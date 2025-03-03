@@ -5,7 +5,7 @@ public import atk.c.functions;
 public import atk.c.types;
 public import atk.hyperlink;
 public import atk.types;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gobject.object;
 
@@ -31,11 +31,11 @@ template HypertextT()
    * Returns: the link in this hypertext document at
    *   index link_index
    */
-  override Hyperlink getLink(int linkIndex)
+  override atk.hyperlink.Hyperlink getLink(int linkIndex)
   {
     AtkHyperlink* _cretval;
     _cretval = atk_hypertext_get_link(cast(AtkHypertext*)cPtr, linkIndex);
-    auto _retval = ObjectG.getDObject!Hyperlink(cast(AtkHyperlink*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.hyperlink.Hyperlink)(cast(AtkHyperlink*)_cretval, No.Take);
     return _retval;
   }
 
@@ -73,8 +73,8 @@ template HypertextT()
    *   arg1 = the index of the hyperlink which is selected
    *   hypertext = the instance the signal is connected to
    */
-  alias LinkSelectedCallbackDlg = void delegate(int arg1, Hypertext hypertext);
-  alias LinkSelectedCallbackFunc = void function(int arg1, Hypertext hypertext);
+  alias LinkSelectedCallbackDlg = void delegate(int arg1, atk.hypertext.Hypertext hypertext);
+  alias LinkSelectedCallbackFunc = void function(int arg1, atk.hypertext.Hypertext hypertext);
 
   /**
    * Connect to LinkSelected signal.
@@ -90,8 +90,8 @@ template HypertextT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto hypertext = getVal!Hypertext(_paramVals);
-      auto arg1 = getVal!int(&_paramVals[1]);
+      auto hypertext = getVal!(atk.hypertext.Hypertext)(_paramVals);
+      auto arg1 = getVal!(int)(&_paramVals[1]);
       _dClosure.dlg(arg1, hypertext);
     }
 

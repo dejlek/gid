@@ -1,12 +1,11 @@
 module gio.simple_action_group;
 
-import gid.global;
+import gid.gid;
 import gio.action;
 import gio.action_group;
 import gio.action_group_mixin;
 import gio.action_map;
 import gio.action_map_mixin;
-import gio.action_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -17,7 +16,7 @@ import gobject.object;
  * implementing the [gio.action_group.ActionGroup] and [gio.action_map.ActionMap]
  * interfaces.
  */
-class SimpleActionGroup : ObjectG, ActionGroup, ActionMap
+class SimpleActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.action_map.ActionMap
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -60,7 +59,7 @@ class SimpleActionGroup : ObjectG, ActionGroup, ActionMap
 
    * Deprecated: Use [gio.action_map.ActionMap.addAction]
    */
-  void insert(Action action)
+  void insert(gio.action.Action action)
   {
     g_simple_action_group_insert(cast(GSimpleActionGroup*)cPtr, action ? cast(GAction*)(cast(ObjectG)action).cPtr(No.Dup) : null);
   }
@@ -74,12 +73,12 @@ class SimpleActionGroup : ObjectG, ActionGroup, ActionMap
 
    * Deprecated: Use [gio.action_map.ActionMap.lookupAction]
    */
-  Action lookup(string actionName)
+  gio.action.Action lookup(string actionName)
   {
     GAction* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_simple_action_group_lookup(cast(GSimpleActionGroup*)cPtr, _actionName);
-    auto _retval = ObjectG.getDObject!Action(cast(GAction*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.action.Action)(cast(GAction*)_cretval, No.Take);
     return _retval;
   }
 

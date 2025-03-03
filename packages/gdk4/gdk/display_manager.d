@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.display;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 
@@ -46,7 +46,7 @@ import gobject.object;
  * g_error $(LPAREN)"Unsupported GDK backend"$(RPAREN);
  * ```
  */
-class DisplayManager : ObjectG
+class DisplayManager : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -75,11 +75,11 @@ class DisplayManager : ObjectG
    * backends will be used.
    * Returns: The global `GdkDisplayManager` singleton
    */
-  static DisplayManager get()
+  static gdk.display_manager.DisplayManager get()
   {
     GdkDisplayManager* _cretval;
     _cretval = gdk_display_manager_get();
-    auto _retval = ObjectG.getDObject!DisplayManager(cast(GdkDisplayManager*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display_manager.DisplayManager)(cast(GdkDisplayManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -87,11 +87,11 @@ class DisplayManager : ObjectG
    * Gets the default `GdkDisplay`.
    * Returns: a `GdkDisplay`
    */
-  Display getDefaultDisplay()
+  gdk.display.Display getDefaultDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gdk_display_manager_get_default_display(cast(GdkDisplayManager*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -100,11 +100,11 @@ class DisplayManager : ObjectG
    * Returns: a newly
    *   allocated `GSList` of `GdkDisplay` objects
    */
-  Display[] listDisplays()
+  gdk.display.Display[] listDisplays()
   {
     GSList* _cretval;
     _cretval = gdk_display_manager_list_displays(cast(GdkDisplayManager*)cPtr);
-    auto _retval = gSListToD!(Display, GidOwnership.Container)(cast(GSList*)_cretval);
+    auto _retval = gSListToD!(gdk.display.Display, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
 
@@ -115,12 +115,12 @@ class DisplayManager : ObjectG
    * Returns: a `GdkDisplay`, or %NULL
    *   if the display could not be opened
    */
-  Display openDisplay(string name)
+  gdk.display.Display openDisplay(string name)
   {
     GdkDisplay* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gdk_display_manager_open_display(cast(GdkDisplayManager*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class DisplayManager : ObjectG
    * Params:
    *   display = a `GdkDisplay`
    */
-  void setDefaultDisplay(Display display)
+  void setDefaultDisplay(gdk.display.Display display)
   {
     gdk_display_manager_set_default_display(cast(GdkDisplayManager*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
   }
@@ -140,8 +140,8 @@ class DisplayManager : ObjectG
    *   display = the opened display
    *   displayManager = the instance the signal is connected to
    */
-  alias DisplayOpenedCallbackDlg = void delegate(Display display, DisplayManager displayManager);
-  alias DisplayOpenedCallbackFunc = void function(Display display, DisplayManager displayManager);
+  alias DisplayOpenedCallbackDlg = void delegate(gdk.display.Display display, gdk.display_manager.DisplayManager displayManager);
+  alias DisplayOpenedCallbackFunc = void function(gdk.display.Display display, gdk.display_manager.DisplayManager displayManager);
 
   /**
    * Connect to DisplayOpened signal.
@@ -157,8 +157,8 @@ class DisplayManager : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto displayManager = getVal!DisplayManager(_paramVals);
-      auto display = getVal!Display(&_paramVals[1]);
+      auto displayManager = getVal!(gdk.display_manager.DisplayManager)(_paramVals);
+      auto display = getVal!(gdk.display.Display)(&_paramVals[1]);
       _dClosure.dlg(display, displayManager);
     }
 

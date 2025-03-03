@@ -7,11 +7,11 @@ import arrowflight.c.types;
 import arrowflight.descriptor;
 import arrowflight.endpoint;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class Info : ObjectG
+class Info : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -30,11 +30,11 @@ class Info : ObjectG
     return getType();
   }
 
-  this(Schema schema, Descriptor descriptor, Endpoint[] endpoints, long totalRecords, long totalBytes)
+  this(arrow.schema.Schema schema, arrowflight.descriptor.Descriptor descriptor, arrowflight.endpoint.Endpoint[] endpoints, long totalRecords, long totalBytes)
   {
     GAFlightInfo* _cretval;
-    auto _endpoints = gListFromD!(Endpoint)(endpoints);
-    scope(exit) containerFree!(GList*, Endpoint, GidOwnership.None)(_endpoints);
+    auto _endpoints = gListFromD!(arrowflight.endpoint.Endpoint)(endpoints);
+    scope(exit) containerFree!(GList*, arrowflight.endpoint.Endpoint, GidOwnership.None)(_endpoints);
     GError *_err;
     _cretval = gaflight_info_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, descriptor ? cast(GAFlightDescriptor*)descriptor.cPtr(No.Dup) : null, _endpoints, totalRecords, totalBytes, &_err);
     if (_err)
@@ -42,37 +42,37 @@ class Info : ObjectG
     this(_cretval, Yes.Take);
   }
 
-  bool equal(Info otherInfo)
+  bool equal(arrowflight.info.Info otherInfo)
   {
     bool _retval;
     _retval = gaflight_info_equal(cast(GAFlightInfo*)cPtr, otherInfo ? cast(GAFlightInfo*)otherInfo.cPtr(No.Dup) : null);
     return _retval;
   }
 
-  Descriptor getDescriptor()
+  arrowflight.descriptor.Descriptor getDescriptor()
   {
     GAFlightDescriptor* _cretval;
     _cretval = gaflight_info_get_descriptor(cast(GAFlightInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!Descriptor(cast(GAFlightDescriptor*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowflight.descriptor.Descriptor)(cast(GAFlightDescriptor*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Endpoint[] getEndpoints()
+  arrowflight.endpoint.Endpoint[] getEndpoints()
   {
     GList* _cretval;
     _cretval = gaflight_info_get_endpoints(cast(GAFlightInfo*)cPtr);
-    auto _retval = gListToD!(Endpoint, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(arrowflight.endpoint.Endpoint, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
-  Schema getSchema(ReadOptions options)
+  arrow.schema.Schema getSchema(arrow.read_options.ReadOptions options)
   {
     GArrowSchema* _cretval;
     GError *_err;
     _cretval = gaflight_info_get_schema(cast(GAFlightInfo*)cPtr, options ? cast(GArrowReadOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Schema(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 

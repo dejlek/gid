@@ -1,20 +1,15 @@
 module gio.volume;
 
 public import gio.volume_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
 import gio.drive;
-import gio.drive_mixin;
 import gio.file;
-import gio.file_mixin;
 import gio.icon;
-import gio.icon_mixin;
 import gio.mount;
-import gio.mount_mixin;
 import gio.mount_operation;
 import gio.types;
 import glib.error;
@@ -29,7 +24,7 @@ import gobject.object;
  * information about asynchronous operations, see [gio.async_result.AsyncResult] and
  * [gio.task.Task]. To mount a `GVolume`, first call [gio.volume.Volume.mount]
  * with $(LPAREN)at least$(RPAREN) the `GVolume` instance, optionally a
- * [gio.mount_operation.MountOperation] object and a [gio.AsyncReadyCallback].
+ * [gio.mount_operation.MountOperation] object and a [gio.types.AsyncReadyCallback].
  * Typically, one will only want to pass `NULL` for the
  * [gio.mount_operation.MountOperation] if automounting all volumes when a desktop session
  * starts since it’s not desirable to put up a lot of dialogs asking
@@ -90,7 +85,7 @@ interface Volume
 
    * Deprecated: Use [gio.volume.Volume.ejectWithOperation] instead.
    */
-  void eject(MountUnmountFlags flags, Cancellable cancellable, AsyncReadyCallback callback);
+  void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes ejecting a volume. If any errors occurred during the operation,
@@ -101,7 +96,7 @@ interface Volume
 
    * Deprecated: Use [gio.volume.Volume.ejectWithOperationFinish] instead.
    */
-  bool ejectFinish(AsyncResult result);
+  bool ejectFinish(gio.async_result.AsyncResult result);
 
   /**
    * Ejects a volume. This is an asynchronous operation, and is
@@ -114,7 +109,7 @@ interface Volume
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback, or %NULL
    */
-  void ejectWithOperation(MountUnmountFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback);
+  void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes ejecting a volume. If any errors occurred during the operation,
@@ -123,7 +118,7 @@ interface Volume
    *   result = a #GAsyncResult
    * Returns: %TRUE if the volume was successfully ejected. %FALSE otherwise
    */
-  bool ejectWithOperationFinish(AsyncResult result);
+  bool ejectWithOperationFinish(gio.async_result.AsyncResult result);
 
   /**
    * Gets the kinds of [identifiers](#volume-identifiers) that volume has.
@@ -160,7 +155,7 @@ interface Volume
    * Returns: the activation root of volume
    *   or %NULL. Use [gobject.object.ObjectG.unref] to free.
    */
-  File getActivationRoot();
+  gio.file.File getActivationRoot();
 
   /**
    * Gets the drive for the volume.
@@ -168,7 +163,7 @@ interface Volume
    *   associated with a drive. The returned object should be unreffed
    *   with [gobject.object.ObjectG.unref] when no longer needed.
    */
-  Drive getDrive();
+  gio.drive.Drive getDrive();
 
   /**
    * Gets the icon for volume.
@@ -176,7 +171,7 @@ interface Volume
    *   The returned object should be unreffed with [gobject.object.ObjectG.unref]
    *   when no longer needed.
    */
-  Icon getIcon();
+  gio.icon.Icon getIcon();
 
   /**
    * Gets the identifier of the given kind for volume.
@@ -196,7 +191,7 @@ interface Volume
    *   The returned object should be unreffed with [gobject.object.ObjectG.unref]
    *   when no longer needed.
    */
-  Mount getMount();
+  gio.mount.Mount getMount();
 
   /**
    * Gets the name of volume.
@@ -217,7 +212,7 @@ interface Volume
    *   The returned object should be unreffed with [gobject.object.ObjectG.unref]
    *   when no longer needed.
    */
-  Icon getSymbolicIcon();
+  gio.icon.Icon getSymbolicIcon();
 
   /**
    * Gets the UUID for the volume. The reference is typically based on
@@ -241,7 +236,7 @@ interface Volume
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback, or %NULL
    */
-  void mount(MountMountFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback);
+  void mount(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes mounting a volume. If any errors occurred during the operation,
@@ -254,7 +249,7 @@ interface Volume
    *   result = a #GAsyncResult
    * Returns: %TRUE, %FALSE if operation failed
    */
-  bool mountFinish(AsyncResult result);
+  bool mountFinish(gio.async_result.AsyncResult result);
 
   /**
    * Returns whether the volume should be automatically mounted.
@@ -266,8 +261,8 @@ interface Volume
    * Emitted when the volume has been changed.
    *   volume = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(Volume volume);
-  alias ChangedCallbackFunc = void function(Volume volume);
+  alias ChangedCallbackDlg = void delegate(gio.volume.Volume volume);
+  alias ChangedCallbackFunc = void function(gio.volume.Volume volume);
 
   /**
    * Connect to Changed signal.
@@ -285,8 +280,8 @@ interface Volume
    * release them so the object can be finalized.
    *   volume = the instance the signal is connected to
    */
-  alias RemovedCallbackDlg = void delegate(Volume volume);
-  alias RemovedCallbackFunc = void function(Volume volume);
+  alias RemovedCallbackDlg = void delegate(gio.volume.Volume volume);
+  alias RemovedCallbackFunc = void function(gio.volume.Volume volume);
 
   /**
    * Connect to Removed signal.

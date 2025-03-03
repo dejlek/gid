@@ -1,9 +1,8 @@
 module rsvg.types;
 
-import gid.global;
+import gid.gid;
 import rsvg.c.functions;
 import rsvg.c.types;
-import rsvg.types;
 
 
 // Enums

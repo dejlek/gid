@@ -1,6 +1,6 @@
 module glib.cache;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -79,11 +79,11 @@ class Cache
 
    * Deprecated: Use a #GHashTable instead
    */
-  void keyForeach(HFunc func)
+  void keyForeach(glib.types.HFunc func)
   {
     extern(C) void _funcCallback(void* key, void* value, void* userData)
     {
-      auto _dlg = cast(HFunc*)userData;
+      auto _dlg = cast(glib.types.HFunc*)userData;
 
       (*_dlg)(key, value);
     }
@@ -115,11 +115,11 @@ class Cache
    * Deprecated: The reason is that it passes pointers to internal
    *   data structures to func; use [glib.cache.Cache.keyForeach] instead
    */
-  void valueForeach(HFunc func)
+  void valueForeach(glib.types.HFunc func)
   {
     extern(C) void _funcCallback(void* key, void* value, void* userData)
     {
-      auto _dlg = cast(HFunc*)userData;
+      auto _dlg = cast(glib.types.HFunc*)userData;
 
       (*_dlg)(key, value);
     }

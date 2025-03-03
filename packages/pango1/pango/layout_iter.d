@@ -1,6 +1,6 @@
 module pango.layout_iter;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gobject.object;
 import pango.c.functions;
@@ -15,7 +15,7 @@ import pango.types;
  * To obtain a `PangoLayoutIter`, use [pango.layout.Layout.getIter].
  * The `PangoLayoutIter` structure is opaque, and has no user-visible fields.
  */
-class LayoutIter : Boxed
+class LayoutIter : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,11 +54,11 @@ class LayoutIter : Boxed
    * Copies a `PangoLayoutIter`.
    * Returns: the newly allocated `PangoLayoutIter`
    */
-  LayoutIter copy()
+  pango.layout_iter.LayoutIter copy()
   {
     PangoLayoutIter* _cretval;
     _cretval = pango_layout_iter_copy(cast(PangoLayoutIter*)cPtr);
-    auto _retval = _cretval ? new LayoutIter(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.layout_iter.LayoutIter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class LayoutIter : Boxed
    *   logicalRect = rectangle to fill with
    *     logical extents
    */
-  void getCharExtents(out Rectangle logicalRect)
+  void getCharExtents(out pango.types.Rectangle logicalRect)
   {
     pango_layout_iter_get_char_extents(cast(PangoLayoutIter*)cPtr, &logicalRect);
   }
@@ -96,7 +96,7 @@ class LayoutIter : Boxed
    *   inkRect = rectangle to fill with ink extents
    *   logicalRect = rectangle to fill with logical extents
    */
-  void getClusterExtents(out Rectangle inkRect, out Rectangle logicalRect)
+  void getClusterExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
     pango_layout_iter_get_cluster_extents(cast(PangoLayoutIter*)cPtr, &inkRect, &logicalRect);
   }
@@ -120,11 +120,11 @@ class LayoutIter : Boxed
    * Gets the layout associated with a `PangoLayoutIter`.
    * Returns: the layout associated with iter
    */
-  Layout getLayout()
+  pango.layout.Layout getLayout()
   {
     PangoLayout* _cretval;
     _cretval = pango_layout_iter_get_layout(cast(PangoLayoutIter*)cPtr);
-    auto _retval = ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class LayoutIter : Boxed
    *   inkRect = rectangle to fill with ink extents
    *   logicalRect = rectangle to fill with logical extents
    */
-  void getLayoutExtents(out Rectangle inkRect, out Rectangle logicalRect)
+  void getLayoutExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
     pango_layout_iter_get_layout_extents(cast(PangoLayoutIter*)cPtr, &inkRect, &logicalRect);
   }
@@ -146,11 +146,11 @@ class LayoutIter : Boxed
    * glyph widths, etc.$(RPAREN).
    * Returns: the current line
    */
-  LayoutLine getLine()
+  pango.layout_line.LayoutLine getLine()
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_layout_iter_get_line(cast(PangoLayoutIter*)cPtr);
-    auto _retval = _cretval ? new LayoutLine(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class LayoutIter : Boxed
    *   inkRect = rectangle to fill with ink extents
    *   logicalRect = rectangle to fill with logical extents
    */
-  void getLineExtents(out Rectangle inkRect, out Rectangle logicalRect)
+  void getLineExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
     pango_layout_iter_get_line_extents(cast(PangoLayoutIter*)cPtr, &inkRect, &logicalRect);
   }
@@ -177,11 +177,11 @@ class LayoutIter : Boxed
    * Returns: the current line, that should not be
    *   modified
    */
-  LayoutLine getLineReadonly()
+  pango.layout_line.LayoutLine getLineReadonly()
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_layout_iter_get_line_readonly(cast(PangoLayoutIter*)cPtr);
-    auto _retval = _cretval ? new LayoutLine(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -214,11 +214,11 @@ class LayoutIter : Boxed
    * plan to modify the contents of the run $(LPAREN)glyphs, glyph widths, etc.$(RPAREN).
    * Returns: the current run
    */
-  LayoutRun getRun()
+  pango.types.LayoutRun getRun()
   {
     PangoLayoutRun* _cretval;
     _cretval = pango_layout_iter_get_run(cast(PangoLayoutIter*)cPtr);
-    auto _retval = _cretval ? new LayoutRun(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.types.LayoutRun(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class LayoutIter : Boxed
    *   inkRect = rectangle to fill with ink extents
    *   logicalRect = rectangle to fill with logical extents
    */
-  void getRunExtents(out Rectangle inkRect, out Rectangle logicalRect)
+  void getRunExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
     pango_layout_iter_get_run_extents(cast(PangoLayoutIter*)cPtr, &inkRect, &logicalRect);
   }
@@ -261,11 +261,11 @@ class LayoutIter : Boxed
    * Returns: the current run, that
    *   should not be modified
    */
-  LayoutRun getRunReadonly()
+  pango.types.LayoutRun getRunReadonly()
   {
     PangoLayoutRun* _cretval;
     _cretval = pango_layout_iter_get_run_readonly(cast(PangoLayoutIter*)cPtr);
-    auto _retval = _cretval ? new LayoutRun(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.types.LayoutRun(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

@@ -2,7 +2,7 @@ module gtk.root_mixin;
 
 public import gtk.root_iface_proxy;
 public import gdk.display;
-public import gid.global;
+public import gid.gid;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -27,11 +27,11 @@ template RootT()
    * Returns the display that this `GtkRoot` is on.
    * Returns: the display of root
    */
-  override Display getDisplay()
+  override gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gtk_root_get_display(cast(GtkRoot*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -43,11 +43,11 @@ template RootT()
    * widget.
    * Returns: the currently focused widget
    */
-  override Widget getFocus()
+  override gtk.widget.Widget getFocus()
   {
     GtkWidget* _cretval;
     _cretval = gtk_root_get_focus(cast(GtkRoot*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -62,7 +62,7 @@ template RootT()
    *   focus = widget to be the new focus widget, or %NULL
    *     to unset the focus widget
    */
-  override void setFocus(Widget focus)
+  override void setFocus(gtk.widget.Widget focus)
   {
     gtk_root_set_focus(cast(GtkRoot*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(No.Dup) : null);
   }

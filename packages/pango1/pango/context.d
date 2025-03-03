@@ -1,6 +1,6 @@
 module pango.context;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import pango.c.functions;
 import pango.c.types;
@@ -22,7 +22,7 @@ import pango.types;
  * default gravity, or default font.
  * To obtain a `PangoContext`, use [pango.font_map.FontMap.createContext].
  */
-class Context : ObjectG
+class Context : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -79,11 +79,11 @@ class Context : ObjectG
    * See [pango.context.Context.setBaseDir].
    * Returns: the base direction for the context.
    */
-  Direction getBaseDir()
+  pango.types.Direction getBaseDir()
   {
     PangoDirection _cretval;
     _cretval = pango_context_get_base_dir(cast(PangoContext*)cPtr);
-    Direction _retval = cast(Direction)_cretval;
+    pango.types.Direction _retval = cast(pango.types.Direction)_cretval;
     return _retval;
   }
 
@@ -92,11 +92,11 @@ class Context : ObjectG
    * See [pango.context.Context.setBaseGravity].
    * Returns: the base gravity for the context.
    */
-  Gravity getBaseGravity()
+  pango.types.Gravity getBaseGravity()
   {
     PangoGravity _cretval;
     _cretval = pango_context_get_base_gravity(cast(PangoContext*)cPtr);
-    Gravity _retval = cast(Gravity)_cretval;
+    pango.types.Gravity _retval = cast(pango.types.Gravity)_cretval;
     return _retval;
   }
 
@@ -105,11 +105,11 @@ class Context : ObjectG
    * Returns: a pointer to the context's default font
    *   description. This value must not be modified or freed.
    */
-  FontDescription getFontDescription()
+  pango.font_description.FontDescription getFontDescription()
   {
     PangoFontDescription* _cretval;
     _cretval = pango_context_get_font_description(cast(PangoContext*)cPtr);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -119,11 +119,11 @@ class Context : ObjectG
    *   `PangoContext` This value is owned by Pango and should not be
    *   unreferenced.
    */
-  FontMap getFontMap()
+  pango.font_map.FontMap getFontMap()
   {
     PangoFontMap* _cretval;
     _cretval = pango_context_get_font_map(cast(PangoContext*)cPtr);
-    auto _retval = ObjectG.getDObject!FontMap(cast(PangoFontMap*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -135,11 +135,11 @@ class Context : ObjectG
    * gravity from the current context matrix.
    * Returns: the resolved gravity for the context.
    */
-  Gravity getGravity()
+  pango.types.Gravity getGravity()
   {
     PangoGravity _cretval;
     _cretval = pango_context_get_gravity(cast(PangoContext*)cPtr);
-    Gravity _retval = cast(Gravity)_cretval;
+    pango.types.Gravity _retval = cast(pango.types.Gravity)_cretval;
     return _retval;
   }
 
@@ -148,11 +148,11 @@ class Context : ObjectG
    * See [pango.context.Context.setGravityHint] for details.
    * Returns: the gravity hint for the context.
    */
-  GravityHint getGravityHint()
+  pango.types.GravityHint getGravityHint()
   {
     PangoGravityHint _cretval;
     _cretval = pango_context_get_gravity_hint(cast(PangoContext*)cPtr);
-    GravityHint _retval = cast(GravityHint)_cretval;
+    pango.types.GravityHint _retval = cast(pango.types.GravityHint)_cretval;
     return _retval;
   }
 
@@ -160,11 +160,11 @@ class Context : ObjectG
    * Retrieves the global language tag for the context.
    * Returns: the global language tag.
    */
-  PgLanguage getLanguage()
+  pango.language.PgLanguage getLanguage()
   {
     PangoLanguage* _cretval;
     _cretval = pango_context_get_language(cast(PangoContext*)cPtr);
-    auto _retval = _cretval ? new PgLanguage(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.language.PgLanguage(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -177,11 +177,11 @@ class Context : ObjectG
    *   The returned matrix is owned by Pango and must not be modified
    *   or freed.
    */
-  Matrix getMatrix()
+  pango.matrix.Matrix getMatrix()
   {
     const(PangoMatrix)* _cretval;
     _cretval = pango_context_get_matrix(cast(PangoContext*)cPtr);
-    auto _retval = _cretval ? new Matrix(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.matrix.Matrix(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -206,11 +206,11 @@ class Context : ObjectG
    * Returns: a `PangoFontMetrics` object. The caller must call
    *   [pango.font_metrics.FontMetrics.unref] when finished using the object.
    */
-  FontMetrics getMetrics(FontDescription desc, PgLanguage language)
+  pango.font_metrics.FontMetrics getMetrics(pango.font_description.FontDescription desc, pango.language.PgLanguage language)
   {
     PangoFontMetrics* _cretval;
-    _cretval = pango_context_get_metrics(cast(PangoContext*)cPtr, desc ? cast(PangoFontDescription*)desc.cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new FontMetrics(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = pango_context_get_metrics(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new pango.font_metrics.FontMetrics(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -253,14 +253,14 @@ class Context : ObjectG
    *     to store a pointer to an array of `PangoFontFamily`. This array should
    *     be freed with [glib.global.gfree].
    */
-  void listFamilies(out FontFamily[] families)
+  void listFamilies(out pango.font_family.FontFamily[] families)
   {
     int _nFamilies;
     PangoFontFamily** _families;
     pango_context_list_families(cast(PangoContext*)cPtr, &_families, &_nFamilies);
     families.length = _nFamilies;
     foreach (i; 0 .. _nFamilies)
-      families[i] = ObjectG.getDObject!FontFamily(_families[i], No.Take);
+      families[i] = ObjectG.getDObject!(pango.font_family.FontFamily)(_families[i], No.Take);
     safeFree(cast(void*)_families);
   }
 
@@ -272,11 +272,11 @@ class Context : ObjectG
    * Returns: the newly allocated `PangoFont`
    *   that was loaded, or %NULL if no font matched.
    */
-  Font loadFont(FontDescription desc)
+  pango.font.Font loadFont(pango.font_description.FontDescription desc)
   {
     PangoFont* _cretval;
-    _cretval = pango_context_load_font(cast(PangoContext*)cPtr, desc ? cast(PangoFontDescription*)desc.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Font(cast(PangoFont*)_cretval, Yes.Take);
+    _cretval = pango_context_load_font(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -289,11 +289,11 @@ class Context : ObjectG
    * Returns: the newly allocated
    *   `PangoFontset` loaded, or %NULL if no font matched.
    */
-  Fontset loadFontset(FontDescription desc, PgLanguage language)
+  pango.fontset.Fontset loadFontset(pango.font_description.FontDescription desc, pango.language.PgLanguage language)
   {
     PangoFontset* _cretval;
-    _cretval = pango_context_load_fontset(cast(PangoContext*)cPtr, desc ? cast(PangoFontDescription*)desc.cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Fontset(cast(PangoFontset*)_cretval, Yes.Take);
+    _cretval = pango_context_load_fontset(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(pango.fontset.Fontset)(cast(PangoFontset*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -308,7 +308,7 @@ class Context : ObjectG
    * Params:
    *   direction = the new base direction
    */
-  void setBaseDir(Direction direction)
+  void setBaseDir(pango.types.Direction direction)
   {
     pango_context_set_base_dir(cast(PangoContext*)cPtr, direction);
   }
@@ -319,7 +319,7 @@ class Context : ObjectG
    * Params:
    *   gravity = the new base gravity
    */
-  void setBaseGravity(Gravity gravity)
+  void setBaseGravity(pango.types.Gravity gravity)
   {
     pango_context_set_base_gravity(cast(PangoContext*)cPtr, gravity);
   }
@@ -329,9 +329,9 @@ class Context : ObjectG
    * Params:
    *   desc = the new pango font description
    */
-  void setFontDescription(FontDescription desc)
+  void setFontDescription(pango.font_description.FontDescription desc)
   {
-    pango_context_set_font_description(cast(PangoContext*)cPtr, desc ? cast(PangoFontDescription*)desc.cPtr(No.Dup) : null);
+    pango_context_set_font_description(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
   }
 
   /**
@@ -343,7 +343,7 @@ class Context : ObjectG
    * Params:
    *   fontMap = the `PangoFontMap` to set.
    */
-  void setFontMap(FontMap fontMap)
+  void setFontMap(pango.font_map.FontMap fontMap)
   {
     pango_context_set_font_map(cast(PangoContext*)cPtr, fontMap ? cast(PangoFontMap*)fontMap.cPtr(No.Dup) : null);
   }
@@ -357,7 +357,7 @@ class Context : ObjectG
    * Params:
    *   hint = the new gravity hint
    */
-  void setGravityHint(GravityHint hint)
+  void setGravityHint(pango.types.GravityHint hint)
   {
     pango_context_set_gravity_hint(cast(PangoContext*)cPtr, hint);
   }
@@ -369,7 +369,7 @@ class Context : ObjectG
    * Params:
    *   language = the new language tag.
    */
-  void setLanguage(PgLanguage language)
+  void setLanguage(pango.language.PgLanguage language)
   {
     pango_context_set_language(cast(PangoContext*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
   }
@@ -386,9 +386,9 @@ class Context : ObjectG
    *   matrix = a `PangoMatrix`, or %NULL to unset any existing
    *     matrix. $(LPAREN)No matrix set is the same as setting the identity matrix.$(RPAREN)
    */
-  void setMatrix(Matrix matrix)
+  void setMatrix(pango.matrix.Matrix matrix)
   {
-    pango_context_set_matrix(cast(PangoContext*)cPtr, matrix ? cast(PangoMatrix*)matrix.cPtr(No.Dup) : null);
+    pango_context_set_matrix(cast(PangoContext*)cPtr, matrix ? cast(const(PangoMatrix)*)matrix.cPtr(No.Dup) : null);
   }
 
   /**

@@ -1,6 +1,6 @@
 module soup.websocket_extension;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.error;
 import gobject.object;
@@ -12,7 +12,7 @@ import soup.types;
  * A WebSocket extension
  * #SoupWebsocketExtension is the base class for WebSocket extension objects.
  */
-class WebsocketExtension : ObjectG
+class WebsocketExtension : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -41,7 +41,7 @@ class WebsocketExtension : ObjectG
   {
     char* _cretval;
     _cretval = soup_websocket_extension_get_request_params(cast(SoupWebsocketExtension*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -55,7 +55,7 @@ class WebsocketExtension : ObjectG
   {
     char* _cretval;
     _cretval = soup_websocket_extension_get_response_params(cast(SoupWebsocketExtension*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -70,14 +70,14 @@ class WebsocketExtension : ObjectG
    *   payload = the payload data
    * Returns: the message payload data, or %NULL in case of error
    */
-  Bytes processIncomingMessage(ref ubyte header, Bytes payload)
+  glib.bytes.Bytes processIncomingMessage(ref ubyte header, glib.bytes.Bytes payload)
   {
     GBytes* _cretval;
     GError *_err;
     _cretval = soup_websocket_extension_process_incoming_message(cast(SoupWebsocketExtension*)cPtr, cast(ubyte*)&header, payload ? cast(GBytes*)payload.cPtr(Yes.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -92,14 +92,14 @@ class WebsocketExtension : ObjectG
    *   payload = the payload data
    * Returns: the message payload data, or %NULL in case of error
    */
-  Bytes processOutgoingMessage(ref ubyte header, Bytes payload)
+  glib.bytes.Bytes processOutgoingMessage(ref ubyte header, glib.bytes.Bytes payload)
   {
     GBytes* _cretval;
     GError *_err;
     _cretval = soup_websocket_extension_process_outgoing_message(cast(SoupWebsocketExtension*)cPtr, cast(ubyte*)&header, payload ? cast(GBytes*)payload.cPtr(Yes.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

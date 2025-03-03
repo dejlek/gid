@@ -1,6 +1,6 @@
 module gio.srv_target;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -22,7 +22,7 @@ import gobject.boxed;
  * [gio.socket_connectable.SocketConnectable] interface and not need to worry about
  * `GSrvTarget` at all.
  */
-class SrvTarget : Boxed
+class SrvTarget : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -69,11 +69,11 @@ class SrvTarget : Boxed
    * Copies target
    * Returns: a copy of target
    */
-  SrvTarget copy()
+  gio.srv_target.SrvTarget copy()
   {
     GSrvTarget* _cretval;
     _cretval = g_srv_target_copy(cast(GSrvTarget*)cPtr);
-    auto _retval = _cretval ? new SrvTarget(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gio.srv_target.SrvTarget(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class SrvTarget : Boxed
   {
     const(char)* _cretval;
     _cretval = g_srv_target_get_hostname(cast(GSrvTarget*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

@@ -7,7 +7,7 @@ import cairo.font_options;
 import cairo.glyph;
 import cairo.matrix;
 import cairo.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -21,7 +21,7 @@ import gobject.boxed;
  * Memory management of #cairo_scaled_font_t is done with
  * [cairo.scaled_font.ScaledFont.reference] and [cairo.scaled_font.ScaledFont.destroy].
  */
-class ScaledFont : Boxed
+class ScaledFont : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -50,7 +50,7 @@ class ScaledFont : Boxed
    * Params:
    *   extents = a #cairo_font_extents_t which to store the retrieved extents.
    */
-  void extents(FontExtents extents)
+  void extents(cairo.types.FontExtents extents)
   {
     cairo_scaled_font_extents(cast(cairo_scaled_font_t*)cPtr, &extents);
   }
@@ -63,7 +63,7 @@ class ScaledFont : Boxed
    * Params:
    *   ctm = return value for the CTM
    */
-  void getCtm(Matrix ctm)
+  void getCtm(cairo.matrix.Matrix ctm)
   {
     cairo_scaled_font_get_ctm(cast(cairo_scaled_font_t*)cPtr, ctm ? cast(cairo_matrix_t*)ctm.cPtr(No.Dup) : null);
   }
@@ -76,11 +76,11 @@ class ScaledFont : Boxed
    *   created.  This object is owned by cairo. To keep a reference to it,
    *   you must call [cairo.scaled_font.ScaledFont.reference].
    */
-  FontFace getFontFace()
+  cairo.font_face.FontFace getFontFace()
   {
     cairo_font_face_t* _cretval;
     _cretval = cairo_scaled_font_get_font_face(cast(cairo_scaled_font_t*)cPtr);
-    auto _retval = _cretval ? new FontFace(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.font_face.FontFace(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class ScaledFont : Boxed
    * Params:
    *   fontMatrix = return value for the matrix
    */
-  void getFontMatrix(Matrix fontMatrix)
+  void getFontMatrix(cairo.matrix.Matrix fontMatrix)
   {
     cairo_scaled_font_get_font_matrix(cast(cairo_scaled_font_t*)cPtr, fontMatrix ? cast(cairo_matrix_t*)fontMatrix.cPtr(No.Dup) : null);
   }
@@ -101,7 +101,7 @@ class ScaledFont : Boxed
    * Params:
    *   options = return value for the font options
    */
-  void getFontOptions(FontOptions options)
+  void getFontOptions(cairo.font_options.FontOptions options)
   {
     cairo_scaled_font_get_font_options(cast(cairo_scaled_font_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(No.Dup) : null);
   }
@@ -114,7 +114,7 @@ class ScaledFont : Boxed
    * Params:
    *   scaleMatrix = return value for the matrix
    */
-  void getScaleMatrix(Matrix scaleMatrix)
+  void getScaleMatrix(cairo.matrix.Matrix scaleMatrix)
   {
     cairo_scaled_font_get_scale_matrix(cast(cairo_scaled_font_t*)cPtr, scaleMatrix ? cast(cairo_matrix_t*)scaleMatrix.cPtr(No.Dup) : null);
   }
@@ -125,11 +125,11 @@ class ScaledFont : Boxed
    * However, this function never returns %CAIRO_FONT_TYPE_TOY.
    * Returns: The type of scaled_font.
    */
-  FontType getFontType()
+  cairo.types.FontType getFontType()
   {
     cairo_font_type_t _cretval;
     _cretval = cairo_scaled_font_get_type(cast(cairo_scaled_font_t*)cPtr);
-    FontType _retval = cast(FontType)_cretval;
+    cairo.types.FontType _retval = cast(cairo.types.FontType)_cretval;
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class ScaledFont : Boxed
    *     attached to
    * Returns: the user data previously attached or %NULL.
    */
-  void* getUserData(UserDataKey key)
+  void* getUserData(cairo.types.UserDataKey key)
   {
     auto _retval = cairo_scaled_font_get_user_data(cast(cairo_scaled_font_t*)cPtr, &key);
     return _retval;
@@ -163,9 +163,9 @@ class ScaledFont : Boxed
    *   numGlyphs = the number of glyphs in the glyphs array
    *   extents = a #cairo_text_extents_t which to store the retrieved extents.
    */
-  void glyphExtents(Glyph glyphs, int numGlyphs, TextExtents extents)
+  void glyphExtents(cairo.glyph.Glyph glyphs, int numGlyphs, cairo.types.TextExtents extents)
   {
-    cairo_scaled_font_glyph_extents(cast(cairo_scaled_font_t*)cPtr, glyphs ? cast(cairo_glyph_t*)glyphs.cPtr(No.Dup) : null, numGlyphs, &extents);
+    cairo_scaled_font_glyph_extents(cast(cairo_scaled_font_t*)cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.Dup) : null, numGlyphs, &extents);
   }
 
   /**
@@ -174,11 +174,11 @@ class ScaledFont : Boxed
    * Returns: %CAIRO_STATUS_SUCCESS or another error such as
    *   %CAIRO_STATUS_NO_MEMORY.
    */
-  Status status()
+  cairo.types.Status status()
   {
     cairo_status_t _cretval;
     _cretval = cairo_scaled_font_status(cast(cairo_scaled_font_t*)cPtr);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class ScaledFont : Boxed
    *   utf8 = a NUL-terminated string of text, encoded in UTF-8
    *   extents = a #cairo_text_extents_t which to store the retrieved extents.
    */
-  void textExtents(string utf8, TextExtents extents)
+  void textExtents(string utf8, cairo.types.TextExtents extents)
   {
     const(char)* _utf8 = utf8.toCString(No.Alloc);
     cairo_scaled_font_text_extents(cast(cairo_scaled_font_t*)cPtr, _utf8, &extents);

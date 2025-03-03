@@ -1,12 +1,10 @@
 module gio.app_launch_context;
 
-import gid.global;
+import gid.gid;
 import gio.app_info;
-import gio.app_info_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.file;
-import gio.file_mixin;
 import gio.types;
 import glib.variant;
 import gobject.dclosure;
@@ -17,7 +15,7 @@ import gobject.object;
  * handle for instance startup notification and launching the new application
  * on the same screen as the launching window.
  */
-class AppLaunchContext : ObjectG
+class AppLaunchContext : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -57,13 +55,13 @@ class AppLaunchContext : ObjectG
    *   files = a #GList of #GFile objects
    * Returns: a display string for the display.
    */
-  string getDisplay(AppInfo info, File[] files)
+  string getDisplay(gio.app_info.AppInfo info, gio.file.File[] files)
   {
     char* _cretval;
-    auto _files = gListFromD!(File)(files);
-    scope(exit) containerFree!(GList*, File, GidOwnership.None)(_files);
+    auto _files = gListFromD!(gio.file.File)(files);
+    scope(exit) containerFree!(GList*, gio.file.File, GidOwnership.None)(_files);
     _cretval = g_app_launch_context_get_display(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(ObjectG)info).cPtr(No.Dup) : null, _files);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -109,13 +107,13 @@ class AppLaunchContext : ObjectG
    * Returns: a startup notification ID for the application, or %NULL if
    *   not supported.
    */
-  string getStartupNotifyId(AppInfo info, File[] files)
+  string getStartupNotifyId(gio.app_info.AppInfo info, gio.file.File[] files)
   {
     char* _cretval;
-    auto _files = gListFromD!(File)(files);
-    scope(exit) containerFree!(GList*, File, GidOwnership.None)(_files);
+    auto _files = gListFromD!(gio.file.File)(files);
+    scope(exit) containerFree!(GList*, gio.file.File, GidOwnership.None)(_files);
     _cretval = g_app_launch_context_get_startup_notify_id(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(ObjectG)info).cPtr(No.Dup) : null, _files);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -168,8 +166,8 @@ class AppLaunchContext : ObjectG
    *   startupNotifyId = the startup notification id for the failed launch
    *   appLaunchContext = the instance the signal is connected to
    */
-  alias LaunchFailedCallbackDlg = void delegate(string startupNotifyId, AppLaunchContext appLaunchContext);
-  alias LaunchFailedCallbackFunc = void function(string startupNotifyId, AppLaunchContext appLaunchContext);
+  alias LaunchFailedCallbackDlg = void delegate(string startupNotifyId, gio.app_launch_context.AppLaunchContext appLaunchContext);
+  alias LaunchFailedCallbackFunc = void function(string startupNotifyId, gio.app_launch_context.AppLaunchContext appLaunchContext);
 
   /**
    * Connect to LaunchFailed signal.
@@ -185,8 +183,8 @@ class AppLaunchContext : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto appLaunchContext = getVal!AppLaunchContext(_paramVals);
-      auto startupNotifyId = getVal!string(&_paramVals[1]);
+      auto appLaunchContext = getVal!(gio.app_launch_context.AppLaunchContext)(_paramVals);
+      auto startupNotifyId = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(startupNotifyId, appLaunchContext);
     }
 
@@ -215,8 +213,8 @@ class AppLaunchContext : ObjectG
    *   platformData = additional platform-specific data for this launch
    *   appLaunchContext = the instance the signal is connected to
    */
-  alias LaunchStartedCallbackDlg = void delegate(AppInfo info, VariantG platformData, AppLaunchContext appLaunchContext);
-  alias LaunchStartedCallbackFunc = void function(AppInfo info, VariantG platformData, AppLaunchContext appLaunchContext);
+  alias LaunchStartedCallbackDlg = void delegate(gio.app_info.AppInfo info, glib.variant.VariantG platformData, gio.app_launch_context.AppLaunchContext appLaunchContext);
+  alias LaunchStartedCallbackFunc = void function(gio.app_info.AppInfo info, glib.variant.VariantG platformData, gio.app_launch_context.AppLaunchContext appLaunchContext);
 
   /**
    * Connect to LaunchStarted signal.
@@ -232,9 +230,9 @@ class AppLaunchContext : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto appLaunchContext = getVal!AppLaunchContext(_paramVals);
-      auto info = getVal!AppInfo(&_paramVals[1]);
-      auto platformData = getVal!VariantG(&_paramVals[2]);
+      auto appLaunchContext = getVal!(gio.app_launch_context.AppLaunchContext)(_paramVals);
+      auto info = getVal!(gio.app_info.AppInfo)(&_paramVals[1]);
+      auto platformData = getVal!(glib.variant.VariantG)(&_paramVals[2]);
       _dClosure.dlg(info, platformData, appLaunchContext);
     }
 
@@ -264,8 +262,8 @@ class AppLaunchContext : ObjectG
    *   platformData = additional platform-specific data for this launch
    *   appLaunchContext = the instance the signal is connected to
    */
-  alias LaunchedCallbackDlg = void delegate(AppInfo info, VariantG platformData, AppLaunchContext appLaunchContext);
-  alias LaunchedCallbackFunc = void function(AppInfo info, VariantG platformData, AppLaunchContext appLaunchContext);
+  alias LaunchedCallbackDlg = void delegate(gio.app_info.AppInfo info, glib.variant.VariantG platformData, gio.app_launch_context.AppLaunchContext appLaunchContext);
+  alias LaunchedCallbackFunc = void function(gio.app_info.AppInfo info, glib.variant.VariantG platformData, gio.app_launch_context.AppLaunchContext appLaunchContext);
 
   /**
    * Connect to Launched signal.
@@ -281,9 +279,9 @@ class AppLaunchContext : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto appLaunchContext = getVal!AppLaunchContext(_paramVals);
-      auto info = getVal!AppInfo(&_paramVals[1]);
-      auto platformData = getVal!VariantG(&_paramVals[2]);
+      auto appLaunchContext = getVal!(gio.app_launch_context.AppLaunchContext)(_paramVals);
+      auto info = getVal!(gio.app_info.AppInfo)(&_paramVals[1]);
+      auto platformData = getVal!(glib.variant.VariantG)(&_paramVals[2]);
       _dClosure.dlg(info, platformData, appLaunchContext);
     }
 

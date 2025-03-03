@@ -1,20 +1,19 @@
 module gtk.selection_filter_model;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.selection_model;
-import gtk.selection_model_mixin;
 import gtk.types;
 
 /**
  * `GtkSelectionFilterModel` is a list model that presents the selection from
  * a `GtkSelectionModel`.
  */
-class SelectionFilterModel : ObjectG, ListModel
+class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -42,7 +41,7 @@ class SelectionFilterModel : ObjectG, ListModel
    *   model = the selection model to filter
    * Returns: a new `GtkSelectionFilterModel`
    */
-  this(SelectionModel model)
+  this(gtk.selection_model.SelectionModel model)
   {
     GtkSelectionFilterModel* _cretval;
     _cretval = gtk_selection_filter_model_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
@@ -53,11 +52,11 @@ class SelectionFilterModel : ObjectG, ListModel
    * Gets the model currently filtered or %NULL if none.
    * Returns: The model that gets filtered
    */
-  SelectionModel getModel()
+  gtk.selection_model.SelectionModel getModel()
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_selection_filter_model_get_model(cast(GtkSelectionFilterModel*)cPtr);
-    auto _retval = ObjectG.getDObject!SelectionModel(cast(GtkSelectionModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -70,7 +69,7 @@ class SelectionFilterModel : ObjectG, ListModel
    * Params:
    *   model = The model to be filtered
    */
-  void setModel(SelectionModel model)
+  void setModel(gtk.selection_model.SelectionModel model)
   {
     gtk_selection_filter_model_set_model(cast(GtkSelectionFilterModel*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

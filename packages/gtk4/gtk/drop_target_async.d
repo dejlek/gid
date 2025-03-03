@@ -3,7 +3,7 @@ module gtk.drop_target_async;
 import gdk.content_formats;
 import gdk.drop;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -40,7 +40,7 @@ import gtk.types;
  * current drop target, and will receive the %GTK_STATE_FLAG_DROP_ACTIVE
  * state, which can be used by themes to style the widget as a drop target.
  */
-class DropTargetAsync : EventController
+class DropTargetAsync : gtk.event_controller.EventController
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -66,7 +66,7 @@ class DropTargetAsync : EventController
    *   actions = the supported actions
    * Returns: the new `GtkDropTargetAsync`
    */
-  this(ContentFormats formats, DragAction actions)
+  this(gdk.content_formats.ContentFormats formats, gdk.types.DragAction actions)
   {
     GtkDropTargetAsync* _cretval;
     _cretval = gtk_drop_target_async_new(formats ? cast(GdkContentFormats*)formats.cPtr(Yes.Dup) : null, actions);
@@ -77,11 +77,11 @@ class DropTargetAsync : EventController
    * Gets the actions that this drop target supports.
    * Returns: the actions that this drop target supports
    */
-  DragAction getActions()
+  gdk.types.DragAction getActions()
   {
     GdkDragAction _cretval;
     _cretval = gtk_drop_target_async_get_actions(cast(GtkDropTargetAsync*)cPtr);
-    DragAction _retval = cast(DragAction)_cretval;
+    gdk.types.DragAction _retval = cast(gdk.types.DragAction)_cretval;
     return _retval;
   }
 
@@ -90,11 +90,11 @@ class DropTargetAsync : EventController
    * If the result is %NULL, all formats are expected to be supported.
    * Returns: the supported data formats
    */
-  ContentFormats getFormats()
+  gdk.content_formats.ContentFormats getFormats()
   {
     GdkContentFormats* _cretval;
     _cretval = gtk_drop_target_async_get_formats(cast(GtkDropTargetAsync*)cPtr);
-    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class DropTargetAsync : EventController
    * Params:
    *   drop = the `GdkDrop` of an ongoing drag operation
    */
-  void rejectDrop(Drop drop)
+  void rejectDrop(gdk.drop.Drop drop)
   {
     gtk_drop_target_async_reject_drop(cast(GtkDropTargetAsync*)cPtr, drop ? cast(GdkDrop*)drop.cPtr(No.Dup) : null);
   }
@@ -116,7 +116,7 @@ class DropTargetAsync : EventController
    * Params:
    *   actions = the supported actions
    */
-  void setActions(DragAction actions)
+  void setActions(gdk.types.DragAction actions)
   {
     gtk_drop_target_async_set_actions(cast(GtkDropTargetAsync*)cPtr, actions);
   }
@@ -126,7 +126,7 @@ class DropTargetAsync : EventController
    * Params:
    *   formats = the supported data formats or %NULL for any format
    */
-  void setFormats(ContentFormats formats)
+  void setFormats(gdk.content_formats.ContentFormats formats)
   {
     gtk_drop_target_async_set_formats(cast(GtkDropTargetAsync*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null);
   }
@@ -149,8 +149,8 @@ class DropTargetAsync : EventController
    *   dropTargetAsync = the instance the signal is connected to
    * Returns: %TRUE if drop is accepted
    */
-  alias AcceptCallbackDlg = bool delegate(Drop drop, DropTargetAsync dropTargetAsync);
-  alias AcceptCallbackFunc = bool function(Drop drop, DropTargetAsync dropTargetAsync);
+  alias AcceptCallbackDlg = bool delegate(gdk.drop.Drop drop, gtk.drop_target_async.DropTargetAsync dropTargetAsync);
+  alias AcceptCallbackFunc = bool function(gdk.drop.Drop drop, gtk.drop_target_async.DropTargetAsync dropTargetAsync);
 
   /**
    * Connect to Accept signal.
@@ -167,8 +167,8 @@ class DropTargetAsync : EventController
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto dropTargetAsync = getVal!DropTargetAsync(_paramVals);
-      auto drop = getVal!Drop(&_paramVals[1]);
+      auto dropTargetAsync = getVal!(gtk.drop_target_async.DropTargetAsync)(_paramVals);
+      auto drop = getVal!(gdk.drop.Drop)(&_paramVals[1]);
       _retval = _dClosure.dlg(drop, dropTargetAsync);
       setVal!bool(_returnValue, _retval);
     }
@@ -187,8 +187,8 @@ class DropTargetAsync : EventController
    *   dropTargetAsync = the instance the signal is connected to
    * Returns: Preferred action for this drag operation.
    */
-  alias DragEnterCallbackDlg = DragAction delegate(Drop drop, double x, double y, DropTargetAsync dropTargetAsync);
-  alias DragEnterCallbackFunc = DragAction function(Drop drop, double x, double y, DropTargetAsync dropTargetAsync);
+  alias DragEnterCallbackDlg = gdk.types.DragAction delegate(gdk.drop.Drop drop, double x, double y, gtk.drop_target_async.DropTargetAsync dropTargetAsync);
+  alias DragEnterCallbackFunc = gdk.types.DragAction function(gdk.drop.Drop drop, double x, double y, gtk.drop_target_async.DropTargetAsync dropTargetAsync);
 
   /**
    * Connect to DragEnter signal.
@@ -204,13 +204,13 @@ class DropTargetAsync : EventController
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dropTargetAsync = getVal!DropTargetAsync(_paramVals);
-      auto drop = getVal!Drop(&_paramVals[1]);
-      auto x = getVal!double(&_paramVals[2]);
-      auto y = getVal!double(&_paramVals[3]);
+      auto dropTargetAsync = getVal!(gtk.drop_target_async.DropTargetAsync)(_paramVals);
+      auto drop = getVal!(gdk.drop.Drop)(&_paramVals[1]);
+      auto x = getVal!(double)(&_paramVals[2]);
+      auto y = getVal!(double)(&_paramVals[3]);
       auto _dretval = _dClosure.dlg(drop, x, y, dropTargetAsync);
       GdkDragAction _retval = cast(GdkDragAction)_dretval;
-      setVal!DragAction(_returnValue, _retval);
+      setVal!gdk.types.DragAction(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -225,8 +225,8 @@ class DropTargetAsync : EventController
    *   drop = the `GdkDrop`
    *   dropTargetAsync = the instance the signal is connected to
    */
-  alias DragLeaveCallbackDlg = void delegate(Drop drop, DropTargetAsync dropTargetAsync);
-  alias DragLeaveCallbackFunc = void function(Drop drop, DropTargetAsync dropTargetAsync);
+  alias DragLeaveCallbackDlg = void delegate(gdk.drop.Drop drop, gtk.drop_target_async.DropTargetAsync dropTargetAsync);
+  alias DragLeaveCallbackFunc = void function(gdk.drop.Drop drop, gtk.drop_target_async.DropTargetAsync dropTargetAsync);
 
   /**
    * Connect to DragLeave signal.
@@ -242,8 +242,8 @@ class DropTargetAsync : EventController
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dropTargetAsync = getVal!DropTargetAsync(_paramVals);
-      auto drop = getVal!Drop(&_paramVals[1]);
+      auto dropTargetAsync = getVal!(gtk.drop_target_async.DropTargetAsync)(_paramVals);
+      auto drop = getVal!(gdk.drop.Drop)(&_paramVals[1]);
       _dClosure.dlg(drop, dropTargetAsync);
     }
 
@@ -260,8 +260,8 @@ class DropTargetAsync : EventController
    *   dropTargetAsync = the instance the signal is connected to
    * Returns: Preferred action for this drag operation.
    */
-  alias DragMotionCallbackDlg = DragAction delegate(Drop drop, double x, double y, DropTargetAsync dropTargetAsync);
-  alias DragMotionCallbackFunc = DragAction function(Drop drop, double x, double y, DropTargetAsync dropTargetAsync);
+  alias DragMotionCallbackDlg = gdk.types.DragAction delegate(gdk.drop.Drop drop, double x, double y, gtk.drop_target_async.DropTargetAsync dropTargetAsync);
+  alias DragMotionCallbackFunc = gdk.types.DragAction function(gdk.drop.Drop drop, double x, double y, gtk.drop_target_async.DropTargetAsync dropTargetAsync);
 
   /**
    * Connect to DragMotion signal.
@@ -277,13 +277,13 @@ class DropTargetAsync : EventController
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dropTargetAsync = getVal!DropTargetAsync(_paramVals);
-      auto drop = getVal!Drop(&_paramVals[1]);
-      auto x = getVal!double(&_paramVals[2]);
-      auto y = getVal!double(&_paramVals[3]);
+      auto dropTargetAsync = getVal!(gtk.drop_target_async.DropTargetAsync)(_paramVals);
+      auto drop = getVal!(gdk.drop.Drop)(&_paramVals[1]);
+      auto x = getVal!(double)(&_paramVals[2]);
+      auto y = getVal!(double)(&_paramVals[3]);
       auto _dretval = _dClosure.dlg(drop, x, y, dropTargetAsync);
       GdkDragAction _retval = cast(GdkDragAction)_dretval;
-      setVal!DragAction(_returnValue, _retval);
+      setVal!gdk.types.DragAction(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -309,8 +309,8 @@ class DropTargetAsync : EventController
    *   dropTargetAsync = the instance the signal is connected to
    * Returns: whether the drop is accepted at the given pointer position
    */
-  alias DropCallbackDlg = bool delegate(Drop drop, double x, double y, DropTargetAsync dropTargetAsync);
-  alias DropCallbackFunc = bool function(Drop drop, double x, double y, DropTargetAsync dropTargetAsync);
+  alias DropCallbackDlg = bool delegate(gdk.drop.Drop drop, double x, double y, gtk.drop_target_async.DropTargetAsync dropTargetAsync);
+  alias DropCallbackFunc = bool function(gdk.drop.Drop drop, double x, double y, gtk.drop_target_async.DropTargetAsync dropTargetAsync);
 
   /**
    * Connect to Drop signal.
@@ -327,10 +327,10 @@ class DropTargetAsync : EventController
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto dropTargetAsync = getVal!DropTargetAsync(_paramVals);
-      auto drop = getVal!Drop(&_paramVals[1]);
-      auto x = getVal!double(&_paramVals[2]);
-      auto y = getVal!double(&_paramVals[3]);
+      auto dropTargetAsync = getVal!(gtk.drop_target_async.DropTargetAsync)(_paramVals);
+      auto drop = getVal!(gdk.drop.Drop)(&_paramVals[1]);
+      auto x = getVal!(double)(&_paramVals[2]);
+      auto y = getVal!(double)(&_paramVals[3]);
       _retval = _dClosure.dlg(drop, x, y, dropTargetAsync);
       setVal!bool(_returnValue, _retval);
     }

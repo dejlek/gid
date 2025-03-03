@@ -4,10 +4,10 @@ import arrow.array;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class UnionArray : Array
+class UnionArray : arrow.array.Array
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -33,11 +33,11 @@ class UnionArray : Array
     return _retval;
   }
 
-  Array getField(int i)
+  arrow.array.Array getField(int i)
   {
     GArrowArray* _cretval;
     _cretval = garrow_union_array_get_field(cast(GArrowUnionArray*)cPtr, i);
-    auto _retval = ObjectG.getDObject!Array(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -1,6 +1,6 @@
 module gtk.constraint_guide;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -19,7 +19,7 @@ import gtk.types;
  * space*.
  * Unlike a `GtkWidget`, a `GtkConstraintGuide` will not be drawn.
  */
-class ConstraintGuide : ObjectG, ConstraintTarget
+class ConstraintGuide : gobject.object.ObjectG, gtk.constraint_target.ConstraintTarget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -81,7 +81,7 @@ class ConstraintGuide : ObjectG, ConstraintTarget
   {
     const(char)* _cretval;
     _cretval = gtk_constraint_guide_get_name(cast(GtkConstraintGuide*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -100,11 +100,11 @@ class ConstraintGuide : ObjectG, ConstraintTarget
    * Retrieves the strength set using [gtk.constraint_guide.ConstraintGuide.setStrength].
    * Returns: the strength of the constraint on the natural size
    */
-  ConstraintStrength getStrength()
+  gtk.types.ConstraintStrength getStrength()
   {
     GtkConstraintStrength _cretval;
     _cretval = gtk_constraint_guide_get_strength(cast(GtkConstraintGuide*)cPtr);
-    ConstraintStrength _retval = cast(ConstraintStrength)_cretval;
+    gtk.types.ConstraintStrength _retval = cast(gtk.types.ConstraintStrength)_cretval;
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class ConstraintGuide : ObjectG, ConstraintTarget
    * Params:
    *   strength = the strength of the constraint
    */
-  void setStrength(ConstraintStrength strength)
+  void setStrength(gtk.types.ConstraintStrength strength)
   {
     gtk_constraint_guide_set_strength(cast(GtkConstraintGuide*)cPtr, strength);
   }

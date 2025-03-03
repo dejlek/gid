@@ -1,6 +1,6 @@
 module gtk.emoji_chooser;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -42,7 +42,7 @@ import gtk.types;
  * consists of buttons with the .emoji-section style class and gets the
  * .emoji-toolbar style class itself.
  */
-class EmojiChooser : Popover
+class EmojiChooser : gtk.popover.Popover
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -78,8 +78,8 @@ class EmojiChooser : Popover
    *   text = the Unicode sequence for the picked Emoji, in UTF-8
    *   emojiChooser = the instance the signal is connected to
    */
-  alias EmojiPickedCallbackDlg = void delegate(string text, EmojiChooser emojiChooser);
-  alias EmojiPickedCallbackFunc = void function(string text, EmojiChooser emojiChooser);
+  alias EmojiPickedCallbackDlg = void delegate(string text, gtk.emoji_chooser.EmojiChooser emojiChooser);
+  alias EmojiPickedCallbackFunc = void function(string text, gtk.emoji_chooser.EmojiChooser emojiChooser);
 
   /**
    * Connect to EmojiPicked signal.
@@ -95,8 +95,8 @@ class EmojiChooser : Popover
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto emojiChooser = getVal!EmojiChooser(_paramVals);
-      auto text = getVal!string(&_paramVals[1]);
+      auto emojiChooser = getVal!(gtk.emoji_chooser.EmojiChooser)(_paramVals);
+      auto text = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(text, emojiChooser);
     }
 

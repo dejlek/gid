@@ -4,7 +4,7 @@ public import atk.image_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;
 public import atk.types;
-public import gid.global;
+public import gid.gid;
 
 /**
  * The ATK Interface implemented by components
@@ -33,7 +33,7 @@ template ImageT()
   {
     const(char)* _cretval;
     _cretval = atk_image_get_image_description(cast(AtkImage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -47,7 +47,7 @@ template ImageT()
   {
     const(char)* _cretval;
     _cretval = atk_image_get_image_locale(cast(AtkImage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -62,7 +62,7 @@ template ImageT()
    *   coordType = specifies whether the coordinates are relative to the screen
    *     or to the components top level window
    */
-  override void getImagePosition(out int x, out int y, CoordType coordType)
+  override void getImagePosition(out int x, out int y, atk.types.CoordType coordType)
   {
     atk_image_get_image_position(cast(AtkImage*)cPtr, cast(int*)&x, cast(int*)&y, coordType);
   }

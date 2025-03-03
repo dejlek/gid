@@ -1,8 +1,7 @@
 module gio.iostream;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -55,7 +54,7 @@ import gobject.object;
  * operations may not be well-defined due to the state the wrapper stream leaves
  * the base stream in $(LPAREN)though they are guaranteed not to crash$(RPAREN).
  */
-class IOStream : ObjectG
+class IOStream : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -80,7 +79,7 @@ class IOStream : ObjectG
    *   result = a #GAsyncResult.
    * Returns: %TRUE on success, %FALSE otherwise.
    */
-  static bool spliceFinish(AsyncResult result)
+  static bool spliceFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -129,7 +128,7 @@ class IOStream : ObjectG
    *   cancellable = optional #GCancellable object, %NULL to ignore
    * Returns: %TRUE on success, %FALSE on failure
    */
-  bool close(Cancellable cancellable)
+  bool close(gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -154,14 +153,14 @@ class IOStream : ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void closeAsync(int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -175,7 +174,7 @@ class IOStream : ObjectG
    *   result = a #GAsyncResult
    * Returns: %TRUE if stream was successfully closed, %FALSE otherwise.
    */
-  bool closeFinish(AsyncResult result)
+  bool closeFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -191,11 +190,11 @@ class IOStream : ObjectG
    * Returns: a #GInputStream, owned by the #GIOStream.
    *   Do not free.
    */
-  InputStream getInputStream()
+  gio.input_stream.InputStream getInputStream()
   {
     GInputStream* _cretval;
     _cretval = g_io_stream_get_input_stream(cast(GIOStream*)cPtr);
-    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -205,11 +204,11 @@ class IOStream : ObjectG
    * Returns: a #GOutputStream, owned by the #GIOStream.
    *   Do not free.
    */
-  OutputStream getOutputStream()
+  gio.output_stream.OutputStream getOutputStream()
   {
     GOutputStream* _cretval;
     _cretval = g_io_stream_get_output_stream(cast(GIOStream*)cPtr);
-    auto _retval = ObjectG.getDObject!OutputStream(cast(GOutputStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -266,14 +265,14 @@ class IOStream : ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void spliceAsync(IOStream stream2, IOStreamSpliceFlags flags, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void spliceAsync(gio.iostream.IOStream stream2, gio.types.IOStreamSpliceFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 

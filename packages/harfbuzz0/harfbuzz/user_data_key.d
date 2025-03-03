@@ -1,6 +1,6 @@
 module harfbuzz.user_data_key;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -9,7 +9,7 @@ import harfbuzz.types;
 /**
  * Data structure for holding user-data keys.
  */
-class UserDataKey : Boxed
+class UserDataKey : gobject.boxed.Boxed
 {
 
   this()

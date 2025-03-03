@@ -1,6 +1,6 @@
 module gtk.paned;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -72,7 +72,7 @@ import gtk.widget;
  * gtk_widget_set_size_request $(LPAREN)frame2, 50, -1$(RPAREN);
  * ```
  */
-class Paned : Widget, AccessibleRange, Orientable
+class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -100,7 +100,7 @@ class Paned : Widget, AccessibleRange, Orientable
    *   orientation = the paned’s orientation.
    * Returns: the newly created paned widget
    */
-  this(Orientation orientation)
+  this(gtk.types.Orientation orientation)
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_new(orientation);
@@ -111,11 +111,11 @@ class Paned : Widget, AccessibleRange, Orientable
    * Retrieves the end child of the given `GtkPaned`.
    * Returns: the end child widget
    */
-  Widget getEndChild()
+  gtk.widget.Widget getEndChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_get_end_child(cast(GtkPaned*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -178,11 +178,11 @@ class Paned : Widget, AccessibleRange, Orientable
    * Retrieves the start child of the given `GtkPaned`.
    * Returns: the start child widget
    */
-  Widget getStartChild()
+  gtk.widget.Widget getStartChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_get_start_child(cast(GtkPaned*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class Paned : Widget, AccessibleRange, Orientable
    * Params:
    *   child = the widget to add
    */
-  void setEndChild(Widget child)
+  void setEndChild(gtk.widget.Widget child)
   {
     gtk_paned_set_end_child(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -265,7 +265,7 @@ class Paned : Widget, AccessibleRange, Orientable
    * Params:
    *   child = the widget to add
    */
-  void setStartChild(Widget child)
+  void setStartChild(gtk.widget.Widget child)
   {
     gtk_paned_set_start_child(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -289,8 +289,8 @@ class Paned : Widget, AccessibleRange, Orientable
    *   paned = the instance the signal is connected to
    * Returns:
    */
-  alias AcceptPositionCallbackDlg = bool delegate(Paned paned);
-  alias AcceptPositionCallbackFunc = bool function(Paned paned);
+  alias AcceptPositionCallbackDlg = bool delegate(gtk.paned.Paned paned);
+  alias AcceptPositionCallbackFunc = bool function(gtk.paned.Paned paned);
 
   /**
    * Connect to AcceptPosition signal.
@@ -307,7 +307,7 @@ class Paned : Widget, AccessibleRange, Orientable
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto paned = getVal!Paned(_paramVals);
+      auto paned = getVal!(gtk.paned.Paned)(_paramVals);
       _retval = _dClosure.dlg(paned);
       setVal!bool(_returnValue, _retval);
     }
@@ -326,8 +326,8 @@ class Paned : Widget, AccessibleRange, Orientable
    *   paned = the instance the signal is connected to
    * Returns:
    */
-  alias CancelPositionCallbackDlg = bool delegate(Paned paned);
-  alias CancelPositionCallbackFunc = bool function(Paned paned);
+  alias CancelPositionCallbackDlg = bool delegate(gtk.paned.Paned paned);
+  alias CancelPositionCallbackFunc = bool function(gtk.paned.Paned paned);
 
   /**
    * Connect to CancelPosition signal.
@@ -344,7 +344,7 @@ class Paned : Widget, AccessibleRange, Orientable
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto paned = getVal!Paned(_paramVals);
+      auto paned = getVal!(gtk.paned.Paned)(_paramVals);
       _retval = _dClosure.dlg(paned);
       setVal!bool(_returnValue, _retval);
     }
@@ -362,8 +362,8 @@ class Paned : Widget, AccessibleRange, Orientable
    *   paned = the instance the signal is connected to
    * Returns:
    */
-  alias CycleChildFocusCallbackDlg = bool delegate(bool reversed, Paned paned);
-  alias CycleChildFocusCallbackFunc = bool function(bool reversed, Paned paned);
+  alias CycleChildFocusCallbackDlg = bool delegate(bool reversed, gtk.paned.Paned paned);
+  alias CycleChildFocusCallbackFunc = bool function(bool reversed, gtk.paned.Paned paned);
 
   /**
    * Connect to CycleChildFocus signal.
@@ -380,8 +380,8 @@ class Paned : Widget, AccessibleRange, Orientable
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto paned = getVal!Paned(_paramVals);
-      auto reversed = getVal!bool(&_paramVals[1]);
+      auto paned = getVal!(gtk.paned.Paned)(_paramVals);
+      auto reversed = getVal!(bool)(&_paramVals[1]);
       _retval = _dClosure.dlg(reversed, paned);
       setVal!bool(_returnValue, _retval);
     }
@@ -400,8 +400,8 @@ class Paned : Widget, AccessibleRange, Orientable
    *   paned = the instance the signal is connected to
    * Returns:
    */
-  alias CycleHandleFocusCallbackDlg = bool delegate(bool reversed, Paned paned);
-  alias CycleHandleFocusCallbackFunc = bool function(bool reversed, Paned paned);
+  alias CycleHandleFocusCallbackDlg = bool delegate(bool reversed, gtk.paned.Paned paned);
+  alias CycleHandleFocusCallbackFunc = bool function(bool reversed, gtk.paned.Paned paned);
 
   /**
    * Connect to CycleHandleFocus signal.
@@ -418,8 +418,8 @@ class Paned : Widget, AccessibleRange, Orientable
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto paned = getVal!Paned(_paramVals);
-      auto reversed = getVal!bool(&_paramVals[1]);
+      auto paned = getVal!(gtk.paned.Paned)(_paramVals);
+      auto reversed = getVal!(bool)(&_paramVals[1]);
       _retval = _dClosure.dlg(reversed, paned);
       setVal!bool(_returnValue, _retval);
     }
@@ -436,8 +436,8 @@ class Paned : Widget, AccessibleRange, Orientable
    *   paned = the instance the signal is connected to
    * Returns:
    */
-  alias MoveHandleCallbackDlg = bool delegate(ScrollType scrollType, Paned paned);
-  alias MoveHandleCallbackFunc = bool function(ScrollType scrollType, Paned paned);
+  alias MoveHandleCallbackDlg = bool delegate(gtk.types.ScrollType scrollType, gtk.paned.Paned paned);
+  alias MoveHandleCallbackFunc = bool function(gtk.types.ScrollType scrollType, gtk.paned.Paned paned);
 
   /**
    * Connect to MoveHandle signal.
@@ -454,8 +454,8 @@ class Paned : Widget, AccessibleRange, Orientable
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto paned = getVal!Paned(_paramVals);
-      auto scrollType = getVal!ScrollType(&_paramVals[1]);
+      auto paned = getVal!(gtk.paned.Paned)(_paramVals);
+      auto scrollType = getVal!(gtk.types.ScrollType)(&_paramVals[1]);
       _retval = _dClosure.dlg(scrollType, paned);
       setVal!bool(_returnValue, _retval);
     }
@@ -472,8 +472,8 @@ class Paned : Widget, AccessibleRange, Orientable
    *   paned = the instance the signal is connected to
    * Returns:
    */
-  alias ToggleHandleFocusCallbackDlg = bool delegate(Paned paned);
-  alias ToggleHandleFocusCallbackFunc = bool function(Paned paned);
+  alias ToggleHandleFocusCallbackDlg = bool delegate(gtk.paned.Paned paned);
+  alias ToggleHandleFocusCallbackFunc = bool function(gtk.paned.Paned paned);
 
   /**
    * Connect to ToggleHandleFocus signal.
@@ -490,7 +490,7 @@ class Paned : Widget, AccessibleRange, Orientable
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto paned = getVal!Paned(_paramVals);
+      auto paned = getVal!(gtk.paned.Paned)(_paramVals);
       _retval = _dClosure.dlg(paned);
       setVal!bool(_returnValue, _retval);
     }

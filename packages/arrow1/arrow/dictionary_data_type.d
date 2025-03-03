@@ -5,10 +5,10 @@ import arrow.c.types;
 import arrow.data_type;
 import arrow.fixed_width_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class DictionaryDataType : FixedWidthDataType
+class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,26 +27,26 @@ class DictionaryDataType : FixedWidthDataType
     return getType();
   }
 
-  this(DataType indexDataType, DataType valueDataType, bool ordered)
+  this(arrow.data_type.DataType indexDataType, arrow.data_type.DataType valueDataType, bool ordered)
   {
     GArrowDictionaryDataType* _cretval;
     _cretval = garrow_dictionary_data_type_new(indexDataType ? cast(GArrowDataType*)indexDataType.cPtr(No.Dup) : null, valueDataType ? cast(GArrowDataType*)valueDataType.cPtr(No.Dup) : null, ordered);
     this(_cretval, Yes.Take);
   }
 
-  DataType getIndexDataType()
+  arrow.data_type.DataType getIndexDataType()
   {
     GArrowDataType* _cretval;
     _cretval = garrow_dictionary_data_type_get_index_data_type(cast(GArrowDictionaryDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!DataType(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
-  DataType getValueDataType()
+  arrow.data_type.DataType getValueDataType()
   {
     GArrowDataType* _cretval;
     _cretval = garrow_dictionary_data_type_get_value_data_type(cast(GArrowDictionaryDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!DataType(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 

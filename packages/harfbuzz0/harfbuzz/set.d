@@ -1,6 +1,6 @@
 module harfbuzz.set;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -12,7 +12,7 @@ import harfbuzz.types;
  * points, and various other collections of discrete
  * values.
  */
-class Set : Boxed
+class Set : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

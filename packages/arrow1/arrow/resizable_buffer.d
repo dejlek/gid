@@ -4,10 +4,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.mutable_buffer;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class ResizableBuffer : MutableBuffer
+class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

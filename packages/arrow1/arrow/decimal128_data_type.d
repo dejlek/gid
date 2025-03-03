@@ -4,10 +4,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.decimal_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class Decimal128DataType : DecimalDataType
+class Decimal128DataType : arrow.decimal_data_type.DecimalDataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

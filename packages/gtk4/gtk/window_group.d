@@ -1,6 +1,6 @@
 module gtk.window_group;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -22,7 +22,7 @@ import gtk.window;
  * group; when all window have been removed, the window group will be
  * freed.
  */
-class WindowGroup : ObjectG
+class WindowGroup : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -59,7 +59,7 @@ class WindowGroup : ObjectG
    * Params:
    *   window = the `GtkWindow` to add
    */
-  void addWindow(Window window)
+  void addWindow(gtk.window.Window window)
   {
     gtk_window_group_add_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
   }
@@ -69,11 +69,11 @@ class WindowGroup : ObjectG
    * Returns: A
    *   newly-allocated list of windows inside the group.
    */
-  Window[] listWindows()
+  gtk.window.Window[] listWindows()
   {
     GList* _cretval;
     _cretval = gtk_window_group_list_windows(cast(GtkWindowGroup*)cPtr);
-    auto _retval = gListToD!(Window, GidOwnership.Container)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gtk.window.Window, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class WindowGroup : ObjectG
    * Params:
    *   window = the `GtkWindow` to remove
    */
-  void removeWindow(Window window)
+  void removeWindow(gtk.window.Window window)
   {
     gtk_window_group_remove_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
   }

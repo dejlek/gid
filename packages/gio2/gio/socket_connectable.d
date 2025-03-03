@@ -1,7 +1,7 @@
 module gio.socket_connectable;
 
 public import gio.socket_connectable_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_address_enumerator;
@@ -76,7 +76,7 @@ interface SocketConnectable
    * Creates a #GSocketAddressEnumerator for connectable.
    * Returns: a new #GSocketAddressEnumerator.
    */
-  SocketAddressEnumerator enumerate();
+  gio.socket_address_enumerator.SocketAddressEnumerator enumerate();
 
   /**
    * Creates a #GSocketAddressEnumerator for connectable that will
@@ -87,7 +87,7 @@ interface SocketConnectable
    * calling [gio.socket_connectable.SocketConnectable.enumerate].
    * Returns: a new #GSocketAddressEnumerator.
    */
-  SocketAddressEnumerator proxyEnumerate();
+  gio.socket_address_enumerator.SocketAddressEnumerator proxyEnumerate();
 
   /**
    * Format a #GSocketConnectable as a string. This is a human-readable format for

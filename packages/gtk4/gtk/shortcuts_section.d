@@ -1,6 +1,6 @@
 module gtk.shortcuts_section;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -35,7 +35,7 @@ import gtk.types;
  * If you need to add a group programmatically, use
  * [gtk.shortcuts_section.ShortcutsSection.addGroup].
  */
-class ShortcutsSection : Box
+class ShortcutsSection : gtk.box.Box
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -63,13 +63,13 @@ class ShortcutsSection : Box
    * Params:
    *   group = the `GtkShortcutsGroup` to add
    */
-  void addGroup(ShortcutsGroup group)
+  void addGroup(gtk.shortcuts_group.ShortcutsGroup group)
   {
     gtk_shortcuts_section_add_group(cast(GtkShortcutsSection*)cPtr, group ? cast(GtkShortcutsGroup*)group.cPtr(No.Dup) : null);
   }
 
-  alias ChangeCurrentPageCallbackDlg = bool delegate(int object, ShortcutsSection shortcutsSection);
-  alias ChangeCurrentPageCallbackFunc = bool function(int object, ShortcutsSection shortcutsSection);
+  alias ChangeCurrentPageCallbackDlg = bool delegate(int object, gtk.shortcuts_section.ShortcutsSection shortcutsSection);
+  alias ChangeCurrentPageCallbackFunc = bool function(int object, gtk.shortcuts_section.ShortcutsSection shortcutsSection);
 
   /**
    * Connect to ChangeCurrentPage signal.
@@ -86,8 +86,8 @@ class ShortcutsSection : Box
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto shortcutsSection = getVal!ShortcutsSection(_paramVals);
-      auto object = getVal!int(&_paramVals[1]);
+      auto shortcutsSection = getVal!(gtk.shortcuts_section.ShortcutsSection)(_paramVals);
+      auto object = getVal!(int)(&_paramVals[1]);
       _retval = _dClosure.dlg(object, shortcutsSection);
       setVal!bool(_returnValue, _retval);
     }

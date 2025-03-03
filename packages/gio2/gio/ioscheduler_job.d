@@ -1,6 +1,6 @@
 module gio.ioscheduler_job;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -42,11 +42,11 @@ class IOSchedulerJob
 
    * Deprecated: Use [glib.main_context.MainContext.invoke].
    */
-  bool sendToMainloop(SourceFunc func)
+  bool sendToMainloop(glib.types.SourceFunc func)
   {
     extern(C) bool _funcCallback(void* userData)
     {
-      auto _dlg = cast(SourceFunc*)userData;
+      auto _dlg = cast(glib.types.SourceFunc*)userData;
 
       bool _retval = (*_dlg)();
       return _retval;
@@ -74,11 +74,11 @@ class IOSchedulerJob
 
    * Deprecated: Use [glib.main_context.MainContext.invoke].
    */
-  void sendToMainloopAsync(SourceFunc func)
+  void sendToMainloopAsync(glib.types.SourceFunc func)
   {
     extern(C) bool _funcCallback(void* userData)
     {
-      auto _dlg = cast(SourceFunc*)userData;
+      auto _dlg = cast(glib.types.SourceFunc*)userData;
 
       bool _retval = (*_dlg)();
       return _retval;

@@ -1,6 +1,6 @@
 module glib.global;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.c.functions;
 import glib.c.types;
@@ -131,7 +131,7 @@ int asciiDigitValue(char c)
  * the string back using funcGLib.ascii_strtod gives the same machine-number
  * $(LPAREN)on machines with IEEE compatible 64bit doubles$(RPAREN). It is
  * guaranteed that the size of the resulting string will never
- * be larger than [glib.int] bytes, including the terminating
+ * be larger than [glib.types.int] bytes, including the terminating
  * nul character, which is always added.
  * Params:
  *   buffer = a buffer to place the resulting string in
@@ -144,7 +144,7 @@ string asciiDtostr(string buffer, int bufLen, double d)
   char* _cretval;
   char* _buffer = buffer.toCString(No.Alloc);
   _cretval = g_ascii_dtostr(_buffer, bufLen, d);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -172,7 +172,7 @@ string asciiFormatd(string buffer, int bufLen, string format, double d)
   char* _buffer = buffer.toCString(No.Alloc);
   const(char)* _format = format.toCString(No.Alloc);
   _cretval = g_ascii_formatd(_buffer, bufLen, _format, d);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -219,7 +219,7 @@ string asciiStrdown(string str, ptrdiff_t len)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_ascii_strdown(_str, len);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -370,8 +370,8 @@ double asciiStrtod(string nptr, out string endptr)
  * files or other non-user input that should be locale independent.
  * To handle input from the user you should normally use the
  * locale-sensitive system `strtoll$(LPAREN)$(RPAREN)` function.
- * If the correct value would cause overflow, [glib.long] or
- * [glib.long] is returned, and `ERANGE` is stored in `errno`.
+ * If the correct value would cause overflow, [glib.types.long] or
+ * [glib.types.long] is returned, and `ERANGE` is stored in `errno`.
  * If the base is outside the valid range, zero is returned, and
  * `EINVAL` is stored in `errno`. If the
  * string conversion fails, zero is returned, and endptr returns nptr
@@ -407,7 +407,7 @@ long asciiStrtoll(string nptr, out string endptr, uint base)
  * files or other non-user input that should be locale independent.
  * To handle input from the user you should normally use the
  * locale-sensitive system `strtoull$(LPAREN)$(RPAREN)` function.
- * If the correct value would cause overflow, [glib.ulong]
+ * If the correct value would cause overflow, [glib.types.ulong]
  * is returned, and `ERANGE` is stored in `errno`.
  * If the base is outside the valid range, zero is returned, and
  * `EINVAL` is stored in `errno`.
@@ -445,7 +445,7 @@ string asciiStrup(string str, ptrdiff_t len)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_ascii_strup(_str, len);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -570,13 +570,13 @@ void assertionMessageCmpstrv(string domain, string file, int line, string func, 
   g_assertion_message_cmpstrv(_domain, _file, line, _func, _expr, _arg1, _arg2, firstWrongIdx);
 }
 
-void assertionMessageError(string domain, string file, int line, string func, string expr, ErrorG error, Quark errorDomain, int errorCode)
+void assertionMessageError(string domain, string file, int line, string func, string expr, glib.error.ErrorG error, glib.types.Quark errorDomain, int errorCode)
 {
   const(char)* _domain = domain.toCString(No.Alloc);
   const(char)* _file = file.toCString(No.Alloc);
   const(char)* _func = func.toCString(No.Alloc);
   const(char)* _expr = expr.toCString(No.Alloc);
-  g_assertion_message_error(_domain, _file, line, _func, _expr, error ? cast(GError*)error.cPtr : null, errorDomain, errorCode);
+  g_assertion_message_error(_domain, _file, line, _func, _expr, error ? cast(const(GError)*)error.cPtr : null, errorDomain, errorCode);
 }
 
 /**
@@ -1087,11 +1087,11 @@ void atomicRcBoxRelease(void* memBlock)
  *   memBlock = a pointer to reference counted data
  *   clearFunc = a function to call when clearing the data
  */
-void atomicRcBoxReleaseFull(void* memBlock, DestroyNotify clearFunc)
+void atomicRcBoxReleaseFull(void* memBlock, glib.types.DestroyNotify clearFunc)
 {
   extern(C) void _clearFuncCallback(void* data)
   {
-    auto _dlg = cast(DestroyNotify*)data;
+    auto _dlg = cast(glib.types.DestroyNotify*)data;
 
     (*_dlg)();
   }
@@ -1193,7 +1193,7 @@ string base64Encode(ubyte[] data)
 
   auto _data = cast(const(ubyte)*)data.ptr;
   _cretval = g_base64_encode(_data, _len);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1216,7 +1216,7 @@ string basename(string fileName)
   const(char)* _cretval;
   const(char)* _fileName = fileName.toCString(No.Alloc);
   _cretval = g_basename(_fileName);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -1359,7 +1359,7 @@ string buildFilenamev(string[] args)
   _tmpargs ~= null;
   char** _args = _tmpargs.ptr;
   _cretval = g_build_filenamev(_args);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1384,7 +1384,7 @@ string buildPathv(string separator, string[] args)
   _tmpargs ~= null;
   char** _args = _tmpargs.ptr;
   _cretval = g_build_pathv(_separator, _args);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1412,7 +1412,7 @@ string canonicalizeFilename(string filename, string relativeTo)
   const(char)* _filename = filename.toCString(No.Alloc);
   const(char)* _relativeTo = relativeTo.toCString(No.Alloc);
   _cretval = g_canonicalize_filename(_filename, _relativeTo);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1460,7 +1460,7 @@ string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro)
 {
   const(char)* _cretval;
   _cretval = glib_check_version(requiredMajor, requiredMinor, requiredMicro);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -1492,11 +1492,11 @@ string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro)
  *   function_ = function to call
  * Returns: the ID $(LPAREN)greater than 0$(RPAREN) of the event source.
  */
-uint childWatchAdd(int priority, Pid pid, ChildWatchFunc function_)
+uint childWatchAdd(int priority, glib.types.Pid pid, glib.types.ChildWatchFunc function_)
 {
   extern(C) void _function_Callback(GPid pid, int waitStatus, void* userData)
   {
-    auto _dlg = cast(ChildWatchFunc*)userData;
+    auto _dlg = cast(glib.types.ChildWatchFunc*)userData;
 
     (*_dlg)(pid, waitStatus);
   }
@@ -1548,11 +1548,11 @@ uint childWatchAdd(int priority, Pid pid, ChildWatchFunc function_)
  *     Windows a handle for a process $(LPAREN)which doesn't have to be a child$(RPAREN).
  * Returns: the newly-created child watch source
  */
-Source childWatchSourceNew(Pid pid)
+glib.source.Source childWatchSourceNew(glib.types.Pid pid)
 {
   GSource* _cretval;
   _cretval = g_child_watch_source_new(pid);
-  auto _retval = _cretval ? new Source(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1629,7 +1629,7 @@ bool close(int fd)
  * Equivalently, it is the same as BSD `closefrom $(LPAREN)lowfd$(RPAREN)`, but portable,
  * and async-signal-safe on all OSs.
  * This function is async-signal safe, making it safe to call from a
- * signal handler or a [glib.SpawnChildSetupFunc], as long as lowfd is
+ * signal handler or a [glib.types.SpawnChildSetupFunc], as long as lowfd is
  * non-negative.
  * See [`signal$(LPAREN)7$(RPAREN)`]$(LPAREN)$(RPAREN)(man:signal7) and
  * [`signal-safety$(LPAREN)7$(RPAREN)`]$(LPAREN)$(RPAREN)(man:signal-safety7) for more details.
@@ -1657,11 +1657,11 @@ int closefrom(int lowfd)
  *   checksum_type. The returned string should be freed with [glib.global.gfree] when
  *   done using it.
  */
-string computeChecksumForBytes(ChecksumType checksumType, Bytes data)
+string computeChecksumForBytes(glib.types.ChecksumType checksumType, glib.bytes.Bytes data)
 {
   char* _cretval;
   _cretval = g_compute_checksum_for_bytes(checksumType, data ? cast(GBytes*)data.cPtr(No.Dup) : null);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1678,7 +1678,7 @@ string computeChecksumForBytes(ChecksumType checksumType, Bytes data)
  *   checksum_type. The returned string should be freed with [glib.global.gfree] when
  *   done using it.
  */
-string computeChecksumForData(ChecksumType checksumType, ubyte[] data)
+string computeChecksumForData(glib.types.ChecksumType checksumType, ubyte[] data)
 {
   char* _cretval;
   size_t _length;
@@ -1687,7 +1687,7 @@ string computeChecksumForData(ChecksumType checksumType, ubyte[] data)
 
   auto _data = cast(const(ubyte)*)data.ptr;
   _cretval = g_compute_checksum_for_data(checksumType, _data, _length);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1702,12 +1702,12 @@ string computeChecksumForData(ChecksumType checksumType, ubyte[] data)
  *   or %NULL if [glib.checksum.Checksum.new_] fails for checksum_type. The returned string
  *   should be freed with [glib.global.gfree] when done using it.
  */
-string computeChecksumForString(ChecksumType checksumType, string str, ptrdiff_t length)
+string computeChecksumForString(glib.types.ChecksumType checksumType, string str, ptrdiff_t length)
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_compute_checksum_for_string(checksumType, _str, length);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1723,11 +1723,11 @@ string computeChecksumForString(ChecksumType checksumType, string str, ptrdiff_t
  * Returns: the HMAC of the binary data as a string in hexadecimal.
  *   The returned string should be freed with [glib.global.gfree] when done using it.
  */
-string computeHmacForBytes(ChecksumType digestType, Bytes key, Bytes data)
+string computeHmacForBytes(glib.types.ChecksumType digestType, glib.bytes.Bytes key, glib.bytes.Bytes data)
 {
   char* _cretval;
   _cretval = g_compute_hmac_for_bytes(digestType, key ? cast(GBytes*)key.cPtr(No.Dup) : null, data ? cast(GBytes*)data.cPtr(No.Dup) : null);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1743,7 +1743,7 @@ string computeHmacForBytes(ChecksumType digestType, Bytes key, Bytes data)
  * Returns: the HMAC of the binary data as a string in hexadecimal.
  *   The returned string should be freed with [glib.global.gfree] when done using it.
  */
-string computeHmacForData(ChecksumType digestType, ubyte[] key, ubyte[] data)
+string computeHmacForData(glib.types.ChecksumType digestType, ubyte[] key, ubyte[] data)
 {
   char* _cretval;
   size_t _keyLen;
@@ -1757,7 +1757,7 @@ string computeHmacForData(ChecksumType digestType, ubyte[] key, ubyte[] data)
 
   auto _data = cast(const(ubyte)*)data.ptr;
   _cretval = g_compute_hmac_for_data(digestType, _key, _keyLen, _data, _length);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1773,7 +1773,7 @@ string computeHmacForData(ChecksumType digestType, ubyte[] key, ubyte[] data)
  *   The returned string should be freed with [glib.global.gfree]
  *   when done using it.
  */
-string computeHmacForString(ChecksumType digestType, ubyte[] key, string str, ptrdiff_t length)
+string computeHmacForString(glib.types.ChecksumType digestType, ubyte[] key, string str, ptrdiff_t length)
 {
   char* _cretval;
   size_t _keyLen;
@@ -1783,7 +1783,7 @@ string computeHmacForString(ChecksumType digestType, ubyte[] key, string str, pt
   auto _key = cast(const(ubyte)*)key.ptr;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_compute_hmac_for_string(digestType, _key, _keyLen, _str, length);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1840,9 +1840,9 @@ ubyte[] convert(ubyte[] str, string toCodeset, string fromCodeset, out size_t by
   return _retval;
 }
 
-Quark convertErrorQuark()
+glib.types.Quark convertErrorQuark()
 {
-  Quark _retval;
+  glib.types.Quark _retval;
   _retval = g_convert_error_quark();
   return _retval;
 }
@@ -1963,11 +1963,11 @@ void datasetDestroy(const(void)* datasetLocation)
  *   datasetLocation = the location identifying the dataset.
  *   func = the function to call for each data element.
  */
-void datasetForeach(const(void)* datasetLocation, DataForeachFunc func)
+void datasetForeach(const(void)* datasetLocation, glib.types.DataForeachFunc func)
 {
   extern(C) void _funcCallback(GQuark keyId, void* data, void* userData)
   {
-    auto _dlg = cast(DataForeachFunc*)userData;
+    auto _dlg = cast(glib.types.DataForeachFunc*)userData;
 
     (*_dlg)(keyId, data);
   }
@@ -1985,7 +1985,7 @@ void datasetForeach(const(void)* datasetLocation, DataForeachFunc func)
  * Returns: the data element corresponding to
  *   the #GQuark, or %NULL if it is not found.
  */
-void* datasetIdGetData(const(void)* datasetLocation, Quark keyId)
+void* datasetIdGetData(const(void)* datasetLocation, glib.types.Quark keyId)
 {
   auto _retval = g_dataset_id_get_data(datasetLocation, keyId);
   return _retval;
@@ -2009,7 +2009,7 @@ string dcgettext(string domain, string msgid, int category)
   const(char)* _domain = domain.toCString(No.Alloc);
   const(char)* _msgid = msgid.toCString(No.Alloc);
   _cretval = g_dcgettext(_domain, _msgid, category);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -2050,7 +2050,7 @@ string dgettext(string domain, string msgid)
   const(char)* _domain = domain.toCString(No.Alloc);
   const(char)* _msgid = msgid.toCString(No.Alloc);
   _cretval = g_dgettext(_domain, _msgid);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -2112,7 +2112,7 @@ string dngettext(string domain, string msgid, string msgidPlural, gulong n)
   const(char)* _msgid = msgid.toCString(No.Alloc);
   const(char)* _msgidPlural = msgidPlural.toCString(No.Alloc);
   _cretval = g_dngettext(_domain, _msgid, _msgidPlural, n);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -2176,7 +2176,7 @@ string dpgettext(string domain, string msgctxtid, size_t msgidoffset)
   const(char)* _domain = domain.toCString(No.Alloc);
   const(char)* _msgctxtid = msgctxtid.toCString(No.Alloc);
   _cretval = g_dpgettext(_domain, _msgctxtid, msgidoffset);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -2203,7 +2203,7 @@ string dpgettext2(string domain, string context, string msgid)
   const(char)* _context = context.toCString(No.Alloc);
   const(char)* _msgid = msgid.toCString(No.Alloc);
   _cretval = g_dpgettext2(_domain, _context, _msgid);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -2230,7 +2230,7 @@ string environGetenv(string[] envp, string variable)
 
   const(char)* _variable = variable.toCString(No.Alloc);
   _cretval = g_environ_getenv(_envp, _variable);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -2242,7 +2242,7 @@ string environGetenv(string[] envp, string variable)
  * This is the same as Linux `close_range $(LPAREN)lowfd, ~0U, CLOSE_RANGE_CLOEXEC$(RPAREN)`,
  * but portable to other OSs and to older versions of Linux.
  * This function is async-signal safe, making it safe to call from a
- * signal handler or a [glib.SpawnChildSetupFunc], as long as lowfd is
+ * signal handler or a [glib.types.SpawnChildSetupFunc], as long as lowfd is
  * non-negative.
  * See [`signal$(LPAREN)7$(RPAREN)`]$(LPAREN)$(RPAREN)(man:signal7) and
  * [`signal-safety$(LPAREN)7$(RPAREN)`]$(LPAREN)$(RPAREN)(man:signal-safety7) for more details.
@@ -2269,17 +2269,17 @@ int fdwalkSetCloexec(int lowfd)
  *   errNo = an "errno" value
  * Returns: #GFileError corresponding to the given err_no
  */
-FileError fileErrorFromErrno(int errNo)
+glib.types.FileError fileErrorFromErrno(int errNo)
 {
   GFileError _cretval;
   _cretval = g_file_error_from_errno(errNo);
-  FileError _retval = cast(FileError)_cretval;
+  glib.types.FileError _retval = cast(glib.types.FileError)_cretval;
   return _retval;
 }
 
-Quark fileErrorQuark()
+glib.types.Quark fileErrorQuark()
 {
-  Quark _retval;
+  glib.types.Quark _retval;
   _retval = g_file_error_quark();
   return _retval;
 }
@@ -2385,7 +2385,7 @@ string fileReadLink(string filename)
   _cretval = g_file_read_link(_filename, &_err);
   if (_err)
     throw new ErrorG(_err);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -2467,7 +2467,7 @@ bool fileSetContents(string filename, ubyte[] contents)
  *   mode = file mode, as passed to `open$(LPAREN)$(RPAREN)`; typically this will be `0666`
  * Returns: %TRUE on success, %FALSE if an error occurred
  */
-bool fileSetContentsFull(string filename, ubyte[] contents, FileSetContentsFlags flags, int mode)
+bool fileSetContentsFull(string filename, ubyte[] contents, glib.types.FileSetContentsFlags flags, int mode)
 {
   bool _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -2541,7 +2541,7 @@ bool fileSetContentsFull(string filename, ubyte[] contents, FileSetContentsFlags
  *   test = bitfield of #GFileTest flags
  * Returns: whether a test was %TRUE
  */
-bool fileTest(string filename, FileTest test)
+bool fileTest(string filename, glib.types.FileTest test)
 {
   bool _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -2574,7 +2574,7 @@ string filenameDisplayBasename(string filename)
   char* _cretval;
   const(char)* _filename = filename.toCString(No.Alloc);
   _cretval = g_filename_display_basename(_filename);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -2603,7 +2603,7 @@ string filenameDisplayName(string filename)
   char* _cretval;
   const(char)* _filename = filename.toCString(No.Alloc);
   _cretval = g_filename_display_name(_filename);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -2631,7 +2631,7 @@ string filenameFromUri(string uri, out string hostname)
   _cretval = g_filename_from_uri(_uri, &_hostname, &_err);
   if (_err)
     throw new ErrorG(_err);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   hostname = _hostname.fromCString(Yes.Free);
   return _retval;
 }
@@ -2670,7 +2670,7 @@ string filenameFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead, 
   _cretval = g_filename_from_utf8(_utf8string, len, cast(size_t*)&bytesRead, cast(size_t*)&bytesWritten, &_err);
   if (_err)
     throw new ErrorG(_err);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -2694,7 +2694,7 @@ string filenameToUri(string filename, string hostname)
   _cretval = g_filename_to_uri(_filename, _hostname, &_err);
   if (_err)
     throw new ErrorG(_err);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -2736,7 +2736,7 @@ string filenameToUtf8(string opsysstring, ptrdiff_t len, out size_t bytesRead, o
   _cretval = g_filename_to_utf8(_opsysstring, len, cast(size_t*)&bytesRead, cast(size_t*)&bytesWritten, &_err);
   if (_err)
     throw new ErrorG(_err);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -2766,7 +2766,7 @@ string findProgramInPath(string program)
   char* _cretval;
   const(char)* _program = program.toCString(No.Alloc);
   _cretval = g_find_program_in_path(_program);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -2819,7 +2819,7 @@ string formatSize(ulong size)
 {
   char* _cretval;
   _cretval = g_format_size(size);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -2843,7 +2843,7 @@ string formatSizeForDisplay(long size)
 {
   char* _cretval;
   _cretval = g_format_size_for_display(size);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -2857,11 +2857,11 @@ string formatSizeForDisplay(long size)
  * Returns: a newly-allocated formatted string
  *   containing a human readable file size
  */
-string formatSizeFull(ulong size, FormatSizeFlags flags)
+string formatSizeFull(ulong size, glib.types.FormatSizeFlags flags)
 {
   char* _cretval;
   _cretval = g_format_size_full(size, flags);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -2956,7 +2956,7 @@ string getApplicationName()
 {
   const(char)* _cretval;
   _cretval = g_get_application_name();
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3001,7 +3001,7 @@ string getCodeset()
 {
   char* _cretval;
   _cretval = g_get_codeset();
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -3048,7 +3048,7 @@ string getCurrentDir()
 {
   char* _cretval;
   _cretval = g_get_current_dir();
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -3061,7 +3061,7 @@ string getCurrentDir()
  * Deprecated: #GTimeVal is not year-2038-safe. Use [glib.global.getRealTime]
  *   instead.
  */
-void getCurrentTime(TimeVal result)
+void getCurrentTime(glib.time_val.TimeVal result)
 {
   g_get_current_time(result ? cast(GTimeVal*)result.cPtr : null);
 }
@@ -3160,7 +3160,7 @@ string getHomeDir()
 {
   const(char)* _cretval;
   _cretval = g_get_home_dir();
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3183,7 +3183,7 @@ string getHostName()
 {
   const(char)* _cretval;
   _cretval = g_get_host_name();
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3340,7 +3340,7 @@ string getOsInfo(string keyName)
   char* _cretval;
   const(char)* _keyName = keyName.toCString(No.Alloc);
   _cretval = g_get_os_info(_keyName);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -3349,7 +3349,7 @@ string getOsInfo(string keyName)
  * in contrast to [glib.global.getApplicationName].
  * If you are using #GApplication the program name is set in
  * [gio.application.ApplicationGio.run]. In case of GDK or GTK it is set in
- * gdk_init$(LPAREN)$(RPAREN), which is called by [gtk.global.init_] and the
+ * [gdk.global.init_], which is called by [gtk.global.init_] and the
  * #GtkApplication::startup handler. The program name is found by
  * taking the last component of argv[0].
  * Returns: the name of the program,
@@ -3360,7 +3360,7 @@ string getPrgname()
 {
   const(char)* _cretval;
   _cretval = g_get_prgname();
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3376,7 +3376,7 @@ string getRealName()
 {
   const(char)* _cretval;
   _cretval = g_get_real_name();
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3503,7 +3503,7 @@ string getTmpDir()
 {
   const(char)* _cretval;
   _cretval = g_get_tmp_dir();
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3528,7 +3528,7 @@ string getUserCacheDir()
 {
   const(char)* _cretval;
   _cretval = g_get_user_cache_dir();
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3554,7 +3554,7 @@ string getUserConfigDir()
 {
   const(char)* _cretval;
   _cretval = g_get_user_config_dir();
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3580,7 +3580,7 @@ string getUserDataDir()
 {
   const(char)* _cretval;
   _cretval = g_get_user_data_dir();
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3595,7 +3595,7 @@ string getUserName()
 {
   const(char)* _cretval;
   _cretval = g_get_user_name();
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3618,7 +3618,7 @@ string getUserRuntimeDir()
 {
   const(char)* _cretval;
   _cretval = g_get_user_runtime_dir();
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3637,11 +3637,11 @@ string getUserRuntimeDir()
  *   directory, or %NULL if the logical id was not found. The returned string is
  *   owned by GLib and should not be modified or freed.
  */
-string getUserSpecialDir(UserDirectory directory)
+string getUserSpecialDir(glib.types.UserDirectory directory)
 {
   const(char)* _cretval;
   _cretval = g_get_user_special_dir(directory);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3667,7 +3667,7 @@ string getUserStateDir()
 {
   const(char)* _cretval;
   _cretval = g_get_user_state_dir();
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3690,7 +3690,7 @@ string getenv(string variable)
   const(char)* _cretval;
   const(char)* _variable = variable.toCString(No.Alloc);
   _cretval = g_getenv(_variable);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3764,7 +3764,7 @@ string hostnameToAscii(string hostname)
   char* _cretval;
   const(char)* _hostname = hostname.toCString(No.Alloc);
   _cretval = g_hostname_to_ascii(_hostname);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -3785,7 +3785,7 @@ string hostnameToUnicode(string hostname)
   char* _cretval;
   const(char)* _hostname = hostname.toCString(No.Alloc);
   _cretval = g_hostname_to_unicode(_hostname);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -3807,11 +3807,11 @@ string hostnameToUnicode(string hostname)
  *   function_ = function to call
  * Returns: the ID $(LPAREN)greater than 0$(RPAREN) of the event source.
  */
-uint idleAdd(int priority, SourceFunc function_)
+uint idleAdd(int priority, glib.types.SourceFunc function_)
 {
   extern(C) bool _function_Callback(void* userData)
   {
-    auto _dlg = cast(SourceFunc*)userData;
+    auto _dlg = cast(glib.types.SourceFunc*)userData;
 
     bool _retval = (*_dlg)();
     return _retval;
@@ -3847,11 +3847,11 @@ bool idleRemoveByData(void* data)
  * have a default priority of %G_PRIORITY_DEFAULT.
  * Returns: the newly-created idle source
  */
-Source idleSourceNew()
+glib.source.Source idleSourceNew()
 {
   GSource* _cretval;
   _cretval = g_idle_source_new();
-  auto _retval = _cretval ? new Source(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3945,7 +3945,7 @@ string internStaticString(string string_)
   const(char)* _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
   _cretval = g_intern_static_string(_string_);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3965,7 +3965,7 @@ string internString(string string_)
   const(char)* _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
   _cretval = g_intern_string(_string_);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3982,13 +3982,13 @@ string internString(string string_)
  *   func = the function to call when the condition is satisfied
  * Returns: the event source id
  */
-uint ioAddWatch(IOChannel channel, int priority, IOCondition condition, IOFunc func)
+uint ioAddWatch(glib.iochannel.IOChannel channel, int priority, glib.types.IOCondition condition, glib.types.IOFunc func)
 {
   extern(C) bool _funcCallback(GIOChannel* source, GIOCondition condition, void* data)
   {
-    auto _dlg = cast(IOFunc*)data;
+    auto _dlg = cast(glib.types.IOFunc*)data;
 
-    bool _retval = (*_dlg)(source ? new IOChannel(cast(void*)source, No.Take) : null, condition);
+    bool _retval = (*_dlg)(source ? new glib.iochannel.IOChannel(cast(void*)source, No.Take) : null, condition);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
@@ -4017,11 +4017,11 @@ uint ioAddWatch(IOChannel channel, int priority, IOCondition condition, IOFunc f
  *   condition = conditions to watch for
  * Returns: a new #GSource
  */
-Source ioCreateWatch(IOChannel channel, IOCondition condition)
+glib.source.Source ioCreateWatch(glib.iochannel.IOChannel channel, glib.types.IOCondition condition)
 {
   GSource* _cretval;
   _cretval = g_io_create_watch(channel ? cast(GIOChannel*)channel.cPtr(No.Dup) : null, condition);
-  auto _retval = _cretval ? new Source(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -4135,7 +4135,7 @@ string localeToUtf8(ubyte[] opsysstring, out size_t bytesRead, out size_t bytesW
   _cretval = g_locale_to_utf8(_opsysstring, _len, cast(size_t*)&bytesRead, cast(size_t*)&bytesWritten, &_err);
   if (_err)
     throw new ErrorG(_err);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -4170,7 +4170,7 @@ string localeToUtf8(ubyte[] opsysstring, out size_t bytesRead, out size_t bytesW
  *   message = the message
  *   unusedData = data passed from funcGLib.log which is unused
  */
-void logDefaultHandler(string logDomain, LogLevelFlags logLevel, string message, void* unusedData)
+void logDefaultHandler(string logDomain, glib.types.LogLevelFlags logLevel, string message, void* unusedData)
 {
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
   const(char)* _message = message.toCString(No.Alloc);
@@ -4180,7 +4180,7 @@ void logDefaultHandler(string logDomain, LogLevelFlags logLevel, string message,
 /**
  * Return whether debug output from the GLib logging system is enabled.
  * Note that this should not be used to conditionalise calls to funcGLib.debug or
- * other logging functions; it should only be used from [glib.LogWriterFunc]
+ * other logging functions; it should only be used from [glib.types.LogWriterFunc]
  * implementations.
  * Note also that the value of this does not depend on `G_MESSAGES_DEBUG`, nor
  * funcGLib.log_writer_default_set_debug_domains; see the docs for funcGLib.log_set_debug_enabled.
@@ -4227,11 +4227,11 @@ void logRemoveHandler(string logDomain, uint handlerId)
  *     to be fatal
  * Returns: the old fatal mask
  */
-LogLevelFlags logSetAlwaysFatal(LogLevelFlags fatalMask)
+glib.types.LogLevelFlags logSetAlwaysFatal(glib.types.LogLevelFlags fatalMask)
 {
   GLogLevelFlags _cretval;
   _cretval = g_log_set_always_fatal(fatalMask);
-  LogLevelFlags _retval = cast(LogLevelFlags)_cretval;
+  glib.types.LogLevelFlags _retval = cast(glib.types.LogLevelFlags)_cretval;
   return _retval;
 }
 
@@ -4267,12 +4267,12 @@ void logSetDebugEnabled(bool enabled)
  *   fatalMask = the new fatal mask
  * Returns: the old fatal mask for the log domain
  */
-LogLevelFlags logSetFatalMask(string logDomain, LogLevelFlags fatalMask)
+glib.types.LogLevelFlags logSetFatalMask(string logDomain, glib.types.LogLevelFlags fatalMask)
 {
   GLogLevelFlags _cretval;
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
   _cretval = g_log_set_fatal_mask(_logDomain, fatalMask);
-  LogLevelFlags _retval = cast(LogLevelFlags)_cretval;
+  glib.types.LogLevelFlags _retval = cast(glib.types.LogLevelFlags)_cretval;
   return _retval;
 }
 
@@ -4290,11 +4290,11 @@ LogLevelFlags logSetFatalMask(string logDomain, LogLevelFlags fatalMask)
  *   logFunc = the log handler function
  * Returns: the ID of the new handler
  */
-uint logSetHandler(string logDomain, LogLevelFlags logLevels, LogFunc logFunc)
+uint logSetHandler(string logDomain, glib.types.LogLevelFlags logLevels, glib.types.LogFunc logFunc)
 {
   extern(C) void _logFuncCallback(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* userData)
   {
-    auto _dlg = cast(LogFunc*)userData;
+    auto _dlg = cast(glib.types.LogFunc*)userData;
     string _logDomain = logDomain.fromCString(No.Free);
     string _message = message.fromCString(No.Free);
 
@@ -4324,12 +4324,12 @@ uint logSetHandler(string logDomain, LogLevelFlags logLevels, LogFunc logFunc)
  * For more details on its usage and about the parameters, see funcGLib.log_structured.
  * Params:
  *   logDomain = log domain, usually `G_LOG_DOMAIN`
- *   logLevel = log level, either from [glib.LogLevelFlags], or a user-defined
+ *   logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined
  *     level
  *   fields = a dictionary $(LPAREN)[glib.variant.VariantG] of the type `G_VARIANT_TYPE_VARDICT`$(RPAREN)
  *     containing the key-value pairs of message data.
  */
-void logVariant(string logDomain, LogLevelFlags logLevel, VariantG fields)
+void logVariant(string logDomain, glib.types.LogLevelFlags logLevel, glib.variant.VariantG fields)
 {
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
   g_log_variant(_logDomain, logLevel, fields ? cast(VariantC*)fields.cPtr(No.Dup) : null);
@@ -4397,13 +4397,13 @@ void logWriterDefaultSetUseStderr(bool useStderr)
  * }
  * ```
  * Params:
- *   logLevel = log level, either from [glib.LogLevelFlags], or a user-defined
+ *   logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined
  *     level
  *   logDomain = log domain
  * Returns: `TRUE` if the log message would be dropped by GLib’s
  *   default log handlers
  */
-bool logWriterDefaultWouldDrop(LogLevelFlags logLevel, string logDomain)
+bool logWriterDefaultWouldDrop(glib.types.LogLevelFlags logLevel, string logDomain)
 {
   bool _retval;
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
@@ -4461,7 +4461,7 @@ bool logWriterSupportsColor(int outputFd)
  * Returns: 0 if the information was successfully retrieved,
  *   -1 if an error occurred
  */
-int lstat(string filename, StatBuf buf)
+int lstat(string filename, glib.types.StatBuf buf)
 {
   int _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -4473,11 +4473,11 @@ int lstat(string filename, StatBuf buf)
  * Returns the currently firing source for this thread.
  * Returns: The currently firing source or %NULL.
  */
-Source mainCurrentSource()
+glib.source.Source mainCurrentSource()
 {
   GSource* _cretval;
   _cretval = g_main_current_source();
-  auto _retval = _cretval ? new Source(cast(void*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -4640,9 +4640,9 @@ void* mallocN(size_t nBlocks, size_t nBlockBytes)
   return _retval;
 }
 
-Quark markupErrorQuark()
+glib.types.Quark markupErrorQuark()
 {
-  Quark _retval;
+  glib.types.Quark _retval;
   _retval = g_markup_error_quark();
   return _retval;
 }
@@ -4670,7 +4670,7 @@ string markupEscapeText(string text, ptrdiff_t length)
   char* _cretval;
   const(char)* _text = text.toCString(No.Alloc);
   _cretval = g_markup_escape_text(_text, length);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -4715,7 +4715,7 @@ void memProfile()
  * Deprecated: This function now does nothing. Use other memory
  *   profiling tools instead
  */
-void memSetVtable(MemVTable vtable)
+void memSetVtable(glib.types.MemVTable vtable)
 {
   g_mem_set_vtable(&vtable);
 }
@@ -4801,9 +4801,9 @@ void nullifyPointer(out void* nullifyLocation)
   g_nullify_pointer(cast(void**)&nullifyLocation);
 }
 
-Quark numberParserErrorQuark()
+glib.types.Quark numberParserErrorQuark()
 {
-  Quark _retval;
+  glib.types.Quark _retval;
   _retval = g_number_parser_error_quark();
   return _retval;
 }
@@ -4849,7 +4849,7 @@ Quark numberParserErrorQuark()
  * Params:
  *   prgName = the program name, needed by gdb for the "[S]tack trace"
  *     option. If prg_name is %NULL, [glib.global.getPrgname] is called to get
- *     the program name $(LPAREN)which will work correctly if gdk_init$(LPAREN)$(RPAREN) or
+ *     the program name $(LPAREN)which will work correctly if [gdk.global.init_] or
  *     [gtk.global.init_] has been called$(RPAREN)
  */
 void onErrorQuery(string prgName)
@@ -4863,7 +4863,7 @@ void onErrorQuery(string prgName)
  * stack trace. Called by [glib.global.onErrorQuery] when the "[S]tack trace"
  * option is selected. You can get the current process's program name
  * with [glib.global.getPrgname], assuming that you have called [gtk.global.init_] or
- * gdk_init$(LPAREN)$(RPAREN).
+ * [gdk.global.init_].
  * This function may cause different actions on non-UNIX platforms.
  * When running on Windows, this function is *not* called by
  * [glib.global.onErrorQuery]. If called directly, it will raise an
@@ -4913,9 +4913,9 @@ int open(string filename, int flags, int mode)
   return _retval;
 }
 
-Quark optionErrorQuark()
+glib.types.Quark optionErrorQuark()
 {
-  Quark _retval;
+  glib.types.Quark _retval;
   _retval = g_option_error_quark();
   return _retval;
 }
@@ -4936,7 +4936,7 @@ string pathGetBasename(string fileName)
   char* _cretval;
   const(char)* _fileName = fileName.toCString(No.Alloc);
   _cretval = g_path_get_basename(_fileName);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -4955,7 +4955,7 @@ string pathGetDirname(string fileName)
   char* _cretval;
   const(char)* _fileName = fileName.toCString(No.Alloc);
   _cretval = g_path_get_dirname(_fileName);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -5006,7 +5006,7 @@ string pathSkipRoot(string fileName)
   const(char)* _cretval;
   const(char)* _fileName = fileName.toCString(No.Alloc);
   _cretval = g_path_skip_root(_fileName);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -5167,7 +5167,7 @@ void pointerBitUnlockAndSet(void* address, uint lockBit, void* ptr, size_t prese
  *   were filled in, or 0 if the operation timed out, or -1 on error or
  *   if the call was interrupted.
  */
-int poll(PollFD fds, uint nfds, int timeout)
+int poll(glib.types.PollFD fds, uint nfds, int timeout)
 {
   int _retval;
   _retval = g_poll(&fds, nfds, timeout);
@@ -5185,11 +5185,11 @@ int poll(PollFD fds, uint nfds, int timeout)
  *   dest = error return location
  *   src = error to move into the return location
  */
-void propagateError(out ErrorG dest, ErrorG src)
+void propagateError(out glib.error.ErrorG dest, glib.error.ErrorG src)
 {
   GError* _dest;
   g_propagate_error(&_dest, src ? cast(GError*)src.cPtr : null);
-  dest = new ErrorG(cast(void*)_dest);
+  dest = new glib.error.ErrorG(cast(void*)_dest);
 }
 
 /**
@@ -5202,11 +5202,11 @@ void propagateError(out ErrorG dest, ErrorG src)
  *   size = size of each element
  *   compareFunc = function to compare elements
  */
-void qsortWithData(const(void)* pbase, int totalElems, size_t size, CompareDataFunc compareFunc)
+void qsortWithData(const(void)* pbase, int totalElems, size_t size, glib.types.CompareDataFunc compareFunc)
 {
   extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
   {
-    auto _dlg = cast(CompareDataFunc*)userData;
+    auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
     int _retval = (*_dlg)(a, b);
     return _retval;
@@ -5236,9 +5236,9 @@ void qsortWithData(const(void)* pbase, int totalElems, size_t size, CompareDataF
  *   string_ = a string
  * Returns: the #GQuark identifying the string, or 0 if string is %NULL
  */
-Quark quarkFromStaticString(string string_)
+glib.types.Quark quarkFromStaticString(string string_)
 {
-  Quark _retval;
+  glib.types.Quark _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
   _retval = g_quark_from_static_string(_string_);
   return _retval;
@@ -5255,9 +5255,9 @@ Quark quarkFromStaticString(string string_)
  *   string_ = a string
  * Returns: the #GQuark identifying the string, or 0 if string is %NULL
  */
-Quark quarkFromString(string string_)
+glib.types.Quark quarkFromString(string string_)
 {
-  Quark _retval;
+  glib.types.Quark _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
   _retval = g_quark_from_string(_string_);
   return _retval;
@@ -5269,11 +5269,11 @@ Quark quarkFromString(string string_)
  *   quark = a #GQuark.
  * Returns: the string associated with the #GQuark
  */
-string quarkToString(Quark quark)
+string quarkToString(glib.types.Quark quark)
 {
   const(char)* _cretval;
   _cretval = g_quark_to_string(quark);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -5289,9 +5289,9 @@ string quarkToString(Quark quark)
  * Returns: the #GQuark associated with the string, or 0 if string is
  *   %NULL or there is no #GQuark associated with it
  */
-Quark quarkTryString(string string_)
+glib.types.Quark quarkTryString(string string_)
 {
-  Quark _retval;
+  glib.types.Quark _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
   _retval = g_quark_try_string(_string_);
   return _retval;
@@ -5459,11 +5459,11 @@ void rcBoxRelease(void* memBlock)
  *   memBlock = a pointer to reference counted data
  *   clearFunc = a function to call when clearing the data
  */
-void rcBoxReleaseFull(void* memBlock, DestroyNotify clearFunc)
+void rcBoxReleaseFull(void* memBlock, glib.types.DestroyNotify clearFunc)
 {
   extern(C) void _clearFuncCallback(void* data)
   {
-    auto _dlg = cast(DestroyNotify*)data;
+    auto _dlg = cast(glib.types.DestroyNotify*)data;
 
     (*_dlg)();
   }
@@ -5569,7 +5569,7 @@ string refStringAcquire(string str)
   char* _cretval;
   char* _str = str.toCString(No.Alloc);
   _cretval = g_ref_string_acquire(_str);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -5599,7 +5599,7 @@ string refStringNew(string str)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_ref_string_new(_str);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -5619,7 +5619,7 @@ string refStringNewIntern(string str)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_ref_string_new_intern(_str);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -5638,7 +5638,7 @@ string refStringNewLen(string str, ptrdiff_t len)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_ref_string_new_len(_str, len);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -5768,12 +5768,12 @@ void setApplicationName(string applicationName)
  *   code = error code
  *   message = error message
  */
-void setErrorLiteral(out ErrorG err, Quark domain, int code, string message)
+void setErrorLiteral(out glib.error.ErrorG err, glib.types.Quark domain, int code, string message)
 {
   GError* _err;
   const(char)* _message = message.toCString(No.Alloc);
   g_set_error_literal(&_err, domain, code, _message);
-  err = new ErrorG(cast(void*)_err);
+  err = new glib.error.ErrorG(cast(void*)_err);
 }
 
 /**
@@ -5781,7 +5781,7 @@ void setErrorLiteral(out ErrorG err, Quark domain, int code, string message)
  * in contrast to [glib.global.setApplicationName].
  * If you are using #GApplication the program name is set in
  * [gio.application.ApplicationGio.run]. In case of GDK or GTK it is set in
- * gdk_init$(LPAREN)$(RPAREN), which is called by [gtk.global.init_] and the
+ * [gdk.global.init_], which is called by [gtk.global.init_] and the
  * #GtkApplication::startup handler. The program name is found by
  * taking the last component of argv[0].
  * Since GLib 2.72, this function can be called multiple times
@@ -5829,9 +5829,9 @@ bool setenv(string variable, string value, bool overwrite)
   return _retval;
 }
 
-Quark shellErrorQuark()
+glib.types.Quark shellErrorQuark()
 {
-  Quark _retval;
+  glib.types.Quark _retval;
   _retval = g_shell_error_quark();
   return _retval;
 }
@@ -5890,7 +5890,7 @@ string shellQuote(string unquotedString)
   char* _cretval;
   const(char)* _unquotedString = unquotedString.toCString(No.Alloc);
   _cretval = g_shell_quote(_unquotedString);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -5928,7 +5928,7 @@ string shellUnquote(string quotedString)
   _cretval = g_shell_unquote(_quotedString, &_err);
   if (_err)
     throw new ErrorG(_err);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -6023,14 +6023,14 @@ void sliceFreeChainWithOffset(size_t blockSize, void* memChain, size_t nextOffse
   g_slice_free_chain_with_offset(blockSize, memChain, nextOffset);
 }
 
-long sliceGetConfig(SliceConfig ckey)
+long sliceGetConfig(glib.types.SliceConfig ckey)
 {
   long _retval;
   _retval = g_slice_get_config(ckey);
   return _retval;
 }
 
-long[] sliceGetConfigState(SliceConfig ckey, long address)
+long[] sliceGetConfigState(glib.types.SliceConfig ckey, long address)
 {
   const(long)* _cretval;
   uint _cretlength;
@@ -6044,7 +6044,7 @@ long[] sliceGetConfigState(SliceConfig ckey, long address)
   return _retval;
 }
 
-void sliceSetConfig(SliceConfig ckey, long value)
+void sliceSetConfig(glib.types.SliceConfig ckey, long value)
 {
   g_slice_set_config(ckey, value);
 }
@@ -6091,12 +6091,12 @@ uint spacedPrimesClosest(uint num)
  *   childPid = return location for child process reference, or %NULL
  * Returns: %TRUE on success, %FALSE if error is set
  */
-bool spawnAsync(string workingDirectory, string[] argv, string[] envp, SpawnFlags flags, SpawnChildSetupFunc childSetup, out Pid childPid)
+bool spawnAsync(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid)
 {
   extern(C) void _childSetupCallback(void* data)
   {
     ptrThawGC(data);
-    auto _dlg = cast(SpawnChildSetupFunc*)data;
+    auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
     (*_dlg)();
   }
@@ -6142,12 +6142,12 @@ bool spawnAsync(string workingDirectory, string[] argv, string[] envp, SpawnFlag
  *   stderrFd = file descriptor to use for child's stderr, or `-1`
  * Returns: %TRUE on success, %FALSE if an error was set
  */
-bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, SpawnFlags flags, SpawnChildSetupFunc childSetup, out Pid childPid, int stdinFd, int stdoutFd, int stderrFd)
+bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid, int stdinFd, int stdoutFd, int stderrFd)
 {
   extern(C) void _childSetupCallback(void* data)
   {
     ptrThawGC(data);
-    auto _dlg = cast(SpawnChildSetupFunc*)data;
+    auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
     (*_dlg)();
   }
@@ -6194,12 +6194,12 @@ bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, Sp
  *   standardError = return location for file descriptor to read child's stderr, or %NULL
  * Returns: %TRUE on success, %FALSE if an error was set
  */
-bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, SpawnFlags flags, SpawnChildSetupFunc childSetup, out Pid childPid, out int standardInput, out int standardOutput, out int standardError)
+bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid, out int standardInput, out int standardOutput, out int standardError)
 {
   extern(C) void _childSetupCallback(void* data)
   {
     ptrThawGC(data);
-    auto _dlg = cast(SpawnChildSetupFunc*)data;
+    auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
     (*_dlg)();
   }
@@ -6416,12 +6416,12 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
  *   stderrPipeOut = return location for file descriptor to read child's stderr, or %NULL
  * Returns: %TRUE on success, %FALSE if an error was set
  */
-bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] envp, SpawnFlags flags, SpawnChildSetupFunc childSetup, int stdinFd, int stdoutFd, int stderrFd, int[] sourceFds, int[] targetFds, out Pid childPidOut, out int stdinPipeOut, out int stdoutPipeOut, out int stderrPipeOut)
+bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, int stdinFd, int stdoutFd, int stderrFd, int[] sourceFds, int[] targetFds, out glib.types.Pid childPidOut, out int stdinPipeOut, out int stdoutPipeOut, out int stderrPipeOut)
 {
   extern(C) void _childSetupCallback(void* data)
   {
     ptrThawGC(data);
-    auto _dlg = cast(SpawnChildSetupFunc*)data;
+    auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
     (*_dlg)();
   }
@@ -6538,7 +6538,7 @@ bool spawnCheckWaitStatus(int waitStatus)
  * Params:
  *   pid = The process reference to close
  */
-void spawnClosePid(Pid pid)
+void spawnClosePid(glib.types.Pid pid)
 {
   g_spawn_close_pid(pid);
 }
@@ -6613,16 +6613,16 @@ bool spawnCommandLineSync(string commandLine, out string standardOutput, out str
   return _retval;
 }
 
-Quark spawnErrorQuark()
+glib.types.Quark spawnErrorQuark()
 {
-  Quark _retval;
+  glib.types.Quark _retval;
   _retval = g_spawn_error_quark();
   return _retval;
 }
 
-Quark spawnExitErrorQuark()
+glib.types.Quark spawnExitErrorQuark()
 {
-  Quark _retval;
+  glib.types.Quark _retval;
   _retval = g_spawn_exit_error_quark();
   return _retval;
 }
@@ -6659,11 +6659,11 @@ Quark spawnExitErrorQuark()
  *   waitStatus = return location for child wait status, as returned by waitpid$(LPAREN)$(RPAREN), or %NULL
  * Returns: %TRUE on success, %FALSE if an error was set
  */
-bool spawnSync(string workingDirectory, string[] argv, string[] envp, SpawnFlags flags, SpawnChildSetupFunc childSetup, out string standardOutput, out string standardError, out int waitStatus)
+bool spawnSync(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out string standardOutput, out string standardError, out int waitStatus)
 {
   extern(C) void _childSetupCallback(void* data)
   {
-    auto _dlg = cast(SpawnChildSetupFunc*)data;
+    auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
     (*_dlg)();
   }
@@ -6721,7 +6721,7 @@ bool spawnSync(string workingDirectory, string[] argv, string[] envp, SpawnFlags
  * Returns: 0 if the information was successfully retrieved,
  *   -1 if an error occurred
  */
-int stat(string filename, StatBuf buf)
+int stat(string filename, glib.types.StatBuf buf)
 {
   int _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -6745,7 +6745,7 @@ string stpcpy(string dest, string src)
   char* _dest = dest.toCString(No.Alloc);
   const(char)* _src = src.toCString(No.Alloc);
   _cretval = g_stpcpy(_dest, _src);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -6898,7 +6898,7 @@ string strToAscii(string str, string fromLocale)
   const(char)* _str = str.toCString(No.Alloc);
   const(char)* _fromLocale = fromLocale.toCString(No.Alloc);
   _cretval = g_str_to_ascii(_str, _fromLocale);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -6980,7 +6980,7 @@ string strcanon(string string_, string validChars, char substitutor)
   char* _string_ = string_.toCString(No.Alloc);
   const(char)* _validChars = validChars.toCString(No.Alloc);
   _cretval = g_strcanon(_string_, _validChars, substitutor);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7021,7 +7021,7 @@ string strchomp(string string_)
   char* _cretval;
   char* _string_ = string_.toCString(No.Alloc);
   _cretval = g_strchomp(_string_);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7042,7 +7042,7 @@ string strchug(string string_)
   char* _cretval;
   char* _string_ = string_.toCString(No.Alloc);
   _cretval = g_strchug(_string_);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7077,7 +7077,7 @@ string strcompress(string source)
   char* _cretval;
   const(char)* _source = source.toCString(No.Alloc);
   _cretval = g_strcompress(_source);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7099,7 +7099,7 @@ string strcompress(string source)
  * Params:
  *   string_ = the string to convert
  *   delimiters = a string containing the current delimiters, or
- *     `NULL` to use the standard delimiters defined in [glib.string]
+ *     `NULL` to use the standard delimiters defined in [glib.types.string]
  *   newDelimiter = the new delimiter character
  * Returns: the modified string
  */
@@ -7109,7 +7109,7 @@ string strdelimit(string string_, string delimiters, char newDelimiter)
   char* _string_ = string_.toCString(No.Alloc);
   const(char)* _delimiters = delimiters.toCString(No.Alloc);
   _cretval = g_strdelimit(_string_, _delimiters, newDelimiter);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7128,7 +7128,7 @@ string strdown(string string_)
   char* _cretval;
   char* _string_ = string_.toCString(No.Alloc);
   _cretval = g_strdown(_string_);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7143,7 +7143,7 @@ string strdup(string str)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_strdup(_str);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7204,7 +7204,7 @@ string strerror(int errnum)
 {
   const(char)* _cretval;
   _cretval = g_strerror(errnum);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -7227,7 +7227,7 @@ string strescape(string source, string exceptions)
   const(char)* _source = source.toCString(No.Alloc);
   const(char)* _exceptions = exceptions.toCString(No.Alloc);
   _cretval = g_strescape(_source, _exceptions);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7246,7 +7246,7 @@ string stripContext(string msgid, string msgval)
   const(char)* _msgid = msgid.toCString(No.Alloc);
   const(char)* _msgval = msgval.toCString(No.Alloc);
   _cretval = g_strip_context(_msgid, _msgval);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -7272,7 +7272,7 @@ string strjoinv(string separator, string[] strArray)
   _tmpstrArray ~= null;
   char** _strArray = _tmpstrArray.ptr;
   _cretval = g_strjoinv(_separator, _strArray);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7387,7 +7387,7 @@ string strndup(string str, size_t n)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_strndup(_str, n);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7402,7 +7402,7 @@ string strnfill(size_t length, char fillChar)
 {
   char* _cretval;
   _cretval = g_strnfill(length, fillChar);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7421,7 +7421,7 @@ string strreverse(string string_)
   char* _cretval;
   char* _string_ = string_.toCString(No.Alloc);
   _cretval = g_strreverse(_string_);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7439,7 +7439,7 @@ string strrstr(string haystack, string needle)
   const(char)* _haystack = haystack.toCString(No.Alloc);
   const(char)* _needle = needle.toCString(No.Alloc);
   _cretval = g_strrstr(_haystack, _needle);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7460,7 +7460,7 @@ string strrstrLen(string haystack, ptrdiff_t haystackLen, string needle)
   const(char)* _haystack = haystack.toCString(No.Alloc);
   const(char)* _needle = needle.toCString(No.Alloc);
   _cretval = g_strrstr_len(_haystack, haystackLen, _needle);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7478,7 +7478,7 @@ string strsignal(int signum)
 {
   const(char)* _cretval;
   _cretval = g_strsignal(signum);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -7589,7 +7589,7 @@ string strstrLen(string haystack, ptrdiff_t haystackLen, string needle)
   const(char)* _haystack = haystack.toCString(No.Alloc);
   const(char)* _needle = needle.toCString(No.Alloc);
   _cretval = g_strstr_len(_haystack, haystackLen, _needle);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7635,7 +7635,7 @@ string strup(string string_)
   char* _cretval;
   char* _string_ = string_.toCString(No.Alloc);
   _cretval = g_strup(_string_);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -7695,9 +7695,9 @@ bool strvEqual(string[] strv1, string[] strv2)
   return _retval;
 }
 
-GType strvGetType()
+gobject.types.GType strvGetType()
 {
-  GType _retval;
+  gobject.types.GType _retval;
   _retval = g_strv_get_type();
   return _retval;
 }
@@ -7737,12 +7737,12 @@ uint strvLength(string[] strArray)
  *   testData = Test data argument for the test function.
  *   testFunc = The test function to invoke for this test.
  */
-void testAddDataFunc(string testpath, const(void)* testData, TestDataFunc testFunc)
+void testAddDataFunc(string testpath, const(void)* testData, glib.types.TestDataFunc testFunc)
 {
   extern(C) void _testFuncCallback(const(void)* userData)
   {
     ptrThawGC(userData);
-    auto _dlg = cast(TestDataFunc*)userData;
+    auto _dlg = cast(glib.types.TestDataFunc*)userData;
 
     (*_dlg)();
   }
@@ -7846,7 +7846,7 @@ void testDisableCrashReporting()
  *   logLevel = the log level of the message
  *   pattern = a glob-style pattern $(LPAREN)see [glib.pattern_spec.PatternSpec]$(RPAREN)
  */
-void testExpectMessage(string logDomain, LogLevelFlags logLevel, string pattern)
+void testExpectMessage(string logDomain, glib.types.LogLevelFlags logLevel, string pattern)
 {
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
   const(char)* _pattern = pattern.toCString(No.Alloc);
@@ -7902,11 +7902,11 @@ bool testFailed()
  *   fileType = the type of file $(LPAREN)built vs. distributed$(RPAREN)
  * Returns: the path of the directory, owned by GLib
  */
-string testGetDir(TestFileType fileType)
+string testGetDir(glib.types.TestFileType fileType)
 {
   const(char)* _cretval;
   _cretval = g_test_get_dir(fileType);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -7922,7 +7922,7 @@ string testGetPath()
 {
   const(char)* _cretval;
   _cretval = g_test_get_path();
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -7944,11 +7944,11 @@ void testIncomplete(string msg)
   g_test_incomplete(_msg);
 }
 
-string testLogTypeName(TestLogType logType)
+string testLogTypeName(glib.types.TestLogType logType)
 {
   const(char)* _cretval;
   _cretval = g_test_log_type_name(logType);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -8076,7 +8076,7 @@ int testRun()
  *   suite = a #GTestSuite
  * Returns: 0 on success
  */
-int testRunSuite(TestSuite suite)
+int testRunSuite(glib.test_suite.TestSuite suite)
 {
   int _retval;
   _retval = g_test_run_suite(suite ? cast(GTestSuite*)suite.cPtr : null);
@@ -8232,7 +8232,7 @@ void testTrapAssertions(string domain, string file, int line, string func, ulong
  *   and doesn't set close-on-exec flag on its file descriptors.
  *   Use [glib.global.testTrapSubprocess] instead.
  */
-bool testTrapFork(ulong usecTimeout, TestTrapFlags testTrapFlags)
+bool testTrapFork(ulong usecTimeout, glib.types.TestTrapFlags testTrapFlags)
 {
   bool _retval;
   _retval = g_test_trap_fork(usecTimeout, testTrapFlags);
@@ -8270,7 +8270,7 @@ bool testTrapReachedTimeout()
  *   usecTimeout = Timeout for the subprocess test in micro seconds.
  *   testFlags = Flags to modify subprocess behaviour.
  */
-void testTrapSubprocess(string testPath, ulong usecTimeout, TestSubprocessFlags testFlags)
+void testTrapSubprocess(string testPath, ulong usecTimeout, glib.types.TestSubprocessFlags testFlags)
 {
   const(char)* _testPath = testPath.toCString(No.Alloc);
   g_test_trap_subprocess(_testPath, usecTimeout, testFlags);
@@ -8359,7 +8359,7 @@ void testTrapSubprocess(string testPath, ulong usecTimeout, TestSubprocessFlags 
  *   usecTimeout = Timeout for the subprocess test in micro seconds.
  *   testFlags = Flags to modify subprocess behaviour.
  */
-void testTrapSubprocessWithEnvp(string testPath, string[] envp, ulong usecTimeout, TestSubprocessFlags testFlags)
+void testTrapSubprocessWithEnvp(string testPath, string[] envp, ulong usecTimeout, glib.types.TestSubprocessFlags testFlags)
 {
   const(char)* _testPath = testPath.toCString(No.Alloc);
   const(char)*[] _tmpenvp;
@@ -8399,11 +8399,11 @@ void testTrapSubprocessWithEnvp(string testPath, string[] envp, ulong usecTimeou
  *   function_ = function to call
  * Returns: the ID $(LPAREN)greater than 0$(RPAREN) of the event source.
  */
-uint timeoutAdd(int priority, uint interval, SourceFunc function_)
+uint timeoutAdd(int priority, uint interval, glib.types.SourceFunc function_)
 {
   extern(C) bool _function_Callback(void* userData)
   {
-    auto _dlg = cast(SourceFunc*)userData;
+    auto _dlg = cast(glib.types.SourceFunc*)userData;
 
     bool _retval = (*_dlg)();
     return _retval;
@@ -8455,11 +8455,11 @@ uint timeoutAdd(int priority, uint interval, SourceFunc function_)
  *   function_ = function to call
  * Returns: the ID $(LPAREN)greater than 0$(RPAREN) of the event source.
  */
-uint timeoutAddSeconds(int priority, uint interval, SourceFunc function_)
+uint timeoutAddSeconds(int priority, uint interval, glib.types.SourceFunc function_)
 {
   extern(C) bool _function_Callback(void* userData)
   {
-    auto _dlg = cast(SourceFunc*)userData;
+    auto _dlg = cast(glib.types.SourceFunc*)userData;
 
     bool _retval = (*_dlg)();
     return _retval;
@@ -8484,11 +8484,11 @@ uint timeoutAddSeconds(int priority, uint interval, SourceFunc function_)
  *   interval = the timeout interval in milliseconds.
  * Returns: the newly-created timeout source
  */
-Source timeoutSourceNew(uint interval)
+glib.source.Source timeoutSourceNew(uint interval)
 {
   GSource* _cretval;
   _cretval = g_timeout_source_new(interval);
-  auto _retval = _cretval ? new Source(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -8505,11 +8505,11 @@ Source timeoutSourceNew(uint interval)
  *   interval = the timeout interval in seconds
  * Returns: the newly-created timeout source
  */
-Source timeoutSourceNewSeconds(uint interval)
+glib.source.Source timeoutSourceNewSeconds(uint interval)
 {
   GSource* _cretval;
   _cretval = g_timeout_source_new_seconds(interval);
-  auto _retval = _cretval ? new Source(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -8664,7 +8664,7 @@ string ucs4ToUtf8(dchar[] str, out glong itemsRead, out glong itemsWritten)
   _cretval = g_ucs4_to_utf8(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
     throw new ErrorG(_err);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -8679,11 +8679,11 @@ string ucs4ToUtf8(dchar[] str, out glong itemsRead, out glong itemsWritten)
  *   c = a Unicode character
  * Returns: the break type of c
  */
-UnicodeBreakType unicharBreakType(dchar c)
+glib.types.UnicodeBreakType unicharBreakType(dchar c)
 {
   GUnicodeBreakType _cretval;
   _cretval = g_unichar_break_type(c);
-  UnicodeBreakType _retval = cast(UnicodeBreakType)_cretval;
+  glib.types.UnicodeBreakType _retval = cast(glib.types.UnicodeBreakType)_cretval;
   return _retval;
 }
 
@@ -8839,11 +8839,11 @@ bool unicharGetMirrorChar(dchar ch, out dchar mirroredCh)
  *   ch = a Unicode character
  * Returns: the #GUnicodeScript for the character.
  */
-UnicodeScript unicharGetScript(dchar ch)
+glib.types.UnicodeScript unicharGetScript(dchar ch)
 {
   GUnicodeScript _cretval;
   _cretval = g_unichar_get_script(ch);
-  UnicodeScript _retval = cast(UnicodeScript)_cretval;
+  glib.types.UnicodeScript _retval = cast(glib.types.UnicodeScript)_cretval;
   return _retval;
 }
 
@@ -9172,11 +9172,11 @@ dchar unicharToupper(dchar c)
  *   c = a Unicode character
  * Returns: the type of the character.
  */
-UnicodeType unicharType(dchar c)
+glib.types.UnicodeType unicharType(dchar c)
 {
   GUnicodeType _cretval;
   _cretval = g_unichar_type(c);
-  UnicodeType _retval = cast(UnicodeType)_cretval;
+  glib.types.UnicodeType _retval = cast(glib.types.UnicodeType)_cretval;
   return _retval;
 }
 
@@ -9252,9 +9252,9 @@ void unicodeCanonicalOrdering(dchar[] string_)
   g_unicode_canonical_ordering(_string_, _len);
 }
 
-Quark unixErrorQuark()
+glib.types.Quark unixErrorQuark()
 {
-  Quark _retval;
+  glib.types.Quark _retval;
   _retval = g_unix_error_quark();
   return _retval;
 }
@@ -9272,11 +9272,11 @@ Quark unixErrorQuark()
  *   function_ = a #GUnixFDSourceFunc
  * Returns: the ID $(LPAREN)greater than 0$(RPAREN) of the event source
  */
-uint unixFdAddFull(int priority, int fd, IOCondition condition, UnixFDSourceFunc function_)
+uint unixFdAddFull(int priority, int fd, glib.types.IOCondition condition, glib.types.UnixFDSourceFunc function_)
 {
   extern(C) bool _function_Callback(int fd, GIOCondition condition, void* userData)
   {
-    auto _dlg = cast(UnixFDSourceFunc*)userData;
+    auto _dlg = cast(glib.types.UnixFDSourceFunc*)userData;
 
     bool _retval = (*_dlg)(fd, condition);
     return _retval;
@@ -9301,11 +9301,11 @@ uint unixFdAddFull(int priority, int fd, IOCondition condition, UnixFDSourceFunc
  *   condition = I/O conditions to watch for on fd
  * Returns: the newly created #GSource
  */
-Source unixFdSourceNew(int fd, IOCondition condition)
+glib.source.Source unixFdSourceNew(int fd, glib.types.IOCondition condition)
 {
   GSource* _cretval;
   _cretval = g_unix_fd_source_new(fd, condition);
-  auto _retval = _cretval ? new Source(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -9396,11 +9396,11 @@ bool unixSetFdNonblocking(int fd, bool nonblock)
  *   handler = Callback
  * Returns: An ID $(LPAREN)greater than 0$(RPAREN) for the event source
  */
-uint unixSignalAdd(int priority, int signum, SourceFunc handler)
+uint unixSignalAdd(int priority, int signum, glib.types.SourceFunc handler)
 {
   extern(C) bool _handlerCallback(void* userData)
   {
-    auto _dlg = cast(SourceFunc*)userData;
+    auto _dlg = cast(glib.types.SourceFunc*)userData;
 
     bool _retval = (*_dlg)();
     return _retval;
@@ -9438,11 +9438,11 @@ uint unixSignalAdd(int priority, int signum, SourceFunc handler)
  *   signum = A signal number
  * Returns: A newly created #GSource
  */
-Source unixSignalSourceNew(int signum)
+glib.source.Source unixSignalSourceNew(int signum)
 {
   GSource* _cretval;
   _cretval = g_unix_signal_source_new(signum);
-  auto _retval = _cretval ? new Source(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -9580,7 +9580,7 @@ string utf16ToUtf8(ushort[] str, out glong itemsRead, out glong itemsWritten)
   _cretval = g_utf16_to_utf8(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
     throw new ErrorG(_err);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -9606,7 +9606,7 @@ string utf8Casefold(string str, ptrdiff_t len)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_utf8_casefold(_str, len);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -9654,7 +9654,7 @@ string utf8CollateKey(string str, ptrdiff_t len)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_utf8_collate_key(_str, len);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -9679,7 +9679,7 @@ string utf8CollateKeyForFilename(string str, ptrdiff_t len)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_utf8_collate_key_for_filename(_str, len);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -9705,7 +9705,7 @@ string utf8FindNextChar(string p, string end)
   const(char)* _p = p.toCString(No.Alloc);
   const(char)* _end = end.toCString(No.Alloc);
   _cretval = g_utf8_find_next_char(_p, _end);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -9727,7 +9727,7 @@ string utf8FindPrevChar(string str, string p)
   const(char)* _str = str.toCString(No.Alloc);
   const(char)* _p = p.toCString(No.Alloc);
   _cretval = g_utf8_find_prev_char(_str, _p);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -9794,7 +9794,7 @@ string utf8MakeValid(string str, ptrdiff_t len)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_utf8_make_valid(_str, len);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -9830,12 +9830,12 @@ string utf8MakeValid(string str, ptrdiff_t len)
  *   is the normalized form of str, or %NULL if str
  *   is not valid UTF-8.
  */
-string utf8Normalize(string str, ptrdiff_t len, NormalizeMode mode)
+string utf8Normalize(string str, ptrdiff_t len, glib.types.NormalizeMode mode)
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_utf8_normalize(_str, len, mode);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -9861,7 +9861,7 @@ string utf8OffsetToPointer(string str, glong offset)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_utf8_offset_to_pointer(_str, offset);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -9899,7 +9899,7 @@ string utf8PrevChar(string p)
   char* _cretval;
   const(char)* _p = p.toCString(No.Alloc);
   _cretval = g_utf8_prev_char(_p);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -9920,7 +9920,7 @@ string utf8Strchr(string p, ptrdiff_t len, dchar c)
   char* _cretval;
   const(char)* _p = p.toCString(No.Alloc);
   _cretval = g_utf8_strchr(_p, len, c);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -9940,7 +9940,7 @@ string utf8Strdown(string str, ptrdiff_t len)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_utf8_strdown(_str, len);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -9984,7 +9984,7 @@ string utf8Strncpy(string dest, string src, size_t n)
   char* _dest = dest.toCString(No.Alloc);
   const(char)* _src = src.toCString(No.Alloc);
   _cretval = g_utf8_strncpy(_dest, _src, n);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -10005,7 +10005,7 @@ string utf8Strrchr(string p, ptrdiff_t len, dchar c)
   char* _cretval;
   const(char)* _p = p.toCString(No.Alloc);
   _cretval = g_utf8_strrchr(_p, len, c);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -10032,7 +10032,7 @@ string utf8Strreverse(string str, ptrdiff_t len)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_utf8_strreverse(_str, len);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -10053,7 +10053,7 @@ string utf8Strup(string str, ptrdiff_t len)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_utf8_strup(_str, len);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -10075,7 +10075,7 @@ string utf8Substring(string str, glong startPos, glong endPos)
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
   _cretval = g_utf8_substring(_str, startPos, endPos);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -10193,7 +10193,7 @@ string utf8TruncateMiddle(string string_, size_t truncateLength)
   char* _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
   _cretval = g_utf8_truncate_middle(_string_, truncateLength);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -10281,13 +10281,13 @@ string uuidStringRandom()
 {
   char* _cretval;
   _cretval = g_uuid_string_random();
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
-GType variantGetGtype()
+gobject.types.GType variantGetGtype()
 {
-  GType _retval;
+  gobject.types.GType _retval;
   _retval = g_variant_get_gtype();
   return _retval;
 }

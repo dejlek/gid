@@ -1,6 +1,6 @@
 module gtk.custom_sorter;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.sorter;
@@ -10,7 +10,7 @@ import gtk.types;
  * `GtkCustomSorter` is a `GtkSorter` implementation that sorts via a callback
  * function.
  */
-class CustomSorter : Sorter
+class CustomSorter : gtk.sorter.Sorter
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

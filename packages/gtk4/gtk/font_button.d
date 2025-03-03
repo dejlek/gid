@@ -1,6 +1,6 @@
 module gtk.font_button;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -32,7 +32,7 @@ import gtk.widget;
 
  * Deprecated: Use [gtk.font_dialog_button.FontDialogButton] instead
  */
-class FontButton : Widget, FontChooser
+class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -74,12 +74,12 @@ class FontButton : Widget, FontChooser
 
    * Deprecated: Use [gtk.font_dialog_button.FontDialogButton] instead
    */
-  static FontButton newWithFont(string fontname)
+  static gtk.font_button.FontButton newWithFont(string fontname)
   {
     GtkWidget* _cretval;
     const(char)* _fontname = fontname.toCString(No.Alloc);
     _cretval = gtk_font_button_new_with_font(_fontname);
-    auto _retval = ObjectG.getDObject!FontButton(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.font_button.FontButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class FontButton : Widget, FontChooser
   {
     const(char)* _cretval;
     _cretval = gtk_font_button_get_title(cast(GtkFontButton*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -195,8 +195,8 @@ class FontButton : Widget, FontChooser
    * emitting it causes the button to present its dialog.
    *   fontButton = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(FontButton fontButton);
-  alias ActivateCallbackFunc = void function(FontButton fontButton);
+  alias ActivateCallbackDlg = void delegate(gtk.font_button.FontButton fontButton);
+  alias ActivateCallbackFunc = void function(gtk.font_button.FontButton fontButton);
 
   /**
    * Connect to Activate signal.
@@ -212,7 +212,7 @@ class FontButton : Widget, FontChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fontButton = getVal!FontButton(_paramVals);
+      auto fontButton = getVal!(gtk.font_button.FontButton)(_paramVals);
       _dClosure.dlg(fontButton);
     }
 
@@ -229,8 +229,8 @@ class FontButton : Widget, FontChooser
    * the notify::font signal.
    *   fontButton = the instance the signal is connected to
    */
-  alias FontSetCallbackDlg = void delegate(FontButton fontButton);
-  alias FontSetCallbackFunc = void function(FontButton fontButton);
+  alias FontSetCallbackDlg = void delegate(gtk.font_button.FontButton fontButton);
+  alias FontSetCallbackFunc = void function(gtk.font_button.FontButton fontButton);
 
   /**
    * Connect to FontSet signal.
@@ -246,7 +246,7 @@ class FontButton : Widget, FontChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fontButton = getVal!FontButton(_paramVals);
+      auto fontButton = getVal!(gtk.font_button.FontButton)(_paramVals);
       _dClosure.dlg(fontButton);
     }
 

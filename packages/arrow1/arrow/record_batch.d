@@ -13,11 +13,11 @@ import arrow.take_options;
 import arrow.types;
 import arrow.uint64_array;
 import arrow.write_options;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class RecordBatch : ObjectG
+class RecordBatch : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -36,11 +36,11 @@ class RecordBatch : ObjectG
     return getType();
   }
 
-  this(Schema schema, uint nRows, Array[] columns)
+  this(arrow.schema.Schema schema, uint nRows, arrow.array.Array[] columns)
   {
     GArrowRecordBatch* _cretval;
-    auto _columns = gListFromD!(Array)(columns);
-    scope(exit) containerFree!(GList*, Array, GidOwnership.None)(_columns);
+    auto _columns = gListFromD!(arrow.array.Array)(columns);
+    scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_columns);
     GError *_err;
     _cretval = garrow_record_batch_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, nRows, _columns, &_err);
     if (_err)
@@ -48,36 +48,36 @@ class RecordBatch : ObjectG
     this(_cretval, Yes.Take);
   }
 
-  static RecordBatch import_(void* cAbiArray, Schema schema)
+  static arrow.record_batch.RecordBatch import_(void* cAbiArray, arrow.schema.Schema schema)
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
     _cretval = garrow_record_batch_import(cAbiArray, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!RecordBatch(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
-  RecordBatch addColumn(uint i, Field field, Array column)
+  arrow.record_batch.RecordBatch addColumn(uint i, arrow.field.Field field, arrow.array.Array column)
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
     _cretval = garrow_record_batch_add_column(cast(GArrowRecordBatch*)cPtr, i, field ? cast(GArrowField*)field.cPtr(No.Dup) : null, column ? cast(GArrowArray*)column.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!RecordBatch(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
-  bool equal(RecordBatch otherRecordBatch)
+  bool equal(arrow.record_batch.RecordBatch otherRecordBatch)
   {
     bool _retval;
     _retval = garrow_record_batch_equal(cast(GArrowRecordBatch*)cPtr, otherRecordBatch ? cast(GArrowRecordBatch*)otherRecordBatch.cPtr(No.Dup) : null);
     return _retval;
   }
 
-  bool equalMetadata(RecordBatch otherRecordBatch, bool checkMetadata)
+  bool equalMetadata(arrow.record_batch.RecordBatch otherRecordBatch, bool checkMetadata)
   {
     bool _retval;
     _retval = garrow_record_batch_equal_metadata(cast(GArrowRecordBatch*)cPtr, otherRecordBatch ? cast(GArrowRecordBatch*)otherRecordBatch.cPtr(No.Dup) : null, checkMetadata);
@@ -94,22 +94,22 @@ class RecordBatch : ObjectG
     return _retval;
   }
 
-  RecordBatch filter(BooleanArray filter, FilterOptions options)
+  arrow.record_batch.RecordBatch filter(arrow.boolean_array.BooleanArray filter, arrow.filter_options.FilterOptions options)
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
     _cretval = garrow_record_batch_filter(cast(GArrowRecordBatch*)cPtr, filter ? cast(GArrowBooleanArray*)filter.cPtr(No.Dup) : null, options ? cast(GArrowFilterOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!RecordBatch(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Array getColumnData(int i)
+  arrow.array.Array getColumnData(int i)
   {
     GArrowArray* _cretval;
     _cretval = garrow_record_batch_get_column_data(cast(GArrowRecordBatch*)cPtr, i);
-    auto _retval = ObjectG.getDObject!Array(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class RecordBatch : ObjectG
   {
     const(char)* _cretval;
     _cretval = garrow_record_batch_get_column_name(cast(GArrowRecordBatch*)cPtr, i);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -135,63 +135,63 @@ class RecordBatch : ObjectG
     return _retval;
   }
 
-  Schema getSchema()
+  arrow.schema.Schema getSchema()
   {
     GArrowSchema* _cretval;
     _cretval = garrow_record_batch_get_schema(cast(GArrowRecordBatch*)cPtr);
-    auto _retval = ObjectG.getDObject!Schema(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 
-  RecordBatch removeColumn(uint i)
+  arrow.record_batch.RecordBatch removeColumn(uint i)
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
     _cretval = garrow_record_batch_remove_column(cast(GArrowRecordBatch*)cPtr, i, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!RecordBatch(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Buffer serialize(WriteOptions options)
+  arrow.buffer.Buffer serialize(arrow.write_options.WriteOptions options)
   {
     GArrowBuffer* _cretval;
     GError *_err;
     _cretval = garrow_record_batch_serialize(cast(GArrowRecordBatch*)cPtr, options ? cast(GArrowWriteOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Buffer(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
-  RecordBatch slice(long offset, long length)
+  arrow.record_batch.RecordBatch slice(long offset, long length)
   {
     GArrowRecordBatch* _cretval;
     _cretval = garrow_record_batch_slice(cast(GArrowRecordBatch*)cPtr, offset, length);
-    auto _retval = ObjectG.getDObject!RecordBatch(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
-  UInt64Array sortIndices(SortOptions options)
+  arrow.uint64_array.UInt64Array sortIndices(arrow.sort_options.SortOptions options)
   {
     GArrowUInt64Array* _cretval;
     GError *_err;
     _cretval = garrow_record_batch_sort_indices(cast(GArrowRecordBatch*)cPtr, options ? cast(GArrowSortOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!UInt64Array(cast(GArrowUInt64Array*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.uint64_array.UInt64Array)(cast(GArrowUInt64Array*)_cretval, Yes.Take);
     return _retval;
   }
 
-  RecordBatch take(Array indices, TakeOptions options)
+  arrow.record_batch.RecordBatch take(arrow.array.Array indices, arrow.take_options.TakeOptions options)
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
     _cretval = garrow_record_batch_take(cast(GArrowRecordBatch*)cPtr, indices ? cast(GArrowArray*)indices.cPtr(No.Dup) : null, options ? cast(GArrowTakeOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!RecordBatch(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class RecordBatch : ObjectG
     _cretval = garrow_record_batch_to_string(cast(GArrowRecordBatch*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

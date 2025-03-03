@@ -4,7 +4,7 @@ public import arrow.writable_iface_proxy;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
 interface Writable

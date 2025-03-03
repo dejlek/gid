@@ -1,6 +1,6 @@
 module gobject.closure;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gobject.c.functions;
 import gobject.c.types;
@@ -47,7 +47,7 @@ import gobject.value;
  * - [gobject.closure.Closure.invalidate] and invalidation notifiers allow callbacks to be
  * automatically removed when the objects they point to go away.
  */
-class Closure : Boxed
+class Closure : gobject.boxed.Boxed
 {
 
   this()
@@ -115,11 +115,11 @@ class Closure : Boxed
    *     allocated #GClosure
    * Returns: a newly allocated #GClosure
    */
-  static Closure newObject(uint sizeofClosure, ObjectG object)
+  static gobject.closure.Closure newObject(uint sizeofClosure, gobject.object.ObjectG object)
   {
     GClosure* _cretval;
     _cretval = g_closure_new_object(sizeofClosure, object ? cast(ObjectC*)object.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new Closure(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.closure.Closure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -159,11 +159,11 @@ class Closure : Boxed
    *   data = data to store in the data field of the newly allocated #GClosure
    * Returns: a floating reference to a new #GClosure
    */
-  static Closure newSimple(uint sizeofClosure, void* data)
+  static gobject.closure.Closure newSimple(uint sizeofClosure, void* data)
   {
     GClosure* _cretval;
     _cretval = g_closure_new_simple(sizeofClosure, data);
-    auto _retval = _cretval ? new Closure(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.closure.Closure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -198,7 +198,7 @@ class Closure : Boxed
    *     invoke the callback of closure
    *   invocationHint = a context-dependent invocation hint
    */
-  void invoke(out Value returnValue, Value[] paramValues, void* invocationHint)
+  void invoke(out gobject.value.Value returnValue, gobject.value.Value[] paramValues, void* invocationHint)
   {
     GValue _returnValue;
     uint _nParamValues;
@@ -210,7 +210,7 @@ class Closure : Boxed
       _tmpparamValues ~= *cast(GValue*)obj.cPtr;
     const(GValue)* _paramValues = _tmpparamValues.ptr;
     g_closure_invoke(cast(GClosure*)cPtr, &_returnValue, _nParamValues, _paramValues, invocationHint);
-    returnValue = new Value(cast(void*)&_returnValue, No.Take);
+    returnValue = new gobject.value.Value(cast(void*)&_returnValue, No.Take);
   }
 
   /**

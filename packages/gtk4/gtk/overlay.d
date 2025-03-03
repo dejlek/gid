@@ -1,6 +1,6 @@
 module gtk.overlay;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -39,7 +39,7 @@ import gtk.widget;
  * whose alignments cause them to be positioned at an edge get the style classes
  * “.left”, “.right”, “.top”, and/or “.bottom” according to their position.
  */
-class Overlay : Widget
+class Overlay : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -79,7 +79,7 @@ class Overlay : Widget
    * Params:
    *   widget = a `GtkWidget` to be added to the container
    */
-  void addOverlay(Widget widget)
+  void addOverlay(gtk.widget.Widget widget)
   {
     gtk_overlay_add_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -88,11 +88,11 @@ class Overlay : Widget
    * Gets the child widget of overlay.
    * Returns: the child widget of overlay
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_overlay_get_child(cast(GtkOverlay*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class Overlay : Widget
    *   widget = an overlay child of `GtkOverlay`
    * Returns: whether the widget is clipped within the parent.
    */
-  bool getClipOverlay(Widget widget)
+  bool getClipOverlay(gtk.widget.Widget widget)
   {
     bool _retval;
     _retval = gtk_overlay_get_clip_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
@@ -116,7 +116,7 @@ class Overlay : Widget
    *   widget = an overlay child of `GtkOverlay`
    * Returns: whether the widget is measured
    */
-  bool getMeasureOverlay(Widget widget)
+  bool getMeasureOverlay(gtk.widget.Widget widget)
   {
     bool _retval;
     _retval = gtk_overlay_get_measure_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
@@ -128,7 +128,7 @@ class Overlay : Widget
    * Params:
    *   widget = a `GtkWidget` to be removed
    */
-  void removeOverlay(Widget widget)
+  void removeOverlay(gtk.widget.Widget widget)
   {
     gtk_overlay_remove_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -138,7 +138,7 @@ class Overlay : Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_overlay_set_child(cast(GtkOverlay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -149,7 +149,7 @@ class Overlay : Widget
    *   widget = an overlay child of `GtkOverlay`
    *   clipOverlay = whether the child should be clipped
    */
-  void setClipOverlay(Widget widget, bool clipOverlay)
+  void setClipOverlay(gtk.widget.Widget widget, bool clipOverlay)
   {
     gtk_overlay_set_clip_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, clipOverlay);
   }
@@ -163,7 +163,7 @@ class Overlay : Widget
    *   widget = an overlay child of `GtkOverlay`
    *   measure = whether the child should be measured
    */
-  void setMeasureOverlay(Widget widget, bool measure)
+  void setMeasureOverlay(gtk.widget.Widget widget, bool measure)
   {
     gtk_overlay_set_measure_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, measure);
   }

@@ -1,7 +1,7 @@
 module gio.memory_monitor;
 
 public import gio.memory_monitor_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -27,7 +27,7 @@ import gobject.object;
  * should be profiled for your application. `malloc_trim$(LPAREN)$(RPAREN)`, for example, may
  * make future heap allocations slower $(LPAREN)due to releasing cached heap pages back
  * to the kernel$(RPAREN).
- * See [gio.MemoryMonitorWarningLevel] for details on the various warning
+ * See [gio.types.MemoryMonitorWarningLevel] for details on the various warning
  * levels.
  * ```c
  * static void
@@ -63,11 +63,11 @@ interface MemoryMonitor
    * Gets a reference to the default #GMemoryMonitor for the system.
    * Returns: a new reference to the default #GMemoryMonitor
    */
-  static MemoryMonitor dupDefault()
+  static gio.memory_monitor.MemoryMonitor dupDefault()
   {
     GMemoryMonitor* _cretval;
     _cretval = g_memory_monitor_dup_default();
-    auto _retval = ObjectG.getDObject!MemoryMonitor(cast(GMemoryMonitor*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.memory_monitor.MemoryMonitor)(cast(GMemoryMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -80,8 +80,8 @@ interface MemoryMonitor
    *   level = the #GMemoryMonitorWarningLevel warning level
    *   memoryMonitor = the instance the signal is connected to
    */
-  alias LowMemoryWarningCallbackDlg = void delegate(MemoryMonitorWarningLevel level, MemoryMonitor memoryMonitor);
-  alias LowMemoryWarningCallbackFunc = void function(MemoryMonitorWarningLevel level, MemoryMonitor memoryMonitor);
+  alias LowMemoryWarningCallbackDlg = void delegate(gio.types.MemoryMonitorWarningLevel level, gio.memory_monitor.MemoryMonitor memoryMonitor);
+  alias LowMemoryWarningCallbackFunc = void function(gio.types.MemoryMonitorWarningLevel level, gio.memory_monitor.MemoryMonitor memoryMonitor);
 
   /**
    * Connect to LowMemoryWarning signal.

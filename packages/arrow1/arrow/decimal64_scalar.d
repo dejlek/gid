@@ -6,10 +6,10 @@ import arrow.decimal64;
 import arrow.decimal64_data_type;
 import arrow.scalar;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class Decimal64Scalar : Scalar
+class Decimal64Scalar : arrow.scalar.Scalar
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -28,18 +28,18 @@ class Decimal64Scalar : Scalar
     return getType();
   }
 
-  this(Decimal64DataType dataType, Decimal64 value)
+  this(arrow.decimal64_data_type.Decimal64DataType dataType, arrow.decimal64.Decimal64 value)
   {
     GArrowDecimal64Scalar* _cretval;
     _cretval = garrow_decimal64_scalar_new(dataType ? cast(GArrowDecimal64DataType*)dataType.cPtr(No.Dup) : null, value ? cast(GArrowDecimal64*)value.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
-  Decimal64 getValue()
+  arrow.decimal64.Decimal64 getValue()
   {
     GArrowDecimal64* _cretval;
     _cretval = garrow_decimal64_scalar_get_value(cast(GArrowDecimal64Scalar*)cPtr);
-    auto _retval = ObjectG.getDObject!Decimal64(cast(GArrowDecimal64*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal64.Decimal64)(cast(GArrowDecimal64*)_cretval, No.Take);
     return _retval;
   }
 }

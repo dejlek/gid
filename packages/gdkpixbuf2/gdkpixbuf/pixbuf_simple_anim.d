@@ -5,12 +5,12 @@ import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf;
 import gdkpixbuf.pixbuf_animation;
 import gdkpixbuf.types;
-import gid.global;
+import gid.gid;
 
 /**
  * An opaque struct representing a simple animation.
  */
-class PixbufSimpleAnim : PixbufAnimation
+class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -51,7 +51,7 @@ class PixbufSimpleAnim : PixbufAnimation
    * Params:
    *   pixbuf = the pixbuf to add
    */
-  void addFrame(Pixbuf pixbuf)
+  void addFrame(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     gdk_pixbuf_simple_anim_add_frame(cast(GdkPixbufSimpleAnim*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }

@@ -1,8 +1,7 @@
 module gtk.list_box;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
-import gio.list_model_mixin;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -60,7 +59,7 @@ import gtk.widget;
  * `GtkListBox` uses the %GTK_ACCESSIBLE_ROLE_LIST role and `GtkListBoxRow` uses
  * the %GTK_ACCESSIBLE_ROLE_LIST_ITEM role.
  */
-class ListBox : Widget
+class ListBox : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -97,7 +96,7 @@ class ListBox : Widget
    * Params:
    *   child = the `GtkWidget` to add
    */
-  void append(Widget child)
+  void append(gtk.widget.Widget child)
   {
     gtk_list_box_append(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -119,14 +118,14 @@ class ListBox : Widget
    *   createWidgetFunc = a function that creates widgets for items
    *     or %NULL in case you also passed %NULL as model
    */
-  void bindModel(ListModel model, ListBoxCreateWidgetFunc createWidgetFunc)
+  void bindModel(gio.list_model.ListModel model, gtk.types.ListBoxCreateWidgetFunc createWidgetFunc)
   {
     extern(C) GtkWidget* _createWidgetFuncCallback(ObjectC* item, void* userData)
     {
-      Widget _dretval;
-      auto _dlg = cast(ListBoxCreateWidgetFunc*)userData;
+      gtk.widget.Widget _dretval;
+      auto _dlg = cast(gtk.types.ListBoxCreateWidgetFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)item, No.Take));
+      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.Take));
       GtkWidget* _retval = cast(GtkWidget*)_dretval.cPtr(Yes.Dup);
 
       return _retval;
@@ -149,7 +148,7 @@ class ListBox : Widget
    * Params:
    *   row = a `GtkListBoxRow`
    */
-  void dragHighlightRow(ListBoxRow row)
+  void dragHighlightRow(gtk.list_box_row.ListBoxRow row)
   {
     gtk_list_box_drag_highlight_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(No.Dup) : null);
   }
@@ -179,11 +178,11 @@ class ListBox : Widget
    * for vertical scrolling.
    * Returns: the adjustment
    */
-  Adjustment getAdjustment()
+  gtk.adjustment.Adjustment getAdjustment()
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_list_box_get_adjustment(cast(GtkListBox*)cPtr);
-    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -195,11 +194,11 @@ class ListBox : Widget
    *   index = the index of the row
    * Returns: the child `GtkWidget`
    */
-  ListBoxRow getRowAtIndex(int index)
+  gtk.list_box_row.ListBoxRow getRowAtIndex(int index)
   {
     GtkListBoxRow* _cretval;
     _cretval = gtk_list_box_get_row_at_index(cast(GtkListBox*)cPtr, index);
-    auto _retval = ObjectG.getDObject!ListBoxRow(cast(GtkListBoxRow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(GtkListBoxRow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -209,11 +208,11 @@ class ListBox : Widget
    *   y = position
    * Returns: the row
    */
-  ListBoxRow getRowAtY(int y)
+  gtk.list_box_row.ListBoxRow getRowAtY(int y)
   {
     GtkListBoxRow* _cretval;
     _cretval = gtk_list_box_get_row_at_y(cast(GtkListBox*)cPtr, y);
-    auto _retval = ObjectG.getDObject!ListBoxRow(cast(GtkListBoxRow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(GtkListBoxRow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -224,11 +223,11 @@ class ListBox : Widget
    * find all selected rows.
    * Returns: the selected row
    */
-  ListBoxRow getSelectedRow()
+  gtk.list_box_row.ListBoxRow getSelectedRow()
   {
     GtkListBoxRow* _cretval;
     _cretval = gtk_list_box_get_selected_row(cast(GtkListBox*)cPtr);
-    auto _retval = ObjectG.getDObject!ListBoxRow(cast(GtkListBoxRow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(GtkListBoxRow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -237,11 +236,11 @@ class ListBox : Widget
    * Returns: A `GList` containing the `GtkWidget` for each selected child.
    *   Free with [glib.list.List.free] when done.
    */
-  ListBoxRow[] getSelectedRows()
+  gtk.list_box_row.ListBoxRow[] getSelectedRows()
   {
     GList* _cretval;
     _cretval = gtk_list_box_get_selected_rows(cast(GtkListBox*)cPtr);
-    auto _retval = gListToD!(ListBoxRow, GidOwnership.Container)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gtk.list_box_row.ListBoxRow, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -249,11 +248,11 @@ class ListBox : Widget
    * Gets the selection mode of the listbox.
    * Returns: a `GtkSelectionMode`
    */
-  SelectionMode getSelectionMode()
+  gtk.types.SelectionMode getSelectionMode()
   {
     GtkSelectionMode _cretval;
     _cretval = gtk_list_box_get_selection_mode(cast(GtkListBox*)cPtr);
-    SelectionMode _retval = cast(SelectionMode)_cretval;
+    gtk.types.SelectionMode _retval = cast(gtk.types.SelectionMode)_cretval;
     return _retval;
   }
 
@@ -279,7 +278,7 @@ class ListBox : Widget
    *   child = the `GtkWidget` to add
    *   position = the position to insert child in
    */
-  void insert(Widget child, int position)
+  void insert(gtk.widget.Widget child, int position)
   {
     gtk_list_box_insert(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
   }
@@ -326,7 +325,7 @@ class ListBox : Widget
    * Params:
    *   child = the `GtkWidget` to add
    */
-  void prepend(Widget child)
+  void prepend(gtk.widget.Widget child)
   {
     gtk_list_box_prepend(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -336,7 +335,7 @@ class ListBox : Widget
    * Params:
    *   child = the child to remove
    */
-  void remove(Widget child)
+  void remove(gtk.widget.Widget child)
   {
     gtk_list_box_remove(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -363,7 +362,7 @@ class ListBox : Widget
    * Params:
    *   row = The row to select
    */
-  void selectRow(ListBoxRow row)
+  void selectRow(gtk.list_box_row.ListBoxRow row)
   {
     gtk_list_box_select_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(No.Dup) : null);
   }
@@ -374,13 +373,13 @@ class ListBox : Widget
    * Params:
    *   func = the function to call for each selected child
    */
-  void selectedForeach(ListBoxForeachFunc func)
+  void selectedForeach(gtk.types.ListBoxForeachFunc func)
   {
     extern(C) void _funcCallback(GtkListBox* box, GtkListBoxRow* row, void* userData)
     {
-      auto _dlg = cast(ListBoxForeachFunc*)userData;
+      auto _dlg = cast(gtk.types.ListBoxForeachFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!ListBox(cast(void*)box, No.Take), ObjectG.getDObject!ListBoxRow(cast(void*)row, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gtk.list_box.ListBox)(cast(void*)box, No.Take), ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -411,7 +410,7 @@ class ListBox : Widget
    * Params:
    *   adjustment = the adjustment
    */
-  void setAdjustment(Adjustment adjustment)
+  void setAdjustment(gtk.adjustment.Adjustment adjustment)
   {
     gtk_list_box_set_adjustment(cast(GtkListBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
@@ -430,13 +429,13 @@ class ListBox : Widget
    * Params:
    *   filterFunc = callback that lets you filter which rows to show
    */
-  void setFilterFunc(ListBoxFilterFunc filterFunc)
+  void setFilterFunc(gtk.types.ListBoxFilterFunc filterFunc)
   {
     extern(C) bool _filterFuncCallback(GtkListBoxRow* row, void* userData)
     {
-      auto _dlg = cast(ListBoxFilterFunc*)userData;
+      auto _dlg = cast(gtk.types.ListBoxFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!ListBoxRow(cast(void*)row, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
       return _retval;
     }
     auto _filterFuncCB = filterFunc ? &_filterFuncCallback : null;
@@ -470,13 +469,13 @@ class ListBox : Widget
    * Params:
    *   updateHeader = callback that lets you add row headers
    */
-  void setHeaderFunc(ListBoxUpdateHeaderFunc updateHeader)
+  void setHeaderFunc(gtk.types.ListBoxUpdateHeaderFunc updateHeader)
   {
     extern(C) void _updateHeaderCallback(GtkListBoxRow* row, GtkListBoxRow* before, void* userData)
     {
-      auto _dlg = cast(ListBoxUpdateHeaderFunc*)userData;
+      auto _dlg = cast(gtk.types.ListBoxUpdateHeaderFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!ListBoxRow(cast(void*)row, No.Take), ObjectG.getDObject!ListBoxRow(cast(void*)before, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take), ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)before, No.Take));
     }
     auto _updateHeaderCB = updateHeader ? &_updateHeaderCallback : null;
 
@@ -491,7 +490,7 @@ class ListBox : Widget
    * Params:
    *   placeholder = a `GtkWidget`
    */
-  void setPlaceholder(Widget placeholder)
+  void setPlaceholder(gtk.widget.Widget placeholder)
   {
     gtk_list_box_set_placeholder(cast(GtkListBox*)cPtr, placeholder ? cast(GtkWidget*)placeholder.cPtr(No.Dup) : null);
   }
@@ -501,7 +500,7 @@ class ListBox : Widget
    * Params:
    *   mode = The `GtkSelectionMode`
    */
-  void setSelectionMode(SelectionMode mode)
+  void setSelectionMode(gtk.types.SelectionMode mode)
   {
     gtk_list_box_set_selection_mode(cast(GtkListBox*)cPtr, mode);
   }
@@ -530,13 +529,13 @@ class ListBox : Widget
    * Params:
    *   sortFunc = the sort function
    */
-  void setSortFunc(ListBoxSortFunc sortFunc)
+  void setSortFunc(gtk.types.ListBoxSortFunc sortFunc)
   {
     extern(C) int _sortFuncCallback(GtkListBoxRow* row1, GtkListBoxRow* row2, void* userData)
     {
-      auto _dlg = cast(ListBoxSortFunc*)userData;
+      auto _dlg = cast(gtk.types.ListBoxSortFunc*)userData;
 
-      int _retval = (*_dlg)(ObjectG.getDObject!ListBoxRow(cast(void*)row1, No.Take), ObjectG.getDObject!ListBoxRow(cast(void*)row2, No.Take));
+      int _retval = (*_dlg)(ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row1, No.Take), ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row2, No.Take));
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
@@ -559,13 +558,13 @@ class ListBox : Widget
    * Params:
    *   row = the row to unselect
    */
-  void unselectRow(ListBoxRow row)
+  void unselectRow(gtk.list_box_row.ListBoxRow row)
   {
     gtk_list_box_unselect_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(No.Dup) : null);
   }
 
-  alias ActivateCursorRowCallbackDlg = void delegate(ListBox listBox);
-  alias ActivateCursorRowCallbackFunc = void function(ListBox listBox);
+  alias ActivateCursorRowCallbackDlg = void delegate(gtk.list_box.ListBox listBox);
+  alias ActivateCursorRowCallbackFunc = void function(gtk.list_box.ListBox listBox);
 
   /**
    * Connect to ActivateCursorRow signal.
@@ -581,7 +580,7 @@ class ListBox : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!ListBox(_paramVals);
+      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
       _dClosure.dlg(listBox);
     }
 
@@ -589,8 +588,8 @@ class ListBox : Widget
     return connectSignalClosure("activate-cursor-row", closure, after);
   }
 
-  alias MoveCursorCallbackDlg = void delegate(MovementStep object, int p0, bool p1, bool p2, ListBox listBox);
-  alias MoveCursorCallbackFunc = void function(MovementStep object, int p0, bool p1, bool p2, ListBox listBox);
+  alias MoveCursorCallbackDlg = void delegate(gtk.types.MovementStep object, int p0, bool p1, bool p2, gtk.list_box.ListBox listBox);
+  alias MoveCursorCallbackFunc = void function(gtk.types.MovementStep object, int p0, bool p1, bool p2, gtk.list_box.ListBox listBox);
 
   /**
    * Connect to MoveCursor signal.
@@ -606,11 +605,11 @@ class ListBox : Widget
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!ListBox(_paramVals);
-      auto object = getVal!MovementStep(&_paramVals[1]);
-      auto p0 = getVal!int(&_paramVals[2]);
-      auto p1 = getVal!bool(&_paramVals[3]);
-      auto p2 = getVal!bool(&_paramVals[4]);
+      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
+      auto object = getVal!(gtk.types.MovementStep)(&_paramVals[1]);
+      auto p0 = getVal!(int)(&_paramVals[2]);
+      auto p1 = getVal!(bool)(&_paramVals[3]);
+      auto p2 = getVal!(bool)(&_paramVals[4]);
       _dClosure.dlg(object, p0, p1, p2, listBox);
     }
 
@@ -624,8 +623,8 @@ class ListBox : Widget
    *   row = the activated row
    *   listBox = the instance the signal is connected to
    */
-  alias RowActivatedCallbackDlg = void delegate(ListBoxRow row, ListBox listBox);
-  alias RowActivatedCallbackFunc = void function(ListBoxRow row, ListBox listBox);
+  alias RowActivatedCallbackDlg = void delegate(gtk.list_box_row.ListBoxRow row, gtk.list_box.ListBox listBox);
+  alias RowActivatedCallbackFunc = void function(gtk.list_box_row.ListBoxRow row, gtk.list_box.ListBox listBox);
 
   /**
    * Connect to RowActivated signal.
@@ -641,8 +640,8 @@ class ListBox : Widget
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!ListBox(_paramVals);
-      auto row = getVal!ListBoxRow(&_paramVals[1]);
+      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
+      auto row = getVal!(gtk.list_box_row.ListBoxRow)(&_paramVals[1]);
       _dClosure.dlg(row, listBox);
     }
 
@@ -660,8 +659,8 @@ class ListBox : Widget
    *   row = the selected row
    *   listBox = the instance the signal is connected to
    */
-  alias RowSelectedCallbackDlg = void delegate(ListBoxRow row, ListBox listBox);
-  alias RowSelectedCallbackFunc = void function(ListBoxRow row, ListBox listBox);
+  alias RowSelectedCallbackDlg = void delegate(gtk.list_box_row.ListBoxRow row, gtk.list_box.ListBox listBox);
+  alias RowSelectedCallbackFunc = void function(gtk.list_box_row.ListBoxRow row, gtk.list_box.ListBox listBox);
 
   /**
    * Connect to RowSelected signal.
@@ -677,8 +676,8 @@ class ListBox : Widget
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!ListBox(_paramVals);
-      auto row = getVal!ListBoxRow(&_paramVals[1]);
+      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
+      auto row = getVal!(gtk.list_box_row.ListBoxRow)(&_paramVals[1]);
       _dClosure.dlg(row, listBox);
     }
 
@@ -693,8 +692,8 @@ class ListBox : Widget
    * The default binding for this signal is <kbd>Ctrl</kbd>-<kbd>a</kbd>.
    *   listBox = the instance the signal is connected to
    */
-  alias SelectAllCallbackDlg = void delegate(ListBox listBox);
-  alias SelectAllCallbackFunc = void function(ListBox listBox);
+  alias SelectAllCallbackDlg = void delegate(gtk.list_box.ListBox listBox);
+  alias SelectAllCallbackFunc = void function(gtk.list_box.ListBox listBox);
 
   /**
    * Connect to SelectAll signal.
@@ -710,7 +709,7 @@ class ListBox : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!ListBox(_paramVals);
+      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
       _dClosure.dlg(listBox);
     }
 
@@ -722,8 +721,8 @@ class ListBox : Widget
    * Emitted when the set of selected rows changes.
    *   listBox = the instance the signal is connected to
    */
-  alias SelectedRowsChangedCallbackDlg = void delegate(ListBox listBox);
-  alias SelectedRowsChangedCallbackFunc = void function(ListBox listBox);
+  alias SelectedRowsChangedCallbackDlg = void delegate(gtk.list_box.ListBox listBox);
+  alias SelectedRowsChangedCallbackFunc = void function(gtk.list_box.ListBox listBox);
 
   /**
    * Connect to SelectedRowsChanged signal.
@@ -739,7 +738,7 @@ class ListBox : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!ListBox(_paramVals);
+      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
       _dClosure.dlg(listBox);
     }
 
@@ -747,8 +746,8 @@ class ListBox : Widget
     return connectSignalClosure("selected-rows-changed", closure, after);
   }
 
-  alias ToggleCursorRowCallbackDlg = void delegate(ListBox listBox);
-  alias ToggleCursorRowCallbackFunc = void function(ListBox listBox);
+  alias ToggleCursorRowCallbackDlg = void delegate(gtk.list_box.ListBox listBox);
+  alias ToggleCursorRowCallbackFunc = void function(gtk.list_box.ListBox listBox);
 
   /**
    * Connect to ToggleCursorRow signal.
@@ -764,7 +763,7 @@ class ListBox : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!ListBox(_paramVals);
+      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
       _dClosure.dlg(listBox);
     }
 
@@ -780,8 +779,8 @@ class ListBox : Widget
    * <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>a</kbd>.
    *   listBox = the instance the signal is connected to
    */
-  alias UnselectAllCallbackDlg = void delegate(ListBox listBox);
-  alias UnselectAllCallbackFunc = void function(ListBox listBox);
+  alias UnselectAllCallbackDlg = void delegate(gtk.list_box.ListBox listBox);
+  alias UnselectAllCallbackFunc = void function(gtk.list_box.ListBox listBox);
 
   /**
    * Connect to UnselectAll signal.
@@ -797,7 +796,7 @@ class ListBox : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!ListBox(_paramVals);
+      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
       _dClosure.dlg(listBox);
     }
 

@@ -1,7 +1,7 @@
 module soup.session_feature;
 
 public import soup.session_feature_iface_proxy;
-import gid.global;
+import gid.gid;
 import soup.c.functions;
 import soup.c.types;
 import soup.types;

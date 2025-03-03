@@ -1,0 +1,225 @@
+module gtk.app_chooser_button;
+
+import atk.implementor_iface;
+import atk.implementor_iface_mixin;
+import gid.gid;
+import gio.icon;
+import gobject.dclosure;
+import gobject.object;
+import gtk.app_chooser;
+import gtk.app_chooser_mixin;
+import gtk.buildable;
+import gtk.buildable_mixin;
+import gtk.c.functions;
+import gtk.c.types;
+import gtk.cell_editable;
+import gtk.cell_editable_mixin;
+import gtk.cell_layout;
+import gtk.cell_layout_mixin;
+import gtk.combo_box;
+import gtk.types;
+
+/**
+ * The #GtkAppChooserButton is a widget that lets the user select
+ * an application. It implements the #GtkAppChooser interface.
+ * Initially, a #GtkAppChooserButton selects the first application
+ * in its list, which will either be the most-recently used application
+ * or, if #GtkAppChooserButton:show-default-item is %TRUE, the
+ * default application.
+ * The list of applications shown in a #GtkAppChooserButton includes
+ * the recommended applications for the given content type. When
+ * #GtkAppChooserButton:show-default-item is set, the default application
+ * is also included. To let the user chooser other applications,
+ * you can set the #GtkAppChooserButton:show-dialog-item property,
+ * which allows to open a full #GtkAppChooserDialog.
+ * It is possible to add custom items to the list, using
+ * [gtk.app_chooser_button.AppChooserButton.appendCustomItem]. These items cause
+ * the #GtkAppChooserButton::custom-item-activated signal to be
+ * emitted when they are selected.
+ * To track changes in the selected application, use the
+ * #GtkComboBox::changed signal.
+ */
+class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
+{
+
+  this(void* ptr, Flag!"Take" take = No.Take)
+  {
+    super(cast(void*)ptr, take);
+  }
+
+  static GType getType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_app_chooser_button_get_type != &gidSymbolNotFound ? gtk_app_chooser_button_get_type() : cast(GType)0;
+  }
+
+  override @property GType gType()
+  {
+    return getType();
+  }
+
+  mixin AppChooserT!();
+
+  /**
+   * Creates a new #GtkAppChooserButton for applications
+   * that can handle content of the given type.
+   * Params:
+   *   contentType = the content type to show applications for
+   * Returns: a newly created #GtkAppChooserButton
+   */
+  this(string contentType)
+  {
+    GtkWidget* _cretval;
+    const(char)* _contentType = contentType.toCString(No.Alloc);
+    _cretval = gtk_app_chooser_button_new(_contentType);
+    this(_cretval, No.Take);
+  }
+
+  /**
+   * Appends a custom item to the list of applications that is shown
+   * in the popup; the item name must be unique per-widget.
+   * Clients can use the provided name as a detail for the
+   * #GtkAppChooserButton::custom-item-activated signal, to add a
+   * callback for the activation of a particular custom item in the list.
+   * See also [gtk.app_chooser_button.AppChooserButton.appendSeparator].
+   * Params:
+   *   name = the name of the custom item
+   *   label = the label for the custom item
+   *   icon = the icon for the custom item
+   */
+  void appendCustomItem(string name, string label, gio.icon.Icon icon)
+  {
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.Alloc);
+    gtk_app_chooser_button_append_custom_item(cast(GtkAppChooserButton*)cPtr, _name, _label, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+  }
+
+  /**
+   * Appends a separator to the list of applications that is shown
+   * in the popup.
+   */
+  void appendSeparator()
+  {
+    gtk_app_chooser_button_append_separator(cast(GtkAppChooserButton*)cPtr);
+  }
+
+  /**
+   * Returns the text to display at the top of the dialog.
+   * Returns: the text to display at the top of the dialog,
+   *   or %NULL, in which case a default text is displayed
+   */
+  string getHeading()
+  {
+    const(char)* _cretval;
+    _cretval = gtk_app_chooser_button_get_heading(cast(GtkAppChooserButton*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    return _retval;
+  }
+
+  /**
+   * Returns the current value of the #GtkAppChooserButton:show-default-item
+   * property.
+   * Returns: the value of #GtkAppChooserButton:show-default-item
+   */
+  bool getShowDefaultItem()
+  {
+    bool _retval;
+    _retval = gtk_app_chooser_button_get_show_default_item(cast(GtkAppChooserButton*)cPtr);
+    return _retval;
+  }
+
+  /**
+   * Returns the current value of the #GtkAppChooserButton:show-dialog-item
+   * property.
+   * Returns: the value of #GtkAppChooserButton:show-dialog-item
+   */
+  bool getShowDialogItem()
+  {
+    bool _retval;
+    _retval = gtk_app_chooser_button_get_show_dialog_item(cast(GtkAppChooserButton*)cPtr);
+    return _retval;
+  }
+
+  /**
+   * Selects a custom item previously added with
+   * [gtk.app_chooser_button.AppChooserButton.appendCustomItem].
+   * Use [gtk.app_chooser.AppChooser.refresh] to bring the selection
+   * to its initial state.
+   * Params:
+   *   name = the name of the custom item
+   */
+  void setActiveCustomItem(string name)
+  {
+    const(char)* _name = name.toCString(No.Alloc);
+    gtk_app_chooser_button_set_active_custom_item(cast(GtkAppChooserButton*)cPtr, _name);
+  }
+
+  /**
+   * Sets the text to display at the top of the dialog.
+   * If the heading is not set, the dialog displays a default text.
+   * Params:
+   *   heading = a string containing Pango markup
+   */
+  void setHeading(string heading)
+  {
+    const(char)* _heading = heading.toCString(No.Alloc);
+    gtk_app_chooser_button_set_heading(cast(GtkAppChooserButton*)cPtr, _heading);
+  }
+
+  /**
+   * Sets whether the dropdown menu of this button should show the
+   * default application for the given content type at top.
+   * Params:
+   *   setting = the new value for #GtkAppChooserButton:show-default-item
+   */
+  void setShowDefaultItem(bool setting)
+  {
+    gtk_app_chooser_button_set_show_default_item(cast(GtkAppChooserButton*)cPtr, setting);
+  }
+
+  /**
+   * Sets whether the dropdown menu of this button should show an
+   * entry to trigger a #GtkAppChooserDialog.
+   * Params:
+   *   setting = the new value for #GtkAppChooserButton:show-dialog-item
+   */
+  void setShowDialogItem(bool setting)
+  {
+    gtk_app_chooser_button_set_show_dialog_item(cast(GtkAppChooserButton*)cPtr, setting);
+  }
+
+  /**
+   * Emitted when a custom item, previously added with
+   * [gtk.app_chooser_button.AppChooserButton.appendCustomItem], is activated from the
+   * dropdown menu.
+   * Params
+   *   itemName = the name of the activated item
+   *   appChooserButton = the instance the signal is connected to
+   */
+  alias CustomItemActivatedCallbackDlg = void delegate(string itemName, gtk.app_chooser_button.AppChooserButton appChooserButton);
+  alias CustomItemActivatedCallbackFunc = void function(string itemName, gtk.app_chooser_button.AppChooserButton appChooserButton);
+
+  /**
+   * Connect to CustomItemActivated signal.
+   * Params:
+   *   detail = Signal detail or null (default)
+   *   callback = signal callback delegate or function to connect
+   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
+   * Returns: Signal ID
+   */
+  ulong connectCustomItemActivated(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  if (is(T : CustomItemActivatedCallbackDlg) || is(T : CustomItemActivatedCallbackFunc))
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      auto appChooserButton = getVal!(gtk.app_chooser_button.AppChooserButton)(_paramVals);
+      auto itemName = getVal!(string)(&_paramVals[1]);
+      _dClosure.dlg(itemName, appChooserButton);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("custom-item-activated"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}

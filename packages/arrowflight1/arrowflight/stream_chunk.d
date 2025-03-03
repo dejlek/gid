@@ -5,10 +5,10 @@ import arrow.record_batch;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class StreamChunk : ObjectG
+class StreamChunk : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,21 +27,21 @@ class StreamChunk : ObjectG
     return getType();
   }
 
-  alias getData = ObjectG.getData;
+  alias getData = gobject.object.ObjectG.getData;
 
-  RecordBatch getData()
+  arrow.record_batch.RecordBatch getData()
   {
     GArrowRecordBatch* _cretval;
     _cretval = gaflight_stream_chunk_get_data(cast(GAFlightStreamChunk*)cPtr);
-    auto _retval = ObjectG.getDObject!RecordBatch(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Buffer getMetadata()
+  arrow.buffer.Buffer getMetadata()
   {
     GArrowBuffer* _cretval;
     _cretval = gaflight_stream_chunk_get_metadata(cast(GAFlightStreamChunk*)cPtr);
-    auto _retval = ObjectG.getDObject!Buffer(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 }

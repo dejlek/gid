@@ -3,13 +3,13 @@ module cairo.rectangle;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
  * A data structure for holding a rectangle.
  */
-class Rectangle : Boxed
+class Rectangle : gobject.boxed.Boxed
 {
 
   this()

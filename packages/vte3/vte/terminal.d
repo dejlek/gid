@@ -4,7 +4,7 @@ import cairo.font_options;
 import gdk.cursor;
 import gdk.rectangle;
 import gdk.rgba;
-import gid.global;
+import gid.gid;
 import gio.cancellable;
 import gio.menu_model;
 import gio.output_stream;
@@ -29,7 +29,7 @@ import vte.pty;
 import vte.regex;
 import vte.types;
 
-class Terminal : Widget, Scrollable
+class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -77,7 +77,7 @@ class Terminal : Widget, Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_check_hyperlink_at(cast(VteTerminal*)cPtr, x, y);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class Terminal : Widget, Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_check_match_at(cast(VteTerminal*)cPtr, x, y, cast(int*)&tag);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class Terminal : Widget, Scrollable
    * Returns: a newly allocated array of strings,
    *   or %NULL if none of the regexes matched
    */
-  string[] checkRegexSimpleAt(double x, double y, Regex[] regexes, uint matchFlags)
+  string[] checkRegexSimpleAt(double x, double y, vte.regex.Regex[] regexes, uint matchFlags)
   {
     char** _cretval;
     size_t _cretlength;
@@ -158,7 +158,7 @@ class Terminal : Widget, Scrollable
    * Places the selected text in the terminal in the #GDK_SELECTION_CLIPBOARD
    * selection in the form specified by format.
    * For all formats, the selection data $(LPAREN)see #GtkSelectionData$(RPAREN) will include the
-   * text targets $(LPAREN)see gtk_target_list_add_text_targets$(LPAREN)$(RPAREN) and
+   * text targets $(LPAREN)see [gtk.target_list.TargetList.addTextTargets] and
    * gtk_selection_data_targets_includes_text$(LPAREN)$(RPAREN)$(RPAREN). For %VTE_FORMAT_HTML,
    * the selection will also include the "text/html" target, which when requested,
    * returns the HTML data in UTF-16 with a U+FEFF BYTE ORDER MARK character at
@@ -166,7 +166,7 @@ class Terminal : Widget, Scrollable
    * Params:
    *   format = a #VteFormat
    */
-  void copyClipboardFormat(Format format)
+  void copyClipboardFormat(vte.types.Format format)
   {
     vte_terminal_copy_clipboard_format(cast(VteTerminal*)cPtr, format);
   }
@@ -333,11 +333,11 @@ class Terminal : Widget, Scrollable
    * Params:
    *   color = a location to store a #GdkRGBA color
    */
-  void getColorBackgroundForDraw(out RGBA color)
+  void getColorBackgroundForDraw(out gdk.rgba.RGBA color)
   {
     GdkRGBA _color;
     vte_terminal_get_color_background_for_draw(cast(VteTerminal*)cPtr, &_color);
-    color = new RGBA(cast(void*)&_color, No.Take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
   }
 
   glong getColumnCount()
@@ -347,19 +347,19 @@ class Terminal : Widget, Scrollable
     return _retval;
   }
 
-  Widget getContextMenu()
+  gtk.widget.Widget getContextMenu()
   {
     GtkWidget* _cretval;
     _cretval = vte_terminal_get_context_menu(cast(VteTerminal*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
-  MenuModel getContextMenuModel()
+  gio.menu_model.MenuModel getContextMenuModel()
   {
     GMenuModel* _cretval;
     _cretval = vte_terminal_get_context_menu_model(cast(VteTerminal*)cPtr);
-    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -367,7 +367,7 @@ class Terminal : Widget, Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_current_directory_uri(cast(VteTerminal*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -375,7 +375,7 @@ class Terminal : Widget, Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_current_file_uri(cast(VteTerminal*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -383,11 +383,11 @@ class Terminal : Widget, Scrollable
    * Returns the currently set cursor blink mode.
    * Returns: cursor blink mode.
    */
-  CursorBlinkMode getCursorBlinkMode()
+  vte.types.CursorBlinkMode getCursorBlinkMode()
   {
     VteCursorBlinkMode _cretval;
     _cretval = vte_terminal_get_cursor_blink_mode(cast(VteTerminal*)cPtr);
-    CursorBlinkMode _retval = cast(CursorBlinkMode)_cretval;
+    vte.types.CursorBlinkMode _retval = cast(vte.types.CursorBlinkMode)_cretval;
     return _retval;
   }
 
@@ -408,11 +408,11 @@ class Terminal : Widget, Scrollable
    * Returns the currently set cursor shape.
    * Returns: cursor shape.
    */
-  CursorShape getCursorShape()
+  vte.types.CursorShape getCursorShape()
   {
     VteCursorShape _cretval;
     _cretval = vte_terminal_get_cursor_shape(cast(VteTerminal*)cPtr);
-    CursorShape _retval = cast(CursorShape)_cretval;
+    vte.types.CursorShape _retval = cast(vte.types.CursorShape)_cretval;
     return _retval;
   }
 
@@ -463,7 +463,7 @@ class Terminal : Widget, Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_encoding(cast(VteTerminal*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -475,19 +475,19 @@ class Terminal : Widget, Scrollable
    * Returns: a #PangoFontDescription describing the font the
    *   terminal uses to render text at the default font scale of 1.0.
    */
-  FontDescription getFont()
+  pango.font_description.FontDescription getFont()
   {
     const(PangoFontDescription)* _cretval;
     _cretval = vte_terminal_get_font(cast(VteTerminal*)cPtr);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
-  override FontOptions getFontOptions()
+  override cairo.font_options.FontOptions getFontOptions()
   {
     const(cairo_font_options_t)* _cretval;
     _cretval = vte_terminal_get_font_options(cast(VteTerminal*)cPtr);
-    auto _retval = _cretval ? new FontOptions(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -515,7 +515,7 @@ class Terminal : Widget, Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_icon_title(cast(VteTerminal*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -548,11 +548,11 @@ class Terminal : Widget, Scrollable
    * Returns the #VtePty of terminal.
    * Returns: a #VtePty, or %NULL
    */
-  Pty getPty()
+  vte.pty.Pty getPty()
   {
     VtePty* _cretval;
     _cretval = vte_terminal_get_pty(cast(VteTerminal*)cPtr);
-    auto _retval = ObjectG.getDObject!Pty(cast(VtePty*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, No.Take);
     return _retval;
   }
 
@@ -613,11 +613,11 @@ class Terminal : Widget, Scrollable
    * Checks whether or not the terminal will allow blinking text.
    * Returns: the blinking setting
    */
-  TextBlinkMode getTextBlinkMode()
+  vte.types.TextBlinkMode getTextBlinkMode()
   {
     VteTextBlinkMode _cretval;
     _cretval = vte_terminal_get_text_blink_mode(cast(VteTerminal*)cPtr);
-    TextBlinkMode _retval = cast(TextBlinkMode)_cretval;
+    vte.types.TextBlinkMode _retval = cast(vte.types.TextBlinkMode)_cretval;
     return _retval;
   }
 
@@ -629,11 +629,11 @@ class Terminal : Widget, Scrollable
    *   format = the #VteFormat to use
    * Returns: a newly allocated text string, or %NULL.
    */
-  string getTextFormat(Format format)
+  string getTextFormat(vte.types.Format format)
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_format(cast(VteTerminal*)cPtr, format);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -648,11 +648,11 @@ class Terminal : Widget, Scrollable
    *   length = a pointer to a #gsize to store the string length
    * Returns: a newly allocated string, or %NULL.
    */
-  string getTextRangeFormat(Format format, glong startRow, glong startCol, glong endRow, glong endCol, out size_t length)
+  string getTextRangeFormat(vte.types.Format format, glong startRow, glong startCol, glong endRow, glong endCol, out size_t length)
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_range_format(cast(VteTerminal*)cPtr, format, startRow, startCol, endRow, endCol, cast(size_t*)&length);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -663,11 +663,11 @@ class Terminal : Widget, Scrollable
    *   format = the #VteFormat to use
    * Returns: a newly allocated string containing the selected text, or %NULL if there is no selection or the format is not supported
    */
-  string getTextSelected(Format format)
+  string getTextSelected(vte.types.Format format)
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_selected(cast(VteTerminal*)cPtr, format);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -678,11 +678,11 @@ class Terminal : Widget, Scrollable
    *   length = a pointer to a #gsize to store the string length
    * Returns: a newly allocated string containing the selected text, or %NULL if there is no selection or the format is not supported
    */
-  string getTextSelectedFull(Format format, out size_t length)
+  string getTextSelectedFull(vte.types.Format format, out size_t length)
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_selected_full(cast(VteTerminal*)cPtr, format, cast(size_t*)&length);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -690,7 +690,7 @@ class Terminal : Widget, Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_window_title(cast(VteTerminal*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -705,15 +705,15 @@ class Terminal : Widget, Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_word_char_exceptions(cast(VteTerminal*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
-  AlignVte getXalign()
+  vte.types.AlignVte getXalign()
   {
     VteAlign _cretval;
     _cretval = vte_terminal_get_xalign(cast(VteTerminal*)cPtr);
-    AlignVte _retval = cast(AlignVte)_cretval;
+    vte.types.AlignVte _retval = cast(vte.types.AlignVte)_cretval;
     return _retval;
   }
 
@@ -724,11 +724,11 @@ class Terminal : Widget, Scrollable
     return _retval;
   }
 
-  AlignVte getYalign()
+  vte.types.AlignVte getYalign()
   {
     VteAlign _cretval;
     _cretval = vte_terminal_get_yalign(cast(VteTerminal*)cPtr);
-    AlignVte _retval = cast(AlignVte)_cretval;
+    vte.types.AlignVte _retval = cast(vte.types.AlignVte)_cretval;
     return _retval;
   }
 
@@ -750,7 +750,7 @@ class Terminal : Widget, Scrollable
    *   flags = PCRE2 match flags, or 0
    * Returns: an integer associated with this expression
    */
-  int matchAddRegex(Regex regex, uint flags)
+  int matchAddRegex(vte.regex.Regex regex, uint flags)
   {
     int _retval;
     _retval = vte_terminal_match_add_regex(cast(VteTerminal*)cPtr, regex ? cast(VteRegex*)regex.cPtr(No.Dup) : null, flags);
@@ -778,7 +778,7 @@ class Terminal : Widget, Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_match_check(cast(VteTerminal*)cPtr, column, row, cast(int*)&tag);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -813,7 +813,7 @@ class Terminal : Widget, Scrollable
 
    * Deprecated: Use [vte.terminal.Terminal.matchSetCursorName] instead.
    */
-  void matchSetCursor(int tag, Cursor cursor)
+  void matchSetCursor(int tag, gdk.cursor.Cursor cursor)
   {
     vte_terminal_match_set_cursor(cast(VteTerminal*)cPtr, tag, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
@@ -875,14 +875,14 @@ class Terminal : Widget, Scrollable
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a new #VtePty
    */
-  Pty ptyNewSync(PtyFlags flags, Cancellable cancellable)
+  vte.pty.Pty ptyNewSync(vte.types.PtyFlags flags, gio.cancellable.Cancellable cancellable)
   {
     VtePty* _cretval;
     GError *_err;
     _cretval = vte_terminal_pty_new_sync(cast(VteTerminal*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Pty(cast(VtePty*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -924,11 +924,11 @@ class Terminal : Widget, Scrollable
     return _retval;
   }
 
-  Regex searchGetRegex()
+  vte.regex.Regex searchGetRegex()
   {
     VteRegex* _cretval;
     _cretval = vte_terminal_search_get_regex(cast(VteTerminal*)cPtr);
-    auto _retval = _cretval ? new Regex(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -947,7 +947,7 @@ class Terminal : Widget, Scrollable
    *   regex = a #VteRegex, or %NULL
    *   flags = PCRE2 match flags, or 0
    */
-  void searchSetRegex(Regex regex, uint flags)
+  void searchSetRegex(vte.regex.Regex regex, uint flags)
   {
     vte_terminal_search_set_regex(cast(VteTerminal*)cPtr, regex ? cast(VteRegex*)regex.cPtr(No.Dup) : null, flags);
   }
@@ -1012,7 +1012,7 @@ class Terminal : Widget, Scrollable
    * Params:
    *   binding = a #VteEraseBinding for the backspace key
    */
-  void setBackspaceBinding(EraseBinding binding)
+  void setBackspaceBinding(vte.types.EraseBinding binding)
   {
     vte_terminal_set_backspace_binding(cast(VteTerminal*)cPtr, binding);
   }
@@ -1086,9 +1086,9 @@ class Terminal : Widget, Scrollable
    * Params:
    *   background = the new background color
    */
-  void setColorBackground(RGBA background)
+  void setColorBackground(gdk.rgba.RGBA background)
   {
-    vte_terminal_set_color_background(cast(VteTerminal*)cPtr, background ? cast(GdkRGBA*)background.cPtr(No.Dup) : null);
+    vte_terminal_set_color_background(cast(VteTerminal*)cPtr, background ? cast(const(GdkRGBA)*)background.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1097,9 +1097,9 @@ class Terminal : Widget, Scrollable
    * Params:
    *   bold = the new bold color or %NULL
    */
-  void setColorBold(RGBA bold)
+  void setColorBold(gdk.rgba.RGBA bold)
   {
-    vte_terminal_set_color_bold(cast(VteTerminal*)cPtr, bold ? cast(GdkRGBA*)bold.cPtr(No.Dup) : null);
+    vte_terminal_set_color_bold(cast(VteTerminal*)cPtr, bold ? cast(const(GdkRGBA)*)bold.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1109,9 +1109,9 @@ class Terminal : Widget, Scrollable
    * Params:
    *   cursorBackground = the new color to use for the text cursor, or %NULL
    */
-  void setColorCursor(RGBA cursorBackground)
+  void setColorCursor(gdk.rgba.RGBA cursorBackground)
   {
-    vte_terminal_set_color_cursor(cast(VteTerminal*)cPtr, cursorBackground ? cast(GdkRGBA*)cursorBackground.cPtr(No.Dup) : null);
+    vte_terminal_set_color_cursor(cast(VteTerminal*)cPtr, cursorBackground ? cast(const(GdkRGBA)*)cursorBackground.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1121,9 +1121,9 @@ class Terminal : Widget, Scrollable
    * Params:
    *   cursorForeground = the new color to use for the text cursor, or %NULL
    */
-  void setColorCursorForeground(RGBA cursorForeground)
+  void setColorCursorForeground(gdk.rgba.RGBA cursorForeground)
   {
-    vte_terminal_set_color_cursor_foreground(cast(VteTerminal*)cPtr, cursorForeground ? cast(GdkRGBA*)cursorForeground.cPtr(No.Dup) : null);
+    vte_terminal_set_color_cursor_foreground(cast(VteTerminal*)cPtr, cursorForeground ? cast(const(GdkRGBA)*)cursorForeground.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1131,9 +1131,9 @@ class Terminal : Widget, Scrollable
    * Params:
    *   foreground = the new foreground color
    */
-  void setColorForeground(RGBA foreground)
+  void setColorForeground(gdk.rgba.RGBA foreground)
   {
-    vte_terminal_set_color_foreground(cast(VteTerminal*)cPtr, foreground ? cast(GdkRGBA*)foreground.cPtr(No.Dup) : null);
+    vte_terminal_set_color_foreground(cast(VteTerminal*)cPtr, foreground ? cast(const(GdkRGBA)*)foreground.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1144,9 +1144,9 @@ class Terminal : Widget, Scrollable
    * Params:
    *   highlightBackground = the new color to use for highlighted text, or %NULL
    */
-  void setColorHighlight(RGBA highlightBackground)
+  void setColorHighlight(gdk.rgba.RGBA highlightBackground)
   {
-    vte_terminal_set_color_highlight(cast(VteTerminal*)cPtr, highlightBackground ? cast(GdkRGBA*)highlightBackground.cPtr(No.Dup) : null);
+    vte_terminal_set_color_highlight(cast(VteTerminal*)cPtr, highlightBackground ? cast(const(GdkRGBA)*)highlightBackground.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1157,9 +1157,9 @@ class Terminal : Widget, Scrollable
    * Params:
    *   highlightForeground = the new color to use for highlighted text, or %NULL
    */
-  void setColorHighlightForeground(RGBA highlightForeground)
+  void setColorHighlightForeground(gdk.rgba.RGBA highlightForeground)
   {
-    vte_terminal_set_color_highlight_foreground(cast(VteTerminal*)cPtr, highlightForeground ? cast(GdkRGBA*)highlightForeground.cPtr(No.Dup) : null);
+    vte_terminal_set_color_highlight_foreground(cast(VteTerminal*)cPtr, highlightForeground ? cast(const(GdkRGBA)*)highlightForeground.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1175,7 +1175,7 @@ class Terminal : Widget, Scrollable
    *   background = the new background color, or %NULL
    *   palette = the color palette
    */
-  void setColors(RGBA foreground, RGBA background, RGBA[] palette)
+  void setColors(gdk.rgba.RGBA foreground, gdk.rgba.RGBA background, gdk.rgba.RGBA[] palette)
   {
     size_t _paletteSize;
     if (palette)
@@ -1185,7 +1185,7 @@ class Terminal : Widget, Scrollable
     foreach (obj; palette)
       _tmppalette ~= *cast(GdkRGBA*)obj.cPtr;
     const(GdkRGBA)* _palette = _tmppalette.ptr;
-    vte_terminal_set_colors(cast(VteTerminal*)cPtr, foreground ? cast(GdkRGBA*)foreground.cPtr(No.Dup) : null, background ? cast(GdkRGBA*)background.cPtr(No.Dup) : null, _palette, _paletteSize);
+    vte_terminal_set_colors(cast(VteTerminal*)cPtr, foreground ? cast(const(GdkRGBA)*)foreground.cPtr(No.Dup) : null, background ? cast(const(GdkRGBA)*)background.cPtr(No.Dup) : null, _palette, _paletteSize);
   }
 
   /**
@@ -1196,7 +1196,7 @@ class Terminal : Widget, Scrollable
    * Params:
    *   menu = a menu
    */
-  void setContextMenu(Widget menu)
+  void setContextMenu(gtk.widget.Widget menu)
   {
     vte_terminal_set_context_menu(cast(VteTerminal*)cPtr, menu ? cast(GtkWidget*)menu.cPtr(No.Dup) : null);
   }
@@ -1207,7 +1207,7 @@ class Terminal : Widget, Scrollable
    * Params:
    *   model = a #GMenuModel
    */
-  void setContextMenuModel(MenuModel model)
+  void setContextMenuModel(gio.menu_model.MenuModel model)
   {
     vte_terminal_set_context_menu_model(cast(VteTerminal*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
@@ -1218,7 +1218,7 @@ class Terminal : Widget, Scrollable
    * Params:
    *   mode = the #VteCursorBlinkMode to use
    */
-  void setCursorBlinkMode(CursorBlinkMode mode)
+  void setCursorBlinkMode(vte.types.CursorBlinkMode mode)
   {
     vte_terminal_set_cursor_blink_mode(cast(VteTerminal*)cPtr, mode);
   }
@@ -1228,7 +1228,7 @@ class Terminal : Widget, Scrollable
    * Params:
    *   shape = the #VteCursorShape to use
    */
-  void setCursorShape(CursorShape shape)
+  void setCursorShape(vte.types.CursorShape shape)
   {
     vte_terminal_set_cursor_shape(cast(VteTerminal*)cPtr, shape);
   }
@@ -1248,7 +1248,7 @@ class Terminal : Widget, Scrollable
    * Params:
    *   binding = a #VteEraseBinding for the delete key
    */
-  void setDeleteBinding(EraseBinding binding)
+  void setDeleteBinding(vte.types.EraseBinding binding)
   {
     vte_terminal_set_delete_binding(cast(VteTerminal*)cPtr, binding);
   }
@@ -1324,16 +1324,16 @@ class Terminal : Widget, Scrollable
 
   /**
    * Sets the font used for rendering all text displayed by the terminal,
-   * overriding any fonts set using gtk_widget_modify_font$(LPAREN)$(RPAREN).  The terminal
+   * overriding any fonts set using [gtk.widget.Widget.modifyFont].  The terminal
    * will immediately attempt to load the desired font, retrieve its
    * metrics, and attempt to resize itself to keep the same number of rows
    * and columns.  The font scale is applied to the specified font.
    * Params:
    *   fontDesc = a #PangoFontDescription for the desired font, or %NULL
    */
-  void setFont(FontDescription fontDesc)
+  void setFont(pango.font_description.FontDescription fontDesc)
   {
-    vte_terminal_set_font(cast(VteTerminal*)cPtr, fontDesc ? cast(PangoFontDescription*)fontDesc.cPtr(No.Dup) : null);
+    vte_terminal_set_font(cast(VteTerminal*)cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1345,9 +1345,9 @@ class Terminal : Widget, Scrollable
    * Params:
    *   fontOptions = the font options, or %NULL
    */
-  override void setFontOptions(FontOptions fontOptions)
+  override void setFontOptions(cairo.font_options.FontOptions fontOptions)
   {
-    vte_terminal_set_font_options(cast(VteTerminal*)cPtr, fontOptions ? cast(cairo_font_options_t*)fontOptions.cPtr(No.Dup) : null);
+    vte_terminal_set_font_options(cast(VteTerminal*)cPtr, fontOptions ? cast(const(cairo_font_options_t)*)fontOptions.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1391,7 +1391,7 @@ class Terminal : Widget, Scrollable
    * Params:
    *   pty = a #VtePty, or %NULL
    */
-  void setPty(Pty pty)
+  void setPty(vte.pty.Pty pty)
   {
     vte_terminal_set_pty(cast(VteTerminal*)cPtr, pty ? cast(VtePty*)pty.cPtr(No.Dup) : null);
   }
@@ -1488,7 +1488,7 @@ class Terminal : Widget, Scrollable
    * Params:
    *   textBlinkMode = the #VteTextBlinkMode to use
    */
-  void setTextBlinkMode(TextBlinkMode textBlinkMode)
+  void setTextBlinkMode(vte.types.TextBlinkMode textBlinkMode)
   {
     vte_terminal_set_text_blink_mode(cast(VteTerminal*)cPtr, textBlinkMode);
   }
@@ -1518,7 +1518,7 @@ class Terminal : Widget, Scrollable
    * Params:
    *   align_ = alignment value from #VteAlign
    */
-  void setXalign(AlignVte align_)
+  void setXalign(vte.types.AlignVte align_)
   {
     vte_terminal_set_xalign(cast(VteTerminal*)cPtr, align_);
   }
@@ -1540,7 +1540,7 @@ class Terminal : Widget, Scrollable
    * Params:
    *   align_ = alignment value from #VteAlign
    */
-  void setYalign(AlignVte align_)
+  void setYalign(vte.types.AlignVte align_)
   {
     vte_terminal_set_yalign(cast(VteTerminal*)cPtr, align_);
   }
@@ -1576,11 +1576,11 @@ class Terminal : Widget, Scrollable
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #VteTerminalSpawnAsyncCallback, or %NULL
    */
-  void spawnAsync(PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, SpawnFlags spawnFlags, SpawnChildSetupFunc childSetup, int timeout, Cancellable cancellable, TerminalSpawnAsyncCallback callback)
+  void spawnAsync(vte.types.PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable, vte.types.TerminalSpawnAsyncCallback callback)
   {
     extern(C) void _childSetupCallback(void* data)
     {
-      auto _dlg = cast(SpawnChildSetupFunc*)data;
+      auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
       (*_dlg)();
     }
@@ -1589,9 +1589,9 @@ class Terminal : Widget, Scrollable
     extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData)
     {
       ptrThawGC(userData);
-      auto _dlg = cast(TerminalSpawnAsyncCallback*)userData;
+      auto _dlg = cast(vte.types.TerminalSpawnAsyncCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!Terminal(cast(void*)terminal, No.Take), pid, error ? new ErrorG(cast(void*)error, No.Take) : null);
+      (*_dlg)(ObjectG.getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorG(cast(void*)error, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -1648,11 +1648,11 @@ class Terminal : Widget, Scrollable
 
    * Deprecated: Use [vte.terminal.Terminal.spawnAsync] instead.
    */
-  bool spawnSync(PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, SpawnFlags spawnFlags, SpawnChildSetupFunc childSetup, out Pid childPid, Cancellable cancellable)
+  bool spawnSync(vte.types.PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid, gio.cancellable.Cancellable cancellable)
   {
     extern(C) void _childSetupCallback(void* data)
     {
-      auto _dlg = cast(SpawnChildSetupFunc*)data;
+      auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
       (*_dlg)();
     }
@@ -1732,11 +1732,11 @@ class Terminal : Widget, Scrollable
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #VteTerminalSpawnAsyncCallback, or %NULL
    */
-  void spawnWithFdsAsync(PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, SpawnFlags spawnFlags, SpawnChildSetupFunc childSetup, int timeout, Cancellable cancellable, TerminalSpawnAsyncCallback callback)
+  void spawnWithFdsAsync(vte.types.PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable, vte.types.TerminalSpawnAsyncCallback callback)
   {
     extern(C) void _childSetupCallback(void* data)
     {
-      auto _dlg = cast(SpawnChildSetupFunc*)data;
+      auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
       (*_dlg)();
     }
@@ -1745,9 +1745,9 @@ class Terminal : Widget, Scrollable
     extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData)
     {
       ptrThawGC(userData);
-      auto _dlg = cast(TerminalSpawnAsyncCallback*)userData;
+      auto _dlg = cast(vte.types.TerminalSpawnAsyncCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!Terminal(cast(void*)terminal, No.Take), pid, error ? new ErrorG(cast(void*)error, No.Take) : null);
+      (*_dlg)(ObjectG.getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorG(cast(void*)error, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -1802,7 +1802,7 @@ class Terminal : Widget, Scrollable
    * Params:
    *   childPid = a #GPid
    */
-  void watchChild(Pid childPid)
+  void watchChild(glib.types.Pid childPid)
   {
     vte_terminal_watch_child(cast(VteTerminal*)cPtr, childPid);
   }
@@ -1822,7 +1822,7 @@ class Terminal : Widget, Scrollable
    *   cancellable = a #GCancellable object, or %NULL
    * Returns: %TRUE on success, %FALSE if there was an error
    */
-  bool writeContentsSync(OutputStream stream, WriteFlags flags, Cancellable cancellable)
+  bool writeContentsSync(gio.output_stream.OutputStream stream, vte.types.WriteFlags flags, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -1837,8 +1837,8 @@ class Terminal : Widget, Scrollable
    * terminal.
    *   terminal = the instance the signal is connected to
    */
-  alias BellCallbackDlg = void delegate(Terminal terminal);
-  alias BellCallbackFunc = void function(Terminal terminal);
+  alias BellCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias BellCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to Bell signal.
@@ -1854,7 +1854,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -1871,8 +1871,8 @@ class Terminal : Widget, Scrollable
    *   height = the new character cell height
    *   terminal = the instance the signal is connected to
    */
-  alias CharSizeChangedCallbackDlg = void delegate(uint width, uint height, Terminal terminal);
-  alias CharSizeChangedCallbackFunc = void function(uint width, uint height, Terminal terminal);
+  alias CharSizeChangedCallbackDlg = void delegate(uint width, uint height, vte.terminal.Terminal terminal);
+  alias CharSizeChangedCallbackFunc = void function(uint width, uint height, vte.terminal.Terminal terminal);
 
   /**
    * Connect to CharSizeChanged signal.
@@ -1888,9 +1888,9 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
-      auto width = getVal!uint(&_paramVals[1]);
-      auto height = getVal!uint(&_paramVals[2]);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
+      auto width = getVal!(uint)(&_paramVals[1]);
+      auto height = getVal!(uint)(&_paramVals[2]);
       _dClosure.dlg(width, height, terminal);
     }
 
@@ -1905,8 +1905,8 @@ class Terminal : Widget, Scrollable
    *   status = the child's exit status
    *   terminal = the instance the signal is connected to
    */
-  alias ChildExitedCallbackDlg = void delegate(int status, Terminal terminal);
-  alias ChildExitedCallbackFunc = void function(int status, Terminal terminal);
+  alias ChildExitedCallbackDlg = void delegate(int status, vte.terminal.Terminal terminal);
+  alias ChildExitedCallbackFunc = void function(int status, vte.terminal.Terminal terminal);
 
   /**
    * Connect to ChildExited signal.
@@ -1922,8 +1922,8 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
-      auto status = getVal!int(&_paramVals[1]);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
+      auto status = getVal!(int)(&_paramVals[1]);
       _dClosure.dlg(status, terminal);
     }
 
@@ -1939,8 +1939,8 @@ class Terminal : Widget, Scrollable
    *   size = the length of that string of text
    *   terminal = the instance the signal is connected to
    */
-  alias CommitCallbackDlg = void delegate(string text, uint size, Terminal terminal);
-  alias CommitCallbackFunc = void function(string text, uint size, Terminal terminal);
+  alias CommitCallbackDlg = void delegate(string text, uint size, vte.terminal.Terminal terminal);
+  alias CommitCallbackFunc = void function(string text, uint size, vte.terminal.Terminal terminal);
 
   /**
    * Connect to Commit signal.
@@ -1956,9 +1956,9 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
-      auto text = getVal!string(&_paramVals[1]);
-      auto size = getVal!uint(&_paramVals[2]);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
+      auto text = getVal!(string)(&_paramVals[1]);
+      auto size = getVal!(uint)(&_paramVals[2]);
       _dClosure.dlg(text, size, terminal);
     }
 
@@ -1971,8 +1971,8 @@ class Terminal : Widget, Scrollable
    * Used primarily by #VteTerminalAccessible.
    *   terminal = the instance the signal is connected to
    */
-  alias ContentsChangedCallbackDlg = void delegate(Terminal terminal);
-  alias ContentsChangedCallbackFunc = void function(Terminal terminal);
+  alias ContentsChangedCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias ContentsChangedCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to ContentsChanged signal.
@@ -1988,7 +1988,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2000,8 +2000,8 @@ class Terminal : Widget, Scrollable
    * Emitted whenever [vte.terminal.Terminal.copyClipboard] is called.
    *   terminal = the instance the signal is connected to
    */
-  alias CopyClipboardCallbackDlg = void delegate(Terminal terminal);
-  alias CopyClipboardCallbackFunc = void function(Terminal terminal);
+  alias CopyClipboardCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias CopyClipboardCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to CopyClipboard signal.
@@ -2017,7 +2017,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2029,8 +2029,8 @@ class Terminal : Widget, Scrollable
    * Emitted when the current directory URI is modified.
    *   terminal = the instance the signal is connected to
    */
-  alias CurrentDirectoryUriChangedCallbackDlg = void delegate(Terminal terminal);
-  alias CurrentDirectoryUriChangedCallbackFunc = void function(Terminal terminal);
+  alias CurrentDirectoryUriChangedCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias CurrentDirectoryUriChangedCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to CurrentDirectoryUriChanged signal.
@@ -2046,7 +2046,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2058,8 +2058,8 @@ class Terminal : Widget, Scrollable
    * Emitted when the current file URI is modified.
    *   terminal = the instance the signal is connected to
    */
-  alias CurrentFileUriChangedCallbackDlg = void delegate(Terminal terminal);
-  alias CurrentFileUriChangedCallbackFunc = void function(Terminal terminal);
+  alias CurrentFileUriChangedCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias CurrentFileUriChangedCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to CurrentFileUriChanged signal.
@@ -2075,7 +2075,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2088,8 +2088,8 @@ class Terminal : Widget, Scrollable
    * primarily by #VteTerminalAccessible.
    *   terminal = the instance the signal is connected to
    */
-  alias CursorMovedCallbackDlg = void delegate(Terminal terminal);
-  alias CursorMovedCallbackFunc = void function(Terminal terminal);
+  alias CursorMovedCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias CursorMovedCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to CursorMoved signal.
@@ -2105,7 +2105,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2117,8 +2117,8 @@ class Terminal : Widget, Scrollable
    * Emitted when the user hits the '-' key while holding the Control key.
    *   terminal = the instance the signal is connected to
    */
-  alias DecreaseFontSizeCallbackDlg = void delegate(Terminal terminal);
-  alias DecreaseFontSizeCallbackFunc = void function(Terminal terminal);
+  alias DecreaseFontSizeCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias DecreaseFontSizeCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to DecreaseFontSize signal.
@@ -2134,7 +2134,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2146,8 +2146,8 @@ class Terminal : Widget, Scrollable
    * Never emitted.
    *   terminal = the instance the signal is connected to
    */
-  alias DeiconifyWindowCallbackDlg = void delegate(Terminal terminal);
-  alias DeiconifyWindowCallbackFunc = void function(Terminal terminal);
+  alias DeiconifyWindowCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias DeiconifyWindowCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to DeiconifyWindow signal.
@@ -2163,7 +2163,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2176,8 +2176,8 @@ class Terminal : Widget, Scrollable
    * Note: support for non-UTF-8 is deprecated.
    *   terminal = the instance the signal is connected to
    */
-  alias EncodingChangedCallbackDlg = void delegate(Terminal terminal);
-  alias EncodingChangedCallbackFunc = void function(Terminal terminal);
+  alias EncodingChangedCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias EncodingChangedCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to EncodingChanged signal.
@@ -2193,7 +2193,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2207,8 +2207,8 @@ class Terminal : Widget, Scrollable
    * always$(RPAREN) emitted with a #VteTerminal::child-exited signal.
    *   terminal = the instance the signal is connected to
    */
-  alias EofCallbackDlg = void delegate(Terminal terminal);
-  alias EofCallbackFunc = void function(Terminal terminal);
+  alias EofCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias EofCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to Eof signal.
@@ -2224,7 +2224,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2243,8 +2243,8 @@ class Terminal : Widget, Scrollable
    *   bbox = the bounding box of the hyperlink anchor text, or NULL
    *   terminal = the instance the signal is connected to
    */
-  alias HyperlinkHoverUriChangedCallbackDlg = void delegate(string uri, Rectangle bbox, Terminal terminal);
-  alias HyperlinkHoverUriChangedCallbackFunc = void function(string uri, Rectangle bbox, Terminal terminal);
+  alias HyperlinkHoverUriChangedCallbackDlg = void delegate(string uri, gdk.rectangle.Rectangle bbox, vte.terminal.Terminal terminal);
+  alias HyperlinkHoverUriChangedCallbackFunc = void function(string uri, gdk.rectangle.Rectangle bbox, vte.terminal.Terminal terminal);
 
   /**
    * Connect to HyperlinkHoverUriChanged signal.
@@ -2260,9 +2260,9 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
-      auto uri = getVal!string(&_paramVals[1]);
-      auto bbox = getVal!Rectangle(&_paramVals[2]);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
+      auto uri = getVal!(string)(&_paramVals[1]);
+      auto bbox = getVal!(gdk.rectangle.Rectangle)(&_paramVals[2]);
       _dClosure.dlg(uri, bbox, terminal);
     }
 
@@ -2270,8 +2270,8 @@ class Terminal : Widget, Scrollable
     return connectSignalClosure("hyperlink-hover-uri-changed", closure, after);
   }
 
-  alias IconTitleChangedCallbackDlg = void delegate(Terminal terminal);
-  alias IconTitleChangedCallbackFunc = void function(Terminal terminal);
+  alias IconTitleChangedCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias IconTitleChangedCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to IconTitleChanged signal.
@@ -2287,7 +2287,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2299,8 +2299,8 @@ class Terminal : Widget, Scrollable
    * Never emitted.
    *   terminal = the instance the signal is connected to
    */
-  alias IconifyWindowCallbackDlg = void delegate(Terminal terminal);
-  alias IconifyWindowCallbackFunc = void function(Terminal terminal);
+  alias IconifyWindowCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias IconifyWindowCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to IconifyWindow signal.
@@ -2316,7 +2316,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2328,8 +2328,8 @@ class Terminal : Widget, Scrollable
    * Emitted when the user hits the '+' key while holding the Control key.
    *   terminal = the instance the signal is connected to
    */
-  alias IncreaseFontSizeCallbackDlg = void delegate(Terminal terminal);
-  alias IncreaseFontSizeCallbackFunc = void function(Terminal terminal);
+  alias IncreaseFontSizeCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias IncreaseFontSizeCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to IncreaseFontSize signal.
@@ -2345,7 +2345,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2357,8 +2357,8 @@ class Terminal : Widget, Scrollable
    * Never emitted.
    *   terminal = the instance the signal is connected to
    */
-  alias LowerWindowCallbackDlg = void delegate(Terminal terminal);
-  alias LowerWindowCallbackFunc = void function(Terminal terminal);
+  alias LowerWindowCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias LowerWindowCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to LowerWindow signal.
@@ -2374,7 +2374,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2386,8 +2386,8 @@ class Terminal : Widget, Scrollable
    * Never emitted.
    *   terminal = the instance the signal is connected to
    */
-  alias MaximizeWindowCallbackDlg = void delegate(Terminal terminal);
-  alias MaximizeWindowCallbackFunc = void function(Terminal terminal);
+  alias MaximizeWindowCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias MaximizeWindowCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to MaximizeWindow signal.
@@ -2403,7 +2403,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2418,8 +2418,8 @@ class Terminal : Widget, Scrollable
    *   y = the terminal's desired location, Y coordinate
    *   terminal = the instance the signal is connected to
    */
-  alias MoveWindowCallbackDlg = void delegate(uint x, uint y, Terminal terminal);
-  alias MoveWindowCallbackFunc = void function(uint x, uint y, Terminal terminal);
+  alias MoveWindowCallbackDlg = void delegate(uint x, uint y, vte.terminal.Terminal terminal);
+  alias MoveWindowCallbackFunc = void function(uint x, uint y, vte.terminal.Terminal terminal);
 
   /**
    * Connect to MoveWindow signal.
@@ -2435,9 +2435,9 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
-      auto x = getVal!uint(&_paramVals[1]);
-      auto y = getVal!uint(&_paramVals[2]);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
+      auto x = getVal!(uint)(&_paramVals[1]);
+      auto y = getVal!(uint)(&_paramVals[2]);
       _dClosure.dlg(x, y, terminal);
     }
 
@@ -2449,8 +2449,8 @@ class Terminal : Widget, Scrollable
    * Emitted whenever [vte.terminal.Terminal.pasteClipboard] is called.
    *   terminal = the instance the signal is connected to
    */
-  alias PasteClipboardCallbackDlg = void delegate(Terminal terminal);
-  alias PasteClipboardCallbackFunc = void function(Terminal terminal);
+  alias PasteClipboardCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias PasteClipboardCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to PasteClipboard signal.
@@ -2466,7 +2466,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2478,8 +2478,8 @@ class Terminal : Widget, Scrollable
    * Never emitted.
    *   terminal = the instance the signal is connected to
    */
-  alias RaiseWindowCallbackDlg = void delegate(Terminal terminal);
-  alias RaiseWindowCallbackFunc = void function(Terminal terminal);
+  alias RaiseWindowCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias RaiseWindowCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to RaiseWindow signal.
@@ -2495,7 +2495,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2507,8 +2507,8 @@ class Terminal : Widget, Scrollable
    * Never emitted.
    *   terminal = the instance the signal is connected to
    */
-  alias RefreshWindowCallbackDlg = void delegate(Terminal terminal);
-  alias RefreshWindowCallbackFunc = void function(Terminal terminal);
+  alias RefreshWindowCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias RefreshWindowCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to RefreshWindow signal.
@@ -2524,7 +2524,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2539,8 +2539,8 @@ class Terminal : Widget, Scrollable
    *   height = the desired number of rows
    *   terminal = the instance the signal is connected to
    */
-  alias ResizeWindowCallbackDlg = void delegate(uint width, uint height, Terminal terminal);
-  alias ResizeWindowCallbackFunc = void function(uint width, uint height, Terminal terminal);
+  alias ResizeWindowCallbackDlg = void delegate(uint width, uint height, vte.terminal.Terminal terminal);
+  alias ResizeWindowCallbackFunc = void function(uint width, uint height, vte.terminal.Terminal terminal);
 
   /**
    * Connect to ResizeWindow signal.
@@ -2556,9 +2556,9 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
-      auto width = getVal!uint(&_paramVals[1]);
-      auto height = getVal!uint(&_paramVals[2]);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
+      auto width = getVal!(uint)(&_paramVals[1]);
+      auto height = getVal!(uint)(&_paramVals[2]);
       _dClosure.dlg(width, height, terminal);
     }
 
@@ -2570,8 +2570,8 @@ class Terminal : Widget, Scrollable
    * Never emitted.
    *   terminal = the instance the signal is connected to
    */
-  alias RestoreWindowCallbackDlg = void delegate(Terminal terminal);
-  alias RestoreWindowCallbackFunc = void function(Terminal terminal);
+  alias RestoreWindowCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias RestoreWindowCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to RestoreWindow signal.
@@ -2587,7 +2587,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2599,8 +2599,8 @@ class Terminal : Widget, Scrollable
    * Emitted whenever the contents of terminal's selection changes.
    *   terminal = the instance the signal is connected to
    */
-  alias SelectionChangedCallbackDlg = void delegate(Terminal terminal);
-  alias SelectionChangedCallbackFunc = void function(Terminal terminal);
+  alias SelectionChangedCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias SelectionChangedCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to SelectionChanged signal.
@@ -2616,7 +2616,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 
@@ -2639,8 +2639,8 @@ class Terminal : Widget, Scrollable
    *   context = the context
    *   terminal = the instance the signal is connected to
    */
-  alias SetupContextMenuCallbackDlg = void delegate(EventContext context, Terminal terminal);
-  alias SetupContextMenuCallbackFunc = void function(EventContext context, Terminal terminal);
+  alias SetupContextMenuCallbackDlg = void delegate(vte.event_context.EventContext context, vte.terminal.Terminal terminal);
+  alias SetupContextMenuCallbackFunc = void function(vte.event_context.EventContext context, vte.terminal.Terminal terminal);
 
   /**
    * Connect to SetupContextMenu signal.
@@ -2656,8 +2656,8 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
-      auto context = getVal!EventContext(&_paramVals[1]);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
+      auto context = getVal!(vte.event_context.EventContext)(&_paramVals[1]);
       _dClosure.dlg(context, terminal);
     }
 
@@ -2669,8 +2669,8 @@ class Terminal : Widget, Scrollable
    * Emitted when the #VteTerminal:window-title property is modified.
    *   terminal = the instance the signal is connected to
    */
-  alias WindowTitleChangedCallbackDlg = void delegate(Terminal terminal);
-  alias WindowTitleChangedCallbackFunc = void function(Terminal terminal);
+  alias WindowTitleChangedCallbackDlg = void delegate(vte.terminal.Terminal terminal);
+  alias WindowTitleChangedCallbackFunc = void function(vte.terminal.Terminal terminal);
 
   /**
    * Connect to WindowTitleChanged signal.
@@ -2686,7 +2686,7 @@ class Terminal : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto terminal = getVal!Terminal(_paramVals);
+      auto terminal = getVal!(vte.terminal.Terminal)(_paramVals);
       _dClosure.dlg(terminal);
     }
 

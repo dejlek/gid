@@ -1,7 +1,7 @@
 module gio.list_model_mixin;
 
 public import gio.list_model_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
@@ -101,9 +101,9 @@ template ListModelT()
    * model.
    * Returns: the #GType of the items contained in list.
    */
-  override GType getItemType()
+  override gobject.types.GType getItemType()
   {
-    GType _retval;
+    gobject.types.GType _retval;
     _retval = g_list_model_get_item_type(cast(GListModel*)cPtr);
     return _retval;
   }
@@ -135,11 +135,11 @@ template ListModelT()
    *   position = the position of the item to fetch
    * Returns: the object at position.
    */
-  override ObjectG getItem(uint position)
+  override gobject.object.ObjectG getItem(uint position)
   {
     ObjectC* _cretval;
     _cretval = g_list_model_get_object(cast(GListModel*)cPtr, position);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -183,8 +183,8 @@ template ListModelT()
    *   added = the number of items added
    *   listModel = the instance the signal is connected to
    */
-  alias ItemsChangedCallbackDlg = void delegate(uint position, uint removed, uint added, ListModel listModel);
-  alias ItemsChangedCallbackFunc = void function(uint position, uint removed, uint added, ListModel listModel);
+  alias ItemsChangedCallbackDlg = void delegate(uint position, uint removed, uint added, gio.list_model.ListModel listModel);
+  alias ItemsChangedCallbackFunc = void function(uint position, uint removed, uint added, gio.list_model.ListModel listModel);
 
   /**
    * Connect to ItemsChanged signal.
@@ -200,10 +200,10 @@ template ListModelT()
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listModel = getVal!ListModel(_paramVals);
-      auto position = getVal!uint(&_paramVals[1]);
-      auto removed = getVal!uint(&_paramVals[2]);
-      auto added = getVal!uint(&_paramVals[3]);
+      auto listModel = getVal!(gio.list_model.ListModel)(_paramVals);
+      auto position = getVal!(uint)(&_paramVals[1]);
+      auto removed = getVal!(uint)(&_paramVals[2]);
+      auto added = getVal!(uint)(&_paramVals[3]);
       _dClosure.dlg(position, removed, added, listModel);
     }
 

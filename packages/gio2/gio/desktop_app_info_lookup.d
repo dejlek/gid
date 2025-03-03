@@ -1,9 +1,8 @@
 module gio.desktop_app_info_lookup;
 
 public import gio.desktop_app_info_lookup_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.app_info;
-import gio.app_info_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -41,5 +40,5 @@ interface DesktopAppInfoLookup
    * Deprecated: The #GDesktopAppInfoLookup interface is deprecated and
    *   unused by GIO.
    */
-  AppInfo getDefaultForUriScheme(string uriScheme);
+  gio.app_info.AppInfo getDefaultForUriScheme(string uriScheme);
 }

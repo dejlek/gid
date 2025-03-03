@@ -1,6 +1,6 @@
 module gio.file_attribute_info;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -39,22 +39,22 @@ class FileAttributeInfo
     (cast(GFileAttributeInfo*)cPtr).name = propval.toCString(Yes.Alloc);
   }
 
-  @property FileAttributeType type()
+  @property gio.types.FileAttributeType type()
   {
-    return cast(FileAttributeType)(cast(GFileAttributeInfo*)cPtr).type;
+    return cast(gio.types.FileAttributeType)(cast(GFileAttributeInfo*)cPtr).type;
   }
 
-  @property void type(FileAttributeType propval)
+  @property void type(gio.types.FileAttributeType propval)
   {
     (cast(GFileAttributeInfo*)cPtr).type = cast(GFileAttributeType)propval;
   }
 
-  @property FileAttributeInfoFlags flags()
+  @property gio.types.FileAttributeInfoFlags flags()
   {
-    return cast(FileAttributeInfoFlags)(cast(GFileAttributeInfo*)cPtr).flags;
+    return cast(gio.types.FileAttributeInfoFlags)(cast(GFileAttributeInfo*)cPtr).flags;
   }
 
-  @property void flags(FileAttributeInfoFlags propval)
+  @property void flags(gio.types.FileAttributeInfoFlags propval)
   {
     (cast(GFileAttributeInfo*)cPtr).flags = cast(GFileAttributeInfoFlags)propval;
   }

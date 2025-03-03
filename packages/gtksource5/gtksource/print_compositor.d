@@ -1,6 +1,6 @@
 module gtksource.print_compositor;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.print_context;
 import gtk.text_tag;
@@ -25,7 +25,7 @@ import gtksource.view;
  * ones are used as a fallback by the `GtkSourcePrintCompositor` object, so that
  * the printed area is not clipped.
  */
-class PrintCompositor : ObjectG
+class PrintCompositor : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -50,7 +50,7 @@ class PrintCompositor : ObjectG
    *   buffer = the #GtkSourceBuffer to print.
    * Returns: a new print compositor object.
    */
-  this(Buffer buffer)
+  this(gtksource.buffer.Buffer buffer)
   {
     GtkSourcePrintCompositor* _cretval;
     _cretval = gtk_source_print_compositor_new(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null);
@@ -69,11 +69,11 @@ class PrintCompositor : ObjectG
    *   view = a #GtkSourceView to get configuration from.
    * Returns: a new print compositor object.
    */
-  static PrintCompositor newFromView(View view)
+  static gtksource.print_compositor.PrintCompositor newFromView(gtksource.view.View view)
   {
     GtkSourcePrintCompositor* _cretval;
     _cretval = gtk_source_print_compositor_new_from_view(view ? cast(GtkSourceView*)view.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!PrintCompositor(cast(GtkSourcePrintCompositor*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.print_compositor.PrintCompositor)(cast(GtkSourcePrintCompositor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class PrintCompositor : ObjectG
    *     drawing the page for printing.
    *   pageNr = the number of the page to print.
    */
-  void drawPage(PrintContext context, int pageNr)
+  void drawPage(gtk.print_context.PrintContext context, int pageNr)
   {
     gtk_source_print_compositor_draw_page(cast(GtkSourcePrintCompositor*)cPtr, context ? cast(GtkPrintContext*)context.cPtr(No.Dup) : null, pageNr);
   }
@@ -116,7 +116,7 @@ class PrintCompositor : ObjectG
   {
     char* _cretval;
     _cretval = gtk_source_print_compositor_get_body_font_name(cast(GtkSourcePrintCompositor*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class PrintCompositor : ObjectG
    *   unit = the unit for the return value.
    * Returns: the bottom margin.
    */
-  double getBottomMargin(Unit unit)
+  double getBottomMargin(gtk.types.Unit unit)
   {
     double _retval;
     _retval = gtk_source_print_compositor_get_bottom_margin(cast(GtkSourcePrintCompositor*)cPtr, unit);
@@ -139,11 +139,11 @@ class PrintCompositor : ObjectG
    * should not be unreferenced.
    * Returns: the #GtkSourceBuffer associated with the compositor.
    */
-  Buffer getBuffer()
+  gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_print_compositor_get_buffer(cast(GtkSourcePrintCompositor*)cPtr);
-    auto _retval = ObjectG.getDObject!Buffer(cast(GtkSourceBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class PrintCompositor : ObjectG
   {
     char* _cretval;
     _cretval = gtk_source_print_compositor_get_footer_font_name(cast(GtkSourcePrintCompositor*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class PrintCompositor : ObjectG
   {
     char* _cretval;
     _cretval = gtk_source_print_compositor_get_header_font_name(cast(GtkSourcePrintCompositor*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class PrintCompositor : ObjectG
    *   unit = the unit for the return value.
    * Returns: the left margin
    */
-  double getLeftMargin(Unit unit)
+  double getLeftMargin(gtk.types.Unit unit)
   {
     double _retval;
     _retval = gtk_source_print_compositor_get_left_margin(cast(GtkSourcePrintCompositor*)cPtr, unit);
@@ -211,7 +211,7 @@ class PrintCompositor : ObjectG
   {
     char* _cretval;
     _cretval = gtk_source_print_compositor_get_line_numbers_font_name(cast(GtkSourcePrintCompositor*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -286,7 +286,7 @@ class PrintCompositor : ObjectG
    *   unit = the unit for the return value.
    * Returns: the right margin.
    */
-  double getRightMargin(Unit unit)
+  double getRightMargin(gtk.types.Unit unit)
   {
     double _retval;
     _retval = gtk_source_print_compositor_get_right_margin(cast(GtkSourcePrintCompositor*)cPtr, unit);
@@ -310,7 +310,7 @@ class PrintCompositor : ObjectG
    *   unit = the unit for the return value.
    * Returns: the top margin.
    */
-  double getTopMargin(Unit unit)
+  double getTopMargin(gtk.types.Unit unit)
   {
     double _retval;
     _retval = gtk_source_print_compositor_get_top_margin(cast(GtkSourcePrintCompositor*)cPtr, unit);
@@ -321,11 +321,11 @@ class PrintCompositor : ObjectG
    * Gets the line wrapping mode for the printed text.
    * Returns: the line wrap mode.
    */
-  WrapMode getWrapMode()
+  gtk.types.WrapMode getWrapMode()
   {
     GtkWrapMode _cretval;
     _cretval = gtk_source_print_compositor_get_wrap_mode(cast(GtkSourcePrintCompositor*)cPtr);
-    WrapMode _retval = cast(WrapMode)_cretval;
+    gtk.types.WrapMode _retval = cast(gtk.types.WrapMode)_cretval;
     return _retval;
   }
 
@@ -335,7 +335,7 @@ class PrintCompositor : ObjectG
    * Params:
    *   tag = a #GtkTextTag
    */
-  void ignoreTag(TextTag tag)
+  void ignoreTag(gtk.text_tag.TextTag tag)
   {
     gtk_source_print_compositor_ignore_tag(cast(GtkSourcePrintCompositor*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
   }
@@ -391,7 +391,7 @@ class PrintCompositor : ObjectG
    *     are used by the the compositor to paginate the document.
    * Returns: %TRUE if the document has been completely paginated, %FALSE otherwise.
    */
-  bool paginate(PrintContext context)
+  bool paginate(gtk.print_context.PrintContext context)
   {
     bool _retval;
     _retval = gtk_source_print_compositor_paginate(cast(GtkSourcePrintCompositor*)cPtr, context ? cast(GtkPrintContext*)context.cPtr(No.Dup) : null);
@@ -421,7 +421,7 @@ class PrintCompositor : ObjectG
    *   margin = the new bottom margin in units of unit.
    *   unit = the units for margin.
    */
-  void setBottomMargin(double margin, Unit unit)
+  void setBottomMargin(double margin, gtk.types.Unit unit)
   {
     gtk_source_print_compositor_set_bottom_margin(cast(GtkSourcePrintCompositor*)cPtr, margin, unit);
   }
@@ -532,7 +532,7 @@ class PrintCompositor : ObjectG
    *   margin = the new left margin in units of unit.
    *   unit = the units for margin.
    */
-  void setLeftMargin(double margin, Unit unit)
+  void setLeftMargin(double margin, gtk.types.Unit unit)
   {
     gtk_source_print_compositor_set_left_margin(cast(GtkSourcePrintCompositor*)cPtr, margin, unit);
   }
@@ -610,7 +610,7 @@ class PrintCompositor : ObjectG
    *   margin = the new right margin in units of unit.
    *   unit = the units for margin.
    */
-  void setRightMargin(double margin, Unit unit)
+  void setRightMargin(double margin, gtk.types.Unit unit)
   {
     gtk_source_print_compositor_set_right_margin(cast(GtkSourcePrintCompositor*)cPtr, margin, unit);
   }
@@ -633,7 +633,7 @@ class PrintCompositor : ObjectG
    *   margin = the new top margin in units of unit
    *   unit = the units for margin
    */
-  void setTopMargin(double margin, Unit unit)
+  void setTopMargin(double margin, gtk.types.Unit unit)
   {
     gtk_source_print_compositor_set_top_margin(cast(GtkSourcePrintCompositor*)cPtr, margin, unit);
   }
@@ -645,7 +645,7 @@ class PrintCompositor : ObjectG
    * Params:
    *   wrapMode = a #GtkWrapMode.
    */
-  void setWrapMode(WrapMode wrapMode)
+  void setWrapMode(gtk.types.WrapMode wrapMode)
   {
     gtk_source_print_compositor_set_wrap_mode(cast(GtkSourcePrintCompositor*)cPtr, wrapMode);
   }

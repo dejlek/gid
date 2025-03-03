@@ -1,6 +1,6 @@
 module gtk.constant_expression;
 
-import gid.global;
+import gid.gid;
 import gobject.value;
 import gtk.c.functions;
 import gtk.c.types;
@@ -10,7 +10,7 @@ import gtk.types;
 /**
  * A constant value in a `GtkExpression`.
  */
-class ConstantExpression : Expression
+class ConstantExpression : gtk.expression.Expression
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,11 +27,11 @@ class ConstantExpression : Expression
    *   value = a `GValue`
    * Returns: a new `GtkExpression`
    */
-  static ConstantExpression newForValue(Value value)
+  static gtk.constant_expression.ConstantExpression newForValue(gobject.value.Value value)
   {
     GtkExpression* _cretval;
-    _cretval = gtk_constant_expression_new_for_value(value ? cast(GValue*)value.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new ConstantExpression(cast(GtkExpression*)_cretval, Yes.Take) : null;
+    _cretval = gtk_constant_expression_new_for_value(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gtk.constant_expression.ConstantExpression(cast(GtkExpression*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -39,11 +39,11 @@ class ConstantExpression : Expression
    * Gets the value that a constant expression evaluates to.
    * Returns: the value
    */
-  Value getValue()
+  gobject.value.Value getValue()
   {
     const(GValue)* _cretval;
     _cretval = gtk_constant_expression_get_value(cast(GtkExpression*)cPtr);
-    auto _retval = _cretval ? new Value(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

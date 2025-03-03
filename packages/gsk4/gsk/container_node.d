@@ -1,6 +1,6 @@
 module gsk.container_node;
 
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.render_node;
@@ -9,7 +9,7 @@ import gsk.types;
 /**
  * A render node that can contain other render nodes.
  */
-class ContainerNode : RenderNode
+class ContainerNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,7 +27,7 @@ class ContainerNode : RenderNode
    *   children = The children of the node
    * Returns: the new `GskRenderNode`
    */
-  this(RenderNode[] children)
+  this(gsk.render_node.RenderNode[] children)
   {
     GskRenderNode* _cretval;
     uint _nChildren;
@@ -48,11 +48,11 @@ class ContainerNode : RenderNode
    *   idx = the position of the child to get
    * Returns: the idx'th child of container
    */
-  RenderNode getChild(uint idx)
+  gsk.render_node.RenderNode getChild(uint idx)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_container_node_get_child(cast(GskRenderNode*)cPtr, idx);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    _cretval = gsk_container_node_get_child(cast(const(GskRenderNode)*)cPtr, idx);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -63,7 +63,7 @@ class ContainerNode : RenderNode
   uint getNChildren()
   {
     uint _retval;
-    _retval = gsk_container_node_get_n_children(cast(GskRenderNode*)cPtr);
+    _retval = gsk_container_node_get_n_children(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 }

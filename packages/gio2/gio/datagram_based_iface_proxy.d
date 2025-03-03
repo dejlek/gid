@@ -5,7 +5,7 @@ import gio.datagram_based;
 import gio.datagram_based_mixin;
 
 /// Proxy object for Gio.DatagramBased interface when a GObject has no applicable D binding
-class DatagramBasedIfaceProxy : IfaceProxy, DatagramBased
+class DatagramBasedIfaceProxy : IfaceProxy, gio.datagram_based.DatagramBased
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class DatagramBasedIfaceProxy : IfaceProxy, DatagramBased
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(DatagramBased);
+    return typeid(gio.datagram_based.DatagramBased);
   }
 
   mixin DatagramBasedT!();

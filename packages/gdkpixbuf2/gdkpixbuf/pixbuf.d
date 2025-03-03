@@ -4,9 +4,8 @@ import gdkpixbuf.c.functions;
 import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf_format;
 import gdkpixbuf.types;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.icon;
 import gio.icon_mixin;
@@ -126,7 +125,7 @@ import gobject.object;
  * callback on the data, which allows to e.g. write the image
  * to a socket or store it in a database.
  */
-class Pixbuf : ObjectG, Icon, LoadableIcon
+class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.LoadableIcon
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -161,7 +160,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   height = Height of image in pixels, must be > 0
    * Returns: A newly-created pixel buffer
    */
-  this(Colorspace colorspace, bool hasAlpha, int bitsPerSample, int width, int height)
+  this(gdkpixbuf.types.Colorspace colorspace, bool hasAlpha, int bitsPerSample, int width, int height)
   {
     PixbufC* _cretval;
     _cretval = gdk_pixbuf_new(colorspace, hasAlpha, bitsPerSample, width, height);
@@ -183,11 +182,11 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   rowstride = Distance in bytes between row starts
    * Returns: A newly-created pixbuf
    */
-  static Pixbuf newFromBytes(Bytes data, Colorspace colorspace, bool hasAlpha, int bitsPerSample, int width, int height, int rowstride)
+  static gdkpixbuf.pixbuf.Pixbuf newFromBytes(glib.bytes.Bytes data, gdkpixbuf.types.Colorspace colorspace, bool hasAlpha, int bitsPerSample, int width, int height, int rowstride)
   {
     PixbufC* _cretval;
     _cretval = gdk_pixbuf_new_from_bytes(data ? cast(GBytes*)data.cPtr(No.Dup) : null, colorspace, hasAlpha, bitsPerSample, width, height, rowstride);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -205,7 +204,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *     name encoding
    * Returns: A newly-created pixbuf
    */
-  static Pixbuf newFromFile(string filename)
+  static gdkpixbuf.pixbuf.Pixbuf newFromFile(string filename)
   {
     PixbufC* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -213,7 +212,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
     _cretval = gdk_pixbuf_new_from_file(_filename, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -242,7 +241,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   preserveAspectRatio = `TRUE` to preserve the image's aspect ratio
    * Returns: A newly-created pixbuf
    */
-  static Pixbuf newFromFileAtScale(string filename, int width, int height, bool preserveAspectRatio)
+  static gdkpixbuf.pixbuf.Pixbuf newFromFileAtScale(string filename, int width, int height, bool preserveAspectRatio)
   {
     PixbufC* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -250,7 +249,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
     _cretval = gdk_pixbuf_new_from_file_at_scale(_filename, width, height, preserveAspectRatio, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -275,7 +274,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   height = The height the image should have or -1 to not constrain the height
    * Returns: A newly-created pixbuf
    */
-  static Pixbuf newFromFileAtSize(string filename, int width, int height)
+  static gdkpixbuf.pixbuf.Pixbuf newFromFileAtSize(string filename, int width, int height)
   {
     PixbufC* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -283,7 +282,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
     _cretval = gdk_pixbuf_new_from_file_at_size(_filename, width, height, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -322,7 +321,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
 
    * Deprecated: Use `GResource` instead.
    */
-  static Pixbuf newFromInline(ubyte[] data, bool copyPixels)
+  static gdkpixbuf.pixbuf.Pixbuf newFromInline(ubyte[] data, bool copyPixels)
   {
     PixbufC* _cretval;
     int _dataLength;
@@ -334,7 +333,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
     _cretval = gdk_pixbuf_new_from_inline(_dataLength, _data, copyPixels, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -346,7 +345,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   resourcePath = the path of the resource file
    * Returns: A newly-created pixbuf
    */
-  static Pixbuf newFromResource(string resourcePath)
+  static gdkpixbuf.pixbuf.Pixbuf newFromResource(string resourcePath)
   {
     PixbufC* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -354,7 +353,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
     _cretval = gdk_pixbuf_new_from_resource(_resourcePath, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -376,7 +375,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   preserveAspectRatio = `TRUE` to preserve the image's aspect ratio
    * Returns: A newly-created pixbuf
    */
-  static Pixbuf newFromResourceAtScale(string resourcePath, int width, int height, bool preserveAspectRatio)
+  static gdkpixbuf.pixbuf.Pixbuf newFromResourceAtScale(string resourcePath, int width, int height, bool preserveAspectRatio)
   {
     PixbufC* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -384,7 +383,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
     _cretval = gdk_pixbuf_new_from_resource_at_scale(_resourcePath, width, height, preserveAspectRatio, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -402,14 +401,14 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   cancellable = optional `GCancellable` object, `NULL` to ignore
    * Returns: A newly-created pixbuf
    */
-  static Pixbuf newFromStream(InputStream stream, Cancellable cancellable)
+  static gdkpixbuf.pixbuf.Pixbuf newFromStream(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable)
   {
     PixbufC* _cretval;
     GError *_err;
     _cretval = gdk_pixbuf_new_from_stream(stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -438,14 +437,14 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   cancellable = optional `GCancellable` object, `NULL` to ignore
    * Returns: A newly-created pixbuf
    */
-  static Pixbuf newFromStreamAtScale(InputStream stream, int width, int height, bool preserveAspectRatio, Cancellable cancellable)
+  static gdkpixbuf.pixbuf.Pixbuf newFromStreamAtScale(gio.input_stream.InputStream stream, int width, int height, bool preserveAspectRatio, gio.cancellable.Cancellable cancellable)
   {
     PixbufC* _cretval;
     GError *_err;
     _cretval = gdk_pixbuf_new_from_stream_at_scale(stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, width, height, preserveAspectRatio, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -456,14 +455,14 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   asyncResult = a `GAsyncResult`
    * Returns: the newly created pixbuf
    */
-  static Pixbuf newFromStreamFinish(AsyncResult asyncResult)
+  static gdkpixbuf.pixbuf.Pixbuf newFromStreamFinish(gio.async_result.AsyncResult asyncResult)
   {
     PixbufC* _cretval;
     GError *_err;
     _cretval = gdk_pixbuf_new_from_stream_finish(asyncResult ? cast(GAsyncResult*)(cast(ObjectG)asyncResult).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -475,7 +474,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   data = Pointer to inline XPM data.
    * Returns: A newly-created pixbuf
    */
-  static Pixbuf newFromXpmData(string[] data)
+  static gdkpixbuf.pixbuf.Pixbuf newFromXpmData(string[] data)
   {
     PixbufC* _cretval;
     char*[] _tmpdata;
@@ -484,7 +483,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
     _tmpdata ~= null;
     const(char*)* _data = _tmpdata.ptr;
     _cretval = gdk_pixbuf_new_from_xpm_data(_data);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -501,7 +500,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   height = Height of image in pixels, must be > 0
    * Returns: the rowstride for the given values, or -1 in case of error.
    */
-  static int calculateRowstride(Colorspace colorspace, bool hasAlpha, int bitsPerSample, int width, int height)
+  static int calculateRowstride(gdkpixbuf.types.Colorspace colorspace, bool hasAlpha, int bitsPerSample, int width, int height)
   {
     int _retval;
     _retval = gdk_pixbuf_calculate_rowstride(colorspace, hasAlpha, bitsPerSample, width, height);
@@ -517,12 +516,12 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    * Returns: A `GdkPixbufFormat` describing
    *   the image format of the file
    */
-  static PixbufFormat getFileInfo(string filename, out int width, out int height)
+  static gdkpixbuf.pixbuf_format.PixbufFormat getFileInfo(string filename, out int width, out int height)
   {
     GdkPixbufFormat* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gdk_pixbuf_get_file_info(_filename, cast(int*)&width, cast(int*)&height);
-    auto _retval = _cretval ? new PixbufFormat(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdkpixbuf.pixbuf_format.PixbufFormat(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -539,14 +538,14 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   cancellable = optional `GCancellable` object, `NULL` to ignore
    *   callback = a `GAsyncReadyCallback` to call when the file info is available
    */
-  static void getFileInfoAsync(string filename, Cancellable cancellable, AsyncReadyCallback callback)
+  static void getFileInfoAsync(string filename, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -565,14 +564,14 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    * Returns: A `GdkPixbufFormat` describing the
    *   image format of the file
    */
-  static PixbufFormat getFileInfoFinish(AsyncResult asyncResult, out int width, out int height)
+  static gdkpixbuf.pixbuf_format.PixbufFormat getFileInfoFinish(gio.async_result.AsyncResult asyncResult, out int width, out int height)
   {
     GdkPixbufFormat* _cretval;
     GError *_err;
     _cretval = gdk_pixbuf_get_file_info_finish(asyncResult ? cast(GAsyncResult*)(cast(ObjectG)asyncResult).cPtr(No.Dup) : null, cast(int*)&width, cast(int*)&height, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new PixbufFormat(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdkpixbuf.pixbuf_format.PixbufFormat(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -582,11 +581,11 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    * Returns: A list of
    *   support image formats.
    */
-  static PixbufFormat[] getFormats()
+  static gdkpixbuf.pixbuf_format.PixbufFormat[] getFormats()
   {
     GSList* _cretval;
     _cretval = gdk_pixbuf_get_formats();
-    auto _retval = gSListToD!(PixbufFormat, GidOwnership.Container)(cast(GSList*)_cretval);
+    auto _retval = gSListToD!(gdkpixbuf.pixbuf_format.PixbufFormat, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
 
@@ -629,14 +628,14 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   cancellable = optional `GCancellable` object, `NULL` to ignore
    *   callback = a `GAsyncReadyCallback` to call when the pixbuf is loaded
    */
-  static void newFromStreamAsync(InputStream stream, Cancellable cancellable, AsyncReadyCallback callback)
+  static void newFromStreamAsync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -658,14 +657,14 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   cancellable = optional `GCancellable` object, `NULL` to ignore
    *   callback = a `GAsyncReadyCallback` to call when the pixbuf is loaded
    */
-  static void newFromStreamAtScaleAsync(InputStream stream, int width, int height, bool preserveAspectRatio, Cancellable cancellable, AsyncReadyCallback callback)
+  static void newFromStreamAtScaleAsync(gio.input_stream.InputStream stream, int width, int height, bool preserveAspectRatio, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -680,7 +679,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   asyncResult = a `GAsyncResult`
    * Returns: `TRUE` if the pixbuf was saved successfully, `FALSE` if an error was set.
    */
-  static bool saveToStreamFinish(AsyncResult asyncResult)
+  static bool saveToStreamFinish(gio.async_result.AsyncResult asyncResult)
   {
     bool _retval;
     GError *_err;
@@ -708,11 +707,11 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   b = Blue value to substitute.
    * Returns: A newly-created pixbuf
    */
-  Pixbuf addAlpha(bool substituteColor, ubyte r, ubyte g, ubyte b)
+  gdkpixbuf.pixbuf.Pixbuf addAlpha(bool substituteColor, ubyte r, ubyte g, ubyte b)
   {
     PixbufC* _cretval;
-    _cretval = gdk_pixbuf_add_alpha(cast(PixbufC*)cPtr, substituteColor, r, g, b);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    _cretval = gdk_pixbuf_add_alpha(cast(const(PixbufC)*)cPtr, substituteColor, r, g, b);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -727,11 +726,11 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    * will be performed so that the pixbuf is oriented correctly.
    * Returns: A newly-created pixbuf
    */
-  Pixbuf applyEmbeddedOrientation()
+  gdkpixbuf.pixbuf.Pixbuf applyEmbeddedOrientation()
   {
     PixbufC* _cretval;
     _cretval = gdk_pixbuf_apply_embedded_orientation(cast(PixbufC*)cPtr);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -759,9 +758,9 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   interpType = the interpolation type for the transformation.
    *   overallAlpha = overall alpha for source image $(LPAREN)0..255$(RPAREN)
    */
-  void composite(Pixbuf dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, InterpType interpType, int overallAlpha)
+  void composite(gdkpixbuf.pixbuf.Pixbuf dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, gdkpixbuf.types.InterpType interpType, int overallAlpha)
   {
-    gdk_pixbuf_composite(cast(PixbufC*)cPtr, dest ? cast(PixbufC*)dest.cPtr(No.Dup) : null, destX, destY, destWidth, destHeight, offsetX, offsetY, scaleX, scaleY, interpType, overallAlpha);
+    gdk_pixbuf_composite(cast(const(PixbufC)*)cPtr, dest ? cast(PixbufC*)dest.cPtr(No.Dup) : null, destX, destY, destWidth, destHeight, offsetX, offsetY, scaleX, scaleY, interpType, overallAlpha);
   }
 
   /**
@@ -793,9 +792,9 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   color1 = the color of check at upper left
    *   color2 = the color of the other check
    */
-  void compositeColor(Pixbuf dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, InterpType interpType, int overallAlpha, int checkX, int checkY, int checkSize, uint color1, uint color2)
+  void compositeColor(gdkpixbuf.pixbuf.Pixbuf dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, gdkpixbuf.types.InterpType interpType, int overallAlpha, int checkX, int checkY, int checkSize, uint color1, uint color2)
   {
-    gdk_pixbuf_composite_color(cast(PixbufC*)cPtr, dest ? cast(PixbufC*)dest.cPtr(No.Dup) : null, destX, destY, destWidth, destHeight, offsetX, offsetY, scaleX, scaleY, interpType, overallAlpha, checkX, checkY, checkSize, color1, color2);
+    gdk_pixbuf_composite_color(cast(const(PixbufC)*)cPtr, dest ? cast(PixbufC*)dest.cPtr(No.Dup) : null, destX, destY, destWidth, destHeight, offsetX, offsetY, scaleX, scaleY, interpType, overallAlpha, checkX, checkY, checkSize, color1, color2);
   }
 
   /**
@@ -812,11 +811,11 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   color2 = the color of the other check
    * Returns: the new pixbuf
    */
-  Pixbuf compositeColorSimple(int destWidth, int destHeight, InterpType interpType, int overallAlpha, int checkSize, uint color1, uint color2)
+  gdkpixbuf.pixbuf.Pixbuf compositeColorSimple(int destWidth, int destHeight, gdkpixbuf.types.InterpType interpType, int overallAlpha, int checkSize, uint color1, uint color2)
   {
     PixbufC* _cretval;
-    _cretval = gdk_pixbuf_composite_color_simple(cast(PixbufC*)cPtr, destWidth, destHeight, interpType, overallAlpha, checkSize, color1, color2);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    _cretval = gdk_pixbuf_composite_color_simple(cast(const(PixbufC)*)cPtr, destWidth, destHeight, interpType, overallAlpha, checkSize, color1, color2);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -827,11 +826,11 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    * use [gdkpixbuf.pixbuf.Pixbuf.copyOptions] for this.
    * Returns: A newly-created pixbuf
    */
-  Pixbuf copy()
+  gdkpixbuf.pixbuf.Pixbuf copy()
   {
     PixbufC* _cretval;
-    _cretval = gdk_pixbuf_copy(cast(PixbufC*)cPtr);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    _cretval = gdk_pixbuf_copy(cast(const(PixbufC)*)cPtr);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -850,9 +849,9 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   destX = X coordinate within dest_pixbuf.
    *   destY = Y coordinate within dest_pixbuf.
    */
-  void copyArea(int srcX, int srcY, int width, int height, Pixbuf destPixbuf, int destX, int destY)
+  void copyArea(int srcX, int srcY, int width, int height, gdkpixbuf.pixbuf.Pixbuf destPixbuf, int destX, int destY)
   {
-    gdk_pixbuf_copy_area(cast(PixbufC*)cPtr, srcX, srcY, width, height, destPixbuf ? cast(PixbufC*)destPixbuf.cPtr(No.Dup) : null, destX, destY);
+    gdk_pixbuf_copy_area(cast(const(PixbufC)*)cPtr, srcX, srcY, width, height, destPixbuf ? cast(PixbufC*)destPixbuf.cPtr(No.Dup) : null, destX, destY);
   }
 
   /**
@@ -865,7 +864,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   destPixbuf = the destination pixbuf
    * Returns: `TRUE` on success.
    */
-  bool copyOptions(Pixbuf destPixbuf)
+  bool copyOptions(gdkpixbuf.pixbuf.Pixbuf destPixbuf)
   {
     bool _retval;
     _retval = gdk_pixbuf_copy_options(cast(PixbufC*)cPtr, destPixbuf ? cast(PixbufC*)destPixbuf.cPtr(No.Dup) : null);
@@ -893,11 +892,11 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   horizontal = `TRUE` to flip horizontally, `FALSE` to flip vertically
    * Returns: the new pixbuf
    */
-  Pixbuf flip(bool horizontal)
+  gdkpixbuf.pixbuf.Pixbuf flip(bool horizontal)
   {
     PixbufC* _cretval;
-    _cretval = gdk_pixbuf_flip(cast(PixbufC*)cPtr, horizontal);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    _cretval = gdk_pixbuf_flip(cast(const(PixbufC)*)cPtr, horizontal);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -908,7 +907,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   int getBitsPerSample()
   {
     int _retval;
-    _retval = gdk_pixbuf_get_bits_per_sample(cast(PixbufC*)cPtr);
+    _retval = gdk_pixbuf_get_bits_per_sample(cast(const(PixbufC)*)cPtr);
     return _retval;
   }
 
@@ -919,7 +918,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   size_t getByteLength()
   {
     size_t _retval;
-    _retval = gdk_pixbuf_get_byte_length(cast(PixbufC*)cPtr);
+    _retval = gdk_pixbuf_get_byte_length(cast(const(PixbufC)*)cPtr);
     return _retval;
   }
 
@@ -927,11 +926,11 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    * Queries the color space of a pixbuf.
    * Returns: Color space.
    */
-  Colorspace getColorspace()
+  gdkpixbuf.types.Colorspace getColorspace()
   {
     GdkColorspace _cretval;
-    _cretval = gdk_pixbuf_get_colorspace(cast(PixbufC*)cPtr);
-    Colorspace _retval = cast(Colorspace)_cretval;
+    _cretval = gdk_pixbuf_get_colorspace(cast(const(PixbufC)*)cPtr);
+    gdkpixbuf.types.Colorspace _retval = cast(gdkpixbuf.types.Colorspace)_cretval;
     return _retval;
   }
 
@@ -942,7 +941,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   bool getHasAlpha()
   {
     bool _retval;
-    _retval = gdk_pixbuf_get_has_alpha(cast(PixbufC*)cPtr);
+    _retval = gdk_pixbuf_get_has_alpha(cast(const(PixbufC)*)cPtr);
     return _retval;
   }
 
@@ -953,7 +952,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   int getHeight()
   {
     int _retval;
-    _retval = gdk_pixbuf_get_height(cast(PixbufC*)cPtr);
+    _retval = gdk_pixbuf_get_height(cast(const(PixbufC)*)cPtr);
     return _retval;
   }
 
@@ -964,7 +963,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   int getNChannels()
   {
     int _retval;
-    _retval = gdk_pixbuf_get_n_channels(cast(PixbufC*)cPtr);
+    _retval = gdk_pixbuf_get_n_channels(cast(const(PixbufC)*)cPtr);
     return _retval;
   }
 
@@ -992,7 +991,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = gdk_pixbuf_get_option(cast(PixbufC*)cPtr, _key);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -1024,7 +1023,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   {
     ubyte* _cretval;
     uint _cretlength;
-    _cretval = gdk_pixbuf_get_pixels_with_length(cast(PixbufC*)cPtr, &_cretlength);
+    _cretval = gdk_pixbuf_get_pixels_with_length(cast(const(PixbufC)*)cPtr, &_cretlength);
     ubyte[] _retval;
 
     if (_cretval)
@@ -1042,7 +1041,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   int getRowstride()
   {
     int _retval;
-    _retval = gdk_pixbuf_get_rowstride(cast(PixbufC*)cPtr);
+    _retval = gdk_pixbuf_get_rowstride(cast(const(PixbufC)*)cPtr);
     return _retval;
   }
 
@@ -1053,7 +1052,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
   int getWidth()
   {
     int _retval;
-    _retval = gdk_pixbuf_get_width(cast(PixbufC*)cPtr);
+    _retval = gdk_pixbuf_get_width(cast(const(PixbufC)*)cPtr);
     return _retval;
   }
 
@@ -1072,11 +1071,11 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   height = height of region in src_pixbuf
    * Returns: a new pixbuf
    */
-  Pixbuf newSubpixbuf(int srcX, int srcY, int width, int height)
+  gdkpixbuf.pixbuf.Pixbuf newSubpixbuf(int srcX, int srcY, int width, int height)
   {
     PixbufC* _cretval;
     _cretval = gdk_pixbuf_new_subpixbuf(cast(PixbufC*)cPtr, srcX, srcY, width, height);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1090,11 +1089,11 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   incur a one-time copy of the pixel data for conversion into the
    *   returned #GBytes.
    */
-  Bytes readPixelBytes()
+  glib.bytes.Bytes readPixelBytes()
   {
     GBytes* _cretval;
-    _cretval = gdk_pixbuf_read_pixel_bytes(cast(PixbufC*)cPtr);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gdk_pixbuf_read_pixel_bytes(cast(const(PixbufC)*)cPtr);
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1106,7 +1105,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    */
   const(ubyte)* readPixels()
   {
-    auto _retval = gdk_pixbuf_read_pixels(cast(PixbufC*)cPtr);
+    auto _retval = gdk_pixbuf_read_pixels(cast(const(PixbufC)*)cPtr);
     return _retval;
   }
 
@@ -1132,11 +1131,11 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   angle = the angle to rotate by
    * Returns: the new pixbuf
    */
-  Pixbuf rotateSimple(PixbufRotation angle)
+  gdkpixbuf.pixbuf.Pixbuf rotateSimple(gdkpixbuf.types.PixbufRotation angle)
   {
     PixbufC* _cretval;
-    _cretval = gdk_pixbuf_rotate_simple(cast(PixbufC*)cPtr, angle);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    _cretval = gdk_pixbuf_rotate_simple(cast(const(PixbufC)*)cPtr, angle);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1156,9 +1155,9 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   saturation = saturation factor
    *   pixelate = whether to pixelate
    */
-  void saturateAndPixelate(Pixbuf dest, float saturation, bool pixelate)
+  void saturateAndPixelate(gdkpixbuf.pixbuf.Pixbuf dest, float saturation, bool pixelate)
   {
-    gdk_pixbuf_saturate_and_pixelate(cast(PixbufC*)cPtr, dest ? cast(PixbufC*)dest.cPtr(No.Dup) : null, saturation, pixelate);
+    gdk_pixbuf_saturate_and_pixelate(cast(const(PixbufC)*)cPtr, dest ? cast(PixbufC*)dest.cPtr(No.Dup) : null, saturation, pixelate);
   }
 
   /**
@@ -1215,15 +1214,15 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   optionValues = values for named options
    * Returns: whether an error was set
    */
-  bool saveToCallbackv(PixbufSaveFunc saveFunc, string type, string[] optionKeys, string[] optionValues)
+  bool saveToCallbackv(gdkpixbuf.types.PixbufSaveFunc saveFunc, string type, string[] optionKeys, string[] optionValues)
   {
     extern(C) bool _saveFuncCallback(const(ubyte)* buf, size_t count, GError** error, void* data)
     {
-      auto _dlg = cast(PixbufSaveFunc*)data;
+      auto _dlg = cast(gdkpixbuf.types.PixbufSaveFunc*)data;
       ubyte[] _buf;
       _buf.length = count;
       _buf[0 .. count] = buf[0 .. count];
-      auto _error = new ErrorG(error, No.Take);
+      auto _error = new glib.error.ErrorG(error, No.Take);
 
       bool _retval = (*_dlg)(_buf, _error);
        *error = *cast(GError**)_error.cPtr;
@@ -1268,7 +1267,7 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    * Returns: `TRUE` if the pixbuf was saved successfully, `FALSE` if an
    *   error was set.
    */
-  bool saveToStreamv(OutputStream stream, string type, string[] optionKeys, string[] optionValues, Cancellable cancellable)
+  bool saveToStreamv(gio.output_stream.OutputStream stream, string type, string[] optionKeys, string[] optionValues, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     const(char)* _type = type.toCString(No.Alloc);
@@ -1306,14 +1305,14 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   cancellable = optional `GCancellable` object, `NULL` to ignore
    *   callback = a `GAsyncReadyCallback` to call when the pixbuf is saved
    */
-  void saveToStreamvAsync(OutputStream stream, string type, string[] optionKeys, string[] optionValues, Cancellable cancellable, AsyncReadyCallback callback)
+  void saveToStreamvAsync(gio.output_stream.OutputStream stream, string type, string[] optionKeys, string[] optionValues, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -1394,9 +1393,9 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   scaleY = the scale factor in the Y direction
    *   interpType = the interpolation type for the transformation.
    */
-  void scale(Pixbuf dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, InterpType interpType)
+  void scale(gdkpixbuf.pixbuf.Pixbuf dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, gdkpixbuf.types.InterpType interpType)
   {
-    gdk_pixbuf_scale(cast(PixbufC*)cPtr, dest ? cast(PixbufC*)dest.cPtr(No.Dup) : null, destX, destY, destWidth, destHeight, offsetX, offsetY, scaleX, scaleY, interpType);
+    gdk_pixbuf_scale(cast(const(PixbufC)*)cPtr, dest ? cast(PixbufC*)dest.cPtr(No.Dup) : null, destX, destY, destWidth, destHeight, offsetX, offsetY, scaleX, scaleY, interpType);
   }
 
   /**
@@ -1419,11 +1418,11 @@ class Pixbuf : ObjectG, Icon, LoadableIcon
    *   interpType = the interpolation type for the transformation.
    * Returns: the new pixbuf
    */
-  Pixbuf scaleSimple(int destWidth, int destHeight, InterpType interpType)
+  gdkpixbuf.pixbuf.Pixbuf scaleSimple(int destWidth, int destHeight, gdkpixbuf.types.InterpType interpType)
   {
     PixbufC* _cretval;
-    _cretval = gdk_pixbuf_scale_simple(cast(PixbufC*)cPtr, destWidth, destHeight, interpType);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    _cretval = gdk_pixbuf_scale_simple(cast(const(PixbufC)*)cPtr, destWidth, destHeight, interpType);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 

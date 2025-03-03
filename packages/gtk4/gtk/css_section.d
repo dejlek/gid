@@ -1,8 +1,7 @@
 module gtk.css_section;
 
-import gid.global;
+import gid.gid;
 import gio.file;
-import gio.file_mixin;
 import glib.string_;
 import gobject.boxed;
 import gobject.object;
@@ -15,7 +14,7 @@ import gtk.types;
  * Because sections are nested into one another, you can use
  * [gtk.css_section.CssSection.getParent] to get the containing region.
  */
-class CssSection : Boxed
+class CssSection : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -49,7 +48,7 @@ class CssSection : Boxed
    *   end = The end location
    * Returns: a new `GtkCssSection`
    */
-  this(File file, CssLocation start, CssLocation end)
+  this(gio.file.File file, gtk.types.CssLocation start, gtk.types.CssLocation end)
   {
     GtkCssSection* _cretval;
     _cretval = gtk_css_section_new(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &start, &end);
@@ -61,11 +60,11 @@ class CssSection : Boxed
    * Returns: The end location of
    *   this section
    */
-  CssLocation getEndLocation()
+  gtk.types.CssLocation getEndLocation()
   {
     const(GtkCssLocation)* _cretval;
-    _cretval = gtk_css_section_get_end_location(cast(GtkCssSection*)cPtr);
-    CssLocation _retval;
+    _cretval = gtk_css_section_get_end_location(cast(const(GtkCssSection)*)cPtr);
+    gtk.types.CssLocation _retval;
     if (_cretval)
       _retval = *_cretval;
     return _retval;
@@ -78,11 +77,11 @@ class CssSection : Boxed
    * Returns: the `GFile` from which the `section`
    *   was parsed
    */
-  File getFile()
+  gio.file.File getFile()
   {
     GFile* _cretval;
-    _cretval = gtk_css_section_get_file(cast(GtkCssSection*)cPtr);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, No.Take);
+    _cretval = gtk_css_section_get_file(cast(const(GtkCssSection)*)cPtr);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -96,11 +95,11 @@ class CssSection : Boxed
    * a different file.
    * Returns: the parent section
    */
-  CssSection getParent()
+  gtk.css_section.CssSection getParent()
   {
     GtkCssSection* _cretval;
-    _cretval = gtk_css_section_get_parent(cast(GtkCssSection*)cPtr);
-    auto _retval = _cretval ? new CssSection(cast(void*)_cretval, No.Take) : null;
+    _cretval = gtk_css_section_get_parent(cast(const(GtkCssSection)*)cPtr);
+    auto _retval = _cretval ? new gtk.css_section.CssSection(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -109,11 +108,11 @@ class CssSection : Boxed
    * Returns: The start location of
    *   this section
    */
-  CssLocation getStartLocation()
+  gtk.types.CssLocation getStartLocation()
   {
     const(GtkCssLocation)* _cretval;
-    _cretval = gtk_css_section_get_start_location(cast(GtkCssSection*)cPtr);
-    CssLocation _retval;
+    _cretval = gtk_css_section_get_start_location(cast(const(GtkCssSection)*)cPtr);
+    gtk.types.CssLocation _retval;
     if (_cretval)
       _retval = *_cretval;
     return _retval;
@@ -126,9 +125,9 @@ class CssSection : Boxed
    * Params:
    *   string_ = a `GString` to print to
    */
-  void print(String string_)
+  void print(glib.string_.String string_)
   {
-    gtk_css_section_print(cast(GtkCssSection*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
+    gtk_css_section_print(cast(const(GtkCssSection)*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
   }
 
   /**
@@ -139,8 +138,8 @@ class CssSection : Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = gtk_css_section_to_string(cast(GtkCssSection*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    _cretval = gtk_css_section_to_string(cast(const(GtkCssSection)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

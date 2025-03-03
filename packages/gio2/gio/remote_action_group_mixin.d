@@ -1,7 +1,7 @@
 module gio.remote_action_group_mixin;
 
 public import gio.remote_action_group_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
@@ -43,7 +43,7 @@ template RemoteActionGroupT()
    *   parameter = the optional parameter to the activation
    *   platformData = the platform data to send
    */
-  override void activateActionFull(string actionName, VariantG parameter, VariantG platformData)
+  override void activateActionFull(string actionName, glib.variant.VariantG parameter, glib.variant.VariantG platformData)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_remote_action_group_activate_action_full(cast(GRemoteActionGroup*)cPtr, _actionName, parameter ? cast(VariantC*)parameter.cPtr(No.Dup) : null, platformData ? cast(VariantC*)platformData.cPtr(No.Dup) : null);
@@ -62,7 +62,7 @@ template RemoteActionGroupT()
    *   value = the new requested value for the state
    *   platformData = the platform data to send
    */
-  override void changeActionStateFull(string actionName, VariantG value, VariantG platformData)
+  override void changeActionStateFull(string actionName, glib.variant.VariantG value, glib.variant.VariantG platformData)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_remote_action_group_change_action_state_full(cast(GRemoteActionGroup*)cPtr, _actionName, value ? cast(VariantC*)value.cPtr(No.Dup) : null, platformData ? cast(VariantC*)platformData.cPtr(No.Dup) : null);

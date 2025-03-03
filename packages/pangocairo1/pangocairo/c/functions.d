@@ -31,7 +31,7 @@ __gshared extern(C)
   void function(PangoCairoFontMap* fontmap) c_pango_cairo_font_map_set_default;
   void function(PangoCairoFontMap* fontmap, double dpi) c_pango_cairo_font_map_set_resolution;
 
-  // Global
+  // global
   const(cairo_font_options_t)* function(PangoContext* context) c_pango_cairo_context_get_font_options;
   double function(PangoContext* context) c_pango_cairo_context_get_resolution;
   PangoCairoShapeRendererFunc function(PangoContext* context, void** data) c_pango_cairo_context_get_shape_renderer;
@@ -68,7 +68,7 @@ alias pango_cairo_font_map_get_resolution = c_pango_cairo_font_map_get_resolutio
 alias pango_cairo_font_map_set_default = c_pango_cairo_font_map_set_default;
 alias pango_cairo_font_map_set_resolution = c_pango_cairo_font_map_set_resolution;
 
-// Global
+// global
 alias pango_cairo_context_get_font_options = c_pango_cairo_context_get_font_options;
 alias pango_cairo_context_get_resolution = c_pango_cairo_context_get_resolution;
 alias pango_cairo_context_get_shape_renderer = c_pango_cairo_context_get_shape_renderer;
@@ -106,7 +106,7 @@ shared static this()
   gidLink(cast(void**)&pango_cairo_font_map_set_default, "pango_cairo_font_map_set_default", LIBS);
   gidLink(cast(void**)&pango_cairo_font_map_set_resolution, "pango_cairo_font_map_set_resolution", LIBS);
 
-  // Global
+  // global
   gidLink(cast(void**)&pango_cairo_context_get_font_options, "pango_cairo_context_get_font_options", LIBS);
   gidLink(cast(void**)&pango_cairo_context_get_resolution, "pango_cairo_context_get_resolution", LIBS);
   gidLink(cast(void**)&pango_cairo_context_get_shape_renderer, "pango_cairo_context_get_shape_renderer", LIBS);

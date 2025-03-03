@@ -2,10 +2,9 @@ module gtk.tree_view;
 
 import gdk.content_formats;
 import gdk.paintable;
-import gdk.paintable_mixin;
 import gdk.rectangle;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -18,13 +17,11 @@ import gtk.cell_renderer;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
 import gtk.editable;
-import gtk.editable_mixin;
 import gtk.scrollable;
 import gtk.scrollable_mixin;
 import gtk.tooltip;
 import gtk.tree_iter;
 import gtk.tree_model;
-import gtk.tree_model_mixin;
 import gtk.tree_path;
 import gtk.tree_selection;
 import gtk.tree_view_column;
@@ -103,7 +100,7 @@ import gtk.widget;
  * Deprecated: Use [gtk.list_view.ListView] for lists, and [gtk.column_view.ColumnView]
  *   for tabular lists
  */
-class TreeView : Widget, Scrollable
+class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -145,11 +142,11 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  static TreeView newWithModel(TreeModel model)
+  static gtk.tree_view.TreeView newWithModel(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
     _cretval = gtk_tree_view_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!TreeView(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_view.TreeView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -163,7 +160,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  int appendColumn(TreeViewColumn column)
+  int appendColumn(gtk.tree_view_column.TreeViewColumn column)
   {
     int _retval;
     _retval = gtk_tree_view_append_column(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null);
@@ -188,7 +185,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  bool collapseRow(TreePath path)
+  bool collapseRow(gtk.tree_path.TreePath path)
   {
     bool _retval;
     _retval = gtk_tree_view_collapse_row(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
@@ -309,11 +306,11 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  Paintable createRowDragIcon(TreePath path)
+  gdk.paintable.Paintable createRowDragIcon(gtk.tree_path.TreePath path)
   {
     GdkPaintable* _cretval;
     _cretval = gtk_tree_view_create_row_drag_icon(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -327,7 +324,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void enableModelDragDest(ContentFormats formats, DragAction actions)
+  void enableModelDragDest(gdk.content_formats.ContentFormats formats, gdk.types.DragAction actions)
   {
     gtk_tree_view_enable_model_drag_dest(cast(GtkTreeView*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null, actions);
   }
@@ -343,7 +340,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void enableModelDragSource(ModifierType startButtonMask, ContentFormats formats, DragAction actions)
+  void enableModelDragSource(gdk.types.ModifierType startButtonMask, gdk.content_formats.ContentFormats formats, gdk.types.DragAction actions)
   {
     gtk_tree_view_enable_model_drag_source(cast(GtkTreeView*)cPtr, startButtonMask, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null, actions);
   }
@@ -367,7 +364,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  bool expandRow(TreePath path, bool openAll)
+  bool expandRow(gtk.tree_path.TreePath path, bool openAll)
   {
     bool _retval;
     _retval = gtk_tree_view_expand_row(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, openAll);
@@ -382,7 +379,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void expandToPath(TreePath path)
+  void expandToPath(gtk.tree_path.TreePath path)
   {
     gtk_tree_view_expand_to_path(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
@@ -406,7 +403,7 @@ class TreeView : Widget, Scrollable
    * %NULL, or points to a node not found in the tree, the y and height fields of
    * the rectangle will be filled with 0. If column is %NULL, the x and width
    * fields will be filled with 0.  The returned rectangle is equivalent to the
-   * background_area passed to gtk_cell_renderer_render$(LPAREN)$(RPAREN).  These background
+   * background_area passed to [gtk.cell_renderer.CellRenderer.render].  These background
    * areas tile to cover the entire bin window.  Contrast with the cell_area,
    * returned by [gtk.tree_view.TreeView.getCellArea], which returns only the cell
    * itself, excluding surrounding borders and the tree expander area.
@@ -417,11 +414,11 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void getBackgroundArea(TreePath path, TreeViewColumn column, out Rectangle rect)
+  void getBackgroundArea(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, out gdk.rectangle.Rectangle rect)
   {
     GdkRectangle _rect;
     gtk_tree_view_get_background_area(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, &_rect);
-    rect = new Rectangle(cast(void*)&_rect, No.Take);
+    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
   }
 
   /**
@@ -432,7 +429,7 @@ class TreeView : Widget, Scrollable
    * fields will be filled with 0.  The sum of all cell rects does not cover the
    * entire tree; there are extra pixels in between rows, for example. The
    * returned rectangle is equivalent to the cell_area passed to
-   * gtk_cell_renderer_render$(LPAREN)$(RPAREN).  This function is only valid if tree_view is
+   * [gtk.cell_renderer.CellRenderer.render].  This function is only valid if tree_view is
    * realized.
    * Params:
    *   path = a `GtkTreePath` for the row, or %NULL to get only horizontal coordinates
@@ -441,11 +438,11 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void getCellArea(TreePath path, TreeViewColumn column, out Rectangle rect)
+  void getCellArea(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, out gdk.rectangle.Rectangle rect)
   {
     GdkRectangle _rect;
     gtk_tree_view_get_cell_area(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, &_rect);
-    rect = new Rectangle(cast(void*)&_rect, No.Take);
+    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
   }
 
   /**
@@ -457,11 +454,11 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  TreeViewColumn getColumn(int n)
+  gtk.tree_view_column.TreeViewColumn getColumn(int n)
   {
     GtkTreeViewColumn* _cretval;
     _cretval = gtk_tree_view_get_column(cast(GtkTreeView*)cPtr, n);
-    auto _retval = ObjectG.getDObject!TreeViewColumn(cast(GtkTreeViewColumn*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(GtkTreeViewColumn*)_cretval, No.Take);
     return _retval;
   }
 
@@ -472,15 +469,15 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  TreeViewColumn[] getColumns()
+  gtk.tree_view_column.TreeViewColumn[] getColumns()
   {
     GList* _cretval;
     _cretval = gtk_tree_view_get_columns(cast(GtkTreeView*)cPtr);
-    auto _retval = gListToD!(TreeViewColumn, GidOwnership.Container)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gtk.tree_view_column.TreeViewColumn, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 
-  alias getCursor = Widget.getCursor;
+  alias getCursor = gtk.widget.Widget.getCursor;
 
   /**
    * Fills in path and focus_column with the current path and focus column.  If
@@ -496,13 +493,13 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void getCursor(out TreePath path, out TreeViewColumn focusColumn)
+  void getCursor(out gtk.tree_path.TreePath path, out gtk.tree_view_column.TreeViewColumn focusColumn)
   {
     GtkTreePath* _path;
     GtkTreeViewColumn* _focusColumn;
     gtk_tree_view_get_cursor(cast(GtkTreeView*)cPtr, &_path, &_focusColumn);
-    path = new TreePath(cast(void*)_path, Yes.Take);
-    focusColumn = new TreeViewColumn(cast(void*)_focusColumn, No.Take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    focusColumn = new gtk.tree_view_column.TreeViewColumn(cast(void*)_focusColumn, No.Take);
   }
 
   /**
@@ -522,12 +519,12 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  bool getDestRowAtPos(int dragX, int dragY, out TreePath path, out TreeViewDropPosition pos)
+  bool getDestRowAtPos(int dragX, int dragY, out gtk.tree_path.TreePath path, out gtk.types.TreeViewDropPosition pos)
   {
     bool _retval;
     GtkTreePath* _path;
     _retval = gtk_tree_view_get_dest_row_at_pos(cast(GtkTreeView*)cPtr, dragX, dragY, &_path, &pos);
-    path = new TreePath(cast(void*)_path, Yes.Take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
     return _retval;
   }
 
@@ -539,11 +536,11 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void getDragDestRow(out TreePath path, out TreeViewDropPosition pos)
+  void getDragDestRow(out gtk.tree_path.TreePath path, out gtk.types.TreeViewDropPosition pos)
   {
     GtkTreePath* _path;
     gtk_tree_view_get_drag_dest_row(cast(GtkTreeView*)cPtr, &_path, &pos);
-    path = new TreePath(cast(void*)_path, Yes.Take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
   }
 
   /**
@@ -582,11 +579,11 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  TreeViewColumn getExpanderColumn()
+  gtk.tree_view_column.TreeViewColumn getExpanderColumn()
   {
     GtkTreeViewColumn* _cretval;
     _cretval = gtk_tree_view_get_expander_column(cast(GtkTreeView*)cPtr);
-    auto _retval = ObjectG.getDObject!TreeViewColumn(cast(GtkTreeViewColumn*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(GtkTreeViewColumn*)_cretval, No.Take);
     return _retval;
   }
 
@@ -610,11 +607,11 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  TreeViewGridLines getGridLines()
+  gtk.types.TreeViewGridLines getGridLines()
   {
     GtkTreeViewGridLines _cretval;
     _cretval = gtk_tree_view_get_grid_lines(cast(GtkTreeView*)cPtr);
-    TreeViewGridLines _retval = cast(TreeViewGridLines)_cretval;
+    gtk.types.TreeViewGridLines _retval = cast(gtk.types.TreeViewGridLines)_cretval;
     return _retval;
   }
 
@@ -692,11 +689,11 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  TreeModel getModel()
+  gtk.tree_model.TreeModel getModel()
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_view_get_model(cast(GtkTreeView*)cPtr);
-    auto _retval = ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -723,7 +720,7 @@ class TreeView : Widget, Scrollable
    * [gtk.tree_path.TreePath.free].  If column is non-%NULL, then it will be filled
    * with the column at that point.  cell_x and cell_y return the coordinates
    * relative to the cell background $(LPAREN)i.e. the background_area passed to
-   * gtk_cell_renderer_render$(LPAREN)$(RPAREN)$(RPAREN).  This function is only meaningful if
+   * [gtk.cell_renderer.CellRenderer.render]$(RPAREN).  This function is only meaningful if
    * tree_view is realized.  Therefore this function will always return %FALSE
    * if tree_view is not realized or does not have a model.
    * For converting widget coordinates $(LPAREN)eg. the ones you get from
@@ -744,14 +741,14 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  bool getPathAtPos(int x, int y, out TreePath path, out TreeViewColumn column, out int cellX, out int cellY)
+  bool getPathAtPos(int x, int y, out gtk.tree_path.TreePath path, out gtk.tree_view_column.TreeViewColumn column, out int cellX, out int cellY)
   {
     bool _retval;
     GtkTreePath* _path;
     GtkTreeViewColumn* _column;
     _retval = gtk_tree_view_get_path_at_pos(cast(GtkTreeView*)cPtr, x, y, &_path, &_column, cast(int*)&cellX, cast(int*)&cellY);
-    path = new TreePath(cast(void*)_path, Yes.Take);
-    column = new TreeViewColumn(cast(void*)_column, No.Take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    column = new gtk.tree_view_column.TreeViewColumn(cast(void*)_column, No.Take);
     return _retval;
   }
 
@@ -805,11 +802,11 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  Editable getSearchEntry()
+  gtk.editable.Editable getSearchEntry()
   {
     GtkEditable* _cretval;
     _cretval = gtk_tree_view_get_search_entry(cast(GtkTreeView*)cPtr);
-    auto _retval = ObjectG.getDObject!Editable(cast(GtkEditable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.editable.Editable)(cast(GtkEditable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -819,11 +816,11 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  TreeSelection getSelection()
+  gtk.tree_selection.TreeSelection getSelection()
   {
     GtkTreeSelection* _cretval;
     _cretval = gtk_tree_view_get_selection(cast(GtkTreeView*)cPtr);
-    auto _retval = ObjectG.getDObject!TreeSelection(cast(GtkTreeSelection*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_selection.TreeSelection)(cast(GtkTreeSelection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -879,16 +876,16 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  bool getTooltipContext(int x, int y, bool keyboardTip, out TreeModel model, out TreePath path, out TreeIter iter)
+  bool getTooltipContext(int x, int y, bool keyboardTip, out gtk.tree_model.TreeModel model, out gtk.tree_path.TreePath path, out gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
     GtkTreeModel* _model;
     GtkTreePath* _path;
     GtkTreeIter _iter;
     _retval = gtk_tree_view_get_tooltip_context(cast(GtkTreeView*)cPtr, x, y, keyboardTip, &_model, &_path, &_iter);
-    model = ObjectG.getDObject!TreeModel(_model, No.Take);
-    path = new TreePath(cast(void*)_path, Yes.Take);
-    iter = new TreeIter(cast(void*)&_iter, No.Take);
+    model = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -903,14 +900,14 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  bool getVisibleRange(out TreePath startPath, out TreePath endPath)
+  bool getVisibleRange(out gtk.tree_path.TreePath startPath, out gtk.tree_path.TreePath endPath)
   {
     bool _retval;
     GtkTreePath* _startPath;
     GtkTreePath* _endPath;
     _retval = gtk_tree_view_get_visible_range(cast(GtkTreeView*)cPtr, &_startPath, &_endPath);
-    startPath = new TreePath(cast(void*)_startPath, Yes.Take);
-    endPath = new TreePath(cast(void*)_endPath, Yes.Take);
+    startPath = new gtk.tree_path.TreePath(cast(void*)_startPath, Yes.Take);
+    endPath = new gtk.tree_path.TreePath(cast(void*)_endPath, Yes.Take);
     return _retval;
   }
 
@@ -925,11 +922,11 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void getVisibleRect(out Rectangle visibleRect)
+  void getVisibleRect(out gdk.rectangle.Rectangle visibleRect)
   {
     GdkRectangle _visibleRect;
     gtk_tree_view_get_visible_rect(cast(GtkTreeView*)cPtr, &_visibleRect);
-    visibleRect = new Rectangle(cast(void*)&_visibleRect, No.Take);
+    visibleRect = new gdk.rectangle.Rectangle(cast(void*)&_visibleRect, No.Take);
   }
 
   /**
@@ -944,7 +941,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  int insertColumn(TreeViewColumn column, int position)
+  int insertColumn(gtk.tree_view_column.TreeViewColumn column, int position)
   {
     int _retval;
     _retval = gtk_tree_view_insert_column(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, position);
@@ -967,13 +964,13 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  int insertColumnWithDataFunc(int position, string title, CellRenderer cell, TreeCellDataFunc func)
+  int insertColumnWithDataFunc(int position, string title, gtk.cell_renderer.CellRenderer cell, gtk.types.TreeCellDataFunc func)
   {
     extern(C) void _funcCallback(GtkTreeViewColumn* treeColumn, GtkCellRenderer* cell, GtkTreeModel* treeModel, GtkTreeIter* iter, void* data)
     {
-      auto _dlg = cast(TreeCellDataFunc*)data;
+      auto _dlg = cast(gtk.types.TreeCellDataFunc*)data;
 
-      (*_dlg)(ObjectG.getDObject!TreeViewColumn(cast(void*)treeColumn, No.Take), ObjectG.getDObject!CellRenderer(cast(void*)cell, No.Take), ObjectG.getDObject!TreeModel(cast(void*)treeModel, No.Take), iter ? new TreeIter(cast(void*)iter, No.Take) : null);
+      (*_dlg)(ObjectG.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)treeColumn, No.Take), ObjectG.getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -1016,14 +1013,14 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  bool isBlankAtPos(int x, int y, out TreePath path, out TreeViewColumn column, out int cellX, out int cellY)
+  bool isBlankAtPos(int x, int y, out gtk.tree_path.TreePath path, out gtk.tree_view_column.TreeViewColumn column, out int cellX, out int cellY)
   {
     bool _retval;
     GtkTreePath* _path;
     GtkTreeViewColumn* _column;
     _retval = gtk_tree_view_is_blank_at_pos(cast(GtkTreeView*)cPtr, x, y, &_path, &_column, cast(int*)&cellX, cast(int*)&cellY);
-    path = new TreePath(cast(void*)_path, Yes.Take);
-    column = new TreeViewColumn(cast(void*)_column, No.Take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    column = new gtk.tree_view_column.TreeViewColumn(cast(void*)_column, No.Take);
     return _retval;
   }
 
@@ -1049,13 +1046,13 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void mapExpandedRows(TreeViewMappingFunc func)
+  void mapExpandedRows(gtk.types.TreeViewMappingFunc func)
   {
     extern(C) void _funcCallback(GtkTreeView* treeView, GtkTreePath* path, void* userData)
     {
-      auto _dlg = cast(TreeViewMappingFunc*)userData;
+      auto _dlg = cast(gtk.types.TreeViewMappingFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!TreeView(cast(void*)treeView, No.Take), path ? new TreePath(cast(void*)path, No.Take) : null);
+      (*_dlg)(ObjectG.getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -1072,7 +1069,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void moveColumnAfter(TreeViewColumn column, TreeViewColumn baseColumn)
+  void moveColumnAfter(gtk.tree_view_column.TreeViewColumn column, gtk.tree_view_column.TreeViewColumn baseColumn)
   {
     gtk_tree_view_move_column_after(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, baseColumn ? cast(GtkTreeViewColumn*)baseColumn.cPtr(No.Dup) : null);
   }
@@ -1085,7 +1082,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  int removeColumn(TreeViewColumn column)
+  int removeColumn(gtk.tree_view_column.TreeViewColumn column)
   {
     int _retval;
     _retval = gtk_tree_view_remove_column(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null);
@@ -1100,7 +1097,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void rowActivated(TreePath path, TreeViewColumn column)
+  void rowActivated(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column)
   {
     gtk_tree_view_row_activated(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null);
   }
@@ -1113,7 +1110,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  bool rowExpanded(TreePath path)
+  bool rowExpanded(gtk.tree_path.TreePath path)
   {
     bool _retval;
     _retval = gtk_tree_view_row_expanded(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
@@ -1144,7 +1141,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void scrollToCell(TreePath path, TreeViewColumn column, bool useAlign, float rowAlign, float colAlign)
+  void scrollToCell(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, bool useAlign, float rowAlign, float colAlign)
   {
     gtk_tree_view_scroll_to_cell(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, useAlign, rowAlign, colAlign);
   }
@@ -1195,13 +1192,13 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setColumnDragFunction(TreeViewColumnDropFunc func)
+  void setColumnDragFunction(gtk.types.TreeViewColumnDropFunc func)
   {
     extern(C) bool _funcCallback(GtkTreeView* treeView, GtkTreeViewColumn* column, GtkTreeViewColumn* prevColumn, GtkTreeViewColumn* nextColumn, void* data)
     {
-      auto _dlg = cast(TreeViewColumnDropFunc*)data;
+      auto _dlg = cast(gtk.types.TreeViewColumnDropFunc*)data;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!TreeView(cast(void*)treeView, No.Take), ObjectG.getDObject!TreeViewColumn(cast(void*)column, No.Take), ObjectG.getDObject!TreeViewColumn(cast(void*)prevColumn, No.Take), ObjectG.getDObject!TreeViewColumn(cast(void*)nextColumn, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), ObjectG.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)column, No.Take), ObjectG.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)prevColumn, No.Take), ObjectG.getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)nextColumn, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -1211,7 +1208,7 @@ class TreeView : Widget, Scrollable
     gtk_tree_view_set_column_drag_function(cast(GtkTreeView*)cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
-  alias setCursor = Widget.setCursor;
+  alias setCursor = gtk.widget.Widget.setCursor;
 
   /**
    * Sets the current keyboard focus to be at path, and selects it.  This is
@@ -1231,7 +1228,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setCursor(TreePath path, TreeViewColumn focusColumn, bool startEditing)
+  void setCursor(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn focusColumn, bool startEditing)
   {
     gtk_tree_view_set_cursor(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, focusColumn ? cast(GtkTreeViewColumn*)focusColumn.cPtr(No.Dup) : null, startEditing);
   }
@@ -1258,7 +1255,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setCursorOnCell(TreePath path, TreeViewColumn focusColumn, CellRenderer focusCell, bool startEditing)
+  void setCursorOnCell(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn focusColumn, gtk.cell_renderer.CellRenderer focusCell, bool startEditing)
   {
     gtk_tree_view_set_cursor_on_cell(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, focusColumn ? cast(GtkTreeViewColumn*)focusColumn.cPtr(No.Dup) : null, focusCell ? cast(GtkCellRenderer*)focusCell.cPtr(No.Dup) : null, startEditing);
   }
@@ -1272,7 +1269,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setDragDestRow(TreePath path, TreeViewDropPosition pos)
+  void setDragDestRow(gtk.tree_path.TreePath path, gtk.types.TreeViewDropPosition pos)
   {
     gtk_tree_view_set_drag_dest_row(cast(GtkTreeView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, pos);
   }
@@ -1316,7 +1313,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setExpanderColumn(TreeViewColumn column)
+  void setExpanderColumn(gtk.tree_view_column.TreeViewColumn column)
   {
     gtk_tree_view_set_expander_column(cast(GtkTreeView*)cPtr, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null);
   }
@@ -1345,7 +1342,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setGridLines(TreeViewGridLines gridLines)
+  void setGridLines(gtk.types.TreeViewGridLines gridLines)
   {
     gtk_tree_view_set_grid_lines(cast(GtkTreeView*)cPtr, gridLines);
   }
@@ -1428,7 +1425,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setModel(TreeModel model)
+  void setModel(gtk.tree_model.TreeModel model)
   {
     gtk_tree_view_set_model(cast(GtkTreeView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
@@ -1466,13 +1463,13 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setRowSeparatorFunc(TreeViewRowSeparatorFunc func)
+  void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func)
   {
     extern(C) bool _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
     {
-      auto _dlg = cast(TreeViewRowSeparatorFunc*)data;
+      auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), iter ? new TreeIter(cast(void*)iter, No.Take) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -1525,7 +1522,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setSearchEntry(Editable entry)
+  void setSearchEntry(gtk.editable.Editable entry)
   {
     gtk_tree_view_set_search_entry(cast(GtkTreeView*)cPtr, entry ? cast(GtkEditable*)(cast(ObjectG)entry).cPtr(No.Dup) : null);
   }
@@ -1539,14 +1536,14 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setSearchEqualFunc(TreeViewSearchEqualFunc searchEqualFunc)
+  void setSearchEqualFunc(gtk.types.TreeViewSearchEqualFunc searchEqualFunc)
   {
     extern(C) bool _searchEqualFuncCallback(GtkTreeModel* model, int column, const(char)* key, GtkTreeIter* iter, void* searchData)
     {
-      auto _dlg = cast(TreeViewSearchEqualFunc*)searchData;
+      auto _dlg = cast(gtk.types.TreeViewSearchEqualFunc*)searchData;
       string _key = key.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), column, _key, iter ? new TreeIter(cast(void*)iter, No.Take) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), column, _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _searchEqualFuncCB = searchEqualFunc ? &_searchEqualFuncCallback : null;
@@ -1592,7 +1589,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setTooltipCell(Tooltip tooltip, TreePath path, TreeViewColumn column, CellRenderer cell)
+  void setTooltipCell(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, gtk.cell_renderer.CellRenderer cell)
   {
     gtk_tree_view_set_tooltip_cell(cast(GtkTreeView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null);
   }
@@ -1626,7 +1623,7 @@ class TreeView : Widget, Scrollable
 
    * Deprecated: Use [gtk.list_view.ListView] or [gtk.column_view.ColumnView] instead
    */
-  void setTooltipRow(Tooltip tooltip, TreePath path)
+  void setTooltipRow(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path)
   {
     gtk_tree_view_set_tooltip_row(cast(GtkTreeView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
@@ -1659,8 +1656,8 @@ class TreeView : Widget, Scrollable
    * The number of columns of the treeview has changed.
    *   treeView = the instance the signal is connected to
    */
-  alias ColumnsChangedCallbackDlg = void delegate(TreeView treeView);
-  alias ColumnsChangedCallbackFunc = void function(TreeView treeView);
+  alias ColumnsChangedCallbackDlg = void delegate(gtk.tree_view.TreeView treeView);
+  alias ColumnsChangedCallbackFunc = void function(gtk.tree_view.TreeView treeView);
 
   /**
    * Connect to ColumnsChanged signal.
@@ -1676,7 +1673,7 @@ class TreeView : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto treeView = getVal!TreeView(_paramVals);
+      auto treeView = getVal!(gtk.tree_view.TreeView)(_paramVals);
       _dClosure.dlg(treeView);
     }
 
@@ -1688,8 +1685,8 @@ class TreeView : Widget, Scrollable
    * The position of the cursor $(LPAREN)focused cell$(RPAREN) has changed.
    *   treeView = the instance the signal is connected to
    */
-  alias CursorChangedCallbackDlg = void delegate(TreeView treeView);
-  alias CursorChangedCallbackFunc = void function(TreeView treeView);
+  alias CursorChangedCallbackDlg = void delegate(gtk.tree_view.TreeView treeView);
+  alias CursorChangedCallbackFunc = void function(gtk.tree_view.TreeView treeView);
 
   /**
    * Connect to CursorChanged signal.
@@ -1705,7 +1702,7 @@ class TreeView : Widget, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto treeView = getVal!TreeView(_paramVals);
+      auto treeView = getVal!(gtk.tree_view.TreeView)(_paramVals);
       _dClosure.dlg(treeView);
     }
 
@@ -1713,8 +1710,8 @@ class TreeView : Widget, Scrollable
     return connectSignalClosure("cursor-changed", closure, after);
   }
 
-  alias ExpandCollapseCursorRowCallbackDlg = bool delegate(bool object, bool p0, bool p1, TreeView treeView);
-  alias ExpandCollapseCursorRowCallbackFunc = bool function(bool object, bool p0, bool p1, TreeView treeView);
+  alias ExpandCollapseCursorRowCallbackDlg = bool delegate(bool object, bool p0, bool p1, gtk.tree_view.TreeView treeView);
+  alias ExpandCollapseCursorRowCallbackFunc = bool function(bool object, bool p0, bool p1, gtk.tree_view.TreeView treeView);
 
   /**
    * Connect to ExpandCollapseCursorRow signal.
@@ -1731,10 +1728,10 @@ class TreeView : Widget, Scrollable
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto treeView = getVal!TreeView(_paramVals);
-      auto object = getVal!bool(&_paramVals[1]);
-      auto p0 = getVal!bool(&_paramVals[2]);
-      auto p1 = getVal!bool(&_paramVals[3]);
+      auto treeView = getVal!(gtk.tree_view.TreeView)(_paramVals);
+      auto object = getVal!(bool)(&_paramVals[1]);
+      auto p0 = getVal!(bool)(&_paramVals[2]);
+      auto p1 = getVal!(bool)(&_paramVals[3]);
       _retval = _dClosure.dlg(object, p0, p1, treeView);
       setVal!bool(_returnValue, _retval);
     }
@@ -1766,8 +1763,8 @@ class TreeView : Widget, Scrollable
    *   treeView = the instance the signal is connected to
    * Returns: %TRUE if step is supported, %FALSE otherwise.
    */
-  alias MoveCursorCallbackDlg = bool delegate(MovementStep step, int direction, bool extend, bool modify, TreeView treeView);
-  alias MoveCursorCallbackFunc = bool function(MovementStep step, int direction, bool extend, bool modify, TreeView treeView);
+  alias MoveCursorCallbackDlg = bool delegate(gtk.types.MovementStep step, int direction, bool extend, bool modify, gtk.tree_view.TreeView treeView);
+  alias MoveCursorCallbackFunc = bool function(gtk.types.MovementStep step, int direction, bool extend, bool modify, gtk.tree_view.TreeView treeView);
 
   /**
    * Connect to MoveCursor signal.
@@ -1784,11 +1781,11 @@ class TreeView : Widget, Scrollable
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto treeView = getVal!TreeView(_paramVals);
-      auto step = getVal!MovementStep(&_paramVals[1]);
-      auto direction = getVal!int(&_paramVals[2]);
-      auto extend = getVal!bool(&_paramVals[3]);
-      auto modify = getVal!bool(&_paramVals[4]);
+      auto treeView = getVal!(gtk.tree_view.TreeView)(_paramVals);
+      auto step = getVal!(gtk.types.MovementStep)(&_paramVals[1]);
+      auto direction = getVal!(int)(&_paramVals[2]);
+      auto extend = getVal!(bool)(&_paramVals[3]);
+      auto modify = getVal!(bool)(&_paramVals[4]);
       _retval = _dClosure.dlg(step, direction, extend, modify, treeView);
       setVal!bool(_returnValue, _retval);
     }
@@ -1814,8 +1811,8 @@ class TreeView : Widget, Scrollable
    *   column = the `GtkTreeViewColumn` in which the activation occurred
    *   treeView = the instance the signal is connected to
    */
-  alias RowActivatedCallbackDlg = void delegate(TreePath path, TreeViewColumn column, TreeView treeView);
-  alias RowActivatedCallbackFunc = void function(TreePath path, TreeViewColumn column, TreeView treeView);
+  alias RowActivatedCallbackDlg = void delegate(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, gtk.tree_view.TreeView treeView);
+  alias RowActivatedCallbackFunc = void function(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, gtk.tree_view.TreeView treeView);
 
   /**
    * Connect to RowActivated signal.
@@ -1831,9 +1828,9 @@ class TreeView : Widget, Scrollable
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto treeView = getVal!TreeView(_paramVals);
-      auto path = getVal!TreePath(&_paramVals[1]);
-      auto column = getVal!TreeViewColumn(&_paramVals[2]);
+      auto treeView = getVal!(gtk.tree_view.TreeView)(_paramVals);
+      auto path = getVal!(gtk.tree_path.TreePath)(&_paramVals[1]);
+      auto column = getVal!(gtk.tree_view_column.TreeViewColumn)(&_paramVals[2]);
       _dClosure.dlg(path, column, treeView);
     }
 
@@ -1848,8 +1845,8 @@ class TreeView : Widget, Scrollable
    *   path = a tree path that points to the row
    *   treeView = the instance the signal is connected to
    */
-  alias RowCollapsedCallbackDlg = void delegate(TreeIter iter, TreePath path, TreeView treeView);
-  alias RowCollapsedCallbackFunc = void function(TreeIter iter, TreePath path, TreeView treeView);
+  alias RowCollapsedCallbackDlg = void delegate(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView);
+  alias RowCollapsedCallbackFunc = void function(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView);
 
   /**
    * Connect to RowCollapsed signal.
@@ -1865,9 +1862,9 @@ class TreeView : Widget, Scrollable
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto treeView = getVal!TreeView(_paramVals);
-      auto iter = getVal!TreeIter(&_paramVals[1]);
-      auto path = getVal!TreePath(&_paramVals[2]);
+      auto treeView = getVal!(gtk.tree_view.TreeView)(_paramVals);
+      auto iter = getVal!(gtk.tree_iter.TreeIter)(&_paramVals[1]);
+      auto path = getVal!(gtk.tree_path.TreePath)(&_paramVals[2]);
       _dClosure.dlg(iter, path, treeView);
     }
 
@@ -1882,8 +1879,8 @@ class TreeView : Widget, Scrollable
    *   path = a tree path that points to the row
    *   treeView = the instance the signal is connected to
    */
-  alias RowExpandedCallbackDlg = void delegate(TreeIter iter, TreePath path, TreeView treeView);
-  alias RowExpandedCallbackFunc = void function(TreeIter iter, TreePath path, TreeView treeView);
+  alias RowExpandedCallbackDlg = void delegate(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView);
+  alias RowExpandedCallbackFunc = void function(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView);
 
   /**
    * Connect to RowExpanded signal.
@@ -1899,9 +1896,9 @@ class TreeView : Widget, Scrollable
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto treeView = getVal!TreeView(_paramVals);
-      auto iter = getVal!TreeIter(&_paramVals[1]);
-      auto path = getVal!TreePath(&_paramVals[2]);
+      auto treeView = getVal!(gtk.tree_view.TreeView)(_paramVals);
+      auto iter = getVal!(gtk.tree_iter.TreeIter)(&_paramVals[1]);
+      auto path = getVal!(gtk.tree_path.TreePath)(&_paramVals[2]);
       _dClosure.dlg(iter, path, treeView);
     }
 
@@ -1909,8 +1906,8 @@ class TreeView : Widget, Scrollable
     return connectSignalClosure("row-expanded", closure, after);
   }
 
-  alias SelectAllCallbackDlg = bool delegate(TreeView treeView);
-  alias SelectAllCallbackFunc = bool function(TreeView treeView);
+  alias SelectAllCallbackDlg = bool delegate(gtk.tree_view.TreeView treeView);
+  alias SelectAllCallbackFunc = bool function(gtk.tree_view.TreeView treeView);
 
   /**
    * Connect to SelectAll signal.
@@ -1927,7 +1924,7 @@ class TreeView : Widget, Scrollable
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto treeView = getVal!TreeView(_paramVals);
+      auto treeView = getVal!(gtk.tree_view.TreeView)(_paramVals);
       _retval = _dClosure.dlg(treeView);
       setVal!bool(_returnValue, _retval);
     }
@@ -1936,8 +1933,8 @@ class TreeView : Widget, Scrollable
     return connectSignalClosure("select-all", closure, after);
   }
 
-  alias SelectCursorParentCallbackDlg = bool delegate(TreeView treeView);
-  alias SelectCursorParentCallbackFunc = bool function(TreeView treeView);
+  alias SelectCursorParentCallbackDlg = bool delegate(gtk.tree_view.TreeView treeView);
+  alias SelectCursorParentCallbackFunc = bool function(gtk.tree_view.TreeView treeView);
 
   /**
    * Connect to SelectCursorParent signal.
@@ -1954,7 +1951,7 @@ class TreeView : Widget, Scrollable
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto treeView = getVal!TreeView(_paramVals);
+      auto treeView = getVal!(gtk.tree_view.TreeView)(_paramVals);
       _retval = _dClosure.dlg(treeView);
       setVal!bool(_returnValue, _retval);
     }
@@ -1963,8 +1960,8 @@ class TreeView : Widget, Scrollable
     return connectSignalClosure("select-cursor-parent", closure, after);
   }
 
-  alias SelectCursorRowCallbackDlg = bool delegate(bool object, TreeView treeView);
-  alias SelectCursorRowCallbackFunc = bool function(bool object, TreeView treeView);
+  alias SelectCursorRowCallbackDlg = bool delegate(bool object, gtk.tree_view.TreeView treeView);
+  alias SelectCursorRowCallbackFunc = bool function(bool object, gtk.tree_view.TreeView treeView);
 
   /**
    * Connect to SelectCursorRow signal.
@@ -1981,8 +1978,8 @@ class TreeView : Widget, Scrollable
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto treeView = getVal!TreeView(_paramVals);
-      auto object = getVal!bool(&_paramVals[1]);
+      auto treeView = getVal!(gtk.tree_view.TreeView)(_paramVals);
+      auto object = getVal!(bool)(&_paramVals[1]);
       _retval = _dClosure.dlg(object, treeView);
       setVal!bool(_returnValue, _retval);
     }
@@ -1991,8 +1988,8 @@ class TreeView : Widget, Scrollable
     return connectSignalClosure("select-cursor-row", closure, after);
   }
 
-  alias StartInteractiveSearchCallbackDlg = bool delegate(TreeView treeView);
-  alias StartInteractiveSearchCallbackFunc = bool function(TreeView treeView);
+  alias StartInteractiveSearchCallbackDlg = bool delegate(gtk.tree_view.TreeView treeView);
+  alias StartInteractiveSearchCallbackFunc = bool function(gtk.tree_view.TreeView treeView);
 
   /**
    * Connect to StartInteractiveSearch signal.
@@ -2009,7 +2006,7 @@ class TreeView : Widget, Scrollable
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto treeView = getVal!TreeView(_paramVals);
+      auto treeView = getVal!(gtk.tree_view.TreeView)(_paramVals);
       _retval = _dClosure.dlg(treeView);
       setVal!bool(_returnValue, _retval);
     }
@@ -2027,8 +2024,8 @@ class TreeView : Widget, Scrollable
    *   treeView = the instance the signal is connected to
    * Returns: %FALSE to allow collapsing, %TRUE to reject
    */
-  alias TestCollapseRowCallbackDlg = bool delegate(TreeIter iter, TreePath path, TreeView treeView);
-  alias TestCollapseRowCallbackFunc = bool function(TreeIter iter, TreePath path, TreeView treeView);
+  alias TestCollapseRowCallbackDlg = bool delegate(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView);
+  alias TestCollapseRowCallbackFunc = bool function(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView);
 
   /**
    * Connect to TestCollapseRow signal.
@@ -2045,9 +2042,9 @@ class TreeView : Widget, Scrollable
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto treeView = getVal!TreeView(_paramVals);
-      auto iter = getVal!TreeIter(&_paramVals[1]);
-      auto path = getVal!TreePath(&_paramVals[2]);
+      auto treeView = getVal!(gtk.tree_view.TreeView)(_paramVals);
+      auto iter = getVal!(gtk.tree_iter.TreeIter)(&_paramVals[1]);
+      auto path = getVal!(gtk.tree_path.TreePath)(&_paramVals[2]);
       _retval = _dClosure.dlg(iter, path, treeView);
       setVal!bool(_returnValue, _retval);
     }
@@ -2065,8 +2062,8 @@ class TreeView : Widget, Scrollable
    *   treeView = the instance the signal is connected to
    * Returns: %FALSE to allow expansion, %TRUE to reject
    */
-  alias TestExpandRowCallbackDlg = bool delegate(TreeIter iter, TreePath path, TreeView treeView);
-  alias TestExpandRowCallbackFunc = bool function(TreeIter iter, TreePath path, TreeView treeView);
+  alias TestExpandRowCallbackDlg = bool delegate(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView);
+  alias TestExpandRowCallbackFunc = bool function(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView);
 
   /**
    * Connect to TestExpandRow signal.
@@ -2083,9 +2080,9 @@ class TreeView : Widget, Scrollable
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto treeView = getVal!TreeView(_paramVals);
-      auto iter = getVal!TreeIter(&_paramVals[1]);
-      auto path = getVal!TreePath(&_paramVals[2]);
+      auto treeView = getVal!(gtk.tree_view.TreeView)(_paramVals);
+      auto iter = getVal!(gtk.tree_iter.TreeIter)(&_paramVals[1]);
+      auto path = getVal!(gtk.tree_path.TreePath)(&_paramVals[2]);
       _retval = _dClosure.dlg(iter, path, treeView);
       setVal!bool(_returnValue, _retval);
     }
@@ -2094,8 +2091,8 @@ class TreeView : Widget, Scrollable
     return connectSignalClosure("test-expand-row", closure, after);
   }
 
-  alias ToggleCursorRowCallbackDlg = bool delegate(TreeView treeView);
-  alias ToggleCursorRowCallbackFunc = bool function(TreeView treeView);
+  alias ToggleCursorRowCallbackDlg = bool delegate(gtk.tree_view.TreeView treeView);
+  alias ToggleCursorRowCallbackFunc = bool function(gtk.tree_view.TreeView treeView);
 
   /**
    * Connect to ToggleCursorRow signal.
@@ -2112,7 +2109,7 @@ class TreeView : Widget, Scrollable
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto treeView = getVal!TreeView(_paramVals);
+      auto treeView = getVal!(gtk.tree_view.TreeView)(_paramVals);
       _retval = _dClosure.dlg(treeView);
       setVal!bool(_returnValue, _retval);
     }
@@ -2121,8 +2118,8 @@ class TreeView : Widget, Scrollable
     return connectSignalClosure("toggle-cursor-row", closure, after);
   }
 
-  alias UnselectAllCallbackDlg = bool delegate(TreeView treeView);
-  alias UnselectAllCallbackFunc = bool function(TreeView treeView);
+  alias UnselectAllCallbackDlg = bool delegate(gtk.tree_view.TreeView treeView);
+  alias UnselectAllCallbackFunc = bool function(gtk.tree_view.TreeView treeView);
 
   /**
    * Connect to UnselectAll signal.
@@ -2139,7 +2136,7 @@ class TreeView : Widget, Scrollable
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto treeView = getVal!TreeView(_paramVals);
+      auto treeView = getVal!(gtk.tree_view.TreeView)(_paramVals);
       _retval = _dClosure.dlg(treeView);
       setVal!bool(_returnValue, _retval);
     }

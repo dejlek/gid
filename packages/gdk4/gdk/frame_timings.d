@@ -3,7 +3,7 @@ module gdk.frame_timings;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -15,7 +15,7 @@ import gobject.boxed;
  * the event or audio streams, and for measuring quality metrics for the
  * application’s display, such as latency and jitter.
  */
-class FrameTimings : Boxed
+class FrameTimings : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

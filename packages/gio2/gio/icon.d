@@ -1,7 +1,7 @@
 module gio.icon;
 
 public import gio.icon_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -50,11 +50,11 @@ interface Icon
    *   value = a #GVariant created with [gio.icon.Icon.serialize]
    * Returns: a #GIcon, or %NULL when deserialization fails.
    */
-  static Icon deserialize(VariantG value)
+  static gio.icon.Icon deserialize(glib.variant.VariantG value)
   {
     GIcon* _cretval;
     _cretval = g_icon_deserialize(value ? cast(VariantC*)value.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -69,7 +69,7 @@ interface Icon
    * Returns: An object implementing the #GIcon
    *   interface or %NULL if error is set.
    */
-  static Icon newForString(string str)
+  static gio.icon.Icon newForString(string str)
   {
     GIcon* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -77,7 +77,7 @@ interface Icon
     _cretval = g_icon_new_for_string(_str, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ interface Icon
    *   icon2 = pointer to the second #GIcon.
    * Returns: %TRUE if icon1 is equal to icon2. %FALSE otherwise.
    */
-  bool equal(Icon icon2);
+  bool equal(gio.icon.Icon icon2);
 
   /**
    * Gets a hash for an icon.
@@ -104,7 +104,7 @@ interface Icon
    * $(LPAREN)as opposed to over the network$(RPAREN), and within the same file system namespace.
    * Returns: a #GVariant, or %NULL when serialization fails. The #GVariant will not be floating.
    */
-  VariantG serialize();
+  glib.variant.VariantG serialize();
 
   /**
    * Generates a textual representation of icon that can be used for

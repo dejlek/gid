@@ -4,7 +4,7 @@ import cairo.region;
 import gdk.display;
 import gdk.surface;
 import gdk.texture;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 import graphene.rect;
@@ -24,7 +24,7 @@ import gsk.types;
  * in order to create the appropriate windowing system resources needed
  * to render the scene.
  */
-class Renderer : ObjectG
+class Renderer : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -53,11 +53,11 @@ class Renderer : ObjectG
    *   surface = a `GdkSurface`
    * Returns: a `GskRenderer`
    */
-  static Renderer newForSurface(Surface surface)
+  static gsk.renderer.Renderer newForSurface(gdk.surface.Surface surface)
   {
     GskRenderer* _cretval;
     _cretval = gsk_renderer_new_for_surface(surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Renderer(cast(GskRenderer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gsk.renderer.Renderer)(cast(GskRenderer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -66,11 +66,11 @@ class Renderer : ObjectG
    * If the renderer has not been realized yet, %NULL will be returned.
    * Returns: a `GdkSurface`
    */
-  Surface getSurface()
+  gdk.surface.Surface getSurface()
   {
     GdkSurface* _cretval;
     _cretval = gsk_renderer_get_surface(cast(GskRenderer*)cPtr);
-    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class Renderer : ObjectG
    *   surface = the `GdkSurface` renderer will be used on
    * Returns: Whether the renderer was successfully realized
    */
-  bool realize(Surface surface)
+  bool realize(gdk.surface.Surface surface)
   {
     bool _retval;
     GError *_err;
@@ -117,7 +117,7 @@ class Renderer : ObjectG
    *   display = the `GdkDisplay` renderer will be used on
    * Returns: Whether the renderer was successfully realized
    */
-  bool realizeForDisplay(Display display)
+  bool realizeForDisplay(gdk.display.Display display)
   {
     bool _retval;
     GError *_err;
@@ -142,9 +142,9 @@ class Renderer : ObjectG
    *   region = the `cairo_region_t` that must be redrawn or %NULL
    *     for the whole window
    */
-  void render(RenderNode root, Region region)
+  void render(gsk.render_node.RenderNode root, cairo.region.Region region)
   {
-    gsk_renderer_render(cast(GskRenderer*)cPtr, root ? cast(GskRenderNode*)root.cPtr(No.Dup) : null, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
+    gsk_renderer_render(cast(GskRenderer*)cPtr, root ? cast(GskRenderNode*)root.cPtr(No.Dup) : null, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
   }
 
   /**
@@ -159,11 +159,11 @@ class Renderer : ObjectG
    *   viewport = the section to draw or %NULL to use root's bounds
    * Returns: a `GdkTexture` with the rendered contents of root.
    */
-  Texture renderTexture(RenderNode root, Rect viewport)
+  gdk.texture.Texture renderTexture(gsk.render_node.RenderNode root, graphene.rect.Rect viewport)
   {
     GdkTexture* _cretval;
-    _cretval = gsk_renderer_render_texture(cast(GskRenderer*)cPtr, root ? cast(GskRenderNode*)root.cPtr(No.Dup) : null, viewport ? cast(graphene_rect_t*)viewport.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, Yes.Take);
+    _cretval = gsk_renderer_render_texture(cast(GskRenderer*)cPtr, root ? cast(GskRenderNode*)root.cPtr(No.Dup) : null, viewport ? cast(const(graphene_rect_t)*)viewport.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 

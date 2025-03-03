@@ -1,6 +1,6 @@
 module pango.font_description;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
@@ -13,7 +13,7 @@ import pango.types;
  * available on the system and also for specifying the characteristics of
  * a font to load.
  */
-class FontDescription : Boxed
+class FontDescription : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -64,10 +64,10 @@ class FontDescription : Boxed
    *   newMatch = a `PangoFontDescription`
    * Returns: %TRUE if new_match is a better match
    */
-  bool betterMatch(FontDescription oldMatch, FontDescription newMatch)
+  bool betterMatch(pango.font_description.FontDescription oldMatch, pango.font_description.FontDescription newMatch)
   {
     bool _retval;
-    _retval = pango_font_description_better_match(cast(PangoFontDescription*)cPtr, oldMatch ? cast(PangoFontDescription*)oldMatch.cPtr(No.Dup) : null, newMatch ? cast(PangoFontDescription*)newMatch.cPtr(No.Dup) : null);
+    _retval = pango_font_description_better_match(cast(const(PangoFontDescription)*)cPtr, oldMatch ? cast(const(PangoFontDescription)*)oldMatch.cPtr(No.Dup) : null, newMatch ? cast(const(PangoFontDescription)*)newMatch.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -77,11 +77,11 @@ class FontDescription : Boxed
    *   which should be freed with [pango.font_description.FontDescription.free],
    *   or %NULL if desc was %NULL.
    */
-  FontDescription copy()
+  pango.font_description.FontDescription copy()
   {
     PangoFontDescription* _cretval;
-    _cretval = pango_font_description_copy(cast(PangoFontDescription*)cPtr);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = pango_font_description_copy(cast(const(PangoFontDescription)*)cPtr);
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -96,11 +96,11 @@ class FontDescription : Boxed
    *   which should be freed with [pango.font_description.FontDescription.free],
    *   or %NULL if desc was %NULL.
    */
-  FontDescription copyStatic()
+  pango.font_description.FontDescription copyStatic()
   {
     PangoFontDescription* _cretval;
-    _cretval = pango_font_description_copy_static(cast(PangoFontDescription*)cPtr);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = pango_font_description_copy_static(cast(const(PangoFontDescription)*)cPtr);
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -115,10 +115,10 @@ class FontDescription : Boxed
    * Returns: %TRUE if the two font descriptions are identical,
    *   %FALSE otherwise.
    */
-  bool equal(FontDescription desc2)
+  bool equal(pango.font_description.FontDescription desc2)
   {
     bool _retval;
-    _retval = pango_font_description_equal(cast(PangoFontDescription*)cPtr, desc2 ? cast(PangoFontDescription*)desc2.cPtr(No.Dup) : null);
+    _retval = pango_font_description_equal(cast(const(PangoFontDescription)*)cPtr, desc2 ? cast(const(PangoFontDescription)*)desc2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -132,8 +132,8 @@ class FontDescription : Boxed
   string getFamily()
   {
     const(char)* _cretval;
-    _cretval = pango_font_description_get_family(cast(PangoFontDescription*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    _cretval = pango_font_description_get_family(cast(const(PangoFontDescription)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -144,11 +144,11 @@ class FontDescription : Boxed
    *   Use [pango.font_description.FontDescription.getSetFields] to find out
    *   if the field was explicitly set or not.
    */
-  Gravity getGravity()
+  pango.types.Gravity getGravity()
   {
     PangoGravity _cretval;
-    _cretval = pango_font_description_get_gravity(cast(PangoFontDescription*)cPtr);
-    Gravity _retval = cast(Gravity)_cretval;
+    _cretval = pango_font_description_get_gravity(cast(const(PangoFontDescription)*)cPtr);
+    pango.types.Gravity _retval = cast(pango.types.Gravity)_cretval;
     return _retval;
   }
 
@@ -157,11 +157,11 @@ class FontDescription : Boxed
    * Returns: a bitmask with bits set corresponding to the
    *   fields in desc that have been set.
    */
-  FontMask getSetFields()
+  pango.types.FontMask getSetFields()
   {
     PangoFontMask _cretval;
-    _cretval = pango_font_description_get_set_fields(cast(PangoFontDescription*)cPtr);
-    FontMask _retval = cast(FontMask)_cretval;
+    _cretval = pango_font_description_get_set_fields(cast(const(PangoFontDescription)*)cPtr);
+    pango.types.FontMask _retval = cast(pango.types.FontMask)_cretval;
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class FontDescription : Boxed
   int getSize()
   {
     int _retval;
-    _retval = pango_font_description_get_size(cast(PangoFontDescription*)cPtr);
+    _retval = pango_font_description_get_size(cast(const(PangoFontDescription)*)cPtr);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class FontDescription : Boxed
   bool getSizeIsAbsolute()
   {
     bool _retval;
-    _retval = pango_font_description_get_size_is_absolute(cast(PangoFontDescription*)cPtr);
+    _retval = pango_font_description_get_size_is_absolute(cast(const(PangoFontDescription)*)cPtr);
     return _retval;
   }
 
@@ -207,11 +207,11 @@ class FontDescription : Boxed
    *   Use [pango.font_description.FontDescription.getSetFields] to find
    *   out if the field was explicitly set or not.
    */
-  Stretch getStretch()
+  pango.types.Stretch getStretch()
   {
     PangoStretch _cretval;
-    _cretval = pango_font_description_get_stretch(cast(PangoFontDescription*)cPtr);
-    Stretch _retval = cast(Stretch)_cretval;
+    _cretval = pango_font_description_get_stretch(cast(const(PangoFontDescription)*)cPtr);
+    pango.types.Stretch _retval = cast(pango.types.Stretch)_cretval;
     return _retval;
   }
 
@@ -222,11 +222,11 @@ class FontDescription : Boxed
    *   Use [pango.font_description.FontDescription.getSetFields] to
    *   find out if the field was explicitly set or not.
    */
-  Style getStyle()
+  pango.types.Style getStyle()
   {
     PangoStyle _cretval;
-    _cretval = pango_font_description_get_style(cast(PangoFontDescription*)cPtr);
-    Style _retval = cast(Style)_cretval;
+    _cretval = pango_font_description_get_style(cast(const(PangoFontDescription)*)cPtr);
+    pango.types.Style _retval = cast(pango.types.Style)_cretval;
     return _retval;
   }
 
@@ -237,11 +237,11 @@ class FontDescription : Boxed
    *   Use [pango.font_description.FontDescription.getSetFields] to find
    *   out if the field was explicitly set or not.
    */
-  Variant getVariant()
+  pango.types.Variant getVariant()
   {
     PangoVariant _cretval;
-    _cretval = pango_font_description_get_variant(cast(PangoFontDescription*)cPtr);
-    Variant _retval = cast(Variant)_cretval;
+    _cretval = pango_font_description_get_variant(cast(const(PangoFontDescription)*)cPtr);
+    pango.types.Variant _retval = cast(pango.types.Variant)_cretval;
     return _retval;
   }
 
@@ -255,8 +255,8 @@ class FontDescription : Boxed
   string getVariations()
   {
     const(char)* _cretval;
-    _cretval = pango_font_description_get_variations(cast(PangoFontDescription*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    _cretval = pango_font_description_get_variations(cast(const(PangoFontDescription)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -267,11 +267,11 @@ class FontDescription : Boxed
    *   Use [pango.font_description.FontDescription.getSetFields] to find
    *   out if the field was explicitly set or not.
    */
-  Weight getWeight()
+  pango.types.Weight getWeight()
   {
     PangoWeight _cretval;
-    _cretval = pango_font_description_get_weight(cast(PangoFontDescription*)cPtr);
-    Weight _retval = cast(Weight)_cretval;
+    _cretval = pango_font_description_get_weight(cast(const(PangoFontDescription)*)cPtr);
+    pango.types.Weight _retval = cast(pango.types.Weight)_cretval;
     return _retval;
   }
 
@@ -284,7 +284,7 @@ class FontDescription : Boxed
   uint hash()
   {
     uint _retval;
-    _retval = pango_font_description_hash(cast(PangoFontDescription*)cPtr);
+    _retval = pango_font_description_hash(cast(const(PangoFontDescription)*)cPtr);
     return _retval;
   }
 
@@ -302,9 +302,9 @@ class FontDescription : Boxed
    *     corresponding values from desc_to_merge, even if they
    *     are already exist.
    */
-  void merge(FontDescription descToMerge, bool replaceExisting)
+  void merge(pango.font_description.FontDescription descToMerge, bool replaceExisting)
   {
-    pango_font_description_merge(cast(PangoFontDescription*)cPtr, descToMerge ? cast(PangoFontDescription*)descToMerge.cPtr(No.Dup) : null, replaceExisting);
+    pango_font_description_merge(cast(PangoFontDescription*)cPtr, descToMerge ? cast(const(PangoFontDescription)*)descToMerge.cPtr(No.Dup) : null, replaceExisting);
   }
 
   /**
@@ -320,9 +320,9 @@ class FontDescription : Boxed
    *     corresponding values from desc_to_merge, even if they
    *     are already exist.
    */
-  void mergeStatic(FontDescription descToMerge, bool replaceExisting)
+  void mergeStatic(pango.font_description.FontDescription descToMerge, bool replaceExisting)
   {
-    pango_font_description_merge_static(cast(PangoFontDescription*)cPtr, descToMerge ? cast(PangoFontDescription*)descToMerge.cPtr(No.Dup) : null, replaceExisting);
+    pango_font_description_merge_static(cast(PangoFontDescription*)cPtr, descToMerge ? cast(const(PangoFontDescription)*)descToMerge.cPtr(No.Dup) : null, replaceExisting);
   }
 
   /**
@@ -382,7 +382,7 @@ class FontDescription : Boxed
    * Params:
    *   gravity = the gravity for the font description.
    */
-  void setGravity(Gravity gravity)
+  void setGravity(pango.types.Gravity gravity)
   {
     pango_font_description_set_gravity(cast(PangoFontDescription*)cPtr, gravity);
   }
@@ -408,19 +408,19 @@ class FontDescription : Boxed
 
   /**
    * Sets the stretch field of a font description.
-   * The [pango.Stretch] field specifies how narrow or
+   * The [pango.types.Stretch] field specifies how narrow or
    * wide the font should be.
    * Params:
    *   stretch = the stretch for the font description
    */
-  void setStretch(Stretch stretch)
+  void setStretch(pango.types.Stretch stretch)
   {
     pango_font_description_set_stretch(cast(PangoFontDescription*)cPtr, stretch);
   }
 
   /**
    * Sets the style field of a `PangoFontDescription`.
-   * The [pango.Style] enumeration describes whether the font is
+   * The [pango.types.Style] enumeration describes whether the font is
    * slanted and the manner in which it is slanted; it can be either
    * %PANGO_STYLE_NORMAL, %PANGO_STYLE_ITALIC, or %PANGO_STYLE_OBLIQUE.
    * Most fonts will either have a italic style or an oblique style,
@@ -430,19 +430,19 @@ class FontDescription : Boxed
    * Params:
    *   style = the style for the font description
    */
-  void setStyle(Style style)
+  void setStyle(pango.types.Style style)
   {
     pango_font_description_set_style(cast(PangoFontDescription*)cPtr, style);
   }
 
   /**
    * Sets the variant field of a font description.
-   * The [pango.Variant] can either be %PANGO_VARIANT_NORMAL
+   * The [pango.types.Variant] can either be %PANGO_VARIANT_NORMAL
    * or %PANGO_VARIANT_SMALL_CAPS.
    * Params:
    *   variant = the variant type for the font description.
    */
-  void setVariant(Variant variant)
+  void setVariant(pango.types.Variant variant)
   {
     pango_font_description_set_variant(cast(PangoFontDescription*)cPtr, variant);
   }
@@ -489,12 +489,12 @@ class FontDescription : Boxed
    * Sets the weight field of a font description.
    * The weight field
    * specifies how bold or light the font should be. In addition
-   * to the values of the [pango.Weight] enumeration, other
+   * to the values of the [pango.types.Weight] enumeration, other
    * intermediate numeric values are possible.
    * Params:
    *   weight = the weight for the font description.
    */
-  void setWeight(Weight weight)
+  void setWeight(pango.types.Weight weight)
   {
     pango_font_description_set_weight(cast(PangoFontDescription*)cPtr, weight);
   }
@@ -510,8 +510,8 @@ class FontDescription : Boxed
   string toFilename()
   {
     char* _cretval;
-    _cretval = pango_font_description_to_filename(cast(PangoFontDescription*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    _cretval = pango_font_description_to_filename(cast(const(PangoFontDescription)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -526,8 +526,8 @@ class FontDescription : Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = pango_font_description_to_string(cast(PangoFontDescription*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    _cretval = pango_font_description_to_string(cast(const(PangoFontDescription)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -537,7 +537,7 @@ class FontDescription : Boxed
    * Params:
    *   toUnset = bitmask of fields in the desc to unset.
    */
-  void unsetFields(FontMask toUnset)
+  void unsetFields(pango.types.FontMask toUnset)
   {
     pango_font_description_unset_fields(cast(PangoFontDescription*)cPtr, toUnset);
   }
@@ -580,12 +580,12 @@ class FontDescription : Boxed
    *   str = string representation of a font description.
    * Returns: a new `PangoFontDescription`.
    */
-  static FontDescription fromString(string str)
+  static pango.font_description.FontDescription fromString(string str)
   {
     PangoFontDescription* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
     _cretval = pango_font_description_from_string(_str);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

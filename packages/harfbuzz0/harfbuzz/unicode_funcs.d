@@ -1,6 +1,6 @@
 module harfbuzz.unicode_funcs;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -15,7 +15,7 @@ import harfbuzz.types;
  * needed, and replace the default by calling the setter for a
  * method.
  */
-class UnicodeFuncs : Boxed
+class UnicodeFuncs : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -10,11 +10,11 @@ import arrow.types;
 import arrow.writable;
 import arrow.writable_mixin;
 import arrow.write_options;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class OutputStream : ObjectG, File, Writable
+class OutputStream : gobject.object.ObjectG, arrow.file.File, arrow.writable.Writable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -46,7 +46,7 @@ class OutputStream : ObjectG, File, Writable
     return _retval;
   }
 
-  long writeRecordBatch(RecordBatch recordBatch, WriteOptions options)
+  long writeRecordBatch(arrow.record_batch.RecordBatch recordBatch, arrow.write_options.WriteOptions options)
   {
     long _retval;
     GError *_err;
@@ -56,7 +56,7 @@ class OutputStream : ObjectG, File, Writable
     return _retval;
   }
 
-  long writeTensor(Tensor tensor)
+  long writeTensor(arrow.tensor.Tensor tensor)
   {
     long _retval;
     GError *_err;

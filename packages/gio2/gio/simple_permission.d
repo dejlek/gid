@@ -1,6 +1,6 @@
 module gio.simple_permission;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.permission;
@@ -13,7 +13,7 @@ import gio.types;
  * Calling [gio.permission.Permission.acquire] or [gio.permission.Permission.release]
  * on a `GSimplePermission` will result in errors.
  */
-class SimplePermission : Permission
+class SimplePermission : gio.permission.Permission
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

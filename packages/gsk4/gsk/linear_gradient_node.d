@@ -1,6 +1,6 @@
 module gsk.linear_gradient_node;
 
-import gid.global;
+import gid.gid;
 import graphene.point;
 import gsk.c.functions;
 import gsk.c.types;
@@ -10,7 +10,7 @@ import gsk.types;
 /**
  * A render node for a linear gradient.
  */
-class LinearGradientNode : RenderNode
+class LinearGradientNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -25,11 +25,11 @@ class LinearGradientNode : RenderNode
    * Retrieves the final point of the linear gradient.
    * Returns: the final point
    */
-  Point getEnd()
+  graphene.point.Point getEnd()
   {
     const(graphene_point_t)* _cretval;
-    _cretval = gsk_linear_gradient_node_get_end(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
+    _cretval = gsk_linear_gradient_node_get_end(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -40,7 +40,7 @@ class LinearGradientNode : RenderNode
   size_t getNColorStops()
   {
     size_t _retval;
-    _retval = gsk_linear_gradient_node_get_n_color_stops(cast(GskRenderNode*)cPtr);
+    _retval = gsk_linear_gradient_node_get_n_color_stops(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 
@@ -48,11 +48,11 @@ class LinearGradientNode : RenderNode
    * Retrieves the initial point of the linear gradient.
    * Returns: the initial point
    */
-  Point getStart()
+  graphene.point.Point getStart()
   {
     const(graphene_point_t)* _cretval;
-    _cretval = gsk_linear_gradient_node_get_start(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
+    _cretval = gsk_linear_gradient_node_get_start(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

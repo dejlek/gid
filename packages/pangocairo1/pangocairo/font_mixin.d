@@ -2,7 +2,7 @@ module pangocairo.font_mixin;
 
 public import pangocairo.font_iface_proxy;
 public import cairo.scaled_font;
-public import gid.global;
+public import gid.gid;
 public import pangocairo.c.functions;
 public import pangocairo.c.types;
 public import pangocairo.types;
@@ -23,11 +23,11 @@ template FontT()
    * Returns: the `cairo_scaled_font_t`
    *   used by font
    */
-  override ScaledFont getScaledFont()
+  override cairo.scaled_font.ScaledFont getScaledFont()
   {
     cairo_scaled_font_t* _cretval;
     _cretval = pango_cairo_font_get_scaled_font(cast(PangoCairoFont*)cPtr);
-    auto _retval = _cretval ? new ScaledFont(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new cairo.scaled_font.ScaledFont(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

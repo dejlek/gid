@@ -1,6 +1,6 @@
 module gtk.password_entry;
 
-import gid.global;
+import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
 import gobject.object;
@@ -42,7 +42,7 @@ import gtk.widget;
  * # Accessibility
  * `GtkPasswordEntry` uses the %GTK_ACCESSIBLE_ROLE_TEXT_BOX role.
  */
-class PasswordEntry : Widget, Editable
+class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -78,11 +78,11 @@ class PasswordEntry : Widget, Editable
    * Gets the menu model set with [gtk.password_entry.PasswordEntry.setExtraMenu].
    * Returns: the menu model
    */
-  MenuModel getExtraMenu()
+  gio.menu_model.MenuModel getExtraMenu()
   {
     GMenuModel* _cretval;
     _cretval = gtk_password_entry_get_extra_menu(cast(GtkPasswordEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class PasswordEntry : Widget, Editable
    * Params:
    *   model = a `GMenuModel`
    */
-  void setExtraMenu(MenuModel model)
+  void setExtraMenu(gio.menu_model.MenuModel model)
   {
     gtk_password_entry_set_extra_menu(cast(GtkPasswordEntry*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
@@ -126,8 +126,8 @@ class PasswordEntry : Widget, Editable
    * The keybindings for this signal are all forms of the Enter key.
    *   passwordEntry = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(PasswordEntry passwordEntry);
-  alias ActivateCallbackFunc = void function(PasswordEntry passwordEntry);
+  alias ActivateCallbackDlg = void delegate(gtk.password_entry.PasswordEntry passwordEntry);
+  alias ActivateCallbackFunc = void function(gtk.password_entry.PasswordEntry passwordEntry);
 
   /**
    * Connect to Activate signal.
@@ -143,7 +143,7 @@ class PasswordEntry : Widget, Editable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto passwordEntry = getVal!PasswordEntry(_paramVals);
+      auto passwordEntry = getVal!(gtk.password_entry.PasswordEntry)(_paramVals);
       _dClosure.dlg(passwordEntry);
     }
 

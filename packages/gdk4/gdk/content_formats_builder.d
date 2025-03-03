@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.content_formats;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gobject.types;
 
@@ -12,7 +12,7 @@ import gobject.types;
  * A `GdkContentFormatsBuilder` is an auxiliary struct used to create
  * new `GdkContentFormats`, and should not be kept around.
  */
-class ContentFormatsBuilder : Boxed
+class ContentFormatsBuilder : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -55,9 +55,9 @@ class ContentFormatsBuilder : Boxed
    * Params:
    *   formats = the formats to add
    */
-  void addFormats(ContentFormats formats)
+  void addFormats(gdk.content_formats.ContentFormats formats)
   {
-    gdk_content_formats_builder_add_formats(cast(GdkContentFormatsBuilder*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null);
+    gdk_content_formats_builder_add_formats(cast(GdkContentFormatsBuilder*)cPtr, formats ? cast(const(GdkContentFormats)*)formats.cPtr(No.Dup) : null);
   }
 
   /**
@@ -65,7 +65,7 @@ class ContentFormatsBuilder : Boxed
    * Params:
    *   type = a `GType`
    */
-  void addGtype(GType type)
+  void addGtype(gobject.types.GType type)
   {
     gdk_content_formats_builder_add_gtype(cast(GdkContentFormatsBuilder*)cPtr, type);
   }
@@ -90,11 +90,11 @@ class ContentFormatsBuilder : Boxed
    * Returns: the newly created `GdkContentFormats`
    *   with all the formats added to builder
    */
-  ContentFormats toFormats()
+  gdk.content_formats.ContentFormats toFormats()
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_formats_builder_to_formats(cast(GdkContentFormatsBuilder*)cPtr);
-    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

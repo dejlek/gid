@@ -1,6 +1,6 @@
 module secret.value;
 
-import gid.global;
+import gid.gid;
 import glib.types;
 import gobject.boxed;
 import secret.c.functions;
@@ -18,7 +18,7 @@ import secret.types;
  * #SecretValue is reference counted and immutable. The secret data is only
  * freed when all references have been released via [secret.value.ValueSecret.unref].
  */
-class ValueSecret : Boxed
+class ValueSecret : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -69,28 +69,28 @@ class ValueSecret : Boxed
    * If the length is less than zero, then secret is assumed to be
    * null-terminated.
    * Params:
-   *   secret = the secret data
+   *   secretData = the secret data
    *   length = the length of the data
    *   contentType = the content type of the data
    *   destroy = function to call to free the secret data
    * Returns: the new #SecretValue
    */
-  static ValueSecret newFull(string secret, ptrdiff_t length, string contentType, DestroyNotify destroy)
+  static secret.value.ValueSecret newFull(string secretData, ptrdiff_t length, string contentType, glib.types.DestroyNotify destroy)
   {
     extern(C) void _destroyCallback(void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(DestroyNotify*)data;
+      auto _dlg = cast(glib.types.DestroyNotify*)data;
 
       (*_dlg)();
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
 
     SecretValue* _cretval;
-    char* _secret = secret.toCString(No.Alloc);
+    char* _secretData = secretData.toCString(No.Alloc);
     const(char)* _contentType = contentType.toCString(No.Alloc);
-    _cretval = secret_value_new_full(_secret, length, _contentType, _destroyCB);
-    auto _retval = _cretval ? new ValueSecret(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = secret_value_new_full(_secretData, length, _contentType, _destroyCB);
+    auto _retval = _cretval ? new secret.value.ValueSecret(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class ValueSecret : Boxed
   {
     const(char)* _cretval;
     _cretval = secret_value_get_content_type(cast(SecretValue*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class ValueSecret : Boxed
   {
     const(char)* _cretval;
     _cretval = secret_value_get_text(cast(SecretValue*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class ValueSecret : Boxed
   {
     char* _cretval;
     _cretval = secret_value_unref_to_password(cast(SecretValue*)cPtr, cast(size_t*)&length);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

@@ -1,7 +1,7 @@
 module gtk.font_chooser;
 
 public import gtk.font_chooser_iface_proxy;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -63,7 +63,7 @@ interface FontChooser
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  FontDescription getFontDesc();
+  pango.font_description.FontDescription getFontDesc();
 
   /**
    * Gets the `PangoFontFace` representing the selected font group
@@ -75,7 +75,7 @@ interface FontChooser
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  FontFace getFontFace();
+  pango.font_face.FontFace getFontFace();
 
   /**
    * Gets the `PangoFontFamily` representing the selected font family.
@@ -87,7 +87,7 @@ interface FontChooser
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  FontFamily getFontFamily();
+  pango.font_family.FontFamily getFontFamily();
 
   /**
    * Gets the currently-selected font features.
@@ -109,7 +109,7 @@ interface FontChooser
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  FontMap getFontMap();
+  pango.font_map.FontMap getFontMap();
 
   /**
    * The selected font size.
@@ -137,7 +137,7 @@ interface FontChooser
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  FontChooserLevel getLevel();
+  gtk.types.FontChooserLevel getLevel();
 
   /**
    * Gets the text displayed in the preview area.
@@ -166,7 +166,7 @@ interface FontChooser
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  void setFilterFunc(FontFilterFunc filter);
+  void setFilterFunc(gtk.types.FontFilterFunc filter);
 
   /**
    * Sets the currently-selected font.
@@ -186,7 +186,7 @@ interface FontChooser
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  void setFontDesc(FontDescription fontDesc);
+  void setFontDesc(pango.font_description.FontDescription fontDesc);
 
   /**
    * Sets a custom font map to use for this font chooser widget.
@@ -213,7 +213,7 @@ interface FontChooser
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  void setFontMap(FontMap fontmap);
+  void setFontMap(pango.font_map.FontMap fontmap);
 
   /**
    * Sets the language to use for font features.
@@ -233,7 +233,7 @@ interface FontChooser
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  void setLevel(FontChooserLevel level);
+  void setLevel(gtk.types.FontChooserLevel level);
 
   /**
    * Sets the text displayed in the preview area.
@@ -267,8 +267,8 @@ interface FontChooser
 
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
    */
-  alias FontActivatedCallbackDlg = void delegate(string fontname, FontChooser fontChooser);
-  alias FontActivatedCallbackFunc = void function(string fontname, FontChooser fontChooser);
+  alias FontActivatedCallbackDlg = void delegate(string fontname, gtk.font_chooser.FontChooser fontChooser);
+  alias FontActivatedCallbackFunc = void function(string fontname, gtk.font_chooser.FontChooser fontChooser);
 
   /**
    * Connect to FontActivated signal.

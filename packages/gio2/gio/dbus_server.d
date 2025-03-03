@@ -1,6 +1,6 @@
 module gio.dbus_server;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -32,7 +32,7 @@ import gobject.object;
  * the `G_DBUS_SERVER_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER` flag to the
  * server.
  */
-class DBusServer : ObjectG, Initable
+class DBusServer : gobject.object.ObjectG, gio.initable.Initable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -77,7 +77,7 @@ class DBusServer : ObjectG, Initable
    * Returns: A #GDBusServer or %NULL if error is set. Free with
    *   [gobject.object.ObjectG.unref].
    */
-  static DBusServer newSync(string address, DBusServerFlags flags, string guid, DBusAuthObserver observer, Cancellable cancellable)
+  static gio.dbus_server.DBusServer newSync(string address, gio.types.DBusServerFlags flags, string guid, gio.dbus_auth_observer.DBusAuthObserver observer, gio.cancellable.Cancellable cancellable)
   {
     GDBusServer* _cretval;
     const(char)* _address = address.toCString(No.Alloc);
@@ -86,7 +86,7 @@ class DBusServer : ObjectG, Initable
     _cretval = g_dbus_server_new_sync(_address, flags, _guid, observer ? cast(GDBusAuthObserver*)observer.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!DBusServer(cast(GDBusServer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_server.DBusServer)(cast(GDBusServer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class DBusServer : ObjectG, Initable
   {
     const(char)* _cretval;
     _cretval = g_dbus_server_get_client_address(cast(GDBusServer*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -110,11 +110,11 @@ class DBusServer : ObjectG, Initable
    * Gets the flags for server.
    * Returns: A set of flags from the #GDBusServerFlags enumeration.
    */
-  DBusServerFlags getFlags()
+  gio.types.DBusServerFlags getFlags()
   {
     GDBusServerFlags _cretval;
     _cretval = g_dbus_server_get_flags(cast(GDBusServer*)cPtr);
-    DBusServerFlags _retval = cast(DBusServerFlags)_cretval;
+    gio.types.DBusServerFlags _retval = cast(gio.types.DBusServerFlags)_cretval;
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class DBusServer : ObjectG, Initable
   {
     const(char)* _cretval;
     _cretval = g_dbus_server_get_guid(cast(GDBusServer*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -182,8 +182,8 @@ class DBusServer : ObjectG, Initable
    * Returns: %TRUE to claim connection, %FALSE to let other handlers
    *   run.
    */
-  alias NewConnectionCallbackDlg = bool delegate(DBusConnection connection, DBusServer dBusServer);
-  alias NewConnectionCallbackFunc = bool function(DBusConnection connection, DBusServer dBusServer);
+  alias NewConnectionCallbackDlg = bool delegate(gio.dbus_connection.DBusConnection connection, gio.dbus_server.DBusServer dBusServer);
+  alias NewConnectionCallbackFunc = bool function(gio.dbus_connection.DBusConnection connection, gio.dbus_server.DBusServer dBusServer);
 
   /**
    * Connect to NewConnection signal.
@@ -200,8 +200,8 @@ class DBusServer : ObjectG, Initable
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto dBusServer = getVal!DBusServer(_paramVals);
-      auto connection = getVal!DBusConnection(&_paramVals[1]);
+      auto dBusServer = getVal!(gio.dbus_server.DBusServer)(_paramVals);
+      auto connection = getVal!(gio.dbus_connection.DBusConnection)(&_paramVals[1]);
       _retval = _dClosure.dlg(connection, dBusServer);
       setVal!bool(_returnValue, _retval);
     }

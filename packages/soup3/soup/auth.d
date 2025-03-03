@@ -1,6 +1,6 @@
 module soup.auth;
 
-import gid.global;
+import gid.gid;
 import glib.uri;
 import gobject.object;
 import gobject.types;
@@ -17,7 +17,7 @@ import soup.types;
  * #SoupAuth objects store the authentication data associated with a given bit
  * of web space. They are created automatically by class@Session.
  */
-class Auth : ObjectG
+class Auth : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -48,7 +48,7 @@ class Auth : ObjectG
    * Returns: the new #SoupAuth, or %NULL if it could
    *   not be created
    */
-  this(GType type, Message msg, string authHeader)
+  this(gobject.types.GType type, soup.message.Message msg, string authHeader)
   {
     SoupAuth* _cretval;
     const(char)* _authHeader = authHeader.toCString(No.Alloc);
@@ -102,7 +102,7 @@ class Auth : ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_auth_get_authority(cast(SoupAuth*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -114,11 +114,11 @@ class Auth : ObjectG
    *   msg = the #SoupMessage to be authorized
    * Returns: the "Authorization" header, which must be freed.
    */
-  string getAuthorization(Message msg)
+  string getAuthorization(soup.message.Message msg)
   {
     char* _cretval;
     _cretval = soup_auth_get_authorization(cast(SoupAuth*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class Auth : ObjectG
   {
     char* _cretval;
     _cretval = soup_auth_get_info(cast(SoupAuth*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class Auth : ObjectG
    * Returns: the list of
    *   paths, which can be freed with [soup.auth.Auth.freeProtectionSpace].
    */
-  string[] getProtectionSpace(Uri sourceUri)
+  string[] getProtectionSpace(glib.uri.Uri sourceUri)
   {
     GSList* _cretval;
     _cretval = soup_auth_get_protection_space(cast(SoupAuth*)cPtr, sourceUri ? cast(GUri*)sourceUri.cPtr(No.Dup) : null);
@@ -168,7 +168,7 @@ class Auth : ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_auth_get_realm(cast(SoupAuth*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class Auth : ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_auth_get_scheme_name(cast(SoupAuth*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ class Auth : ObjectG
    *   msg = a #SoupMessage
    * Returns: %TRUE if auth is ready to make a request with.
    */
-  bool isReady(Message msg)
+  bool isReady(soup.message.Message msg)
   {
     bool _retval;
     _retval = soup_auth_is_ready(cast(SoupAuth*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
@@ -246,7 +246,7 @@ class Auth : ObjectG
    *   unauthenticated$(RPAREN) #SoupAuth. %FALSE if something about auth_params
    *   could not be parsed or incorporated into auth at all.
    */
-  bool update(Message msg, string authHeader)
+  bool update(soup.message.Message msg, string authHeader)
   {
     bool _retval;
     const(char)* _authHeader = authHeader.toCString(No.Alloc);

@@ -1,6 +1,6 @@
 module gtk.shortcuts_window;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -55,7 +55,7 @@ import gtk.window;
  * `GtkShortcutsWindow` has a single CSS node with the name `window` and style
  * class `.shortcuts`.
  */
-class ShortcutsWindow : Window
+class ShortcutsWindow : gtk.window.Window
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -83,7 +83,7 @@ class ShortcutsWindow : Window
    * Params:
    *   section = the `GtkShortcutsSection` to add
    */
-  void addSection(ShortcutsSection section)
+  void addSection(gtk.shortcuts_section.ShortcutsSection section)
   {
     gtk_shortcuts_window_add_section(cast(GtkShortcutsWindow*)cPtr, section ? cast(GtkShortcutsSection*)section.cPtr(No.Dup) : null);
   }
@@ -94,8 +94,8 @@ class ShortcutsWindow : Window
    * The default binding for this signal is the Escape key.
    *   shortcutsWindow = the instance the signal is connected to
    */
-  alias CloseCallbackDlg = void delegate(ShortcutsWindow shortcutsWindow);
-  alias CloseCallbackFunc = void function(ShortcutsWindow shortcutsWindow);
+  alias CloseCallbackDlg = void delegate(gtk.shortcuts_window.ShortcutsWindow shortcutsWindow);
+  alias CloseCallbackFunc = void function(gtk.shortcuts_window.ShortcutsWindow shortcutsWindow);
 
   /**
    * Connect to Close signal.
@@ -111,7 +111,7 @@ class ShortcutsWindow : Window
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto shortcutsWindow = getVal!ShortcutsWindow(_paramVals);
+      auto shortcutsWindow = getVal!(gtk.shortcuts_window.ShortcutsWindow)(_paramVals);
       _dClosure.dlg(shortcutsWindow);
     }
 
@@ -125,8 +125,8 @@ class ShortcutsWindow : Window
    * The default binding for this signal is Control-F.
    *   shortcutsWindow = the instance the signal is connected to
    */
-  alias SearchCallbackDlg = void delegate(ShortcutsWindow shortcutsWindow);
-  alias SearchCallbackFunc = void function(ShortcutsWindow shortcutsWindow);
+  alias SearchCallbackDlg = void delegate(gtk.shortcuts_window.ShortcutsWindow shortcutsWindow);
+  alias SearchCallbackFunc = void function(gtk.shortcuts_window.ShortcutsWindow shortcutsWindow);
 
   /**
    * Connect to Search signal.
@@ -142,7 +142,7 @@ class ShortcutsWindow : Window
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto shortcutsWindow = getVal!ShortcutsWindow(_paramVals);
+      auto shortcutsWindow = getVal!(gtk.shortcuts_window.ShortcutsWindow)(_paramVals);
       _dClosure.dlg(shortcutsWindow);
     }
 

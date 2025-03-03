@@ -1,6 +1,6 @@
 module gtk.cell_renderer_spinner;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_renderer;
@@ -21,7 +21,7 @@ import gtk.types;
  * Deprecated: List views use widgets to display their contents.
  *   You should use [gtk.spinner.Spinner] instead
  */
-class CellRendererSpinner : CellRenderer
+class CellRendererSpinner : gtk.cell_renderer.CellRenderer
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

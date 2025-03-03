@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.texture;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
@@ -36,7 +36,7 @@ import gobject.object;
  * easier to support cursors. If none of the provided cursors can be supported,
  * the default cursor will be the ultimate fallback.
  */
-class Cursor : ObjectG
+class Cursor : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -78,12 +78,12 @@ class Cursor : ObjectG
    * Returns: a new `GdkCursor`, or %NULL if there is no
    *   cursor with the given name
    */
-  static Cursor newFromName(string name, Cursor fallback)
+  static gdk.cursor.Cursor newFromName(string name, gdk.cursor.Cursor fallback)
   {
     GdkCursor* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gdk_cursor_new_from_name(_name, fallback ? cast(GdkCursor*)fallback.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Cursor(cast(GdkCursor*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -97,11 +97,11 @@ class Cursor : ObjectG
    *     this one cannot be supported
    * Returns: a new `GdkCursor`
    */
-  static Cursor newFromTexture(Texture texture, int hotspotX, int hotspotY, Cursor fallback)
+  static gdk.cursor.Cursor newFromTexture(gdk.texture.Texture texture, int hotspotX, int hotspotY, gdk.cursor.Cursor fallback)
   {
     GdkCursor* _cretval;
     _cretval = gdk_cursor_new_from_texture(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null, hotspotX, hotspotY, fallback ? cast(GdkCursor*)fallback.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Cursor(cast(GdkCursor*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -115,11 +115,11 @@ class Cursor : ObjectG
    * Returns: the fallback of the cursor or %NULL
    *   to use the default cursor as fallback
    */
-  Cursor getFallback()
+  gdk.cursor.Cursor getFallback()
   {
     GdkCursor* _cretval;
     _cretval = gdk_cursor_get_fallback(cast(GdkCursor*)cPtr);
-    auto _retval = ObjectG.getDObject!Cursor(cast(GdkCursor*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class Cursor : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_cursor_get_name(cast(GdkCursor*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -173,11 +173,11 @@ class Cursor : ObjectG
    * Returns: the texture for cursor or %NULL
    *   if it is a named cursor
    */
-  Texture getTexture()
+  gdk.texture.Texture getTexture()
   {
     GdkTexture* _cretval;
     _cretval = gdk_cursor_get_texture(cast(GdkCursor*)cPtr);
-    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -1,6 +1,6 @@
 module harfbuzz.draw_funcs;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -13,7 +13,7 @@ import harfbuzz.types;
  * #hb_draw_quadratic_to_func_t calls to #hb_draw_cubic_to_func_t if the
  * callback isn't defined.
  */
-class DrawFuncs : Boxed
+class DrawFuncs : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

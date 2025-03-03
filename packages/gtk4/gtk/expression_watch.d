@@ -1,6 +1,6 @@
 module gtk.expression_watch;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gobject.value;
 import gtk.c.functions;
@@ -12,7 +12,7 @@ import gtk.types;
  * The contents of `GtkExpressionWatch` should only be accessed through the
  * provided API.
  */
-class ExpressionWatch : Boxed
+class ExpressionWatch : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,7 +45,7 @@ class ExpressionWatch : Boxed
    *   value = an empty `GValue` to be set
    * Returns: `TRUE` if the expression could be evaluated and `value` was set
    */
-  bool evaluate(Value value)
+  bool evaluate(gobject.value.Value value)
   {
     bool _retval;
     _retval = gtk_expression_watch_evaluate(cast(GtkExpressionWatch*)cPtr, value ? cast(GValue*)value.cPtr(No.Dup) : null);

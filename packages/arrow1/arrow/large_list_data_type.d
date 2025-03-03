@@ -5,10 +5,10 @@ import arrow.c.types;
 import arrow.data_type;
 import arrow.field;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class LargeListDataType : DataType
+class LargeListDataType : arrow.data_type.DataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,18 +27,18 @@ class LargeListDataType : DataType
     return getType();
   }
 
-  this(Field field)
+  this(arrow.field.Field field)
   {
     GArrowLargeListDataType* _cretval;
     _cretval = garrow_large_list_data_type_new(field ? cast(GArrowField*)field.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
-  Field getField()
+  arrow.field.Field getField()
   {
     GArrowField* _cretval;
     _cretval = garrow_large_list_data_type_get_field(cast(GArrowLargeListDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!Field(cast(GArrowField*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
 }

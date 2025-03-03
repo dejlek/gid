@@ -4,12 +4,12 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.event;
 import gdk.types;
-import gid.global;
+import gid.gid;
 
 /**
  * An event related to a keyboard focus change.
  */
-class FocusEvent : Event
+class FocusEvent : gdk.event.Event
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -5,7 +5,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.drag_surface_size;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 
 /**
@@ -44,8 +44,8 @@ interface DragSurface
    *   size = the size of the drag surface
    *   dragSurface = the instance the signal is connected to
    */
-  alias ComputeSizeCallbackDlg = void delegate(DragSurfaceSize size, DragSurface dragSurface);
-  alias ComputeSizeCallbackFunc = void function(DragSurfaceSize size, DragSurface dragSurface);
+  alias ComputeSizeCallbackDlg = void delegate(gdk.drag_surface_size.DragSurfaceSize size, gdk.drag_surface.DragSurface dragSurface);
+  alias ComputeSizeCallbackFunc = void function(gdk.drag_surface_size.DragSurfaceSize size, gdk.drag_surface.DragSurface dragSurface);
 
   /**
    * Connect to ComputeSize signal.

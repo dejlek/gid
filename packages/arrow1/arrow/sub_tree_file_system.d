@@ -4,9 +4,9 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.file_system;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class SubTreeFileSystem : FileSystem
+class SubTreeFileSystem : arrow.file_system.FileSystem
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -25,7 +25,7 @@ class SubTreeFileSystem : FileSystem
     return getType();
   }
 
-  this(string basePath, FileSystem baseFileSystem)
+  this(string basePath, arrow.file_system.FileSystem baseFileSystem)
   {
     GArrowSubTreeFileSystem* _cretval;
     const(char)* _basePath = basePath.toCString(No.Alloc);

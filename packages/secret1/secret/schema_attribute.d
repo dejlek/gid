@@ -1,6 +1,6 @@
 module secret.schema_attribute;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import secret.c.functions;
 import secret.c.types;
@@ -9,7 +9,7 @@ import secret.types;
 /**
  * An attribute in a #SecretSchema.
  */
-class SchemaAttribute : Boxed
+class SchemaAttribute : gobject.boxed.Boxed
 {
 
   this()
@@ -49,12 +49,12 @@ class SchemaAttribute : Boxed
     (cast(SecretSchemaAttribute*)cPtr).name = propval.toCString(Yes.Alloc);
   }
 
-  @property SchemaAttributeType type()
+  @property secret.types.SchemaAttributeType type()
   {
-    return cast(SchemaAttributeType)(cast(SecretSchemaAttribute*)cPtr).type;
+    return cast(secret.types.SchemaAttributeType)(cast(SecretSchemaAttribute*)cPtr).type;
   }
 
-  @property void type(SchemaAttributeType propval)
+  @property void type(secret.types.SchemaAttributeType propval)
   {
     (cast(SecretSchemaAttribute*)cPtr).type = cast(SecretSchemaAttributeType)propval;
   }

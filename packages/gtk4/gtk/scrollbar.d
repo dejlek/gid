@@ -1,6 +1,6 @@
 module gtk.scrollbar;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -50,7 +50,7 @@ import gtk.widget;
  * # Accessibility
  * `GtkScrollbar` uses the %GTK_ACCESSIBLE_ROLE_SCROLLBAR role.
  */
-class Scrollbar : Widget, Orientable
+class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -79,7 +79,7 @@ class Scrollbar : Widget, Orientable
    *     to create a new adjustment.
    * Returns: the new `GtkScrollbar`.
    */
-  this(Orientation orientation, Adjustment adjustment)
+  this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment)
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrollbar_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
@@ -90,11 +90,11 @@ class Scrollbar : Widget, Orientable
    * Returns the scrollbar's adjustment.
    * Returns: the scrollbar's adjustment
    */
-  Adjustment getAdjustment()
+  gtk.adjustment.Adjustment getAdjustment()
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrollbar_get_adjustment(cast(GtkScrollbar*)cPtr);
-    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ class Scrollbar : Widget, Orientable
    * Params:
    *   adjustment = the adjustment to set
    */
-  void setAdjustment(Adjustment adjustment)
+  void setAdjustment(gtk.adjustment.Adjustment adjustment)
   {
     gtk_scrollbar_set_adjustment(cast(GtkScrollbar*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }

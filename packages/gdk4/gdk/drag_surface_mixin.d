@@ -5,7 +5,7 @@ public import gdk.c.functions;
 public import gdk.c.types;
 public import gdk.drag_surface_size;
 public import gdk.types;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 
 /**
@@ -43,8 +43,8 @@ template DragSurfaceT()
    *   size = the size of the drag surface
    *   dragSurface = the instance the signal is connected to
    */
-  alias ComputeSizeCallbackDlg = void delegate(DragSurfaceSize size, DragSurface dragSurface);
-  alias ComputeSizeCallbackFunc = void function(DragSurfaceSize size, DragSurface dragSurface);
+  alias ComputeSizeCallbackDlg = void delegate(gdk.drag_surface_size.DragSurfaceSize size, gdk.drag_surface.DragSurface dragSurface);
+  alias ComputeSizeCallbackFunc = void function(gdk.drag_surface_size.DragSurfaceSize size, gdk.drag_surface.DragSurface dragSurface);
 
   /**
    * Connect to ComputeSize signal.
@@ -60,8 +60,8 @@ template DragSurfaceT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dragSurface = getVal!DragSurface(_paramVals);
-      auto size = getVal!DragSurfaceSize(&_paramVals[1]);
+      auto dragSurface = getVal!(gdk.drag_surface.DragSurface)(_paramVals);
+      auto size = getVal!(gdk.drag_surface_size.DragSurfaceSize)(&_paramVals[1]);
       _dClosure.dlg(size, dragSurface);
     }
 

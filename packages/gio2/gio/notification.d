@@ -1,10 +1,9 @@
 module gio.notification;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.icon;
-import gio.icon_mixin;
 import gio.types;
 import glib.variant;
 import gobject.object;
@@ -49,7 +48,7 @@ import gobject.object;
  * clicked.
  * A notification can be sent with [gio.application.ApplicationGio.sendNotification].
  */
-class Notification : ObjectG
+class Notification : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -115,7 +114,7 @@ class Notification : ObjectG
    *   action = an action name
    *   target = a #GVariant to use as action's parameter, or %NULL
    */
-  void addButtonWithTarget(string label, string action, VariantG target)
+  void addButtonWithTarget(string label, string action, glib.variant.VariantG target)
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _action = action.toCString(No.Alloc);
@@ -179,7 +178,7 @@ class Notification : ObjectG
    *   action = an action name
    *   target = a #GVariant to use as action's parameter, or %NULL
    */
-  void setDefaultActionAndTarget(string action, VariantG target)
+  void setDefaultActionAndTarget(string action, glib.variant.VariantG target)
   {
     const(char)* _action = action.toCString(No.Alloc);
     g_notification_set_default_action_and_target_value(cast(GNotification*)cPtr, _action, target ? cast(VariantC*)target.cPtr(No.Dup) : null);
@@ -190,7 +189,7 @@ class Notification : ObjectG
    * Params:
    *   icon = the icon to be shown in notification, as a #GIcon
    */
-  void setIcon(Icon icon)
+  void setIcon(gio.icon.Icon icon)
   {
     g_notification_set_icon(cast(GNotification*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
@@ -201,7 +200,7 @@ class Notification : ObjectG
    * Params:
    *   priority = a #GNotificationPriority
    */
-  void setPriority(NotificationPriority priority)
+  void setPriority(gio.types.NotificationPriority priority)
   {
     g_notification_set_priority(cast(GNotification*)cPtr, priority);
   }

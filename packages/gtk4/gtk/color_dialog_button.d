@@ -1,7 +1,7 @@
 module gtk.color_dialog_button;
 
 import gdk.rgba;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -31,7 +31,7 @@ import gtk.widget;
  * contains a button node. To differentiate it from a plain `GtkButton`,
  * it gets the .color style class.
  */
-class ColorDialogButton : Widget
+class ColorDialogButton : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -59,7 +59,7 @@ class ColorDialogButton : Widget
    *   dialog = the `GtkColorDialog` to use
    * Returns: the new `GtkColorDialogButton`
    */
-  this(ColorDialog dialog)
+  this(gtk.color_dialog.ColorDialog dialog)
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_dialog_button_new(dialog ? cast(GtkColorDialog*)dialog.cPtr(Yes.Dup) : null);
@@ -70,11 +70,11 @@ class ColorDialogButton : Widget
    * Returns the `GtkColorDialog` of self.
    * Returns: the `GtkColorDialog`
    */
-  ColorDialog getDialog()
+  gtk.color_dialog.ColorDialog getDialog()
   {
     GtkColorDialog* _cretval;
     _cretval = gtk_color_dialog_button_get_dialog(cast(GtkColorDialogButton*)cPtr);
-    auto _retval = ObjectG.getDObject!ColorDialog(cast(GtkColorDialog*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.color_dialog.ColorDialog)(cast(GtkColorDialog*)_cretval, No.Take);
     return _retval;
   }
 
@@ -85,11 +85,11 @@ class ColorDialogButton : Widget
    * informed about changes, listen to "notify::rgba".
    * Returns: the color
    */
-  RGBA getRgba()
+  gdk.rgba.RGBA getRgba()
   {
     const(GdkRGBA)* _cretval;
     _cretval = gtk_color_dialog_button_get_rgba(cast(GtkColorDialogButton*)cPtr);
-    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class ColorDialogButton : Widget
    * Params:
    *   dialog = the new `GtkColorDialog`
    */
-  void setDialog(ColorDialog dialog)
+  void setDialog(gtk.color_dialog.ColorDialog dialog)
   {
     gtk_color_dialog_button_set_dialog(cast(GtkColorDialogButton*)cPtr, dialog ? cast(GtkColorDialog*)dialog.cPtr(No.Dup) : null);
   }
@@ -110,9 +110,9 @@ class ColorDialogButton : Widget
    * Params:
    *   color = the new color
    */
-  void setRgba(RGBA color)
+  void setRgba(gdk.rgba.RGBA color)
   {
-    gtk_color_dialog_button_set_rgba(cast(GtkColorDialogButton*)cPtr, color ? cast(GdkRGBA*)color.cPtr(No.Dup) : null);
+    gtk_color_dialog_button_set_rgba(cast(GtkColorDialogButton*)cPtr, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
   }
 
   /**
@@ -121,8 +121,8 @@ class ColorDialogButton : Widget
    * and emitting it causes the button to pop up its dialog.
    *   colorDialogButton = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(ColorDialogButton colorDialogButton);
-  alias ActivateCallbackFunc = void function(ColorDialogButton colorDialogButton);
+  alias ActivateCallbackDlg = void delegate(gtk.color_dialog_button.ColorDialogButton colorDialogButton);
+  alias ActivateCallbackFunc = void function(gtk.color_dialog_button.ColorDialogButton colorDialogButton);
 
   /**
    * Connect to Activate signal.
@@ -138,7 +138,7 @@ class ColorDialogButton : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto colorDialogButton = getVal!ColorDialogButton(_paramVals);
+      auto colorDialogButton = getVal!(gtk.color_dialog_button.ColorDialogButton)(_paramVals);
       _dClosure.dlg(colorDialogButton);
     }
 

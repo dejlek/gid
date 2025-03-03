@@ -1,6 +1,6 @@
 module gtk.printer;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -18,7 +18,7 @@ import gtk.types;
  * etc. Most importantly, a `GtkPrinter` object can be used to create
  * a [gtk.print_job.PrintJob] object, which lets you print to the printer.
  */
-class Printer : ObjectG
+class Printer : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,7 +45,7 @@ class Printer : ObjectG
    *   virtual = whether the printer is virtual
    * Returns: a new `GtkPrinter`
    */
-  this(string name, PrintBackend backend, bool virtual)
+  this(string name, gtk.types.PrintBackend backend, bool virtual)
   {
     GtkPrinter* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -84,7 +84,7 @@ class Printer : ObjectG
    * Returns: 0 if the printer match, a negative value if a < b,
    *   or a positive value if a > b
    */
-  int compare(Printer b)
+  int compare(gtk.printer.Printer b)
   {
     int _retval;
     _retval = gtk_printer_compare(cast(GtkPrinter*)cPtr, b ? cast(GtkPrinter*)b.cPtr(No.Dup) : null);
@@ -95,7 +95,7 @@ class Printer : ObjectG
    * Returns the backend of the printer.
    * Returns: the backend of printer
    */
-  PrintBackend getBackend()
+  gtk.types.PrintBackend getBackend()
   {
     auto _retval = gtk_printer_get_backend(cast(GtkPrinter*)cPtr);
     return _retval;
@@ -111,11 +111,11 @@ class Printer : ObjectG
    * [gtk.printer.Printer.requestDetails].
    * Returns: the printer’s capabilities
    */
-  PrintCapabilities getCapabilities()
+  gtk.types.PrintCapabilities getCapabilities()
   {
     GtkPrintCapabilities _cretval;
     _cretval = gtk_printer_get_capabilities(cast(GtkPrinter*)cPtr);
-    PrintCapabilities _retval = cast(PrintCapabilities)_cretval;
+    gtk.types.PrintCapabilities _retval = cast(gtk.types.PrintCapabilities)_cretval;
     return _retval;
   }
 
@@ -124,11 +124,11 @@ class Printer : ObjectG
    * Returns: a newly allocated `GtkPageSetup` with default page size
    *   of the printer.
    */
-  PageSetup getDefaultPageSize()
+  gtk.page_setup.PageSetup getDefaultPageSize()
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_printer_get_default_page_size(cast(GtkPrinter*)cPtr);
-    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class Printer : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_description(cast(GtkPrinter*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class Printer : ObjectG
    *   right = a location to store the right margin in
    * Returns: %TRUE iff the hard margins were retrieved
    */
-  bool getHardMarginsForPaperSize(PaperSize paperSize, out double top, out double bottom, out double left, out double right)
+  bool getHardMarginsForPaperSize(gtk.paper_size.PaperSize paperSize, out double top, out double bottom, out double left, out double right)
   {
     bool _retval;
     _retval = gtk_printer_get_hard_margins_for_paper_size(cast(GtkPrinter*)cPtr, paperSize ? cast(GtkPaperSize*)paperSize.cPtr(No.Dup) : null, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
@@ -195,7 +195,7 @@ class Printer : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_icon_name(cast(GtkPrinter*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class Printer : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_location(cast(GtkPrinter*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class Printer : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_name(cast(GtkPrinter*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -243,7 +243,7 @@ class Printer : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_state_message(cast(GtkPrinter*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -326,11 +326,11 @@ class Printer : ObjectG
    * Returns: a newly
    *   allocated list of newly allocated `GtkPageSetup`s.
    */
-  PageSetup[] listPapers()
+  gtk.page_setup.PageSetup[] listPapers()
   {
     GList* _cretval;
     _cretval = gtk_printer_list_papers(cast(GtkPrinter*)cPtr);
-    auto _retval = gListToD!(PageSetup, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gtk.page_setup.PageSetup, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -354,8 +354,8 @@ class Printer : ObjectG
    *   success = %TRUE if the details were successfully acquired
    *   printer = the instance the signal is connected to
    */
-  alias DetailsAcquiredCallbackDlg = void delegate(bool success, Printer printer);
-  alias DetailsAcquiredCallbackFunc = void function(bool success, Printer printer);
+  alias DetailsAcquiredCallbackDlg = void delegate(bool success, gtk.printer.Printer printer);
+  alias DetailsAcquiredCallbackFunc = void function(bool success, gtk.printer.Printer printer);
 
   /**
    * Connect to DetailsAcquired signal.
@@ -371,8 +371,8 @@ class Printer : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printer = getVal!Printer(_paramVals);
-      auto success = getVal!bool(&_paramVals[1]);
+      auto printer = getVal!(gtk.printer.Printer)(_paramVals);
+      auto success = getVal!(bool)(&_paramVals[1]);
       _dClosure.dlg(success, printer);
     }
 

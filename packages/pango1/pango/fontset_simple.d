@@ -1,6 +1,6 @@
 module pango.fontset_simple;
 
-import gid.global;
+import gid.gid;
 import pango.c.functions;
 import pango.c.types;
 import pango.font;
@@ -14,7 +14,7 @@ import pango.types;
  * When creating a `PangoFontsetSimple`, you have to provide
  * the array of fonts that make up the fontset.
  */
-class FontsetSimple : Fontset
+class FontsetSimple : pango.fontset.Fontset
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -39,7 +39,7 @@ class FontsetSimple : Fontset
    *   language = a `PangoLanguage` tag
    * Returns: the newly allocated `PangoFontsetSimple`
    */
-  this(PgLanguage language)
+  this(pango.language.PgLanguage language)
   {
     PangoFontsetSimple* _cretval;
     _cretval = pango_fontset_simple_new(language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
@@ -52,7 +52,7 @@ class FontsetSimple : Fontset
    * Params:
    *   font = a `PangoFont`.
    */
-  void append(Font font)
+  void append(pango.font.Font font)
   {
     pango_fontset_simple_append(cast(PangoFontsetSimple*)cPtr, font ? cast(PangoFont*)font.cPtr(Yes.Dup) : null);
   }

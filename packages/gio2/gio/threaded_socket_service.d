@@ -1,6 +1,6 @@
 module gio.threaded_socket_service;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_connection;
@@ -24,7 +24,7 @@ import gobject.object;
  * [gio.threaded_socket_service.ThreadedSocketService.run], or subclass and override the default
  * handler.
  */
-class ThreadedSocketService : SocketService
+class ThreadedSocketService : gio.socket_service.SocketService
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -69,8 +69,8 @@ class ThreadedSocketService : SocketService
    *   threadedSocketService = the instance the signal is connected to
    * Returns: %TRUE to stop further signal handlers from being called
    */
-  alias RunCallbackDlg = bool delegate(SocketConnection connection, ObjectG sourceObject, ThreadedSocketService threadedSocketService);
-  alias RunCallbackFunc = bool function(SocketConnection connection, ObjectG sourceObject, ThreadedSocketService threadedSocketService);
+  alias RunCallbackDlg = bool delegate(gio.socket_connection.SocketConnection connection, gobject.object.ObjectG sourceObject, gio.threaded_socket_service.ThreadedSocketService threadedSocketService);
+  alias RunCallbackFunc = bool function(gio.socket_connection.SocketConnection connection, gobject.object.ObjectG sourceObject, gio.threaded_socket_service.ThreadedSocketService threadedSocketService);
 
   /**
    * Connect to Run signal.
@@ -87,9 +87,9 @@ class ThreadedSocketService : SocketService
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto threadedSocketService = getVal!ThreadedSocketService(_paramVals);
-      auto connection = getVal!SocketConnection(&_paramVals[1]);
-      auto sourceObject = getVal!ObjectG(&_paramVals[2]);
+      auto threadedSocketService = getVal!(gio.threaded_socket_service.ThreadedSocketService)(_paramVals);
+      auto connection = getVal!(gio.socket_connection.SocketConnection)(&_paramVals[1]);
+      auto sourceObject = getVal!(gobject.object.ObjectG)(&_paramVals[2]);
       _retval = _dClosure.dlg(connection, sourceObject, threadedSocketService);
       setVal!bool(_returnValue, _retval);
     }

@@ -1,6 +1,6 @@
 module gsk.clip_node;
 
-import gid.global;
+import gid.gid;
 import graphene.rect;
 import gsk.c.functions;
 import gsk.c.types;
@@ -10,7 +10,7 @@ import gsk.types;
 /**
  * A render node applying a rectangular clip to its single child node.
  */
-class ClipNode : RenderNode
+class ClipNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,10 +29,10 @@ class ClipNode : RenderNode
    *   clip = The clip to apply
    * Returns: A new `GskRenderNode`
    */
-  this(RenderNode child, Rect clip)
+  this(gsk.render_node.RenderNode child, graphene.rect.Rect clip)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_clip_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, clip ? cast(graphene_rect_t*)clip.cPtr(No.Dup) : null);
+    _cretval = gsk_clip_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, clip ? cast(const(graphene_rect_t)*)clip.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -40,11 +40,11 @@ class ClipNode : RenderNode
    * Gets the child node that is getting clipped by the given node.
    * Returns: The child that is getting clipped
    */
-  RenderNode getChild()
+  gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_clip_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    _cretval = gsk_clip_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -52,11 +52,11 @@ class ClipNode : RenderNode
    * Retrieves the clip rectangle for node.
    * Returns: a clip rectangle
    */
-  Rect getClip()
+  graphene.rect.Rect getClip()
   {
     const(graphene_rect_t)* _cretval;
-    _cretval = gsk_clip_node_get_clip(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Rect(cast(void*)_cretval, No.Take) : null;
+    _cretval = gsk_clip_node_get_clip(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

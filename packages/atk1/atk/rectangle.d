@@ -3,14 +3,14 @@ module atk.rectangle;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
  * A data structure for holding a rectangle. Those coordinates are
  * relative to the component top-level parent.
  */
-class Rectangle : Boxed
+class Rectangle : gobject.boxed.Boxed
 {
 
   this()

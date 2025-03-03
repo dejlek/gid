@@ -1,7 +1,7 @@
 module gio.icon_mixin;
 
 public import gio.icon_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
@@ -46,7 +46,7 @@ template IconT()
    *   icon2 = pointer to the second #GIcon.
    * Returns: %TRUE if icon1 is equal to icon2. %FALSE otherwise.
    */
-  override bool equal(Icon icon2)
+  override bool equal(gio.icon.Icon icon2)
   {
     bool _retval;
     _retval = g_icon_equal(cast(GIcon*)cPtr, icon2 ? cast(GIcon*)(cast(ObjectG)icon2).cPtr(No.Dup) : null);
@@ -73,11 +73,11 @@ template IconT()
    * $(LPAREN)as opposed to over the network$(RPAREN), and within the same file system namespace.
    * Returns: a #GVariant, or %NULL when serialization fails. The #GVariant will not be floating.
    */
-  override VariantG serialize()
+  override glib.variant.VariantG serialize()
   {
     VariantC* _cretval;
     _cretval = g_icon_serialize(cast(GIcon*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -102,7 +102,7 @@ template IconT()
   {
     char* _cretval;
     _cretval = g_icon_to_string(cast(GIcon*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

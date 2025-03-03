@@ -1,6 +1,6 @@
 module glib.date;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.time_val;
@@ -43,7 +43,7 @@ import gobject.boxed;
  * Use the API.
  * GLib also features `GDateTime` which represents a precise time.
  */
-class Date : Boxed
+class Date : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -153,11 +153,11 @@ class Date : Boxed
    * Returns: a newly-allocated #GDate
    *   initialized with day, month, and year
    */
-  static Date newDmy(DateDay day, DateMonth month, DateYear year)
+  static glib.date.Date newDmy(glib.types.DateDay day, glib.types.DateMonth month, glib.types.DateYear year)
   {
     GDate* _cretval;
     _cretval = g_date_new_dmy(day, month, year);
-    auto _retval = _cretval ? new Date(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.date.Date(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -171,11 +171,11 @@ class Date : Boxed
    * Returns: a newly-allocated #GDate initialized
    *   with julian_day
    */
-  static Date newJulian(uint julianDay)
+  static glib.date.Date newJulian(uint julianDay)
   {
     GDate* _cretval;
     _cretval = g_date_new_julian(julianDay);
-    auto _retval = _cretval ? new Date(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.date.Date(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -228,9 +228,9 @@ class Date : Boxed
    *   minDate = minimum accepted value for date
    *   maxDate = maximum accepted value for date
    */
-  void clamp(Date minDate, Date maxDate)
+  void clamp(glib.date.Date minDate, glib.date.Date maxDate)
   {
-    g_date_clamp(cast(GDate*)cPtr, minDate ? cast(GDate*)minDate.cPtr(No.Dup) : null, maxDate ? cast(GDate*)maxDate.cPtr(No.Dup) : null);
+    g_date_clamp(cast(GDate*)cPtr, minDate ? cast(const(GDate)*)minDate.cPtr(No.Dup) : null, maxDate ? cast(const(GDate)*)maxDate.cPtr(No.Dup) : null);
   }
 
   /**
@@ -254,10 +254,10 @@ class Date : Boxed
    * Returns: 0 for equal, less than zero if lhs is less than rhs,
    *   greater than zero if lhs is greater than rhs
    */
-  int compare(Date rhs)
+  int compare(glib.date.Date rhs)
   {
     int _retval;
-    _retval = g_date_compare(cast(GDate*)cPtr, rhs ? cast(GDate*)rhs.cPtr(No.Dup) : null);
+    _retval = g_date_compare(cast(const(GDate)*)cPtr, rhs ? cast(const(GDate)*)rhs.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -267,11 +267,11 @@ class Date : Boxed
    * as is into the new object.
    * Returns: a newly-allocated #GDate initialized from date
    */
-  Date copy()
+  glib.date.Date copy()
   {
     GDate* _cretval;
-    _cretval = g_date_copy(cast(GDate*)cPtr);
-    auto _retval = _cretval ? new Date(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = g_date_copy(cast(const(GDate)*)cPtr);
+    auto _retval = _cretval ? new glib.date.Date(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -283,10 +283,10 @@ class Date : Boxed
    *   date2 = the second date
    * Returns: the number of days between date1 and date2
    */
-  int daysBetween(Date date2)
+  int daysBetween(glib.date.Date date2)
   {
     int _retval;
-    _retval = g_date_days_between(cast(GDate*)cPtr, date2 ? cast(GDate*)date2.cPtr(No.Dup) : null);
+    _retval = g_date_days_between(cast(const(GDate)*)cPtr, date2 ? cast(const(GDate)*)date2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -294,10 +294,10 @@ class Date : Boxed
    * Returns the day of the month. The date must be valid.
    * Returns: day of the month
    */
-  DateDay getDay()
+  glib.types.DateDay getDay()
   {
-    DateDay _retval;
-    _retval = g_date_get_day(cast(GDate*)cPtr);
+    glib.types.DateDay _retval;
+    _retval = g_date_get_day(cast(const(GDate)*)cPtr);
     return _retval;
   }
 
@@ -309,7 +309,7 @@ class Date : Boxed
   uint getDayOfYear()
   {
     uint _retval;
-    _retval = g_date_get_day_of_year(cast(GDate*)cPtr);
+    _retval = g_date_get_day_of_year(cast(const(GDate)*)cPtr);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class Date : Boxed
   uint getIso8601WeekOfYear()
   {
     uint _retval;
-    _retval = g_date_get_iso8601_week_of_year(cast(GDate*)cPtr);
+    _retval = g_date_get_iso8601_week_of_year(cast(const(GDate)*)cPtr);
     return _retval;
   }
 
@@ -335,7 +335,7 @@ class Date : Boxed
   uint getJulian()
   {
     uint _retval;
-    _retval = g_date_get_julian(cast(GDate*)cPtr);
+    _retval = g_date_get_julian(cast(const(GDate)*)cPtr);
     return _retval;
   }
 
@@ -348,7 +348,7 @@ class Date : Boxed
   uint getMondayWeekOfYear()
   {
     uint _retval;
-    _retval = g_date_get_monday_week_of_year(cast(GDate*)cPtr);
+    _retval = g_date_get_monday_week_of_year(cast(const(GDate)*)cPtr);
     return _retval;
   }
 
@@ -356,11 +356,11 @@ class Date : Boxed
    * Returns the month of the year. The date must be valid.
    * Returns: month of the year as a #GDateMonth
    */
-  DateMonth getMonth()
+  glib.types.DateMonth getMonth()
   {
     GDateMonth _cretval;
-    _cretval = g_date_get_month(cast(GDate*)cPtr);
-    DateMonth _retval = cast(DateMonth)_cretval;
+    _cretval = g_date_get_month(cast(const(GDate)*)cPtr);
+    glib.types.DateMonth _retval = cast(glib.types.DateMonth)_cretval;
     return _retval;
   }
 
@@ -373,7 +373,7 @@ class Date : Boxed
   uint getSundayWeekOfYear()
   {
     uint _retval;
-    _retval = g_date_get_sunday_week_of_year(cast(GDate*)cPtr);
+    _retval = g_date_get_sunday_week_of_year(cast(const(GDate)*)cPtr);
     return _retval;
   }
 
@@ -381,11 +381,11 @@ class Date : Boxed
    * Returns the day of the week for a #GDate. The date must be valid.
    * Returns: day of the week as a #GDateWeekday.
    */
-  DateWeekday getWeekday()
+  glib.types.DateWeekday getWeekday()
   {
     GDateWeekday _cretval;
-    _cretval = g_date_get_weekday(cast(GDate*)cPtr);
-    DateWeekday _retval = cast(DateWeekday)_cretval;
+    _cretval = g_date_get_weekday(cast(const(GDate)*)cPtr);
+    glib.types.DateWeekday _retval = cast(glib.types.DateWeekday)_cretval;
     return _retval;
   }
 
@@ -393,10 +393,10 @@ class Date : Boxed
    * Returns the year of a #GDate. The date must be valid.
    * Returns: year in which the date falls
    */
-  DateYear getYear()
+  glib.types.DateYear getYear()
   {
-    DateYear _retval;
-    _retval = g_date_get_year(cast(GDate*)cPtr);
+    glib.types.DateYear _retval;
+    _retval = g_date_get_year(cast(const(GDate)*)cPtr);
     return _retval;
   }
 
@@ -408,7 +408,7 @@ class Date : Boxed
   bool isFirstOfMonth()
   {
     bool _retval;
-    _retval = g_date_is_first_of_month(cast(GDate*)cPtr);
+    _retval = g_date_is_first_of_month(cast(const(GDate)*)cPtr);
     return _retval;
   }
 
@@ -420,7 +420,7 @@ class Date : Boxed
   bool isLastOfMonth()
   {
     bool _retval;
-    _retval = g_date_is_last_of_month(cast(GDate*)cPtr);
+    _retval = g_date_is_last_of_month(cast(const(GDate)*)cPtr);
     return _retval;
   }
 
@@ -430,7 +430,7 @@ class Date : Boxed
    * Params:
    *   date2 = the second date
    */
-  void order(Date date2)
+  void order(glib.date.Date date2)
   {
     g_date_order(cast(GDate*)cPtr, date2 ? cast(GDate*)date2.cPtr(No.Dup) : null);
   }
@@ -441,7 +441,7 @@ class Date : Boxed
    * Params:
    *   day = day to set
    */
-  void setDay(DateDay day)
+  void setDay(glib.types.DateDay day)
   {
     g_date_set_day(cast(GDate*)cPtr, day);
   }
@@ -456,7 +456,7 @@ class Date : Boxed
    *   month = month
    *   y = year
    */
-  void setDmy(DateDay day, DateMonth month, DateYear y)
+  void setDmy(glib.types.DateDay day, glib.types.DateMonth month, glib.types.DateYear y)
   {
     g_date_set_dmy(cast(GDate*)cPtr, day, month, y);
   }
@@ -477,7 +477,7 @@ class Date : Boxed
    * Params:
    *   month = month to set
    */
-  void setMonth(DateMonth month)
+  void setMonth(glib.types.DateMonth month)
   {
     g_date_set_month(cast(GDate*)cPtr, month);
   }
@@ -510,7 +510,7 @@ class Date : Boxed
 
    * Deprecated: Use [glib.date.Date.setTimeT] instead.
    */
-  void setTime(Time time)
+  void setTime(glib.types.Time time)
   {
     g_date_set_time(cast(GDate*)cPtr, time);
   }
@@ -545,7 +545,7 @@ class Date : Boxed
    * Deprecated: #GTimeVal is not year-2038-safe. Use [glib.date.Date.setTimeT]
    *   instead.
    */
-  void setTimeVal(TimeVal timeval)
+  void setTimeVal(glib.time_val.TimeVal timeval)
   {
     g_date_set_time_val(cast(GDate*)cPtr, timeval ? cast(GTimeVal*)timeval.cPtr : null);
   }
@@ -556,7 +556,7 @@ class Date : Boxed
    * Params:
    *   year = year to set
    */
-  void setYear(DateYear year)
+  void setYear(glib.types.DateYear year)
   {
     g_date_set_year(cast(GDate*)cPtr, year);
   }
@@ -608,7 +608,7 @@ class Date : Boxed
    */
   void toStructTm(void* tm)
   {
-    g_date_to_struct_tm(cast(GDate*)cPtr, tm);
+    g_date_to_struct_tm(cast(const(GDate)*)cPtr, tm);
   }
 
   /**
@@ -620,7 +620,7 @@ class Date : Boxed
   bool valid()
   {
     bool _retval;
-    _retval = g_date_valid(cast(GDate*)cPtr);
+    _retval = g_date_valid(cast(const(GDate)*)cPtr);
     return _retval;
   }
 
@@ -632,7 +632,7 @@ class Date : Boxed
    *   year = year
    * Returns: number of days in month during the year
    */
-  static ubyte getDaysInMonth(DateMonth month, DateYear year)
+  static ubyte getDaysInMonth(glib.types.DateMonth month, glib.types.DateYear year)
   {
     ubyte _retval;
     _retval = g_date_get_days_in_month(month, year);
@@ -651,7 +651,7 @@ class Date : Boxed
    *   year = a year
    * Returns: number of Mondays in the year
    */
-  static ubyte getMondayWeeksInYear(DateYear year)
+  static ubyte getMondayWeeksInYear(glib.types.DateYear year)
   {
     ubyte _retval;
     _retval = g_date_get_monday_weeks_in_year(year);
@@ -670,7 +670,7 @@ class Date : Boxed
    *   year = year to count weeks in
    * Returns: the number of weeks in year
    */
-  static ubyte getSundayWeeksInYear(DateYear year)
+  static ubyte getSundayWeeksInYear(glib.types.DateYear year)
   {
     ubyte _retval;
     _retval = g_date_get_sunday_weeks_in_year(year);
@@ -687,7 +687,7 @@ class Date : Boxed
    *   year = year to check
    * Returns: %TRUE if the year is a leap year
    */
-  static bool isLeapYear(DateYear year)
+  static bool isLeapYear(glib.types.DateYear year)
   {
     bool _retval;
     _retval = g_date_is_leap_year(year);
@@ -714,12 +714,12 @@ class Date : Boxed
    *   date = valid #GDate
    * Returns: number of characters written to the buffer, or 0 the buffer was too small
    */
-  static size_t strftime(string s, size_t slen, string format, Date date)
+  static size_t strftime(string s, size_t slen, string format, glib.date.Date date)
   {
     size_t _retval;
     char* _s = s.toCString(No.Alloc);
     const(char)* _format = format.toCString(No.Alloc);
-    _retval = g_date_strftime(_s, slen, _format, date ? cast(GDate*)date.cPtr(No.Dup) : null);
+    _retval = g_date_strftime(_s, slen, _format, date ? cast(const(GDate)*)date.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -730,7 +730,7 @@ class Date : Boxed
    *   day = day to check
    * Returns: %TRUE if the day is valid
    */
-  static bool validDay(DateDay day)
+  static bool validDay(glib.types.DateDay day)
   {
     bool _retval;
     _retval = g_date_valid_day(day);
@@ -747,7 +747,7 @@ class Date : Boxed
    *   year = year
    * Returns: %TRUE if the date is a valid one
    */
-  static bool validDmy(DateDay day, DateMonth month, DateYear year)
+  static bool validDmy(glib.types.DateDay day, glib.types.DateMonth month, glib.types.DateYear year)
   {
     bool _retval;
     _retval = g_date_valid_dmy(day, month, year);
@@ -775,7 +775,7 @@ class Date : Boxed
    *   month = month
    * Returns: %TRUE if the month is valid
    */
-  static bool validMonth(DateMonth month)
+  static bool validMonth(glib.types.DateMonth month)
   {
     bool _retval;
     _retval = g_date_valid_month(month);
@@ -789,7 +789,7 @@ class Date : Boxed
    *   weekday = weekday
    * Returns: %TRUE if the weekday is valid
    */
-  static bool validWeekday(DateWeekday weekday)
+  static bool validWeekday(glib.types.DateWeekday weekday)
   {
     bool _retval;
     _retval = g_date_valid_weekday(weekday);
@@ -803,7 +803,7 @@ class Date : Boxed
    *   year = year
    * Returns: %TRUE if the year is valid
    */
-  static bool validYear(DateYear year)
+  static bool validYear(glib.types.DateYear year)
   {
     bool _retval;
     _retval = g_date_valid_year(year);

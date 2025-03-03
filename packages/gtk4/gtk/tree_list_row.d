@@ -1,8 +1,7 @@
 module gtk.tree_list_row;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
-import gio.list_model_mixin;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -18,7 +17,7 @@ import gtk.types;
  * an icon to expand or collapse a row or [gtk.tree_list_row_sorter.TreeListRowSorter] that
  * makes it possible to sort trees properly.
  */
-class TreeListRow : ObjectG
+class TreeListRow : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -44,27 +43,27 @@ class TreeListRow : ObjectG
    *   position = position of the child to get
    * Returns: the child in position
    */
-  TreeListRow getChildRow(uint position)
+  gtk.tree_list_row.TreeListRow getChildRow(uint position)
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_list_row_get_child_row(cast(GtkTreeListRow*)cPtr, position);
-    auto _retval = ObjectG.getDObject!TreeListRow(cast(GtkTreeListRow*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
     return _retval;
   }
 
   /**
    * If the row is expanded, gets the model holding the children of self.
    * This model is the model created by the
-   * [gtk.TreeListModelCreateModelFunc]
+   * [gtk.types.TreeListModelCreateModelFunc]
    * and contains the original items, no matter what value
    * [gtk.tree_list_model.TreeListModel.gboolean] is set to.
    * Returns: The model containing the children
    */
-  ListModel getChildren()
+  gio.list_model.ListModel getChildren()
   {
     GListModel* _cretval;
     _cretval = gtk_tree_list_row_get_children(cast(GtkTreeListRow*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -101,11 +100,11 @@ class TreeListRow : ObjectG
    *   of this row. This function is only marked as nullable for backwards
    *   compatibility reasons.
    */
-  ObjectG getItem()
+  gobject.object.ObjectG getItem()
   {
     ObjectC* _cretval;
     _cretval = gtk_tree_list_row_get_item(cast(GtkTreeListRow*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -120,11 +119,11 @@ class TreeListRow : ObjectG
    * it will forever return %NULL.
    * Returns: The parent of self
    */
-  TreeListRow getParent()
+  gtk.tree_list_row.TreeListRow getParent()
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_list_row_get_parent(cast(GtkTreeListRow*)cPtr);
-    auto _retval = ObjectG.getDObject!TreeListRow(cast(GtkTreeListRow*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -158,7 +157,7 @@ class TreeListRow : ObjectG
   /**
    * Expands or collapses a row.
    * If a row is expanded, the model of calling the
-   * [gtk.TreeListModelCreateModelFunc] for the row's
+   * [gtk.types.TreeListModelCreateModelFunc] for the row's
    * item will be inserted after this row. If a row is collapsed,
    * those items will be removed from the model.
    * If the row is not expandable, this function does nothing.

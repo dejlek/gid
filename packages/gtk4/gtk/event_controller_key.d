@@ -1,7 +1,7 @@
 module gtk.event_controller_key;
 
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -15,7 +15,7 @@ import gtk.widget;
  * `GtkEventControllerKey` is an event controller that provides access
  * to key events.
  */
-class EventControllerKey : EventController
+class EventControllerKey : gtk.event_controller.EventController
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -55,7 +55,7 @@ class EventControllerKey : EventController
    *   widget = a `GtkWidget`
    * Returns: whether the widget handled the event
    */
-  bool forward(Widget widget)
+  bool forward(gtk.widget.Widget widget)
   {
     bool _retval;
     _retval = gtk_event_controller_key_forward(cast(GtkEventControllerKey*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
@@ -78,11 +78,11 @@ class EventControllerKey : EventController
    * Gets the input method context of the key controller.
    * Returns: the `GtkIMContext`
    */
-  IMContext getImContext()
+  gtk.imcontext.IMContext getImContext()
   {
     GtkIMContext* _cretval;
     _cretval = gtk_event_controller_key_get_im_context(cast(GtkEventControllerKey*)cPtr);
-    auto _retval = ObjectG.getDObject!IMContext(cast(GtkIMContext*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.imcontext.IMContext)(cast(GtkIMContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class EventControllerKey : EventController
    * Params:
    *   imContext = a `GtkIMContext`
    */
-  void setImContext(IMContext imContext)
+  void setImContext(gtk.imcontext.IMContext imContext)
   {
     gtk_event_controller_key_set_im_context(cast(GtkEventControllerKey*)cPtr, imContext ? cast(GtkIMContext*)imContext.cPtr(No.Dup) : null);
   }
@@ -103,8 +103,8 @@ class EventControllerKey : EventController
    * [gtk.imcontext.IMContext.filterKeypress].
    *   eventControllerKey = the instance the signal is connected to
    */
-  alias ImUpdateCallbackDlg = void delegate(EventControllerKey eventControllerKey);
-  alias ImUpdateCallbackFunc = void function(EventControllerKey eventControllerKey);
+  alias ImUpdateCallbackDlg = void delegate(gtk.event_controller_key.EventControllerKey eventControllerKey);
+  alias ImUpdateCallbackFunc = void function(gtk.event_controller_key.EventControllerKey eventControllerKey);
 
   /**
    * Connect to ImUpdate signal.
@@ -120,7 +120,7 @@ class EventControllerKey : EventController
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto eventControllerKey = getVal!EventControllerKey(_paramVals);
+      auto eventControllerKey = getVal!(gtk.event_controller_key.EventControllerKey)(_paramVals);
       _dClosure.dlg(eventControllerKey);
     }
 
@@ -137,8 +137,8 @@ class EventControllerKey : EventController
    *   eventControllerKey = the instance the signal is connected to
    * Returns: %TRUE if the key press was handled, %FALSE otherwise.
    */
-  alias KeyPressedCallbackDlg = bool delegate(uint keyval, uint keycode, ModifierType state, EventControllerKey eventControllerKey);
-  alias KeyPressedCallbackFunc = bool function(uint keyval, uint keycode, ModifierType state, EventControllerKey eventControllerKey);
+  alias KeyPressedCallbackDlg = bool delegate(uint keyval, uint keycode, gdk.types.ModifierType state, gtk.event_controller_key.EventControllerKey eventControllerKey);
+  alias KeyPressedCallbackFunc = bool function(uint keyval, uint keycode, gdk.types.ModifierType state, gtk.event_controller_key.EventControllerKey eventControllerKey);
 
   /**
    * Connect to KeyPressed signal.
@@ -155,10 +155,10 @@ class EventControllerKey : EventController
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto eventControllerKey = getVal!EventControllerKey(_paramVals);
-      auto keyval = getVal!uint(&_paramVals[1]);
-      auto keycode = getVal!uint(&_paramVals[2]);
-      auto state = getVal!ModifierType(&_paramVals[3]);
+      auto eventControllerKey = getVal!(gtk.event_controller_key.EventControllerKey)(_paramVals);
+      auto keyval = getVal!(uint)(&_paramVals[1]);
+      auto keycode = getVal!(uint)(&_paramVals[2]);
+      auto state = getVal!(gdk.types.ModifierType)(&_paramVals[3]);
       _retval = _dClosure.dlg(keyval, keycode, state, eventControllerKey);
       setVal!bool(_returnValue, _retval);
     }
@@ -175,8 +175,8 @@ class EventControllerKey : EventController
    *   state = the bitmask, representing the state of modifier keys and pointer buttons.
    *   eventControllerKey = the instance the signal is connected to
    */
-  alias KeyReleasedCallbackDlg = void delegate(uint keyval, uint keycode, ModifierType state, EventControllerKey eventControllerKey);
-  alias KeyReleasedCallbackFunc = void function(uint keyval, uint keycode, ModifierType state, EventControllerKey eventControllerKey);
+  alias KeyReleasedCallbackDlg = void delegate(uint keyval, uint keycode, gdk.types.ModifierType state, gtk.event_controller_key.EventControllerKey eventControllerKey);
+  alias KeyReleasedCallbackFunc = void function(uint keyval, uint keycode, gdk.types.ModifierType state, gtk.event_controller_key.EventControllerKey eventControllerKey);
 
   /**
    * Connect to KeyReleased signal.
@@ -192,10 +192,10 @@ class EventControllerKey : EventController
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto eventControllerKey = getVal!EventControllerKey(_paramVals);
-      auto keyval = getVal!uint(&_paramVals[1]);
-      auto keycode = getVal!uint(&_paramVals[2]);
-      auto state = getVal!ModifierType(&_paramVals[3]);
+      auto eventControllerKey = getVal!(gtk.event_controller_key.EventControllerKey)(_paramVals);
+      auto keyval = getVal!(uint)(&_paramVals[1]);
+      auto keycode = getVal!(uint)(&_paramVals[2]);
+      auto state = getVal!(gdk.types.ModifierType)(&_paramVals[3]);
       _dClosure.dlg(keyval, keycode, state, eventControllerKey);
     }
 
@@ -211,8 +211,8 @@ class EventControllerKey : EventController
    *   eventControllerKey = the instance the signal is connected to
    * Returns:
    */
-  alias ModifiersCallbackDlg = bool delegate(ModifierType state, EventControllerKey eventControllerKey);
-  alias ModifiersCallbackFunc = bool function(ModifierType state, EventControllerKey eventControllerKey);
+  alias ModifiersCallbackDlg = bool delegate(gdk.types.ModifierType state, gtk.event_controller_key.EventControllerKey eventControllerKey);
+  alias ModifiersCallbackFunc = bool function(gdk.types.ModifierType state, gtk.event_controller_key.EventControllerKey eventControllerKey);
 
   /**
    * Connect to Modifiers signal.
@@ -229,8 +229,8 @@ class EventControllerKey : EventController
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto eventControllerKey = getVal!EventControllerKey(_paramVals);
-      auto state = getVal!ModifierType(&_paramVals[1]);
+      auto eventControllerKey = getVal!(gtk.event_controller_key.EventControllerKey)(_paramVals);
+      auto state = getVal!(gdk.types.ModifierType)(&_paramVals[1]);
       _retval = _dClosure.dlg(state, eventControllerKey);
       setVal!bool(_returnValue, _retval);
     }

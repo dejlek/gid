@@ -6,9 +6,8 @@ import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.types;
 import gdkpixbuf.pixbuf;
-import gid.global;
+import gid.gid;
 import gio.file;
-import gio.file_mixin;
 import gio.icon;
 import gio.icon_mixin;
 import gio.loadable_icon;
@@ -30,7 +29,7 @@ import gobject.object;
  * anything about it other than increasing the reference count via
  * [gobject.object.ObjectG.ref_], and consequently, it is a thread-safe object.
  */
-class Texture : ObjectG, Paintable, Icon, LoadableIcon
+class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, gio.loadable_icon.LoadableIcon
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -62,11 +61,11 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
    *   pixbuf = a `GdkPixbuf`
    * Returns: a new `GdkTexture`
    */
-  static Texture newForPixbuf(Pixbuf pixbuf)
+  static gdk.texture.Texture newForPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GdkTexture* _cretval;
     _cretval = gdk_texture_new_for_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -82,14 +81,14 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
    *   bytes = a `GBytes` containing the data to load
    * Returns: A newly-created `GdkTexture`
    */
-  static Texture newFromBytes(Bytes bytes)
+  static gdk.texture.Texture newFromBytes(glib.bytes.Bytes bytes)
   {
     GdkTexture* _cretval;
     GError *_err;
     _cretval = gdk_texture_new_from_bytes(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -105,14 +104,14 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
    *   file = `GFile` to load
    * Returns: A newly-created `GdkTexture`
    */
-  static Texture newFromFile(File file)
+  static gdk.texture.Texture newFromFile(gio.file.File file)
   {
     GdkTexture* _cretval;
     GError *_err;
     _cretval = gdk_texture_new_from_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -128,7 +127,7 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
    *   path = the filename to load
    * Returns: A newly-created `GdkTexture`
    */
-  static Texture newFromFilename(string path)
+  static gdk.texture.Texture newFromFilename(string path)
   {
     GdkTexture* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -136,7 +135,7 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
     _cretval = gdk_texture_new_from_filename(_path, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -155,12 +154,12 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
    *   resourcePath = the path of the resource file
    * Returns: A newly-created `GdkTexture`
    */
-  static Texture newFromResource(string resourcePath)
+  static gdk.texture.Texture newFromResource(string resourcePath)
   {
     GdkTexture* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gdk_texture_new_from_resource(_resourcePath);
-    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -174,11 +173,11 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
    * downloading the texture.
    * Returns: the preferred format for the texture's data
    */
-  MemoryFormat getFormat()
+  gdk.types.MemoryFormat getFormat()
   {
     GdkMemoryFormat _cretval;
     _cretval = gdk_texture_get_format(cast(GdkTexture*)cPtr);
-    MemoryFormat _retval = cast(MemoryFormat)_cretval;
+    gdk.types.MemoryFormat _retval = cast(gdk.types.MemoryFormat)_cretval;
     return _retval;
   }
 
@@ -236,11 +235,11 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
    * instead.
    * Returns: a newly allocated `GBytes` containing PNG data
    */
-  Bytes saveToPngBytes()
+  glib.bytes.Bytes saveToPngBytes()
   {
     GBytes* _cretval;
     _cretval = gdk_texture_save_to_png_bytes(cast(GdkTexture*)cPtr);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -271,11 +270,11 @@ class Texture : ObjectG, Paintable, Icon, LoadableIcon
    * use [gdk.texture.Texture.saveToPngBytes].
    * Returns: a newly allocated `GBytes` containing TIFF data
    */
-  Bytes saveToTiffBytes()
+  glib.bytes.Bytes saveToTiffBytes()
   {
     GBytes* _cretval;
     _cretval = gdk_texture_save_to_tiff_bytes(cast(GdkTexture*)cPtr);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

@@ -1,9 +1,8 @@
 module secret.retrievable_mixin;
 
 public import secret.retrievable_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.async_result;
-public import gio.async_result_mixin;
 public import gio.cancellable;
 public import gio.types;
 public import glib.error;
@@ -63,7 +62,7 @@ template RetrievableT()
   {
     char* _cretval;
     _cretval = secret_retrievable_get_label(cast(SecretRetrievable*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -89,14 +88,14 @@ template RetrievableT()
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  override void retrieveSecret(Cancellable cancellable, AsyncReadyCallback callback)
+  override void retrieveSecret(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -111,14 +110,14 @@ template RetrievableT()
    * Returns: the secret value which should be
    *   released with [secret.value.ValueSecret.unref], or %NULL
    */
-  override ValueSecret retrieveSecretFinish(AsyncResult result)
+  override secret.value.ValueSecret retrieveSecretFinish(gio.async_result.AsyncResult result)
   {
     SecretValue* _cretval;
     GError *_err;
     _cretval = secret_retrievable_retrieve_secret_finish(cast(SecretRetrievable*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new ValueSecret(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new secret.value.ValueSecret(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -133,14 +132,14 @@ template RetrievableT()
    * Returns: the secret value which should be
    *   released with [secret.value.ValueSecret.unref], or %NULL
    */
-  override ValueSecret retrieveSecretSync(Cancellable cancellable)
+  override secret.value.ValueSecret retrieveSecretSync(gio.cancellable.Cancellable cancellable)
   {
     SecretValue* _cretval;
     GError *_err;
     _cretval = secret_retrievable_retrieve_secret_sync(cast(SecretRetrievable*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new ValueSecret(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new secret.value.ValueSecret(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

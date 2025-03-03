@@ -1,6 +1,6 @@
 module gio.credentials;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -34,7 +34,7 @@ import gobject.object;
  * Since GLib 2.72, on Windows, the native credentials may contain the PID of a
  * process. This corresponds to `G_CREDENTIALS_TYPE_WIN32_PID`.
  */
-class Credentials : ObjectG
+class Credentials : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -110,7 +110,7 @@ class Credentials : ObjectG
    * Returns: %TRUE if credentials and other_credentials has the same
    *   user, %FALSE otherwise or if error is set.
    */
-  bool isSameUser(Credentials otherCredentials)
+  bool isSameUser(gio.credentials.Credentials otherCredentials)
   {
     bool _retval;
     GError *_err;
@@ -130,7 +130,7 @@ class Credentials : ObjectG
    *   nativeType = The type of native credentials to set.
    *   native = A pointer to native credentials.
    */
-  void setNative(CredentialsType nativeType, void* native)
+  void setNative(gio.types.CredentialsType nativeType, void* native)
   {
     g_credentials_set_native(cast(GCredentials*)cPtr, nativeType, native);
   }
@@ -166,7 +166,7 @@ class Credentials : ObjectG
   {
     char* _cretval;
     _cretval = g_credentials_to_string(cast(GCredentials*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

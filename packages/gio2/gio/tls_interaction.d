@@ -1,8 +1,7 @@
 module gio.tls_interaction;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -30,7 +29,7 @@ import gobject.object;
  * `G_TLS_INTERACTION_UNHANDLED`. If a derived class implements an async method,
  * it must also implement the corresponding finish method.
  */
-class TlsInteraction : ObjectG
+class TlsInteraction : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -66,14 +65,14 @@ class TlsInteraction : ObjectG
    *   cancellable = an optional #GCancellable cancellation object
    * Returns: The status of the ask password interaction.
    */
-  TlsInteractionResult askPassword(TlsPassword password, Cancellable cancellable)
+  gio.types.TlsInteractionResult askPassword(gio.tls_password.TlsPassword password, gio.cancellable.Cancellable cancellable)
   {
     GTlsInteractionResult _cretval;
     GError *_err;
     _cretval = g_tls_interaction_ask_password(cast(GTlsInteraction*)cPtr, password ? cast(GTlsPassword*)password.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    TlsInteractionResult _retval = cast(TlsInteractionResult)_cretval;
+    gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
     return _retval;
   }
 
@@ -95,14 +94,14 @@ class TlsInteraction : ObjectG
    *   cancellable = an optional #GCancellable cancellation object
    *   callback = will be called when the interaction completes
    */
-  void askPasswordAsync(TlsPassword password, Cancellable cancellable, AsyncReadyCallback callback)
+  void askPasswordAsync(gio.tls_password.TlsPassword password, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -122,14 +121,14 @@ class TlsInteraction : ObjectG
    *   result = the result passed to the callback
    * Returns: The status of the ask password interaction.
    */
-  TlsInteractionResult askPasswordFinish(AsyncResult result)
+  gio.types.TlsInteractionResult askPasswordFinish(gio.async_result.AsyncResult result)
   {
     GTlsInteractionResult _cretval;
     GError *_err;
     _cretval = g_tls_interaction_ask_password_finish(cast(GTlsInteraction*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    TlsInteractionResult _retval = cast(TlsInteractionResult)_cretval;
+    gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
     return _retval;
   }
 
@@ -155,14 +154,14 @@ class TlsInteraction : ObjectG
    *   cancellable = an optional #GCancellable cancellation object
    * Returns: The status of the ask password interaction.
    */
-  TlsInteractionResult invokeAskPassword(TlsPassword password, Cancellable cancellable)
+  gio.types.TlsInteractionResult invokeAskPassword(gio.tls_password.TlsPassword password, gio.cancellable.Cancellable cancellable)
   {
     GTlsInteractionResult _cretval;
     GError *_err;
     _cretval = g_tls_interaction_invoke_ask_password(cast(GTlsInteraction*)cPtr, password ? cast(GTlsPassword*)password.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    TlsInteractionResult _retval = cast(TlsInteractionResult)_cretval;
+    gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
     return _retval;
   }
 
@@ -190,14 +189,14 @@ class TlsInteraction : ObjectG
    *   cancellable = an optional #GCancellable cancellation object
    * Returns: The status of the certificate request interaction.
    */
-  TlsInteractionResult invokeRequestCertificate(TlsConnection connection, TlsCertificateRequestFlags flags, Cancellable cancellable)
+  gio.types.TlsInteractionResult invokeRequestCertificate(gio.tls_connection.TlsConnection connection, gio.types.TlsCertificateRequestFlags flags, gio.cancellable.Cancellable cancellable)
   {
     GTlsInteractionResult _cretval;
     GError *_err;
     _cretval = g_tls_interaction_invoke_request_certificate(cast(GTlsInteraction*)cPtr, connection ? cast(GTlsConnection*)connection.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    TlsInteractionResult _retval = cast(TlsInteractionResult)_cretval;
+    gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
     return _retval;
   }
 
@@ -221,14 +220,14 @@ class TlsInteraction : ObjectG
    *   cancellable = an optional #GCancellable cancellation object
    * Returns: The status of the request certificate interaction.
    */
-  TlsInteractionResult requestCertificate(TlsConnection connection, TlsCertificateRequestFlags flags, Cancellable cancellable)
+  gio.types.TlsInteractionResult requestCertificate(gio.tls_connection.TlsConnection connection, gio.types.TlsCertificateRequestFlags flags, gio.cancellable.Cancellable cancellable)
   {
     GTlsInteractionResult _cretval;
     GError *_err;
     _cretval = g_tls_interaction_request_certificate(cast(GTlsInteraction*)cPtr, connection ? cast(GTlsConnection*)connection.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    TlsInteractionResult _retval = cast(TlsInteractionResult)_cretval;
+    gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
     return _retval;
   }
 
@@ -246,14 +245,14 @@ class TlsInteraction : ObjectG
    *   cancellable = an optional #GCancellable cancellation object
    *   callback = will be called when the interaction completes
    */
-  void requestCertificateAsync(TlsConnection connection, TlsCertificateRequestFlags flags, Cancellable cancellable, AsyncReadyCallback callback)
+  void requestCertificateAsync(gio.tls_connection.TlsConnection connection, gio.types.TlsCertificateRequestFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -274,14 +273,14 @@ class TlsInteraction : ObjectG
    *   result = the result passed to the callback
    * Returns: The status of the request certificate interaction.
    */
-  TlsInteractionResult requestCertificateFinish(AsyncResult result)
+  gio.types.TlsInteractionResult requestCertificateFinish(gio.async_result.AsyncResult result)
   {
     GTlsInteractionResult _cretval;
     GError *_err;
     _cretval = g_tls_interaction_request_certificate_finish(cast(GTlsInteraction*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    TlsInteractionResult _retval = cast(TlsInteractionResult)_cretval;
+    gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
     return _retval;
   }
 }

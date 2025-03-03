@@ -1,6 +1,6 @@
 module harfbuzz.shape_plan;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -15,7 +15,7 @@ import harfbuzz.types;
  * of specific input parameters $(LPAREN)script, language, direction, features,
  * etc.$(RPAREN).
  */
-class ShapePlan : Boxed
+class ShapePlan : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -1,6 +1,6 @@
 module glib.string_;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.c.functions;
 import glib.c.types;
@@ -17,7 +17,7 @@ import gobject.boxed;
  * `GString` is like a `GByteArray` with the addition of many convenience methods for
  * text, and a guaranteed nul terminator.
  */
-class String : Boxed
+class String : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -99,12 +99,12 @@ class String : Boxed
    *   len = length of init to use
    * Returns: a new #GString
    */
-  static String newLen(string init_, ptrdiff_t len)
+  static glib.string_.String newLen(string init_, ptrdiff_t len)
   {
     GString* _cretval;
     const(char)* _init_ = init_.toCString(No.Alloc);
     _cretval = g_string_new_len(_init_, len);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -119,12 +119,12 @@ class String : Boxed
    *     Passing %NULL creates an empty string.
    * Returns: the new #GString
    */
-  static String newTake(string init_)
+  static glib.string_.String newTake(string init_)
   {
     GString* _cretval;
     char* _init_ = init_.toCString(Yes.Alloc);
     _cretval = g_string_new_take(_init_);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -137,11 +137,11 @@ class String : Boxed
    *   dflSize = the default size of the space allocated to hold the string
    * Returns: the new #GString
    */
-  static String sizedNew(size_t dflSize)
+  static glib.string_.String sizedNew(size_t dflSize)
   {
     GString* _cretval;
     _cretval = g_string_sized_new(dflSize);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -152,12 +152,12 @@ class String : Boxed
    *   val = the string to append onto the end of string
    * Returns: string
    */
-  String append(string val)
+  glib.string_.String append(string val)
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
     _cretval = g_string_append(cast(GString*)cPtr, _val);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -168,11 +168,11 @@ class String : Boxed
    *   c = the byte to append onto the end of string
    * Returns: string
    */
-  String appendC(char c)
+  glib.string_.String appendC(char c)
   {
     GString* _cretval;
     _cretval = g_string_append_c(cast(GString*)cPtr, c);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -189,12 +189,12 @@ class String : Boxed
    *   len = number of bytes of val to use, or -1 for all of val
    * Returns: string
    */
-  String appendLen(string val, ptrdiff_t len)
+  glib.string_.String appendLen(string val, ptrdiff_t len)
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
     _cretval = g_string_append_len(cast(GString*)cPtr, _val, len);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -205,11 +205,11 @@ class String : Boxed
    *   wc = a Unicode character
    * Returns: string
    */
-  String appendUnichar(dchar wc)
+  glib.string_.String appendUnichar(dchar wc)
   {
     GString* _cretval;
     _cretval = g_string_append_unichar(cast(GString*)cPtr, wc);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -223,13 +223,13 @@ class String : Boxed
    *   allowUtf8 = set %TRUE if the escaped string may include UTF8 characters
    * Returns: string
    */
-  String appendUriEscaped(string unescaped, string reservedCharsAllowed, bool allowUtf8)
+  glib.string_.String appendUriEscaped(string unescaped, string reservedCharsAllowed, bool allowUtf8)
   {
     GString* _cretval;
     const(char)* _unescaped = unescaped.toCString(No.Alloc);
     const(char)* _reservedCharsAllowed = reservedCharsAllowed.toCString(No.Alloc);
     _cretval = g_string_append_uri_escaped(cast(GString*)cPtr, _unescaped, _reservedCharsAllowed, allowUtf8);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -239,11 +239,11 @@ class String : Boxed
    *   uppercase characters converted to lowercase in place,
    *   with semantics that exactly match [glib.global.asciiTolower].
    */
-  String asciiDown()
+  glib.string_.String asciiDown()
   {
     GString* _cretval;
     _cretval = g_string_ascii_down(cast(GString*)cPtr);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -253,11 +253,11 @@ class String : Boxed
    *   lowercase characters converted to uppercase in place,
    *   with semantics that exactly match [glib.global.asciiToupper].
    */
-  String asciiUp()
+  glib.string_.String asciiUp()
   {
     GString* _cretval;
     _cretval = g_string_ascii_up(cast(GString*)cPtr);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -270,12 +270,12 @@ class String : Boxed
    *   rval = the string to copy into string
    * Returns: string
    */
-  String assign(string rval)
+  glib.string_.String assign(string rval)
   {
     GString* _cretval;
     const(char)* _rval = rval.toCString(No.Alloc);
     _cretval = g_string_assign(cast(GString*)cPtr, _rval);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -287,11 +287,11 @@ class String : Boxed
    *   tolower$(LPAREN)$(RPAREN) function, which is almost never the right thing.
    *   Use [glib.string_.String.asciiDown] or [glib.global.utf8Strdown] instead.
    */
-  String down()
+  glib.string_.String down()
   {
     GString* _cretval;
     _cretval = g_string_down(cast(GString*)cPtr);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -303,10 +303,10 @@ class String : Boxed
    * Returns: %TRUE if the strings are the same length and contain the
    *   same bytes
    */
-  bool equal(String v2)
+  bool equal(glib.string_.String v2)
   {
     bool _retval;
-    _retval = g_string_equal(cast(GString*)cPtr, v2 ? cast(GString*)v2.cPtr(No.Dup) : null);
+    _retval = g_string_equal(cast(const(GString)*)cPtr, v2 ? cast(const(GString)*)v2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -319,11 +319,11 @@ class String : Boxed
    *     following bytes
    * Returns: string
    */
-  String erase(ptrdiff_t pos, ptrdiff_t len)
+  glib.string_.String erase(ptrdiff_t pos, ptrdiff_t len)
   {
     GString* _cretval;
     _cretval = g_string_erase(cast(GString*)cPtr, pos, len);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -337,7 +337,7 @@ class String : Boxed
   {
     char* _cretval;
     _cretval = g_string_free_and_steal(cast(GString*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -351,11 +351,11 @@ class String : Boxed
    * equal to the "len" member.
    * Returns: A newly allocated #GBytes containing contents of string; string itself is freed
    */
-  Bytes freeToBytes()
+  glib.bytes.Bytes freeToBytes()
   {
     GBytes* _cretval;
     _cretval = g_string_free_to_bytes(cast(GString*)cPtr);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -366,7 +366,7 @@ class String : Boxed
   uint hash()
   {
     uint _retval;
-    _retval = g_string_hash(cast(GString*)cPtr);
+    _retval = g_string_hash(cast(const(GString)*)cPtr);
     return _retval;
   }
 
@@ -378,12 +378,12 @@ class String : Boxed
    *   val = the string to insert
    * Returns: string
    */
-  String insert(ptrdiff_t pos, string val)
+  glib.string_.String insert(ptrdiff_t pos, string val)
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
     _cretval = g_string_insert(cast(GString*)cPtr, pos, _val);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -394,11 +394,11 @@ class String : Boxed
    *   c = the byte to insert
    * Returns: string
    */
-  String insertC(ptrdiff_t pos, char c)
+  glib.string_.String insertC(ptrdiff_t pos, char c)
   {
     GString* _cretval;
     _cretval = g_string_insert_c(cast(GString*)cPtr, pos, c);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -417,12 +417,12 @@ class String : Boxed
    *   len = number of bytes of val to insert, or -1 for all of val
    * Returns: string
    */
-  String insertLen(ptrdiff_t pos, string val, ptrdiff_t len)
+  glib.string_.String insertLen(ptrdiff_t pos, string val, ptrdiff_t len)
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
     _cretval = g_string_insert_len(cast(GString*)cPtr, pos, _val, len);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -435,11 +435,11 @@ class String : Boxed
    *   wc = a Unicode character
    * Returns: string
    */
-  String insertUnichar(ptrdiff_t pos, dchar wc)
+  glib.string_.String insertUnichar(ptrdiff_t pos, dchar wc)
   {
     GString* _cretval;
     _cretval = g_string_insert_unichar(cast(GString*)cPtr, pos, wc);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -450,12 +450,12 @@ class String : Boxed
    *   val = the string that will overwrite the string starting at pos
    * Returns: string
    */
-  String overwrite(size_t pos, string val)
+  glib.string_.String overwrite(size_t pos, string val)
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
     _cretval = g_string_overwrite(cast(GString*)cPtr, pos, _val);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -468,12 +468,12 @@ class String : Boxed
    *   len = the number of bytes to write from val
    * Returns: string
    */
-  String overwriteLen(size_t pos, string val, ptrdiff_t len)
+  glib.string_.String overwriteLen(size_t pos, string val, ptrdiff_t len)
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
     _cretval = g_string_overwrite_len(cast(GString*)cPtr, pos, _val, len);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -484,12 +484,12 @@ class String : Boxed
    *   val = the string to prepend on the start of string
    * Returns: string
    */
-  String prepend(string val)
+  glib.string_.String prepend(string val)
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
     _cretval = g_string_prepend(cast(GString*)cPtr, _val);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -500,11 +500,11 @@ class String : Boxed
    *   c = the byte to prepend on the start of the #GString
    * Returns: string
    */
-  String prependC(char c)
+  glib.string_.String prependC(char c)
   {
     GString* _cretval;
     _cretval = g_string_prepend_c(cast(GString*)cPtr, c);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -521,12 +521,12 @@ class String : Boxed
    *   len = number of bytes in val to prepend, or -1 for all of val
    * Returns: string
    */
-  String prependLen(string val, ptrdiff_t len)
+  glib.string_.String prependLen(string val, ptrdiff_t len)
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
     _cretval = g_string_prepend_len(cast(GString*)cPtr, _val, len);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -537,11 +537,11 @@ class String : Boxed
    *   wc = a Unicode character
    * Returns: string
    */
-  String prependUnichar(dchar wc)
+  glib.string_.String prependUnichar(dchar wc)
   {
     GString* _cretval;
     _cretval = g_string_prepend_unichar(cast(GString*)cPtr, wc);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -580,11 +580,11 @@ class String : Boxed
    *   len = the new length
    * Returns: string
    */
-  String setSize(size_t len)
+  glib.string_.String setSize(size_t len)
   {
     GString* _cretval;
     _cretval = g_string_set_size(cast(GString*)cPtr, len);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -594,11 +594,11 @@ class String : Boxed
    *   len = the new size of string
    * Returns: string
    */
-  String truncate(size_t len)
+  glib.string_.String truncate(size_t len)
   {
     GString* _cretval;
     _cretval = g_string_truncate(cast(GString*)cPtr, len);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -610,11 +610,11 @@ class String : Boxed
    *   toupper$(LPAREN)$(RPAREN) function, which is almost never the right thing.
    *   Use [glib.string_.String.asciiUp] or [glib.global.utf8Strup] instead.
    */
-  String up()
+  glib.string_.String up()
   {
     GString* _cretval;
     _cretval = g_string_up(cast(GString*)cPtr);
-    auto _retval = _cretval ? new String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

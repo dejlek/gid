@@ -1,9 +1,8 @@
 module gio.proxy_resolver_mixin;
 
 public import gio.proxy_resolver_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.async_result;
-public import gio.async_result_mixin;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
@@ -58,7 +57,7 @@ template ProxyResolverT()
    *   NULL-terminated array of proxy URIs. Must be freed
    *   with [glib.global.strfreev].
    */
-  override string[] lookup(string uri, Cancellable cancellable)
+  override string[] lookup(string uri, gio.cancellable.Cancellable cancellable)
   {
     char** _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -88,14 +87,14 @@ template ProxyResolverT()
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call after resolution completes
    */
-  override void lookupAsync(string uri, Cancellable cancellable, AsyncReadyCallback callback)
+  override void lookupAsync(string uri, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -114,7 +113,7 @@ template ProxyResolverT()
    *   NULL-terminated array of proxy URIs. Must be freed
    *   with [glib.global.strfreev].
    */
-  override string[] lookupFinish(AsyncResult result)
+  override string[] lookupFinish(gio.async_result.AsyncResult result)
   {
     char** _cretval;
     GError *_err;

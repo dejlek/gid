@@ -1,7 +1,7 @@
 module gtk.print_job;
 
 import cairo.surface;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.dclosure;
 import gobject.object;
@@ -22,7 +22,7 @@ import gtk.types;
  * `GtkPrintJob` also supports printing of manually generated PostScript,
  * via [gtk.print_job.PrintJob.setSourceFile].
  */
-class PrintJob : ObjectG
+class PrintJob : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -50,7 +50,7 @@ class PrintJob : ObjectG
    *   pageSetup = a `GtkPageSetup`
    * Returns: a new `GtkPrintJob`
    */
-  this(string title, Printer printer, PrintSettings settings, PageSetup pageSetup)
+  this(string title, gtk.printer.Printer printer, gtk.print_settings.PrintSettings settings, gtk.page_setup.PageSetup pageSetup)
   {
     GtkPrintJob* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -84,11 +84,11 @@ class PrintJob : ObjectG
    * Gets the n-up layout setting for this job.
    * Returns: the n-up layout
    */
-  NumberUpLayout getNUpLayout()
+  gtk.types.NumberUpLayout getNUpLayout()
   {
     GtkNumberUpLayout _cretval;
     _cretval = gtk_print_job_get_n_up_layout(cast(GtkPrintJob*)cPtr);
-    NumberUpLayout _retval = cast(NumberUpLayout)_cretval;
+    gtk.types.NumberUpLayout _retval = cast(gtk.types.NumberUpLayout)_cretval;
     return _retval;
   }
 
@@ -108,16 +108,16 @@ class PrintJob : ObjectG
    * Returns: a pointer to an
    *   array of `GtkPageRange` structs
    */
-  PageRange[] getPageRanges()
+  gtk.types.PageRange[] getPageRanges()
   {
     GtkPageRange* _cretval;
     int _cretlength;
     _cretval = gtk_print_job_get_page_ranges(cast(GtkPrintJob*)cPtr, &_cretlength);
-    PageRange[] _retval;
+    gtk.types.PageRange[] _retval;
 
     if (_cretval)
     {
-      _retval = new PageRange[_cretlength];
+      _retval = new gtk.types.PageRange[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i];
     }
@@ -128,11 +128,11 @@ class PrintJob : ObjectG
    * Gets the `GtkPageSet` setting for this job.
    * Returns: the `GtkPageSet` setting
    */
-  PageSet getPageSet()
+  gtk.types.PageSet getPageSet()
   {
     GtkPageSet _cretval;
     _cretval = gtk_print_job_get_page_set(cast(GtkPrintJob*)cPtr);
-    PageSet _retval = cast(PageSet)_cretval;
+    gtk.types.PageSet _retval = cast(gtk.types.PageSet)_cretval;
     return _retval;
   }
 
@@ -140,11 +140,11 @@ class PrintJob : ObjectG
    * Gets the `GtkPrintPages` setting for this job.
    * Returns: the `GtkPrintPages` setting
    */
-  PrintPages getPages()
+  gtk.types.PrintPages getPages()
   {
     GtkPrintPages _cretval;
     _cretval = gtk_print_job_get_pages(cast(GtkPrintJob*)cPtr);
-    PrintPages _retval = cast(PrintPages)_cretval;
+    gtk.types.PrintPages _retval = cast(gtk.types.PrintPages)_cretval;
     return _retval;
   }
 
@@ -152,11 +152,11 @@ class PrintJob : ObjectG
    * Gets the `GtkPrinter` of the print job.
    * Returns: the printer of job
    */
-  Printer getPrinter()
+  gtk.printer.Printer getPrinter()
   {
     GtkPrinter* _cretval;
     _cretval = gtk_print_job_get_printer(cast(GtkPrintJob*)cPtr);
-    auto _retval = ObjectG.getDObject!Printer(cast(GtkPrinter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.printer.Printer)(cast(GtkPrinter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -197,11 +197,11 @@ class PrintJob : ObjectG
    * Gets the `GtkPrintSettings` of the print job.
    * Returns: the settings of job
    */
-  PrintSettings getSettings()
+  gtk.print_settings.PrintSettings getSettings()
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_job_get_settings(cast(GtkPrintJob*)cPtr);
-    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -209,11 +209,11 @@ class PrintJob : ObjectG
    * Gets the status of the print job.
    * Returns: the status of job
    */
-  PrintStatus getStatus()
+  gtk.types.PrintStatus getStatus()
   {
     GtkPrintStatus _cretval;
     _cretval = gtk_print_job_get_status(cast(GtkPrintJob*)cPtr);
-    PrintStatus _retval = cast(PrintStatus)_cretval;
+    gtk.types.PrintStatus _retval = cast(gtk.types.PrintStatus)_cretval;
     return _retval;
   }
 
@@ -222,14 +222,14 @@ class PrintJob : ObjectG
    * the print job should be rendered.
    * Returns: the cairo surface of job
    */
-  Surface getSurface()
+  cairo.surface.Surface getSurface()
   {
     cairo_surface_t* _cretval;
     GError *_err;
     _cretval = gtk_print_job_get_surface(cast(GtkPrintJob*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class PrintJob : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_job_get_title(cast(GtkPrintJob*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -262,13 +262,13 @@ class PrintJob : ObjectG
    * Params:
    *   callback = function to call when the job completes or an error occurs
    */
-  void send(PrintJobCompleteFunc callback)
+  void send(gtk.types.PrintJobCompleteFunc callback)
   {
     extern(C) void _callbackCallback(GtkPrintJob* printJob, void* userData, const(GError)* error)
     {
-      auto _dlg = cast(PrintJobCompleteFunc*)userData;
+      auto _dlg = cast(gtk.types.PrintJobCompleteFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!PrintJob(cast(void*)printJob, No.Take), error ? new ErrorG(cast(void*)error, No.Take) : null);
+      (*_dlg)(ObjectG.getDObject!(gtk.print_job.PrintJob)(cast(void*)printJob, No.Take), error ? new glib.error.ErrorG(cast(void*)error, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -302,7 +302,7 @@ class PrintJob : ObjectG
    * Params:
    *   layout = the n-up layout setting
    */
-  void setNUpLayout(NumberUpLayout layout)
+  void setNUpLayout(gtk.types.NumberUpLayout layout)
   {
     gtk_print_job_set_n_up_layout(cast(GtkPrintJob*)cPtr, layout);
   }
@@ -322,7 +322,7 @@ class PrintJob : ObjectG
    * Params:
    *   pageSet = a `GtkPageSet` setting
    */
-  void setPageSet(PageSet pageSet)
+  void setPageSet(gtk.types.PageSet pageSet)
   {
     gtk_print_job_set_page_set(cast(GtkPrintJob*)cPtr, pageSet);
   }
@@ -332,7 +332,7 @@ class PrintJob : ObjectG
    * Params:
    *   pages = the `GtkPrintPages` setting
    */
-  void setPages(PrintPages pages)
+  void setPages(gtk.types.PrintPages pages)
   {
     gtk_print_job_set_pages(cast(GtkPrintJob*)cPtr, pages);
   }
@@ -435,8 +435,8 @@ class PrintJob : ObjectG
    * to obtain the new status.
    *   printJob = the instance the signal is connected to
    */
-  alias StatusChangedCallbackDlg = void delegate(PrintJob printJob);
-  alias StatusChangedCallbackFunc = void function(PrintJob printJob);
+  alias StatusChangedCallbackDlg = void delegate(gtk.print_job.PrintJob printJob);
+  alias StatusChangedCallbackFunc = void function(gtk.print_job.PrintJob printJob);
 
   /**
    * Connect to StatusChanged signal.
@@ -452,7 +452,7 @@ class PrintJob : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printJob = getVal!PrintJob(_paramVals);
+      auto printJob = getVal!(gtk.print_job.PrintJob)(_paramVals);
       _dClosure.dlg(printJob);
     }
 

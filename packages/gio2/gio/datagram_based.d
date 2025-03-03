@@ -1,7 +1,7 @@
 module gio.datagram_based;
 
 public import gio.datagram_based_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -96,7 +96,7 @@ interface DatagramBased
    *   condition = a #GIOCondition mask to check
    * Returns: the #GIOCondition mask of the current state
    */
-  IOCondition conditionCheck(IOCondition condition);
+  glib.types.IOCondition conditionCheck(glib.types.IOCondition condition);
 
   /**
    * Waits for up to timeout microseconds for condition to become true on
@@ -111,7 +111,7 @@ interface DatagramBased
    *   cancellable = a #GCancellable
    * Returns: %TRUE if the condition was met, %FALSE otherwise
    */
-  bool conditionWait(IOCondition condition, long timeout, Cancellable cancellable);
+  bool conditionWait(glib.types.IOCondition condition, long timeout, gio.cancellable.Cancellable cancellable);
 
   /**
    * Creates a #GSource that can be attached to a #GMainContext to monitor for
@@ -130,5 +130,5 @@ interface DatagramBased
    *   cancellable = a #GCancellable
    * Returns: a newly allocated #GSource
    */
-  Source createSource(IOCondition condition, Cancellable cancellable);
+  glib.source.Source createSource(glib.types.IOCondition condition, gio.cancellable.Cancellable cancellable);
 }

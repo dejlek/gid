@@ -1,7 +1,7 @@
 module gtk.gesture_single;
 
 import gdk.event_sequence;
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.gesture;
@@ -21,7 +21,7 @@ import gtk.types;
  * button being currently pressed can be known through
  * [gtk.gesture_single.GestureSingle.getCurrentButton].
  */
-class GestureSingle : Gesture
+class GestureSingle : gtk.gesture.Gesture
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -70,11 +70,11 @@ class GestureSingle : Gesture
    * returns %TRUE.
    * Returns: the current sequence
    */
-  EventSequence getCurrentSequence()
+  gdk.event_sequence.EventSequence getCurrentSequence()
   {
     GdkEventSequence* _cretval;
     _cretval = gtk_gesture_single_get_current_sequence(cast(GtkGestureSingle*)cPtr);
-    auto _retval = _cretval ? new EventSequence(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.event_sequence.EventSequence(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

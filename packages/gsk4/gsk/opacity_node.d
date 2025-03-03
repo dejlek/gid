@@ -1,6 +1,6 @@
 module gsk.opacity_node;
 
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.render_node;
@@ -9,7 +9,7 @@ import gsk.types;
 /**
  * A render node controlling the opacity of its single child node.
  */
-class OpacityNode : RenderNode
+class OpacityNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -28,7 +28,7 @@ class OpacityNode : RenderNode
    *   opacity = The opacity to apply
    * Returns: A new `GskRenderNode`
    */
-  this(RenderNode child, float opacity)
+  this(gsk.render_node.RenderNode child, float opacity)
   {
     GskRenderNode* _cretval;
     _cretval = gsk_opacity_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, opacity);
@@ -39,11 +39,11 @@ class OpacityNode : RenderNode
    * Gets the child node that is getting opacityed by the given node.
    * Returns: The child that is getting opacityed
    */
-  RenderNode getChild()
+  gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_opacity_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    _cretval = gsk_opacity_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -54,7 +54,7 @@ class OpacityNode : RenderNode
   float getOpacity()
   {
     float _retval;
-    _retval = gsk_opacity_node_get_opacity(cast(GskRenderNode*)cPtr);
+    _retval = gsk_opacity_node_get_opacity(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 }

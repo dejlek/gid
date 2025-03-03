@@ -3,10 +3,10 @@ module arrowflight.server_call_context;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class ServerCallContext : ObjectG
+class ServerCallContext : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -30,11 +30,11 @@ class ServerCallContext : ObjectG
    * Params:
    *   func = The user's callback function.
    */
-  void foreachIncomingHeader(HeaderFunc func)
+  void foreachIncomingHeader(arrowflight.types.HeaderFunc func)
   {
     extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData)
     {
-      auto _dlg = cast(HeaderFunc*)userData;
+      auto _dlg = cast(arrowflight.types.HeaderFunc*)userData;
       string _name = name.fromCString(No.Free);
       string _value = value.fromCString(No.Free);
 

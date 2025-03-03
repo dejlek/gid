@@ -1,14 +1,12 @@
 module gio.network_monitor_mixin;
 
 public import gio.network_monitor_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.async_result;
-public import gio.async_result_mixin;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
 public import gio.socket_connectable;
-public import gio.socket_connectable_mixin;
 public import gio.types;
 public import glib.error;
 public import gobject.dclosure;
@@ -45,7 +43,7 @@ template NetworkMonitorT()
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE if connectable is reachable, %FALSE if not.
    */
-  override bool canReach(SocketConnectable connectable, Cancellable cancellable)
+  override bool canReach(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -69,14 +67,14 @@ template NetworkMonitorT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void canReachAsync(SocketConnectable connectable, Cancellable cancellable, AsyncReadyCallback callback)
+  override void canReachAsync(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -91,7 +89,7 @@ template NetworkMonitorT()
    *   result = a #GAsyncResult
    * Returns: %TRUE if network is reachable, %FALSE if not.
    */
-  override bool canReachFinish(AsyncResult result)
+  override bool canReachFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -120,11 +118,11 @@ template NetworkMonitorT()
    * back to their "offline" behavior if the connection attempt fails.
    * Returns: the network connectivity state
    */
-  override NetworkConnectivity getConnectivity()
+  override gio.types.NetworkConnectivity getConnectivity()
   {
     GNetworkConnectivity _cretval;
     _cretval = g_network_monitor_get_connectivity(cast(GNetworkMonitor*)cPtr);
-    NetworkConnectivity _retval = cast(NetworkConnectivity)_cretval;
+    gio.types.NetworkConnectivity _retval = cast(gio.types.NetworkConnectivity)_cretval;
     return _retval;
   }
 
@@ -160,8 +158,8 @@ template NetworkMonitorT()
    *   networkAvailable = the current value of #GNetworkMonitor:network-available
    *   networkMonitor = the instance the signal is connected to
    */
-  alias NetworkChangedCallbackDlg = void delegate(bool networkAvailable, NetworkMonitor networkMonitor);
-  alias NetworkChangedCallbackFunc = void function(bool networkAvailable, NetworkMonitor networkMonitor);
+  alias NetworkChangedCallbackDlg = void delegate(bool networkAvailable, gio.network_monitor.NetworkMonitor networkMonitor);
+  alias NetworkChangedCallbackFunc = void function(bool networkAvailable, gio.network_monitor.NetworkMonitor networkMonitor);
 
   /**
    * Connect to NetworkChanged signal.
@@ -177,8 +175,8 @@ template NetworkMonitorT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto networkMonitor = getVal!NetworkMonitor(_paramVals);
-      auto networkAvailable = getVal!bool(&_paramVals[1]);
+      auto networkMonitor = getVal!(gio.network_monitor.NetworkMonitor)(_paramVals);
+      auto networkAvailable = getVal!(bool)(&_paramVals[1]);
       _dClosure.dlg(networkAvailable, networkMonitor);
     }
 

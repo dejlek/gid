@@ -1,6 +1,6 @@
 module gtk.mnemonic_action;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -10,7 +10,7 @@ import gtk.types;
 /**
  * A `GtkShortcutAction` that calls [gtk.widget.Widget.mnemonicActivate].
  */
-class MnemonicAction : ShortcutAction
+class MnemonicAction : gtk.shortcut_action.ShortcutAction
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -35,11 +35,11 @@ class MnemonicAction : ShortcutAction
    * on the given widget upon activation.
    * Returns: The mnemonic action
    */
-  static MnemonicAction get()
+  static gtk.mnemonic_action.MnemonicAction get()
   {
     GtkShortcutAction* _cretval;
     _cretval = gtk_mnemonic_action_get();
-    auto _retval = ObjectG.getDObject!MnemonicAction(cast(GtkShortcutAction*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.mnemonic_action.MnemonicAction)(cast(GtkShortcutAction*)_cretval, No.Take);
     return _retval;
   }
 }

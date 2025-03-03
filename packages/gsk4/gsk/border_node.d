@@ -1,7 +1,7 @@
 module gsk.border_node;
 
 import gdk.rgba;
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.render_node;
@@ -11,7 +11,7 @@ import gsk.types;
 /**
  * A render node for a border.
  */
-class BorderNode : RenderNode
+class BorderNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -34,7 +34,7 @@ class BorderNode : RenderNode
    *     bottom and left side.
    * Returns: A new `GskRenderNode`
    */
-  this(RoundedRect outline, float[] borderWidth, RGBA[] borderColor)
+  this(gsk.rounded_rect.RoundedRect outline, float[] borderWidth, gdk.rgba.RGBA[] borderColor)
   {
     GskRenderNode* _cretval;
     assert(!borderWidth || borderWidth.length == 4);
@@ -44,7 +44,7 @@ class BorderNode : RenderNode
     foreach (obj; borderColor)
       _tmpborderColor ~= *cast(GdkRGBA*)obj.cPtr;
     const(GdkRGBA)* _borderColor = _tmpborderColor.ptr;
-    _cretval = gsk_border_node_new(outline ? cast(GskRoundedRect*)outline.cPtr : null, _borderWidth, _borderColor);
+    _cretval = gsk_border_node_new(outline ? cast(const(GskRoundedRect)*)outline.cPtr : null, _borderWidth, _borderColor);
     this(_cretval, Yes.Take);
   }
 
@@ -53,11 +53,11 @@ class BorderNode : RenderNode
    * Returns: an array of 4 `GdkRGBA` structs
    *   for the top, right, bottom and left color of the border
    */
-  RGBA getColors()
+  gdk.rgba.RGBA getColors()
   {
     const(GdkRGBA)* _cretval;
-    _cretval = gsk_border_node_get_colors(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, No.Take) : null;
+    _cretval = gsk_border_node_get_colors(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -65,11 +65,11 @@ class BorderNode : RenderNode
    * Retrieves the outline of the border.
    * Returns: the outline of the border
    */
-  RoundedRect getOutline()
+  gsk.rounded_rect.RoundedRect getOutline()
   {
     const(GskRoundedRect)* _cretval;
-    _cretval = gsk_border_node_get_outline(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RoundedRect(cast(GskRoundedRect*)_cretval) : null;
+    _cretval = gsk_border_node_get_outline(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval) : null;
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class BorderNode : RenderNode
   float[] getWidths()
   {
     const(float)* _cretval;
-    _cretval = gsk_border_node_get_widths(cast(GskRenderNode*)cPtr);
+    _cretval = gsk_border_node_get_widths(cast(const(GskRenderNode)*)cPtr);
     float[] _retval;
 
     if (_cretval)

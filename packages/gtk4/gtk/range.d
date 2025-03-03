@@ -1,7 +1,7 @@
 module gtk.range;
 
 import gdk.rectangle;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -29,7 +29,7 @@ import gtk.widget;
  * `GtkRange` provides properties and methods for setting a
  * “fill level” on range widgets. See [gtk.range.Range.setFillLevel].
  */
-class Range : Widget, AccessibleRange, Orientable
+class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -55,11 +55,11 @@ class Range : Widget, AccessibleRange, Orientable
    * Get the adjustment which is the “model” object for `GtkRange`.
    * Returns: a `GtkAdjustment`
    */
-  Adjustment getAdjustment()
+  gtk.adjustment.Adjustment getAdjustment()
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_range_get_adjustment(cast(GtkRange*)cPtr);
-    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -105,11 +105,11 @@ class Range : Widget, AccessibleRange, Orientable
    * Params:
    *   rangeRect = return location for the range rectangle
    */
-  void getRangeRect(out Rectangle rangeRect)
+  void getRangeRect(out gdk.rectangle.Rectangle rangeRect)
   {
     GdkRectangle _rangeRect;
     gtk_range_get_range_rect(cast(GtkRange*)cPtr, &_rangeRect);
-    rangeRect = new Rectangle(cast(void*)&_rangeRect, No.Take);
+    rangeRect = new gdk.rectangle.Rectangle(cast(void*)&_rangeRect, No.Take);
   }
 
   /**
@@ -194,7 +194,7 @@ class Range : Widget, AccessibleRange, Orientable
    * Params:
    *   adjustment = a `GtkAdjustment`
    */
-  void setAdjustment(Adjustment adjustment)
+  void setAdjustment(gtk.adjustment.Adjustment adjustment)
   {
     gtk_range_set_adjustment(cast(GtkRange*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
@@ -345,8 +345,8 @@ class Range : Widget, AccessibleRange, Orientable
    *   value = the value before we clamp
    *   range = the instance the signal is connected to
    */
-  alias AdjustBoundsCallbackDlg = void delegate(double value, Range range);
-  alias AdjustBoundsCallbackFunc = void function(double value, Range range);
+  alias AdjustBoundsCallbackDlg = void delegate(double value, gtk.range.Range range);
+  alias AdjustBoundsCallbackFunc = void function(double value, gtk.range.Range range);
 
   /**
    * Connect to AdjustBounds signal.
@@ -362,8 +362,8 @@ class Range : Widget, AccessibleRange, Orientable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto range = getVal!Range(_paramVals);
-      auto value = getVal!double(&_paramVals[1]);
+      auto range = getVal!(gtk.range.Range)(_paramVals);
+      auto value = getVal!(double)(&_paramVals[1]);
       _dClosure.dlg(value, range);
     }
 
@@ -389,8 +389,8 @@ class Range : Widget, AccessibleRange, Orientable
    * Returns: %TRUE to prevent other handlers from being invoked for
    *   the signal, %FALSE to propagate the signal further
    */
-  alias ChangeValueCallbackDlg = bool delegate(ScrollType scroll, double value, Range range);
-  alias ChangeValueCallbackFunc = bool function(ScrollType scroll, double value, Range range);
+  alias ChangeValueCallbackDlg = bool delegate(gtk.types.ScrollType scroll, double value, gtk.range.Range range);
+  alias ChangeValueCallbackFunc = bool function(gtk.types.ScrollType scroll, double value, gtk.range.Range range);
 
   /**
    * Connect to ChangeValue signal.
@@ -407,9 +407,9 @@ class Range : Widget, AccessibleRange, Orientable
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto range = getVal!Range(_paramVals);
-      auto scroll = getVal!ScrollType(&_paramVals[1]);
-      auto value = getVal!double(&_paramVals[2]);
+      auto range = getVal!(gtk.range.Range)(_paramVals);
+      auto scroll = getVal!(gtk.types.ScrollType)(&_paramVals[1]);
+      auto value = getVal!(double)(&_paramVals[2]);
       _retval = _dClosure.dlg(scroll, value, range);
       setVal!bool(_returnValue, _retval);
     }
@@ -425,8 +425,8 @@ class Range : Widget, AccessibleRange, Orientable
    *   step = how to move the slider
    *   range = the instance the signal is connected to
    */
-  alias MoveSliderCallbackDlg = void delegate(ScrollType step, Range range);
-  alias MoveSliderCallbackFunc = void function(ScrollType step, Range range);
+  alias MoveSliderCallbackDlg = void delegate(gtk.types.ScrollType step, gtk.range.Range range);
+  alias MoveSliderCallbackFunc = void function(gtk.types.ScrollType step, gtk.range.Range range);
 
   /**
    * Connect to MoveSlider signal.
@@ -442,8 +442,8 @@ class Range : Widget, AccessibleRange, Orientable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto range = getVal!Range(_paramVals);
-      auto step = getVal!ScrollType(&_paramVals[1]);
+      auto range = getVal!(gtk.range.Range)(_paramVals);
+      auto step = getVal!(gtk.types.ScrollType)(&_paramVals[1]);
       _dClosure.dlg(step, range);
     }
 
@@ -455,8 +455,8 @@ class Range : Widget, AccessibleRange, Orientable
    * Emitted when the range value changes.
    *   range = the instance the signal is connected to
    */
-  alias ValueChangedCallbackDlg = void delegate(Range range);
-  alias ValueChangedCallbackFunc = void function(Range range);
+  alias ValueChangedCallbackDlg = void delegate(gtk.range.Range range);
+  alias ValueChangedCallbackFunc = void function(gtk.range.Range range);
 
   /**
    * Connect to ValueChanged signal.
@@ -472,7 +472,7 @@ class Range : Widget, AccessibleRange, Orientable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto range = getVal!Range(_paramVals);
+      auto range = getVal!(gtk.range.Range)(_paramVals);
       _dClosure.dlg(range);
     }
 

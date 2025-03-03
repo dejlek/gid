@@ -1,6 +1,6 @@
 module gtk.list_header;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -14,7 +14,7 @@ import gtk.widget;
  * objects via their factory, but provide a different set of properties suitable
  * for managing the header instead of individual items.
  */
-class ListHeader : ObjectG
+class ListHeader : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -38,11 +38,11 @@ class ListHeader : ObjectG
    * %NULL if none was set.
    * Returns: The child
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_header_get_child(cast(GtkListHeader*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -66,11 +66,11 @@ class ListHeader : ObjectG
    * If self is unbound, this function returns %NULL.
    * Returns: The item displayed
    */
-  ObjectG getItem()
+  gobject.object.ObjectG getItem()
   {
     ObjectC* _cretval;
     _cretval = gtk_list_header_get_item(cast(GtkListHeader*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class ListHeader : ObjectG
    * Params:
    *   child = The list item's child or %NULL to unset
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_list_header_set_child(cast(GtkListHeader*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

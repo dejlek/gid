@@ -6,10 +6,10 @@ import arrowdataset.dataset;
 import arrowdataset.file_system_dataset_write_options;
 import arrowdataset.scanner;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class FileSystemDataset : Dataset
+class FileSystemDataset : arrowdataset.dataset.Dataset
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -28,7 +28,7 @@ class FileSystemDataset : Dataset
     return getType();
   }
 
-  static bool writeScanner(Scanner scanner, FileSystemDatasetWriteOptions options)
+  static bool writeScanner(arrowdataset.scanner.Scanner scanner, arrowdataset.file_system_dataset_write_options.FileSystemDatasetWriteOptions options)
   {
     bool _retval;
     GError *_err;

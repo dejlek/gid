@@ -1,8 +1,7 @@
 module gtk.drop_down;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
-import gio.list_model_mixin;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -62,7 +61,7 @@ import gtk.widget;
  * ## Accessibility
  * `GtkDropDown` uses the %GTK_ACCESSIBLE_ROLE_COMBO_BOX role.
  */
-class DropDown : Widget
+class DropDown : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -90,7 +89,7 @@ class DropDown : Widget
    *   expression = the expression to use
    * Returns: a new `GtkDropDown`
    */
-  this(ListModel model, Expression expression)
+  this(gio.list_model.ListModel model, gtk.expression.Expression expression)
   {
     GtkWidget* _cretval;
     _cretval = gtk_drop_down_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
@@ -104,7 +103,7 @@ class DropDown : Widget
    *   strings = The strings to put in the dropdown
    * Returns: a new `GtkDropDown`
    */
-  static DropDown newFromStrings(string[] strings)
+  static gtk.drop_down.DropDown newFromStrings(string[] strings)
   {
     GtkWidget* _cretval;
     char*[] _tmpstrings;
@@ -113,7 +112,7 @@ class DropDown : Widget
     _tmpstrings ~= null;
     const(char*)* _strings = _tmpstrings.ptr;
     _cretval = gtk_drop_down_new_from_strings(_strings);
-    auto _retval = ObjectG.getDObject!DropDown(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.drop_down.DropDown)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -133,11 +132,11 @@ class DropDown : Widget
    * See [gtk.drop_down.DropDown.setExpression].
    * Returns: a `GtkExpression`
    */
-  Expression getExpression()
+  gtk.expression.Expression getExpression()
   {
     GtkExpression* _cretval;
     _cretval = gtk_drop_down_get_expression(cast(GtkDropDown*)cPtr);
-    auto _retval = _cretval ? new Expression(cast(GtkExpression*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -148,11 +147,11 @@ class DropDown : Widget
    * if propertyGtk.DropDown:list-factory is not set.
    * Returns: The factory in use
    */
-  ListItemFactory getFactory()
+  gtk.list_item_factory.ListItemFactory getFactory()
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_drop_down_get_factory(cast(GtkDropDown*)cPtr);
-    auto _retval = ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -160,11 +159,11 @@ class DropDown : Widget
    * Gets the factory that's currently used to create header widgets for the popup.
    * Returns: The factory in use
    */
-  ListItemFactory getHeaderFactory()
+  gtk.list_item_factory.ListItemFactory getHeaderFactory()
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_drop_down_get_header_factory(cast(GtkDropDown*)cPtr);
-    auto _retval = ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -172,11 +171,11 @@ class DropDown : Widget
    * Gets the factory that's currently used to populate list items in the popup.
    * Returns: The factory in use
    */
-  ListItemFactory getListFactory()
+  gtk.list_item_factory.ListItemFactory getListFactory()
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_drop_down_get_list_factory(cast(GtkDropDown*)cPtr);
-    auto _retval = ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -184,11 +183,11 @@ class DropDown : Widget
    * Gets the model that provides the displayed items.
    * Returns: The model in use
    */
-  ListModel getModel()
+  gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
     _cretval = gtk_drop_down_get_model(cast(GtkDropDown*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -196,11 +195,11 @@ class DropDown : Widget
    * Returns the match mode that the search filter is using.
    * Returns: the match mode of the search filter
    */
-  StringFilterMatchMode getSearchMatchMode()
+  gtk.types.StringFilterMatchMode getSearchMatchMode()
   {
     GtkStringFilterMatchMode _cretval;
     _cretval = gtk_drop_down_get_search_match_mode(cast(GtkDropDown*)cPtr);
-    StringFilterMatchMode _retval = cast(StringFilterMatchMode)_cretval;
+    gtk.types.StringFilterMatchMode _retval = cast(gtk.types.StringFilterMatchMode)_cretval;
     return _retval;
   }
 
@@ -220,11 +219,11 @@ class DropDown : Widget
    * Gets the selected item. If no item is selected, %NULL is returned.
    * Returns: The selected item
    */
-  ObjectG getSelectedItem()
+  gobject.object.ObjectG getSelectedItem()
   {
     ObjectC* _cretval;
     _cretval = gtk_drop_down_get_selected_item(cast(GtkDropDown*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -259,7 +258,7 @@ class DropDown : Widget
    * Params:
    *   expression = a `GtkExpression`
    */
-  void setExpression(Expression expression)
+  void setExpression(gtk.expression.Expression expression)
   {
     gtk_drop_down_set_expression(cast(GtkDropDown*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }
@@ -269,7 +268,7 @@ class DropDown : Widget
    * Params:
    *   factory = the factory to use
    */
-  void setFactory(ListItemFactory factory)
+  void setFactory(gtk.list_item_factory.ListItemFactory factory)
   {
     gtk_drop_down_set_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
@@ -279,7 +278,7 @@ class DropDown : Widget
    * Params:
    *   factory = the factory to use
    */
-  void setHeaderFactory(ListItemFactory factory)
+  void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory)
   {
     gtk_drop_down_set_header_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
@@ -289,7 +288,7 @@ class DropDown : Widget
    * Params:
    *   factory = the factory to use
    */
-  void setListFactory(ListItemFactory factory)
+  void setListFactory(gtk.list_item_factory.ListItemFactory factory)
   {
     gtk_drop_down_set_list_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
@@ -299,7 +298,7 @@ class DropDown : Widget
    * Params:
    *   model = the model to use
    */
-  void setModel(ListModel model)
+  void setModel(gio.list_model.ListModel model)
   {
     gtk_drop_down_set_model(cast(GtkDropDown*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
@@ -309,7 +308,7 @@ class DropDown : Widget
    * Params:
    *   searchMatchMode = the new match mode
    */
-  void setSearchMatchMode(StringFilterMatchMode searchMatchMode)
+  void setSearchMatchMode(gtk.types.StringFilterMatchMode searchMatchMode)
   {
     gtk_drop_down_set_search_match_mode(cast(GtkDropDown*)cPtr, searchMatchMode);
   }
@@ -340,8 +339,8 @@ class DropDown : Widget
    * emitting it causes the drop down to pop up its dropdown.
    *   dropDown = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(DropDown dropDown);
-  alias ActivateCallbackFunc = void function(DropDown dropDown);
+  alias ActivateCallbackDlg = void delegate(gtk.drop_down.DropDown dropDown);
+  alias ActivateCallbackFunc = void function(gtk.drop_down.DropDown dropDown);
 
   /**
    * Connect to Activate signal.
@@ -357,7 +356,7 @@ class DropDown : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dropDown = getVal!DropDown(_paramVals);
+      auto dropDown = getVal!(gtk.drop_down.DropDown)(_paramVals);
       _dClosure.dlg(dropDown);
     }
 

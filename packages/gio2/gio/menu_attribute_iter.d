@@ -1,6 +1,6 @@
 module gio.menu_attribute_iter;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -11,7 +11,7 @@ import gobject.object;
  * #GMenuAttributeIter is an opaque structure type.  You must access it
  * using the functions below.
  */
-class MenuAttributeIter : ObjectG
+class MenuAttributeIter : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -40,7 +40,7 @@ class MenuAttributeIter : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_menu_attribute_iter_get_name(cast(GMenuAttributeIter*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -63,14 +63,14 @@ class MenuAttributeIter : ObjectG
    * Returns: %TRUE on success, or %FALSE if there is no additional
    *   attribute
    */
-  bool getNext(out string outName, out VariantG value)
+  bool getNext(out string outName, out glib.variant.VariantG value)
   {
     bool _retval;
     char* _outName;
     VariantC* _value;
     _retval = g_menu_attribute_iter_get_next(cast(GMenuAttributeIter*)cPtr, &_outName, &_value);
     outName = _outName.fromCString(No.Free);
-    value = new VariantG(cast(void*)_value, Yes.Take);
+    value = new glib.variant.VariantG(cast(void*)_value, Yes.Take);
     return _retval;
   }
 
@@ -79,11 +79,11 @@ class MenuAttributeIter : ObjectG
    * The iterator is not advanced.
    * Returns: the value of the current attribute
    */
-  VariantG getValue()
+  glib.variant.VariantG getValue()
   {
     VariantC* _cretval;
     _cretval = g_menu_attribute_iter_get_value(cast(GMenuAttributeIter*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

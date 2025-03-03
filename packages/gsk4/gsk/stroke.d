@@ -1,7 +1,7 @@
 module gsk.stroke;
 
 import cairo.context;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gsk.c.functions;
 import gsk.c.types;
@@ -11,7 +11,7 @@ import gsk.types;
  * A `GskStroke` struct collects the parameters that influence
  * the operation of stroking a path.
  */
-class Stroke : Boxed
+class Stroke : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -52,11 +52,11 @@ class Stroke : Boxed
    * Creates a copy of the given other stroke.
    * Returns: a new `GskStroke`. Use [gsk.stroke.Stroke.free] to free it
    */
-  Stroke copy()
+  gsk.stroke.Stroke copy()
   {
     GskStroke* _cretval;
-    _cretval = gsk_stroke_copy(cast(GskStroke*)cPtr);
-    auto _retval = _cretval ? new Stroke(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gsk_stroke_copy(cast(const(GskStroke)*)cPtr);
+    auto _retval = _cretval ? new gsk.stroke.Stroke(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -68,7 +68,7 @@ class Stroke : Boxed
   {
     const(float)* _cretval;
     size_t _cretlength;
-    _cretval = gsk_stroke_get_dash(cast(GskStroke*)cPtr, &_cretlength);
+    _cretval = gsk_stroke_get_dash(cast(const(GskStroke)*)cPtr, &_cretlength);
     float[] _retval;
 
     if (_cretval)
@@ -85,33 +85,33 @@ class Stroke : Boxed
   float getDashOffset()
   {
     float _retval;
-    _retval = gsk_stroke_get_dash_offset(cast(GskStroke*)cPtr);
+    _retval = gsk_stroke_get_dash_offset(cast(const(GskStroke)*)cPtr);
     return _retval;
   }
 
   /**
    * Gets the line cap used.
-   * See [gsk.LineCap] for details.
+   * See [gsk.types.LineCap] for details.
    * Returns: The line cap
    */
-  LineCap getLineCap()
+  gsk.types.LineCap getLineCap()
   {
     GskLineCap _cretval;
-    _cretval = gsk_stroke_get_line_cap(cast(GskStroke*)cPtr);
-    LineCap _retval = cast(LineCap)_cretval;
+    _cretval = gsk_stroke_get_line_cap(cast(const(GskStroke)*)cPtr);
+    gsk.types.LineCap _retval = cast(gsk.types.LineCap)_cretval;
     return _retval;
   }
 
   /**
    * Gets the line join used.
-   * See [gsk.LineJoin] for details.
+   * See [gsk.types.LineJoin] for details.
    * Returns: The line join
    */
-  LineJoin getLineJoin()
+  gsk.types.LineJoin getLineJoin()
   {
     GskLineJoin _cretval;
-    _cretval = gsk_stroke_get_line_join(cast(GskStroke*)cPtr);
-    LineJoin _retval = cast(LineJoin)_cretval;
+    _cretval = gsk_stroke_get_line_join(cast(const(GskStroke)*)cPtr);
+    gsk.types.LineJoin _retval = cast(gsk.types.LineJoin)_cretval;
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class Stroke : Boxed
   float getLineWidth()
   {
     float _retval;
-    _retval = gsk_stroke_get_line_width(cast(GskStroke*)cPtr);
+    _retval = gsk_stroke_get_line_width(cast(const(GskStroke)*)cPtr);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class Stroke : Boxed
   float getMiterLimit()
   {
     float _retval;
-    _retval = gsk_stroke_get_miter_limit(cast(GskStroke*)cPtr);
+    _retval = gsk_stroke_get_miter_limit(cast(const(GskStroke)*)cPtr);
     return _retval;
   }
 
@@ -183,22 +183,22 @@ class Stroke : Boxed
 
   /**
    * Sets the line cap to be used when stroking.
-   * See [gsk.LineCap] for details.
+   * See [gsk.types.LineCap] for details.
    * Params:
    *   lineCap = the `GskLineCap`
    */
-  void setLineCap(LineCap lineCap)
+  void setLineCap(gsk.types.LineCap lineCap)
   {
     gsk_stroke_set_line_cap(cast(GskStroke*)cPtr, lineCap);
   }
 
   /**
    * Sets the line join to be used when stroking.
-   * See [gsk.LineJoin] for details.
+   * See [gsk.types.LineJoin] for details.
    * Params:
    *   lineJoin = The line join to use
    */
-  void setLineJoin(LineJoin lineJoin)
+  void setLineJoin(gsk.types.LineJoin lineJoin)
   {
     gsk_stroke_set_line_join(cast(GskStroke*)cPtr, lineJoin);
   }
@@ -235,9 +235,9 @@ class Stroke : Boxed
    * Params:
    *   cr = the cairo context to configure
    */
-  void toCairo(Context cr)
+  void toCairo(cairo.context.Context cr)
   {
-    gsk_stroke_to_cairo(cast(GskStroke*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
+    gsk_stroke_to_cairo(cast(const(GskStroke)*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
   }
 
   /**

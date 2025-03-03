@@ -3,9 +3,8 @@ module gtk.drag_source;
 import gdk.content_provider;
 import gdk.drag;
 import gdk.paintable;
-import gdk.paintable_mixin;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -80,7 +79,7 @@ import gtk.types;
  * signal@Gtk.DragSource::drag-end signal and delete the
  * data after it has been transferred.
  */
-class DragSource : GestureSingle
+class DragSource : gtk.gesture_single.GestureSingle
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -122,11 +121,11 @@ class DragSource : GestureSingle
    * Gets the actions that are currently set on the `GtkDragSource`.
    * Returns: the actions set on source
    */
-  DragAction getActions()
+  gdk.types.DragAction getActions()
   {
     GdkDragAction _cretval;
     _cretval = gtk_drag_source_get_actions(cast(GtkDragSource*)cPtr);
-    DragAction _retval = cast(DragAction)_cretval;
+    gdk.types.DragAction _retval = cast(gdk.types.DragAction)_cretval;
     return _retval;
   }
 
@@ -134,11 +133,11 @@ class DragSource : GestureSingle
    * Gets the current content provider of a `GtkDragSource`.
    * Returns: the `GdkContentProvider` of source
    */
-  ContentProvider getContent()
+  gdk.content_provider.ContentProvider getContent()
   {
     GdkContentProvider* _cretval;
     _cretval = gtk_drag_source_get_content(cast(GtkDragSource*)cPtr);
-    auto _retval = ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, No.Take);
     return _retval;
   }
 
@@ -147,11 +146,11 @@ class DragSource : GestureSingle
    * Returns: the `GdkDrag` of the current
    *   drag operation
    */
-  Drag getDrag()
+  gdk.drag.Drag getDrag()
   {
     GdkDrag* _cretval;
     _cretval = gtk_drag_source_get_drag(cast(GtkDragSource*)cPtr);
-    auto _retval = ObjectG.getDObject!Drag(cast(GdkDrag*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.drag.Drag)(cast(GdkDrag*)_cretval, No.Take);
     return _retval;
   }
 
@@ -166,7 +165,7 @@ class DragSource : GestureSingle
    * Params:
    *   actions = the actions to offer
    */
-  void setActions(DragAction actions)
+  void setActions(gdk.types.DragAction actions)
   {
     gtk_drag_source_set_actions(cast(GtkDragSource*)cPtr, actions);
   }
@@ -182,7 +181,7 @@ class DragSource : GestureSingle
    * Params:
    *   content = a `GdkContentProvider`
    */
-  void setContent(ContentProvider content)
+  void setContent(gdk.content_provider.ContentProvider content)
   {
     gtk_drag_source_set_content(cast(GtkDragSource*)cPtr, content ? cast(GdkContentProvider*)content.cPtr(No.Dup) : null);
   }
@@ -200,7 +199,7 @@ class DragSource : GestureSingle
    *   hotX = the hotspot X coordinate on the icon
    *   hotY = the hotspot Y coordinate on the icon
    */
-  void setIcon(Paintable paintable, int hotX, int hotY)
+  void setIcon(gdk.paintable.Paintable paintable, int hotX, int hotY)
   {
     gtk_drag_source_set_icon(cast(GtkDragSource*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null, hotX, hotY);
   }
@@ -213,8 +212,8 @@ class DragSource : GestureSingle
    *   drag = the `GdkDrag` object
    *   dragSource = the instance the signal is connected to
    */
-  alias DragBeginCallbackDlg = void delegate(Drag drag, DragSource dragSource);
-  alias DragBeginCallbackFunc = void function(Drag drag, DragSource dragSource);
+  alias DragBeginCallbackDlg = void delegate(gdk.drag.Drag drag, gtk.drag_source.DragSource dragSource);
+  alias DragBeginCallbackFunc = void function(gdk.drag.Drag drag, gtk.drag_source.DragSource dragSource);
 
   /**
    * Connect to DragBegin signal.
@@ -230,8 +229,8 @@ class DragSource : GestureSingle
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dragSource = getVal!DragSource(_paramVals);
-      auto drag = getVal!Drag(&_paramVals[1]);
+      auto dragSource = getVal!(gtk.drag_source.DragSource)(_paramVals);
+      auto drag = getVal!(gdk.drag.Drag)(&_paramVals[1]);
       _dClosure.dlg(drag, dragSource);
     }
 
@@ -250,8 +249,8 @@ class DragSource : GestureSingle
    *   dragSource = the instance the signal is connected to
    * Returns: %TRUE if the failed drag operation has been already handled
    */
-  alias DragCancelCallbackDlg = bool delegate(Drag drag, DragCancelReason reason, DragSource dragSource);
-  alias DragCancelCallbackFunc = bool function(Drag drag, DragCancelReason reason, DragSource dragSource);
+  alias DragCancelCallbackDlg = bool delegate(gdk.drag.Drag drag, gdk.types.DragCancelReason reason, gtk.drag_source.DragSource dragSource);
+  alias DragCancelCallbackFunc = bool function(gdk.drag.Drag drag, gdk.types.DragCancelReason reason, gtk.drag_source.DragSource dragSource);
 
   /**
    * Connect to DragCancel signal.
@@ -268,9 +267,9 @@ class DragSource : GestureSingle
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto dragSource = getVal!DragSource(_paramVals);
-      auto drag = getVal!Drag(&_paramVals[1]);
-      auto reason = getVal!DragCancelReason(&_paramVals[2]);
+      auto dragSource = getVal!(gtk.drag_source.DragSource)(_paramVals);
+      auto drag = getVal!(gdk.drag.Drag)(&_paramVals[1]);
+      auto reason = getVal!(gdk.types.DragCancelReason)(&_paramVals[2]);
       _retval = _dClosure.dlg(drag, reason, dragSource);
       setVal!bool(_returnValue, _retval);
     }
@@ -290,8 +289,8 @@ class DragSource : GestureSingle
    *     and the data should be deleted
    *   dragSource = the instance the signal is connected to
    */
-  alias DragEndCallbackDlg = void delegate(Drag drag, bool deleteData, DragSource dragSource);
-  alias DragEndCallbackFunc = void function(Drag drag, bool deleteData, DragSource dragSource);
+  alias DragEndCallbackDlg = void delegate(gdk.drag.Drag drag, bool deleteData, gtk.drag_source.DragSource dragSource);
+  alias DragEndCallbackFunc = void function(gdk.drag.Drag drag, bool deleteData, gtk.drag_source.DragSource dragSource);
 
   /**
    * Connect to DragEnd signal.
@@ -307,9 +306,9 @@ class DragSource : GestureSingle
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dragSource = getVal!DragSource(_paramVals);
-      auto drag = getVal!Drag(&_paramVals[1]);
-      auto deleteData = getVal!bool(&_paramVals[2]);
+      auto dragSource = getVal!(gtk.drag_source.DragSource)(_paramVals);
+      auto drag = getVal!(gdk.drag.Drag)(&_paramVals[1]);
+      auto deleteData = getVal!(bool)(&_paramVals[2]);
       _dClosure.dlg(drag, deleteData, dragSource);
     }
 
@@ -329,8 +328,8 @@ class DragSource : GestureSingle
    *   dragSource = the instance the signal is connected to
    * Returns: a `GdkContentProvider`
    */
-  alias PrepareCallbackDlg = ContentProvider delegate(double x, double y, DragSource dragSource);
-  alias PrepareCallbackFunc = ContentProvider function(double x, double y, DragSource dragSource);
+  alias PrepareCallbackDlg = gdk.content_provider.ContentProvider delegate(double x, double y, gtk.drag_source.DragSource dragSource);
+  alias PrepareCallbackFunc = gdk.content_provider.ContentProvider function(double x, double y, gtk.drag_source.DragSource dragSource);
 
   /**
    * Connect to Prepare signal.
@@ -346,11 +345,11 @@ class DragSource : GestureSingle
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dragSource = getVal!DragSource(_paramVals);
-      auto x = getVal!double(&_paramVals[1]);
-      auto y = getVal!double(&_paramVals[2]);
+      auto dragSource = getVal!(gtk.drag_source.DragSource)(_paramVals);
+      auto x = getVal!(double)(&_paramVals[1]);
+      auto y = getVal!(double)(&_paramVals[2]);
       auto _retval = _dClosure.dlg(x, y, dragSource);
-      setVal!ContentProvider(_returnValue, _retval);
+      setVal!gdk.content_provider.ContentProvider(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

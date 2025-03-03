@@ -4,7 +4,7 @@ public import atk.editable_text_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;
 public import atk.types;
-public import gid.global;
+public import gid.gid;
 
 /**
  * The ATK interface implemented by components containing user-editable text content.

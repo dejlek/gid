@@ -1,7 +1,7 @@
 module gio.tls_backend_mixin;
 
 public import gio.tls_backend_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.tls_database;
@@ -23,9 +23,9 @@ template TlsBackendT()
    * Returns: the #GType of backend's #GTlsCertificate
    *   implementation.
    */
-  override GType getCertificateType()
+  override gobject.types.GType getCertificateType()
   {
-    GType _retval;
+    gobject.types.GType _retval;
     _retval = g_tls_backend_get_certificate_type(cast(GTlsBackend*)cPtr);
     return _retval;
   }
@@ -35,9 +35,9 @@ template TlsBackendT()
    * Returns: the #GType of backend's #GTlsClientConnection
    *   implementation.
    */
-  override GType getClientConnectionType()
+  override gobject.types.GType getClientConnectionType()
   {
-    GType _retval;
+    gobject.types.GType _retval;
     _retval = g_tls_backend_get_client_connection_type(cast(GTlsBackend*)cPtr);
     return _retval;
   }
@@ -47,11 +47,11 @@ template TlsBackendT()
    * Returns: the default database, which should be
    *   unreffed when done.
    */
-  override TlsDatabase getDefaultDatabase()
+  override gio.tls_database.TlsDatabase getDefaultDatabase()
   {
     GTlsDatabase* _cretval;
     _cretval = g_tls_backend_get_default_database(cast(GTlsBackend*)cPtr);
-    auto _retval = ObjectG.getDObject!TlsDatabase(cast(GTlsDatabase*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -60,9 +60,9 @@ template TlsBackendT()
    * Returns: the #GType of backend’s #GDtlsClientConnection
    *   implementation, or %G_TYPE_INVALID if this backend doesn’t support DTLS.
    */
-  override GType getDtlsClientConnectionType()
+  override gobject.types.GType getDtlsClientConnectionType()
   {
-    GType _retval;
+    gobject.types.GType _retval;
     _retval = g_tls_backend_get_dtls_client_connection_type(cast(GTlsBackend*)cPtr);
     return _retval;
   }
@@ -72,9 +72,9 @@ template TlsBackendT()
    * Returns: the #GType of backend’s #GDtlsServerConnection
    *   implementation, or %G_TYPE_INVALID if this backend doesn’t support DTLS.
    */
-  override GType getDtlsServerConnectionType()
+  override gobject.types.GType getDtlsServerConnectionType()
   {
-    GType _retval;
+    gobject.types.GType _retval;
     _retval = g_tls_backend_get_dtls_server_connection_type(cast(GTlsBackend*)cPtr);
     return _retval;
   }
@@ -83,9 +83,9 @@ template TlsBackendT()
    * Gets the #GType of backend's #GTlsFileDatabase implementation.
    * Returns: the #GType of backend's #GTlsFileDatabase implementation.
    */
-  override GType getFileDatabaseType()
+  override gobject.types.GType getFileDatabaseType()
   {
-    GType _retval;
+    gobject.types.GType _retval;
     _retval = g_tls_backend_get_file_database_type(cast(GTlsBackend*)cPtr);
     return _retval;
   }
@@ -95,9 +95,9 @@ template TlsBackendT()
    * Returns: the #GType of backend's #GTlsServerConnection
    *   implementation.
    */
-  override GType getServerConnectionType()
+  override gobject.types.GType getServerConnectionType()
   {
-    GType _retval;
+    gobject.types.GType _retval;
     _retval = g_tls_backend_get_server_connection_type(cast(GTlsBackend*)cPtr);
     return _retval;
   }
@@ -112,7 +112,7 @@ template TlsBackendT()
    * Params:
    *   database = the #GTlsDatabase
    */
-  override void setDefaultDatabase(TlsDatabase database)
+  override void setDefaultDatabase(gio.tls_database.TlsDatabase database)
   {
     g_tls_backend_set_default_database(cast(GTlsBackend*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.Dup) : null);
   }

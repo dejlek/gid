@@ -1,15 +1,15 @@
 module vte.global;
 
-import gid.global;
+import gid.gid;
 import gobject.types;
 import vte.c.functions;
 import vte.c.types;
 import vte.types;
 
 
-GType eventContextGetType()
+gobject.types.GType eventContextGetType()
 {
-  GType _retval;
+  gobject.types.GType _retval;
   _retval = vte_event_context_get_type();
   return _retval;
 }
@@ -63,11 +63,11 @@ string[] getEncodings(bool includeAliases)
  * Gets features VTE was compiled with.
  * Returns: flags from #VteFeatureFlags
  */
-FeatureFlags getFeatureFlags()
+vte.types.FeatureFlags getFeatureFlags()
 {
   VteFeatureFlags _cretval;
   _cretval = vte_get_feature_flags();
-  FeatureFlags _retval = cast(FeatureFlags)_cretval;
+  vte.types.FeatureFlags _retval = cast(vte.types.FeatureFlags)_cretval;
   return _retval;
 }
 
@@ -79,7 +79,7 @@ string getFeatures()
 {
   const(char)* _cretval;
   _cretval = vte_get_features();
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -135,6 +135,6 @@ string getUserShell()
 {
   char* _cretval;
   _cretval = vte_get_user_shell();
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }

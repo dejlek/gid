@@ -1,9 +1,8 @@
 module gio.dtls_connection;
 
 public import gio.dtls_connection_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -63,7 +62,7 @@ interface DtlsConnection
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE on success, %FALSE otherwise
    */
-  bool close(Cancellable cancellable);
+  bool close(gio.cancellable.Cancellable cancellable);
 
   /**
    * Asynchronously close the DTLS connection. See [gio.dtls_connection.DtlsConnection.close] for
@@ -73,7 +72,7 @@ interface DtlsConnection
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the close operation is complete
    */
-  void closeAsync(int ioPriority, Cancellable cancellable, AsyncReadyCallback callback);
+  void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finish an asynchronous TLS close operation. See [gio.dtls_connection.DtlsConnection.close]
@@ -83,7 +82,7 @@ interface DtlsConnection
    * Returns: %TRUE on success, %FALSE on failure, in which
    *   case error will be set
    */
-  bool closeFinish(AsyncResult result);
+  bool closeFinish(gio.async_result.AsyncResult result);
 
   /**
    * Used by #GDtlsConnection implementations to emit the
@@ -94,14 +93,14 @@ interface DtlsConnection
    * Returns: %TRUE if one of the signal handlers has returned
    *   %TRUE to accept peer_cert
    */
-  bool emitAcceptCertificate(TlsCertificate peerCert, TlsCertificateFlags errors);
+  bool emitAcceptCertificate(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors);
 
   /**
    * Gets conn's certificate, as set by
    * [gio.dtls_connection.DtlsConnection.setCertificate].
    * Returns: conn's certificate, or %NULL
    */
-  TlsCertificate getCertificate();
+  gio.tls_certificate.TlsCertificate getCertificate();
 
   /**
    * Returns the name of the current DTLS ciphersuite, or %NULL if the
@@ -121,7 +120,7 @@ interface DtlsConnection
    * peer certificates. See [gio.dtls_connection.DtlsConnection.setDatabase].
    * Returns: the certificate database that conn uses or %NULL
    */
-  TlsDatabase getDatabase();
+  gio.tls_database.TlsDatabase getDatabase();
 
   /**
    * Get the object that will be used to interact with the user. It will be used
@@ -129,7 +128,7 @@ interface DtlsConnection
    * no user interaction will occur for this connection.
    * Returns: The interaction object.
    */
-  TlsInteraction getInteraction();
+  gio.tls_interaction.TlsInteraction getInteraction();
 
   /**
    * Gets the name of the application-layer protocol negotiated during
@@ -148,7 +147,7 @@ interface DtlsConnection
    * #GDtlsConnection::accept-certificate.$(RPAREN)
    * Returns: conn's peer's certificate, or %NULL
    */
-  TlsCertificate getPeerCertificate();
+  gio.tls_certificate.TlsCertificate getPeerCertificate();
 
   /**
    * Gets the errors associated with validating conn's peer's
@@ -156,7 +155,7 @@ interface DtlsConnection
    * not set during the emission of #GDtlsConnection::accept-certificate.$(RPAREN)
    * Returns: conn's peer's certificate errors
    */
-  TlsCertificateFlags getPeerCertificateErrors();
+  gio.types.TlsCertificateFlags getPeerCertificateErrors();
 
   /**
    * Returns the current DTLS protocol version, which may be
@@ -165,7 +164,7 @@ interface DtlsConnection
    * that is not a recognized #GTlsProtocolVersion.
    * Returns: The current DTLS protocol version
    */
-  TlsProtocolVersion getProtocolVersion();
+  gio.types.TlsProtocolVersion getProtocolVersion();
 
   /**
    * Gets conn rehandshaking mode. See
@@ -176,7 +175,7 @@ interface DtlsConnection
    *   required for compatibility. Also, rehandshaking has been removed
    *   from the TLS protocol in TLS 1.3.
    */
-  TlsRehandshakeMode getRehandshakeMode();
+  gio.types.TlsRehandshakeMode getRehandshakeMode();
 
   /**
    * Tests whether or not conn expects a proper TLS close notification
@@ -213,7 +212,7 @@ interface DtlsConnection
    *   cancellable = a #GCancellable, or %NULL
    * Returns: success or failure
    */
-  bool handshake(Cancellable cancellable);
+  bool handshake(gio.cancellable.Cancellable cancellable);
 
   /**
    * Asynchronously performs a TLS handshake on conn. See
@@ -223,7 +222,7 @@ interface DtlsConnection
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the handshake is complete
    */
-  void handshakeAsync(int ioPriority, Cancellable cancellable, AsyncReadyCallback callback);
+  void handshakeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finish an asynchronous TLS handshake operation. See
@@ -233,7 +232,7 @@ interface DtlsConnection
    * Returns: %TRUE on success, %FALSE on failure, in which
    *   case error will be set.
    */
-  bool handshakeFinish(AsyncResult result);
+  bool handshakeFinish(gio.async_result.AsyncResult result);
 
   /**
    * Sets the list of application-layer protocols to advertise that the
@@ -271,7 +270,7 @@ interface DtlsConnection
    * Params:
    *   certificate = the certificate to use for conn
    */
-  void setCertificate(TlsCertificate certificate);
+  void setCertificate(gio.tls_certificate.TlsCertificate certificate);
 
   /**
    * Sets the certificate database that is used to verify peer certificates.
@@ -287,7 +286,7 @@ interface DtlsConnection
    * Params:
    *   database = a #GTlsDatabase
    */
-  void setDatabase(TlsDatabase database);
+  void setDatabase(gio.tls_database.TlsDatabase database);
 
   /**
    * Set the object that will be used to interact with the user. It will be used
@@ -298,7 +297,7 @@ interface DtlsConnection
    * Params:
    *   interaction = an interaction object, or %NULL
    */
-  void setInteraction(TlsInteraction interaction);
+  void setInteraction(gio.tls_interaction.TlsInteraction interaction);
 
   /**
    * Since GLib 2.64, changing the rehandshake mode is no longer supported
@@ -312,7 +311,7 @@ interface DtlsConnection
    *   required for compatibility. Also, rehandshaking has been removed
    *   from the TLS protocol in TLS 1.3.
    */
-  void setRehandshakeMode(TlsRehandshakeMode mode);
+  void setRehandshakeMode(gio.types.TlsRehandshakeMode mode);
 
   /**
    * Sets whether or not conn expects a proper TLS close notification
@@ -362,7 +361,7 @@ interface DtlsConnection
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE on success, %FALSE otherwise
    */
-  bool shutdown(bool shutdownRead, bool shutdownWrite, Cancellable cancellable);
+  bool shutdown(bool shutdownRead, bool shutdownWrite, gio.cancellable.Cancellable cancellable);
 
   /**
    * Asynchronously shut down part or all of the DTLS connection. See
@@ -374,7 +373,7 @@ interface DtlsConnection
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the shutdown operation is complete
    */
-  void shutdownAsync(bool shutdownRead, bool shutdownWrite, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback);
+  void shutdownAsync(bool shutdownRead, bool shutdownWrite, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finish an asynchronous TLS shutdown operation. See
@@ -384,7 +383,7 @@ interface DtlsConnection
    * Returns: %TRUE on success, %FALSE on failure, in which
    *   case error will be set
    */
-  bool shutdownFinish(AsyncResult result);
+  bool shutdownFinish(gio.async_result.AsyncResult result);
 
   /**
    * Emitted during the TLS handshake after the peer certificate has
@@ -433,8 +432,8 @@ interface DtlsConnection
    *   emission to continue, which will cause the handshake to fail if
    *   no one else overrides it.
    */
-  alias AcceptCertificateCallbackDlg = bool delegate(TlsCertificate peerCert, TlsCertificateFlags errors, DtlsConnection dtlsConnection);
-  alias AcceptCertificateCallbackFunc = bool function(TlsCertificate peerCert, TlsCertificateFlags errors, DtlsConnection dtlsConnection);
+  alias AcceptCertificateCallbackDlg = bool delegate(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors, gio.dtls_connection.DtlsConnection dtlsConnection);
+  alias AcceptCertificateCallbackFunc = bool function(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors, gio.dtls_connection.DtlsConnection dtlsConnection);
 
   /**
    * Connect to AcceptCertificate signal.

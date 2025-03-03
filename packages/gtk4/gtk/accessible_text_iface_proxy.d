@@ -5,7 +5,7 @@ import gtk.accessible_text;
 import gtk.accessible_text_mixin;
 
 /// Proxy object for Gtk.AccessibleText interface when a GObject has no applicable D binding
-class AccessibleTextIfaceProxy : IfaceProxy, AccessibleText
+class AccessibleTextIfaceProxy : IfaceProxy, gtk.accessible_text.AccessibleText
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class AccessibleTextIfaceProxy : IfaceProxy, AccessibleText
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(AccessibleText);
+    return typeid(gtk.accessible_text.AccessibleText);
   }
 
   mixin AccessibleTextT!();

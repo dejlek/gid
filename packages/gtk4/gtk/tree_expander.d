@@ -1,6 +1,6 @@
 module gtk.tree_expander;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -58,7 +58,7 @@ import gtk.widget;
  * Since GTK 4.12, `GtkTreeExpander` uses the `GTK_ACCESSIBLE_ROLE_BUTTON` role.
  * Toggling it will change the `GTK_ACCESSIBLE_STATE_EXPANDED` state.
  */
-class TreeExpander : Widget
+class TreeExpander : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -92,11 +92,11 @@ class TreeExpander : Widget
    * Gets the child widget displayed by self.
    * Returns: The child displayed by self
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_tree_expander_get_child(cast(GtkTreeExpander*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -141,11 +141,11 @@ class TreeExpander : Widget
    * ```
    * Returns: The item of the row
    */
-  ObjectG getItem()
+  gobject.object.ObjectG getItem()
   {
     ObjectC* _cretval;
     _cretval = gtk_tree_expander_get_item(cast(GtkTreeExpander*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -153,11 +153,11 @@ class TreeExpander : Widget
    * Gets the list row managed by self.
    * Returns: The list row displayed by self
    */
-  TreeListRow getListRow()
+  gtk.tree_list_row.TreeListRow getListRow()
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_expander_get_list_row(cast(GtkTreeExpander*)cPtr);
-    auto _retval = ObjectG.getDObject!TreeListRow(cast(GtkTreeListRow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class TreeExpander : Widget
    * Params:
    *   child = a `GtkWidget`
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_tree_expander_set_child(cast(GtkTreeExpander*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -206,7 +206,7 @@ class TreeExpander : Widget
    * Params:
    *   listRow = a `GtkTreeListRow`
    */
-  void setListRow(TreeListRow listRow)
+  void setListRow(gtk.tree_list_row.TreeListRow listRow)
   {
     gtk_tree_expander_set_list_row(cast(GtkTreeExpander*)cPtr, listRow ? cast(GtkTreeListRow*)listRow.cPtr(No.Dup) : null);
   }

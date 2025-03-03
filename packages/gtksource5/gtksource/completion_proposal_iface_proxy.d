@@ -5,7 +5,7 @@ import gtksource.completion_proposal;
 import gtksource.completion_proposal_mixin;
 
 /// Proxy object for GtkSource.CompletionProposal interface when a GObject has no applicable D binding
-class CompletionProposalIfaceProxy : IfaceProxy, CompletionProposal
+class CompletionProposalIfaceProxy : IfaceProxy, gtksource.completion_proposal.CompletionProposal
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class CompletionProposalIfaceProxy : IfaceProxy, CompletionProposal
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(CompletionProposal);
+    return typeid(gtksource.completion_proposal.CompletionProposal);
   }
 
   mixin CompletionProposalT!();

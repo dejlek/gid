@@ -1,6 +1,6 @@
 module gio.buffered_output_stream;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.filter_output_stream;
@@ -22,7 +22,7 @@ import gobject.object;
  * buffered output stream's buffer, use [gio.buffered_output_stream.BufferedOutputStream.setBufferSize].
  * Note that the buffer's size cannot be reduced below the size of the data within the buffer.
  */
-class BufferedOutputStream : FilterOutputStream, Seekable
+class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekable.Seekable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -49,7 +49,7 @@ class BufferedOutputStream : FilterOutputStream, Seekable
    *   baseStream = a #GOutputStream.
    * Returns: a #GOutputStream for the given base_stream.
    */
-  this(OutputStream baseStream)
+  this(gio.output_stream.OutputStream baseStream)
   {
     GOutputStream* _cretval;
     _cretval = g_buffered_output_stream_new(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.Dup) : null);
@@ -63,11 +63,11 @@ class BufferedOutputStream : FilterOutputStream, Seekable
    *   size = a #gsize.
    * Returns: a #GOutputStream with an internal buffer set to size.
    */
-  static BufferedOutputStream newSized(OutputStream baseStream, size_t size)
+  static gio.buffered_output_stream.BufferedOutputStream newSized(gio.output_stream.OutputStream baseStream, size_t size)
   {
     GOutputStream* _cretval;
     _cretval = g_buffered_output_stream_new_sized(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.Dup) : null, size);
-    auto _retval = ObjectG.getDObject!BufferedOutputStream(cast(GOutputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.buffered_output_stream.BufferedOutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 

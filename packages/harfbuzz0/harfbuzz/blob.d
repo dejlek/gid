@@ -1,6 +1,6 @@
 module harfbuzz.blob;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -11,7 +11,7 @@ import harfbuzz.types;
  * data and facilitates its lifecycle management between
  * a client program and HarfBuzz.
  */
-class Blob : Boxed
+class Blob : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

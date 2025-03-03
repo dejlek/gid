@@ -1,6 +1,6 @@
 module gtk.search_bar;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -11,7 +11,6 @@ import gtk.c.types;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
 import gtk.editable;
-import gtk.editable_mixin;
 import gtk.types;
 import gtk.widget;
 
@@ -49,7 +48,7 @@ import gtk.widget;
  * # Accessibility
  * `GtkSearchBar` uses the %GTK_ACCESSIBLE_ROLE_SEARCH role.
  */
-class SearchBar : Widget
+class SearchBar : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -90,7 +89,7 @@ class SearchBar : Widget
    * Params:
    *   entry = a `GtkEditable`
    */
-  void connectEntry(Editable entry)
+  void connectEntry(gtk.editable.Editable entry)
   {
     gtk_search_bar_connect_entry(cast(GtkSearchBar*)cPtr, entry ? cast(GtkEditable*)(cast(ObjectG)entry).cPtr(No.Dup) : null);
   }
@@ -99,11 +98,11 @@ class SearchBar : Widget
    * Gets the child widget of bar.
    * Returns: the child widget of bar
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_bar_get_child(cast(GtkSearchBar*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -111,11 +110,11 @@ class SearchBar : Widget
    * Gets the widget that bar is capturing key events from.
    * Returns: The key capture widget.
    */
-  Widget getKeyCaptureWidget()
+  gtk.widget.Widget getKeyCaptureWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_bar_get_key_capture_widget(cast(GtkSearchBar*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -146,7 +145,7 @@ class SearchBar : Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_search_bar_set_child(cast(GtkSearchBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -165,7 +164,7 @@ class SearchBar : Widget
    * Params:
    *   widget = a `GtkWidget`
    */
-  void setKeyCaptureWidget(Widget widget)
+  void setKeyCaptureWidget(gtk.widget.Widget widget)
   {
     gtk_search_bar_set_key_capture_widget(cast(GtkSearchBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }

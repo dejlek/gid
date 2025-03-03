@@ -1,6 +1,6 @@
 module pango.attr_list;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import pango.attr_iterator;
 import pango.attribute;
@@ -19,7 +19,7 @@ import pango.types;
  * suitable for storing attributes for large amounts of text. In general, you
  * should not use a single `PangoAttrList` for more than one paragraph of text.
  */
-class AttrList : Boxed
+class AttrList : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -71,7 +71,7 @@ class AttrList : Boxed
    * Params:
    *   attr = the attribute to insert
    */
-  void change(Attribute attr)
+  void change(pango.attribute.Attribute attr)
   {
     pango_attr_list_change(cast(PangoAttrList*)cPtr, attr ? cast(PangoAttribute*)attr.cPtr(Yes.Dup) : null);
   }
@@ -83,11 +83,11 @@ class AttrList : Boxed
    *   which should be freed with [pango.attr_list.AttrList.unref].
    *   Returns %NULL if list was %NULL.
    */
-  AttrList copy()
+  pango.attr_list.AttrList copy()
   {
     PangoAttrList* _cretval;
     _cretval = pango_attr_list_copy(cast(PangoAttrList*)cPtr);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class AttrList : Boxed
    * Returns: %TRUE if the lists are equal, %FALSE if
    *   they aren't
    */
-  bool equal(AttrList otherList)
+  bool equal(pango.attr_list.AttrList otherList)
   {
     bool _retval;
     _retval = pango_attr_list_equal(cast(PangoAttrList*)cPtr, otherList ? cast(PangoAttrList*)otherList.cPtr(No.Dup) : null);
@@ -120,13 +120,13 @@ class AttrList : Boxed
    *   `PangoAttrList` or %NULL if no attributes of the
    *   given types were found
    */
-  AttrList filter(AttrFilterFunc func)
+  pango.attr_list.AttrList filter(pango.types.AttrFilterFunc func)
   {
     extern(C) bool _funcCallback(PangoAttribute* attribute, void* userData)
     {
-      auto _dlg = cast(AttrFilterFunc*)userData;
+      auto _dlg = cast(pango.types.AttrFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(attribute ? new Attribute(cast(void*)attribute, No.Take) : null);
+      bool _retval = (*_dlg)(attribute ? new pango.attribute.Attribute(cast(void*)attribute, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -134,7 +134,7 @@ class AttrList : Boxed
     PangoAttrList* _cretval;
     auto _func = func ? cast(void*)&(func) : null;
     _cretval = pango_attr_list_filter(cast(PangoAttrList*)cPtr, _funcCB, _func);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -144,11 +144,11 @@ class AttrList : Boxed
    *   call [pango.attribute.Attribute.destroy] on each value and
    *   [glib.slist.SList.free] on the list.
    */
-  Attribute[] getAttributes()
+  pango.attribute.Attribute[] getAttributes()
   {
     GSList* _cretval;
     _cretval = pango_attr_list_get_attributes(cast(PangoAttrList*)cPtr);
-    auto _retval = gSListToD!(Attribute, GidOwnership.Full)(cast(GSList*)_cretval);
+    auto _retval = gSListToD!(pango.attribute.Attribute, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
 
@@ -159,11 +159,11 @@ class AttrList : Boxed
    *   `PangoAttrIterator`, which should be freed with
    *   [pango.attr_iterator.AttrIterator.destroy]
    */
-  AttrIterator getIterator()
+  pango.attr_iterator.AttrIterator getIterator()
   {
     PangoAttrIterator* _cretval;
     _cretval = pango_attr_list_get_iterator(cast(PangoAttrList*)cPtr);
-    auto _retval = _cretval ? new AttrIterator(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.attr_iterator.AttrIterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class AttrList : Boxed
    * Params:
    *   attr = the attribute to insert
    */
-  void insert(Attribute attr)
+  void insert(pango.attribute.Attribute attr)
   {
     pango_attr_list_insert(cast(PangoAttrList*)cPtr, attr ? cast(PangoAttribute*)attr.cPtr(Yes.Dup) : null);
   }
@@ -186,7 +186,7 @@ class AttrList : Boxed
    * Params:
    *   attr = the attribute to insert
    */
-  void insertBefore(Attribute attr)
+  void insertBefore(pango.attribute.Attribute attr)
   {
     pango_attr_list_insert_before(cast(PangoAttrList*)cPtr, attr ? cast(PangoAttribute*)attr.cPtr(Yes.Dup) : null);
   }
@@ -213,7 +213,7 @@ class AttrList : Boxed
    *     must be specified since the attributes in other may only
    *     be present at some subsection of this range$(RPAREN)
    */
-  void splice(AttrList other, int pos, int len)
+  void splice(pango.attr_list.AttrList other, int pos, int len)
   {
     pango_attr_list_splice(cast(PangoAttrList*)cPtr, other ? cast(PangoAttrList*)other.cPtr(No.Dup) : null, pos, len);
   }
@@ -250,7 +250,7 @@ class AttrList : Boxed
   {
     char* _cretval;
     _cretval = pango_attr_list_to_string(cast(PangoAttrList*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -283,12 +283,12 @@ class AttrList : Boxed
    *   text = a string
    * Returns: a new `PangoAttrList`
    */
-  static AttrList fromString(string text)
+  static pango.attr_list.AttrList fromString(string text)
   {
     PangoAttrList* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
     _cretval = pango_attr_list_from_string(_text);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

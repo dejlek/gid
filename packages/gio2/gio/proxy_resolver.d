@@ -1,9 +1,8 @@
 module gio.proxy_resolver;
 
 public import gio.proxy_resolver_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -34,11 +33,11 @@ interface ProxyResolver
    * Returns: the default #GProxyResolver, which
    *   will be a dummy object if no proxy resolver is available
    */
-  static ProxyResolver getDefault()
+  static gio.proxy_resolver.ProxyResolver getDefault()
   {
     GProxyResolver* _cretval;
     _cretval = g_proxy_resolver_get_default();
-    auto _retval = ObjectG.getDObject!ProxyResolver(cast(GProxyResolver*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, No.Take);
     return _retval;
   }
 
@@ -71,7 +70,7 @@ interface ProxyResolver
    *   NULL-terminated array of proxy URIs. Must be freed
    *   with [glib.global.strfreev].
    */
-  string[] lookup(string uri, Cancellable cancellable);
+  string[] lookup(string uri, gio.cancellable.Cancellable cancellable);
 
   /**
    * Asynchronous lookup of proxy. See [gio.proxy_resolver.ProxyResolver.lookup] for more
@@ -81,7 +80,7 @@ interface ProxyResolver
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call after resolution completes
    */
-  void lookupAsync(string uri, Cancellable cancellable, AsyncReadyCallback callback);
+  void lookupAsync(string uri, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Call this function to obtain the array of proxy URIs when
@@ -93,5 +92,5 @@ interface ProxyResolver
    *   NULL-terminated array of proxy URIs. Must be freed
    *   with [glib.global.strfreev].
    */
-  string[] lookupFinish(AsyncResult result);
+  string[] lookupFinish(gio.async_result.AsyncResult result);
 }

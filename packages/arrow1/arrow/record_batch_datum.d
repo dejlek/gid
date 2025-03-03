@@ -5,9 +5,9 @@ import arrow.c.types;
 import arrow.datum;
 import arrow.record_batch;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class RecordBatchDatum : Datum
+class RecordBatchDatum : arrow.datum.Datum
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class RecordBatchDatum : Datum
     return getType();
   }
 
-  this(RecordBatch value)
+  this(arrow.record_batch.RecordBatch value)
   {
     GArrowRecordBatchDatum* _cretval;
     _cretval = garrow_record_batch_datum_new(value ? cast(GArrowRecordBatch*)value.cPtr(No.Dup) : null);

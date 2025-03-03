@@ -18,18 +18,6 @@ else
 
 __gshared extern(C)
 {
-  // Global
-  void function() c_rsvg_cleanup;
-  void function() c_rsvg_init;
-  PixbufC* function(const(char)* filename, GError** _err) c_rsvg_pixbuf_from_file;
-  PixbufC* function(const(char)* filename, int maxWidth, int maxHeight, GError** _err) c_rsvg_pixbuf_from_file_at_max_size;
-  PixbufC* function(const(char)* filename, int width, int height, GError** _err) c_rsvg_pixbuf_from_file_at_size;
-  PixbufC* function(const(char)* filename, double xZoom, double yZoom, GError** _err) c_rsvg_pixbuf_from_file_at_zoom;
-  PixbufC* function(const(char)* filename, double xZoom, double yZoom, int maxWidth, int maxHeight, GError** _err) c_rsvg_pixbuf_from_file_at_zoom_with_max;
-  void function(double dpi) c_rsvg_set_default_dpi;
-  void function(double dpiX, double dpiY) c_rsvg_set_default_dpi_x_y;
-  void function() c_rsvg_term;
-
   // Handle
   extern(C) GType function() c_rsvg_handle_get_type;
   RsvgHandle* function() c_rsvg_handle_new;
@@ -68,19 +56,19 @@ __gshared extern(C)
   void function(RsvgHandle* handle, RsvgSizeFunc sizeFunc, void* userData, GDestroyNotify userDataDestroy) c_rsvg_handle_set_size_callback;
   bool function(RsvgHandle* handle, const(ubyte)* css, size_t cssLen, GError** _err) c_rsvg_handle_set_stylesheet;
   bool function(RsvgHandle* handle, const(ubyte)* buf, size_t count, GError** _err) c_rsvg_handle_write;
-}
 
-// Global
-alias rsvg_cleanup = c_rsvg_cleanup;
-alias rsvg_init = c_rsvg_init;
-alias rsvg_pixbuf_from_file = c_rsvg_pixbuf_from_file;
-alias rsvg_pixbuf_from_file_at_max_size = c_rsvg_pixbuf_from_file_at_max_size;
-alias rsvg_pixbuf_from_file_at_size = c_rsvg_pixbuf_from_file_at_size;
-alias rsvg_pixbuf_from_file_at_zoom = c_rsvg_pixbuf_from_file_at_zoom;
-alias rsvg_pixbuf_from_file_at_zoom_with_max = c_rsvg_pixbuf_from_file_at_zoom_with_max;
-alias rsvg_set_default_dpi = c_rsvg_set_default_dpi;
-alias rsvg_set_default_dpi_x_y = c_rsvg_set_default_dpi_x_y;
-alias rsvg_term = c_rsvg_term;
+  // global
+  void function() c_rsvg_cleanup;
+  void function() c_rsvg_init;
+  PixbufC* function(const(char)* filename, GError** _err) c_rsvg_pixbuf_from_file;
+  PixbufC* function(const(char)* filename, int maxWidth, int maxHeight, GError** _err) c_rsvg_pixbuf_from_file_at_max_size;
+  PixbufC* function(const(char)* filename, int width, int height, GError** _err) c_rsvg_pixbuf_from_file_at_size;
+  PixbufC* function(const(char)* filename, double xZoom, double yZoom, GError** _err) c_rsvg_pixbuf_from_file_at_zoom;
+  PixbufC* function(const(char)* filename, double xZoom, double yZoom, int maxWidth, int maxHeight, GError** _err) c_rsvg_pixbuf_from_file_at_zoom_with_max;
+  void function(double dpi) c_rsvg_set_default_dpi;
+  void function(double dpiX, double dpiY) c_rsvg_set_default_dpi_x_y;
+  void function() c_rsvg_term;
+}
 
 // Handle
 alias rsvg_handle_get_type = c_rsvg_handle_get_type;
@@ -121,20 +109,20 @@ alias rsvg_handle_set_size_callback = c_rsvg_handle_set_size_callback;
 alias rsvg_handle_set_stylesheet = c_rsvg_handle_set_stylesheet;
 alias rsvg_handle_write = c_rsvg_handle_write;
 
+// global
+alias rsvg_cleanup = c_rsvg_cleanup;
+alias rsvg_init = c_rsvg_init;
+alias rsvg_pixbuf_from_file = c_rsvg_pixbuf_from_file;
+alias rsvg_pixbuf_from_file_at_max_size = c_rsvg_pixbuf_from_file_at_max_size;
+alias rsvg_pixbuf_from_file_at_size = c_rsvg_pixbuf_from_file_at_size;
+alias rsvg_pixbuf_from_file_at_zoom = c_rsvg_pixbuf_from_file_at_zoom;
+alias rsvg_pixbuf_from_file_at_zoom_with_max = c_rsvg_pixbuf_from_file_at_zoom_with_max;
+alias rsvg_set_default_dpi = c_rsvg_set_default_dpi;
+alias rsvg_set_default_dpi_x_y = c_rsvg_set_default_dpi_x_y;
+alias rsvg_term = c_rsvg_term;
+
 shared static this()
 {
-  // Global
-  gidLink(cast(void**)&rsvg_cleanup, "rsvg_cleanup", LIBS);
-  gidLink(cast(void**)&rsvg_init, "rsvg_init", LIBS);
-  gidLink(cast(void**)&rsvg_pixbuf_from_file, "rsvg_pixbuf_from_file", LIBS);
-  gidLink(cast(void**)&rsvg_pixbuf_from_file_at_max_size, "rsvg_pixbuf_from_file_at_max_size", LIBS);
-  gidLink(cast(void**)&rsvg_pixbuf_from_file_at_size, "rsvg_pixbuf_from_file_at_size", LIBS);
-  gidLink(cast(void**)&rsvg_pixbuf_from_file_at_zoom, "rsvg_pixbuf_from_file_at_zoom", LIBS);
-  gidLink(cast(void**)&rsvg_pixbuf_from_file_at_zoom_with_max, "rsvg_pixbuf_from_file_at_zoom_with_max", LIBS);
-  gidLink(cast(void**)&rsvg_set_default_dpi, "rsvg_set_default_dpi", LIBS);
-  gidLink(cast(void**)&rsvg_set_default_dpi_x_y, "rsvg_set_default_dpi_x_y", LIBS);
-  gidLink(cast(void**)&rsvg_term, "rsvg_term", LIBS);
-
   // Handle
   gidLink(cast(void**)&rsvg_handle_get_type, "rsvg_handle_get_type", LIBS);
   gidLink(cast(void**)&rsvg_handle_new, "rsvg_handle_new", LIBS);
@@ -173,4 +161,16 @@ shared static this()
   gidLink(cast(void**)&rsvg_handle_set_size_callback, "rsvg_handle_set_size_callback", LIBS);
   gidLink(cast(void**)&rsvg_handle_set_stylesheet, "rsvg_handle_set_stylesheet", LIBS);
   gidLink(cast(void**)&rsvg_handle_write, "rsvg_handle_write", LIBS);
+
+  // global
+  gidLink(cast(void**)&rsvg_cleanup, "rsvg_cleanup", LIBS);
+  gidLink(cast(void**)&rsvg_init, "rsvg_init", LIBS);
+  gidLink(cast(void**)&rsvg_pixbuf_from_file, "rsvg_pixbuf_from_file", LIBS);
+  gidLink(cast(void**)&rsvg_pixbuf_from_file_at_max_size, "rsvg_pixbuf_from_file_at_max_size", LIBS);
+  gidLink(cast(void**)&rsvg_pixbuf_from_file_at_size, "rsvg_pixbuf_from_file_at_size", LIBS);
+  gidLink(cast(void**)&rsvg_pixbuf_from_file_at_zoom, "rsvg_pixbuf_from_file_at_zoom", LIBS);
+  gidLink(cast(void**)&rsvg_pixbuf_from_file_at_zoom_with_max, "rsvg_pixbuf_from_file_at_zoom_with_max", LIBS);
+  gidLink(cast(void**)&rsvg_set_default_dpi, "rsvg_set_default_dpi", LIBS);
+  gidLink(cast(void**)&rsvg_set_default_dpi_x_y, "rsvg_set_default_dpi_x_y", LIBS);
+  gidLink(cast(void**)&rsvg_term, "rsvg_term", LIBS);
 }

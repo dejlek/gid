@@ -1,6 +1,6 @@
 module pango.attr_font_features;
 
-import gid.global;
+import gid.gid;
 import pango.attribute;
 import pango.c.functions;
 import pango.c.types;
@@ -30,9 +30,9 @@ class AttrFontFeatures
     return cast(void*)&cInstance;
   }
 
-  @property Attribute attr()
+  @property pango.attribute.Attribute attr()
   {
-    return new Attribute(cast(PangoAttribute*)&(cast(PangoAttrFontFeatures*)cPtr).attr);
+    return new pango.attribute.Attribute(cast(PangoAttribute*)&(cast(PangoAttrFontFeatures*)cPtr).attr);
   }
 
   @property string features()
@@ -57,12 +57,12 @@ class AttrFontFeatures
    *   `PangoAttribute`, which should be freed with
    *   [pango.attribute.Attribute.destroy]
    */
-  static Attribute new_(string features)
+  static pango.attribute.Attribute new_(string features)
   {
     PangoAttribute* _cretval;
     const(char)* _features = features.toCString(No.Alloc);
     _cretval = pango_attr_font_features_new(_features);
-    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

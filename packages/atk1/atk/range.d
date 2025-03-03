@@ -3,7 +3,7 @@ module atk.range;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -14,7 +14,7 @@ import gobject.boxed;
  * splitted if available. See #AtkValue documentation for further
  * details.
  */
-class Range : Boxed
+class Range : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -58,11 +58,11 @@ class Range : Boxed
    * Returns a new #AtkRange that is a exact copy of src
    * Returns: a new #AtkRange copy of src
    */
-  Range copy()
+  atk.range.Range copy()
   {
     AtkRange* _cretval;
     _cretval = atk_range_copy(cast(AtkRange*)cPtr);
-    auto _retval = _cretval ? new Range(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new atk.range.Range(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class Range : Boxed
   {
     const(char)* _cretval;
     _cretval = atk_range_get_description(cast(AtkRange*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

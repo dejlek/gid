@@ -1,6 +1,6 @@
 module gio.unix_credentials_message;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.credentials;
@@ -26,7 +26,7 @@ import gobject.object;
  * GIO interfaces, thus you had to use the `gio-unix-2.0.pc` pkg-config file
  * when using it. This is no longer necessary since GLib 2.72.
  */
-class UnixCredentialsMessage : SocketControlMessage
+class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -62,11 +62,11 @@ class UnixCredentialsMessage : SocketControlMessage
    *   credentials = A #GCredentials object.
    * Returns: a new #GUnixCredentialsMessage
    */
-  static UnixCredentialsMessage newWithCredentials(Credentials credentials)
+  static gio.unix_credentials_message.UnixCredentialsMessage newWithCredentials(gio.credentials.Credentials credentials)
   {
     GSocketControlMessage* _cretval;
     _cretval = g_unix_credentials_message_new_with_credentials(credentials ? cast(GCredentials*)credentials.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!UnixCredentialsMessage(cast(GSocketControlMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.unix_credentials_message.UnixCredentialsMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -85,11 +85,11 @@ class UnixCredentialsMessage : SocketControlMessage
    * Gets the credentials stored in message.
    * Returns: A #GCredentials instance. Do not free, it is owned by message.
    */
-  Credentials getCredentials()
+  gio.credentials.Credentials getCredentials()
   {
     GCredentials* _cretval;
     _cretval = g_unix_credentials_message_get_credentials(cast(GUnixCredentialsMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!Credentials(cast(GCredentials*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, No.Take);
     return _retval;
   }
 }

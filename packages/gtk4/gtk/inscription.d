@@ -1,6 +1,6 @@
 module gtk.inscription;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.accessible_text;
@@ -14,7 +14,7 @@ import gtk.constraint_target_mixin;
 import gtk.types;
 import gtk.widget;
 import pango.attr_list;
-import pango.types : WrapMode = WrapMode;
+import pango.types;
 
 /**
  * `GtkInscription` is a widget to show text in a predefined area.
@@ -27,7 +27,7 @@ import pango.types : WrapMode = WrapMode;
  * Users of this widget should take care to plan behaviour for the common case
  * where the text doesn't fit exactly in the allocated space.
  */
-class Inscription : Widget, AccessibleText
+class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -66,11 +66,11 @@ class Inscription : Widget, AccessibleText
    * Gets the inscription's attribute list.
    * Returns: the attribute list
    */
-  AttrList getAttributes()
+  pango.attr_list.AttrList getAttributes()
   {
     PangoAttrList* _cretval;
     _cretval = gtk_inscription_get_attributes(cast(GtkInscription*)cPtr);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class Inscription : Widget, AccessibleText
   {
     const(char)* _cretval;
     _cretval = gtk_inscription_get_text(cast(GtkInscription*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -138,11 +138,11 @@ class Inscription : Widget, AccessibleText
    * Gets the inscription's overflow method.
    * Returns: the overflow method
    */
-  InscriptionOverflow getTextOverflow()
+  gtk.types.InscriptionOverflow getTextOverflow()
   {
     GtkInscriptionOverflow _cretval;
     _cretval = gtk_inscription_get_text_overflow(cast(GtkInscription*)cPtr);
-    InscriptionOverflow _retval = cast(InscriptionOverflow)_cretval;
+    gtk.types.InscriptionOverflow _retval = cast(gtk.types.InscriptionOverflow)_cretval;
     return _retval;
   }
 
@@ -151,11 +151,11 @@ class Inscription : Widget, AccessibleText
    * See [gtk.inscription.Inscription.setWrapMode].
    * Returns: the line wrap mode
    */
-  WrapMode getWrapMode()
+  pango.types.WrapMode getWrapMode()
   {
     PangoWrapMode _cretval;
     _cretval = gtk_inscription_get_wrap_mode(cast(GtkInscription*)cPtr);
-    WrapMode _retval = cast(WrapMode)_cretval;
+    pango.types.WrapMode _retval = cast(pango.types.WrapMode)_cretval;
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class Inscription : Widget, AccessibleText
    * Params:
    *   attrs = a [pango.attr_list.AttrList]
    */
-  void setAttributes(AttrList attrs)
+  void setAttributes(pango.attr_list.AttrList attrs)
   {
     gtk_inscription_set_attributes(cast(GtkInscription*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
@@ -266,7 +266,7 @@ class Inscription : Widget, AccessibleText
    * Params:
    *   overflow = the overflow method to use
    */
-  void setTextOverflow(InscriptionOverflow overflow)
+  void setTextOverflow(gtk.types.InscriptionOverflow overflow)
   {
     gtk_inscription_set_text_overflow(cast(GtkInscription*)cPtr, overflow);
   }
@@ -276,7 +276,7 @@ class Inscription : Widget, AccessibleText
    * Params:
    *   wrapMode = the line wrapping mode
    */
-  void setWrapMode(WrapMode wrapMode)
+  void setWrapMode(pango.types.WrapMode wrapMode)
   {
     gtk_inscription_set_wrap_mode(cast(GtkInscription*)cPtr, wrapMode);
   }

@@ -5,9 +5,9 @@ import arrow.c.types;
 import arrow.file_system;
 import arrow.local_file_system_options;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class LocalFileSystem : FileSystem
+class LocalFileSystem : arrow.file_system.FileSystem
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class LocalFileSystem : FileSystem
     return getType();
   }
 
-  this(LocalFileSystemOptions options)
+  this(arrow.local_file_system_options.LocalFileSystemOptions options)
   {
     GArrowLocalFileSystem* _cretval;
     _cretval = garrow_local_file_system_new(options ? cast(GArrowLocalFileSystemOptions*)options.cPtr(No.Dup) : null);

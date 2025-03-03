@@ -1,6 +1,6 @@
 module glib.strv_builder;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -16,7 +16,7 @@ import gobject.boxed;
  * g_auto$(LPAREN)GStrv$(RPAREN) array \= g_strv_builder_end $(LPAREN)builder$(RPAREN);
  * ```
  */
-class StrvBuilder : Boxed
+class StrvBuilder : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

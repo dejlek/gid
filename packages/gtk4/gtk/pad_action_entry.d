@@ -1,6 +1,6 @@
 module gtk.pad_action_entry;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -28,12 +28,12 @@ class PadActionEntry
     return cast(void*)&cInstance;
   }
 
-  @property PadActionType type()
+  @property gtk.types.PadActionType type()
   {
-    return cast(PadActionType)(cast(GtkPadActionEntry*)cPtr).type;
+    return cast(gtk.types.PadActionType)(cast(GtkPadActionEntry*)cPtr).type;
   }
 
-  @property void type(PadActionType propval)
+  @property void type(gtk.types.PadActionType propval)
   {
     (cast(GtkPadActionEntry*)cPtr).type = cast(GtkPadActionType)propval;
   }

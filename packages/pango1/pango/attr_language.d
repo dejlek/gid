@@ -1,6 +1,6 @@
 module pango.attr_language;
 
-import gid.global;
+import gid.gid;
 import pango.attribute;
 import pango.c.functions;
 import pango.c.types;
@@ -31,14 +31,14 @@ class AttrLanguage
     return cast(void*)&cInstance;
   }
 
-  @property Attribute attr()
+  @property pango.attribute.Attribute attr()
   {
-    return new Attribute(cast(PangoAttribute*)&(cast(PangoAttrLanguage*)cPtr).attr);
+    return new pango.attribute.Attribute(cast(PangoAttribute*)&(cast(PangoAttrLanguage*)cPtr).attr);
   }
 
-  @property PgLanguage value()
+  @property pango.language.PgLanguage value()
   {
-    return new PgLanguage(cast(PangoLanguage*)(cast(PangoAttrLanguage*)cPtr).value);
+    return new pango.language.PgLanguage(cast(PangoLanguage*)(cast(PangoAttrLanguage*)cPtr).value);
   }
 
   /**
@@ -49,11 +49,11 @@ class AttrLanguage
    *   `PangoAttribute`, which should be freed with
    *   [pango.attribute.Attribute.destroy]
    */
-  static Attribute new_(PgLanguage language)
+  static pango.attribute.Attribute new_(pango.language.PgLanguage language)
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_language_new(language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

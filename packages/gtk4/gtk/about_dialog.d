@@ -1,8 +1,7 @@
 module gtk.about_dialog;
 
 import gdk.paintable;
-import gdk.paintable_mixin;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -60,7 +59,7 @@ import gtk.window;
  * `GtkAboutDialog` has a single CSS node with the name `window` and style
  * class `.aboutdialog`.
  */
-class AboutDialog : Window
+class AboutDialog : gtk.window.Window
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -163,7 +162,7 @@ class AboutDialog : Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_comments(cast(GtkAboutDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -175,7 +174,7 @@ class AboutDialog : Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_copyright(cast(GtkAboutDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -211,19 +210,19 @@ class AboutDialog : Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_license(cast(GtkAboutDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
   /**
    * Retrieves the license type.
-   * Returns: a [gtk.License] value
+   * Returns: a [gtk.types.License] value
    */
-  License getLicenseType()
+  gtk.types.License getLicenseType()
   {
     GtkLicense _cretval;
     _cretval = gtk_about_dialog_get_license_type(cast(GtkAboutDialog*)cPtr);
-    License _retval = cast(License)_cretval;
+    gtk.types.License _retval = cast(gtk.types.License)_cretval;
     return _retval;
   }
 
@@ -233,11 +232,11 @@ class AboutDialog : Window
    *   logo or `NULL` if the logo is unset or has been set via
    *   [gtk.about_dialog.AboutDialog.setLogoIconName]
    */
-  Paintable getLogo()
+  gdk.paintable.Paintable getLogo()
   {
     GdkPaintable* _cretval;
     _cretval = gtk_about_dialog_get_logo(cast(GtkAboutDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -250,7 +249,7 @@ class AboutDialog : Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_logo_icon_name(cast(GtkAboutDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -262,7 +261,7 @@ class AboutDialog : Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_program_name(cast(GtkAboutDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -274,7 +273,7 @@ class AboutDialog : Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_system_information(cast(GtkAboutDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -287,7 +286,7 @@ class AboutDialog : Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_translator_credits(cast(GtkAboutDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -299,7 +298,7 @@ class AboutDialog : Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_version(cast(GtkAboutDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -311,7 +310,7 @@ class AboutDialog : Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_website(cast(GtkAboutDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -323,7 +322,7 @@ class AboutDialog : Window
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_website_label(cast(GtkAboutDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -434,7 +433,7 @@ class AboutDialog : Window
    * Params:
    *   licenseType = the type of license
    */
-  void setLicenseType(License licenseType)
+  void setLicenseType(gtk.types.License licenseType)
   {
     gtk_about_dialog_set_license_type(cast(GtkAboutDialog*)cPtr, licenseType);
   }
@@ -444,7 +443,7 @@ class AboutDialog : Window
    * Params:
    *   logo = a `GdkPaintable`
    */
-  void setLogo(Paintable logo)
+  void setLogo(gdk.paintable.Paintable logo)
   {
     gtk_about_dialog_set_logo(cast(GtkAboutDialog*)cPtr, logo ? cast(GdkPaintable*)(cast(ObjectG)logo).cPtr(No.Dup) : null);
   }
@@ -566,8 +565,8 @@ class AboutDialog : Window
    *   aboutDialog = the instance the signal is connected to
    * Returns: `TRUE` if the link has been activated
    */
-  alias ActivateLinkCallbackDlg = bool delegate(string uri, AboutDialog aboutDialog);
-  alias ActivateLinkCallbackFunc = bool function(string uri, AboutDialog aboutDialog);
+  alias ActivateLinkCallbackDlg = bool delegate(string uri, gtk.about_dialog.AboutDialog aboutDialog);
+  alias ActivateLinkCallbackFunc = bool function(string uri, gtk.about_dialog.AboutDialog aboutDialog);
 
   /**
    * Connect to ActivateLink signal.
@@ -584,8 +583,8 @@ class AboutDialog : Window
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto aboutDialog = getVal!AboutDialog(_paramVals);
-      auto uri = getVal!string(&_paramVals[1]);
+      auto aboutDialog = getVal!(gtk.about_dialog.AboutDialog)(_paramVals);
+      auto uri = getVal!(string)(&_paramVals[1]);
       _retval = _dClosure.dlg(uri, aboutDialog);
       setVal!bool(_returnValue, _retval);
     }

@@ -1,10 +1,9 @@
 module gtk.accessible_list;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gobject.object;
 import gtk.accessible;
-import gtk.accessible_mixin;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -12,7 +11,7 @@ import gtk.types;
 /**
  * A boxed type which wraps a list of references to GtkAccessible objects.
  */
-class AccessibleList : Boxed
+class AccessibleList : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -42,7 +41,7 @@ class AccessibleList : Boxed
    *   accessibles = array of GtkAccessible
    * Returns: the newly created list of accessible instances
    */
-  static AccessibleList newFromArray(Accessible[] accessibles)
+  static gtk.accessible_list.AccessibleList newFromArray(gtk.accessible.Accessible[] accessibles)
   {
     GtkAccessibleList* _cretval;
     size_t _nAccessibles;
@@ -54,7 +53,7 @@ class AccessibleList : Boxed
       _tmpaccessibles ~= obj ? cast(GtkAccessible*)(cast(ObjectG)obj).cPtr : null;
     GtkAccessible** _accessibles = _tmpaccessibles.ptr;
     _cretval = gtk_accessible_list_new_from_array(_accessibles, _nAccessibles);
-    auto _retval = _cretval ? new AccessibleList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.accessible_list.AccessibleList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -65,13 +64,13 @@ class AccessibleList : Boxed
    *   list = a reference to a `GList` containing a list of accessible values
    * Returns: the list of accessible instances
    */
-  static AccessibleList newFromList(Accessible[] list)
+  static gtk.accessible_list.AccessibleList newFromList(gtk.accessible.Accessible[] list)
   {
     GtkAccessibleList* _cretval;
-    auto _list = gListFromD!(Accessible)(list);
-    scope(exit) containerFree!(GList*, Accessible, GidOwnership.None)(_list);
+    auto _list = gListFromD!(gtk.accessible.Accessible)(list);
+    scope(exit) containerFree!(GList*, gtk.accessible.Accessible, GidOwnership.None)(_list);
     _cretval = gtk_accessible_list_new_from_list(_list);
-    auto _retval = _cretval ? new AccessibleList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.accessible_list.AccessibleList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -79,11 +78,11 @@ class AccessibleList : Boxed
    * Gets the list of objects this boxed type holds
    * Returns: a shallow copy of the objects
    */
-  Accessible[] getObjects()
+  gtk.accessible.Accessible[] getObjects()
   {
     GList* _cretval;
     _cretval = gtk_accessible_list_get_objects(cast(GtkAccessibleList*)cPtr);
-    auto _retval = gListToD!(Accessible, GidOwnership.Container)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gtk.accessible.Accessible, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 }

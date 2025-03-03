@@ -4,7 +4,7 @@ public import atk.document_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;
 public import atk.types;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 
 /**
@@ -35,7 +35,7 @@ template DocumentT()
     const(char)* _cretval;
     const(char)* _attributeName = attributeName.toCString(No.Alloc);
     _cretval = atk_document_get_attribute_value(cast(AtkDocument*)cPtr, _attributeName);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -78,7 +78,7 @@ template DocumentT()
   {
     const(char)* _cretval;
     _cretval = atk_document_get_document_type(cast(AtkDocument*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ template DocumentT()
   {
     const(char)* _cretval;
     _cretval = atk_document_get_locale(cast(AtkDocument*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -143,8 +143,8 @@ template DocumentT()
    *   arg2 = the attribute's new value, or %null if not available.
    *   document = the instance the signal is connected to
    */
-  alias DocumentAttributeChangedCallbackDlg = void delegate(string arg1, string arg2, Document document);
-  alias DocumentAttributeChangedCallbackFunc = void function(string arg1, string arg2, Document document);
+  alias DocumentAttributeChangedCallbackDlg = void delegate(string arg1, string arg2, atk.document.Document document);
+  alias DocumentAttributeChangedCallbackFunc = void function(string arg1, string arg2, atk.document.Document document);
 
   /**
    * Connect to DocumentAttributeChanged signal.
@@ -160,9 +160,9 @@ template DocumentT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto document = getVal!Document(_paramVals);
-      auto arg1 = getVal!string(&_paramVals[1]);
-      auto arg2 = getVal!string(&_paramVals[2]);
+      auto document = getVal!(atk.document.Document)(_paramVals);
+      auto arg1 = getVal!(string)(&_paramVals[1]);
+      auto arg2 = getVal!(string)(&_paramVals[2]);
       _dClosure.dlg(arg1, arg2, document);
     }
 
@@ -182,8 +182,8 @@ template DocumentT()
    * signals.$(RPAREN)
    *   document = the instance the signal is connected to
    */
-  alias LoadCompleteCallbackDlg = void delegate(Document document);
-  alias LoadCompleteCallbackFunc = void function(Document document);
+  alias LoadCompleteCallbackDlg = void delegate(atk.document.Document document);
+  alias LoadCompleteCallbackFunc = void function(atk.document.Document document);
 
   /**
    * Connect to LoadComplete signal.
@@ -199,7 +199,7 @@ template DocumentT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto document = getVal!Document(_paramVals);
+      auto document = getVal!(atk.document.Document)(_paramVals);
       _dClosure.dlg(document);
     }
 
@@ -216,8 +216,8 @@ template DocumentT()
    * user-significant timeout has occurred.
    *   document = the instance the signal is connected to
    */
-  alias LoadStoppedCallbackDlg = void delegate(Document document);
-  alias LoadStoppedCallbackFunc = void function(Document document);
+  alias LoadStoppedCallbackDlg = void delegate(atk.document.Document document);
+  alias LoadStoppedCallbackFunc = void function(atk.document.Document document);
 
   /**
    * Connect to LoadStopped signal.
@@ -233,7 +233,7 @@ template DocumentT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto document = getVal!Document(_paramVals);
+      auto document = getVal!(atk.document.Document)(_paramVals);
       _dClosure.dlg(document);
     }
 
@@ -250,8 +250,8 @@ template DocumentT()
    *     or not applicable, -1 should be provided.
    *   document = the instance the signal is connected to
    */
-  alias PageChangedCallbackDlg = void delegate(int pageNumber, Document document);
-  alias PageChangedCallbackFunc = void function(int pageNumber, Document document);
+  alias PageChangedCallbackDlg = void delegate(int pageNumber, atk.document.Document document);
+  alias PageChangedCallbackFunc = void function(int pageNumber, atk.document.Document document);
 
   /**
    * Connect to PageChanged signal.
@@ -267,8 +267,8 @@ template DocumentT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto document = getVal!Document(_paramVals);
-      auto pageNumber = getVal!int(&_paramVals[1]);
+      auto document = getVal!(atk.document.Document)(_paramVals);
+      auto pageNumber = getVal!(int)(&_paramVals[1]);
       _dClosure.dlg(pageNumber, document);
     }
 
@@ -284,8 +284,8 @@ template DocumentT()
    * interrogating ATK for the latest document content.
    *   document = the instance the signal is connected to
    */
-  alias ReloadCallbackDlg = void delegate(Document document);
-  alias ReloadCallbackFunc = void function(Document document);
+  alias ReloadCallbackDlg = void delegate(atk.document.Document document);
+  alias ReloadCallbackFunc = void function(atk.document.Document document);
 
   /**
    * Connect to Reload signal.
@@ -301,7 +301,7 @@ template DocumentT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto document = getVal!Document(_paramVals);
+      auto document = getVal!(atk.document.Document)(_paramVals);
       _dClosure.dlg(document);
     }
 

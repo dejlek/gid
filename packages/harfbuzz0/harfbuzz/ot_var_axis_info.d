@@ -1,6 +1,6 @@
 module harfbuzz.ot_var_axis_info;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -12,7 +12,7 @@ import harfbuzz.types;
  * <note>Note: at present, the only flag defined for @flags is
  * #HB_OT_VAR_AXIS_FLAG_HIDDEN.</note>
  */
-class OtVarAxisInfo : Boxed
+class OtVarAxisInfo : gobject.boxed.Boxed
 {
 
   this()
@@ -51,32 +51,32 @@ class OtVarAxisInfo : Boxed
     (cast(hb_ot_var_axis_info_t*)cPtr).axisIndex = propval;
   }
 
-  @property Tag tag()
+  @property harfbuzz.types.Tag tag()
   {
     return (cast(hb_ot_var_axis_info_t*)cPtr).tag;
   }
 
-  @property void tag(Tag propval)
+  @property void tag(harfbuzz.types.Tag propval)
   {
     (cast(hb_ot_var_axis_info_t*)cPtr).tag = propval;
   }
 
-  @property OtNameId nameId()
+  @property harfbuzz.types.OtNameId nameId()
   {
     return (cast(hb_ot_var_axis_info_t*)cPtr).nameId;
   }
 
-  @property void nameId(OtNameId propval)
+  @property void nameId(harfbuzz.types.OtNameId propval)
   {
     (cast(hb_ot_var_axis_info_t*)cPtr).nameId = propval;
   }
 
-  @property OtVarAxisFlags flags()
+  @property harfbuzz.types.OtVarAxisFlags flags()
   {
-    return cast(OtVarAxisFlags)(cast(hb_ot_var_axis_info_t*)cPtr).flags;
+    return cast(harfbuzz.types.OtVarAxisFlags)(cast(hb_ot_var_axis_info_t*)cPtr).flags;
   }
 
-  @property void flags(OtVarAxisFlags propval)
+  @property void flags(harfbuzz.types.OtVarAxisFlags propval)
   {
     (cast(hb_ot_var_axis_info_t*)cPtr).flags = cast(hb_ot_var_axis_flags_t)propval;
   }

@@ -1,6 +1,6 @@
 module gio.simple_iostream;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.input_stream;
@@ -19,7 +19,7 @@ import gio.types;
  * $(LPAREN)from `gio-unix-2.0.pc` / `GioUnix-2.0`$(RPAREN), and you want to
  * take advantage of the methods provided by [gio.iostream.IOStream].
  */
-class SimpleIOStream : IOStream
+class SimpleIOStream : gio.iostream.IOStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -46,7 +46,7 @@ class SimpleIOStream : IOStream
    *   outputStream = a #GOutputStream.
    * Returns: a new #GSimpleIOStream instance.
    */
-  this(InputStream inputStream, OutputStream outputStream)
+  this(gio.input_stream.InputStream inputStream, gio.output_stream.OutputStream outputStream)
   {
     GIOStream* _cretval;
     _cretval = g_simple_io_stream_new(inputStream ? cast(GInputStream*)inputStream.cPtr(No.Dup) : null, outputStream ? cast(GOutputStream*)outputStream.cPtr(No.Dup) : null);

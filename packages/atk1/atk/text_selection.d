@@ -4,7 +4,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.object;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
@@ -45,9 +45,9 @@ class TextSelection
     return cast(void*)&cInstance;
   }
 
-  @property ObjectAtk startObject()
+  @property atk.object.ObjectAtk startObject()
   {
-    return ObjectG.getDObject!ObjectAtk((cast(AtkTextSelection*)cPtr).startObject, No.Take);
+    return ObjectG.getDObject!(atk.object.ObjectAtk)((cast(AtkTextSelection*)cPtr).startObject, No.Take);
   }
 
   @property int startOffset()
@@ -60,9 +60,9 @@ class TextSelection
     (cast(AtkTextSelection*)cPtr).startOffset = propval;
   }
 
-  @property ObjectAtk endObject()
+  @property atk.object.ObjectAtk endObject()
   {
-    return ObjectG.getDObject!ObjectAtk((cast(AtkTextSelection*)cPtr).endObject, No.Take);
+    return ObjectG.getDObject!(atk.object.ObjectAtk)((cast(AtkTextSelection*)cPtr).endObject, No.Take);
   }
 
   @property int endOffset()

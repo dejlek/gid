@@ -1,11 +1,9 @@
 module gtk.file_chooser;
 
 public import gtk.file_chooser_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.file;
-import gio.file_mixin;
 import gio.list_model;
-import gio.list_model_mixin;
 import glib.error;
 import gobject.object;
 import gtk.c.functions;
@@ -85,7 +83,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  void addFilter(FileFilter filter);
+  void addFilter(gtk.file_filter.FileFilter filter);
 
   /**
    * Adds a folder to be displayed with the shortcut folders
@@ -97,7 +95,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  bool addShortcutFolder(File folder);
+  bool addShortcutFolder(gio.file.File folder);
 
   /**
    * Gets the type of operation that the file chooser is performing.
@@ -105,7 +103,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  FileChooserAction getAction();
+  gtk.types.FileChooserAction getAction();
 
   /**
    * Gets the currently selected option in the 'choice' with the given ID.
@@ -131,7 +129,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  File getCurrentFolder();
+  gio.file.File getCurrentFolder();
 
   /**
    * Gets the current name in the file selector, as entered by the user.
@@ -159,7 +157,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  File getFile();
+  gio.file.File getFile();
 
   /**
    * Lists all the selected files and subfolders in the current folder
@@ -170,7 +168,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  ListModel getFiles();
+  gio.list_model.ListModel getFiles();
 
   /**
    * Gets the current filter.
@@ -178,7 +176,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  FileFilter getFilter();
+  gtk.file_filter.FileFilter getFilter();
 
   /**
    * Gets the current set of user-selectable filters, as a list model.
@@ -191,7 +189,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  ListModel getFilters();
+  gio.list_model.ListModel getFilters();
 
   /**
    * Gets whether multiple files can be selected in the file
@@ -210,7 +208,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  ListModel getShortcutFolders();
+  gio.list_model.ListModel getShortcutFolders();
 
   /**
    * Removes a 'choice' that has been added with [gtk.file_chooser.FileChooser.addChoice].
@@ -228,7 +226,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  void removeFilter(FileFilter filter);
+  void removeFilter(gtk.file_filter.FileFilter filter);
 
   /**
    * Removes a folder from the shortcut folders in a file chooser.
@@ -239,7 +237,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  bool removeShortcutFolder(File folder);
+  bool removeShortcutFolder(gio.file.File folder);
 
   /**
    * Sets the type of operation that the chooser is performing.
@@ -252,7 +250,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  void setAction(FileChooserAction action);
+  void setAction(gtk.types.FileChooserAction action);
 
   /**
    * Selects an option in a 'choice' that has been added with
@@ -286,7 +284,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  bool setCurrentFolder(File file);
+  bool setCurrentFolder(gio.file.File file);
 
   /**
    * Sets the current name in the file selector, as if entered
@@ -348,7 +346,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  bool setFile(File file);
+  bool setFile(gio.file.File file);
 
   /**
    * Sets the current filter.
@@ -363,7 +361,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  void setFilter(FileFilter filter);
+  void setFilter(gtk.file_filter.FileFilter filter);
 
   /**
    * Sets whether multiple files can be selected in the file chooser.

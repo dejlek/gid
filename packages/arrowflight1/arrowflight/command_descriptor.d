@@ -4,9 +4,9 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.descriptor;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 
-class CommandDescriptor : Descriptor
+class CommandDescriptor : arrowflight.descriptor.Descriptor
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -37,7 +37,7 @@ class CommandDescriptor : Descriptor
   {
     char* _cretval;
     _cretval = gaflight_command_descriptor_get_command(cast(GAFlightCommandDescriptor*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

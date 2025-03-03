@@ -3,8 +3,7 @@ module gtk.text_buffer;
 import gdk.clipboard;
 import gdk.content_provider;
 import gdk.paintable;
-import gdk.paintable_mixin;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -25,7 +24,7 @@ import gtk.types;
  * GtkTextBuffer can support undoing changes to the buffer
  * content, see [gtk.text_buffer.TextBuffer.setEnableUndo].
  */
-class TextBuffer : ObjectG
+class TextBuffer : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -50,7 +49,7 @@ class TextBuffer : ObjectG
    *   table = a tag table, or %NULL to create a new one
    * Returns: a new text buffer
    */
-  this(TextTagTable table)
+  this(gtk.text_tag_table.TextTagTable table)
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_buffer_new(table ? cast(GtkTextTagTable*)table.cPtr(No.Dup) : null);
@@ -68,9 +67,9 @@ class TextBuffer : ObjectG
    *   mark = the mark to add
    *   where = location to place mark
    */
-  void addMark(TextMark mark, TextIter where)
+  void addMark(gtk.text_mark.TextMark mark, gtk.text_iter.TextIter where)
   {
-    gtk_text_buffer_add_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null, where ? cast(GtkTextIter*)where.cPtr(No.Dup) : null);
+    gtk_text_buffer_add_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null, where ? cast(const(GtkTextIter)*)where.cPtr(No.Dup) : null);
   }
 
   /**
@@ -81,7 +80,7 @@ class TextBuffer : ObjectG
    * Params:
    *   clipboard = a `GdkClipboard`
    */
-  void addSelectionClipboard(Clipboard clipboard)
+  void addSelectionClipboard(gdk.clipboard.Clipboard clipboard)
   {
     gtk_text_buffer_add_selection_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GdkClipboard*)clipboard.cPtr(No.Dup) : null);
   }
@@ -96,9 +95,9 @@ class TextBuffer : ObjectG
    *   start = one bound of range to be tagged
    *   end = other bound of range to be tagged
    */
-  void applyTag(TextTag tag, TextIter start, TextIter end)
+  void applyTag(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_text_buffer_apply_tag(cast(GtkTextBuffer*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+    gtk_text_buffer_apply_tag(cast(GtkTextBuffer*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -111,10 +110,10 @@ class TextBuffer : ObjectG
    *   start = one bound of range to be tagged
    *   end = other bound of range to be tagged
    */
-  void applyTagByName(string name, TextIter start, TextIter end)
+  void applyTagByName(string name, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_text_buffer_apply_tag_by_name(cast(GtkTextBuffer*)cPtr, _name, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+    gtk_text_buffer_apply_tag_by_name(cast(GtkTextBuffer*)cPtr, _name, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -133,7 +132,7 @@ class TextBuffer : ObjectG
    *   defaultEditable = whether the buffer is editable by default
    * Returns: %TRUE if the buffer was modified
    */
-  bool backspace(TextIter iter, bool interactive, bool defaultEditable)
+  bool backspace(gtk.text_iter.TextIter iter, bool interactive, bool defaultEditable)
   {
     bool _retval;
     _retval = gtk_text_buffer_backspace(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, interactive, defaultEditable);
@@ -183,7 +182,7 @@ class TextBuffer : ObjectG
    * Params:
    *   clipboard = the `GdkClipboard` object to copy to
    */
-  void copyClipboard(Clipboard clipboard)
+  void copyClipboard(gdk.clipboard.Clipboard clipboard)
   {
     gtk_text_buffer_copy_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GdkClipboard*)clipboard.cPtr(No.Dup) : null);
   }
@@ -199,11 +198,11 @@ class TextBuffer : ObjectG
    *   iter = location in the buffer
    * Returns: the created child anchor
    */
-  TextChildAnchor createChildAnchor(TextIter iter)
+  gtk.text_child_anchor.TextChildAnchor createChildAnchor(gtk.text_iter.TextIter iter)
   {
     GtkTextChildAnchor* _cretval;
     _cretval = gtk_text_buffer_create_child_anchor(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!TextChildAnchor(cast(GtkTextChildAnchor*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -230,12 +229,12 @@ class TextBuffer : ObjectG
    *   leftGravity = whether the mark has left gravity
    * Returns: the new `GtkTextMark` object
    */
-  TextMark createMark(string markName, TextIter where, bool leftGravity)
+  gtk.text_mark.TextMark createMark(string markName, gtk.text_iter.TextIter where, bool leftGravity)
   {
     GtkTextMark* _cretval;
     const(char)* _markName = markName.toCString(No.Alloc);
-    _cretval = gtk_text_buffer_create_mark(cast(GtkTextBuffer*)cPtr, _markName, where ? cast(GtkTextIter*)where.cPtr(No.Dup) : null, leftGravity);
-    auto _retval = ObjectG.getDObject!TextMark(cast(GtkTextMark*)_cretval, No.Take);
+    _cretval = gtk_text_buffer_create_mark(cast(GtkTextBuffer*)cPtr, _markName, where ? cast(const(GtkTextIter)*)where.cPtr(No.Dup) : null, leftGravity);
+    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -246,7 +245,7 @@ class TextBuffer : ObjectG
    *   clipboard = the `GdkClipboard` object to cut to
    *   defaultEditable = default editability of the buffer
    */
-  void cutClipboard(Clipboard clipboard, bool defaultEditable)
+  void cutClipboard(gdk.clipboard.Clipboard clipboard, bool defaultEditable)
   {
     gtk_text_buffer_cut_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GdkClipboard*)clipboard.cPtr(No.Dup) : null, defaultEditable);
   }
@@ -264,7 +263,7 @@ class TextBuffer : ObjectG
    *   start = a position in buffer
    *   end = another position in buffer
    */
-  void delete_(TextIter start, TextIter end)
+  void delete_(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
     gtk_text_buffer_delete(cast(GtkTextBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
   }
@@ -281,7 +280,7 @@ class TextBuffer : ObjectG
    *   defaultEditable = whether the buffer is editable by default
    * Returns: whether some text was actually deleted
    */
-  bool deleteInteractive(TextIter startIter, TextIter endIter, bool defaultEditable)
+  bool deleteInteractive(gtk.text_iter.TextIter startIter, gtk.text_iter.TextIter endIter, bool defaultEditable)
   {
     bool _retval;
     _retval = gtk_text_buffer_delete_interactive(cast(GtkTextBuffer*)cPtr, startIter ? cast(GtkTextIter*)startIter.cPtr(No.Dup) : null, endIter ? cast(GtkTextIter*)endIter.cPtr(No.Dup) : null, defaultEditable);
@@ -302,7 +301,7 @@ class TextBuffer : ObjectG
    * Params:
    *   mark = a `GtkTextMark` in buffer
    */
-  void deleteMark(TextMark mark)
+  void deleteMark(gtk.text_mark.TextMark mark)
   {
     gtk_text_buffer_delete_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null);
   }
@@ -369,13 +368,13 @@ class TextBuffer : ObjectG
    *   start = iterator to initialize with first position in the buffer
    *   end = iterator to initialize with the end iterator
    */
-  void getBounds(out TextIter start, out TextIter end)
+  void getBounds(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end)
   {
     GtkTextIter _start;
     GtkTextIter _end;
     gtk_text_buffer_get_bounds(cast(GtkTextBuffer*)cPtr, &_start, &_end);
-    start = new TextIter(cast(void*)&_start, No.Take);
-    end = new TextIter(cast(void*)&_end, No.Take);
+    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
+    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
   }
 
   /**
@@ -441,11 +440,11 @@ class TextBuffer : ObjectG
    * Params:
    *   iter = iterator to initialize
    */
-  void getEndIter(out TextIter iter)
+  void getEndIter(out gtk.text_iter.TextIter iter)
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_end_iter(cast(GtkTextBuffer*)cPtr, &_iter);
-    iter = new TextIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -466,11 +465,11 @@ class TextBuffer : ObjectG
    * efficient, and involves less typing.
    * Returns: insertion point mark
    */
-  TextMark getInsert()
+  gtk.text_mark.TextMark getInsert()
   {
     GtkTextMark* _cretval;
     _cretval = gtk_text_buffer_get_insert(cast(GtkTextBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!TextMark(cast(GtkTextMark*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -480,11 +479,11 @@ class TextBuffer : ObjectG
    *   iter = an iterator to be initialized
    *   anchor = a child anchor that appears in buffer
    */
-  void getIterAtChildAnchor(out TextIter iter, TextChildAnchor anchor)
+  void getIterAtChildAnchor(out gtk.text_iter.TextIter iter, gtk.text_child_anchor.TextChildAnchor anchor)
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_iter_at_child_anchor(cast(GtkTextBuffer*)cPtr, &_iter, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(No.Dup) : null);
-    iter = new TextIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -496,12 +495,12 @@ class TextBuffer : ObjectG
    *   lineNumber = line number counting from 0
    * Returns: whether the exact position has been found
    */
-  bool getIterAtLine(out TextIter iter, int lineNumber)
+  bool getIterAtLine(out gtk.text_iter.TextIter iter, int lineNumber)
   {
     bool _retval;
     GtkTextIter _iter;
     _retval = gtk_text_buffer_get_iter_at_line(cast(GtkTextBuffer*)cPtr, &_iter, lineNumber);
-    iter = new TextIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -518,12 +517,12 @@ class TextBuffer : ObjectG
    *   byteIndex = byte index from start of line
    * Returns: whether the exact position has been found
    */
-  bool getIterAtLineIndex(out TextIter iter, int lineNumber, int byteIndex)
+  bool getIterAtLineIndex(out gtk.text_iter.TextIter iter, int lineNumber, int byteIndex)
   {
     bool _retval;
     GtkTextIter _iter;
     _retval = gtk_text_buffer_get_iter_at_line_index(cast(GtkTextBuffer*)cPtr, &_iter, lineNumber, byteIndex);
-    iter = new TextIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -540,12 +539,12 @@ class TextBuffer : ObjectG
    *   charOffset = char offset from start of line
    * Returns: whether the exact position has been found
    */
-  bool getIterAtLineOffset(out TextIter iter, int lineNumber, int charOffset)
+  bool getIterAtLineOffset(out gtk.text_iter.TextIter iter, int lineNumber, int charOffset)
   {
     bool _retval;
     GtkTextIter _iter;
     _retval = gtk_text_buffer_get_iter_at_line_offset(cast(GtkTextBuffer*)cPtr, &_iter, lineNumber, charOffset);
-    iter = new TextIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -555,11 +554,11 @@ class TextBuffer : ObjectG
    *   iter = iterator to initialize
    *   mark = a `GtkTextMark` in buffer
    */
-  void getIterAtMark(out TextIter iter, TextMark mark)
+  void getIterAtMark(out gtk.text_iter.TextIter iter, gtk.text_mark.TextMark mark)
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_iter_at_mark(cast(GtkTextBuffer*)cPtr, &_iter, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null);
-    iter = new TextIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -572,11 +571,11 @@ class TextBuffer : ObjectG
    *   iter = iterator to initialize
    *   charOffset = char offset from start of buffer, counting from 0, or -1
    */
-  void getIterAtOffset(out TextIter iter, int charOffset)
+  void getIterAtOffset(out gtk.text_iter.TextIter iter, int charOffset)
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_iter_at_offset(cast(GtkTextBuffer*)cPtr, &_iter, charOffset);
-    iter = new TextIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -598,12 +597,12 @@ class TextBuffer : ObjectG
    *   name = a mark name
    * Returns: a `GtkTextMark`
    */
-  TextMark getMark(string name)
+  gtk.text_mark.TextMark getMark(string name)
   {
     GtkTextMark* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_text_buffer_get_mark(cast(GtkTextBuffer*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!TextMark(cast(GtkTextMark*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -648,11 +647,11 @@ class TextBuffer : ObjectG
    * there’s a selection and what its bounds are.
    * Returns: selection bound mark
    */
-  TextMark getSelectionBound()
+  gtk.text_mark.TextMark getSelectionBound()
   {
     GtkTextMark* _cretval;
     _cretval = gtk_text_buffer_get_selection_bound(cast(GtkTextBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!TextMark(cast(GtkTextMark*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -668,14 +667,14 @@ class TextBuffer : ObjectG
    *   end = iterator to initialize with selection end
    * Returns: whether the selection has nonzero length
    */
-  bool getSelectionBounds(out TextIter start, out TextIter end)
+  bool getSelectionBounds(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end)
   {
     bool _retval;
     GtkTextIter _start;
     GtkTextIter _end;
     _retval = gtk_text_buffer_get_selection_bounds(cast(GtkTextBuffer*)cPtr, &_start, &_end);
-    start = new TextIter(cast(void*)&_start, No.Take);
-    end = new TextIter(cast(void*)&_end, No.Take);
+    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
+    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
   }
 
@@ -685,11 +684,11 @@ class TextBuffer : ObjectG
    * in a `GdkClipboard`, see [gdk.clipboard.Clipboard.setContent].
    * Returns: a new `GdkContentProvider`.
    */
-  ContentProvider getSelectionContent()
+  gdk.content_provider.ContentProvider getSelectionContent()
   {
     GdkContentProvider* _cretval;
     _cretval = gtk_text_buffer_get_selection_content(cast(GtkTextBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -709,11 +708,11 @@ class TextBuffer : ObjectG
    *   includeHiddenChars = whether to include invisible text
    * Returns: an allocated UTF-8 string
    */
-  string getSlice(TextIter start, TextIter end, bool includeHiddenChars)
+  string getSlice(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, bool includeHiddenChars)
   {
     char* _cretval;
-    _cretval = gtk_text_buffer_get_slice(cast(GtkTextBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null, includeHiddenChars);
-    string _retval = _cretval.fromCString(Yes.Free);
+    _cretval = gtk_text_buffer_get_slice(cast(GtkTextBuffer*)cPtr, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null, includeHiddenChars);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -724,22 +723,22 @@ class TextBuffer : ObjectG
    * Params:
    *   iter = iterator to initialize
    */
-  void getStartIter(out TextIter iter)
+  void getStartIter(out gtk.text_iter.TextIter iter)
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_start_iter(cast(GtkTextBuffer*)cPtr, &_iter);
-    iter = new TextIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
    * Get the `GtkTextTagTable` associated with this buffer.
    * Returns: the buffer’s tag table
    */
-  TextTagTable getTagTable()
+  gtk.text_tag_table.TextTagTable getTagTable()
   {
     GtkTextTagTable* _cretval;
     _cretval = gtk_text_buffer_get_tag_table(cast(GtkTextBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!TextTagTable(cast(GtkTextTagTable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_tag_table.TextTagTable)(cast(GtkTextTagTable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -757,11 +756,11 @@ class TextBuffer : ObjectG
    *   includeHiddenChars = whether to include invisible text
    * Returns: an allocated UTF-8 string
    */
-  string getText(TextIter start, TextIter end, bool includeHiddenChars)
+  string getText(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, bool includeHiddenChars)
   {
     char* _cretval;
-    _cretval = gtk_text_buffer_get_text(cast(GtkTextBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null, includeHiddenChars);
-    string _retval = _cretval.fromCString(Yes.Free);
+    _cretval = gtk_text_buffer_get_text(cast(GtkTextBuffer*)cPtr, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null, includeHiddenChars);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -777,7 +776,7 @@ class TextBuffer : ObjectG
    *   iter = a position in the buffer
    *   text = text in UTF-8 format
    */
-  void insert(TextIter iter, string text)
+  void insert(gtk.text_iter.TextIter iter, string text)
   {
     int _len;
     if (text)
@@ -820,7 +819,7 @@ class TextBuffer : ObjectG
    *   iter = location to insert the anchor
    *   anchor = a `GtkTextChildAnchor`
    */
-  void insertChildAnchor(TextIter iter, TextChildAnchor anchor)
+  void insertChildAnchor(gtk.text_iter.TextIter iter, gtk.text_child_anchor.TextChildAnchor anchor)
   {
     gtk_text_buffer_insert_child_anchor(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(No.Dup) : null);
   }
@@ -840,7 +839,7 @@ class TextBuffer : ObjectG
    *   defaultEditable = default editability of buffer
    * Returns: whether text was actually inserted
    */
-  bool insertInteractive(TextIter iter, string text, bool defaultEditable)
+  bool insertInteractive(gtk.text_iter.TextIter iter, string text, bool defaultEditable)
   {
     bool _retval;
     int _len;
@@ -886,7 +885,7 @@ class TextBuffer : ObjectG
    *   iter = location to insert the markup
    *   markup = a nul-terminated UTF-8 string containing Pango markup
    */
-  void insertMarkup(TextIter iter, string markup)
+  void insertMarkup(gtk.text_iter.TextIter iter, string markup)
   {
     int _len;
     if (markup)
@@ -909,7 +908,7 @@ class TextBuffer : ObjectG
    *   iter = location to insert the paintable
    *   paintable = a `GdkPaintable`
    */
-  void insertPaintable(TextIter iter, Paintable paintable)
+  void insertPaintable(gtk.text_iter.TextIter iter, gdk.paintable.Paintable paintable)
   {
     gtk_text_buffer_insert_paintable(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
@@ -928,9 +927,9 @@ class TextBuffer : ObjectG
    *   start = a position in a `GtkTextBuffer`
    *   end = another position in the same buffer as start
    */
-  void insertRange(TextIter iter, TextIter start, TextIter end)
+  void insertRange(gtk.text_iter.TextIter iter, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_text_buffer_insert_range(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+    gtk_text_buffer_insert_range(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -948,10 +947,10 @@ class TextBuffer : ObjectG
    *   defaultEditable = default editability of the buffer
    * Returns: whether an insertion was possible at iter
    */
-  bool insertRangeInteractive(TextIter iter, TextIter start, TextIter end, bool defaultEditable)
+  bool insertRangeInteractive(gtk.text_iter.TextIter iter, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, bool defaultEditable)
   {
     bool _retval;
-    _retval = gtk_text_buffer_insert_range_interactive(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null, defaultEditable);
+    _retval = gtk_text_buffer_insert_range_interactive(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null, defaultEditable);
     return _retval;
   }
 
@@ -963,9 +962,9 @@ class TextBuffer : ObjectG
    *   mark = a `GtkTextMark`
    *   where = new location for mark in buffer
    */
-  void moveMark(TextMark mark, TextIter where)
+  void moveMark(gtk.text_mark.TextMark mark, gtk.text_iter.TextIter where)
   {
-    gtk_text_buffer_move_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null, where ? cast(GtkTextIter*)where.cPtr(No.Dup) : null);
+    gtk_text_buffer_move_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null, where ? cast(const(GtkTextIter)*)where.cPtr(No.Dup) : null);
   }
 
   /**
@@ -975,10 +974,10 @@ class TextBuffer : ObjectG
    *   name = name of a mark
    *   where = new location for mark
    */
-  void moveMarkByName(string name, TextIter where)
+  void moveMarkByName(string name, gtk.text_iter.TextIter where)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_text_buffer_move_mark_by_name(cast(GtkTextBuffer*)cPtr, _name, where ? cast(GtkTextIter*)where.cPtr(No.Dup) : null);
+    gtk_text_buffer_move_mark_by_name(cast(GtkTextBuffer*)cPtr, _name, where ? cast(const(GtkTextIter)*)where.cPtr(No.Dup) : null);
   }
 
   /**
@@ -994,7 +993,7 @@ class TextBuffer : ObjectG
    *   overrideLocation = location to insert pasted text
    *   defaultEditable = whether the buffer is editable by default
    */
-  void pasteClipboard(Clipboard clipboard, TextIter overrideLocation, bool defaultEditable)
+  void pasteClipboard(gdk.clipboard.Clipboard clipboard, gtk.text_iter.TextIter overrideLocation, bool defaultEditable)
   {
     gtk_text_buffer_paste_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GdkClipboard*)clipboard.cPtr(No.Dup) : null, overrideLocation ? cast(GtkTextIter*)overrideLocation.cPtr(No.Dup) : null, defaultEditable);
   }
@@ -1011,9 +1010,9 @@ class TextBuffer : ObjectG
    * Params:
    *   where = where to put the cursor
    */
-  void placeCursor(TextIter where)
+  void placeCursor(gtk.text_iter.TextIter where)
   {
-    gtk_text_buffer_place_cursor(cast(GtkTextBuffer*)cPtr, where ? cast(GtkTextIter*)where.cPtr(No.Dup) : null);
+    gtk_text_buffer_place_cursor(cast(GtkTextBuffer*)cPtr, where ? cast(const(GtkTextIter)*)where.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1034,9 +1033,9 @@ class TextBuffer : ObjectG
    *   start = one bound of range to be untagged
    *   end = other bound of range to be untagged
    */
-  void removeAllTags(TextIter start, TextIter end)
+  void removeAllTags(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_text_buffer_remove_all_tags(cast(GtkTextBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+    gtk_text_buffer_remove_all_tags(cast(GtkTextBuffer*)cPtr, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1046,7 +1045,7 @@ class TextBuffer : ObjectG
    *   clipboard = a `GdkClipboard` added to buffer by
    *     [gtk.text_buffer.TextBuffer.addSelectionClipboard]
    */
-  void removeSelectionClipboard(Clipboard clipboard)
+  void removeSelectionClipboard(gdk.clipboard.Clipboard clipboard)
   {
     gtk_text_buffer_remove_selection_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GdkClipboard*)clipboard.cPtr(No.Dup) : null);
   }
@@ -1061,9 +1060,9 @@ class TextBuffer : ObjectG
    *   start = one bound of range to be untagged
    *   end = other bound of range to be untagged
    */
-  void removeTag(TextTag tag, TextIter start, TextIter end)
+  void removeTag(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_text_buffer_remove_tag(cast(GtkTextBuffer*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+    gtk_text_buffer_remove_tag(cast(GtkTextBuffer*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1076,10 +1075,10 @@ class TextBuffer : ObjectG
    *   start = one bound of range to be untagged
    *   end = other bound of range to be untagged
    */
-  void removeTagByName(string name, TextIter start, TextIter end)
+  void removeTagByName(string name, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_text_buffer_remove_tag_by_name(cast(GtkTextBuffer*)cPtr, _name, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+    gtk_text_buffer_remove_tag_by_name(cast(GtkTextBuffer*)cPtr, _name, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1095,9 +1094,9 @@ class TextBuffer : ObjectG
    *   ins = where to put the “insert” mark
    *   bound = where to put the “selection_bound” mark
    */
-  void selectRange(TextIter ins, TextIter bound)
+  void selectRange(gtk.text_iter.TextIter ins, gtk.text_iter.TextIter bound)
   {
-    gtk_text_buffer_select_range(cast(GtkTextBuffer*)cPtr, ins ? cast(GtkTextIter*)ins.cPtr(No.Dup) : null, bound ? cast(GtkTextIter*)bound.cPtr(No.Dup) : null);
+    gtk_text_buffer_select_range(cast(GtkTextBuffer*)cPtr, ins ? cast(const(GtkTextIter)*)ins.cPtr(No.Dup) : null, bound ? cast(const(GtkTextIter)*)bound.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1191,8 +1190,8 @@ class TextBuffer : ObjectG
    *   end = the end of the range the tag is applied to
    *   textBuffer = the instance the signal is connected to
    */
-  alias ApplyTagCallbackDlg = void delegate(TextTag tag, TextIter start, TextIter end, TextBuffer textBuffer);
-  alias ApplyTagCallbackFunc = void function(TextTag tag, TextIter start, TextIter end, TextBuffer textBuffer);
+  alias ApplyTagCallbackDlg = void delegate(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_buffer.TextBuffer textBuffer);
+  alias ApplyTagCallbackFunc = void function(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_buffer.TextBuffer textBuffer);
 
   /**
    * Connect to ApplyTag signal.
@@ -1208,10 +1207,10 @@ class TextBuffer : ObjectG
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textBuffer = getVal!TextBuffer(_paramVals);
-      auto tag = getVal!TextTag(&_paramVals[1]);
-      auto start = getVal!TextIter(&_paramVals[2]);
-      auto end = getVal!TextIter(&_paramVals[3]);
+      auto textBuffer = getVal!(gtk.text_buffer.TextBuffer)(_paramVals);
+      auto tag = getVal!(gtk.text_tag.TextTag)(&_paramVals[1]);
+      auto start = getVal!(gtk.text_iter.TextIter)(&_paramVals[2]);
+      auto end = getVal!(gtk.text_iter.TextIter)(&_paramVals[3]);
       _dClosure.dlg(tag, start, end, textBuffer);
     }
 
@@ -1231,8 +1230,8 @@ class TextBuffer : ObjectG
    * [gtk.text_buffer.TextBuffer.deleteSelection].
    *   textBuffer = the instance the signal is connected to
    */
-  alias BeginUserActionCallbackDlg = void delegate(TextBuffer textBuffer);
-  alias BeginUserActionCallbackFunc = void function(TextBuffer textBuffer);
+  alias BeginUserActionCallbackDlg = void delegate(gtk.text_buffer.TextBuffer textBuffer);
+  alias BeginUserActionCallbackFunc = void function(gtk.text_buffer.TextBuffer textBuffer);
 
   /**
    * Connect to BeginUserAction signal.
@@ -1248,7 +1247,7 @@ class TextBuffer : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textBuffer = getVal!TextBuffer(_paramVals);
+      auto textBuffer = getVal!(gtk.text_buffer.TextBuffer)(_paramVals);
       _dClosure.dlg(textBuffer);
     }
 
@@ -1260,8 +1259,8 @@ class TextBuffer : ObjectG
    * Emitted when the content of a `GtkTextBuffer` has changed.
    *   textBuffer = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(TextBuffer textBuffer);
-  alias ChangedCallbackFunc = void function(TextBuffer textBuffer);
+  alias ChangedCallbackDlg = void delegate(gtk.text_buffer.TextBuffer textBuffer);
+  alias ChangedCallbackFunc = void function(gtk.text_buffer.TextBuffer textBuffer);
 
   /**
    * Connect to Changed signal.
@@ -1277,7 +1276,7 @@ class TextBuffer : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textBuffer = getVal!TextBuffer(_paramVals);
+      auto textBuffer = getVal!(gtk.text_buffer.TextBuffer)(_paramVals);
       _dClosure.dlg(textBuffer);
     }
 
@@ -1300,8 +1299,8 @@ class TextBuffer : ObjectG
    *   end = the end of the range to be deleted
    *   textBuffer = the instance the signal is connected to
    */
-  alias DeleteRangeCallbackDlg = void delegate(TextIter start, TextIter end, TextBuffer textBuffer);
-  alias DeleteRangeCallbackFunc = void function(TextIter start, TextIter end, TextBuffer textBuffer);
+  alias DeleteRangeCallbackDlg = void delegate(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_buffer.TextBuffer textBuffer);
+  alias DeleteRangeCallbackFunc = void function(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_buffer.TextBuffer textBuffer);
 
   /**
    * Connect to DeleteRange signal.
@@ -1317,9 +1316,9 @@ class TextBuffer : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textBuffer = getVal!TextBuffer(_paramVals);
-      auto start = getVal!TextIter(&_paramVals[1]);
-      auto end = getVal!TextIter(&_paramVals[2]);
+      auto textBuffer = getVal!(gtk.text_buffer.TextBuffer)(_paramVals);
+      auto start = getVal!(gtk.text_iter.TextIter)(&_paramVals[1]);
+      auto end = getVal!(gtk.text_iter.TextIter)(&_paramVals[2]);
       _dClosure.dlg(start, end, textBuffer);
     }
 
@@ -1340,8 +1339,8 @@ class TextBuffer : ObjectG
    * [gtk.text_buffer.TextBuffer.backspace].
    *   textBuffer = the instance the signal is connected to
    */
-  alias EndUserActionCallbackDlg = void delegate(TextBuffer textBuffer);
-  alias EndUserActionCallbackFunc = void function(TextBuffer textBuffer);
+  alias EndUserActionCallbackDlg = void delegate(gtk.text_buffer.TextBuffer textBuffer);
+  alias EndUserActionCallbackFunc = void function(gtk.text_buffer.TextBuffer textBuffer);
 
   /**
    * Connect to EndUserAction signal.
@@ -1357,7 +1356,7 @@ class TextBuffer : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textBuffer = getVal!TextBuffer(_paramVals);
+      auto textBuffer = getVal!(gtk.text_buffer.TextBuffer)(_paramVals);
       _dClosure.dlg(textBuffer);
     }
 
@@ -1378,8 +1377,8 @@ class TextBuffer : ObjectG
    *   anchor = the `GtkTextChildAnchor` to be inserted
    *   textBuffer = the instance the signal is connected to
    */
-  alias InsertChildAnchorCallbackDlg = void delegate(TextIter location, TextChildAnchor anchor, TextBuffer textBuffer);
-  alias InsertChildAnchorCallbackFunc = void function(TextIter location, TextChildAnchor anchor, TextBuffer textBuffer);
+  alias InsertChildAnchorCallbackDlg = void delegate(gtk.text_iter.TextIter location, gtk.text_child_anchor.TextChildAnchor anchor, gtk.text_buffer.TextBuffer textBuffer);
+  alias InsertChildAnchorCallbackFunc = void function(gtk.text_iter.TextIter location, gtk.text_child_anchor.TextChildAnchor anchor, gtk.text_buffer.TextBuffer textBuffer);
 
   /**
    * Connect to InsertChildAnchor signal.
@@ -1395,9 +1394,9 @@ class TextBuffer : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textBuffer = getVal!TextBuffer(_paramVals);
-      auto location = getVal!TextIter(&_paramVals[1]);
-      auto anchor = getVal!TextChildAnchor(&_paramVals[2]);
+      auto textBuffer = getVal!(gtk.text_buffer.TextBuffer)(_paramVals);
+      auto location = getVal!(gtk.text_iter.TextIter)(&_paramVals[1]);
+      auto anchor = getVal!(gtk.text_child_anchor.TextChildAnchor)(&_paramVals[2]);
       _dClosure.dlg(location, anchor, textBuffer);
     }
 
@@ -1418,8 +1417,8 @@ class TextBuffer : ObjectG
    *   paintable = the `GdkPaintable` to be inserted
    *   textBuffer = the instance the signal is connected to
    */
-  alias InsertPaintableCallbackDlg = void delegate(TextIter location, Paintable paintable, TextBuffer textBuffer);
-  alias InsertPaintableCallbackFunc = void function(TextIter location, Paintable paintable, TextBuffer textBuffer);
+  alias InsertPaintableCallbackDlg = void delegate(gtk.text_iter.TextIter location, gdk.paintable.Paintable paintable, gtk.text_buffer.TextBuffer textBuffer);
+  alias InsertPaintableCallbackFunc = void function(gtk.text_iter.TextIter location, gdk.paintable.Paintable paintable, gtk.text_buffer.TextBuffer textBuffer);
 
   /**
    * Connect to InsertPaintable signal.
@@ -1435,9 +1434,9 @@ class TextBuffer : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textBuffer = getVal!TextBuffer(_paramVals);
-      auto location = getVal!TextIter(&_paramVals[1]);
-      auto paintable = getVal!Paintable(&_paramVals[2]);
+      auto textBuffer = getVal!(gtk.text_buffer.TextBuffer)(_paramVals);
+      auto location = getVal!(gtk.text_iter.TextIter)(&_paramVals[1]);
+      auto paintable = getVal!(gdk.paintable.Paintable)(&_paramVals[2]);
       _dClosure.dlg(location, paintable, textBuffer);
     }
 
@@ -1460,8 +1459,8 @@ class TextBuffer : ObjectG
    *   len = length of the inserted text in bytes
    *   textBuffer = the instance the signal is connected to
    */
-  alias InsertTextCallbackDlg = void delegate(TextIter location, string text, int len, TextBuffer textBuffer);
-  alias InsertTextCallbackFunc = void function(TextIter location, string text, int len, TextBuffer textBuffer);
+  alias InsertTextCallbackDlg = void delegate(gtk.text_iter.TextIter location, string text, int len, gtk.text_buffer.TextBuffer textBuffer);
+  alias InsertTextCallbackFunc = void function(gtk.text_iter.TextIter location, string text, int len, gtk.text_buffer.TextBuffer textBuffer);
 
   /**
    * Connect to InsertText signal.
@@ -1477,10 +1476,10 @@ class TextBuffer : ObjectG
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textBuffer = getVal!TextBuffer(_paramVals);
-      auto location = getVal!TextIter(&_paramVals[1]);
-      auto text = getVal!string(&_paramVals[2]);
-      auto len = getVal!int(&_paramVals[3]);
+      auto textBuffer = getVal!(gtk.text_buffer.TextBuffer)(_paramVals);
+      auto location = getVal!(gtk.text_iter.TextIter)(&_paramVals[1]);
+      auto text = getVal!(string)(&_paramVals[2]);
+      auto len = getVal!(int)(&_paramVals[3]);
       _dClosure.dlg(location, text, len, textBuffer);
     }
 
@@ -1495,8 +1494,8 @@ class TextBuffer : ObjectG
    *   mark = The mark that was deleted
    *   textBuffer = the instance the signal is connected to
    */
-  alias MarkDeletedCallbackDlg = void delegate(TextMark mark, TextBuffer textBuffer);
-  alias MarkDeletedCallbackFunc = void function(TextMark mark, TextBuffer textBuffer);
+  alias MarkDeletedCallbackDlg = void delegate(gtk.text_mark.TextMark mark, gtk.text_buffer.TextBuffer textBuffer);
+  alias MarkDeletedCallbackFunc = void function(gtk.text_mark.TextMark mark, gtk.text_buffer.TextBuffer textBuffer);
 
   /**
    * Connect to MarkDeleted signal.
@@ -1512,8 +1511,8 @@ class TextBuffer : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textBuffer = getVal!TextBuffer(_paramVals);
-      auto mark = getVal!TextMark(&_paramVals[1]);
+      auto textBuffer = getVal!(gtk.text_buffer.TextBuffer)(_paramVals);
+      auto mark = getVal!(gtk.text_mark.TextMark)(&_paramVals[1]);
       _dClosure.dlg(mark, textBuffer);
     }
 
@@ -1531,8 +1530,8 @@ class TextBuffer : ObjectG
    *   mark = The mark that is set
    *   textBuffer = the instance the signal is connected to
    */
-  alias MarkSetCallbackDlg = void delegate(TextIter location, TextMark mark, TextBuffer textBuffer);
-  alias MarkSetCallbackFunc = void function(TextIter location, TextMark mark, TextBuffer textBuffer);
+  alias MarkSetCallbackDlg = void delegate(gtk.text_iter.TextIter location, gtk.text_mark.TextMark mark, gtk.text_buffer.TextBuffer textBuffer);
+  alias MarkSetCallbackFunc = void function(gtk.text_iter.TextIter location, gtk.text_mark.TextMark mark, gtk.text_buffer.TextBuffer textBuffer);
 
   /**
    * Connect to MarkSet signal.
@@ -1548,9 +1547,9 @@ class TextBuffer : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textBuffer = getVal!TextBuffer(_paramVals);
-      auto location = getVal!TextIter(&_paramVals[1]);
-      auto mark = getVal!TextMark(&_paramVals[2]);
+      auto textBuffer = getVal!(gtk.text_buffer.TextBuffer)(_paramVals);
+      auto location = getVal!(gtk.text_iter.TextIter)(&_paramVals[1]);
+      auto mark = getVal!(gtk.text_mark.TextMark)(&_paramVals[2]);
       _dClosure.dlg(location, mark, textBuffer);
     }
 
@@ -1563,8 +1562,8 @@ class TextBuffer : ObjectG
    * See also: [gtk.text_buffer.TextBuffer.setModified].
    *   textBuffer = the instance the signal is connected to
    */
-  alias ModifiedChangedCallbackDlg = void delegate(TextBuffer textBuffer);
-  alias ModifiedChangedCallbackFunc = void function(TextBuffer textBuffer);
+  alias ModifiedChangedCallbackDlg = void delegate(gtk.text_buffer.TextBuffer textBuffer);
+  alias ModifiedChangedCallbackFunc = void function(gtk.text_buffer.TextBuffer textBuffer);
 
   /**
    * Connect to ModifiedChanged signal.
@@ -1580,7 +1579,7 @@ class TextBuffer : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textBuffer = getVal!TextBuffer(_paramVals);
+      auto textBuffer = getVal!(gtk.text_buffer.TextBuffer)(_paramVals);
       _dClosure.dlg(textBuffer);
     }
 
@@ -1597,8 +1596,8 @@ class TextBuffer : ObjectG
    *   clipboard = the `GdkClipboard` pasted from
    *   textBuffer = the instance the signal is connected to
    */
-  alias PasteDoneCallbackDlg = void delegate(Clipboard clipboard, TextBuffer textBuffer);
-  alias PasteDoneCallbackFunc = void function(Clipboard clipboard, TextBuffer textBuffer);
+  alias PasteDoneCallbackDlg = void delegate(gdk.clipboard.Clipboard clipboard, gtk.text_buffer.TextBuffer textBuffer);
+  alias PasteDoneCallbackFunc = void function(gdk.clipboard.Clipboard clipboard, gtk.text_buffer.TextBuffer textBuffer);
 
   /**
    * Connect to PasteDone signal.
@@ -1614,8 +1613,8 @@ class TextBuffer : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textBuffer = getVal!TextBuffer(_paramVals);
-      auto clipboard = getVal!Clipboard(&_paramVals[1]);
+      auto textBuffer = getVal!(gtk.text_buffer.TextBuffer)(_paramVals);
+      auto clipboard = getVal!(gdk.clipboard.Clipboard)(&_paramVals[1]);
       _dClosure.dlg(clipboard, textBuffer);
     }
 
@@ -1628,8 +1627,8 @@ class TextBuffer : ObjectG
    * previously undone operation.
    *   textBuffer = the instance the signal is connected to
    */
-  alias RedoCallbackDlg = void delegate(TextBuffer textBuffer);
-  alias RedoCallbackFunc = void function(TextBuffer textBuffer);
+  alias RedoCallbackDlg = void delegate(gtk.text_buffer.TextBuffer textBuffer);
+  alias RedoCallbackFunc = void function(gtk.text_buffer.TextBuffer textBuffer);
 
   /**
    * Connect to Redo signal.
@@ -1645,7 +1644,7 @@ class TextBuffer : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textBuffer = getVal!TextBuffer(_paramVals);
+      auto textBuffer = getVal!(gtk.text_buffer.TextBuffer)(_paramVals);
       _dClosure.dlg(textBuffer);
     }
 
@@ -1667,8 +1666,8 @@ class TextBuffer : ObjectG
    *   end = the end of the range the tag is removed from
    *   textBuffer = the instance the signal is connected to
    */
-  alias RemoveTagCallbackDlg = void delegate(TextTag tag, TextIter start, TextIter end, TextBuffer textBuffer);
-  alias RemoveTagCallbackFunc = void function(TextTag tag, TextIter start, TextIter end, TextBuffer textBuffer);
+  alias RemoveTagCallbackDlg = void delegate(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_buffer.TextBuffer textBuffer);
+  alias RemoveTagCallbackFunc = void function(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_buffer.TextBuffer textBuffer);
 
   /**
    * Connect to RemoveTag signal.
@@ -1684,10 +1683,10 @@ class TextBuffer : ObjectG
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textBuffer = getVal!TextBuffer(_paramVals);
-      auto tag = getVal!TextTag(&_paramVals[1]);
-      auto start = getVal!TextIter(&_paramVals[2]);
-      auto end = getVal!TextIter(&_paramVals[3]);
+      auto textBuffer = getVal!(gtk.text_buffer.TextBuffer)(_paramVals);
+      auto tag = getVal!(gtk.text_tag.TextTag)(&_paramVals[1]);
+      auto start = getVal!(gtk.text_iter.TextIter)(&_paramVals[2]);
+      auto end = getVal!(gtk.text_iter.TextIter)(&_paramVals[3]);
       _dClosure.dlg(tag, start, end, textBuffer);
     }
 
@@ -1701,8 +1700,8 @@ class TextBuffer : ObjectG
    * been grouped together.
    *   textBuffer = the instance the signal is connected to
    */
-  alias UndoCallbackDlg = void delegate(TextBuffer textBuffer);
-  alias UndoCallbackFunc = void function(TextBuffer textBuffer);
+  alias UndoCallbackDlg = void delegate(gtk.text_buffer.TextBuffer textBuffer);
+  alias UndoCallbackFunc = void function(gtk.text_buffer.TextBuffer textBuffer);
 
   /**
    * Connect to Undo signal.
@@ -1718,7 +1717,7 @@ class TextBuffer : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textBuffer = getVal!TextBuffer(_paramVals);
+      auto textBuffer = getVal!(gtk.text_buffer.TextBuffer)(_paramVals);
       _dClosure.dlg(textBuffer);
     }
 

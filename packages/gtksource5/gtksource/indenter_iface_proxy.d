@@ -5,7 +5,7 @@ import gtksource.indenter;
 import gtksource.indenter_mixin;
 
 /// Proxy object for GtkSource.Indenter interface when a GObject has no applicable D binding
-class IndenterIfaceProxy : IfaceProxy, Indenter
+class IndenterIfaceProxy : IfaceProxy, gtksource.indenter.Indenter
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class IndenterIfaceProxy : IfaceProxy, Indenter
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Indenter);
+    return typeid(gtksource.indenter.Indenter);
   }
 
   mixin IndenterT!();

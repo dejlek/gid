@@ -1,6 +1,6 @@
 module gobject.type_instance;
 
-import gid.global;
+import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.types;
@@ -28,7 +28,7 @@ class TypeInstance
     return cast(void*)&cInstance;
   }
 
-  void* getPrivate(GType privateType)
+  void* getPrivate(gobject.types.GType privateType)
   {
     auto _retval = g_type_instance_get_private(cast(GTypeInstance*)cPtr, privateType);
     return _retval;

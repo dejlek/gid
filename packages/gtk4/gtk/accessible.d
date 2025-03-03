@@ -1,7 +1,7 @@
 module gtk.accessible;
 
 public import gtk.accessible_iface_proxy;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gobject.value;
 import gtk.atcontext;
@@ -13,9 +13,9 @@ import gtk.types;
  * `GtkAccessible` is an interface for describing UI elements for
  * Assistive Technologies.
  * Every accessible implementation has:
- * - a “role”, represented by a value of the [gtk.AccessibleRole] enumeration
- * - an “attribute”, represented by a set of [gtk.AccessibleState],
- * [gtk.AccessibleProperty] and [gtk.AccessibleRelation] values
+ * - a “role”, represented by a value of the [gtk.types.AccessibleRole] enumeration
+ * - an “attribute”, represented by a set of [gtk.types.AccessibleState],
+ * [gtk.types.AccessibleProperty] and [gtk.types.AccessibleRelation] values
  * The role cannot be changed after instantiating a `GtkAccessible`
  * implementation.
  * The attributes are updated every time a UI element's state changes in
@@ -56,26 +56,26 @@ interface Accessible
    *   message = the string to announce
    *   priority = the priority of the announcement
    */
-  void announce(string message, AccessibleAnnouncementPriority priority);
+  void announce(string message, gtk.types.AccessibleAnnouncementPriority priority);
 
   /**
    * Retrieves the accessible parent for an accessible object.
    * This function returns `NULL` for top level widgets.
    * Returns: the accessible parent
    */
-  Accessible getAccessibleParent();
+  gtk.accessible.Accessible getAccessibleParent();
 
   /**
    * Retrieves the accessible role of an accessible object.
    * Returns: the accessible role
    */
-  AccessibleRole getAccessibleRole();
+  gtk.types.AccessibleRole getAccessibleRole();
 
   /**
    * Retrieves the accessible implementation for the given `GtkAccessible`.
    * Returns: the accessible implementation object
    */
-  ATContext getAtContext();
+  gtk.atcontext.ATContext getAtContext();
 
   /**
    * Queries the coordinates and dimensions of this accessible
@@ -95,13 +95,13 @@ interface Accessible
    * Retrieves the first accessible child of an accessible object.
    * Returns: the first accessible child
    */
-  Accessible getFirstAccessibleChild();
+  gtk.accessible.Accessible getFirstAccessibleChild();
 
   /**
    * Retrieves the next accessible sibling of an accessible object
    * Returns: the next accessible sibling
    */
-  Accessible getNextAccessibleSibling();
+  gtk.accessible.Accessible getNextAccessibleSibling();
 
   /**
    * Query a platform state, such as focus.
@@ -113,28 +113,28 @@ interface Accessible
    *   state = platform state to query
    * Returns: the value of state for the accessible
    */
-  bool getPlatformState(AccessiblePlatformState state);
+  bool getPlatformState(gtk.types.AccessiblePlatformState state);
 
   /**
    * Resets the accessible property to its default value.
    * Params:
    *   property = a `GtkAccessibleProperty`
    */
-  void resetProperty(AccessibleProperty property);
+  void resetProperty(gtk.types.AccessibleProperty property);
 
   /**
    * Resets the accessible relation to its default value.
    * Params:
    *   relation = a `GtkAccessibleRelation`
    */
-  void resetRelation(AccessibleRelation relation);
+  void resetRelation(gtk.types.AccessibleRelation relation);
 
   /**
    * Resets the accessible state to its default value.
    * Params:
    *   state = a `GtkAccessibleState`
    */
-  void resetState(AccessibleState state);
+  void resetState(gtk.types.AccessibleState state);
 
   /**
    * Sets the parent and sibling of an accessible object.
@@ -149,7 +149,7 @@ interface Accessible
    *   parent = the parent accessible object
    *   nextSibling = the sibling accessible object
    */
-  void setAccessibleParent(Accessible parent, Accessible nextSibling);
+  void setAccessibleParent(gtk.accessible.Accessible parent, gtk.accessible.Accessible nextSibling);
 
   /**
    * Updates the next accessible sibling of self.
@@ -158,7 +158,7 @@ interface Accessible
    * Params:
    *   newSibling = the new next accessible sibling to set
    */
-  void updateNextAccessibleSibling(Accessible newSibling);
+  void updateNextAccessibleSibling(gtk.accessible.Accessible newSibling);
 
   /**
    * Updates an array of accessible properties.
@@ -169,7 +169,7 @@ interface Accessible
    *   properties = an array of `GtkAccessibleProperty`
    *   values = an array of `GValues`, one for each property
    */
-  void updateProperty(AccessibleProperty[] properties, Value[] values);
+  void updateProperty(gtk.types.AccessibleProperty[] properties, gobject.value.Value[] values);
 
   /**
    * Updates an array of accessible relations.
@@ -180,7 +180,7 @@ interface Accessible
    *   relations = an array of `GtkAccessibleRelation`
    *   values = an array of `GValues`, one for each relation
    */
-  void updateRelation(AccessibleRelation[] relations, Value[] values);
+  void updateRelation(gtk.types.AccessibleRelation[] relations, gobject.value.Value[] values);
 
   /**
    * Updates an array of accessible states.
@@ -191,5 +191,5 @@ interface Accessible
    *   states = an array of `GtkAccessibleState`
    *   values = an array of `GValues`, one for each state
    */
-  void updateState(AccessibleState[] states, Value[] values);
+  void updateState(gtk.types.AccessibleState[] states, gobject.value.Value[] values);
 }

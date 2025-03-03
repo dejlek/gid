@@ -5,9 +5,9 @@ import arrow.c.types;
 import arrow.datum;
 import arrow.function_options;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class SetLookupOptions : FunctionOptions
+class SetLookupOptions : arrow.function_options.FunctionOptions
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class SetLookupOptions : FunctionOptions
     return getType();
   }
 
-  this(Datum valueSet)
+  this(arrow.datum.Datum valueSet)
   {
     GArrowSetLookupOptions* _cretval;
     _cretval = garrow_set_lookup_options_new(valueSet ? cast(GArrowDatum*)valueSet.cPtr(No.Dup) : null);

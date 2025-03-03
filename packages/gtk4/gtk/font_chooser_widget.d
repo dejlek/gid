@@ -1,6 +1,6 @@
 module gtk.font_chooser_widget;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -29,7 +29,7 @@ import gtk.widget;
 
  * Deprecated: Direct use of `GtkFontChooserWidget` is deprecated.
  */
-class FontChooserWidget : Widget, FontChooser
+class FontChooserWidget : gtk.widget.Widget, gtk.font_chooser.FontChooser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

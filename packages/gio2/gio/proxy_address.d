@@ -1,6 +1,6 @@
 module gio.proxy_address;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.inet_address;
@@ -12,7 +12,7 @@ import gio.types;
 /**
  * A [gio.inet_socket_address.InetSocketAddress] representing a connection via a proxy server.
  */
-class ProxyAddress : InetSocketAddress
+class ProxyAddress : gio.inet_socket_address.InetSocketAddress
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -49,7 +49,7 @@ class ProxyAddress : InetSocketAddress
    *     $(LPAREN)or %NULL$(RPAREN).
    * Returns: a new #GProxyAddress
    */
-  this(InetAddress inetaddr, ushort port, string protocol, string destHostname, ushort destPort, string username, string password)
+  this(gio.inet_address.InetAddress inetaddr, ushort port, string protocol, string destHostname, ushort destPort, string username, string password)
   {
     GSocketAddress* _cretval;
     const(char)* _protocol = protocol.toCString(No.Alloc);
@@ -70,7 +70,7 @@ class ProxyAddress : InetSocketAddress
   {
     const(char)* _cretval;
     _cretval = g_proxy_address_get_destination_hostname(cast(GProxyAddress*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class ProxyAddress : InetSocketAddress
   {
     const(char)* _cretval;
     _cretval = g_proxy_address_get_destination_protocol(cast(GProxyAddress*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class ProxyAddress : InetSocketAddress
   {
     const(char)* _cretval;
     _cretval = g_proxy_address_get_password(cast(GProxyAddress*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class ProxyAddress : InetSocketAddress
   {
     const(char)* _cretval;
     _cretval = g_proxy_address_get_protocol(cast(GProxyAddress*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class ProxyAddress : InetSocketAddress
   {
     const(char)* _cretval;
     _cretval = g_proxy_address_get_uri(cast(GProxyAddress*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class ProxyAddress : InetSocketAddress
   {
     const(char)* _cretval;
     _cretval = g_proxy_address_get_username(cast(GProxyAddress*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

@@ -1,6 +1,6 @@
 module gtk.stack_sidebar;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -27,7 +27,7 @@ import gtk.widget;
  * .needs-attention style class to the widgets representing the stack
  * pages.
  */
-class StackSidebar : Widget
+class StackSidebar : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -62,11 +62,11 @@ class StackSidebar : Widget
    * Returns: the associated `GtkStack` or
    *   %NULL if none has been set explicitly
    */
-  Stack getStack()
+  gtk.stack.Stack getStack()
   {
     GtkStack* _cretval;
     _cretval = gtk_stack_sidebar_get_stack(cast(GtkStackSidebar*)cPtr);
-    auto _retval = ObjectG.getDObject!Stack(cast(GtkStack*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.Take);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class StackSidebar : Widget
    * Params:
    *   stack = a `GtkStack`
    */
-  void setStack(Stack stack)
+  void setStack(gtk.stack.Stack stack)
   {
     gtk_stack_sidebar_set_stack(cast(GtkStackSidebar*)cPtr, stack ? cast(GtkStack*)stack.cPtr(No.Dup) : null);
   }

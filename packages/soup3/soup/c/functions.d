@@ -146,50 +146,6 @@ __gshared extern(C)
   extern(C) GType function() c_soup_cookie_jar_text_get_type;
   SoupCookieJar* function(const(char)* filename, bool readOnly) c_soup_cookie_jar_text_new;
 
-  // Global
-  bool function(uint major, uint minor, uint micro) c_soup_check_version;
-  void function(GSList* cookies) c_soup_cookies_free;
-  GSList* function(SoupMessage* msg) c_soup_cookies_from_request;
-  GSList* function(SoupMessage* msg) c_soup_cookies_from_response;
-  char* function(GSList* cookies) c_soup_cookies_to_cookie_header;
-  void function(GSList* cookies, SoupMessage* msg) c_soup_cookies_to_request;
-  void function(GSList* cookies, SoupMessage* msg) c_soup_cookies_to_response;
-  GDateTime* function(const(char)* dateString) c_soup_date_time_new_from_http_string;
-  char* function(GDateTime* date, SoupDateFormat format) c_soup_date_time_to_string;
-  GHashTable* function(const(char)* encodedForm) c_soup_form_decode;
-  GHashTable* function(SoupMultipart* multipart, const(char)* fileControlName, char** filename, char** contentType, GBytes** file) c_soup_form_decode_multipart;
-  char* function(const(char)* firstField,  ...) c_soup_form_encode;
-  char* function(GData** formDataSet) c_soup_form_encode_datalist;
-  char* function(GHashTable* formDataSet) c_soup_form_encode_hash;
-  char* function(const(char)* firstField, void* args) c_soup_form_encode_valist;
-  uint function() c_soup_get_major_version;
-  uint function() c_soup_get_micro_version;
-  uint function() c_soup_get_minor_version;
-  bool function(const(char)* header, const(char)* token) c_soup_header_contains;
-  void function(GSList* list) c_soup_header_free_list;
-  void function(GHashTable* paramList) c_soup_header_free_param_list;
-  void function(GString* string_, const(char)* name, const(char)* value) c_soup_header_g_string_append_param;
-  void function(GString* string_, const(char)* name, const(char)* value) c_soup_header_g_string_append_param_quoted;
-  GSList* function(const(char)* header) c_soup_header_parse_list;
-  GHashTable* function(const(char)* header) c_soup_header_parse_param_list;
-  GHashTable* function(const(char)* header) c_soup_header_parse_param_list_strict;
-  GSList* function(const(char)* header, GSList** unacceptable) c_soup_header_parse_quality_list;
-  GHashTable* function(const(char)* header) c_soup_header_parse_semi_param_list;
-  GHashTable* function(const(char)* header) c_soup_header_parse_semi_param_list_strict;
-  bool function(const(char)* str, int len, SoupMessageHeaders* dest) c_soup_headers_parse;
-  uint function(const(char)* str, int len, SoupMessageHeaders* reqHeaders, char** reqMethod, char** reqPath, SoupHTTPVersion* ver) c_soup_headers_parse_request;
-  bool function(const(char)* str, int len, SoupMessageHeaders* headers, SoupHTTPVersion* ver, uint* statusCode, char** reasonPhrase) c_soup_headers_parse_response;
-  bool function(const(char)* statusLine, SoupHTTPVersion* ver, uint* statusCode, char** reasonPhrase) c_soup_headers_parse_status_line;
-  bool function(const(char)* domain) c_soup_tld_domain_is_public_suffix;
-  const(char)* function(const(char)* hostname, GError** _err) c_soup_tld_get_base_domain;
-  GUri* function(GUri* uri, SoupURIComponent firstComponent,  ...) c_soup_uri_copy;
-  GBytes* function(const(char)* uri, char** contentType) c_soup_uri_decode_data_uri;
-  bool function(GUri* uri1, GUri* uri2) c_soup_uri_equal;
-  void function(SoupMessage* msg, const(char)* origin, char** protocols, GPtrArray* supportedExtensions) c_soup_websocket_client_prepare_handshake;
-  bool function(SoupMessage* msg, GPtrArray* supportedExtensions, GList** acceptedExtensions, GError** _err) c_soup_websocket_client_verify_handshake;
-  bool function(SoupServerMessage* msg, const(char)* origin, char** protocols, GPtrArray* supportedExtensions, GError** _err) c_soup_websocket_server_check_handshake;
-  bool function(SoupServerMessage* msg, const(char)* expectedOrigin, char** protocols, GPtrArray* supportedExtensions, GList** acceptedExtensions) c_soup_websocket_server_process_handshake;
-
   // HSTSEnforcer
   extern(C) GType function() c_soup_hsts_enforcer_get_type;
   SoupHSTSEnforcer* function() c_soup_hsts_enforcer_new;
@@ -512,6 +468,50 @@ __gshared extern(C)
 
   // WebsocketExtensionManager
   extern(C) GType function() c_soup_websocket_extension_manager_get_type;
+
+  // global
+  bool function(uint major, uint minor, uint micro) c_soup_check_version;
+  void function(GSList* cookies) c_soup_cookies_free;
+  GSList* function(SoupMessage* msg) c_soup_cookies_from_request;
+  GSList* function(SoupMessage* msg) c_soup_cookies_from_response;
+  char* function(GSList* cookies) c_soup_cookies_to_cookie_header;
+  void function(GSList* cookies, SoupMessage* msg) c_soup_cookies_to_request;
+  void function(GSList* cookies, SoupMessage* msg) c_soup_cookies_to_response;
+  GDateTime* function(const(char)* dateString) c_soup_date_time_new_from_http_string;
+  char* function(GDateTime* date, SoupDateFormat format) c_soup_date_time_to_string;
+  GHashTable* function(const(char)* encodedForm) c_soup_form_decode;
+  GHashTable* function(SoupMultipart* multipart, const(char)* fileControlName, char** filename, char** contentType, GBytes** file) c_soup_form_decode_multipart;
+  char* function(const(char)* firstField,  ...) c_soup_form_encode;
+  char* function(GData** formDataSet) c_soup_form_encode_datalist;
+  char* function(GHashTable* formDataSet) c_soup_form_encode_hash;
+  char* function(const(char)* firstField, void* args) c_soup_form_encode_valist;
+  uint function() c_soup_get_major_version;
+  uint function() c_soup_get_micro_version;
+  uint function() c_soup_get_minor_version;
+  bool function(const(char)* header, const(char)* token) c_soup_header_contains;
+  void function(GSList* list) c_soup_header_free_list;
+  void function(GHashTable* paramList) c_soup_header_free_param_list;
+  void function(GString* string_, const(char)* name, const(char)* value) c_soup_header_g_string_append_param;
+  void function(GString* string_, const(char)* name, const(char)* value) c_soup_header_g_string_append_param_quoted;
+  GSList* function(const(char)* header) c_soup_header_parse_list;
+  GHashTable* function(const(char)* header) c_soup_header_parse_param_list;
+  GHashTable* function(const(char)* header) c_soup_header_parse_param_list_strict;
+  GSList* function(const(char)* header, GSList** unacceptable) c_soup_header_parse_quality_list;
+  GHashTable* function(const(char)* header) c_soup_header_parse_semi_param_list;
+  GHashTable* function(const(char)* header) c_soup_header_parse_semi_param_list_strict;
+  bool function(const(char)* str, int len, SoupMessageHeaders* dest) c_soup_headers_parse;
+  uint function(const(char)* str, int len, SoupMessageHeaders* reqHeaders, char** reqMethod, char** reqPath, SoupHTTPVersion* ver) c_soup_headers_parse_request;
+  bool function(const(char)* str, int len, SoupMessageHeaders* headers, SoupHTTPVersion* ver, uint* statusCode, char** reasonPhrase) c_soup_headers_parse_response;
+  bool function(const(char)* statusLine, SoupHTTPVersion* ver, uint* statusCode, char** reasonPhrase) c_soup_headers_parse_status_line;
+  bool function(const(char)* domain) c_soup_tld_domain_is_public_suffix;
+  const(char)* function(const(char)* hostname, GError** _err) c_soup_tld_get_base_domain;
+  GUri* function(GUri* uri, SoupURIComponent firstComponent,  ...) c_soup_uri_copy;
+  GBytes* function(const(char)* uri, char** contentType) c_soup_uri_decode_data_uri;
+  bool function(GUri* uri1, GUri* uri2) c_soup_uri_equal;
+  void function(SoupMessage* msg, const(char)* origin, char** protocols, GPtrArray* supportedExtensions) c_soup_websocket_client_prepare_handshake;
+  bool function(SoupMessage* msg, GPtrArray* supportedExtensions, GList** acceptedExtensions, GError** _err) c_soup_websocket_client_verify_handshake;
+  bool function(SoupServerMessage* msg, const(char)* origin, char** protocols, GPtrArray* supportedExtensions, GError** _err) c_soup_websocket_server_check_handshake;
+  bool function(SoupServerMessage* msg, const(char)* expectedOrigin, char** protocols, GPtrArray* supportedExtensions, GList** acceptedExtensions) c_soup_websocket_server_process_handshake;
 }
 
 // Auth
@@ -645,50 +645,6 @@ alias soup_cookie_jar_db_new = c_soup_cookie_jar_db_new;
 // CookieJarText
 alias soup_cookie_jar_text_get_type = c_soup_cookie_jar_text_get_type;
 alias soup_cookie_jar_text_new = c_soup_cookie_jar_text_new;
-
-// Global
-alias soup_check_version = c_soup_check_version;
-alias soup_cookies_free = c_soup_cookies_free;
-alias soup_cookies_from_request = c_soup_cookies_from_request;
-alias soup_cookies_from_response = c_soup_cookies_from_response;
-alias soup_cookies_to_cookie_header = c_soup_cookies_to_cookie_header;
-alias soup_cookies_to_request = c_soup_cookies_to_request;
-alias soup_cookies_to_response = c_soup_cookies_to_response;
-alias soup_date_time_new_from_http_string = c_soup_date_time_new_from_http_string;
-alias soup_date_time_to_string = c_soup_date_time_to_string;
-alias soup_form_decode = c_soup_form_decode;
-alias soup_form_decode_multipart = c_soup_form_decode_multipart;
-alias soup_form_encode = c_soup_form_encode;
-alias soup_form_encode_datalist = c_soup_form_encode_datalist;
-alias soup_form_encode_hash = c_soup_form_encode_hash;
-alias soup_form_encode_valist = c_soup_form_encode_valist;
-alias soup_get_major_version = c_soup_get_major_version;
-alias soup_get_micro_version = c_soup_get_micro_version;
-alias soup_get_minor_version = c_soup_get_minor_version;
-alias soup_header_contains = c_soup_header_contains;
-alias soup_header_free_list = c_soup_header_free_list;
-alias soup_header_free_param_list = c_soup_header_free_param_list;
-alias soup_header_g_string_append_param = c_soup_header_g_string_append_param;
-alias soup_header_g_string_append_param_quoted = c_soup_header_g_string_append_param_quoted;
-alias soup_header_parse_list = c_soup_header_parse_list;
-alias soup_header_parse_param_list = c_soup_header_parse_param_list;
-alias soup_header_parse_param_list_strict = c_soup_header_parse_param_list_strict;
-alias soup_header_parse_quality_list = c_soup_header_parse_quality_list;
-alias soup_header_parse_semi_param_list = c_soup_header_parse_semi_param_list;
-alias soup_header_parse_semi_param_list_strict = c_soup_header_parse_semi_param_list_strict;
-alias soup_headers_parse = c_soup_headers_parse;
-alias soup_headers_parse_request = c_soup_headers_parse_request;
-alias soup_headers_parse_response = c_soup_headers_parse_response;
-alias soup_headers_parse_status_line = c_soup_headers_parse_status_line;
-alias soup_tld_domain_is_public_suffix = c_soup_tld_domain_is_public_suffix;
-alias soup_tld_get_base_domain = c_soup_tld_get_base_domain;
-alias soup_uri_copy = c_soup_uri_copy;
-alias soup_uri_decode_data_uri = c_soup_uri_decode_data_uri;
-alias soup_uri_equal = c_soup_uri_equal;
-alias soup_websocket_client_prepare_handshake = c_soup_websocket_client_prepare_handshake;
-alias soup_websocket_client_verify_handshake = c_soup_websocket_client_verify_handshake;
-alias soup_websocket_server_check_handshake = c_soup_websocket_server_check_handshake;
-alias soup_websocket_server_process_handshake = c_soup_websocket_server_process_handshake;
 
 // HSTSEnforcer
 alias soup_hsts_enforcer_get_type = c_soup_hsts_enforcer_get_type;
@@ -1013,6 +969,50 @@ alias soup_websocket_extension_deflate_get_type = c_soup_websocket_extension_def
 // WebsocketExtensionManager
 alias soup_websocket_extension_manager_get_type = c_soup_websocket_extension_manager_get_type;
 
+// global
+alias soup_check_version = c_soup_check_version;
+alias soup_cookies_free = c_soup_cookies_free;
+alias soup_cookies_from_request = c_soup_cookies_from_request;
+alias soup_cookies_from_response = c_soup_cookies_from_response;
+alias soup_cookies_to_cookie_header = c_soup_cookies_to_cookie_header;
+alias soup_cookies_to_request = c_soup_cookies_to_request;
+alias soup_cookies_to_response = c_soup_cookies_to_response;
+alias soup_date_time_new_from_http_string = c_soup_date_time_new_from_http_string;
+alias soup_date_time_to_string = c_soup_date_time_to_string;
+alias soup_form_decode = c_soup_form_decode;
+alias soup_form_decode_multipart = c_soup_form_decode_multipart;
+alias soup_form_encode = c_soup_form_encode;
+alias soup_form_encode_datalist = c_soup_form_encode_datalist;
+alias soup_form_encode_hash = c_soup_form_encode_hash;
+alias soup_form_encode_valist = c_soup_form_encode_valist;
+alias soup_get_major_version = c_soup_get_major_version;
+alias soup_get_micro_version = c_soup_get_micro_version;
+alias soup_get_minor_version = c_soup_get_minor_version;
+alias soup_header_contains = c_soup_header_contains;
+alias soup_header_free_list = c_soup_header_free_list;
+alias soup_header_free_param_list = c_soup_header_free_param_list;
+alias soup_header_g_string_append_param = c_soup_header_g_string_append_param;
+alias soup_header_g_string_append_param_quoted = c_soup_header_g_string_append_param_quoted;
+alias soup_header_parse_list = c_soup_header_parse_list;
+alias soup_header_parse_param_list = c_soup_header_parse_param_list;
+alias soup_header_parse_param_list_strict = c_soup_header_parse_param_list_strict;
+alias soup_header_parse_quality_list = c_soup_header_parse_quality_list;
+alias soup_header_parse_semi_param_list = c_soup_header_parse_semi_param_list;
+alias soup_header_parse_semi_param_list_strict = c_soup_header_parse_semi_param_list_strict;
+alias soup_headers_parse = c_soup_headers_parse;
+alias soup_headers_parse_request = c_soup_headers_parse_request;
+alias soup_headers_parse_response = c_soup_headers_parse_response;
+alias soup_headers_parse_status_line = c_soup_headers_parse_status_line;
+alias soup_tld_domain_is_public_suffix = c_soup_tld_domain_is_public_suffix;
+alias soup_tld_get_base_domain = c_soup_tld_get_base_domain;
+alias soup_uri_copy = c_soup_uri_copy;
+alias soup_uri_decode_data_uri = c_soup_uri_decode_data_uri;
+alias soup_uri_equal = c_soup_uri_equal;
+alias soup_websocket_client_prepare_handshake = c_soup_websocket_client_prepare_handshake;
+alias soup_websocket_client_verify_handshake = c_soup_websocket_client_verify_handshake;
+alias soup_websocket_server_check_handshake = c_soup_websocket_server_check_handshake;
+alias soup_websocket_server_process_handshake = c_soup_websocket_server_process_handshake;
+
 shared static this()
 {
   // Auth
@@ -1146,50 +1146,6 @@ shared static this()
   // CookieJarText
   gidLink(cast(void**)&soup_cookie_jar_text_get_type, "soup_cookie_jar_text_get_type", LIBS);
   gidLink(cast(void**)&soup_cookie_jar_text_new, "soup_cookie_jar_text_new", LIBS);
-
-  // Global
-  gidLink(cast(void**)&soup_check_version, "soup_check_version", LIBS);
-  gidLink(cast(void**)&soup_cookies_free, "soup_cookies_free", LIBS);
-  gidLink(cast(void**)&soup_cookies_from_request, "soup_cookies_from_request", LIBS);
-  gidLink(cast(void**)&soup_cookies_from_response, "soup_cookies_from_response", LIBS);
-  gidLink(cast(void**)&soup_cookies_to_cookie_header, "soup_cookies_to_cookie_header", LIBS);
-  gidLink(cast(void**)&soup_cookies_to_request, "soup_cookies_to_request", LIBS);
-  gidLink(cast(void**)&soup_cookies_to_response, "soup_cookies_to_response", LIBS);
-  gidLink(cast(void**)&soup_date_time_new_from_http_string, "soup_date_time_new_from_http_string", LIBS);
-  gidLink(cast(void**)&soup_date_time_to_string, "soup_date_time_to_string", LIBS);
-  gidLink(cast(void**)&soup_form_decode, "soup_form_decode", LIBS);
-  gidLink(cast(void**)&soup_form_decode_multipart, "soup_form_decode_multipart", LIBS);
-  gidLink(cast(void**)&soup_form_encode, "soup_form_encode", LIBS);
-  gidLink(cast(void**)&soup_form_encode_datalist, "soup_form_encode_datalist", LIBS);
-  gidLink(cast(void**)&soup_form_encode_hash, "soup_form_encode_hash", LIBS);
-  gidLink(cast(void**)&soup_form_encode_valist, "soup_form_encode_valist", LIBS);
-  gidLink(cast(void**)&soup_get_major_version, "soup_get_major_version", LIBS);
-  gidLink(cast(void**)&soup_get_micro_version, "soup_get_micro_version", LIBS);
-  gidLink(cast(void**)&soup_get_minor_version, "soup_get_minor_version", LIBS);
-  gidLink(cast(void**)&soup_header_contains, "soup_header_contains", LIBS);
-  gidLink(cast(void**)&soup_header_free_list, "soup_header_free_list", LIBS);
-  gidLink(cast(void**)&soup_header_free_param_list, "soup_header_free_param_list", LIBS);
-  gidLink(cast(void**)&soup_header_g_string_append_param, "soup_header_g_string_append_param", LIBS);
-  gidLink(cast(void**)&soup_header_g_string_append_param_quoted, "soup_header_g_string_append_param_quoted", LIBS);
-  gidLink(cast(void**)&soup_header_parse_list, "soup_header_parse_list", LIBS);
-  gidLink(cast(void**)&soup_header_parse_param_list, "soup_header_parse_param_list", LIBS);
-  gidLink(cast(void**)&soup_header_parse_param_list_strict, "soup_header_parse_param_list_strict", LIBS);
-  gidLink(cast(void**)&soup_header_parse_quality_list, "soup_header_parse_quality_list", LIBS);
-  gidLink(cast(void**)&soup_header_parse_semi_param_list, "soup_header_parse_semi_param_list", LIBS);
-  gidLink(cast(void**)&soup_header_parse_semi_param_list_strict, "soup_header_parse_semi_param_list_strict", LIBS);
-  gidLink(cast(void**)&soup_headers_parse, "soup_headers_parse", LIBS);
-  gidLink(cast(void**)&soup_headers_parse_request, "soup_headers_parse_request", LIBS);
-  gidLink(cast(void**)&soup_headers_parse_response, "soup_headers_parse_response", LIBS);
-  gidLink(cast(void**)&soup_headers_parse_status_line, "soup_headers_parse_status_line", LIBS);
-  gidLink(cast(void**)&soup_tld_domain_is_public_suffix, "soup_tld_domain_is_public_suffix", LIBS);
-  gidLink(cast(void**)&soup_tld_get_base_domain, "soup_tld_get_base_domain", LIBS);
-  gidLink(cast(void**)&soup_uri_copy, "soup_uri_copy", LIBS);
-  gidLink(cast(void**)&soup_uri_decode_data_uri, "soup_uri_decode_data_uri", LIBS);
-  gidLink(cast(void**)&soup_uri_equal, "soup_uri_equal", LIBS);
-  gidLink(cast(void**)&soup_websocket_client_prepare_handshake, "soup_websocket_client_prepare_handshake", LIBS);
-  gidLink(cast(void**)&soup_websocket_client_verify_handshake, "soup_websocket_client_verify_handshake", LIBS);
-  gidLink(cast(void**)&soup_websocket_server_check_handshake, "soup_websocket_server_check_handshake", LIBS);
-  gidLink(cast(void**)&soup_websocket_server_process_handshake, "soup_websocket_server_process_handshake", LIBS);
 
   // HSTSEnforcer
   gidLink(cast(void**)&soup_hsts_enforcer_get_type, "soup_hsts_enforcer_get_type", LIBS);
@@ -1513,4 +1469,48 @@ shared static this()
 
   // WebsocketExtensionManager
   gidLink(cast(void**)&soup_websocket_extension_manager_get_type, "soup_websocket_extension_manager_get_type", LIBS);
+
+  // global
+  gidLink(cast(void**)&soup_check_version, "soup_check_version", LIBS);
+  gidLink(cast(void**)&soup_cookies_free, "soup_cookies_free", LIBS);
+  gidLink(cast(void**)&soup_cookies_from_request, "soup_cookies_from_request", LIBS);
+  gidLink(cast(void**)&soup_cookies_from_response, "soup_cookies_from_response", LIBS);
+  gidLink(cast(void**)&soup_cookies_to_cookie_header, "soup_cookies_to_cookie_header", LIBS);
+  gidLink(cast(void**)&soup_cookies_to_request, "soup_cookies_to_request", LIBS);
+  gidLink(cast(void**)&soup_cookies_to_response, "soup_cookies_to_response", LIBS);
+  gidLink(cast(void**)&soup_date_time_new_from_http_string, "soup_date_time_new_from_http_string", LIBS);
+  gidLink(cast(void**)&soup_date_time_to_string, "soup_date_time_to_string", LIBS);
+  gidLink(cast(void**)&soup_form_decode, "soup_form_decode", LIBS);
+  gidLink(cast(void**)&soup_form_decode_multipart, "soup_form_decode_multipart", LIBS);
+  gidLink(cast(void**)&soup_form_encode, "soup_form_encode", LIBS);
+  gidLink(cast(void**)&soup_form_encode_datalist, "soup_form_encode_datalist", LIBS);
+  gidLink(cast(void**)&soup_form_encode_hash, "soup_form_encode_hash", LIBS);
+  gidLink(cast(void**)&soup_form_encode_valist, "soup_form_encode_valist", LIBS);
+  gidLink(cast(void**)&soup_get_major_version, "soup_get_major_version", LIBS);
+  gidLink(cast(void**)&soup_get_micro_version, "soup_get_micro_version", LIBS);
+  gidLink(cast(void**)&soup_get_minor_version, "soup_get_minor_version", LIBS);
+  gidLink(cast(void**)&soup_header_contains, "soup_header_contains", LIBS);
+  gidLink(cast(void**)&soup_header_free_list, "soup_header_free_list", LIBS);
+  gidLink(cast(void**)&soup_header_free_param_list, "soup_header_free_param_list", LIBS);
+  gidLink(cast(void**)&soup_header_g_string_append_param, "soup_header_g_string_append_param", LIBS);
+  gidLink(cast(void**)&soup_header_g_string_append_param_quoted, "soup_header_g_string_append_param_quoted", LIBS);
+  gidLink(cast(void**)&soup_header_parse_list, "soup_header_parse_list", LIBS);
+  gidLink(cast(void**)&soup_header_parse_param_list, "soup_header_parse_param_list", LIBS);
+  gidLink(cast(void**)&soup_header_parse_param_list_strict, "soup_header_parse_param_list_strict", LIBS);
+  gidLink(cast(void**)&soup_header_parse_quality_list, "soup_header_parse_quality_list", LIBS);
+  gidLink(cast(void**)&soup_header_parse_semi_param_list, "soup_header_parse_semi_param_list", LIBS);
+  gidLink(cast(void**)&soup_header_parse_semi_param_list_strict, "soup_header_parse_semi_param_list_strict", LIBS);
+  gidLink(cast(void**)&soup_headers_parse, "soup_headers_parse", LIBS);
+  gidLink(cast(void**)&soup_headers_parse_request, "soup_headers_parse_request", LIBS);
+  gidLink(cast(void**)&soup_headers_parse_response, "soup_headers_parse_response", LIBS);
+  gidLink(cast(void**)&soup_headers_parse_status_line, "soup_headers_parse_status_line", LIBS);
+  gidLink(cast(void**)&soup_tld_domain_is_public_suffix, "soup_tld_domain_is_public_suffix", LIBS);
+  gidLink(cast(void**)&soup_tld_get_base_domain, "soup_tld_get_base_domain", LIBS);
+  gidLink(cast(void**)&soup_uri_copy, "soup_uri_copy", LIBS);
+  gidLink(cast(void**)&soup_uri_decode_data_uri, "soup_uri_decode_data_uri", LIBS);
+  gidLink(cast(void**)&soup_uri_equal, "soup_uri_equal", LIBS);
+  gidLink(cast(void**)&soup_websocket_client_prepare_handshake, "soup_websocket_client_prepare_handshake", LIBS);
+  gidLink(cast(void**)&soup_websocket_client_verify_handshake, "soup_websocket_client_verify_handshake", LIBS);
+  gidLink(cast(void**)&soup_websocket_server_check_handshake, "soup_websocket_server_check_handshake", LIBS);
+  gidLink(cast(void**)&soup_websocket_server_process_handshake, "soup_websocket_server_process_handshake", LIBS);
 }

@@ -1,6 +1,6 @@
 module gtksource.completion_context;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.dclosure;
@@ -11,7 +11,6 @@ import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.completion;
 import gtksource.completion_provider;
-import gtksource.completion_provider_mixin;
 import gtksource.language;
 import gtksource.types;
 import gtksource.view;
@@ -31,7 +30,7 @@ import gtksource.view;
  * displayed using class@CompletionCell which allows for some level of
  * customization.
  */
-class CompletionContext : ObjectG, ListModel
+class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -56,11 +55,11 @@ class CompletionContext : ObjectG, ListModel
    * Gets the mode for which the context was activated.
    * Returns:
    */
-  CompletionActivation getActivation()
+  gtksource.types.CompletionActivation getActivation()
   {
     GtkSourceCompletionActivation _cretval;
     _cretval = gtk_source_completion_context_get_activation(cast(GtkSourceCompletionContext*)cPtr);
-    CompletionActivation _retval = cast(CompletionActivation)_cretval;
+    gtksource.types.CompletionActivation _retval = cast(gtksource.types.CompletionActivation)_cretval;
     return _retval;
   }
 
@@ -77,14 +76,14 @@ class CompletionContext : ObjectG, ListModel
    *   end = a #GtkTextIter
    * Returns: %TRUE if the marks are still valid and begin or end was set.
    */
-  bool getBounds(out TextIter begin, out TextIter end)
+  bool getBounds(out gtk.text_iter.TextIter begin, out gtk.text_iter.TextIter end)
   {
     bool _retval;
     GtkTextIter _begin;
     GtkTextIter _end;
     _retval = gtk_source_completion_context_get_bounds(cast(GtkSourceCompletionContext*)cPtr, &_begin, &_end);
-    begin = new TextIter(cast(void*)&_begin, No.Take);
-    end = new TextIter(cast(void*)&_end, No.Take);
+    begin = new gtk.text_iter.TextIter(cast(void*)&_begin, No.Take);
+    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
   }
 
@@ -94,11 +93,11 @@ class CompletionContext : ObjectG, ListModel
    * property.
    * Returns: a #GtkTextBuffer or %NULL
    */
-  Buffer getBuffer()
+  gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_completion_context_get_buffer(cast(GtkSourceCompletionContext*)cPtr);
-    auto _retval = ObjectG.getDObject!Buffer(cast(GtkSourceBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -119,11 +118,11 @@ class CompletionContext : ObjectG, ListModel
    * Gets the #GtkSourceCompletion that created the context.
    * Returns: an #GtkSourceCompletion or %NULL
    */
-  Completion getCompletion()
+  gtksource.completion.Completion getCompletion()
   {
     GtkSourceCompletion* _cretval;
     _cretval = gtk_source_completion_context_get_completion(cast(GtkSourceCompletionContext*)cPtr);
-    auto _retval = ObjectG.getDObject!Completion(cast(GtkSourceCompletion*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.completion.Completion)(cast(GtkSourceCompletion*)_cretval, No.Take);
     return _retval;
   }
 
@@ -143,11 +142,11 @@ class CompletionContext : ObjectG, ListModel
    * Gets the language of the underlying buffer, if any.
    * Returns: a #GtkSourceLanguage or %NULL
    */
-  Language getLanguage()
+  gtksource.language.Language getLanguage()
   {
     GtkSourceLanguage* _cretval;
     _cretval = gtk_source_completion_context_get_language(cast(GtkSourceCompletionContext*)cPtr);
-    auto _retval = ObjectG.getDObject!Language(cast(GtkSourceLanguage*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -159,11 +158,11 @@ class CompletionContext : ObjectG, ListModel
    *   provider = a #GtkSourceCompletionProvider
    * Returns: a #GListModel or %NULL
    */
-  ListModel getProposalsForProvider(CompletionProvider provider)
+  gio.list_model.ListModel getProposalsForProvider(gtksource.completion_provider.CompletionProvider provider)
   {
     GListModel* _cretval;
     _cretval = gtk_source_completion_context_get_proposals_for_provider(cast(GtkSourceCompletionContext*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -171,11 +170,11 @@ class CompletionContext : ObjectG, ListModel
    * Gets the text view for the context.
    * Returns: a #GtkSourceView or %NULL
    */
-  View getView()
+  gtksource.view.View getView()
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_completion_context_get_view(cast(GtkSourceCompletionContext*)cPtr);
-    auto _retval = ObjectG.getDObject!View(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -187,7 +186,7 @@ class CompletionContext : ObjectG, ListModel
   {
     char* _cretval;
     _cretval = gtk_source_completion_context_get_word(cast(GtkSourceCompletionContext*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -195,11 +194,11 @@ class CompletionContext : ObjectG, ListModel
    * Gets the providers that are associated with the context.
    * Returns: a #GListModel of #GtkSourceCompletionProvider
    */
-  ListModel listProviders()
+  gio.list_model.ListModel listProviders()
   {
     GListModel* _cretval;
     _cretval = gtk_source_completion_context_list_providers(cast(GtkSourceCompletionContext*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -213,7 +212,7 @@ class CompletionContext : ObjectG, ListModel
    *   provider = an #GtkSourceCompletionProvider
    *   results = a #GListModel or %NULL
    */
-  void setProposalsForProvider(CompletionProvider provider, ListModel results)
+  void setProposalsForProvider(gtksource.completion_provider.CompletionProvider provider, gio.list_model.ListModel results)
   {
     gtk_source_completion_context_set_proposals_for_provider(cast(GtkSourceCompletionContext*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, results ? cast(GListModel*)(cast(ObjectG)results).cPtr(No.Dup) : null);
   }
@@ -228,8 +227,8 @@ class CompletionContext : ObjectG, ListModel
    *   model = a #GListModel
    *   completionContext = the instance the signal is connected to
    */
-  alias ProviderModelChangedCallbackDlg = void delegate(CompletionProvider provider, ListModel model, CompletionContext completionContext);
-  alias ProviderModelChangedCallbackFunc = void function(CompletionProvider provider, ListModel model, CompletionContext completionContext);
+  alias ProviderModelChangedCallbackDlg = void delegate(gtksource.completion_provider.CompletionProvider provider, gio.list_model.ListModel model, gtksource.completion_context.CompletionContext completionContext);
+  alias ProviderModelChangedCallbackFunc = void function(gtksource.completion_provider.CompletionProvider provider, gio.list_model.ListModel model, gtksource.completion_context.CompletionContext completionContext);
 
   /**
    * Connect to ProviderModelChanged signal.
@@ -245,9 +244,9 @@ class CompletionContext : ObjectG, ListModel
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completionContext = getVal!CompletionContext(_paramVals);
-      auto provider = getVal!CompletionProvider(&_paramVals[1]);
-      auto model = getVal!ListModel(&_paramVals[2]);
+      auto completionContext = getVal!(gtksource.completion_context.CompletionContext)(_paramVals);
+      auto provider = getVal!(gtksource.completion_provider.CompletionProvider)(&_paramVals[1]);
+      auto model = getVal!(gio.list_model.ListModel)(&_paramVals[2]);
       _dClosure.dlg(provider, model, completionContext);
     }
 

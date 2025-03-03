@@ -1,7 +1,7 @@
 module gsk.render_node;
 
 import cairo.context;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.error;
 import graphene.rect;
@@ -58,20 +58,20 @@ class RenderNode
    *   errorFunc = Callback on parsing errors
    * Returns: a new `GskRenderNode`
    */
-  static RenderNode deserialize(Bytes bytes, ParseErrorFunc errorFunc)
+  static gsk.render_node.RenderNode deserialize(glib.bytes.Bytes bytes, gsk.types.ParseErrorFunc errorFunc)
   {
     extern(C) void _errorFuncCallback(const(GskParseLocation)* start, const(GskParseLocation)* end, const(GError)* error, void* userData)
     {
-      auto _dlg = cast(ParseErrorFunc*)userData;
+      auto _dlg = cast(gsk.types.ParseErrorFunc*)userData;
 
-      (*_dlg)(*start, *end, error ? new ErrorG(cast(void*)error, No.Take) : null);
+      (*_dlg)(*start, *end, error ? new glib.error.ErrorG(cast(void*)error, No.Take) : null);
     }
     auto _errorFuncCB = errorFunc ? &_errorFuncCallback : null;
 
     GskRenderNode* _cretval;
     auto _errorFunc = errorFunc ? cast(void*)&(errorFunc) : null;
     _cretval = gsk_render_node_deserialize(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, _errorFuncCB, _errorFunc);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class RenderNode
    * Params:
    *   cr = cairo context to draw to
    */
-  void draw(Context cr)
+  void draw(cairo.context.Context cr)
   {
     gsk_render_node_draw(cast(GskRenderNode*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
   }
@@ -96,22 +96,22 @@ class RenderNode
    * Params:
    *   bounds = return location for the boundaries
    */
-  void getBounds(out Rect bounds)
+  void getBounds(out graphene.rect.Rect bounds)
   {
     graphene_rect_t _bounds;
     gsk_render_node_get_bounds(cast(GskRenderNode*)cPtr, &_bounds);
-    bounds = new Rect(cast(void*)&_bounds, No.Take);
+    bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.Take);
   }
 
   /**
    * Returns the type of the node.
    * Returns: the type of the `GskRenderNode`
    */
-  RenderNodeType getNodeType()
+  gsk.types.RenderNodeType getNodeType()
   {
     GskRenderNodeType _cretval;
-    _cretval = gsk_render_node_get_node_type(cast(GskRenderNode*)cPtr);
-    RenderNodeType _retval = cast(RenderNodeType)_cretval;
+    _cretval = gsk_render_node_get_node_type(cast(const(GskRenderNode)*)cPtr);
+    gsk.types.RenderNodeType _retval = cast(gsk.types.RenderNodeType)_cretval;
     return _retval;
   }
 
@@ -126,11 +126,11 @@ class RenderNode
    * The format is not meant as a permanent storage format.
    * Returns: a `GBytes` representing the node.
    */
-  Bytes serialize()
+  glib.bytes.Bytes serialize()
   {
     GBytes* _cretval;
     _cretval = gsk_render_node_serialize(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

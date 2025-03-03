@@ -1,6 +1,6 @@
 module gtk.calendar;
 
-import gid.global;
+import gid.gid;
 import glib.date_time;
 import gobject.dclosure;
 import gtk.accessible;
@@ -53,7 +53,7 @@ import gtk.widget;
  * style class. The label of the current day get the .today style class.
  * Marked day labels get the :selected state assigned.
  */
-class Calendar : Widget
+class Calendar : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -97,11 +97,11 @@ class Calendar : Widget
    * The returned date is in the local time zone.
    * Returns: the `GDateTime` representing the shown date
    */
-  DateTime getDate()
+  glib.date_time.DateTime getDate()
   {
     GDateTime* _cretval;
     _cretval = gtk_calendar_get_date(cast(GtkCalendar*)cPtr);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class Calendar : Widget
    * Params:
    *   date = a `GDateTime` representing the day to select
    */
-  void selectDay(DateTime date)
+  void selectDay(glib.date_time.DateTime date)
   {
     gtk_calendar_select_day(cast(GtkCalendar*)cPtr, date ? cast(GDateTime*)date.cPtr(No.Dup) : null);
   }
@@ -295,8 +295,8 @@ class Calendar : Widget
    * Emitted when the user selects a day.
    *   calendar = the instance the signal is connected to
    */
-  alias DaySelectedCallbackDlg = void delegate(Calendar calendar);
-  alias DaySelectedCallbackFunc = void function(Calendar calendar);
+  alias DaySelectedCallbackDlg = void delegate(gtk.calendar.Calendar calendar);
+  alias DaySelectedCallbackFunc = void function(gtk.calendar.Calendar calendar);
 
   /**
    * Connect to DaySelected signal.
@@ -312,7 +312,7 @@ class Calendar : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto calendar = getVal!Calendar(_paramVals);
+      auto calendar = getVal!(gtk.calendar.Calendar)(_paramVals);
       _dClosure.dlg(calendar);
     }
 
@@ -324,8 +324,8 @@ class Calendar : Widget
    * Emitted when the user switched to the next month.
    *   calendar = the instance the signal is connected to
    */
-  alias NextMonthCallbackDlg = void delegate(Calendar calendar);
-  alias NextMonthCallbackFunc = void function(Calendar calendar);
+  alias NextMonthCallbackDlg = void delegate(gtk.calendar.Calendar calendar);
+  alias NextMonthCallbackFunc = void function(gtk.calendar.Calendar calendar);
 
   /**
    * Connect to NextMonth signal.
@@ -341,7 +341,7 @@ class Calendar : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto calendar = getVal!Calendar(_paramVals);
+      auto calendar = getVal!(gtk.calendar.Calendar)(_paramVals);
       _dClosure.dlg(calendar);
     }
 
@@ -353,8 +353,8 @@ class Calendar : Widget
    * Emitted when user switched to the next year.
    *   calendar = the instance the signal is connected to
    */
-  alias NextYearCallbackDlg = void delegate(Calendar calendar);
-  alias NextYearCallbackFunc = void function(Calendar calendar);
+  alias NextYearCallbackDlg = void delegate(gtk.calendar.Calendar calendar);
+  alias NextYearCallbackFunc = void function(gtk.calendar.Calendar calendar);
 
   /**
    * Connect to NextYear signal.
@@ -370,7 +370,7 @@ class Calendar : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto calendar = getVal!Calendar(_paramVals);
+      auto calendar = getVal!(gtk.calendar.Calendar)(_paramVals);
       _dClosure.dlg(calendar);
     }
 
@@ -382,8 +382,8 @@ class Calendar : Widget
    * Emitted when the user switched to the previous month.
    *   calendar = the instance the signal is connected to
    */
-  alias PrevMonthCallbackDlg = void delegate(Calendar calendar);
-  alias PrevMonthCallbackFunc = void function(Calendar calendar);
+  alias PrevMonthCallbackDlg = void delegate(gtk.calendar.Calendar calendar);
+  alias PrevMonthCallbackFunc = void function(gtk.calendar.Calendar calendar);
 
   /**
    * Connect to PrevMonth signal.
@@ -399,7 +399,7 @@ class Calendar : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto calendar = getVal!Calendar(_paramVals);
+      auto calendar = getVal!(gtk.calendar.Calendar)(_paramVals);
       _dClosure.dlg(calendar);
     }
 
@@ -411,8 +411,8 @@ class Calendar : Widget
    * Emitted when user switched to the previous year.
    *   calendar = the instance the signal is connected to
    */
-  alias PrevYearCallbackDlg = void delegate(Calendar calendar);
-  alias PrevYearCallbackFunc = void function(Calendar calendar);
+  alias PrevYearCallbackDlg = void delegate(gtk.calendar.Calendar calendar);
+  alias PrevYearCallbackFunc = void function(gtk.calendar.Calendar calendar);
 
   /**
    * Connect to PrevYear signal.
@@ -428,7 +428,7 @@ class Calendar : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto calendar = getVal!Calendar(_paramVals);
+      auto calendar = getVal!(gtk.calendar.Calendar)(_paramVals);
       _dClosure.dlg(calendar);
     }
 

@@ -1,6 +1,6 @@
 module glib.uri_params_iter;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.error;
@@ -76,7 +76,7 @@ class UriParamsIter
    *     no splitting will occur.
    *   flags = flags to modify the way the parameters are handled.
    */
-  void init_(string params, ptrdiff_t length, string separators, UriParamsFlags flags)
+  void init_(string params, ptrdiff_t length, string separators, glib.types.UriParamsFlags flags)
   {
     const(char)* _params = params.toCString(No.Alloc);
     const(char)* _separators = separators.toCString(No.Alloc);

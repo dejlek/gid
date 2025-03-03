@@ -1,7 +1,7 @@
 module gsk.texture_scale_node;
 
 import gdk.texture;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import graphene.rect;
 import gsk.c.functions;
@@ -12,7 +12,7 @@ import gsk.types;
 /**
  * A render node for a `GdkTexture`.
  */
-class TextureScaleNode : RenderNode
+class TextureScaleNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -40,10 +40,10 @@ class TextureScaleNode : RenderNode
    *   filter = how to scale the texture
    * Returns: A new `GskRenderNode`
    */
-  this(Texture texture, Rect bounds, ScalingFilter filter)
+  this(gdk.texture.Texture texture, graphene.rect.Rect bounds, gsk.types.ScalingFilter filter)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_texture_scale_node_new(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null, bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null, filter);
+    _cretval = gsk_texture_scale_node_new(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null, filter);
     this(_cretval, Yes.Take);
   }
 
@@ -51,11 +51,11 @@ class TextureScaleNode : RenderNode
    * Retrieves the `GskScalingFilter` used when creating this `GskRenderNode`.
    * Returns: the `GskScalingFilter`
    */
-  ScalingFilter getFilter()
+  gsk.types.ScalingFilter getFilter()
   {
     GskScalingFilter _cretval;
-    _cretval = gsk_texture_scale_node_get_filter(cast(GskRenderNode*)cPtr);
-    ScalingFilter _retval = cast(ScalingFilter)_cretval;
+    _cretval = gsk_texture_scale_node_get_filter(cast(const(GskRenderNode)*)cPtr);
+    gsk.types.ScalingFilter _retval = cast(gsk.types.ScalingFilter)_cretval;
     return _retval;
   }
 
@@ -63,11 +63,11 @@ class TextureScaleNode : RenderNode
    * Retrieves the `GdkTexture` used when creating this `GskRenderNode`.
    * Returns: the `GdkTexture`
    */
-  Texture getTexture()
+  gdk.texture.Texture getTexture()
   {
     GdkTexture* _cretval;
-    _cretval = gsk_texture_scale_node_get_texture(cast(GskRenderNode*)cPtr);
-    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, No.Take);
+    _cretval = gsk_texture_scale_node_get_texture(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 }

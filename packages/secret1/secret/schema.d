@@ -1,6 +1,6 @@
 module secret.schema;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import secret.c.functions;
 import secret.c.types;
@@ -49,7 +49,7 @@ import secret.types;
  * }
  * ```
  */
-class Schema : Boxed
+class Schema : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -84,12 +84,12 @@ class Schema : Boxed
     (cast(SecretSchema*)cPtr).name = propval.toCString(Yes.Alloc);
   }
 
-  @property SchemaFlags flags()
+  @property secret.types.SchemaFlags flags()
   {
-    return cast(SchemaFlags)(cast(SecretSchema*)cPtr).flags;
+    return cast(secret.types.SchemaFlags)(cast(SecretSchema*)cPtr).flags;
   }
 
-  @property void flags(SchemaFlags propval)
+  @property void flags(secret.types.SchemaFlags propval)
   {
     (cast(SecretSchema*)cPtr).flags = cast(SecretSchemaFlags)propval;
   }

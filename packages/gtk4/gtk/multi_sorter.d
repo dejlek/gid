@@ -1,6 +1,6 @@
 module gtk.multi_sorter;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gtk.buildable;
@@ -16,7 +16,7 @@ import gtk.types;
  * If the first sorter compares two items as equal,
  * the second is tried next, and so on.
  */
-class MultiSorter : Sorter, ListModel, Buildable
+class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.Buildable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -60,7 +60,7 @@ class MultiSorter : Sorter, ListModel, Buildable
    * Params:
    *   sorter = a sorter to add
    */
-  void append(Sorter sorter)
+  void append(gtk.sorter.Sorter sorter)
   {
     gtk_multi_sorter_append(cast(GtkMultiSorter*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(Yes.Dup) : null);
   }

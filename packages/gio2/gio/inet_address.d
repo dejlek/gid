@@ -1,6 +1,6 @@
 module gio.inet_address;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -17,7 +17,7 @@ import gobject.object;
  * [gio.inet_socket_address.InetSocketAddress] $(LPAREN)which includes a `GInetAddress` as well as a
  * port number$(RPAREN).
  */
-class InetAddress : ObjectG
+class InetAddress : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,11 +45,11 @@ class InetAddress : ObjectG
    *   for family.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  static InetAddress newAny(SocketFamily family)
+  static gio.inet_address.InetAddress newAny(gio.types.SocketFamily family)
   {
     GInetAddress* _cretval;
     _cretval = g_inet_address_new_any(family);
-    auto _retval = ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -63,12 +63,12 @@ class InetAddress : ObjectG
    * Returns: a new #GInetAddress corresponding to family and bytes.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  static InetAddress newFromBytes(ubyte[] bytes, SocketFamily family)
+  static gio.inet_address.InetAddress newFromBytes(ubyte[] bytes, gio.types.SocketFamily family)
   {
     GInetAddress* _cretval;
     auto _bytes = cast(const(ubyte)*)(bytes ~ ubyte.init).ptr;
     _cretval = g_inet_address_new_from_bytes(_bytes, family);
-    auto _retval = ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -80,12 +80,12 @@ class InetAddress : ObjectG
    *   to string, or %NULL if string could not be parsed.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  static InetAddress newFromString(string string_)
+  static gio.inet_address.InetAddress newFromString(string string_)
   {
     GInetAddress* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = g_inet_address_new_from_string(_string_);
-    auto _retval = ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -97,11 +97,11 @@ class InetAddress : ObjectG
    *   for family.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  static InetAddress newLoopback(SocketFamily family)
+  static gio.inet_address.InetAddress newLoopback(gio.types.SocketFamily family)
   {
     GInetAddress* _cretval;
     _cretval = g_inet_address_new_loopback(family);
-    auto _retval = ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class InetAddress : ObjectG
    *   otherAddress = Another #GInetAddress.
    * Returns: %TRUE if address and other_address are equal, %FALSE otherwise.
    */
-  bool equal(InetAddress otherAddress)
+  bool equal(gio.inet_address.InetAddress otherAddress)
   {
     bool _retval;
     _retval = g_inet_address_equal(cast(GInetAddress*)cPtr, otherAddress ? cast(GInetAddress*)otherAddress.cPtr(No.Dup) : null);
@@ -122,11 +122,11 @@ class InetAddress : ObjectG
    * Gets address's family
    * Returns: address's family
    */
-  SocketFamily getFamily()
+  gio.types.SocketFamily getFamily()
   {
     GSocketFamily _cretval;
     _cretval = g_inet_address_get_family(cast(GInetAddress*)cPtr);
-    SocketFamily _retval = cast(SocketFamily)_cretval;
+    gio.types.SocketFamily _retval = cast(gio.types.SocketFamily)_cretval;
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class InetAddress : ObjectG
   {
     char* _cretval;
     _cretval = g_inet_address_to_string(cast(GInetAddress*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

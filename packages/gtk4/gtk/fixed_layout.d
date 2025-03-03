@@ -1,6 +1,6 @@
 module gtk.fixed_layout;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_manager;
@@ -33,7 +33,7 @@ import gtk.types;
  * elements, since you have to reposition all the other  elements. This is a
  * long-term maintenance problem for your application.
  */
-class FixedLayout : LayoutManager
+class FixedLayout : gtk.layout_manager.LayoutManager
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

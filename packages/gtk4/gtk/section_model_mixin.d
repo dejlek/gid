@@ -1,7 +1,7 @@
 module gtk.section_model_mixin;
 
 public import gtk.section_model_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -59,8 +59,8 @@ template SectionModelT()
    *   nItems = number of items with changes
    *   sectionModel = the instance the signal is connected to
    */
-  alias SectionsChangedCallbackDlg = void delegate(uint position, uint nItems, SectionModel sectionModel);
-  alias SectionsChangedCallbackFunc = void function(uint position, uint nItems, SectionModel sectionModel);
+  alias SectionsChangedCallbackDlg = void delegate(uint position, uint nItems, gtk.section_model.SectionModel sectionModel);
+  alias SectionsChangedCallbackFunc = void function(uint position, uint nItems, gtk.section_model.SectionModel sectionModel);
 
   /**
    * Connect to SectionsChanged signal.
@@ -76,9 +76,9 @@ template SectionModelT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto sectionModel = getVal!SectionModel(_paramVals);
-      auto position = getVal!uint(&_paramVals[1]);
-      auto nItems = getVal!uint(&_paramVals[2]);
+      auto sectionModel = getVal!(gtk.section_model.SectionModel)(_paramVals);
+      auto position = getVal!(uint)(&_paramVals[1]);
+      auto nItems = getVal!(uint)(&_paramVals[2]);
       _dClosure.dlg(position, nItems, sectionModel);
     }
 

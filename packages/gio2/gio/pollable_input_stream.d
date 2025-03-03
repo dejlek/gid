@@ -1,7 +1,7 @@
 module gio.pollable_input_stream;
 
 public import gio.pollable_input_stream_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -53,7 +53,7 @@ interface PollableInputStream
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a new #GSource
    */
-  Source createSource(Cancellable cancellable);
+  glib.source.Source createSource(gio.cancellable.Cancellable cancellable);
 
   /**
    * Checks if stream can be read.
@@ -92,5 +92,5 @@ interface PollableInputStream
    * Returns: the number of bytes read, or -1 on error $(LPAREN)including
    *   %G_IO_ERROR_WOULD_BLOCK$(RPAREN).
    */
-  ptrdiff_t readNonblocking(ref ubyte[] buffer, Cancellable cancellable);
+  ptrdiff_t readNonblocking(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable);
 }

@@ -1,6 +1,6 @@
 module gio.inet_address_mask;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.inet_address;
@@ -16,7 +16,7 @@ import gobject.object;
  * of the base address are relevant for matching purposes. These are
  * often given in string form. For example, `10.0.0.0/8`, or `fe80::/10`.
  */
-class InetAddressMask : ObjectG, Initable
+class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,7 +45,7 @@ class InetAddressMask : ObjectG, Initable
    *   length = number of bits of addr to use
    * Returns: a new #GInetAddressMask, or %NULL on error
    */
-  this(InetAddress addr, uint length)
+  this(gio.inet_address.InetAddress addr, uint length)
   {
     GInetAddressMask* _cretval;
     GError *_err;
@@ -65,7 +65,7 @@ class InetAddressMask : ObjectG, Initable
    * Returns: a new #GInetAddressMask corresponding to string, or %NULL
    *   on error.
    */
-  static InetAddressMask newFromString(string maskString)
+  static gio.inet_address_mask.InetAddressMask newFromString(string maskString)
   {
     GInetAddressMask* _cretval;
     const(char)* _maskString = maskString.toCString(No.Alloc);
@@ -73,7 +73,7 @@ class InetAddressMask : ObjectG, Initable
     _cretval = g_inet_address_mask_new_from_string(_maskString, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!InetAddressMask(cast(GInetAddressMask*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.inet_address_mask.InetAddressMask)(cast(GInetAddressMask*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class InetAddressMask : ObjectG, Initable
    *   mask2 = another #GInetAddressMask
    * Returns: whether mask and mask2 are the same mask
    */
-  bool equal(InetAddressMask mask2)
+  bool equal(gio.inet_address_mask.InetAddressMask mask2)
   {
     bool _retval;
     _retval = g_inet_address_mask_equal(cast(GInetAddressMask*)cPtr, mask2 ? cast(GInetAddressMask*)mask2.cPtr(No.Dup) : null);
@@ -94,11 +94,11 @@ class InetAddressMask : ObjectG, Initable
    * Gets mask's base address
    * Returns: mask's base address
    */
-  InetAddress getAddress()
+  gio.inet_address.InetAddress getAddress()
   {
     GInetAddress* _cretval;
     _cretval = g_inet_address_mask_get_address(cast(GInetAddressMask*)cPtr);
-    auto _retval = ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, No.Take);
     return _retval;
   }
 
@@ -106,11 +106,11 @@ class InetAddressMask : ObjectG, Initable
    * Gets the #GSocketFamily of mask's address
    * Returns: the #GSocketFamily of mask's address
    */
-  SocketFamily getFamily()
+  gio.types.SocketFamily getFamily()
   {
     GSocketFamily _cretval;
     _cretval = g_inet_address_mask_get_family(cast(GInetAddressMask*)cPtr);
-    SocketFamily _retval = cast(SocketFamily)_cretval;
+    gio.types.SocketFamily _retval = cast(gio.types.SocketFamily)_cretval;
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class InetAddressMask : ObjectG, Initable
    * Returns: whether address falls within the range described by
    *   mask.
    */
-  bool matches(InetAddress address)
+  bool matches(gio.inet_address.InetAddress address)
   {
     bool _retval;
     _retval = g_inet_address_mask_matches(cast(GInetAddressMask*)cPtr, address ? cast(GInetAddress*)address.cPtr(No.Dup) : null);
@@ -147,7 +147,7 @@ class InetAddressMask : ObjectG, Initable
   {
     char* _cretval;
     _cretval = g_inet_address_mask_to_string(cast(GInetAddressMask*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

@@ -1,6 +1,6 @@
 module gtk.cell_area_box;
 
-import gid.global;
+import gid.gid;
 import gtk.buildable;
 import gtk.buildable_mixin;
 import gtk.c.functions;
@@ -34,7 +34,7 @@ import gtk.types;
  * Deprecated: List views use widgets for displaying their
  *   contents
  */
-class CellAreaBox : CellArea, Orientable
+class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -88,7 +88,7 @@ class CellAreaBox : CellArea, Orientable
    *   align_ = whether renderer should be aligned in adjacent rows
    *   fixed = whether renderer should have the same size in all rows
    */
-  void packEnd(CellRenderer renderer, bool expand, bool align_, bool fixed)
+  void packEnd(gtk.cell_renderer.CellRenderer renderer, bool expand, bool align_, bool fixed)
   {
     gtk_cell_area_box_pack_end(cast(GtkCellAreaBox*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, expand, align_, fixed);
   }
@@ -104,7 +104,7 @@ class CellAreaBox : CellArea, Orientable
    *   align_ = whether renderer should be aligned in adjacent rows
    *   fixed = whether renderer should have the same size in all rows
    */
-  void packStart(CellRenderer renderer, bool expand, bool align_, bool fixed)
+  void packStart(gtk.cell_renderer.CellRenderer renderer, bool expand, bool align_, bool fixed)
   {
     gtk_cell_area_box_pack_start(cast(GtkCellAreaBox*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, expand, align_, fixed);
   }

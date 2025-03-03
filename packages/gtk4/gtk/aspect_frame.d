@@ -1,6 +1,6 @@
 module gtk.aspect_frame;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -23,7 +23,7 @@ import gtk.widget;
  * Until GTK 4.10, `GtkAspectFrame` used the `GTK_ACCESSIBLE_ROLE_GROUP` role.
  * Starting from GTK 4.12, `GtkAspectFrame` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
  */
-class AspectFrame : Widget
+class AspectFrame : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -65,11 +65,11 @@ class AspectFrame : Widget
    * Gets the child widget of self.
    * Returns: the child widget of self
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_aspect_frame_get_child(cast(GtkAspectFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class AspectFrame : Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_aspect_frame_set_child(cast(GtkAspectFrame*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

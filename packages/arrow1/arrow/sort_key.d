@@ -3,11 +3,11 @@ module arrow.sort_key;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class SortKey : ObjectG
+class SortKey : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class SortKey : ObjectG
     return getType();
   }
 
-  this(string target, SortOrder order)
+  this(string target, arrow.types.SortOrder order)
   {
     GArrowSortKey* _cretval;
     const(char)* _target = target.toCString(No.Alloc);
@@ -37,7 +37,7 @@ class SortKey : ObjectG
     this(_cretval, Yes.Take);
   }
 
-  bool equal(SortKey otherSortKey)
+  bool equal(arrow.sort_key.SortKey otherSortKey)
   {
     bool _retval;
     _retval = garrow_sort_key_equal(cast(GArrowSortKey*)cPtr, otherSortKey ? cast(GArrowSortKey*)otherSortKey.cPtr(No.Dup) : null);

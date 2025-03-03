@@ -4,9 +4,9 @@ import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.partitioning;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 
-class KeyValuePartitioning : Partitioning
+class KeyValuePartitioning : arrowdataset.partitioning.Partitioning
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

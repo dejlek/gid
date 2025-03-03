@@ -1,6 +1,6 @@
 module pango.font_family;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -15,7 +15,7 @@ import pango.types;
  * The font faces in a family share a common design, but differ in
  * slant, weight, width or other aspects.
  */
-class FontFamily : ObjectG, ListModel
+class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,12 +45,12 @@ class FontFamily : ObjectG, ListModel
    * Returns: the `PangoFontFace`,
    *   or %NULL if no face with the given name exists.
    */
-  FontFace getFace(string name)
+  pango.font_face.FontFace getFace(string name)
   {
     PangoFontFace* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = pango_font_family_get_face(cast(PangoFontFamily*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!FontFace(cast(PangoFontFace*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
     return _retval;
   }
 
@@ -66,7 +66,7 @@ class FontFamily : ObjectG, ListModel
   {
     const(char)* _cretval;
     _cretval = pango_font_family_get_name(cast(PangoFontFamily*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -119,14 +119,14 @@ class FontFamily : ObjectG, ListModel
    *     or %NULL. This array should be freed with [glib.global.gfree] when it is no
    *     longer needed.
    */
-  void listFaces(out FontFace[] faces)
+  void listFaces(out pango.font_face.FontFace[] faces)
   {
     int _nFaces;
     PangoFontFace** _faces;
     pango_font_family_list_faces(cast(PangoFontFamily*)cPtr, &_faces, &_nFaces);
     faces.length = _nFaces;
     foreach (i; 0 .. _nFaces)
-      faces[i] = ObjectG.getDObject!FontFace(_faces[i], No.Take);
+      faces[i] = ObjectG.getDObject!(pango.font_face.FontFace)(_faces[i], No.Take);
     safeFree(cast(void*)_faces);
   }
 }

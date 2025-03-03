@@ -1,6 +1,6 @@
 module parquet.row_group_metadata;
 
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 import parquet.c.functions;
@@ -8,7 +8,7 @@ import parquet.c.types;
 import parquet.column_chunk_metadata;
 import parquet.types;
 
-class RowGroupMetadata : ObjectG
+class RowGroupMetadata : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -34,21 +34,21 @@ class RowGroupMetadata : ObjectG
     return _retval;
   }
 
-  bool equal(RowGroupMetadata otherMetadata)
+  bool equal(parquet.row_group_metadata.RowGroupMetadata otherMetadata)
   {
     bool _retval;
     _retval = gparquet_row_group_metadata_equal(cast(GParquetRowGroupMetadata*)cPtr, otherMetadata ? cast(GParquetRowGroupMetadata*)otherMetadata.cPtr(No.Dup) : null);
     return _retval;
   }
 
-  ColumnChunkMetadata getColumnChunk(int index)
+  parquet.column_chunk_metadata.ColumnChunkMetadata getColumnChunk(int index)
   {
     GParquetColumnChunkMetadata* _cretval;
     GError *_err;
     _cretval = gparquet_row_group_metadata_get_column_chunk(cast(GParquetRowGroupMetadata*)cPtr, index, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!ColumnChunkMetadata(cast(GParquetColumnChunkMetadata*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(parquet.column_chunk_metadata.ColumnChunkMetadata)(cast(GParquetColumnChunkMetadata*)_cretval, Yes.Take);
     return _retval;
   }
 

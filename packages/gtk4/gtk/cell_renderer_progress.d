@@ -1,6 +1,6 @@
 module gtk.cell_renderer_progress;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_renderer;
@@ -16,7 +16,7 @@ import gtk.types;
  * Deprecated: List views use widgets to display their contents.
  *   You should use [gtk.progress_bar.ProgressBar] instead
  */
-class CellRendererProgress : CellRenderer, Orientable
+class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

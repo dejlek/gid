@@ -1,7 +1,7 @@
 module gio.pollable_output_stream;
 
 public import gio.pollable_output_stream_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -53,7 +53,7 @@ interface PollableOutputStream
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a new #GSource
    */
-  Source createSource(Cancellable cancellable);
+  glib.source.Source createSource(gio.cancellable.Cancellable cancellable);
 
   /**
    * Checks if stream can be written.
@@ -95,7 +95,7 @@ interface PollableOutputStream
    * Returns: the number of bytes written, or -1 on error $(LPAREN)including
    *   %G_IO_ERROR_WOULD_BLOCK$(RPAREN).
    */
-  ptrdiff_t writeNonblocking(ubyte[] buffer, Cancellable cancellable);
+  ptrdiff_t writeNonblocking(ubyte[] buffer, gio.cancellable.Cancellable cancellable);
 
   /**
    * Attempts to write the bytes contained in the n_vectors vectors to stream,
@@ -124,5 +124,5 @@ interface PollableOutputStream
    *   %G_POLLABLE_RETURN_FAILED if there was an error in which case error will
    *   be set.
    */
-  PollableReturn writevNonblocking(OutputVector[] vectors, out size_t bytesWritten, Cancellable cancellable);
+  gio.types.PollableReturn writevNonblocking(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable);
 }

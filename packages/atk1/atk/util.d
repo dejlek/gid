@@ -3,7 +3,7 @@ module atk.util;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
@@ -13,7 +13,7 @@ import gobject.object;
  * of a process and information about the current ATK implementation
  * and toolkit version.
  */
-class Util : ObjectG
+class Util : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -1,6 +1,6 @@
 module gtk.spinner;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -24,7 +24,7 @@ import gtk.widget;
  * When the animation is active, the :checked pseudoclass is
  * added to this node.
  */
-class Spinner : Widget
+class Spinner : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

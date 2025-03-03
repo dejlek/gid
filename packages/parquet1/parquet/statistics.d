@@ -1,12 +1,12 @@
 module parquet.statistics;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import parquet.c.functions;
 import parquet.c.types;
 import parquet.types;
 
-class Statistics : ObjectG
+class Statistics : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -25,7 +25,7 @@ class Statistics : ObjectG
     return getType();
   }
 
-  bool equal(Statistics otherStatistics)
+  bool equal(parquet.statistics.Statistics otherStatistics)
   {
     bool _retval;
     _retval = gparquet_statistics_equal(cast(GParquetStatistics*)cPtr, otherStatistics ? cast(GParquetStatistics*)otherStatistics.cPtr(No.Dup) : null);

@@ -1,8 +1,7 @@
 module gtk.css_provider;
 
-import gid.global;
+import gid.gid;
 import gio.file;
-import gio.file_mixin;
 import glib.bytes;
 import glib.error;
 import gobject.dclosure;
@@ -41,7 +40,7 @@ import gtk.types;
  * To track errors while loading CSS, connect to the
  * signal@Gtk.CssProvider::parsing-error signal.
  */
-class CssProvider : ObjectG, StyleProvider
+class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -79,7 +78,7 @@ class CssProvider : ObjectG, StyleProvider
    * Params:
    *   data = `GBytes` containing the data to load
    */
-  void loadFromBytes(Bytes data)
+  void loadFromBytes(glib.bytes.Bytes data)
   {
     gtk_css_provider_load_from_bytes(cast(GtkCssProvider*)cPtr, data ? cast(GBytes*)data.cPtr(No.Dup) : null);
   }
@@ -106,7 +105,7 @@ class CssProvider : ObjectG, StyleProvider
    * Params:
    *   file = `GFile` pointing to a file to load
    */
-  void loadFromFile(File file)
+  void loadFromFile(gio.file.File file)
   {
     gtk_css_provider_load_from_file(cast(GtkCssProvider*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }
@@ -178,7 +177,7 @@ class CssProvider : ObjectG, StyleProvider
   {
     char* _cretval;
     _cretval = gtk_css_provider_to_string(cast(GtkCssProvider*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -198,8 +197,8 @@ class CssProvider : ObjectG, StyleProvider
    *   error = The parsing error
    *   cssProvider = the instance the signal is connected to
    */
-  alias ParsingErrorCallbackDlg = void delegate(CssSection section, ErrorG error, CssProvider cssProvider);
-  alias ParsingErrorCallbackFunc = void function(CssSection section, ErrorG error, CssProvider cssProvider);
+  alias ParsingErrorCallbackDlg = void delegate(gtk.css_section.CssSection section, glib.error.ErrorG error, gtk.css_provider.CssProvider cssProvider);
+  alias ParsingErrorCallbackFunc = void function(gtk.css_section.CssSection section, glib.error.ErrorG error, gtk.css_provider.CssProvider cssProvider);
 
   /**
    * Connect to ParsingError signal.
@@ -215,9 +214,9 @@ class CssProvider : ObjectG, StyleProvider
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto cssProvider = getVal!CssProvider(_paramVals);
-      auto section = getVal!CssSection(&_paramVals[1]);
-      auto error = getVal!ErrorG(&_paramVals[2]);
+      auto cssProvider = getVal!(gtk.css_provider.CssProvider)(_paramVals);
+      auto section = getVal!(gtk.css_section.CssSection)(&_paramVals[1]);
+      auto error = getVal!(glib.error.ErrorG)(&_paramVals[2]);
       _dClosure.dlg(section, error, cssProvider);
     }
 

@@ -5,7 +5,7 @@ import arrow.file;
 import arrow.file_mixin;
 
 /// Proxy object for Arrow.File interface when a GObject has no applicable D binding
-class FileIfaceProxy : IfaceProxy, File
+class FileIfaceProxy : IfaceProxy, arrow.file.File
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class FileIfaceProxy : IfaceProxy, File
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(File);
+    return typeid(arrow.file.File);
   }
 
   mixin FileT!();

@@ -5,7 +5,7 @@ import atk.component;
 import atk.component_mixin;
 
 /// Proxy object for Atk.Component interface when a GObject has no applicable D binding
-class ComponentIfaceProxy : IfaceProxy, Component
+class ComponentIfaceProxy : IfaceProxy, atk.component.Component
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class ComponentIfaceProxy : IfaceProxy, Component
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Component);
+    return typeid(atk.component.Component);
   }
 
   mixin ComponentT!();

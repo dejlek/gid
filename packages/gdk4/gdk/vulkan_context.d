@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.draw_context;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gio.initable;
 import gio.initable_mixin;
 import gobject.dclosure;
@@ -18,7 +18,7 @@ import gobject.dclosure;
  * Support for `GdkVulkanContext` is platform-specific and context creation
  * can fail, returning %NULL context.
  */
-class VulkanContext : DrawContext, Initable
+class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,8 +45,8 @@ class VulkanContext : DrawContext, Initable
    * for example in response to a change of the surface size.
    *   vulkanContext = the instance the signal is connected to
    */
-  alias ImagesUpdatedCallbackDlg = void delegate(VulkanContext vulkanContext);
-  alias ImagesUpdatedCallbackFunc = void function(VulkanContext vulkanContext);
+  alias ImagesUpdatedCallbackDlg = void delegate(gdk.vulkan_context.VulkanContext vulkanContext);
+  alias ImagesUpdatedCallbackFunc = void function(gdk.vulkan_context.VulkanContext vulkanContext);
 
   /**
    * Connect to ImagesUpdated signal.
@@ -62,7 +62,7 @@ class VulkanContext : DrawContext, Initable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto vulkanContext = getVal!VulkanContext(_paramVals);
+      auto vulkanContext = getVal!(gdk.vulkan_context.VulkanContext)(_paramVals);
       _dClosure.dlg(vulkanContext);
     }
 

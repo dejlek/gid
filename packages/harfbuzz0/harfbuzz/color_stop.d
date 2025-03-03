@@ -1,6 +1,6 @@
 module harfbuzz.color_stop;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -15,7 +15,7 @@ import harfbuzz.types;
  * [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
  * section for details.
  */
-class ColorStop : Boxed
+class ColorStop : gobject.boxed.Boxed
 {
 
   this()
@@ -54,22 +54,22 @@ class ColorStop : Boxed
     (cast(hb_color_stop_t*)cPtr).offset = propval;
   }
 
-  @property Bool isForeground()
+  @property harfbuzz.types.Bool isForeground()
   {
     return (cast(hb_color_stop_t*)cPtr).isForeground;
   }
 
-  @property void isForeground(Bool propval)
+  @property void isForeground(harfbuzz.types.Bool propval)
   {
     (cast(hb_color_stop_t*)cPtr).isForeground = propval;
   }
 
-  @property Color color()
+  @property harfbuzz.types.Color color()
   {
     return (cast(hb_color_stop_t*)cPtr).color;
   }
 
-  @property void color(Color propval)
+  @property void color(harfbuzz.types.Color propval)
   {
     (cast(hb_color_stop_t*)cPtr).color = propval;
   }

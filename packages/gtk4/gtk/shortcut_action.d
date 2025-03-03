@@ -1,6 +1,6 @@
 module gtk.shortcut_action;
 
-import gid.global;
+import gid.gid;
 import glib.string_;
 import glib.variant;
 import gobject.object;
@@ -33,7 +33,7 @@ import gtk.widget;
  * [gtk.widget.Widget.activateAction]
  * - [gtk.nothing_action.NothingAction]: a shortcut action that does nothing
  */
-class ShortcutAction : ObjectG
+class ShortcutAction : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -66,12 +66,12 @@ class ShortcutAction : ObjectG
    *   string_ = the string to parse
    * Returns: a new `GtkShortcutAction`
    */
-  static ShortcutAction parseString(string string_)
+  static gtk.shortcut_action.ShortcutAction parseString(string string_)
   {
     GtkShortcutAction* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = gtk_shortcut_action_parse_string(_string_);
-    auto _retval = ObjectG.getDObject!ShortcutAction(cast(GtkShortcutAction*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.shortcut_action.ShortcutAction)(cast(GtkShortcutAction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class ShortcutAction : ObjectG
    *   args = arguments to pass
    * Returns: %TRUE if this action was activated successfully
    */
-  bool activate(ShortcutActionFlags flags, Widget widget, VariantG args)
+  bool activate(gtk.types.ShortcutActionFlags flags, gtk.widget.Widget widget, glib.variant.VariantG args)
   {
     bool _retval;
     _retval = gtk_shortcut_action_activate(cast(GtkShortcutAction*)cPtr, flags, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, args ? cast(VariantC*)args.cPtr(No.Dup) : null);
@@ -102,7 +102,7 @@ class ShortcutAction : ObjectG
    * Params:
    *   string_ = a `GString` to print into
    */
-  void print(String string_)
+  void print(glib.string_.String string_)
   {
     gtk_shortcut_action_print(cast(GtkShortcutAction*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
   }
@@ -117,7 +117,7 @@ class ShortcutAction : ObjectG
   {
     char* _cretval;
     _cretval = gtk_shortcut_action_to_string(cast(GtkShortcutAction*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

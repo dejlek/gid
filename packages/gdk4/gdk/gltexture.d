@@ -7,7 +7,7 @@ import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.texture;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gio.icon;
 import gio.icon_mixin;
 import gio.loadable_icon;
@@ -17,7 +17,7 @@ import glib.types;
 /**
  * A GdkTexture representing a GL texture object.
  */
-class GLTexture : Texture
+class GLTexture : gdk.texture.Texture
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -55,12 +55,12 @@ class GLTexture : Texture
    * Deprecated: [gdk.gltexture_builder.GLTextureBuilder] supersedes this function
    *   and provides extended functionality for creating GL textures.
    */
-  this(GLContext context, uint id, int width, int height, DestroyNotify destroy, void* data)
+  this(gdk.glcontext.GLContext context, uint id, int width, int height, glib.types.DestroyNotify destroy, void* data)
   {
     extern(C) void _destroyCallback(void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(DestroyNotify*)data;
+      auto _dlg = cast(glib.types.DestroyNotify*)data;
 
       (*_dlg)();
     }

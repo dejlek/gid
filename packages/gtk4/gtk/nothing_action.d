@@ -1,6 +1,6 @@
 module gtk.nothing_action;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -10,7 +10,7 @@ import gtk.types;
 /**
  * A `GtkShortcutAction` that does nothing.
  */
-class NothingAction : ShortcutAction
+class NothingAction : gtk.shortcut_action.ShortcutAction
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -35,11 +35,11 @@ class NothingAction : ShortcutAction
    * activating it always fails.
    * Returns: The nothing action
    */
-  static NothingAction get()
+  static gtk.nothing_action.NothingAction get()
   {
     GtkShortcutAction* _cretval;
     _cretval = gtk_nothing_action_get();
-    auto _retval = ObjectG.getDObject!NothingAction(cast(GtkShortcutAction*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.nothing_action.NothingAction)(cast(GtkShortcutAction*)_cretval, No.Take);
     return _retval;
   }
 }

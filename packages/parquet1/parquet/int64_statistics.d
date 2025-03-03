@@ -1,12 +1,12 @@
 module parquet.int64_statistics;
 
-import gid.global;
+import gid.gid;
 import parquet.c.functions;
 import parquet.c.types;
 import parquet.statistics;
 import parquet.types;
 
-class Int64Statistics : Statistics
+class Int64Statistics : parquet.statistics.Statistics
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

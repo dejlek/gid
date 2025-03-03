@@ -3,14 +3,14 @@ module gdk.event_sequence;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
  * `GdkEventSequence` is an opaque type representing a sequence
  * of related touch events.
  */
-class EventSequence : Boxed
+class EventSequence : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

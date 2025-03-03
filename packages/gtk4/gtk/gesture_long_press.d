@@ -1,6 +1,6 @@
 module gtk.gesture_long_press;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -20,7 +20,7 @@ import gtk.types;
  * It can be modified by the property@Gtk.GestureLongPress:delay-factor
  * property.
  */
-class GestureLongPress : GestureSingle
+class GestureLongPress : gtk.gesture_single.GestureSingle
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -78,8 +78,8 @@ class GestureLongPress : GestureSingle
    * before [gtk.gesture_long_press.GestureLongPress.pressed] happened.
    *   gestureLongPress = the instance the signal is connected to
    */
-  alias CancelledCallbackDlg = void delegate(GestureLongPress gestureLongPress);
-  alias CancelledCallbackFunc = void function(GestureLongPress gestureLongPress);
+  alias CancelledCallbackDlg = void delegate(gtk.gesture_long_press.GestureLongPress gestureLongPress);
+  alias CancelledCallbackFunc = void function(gtk.gesture_long_press.GestureLongPress gestureLongPress);
 
   /**
    * Connect to Cancelled signal.
@@ -95,7 +95,7 @@ class GestureLongPress : GestureSingle
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureLongPress = getVal!GestureLongPress(_paramVals);
+      auto gestureLongPress = getVal!(gtk.gesture_long_press.GestureLongPress)(_paramVals);
       _dClosure.dlg(gestureLongPress);
     }
 
@@ -111,8 +111,8 @@ class GestureLongPress : GestureSingle
    *   y = the Y coordinate where the press happened, relative to the widget allocation
    *   gestureLongPress = the instance the signal is connected to
    */
-  alias PressedCallbackDlg = void delegate(double x, double y, GestureLongPress gestureLongPress);
-  alias PressedCallbackFunc = void function(double x, double y, GestureLongPress gestureLongPress);
+  alias PressedCallbackDlg = void delegate(double x, double y, gtk.gesture_long_press.GestureLongPress gestureLongPress);
+  alias PressedCallbackFunc = void function(double x, double y, gtk.gesture_long_press.GestureLongPress gestureLongPress);
 
   /**
    * Connect to Pressed signal.
@@ -128,9 +128,9 @@ class GestureLongPress : GestureSingle
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureLongPress = getVal!GestureLongPress(_paramVals);
-      auto x = getVal!double(&_paramVals[1]);
-      auto y = getVal!double(&_paramVals[2]);
+      auto gestureLongPress = getVal!(gtk.gesture_long_press.GestureLongPress)(_paramVals);
+      auto x = getVal!(double)(&_paramVals[1]);
+      auto y = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(x, y, gestureLongPress);
     }
 

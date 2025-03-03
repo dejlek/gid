@@ -4,10 +4,10 @@ import arrow.array_builder;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class UnionArrayBuilder : ArrayBuilder
+class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class UnionArrayBuilder : ArrayBuilder
     return getType();
   }
 
-  byte appendChild(ArrayBuilder child, string fieldName)
+  byte appendChild(arrow.array_builder.ArrayBuilder child, string fieldName)
   {
     byte _retval;
     const(char)* _fieldName = fieldName.toCString(No.Alloc);

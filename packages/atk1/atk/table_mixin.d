@@ -5,7 +5,7 @@ public import atk.c.functions;
 public import atk.c.types;
 public import atk.object;
 public import atk.types;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gobject.object;
 
@@ -73,11 +73,11 @@ template TableT()
    * Returns: a AtkObject* representing the
    *   table caption, or %NULL if value does not implement this interface.
    */
-  override ObjectAtk getCaption()
+  override atk.object.ObjectAtk getCaption()
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_caption(cast(AtkTable*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectAtk(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ template TableT()
   {
     const(char)* _cretval;
     _cretval = atk_table_get_column_description(cast(AtkTable*)cPtr, column);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -136,11 +136,11 @@ template TableT()
    *   specified column header, or %NULL if value does not implement this
    *   interface.
    */
-  override ObjectAtk getColumnHeader(int column)
+  override atk.object.ObjectAtk getColumnHeader(int column)
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_column_header(cast(AtkTable*)cPtr, column);
-    auto _retval = ObjectG.getDObject!ObjectAtk(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ template TableT()
   {
     const(char)* _cretval;
     _cretval = atk_table_get_row_description(cast(AtkTable*)cPtr, row);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -243,11 +243,11 @@ template TableT()
    *   specified row header, or %NULL if value does not implement this
    *   interface.
    */
-  override ObjectAtk getRowHeader(int row)
+  override atk.object.ObjectAtk getRowHeader(int row)
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_row_header(cast(AtkTable*)cPtr, row);
-    auto _retval = ObjectG.getDObject!ObjectAtk(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -286,11 +286,11 @@ template TableT()
    * Returns: a AtkObject* representing a summary description
    *   of the table, or zero if value does not implement this interface.
    */
-  override ObjectAtk getSummary()
+  override atk.object.ObjectAtk getSummary()
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_summary(cast(AtkTable*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectAtk(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -349,11 +349,11 @@ template TableT()
    * Returns: an #AtkObject representing the referred
    *   to accessible
    */
-  override ObjectAtk refAt(int row, int column)
+  override atk.object.ObjectAtk refAt(int row, int column)
   {
     AtkObject* _cretval;
     _cretval = atk_table_ref_at(cast(AtkTable*)cPtr, row, column);
-    auto _retval = ObjectG.getDObject!ObjectAtk(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -390,7 +390,7 @@ template TableT()
    * Params:
    *   caption = a #AtkObject representing the caption to set for table
    */
-  override void setCaption(ObjectAtk caption)
+  override void setCaption(atk.object.ObjectAtk caption)
   {
     atk_table_set_caption(cast(AtkTable*)cPtr, caption ? cast(AtkObject*)caption.cPtr(No.Dup) : null);
   }
@@ -414,7 +414,7 @@ template TableT()
    *   column = a #gint representing a column in table
    *   header = an #AtkTable
    */
-  override void setColumnHeader(int column, ObjectAtk header)
+  override void setColumnHeader(int column, atk.object.ObjectAtk header)
   {
     atk_table_set_column_header(cast(AtkTable*)cPtr, column, header ? cast(AtkObject*)header.cPtr(No.Dup) : null);
   }
@@ -438,7 +438,7 @@ template TableT()
    *   row = a #gint representing a row in table
    *   header = an #AtkTable
    */
-  override void setRowHeader(int row, ObjectAtk header)
+  override void setRowHeader(int row, atk.object.ObjectAtk header)
   {
     atk_table_set_row_header(cast(AtkTable*)cPtr, row, header ? cast(AtkObject*)header.cPtr(No.Dup) : null);
   }
@@ -449,7 +449,7 @@ template TableT()
    *   accessible = an #AtkObject representing the summary description
    *     to set for table
    */
-  override void setSummary(ObjectAtk accessible)
+  override void setSummary(atk.object.ObjectAtk accessible)
   {
     atk_table_set_summary(cast(AtkTable*)cPtr, accessible ? cast(AtkObject*)accessible.cPtr(No.Dup) : null);
   }
@@ -462,8 +462,8 @@ template TableT()
    *   arg2 = The number of columns deleted.
    *   table = the instance the signal is connected to
    */
-  alias ColumnDeletedCallbackDlg = void delegate(int arg1, int arg2, Table table);
-  alias ColumnDeletedCallbackFunc = void function(int arg1, int arg2, Table table);
+  alias ColumnDeletedCallbackDlg = void delegate(int arg1, int arg2, atk.table.Table table);
+  alias ColumnDeletedCallbackFunc = void function(int arg1, int arg2, atk.table.Table table);
 
   /**
    * Connect to ColumnDeleted signal.
@@ -479,9 +479,9 @@ template TableT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto table = getVal!Table(_paramVals);
-      auto arg1 = getVal!int(&_paramVals[1]);
-      auto arg2 = getVal!int(&_paramVals[2]);
+      auto table = getVal!(atk.table.Table)(_paramVals);
+      auto arg1 = getVal!(int)(&_paramVals[1]);
+      auto arg2 = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(arg1, arg2, table);
     }
 
@@ -497,8 +497,8 @@ template TableT()
    *   arg2 = The number of colums inserted.
    *   table = the instance the signal is connected to
    */
-  alias ColumnInsertedCallbackDlg = void delegate(int arg1, int arg2, Table table);
-  alias ColumnInsertedCallbackFunc = void function(int arg1, int arg2, Table table);
+  alias ColumnInsertedCallbackDlg = void delegate(int arg1, int arg2, atk.table.Table table);
+  alias ColumnInsertedCallbackFunc = void function(int arg1, int arg2, atk.table.Table table);
 
   /**
    * Connect to ColumnInserted signal.
@@ -514,9 +514,9 @@ template TableT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto table = getVal!Table(_paramVals);
-      auto arg1 = getVal!int(&_paramVals[1]);
-      auto arg2 = getVal!int(&_paramVals[2]);
+      auto table = getVal!(atk.table.Table)(_paramVals);
+      auto arg1 = getVal!(int)(&_paramVals[1]);
+      auto arg2 = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(arg1, arg2, table);
     }
 
@@ -530,8 +530,8 @@ template TableT()
    * reordered.
    *   table = the instance the signal is connected to
    */
-  alias ColumnReorderedCallbackDlg = void delegate(Table table);
-  alias ColumnReorderedCallbackFunc = void function(Table table);
+  alias ColumnReorderedCallbackDlg = void delegate(atk.table.Table table);
+  alias ColumnReorderedCallbackFunc = void function(atk.table.Table table);
 
   /**
    * Connect to ColumnReordered signal.
@@ -547,7 +547,7 @@ template TableT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto table = getVal!Table(_paramVals);
+      auto table = getVal!(atk.table.Table)(_paramVals);
       _dClosure.dlg(table);
     }
 
@@ -561,8 +561,8 @@ template TableT()
    * the table changes.
    *   table = the instance the signal is connected to
    */
-  alias ModelChangedCallbackDlg = void delegate(Table table);
-  alias ModelChangedCallbackFunc = void function(Table table);
+  alias ModelChangedCallbackDlg = void delegate(atk.table.Table table);
+  alias ModelChangedCallbackFunc = void function(atk.table.Table table);
 
   /**
    * Connect to ModelChanged signal.
@@ -578,7 +578,7 @@ template TableT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto table = getVal!Table(_paramVals);
+      auto table = getVal!(atk.table.Table)(_paramVals);
       _dClosure.dlg(table);
     }
 
@@ -594,8 +594,8 @@ template TableT()
    *   arg2 = The number of rows deleted.
    *   table = the instance the signal is connected to
    */
-  alias RowDeletedCallbackDlg = void delegate(int arg1, int arg2, Table table);
-  alias RowDeletedCallbackFunc = void function(int arg1, int arg2, Table table);
+  alias RowDeletedCallbackDlg = void delegate(int arg1, int arg2, atk.table.Table table);
+  alias RowDeletedCallbackFunc = void function(int arg1, int arg2, atk.table.Table table);
 
   /**
    * Connect to RowDeleted signal.
@@ -611,9 +611,9 @@ template TableT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto table = getVal!Table(_paramVals);
-      auto arg1 = getVal!int(&_paramVals[1]);
-      auto arg2 = getVal!int(&_paramVals[2]);
+      auto table = getVal!(atk.table.Table)(_paramVals);
+      auto arg1 = getVal!(int)(&_paramVals[1]);
+      auto arg2 = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(arg1, arg2, table);
     }
 
@@ -629,8 +629,8 @@ template TableT()
    *   arg2 = The number of rows inserted.
    *   table = the instance the signal is connected to
    */
-  alias RowInsertedCallbackDlg = void delegate(int arg1, int arg2, Table table);
-  alias RowInsertedCallbackFunc = void function(int arg1, int arg2, Table table);
+  alias RowInsertedCallbackDlg = void delegate(int arg1, int arg2, atk.table.Table table);
+  alias RowInsertedCallbackFunc = void function(int arg1, int arg2, atk.table.Table table);
 
   /**
    * Connect to RowInserted signal.
@@ -646,9 +646,9 @@ template TableT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto table = getVal!Table(_paramVals);
-      auto arg1 = getVal!int(&_paramVals[1]);
-      auto arg2 = getVal!int(&_paramVals[2]);
+      auto table = getVal!(atk.table.Table)(_paramVals);
+      auto arg1 = getVal!(int)(&_paramVals[1]);
+      auto arg2 = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(arg1, arg2, table);
     }
 
@@ -662,8 +662,8 @@ template TableT()
    * reordered.
    *   table = the instance the signal is connected to
    */
-  alias RowReorderedCallbackDlg = void delegate(Table table);
-  alias RowReorderedCallbackFunc = void function(Table table);
+  alias RowReorderedCallbackDlg = void delegate(atk.table.Table table);
+  alias RowReorderedCallbackFunc = void function(atk.table.Table table);
 
   /**
    * Connect to RowReordered signal.
@@ -679,7 +679,7 @@ template TableT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto table = getVal!Table(_paramVals);
+      auto table = getVal!(atk.table.Table)(_paramVals);
       _dClosure.dlg(table);
     }
 

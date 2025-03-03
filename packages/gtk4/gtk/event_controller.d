@@ -3,7 +3,7 @@ module gtk.event_controller;
 import gdk.device;
 import gdk.event;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -21,7 +21,7 @@ import gtk.widget;
  * an overview of the basic concepts, such as the capture and bubble
  * phases of event propagation.
  */
-class EventController : ObjectG
+class EventController : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -46,11 +46,11 @@ class EventController : ObjectG
    * Returns: the event that is currently
    *   handled by controller
    */
-  Event getCurrentEvent()
+  gdk.event.Event getCurrentEvent()
   {
     GdkEvent* _cretval;
     _cretval = gtk_event_controller_get_current_event(cast(GtkEventController*)cPtr);
-    auto _retval = _cretval ? new Event(cast(GdkEvent*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -61,11 +61,11 @@ class EventController : ObjectG
    * Returns: device of the event is
    *   currently handled by controller
    */
-  Device getCurrentEventDevice()
+  gdk.device.Device getCurrentEventDevice()
   {
     GdkDevice* _cretval;
     _cretval = gtk_event_controller_get_current_event_device(cast(GtkEventController*)cPtr);
-    auto _retval = ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -75,11 +75,11 @@ class EventController : ObjectG
    * At other times, 0 is returned.
    * Returns: modifier state of the event is currently handled by controller
    */
-  ModifierType getCurrentEventState()
+  gdk.types.ModifierType getCurrentEventState()
   {
     GdkModifierType _cretval;
     _cretval = gtk_event_controller_get_current_event_state(cast(GtkEventController*)cPtr);
-    ModifierType _retval = cast(ModifierType)_cretval;
+    gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class EventController : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_event_controller_get_name(cast(GtkEventController*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -112,11 +112,11 @@ class EventController : ObjectG
    * Gets the propagation limit of the event controller.
    * Returns: the propagation limit
    */
-  PropagationLimit getPropagationLimit()
+  gtk.types.PropagationLimit getPropagationLimit()
   {
     GtkPropagationLimit _cretval;
     _cretval = gtk_event_controller_get_propagation_limit(cast(GtkEventController*)cPtr);
-    PropagationLimit _retval = cast(PropagationLimit)_cretval;
+    gtk.types.PropagationLimit _retval = cast(gtk.types.PropagationLimit)_cretval;
     return _retval;
   }
 
@@ -124,11 +124,11 @@ class EventController : ObjectG
    * Gets the propagation phase at which controller handles events.
    * Returns: the propagation phase
    */
-  PropagationPhase getPropagationPhase()
+  gtk.types.PropagationPhase getPropagationPhase()
   {
     GtkPropagationPhase _cretval;
     _cretval = gtk_event_controller_get_propagation_phase(cast(GtkEventController*)cPtr);
-    PropagationPhase _retval = cast(PropagationPhase)_cretval;
+    gtk.types.PropagationPhase _retval = cast(gtk.types.PropagationPhase)_cretval;
     return _retval;
   }
 
@@ -136,11 +136,11 @@ class EventController : ObjectG
    * Returns the `GtkWidget` this controller relates to.
    * Returns: a `GtkWidget`
    */
-  Widget getWidget()
+  gtk.widget.Widget getWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_event_controller_get_widget(cast(GtkEventController*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class EventController : ObjectG
    * Params:
    *   limit = the propagation limit
    */
-  void setPropagationLimit(PropagationLimit limit)
+  void setPropagationLimit(gtk.types.PropagationLimit limit)
   {
     gtk_event_controller_set_propagation_limit(cast(GtkEventController*)cPtr, limit);
   }
@@ -183,7 +183,7 @@ class EventController : ObjectG
    * Params:
    *   phase = a propagation phase
    */
-  void setPropagationPhase(PropagationPhase phase)
+  void setPropagationPhase(gtk.types.PropagationPhase phase)
   {
     gtk_event_controller_set_propagation_phase(cast(GtkEventController*)cPtr, phase);
   }

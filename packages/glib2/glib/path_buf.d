@@ -1,6 +1,6 @@
 module glib.path_buf;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -69,7 +69,7 @@ class PathBuf
   {
     char* _cretval;
     _cretval = g_path_buf_clear_to_path(cast(GPathBuf*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class PathBuf
   {
     char* _cretval;
     _cretval = g_path_buf_free_to_path(cast(GPathBuf*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -92,11 +92,11 @@ class PathBuf
    * Initializes a `GPathBuf` instance.
    * Returns: the initialized path builder
    */
-  PathBuf init_()
+  glib.path_buf.PathBuf init_()
   {
     GPathBuf* _cretval;
     _cretval = g_path_buf_init(cast(GPathBuf*)cPtr);
-    auto _retval = _cretval ? new PathBuf(cast(GPathBuf*)_cretval) : null;
+    auto _retval = _cretval ? new glib.path_buf.PathBuf(cast(GPathBuf*)_cretval) : null;
     return _retval;
   }
 
@@ -106,12 +106,12 @@ class PathBuf
    *   path = a file system path
    * Returns: the initialized path builder
    */
-  PathBuf initFromPath(string path)
+  glib.path_buf.PathBuf initFromPath(string path)
   {
     GPathBuf* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_path_buf_init_from_path(cast(GPathBuf*)cPtr, _path);
-    auto _retval = _cretval ? new PathBuf(cast(GPathBuf*)_cretval) : null;
+    auto _retval = _cretval ? new glib.path_buf.PathBuf(cast(GPathBuf*)_cretval) : null;
     return _retval;
   }
 
@@ -167,12 +167,12 @@ class PathBuf
    *   path = a path
    * Returns: the same pointer to buf, for convenience
    */
-  PathBuf push(string path)
+  glib.path_buf.PathBuf push(string path)
   {
     GPathBuf* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_path_buf_push(cast(GPathBuf*)cPtr, _path);
-    auto _retval = _cretval ? new PathBuf(cast(GPathBuf*)_cretval) : null;
+    auto _retval = _cretval ? new glib.path_buf.PathBuf(cast(GPathBuf*)_cretval) : null;
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class PathBuf
   {
     char* _cretval;
     _cretval = g_path_buf_to_path(cast(GPathBuf*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 

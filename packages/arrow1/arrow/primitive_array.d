@@ -5,10 +5,10 @@ import arrow.buffer;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class PrimitiveArray : Array
+class PrimitiveArray : arrow.array.Array
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,19 +27,19 @@ class PrimitiveArray : Array
     return getType();
   }
 
-  Buffer getBuffer()
+  arrow.buffer.Buffer getBuffer()
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_primitive_array_get_buffer(cast(GArrowPrimitiveArray*)cPtr);
-    auto _retval = ObjectG.getDObject!Buffer(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Buffer getDataBuffer()
+  arrow.buffer.Buffer getDataBuffer()
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_primitive_array_get_data_buffer(cast(GArrowPrimitiveArray*)cPtr);
-    auto _retval = ObjectG.getDObject!Buffer(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 }

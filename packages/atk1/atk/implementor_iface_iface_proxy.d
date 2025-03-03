@@ -5,7 +5,7 @@ import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 
 /// Proxy object for Atk.ImplementorIface interface when a GObject has no applicable D binding
-class ImplementorIfaceIfaceProxy : IfaceProxy, ImplementorIface
+class ImplementorIfaceIfaceProxy : IfaceProxy, atk.implementor_iface.ImplementorIface
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class ImplementorIfaceIfaceProxy : IfaceProxy, ImplementorIface
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(ImplementorIface);
+    return typeid(atk.implementor_iface.ImplementorIface);
   }
 
   mixin ImplementorIfaceT!();

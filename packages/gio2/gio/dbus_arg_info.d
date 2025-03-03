@@ -1,6 +1,6 @@
 module gio.dbus_arg_info;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -9,7 +9,7 @@ import gobject.boxed;
 /**
  * Information about an argument for a method or a signal.
  */
-class DBusArgInfo : Boxed
+class DBusArgInfo : gobject.boxed.Boxed
 {
 
   this()

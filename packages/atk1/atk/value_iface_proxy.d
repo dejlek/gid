@@ -5,7 +5,7 @@ import atk.value;
 import atk.value_mixin;
 
 /// Proxy object for Atk.ValueAtk interface when a GObject has no applicable D binding
-class ValueAtkIfaceProxy : IfaceProxy, ValueAtk
+class ValueAtkIfaceProxy : IfaceProxy, atk.value.ValueAtk
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class ValueAtkIfaceProxy : IfaceProxy, ValueAtk
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(ValueAtk);
+    return typeid(atk.value.ValueAtk);
   }
 
   mixin ValueAtkT!();

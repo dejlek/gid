@@ -6,10 +6,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.string_array;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class StringDictionaryArrayBuilder : ArrayBuilder
+class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -35,7 +35,7 @@ class StringDictionaryArrayBuilder : ArrayBuilder
     this(_cretval, Yes.Take);
   }
 
-  bool appendArray(StringArray array)
+  bool appendArray(arrow.string_array.StringArray array)
   {
     bool _retval;
     GError *_err;
@@ -86,7 +86,7 @@ class StringDictionaryArrayBuilder : ArrayBuilder
     return _retval;
   }
 
-  bool finishDelta(out Array outIndices, out Array outDelta)
+  bool finishDelta(out arrow.array.Array outIndices, out arrow.array.Array outDelta)
   {
     bool _retval;
     GArrowArray* _outIndices;
@@ -95,8 +95,8 @@ class StringDictionaryArrayBuilder : ArrayBuilder
     _retval = garrow_string_dictionary_array_builder_finish_delta(cast(GArrowStringDictionaryArrayBuilder*)cPtr, &_outIndices, &_outDelta, &_err);
     if (_err)
       throw new ErrorG(_err);
-    outIndices = new Array(cast(void*)_outIndices, Yes.Take);
-    outDelta = new Array(cast(void*)_outDelta, Yes.Take);
+    outIndices = new arrow.array.Array(cast(void*)_outIndices, Yes.Take);
+    outDelta = new arrow.array.Array(cast(void*)_outDelta, Yes.Take);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class StringDictionaryArrayBuilder : ArrayBuilder
     return _retval;
   }
 
-  bool insertMemoValues(StringArray values)
+  bool insertMemoValues(arrow.string_array.StringArray values)
   {
     bool _retval;
     GError *_err;

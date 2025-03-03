@@ -1,6 +1,6 @@
 module gobject.binding_group;
 
-import gid.global;
+import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.closure;
@@ -15,7 +15,7 @@ import gobject.types;
  * bidirectionally and are connected when the source object is set
  * with [gobject.binding_group.BindingGroup.setSource].
  */
-class BindingGroup : ObjectG
+class BindingGroup : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -57,7 +57,7 @@ class BindingGroup : ObjectG
    *   targetProperty = the property on target to bind
    *   flags = the flags used to create the #GBinding
    */
-  void bind(string sourceProperty, ObjectG target, string targetProperty, BindingFlags flags)
+  void bind(string sourceProperty, gobject.object.ObjectG target, string targetProperty, gobject.types.BindingFlags flags)
   {
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
     const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
@@ -85,7 +85,7 @@ class BindingGroup : ObjectG
    *     transformation function from the target to the source object,
    *     or %NULL to use the default
    */
-  void bindFull(string sourceProperty, ObjectG target, string targetProperty, BindingFlags flags, Closure transformTo, Closure transformFrom)
+  void bindFull(string sourceProperty, gobject.object.ObjectG target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo, gobject.closure.Closure transformFrom)
   {
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
     const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
@@ -96,11 +96,11 @@ class BindingGroup : ObjectG
    * Gets the source object used for binding properties.
    * Returns: a #GObject or %NULL.
    */
-  ObjectG dupSource()
+  gobject.object.ObjectG dupSource()
   {
     ObjectC* _cretval;
     _cretval = g_binding_group_dup_source(cast(GBindingGroup*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class BindingGroup : ObjectG
    *   source = the source #GObject,
    *     or %NULL to clear it
    */
-  void setSource(ObjectG source)
+  void setSource(gobject.object.ObjectG source)
   {
     g_binding_group_set_source(cast(GBindingGroup*)cPtr, source ? cast(ObjectC*)source.cPtr(No.Dup) : null);
   }

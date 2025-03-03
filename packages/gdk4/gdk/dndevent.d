@@ -5,13 +5,13 @@ import gdk.c.types;
 import gdk.drop;
 import gdk.event;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
  * An event related to drag and drop operations.
  */
-class DNDEvent : Event
+class DNDEvent : gdk.event.Event
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,11 +26,11 @@ class DNDEvent : Event
    * Gets the `GdkDrop` object from a DND event.
    * Returns: the drop
    */
-  Drop getDrop()
+  gdk.drop.Drop getDrop()
   {
     GdkDrop* _cretval;
     _cretval = gdk_dnd_event_get_drop(cast(GdkEvent*)cPtr);
-    auto _retval = ObjectG.getDObject!Drop(cast(GdkDrop*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 }

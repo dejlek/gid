@@ -1,6 +1,6 @@
 module glib.async_queue;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.time_val;
@@ -158,11 +158,11 @@ class AsyncQueue
    *   data = the data to push into the queue
    *   func = the #GCompareDataFunc is used to sort queue
    */
-  void pushSorted(void* data, CompareDataFunc func)
+  void pushSorted(void* data, glib.types.CompareDataFunc func)
   {
     extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData)
     {
-      auto _dlg = cast(CompareDataFunc*)userData;
+      auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
       int _retval = (*_dlg)(a, b);
       return _retval;
@@ -189,11 +189,11 @@ class AsyncQueue
    *   data = the data to push into the queue
    *   func = the #GCompareDataFunc is used to sort queue
    */
-  void pushSortedUnlocked(void* data, CompareDataFunc func)
+  void pushSortedUnlocked(void* data, glib.types.CompareDataFunc func)
   {
     extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData)
     {
-      auto _dlg = cast(CompareDataFunc*)userData;
+      auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
       int _retval = (*_dlg)(a, b);
       return _retval;
@@ -276,11 +276,11 @@ class AsyncQueue
    * Params:
    *   func = the #GCompareDataFunc is used to sort queue
    */
-  void sort(CompareDataFunc func)
+  void sort(glib.types.CompareDataFunc func)
   {
     extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData)
     {
-      auto _dlg = cast(CompareDataFunc*)userData;
+      auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
       int _retval = (*_dlg)(a, b);
       return _retval;
@@ -302,11 +302,11 @@ class AsyncQueue
    * Params:
    *   func = the #GCompareDataFunc is used to sort queue
    */
-  void sortUnlocked(CompareDataFunc func)
+  void sortUnlocked(glib.types.CompareDataFunc func)
   {
     extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData)
     {
-      auto _dlg = cast(CompareDataFunc*)userData;
+      auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
       int _retval = (*_dlg)(a, b);
       return _retval;
@@ -330,7 +330,7 @@ class AsyncQueue
 
    * Deprecated: use [glib.async_queue.AsyncQueue.timeoutPop].
    */
-  void* timedPop(TimeVal endTime)
+  void* timedPop(glib.time_val.TimeVal endTime)
   {
     auto _retval = g_async_queue_timed_pop(cast(GAsyncQueue*)cPtr, endTime ? cast(GTimeVal*)endTime.cPtr : null);
     return _retval;
@@ -350,7 +350,7 @@ class AsyncQueue
 
    * Deprecated: use [glib.async_queue.AsyncQueue.timeoutPopUnlocked].
    */
-  void* timedPopUnlocked(TimeVal endTime)
+  void* timedPopUnlocked(glib.time_val.TimeVal endTime)
   {
     auto _retval = g_async_queue_timed_pop_unlocked(cast(GAsyncQueue*)cPtr, endTime ? cast(GTimeVal*)endTime.cPtr : null);
     return _retval;

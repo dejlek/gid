@@ -1,6 +1,6 @@
 module gtk.list_item_factory;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -46,7 +46,7 @@ import gtk.types;
  * [gtk.list_view.ListView.setFactory]. Reusing factories across different
  * views is allowed, but very uncommon.
  */
-class ListItemFactory : ObjectG
+class ListItemFactory : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

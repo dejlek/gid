@@ -1,7 +1,7 @@
 module gtk.scrollable_mixin;
 
 public import gtk.scrollable_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gobject.object;
 public import gtk.adjustment;
 public import gtk.border;
@@ -45,12 +45,12 @@ template ScrollableT()
    *   border = return location for the results
    * Returns: %TRUE if border has been set
    */
-  override bool getBorder(out Border border)
+  override bool getBorder(out gtk.border.Border border)
   {
     bool _retval;
     GtkBorder _border;
     _retval = gtk_scrollable_get_border(cast(GtkScrollable*)cPtr, &_border);
-    border = new Border(cast(void*)&_border, No.Take);
+    border = new gtk.border.Border(cast(void*)&_border, No.Take);
     return _retval;
   }
 
@@ -58,11 +58,11 @@ template ScrollableT()
    * Retrieves the `GtkAdjustment` used for horizontal scrolling.
    * Returns: horizontal `GtkAdjustment`.
    */
-  override Adjustment getHadjustment()
+  override gtk.adjustment.Adjustment getHadjustment()
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrollable_get_hadjustment(cast(GtkScrollable*)cPtr);
-    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -70,11 +70,11 @@ template ScrollableT()
    * Gets the horizontal `GtkScrollablePolicy`.
    * Returns: The horizontal `GtkScrollablePolicy`.
    */
-  override ScrollablePolicy getHscrollPolicy()
+  override gtk.types.ScrollablePolicy getHscrollPolicy()
   {
     GtkScrollablePolicy _cretval;
     _cretval = gtk_scrollable_get_hscroll_policy(cast(GtkScrollable*)cPtr);
-    ScrollablePolicy _retval = cast(ScrollablePolicy)_cretval;
+    gtk.types.ScrollablePolicy _retval = cast(gtk.types.ScrollablePolicy)_cretval;
     return _retval;
   }
 
@@ -82,11 +82,11 @@ template ScrollableT()
    * Retrieves the `GtkAdjustment` used for vertical scrolling.
    * Returns: vertical `GtkAdjustment`.
    */
-  override Adjustment getVadjustment()
+  override gtk.adjustment.Adjustment getVadjustment()
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrollable_get_vadjustment(cast(GtkScrollable*)cPtr);
-    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -94,11 +94,11 @@ template ScrollableT()
    * Gets the vertical `GtkScrollablePolicy`.
    * Returns: The vertical `GtkScrollablePolicy`.
    */
-  override ScrollablePolicy getVscrollPolicy()
+  override gtk.types.ScrollablePolicy getVscrollPolicy()
   {
     GtkScrollablePolicy _cretval;
     _cretval = gtk_scrollable_get_vscroll_policy(cast(GtkScrollable*)cPtr);
-    ScrollablePolicy _retval = cast(ScrollablePolicy)_cretval;
+    gtk.types.ScrollablePolicy _retval = cast(gtk.types.ScrollablePolicy)_cretval;
     return _retval;
   }
 
@@ -107,7 +107,7 @@ template ScrollableT()
    * Params:
    *   hadjustment = a `GtkAdjustment`
    */
-  override void setHadjustment(Adjustment hadjustment)
+  override void setHadjustment(gtk.adjustment.Adjustment hadjustment)
   {
     gtk_scrollable_set_hadjustment(cast(GtkScrollable*)cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null);
   }
@@ -119,7 +119,7 @@ template ScrollableT()
    * Params:
    *   policy = the horizontal `GtkScrollablePolicy`
    */
-  override void setHscrollPolicy(ScrollablePolicy policy)
+  override void setHscrollPolicy(gtk.types.ScrollablePolicy policy)
   {
     gtk_scrollable_set_hscroll_policy(cast(GtkScrollable*)cPtr, policy);
   }
@@ -129,7 +129,7 @@ template ScrollableT()
    * Params:
    *   vadjustment = a `GtkAdjustment`
    */
-  override void setVadjustment(Adjustment vadjustment)
+  override void setVadjustment(gtk.adjustment.Adjustment vadjustment)
   {
     gtk_scrollable_set_vadjustment(cast(GtkScrollable*)cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
   }
@@ -141,7 +141,7 @@ template ScrollableT()
    * Params:
    *   policy = the vertical `GtkScrollablePolicy`
    */
-  override void setVscrollPolicy(ScrollablePolicy policy)
+  override void setVscrollPolicy(gtk.types.ScrollablePolicy policy)
   {
     gtk_scrollable_set_vscroll_policy(cast(GtkScrollable*)cPtr, policy);
   }

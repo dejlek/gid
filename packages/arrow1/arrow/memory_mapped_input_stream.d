@@ -8,10 +8,10 @@ import arrow.readable;
 import arrow.readable_mixin;
 import arrow.seekable_input_stream;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class MemoryMappedInputStream : SeekableInputStream
+class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

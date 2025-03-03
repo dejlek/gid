@@ -3,9 +3,8 @@ module gtk.types;
 import cairo.context;
 import gdk.frame_clock;
 import gdk.rectangle;
-import gid.global;
+import gid.gid;
 import gio.list_model;
-import gio.list_model_mixin;
 import glib.error;
 import glib.variant;
 import gobject.object;
@@ -13,7 +12,6 @@ import gobject.value;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_layout;
-import gtk.cell_layout_mixin;
 import gtk.cell_renderer;
 import gtk.drawing_area;
 import gtk.entry_completion;
@@ -30,19 +28,17 @@ import gtk.scale;
 import gtk.text_tag;
 import gtk.tree_iter;
 import gtk.tree_model;
-import gtk.tree_model_mixin;
 import gtk.tree_path;
 import gtk.tree_selection;
 import gtk.tree_view;
 import gtk.tree_view_column;
-import gtk.types;
 import gtk.widget;
 import pango.font_face;
 import pango.font_family;
 
 
 // Aliases
-alias Allocation = Rectangle;
+alias Allocation = gdk.rectangle.Rectangle;
 
 // Enums
 alias AccessibleAnnouncementPriority = GtkAccessibleAnnouncementPriority;
@@ -201,51 +197,51 @@ alias WindowGroupPrivate = GtkWindowGroupPrivate*;
 
 // Callbacks
 alias AssistantPageFunc = int delegate(int currentPage);
-alias CellAllocCallback = bool delegate(CellRenderer renderer, Rectangle cellArea, Rectangle cellBackground);
-alias CellCallback = bool delegate(CellRenderer renderer);
-alias CellLayoutDataFunc = void delegate(CellLayout cellLayout, CellRenderer cell, TreeModel treeModel, TreeIter iter);
-alias CustomAllocateFunc = void delegate(Widget widget, int width, int height, int baseline);
-alias CustomFilterFunc = bool delegate(ObjectG item);
-alias CustomMeasureFunc = void delegate(Widget widget, Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline);
-alias CustomRequestModeFunc = SizeRequestMode delegate(Widget widget);
-alias DrawingAreaDrawFunc = void delegate(DrawingArea drawingArea, Context cr, int width, int height);
-alias EntryCompletionMatchFunc = bool delegate(EntryCompletion completion, string key, TreeIter iter);
+alias CellAllocCallback = bool delegate(gtk.cell_renderer.CellRenderer renderer, gdk.rectangle.Rectangle cellArea, gdk.rectangle.Rectangle cellBackground);
+alias CellCallback = bool delegate(gtk.cell_renderer.CellRenderer renderer);
+alias CellLayoutDataFunc = void delegate(gtk.cell_layout.CellLayout cellLayout, gtk.cell_renderer.CellRenderer cell, gtk.tree_model.TreeModel treeModel, gtk.tree_iter.TreeIter iter);
+alias CustomAllocateFunc = void delegate(gtk.widget.Widget widget, int width, int height, int baseline);
+alias CustomFilterFunc = bool delegate(gobject.object.ObjectG item);
+alias CustomMeasureFunc = void delegate(gtk.widget.Widget widget, gtk.types.Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline);
+alias CustomRequestModeFunc = gtk.types.SizeRequestMode delegate(gtk.widget.Widget widget);
+alias DrawingAreaDrawFunc = void delegate(gtk.drawing_area.DrawingArea drawingArea, cairo.context.Context cr, int width, int height);
+alias EntryCompletionMatchFunc = bool delegate(gtk.entry_completion.EntryCompletion completion, string key, gtk.tree_iter.TreeIter iter);
 alias ExpressionNotify = void delegate();
-alias FlowBoxCreateWidgetFunc = Widget delegate(ObjectG item);
-alias FlowBoxFilterFunc = bool delegate(FlowBoxChild child);
-alias FlowBoxForeachFunc = void delegate(FlowBox box, FlowBoxChild child);
-alias FlowBoxSortFunc = int delegate(FlowBoxChild child1, FlowBoxChild child2);
-alias FontFilterFunc = bool delegate(FontFamily family, FontFace face);
-alias IconViewForeachFunc = void delegate(IconView iconView, TreePath path);
-alias ListBoxCreateWidgetFunc = Widget delegate(ObjectG item);
-alias ListBoxFilterFunc = bool delegate(ListBoxRow row);
-alias ListBoxForeachFunc = void delegate(ListBox box, ListBoxRow row);
-alias ListBoxSortFunc = int delegate(ListBoxRow row1, ListBoxRow row2);
-alias ListBoxUpdateHeaderFunc = void delegate(ListBoxRow row, ListBoxRow before);
-alias MapListModelMapFunc = ObjectG delegate(ObjectG item);
-alias MenuButtonCreatePopupFunc = void delegate(MenuButton menuButton);
-alias PageSetupDoneFunc = void delegate(PageSetup pageSetup);
-alias PrintJobCompleteFunc = void delegate(PrintJob printJob, ErrorG error);
+alias FlowBoxCreateWidgetFunc = gtk.widget.Widget delegate(gobject.object.ObjectG item);
+alias FlowBoxFilterFunc = bool delegate(gtk.flow_box_child.FlowBoxChild child);
+alias FlowBoxForeachFunc = void delegate(gtk.flow_box.FlowBox box, gtk.flow_box_child.FlowBoxChild child);
+alias FlowBoxSortFunc = int delegate(gtk.flow_box_child.FlowBoxChild child1, gtk.flow_box_child.FlowBoxChild child2);
+alias FontFilterFunc = bool delegate(pango.font_family.FontFamily family, pango.font_face.FontFace face);
+alias IconViewForeachFunc = void delegate(gtk.icon_view.IconView iconView, gtk.tree_path.TreePath path);
+alias ListBoxCreateWidgetFunc = gtk.widget.Widget delegate(gobject.object.ObjectG item);
+alias ListBoxFilterFunc = bool delegate(gtk.list_box_row.ListBoxRow row);
+alias ListBoxForeachFunc = void delegate(gtk.list_box.ListBox box, gtk.list_box_row.ListBoxRow row);
+alias ListBoxSortFunc = int delegate(gtk.list_box_row.ListBoxRow row1, gtk.list_box_row.ListBoxRow row2);
+alias ListBoxUpdateHeaderFunc = void delegate(gtk.list_box_row.ListBoxRow row, gtk.list_box_row.ListBoxRow before);
+alias MapListModelMapFunc = gobject.object.ObjectG delegate(gobject.object.ObjectG item);
+alias MenuButtonCreatePopupFunc = void delegate(gtk.menu_button.MenuButton menuButton);
+alias PageSetupDoneFunc = void delegate(gtk.page_setup.PageSetup pageSetup);
+alias PrintJobCompleteFunc = void delegate(gtk.print_job.PrintJob printJob, glib.error.ErrorG error);
 alias PrintSettingsFunc = void delegate(string key, string value);
-alias PrinterFunc = bool delegate(Printer printer);
-alias ScaleFormatValueFunc = string delegate(Scale scale, double value);
-alias ShortcutFunc = bool delegate(Widget widget, VariantG args);
+alias PrinterFunc = bool delegate(gtk.printer.Printer printer);
+alias ScaleFormatValueFunc = string delegate(gtk.scale.Scale scale, double value);
+alias ShortcutFunc = bool delegate(gtk.widget.Widget widget, glib.variant.VariantG args);
 alias TextCharPredicate = bool delegate(dchar ch);
-alias TextTagTableForeach = void delegate(TextTag tag);
-alias TickCallback = bool delegate(Widget widget, FrameClock frameClock);
-alias TreeCellDataFunc = void delegate(TreeViewColumn treeColumn, CellRenderer cell, TreeModel treeModel, TreeIter iter);
-alias TreeIterCompareFunc = int delegate(TreeModel model, TreeIter a, TreeIter b);
-alias TreeListModelCreateModelFunc = ListModel delegate(ObjectG item);
-alias TreeModelFilterModifyFunc = void delegate(TreeModel model, TreeIter iter, out Value value, int column);
-alias TreeModelFilterVisibleFunc = bool delegate(TreeModel model, TreeIter iter);
-alias TreeModelForeachFunc = bool delegate(TreeModel model, TreePath path, TreeIter iter);
-alias TreeSelectionForeachFunc = void delegate(TreeModel model, TreePath path, TreeIter iter);
-alias TreeSelectionFunc = bool delegate(TreeSelection selection, TreeModel model, TreePath path, bool pathCurrentlySelected);
-alias TreeViewColumnDropFunc = bool delegate(TreeView treeView, TreeViewColumn column, TreeViewColumn prevColumn, TreeViewColumn nextColumn);
-alias TreeViewMappingFunc = void delegate(TreeView treeView, TreePath path);
-alias TreeViewRowSeparatorFunc = bool delegate(TreeModel model, TreeIter iter);
-alias TreeViewSearchEqualFunc = bool delegate(TreeModel model, int column, string key, TreeIter iter);
-alias WidgetActionActivateFunc = void delegate(Widget widget, string actionName, VariantG parameter);
+alias TextTagTableForeach = void delegate(gtk.text_tag.TextTag tag);
+alias TickCallback = bool delegate(gtk.widget.Widget widget, gdk.frame_clock.FrameClock frameClock);
+alias TreeCellDataFunc = void delegate(gtk.tree_view_column.TreeViewColumn treeColumn, gtk.cell_renderer.CellRenderer cell, gtk.tree_model.TreeModel treeModel, gtk.tree_iter.TreeIter iter);
+alias TreeIterCompareFunc = int delegate(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter a, gtk.tree_iter.TreeIter b);
+alias TreeListModelCreateModelFunc = gio.list_model.ListModel delegate(gobject.object.ObjectG item);
+alias TreeModelFilterModifyFunc = void delegate(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, out gobject.value.Value value, int column);
+alias TreeModelFilterVisibleFunc = bool delegate(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter);
+alias TreeModelForeachFunc = bool delegate(gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter);
+alias TreeSelectionForeachFunc = void delegate(gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter);
+alias TreeSelectionFunc = bool delegate(gtk.tree_selection.TreeSelection selection, gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path, bool pathCurrentlySelected);
+alias TreeViewColumnDropFunc = bool delegate(gtk.tree_view.TreeView treeView, gtk.tree_view_column.TreeViewColumn column, gtk.tree_view_column.TreeViewColumn prevColumn, gtk.tree_view_column.TreeViewColumn nextColumn);
+alias TreeViewMappingFunc = void delegate(gtk.tree_view.TreeView treeView, gtk.tree_path.TreePath path);
+alias TreeViewRowSeparatorFunc = bool delegate(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter);
+alias TreeViewSearchEqualFunc = bool delegate(gtk.tree_model.TreeModel model, int column, string key, gtk.tree_iter.TreeIter iter);
+alias WidgetActionActivateFunc = void delegate(gtk.widget.Widget widget, string actionName, glib.variant.VariantG parameter);
 
 /**
  * An attribute for the background color, expressed as an RGB value
@@ -270,20 +266,20 @@ enum ACCESSIBLE_ATTRIBUTE_FOREGROUND = "fg-color";
 /**
  * An attribute for the overline style.
  * Possible values are:
- * - [gtk.string]
- * - [gtk.string]
+ * - [gtk.types.string]
+ * - [gtk.types.string]
  */
 enum ACCESSIBLE_ATTRIBUTE_OVERLINE = "overline";
 
 
 /**
- * The "none" overline value for [gtk.string].
+ * The "none" overline value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_OVERLINE_NONE = "none";
 
 
 /**
- * The "single" overline value for [gtk.string].
+ * The "single" overline value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_OVERLINE_SINGLE = "single";
 
@@ -297,64 +293,64 @@ enum ACCESSIBLE_ATTRIBUTE_SIZE = "size";
 /**
  * An attribute for the font stretch type.
  * Possible values are:
- * - [gtk.string]
- * - [gtk.string]
- * - [gtk.string]
- * - [gtk.string]
+ * - [gtk.types.string]
+ * - [gtk.types.string]
+ * - [gtk.types.string]
+ * - [gtk.types.string]
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH = "stretch";
 
 
 /**
- * The "condensed" stretch value for [gtk.string].
+ * The "condensed" stretch value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_CONDENSED = "condensed";
 
 
 /**
- * The "expanded" stretch value for [gtk.string].
+ * The "expanded" stretch value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_EXPANDED = "expanded";
 
 
 /**
- * The "extra condensed" stretch value for [gtk.string].
+ * The "extra condensed" stretch value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_EXTRA_CONDENSED = "extra_condensed";
 
 
 /**
- * The "extra expanded" stretch value for [gtk.string].
+ * The "extra expanded" stretch value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_EXTRA_EXPANDED = "extra_expanded";
 
 
 /**
- * The "normal" stretch value for [gtk.string].
+ * The "normal" stretch value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_NORMAL = "normal";
 
 
 /**
- * The "semi condensed" stretch value for [gtk.string].
+ * The "semi condensed" stretch value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_SEMI_CONDENSED = "semi_condensed";
 
 
 /**
- * The "semi expanded" stretch value for [gtk.string].
+ * The "semi expanded" stretch value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_SEMI_EXPANDED = "semi_expanded";
 
 
 /**
- * The "ultra condensed" stretch value for [gtk.string].
+ * The "ultra condensed" stretch value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_ULTRA_CONDENSED = "ultra_condensed";
 
 
 /**
- * The "ultra expanded" stretch value for [gtk.string].
+ * The "ultra expanded" stretch value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STRETCH_ULTRA_EXPANDED = "ultra_expanded";
 
@@ -369,27 +365,27 @@ enum ACCESSIBLE_ATTRIBUTE_STRIKETHROUGH = "strikethrough";
 /**
  * An attribute for the font style.
  * Possible values are:
- * - [gtk.string]
- * - [gtk.string]
- * - [gtk.string]
+ * - [gtk.types.string]
+ * - [gtk.types.string]
+ * - [gtk.types.string]
  */
 enum ACCESSIBLE_ATTRIBUTE_STYLE = "style";
 
 
 /**
- * The "italic" style value for [gtk.string].
+ * The "italic" style value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STYLE_ITALIC = "italic";
 
 
 /**
- * The "normal" style value for [gtk.string].
+ * The "normal" style value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STYLE_NORMAL = "normal";
 
 
 /**
- * The "oblique" style value for [gtk.string].
+ * The "oblique" style value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_STYLE_OBLIQUE = "oblique";
 
@@ -397,34 +393,34 @@ enum ACCESSIBLE_ATTRIBUTE_STYLE_OBLIQUE = "oblique";
 /**
  * An attribute for the underline style.
  * Possible values are:
- * - [gtk.string]
- * - [gtk.string]
- * - [gtk.string]
- * - [gtk.string]
+ * - [gtk.types.string]
+ * - [gtk.types.string]
+ * - [gtk.types.string]
+ * - [gtk.types.string]
  */
 enum ACCESSIBLE_ATTRIBUTE_UNDERLINE = "underline";
 
 
 /**
- * The "double" underline value for [gtk.string].
+ * The "double" underline value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_UNDERLINE_DOUBLE = "double";
 
 
 /**
- * The "error" underline value for [gtk.string].
+ * The "error" underline value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_UNDERLINE_ERROR = "error";
 
 
 /**
- * The "none" underline value for [gtk.string].
+ * The "none" underline value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_UNDERLINE_NONE = "none";
 
 
 /**
- * The "single" underline value for [gtk.string].
+ * The "single" underline value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_UNDERLINE_SINGLE = "single";
 
@@ -432,48 +428,48 @@ enum ACCESSIBLE_ATTRIBUTE_UNDERLINE_SINGLE = "single";
 /**
  * An attribute for the font variant.
  * Possible values are:
- * - [gtk.string]
- * - [gtk.string]
- * - [gtk.string]
- * - [gtk.string]
- * - [gtk.string]
- * - [gtk.string]
+ * - [gtk.types.string]
+ * - [gtk.types.string]
+ * - [gtk.types.string]
+ * - [gtk.types.string]
+ * - [gtk.types.string]
+ * - [gtk.types.string]
  */
 enum ACCESSIBLE_ATTRIBUTE_VARIANT = "variant";
 
 
 /**
- * The "all petite caps" variant value for [gtk.string].
+ * The "all petite caps" variant value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_VARIANT_ALL_PETITE_CAPS = "all-petite-caps";
 
 
 /**
- * The "all small caps" variant value for [gtk.string].
+ * The "all small caps" variant value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_VARIANT_ALL_SMALL_CAPS = "all-small-caps";
 
 
 /**
- * The "petite caps" variant value for [gtk.string].
+ * The "petite caps" variant value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_VARIANT_PETITE_CAPS = "petite-caps";
 
 
 /**
- * The "small caps" variant value for [gtk.string].
+ * The "small caps" variant value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_VARIANT_SMALL_CAPS = "small-caps";
 
 
 /**
- * The "title caps" variant value for [gtk.string].
+ * The "title caps" variant value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_VARIANT_TITLE_CAPS = "title-caps";
 
 
 /**
- * The "unicase" variant value for [gtk.string].
+ * The "unicase" variant value for [gtk.types.string].
  */
 enum ACCESSIBLE_ATTRIBUTE_VARIANT_UNICASE = "unicase";
 

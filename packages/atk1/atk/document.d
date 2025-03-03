@@ -4,7 +4,7 @@ public import atk.document_iface_proxy;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 
 /**
@@ -109,8 +109,8 @@ interface Document
    *   arg2 = the attribute's new value, or %null if not available.
    *   document = the instance the signal is connected to
    */
-  alias DocumentAttributeChangedCallbackDlg = void delegate(string arg1, string arg2, Document document);
-  alias DocumentAttributeChangedCallbackFunc = void function(string arg1, string arg2, Document document);
+  alias DocumentAttributeChangedCallbackDlg = void delegate(string arg1, string arg2, atk.document.Document document);
+  alias DocumentAttributeChangedCallbackFunc = void function(string arg1, string arg2, atk.document.Document document);
 
   /**
    * Connect to DocumentAttributeChanged signal.
@@ -134,8 +134,8 @@ interface Document
    * signals.$(RPAREN)
    *   document = the instance the signal is connected to
    */
-  alias LoadCompleteCallbackDlg = void delegate(Document document);
-  alias LoadCompleteCallbackFunc = void function(Document document);
+  alias LoadCompleteCallbackDlg = void delegate(atk.document.Document document);
+  alias LoadCompleteCallbackFunc = void function(atk.document.Document document);
 
   /**
    * Connect to LoadComplete signal.
@@ -156,8 +156,8 @@ interface Document
    * user-significant timeout has occurred.
    *   document = the instance the signal is connected to
    */
-  alias LoadStoppedCallbackDlg = void delegate(Document document);
-  alias LoadStoppedCallbackFunc = void function(Document document);
+  alias LoadStoppedCallbackDlg = void delegate(atk.document.Document document);
+  alias LoadStoppedCallbackFunc = void function(atk.document.Document document);
 
   /**
    * Connect to LoadStopped signal.
@@ -178,8 +178,8 @@ interface Document
    *     or not applicable, -1 should be provided.
    *   document = the instance the signal is connected to
    */
-  alias PageChangedCallbackDlg = void delegate(int pageNumber, Document document);
-  alias PageChangedCallbackFunc = void function(int pageNumber, Document document);
+  alias PageChangedCallbackDlg = void delegate(int pageNumber, atk.document.Document document);
+  alias PageChangedCallbackFunc = void function(int pageNumber, atk.document.Document document);
 
   /**
    * Connect to PageChanged signal.
@@ -199,8 +199,8 @@ interface Document
    * interrogating ATK for the latest document content.
    *   document = the instance the signal is connected to
    */
-  alias ReloadCallbackDlg = void delegate(Document document);
-  alias ReloadCallbackFunc = void function(Document document);
+  alias ReloadCallbackDlg = void delegate(atk.document.Document document);
+  alias ReloadCallbackFunc = void function(atk.document.Document document);
 
   /**
    * Connect to Reload signal.

@@ -5,9 +5,9 @@ import arrow.c.types;
 import arrow.expression;
 import arrow.function_options;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class CallExpression : Expression
+class CallExpression : arrow.expression.Expression
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,12 +26,12 @@ class CallExpression : Expression
     return getType();
   }
 
-  this(string function_, Expression[] arguments, FunctionOptions options)
+  this(string function_, arrow.expression.Expression[] arguments, arrow.function_options.FunctionOptions options)
   {
     GArrowCallExpression* _cretval;
     const(char)* _function_ = function_.toCString(No.Alloc);
-    auto _arguments = gListFromD!(Expression)(arguments);
-    scope(exit) containerFree!(GList*, Expression, GidOwnership.None)(_arguments);
+    auto _arguments = gListFromD!(arrow.expression.Expression)(arguments);
+    scope(exit) containerFree!(GList*, arrow.expression.Expression, GidOwnership.None)(_arguments);
     _cretval = garrow_call_expression_new(_function_, _arguments, options ? cast(GArrowFunctionOptions*)options.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }

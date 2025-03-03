@@ -1,6 +1,6 @@
 module gio.settings_schema;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.settings_schema_key;
@@ -79,7 +79,7 @@ import gobject.boxed;
  * In that case, the plugin loading system must compile the schemas for
  * itself before attempting to create the settings source.
  */
-class SettingsSchema : Boxed
+class SettingsSchema : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -111,7 +111,7 @@ class SettingsSchema : Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_get_id(cast(GSettingsSchema*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -123,12 +123,12 @@ class SettingsSchema : Boxed
    *   name = the name of a key
    * Returns: the #GSettingsSchemaKey for name
    */
-  SettingsSchemaKey getKey(string name)
+  gio.settings_schema_key.SettingsSchemaKey getKey(string name)
   {
     GSettingsSchemaKey* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_settings_schema_get_key(cast(GSettingsSchema*)cPtr, _name);
-    auto _retval = _cretval ? new SettingsSchemaKey(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gio.settings_schema_key.SettingsSchemaKey(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class SettingsSchema : Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_get_path(cast(GSettingsSchema*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

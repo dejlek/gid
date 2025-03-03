@@ -1,6 +1,6 @@
 module pango.attr_shape;
 
-import gid.global;
+import gid.gid;
 import pango.attribute;
 import pango.c.functions;
 import pango.c.types;
@@ -30,27 +30,27 @@ class AttrShape
     return cast(void*)&cInstance;
   }
 
-  @property Attribute attr()
+  @property pango.attribute.Attribute attr()
   {
-    return new Attribute(cast(PangoAttribute*)&(cast(PangoAttrShape*)cPtr).attr);
+    return new pango.attribute.Attribute(cast(PangoAttribute*)&(cast(PangoAttrShape*)cPtr).attr);
   }
 
-  @property Rectangle inkRect()
+  @property pango.types.Rectangle inkRect()
   {
     return (cast(PangoAttrShape*)cPtr).inkRect;
   }
 
-  @property void inkRect(Rectangle propval)
+  @property void inkRect(pango.types.Rectangle propval)
   {
     (cast(PangoAttrShape*)cPtr).inkRect = propval;
   }
 
-  @property Rectangle logicalRect()
+  @property pango.types.Rectangle logicalRect()
   {
     return (cast(PangoAttrShape*)cPtr).logicalRect;
   }
 
-  @property void logicalRect(Rectangle propval)
+  @property void logicalRect(pango.types.Rectangle propval)
   {
     (cast(PangoAttrShape*)cPtr).logicalRect = propval;
   }
@@ -88,11 +88,11 @@ class AttrShape
    *   `PangoAttribute`, which should be freed with
    *   [pango.attribute.Attribute.destroy]
    */
-  static Attribute new_(Rectangle inkRect, Rectangle logicalRect)
+  static pango.attribute.Attribute new_(pango.types.Rectangle inkRect, pango.types.Rectangle logicalRect)
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_shape_new(&inkRect, &logicalRect);
-    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

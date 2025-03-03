@@ -1,7 +1,7 @@
 module gio.debug_controller;
 
 public import gio.debug_controller_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;

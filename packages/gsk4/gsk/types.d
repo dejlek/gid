@@ -1,11 +1,10 @@
 module gsk.types;
 
-import gid.global;
+import gid.gid;
 import glib.error;
 import graphene.point;
 import gsk.c.functions;
 import gsk.c.types;
-import gsk.types;
 
 
 // Enums
@@ -28,5 +27,5 @@ alias TransformCategory = GskTransformCategory;
 alias ParseLocation = GskParseLocation;
 
 // Callbacks
-alias ParseErrorFunc = void delegate(ParseLocation start, ParseLocation end, ErrorG error);
-alias PathForeachFunc = bool delegate(PathOperation op, Point pts, size_t nPts, float weight);
+alias ParseErrorFunc = void delegate(gsk.types.ParseLocation start, gsk.types.ParseLocation end, glib.error.ErrorG error);
+alias PathForeachFunc = bool delegate(gsk.types.PathOperation op, graphene.point.Point pts, size_t nPts, float weight);

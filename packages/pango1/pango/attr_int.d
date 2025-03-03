@@ -1,6 +1,6 @@
 module pango.attr_int;
 
-import gid.global;
+import gid.gid;
 import pango.attribute;
 import pango.c.functions;
 import pango.c.types;
@@ -30,9 +30,9 @@ class AttrInt
     return cast(void*)&cInstance;
   }
 
-  @property Attribute attr()
+  @property pango.attribute.Attribute attr()
   {
-    return new Attribute(cast(PangoAttribute*)&(cast(PangoAttrInt*)cPtr).attr);
+    return new pango.attribute.Attribute(cast(PangoAttribute*)&(cast(PangoAttrInt*)cPtr).attr);
   }
 
   @property int value()

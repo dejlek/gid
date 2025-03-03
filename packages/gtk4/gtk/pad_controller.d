@@ -1,9 +1,8 @@
 module gtk.pad_controller;
 
 import gdk.device;
-import gid.global;
+import gid.gid;
 import gio.action_group;
-import gio.action_group_mixin;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -50,7 +49,7 @@ import gtk.types;
  * of type %G_VARIANT_TYPE_DOUBLE bearing the value of the given axis, it
  * is required that those are made stateful and accepting this `GVariantType`.
  */
-class PadController : EventController
+class PadController : gtk.event_controller.EventController
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -86,7 +85,7 @@ class PadController : EventController
    *   pad = A %GDK_SOURCE_TABLET_PAD device, or %NULL to handle all pads
    * Returns: A newly created `GtkPadController`
    */
-  this(ActionGroup group, Device pad)
+  this(gio.action_group.ActionGroup group, gdk.device.Device pad)
   {
     GtkPadController* _cretval;
     _cretval = gtk_pad_controller_new(group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(No.Dup) : null, pad ? cast(GdkDevice*)pad.cPtr(No.Dup) : null);
@@ -109,7 +108,7 @@ class PadController : EventController
    *     be deemed user-visible.
    *   actionName = action name that will be activated in the `GActionGroup`
    */
-  void setAction(PadActionType type, int index, int mode, string label, string actionName)
+  void setAction(gtk.types.PadActionType type, int index, int mode, string label, string actionName)
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _actionName = actionName.toCString(No.Alloc);

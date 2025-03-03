@@ -5,7 +5,7 @@ import gio.app_info;
 import gio.app_info_mixin;
 
 /// Proxy object for Gio.AppInfo interface when a GObject has no applicable D binding
-class AppInfoIfaceProxy : IfaceProxy, AppInfo
+class AppInfoIfaceProxy : IfaceProxy, gio.app_info.AppInfo
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class AppInfoIfaceProxy : IfaceProxy, AppInfo
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(AppInfo);
+    return typeid(gio.app_info.AppInfo);
   }
 
   mixin AppInfoT!();

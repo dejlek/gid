@@ -6,7 +6,7 @@ import gdkpixbuf.pixbuf;
 import gdkpixbuf.pixbuf_animation;
 import gdkpixbuf.pixbuf_format;
 import gdkpixbuf.types;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.error;
 import gobject.dclosure;
@@ -53,7 +53,7 @@ import gobject.object;
  * [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter] to retrieve the pixbuf for the
  * desired time stamp.
  */
-class PixbufLoader : ObjectG
+class PixbufLoader : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -101,7 +101,7 @@ class PixbufLoader : ObjectG
    *   mimeType = the mime type to be loaded
    * Returns: A newly-created pixbuf loader.
    */
-  static PixbufLoader newWithMimeType(string mimeType)
+  static gdkpixbuf.pixbuf_loader.PixbufLoader newWithMimeType(string mimeType)
   {
     GdkPixbufLoader* _cretval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
@@ -109,7 +109,7 @@ class PixbufLoader : ObjectG
     _cretval = gdk_pixbuf_loader_new_with_mime_type(_mimeType, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!PixbufLoader(cast(GdkPixbufLoader*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_loader.PixbufLoader)(cast(GdkPixbufLoader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class PixbufLoader : ObjectG
    *   imageType = name of the image format to be loaded with the image
    * Returns: A newly-created pixbuf loader.
    */
-  static PixbufLoader newWithType(string imageType)
+  static gdkpixbuf.pixbuf_loader.PixbufLoader newWithType(string imageType)
   {
     GdkPixbufLoader* _cretval;
     const(char)* _imageType = imageType.toCString(No.Alloc);
@@ -138,7 +138,7 @@ class PixbufLoader : ObjectG
     _cretval = gdk_pixbuf_loader_new_with_type(_imageType, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!PixbufLoader(cast(GdkPixbufLoader*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_loader.PixbufLoader)(cast(GdkPixbufLoader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -177,11 +177,11 @@ class PixbufLoader : ObjectG
    * Returns: The animation that the loader is
    *   currently loading
    */
-  PixbufAnimation getAnimation()
+  gdkpixbuf.pixbuf_animation.PixbufAnimation getAnimation()
   {
     GdkPixbufAnimation* _cretval;
     _cretval = gdk_pixbuf_loader_get_animation(cast(GdkPixbufLoader*)cPtr);
-    auto _retval = ObjectG.getDObject!PixbufAnimation(cast(GdkPixbufAnimation*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, No.Take);
     return _retval;
   }
 
@@ -190,11 +190,11 @@ class PixbufLoader : ObjectG
    * currently loading image file.
    * Returns: A #GdkPixbufFormat
    */
-  PixbufFormat getFormat()
+  gdkpixbuf.pixbuf_format.PixbufFormat getFormat()
   {
     GdkPixbufFormat* _cretval;
     _cretval = gdk_pixbuf_loader_get_format(cast(GdkPixbufLoader*)cPtr);
-    auto _retval = _cretval ? new PixbufFormat(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdkpixbuf.pixbuf_format.PixbufFormat(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -213,11 +213,11 @@ class PixbufLoader : ObjectG
    * Returns: The pixbuf that the loader is
    *   creating
    */
-  Pixbuf getPixbuf()
+  gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
     _cretval = gdk_pixbuf_loader_get_pixbuf(cast(GdkPixbufLoader*)cPtr);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class PixbufLoader : ObjectG
    * Returns: `TRUE` if the write was successful, or `FALSE` if
    *   the loader cannot parse the buffer
    */
-  bool writeBytes(Bytes buffer)
+  bool writeBytes(glib.bytes.Bytes buffer)
   {
     bool _retval;
     GError *_err;
@@ -284,8 +284,8 @@ class PixbufLoader : ObjectG
    * pixbuf.
    *   pixbufLoader = the instance the signal is connected to
    */
-  alias AreaPreparedCallbackDlg = void delegate(PixbufLoader pixbufLoader);
-  alias AreaPreparedCallbackFunc = void function(PixbufLoader pixbufLoader);
+  alias AreaPreparedCallbackDlg = void delegate(gdkpixbuf.pixbuf_loader.PixbufLoader pixbufLoader);
+  alias AreaPreparedCallbackFunc = void function(gdkpixbuf.pixbuf_loader.PixbufLoader pixbufLoader);
 
   /**
    * Connect to AreaPrepared signal.
@@ -301,7 +301,7 @@ class PixbufLoader : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto pixbufLoader = getVal!PixbufLoader(_paramVals);
+      auto pixbufLoader = getVal!(gdkpixbuf.pixbuf_loader.PixbufLoader)(_paramVals);
       _dClosure.dlg(pixbufLoader);
     }
 
@@ -323,8 +323,8 @@ class PixbufLoader : ObjectG
    *   height = Height of updated area.
    *   pixbufLoader = the instance the signal is connected to
    */
-  alias AreaUpdatedCallbackDlg = void delegate(int x, int y, int width, int height, PixbufLoader pixbufLoader);
-  alias AreaUpdatedCallbackFunc = void function(int x, int y, int width, int height, PixbufLoader pixbufLoader);
+  alias AreaUpdatedCallbackDlg = void delegate(int x, int y, int width, int height, gdkpixbuf.pixbuf_loader.PixbufLoader pixbufLoader);
+  alias AreaUpdatedCallbackFunc = void function(int x, int y, int width, int height, gdkpixbuf.pixbuf_loader.PixbufLoader pixbufLoader);
 
   /**
    * Connect to AreaUpdated signal.
@@ -340,11 +340,11 @@ class PixbufLoader : ObjectG
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto pixbufLoader = getVal!PixbufLoader(_paramVals);
-      auto x = getVal!int(&_paramVals[1]);
-      auto y = getVal!int(&_paramVals[2]);
-      auto width = getVal!int(&_paramVals[3]);
-      auto height = getVal!int(&_paramVals[4]);
+      auto pixbufLoader = getVal!(gdkpixbuf.pixbuf_loader.PixbufLoader)(_paramVals);
+      auto x = getVal!(int)(&_paramVals[1]);
+      auto y = getVal!(int)(&_paramVals[2]);
+      auto width = getVal!(int)(&_paramVals[3]);
+      auto height = getVal!(int)(&_paramVals[4]);
       _dClosure.dlg(x, y, width, height, pixbufLoader);
     }
 
@@ -359,8 +359,8 @@ class PixbufLoader : ObjectG
    * drives it.
    *   pixbufLoader = the instance the signal is connected to
    */
-  alias ClosedCallbackDlg = void delegate(PixbufLoader pixbufLoader);
-  alias ClosedCallbackFunc = void function(PixbufLoader pixbufLoader);
+  alias ClosedCallbackDlg = void delegate(gdkpixbuf.pixbuf_loader.PixbufLoader pixbufLoader);
+  alias ClosedCallbackFunc = void function(gdkpixbuf.pixbuf_loader.PixbufLoader pixbufLoader);
 
   /**
    * Connect to Closed signal.
@@ -376,7 +376,7 @@ class PixbufLoader : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto pixbufLoader = getVal!PixbufLoader(_paramVals);
+      auto pixbufLoader = getVal!(gdkpixbuf.pixbuf_loader.PixbufLoader)(_paramVals);
       _dClosure.dlg(pixbufLoader);
     }
 
@@ -396,8 +396,8 @@ class PixbufLoader : ObjectG
    *   height = the original height of the image
    *   pixbufLoader = the instance the signal is connected to
    */
-  alias SizePreparedCallbackDlg = void delegate(int width, int height, PixbufLoader pixbufLoader);
-  alias SizePreparedCallbackFunc = void function(int width, int height, PixbufLoader pixbufLoader);
+  alias SizePreparedCallbackDlg = void delegate(int width, int height, gdkpixbuf.pixbuf_loader.PixbufLoader pixbufLoader);
+  alias SizePreparedCallbackFunc = void function(int width, int height, gdkpixbuf.pixbuf_loader.PixbufLoader pixbufLoader);
 
   /**
    * Connect to SizePrepared signal.
@@ -413,9 +413,9 @@ class PixbufLoader : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto pixbufLoader = getVal!PixbufLoader(_paramVals);
-      auto width = getVal!int(&_paramVals[1]);
-      auto height = getVal!int(&_paramVals[2]);
+      auto pixbufLoader = getVal!(gdkpixbuf.pixbuf_loader.PixbufLoader)(_paramVals);
+      auto width = getVal!(int)(&_paramVals[1]);
+      auto height = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(width, height, pixbufLoader);
     }
 

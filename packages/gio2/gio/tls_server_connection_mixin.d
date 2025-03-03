@@ -1,7 +1,7 @@
 module gio.tls_server_connection_mixin;
 
 public import gio.tls_server_connection_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.iostream;

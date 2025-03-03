@@ -214,7 +214,7 @@ struct RsvgDimensionData
  * You can load an [rsvg.handle.Handle] from a simple filename or URI with
  * [rsvg.handle.Handle.newFromFile].  Note that this is a blocking operation; there
  * is no way to cancel it if loading a remote URI takes a long time.  Also, note that
- * this method does not let you specify [rsvg.HandleFlags].
+ * this method does not let you specify [rsvg.types.HandleFlags].
  * Otherwise, loading an SVG without GIO is not recommended, since librsvg will
  * need to buffer your entire data internally before actually being able to
  * parse it.  The deprecated way of doing this is by creating a handle with

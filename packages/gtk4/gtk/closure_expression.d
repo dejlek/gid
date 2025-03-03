@@ -1,6 +1,6 @@
 module gtk.closure_expression;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.expression;
@@ -10,7 +10,7 @@ import gtk.types;
  * An expression using a custom `GClosure` to compute the value from
  * its parameters.
  */
-class ClosureExpression : Expression
+class ClosureExpression : gtk.expression.Expression
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

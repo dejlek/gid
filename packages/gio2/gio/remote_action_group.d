@@ -1,7 +1,7 @@
 module gio.remote_action_group;
 
 public import gio.remote_action_group_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -49,7 +49,7 @@ interface RemoteActionGroup
    *   parameter = the optional parameter to the activation
    *   platformData = the platform data to send
    */
-  void activateActionFull(string actionName, VariantG parameter, VariantG platformData);
+  void activateActionFull(string actionName, glib.variant.VariantG parameter, glib.variant.VariantG platformData);
 
   /**
    * Changes the state of a remote action.
@@ -64,5 +64,5 @@ interface RemoteActionGroup
    *   value = the new requested value for the state
    *   platformData = the platform data to send
    */
-  void changeActionStateFull(string actionName, VariantG value, VariantG platformData);
+  void changeActionStateFull(string actionName, glib.variant.VariantG value, glib.variant.VariantG platformData);
 }

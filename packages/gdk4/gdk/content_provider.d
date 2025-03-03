@@ -4,9 +4,8 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.content_formats;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.output_stream;
 import gio.types;
@@ -25,7 +24,7 @@ import gobject.value;
  * [gdk.content_serializer.ContentSerializer] and [gdk.content_deserializer.ContentDeserializer] if you want
  * to add support for application-specific data formats.
  */
-class ContentProvider : ObjectG
+class ContentProvider : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -52,12 +51,12 @@ class ContentProvider : ObjectG
    *   bytes = a `GBytes` with the data for mime_type
    * Returns: a new `GdkContentProvider`
    */
-  static ContentProvider newForBytes(string mimeType, Bytes bytes)
+  static gdk.content_provider.ContentProvider newForBytes(string mimeType, glib.bytes.Bytes bytes)
   {
     GdkContentProvider* _cretval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
     _cretval = gdk_content_provider_new_for_bytes(_mimeType, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -67,11 +66,11 @@ class ContentProvider : ObjectG
    *   value = a `GValue`
    * Returns: a new `GdkContentProvider`
    */
-  static ContentProvider newForValue(Value value)
+  static gdk.content_provider.ContentProvider newForValue(gobject.value.Value value)
   {
     GdkContentProvider* _cretval;
-    _cretval = gdk_content_provider_new_for_value(value ? cast(GValue*)value.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, Yes.Take);
+    _cretval = gdk_content_provider_new_for_value(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -95,7 +94,7 @@ class ContentProvider : ObjectG
    * Returns: %TRUE if the value was set successfully. Otherwise
    *   error will be set to describe the failure.
    */
-  bool getValue(out Value value)
+  bool getValue(out gobject.value.Value value)
   {
     bool _retval;
     GValue _value;
@@ -103,7 +102,7 @@ class ContentProvider : ObjectG
     _retval = gdk_content_provider_get_value(cast(GdkContentProvider*)cPtr, &_value, &_err);
     if (_err)
       throw new ErrorG(_err);
-    value = new Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
   }
 
@@ -111,11 +110,11 @@ class ContentProvider : ObjectG
    * Gets the formats that the provider can provide its current contents in.
    * Returns: The formats of the provider
    */
-  ContentFormats refFormats()
+  gdk.content_formats.ContentFormats refFormats()
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_provider_ref_formats(cast(GdkContentProvider*)cPtr);
-    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -126,11 +125,11 @@ class ContentProvider : ObjectG
    * This can be assumed to be a subset of [gdk.content_provider.ContentProvider.refFormats].
    * Returns: The storable formats of the provider
    */
-  ContentFormats refStorableFormats()
+  gdk.content_formats.ContentFormats refStorableFormats()
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_provider_ref_storable_formats(cast(GdkContentProvider*)cPtr);
-    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -151,14 +150,14 @@ class ContentProvider : ObjectG
    *   cancellable = optional `GCancellable` object, %NULL to ignore.
    *   callback = callback to call when the request is satisfied
    */
-  void writeMimeTypeAsync(string mimeType, OutputStream stream, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void writeMimeTypeAsync(string mimeType, gio.output_stream.OutputStream stream, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -175,7 +174,7 @@ class ContentProvider : ObjectG
    * Returns: %TRUE if the operation was completed successfully. Otherwise
    *   error will be set to describe the failure.
    */
-  bool writeMimeTypeFinish(AsyncResult result)
+  bool writeMimeTypeFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -189,8 +188,8 @@ class ContentProvider : ObjectG
    * Emitted whenever the content provided by this provider has changed.
    *   contentProvider = the instance the signal is connected to
    */
-  alias ContentChangedCallbackDlg = void delegate(ContentProvider contentProvider);
-  alias ContentChangedCallbackFunc = void function(ContentProvider contentProvider);
+  alias ContentChangedCallbackDlg = void delegate(gdk.content_provider.ContentProvider contentProvider);
+  alias ContentChangedCallbackFunc = void function(gdk.content_provider.ContentProvider contentProvider);
 
   /**
    * Connect to ContentChanged signal.
@@ -206,7 +205,7 @@ class ContentProvider : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto contentProvider = getVal!ContentProvider(_paramVals);
+      auto contentProvider = getVal!(gdk.content_provider.ContentProvider)(_paramVals);
       _dClosure.dlg(contentProvider);
     }
 

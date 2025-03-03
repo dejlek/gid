@@ -1,6 +1,6 @@
 module gtk.gesture_swipe;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -18,7 +18,7 @@ import gtk.types;
  * [gtk.gesture.Gesture.update] handler.
  * All velocities are reported in pixels/sec units.
  */
-class GestureSwipe : GestureSingle
+class GestureSwipe : gtk.gesture_single.GestureSingle
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -73,8 +73,8 @@ class GestureSwipe : GestureSingle
    *   velocityY = velocity in the Y axis, in pixels/sec
    *   gestureSwipe = the instance the signal is connected to
    */
-  alias SwipeCallbackDlg = void delegate(double velocityX, double velocityY, GestureSwipe gestureSwipe);
-  alias SwipeCallbackFunc = void function(double velocityX, double velocityY, GestureSwipe gestureSwipe);
+  alias SwipeCallbackDlg = void delegate(double velocityX, double velocityY, gtk.gesture_swipe.GestureSwipe gestureSwipe);
+  alias SwipeCallbackFunc = void function(double velocityX, double velocityY, gtk.gesture_swipe.GestureSwipe gestureSwipe);
 
   /**
    * Connect to Swipe signal.
@@ -90,9 +90,9 @@ class GestureSwipe : GestureSingle
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureSwipe = getVal!GestureSwipe(_paramVals);
-      auto velocityX = getVal!double(&_paramVals[1]);
-      auto velocityY = getVal!double(&_paramVals[2]);
+      auto gestureSwipe = getVal!(gtk.gesture_swipe.GestureSwipe)(_paramVals);
+      auto velocityX = getVal!(double)(&_paramVals[1]);
+      auto velocityY = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(velocityX, velocityY, gestureSwipe);
     }
 

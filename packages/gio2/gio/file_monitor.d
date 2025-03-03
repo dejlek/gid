@@ -1,10 +1,9 @@
 module gio.file_monitor;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.file;
-import gio.file_mixin;
 import gio.types;
 import gobject.dclosure;
 import gobject.object;
@@ -22,7 +21,7 @@ import gobject.object;
  * may cause notifications to be blocked even if the thread-default
  * context is still running$(RPAREN).
  */
-class FileMonitor : ObjectG
+class FileMonitor : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -64,7 +63,7 @@ class FileMonitor : ObjectG
    *   otherFile = a #GFile.
    *   eventType = a set of #GFileMonitorEvent flags.
    */
-  void emitEvent(File child, File otherFile, FileMonitorEvent eventType)
+  void emitEvent(gio.file.File child, gio.file.File otherFile, gio.types.FileMonitorEvent eventType)
   {
     g_file_monitor_emit_event(cast(GFileMonitor*)cPtr, child ? cast(GFile*)(cast(ObjectG)child).cPtr(No.Dup) : null, otherFile ? cast(GFile*)(cast(ObjectG)otherFile).cPtr(No.Dup) : null, eventType);
   }
@@ -122,8 +121,8 @@ class FileMonitor : ObjectG
    *   eventType = a #GFileMonitorEvent.
    *   fileMonitor = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(File file, File otherFile, FileMonitorEvent eventType, FileMonitor fileMonitor);
-  alias ChangedCallbackFunc = void function(File file, File otherFile, FileMonitorEvent eventType, FileMonitor fileMonitor);
+  alias ChangedCallbackDlg = void delegate(gio.file.File file, gio.file.File otherFile, gio.types.FileMonitorEvent eventType, gio.file_monitor.FileMonitor fileMonitor);
+  alias ChangedCallbackFunc = void function(gio.file.File file, gio.file.File otherFile, gio.types.FileMonitorEvent eventType, gio.file_monitor.FileMonitor fileMonitor);
 
   /**
    * Connect to Changed signal.
@@ -139,10 +138,10 @@ class FileMonitor : ObjectG
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fileMonitor = getVal!FileMonitor(_paramVals);
-      auto file = getVal!File(&_paramVals[1]);
-      auto otherFile = getVal!File(&_paramVals[2]);
-      auto eventType = getVal!FileMonitorEvent(&_paramVals[3]);
+      auto fileMonitor = getVal!(gio.file_monitor.FileMonitor)(_paramVals);
+      auto file = getVal!(gio.file.File)(&_paramVals[1]);
+      auto otherFile = getVal!(gio.file.File)(&_paramVals[2]);
+      auto eventType = getVal!(gio.types.FileMonitorEvent)(&_paramVals[3]);
       _dClosure.dlg(file, otherFile, eventType, fileMonitor);
     }
 

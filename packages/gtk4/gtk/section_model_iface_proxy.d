@@ -5,7 +5,7 @@ import gtk.section_model;
 import gtk.section_model_mixin;
 
 /// Proxy object for Gtk.SectionModel interface when a GObject has no applicable D binding
-class SectionModelIfaceProxy : IfaceProxy, SectionModel
+class SectionModelIfaceProxy : IfaceProxy, gtk.section_model.SectionModel
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class SectionModelIfaceProxy : IfaceProxy, SectionModel
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(SectionModel);
+    return typeid(gtk.section_model.SectionModel);
   }
 
   mixin SectionModelT!();

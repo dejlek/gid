@@ -3,11 +3,11 @@ module arrowflight.location;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class Location : ObjectG
+class Location : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -37,7 +37,7 @@ class Location : ObjectG
     this(_cretval, Yes.Take);
   }
 
-  bool equal(Location otherLocation)
+  bool equal(arrowflight.location.Location otherLocation)
   {
     bool _retval;
     _retval = gaflight_location_equal(cast(GAFlightLocation*)cPtr, otherLocation ? cast(GAFlightLocation*)otherLocation.cPtr(No.Dup) : null);
@@ -48,7 +48,7 @@ class Location : ObjectG
   {
     char* _cretval;
     _cretval = gaflight_location_get_scheme(cast(GAFlightLocation*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -56,7 +56,7 @@ class Location : ObjectG
   {
     char* _cretval;
     _cretval = gaflight_location_to_string(cast(GAFlightLocation*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

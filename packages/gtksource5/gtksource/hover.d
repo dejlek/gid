@@ -1,11 +1,10 @@
 module gtksource.hover;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.hover_provider;
-import gtksource.hover_provider_mixin;
 import gtksource.types;
 
 /**
@@ -20,7 +19,7 @@ import gtksource.types;
  * You can change how long to wait to display the interactive tooltip by
  * setting the property@Hover:hover-delay property in milliseconds.
  */
-class Hover : ObjectG
+class Hover : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -39,12 +38,12 @@ class Hover : ObjectG
     return getType();
   }
 
-  void addProvider(HoverProvider provider)
+  void addProvider(gtksource.hover_provider.HoverProvider provider)
   {
     gtk_source_hover_add_provider(cast(GtkSourceHover*)cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
   }
 
-  void removeProvider(HoverProvider provider)
+  void removeProvider(gtksource.hover_provider.HoverProvider provider)
   {
     gtk_source_hover_remove_provider(cast(GtkSourceHover*)cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
   }

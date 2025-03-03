@@ -2,7 +2,7 @@ module gtk.cell_editable_mixin;
 
 public import gtk.cell_editable_iface_proxy;
 public import gdk.event;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -48,7 +48,7 @@ template CellEditableT()
    *   event = The `GdkEvent` that began the editing process, or
    *     %NULL if editing was initiated programmatically
    */
-  override void startEditing(Event event)
+  override void startEditing(gdk.event.Event event)
   {
     gtk_cell_editable_start_editing(cast(GtkCellEditable*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
   }
@@ -65,8 +65,8 @@ template CellEditableT()
    * for emitting `GtkCellEditable::editing-done`.
    *   cellEditable = the instance the signal is connected to
    */
-  alias EditingDoneCallbackDlg = void delegate(CellEditable cellEditable);
-  alias EditingDoneCallbackFunc = void function(CellEditable cellEditable);
+  alias EditingDoneCallbackDlg = void delegate(gtk.cell_editable.CellEditable cellEditable);
+  alias EditingDoneCallbackFunc = void function(gtk.cell_editable.CellEditable cellEditable);
 
   /**
    * Connect to EditingDone signal.
@@ -82,7 +82,7 @@ template CellEditableT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto cellEditable = getVal!CellEditable(_paramVals);
+      auto cellEditable = getVal!(gtk.cell_editable.CellEditable)(_paramVals);
       _dClosure.dlg(cellEditable);
     }
 
@@ -103,8 +103,8 @@ template CellEditableT()
    * for emitting `GtkCellEditable::remove-widget`.
    *   cellEditable = the instance the signal is connected to
    */
-  alias RemoveWidgetCallbackDlg = void delegate(CellEditable cellEditable);
-  alias RemoveWidgetCallbackFunc = void function(CellEditable cellEditable);
+  alias RemoveWidgetCallbackDlg = void delegate(gtk.cell_editable.CellEditable cellEditable);
+  alias RemoveWidgetCallbackFunc = void function(gtk.cell_editable.CellEditable cellEditable);
 
   /**
    * Connect to RemoveWidget signal.
@@ -120,7 +120,7 @@ template CellEditableT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto cellEditable = getVal!CellEditable(_paramVals);
+      auto cellEditable = getVal!(gtk.cell_editable.CellEditable)(_paramVals);
       _dClosure.dlg(cellEditable);
     }
 

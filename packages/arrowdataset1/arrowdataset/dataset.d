@@ -6,11 +6,11 @@ import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.scanner_builder;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class Dataset : ObjectG
+class Dataset : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,14 +29,14 @@ class Dataset : ObjectG
     return getType();
   }
 
-  ScannerBuilder beginScan()
+  arrowdataset.scanner_builder.ScannerBuilder beginScan()
   {
     GADatasetScannerBuilder* _cretval;
     GError *_err;
     _cretval = gadataset_dataset_begin_scan(cast(GADatasetDataset*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!ScannerBuilder(cast(GADatasetScannerBuilder*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowdataset.scanner_builder.ScannerBuilder)(cast(GADatasetScannerBuilder*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -44,29 +44,29 @@ class Dataset : ObjectG
   {
     char* _cretval;
     _cretval = gadataset_dataset_get_type_name(cast(GADatasetDataset*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
-  RecordBatchReader toRecordBatchReader()
+  arrow.record_batch_reader.RecordBatchReader toRecordBatchReader()
   {
     GArrowRecordBatchReader* _cretval;
     GError *_err;
     _cretval = gadataset_dataset_to_record_batch_reader(cast(GADatasetDataset*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!RecordBatchReader(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Table toTable()
+  arrow.table.Table toTable()
   {
     GArrowTable* _cretval;
     GError *_err;
     _cretval = gadataset_dataset_to_table(cast(GADatasetDataset*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Table(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 }

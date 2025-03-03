@@ -1,8 +1,7 @@
 module gio.settings;
 
-import gid.global;
+import gid.gid;
 import gio.action;
-import gio.action_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.settings_backend;
@@ -259,7 +258,7 @@ import gobject.object;
  * rules. It should not be committed to version control or included in
  * `EXTRA_DIST`.
  */
-class Settings : ObjectG
+class Settings : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -327,12 +326,12 @@ class Settings : ObjectG
    *   path = the path to use
    * Returns: a new #GSettings object
    */
-  static Settings newFull(SettingsSchema schema, SettingsBackend backend, string path)
+  static gio.settings.Settings newFull(gio.settings_schema.SettingsSchema schema, gio.settings_backend.SettingsBackend backend, string path)
   {
     GSettings* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_settings_new_full(schema ? cast(GSettingsSchema*)schema.cPtr(No.Dup) : null, backend ? cast(GSettingsBackend*)backend.cPtr(No.Dup) : null, _path);
-    auto _retval = ObjectG.getDObject!Settings(cast(GSettings*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -349,12 +348,12 @@ class Settings : ObjectG
    *   backend = the #GSettingsBackend to use
    * Returns: a new #GSettings object
    */
-  static Settings newWithBackend(string schemaId, SettingsBackend backend)
+  static gio.settings.Settings newWithBackend(string schemaId, gio.settings_backend.SettingsBackend backend)
   {
     GSettings* _cretval;
     const(char)* _schemaId = schemaId.toCString(No.Alloc);
     _cretval = g_settings_new_with_backend(_schemaId, backend ? cast(GSettingsBackend*)backend.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Settings(cast(GSettings*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -369,13 +368,13 @@ class Settings : ObjectG
    *   path = the path to use
    * Returns: a new #GSettings object
    */
-  static Settings newWithBackendAndPath(string schemaId, SettingsBackend backend, string path)
+  static gio.settings.Settings newWithBackendAndPath(string schemaId, gio.settings_backend.SettingsBackend backend, string path)
   {
     GSettings* _cretval;
     const(char)* _schemaId = schemaId.toCString(No.Alloc);
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_settings_new_with_backend_and_path(_schemaId, backend ? cast(GSettingsBackend*)backend.cPtr(No.Dup) : null, _path);
-    auto _retval = ObjectG.getDObject!Settings(cast(GSettings*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -395,13 +394,13 @@ class Settings : ObjectG
    *   path = the path to use
    * Returns: a new #GSettings object
    */
-  static Settings newWithPath(string schemaId, string path)
+  static gio.settings.Settings newWithPath(string schemaId, string path)
   {
     GSettings* _cretval;
     const(char)* _schemaId = schemaId.toCString(No.Alloc);
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_settings_new_with_path(_schemaId, _path);
-    auto _retval = ObjectG.getDObject!Settings(cast(GSettings*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -484,7 +483,7 @@ class Settings : ObjectG
    *   object = the object
    *   property = the property whose binding is removed
    */
-  static void unbind(ObjectG object, string property)
+  static void unbind(gobject.object.ObjectG object, string property)
   {
     const(char)* _property = property.toCString(No.Alloc);
     g_settings_unbind(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property);
@@ -525,7 +524,7 @@ class Settings : ObjectG
    *   property = the name of the property to bind
    *   flags = flags for the binding
    */
-  void bind(string key, ObjectG object, string property, SettingsBindFlags flags)
+  void bind(string key, gobject.object.ObjectG object, string property, gio.types.SettingsBindFlags flags)
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _property = property.toCString(No.Alloc);
@@ -553,7 +552,7 @@ class Settings : ObjectG
    *   property = the name of a boolean property to bind
    *   inverted = whether to 'invert' the value
    */
-  void bindWritable(string key, ObjectG object, string property, bool inverted)
+  void bindWritable(string key, gobject.object.ObjectG object, string property, bool inverted)
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _property = property.toCString(No.Alloc);
@@ -576,12 +575,12 @@ class Settings : ObjectG
    *   key = the name of a key in settings
    * Returns: a new #GAction
    */
-  Action createAction(string key)
+  gio.action.Action createAction(string key)
   {
     GAction* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_create_action(cast(GSettings*)cPtr, _key);
-    auto _retval = ObjectG.getDObject!Action(cast(GAction*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.action.Action)(cast(GAction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -624,12 +623,12 @@ class Settings : ObjectG
    *   name = the name of the child schema
    * Returns: a 'child' settings object
    */
-  Settings getChild(string name)
+  gio.settings.Settings getChild(string name)
   {
     GSettings* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_settings_get_child(cast(GSettings*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!Settings(cast(GSettings*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.settings.Settings)(cast(GSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -654,12 +653,12 @@ class Settings : ObjectG
    *   key = the key to get the default value for
    * Returns: the default value
    */
-  VariantG getDefaultValue(string key)
+  glib.variant.VariantG getDefaultValue(string key)
   {
     VariantC* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_get_default_value(cast(GSettings*)cPtr, _key);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -799,13 +798,13 @@ class Settings : ObjectG
    *     settings database to the value used by the application
    * Returns: the result, which may be %NULL
    */
-  void* getMapped(string key, SettingsGetMapping mapping)
+  void* getMapped(string key, gio.types.SettingsGetMapping mapping)
   {
     extern(C) bool _mappingCallback(VariantC* value, void** result, void* userData)
     {
-      auto _dlg = cast(SettingsGetMapping*)userData;
+      auto _dlg = cast(gio.types.SettingsGetMapping*)userData;
 
-      bool _retval = (*_dlg)(value ? new VariantG(cast(void*)value, No.Take) : null, *result);
+      bool _retval = (*_dlg)(value ? new glib.variant.VariantG(cast(void*)value, No.Take) : null, *result);
       return _retval;
     }
     auto _mappingCB = mapping ? &_mappingCallback : null;
@@ -824,12 +823,12 @@ class Settings : ObjectG
 
    * Deprecated: Use [gio.settings_schema_key.SettingsSchemaKey.getRange] instead.
    */
-  VariantG getRange(string key)
+  glib.variant.VariantG getRange(string key)
   {
     VariantC* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_get_range(cast(GSettings*)cPtr, _key);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -847,7 +846,7 @@ class Settings : ObjectG
     char* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_get_string(cast(GSettings*)cPtr, _key);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -934,12 +933,12 @@ class Settings : ObjectG
    *   key = the key to get the user value for
    * Returns: the user's value, if set
    */
-  VariantG getUserValue(string key)
+  glib.variant.VariantG getUserValue(string key)
   {
     VariantC* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_get_user_value(cast(GSettings*)cPtr, _key);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -951,12 +950,12 @@ class Settings : ObjectG
    *   key = the key to get the value for
    * Returns: a new #GVariant
    */
-  VariantG getValue(string key)
+  glib.variant.VariantG getValue(string key)
   {
     VariantC* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_settings_get_value(cast(GSettings*)cPtr, _key);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1044,7 +1043,7 @@ class Settings : ObjectG
 
    * Deprecated: Use [gio.settings_schema_key.SettingsSchemaKey.rangeCheck] instead.
    */
-  bool rangeCheck(string key, VariantG value)
+  bool rangeCheck(string key, glib.variant.VariantG value)
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1296,7 +1295,7 @@ class Settings : ObjectG
    * Returns: %TRUE if setting the key succeeded,
    *   %FALSE if the key was not writable
    */
-  bool setValue(string key, VariantG value)
+  bool setValue(string key, glib.variant.VariantG value)
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1324,8 +1323,8 @@ class Settings : ObjectG
    * Returns: %TRUE to stop other handlers from being invoked for the
    *   event. FALSE to propagate the event further.
    */
-  alias ChangeEventCallbackDlg = bool delegate(Quark[] keys, Settings settings);
-  alias ChangeEventCallbackFunc = bool function(Quark[] keys, Settings settings);
+  alias ChangeEventCallbackDlg = bool delegate(glib.types.Quark[] keys, gio.settings.Settings settings);
+  alias ChangeEventCallbackFunc = bool function(glib.types.Quark[] keys, gio.settings.Settings settings);
 
   /**
    * Connect to ChangeEvent signal.
@@ -1342,11 +1341,11 @@ class Settings : ObjectG
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto settings = getVal!Settings(_paramVals);
+      auto settings = getVal!(gio.settings.Settings)(_paramVals);
       auto keys = getVal!(uint**)(&_paramVals[1]);
-      Quark[] _keys;
-      auto nKeys = getVal!int(&_paramVals[2]);
-      _keys = cast(Quark[])keys[0 .. nKeys];
+      glib.types.Quark[] _keys;
+      auto nKeys = getVal!(int)(&_paramVals[2]);
+      _keys = cast(glib.types.Quark[])keys[0 .. nKeys];
       _retval = _dClosure.dlg(_keys, settings);
       setVal!bool(_returnValue, _retval);
     }
@@ -1368,8 +1367,8 @@ class Settings : ObjectG
    *   key = the name of the key that changed
    *   settings = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(string key, Settings settings);
-  alias ChangedCallbackFunc = void function(string key, Settings settings);
+  alias ChangedCallbackDlg = void delegate(string key, gio.settings.Settings settings);
+  alias ChangedCallbackFunc = void function(string key, gio.settings.Settings settings);
 
   /**
    * Connect to Changed signal.
@@ -1386,8 +1385,8 @@ class Settings : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto settings = getVal!Settings(_paramVals);
-      auto key = getVal!string(&_paramVals[1]);
+      auto settings = getVal!(gio.settings.Settings)(_paramVals);
+      auto key = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(key, settings);
     }
 
@@ -1418,8 +1417,8 @@ class Settings : ObjectG
    * Returns: %TRUE to stop other handlers from being invoked for the
    *   event. FALSE to propagate the event further.
    */
-  alias WritableChangeEventCallbackDlg = bool delegate(uint key, Settings settings);
-  alias WritableChangeEventCallbackFunc = bool function(uint key, Settings settings);
+  alias WritableChangeEventCallbackDlg = bool delegate(uint key, gio.settings.Settings settings);
+  alias WritableChangeEventCallbackFunc = bool function(uint key, gio.settings.Settings settings);
 
   /**
    * Connect to WritableChangeEvent signal.
@@ -1436,8 +1435,8 @@ class Settings : ObjectG
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto settings = getVal!Settings(_paramVals);
-      auto key = getVal!uint(&_paramVals[1]);
+      auto settings = getVal!(gio.settings.Settings)(_paramVals);
+      auto key = getVal!(uint)(&_paramVals[1]);
       _retval = _dClosure.dlg(key, settings);
       setVal!bool(_returnValue, _retval);
     }
@@ -1457,8 +1456,8 @@ class Settings : ObjectG
    *   key = the key
    *   settings = the instance the signal is connected to
    */
-  alias WritableChangedCallbackDlg = void delegate(string key, Settings settings);
-  alias WritableChangedCallbackFunc = void function(string key, Settings settings);
+  alias WritableChangedCallbackDlg = void delegate(string key, gio.settings.Settings settings);
+  alias WritableChangedCallbackFunc = void function(string key, gio.settings.Settings settings);
 
   /**
    * Connect to WritableChanged signal.
@@ -1475,8 +1474,8 @@ class Settings : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto settings = getVal!Settings(_paramVals);
-      auto key = getVal!string(&_paramVals[1]);
+      auto settings = getVal!(gio.settings.Settings)(_paramVals);
+      auto key = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(key, settings);
     }
 

@@ -1,6 +1,6 @@
 module pango.analysis;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import pango.c.functions;
 import pango.c.types;
@@ -32,9 +32,9 @@ class Analysis
     return cast(void*)&cInstance;
   }
 
-  @property Font font()
+  @property pango.font.Font font()
   {
-    return ObjectG.getDObject!Font((cast(PangoAnalysis*)cPtr).font, No.Take);
+    return ObjectG.getDObject!(pango.font.Font)((cast(PangoAnalysis*)cPtr).font, No.Take);
   }
 
   @property ubyte level()
@@ -77,8 +77,8 @@ class Analysis
     (cast(PangoAnalysis*)cPtr).script = propval;
   }
 
-  @property PgLanguage language()
+  @property pango.language.PgLanguage language()
   {
-    return new PgLanguage(cast(PangoLanguage*)(cast(PangoAnalysis*)cPtr).language);
+    return new pango.language.PgLanguage(cast(PangoLanguage*)(cast(PangoAnalysis*)cPtr).language);
   }
 }

@@ -1,6 +1,6 @@
 module gtk.label;
 
-import gid.global;
+import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
 import gobject.object;
@@ -20,7 +20,6 @@ import pango.attr_list;
 import pango.layout;
 import pango.tab_array;
 import pango.types;
-import pango.types : WrapMode = WrapMode;
 
 /**
  * The `GtkLabel` widget displays a small amount of text.
@@ -164,7 +163,7 @@ import pango.types : WrapMode = WrapMode;
  * with the signal@Gtk.Label::activate-link signal and the
  * [gtk.label.Label.getCurrentUri] function.
  */
-class Label : Widget, AccessibleText
+class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -218,12 +217,12 @@ class Label : Widget, AccessibleText
    *     mnemonic character
    * Returns: the new `GtkLabel`
    */
-  static Label newWithMnemonic(string str)
+  static gtk.label.Label newWithMnemonic(string str)
   {
     GtkWidget* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
     _cretval = gtk_label_new_with_mnemonic(_str);
-    auto _retval = ObjectG.getDObject!Label(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.label.Label)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -237,11 +236,11 @@ class Label : Widget, AccessibleText
    * `pango_layout_get_attributes $(LPAREN)gtk_label_get_layout $(LPAREN)self$(RPAREN)$(RPAREN)`.
    * Returns: the attribute list
    */
-  AttrList getAttributes()
+  pango.attr_list.AttrList getAttributes()
   {
     PangoAttrList* _cretval;
     _cretval = gtk_label_get_attributes(cast(GtkLabel*)cPtr);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -258,7 +257,7 @@ class Label : Widget, AccessibleText
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_current_uri(cast(GtkLabel*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -267,11 +266,11 @@ class Label : Widget, AccessibleText
    * See [gtk.label.Label.setEllipsize].
    * Returns: `PangoEllipsizeMode`
    */
-  EllipsizeMode getEllipsize()
+  pango.types.EllipsizeMode getEllipsize()
   {
     PangoEllipsizeMode _cretval;
     _cretval = gtk_label_get_ellipsize(cast(GtkLabel*)cPtr);
-    EllipsizeMode _retval = cast(EllipsizeMode)_cretval;
+    pango.types.EllipsizeMode _retval = cast(pango.types.EllipsizeMode)_cretval;
     return _retval;
   }
 
@@ -280,11 +279,11 @@ class Label : Widget, AccessibleText
    * See [gtk.label.Label.setExtraMenu].
    * Returns: the menu model
    */
-  MenuModel getExtraMenu()
+  gio.menu_model.MenuModel getExtraMenu()
   {
     GMenuModel* _cretval;
     _cretval = gtk_label_get_extra_menu(cast(GtkLabel*)cPtr);
-    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -293,11 +292,11 @@ class Label : Widget, AccessibleText
    * See [gtk.label.Label.setJustify].
    * Returns: `GtkJustification`
    */
-  Justification getJustify()
+  gtk.types.Justification getJustify()
   {
     GtkJustification _cretval;
     _cretval = gtk_label_get_justify(cast(GtkLabel*)cPtr);
-    Justification _retval = cast(Justification)_cretval;
+    gtk.types.Justification _retval = cast(gtk.types.Justification)_cretval;
     return _retval;
   }
 
@@ -312,7 +311,7 @@ class Label : Widget, AccessibleText
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_label(cast(GtkLabel*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -325,11 +324,11 @@ class Label : Widget, AccessibleText
    * at any time, so it should be considered read-only.
    * Returns: the [pango.layout.Layout] for this label
    */
-  Layout getLayout()
+  pango.layout.Layout getLayout()
   {
     PangoLayout* _cretval;
     _cretval = gtk_label_get_layout(cast(GtkLabel*)cPtr);
-    auto _retval = ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -339,7 +338,7 @@ class Label : Widget, AccessibleText
    * inside the [pango.layout.Layout], e.g. to take some action if some part
    * of the label is clicked. Remember when using the [pango.layout.Layout]
    * functions you need to convert to and from pixels using PANGO_PIXELS$(LPAREN)$(RPAREN)
-   * or [pango.int].
+   * or [pango.types.int].
    * Params:
    *   x = location to store X offset of layout
    *   y = location to store Y offset of layout
@@ -395,11 +394,11 @@ class Label : Widget, AccessibleText
    * Returns: the target of the label’s mnemonic,
    *   or %NULL if none has been set and the default algorithm will be used.
    */
-  Widget getMnemonicWidget()
+  gtk.widget.Widget getMnemonicWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_label_get_mnemonic_widget(cast(GtkLabel*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -408,11 +407,11 @@ class Label : Widget, AccessibleText
    * See [gtk.label.Label.setNaturalWrapMode].
    * Returns: the natural line wrap mode
    */
-  NaturalWrapMode getNaturalWrapMode()
+  gtk.types.NaturalWrapMode getNaturalWrapMode()
   {
     GtkNaturalWrapMode _cretval;
     _cretval = gtk_label_get_natural_wrap_mode(cast(GtkLabel*)cPtr);
-    NaturalWrapMode _retval = cast(NaturalWrapMode)_cretval;
+    gtk.types.NaturalWrapMode _retval = cast(gtk.types.NaturalWrapMode)_cretval;
     return _retval;
   }
 
@@ -460,11 +459,11 @@ class Label : Widget, AccessibleText
    *   or %NULL if standard tabs are used; must be freed with
    *   [pango.tab_array.TabArray.free].
    */
-  TabArray getTabs()
+  pango.tab_array.TabArray getTabs()
   {
     PangoTabArray* _cretval;
     _cretval = gtk_label_get_tabs(cast(GtkLabel*)cPtr);
-    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -480,7 +479,7 @@ class Label : Widget, AccessibleText
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_text(cast(GtkLabel*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -538,11 +537,11 @@ class Label : Widget, AccessibleText
    * See [gtk.label.Label.setWrapMode].
    * Returns: the line wrap mode
    */
-  WrapMode getWrapMode()
+  pango.types.WrapMode getWrapMode()
   {
     PangoWrapMode _cretval;
     _cretval = gtk_label_get_wrap_mode(cast(GtkLabel*)cPtr);
-    WrapMode _retval = cast(WrapMode)_cretval;
+    pango.types.WrapMode _retval = cast(pango.types.WrapMode)_cretval;
     return _retval;
   }
 
@@ -595,7 +594,7 @@ class Label : Widget, AccessibleText
    * Params:
    *   attrs = a [pango.attr_list.AttrList]
    */
-  void setAttributes(AttrList attrs)
+  void setAttributes(pango.attr_list.AttrList attrs)
   {
     gtk_label_set_attributes(cast(GtkLabel*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
@@ -607,7 +606,7 @@ class Label : Widget, AccessibleText
    * Params:
    *   mode = a `PangoEllipsizeMode`
    */
-  void setEllipsize(EllipsizeMode mode)
+  void setEllipsize(pango.types.EllipsizeMode mode)
   {
     gtk_label_set_ellipsize(cast(GtkLabel*)cPtr, mode);
   }
@@ -618,7 +617,7 @@ class Label : Widget, AccessibleText
    * Params:
    *   model = a `GMenuModel`
    */
-  void setExtraMenu(MenuModel model)
+  void setExtraMenu(gio.menu_model.MenuModel model)
   {
     gtk_label_set_extra_menu(cast(GtkLabel*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
@@ -634,7 +633,7 @@ class Label : Widget, AccessibleText
    * Params:
    *   jtype = a `GtkJustification`
    */
-  void setJustify(Justification jtype)
+  void setJustify(gtk.types.Justification jtype)
   {
     gtk_label_set_justify(cast(GtkLabel*)cPtr, jtype);
   }
@@ -742,7 +741,7 @@ class Label : Widget, AccessibleText
    * Params:
    *   widget = the target `GtkWidget`, or %NULL to unset
    */
-  void setMnemonicWidget(Widget widget)
+  void setMnemonicWidget(gtk.widget.Widget widget)
   {
     gtk_label_set_mnemonic_widget(cast(GtkLabel*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -754,7 +753,7 @@ class Label : Widget, AccessibleText
    * Params:
    *   wrapMode = the line wrapping mode
    */
-  void setNaturalWrapMode(NaturalWrapMode wrapMode)
+  void setNaturalWrapMode(gtk.types.NaturalWrapMode wrapMode)
   {
     gtk_label_set_natural_wrap_mode(cast(GtkLabel*)cPtr, wrapMode);
   }
@@ -786,7 +785,7 @@ class Label : Widget, AccessibleText
    * Params:
    *   tabs = tabs as a `PangoTabArray`
    */
-  void setTabs(TabArray tabs)
+  void setTabs(pango.tab_array.TabArray tabs)
   {
     gtk_label_set_tabs(cast(GtkLabel*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }
@@ -883,7 +882,7 @@ class Label : Widget, AccessibleText
    * Params:
    *   wrapMode = the line wrapping mode
    */
-  void setWrapMode(WrapMode wrapMode)
+  void setWrapMode(pango.types.WrapMode wrapMode)
   {
     gtk_label_set_wrap_mode(cast(GtkLabel*)cPtr, wrapMode);
   }
@@ -918,8 +917,8 @@ class Label : Widget, AccessibleText
    * The default bindings for this signal are all forms of the <kbd>Enter</kbd> key.
    *   label = the instance the signal is connected to
    */
-  alias ActivateCurrentLinkCallbackDlg = void delegate(Label label);
-  alias ActivateCurrentLinkCallbackFunc = void function(Label label);
+  alias ActivateCurrentLinkCallbackDlg = void delegate(gtk.label.Label label);
+  alias ActivateCurrentLinkCallbackFunc = void function(gtk.label.Label label);
 
   /**
    * Connect to ActivateCurrentLink signal.
@@ -935,7 +934,7 @@ class Label : Widget, AccessibleText
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto label = getVal!Label(_paramVals);
+      auto label = getVal!(gtk.label.Label)(_paramVals);
       _dClosure.dlg(label);
     }
 
@@ -952,8 +951,8 @@ class Label : Widget, AccessibleText
    *   label = the instance the signal is connected to
    * Returns: %TRUE if the link has been activated
    */
-  alias ActivateLinkCallbackDlg = bool delegate(string uri, Label label);
-  alias ActivateLinkCallbackFunc = bool function(string uri, Label label);
+  alias ActivateLinkCallbackDlg = bool delegate(string uri, gtk.label.Label label);
+  alias ActivateLinkCallbackFunc = bool function(string uri, gtk.label.Label label);
 
   /**
    * Connect to ActivateLink signal.
@@ -970,8 +969,8 @@ class Label : Widget, AccessibleText
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto label = getVal!Label(_paramVals);
-      auto uri = getVal!string(&_paramVals[1]);
+      auto label = getVal!(gtk.label.Label)(_paramVals);
+      auto uri = getVal!(string)(&_paramVals[1]);
       _retval = _dClosure.dlg(uri, label);
       setVal!bool(_returnValue, _retval);
     }
@@ -986,8 +985,8 @@ class Label : Widget, AccessibleText
    * The default binding for this signal is <kbd>Ctrl</kbd>+<kbd>c</kbd>.
    *   label = the instance the signal is connected to
    */
-  alias CopyClipboardCallbackDlg = void delegate(Label label);
-  alias CopyClipboardCallbackFunc = void function(Label label);
+  alias CopyClipboardCallbackDlg = void delegate(gtk.label.Label label);
+  alias CopyClipboardCallbackFunc = void function(gtk.label.Label label);
 
   /**
    * Connect to CopyClipboard signal.
@@ -1003,7 +1002,7 @@ class Label : Widget, AccessibleText
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto label = getVal!Label(_paramVals);
+      auto label = getVal!(gtk.label.Label)(_paramVals);
       _dClosure.dlg(label);
     }
 
@@ -1033,8 +1032,8 @@ class Label : Widget, AccessibleText
    *   extendSelection = %TRUE if the move should extend the selection
    *   label = the instance the signal is connected to
    */
-  alias MoveCursorCallbackDlg = void delegate(MovementStep step, int count, bool extendSelection, Label label);
-  alias MoveCursorCallbackFunc = void function(MovementStep step, int count, bool extendSelection, Label label);
+  alias MoveCursorCallbackDlg = void delegate(gtk.types.MovementStep step, int count, bool extendSelection, gtk.label.Label label);
+  alias MoveCursorCallbackFunc = void function(gtk.types.MovementStep step, int count, bool extendSelection, gtk.label.Label label);
 
   /**
    * Connect to MoveCursor signal.
@@ -1050,10 +1049,10 @@ class Label : Widget, AccessibleText
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto label = getVal!Label(_paramVals);
-      auto step = getVal!MovementStep(&_paramVals[1]);
-      auto count = getVal!int(&_paramVals[2]);
-      auto extendSelection = getVal!bool(&_paramVals[3]);
+      auto label = getVal!(gtk.label.Label)(_paramVals);
+      auto step = getVal!(gtk.types.MovementStep)(&_paramVals[1]);
+      auto count = getVal!(int)(&_paramVals[2]);
+      auto extendSelection = getVal!(bool)(&_paramVals[3]);
       _dClosure.dlg(step, count, extendSelection, label);
     }
 

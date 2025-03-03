@@ -1,6 +1,6 @@
 module gtk.cell_renderer_pixbuf;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_renderer;
@@ -23,7 +23,7 @@ import gtk.types;
  * Deprecated: List views use widgets to display their contents. You
  *   should use [gtk.image.Image] for icons, and [gtk.picture.Picture] for images
  */
-class CellRendererPixbuf : CellRenderer
+class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

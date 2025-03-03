@@ -1,10 +1,9 @@
 module gio.application_command_line;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.file;
-import gio.file_mixin;
 import gio.input_stream;
 import gio.types;
 import glib.variant;
@@ -145,7 +144,7 @@ import gobject.object;
  * The complete example can be found here:
  * [gapplication-example-cmdline3.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline3.c)
  */
-class ApplicationCommandLine : ObjectG
+class ApplicationCommandLine : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -174,12 +173,12 @@ class ApplicationCommandLine : ObjectG
    *   arg = an argument from cmdline
    * Returns: a new #GFile
    */
-  File createFileForArg(string arg)
+  gio.file.File createFileForArg(string arg)
   {
     GFile* _cretval;
     const(char)* _arg = arg.toCString(No.Alloc);
     _cretval = g_application_command_line_create_file_for_arg(cast(GApplicationCommandLine*)cPtr, _arg);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -240,7 +239,7 @@ class ApplicationCommandLine : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_application_command_line_get_cwd(cast(GApplicationCommandLine*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -312,11 +311,11 @@ class ApplicationCommandLine : ObjectG
    * all values must be checked before being used.
    * Returns: a #GVariantDict with the options
    */
-  VariantDict getOptionsDict()
+  glib.variant_dict.VariantDict getOptionsDict()
   {
     GVariantDict* _cretval;
     _cretval = g_application_command_line_get_options_dict(cast(GApplicationCommandLine*)cPtr);
-    auto _retval = _cretval ? new VariantDict(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant_dict.VariantDict(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -331,11 +330,11 @@ class ApplicationCommandLine : ObjectG
    * For local invocation, it will be %NULL.
    * Returns: the platform data, or %NULL
    */
-  VariantG getPlatformData()
+  glib.variant.VariantG getPlatformData()
   {
     VariantC* _cretval;
     _cretval = g_application_command_line_get_platform_data(cast(GApplicationCommandLine*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -350,11 +349,11 @@ class ApplicationCommandLine : ObjectG
    * You must only call this function once per commandline invocation.
    * Returns: a #GInputStream for stdin
    */
-  InputStream getStdin()
+  gio.input_stream.InputStream getStdin()
   {
     GInputStream* _cretval;
     _cretval = g_application_command_line_get_stdin(cast(GApplicationCommandLine*)cPtr);
-    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -377,7 +376,7 @@ class ApplicationCommandLine : ObjectG
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_application_command_line_getenv(cast(GApplicationCommandLine*)cPtr, _name);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

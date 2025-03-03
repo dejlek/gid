@@ -5,10 +5,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class BaseListScalar : Scalar
+class BaseListScalar : arrow.scalar.Scalar
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,11 +27,11 @@ class BaseListScalar : Scalar
     return getType();
   }
 
-  Array getValue()
+  arrow.array.Array getValue()
   {
     GArrowArray* _cretval;
     _cretval = garrow_base_list_scalar_get_value(cast(GArrowBaseListScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!Array(cast(GArrowArray*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, No.Take);
     return _retval;
   }
 }

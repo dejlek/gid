@@ -1,7 +1,7 @@
 module gtk.shortcut_manager;
 
 public import gtk.shortcut_manager_iface_proxy;
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;

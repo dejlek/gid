@@ -1,6 +1,6 @@
 module gtk.text_child_anchor;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -12,7 +12,7 @@ import gtk.widget;
  * be “anchored”.
  * The anchor can have multiple widgets anchored, to allow for multiple views.
  */
-class TextChildAnchor : ObjectG
+class TextChildAnchor : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,12 +54,12 @@ class TextChildAnchor : ObjectG
    *   character =
    * Returns: a new `GtkTextChildAnchor`
    */
-  static TextChildAnchor newWithReplacement(string character)
+  static gtk.text_child_anchor.TextChildAnchor newWithReplacement(string character)
   {
     GtkTextChildAnchor* _cretval;
     const(char)* _character = character.toCString(No.Alloc);
     _cretval = gtk_text_child_anchor_new_with_replacement(_character);
-    auto _retval = ObjectG.getDObject!TextChildAnchor(cast(GtkTextChildAnchor*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -86,18 +86,18 @@ class TextChildAnchor : ObjectG
    * Returns: an
    *   array of widgets anchored at anchor
    */
-  Widget[] getWidgets()
+  gtk.widget.Widget[] getWidgets()
   {
     GtkWidget** _cretval;
     uint _cretlength;
     _cretval = gtk_text_child_anchor_get_widgets(cast(GtkTextChildAnchor*)cPtr, &_cretlength);
-    Widget[] _retval;
+    gtk.widget.Widget[] _retval;
 
     if (_cretval)
     {
-      _retval = new Widget[_cretlength];
+      _retval = new gtk.widget.Widget[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = ObjectG.getDObject!Widget(_cretval[i], No.Take);
+        _retval[i] = ObjectG.getDObject!(gtk.widget.Widget)(_cretval[i], No.Take);
     }
     return _retval;
   }

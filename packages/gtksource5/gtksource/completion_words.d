@@ -1,6 +1,6 @@
 module gtksource.completion_words;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.text_buffer;
 import gtksource.c.functions;
@@ -15,7 +15,7 @@ import gtksource.types;
  * the iface@CompletionProvider interface. The proposals are words
  * appearing in the registered [gtk.text_buffer.TextBuffer]s.
  */
-class CompletionWords : ObjectG, CompletionProvider
+class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.CompletionProvider
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -49,7 +49,7 @@ class CompletionWords : ObjectG, CompletionProvider
    * Params:
    *   buffer = a #GtkTextBuffer
    */
-  void register(TextBuffer buffer)
+  void register(gtk.text_buffer.TextBuffer buffer)
   {
     gtk_source_completion_words_register(cast(GtkSourceCompletionWords*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
   }
@@ -59,7 +59,7 @@ class CompletionWords : ObjectG, CompletionProvider
    * Params:
    *   buffer = a #GtkTextBuffer
    */
-  void unregister(TextBuffer buffer)
+  void unregister(gtk.text_buffer.TextBuffer buffer)
   {
     gtk_source_completion_words_unregister(cast(GtkSourceCompletionWords*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
   }

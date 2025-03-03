@@ -2,7 +2,7 @@ module gtk.native;
 
 public import gtk.native_iface_proxy;
 import gdk.surface;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gsk.renderer;
 import gtk.c.functions;
@@ -37,11 +37,11 @@ interface Native
    *   surface = a `GdkSurface`
    * Returns: the `GtkNative` that is associated with surface
    */
-  static Native getForSurface(Surface surface)
+  static gtk.native.Native getForSurface(gdk.surface.Surface surface)
   {
     GtkNative* _cretval;
     _cretval = gtk_native_get_for_surface(surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Native(cast(GtkNative*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.native.Native)(cast(GtkNative*)_cretval, No.Take);
     return _retval;
   }
 
@@ -49,13 +49,13 @@ interface Native
    * Returns the renderer that is used for this `GtkNative`.
    * Returns: the renderer for self
    */
-  Renderer getRenderer();
+  gsk.renderer.Renderer getRenderer();
 
   /**
    * Returns the surface of this `GtkNative`.
    * Returns: the surface of self
    */
-  Surface getSurface();
+  gdk.surface.Surface getSurface();
 
   /**
    * Retrieves the surface transform of self.

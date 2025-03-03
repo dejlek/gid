@@ -1,8 +1,7 @@
 module gtk.app_chooser_button;
 
-import gid.global;
+import gid.gid;
 import gio.icon;
-import gio.icon_mixin;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -44,7 +43,7 @@ import gtk.widget;
  *   implemented according to the design of each platform and/or
  *   application requiring them.
  */
-class AppChooserButton : Widget, AppChooser
+class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -97,7 +96,7 @@ class AppChooserButton : Widget, AppChooser
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  void appendCustomItem(string name, string label, Icon icon)
+  void appendCustomItem(string name, string label, gio.icon.Icon icon)
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
@@ -126,7 +125,7 @@ class AppChooserButton : Widget, AppChooser
   {
     const(char)* _cretval;
     _cretval = gtk_app_chooser_button_get_heading(cast(GtkAppChooserButton*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -245,8 +244,8 @@ class AppChooserButton : Widget, AppChooser
    * emitting it causes the button to pop up its dialog.
    *   appChooserButton = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(AppChooserButton appChooserButton);
-  alias ActivateCallbackFunc = void function(AppChooserButton appChooserButton);
+  alias ActivateCallbackDlg = void delegate(gtk.app_chooser_button.AppChooserButton appChooserButton);
+  alias ActivateCallbackFunc = void function(gtk.app_chooser_button.AppChooserButton appChooserButton);
 
   /**
    * Connect to Activate signal.
@@ -262,7 +261,7 @@ class AppChooserButton : Widget, AppChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto appChooserButton = getVal!AppChooserButton(_paramVals);
+      auto appChooserButton = getVal!(gtk.app_chooser_button.AppChooserButton)(_paramVals);
       _dClosure.dlg(appChooserButton);
     }
 
@@ -274,8 +273,8 @@ class AppChooserButton : Widget, AppChooser
    * Emitted when the active application changes.
    *   appChooserButton = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(AppChooserButton appChooserButton);
-  alias ChangedCallbackFunc = void function(AppChooserButton appChooserButton);
+  alias ChangedCallbackDlg = void delegate(gtk.app_chooser_button.AppChooserButton appChooserButton);
+  alias ChangedCallbackFunc = void function(gtk.app_chooser_button.AppChooserButton appChooserButton);
 
   /**
    * Connect to Changed signal.
@@ -291,7 +290,7 @@ class AppChooserButton : Widget, AppChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto appChooserButton = getVal!AppChooserButton(_paramVals);
+      auto appChooserButton = getVal!(gtk.app_chooser_button.AppChooserButton)(_paramVals);
       _dClosure.dlg(appChooserButton);
     }
 
@@ -307,8 +306,8 @@ class AppChooserButton : Widget, AppChooser
    *   itemName = the name of the activated item
    *   appChooserButton = the instance the signal is connected to
    */
-  alias CustomItemActivatedCallbackDlg = void delegate(string itemName, AppChooserButton appChooserButton);
-  alias CustomItemActivatedCallbackFunc = void function(string itemName, AppChooserButton appChooserButton);
+  alias CustomItemActivatedCallbackDlg = void delegate(string itemName, gtk.app_chooser_button.AppChooserButton appChooserButton);
+  alias CustomItemActivatedCallbackFunc = void function(string itemName, gtk.app_chooser_button.AppChooserButton appChooserButton);
 
   /**
    * Connect to CustomItemActivated signal.
@@ -325,8 +324,8 @@ class AppChooserButton : Widget, AppChooser
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto appChooserButton = getVal!AppChooserButton(_paramVals);
-      auto itemName = getVal!string(&_paramVals[1]);
+      auto appChooserButton = getVal!(gtk.app_chooser_button.AppChooserButton)(_paramVals);
+      auto itemName = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(itemName, appChooserButton);
     }
 

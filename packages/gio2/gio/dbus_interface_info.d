@@ -1,6 +1,6 @@
 module gio.dbus_interface_info;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_method_info;
@@ -13,7 +13,7 @@ import gobject.boxed;
 /**
  * Information about a D-Bus interface.
  */
-class DBusInterfaceInfo : Boxed
+class DBusInterfaceInfo : gobject.boxed.Boxed
 {
 
   this()
@@ -98,7 +98,7 @@ class DBusInterfaceInfo : Boxed
    *   indent = Indentation level.
    *   stringBuilder = A #GString to to append XML data to.
    */
-  void generateXml(uint indent, String stringBuilder)
+  void generateXml(uint indent, glib.string_.String stringBuilder)
   {
     g_dbus_interface_info_generate_xml(cast(GDBusInterfaceInfo*)cPtr, indent, stringBuilder ? cast(GString*)stringBuilder.cPtr(No.Dup) : null);
   }
@@ -111,12 +111,12 @@ class DBusInterfaceInfo : Boxed
    *   name = A D-Bus method name $(LPAREN)typically in CamelCase$(RPAREN)
    * Returns: A #GDBusMethodInfo or %NULL if not found. Do not free, it is owned by info.
    */
-  DBusMethodInfo lookupMethod(string name)
+  gio.dbus_method_info.DBusMethodInfo lookupMethod(string name)
   {
     GDBusMethodInfo* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_dbus_interface_info_lookup_method(cast(GDBusInterfaceInfo*)cPtr, _name);
-    auto _retval = _cretval ? new DBusMethodInfo(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gio.dbus_method_info.DBusMethodInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -128,12 +128,12 @@ class DBusInterfaceInfo : Boxed
    *   name = A D-Bus property name $(LPAREN)typically in CamelCase$(RPAREN).
    * Returns: A #GDBusPropertyInfo or %NULL if not found. Do not free, it is owned by info.
    */
-  DBusPropertyInfo lookupProperty(string name)
+  gio.dbus_property_info.DBusPropertyInfo lookupProperty(string name)
   {
     GDBusPropertyInfo* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_dbus_interface_info_lookup_property(cast(GDBusInterfaceInfo*)cPtr, _name);
-    auto _retval = _cretval ? new DBusPropertyInfo(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gio.dbus_property_info.DBusPropertyInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -145,12 +145,12 @@ class DBusInterfaceInfo : Boxed
    *   name = A D-Bus signal name $(LPAREN)typically in CamelCase$(RPAREN)
    * Returns: A #GDBusSignalInfo or %NULL if not found. Do not free, it is owned by info.
    */
-  DBusSignalInfo lookupSignal(string name)
+  gio.dbus_signal_info.DBusSignalInfo lookupSignal(string name)
   {
     GDBusSignalInfo* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_dbus_interface_info_lookup_signal(cast(GDBusInterfaceInfo*)cPtr, _name);
-    auto _retval = _cretval ? new DBusSignalInfo(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gio.dbus_signal_info.DBusSignalInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

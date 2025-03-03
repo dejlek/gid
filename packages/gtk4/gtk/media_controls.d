@@ -1,6 +1,6 @@
 module gtk.media_controls;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -19,7 +19,7 @@ import gtk.widget;
  * ![An example GtkMediaControls](media-controls.png)
  * Usually, `GtkMediaControls` is used as part of [gtk.video.Video].
  */
-class MediaControls : Widget
+class MediaControls : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -44,7 +44,7 @@ class MediaControls : Widget
    *   stream = a `GtkMediaStream` to manage
    * Returns: a new `GtkMediaControls`
    */
-  this(MediaStream stream)
+  this(gtk.media_stream.MediaStream stream)
   {
     GtkWidget* _cretval;
     _cretval = gtk_media_controls_new(stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);
@@ -55,11 +55,11 @@ class MediaControls : Widget
    * Gets the media stream managed by controls or %NULL if none.
    * Returns: The media stream managed by controls
    */
-  MediaStream getMediaStream()
+  gtk.media_stream.MediaStream getMediaStream()
   {
     GtkMediaStream* _cretval;
     _cretval = gtk_media_controls_get_media_stream(cast(GtkMediaControls*)cPtr);
-    auto _retval = ObjectG.getDObject!MediaStream(cast(GtkMediaStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.media_stream.MediaStream)(cast(GtkMediaStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -68,7 +68,7 @@ class MediaControls : Widget
    * Params:
    *   stream = a `GtkMediaStream`
    */
-  void setMediaStream(MediaStream stream)
+  void setMediaStream(gtk.media_stream.MediaStream stream)
   {
     gtk_media_controls_set_media_stream(cast(GtkMediaControls*)cPtr, stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);
   }

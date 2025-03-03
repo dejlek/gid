@@ -5,7 +5,7 @@ public import atk.c.functions;
 public import atk.c.types;
 public import atk.range;
 public import atk.types;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gobject.value;
 
@@ -153,11 +153,11 @@ template ValueAtkT()
    * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getValueAndText]
    *   instead.
    */
-  override void getCurrentValue(out Value value)
+  override void getCurrentValue(out gobject.value.Value value)
   {
     GValue _value;
     atk_value_get_current_value(cast(AtkValue*)cPtr, &_value);
-    value = new Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)&_value, No.Take);
   }
 
   /**
@@ -182,11 +182,11 @@ template ValueAtkT()
 
    * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getRange] instead.
    */
-  override void getMaximumValue(out Value value)
+  override void getMaximumValue(out gobject.value.Value value)
   {
     GValue _value;
     atk_value_get_maximum_value(cast(AtkValue*)cPtr, &_value);
-    value = new Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)&_value, No.Take);
   }
 
   /**
@@ -198,11 +198,11 @@ template ValueAtkT()
 
    * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getIncrement] instead.
    */
-  override void getMinimumIncrement(out Value value)
+  override void getMinimumIncrement(out gobject.value.Value value)
   {
     GValue _value;
     atk_value_get_minimum_increment(cast(AtkValue*)cPtr, &_value);
-    value = new Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)&_value, No.Take);
   }
 
   /**
@@ -212,11 +212,11 @@ template ValueAtkT()
 
    * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getRange] instead.
    */
-  override void getMinimumValue(out Value value)
+  override void getMinimumValue(out gobject.value.Value value)
   {
     GValue _value;
     atk_value_get_minimum_value(cast(AtkValue*)cPtr, &_value);
-    value = new Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)&_value, No.Take);
   }
 
   /**
@@ -225,11 +225,11 @@ template ValueAtkT()
    *   that represents the minimum, maximum and descriptor $(LPAREN)if available$(RPAREN)
    *   of obj. NULL if that range is not defined.
    */
-  override Range getRange()
+  override atk.range.Range getRange()
   {
     AtkRange* _cretval;
     _cretval = atk_value_get_range(cast(AtkValue*)cPtr);
-    auto _retval = _cretval ? new Range(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new atk.range.Range(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -240,11 +240,11 @@ template ValueAtkT()
    *   #AtkRange which each of the subranges defined for this object. Free
    *   the returns list with [glib.slist.SList.free].
    */
-  override Range[] getSubRanges()
+  override atk.range.Range[] getSubRanges()
   {
     GSList* _cretval;
     _cretval = atk_value_get_sub_ranges(cast(AtkValue*)cPtr);
-    auto _retval = gSListToD!(Range, GidOwnership.Full)(cast(GSList*)_cretval);
+    auto _retval = gSListToD!(atk.range.Range, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
 
@@ -272,10 +272,10 @@ template ValueAtkT()
 
    * Deprecated: Since 2.12. Use [atk.value.ValueAtk.setValue] instead.
    */
-  override bool setCurrentValue(Value value)
+  override bool setCurrentValue(gobject.value.Value value)
   {
     bool _retval;
-    _retval = atk_value_set_current_value(cast(AtkValue*)cPtr, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    _retval = atk_value_set_current_value(cast(AtkValue*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -318,8 +318,8 @@ template ValueAtkT()
    *     description$(RPAREN) of this object. NULL if not available.
    *   valueAtk = the instance the signal is connected to
    */
-  alias ValueChangedCallbackDlg = void delegate(double value, string text, ValueAtk valueAtk);
-  alias ValueChangedCallbackFunc = void function(double value, string text, ValueAtk valueAtk);
+  alias ValueChangedCallbackDlg = void delegate(double value, string text, atk.value.ValueAtk valueAtk);
+  alias ValueChangedCallbackFunc = void function(double value, string text, atk.value.ValueAtk valueAtk);
 
   /**
    * Connect to ValueChanged signal.
@@ -335,9 +335,9 @@ template ValueAtkT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto valueAtk = getVal!ValueAtk(_paramVals);
-      auto value = getVal!double(&_paramVals[1]);
-      auto text = getVal!string(&_paramVals[2]);
+      auto valueAtk = getVal!(atk.value.ValueAtk)(_paramVals);
+      auto value = getVal!(double)(&_paramVals[1]);
+      auto text = getVal!(string)(&_paramVals[2]);
       _dClosure.dlg(value, text, valueAtk);
     }
 

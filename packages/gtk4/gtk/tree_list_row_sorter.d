@@ -1,6 +1,6 @@
 module gtk.tree_list_row_sorter;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -20,7 +20,7 @@ import gtk.types;
  * gtk_column_view_set_model $(LPAREN)view, G_LIST_MODEL $(LPAREN)selection$(RPAREN)$(RPAREN);
  * ```
  */
-class TreeListRowSorter : Sorter
+class TreeListRowSorter : gtk.sorter.Sorter
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -48,7 +48,7 @@ class TreeListRowSorter : Sorter
    *   sorter = a `GtkSorter`
    * Returns: a new `GtkTreeListRowSorter`
    */
-  this(Sorter sorter)
+  this(gtk.sorter.Sorter sorter)
   {
     GtkTreeListRowSorter* _cretval;
     _cretval = gtk_tree_list_row_sorter_new(sorter ? cast(GtkSorter*)sorter.cPtr(Yes.Dup) : null);
@@ -59,11 +59,11 @@ class TreeListRowSorter : Sorter
    * Returns the sorter used by self.
    * Returns: the sorter used
    */
-  Sorter getSorter()
+  gtk.sorter.Sorter getSorter()
   {
     GtkSorter* _cretval;
     _cretval = gtk_tree_list_row_sorter_get_sorter(cast(GtkTreeListRowSorter*)cPtr);
-    auto _retval = ObjectG.getDObject!Sorter(cast(GtkSorter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class TreeListRowSorter : Sorter
    * Params:
    *   sorter = The sorter to use
    */
-  void setSorter(Sorter sorter)
+  void setSorter(gtk.sorter.Sorter sorter)
   {
     gtk_tree_list_row_sorter_set_sorter(cast(GtkTreeListRowSorter*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.Dup) : null);
   }

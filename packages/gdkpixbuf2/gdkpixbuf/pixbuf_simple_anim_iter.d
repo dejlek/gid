@@ -4,9 +4,9 @@ import gdkpixbuf.c.functions;
 import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf_animation_iter;
 import gdkpixbuf.types;
-import gid.global;
+import gid.gid;
 
-class PixbufSimpleAnimIter : PixbufAnimationIter
+class PixbufSimpleAnimIter : gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

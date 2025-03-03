@@ -1,6 +1,6 @@
 module graphene.euler;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import graphene.c.functions;
 import graphene.c.types;
@@ -14,7 +14,7 @@ import graphene.vec3;
  * The contents of the #graphene_euler_t structure are private
  * and should never be accessed directly.
  */
-class Euler : Boxed
+class Euler : gobject.boxed.Boxed
 {
 
   this()
@@ -48,11 +48,11 @@ class Euler : Boxed
    * The contents of the returned structure are undefined.
    * Returns: the newly allocated #graphene_euler_t
    */
-  static Euler alloc()
+  static graphene.euler.Euler alloc()
   {
     graphene_euler_t* _cretval;
     _cretval = graphene_euler_alloc();
-    auto _retval = _cretval ? new Euler(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new graphene.euler.Euler(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -62,10 +62,10 @@ class Euler : Boxed
    *   b = a #graphene_euler_t
    * Returns: `true` if the two #graphene_euler_t are equal
    */
-  bool equal(Euler b)
+  bool equal(graphene.euler.Euler b)
   {
     bool _retval;
-    _retval = graphene_euler_equal(cast(graphene_euler_t*)cPtr, b ? cast(graphene_euler_t*)b.cPtr(No.Dup) : null);
+    _retval = graphene_euler_equal(cast(const(graphene_euler_t)*)cPtr, b ? cast(const(graphene_euler_t)*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -78,7 +78,7 @@ class Euler : Boxed
   float getAlpha()
   {
     float _retval;
-    _retval = graphene_euler_get_alpha(cast(graphene_euler_t*)cPtr);
+    _retval = graphene_euler_get_alpha(cast(const(graphene_euler_t)*)cPtr);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class Euler : Boxed
   float getBeta()
   {
     float _retval;
-    _retval = graphene_euler_get_beta(cast(graphene_euler_t*)cPtr);
+    _retval = graphene_euler_get_beta(cast(const(graphene_euler_t)*)cPtr);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class Euler : Boxed
   float getGamma()
   {
     float _retval;
-    _retval = graphene_euler_get_gamma(cast(graphene_euler_t*)cPtr);
+    _retval = graphene_euler_get_gamma(cast(const(graphene_euler_t)*)cPtr);
     return _retval;
   }
 
@@ -117,11 +117,11 @@ class Euler : Boxed
    * instead.
    * Returns: the order used to apply the rotations
    */
-  EulerOrder getOrder()
+  graphene.types.EulerOrder getOrder()
   {
     graphene_euler_order_t _cretval;
-    _cretval = graphene_euler_get_order(cast(graphene_euler_t*)cPtr);
-    EulerOrder _retval = cast(EulerOrder)_cretval;
+    _cretval = graphene_euler_get_order(cast(const(graphene_euler_t)*)cPtr);
+    graphene.types.EulerOrder _retval = cast(graphene.types.EulerOrder)_cretval;
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class Euler : Boxed
   float getX()
   {
     float _retval;
-    _retval = graphene_euler_get_x(cast(graphene_euler_t*)cPtr);
+    _retval = graphene_euler_get_x(cast(const(graphene_euler_t)*)cPtr);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class Euler : Boxed
   float getY()
   {
     float _retval;
-    _retval = graphene_euler_get_y(cast(graphene_euler_t*)cPtr);
+    _retval = graphene_euler_get_y(cast(const(graphene_euler_t)*)cPtr);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class Euler : Boxed
   float getZ()
   {
     float _retval;
-    _retval = graphene_euler_get_z(cast(graphene_euler_t*)cPtr);
+    _retval = graphene_euler_get_z(cast(const(graphene_euler_t)*)cPtr);
     return _retval;
   }
 
@@ -167,11 +167,11 @@ class Euler : Boxed
    *   z = rotation angle on the Z axis, in degrees
    * Returns: the initialized #graphene_euler_t
    */
-  Euler init_(float x, float y, float z)
+  graphene.euler.Euler init_(float x, float y, float z)
   {
     graphene_euler_t* _cretval;
     _cretval = graphene_euler_init(cast(graphene_euler_t*)cPtr, x, y, z);
-    auto _retval = _cretval ? new Euler(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.euler.Euler(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -184,11 +184,11 @@ class Euler : Boxed
    *   src = a #graphene_euler_t
    * Returns: the initialized #graphene_euler_t
    */
-  Euler initFromEuler(Euler src)
+  graphene.euler.Euler initFromEuler(graphene.euler.Euler src)
   {
     graphene_euler_t* _cretval;
-    _cretval = graphene_euler_init_from_euler(cast(graphene_euler_t*)cPtr, src ? cast(graphene_euler_t*)src.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new Euler(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_euler_init_from_euler(cast(graphene_euler_t*)cPtr, src ? cast(const(graphene_euler_t)*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new graphene.euler.Euler(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -201,11 +201,11 @@ class Euler : Boxed
    *   order = the order used to apply the rotations
    * Returns: the initialized #graphene_euler_t
    */
-  Euler initFromMatrix(Matrix m, EulerOrder order)
+  graphene.euler.Euler initFromMatrix(graphene.matrix.Matrix m, graphene.types.EulerOrder order)
   {
     graphene_euler_t* _cretval;
-    _cretval = graphene_euler_init_from_matrix(cast(graphene_euler_t*)cPtr, m ? cast(graphene_matrix_t*)m.cPtr(No.Dup) : null, order);
-    auto _retval = _cretval ? new Euler(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_euler_init_from_matrix(cast(graphene_euler_t*)cPtr, m ? cast(const(graphene_matrix_t)*)m.cPtr(No.Dup) : null, order);
+    auto _retval = _cretval ? new graphene.euler.Euler(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -218,11 +218,11 @@ class Euler : Boxed
    *   order = the order used to apply the rotations
    * Returns: the initialized #graphene_euler_t
    */
-  Euler initFromQuaternion(Quaternion q, EulerOrder order)
+  graphene.euler.Euler initFromQuaternion(graphene.quaternion.Quaternion q, graphene.types.EulerOrder order)
   {
     graphene_euler_t* _cretval;
-    _cretval = graphene_euler_init_from_quaternion(cast(graphene_euler_t*)cPtr, q ? cast(graphene_quaternion_t*)q.cPtr(No.Dup) : null, order);
-    auto _retval = _cretval ? new Euler(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_euler_init_from_quaternion(cast(graphene_euler_t*)cPtr, q ? cast(const(graphene_quaternion_t)*)q.cPtr(No.Dup) : null, order);
+    auto _retval = _cretval ? new graphene.euler.Euler(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -236,11 +236,11 @@ class Euler : Boxed
    *   order = order of rotations
    * Returns: the initialized #graphene_euler_t
    */
-  Euler initFromRadians(float x, float y, float z, EulerOrder order)
+  graphene.euler.Euler initFromRadians(float x, float y, float z, graphene.types.EulerOrder order)
   {
     graphene_euler_t* _cretval;
     _cretval = graphene_euler_init_from_radians(cast(graphene_euler_t*)cPtr, x, y, z, order);
-    auto _retval = _cretval ? new Euler(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.euler.Euler(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -255,11 +255,11 @@ class Euler : Boxed
    *   order = the order used to apply the rotations
    * Returns: the initialized #graphene_euler_t
    */
-  Euler initFromVec3(Vec3 v, EulerOrder order)
+  graphene.euler.Euler initFromVec3(graphene.vec3.Vec3 v, graphene.types.EulerOrder order)
   {
     graphene_euler_t* _cretval;
-    _cretval = graphene_euler_init_from_vec3(cast(graphene_euler_t*)cPtr, v ? cast(graphene_vec3_t*)v.cPtr(No.Dup) : null, order);
-    auto _retval = _cretval ? new Euler(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_euler_init_from_vec3(cast(graphene_euler_t*)cPtr, v ? cast(const(graphene_vec3_t)*)v.cPtr(No.Dup) : null, order);
+    auto _retval = _cretval ? new graphene.euler.Euler(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -272,11 +272,11 @@ class Euler : Boxed
    *   order = the order used to apply the rotations
    * Returns: the initialized #graphene_euler_t
    */
-  Euler initWithOrder(float x, float y, float z, EulerOrder order)
+  graphene.euler.Euler initWithOrder(float x, float y, float z, graphene.types.EulerOrder order)
   {
     graphene_euler_t* _cretval;
     _cretval = graphene_euler_init_with_order(cast(graphene_euler_t*)cPtr, x, y, z, order);
-    auto _retval = _cretval ? new Euler(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.euler.Euler(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -290,11 +290,11 @@ class Euler : Boxed
    *   res = return location for the reordered
    *     #graphene_euler_t
    */
-  void reorder(EulerOrder order, out Euler res)
+  void reorder(graphene.types.EulerOrder order, out graphene.euler.Euler res)
   {
     graphene_euler_t _res;
-    graphene_euler_reorder(cast(graphene_euler_t*)cPtr, order, &_res);
-    res = new Euler(cast(void*)&_res, No.Take);
+    graphene_euler_reorder(cast(const(graphene_euler_t)*)cPtr, order, &_res);
+    res = new graphene.euler.Euler(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -314,11 +314,11 @@ class Euler : Boxed
    * Params:
    *   res = return location for a #graphene_matrix_t
    */
-  void toMatrix(out Matrix res)
+  void toMatrix(out graphene.matrix.Matrix res)
   {
     graphene_matrix_t _res;
-    graphene_euler_to_matrix(cast(graphene_euler_t*)cPtr, &_res);
-    res = new Matrix(cast(void*)&_res, No.Take);
+    graphene_euler_to_matrix(cast(const(graphene_euler_t)*)cPtr, &_res);
+    res = new graphene.matrix.Matrix(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -326,11 +326,11 @@ class Euler : Boxed
    * Params:
    *   res = return location for a #graphene_quaternion_t
    */
-  void toQuaternion(out Quaternion res)
+  void toQuaternion(out graphene.quaternion.Quaternion res)
   {
     graphene_quaternion_t _res;
-    graphene_euler_to_quaternion(cast(graphene_euler_t*)cPtr, &_res);
-    res = new Quaternion(cast(void*)&_res, No.Take);
+    graphene_euler_to_quaternion(cast(const(graphene_euler_t)*)cPtr, &_res);
+    res = new graphene.quaternion.Quaternion(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -339,10 +339,10 @@ class Euler : Boxed
    * Params:
    *   res = return location for a #graphene_vec3_t
    */
-  void toVec3(out Vec3 res)
+  void toVec3(out graphene.vec3.Vec3 res)
   {
     graphene_vec3_t _res;
-    graphene_euler_to_vec3(cast(graphene_euler_t*)cPtr, &_res);
-    res = new Vec3(cast(void*)&_res, No.Take);
+    graphene_euler_to_vec3(cast(const(graphene_euler_t)*)cPtr, &_res);
+    res = new graphene.vec3.Vec3(cast(void*)&_res, No.Take);
   }
 }

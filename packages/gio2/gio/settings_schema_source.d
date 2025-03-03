@@ -1,6 +1,6 @@
 module gio.settings_schema_source;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.settings_schema;
@@ -11,7 +11,7 @@ import gobject.boxed;
 /**
  * This is an opaque structure type.  You may not access it directly.
  */
-class SettingsSchemaSource : Boxed
+class SettingsSchemaSource : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -65,7 +65,7 @@ class SettingsSchemaSource : Boxed
    *   trusted = %TRUE, if the directory is trusted
    * Returns:
    */
-  static SettingsSchemaSource newFromDirectory(string directory, SettingsSchemaSource parent, bool trusted)
+  static gio.settings_schema_source.SettingsSchemaSource newFromDirectory(string directory, gio.settings_schema_source.SettingsSchemaSource parent, bool trusted)
   {
     GSettingsSchemaSource* _cretval;
     const(char)* _directory = directory.toCString(No.Alloc);
@@ -73,7 +73,7 @@ class SettingsSchemaSource : Boxed
     _cretval = g_settings_schema_source_new_from_directory(_directory, parent ? cast(GSettingsSchemaSource*)parent.cPtr(No.Dup) : null, trusted, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new SettingsSchemaSource(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gio.settings_schema_source.SettingsSchemaSource(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -136,12 +136,12 @@ class SettingsSchemaSource : Boxed
    *   recursive = %TRUE if the lookup should be recursive
    * Returns: a new #GSettingsSchema
    */
-  SettingsSchema lookup(string schemaId, bool recursive)
+  gio.settings_schema.SettingsSchema lookup(string schemaId, bool recursive)
   {
     GSettingsSchema* _cretval;
     const(char)* _schemaId = schemaId.toCString(No.Alloc);
     _cretval = g_settings_schema_source_lookup(cast(GSettingsSchemaSource*)cPtr, _schemaId, recursive);
-    auto _retval = _cretval ? new SettingsSchema(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gio.settings_schema.SettingsSchema(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -158,11 +158,11 @@ class SettingsSchemaSource : Boxed
    * recursively.
    * Returns: the default schema source
    */
-  static SettingsSchemaSource getDefault()
+  static gio.settings_schema_source.SettingsSchemaSource getDefault()
   {
     GSettingsSchemaSource* _cretval;
     _cretval = g_settings_schema_source_get_default();
-    auto _retval = _cretval ? new SettingsSchemaSource(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gio.settings_schema_source.SettingsSchemaSource(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

@@ -28,7 +28,7 @@ import atk.value;
 import atk.value_mixin;
 import atk.window;
 import atk.window_mixin;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
@@ -38,7 +38,7 @@ import gobject.object;
  * accessible object is requested for an object type for which no
  * factory type is specified.
  */
-class NoOpObject : ObjectAtk, Action, Component, Document, EditableText, Hypertext, Image, Selection, Table, TableCell, Text, ValueAtk, Window
+class NoOpObject : atk.object.ObjectAtk, atk.action.Action, atk.component.Component, atk.document.Document, atk.editable_text.EditableText, atk.hypertext.Hypertext, atk.image.Image, atk.selection.Selection, atk.table.Table, atk.table_cell.TableCell, atk.text.Text, atk.value.ValueAtk, atk.window.Window
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -69,12 +69,9 @@ class NoOpObject : ObjectAtk, Action, Component, Document, EditableText, Hyperte
   mixin TextT!();
   mixin ValueAtkT!();
   mixin WindowT!();
-  alias getDescription = ObjectAtk.getDescription;
-
-  alias getName = ObjectAtk.getName;
-
-  alias setDescription = ObjectAtk.setDescription;
-
+  alias getDescription = atk.object.ObjectAtk.getDescription;
+  alias getName = atk.object.ObjectAtk.getName;
+  alias setDescription = atk.object.ObjectAtk.setDescription;
 
   /**
    * Provides a default $(LPAREN)non-functioning stub$(RPAREN) #AtkObject.
@@ -83,7 +80,7 @@ class NoOpObject : ObjectAtk, Action, Component, Document, EditableText, Hyperte
    *   obj = a #GObject
    * Returns: a default $(LPAREN)non-functioning stub$(RPAREN) #AtkObject
    */
-  this(ObjectG obj)
+  this(gobject.object.ObjectG obj)
   {
     AtkObject* _cretval;
     _cretval = atk_no_op_object_new(obj ? cast(ObjectC*)obj.cPtr(No.Dup) : null);

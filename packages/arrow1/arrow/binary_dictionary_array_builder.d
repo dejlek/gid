@@ -6,11 +6,11 @@ import arrow.binary_array;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.error;
 
-class BinaryDictionaryArrayBuilder : ArrayBuilder
+class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -36,7 +36,7 @@ class BinaryDictionaryArrayBuilder : ArrayBuilder
     this(_cretval, Yes.Take);
   }
 
-  bool appendArray(BinaryArray array)
+  bool appendArray(arrow.binary_array.BinaryArray array)
   {
     bool _retval;
     GError *_err;
@@ -91,7 +91,7 @@ class BinaryDictionaryArrayBuilder : ArrayBuilder
     return _retval;
   }
 
-  bool appendValueBytes(Bytes value)
+  bool appendValueBytes(glib.bytes.Bytes value)
   {
     bool _retval;
     GError *_err;
@@ -101,7 +101,7 @@ class BinaryDictionaryArrayBuilder : ArrayBuilder
     return _retval;
   }
 
-  bool finishDelta(out Array outIndices, out Array outDelta)
+  bool finishDelta(out arrow.array.Array outIndices, out arrow.array.Array outDelta)
   {
     bool _retval;
     GArrowArray* _outIndices;
@@ -110,8 +110,8 @@ class BinaryDictionaryArrayBuilder : ArrayBuilder
     _retval = garrow_binary_dictionary_array_builder_finish_delta(cast(GArrowBinaryDictionaryArrayBuilder*)cPtr, &_outIndices, &_outDelta, &_err);
     if (_err)
       throw new ErrorG(_err);
-    outIndices = new Array(cast(void*)_outIndices, Yes.Take);
-    outDelta = new Array(cast(void*)_outDelta, Yes.Take);
+    outIndices = new arrow.array.Array(cast(void*)_outIndices, Yes.Take);
+    outDelta = new arrow.array.Array(cast(void*)_outDelta, Yes.Take);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class BinaryDictionaryArrayBuilder : ArrayBuilder
     return _retval;
   }
 
-  bool insertMemoValues(BinaryArray values)
+  bool insertMemoValues(arrow.binary_array.BinaryArray values)
   {
     bool _retval;
     GError *_err;

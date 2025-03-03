@@ -1,6 +1,6 @@
 module gtksource.gutter;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -31,7 +31,7 @@ import gtksource.view;
  * in ascending order, from left to right. So the marks are displayed on the
  * right of the line numbers.
  */
-class Gutter : Widget
+class Gutter : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -50,11 +50,11 @@ class Gutter : Widget
     return getType();
   }
 
-  View getView()
+  gtksource.view.View getView()
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_gutter_get_view(cast(GtkSourceGutter*)cPtr);
-    auto _retval = ObjectG.getDObject!View(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -67,14 +67,14 @@ class Gutter : Widget
    *   position = the renderer position.
    * Returns: %TRUE if operation succeeded. Otherwise %FALSE.
    */
-  bool insert(GutterRenderer renderer, int position)
+  bool insert(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {
     bool _retval;
     _retval = gtk_source_gutter_insert(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.Dup) : null, position);
     return _retval;
   }
 
-  void remove(GutterRenderer renderer)
+  void remove(gtksource.gutter_renderer.GutterRenderer renderer)
   {
     gtk_source_gutter_remove(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.Dup) : null);
   }
@@ -85,7 +85,7 @@ class Gutter : Widget
    *   renderer = a #GtkCellRenderer.
    *   position = the new renderer position.
    */
-  void reorder(GutterRenderer renderer, int position)
+  void reorder(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {
     gtk_source_gutter_reorder(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.Dup) : null, position);
   }

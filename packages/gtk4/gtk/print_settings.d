@@ -1,6 +1,6 @@
 module gtk.print_settings;
 
-import gid.global;
+import gid.gid;
 import glib.error;
 import glib.key_file;
 import glib.variant;
@@ -22,7 +22,7 @@ import gtk.types;
  * document. The predefined keys try to use shared values as much as possible
  * so that moving such a document between systems still works.
  */
-class PrintSettings : ObjectG
+class PrintSettings : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -62,7 +62,7 @@ class PrintSettings : ObjectG
    *   fileName = the filename to read the settings from
    * Returns: the restored `GtkPrintSettings`
    */
-  static PrintSettings newFromFile(string fileName)
+  static gtk.print_settings.PrintSettings newFromFile(string fileName)
   {
     GtkPrintSettings* _cretval;
     const(char)* _fileName = fileName.toCString(No.Alloc);
@@ -70,7 +70,7 @@ class PrintSettings : ObjectG
     _cretval = gtk_print_settings_new_from_file(_fileName, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -82,11 +82,11 @@ class PrintSettings : ObjectG
    *   variant = an a{sv} `GVariant`
    * Returns: a new `GtkPrintSettings` object
    */
-  static PrintSettings newFromGvariant(VariantG variant)
+  static gtk.print_settings.PrintSettings newFromGvariant(glib.variant.VariantG variant)
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_settings_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class PrintSettings : ObjectG
    *     the default “Print Settings”
    * Returns: the restored `GtkPrintSettings`
    */
-  static PrintSettings newFromKeyFile(KeyFile keyFile, string groupName)
+  static gtk.print_settings.PrintSettings newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName)
   {
     GtkPrintSettings* _cretval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
@@ -109,7 +109,7 @@ class PrintSettings : ObjectG
     _cretval = gtk_print_settings_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -117,11 +117,11 @@ class PrintSettings : ObjectG
    * Copies a `GtkPrintSettings` object.
    * Returns: a newly allocated copy of other
    */
-  PrintSettings copy()
+  gtk.print_settings.PrintSettings copy()
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_settings_copy(cast(GtkPrintSettings*)cPtr);
-    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -130,11 +130,11 @@ class PrintSettings : ObjectG
    * Params:
    *   func = the function to call
    */
-  void foreach_(PrintSettingsFunc func)
+  void foreach_(gtk.types.PrintSettingsFunc func)
   {
     extern(C) void _funcCallback(const(char)* key, const(char)* value, void* userData)
     {
-      auto _dlg = cast(PrintSettingsFunc*)userData;
+      auto _dlg = cast(gtk.types.PrintSettingsFunc*)userData;
       string _key = key.fromCString(No.Free);
       string _value = value.fromCString(No.Free);
 
@@ -157,7 +157,7 @@ class PrintSettings : ObjectG
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = gtk_print_settings_get(cast(GtkPrintSettings*)cPtr, _key);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class PrintSettings : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_default_source(cast(GtkPrintSettings*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class PrintSettings : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_dither(cast(GtkPrintSettings*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -249,11 +249,11 @@ class PrintSettings : ObjectG
    * Gets the value of %GTK_PRINT_SETTINGS_DUPLEX.
    * Returns: whether to print the output in duplex.
    */
-  PrintDuplex getDuplex()
+  gtk.types.PrintDuplex getDuplex()
   {
     GtkPrintDuplex _cretval;
     _cretval = gtk_print_settings_get_duplex(cast(GtkPrintSettings*)cPtr);
-    PrintDuplex _retval = cast(PrintDuplex)_cretval;
+    gtk.types.PrintDuplex _retval = cast(gtk.types.PrintDuplex)_cretval;
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class PrintSettings : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_finishings(cast(GtkPrintSettings*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -308,7 +308,7 @@ class PrintSettings : ObjectG
    *   unit = the unit of the return value
    * Returns: the length value of key, converted to unit
    */
-  double getLength(string key, Unit unit)
+  double getLength(string key, gtk.types.Unit unit)
   {
     double _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -325,7 +325,7 @@ class PrintSettings : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_media_type(cast(GtkPrintSettings*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -355,11 +355,11 @@ class PrintSettings : ObjectG
    * Gets the value of %GTK_PRINT_SETTINGS_NUMBER_UP_LAYOUT.
    * Returns: layout of page in number-up mode
    */
-  NumberUpLayout getNumberUpLayout()
+  gtk.types.NumberUpLayout getNumberUpLayout()
   {
     GtkNumberUpLayout _cretval;
     _cretval = gtk_print_settings_get_number_up_layout(cast(GtkPrintSettings*)cPtr);
-    NumberUpLayout _retval = cast(NumberUpLayout)_cretval;
+    gtk.types.NumberUpLayout _retval = cast(gtk.types.NumberUpLayout)_cretval;
     return _retval;
   }
 
@@ -368,11 +368,11 @@ class PrintSettings : ObjectG
    * converted to a `GtkPageOrientation`.
    * Returns: the orientation
    */
-  PageOrientation getOrientation()
+  gtk.types.PageOrientation getOrientation()
   {
     GtkPageOrientation _cretval;
     _cretval = gtk_print_settings_get_orientation(cast(GtkPrintSettings*)cPtr);
-    PageOrientation _retval = cast(PageOrientation)_cretval;
+    gtk.types.PageOrientation _retval = cast(gtk.types.PageOrientation)_cretval;
     return _retval;
   }
 
@@ -384,7 +384,7 @@ class PrintSettings : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_output_bin(cast(GtkPrintSettings*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -394,16 +394,16 @@ class PrintSettings : ObjectG
    *   of `GtkPageRange`s. Use [glib.global.gfree] to free the array when
    *   it is no longer needed.
    */
-  PageRange[] getPageRanges()
+  gtk.types.PageRange[] getPageRanges()
   {
     GtkPageRange* _cretval;
     int _cretlength;
     _cretval = gtk_print_settings_get_page_ranges(cast(GtkPrintSettings*)cPtr, &_cretlength);
-    PageRange[] _retval;
+    gtk.types.PageRange[] _retval;
 
     if (_cretval)
     {
-      _retval = new PageRange[_cretlength];
+      _retval = new gtk.types.PageRange[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i];
     }
@@ -414,11 +414,11 @@ class PrintSettings : ObjectG
    * Gets the value of %GTK_PRINT_SETTINGS_PAGE_SET.
    * Returns: the set of pages to print
    */
-  PageSet getPageSet()
+  gtk.types.PageSet getPageSet()
   {
     GtkPageSet _cretval;
     _cretval = gtk_print_settings_get_page_set(cast(GtkPrintSettings*)cPtr);
-    PageSet _retval = cast(PageSet)_cretval;
+    gtk.types.PageSet _retval = cast(gtk.types.PageSet)_cretval;
     return _retval;
   }
 
@@ -429,7 +429,7 @@ class PrintSettings : ObjectG
    *   unit = the unit for the return value
    * Returns: the paper height, in units of unit
    */
-  double getPaperHeight(Unit unit)
+  double getPaperHeight(gtk.types.Unit unit)
   {
     double _retval;
     _retval = gtk_print_settings_get_paper_height(cast(GtkPrintSettings*)cPtr, unit);
@@ -441,11 +441,11 @@ class PrintSettings : ObjectG
    * converted to a `GtkPaperSize`.
    * Returns: the paper size
    */
-  PaperSize getPaperSize()
+  gtk.paper_size.PaperSize getPaperSize()
   {
     GtkPaperSize* _cretval;
     _cretval = gtk_print_settings_get_paper_size(cast(GtkPrintSettings*)cPtr);
-    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -456,7 +456,7 @@ class PrintSettings : ObjectG
    *   unit = the unit for the return value
    * Returns: the paper width, in units of unit
    */
-  double getPaperWidth(Unit unit)
+  double getPaperWidth(gtk.types.Unit unit)
   {
     double _retval;
     _retval = gtk_print_settings_get_paper_width(cast(GtkPrintSettings*)cPtr, unit);
@@ -467,11 +467,11 @@ class PrintSettings : ObjectG
    * Gets the value of %GTK_PRINT_SETTINGS_PRINT_PAGES.
    * Returns: which pages to print
    */
-  PrintPages getPrintPages()
+  gtk.types.PrintPages getPrintPages()
   {
     GtkPrintPages _cretval;
     _cretval = gtk_print_settings_get_print_pages(cast(GtkPrintSettings*)cPtr);
-    PrintPages _retval = cast(PrintPages)_cretval;
+    gtk.types.PrintPages _retval = cast(gtk.types.PrintPages)_cretval;
     return _retval;
   }
 
@@ -484,7 +484,7 @@ class PrintSettings : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_printer(cast(GtkPrintSettings*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -503,11 +503,11 @@ class PrintSettings : ObjectG
    * Gets the value of %GTK_PRINT_SETTINGS_QUALITY.
    * Returns: the print quality
    */
-  PrintQuality getQuality()
+  gtk.types.PrintQuality getQuality()
   {
     GtkPrintQuality _cretval;
     _cretval = gtk_print_settings_get_quality(cast(GtkPrintSettings*)cPtr);
-    PrintQuality _retval = cast(PrintQuality)_cretval;
+    gtk.types.PrintQuality _retval = cast(gtk.types.PrintQuality)_cretval;
     return _retval;
   }
 
@@ -621,7 +621,7 @@ class PrintSettings : ObjectG
    *     to use the default “Print Settings”
    * Returns: %TRUE on success
    */
-  bool loadKeyFile(KeyFile keyFile, string groupName)
+  bool loadKeyFile(glib.key_file.KeyFile keyFile, string groupName)
   {
     bool _retval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
@@ -706,7 +706,7 @@ class PrintSettings : ObjectG
    * Params:
    *   duplex = a `GtkPrintDuplex` value
    */
-  void setDuplex(PrintDuplex duplex)
+  void setDuplex(gtk.types.PrintDuplex duplex)
   {
     gtk_print_settings_set_duplex(cast(GtkPrintSettings*)cPtr, duplex);
   }
@@ -741,7 +741,7 @@ class PrintSettings : ObjectG
    *   value = a length
    *   unit = the unit of length
    */
-  void setLength(string key, double value, Unit unit)
+  void setLength(string key, double value, gtk.types.Unit unit)
   {
     const(char)* _key = key.toCString(No.Alloc);
     gtk_print_settings_set_length(cast(GtkPrintSettings*)cPtr, _key, value, unit);
@@ -784,7 +784,7 @@ class PrintSettings : ObjectG
    * Params:
    *   numberUpLayout = a `GtkNumberUpLayout` value
    */
-  void setNumberUpLayout(NumberUpLayout numberUpLayout)
+  void setNumberUpLayout(gtk.types.NumberUpLayout numberUpLayout)
   {
     gtk_print_settings_set_number_up_layout(cast(GtkPrintSettings*)cPtr, numberUpLayout);
   }
@@ -794,7 +794,7 @@ class PrintSettings : ObjectG
    * Params:
    *   orientation = a page orientation
    */
-  void setOrientation(PageOrientation orientation)
+  void setOrientation(gtk.types.PageOrientation orientation)
   {
     gtk_print_settings_set_orientation(cast(GtkPrintSettings*)cPtr, orientation);
   }
@@ -815,7 +815,7 @@ class PrintSettings : ObjectG
    * Params:
    *   pageRanges = an array of `GtkPageRange`s
    */
-  void setPageRanges(PageRange[] pageRanges)
+  void setPageRanges(gtk.types.PageRange[] pageRanges)
   {
     int _numRanges;
     if (pageRanges)
@@ -830,7 +830,7 @@ class PrintSettings : ObjectG
    * Params:
    *   pageSet = a `GtkPageSet` value
    */
-  void setPageSet(PageSet pageSet)
+  void setPageSet(gtk.types.PageSet pageSet)
   {
     gtk_print_settings_set_page_set(cast(GtkPrintSettings*)cPtr, pageSet);
   }
@@ -841,7 +841,7 @@ class PrintSettings : ObjectG
    *   height = the paper height
    *   unit = the units of height
    */
-  void setPaperHeight(double height, Unit unit)
+  void setPaperHeight(double height, gtk.types.Unit unit)
   {
     gtk_print_settings_set_paper_height(cast(GtkPrintSettings*)cPtr, height, unit);
   }
@@ -853,7 +853,7 @@ class PrintSettings : ObjectG
    * Params:
    *   paperSize = a paper size
    */
-  void setPaperSize(PaperSize paperSize)
+  void setPaperSize(gtk.paper_size.PaperSize paperSize)
   {
     gtk_print_settings_set_paper_size(cast(GtkPrintSettings*)cPtr, paperSize ? cast(GtkPaperSize*)paperSize.cPtr(No.Dup) : null);
   }
@@ -864,7 +864,7 @@ class PrintSettings : ObjectG
    *   width = the paper width
    *   unit = the units of width
    */
-  void setPaperWidth(double width, Unit unit)
+  void setPaperWidth(double width, gtk.types.Unit unit)
   {
     gtk_print_settings_set_paper_width(cast(GtkPrintSettings*)cPtr, width, unit);
   }
@@ -874,7 +874,7 @@ class PrintSettings : ObjectG
    * Params:
    *   pages = a `GtkPrintPages` value
    */
-  void setPrintPages(PrintPages pages)
+  void setPrintPages(gtk.types.PrintPages pages)
   {
     gtk_print_settings_set_print_pages(cast(GtkPrintSettings*)cPtr, pages);
   }
@@ -906,7 +906,7 @@ class PrintSettings : ObjectG
    * Params:
    *   quality = a `GtkPrintQuality` value
    */
-  void setQuality(PrintQuality quality)
+  void setQuality(gtk.types.PrintQuality quality)
   {
     gtk_print_settings_set_quality(cast(GtkPrintSettings*)cPtr, quality);
   }
@@ -989,11 +989,11 @@ class PrintSettings : ObjectG
    * Serialize print settings to an a{sv} variant.
    * Returns: a new, floating, `GVariant`
    */
-  VariantG toGvariant()
+  glib.variant.VariantG toGvariant()
   {
     VariantC* _cretval;
     _cretval = gtk_print_settings_to_gvariant(cast(GtkPrintSettings*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -1004,7 +1004,7 @@ class PrintSettings : ObjectG
    *   groupName = the group to add the settings to in key_file, or
    *     %NULL to use the default “Print Settings”
    */
-  void toKeyFile(KeyFile keyFile, string groupName)
+  void toKeyFile(glib.key_file.KeyFile keyFile, string groupName)
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     gtk_print_settings_to_key_file(cast(GtkPrintSettings*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName);

@@ -1,6 +1,6 @@
 module gio.unix_mount_monitor;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -10,7 +10,7 @@ import gobject.object;
 /**
  * Watches #GUnixMounts for changes.
  */
-class UnixMountMonitor : ObjectG
+class UnixMountMonitor : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,11 +54,11 @@ class UnixMountMonitor : ObjectG
    * the same main context as you called this function.
    * Returns: the #GUnixMountMonitor.
    */
-  static UnixMountMonitor get()
+  static gio.unix_mount_monitor.UnixMountMonitor get()
   {
     GUnixMountMonitor* _cretval;
     _cretval = g_unix_mount_monitor_get();
-    auto _retval = ObjectG.getDObject!UnixMountMonitor(cast(GUnixMountMonitor*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.unix_mount_monitor.UnixMountMonitor)(cast(GUnixMountMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -84,8 +84,8 @@ class UnixMountMonitor : ObjectG
    * Emitted when the unix mount points have changed.
    *   unixMountMonitor = the instance the signal is connected to
    */
-  alias MountpointsChangedCallbackDlg = void delegate(UnixMountMonitor unixMountMonitor);
-  alias MountpointsChangedCallbackFunc = void function(UnixMountMonitor unixMountMonitor);
+  alias MountpointsChangedCallbackDlg = void delegate(gio.unix_mount_monitor.UnixMountMonitor unixMountMonitor);
+  alias MountpointsChangedCallbackFunc = void function(gio.unix_mount_monitor.UnixMountMonitor unixMountMonitor);
 
   /**
    * Connect to MountpointsChanged signal.
@@ -101,7 +101,7 @@ class UnixMountMonitor : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto unixMountMonitor = getVal!UnixMountMonitor(_paramVals);
+      auto unixMountMonitor = getVal!(gio.unix_mount_monitor.UnixMountMonitor)(_paramVals);
       _dClosure.dlg(unixMountMonitor);
     }
 
@@ -113,8 +113,8 @@ class UnixMountMonitor : ObjectG
    * Emitted when the unix mounts have changed.
    *   unixMountMonitor = the instance the signal is connected to
    */
-  alias MountsChangedCallbackDlg = void delegate(UnixMountMonitor unixMountMonitor);
-  alias MountsChangedCallbackFunc = void function(UnixMountMonitor unixMountMonitor);
+  alias MountsChangedCallbackDlg = void delegate(gio.unix_mount_monitor.UnixMountMonitor unixMountMonitor);
+  alias MountsChangedCallbackFunc = void function(gio.unix_mount_monitor.UnixMountMonitor unixMountMonitor);
 
   /**
    * Connect to MountsChanged signal.
@@ -130,7 +130,7 @@ class UnixMountMonitor : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto unixMountMonitor = getVal!UnixMountMonitor(_paramVals);
+      auto unixMountMonitor = getVal!(gio.unix_mount_monitor.UnixMountMonitor)(_paramVals);
       _dClosure.dlg(unixMountMonitor);
     }
 

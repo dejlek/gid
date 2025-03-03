@@ -6,11 +6,11 @@ import arrow.decimal256;
 import arrow.decimal256_data_type;
 import arrow.fixed_size_binary_array_builder;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.error;
 
-class Decimal256ArrayBuilder : FixedSizeBinaryArrayBuilder
+class Decimal256ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,16 +29,16 @@ class Decimal256ArrayBuilder : FixedSizeBinaryArrayBuilder
     return getType();
   }
 
-  this(Decimal256DataType dataType)
+  this(arrow.decimal256_data_type.Decimal256DataType dataType)
   {
     GArrowDecimal256ArrayBuilder* _cretval;
     _cretval = garrow_decimal256_array_builder_new(dataType ? cast(GArrowDecimal256DataType*)dataType.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
-  alias appendValue = FixedSizeBinaryArrayBuilder.appendValue;
+  alias appendValue = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValue;
 
-  bool appendValue(Decimal256 value)
+  bool appendValue(arrow.decimal256.Decimal256 value)
   {
     bool _retval;
     GError *_err;
@@ -48,7 +48,7 @@ class Decimal256ArrayBuilder : FixedSizeBinaryArrayBuilder
     return _retval;
   }
 
-  alias appendValues = FixedSizeBinaryArrayBuilder.appendValues;
+  alias appendValues = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValues;
 
   /**
    * Append multiple values at once. It's more efficient than multiple
@@ -61,7 +61,7 @@ class Decimal256ArrayBuilder : FixedSizeBinaryArrayBuilder
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendValues(Decimal256[] values, bool[] isValids)
+  bool appendValues(arrow.decimal256.Decimal256[] values, bool[] isValids)
   {
     bool _retval;
     long _valuesLength;

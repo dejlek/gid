@@ -1,6 +1,6 @@
 module gsk.vulkan_renderer;
 
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.renderer;
@@ -10,7 +10,7 @@ import gsk.types;
  * A GSK renderer that is using Vulkan.
  * This renderer will fail to realize if Vulkan is not supported.
  */
-class VulkanRenderer : Renderer
+class VulkanRenderer : gsk.renderer.Renderer
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -1,6 +1,6 @@
 module gtk.map_list_model;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -12,7 +12,7 @@ import gtk.types;
 
 /**
  * A `GtkMapListModel` maps the items in a list model to different items.
- * `GtkMapListModel` uses a [gtk.MapListModelMapFunc].
+ * `GtkMapListModel` uses a [gtk.types.MapListModelMapFunc].
  * Example: Create a list of `GtkEventControllers`
  * ```c
  * static gpointer
@@ -34,7 +34,7 @@ import gtk.types;
  * they are no longer needed and recreate them if necessary.
  * `GtkMapListModel` passes through sections from the underlying model.
  */
-class MapListModel : ObjectG, ListModel, SectionModel
+class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -63,14 +63,14 @@ class MapListModel : ObjectG, ListModel, SectionModel
    *   mapFunc = map function
    * Returns: a new `GtkMapListModel`
    */
-  this(ListModel model, MapListModelMapFunc mapFunc)
+  this(gio.list_model.ListModel model, gtk.types.MapListModelMapFunc mapFunc)
   {
     extern(C) ObjectC* _mapFuncCallback(ObjectC* item, void* userData)
     {
-      ObjectG _dretval;
-      auto _dlg = cast(MapListModelMapFunc*)userData;
+      gobject.object.ObjectG _dretval;
+      auto _dlg = cast(gtk.types.MapListModelMapFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)item, Yes.Take));
+      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, Yes.Take));
       ObjectC* _retval = cast(ObjectC*)_dretval.cPtr(Yes.Dup);
 
       return _retval;
@@ -88,11 +88,11 @@ class MapListModel : ObjectG, ListModel, SectionModel
    * Gets the model that is currently being mapped or %NULL if none.
    * Returns: The model that gets mapped
    */
-  ListModel getModel()
+  gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
     _cretval = gtk_map_list_model_get_model(cast(GtkMapListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -119,14 +119,14 @@ class MapListModel : ObjectG, ListModel, SectionModel
    * Params:
    *   mapFunc = map function
    */
-  void setMapFunc(MapListModelMapFunc mapFunc)
+  void setMapFunc(gtk.types.MapListModelMapFunc mapFunc)
   {
     extern(C) ObjectC* _mapFuncCallback(ObjectC* item, void* userData)
     {
-      ObjectG _dretval;
-      auto _dlg = cast(MapListModelMapFunc*)userData;
+      gobject.object.ObjectG _dretval;
+      auto _dlg = cast(gtk.types.MapListModelMapFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)item, Yes.Take));
+      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, Yes.Take));
       ObjectC* _retval = cast(ObjectC*)_dretval.cPtr(Yes.Dup);
 
       return _retval;
@@ -146,7 +146,7 @@ class MapListModel : ObjectG, ListModel, SectionModel
    * Params:
    *   model = The model to be mapped
    */
-  void setModel(ListModel model)
+  void setModel(gio.list_model.ListModel model)
   {
     gtk_map_list_model_set_model(cast(GtkMapListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

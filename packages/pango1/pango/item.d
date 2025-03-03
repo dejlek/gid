@@ -1,6 +1,6 @@
 module pango.item;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import pango.analysis;
 import pango.attr_iterator;
@@ -13,7 +13,7 @@ import pango.types;
  * You typically obtain `PangoItems` by itemizing a piece of text
  * with func@itemize.
  */
-class Item : Boxed
+class Item : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -67,9 +67,9 @@ class Item : Boxed
     (cast(PangoItem*)cPtr).numChars = propval;
   }
 
-  @property Analysis analysis()
+  @property pango.analysis.Analysis analysis()
   {
-    return new Analysis(cast(PangoAnalysis*)&(cast(PangoItem*)cPtr).analysis);
+    return new pango.analysis.Analysis(cast(PangoAnalysis*)&(cast(PangoItem*)cPtr).analysis);
   }
 
   /**
@@ -97,7 +97,7 @@ class Item : Boxed
    * Params:
    *   iter = a `PangoAttrIterator`
    */
-  void applyAttrs(AttrIterator iter)
+  void applyAttrs(pango.attr_iterator.AttrIterator iter)
   {
     pango_item_apply_attrs(cast(PangoItem*)cPtr, iter ? cast(PangoAttrIterator*)iter.cPtr(No.Dup) : null);
   }
@@ -106,11 +106,11 @@ class Item : Boxed
    * Copy an existing `PangoItem` structure.
    * Returns: the newly allocated `PangoItem`
    */
-  Item copy()
+  pango.item.Item copy()
   {
     PangoItem* _cretval;
     _cretval = pango_item_copy(cast(PangoItem*)cPtr);
-    auto _retval = _cretval ? new Item(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.item.Item(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -133,11 +133,11 @@ class Item : Boxed
    * Returns: new item representing text before split_index, which
    *   should be freed with [pango.item.Item.free].
    */
-  Item split(int splitIndex, int splitOffset)
+  pango.item.Item split(int splitIndex, int splitOffset)
   {
     PangoItem* _cretval;
     _cretval = pango_item_split(cast(PangoItem*)cPtr, splitIndex, splitOffset);
-    auto _retval = _cretval ? new Item(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.item.Item(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

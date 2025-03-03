@@ -3,12 +3,12 @@ module arrowflight.server_auth_sender;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.error;
 import gobject.object;
 
-class ServerAuthSender : ObjectG
+class ServerAuthSender : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -33,7 +33,7 @@ class ServerAuthSender : ObjectG
    *   message = A #GBytes to be sent.
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool write(Bytes message)
+  bool write(glib.bytes.Bytes message)
   {
     bool _retval;
     GError *_err;

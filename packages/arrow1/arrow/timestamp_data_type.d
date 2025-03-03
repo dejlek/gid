@@ -4,10 +4,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.temporal_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.time_zone;
 
-class TimestampDataType : TemporalDataType
+class TimestampDataType : arrow.temporal_data_type.TemporalDataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,18 +26,18 @@ class TimestampDataType : TemporalDataType
     return getType();
   }
 
-  this(TimeUnit unit, TimeZone timeZone)
+  this(arrow.types.TimeUnit unit, glib.time_zone.TimeZone timeZone)
   {
     GArrowTimestampDataType* _cretval;
     _cretval = garrow_timestamp_data_type_new(unit, timeZone ? cast(GTimeZone*)timeZone.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
-  TimeUnit getUnit()
+  arrow.types.TimeUnit getUnit()
   {
     GArrowTimeUnit _cretval;
     _cretval = garrow_timestamp_data_type_get_unit(cast(GArrowTimestampDataType*)cPtr);
-    TimeUnit _retval = cast(TimeUnit)_cretval;
+    arrow.types.TimeUnit _retval = cast(arrow.types.TimeUnit)_cretval;
     return _retval;
   }
 }

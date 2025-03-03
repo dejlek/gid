@@ -3,7 +3,7 @@ module gtk.symbolic_paintable;
 public import gtk.symbolic_paintable_iface_proxy;
 import gdk.rgba;
 import gdk.snapshot;
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -38,5 +38,5 @@ interface SymbolicPaintable
    *   height = height to snapshot in
    *   colors = a pointer to an array of colors
    */
-  void snapshotSymbolic(Snapshot snapshot, double width, double height, RGBA[] colors);
+  void snapshotSymbolic(gdk.snapshot.Snapshot snapshot, double width, double height, gdk.rgba.RGBA[] colors);
 }

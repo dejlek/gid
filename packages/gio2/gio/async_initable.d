@@ -1,9 +1,8 @@
 module gio.async_initable;
 
 public import gio.async_initable_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -126,14 +125,14 @@ interface AsyncInitable
    * Deprecated: Use [gobject.object.ObjectG.newWithProperties] and
    *   [gio.async_initable.AsyncInitable.initAsync] instead. See #GParameter for more information.
    */
-  static void newvAsync(GType objectType, uint nParameters, Parameter parameters, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  static void newvAsync(gobject.types.GType objectType, uint nParameters, gobject.parameter.Parameter parameters, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -177,7 +176,7 @@ interface AsyncInitable
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback to call when the request is satisfied
    */
-  void initAsync(int ioPriority, Cancellable cancellable, AsyncReadyCallback callback);
+  void initAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes asynchronous initialization and returns the result.
@@ -187,7 +186,7 @@ interface AsyncInitable
    * Returns: %TRUE if successful. If an error has occurred, this function
    *   will return %FALSE and set error appropriately if present.
    */
-  bool initFinish(AsyncResult res);
+  bool initFinish(gio.async_result.AsyncResult res);
 
   /**
    * Finishes the async construction for the various g_async_initable_new
@@ -197,5 +196,5 @@ interface AsyncInitable
    * Returns: a newly created #GObject,
    *   or %NULL on error. Free with [gobject.object.ObjectG.unref].
    */
-  ObjectG newFinish(AsyncResult res);
+  gobject.object.ObjectG newFinish(gio.async_result.AsyncResult res);
 }

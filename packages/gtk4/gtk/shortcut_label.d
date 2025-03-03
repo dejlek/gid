@@ -1,6 +1,6 @@
 module gtk.shortcut_label;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -16,7 +16,7 @@ import gtk.widget;
  * `GtkShortcutLabel` displays a single keyboard shortcut or gesture.
  * The main use case for `GtkShortcutLabel` is inside a [gtk.shortcuts_window.ShortcutsWindow].
  */
-class ShortcutLabel : Widget
+class ShortcutLabel : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -57,7 +57,7 @@ class ShortcutLabel : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_shortcut_label_get_accelerator(cast(GtkShortcutLabel*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class ShortcutLabel : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_shortcut_label_get_disabled_text(cast(GtkShortcutLabel*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

@@ -1,6 +1,6 @@
 module gtk.dialog;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -47,7 +47,7 @@ import gtk.window;
  * [gtk.dialog.Dialog.response] signal with a response ID that you specified.
  * GTK will never assign a meaning to positive response IDs; these are
  * entirely user-defined. But for convenience, you can use the response
- * IDs in the [gtk.ResponseType] enumeration $(LPAREN)these all have values
+ * IDs in the [gtk.types.ResponseType] enumeration $(LPAREN)these all have values
  * less than zero$(RPAREN). If a dialog receives a delete event, the
  * [gtk.dialog.Dialog.response] signal will be emitted with the
  * %GTK_RESPONSE_DELETE_EVENT response ID.
@@ -124,7 +124,7 @@ import gtk.window;
 
  * Deprecated: Use [gtk.window.Window] instead
  */
-class Dialog : Window
+class Dialog : gtk.window.Window
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -173,7 +173,7 @@ class Dialog : Window
 
    * Deprecated: Use [gtk.window.Window] instead
    */
-  void addActionWidget(Widget child, int responseId)
+  void addActionWidget(gtk.widget.Widget child, int responseId)
   {
     gtk_dialog_add_action_widget(cast(GtkDialog*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, responseId);
   }
@@ -191,12 +191,12 @@ class Dialog : Window
 
    * Deprecated: Use [gtk.window.Window] instead
    */
-  Widget addButton(string buttonText, int responseId)
+  gtk.widget.Widget addButton(string buttonText, int responseId)
   {
     GtkWidget* _cretval;
     const(char)* _buttonText = buttonText.toCString(No.Alloc);
     _cretval = gtk_dialog_add_button(cast(GtkDialog*)cPtr, _buttonText, responseId);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -206,11 +206,11 @@ class Dialog : Window
 
    * Deprecated: Use [gtk.window.Window] instead
    */
-  Box getContentArea()
+  gtk.box.Box getContentArea()
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_content_area(cast(GtkDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!Box(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -222,11 +222,11 @@ class Dialog : Window
 
    * Deprecated: Use [gtk.window.Window] instead
    */
-  HeaderBar getHeaderBar()
+  gtk.header_bar.HeaderBar getHeaderBar()
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_header_bar(cast(GtkDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!HeaderBar(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.header_bar.HeaderBar)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class Dialog : Window
 
    * Deprecated: Use [gtk.window.Window] instead
    */
-  int getResponseForWidget(Widget widget)
+  int getResponseForWidget(gtk.widget.Widget widget)
   {
     int _retval;
     _retval = gtk_dialog_get_response_for_widget(cast(GtkDialog*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
@@ -257,11 +257,11 @@ class Dialog : Window
 
    * Deprecated: Use [gtk.window.Window] instead
    */
-  Widget getWidgetForResponse(int responseId)
+  gtk.widget.Widget getWidgetForResponse(int responseId)
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_widget_for_response(cast(GtkDialog*)cPtr, responseId);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -314,8 +314,8 @@ class Dialog : Window
 
    * Deprecated: Use [gtk.window.Window] instead
    */
-  alias CloseCallbackDlg = void delegate(Dialog dialog);
-  alias CloseCallbackFunc = void function(Dialog dialog);
+  alias CloseCallbackDlg = void delegate(gtk.dialog.Dialog dialog);
+  alias CloseCallbackFunc = void function(gtk.dialog.Dialog dialog);
 
   /**
    * Connect to Close signal.
@@ -331,7 +331,7 @@ class Dialog : Window
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dialog = getVal!Dialog(_paramVals);
+      auto dialog = getVal!(gtk.dialog.Dialog)(_paramVals);
       _dClosure.dlg(dialog);
     }
 
@@ -351,8 +351,8 @@ class Dialog : Window
 
    * Deprecated: Use [gtk.window.Window] instead
    */
-  alias ResponseCallbackDlg = void delegate(int responseId, Dialog dialog);
-  alias ResponseCallbackFunc = void function(int responseId, Dialog dialog);
+  alias ResponseCallbackDlg = void delegate(int responseId, gtk.dialog.Dialog dialog);
+  alias ResponseCallbackFunc = void function(int responseId, gtk.dialog.Dialog dialog);
 
   /**
    * Connect to Response signal.
@@ -368,8 +368,8 @@ class Dialog : Window
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dialog = getVal!Dialog(_paramVals);
-      auto responseId = getVal!int(&_paramVals[1]);
+      auto dialog = getVal!(gtk.dialog.Dialog)(_paramVals);
+      auto responseId = getVal!(int)(&_paramVals[1]);
       _dClosure.dlg(responseId, dialog);
     }
 

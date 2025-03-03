@@ -5,7 +5,7 @@ import gtksource.completion_provider;
 import gtksource.completion_provider_mixin;
 
 /// Proxy object for GtkSource.CompletionProvider interface when a GObject has no applicable D binding
-class CompletionProviderIfaceProxy : IfaceProxy, CompletionProvider
+class CompletionProviderIfaceProxy : IfaceProxy, gtksource.completion_provider.CompletionProvider
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class CompletionProviderIfaceProxy : IfaceProxy, CompletionProvider
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(CompletionProvider);
+    return typeid(gtksource.completion_provider.CompletionProvider);
   }
 
   mixin CompletionProviderT!();

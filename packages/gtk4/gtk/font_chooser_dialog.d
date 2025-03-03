@@ -1,6 +1,6 @@
 module gtk.font_chooser_dialog;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -37,7 +37,7 @@ import gtk.window;
 
  * Deprecated: Use [gtk.font_dialog.FontDialog] instead
  */
-class FontChooserDialog : Dialog, FontChooser
+class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -67,7 +67,7 @@ class FontChooserDialog : Dialog, FontChooser
 
    * Deprecated: Use [gtk.font_dialog.FontDialog] instead
    */
-  this(string title, Window parent)
+  this(string title, gtk.window.Window parent)
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);

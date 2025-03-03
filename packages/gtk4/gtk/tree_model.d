@@ -1,7 +1,7 @@
 module gtk.tree_model;
 
 public import gtk.tree_model_iface_proxy;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gobject.types;
@@ -197,7 +197,7 @@ interface TreeModel
    *   root = A `GtkTreePath`
    * Returns: A new `GtkTreeModel`.
    */
-  TreeModel filterNew(TreePath root);
+  gtk.tree_model.TreeModel filterNew(gtk.tree_path.TreePath root);
 
   /**
    * Calls func on each node in model in a depth-first fashion.
@@ -206,7 +206,7 @@ interface TreeModel
    * Params:
    *   func = a function to be called on each row
    */
-  void foreach_(TreeModelForeachFunc func);
+  void foreach_(gtk.types.TreeModelForeachFunc func);
 
   /**
    * Returns the type of the column.
@@ -214,7 +214,7 @@ interface TreeModel
    *   index = the column index
    * Returns: the type of the column
    */
-  GType getColumnType(int index);
+  gobject.types.GType getColumnType(int index);
 
   /**
    * Returns a set of flags supported by this interface.
@@ -223,7 +223,7 @@ interface TreeModel
    * of the tree_model.
    * Returns: the flags supported by this interface
    */
-  TreeModelFlags getFlags();
+  gtk.types.TreeModelFlags getFlags();
 
   /**
    * Sets iter to a valid iterator pointing to path.
@@ -234,7 +234,7 @@ interface TreeModel
    *   path = the `GtkTreePath`
    * Returns: %TRUE, if iter was set
    */
-  bool getIter(out TreeIter iter, TreePath path);
+  bool getIter(out gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path);
 
   /**
    * Initializes iter with the first iterator in the tree
@@ -244,7 +244,7 @@ interface TreeModel
    *   iter = the uninitialized `GtkTreeIter`
    * Returns: %TRUE, if iter was set
    */
-  bool getIterFirst(out TreeIter iter);
+  bool getIterFirst(out gtk.tree_iter.TreeIter iter);
 
   /**
    * Sets iter to a valid iterator pointing to path_string, if it
@@ -255,7 +255,7 @@ interface TreeModel
    *   pathString = a string representation of a `GtkTreePath`
    * Returns: %TRUE, if iter was set
    */
-  bool getIterFromString(out TreeIter iter, string pathString);
+  bool getIterFromString(out gtk.tree_iter.TreeIter iter, string pathString);
 
   /**
    * Returns the number of columns supported by tree_model.
@@ -270,7 +270,7 @@ interface TreeModel
    *   iter = the `GtkTreeIter`
    * Returns: a newly-created `GtkTreePath`
    */
-  TreePath getPath(TreeIter iter);
+  gtk.tree_path.TreePath getPath(gtk.tree_iter.TreeIter iter);
 
   /**
    * Generates a string representation of the iter.
@@ -281,7 +281,7 @@ interface TreeModel
    *   iter = a `GtkTreeIter`
    * Returns: a newly-allocated string
    */
-  string getStringFromIter(TreeIter iter);
+  string getStringFromIter(gtk.tree_iter.TreeIter iter);
 
   /**
    * Initializes and sets value to that at column.
@@ -292,7 +292,7 @@ interface TreeModel
    *   column = the column to lookup the value at
    *   value = an empty `GValue` to set
    */
-  void getValue(TreeIter iter, int column, out Value value);
+  void getValue(gtk.tree_iter.TreeIter iter, int column, out gobject.value.Value value);
 
   /**
    * Sets iter to point to the first child of parent.
@@ -306,7 +306,7 @@ interface TreeModel
    *   parent = the `GtkTreeIter`
    * Returns: %TRUE, if iter has been set to the first child
    */
-  bool iterChildren(out TreeIter iter, TreeIter parent);
+  bool iterChildren(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent);
 
   /**
    * Returns %TRUE if iter has children, %FALSE otherwise.
@@ -314,7 +314,7 @@ interface TreeModel
    *   iter = the `GtkTreeIter` to test for children
    * Returns: %TRUE if iter has children
    */
-  bool iterHasChild(TreeIter iter);
+  bool iterHasChild(gtk.tree_iter.TreeIter iter);
 
   /**
    * Returns the number of children that iter has.
@@ -324,7 +324,7 @@ interface TreeModel
    *   iter = the `GtkTreeIter`
    * Returns: the number of children of iter
    */
-  int iterNChildren(TreeIter iter);
+  int iterNChildren(gtk.tree_iter.TreeIter iter);
 
   /**
    * Sets iter to point to the node following it at the current level.
@@ -334,7 +334,7 @@ interface TreeModel
    *   iter = the `GtkTreeIter`
    * Returns: %TRUE if iter has been changed to the next node
    */
-  bool iterNext(TreeIter iter);
+  bool iterNext(gtk.tree_iter.TreeIter iter);
 
   /**
    * Sets iter to be the child of parent, using the given index.
@@ -349,7 +349,7 @@ interface TreeModel
    *   n = the index of the desired child
    * Returns: %TRUE, if parent has an n-th child
    */
-  bool iterNthChild(out TreeIter iter, TreeIter parent, int n);
+  bool iterNthChild(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent, int n);
 
   /**
    * Sets iter to be the parent of child.
@@ -364,7 +364,7 @@ interface TreeModel
    *   child = the `GtkTreeIter`
    * Returns: %TRUE, if iter is set to the parent of child
    */
-  bool iterParent(out TreeIter iter, TreeIter child);
+  bool iterParent(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter child);
 
   /**
    * Sets iter to point to the previous node at the current level.
@@ -374,7 +374,7 @@ interface TreeModel
    *   iter = the `GtkTreeIter`
    * Returns: %TRUE if iter has been changed to the previous node
    */
-  bool iterPrevious(TreeIter iter);
+  bool iterPrevious(gtk.tree_iter.TreeIter iter);
 
   /**
    * Lets the tree ref the node.
@@ -394,7 +394,7 @@ interface TreeModel
    * Params:
    *   iter = the `GtkTreeIter`
    */
-  void refNode(TreeIter iter);
+  void refNode(gtk.tree_iter.TreeIter iter);
 
   /**
    * Emits the ::row-changed signal on tree_model.
@@ -403,7 +403,7 @@ interface TreeModel
    *   path = a `GtkTreePath` pointing to the changed row
    *   iter = a valid `GtkTreeIter` pointing to the changed row
    */
-  void rowChanged(TreePath path, TreeIter iter);
+  void rowChanged(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter);
 
   /**
    * Emits the ::row-deleted signal on tree_model.
@@ -417,7 +417,7 @@ interface TreeModel
    *   path = a `GtkTreePath` pointing to the previous location of
    *     the deleted row
    */
-  void rowDeleted(TreePath path);
+  void rowDeleted(gtk.tree_path.TreePath path);
 
   /**
    * Emits the ::row-has-child-toggled signal on tree_model.
@@ -428,7 +428,7 @@ interface TreeModel
    *   path = a `GtkTreePath` pointing to the changed row
    *   iter = a valid `GtkTreeIter` pointing to the changed row
    */
-  void rowHasChildToggled(TreePath path, TreeIter iter);
+  void rowHasChildToggled(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter);
 
   /**
    * Emits the ::row-inserted signal on tree_model.
@@ -437,7 +437,7 @@ interface TreeModel
    *   path = a `GtkTreePath` pointing to the inserted row
    *   iter = a valid `GtkTreeIter` pointing to the inserted row
    */
-  void rowInserted(TreePath path, TreeIter iter);
+  void rowInserted(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter);
 
   /**
    * Emits the ::rows-reordered signal on tree_model.
@@ -455,7 +455,7 @@ interface TreeModel
    *     position before the re-ordering,
    *     i.e. new_order`[newpos] \= oldpos`
    */
-  void rowsReordered(TreePath path, TreeIter iter, int[] newOrder);
+  void rowsReordered(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, int[] newOrder);
 
   /**
    * Lets the tree unref the node.
@@ -467,7 +467,7 @@ interface TreeModel
    * Params:
    *   iter = the `GtkTreeIter`
    */
-  void unrefNode(TreeIter iter);
+  void unrefNode(gtk.tree_iter.TreeIter iter);
 
   /**
    * This signal is emitted when a row in the model has changed.
@@ -476,8 +476,8 @@ interface TreeModel
    *   iter = a valid `GtkTreeIter` pointing to the changed row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowChangedCallbackDlg = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
-  alias RowChangedCallbackFunc = void function(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowChangedCallbackDlg = void delegate(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel);
+  alias RowChangedCallbackFunc = void function(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel);
 
   /**
    * Connect to RowChanged signal.
@@ -500,8 +500,8 @@ interface TreeModel
    *   path = a `GtkTreePath` identifying the row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowDeletedCallbackDlg = void delegate(TreePath path, TreeModel treeModel);
-  alias RowDeletedCallbackFunc = void function(TreePath path, TreeModel treeModel);
+  alias RowDeletedCallbackDlg = void delegate(gtk.tree_path.TreePath path, gtk.tree_model.TreeModel treeModel);
+  alias RowDeletedCallbackFunc = void function(gtk.tree_path.TreePath path, gtk.tree_model.TreeModel treeModel);
 
   /**
    * Connect to RowDeleted signal.
@@ -521,8 +521,8 @@ interface TreeModel
    *   iter = a valid `GtkTreeIter` pointing to the row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowHasChildToggledCallbackDlg = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
-  alias RowHasChildToggledCallbackFunc = void function(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowHasChildToggledCallbackDlg = void delegate(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel);
+  alias RowHasChildToggledCallbackFunc = void function(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel);
 
   /**
    * Connect to RowHasChildToggled signal.
@@ -545,8 +545,8 @@ interface TreeModel
    *   iter = a valid `GtkTreeIter` pointing to the new row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowInsertedCallbackDlg = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
-  alias RowInsertedCallbackFunc = void function(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowInsertedCallbackDlg = void delegate(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel);
+  alias RowInsertedCallbackFunc = void function(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel);
 
   /**
    * Connect to RowInserted signal.

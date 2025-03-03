@@ -1,6 +1,6 @@
 module gio.unix_fdlist;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -20,7 +20,7 @@ import gobject.object;
  * using it.
  * Since 2.74, the API is available for Windows.
  */
-class UnixFDList : ObjectG
+class UnixFDList : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -61,7 +61,7 @@ class UnixFDList : ObjectG
    *   fds = the initial list of file descriptors
    * Returns: a new #GUnixFDList
    */
-  static UnixFDList newFromArray(int[] fds)
+  static gio.unix_fdlist.UnixFDList newFromArray(int[] fds)
   {
     GUnixFDList* _cretval;
     int _nFds;
@@ -70,7 +70,7 @@ class UnixFDList : ObjectG
 
     auto _fds = cast(const(int)*)fds.ptr;
     _cretval = g_unix_fd_list_new_from_array(_fds, _nFds);
-    auto _retval = ObjectG.getDObject!UnixFDList(cast(GUnixFDList*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, Yes.Take);
     return _retval;
   }
 

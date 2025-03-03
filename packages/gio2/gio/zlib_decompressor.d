@@ -1,6 +1,6 @@
 module gio.zlib_decompressor;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.converter;
@@ -13,7 +13,7 @@ import gobject.object;
  * `GZlibDecompressor` is an implementation of [gio.converter.Converter] that
  * decompresses data compressed with zlib.
  */
-class ZlibDecompressor : ObjectG, Converter
+class ZlibDecompressor : gobject.object.ObjectG, gio.converter.Converter
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -40,7 +40,7 @@ class ZlibDecompressor : ObjectG, Converter
    *   format = The format to use for the compressed data
    * Returns: a new #GZlibDecompressor
    */
-  this(ZlibCompressorFormat format)
+  this(gio.types.ZlibCompressorFormat format)
   {
     GZlibDecompressor* _cretval;
     _cretval = g_zlib_decompressor_new(format);
@@ -55,11 +55,11 @@ class ZlibDecompressor : ObjectG, Converter
    * data stream at all.
    * Returns: a #GFileInfo, or %NULL
    */
-  FileInfo getFileInfo()
+  gio.file_info.FileInfo getFileInfo()
   {
     GFileInfo* _cretval;
     _cretval = g_zlib_decompressor_get_file_info(cast(GZlibDecompressor*)cPtr);
-    auto _retval = ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, No.Take);
     return _retval;
   }
 }

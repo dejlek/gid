@@ -1,8 +1,7 @@
 module gio.permission;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -24,7 +23,7 @@ import gobject.object;
  * unlock” button in a dialog and to provide the mechanism to invoke
  * when that button is clicked.
  */
-class Permission : ObjectG
+class Permission : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -59,7 +58,7 @@ class Permission : ObjectG
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE if the permission was successfully acquired
    */
-  bool acquire(Cancellable cancellable)
+  bool acquire(gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -77,14 +76,14 @@ class Permission : ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = the #GAsyncReadyCallback to call when done
    */
-  void acquireAsync(Cancellable cancellable, AsyncReadyCallback callback)
+  void acquireAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -101,7 +100,7 @@ class Permission : ObjectG
    *   result = the #GAsyncResult given to the #GAsyncReadyCallback
    * Returns: %TRUE if the permission was successfully acquired
    */
-  bool acquireFinish(AsyncResult result)
+  bool acquireFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -181,7 +180,7 @@ class Permission : ObjectG
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE if the permission was successfully released
    */
-  bool release(Cancellable cancellable)
+  bool release(gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -199,14 +198,14 @@ class Permission : ObjectG
    *   cancellable = a #GCancellable, or %NULL
    *   callback = the #GAsyncReadyCallback to call when done
    */
-  void releaseAsync(Cancellable cancellable, AsyncReadyCallback callback)
+  void releaseAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -223,7 +222,7 @@ class Permission : ObjectG
    *   result = the #GAsyncResult given to the #GAsyncReadyCallback
    * Returns: %TRUE if the permission was successfully released
    */
-  bool releaseFinish(AsyncResult result)
+  bool releaseFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;

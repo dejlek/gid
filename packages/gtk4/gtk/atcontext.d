@@ -1,11 +1,10 @@
 module gtk.atcontext;
 
 import gdk.display;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
-import gtk.accessible_mixin;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -17,7 +16,7 @@ import gtk.types;
  * is responsible for updating the accessible state in response to state
  * changes in `GtkAccessible`.
  */
-class ATContext : ObjectG
+class ATContext : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -47,11 +46,11 @@ class ATContext : ObjectG
    *   display = the `GdkDisplay` used by the `GtkATContext`
    * Returns: the `GtkATContext`
    */
-  static ATContext create(AccessibleRole accessibleRole, Accessible accessible, Display display)
+  static gtk.atcontext.ATContext create(gtk.types.AccessibleRole accessibleRole, gtk.accessible.Accessible accessible, gdk.display.Display display)
   {
     GtkATContext* _cretval;
     _cretval = gtk_at_context_create(accessibleRole, accessible ? cast(GtkAccessible*)(cast(ObjectG)accessible).cPtr(No.Dup) : null, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!ATContext(cast(GtkATContext*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.atcontext.ATContext)(cast(GtkATContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -59,11 +58,11 @@ class ATContext : ObjectG
    * Retrieves the `GtkAccessible` using this context.
    * Returns: a `GtkAccessible`
    */
-  Accessible getAccessible()
+  gtk.accessible.Accessible getAccessible()
   {
     GtkAccessible* _cretval;
     _cretval = gtk_at_context_get_accessible(cast(GtkATContext*)cPtr);
-    auto _retval = ObjectG.getDObject!Accessible(cast(GtkAccessible*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, No.Take);
     return _retval;
   }
 
@@ -71,11 +70,11 @@ class ATContext : ObjectG
    * Retrieves the accessible role of this context.
    * Returns: a `GtkAccessibleRole`
    */
-  AccessibleRole getAccessibleRole()
+  gtk.types.AccessibleRole getAccessibleRole()
   {
     GtkAccessibleRole _cretval;
     _cretval = gtk_at_context_get_accessible_role(cast(GtkATContext*)cPtr);
-    AccessibleRole _retval = cast(AccessibleRole)_cretval;
+    gtk.types.AccessibleRole _retval = cast(gtk.types.AccessibleRole)_cretval;
     return _retval;
   }
 
@@ -84,8 +83,8 @@ class ATContext : ObjectG
    * `GtkATContext` instance change.
    *   aTContext = the instance the signal is connected to
    */
-  alias StateChangeCallbackDlg = void delegate(ATContext aTContext);
-  alias StateChangeCallbackFunc = void function(ATContext aTContext);
+  alias StateChangeCallbackDlg = void delegate(gtk.atcontext.ATContext aTContext);
+  alias StateChangeCallbackFunc = void function(gtk.atcontext.ATContext aTContext);
 
   /**
    * Connect to StateChange signal.
@@ -101,7 +100,7 @@ class ATContext : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto aTContext = getVal!ATContext(_paramVals);
+      auto aTContext = getVal!(gtk.atcontext.ATContext)(_paramVals);
       _dClosure.dlg(aTContext);
     }
 

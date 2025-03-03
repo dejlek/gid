@@ -1,6 +1,6 @@
 module parquet.file_metadata;
 
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 import parquet.c.functions;
@@ -8,7 +8,7 @@ import parquet.c.types;
 import parquet.row_group_metadata;
 import parquet.types;
 
-class FileMetadata : ObjectG
+class FileMetadata : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -34,7 +34,7 @@ class FileMetadata : ObjectG
     return _retval;
   }
 
-  bool equal(FileMetadata otherMetadata)
+  bool equal(parquet.file_metadata.FileMetadata otherMetadata)
   {
     bool _retval;
     _retval = gparquet_file_metadata_equal(cast(GParquetFileMetadata*)cPtr, otherMetadata ? cast(GParquetFileMetadata*)otherMetadata.cPtr(No.Dup) : null);
@@ -45,7 +45,7 @@ class FileMetadata : ObjectG
   {
     const(char)* _cretval;
     _cretval = gparquet_file_metadata_get_created_by(cast(GParquetFileMetadata*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -77,14 +77,14 @@ class FileMetadata : ObjectG
     return _retval;
   }
 
-  RowGroupMetadata getRowGroup(int index)
+  parquet.row_group_metadata.RowGroupMetadata getRowGroup(int index)
   {
     GParquetRowGroupMetadata* _cretval;
     GError *_err;
     _cretval = gparquet_file_metadata_get_row_group(cast(GParquetFileMetadata*)cPtr, index, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!RowGroupMetadata(cast(GParquetRowGroupMetadata*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(parquet.row_group_metadata.RowGroupMetadata)(cast(GParquetRowGroupMetadata*)_cretval, Yes.Take);
     return _retval;
   }
 

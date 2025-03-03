@@ -1,7 +1,7 @@
 module gtk.actionable;
 
 public import gtk.actionable_iface_proxy;
-import gid.global;
+import gid.gid;
 import glib.variant;
 import gtk.c.functions;
 import gtk.c.types;
@@ -39,7 +39,7 @@ interface Actionable
    * Gets the current target value of actionable.
    * Returns: the current target value
    */
-  VariantG getActionTargetValue();
+  glib.variant.VariantG getActionTargetValue();
 
   /**
    * Specifies the name of the action with which this widget should be
@@ -76,7 +76,7 @@ interface Actionable
    * Params:
    *   targetValue = a [glib.variant.VariantG] to set as the target value
    */
-  void setActionTargetValue(VariantG targetValue);
+  void setActionTargetValue(glib.variant.VariantG targetValue);
 
   /**
    * Sets the action-name and associated string target value of an

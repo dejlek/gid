@@ -1,6 +1,6 @@
 module gobject.initially_unowned;
 
-import gid.global;
+import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.object;
@@ -11,7 +11,7 @@ import gobject.types;
  * All the fields in the `GInitiallyUnowned` structure are private to the
  * implementation and should never be accessed directly.
  */
-class InitiallyUnowned : ObjectG
+class InitiallyUnowned : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

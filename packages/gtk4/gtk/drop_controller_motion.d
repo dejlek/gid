@@ -1,7 +1,7 @@
 module gtk.drop_controller_motion;
 
 import gdk.drop;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -17,7 +17,7 @@ import gtk.types;
  * This controller is not able to accept drops, use [gtk.drop_target.DropTarget]
  * for that purpose.
  */
-class DropControllerMotion : EventController
+class DropControllerMotion : gtk.event_controller.EventController
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -66,11 +66,11 @@ class DropControllerMotion : EventController
    * Returns: The `GdkDrop` currently
    *   happening within self
    */
-  Drop getDrop()
+  gdk.drop.Drop getDrop()
   {
     GdkDrop* _cretval;
     _cretval = gtk_drop_controller_motion_get_drop(cast(GtkDropControllerMotion*)cPtr);
-    auto _retval = ObjectG.getDObject!Drop(cast(GdkDrop*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 
@@ -94,8 +94,8 @@ class DropControllerMotion : EventController
    *   y = coordinates of pointer location
    *   dropControllerMotion = the instance the signal is connected to
    */
-  alias EnterCallbackDlg = void delegate(double x, double y, DropControllerMotion dropControllerMotion);
-  alias EnterCallbackFunc = void function(double x, double y, DropControllerMotion dropControllerMotion);
+  alias EnterCallbackDlg = void delegate(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
+  alias EnterCallbackFunc = void function(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
 
   /**
    * Connect to Enter signal.
@@ -111,9 +111,9 @@ class DropControllerMotion : EventController
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dropControllerMotion = getVal!DropControllerMotion(_paramVals);
-      auto x = getVal!double(&_paramVals[1]);
-      auto y = getVal!double(&_paramVals[2]);
+      auto dropControllerMotion = getVal!(gtk.drop_controller_motion.DropControllerMotion)(_paramVals);
+      auto x = getVal!(double)(&_paramVals[1]);
+      auto y = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(x, y, dropControllerMotion);
     }
 
@@ -125,8 +125,8 @@ class DropControllerMotion : EventController
    * Signals that the pointer has left the widget.
    *   dropControllerMotion = the instance the signal is connected to
    */
-  alias LeaveCallbackDlg = void delegate(DropControllerMotion dropControllerMotion);
-  alias LeaveCallbackFunc = void function(DropControllerMotion dropControllerMotion);
+  alias LeaveCallbackDlg = void delegate(gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
+  alias LeaveCallbackFunc = void function(gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
 
   /**
    * Connect to Leave signal.
@@ -142,7 +142,7 @@ class DropControllerMotion : EventController
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dropControllerMotion = getVal!DropControllerMotion(_paramVals);
+      auto dropControllerMotion = getVal!(gtk.drop_controller_motion.DropControllerMotion)(_paramVals);
       _dClosure.dlg(dropControllerMotion);
     }
 
@@ -157,8 +157,8 @@ class DropControllerMotion : EventController
    *   y = the y coordinate
    *   dropControllerMotion = the instance the signal is connected to
    */
-  alias MotionCallbackDlg = void delegate(double x, double y, DropControllerMotion dropControllerMotion);
-  alias MotionCallbackFunc = void function(double x, double y, DropControllerMotion dropControllerMotion);
+  alias MotionCallbackDlg = void delegate(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
+  alias MotionCallbackFunc = void function(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
 
   /**
    * Connect to Motion signal.
@@ -174,9 +174,9 @@ class DropControllerMotion : EventController
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dropControllerMotion = getVal!DropControllerMotion(_paramVals);
-      auto x = getVal!double(&_paramVals[1]);
-      auto y = getVal!double(&_paramVals[2]);
+      auto dropControllerMotion = getVal!(gtk.drop_controller_motion.DropControllerMotion)(_paramVals);
+      auto x = getVal!(double)(&_paramVals[1]);
+      auto y = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(x, y, dropControllerMotion);
     }
 

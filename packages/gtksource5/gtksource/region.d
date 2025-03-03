@@ -1,6 +1,6 @@
 module gtksource.region;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.text_buffer;
 import gtk.text_iter;
@@ -44,7 +44,7 @@ import gtksource.types;
  * }
  * ```
  */
-class Region : ObjectG
+class Region : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -63,7 +63,7 @@ class Region : ObjectG
     return getType();
   }
 
-  this(TextBuffer buffer)
+  this(gtk.text_buffer.TextBuffer buffer)
   {
     GtkSourceRegion* _cretval;
     _cretval = gtk_source_region_new(buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
@@ -76,7 +76,7 @@ class Region : ObjectG
    * Params:
    *   regionToAdd = the #GtkSourceRegion to add to region, or %NULL.
    */
-  void addRegion(Region regionToAdd)
+  void addRegion(gtksource.region.Region regionToAdd)
   {
     gtk_source_region_add_region(cast(GtkSourceRegion*)cPtr, regionToAdd ? cast(GtkSourceRegion*)regionToAdd.cPtr(No.Dup) : null);
   }
@@ -87,9 +87,9 @@ class Region : ObjectG
    *   Start = the start of the subregion.
    *   End = the end of the subregion.
    */
-  void addSubregion(TextIter Start, TextIter End)
+  void addSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End)
   {
-    gtk_source_region_add_subregion(cast(GtkSourceRegion*)cPtr, Start ? cast(GtkTextIter*)Start.cPtr(No.Dup) : null, End ? cast(GtkTextIter*)End.cPtr(No.Dup) : null);
+    gtk_source_region_add_subregion(cast(GtkSourceRegion*)cPtr, Start ? cast(const(GtkTextIter)*)Start.cPtr(No.Dup) : null, End ? cast(const(GtkTextIter)*)End.cPtr(No.Dup) : null);
   }
 
   /**
@@ -102,22 +102,22 @@ class Region : ObjectG
    * Returns: %TRUE if start and end have been set successfully $(LPAREN)if non-%NULL$(RPAREN),
    *   or %FALSE if the region is empty.
    */
-  bool getBounds(out TextIter start, out TextIter end)
+  bool getBounds(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end)
   {
     bool _retval;
     GtkTextIter _start;
     GtkTextIter _end;
     _retval = gtk_source_region_get_bounds(cast(GtkSourceRegion*)cPtr, &_start, &_end);
-    start = new TextIter(cast(void*)&_start, No.Take);
-    end = new TextIter(cast(void*)&_end, No.Take);
+    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
+    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
   }
 
-  TextBuffer getBuffer()
+  gtk.text_buffer.TextBuffer getBuffer()
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_source_region_get_buffer(cast(GtkSourceRegion*)cPtr);
-    auto _retval = ObjectG.getDObject!TextBuffer(cast(GtkTextBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -127,11 +127,11 @@ class Region : ObjectG
    * Params:
    *   iter = iterator to initialize to the first subregion.
    */
-  void getStartRegionIter(out RegionIter iter)
+  void getStartRegionIter(out gtksource.region_iter.RegionIter iter)
   {
     GtkSourceRegionIter _iter;
     gtk_source_region_get_start_region_iter(cast(GtkSourceRegion*)cPtr, &_iter);
-    iter = new RegionIter(cast(void*)&_iter);
+    iter = new gtksource.region_iter.RegionIter(cast(void*)&_iter);
   }
 
   /**
@@ -142,11 +142,11 @@ class Region : ObjectG
    * Returns: the intersection as a #GtkSourceRegion
    *   object.
    */
-  Region intersectRegion(Region region2)
+  gtksource.region.Region intersectRegion(gtksource.region.Region region2)
   {
     GtkSourceRegion* _cretval;
     _cretval = gtk_source_region_intersect_region(cast(GtkSourceRegion*)cPtr, region2 ? cast(GtkSourceRegion*)region2.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Region(cast(GtkSourceRegion*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.region.Region)(cast(GtkSourceRegion*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -160,11 +160,11 @@ class Region : ObjectG
    * Returns: the intersection as a new
    *   #GtkSourceRegion.
    */
-  Region intersectSubregion(TextIter Start, TextIter End)
+  gtksource.region.Region intersectSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End)
   {
     GtkSourceRegion* _cretval;
-    _cretval = gtk_source_region_intersect_subregion(cast(GtkSourceRegion*)cPtr, Start ? cast(GtkTextIter*)Start.cPtr(No.Dup) : null, End ? cast(GtkTextIter*)End.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Region(cast(GtkSourceRegion*)_cretval, Yes.Take);
+    _cretval = gtk_source_region_intersect_subregion(cast(GtkSourceRegion*)cPtr, Start ? cast(const(GtkTextIter)*)Start.cPtr(No.Dup) : null, End ? cast(const(GtkTextIter)*)End.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtksource.region.Region)(cast(GtkSourceRegion*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class Region : ObjectG
    *   regionToSubtract = the #GtkSourceRegion to subtract from
    *     region, or %NULL.
    */
-  void subtractRegion(Region regionToSubtract)
+  void subtractRegion(gtksource.region.Region regionToSubtract)
   {
     gtk_source_region_subtract_region(cast(GtkSourceRegion*)cPtr, regionToSubtract ? cast(GtkSourceRegion*)regionToSubtract.cPtr(No.Dup) : null);
   }
@@ -198,9 +198,9 @@ class Region : ObjectG
    *   Start = the start of the subregion.
    *   End = the end of the subregion.
    */
-  void subtractSubregion(TextIter Start, TextIter End)
+  void subtractSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End)
   {
-    gtk_source_region_subtract_subregion(cast(GtkSourceRegion*)cPtr, Start ? cast(GtkTextIter*)Start.cPtr(No.Dup) : null, End ? cast(GtkTextIter*)End.cPtr(No.Dup) : null);
+    gtk_source_region_subtract_subregion(cast(GtkSourceRegion*)cPtr, Start ? cast(const(GtkTextIter)*)Start.cPtr(No.Dup) : null, End ? cast(const(GtkTextIter)*)End.cPtr(No.Dup) : null);
   }
 
   /**
@@ -214,7 +214,7 @@ class Region : ObjectG
   {
     char* _cretval;
     _cretval = gtk_source_region_to_string(cast(GtkSourceRegion*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

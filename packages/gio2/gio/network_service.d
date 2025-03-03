@@ -1,6 +1,6 @@
 module gio.network_service;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_connectable;
@@ -18,7 +18,7 @@ import gobject.object;
  * [gio.socket_connectable.SocketConnectable] for an example of using the connectable
  * interface.
  */
-class NetworkService : ObjectG, SocketConnectable
+class NetworkService : gobject.object.ObjectG, gio.socket_connectable.SocketConnectable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -68,7 +68,7 @@ class NetworkService : ObjectG, SocketConnectable
   {
     const(char)* _cretval;
     _cretval = g_network_service_get_domain(cast(GNetworkService*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class NetworkService : ObjectG, SocketConnectable
   {
     const(char)* _cretval;
     _cretval = g_network_service_get_protocol(cast(GNetworkService*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class NetworkService : ObjectG, SocketConnectable
   {
     const(char)* _cretval;
     _cretval = g_network_service_get_scheme(cast(GNetworkService*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class NetworkService : ObjectG, SocketConnectable
   {
     const(char)* _cretval;
     _cretval = g_network_service_get_service(cast(GNetworkService*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

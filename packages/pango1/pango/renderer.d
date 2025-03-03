@@ -1,6 +1,6 @@
 module pango.renderer;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import pango.c.functions;
 import pango.c.types;
@@ -20,7 +20,7 @@ import pango.types;
  * @draw_glyphs and @draw_rectangle, renderers for particular font
  * backends and destinations can be created.
  */
-class Renderer : ObjectG
+class Renderer : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -89,7 +89,7 @@ class Renderer : ObjectG
    *   x = X coordinate of left edge of baseline of glyph
    *   y = Y coordinate of left edge of baseline of glyph
    */
-  void drawGlyph(Font font, Glyph glyph, double x, double y)
+  void drawGlyph(pango.font.Font font, pango.types.Glyph glyph, double x, double y)
   {
     pango_renderer_draw_glyph(cast(PangoRenderer*)cPtr, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, glyph, x, y);
   }
@@ -116,7 +116,7 @@ class Renderer : ObjectG
    *   y = Y position of left edge of baseline, in user space coordinates
    *     in Pango units
    */
-  void drawGlyphItem(string text, GlyphItem glyphItem, int x, int y)
+  void drawGlyphItem(string text, pango.glyph_item.GlyphItem glyphItem, int x, int y)
   {
     const(char)* _text = text.toCString(No.Alloc);
     pango_renderer_draw_glyph_item(cast(PangoRenderer*)cPtr, _text, glyphItem ? cast(PangoGlyphItem*)glyphItem.cPtr(No.Dup) : null, x, y);
@@ -132,7 +132,7 @@ class Renderer : ObjectG
    *   y = Y position of left edge of baseline, in user space coordinates
    *     in Pango units.
    */
-  void drawGlyphs(Font font, GlyphString glyphs, int x, int y)
+  void drawGlyphs(pango.font.Font font, pango.glyph_string.GlyphString glyphs, int x, int y)
   {
     pango_renderer_draw_glyphs(cast(PangoRenderer*)cPtr, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, x, y);
   }
@@ -148,7 +148,7 @@ class Renderer : ObjectG
    *   y = Y position of left edge of baseline, in user space coordinates
    *     in Pango units.
    */
-  void drawLayout(Layout layout, int x, int y)
+  void drawLayout(pango.layout.Layout layout, int x, int y)
   {
     pango_renderer_draw_layout(cast(PangoRenderer*)cPtr, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null, x, y);
   }
@@ -165,7 +165,7 @@ class Renderer : ObjectG
    *   y = Y position of left edge of baseline, in user space coordinates
    *     in Pango units.
    */
-  void drawLayoutLine(LayoutLine line, int x, int y)
+  void drawLayoutLine(pango.layout_line.LayoutLine line, int x, int y)
   {
     pango_renderer_draw_layout_line(cast(PangoRenderer*)cPtr, line ? cast(PangoLayoutLine*)line.cPtr(No.Dup) : null, x, y);
   }
@@ -184,7 +184,7 @@ class Renderer : ObjectG
    *   width = width of rectangle in Pango units
    *   height = height of rectangle in Pango units
    */
-  void drawRectangle(RenderPart part, int x, int y, int width, int height)
+  void drawRectangle(pango.types.RenderPart part, int x, int y, int width, int height)
   {
     pango_renderer_draw_rectangle(cast(PangoRenderer*)cPtr, part, x, y, width, height);
   }
@@ -201,7 +201,7 @@ class Renderer : ObjectG
    *   x12 = X coordinate of left end of bottom of trapezoid
    *   x22 = X coordinate of right end of bottom of trapezoid
    */
-  void drawTrapezoid(RenderPart part, double y1, double x11, double x21, double y2, double x12, double x22)
+  void drawTrapezoid(pango.types.RenderPart part, double y1, double x11, double x21, double y2, double x12, double x22)
   {
     pango_renderer_draw_trapezoid(cast(PangoRenderer*)cPtr, part, y1, x11, x21, y2, x12, x22);
   }
@@ -214,7 +214,7 @@ class Renderer : ObjectG
    *   or 0 if it hasn't been set and should be
    *   inherited from the environment.
    */
-  ushort getAlpha(RenderPart part)
+  ushort getAlpha(pango.types.RenderPart part)
   {
     ushort _retval;
     _retval = pango_renderer_get_alpha(cast(PangoRenderer*)cPtr, part);
@@ -229,11 +229,11 @@ class Renderer : ObjectG
    *   specified part, or %NULL if it hasn't been set and should be
    *   inherited from the environment.
    */
-  Color getColor(RenderPart part)
+  pango.color.Color getColor(pango.types.RenderPart part)
   {
     PangoColor* _cretval;
     _cretval = pango_renderer_get_color(cast(PangoRenderer*)cPtr, part);
-    auto _retval = _cretval ? new Color(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.color.Color(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -246,11 +246,11 @@ class Renderer : ObjectG
    * Returns: the layout, or %NULL if
    *   no layout is being rendered using renderer at this time.
    */
-  Layout getLayout()
+  pango.layout.Layout getLayout()
   {
     PangoLayout* _cretval;
     _cretval = pango_renderer_get_layout(cast(PangoRenderer*)cPtr);
-    auto _retval = ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -263,11 +263,11 @@ class Renderer : ObjectG
    * Returns: the layout line, or %NULL
    *   if no layout line is being rendered using renderer at this time.
    */
-  LayoutLine getLayoutLine()
+  pango.layout_line.LayoutLine getLayoutLine()
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_renderer_get_layout_line(cast(PangoRenderer*)cPtr);
-    auto _retval = _cretval ? new LayoutLine(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -279,11 +279,11 @@ class Renderer : ObjectG
    *   been set $(LPAREN)which is the same as the identity matrix$(RPAREN). The returned
    *   matrix is owned by Pango and must not be modified or freed.
    */
-  Matrix getMatrix()
+  pango.matrix.Matrix getMatrix()
   {
     const(PangoMatrix)* _cretval;
     _cretval = pango_renderer_get_matrix(cast(PangoRenderer*)cPtr);
-    auto _retval = _cretval ? new Matrix(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.matrix.Matrix(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class Renderer : ObjectG
    * Params:
    *   part = the part for which rendering has changed.
    */
-  void partChanged(RenderPart part)
+  void partChanged(pango.types.RenderPart part)
   {
     pango_renderer_part_changed(cast(PangoRenderer*)cPtr, part);
   }
@@ -316,7 +316,7 @@ class Renderer : ObjectG
    *   part = the part to set the alpha for
    *   alpha = an alpha value between 1 and 65536, or 0 to unset the alpha
    */
-  void setAlpha(RenderPart part, ushort alpha)
+  void setAlpha(pango.types.RenderPart part, ushort alpha)
   {
     pango_renderer_set_alpha(cast(PangoRenderer*)cPtr, part, alpha);
   }
@@ -328,9 +328,9 @@ class Renderer : ObjectG
    *   part = the part to change the color of
    *   color = the new color or %NULL to unset the current color
    */
-  void setColor(RenderPart part, Color color)
+  void setColor(pango.types.RenderPart part, pango.color.Color color)
   {
-    pango_renderer_set_color(cast(PangoRenderer*)cPtr, part, color ? cast(PangoColor*)color.cPtr(No.Dup) : null);
+    pango_renderer_set_color(cast(PangoRenderer*)cPtr, part, color ? cast(const(PangoColor)*)color.cPtr(No.Dup) : null);
   }
 
   /**
@@ -339,8 +339,8 @@ class Renderer : ObjectG
    *   matrix = a `PangoMatrix`, or %NULL to unset any existing matrix
    *     $(LPAREN)No matrix set is the same as setting the identity matrix.$(RPAREN)
    */
-  void setMatrix(Matrix matrix)
+  void setMatrix(pango.matrix.Matrix matrix)
   {
-    pango_renderer_set_matrix(cast(PangoRenderer*)cPtr, matrix ? cast(PangoMatrix*)matrix.cPtr(No.Dup) : null);
+    pango_renderer_set_matrix(cast(PangoRenderer*)cPtr, matrix ? cast(const(PangoMatrix)*)matrix.cPtr(No.Dup) : null);
   }
 }

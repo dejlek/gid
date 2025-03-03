@@ -4,12 +4,12 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.event;
 import gdk.types;
-import gid.global;
+import gid.gid;
 
 /**
  * An event related to a scrolling motion.
  */
-class ScrollEvent : Event
+class ScrollEvent : gdk.event.Event
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -39,11 +39,11 @@ class ScrollEvent : Event
    * Extracts the direction of a scroll event.
    * Returns: the scroll direction of event
    */
-  ScrollDirection getDirection()
+  gdk.types.ScrollDirection getDirection()
   {
     GdkScrollDirection _cretval;
     _cretval = gdk_scroll_event_get_direction(cast(GdkEvent*)cPtr);
-    ScrollDirection _retval = cast(ScrollDirection)_cretval;
+    gdk.types.ScrollDirection _retval = cast(gdk.types.ScrollDirection)_cretval;
     return _retval;
   }
 
@@ -53,11 +53,11 @@ class ScrollEvent : Event
    * %GDK_SCROLL_SMOOTH.
    * Returns: the scroll unit.
    */
-  ScrollUnit getUnit()
+  gdk.types.ScrollUnit getUnit()
   {
     GdkScrollUnit _cretval;
     _cretval = gdk_scroll_event_get_unit(cast(GdkEvent*)cPtr);
-    ScrollUnit _retval = cast(ScrollUnit)_cretval;
+    gdk.types.ScrollUnit _retval = cast(gdk.types.ScrollUnit)_cretval;
     return _retval;
   }
 

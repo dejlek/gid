@@ -1,6 +1,6 @@
 module gsk.color_matrix_node;
 
-import gid.global;
+import gid.gid;
 import graphene.matrix;
 import graphene.vec4;
 import gsk.c.functions;
@@ -11,7 +11,7 @@ import gsk.types;
 /**
  * A render node controlling the color matrix of its single child node.
  */
-class ColorMatrixNode : RenderNode
+class ColorMatrixNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -35,10 +35,10 @@ class ColorMatrixNode : RenderNode
    *   colorOffset = Values to add to the color
    * Returns: A new `GskRenderNode`
    */
-  this(RenderNode child, Matrix colorMatrix, Vec4 colorOffset)
+  this(gsk.render_node.RenderNode child, graphene.matrix.Matrix colorMatrix, graphene.vec4.Vec4 colorOffset)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_color_matrix_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, colorMatrix ? cast(graphene_matrix_t*)colorMatrix.cPtr(No.Dup) : null, colorOffset ? cast(graphene_vec4_t*)colorOffset.cPtr(No.Dup) : null);
+    _cretval = gsk_color_matrix_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, colorMatrix ? cast(const(graphene_matrix_t)*)colorMatrix.cPtr(No.Dup) : null, colorOffset ? cast(const(graphene_vec4_t)*)colorOffset.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -46,11 +46,11 @@ class ColorMatrixNode : RenderNode
    * Gets the child node that is getting its colors modified by the given node.
    * Returns: The child that is getting its colors modified
    */
-  RenderNode getChild()
+  gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_color_matrix_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    _cretval = gsk_color_matrix_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -58,11 +58,11 @@ class ColorMatrixNode : RenderNode
    * Retrieves the color matrix used by the node.
    * Returns: a 4x4 color matrix
    */
-  Matrix getColorMatrix()
+  graphene.matrix.Matrix getColorMatrix()
   {
     const(graphene_matrix_t)* _cretval;
-    _cretval = gsk_color_matrix_node_get_color_matrix(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Matrix(cast(void*)_cretval, No.Take) : null;
+    _cretval = gsk_color_matrix_node_get_color_matrix(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new graphene.matrix.Matrix(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -70,11 +70,11 @@ class ColorMatrixNode : RenderNode
    * Retrieves the color offset used by the node.
    * Returns: a color vector
    */
-  Vec4 getColorOffset()
+  graphene.vec4.Vec4 getColorOffset()
   {
     const(graphene_vec4_t)* _cretval;
-    _cretval = gsk_color_matrix_node_get_color_offset(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Vec4(cast(void*)_cretval, No.Take) : null;
+    _cretval = gsk_color_matrix_node_get_color_offset(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new graphene.vec4.Vec4(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

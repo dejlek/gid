@@ -3,7 +3,7 @@ module gdk.rgba;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -16,7 +16,7 @@ import gobject.boxed;
  * $(LPAREN)1.0, 1.0, 1.0, 1.0$(RPAREN) is opaque white. Other values will
  * be clamped to this range when drawing.
  */
-class RGBA : Boxed
+class RGBA : gobject.boxed.Boxed
 {
 
   this()
@@ -90,11 +90,11 @@ class RGBA : Boxed
    * The result must be freed through [gdk.rgba.RGBA.free].
    * Returns: A newly allocated `GdkRGBA`, with the same contents as rgba
    */
-  RGBA copy()
+  gdk.rgba.RGBA copy()
   {
     GdkRGBA* _cretval;
-    _cretval = gdk_rgba_copy(cast(GdkRGBA*)cPtr);
-    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gdk_rgba_copy(cast(const(GdkRGBA)*)cPtr);
+    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class RGBA : Boxed
    *   p2 = another `GdkRGBA`
    * Returns: %TRUE if the two colors compare equal
    */
-  bool equal(RGBA p2)
+  bool equal(gdk.rgba.RGBA p2)
   {
     bool _retval;
     _retval = gdk_rgba_equal(cast(GdkRGBA*)cPtr, p2 ? cast(GdkRGBA*)p2.cPtr(No.Dup) : null);
@@ -131,7 +131,7 @@ class RGBA : Boxed
   bool isClear()
   {
     bool _retval;
-    _retval = gdk_rgba_is_clear(cast(GdkRGBA*)cPtr);
+    _retval = gdk_rgba_is_clear(cast(const(GdkRGBA)*)cPtr);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class RGBA : Boxed
   bool isOpaque()
   {
     bool _retval;
-    _retval = gdk_rgba_is_opaque(cast(GdkRGBA*)cPtr);
+    _retval = gdk_rgba_is_opaque(cast(const(GdkRGBA)*)cPtr);
     return _retval;
   }
 
@@ -195,8 +195,8 @@ class RGBA : Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = gdk_rgba_to_string(cast(GdkRGBA*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    _cretval = gdk_rgba_to_string(cast(const(GdkRGBA)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

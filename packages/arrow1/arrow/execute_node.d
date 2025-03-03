@@ -4,10 +4,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.schema;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class ExecuteNode : ObjectG
+class ExecuteNode : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -30,15 +30,15 @@ class ExecuteNode : ObjectG
   {
     const(char)* _cretval;
     _cretval = garrow_execute_node_get_kind_name(cast(GArrowExecuteNode*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
-  Schema getOutputSchema()
+  arrow.schema.Schema getOutputSchema()
   {
     GArrowSchema* _cretval;
     _cretval = garrow_execute_node_get_output_schema(cast(GArrowExecuteNode*)cPtr);
-    auto _retval = ObjectG.getDObject!Schema(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 }

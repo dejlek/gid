@@ -1,7 +1,7 @@
 module gtk.scrollable;
 
 public import gtk.scrollable_iface_proxy;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.adjustment;
 import gtk.border;
@@ -51,38 +51,38 @@ interface Scrollable
    *   border = return location for the results
    * Returns: %TRUE if border has been set
    */
-  bool getBorder(out Border border);
+  bool getBorder(out gtk.border.Border border);
 
   /**
    * Retrieves the `GtkAdjustment` used for horizontal scrolling.
    * Returns: horizontal `GtkAdjustment`.
    */
-  Adjustment getHadjustment();
+  gtk.adjustment.Adjustment getHadjustment();
 
   /**
    * Gets the horizontal `GtkScrollablePolicy`.
    * Returns: The horizontal `GtkScrollablePolicy`.
    */
-  ScrollablePolicy getHscrollPolicy();
+  gtk.types.ScrollablePolicy getHscrollPolicy();
 
   /**
    * Retrieves the `GtkAdjustment` used for vertical scrolling.
    * Returns: vertical `GtkAdjustment`.
    */
-  Adjustment getVadjustment();
+  gtk.adjustment.Adjustment getVadjustment();
 
   /**
    * Gets the vertical `GtkScrollablePolicy`.
    * Returns: The vertical `GtkScrollablePolicy`.
    */
-  ScrollablePolicy getVscrollPolicy();
+  gtk.types.ScrollablePolicy getVscrollPolicy();
 
   /**
    * Sets the horizontal adjustment of the `GtkScrollable`.
    * Params:
    *   hadjustment = a `GtkAdjustment`
    */
-  void setHadjustment(Adjustment hadjustment);
+  void setHadjustment(gtk.adjustment.Adjustment hadjustment);
 
   /**
    * Sets the `GtkScrollablePolicy`.
@@ -91,14 +91,14 @@ interface Scrollable
    * Params:
    *   policy = the horizontal `GtkScrollablePolicy`
    */
-  void setHscrollPolicy(ScrollablePolicy policy);
+  void setHscrollPolicy(gtk.types.ScrollablePolicy policy);
 
   /**
    * Sets the vertical adjustment of the `GtkScrollable`.
    * Params:
    *   vadjustment = a `GtkAdjustment`
    */
-  void setVadjustment(Adjustment vadjustment);
+  void setVadjustment(gtk.adjustment.Adjustment vadjustment);
 
   /**
    * Sets the `GtkScrollablePolicy`.
@@ -107,5 +107,5 @@ interface Scrollable
    * Params:
    *   policy = the vertical `GtkScrollablePolicy`
    */
-  void setVscrollPolicy(ScrollablePolicy policy);
+  void setVscrollPolicy(gtk.types.ScrollablePolicy policy);
 }

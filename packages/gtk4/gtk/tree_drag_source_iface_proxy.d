@@ -5,7 +5,7 @@ import gtk.tree_drag_source;
 import gtk.tree_drag_source_mixin;
 
 /// Proxy object for Gtk.TreeDragSource interface when a GObject has no applicable D binding
-class TreeDragSourceIfaceProxy : IfaceProxy, TreeDragSource
+class TreeDragSourceIfaceProxy : IfaceProxy, gtk.tree_drag_source.TreeDragSource
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class TreeDragSourceIfaceProxy : IfaceProxy, TreeDragSource
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(TreeDragSource);
+    return typeid(gtk.tree_drag_source.TreeDragSource);
   }
 
   mixin TreeDragSourceT!();

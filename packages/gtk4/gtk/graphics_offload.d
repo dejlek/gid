@@ -1,6 +1,6 @@
 module gtk.graphics_offload;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -38,7 +38,7 @@ import gtk.widget;
  * GDK_DEBUG\=dmabuf
  * The GTK inspector provides a visual debugging tool for graphics offload.
  */
-class GraphicsOffload : Widget
+class GraphicsOffload : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -63,7 +63,7 @@ class GraphicsOffload : Widget
    *   child = the child widget
    * Returns: the new widget
    */
-  this(Widget child)
+  this(gtk.widget.Widget child)
   {
     GtkWidget* _cretval;
     _cretval = gtk_graphics_offload_new(child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
@@ -74,11 +74,11 @@ class GraphicsOffload : Widget
    * Gets the child of self.
    * Returns: the child widget
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_graphics_offload_get_child(cast(GtkGraphicsOffload*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -86,11 +86,11 @@ class GraphicsOffload : Widget
    * Returns whether offload is enabled for self.
    * Returns: whether offload is enabled
    */
-  GraphicsOffloadEnabled getEnabled()
+  gtk.types.GraphicsOffloadEnabled getEnabled()
   {
     GtkGraphicsOffloadEnabled _cretval;
     _cretval = gtk_graphics_offload_get_enabled(cast(GtkGraphicsOffload*)cPtr);
-    GraphicsOffloadEnabled _retval = cast(GraphicsOffloadEnabled)_cretval;
+    gtk.types.GraphicsOffloadEnabled _retval = cast(gtk.types.GraphicsOffloadEnabled)_cretval;
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class GraphicsOffload : Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_graphics_offload_set_child(cast(GtkGraphicsOffload*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -110,7 +110,7 @@ class GraphicsOffload : Widget
    * Params:
    *   enabled = whether to enable offload
    */
-  void setEnabled(GraphicsOffloadEnabled enabled)
+  void setEnabled(gtk.types.GraphicsOffloadEnabled enabled)
   {
     gtk_graphics_offload_set_enabled(cast(GtkGraphicsOffload*)cPtr, enabled);
   }

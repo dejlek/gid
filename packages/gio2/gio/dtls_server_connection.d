@@ -1,11 +1,10 @@
 module gio.dtls_server_connection;
 
 public import gio.dtls_server_connection_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.datagram_based;
-import gio.datagram_based_mixin;
 import gio.tls_certificate;
 import gio.types;
 import glib.error;
@@ -32,14 +31,14 @@ interface DtlsServerConnection
    * Returns: the new
    *   #GDtlsServerConnection, or %NULL on error
    */
-  static DtlsServerConnection new_(DatagramBased baseSocket, TlsCertificate certificate)
+  static gio.dtls_server_connection.DtlsServerConnection new_(gio.datagram_based.DatagramBased baseSocket, gio.tls_certificate.TlsCertificate certificate)
   {
     GDatagramBased* _cretval;
     GError *_err;
     _cretval = g_dtls_server_connection_new(baseSocket ? cast(GDatagramBased*)(cast(ObjectG)baseSocket).cPtr(No.Dup) : null, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!DtlsServerConnection(cast(GDatagramBased*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dtls_server_connection.DtlsServerConnection)(cast(GDatagramBased*)_cretval, Yes.Take);
     return _retval;
   }
 }

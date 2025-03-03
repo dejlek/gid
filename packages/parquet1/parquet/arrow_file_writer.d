@@ -5,7 +5,7 @@ import arrow.output_stream;
 import arrow.record_batch;
 import arrow.schema;
 import arrow.table;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 import parquet.c.functions;
@@ -13,7 +13,7 @@ import parquet.c.types;
 import parquet.types;
 import parquet.writer_properties;
 
-class ArrowFileWriter : ObjectG
+class ArrowFileWriter : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -32,18 +32,18 @@ class ArrowFileWriter : ObjectG
     return getType();
   }
 
-  static ArrowFileWriter newArrow(Schema schema, OutputStream sink, WriterProperties writerProperties)
+  static parquet.arrow_file_writer.ArrowFileWriter newArrow(arrow.schema.Schema schema, arrow.output_stream.OutputStream sink, parquet.writer_properties.WriterProperties writerProperties)
   {
     GParquetArrowFileWriter* _cretval;
     GError *_err;
     _cretval = gparquet_arrow_file_writer_new_arrow(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, sink ? cast(GArrowOutputStream*)sink.cPtr(No.Dup) : null, writerProperties ? cast(GParquetWriterProperties*)writerProperties.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!ArrowFileWriter(cast(GParquetArrowFileWriter*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(parquet.arrow_file_writer.ArrowFileWriter)(cast(GParquetArrowFileWriter*)_cretval, Yes.Take);
     return _retval;
   }
 
-  static ArrowFileWriter newPath(Schema schema, string path, WriterProperties writerProperties)
+  static parquet.arrow_file_writer.ArrowFileWriter newPath(arrow.schema.Schema schema, string path, parquet.writer_properties.WriterProperties writerProperties)
   {
     GParquetArrowFileWriter* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -51,7 +51,7 @@ class ArrowFileWriter : ObjectG
     _cretval = gparquet_arrow_file_writer_new_path(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, _path, writerProperties ? cast(GParquetWriterProperties*)writerProperties.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!ArrowFileWriter(cast(GParquetArrowFileWriter*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(parquet.arrow_file_writer.ArrowFileWriter)(cast(GParquetArrowFileWriter*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -65,11 +65,11 @@ class ArrowFileWriter : ObjectG
     return _retval;
   }
 
-  Schema getSchema()
+  arrow.schema.Schema getSchema()
   {
     GArrowSchema* _cretval;
     _cretval = gparquet_arrow_file_writer_get_schema(cast(GParquetArrowFileWriter*)cPtr);
-    auto _retval = ObjectG.getDObject!Schema(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class ArrowFileWriter : ObjectG
    *   chunkedArray = A #GArrowChunkedArray to be written.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool writeChunkedArray(ChunkedArray chunkedArray)
+  bool writeChunkedArray(arrow.chunked_array.ChunkedArray chunkedArray)
   {
     bool _retval;
     GError *_err;
@@ -133,7 +133,7 @@ class ArrowFileWriter : ObjectG
    *   recordBatch = A record batch to be written.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool writeRecordBatch(RecordBatch recordBatch)
+  bool writeRecordBatch(arrow.record_batch.RecordBatch recordBatch)
   {
     bool _retval;
     GError *_err;
@@ -143,7 +143,7 @@ class ArrowFileWriter : ObjectG
     return _retval;
   }
 
-  bool writeTable(Table table, size_t chunkSize)
+  bool writeTable(arrow.table.Table table, size_t chunkSize)
   {
     bool _retval;
     GError *_err;

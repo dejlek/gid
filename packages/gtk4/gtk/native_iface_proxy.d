@@ -5,7 +5,7 @@ import gtk.native;
 import gtk.native_mixin;
 
 /// Proxy object for Gtk.Native interface when a GObject has no applicable D binding
-class NativeIfaceProxy : IfaceProxy, Native
+class NativeIfaceProxy : IfaceProxy, gtk.native.Native
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class NativeIfaceProxy : IfaceProxy, Native
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Native);
+    return typeid(gtk.native.Native);
   }
 
   mixin NativeT!();

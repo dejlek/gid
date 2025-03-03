@@ -5,7 +5,7 @@ import gio.dtls_server_connection;
 import gio.dtls_server_connection_mixin;
 
 /// Proxy object for Gio.DtlsServerConnection interface when a GObject has no applicable D binding
-class DtlsServerConnectionIfaceProxy : IfaceProxy, DtlsServerConnection
+class DtlsServerConnectionIfaceProxy : IfaceProxy, gio.dtls_server_connection.DtlsServerConnection
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class DtlsServerConnectionIfaceProxy : IfaceProxy, DtlsServerConnection
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(DtlsServerConnection);
+    return typeid(gio.dtls_server_connection.DtlsServerConnection);
   }
 
   mixin DtlsServerConnectionT!();

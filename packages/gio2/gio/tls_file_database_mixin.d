@@ -1,7 +1,7 @@
 module gio.tls_file_database_mixin;
 
 public import gio.tls_file_database_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;

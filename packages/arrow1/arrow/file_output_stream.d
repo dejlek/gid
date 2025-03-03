@@ -8,10 +8,10 @@ import arrow.output_stream;
 import arrow.types;
 import arrow.writable;
 import arrow.writable_mixin;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class FileOutputStream : OutputStream
+class FileOutputStream : arrow.output_stream.OutputStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

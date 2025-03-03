@@ -1,7 +1,7 @@
 module gtksource.view;
 
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -25,7 +25,6 @@ import gtksource.completion;
 import gtksource.gutter;
 import gtksource.hover;
 import gtksource.indenter;
-import gtksource.indenter_mixin;
 import gtksource.mark_attributes;
 import gtksource.snippet;
 import gtksource.space_drawer;
@@ -80,7 +79,7 @@ import gtksource.types;
  * [gtk.text_tag.TextTag.gdouble] set so that the font size may be scaled relative to
  * the default font set in CSS.
  */
-class View : TextView
+class View : gtk.text_view.TextView
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -122,11 +121,11 @@ class View : TextView
    *   buffer = a #GtkSourceBuffer.
    * Returns: a new #GtkSourceView.
    */
-  static View newWithBuffer(Buffer buffer)
+  static gtksource.view.View newWithBuffer(gtksource.buffer.Buffer buffer)
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_view_new_with_buffer(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!View(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -146,11 +145,11 @@ class View : TextView
    * the background pattern should be displayed for this view.
    * Returns: the #GtkSourceBackgroundPatternType.
    */
-  BackgroundPatternType getBackgroundPattern()
+  gtksource.types.BackgroundPatternType getBackgroundPattern()
   {
     GtkSourceBackgroundPatternType _cretval;
     _cretval = gtk_source_view_get_background_pattern(cast(GtkSourceView*)cPtr);
-    BackgroundPatternType _retval = cast(BackgroundPatternType)_cretval;
+    gtksource.types.BackgroundPatternType _retval = cast(gtksource.types.BackgroundPatternType)_cretval;
     return _retval;
   }
 
@@ -160,11 +159,11 @@ class View : TextView
    * Each `GtkSourceView` object has a different classCompletion.
    * Returns: the #GtkSourceCompletion associated with view.
    */
-  Completion getCompletion()
+  gtksource.completion.Completion getCompletion()
   {
     GtkSourceCompletion* _cretval;
     _cretval = gtk_source_view_get_completion(cast(GtkSourceView*)cPtr);
-    auto _retval = ObjectG.getDObject!Completion(cast(GtkSourceCompletion*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.completion.Completion)(cast(GtkSourceCompletion*)_cretval, No.Take);
     return _retval;
   }
 
@@ -190,11 +189,11 @@ class View : TextView
    *   windowType = the gutter window type.
    * Returns: the #GtkSourceGutter.
    */
-  override Gutter getGutter(TextWindowType windowType)
+  override gtksource.gutter.Gutter getGutter(gtk.types.TextWindowType windowType)
   {
     GtkSourceGutter* _cretval;
     _cretval = gtk_source_view_get_gutter(cast(GtkSourceView*)cPtr, windowType);
-    auto _retval = ObjectG.getDObject!Gutter(cast(GtkSourceGutter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.gutter.Gutter)(cast(GtkSourceGutter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -215,11 +214,11 @@ class View : TextView
    * Each classView object has a different classHover.
    * Returns: a #GtkSourceHover associated with view.
    */
-  Hover getHover()
+  gtksource.hover.Hover getHover()
   {
     GtkSourceHover* _cretval;
     _cretval = gtk_source_view_get_hover(cast(GtkSourceView*)cPtr);
-    auto _retval = ObjectG.getDObject!Hover(cast(GtkSourceHover*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.hover.Hover)(cast(GtkSourceHover*)_cretval, No.Take);
     return _retval;
   }
 
@@ -251,11 +250,11 @@ class View : TextView
    * Gets the propertyView:indenter property.
    * Returns: a #GtkSourceIndenter or %NULL
    */
-  Indenter getIndenter()
+  gtksource.indenter.Indenter getIndenter()
   {
     GtkSourceIndenter* _cretval;
     _cretval = gtk_source_view_get_indenter(cast(GtkSourceView*)cPtr);
-    auto _retval = ObjectG.getDObject!Indenter(cast(GtkSourceIndenter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.indenter.Indenter)(cast(GtkSourceIndenter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -279,12 +278,12 @@ class View : TextView
    * Returns: #GtkSourceMarkAttributes for the category.
    *   The object belongs to view, so it must not be unreffed.
    */
-  MarkAttributes getMarkAttributes(string category, out int priority)
+  gtksource.mark_attributes.MarkAttributes getMarkAttributes(string category, out int priority)
   {
     GtkSourceMarkAttributes* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
     _cretval = gtk_source_view_get_mark_attributes(cast(GtkSourceView*)cPtr, _category, cast(int*)&priority);
-    auto _retval = ObjectG.getDObject!MarkAttributes(cast(GtkSourceMarkAttributes*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.mark_attributes.MarkAttributes)(cast(GtkSourceMarkAttributes*)_cretval, No.Take);
     return _retval;
   }
 
@@ -349,11 +348,11 @@ class View : TextView
    * how the cursor will move when HOME and END keys are pressed.
    * Returns: a #GtkSourceSmartHomeEndType value.
    */
-  SmartHomeEndType getSmartHomeEnd()
+  gtksource.types.SmartHomeEndType getSmartHomeEnd()
   {
     GtkSourceSmartHomeEndType _cretval;
     _cretval = gtk_source_view_get_smart_home_end(cast(GtkSourceView*)cPtr);
-    SmartHomeEndType _retval = cast(SmartHomeEndType)_cretval;
+    gtksource.types.SmartHomeEndType _retval = cast(gtksource.types.SmartHomeEndType)_cretval;
     return _retval;
   }
 
@@ -363,11 +362,11 @@ class View : TextView
    * Each classView object has a different classSpaceDrawer.
    * Returns: the #GtkSourceSpaceDrawer associated with view.
    */
-  SpaceDrawer getSpaceDrawer()
+  gtksource.space_drawer.SpaceDrawer getSpaceDrawer()
   {
     GtkSourceSpaceDrawer* _cretval;
     _cretval = gtk_source_view_get_space_drawer(cast(GtkSourceView*)cPtr);
-    auto _retval = ObjectG.getDObject!SpaceDrawer(cast(GtkSourceSpaceDrawer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.space_drawer.SpaceDrawer)(cast(GtkSourceSpaceDrawer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -389,10 +388,10 @@ class View : TextView
    *   iter = a position in view.
    * Returns: the visual column at iter.
    */
-  uint getVisualColumn(TextIter iter)
+  uint getVisualColumn(gtk.text_iter.TextIter iter)
   {
     uint _retval;
-    _retval = gtk_source_view_get_visual_column(cast(GtkSourceView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_source_view_get_visual_column(cast(GtkSourceView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -403,7 +402,7 @@ class View : TextView
    *   start = #GtkTextIter of the first line to indent
    *   end = #GtkTextIter of the last line to indent
    */
-  void indentLines(TextIter start, TextIter end)
+  void indentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
     gtk_source_view_indent_lines(cast(GtkSourceView*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
   }
@@ -417,7 +416,7 @@ class View : TextView
    *   snippet = a #GtkSourceSnippet
    *   location = a #GtkTextIter or %NULL for the cursor position
    */
-  void pushSnippet(Snippet snippet, TextIter location)
+  void pushSnippet(gtksource.snippet.Snippet snippet, gtk.text_iter.TextIter location)
   {
     gtk_source_view_push_snippet(cast(GtkSourceView*)cPtr, snippet ? cast(GtkSourceSnippet*)snippet.cPtr(No.Dup) : null, location ? cast(GtkTextIter*)location.cPtr(No.Dup) : null);
   }
@@ -441,7 +440,7 @@ class View : TextView
    * Params:
    *   backgroundPattern = the #GtkSourceBackgroundPatternType.
    */
-  void setBackgroundPattern(BackgroundPatternType backgroundPattern)
+  void setBackgroundPattern(gtksource.types.BackgroundPatternType backgroundPattern)
   {
     gtk_source_view_set_background_pattern(cast(GtkSourceView*)cPtr, backgroundPattern);
   }
@@ -519,7 +518,7 @@ class View : TextView
    * Params:
    *   indenter = a #GtkSourceIndenter or %NULL
    */
-  void setIndenter(Indenter indenter)
+  void setIndenter(gtksource.indenter.Indenter indenter)
   {
     gtk_source_view_set_indenter(cast(GtkSourceView*)cPtr, indenter ? cast(GtkSourceIndenter*)(cast(ObjectG)indenter).cPtr(No.Dup) : null);
   }
@@ -543,7 +542,7 @@ class View : TextView
    *   attributes = mark attributes.
    *   priority = priority of the category.
    */
-  void setMarkAttributes(string category, MarkAttributes attributes, int priority)
+  void setMarkAttributes(string category, gtksource.mark_attributes.MarkAttributes attributes, int priority)
   {
     const(char)* _category = category.toCString(No.Alloc);
     gtk_source_view_set_mark_attributes(cast(GtkSourceView*)cPtr, _category, attributes ? cast(GtkSourceMarkAttributes*)attributes.cPtr(No.Dup) : null, priority);
@@ -606,7 +605,7 @@ class View : TextView
    * Params:
    *   smartHomeEnd = the desired behavior among #GtkSourceSmartHomeEndType.
    */
-  void setSmartHomeEnd(SmartHomeEndType smartHomeEnd)
+  void setSmartHomeEnd(gtksource.types.SmartHomeEndType smartHomeEnd)
   {
     gtk_source_view_set_smart_home_end(cast(GtkSourceView*)cPtr, smartHomeEnd);
   }
@@ -630,7 +629,7 @@ class View : TextView
    *   start = #GtkTextIter of the first line to indent
    *   end = #GtkTextIter of the last line to indent
    */
-  void unindentLines(TextIter start, TextIter end)
+  void unindentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
     gtk_source_view_unindent_lines(cast(GtkSourceView*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
   }
@@ -641,8 +640,8 @@ class View : TextView
    *   caseType = the case to use
    *   view = the instance the signal is connected to
    */
-  alias ChangeCaseCallbackDlg = void delegate(ChangeCaseType caseType, View view);
-  alias ChangeCaseCallbackFunc = void function(ChangeCaseType caseType, View view);
+  alias ChangeCaseCallbackDlg = void delegate(gtksource.types.ChangeCaseType caseType, gtksource.view.View view);
+  alias ChangeCaseCallbackFunc = void function(gtksource.types.ChangeCaseType caseType, gtksource.view.View view);
 
   /**
    * Connect to ChangeCase signal.
@@ -658,8 +657,8 @@ class View : TextView
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto view = getVal!View(_paramVals);
-      auto caseType = getVal!ChangeCaseType(&_paramVals[1]);
+      auto view = getVal!(gtksource.view.View)(_paramVals);
+      auto caseType = getVal!(gtksource.types.ChangeCaseType)(&_paramVals[1]);
       _dClosure.dlg(caseType, view);
     }
 
@@ -673,8 +672,8 @@ class View : TextView
    *   count = the number to add to the number at the current position
    *   view = the instance the signal is connected to
    */
-  alias ChangeNumberCallbackDlg = void delegate(int count, View view);
-  alias ChangeNumberCallbackFunc = void function(int count, View view);
+  alias ChangeNumberCallbackDlg = void delegate(int count, gtksource.view.View view);
+  alias ChangeNumberCallbackFunc = void function(int count, gtksource.view.View view);
 
   /**
    * Connect to ChangeNumber signal.
@@ -690,8 +689,8 @@ class View : TextView
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto view = getVal!View(_paramVals);
-      auto count = getVal!int(&_paramVals[1]);
+      auto view = getVal!(gtksource.view.View)(_paramVals);
+      auto count = getVal!(int)(&_paramVals[1]);
       _dClosure.dlg(count, view);
     }
 
@@ -703,8 +702,8 @@ class View : TextView
    * Keybinding signal to join the lines currently selected.
    *   view = the instance the signal is connected to
    */
-  alias JoinLinesCallbackDlg = void delegate(View view);
-  alias JoinLinesCallbackFunc = void function(View view);
+  alias JoinLinesCallbackDlg = void delegate(gtksource.view.View view);
+  alias JoinLinesCallbackFunc = void function(gtksource.view.View view);
 
   /**
    * Connect to JoinLines signal.
@@ -720,7 +719,7 @@ class View : TextView
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto view = getVal!View(_paramVals);
+      auto view = getVal!(gtksource.view.View)(_paramVals);
       _dClosure.dlg(view);
     }
 
@@ -739,8 +738,8 @@ class View : TextView
    *   nPresses = the number of presses
    *   view = the instance the signal is connected to
    */
-  alias LineMarkActivatedCallbackDlg = void delegate(TextIter iter, uint button, ModifierType state, int nPresses, View view);
-  alias LineMarkActivatedCallbackFunc = void function(TextIter iter, uint button, ModifierType state, int nPresses, View view);
+  alias LineMarkActivatedCallbackDlg = void delegate(gtk.text_iter.TextIter iter, uint button, gdk.types.ModifierType state, int nPresses, gtksource.view.View view);
+  alias LineMarkActivatedCallbackFunc = void function(gtk.text_iter.TextIter iter, uint button, gdk.types.ModifierType state, int nPresses, gtksource.view.View view);
 
   /**
    * Connect to LineMarkActivated signal.
@@ -756,11 +755,11 @@ class View : TextView
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto view = getVal!View(_paramVals);
-      auto iter = getVal!TextIter(&_paramVals[1]);
-      auto button = getVal!uint(&_paramVals[2]);
-      auto state = getVal!ModifierType(&_paramVals[3]);
-      auto nPresses = getVal!int(&_paramVals[4]);
+      auto view = getVal!(gtksource.view.View)(_paramVals);
+      auto iter = getVal!(gtk.text_iter.TextIter)(&_paramVals[1]);
+      auto button = getVal!(uint)(&_paramVals[2]);
+      auto state = getVal!(gdk.types.ModifierType)(&_paramVals[3]);
+      auto nPresses = getVal!(int)(&_paramVals[4]);
       _dClosure.dlg(iter, button, state, nPresses, view);
     }
 
@@ -776,8 +775,8 @@ class View : TextView
    *   down = %TRUE to move down, %FALSE to move up.
    *   view = the instance the signal is connected to
    */
-  alias MoveLinesCallbackDlg = void delegate(bool down, View view);
-  alias MoveLinesCallbackFunc = void function(bool down, View view);
+  alias MoveLinesCallbackDlg = void delegate(bool down, gtksource.view.View view);
+  alias MoveLinesCallbackFunc = void function(bool down, gtksource.view.View view);
 
   /**
    * Connect to MoveLines signal.
@@ -793,8 +792,8 @@ class View : TextView
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto view = getVal!View(_paramVals);
-      auto down = getVal!bool(&_paramVals[1]);
+      auto view = getVal!(gtksource.view.View)(_paramVals);
+      auto down = getVal!(bool)(&_paramVals[1]);
       _dClosure.dlg(down, view);
     }
 
@@ -808,8 +807,8 @@ class View : TextView
    *   extendSelection = %TRUE if the move should extend the selection
    *   view = the instance the signal is connected to
    */
-  alias MoveToMatchingBracketCallbackDlg = void delegate(bool extendSelection, View view);
-  alias MoveToMatchingBracketCallbackFunc = void function(bool extendSelection, View view);
+  alias MoveToMatchingBracketCallbackDlg = void delegate(bool extendSelection, gtksource.view.View view);
+  alias MoveToMatchingBracketCallbackFunc = void function(bool extendSelection, gtksource.view.View view);
 
   /**
    * Connect to MoveToMatchingBracket signal.
@@ -825,8 +824,8 @@ class View : TextView
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto view = getVal!View(_paramVals);
-      auto extendSelection = getVal!bool(&_paramVals[1]);
+      auto view = getVal!(gtksource.view.View)(_paramVals);
+      auto extendSelection = getVal!(bool)(&_paramVals[1]);
       _dClosure.dlg(extendSelection, view);
     }
 
@@ -842,8 +841,8 @@ class View : TextView
    *   count = the number of words to move over
    *   view = the instance the signal is connected to
    */
-  alias MoveWordsCallbackDlg = void delegate(int count, View view);
-  alias MoveWordsCallbackFunc = void function(int count, View view);
+  alias MoveWordsCallbackDlg = void delegate(int count, gtksource.view.View view);
+  alias MoveWordsCallbackFunc = void function(int count, gtksource.view.View view);
 
   /**
    * Connect to MoveWords signal.
@@ -859,8 +858,8 @@ class View : TextView
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto view = getVal!View(_paramVals);
-      auto count = getVal!int(&_paramVals[1]);
+      auto view = getVal!(gtksource.view.View)(_paramVals);
+      auto count = getVal!(int)(&_paramVals[1]);
       _dClosure.dlg(count, view);
     }
 
@@ -879,8 +878,8 @@ class View : TextView
    * another means, for example with another key binding or a menu entry.
    *   view = the instance the signal is connected to
    */
-  alias ShowCompletionCallbackDlg = void delegate(View view);
-  alias ShowCompletionCallbackFunc = void function(View view);
+  alias ShowCompletionCallbackDlg = void delegate(gtksource.view.View view);
+  alias ShowCompletionCallbackFunc = void function(gtksource.view.View view);
 
   /**
    * Connect to ShowCompletion signal.
@@ -896,7 +895,7 @@ class View : TextView
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto view = getVal!View(_paramVals);
+      auto view = getVal!(gtksource.view.View)(_paramVals);
       _dClosure.dlg(view);
     }
 
@@ -915,8 +914,8 @@ class View : TextView
    *   count = the count
    *   view = the instance the signal is connected to
    */
-  alias SmartHomeEndCallbackDlg = void delegate(TextIter iter, int count, View view);
-  alias SmartHomeEndCallbackFunc = void function(TextIter iter, int count, View view);
+  alias SmartHomeEndCallbackDlg = void delegate(gtk.text_iter.TextIter iter, int count, gtksource.view.View view);
+  alias SmartHomeEndCallbackFunc = void function(gtk.text_iter.TextIter iter, int count, gtksource.view.View view);
 
   /**
    * Connect to SmartHomeEnd signal.
@@ -932,9 +931,9 @@ class View : TextView
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto view = getVal!View(_paramVals);
-      auto iter = getVal!TextIter(&_paramVals[1]);
-      auto count = getVal!int(&_paramVals[2]);
+      auto view = getVal!(gtksource.view.View)(_paramVals);
+      auto iter = getVal!(gtk.text_iter.TextIter)(&_paramVals[1]);
+      auto count = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(iter, count, view);
     }
 

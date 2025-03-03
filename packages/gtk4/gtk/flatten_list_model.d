@@ -1,6 +1,6 @@
 module gtk.flatten_list_model;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -15,7 +15,7 @@ import gtk.types;
  * `GtkFlattenListModel` takes a list model containing list models, and flattens
  * it into a single model. Each list model becomes a section in the single model.
  */
-class FlattenListModel : ObjectG, ListModel, SectionModel
+class FlattenListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -43,7 +43,7 @@ class FlattenListModel : ObjectG, ListModel, SectionModel
    *   model = the model to be flattened
    * Returns: a new `GtkFlattenListModel`
    */
-  this(ListModel model)
+  this(gio.list_model.ListModel model)
   {
     GtkFlattenListModel* _cretval;
     _cretval = gtk_flatten_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
@@ -54,11 +54,11 @@ class FlattenListModel : ObjectG, ListModel, SectionModel
    * Gets the model set via [gtk.flatten_list_model.FlattenListModel.setModel].
    * Returns: The model flattened by self
    */
-  ListModel getModel()
+  gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
     _cretval = gtk_flatten_list_model_get_model(cast(GtkFlattenListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -68,11 +68,11 @@ class FlattenListModel : ObjectG, ListModel, SectionModel
    *   position = a position
    * Returns: the model containing the item at position
    */
-  ListModel getModelForItem(uint position)
+  gio.list_model.ListModel getModelForItem(uint position)
   {
     GListModel* _cretval;
     _cretval = gtk_flatten_list_model_get_model_for_item(cast(GtkFlattenListModel*)cPtr, position);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class FlattenListModel : ObjectG, ListModel, SectionModel
    * Params:
    *   model = the new model
    */
-  void setModel(ListModel model)
+  void setModel(gio.list_model.ListModel model)
   {
     gtk_flatten_list_model_set_model(cast(GtkFlattenListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

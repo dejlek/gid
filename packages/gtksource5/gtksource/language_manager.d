@@ -1,6 +1,6 @@
 module gtksource.language_manager;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -17,7 +17,7 @@ import gtksource.types;
  * [gtksource.language_manager.LanguageManager.guessLanguage] to get a class@Language for
  * given file name and content type.
  */
-class LanguageManager : ObjectG
+class LanguageManager : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,11 +54,11 @@ class LanguageManager : ObjectG
    * Returns: a #GtkSourceLanguageManager.
    *   Return value is owned by GtkSourceView library and must not be unref'ed.
    */
-  static LanguageManager getDefault()
+  static gtksource.language_manager.LanguageManager getDefault()
   {
     GtkSourceLanguageManager* _cretval;
     _cretval = gtk_source_language_manager_get_default();
-    auto _retval = ObjectG.getDObject!LanguageManager(cast(GtkSourceLanguageManager*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.language_manager.LanguageManager)(cast(GtkSourceLanguageManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -84,12 +84,12 @@ class LanguageManager : ObjectG
    *   if there is no language identified by the given id. Return value is
    *   owned by lm and should not be freed.
    */
-  Language getLanguage(string id)
+  gtksource.language.Language getLanguage(string id)
   {
     GtkSourceLanguage* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
     _cretval = gtk_source_language_manager_get_language(cast(GtkSourceLanguageManager*)cPtr, _id);
-    auto _retval = ObjectG.getDObject!Language(cast(GtkSourceLanguage*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -179,13 +179,13 @@ class LanguageManager : ObjectG
    *   is no suitable language for given filename and/or content_type. Return
    *   value is owned by lm and should not be freed.
    */
-  Language guessLanguage(string filename, string contentType)
+  gtksource.language.Language guessLanguage(string filename, string contentType)
   {
     GtkSourceLanguage* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = gtk_source_language_manager_guess_language(cast(GtkSourceLanguageManager*)cPtr, _filename, _contentType);
-    auto _retval = ObjectG.getDObject!Language(cast(GtkSourceLanguage*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
     return _retval;
   }
 

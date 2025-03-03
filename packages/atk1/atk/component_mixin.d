@@ -6,7 +6,7 @@ public import atk.c.types;
 public import atk.object;
 public import atk.rectangle;
 public import atk.types;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gobject.object;
 
@@ -40,7 +40,7 @@ template ComponentT()
    * Returns: %TRUE or %FALSE indicating whether the specified point is within
    *   the extent of the component or not
    */
-  override bool contains(int x, int y, CoordType coordType)
+  override bool contains(int x, int y, atk.types.CoordType coordType)
   {
     bool _retval;
     _retval = atk_component_contains(cast(AtkComponent*)cPtr, x, y, coordType);
@@ -72,7 +72,7 @@ template ComponentT()
    *   coordType = specifies whether the coordinates are relative to the screen
    *     or to the components top level window
    */
-  override void getExtents(out int x, out int y, out int width, out int height, CoordType coordType)
+  override void getExtents(out int x, out int y, out int width, out int height, atk.types.CoordType coordType)
   {
     atk_component_get_extents(cast(AtkComponent*)cPtr, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height, coordType);
   }
@@ -81,11 +81,11 @@ template ComponentT()
    * Gets the layer of the component.
    * Returns: an #AtkLayer which is the layer of the component
    */
-  override Layer getLayer()
+  override atk.types.Layer getLayer()
   {
     AtkLayer _cretval;
     _cretval = atk_component_get_layer(cast(AtkComponent*)cPtr);
-    Layer _retval = cast(Layer)_cretval;
+    atk.types.Layer _retval = cast(atk.types.Layer)_cretval;
     return _retval;
   }
 
@@ -116,7 +116,7 @@ template ComponentT()
 
    * Deprecated: Since 2.12. Use [atk.component.Component.getExtents] instead.
    */
-  override void getPosition(out int x, out int y, CoordType coordType)
+  override void getPosition(out int x, out int y, atk.types.CoordType coordType)
   {
     atk_component_get_position(cast(AtkComponent*)cPtr, cast(int*)&x, cast(int*)&y, coordType);
   }
@@ -158,11 +158,11 @@ template ComponentT()
    * Returns: a reference to the accessible
    *   child, if one exists
    */
-  override ObjectAtk refAccessibleAtPoint(int x, int y, CoordType coordType)
+  override atk.object.ObjectAtk refAccessibleAtPoint(int x, int y, atk.types.CoordType coordType)
   {
     AtkObject* _cretval;
     _cretval = atk_component_ref_accessible_at_point(cast(AtkComponent*)cPtr, x, y, coordType);
-    auto _retval = ObjectG.getDObject!ObjectAtk(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ template ComponentT()
    *   type = specify where the object should be made visible.
    * Returns: whether scrolling was successful.
    */
-  override bool scrollTo(ScrollType type)
+  override bool scrollTo(atk.types.ScrollType type)
   {
     bool _retval;
     _retval = atk_component_scroll_to(cast(AtkComponent*)cPtr, type);
@@ -208,7 +208,7 @@ template ComponentT()
    *   y = y-position where to scroll to
    * Returns: whether scrolling was successful.
    */
-  override bool scrollToPoint(CoordType coords, int x, int y)
+  override bool scrollToPoint(atk.types.CoordType coords, int x, int y)
   {
     bool _retval;
     _retval = atk_component_scroll_to_point(cast(AtkComponent*)cPtr, coords, x, y);
@@ -226,7 +226,7 @@ template ComponentT()
    *     or to the components top level window
    * Returns: %TRUE or %FALSE whether the extents were set or not
    */
-  override bool setExtents(int x, int y, int width, int height, CoordType coordType)
+  override bool setExtents(int x, int y, int width, int height, atk.types.CoordType coordType)
   {
     bool _retval;
     _retval = atk_component_set_extents(cast(AtkComponent*)cPtr, x, y, width, height, coordType);
@@ -244,7 +244,7 @@ template ComponentT()
    *     or to the component's top level window
    * Returns: %TRUE or %FALSE whether or not the position was set or not
    */
-  override bool setPosition(int x, int y, CoordType coordType)
+  override bool setPosition(int x, int y, atk.types.CoordType coordType)
   {
     bool _retval;
     _retval = atk_component_set_position(cast(AtkComponent*)cPtr, x, y, coordType);
@@ -272,8 +272,8 @@ template ComponentT()
    *   arg1 = The AtkRectangle giving the new position and size.
    *   component = the instance the signal is connected to
    */
-  alias BoundsChangedCallbackDlg = void delegate(Rectangle arg1, Component component);
-  alias BoundsChangedCallbackFunc = void function(Rectangle arg1, Component component);
+  alias BoundsChangedCallbackDlg = void delegate(atk.rectangle.Rectangle arg1, atk.component.Component component);
+  alias BoundsChangedCallbackFunc = void function(atk.rectangle.Rectangle arg1, atk.component.Component component);
 
   /**
    * Connect to BoundsChanged signal.
@@ -289,8 +289,8 @@ template ComponentT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto component = getVal!Component(_paramVals);
-      auto arg1 = getVal!Rectangle(&_paramVals[1]);
+      auto component = getVal!(atk.component.Component)(_paramVals);
+      auto arg1 = getVal!(atk.rectangle.Rectangle)(&_paramVals[1]);
       _dClosure.dlg(arg1, component);
     }
 

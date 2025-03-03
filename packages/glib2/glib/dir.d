@@ -1,6 +1,6 @@
 module glib.dir;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.error;
@@ -10,7 +10,7 @@ import gobject.boxed;
 /**
  * An opaque structure representing an opened directory.
  */
-class Dir : Boxed
+class Dir : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -46,7 +46,7 @@ class Dir : Boxed
    *   If non-%NULL, you must free the result with [glib.dir.Dir.close]
    *   when you are finished with it.
    */
-  static Dir open(string path, uint flags)
+  static glib.dir.Dir open(string path, uint flags)
   {
     GDir* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -54,7 +54,7 @@ class Dir : Boxed
     _cretval = g_dir_open(_path, flags, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Dir(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.dir.Dir(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class Dir : Boxed
   {
     const(char)* _cretval;
     _cretval = g_dir_read_name(cast(GDir*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class Dir : Boxed
     _cretval = g_dir_make_tmp(_tmpl, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

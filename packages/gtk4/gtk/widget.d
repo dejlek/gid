@@ -6,11 +6,9 @@ import gdk.cursor;
 import gdk.display;
 import gdk.frame_clock;
 import gdk.rgba;
-import gid.global;
+import gid.gid;
 import gio.action_group;
-import gio.action_group_mixin;
 import gio.list_model;
-import gio.list_model_mixin;
 import glib.variant;
 import gobject.dclosure;
 import gobject.initially_unowned;
@@ -31,10 +29,8 @@ import gtk.constraint_target_mixin;
 import gtk.event_controller;
 import gtk.layout_manager;
 import gtk.native;
-import gtk.native_mixin;
 import gtk.requisition;
 import gtk.root;
-import gtk.root_mixin;
 import gtk.settings;
 import gtk.snapshot;
 import gtk.style_context;
@@ -72,7 +68,7 @@ import pango.layout;
  * The geometry management system will query a widget hierarchy in
  * only one orientation at a time. When widgets are initially queried
  * for their minimum sizes it is generally done in two initial passes
- * in the [gtk.SizeRequestMode] chosen by the toplevel.
+ * in the [gtk.types.SizeRequestMode] chosen by the toplevel.
  * For example, when queried in the normal %GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH mode:
  * First, the default minimum and natural width for each widget
  * in the interface will be computed using [gtk.widget.Widget.measure] with an
@@ -375,7 +371,7 @@ import pango.layout;
  * }
  * ```
  */
-class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
+class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Accessible, gtk.buildable.Buildable, gtk.constraint_target.ConstraintTarget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -403,11 +399,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * See [gtk.widget.Widget.setDefaultDirection].
    * Returns: the current default direction.
    */
-  static TextDirection getDefaultDirection()
+  static gtk.types.TextDirection getDefaultDirection()
   {
     GtkTextDirection _cretval;
     _cretval = gtk_widget_get_default_direction();
-    TextDirection _retval = cast(TextDirection)_cretval;
+    gtk.types.TextDirection _retval = cast(gtk.types.TextDirection)_cretval;
     return _retval;
   }
 
@@ -417,7 +413,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Params:
    *   dir = the new default direction. This cannot be %GTK_TEXT_DIR_NONE.
    */
-  static void setDefaultDirection(TextDirection dir)
+  static void setDefaultDirection(gtk.types.TextDirection dir)
   {
     gtk_widget_set_default_direction(dir);
   }
@@ -470,7 +466,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: %TRUE if the action was activated, %FALSE if the
    *   action does not exist.
    */
-  bool activateAction(string name, VariantG args)
+  bool activateAction(string name, glib.variant.VariantG args)
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -494,7 +490,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   controller = a `GtkEventController` that hasn't been
    *     added to a widget yet
    */
-  void addController(EventController controller)
+  void addController(gtk.event_controller.EventController controller)
   {
     gtk_widget_add_controller(cast(GtkWidget*)cPtr, controller ? cast(GtkEventController*)controller.cPtr(Yes.Dup) : null);
   }
@@ -524,7 +520,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Params:
    *   label = a `GtkWidget` that acts as a mnemonic label for widget
    */
-  void addMnemonicLabel(Widget label)
+  void addMnemonicLabel(gtk.widget.Widget label)
   {
     gtk_widget_add_mnemonic_label(cast(GtkWidget*)cPtr, label ? cast(GtkWidget*)label.cPtr(No.Dup) : null);
   }
@@ -555,13 +551,13 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   by passing the id returned from this function to
    *   [gtk.widget.Widget.removeTickCallback]
    */
-  uint addTickCallback(TickCallback callback)
+  uint addTickCallback(gtk.types.TickCallback callback)
   {
     extern(C) bool _callbackCallback(GtkWidget* widget, GdkFrameClock* frameClock, void* userData)
     {
-      auto _dlg = cast(TickCallback*)userData;
+      auto _dlg = cast(gtk.types.TickCallback*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!Widget(cast(void*)widget, No.Take), ObjectG.getDObject!FrameClock(cast(void*)frameClock, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(void*)frameClock, No.Take));
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
@@ -588,7 +584,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   baseline = New baseline of widget, or -1
    *   transform = Transformation to be applied to widget
    */
-  void allocate(int width, int height, int baseline, Transform transform)
+  void allocate(int width, int height, int baseline, gsk.transform.Transform transform)
   {
     gtk_widget_allocate(cast(GtkWidget*)cPtr, width, height, baseline, transform ? cast(GskTransform*)transform.cPtr(Yes.Dup) : null);
   }
@@ -614,7 +610,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   direction = direction of focus movement
    * Returns: %TRUE if focus ended up inside widget
    */
-  bool childFocus(DirectionType direction)
+  bool childFocus(gtk.types.DirectionType direction)
   {
     bool _retval;
     _retval = gtk_widget_child_focus(cast(GtkWidget*)cPtr, direction);
@@ -636,12 +632,12 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   outBounds = the rectangle taking the bounds
    * Returns: %TRUE if the bounds could be computed
    */
-  bool computeBounds(Widget target, out Rect outBounds)
+  bool computeBounds(gtk.widget.Widget target, out graphene.rect.Rect outBounds)
   {
     bool _retval;
     graphene_rect_t _outBounds;
     _retval = gtk_widget_compute_bounds(cast(GtkWidget*)cPtr, target ? cast(GtkWidget*)target.cPtr(No.Dup) : null, &_outBounds);
-    outBounds = new Rect(cast(void*)&_outBounds, No.Take);
+    outBounds = new graphene.rect.Rect(cast(void*)&_outBounds, No.Take);
     return _retval;
   }
 
@@ -660,7 +656,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   orientation = expand direction
    * Returns: whether widget tree rooted here should be expanded
    */
-  bool computeExpand(Orientation orientation)
+  bool computeExpand(gtk.types.Orientation orientation)
   {
     bool _retval;
     _retval = gtk_widget_compute_expand(cast(GtkWidget*)cPtr, orientation);
@@ -680,12 +676,12 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: %TRUE if the point could be determined, %FALSE on failure.
    *   In this case, 0 is stored in out_point.
    */
-  bool computePoint(Widget target, Point point, out Point outPoint)
+  bool computePoint(gtk.widget.Widget target, graphene.point.Point point, out graphene.point.Point outPoint)
   {
     bool _retval;
     graphene_point_t _outPoint;
-    _retval = gtk_widget_compute_point(cast(GtkWidget*)cPtr, target ? cast(GtkWidget*)target.cPtr(No.Dup) : null, point ? cast(graphene_point_t*)point.cPtr(No.Dup) : null, &_outPoint);
-    outPoint = new Point(cast(void*)&_outPoint, No.Take);
+    _retval = gtk_widget_compute_point(cast(GtkWidget*)cPtr, target ? cast(GtkWidget*)target.cPtr(No.Dup) : null, point ? cast(const(graphene_point_t)*)point.cPtr(No.Dup) : null, &_outPoint);
+    outPoint = new graphene.point.Point(cast(void*)&_outPoint, No.Take);
     return _retval;
   }
 
@@ -703,12 +699,12 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *     store the final transformation
    * Returns: %TRUE if the transform could be computed, %FALSE otherwise
    */
-  bool computeTransform(Widget target, out Matrix outTransform)
+  bool computeTransform(gtk.widget.Widget target, out graphene.matrix.Matrix outTransform)
   {
     bool _retval;
     graphene_matrix_t _outTransform;
     _retval = gtk_widget_compute_transform(cast(GtkWidget*)cPtr, target ? cast(GtkWidget*)target.cPtr(No.Dup) : null, &_outTransform);
-    outTransform = new Matrix(cast(void*)&_outTransform, No.Take);
+    outTransform = new graphene.matrix.Matrix(cast(void*)&_outTransform, No.Take);
     return _retval;
   }
 
@@ -735,11 +731,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * See also [gtk.widget.Widget.getPangoContext].
    * Returns: the new `PangoContext`
    */
-  Context createPangoContext()
+  pango.context.Context createPangoContext()
   {
     PangoContext* _cretval;
     _cretval = gtk_widget_create_pango_context(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!Context(cast(PangoContext*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -755,12 +751,12 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   text = text to set on the layout
    * Returns: the new `PangoLayout`
    */
-  Layout createPangoLayout(string text)
+  pango.layout.Layout createPangoLayout(string text)
   {
     PangoLayout* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
     _cretval = gtk_widget_create_pango_layout(cast(GtkWidget*)cPtr, _text);
-    auto _retval = ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -788,7 +784,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Params:
    *   widgetType = the type of the widget to finalize the template for
    */
-  void disposeTemplate(GType widgetType)
+  void disposeTemplate(gobject.types.GType widgetType)
   {
     gtk_widget_dispose_template(cast(GtkWidget*)cPtr, widgetType);
   }
@@ -880,11 +876,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   widgetType = ancestor type
    * Returns: the ancestor widget
    */
-  Widget getAncestor(GType widgetType)
+  gtk.widget.Widget getAncestor(gobject.types.GType widgetType)
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_ancestor(cast(GtkWidget*)cPtr, widgetType);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -949,11 +945,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * realized yet.
    * Returns: the appropriate clipboard object
    */
-  Clipboard getClipboard()
+  gdk.clipboard.Clipboard getClipboard()
   {
     GdkClipboard* _cretval;
     _cretval = gtk_widget_get_clipboard(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!Clipboard(cast(GdkClipboard*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.clipboard.Clipboard)(cast(GdkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -966,11 +962,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Params:
    *   color = return location for the color
    */
-  void getColor(out RGBA color)
+  void getColor(out gdk.rgba.RGBA color)
   {
     GdkRGBA _color;
     gtk_widget_get_color(cast(GtkWidget*)cPtr, &_color);
-    color = new RGBA(cast(void*)&_color, No.Take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
   }
 
   /**
@@ -1005,7 +1001,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     const(char)* _cretval;
     _cretval = gtk_widget_get_css_name(cast(GtkWidget*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -1015,11 +1011,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: the cursor
    *   currently in use or %NULL if the cursor is inherited
    */
-  Cursor getCursor()
+  gdk.cursor.Cursor getCursor()
   {
     GdkCursor* _cretval;
     _cretval = gtk_widget_get_cursor(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!Cursor(cast(GdkCursor*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1028,11 +1024,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * See [gtk.widget.Widget.setDirection].
    * Returns: the reading direction for the widget.
    */
-  TextDirection getDirection()
+  gtk.types.TextDirection getDirection()
   {
     GtkTextDirection _cretval;
     _cretval = gtk_widget_get_direction(cast(GtkWidget*)cPtr);
-    TextDirection _retval = cast(TextDirection)_cretval;
+    gtk.types.TextDirection _retval = cast(gtk.types.TextDirection)_cretval;
     return _retval;
   }
 
@@ -1047,11 +1043,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: the `GdkDisplay` for the toplevel
    *   for this widget.
    */
-  Display getDisplay()
+  gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gtk_widget_get_display(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1060,11 +1056,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * This API is primarily meant for widget implementations.
    * Returns: The widget's first child
    */
-  Widget getFirstChild()
+  gtk.widget.Widget getFirstChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_first_child(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1073,11 +1069,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: The current focus
    *   child of widget
    */
-  Widget getFocusChild()
+  gtk.widget.Widget getFocusChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_focus_child(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1112,11 +1108,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * See [gtk.widget.Widget.setFontMap].
    * Returns: A `PangoFontMap`
    */
-  FontMap getFontMap()
+  pango.font_map.FontMap getFontMap()
   {
     PangoFontMap* _cretval;
     _cretval = gtk_widget_get_font_map(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!FontMap(cast(PangoFontMap*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1126,11 +1122,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: the `cairo_font_options_t`
    *   of widget
    */
-  FontOptions getFontOptions()
+  cairo.font_options.FontOptions getFontOptions()
   {
     const(cairo_font_options_t)* _cretval;
     _cretval = gtk_widget_get_font_options(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? new FontOptions(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -1155,11 +1151,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Unrealized widgets do not have a frame clock.
    * Returns: a `GdkFrameClock`
    */
-  FrameClock getFrameClock()
+  gdk.frame_clock.FrameClock getFrameClock()
   {
     GdkFrameClock* _cretval;
     _cretval = gtk_widget_get_frame_clock(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!FrameClock(cast(GdkFrameClock*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1171,11 +1167,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Baselines are not supported for horizontal alignment.
    * Returns: the horizontal alignment of widget
    */
-  Align getHalign()
+  gtk.types.Align getHalign()
   {
     GtkAlign _cretval;
     _cretval = gtk_widget_get_halign(cast(GtkWidget*)cPtr);
-    Align _retval = cast(Align)_cretval;
+    gtk.types.Align _retval = cast(gtk.types.Align)_cretval;
     return _retval;
   }
 
@@ -1253,11 +1249,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * This API is primarily meant for widget implementations.
    * Returns: The widget's last child
    */
-  Widget getLastChild()
+  gtk.widget.Widget getLastChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_last_child(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1266,11 +1262,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * See [gtk.widget.Widget.setLayoutManager].
    * Returns: a `GtkLayoutManager`
    */
-  LayoutManager getLayoutManager()
+  gtk.layout_manager.LayoutManager getLayoutManager()
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_widget_get_layout_manager(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!LayoutManager(cast(GtkLayoutManager*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.layout_manager.LayoutManager)(cast(GtkLayoutManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1339,7 +1335,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     const(char)* _cretval;
     _cretval = gtk_widget_get_name(cast(GtkWidget*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -1350,11 +1346,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * `GtkNative` widgets will return themselves here.
    * Returns: the `GtkNative` ancestor of widget
    */
-  Native getNative()
+  gtk.native.Native getNative()
   {
     GtkNative* _cretval;
     _cretval = gtk_widget_get_native(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!Native(cast(GtkNative*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.native.Native)(cast(GtkNative*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1363,11 +1359,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * This API is primarily meant for widget implementations.
    * Returns: The widget's next sibling
    */
-  Widget getNextSibling()
+  gtk.widget.Widget getNextSibling()
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_next_sibling(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1387,11 +1383,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns the widget’s overflow value.
    * Returns: The widget's overflow.
    */
-  Overflow getOverflow()
+  gtk.types.Overflow getOverflow()
   {
     GtkOverflow _cretval;
     _cretval = gtk_widget_get_overflow(cast(GtkWidget*)cPtr);
-    Overflow _retval = cast(Overflow)_cretval;
+    gtk.types.Overflow _retval = cast(gtk.types.Overflow)_cretval;
     return _retval;
   }
 
@@ -1406,11 +1402,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * [gtk.widget.Widget.Root] property on the widget.
    * Returns: the `PangoContext` for the widget.
    */
-  Context getPangoContext()
+  pango.context.Context getPangoContext()
   {
     PangoContext* _cretval;
     _cretval = gtk_widget_get_pango_context(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!Context(cast(PangoContext*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1418,11 +1414,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns the parent widget of widget.
    * Returns: the parent widget of widget
    */
-  Widget getParent()
+  gtk.widget.Widget getParent()
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_parent(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1442,13 +1438,13 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   minimumSize = location for storing the minimum size
    *   naturalSize = location for storing the natural size
    */
-  void getPreferredSize(out Requisition minimumSize, out Requisition naturalSize)
+  void getPreferredSize(out gtk.requisition.Requisition minimumSize, out gtk.requisition.Requisition naturalSize)
   {
     GtkRequisition _minimumSize;
     GtkRequisition _naturalSize;
     gtk_widget_get_preferred_size(cast(GtkWidget*)cPtr, &_minimumSize, &_naturalSize);
-    minimumSize = new Requisition(cast(void*)&_minimumSize, No.Take);
-    naturalSize = new Requisition(cast(void*)&_naturalSize, No.Take);
+    minimumSize = new gtk.requisition.Requisition(cast(void*)&_minimumSize, No.Take);
+    naturalSize = new gtk.requisition.Requisition(cast(void*)&_naturalSize, No.Take);
   }
 
   /**
@@ -1456,11 +1452,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * This API is primarily meant for widget implementations.
    * Returns: The widget's previous sibling
    */
-  Widget getPrevSibling()
+  gtk.widget.Widget getPrevSibling()
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_prev_sibling(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1472,11 +1468,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * realized yet.
    * Returns: the appropriate clipboard object
    */
-  Clipboard getPrimaryClipboard()
+  gdk.clipboard.Clipboard getPrimaryClipboard()
   {
     GdkClipboard* _cretval;
     _cretval = gtk_widget_get_primary_clipboard(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!Clipboard(cast(GdkClipboard*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.clipboard.Clipboard)(cast(GdkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1515,11 +1511,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * allocation capabilities.
    * Returns: The `GtkSizeRequestMode` preferred by widget.
    */
-  SizeRequestMode getRequestMode()
+  gtk.types.SizeRequestMode getRequestMode()
   {
     GtkSizeRequestMode _cretval;
     _cretval = gtk_widget_get_request_mode(cast(GtkWidget*)cPtr);
-    SizeRequestMode _retval = cast(SizeRequestMode)_cretval;
+    gtk.types.SizeRequestMode _retval = cast(gtk.types.SizeRequestMode)_cretval;
     return _retval;
   }
 
@@ -1530,11 +1526,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * `GtkRoot` widgets will return themselves here.
    * Returns: the root widget of widget
    */
-  Root getRoot()
+  gtk.root.Root getRoot()
   {
     GtkRoot* _cretval;
     _cretval = gtk_widget_get_root(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!Root(cast(GtkRoot*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.root.Root)(cast(GtkRoot*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1577,11 +1573,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * changes in its settings, connect to the `notify::display` signal.
    * Returns: the relevant `GtkSettings` object
    */
-  Settings getSettings()
+  gtk.settings.Settings getSettings()
   {
     GtkSettings* _cretval;
     _cretval = gtk_widget_get_settings(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!Settings(cast(GtkSettings*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1599,7 +1595,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   orientation = the orientation to query
    * Returns: The size of widget in orientation.
    */
-  int getSize(Orientation orientation)
+  int getSize(gtk.types.Orientation orientation)
   {
     int _retval;
     _retval = gtk_widget_get_size(cast(GtkWidget*)cPtr, orientation);
@@ -1630,15 +1626,15 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * state will be returned, that is, also based on parent insensitivity,
    * even if widget itself is sensitive.
    * Also note that if you are looking for a way to obtain the
-   * [gtk.StateFlags] to pass to a [gtk.style_context.StyleContext]
+   * [gtk.types.StateFlags] to pass to a [gtk.style_context.StyleContext]
    * method, you should look at [gtk.style_context.StyleContext.getState].
    * Returns: The state flags for widget
    */
-  StateFlags getStateFlags()
+  gtk.types.StateFlags getStateFlags()
   {
     GtkStateFlags _cretval;
     _cretval = gtk_widget_get_state_flags(cast(GtkWidget*)cPtr);
-    StateFlags _retval = cast(StateFlags)_cretval;
+    gtk.types.StateFlags _retval = cast(gtk.types.StateFlags)_cretval;
     return _retval;
   }
 
@@ -1650,11 +1646,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
    * Deprecated: Style contexts will be removed in GTK 5
    */
-  StyleContext getStyleContext()
+  gtk.style_context.StyleContext getStyleContext()
   {
     GtkStyleContext* _cretval;
     _cretval = gtk_widget_get_style_context(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!StyleContext(cast(GtkStyleContext*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.style_context.StyleContext)(cast(GtkStyleContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1673,12 +1669,12 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: The object built in the template XML with
    *   the id name
    */
-  ObjectG getTemplateChild(GType widgetType, string name)
+  gobject.object.ObjectG getTemplateChild(gobject.types.GType widgetType, string name)
   {
     ObjectC* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_widget_get_template_child(cast(GtkWidget*)cPtr, widgetType, _name);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1693,7 +1689,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     const(char)* _cretval;
     _cretval = gtk_widget_get_tooltip_markup(cast(GtkWidget*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -1708,7 +1704,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   {
     const(char)* _cretval;
     _cretval = gtk_widget_get_tooltip_text(cast(GtkWidget*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -1716,11 +1712,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Gets the vertical alignment of widget.
    * Returns: the vertical alignment of widget
    */
-  Align getValign()
+  gtk.types.Align getValign()
   {
     GtkAlign _cretval;
     _cretval = gtk_widget_get_valign(cast(GtkWidget*)cPtr);
-    Align _retval = cast(Align)_cretval;
+    gtk.types.Align _retval = cast(gtk.types.Align)_cretval;
     return _retval;
   }
 
@@ -1924,7 +1920,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   group = a `GActionGroup`, or %NULL to remove
    *     the previously inserted group for name
    */
-  void insertActionGroup(string name, ActionGroup group)
+  void insertActionGroup(string name, gio.action_group.ActionGroup group)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_insert_action_group(cast(GtkWidget*)cPtr, _name, group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(No.Dup) : null);
@@ -1945,7 +1941,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   parent = the parent `GtkWidget` to insert widget into
    *   previousSibling = the new previous sibling of widget
    */
-  void insertAfter(Widget parent, Widget previousSibling)
+  void insertAfter(gtk.widget.Widget parent, gtk.widget.Widget previousSibling)
   {
     gtk_widget_insert_after(cast(GtkWidget*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(No.Dup) : null, previousSibling ? cast(GtkWidget*)previousSibling.cPtr(No.Dup) : null);
   }
@@ -1964,7 +1960,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   parent = the parent `GtkWidget` to insert widget into
    *   nextSibling = the new next sibling of widget
    */
-  void insertBefore(Widget parent, Widget nextSibling)
+  void insertBefore(gtk.widget.Widget parent, gtk.widget.Widget nextSibling)
   {
     gtk_widget_insert_before(cast(GtkWidget*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(No.Dup) : null, nextSibling ? cast(GtkWidget*)nextSibling.cPtr(No.Dup) : null);
   }
@@ -1977,7 +1973,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: %TRUE if ancestor contains widget as a child,
    *   grandchild, great grandchild, etc.
    */
-  bool isAncestor(Widget ancestor)
+  bool isAncestor(gtk.widget.Widget ancestor)
   {
     bool _retval;
     _retval = gtk_widget_is_ancestor(cast(GtkWidget*)cPtr, ancestor ? cast(GtkWidget*)ancestor.cPtr(No.Dup) : null);
@@ -2069,7 +2065,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   if the emitting widget should try to handle the keyboard
    *   navigation attempt in its parent container$(LPAREN)s$(RPAREN).
    */
-  bool keynavFailed(DirectionType direction)
+  bool keynavFailed(gtk.types.DirectionType direction)
   {
     bool _retval;
     _retval = gtk_widget_keynav_failed(cast(GtkWidget*)cPtr, direction);
@@ -2090,11 +2086,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   of mnemonic labels; free this list with [glib.list.List.free] when you
    *   are done with it.
    */
-  Widget[] listMnemonicLabels()
+  gtk.widget.Widget[] listMnemonicLabels()
   {
     GList* _cretval;
     _cretval = gtk_widget_list_mnemonic_labels(cast(GtkWidget*)cPtr);
-    auto _retval = gListToD!(Widget, GidOwnership.Container)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gtk.widget.Widget, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -2128,7 +2124,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   naturalBaseline = location to store the baseline
    *     position for the natural size, or -1 to report no baseline
    */
-  void measure(Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline)
+  void measure(gtk.types.Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline)
   {
     gtk_widget_measure(cast(GtkWidget*)cPtr, orientation, forSize, cast(int*)&minimum, cast(int*)&natural, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
   }
@@ -2156,11 +2152,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * because of the slowdowns.
    * Returns: a `GListModel` tracking widget's children
    */
-  ListModel observeChildren()
+  gio.list_model.ListModel observeChildren()
   {
     GListModel* _cretval;
     _cretval = gtk_widget_observe_children(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2174,11 +2170,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * because of the slowdowns.
    * Returns: a `GListModel` tracking widget's controllers
    */
-  ListModel observeControllers()
+  gio.list_model.ListModel observeControllers()
   {
     GListModel* _cretval;
     _cretval = gtk_widget_observe_controllers(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2201,11 +2197,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: The widget descendant at
    *   the given point
    */
-  Widget pick(double x, double y, PickFlags flags)
+  gtk.widget.Widget pick(double x, double y, gtk.types.PickFlags flags)
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_pick(cast(GtkWidget*)cPtr, x, y, flags);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2280,7 +2276,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Params:
    *   controller = a `GtkEventController`
    */
-  void removeController(EventController controller)
+  void removeController(gtk.event_controller.EventController controller)
   {
     gtk_widget_remove_controller(cast(GtkWidget*)cPtr, controller ? cast(GtkEventController*)controller.cPtr(No.Dup) : null);
   }
@@ -2307,7 +2303,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   label = a `GtkWidget` that was previously set as a mnemonic
    *     label for widget with [gtk.widget.Widget.addMnemonicLabel]
    */
-  void removeMnemonicLabel(Widget label)
+  void removeMnemonicLabel(gtk.widget.Widget label)
   {
     gtk_widget_remove_mnemonic_label(cast(GtkWidget*)cPtr, label ? cast(GtkWidget*)label.cPtr(No.Dup) : null);
   }
@@ -2402,7 +2398,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Params:
    *   cursor = the new cursor
    */
-  void setCursor(Cursor cursor)
+  void setCursor(gdk.cursor.Cursor cursor)
   {
     gtk_widget_set_cursor(cast(GtkWidget*)cPtr, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
@@ -2441,7 +2437,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Params:
    *   dir = the new direction
    */
-  void setDirection(TextDirection dir)
+  void setDirection(gtk.types.TextDirection dir)
   {
     gtk_widget_set_direction(cast(GtkWidget*)cPtr, dir);
   }
@@ -2455,7 +2451,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   child = a direct child widget of widget or %NULL
    *     to unset the focus child of widget
    */
-  void setFocusChild(Widget child)
+  void setFocusChild(gtk.widget.Widget child)
   {
     gtk_widget_set_focus_child(cast(GtkWidget*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -2505,7 +2501,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   fontMap = a `PangoFontMap`, or %NULL to unset any
    *     previously set font map
    */
-  void setFontMap(FontMap fontMap)
+  void setFontMap(pango.font_map.FontMap fontMap)
   {
     gtk_widget_set_font_map(cast(GtkWidget*)cPtr, fontMap ? cast(PangoFontMap*)fontMap.cPtr(No.Dup) : null);
   }
@@ -2519,9 +2515,9 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   options = a `cairo_font_options_t`
    *     to unset any previously set default font options
    */
-  void setFontOptions(FontOptions options)
+  void setFontOptions(cairo.font_options.FontOptions options)
   {
-    gtk_widget_set_font_options(cast(GtkWidget*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(No.Dup) : null);
+    gtk_widget_set_font_options(cast(GtkWidget*)cPtr, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2529,7 +2525,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Params:
    *   align_ = the horizontal alignment
    */
-  void setHalign(Align align_)
+  void setHalign(gtk.types.Align align_)
   {
     gtk_widget_set_halign(cast(GtkWidget*)cPtr, align_);
   }
@@ -2601,7 +2597,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Params:
    *   layoutManager = a `GtkLayoutManager`
    */
-  void setLayoutManager(LayoutManager layoutManager)
+  void setLayoutManager(gtk.layout_manager.LayoutManager layoutManager)
   {
     gtk_widget_set_layout_manager(cast(GtkWidget*)cPtr, layoutManager ? cast(GtkLayoutManager*)layoutManager.cPtr(Yes.Dup) : null);
   }
@@ -2696,14 +2692,14 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
   /**
    * Sets how widget treats content that is drawn outside the
    * widget's content area.
-   * See the definition of [gtk.Overflow] for details.
+   * See the definition of [gtk.types.Overflow] for details.
    * This setting is provided for widget implementations and
    * should not be used by application code.
    * The default value is %GTK_OVERFLOW_VISIBLE.
    * Params:
    *   overflow = desired overflow
    */
-  void setOverflow(Overflow overflow)
+  void setOverflow(gtk.types.Overflow overflow)
   {
     gtk_widget_set_overflow(cast(GtkWidget*)cPtr, overflow);
   }
@@ -2718,7 +2714,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Params:
    *   parent = parent widget
    */
-  void setParent(Widget parent)
+  void setParent(gtk.widget.Widget parent)
   {
     gtk_widget_set_parent(cast(GtkWidget*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(No.Dup) : null);
   }
@@ -2799,7 +2795,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   flags = State flags to turn on
    *   clear = Whether to clear state before turning on flags
    */
-  void setStateFlags(StateFlags flags, bool clear)
+  void setStateFlags(gtk.types.StateFlags flags, bool clear)
   {
     gtk_widget_set_state_flags(cast(GtkWidget*)cPtr, flags, clear);
   }
@@ -2842,7 +2838,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Params:
    *   align_ = the vertical alignment
    */
-  void setValign(Align align_)
+  void setValign(gtk.types.Align align_)
   {
     gtk_widget_set_valign(cast(GtkWidget*)cPtr, align_);
   }
@@ -2931,7 +2927,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *     calls to [gtk.snapshot.Snapshot.translate] or other transform calls should
    *     have been made.
    */
-  void snapshotChild(Widget child, Snapshot snapshot)
+  void snapshotChild(gtk.widget.Widget child, gtk.snapshot.Snapshot snapshot)
   {
     gtk_widget_snapshot_child(cast(GtkWidget*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, snapshot ? cast(GtkSnapshot*)snapshot.cPtr(No.Dup) : null);
   }
@@ -2953,7 +2949,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
 
    * Deprecated: Use [gtk.widget.Widget.computePoint] instead
    */
-  bool translateCoordinates(Widget destWidget, double srcX, double srcY, out double destX, out double destY)
+  bool translateCoordinates(gtk.widget.Widget destWidget, double srcX, double srcY, out double destX, out double destY)
   {
     bool _retval;
     _retval = gtk_widget_translate_coordinates(cast(GtkWidget*)cPtr, destWidget ? cast(GtkWidget*)destWidget.cPtr(No.Dup) : null, srcX, srcY, cast(double*)&destX, cast(double*)&destY);
@@ -3005,7 +3001,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Params:
    *   flags = State flags to turn off
    */
-  void unsetStateFlags(StateFlags flags)
+  void unsetStateFlags(gtk.types.StateFlags flags)
   {
     gtk_widget_unset_state_flags(cast(GtkWidget*)cPtr, flags);
   }
@@ -3017,8 +3013,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * This signal is not suitable for saving widget state.
    *   widget = the instance the signal is connected to
    */
-  alias DestroyCallbackDlg = void delegate(Widget widget);
-  alias DestroyCallbackFunc = void function(Widget widget);
+  alias DestroyCallbackDlg = void delegate(gtk.widget.Widget widget);
+  alias DestroyCallbackFunc = void function(gtk.widget.Widget widget);
 
   /**
    * Connect to Destroy signal.
@@ -3034,7 +3030,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto widget = getVal!Widget(_paramVals);
+      auto widget = getVal!(gtk.widget.Widget)(_paramVals);
       _dClosure.dlg(widget);
     }
 
@@ -3048,8 +3044,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   previousDirection = the previous text direction of widget
    *   widget = the instance the signal is connected to
    */
-  alias DirectionChangedCallbackDlg = void delegate(TextDirection previousDirection, Widget widget);
-  alias DirectionChangedCallbackFunc = void function(TextDirection previousDirection, Widget widget);
+  alias DirectionChangedCallbackDlg = void delegate(gtk.types.TextDirection previousDirection, gtk.widget.Widget widget);
+  alias DirectionChangedCallbackFunc = void function(gtk.types.TextDirection previousDirection, gtk.widget.Widget widget);
 
   /**
    * Connect to DirectionChanged signal.
@@ -3065,8 +3061,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto widget = getVal!Widget(_paramVals);
-      auto previousDirection = getVal!TextDirection(&_paramVals[1]);
+      auto widget = getVal!(gtk.widget.Widget)(_paramVals);
+      auto previousDirection = getVal!(gtk.types.TextDirection)(&_paramVals[1]);
       _dClosure.dlg(previousDirection, widget);
     }
 
@@ -3078,8 +3074,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Emitted when widget is hidden.
    *   widget = the instance the signal is connected to
    */
-  alias HideCallbackDlg = void delegate(Widget widget);
-  alias HideCallbackFunc = void function(Widget widget);
+  alias HideCallbackDlg = void delegate(gtk.widget.Widget widget);
+  alias HideCallbackFunc = void function(gtk.widget.Widget widget);
 
   /**
    * Connect to Hide signal.
@@ -3095,7 +3091,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto widget = getVal!Widget(_paramVals);
+      auto widget = getVal!(gtk.widget.Widget)(_paramVals);
       _dClosure.dlg(widget);
     }
 
@@ -3113,8 +3109,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   if the emitting widget should try to handle the keyboard
    *   navigation attempt in its parent widget$(LPAREN)s$(RPAREN).
    */
-  alias KeynavFailedCallbackDlg = bool delegate(DirectionType direction, Widget widget);
-  alias KeynavFailedCallbackFunc = bool function(DirectionType direction, Widget widget);
+  alias KeynavFailedCallbackDlg = bool delegate(gtk.types.DirectionType direction, gtk.widget.Widget widget);
+  alias KeynavFailedCallbackFunc = bool function(gtk.types.DirectionType direction, gtk.widget.Widget widget);
 
   /**
    * Connect to KeynavFailed signal.
@@ -3131,8 +3127,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto widget = getVal!Widget(_paramVals);
-      auto direction = getVal!DirectionType(&_paramVals[1]);
+      auto widget = getVal!(gtk.widget.Widget)(_paramVals);
+      auto direction = getVal!(gtk.types.DirectionType)(&_paramVals[1]);
       _retval = _dClosure.dlg(direction, widget);
       setVal!bool(_returnValue, _retval);
     }
@@ -3151,8 +3147,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * emission of [gtk.widget.Widget.unmap].
    *   widget = the instance the signal is connected to
    */
-  alias MapCallbackDlg = void delegate(Widget widget);
-  alias MapCallbackFunc = void function(Widget widget);
+  alias MapCallbackDlg = void delegate(gtk.widget.Widget widget);
+  alias MapCallbackFunc = void function(gtk.widget.Widget widget);
 
   /**
    * Connect to Map signal.
@@ -3168,7 +3164,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto widget = getVal!Widget(_paramVals);
+      auto widget = getVal!(gtk.widget.Widget)(_paramVals);
       _dClosure.dlg(widget);
     }
 
@@ -3186,8 +3182,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Returns: %TRUE to stop other handlers from being invoked for the event.
    *   %FALSE to propagate the event further.
    */
-  alias MnemonicActivateCallbackDlg = bool delegate(bool groupCycling, Widget widget);
-  alias MnemonicActivateCallbackFunc = bool function(bool groupCycling, Widget widget);
+  alias MnemonicActivateCallbackDlg = bool delegate(bool groupCycling, gtk.widget.Widget widget);
+  alias MnemonicActivateCallbackFunc = bool function(bool groupCycling, gtk.widget.Widget widget);
 
   /**
    * Connect to MnemonicActivate signal.
@@ -3204,8 +3200,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto widget = getVal!Widget(_paramVals);
-      auto groupCycling = getVal!bool(&_paramVals[1]);
+      auto widget = getVal!(gtk.widget.Widget)(_paramVals);
+      auto groupCycling = getVal!(bool)(&_paramVals[1]);
       _retval = _dClosure.dlg(groupCycling, widget);
       setVal!bool(_returnValue, _retval);
     }
@@ -3223,8 +3219,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   direction = the direction of the focus move
    *   widget = the instance the signal is connected to
    */
-  alias MoveFocusCallbackDlg = void delegate(DirectionType direction, Widget widget);
-  alias MoveFocusCallbackFunc = void function(DirectionType direction, Widget widget);
+  alias MoveFocusCallbackDlg = void delegate(gtk.types.DirectionType direction, gtk.widget.Widget widget);
+  alias MoveFocusCallbackFunc = void function(gtk.types.DirectionType direction, gtk.widget.Widget widget);
 
   /**
    * Connect to MoveFocus signal.
@@ -3240,8 +3236,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto widget = getVal!Widget(_paramVals);
-      auto direction = getVal!DirectionType(&_paramVals[1]);
+      auto widget = getVal!(gtk.widget.Widget)(_paramVals);
+      auto direction = getVal!(gtk.types.DirectionType)(&_paramVals[1]);
       _dClosure.dlg(direction, widget);
     }
 
@@ -3271,8 +3267,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   widget = the instance the signal is connected to
    * Returns: %TRUE if tooltip should be shown right now, %FALSE otherwise.
    */
-  alias QueryTooltipCallbackDlg = bool delegate(int x, int y, bool keyboardMode, Tooltip tooltip, Widget widget);
-  alias QueryTooltipCallbackFunc = bool function(int x, int y, bool keyboardMode, Tooltip tooltip, Widget widget);
+  alias QueryTooltipCallbackDlg = bool delegate(int x, int y, bool keyboardMode, gtk.tooltip.Tooltip tooltip, gtk.widget.Widget widget);
+  alias QueryTooltipCallbackFunc = bool function(int x, int y, bool keyboardMode, gtk.tooltip.Tooltip tooltip, gtk.widget.Widget widget);
 
   /**
    * Connect to QueryTooltip signal.
@@ -3289,11 +3285,11 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto widget = getVal!Widget(_paramVals);
-      auto x = getVal!int(&_paramVals[1]);
-      auto y = getVal!int(&_paramVals[2]);
-      auto keyboardMode = getVal!bool(&_paramVals[3]);
-      auto tooltip = getVal!Tooltip(&_paramVals[4]);
+      auto widget = getVal!(gtk.widget.Widget)(_paramVals);
+      auto x = getVal!(int)(&_paramVals[1]);
+      auto y = getVal!(int)(&_paramVals[2]);
+      auto keyboardMode = getVal!(bool)(&_paramVals[3]);
+      auto tooltip = getVal!(gtk.tooltip.Tooltip)(&_paramVals[4]);
       _retval = _dClosure.dlg(x, y, keyboardMode, tooltip, widget);
       setVal!bool(_returnValue, _retval);
     }
@@ -3308,8 +3304,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * or the widget has been mapped $(LPAREN)that is, it is going to be drawn$(RPAREN).
    *   widget = the instance the signal is connected to
    */
-  alias RealizeCallbackDlg = void delegate(Widget widget);
-  alias RealizeCallbackFunc = void function(Widget widget);
+  alias RealizeCallbackDlg = void delegate(gtk.widget.Widget widget);
+  alias RealizeCallbackFunc = void function(gtk.widget.Widget widget);
 
   /**
    * Connect to Realize signal.
@@ -3325,7 +3321,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto widget = getVal!Widget(_paramVals);
+      auto widget = getVal!(gtk.widget.Widget)(_paramVals);
       _dClosure.dlg(widget);
     }
 
@@ -3337,8 +3333,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * Emitted when widget is shown.
    *   widget = the instance the signal is connected to
    */
-  alias ShowCallbackDlg = void delegate(Widget widget);
-  alias ShowCallbackFunc = void function(Widget widget);
+  alias ShowCallbackDlg = void delegate(gtk.widget.Widget widget);
+  alias ShowCallbackFunc = void function(gtk.widget.Widget widget);
 
   /**
    * Connect to Show signal.
@@ -3354,7 +3350,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto widget = getVal!Widget(_paramVals);
+      auto widget = getVal!(gtk.widget.Widget)(_paramVals);
       _dClosure.dlg(widget);
     }
 
@@ -3369,8 +3365,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    *   flags = The previous state flags.
    *   widget = the instance the signal is connected to
    */
-  alias StateFlagsChangedCallbackDlg = void delegate(StateFlags flags, Widget widget);
-  alias StateFlagsChangedCallbackFunc = void function(StateFlags flags, Widget widget);
+  alias StateFlagsChangedCallbackDlg = void delegate(gtk.types.StateFlags flags, gtk.widget.Widget widget);
+  alias StateFlagsChangedCallbackFunc = void function(gtk.types.StateFlags flags, gtk.widget.Widget widget);
 
   /**
    * Connect to StateFlagsChanged signal.
@@ -3386,8 +3382,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto widget = getVal!Widget(_paramVals);
-      auto flags = getVal!StateFlags(&_paramVals[1]);
+      auto widget = getVal!(gtk.widget.Widget)(_paramVals);
+      auto flags = getVal!(gtk.types.StateFlags)(&_paramVals[1]);
       _dClosure.dlg(flags, widget);
     }
 
@@ -3403,8 +3399,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * it can be used to, for example, stop an animation on the widget.
    *   widget = the instance the signal is connected to
    */
-  alias UnmapCallbackDlg = void delegate(Widget widget);
-  alias UnmapCallbackFunc = void function(Widget widget);
+  alias UnmapCallbackDlg = void delegate(gtk.widget.Widget widget);
+  alias UnmapCallbackFunc = void function(gtk.widget.Widget widget);
 
   /**
    * Connect to Unmap signal.
@@ -3420,7 +3416,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto widget = getVal!Widget(_paramVals);
+      auto widget = getVal!(gtk.widget.Widget)(_paramVals);
       _dClosure.dlg(widget);
     }
 
@@ -3434,8 +3430,8 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
    * or the widget has been unmapped $(LPAREN)that is, it is going to be hidden$(RPAREN).
    *   widget = the instance the signal is connected to
    */
-  alias UnrealizeCallbackDlg = void delegate(Widget widget);
-  alias UnrealizeCallbackFunc = void function(Widget widget);
+  alias UnrealizeCallbackDlg = void delegate(gtk.widget.Widget widget);
+  alias UnrealizeCallbackFunc = void function(gtk.widget.Widget widget);
 
   /**
    * Connect to Unrealize signal.
@@ -3451,7 +3447,7 @@ class Widget : InitiallyUnowned, Accessible, Buildable, ConstraintTarget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto widget = getVal!Widget(_paramVals);
+      auto widget = getVal!(gtk.widget.Widget)(_paramVals);
       _dClosure.dlg(widget);
     }
 

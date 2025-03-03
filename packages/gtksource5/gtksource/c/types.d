@@ -860,7 +860,7 @@ struct GtkSourceHoverProviderInterface
  * vfunc@Indenter.is_trigger is called upon key-press to
  * determine of the key press should trigger an indentation.  The default
  * implementation of the interface checks to see if the key was
- * [gdk.int] or [gdk.int] without %GDK_SHIFT_MASK set.
+ * [gdk.types.int] or [gdk.types.int] without %GDK_SHIFT_MASK set.
  * vfunc@Indenter.indent is called after text has been
  * inserted into class@Buffer when
  * vfunc@Indenter.is_trigger returned %TRUE. The [gtk.text_iter.TextIter]

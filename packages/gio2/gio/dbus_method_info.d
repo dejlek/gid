@@ -1,6 +1,6 @@
 module gio.dbus_method_info;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -9,7 +9,7 @@ import gobject.boxed;
 /**
  * Information about a method on an D-Bus interface.
  */
-class DBusMethodInfo : Boxed
+class DBusMethodInfo : gobject.boxed.Boxed
 {
 
   this()

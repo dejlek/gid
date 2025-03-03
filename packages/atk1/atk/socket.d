@@ -6,7 +6,7 @@ import atk.component;
 import atk.component_mixin;
 import atk.object;
 import atk.types;
-import gid.global;
+import gid.gid;
 
 /**
  * Container for AtkPlug objects from other processes
@@ -32,7 +32,7 @@ import gid.global;
  * functions will be implemented by the IPC layer.
  * See class@AtkPlug
  */
-class Socket : ObjectAtk, Component
+class Socket : atk.object.ObjectAtk, atk.component.Component
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

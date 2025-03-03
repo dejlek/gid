@@ -17,7 +17,7 @@ import cairo.scaled_font;
 import cairo.surface;
 import cairo.text_cluster;
 import cairo.types;
-import gid.global;
+import gid.gid;
 
 
 /**
@@ -43,11 +43,11 @@ import gid.global;
  *   %CAIRO_STATUS_WRITE_ERROR will be raised.  You can use this
  *   object normally, but no drawing will be done.
  */
-Context create(Surface target)
+cairo.context.Context create(cairo.surface.Surface target)
 {
   cairo_t* _cretval;
   _cretval = cairo_create(target ? cast(cairo_surface_t*)target.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new Context(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -82,11 +82,11 @@ void debugResetStaticData()
  *   error object is returned where all operations on the object do nothing.
  *   You can check for this with [cairo.font_options.FontOptions.status].
  */
-FontOptions fontOptionsCreate()
+cairo.font_options.FontOptions fontOptionsCreate()
 {
   cairo_font_options_t* _cretval;
   _cretval = cairo_font_options_create();
-  auto _retval = _cretval ? new FontOptions(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -111,7 +111,7 @@ FontOptions fontOptionsCreate()
  *   format and width, or -1 if either the format is invalid or the width
  *   too large.
  */
-int formatStrideForWidth(Format format, int width)
+int formatStrideForWidth(cairo.types.Format format, int width)
 {
   int _retval;
   _retval = cairo_format_stride_for_width(format, width);
@@ -128,7 +128,7 @@ int formatStrideForWidth(Format format, int width)
  *     attached to
  * Returns: the user data previously attached or %NULL.
  */
-void* getUserData(Context cr, UserDataKey key)
+void* getUserData(cairo.context.Context cr, cairo.types.UserDataKey key)
 {
   auto _retval = cairo_get_user_data(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, &key);
   return _retval;
@@ -149,11 +149,11 @@ void* getUserData(Context cr, UserDataKey key)
  * Returns: the newly allocated array of glyphs that should be
  *   freed using [cairo.glyph.Glyph.free]
  */
-Glyph glyphAllocate(int numGlyphs)
+cairo.glyph.Glyph glyphAllocate(int numGlyphs)
 {
   cairo_glyph_t* _cretval;
   _cretval = cairo_glyph_allocate(numGlyphs);
-  auto _retval = _cretval ? new Glyph(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.glyph.Glyph(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -174,11 +174,11 @@ Glyph glyphAllocate(int numGlyphs)
  *   pointer to a "nil" surface if an error such as out of memory
  *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
-Surface imageSurfaceCreate(Format format, int width, int height)
+cairo.surface.Surface imageSurfaceCreate(cairo.types.Format format, int width, int height)
 {
   cairo_surface_t* _cretval;
   _cretval = cairo_image_surface_create(format, width, height);
-  auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -200,12 +200,12 @@ Surface imageSurfaceCreate(Format format, int width, int height)
  *   operations and check the status on the context upon completion
  *   using [cairo.context.Context.status].
  */
-Surface imageSurfaceCreateFromPng(string filename)
+cairo.surface.Surface imageSurfaceCreateFromPng(string filename)
 {
   cairo_surface_t* _cretval;
   const(char)* _filename = filename.toCString(No.Alloc);
   _cretval = cairo_image_surface_create_from_png(_filename);
-  auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -226,12 +226,12 @@ Surface imageSurfaceCreateFromPng(string filename)
  *   operations and check the status on the context upon completion
  *   using [cairo.context.Context.status].
  */
-Surface imageSurfaceCreateFromPngStream(ReadFunc readFunc)
+cairo.surface.Surface imageSurfaceCreateFromPngStream(cairo.types.ReadFunc readFunc)
 {
   extern(C) cairo_status_t _readFuncCallback(void* closure, ubyte* data, uint length)
   {
-    Status _dretval;
-    auto _dlg = cast(ReadFunc*)closure;
+    cairo.types.Status _dretval;
+    auto _dlg = cast(cairo.types.ReadFunc*)closure;
     ubyte[] _data;
     _data.length = length;
     _data[0 .. length] = data[0 .. length];
@@ -246,7 +246,7 @@ Surface imageSurfaceCreateFromPngStream(ReadFunc readFunc)
   cairo_surface_t* _cretval;
   auto _readFunc = readFunc ? cast(void*)&(readFunc) : null;
   _cretval = cairo_image_surface_create_from_png_stream(_readFuncCB, _readFunc);
-  auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -263,7 +263,7 @@ Surface imageSurfaceCreateFromPngStream(ReadFunc readFunc)
  *   if surface is not an image surface, or if [cairo.surface.Surface.finish]
  *   has been called.
  */
-ubyte* imageSurfaceGetData(Surface surface)
+ubyte* imageSurfaceGetData(cairo.surface.Surface surface)
 {
   auto _retval = cairo_image_surface_get_data(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
   return _retval;
@@ -275,11 +275,11 @@ ubyte* imageSurfaceGetData(Surface surface)
  *   surface = a #cairo_image_surface_t
  * Returns: the format of the surface
  */
-Format imageSurfaceGetFormat(Surface surface)
+cairo.types.Format imageSurfaceGetFormat(cairo.surface.Surface surface)
 {
   cairo_format_t _cretval;
   _cretval = cairo_image_surface_get_format(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
-  Format _retval = cast(Format)_cretval;
+  cairo.types.Format _retval = cast(cairo.types.Format)_cretval;
   return _retval;
 }
 
@@ -289,7 +289,7 @@ Format imageSurfaceGetFormat(Surface surface)
  *   surface = a #cairo_image_surface_t
  * Returns: the height of the surface in pixels.
  */
-int imageSurfaceGetHeight(Surface surface)
+int imageSurfaceGetHeight(cairo.surface.Surface surface)
 {
   int _retval;
   _retval = cairo_image_surface_get_height(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
@@ -305,7 +305,7 @@ int imageSurfaceGetHeight(Surface surface)
  *   bytes from the beginning of one row of the image data to the
  *   beginning of the next row.
  */
-int imageSurfaceGetStride(Surface surface)
+int imageSurfaceGetStride(cairo.surface.Surface surface)
 {
   int _retval;
   _retval = cairo_image_surface_get_stride(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
@@ -318,7 +318,7 @@ int imageSurfaceGetStride(Surface surface)
  *   surface = a #cairo_image_surface_t
  * Returns: the width of the surface in pixels.
  */
-int imageSurfaceGetWidth(Surface surface)
+int imageSurfaceGetWidth(cairo.surface.Surface surface)
 {
   int _retval;
   _retval = cairo_image_surface_get_width(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
@@ -340,7 +340,7 @@ int imageSurfaceGetWidth(Surface surface)
  * Params:
  *   pattern = a #cairo_pattern_t
  */
-void meshPatternBeginPatch(Pattern pattern)
+void meshPatternBeginPatch(cairo.pattern.Pattern pattern)
 {
   cairo_mesh_pattern_begin_patch(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null);
 }
@@ -369,7 +369,7 @@ void meshPatternBeginPatch(Pattern pattern)
  *   x3 = the X coordinate of the end of the curve
  *   y3 = the Y coordinate of the end of the curve
  */
-void meshPatternCurveTo(Pattern pattern, double x1, double y1, double x2, double y2, double x3, double y3)
+void meshPatternCurveTo(cairo.pattern.Pattern pattern, double x1, double y1, double x2, double y2, double x3, double y3)
 {
   cairo_mesh_pattern_curve_to(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null, x1, y1, x2, y2, x3, y3);
 }
@@ -388,7 +388,7 @@ void meshPatternCurveTo(Pattern pattern, double x1, double y1, double x2, double
  * Params:
  *   pattern = a #cairo_pattern_t
  */
-void meshPatternEndPatch(Pattern pattern)
+void meshPatternEndPatch(cairo.pattern.Pattern pattern)
 {
   cairo_mesh_pattern_end_patch(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null);
 }
@@ -411,11 +411,11 @@ void meshPatternEndPatch(Pattern pattern)
  *   is not a mesh pattern, %CAIRO_STATUS_PATTERN_TYPE_MISMATCH is
  *   returned.
  */
-Status meshPatternGetControlPoint(Pattern pattern, uint patchNum, uint pointNum, out double x, out double y)
+cairo.types.Status meshPatternGetControlPoint(cairo.pattern.Pattern pattern, uint patchNum, uint pointNum, out double x, out double y)
 {
   cairo_status_t _cretval;
   _cretval = cairo_mesh_pattern_get_control_point(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null, patchNum, pointNum, cast(double*)&x, cast(double*)&y);
-  Status _retval = cast(Status)_cretval;
+  cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
   return _retval;
 }
 
@@ -440,11 +440,11 @@ Status meshPatternGetControlPoint(Pattern pattern, uint patchNum, uint pointNum,
  *   pattern is not a mesh pattern, %CAIRO_STATUS_PATTERN_TYPE_MISMATCH
  *   is returned.
  */
-Status meshPatternGetCornerColorRgba(Pattern pattern, uint patchNum, uint cornerNum, out double red, out double green, out double blue, out double alpha)
+cairo.types.Status meshPatternGetCornerColorRgba(cairo.pattern.Pattern pattern, uint patchNum, uint cornerNum, out double red, out double green, out double blue, out double alpha)
 {
   cairo_status_t _cretval;
   _cretval = cairo_mesh_pattern_get_corner_color_rgba(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null, patchNum, cornerNum, cast(double*)&red, cast(double*)&green, cast(double*)&blue, cast(double*)&alpha);
-  Status _retval = cast(Status)_cretval;
+  cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
   return _retval;
 }
 
@@ -460,11 +460,11 @@ Status meshPatternGetCornerColorRgba(Pattern pattern, uint patchNum, uint corner
  *   %CAIRO_STATUS_PATTERN_TYPE_MISMATCH if pattern is not a mesh
  *   pattern.
  */
-Status meshPatternGetPatchCount(Pattern pattern, out uint count)
+cairo.types.Status meshPatternGetPatchCount(cairo.pattern.Pattern pattern, out uint count)
 {
   cairo_status_t _cretval;
   _cretval = cairo_mesh_pattern_get_patch_count(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null, cast(uint*)&count);
-  Status _retval = cast(Status)_cretval;
+  cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
   return _retval;
 }
 
@@ -481,11 +481,11 @@ Status meshPatternGetPatchCount(Pattern pattern, out uint count)
  *   valid for pattern. If pattern is not a mesh pattern, a path with
  *   status %CAIRO_STATUS_PATTERN_TYPE_MISMATCH is returned.
  */
-Path meshPatternGetPath(Pattern pattern, uint patchNum)
+cairo.path.Path meshPatternGetPath(cairo.pattern.Pattern pattern, uint patchNum)
 {
   cairo_path_t* _cretval;
   _cretval = cairo_mesh_pattern_get_path(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null, patchNum);
-  auto _retval = _cretval ? new Path(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.path.Path(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -507,7 +507,7 @@ Path meshPatternGetPath(Pattern pattern, uint patchNum)
  *   x = the X coordinate of the end of the new line
  *   y = the Y coordinate of the end of the new line
  */
-void meshPatternLineTo(Pattern pattern, double x, double y)
+void meshPatternLineTo(cairo.pattern.Pattern pattern, double x, double y)
 {
   cairo_mesh_pattern_line_to(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null, x, y);
 }
@@ -526,7 +526,7 @@ void meshPatternLineTo(Pattern pattern, double x, double y)
  *   x = the X coordinate of the new position
  *   y = the Y coordinate of the new position
  */
-void meshPatternMoveTo(Pattern pattern, double x, double y)
+void meshPatternMoveTo(cairo.pattern.Pattern pattern, double x, double y)
 {
   cairo_mesh_pattern_move_to(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null, x, y);
 }
@@ -548,7 +548,7 @@ void meshPatternMoveTo(Pattern pattern, double x, double y)
  *   x = the X coordinate of the control point
  *   y = the Y coordinate of the control point
  */
-void meshPatternSetControlPoint(Pattern pattern, uint pointNum, double x, double y)
+void meshPatternSetControlPoint(cairo.pattern.Pattern pattern, uint pointNum, double x, double y)
 {
   cairo_mesh_pattern_set_control_point(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null, pointNum, x, y);
 }
@@ -572,7 +572,7 @@ void meshPatternSetControlPoint(Pattern pattern, uint pointNum, double x, double
  *   green = green component of color
  *   blue = blue component of color
  */
-void meshPatternSetCornerColorRgb(Pattern pattern, uint cornerNum, double red, double green, double blue)
+void meshPatternSetCornerColorRgb(cairo.pattern.Pattern pattern, uint cornerNum, double red, double green, double blue)
 {
   cairo_mesh_pattern_set_corner_color_rgb(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null, cornerNum, red, green, blue);
 }
@@ -597,7 +597,7 @@ void meshPatternSetCornerColorRgb(Pattern pattern, uint cornerNum, double red, d
  *   blue = blue component of color
  *   alpha = alpha component of color
  */
-void meshPatternSetCornerColorRgba(Pattern pattern, uint cornerNum, double red, double green, double blue, double alpha)
+void meshPatternSetCornerColorRgba(cairo.pattern.Pattern pattern, uint cornerNum, double red, double green, double blue, double alpha)
 {
   cairo_mesh_pattern_set_corner_color_rgba(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null, cornerNum, red, green, blue, alpha);
 }
@@ -614,11 +614,11 @@ void meshPatternSetCornerColorRgba(Pattern pattern, uint cornerNum, double red, 
  *   occurred the pattern status will be set to an error.  To inspect
  *   the status of a pattern use [cairo.pattern.Pattern.status].
  */
-Pattern patternCreateForSurface(Surface surface)
+cairo.pattern.Pattern patternCreateForSurface(cairo.surface.Surface surface)
 {
   cairo_pattern_t* _cretval;
   _cretval = cairo_pattern_create_for_surface(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new Pattern(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -644,11 +644,11 @@ Pattern patternCreateForSurface(Surface surface)
  *   occurred the pattern status will be set to an error.  To inspect
  *   the status of a pattern use [cairo.pattern.Pattern.status].
  */
-Pattern patternCreateLinear(double x0, double y0, double x1, double y1)
+cairo.pattern.Pattern patternCreateLinear(double x0, double y0, double x1, double y1)
 {
   cairo_pattern_t* _cretval;
   _cretval = cairo_pattern_create_linear(x0, y0, x1, y1);
-  auto _retval = _cretval ? new Pattern(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -774,11 +774,11 @@ Pattern patternCreateLinear(double x0, double y0, double x1, double y1)
  *   occurred the pattern status will be set to an error. To inspect the
  *   status of a pattern use [cairo.pattern.Pattern.status].
  */
-Pattern patternCreateMesh()
+cairo.pattern.Pattern patternCreateMesh()
 {
   cairo_pattern_t* _cretval;
   _cretval = cairo_pattern_create_mesh();
-  auto _retval = _cretval ? new Pattern(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -806,11 +806,11 @@ Pattern patternCreateMesh()
  *   occurred the pattern status will be set to an error.  To inspect
  *   the status of a pattern use [cairo.pattern.Pattern.status].
  */
-Pattern patternCreateRadial(double cx0, double cy0, double radius0, double cx1, double cy1, double radius1)
+cairo.pattern.Pattern patternCreateRadial(double cx0, double cy0, double radius0, double cx1, double cy1, double radius1)
 {
   cairo_pattern_t* _cretval;
   _cretval = cairo_pattern_create_radial(cx0, cy0, radius0, cx1, cy1, radius1);
-  auto _retval = _cretval ? new Pattern(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -828,11 +828,11 @@ Pattern patternCreateRadial(double cx0, double cy0, double radius0, double cx1, 
  * Returns: a newly created #cairo_pattern_t. Free with
  *   [cairo.pattern.Pattern.destroy] when you are done using it.
  */
-Pattern patternCreateRasterSource(void* userData, Content content, int width, int height)
+cairo.pattern.Pattern patternCreateRasterSource(void* userData, cairo.types.Content content, int width, int height)
 {
   cairo_pattern_t* _cretval;
   _cretval = cairo_pattern_create_raster_source(userData, content, width, height);
-  auto _retval = _cretval ? new Pattern(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -853,11 +853,11 @@ Pattern patternCreateRasterSource(void* userData, Content content, int width, in
  *   occurred the pattern status will be set to an error.  To inspect
  *   the status of a pattern use [cairo.pattern.Pattern.status].
  */
-Pattern patternCreateRgb(double red, double green, double blue)
+cairo.pattern.Pattern patternCreateRgb(double red, double green, double blue)
 {
   cairo_pattern_t* _cretval;
   _cretval = cairo_pattern_create_rgb(red, green, blue);
-  auto _retval = _cretval ? new Pattern(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -880,11 +880,11 @@ Pattern patternCreateRgb(double red, double green, double blue)
  *   occurred the pattern status will be set to an error.  To inspect
  *   the status of a pattern use [cairo.pattern.Pattern.status].
  */
-Pattern patternCreateRgba(double red, double green, double blue, double alpha)
+cairo.pattern.Pattern patternCreateRgba(double red, double green, double blue, double alpha)
 {
   cairo_pattern_t* _cretval;
   _cretval = cairo_pattern_create_rgba(red, green, blue, alpha);
-  auto _retval = _cretval ? new Pattern(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -894,7 +894,7 @@ Pattern patternCreateRgba(double red, double green, double blue, double alpha)
  * Params:
  *   versions = supported version list
  */
-void pdfGetVersions(out PdfVersion[] versions)
+void pdfGetVersions(out cairo.types.PdfVersion[] versions)
 {
   int _numVersions;
   const(cairo_pdf_version_t)* _versions;
@@ -918,7 +918,7 @@ void pdfGetVersions(out PdfVersion[] versions)
  *   flags = outline item flags
  * Returns: the id for the added item.
  */
-int pdfSurfaceAddOutline(Surface surface, int parentId, string utf8, string linkAttribs, PdfOutlineFlags flags)
+int pdfSurfaceAddOutline(cairo.surface.Surface surface, int parentId, string utf8, string linkAttribs, cairo.types.PdfOutlineFlags flags)
 {
   int _retval;
   const(char)* _utf8 = utf8.toCString(No.Alloc);
@@ -944,12 +944,12 @@ int pdfSurfaceAddOutline(Surface surface, int parentId, string utf8, string link
  *   pointer to a "nil" surface if an error such as out of memory
  *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
-Surface pdfSurfaceCreate(string filename, double widthInPoints, double heightInPoints)
+cairo.surface.Surface pdfSurfaceCreate(string filename, double widthInPoints, double heightInPoints)
 {
   cairo_surface_t* _cretval;
   const(char)* _filename = filename.toCString(No.Alloc);
   _cretval = cairo_pdf_surface_create(_filename, widthInPoints, heightInPoints);
-  auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -970,12 +970,12 @@ Surface pdfSurfaceCreate(string filename, double widthInPoints, double heightInP
  *   pointer to a "nil" surface if an error such as out of memory
  *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
-Surface pdfSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, double heightInPoints)
+cairo.surface.Surface pdfSurfaceCreateForStream(cairo.types.WriteFunc writeFunc, double widthInPoints, double heightInPoints)
 {
   extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length)
   {
-    Status _dretval;
-    auto _dlg = cast(WriteFunc*)closure;
+    cairo.types.Status _dretval;
+    auto _dlg = cast(cairo.types.WriteFunc*)closure;
     ubyte[] _data;
     _data.length = length;
     _data[0 .. length] = data[0 .. length];
@@ -990,7 +990,7 @@ Surface pdfSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, dou
   cairo_surface_t* _cretval;
   auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
   _cretval = cairo_pdf_surface_create_for_stream(_writeFuncCB, _writeFunc, widthInPoints, heightInPoints);
-  auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1005,7 +1005,7 @@ Surface pdfSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, dou
  *   surface = a PDF #cairo_surface_t
  *   version_ = PDF version
  */
-void pdfSurfaceRestrictToVersion(Surface surface, PdfVersion version_)
+void pdfSurfaceRestrictToVersion(cairo.surface.Surface surface, cairo.types.PdfVersion version_)
 {
   cairo_pdf_surface_restrict_to_version(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, version_);
 }
@@ -1025,7 +1025,7 @@ void pdfSurfaceRestrictToVersion(Surface surface, PdfVersion version_)
  *   name = The name of the custom metadata item to set $(LPAREN)utf8$(RPAREN).
  *   value = The value of the metadata $(LPAREN)utf8$(RPAREN).
  */
-void pdfSurfaceSetCustomMetadata(Surface surface, string name, string value)
+void pdfSurfaceSetCustomMetadata(cairo.surface.Surface surface, string name, string value)
 {
   const(char)* _name = name.toCString(No.Alloc);
   const(char)* _value = value.toCString(No.Alloc);
@@ -1048,7 +1048,7 @@ void pdfSurfaceSetCustomMetadata(Surface surface, string name, string value)
  *   metadata = The metadata item to set.
  *   utf8 = metadata value
  */
-void pdfSurfaceSetMetadata(Surface surface, PdfMetadata metadata, string utf8)
+void pdfSurfaceSetMetadata(cairo.surface.Surface surface, cairo.types.PdfMetadata metadata, string utf8)
 {
   const(char)* _utf8 = utf8.toCString(No.Alloc);
   cairo_pdf_surface_set_metadata(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, metadata, _utf8);
@@ -1060,7 +1060,7 @@ void pdfSurfaceSetMetadata(Surface surface, PdfMetadata metadata, string utf8)
  *   surface = a PDF #cairo_surface_t
  *   utf8 = The page label.
  */
-void pdfSurfaceSetPageLabel(Surface surface, string utf8)
+void pdfSurfaceSetPageLabel(cairo.surface.Surface surface, string utf8)
 {
   const(char)* _utf8 = utf8.toCString(No.Alloc);
   cairo_pdf_surface_set_page_label(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, _utf8);
@@ -1079,7 +1079,7 @@ void pdfSurfaceSetPageLabel(Surface surface, string utf8)
  *   widthInPoints = new surface width, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  *   heightInPoints = new surface height, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  */
-void pdfSurfaceSetSize(Surface surface, double widthInPoints, double heightInPoints)
+void pdfSurfaceSetSize(cairo.surface.Surface surface, double widthInPoints, double heightInPoints)
 {
   cairo_pdf_surface_set_size(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, widthInPoints, heightInPoints);
 }
@@ -1093,7 +1093,7 @@ void pdfSurfaceSetSize(Surface surface, double widthInPoints, double heightInPoi
  *   width = Thumbnail width.
  *   height = Thumbnail height
  */
-void pdfSurfaceSetThumbnailSize(Surface surface, int width, int height)
+void pdfSurfaceSetThumbnailSize(cairo.surface.Surface surface, int width, int height)
 {
   cairo_pdf_surface_set_thumbnail_size(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, width, height);
 }
@@ -1106,11 +1106,11 @@ void pdfSurfaceSetThumbnailSize(Surface surface, int width, int height)
  *   version_ = a version id
  * Returns: the string associated to given version.
  */
-string pdfVersionToString(PdfVersion version_)
+string pdfVersionToString(cairo.types.PdfVersion version_)
 {
   const(char)* _cretval;
   _cretval = cairo_pdf_version_to_string(version_);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -1120,7 +1120,7 @@ string pdfVersionToString(PdfVersion version_)
  * Params:
  *   levels = supported level list
  */
-void psGetLevels(out PsLevel[] levels)
+void psGetLevels(out cairo.types.PsLevel[] levels)
 {
   int _numLevels;
   const(cairo_ps_level_t)* _levels;
@@ -1137,11 +1137,11 @@ void psGetLevels(out PsLevel[] levels)
  *   level = a level id
  * Returns: the string associated to given level.
  */
-string psLevelToString(PsLevel level)
+string psLevelToString(cairo.types.PsLevel level)
 {
   const(char)* _cretval;
   _cretval = cairo_ps_level_to_string(level);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -1166,12 +1166,12 @@ string psLevelToString(PsLevel level)
  *   pointer to a "nil" surface if an error such as out of memory
  *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
-Surface psSurfaceCreate(string filename, double widthInPoints, double heightInPoints)
+cairo.surface.Surface psSurfaceCreate(string filename, double widthInPoints, double heightInPoints)
 {
   cairo_surface_t* _cretval;
   const(char)* _filename = filename.toCString(No.Alloc);
   _cretval = cairo_ps_surface_create(_filename, widthInPoints, heightInPoints);
-  auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1196,12 +1196,12 @@ Surface psSurfaceCreate(string filename, double widthInPoints, double heightInPo
  *   pointer to a "nil" surface if an error such as out of memory
  *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
-Surface psSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, double heightInPoints)
+cairo.surface.Surface psSurfaceCreateForStream(cairo.types.WriteFunc writeFunc, double widthInPoints, double heightInPoints)
 {
   extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length)
   {
-    Status _dretval;
-    auto _dlg = cast(WriteFunc*)closure;
+    cairo.types.Status _dretval;
+    auto _dlg = cast(cairo.types.WriteFunc*)closure;
     ubyte[] _data;
     _data.length = length;
     _data[0 .. length] = data[0 .. length];
@@ -1216,7 +1216,7 @@ Surface psSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, doub
   cairo_surface_t* _cretval;
   auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
   _cretval = cairo_ps_surface_create_for_stream(_writeFuncCB, _writeFunc, widthInPoints, heightInPoints);
-  auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1232,7 +1232,7 @@ Surface psSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, doub
  * Params:
  *   surface = a PostScript #cairo_surface_t
  */
-void psSurfaceDscBeginPageSetup(Surface surface)
+void psSurfaceDscBeginPageSetup(cairo.surface.Surface surface)
 {
   cairo_ps_surface_dsc_begin_page_setup(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
 }
@@ -1248,7 +1248,7 @@ void psSurfaceDscBeginPageSetup(Surface surface)
  * Params:
  *   surface = a PostScript #cairo_surface_t
  */
-void psSurfaceDscBeginSetup(Surface surface)
+void psSurfaceDscBeginSetup(cairo.surface.Surface surface)
 {
   cairo_ps_surface_dsc_begin_setup(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
 }
@@ -1324,7 +1324,7 @@ void psSurfaceDscBeginSetup(Surface surface)
  *   surface = a PostScript #cairo_surface_t
  *   comment = a comment string to be emitted into the PostScript output
  */
-void psSurfaceDscComment(Surface surface, string comment)
+void psSurfaceDscComment(cairo.surface.Surface surface, string comment)
 {
   const(char)* _comment = comment.toCString(No.Alloc);
   cairo_ps_surface_dsc_comment(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, _comment);
@@ -1336,9 +1336,9 @@ void psSurfaceDscComment(Surface surface, string comment)
  *   surface = a PostScript #cairo_surface_t
  * Returns: %TRUE if the surface will output Encapsulated PostScript.
  */
-Bool psSurfaceGetEps(Surface surface)
+cairo.types.Bool psSurfaceGetEps(cairo.surface.Surface surface)
 {
-  Bool _retval;
+  cairo.types.Bool _retval;
   _retval = cairo_ps_surface_get_eps(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
   return _retval;
 }
@@ -1355,7 +1355,7 @@ Bool psSurfaceGetEps(Surface surface)
  *   surface = a PostScript #cairo_surface_t
  *   level = PostScript level
  */
-void psSurfaceRestrictToLevel(Surface surface, PsLevel level)
+void psSurfaceRestrictToLevel(cairo.surface.Surface surface, cairo.types.PsLevel level)
 {
   cairo_ps_surface_restrict_to_level(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, level);
 }
@@ -1372,7 +1372,7 @@ void psSurfaceRestrictToLevel(Surface surface, PsLevel level)
  *   surface = a PostScript #cairo_surface_t
  *   eps = %TRUE to output EPS format PostScript
  */
-void psSurfaceSetEps(Surface surface, Bool eps)
+void psSurfaceSetEps(cairo.surface.Surface surface, cairo.types.Bool eps)
 {
   cairo_ps_surface_set_eps(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, eps);
 }
@@ -1390,7 +1390,7 @@ void psSurfaceSetEps(Surface surface, Bool eps)
  *   widthInPoints = new surface width, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  *   heightInPoints = new surface height, in points $(LPAREN)1 point \=\= 1/72.0 inch$(RPAREN)
  */
-void psSurfaceSetSize(Surface surface, double widthInPoints, double heightInPoints)
+void psSurfaceSetSize(cairo.surface.Surface surface, double widthInPoints, double heightInPoints)
 {
   cairo_ps_surface_set_size(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, widthInPoints, heightInPoints);
 }
@@ -1401,7 +1401,7 @@ void psSurfaceSetSize(Surface surface, double widthInPoints, double heightInPoin
  *   pattern = the pattern to update
  * Returns: the current user-data passed to each callback
  */
-void* rasterSourcePatternGetCallbackData(Pattern pattern)
+void* rasterSourcePatternGetCallbackData(cairo.pattern.Pattern pattern)
 {
   auto _retval = cairo_raster_source_pattern_get_callback_data(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null);
   return _retval;
@@ -1413,7 +1413,7 @@ void* rasterSourcePatternGetCallbackData(Pattern pattern)
  *   pattern = the pattern to update
  *   data = the user data to be passed to all callbacks
  */
-void rasterSourcePatternSetCallbackData(Pattern pattern, void* data)
+void rasterSourcePatternSetCallbackData(cairo.pattern.Pattern pattern, void* data)
 {
   cairo_raster_source_pattern_set_callback_data(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null, data);
 }
@@ -1434,11 +1434,11 @@ void rasterSourcePatternSetCallbackData(Pattern pattern, void* data)
  *   owns the surface and should call [cairo.surface.Surface.destroy] when done
  *   with it.
  */
-Surface recordingSurfaceCreate(Content content, Rectangle extents)
+cairo.surface.Surface recordingSurfaceCreate(cairo.types.Content content, cairo.rectangle.Rectangle extents)
 {
   cairo_surface_t* _cretval;
-  _cretval = cairo_recording_surface_create(content, extents ? cast(cairo_rectangle_t*)extents.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+  _cretval = cairo_recording_surface_create(content, extents ? cast(const(cairo_rectangle_t)*)extents.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1450,9 +1450,9 @@ Surface recordingSurfaceCreate(Content content, Rectangle extents)
  * Returns: %TRUE if the surface is bounded, of recording type, and
  *   not in an error state, otherwise %FALSE
  */
-Bool recordingSurfaceGetExtents(Surface surface, Rectangle extents)
+cairo.types.Bool recordingSurfaceGetExtents(cairo.surface.Surface surface, cairo.rectangle.Rectangle extents)
 {
-  Bool _retval;
+  cairo.types.Bool _retval;
   _retval = cairo_recording_surface_get_extents(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, extents ? cast(cairo_rectangle_t*)extents.cPtr(No.Dup) : null);
   return _retval;
 }
@@ -1468,7 +1468,7 @@ Bool recordingSurfaceGetExtents(Surface surface, Rectangle extents)
  *   width = the width of the ink bounding box
  *   height = the height of the ink bounding box
  */
-void recordingSurfaceInkExtents(Surface surface, out double x0, out double y0, out double width, out double height)
+void recordingSurfaceInkExtents(cairo.surface.Surface surface, out double x0, out double y0, out double width, out double height)
 {
   cairo_recording_surface_ink_extents(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, cast(double*)&x0, cast(double*)&y0, cast(double*)&width, cast(double*)&height);
 }
@@ -1481,11 +1481,11 @@ void recordingSurfaceInkExtents(Surface surface, out double x0, out double y0, o
  *   error object is returned where all operations on the object do nothing.
  *   You can check for this with [cairo.region.Region.status].
  */
-Region regionCreate()
+cairo.region.Region regionCreate()
 {
   cairo_region_t* _cretval;
   _cretval = cairo_region_create();
-  auto _retval = _cretval ? new Region(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1499,11 +1499,11 @@ Region regionCreate()
  *   error object is returned where all operations on the object do nothing.
  *   You can check for this with [cairo.region.Region.status].
  */
-Region regionCreateRectangle(RectangleInt rectangle)
+cairo.region.Region regionCreateRectangle(cairo.rectangle_int.RectangleInt rectangle)
 {
   cairo_region_t* _cretval;
-  _cretval = cairo_region_create_rectangle(rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new Region(cast(void*)_cretval, Yes.Take) : null;
+  _cretval = cairo_region_create_rectangle(rectangle ? cast(const(cairo_rectangle_int_t)*)rectangle.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1518,11 +1518,11 @@ Region regionCreateRectangle(RectangleInt rectangle)
  *   error object is returned where all operations on the object do nothing.
  *   You can check for this with [cairo.region.Region.status].
  */
-Region regionCreateRectangles(RectangleInt rects, int count)
+cairo.region.Region regionCreateRectangles(cairo.rectangle_int.RectangleInt rects, int count)
 {
   cairo_region_t* _cretval;
-  _cretval = cairo_region_create_rectangles(rects ? cast(cairo_rectangle_int_t*)rects.cPtr(No.Dup) : null, count);
-  auto _retval = _cretval ? new Region(cast(void*)_cretval, Yes.Take) : null;
+  _cretval = cairo_region_create_rectangles(rects ? cast(const(cairo_rectangle_int_t)*)rects.cPtr(No.Dup) : null, count);
+  auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1544,11 +1544,11 @@ Region regionCreateRectangles(RectangleInt rects, int count)
  * Returns: a newly created #cairo_scaled_font_t. Destroy with
  *   [cairo.scaled_font.ScaledFont.destroy]
  */
-ScaledFont scaledFontCreate(FontFace fontFace, Matrix fontMatrix, Matrix ctm, FontOptions options)
+cairo.scaled_font.ScaledFont scaledFontCreate(cairo.font_face.FontFace fontFace, cairo.matrix.Matrix fontMatrix, cairo.matrix.Matrix ctm, cairo.font_options.FontOptions options)
 {
   cairo_scaled_font_t* _cretval;
-  _cretval = cairo_scaled_font_create(fontFace ? cast(cairo_font_face_t*)fontFace.cPtr(No.Dup) : null, fontMatrix ? cast(cairo_matrix_t*)fontMatrix.cPtr(No.Dup) : null, ctm ? cast(cairo_matrix_t*)ctm.cPtr(No.Dup) : null, options ? cast(cairo_font_options_t*)options.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new ScaledFont(cast(void*)_cretval, Yes.Take) : null;
+  _cretval = cairo_scaled_font_create(fontFace ? cast(cairo_font_face_t*)fontFace.cPtr(No.Dup) : null, fontMatrix ? cast(const(cairo_matrix_t)*)fontMatrix.cPtr(No.Dup) : null, ctm ? cast(const(cairo_matrix_t)*)ctm.cPtr(No.Dup) : null, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new cairo.scaled_font.ScaledFont(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1564,12 +1564,12 @@ ScaledFont scaledFontCreate(FontFace fontFace, Matrix fontMatrix, Matrix ctm, Fo
  *   pointer to a "nil" device if an error such as out of memory
  *   occurs. You can use [cairo.device.Device.status] to check for this.
  */
-Device scriptCreate(string filename)
+cairo.device.Device scriptCreate(string filename)
 {
   cairo_device_t* _cretval;
   const(char)* _filename = filename.toCString(No.Alloc);
   _cretval = cairo_script_create(_filename);
-  auto _retval = _cretval ? new Device(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.device.Device(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1585,12 +1585,12 @@ Device scriptCreate(string filename)
  *   pointer to a "nil" device if an error such as out of memory
  *   occurs. You can use [cairo.device.Device.status] to check for this.
  */
-Device scriptCreateForStream(WriteFunc writeFunc)
+cairo.device.Device scriptCreateForStream(cairo.types.WriteFunc writeFunc)
 {
   extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length)
   {
-    Status _dretval;
-    auto _dlg = cast(WriteFunc*)closure;
+    cairo.types.Status _dretval;
+    auto _dlg = cast(cairo.types.WriteFunc*)closure;
     ubyte[] _data;
     _data.length = length;
     _data[0 .. length] = data[0 .. length];
@@ -1605,7 +1605,7 @@ Device scriptCreateForStream(WriteFunc writeFunc)
   cairo_device_t* _cretval;
   auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
   _cretval = cairo_script_create_for_stream(_writeFuncCB, _writeFunc);
-  auto _retval = _cretval ? new Device(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.device.Device(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1616,11 +1616,11 @@ Device scriptCreateForStream(WriteFunc writeFunc)
  *   recordingSurface = the recording surface to replay
  * Returns: #CAIRO_STATUS_SUCCESS on successful completion or an error code.
  */
-Status scriptFromRecordingSurface(Device script, Surface recordingSurface)
+cairo.types.Status scriptFromRecordingSurface(cairo.device.Device script, cairo.surface.Surface recordingSurface)
 {
   cairo_status_t _cretval;
   _cretval = cairo_script_from_recording_surface(script ? cast(cairo_device_t*)script.cPtr(No.Dup) : null, recordingSurface ? cast(cairo_surface_t*)recordingSurface.cPtr(No.Dup) : null);
-  Status _retval = cast(Status)_cretval;
+  cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
   return _retval;
 }
 
@@ -1630,11 +1630,11 @@ Status scriptFromRecordingSurface(Device script, Surface recordingSurface)
  *   script = The script $(LPAREN)output device$(RPAREN) to query
  * Returns: the current output mode of the script
  */
-ScriptMode scriptGetMode(Device script)
+cairo.types.ScriptMode scriptGetMode(cairo.device.Device script)
 {
   cairo_script_mode_t _cretval;
   _cretval = cairo_script_get_mode(script ? cast(cairo_device_t*)script.cPtr(No.Dup) : null);
-  ScriptMode _retval = cast(ScriptMode)_cretval;
+  cairo.types.ScriptMode _retval = cast(cairo.types.ScriptMode)_cretval;
   return _retval;
 }
 
@@ -1644,7 +1644,7 @@ ScriptMode scriptGetMode(Device script)
  *   script = The script $(LPAREN)output device$(RPAREN)
  *   mode = the new mode
  */
-void scriptSetMode(Device script, ScriptMode mode)
+void scriptSetMode(cairo.device.Device script, cairo.types.ScriptMode mode)
 {
   cairo_script_set_mode(script ? cast(cairo_device_t*)script.cPtr(No.Dup) : null, mode);
 }
@@ -1663,11 +1663,11 @@ void scriptSetMode(Device script, ScriptMode mode)
  *   pointer to a "nil" surface if an error such as out of memory
  *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
-Surface scriptSurfaceCreate(Device script, Content content, double width, double height)
+cairo.surface.Surface scriptSurfaceCreate(cairo.device.Device script, cairo.types.Content content, double width, double height)
 {
   cairo_surface_t* _cretval;
   _cretval = cairo_script_surface_create(script ? cast(cairo_device_t*)script.cPtr(No.Dup) : null, content, width, height);
-  auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1684,11 +1684,11 @@ Surface scriptSurfaceCreate(Device script, Content content, double width, double
  *   pointer to a "nil" surface if an error such as out of memory
  *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
-Surface scriptSurfaceCreateForTarget(Device script, Surface target)
+cairo.surface.Surface scriptSurfaceCreateForTarget(cairo.device.Device script, cairo.surface.Surface target)
 {
   cairo_surface_t* _cretval;
   _cretval = cairo_script_surface_create_for_target(script ? cast(cairo_device_t*)script.cPtr(No.Dup) : null, target ? cast(cairo_surface_t*)target.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1698,7 +1698,7 @@ Surface scriptSurfaceCreateForTarget(Device script, Surface target)
  *   script = the script $(LPAREN)output device$(RPAREN)
  *   comment = the string to emit
  */
-void scriptWriteComment(Device script, string comment)
+void scriptWriteComment(cairo.device.Device script, string comment)
 {
   int _len;
   if (comment)
@@ -1714,11 +1714,11 @@ void scriptWriteComment(Device script, string comment)
  *   status = a cairo status
  * Returns: a string representation of the status
  */
-string statusToString(Status status)
+string statusToString(cairo.types.Status status)
 {
   const(char)* _cretval;
   _cretval = cairo_status_to_string(status);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -1728,7 +1728,7 @@ string statusToString(Status status)
  * Params:
  *   versions = supported version list
  */
-void svgGetVersions(out SvgVersion[] versions)
+void svgGetVersions(out cairo.types.SvgVersion[] versions)
 {
   int _numVersions;
   const(cairo_svg_version_t)* _versions;
@@ -1769,12 +1769,12 @@ void svgGetVersions(out SvgVersion[] versions)
  *   pointer to a "nil" surface if an error such as out of memory
  *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
-Surface svgSurfaceCreate(string filename, double widthInPoints, double heightInPoints)
+cairo.surface.Surface svgSurfaceCreate(string filename, double widthInPoints, double heightInPoints)
 {
   cairo_surface_t* _cretval;
   const(char)* _filename = filename.toCString(No.Alloc);
   _cretval = cairo_svg_surface_create(_filename, widthInPoints, heightInPoints);
-  auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1795,12 +1795,12 @@ Surface svgSurfaceCreate(string filename, double widthInPoints, double heightInP
  *   pointer to a "nil" surface if an error such as out of memory
  *   occurs. You can use [cairo.surface.Surface.status] to check for this.
  */
-Surface svgSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, double heightInPoints)
+cairo.surface.Surface svgSurfaceCreateForStream(cairo.types.WriteFunc writeFunc, double widthInPoints, double heightInPoints)
 {
   extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length)
   {
-    Status _dretval;
-    auto _dlg = cast(WriteFunc*)closure;
+    cairo.types.Status _dretval;
+    auto _dlg = cast(cairo.types.WriteFunc*)closure;
     ubyte[] _data;
     _data.length = length;
     _data[0 .. length] = data[0 .. length];
@@ -1815,7 +1815,7 @@ Surface svgSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, dou
   cairo_surface_t* _cretval;
   auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
   _cretval = cairo_svg_surface_create_for_stream(_writeFuncCB, _writeFunc, widthInPoints, heightInPoints);
-  auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1828,11 +1828,11 @@ Surface svgSurfaceCreateForStream(WriteFunc writeFunc, double widthInPoints, dou
  *   surface = a SVG #cairo_surface_t
  * Returns: the SVG unit of the SVG surface.
  */
-SvgUnit svgSurfaceGetDocumentUnit(Surface surface)
+cairo.types.SvgUnit svgSurfaceGetDocumentUnit(cairo.surface.Surface surface)
 {
   cairo_svg_unit_t _cretval;
   _cretval = cairo_svg_surface_get_document_unit(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
-  SvgUnit _retval = cast(SvgUnit)_cretval;
+  cairo.types.SvgUnit _retval = cast(cairo.types.SvgUnit)_cretval;
   return _retval;
 }
 
@@ -1847,7 +1847,7 @@ SvgUnit svgSurfaceGetDocumentUnit(Surface surface)
  *   surface = a SVG #cairo_surface_t
  *   version_ = SVG version
  */
-void svgSurfaceRestrictToVersion(Surface surface, SvgVersion version_)
+void svgSurfaceRestrictToVersion(cairo.surface.Surface surface, cairo.types.SvgVersion version_)
 {
   cairo_svg_surface_restrict_to_version(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, version_);
 }
@@ -1868,7 +1868,7 @@ void svgSurfaceRestrictToVersion(Surface surface, SvgVersion version_)
  *   surface = a SVG #cairo_surface_t
  *   unit = SVG unit
  */
-void svgSurfaceSetDocumentUnit(Surface surface, SvgUnit unit)
+void svgSurfaceSetDocumentUnit(cairo.surface.Surface surface, cairo.types.SvgUnit unit)
 {
   cairo_svg_surface_set_document_unit(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, unit);
 }
@@ -1881,11 +1881,11 @@ void svgSurfaceSetDocumentUnit(Surface surface, SvgUnit unit)
  *   version_ = a version id
  * Returns: the string associated to given version.
  */
-string svgVersionToString(SvgVersion version_)
+string svgVersionToString(cairo.types.SvgVersion version_)
 {
   const(char)* _cretval;
   _cretval = cairo_svg_version_to_string(version_);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -1896,7 +1896,7 @@ string svgVersionToString(SvgVersion version_)
  *   abstractSurface = a #cairo_tee_surface_t
  *   target = the surface to add
  */
-void teeSurfaceAdd(Surface abstractSurface, Surface target)
+void teeSurfaceAdd(cairo.surface.Surface abstractSurface, cairo.surface.Surface target)
 {
   cairo_tee_surface_add(abstractSurface ? cast(cairo_surface_t*)abstractSurface.cPtr(No.Dup) : null, target ? cast(cairo_surface_t*)target.cPtr(No.Dup) : null);
 }
@@ -1911,11 +1911,11 @@ void teeSurfaceAdd(Surface abstractSurface, Surface target)
  *   primary = the primary #cairo_surface_t
  * Returns: the newly created surface
  */
-Surface teeSurfaceCreate(Surface primary)
+cairo.surface.Surface teeSurfaceCreate(cairo.surface.Surface primary)
 {
   cairo_surface_t* _cretval;
   _cretval = cairo_tee_surface_create(primary ? cast(cairo_surface_t*)primary.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1928,11 +1928,11 @@ Surface teeSurfaceCreate(Surface primary)
  *   index = the index of the replica to retrieve
  * Returns: the surface at the given index
  */
-Surface teeSurfaceIndex(Surface abstractSurface, uint index)
+cairo.surface.Surface teeSurfaceIndex(cairo.surface.Surface abstractSurface, uint index)
 {
   cairo_surface_t* _cretval;
   _cretval = cairo_tee_surface_index(abstractSurface ? cast(cairo_surface_t*)abstractSurface.cPtr(No.Dup) : null, index);
-  auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1943,7 +1943,7 @@ Surface teeSurfaceIndex(Surface abstractSurface, uint index)
  *   abstractSurface = a #cairo_tee_surface_t
  *   target = the surface to remove
  */
-void teeSurfaceRemove(Surface abstractSurface, Surface target)
+void teeSurfaceRemove(cairo.surface.Surface abstractSurface, cairo.surface.Surface target)
 {
   cairo_tee_surface_remove(abstractSurface ? cast(cairo_surface_t*)abstractSurface.cPtr(No.Dup) : null, target ? cast(cairo_surface_t*)target.cPtr(No.Dup) : null);
 }
@@ -1963,11 +1963,11 @@ void teeSurfaceRemove(Surface abstractSurface, Surface target)
  * Returns: the newly allocated array of text clusters that should be
  *   freed using [cairo.text_cluster.TextCluster.free]
  */
-TextCluster textClusterAllocate(int numClusters)
+cairo.text_cluster.TextCluster textClusterAllocate(int numClusters)
 {
   cairo_text_cluster_t* _cretval;
   _cretval = cairo_text_cluster_allocate(numClusters);
-  auto _retval = _cretval ? new TextCluster(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.text_cluster.TextCluster(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1987,12 +1987,12 @@ TextCluster textClusterAllocate(int numClusters)
  * Returns: a newly created #cairo_font_face_t. Free with
  *   [cairo.font_face.FontFace.destroy] when you are done using it.
  */
-FontFace toyFontFaceCreate(string family, FontSlant slant, FontWeight weight)
+cairo.font_face.FontFace toyFontFaceCreate(string family, cairo.types.FontSlant slant, cairo.types.FontWeight weight)
 {
   cairo_font_face_t* _cretval;
   const(char)* _family = family.toCString(No.Alloc);
   _cretval = cairo_toy_font_face_create(_family, slant, weight);
-  auto _retval = _cretval ? new FontFace(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.font_face.FontFace(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -2003,11 +2003,11 @@ FontFace toyFontFaceCreate(string family, FontSlant slant, FontWeight weight)
  * Returns: The family name.  This string is owned by the font face
  *   and remains valid as long as the font face is alive $(LPAREN)referenced$(RPAREN).
  */
-string toyFontFaceGetFamily(FontFace fontFace)
+string toyFontFaceGetFamily(cairo.font_face.FontFace fontFace)
 {
   const(char)* _cretval;
   _cretval = cairo_toy_font_face_get_family(fontFace ? cast(cairo_font_face_t*)fontFace.cPtr(No.Dup) : null);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -2017,11 +2017,11 @@ string toyFontFaceGetFamily(FontFace fontFace)
  *   fontFace = A toy font face
  * Returns: The slant value
  */
-FontSlant toyFontFaceGetSlant(FontFace fontFace)
+cairo.types.FontSlant toyFontFaceGetSlant(cairo.font_face.FontFace fontFace)
 {
   cairo_font_slant_t _cretval;
   _cretval = cairo_toy_font_face_get_slant(fontFace ? cast(cairo_font_face_t*)fontFace.cPtr(No.Dup) : null);
-  FontSlant _retval = cast(FontSlant)_cretval;
+  cairo.types.FontSlant _retval = cast(cairo.types.FontSlant)_cretval;
   return _retval;
 }
 
@@ -2031,11 +2031,11 @@ FontSlant toyFontFaceGetSlant(FontFace fontFace)
  *   fontFace = A toy font face
  * Returns: The weight value
  */
-FontWeight toyFontFaceGetWeight(FontFace fontFace)
+cairo.types.FontWeight toyFontFaceGetWeight(cairo.font_face.FontFace fontFace)
 {
   cairo_font_weight_t _cretval;
   _cretval = cairo_toy_font_face_get_weight(fontFace ? cast(cairo_font_face_t*)fontFace.cPtr(No.Dup) : null);
-  FontWeight _retval = cast(FontWeight)_cretval;
+  cairo.types.FontWeight _retval = cast(cairo.types.FontWeight)_cretval;
   return _retval;
 }
 
@@ -2051,11 +2051,11 @@ FontWeight toyFontFaceGetWeight(FontFace fontFace)
  * Returns: a newly created #cairo_font_face_t. Free with
  *   [cairo.font_face.FontFace.destroy] when you are done using it.
  */
-FontFace userFontFaceCreate()
+cairo.font_face.FontFace userFontFaceCreate()
 {
   cairo_font_face_t* _cretval;
   _cretval = cairo_user_font_face_create();
-  auto _retval = _cretval ? new FontFace(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.font_face.FontFace(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -2100,11 +2100,11 @@ FontFace userFontFaceCreate()
  *   outside of a color render callback. To keep a reference to it,
  *   you must call [cairo.pattern.Pattern.reference].
  */
-Pattern userScaledFontGetForegroundMarker(ScaledFont scaledFont)
+cairo.pattern.Pattern userScaledFontGetForegroundMarker(cairo.scaled_font.ScaledFont scaledFont)
 {
   cairo_pattern_t* _cretval;
   _cretval = cairo_user_scaled_font_get_foreground_marker(scaledFont ? cast(cairo_scaled_font_t*)scaledFont.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new Pattern(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -2141,11 +2141,11 @@ Pattern userScaledFontGetForegroundMarker(ScaledFont scaledFont)
  *   owned by cairo. To keep a reference to it, you must call
  *   [cairo.pattern.Pattern.reference].
  */
-Pattern userScaledFontGetForegroundSource(ScaledFont scaledFont)
+cairo.pattern.Pattern userScaledFontGetForegroundSource(cairo.scaled_font.ScaledFont scaledFont)
 {
   cairo_pattern_t* _cretval;
   _cretval = cairo_user_scaled_font_get_foreground_source(scaledFont ? cast(cairo_scaled_font_t*)scaledFont.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new Pattern(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -2180,6 +2180,6 @@ string versionString()
 {
   const(char)* _cretval;
   _cretval = cairo_version_string();
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }

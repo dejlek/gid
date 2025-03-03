@@ -1,6 +1,6 @@
 module gtk.entry_buffer;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -17,7 +17,7 @@ import gtk.types;
  * useful in the case of important passwords. Or a derived class could
  * integrate with an application’s concept of undo/redo.
  */
-class EntryBuffer : ObjectG
+class EntryBuffer : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -144,7 +144,7 @@ class EntryBuffer : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_entry_buffer_get_text(cast(GtkEntryBuffer*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -209,8 +209,8 @@ class EntryBuffer : ObjectG
    *   nChars = The number of characters that were deleted.
    *   entryBuffer = the instance the signal is connected to
    */
-  alias DeletedTextCallbackDlg = void delegate(uint position, uint nChars, EntryBuffer entryBuffer);
-  alias DeletedTextCallbackFunc = void function(uint position, uint nChars, EntryBuffer entryBuffer);
+  alias DeletedTextCallbackDlg = void delegate(uint position, uint nChars, gtk.entry_buffer.EntryBuffer entryBuffer);
+  alias DeletedTextCallbackFunc = void function(uint position, uint nChars, gtk.entry_buffer.EntryBuffer entryBuffer);
 
   /**
    * Connect to DeletedText signal.
@@ -226,9 +226,9 @@ class EntryBuffer : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto entryBuffer = getVal!EntryBuffer(_paramVals);
-      auto position = getVal!uint(&_paramVals[1]);
-      auto nChars = getVal!uint(&_paramVals[2]);
+      auto entryBuffer = getVal!(gtk.entry_buffer.EntryBuffer)(_paramVals);
+      auto position = getVal!(uint)(&_paramVals[1]);
+      auto nChars = getVal!(uint)(&_paramVals[2]);
       _dClosure.dlg(position, nChars, entryBuffer);
     }
 
@@ -244,8 +244,8 @@ class EntryBuffer : ObjectG
    *   nChars = The number of characters that were inserted.
    *   entryBuffer = the instance the signal is connected to
    */
-  alias InsertedTextCallbackDlg = void delegate(uint position, string chars, uint nChars, EntryBuffer entryBuffer);
-  alias InsertedTextCallbackFunc = void function(uint position, string chars, uint nChars, EntryBuffer entryBuffer);
+  alias InsertedTextCallbackDlg = void delegate(uint position, string chars, uint nChars, gtk.entry_buffer.EntryBuffer entryBuffer);
+  alias InsertedTextCallbackFunc = void function(uint position, string chars, uint nChars, gtk.entry_buffer.EntryBuffer entryBuffer);
 
   /**
    * Connect to InsertedText signal.
@@ -261,10 +261,10 @@ class EntryBuffer : ObjectG
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto entryBuffer = getVal!EntryBuffer(_paramVals);
-      auto position = getVal!uint(&_paramVals[1]);
-      auto chars = getVal!string(&_paramVals[2]);
-      auto nChars = getVal!uint(&_paramVals[3]);
+      auto entryBuffer = getVal!(gtk.entry_buffer.EntryBuffer)(_paramVals);
+      auto position = getVal!(uint)(&_paramVals[1]);
+      auto chars = getVal!(string)(&_paramVals[2]);
+      auto nChars = getVal!(uint)(&_paramVals[3]);
       _dClosure.dlg(position, chars, nChars, entryBuffer);
     }
 

@@ -2,14 +2,13 @@ module gtk.cell_renderer;
 
 import gdk.event;
 import gdk.rectangle;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.initially_unowned;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_editable;
-import gtk.cell_editable_mixin;
 import gtk.requisition;
 import gtk.snapshot;
 import gtk.types;
@@ -52,7 +51,7 @@ import gtk.widget;
  * Deprecated: List views use widgets for displaying their
  *   contents
  */
-class CellRenderer : InitiallyUnowned
+class CellRenderer : gobject.initially_unowned.InitiallyUnowned
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -80,16 +79,16 @@ class CellRenderer : InitiallyUnowned
    *   widget = widget that received the event
    *   path = widget-dependent string representation of the event location;
    *     e.g. for `GtkTreeView`, a string representation of `GtkTreePath`
-   *   backgroundArea = background area as passed to gtk_cell_renderer_render$(LPAREN)$(RPAREN)
-   *   cellArea = cell area as passed to gtk_cell_renderer_render$(LPAREN)$(RPAREN)
+   *   backgroundArea = background area as passed to [gtk.cell_renderer.CellRenderer.render]
+   *   cellArea = cell area as passed to [gtk.cell_renderer.CellRenderer.render]
    *   flags = render flags
    * Returns: %TRUE if the event was consumed/handled
    */
-  bool activate(Event event, Widget widget, string path, Rectangle backgroundArea, Rectangle cellArea, CellRendererState flags)
+  bool activate(gdk.event.Event event, gtk.widget.Widget widget, string path, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags)
   {
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
-    _retval = gtk_cell_renderer_activate(cast(GtkCellRenderer*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _path, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, flags);
+    _retval = gtk_cell_renderer_activate(cast(GtkCellRenderer*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _path, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.Dup) : null, flags);
     return _retval;
   }
 
@@ -99,15 +98,15 @@ class CellRenderer : InitiallyUnowned
    * Params:
    *   widget = the `GtkWidget` this cell will be rendering to
    *   flags = render flags
-   *   cellArea = cell area which would be passed to gtk_cell_renderer_render$(LPAREN)$(RPAREN)
+   *   cellArea = cell area which would be passed to [gtk.cell_renderer.CellRenderer.render]
    *   alignedArea = the return location for the space inside cell_area
    *     that would actually be used to render.
    */
-  void getAlignedArea(Widget widget, CellRendererState flags, Rectangle cellArea, out Rectangle alignedArea)
+  void getAlignedArea(gtk.widget.Widget widget, gtk.types.CellRendererState flags, gdk.rectangle.Rectangle cellArea, out gdk.rectangle.Rectangle alignedArea)
   {
     GdkRectangle _alignedArea;
-    gtk_cell_renderer_get_aligned_area(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, flags, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, &_alignedArea);
-    alignedArea = new Rectangle(cast(void*)&_alignedArea, No.Take);
+    gtk_cell_renderer_get_aligned_area(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, flags, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.Dup) : null, &_alignedArea);
+    alignedArea = new gdk.rectangle.Rectangle(cast(void*)&_alignedArea, No.Take);
   }
 
   /**
@@ -172,7 +171,7 @@ class CellRenderer : InitiallyUnowned
    *   minimumSize = location to store the minimum size
    *   naturalSize = location to store the natural size
    */
-  void getPreferredHeight(Widget widget, out int minimumSize, out int naturalSize)
+  void getPreferredHeight(gtk.widget.Widget widget, out int minimumSize, out int naturalSize)
   {
     gtk_cell_renderer_get_preferred_height(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cast(int*)&minimumSize, cast(int*)&naturalSize);
   }
@@ -186,7 +185,7 @@ class CellRenderer : InitiallyUnowned
    *   minimumHeight = location for storing the minimum size
    *   naturalHeight = location for storing the preferred size
    */
-  void getPreferredHeightForWidth(Widget widget, int width, out int minimumHeight, out int naturalHeight)
+  void getPreferredHeightForWidth(gtk.widget.Widget widget, int width, out int minimumHeight, out int naturalHeight)
   {
     gtk_cell_renderer_get_preferred_height_for_width(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
@@ -199,13 +198,13 @@ class CellRenderer : InitiallyUnowned
    *   minimumSize = location for storing the minimum size
    *   naturalSize = location for storing the natural size
    */
-  void getPreferredSize(Widget widget, out Requisition minimumSize, out Requisition naturalSize)
+  void getPreferredSize(gtk.widget.Widget widget, out gtk.requisition.Requisition minimumSize, out gtk.requisition.Requisition naturalSize)
   {
     GtkRequisition _minimumSize;
     GtkRequisition _naturalSize;
     gtk_cell_renderer_get_preferred_size(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, &_minimumSize, &_naturalSize);
-    minimumSize = new Requisition(cast(void*)&_minimumSize, No.Take);
-    naturalSize = new Requisition(cast(void*)&_naturalSize, No.Take);
+    minimumSize = new gtk.requisition.Requisition(cast(void*)&_minimumSize, No.Take);
+    naturalSize = new gtk.requisition.Requisition(cast(void*)&_naturalSize, No.Take);
   }
 
   /**
@@ -215,7 +214,7 @@ class CellRenderer : InitiallyUnowned
    *   minimumSize = location to store the minimum size
    *   naturalSize = location to store the natural size
    */
-  void getPreferredWidth(Widget widget, out int minimumSize, out int naturalSize)
+  void getPreferredWidth(gtk.widget.Widget widget, out int minimumSize, out int naturalSize)
   {
     gtk_cell_renderer_get_preferred_width(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cast(int*)&minimumSize, cast(int*)&naturalSize);
   }
@@ -229,7 +228,7 @@ class CellRenderer : InitiallyUnowned
    *   minimumWidth = location for storing the minimum size
    *   naturalWidth = location for storing the preferred size
    */
-  void getPreferredWidthForHeight(Widget widget, int height, out int minimumWidth, out int naturalWidth)
+  void getPreferredWidthForHeight(gtk.widget.Widget widget, int height, out int minimumWidth, out int naturalWidth)
   {
     gtk_cell_renderer_get_preferred_width_for_height(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
@@ -239,11 +238,11 @@ class CellRenderer : InitiallyUnowned
    * or a width-for-height layout.
    * Returns: The `GtkSizeRequestMode` preferred by this renderer.
    */
-  SizeRequestMode getRequestMode()
+  gtk.types.SizeRequestMode getRequestMode()
   {
     GtkSizeRequestMode _cretval;
     _cretval = gtk_cell_renderer_get_request_mode(cast(GtkCellRenderer*)cPtr);
-    SizeRequestMode _retval = cast(SizeRequestMode)_cretval;
+    gtk.types.SizeRequestMode _retval = cast(gtk.types.SizeRequestMode)_cretval;
     return _retval;
   }
 
@@ -267,11 +266,11 @@ class CellRenderer : InitiallyUnowned
    *   cellState = cell renderer state
    * Returns: the widget state flags applying to cell
    */
-  StateFlags getState(Widget widget, CellRendererState cellState)
+  gtk.types.StateFlags getState(gtk.widget.Widget widget, gtk.types.CellRendererState cellState)
   {
     GtkStateFlags _cretval;
     _cretval = gtk_cell_renderer_get_state(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cellState);
-    StateFlags _retval = cast(StateFlags)_cretval;
+    gtk.types.StateFlags _retval = cast(gtk.types.StateFlags)_cretval;
     return _retval;
   }
 
@@ -386,9 +385,9 @@ class CellRenderer : InitiallyUnowned
    *   cellArea = area normally rendered by a cell renderer
    *   flags = flags that affect rendering
    */
-  void snapshot(Snapshot snapshot, Widget widget, Rectangle backgroundArea, Rectangle cellArea, CellRendererState flags)
+  void snapshot(gtk.snapshot.Snapshot snapshot, gtk.widget.Widget widget, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags)
   {
-    gtk_cell_renderer_snapshot(cast(GtkCellRenderer*)cPtr, snapshot ? cast(GtkSnapshot*)snapshot.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, flags);
+    gtk_cell_renderer_snapshot(cast(GtkCellRenderer*)cPtr, snapshot ? cast(GtkSnapshot*)snapshot.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.Dup) : null, flags);
   }
 
   /**
@@ -399,18 +398,18 @@ class CellRenderer : InitiallyUnowned
    *   widget = widget that received the event
    *   path = widget-dependent string representation of the event location;
    *     e.g. for `GtkTreeView`, a string representation of `GtkTreePath`
-   *   backgroundArea = background area as passed to gtk_cell_renderer_render$(LPAREN)$(RPAREN)
-   *   cellArea = cell area as passed to gtk_cell_renderer_render$(LPAREN)$(RPAREN)
+   *   backgroundArea = background area as passed to [gtk.cell_renderer.CellRenderer.render]
+   *   cellArea = cell area as passed to [gtk.cell_renderer.CellRenderer.render]
    *   flags = render flags
    * Returns: A new `GtkCellEditable` for editing this
    *   cell, or %NULL if editing is not possible
    */
-  CellEditable startEditing(Event event, Widget widget, string path, Rectangle backgroundArea, Rectangle cellArea, CellRendererState flags)
+  gtk.cell_editable.CellEditable startEditing(gdk.event.Event event, gtk.widget.Widget widget, string path, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags)
   {
     GtkCellEditable* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
-    _cretval = gtk_cell_renderer_start_editing(cast(GtkCellRenderer*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _path, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, flags);
-    auto _retval = ObjectG.getDObject!CellEditable(cast(GtkCellEditable*)_cretval, No.Take);
+    _cretval = gtk_cell_renderer_start_editing(cast(GtkCellRenderer*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _path, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.Dup) : null, flags);
+    auto _retval = ObjectG.getDObject!(gtk.cell_editable.CellEditable)(cast(GtkCellEditable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -436,8 +435,8 @@ class CellRenderer : InitiallyUnowned
    * See also: [gtk.cell_renderer.CellRenderer.stopEditing].
    *   cellRenderer = the instance the signal is connected to
    */
-  alias EditingCanceledCallbackDlg = void delegate(CellRenderer cellRenderer);
-  alias EditingCanceledCallbackFunc = void function(CellRenderer cellRenderer);
+  alias EditingCanceledCallbackDlg = void delegate(gtk.cell_renderer.CellRenderer cellRenderer);
+  alias EditingCanceledCallbackFunc = void function(gtk.cell_renderer.CellRenderer cellRenderer);
 
   /**
    * Connect to EditingCanceled signal.
@@ -453,7 +452,7 @@ class CellRenderer : InitiallyUnowned
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto cellRenderer = getVal!CellRenderer(_paramVals);
+      auto cellRenderer = getVal!(gtk.cell_renderer.CellRenderer)(_paramVals);
       _dClosure.dlg(cellRenderer);
     }
 
@@ -492,8 +491,8 @@ class CellRenderer : InitiallyUnowned
    *   path = the path identifying the edited cell
    *   cellRenderer = the instance the signal is connected to
    */
-  alias EditingStartedCallbackDlg = void delegate(CellEditable editable, string path, CellRenderer cellRenderer);
-  alias EditingStartedCallbackFunc = void function(CellEditable editable, string path, CellRenderer cellRenderer);
+  alias EditingStartedCallbackDlg = void delegate(gtk.cell_editable.CellEditable editable, string path, gtk.cell_renderer.CellRenderer cellRenderer);
+  alias EditingStartedCallbackFunc = void function(gtk.cell_editable.CellEditable editable, string path, gtk.cell_renderer.CellRenderer cellRenderer);
 
   /**
    * Connect to EditingStarted signal.
@@ -509,9 +508,9 @@ class CellRenderer : InitiallyUnowned
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto cellRenderer = getVal!CellRenderer(_paramVals);
-      auto editable = getVal!CellEditable(&_paramVals[1]);
-      auto path = getVal!string(&_paramVals[2]);
+      auto cellRenderer = getVal!(gtk.cell_renderer.CellRenderer)(_paramVals);
+      auto editable = getVal!(gtk.cell_editable.CellEditable)(&_paramVals[1]);
+      auto path = getVal!(string)(&_paramVals[2]);
       _dClosure.dlg(editable, path, cellRenderer);
     }
 

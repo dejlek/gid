@@ -6,10 +6,10 @@ import arrow.execute_node_options;
 import arrow.record_batch_reader;
 import arrow.schema;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class SinkNodeOptions : ExecuteNodeOptions
+class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -35,11 +35,11 @@ class SinkNodeOptions : ExecuteNodeOptions
     this(_cretval, Yes.Take);
   }
 
-  RecordBatchReader getReader(Schema schema)
+  arrow.record_batch_reader.RecordBatchReader getReader(arrow.schema.Schema schema)
   {
     GArrowRecordBatchReader* _cretval;
     _cretval = garrow_sink_node_options_get_reader(cast(GArrowSinkNodeOptions*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!RecordBatchReader(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
     return _retval;
   }
 }

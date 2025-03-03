@@ -1,6 +1,6 @@
 module gtk.file_chooser_native;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.file_chooser;
@@ -122,7 +122,7 @@ import gtk.window;
 
  * Deprecated: Use [gtk.file_dialog.FileDialog] instead
  */
-class FileChooserNative : NativeDialog, FileChooser
+class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileChooser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -155,7 +155,7 @@ class FileChooserNative : NativeDialog, FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  this(string title, Window parent, FileChooserAction action, string acceptLabel, string cancelLabel)
+  this(string title, gtk.window.Window parent, gtk.types.FileChooserAction action, string acceptLabel, string cancelLabel)
   {
     GtkFileChooserNative* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -175,7 +175,7 @@ class FileChooserNative : NativeDialog, FileChooser
   {
     const(char)* _cretval;
     _cretval = gtk_file_chooser_native_get_accept_label(cast(GtkFileChooserNative*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class FileChooserNative : NativeDialog, FileChooser
   {
     const(char)* _cretval;
     _cretval = gtk_file_chooser_native_get_cancel_label(cast(GtkFileChooserNative*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

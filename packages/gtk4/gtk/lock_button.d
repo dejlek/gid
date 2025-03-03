@@ -1,6 +1,6 @@
 module gtk.lock_button;
 
-import gid.global;
+import gid.gid;
 import gio.permission;
 import gobject.object;
 import gtk.accessible;
@@ -46,7 +46,7 @@ import gtk.types;
 
  * Deprecated: This widget will be removed in GTK 5
  */
-class LockButton : Button
+class LockButton : gtk.button.Button
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -73,7 +73,7 @@ class LockButton : Button
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  this(Permission permission)
+  this(gio.permission.Permission permission)
   {
     GtkWidget* _cretval;
     _cretval = gtk_lock_button_new(permission ? cast(GPermission*)permission.cPtr(No.Dup) : null);
@@ -86,11 +86,11 @@ class LockButton : Button
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  Permission getPermission()
+  gio.permission.Permission getPermission()
   {
     GPermission* _cretval;
     _cretval = gtk_lock_button_get_permission(cast(GtkLockButton*)cPtr);
-    auto _retval = ObjectG.getDObject!Permission(cast(GPermission*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.permission.Permission)(cast(GPermission*)_cretval, No.Take);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class LockButton : Button
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  void setPermission(Permission permission)
+  void setPermission(gio.permission.Permission permission)
   {
     gtk_lock_button_set_permission(cast(GtkLockButton*)cPtr, permission ? cast(GPermission*)permission.cPtr(No.Dup) : null);
   }

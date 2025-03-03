@@ -1,6 +1,6 @@
 module gtk.builder_cscope;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.builder_scope;
 import gtk.builder_scope_mixin;
@@ -23,7 +23,7 @@ import gtk.types;
  * called for all signal callbacks which are referenced by the loaded XML,
  * this functionality will require that `GModule` be supported on the platform.
  */
-class BuilderCScope : ObjectG, BuilderScope
+class BuilderCScope : gobject.object.ObjectG, gtk.builder_scope.BuilderScope
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

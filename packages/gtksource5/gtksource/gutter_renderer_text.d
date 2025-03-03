@@ -1,6 +1,6 @@
 module gtksource.gutter_renderer_text;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -18,7 +18,7 @@ import gtksource.types;
  * A `GtkSourceGutterRendererText` can be used to render text in a cell of
  * class@Gutter.
  */
-class GutterRendererText : GutterRenderer
+class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -48,7 +48,7 @@ class GutterRendererText : GutterRenderer
     this(_cretval, Yes.Take);
   }
 
-  alias measure = Widget.measure;
+  alias measure = gtk.widget.Widget.measure;
 
   /**
    * Measures the text provided using the pango layout used by the

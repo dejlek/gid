@@ -1,6 +1,6 @@
 module gtk.header_bar;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -72,7 +72,7 @@ import gtk.widget;
  * # Accessibility
  * `GtkHeaderBar` uses the %GTK_ACCESSIBLE_ROLE_GROUP role.
  */
-class HeaderBar : Widget
+class HeaderBar : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -110,7 +110,7 @@ class HeaderBar : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_header_bar_get_decoration_layout(cast(GtkHeaderBar*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -131,11 +131,11 @@ class HeaderBar : Widget
    * See [gtk.header_bar.HeaderBar.setTitleWidget].
    * Returns: the title widget of the header
    */
-  Widget getTitleWidget()
+  gtk.widget.Widget getTitleWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_header_bar_get_title_widget(cast(GtkHeaderBar*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class HeaderBar : Widget
    * Params:
    *   child = the `GtkWidget` to be added to bar
    */
-  void packEnd(Widget child)
+  void packEnd(gtk.widget.Widget child)
   {
     gtk_header_bar_pack_end(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -156,7 +156,7 @@ class HeaderBar : Widget
    * Params:
    *   child = the `GtkWidget` to be added to bar
    */
-  void packStart(Widget child)
+  void packStart(gtk.widget.Widget child)
   {
     gtk_header_bar_pack_start(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -170,7 +170,7 @@ class HeaderBar : Widget
    * Params:
    *   child = the child to remove
    */
-  void remove(Widget child)
+  void remove(gtk.widget.Widget child)
   {
     gtk_header_bar_remove(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -221,7 +221,7 @@ class HeaderBar : Widget
    * Params:
    *   titleWidget = a widget to use for a title
    */
-  void setTitleWidget(Widget titleWidget)
+  void setTitleWidget(gtk.widget.Widget titleWidget)
   {
     gtk_header_bar_set_title_widget(cast(GtkHeaderBar*)cPtr, titleWidget ? cast(GtkWidget*)titleWidget.cPtr(No.Dup) : null);
   }

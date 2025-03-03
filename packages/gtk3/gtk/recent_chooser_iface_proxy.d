@@ -1,0 +1,21 @@
+module gtk.recent_chooser_iface_proxy;
+
+import gobject.object;
+import gtk.recent_chooser;
+import gtk.recent_chooser_mixin;
+
+/// Proxy object for Gtk.RecentChooser interface when a GObject has no applicable D binding
+class RecentChooserIfaceProxy : IfaceProxy, gtk.recent_chooser.RecentChooser
+{
+  this(void* ptr, Flag!"Take" take = No.Take)
+  {
+    super(cast(void*)ptr, take);
+  }
+
+  override TypeInfo_Interface getIface()
+  {
+    return typeid(gtk.recent_chooser.RecentChooser);
+  }
+
+  mixin RecentChooserT!();
+}

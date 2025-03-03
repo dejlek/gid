@@ -1,6 +1,6 @@
 module pango.coverage;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import pango.c.functions;
 import pango.c.types;
@@ -8,14 +8,14 @@ import pango.types;
 
 /**
  * A `PangoCoverage` structure is a map from Unicode characters
- * to [pango.CoverageLevel] values.
+ * to [pango.types.CoverageLevel] values.
  * It is often necessary in Pango to determine if a particular
  * font can represent a particular character, and also how well
  * it can represent that character. The `PangoCoverage` is a data
  * structure that is used to represent that information. It is an
  * opaque structure with no public fields.
  */
-class Coverage : ObjectG
+class Coverage : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -57,7 +57,7 @@ class Coverage : ObjectG
 
    * Deprecated: This returns %NULL
    */
-  static Coverage fromBytes(ubyte[] bytes)
+  static pango.coverage.Coverage fromBytes(ubyte[] bytes)
   {
     PangoCoverage* _cretval;
     int _nBytes;
@@ -66,7 +66,7 @@ class Coverage : ObjectG
 
     auto _bytes = cast(ubyte*)bytes.ptr;
     _cretval = pango_coverage_from_bytes(_bytes, _nBytes);
-    auto _retval = ObjectG.getDObject!Coverage(cast(PangoCoverage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -76,11 +76,11 @@ class Coverage : ObjectG
    *   with a reference count of one, which should be freed with
    *   [pango.coverage.Coverage.unref].
    */
-  Coverage copy()
+  pango.coverage.Coverage copy()
   {
     PangoCoverage* _cretval;
     _cretval = pango_coverage_copy(cast(PangoCoverage*)cPtr);
-    auto _retval = ObjectG.getDObject!Coverage(cast(PangoCoverage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -90,11 +90,11 @@ class Coverage : ObjectG
    *   index = the index to check
    * Returns: the coverage level of coverage for character index_.
    */
-  CoverageLevel get(int index)
+  pango.types.CoverageLevel get(int index)
   {
     PangoCoverageLevel _cretval;
     _cretval = pango_coverage_get(cast(PangoCoverage*)cPtr, index);
-    CoverageLevel _retval = cast(CoverageLevel)_cretval;
+    pango.types.CoverageLevel _retval = cast(pango.types.CoverageLevel)_cretval;
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class Coverage : ObjectG
 
    * Deprecated: This function does nothing
    */
-  void max(Coverage other)
+  void max(pango.coverage.Coverage other)
   {
     pango_coverage_max(cast(PangoCoverage*)cPtr, other ? cast(PangoCoverage*)other.cPtr(No.Dup) : null);
   }
@@ -118,7 +118,7 @@ class Coverage : ObjectG
    *   index = the index to modify
    *   level = the new level for index_
    */
-  void set(int index, CoverageLevel level)
+  void set(int index, pango.types.CoverageLevel level)
   {
     pango_coverage_set(cast(PangoCoverage*)cPtr, index, level);
   }

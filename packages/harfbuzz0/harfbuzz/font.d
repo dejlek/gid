@@ -1,6 +1,6 @@
 module harfbuzz.font;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -9,7 +9,7 @@ import harfbuzz.types;
 /**
  * Data type for holding fonts.
  */
-class Font : Boxed
+class Font : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

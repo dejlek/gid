@@ -3,10 +3,10 @@ module arrowdataset.fragment;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class Fragment : ObjectG
+class Fragment : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

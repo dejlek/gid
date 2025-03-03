@@ -424,40 +424,6 @@ __gshared extern(C)
   void function(GdkGLTextureBuilder* self, GdkTexture* texture) c_gdk_gl_texture_builder_set_update_texture;
   void function(GdkGLTextureBuilder* self, int width) c_gdk_gl_texture_builder_set_width;
 
-  // Global
-  void function(cairo_t* cr, GdkSurface* surface, int source, int sourceType, int bufferScale, int x, int y, int width, int height) c_gdk_cairo_draw_from_gl;
-  void function(cairo_t* cr, const(GdkRectangle)* rectangle) c_gdk_cairo_rectangle;
-  void function(cairo_t* cr, const(cairo_region_t)* region) c_gdk_cairo_region;
-  cairo_region_t* function(cairo_surface_t* surface) c_gdk_cairo_region_create_from_surface;
-  void function(cairo_t* cr, const(PixbufC)* pixbuf, double pixbufX, double pixbufY) c_gdk_cairo_set_source_pixbuf;
-  void function(cairo_t* cr, const(GdkRGBA)* rgba) c_gdk_cairo_set_source_rgba;
-  void function(GInputStream* stream, const(char)* mimeType, GType type, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gdk_content_deserialize_async;
-  bool function(GAsyncResult* result, GValue* value, GError** _err) c_gdk_content_deserialize_finish;
-  void function(const(char)* mimeType, GType type, GdkContentDeserializeFunc deserialize, void* data, GDestroyNotify notify) c_gdk_content_register_deserializer;
-  void function(GType type, const(char)* mimeType, GdkContentSerializeFunc serialize, void* data, GDestroyNotify notify) c_gdk_content_register_serializer;
-  void function(GOutputStream* stream, const(char)* mimeType, const(GValue)* value, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gdk_content_serialize_async;
-  bool function(GAsyncResult* result, GError** _err) c_gdk_content_serialize_finish;
-  GType function() c_gdk_drag_surface_size_get_type;
-  bool function(GdkEvent* event1, GdkEvent* event2, double* angle) c_gdk_events_get_angle;
-  bool function(GdkEvent* event1, GdkEvent* event2, double* x, double* y) c_gdk_events_get_center;
-  bool function(GdkEvent* event1, GdkEvent* event2, double* distance) c_gdk_events_get_distance;
-  const(char)* function(const(char)* string_) c_gdk_intern_mime_type;
-  void function(uint symbol, uint* lower, uint* upper) c_gdk_keyval_convert_case;
-  uint function(const(char)* keyvalName) c_gdk_keyval_from_name;
-  bool function(uint keyval) c_gdk_keyval_is_lower;
-  bool function(uint keyval) c_gdk_keyval_is_upper;
-  const(char)* function(uint keyval) c_gdk_keyval_name;
-  uint function(uint keyval) c_gdk_keyval_to_lower;
-  uint function(uint keyval) c_gdk_keyval_to_unicode;
-  uint function(uint keyval) c_gdk_keyval_to_upper;
-  cairo_region_t* function(PangoLayout* layout, int xOrigin, int yOrigin, const(int)* indexRanges, int nRanges) c_gdk_pango_layout_get_clip_region;
-  cairo_region_t* function(PangoLayoutLine* line, int xOrigin, int yOrigin, const(int)* indexRanges, int nRanges) c_gdk_pango_layout_line_get_clip_region;
-  PixbufC* function(cairo_surface_t* surface, int srcX, int srcY, int width, int height) c_gdk_pixbuf_get_from_surface;
-  PixbufC* function(GdkTexture* texture) c_gdk_pixbuf_get_from_texture;
-  void function(const(char)* backends) c_gdk_set_allowed_backends;
-  GType function() c_gdk_toplevel_size_get_type;
-  uint function(uint wc) c_gdk_unicode_to_keyval;
-
   // GrabBrokenEvent
   extern(C) GType function() c_gdk_grab_broken_event_get_type;
   GdkSurface* function(GdkEvent* event) c_gdk_grab_broken_event_get_grab_surface;
@@ -701,6 +667,40 @@ __gshared extern(C)
 
   // VulkanContext
   extern(C) GType function() c_gdk_vulkan_context_get_type;
+
+  // global
+  void function(cairo_t* cr, GdkSurface* surface, int source, int sourceType, int bufferScale, int x, int y, int width, int height) c_gdk_cairo_draw_from_gl;
+  void function(cairo_t* cr, const(GdkRectangle)* rectangle) c_gdk_cairo_rectangle;
+  void function(cairo_t* cr, const(cairo_region_t)* region) c_gdk_cairo_region;
+  cairo_region_t* function(cairo_surface_t* surface) c_gdk_cairo_region_create_from_surface;
+  void function(cairo_t* cr, const(PixbufC)* pixbuf, double pixbufX, double pixbufY) c_gdk_cairo_set_source_pixbuf;
+  void function(cairo_t* cr, const(GdkRGBA)* rgba) c_gdk_cairo_set_source_rgba;
+  void function(GInputStream* stream, const(char)* mimeType, GType type, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gdk_content_deserialize_async;
+  bool function(GAsyncResult* result, GValue* value, GError** _err) c_gdk_content_deserialize_finish;
+  void function(const(char)* mimeType, GType type, GdkContentDeserializeFunc deserialize, void* data, GDestroyNotify notify) c_gdk_content_register_deserializer;
+  void function(GType type, const(char)* mimeType, GdkContentSerializeFunc serialize, void* data, GDestroyNotify notify) c_gdk_content_register_serializer;
+  void function(GOutputStream* stream, const(char)* mimeType, const(GValue)* value, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gdk_content_serialize_async;
+  bool function(GAsyncResult* result, GError** _err) c_gdk_content_serialize_finish;
+  GType function() c_gdk_drag_surface_size_get_type;
+  bool function(GdkEvent* event1, GdkEvent* event2, double* angle) c_gdk_events_get_angle;
+  bool function(GdkEvent* event1, GdkEvent* event2, double* x, double* y) c_gdk_events_get_center;
+  bool function(GdkEvent* event1, GdkEvent* event2, double* distance) c_gdk_events_get_distance;
+  const(char)* function(const(char)* string_) c_gdk_intern_mime_type;
+  void function(uint symbol, uint* lower, uint* upper) c_gdk_keyval_convert_case;
+  uint function(const(char)* keyvalName) c_gdk_keyval_from_name;
+  bool function(uint keyval) c_gdk_keyval_is_lower;
+  bool function(uint keyval) c_gdk_keyval_is_upper;
+  const(char)* function(uint keyval) c_gdk_keyval_name;
+  uint function(uint keyval) c_gdk_keyval_to_lower;
+  uint function(uint keyval) c_gdk_keyval_to_unicode;
+  uint function(uint keyval) c_gdk_keyval_to_upper;
+  cairo_region_t* function(PangoLayout* layout, int xOrigin, int yOrigin, const(int)* indexRanges, int nRanges) c_gdk_pango_layout_get_clip_region;
+  cairo_region_t* function(PangoLayoutLine* line, int xOrigin, int yOrigin, const(int)* indexRanges, int nRanges) c_gdk_pango_layout_line_get_clip_region;
+  PixbufC* function(cairo_surface_t* surface, int srcX, int srcY, int width, int height) c_gdk_pixbuf_get_from_surface;
+  PixbufC* function(GdkTexture* texture) c_gdk_pixbuf_get_from_texture;
+  void function(const(char)* backends) c_gdk_set_allowed_backends;
+  GType function() c_gdk_toplevel_size_get_type;
+  uint function(uint wc) c_gdk_unicode_to_keyval;
 }
 
 // AppLaunchContext
@@ -1109,40 +1109,6 @@ alias gdk_gl_texture_builder_set_update_region = c_gdk_gl_texture_builder_set_up
 alias gdk_gl_texture_builder_set_update_texture = c_gdk_gl_texture_builder_set_update_texture;
 alias gdk_gl_texture_builder_set_width = c_gdk_gl_texture_builder_set_width;
 
-// Global
-alias gdk_cairo_draw_from_gl = c_gdk_cairo_draw_from_gl;
-alias gdk_cairo_rectangle = c_gdk_cairo_rectangle;
-alias gdk_cairo_region = c_gdk_cairo_region;
-alias gdk_cairo_region_create_from_surface = c_gdk_cairo_region_create_from_surface;
-alias gdk_cairo_set_source_pixbuf = c_gdk_cairo_set_source_pixbuf;
-alias gdk_cairo_set_source_rgba = c_gdk_cairo_set_source_rgba;
-alias gdk_content_deserialize_async = c_gdk_content_deserialize_async;
-alias gdk_content_deserialize_finish = c_gdk_content_deserialize_finish;
-alias gdk_content_register_deserializer = c_gdk_content_register_deserializer;
-alias gdk_content_register_serializer = c_gdk_content_register_serializer;
-alias gdk_content_serialize_async = c_gdk_content_serialize_async;
-alias gdk_content_serialize_finish = c_gdk_content_serialize_finish;
-alias gdk_drag_surface_size_get_type = c_gdk_drag_surface_size_get_type;
-alias gdk_events_get_angle = c_gdk_events_get_angle;
-alias gdk_events_get_center = c_gdk_events_get_center;
-alias gdk_events_get_distance = c_gdk_events_get_distance;
-alias gdk_intern_mime_type = c_gdk_intern_mime_type;
-alias gdk_keyval_convert_case = c_gdk_keyval_convert_case;
-alias gdk_keyval_from_name = c_gdk_keyval_from_name;
-alias gdk_keyval_is_lower = c_gdk_keyval_is_lower;
-alias gdk_keyval_is_upper = c_gdk_keyval_is_upper;
-alias gdk_keyval_name = c_gdk_keyval_name;
-alias gdk_keyval_to_lower = c_gdk_keyval_to_lower;
-alias gdk_keyval_to_unicode = c_gdk_keyval_to_unicode;
-alias gdk_keyval_to_upper = c_gdk_keyval_to_upper;
-alias gdk_pango_layout_get_clip_region = c_gdk_pango_layout_get_clip_region;
-alias gdk_pango_layout_line_get_clip_region = c_gdk_pango_layout_line_get_clip_region;
-alias gdk_pixbuf_get_from_surface = c_gdk_pixbuf_get_from_surface;
-alias gdk_pixbuf_get_from_texture = c_gdk_pixbuf_get_from_texture;
-alias gdk_set_allowed_backends = c_gdk_set_allowed_backends;
-alias gdk_toplevel_size_get_type = c_gdk_toplevel_size_get_type;
-alias gdk_unicode_to_keyval = c_gdk_unicode_to_keyval;
-
 // GrabBrokenEvent
 alias gdk_grab_broken_event_get_type = c_gdk_grab_broken_event_get_type;
 alias gdk_grab_broken_event_get_grab_surface = c_gdk_grab_broken_event_get_grab_surface;
@@ -1386,6 +1352,40 @@ alias gdk_touchpad_event_get_pinch_scale = c_gdk_touchpad_event_get_pinch_scale;
 
 // VulkanContext
 alias gdk_vulkan_context_get_type = c_gdk_vulkan_context_get_type;
+
+// global
+alias gdk_cairo_draw_from_gl = c_gdk_cairo_draw_from_gl;
+alias gdk_cairo_rectangle = c_gdk_cairo_rectangle;
+alias gdk_cairo_region = c_gdk_cairo_region;
+alias gdk_cairo_region_create_from_surface = c_gdk_cairo_region_create_from_surface;
+alias gdk_cairo_set_source_pixbuf = c_gdk_cairo_set_source_pixbuf;
+alias gdk_cairo_set_source_rgba = c_gdk_cairo_set_source_rgba;
+alias gdk_content_deserialize_async = c_gdk_content_deserialize_async;
+alias gdk_content_deserialize_finish = c_gdk_content_deserialize_finish;
+alias gdk_content_register_deserializer = c_gdk_content_register_deserializer;
+alias gdk_content_register_serializer = c_gdk_content_register_serializer;
+alias gdk_content_serialize_async = c_gdk_content_serialize_async;
+alias gdk_content_serialize_finish = c_gdk_content_serialize_finish;
+alias gdk_drag_surface_size_get_type = c_gdk_drag_surface_size_get_type;
+alias gdk_events_get_angle = c_gdk_events_get_angle;
+alias gdk_events_get_center = c_gdk_events_get_center;
+alias gdk_events_get_distance = c_gdk_events_get_distance;
+alias gdk_intern_mime_type = c_gdk_intern_mime_type;
+alias gdk_keyval_convert_case = c_gdk_keyval_convert_case;
+alias gdk_keyval_from_name = c_gdk_keyval_from_name;
+alias gdk_keyval_is_lower = c_gdk_keyval_is_lower;
+alias gdk_keyval_is_upper = c_gdk_keyval_is_upper;
+alias gdk_keyval_name = c_gdk_keyval_name;
+alias gdk_keyval_to_lower = c_gdk_keyval_to_lower;
+alias gdk_keyval_to_unicode = c_gdk_keyval_to_unicode;
+alias gdk_keyval_to_upper = c_gdk_keyval_to_upper;
+alias gdk_pango_layout_get_clip_region = c_gdk_pango_layout_get_clip_region;
+alias gdk_pango_layout_line_get_clip_region = c_gdk_pango_layout_line_get_clip_region;
+alias gdk_pixbuf_get_from_surface = c_gdk_pixbuf_get_from_surface;
+alias gdk_pixbuf_get_from_texture = c_gdk_pixbuf_get_from_texture;
+alias gdk_set_allowed_backends = c_gdk_set_allowed_backends;
+alias gdk_toplevel_size_get_type = c_gdk_toplevel_size_get_type;
+alias gdk_unicode_to_keyval = c_gdk_unicode_to_keyval;
 
 shared static this()
 {
@@ -1795,40 +1795,6 @@ shared static this()
   gidLink(cast(void**)&gdk_gl_texture_builder_set_update_texture, "gdk_gl_texture_builder_set_update_texture", LIBS);
   gidLink(cast(void**)&gdk_gl_texture_builder_set_width, "gdk_gl_texture_builder_set_width", LIBS);
 
-  // Global
-  gidLink(cast(void**)&gdk_cairo_draw_from_gl, "gdk_cairo_draw_from_gl", LIBS);
-  gidLink(cast(void**)&gdk_cairo_rectangle, "gdk_cairo_rectangle", LIBS);
-  gidLink(cast(void**)&gdk_cairo_region, "gdk_cairo_region", LIBS);
-  gidLink(cast(void**)&gdk_cairo_region_create_from_surface, "gdk_cairo_region_create_from_surface", LIBS);
-  gidLink(cast(void**)&gdk_cairo_set_source_pixbuf, "gdk_cairo_set_source_pixbuf", LIBS);
-  gidLink(cast(void**)&gdk_cairo_set_source_rgba, "gdk_cairo_set_source_rgba", LIBS);
-  gidLink(cast(void**)&gdk_content_deserialize_async, "gdk_content_deserialize_async", LIBS);
-  gidLink(cast(void**)&gdk_content_deserialize_finish, "gdk_content_deserialize_finish", LIBS);
-  gidLink(cast(void**)&gdk_content_register_deserializer, "gdk_content_register_deserializer", LIBS);
-  gidLink(cast(void**)&gdk_content_register_serializer, "gdk_content_register_serializer", LIBS);
-  gidLink(cast(void**)&gdk_content_serialize_async, "gdk_content_serialize_async", LIBS);
-  gidLink(cast(void**)&gdk_content_serialize_finish, "gdk_content_serialize_finish", LIBS);
-  gidLink(cast(void**)&gdk_drag_surface_size_get_type, "gdk_drag_surface_size_get_type", LIBS);
-  gidLink(cast(void**)&gdk_events_get_angle, "gdk_events_get_angle", LIBS);
-  gidLink(cast(void**)&gdk_events_get_center, "gdk_events_get_center", LIBS);
-  gidLink(cast(void**)&gdk_events_get_distance, "gdk_events_get_distance", LIBS);
-  gidLink(cast(void**)&gdk_intern_mime_type, "gdk_intern_mime_type", LIBS);
-  gidLink(cast(void**)&gdk_keyval_convert_case, "gdk_keyval_convert_case", LIBS);
-  gidLink(cast(void**)&gdk_keyval_from_name, "gdk_keyval_from_name", LIBS);
-  gidLink(cast(void**)&gdk_keyval_is_lower, "gdk_keyval_is_lower", LIBS);
-  gidLink(cast(void**)&gdk_keyval_is_upper, "gdk_keyval_is_upper", LIBS);
-  gidLink(cast(void**)&gdk_keyval_name, "gdk_keyval_name", LIBS);
-  gidLink(cast(void**)&gdk_keyval_to_lower, "gdk_keyval_to_lower", LIBS);
-  gidLink(cast(void**)&gdk_keyval_to_unicode, "gdk_keyval_to_unicode", LIBS);
-  gidLink(cast(void**)&gdk_keyval_to_upper, "gdk_keyval_to_upper", LIBS);
-  gidLink(cast(void**)&gdk_pango_layout_get_clip_region, "gdk_pango_layout_get_clip_region", LIBS);
-  gidLink(cast(void**)&gdk_pango_layout_line_get_clip_region, "gdk_pango_layout_line_get_clip_region", LIBS);
-  gidLink(cast(void**)&gdk_pixbuf_get_from_surface, "gdk_pixbuf_get_from_surface", LIBS);
-  gidLink(cast(void**)&gdk_pixbuf_get_from_texture, "gdk_pixbuf_get_from_texture", LIBS);
-  gidLink(cast(void**)&gdk_set_allowed_backends, "gdk_set_allowed_backends", LIBS);
-  gidLink(cast(void**)&gdk_toplevel_size_get_type, "gdk_toplevel_size_get_type", LIBS);
-  gidLink(cast(void**)&gdk_unicode_to_keyval, "gdk_unicode_to_keyval", LIBS);
-
   // GrabBrokenEvent
   gidLink(cast(void**)&gdk_grab_broken_event_get_type, "gdk_grab_broken_event_get_type", LIBS);
   gidLink(cast(void**)&gdk_grab_broken_event_get_grab_surface, "gdk_grab_broken_event_get_grab_surface", LIBS);
@@ -2072,4 +2038,38 @@ shared static this()
 
   // VulkanContext
   gidLink(cast(void**)&gdk_vulkan_context_get_type, "gdk_vulkan_context_get_type", LIBS);
+
+  // global
+  gidLink(cast(void**)&gdk_cairo_draw_from_gl, "gdk_cairo_draw_from_gl", LIBS);
+  gidLink(cast(void**)&gdk_cairo_rectangle, "gdk_cairo_rectangle", LIBS);
+  gidLink(cast(void**)&gdk_cairo_region, "gdk_cairo_region", LIBS);
+  gidLink(cast(void**)&gdk_cairo_region_create_from_surface, "gdk_cairo_region_create_from_surface", LIBS);
+  gidLink(cast(void**)&gdk_cairo_set_source_pixbuf, "gdk_cairo_set_source_pixbuf", LIBS);
+  gidLink(cast(void**)&gdk_cairo_set_source_rgba, "gdk_cairo_set_source_rgba", LIBS);
+  gidLink(cast(void**)&gdk_content_deserialize_async, "gdk_content_deserialize_async", LIBS);
+  gidLink(cast(void**)&gdk_content_deserialize_finish, "gdk_content_deserialize_finish", LIBS);
+  gidLink(cast(void**)&gdk_content_register_deserializer, "gdk_content_register_deserializer", LIBS);
+  gidLink(cast(void**)&gdk_content_register_serializer, "gdk_content_register_serializer", LIBS);
+  gidLink(cast(void**)&gdk_content_serialize_async, "gdk_content_serialize_async", LIBS);
+  gidLink(cast(void**)&gdk_content_serialize_finish, "gdk_content_serialize_finish", LIBS);
+  gidLink(cast(void**)&gdk_drag_surface_size_get_type, "gdk_drag_surface_size_get_type", LIBS);
+  gidLink(cast(void**)&gdk_events_get_angle, "gdk_events_get_angle", LIBS);
+  gidLink(cast(void**)&gdk_events_get_center, "gdk_events_get_center", LIBS);
+  gidLink(cast(void**)&gdk_events_get_distance, "gdk_events_get_distance", LIBS);
+  gidLink(cast(void**)&gdk_intern_mime_type, "gdk_intern_mime_type", LIBS);
+  gidLink(cast(void**)&gdk_keyval_convert_case, "gdk_keyval_convert_case", LIBS);
+  gidLink(cast(void**)&gdk_keyval_from_name, "gdk_keyval_from_name", LIBS);
+  gidLink(cast(void**)&gdk_keyval_is_lower, "gdk_keyval_is_lower", LIBS);
+  gidLink(cast(void**)&gdk_keyval_is_upper, "gdk_keyval_is_upper", LIBS);
+  gidLink(cast(void**)&gdk_keyval_name, "gdk_keyval_name", LIBS);
+  gidLink(cast(void**)&gdk_keyval_to_lower, "gdk_keyval_to_lower", LIBS);
+  gidLink(cast(void**)&gdk_keyval_to_unicode, "gdk_keyval_to_unicode", LIBS);
+  gidLink(cast(void**)&gdk_keyval_to_upper, "gdk_keyval_to_upper", LIBS);
+  gidLink(cast(void**)&gdk_pango_layout_get_clip_region, "gdk_pango_layout_get_clip_region", LIBS);
+  gidLink(cast(void**)&gdk_pango_layout_line_get_clip_region, "gdk_pango_layout_line_get_clip_region", LIBS);
+  gidLink(cast(void**)&gdk_pixbuf_get_from_surface, "gdk_pixbuf_get_from_surface", LIBS);
+  gidLink(cast(void**)&gdk_pixbuf_get_from_texture, "gdk_pixbuf_get_from_texture", LIBS);
+  gidLink(cast(void**)&gdk_set_allowed_backends, "gdk_set_allowed_backends", LIBS);
+  gidLink(cast(void**)&gdk_toplevel_size_get_type, "gdk_toplevel_size_get_type", LIBS);
+  gidLink(cast(void**)&gdk_unicode_to_keyval, "gdk_unicode_to_keyval", LIBS);
 }

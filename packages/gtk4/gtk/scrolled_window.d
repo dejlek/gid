@@ -1,6 +1,6 @@
 module gtk.scrolled_window;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -69,7 +69,7 @@ import gtk.widget;
  * Until GTK 4.10, `GtkScrolledWindow` used the `GTK_ACCESSIBLE_ROLE_GROUP` role.
  * Starting from GTK 4.12, `GtkScrolledWindow` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
  */
-class ScrolledWindow : Widget
+class ScrolledWindow : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -106,11 +106,11 @@ class ScrolledWindow : Widget
    * using [gtk.viewport.Viewport.getChild].
    * Returns: the child widget of scrolled_window
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_get_child(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -120,11 +120,11 @@ class ScrolledWindow : Widget
    * to the child widget’s horizontal scroll functionality.
    * Returns: the horizontal `GtkAdjustment`
    */
-  Adjustment getHadjustment()
+  gtk.adjustment.Adjustment getHadjustment()
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrolled_window_get_hadjustment(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -143,11 +143,11 @@ class ScrolledWindow : Widget
    * Returns the horizontal scrollbar of scrolled_window.
    * Returns: the horizontal scrollbar of the scrolled window.
    */
-  Widget getHscrollbar()
+  gtk.widget.Widget getHscrollbar()
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_get_hscrollbar(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -221,11 +221,11 @@ class ScrolledWindow : Widget
    * Gets the placement of the contents with respect to the scrollbars.
    * Returns: the current placement value.
    */
-  CornerType getPlacement()
+  gtk.types.CornerType getPlacement()
   {
     GtkCornerType _cretval;
     _cretval = gtk_scrolled_window_get_placement(cast(GtkScrolledWindow*)cPtr);
-    CornerType _retval = cast(CornerType)_cretval;
+    gtk.types.CornerType _retval = cast(gtk.types.CornerType)_cretval;
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class ScrolledWindow : Widget
    *   vscrollbarPolicy = location to store the policy
    *     for the vertical scrollbar
    */
-  void getPolicy(out PolicyType hscrollbarPolicy, out PolicyType vscrollbarPolicy)
+  void getPolicy(out gtk.types.PolicyType hscrollbarPolicy, out gtk.types.PolicyType vscrollbarPolicy)
   {
     gtk_scrolled_window_get_policy(cast(GtkScrolledWindow*)cPtr, &hscrollbarPolicy, &vscrollbarPolicy);
   }
@@ -274,11 +274,11 @@ class ScrolledWindow : Widget
    * scrollbar to the child widget’s vertical scroll functionality.
    * Returns: the vertical `GtkAdjustment`
    */
-  Adjustment getVadjustment()
+  gtk.adjustment.Adjustment getVadjustment()
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrolled_window_get_vadjustment(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -286,11 +286,11 @@ class ScrolledWindow : Widget
    * Returns the vertical scrollbar of scrolled_window.
    * Returns: the vertical scrollbar of the scrolled window.
    */
-  Widget getVscrollbar()
+  gtk.widget.Widget getVscrollbar()
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_get_vscrollbar(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -302,7 +302,7 @@ class ScrolledWindow : Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_scrolled_window_set_child(cast(GtkScrolledWindow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -312,7 +312,7 @@ class ScrolledWindow : Widget
    * Params:
    *   hadjustment = the `GtkAdjustment` to use, or %NULL to create a new one
    */
-  void setHadjustment(Adjustment hadjustment)
+  void setHadjustment(gtk.adjustment.Adjustment hadjustment)
   {
     gtk_scrolled_window_set_hadjustment(cast(GtkScrolledWindow*)cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null);
   }
@@ -410,14 +410,14 @@ class ScrolledWindow : Widget
    * for the scrolled window.
    * The default is %GTK_CORNER_TOP_LEFT, meaning the child is
    * in the top left, with the scrollbars underneath and to the right.
-   * Other values in [gtk.CornerType] are %GTK_CORNER_TOP_RIGHT,
+   * Other values in [gtk.types.CornerType] are %GTK_CORNER_TOP_RIGHT,
    * %GTK_CORNER_BOTTOM_LEFT, and %GTK_CORNER_BOTTOM_RIGHT.
    * See also [gtk.scrolled_window.ScrolledWindow.getPlacement] and
    * [gtk.scrolled_window.ScrolledWindow.unsetPlacement].
    * Params:
    *   windowPlacement = position of the child window
    */
-  void setPlacement(CornerType windowPlacement)
+  void setPlacement(gtk.types.CornerType windowPlacement)
   {
     gtk_scrolled_window_set_placement(cast(GtkScrolledWindow*)cPtr, windowPlacement);
   }
@@ -425,7 +425,7 @@ class ScrolledWindow : Widget
   /**
    * Sets the scrollbar policy for the horizontal and vertical scrollbars.
    * The policy determines when the scrollbar should appear; it is a value
-   * from the [gtk.PolicyType] enumeration. If %GTK_POLICY_ALWAYS, the
+   * from the [gtk.types.PolicyType] enumeration. If %GTK_POLICY_ALWAYS, the
    * scrollbar is always present; if %GTK_POLICY_NEVER, the scrollbar is
    * never present; if %GTK_POLICY_AUTOMATIC, the scrollbar is present only
    * if needed $(LPAREN)that is, if the slider part of the bar would be smaller
@@ -434,7 +434,7 @@ class ScrolledWindow : Widget
    *   hscrollbarPolicy = policy for horizontal bar
    *   vscrollbarPolicy = policy for vertical bar
    */
-  void setPolicy(PolicyType hscrollbarPolicy, PolicyType vscrollbarPolicy)
+  void setPolicy(gtk.types.PolicyType hscrollbarPolicy, gtk.types.PolicyType vscrollbarPolicy)
   {
     gtk_scrolled_window_set_policy(cast(GtkScrolledWindow*)cPtr, hscrollbarPolicy, vscrollbarPolicy);
   }
@@ -466,7 +466,7 @@ class ScrolledWindow : Widget
    * Params:
    *   vadjustment = the `GtkAdjustment` to use, or %NULL to create a new one
    */
-  void setVadjustment(Adjustment vadjustment)
+  void setVadjustment(gtk.adjustment.Adjustment vadjustment)
   {
     gtk_scrolled_window_set_vadjustment(cast(GtkScrolledWindow*)cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
   }
@@ -493,8 +493,8 @@ class ScrolledWindow : Widget
    *   pos = edge side that was hit
    *   scrolledWindow = the instance the signal is connected to
    */
-  alias EdgeOvershotCallbackDlg = void delegate(PositionType pos, ScrolledWindow scrolledWindow);
-  alias EdgeOvershotCallbackFunc = void function(PositionType pos, ScrolledWindow scrolledWindow);
+  alias EdgeOvershotCallbackDlg = void delegate(gtk.types.PositionType pos, gtk.scrolled_window.ScrolledWindow scrolledWindow);
+  alias EdgeOvershotCallbackFunc = void function(gtk.types.PositionType pos, gtk.scrolled_window.ScrolledWindow scrolledWindow);
 
   /**
    * Connect to EdgeOvershot signal.
@@ -510,8 +510,8 @@ class ScrolledWindow : Widget
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto scrolledWindow = getVal!ScrolledWindow(_paramVals);
-      auto pos = getVal!PositionType(&_paramVals[1]);
+      auto scrolledWindow = getVal!(gtk.scrolled_window.ScrolledWindow)(_paramVals);
+      auto pos = getVal!(gtk.types.PositionType)(&_paramVals[1]);
       _dClosure.dlg(pos, scrolledWindow);
     }
 
@@ -531,8 +531,8 @@ class ScrolledWindow : Widget
    *   pos = edge side that was reached
    *   scrolledWindow = the instance the signal is connected to
    */
-  alias EdgeReachedCallbackDlg = void delegate(PositionType pos, ScrolledWindow scrolledWindow);
-  alias EdgeReachedCallbackFunc = void function(PositionType pos, ScrolledWindow scrolledWindow);
+  alias EdgeReachedCallbackDlg = void delegate(gtk.types.PositionType pos, gtk.scrolled_window.ScrolledWindow scrolledWindow);
+  alias EdgeReachedCallbackFunc = void function(gtk.types.PositionType pos, gtk.scrolled_window.ScrolledWindow scrolledWindow);
 
   /**
    * Connect to EdgeReached signal.
@@ -548,8 +548,8 @@ class ScrolledWindow : Widget
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto scrolledWindow = getVal!ScrolledWindow(_paramVals);
-      auto pos = getVal!PositionType(&_paramVals[1]);
+      auto scrolledWindow = getVal!(gtk.scrolled_window.ScrolledWindow)(_paramVals);
+      auto pos = getVal!(gtk.types.PositionType)(&_paramVals[1]);
       _dClosure.dlg(pos, scrolledWindow);
     }
 
@@ -569,8 +569,8 @@ class ScrolledWindow : Widget
    *     %GTK_DIR_TAB_BACKWARD
    *   scrolledWindow = the instance the signal is connected to
    */
-  alias MoveFocusOutCallbackDlg = void delegate(DirectionType directionType, ScrolledWindow scrolledWindow);
-  alias MoveFocusOutCallbackFunc = void function(DirectionType directionType, ScrolledWindow scrolledWindow);
+  alias MoveFocusOutCallbackDlg = void delegate(gtk.types.DirectionType directionType, gtk.scrolled_window.ScrolledWindow scrolledWindow);
+  alias MoveFocusOutCallbackFunc = void function(gtk.types.DirectionType directionType, gtk.scrolled_window.ScrolledWindow scrolledWindow);
 
   /**
    * Connect to MoveFocusOut signal.
@@ -586,8 +586,8 @@ class ScrolledWindow : Widget
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto scrolledWindow = getVal!ScrolledWindow(_paramVals);
-      auto directionType = getVal!DirectionType(&_paramVals[1]);
+      auto scrolledWindow = getVal!(gtk.scrolled_window.ScrolledWindow)(_paramVals);
+      auto directionType = getVal!(gtk.types.DirectionType)(&_paramVals[1]);
       _dClosure.dlg(directionType, scrolledWindow);
     }
 
@@ -607,8 +607,8 @@ class ScrolledWindow : Widget
    *   scrolledWindow = the instance the signal is connected to
    * Returns:
    */
-  alias ScrollChildCallbackDlg = bool delegate(ScrollType scroll, bool horizontal, ScrolledWindow scrolledWindow);
-  alias ScrollChildCallbackFunc = bool function(ScrollType scroll, bool horizontal, ScrolledWindow scrolledWindow);
+  alias ScrollChildCallbackDlg = bool delegate(gtk.types.ScrollType scroll, bool horizontal, gtk.scrolled_window.ScrolledWindow scrolledWindow);
+  alias ScrollChildCallbackFunc = bool function(gtk.types.ScrollType scroll, bool horizontal, gtk.scrolled_window.ScrolledWindow scrolledWindow);
 
   /**
    * Connect to ScrollChild signal.
@@ -625,9 +625,9 @@ class ScrolledWindow : Widget
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto scrolledWindow = getVal!ScrolledWindow(_paramVals);
-      auto scroll = getVal!ScrollType(&_paramVals[1]);
-      auto horizontal = getVal!bool(&_paramVals[2]);
+      auto scrolledWindow = getVal!(gtk.scrolled_window.ScrolledWindow)(_paramVals);
+      auto scroll = getVal!(gtk.types.ScrollType)(&_paramVals[1]);
+      auto horizontal = getVal!(bool)(&_paramVals[2]);
       _retval = _dClosure.dlg(scroll, horizontal, scrolledWindow);
       setVal!bool(_returnValue, _retval);
     }

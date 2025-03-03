@@ -1,6 +1,6 @@
 module glib.main_loop;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.main_context;
@@ -11,7 +11,7 @@ import gobject.boxed;
  * The `GMainLoop` struct is an opaque data type
  * representing the main event loop of a GLib or GTK application.
  */
-class MainLoop : Boxed
+class MainLoop : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,7 +45,7 @@ class MainLoop : Boxed
    *     %TRUE anyway.
    * Returns: a new #GMainLoop.
    */
-  this(MainContext context, bool isRunning)
+  this(glib.main_context.MainContext context, bool isRunning)
   {
     GMainLoop* _cretval;
     _cretval = g_main_loop_new(context ? cast(GMainContext*)context.cPtr(No.Dup) : null, isRunning);
@@ -56,11 +56,11 @@ class MainLoop : Boxed
    * Returns the #GMainContext of loop.
    * Returns: the #GMainContext of loop
    */
-  MainContext getContext()
+  glib.main_context.MainContext getContext()
   {
     GMainContext* _cretval;
     _cretval = g_main_loop_get_context(cast(GMainLoop*)cPtr);
-    auto _retval = _cretval ? new MainContext(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

@@ -6,10 +6,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class ListArray : Array
+class ListArray : arrow.array.Array
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -28,18 +28,18 @@ class ListArray : Array
     return getType();
   }
 
-  this(DataType dataType, long length, Buffer valueOffsets, Array values, Buffer nullBitmap, long nNulls)
+  this(arrow.data_type.DataType dataType, long length, arrow.buffer.Buffer valueOffsets, arrow.array.Array values, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowListArray* _cretval;
     _cretval = garrow_list_array_new(dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, length, valueOffsets ? cast(GArrowBuffer*)valueOffsets.cPtr(No.Dup) : null, values ? cast(GArrowArray*)values.cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);
     this(_cretval, Yes.Take);
   }
 
-  Array getValue(long i)
+  arrow.array.Array getValue(long i)
   {
     GArrowArray* _cretval;
     _cretval = garrow_list_array_get_value(cast(GArrowListArray*)cPtr, i);
-    auto _retval = ObjectG.getDObject!Array(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -71,21 +71,21 @@ class ListArray : Array
     return _retval;
   }
 
-  alias getValueType = Array.getValueType;
+  alias getValueType = arrow.array.Array.getValueType;
 
-  DataType getValueType()
+  arrow.data_type.DataType getValueType()
   {
     GArrowDataType* _cretval;
     _cretval = garrow_list_array_get_value_type(cast(GArrowListArray*)cPtr);
-    auto _retval = ObjectG.getDObject!DataType(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Array getValues()
+  arrow.array.Array getValues()
   {
     GArrowArray* _cretval;
     _cretval = garrow_list_array_get_values(cast(GArrowListArray*)cPtr);
-    auto _retval = ObjectG.getDObject!Array(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

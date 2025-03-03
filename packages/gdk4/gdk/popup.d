@@ -6,7 +6,7 @@ import gdk.c.types;
 import gdk.popup_layout;
 import gdk.surface;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
@@ -35,7 +35,7 @@ interface Popup
    * Returns the parent surface of a popup.
    * Returns: the parent surface
    */
-  Surface getParent();
+  gdk.surface.Surface getParent();
 
   /**
    * Obtains the position of the popup relative to its parent.
@@ -55,7 +55,7 @@ interface Popup
    * or after the [gdk.surface.Surface.layout] signal is emitted.
    * Returns: the current rectangle anchor value of popup
    */
-  Gravity getRectAnchor();
+  gdk.types.Gravity getRectAnchor();
 
   /**
    * Gets the current popup surface anchor.
@@ -63,7 +63,7 @@ interface Popup
    * or after the [gdk.surface.Surface.layout] signal is emitted.
    * Returns: the current surface anchor value of popup
    */
-  Gravity getSurfaceAnchor();
+  gdk.types.Gravity getSurfaceAnchor();
 
   /**
    * Present popup after having processed the `GdkPopupLayout` rules.
@@ -84,5 +84,5 @@ interface Popup
    *   layout = the `GdkPopupLayout` object used to layout
    * Returns: %FALSE if it failed to be presented, otherwise %TRUE.
    */
-  bool present(int width, int height, PopupLayout layout);
+  bool present(int width, int height, gdk.popup_layout.PopupLayout layout);
 }

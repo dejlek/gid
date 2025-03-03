@@ -1,6 +1,6 @@
 module harfbuzz.glyph_position;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -11,7 +11,7 @@ import harfbuzz.types;
  * glyph in both horizontal and vertical directions. All positions in
  * #hb_glyph_position_t are relative to the current point.
  */
-class GlyphPosition : Boxed
+class GlyphPosition : gobject.boxed.Boxed
 {
 
   this()
@@ -40,42 +40,42 @@ class GlyphPosition : Boxed
     return getType();
   }
 
-  @property Position xAdvance()
+  @property harfbuzz.types.Position xAdvance()
   {
     return (cast(hb_glyph_position_t*)cPtr).xAdvance;
   }
 
-  @property void xAdvance(Position propval)
+  @property void xAdvance(harfbuzz.types.Position propval)
   {
     (cast(hb_glyph_position_t*)cPtr).xAdvance = propval;
   }
 
-  @property Position yAdvance()
+  @property harfbuzz.types.Position yAdvance()
   {
     return (cast(hb_glyph_position_t*)cPtr).yAdvance;
   }
 
-  @property void yAdvance(Position propval)
+  @property void yAdvance(harfbuzz.types.Position propval)
   {
     (cast(hb_glyph_position_t*)cPtr).yAdvance = propval;
   }
 
-  @property Position xOffset()
+  @property harfbuzz.types.Position xOffset()
   {
     return (cast(hb_glyph_position_t*)cPtr).xOffset;
   }
 
-  @property void xOffset(Position propval)
+  @property void xOffset(harfbuzz.types.Position propval)
   {
     (cast(hb_glyph_position_t*)cPtr).xOffset = propval;
   }
 
-  @property Position yOffset()
+  @property harfbuzz.types.Position yOffset()
   {
     return (cast(hb_glyph_position_t*)cPtr).yOffset;
   }
 
-  @property void yOffset(Position propval)
+  @property void yOffset(harfbuzz.types.Position propval)
   {
     (cast(hb_glyph_position_t*)cPtr).yOffset = propval;
   }

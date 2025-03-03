@@ -1,7 +1,7 @@
 module gtk.event_controller_legacy;
 
 import gdk.event;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -14,7 +14,7 @@ import gtk.types;
  * It should only be used as a last resort if none of the other event
  * controllers or gestures do the job.
  */
-class EventControllerLegacy : EventController
+class EventControllerLegacy : gtk.event_controller.EventController
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -52,8 +52,8 @@ class EventControllerLegacy : EventController
    * Returns: %TRUE to stop other handlers from being invoked for the event
    *   and the emission of this signal. %FALSE to propagate the event further.
    */
-  alias EventCallbackDlg = bool delegate(Event event, EventControllerLegacy eventControllerLegacy);
-  alias EventCallbackFunc = bool function(Event event, EventControllerLegacy eventControllerLegacy);
+  alias EventCallbackDlg = bool delegate(gdk.event.Event event, gtk.event_controller_legacy.EventControllerLegacy eventControllerLegacy);
+  alias EventCallbackFunc = bool function(gdk.event.Event event, gtk.event_controller_legacy.EventControllerLegacy eventControllerLegacy);
 
   /**
    * Connect to Event signal.
@@ -70,8 +70,8 @@ class EventControllerLegacy : EventController
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto eventControllerLegacy = getVal!EventControllerLegacy(_paramVals);
-      auto event = getVal!Event(&_paramVals[1]);
+      auto eventControllerLegacy = getVal!(gtk.event_controller_legacy.EventControllerLegacy)(_paramVals);
+      auto event = getVal!(gdk.event.Event)(&_paramVals[1]);
       _retval = _dClosure.dlg(event, eventControllerLegacy);
       setVal!bool(_returnValue, _retval);
     }

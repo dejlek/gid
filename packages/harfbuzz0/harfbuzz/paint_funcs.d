@@ -1,6 +1,6 @@
 module harfbuzz.paint_funcs;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -24,7 +24,7 @@ import harfbuzz.types;
  * you want to override colors from the font palette with
  * custom colors.
  */
-class PaintFuncs : Boxed
+class PaintFuncs : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

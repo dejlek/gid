@@ -1,6 +1,6 @@
 module gtk.message_dialog;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -70,7 +70,7 @@ import gtk.widget;
 
  * Deprecated: Use [gtk.alert_dialog.AlertDialog] instead
  */
-class MessageDialog : Dialog
+class MessageDialog : gtk.dialog.Dialog
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -100,11 +100,11 @@ class MessageDialog : Dialog
 
    * Deprecated: Use [gtk.alert_dialog.AlertDialog] instead
    */
-  Widget getMessageArea()
+  gtk.widget.Widget getMessageArea()
   {
     GtkWidget* _cretval;
     _cretval = gtk_message_dialog_get_message_area(cast(GtkMessageDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

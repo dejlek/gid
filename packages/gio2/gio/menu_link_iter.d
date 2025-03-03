@@ -1,6 +1,6 @@
 module gio.menu_link_iter;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.menu_model;
@@ -11,7 +11,7 @@ import gobject.object;
  * #GMenuLinkIter is an opaque structure type.  You must access it using
  * the functions below.
  */
-class MenuLinkIter : ObjectG
+class MenuLinkIter : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -39,7 +39,7 @@ class MenuLinkIter : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_menu_link_iter_get_name(cast(GMenuLinkIter*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -60,14 +60,14 @@ class MenuLinkIter : ObjectG
    *   value = the linked #GMenuModel
    * Returns: %TRUE on success, or %FALSE if there is no additional link
    */
-  bool getNext(out string outLink, out MenuModel value)
+  bool getNext(out string outLink, out gio.menu_model.MenuModel value)
   {
     bool _retval;
     char* _outLink;
     GMenuModel* _value;
     _retval = g_menu_link_iter_get_next(cast(GMenuLinkIter*)cPtr, &_outLink, &_value);
     outLink = _outLink.fromCString(No.Free);
-    value = new MenuModel(cast(void*)_value, Yes.Take);
+    value = new gio.menu_model.MenuModel(cast(void*)_value, Yes.Take);
     return _retval;
   }
 
@@ -76,11 +76,11 @@ class MenuLinkIter : ObjectG
    * The iterator is not advanced.
    * Returns: the #GMenuModel that is linked to
    */
-  MenuModel getValue()
+  gio.menu_model.MenuModel getValue()
   {
     GMenuModel* _cretval;
     _cretval = g_menu_link_iter_get_value(cast(GMenuLinkIter*)cPtr);
-    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
     return _retval;
   }
 

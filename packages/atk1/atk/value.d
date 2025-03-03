@@ -5,7 +5,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.range;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.value;
 
@@ -159,7 +159,7 @@ interface ValueAtk
    * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getValueAndText]
    *   instead.
    */
-  void getCurrentValue(out Value value);
+  void getCurrentValue(out gobject.value.Value value);
 
   /**
    * Gets the minimum increment by which the value of this object may be
@@ -178,7 +178,7 @@ interface ValueAtk
 
    * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getRange] instead.
    */
-  void getMaximumValue(out Value value);
+  void getMaximumValue(out gobject.value.Value value);
 
   /**
    * Gets the minimum increment by which the value of this object may be changed.  If zero,
@@ -189,7 +189,7 @@ interface ValueAtk
 
    * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getIncrement] instead.
    */
-  void getMinimumIncrement(out Value value);
+  void getMinimumIncrement(out gobject.value.Value value);
 
   /**
    * Gets the minimum value of this object.
@@ -198,7 +198,7 @@ interface ValueAtk
 
    * Deprecated: Since 2.12. Use [atk.value.ValueAtk.getRange] instead.
    */
-  void getMinimumValue(out Value value);
+  void getMinimumValue(out gobject.value.Value value);
 
   /**
    * Gets the range of this object.
@@ -206,7 +206,7 @@ interface ValueAtk
    *   that represents the minimum, maximum and descriptor $(LPAREN)if available$(RPAREN)
    *   of obj. NULL if that range is not defined.
    */
-  Range getRange();
+  atk.range.Range getRange();
 
   /**
    * Gets the list of subranges defined for this object. See #AtkValue
@@ -215,7 +215,7 @@ interface ValueAtk
    *   #AtkRange which each of the subranges defined for this object. Free
    *   the returns list with [glib.slist.SList.free].
    */
-  Range[] getSubRanges();
+  atk.range.Range[] getSubRanges();
 
   /**
    * Gets the current value and the human readable text alternative of
@@ -236,7 +236,7 @@ interface ValueAtk
 
    * Deprecated: Since 2.12. Use [atk.value.ValueAtk.setValue] instead.
    */
-  bool setCurrentValue(Value value);
+  bool setCurrentValue(gobject.value.Value value);
 
   /**
    * Sets the value of this object.
@@ -274,8 +274,8 @@ interface ValueAtk
    *     description$(RPAREN) of this object. NULL if not available.
    *   valueAtk = the instance the signal is connected to
    */
-  alias ValueChangedCallbackDlg = void delegate(double value, string text, ValueAtk valueAtk);
-  alias ValueChangedCallbackFunc = void function(double value, string text, ValueAtk valueAtk);
+  alias ValueChangedCallbackDlg = void delegate(double value, string text, atk.value.ValueAtk valueAtk);
+  alias ValueChangedCallbackFunc = void function(double value, string text, atk.value.ValueAtk valueAtk);
 
   /**
    * Connect to ValueChanged signal.

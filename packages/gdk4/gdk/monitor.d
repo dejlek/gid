@@ -5,7 +5,7 @@ import gdk.c.types;
 import gdk.display;
 import gdk.rectangle;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 
@@ -17,7 +17,7 @@ import gobject.object;
  * [gdk.display.Display.getMonitorAtSurface] to find a particular
  * monitor.
  */
-class MonitorG : ObjectG
+class MonitorG : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -47,7 +47,7 @@ class MonitorG : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_connector(cast(GdkMonitor*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -60,7 +60,7 @@ class MonitorG : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_description(cast(GdkMonitor*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -68,11 +68,11 @@ class MonitorG : ObjectG
    * Gets the display that this monitor belongs to.
    * Returns: the display
    */
-  Display getDisplay()
+  gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gdk_monitor_get_display(cast(GdkMonitor*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -84,11 +84,11 @@ class MonitorG : ObjectG
    * Params:
    *   geometry = a `GdkRectangle` to be filled with the monitor geometry
    */
-  void getGeometry(out Rectangle geometry)
+  void getGeometry(out gdk.rectangle.Rectangle geometry)
   {
     GdkRectangle _geometry;
     gdk_monitor_get_geometry(cast(GdkMonitor*)cPtr, &_geometry);
-    geometry = new Rectangle(cast(void*)&_geometry, No.Take);
+    geometry = new gdk.rectangle.Rectangle(cast(void*)&_geometry, No.Take);
   }
 
   /**
@@ -114,7 +114,7 @@ class MonitorG : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_manufacturer(cast(GdkMonitor*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class MonitorG : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_model(cast(GdkMonitor*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -180,11 +180,11 @@ class MonitorG : ObjectG
    * primaries for pixels.
    * Returns: the subpixel layout
    */
-  SubpixelLayout getSubpixelLayout()
+  gdk.types.SubpixelLayout getSubpixelLayout()
   {
     GdkSubpixelLayout _cretval;
     _cretval = gdk_monitor_get_subpixel_layout(cast(GdkMonitor*)cPtr);
-    SubpixelLayout _retval = cast(SubpixelLayout)_cretval;
+    gdk.types.SubpixelLayout _retval = cast(gdk.types.SubpixelLayout)_cretval;
     return _retval;
   }
 
@@ -217,8 +217,8 @@ class MonitorG : ObjectG
    * Emitted when the output represented by monitor gets disconnected.
    *   monitorG = the instance the signal is connected to
    */
-  alias InvalidateCallbackDlg = void delegate(MonitorG monitorG);
-  alias InvalidateCallbackFunc = void function(MonitorG monitorG);
+  alias InvalidateCallbackDlg = void delegate(gdk.monitor.MonitorG monitorG);
+  alias InvalidateCallbackFunc = void function(gdk.monitor.MonitorG monitorG);
 
   /**
    * Connect to Invalidate signal.
@@ -234,7 +234,7 @@ class MonitorG : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto monitorG = getVal!MonitorG(_paramVals);
+      auto monitorG = getVal!(gdk.monitor.MonitorG)(_paramVals);
       _dClosure.dlg(monitorG);
     }
 

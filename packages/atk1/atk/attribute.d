@@ -3,7 +3,7 @@ module atk.attribute;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.global;
+import gid.gid;
 
 /**
  * AtkAttribute is a string name/value pair representing a generic

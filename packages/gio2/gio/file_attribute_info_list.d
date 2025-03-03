@@ -1,6 +1,6 @@
 module gio.file_attribute_info_list;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.file_attribute_info;
@@ -11,7 +11,7 @@ import gobject.boxed;
  * Acts as a lightweight registry for possible valid file attributes.
  * The registry stores Key-Value pair formats as #GFileAttributeInfos.
  */
-class FileAttributeInfoList : Boxed
+class FileAttributeInfoList : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -35,9 +35,9 @@ class FileAttributeInfoList : Boxed
     return getType();
   }
 
-  @property FileAttributeInfo infos()
+  @property gio.file_attribute_info.FileAttributeInfo infos()
   {
-    return new FileAttributeInfo(cast(GFileAttributeInfo*)(cast(GFileAttributeInfoList*)cPtr).infos);
+    return new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)(cast(GFileAttributeInfoList*)cPtr).infos);
   }
 
   @property int nInfos()
@@ -69,7 +69,7 @@ class FileAttributeInfoList : Boxed
    *   type = the #GFileAttributeType for the attribute.
    *   flags = #GFileAttributeInfoFlags for the attribute.
    */
-  void add(string name, FileAttributeType type, FileAttributeInfoFlags flags)
+  void add(string name, gio.types.FileAttributeType type, gio.types.FileAttributeInfoFlags flags)
   {
     const(char)* _name = name.toCString(No.Alloc);
     g_file_attribute_info_list_add(cast(GFileAttributeInfoList*)cPtr, _name, type, flags);
@@ -79,11 +79,11 @@ class FileAttributeInfoList : Boxed
    * Makes a duplicate of a file attribute info list.
    * Returns: a copy of the given list.
    */
-  FileAttributeInfoList dup()
+  gio.file_attribute_info_list.FileAttributeInfoList dup()
   {
     GFileAttributeInfoList* _cretval;
     _cretval = g_file_attribute_info_list_dup(cast(GFileAttributeInfoList*)cPtr);
-    auto _retval = _cretval ? new FileAttributeInfoList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gio.file_attribute_info_list.FileAttributeInfoList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -94,12 +94,12 @@ class FileAttributeInfoList : Boxed
    * Returns: a #GFileAttributeInfo for the name, or %NULL if an
    *   attribute isn't found.
    */
-  FileAttributeInfo lookup(string name)
+  gio.file_attribute_info.FileAttributeInfo lookup(string name)
   {
     const(GFileAttributeInfo)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_file_attribute_info_list_lookup(cast(GFileAttributeInfoList*)cPtr, _name);
-    auto _retval = _cretval ? new FileAttributeInfo(cast(GFileAttributeInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)_cretval) : null;
     return _retval;
   }
 }

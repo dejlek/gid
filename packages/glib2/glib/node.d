@@ -1,6 +1,6 @@
 module glib.node;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -28,24 +28,24 @@ class Node
     return cast(void*)&cInstance;
   }
 
-  @property Node next()
+  @property glib.node.Node next()
   {
-    return new Node(cast(GNode*)(cast(GNode*)cPtr).next);
+    return new glib.node.Node(cast(GNode*)(cast(GNode*)cPtr).next);
   }
 
-  @property Node prev()
+  @property glib.node.Node prev()
   {
-    return new Node(cast(GNode*)(cast(GNode*)cPtr).prev);
+    return new glib.node.Node(cast(GNode*)(cast(GNode*)cPtr).prev);
   }
 
-  @property Node parent()
+  @property glib.node.Node parent()
   {
-    return new Node(cast(GNode*)(cast(GNode*)cPtr).parent);
+    return new glib.node.Node(cast(GNode*)(cast(GNode*)cPtr).parent);
   }
 
-  @property Node children()
+  @property glib.node.Node children()
   {
-    return new Node(cast(GNode*)(cast(GNode*)cPtr).children);
+    return new glib.node.Node(cast(GNode*)(cast(GNode*)cPtr).children);
   }
 
   /**
@@ -71,7 +71,7 @@ class Node
    *   child = a child of node
    * Returns: the position of child with respect to its siblings
    */
-  int childPosition(Node child)
+  int childPosition(glib.node.Node child)
   {
     int _retval;
     _retval = g_node_child_position(cast(GNode*)cPtr, child ? cast(GNode*)child.cPtr : null);
@@ -87,13 +87,13 @@ class Node
    *     %G_TRAVERSE_ALL, %G_TRAVERSE_LEAVES and %G_TRAVERSE_NON_LEAVES
    *   func = the function to call for each visited node
    */
-  void childrenForeach(TraverseFlags flags, NodeForeachFunc func)
+  void childrenForeach(glib.types.TraverseFlags flags, glib.types.NodeForeachFunc func)
   {
     extern(C) void _funcCallback(GNode* node, void* data)
     {
-      auto _dlg = cast(NodeForeachFunc*)data;
+      auto _dlg = cast(glib.types.NodeForeachFunc*)data;
 
-      (*_dlg)(node ? new Node(cast(void*)node, No.Take) : null);
+      (*_dlg)(node ? new glib.node.Node(cast(void*)node, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -131,7 +131,7 @@ class Node
    *   descendant = a #GNode
    * Returns: %TRUE if node is an ancestor of descendant
    */
-  bool isAncestor(Node descendant)
+  bool isAncestor(glib.node.Node descendant)
   {
     bool _retval;
     _retval = g_node_is_ancestor(cast(GNode*)cPtr, descendant ? cast(GNode*)descendant.cPtr : null);
@@ -170,7 +170,7 @@ class Node
    *     %G_TRAVERSE_ALL, %G_TRAVERSE_LEAVES and %G_TRAVERSE_NON_LEAVES
    * Returns: the number of nodes in the tree
    */
-  uint nNodes(TraverseFlags flags)
+  uint nNodes(glib.types.TraverseFlags flags)
   {
     uint _retval;
     _retval = g_node_n_nodes(cast(GNode*)cPtr, flags);
@@ -202,13 +202,13 @@ class Node
    *     If depth is 2, the root and its children are visited. And so on.
    *   func = the function to call for each visited #GNode
    */
-  void traverse(TraverseType order, TraverseFlags flags, int maxDepth, NodeTraverseFunc func)
+  void traverse(glib.types.TraverseType order, glib.types.TraverseFlags flags, int maxDepth, glib.types.NodeTraverseFunc func)
   {
     extern(C) bool _funcCallback(GNode* node, void* data)
     {
-      auto _dlg = cast(NodeTraverseFunc*)data;
+      auto _dlg = cast(glib.types.NodeTraverseFunc*)data;
 
-      bool _retval = (*_dlg)(node ? new Node(cast(void*)node, No.Take) : null);
+      bool _retval = (*_dlg)(node ? new glib.node.Node(cast(void*)node, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -230,7 +230,7 @@ class Node
     g_node_pop_allocator();
   }
 
-  static void pushAllocator(Allocator allocator)
+  static void pushAllocator(glib.types.Allocator allocator)
   {
     g_node_push_allocator(allocator);
   }

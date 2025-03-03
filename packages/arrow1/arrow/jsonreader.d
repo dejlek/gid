@@ -6,11 +6,11 @@ import arrow.input_stream;
 import arrow.jsonread_options;
 import arrow.table;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class JSONReader : ObjectG
+class JSONReader : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,7 +29,7 @@ class JSONReader : ObjectG
     return getType();
   }
 
-  this(InputStream input, JSONReadOptions options)
+  this(arrow.input_stream.InputStream input, arrow.jsonread_options.JSONReadOptions options)
   {
     GArrowJSONReader* _cretval;
     GError *_err;
@@ -39,14 +39,14 @@ class JSONReader : ObjectG
     this(_cretval, Yes.Take);
   }
 
-  Table read()
+  arrow.table.Table read()
   {
     GArrowTable* _cretval;
     GError *_err;
     _cretval = garrow_json_reader_read(cast(GArrowJSONReader*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Table(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 }

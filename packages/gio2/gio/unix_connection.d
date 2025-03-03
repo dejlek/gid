@@ -1,8 +1,7 @@
 module gio.unix_connection;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -23,7 +22,7 @@ import gobject.object;
  * interfaces, thus you had to use the `gio-unix-2.0.pc` pkg-config file when
  * using it. This is no longer necessary since GLib 2.72.
  */
-class UnixConnection : SocketConnection
+class UnixConnection : gio.socket_connection.SocketConnection
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -62,14 +61,14 @@ class UnixConnection : SocketConnection
    * Returns: Received credentials on success $(LPAREN)free with
    *   [gobject.object.ObjectG.unref]$(RPAREN), %NULL if error is set.
    */
-  Credentials receiveCredentials(Cancellable cancellable)
+  gio.credentials.Credentials receiveCredentials(gio.cancellable.Cancellable cancellable)
   {
     GCredentials* _cretval;
     GError *_err;
     _cretval = g_unix_connection_receive_credentials(cast(GUnixConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Credentials(cast(GCredentials*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -84,14 +83,14 @@ class UnixConnection : SocketConnection
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void receiveCredentialsAsync(Cancellable cancellable, AsyncReadyCallback callback)
+  void receiveCredentialsAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -107,14 +106,14 @@ class UnixConnection : SocketConnection
    * Returns: a #GCredentials, or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  Credentials receiveCredentialsFinish(AsyncResult result)
+  gio.credentials.Credentials receiveCredentialsFinish(gio.async_result.AsyncResult result)
   {
     GCredentials* _cretval;
     GError *_err;
     _cretval = g_unix_connection_receive_credentials_finish(cast(GUnixConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Credentials(cast(GCredentials*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -129,7 +128,7 @@ class UnixConnection : SocketConnection
    *   cancellable = optional #GCancellable object, %NULL to ignore
    * Returns: a file descriptor on success, -1 on error.
    */
-  int receiveFd(Cancellable cancellable)
+  int receiveFd(gio.cancellable.Cancellable cancellable)
   {
     int _retval;
     GError *_err;
@@ -159,7 +158,7 @@ class UnixConnection : SocketConnection
    *   cancellable = A #GCancellable or %NULL.
    * Returns: %TRUE on success, %FALSE if error is set.
    */
-  bool sendCredentials(Cancellable cancellable)
+  bool sendCredentials(gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -180,14 +179,14 @@ class UnixConnection : SocketConnection
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void sendCredentialsAsync(Cancellable cancellable, AsyncReadyCallback callback)
+  void sendCredentialsAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -202,7 +201,7 @@ class UnixConnection : SocketConnection
    *   result = a #GAsyncResult.
    * Returns: %TRUE if the operation was successful, otherwise %FALSE.
    */
-  bool sendCredentialsFinish(AsyncResult result)
+  bool sendCredentialsFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -224,7 +223,7 @@ class UnixConnection : SocketConnection
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: a %TRUE on success, %NULL on error.
    */
-  bool sendFd(int fd, Cancellable cancellable)
+  bool sendFd(int fd, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;

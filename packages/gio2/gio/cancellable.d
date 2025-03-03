@@ -1,6 +1,6 @@
 module gio.cancellable;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -16,7 +16,7 @@ import gobject.object;
  * throughout GIO to allow for cancellation of synchronous and
  * asynchronous operations.
  */
-class Cancellable : ObjectG
+class Cancellable : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -56,11 +56,11 @@ class Cancellable : ObjectG
    * Returns: a #GCancellable from the top
    *   of the stack, or %NULL if the stack is empty.
    */
-  static Cancellable getCurrent()
+  static gio.cancellable.Cancellable getCurrent()
   {
     GCancellable* _cretval;
     _cretval = g_cancellable_get_current();
-    auto _retval = ObjectG.getDObject!Cancellable(cast(GCancellable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -159,7 +159,7 @@ class Cancellable : ObjectG
    * Returns: %TRUE if pollfd was successfully initialized, %FALSE on
    *   failure to prepare the cancellable.
    */
-  bool makePollfd(PollFD pollfd)
+  bool makePollfd(glib.types.PollFD pollfd)
   {
     bool _retval;
     _retval = g_cancellable_make_pollfd(cast(GCancellable*)cPtr, &pollfd);
@@ -244,11 +244,11 @@ class Cancellable : ObjectG
    * The new #GSource will hold a reference to the #GCancellable.
    * Returns: the new #GSource.
    */
-  Source sourceNew()
+  glib.source.Source sourceNew()
   {
     GSource* _cretval;
     _cretval = g_cancellable_source_new(cast(GCancellable*)cPtr);
-    auto _retval = _cretval ? new Source(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -295,8 +295,8 @@ class Cancellable : ObjectG
    * cancellable signal should not do something that can block.
    *   cancellable = the instance the signal is connected to
    */
-  alias CancelledCallbackDlg = void delegate(Cancellable cancellable);
-  alias CancelledCallbackFunc = void function(Cancellable cancellable);
+  alias CancelledCallbackDlg = void delegate(gio.cancellable.Cancellable cancellable);
+  alias CancelledCallbackFunc = void function(gio.cancellable.Cancellable cancellable);
 
   /**
    * Connect to Cancelled signal.
@@ -312,7 +312,7 @@ class Cancellable : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto cancellable = getVal!Cancellable(_paramVals);
+      auto cancellable = getVal!(gio.cancellable.Cancellable)(_paramVals);
       _dClosure.dlg(cancellable);
     }
 

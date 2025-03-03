@@ -1,7 +1,7 @@
 module gsk.outset_shadow_node;
 
 import gdk.rgba;
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.render_node;
@@ -11,7 +11,7 @@ import gsk.types;
 /**
  * A render node for an outset shadow.
  */
-class OutsetShadowNode : RenderNode
+class OutsetShadowNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -34,10 +34,10 @@ class OutsetShadowNode : RenderNode
    *   blurRadius = how much blur to apply to the shadow
    * Returns: A new `GskRenderNode`
    */
-  this(RoundedRect outline, RGBA color, float dx, float dy, float spread, float blurRadius)
+  this(gsk.rounded_rect.RoundedRect outline, gdk.rgba.RGBA color, float dx, float dy, float spread, float blurRadius)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_outset_shadow_node_new(outline ? cast(GskRoundedRect*)outline.cPtr : null, color ? cast(GdkRGBA*)color.cPtr(No.Dup) : null, dx, dy, spread, blurRadius);
+    _cretval = gsk_outset_shadow_node_new(outline ? cast(const(GskRoundedRect)*)outline.cPtr : null, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null, dx, dy, spread, blurRadius);
     this(_cretval, Yes.Take);
   }
 
@@ -48,7 +48,7 @@ class OutsetShadowNode : RenderNode
   float getBlurRadius()
   {
     float _retval;
-    _retval = gsk_outset_shadow_node_get_blur_radius(cast(GskRenderNode*)cPtr);
+    _retval = gsk_outset_shadow_node_get_blur_radius(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 
@@ -56,11 +56,11 @@ class OutsetShadowNode : RenderNode
    * Retrieves the color of the outset shadow.
    * Returns: a color
    */
-  RGBA getColor()
+  gdk.rgba.RGBA getColor()
   {
     const(GdkRGBA)* _cretval;
-    _cretval = gsk_outset_shadow_node_get_color(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, No.Take) : null;
+    _cretval = gsk_outset_shadow_node_get_color(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -71,7 +71,7 @@ class OutsetShadowNode : RenderNode
   float getDx()
   {
     float _retval;
-    _retval = gsk_outset_shadow_node_get_dx(cast(GskRenderNode*)cPtr);
+    _retval = gsk_outset_shadow_node_get_dx(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class OutsetShadowNode : RenderNode
   float getDy()
   {
     float _retval;
-    _retval = gsk_outset_shadow_node_get_dy(cast(GskRenderNode*)cPtr);
+    _retval = gsk_outset_shadow_node_get_dy(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 
@@ -90,11 +90,11 @@ class OutsetShadowNode : RenderNode
    * Retrieves the outline rectangle of the outset shadow.
    * Returns: a rounded rectangle
    */
-  RoundedRect getOutline()
+  gsk.rounded_rect.RoundedRect getOutline()
   {
     const(GskRoundedRect)* _cretval;
-    _cretval = gsk_outset_shadow_node_get_outline(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RoundedRect(cast(GskRoundedRect*)_cretval) : null;
+    _cretval = gsk_outset_shadow_node_get_outline(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval) : null;
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class OutsetShadowNode : RenderNode
   float getSpread()
   {
     float _retval;
-    _retval = gsk_outset_shadow_node_get_spread(cast(GskRenderNode*)cPtr);
+    _retval = gsk_outset_shadow_node_get_spread(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 }

@@ -4,10 +4,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.expression;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class FieldExpression : Expression
+class FieldExpression : arrow.expression.Expression
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

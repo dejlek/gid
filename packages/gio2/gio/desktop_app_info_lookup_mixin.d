@@ -1,9 +1,8 @@
 module gio.desktop_app_info_lookup_mixin;
 
 public import gio.desktop_app_info_lookup_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.app_info;
-public import gio.app_info_mixin;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
@@ -35,12 +34,12 @@ template DesktopAppInfoLookupT()
    * Deprecated: The #GDesktopAppInfoLookup interface is deprecated and
    *   unused by GIO.
    */
-  override AppInfo getDefaultForUriScheme(string uriScheme)
+  override gio.app_info.AppInfo getDefaultForUriScheme(string uriScheme)
   {
     GAppInfo* _cretval;
     const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
     _cretval = g_desktop_app_info_lookup_get_default_for_uri_scheme(cast(GDesktopAppInfoLookup*)cPtr, _uriScheme);
-    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 }

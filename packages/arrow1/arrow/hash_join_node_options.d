@@ -4,10 +4,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.execute_node_options;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class HashJoinNodeOptions : ExecuteNodeOptions
+class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class HashJoinNodeOptions : ExecuteNodeOptions
     return getType();
   }
 
-  this(JoinType type, string[] leftKeys, string[] rightKeys)
+  this(arrow.types.JoinType type, string[] leftKeys, string[] rightKeys)
   {
     GArrowHashJoinNodeOptions* _cretval;
     size_t _nLeftKeys;

@@ -1,7 +1,7 @@
 module gtk.selection_model_mixin;
 
 public import gtk.selection_model_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gtk.bitset;
 public import gtk.c.functions;
@@ -52,11 +52,11 @@ template SelectionModelT()
    *   selected in model. If no items are selected, the bitset is empty.
    *   The bitset must not be modified.
    */
-  override Bitset getSelection()
+  override gtk.bitset.Bitset getSelection()
   {
     GtkBitset* _cretval;
     _cretval = gtk_selection_model_get_selection(cast(GtkSelectionModel*)cPtr);
-    auto _retval = _cretval ? new Bitset(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.bitset.Bitset(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -74,11 +74,11 @@ template SelectionModelT()
    *   for the given range with all other values being undefined.
    *   The bitset must not be modified.
    */
-  override Bitset getSelectionInRange(uint position, uint nItems)
+  override gtk.bitset.Bitset getSelectionInRange(uint position, uint nItems)
   {
     GtkBitset* _cretval;
     _cretval = gtk_selection_model_get_selection_in_range(cast(GtkSelectionModel*)cPtr, position, nItems);
-    auto _retval = _cretval ? new Bitset(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.bitset.Bitset(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -185,7 +185,7 @@ template SelectionModelT()
    *   tried. This does not mean that all items were updated according
    *   to the inputs.
    */
-  override bool setSelection(Bitset selected, Bitset mask)
+  override bool setSelection(gtk.bitset.Bitset selected, gtk.bitset.Bitset mask)
   {
     bool _retval;
     _retval = gtk_selection_model_set_selection(cast(GtkSelectionModel*)cPtr, selected ? cast(GtkBitset*)selected.cPtr(No.Dup) : null, mask ? cast(GtkBitset*)mask.cPtr(No.Dup) : null);
@@ -244,8 +244,8 @@ template SelectionModelT()
    *   nItems = number of items with changes
    *   selectionModel = the instance the signal is connected to
    */
-  alias SelectionChangedCallbackDlg = void delegate(uint position, uint nItems, SelectionModel selectionModel);
-  alias SelectionChangedCallbackFunc = void function(uint position, uint nItems, SelectionModel selectionModel);
+  alias SelectionChangedCallbackDlg = void delegate(uint position, uint nItems, gtk.selection_model.SelectionModel selectionModel);
+  alias SelectionChangedCallbackFunc = void function(uint position, uint nItems, gtk.selection_model.SelectionModel selectionModel);
 
   /**
    * Connect to SelectionChanged signal.
@@ -261,9 +261,9 @@ template SelectionModelT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto selectionModel = getVal!SelectionModel(_paramVals);
-      auto position = getVal!uint(&_paramVals[1]);
-      auto nItems = getVal!uint(&_paramVals[2]);
+      auto selectionModel = getVal!(gtk.selection_model.SelectionModel)(_paramVals);
+      auto position = getVal!(uint)(&_paramVals[1]);
+      auto nItems = getVal!(uint)(&_paramVals[2]);
       _dClosure.dlg(position, nItems, selectionModel);
     }
 

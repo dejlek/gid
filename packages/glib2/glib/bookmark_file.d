@@ -1,6 +1,6 @@
 module glib.bookmark_file;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.date_time;
@@ -42,7 +42,7 @@ import gobject.boxed;
  * the on disk representation, using [glib.bookmark_file.BookmarkFile.toData] or
  * [glib.bookmark_file.BookmarkFile.toFile].
  */
-class BookmarkFile : Boxed
+class BookmarkFile : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -133,11 +133,11 @@ class BookmarkFile : Boxed
    * Returns: the copy of bookmark. Use
    *   g_bookmark_free$(LPAREN)$(RPAREN) when finished using it.
    */
-  BookmarkFile copy()
+  glib.bookmark_file.BookmarkFile copy()
   {
     GBookmarkFile* _cretval;
     _cretval = g_bookmark_file_copy(cast(GBookmarkFile*)cPtr);
-    auto _retval = _cretval ? new BookmarkFile(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bookmark_file.BookmarkFile(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class BookmarkFile : Boxed
    *   uri = a valid URI
    * Returns: a #GDateTime
    */
-  DateTime getAddedDateTime(string uri)
+  glib.date_time.DateTime getAddedDateTime(string uri)
   {
     GDateTime* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -179,7 +179,7 @@ class BookmarkFile : Boxed
     _cretval = g_bookmark_file_get_added_date_time(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class BookmarkFile : Boxed
    *   stamp = return location for the last registration time, or %NULL
    * Returns: %TRUE on success.
    */
-  bool getApplicationInfo(string uri, string name, out string exec, out uint count, out DateTime stamp)
+  bool getApplicationInfo(string uri, string name, out string exec, out uint count, out glib.date_time.DateTime stamp)
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -252,7 +252,7 @@ class BookmarkFile : Boxed
     if (_err)
       throw new BookmarkFileException(_err);
     exec = _exec.fromCString(Yes.Free);
-    stamp = new DateTime(cast(void*)_stamp, No.Take);
+    stamp = new glib.date_time.DateTime(cast(void*)_stamp, No.Take);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class BookmarkFile : Boxed
     _cretval = g_bookmark_file_get_description(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -404,7 +404,7 @@ class BookmarkFile : Boxed
     _cretval = g_bookmark_file_get_mime_type(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -438,7 +438,7 @@ class BookmarkFile : Boxed
    *   uri = a valid URI
    * Returns: a #GDateTime
    */
-  DateTime getModifiedDateTime(string uri)
+  glib.date_time.DateTime getModifiedDateTime(string uri)
   {
     GDateTime* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -446,7 +446,7 @@ class BookmarkFile : Boxed
     _cretval = g_bookmark_file_get_modified_date_time(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -479,7 +479,7 @@ class BookmarkFile : Boxed
     _cretval = g_bookmark_file_get_title(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -536,7 +536,7 @@ class BookmarkFile : Boxed
    *   uri = a valid URI
    * Returns: a #GDateTime
    */
-  DateTime getVisitedDateTime(string uri)
+  glib.date_time.DateTime getVisitedDateTime(string uri)
   {
     GDateTime* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -544,7 +544,7 @@ class BookmarkFile : Boxed
     _cretval = g_bookmark_file_get_visited_date_time(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -787,7 +787,7 @@ class BookmarkFile : Boxed
    *   uri = a valid URI
    *   added = a #GDateTime
    */
-  void setAddedDateTime(string uri, DateTime added)
+  void setAddedDateTime(string uri, glib.date_time.DateTime added)
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     g_bookmark_file_set_added_date_time(cast(GBookmarkFile*)cPtr, _uri, added ? cast(GDateTime*)added.cPtr(No.Dup) : null);
@@ -879,7 +879,7 @@ class BookmarkFile : Boxed
    * Returns: %TRUE if the application's meta-data was successfully
    *   changed.
    */
-  bool setApplicationInfo(string uri, string name, string exec, int count, DateTime stamp)
+  bool setApplicationInfo(string uri, string name, string exec, int count, glib.date_time.DateTime stamp)
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -1006,7 +1006,7 @@ class BookmarkFile : Boxed
    *   uri = a valid URI
    *   modified = a #GDateTime
    */
-  void setModifiedDateTime(string uri, DateTime modified)
+  void setModifiedDateTime(string uri, glib.date_time.DateTime modified)
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     g_bookmark_file_set_modified_date_time(cast(GBookmarkFile*)cPtr, _uri, modified ? cast(GDateTime*)modified.cPtr(No.Dup) : null);
@@ -1061,7 +1061,7 @@ class BookmarkFile : Boxed
    *   uri = a valid URI
    *   visited = a #GDateTime
    */
-  void setVisitedDateTime(string uri, DateTime visited)
+  void setVisitedDateTime(string uri, glib.date_time.DateTime visited)
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     g_bookmark_file_set_visited_date_time(cast(GBookmarkFile*)cPtr, _uri, visited ? cast(GDateTime*)visited.cPtr(No.Dup) : null);
@@ -1106,9 +1106,9 @@ class BookmarkFile : Boxed
     return _retval;
   }
 
-  static Quark errorQuark()
+  static glib.types.Quark errorQuark()
   {
-    Quark _retval;
+    glib.types.Quark _retval;
     _retval = g_bookmark_file_error_quark();
     return _retval;
   }
@@ -1123,7 +1123,7 @@ class BookmarkFileException : ErrorG
 
   this(Code code, string msg)
   {
-    super(BookmarkFile.errorQuark, cast(int)code, msg);
+    super(glib.bookmark_file.BookmarkFile.errorQuark, cast(int)code, msg);
   }
 
   alias Code = GBookmarkFileError;

@@ -138,12 +138,6 @@ __gshared extern(C)
   uint function(const(GskRenderNode)* node) c_gsk_gl_shader_node_get_n_children;
   GskGLShader* function(const(GskRenderNode)* node) c_gsk_gl_shader_node_get_shader;
 
-  // Global
-  GskRenderNode* function(const(GValue)* value) c_gsk_value_dup_render_node;
-  GskRenderNode* function(const(GValue)* value) c_gsk_value_get_render_node;
-  void function(GValue* value, GskRenderNode* node) c_gsk_value_set_render_node;
-  void function(GValue* value, GskRenderNode* node) c_gsk_value_take_render_node;
-
   // InsetShadowNode
   extern(C) GType function() c_gsk_inset_shadow_node_get_type;
   GskRenderNode* function(const(GskRoundedRect)* outline, const(GdkRGBA)* color, float dx, float dy, float spread, float blurRadius) c_gsk_inset_shadow_node_new;
@@ -443,6 +437,12 @@ __gshared extern(C)
   // VulkanRenderer
   extern(C) GType function() c_gsk_vulkan_renderer_get_type;
   GskRenderer* function() c_gsk_vulkan_renderer_new;
+
+  // global
+  GskRenderNode* function(const(GValue)* value) c_gsk_value_dup_render_node;
+  GskRenderNode* function(const(GValue)* value) c_gsk_value_get_render_node;
+  void function(GValue* value, GskRenderNode* node) c_gsk_value_set_render_node;
+  void function(GValue* value, GskRenderNode* node) c_gsk_value_take_render_node;
 }
 
 // BlendNode
@@ -567,12 +567,6 @@ alias gsk_gl_shader_node_get_args = c_gsk_gl_shader_node_get_args;
 alias gsk_gl_shader_node_get_child = c_gsk_gl_shader_node_get_child;
 alias gsk_gl_shader_node_get_n_children = c_gsk_gl_shader_node_get_n_children;
 alias gsk_gl_shader_node_get_shader = c_gsk_gl_shader_node_get_shader;
-
-// Global
-alias gsk_value_dup_render_node = c_gsk_value_dup_render_node;
-alias gsk_value_get_render_node = c_gsk_value_get_render_node;
-alias gsk_value_set_render_node = c_gsk_value_set_render_node;
-alias gsk_value_take_render_node = c_gsk_value_take_render_node;
 
 // InsetShadowNode
 alias gsk_inset_shadow_node_get_type = c_gsk_inset_shadow_node_get_type;
@@ -874,6 +868,12 @@ alias gsk_transform_node_get_transform = c_gsk_transform_node_get_transform;
 alias gsk_vulkan_renderer_get_type = c_gsk_vulkan_renderer_get_type;
 alias gsk_vulkan_renderer_new = c_gsk_vulkan_renderer_new;
 
+// global
+alias gsk_value_dup_render_node = c_gsk_value_dup_render_node;
+alias gsk_value_get_render_node = c_gsk_value_get_render_node;
+alias gsk_value_set_render_node = c_gsk_value_set_render_node;
+alias gsk_value_take_render_node = c_gsk_value_take_render_node;
+
 shared static this()
 {
   // BlendNode
@@ -998,12 +998,6 @@ shared static this()
   gidLink(cast(void**)&gsk_gl_shader_node_get_child, "gsk_gl_shader_node_get_child", LIBS);
   gidLink(cast(void**)&gsk_gl_shader_node_get_n_children, "gsk_gl_shader_node_get_n_children", LIBS);
   gidLink(cast(void**)&gsk_gl_shader_node_get_shader, "gsk_gl_shader_node_get_shader", LIBS);
-
-  // Global
-  gidLink(cast(void**)&gsk_value_dup_render_node, "gsk_value_dup_render_node", LIBS);
-  gidLink(cast(void**)&gsk_value_get_render_node, "gsk_value_get_render_node", LIBS);
-  gidLink(cast(void**)&gsk_value_set_render_node, "gsk_value_set_render_node", LIBS);
-  gidLink(cast(void**)&gsk_value_take_render_node, "gsk_value_take_render_node", LIBS);
 
   // InsetShadowNode
   gidLink(cast(void**)&gsk_inset_shadow_node_get_type, "gsk_inset_shadow_node_get_type", LIBS);
@@ -1304,4 +1298,10 @@ shared static this()
   // VulkanRenderer
   gidLink(cast(void**)&gsk_vulkan_renderer_get_type, "gsk_vulkan_renderer_get_type", LIBS);
   gidLink(cast(void**)&gsk_vulkan_renderer_new, "gsk_vulkan_renderer_new", LIBS);
+
+  // global
+  gidLink(cast(void**)&gsk_value_dup_render_node, "gsk_value_dup_render_node", LIBS);
+  gidLink(cast(void**)&gsk_value_get_render_node, "gsk_value_get_render_node", LIBS);
+  gidLink(cast(void**)&gsk_value_set_render_node, "gsk_value_set_render_node", LIBS);
+  gidLink(cast(void**)&gsk_value_take_render_node, "gsk_value_take_render_node", LIBS);
 }

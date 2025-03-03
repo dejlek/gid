@@ -1,6 +1,6 @@
 module gio.dbus_object_skeleton;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_interface_skeleton;
@@ -17,7 +17,7 @@ import gobject.object;
  * dynamic and change at runtime.
  * This type is intended to be used with [gio.dbus_object_manager.DBusObjectManager].
  */
-class DBusObjectSkeleton : ObjectG, DBusObject
+class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -61,7 +61,7 @@ class DBusObjectSkeleton : ObjectG, DBusObject
    * Params:
    *   interface_ = A #GDBusInterfaceSkeleton.
    */
-  void addInterface(DBusInterfaceSkeleton interface_)
+  void addInterface(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_)
   {
     g_dbus_object_skeleton_add_interface(cast(GDBusObjectSkeleton*)cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_.cPtr(No.Dup) : null);
   }
@@ -81,7 +81,7 @@ class DBusObjectSkeleton : ObjectG, DBusObject
    * Params:
    *   interface_ = A #GDBusInterfaceSkeleton.
    */
-  void removeInterface(DBusInterfaceSkeleton interface_)
+  void removeInterface(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_)
   {
     g_dbus_object_skeleton_remove_interface(cast(GDBusObjectSkeleton*)cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_.cPtr(No.Dup) : null);
   }
@@ -123,8 +123,8 @@ class DBusObjectSkeleton : ObjectG, DBusObject
    *   dBusObjectSkeleton = the instance the signal is connected to
    * Returns: %TRUE if the call is authorized, %FALSE otherwise.
    */
-  alias AuthorizeMethodCallbackDlg = bool delegate(DBusInterfaceSkeleton interface_, DBusMethodInvocation invocation, DBusObjectSkeleton dBusObjectSkeleton);
-  alias AuthorizeMethodCallbackFunc = bool function(DBusInterfaceSkeleton interface_, DBusMethodInvocation invocation, DBusObjectSkeleton dBusObjectSkeleton);
+  alias AuthorizeMethodCallbackDlg = bool delegate(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_, gio.dbus_method_invocation.DBusMethodInvocation invocation, gio.dbus_object_skeleton.DBusObjectSkeleton dBusObjectSkeleton);
+  alias AuthorizeMethodCallbackFunc = bool function(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_, gio.dbus_method_invocation.DBusMethodInvocation invocation, gio.dbus_object_skeleton.DBusObjectSkeleton dBusObjectSkeleton);
 
   /**
    * Connect to AuthorizeMethod signal.
@@ -141,9 +141,9 @@ class DBusObjectSkeleton : ObjectG, DBusObject
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto dBusObjectSkeleton = getVal!DBusObjectSkeleton(_paramVals);
-      auto interface_ = getVal!DBusInterfaceSkeleton(&_paramVals[1]);
-      auto invocation = getVal!DBusMethodInvocation(&_paramVals[2]);
+      auto dBusObjectSkeleton = getVal!(gio.dbus_object_skeleton.DBusObjectSkeleton)(_paramVals);
+      auto interface_ = getVal!(gio.dbus_interface_skeleton.DBusInterfaceSkeleton)(&_paramVals[1]);
+      auto invocation = getVal!(gio.dbus_method_invocation.DBusMethodInvocation)(&_paramVals[2]);
       _retval = _dClosure.dlg(interface_, invocation, dBusObjectSkeleton);
       setVal!bool(_returnValue, _retval);
     }

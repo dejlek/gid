@@ -1,6 +1,6 @@
 module soup.cookie_jar_text;
 
-import gid.global;
+import gid.gid;
 import soup.c.functions;
 import soup.c.types;
 import soup.cookie_jar;
@@ -13,7 +13,7 @@ import soup.types;
  * #SoupCookieJarText is a class@CookieJar that reads cookies from and writes
  * them to a text file in format similar to Mozilla's "cookies.txt".
  */
-class CookieJarText : CookieJar
+class CookieJarText : soup.cookie_jar.CookieJar
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -1,17 +1,16 @@
 module gio.vfs;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.file;
-import gio.file_mixin;
 import gio.types;
 import gobject.object;
 
 /**
  * Entry point for using GIO functionality.
  */
-class Vfs : ObjectG
+class Vfs : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -35,11 +34,11 @@ class Vfs : ObjectG
    * Returns: a #GVfs, which will be the local
    *   file system #GVfs if no other implementation is available.
    */
-  static Vfs getDefault()
+  static gio.vfs.Vfs getDefault()
   {
     GVfs* _cretval;
     _cretval = g_vfs_get_default();
-    auto _retval = ObjectG.getDObject!Vfs(cast(GVfs*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.vfs.Vfs)(cast(GVfs*)_cretval, No.Take);
     return _retval;
   }
 
@@ -47,11 +46,11 @@ class Vfs : ObjectG
    * Gets the local #GVfs for the system.
    * Returns: a #GVfs.
    */
-  static Vfs getLocal()
+  static gio.vfs.Vfs getLocal()
   {
     GVfs* _cretval;
     _cretval = g_vfs_get_local();
-    auto _retval = ObjectG.getDObject!Vfs(cast(GVfs*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.vfs.Vfs)(cast(GVfs*)_cretval, No.Take);
     return _retval;
   }
 
@@ -62,12 +61,12 @@ class Vfs : ObjectG
    * Returns: a #GFile.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  File getFileForPath(string path)
+  gio.file.File getFileForPath(string path)
   {
     GFile* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_vfs_get_file_for_path(cast(GVfs*)cPtr, _path);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -81,12 +80,12 @@ class Vfs : ObjectG
    * Returns: a #GFile.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  File getFileForUri(string uri)
+  gio.file.File getFileForUri(string uri)
   {
     GFile* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
     _cretval = g_vfs_get_file_for_uri(cast(GVfs*)cPtr, _uri);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -135,12 +134,12 @@ class Vfs : ObjectG
    * Returns: a #GFile for the given parse_name.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  File parseName(string parseName)
+  gio.file.File parseName(string parseName)
   {
     GFile* _cretval;
     const(char)* _parseName = parseName.toCString(No.Alloc);
     _cretval = g_vfs_parse_name(cast(GVfs*)cPtr, _parseName);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -169,15 +168,15 @@ class Vfs : ObjectG
    * Returns: %TRUE if scheme was successfully registered, or %FALSE if a handler
    *   for scheme already exists.
    */
-  bool registerUriScheme(string scheme, VfsFileLookupFunc uriFunc, VfsFileLookupFunc parseNameFunc)
+  bool registerUriScheme(string scheme, gio.types.VfsFileLookupFunc uriFunc, gio.types.VfsFileLookupFunc parseNameFunc)
   {
     extern(C) GFile* _uriFuncCallback(GVfs* vfs, const(char)* identifier, void* userData)
     {
-      File _dretval;
-      auto _dlg = cast(VfsFileLookupFunc*)userData;
+      gio.file.File _dretval;
+      auto _dlg = cast(gio.types.VfsFileLookupFunc*)userData;
       string _identifier = identifier.fromCString(No.Free);
 
-      _dretval = (*_dlg)(ObjectG.getDObject!Vfs(cast(void*)vfs, No.Take), _identifier);
+      _dretval = (*_dlg)(ObjectG.getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.Take), _identifier);
       GFile* _retval = cast(GFile*)(cast(ObjectG)_dretval).cPtr(Yes.Dup);
 
       return _retval;
@@ -186,11 +185,11 @@ class Vfs : ObjectG
 
     extern(C) GFile* _parseNameFuncCallback(GVfs* vfs, const(char)* identifier, void* userData)
     {
-      File _dretval;
-      auto _dlg = cast(VfsFileLookupFunc*)userData;
+      gio.file.File _dretval;
+      auto _dlg = cast(gio.types.VfsFileLookupFunc*)userData;
       string _identifier = identifier.fromCString(No.Free);
 
-      _dretval = (*_dlg)(ObjectG.getDObject!Vfs(cast(void*)vfs, No.Take), _identifier);
+      _dretval = (*_dlg)(ObjectG.getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.Take), _identifier);
       GFile* _retval = cast(GFile*)(cast(ObjectG)_dretval).cPtr(Yes.Dup);
 
       return _retval;

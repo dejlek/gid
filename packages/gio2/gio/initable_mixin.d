@@ -1,7 +1,7 @@
 module gio.initable_mixin;
 
 public import gio.initable_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
@@ -71,7 +71,7 @@ template InitableT()
    * Returns: %TRUE if successful. If an error has occurred, this function will
    *   return %FALSE and set error appropriately if present.
    */
-  override bool init_(Cancellable cancellable)
+  override bool init_(gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;

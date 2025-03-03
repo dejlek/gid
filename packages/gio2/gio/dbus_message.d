@@ -1,6 +1,6 @@
 module gio.dbus_message;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -13,7 +13,7 @@ import gobject.object;
  * A type for representing D-Bus messages that can be sent or received
  * on a [gio.dbus_connection.DBusConnection].
  */
-class DBusMessage : ObjectG
+class DBusMessage : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -55,7 +55,7 @@ class DBusMessage : ObjectG
    * Returns: A new #GDBusMessage or %NULL if error is set. Free with
    *   [gobject.object.ObjectG.unref].
    */
-  static DBusMessage newFromBlob(ubyte[] blob, DBusCapabilityFlags capabilities)
+  static gio.dbus_message.DBusMessage newFromBlob(ubyte[] blob, gio.types.DBusCapabilityFlags capabilities)
   {
     GDBusMessage* _cretval;
     size_t _blobLen;
@@ -67,7 +67,7 @@ class DBusMessage : ObjectG
     _cretval = g_dbus_message_new_from_blob(_blob, _blobLen, capabilities, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!DBusMessage(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class DBusMessage : ObjectG
    *   method = A valid method name.
    * Returns: A #GDBusMessage. Free with [gobject.object.ObjectG.unref].
    */
-  static DBusMessage newMethodCall(string name, string path, string interface_, string method)
+  static gio.dbus_message.DBusMessage newMethodCall(string name, string path, string interface_, string method)
   {
     GDBusMessage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -88,7 +88,7 @@ class DBusMessage : ObjectG
     const(char)* _interface_ = interface_.toCString(No.Alloc);
     const(char)* _method = method.toCString(No.Alloc);
     _cretval = g_dbus_message_new_method_call(_name, _path, _interface_, _method);
-    auto _retval = ObjectG.getDObject!DBusMessage(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -100,14 +100,14 @@ class DBusMessage : ObjectG
    *   signal = A valid signal name.
    * Returns: A #GDBusMessage. Free with [gobject.object.ObjectG.unref].
    */
-  static DBusMessage newSignal(string path, string interface_, string signal)
+  static gio.dbus_message.DBusMessage newSignal(string path, string interface_, string signal)
   {
     GDBusMessage* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     const(char)* _interface_ = interface_.toCString(No.Alloc);
     const(char)* _signal = signal.toCString(No.Alloc);
     _cretval = g_dbus_message_new_signal(_path, _interface_, _signal);
-    auto _retval = ObjectG.getDObject!DBusMessage(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -144,14 +144,14 @@ class DBusMessage : ObjectG
    * Returns: A new #GDBusMessage or %NULL if error is set.
    *   Free with [gobject.object.ObjectG.unref].
    */
-  DBusMessage copy()
+  gio.dbus_message.DBusMessage copy()
   {
     GDBusMessage* _cretval;
     GError *_err;
     _cretval = g_dbus_message_copy(cast(GDBusMessage*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!DBusMessage(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class DBusMessage : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_arg0(cast(GDBusMessage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class DBusMessage : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_arg0_path(cast(GDBusMessage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -189,11 +189,11 @@ class DBusMessage : ObjectG
    * Returns: A #GVariant or %NULL if the body is
    *   empty. Do not free, it is owned by message.
    */
-  VariantG getBody()
+  glib.variant.VariantG getBody()
   {
     VariantC* _cretval;
     _cretval = g_dbus_message_get_body(cast(GDBusMessage*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -201,11 +201,11 @@ class DBusMessage : ObjectG
    * Gets the byte order of message.
    * Returns: The byte order.
    */
-  DBusMessageByteOrder getByteOrder()
+  gio.types.DBusMessageByteOrder getByteOrder()
   {
     GDBusMessageByteOrder _cretval;
     _cretval = g_dbus_message_get_byte_order(cast(GDBusMessage*)cPtr);
-    DBusMessageByteOrder _retval = cast(DBusMessageByteOrder)_cretval;
+    gio.types.DBusMessageByteOrder _retval = cast(gio.types.DBusMessageByteOrder)_cretval;
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class DBusMessage : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_destination(cast(GDBusMessage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class DBusMessage : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_error_name(cast(GDBusMessage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -237,11 +237,11 @@ class DBusMessage : ObjectG
    * Gets the flags for message.
    * Returns: Flags that are set $(LPAREN)typically values from the #GDBusMessageFlags enumeration bitwise ORed together$(RPAREN).
    */
-  DBusMessageFlags getFlags()
+  gio.types.DBusMessageFlags getFlags()
   {
     GDBusMessageFlags _cretval;
     _cretval = g_dbus_message_get_flags(cast(GDBusMessage*)cPtr);
-    DBusMessageFlags _retval = cast(DBusMessageFlags)_cretval;
+    gio.types.DBusMessageFlags _retval = cast(gio.types.DBusMessageFlags)_cretval;
     return _retval;
   }
 
@@ -254,11 +254,11 @@ class DBusMessage : ObjectG
    * Returns: A #GVariant with the value if the header was found, %NULL
    *   otherwise. Do not free, it is owned by message.
    */
-  VariantG getHeader(DBusMessageHeaderField headerField)
+  glib.variant.VariantG getHeader(gio.types.DBusMessageHeaderField headerField)
   {
     VariantC* _cretval;
     _cretval = g_dbus_message_get_header(cast(GDBusMessage*)cPtr, headerField);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class DBusMessage : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_interface(cast(GDBusMessage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -317,7 +317,7 @@ class DBusMessage : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_member(cast(GDBusMessage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -325,11 +325,11 @@ class DBusMessage : ObjectG
    * Gets the type of message.
    * Returns: A 8-bit unsigned integer $(LPAREN)typically a value from the #GDBusMessageType enumeration$(RPAREN).
    */
-  DBusMessageType getMessageType()
+  gio.types.DBusMessageType getMessageType()
   {
     GDBusMessageType _cretval;
     _cretval = g_dbus_message_get_message_type(cast(GDBusMessage*)cPtr);
-    DBusMessageType _retval = cast(DBusMessageType)_cretval;
+    gio.types.DBusMessageType _retval = cast(gio.types.DBusMessageType)_cretval;
     return _retval;
   }
 
@@ -352,7 +352,7 @@ class DBusMessage : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_path(cast(GDBusMessage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -375,7 +375,7 @@ class DBusMessage : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_sender(cast(GDBusMessage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -399,7 +399,7 @@ class DBusMessage : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_signature(cast(GDBusMessage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -414,11 +414,11 @@ class DBusMessage : ObjectG
    * Returns: A #GUnixFDList or %NULL if no file descriptors are
    *   associated. Do not free, this object is owned by message.
    */
-  UnixFDList getUnixFdList()
+  gio.unix_fdlist.UnixFDList getUnixFdList()
   {
     GUnixFDList* _cretval;
     _cretval = g_dbus_message_get_unix_fd_list(cast(GDBusMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!UnixFDList(cast(GUnixFDList*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.Take);
     return _retval;
   }
 
@@ -437,13 +437,13 @@ class DBusMessage : ObjectG
    *   errorMessage = The D-Bus error message.
    * Returns: A #GDBusMessage. Free with [gobject.object.ObjectG.unref].
    */
-  DBusMessage newMethodErrorLiteral(string errorName, string errorMessage)
+  gio.dbus_message.DBusMessage newMethodErrorLiteral(string errorName, string errorMessage)
   {
     GDBusMessage* _cretval;
     const(char)* _errorName = errorName.toCString(No.Alloc);
     const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
     _cretval = g_dbus_message_new_method_error_literal(cast(GDBusMessage*)cPtr, _errorName, _errorMessage);
-    auto _retval = ObjectG.getDObject!DBusMessage(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -451,11 +451,11 @@ class DBusMessage : ObjectG
    * Creates a new #GDBusMessage that is a reply to method_call_message.
    * Returns: #GDBusMessage. Free with [gobject.object.ObjectG.unref].
    */
-  DBusMessage newMethodReply()
+  gio.dbus_message.DBusMessage newMethodReply()
   {
     GDBusMessage* _cretval;
     _cretval = g_dbus_message_new_method_reply(cast(GDBusMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!DBusMessage(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -499,7 +499,7 @@ class DBusMessage : ObjectG
   {
     char* _cretval;
     _cretval = g_dbus_message_print(cast(GDBusMessage*)cPtr, indent);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -511,7 +511,7 @@ class DBusMessage : ObjectG
    * Params:
    *   body_ = Either %NULL or a #GVariant that is a tuple.
    */
-  void setBody(VariantG body_)
+  void setBody(glib.variant.VariantG body_)
   {
     g_dbus_message_set_body(cast(GDBusMessage*)cPtr, body_ ? cast(VariantC*)body_.cPtr(No.Dup) : null);
   }
@@ -521,7 +521,7 @@ class DBusMessage : ObjectG
    * Params:
    *   byteOrder = The byte order.
    */
-  void setByteOrder(DBusMessageByteOrder byteOrder)
+  void setByteOrder(gio.types.DBusMessageByteOrder byteOrder)
   {
     g_dbus_message_set_byte_order(cast(GDBusMessage*)cPtr, byteOrder);
   }
@@ -554,7 +554,7 @@ class DBusMessage : ObjectG
    *   flags = Flags for message that are set $(LPAREN)typically values from the #GDBusMessageFlags
    *     enumeration bitwise ORed together$(RPAREN).
    */
-  void setFlags(DBusMessageFlags flags)
+  void setFlags(gio.types.DBusMessageFlags flags)
   {
     g_dbus_message_set_flags(cast(GDBusMessage*)cPtr, flags);
   }
@@ -566,7 +566,7 @@ class DBusMessage : ObjectG
    *   headerField = A 8-bit unsigned integer $(LPAREN)typically a value from the #GDBusMessageHeaderField enumeration$(RPAREN)
    *   value = A #GVariant to set the header field or %NULL to clear the header field.
    */
-  void setHeader(DBusMessageHeaderField headerField, VariantG value)
+  void setHeader(gio.types.DBusMessageHeaderField headerField, glib.variant.VariantG value)
   {
     g_dbus_message_set_header(cast(GDBusMessage*)cPtr, headerField, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
   }
@@ -598,7 +598,7 @@ class DBusMessage : ObjectG
    * Params:
    *   type = A 8-bit unsigned integer $(LPAREN)typically a value from the #GDBusMessageType enumeration$(RPAREN).
    */
-  void setMessageType(DBusMessageType type)
+  void setMessageType(gio.types.DBusMessageType type)
   {
     g_dbus_message_set_message_type(cast(GDBusMessage*)cPtr, type);
   }
@@ -679,7 +679,7 @@ class DBusMessage : ObjectG
    * Params:
    *   fdList = A #GUnixFDList or %NULL.
    */
-  void setUnixFdList(UnixFDList fdList)
+  void setUnixFdList(gio.unix_fdlist.UnixFDList fdList)
   {
     g_dbus_message_set_unix_fd_list(cast(GDBusMessage*)cPtr, fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
   }
@@ -693,7 +693,7 @@ class DBusMessage : ObjectG
    *   valid binary D-Bus message of out_size bytes generated by message
    *   or %NULL if error is set. Free with [glib.global.gfree].
    */
-  ubyte[] toBlob(DBusCapabilityFlags capabilities)
+  ubyte[] toBlob(gio.types.DBusCapabilityFlags capabilities)
   {
     ubyte* _cretval;
     size_t _cretlength;

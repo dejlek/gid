@@ -1,6 +1,6 @@
 module gtksource.style_scheme_chooser_widget;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -24,7 +24,7 @@ import gtksource.types;
  * To get the selected style scheme
  * use [gtksource.style_scheme_chooser.StyleSchemeChooser.getStyleScheme].
  */
-class StyleSchemeChooserWidget : Widget, StyleSchemeChooser
+class StyleSchemeChooserWidget : gtk.widget.Widget, gtksource.style_scheme_chooser.StyleSchemeChooser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

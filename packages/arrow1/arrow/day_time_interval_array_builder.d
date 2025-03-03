@@ -5,10 +5,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.day_millisecond;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class DayTimeIntervalArrayBuilder : ArrayBuilder
+class DayTimeIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -34,7 +34,7 @@ class DayTimeIntervalArrayBuilder : ArrayBuilder
     this(_cretval, Yes.Take);
   }
 
-  bool appendValue(DayMillisecond value)
+  bool appendValue(arrow.day_millisecond.DayMillisecond value)
   {
     bool _retval;
     GError *_err;
@@ -55,7 +55,7 @@ class DayTimeIntervalArrayBuilder : ArrayBuilder
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendValues(DayMillisecond[] values, bool[] isValids)
+  bool appendValues(arrow.day_millisecond.DayMillisecond[] values, bool[] isValids)
   {
     bool _retval;
     long _valuesLength;

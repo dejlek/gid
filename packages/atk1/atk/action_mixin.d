@@ -4,7 +4,7 @@ public import atk.action_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;
 public import atk.types;
-public import gid.global;
+public import gid.gid;
 
 /**
  * The ATK interface provided by UI components
@@ -52,7 +52,7 @@ template ActionT()
   {
     const(char)* _cretval;
     _cretval = atk_action_get_description(cast(AtkAction*)cPtr, i);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -86,7 +86,7 @@ template ActionT()
   {
     const(char)* _cretval;
     _cretval = atk_action_get_keybinding(cast(AtkAction*)cPtr, i);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ template ActionT()
   {
     const(char)* _cretval;
     _cretval = atk_action_get_localized_name(cast(AtkAction*)cPtr, i);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ template ActionT()
   {
     const(char)* _cretval;
     _cretval = atk_action_get_name(cast(AtkAction*)cPtr, i);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

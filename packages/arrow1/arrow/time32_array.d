@@ -6,9 +6,9 @@ import arrow.c.types;
 import arrow.numeric_array;
 import arrow.time32_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class Time32Array : NumericArray
+class Time32Array : arrow.numeric_array.NumericArray
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,7 +27,7 @@ class Time32Array : NumericArray
     return getType();
   }
 
-  this(Time32DataType dataType, long length, Buffer data, Buffer nullBitmap, long nNulls)
+  this(arrow.time32_data_type.Time32DataType dataType, long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowTime32Array* _cretval;
     _cretval = garrow_time32_array_new(dataType ? cast(GArrowTime32DataType*)dataType.cPtr(No.Dup) : null, length, data ? cast(GArrowBuffer*)data.cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);

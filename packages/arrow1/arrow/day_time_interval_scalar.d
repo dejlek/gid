@@ -5,10 +5,10 @@ import arrow.c.types;
 import arrow.day_millisecond;
 import arrow.scalar;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class DayTimeIntervalScalar : Scalar
+class DayTimeIntervalScalar : arrow.scalar.Scalar
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,18 +27,18 @@ class DayTimeIntervalScalar : Scalar
     return getType();
   }
 
-  this(DayMillisecond value)
+  this(arrow.day_millisecond.DayMillisecond value)
   {
     GArrowDayTimeIntervalScalar* _cretval;
     _cretval = garrow_day_time_interval_scalar_new(value ? cast(GArrowDayMillisecond*)value.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
-  DayMillisecond getValue()
+  arrow.day_millisecond.DayMillisecond getValue()
   {
     GArrowDayMillisecond* _cretval;
     _cretval = garrow_day_time_interval_scalar_get_value(cast(GArrowDayTimeIntervalScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!DayMillisecond(cast(GArrowDayMillisecond*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.day_millisecond.DayMillisecond)(cast(GArrowDayMillisecond*)_cretval, No.Take);
     return _retval;
   }
 }

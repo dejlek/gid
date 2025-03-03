@@ -9,11 +9,11 @@ import arrowdataset.file_format;
 import arrowdataset.file_system_dataset;
 import arrowdataset.finish_options;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class FileSystemDatasetFactory : DatasetFactory
+class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -32,7 +32,7 @@ class FileSystemDatasetFactory : DatasetFactory
     return getType();
   }
 
-  this(FileFormat fileFormat)
+  this(arrowdataset.file_format.FileFormat fileFormat)
   {
     GADatasetFileSystemDatasetFactory* _cretval;
     _cretval = gadataset_file_system_dataset_factory_new(fileFormat ? cast(GADatasetFileFormat*)fileFormat.cPtr(No.Dup) : null);
@@ -50,18 +50,18 @@ class FileSystemDatasetFactory : DatasetFactory
     return _retval;
   }
 
-  override FileSystemDataset finish(FinishOptions options)
+  override arrowdataset.file_system_dataset.FileSystemDataset finish(arrowdataset.finish_options.FinishOptions options)
   {
     GADatasetFileSystemDataset* _cretval;
     GError *_err;
     _cretval = gadataset_file_system_dataset_factory_finish(cast(GADatasetFileSystemDatasetFactory*)cPtr, options ? cast(GADatasetFinishOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!FileSystemDataset(cast(GADatasetFileSystemDataset*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowdataset.file_system_dataset.FileSystemDataset)(cast(GADatasetFileSystemDataset*)_cretval, Yes.Take);
     return _retval;
   }
 
-  bool setFileSystem(FileSystem fileSystem)
+  bool setFileSystem(arrow.file_system.FileSystem fileSystem)
   {
     bool _retval;
     GError *_err;

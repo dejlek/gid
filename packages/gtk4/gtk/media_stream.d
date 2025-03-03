@@ -3,7 +3,7 @@ module gtk.media_stream;
 import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.surface;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 import gtk.c.functions;
@@ -27,7 +27,7 @@ import gtk.types;
  * [gtk.media_stream.MediaStream.error],
  * [gtk.media_stream.MediaStream.errorValist].
  */
-class MediaStream : ObjectG, Paintable
+class MediaStream : gobject.object.ObjectG, gdk.paintable.Paintable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -61,7 +61,7 @@ class MediaStream : ObjectG, Paintable
    * Params:
    *   error = the `GError` to set
    */
-  void gerror(ErrorG error)
+  void gerror(glib.error.ErrorG error)
   {
     gtk_media_stream_gerror(cast(GtkMediaStream*)cPtr, error ? cast(GError*)error.cPtr : null);
   }
@@ -104,11 +104,11 @@ class MediaStream : ObjectG, Paintable
    * Returns: %NULL if not in an
    *   error state or the `GError` of the stream
    */
-  ErrorG getError()
+  glib.error.ErrorG getError()
   {
     const(GError)* _cretval;
     _cretval = gtk_media_stream_get_error(cast(GtkMediaStream*)cPtr);
-    auto _retval = _cretval ? new ErrorG(cast(GError*)_cretval) : null;
+    auto _retval = _cretval ? new glib.error.ErrorG(cast(GError*)_cretval) : null;
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class MediaStream : ObjectG, Paintable
    * Params:
    *   surface = a `GdkSurface`
    */
-  void realize(Surface surface)
+  void realize(gdk.surface.Surface surface)
   {
     gtk_media_stream_realize(cast(GtkMediaStream*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
   }
@@ -417,7 +417,7 @@ class MediaStream : ObjectG, Paintable
    * Params:
    *   surface = the `GdkSurface` the stream was realized with
    */
-  void unrealize(Surface surface)
+  void unrealize(gdk.surface.Surface surface)
   {
     gtk_media_stream_unrealize(cast(GtkMediaStream*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
   }

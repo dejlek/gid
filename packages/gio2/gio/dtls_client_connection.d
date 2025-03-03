@@ -1,13 +1,11 @@
 module gio.dtls_client_connection;
 
 public import gio.dtls_client_connection_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.datagram_based;
-import gio.datagram_based_mixin;
 import gio.socket_connectable;
-import gio.socket_connectable_mixin;
 import gio.types;
 import glib.error;
 import gobject.object;
@@ -34,14 +32,14 @@ interface DtlsClientConnection
    * Returns: the new
    *   #GDtlsClientConnection, or %NULL on error
    */
-  static DtlsClientConnection new_(DatagramBased baseSocket, SocketConnectable serverIdentity)
+  static gio.dtls_client_connection.DtlsClientConnection new_(gio.datagram_based.DatagramBased baseSocket, gio.socket_connectable.SocketConnectable serverIdentity)
   {
     GDatagramBased* _cretval;
     GError *_err;
     _cretval = g_dtls_client_connection_new(baseSocket ? cast(GDatagramBased*)(cast(ObjectG)baseSocket).cPtr(No.Dup) : null, serverIdentity ? cast(GSocketConnectable*)(cast(ObjectG)serverIdentity).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!DtlsClientConnection(cast(GDatagramBased*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dtls_client_connection.DtlsClientConnection)(cast(GDatagramBased*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -51,7 +49,7 @@ interface DtlsClientConnection
    *   expected server identity, or %NULL if the expected identity is not
    *   known.
    */
-  SocketConnectable getServerIdentity();
+  gio.socket_connectable.SocketConnectable getServerIdentity();
 
   /**
    * Gets conn's validation flags
@@ -62,7 +60,7 @@ interface DtlsClientConnection
 
    * Deprecated: Do not attempt to ignore validation errors.
    */
-  TlsCertificateFlags getValidationFlags();
+  gio.types.TlsCertificateFlags getValidationFlags();
 
   /**
    * Sets conn's expected server identity, which is used both to tell
@@ -72,7 +70,7 @@ interface DtlsClientConnection
    * Params:
    *   identity = a #GSocketConnectable describing the expected server identity
    */
-  void setServerIdentity(SocketConnectable identity);
+  void setServerIdentity(gio.socket_connectable.SocketConnectable identity);
 
   /**
    * Sets conn's validation flags, to override the default set of
@@ -86,5 +84,5 @@ interface DtlsClientConnection
 
    * Deprecated: Do not attempt to ignore validation errors.
    */
-  void setValidationFlags(TlsCertificateFlags flags);
+  void setValidationFlags(gio.types.TlsCertificateFlags flags);
 }

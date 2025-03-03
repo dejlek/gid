@@ -5,9 +5,9 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.struct_array;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class MapScalar : BaseListScalar
+class MapScalar : arrow.base_list_scalar.BaseListScalar
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class MapScalar : BaseListScalar
     return getType();
   }
 
-  this(StructArray value)
+  this(arrow.struct_array.StructArray value)
   {
     GArrowMapScalar* _cretval;
     _cretval = garrow_map_scalar_new(value ? cast(GArrowStructArray*)value.cPtr(No.Dup) : null);

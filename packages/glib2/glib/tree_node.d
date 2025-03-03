@@ -1,6 +1,6 @@
 module glib.tree_node;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -43,11 +43,11 @@ class TreeNode
    * if the passed node was already the last one.
    * Returns: the next node in the tree
    */
-  TreeNode next()
+  glib.tree_node.TreeNode next()
   {
     GTreeNode* _cretval;
     _cretval = g_tree_node_next(cast(GTreeNode*)cPtr);
-    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.tree_node.TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -56,11 +56,11 @@ class TreeNode
    * if the passed node was already the first one.
    * Returns: the previous node in the tree
    */
-  TreeNode previous()
+  glib.tree_node.TreeNode previous()
   {
     GTreeNode* _cretval;
     _cretval = g_tree_node_previous(cast(GTreeNode*)cPtr);
-    auto _retval = _cretval ? new TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.tree_node.TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
     return _retval;
   }
 

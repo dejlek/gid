@@ -1,6 +1,6 @@
 module gtk.center_layout;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -15,7 +15,7 @@ import gtk.widget;
  * widget at the end.
  * The center widget is centered regarding the full width of the layout's.
  */
-class CenterLayout : LayoutManager
+class CenterLayout : gtk.layout_manager.LayoutManager
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -49,11 +49,11 @@ class CenterLayout : LayoutManager
    * Returns the baseline position of the layout.
    * Returns: The current baseline position of self.
    */
-  BaselinePosition getBaselinePosition()
+  gtk.types.BaselinePosition getBaselinePosition()
   {
     GtkBaselinePosition _cretval;
     _cretval = gtk_center_layout_get_baseline_position(cast(GtkCenterLayout*)cPtr);
-    BaselinePosition _retval = cast(BaselinePosition)_cretval;
+    gtk.types.BaselinePosition _retval = cast(gtk.types.BaselinePosition)_cretval;
     return _retval;
   }
 
@@ -61,11 +61,11 @@ class CenterLayout : LayoutManager
    * Returns the center widget of the layout.
    * Returns: the current center widget of self
    */
-  Widget getCenterWidget()
+  gtk.widget.Widget getCenterWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_layout_get_center_widget(cast(GtkCenterLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -73,11 +73,11 @@ class CenterLayout : LayoutManager
    * Returns the end widget of the layout.
    * Returns: the current end widget of self
    */
-  Widget getEndWidget()
+  gtk.widget.Widget getEndWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_layout_get_end_widget(cast(GtkCenterLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -85,11 +85,11 @@ class CenterLayout : LayoutManager
    * Gets the current orienration of the layout manager.
    * Returns: The current orientation of self
    */
-  Orientation getOrientation()
+  gtk.types.Orientation getOrientation()
   {
     GtkOrientation _cretval;
     _cretval = gtk_center_layout_get_orientation(cast(GtkCenterLayout*)cPtr);
-    Orientation _retval = cast(Orientation)_cretval;
+    gtk.types.Orientation _retval = cast(gtk.types.Orientation)_cretval;
     return _retval;
   }
 
@@ -108,11 +108,11 @@ class CenterLayout : LayoutManager
    * Returns the start widget of the layout.
    * Returns: The current start widget of self
    */
-  Widget getStartWidget()
+  gtk.widget.Widget getStartWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_layout_get_start_widget(cast(GtkCenterLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class CenterLayout : LayoutManager
    * Params:
    *   baselinePosition = the new baseline position
    */
-  void setBaselinePosition(BaselinePosition baselinePosition)
+  void setBaselinePosition(gtk.types.BaselinePosition baselinePosition)
   {
     gtk_center_layout_set_baseline_position(cast(GtkCenterLayout*)cPtr, baselinePosition);
   }
@@ -132,7 +132,7 @@ class CenterLayout : LayoutManager
    * Params:
    *   widget = the new center widget
    */
-  void setCenterWidget(Widget widget)
+  void setCenterWidget(gtk.widget.Widget widget)
   {
     gtk_center_layout_set_center_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -143,7 +143,7 @@ class CenterLayout : LayoutManager
    * Params:
    *   widget = the new end widget
    */
-  void setEndWidget(Widget widget)
+  void setEndWidget(gtk.widget.Widget widget)
   {
     gtk_center_layout_set_end_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -153,7 +153,7 @@ class CenterLayout : LayoutManager
    * Params:
    *   orientation = the new orientation
    */
-  void setOrientation(Orientation orientation)
+  void setOrientation(gtk.types.Orientation orientation)
   {
     gtk_center_layout_set_orientation(cast(GtkCenterLayout*)cPtr, orientation);
   }
@@ -179,7 +179,7 @@ class CenterLayout : LayoutManager
    * Params:
    *   widget = the new start widget
    */
-  void setStartWidget(Widget widget)
+  void setStartWidget(gtk.widget.Widget widget)
   {
     gtk_center_layout_set_start_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }

@@ -1,9 +1,8 @@
 module gtk.app_chooser_mixin;
 
 public import gtk.app_chooser_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.app_info;
-public import gio.app_info_mixin;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -41,11 +40,11 @@ template AppChooserT()
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  override AppInfo getAppInfo()
+  override gio.app_info.AppInfo getAppInfo()
   {
     GAppInfo* _cretval;
     _cretval = gtk_app_chooser_get_app_info(cast(GtkAppChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -60,7 +59,7 @@ template AppChooserT()
   {
     char* _cretval;
     _cretval = gtk_app_chooser_get_content_type(cast(GtkAppChooser*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 

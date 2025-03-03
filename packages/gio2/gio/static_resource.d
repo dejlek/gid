@@ -1,6 +1,6 @@
 module gio.static_resource;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.resource;
@@ -48,11 +48,11 @@ class StaticResource
    * and is not typically used by other code.
    * Returns: a #GResource
    */
-  Resource getResource()
+  gio.resource.Resource getResource()
   {
     GResource* _cretval;
     _cretval = g_static_resource_get_resource(cast(GStaticResource*)cPtr);
-    auto _retval = _cretval ? new Resource(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gio.resource.Resource(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

@@ -5,10 +5,10 @@ import arrow.c.types;
 import arrow.input_stream;
 import arrow.record_batch_reader;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class RecordBatchStreamReader : RecordBatchReader
+class RecordBatchStreamReader : arrow.record_batch_reader.RecordBatchReader
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,7 +27,7 @@ class RecordBatchStreamReader : RecordBatchReader
     return getType();
   }
 
-  this(InputStream stream)
+  this(arrow.input_stream.InputStream stream)
   {
     GArrowRecordBatchStreamReader* _cretval;
     GError *_err;

@@ -2,7 +2,7 @@ module gtksource.gutter_renderer;
 
 import gdk.rectangle;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -48,7 +48,7 @@ import gtksource.view;
  * [gtksource.gutter_renderer.GutterRenderer.alignCell] for a given line number with the
  * width and height measurement of the content they width to render.
  */
-class GutterRenderer : Widget
+class GutterRenderer : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -67,7 +67,7 @@ class GutterRenderer : Widget
     return getType();
   }
 
-  alias activate = Widget.activate;
+  alias activate = gtk.widget.Widget.activate;
 
   /**
    * Emits the signalGutterRenderer::activate signal of the renderer. This is
@@ -79,9 +79,9 @@ class GutterRenderer : Widget
    *   state = a #GdkModifierType
    *   nPresses = the number of button presses
    */
-  void activate(TextIter iter, Rectangle area, uint button, ModifierType state, int nPresses)
+  void activate(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, uint button, gdk.types.ModifierType state, int nPresses)
   {
-    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, area ? cast(GdkRectangle*)area.cPtr(No.Dup) : null, button, state, nPresses);
+    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, area ? cast(const(GdkRectangle)*)area.cPtr(No.Dup) : null, button, state, nPresses);
   }
 
   /**
@@ -110,11 +110,11 @@ class GutterRenderer : Widget
    * propertyGutterRenderer:yalign$(RPAREN).
    * Returns: a #GtkSourceGutterRendererAlignmentMode
    */
-  GutterRendererAlignmentMode getAlignmentMode()
+  gtksource.types.GutterRendererAlignmentMode getAlignmentMode()
   {
     GtkSourceGutterRendererAlignmentMode _cretval;
     _cretval = gtk_source_gutter_renderer_get_alignment_mode(cast(GtkSourceGutterRenderer*)cPtr);
-    GutterRendererAlignmentMode _retval = cast(GutterRendererAlignmentMode)_cretval;
+    gtksource.types.GutterRendererAlignmentMode _retval = cast(gtksource.types.GutterRendererAlignmentMode)_cretval;
     return _retval;
   }
 
@@ -122,11 +122,11 @@ class GutterRenderer : Widget
    * Gets the classBuffer for which the gutter renderer is drawing.
    * Returns: a #GtkTextBuffer or %NULL
    */
-  Buffer getBuffer()
+  gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_gutter_renderer_get_buffer(cast(GtkSourceGutterRenderer*)cPtr);
-    auto _retval = ObjectG.getDObject!Buffer(cast(GtkSourceBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -134,11 +134,11 @@ class GutterRenderer : Widget
    * Get the view associated to the gutter renderer
    * Returns: a #GtkSourceView
    */
-  View getView()
+  gtksource.view.View getView()
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_gutter_renderer_get_view(cast(GtkSourceGutterRenderer*)cPtr);
-    auto _retval = ObjectG.getDObject!View(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -199,10 +199,10 @@ class GutterRenderer : Widget
    *   area = a #GdkRectangle of the cell area to be activated
    * Returns: %TRUE if the renderer can be activated, %FALSE otherwise
    */
-  bool queryActivatable(TextIter iter, Rectangle area)
+  bool queryActivatable(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area)
   {
     bool _retval;
-    _retval = gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, area ? cast(GdkRectangle*)area.cPtr(No.Dup) : null);
+    _retval = gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, area ? cast(const(GdkRectangle)*)area.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -213,7 +213,7 @@ class GutterRenderer : Widget
    * Params:
    *   mode = a #GtkSourceGutterRendererAlignmentMode
    */
-  void setAlignmentMode(GutterRendererAlignmentMode mode)
+  void setAlignmentMode(gtksource.types.GutterRendererAlignmentMode mode)
   {
     gtk_source_gutter_renderer_set_alignment_mode(cast(GtkSourceGutterRenderer*)cPtr, mode);
   }
@@ -272,8 +272,8 @@ class GutterRenderer : Widget
    *   nPresses = the number of button presses
    *   gutterRenderer = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(TextIter iter, Rectangle area, uint button, ModifierType state, int nPresses, GutterRenderer gutterRenderer);
-  alias ActivateCallbackFunc = void function(TextIter iter, Rectangle area, uint button, ModifierType state, int nPresses, GutterRenderer gutterRenderer);
+  alias ActivateCallbackDlg = void delegate(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, uint button, gdk.types.ModifierType state, int nPresses, gtksource.gutter_renderer.GutterRenderer gutterRenderer);
+  alias ActivateCallbackFunc = void function(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, uint button, gdk.types.ModifierType state, int nPresses, gtksource.gutter_renderer.GutterRenderer gutterRenderer);
 
   /**
    * Connect to Activate signal.
@@ -289,12 +289,12 @@ class GutterRenderer : Widget
     {
       assert(_nParams == 6, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gutterRenderer = getVal!GutterRenderer(_paramVals);
-      auto iter = getVal!TextIter(&_paramVals[1]);
-      auto area = getVal!Rectangle(&_paramVals[2]);
-      auto button = getVal!uint(&_paramVals[3]);
-      auto state = getVal!ModifierType(&_paramVals[4]);
-      auto nPresses = getVal!int(&_paramVals[5]);
+      auto gutterRenderer = getVal!(gtksource.gutter_renderer.GutterRenderer)(_paramVals);
+      auto iter = getVal!(gtk.text_iter.TextIter)(&_paramVals[1]);
+      auto area = getVal!(gdk.rectangle.Rectangle)(&_paramVals[2]);
+      auto button = getVal!(uint)(&_paramVals[3]);
+      auto state = getVal!(gdk.types.ModifierType)(&_paramVals[4]);
+      auto nPresses = getVal!(int)(&_paramVals[5]);
       _dClosure.dlg(iter, area, button, state, nPresses, gutterRenderer);
     }
 
@@ -310,8 +310,8 @@ class GutterRenderer : Widget
    *   gutterRenderer = the instance the signal is connected to
    * Returns:
    */
-  alias QueryActivatableCallbackDlg = bool delegate(TextIter iter, Rectangle area, GutterRenderer gutterRenderer);
-  alias QueryActivatableCallbackFunc = bool function(TextIter iter, Rectangle area, GutterRenderer gutterRenderer);
+  alias QueryActivatableCallbackDlg = bool delegate(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gtksource.gutter_renderer.GutterRenderer gutterRenderer);
+  alias QueryActivatableCallbackFunc = bool function(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gtksource.gutter_renderer.GutterRenderer gutterRenderer);
 
   /**
    * Connect to QueryActivatable signal.
@@ -328,9 +328,9 @@ class GutterRenderer : Widget
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto gutterRenderer = getVal!GutterRenderer(_paramVals);
-      auto iter = getVal!TextIter(&_paramVals[1]);
-      auto area = getVal!Rectangle(&_paramVals[2]);
+      auto gutterRenderer = getVal!(gtksource.gutter_renderer.GutterRenderer)(_paramVals);
+      auto iter = getVal!(gtk.text_iter.TextIter)(&_paramVals[1]);
+      auto area = getVal!(gdk.rectangle.Rectangle)(&_paramVals[2]);
       _retval = _dClosure.dlg(iter, area, gutterRenderer);
       setVal!bool(_returnValue, _retval);
     }
@@ -339,8 +339,8 @@ class GutterRenderer : Widget
     return connectSignalClosure("query-activatable", closure, after);
   }
 
-  alias QueryDataCallbackDlg = void delegate(ObjectG object, uint p0, GutterRenderer gutterRenderer);
-  alias QueryDataCallbackFunc = void function(ObjectG object, uint p0, GutterRenderer gutterRenderer);
+  alias QueryDataCallbackDlg = void delegate(gobject.object.ObjectG object, uint p0, gtksource.gutter_renderer.GutterRenderer gutterRenderer);
+  alias QueryDataCallbackFunc = void function(gobject.object.ObjectG object, uint p0, gtksource.gutter_renderer.GutterRenderer gutterRenderer);
 
   /**
    * Connect to QueryData signal.
@@ -356,9 +356,9 @@ class GutterRenderer : Widget
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gutterRenderer = getVal!GutterRenderer(_paramVals);
-      auto object = getVal!ObjectG(&_paramVals[1]);
-      auto p0 = getVal!uint(&_paramVals[2]);
+      auto gutterRenderer = getVal!(gtksource.gutter_renderer.GutterRenderer)(_paramVals);
+      auto object = getVal!(gobject.object.ObjectG)(&_paramVals[1]);
+      auto p0 = getVal!(uint)(&_paramVals[2]);
       _dClosure.dlg(object, p0, gutterRenderer);
     }
 

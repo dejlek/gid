@@ -7,12 +7,12 @@ import arrow.execute_context;
 import arrow.function_doc;
 import arrow.function_options;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 import gobject.types;
 
-class Function : ObjectG
+class Function : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -31,56 +31,56 @@ class Function : ObjectG
     return getType();
   }
 
-  static Function[] all()
+  static arrow.function_.Function[] all()
   {
     GList* _cretval;
     _cretval = garrow_function_all();
-    auto _retval = gListToD!(Function, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(arrow.function_.Function, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
-  static Function find(string name)
+  static arrow.function_.Function find(string name)
   {
     GArrowFunction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = garrow_function_find(_name);
-    auto _retval = ObjectG.getDObject!Function(cast(GArrowFunction*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.function_.Function)(cast(GArrowFunction*)_cretval, Yes.Take);
     return _retval;
   }
 
-  bool equal(Function otherFunction)
+  bool equal(arrow.function_.Function otherFunction)
   {
     bool _retval;
     _retval = garrow_function_equal(cast(GArrowFunction*)cPtr, otherFunction ? cast(GArrowFunction*)otherFunction.cPtr(No.Dup) : null);
     return _retval;
   }
 
-  Datum execute(Datum[] args, FunctionOptions options, ExecuteContext context)
+  arrow.datum.Datum execute(arrow.datum.Datum[] args, arrow.function_options.FunctionOptions options, arrow.execute_context.ExecuteContext context)
   {
     GArrowDatum* _cretval;
-    auto _args = gListFromD!(Datum)(args);
-    scope(exit) containerFree!(GList*, Datum, GidOwnership.None)(_args);
+    auto _args = gListFromD!(arrow.datum.Datum)(args);
+    scope(exit) containerFree!(GList*, arrow.datum.Datum, GidOwnership.None)(_args);
     GError *_err;
     _cretval = garrow_function_execute(cast(GArrowFunction*)cPtr, _args, options ? cast(GArrowFunctionOptions*)options.cPtr(No.Dup) : null, context ? cast(GArrowExecuteContext*)context.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Datum(cast(GArrowDatum*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.datum.Datum)(cast(GArrowDatum*)_cretval, Yes.Take);
     return _retval;
   }
 
-  FunctionOptions getDefaultOptions()
+  arrow.function_options.FunctionOptions getDefaultOptions()
   {
     GArrowFunctionOptions* _cretval;
     _cretval = garrow_function_get_default_options(cast(GArrowFunction*)cPtr);
-    auto _retval = ObjectG.getDObject!FunctionOptions(cast(GArrowFunctionOptions*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.function_options.FunctionOptions)(cast(GArrowFunctionOptions*)_cretval, Yes.Take);
     return _retval;
   }
 
-  FunctionDoc getDoc()
+  arrow.function_doc.FunctionDoc getDoc()
   {
     GArrowFunctionDoc* _cretval;
     _cretval = garrow_function_get_doc(cast(GArrowFunction*)cPtr);
-    auto _retval = ObjectG.getDObject!FunctionDoc(cast(GArrowFunctionDoc*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.function_doc.FunctionDoc)(cast(GArrowFunctionDoc*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -88,13 +88,13 @@ class Function : ObjectG
   {
     const(char)* _cretval;
     _cretval = garrow_function_get_name(cast(GArrowFunction*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
-  GType getOptionsType()
+  gobject.types.GType getOptionsType()
   {
-    GType _retval;
+    gobject.types.GType _retval;
     _retval = garrow_function_get_options_type(cast(GArrowFunction*)cPtr);
     return _retval;
   }
@@ -103,7 +103,7 @@ class Function : ObjectG
   {
     char* _cretval;
     _cretval = garrow_function_to_string(cast(GArrowFunction*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

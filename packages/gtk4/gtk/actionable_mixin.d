@@ -1,7 +1,7 @@
 module gtk.actionable_mixin;
 
 public import gtk.actionable_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import glib.variant;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -31,7 +31,7 @@ template ActionableT()
   {
     const(char)* _cretval;
     _cretval = gtk_actionable_get_action_name(cast(GtkActionable*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -39,11 +39,11 @@ template ActionableT()
    * Gets the current target value of actionable.
    * Returns: the current target value
    */
-  override VariantG getActionTargetValue()
+  override glib.variant.VariantG getActionTargetValue()
   {
     VariantC* _cretval;
     _cretval = gtk_actionable_get_action_target_value(cast(GtkActionable*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -86,7 +86,7 @@ template ActionableT()
    * Params:
    *   targetValue = a [glib.variant.VariantG] to set as the target value
    */
-  override void setActionTargetValue(VariantG targetValue)
+  override void setActionTargetValue(glib.variant.VariantG targetValue)
   {
     gtk_actionable_set_action_target_value(cast(GtkActionable*)cPtr, targetValue ? cast(VariantC*)targetValue.cPtr(No.Dup) : null);
   }

@@ -8,11 +8,11 @@ import arrow.readable;
 import arrow.readable_mixin;
 import arrow.seekable_input_stream;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gio.input_stream;
 import gobject.object;
 
-class GIOInputStream : SeekableInputStream
+class GIOInputStream : arrow.seekable_input_stream.SeekableInputStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -31,18 +31,18 @@ class GIOInputStream : SeekableInputStream
     return getType();
   }
 
-  this(InputStream gioInputStream)
+  this(gio.input_stream.InputStream gioInputStream)
   {
     GArrowGIOInputStream* _cretval;
     _cretval = garrow_gio_input_stream_new(gioInputStream ? cast(GInputStream*)gioInputStream.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
-  InputStream getRaw()
+  gio.input_stream.InputStream getRaw()
   {
     GInputStream* _cretval;
     _cretval = garrow_gio_input_stream_get_raw(cast(GArrowGIOInputStream*)cPtr);
-    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
     return _retval;
   }
 }

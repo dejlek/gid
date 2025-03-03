@@ -7,10 +7,10 @@ import arrow.record_batch;
 import arrow.record_batch_reader;
 import arrow.table;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class SourceNodeOptions : ExecuteNodeOptions
+class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,27 +29,27 @@ class SourceNodeOptions : ExecuteNodeOptions
     return getType();
   }
 
-  static SourceNodeOptions newRecordBatch(RecordBatch recordBatch)
+  static arrow.source_node_options.SourceNodeOptions newRecordBatch(arrow.record_batch.RecordBatch recordBatch)
   {
     GArrowSourceNodeOptions* _cretval;
     _cretval = garrow_source_node_options_new_record_batch(recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!SourceNodeOptions(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
     return _retval;
   }
 
-  static SourceNodeOptions newRecordBatchReader(RecordBatchReader reader)
+  static arrow.source_node_options.SourceNodeOptions newRecordBatchReader(arrow.record_batch_reader.RecordBatchReader reader)
   {
     GArrowSourceNodeOptions* _cretval;
     _cretval = garrow_source_node_options_new_record_batch_reader(reader ? cast(GArrowRecordBatchReader*)reader.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!SourceNodeOptions(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
     return _retval;
   }
 
-  static SourceNodeOptions newTable(Table table)
+  static arrow.source_node_options.SourceNodeOptions newTable(arrow.table.Table table)
   {
     GArrowSourceNodeOptions* _cretval;
     _cretval = garrow_source_node_options_new_table(table ? cast(GArrowTable*)table.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!SourceNodeOptions(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
     return _retval;
   }
 }

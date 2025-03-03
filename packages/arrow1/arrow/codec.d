@@ -3,11 +3,11 @@ module arrow.codec;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class Codec : ObjectG
+class Codec : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class Codec : ObjectG
     return getType();
   }
 
-  this(CompressionType type)
+  this(arrow.types.CompressionType type)
   {
     GArrowCodec* _cretval;
     GError *_err;
@@ -43,11 +43,11 @@ class Codec : ObjectG
     return _retval;
   }
 
-  CompressionType getCompressionType()
+  arrow.types.CompressionType getCompressionType()
   {
     GArrowCompressionType _cretval;
     _cretval = garrow_codec_get_compression_type(cast(GArrowCodec*)cPtr);
-    CompressionType _retval = cast(CompressionType)_cretval;
+    arrow.types.CompressionType _retval = cast(arrow.types.CompressionType)_cretval;
     return _retval;
   }
 
@@ -55,7 +55,7 @@ class Codec : ObjectG
   {
     const(char)* _cretval;
     _cretval = garrow_codec_get_name(cast(GArrowCodec*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

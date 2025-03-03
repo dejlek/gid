@@ -1,6 +1,6 @@
 module gtk.box;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -39,7 +39,7 @@ import gtk.widget;
  * Until GTK 4.10, `GtkBox` used the `GTK_ACCESSIBLE_ROLE_GROUP` role.
  * Starting from GTK 4.12, `GtkBox` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
  */
-class Box : Widget, Orientable
+class Box : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -67,7 +67,7 @@ class Box : Widget, Orientable
    *   spacing = the number of pixels to place by default between children
    * Returns: a new `GtkBox`.
    */
-  this(Orientation orientation, int spacing)
+  this(gtk.types.Orientation orientation, int spacing)
   {
     GtkWidget* _cretval;
     _cretval = gtk_box_new(orientation, spacing);
@@ -79,7 +79,7 @@ class Box : Widget, Orientable
    * Params:
    *   child = the `GtkWidget` to append
    */
-  void append(Widget child)
+  void append(gtk.widget.Widget child)
   {
     gtk_box_append(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -99,11 +99,11 @@ class Box : Widget, Orientable
    * Gets the value set by [gtk.box.Box.setBaselinePosition].
    * Returns: the baseline position
    */
-  BaselinePosition getBaselinePosition()
+  gtk.types.BaselinePosition getBaselinePosition()
   {
     GtkBaselinePosition _cretval;
     _cretval = gtk_box_get_baseline_position(cast(GtkBox*)cPtr);
-    BaselinePosition _retval = cast(BaselinePosition)_cretval;
+    gtk.types.BaselinePosition _retval = cast(gtk.types.BaselinePosition)_cretval;
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class Box : Widget, Orientable
    *   child = the `GtkWidget` to insert
    *   sibling = the sibling after which to insert child
    */
-  void insertChildAfter(Widget child, Widget sibling)
+  void insertChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling)
   {
     gtk_box_insert_child_after(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null);
   }
@@ -148,7 +148,7 @@ class Box : Widget, Orientable
    * Params:
    *   child = the `GtkWidget` to prepend
    */
-  void prepend(Widget child)
+  void prepend(gtk.widget.Widget child)
   {
     gtk_box_prepend(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -161,7 +161,7 @@ class Box : Widget, Orientable
    * Params:
    *   child = the child to remove
    */
-  void remove(Widget child)
+  void remove(gtk.widget.Widget child)
   {
     gtk_box_remove(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -174,7 +174,7 @@ class Box : Widget, Orientable
    *   child = the `GtkWidget` to move, must be a child of box
    *   sibling = the sibling to move child after
    */
-  void reorderChildAfter(Widget child, Widget sibling)
+  void reorderChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling)
   {
     gtk_box_reorder_child_after(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null);
   }
@@ -200,7 +200,7 @@ class Box : Widget, Orientable
    * Params:
    *   position = a `GtkBaselinePosition`
    */
-  void setBaselinePosition(BaselinePosition position)
+  void setBaselinePosition(gtk.types.BaselinePosition position)
   {
     gtk_box_set_baseline_position(cast(GtkBox*)cPtr, position);
   }

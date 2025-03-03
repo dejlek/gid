@@ -1,6 +1,6 @@
 module pango.layout;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.error;
 import gobject.object;
@@ -46,7 +46,7 @@ import pango.types;
  * It is possible, as well, to ignore the 2-D setup,
  * and simply treat the results of a `PangoLayout` as a list of lines.
  */
-class Layout : ObjectG
+class Layout : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -72,7 +72,7 @@ class Layout : ObjectG
    *   context = a `PangoContext`
    * Returns: the newly allocated `PangoLayout`
    */
-  this(Context context)
+  this(pango.context.Context context)
   {
     PangoLayout* _cretval;
     _cretval = pango_layout_new(context ? cast(PangoContext*)context.cPtr(No.Dup) : null);
@@ -91,14 +91,14 @@ class Layout : ObjectG
    *   flags = `PangoLayoutDeserializeFlags`
    * Returns: a new `PangoLayout`
    */
-  static Layout deserialize(Context context, Bytes bytes, LayoutDeserializeFlags flags)
+  static pango.layout.Layout deserialize(pango.context.Context context, glib.bytes.Bytes bytes, pango.types.LayoutDeserializeFlags flags)
   {
     PangoLayout* _cretval;
     GError *_err;
     _cretval = pango_layout_deserialize(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, flags, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -119,11 +119,11 @@ class Layout : ObjectG
    * are all copied by value.
    * Returns: the newly allocated `PangoLayout`
    */
-  Layout copy()
+  pango.layout.Layout copy()
   {
     PangoLayout* _cretval;
     _cretval = pango_layout_copy(cast(PangoLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -132,11 +132,11 @@ class Layout : ObjectG
    * positioned within the horizontal space available.
    * Returns: the alignment
    */
-  Alignment getAlignment()
+  pango.types.Alignment getAlignment()
   {
     PangoAlignment _cretval;
     _cretval = pango_layout_get_alignment(cast(PangoLayout*)cPtr);
-    Alignment _retval = cast(Alignment)_cretval;
+    pango.types.Alignment _retval = cast(pango.types.Alignment)_cretval;
     return _retval;
   }
 
@@ -144,11 +144,11 @@ class Layout : ObjectG
    * Gets the attribute list for the layout, if any.
    * Returns: a `PangoAttrList`
    */
-  AttrList getAttributes()
+  pango.attr_list.AttrList getAttributes()
   {
     PangoAttrList* _cretval;
     _cretval = pango_layout_get_attributes(cast(PangoLayout*)cPtr);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class Layout : ObjectG
    *   strongPos = location to store the strong cursor position
    *   weakPos = location to store the weak cursor position
    */
-  void getCaretPos(int index, out Rectangle strongPos, out Rectangle weakPos)
+  void getCaretPos(int index, out pango.types.Rectangle strongPos, out pango.types.Rectangle weakPos)
   {
     pango_layout_get_caret_pos(cast(PangoLayout*)cPtr, index, &strongPos, &weakPos);
   }
@@ -214,11 +214,11 @@ class Layout : ObjectG
    * Retrieves the `PangoContext` used for this layout.
    * Returns: the `PangoContext` for the layout
    */
-  Context getContext()
+  pango.context.Context getContext()
   {
     PangoContext* _cretval;
     _cretval = pango_layout_get_context(cast(PangoLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!Context(cast(PangoContext*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class Layout : ObjectG
    *   strongPos = location to store the strong cursor position
    *   weakPos = location to store the weak cursor position
    */
-  void getCursorPos(int index, out Rectangle strongPos, out Rectangle weakPos)
+  void getCursorPos(int index, out pango.types.Rectangle strongPos, out pango.types.Rectangle weakPos)
   {
     pango_layout_get_cursor_pos(cast(PangoLayout*)cPtr, index, &strongPos, &weakPos);
   }
@@ -260,11 +260,11 @@ class Layout : ObjectG
    *   index = the byte index of the char
    * Returns: the text direction at index
    */
-  Direction getDirection(int index)
+  pango.types.Direction getDirection(int index)
   {
     PangoDirection _cretval;
     _cretval = pango_layout_get_direction(cast(PangoLayout*)cPtr, index);
-    Direction _retval = cast(Direction)_cretval;
+    pango.types.Direction _retval = cast(pango.types.Direction)_cretval;
     return _retval;
   }
 
@@ -275,11 +275,11 @@ class Layout : ObjectG
    * paragraphs were actually ellipsized.
    * Returns: the current ellipsization mode for layout
    */
-  EllipsizeMode getEllipsize()
+  pango.types.EllipsizeMode getEllipsize()
   {
     PangoEllipsizeMode _cretval;
     _cretval = pango_layout_get_ellipsize(cast(PangoLayout*)cPtr);
-    EllipsizeMode _retval = cast(EllipsizeMode)_cretval;
+    pango.types.EllipsizeMode _retval = cast(pango.types.EllipsizeMode)_cretval;
     return _retval;
   }
 
@@ -298,7 +298,7 @@ class Layout : ObjectG
    *   logicalRect = rectangle used to store the logical
    *     extents of the layout
    */
-  void getExtents(out Rectangle inkRect, out Rectangle logicalRect)
+  void getExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
     pango_layout_get_extents(cast(PangoLayout*)cPtr, &inkRect, &logicalRect);
   }
@@ -309,11 +309,11 @@ class Layout : ObjectG
    *   layout's font description, or %NULL if the font description
    *   from the layout's context is inherited.
    */
-  FontDescription getFontDescription()
+  pango.font_description.FontDescription getFontDescription()
   {
     const(PangoFontDescription)* _cretval;
     _cretval = pango_layout_get_font_description(cast(PangoLayout*)cPtr);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -346,11 +346,11 @@ class Layout : ObjectG
    * Returns an iterator to iterate over the visual extents of the layout.
    * Returns: the new `PangoLayoutIter`
    */
-  LayoutIter getIter()
+  pango.layout_iter.LayoutIter getIter()
   {
     PangoLayoutIter* _cretval;
     _cretval = pango_layout_get_iter(cast(PangoLayout*)cPtr);
-    auto _retval = _cretval ? new LayoutIter(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.layout_iter.LayoutIter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -390,11 +390,11 @@ class Layout : ObjectG
    *   and retained, but will become invalid if changes are made to the
    *   `PangoLayout`.
    */
-  LayoutLine getLine(int line)
+  pango.layout_line.LayoutLine getLine(int line)
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_layout_get_line(cast(PangoLayout*)cPtr, line);
-    auto _retval = _cretval ? new LayoutLine(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -422,11 +422,11 @@ class Layout : ObjectG
    *   and retained, but will become invalid if changes are made to the
    *   `PangoLayout`. No changes should be made to the line.
    */
-  LayoutLine getLineReadonly(int line)
+  pango.layout_line.LayoutLine getLineReadonly(int line)
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_layout_get_line_readonly(cast(PangoLayout*)cPtr, line);
-    auto _retval = _cretval ? new LayoutLine(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -451,11 +451,11 @@ class Layout : ObjectG
    *   `PangoLayout` and must be used with care. It will become invalid on any
    *   change to the layout's text or properties.
    */
-  LayoutLine[] getLines()
+  pango.layout_line.LayoutLine[] getLines()
   {
     GSList* _cretval;
     _cretval = pango_layout_get_lines(cast(PangoLayout*)cPtr);
-    auto _retval = gSListToD!(LayoutLine, GidOwnership.None)(cast(GSList*)_cretval);
+    auto _retval = gSListToD!(pango.layout_line.LayoutLine, GidOwnership.None)(cast(GSList*)_cretval);
     return _retval;
   }
 
@@ -470,11 +470,11 @@ class Layout : ObjectG
    *   change to the layout's text or properties. No changes should be made to
    *   the lines.
    */
-  LayoutLine[] getLinesReadonly()
+  pango.layout_line.LayoutLine[] getLinesReadonly()
   {
     GSList* _cretval;
     _cretval = pango_layout_get_lines_readonly(cast(PangoLayout*)cPtr);
-    auto _retval = gSListToD!(LayoutLine, GidOwnership.None)(cast(GSList*)_cretval);
+    auto _retval = gSListToD!(pango.layout_line.LayoutLine, GidOwnership.None)(cast(GSList*)_cretval);
     return _retval;
   }
 
@@ -485,7 +485,7 @@ class Layout : ObjectG
    *   attrs = location to store a pointer to an array of logical attributes.
    *     This value must be freed with [glib.global.gfree].
    */
-  void getLogAttrs(out LogAttr[] attrs)
+  void getLogAttrs(out pango.types.LogAttr[] attrs)
   {
     int _nAttrs;
     PangoLogAttr* _attrs;
@@ -507,16 +507,16 @@ class Layout : ObjectG
    * the first character and the position after the last character.
    * Returns: an array of logical attributes
    */
-  LogAttr[] getLogAttrsReadonly()
+  pango.types.LogAttr[] getLogAttrsReadonly()
   {
     const(PangoLogAttr)* _cretval;
     int _cretlength;
     _cretval = pango_layout_get_log_attrs_readonly(cast(PangoLayout*)cPtr, &_cretlength);
-    LogAttr[] _retval;
+    pango.types.LogAttr[] _retval;
 
     if (_cretval)
     {
-      _retval = new LogAttr[_cretlength];
+      _retval = new pango.types.LogAttr[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i];
     }
@@ -535,7 +535,7 @@ class Layout : ObjectG
    *   logicalRect = rectangle used to store the logical
    *     extents of the layout
    */
-  void getPixelExtents(out Rectangle inkRect, out Rectangle logicalRect)
+  void getPixelExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
     pango_layout_get_pixel_extents(cast(PangoLayout*)cPtr, &inkRect, &logicalRect);
   }
@@ -619,11 +619,11 @@ class Layout : ObjectG
    * The return value should be freed with [pango.tab_array.TabArray.free].
    * Returns: a copy of the tabs for this layout
    */
-  TabArray getTabs()
+  pango.tab_array.TabArray getTabs()
   {
     PangoTabArray* _cretval;
     _cretval = pango_layout_get_tabs(cast(PangoLayout*)cPtr);
-    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -636,7 +636,7 @@ class Layout : ObjectG
   {
     const(char)* _cretval;
     _cretval = pango_layout_get_text(cast(PangoLayout*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -672,11 +672,11 @@ class Layout : ObjectG
    * any paragraphs were actually wrapped.
    * Returns: active wrap mode.
    */
-  WrapMode getWrap()
+  pango.types.WrapMode getWrap()
   {
     PangoWrapMode _cretval;
     _cretval = pango_layout_get_wrap(cast(PangoLayout*)cPtr);
-    WrapMode _retval = cast(WrapMode)_cretval;
+    pango.types.WrapMode _retval = cast(pango.types.WrapMode)_cretval;
     return _retval;
   }
 
@@ -709,7 +709,7 @@ class Layout : ObjectG
    *   index = byte index within layout
    *   pos = rectangle in which to store the position of the grapheme
    */
-  void indexToPos(int index, out Rectangle pos)
+  void indexToPos(int index, out pango.types.Rectangle pos)
   {
     pango_layout_index_to_pos(cast(PangoLayout*)cPtr, index, &pos);
   }
@@ -796,11 +796,11 @@ class Layout : ObjectG
    *   flags = `PangoLayoutSerializeFlags`
    * Returns: a `GBytes` containing the serialized form of layout
    */
-  Bytes serialize(LayoutSerializeFlags flags)
+  glib.bytes.Bytes serialize(pango.types.LayoutSerializeFlags flags)
   {
     GBytes* _cretval;
     _cretval = pango_layout_serialize(cast(PangoLayout*)cPtr, flags);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -811,7 +811,7 @@ class Layout : ObjectG
    * Params:
    *   alignment = the alignment
    */
-  void setAlignment(Alignment alignment)
+  void setAlignment(pango.types.Alignment alignment)
   {
     pango_layout_set_alignment(cast(PangoLayout*)cPtr, alignment);
   }
@@ -822,7 +822,7 @@ class Layout : ObjectG
    * Params:
    *   attrs = a `PangoAttrList`
    */
-  void setAttributes(AttrList attrs)
+  void setAttributes(pango.attr_list.AttrList attrs)
   {
     pango_layout_set_attributes(cast(PangoLayout*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
@@ -865,7 +865,7 @@ class Layout : ObjectG
    * Params:
    *   ellipsize = the new ellipsization mode for layout
    */
-  void setEllipsize(EllipsizeMode ellipsize)
+  void setEllipsize(pango.types.EllipsizeMode ellipsize)
   {
     pango_layout_set_ellipsize(cast(PangoLayout*)cPtr, ellipsize);
   }
@@ -878,9 +878,9 @@ class Layout : ObjectG
    *   desc = the new `PangoFontDescription`
    *     to unset the current font description
    */
-  void setFontDescription(FontDescription desc)
+  void setFontDescription(pango.font_description.FontDescription desc)
   {
-    pango_layout_set_font_description(cast(PangoLayout*)cPtr, desc ? cast(PangoFontDescription*)desc.cPtr(No.Dup) : null);
+    pango_layout_set_font_description(cast(PangoLayout*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1079,7 +1079,7 @@ class Layout : ObjectG
    * Params:
    *   tabs = a `PangoTabArray`
    */
-  void setTabs(TabArray tabs)
+  void setTabs(pango.tab_array.TabArray tabs)
   {
     pango_layout_set_tabs(cast(PangoLayout*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }
@@ -1128,7 +1128,7 @@ class Layout : ObjectG
    * Params:
    *   wrap = the wrap mode
    */
-  void setWrap(WrapMode wrap)
+  void setWrap(pango.types.WrapMode wrap)
   {
     pango_layout_set_wrap(cast(PangoLayout*)cPtr, wrap);
   }
@@ -1145,7 +1145,7 @@ class Layout : ObjectG
    *   filename = the file to save it to
    * Returns: %TRUE if saving was successful
    */
-  bool writeToFile(LayoutSerializeFlags flags, string filename)
+  bool writeToFile(pango.types.LayoutSerializeFlags flags, string filename)
   {
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);

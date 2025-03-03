@@ -1,6 +1,6 @@
 module gtk.password_entry_buffer;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.entry_buffer;
@@ -11,7 +11,7 @@ import gtk.types;
  * from being swapped to disk.
  * `GtkPasswordEntry` uses a `GtkPasswordEntryBuffer`.
  */
-class PasswordEntryBuffer : EntryBuffer
+class PasswordEntryBuffer : gtk.entry_buffer.EntryBuffer
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -1,6 +1,6 @@
 module gtk.any_filter;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gtk.buildable;
@@ -14,7 +14,7 @@ import gtk.types;
  * `GtkAnyFilter` matches an item when at least one of its filters matches.
  * To add filters to a `GtkAnyFilter`, use [gtk.multi_filter.MultiFilter.append].
  */
-class AnyFilter : MultiFilter
+class AnyFilter : gtk.multi_filter.MultiFilter
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -5,11 +5,11 @@ import arrow.c.types;
 import arrow.decimal256;
 import arrow.fixed_size_binary_array;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import gobject.object;
 
-class Decimal256Array : FixedSizeBinaryArray
+class Decimal256Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -32,17 +32,17 @@ class Decimal256Array : FixedSizeBinaryArray
   {
     char* _cretval;
     _cretval = garrow_decimal256_array_format_value(cast(GArrowDecimal256Array*)cPtr, i);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
-  alias getValue = FixedSizeBinaryArray.getValue;
+  alias getValue = arrow.fixed_size_binary_array.FixedSizeBinaryArray.getValue;
 
-  Decimal256 getValue(long i)
+  arrow.decimal256.Decimal256 getValue(long i)
   {
     GArrowDecimal256* _cretval;
     _cretval = garrow_decimal256_array_get_value(cast(GArrowDecimal256Array*)cPtr, i);
-    auto _retval = ObjectG.getDObject!Decimal256(cast(GArrowDecimal256*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.Take);
     return _retval;
   }
 }

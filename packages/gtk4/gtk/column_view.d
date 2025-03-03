@@ -1,8 +1,7 @@
 module gtk.column_view;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
-import gio.list_model_mixin;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -19,7 +18,6 @@ import gtk.scroll_info;
 import gtk.scrollable;
 import gtk.scrollable_mixin;
 import gtk.selection_model;
-import gtk.selection_model_mixin;
 import gtk.sorter;
 import gtk.types;
 import gtk.widget;
@@ -79,7 +77,7 @@ import gtk.widget;
  * are using the %GTK_ACCESSIBLE_ROLE_ROW role, and individual cells are using
  * the %GTK_ACCESSIBLE_ROLE_GRID_CELL role
  */
-class ColumnView : Widget, Scrollable
+class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -108,7 +106,7 @@ class ColumnView : Widget, Scrollable
    *   model = the list model to use
    * Returns: a new `GtkColumnView`
    */
-  this(SelectionModel model)
+  this(gtk.selection_model.SelectionModel model)
   {
     GtkWidget* _cretval;
     _cretval = gtk_column_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
@@ -121,7 +119,7 @@ class ColumnView : Widget, Scrollable
    *   column = a `GtkColumnViewColumn` that hasn't been added to a
    *     `GtkColumnView` yet
    */
-  void appendColumn(ColumnViewColumn column)
+  void appendColumn(gtk.column_view_column.ColumnViewColumn column)
   {
     gtk_column_view_append_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null);
   }
@@ -133,11 +131,11 @@ class ColumnView : Widget, Scrollable
    * ::items-changed signal.
    * Returns: The list managing the columns
    */
-  ListModel getColumns()
+  gio.list_model.ListModel getColumns()
   {
     GListModel* _cretval;
     _cretval = gtk_column_view_get_columns(cast(GtkColumnView*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -156,11 +154,11 @@ class ColumnView : Widget, Scrollable
    * Gets the factory that's currently used to populate section headers.
    * Returns: The factory in use
    */
-  ListItemFactory getHeaderFactory()
+  gtk.list_item_factory.ListItemFactory getHeaderFactory()
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_column_view_get_header_factory(cast(GtkColumnView*)cPtr);
-    auto _retval = ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -168,11 +166,11 @@ class ColumnView : Widget, Scrollable
    * Gets the model that's currently used to read the items displayed.
    * Returns: The model in use
    */
-  SelectionModel getModel()
+  gtk.selection_model.SelectionModel getModel()
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_column_view_get_model(cast(GtkColumnView*)cPtr);
-    auto _retval = ObjectG.getDObject!SelectionModel(cast(GtkSelectionModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -191,11 +189,11 @@ class ColumnView : Widget, Scrollable
    * Gets the factory set via [gtk.column_view.ColumnView.setRowFactory].
    * Returns: The factory
    */
-  ListItemFactory getRowFactory()
+  gtk.list_item_factory.ListItemFactory getRowFactory()
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_column_view_get_row_factory(cast(GtkColumnView*)cPtr);
-    auto _retval = ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -254,11 +252,11 @@ class ColumnView : Widget, Scrollable
    * ```
    * Returns: the `GtkSorter` of self
    */
-  Sorter getSorter()
+  gtk.sorter.Sorter getSorter()
   {
     GtkSorter* _cretval;
     _cretval = gtk_column_view_get_sorter(cast(GtkColumnView*)cPtr);
-    auto _retval = ObjectG.getDObject!Sorter(cast(GtkSorter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -266,11 +264,11 @@ class ColumnView : Widget, Scrollable
    * Gets the behavior set for the <kbd>Tab</kbd> key.
    * Returns: The behavior of the <kbd>Tab</kbd> key
    */
-  ListTabBehavior getTabBehavior()
+  gtk.types.ListTabBehavior getTabBehavior()
   {
     GtkListTabBehavior _cretval;
     _cretval = gtk_column_view_get_tab_behavior(cast(GtkColumnView*)cPtr);
-    ListTabBehavior _retval = cast(ListTabBehavior)_cretval;
+    gtk.types.ListTabBehavior _retval = cast(gtk.types.ListTabBehavior)_cretval;
     return _retval;
   }
 
@@ -281,7 +279,7 @@ class ColumnView : Widget, Scrollable
    *   position = the position to insert column at
    *   column = the `GtkColumnViewColumn` to insert
    */
-  void insertColumn(uint position, ColumnViewColumn column)
+  void insertColumn(uint position, gtk.column_view_column.ColumnViewColumn column)
   {
     gtk_column_view_insert_column(cast(GtkColumnView*)cPtr, position, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null);
   }
@@ -291,7 +289,7 @@ class ColumnView : Widget, Scrollable
    * Params:
    *   column = a `GtkColumnViewColumn` that's part of self
    */
-  void removeColumn(ColumnViewColumn column)
+  void removeColumn(gtk.column_view_column.ColumnViewColumn column)
   {
     gtk_column_view_remove_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null);
   }
@@ -309,7 +307,7 @@ class ColumnView : Widget, Scrollable
    *   scroll = details of how to perform
    *     the scroll operation or %NULL to scroll into view
    */
-  void scrollTo(uint pos, ColumnViewColumn column, ListScrollFlags flags, ScrollInfo scroll)
+  void scrollTo(uint pos, gtk.column_view_column.ColumnViewColumn column, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll)
   {
     gtk_column_view_scroll_to(cast(GtkColumnView*)cPtr, pos, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
   }
@@ -332,7 +330,7 @@ class ColumnView : Widget, Scrollable
    * Params:
    *   factory = the factory to use
    */
-  void setHeaderFactory(ListItemFactory factory)
+  void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory)
   {
     gtk_column_view_set_header_factory(cast(GtkColumnView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
@@ -343,7 +341,7 @@ class ColumnView : Widget, Scrollable
    * Params:
    *   model = the model to use
    */
-  void setModel(SelectionModel model)
+  void setModel(gtk.selection_model.SelectionModel model)
   {
     gtk_column_view_set_model(cast(GtkColumnView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
@@ -367,7 +365,7 @@ class ColumnView : Widget, Scrollable
    * Params:
    *   factory = The row factory
    */
-  void setRowFactory(ListItemFactory factory)
+  void setRowFactory(gtk.list_item_factory.ListItemFactory factory)
   {
     gtk_column_view_set_row_factory(cast(GtkColumnView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
@@ -410,7 +408,7 @@ class ColumnView : Widget, Scrollable
    * Params:
    *   tabBehavior = The desired tab behavior
    */
-  void setTabBehavior(ListTabBehavior tabBehavior)
+  void setTabBehavior(gtk.types.ListTabBehavior tabBehavior)
   {
     gtk_column_view_set_tab_behavior(cast(GtkColumnView*)cPtr, tabBehavior);
   }
@@ -429,7 +427,7 @@ class ColumnView : Widget, Scrollable
    *   column = the `GtkColumnViewColumn` to sort by
    *   direction = the direction to sort in
    */
-  void sortByColumn(ColumnViewColumn column, SortType direction)
+  void sortByColumn(gtk.column_view_column.ColumnViewColumn column, gtk.types.SortType direction)
   {
     gtk_column_view_sort_by_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null, direction);
   }
@@ -444,8 +442,8 @@ class ColumnView : Widget, Scrollable
    *   position = position of item to activate
    *   columnView = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(uint position, ColumnView columnView);
-  alias ActivateCallbackFunc = void function(uint position, ColumnView columnView);
+  alias ActivateCallbackDlg = void delegate(uint position, gtk.column_view.ColumnView columnView);
+  alias ActivateCallbackFunc = void function(uint position, gtk.column_view.ColumnView columnView);
 
   /**
    * Connect to Activate signal.
@@ -461,8 +459,8 @@ class ColumnView : Widget, Scrollable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto columnView = getVal!ColumnView(_paramVals);
-      auto position = getVal!uint(&_paramVals[1]);
+      auto columnView = getVal!(gtk.column_view.ColumnView)(_paramVals);
+      auto position = getVal!(uint)(&_paramVals[1]);
       _dClosure.dlg(position, columnView);
     }
 

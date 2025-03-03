@@ -1,7 +1,7 @@
 module gtk.combo_box;
 
 import gdk.device;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -18,7 +18,6 @@ import gtk.constraint_target;
 import gtk.constraint_target_mixin;
 import gtk.tree_iter;
 import gtk.tree_model;
-import gtk.tree_model_mixin;
 import gtk.types;
 import gtk.widget;
 
@@ -74,7 +73,7 @@ import gtk.widget;
 
  * Deprecated: Use [gtk.drop_down.DropDown] instead
  */
-class ComboBox : Widget, CellEditable, CellLayout
+class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_layout.CellLayout
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -118,11 +117,11 @@ class ComboBox : Widget, CellEditable, CellLayout
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  static ComboBox newWithEntry()
+  static gtk.combo_box.ComboBox newWithEntry()
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new_with_entry();
-    auto _retval = ObjectG.getDObject!ComboBox(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -134,11 +133,11 @@ class ComboBox : Widget, CellEditable, CellLayout
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  static ComboBox newWithModel(TreeModel model)
+  static gtk.combo_box.ComboBox newWithModel(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!ComboBox(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -151,11 +150,11 @@ class ComboBox : Widget, CellEditable, CellLayout
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  static ComboBox newWithModelAndEntry(TreeModel model)
+  static gtk.combo_box.ComboBox newWithModelAndEntry(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new_with_model_and_entry(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!ComboBox(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -196,7 +195,7 @@ class ComboBox : Widget, CellEditable, CellLayout
   {
     const(char)* _cretval;
     _cretval = gtk_combo_box_get_active_id(cast(GtkComboBox*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -209,12 +208,12 @@ class ComboBox : Widget, CellEditable, CellLayout
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  bool getActiveIter(out TreeIter iter)
+  bool getActiveIter(out gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
     GtkTreeIter _iter;
     _retval = gtk_combo_box_get_active_iter(cast(GtkComboBox*)cPtr, &_iter);
-    iter = new TreeIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -229,11 +228,11 @@ class ComboBox : Widget, CellEditable, CellLayout
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  SensitivityType getButtonSensitivity()
+  gtk.types.SensitivityType getButtonSensitivity()
   {
     GtkSensitivityType _cretval;
     _cretval = gtk_combo_box_get_button_sensitivity(cast(GtkComboBox*)cPtr);
-    SensitivityType _retval = cast(SensitivityType)_cretval;
+    gtk.types.SensitivityType _retval = cast(gtk.types.SensitivityType)_cretval;
     return _retval;
   }
 
@@ -243,11 +242,11 @@ class ComboBox : Widget, CellEditable, CellLayout
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_get_child(cast(GtkComboBox*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -299,11 +298,11 @@ class ComboBox : Widget, CellEditable, CellLayout
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  TreeModel getModel()
+  gtk.tree_model.TreeModel getModel()
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_combo_box_get_model(cast(GtkComboBox*)cPtr);
-    auto _retval = ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -356,7 +355,7 @@ class ComboBox : Widget, CellEditable, CellLayout
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  void popupForDevice(Device device)
+  void popupForDevice(gdk.device.Device device)
   {
     gtk_combo_box_popup_for_device(cast(GtkComboBox*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
   }
@@ -406,7 +405,7 @@ class ComboBox : Widget, CellEditable, CellLayout
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  void setActiveIter(TreeIter iter)
+  void setActiveIter(gtk.tree_iter.TreeIter iter)
   {
     gtk_combo_box_set_active_iter(cast(GtkComboBox*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
   }
@@ -419,7 +418,7 @@ class ComboBox : Widget, CellEditable, CellLayout
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  void setButtonSensitivity(SensitivityType sensitivity)
+  void setButtonSensitivity(gtk.types.SensitivityType sensitivity)
   {
     gtk_combo_box_set_button_sensitivity(cast(GtkComboBox*)cPtr, sensitivity);
   }
@@ -431,7 +430,7 @@ class ComboBox : Widget, CellEditable, CellLayout
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_combo_box_set_child(cast(GtkComboBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -483,7 +482,7 @@ class ComboBox : Widget, CellEditable, CellLayout
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  void setModel(TreeModel model)
+  void setModel(gtk.tree_model.TreeModel model)
   {
     gtk_combo_box_set_model(cast(GtkComboBox*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
@@ -512,13 +511,13 @@ class ComboBox : Widget, CellEditable, CellLayout
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  void setRowSeparatorFunc(TreeViewRowSeparatorFunc func)
+  void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func)
   {
     extern(C) bool _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
     {
-      auto _dlg = cast(TreeViewRowSeparatorFunc*)data;
+      auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), iter ? new TreeIter(cast(void*)iter, No.Take) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -534,8 +533,8 @@ class ComboBox : Widget, CellEditable, CellLayout
    * emitting it causes the combo box to pop up its dropdown.
    *   comboBox = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(ComboBox comboBox);
-  alias ActivateCallbackFunc = void function(ComboBox comboBox);
+  alias ActivateCallbackDlg = void delegate(gtk.combo_box.ComboBox comboBox);
+  alias ActivateCallbackFunc = void function(gtk.combo_box.ComboBox comboBox);
 
   /**
    * Connect to Activate signal.
@@ -551,7 +550,7 @@ class ComboBox : Widget, CellEditable, CellLayout
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto comboBox = getVal!ComboBox(_paramVals);
+      auto comboBox = getVal!(gtk.combo_box.ComboBox)(_paramVals);
       _dClosure.dlg(comboBox);
     }
 
@@ -566,8 +565,8 @@ class ComboBox : Widget, CellEditable, CellLayout
    * also be emitted while typing into the entry of a combo box with an entry.
    *   comboBox = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(ComboBox comboBox);
-  alias ChangedCallbackFunc = void function(ComboBox comboBox);
+  alias ChangedCallbackDlg = void delegate(gtk.combo_box.ComboBox comboBox);
+  alias ChangedCallbackFunc = void function(gtk.combo_box.ComboBox comboBox);
 
   /**
    * Connect to Changed signal.
@@ -583,7 +582,7 @@ class ComboBox : Widget, CellEditable, CellLayout
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto comboBox = getVal!ComboBox(_paramVals);
+      auto comboBox = getVal!(gtk.combo_box.ComboBox)(_paramVals);
       _dClosure.dlg(comboBox);
     }
 
@@ -624,8 +623,8 @@ class ComboBox : Widget, CellEditable, CellLayout
    * Returns: a newly allocated string representing path
    *   for the current `GtkComboBox` model.
    */
-  alias FormatEntryTextCallbackDlg = string delegate(string path, ComboBox comboBox);
-  alias FormatEntryTextCallbackFunc = string function(string path, ComboBox comboBox);
+  alias FormatEntryTextCallbackDlg = string delegate(string path, gtk.combo_box.ComboBox comboBox);
+  alias FormatEntryTextCallbackFunc = string function(string path, gtk.combo_box.ComboBox comboBox);
 
   /**
    * Connect to FormatEntryText signal.
@@ -641,8 +640,8 @@ class ComboBox : Widget, CellEditable, CellLayout
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto comboBox = getVal!ComboBox(_paramVals);
-      auto path = getVal!string(&_paramVals[1]);
+      auto comboBox = getVal!(gtk.combo_box.ComboBox)(_paramVals);
+      auto path = getVal!(string)(&_paramVals[1]);
       auto _retval = _dClosure.dlg(path, comboBox);
       setVal!string(_returnValue, _retval);
     }
@@ -658,8 +657,8 @@ class ComboBox : Widget, CellEditable, CellLayout
    *   scrollType = a `GtkScrollType`
    *   comboBox = the instance the signal is connected to
    */
-  alias MoveActiveCallbackDlg = void delegate(ScrollType scrollType, ComboBox comboBox);
-  alias MoveActiveCallbackFunc = void function(ScrollType scrollType, ComboBox comboBox);
+  alias MoveActiveCallbackDlg = void delegate(gtk.types.ScrollType scrollType, gtk.combo_box.ComboBox comboBox);
+  alias MoveActiveCallbackFunc = void function(gtk.types.ScrollType scrollType, gtk.combo_box.ComboBox comboBox);
 
   /**
    * Connect to MoveActive signal.
@@ -675,8 +674,8 @@ class ComboBox : Widget, CellEditable, CellLayout
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto comboBox = getVal!ComboBox(_paramVals);
-      auto scrollType = getVal!ScrollType(&_paramVals[1]);
+      auto comboBox = getVal!(gtk.combo_box.ComboBox)(_paramVals);
+      auto scrollType = getVal!(gtk.types.ScrollType)(&_paramVals[1]);
       _dClosure.dlg(scrollType, comboBox);
     }
 
@@ -691,8 +690,8 @@ class ComboBox : Widget, CellEditable, CellLayout
    *   comboBox = the instance the signal is connected to
    * Returns:
    */
-  alias PopdownCallbackDlg = bool delegate(ComboBox comboBox);
-  alias PopdownCallbackFunc = bool function(ComboBox comboBox);
+  alias PopdownCallbackDlg = bool delegate(gtk.combo_box.ComboBox comboBox);
+  alias PopdownCallbackFunc = bool function(gtk.combo_box.ComboBox comboBox);
 
   /**
    * Connect to Popdown signal.
@@ -709,7 +708,7 @@ class ComboBox : Widget, CellEditable, CellLayout
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto comboBox = getVal!ComboBox(_paramVals);
+      auto comboBox = getVal!(gtk.combo_box.ComboBox)(_paramVals);
       _retval = _dClosure.dlg(comboBox);
       setVal!bool(_returnValue, _retval);
     }
@@ -724,8 +723,8 @@ class ComboBox : Widget, CellEditable, CellLayout
    * The default binding for this signal is Alt+Down.
    *   comboBox = the instance the signal is connected to
    */
-  alias PopupCallbackDlg = void delegate(ComboBox comboBox);
-  alias PopupCallbackFunc = void function(ComboBox comboBox);
+  alias PopupCallbackDlg = void delegate(gtk.combo_box.ComboBox comboBox);
+  alias PopupCallbackFunc = void function(gtk.combo_box.ComboBox comboBox);
 
   /**
    * Connect to Popup signal.
@@ -741,7 +740,7 @@ class ComboBox : Widget, CellEditable, CellLayout
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto comboBox = getVal!ComboBox(_paramVals);
+      auto comboBox = getVal!(gtk.combo_box.ComboBox)(_paramVals);
       _dClosure.dlg(comboBox);
     }
 

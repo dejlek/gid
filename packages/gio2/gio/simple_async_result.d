@@ -1,6 +1,6 @@
 module gio.simple_async_result;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -14,7 +14,7 @@ import gobject.object;
  * As of GLib 2.46, `GSimpleAsyncResult` is deprecated in favor of
  * [gio.task.Task], which provides a simpler API.
  * `GSimpleAsyncResult` implements [gio.async_result.AsyncResult].
- * `GSimpleAsyncResult` handles [gio.AsyncReadyCallback]s, error
+ * `GSimpleAsyncResult` handles [gio.types.AsyncReadyCallback]s, error
  * reporting, operation cancellation and the final state of an operation,
  * completely transparent to the application. Results can be returned
  * as a pointer e.g. for functions that return data that is collected
@@ -154,7 +154,7 @@ import gobject.object;
  * }
  * ```
  */
-class SimpleAsyncResult : ObjectG, AsyncResult
+class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -192,14 +192,14 @@ class SimpleAsyncResult : ObjectG, AsyncResult
 
    * Deprecated: Use [gio.task.Task.new_] instead.
    */
-  this(ObjectG sourceObject, AsyncReadyCallback callback, void* sourceTag)
+  this(gobject.object.ObjectG sourceObject, gio.types.AsyncReadyCallback callback, void* sourceTag)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -219,21 +219,21 @@ class SimpleAsyncResult : ObjectG, AsyncResult
 
    * Deprecated: Use [gio.task.Task.new_] and [gio.task.Task.returnError] instead.
    */
-  static SimpleAsyncResult newFromError(ObjectG sourceObject, AsyncReadyCallback callback, ErrorG error)
+  static gio.simple_async_result.SimpleAsyncResult newFromError(gobject.object.ObjectG sourceObject, gio.types.AsyncReadyCallback callback, glib.error.ErrorG error)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     GSimpleAsyncResult* _cretval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    _cretval = g_simple_async_result_new_from_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, _callbackCB, _callback, error ? cast(GError*)error.cPtr : null);
-    auto _retval = ObjectG.getDObject!SimpleAsyncResult(cast(GSimpleAsyncResult*)_cretval, Yes.Take);
+    _cretval = g_simple_async_result_new_from_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, _callbackCB, _callback, error ? cast(const(GError)*)error.cPtr : null);
+    auto _retval = ObjectG.getDObject!(gio.simple_async_result.SimpleAsyncResult)(cast(GSimpleAsyncResult*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -257,7 +257,7 @@ class SimpleAsyncResult : ObjectG, AsyncResult
 
    * Deprecated: Use #GTask and [gio.task.Task.isValid] instead.
    */
-  static bool isValid(AsyncResult result, ObjectG source, void* sourceTag)
+  static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectG source, void* sourceTag)
   {
     bool _retval;
     _retval = g_simple_async_result_is_valid(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, source ? cast(ObjectC*)source.cPtr(No.Dup) : null, sourceTag);
@@ -359,7 +359,7 @@ class SimpleAsyncResult : ObjectG, AsyncResult
 
    * Deprecated: Use #GTask instead.
    */
-  void setCheckCancellable(Cancellable checkCancellable)
+  void setCheckCancellable(gio.cancellable.Cancellable checkCancellable)
   {
     g_simple_async_result_set_check_cancellable(cast(GSimpleAsyncResult*)cPtr, checkCancellable ? cast(GCancellable*)checkCancellable.cPtr(No.Dup) : null);
   }
@@ -371,9 +371,9 @@ class SimpleAsyncResult : ObjectG, AsyncResult
 
    * Deprecated: Use #GTask and [gio.task.Task.returnError] instead.
    */
-  void setFromError(ErrorG error)
+  void setFromError(glib.error.ErrorG error)
   {
-    g_simple_async_result_set_from_error(cast(GSimpleAsyncResult*)cPtr, error ? cast(GError*)error.cPtr : null);
+    g_simple_async_result_set_from_error(cast(GSimpleAsyncResult*)cPtr, error ? cast(const(GError)*)error.cPtr : null);
   }
 
   /**

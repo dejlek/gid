@@ -3,7 +3,7 @@ module gdk.rectangle;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -19,7 +19,7 @@ import gobject.boxed;
  * The Graphene library has a number of other data types for regions and
  * volumes in 2D and 3D.
  */
-class Rectangle : Boxed
+class Rectangle : gobject.boxed.Boxed
 {
 
   this()
@@ -98,7 +98,7 @@ class Rectangle : Boxed
   bool containsPoint(int x, int y)
   {
     bool _retval;
-    _retval = gdk_rectangle_contains_point(cast(GdkRectangle*)cPtr, x, y);
+    _retval = gdk_rectangle_contains_point(cast(const(GdkRectangle)*)cPtr, x, y);
     return _retval;
   }
 
@@ -108,10 +108,10 @@ class Rectangle : Boxed
    *   rect2 = a `GdkRectangle`
    * Returns: %TRUE if the rectangles are equal.
    */
-  bool equal(Rectangle rect2)
+  bool equal(gdk.rectangle.Rectangle rect2)
   {
     bool _retval;
-    _retval = gdk_rectangle_equal(cast(GdkRectangle*)cPtr, rect2 ? cast(GdkRectangle*)rect2.cPtr(No.Dup) : null);
+    _retval = gdk_rectangle_equal(cast(const(GdkRectangle)*)cPtr, rect2 ? cast(const(GdkRectangle)*)rect2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -128,12 +128,12 @@ class Rectangle : Boxed
    *     intersection of src1 and src2
    * Returns: %TRUE if the rectangles intersect.
    */
-  bool intersect(Rectangle src2, out Rectangle dest)
+  bool intersect(gdk.rectangle.Rectangle src2, out gdk.rectangle.Rectangle dest)
   {
     bool _retval;
     GdkRectangle _dest;
-    _retval = gdk_rectangle_intersect(cast(GdkRectangle*)cPtr, src2 ? cast(GdkRectangle*)src2.cPtr(No.Dup) : null, &_dest);
-    dest = new Rectangle(cast(void*)&_dest, No.Take);
+    _retval = gdk_rectangle_intersect(cast(const(GdkRectangle)*)cPtr, src2 ? cast(const(GdkRectangle)*)src2.cPtr(No.Dup) : null, &_dest);
+    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.Take);
     return _retval;
   }
 
@@ -148,10 +148,10 @@ class Rectangle : Boxed
    *   src2 = a `GdkRectangle`
    *   dest = return location for the union of src1 and src2
    */
-  void union_(Rectangle src2, out Rectangle dest)
+  void union_(gdk.rectangle.Rectangle src2, out gdk.rectangle.Rectangle dest)
   {
     GdkRectangle _dest;
-    gdk_rectangle_union(cast(GdkRectangle*)cPtr, src2 ? cast(GdkRectangle*)src2.cPtr(No.Dup) : null, &_dest);
-    dest = new Rectangle(cast(void*)&_dest, No.Take);
+    gdk_rectangle_union(cast(const(GdkRectangle)*)cPtr, src2 ? cast(const(GdkRectangle)*)src2.cPtr(No.Dup) : null, &_dest);
+    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.Take);
   }
 }

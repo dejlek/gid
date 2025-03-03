@@ -1,0 +1,169 @@
+module gdk.rgba;
+
+import gdk.c.functions;
+import gdk.c.types;
+import gdk.types;
+import gid.gid;
+import gobject.boxed;
+
+/**
+ * A #GdkRGBA is used to represent a $(LPAREN)possibly translucent$(RPAREN)
+ * color, in a way that is compatible with cairo’s notion of color.
+ */
+class RGBA : gobject.boxed.Boxed
+{
+
+  this()
+  {
+    super(safeMalloc(GdkRGBA.sizeof), Yes.Take);
+  }
+
+  this(void* ptr, Flag!"Take" take = No.Take)
+  {
+    super(cast(void*)ptr, take);
+  }
+
+  void* cPtr(Flag!"Dup" dup = No.Dup)
+  {
+    return dup ? copy_ : cInstancePtr;
+  }
+
+  static GType getType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gdk_rgba_get_type != &gidSymbolNotFound ? gdk_rgba_get_type() : cast(GType)0;
+  }
+
+  override @property GType gType()
+  {
+    return getType();
+  }
+
+  @property double red()
+  {
+    return (cast(GdkRGBA*)cPtr).red;
+  }
+
+  @property void red(double propval)
+  {
+    (cast(GdkRGBA*)cPtr).red = propval;
+  }
+
+  @property double green()
+  {
+    return (cast(GdkRGBA*)cPtr).green;
+  }
+
+  @property void green(double propval)
+  {
+    (cast(GdkRGBA*)cPtr).green = propval;
+  }
+
+  @property double blue()
+  {
+    return (cast(GdkRGBA*)cPtr).blue;
+  }
+
+  @property void blue(double propval)
+  {
+    (cast(GdkRGBA*)cPtr).blue = propval;
+  }
+
+  @property double alpha()
+  {
+    return (cast(GdkRGBA*)cPtr).alpha;
+  }
+
+  @property void alpha(double propval)
+  {
+    (cast(GdkRGBA*)cPtr).alpha = propval;
+  }
+
+  /**
+   * Makes a copy of a #GdkRGBA.
+   * The result must be freed through [gdk.rgba.RGBA.free].
+   * Returns: A newly allocated #GdkRGBA, with the same contents as rgba
+   */
+  gdk.rgba.RGBA copy()
+  {
+    GdkRGBA* _cretval;
+    _cretval = gdk_rgba_copy(cast(const(GdkRGBA)*)cPtr);
+    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+   * Compares two RGBA colors.
+   * Params:
+   *   p2 = another #GdkRGBA pointer
+   * Returns: %TRUE if the two colors compare equal
+   */
+  bool equal(gdk.rgba.RGBA p2)
+  {
+    bool _retval;
+    _retval = gdk_rgba_equal(cast(GdkRGBA*)cPtr, p2 ? cast(GdkRGBA*)p2.cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+   * A hash function suitable for using for a hash
+   * table that stores #GdkRGBAs.
+   * Returns: The hash value for p
+   */
+  uint hash()
+  {
+    uint _retval;
+    _retval = gdk_rgba_hash(cast(GdkRGBA*)cPtr);
+    return _retval;
+  }
+
+  /**
+   * Parses a textual representation of a color, filling in
+   * the red, green, blue and alpha fields of the rgba #GdkRGBA.
+   * The string can be either one of:
+   * - A standard name $(LPAREN)Taken from the X11 rgb.txt file$(RPAREN).
+   * - A hexadecimal value in the form “\#rgb”, “\#rrggbb”,
+   * “\#rrrgggbbb” or ”\#rrrrggggbbbb”
+   * - A RGB color in the form “rgb$(LPAREN)r,g,b$(RPAREN)” $(LPAREN)In this case the color will
+   * have full opacity$(RPAREN)
+   * - A RGBA color in the form “rgba$(LPAREN)r,g,b,a$(RPAREN)”
+   * Where “r”, “g”, “b” and “a” are respectively the red, green, blue and
+   * alpha color values. In the last two cases, “r”, “g”, and “b” are either integers
+   * in the range 0 to 255 or percentage values in the range 0% to 100%, and
+   * a is a floating point value in the range 0 to 1.
+   * Params:
+   *   spec = the string specifying the color
+   * Returns: %TRUE if the parsing succeeded
+   */
+  bool parse(string spec)
+  {
+    bool _retval;
+    const(char)* _spec = spec.toCString(No.Alloc);
+    _retval = gdk_rgba_parse(cast(GdkRGBA*)cPtr, _spec);
+    return _retval;
+  }
+
+  /**
+   * Returns a textual specification of rgba in the form
+   * `rgb$(LPAREN)r,g,b$(RPAREN)` or
+   * `rgba$(LPAREN)r g,b,a$(RPAREN)`,
+   * where “r”, “g”, “b” and “a” represent the red, green,
+   * blue and alpha values respectively. “r”, “g”, and “b” are
+   * represented as integers in the range 0 to 255, and “a”
+   * is represented as a floating point value in the range 0 to 1.
+   * These string forms are string forms that are supported by
+   * the CSS3 colors module, and can be parsed by [gdk.rgba.RGBA.parse].
+   * Note that this string representation may lose some
+   * precision, since “r”, “g” and “b” are represented as 8-bit
+   * integers. If this is a concern, you should use a
+   * different representation.
+   * Returns: A newly allocated text string
+   */
+  string toString_()
+  {
+    char* _cretval;
+    _cretval = gdk_rgba_to_string(cast(const(GdkRGBA)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    return _retval;
+  }
+}

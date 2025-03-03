@@ -1,6 +1,6 @@
 module glib.test_log_msg;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;

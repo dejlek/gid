@@ -1,6 +1,6 @@
 module gtksource.style_scheme_manager;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -10,7 +10,7 @@ import gtksource.types;
 /**
  * Provides access to class@StyleSchemes.
  */
-class StyleSchemeManager : ObjectG
+class StyleSchemeManager : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -47,11 +47,11 @@ class StyleSchemeManager : ObjectG
    * Returns: a #GtkSourceStyleSchemeManager. Return value
    *   is owned by GtkSourceView library and must not be unref'ed.
    */
-  static StyleSchemeManager getDefault()
+  static gtksource.style_scheme_manager.StyleSchemeManager getDefault()
   {
     GtkSourceStyleSchemeManager* _cretval;
     _cretval = gtk_source_style_scheme_manager_get_default();
-    auto _retval = ObjectG.getDObject!StyleSchemeManager(cast(GtkSourceStyleSchemeManager*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.style_scheme_manager.StyleSchemeManager)(cast(GtkSourceStyleSchemeManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -85,12 +85,12 @@ class StyleSchemeManager : ObjectG
    * Returns: a #GtkSourceStyleScheme object.
    *   The returned value is owned by manager and must not be unref'ed.
    */
-  StyleScheme getScheme(string schemeId)
+  gtksource.style_scheme.StyleScheme getScheme(string schemeId)
   {
     GtkSourceStyleScheme* _cretval;
     const(char)* _schemeId = schemeId.toCString(No.Alloc);
     _cretval = gtk_source_style_scheme_manager_get_scheme(cast(GtkSourceStyleSchemeManager*)cPtr, _schemeId);
-    auto _retval = ObjectG.getDObject!StyleScheme(cast(GtkSourceStyleScheme*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
     return _retval;
   }
 

@@ -1,6 +1,6 @@
 module gtk.bookmark_list;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -16,7 +16,7 @@ import gtk.types;
  * namespace added: `recent::private` $(LPAREN)boolean$(RPAREN) and `recent:applications`
  * $(LPAREN)stringv$(RPAREN).
  */
-class BookmarkList : ObjectG, ListModel
+class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -61,7 +61,7 @@ class BookmarkList : ObjectG, ListModel
   {
     const(char)* _cretval;
     _cretval = gtk_bookmark_list_get_attributes(cast(GtkBookmarkList*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class BookmarkList : ObjectG, ListModel
   {
     const(char)* _cretval;
     _cretval = gtk_bookmark_list_get_filename(cast(GtkBookmarkList*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

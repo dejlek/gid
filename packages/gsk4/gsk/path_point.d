@@ -1,6 +1,6 @@
 module gsk.path_point;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import graphene.point;
 import graphene.vec2;
@@ -22,7 +22,7 @@ import gsk.types;
  * It is the callers responsibility to keep a reference to the path
  * as long as the `GskPathPoint` is used.
  */
-class PathPoint : Boxed
+class PathPoint : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,18 +54,18 @@ class PathPoint : Boxed
    *   1 if point1 is after point2,
    *   0 if they are equal
    */
-  int compare(PathPoint point2)
+  int compare(gsk.path_point.PathPoint point2)
   {
     int _retval;
-    _retval = gsk_path_point_compare(cast(GskPathPoint*)cPtr, point2 ? cast(GskPathPoint*)point2.cPtr(No.Dup) : null);
+    _retval = gsk_path_point_compare(cast(const(GskPathPoint)*)cPtr, point2 ? cast(const(GskPathPoint)*)point2.cPtr(No.Dup) : null);
     return _retval;
   }
 
-  PathPoint copy()
+  gsk.path_point.PathPoint copy()
   {
     GskPathPoint* _cretval;
     _cretval = gsk_path_point_copy(cast(GskPathPoint*)cPtr);
-    auto _retval = _cretval ? new PathPoint(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gsk.path_point.PathPoint(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -81,10 +81,10 @@ class PathPoint : Boxed
    *   point2 = another `GskPathPoint`
    * Returns: `TRUE` if point1 and point2 are equal
    */
-  bool equal(PathPoint point2)
+  bool equal(gsk.path_point.PathPoint point2)
   {
     bool _retval;
-    _retval = gsk_path_point_equal(cast(GskPathPoint*)cPtr, point2 ? cast(GskPathPoint*)point2.cPtr(No.Dup) : null);
+    _retval = gsk_path_point_equal(cast(const(GskPathPoint)*)cPtr, point2 ? cast(const(GskPathPoint)*)point2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -111,12 +111,12 @@ class PathPoint : Boxed
    *     the center of the osculating circle
    * Returns: The curvature of the path at the given point
    */
-  float getCurvature(Path path, PathDirection direction, out Point center)
+  float getCurvature(gsk.path.Path path, gsk.types.PathDirection direction, out graphene.point.Point center)
   {
     float _retval;
     graphene_point_t _center;
-    _retval = gsk_path_point_get_curvature(cast(GskPathPoint*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, direction, &_center);
-    center = new Point(cast(void*)&_center, No.Take);
+    _retval = gsk_path_point_get_curvature(cast(const(GskPathPoint)*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, direction, &_center);
+    center = new graphene.point.Point(cast(void*)&_center, No.Take);
     return _retval;
   }
 
@@ -127,10 +127,10 @@ class PathPoint : Boxed
    *   measure = a `GskPathMeasure` for the path
    * Returns: the distance of point
    */
-  float getDistance(PathMeasure measure)
+  float getDistance(gsk.path_measure.PathMeasure measure)
   {
     float _retval;
-    _retval = gsk_path_point_get_distance(cast(GskPathPoint*)cPtr, measure ? cast(GskPathMeasure*)measure.cPtr(No.Dup) : null);
+    _retval = gsk_path_point_get_distance(cast(const(GskPathPoint)*)cPtr, measure ? cast(GskPathMeasure*)measure.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -141,11 +141,11 @@ class PathPoint : Boxed
    *   position = Return location for
    *     the coordinates of the point
    */
-  void getPosition(Path path, out Point position)
+  void getPosition(gsk.path.Path path, out graphene.point.Point position)
   {
     graphene_point_t _position;
-    gsk_path_point_get_position(cast(GskPathPoint*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, &_position);
-    position = new Point(cast(void*)&_position, No.Take);
+    gsk_path_point_get_position(cast(const(GskPathPoint)*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, &_position);
+    position = new graphene.point.Point(cast(void*)&_position, No.Take);
   }
 
   /**
@@ -159,10 +159,10 @@ class PathPoint : Boxed
    *   direction = the direction for which to return the rotation
    * Returns: the angle between the tangent and the X axis, in degrees
    */
-  float getRotation(Path path, PathDirection direction)
+  float getRotation(gsk.path.Path path, gsk.types.PathDirection direction)
   {
     float _retval;
-    _retval = gsk_path_point_get_rotation(cast(GskPathPoint*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, direction);
+    _retval = gsk_path_point_get_rotation(cast(const(GskPathPoint)*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, direction);
     return _retval;
   }
 
@@ -184,10 +184,10 @@ class PathPoint : Boxed
    *   tangent = Return location for
    *     the tangent at the point
    */
-  void getTangent(Path path, PathDirection direction, out Vec2 tangent)
+  void getTangent(gsk.path.Path path, gsk.types.PathDirection direction, out graphene.vec2.Vec2 tangent)
   {
     graphene_vec2_t _tangent;
-    gsk_path_point_get_tangent(cast(GskPathPoint*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, direction, &_tangent);
-    tangent = new Vec2(cast(void*)&_tangent, No.Take);
+    gsk_path_point_get_tangent(cast(const(GskPathPoint)*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, direction, &_tangent);
+    tangent = new graphene.vec2.Vec2(cast(void*)&_tangent, No.Take);
   }
 }

@@ -5,9 +5,9 @@ import arrow.c.types;
 import arrow.data_type;
 import arrow.function_options;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class RunEndEncodeOptions : FunctionOptions
+class RunEndEncodeOptions : arrow.function_options.FunctionOptions
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class RunEndEncodeOptions : FunctionOptions
     return getType();
   }
 
-  this(DataType runEndDataType)
+  this(arrow.data_type.DataType runEndDataType)
   {
     GArrowRunEndEncodeOptions* _cretval;
     _cretval = garrow_run_end_encode_options_new(runEndDataType ? cast(GArrowDataType*)runEndDataType.cPtr(No.Dup) : null);

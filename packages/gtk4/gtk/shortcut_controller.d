@@ -1,7 +1,7 @@
 module gtk.shortcut_controller;
 
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -48,7 +48,7 @@ import gtk.types;
  * [gtk.shortcut_trigger.ShortcutTrigger.parseString] to learn more about the syntax
  * for triggers.
  */
-class ShortcutController : EventController, ListModel, Buildable
+class ShortcutController : gtk.event_controller.EventController, gio.list_model.ListModel, gtk.buildable.Buildable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -91,11 +91,11 @@ class ShortcutController : EventController, ListModel, Buildable
    *   model = a `GListModel` containing shortcuts
    * Returns: a newly created shortcut controller
    */
-  static ShortcutController newForModel(ListModel model)
+  static gtk.shortcut_controller.ShortcutController newForModel(gio.list_model.ListModel model)
   {
     GtkEventController* _cretval;
     _cretval = gtk_shortcut_controller_new_for_model(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!ShortcutController(cast(GtkEventController*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.shortcut_controller.ShortcutController)(cast(GtkEventController*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class ShortcutController : EventController, ListModel, Buildable
    * Params:
    *   shortcut = a `GtkShortcut`
    */
-  void addShortcut(Shortcut shortcut)
+  void addShortcut(gtk.shortcut.Shortcut shortcut)
   {
     gtk_shortcut_controller_add_shortcut(cast(GtkShortcutController*)cPtr, shortcut ? cast(GtkShortcut*)shortcut.cPtr(Yes.Dup) : null);
   }
@@ -115,11 +115,11 @@ class ShortcutController : EventController, ListModel, Buildable
    * Gets the mnemonics modifiers for when this controller activates its shortcuts.
    * Returns: the controller's mnemonics modifiers
    */
-  ModifierType getMnemonicsModifiers()
+  gdk.types.ModifierType getMnemonicsModifiers()
   {
     GdkModifierType _cretval;
     _cretval = gtk_shortcut_controller_get_mnemonics_modifiers(cast(GtkShortcutController*)cPtr);
-    ModifierType _retval = cast(ModifierType)_cretval;
+    gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }
 
@@ -128,11 +128,11 @@ class ShortcutController : EventController, ListModel, Buildable
    * See [gtk.shortcut_controller.ShortcutController.setScope] for details.
    * Returns: the controller's scope
    */
-  ShortcutScope getScope()
+  gtk.types.ShortcutScope getScope()
   {
     GtkShortcutScope _cretval;
     _cretval = gtk_shortcut_controller_get_scope(cast(GtkShortcutController*)cPtr);
-    ShortcutScope _retval = cast(ShortcutScope)_cretval;
+    gtk.types.ShortcutScope _retval = cast(gtk.types.ShortcutScope)_cretval;
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class ShortcutController : EventController, ListModel, Buildable
    * Params:
    *   shortcut = a `GtkShortcut`
    */
-  void removeShortcut(Shortcut shortcut)
+  void removeShortcut(gtk.shortcut.Shortcut shortcut)
   {
     gtk_shortcut_controller_remove_shortcut(cast(GtkShortcutController*)cPtr, shortcut ? cast(GtkShortcut*)shortcut.cPtr(No.Dup) : null);
   }
@@ -162,7 +162,7 @@ class ShortcutController : EventController, ListModel, Buildable
    * Params:
    *   modifiers = the new mnemonics_modifiers to use
    */
-  void setMnemonicsModifiers(ModifierType modifiers)
+  void setMnemonicsModifiers(gdk.types.ModifierType modifiers)
   {
     gtk_shortcut_controller_set_mnemonics_modifiers(cast(GtkShortcutController*)cPtr, modifiers);
   }
@@ -178,7 +178,7 @@ class ShortcutController : EventController, ListModel, Buildable
    * Params:
    *   scope_ = the new scope to use
    */
-  void setScope(ShortcutScope scope_)
+  void setScope(gtk.types.ShortcutScope scope_)
   {
     gtk_shortcut_controller_set_scope(cast(GtkShortcutController*)cPtr, scope_);
   }

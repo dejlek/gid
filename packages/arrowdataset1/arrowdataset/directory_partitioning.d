@@ -7,10 +7,10 @@ import arrowdataset.c.types;
 import arrowdataset.key_value_partitioning;
 import arrowdataset.key_value_partitioning_options;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class DirectoryPartitioning : KeyValuePartitioning
+class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartitioning
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,11 +29,11 @@ class DirectoryPartitioning : KeyValuePartitioning
     return getType();
   }
 
-  this(Schema schema, Array[] dictionaries, KeyValuePartitioningOptions options)
+  this(arrow.schema.Schema schema, arrow.array.Array[] dictionaries, arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions options)
   {
     GADatasetDirectoryPartitioning* _cretval;
-    auto _dictionaries = gListFromD!(Array)(dictionaries);
-    scope(exit) containerFree!(GList*, Array, GidOwnership.None)(_dictionaries);
+    auto _dictionaries = gListFromD!(arrow.array.Array)(dictionaries);
+    scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_dictionaries);
     GError *_err;
     _cretval = gadataset_directory_partitioning_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, _dictionaries, options ? cast(GADatasetKeyValuePartitioningOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)

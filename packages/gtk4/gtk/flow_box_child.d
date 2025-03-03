@@ -1,6 +1,6 @@
 module gtk.flow_box_child;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -17,7 +17,7 @@ import gtk.widget;
 /**
  * `GtkFlowBoxChild` is the kind of widget that can be added to a `GtkFlowBox`.
  */
-class FlowBoxChild : Widget
+class FlowBoxChild : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -74,11 +74,11 @@ class FlowBoxChild : Widget
    * Gets the child widget of self.
    * Returns: the child widget of self
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_flow_box_child_get_child(cast(GtkFlowBoxChild*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class FlowBoxChild : Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_flow_box_child_set_child(cast(GtkFlowBoxChild*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -125,8 +125,8 @@ class FlowBoxChild : Widget
    * The default bindings are <kbd>Space</kbd> and <kbd>Enter</kbd>.
    *   flowBoxChild = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(FlowBoxChild flowBoxChild);
-  alias ActivateCallbackFunc = void function(FlowBoxChild flowBoxChild);
+  alias ActivateCallbackDlg = void delegate(gtk.flow_box_child.FlowBoxChild flowBoxChild);
+  alias ActivateCallbackFunc = void function(gtk.flow_box_child.FlowBoxChild flowBoxChild);
 
   /**
    * Connect to Activate signal.
@@ -142,7 +142,7 @@ class FlowBoxChild : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto flowBoxChild = getVal!FlowBoxChild(_paramVals);
+      auto flowBoxChild = getVal!(gtk.flow_box_child.FlowBoxChild)(_paramVals);
       _dClosure.dlg(flowBoxChild);
     }
 

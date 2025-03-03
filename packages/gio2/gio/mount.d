@@ -1,22 +1,17 @@
 module gio.mount;
 
 public import gio.mount_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
 import gio.drive;
-import gio.drive_mixin;
 import gio.file;
-import gio.file_mixin;
 import gio.icon;
-import gio.icon_mixin;
 import gio.mount_operation;
 import gio.types;
 import gio.volume;
-import gio.volume_mixin;
 import glib.error;
 import gobject.dclosure;
 import gobject.object;
@@ -33,7 +28,7 @@ import gobject.object;
  * more information about asynchronous operations, see [gio.async_result.AsyncResult]
  * and [gio.task.Task]. To unmount a `GMount` instance, first call
  * [gio.mount.Mount.unmountWithOperation] with (at least) the `GMount`
- * instance and a [gio.AsyncReadyCallback].  The callback will be fired
+ * instance and a [gio.types.AsyncReadyCallback].  The callback will be fired
  * when the operation has resolved $(LPAREN)either with success or failure$(RPAREN), and a
  * [gio.async_result.AsyncResult] structure will be passed to the callback.  That
  * callback should then call [gio.mount.Mount.unmountWithOperationFinish]
@@ -74,7 +69,7 @@ interface Mount
 
    * Deprecated: Use [gio.mount.Mount.ejectWithOperation] instead.
    */
-  void eject(MountUnmountFlags flags, Cancellable cancellable, AsyncReadyCallback callback);
+  void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes ejecting a mount. If any errors occurred during the operation,
@@ -85,7 +80,7 @@ interface Mount
 
    * Deprecated: Use [gio.mount.Mount.ejectWithOperationFinish] instead.
    */
-  bool ejectFinish(AsyncResult result);
+  bool ejectFinish(gio.async_result.AsyncResult result);
 
   /**
    * Ejects a mount. This is an asynchronous operation, and is
@@ -98,7 +93,7 @@ interface Mount
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
    */
-  void ejectWithOperation(MountUnmountFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback);
+  void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes ejecting a mount. If any errors occurred during the operation,
@@ -107,7 +102,7 @@ interface Mount
    *   result = a #GAsyncResult.
    * Returns: %TRUE if the mount was successfully ejected. %FALSE otherwise.
    */
-  bool ejectWithOperationFinish(AsyncResult result);
+  bool ejectWithOperationFinish(gio.async_result.AsyncResult result);
 
   /**
    * Gets the default location of mount. The default location of the given
@@ -117,7 +112,7 @@ interface Mount
    *   The returned object should be unreffed with
    *   [gobject.object.ObjectG.unref] when no longer needed.
    */
-  File getDefaultLocation();
+  gio.file.File getDefaultLocation();
 
   /**
    * Gets the drive for the mount.
@@ -128,7 +123,7 @@ interface Mount
    *   The returned object should be unreffed with
    *   [gobject.object.ObjectG.unref] when no longer needed.
    */
-  Drive getDrive();
+  gio.drive.Drive getDrive();
 
   /**
    * Gets the icon for mount.
@@ -136,7 +131,7 @@ interface Mount
    *   The returned object should be unreffed with
    *   [gobject.object.ObjectG.unref] when no longer needed.
    */
-  Icon getIcon();
+  gio.icon.Icon getIcon();
 
   /**
    * Gets the name of mount.
@@ -152,7 +147,7 @@ interface Mount
    *   The returned object should be unreffed with
    *   [gobject.object.ObjectG.unref] when no longer needed.
    */
-  File getRoot();
+  gio.file.File getRoot();
 
   /**
    * Gets the sort key for mount, if any.
@@ -166,7 +161,7 @@ interface Mount
    *   The returned object should be unreffed with
    *   [gobject.object.ObjectG.unref] when no longer needed.
    */
-  Icon getSymbolicIcon();
+  gio.icon.Icon getSymbolicIcon();
 
   /**
    * Gets the UUID for the mount. The reference is typically based on
@@ -187,7 +182,7 @@ interface Mount
    *   The returned object should be unreffed with
    *   [gobject.object.ObjectG.unref] when no longer needed.
    */
-  Volume getVolume();
+  gio.volume.Volume getVolume();
 
   /**
    * Tries to guess the type of content stored on mount. Returns one or
@@ -206,7 +201,7 @@ interface Mount
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback
    */
-  void guessContentType(bool forceRescan, Cancellable cancellable, AsyncReadyCallback callback);
+  void guessContentType(bool forceRescan, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes guessing content types of mount. If any errors occurred
@@ -219,7 +214,7 @@ interface Mount
    * Returns: a %NULL-terminated array of content types or %NULL on error.
    *   Caller should free this array with [glib.global.strfreev] when done with it.
    */
-  string[] guessContentTypeFinish(AsyncResult result);
+  string[] guessContentTypeFinish(gio.async_result.AsyncResult result);
 
   /**
    * Tries to guess the type of content stored on mount. Returns one or
@@ -237,7 +232,7 @@ interface Mount
    * Returns: a %NULL-terminated array of content types or %NULL on error.
    *   Caller should free this array with [glib.global.strfreev] when done with it.
    */
-  string[] guessContentTypeSync(bool forceRescan, Cancellable cancellable);
+  string[] guessContentTypeSync(bool forceRescan, gio.cancellable.Cancellable cancellable);
 
   /**
    * Determines if mount is shadowed. Applications or libraries should
@@ -280,7 +275,7 @@ interface Mount
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
    */
-  void remount(MountMountFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback);
+  void remount(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes remounting a mount. If any errors occurred during the operation,
@@ -289,7 +284,7 @@ interface Mount
    *   result = a #GAsyncResult.
    * Returns: %TRUE if the mount was successfully remounted. %FALSE otherwise.
    */
-  bool remountFinish(AsyncResult result);
+  bool remountFinish(gio.async_result.AsyncResult result);
 
   /**
    * Increments the shadow count on mount. Usually used by
@@ -310,7 +305,7 @@ interface Mount
 
    * Deprecated: Use [gio.mount.Mount.unmountWithOperation] instead.
    */
-  void unmount(MountUnmountFlags flags, Cancellable cancellable, AsyncReadyCallback callback);
+  void unmount(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes unmounting a mount. If any errors occurred during the operation,
@@ -321,7 +316,7 @@ interface Mount
 
    * Deprecated: Use [gio.mount.Mount.unmountWithOperationFinish] instead.
    */
-  bool unmountFinish(AsyncResult result);
+  bool unmountFinish(gio.async_result.AsyncResult result);
 
   /**
    * Unmounts a mount. This is an asynchronous operation, and is
@@ -334,7 +329,7 @@ interface Mount
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
    */
-  void unmountWithOperation(MountUnmountFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback);
+  void unmountWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes unmounting a mount. If any errors occurred during the operation,
@@ -343,7 +338,7 @@ interface Mount
    *   result = a #GAsyncResult.
    * Returns: %TRUE if the mount was successfully unmounted. %FALSE otherwise.
    */
-  bool unmountWithOperationFinish(AsyncResult result);
+  bool unmountWithOperationFinish(gio.async_result.AsyncResult result);
 
   /**
    * Decrements the shadow count on mount. Usually used by
@@ -357,8 +352,8 @@ interface Mount
    * Emitted when the mount has been changed.
    *   mount = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(Mount mount);
-  alias ChangedCallbackFunc = void function(Mount mount);
+  alias ChangedCallbackDlg = void delegate(gio.mount.Mount mount);
+  alias ChangedCallbackFunc = void function(gio.mount.Mount mount);
 
   /**
    * Connect to Changed signal.
@@ -377,8 +372,8 @@ interface Mount
    * GIO was used to unmount.
    *   mount = the instance the signal is connected to
    */
-  alias PreUnmountCallbackDlg = void delegate(Mount mount);
-  alias PreUnmountCallbackFunc = void function(Mount mount);
+  alias PreUnmountCallbackDlg = void delegate(gio.mount.Mount mount);
+  alias PreUnmountCallbackFunc = void function(gio.mount.Mount mount);
 
   /**
    * Connect to PreUnmount signal.
@@ -397,8 +392,8 @@ interface Mount
    * finalized.
    *   mount = the instance the signal is connected to
    */
-  alias UnmountedCallbackDlg = void delegate(Mount mount);
-  alias UnmountedCallbackFunc = void function(Mount mount);
+  alias UnmountedCallbackDlg = void delegate(gio.mount.Mount mount);
+  alias UnmountedCallbackFunc = void function(gio.mount.Mount mount);
 
   /**
    * Connect to Unmounted signal.

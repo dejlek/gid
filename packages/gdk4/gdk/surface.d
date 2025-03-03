@@ -1,7 +1,7 @@
 module gdk.surface;
 
 import cairo.region;
-import cairo.surface : DcairoSurface = Surface;
+import cairo.surface;
 import cairo.types;
 import gdk.c.functions;
 import gdk.c.types;
@@ -15,7 +15,7 @@ import gdk.glcontext;
 import gdk.monitor;
 import gdk.types;
 import gdk.vulkan_context;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.dclosure;
 import gobject.object;
@@ -29,7 +29,7 @@ import gobject.object;
  * API to interact with these surfaces. Other, more specialized surface
  * types exist, but you will rarely interact with them directly.
  */
-class Surface : ObjectG
+class Surface : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -57,11 +57,11 @@ class Surface : ObjectG
    *   autohide = whether to hide the surface on outside clicks
    * Returns: a new `GdkSurface`
    */
-  static Surface newPopup(Surface parent, bool autohide)
+  static gdk.surface.Surface newPopup(gdk.surface.Surface parent, bool autohide)
   {
     GdkSurface* _cretval;
     _cretval = gdk_surface_new_popup(parent ? cast(GdkSurface*)parent.cPtr(No.Dup) : null, autohide);
-    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -71,11 +71,11 @@ class Surface : ObjectG
    *   display = the display to create the surface on
    * Returns: the new `GdkSurface`
    */
-  static Surface newToplevel(Display display)
+  static gdk.surface.Surface newToplevel(gdk.display.Display display)
   {
     GdkSurface* _cretval;
     _cretval = gdk_surface_new_toplevel(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -93,11 +93,11 @@ class Surface : ObjectG
    * Creates a new `GdkCairoContext` for rendering on surface.
    * Returns: the newly created `GdkCairoContext`
    */
-  CairoContext createCairoContext()
+  gdk.cairo_context.CairoContext createCairoContext()
   {
     GdkCairoContext* _cretval;
     _cretval = gdk_surface_create_cairo_context(cast(GdkSurface*)cPtr);
-    auto _retval = ObjectG.getDObject!CairoContext(cast(GdkCairoContext*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.cairo_context.CairoContext)(cast(GdkCairoContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -109,14 +109,14 @@ class Surface : ObjectG
    * call [gdk.glcontext.GLContext.makeCurrent] or [gdk.glcontext.GLContext.realize].
    * Returns: the newly created `GdkGLContext`
    */
-  GLContext createGlContext()
+  gdk.glcontext.GLContext createGlContext()
   {
     GdkGLContext* _cretval;
     GError *_err;
     _cretval = gdk_surface_create_gl_context(cast(GdkSurface*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -143,11 +143,11 @@ class Surface : ObjectG
 
    * Deprecated: Create a suitable cairo image surface yourself
    */
-  DcairoSurface createSimilarSurface(Content content, int width, int height)
+  cairo.surface.Surface createSimilarSurface(cairo.types.Content content, int width, int height)
   {
     cairo_surface_t* _cretval;
     _cretval = gdk_surface_create_similar_surface(cast(GdkSurface*)cPtr, content, width, height);
-    auto _retval = _cretval ? new DcairoSurface(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -158,14 +158,14 @@ class Surface : ObjectG
    * Deprecated: GTK does not expose any Vulkan internals. This
    *   function is a leftover that was accidentally exposed.
    */
-  VulkanContext createVulkanContext()
+  gdk.vulkan_context.VulkanContext createVulkanContext()
   {
     GdkVulkanContext* _cretval;
     GError *_err;
     _cretval = gdk_surface_create_vulkan_context(cast(GdkSurface*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!VulkanContext(cast(GdkVulkanContext*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.vulkan_context.VulkanContext)(cast(GdkVulkanContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -191,11 +191,11 @@ class Surface : ObjectG
    * Use [gdk.surface.Surface.setCursor] to unset the cursor of the surface.
    * Returns: a `GdkCursor`
    */
-  Cursor getCursor()
+  gdk.cursor.Cursor getCursor()
   {
     GdkCursor* _cretval;
     _cretval = gdk_surface_get_cursor(cast(GdkSurface*)cPtr);
-    auto _retval = ObjectG.getDObject!Cursor(cast(GdkCursor*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -209,11 +209,11 @@ class Surface : ObjectG
    *   device = a pointer `GdkDevice`
    * Returns: a `GdkCursor`
    */
-  Cursor getDeviceCursor(Device device)
+  gdk.cursor.Cursor getDeviceCursor(gdk.device.Device device)
   {
     GdkCursor* _cretval;
     _cretval = gdk_surface_get_device_cursor(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Cursor(cast(GdkCursor*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ class Surface : ObjectG
    *   mask = return location for the modifier mask
    * Returns: %TRUE if the device is over the surface
    */
-  bool getDevicePosition(Device device, out double x, out double y, out ModifierType mask)
+  bool getDevicePosition(gdk.device.Device device, out double x, out double y, out gdk.types.ModifierType mask)
   {
     bool _retval;
     _retval = gdk_surface_get_device_position(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y, &mask);
@@ -239,11 +239,11 @@ class Surface : ObjectG
    * Gets the `GdkDisplay` associated with a `GdkSurface`.
    * Returns: the `GdkDisplay` associated with surface
    */
-  Display getDisplay()
+  gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gdk_surface_get_display(cast(GdkSurface*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -253,11 +253,11 @@ class Surface : ObjectG
    * reparented to a new toplevel surface.
    * Returns: the frame clock
    */
-  FrameClock getFrameClock()
+  gdk.frame_clock.FrameClock getFrameClock()
   {
     GdkFrameClock* _cretval;
     _cretval = gdk_surface_get_frame_clock(cast(GdkSurface*)cPtr);
-    auto _retval = ObjectG.getDObject!FrameClock(cast(GdkFrameClock*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
     return _retval;
   }
 
@@ -390,7 +390,7 @@ class Surface : ObjectG
    * Params:
    *   cursor = a `GdkCursor`
    */
-  void setCursor(Cursor cursor)
+  void setCursor(gdk.cursor.Cursor cursor)
   {
     gdk_surface_set_cursor(cast(GdkSurface*)cPtr, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
@@ -405,7 +405,7 @@ class Surface : ObjectG
    *   device = a pointer `GdkDevice`
    *   cursor = a `GdkCursor`
    */
-  void setDeviceCursor(Device device, Cursor cursor)
+  void setDeviceCursor(gdk.device.Device device, gdk.cursor.Cursor cursor)
   {
     gdk_surface_set_device_cursor(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
@@ -425,7 +425,7 @@ class Surface : ObjectG
    * Params:
    *   region = region of surface to be reactive
    */
-  void setInputRegion(Region region)
+  void setInputRegion(cairo.region.Region region)
   {
     gdk_surface_set_input_region(cast(GdkSurface*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
@@ -447,7 +447,7 @@ class Surface : ObjectG
    *   region = a region, or %NULL to make the entire
    *     surface opaque
    */
-  void setOpaqueRegion(Region region)
+  void setOpaqueRegion(cairo.region.Region region)
   {
     gdk_surface_set_opaque_region(cast(GdkSurface*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
@@ -462,7 +462,7 @@ class Surface : ObjectG
    *   y = coordinates to translate
    * Returns: %TRUE if the coordinates were successfully translated
    */
-  bool translateCoordinates(Surface to, ref double x, ref double y)
+  bool translateCoordinates(gdk.surface.Surface to, ref double x, ref double y)
   {
     bool _retval;
     _retval = gdk_surface_translate_coordinates(cast(GdkSurface*)cPtr, to ? cast(GdkSurface*)to.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
@@ -475,8 +475,8 @@ class Surface : ObjectG
    *   monitor = the monitor
    *   surface = the instance the signal is connected to
    */
-  alias EnterMonitorCallbackDlg = void delegate(MonitorG monitor, Surface surface);
-  alias EnterMonitorCallbackFunc = void function(MonitorG monitor, Surface surface);
+  alias EnterMonitorCallbackDlg = void delegate(gdk.monitor.MonitorG monitor, gdk.surface.Surface surface);
+  alias EnterMonitorCallbackFunc = void function(gdk.monitor.MonitorG monitor, gdk.surface.Surface surface);
 
   /**
    * Connect to EnterMonitor signal.
@@ -492,8 +492,8 @@ class Surface : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto surface = getVal!Surface(_paramVals);
-      auto monitor = getVal!MonitorG(&_paramVals[1]);
+      auto surface = getVal!(gdk.surface.Surface)(_paramVals);
+      auto monitor = getVal!(gdk.monitor.MonitorG)(&_paramVals[1]);
       _dClosure.dlg(monitor, surface);
     }
 
@@ -508,8 +508,8 @@ class Surface : ObjectG
    *   surface = the instance the signal is connected to
    * Returns: %TRUE to indicate that the event has been handled
    */
-  alias EventCallbackDlg = bool delegate(Event event, Surface surface);
-  alias EventCallbackFunc = bool function(Event event, Surface surface);
+  alias EventCallbackDlg = bool delegate(gdk.event.Event event, gdk.surface.Surface surface);
+  alias EventCallbackFunc = bool function(gdk.event.Event event, gdk.surface.Surface surface);
 
   /**
    * Connect to Event signal.
@@ -526,8 +526,8 @@ class Surface : ObjectG
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto surface = getVal!Surface(_paramVals);
-      auto event = getVal!Event(&_paramVals[1]);
+      auto surface = getVal!(gdk.surface.Surface)(_paramVals);
+      auto event = getVal!(gdk.event.Event)(&_paramVals[1]);
       _retval = _dClosure.dlg(event, surface);
       setVal!bool(_returnValue, _retval);
     }
@@ -546,8 +546,8 @@ class Surface : ObjectG
    *   height = the current height
    *   surface = the instance the signal is connected to
    */
-  alias LayoutCallbackDlg = void delegate(int width, int height, Surface surface);
-  alias LayoutCallbackFunc = void function(int width, int height, Surface surface);
+  alias LayoutCallbackDlg = void delegate(int width, int height, gdk.surface.Surface surface);
+  alias LayoutCallbackFunc = void function(int width, int height, gdk.surface.Surface surface);
 
   /**
    * Connect to Layout signal.
@@ -563,9 +563,9 @@ class Surface : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto surface = getVal!Surface(_paramVals);
-      auto width = getVal!int(&_paramVals[1]);
-      auto height = getVal!int(&_paramVals[2]);
+      auto surface = getVal!(gdk.surface.Surface)(_paramVals);
+      auto width = getVal!(int)(&_paramVals[1]);
+      auto height = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(width, height, surface);
     }
 
@@ -579,8 +579,8 @@ class Surface : ObjectG
    *   monitor = the monitor
    *   surface = the instance the signal is connected to
    */
-  alias LeaveMonitorCallbackDlg = void delegate(MonitorG monitor, Surface surface);
-  alias LeaveMonitorCallbackFunc = void function(MonitorG monitor, Surface surface);
+  alias LeaveMonitorCallbackDlg = void delegate(gdk.monitor.MonitorG monitor, gdk.surface.Surface surface);
+  alias LeaveMonitorCallbackFunc = void function(gdk.monitor.MonitorG monitor, gdk.surface.Surface surface);
 
   /**
    * Connect to LeaveMonitor signal.
@@ -596,8 +596,8 @@ class Surface : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto surface = getVal!Surface(_paramVals);
-      auto monitor = getVal!MonitorG(&_paramVals[1]);
+      auto surface = getVal!(gdk.surface.Surface)(_paramVals);
+      auto monitor = getVal!(gdk.monitor.MonitorG)(&_paramVals[1]);
       _dClosure.dlg(monitor, surface);
     }
 
@@ -612,8 +612,8 @@ class Surface : ObjectG
    *   surface = the instance the signal is connected to
    * Returns: %TRUE to indicate that the signal has been handled
    */
-  alias RenderCallbackDlg = bool delegate(Region region, Surface surface);
-  alias RenderCallbackFunc = bool function(Region region, Surface surface);
+  alias RenderCallbackDlg = bool delegate(cairo.region.Region region, gdk.surface.Surface surface);
+  alias RenderCallbackFunc = bool function(cairo.region.Region region, gdk.surface.Surface surface);
 
   /**
    * Connect to Render signal.
@@ -630,8 +630,8 @@ class Surface : ObjectG
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto surface = getVal!Surface(_paramVals);
-      auto region = getVal!Region(&_paramVals[1]);
+      auto surface = getVal!(gdk.surface.Surface)(_paramVals);
+      auto region = getVal!(cairo.region.Region)(&_paramVals[1]);
       _retval = _dClosure.dlg(region, surface);
       setVal!bool(_returnValue, _retval);
     }

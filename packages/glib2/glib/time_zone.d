@@ -1,6 +1,6 @@
 module glib.time_zone;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -29,7 +29,7 @@ import gobject.boxed;
  * that some properties $(LPAREN)like the abbreviation$(RPAREN) change between intervals
  * without other properties changing.
  */
-class TimeZone : Boxed
+class TimeZone : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -136,12 +136,12 @@ class TimeZone : Boxed
    * Returns: the requested timezone, or %NULL on
    *   failure
    */
-  static TimeZone newIdentifier(string identifier)
+  static glib.time_zone.TimeZone newIdentifier(string identifier)
   {
     GTimeZone* _cretval;
     const(char)* _identifier = identifier.toCString(No.Alloc);
     _cretval = g_time_zone_new_identifier(_identifier);
-    auto _retval = _cretval ? new TimeZone(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.time_zone.TimeZone(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -155,11 +155,11 @@ class TimeZone : Boxed
    * when you are done with it.
    * Returns: the local timezone
    */
-  static TimeZone newLocal()
+  static glib.time_zone.TimeZone newLocal()
   {
     GTimeZone* _cretval;
     _cretval = g_time_zone_new_local();
-    auto _retval = _cretval ? new TimeZone(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.time_zone.TimeZone(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -177,11 +177,11 @@ class TimeZone : Boxed
    * Returns: a timezone at the given offset from UTC, or UTC on
    *   failure
    */
-  static TimeZone newOffset(int seconds)
+  static glib.time_zone.TimeZone newOffset(int seconds)
   {
     GTimeZone* _cretval;
     _cretval = g_time_zone_new_offset(seconds);
-    auto _retval = _cretval ? new TimeZone(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.time_zone.TimeZone(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -193,11 +193,11 @@ class TimeZone : Boxed
    * when you are done with it.
    * Returns: the universal timezone
    */
-  static TimeZone newUtc()
+  static glib.time_zone.TimeZone newUtc()
   {
     GTimeZone* _cretval;
     _cretval = g_time_zone_new_utc();
-    auto _retval = _cretval ? new TimeZone(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.time_zone.TimeZone(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -220,7 +220,7 @@ class TimeZone : Boxed
    *   time = a pointer to a number of seconds since January 1, 1970
    * Returns: the interval containing time_, never -1
    */
-  int adjustTime(TimeType type, ref long time)
+  int adjustTime(glib.types.TimeType type, ref long time)
   {
     int _retval;
     _retval = g_time_zone_adjust_time(cast(GTimeZone*)cPtr, type, cast(long*)&time);
@@ -248,7 +248,7 @@ class TimeZone : Boxed
    *   time = a number of seconds since January 1, 1970
    * Returns: the interval containing time_, or -1 in case of failure
    */
-  int findInterval(TimeType type, long time)
+  int findInterval(glib.types.TimeType type, long time)
   {
     int _retval;
     _retval = g_time_zone_find_interval(cast(GTimeZone*)cPtr, type, time);
@@ -269,7 +269,7 @@ class TimeZone : Boxed
   {
     const(char)* _cretval;
     _cretval = g_time_zone_get_abbreviation(cast(GTimeZone*)cPtr, interval);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class TimeZone : Boxed
   {
     const(char)* _cretval;
     _cretval = g_time_zone_get_identifier(cast(GTimeZone*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

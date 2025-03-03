@@ -4,11 +4,11 @@ import arrow.array_builder;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.error;
 
-class BinaryArrayBuilder : ArrayBuilder
+class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -64,7 +64,7 @@ class BinaryArrayBuilder : ArrayBuilder
     return _retval;
   }
 
-  bool appendValueBytes(Bytes value)
+  bool appendValueBytes(glib.bytes.Bytes value)
   {
     bool _retval;
     GError *_err;
@@ -85,7 +85,7 @@ class BinaryArrayBuilder : ArrayBuilder
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendValues(Bytes[] values, bool[] isValids)
+  bool appendValues(glib.bytes.Bytes[] values, bool[] isValids)
   {
     bool _retval;
     long _valuesLength;

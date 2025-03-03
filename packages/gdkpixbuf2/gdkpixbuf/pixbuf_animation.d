@@ -5,9 +5,8 @@ import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf;
 import gdkpixbuf.pixbuf_animation_iter;
 import gdkpixbuf.types;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.input_stream;
 import gio.types;
@@ -27,7 +26,7 @@ import gobject.object;
  * representation, however; you just ask `GdkPixbuf` what should
  * be displayed at a given point in time.
  */
-class PixbufAnimation : ObjectG
+class PixbufAnimation : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -57,7 +56,7 @@ class PixbufAnimation : ObjectG
    *     name encoding
    * Returns: A newly-created animation
    */
-  static PixbufAnimation newFromFile(string filename)
+  static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromFile(string filename)
   {
     GdkPixbufAnimation* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -65,7 +64,7 @@ class PixbufAnimation : ObjectG
     _cretval = gdk_pixbuf_animation_new_from_file(_filename, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!PixbufAnimation(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -77,7 +76,7 @@ class PixbufAnimation : ObjectG
    *   resourcePath = the path of the resource file
    * Returns: A newly-created animation
    */
-  static PixbufAnimation newFromResource(string resourcePath)
+  static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromResource(string resourcePath)
   {
     GdkPixbufAnimation* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -85,7 +84,7 @@ class PixbufAnimation : ObjectG
     _cretval = gdk_pixbuf_animation_new_from_resource(_resourcePath, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!PixbufAnimation(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -103,14 +102,14 @@ class PixbufAnimation : ObjectG
    *   cancellable = optional `GCancellable` object
    * Returns: A newly-created animation
    */
-  static PixbufAnimation newFromStream(InputStream stream, Cancellable cancellable)
+  static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromStream(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable)
   {
     GdkPixbufAnimation* _cretval;
     GError *_err;
     _cretval = gdk_pixbuf_animation_new_from_stream(stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!PixbufAnimation(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -121,14 +120,14 @@ class PixbufAnimation : ObjectG
    *   asyncResult = a #GAsyncResult
    * Returns: the newly created animation
    */
-  static PixbufAnimation newFromStreamFinish(AsyncResult asyncResult)
+  static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromStreamFinish(gio.async_result.AsyncResult asyncResult)
   {
     GdkPixbufAnimation* _cretval;
     GError *_err;
     _cretval = gdk_pixbuf_animation_new_from_stream_finish(asyncResult ? cast(GAsyncResult*)(cast(ObjectG)asyncResult).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!PixbufAnimation(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -144,14 +143,14 @@ class PixbufAnimation : ObjectG
    *   cancellable = optional #GCancellable object
    *   callback = a `GAsyncReadyCallback` to call when the pixbuf is loaded
    */
-  static void newFromStreamAsync(InputStream stream, Cancellable cancellable, AsyncReadyCallback callback)
+  static void newFromStreamAsync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -203,11 +202,11 @@ class PixbufAnimation : ObjectG
    *   startTime = time when the animation starts playing
    * Returns: an iterator to move over the animation
    */
-  PixbufAnimationIter getIter(TimeVal startTime)
+  gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter getIter(glib.time_val.TimeVal startTime)
   {
     GdkPixbufAnimationIter* _cretval;
-    _cretval = gdk_pixbuf_animation_get_iter(cast(GdkPixbufAnimation*)cPtr, startTime ? cast(GTimeVal*)startTime.cPtr : null);
-    auto _retval = ObjectG.getDObject!PixbufAnimationIter(cast(GdkPixbufAnimationIter*)_cretval, Yes.Take);
+    _cretval = gdk_pixbuf_animation_get_iter(cast(GdkPixbufAnimation*)cPtr, startTime ? cast(const(GTimeVal)*)startTime.cPtr : null);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter)(cast(GdkPixbufAnimationIter*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -222,11 +221,11 @@ class PixbufAnimation : ObjectG
    * return `NULL`.
    * Returns: unanimated image representing the animation
    */
-  Pixbuf getStaticImage()
+  gdkpixbuf.pixbuf.Pixbuf getStaticImage()
   {
     PixbufC* _cretval;
     _cretval = gdk_pixbuf_animation_get_static_image(cast(GdkPixbufAnimation*)cPtr);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 

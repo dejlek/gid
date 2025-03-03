@@ -1,6 +1,6 @@
 module gtksource.mark;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.text_mark;
 import gtksource.c.functions;
@@ -20,7 +20,7 @@ import gtksource.types;
  * there are multiple marks in the same line, the pixbufs will be drawn on top
  * of each other. The mark with the highest priority will be drawn on top.
  */
-class Mark : TextMark
+class Mark : gtk.text_mark.TextMark
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -71,7 +71,7 @@ class Mark : TextMark
   {
     const(char)* _cretval;
     _cretval = gtk_source_mark_get_category(cast(GtkSourceMark*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -84,12 +84,12 @@ class Mark : TextMark
    *   category = a string specifying the mark category, or %NULL.
    * Returns: the next #GtkSourceMark, or %NULL.
    */
-  Mark next(string category)
+  gtksource.mark.Mark next(string category)
   {
     GtkSourceMark* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
     _cretval = gtk_source_mark_next(cast(GtkSourceMark*)cPtr, _category);
-    auto _retval = ObjectG.getDObject!Mark(cast(GtkSourceMark*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -102,12 +102,12 @@ class Mark : TextMark
    *   category = a string specifying the mark category, or %NULL.
    * Returns: the previous #GtkSourceMark, or %NULL.
    */
-  Mark prev(string category)
+  gtksource.mark.Mark prev(string category)
   {
     GtkSourceMark* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
     _cretval = gtk_source_mark_prev(cast(GtkSourceMark*)cPtr, _category);
-    auto _retval = ObjectG.getDObject!Mark(cast(GtkSourceMark*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
     return _retval;
   }
 }

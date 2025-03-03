@@ -55,44 +55,6 @@ __gshared extern(C)
   bool function(SecretCollection* self, GAsyncResult* result, GError** _err) c_secret_collection_set_label_finish;
   bool function(SecretCollection* self, const(char)* label, GCancellable* cancellable, GError** _err) c_secret_collection_set_label_sync;
 
-  // Global
-  GHashTable* function(const(SecretSchema)* schema,  ...) c_secret_attributes_build;
-  GHashTable* function(const(SecretSchema)* schema, void* va) c_secret_attributes_buildv;
-  bool function(const(SecretSchema)* schema, GHashTable* attributes, GError** _err) c_secret_attributes_validate;
-  const(SecretSchema)* function(SecretSchemaType type) c_secret_get_schema;
-  void function(const(SecretSchema)* schema, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) c_secret_password_clear;
-  bool function(GAsyncResult* result, GError** _err) c_secret_password_clear_finish;
-  bool function(const(SecretSchema)* schema, GCancellable* cancellable, GError** error,  ...) c_secret_password_clear_sync;
-  void function(const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_password_clearv;
-  bool function(const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_password_clearv_sync;
-  void function(char* password) c_secret_password_free;
-  void function(const(SecretSchema)* schema, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) c_secret_password_lookup;
-  SecretValue* function(GAsyncResult* result, GError** _err) c_secret_password_lookup_binary_finish;
-  SecretValue* function(const(SecretSchema)* schema, GCancellable* cancellable, GError** error,  ...) c_secret_password_lookup_binary_sync;
-  char* function(GAsyncResult* result, GError** _err) c_secret_password_lookup_finish;
-  char* function(GAsyncResult* result, GError** _err) c_secret_password_lookup_nonpageable_finish;
-  char* function(const(SecretSchema)* schema, GCancellable* cancellable, GError** error,  ...) c_secret_password_lookup_nonpageable_sync;
-  char* function(const(SecretSchema)* schema, GCancellable* cancellable, GError** error,  ...) c_secret_password_lookup_sync;
-  void function(const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_password_lookupv;
-  SecretValue* function(const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_password_lookupv_binary_sync;
-  char* function(const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_password_lookupv_nonpageable_sync;
-  char* function(const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_password_lookupv_sync;
-  void function(const(SecretSchema)* schema, SecretSearchFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) c_secret_password_search;
-  GList* function(GAsyncResult* result, GError** _err) c_secret_password_search_finish;
-  GList* function(const(SecretSchema)* schema, SecretSearchFlags flags, GCancellable* cancellable, GError** error,  ...) c_secret_password_search_sync;
-  void function(const(SecretSchema)* schema, GHashTable* attributes, SecretSearchFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_password_searchv;
-  GList* function(const(SecretSchema)* schema, GHashTable* attributes, SecretSearchFlags flags, GCancellable* cancellable, GError** _err) c_secret_password_searchv_sync;
-  void function(const(SecretSchema)* schema, const(char)* collection, const(char)* label, const(char)* password, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) c_secret_password_store;
-  void function(const(SecretSchema)* schema, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) c_secret_password_store_binary;
-  bool function(const(SecretSchema)* schema, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GError** error,  ...) c_secret_password_store_binary_sync;
-  bool function(GAsyncResult* result, GError** _err) c_secret_password_store_finish;
-  bool function(const(SecretSchema)* schema, const(char)* collection, const(char)* label, const(char)* password, GCancellable* cancellable, GError** error,  ...) c_secret_password_store_sync;
-  void function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, const(char)* password, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_password_storev;
-  void function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_password_storev_binary;
-  bool function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GError** _err) c_secret_password_storev_binary_sync;
-  bool function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, const(char)* password, GCancellable* cancellable, GError** _err) c_secret_password_storev_sync;
-  void function(char* password) c_secret_password_wipe;
-
   // Item
   extern(C) GType function() c_secret_item_get_type;
   SecretItem* function(GAsyncResult* result, GError** _err) c_secret_item_new_for_dbus_path_finish;
@@ -241,13 +203,51 @@ __gshared extern(C)
   // ValueSecret
   extern(C) GType function() c_secret_value_get_type;
   SecretValue* function(const(char)* secret, ptrdiff_t length, const(char)* contentType) c_secret_value_new;
-  SecretValue* function(char* secret, ptrdiff_t length, const(char)* contentType, GDestroyNotify destroy) c_secret_value_new_full;
+  SecretValue* function(char* secretData, ptrdiff_t length, const(char)* contentType, GDestroyNotify destroy) c_secret_value_new_full;
   const(ubyte)* function(SecretValue* value, size_t* length) c_secret_value_get;
   const(char)* function(SecretValue* value) c_secret_value_get_content_type;
   const(char)* function(SecretValue* value) c_secret_value_get_text;
   SecretValue* function(SecretValue* value) c_secret_value_ref;
   void function(SecretValue* value) c_secret_value_unref;
   char* function(SecretValue* value, size_t* length) c_secret_value_unref_to_password;
+
+  // global
+  GHashTable* function(const(SecretSchema)* schema,  ...) c_secret_attributes_build;
+  GHashTable* function(const(SecretSchema)* schema, void* va) c_secret_attributes_buildv;
+  bool function(const(SecretSchema)* schema, GHashTable* attributes, GError** _err) c_secret_attributes_validate;
+  const(SecretSchema)* function(SecretSchemaType type) c_secret_get_schema;
+  void function(const(SecretSchema)* schema, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) c_secret_password_clear;
+  bool function(GAsyncResult* result, GError** _err) c_secret_password_clear_finish;
+  bool function(const(SecretSchema)* schema, GCancellable* cancellable, GError** error,  ...) c_secret_password_clear_sync;
+  void function(const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_password_clearv;
+  bool function(const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_password_clearv_sync;
+  void function(char* password) c_secret_password_free;
+  void function(const(SecretSchema)* schema, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) c_secret_password_lookup;
+  SecretValue* function(GAsyncResult* result, GError** _err) c_secret_password_lookup_binary_finish;
+  SecretValue* function(const(SecretSchema)* schema, GCancellable* cancellable, GError** error,  ...) c_secret_password_lookup_binary_sync;
+  char* function(GAsyncResult* result, GError** _err) c_secret_password_lookup_finish;
+  char* function(GAsyncResult* result, GError** _err) c_secret_password_lookup_nonpageable_finish;
+  char* function(const(SecretSchema)* schema, GCancellable* cancellable, GError** error,  ...) c_secret_password_lookup_nonpageable_sync;
+  char* function(const(SecretSchema)* schema, GCancellable* cancellable, GError** error,  ...) c_secret_password_lookup_sync;
+  void function(const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_password_lookupv;
+  SecretValue* function(const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_password_lookupv_binary_sync;
+  char* function(const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_password_lookupv_nonpageable_sync;
+  char* function(const(SecretSchema)* schema, GHashTable* attributes, GCancellable* cancellable, GError** _err) c_secret_password_lookupv_sync;
+  void function(const(SecretSchema)* schema, SecretSearchFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) c_secret_password_search;
+  GList* function(GAsyncResult* result, GError** _err) c_secret_password_search_finish;
+  GList* function(const(SecretSchema)* schema, SecretSearchFlags flags, GCancellable* cancellable, GError** error,  ...) c_secret_password_search_sync;
+  void function(const(SecretSchema)* schema, GHashTable* attributes, SecretSearchFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_password_searchv;
+  GList* function(const(SecretSchema)* schema, GHashTable* attributes, SecretSearchFlags flags, GCancellable* cancellable, GError** _err) c_secret_password_searchv_sync;
+  void function(const(SecretSchema)* schema, const(char)* collection, const(char)* label, const(char)* password, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) c_secret_password_store;
+  void function(const(SecretSchema)* schema, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) c_secret_password_store_binary;
+  bool function(const(SecretSchema)* schema, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GError** error,  ...) c_secret_password_store_binary_sync;
+  bool function(GAsyncResult* result, GError** _err) c_secret_password_store_finish;
+  bool function(const(SecretSchema)* schema, const(char)* collection, const(char)* label, const(char)* password, GCancellable* cancellable, GError** error,  ...) c_secret_password_store_sync;
+  void function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, const(char)* password, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_password_storev;
+  void function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_secret_password_storev_binary;
+  bool function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GError** _err) c_secret_password_storev_binary_sync;
+  bool function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, const(char)* password, GCancellable* cancellable, GError** _err) c_secret_password_storev_sync;
+  void function(char* password) c_secret_password_wipe;
 }
 
 // Backend
@@ -289,44 +289,6 @@ alias secret_collection_search_sync = c_secret_collection_search_sync;
 alias secret_collection_set_label = c_secret_collection_set_label;
 alias secret_collection_set_label_finish = c_secret_collection_set_label_finish;
 alias secret_collection_set_label_sync = c_secret_collection_set_label_sync;
-
-// Global
-alias secret_attributes_build = c_secret_attributes_build;
-alias secret_attributes_buildv = c_secret_attributes_buildv;
-alias secret_attributes_validate = c_secret_attributes_validate;
-alias secret_get_schema = c_secret_get_schema;
-alias secret_password_clear = c_secret_password_clear;
-alias secret_password_clear_finish = c_secret_password_clear_finish;
-alias secret_password_clear_sync = c_secret_password_clear_sync;
-alias secret_password_clearv = c_secret_password_clearv;
-alias secret_password_clearv_sync = c_secret_password_clearv_sync;
-alias secret_password_free = c_secret_password_free;
-alias secret_password_lookup = c_secret_password_lookup;
-alias secret_password_lookup_binary_finish = c_secret_password_lookup_binary_finish;
-alias secret_password_lookup_binary_sync = c_secret_password_lookup_binary_sync;
-alias secret_password_lookup_finish = c_secret_password_lookup_finish;
-alias secret_password_lookup_nonpageable_finish = c_secret_password_lookup_nonpageable_finish;
-alias secret_password_lookup_nonpageable_sync = c_secret_password_lookup_nonpageable_sync;
-alias secret_password_lookup_sync = c_secret_password_lookup_sync;
-alias secret_password_lookupv = c_secret_password_lookupv;
-alias secret_password_lookupv_binary_sync = c_secret_password_lookupv_binary_sync;
-alias secret_password_lookupv_nonpageable_sync = c_secret_password_lookupv_nonpageable_sync;
-alias secret_password_lookupv_sync = c_secret_password_lookupv_sync;
-alias secret_password_search = c_secret_password_search;
-alias secret_password_search_finish = c_secret_password_search_finish;
-alias secret_password_search_sync = c_secret_password_search_sync;
-alias secret_password_searchv = c_secret_password_searchv;
-alias secret_password_searchv_sync = c_secret_password_searchv_sync;
-alias secret_password_store = c_secret_password_store;
-alias secret_password_store_binary = c_secret_password_store_binary;
-alias secret_password_store_binary_sync = c_secret_password_store_binary_sync;
-alias secret_password_store_finish = c_secret_password_store_finish;
-alias secret_password_store_sync = c_secret_password_store_sync;
-alias secret_password_storev = c_secret_password_storev;
-alias secret_password_storev_binary = c_secret_password_storev_binary;
-alias secret_password_storev_binary_sync = c_secret_password_storev_binary_sync;
-alias secret_password_storev_sync = c_secret_password_storev_sync;
-alias secret_password_wipe = c_secret_password_wipe;
 
 // Item
 alias secret_item_get_type = c_secret_item_get_type;
@@ -484,6 +446,44 @@ alias secret_value_ref = c_secret_value_ref;
 alias secret_value_unref = c_secret_value_unref;
 alias secret_value_unref_to_password = c_secret_value_unref_to_password;
 
+// global
+alias secret_attributes_build = c_secret_attributes_build;
+alias secret_attributes_buildv = c_secret_attributes_buildv;
+alias secret_attributes_validate = c_secret_attributes_validate;
+alias secret_get_schema = c_secret_get_schema;
+alias secret_password_clear = c_secret_password_clear;
+alias secret_password_clear_finish = c_secret_password_clear_finish;
+alias secret_password_clear_sync = c_secret_password_clear_sync;
+alias secret_password_clearv = c_secret_password_clearv;
+alias secret_password_clearv_sync = c_secret_password_clearv_sync;
+alias secret_password_free = c_secret_password_free;
+alias secret_password_lookup = c_secret_password_lookup;
+alias secret_password_lookup_binary_finish = c_secret_password_lookup_binary_finish;
+alias secret_password_lookup_binary_sync = c_secret_password_lookup_binary_sync;
+alias secret_password_lookup_finish = c_secret_password_lookup_finish;
+alias secret_password_lookup_nonpageable_finish = c_secret_password_lookup_nonpageable_finish;
+alias secret_password_lookup_nonpageable_sync = c_secret_password_lookup_nonpageable_sync;
+alias secret_password_lookup_sync = c_secret_password_lookup_sync;
+alias secret_password_lookupv = c_secret_password_lookupv;
+alias secret_password_lookupv_binary_sync = c_secret_password_lookupv_binary_sync;
+alias secret_password_lookupv_nonpageable_sync = c_secret_password_lookupv_nonpageable_sync;
+alias secret_password_lookupv_sync = c_secret_password_lookupv_sync;
+alias secret_password_search = c_secret_password_search;
+alias secret_password_search_finish = c_secret_password_search_finish;
+alias secret_password_search_sync = c_secret_password_search_sync;
+alias secret_password_searchv = c_secret_password_searchv;
+alias secret_password_searchv_sync = c_secret_password_searchv_sync;
+alias secret_password_store = c_secret_password_store;
+alias secret_password_store_binary = c_secret_password_store_binary;
+alias secret_password_store_binary_sync = c_secret_password_store_binary_sync;
+alias secret_password_store_finish = c_secret_password_store_finish;
+alias secret_password_store_sync = c_secret_password_store_sync;
+alias secret_password_storev = c_secret_password_storev;
+alias secret_password_storev_binary = c_secret_password_storev_binary;
+alias secret_password_storev_binary_sync = c_secret_password_storev_binary_sync;
+alias secret_password_storev_sync = c_secret_password_storev_sync;
+alias secret_password_wipe = c_secret_password_wipe;
+
 shared static this()
 {
   // Backend
@@ -525,44 +525,6 @@ shared static this()
   gidLink(cast(void**)&secret_collection_set_label, "secret_collection_set_label", LIBS);
   gidLink(cast(void**)&secret_collection_set_label_finish, "secret_collection_set_label_finish", LIBS);
   gidLink(cast(void**)&secret_collection_set_label_sync, "secret_collection_set_label_sync", LIBS);
-
-  // Global
-  gidLink(cast(void**)&secret_attributes_build, "secret_attributes_build", LIBS);
-  gidLink(cast(void**)&secret_attributes_buildv, "secret_attributes_buildv", LIBS);
-  gidLink(cast(void**)&secret_attributes_validate, "secret_attributes_validate", LIBS);
-  gidLink(cast(void**)&secret_get_schema, "secret_get_schema", LIBS);
-  gidLink(cast(void**)&secret_password_clear, "secret_password_clear", LIBS);
-  gidLink(cast(void**)&secret_password_clear_finish, "secret_password_clear_finish", LIBS);
-  gidLink(cast(void**)&secret_password_clear_sync, "secret_password_clear_sync", LIBS);
-  gidLink(cast(void**)&secret_password_clearv, "secret_password_clearv", LIBS);
-  gidLink(cast(void**)&secret_password_clearv_sync, "secret_password_clearv_sync", LIBS);
-  gidLink(cast(void**)&secret_password_free, "secret_password_free", LIBS);
-  gidLink(cast(void**)&secret_password_lookup, "secret_password_lookup", LIBS);
-  gidLink(cast(void**)&secret_password_lookup_binary_finish, "secret_password_lookup_binary_finish", LIBS);
-  gidLink(cast(void**)&secret_password_lookup_binary_sync, "secret_password_lookup_binary_sync", LIBS);
-  gidLink(cast(void**)&secret_password_lookup_finish, "secret_password_lookup_finish", LIBS);
-  gidLink(cast(void**)&secret_password_lookup_nonpageable_finish, "secret_password_lookup_nonpageable_finish", LIBS);
-  gidLink(cast(void**)&secret_password_lookup_nonpageable_sync, "secret_password_lookup_nonpageable_sync", LIBS);
-  gidLink(cast(void**)&secret_password_lookup_sync, "secret_password_lookup_sync", LIBS);
-  gidLink(cast(void**)&secret_password_lookupv, "secret_password_lookupv", LIBS);
-  gidLink(cast(void**)&secret_password_lookupv_binary_sync, "secret_password_lookupv_binary_sync", LIBS);
-  gidLink(cast(void**)&secret_password_lookupv_nonpageable_sync, "secret_password_lookupv_nonpageable_sync", LIBS);
-  gidLink(cast(void**)&secret_password_lookupv_sync, "secret_password_lookupv_sync", LIBS);
-  gidLink(cast(void**)&secret_password_search, "secret_password_search", LIBS);
-  gidLink(cast(void**)&secret_password_search_finish, "secret_password_search_finish", LIBS);
-  gidLink(cast(void**)&secret_password_search_sync, "secret_password_search_sync", LIBS);
-  gidLink(cast(void**)&secret_password_searchv, "secret_password_searchv", LIBS);
-  gidLink(cast(void**)&secret_password_searchv_sync, "secret_password_searchv_sync", LIBS);
-  gidLink(cast(void**)&secret_password_store, "secret_password_store", LIBS);
-  gidLink(cast(void**)&secret_password_store_binary, "secret_password_store_binary", LIBS);
-  gidLink(cast(void**)&secret_password_store_binary_sync, "secret_password_store_binary_sync", LIBS);
-  gidLink(cast(void**)&secret_password_store_finish, "secret_password_store_finish", LIBS);
-  gidLink(cast(void**)&secret_password_store_sync, "secret_password_store_sync", LIBS);
-  gidLink(cast(void**)&secret_password_storev, "secret_password_storev", LIBS);
-  gidLink(cast(void**)&secret_password_storev_binary, "secret_password_storev_binary", LIBS);
-  gidLink(cast(void**)&secret_password_storev_binary_sync, "secret_password_storev_binary_sync", LIBS);
-  gidLink(cast(void**)&secret_password_storev_sync, "secret_password_storev_sync", LIBS);
-  gidLink(cast(void**)&secret_password_wipe, "secret_password_wipe", LIBS);
 
   // Item
   gidLink(cast(void**)&secret_item_get_type, "secret_item_get_type", LIBS);
@@ -719,4 +681,42 @@ shared static this()
   gidLink(cast(void**)&secret_value_ref, "secret_value_ref", LIBS);
   gidLink(cast(void**)&secret_value_unref, "secret_value_unref", LIBS);
   gidLink(cast(void**)&secret_value_unref_to_password, "secret_value_unref_to_password", LIBS);
+
+  // global
+  gidLink(cast(void**)&secret_attributes_build, "secret_attributes_build", LIBS);
+  gidLink(cast(void**)&secret_attributes_buildv, "secret_attributes_buildv", LIBS);
+  gidLink(cast(void**)&secret_attributes_validate, "secret_attributes_validate", LIBS);
+  gidLink(cast(void**)&secret_get_schema, "secret_get_schema", LIBS);
+  gidLink(cast(void**)&secret_password_clear, "secret_password_clear", LIBS);
+  gidLink(cast(void**)&secret_password_clear_finish, "secret_password_clear_finish", LIBS);
+  gidLink(cast(void**)&secret_password_clear_sync, "secret_password_clear_sync", LIBS);
+  gidLink(cast(void**)&secret_password_clearv, "secret_password_clearv", LIBS);
+  gidLink(cast(void**)&secret_password_clearv_sync, "secret_password_clearv_sync", LIBS);
+  gidLink(cast(void**)&secret_password_free, "secret_password_free", LIBS);
+  gidLink(cast(void**)&secret_password_lookup, "secret_password_lookup", LIBS);
+  gidLink(cast(void**)&secret_password_lookup_binary_finish, "secret_password_lookup_binary_finish", LIBS);
+  gidLink(cast(void**)&secret_password_lookup_binary_sync, "secret_password_lookup_binary_sync", LIBS);
+  gidLink(cast(void**)&secret_password_lookup_finish, "secret_password_lookup_finish", LIBS);
+  gidLink(cast(void**)&secret_password_lookup_nonpageable_finish, "secret_password_lookup_nonpageable_finish", LIBS);
+  gidLink(cast(void**)&secret_password_lookup_nonpageable_sync, "secret_password_lookup_nonpageable_sync", LIBS);
+  gidLink(cast(void**)&secret_password_lookup_sync, "secret_password_lookup_sync", LIBS);
+  gidLink(cast(void**)&secret_password_lookupv, "secret_password_lookupv", LIBS);
+  gidLink(cast(void**)&secret_password_lookupv_binary_sync, "secret_password_lookupv_binary_sync", LIBS);
+  gidLink(cast(void**)&secret_password_lookupv_nonpageable_sync, "secret_password_lookupv_nonpageable_sync", LIBS);
+  gidLink(cast(void**)&secret_password_lookupv_sync, "secret_password_lookupv_sync", LIBS);
+  gidLink(cast(void**)&secret_password_search, "secret_password_search", LIBS);
+  gidLink(cast(void**)&secret_password_search_finish, "secret_password_search_finish", LIBS);
+  gidLink(cast(void**)&secret_password_search_sync, "secret_password_search_sync", LIBS);
+  gidLink(cast(void**)&secret_password_searchv, "secret_password_searchv", LIBS);
+  gidLink(cast(void**)&secret_password_searchv_sync, "secret_password_searchv_sync", LIBS);
+  gidLink(cast(void**)&secret_password_store, "secret_password_store", LIBS);
+  gidLink(cast(void**)&secret_password_store_binary, "secret_password_store_binary", LIBS);
+  gidLink(cast(void**)&secret_password_store_binary_sync, "secret_password_store_binary_sync", LIBS);
+  gidLink(cast(void**)&secret_password_store_finish, "secret_password_store_finish", LIBS);
+  gidLink(cast(void**)&secret_password_store_sync, "secret_password_store_sync", LIBS);
+  gidLink(cast(void**)&secret_password_storev, "secret_password_storev", LIBS);
+  gidLink(cast(void**)&secret_password_storev_binary, "secret_password_storev_binary", LIBS);
+  gidLink(cast(void**)&secret_password_storev_binary_sync, "secret_password_storev_binary_sync", LIBS);
+  gidLink(cast(void**)&secret_password_storev_sync, "secret_password_storev_sync", LIBS);
+  gidLink(cast(void**)&secret_password_wipe, "secret_password_wipe", LIBS);
 }

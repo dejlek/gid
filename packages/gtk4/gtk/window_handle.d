@@ -1,6 +1,6 @@
 module gtk.window_handle;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -23,7 +23,7 @@ import gtk.widget;
  * Until GTK 4.10, `GtkWindowHandle` used the `GTK_ACCESSIBLE_ROLE_GROUP` role.
  * Starting from GTK 4.12, `GtkWindowHandle` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
  */
-class WindowHandle : Widget
+class WindowHandle : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -57,11 +57,11 @@ class WindowHandle : Widget
    * Gets the child widget of self.
    * Returns: the child widget of self
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_handle_get_child(cast(GtkWindowHandle*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class WindowHandle : Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_window_handle_set_child(cast(GtkWindowHandle*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

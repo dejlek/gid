@@ -1,7 +1,7 @@
 module gio.file_descriptor_based;
 
 public import gio.file_descriptor_based_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;

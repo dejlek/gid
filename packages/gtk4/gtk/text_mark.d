@@ -1,6 +1,6 @@
 module gtk.text_mark;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -36,7 +36,7 @@ import gtk.types;
  * Marks are typically created using the [gtk.text_buffer.TextBuffer.createMark]
  * function.
  */
-class TextMark : ObjectG
+class TextMark : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -84,11 +84,11 @@ class TextMark : ObjectG
    * Returns %NULL if the mark is deleted.
    * Returns: the mark’s `GtkTextBuffer`
    */
-  TextBuffer getBuffer()
+  gtk.text_buffer.TextBuffer getBuffer()
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_mark_get_buffer(cast(GtkTextMark*)cPtr);
-    auto _retval = ObjectG.getDObject!TextBuffer(cast(GtkTextBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class TextMark : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_text_mark_get_name(cast(GtkTextMark*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

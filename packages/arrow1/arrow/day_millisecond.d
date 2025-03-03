@@ -3,10 +3,10 @@ module arrow.day_millisecond;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class DayMillisecond : ObjectG
+class DayMillisecond : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -32,14 +32,14 @@ class DayMillisecond : ObjectG
     this(_cretval, Yes.Take);
   }
 
-  bool equal(DayMillisecond otherDayMillisecond)
+  bool equal(arrow.day_millisecond.DayMillisecond otherDayMillisecond)
   {
     bool _retval;
     _retval = garrow_day_millisecond_equal(cast(GArrowDayMillisecond*)cPtr, otherDayMillisecond ? cast(GArrowDayMillisecond*)otherDayMillisecond.cPtr(No.Dup) : null);
     return _retval;
   }
 
-  bool lessThan(DayMillisecond otherDayMillisecond)
+  bool lessThan(arrow.day_millisecond.DayMillisecond otherDayMillisecond)
   {
     bool _retval;
     _retval = garrow_day_millisecond_less_than(cast(GArrowDayMillisecond*)cPtr, otherDayMillisecond ? cast(GArrowDayMillisecond*)otherDayMillisecond.cPtr(No.Dup) : null);

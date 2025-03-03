@@ -1,7 +1,7 @@
 module gtk.editable;
 
 public import gtk.editable_iface_proxy;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gobject.param_spec;
@@ -137,7 +137,7 @@ interface Editable
    *   pspec = the `GParamSpec` for the property
    * Returns: %TRUE if the property was found
    */
-  static bool delegateGetProperty(ObjectG object, uint propId, Value value, ParamSpec pspec)
+  static bool delegateGetProperty(gobject.object.ObjectG object, uint propId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec)
   {
     bool _retval;
     _retval = gtk_editable_delegate_get_property(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, propId, value ? cast(GValue*)value.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
@@ -156,10 +156,10 @@ interface Editable
    *   pspec = the `GParamSpec` for the property
    * Returns: %TRUE if the property was found
    */
-  static bool delegateSetProperty(ObjectG object, uint propId, Value value, ParamSpec pspec)
+  static bool delegateSetProperty(gobject.object.ObjectG object, uint propId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec)
   {
     bool _retval;
-    _retval = gtk_editable_delegate_set_property(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, propId, value ? cast(GValue*)value.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
+    _retval = gtk_editable_delegate_set_property(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, propId, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ interface Editable
    *   state = what kind of accessible state to retrieve
    * Returns:
    */
-  bool delegateGetAccessiblePlatformState(AccessiblePlatformState state);
+  bool delegateGetAccessiblePlatformState(gtk.types.AccessiblePlatformState state);
 
   /**
    * Deletes the currently selected text of the editable.
@@ -243,7 +243,7 @@ interface Editable
    * Typically, the delegate is a [gtk.text.Text] widget.
    * Returns: the delegate `GtkEditable`
    */
-  Editable getDelegate();
+  gtk.editable.Editable getDelegate();
 
   /**
    * Retrieves whether editable is editable.
@@ -409,8 +409,8 @@ interface Editable
    * to be emitted$(RPAREN).
    *   editable = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(Editable editable);
-  alias ChangedCallbackFunc = void function(Editable editable);
+  alias ChangedCallbackDlg = void delegate(gtk.editable.Editable editable);
+  alias ChangedCallbackFunc = void function(gtk.editable.Editable editable);
 
   /**
    * Connect to Changed signal.
@@ -435,8 +435,8 @@ interface Editable
    *   endPos = the end position
    *   editable = the instance the signal is connected to
    */
-  alias DeleteTextCallbackDlg = void delegate(int startPos, int endPos, Editable editable);
-  alias DeleteTextCallbackFunc = void function(int startPos, int endPos, Editable editable);
+  alias DeleteTextCallbackDlg = void delegate(int startPos, int endPos, gtk.editable.Editable editable);
+  alias DeleteTextCallbackFunc = void function(int startPos, int endPos, gtk.editable.Editable editable);
 
   /**
    * Connect to DeleteText signal.

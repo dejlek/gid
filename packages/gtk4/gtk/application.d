@@ -1,6 +1,6 @@
 module gtk.application;
 
-import gid.global;
+import gid.gid;
 import gio.action_group;
 import gio.action_group_mixin;
 import gio.action_map;
@@ -70,7 +70,7 @@ import gtk.window;
  * [HowDoI: Using GtkApplication](https://wiki.gnome.org/HowDoI/GtkApplication),
  * [Getting Started with GTK: Basics](getting_started.html#basics)
  */
-class Application : ApplicationGio
+class Application : gio.application.ApplicationGio
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -108,7 +108,7 @@ class Application : ApplicationGio
    *   flags = the application flags
    * Returns: a new `GtkApplication` instance
    */
-  this(string applicationId, ApplicationFlags flags)
+  this(string applicationId, gio.types.ApplicationFlags flags)
   {
     GtkApplication* _cretval;
     const(char)* _applicationId = applicationId.toCString(No.Alloc);
@@ -131,7 +131,7 @@ class Application : ApplicationGio
    * Params:
    *   window = a `GtkWindow`
    */
-  void addWindow(Window window)
+  void addWindow(gtk.window.Window window)
   {
     gtk_application_add_window(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
   }
@@ -207,11 +207,11 @@ class Application : ApplicationGio
    * recently-focused window within this application.
    * Returns: the active window
    */
-  Window getActiveWindow()
+  gtk.window.Window getActiveWindow()
   {
     GtkWindow* _cretval;
     _cretval = gtk_application_get_active_window(cast(GtkApplication*)cPtr);
-    auto _retval = ObjectG.getDObject!Window(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -224,12 +224,12 @@ class Application : ApplicationGio
    * Returns: Gets the menu with the
    *   given id from the automatically loaded resources
    */
-  Menu getMenuById(string id)
+  gio.menu.Menu getMenuById(string id)
   {
     GMenu* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
     _cretval = gtk_application_get_menu_by_id(cast(GtkApplication*)cPtr, _id);
-    auto _retval = ObjectG.getDObject!Menu(cast(GMenu*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
     return _retval;
   }
 
@@ -238,11 +238,11 @@ class Application : ApplicationGio
    * [gtk.application.Application.setMenubar].
    * Returns: the menubar for windows of `application`
    */
-  MenuModel getMenubar()
+  gio.menu_model.MenuModel getMenubar()
   {
     GMenuModel* _cretval;
     _cretval = gtk_application_get_menubar(cast(GtkApplication*)cPtr);
-    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -254,11 +254,11 @@ class Application : ApplicationGio
    *   id = an identifier number
    * Returns: the window for the given `id`
    */
-  Window getWindowById(uint id)
+  gtk.window.Window getWindowById(uint id)
   {
     GtkWindow* _cretval;
     _cretval = gtk_application_get_window_by_id(cast(GtkApplication*)cPtr, id);
-    auto _retval = ObjectG.getDObject!Window(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -273,11 +273,11 @@ class Application : ApplicationGio
    * Returns: a `GList` of `GtkWindow`
    *   instances
    */
-  Window[] getWindows()
+  gtk.window.Window[] getWindows()
   {
     GList* _cretval;
     _cretval = gtk_application_get_windows(cast(GtkApplication*)cPtr);
-    auto _retval = gListToD!(Window, GidOwnership.None)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gtk.window.Window, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -310,7 +310,7 @@ class Application : ApplicationGio
    *   in order to remove the request. If the platform does not support
    *   inhibiting or the request failed for some reason, 0 is returned.
    */
-  uint inhibit(Window window, ApplicationInhibitFlags flags, string reason)
+  uint inhibit(gtk.window.Window window, gtk.types.ApplicationInhibitFlags flags, string reason)
   {
     uint _retval;
     const(char)* _reason = reason.toCString(No.Alloc);
@@ -351,7 +351,7 @@ class Application : ApplicationGio
    * Params:
    *   window = a `GtkWindow`
    */
-  void removeWindow(Window window)
+  void removeWindow(gtk.window.Window window)
   {
     gtk_application_remove_window(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
   }
@@ -400,7 +400,7 @@ class Application : ApplicationGio
    * Params:
    *   menubar = a `GMenuModel`
    */
-  void setMenubar(MenuModel menubar)
+  void setMenubar(gio.menu_model.MenuModel menubar)
   {
     gtk_application_set_menubar(cast(GtkApplication*)cPtr, menubar ? cast(GMenuModel*)menubar.cPtr(No.Dup) : null);
   }
@@ -425,8 +425,8 @@ class Application : ApplicationGio
    * to delay the end of the session until state has been saved.
    *   application = the instance the signal is connected to
    */
-  alias QueryEndCallbackDlg = void delegate(Application application);
-  alias QueryEndCallbackFunc = void function(Application application);
+  alias QueryEndCallbackDlg = void delegate(gtk.application.Application application);
+  alias QueryEndCallbackFunc = void function(gtk.application.Application application);
 
   /**
    * Connect to QueryEnd signal.
@@ -442,7 +442,7 @@ class Application : ApplicationGio
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto application = getVal!Application(_paramVals);
+      auto application = getVal!(gtk.application.Application)(_paramVals);
       _dClosure.dlg(application);
     }
 
@@ -457,8 +457,8 @@ class Application : ApplicationGio
    *   window = the newly-added [gtk.window.Window]
    *   application = the instance the signal is connected to
    */
-  alias WindowAddedCallbackDlg = void delegate(Window window, Application application);
-  alias WindowAddedCallbackFunc = void function(Window window, Application application);
+  alias WindowAddedCallbackDlg = void delegate(gtk.window.Window window, gtk.application.Application application);
+  alias WindowAddedCallbackFunc = void function(gtk.window.Window window, gtk.application.Application application);
 
   /**
    * Connect to WindowAdded signal.
@@ -474,8 +474,8 @@ class Application : ApplicationGio
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto application = getVal!Application(_paramVals);
-      auto window = getVal!Window(&_paramVals[1]);
+      auto application = getVal!(gtk.application.Application)(_paramVals);
+      auto window = getVal!(gtk.window.Window)(&_paramVals[1]);
       _dClosure.dlg(window, application);
     }
 
@@ -491,8 +491,8 @@ class Application : ApplicationGio
    *   window = the [gtk.window.Window] that is being removed
    *   application = the instance the signal is connected to
    */
-  alias WindowRemovedCallbackDlg = void delegate(Window window, Application application);
-  alias WindowRemovedCallbackFunc = void function(Window window, Application application);
+  alias WindowRemovedCallbackDlg = void delegate(gtk.window.Window window, gtk.application.Application application);
+  alias WindowRemovedCallbackFunc = void function(gtk.window.Window window, gtk.application.Application application);
 
   /**
    * Connect to WindowRemoved signal.
@@ -508,8 +508,8 @@ class Application : ApplicationGio
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto application = getVal!Application(_paramVals);
-      auto window = getVal!Window(&_paramVals[1]);
+      auto application = getVal!(gtk.application.Application)(_paramVals);
+      auto window = getVal!(gtk.window.Window)(&_paramVals[1]);
       _dClosure.dlg(window, application);
     }
 

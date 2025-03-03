@@ -1,6 +1,6 @@
 module gtk.slice_list_model;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -17,7 +17,7 @@ import gtk.types;
  * opened.
  * `GtkSliceListModel` passes through sections from the underlying model.
  */
-class SliceListModel : ObjectG, ListModel, SectionModel
+class SliceListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -49,7 +49,7 @@ class SliceListModel : ObjectG, ListModel, SectionModel
    *   size = maximum size of the slice
    * Returns: A new `GtkSliceListModel`
    */
-  this(ListModel model, uint offset, uint size)
+  this(gio.list_model.ListModel model, uint offset, uint size)
   {
     GtkSliceListModel* _cretval;
     _cretval = gtk_slice_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, offset, size);
@@ -60,11 +60,11 @@ class SliceListModel : ObjectG, ListModel, SectionModel
    * Gets the model that is currently being used or %NULL if none.
    * Returns: The model in use
    */
-  ListModel getModel()
+  gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
     _cretval = gtk_slice_list_model_get_model(cast(GtkSliceListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class SliceListModel : ObjectG, ListModel, SectionModel
    * Params:
    *   model = The model to be sliced
    */
-  void setModel(ListModel model)
+  void setModel(gio.list_model.ListModel model)
   {
     gtk_slice_list_model_set_model(cast(GtkSliceListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

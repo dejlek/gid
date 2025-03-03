@@ -3,7 +3,7 @@ module gdk.dmabuf_formats;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -23,7 +23,7 @@ import gobject.boxed;
  * about DMA buffers.
  * Note that DMA buffers only exist on Linux.
  */
-class DmabufFormats : Boxed
+class DmabufFormats : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -69,10 +69,10 @@ class DmabufFormats : Boxed
    *   formats2 = another `GdkDmabufFormats`
    * Returns: `TRUE` if formats1 and formats2 are equal
    */
-  bool equal(DmabufFormats formats2)
+  bool equal(gdk.dmabuf_formats.DmabufFormats formats2)
   {
     bool _retval;
-    _retval = gdk_dmabuf_formats_equal(cast(GdkDmabufFormats*)cPtr, formats2 ? cast(GdkDmabufFormats*)formats2.cPtr(No.Dup) : null);
+    _retval = gdk_dmabuf_formats_equal(cast(const(GdkDmabufFormats)*)cPtr, formats2 ? cast(const(GdkDmabufFormats)*)formats2.cPtr(No.Dup) : null);
     return _retval;
   }
 

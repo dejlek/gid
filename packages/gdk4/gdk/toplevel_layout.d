@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.monitor;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gobject.object;
 
@@ -17,7 +17,7 @@ import gobject.object;
  * to the user in various states $(LPAREN)maximized, on all workspaces,
  * etc$(RPAREN).
  */
-class ToplevelLayout : Boxed
+class ToplevelLayout : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -60,11 +60,11 @@ class ToplevelLayout : Boxed
    * Create a new `GdkToplevelLayout` and copy the contents of layout into it.
    * Returns: a copy of layout.
    */
-  ToplevelLayout copy()
+  gdk.toplevel_layout.ToplevelLayout copy()
   {
     GdkToplevelLayout* _cretval;
     _cretval = gdk_toplevel_layout_copy(cast(GdkToplevelLayout*)cPtr);
-    auto _retval = _cretval ? new ToplevelLayout(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.toplevel_layout.ToplevelLayout(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -75,7 +75,7 @@ class ToplevelLayout : Boxed
    * Returns: %TRUE if layout and other have identical layout properties,
    *   otherwise %FALSE.
    */
-  bool equal(ToplevelLayout other)
+  bool equal(gdk.toplevel_layout.ToplevelLayout other)
   {
     bool _retval;
     _retval = gdk_toplevel_layout_equal(cast(GdkToplevelLayout*)cPtr, other ? cast(GdkToplevelLayout*)other.cPtr(No.Dup) : null);
@@ -102,11 +102,11 @@ class ToplevelLayout : Boxed
    * the surface on.
    * Returns: the monitor on which layout fullscreens
    */
-  MonitorG getFullscreenMonitor()
+  gdk.monitor.MonitorG getFullscreenMonitor()
   {
     GdkMonitor* _cretval;
     _cretval = gdk_toplevel_layout_get_fullscreen_monitor(cast(GdkToplevelLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!MonitorG(cast(GdkMonitor*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.monitor.MonitorG)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class ToplevelLayout : Boxed
    *   fullscreen = %TRUE to fullscreen the surface
    *   monitor = the monitor to fullscreen on
    */
-  void setFullscreen(bool fullscreen, MonitorG monitor)
+  void setFullscreen(bool fullscreen, gdk.monitor.MonitorG monitor)
   {
     gdk_toplevel_layout_set_fullscreen(cast(GdkToplevelLayout*)cPtr, fullscreen, monitor ? cast(GdkMonitor*)monitor.cPtr(No.Dup) : null);
   }

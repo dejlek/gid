@@ -1,6 +1,6 @@
 module gobject.param_spec_override;
 
-import gid.global;
+import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.param_spec;
@@ -17,7 +17,7 @@ import gobject.types;
  * [gobject.object_class.ObjectClass.overrideProperty], and will not be directly useful
  * unless you are implementing a new base type similar to GObject.
  */
-class ParamSpecOverride : ParamSpec
+class ParamSpecOverride : gobject.param_spec.ParamSpec
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -5,10 +5,10 @@ import arrow.c.types;
 import arrow.dense_union_data_type;
 import arrow.types;
 import arrow.union_array_builder;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class DenseUnionArrayBuilder : UnionArrayBuilder
+class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,7 +27,7 @@ class DenseUnionArrayBuilder : UnionArrayBuilder
     return getType();
   }
 
-  this(DenseUnionDataType dataType)
+  this(arrow.dense_union_data_type.DenseUnionDataType dataType)
   {
     GArrowDenseUnionArrayBuilder* _cretval;
     GError *_err;

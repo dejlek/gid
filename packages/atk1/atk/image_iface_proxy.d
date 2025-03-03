@@ -5,7 +5,7 @@ import atk.image;
 import atk.image_mixin;
 
 /// Proxy object for Atk.Image interface when a GObject has no applicable D binding
-class ImageIfaceProxy : IfaceProxy, Image
+class ImageIfaceProxy : IfaceProxy, atk.image.Image
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class ImageIfaceProxy : IfaceProxy, Image
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Image);
+    return typeid(atk.image.Image);
   }
 
   mixin ImageT!();

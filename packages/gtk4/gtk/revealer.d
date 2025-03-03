@@ -1,6 +1,6 @@
 module gtk.revealer;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -29,7 +29,7 @@ import gtk.widget;
  * The child of `GtkRevealer`, if set, is always available in the accessibility
  * tree, regardless of the state of the revealer widget.
  */
-class Revealer : Widget
+class Revealer : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -63,11 +63,11 @@ class Revealer : Widget
    * Gets the child widget of revealer.
    * Returns: the child widget of revealer
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_revealer_get_child(cast(GtkRevealer*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,11 +116,11 @@ class Revealer : Widget
    * for transitions in revealer.
    * Returns: the current transition type of revealer
    */
-  RevealerTransitionType getTransitionType()
+  gtk.types.RevealerTransitionType getTransitionType()
   {
     GtkRevealerTransitionType _cretval;
     _cretval = gtk_revealer_get_transition_type(cast(GtkRevealer*)cPtr);
-    RevealerTransitionType _retval = cast(RevealerTransitionType)_cretval;
+    gtk.types.RevealerTransitionType _retval = cast(gtk.types.RevealerTransitionType)_cretval;
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class Revealer : Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_revealer_set_child(cast(GtkRevealer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -163,7 +163,7 @@ class Revealer : Widget
    * Params:
    *   transition = the new transition type
    */
-  void setTransitionType(RevealerTransitionType transition)
+  void setTransitionType(gtk.types.RevealerTransitionType transition)
   {
     gtk_revealer_set_transition_type(cast(GtkRevealer*)cPtr, transition);
   }

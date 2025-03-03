@@ -4,7 +4,7 @@ public import gdk.device_pad_iface_proxy;
 public import gdk.c.functions;
 public import gdk.c.types;
 public import gdk.types;
-public import gid.global;
+public import gid.gid;
 
 /**
  * `GdkDevicePad` is an interface implemented by devices of type
@@ -33,7 +33,7 @@ template DevicePadT()
    *   featureIdx = the index of the feature to get the group from
    * Returns: The group number of the queried pad feature.
    */
-  override int getFeatureGroup(DevicePadFeature feature, int featureIdx)
+  override int getFeatureGroup(gdk.types.DevicePadFeature feature, int featureIdx)
   {
     int _retval;
     _retval = gdk_device_pad_get_feature_group(cast(GdkDevicePad*)cPtr, feature, featureIdx);
@@ -59,7 +59,7 @@ template DevicePadT()
    *   feature = a pad feature
    * Returns: The amount of elements of type feature that this pad has.
    */
-  override int getNFeatures(DevicePadFeature feature)
+  override int getNFeatures(gdk.types.DevicePadFeature feature)
   {
     int _retval;
     _retval = gdk_device_pad_get_n_features(cast(GdkDevicePad*)cPtr, feature);

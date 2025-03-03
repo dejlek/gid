@@ -1,6 +1,6 @@
 module glib.match_info;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.error;
@@ -12,7 +12,7 @@ import gobject.boxed;
  * A GMatchInfo is an opaque struct used to return information about
  * matches.
  */
-class MatchInfo : Boxed
+class MatchInfo : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -60,10 +60,10 @@ class MatchInfo : Boxed
     char* _cretval;
     const(char)* _stringToExpand = stringToExpand.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_match_info_expand_references(cast(GMatchInfo*)cPtr, _stringToExpand, &_err);
+    _cretval = g_match_info_expand_references(cast(const(GMatchInfo)*)cPtr, _stringToExpand, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -89,8 +89,8 @@ class MatchInfo : Boxed
   string fetch(int matchNum)
   {
     char* _cretval;
-    _cretval = g_match_info_fetch(cast(GMatchInfo*)cPtr, matchNum);
-    string _retval = _cretval.fromCString(Yes.Free);
+    _cretval = g_match_info_fetch(cast(const(GMatchInfo)*)cPtr, matchNum);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class MatchInfo : Boxed
   string[] fetchAll()
   {
     char** _cretval;
-    _cretval = g_match_info_fetch_all(cast(GMatchInfo*)cPtr);
+    _cretval = g_match_info_fetch_all(cast(const(GMatchInfo)*)cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -146,8 +146,8 @@ class MatchInfo : Boxed
   {
     char* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = g_match_info_fetch_named(cast(GMatchInfo*)cPtr, _name);
-    string _retval = _cretval.fromCString(Yes.Free);
+    _cretval = g_match_info_fetch_named(cast(const(GMatchInfo)*)cPtr, _name);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class MatchInfo : Boxed
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = g_match_info_fetch_named_pos(cast(GMatchInfo*)cPtr, _name, cast(int*)&startPos, cast(int*)&endPos);
+    _retval = g_match_info_fetch_named_pos(cast(const(GMatchInfo)*)cPtr, _name, cast(int*)&startPos, cast(int*)&endPos);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class MatchInfo : Boxed
   bool fetchPos(int matchNum, out int startPos, out int endPos)
   {
     bool _retval;
-    _retval = g_match_info_fetch_pos(cast(GMatchInfo*)cPtr, matchNum, cast(int*)&startPos, cast(int*)&endPos);
+    _retval = g_match_info_fetch_pos(cast(const(GMatchInfo)*)cPtr, matchNum, cast(int*)&startPos, cast(int*)&endPos);
     return _retval;
   }
 
@@ -216,7 +216,7 @@ class MatchInfo : Boxed
   int getMatchCount()
   {
     int _retval;
-    _retval = g_match_info_get_match_count(cast(GMatchInfo*)cPtr);
+    _retval = g_match_info_get_match_count(cast(const(GMatchInfo)*)cPtr);
     return _retval;
   }
 
@@ -226,11 +226,11 @@ class MatchInfo : Boxed
    * after you free match_info object.
    * Returns: #GRegex object used in match_info
    */
-  Regex getRegex()
+  glib.regex.Regex getRegex()
   {
     GRegex* _cretval;
-    _cretval = g_match_info_get_regex(cast(GMatchInfo*)cPtr);
-    auto _retval = _cretval ? new Regex(cast(void*)_cretval, No.Take) : null;
+    _cretval = g_match_info_get_regex(cast(const(GMatchInfo)*)cPtr);
+    auto _retval = _cretval ? new glib.regex.Regex(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -243,8 +243,8 @@ class MatchInfo : Boxed
   string getString()
   {
     const(char)* _cretval;
-    _cretval = g_match_info_get_string(cast(GMatchInfo*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    _cretval = g_match_info_get_string(cast(const(GMatchInfo)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class MatchInfo : Boxed
   bool isPartialMatch()
   {
     bool _retval;
-    _retval = g_match_info_is_partial_match(cast(GMatchInfo*)cPtr);
+    _retval = g_match_info_is_partial_match(cast(const(GMatchInfo)*)cPtr);
     return _retval;
   }
 
@@ -294,7 +294,7 @@ class MatchInfo : Boxed
   bool matches()
   {
     bool _retval;
-    _retval = g_match_info_matches(cast(GMatchInfo*)cPtr);
+    _retval = g_match_info_matches(cast(const(GMatchInfo)*)cPtr);
     return _retval;
   }
 

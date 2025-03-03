@@ -5,11 +5,11 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.list_array;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class MapArray : ListArray
+class MapArray : arrow.list_array.ListArray
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -28,7 +28,7 @@ class MapArray : ListArray
     return getType();
   }
 
-  this(Array offsets, Array keys, Array items)
+  this(arrow.array.Array offsets, arrow.array.Array keys, arrow.array.Array items)
   {
     GArrowMapArray* _cretval;
     GError *_err;
@@ -38,19 +38,19 @@ class MapArray : ListArray
     this(_cretval, Yes.Take);
   }
 
-  Array getItems()
+  arrow.array.Array getItems()
   {
     GArrowArray* _cretval;
     _cretval = garrow_map_array_get_items(cast(GArrowMapArray*)cPtr);
-    auto _retval = ObjectG.getDObject!Array(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Array getKeys()
+  arrow.array.Array getKeys()
   {
     GArrowArray* _cretval;
     _cretval = garrow_map_array_get_keys(cast(GArrowMapArray*)cPtr);
-    auto _retval = ObjectG.getDObject!Array(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

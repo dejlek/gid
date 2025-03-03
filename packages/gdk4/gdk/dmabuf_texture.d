@@ -6,7 +6,7 @@ import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.texture;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gio.icon;
 import gio.icon_mixin;
 import gio.loadable_icon;
@@ -18,7 +18,7 @@ import gio.loadable_icon_mixin;
  * [gdk.dmabuf_texture_builder.DmabufTextureBuilder] object.
  * Dma-buf textures can only be created on Linux.
  */
-class DmabufTexture : Texture
+class DmabufTexture : gdk.texture.Texture
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

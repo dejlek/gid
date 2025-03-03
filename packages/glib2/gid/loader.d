@@ -141,10 +141,9 @@ else // Linux or OSX
   {
     foreach (lib; libs)
     {
-      string mutableLib = lib;
-      version (OSX) mutableLib = buildPath(basePath, lib);
+      version (OSX) lib = lib.buildPath(basePath, lib);
 
-      if (auto handle = dlopen(cast(char*)toStringz(mutableLib), RTLD_GLOBAL | RTLD_NOW))
+      if (auto handle = dlopen(cast(char*)toStringz(lib), RTLD_GLOBAL | RTLD_NOW))
       {
         if (auto symPtr = dlsym(handle, cast(char*)toStringz(symbol)))
         {
@@ -153,7 +152,7 @@ else // Linux or OSX
         }
       }
       else
-        throw new Error("Failed to load library '" ~ mutableLib ~ "': " ~ dlerror().fromStringz.idup);
+        throw new Error("Failed to load library '" ~ lib ~ "': " ~ dlerror().fromStringz.idup);
     }
 
      *funcPtr = &gidSymbolNotFound;

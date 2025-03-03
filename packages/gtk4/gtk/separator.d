@@ -1,6 +1,6 @@
 module gtk.separator;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -26,7 +26,7 @@ import gtk.widget;
  * # Accessibility
  * `GtkSeparator` uses the %GTK_ACCESSIBLE_ROLE_SEPARATOR role.
  */
-class Separator : Widget, Orientable
+class Separator : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -53,7 +53,7 @@ class Separator : Widget, Orientable
    *   orientation = the separator’s orientation.
    * Returns: a new `GtkSeparator`.
    */
-  this(Orientation orientation)
+  this(gtk.types.Orientation orientation)
   {
     GtkWidget* _cretval;
     _cretval = gtk_separator_new(orientation);

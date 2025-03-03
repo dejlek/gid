@@ -1,6 +1,6 @@
 module gtk.grid_view;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -19,7 +19,6 @@ import gtk.scroll_info;
 import gtk.scrollable;
 import gtk.scrollable_mixin;
 import gtk.selection_model;
-import gtk.selection_model_mixin;
 import gtk.types;
 
 /**
@@ -51,7 +50,7 @@ import gtk.types;
  * `GtkGridView` uses the %GTK_ACCESSIBLE_ROLE_GRID role, and the items
  * use the %GTK_ACCESSIBLE_ROLE_GRID_CELL role.
  */
-class GridView : ListBase
+class GridView : gtk.list_base.ListBase
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -84,7 +83,7 @@ class GridView : ListBase
    *   factory = The factory to populate items with
    * Returns: a new `GtkGridView` using the given model and factory
    */
-  this(SelectionModel model, ListItemFactory factory)
+  this(gtk.selection_model.SelectionModel model, gtk.list_item_factory.ListItemFactory factory)
   {
     GtkWidget* _cretval;
     _cretval = gtk_grid_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.Dup) : null);
@@ -106,11 +105,11 @@ class GridView : ListBase
    * Gets the factory that's currently used to populate list items.
    * Returns: The factory in use
    */
-  ListItemFactory getFactory()
+  gtk.list_item_factory.ListItemFactory getFactory()
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_grid_view_get_factory(cast(GtkGridView*)cPtr);
-    auto _retval = ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -140,11 +139,11 @@ class GridView : ListBase
    * Gets the model that's currently used to read the items displayed.
    * Returns: The model in use
    */
-  SelectionModel getModel()
+  gtk.selection_model.SelectionModel getModel()
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_grid_view_get_model(cast(GtkGridView*)cPtr);
-    auto _retval = ObjectG.getDObject!SelectionModel(cast(GtkSelectionModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -164,11 +163,11 @@ class GridView : ListBase
    * Gets the behavior set for the <kbd>Tab</kbd> key.
    * Returns: The behavior of the <kbd>Tab</kbd> key
    */
-  ListTabBehavior getTabBehavior()
+  gtk.types.ListTabBehavior getTabBehavior()
   {
     GtkListTabBehavior _cretval;
     _cretval = gtk_grid_view_get_tab_behavior(cast(GtkGridView*)cPtr);
-    ListTabBehavior _retval = cast(ListTabBehavior)_cretval;
+    gtk.types.ListTabBehavior _retval = cast(gtk.types.ListTabBehavior)_cretval;
     return _retval;
   }
 
@@ -183,7 +182,7 @@ class GridView : ListBase
    *   scroll = details of how to perform
    *     the scroll operation or %NULL to scroll into view
    */
-  void scrollTo(uint pos, ListScrollFlags flags, ScrollInfo scroll)
+  void scrollTo(uint pos, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll)
   {
     gtk_grid_view_scroll_to(cast(GtkGridView*)cPtr, pos, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
   }
@@ -203,7 +202,7 @@ class GridView : ListBase
    * Params:
    *   factory = the factory to use
    */
-  void setFactory(ListItemFactory factory)
+  void setFactory(gtk.list_item_factory.ListItemFactory factory)
   {
     gtk_grid_view_set_factory(cast(GtkGridView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
@@ -240,7 +239,7 @@ class GridView : ListBase
    * Params:
    *   model = the model to use
    */
-  void setModel(SelectionModel model)
+  void setModel(gtk.selection_model.SelectionModel model)
   {
     gtk_grid_view_set_model(cast(GtkGridView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
@@ -261,7 +260,7 @@ class GridView : ListBase
    * Params:
    *   tabBehavior = The desired tab behavior
    */
-  void setTabBehavior(ListTabBehavior tabBehavior)
+  void setTabBehavior(gtk.types.ListTabBehavior tabBehavior)
   {
     gtk_grid_view_set_tab_behavior(cast(GtkGridView*)cPtr, tabBehavior);
   }
@@ -276,8 +275,8 @@ class GridView : ListBase
    *   position = position of item to activate
    *   gridView = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(uint position, GridView gridView);
-  alias ActivateCallbackFunc = void function(uint position, GridView gridView);
+  alias ActivateCallbackDlg = void delegate(uint position, gtk.grid_view.GridView gridView);
+  alias ActivateCallbackFunc = void function(uint position, gtk.grid_view.GridView gridView);
 
   /**
    * Connect to Activate signal.
@@ -293,8 +292,8 @@ class GridView : ListBase
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gridView = getVal!GridView(_paramVals);
-      auto position = getVal!uint(&_paramVals[1]);
+      auto gridView = getVal!(gtk.grid_view.GridView)(_paramVals);
+      auto position = getVal!(uint)(&_paramVals[1]);
       _dClosure.dlg(position, gridView);
     }
 

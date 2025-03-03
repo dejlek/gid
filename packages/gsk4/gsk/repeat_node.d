@@ -1,6 +1,6 @@
 module gsk.repeat_node;
 
-import gid.global;
+import gid.gid;
 import graphene.rect;
 import gsk.c.functions;
 import gsk.c.types;
@@ -10,7 +10,7 @@ import gsk.types;
 /**
  * A render node repeating its single child node.
  */
-class RepeatNode : RenderNode
+class RepeatNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -31,10 +31,10 @@ class RepeatNode : RenderNode
    *     use the child's bounds
    * Returns: A new `GskRenderNode`
    */
-  this(Rect bounds, RenderNode child, Rect childBounds)
+  this(graphene.rect.Rect bounds, gsk.render_node.RenderNode child, graphene.rect.Rect childBounds)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_repeat_node_new(bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null, child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, childBounds ? cast(graphene_rect_t*)childBounds.cPtr(No.Dup) : null);
+    _cretval = gsk_repeat_node_new(bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null, child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, childBounds ? cast(const(graphene_rect_t)*)childBounds.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -42,11 +42,11 @@ class RepeatNode : RenderNode
    * Retrieves the child of node.
    * Returns: a `GskRenderNode`
    */
-  RenderNode getChild()
+  gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_repeat_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    _cretval = gsk_repeat_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -54,11 +54,11 @@ class RepeatNode : RenderNode
    * Retrieves the bounding rectangle of the child of node.
    * Returns: a bounding rectangle
    */
-  Rect getChildBounds()
+  graphene.rect.Rect getChildBounds()
   {
     const(graphene_rect_t)* _cretval;
-    _cretval = gsk_repeat_node_get_child_bounds(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Rect(cast(void*)_cretval, No.Take) : null;
+    _cretval = gsk_repeat_node_get_child_bounds(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

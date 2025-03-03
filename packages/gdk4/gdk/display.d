@@ -12,9 +12,8 @@ import gdk.monitor;
 import gdk.seat;
 import gdk.surface;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gio.list_model;
-import gio.list_model_mixin;
 import glib.error;
 import gobject.dclosure;
 import gobject.object;
@@ -32,7 +31,7 @@ import gobject.value;
  * Output devices are represented by [gdk.monitor.MonitorG] objects, which can
  * be accessed with [gdk.display.Display.getMonitorAtSurface] and similar APIs.
  */
-class Display : ObjectG
+class Display : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -58,11 +57,11 @@ class Display : ObjectG
    * Returns: a `GdkDisplay`, or %NULL if
    *   there is no default display
    */
-  static Display getDefault()
+  static gdk.display.Display getDefault()
   {
     GdkDisplay* _cretval;
     _cretval = gdk_display_get_default();
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -73,12 +72,12 @@ class Display : ObjectG
    *   displayName = the name of the display to open
    * Returns: a `GdkDisplay`
    */
-  static Display open(string displayName)
+  static gdk.display.Display open(string displayName)
   {
     GdkDisplay* _cretval;
     const(char)* _displayName = displayName.toCString(No.Alloc);
     _cretval = gdk_display_open(_displayName);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -109,14 +108,14 @@ class Display : ObjectG
    * call [gdk.glcontext.GLContext.makeCurrent] or [gdk.glcontext.GLContext.realize].
    * Returns: the newly created `GdkGLContext`
    */
-  GLContext createGlContext()
+  gdk.glcontext.GLContext createGlContext()
   {
     GdkGLContext* _cretval;
     GError *_err;
     _cretval = gdk_display_create_gl_context(cast(GdkDisplay*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -126,7 +125,7 @@ class Display : ObjectG
    *   device = a `GdkDevice`
    * Returns: %TRUE if there is a grab in effect for device.
    */
-  bool deviceIsGrabbed(Device device)
+  bool deviceIsGrabbed(gdk.device.Device device)
   {
     bool _retval;
     _retval = gdk_display_device_is_grabbed(cast(GdkDisplay*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
@@ -153,11 +152,11 @@ class Display : ObjectG
    * applications on the given display.
    * Returns: a new `GdkAppLaunchContext` for display
    */
-  AppLaunchContext getAppLaunchContext()
+  gdk.app_launch_context.AppLaunchContext getAppLaunchContext()
   {
     GdkAppLaunchContext* _cretval;
     _cretval = gdk_display_get_app_launch_context(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!AppLaunchContext(cast(GdkAppLaunchContext*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.app_launch_context.AppLaunchContext)(cast(GdkAppLaunchContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -165,11 +164,11 @@ class Display : ObjectG
    * Gets the clipboard used for copy/paste operations.
    * Returns: the display's clipboard
    */
-  Clipboard getClipboard()
+  gdk.clipboard.Clipboard getClipboard()
   {
     GdkClipboard* _cretval;
     _cretval = gdk_display_get_clipboard(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!Clipboard(cast(GdkClipboard*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.clipboard.Clipboard)(cast(GdkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -179,11 +178,11 @@ class Display : ObjectG
    * this function will return %NULL.
    * Returns: the default seat.
    */
-  Seat getDefaultSeat()
+  gdk.seat.Seat getDefaultSeat()
   {
     GdkSeat* _cretval;
     _cretval = gdk_display_get_default_seat(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!Seat(cast(GdkSeat*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -196,11 +195,11 @@ class Display : ObjectG
    * To learn more about dma-bufs, see [gdk.dmabuf_texture_builder.DmabufTextureBuilder].
    * Returns: a `GdkDmabufFormats` object
    */
-  DmabufFormats getDmabufFormats()
+  gdk.dmabuf_formats.DmabufFormats getDmabufFormats()
   {
     GdkDmabufFormats* _cretval;
     _cretval = gdk_display_get_dmabuf_formats(cast(GdkDisplay*)cPtr);
-    auto _retval = _cretval ? new DmabufFormats(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.dmabuf_formats.DmabufFormats(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -212,11 +211,11 @@ class Display : ObjectG
    * Returns: the monitor with the largest
    *   overlap with surface
    */
-  MonitorG getMonitorAtSurface(Surface surface)
+  gdk.monitor.MonitorG getMonitorAtSurface(gdk.surface.Surface surface)
   {
     GdkMonitor* _cretval;
     _cretval = gdk_display_get_monitor_at_surface(cast(GdkDisplay*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!MonitorG(cast(GdkMonitor*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.monitor.MonitorG)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -228,11 +227,11 @@ class Display : ObjectG
    * this list to monitor changes to the monitor of this display.
    * Returns: a `GListModel` of `GdkMonitor`
    */
-  ListModel getMonitors()
+  gio.list_model.ListModel getMonitors()
   {
     GListModel* _cretval;
     _cretval = gdk_display_get_monitors(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -245,7 +244,7 @@ class Display : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_display_get_name(cast(GdkDisplay*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -255,11 +254,11 @@ class Display : ObjectG
    * GDK emulates this clipboard locally.
    * Returns: the primary clipboard
    */
-  Clipboard getPrimaryClipboard()
+  gdk.clipboard.Clipboard getPrimaryClipboard()
   {
     GdkClipboard* _cretval;
     _cretval = gdk_display_get_primary_clipboard(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!Clipboard(cast(GdkClipboard*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.clipboard.Clipboard)(cast(GdkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -272,7 +271,7 @@ class Display : ObjectG
    * Returns: %TRUE if the setting existed and a value was stored
    *   in value, %FALSE otherwise
    */
-  bool getSetting(string name, Value value)
+  bool getSetting(string name, gobject.value.Value value)
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -289,7 +288,7 @@ class Display : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_display_get_startup_notification_id(cast(GdkDisplay*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -348,11 +347,11 @@ class Display : ObjectG
    * Returns: the
    *   list of seats known to the `GdkDisplay`
    */
-  Seat[] listSeats()
+  gdk.seat.Seat[] listSeats()
   {
     GList* _cretval;
     _cretval = gdk_display_list_seats(cast(GdkDisplay*)cPtr);
-    auto _retval = gListToD!(Seat, GidOwnership.Container)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gdk.seat.Seat, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -371,7 +370,7 @@ class Display : ObjectG
    *     location for array of keyvals
    * Returns: %TRUE if there were any entries
    */
-  bool mapKeycode(uint keycode, out KeymapKey[] keys, out uint[] keyvals)
+  bool mapKeycode(uint keycode, out gdk.types.KeymapKey[] keys, out uint[] keyvals)
   {
     bool _retval;
     int _nEntries;
@@ -405,7 +404,7 @@ class Display : ObjectG
    *     for an array of `GdkKeymapKey`
    * Returns: %TRUE if keys were found and returned
    */
-  bool mapKeyval(uint keyval, out KeymapKey[] keys)
+  bool mapKeyval(uint keyval, out gdk.types.KeymapKey[] keys)
   {
     bool _retval;
     int _nKeys;
@@ -468,7 +467,7 @@ class Display : ObjectG
    * Deprecated: This function is only useful in very
    *   special situations and should not be used by applications.
    */
-  void putEvent(Event event)
+  void putEvent(gdk.event.Event event)
   {
     gdk_display_put_event(cast(GdkDisplay*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
   }
@@ -543,7 +542,7 @@ class Display : ObjectG
    *     to determine the group or level
    * Returns: %TRUE if there was a keyval bound to keycode/state/group.
    */
-  bool translateKey(uint keycode, ModifierType state, int group, out uint keyval, out int effectiveGroup, out int level, out ModifierType consumed)
+  bool translateKey(uint keycode, gdk.types.ModifierType state, int group, out uint keyval, out int effectiveGroup, out int level, out gdk.types.ModifierType consumed)
   {
     bool _retval;
     _retval = gdk_display_translate_key(cast(GdkDisplay*)cPtr, keycode, state, group, cast(uint*)&keyval, cast(int*)&effectiveGroup, cast(int*)&level, &consumed);
@@ -556,8 +555,8 @@ class Display : ObjectG
    *   isError = %TRUE if the display was closed due to an error
    *   display = the instance the signal is connected to
    */
-  alias ClosedCallbackDlg = void delegate(bool isError, Display display);
-  alias ClosedCallbackFunc = void function(bool isError, Display display);
+  alias ClosedCallbackDlg = void delegate(bool isError, gdk.display.Display display);
+  alias ClosedCallbackFunc = void function(bool isError, gdk.display.Display display);
 
   /**
    * Connect to Closed signal.
@@ -573,8 +572,8 @@ class Display : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto display = getVal!Display(_paramVals);
-      auto isError = getVal!bool(&_paramVals[1]);
+      auto display = getVal!(gdk.display.Display)(_paramVals);
+      auto isError = getVal!(bool)(&_paramVals[1]);
       _dClosure.dlg(isError, display);
     }
 
@@ -586,8 +585,8 @@ class Display : ObjectG
    * Emitted when the connection to the windowing system for display is opened.
    *   display = the instance the signal is connected to
    */
-  alias OpenedCallbackDlg = void delegate(Display display);
-  alias OpenedCallbackFunc = void function(Display display);
+  alias OpenedCallbackDlg = void delegate(gdk.display.Display display);
+  alias OpenedCallbackFunc = void function(gdk.display.Display display);
 
   /**
    * Connect to Opened signal.
@@ -603,7 +602,7 @@ class Display : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto display = getVal!Display(_paramVals);
+      auto display = getVal!(gdk.display.Display)(_paramVals);
       _dClosure.dlg(display);
     }
 
@@ -617,8 +616,8 @@ class Display : ObjectG
    *   seat = the seat that was just added
    *   display = the instance the signal is connected to
    */
-  alias SeatAddedCallbackDlg = void delegate(Seat seat, Display display);
-  alias SeatAddedCallbackFunc = void function(Seat seat, Display display);
+  alias SeatAddedCallbackDlg = void delegate(gdk.seat.Seat seat, gdk.display.Display display);
+  alias SeatAddedCallbackFunc = void function(gdk.seat.Seat seat, gdk.display.Display display);
 
   /**
    * Connect to SeatAdded signal.
@@ -634,8 +633,8 @@ class Display : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto display = getVal!Display(_paramVals);
-      auto seat = getVal!Seat(&_paramVals[1]);
+      auto display = getVal!(gdk.display.Display)(_paramVals);
+      auto seat = getVal!(gdk.seat.Seat)(&_paramVals[1]);
       _dClosure.dlg(seat, display);
     }
 
@@ -649,8 +648,8 @@ class Display : ObjectG
    *   seat = the seat that was just removed
    *   display = the instance the signal is connected to
    */
-  alias SeatRemovedCallbackDlg = void delegate(Seat seat, Display display);
-  alias SeatRemovedCallbackFunc = void function(Seat seat, Display display);
+  alias SeatRemovedCallbackDlg = void delegate(gdk.seat.Seat seat, gdk.display.Display display);
+  alias SeatRemovedCallbackFunc = void function(gdk.seat.Seat seat, gdk.display.Display display);
 
   /**
    * Connect to SeatRemoved signal.
@@ -666,8 +665,8 @@ class Display : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto display = getVal!Display(_paramVals);
-      auto seat = getVal!Seat(&_paramVals[1]);
+      auto display = getVal!(gdk.display.Display)(_paramVals);
+      auto seat = getVal!(gdk.seat.Seat)(&_paramVals[1]);
       _dClosure.dlg(seat, display);
     }
 
@@ -681,8 +680,8 @@ class Display : ObjectG
    *   setting = the name of the setting that changed
    *   display = the instance the signal is connected to
    */
-  alias SettingChangedCallbackDlg = void delegate(string setting, Display display);
-  alias SettingChangedCallbackFunc = void function(string setting, Display display);
+  alias SettingChangedCallbackDlg = void delegate(string setting, gdk.display.Display display);
+  alias SettingChangedCallbackFunc = void function(string setting, gdk.display.Display display);
 
   /**
    * Connect to SettingChanged signal.
@@ -698,8 +697,8 @@ class Display : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto display = getVal!Display(_paramVals);
-      auto setting = getVal!string(&_paramVals[1]);
+      auto display = getVal!(gdk.display.Display)(_paramVals);
+      auto setting = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(setting, display);
     }
 

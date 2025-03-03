@@ -8,7 +8,7 @@ import gdk.device;
 import gdk.display;
 import gdk.surface;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 
@@ -22,7 +22,7 @@ import gobject.object;
  * and so they are not normally needed in GTK applications. See the
  * "Drag and Drop" section of the GTK documentation for more information.
  */
-class Drag : ObjectG
+class Drag : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -62,11 +62,11 @@ class Drag : ObjectG
    *   dy = the y offset to device's position where the drag nominally started
    * Returns: a newly created `GdkDrag`
    */
-  static Drag begin(Surface surface, Device device, ContentProvider content, DragAction actions, double dx, double dy)
+  static gdk.drag.Drag begin(gdk.surface.Surface surface, gdk.device.Device device, gdk.content_provider.ContentProvider content, gdk.types.DragAction actions, double dx, double dy)
   {
     GdkDrag* _cretval;
     _cretval = gdk_drag_begin(surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, content ? cast(GdkContentProvider*)content.cPtr(No.Dup) : null, actions, dx, dy);
-    auto _retval = ObjectG.getDObject!Drag(cast(GdkDrag*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.drag.Drag)(cast(GdkDrag*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -91,11 +91,11 @@ class Drag : ObjectG
    * Determines the bitmask of possible actions proposed by the source.
    * Returns: the `GdkDragAction` flags
    */
-  DragAction getActions()
+  gdk.types.DragAction getActions()
   {
     GdkDragAction _cretval;
     _cretval = gdk_drag_get_actions(cast(GdkDrag*)cPtr);
-    DragAction _retval = cast(DragAction)_cretval;
+    gdk.types.DragAction _retval = cast(gdk.types.DragAction)_cretval;
     return _retval;
   }
 
@@ -103,11 +103,11 @@ class Drag : ObjectG
    * Returns the `GdkContentProvider` associated to the `GdkDrag` object.
    * Returns: The `GdkContentProvider` associated to drag.
    */
-  ContentProvider getContent()
+  gdk.content_provider.ContentProvider getContent()
   {
     GdkContentProvider* _cretval;
     _cretval = gdk_drag_get_content(cast(GdkDrag*)cPtr);
-    auto _retval = ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,11 +115,11 @@ class Drag : ObjectG
    * Returns the `GdkDevice` associated to the `GdkDrag` object.
    * Returns: The `GdkDevice` associated to drag.
    */
-  Device getDevice()
+  gdk.device.Device getDevice()
   {
     GdkDevice* _cretval;
     _cretval = gdk_drag_get_device(cast(GdkDrag*)cPtr);
-    auto _retval = ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -127,11 +127,11 @@ class Drag : ObjectG
    * Gets the `GdkDisplay` that the drag object was created for.
    * Returns: a `GdkDisplay`
    */
-  Display getDisplay()
+  gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gdk_drag_get_display(cast(GdkDrag*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,11 +144,11 @@ class Drag : ObjectG
    * when the drag operation is over.
    * Returns: the drag surface
    */
-  Surface getDragSurface()
+  gdk.surface.Surface getDragSurface()
   {
     GdkSurface* _cretval;
     _cretval = gdk_drag_get_drag_surface(cast(GdkDrag*)cPtr);
-    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -156,11 +156,11 @@ class Drag : ObjectG
    * Retrieves the formats supported by this `GdkDrag` object.
    * Returns: a `GdkContentFormats`
    */
-  ContentFormats getFormats()
+  gdk.content_formats.ContentFormats getFormats()
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_drag_get_formats(cast(GdkDrag*)cPtr);
-    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -168,11 +168,11 @@ class Drag : ObjectG
    * Determines the action chosen by the drag destination.
    * Returns: a `GdkDragAction` value
    */
-  DragAction getSelectedAction()
+  gdk.types.DragAction getSelectedAction()
   {
     GdkDragAction _cretval;
     _cretval = gdk_drag_get_selected_action(cast(GdkDrag*)cPtr);
-    DragAction _retval = cast(DragAction)_cretval;
+    gdk.types.DragAction _retval = cast(gdk.types.DragAction)_cretval;
     return _retval;
   }
 
@@ -180,11 +180,11 @@ class Drag : ObjectG
    * Returns the `GdkSurface` where the drag originates.
    * Returns: The `GdkSurface` where the drag originates
    */
-  Surface getSurface()
+  gdk.surface.Surface getSurface()
   {
     GdkSurface* _cretval;
     _cretval = gdk_drag_get_surface(cast(GdkDrag*)cPtr);
-    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -207,8 +207,8 @@ class Drag : ObjectG
    *   reason = The reason the drag was cancelled
    *   drag = the instance the signal is connected to
    */
-  alias CancelCallbackDlg = void delegate(DragCancelReason reason, Drag drag);
-  alias CancelCallbackFunc = void function(DragCancelReason reason, Drag drag);
+  alias CancelCallbackDlg = void delegate(gdk.types.DragCancelReason reason, gdk.drag.Drag drag);
+  alias CancelCallbackFunc = void function(gdk.types.DragCancelReason reason, gdk.drag.Drag drag);
 
   /**
    * Connect to Cancel signal.
@@ -224,8 +224,8 @@ class Drag : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto drag = getVal!Drag(_paramVals);
-      auto reason = getVal!DragCancelReason(&_paramVals[1]);
+      auto drag = getVal!(gdk.drag.Drag)(_paramVals);
+      auto reason = getVal!(gdk.types.DragCancelReason)(&_paramVals[1]);
       _dClosure.dlg(reason, drag);
     }
 
@@ -238,8 +238,8 @@ class Drag : ObjectG
    * The drag object can now free all miscellaneous data.
    *   drag = the instance the signal is connected to
    */
-  alias DndFinishedCallbackDlg = void delegate(Drag drag);
-  alias DndFinishedCallbackFunc = void function(Drag drag);
+  alias DndFinishedCallbackDlg = void delegate(gdk.drag.Drag drag);
+  alias DndFinishedCallbackFunc = void function(gdk.drag.Drag drag);
 
   /**
    * Connect to DndFinished signal.
@@ -255,7 +255,7 @@ class Drag : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto drag = getVal!Drag(_paramVals);
+      auto drag = getVal!(gdk.drag.Drag)(_paramVals);
       _dClosure.dlg(drag);
     }
 
@@ -267,8 +267,8 @@ class Drag : ObjectG
    * Emitted when the drop operation is performed on an accepting client.
    *   drag = the instance the signal is connected to
    */
-  alias DropPerformedCallbackDlg = void delegate(Drag drag);
-  alias DropPerformedCallbackFunc = void function(Drag drag);
+  alias DropPerformedCallbackDlg = void delegate(gdk.drag.Drag drag);
+  alias DropPerformedCallbackFunc = void function(gdk.drag.Drag drag);
 
   /**
    * Connect to DropPerformed signal.
@@ -284,7 +284,7 @@ class Drag : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto drag = getVal!Drag(_paramVals);
+      auto drag = getVal!(gdk.drag.Drag)(_paramVals);
       _dClosure.dlg(drag);
     }
 

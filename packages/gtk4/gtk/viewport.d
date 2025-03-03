@@ -1,6 +1,6 @@
 module gtk.viewport;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -30,7 +30,7 @@ import gtk.widget;
  * Until GTK 4.10, `GtkViewport` used the `GTK_ACCESSIBLE_ROLE_GROUP` role.
  * Starting from GTK 4.12, `GtkViewport` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
  */
-class Viewport : Widget, Scrollable
+class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -60,7 +60,7 @@ class Viewport : Widget, Scrollable
    *   vadjustment = vertical adjustment
    * Returns: a new `GtkViewport`
    */
-  this(Adjustment hadjustment, Adjustment vadjustment)
+  this(gtk.adjustment.Adjustment hadjustment, gtk.adjustment.Adjustment vadjustment)
   {
     GtkWidget* _cretval;
     _cretval = gtk_viewport_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
@@ -71,11 +71,11 @@ class Viewport : Widget, Scrollable
    * Gets the child widget of viewport.
    * Returns: the child widget of viewport
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_viewport_get_child(cast(GtkViewport*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class Viewport : Widget, Scrollable
    *   scroll = details of how to perform
    *     the scroll operation or NULL to scroll into view
    */
-  void scrollTo(Widget descendant, ScrollInfo scroll)
+  void scrollTo(gtk.widget.Widget descendant, gtk.scroll_info.ScrollInfo scroll)
   {
     gtk_viewport_scroll_to(cast(GtkViewport*)cPtr, descendant ? cast(GtkWidget*)descendant.cPtr(No.Dup) : null, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
   }
@@ -110,7 +110,7 @@ class Viewport : Widget, Scrollable
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_viewport_set_child(cast(GtkViewport*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

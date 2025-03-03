@@ -5,7 +5,7 @@ import arrowflight.servable;
 import arrowflight.servable_mixin;
 
 /// Proxy object for ArrowFlight.Servable interface when a GObject has no applicable D binding
-class ServableIfaceProxy : IfaceProxy, Servable
+class ServableIfaceProxy : IfaceProxy, arrowflight.servable.Servable
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class ServableIfaceProxy : IfaceProxy, Servable
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Servable);
+    return typeid(arrowflight.servable.Servable);
   }
 
   mixin ServableT!();

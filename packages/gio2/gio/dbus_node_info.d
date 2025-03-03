@@ -1,6 +1,6 @@
 module gio.dbus_node_info;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_interface_info;
@@ -12,7 +12,7 @@ import gobject.boxed;
 /**
  * Information about nodes in a remote object hierarchy.
  */
-class DBusNodeInfo : Boxed
+class DBusNodeInfo : gobject.boxed.Boxed
 {
 
   this()
@@ -74,7 +74,7 @@ class DBusNodeInfo : Boxed
    * Returns: A #GDBusNodeInfo structure or %NULL if error is set. Free
    *   with [gio.dbus_node_info.DBusNodeInfo.unref].
    */
-  static DBusNodeInfo newForXml(string xmlData)
+  static gio.dbus_node_info.DBusNodeInfo newForXml(string xmlData)
   {
     GDBusNodeInfo* _cretval;
     const(char)* _xmlData = xmlData.toCString(No.Alloc);
@@ -82,7 +82,7 @@ class DBusNodeInfo : Boxed
     _cretval = g_dbus_node_info_new_for_xml(_xmlData, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new DBusNodeInfo(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gio.dbus_node_info.DBusNodeInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class DBusNodeInfo : Boxed
    *   indent = Indentation level.
    *   stringBuilder = A #GString to to append XML data to.
    */
-  void generateXml(uint indent, String stringBuilder)
+  void generateXml(uint indent, glib.string_.String stringBuilder)
   {
     g_dbus_node_info_generate_xml(cast(GDBusNodeInfo*)cPtr, indent, stringBuilder ? cast(GString*)stringBuilder.cPtr(No.Dup) : null);
   }
@@ -106,12 +106,12 @@ class DBusNodeInfo : Boxed
    *   name = A D-Bus interface name.
    * Returns: A #GDBusInterfaceInfo or %NULL if not found. Do not free, it is owned by info.
    */
-  DBusInterfaceInfo lookupInterface(string name)
+  gio.dbus_interface_info.DBusInterfaceInfo lookupInterface(string name)
   {
     GDBusInterfaceInfo* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_dbus_node_info_lookup_interface(cast(GDBusNodeInfo*)cPtr, _name);
-    auto _retval = _cretval ? new DBusInterfaceInfo(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gio.dbus_interface_info.DBusInterfaceInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

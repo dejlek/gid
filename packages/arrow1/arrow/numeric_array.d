@@ -4,10 +4,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.primitive_array;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class NumericArray : PrimitiveArray
+class NumericArray : arrow.primitive_array.PrimitiveArray
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

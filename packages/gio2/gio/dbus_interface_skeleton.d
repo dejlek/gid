@@ -1,6 +1,6 @@
 module gio.dbus_interface_skeleton;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_connection;
@@ -17,7 +17,7 @@ import gobject.object;
 /**
  * Abstract base class for D-Bus interfaces on the service side.
  */
-class DBusInterfaceSkeleton : ObjectG, DBusInterface
+class DBusInterfaceSkeleton : gobject.object.ObjectG, gio.dbus_interface.DBusInterface
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -50,7 +50,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    * Returns: %TRUE if the interface was exported on connection, otherwise %FALSE with
    *   error set.
    */
-  bool export_(DBusConnection connection, string objectPath)
+  bool export_(gio.dbus_connection.DBusConnection connection, string objectPath)
   {
     bool _retval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
@@ -80,11 +80,11 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    * Returns: A #GDBusConnection or %NULL if interface_ is
    *   not exported anywhere. Do not free, the object belongs to interface_.
    */
-  DBusConnection getConnection()
+  gio.dbus_connection.DBusConnection getConnection()
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_interface_skeleton_get_connection(cast(GDBusInterfaceSkeleton*)cPtr);
-    auto _retval = ObjectG.getDObject!DBusConnection(cast(GDBusConnection*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -95,11 +95,11 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    *   list should be freed with [glib.list.List.free] after each element has
    *   been freed with [gobject.object.ObjectG.unref].
    */
-  DBusConnection[] getConnections()
+  gio.dbus_connection.DBusConnection[] getConnections()
   {
     GList* _cretval;
     _cretval = g_dbus_interface_skeleton_get_connections(cast(GDBusInterfaceSkeleton*)cPtr);
-    auto _retval = gListToD!(DBusConnection, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gio.dbus_connection.DBusConnection, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -108,11 +108,11 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    * of interface_
    * Returns: One or more flags from the #GDBusInterfaceSkeletonFlags enumeration.
    */
-  DBusInterfaceSkeletonFlags getFlags()
+  gio.types.DBusInterfaceSkeletonFlags getFlags()
   {
     GDBusInterfaceSkeletonFlags _cretval;
     _cretval = g_dbus_interface_skeleton_get_flags(cast(GDBusInterfaceSkeleton*)cPtr);
-    DBusInterfaceSkeletonFlags _retval = cast(DBusInterfaceSkeletonFlags)_cretval;
+    gio.types.DBusInterfaceSkeletonFlags _retval = cast(gio.types.DBusInterfaceSkeletonFlags)_cretval;
     return _retval;
   }
 
@@ -121,11 +121,11 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    * implemented by interface_.
    * Returns: A #GDBusInterfaceInfo $(LPAREN)never %NULL$(RPAREN). Do not free.
    */
-  DBusInterfaceInfo getInfo()
+  gio.dbus_interface_info.DBusInterfaceInfo getInfo()
   {
     GDBusInterfaceInfo* _cretval;
     _cretval = g_dbus_interface_skeleton_get_info(cast(GDBusInterfaceSkeleton*)cPtr);
-    auto _retval = _cretval ? new DBusInterfaceInfo(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gio.dbus_interface_info.DBusInterfaceInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
   {
     const(char)* _cretval;
     _cretval = g_dbus_interface_skeleton_get_object_path(cast(GDBusInterfaceSkeleton*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -148,11 +148,11 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    *   ['a{sv}'][G-VARIANT-TYPE-VARDICT:CAPS].
    *   Free with [glib.variant.VariantG.unref].
    */
-  VariantG getProperties()
+  glib.variant.VariantG getProperties()
   {
     VariantC* _cretval;
     _cretval = g_dbus_interface_skeleton_get_properties(cast(GDBusInterfaceSkeleton*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -162,11 +162,11 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    * itself to be passed as user_data.
    * Returns: the vtable of the D-Bus interface implemented by the skeleton
    */
-  DBusInterfaceVTable getVtable()
+  gio.types.DBusInterfaceVTable getVtable()
   {
     GDBusInterfaceVTable* _cretval;
     _cretval = g_dbus_interface_skeleton_get_vtable(cast(GDBusInterfaceSkeleton*)cPtr);
-    DBusInterfaceVTable _retval;
+    gio.types.DBusInterfaceVTable _retval;
     if (_cretval)
       _retval = *_cretval;
     return _retval;
@@ -178,7 +178,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    *   connection = A #GDBusConnection.
    * Returns: %TRUE if interface_ is exported on connection, %FALSE otherwise.
    */
-  bool hasConnection(DBusConnection connection)
+  bool hasConnection(gio.dbus_connection.DBusConnection connection)
   {
     bool _retval;
     _retval = g_dbus_interface_skeleton_has_connection(cast(GDBusInterfaceSkeleton*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null);
@@ -190,7 +190,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    * Params:
    *   flags = Flags from the #GDBusInterfaceSkeletonFlags enumeration.
    */
-  void setFlags(DBusInterfaceSkeletonFlags flags)
+  void setFlags(gio.types.DBusInterfaceSkeletonFlags flags)
   {
     g_dbus_interface_skeleton_set_flags(cast(GDBusInterfaceSkeleton*)cPtr, flags);
   }
@@ -212,7 +212,7 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    * Params:
    *   connection = A #GDBusConnection.
    */
-  void unexportFromConnection(DBusConnection connection)
+  void unexportFromConnection(gio.dbus_connection.DBusConnection connection)
   {
     g_dbus_interface_skeleton_unexport_from_connection(cast(GDBusInterfaceSkeleton*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null);
   }
@@ -251,8 +251,8 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
    *   dBusInterfaceSkeleton = the instance the signal is connected to
    * Returns: %TRUE if the call is authorized, %FALSE otherwise.
    */
-  alias GAuthorizeMethodCallbackDlg = bool delegate(DBusMethodInvocation invocation, DBusInterfaceSkeleton dBusInterfaceSkeleton);
-  alias GAuthorizeMethodCallbackFunc = bool function(DBusMethodInvocation invocation, DBusInterfaceSkeleton dBusInterfaceSkeleton);
+  alias GAuthorizeMethodCallbackDlg = bool delegate(gio.dbus_method_invocation.DBusMethodInvocation invocation, gio.dbus_interface_skeleton.DBusInterfaceSkeleton dBusInterfaceSkeleton);
+  alias GAuthorizeMethodCallbackFunc = bool function(gio.dbus_method_invocation.DBusMethodInvocation invocation, gio.dbus_interface_skeleton.DBusInterfaceSkeleton dBusInterfaceSkeleton);
 
   /**
    * Connect to GAuthorizeMethod signal.
@@ -269,8 +269,8 @@ class DBusInterfaceSkeleton : ObjectG, DBusInterface
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto dBusInterfaceSkeleton = getVal!DBusInterfaceSkeleton(_paramVals);
-      auto invocation = getVal!DBusMethodInvocation(&_paramVals[1]);
+      auto dBusInterfaceSkeleton = getVal!(gio.dbus_interface_skeleton.DBusInterfaceSkeleton)(_paramVals);
+      auto invocation = getVal!(gio.dbus_method_invocation.DBusMethodInvocation)(&_paramVals[1]);
       _retval = _dClosure.dlg(invocation, dBusInterfaceSkeleton);
       setVal!bool(_returnValue, _retval);
     }

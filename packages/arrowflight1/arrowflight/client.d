@@ -13,11 +13,11 @@ import arrowflight.location;
 import arrowflight.stream_reader;
 import arrowflight.ticket;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class Client : ObjectG
+class Client : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -36,7 +36,7 @@ class Client : ObjectG
     return getType();
   }
 
-  this(Location location, ClientOptions options)
+  this(arrowflight.location.Location location, arrowflight.client_options.ClientOptions options)
   {
     GAFlightClient* _cretval;
     GError *_err;
@@ -56,7 +56,7 @@ class Client : ObjectG
    *   bearerValue = Bearer token value on success.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool authenticateBasicToken(string user, string password, CallOptions options, out string bearerName, out string bearerValue)
+  bool authenticateBasicToken(string user, string password, arrowflight.call_options.CallOptions options, out string bearerName, out string bearerValue)
   {
     bool _retval;
     const(char)* _user = user.toCString(No.Alloc);
@@ -82,14 +82,14 @@ class Client : ObjectG
     return _retval;
   }
 
-  StreamReader doGet(Ticket ticket, CallOptions options)
+  arrowflight.stream_reader.StreamReader doGet(arrowflight.ticket.Ticket ticket, arrowflight.call_options.CallOptions options)
   {
     GAFlightStreamReader* _cretval;
     GError *_err;
     _cretval = gaflight_client_do_get(cast(GAFlightClient*)cPtr, ticket ? cast(GAFlightTicket*)ticket.cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!StreamReader(cast(GAFlightStreamReader*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowflight.stream_reader.StreamReader)(cast(GAFlightStreamReader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -107,36 +107,36 @@ class Client : ObjectG
    * Returns: The #GAFlighDoPutResult holding a reader and a writer on success,
    *   %NULL on error.
    */
-  DoPutResult doPut(Descriptor descriptor, Schema schema, CallOptions options)
+  arrowflight.do_put_result.DoPutResult doPut(arrowflight.descriptor.Descriptor descriptor, arrow.schema.Schema schema, arrowflight.call_options.CallOptions options)
   {
     GAFlightDoPutResult* _cretval;
     GError *_err;
     _cretval = gaflight_client_do_put(cast(GAFlightClient*)cPtr, descriptor ? cast(GAFlightDescriptor*)descriptor.cPtr(No.Dup) : null, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!DoPutResult(cast(GAFlightDoPutResult*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowflight.do_put_result.DoPutResult)(cast(GAFlightDoPutResult*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Info getFlightInfo(Descriptor descriptor, CallOptions options)
+  arrowflight.info.Info getFlightInfo(arrowflight.descriptor.Descriptor descriptor, arrowflight.call_options.CallOptions options)
   {
     GAFlightInfo* _cretval;
     GError *_err;
     _cretval = gaflight_client_get_flight_info(cast(GAFlightClient*)cPtr, descriptor ? cast(GAFlightDescriptor*)descriptor.cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Info(cast(GAFlightInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowflight.info.Info)(cast(GAFlightInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Info[] listFlights(Criteria criteria, CallOptions options)
+  arrowflight.info.Info[] listFlights(arrowflight.criteria.Criteria criteria, arrowflight.call_options.CallOptions options)
   {
     GList* _cretval;
     GError *_err;
     _cretval = gaflight_client_list_flights(cast(GAFlightClient*)cPtr, criteria ? cast(GAFlightCriteria*)criteria.cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = gListToD!(Info, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(arrowflight.info.Info, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 }

@@ -1,6 +1,6 @@
 module gtk.print_unix_dialog;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -72,7 +72,7 @@ import gtk.window;
  * `GtkPrintUnixDialog` has a single CSS node with name window. The style classes
  * dialog and print are added.
  */
-class PrintUnixDialog : Dialog
+class PrintUnixDialog : gtk.dialog.Dialog
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -98,7 +98,7 @@ class PrintUnixDialog : Dialog
    *   parent = Transient parent of the dialog
    * Returns: a new `GtkPrintUnixDialog`
    */
-  this(string title, Window parent)
+  this(string title, gtk.window.Window parent)
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -112,7 +112,7 @@ class PrintUnixDialog : Dialog
    *   child = the widget to put in the custom tab
    *   tabLabel = the widget to use as tab label
    */
-  void addCustomTab(Widget child, Widget tabLabel)
+  void addCustomTab(gtk.widget.Widget child, gtk.widget.Widget tabLabel)
   {
     gtk_print_unix_dialog_add_custom_tab(cast(GtkPrintUnixDialog*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null);
   }
@@ -154,11 +154,11 @@ class PrintUnixDialog : Dialog
    * Gets the capabilities that have been set on this `GtkPrintUnixDialog`.
    * Returns: the printing capabilities
    */
-  PrintCapabilities getManualCapabilities()
+  gtk.types.PrintCapabilities getManualCapabilities()
   {
     GtkPrintCapabilities _cretval;
     _cretval = gtk_print_unix_dialog_get_manual_capabilities(cast(GtkPrintUnixDialog*)cPtr);
-    PrintCapabilities _retval = cast(PrintCapabilities)_cretval;
+    gtk.types.PrintCapabilities _retval = cast(gtk.types.PrintCapabilities)_cretval;
     return _retval;
   }
 
@@ -166,11 +166,11 @@ class PrintUnixDialog : Dialog
    * Gets the page setup that is used by the `GtkPrintUnixDialog`.
    * Returns: the page setup of dialog.
    */
-  PageSetup getPageSetup()
+  gtk.page_setup.PageSetup getPageSetup()
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_unix_dialog_get_page_setup(cast(GtkPrintUnixDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -189,15 +189,15 @@ class PrintUnixDialog : Dialog
    * Gets the currently selected printer.
    * Returns: the currently selected printer
    */
-  Printer getSelectedPrinter()
+  gtk.printer.Printer getSelectedPrinter()
   {
     GtkPrinter* _cretval;
     _cretval = gtk_print_unix_dialog_get_selected_printer(cast(GtkPrintUnixDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!Printer(cast(GtkPrinter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.printer.Printer)(cast(GtkPrinter*)_cretval, No.Take);
     return _retval;
   }
 
-  alias getSettings = Widget.getSettings;
+  alias getSettings = gtk.widget.Widget.getSettings;
 
   /**
    * Gets a new `GtkPrintSettings` object that represents the
@@ -206,11 +206,11 @@ class PrintUnixDialog : Dialog
    * it if don’t want to keep it.
    * Returns: a new `GtkPrintSettings` object with the values from dialog
    */
-  PrintSettings getSettings()
+  gtk.print_settings.PrintSettings getSettings()
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_unix_dialog_get_settings(cast(GtkPrintUnixDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -267,7 +267,7 @@ class PrintUnixDialog : Dialog
    * Params:
    *   capabilities = the printing capabilities of your application
    */
-  void setManualCapabilities(PrintCapabilities capabilities)
+  void setManualCapabilities(gtk.types.PrintCapabilities capabilities)
   {
     gtk_print_unix_dialog_set_manual_capabilities(cast(GtkPrintUnixDialog*)cPtr, capabilities);
   }
@@ -277,7 +277,7 @@ class PrintUnixDialog : Dialog
    * Params:
    *   pageSetup = a `GtkPageSetup`
    */
-  void setPageSetup(PageSetup pageSetup)
+  void setPageSetup(gtk.page_setup.PageSetup pageSetup)
   {
     gtk_print_unix_dialog_set_page_setup(cast(GtkPrintUnixDialog*)cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null);
   }
@@ -290,7 +290,7 @@ class PrintUnixDialog : Dialog
    * Params:
    *   settings = a `GtkPrintSettings`
    */
-  void setSettings(PrintSettings settings)
+  void setSettings(gtk.print_settings.PrintSettings settings)
   {
     gtk_print_unix_dialog_set_settings(cast(GtkPrintUnixDialog*)cPtr, settings ? cast(GtkPrintSettings*)settings.cPtr(No.Dup) : null);
   }

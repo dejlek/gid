@@ -1,6 +1,6 @@
 module gtk.window_controls;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -52,7 +52,7 @@ import gtk.widget;
  * # Accessibility
  * `GtkWindowControls` uses the %GTK_ACCESSIBLE_ROLE_GROUP role.
  */
-class WindowControls : Widget
+class WindowControls : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -77,7 +77,7 @@ class WindowControls : Widget
    *   side = the side
    * Returns: a new `GtkWindowControls`.
    */
-  this(PackType side)
+  this(gtk.types.PackType side)
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_controls_new(side);
@@ -92,7 +92,7 @@ class WindowControls : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_window_controls_get_decoration_layout(cast(GtkWindowControls*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -111,11 +111,11 @@ class WindowControls : Widget
    * Gets the side to which this `GtkWindowControls` instance belongs.
    * Returns: the side
    */
-  PackType getSide()
+  gtk.types.PackType getSide()
   {
     GtkPackType _cretval;
     _cretval = gtk_window_controls_get_side(cast(GtkWindowControls*)cPtr);
-    PackType _retval = cast(PackType)_cretval;
+    gtk.types.PackType _retval = cast(gtk.types.PackType)_cretval;
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class WindowControls : Widget
    * Params:
    *   side = a side
    */
-  void setSide(PackType side)
+  void setSide(gtk.types.PackType side)
   {
     gtk_window_controls_set_side(cast(GtkWindowControls*)cPtr, side);
   }

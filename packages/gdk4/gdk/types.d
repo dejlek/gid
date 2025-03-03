@@ -4,8 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.content_deserializer;
 import gdk.content_serializer;
-import gdk.types;
-import gid.global;
+import gid.gid;
 
 
 // Enums
@@ -47,8 +46,8 @@ alias KeymapKey = GdkKeymapKey;
 alias TimeCoord = GdkTimeCoord;
 
 // Callbacks
-alias ContentDeserializeFunc = void delegate(ContentDeserializer deserializer);
-alias ContentSerializeFunc = void delegate(ContentSerializer serializer);
+alias ContentDeserializeFunc = void delegate(gdk.content_deserializer.ContentDeserializer deserializer);
+alias ContentSerializeFunc = void delegate(gdk.content_serializer.ContentSerializer serializer);
 
 /**
  * Defines all possible DND actions.

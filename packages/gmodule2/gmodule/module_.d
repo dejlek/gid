@@ -1,6 +1,6 @@
 module gmodule.module_;
 
-import gid.global;
+import gid.gid;
 import glib.error;
 import glib.types;
 import gmodule.c.functions;
@@ -61,7 +61,7 @@ class Module
   {
     const(char)* _cretval;
     _cretval = g_module_name(cast(ModuleC*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class Module
     const(char)* _directory = directory.toCString(No.Alloc);
     const(char)* _moduleName = moduleName.toCString(No.Alloc);
     _cretval = g_module_build_path(_directory, _moduleName);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -122,13 +122,13 @@ class Module
   {
     const(char)* _cretval;
     _cretval = g_module_error();
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
-  static Quark errorQuark()
+  static glib.types.Quark errorQuark()
   {
-    Quark _retval;
+    glib.types.Quark _retval;
     _retval = g_module_error_quark();
     return _retval;
   }
@@ -154,7 +154,7 @@ class ModuleException : ErrorG
 
   this(Code code, string msg)
   {
-    super(Module.errorQuark, cast(int)code, msg);
+    super(gmodule.module_.Module.errorQuark, cast(int)code, msg);
   }
 
   alias Code = GModuleError;

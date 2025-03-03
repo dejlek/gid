@@ -1,6 +1,6 @@
 module glib.pattern_spec;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -21,7 +21,7 @@ import gobject.boxed;
  * instead of func@GLib.pattern_match_simple. This avoids the overhead of repeated
  * pattern compilation.
  */
-class PatternSpec : Boxed
+class PatternSpec : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -63,11 +63,11 @@ class PatternSpec : Boxed
    * Copies pspec in a new #GPatternSpec.
    * Returns: a copy of pspec.
    */
-  PatternSpec copy()
+  glib.pattern_spec.PatternSpec copy()
   {
     GPatternSpec* _cretval;
     _cretval = g_pattern_spec_copy(cast(GPatternSpec*)cPtr);
-    auto _retval = _cretval ? new PatternSpec(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.pattern_spec.PatternSpec(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -78,7 +78,7 @@ class PatternSpec : Boxed
    *   pspec2 = another #GPatternSpec
    * Returns: Whether the compiled patterns are equal
    */
-  bool equal(PatternSpec pspec2)
+  bool equal(glib.pattern_spec.PatternSpec pspec2)
   {
     bool _retval;
     _retval = g_pattern_spec_equal(cast(GPatternSpec*)cPtr, pspec2 ? cast(GPatternSpec*)pspec2.cPtr(No.Dup) : null);

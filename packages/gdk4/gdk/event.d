@@ -9,7 +9,7 @@ import gdk.event_sequence;
 import gdk.seat;
 import gdk.surface;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
@@ -77,7 +77,7 @@ class Event
    *   value = location to store the value found
    * Returns: %TRUE if the specified axis was found, otherwise %FALSE
    */
-  bool getAxis(AxisUse axisUse, out double value)
+  bool getAxis(gdk.types.AxisUse axisUse, out double value)
   {
     bool _retval;
     _retval = gdk_event_get_axis(cast(GdkEvent*)cPtr, axisUse, cast(double*)&value);
@@ -88,11 +88,11 @@ class Event
    * Returns the device of an event.
    * Returns: a `GdkDevice`
    */
-  Device getDevice()
+  gdk.device.Device getDevice()
   {
     GdkDevice* _cretval;
     _cretval = gdk_event_get_device(cast(GdkEvent*)cPtr);
-    auto _retval = ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -107,11 +107,11 @@ class Event
    * persistently across runs, see [gdk.device_tool.DeviceTool.getSerial].
    * Returns: The current device tool
    */
-  DeviceTool getDeviceTool()
+  gdk.device_tool.DeviceTool getDeviceTool()
   {
     GdkDeviceTool* _cretval;
     _cretval = gdk_event_get_device_tool(cast(GdkEvent*)cPtr);
-    auto _retval = ObjectG.getDObject!DeviceTool(cast(GdkDeviceTool*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
     return _retval;
   }
 
@@ -119,11 +119,11 @@ class Event
    * Retrieves the display associated to the event.
    * Returns: a `GdkDisplay`
    */
-  Display getDisplay()
+  gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gdk_event_get_display(cast(GdkEvent*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -133,11 +133,11 @@ class Event
    * events typically don't have event sequence information.
    * Returns: the event sequence that the event belongs to
    */
-  EventSequence getEventSequence()
+  gdk.event_sequence.EventSequence getEventSequence()
   {
     GdkEventSequence* _cretval;
     _cretval = gdk_event_get_event_sequence(cast(GdkEvent*)cPtr);
-    auto _retval = _cretval ? new EventSequence(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.event_sequence.EventSequence(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -145,11 +145,11 @@ class Event
    * Retrieves the type of the event.
    * Returns: a `GdkEvent`Type
    */
-  EventType getEventType()
+  gdk.types.EventType getEventType()
   {
     GdkEventType _cretval;
     _cretval = gdk_event_get_event_type(cast(GdkEvent*)cPtr);
-    EventType _retval = cast(EventType)_cretval;
+    gdk.types.EventType _retval = cast(gdk.types.EventType)_cretval;
     return _retval;
   }
 
@@ -164,16 +164,16 @@ class Event
    * Returns: an
    *   array of time and coordinates
    */
-  TimeCoord[] getHistory()
+  gdk.types.TimeCoord[] getHistory()
   {
     GdkTimeCoord* _cretval;
     uint _cretlength;
     _cretval = gdk_event_get_history(cast(GdkEvent*)cPtr, &_cretlength);
-    TimeCoord[] _retval;
+    gdk.types.TimeCoord[] _retval;
 
     if (_cretval)
     {
-      _retval = new TimeCoord[_cretlength];
+      _retval = new gdk.types.TimeCoord[_cretlength];
       foreach (i; 0 .. _cretlength)
         _retval[i] = _cretval[i];
     }
@@ -184,11 +184,11 @@ class Event
    * Returns the modifier state field of an event.
    * Returns: the modifier state of event
    */
-  ModifierType getModifierState()
+  gdk.types.ModifierType getModifierState()
   {
     GdkModifierType _cretval;
     _cretval = gdk_event_get_modifier_state(cast(GdkEvent*)cPtr);
-    ModifierType _retval = cast(ModifierType)_cretval;
+    gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }
 
@@ -223,11 +223,11 @@ class Event
    * Returns the seat that originated the event.
    * Returns: a `GdkSeat`.
    */
-  Seat getSeat()
+  gdk.seat.Seat getSeat()
   {
     GdkSeat* _cretval;
     _cretval = gdk_event_get_seat(cast(GdkEvent*)cPtr);
-    auto _retval = ObjectG.getDObject!Seat(cast(GdkSeat*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -235,11 +235,11 @@ class Event
    * Extracts the surface associated with an event.
    * Returns: The `GdkSurface` associated with the event
    */
-  Surface getSurface()
+  gdk.surface.Surface getSurface()
   {
     GdkSurface* _cretval;
     _cretval = gdk_event_get_surface(cast(GdkEvent*)cPtr);
-    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 

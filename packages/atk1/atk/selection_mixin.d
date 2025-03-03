@@ -5,7 +5,7 @@ public import atk.c.functions;
 public import atk.c.types;
 public import atk.object;
 public import atk.types;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gobject.object;
 
@@ -98,11 +98,11 @@ template SelectionT()
    *   selected accessible, or %NULL if selection does not implement this
    *   interface.
    */
-  override ObjectAtk refSelection(int i)
+  override atk.object.ObjectAtk refSelection(int i)
   {
     AtkObject* _cretval;
     _cretval = atk_selection_ref_selection(cast(AtkSelection*)cPtr, i);
-    auto _retval = ObjectG.getDObject!ObjectAtk(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -137,8 +137,8 @@ template SelectionT()
    * implements AtkSelection interface when the selection changes.
    *   selection = the instance the signal is connected to
    */
-  alias SelectionChangedCallbackDlg = void delegate(Selection selection);
-  alias SelectionChangedCallbackFunc = void function(Selection selection);
+  alias SelectionChangedCallbackDlg = void delegate(atk.selection.Selection selection);
+  alias SelectionChangedCallbackFunc = void function(atk.selection.Selection selection);
 
   /**
    * Connect to SelectionChanged signal.
@@ -154,7 +154,7 @@ template SelectionT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto selection = getVal!Selection(_paramVals);
+      auto selection = getVal!(atk.selection.Selection)(_paramVals);
       _dClosure.dlg(selection);
     }
 

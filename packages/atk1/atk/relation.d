@@ -4,7 +4,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.object;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
@@ -15,7 +15,7 @@ import gobject.object;
  * other objects are defined as an AtkRelationSet, which is a set of
  * AtkRelations.
  */
-class Relation : ObjectG
+class Relation : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -44,7 +44,7 @@ class Relation : ObjectG
    *     #AtkRelation
    * Returns: a pointer to a new #AtkRelation
    */
-  this(ObjectAtk[] targets, RelationType relationship)
+  this(atk.object.ObjectAtk[] targets, atk.types.RelationType relationship)
   {
     AtkRelation* _cretval;
     int _nTargets;
@@ -65,7 +65,7 @@ class Relation : ObjectG
    * Params:
    *   target = an #AtkObject
    */
-  void addTarget(ObjectAtk target)
+  void addTarget(atk.object.ObjectAtk target)
   {
     atk_relation_add_target(cast(AtkRelation*)cPtr, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
   }
@@ -74,11 +74,11 @@ class Relation : ObjectG
    * Gets the type of relation
    * Returns: the type of relation
    */
-  RelationType getRelationType()
+  atk.types.RelationType getRelationType()
   {
     AtkRelationType _cretval;
     _cretval = atk_relation_get_relation_type(cast(AtkRelation*)cPtr);
-    RelationType _retval = cast(RelationType)_cretval;
+    atk.types.RelationType _retval = cast(atk.types.RelationType)_cretval;
     return _retval;
   }
 
@@ -86,11 +86,11 @@ class Relation : ObjectG
    * Gets the target list of relation
    * Returns: the target list of relation
    */
-  ObjectAtk[] getTarget()
+  atk.object.ObjectAtk[] getTarget()
   {
     GPtrArray* _cretval;
     _cretval = atk_relation_get_target(cast(AtkRelation*)cPtr);
-    auto _retval = gPtrArrayToD!(ObjectAtk, GidOwnership.None)(cast(GPtrArray*)_cretval);
+    auto _retval = gPtrArrayToD!(atk.object.ObjectAtk, GidOwnership.None)(cast(GPtrArray*)_cretval);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class Relation : ObjectG
    *   target = an #AtkObject
    * Returns: TRUE if the removal is successful.
    */
-  bool removeTarget(ObjectAtk target)
+  bool removeTarget(atk.object.ObjectAtk target)
   {
     bool _retval;
     _retval = atk_relation_remove_target(cast(AtkRelation*)cPtr, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);

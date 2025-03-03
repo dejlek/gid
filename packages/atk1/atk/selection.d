@@ -5,7 +5,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.object;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 
@@ -84,7 +84,7 @@ interface Selection
    *   selected accessible, or %NULL if selection does not implement this
    *   interface.
    */
-  ObjectAtk refSelection(int i);
+  atk.object.ObjectAtk refSelection(int i);
 
   /**
    * Removes the specified child of the object from the object's selection.
@@ -107,8 +107,8 @@ interface Selection
    * implements AtkSelection interface when the selection changes.
    *   selection = the instance the signal is connected to
    */
-  alias SelectionChangedCallbackDlg = void delegate(Selection selection);
-  alias SelectionChangedCallbackFunc = void function(Selection selection);
+  alias SelectionChangedCallbackDlg = void delegate(atk.selection.Selection selection);
+  alias SelectionChangedCallbackFunc = void function(atk.selection.Selection selection);
 
   /**
    * Connect to SelectionChanged signal.

@@ -42,7 +42,46 @@ __gshared extern(C)
   // FontFuncs
   extern(C) GType function() c_hb_gobject_font_funcs_get_type;
 
-  // Global
+  // GlyphInfo
+  extern(C) GType function() c_hb_gobject_glyph_info_get_type;
+
+  // GlyphPosition
+  extern(C) GType function() c_hb_gobject_glyph_position_get_type;
+
+  // HBFace
+  extern(C) GType function() c_hb_gobject_face_get_type;
+
+  // Map
+  extern(C) GType function() c_hb_gobject_map_get_type;
+
+  // OtMathGlyphPart
+  extern(C) GType function() c_hb_gobject_ot_math_glyph_part_get_type;
+
+  // OtMathGlyphVariant
+  extern(C) GType function() c_hb_gobject_ot_math_glyph_variant_get_type;
+
+  // OtVarAxisInfo
+  extern(C) GType function() c_hb_gobject_ot_var_axis_info_get_type;
+
+  // PaintFuncs
+  extern(C) GType function() c_hb_gobject_paint_funcs_get_type;
+
+  // SegmentProperties
+  extern(C) GType function() c_hb_gobject_segment_properties_get_type;
+
+  // Set
+  extern(C) GType function() c_hb_gobject_set_get_type;
+
+  // ShapePlan
+  extern(C) GType function() c_hb_gobject_shape_plan_get_type;
+
+  // UnicodeFuncs
+  extern(C) GType function() c_hb_gobject_unicode_funcs_get_type;
+
+  // UserDataKey
+  extern(C) GType function() c_hb_gobject_user_data_key_get_type;
+
+  // global
   hb_ot_name_id_t function(hb_face_t* face, hb_aat_layout_feature_type_t featureType) c_hb_aat_layout_feature_type_get_name_id;
   uint function(hb_face_t* face, hb_aat_layout_feature_type_t featureType, uint startOffset, uint* selectorCount, hb_aat_layout_feature_selector_info_t* selectors, uint* defaultIndex) c_hb_aat_layout_feature_type_get_selector_infos;
   uint function(hb_face_t* face, uint startOffset, uint* featureCount, hb_aat_layout_feature_type_t* features) c_hb_aat_layout_get_feature_types;
@@ -541,45 +580,6 @@ __gshared extern(C)
   hb_script_t function(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode) c_hb_unicode_script;
   hb_bool_t function(const(ubyte)* str, int len, hb_variation_t* variation) c_hb_variation_from_string;
   void function(hb_variation_t* variation, char* buf, uint size) c_hb_variation_to_string;
-
-  // GlyphInfo
-  extern(C) GType function() c_hb_gobject_glyph_info_get_type;
-
-  // GlyphPosition
-  extern(C) GType function() c_hb_gobject_glyph_position_get_type;
-
-  // HBFace
-  extern(C) GType function() c_hb_gobject_face_get_type;
-
-  // Map
-  extern(C) GType function() c_hb_gobject_map_get_type;
-
-  // OtMathGlyphPart
-  extern(C) GType function() c_hb_gobject_ot_math_glyph_part_get_type;
-
-  // OtMathGlyphVariant
-  extern(C) GType function() c_hb_gobject_ot_math_glyph_variant_get_type;
-
-  // OtVarAxisInfo
-  extern(C) GType function() c_hb_gobject_ot_var_axis_info_get_type;
-
-  // PaintFuncs
-  extern(C) GType function() c_hb_gobject_paint_funcs_get_type;
-
-  // SegmentProperties
-  extern(C) GType function() c_hb_gobject_segment_properties_get_type;
-
-  // Set
-  extern(C) GType function() c_hb_gobject_set_get_type;
-
-  // ShapePlan
-  extern(C) GType function() c_hb_gobject_shape_plan_get_type;
-
-  // UnicodeFuncs
-  extern(C) GType function() c_hb_gobject_unicode_funcs_get_type;
-
-  // UserDataKey
-  extern(C) GType function() c_hb_gobject_user_data_key_get_type;
 }
 
 // Blob
@@ -609,7 +609,46 @@ alias hb_gobject_font_get_type = c_hb_gobject_font_get_type;
 // FontFuncs
 alias hb_gobject_font_funcs_get_type = c_hb_gobject_font_funcs_get_type;
 
-// Global
+// GlyphInfo
+alias hb_gobject_glyph_info_get_type = c_hb_gobject_glyph_info_get_type;
+
+// GlyphPosition
+alias hb_gobject_glyph_position_get_type = c_hb_gobject_glyph_position_get_type;
+
+// HBFace
+alias hb_gobject_face_get_type = c_hb_gobject_face_get_type;
+
+// Map
+alias hb_gobject_map_get_type = c_hb_gobject_map_get_type;
+
+// OtMathGlyphPart
+alias hb_gobject_ot_math_glyph_part_get_type = c_hb_gobject_ot_math_glyph_part_get_type;
+
+// OtMathGlyphVariant
+alias hb_gobject_ot_math_glyph_variant_get_type = c_hb_gobject_ot_math_glyph_variant_get_type;
+
+// OtVarAxisInfo
+alias hb_gobject_ot_var_axis_info_get_type = c_hb_gobject_ot_var_axis_info_get_type;
+
+// PaintFuncs
+alias hb_gobject_paint_funcs_get_type = c_hb_gobject_paint_funcs_get_type;
+
+// SegmentProperties
+alias hb_gobject_segment_properties_get_type = c_hb_gobject_segment_properties_get_type;
+
+// Set
+alias hb_gobject_set_get_type = c_hb_gobject_set_get_type;
+
+// ShapePlan
+alias hb_gobject_shape_plan_get_type = c_hb_gobject_shape_plan_get_type;
+
+// UnicodeFuncs
+alias hb_gobject_unicode_funcs_get_type = c_hb_gobject_unicode_funcs_get_type;
+
+// UserDataKey
+alias hb_gobject_user_data_key_get_type = c_hb_gobject_user_data_key_get_type;
+
+// global
 alias hb_aat_layout_feature_type_get_name_id = c_hb_aat_layout_feature_type_get_name_id;
 alias hb_aat_layout_feature_type_get_selector_infos = c_hb_aat_layout_feature_type_get_selector_infos;
 alias hb_aat_layout_get_feature_types = c_hb_aat_layout_get_feature_types;
@@ -1109,45 +1148,6 @@ alias hb_unicode_script = c_hb_unicode_script;
 alias hb_variation_from_string = c_hb_variation_from_string;
 alias hb_variation_to_string = c_hb_variation_to_string;
 
-// GlyphInfo
-alias hb_gobject_glyph_info_get_type = c_hb_gobject_glyph_info_get_type;
-
-// GlyphPosition
-alias hb_gobject_glyph_position_get_type = c_hb_gobject_glyph_position_get_type;
-
-// HBFace
-alias hb_gobject_face_get_type = c_hb_gobject_face_get_type;
-
-// Map
-alias hb_gobject_map_get_type = c_hb_gobject_map_get_type;
-
-// OtMathGlyphPart
-alias hb_gobject_ot_math_glyph_part_get_type = c_hb_gobject_ot_math_glyph_part_get_type;
-
-// OtMathGlyphVariant
-alias hb_gobject_ot_math_glyph_variant_get_type = c_hb_gobject_ot_math_glyph_variant_get_type;
-
-// OtVarAxisInfo
-alias hb_gobject_ot_var_axis_info_get_type = c_hb_gobject_ot_var_axis_info_get_type;
-
-// PaintFuncs
-alias hb_gobject_paint_funcs_get_type = c_hb_gobject_paint_funcs_get_type;
-
-// SegmentProperties
-alias hb_gobject_segment_properties_get_type = c_hb_gobject_segment_properties_get_type;
-
-// Set
-alias hb_gobject_set_get_type = c_hb_gobject_set_get_type;
-
-// ShapePlan
-alias hb_gobject_shape_plan_get_type = c_hb_gobject_shape_plan_get_type;
-
-// UnicodeFuncs
-alias hb_gobject_unicode_funcs_get_type = c_hb_gobject_unicode_funcs_get_type;
-
-// UserDataKey
-alias hb_gobject_user_data_key_get_type = c_hb_gobject_user_data_key_get_type;
-
 shared static this()
 {
   // Blob
@@ -1177,7 +1177,46 @@ shared static this()
   // FontFuncs
   gidLink(cast(void**)&hb_gobject_font_funcs_get_type, "hb_gobject_font_funcs_get_type", LIBS);
 
-  // Global
+  // GlyphInfo
+  gidLink(cast(void**)&hb_gobject_glyph_info_get_type, "hb_gobject_glyph_info_get_type", LIBS);
+
+  // GlyphPosition
+  gidLink(cast(void**)&hb_gobject_glyph_position_get_type, "hb_gobject_glyph_position_get_type", LIBS);
+
+  // HBFace
+  gidLink(cast(void**)&hb_gobject_face_get_type, "hb_gobject_face_get_type", LIBS);
+
+  // Map
+  gidLink(cast(void**)&hb_gobject_map_get_type, "hb_gobject_map_get_type", LIBS);
+
+  // OtMathGlyphPart
+  gidLink(cast(void**)&hb_gobject_ot_math_glyph_part_get_type, "hb_gobject_ot_math_glyph_part_get_type", LIBS);
+
+  // OtMathGlyphVariant
+  gidLink(cast(void**)&hb_gobject_ot_math_glyph_variant_get_type, "hb_gobject_ot_math_glyph_variant_get_type", LIBS);
+
+  // OtVarAxisInfo
+  gidLink(cast(void**)&hb_gobject_ot_var_axis_info_get_type, "hb_gobject_ot_var_axis_info_get_type", LIBS);
+
+  // PaintFuncs
+  gidLink(cast(void**)&hb_gobject_paint_funcs_get_type, "hb_gobject_paint_funcs_get_type", LIBS);
+
+  // SegmentProperties
+  gidLink(cast(void**)&hb_gobject_segment_properties_get_type, "hb_gobject_segment_properties_get_type", LIBS);
+
+  // Set
+  gidLink(cast(void**)&hb_gobject_set_get_type, "hb_gobject_set_get_type", LIBS);
+
+  // ShapePlan
+  gidLink(cast(void**)&hb_gobject_shape_plan_get_type, "hb_gobject_shape_plan_get_type", LIBS);
+
+  // UnicodeFuncs
+  gidLink(cast(void**)&hb_gobject_unicode_funcs_get_type, "hb_gobject_unicode_funcs_get_type", LIBS);
+
+  // UserDataKey
+  gidLink(cast(void**)&hb_gobject_user_data_key_get_type, "hb_gobject_user_data_key_get_type", LIBS);
+
+  // global
   gidLink(cast(void**)&hb_aat_layout_feature_type_get_name_id, "hb_aat_layout_feature_type_get_name_id", LIBS);
   gidLink(cast(void**)&hb_aat_layout_feature_type_get_selector_infos, "hb_aat_layout_feature_type_get_selector_infos", LIBS);
   gidLink(cast(void**)&hb_aat_layout_get_feature_types, "hb_aat_layout_get_feature_types", LIBS);
@@ -1676,43 +1715,4 @@ shared static this()
   gidLink(cast(void**)&hb_unicode_script, "hb_unicode_script", LIBS);
   gidLink(cast(void**)&hb_variation_from_string, "hb_variation_from_string", LIBS);
   gidLink(cast(void**)&hb_variation_to_string, "hb_variation_to_string", LIBS);
-
-  // GlyphInfo
-  gidLink(cast(void**)&hb_gobject_glyph_info_get_type, "hb_gobject_glyph_info_get_type", LIBS);
-
-  // GlyphPosition
-  gidLink(cast(void**)&hb_gobject_glyph_position_get_type, "hb_gobject_glyph_position_get_type", LIBS);
-
-  // HBFace
-  gidLink(cast(void**)&hb_gobject_face_get_type, "hb_gobject_face_get_type", LIBS);
-
-  // Map
-  gidLink(cast(void**)&hb_gobject_map_get_type, "hb_gobject_map_get_type", LIBS);
-
-  // OtMathGlyphPart
-  gidLink(cast(void**)&hb_gobject_ot_math_glyph_part_get_type, "hb_gobject_ot_math_glyph_part_get_type", LIBS);
-
-  // OtMathGlyphVariant
-  gidLink(cast(void**)&hb_gobject_ot_math_glyph_variant_get_type, "hb_gobject_ot_math_glyph_variant_get_type", LIBS);
-
-  // OtVarAxisInfo
-  gidLink(cast(void**)&hb_gobject_ot_var_axis_info_get_type, "hb_gobject_ot_var_axis_info_get_type", LIBS);
-
-  // PaintFuncs
-  gidLink(cast(void**)&hb_gobject_paint_funcs_get_type, "hb_gobject_paint_funcs_get_type", LIBS);
-
-  // SegmentProperties
-  gidLink(cast(void**)&hb_gobject_segment_properties_get_type, "hb_gobject_segment_properties_get_type", LIBS);
-
-  // Set
-  gidLink(cast(void**)&hb_gobject_set_get_type, "hb_gobject_set_get_type", LIBS);
-
-  // ShapePlan
-  gidLink(cast(void**)&hb_gobject_shape_plan_get_type, "hb_gobject_shape_plan_get_type", LIBS);
-
-  // UnicodeFuncs
-  gidLink(cast(void**)&hb_gobject_unicode_funcs_get_type, "hb_gobject_unicode_funcs_get_type", LIBS);
-
-  // UserDataKey
-  gidLink(cast(void**)&hb_gobject_user_data_key_get_type, "hb_gobject_user_data_key_get_type", LIBS);
 }

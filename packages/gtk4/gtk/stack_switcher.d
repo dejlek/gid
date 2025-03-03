@@ -1,6 +1,6 @@
 module gtk.stack_switcher;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -40,7 +40,7 @@ import gtk.widget;
  * the stack switcher to be made vertical with
  * `[gtk.orientable.Orientable.setOrientation]`.
  */
-class StackSwitcher : Widget, Orientable
+class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -76,11 +76,11 @@ class StackSwitcher : Widget, Orientable
    * Retrieves the stack.
    * Returns: the stack
    */
-  Stack getStack()
+  gtk.stack.Stack getStack()
   {
     GtkStack* _cretval;
     _cretval = gtk_stack_switcher_get_stack(cast(GtkStackSwitcher*)cPtr);
-    auto _retval = ObjectG.getDObject!Stack(cast(GtkStack*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.Take);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class StackSwitcher : Widget, Orientable
    * Params:
    *   stack = a `GtkStack`
    */
-  void setStack(Stack stack)
+  void setStack(gtk.stack.Stack stack)
   {
     gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)cPtr, stack ? cast(GtkStack*)stack.cPtr(No.Dup) : null);
   }

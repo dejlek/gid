@@ -1,6 +1,6 @@
 module soup.global;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.date_time;
 import glib.error;
@@ -46,11 +46,11 @@ bool checkVersion(uint major, uint minor, uint micro)
  * Returns: a #GSList of
  *   `SoupCookie`s, which can be freed with [soup.cookie.Cookie.free].
  */
-Cookie[] cookiesFromRequest(Message msg)
+soup.cookie.Cookie[] cookiesFromRequest(soup.message.Message msg)
 {
   GSList* _cretval;
   _cretval = soup_cookies_from_request(msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
-  auto _retval = gSListToD!(Cookie, GidOwnership.Full)(cast(GSList*)_cretval);
+  auto _retval = gSListToD!(soup.cookie.Cookie, GidOwnership.Full)(cast(GSList*)_cretval);
   return _retval;
 }
 
@@ -64,11 +64,11 @@ Cookie[] cookiesFromRequest(Message msg)
  * Returns: a #GSList of
  *   `SoupCookie`s, which can be freed with [soup.cookie.Cookie.free].
  */
-Cookie[] cookiesFromResponse(Message msg)
+soup.cookie.Cookie[] cookiesFromResponse(soup.message.Message msg)
 {
   GSList* _cretval;
   _cretval = soup_cookies_from_response(msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
-  auto _retval = gSListToD!(Cookie, GidOwnership.Full)(cast(GSList*)_cretval);
+  auto _retval = gSListToD!(soup.cookie.Cookie, GidOwnership.Full)(cast(GSList*)_cretval);
   return _retval;
 }
 
@@ -79,13 +79,13 @@ Cookie[] cookiesFromResponse(Message msg)
  *   cookies = a #GSList of #SoupCookie
  * Returns: the serialization of cookies
  */
-string cookiesToCookieHeader(Cookie[] cookies)
+string cookiesToCookieHeader(soup.cookie.Cookie[] cookies)
 {
   char* _cretval;
-  auto _cookies = gSListFromD!(Cookie)(cookies);
-  scope(exit) containerFree!(GSList*, Cookie, GidOwnership.None)(_cookies);
+  auto _cookies = gSListFromD!(soup.cookie.Cookie)(cookies);
+  scope(exit) containerFree!(GSList*, soup.cookie.Cookie, GidOwnership.None)(_cookies);
   _cretval = soup_cookies_to_cookie_header(_cookies);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -99,10 +99,10 @@ string cookiesToCookieHeader(Cookie[] cookies)
  *   cookies = a #GSList of #SoupCookie
  *   msg = a #SoupMessage
  */
-void cookiesToRequest(Cookie[] cookies, Message msg)
+void cookiesToRequest(soup.cookie.Cookie[] cookies, soup.message.Message msg)
 {
-  auto _cookies = gSListFromD!(Cookie)(cookies);
-  scope(exit) containerFree!(GSList*, Cookie, GidOwnership.None)(_cookies);
+  auto _cookies = gSListFromD!(soup.cookie.Cookie)(cookies);
+  scope(exit) containerFree!(GSList*, soup.cookie.Cookie, GidOwnership.None)(_cookies);
   soup_cookies_to_request(_cookies, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
 }
 
@@ -115,10 +115,10 @@ void cookiesToRequest(Cookie[] cookies, Message msg)
  *   cookies = a #GSList of #SoupCookie
  *   msg = a #SoupMessage
  */
-void cookiesToResponse(Cookie[] cookies, Message msg)
+void cookiesToResponse(soup.cookie.Cookie[] cookies, soup.message.Message msg)
 {
-  auto _cookies = gSListFromD!(Cookie)(cookies);
-  scope(exit) containerFree!(GSList*, Cookie, GidOwnership.None)(_cookies);
+  auto _cookies = gSListFromD!(soup.cookie.Cookie)(cookies);
+  scope(exit) containerFree!(GSList*, soup.cookie.Cookie, GidOwnership.None)(_cookies);
   soup_cookies_to_response(_cookies, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
 }
 
@@ -132,12 +132,12 @@ void cookiesToResponse(Cookie[] cookies, Message msg)
  * Returns: a new #GDateTime, or %NULL if date_string
  *   could not be parsed.
  */
-DateTime dateTimeNewFromHttpString(string dateString)
+glib.date_time.DateTime dateTimeNewFromHttpString(string dateString)
 {
   GDateTime* _cretval;
   const(char)* _dateString = dateString.toCString(No.Alloc);
   _cretval = soup_date_time_new_from_http_string(_dateString);
-  auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -148,11 +148,11 @@ DateTime dateTimeNewFromHttpString(string dateString)
  *   format = the format to generate the date in
  * Returns: date as a string or %NULL
  */
-string dateTimeToString(DateTime date, DateFormat format)
+string dateTimeToString(glib.date_time.DateTime date, soup.types.DateFormat format)
 {
   char* _cretval;
   _cretval = soup_date_time_to_string(date ? cast(GDateTime*)date.cPtr(No.Dup) : null, format);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -201,7 +201,7 @@ string[string] formDecode(string encodedForm)
  *   file_control_name$(RPAREN) from msg, which you can free with
  *   [glib.hash_table.HashTable.destroy]. On error, it will return %NULL.
  */
-string[string] formDecodeMultipart(Multipart multipart, string fileControlName, out string filename, out string contentType, out Bytes file)
+string[string] formDecodeMultipart(soup.multipart.Multipart multipart, string fileControlName, out string filename, out string contentType, out glib.bytes.Bytes file)
 {
   GHashTable* _cretval;
   const(char)* _fileControlName = fileControlName.toCString(No.Alloc);
@@ -212,7 +212,7 @@ string[string] formDecodeMultipart(Multipart multipart, string fileControlName, 
   auto _retval = gHashTableToD!(string, string, GidOwnership.Container)(cast(GHashTable*)_cretval);
   filename = _filename.fromCString(Yes.Free);
   contentType = _contentType.fromCString(Yes.Free);
-  file = new Bytes(cast(void*)_file, Yes.Take);
+  file = new glib.bytes.Bytes(cast(void*)_file, Yes.Take);
   return _retval;
 }
 
@@ -236,7 +236,7 @@ string formEncodeHash(string[string] formDataSet)
   auto _formDataSet = gHashTableFromD!(string, string)(formDataSet);
   scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_formDataSet);
   _cretval = soup_form_encode_hash(_formDataSet);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -334,7 +334,7 @@ void headerFreeParamList(string[string] paramList)
  *   name = a parameter name
  *   value = a parameter value, or %NULL
  */
-void headerGStringAppendParam(String string_, string name, string value)
+void headerGStringAppendParam(glib.string_.String string_, string name, string value)
 {
   const(char)* _name = name.toCString(No.Alloc);
   const(char)* _value = value.toCString(No.Alloc);
@@ -351,7 +351,7 @@ void headerGStringAppendParam(String string_, string name, string value)
  *   name = a parameter name
  *   value = a parameter value
  */
-void headerGStringAppendParamQuoted(String string_, string name, string value)
+void headerGStringAppendParamQuoted(glib.string_.String string_, string name, string value)
 {
   const(char)* _name = name.toCString(No.Alloc);
   const(char)* _value = value.toCString(No.Alloc);
@@ -505,7 +505,7 @@ string[string] headerParseSemiParamListStrict(string header)
  *   dest = #SoupMessageHeaders to store the header values in
  * Returns: success or failure
  */
-bool headersParse(string str, int len, MessageHeaders dest)
+bool headersParse(string str, int len, soup.message_headers.MessageHeaders dest)
 {
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -530,7 +530,7 @@ bool headersParse(string str, int len, MessageHeaders dest)
  * Returns: %SOUP_STATUS_OK if the headers could be parsed, or an
  *   HTTP error to be returned to the client if they could not be.
  */
-uint headersParseRequest(string str, int len, MessageHeaders reqHeaders, out string reqMethod, out string reqPath, out HTTPVersion ver)
+uint headersParseRequest(string str, int len, soup.message_headers.MessageHeaders reqHeaders, out string reqMethod, out string reqPath, out soup.types.HTTPVersion ver)
 {
   uint _retval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -558,7 +558,7 @@ uint headersParseRequest(string str, int len, MessageHeaders reqHeaders, out str
  *     the reason phrase
  * Returns: success or failure.
  */
-bool headersParseResponse(string str, int len, MessageHeaders headers, out HTTPVersion ver, out uint statusCode, out string reasonPhrase)
+bool headersParseResponse(string str, int len, soup.message_headers.MessageHeaders headers, out soup.types.HTTPVersion ver, out uint statusCode, out string reasonPhrase)
 {
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -582,7 +582,7 @@ bool headersParseResponse(string str, int len, MessageHeaders headers, out HTTPV
  *     the reason phrase
  * Returns: %TRUE if status_line was parsed successfully.
  */
-bool headersParseStatusLine(string statusLine, out HTTPVersion ver, out uint statusCode, out string reasonPhrase)
+bool headersParseStatusLine(string statusLine, out soup.types.HTTPVersion ver, out uint statusCode, out string reasonPhrase)
 {
   bool _retval;
   const(char)* _statusLine = statusLine.toCString(No.Alloc);
@@ -635,7 +635,7 @@ string tldGetBaseDomain(string hostname)
   _cretval = soup_tld_get_base_domain(_hostname, &_err);
   if (_err)
     throw new ErrorG(_err);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -647,13 +647,13 @@ string tldGetBaseDomain(string hostname)
  * Returns: a #GBytes with the contents of uri,
  *   or %NULL if uri is not a valid data URI
  */
-Bytes uriDecodeDataUri(string uri, out string contentType)
+glib.bytes.Bytes uriDecodeDataUri(string uri, out string contentType)
 {
   GBytes* _cretval;
   const(char)* _uri = uri.toCString(No.Alloc);
   char* _contentType;
   _cretval = soup_uri_decode_data_uri(_uri, &_contentType);
-  auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
   contentType = _contentType.fromCString(Yes.Free);
   return _retval;
 }
@@ -665,7 +665,7 @@ Bytes uriDecodeDataUri(string uri, out string contentType)
  *   uri2 = another #GUri
  * Returns: %TRUE if equal otherwise %FALSE
  */
-bool uriEqual(Uri uri1, Uri uri2)
+bool uriEqual(glib.uri.Uri uri1, glib.uri.Uri uri2)
 {
   bool _retval;
   _retval = soup_uri_equal(uri1 ? cast(GUri*)uri1.cPtr(No.Dup) : null, uri2 ? cast(GUri*)uri2.cPtr(No.Dup) : null);

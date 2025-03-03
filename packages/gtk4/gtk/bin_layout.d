@@ -1,6 +1,6 @@
 module gtk.bin_layout;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_manager;
@@ -14,7 +14,7 @@ import gtk.types;
  * [gtk.widget.Widget.Align], and [gtk.widget.Widget.Align] properties
  * of each child to determine where they should be positioned.
  */
-class BinLayout : LayoutManager
+class BinLayout : gtk.layout_manager.LayoutManager
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

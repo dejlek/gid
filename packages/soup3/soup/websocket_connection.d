@@ -1,6 +1,6 @@
 module soup.websocket_connection;
 
-import gid.global;
+import gid.gid;
 import gio.iostream;
 import glib.bytes;
 import glib.error;
@@ -31,7 +31,7 @@ import soup.websocket_extension;
  * signal@WebsocketConnection::message signal to receive data.
  * $(LPAREN)#SoupWebsocketConnection currently only supports asynchronous I/O.$(RPAREN)
  */
-class WebsocketConnection : ObjectG
+class WebsocketConnection : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -95,7 +95,7 @@ class WebsocketConnection : ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_websocket_connection_get_close_data(cast(SoupWebsocketConnection*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -103,11 +103,11 @@ class WebsocketConnection : ObjectG
    * Get the connection type $(LPAREN)client/server$(RPAREN) of the connection.
    * Returns: the connection type
    */
-  WebsocketConnectionType getConnectionType()
+  soup.types.WebsocketConnectionType getConnectionType()
   {
     SoupWebsocketConnectionType _cretval;
     _cretval = soup_websocket_connection_get_connection_type(cast(SoupWebsocketConnection*)cPtr);
-    WebsocketConnectionType _retval = cast(WebsocketConnectionType)_cretval;
+    soup.types.WebsocketConnectionType _retval = cast(soup.types.WebsocketConnectionType)_cretval;
     return _retval;
   }
 
@@ -115,11 +115,11 @@ class WebsocketConnection : ObjectG
    * Get the extensions chosen via negotiation with the peer.
    * Returns: a #GList of #SoupWebsocketExtension objects
    */
-  WebsocketExtension[] getExtensions()
+  soup.websocket_extension.WebsocketExtension[] getExtensions()
   {
     GList* _cretval;
     _cretval = soup_websocket_connection_get_extensions(cast(SoupWebsocketConnection*)cPtr);
-    auto _retval = gListToD!(WebsocketExtension, GidOwnership.None)(cast(GList*)_cretval);
+    auto _retval = gListToD!(soup.websocket_extension.WebsocketExtension, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -127,11 +127,11 @@ class WebsocketConnection : ObjectG
    * Get the I/O stream the WebSocket is communicating over.
    * Returns: the WebSocket's I/O stream.
    */
-  IOStream getIoStream()
+  gio.iostream.IOStream getIoStream()
   {
     GIOStream* _cretval;
     _cretval = soup_websocket_connection_get_io_stream(cast(SoupWebsocketConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!IOStream(cast(GIOStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class WebsocketConnection : ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_websocket_connection_get_origin(cast(SoupWebsocketConnection*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class WebsocketConnection : ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_websocket_connection_get_protocol(cast(SoupWebsocketConnection*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -185,11 +185,11 @@ class WebsocketConnection : ObjectG
    * Get the current state of the WebSocket.
    * Returns: the state
    */
-  WebsocketState getState()
+  soup.types.WebsocketState getState()
   {
     SoupWebsocketState _cretval;
     _cretval = soup_websocket_connection_get_state(cast(SoupWebsocketConnection*)cPtr);
-    WebsocketState _retval = cast(WebsocketState)_cretval;
+    soup.types.WebsocketState _retval = cast(soup.types.WebsocketState)_cretval;
     return _retval;
   }
 
@@ -199,11 +199,11 @@ class WebsocketConnection : ObjectG
    * for clients it is the address connected to.
    * Returns: the URI
    */
-  Uri getUri()
+  glib.uri.Uri getUri()
   {
     GUri* _cretval;
     _cretval = soup_websocket_connection_get_uri(cast(SoupWebsocketConnection*)cPtr);
-    auto _retval = _cretval ? new Uri(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -234,7 +234,7 @@ class WebsocketConnection : ObjectG
    *   type = the type of message contents
    *   message = the message data as #GBytes
    */
-  void sendMessage(WebsocketDataType type, Bytes message)
+  void sendMessage(soup.types.WebsocketDataType type, glib.bytes.Bytes message)
   {
     soup_websocket_connection_send_message(cast(SoupWebsocketConnection*)cPtr, type, message ? cast(GBytes*)message.cPtr(No.Dup) : null);
   }
@@ -285,8 +285,8 @@ class WebsocketConnection : ObjectG
    * This signal will be emitted once.
    *   websocketConnection = the instance the signal is connected to
    */
-  alias ClosedCallbackDlg = void delegate(WebsocketConnection websocketConnection);
-  alias ClosedCallbackFunc = void function(WebsocketConnection websocketConnection);
+  alias ClosedCallbackDlg = void delegate(soup.websocket_connection.WebsocketConnection websocketConnection);
+  alias ClosedCallbackFunc = void function(soup.websocket_connection.WebsocketConnection websocketConnection);
 
   /**
    * Connect to Closed signal.
@@ -302,7 +302,7 @@ class WebsocketConnection : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto websocketConnection = getVal!WebsocketConnection(_paramVals);
+      auto websocketConnection = getVal!(soup.websocket_connection.WebsocketConnection)(_paramVals);
       _dClosure.dlg(websocketConnection);
     }
 
@@ -314,8 +314,8 @@ class WebsocketConnection : ObjectG
    * This signal will be emitted during an orderly close.
    *   websocketConnection = the instance the signal is connected to
    */
-  alias ClosingCallbackDlg = void delegate(WebsocketConnection websocketConnection);
-  alias ClosingCallbackFunc = void function(WebsocketConnection websocketConnection);
+  alias ClosingCallbackDlg = void delegate(soup.websocket_connection.WebsocketConnection websocketConnection);
+  alias ClosingCallbackFunc = void function(soup.websocket_connection.WebsocketConnection websocketConnection);
 
   /**
    * Connect to Closing signal.
@@ -331,7 +331,7 @@ class WebsocketConnection : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto websocketConnection = getVal!WebsocketConnection(_paramVals);
+      auto websocketConnection = getVal!(soup.websocket_connection.WebsocketConnection)(_paramVals);
       _dClosure.dlg(websocketConnection);
     }
 
@@ -347,8 +347,8 @@ class WebsocketConnection : ObjectG
    *   error = the error that occured
    *   websocketConnection = the instance the signal is connected to
    */
-  alias ErrorCallbackDlg = void delegate(ErrorG error, WebsocketConnection websocketConnection);
-  alias ErrorCallbackFunc = void function(ErrorG error, WebsocketConnection websocketConnection);
+  alias ErrorCallbackDlg = void delegate(glib.error.ErrorG error, soup.websocket_connection.WebsocketConnection websocketConnection);
+  alias ErrorCallbackFunc = void function(glib.error.ErrorG error, soup.websocket_connection.WebsocketConnection websocketConnection);
 
   /**
    * Connect to Error signal.
@@ -364,8 +364,8 @@ class WebsocketConnection : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto websocketConnection = getVal!WebsocketConnection(_paramVals);
-      auto error = getVal!ErrorG(&_paramVals[1]);
+      auto websocketConnection = getVal!(soup.websocket_connection.WebsocketConnection)(_paramVals);
+      auto error = getVal!(glib.error.ErrorG)(&_paramVals[1]);
       _dClosure.dlg(error, websocketConnection);
     }
 
@@ -383,8 +383,8 @@ class WebsocketConnection : ObjectG
    *   message = the message data
    *   websocketConnection = the instance the signal is connected to
    */
-  alias MessageCallbackDlg = void delegate(int type, Bytes message, WebsocketConnection websocketConnection);
-  alias MessageCallbackFunc = void function(int type, Bytes message, WebsocketConnection websocketConnection);
+  alias MessageCallbackDlg = void delegate(int type, glib.bytes.Bytes message, soup.websocket_connection.WebsocketConnection websocketConnection);
+  alias MessageCallbackFunc = void function(int type, glib.bytes.Bytes message, soup.websocket_connection.WebsocketConnection websocketConnection);
 
   /**
    * Connect to Message signal.
@@ -400,9 +400,9 @@ class WebsocketConnection : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto websocketConnection = getVal!WebsocketConnection(_paramVals);
-      auto type = getVal!int(&_paramVals[1]);
-      auto message = getVal!Bytes(&_paramVals[2]);
+      auto websocketConnection = getVal!(soup.websocket_connection.WebsocketConnection)(_paramVals);
+      auto type = getVal!(int)(&_paramVals[1]);
+      auto message = getVal!(glib.bytes.Bytes)(&_paramVals[2]);
       _dClosure.dlg(type, message, websocketConnection);
     }
 
@@ -420,8 +420,8 @@ class WebsocketConnection : ObjectG
    *   message = the application data $(LPAREN)if any$(RPAREN)
    *   websocketConnection = the instance the signal is connected to
    */
-  alias PongCallbackDlg = void delegate(Bytes message, WebsocketConnection websocketConnection);
-  alias PongCallbackFunc = void function(Bytes message, WebsocketConnection websocketConnection);
+  alias PongCallbackDlg = void delegate(glib.bytes.Bytes message, soup.websocket_connection.WebsocketConnection websocketConnection);
+  alias PongCallbackFunc = void function(glib.bytes.Bytes message, soup.websocket_connection.WebsocketConnection websocketConnection);
 
   /**
    * Connect to Pong signal.
@@ -437,8 +437,8 @@ class WebsocketConnection : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto websocketConnection = getVal!WebsocketConnection(_paramVals);
-      auto message = getVal!Bytes(&_paramVals[1]);
+      auto websocketConnection = getVal!(soup.websocket_connection.WebsocketConnection)(_paramVals);
+      auto message = getVal!(glib.bytes.Bytes)(&_paramVals[1]);
       _dClosure.dlg(message, websocketConnection);
     }
 

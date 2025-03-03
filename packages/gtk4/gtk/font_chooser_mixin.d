@@ -1,7 +1,7 @@
 module gtk.font_chooser_mixin;
 
 public import gtk.font_chooser_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gobject.object;
 public import gtk.c.functions;
@@ -44,7 +44,7 @@ template FontChooserT()
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_font(cast(GtkFontChooser*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -63,11 +63,11 @@ template FontChooserT()
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  override FontDescription getFontDesc()
+  override pango.font_description.FontDescription getFontDesc()
   {
     PangoFontDescription* _cretval;
     _cretval = gtk_font_chooser_get_font_desc(cast(GtkFontChooser*)cPtr);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -81,11 +81,11 @@ template FontChooserT()
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  override FontFace getFontFace()
+  override pango.font_face.FontFace getFontFace()
   {
     PangoFontFace* _cretval;
     _cretval = gtk_font_chooser_get_font_face(cast(GtkFontChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!FontFace(cast(PangoFontFace*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
     return _retval;
   }
 
@@ -99,11 +99,11 @@ template FontChooserT()
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  override FontFamily getFontFamily()
+  override pango.font_family.FontFamily getFontFamily()
   {
     PangoFontFamily* _cretval;
     _cretval = gtk_font_chooser_get_font_family(cast(GtkFontChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!FontFamily(cast(PangoFontFamily*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ template FontChooserT()
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_font_features(cast(GtkFontChooser*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -133,11 +133,11 @@ template FontChooserT()
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  override FontMap getFontMap()
+  override pango.font_map.FontMap getFontMap()
   {
     PangoFontMap* _cretval;
     _cretval = gtk_font_chooser_get_font_map(cast(GtkFontChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!FontMap(cast(PangoFontMap*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ template FontChooserT()
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_language(cast(GtkFontChooser*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -178,11 +178,11 @@ template FontChooserT()
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  override FontChooserLevel getLevel()
+  override gtk.types.FontChooserLevel getLevel()
   {
     GtkFontChooserLevel _cretval;
     _cretval = gtk_font_chooser_get_level(cast(GtkFontChooser*)cPtr);
-    FontChooserLevel _retval = cast(FontChooserLevel)_cretval;
+    gtk.types.FontChooserLevel _retval = cast(gtk.types.FontChooserLevel)_cretval;
     return _retval;
   }
 
@@ -197,7 +197,7 @@ template FontChooserT()
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_preview_text(cast(GtkFontChooser*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -224,13 +224,13 @@ template FontChooserT()
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  override void setFilterFunc(FontFilterFunc filter)
+  override void setFilterFunc(gtk.types.FontFilterFunc filter)
   {
     extern(C) bool _filterCallback(const(PangoFontFamily)* family, const(PangoFontFace)* face, void* data)
     {
-      auto _dlg = cast(FontFilterFunc*)data;
+      auto _dlg = cast(gtk.types.FontFilterFunc*)data;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!FontFamily(cast(void*)family, No.Take), ObjectG.getDObject!FontFace(cast(void*)face, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(pango.font_family.FontFamily)(cast(void*)family, No.Take), ObjectG.getDObject!(pango.font_face.FontFace)(cast(void*)face, No.Take));
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;
@@ -262,9 +262,9 @@ template FontChooserT()
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  override void setFontDesc(FontDescription fontDesc)
+  override void setFontDesc(pango.font_description.FontDescription fontDesc)
   {
-    gtk_font_chooser_set_font_desc(cast(GtkFontChooser*)cPtr, fontDesc ? cast(PangoFontDescription*)fontDesc.cPtr(No.Dup) : null);
+    gtk_font_chooser_set_font_desc(cast(GtkFontChooser*)cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc.cPtr(No.Dup) : null);
   }
 
   /**
@@ -292,7 +292,7 @@ template FontChooserT()
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  override void setFontMap(FontMap fontmap)
+  override void setFontMap(pango.font_map.FontMap fontmap)
   {
     gtk_font_chooser_set_font_map(cast(GtkFontChooser*)cPtr, fontmap ? cast(PangoFontMap*)fontmap.cPtr(No.Dup) : null);
   }
@@ -319,7 +319,7 @@ template FontChooserT()
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
    *   instead
    */
-  override void setLevel(FontChooserLevel level)
+  override void setLevel(gtk.types.FontChooserLevel level)
   {
     gtk_font_chooser_set_level(cast(GtkFontChooser*)cPtr, level);
   }
@@ -363,8 +363,8 @@ template FontChooserT()
 
    * Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
    */
-  alias FontActivatedCallbackDlg = void delegate(string fontname, FontChooser fontChooser);
-  alias FontActivatedCallbackFunc = void function(string fontname, FontChooser fontChooser);
+  alias FontActivatedCallbackDlg = void delegate(string fontname, gtk.font_chooser.FontChooser fontChooser);
+  alias FontActivatedCallbackFunc = void function(string fontname, gtk.font_chooser.FontChooser fontChooser);
 
   /**
    * Connect to FontActivated signal.
@@ -380,8 +380,8 @@ template FontChooserT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fontChooser = getVal!FontChooser(_paramVals);
-      auto fontname = getVal!string(&_paramVals[1]);
+      auto fontChooser = getVal!(gtk.font_chooser.FontChooser)(_paramVals);
+      auto fontname = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(fontname, fontChooser);
     }
 

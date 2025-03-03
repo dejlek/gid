@@ -1,6 +1,6 @@
 module graphene.size;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import graphene.c.functions;
 import graphene.c.types;
@@ -9,7 +9,7 @@ import graphene.types;
 /**
  * A size.
  */
-class Size : Boxed
+class Size : gobject.boxed.Boxed
 {
 
   this()
@@ -63,11 +63,11 @@ class Size : Boxed
    * The contents of the returned value are undefined.
    * Returns: the newly allocated #graphene_size_t
    */
-  static Size alloc()
+  static graphene.size.Size alloc()
   {
     graphene_size_t* _cretval;
     _cretval = graphene_size_alloc();
-    auto _retval = _cretval ? new Size(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new graphene.size.Size(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -77,10 +77,10 @@ class Size : Boxed
    *   b = a #graphene_size_t
    * Returns: `true` if the sizes are equal
    */
-  bool equal(Size b)
+  bool equal(graphene.size.Size b)
   {
     bool _retval;
-    _retval = graphene_size_equal(cast(graphene_size_t*)cPtr, b ? cast(graphene_size_t*)b.cPtr(No.Dup) : null);
+    _retval = graphene_size_equal(cast(const(graphene_size_t)*)cPtr, b ? cast(const(graphene_size_t)*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -91,11 +91,11 @@ class Size : Boxed
    *   height = the height
    * Returns: the initialized #graphene_size_t
    */
-  Size init_(float width, float height)
+  graphene.size.Size init_(float width, float height)
   {
     graphene_size_t* _cretval;
     _cretval = graphene_size_init(cast(graphene_size_t*)cPtr, width, height);
-    auto _retval = _cretval ? new Size(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.size.Size(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -106,11 +106,11 @@ class Size : Boxed
    *   src = a #graphene_size_t
    * Returns: the initialized #graphene_size_t
    */
-  Size initFromSize(Size src)
+  graphene.size.Size initFromSize(graphene.size.Size src)
   {
     graphene_size_t* _cretval;
-    _cretval = graphene_size_init_from_size(cast(graphene_size_t*)cPtr, src ? cast(graphene_size_t*)src.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new Size(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_size_init_from_size(cast(graphene_size_t*)cPtr, src ? cast(const(graphene_size_t)*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new graphene.size.Size(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -122,11 +122,11 @@ class Size : Boxed
    *   factor = the linear interpolation factor
    *   res = return location for the interpolated size
    */
-  void interpolate(Size b, double factor, out Size res)
+  void interpolate(graphene.size.Size b, double factor, out graphene.size.Size res)
   {
     graphene_size_t _res;
-    graphene_size_interpolate(cast(graphene_size_t*)cPtr, b ? cast(graphene_size_t*)b.cPtr(No.Dup) : null, factor, &_res);
-    res = new Size(cast(void*)&_res, No.Take);
+    graphene_size_interpolate(cast(const(graphene_size_t)*)cPtr, b ? cast(const(graphene_size_t)*)b.cPtr(No.Dup) : null, factor, &_res);
+    res = new graphene.size.Size(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -135,11 +135,11 @@ class Size : Boxed
    *   factor = the scaling factor
    *   res = return location for the scaled size
    */
-  void scale(float factor, out Size res)
+  void scale(float factor, out graphene.size.Size res)
   {
     graphene_size_t _res;
-    graphene_size_scale(cast(graphene_size_t*)cPtr, factor, &_res);
-    res = new Size(cast(void*)&_res, No.Take);
+    graphene_size_scale(cast(const(graphene_size_t)*)cPtr, factor, &_res);
+    res = new graphene.size.Size(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -147,11 +147,11 @@ class Size : Boxed
    * equality checks and interpolations.
    * Returns: a constant size
    */
-  static Size zero()
+  static graphene.size.Size zero()
   {
     const(graphene_size_t)* _cretval;
     _cretval = graphene_size_zero();
-    auto _retval = _cretval ? new Size(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.size.Size(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

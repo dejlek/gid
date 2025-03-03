@@ -2,12 +2,10 @@ module gtk.entry;
 
 import gdk.content_provider;
 import gdk.paintable;
-import gdk.paintable_mixin;
 import gdk.rectangle;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gio.icon;
-import gio.icon_mixin;
 import gio.menu_model;
 import gobject.dclosure;
 import gobject.object;
@@ -101,7 +99,7 @@ import pango.tab_array;
  * # Accessibility
  * `GtkEntry` uses the %GTK_ACCESSIBLE_ROLE_TEXT_BOX role.
  */
-class Entry : Widget, CellEditable, Editable
+class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Editable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -140,11 +138,11 @@ class Entry : Widget, CellEditable, Editable
    *   buffer = The buffer to use for the new `GtkEntry`.
    * Returns: a new `GtkEntry`
    */
-  static Entry newWithBuffer(EntryBuffer buffer)
+  static gtk.entry.Entry newWithBuffer(gtk.entry_buffer.EntryBuffer buffer)
   {
     GtkWidget* _cretval;
     _cretval = gtk_entry_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Entry(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.entry.Entry)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -176,11 +174,11 @@ class Entry : Widget, CellEditable, Editable
    * See [gtk.entry.Entry.setAttributes].
    * Returns: the attribute list
    */
-  AttrList getAttributes()
+  pango.attr_list.AttrList getAttributes()
   {
     PangoAttrList* _cretval;
     _cretval = gtk_entry_get_attributes(cast(GtkEntry*)cPtr);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -189,11 +187,11 @@ class Entry : Widget, CellEditable, Editable
    * this widget.
    * Returns: A `GtkEntryBuffer` object.
    */
-  EntryBuffer getBuffer()
+  gtk.entry_buffer.EntryBuffer getBuffer()
   {
     GtkEntryBuffer* _cretval;
     _cretval = gtk_entry_get_buffer(cast(GtkEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!EntryBuffer(cast(GtkEntryBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.entry_buffer.EntryBuffer)(cast(GtkEntryBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -205,11 +203,11 @@ class Entry : Widget, CellEditable, Editable
 
    * Deprecated: GtkEntryCompletion will be removed in GTK 5.
    */
-  EntryCompletion getCompletion()
+  gtk.entry_completion.EntryCompletion getCompletion()
   {
     GtkEntryCompletion* _cretval;
     _cretval = gtk_entry_get_completion(cast(GtkEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!EntryCompletion(cast(GtkEntryCompletion*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.entry_completion.EntryCompletion)(cast(GtkEntryCompletion*)_cretval, No.Take);
     return _retval;
   }
 
@@ -230,11 +228,11 @@ class Entry : Widget, CellEditable, Editable
    * Gets the menu model set with [gtk.entry.Entry.setExtraMenu].
    * Returns: the menu model
    */
-  MenuModel getExtraMenu()
+  gio.menu_model.MenuModel getExtraMenu()
   {
     GMenuModel* _cretval;
     _cretval = gtk_entry_get_extra_menu(cast(GtkEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -255,7 +253,7 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = Icon position
    * Returns: %TRUE if the icon is activatable.
    */
-  bool getIconActivatable(EntryIconPosition iconPos)
+  bool getIconActivatable(gtk.types.EntryIconPosition iconPos)
   {
     bool _retval;
     _retval = gtk_entry_get_icon_activatable(cast(GtkEntry*)cPtr, iconPos);
@@ -274,11 +272,11 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = Icon position
    *   iconArea = Return location for the icon’s area
    */
-  void getIconArea(EntryIconPosition iconPos, out Rectangle iconArea)
+  void getIconArea(gtk.types.EntryIconPosition iconPos, out gdk.rectangle.Rectangle iconArea)
   {
     GdkRectangle _iconArea;
     gtk_entry_get_icon_area(cast(GtkEntry*)cPtr, iconPos, &_iconArea);
-    iconArea = new Rectangle(cast(void*)&_iconArea, No.Take);
+    iconArea = new gdk.rectangle.Rectangle(cast(void*)&_iconArea, No.Take);
   }
 
   /**
@@ -307,11 +305,11 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = Icon position
    * Returns: A `GIcon`
    */
-  Icon getIconGicon(EntryIconPosition iconPos)
+  gio.icon.Icon getIconGicon(gtk.types.EntryIconPosition iconPos)
   {
     GIcon* _cretval;
     _cretval = gtk_entry_get_icon_gicon(cast(GtkEntry*)cPtr, iconPos);
-    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -323,11 +321,11 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = Icon position
    * Returns: An icon name
    */
-  string getIconName(EntryIconPosition iconPos)
+  string getIconName(gtk.types.EntryIconPosition iconPos)
   {
     const(char)* _cretval;
     _cretval = gtk_entry_get_icon_name(cast(GtkEntry*)cPtr, iconPos);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -340,11 +338,11 @@ class Entry : Widget, CellEditable, Editable
    *   if no icon is set for this position or the icon set is not
    *   a `GdkPaintable`.
    */
-  Paintable getIconPaintable(EntryIconPosition iconPos)
+  gdk.paintable.Paintable getIconPaintable(gtk.types.EntryIconPosition iconPos)
   {
     GdkPaintable* _cretval;
     _cretval = gtk_entry_get_icon_paintable(cast(GtkEntry*)cPtr, iconPos);
-    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -354,7 +352,7 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = Icon position
    * Returns: %TRUE if the icon is sensitive.
    */
-  bool getIconSensitive(EntryIconPosition iconPos)
+  bool getIconSensitive(gtk.types.EntryIconPosition iconPos)
   {
     bool _retval;
     _retval = gtk_entry_get_icon_sensitive(cast(GtkEntry*)cPtr, iconPos);
@@ -370,11 +368,11 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = Icon position
    * Returns: image representation being used
    */
-  ImageType getIconStorageType(EntryIconPosition iconPos)
+  gtk.types.ImageType getIconStorageType(gtk.types.EntryIconPosition iconPos)
   {
     GtkImageType _cretval;
     _cretval = gtk_entry_get_icon_storage_type(cast(GtkEntry*)cPtr, iconPos);
-    ImageType _retval = cast(ImageType)_cretval;
+    gtk.types.ImageType _retval = cast(gtk.types.ImageType)_cretval;
     return _retval;
   }
 
@@ -385,11 +383,11 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = the icon position
    * Returns: the tooltip text
    */
-  string getIconTooltipMarkup(EntryIconPosition iconPos)
+  string getIconTooltipMarkup(gtk.types.EntryIconPosition iconPos)
   {
     char* _cretval;
     _cretval = gtk_entry_get_icon_tooltip_markup(cast(GtkEntry*)cPtr, iconPos);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -400,11 +398,11 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = the icon position
    * Returns: the tooltip text
    */
-  string getIconTooltipText(EntryIconPosition iconPos)
+  string getIconTooltipText(gtk.types.EntryIconPosition iconPos)
   {
     char* _cretval;
     _cretval = gtk_entry_get_icon_tooltip_text(cast(GtkEntry*)cPtr, iconPos);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -412,11 +410,11 @@ class Entry : Widget, CellEditable, Editable
    * Gets the input hints of this `GtkEntry`.
    * Returns: the input hints
    */
-  InputHints getInputHints()
+  gtk.types.InputHints getInputHints()
   {
     GtkInputHints _cretval;
     _cretval = gtk_entry_get_input_hints(cast(GtkEntry*)cPtr);
-    InputHints _retval = cast(InputHints)_cretval;
+    gtk.types.InputHints _retval = cast(gtk.types.InputHints)_cretval;
     return _retval;
   }
 
@@ -424,11 +422,11 @@ class Entry : Widget, CellEditable, Editable
    * Gets the input purpose of the `GtkEntry`.
    * Returns: the input purpose
    */
-  InputPurpose getInputPurpose()
+  gtk.types.InputPurpose getInputPurpose()
   {
     GtkInputPurpose _cretval;
     _cretval = gtk_entry_get_input_purpose(cast(GtkEntry*)cPtr);
-    InputPurpose _retval = cast(InputPurpose)_cretval;
+    gtk.types.InputPurpose _retval = cast(gtk.types.InputPurpose)_cretval;
     return _retval;
   }
 
@@ -482,7 +480,7 @@ class Entry : Widget, CellEditable, Editable
   {
     const(char)* _cretval;
     _cretval = gtk_entry_get_placeholder_text(cast(GtkEntry*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -515,11 +513,11 @@ class Entry : Widget, CellEditable, Editable
    * See [gtk.entry.Entry.setTabs].
    * Returns: the tabstops
    */
-  TabArray getTabs()
+  pango.tab_array.TabArray getTabs()
   {
     PangoTabArray* _cretval;
     _cretval = gtk_entry_get_tabs(cast(GtkEntry*)cPtr);
-    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -624,7 +622,7 @@ class Entry : Widget, CellEditable, Editable
    * Params:
    *   attrs = a `PangoAttrList`
    */
-  void setAttributes(AttrList attrs)
+  void setAttributes(pango.attr_list.AttrList attrs)
   {
     gtk_entry_set_attributes(cast(GtkEntry*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
@@ -635,7 +633,7 @@ class Entry : Widget, CellEditable, Editable
    * Params:
    *   buffer = a `GtkEntryBuffer`
    */
-  void setBuffer(EntryBuffer buffer)
+  void setBuffer(gtk.entry_buffer.EntryBuffer buffer)
   {
     gtk_entry_set_buffer(cast(GtkEntry*)cPtr, buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
   }
@@ -651,7 +649,7 @@ class Entry : Widget, CellEditable, Editable
 
    * Deprecated: GtkEntryCompletion will be removed in GTK 5.
    */
-  void setCompletion(EntryCompletion completion)
+  void setCompletion(gtk.entry_completion.EntryCompletion completion)
   {
     gtk_entry_set_completion(cast(GtkEntry*)cPtr, completion ? cast(GtkEntryCompletion*)completion.cPtr(No.Dup) : null);
   }
@@ -662,7 +660,7 @@ class Entry : Widget, CellEditable, Editable
    * Params:
    *   model = a `GMenuModel`
    */
-  void setExtraMenu(MenuModel model)
+  void setExtraMenu(gio.menu_model.MenuModel model)
   {
     gtk_entry_set_extra_menu(cast(GtkEntry*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
@@ -683,7 +681,7 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = Icon position
    *   activatable = %TRUE if the icon should be activatable
    */
-  void setIconActivatable(EntryIconPosition iconPos, bool activatable)
+  void setIconActivatable(gtk.types.EntryIconPosition iconPos, bool activatable)
   {
     gtk_entry_set_icon_activatable(cast(GtkEntry*)cPtr, iconPos, activatable);
   }
@@ -697,7 +695,7 @@ class Entry : Widget, CellEditable, Editable
    *   provider = a `GdkContentProvider`
    *   actions = a bitmask of the allowed drag actions
    */
-  void setIconDragSource(EntryIconPosition iconPos, ContentProvider provider, DragAction actions)
+  void setIconDragSource(gtk.types.EntryIconPosition iconPos, gdk.content_provider.ContentProvider provider, gdk.types.DragAction actions)
   {
     gtk_entry_set_icon_drag_source(cast(GtkEntry*)cPtr, iconPos, provider ? cast(GdkContentProvider*)provider.cPtr(No.Dup) : null, actions);
   }
@@ -713,7 +711,7 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = The position at which to set the icon
    *   icon = The icon to set
    */
-  void setIconFromGicon(EntryIconPosition iconPos, Icon icon)
+  void setIconFromGicon(gtk.types.EntryIconPosition iconPos, gio.icon.Icon icon)
   {
     gtk_entry_set_icon_from_gicon(cast(GtkEntry*)cPtr, iconPos, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
@@ -729,7 +727,7 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = The position at which to set the icon
    *   iconName = An icon name
    */
-  void setIconFromIconName(EntryIconPosition iconPos, string iconName)
+  void setIconFromIconName(gtk.types.EntryIconPosition iconPos, string iconName)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_entry_set_icon_from_icon_name(cast(GtkEntry*)cPtr, iconPos, _iconName);
@@ -742,7 +740,7 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = Icon position
    *   paintable = A `GdkPaintable`
    */
-  void setIconFromPaintable(EntryIconPosition iconPos, Paintable paintable)
+  void setIconFromPaintable(gtk.types.EntryIconPosition iconPos, gdk.paintable.Paintable paintable)
   {
     gtk_entry_set_icon_from_paintable(cast(GtkEntry*)cPtr, iconPos, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
@@ -754,7 +752,7 @@ class Entry : Widget, CellEditable, Editable
    *   sensitive = Specifies whether the icon should appear
    *     sensitive or insensitive
    */
-  void setIconSensitive(EntryIconPosition iconPos, bool sensitive)
+  void setIconSensitive(gtk.types.EntryIconPosition iconPos, bool sensitive)
   {
     gtk_entry_set_icon_sensitive(cast(GtkEntry*)cPtr, iconPos, sensitive);
   }
@@ -770,7 +768,7 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = the icon position
    *   tooltip = the contents of the tooltip for the icon
    */
-  void setIconTooltipMarkup(EntryIconPosition iconPos, string tooltip)
+  void setIconTooltipMarkup(gtk.types.EntryIconPosition iconPos, string tooltip)
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     gtk_entry_set_icon_tooltip_markup(cast(GtkEntry*)cPtr, iconPos, _tooltip);
@@ -795,7 +793,7 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = the icon position
    *   tooltip = the contents of the tooltip for the icon
    */
-  void setIconTooltipText(EntryIconPosition iconPos, string tooltip)
+  void setIconTooltipText(gtk.types.EntryIconPosition iconPos, string tooltip)
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     gtk_entry_set_icon_tooltip_text(cast(GtkEntry*)cPtr, iconPos, _tooltip);
@@ -807,7 +805,7 @@ class Entry : Widget, CellEditable, Editable
    * Params:
    *   hints = the hints
    */
-  void setInputHints(InputHints hints)
+  void setInputHints(gtk.types.InputHints hints)
   {
     gtk_entry_set_input_hints(cast(GtkEntry*)cPtr, hints);
   }
@@ -818,7 +816,7 @@ class Entry : Widget, CellEditable, Editable
    * Params:
    *   purpose = the purpose
    */
-  void setInputPurpose(InputPurpose purpose)
+  void setInputPurpose(gtk.types.InputPurpose purpose)
   {
     gtk_entry_set_input_purpose(cast(GtkEntry*)cPtr, purpose);
   }
@@ -910,7 +908,7 @@ class Entry : Widget, CellEditable, Editable
    * Params:
    *   tabs = a `PangoTabArray`
    */
-  void setTabs(TabArray tabs)
+  void setTabs(pango.tab_array.TabArray tabs)
   {
     gtk_entry_set_tabs(cast(GtkEntry*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }
@@ -949,8 +947,8 @@ class Entry : Widget, CellEditable, Editable
    * The keybindings for this signal are all forms of the Enter key.
    *   entry = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(Entry entry);
-  alias ActivateCallbackFunc = void function(Entry entry);
+  alias ActivateCallbackDlg = void delegate(gtk.entry.Entry entry);
+  alias ActivateCallbackFunc = void function(gtk.entry.Entry entry);
 
   /**
    * Connect to Activate signal.
@@ -966,7 +964,7 @@ class Entry : Widget, CellEditable, Editable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto entry = getVal!Entry(_paramVals);
+      auto entry = getVal!(gtk.entry.Entry)(_paramVals);
       _dClosure.dlg(entry);
     }
 
@@ -980,8 +978,8 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = The position of the clicked icon
    *   entry = the instance the signal is connected to
    */
-  alias IconPressCallbackDlg = void delegate(EntryIconPosition iconPos, Entry entry);
-  alias IconPressCallbackFunc = void function(EntryIconPosition iconPos, Entry entry);
+  alias IconPressCallbackDlg = void delegate(gtk.types.EntryIconPosition iconPos, gtk.entry.Entry entry);
+  alias IconPressCallbackFunc = void function(gtk.types.EntryIconPosition iconPos, gtk.entry.Entry entry);
 
   /**
    * Connect to IconPress signal.
@@ -997,8 +995,8 @@ class Entry : Widget, CellEditable, Editable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto entry = getVal!Entry(_paramVals);
-      auto iconPos = getVal!EntryIconPosition(&_paramVals[1]);
+      auto entry = getVal!(gtk.entry.Entry)(_paramVals);
+      auto iconPos = getVal!(gtk.types.EntryIconPosition)(&_paramVals[1]);
       _dClosure.dlg(iconPos, entry);
     }
 
@@ -1013,8 +1011,8 @@ class Entry : Widget, CellEditable, Editable
    *   iconPos = The position of the clicked icon
    *   entry = the instance the signal is connected to
    */
-  alias IconReleaseCallbackDlg = void delegate(EntryIconPosition iconPos, Entry entry);
-  alias IconReleaseCallbackFunc = void function(EntryIconPosition iconPos, Entry entry);
+  alias IconReleaseCallbackDlg = void delegate(gtk.types.EntryIconPosition iconPos, gtk.entry.Entry entry);
+  alias IconReleaseCallbackFunc = void function(gtk.types.EntryIconPosition iconPos, gtk.entry.Entry entry);
 
   /**
    * Connect to IconRelease signal.
@@ -1030,8 +1028,8 @@ class Entry : Widget, CellEditable, Editable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto entry = getVal!Entry(_paramVals);
-      auto iconPos = getVal!EntryIconPosition(&_paramVals[1]);
+      auto entry = getVal!(gtk.entry.Entry)(_paramVals);
+      auto iconPos = getVal!(gtk.types.EntryIconPosition)(&_paramVals[1]);
       _dClosure.dlg(iconPos, entry);
     }
 

@@ -1,6 +1,6 @@
 module gsk.repeating_radial_gradient_node;
 
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.render_node;
@@ -9,7 +9,7 @@ import gsk.types;
 /**
  * A render node for a repeating radial gradient.
  */
-class RepeatingRadialGradientNode : RenderNode
+class RepeatingRadialGradientNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

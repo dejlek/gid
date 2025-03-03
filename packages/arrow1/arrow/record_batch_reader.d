@@ -6,11 +6,11 @@ import arrow.record_batch;
 import arrow.schema;
 import arrow.table;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class RecordBatchReader : ObjectG
+class RecordBatchReader : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,11 +29,11 @@ class RecordBatchReader : ObjectG
     return getType();
   }
 
-  this(RecordBatch[] recordBatches, Schema schema)
+  this(arrow.record_batch.RecordBatch[] recordBatches, arrow.schema.Schema schema)
   {
     GArrowRecordBatchReader* _cretval;
-    auto _recordBatches = gListFromD!(RecordBatch)(recordBatches);
-    scope(exit) containerFree!(GList*, RecordBatch, GidOwnership.None)(_recordBatches);
+    auto _recordBatches = gListFromD!(arrow.record_batch.RecordBatch)(recordBatches);
+    scope(exit) containerFree!(GList*, arrow.record_batch.RecordBatch, GidOwnership.None)(_recordBatches);
     GError *_err;
     _cretval = garrow_record_batch_reader_new(_recordBatches, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -41,14 +41,14 @@ class RecordBatchReader : ObjectG
     this(_cretval, Yes.Take);
   }
 
-  static RecordBatchReader import_(void* cAbiArrayStream)
+  static arrow.record_batch_reader.RecordBatchReader import_(void* cAbiArrayStream)
   {
     GArrowRecordBatchReader* _cretval;
     GError *_err;
     _cretval = garrow_record_batch_reader_import(cAbiArrayStream, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!RecordBatchReader(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -61,63 +61,63 @@ class RecordBatchReader : ObjectG
     return _retval;
   }
 
-  RecordBatch getNextRecordBatch()
+  arrow.record_batch.RecordBatch getNextRecordBatch()
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
     _cretval = garrow_record_batch_reader_get_next_record_batch(cast(GArrowRecordBatchReader*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!RecordBatch(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Schema getSchema()
+  arrow.schema.Schema getSchema()
   {
     GArrowSchema* _cretval;
     _cretval = garrow_record_batch_reader_get_schema(cast(GArrowRecordBatchReader*)cPtr);
-    auto _retval = ObjectG.getDObject!Schema(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 
-  ObjectG[] getSources()
+  gobject.object.ObjectG[] getSources()
   {
     GList* _cretval;
     _cretval = garrow_record_batch_reader_get_sources(cast(GArrowRecordBatchReader*)cPtr);
-    auto _retval = gListToD!(ObjectG, GidOwnership.None)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gobject.object.ObjectG, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
 
-  Table readAll()
+  arrow.table.Table readAll()
   {
     GArrowTable* _cretval;
     GError *_err;
     _cretval = garrow_record_batch_reader_read_all(cast(GArrowRecordBatchReader*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Table(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 
-  RecordBatch readNext()
+  arrow.record_batch.RecordBatch readNext()
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
     _cretval = garrow_record_batch_reader_read_next(cast(GArrowRecordBatchReader*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!RecordBatch(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
-  RecordBatch readNextRecordBatch()
+  arrow.record_batch.RecordBatch readNextRecordBatch()
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
     _cretval = garrow_record_batch_reader_read_next_record_batch(cast(GArrowRecordBatchReader*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!RecordBatch(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 }

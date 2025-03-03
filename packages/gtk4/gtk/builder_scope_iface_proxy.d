@@ -5,7 +5,7 @@ import gtk.builder_scope;
 import gtk.builder_scope_mixin;
 
 /// Proxy object for Gtk.BuilderScope interface when a GObject has no applicable D binding
-class BuilderScopeIfaceProxy : IfaceProxy, BuilderScope
+class BuilderScopeIfaceProxy : IfaceProxy, gtk.builder_scope.BuilderScope
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class BuilderScopeIfaceProxy : IfaceProxy, BuilderScope
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(BuilderScope);
+    return typeid(gtk.builder_scope.BuilderScope);
   }
 
   mixin BuilderScopeT!();

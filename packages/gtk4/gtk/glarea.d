@@ -2,7 +2,7 @@ module gtk.glarea;
 
 import gdk.glcontext;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.dclosure;
 import gobject.object;
@@ -104,7 +104,7 @@ import gtk.widget;
  * If you need to change the options for creating the `GdkGLContext`
  * you should use the signal@Gtk.GLArea::create-context signal.
  */
-class GLArea : Widget
+class GLArea : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -153,11 +153,11 @@ class GLArea : Widget
    * See [gtk.glarea.GLArea.setAllowedApis].
    * Returns: the allowed APIs
    */
-  GLAPI getAllowedApis()
+  gdk.types.GLAPI getAllowedApis()
   {
     GdkGLAPI _cretval;
     _cretval = gtk_gl_area_get_allowed_apis(cast(GtkGLArea*)cPtr);
-    GLAPI _retval = cast(GLAPI)_cretval;
+    gdk.types.GLAPI _retval = cast(gdk.types.GLAPI)_cretval;
     return _retval;
   }
 
@@ -166,11 +166,11 @@ class GLArea : Widget
    * If the GL area has not been realized yet, 0 is returned.
    * Returns: the currently used API
    */
-  GLAPI getApi()
+  gdk.types.GLAPI getApi()
   {
     GdkGLAPI _cretval;
     _cretval = gtk_gl_area_get_api(cast(GtkGLArea*)cPtr);
-    GLAPI _retval = cast(GLAPI)_cretval;
+    gdk.types.GLAPI _retval = cast(gdk.types.GLAPI)_cretval;
     return _retval;
   }
 
@@ -189,11 +189,11 @@ class GLArea : Widget
    * Retrieves the `GdkGLContext` used by area.
    * Returns: the `GdkGLContext`
    */
-  GLContext getContext()
+  gdk.glcontext.GLContext getContext()
   {
     GdkGLContext* _cretval;
     _cretval = gtk_gl_area_get_context(cast(GtkGLArea*)cPtr);
-    auto _retval = ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -201,11 +201,11 @@ class GLArea : Widget
    * Gets the current error set on the area.
    * Returns: the `GError`
    */
-  ErrorG getError()
+  glib.error.ErrorG getError()
   {
     GError* _cretval;
     _cretval = gtk_gl_area_get_error(cast(GtkGLArea*)cPtr);
-    auto _retval = _cretval ? new ErrorG(cast(GError*)_cretval) : null;
+    auto _retval = _cretval ? new glib.error.ErrorG(cast(GError*)_cretval) : null;
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class GLArea : Widget
    * Params:
    *   apis = the allowed APIs
    */
-  void setAllowedApis(GLAPI apis)
+  void setAllowedApis(gdk.types.GLAPI apis)
   {
     gtk_gl_area_set_allowed_apis(cast(GtkGLArea*)cPtr, apis);
   }
@@ -323,9 +323,9 @@ class GLArea : Widget
    * Params:
    *   error = a new `GError`, or %NULL to unset the error
    */
-  void setError(ErrorG error)
+  void setError(glib.error.ErrorG error)
   {
-    gtk_gl_area_set_error(cast(GtkGLArea*)cPtr, error ? cast(GError*)error.cPtr : null);
+    gtk_gl_area_set_error(cast(GtkGLArea*)cPtr, error ? cast(const(GError)*)error.cPtr : null);
   }
 
   /**
@@ -393,8 +393,8 @@ class GLArea : Widget
    * Returns: a newly created `GdkGLContext`;
    *   the `GtkGLArea` widget will take ownership of the returned value.
    */
-  alias CreateContextCallbackDlg = GLContext delegate(GLArea gLArea);
-  alias CreateContextCallbackFunc = GLContext function(GLArea gLArea);
+  alias CreateContextCallbackDlg = gdk.glcontext.GLContext delegate(gtk.glarea.GLArea gLArea);
+  alias CreateContextCallbackFunc = gdk.glcontext.GLContext function(gtk.glarea.GLArea gLArea);
 
   /**
    * Connect to CreateContext signal.
@@ -410,9 +410,9 @@ class GLArea : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gLArea = getVal!GLArea(_paramVals);
+      auto gLArea = getVal!(gtk.glarea.GLArea)(_paramVals);
       auto _retval = _dClosure.dlg(gLArea);
-      setVal!GLContext(_returnValue, _retval);
+      setVal!gdk.glcontext.GLContext(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -429,8 +429,8 @@ class GLArea : Widget
    * Returns: %TRUE to stop other handlers from being invoked for the event.
    *   %FALSE to propagate the event further.
    */
-  alias RenderCallbackDlg = bool delegate(GLContext context, GLArea gLArea);
-  alias RenderCallbackFunc = bool function(GLContext context, GLArea gLArea);
+  alias RenderCallbackDlg = bool delegate(gdk.glcontext.GLContext context, gtk.glarea.GLArea gLArea);
+  alias RenderCallbackFunc = bool function(gdk.glcontext.GLContext context, gtk.glarea.GLArea gLArea);
 
   /**
    * Connect to Render signal.
@@ -447,8 +447,8 @@ class GLArea : Widget
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto gLArea = getVal!GLArea(_paramVals);
-      auto context = getVal!GLContext(&_paramVals[1]);
+      auto gLArea = getVal!(gtk.glarea.GLArea)(_paramVals);
+      auto context = getVal!(gdk.glcontext.GLContext)(&_paramVals[1]);
       _retval = _dClosure.dlg(context, gLArea);
       setVal!bool(_returnValue, _retval);
     }
@@ -471,8 +471,8 @@ class GLArea : Widget
    *   height = the height of the viewport
    *   gLArea = the instance the signal is connected to
    */
-  alias ResizeCallbackDlg = void delegate(int width, int height, GLArea gLArea);
-  alias ResizeCallbackFunc = void function(int width, int height, GLArea gLArea);
+  alias ResizeCallbackDlg = void delegate(int width, int height, gtk.glarea.GLArea gLArea);
+  alias ResizeCallbackFunc = void function(int width, int height, gtk.glarea.GLArea gLArea);
 
   /**
    * Connect to Resize signal.
@@ -488,9 +488,9 @@ class GLArea : Widget
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gLArea = getVal!GLArea(_paramVals);
-      auto width = getVal!int(&_paramVals[1]);
-      auto height = getVal!int(&_paramVals[2]);
+      auto gLArea = getVal!(gtk.glarea.GLArea)(_paramVals);
+      auto width = getVal!(int)(&_paramVals[1]);
+      auto height = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(width, height, gLArea);
     }
 

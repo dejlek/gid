@@ -1,6 +1,6 @@
 module pango.glyph_item;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import pango.attr_list;
 import pango.c.functions;
@@ -16,7 +16,7 @@ import pango.types;
  * of shaping text with `PangoLayout` is a list of `PangoLayoutLine`,
  * each of which contains a list of `PangoGlyphItem`.
  */
-class GlyphItem : Boxed
+class GlyphItem : gobject.boxed.Boxed
 {
 
   this()
@@ -45,14 +45,14 @@ class GlyphItem : Boxed
     return getType();
   }
 
-  @property Item item()
+  @property pango.item.Item item()
   {
-    return new Item(cast(PangoItem*)(cast(PangoGlyphItem*)cPtr).item);
+    return new pango.item.Item(cast(PangoItem*)(cast(PangoGlyphItem*)cPtr).item);
   }
 
-  @property GlyphString glyphs()
+  @property pango.glyph_string.GlyphString glyphs()
   {
-    return new GlyphString(cast(PangoGlyphString*)(cast(PangoGlyphItem*)cPtr).glyphs);
+    return new pango.glyph_string.GlyphString(cast(PangoGlyphString*)(cast(PangoGlyphItem*)cPtr).glyphs);
   }
 
   @property int yOffset()
@@ -108,12 +108,12 @@ class GlyphItem : Boxed
    *   the elements using [pango.glyph_item.GlyphItem.free], the list using
    *   [glib.slist.SList.free].
    */
-  GlyphItem[] applyAttrs(string text, AttrList list)
+  pango.glyph_item.GlyphItem[] applyAttrs(string text, pango.attr_list.AttrList list)
   {
     GSList* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
     _cretval = pango_glyph_item_apply_attrs(cast(PangoGlyphItem*)cPtr, _text, list ? cast(PangoAttrList*)list.cPtr(No.Dup) : null);
-    auto _retval = gSListToD!(GlyphItem, GidOwnership.Full)(cast(GSList*)_cretval);
+    auto _retval = gSListToD!(pango.glyph_item.GlyphItem, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
 
@@ -121,11 +121,11 @@ class GlyphItem : Boxed
    * Make a deep copy of an existing `PangoGlyphItem` structure.
    * Returns: the newly allocated `PangoGlyphItem`
    */
-  GlyphItem copy()
+  pango.glyph_item.GlyphItem copy()
   {
     PangoGlyphItem* _cretval;
     _cretval = pango_glyph_item_copy(cast(PangoGlyphItem*)cPtr);
-    auto _retval = _cretval ? new GlyphItem(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.glyph_item.GlyphItem(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -147,12 +147,12 @@ class GlyphItem : Boxed
    *   representing text before split_index, which should be freed
    *   with [pango.glyph_item.GlyphItem.free].
    */
-  GlyphItem split(string text, int splitIndex)
+  pango.glyph_item.GlyphItem split(string text, int splitIndex)
   {
     PangoGlyphItem* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
     _cretval = pango_glyph_item_split(cast(PangoGlyphItem*)cPtr, _text, splitIndex);
-    auto _retval = _cretval ? new GlyphItem(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.glyph_item.GlyphItem(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

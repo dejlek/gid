@@ -1,6 +1,6 @@
 module gtk.callback_action;
 
-import gid.global;
+import gid.gid;
 import glib.variant;
 import gobject.object;
 import gtk.c.functions;
@@ -12,7 +12,7 @@ import gtk.widget;
 /**
  * A `GtkShortcutAction` that invokes a callback.
  */
-class CallbackAction : ShortcutAction
+class CallbackAction : gtk.shortcut_action.ShortcutAction
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -38,13 +38,13 @@ class CallbackAction : ShortcutAction
    *   callback = the callback to call
    * Returns: A new shortcut action
    */
-  this(ShortcutFunc callback)
+  this(gtk.types.ShortcutFunc callback)
   {
     extern(C) bool _callbackCallback(GtkWidget* widget, VariantC* args, void* userData)
     {
-      auto _dlg = cast(ShortcutFunc*)userData;
+      auto _dlg = cast(gtk.types.ShortcutFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!Widget(cast(void*)widget, No.Take), args ? new VariantG(cast(void*)args, No.Take) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), args ? new glib.variant.VariantG(cast(void*)args, No.Take) : null);
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;

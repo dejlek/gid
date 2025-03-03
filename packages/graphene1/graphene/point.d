@@ -1,6 +1,6 @@
 module graphene.point;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import graphene.c.functions;
 import graphene.c.types;
@@ -10,7 +10,7 @@ import graphene.vec2;
 /**
  * A point with two coordinates.
  */
-class Point : Boxed
+class Point : gobject.boxed.Boxed
 {
 
   this()
@@ -80,11 +80,11 @@ class Point : Boxed
    *   Use [graphene.point.Point.free] to free the resources allocated by
    *   this function.
    */
-  static Point alloc()
+  static graphene.point.Point alloc()
   {
     graphene_point_t* _cretval;
     _cretval = graphene_point_alloc();
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -96,10 +96,10 @@ class Point : Boxed
    *   dY = distance component on the Y axis
    * Returns: the distance between the two points
    */
-  float distance(Point b, out float dX, out float dY)
+  float distance(graphene.point.Point b, out float dX, out float dY)
   {
     float _retval;
-    _retval = graphene_point_distance(cast(graphene_point_t*)cPtr, b ? cast(graphene_point_t*)b.cPtr(No.Dup) : null, cast(float*)&dX, cast(float*)&dY);
+    _retval = graphene_point_distance(cast(const(graphene_point_t)*)cPtr, b ? cast(const(graphene_point_t)*)b.cPtr(No.Dup) : null, cast(float*)&dX, cast(float*)&dY);
     return _retval;
   }
 
@@ -113,10 +113,10 @@ class Point : Boxed
    *   b = a #graphene_point_t
    * Returns: `true` if the points have the same coordinates
    */
-  bool equal(Point b)
+  bool equal(graphene.point.Point b)
   {
     bool _retval;
-    _retval = graphene_point_equal(cast(graphene_point_t*)cPtr, b ? cast(graphene_point_t*)b.cPtr(No.Dup) : null);
+    _retval = graphene_point_equal(cast(const(graphene_point_t)*)cPtr, b ? cast(const(graphene_point_t)*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -128,11 +128,11 @@ class Point : Boxed
    *   y = the Y coordinate
    * Returns: the initialized point
    */
-  Point init_(float x, float y)
+  graphene.point.Point init_(float x, float y)
   {
     graphene_point_t* _cretval;
     _cretval = graphene_point_init(cast(graphene_point_t*)cPtr, x, y);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -142,11 +142,11 @@ class Point : Boxed
    *   src = the #graphene_point_t to use
    * Returns: the initialized point
    */
-  Point initFromPoint(Point src)
+  graphene.point.Point initFromPoint(graphene.point.Point src)
   {
     graphene_point_t* _cretval;
-    _cretval = graphene_point_init_from_point(cast(graphene_point_t*)cPtr, src ? cast(graphene_point_t*)src.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_point_init_from_point(cast(graphene_point_t*)cPtr, src ? cast(const(graphene_point_t)*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -156,11 +156,11 @@ class Point : Boxed
    *   src = a #graphene_vec2_t
    * Returns: the initialized point
    */
-  Point initFromVec2(Vec2 src)
+  graphene.point.Point initFromVec2(graphene.vec2.Vec2 src)
   {
     graphene_point_t* _cretval;
-    _cretval = graphene_point_init_from_vec2(cast(graphene_point_t*)cPtr, src ? cast(graphene_vec2_t*)src.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_point_init_from_vec2(cast(graphene_point_t*)cPtr, src ? cast(const(graphene_vec2_t)*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -173,11 +173,11 @@ class Point : Boxed
    *   res = return location for the interpolated
    *     point
    */
-  void interpolate(Point b, double factor, out Point res)
+  void interpolate(graphene.point.Point b, double factor, out graphene.point.Point res)
   {
     graphene_point_t _res;
-    graphene_point_interpolate(cast(graphene_point_t*)cPtr, b ? cast(graphene_point_t*)b.cPtr(No.Dup) : null, factor, &_res);
-    res = new Point(cast(void*)&_res, No.Take);
+    graphene_point_interpolate(cast(const(graphene_point_t)*)cPtr, b ? cast(const(graphene_point_t)*)b.cPtr(No.Dup) : null, factor, &_res);
+    res = new graphene.point.Point(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -188,10 +188,10 @@ class Point : Boxed
    *   epsilon = threshold between the two points
    * Returns: `true` if the distance is within epsilon
    */
-  bool near(Point b, float epsilon)
+  bool near(graphene.point.Point b, float epsilon)
   {
     bool _retval;
-    _retval = graphene_point_near(cast(graphene_point_t*)cPtr, b ? cast(graphene_point_t*)b.cPtr(No.Dup) : null, epsilon);
+    _retval = graphene_point_near(cast(const(graphene_point_t)*)cPtr, b ? cast(const(graphene_point_t)*)b.cPtr(No.Dup) : null, epsilon);
     return _retval;
   }
 
@@ -201,22 +201,22 @@ class Point : Boxed
    * Params:
    *   v = return location for the vertex
    */
-  void toVec2(out Vec2 v)
+  void toVec2(out graphene.vec2.Vec2 v)
   {
     graphene_vec2_t _v;
-    graphene_point_to_vec2(cast(graphene_point_t*)cPtr, &_v);
-    v = new Vec2(cast(void*)&_v, No.Take);
+    graphene_point_to_vec2(cast(const(graphene_point_t)*)cPtr, &_v);
+    v = new graphene.vec2.Vec2(cast(void*)&_v, No.Take);
   }
 
   /**
    * Returns a point fixed at $(LPAREN)0, 0$(RPAREN).
    * Returns: a fixed point
    */
-  static Point zero()
+  static graphene.point.Point zero()
   {
     const(graphene_point_t)* _cretval;
     _cretval = graphene_point_zero();
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

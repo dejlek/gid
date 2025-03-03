@@ -2,13 +2,12 @@ module gtk.style_context;
 
 import gdk.display;
 import gdk.rgba;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.border;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.style_provider;
-import gtk.style_provider_mixin;
 import gtk.types;
 
 /**
@@ -47,7 +46,7 @@ import gtk.types;
  *   where applicable; otherwise, there is no replacement for querying the
  *   style machinery. Stylable UI elements should use widgets.
  */
-class StyleContext : ObjectG
+class StyleContext : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -83,7 +82,7 @@ class StyleContext : ObjectG
    *     %GTK_STYLE_PROVIDER_PRIORITY_FALLBACK and
    *     %GTK_STYLE_PROVIDER_PRIORITY_USER
    */
-  static void addProviderForDisplay(Display display, StyleProvider provider, uint priority)
+  static void addProviderForDisplay(gdk.display.Display display, gtk.style_provider.StyleProvider provider, uint priority)
   {
     gtk_style_context_add_provider_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, priority);
   }
@@ -94,7 +93,7 @@ class StyleContext : ObjectG
    *   display = a `GdkDisplay`
    *   provider = a `GtkStyleProvider`
    */
-  static void removeProviderForDisplay(Display display, StyleProvider provider)
+  static void removeProviderForDisplay(gdk.display.Display display, gtk.style_provider.StyleProvider provider)
   {
     gtk_style_context_remove_provider_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
   }
@@ -142,7 +141,7 @@ class StyleContext : ObjectG
 
    * Deprecated: Use style classes instead
    */
-  void addProvider(StyleProvider provider, uint priority)
+  void addProvider(gtk.style_provider.StyleProvider provider, uint priority)
   {
     gtk_style_context_add_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, priority);
   }
@@ -154,11 +153,11 @@ class StyleContext : ObjectG
 
    * Deprecated: This api will be removed in GTK 5
    */
-  void getBorder(out Border border)
+  void getBorder(out gtk.border.Border border)
   {
     GtkBorder _border;
     gtk_style_context_get_border(cast(GtkStyleContext*)cPtr, &_border);
-    border = new Border(cast(void*)&_border, No.Take);
+    border = new gtk.border.Border(cast(void*)&_border, No.Take);
   }
 
   /**
@@ -168,11 +167,11 @@ class StyleContext : ObjectG
 
    * Deprecated: Use [gtk.widget.Widget.getColor] instead
    */
-  void getColor(out RGBA color)
+  void getColor(out gdk.rgba.RGBA color)
   {
     GdkRGBA _color;
     gtk_style_context_get_color(cast(GtkStyleContext*)cPtr, &_color);
-    color = new RGBA(cast(void*)&_color, No.Take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
   }
 
   /**
@@ -181,11 +180,11 @@ class StyleContext : ObjectG
 
    * Deprecated: Use [gtk.widget.Widget.getDisplay] instead
    */
-  Display getDisplay()
+  gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gtk_style_context_get_display(cast(GtkStyleContext*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -196,11 +195,11 @@ class StyleContext : ObjectG
 
    * Deprecated: This api will be removed in GTK 5
    */
-  void getMargin(out Border margin)
+  void getMargin(out gtk.border.Border margin)
   {
     GtkBorder _margin;
     gtk_style_context_get_margin(cast(GtkStyleContext*)cPtr, &_margin);
-    margin = new Border(cast(void*)&_margin, No.Take);
+    margin = new gtk.border.Border(cast(void*)&_margin, No.Take);
   }
 
   /**
@@ -210,11 +209,11 @@ class StyleContext : ObjectG
 
    * Deprecated: This api will be removed in GTK 5
    */
-  void getPadding(out Border padding)
+  void getPadding(out gtk.border.Border padding)
   {
     GtkBorder _padding;
     gtk_style_context_get_padding(cast(GtkStyleContext*)cPtr, &_padding);
-    padding = new Border(cast(void*)&_padding, No.Take);
+    padding = new gtk.border.Border(cast(void*)&_padding, No.Take);
   }
 
   /**
@@ -241,11 +240,11 @@ class StyleContext : ObjectG
 
    * Deprecated: Use [gtk.widget.Widget.getStateFlags] instead
    */
-  StateFlags getState()
+  gtk.types.StateFlags getState()
   {
     GtkStateFlags _cretval;
     _cretval = gtk_style_context_get_state(cast(GtkStyleContext*)cPtr);
-    StateFlags _retval = cast(StateFlags)_cretval;
+    gtk.types.StateFlags _retval = cast(gtk.types.StateFlags)_cretval;
     return _retval;
   }
 
@@ -275,13 +274,13 @@ class StyleContext : ObjectG
 
    * Deprecated: This api will be removed in GTK 5
    */
-  bool lookupColor(string colorName, out RGBA color)
+  bool lookupColor(string colorName, out gdk.rgba.RGBA color)
   {
     bool _retval;
     const(char)* _colorName = colorName.toCString(No.Alloc);
     GdkRGBA _color;
     _retval = gtk_style_context_lookup_color(cast(GtkStyleContext*)cPtr, _colorName, &_color);
-    color = new RGBA(cast(void*)&_color, No.Take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
     return _retval;
   }
 
@@ -303,7 +302,7 @@ class StyleContext : ObjectG
    * Params:
    *   provider = a `GtkStyleProvider`
    */
-  void removeProvider(StyleProvider provider)
+  void removeProvider(gtk.style_provider.StyleProvider provider)
   {
     gtk_style_context_remove_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
   }
@@ -348,7 +347,7 @@ class StyleContext : ObjectG
 
    * Deprecated: You should not use this api
    */
-  void setDisplay(Display display)
+  void setDisplay(gdk.display.Display display)
   {
     gtk_style_context_set_display(cast(GtkStyleContext*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
   }
@@ -372,7 +371,7 @@ class StyleContext : ObjectG
 
    * Deprecated: You should not use this api
    */
-  void setState(StateFlags flags)
+  void setState(gtk.types.StateFlags flags)
   {
     gtk_style_context_set_state(cast(GtkStyleContext*)cPtr, flags);
   }
@@ -392,11 +391,11 @@ class StyleContext : ObjectG
 
    * Deprecated: This api will be removed in GTK 5
    */
-  string toString_(StyleContextPrintFlags flags)
+  string toString_(gtk.types.StyleContextPrintFlags flags)
   {
     char* _cretval;
     _cretval = gtk_style_context_to_string(cast(GtkStyleContext*)cPtr, flags);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

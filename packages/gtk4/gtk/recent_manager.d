@@ -1,6 +1,6 @@
 module gtk.recent_manager;
 
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.dclosure;
 import gobject.object;
@@ -56,7 +56,7 @@ import gtk.types;
  * controllable through the property@Gtk.Settings:gtk-recent-files-max-age
  * property.
  */
-class RecentManager : ObjectG
+class RecentManager : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -99,11 +99,11 @@ class RecentManager : ObjectG
    * Returns: A unique `GtkRecentManager`. Do not ref or
    *   unref it.
    */
-  static RecentManager getDefault()
+  static gtk.recent_manager.RecentManager getDefault()
   {
     GtkRecentManager* _cretval;
     _cretval = gtk_recent_manager_get_default();
-    auto _retval = ObjectG.getDObject!RecentManager(cast(GtkRecentManager*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.recent_manager.RecentManager)(cast(GtkRecentManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -130,11 +130,11 @@ class RecentManager : ObjectG
    * Returns: %TRUE if the new item was successfully added to the
    *   recently used resources list, %FALSE otherwise
    */
-  bool addFull(string uri, RecentData recentData)
+  bool addFull(string uri, gtk.recent_data.RecentData recentData)
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _retval = gtk_recent_manager_add_full(cast(GtkRecentManager*)cPtr, _uri, recentData ? cast(GtkRecentData*)recentData.cPtr : null);
+    _retval = gtk_recent_manager_add_full(cast(GtkRecentManager*)cPtr, _uri, recentData ? cast(const(GtkRecentData)*)recentData.cPtr : null);
     return _retval;
   }
 
@@ -166,11 +166,11 @@ class RecentManager : ObjectG
    *   [gtk.recent_info.RecentInfo.unref] on each item inside the list, and then
    *   free the list itself using [glib.list.List.free].
    */
-  RecentInfo[] getItems()
+  gtk.recent_info.RecentInfo[] getItems()
   {
     GList* _cretval;
     _cretval = gtk_recent_manager_get_items(cast(GtkRecentManager*)cPtr);
-    auto _retval = gListToD!(RecentInfo, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gtk.recent_info.RecentInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class RecentManager : ObjectG
    *   not registered in the recently used resources list. Free with
    *   [gtk.recent_info.RecentInfo.unref].
    */
-  RecentInfo lookupItem(string uri)
+  gtk.recent_info.RecentInfo lookupItem(string uri)
   {
     GtkRecentInfo* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -208,7 +208,7 @@ class RecentManager : ObjectG
     _cretval = gtk_recent_manager_lookup_item(cast(GtkRecentManager*)cPtr, _uri, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new RecentInfo(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.recent_info.RecentInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -275,8 +275,8 @@ class RecentManager : ObjectG
    * or by another application.
    *   recentManager = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(RecentManager recentManager);
-  alias ChangedCallbackFunc = void function(RecentManager recentManager);
+  alias ChangedCallbackDlg = void delegate(gtk.recent_manager.RecentManager recentManager);
+  alias ChangedCallbackFunc = void function(gtk.recent_manager.RecentManager recentManager);
 
   /**
    * Connect to Changed signal.
@@ -292,7 +292,7 @@ class RecentManager : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto recentManager = getVal!RecentManager(_paramVals);
+      auto recentManager = getVal!(gtk.recent_manager.RecentManager)(_paramVals);
       _dClosure.dlg(recentManager);
     }
 

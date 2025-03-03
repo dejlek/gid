@@ -1,8 +1,7 @@
 module vte.pty;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.initable;
 import gio.initable_mixin;
@@ -14,7 +13,7 @@ import vte.c.functions;
 import vte.c.types;
 import vte.types;
 
-class Pty : ObjectG, Initable
+class Pty : gobject.object.ObjectG, gio.initable.Initable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,14 +44,14 @@ class Pty : ObjectG, Initable
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a new #VtePty for fd, or %NULL on error with error filled in
    */
-  static Pty newForeignSync(int fd, Cancellable cancellable)
+  static vte.pty.Pty newForeignSync(int fd, gio.cancellable.Cancellable cancellable)
   {
     VtePty* _cretval;
     GError *_err;
     _cretval = vte_pty_new_foreign_sync(fd, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Pty(cast(VtePty*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -82,14 +81,14 @@ class Pty : ObjectG, Initable
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a new #VtePty, or %NULL on error with error filled in
    */
-  static Pty newSync(PtyFlags flags, Cancellable cancellable)
+  static vte.pty.Pty newSync(vte.types.PtyFlags flags, gio.cancellable.Cancellable cancellable)
   {
     VtePty* _cretval;
     GError *_err;
     _cretval = vte_pty_new_sync(flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Pty(cast(VtePty*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -184,11 +183,11 @@ class Pty : ObjectG, Initable
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #GAsyncReadyCallback, or %NULL
    */
-  void spawnAsync(string workingDirectory, string[] argv, string[] envv, SpawnFlags spawnFlags, SpawnChildSetupFunc childSetup, int timeout, Cancellable cancellable, AsyncReadyCallback callback)
+  void spawnAsync(string workingDirectory, string[] argv, string[] envv, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _childSetupCallback(void* data)
     {
-      auto _dlg = cast(SpawnChildSetupFunc*)data;
+      auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
       (*_dlg)();
     }
@@ -197,9 +196,9 @@ class Pty : ObjectG, Initable
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -222,7 +221,7 @@ class Pty : ObjectG, Initable
     vte_pty_spawn_async(cast(VtePty*)cPtr, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
-  bool spawnFinish(AsyncResult result, out Pid childPid)
+  bool spawnFinish(gio.async_result.AsyncResult result, out glib.types.Pid childPid)
   {
     bool _retval;
     GError *_err;
@@ -274,11 +273,11 @@ class Pty : ObjectG, Initable
    *   cancellable = a #GCancellable, or %NULL
    *   callback = a #GAsyncReadyCallback, or %NULL
    */
-  void spawnWithFdsAsync(string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, SpawnFlags spawnFlags, SpawnChildSetupFunc childSetup, int timeout, Cancellable cancellable, AsyncReadyCallback callback)
+  void spawnWithFdsAsync(string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _childSetupCallback(void* data)
     {
-      auto _dlg = cast(SpawnChildSetupFunc*)data;
+      auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
       (*_dlg)();
     }
@@ -287,9 +286,9 @@ class Pty : ObjectG, Initable
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 

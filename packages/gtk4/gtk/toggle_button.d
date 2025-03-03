@@ -1,6 +1,6 @@
 module gtk.toggle_button;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -74,7 +74,7 @@ import gtk.types;
  * }
  * ```
  */
-class ToggleButton : Button
+class ToggleButton : gtk.button.Button
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -111,12 +111,12 @@ class ToggleButton : Button
    *   label = a string containing the message to be placed in the toggle button.
    * Returns: a new toggle button.
    */
-  static ToggleButton newWithLabel(string label)
+  static gtk.toggle_button.ToggleButton newWithLabel(string label)
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_toggle_button_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!ToggleButton(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -129,12 +129,12 @@ class ToggleButton : Button
    *     mnemonic character
    * Returns: a new `GtkToggleButton`
    */
-  static ToggleButton newWithMnemonic(string label)
+  static gtk.toggle_button.ToggleButton newWithMnemonic(string label)
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_toggle_button_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!ToggleButton(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class ToggleButton : Button
    *   group = another `GtkToggleButton` to
    *     form a group with
    */
-  void setGroup(ToggleButton group)
+  void setGroup(gtk.toggle_button.ToggleButton group)
   {
     gtk_toggle_button_set_group(cast(GtkToggleButton*)cPtr, group ? cast(GtkToggleButton*)group.cPtr(No.Dup) : null);
   }
@@ -197,8 +197,8 @@ class ToggleButton : Button
    * Emitted whenever the `GtkToggleButton`'s state is changed.
    *   toggleButton = the instance the signal is connected to
    */
-  alias ToggledCallbackDlg = void delegate(ToggleButton toggleButton);
-  alias ToggledCallbackFunc = void function(ToggleButton toggleButton);
+  alias ToggledCallbackDlg = void delegate(gtk.toggle_button.ToggleButton toggleButton);
+  alias ToggledCallbackFunc = void function(gtk.toggle_button.ToggleButton toggleButton);
 
   /**
    * Connect to Toggled signal.
@@ -214,7 +214,7 @@ class ToggleButton : Button
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto toggleButton = getVal!ToggleButton(_paramVals);
+      auto toggleButton = getVal!(gtk.toggle_button.ToggleButton)(_paramVals);
       _dClosure.dlg(toggleButton);
     }
 

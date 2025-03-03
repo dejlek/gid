@@ -1,6 +1,6 @@
 module gtk.switch_;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -40,7 +40,7 @@ import gtk.widget;
  * # Accessibility
  * `GtkSwitch` uses the %GTK_ACCESSIBLE_ROLE_SWITCH role.
  */
-class Switch : Widget, Actionable
+class Switch : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -123,8 +123,8 @@ class Switch : Widget, Actionable
    * but use the [gtk.switch_.Switch.gboolean] property.
    *   switch_ = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(Switch switch_);
-  alias ActivateCallbackFunc = void function(Switch switch_);
+  alias ActivateCallbackDlg = void delegate(gtk.switch_.Switch switch_);
+  alias ActivateCallbackFunc = void function(gtk.switch_.Switch switch_);
 
   /**
    * Connect to Activate signal.
@@ -140,7 +140,7 @@ class Switch : Widget, Actionable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto switch_ = getVal!Switch(_paramVals);
+      auto switch_ = getVal!(gtk.switch_.Switch)(_paramVals);
       _dClosure.dlg(switch_);
     }
 
@@ -166,8 +166,8 @@ class Switch : Widget, Actionable
    *   switch_ = the instance the signal is connected to
    * Returns: %TRUE to stop the signal emission
    */
-  alias StateSetCallbackDlg = bool delegate(bool state, Switch switch_);
-  alias StateSetCallbackFunc = bool function(bool state, Switch switch_);
+  alias StateSetCallbackDlg = bool delegate(bool state, gtk.switch_.Switch switch_);
+  alias StateSetCallbackFunc = bool function(bool state, gtk.switch_.Switch switch_);
 
   /**
    * Connect to StateSet signal.
@@ -184,8 +184,8 @@ class Switch : Widget, Actionable
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto switch_ = getVal!Switch(_paramVals);
-      auto state = getVal!bool(&_paramVals[1]);
+      auto switch_ = getVal!(gtk.switch_.Switch)(_paramVals);
+      auto state = getVal!(bool)(&_paramVals[1]);
       _retval = _dClosure.dlg(state, switch_);
       setVal!bool(_returnValue, _retval);
     }

@@ -1,6 +1,6 @@
 module gtk.native_dialog;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -24,7 +24,7 @@ import gtk.window;
  * responsibility to keep a reference until you are done with the
  * object.
  */
-class NativeDialog : ObjectG
+class NativeDialog : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -79,7 +79,7 @@ class NativeDialog : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_native_dialog_get_title(cast(GtkNativeDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -88,11 +88,11 @@ class NativeDialog : ObjectG
    * Returns: the transient parent for this window,
    *   or %NULL if no transient parent has been set.
    */
-  Window getTransientFor()
+  gtk.window.Window getTransientFor()
   {
     GtkWindow* _cretval;
     _cretval = gtk_native_dialog_get_transient_for(cast(GtkNativeDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!Window(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class NativeDialog : ObjectG
    * Params:
    *   parent = parent window
    */
-  void setTransientFor(Window parent)
+  void setTransientFor(gtk.window.Window parent)
   {
     gtk_native_dialog_set_transient_for(cast(GtkNativeDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
   }
@@ -180,8 +180,8 @@ class NativeDialog : ObjectG
    *   responseId = the response ID
    *   nativeDialog = the instance the signal is connected to
    */
-  alias ResponseCallbackDlg = void delegate(int responseId, NativeDialog nativeDialog);
-  alias ResponseCallbackFunc = void function(int responseId, NativeDialog nativeDialog);
+  alias ResponseCallbackDlg = void delegate(int responseId, gtk.native_dialog.NativeDialog nativeDialog);
+  alias ResponseCallbackFunc = void function(int responseId, gtk.native_dialog.NativeDialog nativeDialog);
 
   /**
    * Connect to Response signal.
@@ -197,8 +197,8 @@ class NativeDialog : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto nativeDialog = getVal!NativeDialog(_paramVals);
-      auto responseId = getVal!int(&_paramVals[1]);
+      auto nativeDialog = getVal!(gtk.native_dialog.NativeDialog)(_paramVals);
+      auto responseId = getVal!(int)(&_paramVals[1]);
       _dClosure.dlg(responseId, nativeDialog);
     }
 

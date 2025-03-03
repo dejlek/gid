@@ -4,9 +4,9 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class FilterOptions : FunctionOptions
+class FilterOptions : arrow.function_options.FunctionOptions
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

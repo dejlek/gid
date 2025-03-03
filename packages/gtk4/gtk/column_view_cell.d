@@ -1,6 +1,6 @@
 module gtk.column_view_cell;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -21,7 +21,7 @@ import gtk.widget;
  * 2. The bound stage where the listitem references an item from the list.
  * The [gtk.column_view_cell.ColumnViewCell.GObject.Object] property is not %NULL.
  */
-class ColumnViewCell : ListItem
+class ColumnViewCell : gtk.list_item.ListItem
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,11 +45,11 @@ class ColumnViewCell : ListItem
    * %NULL if none was set.
    * Returns: The child
    */
-  override Widget getChild()
+  override gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_column_view_cell_get_child(cast(GtkColumnViewCell*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -70,11 +70,11 @@ class ColumnViewCell : ListItem
    * If self is unbound, this function returns %NULL.
    * Returns: The item displayed
    */
-  override ObjectG getItem()
+  override gobject.object.ObjectG getItem()
   {
     ObjectC* _cretval;
     _cretval = gtk_column_view_cell_get_item(cast(GtkColumnViewCell*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class ColumnViewCell : ListItem
    * Params:
    *   child = The list item's child or %NULL to unset
    */
-  override void setChild(Widget child)
+  override void setChild(gtk.widget.Widget child)
   {
     gtk_column_view_cell_set_child(cast(GtkColumnViewCell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

@@ -1,6 +1,6 @@
 module glib.string_chunk;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -80,7 +80,7 @@ class StringChunk
     char* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = g_string_chunk_insert(cast(GStringChunk*)cPtr, _string_);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class StringChunk
     char* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = g_string_chunk_insert_const(cast(GStringChunk*)cPtr, _string_);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class StringChunk
     char* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = g_string_chunk_insert_len(cast(GStringChunk*)cPtr, _string_, len);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

@@ -5,7 +5,7 @@ import gtksource.hover_provider;
 import gtksource.hover_provider_mixin;
 
 /// Proxy object for GtkSource.HoverProvider interface when a GObject has no applicable D binding
-class HoverProviderIfaceProxy : IfaceProxy, HoverProvider
+class HoverProviderIfaceProxy : IfaceProxy, gtksource.hover_provider.HoverProvider
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class HoverProviderIfaceProxy : IfaceProxy, HoverProvider
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(HoverProvider);
+    return typeid(gtksource.hover_provider.HoverProvider);
   }
 
   mixin HoverProviderT!();

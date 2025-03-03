@@ -1,6 +1,6 @@
 module soup.hstsenforcer;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import soup.c.functions;
@@ -30,7 +30,7 @@ import soup.types;
  * HSTS policy persistence. See class@HSTSEnforcerDB for a persistent
  * enforcer.
  */
-class HSTSEnforcer : ObjectG, SessionFeature
+class HSTSEnforcer : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -88,11 +88,11 @@ class HSTSEnforcer : ObjectG, SessionFeature
    *   allocated list of policies. Use [glib.list.List.freeFull] and
    *   [soup.hstspolicy.HSTSPolicy.free] to free the list.
    */
-  HSTSPolicy[] getPolicies(bool sessionPolicies)
+  soup.hstspolicy.HSTSPolicy[] getPolicies(bool sessionPolicies)
   {
     GList* _cretval;
     _cretval = soup_hsts_enforcer_get_policies(cast(SoupHSTSEnforcer*)cPtr, sessionPolicies);
-    auto _retval = gListToD!(HSTSPolicy, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(soup.hstspolicy.HSTSPolicy, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class HSTSEnforcer : ObjectG, SessionFeature
    * Params:
    *   policy = the policy of the HSTS host
    */
-  void setPolicy(HSTSPolicy policy)
+  void setPolicy(soup.hstspolicy.HSTSPolicy policy)
   {
     soup_hsts_enforcer_set_policy(cast(SoupHSTSEnforcer*)cPtr, policy ? cast(SoupHSTSPolicy*)policy.cPtr(No.Dup) : null);
   }
@@ -168,8 +168,8 @@ class HSTSEnforcer : ObjectG, SessionFeature
    *   newPolicy = the new #SoupHSTSPolicy value
    *   hSTSEnforcer = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(HSTSPolicy oldPolicy, HSTSPolicy newPolicy, HSTSEnforcer hSTSEnforcer);
-  alias ChangedCallbackFunc = void function(HSTSPolicy oldPolicy, HSTSPolicy newPolicy, HSTSEnforcer hSTSEnforcer);
+  alias ChangedCallbackDlg = void delegate(soup.hstspolicy.HSTSPolicy oldPolicy, soup.hstspolicy.HSTSPolicy newPolicy, soup.hstsenforcer.HSTSEnforcer hSTSEnforcer);
+  alias ChangedCallbackFunc = void function(soup.hstspolicy.HSTSPolicy oldPolicy, soup.hstspolicy.HSTSPolicy newPolicy, soup.hstsenforcer.HSTSEnforcer hSTSEnforcer);
 
   /**
    * Connect to Changed signal.
@@ -185,9 +185,9 @@ class HSTSEnforcer : ObjectG, SessionFeature
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto hSTSEnforcer = getVal!HSTSEnforcer(_paramVals);
-      auto oldPolicy = getVal!HSTSPolicy(&_paramVals[1]);
-      auto newPolicy = getVal!HSTSPolicy(&_paramVals[2]);
+      auto hSTSEnforcer = getVal!(soup.hstsenforcer.HSTSEnforcer)(_paramVals);
+      auto oldPolicy = getVal!(soup.hstspolicy.HSTSPolicy)(&_paramVals[1]);
+      auto newPolicy = getVal!(soup.hstspolicy.HSTSPolicy)(&_paramVals[2]);
       _dClosure.dlg(oldPolicy, newPolicy, hSTSEnforcer);
     }
 

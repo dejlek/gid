@@ -1,7 +1,7 @@
 module gtk.selection_model;
 
 public import gtk.selection_model_iface_proxy;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.bitset;
 import gtk.c.functions;
@@ -58,7 +58,7 @@ interface SelectionModel
    *   selected in model. If no items are selected, the bitset is empty.
    *   The bitset must not be modified.
    */
-  Bitset getSelection();
+  gtk.bitset.Bitset getSelection();
 
   /**
    * Gets the set of selected items in a range.
@@ -74,7 +74,7 @@ interface SelectionModel
    *   for the given range with all other values being undefined.
    *   The bitset must not be modified.
    */
-  Bitset getSelectionInRange(uint position, uint nItems);
+  gtk.bitset.Bitset getSelectionInRange(uint position, uint nItems);
 
   /**
    * Checks if the given item is selected.
@@ -156,7 +156,7 @@ interface SelectionModel
    *   tried. This does not mean that all items were updated according
    *   to the inputs.
    */
-  bool setSelection(Bitset selected, Bitset mask);
+  bool setSelection(gtk.bitset.Bitset selected, gtk.bitset.Bitset mask);
 
   /**
    * Requests to unselect all items in the model.
@@ -195,8 +195,8 @@ interface SelectionModel
    *   nItems = number of items with changes
    *   selectionModel = the instance the signal is connected to
    */
-  alias SelectionChangedCallbackDlg = void delegate(uint position, uint nItems, SelectionModel selectionModel);
-  alias SelectionChangedCallbackFunc = void function(uint position, uint nItems, SelectionModel selectionModel);
+  alias SelectionChangedCallbackDlg = void delegate(uint position, uint nItems, gtk.selection_model.SelectionModel selectionModel);
+  alias SelectionChangedCallbackFunc = void function(uint position, uint nItems, gtk.selection_model.SelectionModel selectionModel);
 
   /**
    * Connect to SelectionChanged signal.

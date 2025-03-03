@@ -1,6 +1,6 @@
 module glib.markup_parse_context;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.error;
@@ -13,7 +13,7 @@ import gobject.boxed;
  * See [glib.markup_parse_context.MarkupParseContext.new_], #GMarkupParser, and so
  * on for more details.
  */
-class MarkupParseContext : Boxed
+class MarkupParseContext : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -74,7 +74,7 @@ class MarkupParseContext : Boxed
   {
     const(char)* _cretval;
     _cretval = g_markup_parse_context_get_element(cast(GMarkupParseContext*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class MarkupParseContext : Boxed
    *   parser = a #GMarkupParser
    *   userData = user data to pass to #GMarkupParser functions
    */
-  void push(MarkupParser parser, void* userData)
+  void push(glib.types.MarkupParser parser, void* userData)
   {
     g_markup_parse_context_push(cast(GMarkupParseContext*)cPtr, &parser, userData);
   }

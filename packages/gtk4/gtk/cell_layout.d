@@ -1,7 +1,7 @@
 module gtk.cell_layout;
 
 public import gtk.cell_layout_iface_proxy;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -9,7 +9,6 @@ import gtk.cell_area;
 import gtk.cell_renderer;
 import gtk.tree_iter;
 import gtk.tree_model;
-import gtk.tree_model_mixin;
 import gtk.types;
 
 /**
@@ -128,7 +127,7 @@ interface CellLayout
    *   attribute = a property on the renderer
    *   column = the column position on the model to get the attribute from
    */
-  void addAttribute(CellRenderer cell, string attribute, int column);
+  void addAttribute(gtk.cell_renderer.CellRenderer cell, string attribute, int column);
 
   /**
    * Unsets all the mappings on all renderers on cell_layout and
@@ -142,7 +141,7 @@ interface CellLayout
    * Params:
    *   cell = a `GtkCellRenderer` to clear the attribute mapping on
    */
-  void clearAttributes(CellRenderer cell);
+  void clearAttributes(gtk.cell_renderer.CellRenderer cell);
 
   /**
    * Returns the underlying `GtkCellArea` which might be cell_layout
@@ -150,7 +149,7 @@ interface CellLayout
    * is used by cell_layout.
    * Returns: the cell area used by cell_layout
    */
-  CellArea getArea();
+  gtk.cell_area.CellArea getArea();
 
   /**
    * Returns the cell renderers which have been added to cell_layout.
@@ -158,7 +157,7 @@ interface CellLayout
    *   been newly allocated and should be freed with [glib.list.List.free]
    *   when no longer needed.
    */
-  CellRenderer[] getCells();
+  gtk.cell_renderer.CellRenderer[] getCells();
 
   /**
    * Adds the cell to the end of cell_layout. If expand is %FALSE, then the
@@ -169,7 +168,7 @@ interface CellLayout
    *   cell = a `GtkCellRenderer`
    *   expand = %TRUE if cell is to be given extra space allocated to cell_layout
    */
-  void packEnd(CellRenderer cell, bool expand);
+  void packEnd(gtk.cell_renderer.CellRenderer cell, bool expand);
 
   /**
    * Packs the cell into the beginning of cell_layout. If expand is %FALSE,
@@ -180,7 +179,7 @@ interface CellLayout
    *   cell = a `GtkCellRenderer`
    *   expand = %TRUE if cell is to be given extra space allocated to cell_layout
    */
-  void packStart(CellRenderer cell, bool expand);
+  void packStart(gtk.cell_renderer.CellRenderer cell, bool expand);
 
   /**
    * Re-inserts cell at position.
@@ -190,7 +189,7 @@ interface CellLayout
    *   cell = a `GtkCellRenderer` to reorder
    *   position = new position to insert cell at
    */
-  void reorder(CellRenderer cell, int position);
+  void reorder(gtk.cell_renderer.CellRenderer cell, int position);
 
   /**
    * Sets the `GtkCellLayout`DataFunc to use for cell_layout.
@@ -202,5 +201,5 @@ interface CellLayout
    *   cell = a `GtkCellRenderer`
    *   func = the `GtkCellLayout`DataFunc to use
    */
-  void setCellDataFunc(CellRenderer cell, CellLayoutDataFunc func);
+  void setCellDataFunc(gtk.cell_renderer.CellRenderer cell, gtk.types.CellLayoutDataFunc func);
 }

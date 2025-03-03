@@ -1,6 +1,6 @@
 module gtk.page_setup;
 
-import gid.global;
+import gid.gid;
 import glib.error;
 import glib.key_file;
 import glib.variant;
@@ -43,7 +43,7 @@ import gtk.types;
  * }
  * ```
  */
-class PageSetup : ObjectG
+class PageSetup : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -82,7 +82,7 @@ class PageSetup : ObjectG
    *   fileName = the filename to read the page setup from
    * Returns: the restored `GtkPageSetup`
    */
-  static PageSetup newFromFile(string fileName)
+  static gtk.page_setup.PageSetup newFromFile(string fileName)
   {
     GtkPageSetup* _cretval;
     const(char)* _fileName = fileName.toCString(No.Alloc);
@@ -90,7 +90,7 @@ class PageSetup : ObjectG
     _cretval = gtk_page_setup_new_from_file(_fileName, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -102,11 +102,11 @@ class PageSetup : ObjectG
    *   variant = an a{sv} `GVariant`
    * Returns: a new `GtkPageSetup` object
    */
-  static PageSetup newFromGvariant(VariantG variant)
+  static gtk.page_setup.PageSetup newFromGvariant(glib.variant.VariantG variant)
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_page_setup_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class PageSetup : ObjectG
    *     to use the default name “Page Setup”
    * Returns: the restored `GtkPageSetup`
    */
-  static PageSetup newFromKeyFile(KeyFile keyFile, string groupName)
+  static gtk.page_setup.PageSetup newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName)
   {
     GtkPageSetup* _cretval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
@@ -129,7 +129,7 @@ class PageSetup : ObjectG
     _cretval = gtk_page_setup_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -137,11 +137,11 @@ class PageSetup : ObjectG
    * Copies a `GtkPageSetup`.
    * Returns: a copy of other
    */
-  PageSetup copy()
+  gtk.page_setup.PageSetup copy()
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_page_setup_copy(cast(GtkPageSetup*)cPtr);
-    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class PageSetup : ObjectG
    *   unit = the unit for the return value
    * Returns: the bottom margin
    */
-  double getBottomMargin(Unit unit)
+  double getBottomMargin(gtk.types.Unit unit)
   {
     double _retval;
     _retval = gtk_page_setup_get_bottom_margin(cast(GtkPageSetup*)cPtr, unit);
@@ -164,7 +164,7 @@ class PageSetup : ObjectG
    *   unit = the unit for the return value
    * Returns: the left margin
    */
-  double getLeftMargin(Unit unit)
+  double getLeftMargin(gtk.types.Unit unit)
   {
     double _retval;
     _retval = gtk_page_setup_get_left_margin(cast(GtkPageSetup*)cPtr, unit);
@@ -175,11 +175,11 @@ class PageSetup : ObjectG
    * Gets the page orientation of the `GtkPageSetup`.
    * Returns: the page orientation
    */
-  PageOrientation getOrientation()
+  gtk.types.PageOrientation getOrientation()
   {
     GtkPageOrientation _cretval;
     _cretval = gtk_page_setup_get_orientation(cast(GtkPageSetup*)cPtr);
-    PageOrientation _retval = cast(PageOrientation)_cretval;
+    gtk.types.PageOrientation _retval = cast(gtk.types.PageOrientation)_cretval;
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class PageSetup : ObjectG
    *   unit = the unit for the return value
    * Returns: the page height.
    */
-  double getPageHeight(Unit unit)
+  double getPageHeight(gtk.types.Unit unit)
   {
     double _retval;
     _retval = gtk_page_setup_get_page_height(cast(GtkPageSetup*)cPtr, unit);
@@ -208,7 +208,7 @@ class PageSetup : ObjectG
    *   unit = the unit for the return value
    * Returns: the page width.
    */
-  double getPageWidth(Unit unit)
+  double getPageWidth(gtk.types.Unit unit)
   {
     double _retval;
     _retval = gtk_page_setup_get_page_width(cast(GtkPageSetup*)cPtr, unit);
@@ -224,7 +224,7 @@ class PageSetup : ObjectG
    *   unit = the unit for the return value
    * Returns: the paper height.
    */
-  double getPaperHeight(Unit unit)
+  double getPaperHeight(gtk.types.Unit unit)
   {
     double _retval;
     _retval = gtk_page_setup_get_paper_height(cast(GtkPageSetup*)cPtr, unit);
@@ -235,11 +235,11 @@ class PageSetup : ObjectG
    * Gets the paper size of the `GtkPageSetup`.
    * Returns: the paper size
    */
-  PaperSize getPaperSize()
+  gtk.paper_size.PaperSize getPaperSize()
   {
     GtkPaperSize* _cretval;
     _cretval = gtk_page_setup_get_paper_size(cast(GtkPageSetup*)cPtr);
-    auto _retval = _cretval ? new PaperSize(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.paper_size.PaperSize(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -252,7 +252,7 @@ class PageSetup : ObjectG
    *   unit = the unit for the return value
    * Returns: the paper width.
    */
-  double getPaperWidth(Unit unit)
+  double getPaperWidth(gtk.types.Unit unit)
   {
     double _retval;
     _retval = gtk_page_setup_get_paper_width(cast(GtkPageSetup*)cPtr, unit);
@@ -265,7 +265,7 @@ class PageSetup : ObjectG
    *   unit = the unit for the return value
    * Returns: the right margin
    */
-  double getRightMargin(Unit unit)
+  double getRightMargin(gtk.types.Unit unit)
   {
     double _retval;
     _retval = gtk_page_setup_get_right_margin(cast(GtkPageSetup*)cPtr, unit);
@@ -278,7 +278,7 @@ class PageSetup : ObjectG
    *   unit = the unit for the return value
    * Returns: the top margin
    */
-  double getTopMargin(Unit unit)
+  double getTopMargin(gtk.types.Unit unit)
   {
     double _retval;
     _retval = gtk_page_setup_get_top_margin(cast(GtkPageSetup*)cPtr, unit);
@@ -312,7 +312,7 @@ class PageSetup : ObjectG
    *     to use the default name “Page Setup”
    * Returns: %TRUE on success
    */
-  bool loadKeyFile(KeyFile keyFile, string groupName)
+  bool loadKeyFile(glib.key_file.KeyFile keyFile, string groupName)
   {
     bool _retval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
@@ -329,7 +329,7 @@ class PageSetup : ObjectG
    *   margin = the new bottom margin in units of unit
    *   unit = the units for margin
    */
-  void setBottomMargin(double margin, Unit unit)
+  void setBottomMargin(double margin, gtk.types.Unit unit)
   {
     gtk_page_setup_set_bottom_margin(cast(GtkPageSetup*)cPtr, margin, unit);
   }
@@ -340,7 +340,7 @@ class PageSetup : ObjectG
    *   margin = the new left margin in units of unit
    *   unit = the units for margin
    */
-  void setLeftMargin(double margin, Unit unit)
+  void setLeftMargin(double margin, gtk.types.Unit unit)
   {
     gtk_page_setup_set_left_margin(cast(GtkPageSetup*)cPtr, margin, unit);
   }
@@ -350,7 +350,7 @@ class PageSetup : ObjectG
    * Params:
    *   orientation = a `GtkPageOrientation` value
    */
-  void setOrientation(PageOrientation orientation)
+  void setOrientation(gtk.types.PageOrientation orientation)
   {
     gtk_page_setup_set_orientation(cast(GtkPageSetup*)cPtr, orientation);
   }
@@ -362,7 +362,7 @@ class PageSetup : ObjectG
    * Params:
    *   size = a `GtkPaperSize`
    */
-  void setPaperSize(PaperSize size)
+  void setPaperSize(gtk.paper_size.PaperSize size)
   {
     gtk_page_setup_set_paper_size(cast(GtkPageSetup*)cPtr, size ? cast(GtkPaperSize*)size.cPtr(No.Dup) : null);
   }
@@ -373,7 +373,7 @@ class PageSetup : ObjectG
    * Params:
    *   size = a `GtkPaperSize`
    */
-  void setPaperSizeAndDefaultMargins(PaperSize size)
+  void setPaperSizeAndDefaultMargins(gtk.paper_size.PaperSize size)
   {
     gtk_page_setup_set_paper_size_and_default_margins(cast(GtkPageSetup*)cPtr, size ? cast(GtkPaperSize*)size.cPtr(No.Dup) : null);
   }
@@ -384,7 +384,7 @@ class PageSetup : ObjectG
    *   margin = the new right margin in units of unit
    *   unit = the units for margin
    */
-  void setRightMargin(double margin, Unit unit)
+  void setRightMargin(double margin, gtk.types.Unit unit)
   {
     gtk_page_setup_set_right_margin(cast(GtkPageSetup*)cPtr, margin, unit);
   }
@@ -395,7 +395,7 @@ class PageSetup : ObjectG
    *   margin = the new top margin in units of unit
    *   unit = the units for margin
    */
-  void setTopMargin(double margin, Unit unit)
+  void setTopMargin(double margin, gtk.types.Unit unit)
   {
     gtk_page_setup_set_top_margin(cast(GtkPageSetup*)cPtr, margin, unit);
   }
@@ -421,11 +421,11 @@ class PageSetup : ObjectG
    * Serialize page setup to an a{sv} variant.
    * Returns: a new, floating, `GVariant`
    */
-  VariantG toGvariant()
+  glib.variant.VariantG toGvariant()
   {
     VariantC* _cretval;
     _cretval = gtk_page_setup_to_gvariant(cast(GtkPageSetup*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -436,7 +436,7 @@ class PageSetup : ObjectG
    *   groupName = the group to add the settings to in key_file,
    *     or %NULL to use the default name “Page Setup”
    */
-  void toKeyFile(KeyFile keyFile, string groupName)
+  void toKeyFile(glib.key_file.KeyFile keyFile, string groupName)
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     gtk_page_setup_to_key_file(cast(GtkPageSetup*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName);

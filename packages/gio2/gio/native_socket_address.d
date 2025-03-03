@@ -1,6 +1,6 @@
 module gio.native_socket_address;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_address;
@@ -13,7 +13,7 @@ import gio.types;
  * This corresponds to a general `struct sockaddr` of a type not otherwise
  * handled by GLib.
  */
-class NativeSocketAddress : SocketAddress
+class NativeSocketAddress : gio.socket_address.SocketAddress
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

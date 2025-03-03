@@ -4,7 +4,7 @@ import gdkpixbuf.c.functions;
 import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf;
 import gdkpixbuf.types;
-import gid.global;
+import gid.gid;
 import glib.time_val;
 import gobject.object;
 
@@ -12,7 +12,7 @@ import gobject.object;
  * An opaque object representing an iterator which points to a
  * certain position in an animation.
  */
-class PixbufAnimationIter : ObjectG
+class PixbufAnimationIter : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -53,10 +53,10 @@ class PixbufAnimationIter : ObjectG
    *   currentTime = current time
    * Returns: `TRUE` if the image may need updating
    */
-  bool advance(TimeVal currentTime)
+  bool advance(glib.time_val.TimeVal currentTime)
   {
     bool _retval;
-    _retval = gdk_pixbuf_animation_iter_advance(cast(GdkPixbufAnimationIter*)cPtr, currentTime ? cast(GTimeVal*)currentTime.cPtr : null);
+    _retval = gdk_pixbuf_animation_iter_advance(cast(GdkPixbufAnimationIter*)cPtr, currentTime ? cast(const(GTimeVal)*)currentTime.cPtr : null);
     return _retval;
   }
 
@@ -91,11 +91,11 @@ class PixbufAnimationIter : ObjectG
    * recycled as you advance the iterator.
    * Returns: the pixbuf to be displayed
    */
-  Pixbuf getPixbuf()
+  gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
     _cretval = gdk_pixbuf_animation_iter_get_pixbuf(cast(GdkPixbufAnimationIter*)cPtr);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 

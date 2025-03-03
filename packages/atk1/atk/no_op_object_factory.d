@@ -4,7 +4,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.object_factory;
 import atk.types;
-import gid.global;
+import gid.gid;
 
 /**
  * The AtkObjectFactory which creates an AtkNoOpObject.
@@ -12,7 +12,7 @@ import gid.global;
  * this is created by an AtkRegistry if no factory type has not been
  * specified to create an accessible object of a particular type.
  */
-class NoOpObjectFactory : ObjectFactory
+class NoOpObjectFactory : atk.object_factory.ObjectFactory
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

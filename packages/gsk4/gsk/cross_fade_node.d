@@ -1,6 +1,6 @@
 module gsk.cross_fade_node;
 
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.render_node;
@@ -9,7 +9,7 @@ import gsk.types;
 /**
  * A render node cross fading between two child nodes.
  */
-class CrossFadeNode : RenderNode
+class CrossFadeNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,7 +29,7 @@ class CrossFadeNode : RenderNode
    *     be clamped to the range [0 ... 1]
    * Returns: A new `GskRenderNode`
    */
-  this(RenderNode start, RenderNode end, float progress)
+  this(gsk.render_node.RenderNode start, gsk.render_node.RenderNode end, float progress)
   {
     GskRenderNode* _cretval;
     _cretval = gsk_cross_fade_node_new(start ? cast(GskRenderNode*)start.cPtr(No.Dup) : null, end ? cast(GskRenderNode*)end.cPtr(No.Dup) : null, progress);
@@ -40,11 +40,11 @@ class CrossFadeNode : RenderNode
    * Retrieves the child `GskRenderNode` at the end of the cross-fade.
    * Returns: a `GskRenderNode`
    */
-  RenderNode getEndChild()
+  gsk.render_node.RenderNode getEndChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_cross_fade_node_get_end_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    _cretval = gsk_cross_fade_node_get_end_child(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -55,7 +55,7 @@ class CrossFadeNode : RenderNode
   float getProgress()
   {
     float _retval;
-    _retval = gsk_cross_fade_node_get_progress(cast(GskRenderNode*)cPtr);
+    _retval = gsk_cross_fade_node_get_progress(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 
@@ -63,11 +63,11 @@ class CrossFadeNode : RenderNode
    * Retrieves the child `GskRenderNode` at the beginning of the cross-fade.
    * Returns: a `GskRenderNode`
    */
-  RenderNode getStartChild()
+  gsk.render_node.RenderNode getStartChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_cross_fade_node_get_start_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    _cretval = gsk_cross_fade_node_get_start_child(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 }

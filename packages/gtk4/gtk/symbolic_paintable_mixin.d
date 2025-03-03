@@ -3,7 +3,7 @@ module gtk.symbolic_paintable_mixin;
 public import gtk.symbolic_paintable_iface_proxy;
 public import gdk.rgba;
 public import gdk.snapshot;
-public import gid.global;
+public import gid.gid;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -32,7 +32,7 @@ template SymbolicPaintableT()
    *   height = height to snapshot in
    *   colors = a pointer to an array of colors
    */
-  override void snapshotSymbolic(Snapshot snapshot, double width, double height, RGBA[] colors)
+  override void snapshotSymbolic(gdk.snapshot.Snapshot snapshot, double width, double height, gdk.rgba.RGBA[] colors)
   {
     size_t _nColors;
     if (colors)

@@ -1,6 +1,6 @@
 module glib.key_file;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.c.functions;
 import glib.c.types;
@@ -112,7 +112,7 @@ import gobject.boxed;
  * g_autoptr$(LPAREN)GBytes$(RPAREN) bytes \= g_bytes_new_take $(LPAREN)g_steal_pointer $(LPAREN)&data$(RPAREN), data_len$(RPAREN);
  * ```
  */
-class KeyFile : Boxed
+class KeyFile : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -230,7 +230,7 @@ class KeyFile : Boxed
     _cretval = g_key_file_get_comment(cast(GKeyFile*)cPtr, _groupName, _key, &_err);
     if (_err)
       throw new KeyFileException(_err);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -458,7 +458,7 @@ class KeyFile : Boxed
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _locale = locale.toCString(No.Alloc);
     _cretval = g_key_file_get_locale_for_key(cast(GKeyFile*)cPtr, _groupName, _key, _locale);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -490,7 +490,7 @@ class KeyFile : Boxed
     _cretval = g_key_file_get_locale_string(cast(GKeyFile*)cPtr, _groupName, _key, _locale, &_err);
     if (_err)
       throw new KeyFileException(_err);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -545,7 +545,7 @@ class KeyFile : Boxed
   {
     char* _cretval;
     _cretval = g_key_file_get_start_group(cast(GKeyFile*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -572,7 +572,7 @@ class KeyFile : Boxed
     _cretval = g_key_file_get_string(cast(GKeyFile*)cPtr, _groupName, _key, &_err);
     if (_err)
       throw new KeyFileException(_err);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -653,7 +653,7 @@ class KeyFile : Boxed
     _cretval = g_key_file_get_value(cast(GKeyFile*)cPtr, _groupName, _key, &_err);
     if (_err)
       throw new KeyFileException(_err);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -680,7 +680,7 @@ class KeyFile : Boxed
    *   flags = flags from #GKeyFileFlags
    * Returns: %TRUE if a key file could be loaded, %FALSE otherwise
    */
-  bool loadFromBytes(Bytes bytes, KeyFileFlags flags)
+  bool loadFromBytes(glib.bytes.Bytes bytes, glib.types.KeyFileFlags flags)
   {
     bool _retval;
     GError *_err;
@@ -699,7 +699,7 @@ class KeyFile : Boxed
    *   flags = flags from #GKeyFileFlags
    * Returns: %TRUE if a key file could be loaded, %FALSE otherwise
    */
-  bool loadFromData(string data, size_t length, KeyFileFlags flags)
+  bool loadFromData(string data, size_t length, glib.types.KeyFileFlags flags)
   {
     bool _retval;
     const(char)* _data = data.toCString(No.Alloc);
@@ -723,7 +723,7 @@ class KeyFile : Boxed
    *   flags = flags from #GKeyFileFlags
    * Returns: %TRUE if a key file could be loaded, %FALSE otherwise
    */
-  bool loadFromDataDirs(string file, out string fullPath, KeyFileFlags flags)
+  bool loadFromDataDirs(string file, out string fullPath, glib.types.KeyFileFlags flags)
   {
     bool _retval;
     const(char)* _file = file.toCString(No.Alloc);
@@ -753,7 +753,7 @@ class KeyFile : Boxed
    *   flags = flags from #GKeyFileFlags
    * Returns: %TRUE if a key file could be loaded, %FALSE otherwise
    */
-  bool loadFromDirs(string file, string[] searchDirs, out string fullPath, KeyFileFlags flags)
+  bool loadFromDirs(string file, string[] searchDirs, out string fullPath, glib.types.KeyFileFlags flags)
   {
     bool _retval;
     const(char)* _file = file.toCString(No.Alloc);
@@ -784,7 +784,7 @@ class KeyFile : Boxed
    *   flags = flags from #GKeyFileFlags
    * Returns: %TRUE if a key file could be loaded, %FALSE otherwise
    */
-  bool loadFromFile(string file, KeyFileFlags flags)
+  bool loadFromFile(string file, glib.types.KeyFileFlags flags)
   {
     bool _retval;
     const(char)* _file = file.toCString(No.Alloc);
@@ -1175,13 +1175,13 @@ class KeyFile : Boxed
     _cretval = g_key_file_to_data(cast(GKeyFile*)cPtr, cast(size_t*)&length, &_err);
     if (_err)
       throw new KeyFileException(_err);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
-  static Quark errorQuark()
+  static glib.types.Quark errorQuark()
   {
-    Quark _retval;
+    glib.types.Quark _retval;
     _retval = g_key_file_error_quark();
     return _retval;
   }
@@ -1196,7 +1196,7 @@ class KeyFileException : ErrorG
 
   this(Code code, string msg)
   {
-    super(KeyFile.errorQuark, cast(int)code, msg);
+    super(glib.key_file.KeyFile.errorQuark, cast(int)code, msg);
   }
 
   alias Code = GKeyFileError;

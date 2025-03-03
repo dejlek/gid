@@ -5,7 +5,7 @@ import gio.debug_controller;
 import gio.debug_controller_mixin;
 
 /// Proxy object for Gio.DebugController interface when a GObject has no applicable D binding
-class DebugControllerIfaceProxy : IfaceProxy, DebugController
+class DebugControllerIfaceProxy : IfaceProxy, gio.debug_controller.DebugController
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class DebugControllerIfaceProxy : IfaceProxy, DebugController
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(DebugController);
+    return typeid(gio.debug_controller.DebugController);
   }
 
   mixin DebugControllerT!();

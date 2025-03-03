@@ -6,10 +6,10 @@ import arrow.data_type;
 import arrow.schema;
 import arrow.timestamp_parser;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class CSVReadOptions : ObjectG
+class CSVReadOptions : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -47,7 +47,7 @@ class CSVReadOptions : ObjectG
    *   name = The name of the target column.
    *   dataType = The #GArrowDataType for the column.
    */
-  void addColumnType(string name, DataType dataType)
+  void addColumnType(string name, arrow.data_type.DataType dataType)
   {
     const(char)* _name = name.toCString(No.Alloc);
     garrow_csv_read_options_add_column_type(cast(GArrowCSVReadOptions*)cPtr, _name, dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null);
@@ -70,12 +70,12 @@ class CSVReadOptions : ObjectG
    * Params:
    *   schema = The #GArrowSchema that specifies columns and their types.
    */
-  void addSchema(Schema schema)
+  void addSchema(arrow.schema.Schema schema)
   {
     garrow_csv_read_options_add_schema(cast(GArrowCSVReadOptions*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null);
   }
 
-  void addTimestampParser(TimestampParser parser)
+  void addTimestampParser(arrow.timestamp_parser.TimestampParser parser)
   {
     garrow_csv_read_options_add_timestamp_parser(cast(GArrowCSVReadOptions*)cPtr, parser ? cast(GArrowTimestampParser*)parser.cPtr(No.Dup) : null);
   }
@@ -104,11 +104,11 @@ class CSVReadOptions : ObjectG
     return _retval;
   }
 
-  DataType[string] getColumnTypes()
+  arrow.data_type.DataType[string] getColumnTypes()
   {
     GHashTable* _cretval;
     _cretval = garrow_csv_read_options_get_column_types(cast(GArrowCSVReadOptions*)cPtr);
-    auto _retval = gHashTableToD!(string, DataType, GidOwnership.Full)(cast(GHashTable*)_cretval);
+    auto _retval = gHashTableToD!(string, arrow.data_type.DataType, GidOwnership.Full)(cast(GHashTable*)_cretval);
     return _retval;
   }
 
@@ -148,11 +148,11 @@ class CSVReadOptions : ObjectG
     return _retval;
   }
 
-  TimestampParser[] getTimestampParsers()
+  arrow.timestamp_parser.TimestampParser[] getTimestampParsers()
   {
     GList* _cretval;
     _cretval = garrow_csv_read_options_get_timestamp_parsers(cast(GArrowCSVReadOptions*)cPtr);
-    auto _retval = gListToD!(TimestampParser, GidOwnership.None)(cast(GList*)_cretval);
+    auto _retval = gListToD!(arrow.timestamp_parser.TimestampParser, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -213,10 +213,10 @@ class CSVReadOptions : ObjectG
     garrow_csv_read_options_set_null_values(cast(GArrowCSVReadOptions*)cPtr, _nullValues, _nNullValues);
   }
 
-  void setTimestampParsers(TimestampParser[] parsers)
+  void setTimestampParsers(arrow.timestamp_parser.TimestampParser[] parsers)
   {
-    auto _parsers = gListFromD!(TimestampParser)(parsers);
-    scope(exit) containerFree!(GList*, TimestampParser, GidOwnership.None)(_parsers);
+    auto _parsers = gListFromD!(arrow.timestamp_parser.TimestampParser)(parsers);
+    scope(exit) containerFree!(GList*, arrow.timestamp_parser.TimestampParser, GidOwnership.None)(_parsers);
     garrow_csv_read_options_set_timestamp_parsers(cast(GArrowCSVReadOptions*)cPtr, _parsers);
   }
 

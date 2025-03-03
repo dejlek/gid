@@ -8,11 +8,11 @@ import arrow.readable;
 import arrow.readable_mixin;
 import arrow.seekable_input_stream;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class FileInputStream : SeekableInputStream
+class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -42,14 +42,14 @@ class FileInputStream : SeekableInputStream
     this(_cretval, Yes.Take);
   }
 
-  static FileInputStream newFileDescriptor(int fileDescriptor)
+  static arrow.file_input_stream.FileInputStream newFileDescriptor(int fileDescriptor)
   {
     GArrowFileInputStream* _cretval;
     GError *_err;
     _cretval = garrow_file_input_stream_new_file_descriptor(fileDescriptor, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!FileInputStream(cast(GArrowFileInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.file_input_stream.FileInputStream)(cast(GArrowFileInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 

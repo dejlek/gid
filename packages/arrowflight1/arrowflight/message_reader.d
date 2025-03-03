@@ -5,10 +5,10 @@ import arrowflight.c.types;
 import arrowflight.descriptor;
 import arrowflight.record_batch_reader;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class MessageReader : RecordBatchReader
+class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,11 +27,11 @@ class MessageReader : RecordBatchReader
     return getType();
   }
 
-  Descriptor getDescriptor()
+  arrowflight.descriptor.Descriptor getDescriptor()
   {
     GAFlightDescriptor* _cretval;
     _cretval = gaflight_message_reader_get_descriptor(cast(GAFlightMessageReader*)cPtr);
-    auto _retval = ObjectG.getDObject!Descriptor(cast(GAFlightDescriptor*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowflight.descriptor.Descriptor)(cast(GAFlightDescriptor*)_cretval, Yes.Take);
     return _retval;
   }
 }

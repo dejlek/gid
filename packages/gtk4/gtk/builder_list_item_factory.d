@@ -1,10 +1,9 @@
 module gtk.builder_list_item_factory;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import gobject.object;
 import gtk.builder_scope;
-import gtk.builder_scope_mixin;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.list_item_factory;
@@ -33,7 +32,7 @@ import gtk.types;
  * </interface>
  * ```
  */
-class BuilderListItemFactory : ListItemFactory
+class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -60,11 +59,11 @@ class BuilderListItemFactory : ListItemFactory
    *   bytes = the `GBytes` containing the ui file to instantiate
    * Returns: a new `GtkBuilderListItemFactory`
    */
-  static BuilderListItemFactory newFromBytes(BuilderScope scope_, Bytes bytes)
+  static gtk.builder_list_item_factory.BuilderListItemFactory newFromBytes(gtk.builder_scope.BuilderScope scope_, glib.bytes.Bytes bytes)
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_builder_list_item_factory_new_from_bytes(scope_ ? cast(GtkBuilderScope*)(cast(ObjectG)scope_).cPtr(No.Dup) : null, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!BuilderListItemFactory(cast(GtkListItemFactory*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.builder_list_item_factory.BuilderListItemFactory)(cast(GtkListItemFactory*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -76,12 +75,12 @@ class BuilderListItemFactory : ListItemFactory
    *   resourcePath = valid path to a resource that contains the data
    * Returns: a new `GtkBuilderListItemFactory`
    */
-  static BuilderListItemFactory newFromResource(BuilderScope scope_, string resourcePath)
+  static gtk.builder_list_item_factory.BuilderListItemFactory newFromResource(gtk.builder_scope.BuilderScope scope_, string resourcePath)
   {
     GtkListItemFactory* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gtk_builder_list_item_factory_new_from_resource(scope_ ? cast(GtkBuilderScope*)(cast(ObjectG)scope_).cPtr(No.Dup) : null, _resourcePath);
-    auto _retval = ObjectG.getDObject!BuilderListItemFactory(cast(GtkListItemFactory*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.builder_list_item_factory.BuilderListItemFactory)(cast(GtkListItemFactory*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -90,11 +89,11 @@ class BuilderListItemFactory : ListItemFactory
    * listitems.
    * Returns: The `GtkBuilder` data
    */
-  Bytes getBytes()
+  glib.bytes.Bytes getBytes()
   {
     GBytes* _cretval;
     _cretval = gtk_builder_list_item_factory_get_bytes(cast(GtkBuilderListItemFactory*)cPtr);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -106,7 +105,7 @@ class BuilderListItemFactory : ListItemFactory
   {
     const(char)* _cretval;
     _cretval = gtk_builder_list_item_factory_get_resource(cast(GtkBuilderListItemFactory*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -114,11 +113,11 @@ class BuilderListItemFactory : ListItemFactory
    * Gets the scope used when constructing listitems.
    * Returns: The scope used when constructing listitems
    */
-  BuilderScope getScope()
+  gtk.builder_scope.BuilderScope getScope()
   {
     GtkBuilderScope* _cretval;
     _cretval = gtk_builder_list_item_factory_get_scope(cast(GtkBuilderListItemFactory*)cPtr);
-    auto _retval = ObjectG.getDObject!BuilderScope(cast(GtkBuilderScope*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.builder_scope.BuilderScope)(cast(GtkBuilderScope*)_cretval, No.Take);
     return _retval;
   }
 }

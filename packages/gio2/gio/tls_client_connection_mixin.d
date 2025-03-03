@@ -1,12 +1,11 @@
 module gio.tls_client_connection_mixin;
 
 public import gio.tls_client_connection_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.iostream;
 public import gio.socket_connectable;
-public import gio.socket_connectable_mixin;
 public import gio.types;
 public import glib.error;
 public import gobject.object;
@@ -49,7 +48,7 @@ template TlsClientConnectionT()
    * Params:
    *   source = a #GTlsClientConnection
    */
-  override void copySessionState(TlsClientConnection source)
+  override void copySessionState(gio.tls_client_connection.TlsClientConnection source)
   {
     g_tls_client_connection_copy_session_state(cast(GTlsClientConnection*)cPtr, source ? cast(GTlsClientConnection*)(cast(ObjectG)source).cPtr(No.Dup) : null);
   }
@@ -60,11 +59,11 @@ template TlsClientConnectionT()
    *   expected server identity, or %NULL if the expected identity is not
    *   known.
    */
-  override SocketConnectable getServerIdentity()
+  override gio.socket_connectable.SocketConnectable getServerIdentity()
   {
     GSocketConnectable* _cretval;
     _cretval = g_tls_client_connection_get_server_identity(cast(GTlsClientConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!SocketConnectable(cast(GSocketConnectable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_connectable.SocketConnectable)(cast(GSocketConnectable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -91,11 +90,11 @@ template TlsClientConnectionT()
 
    * Deprecated: Do not attempt to ignore validation errors.
    */
-  override TlsCertificateFlags getValidationFlags()
+  override gio.types.TlsCertificateFlags getValidationFlags()
   {
     GTlsCertificateFlags _cretval;
     _cretval = g_tls_client_connection_get_validation_flags(cast(GTlsClientConnection*)cPtr);
-    TlsCertificateFlags _retval = cast(TlsCertificateFlags)_cretval;
+    gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
   }
 
@@ -107,7 +106,7 @@ template TlsClientConnectionT()
    * Params:
    *   identity = a #GSocketConnectable describing the expected server identity
    */
-  override void setServerIdentity(SocketConnectable identity)
+  override void setServerIdentity(gio.socket_connectable.SocketConnectable identity)
   {
     g_tls_client_connection_set_server_identity(cast(GTlsClientConnection*)cPtr, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.Dup) : null);
   }
@@ -143,7 +142,7 @@ template TlsClientConnectionT()
 
    * Deprecated: Do not attempt to ignore validation errors.
    */
-  override void setValidationFlags(TlsCertificateFlags flags)
+  override void setValidationFlags(gio.types.TlsCertificateFlags flags)
   {
     g_tls_client_connection_set_validation_flags(cast(GTlsClientConnection*)cPtr, flags);
   }

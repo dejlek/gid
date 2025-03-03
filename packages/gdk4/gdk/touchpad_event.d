@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.event;
 import gdk.types;
-import gid.global;
+import gid.gid;
 
 /**
  * An event related to a gesture on a touchpad device.
@@ -13,7 +13,7 @@ import gid.global;
  * recognition to the clients, touchpad gestures are typically
  * processed by the system, resulting in these events.
  */
-class TouchpadEvent : Event
+class TouchpadEvent : gdk.event.Event
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -39,11 +39,11 @@ class TouchpadEvent : Event
    * Extracts the touchpad gesture phase from a touchpad event.
    * Returns: the gesture phase of event
    */
-  TouchpadGesturePhase getGesturePhase()
+  gdk.types.TouchpadGesturePhase getGesturePhase()
   {
     GdkTouchpadGesturePhase _cretval;
     _cretval = gdk_touchpad_event_get_gesture_phase(cast(GdkEvent*)cPtr);
-    TouchpadGesturePhase _retval = cast(TouchpadGesturePhase)_cretval;
+    gdk.types.TouchpadGesturePhase _retval = cast(gdk.types.TouchpadGesturePhase)_cretval;
     return _retval;
   }
 

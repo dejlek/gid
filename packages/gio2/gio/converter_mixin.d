@@ -1,7 +1,7 @@
 module gio.converter_mixin;
 
 public import gio.converter_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
@@ -102,7 +102,7 @@ template ConverterT()
    *     written to outbuf on success
    * Returns: a #GConverterResult, %G_CONVERTER_ERROR on error.
    */
-  override ConverterResult convert(ubyte[] inbuf, ubyte[] outbuf, ConverterFlags flags, out size_t bytesRead, out size_t bytesWritten)
+  override gio.types.ConverterResult convert(ubyte[] inbuf, ubyte[] outbuf, gio.types.ConverterFlags flags, out size_t bytesRead, out size_t bytesWritten)
   {
     GConverterResult _cretval;
     size_t _inbufSize;
@@ -119,7 +119,7 @@ template ConverterT()
     _cretval = g_converter_convert(cast(GConverter*)cPtr, _inbuf, _inbufSize, _outbuf, _outbufSize, flags, cast(size_t*)&bytesRead, cast(size_t*)&bytesWritten, &_err);
     if (_err)
       throw new ErrorG(_err);
-    ConverterResult _retval = cast(ConverterResult)_cretval;
+    gio.types.ConverterResult _retval = cast(gio.types.ConverterResult)_cretval;
     return _retval;
   }
 

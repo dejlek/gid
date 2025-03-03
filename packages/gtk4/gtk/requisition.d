@@ -1,6 +1,6 @@
 module gtk.requisition;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gtk.c.functions;
 import gtk.c.types;
@@ -11,7 +11,7 @@ import gtk.types;
  * [GtkWidget’s geometry management section](class.Widget.html#height-for-width-geometry-management) for
  * more information.
  */
-class Requisition : Boxed
+class Requisition : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -73,11 +73,11 @@ class Requisition : Boxed
    * Copies a `GtkRequisition`.
    * Returns: a copy of requisition
    */
-  Requisition copy()
+  gtk.requisition.Requisition copy()
   {
     GtkRequisition* _cretval;
-    _cretval = gtk_requisition_copy(cast(GtkRequisition*)cPtr);
-    auto _retval = _cretval ? new Requisition(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gtk_requisition_copy(cast(const(GtkRequisition)*)cPtr);
+    auto _retval = _cretval ? new gtk.requisition.Requisition(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

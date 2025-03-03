@@ -1,13 +1,13 @@
 module parquet.writer_properties;
 
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import parquet.c.functions;
 import parquet.c.types;
 import parquet.types;
 
-class WriterProperties : ObjectG
+class WriterProperties : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -52,12 +52,12 @@ class WriterProperties : ObjectG
     return _retval;
   }
 
-  CompressionType getCompressionPath(string path)
+  arrow.types.CompressionType getCompressionPath(string path)
   {
     GArrowCompressionType _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = gparquet_writer_properties_get_compression_path(cast(GParquetWriterProperties*)cPtr, _path);
-    CompressionType _retval = cast(CompressionType)_cretval;
+    arrow.types.CompressionType _retval = cast(arrow.types.CompressionType)_cretval;
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class WriterProperties : ObjectG
     gparquet_writer_properties_set_batch_size(cast(GParquetWriterProperties*)cPtr, batchSize);
   }
 
-  void setCompression(CompressionType compressionType, string path)
+  void setCompression(arrow.types.CompressionType compressionType, string path)
   {
     const(char)* _path = path.toCString(No.Alloc);
     gparquet_writer_properties_set_compression(cast(GParquetWriterProperties*)cPtr, compressionType, _path);

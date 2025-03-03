@@ -1,6 +1,6 @@
 module glib.rand;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -10,7 +10,7 @@ import gobject.boxed;
  * The GRand struct is an opaque data structure. It should only be
  * accessed through the g_rand_* functions.
  */
-class Rand : Boxed
+class Rand : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,11 +54,11 @@ class Rand : Boxed
    *   seed = a value to initialize the random number generator
    * Returns: the new #GRand
    */
-  static Rand newWithSeed(uint seed)
+  static glib.rand.Rand newWithSeed(uint seed)
   {
     GRand* _cretval;
     _cretval = g_rand_new_with_seed(seed);
-    auto _retval = _cretval ? new Rand(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.rand.Rand(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -68,7 +68,7 @@ class Rand : Boxed
    *   seed = an array of seeds to initialize the random number generator
    * Returns: the new #GRand
    */
-  static Rand newWithSeedArray(uint[] seed)
+  static glib.rand.Rand newWithSeedArray(uint[] seed)
   {
     GRand* _cretval;
     uint _seedLength;
@@ -77,7 +77,7 @@ class Rand : Boxed
 
     auto _seed = cast(const(uint)*)seed.ptr;
     _cretval = g_rand_new_with_seed_array(_seed, _seedLength);
-    auto _retval = _cretval ? new Rand(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.rand.Rand(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -87,11 +87,11 @@ class Rand : Boxed
    * replaying later.
    * Returns: the new #GRand
    */
-  Rand copy()
+  glib.rand.Rand copy()
   {
     GRand* _cretval;
     _cretval = g_rand_copy(cast(GRand*)cPtr);
-    auto _retval = _cretval ? new Rand(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.rand.Rand(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

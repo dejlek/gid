@@ -1,10 +1,8 @@
 module gtk.recent_info;
 
-import gid.global;
+import gid.gid;
 import gio.app_info;
-import gio.app_info_mixin;
 import gio.icon;
-import gio.icon_mixin;
 import glib.date_time;
 import glib.error;
 import gobject.boxed;
@@ -17,7 +15,7 @@ import gtk.types;
  * `GtkRecentInfo` contains the metadata associated with an item in the
  * recently used files list.
  */
-class RecentInfo : Boxed
+class RecentInfo : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -51,7 +49,7 @@ class RecentInfo : Boxed
    *     application for the MIME type is used
    * Returns: the newly created `GAppInfo`
    */
-  AppInfo createAppInfo(string appName)
+  gio.app_info.AppInfo createAppInfo(string appName)
   {
     GAppInfo* _cretval;
     const(char)* _appName = appName.toCString(No.Alloc);
@@ -59,7 +57,7 @@ class RecentInfo : Boxed
     _cretval = gtk_recent_info_create_app_info(cast(GtkRecentInfo*)cPtr, _appName, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -82,11 +80,11 @@ class RecentInfo : Boxed
    * Returns: a `GDateTime` for the time
    *   when the resource was added
    */
-  DateTime getAdded()
+  glib.date_time.DateTime getAdded()
   {
     GDateTime* _cretval;
     _cretval = gtk_recent_info_get_added(cast(GtkRecentInfo*)cPtr);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -120,7 +118,7 @@ class RecentInfo : Boxed
    *   app_exec string is owned by the `GtkRecentInfo` and should not be
    *   modified or freed
    */
-  bool getApplicationInfo(string appName, out string appExec, out uint count, out DateTime stamp)
+  bool getApplicationInfo(string appName, out string appExec, out uint count, out glib.date_time.DateTime stamp)
   {
     bool _retval;
     const(char)* _appName = appName.toCString(No.Alloc);
@@ -128,7 +126,7 @@ class RecentInfo : Boxed
     GDateTime* _stamp;
     _retval = gtk_recent_info_get_application_info(cast(GtkRecentInfo*)cPtr, _appName, &_appExec, cast(uint*)&count, &_stamp);
     appExec = _appExec.fromCString(No.Free);
-    stamp = new DateTime(cast(void*)_stamp, No.Take);
+    stamp = new glib.date_time.DateTime(cast(void*)_stamp, No.Take);
     return _retval;
   }
 
@@ -162,7 +160,7 @@ class RecentInfo : Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_recent_info_get_description(cast(GtkRecentInfo*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -177,7 +175,7 @@ class RecentInfo : Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_recent_info_get_display_name(cast(GtkRecentInfo*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -185,11 +183,11 @@ class RecentInfo : Boxed
    * Retrieves the icon associated to the resource MIME type.
    * Returns: a `GIcon` containing the icon
    */
-  Icon getGicon()
+  gio.icon.Icon getGicon()
   {
     GIcon* _cretval;
     _cretval = gtk_recent_info_get_gicon(cast(GtkRecentInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -225,7 +223,7 @@ class RecentInfo : Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_recent_info_get_mime_type(cast(GtkRecentInfo*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -235,11 +233,11 @@ class RecentInfo : Boxed
    * Returns: a `GDateTime` for the time
    *   when the resource was last modified
    */
-  DateTime getModified()
+  glib.date_time.DateTime getModified()
   {
     GDateTime* _cretval;
     _cretval = gtk_recent_info_get_modified(cast(GtkRecentInfo*)cPtr);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -269,7 +267,7 @@ class RecentInfo : Boxed
   {
     char* _cretval;
     _cretval = gtk_recent_info_get_short_name(cast(GtkRecentInfo*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -282,7 +280,7 @@ class RecentInfo : Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_recent_info_get_uri(cast(GtkRecentInfo*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -298,7 +296,7 @@ class RecentInfo : Boxed
   {
     char* _cretval;
     _cretval = gtk_recent_info_get_uri_display(cast(GtkRecentInfo*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -308,11 +306,11 @@ class RecentInfo : Boxed
    * Returns: a `GDateTime` for the time
    *   when the resource was last visited
    */
-  DateTime getVisited()
+  glib.date_time.DateTime getVisited()
   {
     GDateTime* _cretval;
     _cretval = gtk_recent_info_get_visited(cast(GtkRecentInfo*)cPtr);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -367,7 +365,7 @@ class RecentInfo : Boxed
   {
     char* _cretval;
     _cretval = gtk_recent_info_last_application(cast(GtkRecentInfo*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -378,7 +376,7 @@ class RecentInfo : Boxed
    * Returns: %TRUE if both `GtkRecentInfo` point to the same
    *   resource, %FALSE otherwise
    */
-  bool match(RecentInfo infoB)
+  bool match(gtk.recent_info.RecentInfo infoB)
   {
     bool _retval;
     _retval = gtk_recent_info_match(cast(GtkRecentInfo*)cPtr, infoB ? cast(GtkRecentInfo*)infoB.cPtr(No.Dup) : null);

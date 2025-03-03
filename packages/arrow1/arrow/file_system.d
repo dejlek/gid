@@ -8,11 +8,11 @@ import arrow.input_stream;
 import arrow.output_stream;
 import arrow.seekable_input_stream;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class FileSystem : ObjectG
+class FileSystem : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -40,7 +40,7 @@ class FileSystem : ObjectG
    * Returns: The newly created file system
    *   that is an object of a subclass of #GArrowFileSystem.
    */
-  static FileSystem create(string uri)
+  static arrow.file_system.FileSystem create(string uri)
   {
     GArrowFileSystem* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -48,7 +48,7 @@ class FileSystem : ObjectG
     _cretval = garrow_file_system_create(_uri, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!FileSystem(cast(GArrowFileSystem*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.file_system.FileSystem)(cast(GArrowFileSystem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class FileSystem : ObjectG
    *   path = The path of the target.
    * Returns: A #GArrowFileInfo.
    */
-  FileInfo getFileInfo(string path)
+  arrow.file_info.FileInfo getFileInfo(string path)
   {
     GArrowFileInfo* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -190,7 +190,7 @@ class FileSystem : ObjectG
     _cretval = garrow_file_system_get_file_info(cast(GArrowFileSystem*)cPtr, _path, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!FileInfo(cast(GArrowFileInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.file_info.FileInfo)(cast(GArrowFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class FileSystem : ObjectG
    *   paths = The paths of the targets.
    * Returns: A list of #GArrowFileInfo.
    */
-  FileInfo[] getFileInfosPaths(string[] paths)
+  arrow.file_info.FileInfo[] getFileInfosPaths(string[] paths)
   {
     GList* _cretval;
     size_t _nPaths;
@@ -217,7 +217,7 @@ class FileSystem : ObjectG
     _cretval = garrow_file_system_get_file_infos_paths(cast(GArrowFileSystem*)cPtr, _paths, _nPaths, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = gListToD!(FileInfo, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(arrow.file_info.FileInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -230,14 +230,14 @@ class FileSystem : ObjectG
    *   fileSelector = A #GArrowFileSelector.
    * Returns: A list of #GArrowFileInfo.
    */
-  FileInfo[] getFileInfosSelector(FileSelector fileSelector)
+  arrow.file_info.FileInfo[] getFileInfosSelector(arrow.file_selector.FileSelector fileSelector)
   {
     GList* _cretval;
     GError *_err;
     _cretval = garrow_file_system_get_file_infos_selector(cast(GArrowFileSystem*)cPtr, fileSelector ? cast(GArrowFileSelector*)fileSelector.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = gListToD!(FileInfo, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(arrow.file_info.FileInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -245,7 +245,7 @@ class FileSystem : ObjectG
   {
     char* _cretval;
     _cretval = garrow_file_system_get_type_name(cast(GArrowFileSystem*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -280,7 +280,7 @@ class FileSystem : ObjectG
    * Returns: A newly created #GArrowOutputStream
    *   for appending.
    */
-  OutputStream openAppendStream(string path)
+  arrow.output_stream.OutputStream openAppendStream(string path)
   {
     GArrowOutputStream* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -288,7 +288,7 @@ class FileSystem : ObjectG
     _cretval = garrow_file_system_open_append_stream(cast(GArrowFileSystem*)cPtr, _path, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!OutputStream(cast(GArrowOutputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.output_stream.OutputStream)(cast(GArrowOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -299,7 +299,7 @@ class FileSystem : ObjectG
    * Returns: A newly created
    *   #GArrowSeekableInputStream.
    */
-  SeekableInputStream openInputFile(string path)
+  arrow.seekable_input_stream.SeekableInputStream openInputFile(string path)
   {
     GArrowSeekableInputStream* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -307,7 +307,7 @@ class FileSystem : ObjectG
     _cretval = garrow_file_system_open_input_file(cast(GArrowFileSystem*)cPtr, _path, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!SeekableInputStream(cast(GArrowSeekableInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.seekable_input_stream.SeekableInputStream)(cast(GArrowSeekableInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -318,7 +318,7 @@ class FileSystem : ObjectG
    * Returns: A newly created
    *   #GArrowInputStream.
    */
-  InputStream openInputStream(string path)
+  arrow.input_stream.InputStream openInputStream(string path)
   {
     GArrowInputStream* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -326,7 +326,7 @@ class FileSystem : ObjectG
     _cretval = garrow_file_system_open_input_stream(cast(GArrowFileSystem*)cPtr, _path, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!InputStream(cast(GArrowInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.input_stream.InputStream)(cast(GArrowInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -338,7 +338,7 @@ class FileSystem : ObjectG
    * Returns: A newly created
    *   #GArrowOutputStream.
    */
-  OutputStream openOutputStream(string path)
+  arrow.output_stream.OutputStream openOutputStream(string path)
   {
     GArrowOutputStream* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -346,7 +346,7 @@ class FileSystem : ObjectG
     _cretval = garrow_file_system_open_output_stream(cast(GArrowFileSystem*)cPtr, _path, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!OutputStream(cast(GArrowOutputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.output_stream.OutputStream)(cast(GArrowOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -2,12 +2,10 @@ module gtksource.completion_provider;
 
 public import gtksource.completion_provider_iface_proxy;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.list_model;
-import gio.list_model_mixin;
 import gio.types;
 import glib.error;
 import gobject.object;
@@ -17,7 +15,6 @@ import gtksource.c.types;
 import gtksource.completion_cell;
 import gtksource.completion_context;
 import gtksource.completion_proposal;
-import gtksource.completion_proposal_mixin;
 import gtksource.types;
 
 /**
@@ -47,7 +44,7 @@ interface CompletionProvider
    *   context = a #GtkSourceCompletionContext
    *   proposal = a #GtkSourceCompletionProposal
    */
-  void activate(CompletionContext context, CompletionProposal proposal);
+  void activate(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal);
 
   /**
    * This function requests that the #GtkSourceCompletionProvider prepares
@@ -61,7 +58,7 @@ interface CompletionProvider
    *   proposal = a #GtkSourceCompletionProposal
    *   cell = a #GtkSourceCompletionCell
    */
-  void display(CompletionContext context, CompletionProposal proposal, CompletionCell cell);
+  void display(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal, gtksource.completion_cell.CompletionCell cell);
 
   /**
    * This function should return the priority of self in context.
@@ -73,7 +70,7 @@ interface CompletionProvider
    *   context = a #GtkSourceCompletionContext
    * Returns:
    */
-  int getPriority(CompletionContext context);
+  int getPriority(gtksource.completion_context.CompletionContext context);
 
   /**
    * Gets the title of the completion provider, if any.
@@ -96,7 +93,7 @@ interface CompletionProvider
    *   ch = a #gunichar of the character inserted
    * Returns:
    */
-  bool isTrigger(TextIter iter, dchar ch);
+  bool isTrigger(gtk.text_iter.TextIter iter, dchar ch);
 
   /**
    * This function is used to determine if a key typed by the user should
@@ -107,11 +104,11 @@ interface CompletionProvider
    * Params:
    *   context = a #GtkSourceCompletionContext
    *   proposal = a #GtkSourceCompletionProposal
-   *   keyval = a keyval such as [gdk.int]
+   *   keyval = a keyval such as [gdk.types.int]
    *   state = a #GdkModifierType or 0
    * Returns:
    */
-  bool keyActivates(CompletionContext context, CompletionProposal proposal, uint keyval, ModifierType state);
+  bool keyActivates(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal, uint keyval, gdk.types.ModifierType state);
 
   /**
    * Providers should return a list of alternates to proposal or %NULL if
@@ -123,7 +120,7 @@ interface CompletionProvider
    *   proposal = a #GtkSourceCompletionProposal
    * Returns: a #GPtrArray of #GtkSourceCompletionProposal or %NULL.
    */
-  CompletionProposal[] listAlternates(CompletionContext context, CompletionProposal proposal);
+  gtksource.completion_proposal.CompletionProposal[] listAlternates(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal);
 
   /**
    * Asynchronously requests that the provider populates the completion
@@ -137,7 +134,7 @@ interface CompletionProvider
    *   cancellable = a #GCancellable or %NULL
    *   callback = a callback to execute upon completion
    */
-  void populateAsync(CompletionContext context, Cancellable cancellable, AsyncReadyCallback callback);
+  void populateAsync(gtksource.completion_context.CompletionContext context, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Completes an asynchronous operation to populate a completion provider.
@@ -145,7 +142,7 @@ interface CompletionProvider
    *   result = a #GAsyncResult provided to callback
    * Returns: a #GListModel of #GtkSourceCompletionProposal
    */
-  ListModel populateFinish(AsyncResult result);
+  gio.list_model.ListModel populateFinish(gio.async_result.AsyncResult result);
 
   /**
    * This function can be used to filter results previously provided to
@@ -157,5 +154,5 @@ interface CompletionProvider
    *   context = a #GtkSourceCompletionContext
    *   model = a #GListModel
    */
-  void refilter(CompletionContext context, ListModel model);
+  void refilter(gtksource.completion_context.CompletionContext context, gio.list_model.ListModel model);
 }

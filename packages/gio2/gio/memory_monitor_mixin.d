@@ -1,7 +1,7 @@
 module gio.memory_monitor_mixin;
 
 public import gio.memory_monitor_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
@@ -27,7 +27,7 @@ public import gobject.object;
  * should be profiled for your application. `malloc_trim$(LPAREN)$(RPAREN)`, for example, may
  * make future heap allocations slower $(LPAREN)due to releasing cached heap pages back
  * to the kernel$(RPAREN).
- * See [gio.MemoryMonitorWarningLevel] for details on the various warning
+ * See [gio.types.MemoryMonitorWarningLevel] for details on the various warning
  * levels.
  * ```c
  * static void
@@ -63,8 +63,8 @@ template MemoryMonitorT()
    *   level = the #GMemoryMonitorWarningLevel warning level
    *   memoryMonitor = the instance the signal is connected to
    */
-  alias LowMemoryWarningCallbackDlg = void delegate(MemoryMonitorWarningLevel level, MemoryMonitor memoryMonitor);
-  alias LowMemoryWarningCallbackFunc = void function(MemoryMonitorWarningLevel level, MemoryMonitor memoryMonitor);
+  alias LowMemoryWarningCallbackDlg = void delegate(gio.types.MemoryMonitorWarningLevel level, gio.memory_monitor.MemoryMonitor memoryMonitor);
+  alias LowMemoryWarningCallbackFunc = void function(gio.types.MemoryMonitorWarningLevel level, gio.memory_monitor.MemoryMonitor memoryMonitor);
 
   /**
    * Connect to LowMemoryWarning signal.
@@ -80,8 +80,8 @@ template MemoryMonitorT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto memoryMonitor = getVal!MemoryMonitor(_paramVals);
-      auto level = getVal!MemoryMonitorWarningLevel(&_paramVals[1]);
+      auto memoryMonitor = getVal!(gio.memory_monitor.MemoryMonitor)(_paramVals);
+      auto level = getVal!(gio.types.MemoryMonitorWarningLevel)(&_paramVals[1]);
       _dClosure.dlg(level, memoryMonitor);
     }
 

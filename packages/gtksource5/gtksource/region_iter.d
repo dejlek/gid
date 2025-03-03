@@ -1,6 +1,6 @@
 module gtksource.region_iter;
 
-import gid.global;
+import gid.gid;
 import gtk.text_iter;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -38,14 +38,14 @@ class RegionIter
    * Returns: %TRUE if start and end have been set successfully $(LPAREN)if non-%NULL$(RPAREN),
    *   or %FALSE if iter is the end iterator or if the region is empty.
    */
-  bool getSubregion(out TextIter start, out TextIter end)
+  bool getSubregion(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end)
   {
     bool _retval;
     GtkTextIter _start;
     GtkTextIter _end;
     _retval = gtk_source_region_iter_get_subregion(cast(GtkSourceRegionIter*)cPtr, &_start, &_end);
-    start = new TextIter(cast(void*)&_start, No.Take);
-    end = new TextIter(cast(void*)&_end, No.Take);
+    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
+    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
   }
 

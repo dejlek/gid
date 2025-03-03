@@ -4,9 +4,9 @@ import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.file_format;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 
-class ParquetFileFormat : FileFormat
+class ParquetFileFormat : arrowdataset.file_format.FileFormat
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -2,9 +2,8 @@ module gtk.icon_paintable;
 
 import gdk.paintable;
 import gdk.paintable_mixin;
-import gid.global;
+import gid.gid;
 import gio.file;
-import gio.file_mixin;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -16,7 +15,7 @@ import gtk.types;
  * Contains information found when looking up an icon in `GtkIconTheme`.
  * `GtkIconPaintable` implements `GdkPaintable`.
  */
-class IconPaintable : ObjectG, Paintable, SymbolicPaintable
+class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbolic_paintable.SymbolicPaintable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -48,11 +47,11 @@ class IconPaintable : ObjectG, Paintable, SymbolicPaintable
    * Returns: a `GtkIconPaintable` containing
    *   for the icon. Unref with [gobject.object.ObjectG.unref]
    */
-  static IconPaintable newForFile(File file, int size, int scale)
+  static gtk.icon_paintable.IconPaintable newForFile(gio.file.File file, int size, int scale)
   {
     GtkIconPaintable* _cretval;
     _cretval = gtk_icon_paintable_new_for_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, size, scale);
-    auto _retval = ObjectG.getDObject!IconPaintable(cast(GtkIconPaintable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -61,11 +60,11 @@ class IconPaintable : ObjectG, Paintable, SymbolicPaintable
    * Returns %NULL if the icon was not loaded from a file.
    * Returns: the `GFile` for the icon
    */
-  File getFile()
+  gio.file.File getFile()
   {
     GFile* _cretval;
     _cretval = gtk_icon_paintable_get_file(cast(GtkIconPaintable*)cPtr);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -84,7 +83,7 @@ class IconPaintable : ObjectG, Paintable, SymbolicPaintable
   {
     const(char)* _cretval;
     _cretval = gtk_icon_paintable_get_icon_name(cast(GtkIconPaintable*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

@@ -1,6 +1,6 @@
 module gtk.action_bar;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -44,7 +44,7 @@ import gtk.widget;
  * respectively, as well as a center node that represents the center child.
  * Each of the boxes contains children packed for that side.
  */
-class ActionBar : Widget
+class ActionBar : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -78,11 +78,11 @@ class ActionBar : Widget
    * Retrieves the center bar widget of the bar.
    * Returns: the center `GtkWidget`
    */
-  Widget getCenterWidget()
+  gtk.widget.Widget getCenterWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_bar_get_center_widget(cast(GtkActionBar*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class ActionBar : Widget
    * Params:
    *   child = the `GtkWidget` to be added to action_bar
    */
-  void packEnd(Widget child)
+  void packEnd(gtk.widget.Widget child)
   {
     gtk_action_bar_pack_end(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -115,7 +115,7 @@ class ActionBar : Widget
    * Params:
    *   child = the `GtkWidget` to be added to action_bar
    */
-  void packStart(Widget child)
+  void packStart(gtk.widget.Widget child)
   {
     gtk_action_bar_pack_start(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -125,7 +125,7 @@ class ActionBar : Widget
    * Params:
    *   child = the `GtkWidget` to be removed
    */
-  void remove(Widget child)
+  void remove(gtk.widget.Widget child)
   {
     gtk_action_bar_remove(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -135,7 +135,7 @@ class ActionBar : Widget
    * Params:
    *   centerWidget = a widget to use for the center
    */
-  void setCenterWidget(Widget centerWidget)
+  void setCenterWidget(gtk.widget.Widget centerWidget)
   {
     gtk_action_bar_set_center_widget(cast(GtkActionBar*)cPtr, centerWidget ? cast(GtkWidget*)centerWidget.cPtr(No.Dup) : null);
   }

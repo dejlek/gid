@@ -1,9 +1,8 @@
 module gtk.icon_theme;
 
 import gdk.display;
-import gid.global;
+import gid.gid;
 import gio.icon;
-import gio.icon_mixin;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -41,7 +40,7 @@ import gtk.types;
  * g_object_unref $(LPAREN)icon$(RPAREN);
  * ```
  */
-class IconTheme : ObjectG
+class IconTheme : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -89,11 +88,11 @@ class IconTheme : ObjectG
    *   the given display. This icon theme is associated with the display
    *   and can be used as long as the display is open. Do not ref or unref it.
    */
-  static IconTheme getForDisplay(Display display)
+  static gtk.icon_theme.IconTheme getForDisplay(gdk.display.Display display)
   {
     GtkIconTheme* _cretval;
     _cretval = gtk_icon_theme_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!IconTheme(cast(GtkIconTheme*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.icon_theme.IconTheme)(cast(GtkIconTheme*)_cretval, No.Take);
     return _retval;
   }
 
@@ -129,11 +128,11 @@ class IconTheme : ObjectG
    * created for.
    * Returns: the display of icon_theme
    */
-  Display getDisplay()
+  gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gtk_icon_theme_get_display(cast(GtkIconTheme*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -245,7 +244,7 @@ class IconTheme : ObjectG
   {
     char* _cretval;
     _cretval = gtk_icon_theme_get_theme_name(cast(GtkIconTheme*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -256,7 +255,7 @@ class IconTheme : ObjectG
    *   gicon = a `GIcon`
    * Returns: %TRUE if self includes an icon for gicon
    */
-  bool hasGicon(Icon gicon)
+  bool hasGicon(gio.icon.Icon gicon)
   {
     bool _retval;
     _retval = gtk_icon_theme_has_gicon(cast(GtkIconTheme*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.Dup) : null);
@@ -292,11 +291,11 @@ class IconTheme : ObjectG
    * Returns: a `GtkIconPaintable` containing
    *   information about the icon. Unref with [gobject.object.ObjectG.unref]
    */
-  IconPaintable lookupByGicon(Icon icon, int size, int scale, TextDirection direction, IconLookupFlags flags)
+  gtk.icon_paintable.IconPaintable lookupByGicon(gio.icon.Icon icon, int size, int scale, gtk.types.TextDirection direction, gtk.types.IconLookupFlags flags)
   {
     GtkIconPaintable* _cretval;
     _cretval = gtk_icon_theme_lookup_by_gicon(cast(GtkIconTheme*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, size, scale, direction, flags);
-    auto _retval = ObjectG.getDObject!IconPaintable(cast(GtkIconPaintable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -323,7 +322,7 @@ class IconTheme : ObjectG
    * Returns: a `GtkIconPaintable` object
    *   containing the icon.
    */
-  IconPaintable lookupIcon(string iconName, string[] fallbacks, int size, int scale, TextDirection direction, IconLookupFlags flags)
+  gtk.icon_paintable.IconPaintable lookupIcon(string iconName, string[] fallbacks, int size, int scale, gtk.types.TextDirection direction, gtk.types.IconLookupFlags flags)
   {
     GtkIconPaintable* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
@@ -333,7 +332,7 @@ class IconTheme : ObjectG
     _tmpfallbacks ~= null;
     const(char*)* _fallbacks = _tmpfallbacks.ptr;
     _cretval = gtk_icon_theme_lookup_icon(cast(GtkIconTheme*)cPtr, _iconName, _fallbacks, size, scale, direction, flags);
-    auto _retval = ObjectG.getDObject!IconPaintable(cast(GtkIconPaintable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -411,8 +410,8 @@ class IconTheme : ObjectG
    * contents of the current icon theme.
    *   iconTheme = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(IconTheme iconTheme);
-  alias ChangedCallbackFunc = void function(IconTheme iconTheme);
+  alias ChangedCallbackDlg = void delegate(gtk.icon_theme.IconTheme iconTheme);
+  alias ChangedCallbackFunc = void function(gtk.icon_theme.IconTheme iconTheme);
 
   /**
    * Connect to Changed signal.
@@ -428,7 +427,7 @@ class IconTheme : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto iconTheme = getVal!IconTheme(_paramVals);
+      auto iconTheme = getVal!(gtk.icon_theme.IconTheme)(_paramVals);
       _dClosure.dlg(iconTheme);
     }
 

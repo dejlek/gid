@@ -1,14 +1,13 @@
 module gtk.tree_sortable;
 
 public import gtk.tree_sortable_iface_proxy;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.tree_iter;
 import gtk.tree_model;
-import gtk.tree_model_mixin;
 import gtk.types;
 
 /**
@@ -40,7 +39,7 @@ interface TreeSortable
    * Returns: %TRUE if the sort column is not one of the special sort
    *   column ids.
    */
-  bool getSortColumnId(out int sortColumnId, out SortType order);
+  bool getSortColumnId(out int sortColumnId, out gtk.types.SortType order);
 
   /**
    * Returns %TRUE if the model has a default sort function. This is used
@@ -62,7 +61,7 @@ interface TreeSortable
    * Params:
    *   sortFunc = The comparison function
    */
-  void setDefaultSortFunc(TreeIterCompareFunc sortFunc);
+  void setDefaultSortFunc(gtk.types.TreeIterCompareFunc sortFunc);
 
   /**
    * Sets the current sort column to be sort_column_id. The sortable will
@@ -76,7 +75,7 @@ interface TreeSortable
    *   sortColumnId = the sort column id to set
    *   order = The sort order of the column
    */
-  void setSortColumnId(int sortColumnId, SortType order);
+  void setSortColumnId(int sortColumnId, gtk.types.SortType order);
 
   /**
    * Sets the comparison function used when sorting to be sort_func. If the
@@ -86,7 +85,7 @@ interface TreeSortable
    *   sortColumnId = the sort column id to set the function for
    *   sortFunc = The comparison function
    */
-  void setSortFunc(int sortColumnId, TreeIterCompareFunc sortFunc);
+  void setSortFunc(int sortColumnId, gtk.types.TreeIterCompareFunc sortFunc);
 
   /**
    * Emits a `GtkTreeSortable::sort-column-changed` signal on sortable.
@@ -99,8 +98,8 @@ interface TreeSortable
    * the contents of sortable are resorted.
    *   treeSortable = the instance the signal is connected to
    */
-  alias SortColumnChangedCallbackDlg = void delegate(TreeSortable treeSortable);
-  alias SortColumnChangedCallbackFunc = void function(TreeSortable treeSortable);
+  alias SortColumnChangedCallbackDlg = void delegate(gtk.tree_sortable.TreeSortable treeSortable);
+  alias SortColumnChangedCallbackFunc = void function(gtk.tree_sortable.TreeSortable treeSortable);
 
   /**
    * Connect to SortColumnChanged signal.

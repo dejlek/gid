@@ -1,6 +1,6 @@
 module harfbuzz.buffer;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -10,7 +10,7 @@ import harfbuzz.types;
  * The main structure holding the input text and its properties before shaping,
  * and output glyphs and their information after shaping.
  */
-class Buffer : Boxed
+class Buffer : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -5,7 +5,7 @@ import gio.icon;
 import gio.icon_mixin;
 
 /// Proxy object for Gio.Icon interface when a GObject has no applicable D binding
-class IconIfaceProxy : IfaceProxy, Icon
+class IconIfaceProxy : IfaceProxy, gio.icon.Icon
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class IconIfaceProxy : IfaceProxy, Icon
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Icon);
+    return typeid(gio.icon.Icon);
   }
 
   mixin IconT!();

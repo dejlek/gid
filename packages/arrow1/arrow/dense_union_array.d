@@ -8,11 +8,11 @@ import arrow.int32_array;
 import arrow.int8_array;
 import arrow.types;
 import arrow.union_array;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class DenseUnionArray : UnionArray
+class DenseUnionArray : arrow.union_array.UnionArray
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -31,11 +31,11 @@ class DenseUnionArray : UnionArray
     return getType();
   }
 
-  this(Int8Array typeIds, Int32Array valueOffsets, Array[] fields)
+  this(arrow.int8_array.Int8Array typeIds, arrow.int32_array.Int32Array valueOffsets, arrow.array.Array[] fields)
   {
     GArrowDenseUnionArray* _cretval;
-    auto _fields = gListFromD!(Array)(fields);
-    scope(exit) containerFree!(GList*, Array, GidOwnership.None)(_fields);
+    auto _fields = gListFromD!(arrow.array.Array)(fields);
+    scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_fields);
     GError *_err;
     _cretval = garrow_dense_union_array_new(typeIds ? cast(GArrowInt8Array*)typeIds.cPtr(No.Dup) : null, valueOffsets ? cast(GArrowInt32Array*)valueOffsets.cPtr(No.Dup) : null, _fields, &_err);
     if (_err)
@@ -43,16 +43,16 @@ class DenseUnionArray : UnionArray
     this(_cretval, Yes.Take);
   }
 
-  static DenseUnionArray newDataType(DenseUnionDataType dataType, Int8Array typeIds, Int32Array valueOffsets, Array[] fields)
+  static arrow.dense_union_array.DenseUnionArray newDataType(arrow.dense_union_data_type.DenseUnionDataType dataType, arrow.int8_array.Int8Array typeIds, arrow.int32_array.Int32Array valueOffsets, arrow.array.Array[] fields)
   {
     GArrowDenseUnionArray* _cretval;
-    auto _fields = gListFromD!(Array)(fields);
-    scope(exit) containerFree!(GList*, Array, GidOwnership.None)(_fields);
+    auto _fields = gListFromD!(arrow.array.Array)(fields);
+    scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_fields);
     GError *_err;
     _cretval = garrow_dense_union_array_new_data_type(dataType ? cast(GArrowDenseUnionDataType*)dataType.cPtr(No.Dup) : null, typeIds ? cast(GArrowInt8Array*)typeIds.cPtr(No.Dup) : null, valueOffsets ? cast(GArrowInt32Array*)valueOffsets.cPtr(No.Dup) : null, _fields, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!DenseUnionArray(cast(GArrowDenseUnionArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.dense_union_array.DenseUnionArray)(cast(GArrowDenseUnionArray*)_cretval, Yes.Take);
     return _retval;
   }
 

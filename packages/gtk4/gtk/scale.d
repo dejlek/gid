@@ -1,6 +1,6 @@
 module gtk.scale;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -84,7 +84,7 @@ import pango.layout;
  * # Accessibility
  * `GtkScale` uses the %GTK_ACCESSIBLE_ROLE_SLIDER role.
  */
-class Scale : Range
+class Scale : gtk.range.Range
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -111,7 +111,7 @@ class Scale : Range
    *     the range of the scale, or %NULL to create a new adjustment.
    * Returns: a new `GtkScale`
    */
-  this(Orientation orientation, Adjustment adjustment)
+  this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment)
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
@@ -135,11 +135,11 @@ class Scale : Range
    *   step = step increment $(LPAREN)tick size$(RPAREN) used with keyboard shortcuts
    * Returns: a new `GtkScale`
    */
-  static Scale newWithRange(Orientation orientation, double min, double max, double step)
+  static gtk.scale.Scale newWithRange(gtk.types.Orientation orientation, double min, double max, double step)
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_new_with_range(orientation, min, max, step);
-    auto _retval = ObjectG.getDObject!Scale(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.scale.Scale)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -159,7 +159,7 @@ class Scale : Range
    *     the left of the scale, anything else to the right.
    *   markup = Text to be shown at the mark, using Pango markup
    */
-  void addMark(double value, PositionType position, string markup)
+  void addMark(double value, gtk.types.PositionType position, string markup)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_scale_add_mark(cast(GtkScale*)cPtr, value, position, _markup);
@@ -215,11 +215,11 @@ class Scale : Range
    *   for this scale, or %NULL if the propertyGtk.Scale:draw-value
    *   property is %FALSE.
    */
-  Layout getLayout()
+  pango.layout.Layout getLayout()
   {
     PangoLayout* _cretval;
     _cretval = gtk_scale_get_layout(cast(GtkScale*)cPtr);
-    auto _retval = ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -243,11 +243,11 @@ class Scale : Range
    * Gets the position in which the current value is displayed.
    * Returns: the position in which the current value is displayed
    */
-  PositionType getValuePos()
+  gtk.types.PositionType getValuePos()
   {
     GtkPositionType _cretval;
     _cretval = gtk_scale_get_value_pos(cast(GtkScale*)cPtr);
-    PositionType _retval = cast(PositionType)_cretval;
+    gtk.types.PositionType _retval = cast(gtk.types.PositionType)_cretval;
     return _retval;
   }
 
@@ -292,14 +292,14 @@ class Scale : Range
    * Params:
    *   func = function that formats the value
    */
-  void setFormatValueFunc(ScaleFormatValueFunc func)
+  void setFormatValueFunc(gtk.types.ScaleFormatValueFunc func)
   {
     extern(C) char* _funcCallback(GtkScale* scale, double value, void* userData)
     {
       string _dretval;
-      auto _dlg = cast(ScaleFormatValueFunc*)userData;
+      auto _dlg = cast(gtk.types.ScaleFormatValueFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!Scale(cast(void*)scale, No.Take), value);
+      _dretval = (*_dlg)(ObjectG.getDObject!(gtk.scale.Scale)(cast(void*)scale, No.Take), value);
       char* _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
@@ -329,7 +329,7 @@ class Scale : Range
    * Params:
    *   pos = the position in which the current value is displayed
    */
-  void setValuePos(PositionType pos)
+  void setValuePos(gtk.types.PositionType pos)
   {
     gtk_scale_set_value_pos(cast(GtkScale*)cPtr, pos);
   }

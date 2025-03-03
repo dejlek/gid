@@ -1,6 +1,6 @@
 module gsk.glshader_node;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import gobject.object;
 import graphene.rect;
@@ -13,7 +13,7 @@ import gsk.types;
 /**
  * A render node using a GL shader when drawing its children nodes.
  */
-class GLShaderNode : RenderNode
+class GLShaderNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -46,7 +46,7 @@ class GLShaderNode : RenderNode
    *     these will be rendered to textures and used as input.
    * Returns: A new `GskRenderNode`
    */
-  this(GLShader shader, Rect bounds, Bytes args, RenderNode[] children)
+  this(gsk.glshader.GLShader shader, graphene.rect.Rect bounds, glib.bytes.Bytes args, gsk.render_node.RenderNode[] children)
   {
     GskRenderNode* _cretval;
     uint _nChildren;
@@ -57,7 +57,7 @@ class GLShaderNode : RenderNode
     foreach (obj; children)
       _tmpchildren ~= obj ? cast(GskRenderNode*)obj.cPtr : null;
     GskRenderNode** _children = cast(GskRenderNode**)_tmpchildren.ptr;
-    _cretval = gsk_gl_shader_node_new(shader ? cast(GskGLShader*)shader.cPtr(No.Dup) : null, bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null, args ? cast(GBytes*)args.cPtr(No.Dup) : null, _children, _nChildren);
+    _cretval = gsk_gl_shader_node_new(shader ? cast(GskGLShader*)shader.cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null, args ? cast(GBytes*)args.cPtr(No.Dup) : null, _children, _nChildren);
     this(_cretval, Yes.Take);
   }
 
@@ -65,11 +65,11 @@ class GLShaderNode : RenderNode
    * Gets args for the node.
    * Returns: A `GBytes` with the uniform arguments
    */
-  Bytes getArgs()
+  glib.bytes.Bytes getArgs()
   {
     GBytes* _cretval;
-    _cretval = gsk_gl_shader_node_get_args(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, No.Take) : null;
+    _cretval = gsk_gl_shader_node_get_args(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -79,11 +79,11 @@ class GLShaderNode : RenderNode
    *   idx = the position of the child to get
    * Returns: the idx'th child of node
    */
-  RenderNode getChild(uint idx)
+  gsk.render_node.RenderNode getChild(uint idx)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_gl_shader_node_get_child(cast(GskRenderNode*)cPtr, idx);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    _cretval = gsk_gl_shader_node_get_child(cast(const(GskRenderNode)*)cPtr, idx);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class GLShaderNode : RenderNode
   uint getNChildren()
   {
     uint _retval;
-    _retval = gsk_gl_shader_node_get_n_children(cast(GskRenderNode*)cPtr);
+    _retval = gsk_gl_shader_node_get_n_children(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 
@@ -102,11 +102,11 @@ class GLShaderNode : RenderNode
    * Gets shader code for the node.
    * Returns: the `GskGLShader` shader
    */
-  GLShader getShader()
+  gsk.glshader.GLShader getShader()
   {
     GskGLShader* _cretval;
-    _cretval = gsk_gl_shader_node_get_shader(cast(GskRenderNode*)cPtr);
-    auto _retval = ObjectG.getDObject!GLShader(cast(GskGLShader*)_cretval, No.Take);
+    _cretval = gsk_gl_shader_node_get_shader(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = ObjectG.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, No.Take);
     return _retval;
   }
 }

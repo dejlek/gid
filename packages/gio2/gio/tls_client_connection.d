@@ -1,12 +1,11 @@
 module gio.tls_client_connection;
 
 public import gio.tls_client_connection_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.iostream;
 import gio.socket_connectable;
-import gio.socket_connectable_mixin;
 import gio.types;
 import glib.error;
 import gobject.object;
@@ -37,14 +36,14 @@ interface TlsClientConnection
    * Returns: the new
    *   #GTlsClientConnection, or %NULL on error
    */
-  static TlsClientConnection new_(IOStream baseIoStream, SocketConnectable serverIdentity)
+  static gio.tls_client_connection.TlsClientConnection new_(gio.iostream.IOStream baseIoStream, gio.socket_connectable.SocketConnectable serverIdentity)
   {
     GIOStream* _cretval;
     GError *_err;
     _cretval = g_tls_client_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream.cPtr(No.Dup) : null, serverIdentity ? cast(GSocketConnectable*)(cast(ObjectG)serverIdentity).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!TlsClientConnection(cast(GIOStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_client_connection.TlsClientConnection)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -78,7 +77,7 @@ interface TlsClientConnection
    * Params:
    *   source = a #GTlsClientConnection
    */
-  void copySessionState(TlsClientConnection source);
+  void copySessionState(gio.tls_client_connection.TlsClientConnection source);
 
   /**
    * Gets conn's expected server identity
@@ -86,7 +85,7 @@ interface TlsClientConnection
    *   expected server identity, or %NULL if the expected identity is not
    *   known.
    */
-  SocketConnectable getServerIdentity();
+  gio.socket_connectable.SocketConnectable getServerIdentity();
 
   /**
    * SSL 3.0 is no longer supported. See
@@ -106,7 +105,7 @@ interface TlsClientConnection
 
    * Deprecated: Do not attempt to ignore validation errors.
    */
-  TlsCertificateFlags getValidationFlags();
+  gio.types.TlsCertificateFlags getValidationFlags();
 
   /**
    * Sets conn's expected server identity, which is used both to tell
@@ -116,7 +115,7 @@ interface TlsClientConnection
    * Params:
    *   identity = a #GSocketConnectable describing the expected server identity
    */
-  void setServerIdentity(SocketConnectable identity);
+  void setServerIdentity(gio.socket_connectable.SocketConnectable identity);
 
   /**
    * Since GLib 2.42.1, SSL 3.0 is no longer supported.
@@ -146,5 +145,5 @@ interface TlsClientConnection
 
    * Deprecated: Do not attempt to ignore validation errors.
    */
-  void setValidationFlags(TlsCertificateFlags flags);
+  void setValidationFlags(gio.types.TlsCertificateFlags flags);
 }

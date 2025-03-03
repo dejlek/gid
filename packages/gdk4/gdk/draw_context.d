@@ -6,7 +6,7 @@ import gdk.c.types;
 import gdk.display;
 import gdk.surface;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
@@ -17,7 +17,7 @@ import gobject.object;
  * You will always interact with one of those subclasses.
  * A `GdkDrawContext` is always associated with a single toplevel surface.
  */
-class DrawContext : ObjectG
+class DrawContext : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -60,9 +60,9 @@ class DrawContext : ObjectG
    * Params:
    *   region = minimum region that should be drawn
    */
-  void beginFrame(Region region)
+  void beginFrame(cairo.region.Region region)
   {
-    gdk_draw_context_begin_frame(cast(GdkDrawContext*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
+    gdk_draw_context_begin_frame(cast(GdkDrawContext*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
   }
 
   /**
@@ -82,11 +82,11 @@ class DrawContext : ObjectG
    * Retrieves the `GdkDisplay` the context is created for
    * Returns: the `GdkDisplay`
    */
-  Display getDisplay()
+  gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gdk_draw_context_get_display(cast(GdkDrawContext*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -99,11 +99,11 @@ class DrawContext : ObjectG
    * and [gdk.draw_context.DrawContext.endFrame], %NULL will be returned.
    * Returns: a Cairo region
    */
-  Region getFrameRegion()
+  cairo.region.Region getFrameRegion()
   {
     const(cairo_region_t)* _cretval;
     _cretval = gdk_draw_context_get_frame_region(cast(GdkDrawContext*)cPtr);
-    auto _retval = _cretval ? new Region(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -111,11 +111,11 @@ class DrawContext : ObjectG
    * Retrieves the surface that context is bound to.
    * Returns: a `GdkSurface`
    */
-  Surface getSurface()
+  gdk.surface.Surface getSurface()
   {
     GdkSurface* _cretval;
     _cretval = gdk_draw_context_get_surface(cast(GdkDrawContext*)cPtr);
-    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 

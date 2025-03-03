@@ -1,7 +1,7 @@
 module gtk.drawing_area;
 
 import cairo.context;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -78,7 +78,7 @@ import gtk.widget;
  * If you need more complex control over your widget, you should consider
  * creating your own `GtkWidget` subclass.
  */
-class DrawingArea : Widget
+class DrawingArea : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -176,13 +176,13 @@ class DrawingArea : Widget
    *   drawFunc = callback that lets you draw
    *     the drawing area's contents
    */
-  void setDrawFunc(DrawingAreaDrawFunc drawFunc)
+  void setDrawFunc(gtk.types.DrawingAreaDrawFunc drawFunc)
   {
     extern(C) void _drawFuncCallback(GtkDrawingArea* drawingArea, cairo_t* cr, int width, int height, void* userData)
     {
-      auto _dlg = cast(DrawingAreaDrawFunc*)userData;
+      auto _dlg = cast(gtk.types.DrawingAreaDrawFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!DrawingArea(cast(void*)drawingArea, No.Take), cr ? new Context(cast(void*)cr, No.Take) : null, width, height);
+      (*_dlg)(ObjectG.getDObject!(gtk.drawing_area.DrawingArea)(cast(void*)drawingArea, No.Take), cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, width, height);
     }
     auto _drawFuncCB = drawFunc ? &_drawFuncCallback : null;
 
@@ -201,8 +201,8 @@ class DrawingArea : Widget
    *   height = the height of the viewport
    *   drawingArea = the instance the signal is connected to
    */
-  alias ResizeCallbackDlg = void delegate(int width, int height, DrawingArea drawingArea);
-  alias ResizeCallbackFunc = void function(int width, int height, DrawingArea drawingArea);
+  alias ResizeCallbackDlg = void delegate(int width, int height, gtk.drawing_area.DrawingArea drawingArea);
+  alias ResizeCallbackFunc = void function(int width, int height, gtk.drawing_area.DrawingArea drawingArea);
 
   /**
    * Connect to Resize signal.
@@ -218,9 +218,9 @@ class DrawingArea : Widget
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto drawingArea = getVal!DrawingArea(_paramVals);
-      auto width = getVal!int(&_paramVals[1]);
-      auto height = getVal!int(&_paramVals[2]);
+      auto drawingArea = getVal!(gtk.drawing_area.DrawingArea)(_paramVals);
+      auto width = getVal!(int)(&_paramVals[1]);
+      auto height = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(width, height, drawingArea);
     }
 

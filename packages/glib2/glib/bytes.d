@@ -1,6 +1,6 @@
 module glib.bytes;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -28,7 +28,7 @@ import gobject.boxed;
  * mutable array for a #GBytes sequence. To create an immutable #GBytes from
  * a mutable #GByteArray, use the [glib.byte_array.ByteArray.freeToBytes] function.
  */
-class Bytes : Boxed
+class Bytes : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -85,7 +85,7 @@ class Bytes : Boxed
    *   if bytes1 is greater than bytes2, and zero if bytes1 is equal to
    *   bytes2
    */
-  int compare(Bytes bytes2)
+  int compare(glib.bytes.Bytes bytes2)
   {
     int _retval;
     _retval = g_bytes_compare(cast(GBytes*)cPtr, bytes2 ? cast(GBytes*)bytes2.cPtr(No.Dup) : null);
@@ -101,7 +101,7 @@ class Bytes : Boxed
    *   bytes2 = a pointer to a #GBytes to compare with bytes1
    * Returns: %TRUE if the two keys match.
    */
-  bool equal(Bytes bytes2)
+  bool equal(glib.bytes.Bytes bytes2)
   {
     bool _retval;
     _retval = g_bytes_equal(cast(GBytes*)cPtr, bytes2 ? cast(GBytes*)bytes2.cPtr(No.Dup) : null);
@@ -199,11 +199,11 @@ class Bytes : Boxed
    *   length = length of subsection
    * Returns: a new #GBytes
    */
-  Bytes newFromBytes(size_t offset, size_t length)
+  glib.bytes.Bytes newFromBytes(size_t offset, size_t length)
   {
     GBytes* _cretval;
     _cretval = g_bytes_new_from_bytes(cast(GBytes*)cPtr, offset, length);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

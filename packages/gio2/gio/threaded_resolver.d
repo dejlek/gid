@@ -1,6 +1,6 @@
 module gio.threaded_resolver;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.resolver;
@@ -10,7 +10,7 @@ import gio.types;
  * #GThreadedResolver is an implementation of #GResolver which calls the libc
  * lookup functions in threads to allow them to run asynchronously.
  */
-class ThreadedResolver : Resolver
+class ThreadedResolver : gio.resolver.Resolver
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

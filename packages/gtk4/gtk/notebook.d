@@ -1,8 +1,7 @@
 module gtk.notebook;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
-import gio.list_model_mixin;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -93,7 +92,7 @@ import gtk.widget;
  * - %GTK_ACCESSIBLE_ROLE_TAB role for each tab
  * - %GTK_ACCESSIBLE_ROLE_TAB_PANEL for each page
  */
-class Notebook : Widget
+class Notebook : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -132,7 +131,7 @@ class Notebook : Widget
    * Returns: the index $(LPAREN)starting from 0$(RPAREN) of the appended
    *   page in the notebook, or -1 if function fails
    */
-  int appendPage(Widget child, Widget tabLabel)
+  int appendPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel)
   {
     int _retval;
     _retval = gtk_notebook_append_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null);
@@ -155,7 +154,7 @@ class Notebook : Widget
    * Returns: the index $(LPAREN)starting from 0$(RPAREN) of the appended
    *   page in the notebook, or -1 if function fails
    */
-  int appendPageMenu(Widget child, Widget tabLabel, Widget menuLabel)
+  int appendPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel, gtk.widget.Widget menuLabel)
   {
     int _retval;
     _retval = gtk_notebook_append_page_menu(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.Dup) : null);
@@ -171,7 +170,7 @@ class Notebook : Widget
    * Params:
    *   child = a child
    */
-  void detachTab(Widget child)
+  void detachTab(gtk.widget.Widget child)
   {
     gtk_notebook_detach_tab(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -185,11 +184,11 @@ class Notebook : Widget
    *   with the given pack_type or %NULL when this action
    *   widget has not been set
    */
-  Widget getActionWidget(PackType packType)
+  gtk.widget.Widget getActionWidget(gtk.types.PackType packType)
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_action_widget(cast(GtkNotebook*)cPtr, packType);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -215,7 +214,7 @@ class Notebook : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_notebook_get_group_name(cast(GtkNotebook*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -227,11 +226,11 @@ class Notebook : Widget
    *   if the notebook page does not have a menu label other than
    *   the default $(LPAREN)the tab label$(RPAREN).
    */
-  Widget getMenuLabel(Widget child)
+  gtk.widget.Widget getMenuLabel(gtk.widget.Widget child)
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_menu_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -245,11 +244,11 @@ class Notebook : Widget
    *   menu label, or the menu label widget is not a `GtkLabel`.
    *   The string is owned by the widget and must not be freed.
    */
-  string getMenuLabelText(Widget child)
+  string getMenuLabelText(gtk.widget.Widget child)
   {
     const(char)* _cretval;
     _cretval = gtk_notebook_get_menu_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -272,11 +271,11 @@ class Notebook : Widget
    * Returns: the child widget, or %NULL if page_num
    *   is out of bounds
    */
-  Widget getNthPage(int pageNum)
+  gtk.widget.Widget getNthPage(int pageNum)
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_nth_page(cast(GtkNotebook*)cPtr, pageNum);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -286,11 +285,11 @@ class Notebook : Widget
    *   child = a child of notebook
    * Returns: the `GtkNotebookPage` for child
    */
-  NotebookPage getPage(Widget child)
+  gtk.notebook_page.NotebookPage getPage(gtk.widget.Widget child)
   {
     GtkNotebookPage* _cretval;
     _cretval = gtk_notebook_get_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!NotebookPage(cast(GtkNotebookPage*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.notebook_page.NotebookPage)(cast(GtkNotebookPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -302,11 +301,11 @@ class Notebook : Widget
    * Returns: a
    *   `GListModel` for the notebook's children
    */
-  ListModel getPages()
+  gio.list_model.ListModel getPages()
   {
     GListModel* _cretval;
     _cretval = gtk_notebook_get_pages(cast(GtkNotebook*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -349,7 +348,7 @@ class Notebook : Widget
    *   child = a child `GtkWidget`
    * Returns: %TRUE if the tab is detachable.
    */
-  bool getTabDetachable(Widget child)
+  bool getTabDetachable(gtk.widget.Widget child)
   {
     bool _retval;
     _retval = gtk_notebook_get_tab_detachable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
@@ -364,11 +363,11 @@ class Notebook : Widget
    *   child = the page
    * Returns: the tab label
    */
-  Widget getTabLabel(Widget child)
+  gtk.widget.Widget getTabLabel(gtk.widget.Widget child)
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_tab_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -381,11 +380,11 @@ class Notebook : Widget
    *   the tab label widget is not a `GtkLabel`. The string is owned
    *   by the widget and must not be freed.
    */
-  string getTabLabelText(Widget child)
+  string getTabLabelText(gtk.widget.Widget child)
   {
     const(char)* _cretval;
     _cretval = gtk_notebook_get_tab_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -393,11 +392,11 @@ class Notebook : Widget
    * Gets the edge at which the tabs are drawn.
    * Returns: the edge at which the tabs are drawn
    */
-  PositionType getTabPos()
+  gtk.types.PositionType getTabPos()
   {
     GtkPositionType _cretval;
     _cretval = gtk_notebook_get_tab_pos(cast(GtkNotebook*)cPtr);
-    PositionType _retval = cast(PositionType)_cretval;
+    gtk.types.PositionType _retval = cast(gtk.types.PositionType)_cretval;
     return _retval;
   }
 
@@ -407,7 +406,7 @@ class Notebook : Widget
    *   child = a child `GtkWidget`
    * Returns: %TRUE if the tab is reorderable.
    */
-  bool getTabReorderable(Widget child)
+  bool getTabReorderable(gtk.widget.Widget child)
   {
     bool _retval;
     _retval = gtk_notebook_get_tab_reorderable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
@@ -425,7 +424,7 @@ class Notebook : Widget
    * Returns: the index $(LPAREN)starting from 0$(RPAREN) of the inserted
    *   page in the notebook, or -1 if function fails
    */
-  int insertPage(Widget child, Widget tabLabel, int position)
+  int insertPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel, int position)
   {
     int _retval;
     _retval = gtk_notebook_insert_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null, position);
@@ -450,7 +449,7 @@ class Notebook : Widget
    * Returns: the index $(LPAREN)starting from 0$(RPAREN) of the inserted
    *   page in the notebook
    */
-  int insertPageMenu(Widget child, Widget tabLabel, Widget menuLabel, int position)
+  int insertPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel, gtk.widget.Widget menuLabel, int position)
   {
     int _retval;
     _retval = gtk_notebook_insert_page_menu(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.Dup) : null, position);
@@ -474,7 +473,7 @@ class Notebook : Widget
    * Returns: the index of the page containing child, or
    *   -1 if child is not in the notebook
    */
-  int pageNum(Widget child)
+  int pageNum(gtk.widget.Widget child)
   {
     int _retval;
     _retval = gtk_notebook_page_num(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
@@ -508,7 +507,7 @@ class Notebook : Widget
    * Returns: the index $(LPAREN)starting from 0$(RPAREN) of the prepended
    *   page in the notebook, or -1 if function fails
    */
-  int prependPage(Widget child, Widget tabLabel)
+  int prependPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel)
   {
     int _retval;
     _retval = gtk_notebook_prepend_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null);
@@ -531,7 +530,7 @@ class Notebook : Widget
    * Returns: the index $(LPAREN)starting from 0$(RPAREN) of the prepended
    *   page in the notebook, or -1 if function fails
    */
-  int prependPageMenu(Widget child, Widget tabLabel, Widget menuLabel)
+  int prependPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel, gtk.widget.Widget menuLabel)
   {
     int _retval;
     _retval = gtk_notebook_prepend_page_menu(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.Dup) : null);
@@ -568,7 +567,7 @@ class Notebook : Widget
    *   child = the child to move
    *   position = the new position, or -1 to move to the end
    */
-  void reorderChild(Widget child, int position)
+  void reorderChild(gtk.widget.Widget child, int position)
   {
     gtk_notebook_reorder_child(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
   }
@@ -582,7 +581,7 @@ class Notebook : Widget
    *   widget = a `GtkWidget`
    *   packType = pack type of the action widget
    */
-  void setActionWidget(Widget widget, PackType packType)
+  void setActionWidget(gtk.widget.Widget widget, gtk.types.PackType packType)
   {
     gtk_notebook_set_action_widget(cast(GtkNotebook*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, packType);
   }
@@ -625,7 +624,7 @@ class Notebook : Widget
    *   child = the child widget
    *   menuLabel = the menu label, or %NULL for default
    */
-  void setMenuLabel(Widget child, Widget menuLabel)
+  void setMenuLabel(gtk.widget.Widget child, gtk.widget.Widget menuLabel)
   {
     gtk_notebook_set_menu_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.Dup) : null);
   }
@@ -636,7 +635,7 @@ class Notebook : Widget
    *   child = the child widget
    *   menuText = the label text
    */
-  void setMenuLabelText(Widget child, string menuText)
+  void setMenuLabelText(gtk.widget.Widget child, string menuText)
   {
     const(char)* _menuText = menuText.toCString(No.Alloc);
     gtk_notebook_set_menu_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _menuText);
@@ -716,7 +715,7 @@ class Notebook : Widget
    *   child = a child `GtkWidget`
    *   detachable = whether the tab is detachable or not
    */
-  void setTabDetachable(Widget child, bool detachable)
+  void setTabDetachable(gtk.widget.Widget child, bool detachable)
   {
     gtk_notebook_set_tab_detachable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, detachable);
   }
@@ -730,7 +729,7 @@ class Notebook : Widget
    *   tabLabel = the tab label widget to use, or %NULL
    *     for default tab label
    */
-  void setTabLabel(Widget child, Widget tabLabel)
+  void setTabLabel(gtk.widget.Widget child, gtk.widget.Widget tabLabel)
   {
     gtk_notebook_set_tab_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null);
   }
@@ -742,7 +741,7 @@ class Notebook : Widget
    *   child = the page
    *   tabText = the label text
    */
-  void setTabLabelText(Widget child, string tabText)
+  void setTabLabelText(gtk.widget.Widget child, string tabText)
   {
     const(char)* _tabText = tabText.toCString(No.Alloc);
     gtk_notebook_set_tab_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _tabText);
@@ -753,7 +752,7 @@ class Notebook : Widget
    * Params:
    *   pos = the edge to draw the tabs at
    */
-  void setTabPos(PositionType pos)
+  void setTabPos(gtk.types.PositionType pos)
   {
     gtk_notebook_set_tab_pos(cast(GtkNotebook*)cPtr, pos);
   }
@@ -765,13 +764,13 @@ class Notebook : Widget
    *   child = a child `GtkWidget`
    *   reorderable = whether the tab is reorderable or not
    */
-  void setTabReorderable(Widget child, bool reorderable)
+  void setTabReorderable(gtk.widget.Widget child, bool reorderable)
   {
     gtk_notebook_set_tab_reorderable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, reorderable);
   }
 
-  alias ChangeCurrentPageCallbackDlg = bool delegate(int object, Notebook notebook);
-  alias ChangeCurrentPageCallbackFunc = bool function(int object, Notebook notebook);
+  alias ChangeCurrentPageCallbackDlg = bool delegate(int object, gtk.notebook.Notebook notebook);
+  alias ChangeCurrentPageCallbackFunc = bool function(int object, gtk.notebook.Notebook notebook);
 
   /**
    * Connect to ChangeCurrentPage signal.
@@ -788,8 +787,8 @@ class Notebook : Widget
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto notebook = getVal!Notebook(_paramVals);
-      auto object = getVal!int(&_paramVals[1]);
+      auto notebook = getVal!(gtk.notebook.Notebook)(_paramVals);
+      auto object = getVal!(int)(&_paramVals[1]);
       _retval = _dClosure.dlg(object, notebook);
       setVal!bool(_returnValue, _retval);
     }
@@ -812,8 +811,8 @@ class Notebook : Widget
    * Returns: a `GtkNotebook` that
    *   page should be added to
    */
-  alias CreateWindowCallbackDlg = Notebook delegate(Widget page, Notebook notebook);
-  alias CreateWindowCallbackFunc = Notebook function(Widget page, Notebook notebook);
+  alias CreateWindowCallbackDlg = gtk.notebook.Notebook delegate(gtk.widget.Widget page, gtk.notebook.Notebook notebook);
+  alias CreateWindowCallbackFunc = gtk.notebook.Notebook function(gtk.widget.Widget page, gtk.notebook.Notebook notebook);
 
   /**
    * Connect to CreateWindow signal.
@@ -829,18 +828,18 @@ class Notebook : Widget
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto notebook = getVal!Notebook(_paramVals);
-      auto page = getVal!Widget(&_paramVals[1]);
+      auto notebook = getVal!(gtk.notebook.Notebook)(_paramVals);
+      auto page = getVal!(gtk.widget.Widget)(&_paramVals[1]);
       auto _retval = _dClosure.dlg(page, notebook);
-      setVal!Notebook(_returnValue, _retval);
+      setVal!gtk.notebook.Notebook(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("create-window", closure, after);
   }
 
-  alias FocusTabCallbackDlg = bool delegate(NotebookTab object, Notebook notebook);
-  alias FocusTabCallbackFunc = bool function(NotebookTab object, Notebook notebook);
+  alias FocusTabCallbackDlg = bool delegate(gtk.types.NotebookTab object, gtk.notebook.Notebook notebook);
+  alias FocusTabCallbackFunc = bool function(gtk.types.NotebookTab object, gtk.notebook.Notebook notebook);
 
   /**
    * Connect to FocusTab signal.
@@ -857,8 +856,8 @@ class Notebook : Widget
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto notebook = getVal!Notebook(_paramVals);
-      auto object = getVal!NotebookTab(&_paramVals[1]);
+      auto notebook = getVal!(gtk.notebook.Notebook)(_paramVals);
+      auto object = getVal!(gtk.types.NotebookTab)(&_paramVals[1]);
       _retval = _dClosure.dlg(object, notebook);
       setVal!bool(_returnValue, _retval);
     }
@@ -867,8 +866,8 @@ class Notebook : Widget
     return connectSignalClosure("focus-tab", closure, after);
   }
 
-  alias MoveFocusOutCallbackDlg = void delegate(DirectionType object, Notebook notebook);
-  alias MoveFocusOutCallbackFunc = void function(DirectionType object, Notebook notebook);
+  alias MoveFocusOutCallbackDlg = void delegate(gtk.types.DirectionType object, gtk.notebook.Notebook notebook);
+  alias MoveFocusOutCallbackFunc = void function(gtk.types.DirectionType object, gtk.notebook.Notebook notebook);
 
   /**
    * Connect to MoveFocusOut signal.
@@ -884,8 +883,8 @@ class Notebook : Widget
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto notebook = getVal!Notebook(_paramVals);
-      auto object = getVal!DirectionType(&_paramVals[1]);
+      auto notebook = getVal!(gtk.notebook.Notebook)(_paramVals);
+      auto object = getVal!(gtk.types.DirectionType)(&_paramVals[1]);
       _dClosure.dlg(object, notebook);
     }
 
@@ -901,8 +900,8 @@ class Notebook : Widget
    *   pageNum = the new page number for child
    *   notebook = the instance the signal is connected to
    */
-  alias PageAddedCallbackDlg = void delegate(Widget child, uint pageNum, Notebook notebook);
-  alias PageAddedCallbackFunc = void function(Widget child, uint pageNum, Notebook notebook);
+  alias PageAddedCallbackDlg = void delegate(gtk.widget.Widget child, uint pageNum, gtk.notebook.Notebook notebook);
+  alias PageAddedCallbackFunc = void function(gtk.widget.Widget child, uint pageNum, gtk.notebook.Notebook notebook);
 
   /**
    * Connect to PageAdded signal.
@@ -918,9 +917,9 @@ class Notebook : Widget
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto notebook = getVal!Notebook(_paramVals);
-      auto child = getVal!Widget(&_paramVals[1]);
-      auto pageNum = getVal!uint(&_paramVals[2]);
+      auto notebook = getVal!(gtk.notebook.Notebook)(_paramVals);
+      auto child = getVal!(gtk.widget.Widget)(&_paramVals[1]);
+      auto pageNum = getVal!(uint)(&_paramVals[2]);
       _dClosure.dlg(child, pageNum, notebook);
     }
 
@@ -936,8 +935,8 @@ class Notebook : Widget
    *   pageNum = the child page number
    *   notebook = the instance the signal is connected to
    */
-  alias PageRemovedCallbackDlg = void delegate(Widget child, uint pageNum, Notebook notebook);
-  alias PageRemovedCallbackFunc = void function(Widget child, uint pageNum, Notebook notebook);
+  alias PageRemovedCallbackDlg = void delegate(gtk.widget.Widget child, uint pageNum, gtk.notebook.Notebook notebook);
+  alias PageRemovedCallbackFunc = void function(gtk.widget.Widget child, uint pageNum, gtk.notebook.Notebook notebook);
 
   /**
    * Connect to PageRemoved signal.
@@ -953,9 +952,9 @@ class Notebook : Widget
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto notebook = getVal!Notebook(_paramVals);
-      auto child = getVal!Widget(&_paramVals[1]);
-      auto pageNum = getVal!uint(&_paramVals[2]);
+      auto notebook = getVal!(gtk.notebook.Notebook)(_paramVals);
+      auto child = getVal!(gtk.widget.Widget)(&_paramVals[1]);
+      auto pageNum = getVal!(uint)(&_paramVals[2]);
       _dClosure.dlg(child, pageNum, notebook);
     }
 
@@ -971,8 +970,8 @@ class Notebook : Widget
    *   pageNum = the new page number for child
    *   notebook = the instance the signal is connected to
    */
-  alias PageReorderedCallbackDlg = void delegate(Widget child, uint pageNum, Notebook notebook);
-  alias PageReorderedCallbackFunc = void function(Widget child, uint pageNum, Notebook notebook);
+  alias PageReorderedCallbackDlg = void delegate(gtk.widget.Widget child, uint pageNum, gtk.notebook.Notebook notebook);
+  alias PageReorderedCallbackFunc = void function(gtk.widget.Widget child, uint pageNum, gtk.notebook.Notebook notebook);
 
   /**
    * Connect to PageReordered signal.
@@ -988,9 +987,9 @@ class Notebook : Widget
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto notebook = getVal!Notebook(_paramVals);
-      auto child = getVal!Widget(&_paramVals[1]);
-      auto pageNum = getVal!uint(&_paramVals[2]);
+      auto notebook = getVal!(gtk.notebook.Notebook)(_paramVals);
+      auto child = getVal!(gtk.widget.Widget)(&_paramVals[1]);
+      auto pageNum = getVal!(uint)(&_paramVals[2]);
       _dClosure.dlg(child, pageNum, notebook);
     }
 
@@ -998,8 +997,8 @@ class Notebook : Widget
     return connectSignalClosure("page-reordered", closure, after);
   }
 
-  alias ReorderTabCallbackDlg = bool delegate(DirectionType object, bool p0, Notebook notebook);
-  alias ReorderTabCallbackFunc = bool function(DirectionType object, bool p0, Notebook notebook);
+  alias ReorderTabCallbackDlg = bool delegate(gtk.types.DirectionType object, bool p0, gtk.notebook.Notebook notebook);
+  alias ReorderTabCallbackFunc = bool function(gtk.types.DirectionType object, bool p0, gtk.notebook.Notebook notebook);
 
   /**
    * Connect to ReorderTab signal.
@@ -1016,9 +1015,9 @@ class Notebook : Widget
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto notebook = getVal!Notebook(_paramVals);
-      auto object = getVal!DirectionType(&_paramVals[1]);
-      auto p0 = getVal!bool(&_paramVals[2]);
+      auto notebook = getVal!(gtk.notebook.Notebook)(_paramVals);
+      auto object = getVal!(gtk.types.DirectionType)(&_paramVals[1]);
+      auto p0 = getVal!(bool)(&_paramVals[2]);
       _retval = _dClosure.dlg(object, p0, notebook);
       setVal!bool(_returnValue, _retval);
     }
@@ -1027,8 +1026,8 @@ class Notebook : Widget
     return connectSignalClosure("reorder-tab", closure, after);
   }
 
-  alias SelectPageCallbackDlg = bool delegate(bool object, Notebook notebook);
-  alias SelectPageCallbackFunc = bool function(bool object, Notebook notebook);
+  alias SelectPageCallbackDlg = bool delegate(bool object, gtk.notebook.Notebook notebook);
+  alias SelectPageCallbackFunc = bool function(bool object, gtk.notebook.Notebook notebook);
 
   /**
    * Connect to SelectPage signal.
@@ -1045,8 +1044,8 @@ class Notebook : Widget
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto notebook = getVal!Notebook(_paramVals);
-      auto object = getVal!bool(&_paramVals[1]);
+      auto notebook = getVal!(gtk.notebook.Notebook)(_paramVals);
+      auto object = getVal!(bool)(&_paramVals[1]);
       _retval = _dClosure.dlg(object, notebook);
       setVal!bool(_returnValue, _retval);
     }
@@ -1062,8 +1061,8 @@ class Notebook : Widget
    *   pageNum = the index of the page
    *   notebook = the instance the signal is connected to
    */
-  alias SwitchPageCallbackDlg = void delegate(Widget page, uint pageNum, Notebook notebook);
-  alias SwitchPageCallbackFunc = void function(Widget page, uint pageNum, Notebook notebook);
+  alias SwitchPageCallbackDlg = void delegate(gtk.widget.Widget page, uint pageNum, gtk.notebook.Notebook notebook);
+  alias SwitchPageCallbackFunc = void function(gtk.widget.Widget page, uint pageNum, gtk.notebook.Notebook notebook);
 
   /**
    * Connect to SwitchPage signal.
@@ -1079,9 +1078,9 @@ class Notebook : Widget
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto notebook = getVal!Notebook(_paramVals);
-      auto page = getVal!Widget(&_paramVals[1]);
-      auto pageNum = getVal!uint(&_paramVals[2]);
+      auto notebook = getVal!(gtk.notebook.Notebook)(_paramVals);
+      auto page = getVal!(gtk.widget.Widget)(&_paramVals[1]);
+      auto pageNum = getVal!(uint)(&_paramVals[2]);
       _dClosure.dlg(page, pageNum, notebook);
     }
 

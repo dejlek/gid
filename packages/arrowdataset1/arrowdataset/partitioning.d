@@ -3,10 +3,10 @@ module arrowdataset.partitioning;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class Partitioning : ObjectG
+class Partitioning : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -25,11 +25,11 @@ class Partitioning : ObjectG
     return getType();
   }
 
-  static Partitioning createDefault()
+  static arrowdataset.partitioning.Partitioning createDefault()
   {
     GADatasetPartitioning* _cretval;
     _cretval = gadataset_partitioning_create_default();
-    auto _retval = ObjectG.getDObject!Partitioning(cast(GADatasetPartitioning*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowdataset.partitioning.Partitioning)(cast(GADatasetPartitioning*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -37,7 +37,7 @@ class Partitioning : ObjectG
   {
     char* _cretval;
     _cretval = gadataset_partitioning_get_type_name(cast(GADatasetPartitioning*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

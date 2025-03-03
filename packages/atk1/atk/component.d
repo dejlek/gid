@@ -6,7 +6,7 @@ import atk.c.types;
 import atk.object;
 import atk.rectangle;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 
@@ -46,7 +46,7 @@ interface Component
    * Returns: %TRUE or %FALSE indicating whether the specified point is within
    *   the extent of the component or not
    */
-  bool contains(int x, int y, CoordType coordType);
+  bool contains(int x, int y, atk.types.CoordType coordType);
 
   /**
    * Returns the alpha value $(LPAREN)i.e. the opacity$(RPAREN) for this
@@ -68,13 +68,13 @@ interface Component
    *   coordType = specifies whether the coordinates are relative to the screen
    *     or to the components top level window
    */
-  void getExtents(out int x, out int y, out int width, out int height, CoordType coordType);
+  void getExtents(out int x, out int y, out int width, out int height, atk.types.CoordType coordType);
 
   /**
    * Gets the layer of the component.
    * Returns: an #AtkLayer which is the layer of the component
    */
-  Layer getLayer();
+  atk.types.Layer getLayer();
 
   /**
    * Gets the zorder of the component. The value G_MININT will be returned
@@ -98,7 +98,7 @@ interface Component
 
    * Deprecated: Since 2.12. Use [atk.component.Component.getExtents] instead.
    */
-  void getPosition(out int x, out int y, CoordType coordType);
+  void getPosition(out int x, out int y, atk.types.CoordType coordType);
 
   /**
    * Gets the size of the component in terms of width and height.
@@ -129,7 +129,7 @@ interface Component
    * Returns: a reference to the accessible
    *   child, if one exists
    */
-  ObjectAtk refAccessibleAtPoint(int x, int y, CoordType coordType);
+  atk.object.ObjectAtk refAccessibleAtPoint(int x, int y, atk.types.CoordType coordType);
 
   /**
    * Remove the handler specified by handler_id from the list of
@@ -153,7 +153,7 @@ interface Component
    *   type = specify where the object should be made visible.
    * Returns: whether scrolling was successful.
    */
-  bool scrollTo(ScrollType type);
+  bool scrollTo(atk.types.ScrollType type);
 
   /**
    * Move the top-left of component to a given position of the screen by
@@ -165,7 +165,7 @@ interface Component
    *   y = y-position where to scroll to
    * Returns: whether scrolling was successful.
    */
-  bool scrollToPoint(CoordType coords, int x, int y);
+  bool scrollToPoint(atk.types.CoordType coords, int x, int y);
 
   /**
    * Sets the extents of component.
@@ -178,7 +178,7 @@ interface Component
    *     or to the components top level window
    * Returns: %TRUE or %FALSE whether the extents were set or not
    */
-  bool setExtents(int x, int y, int width, int height, CoordType coordType);
+  bool setExtents(int x, int y, int width, int height, atk.types.CoordType coordType);
 
   /**
    * Sets the position of component.
@@ -191,7 +191,7 @@ interface Component
    *     or to the component's top level window
    * Returns: %TRUE or %FALSE whether or not the position was set or not
    */
-  bool setPosition(int x, int y, CoordType coordType);
+  bool setPosition(int x, int y, atk.types.CoordType coordType);
 
   /**
    * Set the size of the component in terms of width and height.
@@ -209,8 +209,8 @@ interface Component
    *   arg1 = The AtkRectangle giving the new position and size.
    *   component = the instance the signal is connected to
    */
-  alias BoundsChangedCallbackDlg = void delegate(Rectangle arg1, Component component);
-  alias BoundsChangedCallbackFunc = void function(Rectangle arg1, Component component);
+  alias BoundsChangedCallbackDlg = void delegate(atk.rectangle.Rectangle arg1, atk.component.Component component);
+  alias BoundsChangedCallbackFunc = void function(atk.rectangle.Rectangle arg1, atk.component.Component component);
 
   /**
    * Connect to BoundsChanged signal.

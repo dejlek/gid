@@ -5,10 +5,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.execute_node_options;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class AggregateNodeOptions : ExecuteNodeOptions
+class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,11 +27,11 @@ class AggregateNodeOptions : ExecuteNodeOptions
     return getType();
   }
 
-  this(Aggregation[] aggregations, string[] keys)
+  this(arrow.aggregation.Aggregation[] aggregations, string[] keys)
   {
     GArrowAggregateNodeOptions* _cretval;
-    auto _aggregations = gListFromD!(Aggregation)(aggregations);
-    scope(exit) containerFree!(GList*, Aggregation, GidOwnership.None)(_aggregations);
+    auto _aggregations = gListFromD!(arrow.aggregation.Aggregation)(aggregations);
+    scope(exit) containerFree!(GList*, arrow.aggregation.Aggregation, GidOwnership.None)(_aggregations);
     size_t _nKeys;
     if (keys)
       _nKeys = cast(size_t)keys.length;

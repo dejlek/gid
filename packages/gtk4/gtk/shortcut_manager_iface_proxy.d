@@ -5,7 +5,7 @@ import gtk.shortcut_manager;
 import gtk.shortcut_manager_mixin;
 
 /// Proxy object for Gtk.ShortcutManager interface when a GObject has no applicable D binding
-class ShortcutManagerIfaceProxy : IfaceProxy, ShortcutManager
+class ShortcutManagerIfaceProxy : IfaceProxy, gtk.shortcut_manager.ShortcutManager
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class ShortcutManagerIfaceProxy : IfaceProxy, ShortcutManager
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(ShortcutManager);
+    return typeid(gtk.shortcut_manager.ShortcutManager);
   }
 
   mixin ShortcutManagerT!();

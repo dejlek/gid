@@ -4,10 +4,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.function_options;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class Aggregation : ObjectG
+class Aggregation : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class Aggregation : ObjectG
     return getType();
   }
 
-  this(string function_, FunctionOptions options, string input, string output)
+  this(string function_, arrow.function_options.FunctionOptions options, string input, string output)
   {
     GArrowAggregation* _cretval;
     const(char)* _function_ = function_.toCString(No.Alloc);

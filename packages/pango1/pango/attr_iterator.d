@@ -1,6 +1,6 @@
 module pango.attr_iterator;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import pango.attribute;
 import pango.c.functions;
@@ -17,7 +17,7 @@ import pango.types;
  * style change, the range of the current style segment and the attributes
  * currently in effect can be queried.
  */
-class AttrIterator : Boxed
+class AttrIterator : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -47,11 +47,11 @@ class AttrIterator : Boxed
    *   `PangoAttrIterator`, which should be freed with
    *   [pango.attr_iterator.AttrIterator.destroy]
    */
-  AttrIterator copy()
+  pango.attr_iterator.AttrIterator copy()
   {
     PangoAttrIterator* _cretval;
     _cretval = pango_attr_iterator_copy(cast(PangoAttrIterator*)cPtr);
-    auto _retval = _cretval ? new AttrIterator(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.attr_iterator.AttrIterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -75,11 +75,11 @@ class AttrIterator : Boxed
    *   attribute of the given type, or %NULL if no attribute
    *   of that type applies to the current location.
    */
-  Attribute get(AttrType type)
+  pango.attribute.Attribute get(pango.types.AttrType type)
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_iterator_get(cast(PangoAttrIterator*)cPtr, type);
-    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -90,11 +90,11 @@ class AttrIterator : Boxed
    *   this value, call [pango.attribute.Attribute.destroy] on each
    *   value and [glib.slist.SList.free] on the list.
    */
-  Attribute[] getAttrs()
+  pango.attribute.Attribute[] getAttrs()
   {
     GSList* _cretval;
     _cretval = pango_attr_iterator_get_attrs(cast(PangoAttrIterator*)cPtr);
-    auto _retval = gSListToD!(Attribute, GidOwnership.Full)(cast(GSList*)_cretval);
+    auto _retval = gSListToD!(pango.attribute.Attribute, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
 
@@ -117,13 +117,13 @@ class AttrIterator : Boxed
    *     order to free this value, you must call
    *     [pango.attribute.Attribute.destroy] on each member.
    */
-  void getFont(FontDescription desc, out PgLanguage language, out Attribute[] extraAttrs)
+  void getFont(pango.font_description.FontDescription desc, out pango.language.PgLanguage language, out pango.attribute.Attribute[] extraAttrs)
   {
     PangoLanguage* _language;
     GSList* _extraAttrs;
     pango_attr_iterator_get_font(cast(PangoAttrIterator*)cPtr, desc ? cast(PangoFontDescription*)desc.cPtr(No.Dup) : null, &_language, &_extraAttrs);
-    language = new PgLanguage(cast(void*)_language, Yes.Take);
-    extraAttrs = gSListToD!(Attribute, GidOwnership.Full)(_extraAttrs);
+    language = new pango.language.PgLanguage(cast(void*)_language, Yes.Take);
+    extraAttrs = gSListToD!(pango.attribute.Attribute, GidOwnership.Full)(_extraAttrs);
   }
 
   /**

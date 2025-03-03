@@ -1,6 +1,6 @@
 module gtk.link_button;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -35,7 +35,7 @@ import gtk.types;
  * # Accessibility
  * `GtkLinkButton` uses the %GTK_ACCESSIBLE_ROLE_LINK role.
  */
-class LinkButton : Button
+class LinkButton : gtk.button.Button
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -75,13 +75,13 @@ class LinkButton : Button
    *   label = the text of the button
    * Returns: a new link button widget.
    */
-  static LinkButton newWithLabel(string uri, string label)
+  static gtk.link_button.LinkButton newWithLabel(string uri, string label)
   {
     GtkWidget* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_link_button_new_with_label(_uri, _label);
-    auto _retval = ObjectG.getDObject!LinkButton(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.link_button.LinkButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class LinkButton : Button
   {
     const(char)* _cretval;
     _cretval = gtk_link_button_get_uri(cast(GtkLinkButton*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -145,8 +145,8 @@ class LinkButton : Button
    *   linkButton = the instance the signal is connected to
    * Returns: %TRUE if the signal has been handled
    */
-  alias ActivateLinkCallbackDlg = bool delegate(LinkButton linkButton);
-  alias ActivateLinkCallbackFunc = bool function(LinkButton linkButton);
+  alias ActivateLinkCallbackDlg = bool delegate(gtk.link_button.LinkButton linkButton);
+  alias ActivateLinkCallbackFunc = bool function(gtk.link_button.LinkButton linkButton);
 
   /**
    * Connect to ActivateLink signal.
@@ -163,7 +163,7 @@ class LinkButton : Button
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto linkButton = getVal!LinkButton(_paramVals);
+      auto linkButton = getVal!(gtk.link_button.LinkButton)(_paramVals);
       _retval = _dClosure.dlg(linkButton);
       setVal!bool(_returnValue, _retval);
     }

@@ -4,9 +4,9 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.record_batch_reader;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 
-class StreamReader : RecordBatchReader
+class StreamReader : arrowflight.record_batch_reader.RecordBatchReader
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

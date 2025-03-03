@@ -1,6 +1,6 @@
 module gio.simple_proxy_resolver;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.proxy_resolver;
@@ -17,7 +17,7 @@ import gobject.object;
  * implementation, or it can be created and used manually, such as
  * with [gio.socket_client.SocketClient.setProxyResolver].
  */
-class SimpleProxyResolver : ObjectG, ProxyResolver
+class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyResolver
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -50,7 +50,7 @@ class SimpleProxyResolver : ObjectG, ProxyResolver
    *     to not use a proxy for.
    * Returns: a new #GSimpleProxyResolver
    */
-  static ProxyResolver new_(string defaultProxy, string[] ignoreHosts)
+  static gio.proxy_resolver.ProxyResolver new_(string defaultProxy, string[] ignoreHosts)
   {
     GProxyResolver* _cretval;
     const(char)* _defaultProxy = defaultProxy.toCString(No.Alloc);
@@ -60,7 +60,7 @@ class SimpleProxyResolver : ObjectG, ProxyResolver
     _tmpignoreHosts ~= null;
     char** _ignoreHosts = _tmpignoreHosts.ptr;
     _cretval = g_simple_proxy_resolver_new(_defaultProxy, _ignoreHosts);
-    auto _retval = ObjectG.getDObject!ProxyResolver(cast(GProxyResolver*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, Yes.Take);
     return _retval;
   }
 

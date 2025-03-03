@@ -5,13 +5,13 @@ import gdk.c.types;
 import gdk.event;
 import gdk.surface;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
  * An event related to a broken windowing system grab.
  */
-class GrabBrokenEvent : Event
+class GrabBrokenEvent : gdk.event.Event
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,11 +26,11 @@ class GrabBrokenEvent : Event
    * Extracts the grab surface from a grab broken event.
    * Returns: the grab surface of event
    */
-  Surface getGrabSurface()
+  gdk.surface.Surface getGrabSurface()
   {
     GdkSurface* _cretval;
     _cretval = gdk_grab_broken_event_get_grab_surface(cast(GdkEvent*)cPtr);
-    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 

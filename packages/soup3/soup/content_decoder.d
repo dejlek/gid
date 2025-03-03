@@ -1,6 +1,6 @@
 module soup.content_decoder;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -29,7 +29,7 @@ import soup.types;
  * Content-Encoding when sending a request body, or to pick specific
  * encoding types to support.$(RPAREN)
  */
-class ContentDecoder : ObjectG, SessionFeature
+class ContentDecoder : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

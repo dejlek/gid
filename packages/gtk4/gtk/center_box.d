@@ -1,6 +1,6 @@
 module gtk.center_box;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -39,7 +39,7 @@ import gtk.widget;
  * Until GTK 4.10, `GtkCenterBox` used the `GTK_ACCESSIBLE_ROLE_GROUP` role.
  * Starting from GTK 4.12, `GtkCenterBox` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
  */
-class CenterBox : Widget, Orientable
+class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -75,11 +75,11 @@ class CenterBox : Widget, Orientable
    * Gets the value set by [gtk.center_box.CenterBox.setBaselinePosition].
    * Returns: the baseline position
    */
-  BaselinePosition getBaselinePosition()
+  gtk.types.BaselinePosition getBaselinePosition()
   {
     GtkBaselinePosition _cretval;
     _cretval = gtk_center_box_get_baseline_position(cast(GtkCenterBox*)cPtr);
-    BaselinePosition _retval = cast(BaselinePosition)_cretval;
+    gtk.types.BaselinePosition _retval = cast(gtk.types.BaselinePosition)_cretval;
     return _retval;
   }
 
@@ -87,11 +87,11 @@ class CenterBox : Widget, Orientable
    * Gets the center widget, or %NULL if there is none.
    * Returns: the center widget.
    */
-  Widget getCenterWidget()
+  gtk.widget.Widget getCenterWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_box_get_center_widget(cast(GtkCenterBox*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -99,11 +99,11 @@ class CenterBox : Widget, Orientable
    * Gets the end widget, or %NULL if there is none.
    * Returns: the end widget.
    */
-  Widget getEndWidget()
+  gtk.widget.Widget getEndWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_box_get_end_widget(cast(GtkCenterBox*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -122,11 +122,11 @@ class CenterBox : Widget, Orientable
    * Gets the start widget, or %NULL if there is none.
    * Returns: the start widget.
    */
-  Widget getStartWidget()
+  gtk.widget.Widget getStartWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_box_get_start_widget(cast(GtkCenterBox*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class CenterBox : Widget, Orientable
    * Params:
    *   position = a `GtkBaselinePosition`
    */
-  void setBaselinePosition(BaselinePosition position)
+  void setBaselinePosition(gtk.types.BaselinePosition position)
   {
     gtk_center_box_set_baseline_position(cast(GtkCenterBox*)cPtr, position);
   }
@@ -151,7 +151,7 @@ class CenterBox : Widget, Orientable
    * Params:
    *   child = the new center widget
    */
-  void setCenterWidget(Widget child)
+  void setCenterWidget(gtk.widget.Widget child)
   {
     gtk_center_box_set_center_widget(cast(GtkCenterBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -162,7 +162,7 @@ class CenterBox : Widget, Orientable
    * Params:
    *   child = the new end widget
    */
-  void setEndWidget(Widget child)
+  void setEndWidget(gtk.widget.Widget child)
   {
     gtk_center_box_set_end_widget(cast(GtkCenterBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -188,7 +188,7 @@ class CenterBox : Widget, Orientable
    * Params:
    *   child = the new start widget
    */
-  void setStartWidget(Widget child)
+  void setStartWidget(gtk.widget.Widget child)
   {
     gtk_center_box_set_start_widget(cast(GtkCenterBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

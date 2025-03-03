@@ -1,6 +1,6 @@
 module gtk.sort_list_model;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -35,7 +35,7 @@ import gtk.types;
  * The [gtk.sort_list_model.SortListModel.Sorter] will then be used to sort items
  * inside their sections.
  */
-class SortListModel : ObjectG, ListModel, SectionModel
+class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -64,7 +64,7 @@ class SortListModel : ObjectG, ListModel, SectionModel
    *   sorter = the `GtkSorter` to sort model with,
    * Returns: a new `GtkSortListModel`
    */
-  this(ListModel model, Sorter sorter)
+  this(gio.list_model.ListModel model, gtk.sorter.Sorter sorter)
   {
     GtkSortListModel* _cretval;
     _cretval = gtk_sort_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, sorter ? cast(GtkSorter*)sorter.cPtr(Yes.Dup) : null);
@@ -87,11 +87,11 @@ class SortListModel : ObjectG, ListModel, SectionModel
    * Gets the model currently sorted or %NULL if none.
    * Returns: The model that gets sorted
    */
-  ListModel getModel()
+  gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
     _cretval = gtk_sort_list_model_get_model(cast(GtkSortListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -124,11 +124,11 @@ class SortListModel : ObjectG, ListModel, SectionModel
    * sections.
    * Returns: the sorter of #self
    */
-  Sorter getSectionSorter()
+  gtk.sorter.Sorter getSectionSorter()
   {
     GtkSorter* _cretval;
     _cretval = gtk_sort_list_model_get_section_sorter(cast(GtkSortListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!Sorter(cast(GtkSorter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -136,11 +136,11 @@ class SortListModel : ObjectG, ListModel, SectionModel
    * Gets the sorter that is used to sort self.
    * Returns: the sorter of #self
    */
-  Sorter getSorter()
+  gtk.sorter.Sorter getSorter()
   {
     GtkSorter* _cretval;
     _cretval = gtk_sort_list_model_get_sorter(cast(GtkSortListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!Sorter(cast(GtkSorter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class SortListModel : ObjectG, ListModel, SectionModel
    * Params:
    *   model = The model to be sorted
    */
-  void setModel(ListModel model)
+  void setModel(gio.list_model.ListModel model)
   {
     gtk_sort_list_model_set_model(cast(GtkSortListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
@@ -181,7 +181,7 @@ class SortListModel : ObjectG, ListModel, SectionModel
    * Params:
    *   sorter = the `GtkSorter` to sort model with
    */
-  void setSectionSorter(Sorter sorter)
+  void setSectionSorter(gtk.sorter.Sorter sorter)
   {
     gtk_sort_list_model_set_section_sorter(cast(GtkSortListModel*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.Dup) : null);
   }
@@ -191,7 +191,7 @@ class SortListModel : ObjectG, ListModel, SectionModel
    * Params:
    *   sorter = the `GtkSorter` to sort model with
    */
-  void setSorter(Sorter sorter)
+  void setSorter(gtk.sorter.Sorter sorter)
   {
     gtk_sort_list_model_set_sorter(cast(GtkSortListModel*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.Dup) : null);
   }

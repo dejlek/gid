@@ -7,10 +7,10 @@ import arrowdataset.c.types;
 import arrowdataset.hive_partitioning_options;
 import arrowdataset.key_value_partitioning;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class HivePartitioning : KeyValuePartitioning
+class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitioning
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,11 +29,11 @@ class HivePartitioning : KeyValuePartitioning
     return getType();
   }
 
-  this(Schema schema, Array[] dictionaries, HivePartitioningOptions options)
+  this(arrow.schema.Schema schema, arrow.array.Array[] dictionaries, arrowdataset.hive_partitioning_options.HivePartitioningOptions options)
   {
     GADatasetHivePartitioning* _cretval;
-    auto _dictionaries = gListFromD!(Array)(dictionaries);
-    scope(exit) containerFree!(GList*, Array, GidOwnership.None)(_dictionaries);
+    auto _dictionaries = gListFromD!(arrow.array.Array)(dictionaries);
+    scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_dictionaries);
     GError *_err;
     _cretval = gadataset_hive_partitioning_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, _dictionaries, options ? cast(GADatasetHivePartitioningOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -45,7 +45,7 @@ class HivePartitioning : KeyValuePartitioning
   {
     char* _cretval;
     _cretval = gadataset_hive_partitioning_get_null_fallback(cast(GADatasetHivePartitioning*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

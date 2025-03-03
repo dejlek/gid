@@ -1,6 +1,6 @@
 module pango.font_face;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import pango.c.functions;
 import pango.c.types;
@@ -12,7 +12,7 @@ import pango.types;
  * A `PangoFontFace` is used to represent a group of fonts with
  * the same family, slant, weight, and width, but varying sizes.
  */
-class FontFace : ObjectG
+class FontFace : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -40,11 +40,11 @@ class FontFace : ObjectG
    *   holding the description of the face. Use [pango.font_description.FontDescription.free]
    *   to free the result.
    */
-  FontDescription describe()
+  pango.font_description.FontDescription describe()
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_face_describe(cast(PangoFontFace*)cPtr);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -60,7 +60,7 @@ class FontFace : ObjectG
   {
     const(char)* _cretval;
     _cretval = pango_font_face_get_face_name(cast(PangoFontFace*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -68,11 +68,11 @@ class FontFace : ObjectG
    * Gets the `PangoFontFamily` that face belongs to.
    * Returns: the `PangoFontFamily`
    */
-  FontFamily getFamily()
+  pango.font_family.FontFamily getFamily()
   {
     PangoFontFamily* _cretval;
     _cretval = pango_font_face_get_family(cast(PangoFontFace*)cPtr);
-    auto _retval = ObjectG.getDObject!FontFamily(cast(PangoFontFamily*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
     return _retval;
   }
 

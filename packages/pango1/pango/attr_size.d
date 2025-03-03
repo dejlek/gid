@@ -1,6 +1,6 @@
 module pango.attr_size;
 
-import gid.global;
+import gid.gid;
 import pango.attribute;
 import pango.c.functions;
 import pango.c.types;
@@ -30,9 +30,9 @@ class AttrSize
     return cast(void*)&cInstance;
   }
 
-  @property Attribute attr()
+  @property pango.attribute.Attribute attr()
   {
-    return new Attribute(cast(PangoAttribute*)&(cast(PangoAttrSize*)cPtr).attr);
+    return new pango.attribute.Attribute(cast(PangoAttribute*)&(cast(PangoAttrSize*)cPtr).attr);
   }
 
   @property int size()
@@ -63,11 +63,11 @@ class AttrSize
    *   `PangoAttribute`, which should be freed with
    *   [pango.attribute.Attribute.destroy]
    */
-  static Attribute new_(int size)
+  static pango.attribute.Attribute new_(int size)
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_size_new(size);
-    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -79,11 +79,11 @@ class AttrSize
    *   `PangoAttribute`, which should be freed with
    *   [pango.attribute.Attribute.destroy]
    */
-  static Attribute newAbsolute(int size)
+  static pango.attribute.Attribute newAbsolute(int size)
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_size_new_absolute(size);
-    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

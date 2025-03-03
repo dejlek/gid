@@ -1,0 +1,119 @@
+module gtk.recent_action;
+
+import gid.gid;
+import gobject.object;
+import gtk.action;
+import gtk.buildable;
+import gtk.buildable_mixin;
+import gtk.c.functions;
+import gtk.c.types;
+import gtk.recent_chooser;
+import gtk.recent_chooser_mixin;
+import gtk.recent_manager;
+import gtk.types;
+
+/**
+ * A #GtkRecentAction represents a list of recently used files, which
+ * can be shown by widgets such as #GtkRecentChooserDialog or
+ * #GtkRecentChooserMenu.
+ * To construct a submenu showing recently used files, use a #GtkRecentAction
+ * as the action for a `<menuitem>`. To construct a menu toolbutton showing
+ * the recently used files in the popup menu, use a #GtkRecentAction as the
+ * action for a `<toolitem>` element.
+ */
+class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
+{
+
+  this(void* ptr, Flag!"Take" take = No.Take)
+  {
+    super(cast(void*)ptr, take);
+  }
+
+  static GType getType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_recent_action_get_type != &gidSymbolNotFound ? gtk_recent_action_get_type() : cast(GType)0;
+  }
+
+  override @property GType gType()
+  {
+    return getType();
+  }
+
+  mixin RecentChooserT!();
+
+  /**
+   * Creates a new #GtkRecentAction object. To add the action to
+   * a #GtkActionGroup and set the accelerator for the action,
+   * call [gtk.action_group.ActionGroup.addActionWithAccel].
+   * Params:
+   *   name = a unique name for the action
+   *   label = the label displayed in menu items and on buttons,
+   *     or %NULL
+   *   tooltip = a tooltip for the action, or %NULL
+   *   stockId = the stock icon to display in widgets representing
+   *     the action, or %NULL
+   * Returns: the newly created #GtkRecentAction.
+   */
+  this(string name, string label, string tooltip, string stockId)
+  {
+    GtkAction* _cretval;
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _tooltip = tooltip.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
+    _cretval = gtk_recent_action_new(_name, _label, _tooltip, _stockId);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+   * Creates a new #GtkRecentAction object. To add the action to
+   * a #GtkActionGroup and set the accelerator for the action,
+   * call [gtk.action_group.ActionGroup.addActionWithAccel].
+   * Params:
+   *   name = a unique name for the action
+   *   label = the label displayed in menu items and on buttons,
+   *     or %NULL
+   *   tooltip = a tooltip for the action, or %NULL
+   *   stockId = the stock icon to display in widgets representing
+   *     the action, or %NULL
+   *   manager = a #GtkRecentManager, or %NULL for using the default
+   *     #GtkRecentManager
+   * Returns: the newly created #GtkRecentAction
+   */
+  static gtk.recent_action.RecentAction newForManager(string name, string label, string tooltip, string stockId, gtk.recent_manager.RecentManager manager)
+  {
+    GtkAction* _cretval;
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _tooltip = tooltip.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
+    _cretval = gtk_recent_action_new_for_manager(_name, _label, _tooltip, _stockId, manager ? cast(GtkRecentManager*)manager.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.recent_action.RecentAction)(cast(GtkAction*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+   * Returns the value set by [gtk.recent_chooser_menu.RecentChooserMenu.setShowNumbers].
+   * Returns: %TRUE if numbers should be shown.
+   */
+  bool getShowNumbers()
+  {
+    bool _retval;
+    _retval = gtk_recent_action_get_show_numbers(cast(GtkRecentAction*)cPtr);
+    return _retval;
+  }
+
+  /**
+   * Sets whether a number should be added to the items shown by the
+   * widgets representing action. The numbers are shown to provide
+   * a unique character for a mnemonic to be used inside the menu item's
+   * label. Only the first ten items get a number to avoid clashes.
+   * Params:
+   *   showNumbers = %TRUE if the shown items should be numbered
+   */
+  void setShowNumbers(bool showNumbers)
+  {
+    gtk_recent_action_set_show_numbers(cast(GtkRecentAction*)cPtr, showNumbers);
+  }
+}

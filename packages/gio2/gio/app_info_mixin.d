@@ -1,17 +1,14 @@
 module gio.app_info_mixin;
 
 public import gio.app_info_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.app_launch_context;
 public import gio.async_result;
-public import gio.async_result_mixin;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
 public import gio.file;
-public import gio.file_mixin;
 public import gio.icon;
-public import gio.icon_mixin;
 public import gio.types;
 public import glib.error;
 public import gobject.object;
@@ -139,11 +136,11 @@ template AppInfoT()
    * Creates a duplicate of a #GAppInfo.
    * Returns: a duplicate of appinfo.
    */
-  override AppInfo dup()
+  override gio.app_info.AppInfo dup()
   {
     GAppInfo* _cretval;
     _cretval = g_app_info_dup(cast(GAppInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -156,7 +153,7 @@ template AppInfoT()
    *   appinfo2 = the second #GAppInfo.
    * Returns: %TRUE if appinfo1 is equal to appinfo2. %FALSE otherwise.
    */
-  override bool equal(AppInfo appinfo2)
+  override bool equal(gio.app_info.AppInfo appinfo2)
   {
     bool _retval;
     _retval = g_app_info_equal(cast(GAppInfo*)cPtr, appinfo2 ? cast(GAppInfo*)(cast(ObjectG)appinfo2).cPtr(No.Dup) : null);
@@ -173,7 +170,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_commandline(cast(GAppInfo*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -186,7 +183,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_description(cast(GAppInfo*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -200,7 +197,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_display_name(cast(GAppInfo*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -216,7 +213,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_executable(cast(GAppInfo*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -225,11 +222,11 @@ template AppInfoT()
    * Returns: the default #GIcon for appinfo or %NULL
    *   if there is no default icon.
    */
-  override Icon getIcon()
+  override gio.icon.Icon getIcon()
   {
     GIcon* _cretval;
     _cretval = g_app_info_get_icon(cast(GAppInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -246,7 +243,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_id(cast(GAppInfo*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -258,7 +255,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_name(cast(GAppInfo*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -317,11 +314,11 @@ template AppInfoT()
    *   context = a #GAppLaunchContext or %NULL
    * Returns: %TRUE on successful launch, %FALSE otherwise.
    */
-  override bool launch(File[] files, AppLaunchContext context)
+  override bool launch(gio.file.File[] files, gio.app_launch_context.AppLaunchContext context)
   {
     bool _retval;
-    auto _files = gListFromD!(File)(files);
-    scope(exit) containerFree!(GList*, File, GidOwnership.None)(_files);
+    auto _files = gListFromD!(gio.file.File)(files);
+    scope(exit) containerFree!(GList*, gio.file.File, GidOwnership.None)(_files);
     GError *_err;
     _retval = g_app_info_launch(cast(GAppInfo*)cPtr, _files, context ? cast(GAppLaunchContext*)context.cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -345,7 +342,7 @@ template AppInfoT()
    *   context = a #GAppLaunchContext or %NULL
    * Returns: %TRUE on successful launch, %FALSE otherwise.
    */
-  override bool launchUris(string[] uris, AppLaunchContext context)
+  override bool launchUris(string[] uris, gio.app_launch_context.AppLaunchContext context)
   {
     bool _retval;
     auto _uris = gListFromD!(string)(uris);
@@ -369,14 +366,14 @@ template AppInfoT()
    *   cancellable = a #GCancellable
    *   callback = a #GAsyncReadyCallback to call when the request is done
    */
-  override void launchUrisAsync(string[] uris, AppLaunchContext context, Cancellable cancellable, AsyncReadyCallback callback)
+  override void launchUrisAsync(string[] uris, gio.app_launch_context.AppLaunchContext context, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -392,7 +389,7 @@ template AppInfoT()
    *   result = a #GAsyncResult
    * Returns: %TRUE on successful launch, %FALSE otherwise.
    */
-  override bool launchUrisFinish(AsyncResult result)
+  override bool launchUrisFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;

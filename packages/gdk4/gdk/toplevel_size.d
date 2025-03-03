@@ -3,7 +3,7 @@ module gdk.toplevel_size;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.global;
+import gid.gid;
 
 /**
  * The `GdkToplevelSize` struct contains information that is useful

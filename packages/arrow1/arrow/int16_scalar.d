@@ -4,9 +4,9 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class Int16Scalar : Scalar
+class Int16Scalar : arrow.scalar.Scalar
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

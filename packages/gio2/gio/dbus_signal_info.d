@@ -1,6 +1,6 @@
 module gio.dbus_signal_info;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -9,7 +9,7 @@ import gobject.boxed;
 /**
  * Information about a signal on a D-Bus interface.
  */
-class DBusSignalInfo : Boxed
+class DBusSignalInfo : gobject.boxed.Boxed
 {
 
   this()

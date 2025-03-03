@@ -5,7 +5,7 @@ import gio.seekable;
 import gio.seekable_mixin;
 
 /// Proxy object for Gio.Seekable interface when a GObject has no applicable D binding
-class SeekableIfaceProxy : IfaceProxy, Seekable
+class SeekableIfaceProxy : IfaceProxy, gio.seekable.Seekable
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class SeekableIfaceProxy : IfaceProxy, Seekable
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Seekable);
+    return typeid(gio.seekable.Seekable);
   }
 
   mixin SeekableT!();

@@ -2,7 +2,7 @@ module gtk.widget_paintable;
 
 import gdk.paintable;
 import gdk.paintable_mixin;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -28,7 +28,7 @@ import gtk.widget;
  * property@Gtk.Picture:can-shrink property is set to %TRUE or you might
  * end up with an infinitely growing widget.
  */
-class WidgetPaintable : ObjectG, Paintable
+class WidgetPaintable : gobject.object.ObjectG, gdk.paintable.Paintable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -55,7 +55,7 @@ class WidgetPaintable : ObjectG, Paintable
    *   widget = a `GtkWidget`
    * Returns: a new `GtkWidgetPaintable`
    */
-  this(Widget widget)
+  this(gtk.widget.Widget widget)
   {
     GdkPaintable* _cretval;
     _cretval = gtk_widget_paintable_new(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
@@ -66,11 +66,11 @@ class WidgetPaintable : ObjectG, Paintable
    * Returns the widget that is observed or %NULL if none.
    * Returns: the observed widget.
    */
-  Widget getWidget()
+  gtk.widget.Widget getWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_paintable_get_widget(cast(GtkWidgetPaintable*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class WidgetPaintable : ObjectG, Paintable
    * Params:
    *   widget = the widget to observe
    */
-  void setWidget(Widget widget)
+  void setWidget(gtk.widget.Widget widget)
   {
     gtk_widget_paintable_set_widget(cast(GtkWidgetPaintable*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }

@@ -1,9 +1,8 @@
 module gtksource.hover_provider;
 
 public import gtksource.hover_provider_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.types;
 import glib.error;
@@ -33,7 +32,7 @@ interface HoverProvider
     return cast(void function())gtk_source_hover_provider_get_type != &gidSymbolNotFound ? gtk_source_hover_provider_get_type() : cast(GType)0;
   }
 
-  void populateAsync(HoverContext context, HoverDisplay display, Cancellable cancellable, AsyncReadyCallback callback);
+  void populateAsync(gtksource.hover_context.HoverContext context, gtksource.hover_display.HoverDisplay display, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
-  bool populateFinish(AsyncResult result);
+  bool populateFinish(gio.async_result.AsyncResult result);
 }

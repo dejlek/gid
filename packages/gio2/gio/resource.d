@@ -1,6 +1,6 @@
 module gio.resource;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.input_stream;
@@ -150,7 +150,7 @@ import gobject.object;
  * this is not strictly required.  It is possible to overlay the location of a
  * single resource with an individual file.
  */
-class Resource : Boxed
+class Resource : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -188,14 +188,14 @@ class Resource : Boxed
    *   data = A #GBytes
    * Returns: a new #GResource, or %NULL on error
    */
-  static Resource newFromData(Bytes data)
+  static gio.resource.Resource newFromData(glib.bytes.Bytes data)
   {
     GResource* _cretval;
     GError *_err;
     _cretval = g_resource_new_from_data(data ? cast(GBytes*)data.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Resource(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gio.resource.Resource(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class Resource : Boxed
    *   lookupFlags = A #GResourceLookupFlags
    * Returns: an array of constant strings
    */
-  string[] enumerateChildren(string path, ResourceLookupFlags lookupFlags)
+  string[] enumerateChildren(string path, gio.types.ResourceLookupFlags lookupFlags)
   {
     char** _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -246,7 +246,7 @@ class Resource : Boxed
    *     or %NULL if the length is not needed
    * Returns: %TRUE if the file was found. %FALSE if there were errors
    */
-  bool getInfo(string path, ResourceLookupFlags lookupFlags, out size_t size, out uint flags)
+  bool getInfo(string path, gio.types.ResourceLookupFlags lookupFlags, out size_t size, out uint flags)
   {
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -275,7 +275,7 @@ class Resource : Boxed
    * Returns: #GBytes or %NULL on error.
    *   Free the returned object with [glib.bytes.Bytes.unref]
    */
-  Bytes lookupData(string path, ResourceLookupFlags lookupFlags)
+  glib.bytes.Bytes lookupData(string path, gio.types.ResourceLookupFlags lookupFlags)
   {
     GBytes* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -283,7 +283,7 @@ class Resource : Boxed
     _cretval = g_resource_lookup_data(cast(GResource*)cPtr, _path, lookupFlags, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -297,7 +297,7 @@ class Resource : Boxed
    * Returns: #GInputStream or %NULL on error.
    *   Free the returned object with [gobject.object.ObjectG.unref]
    */
-  InputStream openStream(string path, ResourceLookupFlags lookupFlags)
+  gio.input_stream.InputStream openStream(string path, gio.types.ResourceLookupFlags lookupFlags)
   {
     GInputStream* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -305,7 +305,7 @@ class Resource : Boxed
     _cretval = g_resource_open_stream(cast(GResource*)cPtr, _path, lookupFlags, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -322,7 +322,7 @@ class Resource : Boxed
    *   filename = the path of a filename to load, in the GLib filename encoding
    * Returns: a new #GResource, or %NULL on error
    */
-  static Resource load(string filename)
+  static gio.resource.Resource load(string filename)
   {
     GResource* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -330,7 +330,7 @@ class Resource : Boxed
     _cretval = g_resource_load(_filename, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Resource(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gio.resource.Resource(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

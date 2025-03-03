@@ -4,7 +4,7 @@ public import atk.streamable_content_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;
 public import atk.types;
-public import gid.global;
+public import gid.gid;
 public import glib.iochannel;
 
 /**
@@ -39,7 +39,7 @@ template StreamableContentT()
   {
     const(char)* _cretval;
     _cretval = atk_streamable_content_get_mime_type(cast(AtkStreamableContent*)cPtr, i);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -61,12 +61,12 @@ template StreamableContentT()
    * Returns: A #GIOChannel which contains the content in the
    *   specified mime type.
    */
-  override IOChannel getStream(string mimeType)
+  override glib.iochannel.IOChannel getStream(string mimeType)
   {
     GIOChannel* _cretval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
     _cretval = atk_streamable_content_get_stream(cast(AtkStreamableContent*)cPtr, _mimeType);
-    auto _retval = _cretval ? new IOChannel(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.iochannel.IOChannel(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -89,7 +89,7 @@ template StreamableContentT()
     const(char)* _cretval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
     _cretval = atk_streamable_content_get_uri(cast(AtkStreamableContent*)cPtr, _mimeType);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

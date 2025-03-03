@@ -1,17 +1,14 @@
 module gio.app_info;
 
 public import gio.app_info_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.app_launch_context;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
 import gio.file;
-import gio.file_mixin;
 import gio.icon;
-import gio.icon_mixin;
 import gio.types;
 import glib.error;
 import gobject.object;
@@ -83,7 +80,7 @@ interface AppInfo
    *   flags = flags that can specify details of the created #GAppInfo
    * Returns: new #GAppInfo for given command.
    */
-  static AppInfo createFromCommandline(string commandline, string applicationName, AppInfoCreateFlags flags)
+  static gio.app_info.AppInfo createFromCommandline(string commandline, string applicationName, gio.types.AppInfoCreateFlags flags)
   {
     GAppInfo* _cretval;
     const(char)* _commandline = commandline.toCString(No.Alloc);
@@ -92,7 +89,7 @@ interface AppInfo
     _cretval = g_app_info_create_from_commandline(_commandline, _applicationName, flags, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -106,11 +103,11 @@ interface AppInfo
    * the `Hidden` key set.
    * Returns: a newly allocated #GList of references to #GAppInfos.
    */
-  static AppInfo[] getAll()
+  static gio.app_info.AppInfo[] getAll()
   {
     GList* _cretval;
     _cretval = g_app_info_get_all();
-    auto _retval = gListToD!(AppInfo, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gio.app_info.AppInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -124,12 +121,12 @@ interface AppInfo
    * Returns: #GList of #GAppInfos
    *   for given content_type or %NULL on error.
    */
-  static AppInfo[] getAllForType(string contentType)
+  static gio.app_info.AppInfo[] getAllForType(string contentType)
   {
     GList* _cretval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = g_app_info_get_all_for_type(_contentType);
-    auto _retval = gListToD!(AppInfo, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gio.app_info.AppInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -142,12 +139,12 @@ interface AppInfo
    * Returns: #GAppInfo for given content_type or
    *   %NULL on error.
    */
-  static AppInfo getDefaultForType(string contentType, bool mustSupportUris)
+  static gio.app_info.AppInfo getDefaultForType(string contentType, bool mustSupportUris)
   {
     GAppInfo* _cretval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = g_app_info_get_default_for_type(_contentType, mustSupportUris);
-    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -160,14 +157,14 @@ interface AppInfo
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is done
    */
-  static void getDefaultForTypeAsync(string contentType, bool mustSupportUris, Cancellable cancellable, AsyncReadyCallback callback)
+  static void getDefaultForTypeAsync(string contentType, bool mustSupportUris, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -185,14 +182,14 @@ interface AppInfo
    * Returns: #GAppInfo for given content_type or
    *   %NULL on error.
    */
-  static AppInfo getDefaultForTypeFinish(AsyncResult result)
+  static gio.app_info.AppInfo getDefaultForTypeFinish(gio.async_result.AsyncResult result)
   {
     GAppInfo* _cretval;
     GError *_err;
     _cretval = g_app_info_get_default_for_type_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -206,12 +203,12 @@ interface AppInfo
    * Returns: #GAppInfo for given uri_scheme or
    *   %NULL on error.
    */
-  static AppInfo getDefaultForUriScheme(string uriScheme)
+  static gio.app_info.AppInfo getDefaultForUriScheme(string uriScheme)
   {
     GAppInfo* _cretval;
     const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
     _cretval = g_app_info_get_default_for_uri_scheme(_uriScheme);
-    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -225,14 +222,14 @@ interface AppInfo
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback to call when the request is done
    */
-  static void getDefaultForUriSchemeAsync(string uriScheme, Cancellable cancellable, AsyncReadyCallback callback)
+  static void getDefaultForUriSchemeAsync(string uriScheme, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -250,14 +247,14 @@ interface AppInfo
    * Returns: #GAppInfo for given uri_scheme or
    *   %NULL on error.
    */
-  static AppInfo getDefaultForUriSchemeFinish(AsyncResult result)
+  static gio.app_info.AppInfo getDefaultForUriSchemeFinish(gio.async_result.AsyncResult result)
   {
     GAppInfo* _cretval;
     GError *_err;
     _cretval = g_app_info_get_default_for_uri_scheme_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!AppInfo(cast(GAppInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -270,12 +267,12 @@ interface AppInfo
    * Returns: #GList of #GAppInfos
    *   for given content_type or %NULL on error.
    */
-  static AppInfo[] getFallbackForType(string contentType)
+  static gio.app_info.AppInfo[] getFallbackForType(string contentType)
   {
     GList* _cretval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = g_app_info_get_fallback_for_type(_contentType);
-    auto _retval = gListToD!(AppInfo, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gio.app_info.AppInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -291,12 +288,12 @@ interface AppInfo
    * Returns: #GList of #GAppInfos
    *   for given content_type or %NULL on error.
    */
-  static AppInfo[] getRecommendedForType(string contentType)
+  static gio.app_info.AppInfo[] getRecommendedForType(string contentType)
   {
     GList* _cretval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = g_app_info_get_recommended_for_type(_contentType);
-    auto _retval = gListToD!(AppInfo, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gio.app_info.AppInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -313,7 +310,7 @@ interface AppInfo
    *   context = an optional #GAppLaunchContext
    * Returns: %TRUE on success, %FALSE on error.
    */
-  static bool launchDefaultForUri(string uri, AppLaunchContext context)
+  static bool launchDefaultForUri(string uri, gio.app_launch_context.AppLaunchContext context)
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -339,14 +336,14 @@ interface AppInfo
    *   cancellable = a #GCancellable
    *   callback = a #GAsyncReadyCallback to call when the request is done
    */
-  static void launchDefaultForUriAsync(string uri, AppLaunchContext context, Cancellable cancellable, AsyncReadyCallback callback)
+  static void launchDefaultForUriAsync(string uri, gio.app_launch_context.AppLaunchContext context, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -361,7 +358,7 @@ interface AppInfo
    *   result = a #GAsyncResult
    * Returns: %TRUE if the launch was successful, %FALSE if error is set
    */
-  static bool launchDefaultForUriFinish(AsyncResult result)
+  static bool launchDefaultForUriFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -422,7 +419,7 @@ interface AppInfo
    * Creates a duplicate of a #GAppInfo.
    * Returns: a duplicate of appinfo.
    */
-  AppInfo dup();
+  gio.app_info.AppInfo dup();
 
   /**
    * Checks if two #GAppInfos are equal.
@@ -433,7 +430,7 @@ interface AppInfo
    *   appinfo2 = the second #GAppInfo.
    * Returns: %TRUE if appinfo1 is equal to appinfo2. %FALSE otherwise.
    */
-  bool equal(AppInfo appinfo2);
+  bool equal(gio.app_info.AppInfo appinfo2);
 
   /**
    * Gets the commandline with which the application will be
@@ -473,7 +470,7 @@ interface AppInfo
    * Returns: the default #GIcon for appinfo or %NULL
    *   if there is no default icon.
    */
-  Icon getIcon();
+  gio.icon.Icon getIcon();
 
   /**
    * Gets the ID of an application. An id is a string that
@@ -531,7 +528,7 @@ interface AppInfo
    *   context = a #GAppLaunchContext or %NULL
    * Returns: %TRUE on successful launch, %FALSE otherwise.
    */
-  bool launch(File[] files, AppLaunchContext context);
+  bool launch(gio.file.File[] files, gio.app_launch_context.AppLaunchContext context);
 
   /**
    * Launches the application. This passes the uris to the launched application
@@ -549,7 +546,7 @@ interface AppInfo
    *   context = a #GAppLaunchContext or %NULL
    * Returns: %TRUE on successful launch, %FALSE otherwise.
    */
-  bool launchUris(string[] uris, AppLaunchContext context);
+  bool launchUris(string[] uris, gio.app_launch_context.AppLaunchContext context);
 
   /**
    * Async version of [gio.app_info.AppInfo.launchUris].
@@ -563,7 +560,7 @@ interface AppInfo
    *   cancellable = a #GCancellable
    *   callback = a #GAsyncReadyCallback to call when the request is done
    */
-  void launchUrisAsync(string[] uris, AppLaunchContext context, Cancellable cancellable, AsyncReadyCallback callback);
+  void launchUrisAsync(string[] uris, gio.app_launch_context.AppLaunchContext context, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes a [gio.app_info.AppInfo.launchUrisAsync] operation.
@@ -571,7 +568,7 @@ interface AppInfo
    *   result = a #GAsyncResult
    * Returns: %TRUE on successful launch, %FALSE otherwise.
    */
-  bool launchUrisFinish(AsyncResult result);
+  bool launchUrisFinish(gio.async_result.AsyncResult result);
 
   /**
    * Removes a supported type from an application, if possible.

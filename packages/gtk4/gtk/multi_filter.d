@@ -1,6 +1,6 @@
 module gtk.multi_filter;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gtk.buildable;
@@ -13,7 +13,7 @@ import gtk.types;
 /**
  * `GtkMultiFilter` is the base class for filters that combine multiple filters.
  */
-class MultiFilter : Filter, ListModel, Buildable
+class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.Buildable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -40,7 +40,7 @@ class MultiFilter : Filter, ListModel, Buildable
    * Params:
    *   filter = A new filter to use
    */
-  void append(Filter filter)
+  void append(gtk.filter.Filter filter)
   {
     gtk_multi_filter_append(cast(GtkMultiFilter*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(Yes.Dup) : null);
   }

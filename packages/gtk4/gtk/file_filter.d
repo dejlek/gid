@@ -1,6 +1,6 @@
 module gtk.file_filter;
 
-import gid.global;
+import gid.gid;
 import glib.variant;
 import gobject.object;
 import gtk.buildable;
@@ -52,7 +52,7 @@ import gtk.types;
  * </object>
  * ```
  */
-class FileFilter : Filter, Buildable
+class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -103,11 +103,11 @@ class FileFilter : Filter, Buildable
    *   variant = an `a{sv}` `GVariant`
    * Returns: a new `GtkFileFilter` object
    */
-  static FileFilter newFromGvariant(VariantG variant)
+  static gtk.file_filter.FileFilter newFromGvariant(glib.variant.VariantG variant)
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_filter_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!FileFilter(cast(GtkFileFilter*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class FileFilter : Filter, Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_file_filter_get_name(cast(GtkFileFilter*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -219,11 +219,11 @@ class FileFilter : Filter, Buildable
    * Serialize a file filter to an `a{sv}` variant.
    * Returns: a new, floating, `GVariant`
    */
-  VariantG toGvariant()
+  glib.variant.VariantG toGvariant()
   {
     VariantC* _cretval;
     _cretval = gtk_file_filter_to_gvariant(cast(GtkFileFilter*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 }

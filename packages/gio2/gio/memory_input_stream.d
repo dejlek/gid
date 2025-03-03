@@ -1,6 +1,6 @@
 module gio.memory_input_stream;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.input_stream;
@@ -18,7 +18,7 @@ import gobject.object;
  * As of GLib 2.34, `GMemoryInputStream` implements
  * [gio.pollable_input_stream.PollableInputStream].
  */
-class MemoryInputStream : InputStream, PollableInputStream, Seekable
+class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_stream.PollableInputStream, gio.seekable.Seekable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -57,11 +57,11 @@ class MemoryInputStream : InputStream, PollableInputStream, Seekable
    *   bytes = a #GBytes
    * Returns: new #GInputStream read from bytes
    */
-  static MemoryInputStream newFromBytes(Bytes bytes)
+  static gio.memory_input_stream.MemoryInputStream newFromBytes(glib.bytes.Bytes bytes)
   {
     GInputStream* _cretval;
     _cretval = g_memory_input_stream_new_from_bytes(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!MemoryInputStream(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.memory_input_stream.MemoryInputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class MemoryInputStream : InputStream, PollableInputStream, Seekable
    * Params:
    *   bytes = input data
    */
-  void addBytes(Bytes bytes)
+  void addBytes(glib.bytes.Bytes bytes)
   {
     g_memory_input_stream_add_bytes(cast(GMemoryInputStream*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
   }

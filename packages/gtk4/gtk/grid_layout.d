@@ -1,6 +1,6 @@
 module gtk.grid_layout;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_manager;
@@ -19,7 +19,7 @@ import gtk.types;
  * attached to the same row or column; however, if you only ever need a
  * single row or column, you should consider using `GtkBoxLayout`.
  */
-class GridLayout : LayoutManager
+class GridLayout : gtk.layout_manager.LayoutManager
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -92,11 +92,11 @@ class GridLayout : LayoutManager
    *   row = a row index
    * Returns: the baseline position of row
    */
-  BaselinePosition getRowBaselinePosition(int row)
+  gtk.types.BaselinePosition getRowBaselinePosition(int row)
   {
     GtkBaselinePosition _cretval;
     _cretval = gtk_grid_layout_get_row_baseline_position(cast(GtkGridLayout*)cPtr, row);
-    BaselinePosition _retval = cast(BaselinePosition)_cretval;
+    gtk.types.BaselinePosition _retval = cast(gtk.types.BaselinePosition)_cretval;
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class GridLayout : LayoutManager
    *   row = a row index
    *   pos = a `GtkBaselinePosition`
    */
-  void setRowBaselinePosition(int row, BaselinePosition pos)
+  void setRowBaselinePosition(int row, gtk.types.BaselinePosition pos)
   {
     gtk_grid_layout_set_row_baseline_position(cast(GtkGridLayout*)cPtr, row, pos);
   }

@@ -1,14 +1,12 @@
 module gio.network_monitor;
 
 public import gio.network_monitor_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
 import gio.socket_connectable;
-import gio.socket_connectable_mixin;
 import gio.types;
 import glib.error;
 import gobject.dclosure;
@@ -35,11 +33,11 @@ interface NetworkMonitor
    * Returns: a #GNetworkMonitor, which will be
    *   a dummy object if no network monitor is available
    */
-  static NetworkMonitor getDefault()
+  static gio.network_monitor.NetworkMonitor getDefault()
   {
     GNetworkMonitor* _cretval;
     _cretval = g_network_monitor_get_default();
-    auto _retval = ObjectG.getDObject!NetworkMonitor(cast(GNetworkMonitor*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.network_monitor.NetworkMonitor)(cast(GNetworkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -63,7 +61,7 @@ interface NetworkMonitor
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE if connectable is reachable, %FALSE if not.
    */
-  bool canReach(SocketConnectable connectable, Cancellable cancellable);
+  bool canReach(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable);
 
   /**
    * Asynchronously attempts to determine whether or not the host
@@ -79,7 +77,7 @@ interface NetworkMonitor
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void canReachAsync(SocketConnectable connectable, Cancellable cancellable, AsyncReadyCallback callback);
+  void canReachAsync(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes an async network connectivity test.
@@ -88,7 +86,7 @@ interface NetworkMonitor
    *   result = a #GAsyncResult
    * Returns: %TRUE if network is reachable, %FALSE if not.
    */
-  bool canReachFinish(AsyncResult result);
+  bool canReachFinish(gio.async_result.AsyncResult result);
 
   /**
    * Gets a more detailed networking state than
@@ -109,7 +107,7 @@ interface NetworkMonitor
    * back to their "offline" behavior if the connection attempt fails.
    * Returns: the network connectivity state
    */
-  NetworkConnectivity getConnectivity();
+  gio.types.NetworkConnectivity getConnectivity();
 
   /**
    * Checks if the network is available. "Available" here means that the
@@ -133,8 +131,8 @@ interface NetworkMonitor
    *   networkAvailable = the current value of #GNetworkMonitor:network-available
    *   networkMonitor = the instance the signal is connected to
    */
-  alias NetworkChangedCallbackDlg = void delegate(bool networkAvailable, NetworkMonitor networkMonitor);
-  alias NetworkChangedCallbackFunc = void function(bool networkAvailable, NetworkMonitor networkMonitor);
+  alias NetworkChangedCallbackDlg = void delegate(bool networkAvailable, gio.network_monitor.NetworkMonitor networkMonitor);
+  alias NetworkChangedCallbackFunc = void function(bool networkAvailable, gio.network_monitor.NetworkMonitor networkMonitor);
 
   /**
    * Connect to NetworkChanged signal.

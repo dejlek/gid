@@ -5,7 +5,7 @@ import gio.pollable_output_stream;
 import gio.pollable_output_stream_mixin;
 
 /// Proxy object for Gio.PollableOutputStream interface when a GObject has no applicable D binding
-class PollableOutputStreamIfaceProxy : IfaceProxy, PollableOutputStream
+class PollableOutputStreamIfaceProxy : IfaceProxy, gio.pollable_output_stream.PollableOutputStream
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class PollableOutputStreamIfaceProxy : IfaceProxy, PollableOutputStream
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(PollableOutputStream);
+    return typeid(gio.pollable_output_stream.PollableOutputStream);
   }
 
   mixin PollableOutputStreamT!();

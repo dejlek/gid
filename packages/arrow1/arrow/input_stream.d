@@ -11,12 +11,12 @@ import arrow.record_batch;
 import arrow.schema;
 import arrow.tensor;
 import arrow.types;
-import gid.global;
-import gio.input_stream : DGioInputStream = InputStream;
+import gid.gid;
+import gio.input_stream;
 import glib.error;
 import gobject.object;
 
-class InputStream : DGioInputStream, File, Readable
+class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readable.Readable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -37,12 +37,9 @@ class InputStream : DGioInputStream, File, Readable
 
   mixin FileT!();
   mixin ReadableT!();
-  alias close = DGioInputStream.close;
-
-  alias read = DGioInputStream.read;
-
-  alias readBytes = DGioInputStream.readBytes;
-
+  alias close = gio.input_stream.InputStream.close;
+  alias read = gio.input_stream.InputStream.read;
+  alias readBytes = gio.input_stream.InputStream.readBytes;
 
   bool advance(long nBytes)
   {
@@ -64,25 +61,25 @@ class InputStream : DGioInputStream, File, Readable
     return _retval;
   }
 
-  RecordBatch readRecordBatch(Schema schema, ReadOptions options)
+  arrow.record_batch.RecordBatch readRecordBatch(arrow.schema.Schema schema, arrow.read_options.ReadOptions options)
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
     _cretval = garrow_input_stream_read_record_batch(cast(GArrowInputStream*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, options ? cast(GArrowReadOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!RecordBatch(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Tensor readTensor()
+  arrow.tensor.Tensor readTensor()
   {
     GArrowTensor* _cretval;
     GError *_err;
     _cretval = garrow_input_stream_read_tensor(cast(GArrowInputStream*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Tensor(cast(GArrowTensor*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.tensor.Tensor)(cast(GArrowTensor*)_cretval, Yes.Take);
     return _retval;
   }
 }

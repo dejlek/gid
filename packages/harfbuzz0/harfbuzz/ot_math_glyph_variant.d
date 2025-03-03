@@ -1,6 +1,6 @@
 module harfbuzz.ot_math_glyph_variant;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -9,7 +9,7 @@ import harfbuzz.types;
 /**
  * Data type to hold math-variant information for a glyph.
  */
-class OtMathGlyphVariant : Boxed
+class OtMathGlyphVariant : gobject.boxed.Boxed
 {
 
   this()
@@ -38,22 +38,22 @@ class OtMathGlyphVariant : Boxed
     return getType();
   }
 
-  @property Codepoint glyph()
+  @property harfbuzz.types.Codepoint glyph()
   {
     return (cast(hb_ot_math_glyph_variant_t*)cPtr).glyph;
   }
 
-  @property void glyph(Codepoint propval)
+  @property void glyph(harfbuzz.types.Codepoint propval)
   {
     (cast(hb_ot_math_glyph_variant_t*)cPtr).glyph = propval;
   }
 
-  @property Position advance()
+  @property harfbuzz.types.Position advance()
   {
     return (cast(hb_ot_math_glyph_variant_t*)cPtr).advance;
   }
 
-  @property void advance(Position propval)
+  @property void advance(harfbuzz.types.Position propval)
   {
     (cast(hb_ot_math_glyph_variant_t*)cPtr).advance = propval;
   }

@@ -1,0 +1,576 @@
+module gtk.image;
+
+import atk.implementor_iface;
+import atk.implementor_iface_mixin;
+import cairo.surface;
+import gdkpixbuf.pixbuf;
+import gdkpixbuf.pixbuf_animation;
+import gid.gid;
+import gio.icon;
+import gobject.object;
+import gtk.buildable;
+import gtk.buildable_mixin;
+import gtk.c.functions;
+import gtk.c.types;
+import gtk.icon_set;
+import gtk.misc;
+import gtk.types;
+
+/**
+ * The #GtkImage widget displays an image. Various kinds of object
+ * can be displayed as an image; most typically, you would load a
+ * #GdkPixbuf $(LPAREN)"pixel buffer"$(RPAREN) from a file, and then display that.
+ * There’s a convenience function to do this, [gtk.image.Image.newFromFile],
+ * used as follows:
+ * |[<!-- language\="C" -->
+ * GtkWidget *image;
+ * image \= gtk_image_new_from_file $(LPAREN)"myfile.png"$(RPAREN);
+ * ]|
+ * If the file isn’t loaded successfully, the image will contain a
+ * “broken image” icon similar to that used in many web browsers.
+ * If you want to handle errors in loading the file yourself,
+ * for example by displaying an error message, then load the image with
+ * [gdkpixbuf.pixbuf.Pixbuf.newFromFile], then create the #GtkImage with
+ * [gtk.image.Image.newFromPixbuf].
+ * The image file may contain an animation, if so the #GtkImage will
+ * display an animation $(LPAREN)#GdkPixbufAnimation$(RPAREN) instead of a static image.
+ * #GtkImage is a subclass of #GtkMisc, which implies that you can
+ * align it $(LPAREN)center, left, right$(RPAREN) and add padding to it, using
+ * #GtkMisc methods.
+ * #GtkImage is a “no window” widget $(LPAREN)has no #GdkWindow of its own$(RPAREN),
+ * so by default does not receive events. If you want to receive events
+ * on the image, such as button clicks, place the image inside a
+ * #GtkEventBox, then connect to the event signals on the event box.
+ * ## Handling button press events on a #GtkImage.
+ * |[<!-- language\="C" -->
+ * static gboolean
+ * button_press_callback $(LPAREN)GtkWidget      *event_box,
+ * GdkEventButton *event,
+ * gpointer        data$(RPAREN)
+ * {
+ * g_print $(LPAREN)"Event box clicked at coordinates %f,%f\n",
+ * event->x, event->y$(RPAREN);
+ * // Returning TRUE means we handled the event, so the signal
+ * // emission should be stopped $(LPAREN)don’t call any further callbacks
+ * // that may be connected$(RPAREN). Return FALSE to continue invoking callbacks.
+ * return TRUE;
+ * }
+ * static GtkWidget*
+ * create_image $(LPAREN)void$(RPAREN)
+ * {
+ * GtkWidget *image;
+ * GtkWidget *event_box;
+ * image \= gtk_image_new_from_file $(LPAREN)"myfile.png"$(RPAREN);
+ * event_box \= gtk_event_box_new $(LPAREN)$(RPAREN);
+ * gtk_container_add $(LPAREN)GTK_CONTAINER $(LPAREN)event_box$(RPAREN), image$(RPAREN);
+ * g_signal_connect $(LPAREN)G_OBJECT $(LPAREN)event_box$(RPAREN),
+ * "button_press_event",
+ * G_CALLBACK $(LPAREN)button_press_callback$(RPAREN),
+ * image$(RPAREN);
+ * return image;
+ * }
+ * ]|
+ * When handling events on the event box, keep in mind that coordinates
+ * in the image may be different from event box coordinates due to
+ * the alignment and padding settings on the image $(LPAREN)see #GtkMisc$(RPAREN).
+ * The simplest way to solve this is to set the alignment to 0.0
+ * $(LPAREN)left/top$(RPAREN), and set the padding to zero. Then the origin of
+ * the image will be the same as the origin of the event box.
+ * Sometimes an application will want to avoid depending on external data
+ * files, such as image files. GTK+ comes with a program to avoid this,
+ * called “gdk-pixbuf-csource”. This library
+ * allows you to convert an image into a C variable declaration, which
+ * can then be loaded into a #GdkPixbuf using
+ * [gdkpixbuf.pixbuf.Pixbuf.newFromInline].
+ * # CSS nodes
+ * GtkImage has a single CSS node with the name image. The style classes
+ * may appear on image CSS nodes: .icon-dropshadow, .lowres-icon.
+ */
+class Image : gtk.misc.Misc
+{
+
+  this(void* ptr, Flag!"Take" take = No.Take)
+  {
+    super(cast(void*)ptr, take);
+  }
+
+  static GType getType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_image_get_type != &gidSymbolNotFound ? gtk_image_get_type() : cast(GType)0;
+  }
+
+  override @property GType gType()
+  {
+    return getType();
+  }
+
+  /**
+   * Creates a new empty #GtkImage widget.
+   * Returns: a newly created #GtkImage widget.
+   */
+  this()
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_image_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+   * Creates a #GtkImage displaying the given animation.
+   * The #GtkImage does not assume a reference to the
+   * animation; you still need to unref it if you own references.
+   * #GtkImage will add its own reference rather than adopting yours.
+   * Note that the animation frames are shown using a timeout with
+   * #G_PRIORITY_DEFAULT. When using animations to indicate busyness,
+   * keep in mind that the animation will only be shown if the main loop
+   * is not busy with something that has a higher priority.
+   * Params:
+   *   animation = an animation
+   * Returns: a new #GtkImage widget
+   */
+  static gtk.image.Image newFromAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation animation)
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_image_new_from_animation(animation ? cast(GdkPixbufAnimation*)animation.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+   * Creates a new #GtkImage displaying the file filename. If the file
+   * isn’t found or can’t be loaded, the resulting #GtkImage will
+   * display a “broken image” icon. This function never returns %NULL,
+   * it always returns a valid #GtkImage widget.
+   * If the file contains an animation, the image will contain an
+   * animation.
+   * If you need to detect failures to load the file, use
+   * [gdkpixbuf.pixbuf.Pixbuf.newFromFile] to load the file yourself, then create
+   * the #GtkImage from the pixbuf. $(LPAREN)Or for animations, use
+   * [gdkpixbuf.pixbuf_animation.PixbufAnimation.newFromFile]$(RPAREN).
+   * The storage type $(LPAREN)[gtk.image.Image.getStorageType]$(RPAREN) of the returned
+   * image is not defined, it will be whatever is appropriate for
+   * displaying the file.
+   * Params:
+   *   filename = a filename
+   * Returns: a new #GtkImage
+   */
+  static gtk.image.Image newFromFile(string filename)
+  {
+    GtkWidget* _cretval;
+    const(char)* _filename = filename.toCString(No.Alloc);
+    _cretval = gtk_image_new_from_file(_filename);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+   * Creates a #GtkImage displaying an icon from the current icon theme.
+   * If the icon name isn’t known, a “broken image” icon will be
+   * displayed instead.  If the current icon theme is changed, the icon
+   * will be updated appropriately.
+   * Params:
+   *   icon = an icon
+   *   size = a stock icon size $(LPAREN)#GtkIconSize$(RPAREN)
+   * Returns: a new #GtkImage displaying the themed icon
+   */
+  static gtk.image.Image newFromGicon(gio.icon.Icon icon, gtk.types.IconSize size)
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_image_new_from_gicon(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, size);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+   * Creates a #GtkImage displaying an icon from the current icon theme.
+   * If the icon name isn’t known, a “broken image” icon will be
+   * displayed instead.  If the current icon theme is changed, the icon
+   * will be updated appropriately.
+   * Params:
+   *   iconName = an icon name or %NULL
+   *   size = a stock icon size $(LPAREN)#GtkIconSize$(RPAREN)
+   * Returns: a new #GtkImage displaying the themed icon
+   */
+  static gtk.image.Image newFromIconName(string iconName, gtk.types.IconSize size)
+  {
+    GtkWidget* _cretval;
+    const(char)* _iconName = iconName.toCString(No.Alloc);
+    _cretval = gtk_image_new_from_icon_name(_iconName, size);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+   * Creates a #GtkImage displaying an icon set. Sample stock sizes are
+   * #GTK_ICON_SIZE_MENU, #GTK_ICON_SIZE_SMALL_TOOLBAR. Instead of using
+   * this function, usually it’s better to create a #GtkIconFactory, put
+   * your icon sets in the icon factory, add the icon factory to the
+   * list of default factories with [gtk.icon_factory.IconFactory.addDefault], and
+   * then use [gtk.image.Image.newFromStock]. This will allow themes to
+   * override the icon you ship with your application.
+   * The #GtkImage does not assume a reference to the
+   * icon set; you still need to unref it if you own references.
+   * #GtkImage will add its own reference rather than adopting yours.
+   * Params:
+   *   iconSet = a #GtkIconSet
+   *   size = a stock icon size $(LPAREN)#GtkIconSize$(RPAREN)
+   * Returns: a new #GtkImage
+
+   * Deprecated: Use [gtk.image.Image.newFromIconName] instead.
+   */
+  static gtk.image.Image newFromIconSet(gtk.icon_set.IconSet iconSet, gtk.types.IconSize size)
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_image_new_from_icon_set(iconSet ? cast(GtkIconSet*)iconSet.cPtr(No.Dup) : null, size);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+   * Creates a new #GtkImage displaying pixbuf.
+   * The #GtkImage does not assume a reference to the
+   * pixbuf; you still need to unref it if you own references.
+   * #GtkImage will add its own reference rather than adopting yours.
+   * Note that this function just creates an #GtkImage from the pixbuf. The
+   * #GtkImage created will not react to state changes. Should you want that,
+   * you should use [gtk.image.Image.newFromIconName].
+   * Params:
+   *   pixbuf = a #GdkPixbuf, or %NULL
+   * Returns: a new #GtkImage
+   */
+  static gtk.image.Image newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+   * Creates a new #GtkImage displaying the resource file resource_path. If the file
+   * isn’t found or can’t be loaded, the resulting #GtkImage will
+   * display a “broken image” icon. This function never returns %NULL,
+   * it always returns a valid #GtkImage widget.
+   * If the file contains an animation, the image will contain an
+   * animation.
+   * If you need to detect failures to load the file, use
+   * [gdkpixbuf.pixbuf.Pixbuf.newFromFile] to load the file yourself, then create
+   * the #GtkImage from the pixbuf. $(LPAREN)Or for animations, use
+   * [gdkpixbuf.pixbuf_animation.PixbufAnimation.newFromFile]$(RPAREN).
+   * The storage type $(LPAREN)[gtk.image.Image.getStorageType]$(RPAREN) of the returned
+   * image is not defined, it will be whatever is appropriate for
+   * displaying the file.
+   * Params:
+   *   resourcePath = a resource path
+   * Returns: a new #GtkImage
+   */
+  static gtk.image.Image newFromResource(string resourcePath)
+  {
+    GtkWidget* _cretval;
+    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    _cretval = gtk_image_new_from_resource(_resourcePath);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+   * Creates a #GtkImage displaying a stock icon. Sample stock icon
+   * names are #GTK_STOCK_OPEN, #GTK_STOCK_QUIT. Sample stock sizes
+   * are #GTK_ICON_SIZE_MENU, #GTK_ICON_SIZE_SMALL_TOOLBAR. If the stock
+   * icon name isn’t known, the image will be empty.
+   * You can register your own stock icon names, see
+   * [gtk.icon_factory.IconFactory.addDefault] and [gtk.icon_factory.IconFactory.add].
+   * Params:
+   *   stockId = a stock icon name
+   *   size = a stock icon size $(LPAREN)#GtkIconSize$(RPAREN)
+   * Returns: a new #GtkImage displaying the stock icon
+
+   * Deprecated: Use [gtk.image.Image.newFromIconName] instead.
+   */
+  static gtk.image.Image newFromStock(string stockId, gtk.types.IconSize size)
+  {
+    GtkWidget* _cretval;
+    const(char)* _stockId = stockId.toCString(No.Alloc);
+    _cretval = gtk_image_new_from_stock(_stockId, size);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+   * Creates a new #GtkImage displaying surface.
+   * The #GtkImage does not assume a reference to the
+   * surface; you still need to unref it if you own references.
+   * #GtkImage will add its own reference rather than adopting yours.
+   * Params:
+   *   surface = a #cairo_surface_t, or %NULL
+   * Returns: a new #GtkImage
+   */
+  static gtk.image.Image newFromSurface(cairo.surface.Surface surface)
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_image_new_from_surface(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+   * Resets the image to be empty.
+   */
+  void clear()
+  {
+    gtk_image_clear(cast(GtkImage*)cPtr);
+  }
+
+  /**
+   * Gets the #GdkPixbufAnimation being displayed by the #GtkImage.
+   * The storage type of the image must be %GTK_IMAGE_EMPTY or
+   * %GTK_IMAGE_ANIMATION $(LPAREN)see [gtk.image.Image.getStorageType]$(RPAREN).
+   * The caller of this function does not own a reference to the
+   * returned animation.
+   * Returns: the displayed animation, or %NULL if
+   *   the image is empty
+   */
+  gdkpixbuf.pixbuf_animation.PixbufAnimation getAnimation()
+  {
+    GdkPixbufAnimation* _cretval;
+    _cretval = gtk_image_get_animation(cast(GtkImage*)cPtr);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+   * Gets the #GIcon and size being displayed by the #GtkImage.
+   * The storage type of the image must be %GTK_IMAGE_EMPTY or
+   * %GTK_IMAGE_GICON $(LPAREN)see [gtk.image.Image.getStorageType]$(RPAREN).
+   * The caller of this function does not own a reference to the
+   * returned #GIcon.
+   * Params:
+   *   gicon = place to store a
+   *     #GIcon, or %NULL
+   *   size = place to store an icon size
+   *     $(LPAREN)#GtkIconSize$(RPAREN), or %NULL
+   */
+  void getGicon(out gio.icon.Icon gicon, out gtk.types.IconSize size)
+  {
+    GIcon* _gicon;
+    gtk_image_get_gicon(cast(GtkImage*)cPtr, &_gicon, &size);
+    gicon = ObjectG.getDObject!(gio.icon.Icon)(_gicon, No.Take);
+  }
+
+  /**
+   * Gets the icon name and size being displayed by the #GtkImage.
+   * The storage type of the image must be %GTK_IMAGE_EMPTY or
+   * %GTK_IMAGE_ICON_NAME $(LPAREN)see [gtk.image.Image.getStorageType]$(RPAREN).
+   * The returned string is owned by the #GtkImage and should not
+   * be freed.
+   * Params:
+   *   iconName = place to store an
+   *     icon name, or %NULL
+   *   size = place to store an icon size
+   *     $(LPAREN)#GtkIconSize$(RPAREN), or %NULL
+   */
+  void getIconName(out string iconName, out gtk.types.IconSize size)
+  {
+    char* _iconName;
+    gtk_image_get_icon_name(cast(GtkImage*)cPtr, &_iconName, &size);
+    iconName = _iconName.fromCString(No.Free);
+  }
+
+  /**
+   * Gets the icon set and size being displayed by the #GtkImage.
+   * The storage type of the image must be %GTK_IMAGE_EMPTY or
+   * %GTK_IMAGE_ICON_SET $(LPAREN)see [gtk.image.Image.getStorageType]$(RPAREN).
+   * Params:
+   *   iconSet = location to store a
+   *     #GtkIconSet, or %NULL
+   *   size = location to store a stock
+   *     icon size $(LPAREN)#GtkIconSize$(RPAREN), or %NULL
+
+   * Deprecated: Use [gtk.image.Image.getIconName] instead.
+   */
+  void getIconSet(out gtk.icon_set.IconSet iconSet, out gtk.types.IconSize size)
+  {
+    GtkIconSet* _iconSet;
+    gtk_image_get_icon_set(cast(GtkImage*)cPtr, &_iconSet, &size);
+    iconSet = new gtk.icon_set.IconSet(cast(void*)_iconSet, No.Take);
+  }
+
+  /**
+   * Gets the #GdkPixbuf being displayed by the #GtkImage.
+   * The storage type of the image must be %GTK_IMAGE_EMPTY or
+   * %GTK_IMAGE_PIXBUF $(LPAREN)see [gtk.image.Image.getStorageType]$(RPAREN).
+   * The caller of this function does not own a reference to the
+   * returned pixbuf.
+   * Returns: the displayed pixbuf, or %NULL if
+   *   the image is empty
+   */
+  gdkpixbuf.pixbuf.Pixbuf getPixbuf()
+  {
+    PixbufC* _cretval;
+    _cretval = gtk_image_get_pixbuf(cast(GtkImage*)cPtr);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+   * Gets the pixel size used for named icons.
+   * Returns: the pixel size used for named icons.
+   */
+  int getPixelSize()
+  {
+    int _retval;
+    _retval = gtk_image_get_pixel_size(cast(GtkImage*)cPtr);
+    return _retval;
+  }
+
+  /**
+   * Gets the stock icon name and size being displayed by the #GtkImage.
+   * The storage type of the image must be %GTK_IMAGE_EMPTY or
+   * %GTK_IMAGE_STOCK $(LPAREN)see [gtk.image.Image.getStorageType]$(RPAREN).
+   * The returned string is owned by the #GtkImage and should not
+   * be freed.
+   * Params:
+   *   stockId = place to store a
+   *     stock icon name, or %NULL
+   *   size = place to store a stock icon
+   *     size $(LPAREN)#GtkIconSize$(RPAREN), or %NULL
+
+   * Deprecated: Use [gtk.image.Image.getIconName] instead.
+   */
+  void getStock(out string stockId, out gtk.types.IconSize size)
+  {
+    char* _stockId;
+    gtk_image_get_stock(cast(GtkImage*)cPtr, &_stockId, &size);
+    stockId = _stockId.fromCString(No.Free);
+  }
+
+  /**
+   * Gets the type of representation being used by the #GtkImage
+   * to store image data. If the #GtkImage has no image data,
+   * the return value will be %GTK_IMAGE_EMPTY.
+   * Returns: image representation being used
+   */
+  gtk.types.ImageType getStorageType()
+  {
+    GtkImageType _cretval;
+    _cretval = gtk_image_get_storage_type(cast(GtkImage*)cPtr);
+    gtk.types.ImageType _retval = cast(gtk.types.ImageType)_cretval;
+    return _retval;
+  }
+
+  /**
+   * Causes the #GtkImage to display the given animation $(LPAREN)or display
+   * nothing, if you set the animation to %NULL$(RPAREN).
+   * Params:
+   *   animation = the #GdkPixbufAnimation
+   */
+  void setFromAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation animation)
+  {
+    gtk_image_set_from_animation(cast(GtkImage*)cPtr, animation ? cast(GdkPixbufAnimation*)animation.cPtr(No.Dup) : null);
+  }
+
+  /**
+   * See [gtk.image.Image.newFromFile] for details.
+   * Params:
+   *   filename = a filename or %NULL
+   */
+  void setFromFile(string filename)
+  {
+    const(char)* _filename = filename.toCString(No.Alloc);
+    gtk_image_set_from_file(cast(GtkImage*)cPtr, _filename);
+  }
+
+  /**
+   * See [gtk.image.Image.newFromGicon] for details.
+   * Params:
+   *   icon = an icon
+   *   size = an icon size $(LPAREN)#GtkIconSize$(RPAREN)
+   */
+  void setFromGicon(gio.icon.Icon icon, gtk.types.IconSize size)
+  {
+    gtk_image_set_from_gicon(cast(GtkImage*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, size);
+  }
+
+  /**
+   * See [gtk.image.Image.newFromIconName] for details.
+   * Params:
+   *   iconName = an icon name or %NULL
+   *   size = an icon size $(LPAREN)#GtkIconSize$(RPAREN)
+   */
+  void setFromIconName(string iconName, gtk.types.IconSize size)
+  {
+    const(char)* _iconName = iconName.toCString(No.Alloc);
+    gtk_image_set_from_icon_name(cast(GtkImage*)cPtr, _iconName, size);
+  }
+
+  /**
+   * See [gtk.image.Image.newFromIconSet] for details.
+   * Params:
+   *   iconSet = a #GtkIconSet
+   *   size = a stock icon size $(LPAREN)#GtkIconSize$(RPAREN)
+
+   * Deprecated: Use [gtk.image.Image.setFromIconName] instead.
+   */
+  void setFromIconSet(gtk.icon_set.IconSet iconSet, gtk.types.IconSize size)
+  {
+    gtk_image_set_from_icon_set(cast(GtkImage*)cPtr, iconSet ? cast(GtkIconSet*)iconSet.cPtr(No.Dup) : null, size);
+  }
+
+  /**
+   * See [gtk.image.Image.newFromPixbuf] for details.
+   * Params:
+   *   pixbuf = a #GdkPixbuf or %NULL
+   */
+  void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  {
+    gtk_image_set_from_pixbuf(cast(GtkImage*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+  }
+
+  /**
+   * See [gtk.image.Image.newFromResource] for details.
+   * Params:
+   *   resourcePath = a resource path or %NULL
+   */
+  void setFromResource(string resourcePath)
+  {
+    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    gtk_image_set_from_resource(cast(GtkImage*)cPtr, _resourcePath);
+  }
+
+  /**
+   * See [gtk.image.Image.newFromStock] for details.
+   * Params:
+   *   stockId = a stock icon name
+   *   size = a stock icon size $(LPAREN)#GtkIconSize$(RPAREN)
+
+   * Deprecated: Use [gtk.image.Image.setFromIconName] instead.
+   */
+  void setFromStock(string stockId, gtk.types.IconSize size)
+  {
+    const(char)* _stockId = stockId.toCString(No.Alloc);
+    gtk_image_set_from_stock(cast(GtkImage*)cPtr, _stockId, size);
+  }
+
+  /**
+   * See [gtk.image.Image.newFromSurface] for details.
+   * Params:
+   *   surface = a cairo_surface_t or %NULL
+   */
+  void setFromSurface(cairo.surface.Surface surface)
+  {
+    gtk_image_set_from_surface(cast(GtkImage*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
+  }
+
+  /**
+   * Sets the pixel size to use for named icons. If the pixel size is set
+   * to a value !\= -1, it is used instead of the icon size set by
+   * [gtk.image.Image.setFromIconName].
+   * Params:
+   *   pixelSize = the new pixel size
+   */
+  void setPixelSize(int pixelSize)
+  {
+    gtk_image_set_pixel_size(cast(GtkImage*)cPtr, pixelSize);
+  }
+}

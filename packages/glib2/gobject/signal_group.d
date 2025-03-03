@@ -1,6 +1,6 @@
 module gobject.signal_group;
 
-import gid.global;
+import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.closure;
@@ -25,7 +25,7 @@ import gobject.types;
  * all the signals you need. When the `GtkTextView:buffer` property changes
  * all of the signals will be transitioned correctly.
  */
-class SignalGroup : ObjectG
+class SignalGroup : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -50,7 +50,7 @@ class SignalGroup : ObjectG
    *   targetType = the #GType of the target instance.
    * Returns: a new #GSignalGroup
    */
-  this(GType targetType)
+  this(gobject.types.GType targetType)
   {
     GSignalGroup* _cretval;
     _cretval = g_signal_group_new(targetType);
@@ -77,7 +77,7 @@ class SignalGroup : ObjectG
    *   after = whether the handler should be called before or after the
    *     default handler of the signal.
    */
-  void connectClosure(string detailedSignal, Closure closure, bool after)
+  void connectClosure(string detailedSignal, gobject.closure.Closure closure, bool after)
   {
     const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
     g_signal_group_connect_closure(cast(GSignalGroup*)cPtr, _detailedSignal, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, after);
@@ -87,11 +87,11 @@ class SignalGroup : ObjectG
    * Gets the target instance used when connecting signals.
    * Returns: The target instance
    */
-  ObjectG dupTarget()
+  gobject.object.ObjectG dupTarget()
   {
     ObjectC* _cretval;
     _cretval = g_signal_group_dup_target(cast(GSignalGroup*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class SignalGroup : ObjectG
    *   target = The target instance used
    *     when connecting signals.
    */
-  void setTarget(ObjectG target)
+  void setTarget(gobject.object.ObjectG target)
   {
     g_signal_group_set_target(cast(GSignalGroup*)cPtr, target ? cast(ObjectC*)target.cPtr(No.Dup) : null);
   }
@@ -130,8 +130,8 @@ class SignalGroup : ObjectG
    *   instance = a #GObject containing the new value for #GSignalGroup:target
    *   signalGroup = the instance the signal is connected to
    */
-  alias BindCallbackDlg = void delegate(ObjectG instance, SignalGroup signalGroup);
-  alias BindCallbackFunc = void function(ObjectG instance, SignalGroup signalGroup);
+  alias BindCallbackDlg = void delegate(gobject.object.ObjectG instance, gobject.signal_group.SignalGroup signalGroup);
+  alias BindCallbackFunc = void function(gobject.object.ObjectG instance, gobject.signal_group.SignalGroup signalGroup);
 
   /**
    * Connect to Bind signal.
@@ -147,8 +147,8 @@ class SignalGroup : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto signalGroup = getVal!SignalGroup(_paramVals);
-      auto instance = getVal!ObjectG(&_paramVals[1]);
+      auto signalGroup = getVal!(gobject.signal_group.SignalGroup)(_paramVals);
+      auto instance = getVal!(gobject.object.ObjectG)(&_paramVals[1]);
       _dClosure.dlg(instance, signalGroup);
     }
 
@@ -163,8 +163,8 @@ class SignalGroup : ObjectG
    * non-%NULL.
    *   signalGroup = the instance the signal is connected to
    */
-  alias UnbindCallbackDlg = void delegate(SignalGroup signalGroup);
-  alias UnbindCallbackFunc = void function(SignalGroup signalGroup);
+  alias UnbindCallbackDlg = void delegate(gobject.signal_group.SignalGroup signalGroup);
+  alias UnbindCallbackFunc = void function(gobject.signal_group.SignalGroup signalGroup);
 
   /**
    * Connect to Unbind signal.
@@ -180,7 +180,7 @@ class SignalGroup : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto signalGroup = getVal!SignalGroup(_paramVals);
+      auto signalGroup = getVal!(gobject.signal_group.SignalGroup)(_paramVals);
       _dClosure.dlg(signalGroup);
     }
 

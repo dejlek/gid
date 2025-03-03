@@ -7,8 +7,7 @@ import cairo.pattern;
 import cairo.rectangle_int;
 import cairo.scaled_font;
 import cairo.surface;
-import cairo.types;
-import gid.global;
+import gid.gid;
 
 
 // Aliases
@@ -55,17 +54,17 @@ alias UserDataKey = cairo_user_data_key_t;
 
 // Callbacks
 alias DestroyFunc = void delegate();
-alias RasterSourceAcquireFunc = Surface delegate(Pattern pattern, Surface target, RectangleInt extents);
-alias RasterSourceCopyFunc = Status delegate(Pattern pattern, Pattern other);
-alias RasterSourceFinishFunc = void delegate(Pattern pattern);
-alias RasterSourceReleaseFunc = void delegate(Pattern pattern, Surface surface);
-alias RasterSourceSnapshotFunc = Status delegate(Pattern pattern);
-alias ReadFunc = Status delegate(ubyte[] data);
-alias SurfaceObserverCallback = void delegate(Surface observer, Surface target);
-alias UserScaledFontInitFunc = Status delegate(ScaledFont scaledFont, Context cr, FontExtents extents);
-alias UserScaledFontRenderGlyphFunc = Status delegate(ScaledFont scaledFont, gulong glyph, Context cr, TextExtents extents);
-alias UserScaledFontUnicodeToGlyphFunc = Status delegate(ScaledFont scaledFont, gulong unicode, out gulong glyphIndex);
-alias WriteFunc = Status delegate(ubyte[] data);
+alias RasterSourceAcquireFunc = cairo.surface.Surface delegate(cairo.pattern.Pattern pattern, cairo.surface.Surface target, cairo.rectangle_int.RectangleInt extents);
+alias RasterSourceCopyFunc = cairo.types.Status delegate(cairo.pattern.Pattern pattern, cairo.pattern.Pattern other);
+alias RasterSourceFinishFunc = void delegate(cairo.pattern.Pattern pattern);
+alias RasterSourceReleaseFunc = void delegate(cairo.pattern.Pattern pattern, cairo.surface.Surface surface);
+alias RasterSourceSnapshotFunc = cairo.types.Status delegate(cairo.pattern.Pattern pattern);
+alias ReadFunc = cairo.types.Status delegate(ubyte[] data);
+alias SurfaceObserverCallback = void delegate(cairo.surface.Surface observer, cairo.surface.Surface target);
+alias UserScaledFontInitFunc = cairo.types.Status delegate(cairo.scaled_font.ScaledFont scaledFont, cairo.context.Context cr, cairo.types.FontExtents extents);
+alias UserScaledFontRenderGlyphFunc = cairo.types.Status delegate(cairo.scaled_font.ScaledFont scaledFont, gulong glyph, cairo.context.Context cr, cairo.types.TextExtents extents);
+alias UserScaledFontUnicodeToGlyphFunc = cairo.types.Status delegate(cairo.scaled_font.ScaledFont scaledFont, gulong unicode, out gulong glyphIndex);
+alias WriteFunc = cairo.types.Status delegate(ubyte[] data);
 
 /**
  * The default color palette index.

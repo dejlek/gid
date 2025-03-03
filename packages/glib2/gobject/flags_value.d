@@ -1,6 +1,6 @@
 module gobject.flags_value;
 
-import gid.global;
+import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.types;

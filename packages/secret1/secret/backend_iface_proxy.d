@@ -5,7 +5,7 @@ import secret.backend;
 import secret.backend_mixin;
 
 /// Proxy object for Secret.Backend interface when a GObject has no applicable D binding
-class BackendIfaceProxy : IfaceProxy, Backend
+class BackendIfaceProxy : IfaceProxy, secret.backend.Backend
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class BackendIfaceProxy : IfaceProxy, Backend
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Backend);
+    return typeid(secret.backend.Backend);
   }
 
   mixin BackendT!();

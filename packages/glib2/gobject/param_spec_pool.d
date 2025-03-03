@@ -1,6 +1,6 @@
 module gobject.param_spec_pool;
 
-import gid.global;
+import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.param_spec;
@@ -38,7 +38,7 @@ class ParamSpecPool
    *   pspec = the #GParamSpec to insert
    *   ownerType = a #GType identifying the owner of pspec
    */
-  void insert(ParamSpec pspec, GType ownerType)
+  void insert(gobject.param_spec.ParamSpec pspec, gobject.types.GType ownerType)
   {
     g_param_spec_pool_insert(cast(GParamSpecPool*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, ownerType);
   }
@@ -52,18 +52,18 @@ class ParamSpecPool
    *   allocated array containing pointers to all #GParamSpecs
    *   owned by owner_type in the pool
    */
-  ParamSpec[] list(GType ownerType)
+  gobject.param_spec.ParamSpec[] list(gobject.types.GType ownerType)
   {
     GParamSpec** _cretval;
     uint _cretlength;
     _cretval = g_param_spec_pool_list(cast(GParamSpecPool*)cPtr, ownerType, &_cretlength);
-    ParamSpec[] _retval;
+    gobject.param_spec.ParamSpec[] _retval;
 
     if (_cretval)
     {
-      _retval = new ParamSpec[_cretlength];
+      _retval = new gobject.param_spec.ParamSpec[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = new ParamSpec(cast(void*)_cretval[i], No.Take);
+        _retval[i] = new gobject.param_spec.ParamSpec(cast(void*)_cretval[i], No.Take);
     }
     return _retval;
   }
@@ -77,11 +77,11 @@ class ParamSpecPool
    *   #GList of all #GParamSpecs owned by owner_type in
    *   the pool#GParamSpecs.
    */
-  ParamSpec[] listOwned(GType ownerType)
+  gobject.param_spec.ParamSpec[] listOwned(gobject.types.GType ownerType)
   {
     GList* _cretval;
     _cretval = g_param_spec_pool_list_owned(cast(GParamSpecPool*)cPtr, ownerType);
-    auto _retval = gListToD!(ParamSpec, GidOwnership.Container)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gobject.param_spec.ParamSpec, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -95,12 +95,12 @@ class ParamSpecPool
    * Returns: The found #GParamSpec, or %NULL if no
    *   matching #GParamSpec was found.
    */
-  ParamSpec lookup(string paramName, GType ownerType, bool walkAncestors)
+  gobject.param_spec.ParamSpec lookup(string paramName, gobject.types.GType ownerType, bool walkAncestors)
   {
     GParamSpec* _cretval;
     const(char)* _paramName = paramName.toCString(No.Alloc);
     _cretval = g_param_spec_pool_lookup(cast(GParamSpecPool*)cPtr, _paramName, ownerType, walkAncestors);
-    auto _retval = _cretval ? new ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class ParamSpecPool
    * Params:
    *   pspec = the #GParamSpec to remove
    */
-  void remove(ParamSpec pspec)
+  void remove(gobject.param_spec.ParamSpec pspec)
   {
     g_param_spec_pool_remove(cast(GParamSpecPool*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
   }

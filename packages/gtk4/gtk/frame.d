@@ -1,6 +1,6 @@
 module gtk.frame;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -50,7 +50,7 @@ import gtk.widget;
  * # Accessibility
  * `GtkFrame` uses the `GTK_ACCESSIBLE_ROLE_GROUP` role.
  */
-class Frame : Widget
+class Frame : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -88,11 +88,11 @@ class Frame : Widget
    * Gets the child widget of frame.
    * Returns: the child widget of frame
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_frame_get_child(cast(GtkFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class Frame : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_frame_get_label(cast(GtkFrame*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -127,11 +127,11 @@ class Frame : Widget
    * Retrieves the label widget for the frame.
    * Returns: the label widget
    */
-  Widget getLabelWidget()
+  gtk.widget.Widget getLabelWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_frame_get_label_widget(cast(GtkFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class Frame : Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_frame_set_child(cast(GtkFrame*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -177,7 +177,7 @@ class Frame : Widget
    * Params:
    *   labelWidget = the new label widget
    */
-  void setLabelWidget(Widget labelWidget)
+  void setLabelWidget(gtk.widget.Widget labelWidget)
   {
     gtk_frame_set_label_widget(cast(GtkFrame*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
   }

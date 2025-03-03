@@ -1,7 +1,7 @@
 module gtk.editable_mixin;
 
 public import gtk.editable_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gobject.object;
 public import gobject.param_spec;
@@ -145,7 +145,7 @@ template EditableT()
    *   state = what kind of accessible state to retrieve
    * Returns:
    */
-  override bool delegateGetAccessiblePlatformState(AccessiblePlatformState state)
+  override bool delegateGetAccessiblePlatformState(gtk.types.AccessiblePlatformState state)
   {
     bool _retval;
     _retval = gtk_editable_delegate_get_accessible_platform_state(cast(GtkEditable*)cPtr, state);
@@ -216,7 +216,7 @@ template EditableT()
   {
     char* _cretval;
     _cretval = gtk_editable_get_chars(cast(GtkEditable*)cPtr, startPos, endPos);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -226,11 +226,11 @@ template EditableT()
    * Typically, the delegate is a [gtk.text.Text] widget.
    * Returns: the delegate `GtkEditable`
    */
-  override Editable getDelegate()
+  override gtk.editable.Editable getDelegate()
   {
     GtkEditable* _cretval;
     _cretval = gtk_editable_get_delegate(cast(GtkEditable*)cPtr);
-    auto _retval = ObjectG.getDObject!Editable(cast(GtkEditable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.editable.Editable)(cast(GtkEditable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -307,7 +307,7 @@ template EditableT()
   {
     const(char)* _cretval;
     _cretval = gtk_editable_get_text(cast(GtkEditable*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -470,8 +470,8 @@ template EditableT()
    * to be emitted$(RPAREN).
    *   editable = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(Editable editable);
-  alias ChangedCallbackFunc = void function(Editable editable);
+  alias ChangedCallbackDlg = void delegate(gtk.editable.Editable editable);
+  alias ChangedCallbackFunc = void function(gtk.editable.Editable editable);
 
   /**
    * Connect to Changed signal.
@@ -487,7 +487,7 @@ template EditableT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto editable = getVal!Editable(_paramVals);
+      auto editable = getVal!(gtk.editable.Editable)(_paramVals);
       _dClosure.dlg(editable);
     }
 
@@ -508,8 +508,8 @@ template EditableT()
    *   endPos = the end position
    *   editable = the instance the signal is connected to
    */
-  alias DeleteTextCallbackDlg = void delegate(int startPos, int endPos, Editable editable);
-  alias DeleteTextCallbackFunc = void function(int startPos, int endPos, Editable editable);
+  alias DeleteTextCallbackDlg = void delegate(int startPos, int endPos, gtk.editable.Editable editable);
+  alias DeleteTextCallbackFunc = void function(int startPos, int endPos, gtk.editable.Editable editable);
 
   /**
    * Connect to DeleteText signal.
@@ -525,9 +525,9 @@ template EditableT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto editable = getVal!Editable(_paramVals);
-      auto startPos = getVal!int(&_paramVals[1]);
-      auto endPos = getVal!int(&_paramVals[2]);
+      auto editable = getVal!(gtk.editable.Editable)(_paramVals);
+      auto startPos = getVal!(int)(&_paramVals[1]);
+      auto endPos = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(startPos, endPos, editable);
     }
 

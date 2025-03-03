@@ -1,6 +1,6 @@
 module gtk.numeric_sorter;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.expression;
@@ -12,7 +12,7 @@ import gtk.types;
  * To obtain the numbers to compare, this sorter evaluates a
  * [gtk.expression.Expression].
  */
-class NumericSorter : Sorter
+class NumericSorter : gtk.sorter.Sorter
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -39,7 +39,7 @@ class NumericSorter : Sorter
    *   expression = The expression to evaluate
    * Returns: a new `GtkNumericSorter`
    */
-  this(Expression expression)
+  this(gtk.expression.Expression expression)
   {
     GtkNumericSorter* _cretval;
     _cretval = gtk_numeric_sorter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
@@ -50,11 +50,11 @@ class NumericSorter : Sorter
    * Gets the expression that is evaluated to obtain numbers from items.
    * Returns: a `GtkExpression`
    */
-  Expression getExpression()
+  gtk.expression.Expression getExpression()
   {
     GtkExpression* _cretval;
     _cretval = gtk_numeric_sorter_get_expression(cast(GtkNumericSorter*)cPtr);
-    auto _retval = _cretval ? new Expression(cast(GtkExpression*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -62,11 +62,11 @@ class NumericSorter : Sorter
    * Gets whether this sorter will sort smaller numbers first.
    * Returns: the order of the numbers
    */
-  SortType getSortOrder()
+  gtk.types.SortType getSortOrder()
   {
     GtkSortType _cretval;
     _cretval = gtk_numeric_sorter_get_sort_order(cast(GtkNumericSorter*)cPtr);
-    SortType _retval = cast(SortType)_cretval;
+    gtk.types.SortType _retval = cast(gtk.types.SortType)_cretval;
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class NumericSorter : Sorter
    * Params:
    *   expression = a `GtkExpression`
    */
-  void setExpression(Expression expression)
+  void setExpression(gtk.expression.Expression expression)
   {
     gtk_numeric_sorter_set_expression(cast(GtkNumericSorter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }
@@ -89,7 +89,7 @@ class NumericSorter : Sorter
    * Params:
    *   sortOrder = whether to sort smaller numbers first
    */
-  void setSortOrder(SortType sortOrder)
+  void setSortOrder(gtk.types.SortType sortOrder)
   {
     gtk_numeric_sorter_set_sort_order(cast(GtkNumericSorter*)cPtr, sortOrder);
   }

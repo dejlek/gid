@@ -6,13 +6,13 @@ import atk.component;
 import atk.component_mixin;
 import atk.object;
 import atk.types;
-import gid.global;
+import gid.gid;
 
 /**
  * Toplevel for embedding into other processes
  * See class@AtkSocket
  */
-class Plug : ObjectAtk, Component
+class Plug : atk.object.ObjectAtk, atk.component.Component
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -58,7 +58,7 @@ class Plug : ObjectAtk, Component
   {
     char* _cretval;
     _cretval = atk_plug_get_id(cast(AtkPlug*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class Plug : ObjectAtk, Component
    * Params:
    *   child = an #AtkObject to be set as accessible child of plug.
    */
-  void setChild(ObjectAtk child)
+  void setChild(atk.object.ObjectAtk child)
   {
     atk_plug_set_child(cast(AtkPlug*)cPtr, child ? cast(AtkObject*)child.cPtr(No.Dup) : null);
   }

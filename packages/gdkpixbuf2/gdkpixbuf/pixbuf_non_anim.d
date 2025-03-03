@@ -5,9 +5,9 @@ import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf;
 import gdkpixbuf.pixbuf_animation;
 import gdkpixbuf.types;
-import gid.global;
+import gid.gid;
 
-class PixbufNonAnim : PixbufAnimation
+class PixbufNonAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class PixbufNonAnim : PixbufAnimation
     return getType();
   }
 
-  this(Pixbuf pixbuf)
+  this(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GdkPixbufAnimation* _cretval;
     _cretval = gdk_pixbuf_non_anim_new(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);

@@ -1,7 +1,7 @@
 module gtk.accessible_text_mixin;
 
 public import gtk.accessible_text_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -41,7 +41,7 @@ template AccessibleTextT()
    *   start = the starting offset of the change, in characters
    *   end = the end offset of the change, in characters
    */
-  override void updateContents(AccessibleTextContentChange change, uint start, uint end)
+  override void updateContents(gtk.types.AccessibleTextContentChange change, uint start, uint end)
   {
     gtk_accessible_text_update_contents(cast(GtkAccessibleText*)cPtr, change, start, end);
   }

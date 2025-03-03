@@ -1,6 +1,6 @@
 module gtksource.search_settings;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -12,7 +12,7 @@ import gtksource.types;
  * search settings can be associated with one or several
  * class@SearchContexts.
  */
-class SearchSettings : ObjectG
+class SearchSettings : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -74,7 +74,7 @@ class SearchSettings : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_search_settings_get_search_text(cast(GtkSourceSearchSettings*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

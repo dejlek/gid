@@ -1,7 +1,7 @@
 module gtk.print_context;
 
-import cairo.context : DcairoContext = Context;
-import gid.global;
+import cairo.context;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -67,7 +67,7 @@ import pango.layout;
  * }
  * ```
  */
-class PrintContext : ObjectG
+class PrintContext : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -91,11 +91,11 @@ class PrintContext : ObjectG
    * `GtkPrintContext`.
    * Returns: a new Pango context for context
    */
-  Context createPangoContext()
+  pango.context.Context createPangoContext()
   {
     PangoContext* _cretval;
     _cretval = gtk_print_context_create_pango_context(cast(GtkPrintContext*)cPtr);
-    auto _retval = ObjectG.getDObject!Context(cast(PangoContext*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -104,11 +104,11 @@ class PrintContext : ObjectG
    * with the `GtkPrintContext`.
    * Returns: a new Pango layout for context
    */
-  Layout createPangoLayout()
+  pango.layout.Layout createPangoLayout()
   {
     PangoLayout* _cretval;
     _cretval = gtk_print_context_create_pango_layout(cast(GtkPrintContext*)cPtr);
-    auto _retval = ObjectG.getDObject!Layout(cast(PangoLayout*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -117,11 +117,11 @@ class PrintContext : ObjectG
    * `GtkPrintContext`.
    * Returns: the cairo context of context
    */
-  DcairoContext getCairoContext()
+  cairo.context.Context getCairoContext()
   {
     cairo_t* _cretval;
     _cretval = gtk_print_context_get_cairo_context(cast(GtkPrintContext*)cPtr);
-    auto _retval = _cretval ? new DcairoContext(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -182,11 +182,11 @@ class PrintContext : ObjectG
    * dimensions of the `GtkPrintContext`.
    * Returns: the page setup of context
    */
-  PageSetup getPageSetup()
+  gtk.page_setup.PageSetup getPageSetup()
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_context_get_page_setup(cast(GtkPrintContext*)cPtr);
-    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -195,11 +195,11 @@ class PrintContext : ObjectG
    * with the `GtkPrintContext`.
    * Returns: the font map of context
    */
-  FontMap getPangoFontmap()
+  pango.font_map.FontMap getPangoFontmap()
   {
     PangoFontMap* _cretval;
     _cretval = gtk_print_context_get_pango_fontmap(cast(GtkPrintContext*)cPtr);
-    auto _retval = ObjectG.getDObject!FontMap(cast(PangoFontMap*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class PrintContext : ObjectG
    *   dpiX = the horizontal resolution to use with cr
    *   dpiY = the vertical resolution to use with cr
    */
-  void setCairoContext(DcairoContext cr, double dpiX, double dpiY)
+  void setCairoContext(cairo.context.Context cr, double dpiX, double dpiY)
   {
     gtk_print_context_set_cairo_context(cast(GtkPrintContext*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, dpiX, dpiY);
   }

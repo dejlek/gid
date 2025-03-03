@@ -1,6 +1,6 @@
 module gsk.rounded_clip_node;
 
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.render_node;
@@ -10,7 +10,7 @@ import gsk.types;
 /**
  * A render node applying a rounded rectangle clip to its single child.
  */
-class RoundedClipNode : RenderNode
+class RoundedClipNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,10 +29,10 @@ class RoundedClipNode : RenderNode
    *   clip = The clip to apply
    * Returns: A new `GskRenderNode`
    */
-  this(RenderNode child, RoundedRect clip)
+  this(gsk.render_node.RenderNode child, gsk.rounded_rect.RoundedRect clip)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_rounded_clip_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, clip ? cast(GskRoundedRect*)clip.cPtr : null);
+    _cretval = gsk_rounded_clip_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, clip ? cast(const(GskRoundedRect)*)clip.cPtr : null);
     this(_cretval, Yes.Take);
   }
 
@@ -40,11 +40,11 @@ class RoundedClipNode : RenderNode
    * Gets the child node that is getting clipped by the given node.
    * Returns: The child that is getting clipped
    */
-  RenderNode getChild()
+  gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_rounded_clip_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    _cretval = gsk_rounded_clip_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -52,11 +52,11 @@ class RoundedClipNode : RenderNode
    * Retrieves the rounded rectangle used to clip the contents of the node.
    * Returns: a rounded rectangle
    */
-  RoundedRect getClip()
+  gsk.rounded_rect.RoundedRect getClip()
   {
     const(GskRoundedRect)* _cretval;
-    _cretval = gsk_rounded_clip_node_get_clip(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RoundedRect(cast(GskRoundedRect*)_cretval) : null;
+    _cretval = gsk_rounded_clip_node_get_clip(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval) : null;
     return _retval;
   }
 }

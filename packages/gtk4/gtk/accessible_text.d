@@ -1,7 +1,7 @@
 module gtk.accessible_text;
 
 public import gtk.accessible_text_iface_proxy;
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -44,7 +44,7 @@ interface AccessibleText
    *   start = the starting offset of the change, in characters
    *   end = the end offset of the change, in characters
    */
-  void updateContents(AccessibleTextContentChange change, uint start, uint end);
+  void updateContents(gtk.types.AccessibleTextContentChange change, uint start, uint end);
 
   /**
    * Updates the boundary of the selection.

@@ -4,7 +4,7 @@ import cairo.c.functions;
 import cairo.c.types;
 import cairo.rectangle_int;
 import cairo.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -14,7 +14,7 @@ import gobject.boxed;
  * Memory management of #cairo_region_t is done with
  * [cairo.region.Region.reference] and [cairo.region.Region.destroy].
  */
-class Region : Boxed
+class Region : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,10 +45,10 @@ class Region : Boxed
    *   y = the y coordinate of a point
    * Returns: %TRUE if $(LPAREN)x, y$(RPAREN) is contained in region, %FALSE if it is not.
    */
-  Bool containsPoint(int x, int y)
+  cairo.types.Bool containsPoint(int x, int y)
   {
-    Bool _retval;
-    _retval = cairo_region_contains_point(cast(cairo_region_t*)cPtr, x, y);
+    cairo.types.Bool _retval;
+    _retval = cairo_region_contains_point(cast(const(cairo_region_t)*)cPtr, x, y);
     return _retval;
   }
 
@@ -61,11 +61,11 @@ class Region : Boxed
    *   %CAIRO_REGION_OVERLAP_OUT if rectangle is entirely outside region, or
    *   %CAIRO_REGION_OVERLAP_PART if rectangle is partially inside and partially outside region.
    */
-  RegionOverlap containsRectangle(RectangleInt rectangle)
+  cairo.types.RegionOverlap containsRectangle(cairo.rectangle_int.RectangleInt rectangle)
   {
     cairo_region_overlap_t _cretval;
-    _cretval = cairo_region_contains_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(No.Dup) : null);
-    RegionOverlap _retval = cast(RegionOverlap)_cretval;
+    _cretval = cairo_region_contains_rectangle(cast(const(cairo_region_t)*)cPtr, rectangle ? cast(const(cairo_rectangle_int_t)*)rectangle.cPtr(No.Dup) : null);
+    cairo.types.RegionOverlap _retval = cast(cairo.types.RegionOverlap)_cretval;
     return _retval;
   }
 
@@ -77,11 +77,11 @@ class Region : Boxed
    *   error object is returned where all operations on the object do nothing.
    *   You can check for this with [cairo.region.Region.status].
    */
-  Region copy()
+  cairo.region.Region copy()
   {
     cairo_region_t* _cretval;
-    _cretval = cairo_region_copy(cast(cairo_region_t*)cPtr);
-    auto _retval = _cretval ? new Region(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = cairo_region_copy(cast(const(cairo_region_t)*)cPtr);
+    auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -93,10 +93,10 @@ class Region : Boxed
    * Returns: %TRUE if both regions contained the same coverage,
    *   %FALSE if it is not or any region is in an error status.
    */
-  Bool equal(Region b)
+  cairo.types.Bool equal(cairo.region.Region b)
   {
-    Bool _retval;
-    _retval = cairo_region_equal(cast(cairo_region_t*)cPtr, b ? cast(cairo_region_t*)b.cPtr(No.Dup) : null);
+    cairo.types.Bool _retval;
+    _retval = cairo_region_equal(cast(const(cairo_region_t)*)cPtr, b ? cast(const(cairo_region_t)*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -105,9 +105,9 @@ class Region : Boxed
    * Params:
    *   extents = rectangle into which to store the extents
    */
-  void getExtents(RectangleInt extents)
+  void getExtents(cairo.rectangle_int.RectangleInt extents)
   {
-    cairo_region_get_extents(cast(cairo_region_t*)cPtr, extents ? cast(cairo_rectangle_int_t*)extents.cPtr(No.Dup) : null);
+    cairo_region_get_extents(cast(const(cairo_region_t)*)cPtr, extents ? cast(cairo_rectangle_int_t*)extents.cPtr(No.Dup) : null);
   }
 
   /**
@@ -116,9 +116,9 @@ class Region : Boxed
    *   nth = a number indicating which rectangle should be returned
    *   rectangle = return location for a #cairo_rectangle_int_t
    */
-  void getRectangle(int nth, RectangleInt rectangle)
+  void getRectangle(int nth, cairo.rectangle_int.RectangleInt rectangle)
   {
-    cairo_region_get_rectangle(cast(cairo_region_t*)cPtr, nth, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(No.Dup) : null);
+    cairo_region_get_rectangle(cast(const(cairo_region_t)*)cPtr, nth, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(No.Dup) : null);
   }
 
   /**
@@ -127,11 +127,11 @@ class Region : Boxed
    *   other = another #cairo_region_t
    * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
    */
-  Status intersect(Region other)
+  cairo.types.Status intersect(cairo.region.Region other)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_intersect(cast(cairo_region_t*)cPtr, other ? cast(cairo_region_t*)other.cPtr(No.Dup) : null);
-    Status _retval = cast(Status)_cretval;
+    _cretval = cairo_region_intersect(cast(cairo_region_t*)cPtr, other ? cast(const(cairo_region_t)*)other.cPtr(No.Dup) : null);
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -142,11 +142,11 @@ class Region : Boxed
    *   rectangle = a #cairo_rectangle_int_t
    * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
    */
-  Status intersectRectangle(RectangleInt rectangle)
+  cairo.types.Status intersectRectangle(cairo.rectangle_int.RectangleInt rectangle)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_intersect_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(No.Dup) : null);
-    Status _retval = cast(Status)_cretval;
+    _cretval = cairo_region_intersect_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(const(cairo_rectangle_int_t)*)rectangle.cPtr(No.Dup) : null);
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -154,10 +154,10 @@ class Region : Boxed
    * Checks whether region is empty.
    * Returns: %TRUE if region is empty, %FALSE if it isn't.
    */
-  Bool isEmpty()
+  cairo.types.Bool isEmpty()
   {
-    Bool _retval;
-    _retval = cairo_region_is_empty(cast(cairo_region_t*)cPtr);
+    cairo.types.Bool _retval;
+    _retval = cairo_region_is_empty(cast(const(cairo_region_t)*)cPtr);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class Region : Boxed
   int numRectangles()
   {
     int _retval;
-    _retval = cairo_region_num_rectangles(cast(cairo_region_t*)cPtr);
+    _retval = cairo_region_num_rectangles(cast(const(cairo_region_t)*)cPtr);
     return _retval;
   }
 
@@ -177,11 +177,11 @@ class Region : Boxed
    * region object.
    * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
    */
-  Status status()
+  cairo.types.Status status()
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_status(cast(cairo_region_t*)cPtr);
-    Status _retval = cast(Status)_cretval;
+    _cretval = cairo_region_status(cast(const(cairo_region_t)*)cPtr);
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -191,11 +191,11 @@ class Region : Boxed
    *   other = another #cairo_region_t
    * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
    */
-  Status subtract(Region other)
+  cairo.types.Status subtract(cairo.region.Region other)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_subtract(cast(cairo_region_t*)cPtr, other ? cast(cairo_region_t*)other.cPtr(No.Dup) : null);
-    Status _retval = cast(Status)_cretval;
+    _cretval = cairo_region_subtract(cast(cairo_region_t*)cPtr, other ? cast(const(cairo_region_t)*)other.cPtr(No.Dup) : null);
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -205,11 +205,11 @@ class Region : Boxed
    *   rectangle = a #cairo_rectangle_int_t
    * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
    */
-  Status subtractRectangle(RectangleInt rectangle)
+  cairo.types.Status subtractRectangle(cairo.rectangle_int.RectangleInt rectangle)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_subtract_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(No.Dup) : null);
-    Status _retval = cast(Status)_cretval;
+    _cretval = cairo_region_subtract_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(const(cairo_rectangle_int_t)*)rectangle.cPtr(No.Dup) : null);
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -230,11 +230,11 @@ class Region : Boxed
    *   other = another #cairo_region_t
    * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
    */
-  Status union_(Region other)
+  cairo.types.Status union_(cairo.region.Region other)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_union(cast(cairo_region_t*)cPtr, other ? cast(cairo_region_t*)other.cPtr(No.Dup) : null);
-    Status _retval = cast(Status)_cretval;
+    _cretval = cairo_region_union(cast(cairo_region_t*)cPtr, other ? cast(const(cairo_region_t)*)other.cPtr(No.Dup) : null);
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -244,11 +244,11 @@ class Region : Boxed
    *   rectangle = a #cairo_rectangle_int_t
    * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
    */
-  Status unionRectangle(RectangleInt rectangle)
+  cairo.types.Status unionRectangle(cairo.rectangle_int.RectangleInt rectangle)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_union_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(No.Dup) : null);
-    Status _retval = cast(Status)_cretval;
+    _cretval = cairo_region_union_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(const(cairo_rectangle_int_t)*)rectangle.cPtr(No.Dup) : null);
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -260,11 +260,11 @@ class Region : Boxed
    *   other = another #cairo_region_t
    * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
    */
-  Status xor(Region other)
+  cairo.types.Status xor(cairo.region.Region other)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_xor(cast(cairo_region_t*)cPtr, other ? cast(cairo_region_t*)other.cPtr(No.Dup) : null);
-    Status _retval = cast(Status)_cretval;
+    _cretval = cairo_region_xor(cast(cairo_region_t*)cPtr, other ? cast(const(cairo_region_t)*)other.cPtr(No.Dup) : null);
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -276,11 +276,11 @@ class Region : Boxed
    *   rectangle = a #cairo_rectangle_int_t
    * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
    */
-  Status xorRectangle(RectangleInt rectangle)
+  cairo.types.Status xorRectangle(cairo.rectangle_int.RectangleInt rectangle)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_region_xor_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(No.Dup) : null);
-    Status _retval = cast(Status)_cretval;
+    _cretval = cairo_region_xor_rectangle(cast(cairo_region_t*)cPtr, rectangle ? cast(const(cairo_rectangle_int_t)*)rectangle.cPtr(No.Dup) : null);
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 }

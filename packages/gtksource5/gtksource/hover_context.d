@@ -1,6 +1,6 @@
 module gtksource.hover_context;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.text_iter;
 import gtksource.buffer;
@@ -19,7 +19,7 @@ import gtksource.view;
  * requested. [gtksource.hover_context.HoverContext.getIter] will get you the location
  * of the pointer when the request was made.
  */
-class HoverContext : ObjectG
+class HoverContext : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -49,14 +49,14 @@ class HoverContext : ObjectG
    *   end = a #GtkTextIter
    * Returns: %TRUE if the marks are still valid and begin or end was set.
    */
-  bool getBounds(out TextIter begin, out TextIter end)
+  bool getBounds(out gtk.text_iter.TextIter begin, out gtk.text_iter.TextIter end)
   {
     bool _retval;
     GtkTextIter _begin;
     GtkTextIter _end;
     _retval = gtk_source_hover_context_get_bounds(cast(GtkSourceHoverContext*)cPtr, &_begin, &_end);
-    begin = new TextIter(cast(void*)&_begin, No.Take);
-    end = new TextIter(cast(void*)&_end, No.Take);
+    begin = new gtk.text_iter.TextIter(cast(void*)&_begin, No.Take);
+    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
   }
 
@@ -64,26 +64,26 @@ class HoverContext : ObjectG
    * A convenience function to get the buffer.
    * Returns: The #GtkSourceBuffer for the view
    */
-  Buffer getBuffer()
+  gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_hover_context_get_buffer(cast(GtkSourceHoverContext*)cPtr);
-    auto _retval = ObjectG.getDObject!Buffer(cast(GtkSourceBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
-  bool getIter(TextIter iter)
+  bool getIter(gtk.text_iter.TextIter iter)
   {
     bool _retval;
     _retval = gtk_source_hover_context_get_iter(cast(GtkSourceHoverContext*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 
-  View getView()
+  gtksource.view.View getView()
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_hover_context_get_view(cast(GtkSourceHoverContext*)cPtr);
-    auto _retval = ObjectG.getDObject!View(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -1,8 +1,7 @@
 module gtk.uri_launcher;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.types;
 import glib.error;
@@ -23,7 +22,7 @@ import gtk.window;
  * calling [gtk.uri_launcher.UriLauncher.launchFinish].
  * To launch a file, use [gtk.file_launcher.FileLauncher].
  */
-class UriLauncher : ObjectG
+class UriLauncher : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -64,7 +63,7 @@ class UriLauncher : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_uri_launcher_get_uri(cast(GtkUriLauncher*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -79,14 +78,14 @@ class UriLauncher : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void launch(Window parent, Cancellable cancellable, AsyncReadyCallback callback)
+  void launch(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -102,7 +101,7 @@ class UriLauncher : ObjectG
    * Returns: `TRUE` if an application was launched,
    *   or `FALSE` and error is set
    */
-  bool launchFinish(AsyncResult result)
+  bool launchFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;

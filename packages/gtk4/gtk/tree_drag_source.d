@@ -2,7 +2,7 @@ module gtk.tree_drag_source;
 
 public import gtk.tree_drag_source_iface_proxy;
 import gdk.content_provider;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -36,7 +36,7 @@ interface TreeDragSource
 
    * Deprecated: Use list models instead
    */
-  bool dragDataDelete(TreePath path);
+  bool dragDataDelete(gtk.tree_path.TreePath path);
 
   /**
    * Asks the `GtkTreeDragSource` to return a `GdkContentProvider` representing
@@ -49,7 +49,7 @@ interface TreeDragSource
 
    * Deprecated: Use list models instead
    */
-  ContentProvider dragDataGet(TreePath path);
+  gdk.content_provider.ContentProvider dragDataGet(gtk.tree_path.TreePath path);
 
   /**
    * Asks the `GtkTreeDragSource` whether a particular row can be used as
@@ -61,5 +61,5 @@ interface TreeDragSource
 
    * Deprecated: Use list models instead
    */
-  bool rowDraggable(TreePath path);
+  bool rowDraggable(gtk.tree_path.TreePath path);
 }

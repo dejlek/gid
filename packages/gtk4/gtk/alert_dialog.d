@@ -1,8 +1,7 @@
 module gtk.alert_dialog;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.types;
 import glib.error;
@@ -21,7 +20,7 @@ import gtk.window;
  * If you don't need to wait for a button to be clicked, you can use
  * [gtk.alert_dialog.AlertDialog.show].
  */
-class AlertDialog : ObjectG
+class AlertDialog : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -53,14 +52,14 @@ class AlertDialog : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void choose(Window parent, Cancellable cancellable, AsyncReadyCallback callback)
+  void choose(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -77,7 +76,7 @@ class AlertDialog : ObjectG
    *   the dialog was cancelled and propertyGtk.AlertDialog:cancel-button
    *   is not set
    */
-  int chooseFinish(AsyncResult result)
+  int chooseFinish(gio.async_result.AsyncResult result)
   {
     int _retval;
     GError *_err;
@@ -139,7 +138,7 @@ class AlertDialog : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_alert_dialog_get_detail(cast(GtkAlertDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -151,7 +150,7 @@ class AlertDialog : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_alert_dialog_get_message(cast(GtkAlertDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -249,7 +248,7 @@ class AlertDialog : ObjectG
    * Params:
    *   parent = the parent `GtkWindow`
    */
-  void show(Window parent)
+  void show(gtk.window.Window parent)
   {
     gtk_alert_dialog_show(cast(GtkAlertDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
   }

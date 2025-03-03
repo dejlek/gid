@@ -12,6 +12,7 @@
     ":atk1": "*",
     ":cairo1": "*",
     ":freetype2": "*",
+    ":gdk3": "*",
     ":gdk4": "*",
     ":gdkpixbuf2": "*",
     ":gio2": "*",
@@ -19,6 +20,7 @@
     ":gmodule2": "*",
     ":graphene1": "*",
     ":gsk4": "*",
+    ":gtk3": "*",
     ":gtk4": "*",
     ":gtksource5": "*",
     ":harfbuzz0": "*",
@@ -28,7 +30,8 @@
     ":rsvg2": "*",
     ":secret1": "*",
     ":soup3": "*",
-    ":vte3": "*"
+    ":vte3": "*",
+    ":xlib2": "*"
   },
   "subPackages": [
     "packages/arrow1/",
@@ -37,6 +40,7 @@
     "packages/atk1/",
     "packages/cairo1/",
     "packages/freetype2/",
+    "packages/gdk3/",
     "packages/gdk4/",
     "packages/gdkpixbuf2/",
     "packages/gio2/",
@@ -44,6 +48,7 @@
     "packages/gmodule2/",
     "packages/graphene1/",
     "packages/gsk4/",
+    "packages/gtk3/",
     "packages/gtk4/",
     "packages/gtksource5/",
     "packages/harfbuzz0/",
@@ -53,6 +58,7 @@
     "packages/rsvg2/",
     "packages/secret1/",
     "packages/soup3/",
-    "packages/vte3/"
+    "packages/vte3/",
+    "packages/xlib2/"
   ]
 }

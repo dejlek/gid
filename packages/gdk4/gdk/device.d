@@ -7,7 +7,7 @@ import gdk.display;
 import gdk.seat;
 import gdk.surface;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import pango.types;
@@ -18,7 +18,7 @@ import pango.types;
  * See the [gdk.seat.Seat] documentation for more information
  * about the various kinds of devices, and their relationships.
  */
-class Device : ObjectG
+class Device : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -53,11 +53,11 @@ class Device : ObjectG
    * Retrieves the current tool for device.
    * Returns: the `GdkDeviceTool`
    */
-  DeviceTool getDeviceTool()
+  gdk.device_tool.DeviceTool getDeviceTool()
   {
     GdkDeviceTool* _cretval;
     _cretval = gdk_device_get_device_tool(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!DeviceTool(cast(GdkDeviceTool*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
     return _retval;
   }
 
@@ -70,11 +70,11 @@ class Device : ObjectG
    *   if it can determine the direction. %PANGO_DIRECTION_NEUTRAL
    *   otherwise
    */
-  Direction getDirection()
+  pango.types.Direction getDirection()
   {
     PangoDirection _cretval;
     _cretval = gdk_device_get_direction(cast(GdkDevice*)cPtr);
-    Direction _retval = cast(Direction)_cretval;
+    pango.types.Direction _retval = cast(pango.types.Direction)_cretval;
     return _retval;
   }
 
@@ -82,11 +82,11 @@ class Device : ObjectG
    * Returns the `GdkDisplay` to which device pertains.
    * Returns: a `GdkDisplay`
    */
-  Display getDisplay()
+  gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gdk_device_get_display(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -108,11 +108,11 @@ class Device : ObjectG
    * This is only relevant for keyboard devices.
    * Returns: the current modifier state
    */
-  ModifierType getModifierState()
+  gdk.types.ModifierType getModifierState()
   {
     GdkModifierType _cretval;
     _cretval = gdk_device_get_modifier_state(cast(GdkDevice*)cPtr);
-    ModifierType _retval = cast(ModifierType)_cretval;
+    gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class Device : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_device_get_name(cast(GdkDevice*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class Device : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_device_get_product_id(cast(GdkDevice*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -181,11 +181,11 @@ class Device : ObjectG
    * Returns the `GdkSeat` the device belongs to.
    * Returns: a `GdkSeat`
    */
-  Seat getSeat()
+  gdk.seat.Seat getSeat()
   {
     GdkSeat* _cretval;
     _cretval = gdk_device_get_seat(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!Seat(cast(GdkSeat*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -193,11 +193,11 @@ class Device : ObjectG
    * Determines the type of the device.
    * Returns: a `GdkInputSource`
    */
-  InputSource getSource()
+  gdk.types.InputSource getSource()
   {
     GdkInputSource _cretval;
     _cretval = gdk_device_get_source(cast(GdkDevice*)cPtr);
-    InputSource _retval = cast(InputSource)_cretval;
+    gdk.types.InputSource _retval = cast(gdk.types.InputSource)_cretval;
     return _retval;
   }
 
@@ -214,11 +214,11 @@ class Device : ObjectG
    * Returns: the `GdkSurface` under the
    *   device position
    */
-  Surface getSurfaceAtPosition(out double winX, out double winY)
+  gdk.surface.Surface getSurfaceAtPosition(out double winX, out double winY)
   {
     GdkSurface* _cretval;
     _cretval = gdk_device_get_surface_at_position(cast(GdkDevice*)cPtr, cast(double*)&winX, cast(double*)&winY);
-    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class Device : ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_device_get_vendor_id(cast(GdkDevice*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -291,8 +291,8 @@ class Device : ObjectG
    * and keys on the new physical device.
    *   device = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(Device device);
-  alias ChangedCallbackFunc = void function(Device device);
+  alias ChangedCallbackDlg = void delegate(gdk.device.Device device);
+  alias ChangedCallbackFunc = void function(gdk.device.Device device);
 
   /**
    * Connect to Changed signal.
@@ -308,7 +308,7 @@ class Device : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto device = getVal!Device(_paramVals);
+      auto device = getVal!(gdk.device.Device)(_paramVals);
       _dClosure.dlg(device);
     }
 
@@ -322,8 +322,8 @@ class Device : ObjectG
    *   tool = The new current tool
    *   device = the instance the signal is connected to
    */
-  alias ToolChangedCallbackDlg = void delegate(DeviceTool tool, Device device);
-  alias ToolChangedCallbackFunc = void function(DeviceTool tool, Device device);
+  alias ToolChangedCallbackDlg = void delegate(gdk.device_tool.DeviceTool tool, gdk.device.Device device);
+  alias ToolChangedCallbackFunc = void function(gdk.device_tool.DeviceTool tool, gdk.device.Device device);
 
   /**
    * Connect to ToolChanged signal.
@@ -339,8 +339,8 @@ class Device : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto device = getVal!Device(_paramVals);
-      auto tool = getVal!DeviceTool(&_paramVals[1]);
+      auto device = getVal!(gdk.device.Device)(_paramVals);
+      auto tool = getVal!(gdk.device_tool.DeviceTool)(&_paramVals[1]);
       _dClosure.dlg(tool, device);
     }
 

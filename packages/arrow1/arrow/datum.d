@@ -3,10 +3,10 @@ module arrow.datum;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class Datum : ObjectG
+class Datum : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -25,7 +25,7 @@ class Datum : ObjectG
     return getType();
   }
 
-  bool equal(Datum otherDatum)
+  bool equal(arrow.datum.Datum otherDatum)
   {
     bool _retval;
     _retval = garrow_datum_equal(cast(GArrowDatum*)cPtr, otherDatum ? cast(GArrowDatum*)otherDatum.cPtr(No.Dup) : null);
@@ -64,7 +64,7 @@ class Datum : ObjectG
   {
     char* _cretval;
     _cretval = garrow_datum_to_string(cast(GArrowDatum*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

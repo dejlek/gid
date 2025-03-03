@@ -5,7 +5,7 @@ import gtk.buildable;
 import gtk.buildable_mixin;
 
 /// Proxy object for Gtk.Buildable interface when a GObject has no applicable D binding
-class BuildableIfaceProxy : IfaceProxy, Buildable
+class BuildableIfaceProxy : IfaceProxy, gtk.buildable.Buildable
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class BuildableIfaceProxy : IfaceProxy, Buildable
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Buildable);
+    return typeid(gtk.buildable.Buildable);
   }
 
   mixin BuildableT!();

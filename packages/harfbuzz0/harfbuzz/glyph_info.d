@@ -1,6 +1,6 @@
 module harfbuzz.glyph_info;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -10,7 +10,7 @@ import harfbuzz.types;
  * The #hb_glyph_info_t is the structure that holds information about the
  * glyphs and their relation to input text.
  */
-class GlyphInfo : Boxed
+class GlyphInfo : gobject.boxed.Boxed
 {
 
   this()
@@ -39,12 +39,12 @@ class GlyphInfo : Boxed
     return getType();
   }
 
-  @property Codepoint codepoint()
+  @property harfbuzz.types.Codepoint codepoint()
   {
     return (cast(hb_glyph_info_t*)cPtr).codepoint;
   }
 
-  @property void codepoint(Codepoint propval)
+  @property void codepoint(harfbuzz.types.Codepoint propval)
   {
     (cast(hb_glyph_info_t*)cPtr).codepoint = propval;
   }

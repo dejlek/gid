@@ -1,7 +1,7 @@
 module gtk.gesture_click;
 
 import gdk.event_sequence;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -16,7 +16,7 @@ import gtk.types;
  * defaults, [gtk.gesture_click.GestureClick.stopped] is emitted, and the
  * click counter is reset.
  */
-class GestureClick : GestureSingle
+class GestureClick : gtk.gesture_single.GestureSingle
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -55,8 +55,8 @@ class GestureClick : GestureSingle
    *   y = The Y coordinate, in widget allocation coordinates
    *   gestureClick = the instance the signal is connected to
    */
-  alias PressedCallbackDlg = void delegate(int nPress, double x, double y, GestureClick gestureClick);
-  alias PressedCallbackFunc = void function(int nPress, double x, double y, GestureClick gestureClick);
+  alias PressedCallbackDlg = void delegate(int nPress, double x, double y, gtk.gesture_click.GestureClick gestureClick);
+  alias PressedCallbackFunc = void function(int nPress, double x, double y, gtk.gesture_click.GestureClick gestureClick);
 
   /**
    * Connect to Pressed signal.
@@ -72,10 +72,10 @@ class GestureClick : GestureSingle
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureClick = getVal!GestureClick(_paramVals);
-      auto nPress = getVal!int(&_paramVals[1]);
-      auto x = getVal!double(&_paramVals[2]);
-      auto y = getVal!double(&_paramVals[3]);
+      auto gestureClick = getVal!(gtk.gesture_click.GestureClick)(_paramVals);
+      auto nPress = getVal!(int)(&_paramVals[1]);
+      auto x = getVal!(double)(&_paramVals[2]);
+      auto y = getVal!(double)(&_paramVals[3]);
       _dClosure.dlg(nPress, x, y, gestureClick);
     }
 
@@ -95,8 +95,8 @@ class GestureClick : GestureSingle
    *   y = The Y coordinate, in widget allocation coordinates
    *   gestureClick = the instance the signal is connected to
    */
-  alias ReleasedCallbackDlg = void delegate(int nPress, double x, double y, GestureClick gestureClick);
-  alias ReleasedCallbackFunc = void function(int nPress, double x, double y, GestureClick gestureClick);
+  alias ReleasedCallbackDlg = void delegate(int nPress, double x, double y, gtk.gesture_click.GestureClick gestureClick);
+  alias ReleasedCallbackFunc = void function(int nPress, double x, double y, gtk.gesture_click.GestureClick gestureClick);
 
   /**
    * Connect to Released signal.
@@ -112,10 +112,10 @@ class GestureClick : GestureSingle
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureClick = getVal!GestureClick(_paramVals);
-      auto nPress = getVal!int(&_paramVals[1]);
-      auto x = getVal!double(&_paramVals[2]);
-      auto y = getVal!double(&_paramVals[3]);
+      auto gestureClick = getVal!(gtk.gesture_click.GestureClick)(_paramVals);
+      auto nPress = getVal!(int)(&_paramVals[1]);
+      auto x = getVal!(double)(&_paramVals[2]);
+      auto y = getVal!(double)(&_paramVals[3]);
       _dClosure.dlg(nPress, x, y, gestureClick);
     }
 
@@ -127,8 +127,8 @@ class GestureClick : GestureSingle
    * Emitted whenever any time/distance threshold has been exceeded.
    *   gestureClick = the instance the signal is connected to
    */
-  alias StoppedCallbackDlg = void delegate(GestureClick gestureClick);
-  alias StoppedCallbackFunc = void function(GestureClick gestureClick);
+  alias StoppedCallbackDlg = void delegate(gtk.gesture_click.GestureClick gestureClick);
+  alias StoppedCallbackFunc = void function(gtk.gesture_click.GestureClick gestureClick);
 
   /**
    * Connect to Stopped signal.
@@ -144,7 +144,7 @@ class GestureClick : GestureSingle
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureClick = getVal!GestureClick(_paramVals);
+      auto gestureClick = getVal!(gtk.gesture_click.GestureClick)(_paramVals);
       _dClosure.dlg(gestureClick);
     }
 
@@ -165,8 +165,8 @@ class GestureClick : GestureSingle
    *   sequence = Sequence being released
    *   gestureClick = the instance the signal is connected to
    */
-  alias UnpairedReleaseCallbackDlg = void delegate(double x, double y, uint button, EventSequence sequence, GestureClick gestureClick);
-  alias UnpairedReleaseCallbackFunc = void function(double x, double y, uint button, EventSequence sequence, GestureClick gestureClick);
+  alias UnpairedReleaseCallbackDlg = void delegate(double x, double y, uint button, gdk.event_sequence.EventSequence sequence, gtk.gesture_click.GestureClick gestureClick);
+  alias UnpairedReleaseCallbackFunc = void function(double x, double y, uint button, gdk.event_sequence.EventSequence sequence, gtk.gesture_click.GestureClick gestureClick);
 
   /**
    * Connect to UnpairedRelease signal.
@@ -182,11 +182,11 @@ class GestureClick : GestureSingle
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureClick = getVal!GestureClick(_paramVals);
-      auto x = getVal!double(&_paramVals[1]);
-      auto y = getVal!double(&_paramVals[2]);
-      auto button = getVal!uint(&_paramVals[3]);
-      auto sequence = getVal!EventSequence(&_paramVals[4]);
+      auto gestureClick = getVal!(gtk.gesture_click.GestureClick)(_paramVals);
+      auto x = getVal!(double)(&_paramVals[1]);
+      auto y = getVal!(double)(&_paramVals[2]);
+      auto button = getVal!(uint)(&_paramVals[3]);
+      auto sequence = getVal!(gdk.event_sequence.EventSequence)(&_paramVals[4]);
       _dClosure.dlg(x, y, button, sequence, gestureClick);
     }
 

@@ -1,6 +1,6 @@
 module gtk.multi_selection;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -16,7 +16,7 @@ import gtk.types;
  * `GtkMultiSelection` is a `GtkSelectionModel` that allows selecting multiple
  * elements.
  */
-class MultiSelection : ObjectG, ListModel, SectionModel, SelectionModel
+class MultiSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel, gtk.selection_model.SelectionModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,7 +45,7 @@ class MultiSelection : ObjectG, ListModel, SectionModel, SelectionModel
    *   model = the `GListModel` to manage
    * Returns: a new `GtkMultiSelection`
    */
-  this(ListModel model)
+  this(gio.list_model.ListModel model)
   {
     GtkMultiSelection* _cretval;
     _cretval = gtk_multi_selection_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
@@ -56,11 +56,11 @@ class MultiSelection : ObjectG, ListModel, SectionModel, SelectionModel
    * Returns the underlying model of self.
    * Returns: the underlying model
    */
-  ListModel getModel()
+  gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
     _cretval = gtk_multi_selection_get_model(cast(GtkMultiSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class MultiSelection : ObjectG, ListModel, SectionModel, SelectionModel
    * Params:
    *   model = A `GListModel` to wrap
    */
-  void setModel(ListModel model)
+  void setModel(gio.list_model.ListModel model)
   {
     gtk_multi_selection_set_model(cast(GtkMultiSelection*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

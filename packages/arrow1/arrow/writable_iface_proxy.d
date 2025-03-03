@@ -5,7 +5,7 @@ import arrow.writable;
 import arrow.writable_mixin;
 
 /// Proxy object for Arrow.Writable interface when a GObject has no applicable D binding
-class WritableIfaceProxy : IfaceProxy, Writable
+class WritableIfaceProxy : IfaceProxy, arrow.writable.Writable
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class WritableIfaceProxy : IfaceProxy, Writable
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Writable);
+    return typeid(arrow.writable.Writable);
   }
 
   mixin WritableT!();

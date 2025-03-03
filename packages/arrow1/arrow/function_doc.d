@@ -3,10 +3,10 @@ module arrow.function_doc;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class FunctionDoc : ObjectG
+class FunctionDoc : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -47,7 +47,7 @@ class FunctionDoc : ObjectG
   {
     char* _cretval;
     _cretval = garrow_function_doc_get_description(cast(GArrowFunctionDoc*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -55,7 +55,7 @@ class FunctionDoc : ObjectG
   {
     char* _cretval;
     _cretval = garrow_function_doc_get_options_class_name(cast(GArrowFunctionDoc*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -63,7 +63,7 @@ class FunctionDoc : ObjectG
   {
     char* _cretval;
     _cretval = garrow_function_doc_get_summary(cast(GArrowFunctionDoc*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

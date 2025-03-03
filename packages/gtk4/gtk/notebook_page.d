@@ -1,6 +1,6 @@
 module gtk.notebook_page;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -10,7 +10,7 @@ import gtk.widget;
 /**
  * `GtkNotebookPage` is an auxiliary object used by `GtkNotebook`.
  */
-class NotebookPage : ObjectG
+class NotebookPage : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -33,11 +33,11 @@ class NotebookPage : ObjectG
    * Returns the notebook child to which page belongs.
    * Returns: the child to which page belongs
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_page_get_child(cast(GtkNotebookPage*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 }

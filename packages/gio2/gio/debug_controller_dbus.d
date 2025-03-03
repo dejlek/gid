@@ -1,6 +1,6 @@
 module gio.debug_controller_dbus;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -110,7 +110,7 @@ import gobject.object;
  * }
  * ```
  */
-class DebugControllerDBus : ObjectG, DebugController, Initable
+class DebugControllerDBus : gobject.object.ObjectG, gio.debug_controller.DebugController, gio.initable.Initable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -144,7 +144,7 @@ class DebugControllerDBus : ObjectG, DebugController, Initable
    * Returns: a new #GDebugControllerDBus, or %NULL
    *   on failure
    */
-  this(DBusConnection connection, Cancellable cancellable)
+  this(gio.dbus_connection.DBusConnection connection, gio.cancellable.Cancellable cancellable)
   {
     GDebugControllerDBus* _cretval;
     GError *_err;
@@ -192,8 +192,8 @@ class DebugControllerDBus : ObjectG, DebugController, Initable
    *   debugControllerDBus = the instance the signal is connected to
    * Returns: %TRUE if the call is authorized, %FALSE otherwise.
    */
-  alias AuthorizeCallbackDlg = bool delegate(DBusMethodInvocation invocation, DebugControllerDBus debugControllerDBus);
-  alias AuthorizeCallbackFunc = bool function(DBusMethodInvocation invocation, DebugControllerDBus debugControllerDBus);
+  alias AuthorizeCallbackDlg = bool delegate(gio.dbus_method_invocation.DBusMethodInvocation invocation, gio.debug_controller_dbus.DebugControllerDBus debugControllerDBus);
+  alias AuthorizeCallbackFunc = bool function(gio.dbus_method_invocation.DBusMethodInvocation invocation, gio.debug_controller_dbus.DebugControllerDBus debugControllerDBus);
 
   /**
    * Connect to Authorize signal.
@@ -210,8 +210,8 @@ class DebugControllerDBus : ObjectG, DebugController, Initable
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto debugControllerDBus = getVal!DebugControllerDBus(_paramVals);
-      auto invocation = getVal!DBusMethodInvocation(&_paramVals[1]);
+      auto debugControllerDBus = getVal!(gio.debug_controller_dbus.DebugControllerDBus)(_paramVals);
+      auto invocation = getVal!(gio.dbus_method_invocation.DBusMethodInvocation)(&_paramVals[1]);
       _retval = _dClosure.dlg(invocation, debugControllerDBus);
       setVal!bool(_returnValue, _retval);
     }

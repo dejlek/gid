@@ -4,7 +4,7 @@ public import atk.implementor_iface_iface_proxy;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.global;
+import gid.gid;
 
 /**
  * The AtkImplementor interface is implemented by objects for which

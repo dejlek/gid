@@ -6,11 +6,11 @@ import arrow.decimal128;
 import arrow.decimal128_data_type;
 import arrow.fixed_size_binary_array_builder;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.error;
 
-class Decimal128ArrayBuilder : FixedSizeBinaryArrayBuilder
+class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,14 +29,14 @@ class Decimal128ArrayBuilder : FixedSizeBinaryArrayBuilder
     return getType();
   }
 
-  this(Decimal128DataType dataType)
+  this(arrow.decimal128_data_type.Decimal128DataType dataType)
   {
     GArrowDecimal128ArrayBuilder* _cretval;
     _cretval = garrow_decimal128_array_builder_new(dataType ? cast(GArrowDecimal128DataType*)dataType.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
-  bool append(Decimal128 value)
+  bool append(arrow.decimal128.Decimal128 value)
   {
     bool _retval;
     GError *_err;
@@ -46,9 +46,9 @@ class Decimal128ArrayBuilder : FixedSizeBinaryArrayBuilder
     return _retval;
   }
 
-  alias appendValue = FixedSizeBinaryArrayBuilder.appendValue;
+  alias appendValue = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValue;
 
-  bool appendValue(Decimal128 value)
+  bool appendValue(arrow.decimal128.Decimal128 value)
   {
     bool _retval;
     GError *_err;
@@ -58,7 +58,7 @@ class Decimal128ArrayBuilder : FixedSizeBinaryArrayBuilder
     return _retval;
   }
 
-  alias appendValues = FixedSizeBinaryArrayBuilder.appendValues;
+  alias appendValues = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValues;
 
   /**
    * Append multiple values at once. It's more efficient than multiple
@@ -71,7 +71,7 @@ class Decimal128ArrayBuilder : FixedSizeBinaryArrayBuilder
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendValues(Decimal128[] values, bool[] isValids)
+  bool appendValues(arrow.decimal128.Decimal128[] values, bool[] isValids)
   {
     bool _retval;
     long _valuesLength;

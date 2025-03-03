@@ -1,6 +1,6 @@
 module soup.websocket_extension_deflate;
 
-import gid.global;
+import gid.gid;
 import soup.c.functions;
 import soup.c.types;
 import soup.types;
@@ -12,7 +12,7 @@ import soup.websocket_extension;
  * This extension is used by default in a class@Session when class@WebsocketExtensionManager
  * feature is present, and always used by class@Server.
  */
-class WebsocketExtensionDeflate : WebsocketExtension
+class WebsocketExtensionDeflate : soup.websocket_extension.WebsocketExtension
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

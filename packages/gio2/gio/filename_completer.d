@@ -1,6 +1,6 @@
 module gio.filename_completer;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -12,7 +12,7 @@ import gobject.object;
  * looking in the file system for clues. Can return a list of possible
  * completion strings for widget implementations.
  */
-class FilenameCompleter : ObjectG
+class FilenameCompleter : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -55,7 +55,7 @@ class FilenameCompleter : ObjectG
     char* _cretval;
     const(char)* _initialText = initialText.toCString(No.Alloc);
     _cretval = g_filename_completer_get_completion_suffix(cast(GFilenameCompleter*)cPtr, _initialText);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -100,8 +100,8 @@ class FilenameCompleter : ObjectG
    * Emitted when the file name completion information comes available.
    *   filenameCompleter = the instance the signal is connected to
    */
-  alias GotCompletionDataCallbackDlg = void delegate(FilenameCompleter filenameCompleter);
-  alias GotCompletionDataCallbackFunc = void function(FilenameCompleter filenameCompleter);
+  alias GotCompletionDataCallbackDlg = void delegate(gio.filename_completer.FilenameCompleter filenameCompleter);
+  alias GotCompletionDataCallbackFunc = void function(gio.filename_completer.FilenameCompleter filenameCompleter);
 
   /**
    * Connect to GotCompletionData signal.
@@ -117,7 +117,7 @@ class FilenameCompleter : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto filenameCompleter = getVal!FilenameCompleter(_paramVals);
+      auto filenameCompleter = getVal!(gio.filename_completer.FilenameCompleter)(_paramVals);
       _dClosure.dlg(filenameCompleter);
     }
 

@@ -1,6 +1,6 @@
 module gtk.scroll_info;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gtk.c.functions;
 import gtk.c.types;
@@ -12,7 +12,7 @@ import gtk.types;
  * Scrolling functions usually allow passing a %NULL scroll info which will cause
  * the default values to be used and just scroll the element into view.
  */
-class ScrollInfo : Boxed
+class ScrollInfo : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

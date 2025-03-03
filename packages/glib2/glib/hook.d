@@ -1,6 +1,6 @@
 module glib.hook;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.hook_list;
@@ -29,14 +29,14 @@ class Hook
     return cast(void*)&cInstance;
   }
 
-  @property Hook next()
+  @property glib.hook.Hook next()
   {
-    return new Hook(cast(GHook*)(cast(GHook*)cPtr).next);
+    return new glib.hook.Hook(cast(GHook*)(cast(GHook*)cPtr).next);
   }
 
-  @property Hook prev()
+  @property glib.hook.Hook prev()
   {
-    return new Hook(cast(GHook*)(cast(GHook*)cPtr).prev);
+    return new glib.hook.Hook(cast(GHook*)(cast(GHook*)cPtr).prev);
   }
 
   @property uint refCount()
@@ -86,7 +86,7 @@ class Hook
    *   sibling = a #GHook to compare with new_hook
    * Returns: a value <\= 0 if the id of sibling is >\= the id of new_hook
    */
-  int compareIds(Hook sibling)
+  int compareIds(glib.hook.Hook sibling)
   {
     int _retval;
     _retval = g_hook_compare_ids(cast(GHook*)cPtr, sibling ? cast(GHook*)sibling.cPtr : null);
@@ -100,7 +100,7 @@ class Hook
    *   hookId = a hook ID
    * Returns: %TRUE if the #GHook was found in the #GHookList and destroyed
    */
-  static bool destroy(HookList hookList, gulong hookId)
+  static bool destroy(glib.hook_list.HookList hookList, gulong hookId)
   {
     bool _retval;
     _retval = g_hook_destroy(hookList ? cast(GHookList*)hookList.cPtr : null, hookId);
@@ -114,7 +114,7 @@ class Hook
    *   hookList = a #GHookList
    *   hook = the #GHook to remove
    */
-  static void destroyLink(HookList hookList, Hook hook)
+  static void destroyLink(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {
     g_hook_destroy_link(hookList ? cast(GHookList*)hookList.cPtr : null, hook ? cast(GHook*)hook.cPtr : null);
   }
@@ -126,7 +126,7 @@ class Hook
    *   hookList = a #GHookList
    *   hook = the #GHook to free
    */
-  static void free(HookList hookList, Hook hook)
+  static void free(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {
     g_hook_free(hookList ? cast(GHookList*)hookList.cPtr : null, hook ? cast(GHook*)hook.cPtr : null);
   }
@@ -138,7 +138,7 @@ class Hook
    *   sibling = the #GHook to insert the new #GHook before
    *   hook = the #GHook to insert
    */
-  static void insertBefore(HookList hookList, Hook sibling, Hook hook)
+  static void insertBefore(glib.hook_list.HookList hookList, glib.hook.Hook sibling, glib.hook.Hook hook)
   {
     g_hook_insert_before(hookList ? cast(GHookList*)hookList.cPtr : null, sibling ? cast(GHook*)sibling.cPtr : null, hook ? cast(GHook*)hook.cPtr : null);
   }
@@ -150,13 +150,13 @@ class Hook
    *   hook = the #GHook to insert
    *   func = the comparison function used to sort the #GHook elements
    */
-  static void insertSorted(HookList hookList, Hook hook, HookCompareFunc func)
+  static void insertSorted(glib.hook_list.HookList hookList, glib.hook.Hook hook, glib.types.HookCompareFunc func)
   {
-    static HookCompareFunc _static_func;
+    static glib.types.HookCompareFunc _static_func;
 
     extern(C) int _funcCallback(GHook* newHook, GHook* sibling)
     {
-      int _retval = _static_func(newHook ? new Hook(cast(void*)newHook, No.Take) : null, sibling ? new Hook(cast(void*)sibling, No.Take) : null);
+      int _retval = _static_func(newHook ? new glib.hook.Hook(cast(void*)newHook, No.Take) : null, sibling ? new glib.hook.Hook(cast(void*)sibling, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -172,7 +172,7 @@ class Hook
    *   hookList = a #GHookList
    *   hook = the #GHook to add to the start of hook_list
    */
-  static void prepend(HookList hookList, Hook hook)
+  static void prepend(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {
     g_hook_prepend(hookList ? cast(GHookList*)hookList.cPtr : null, hook ? cast(GHook*)hook.cPtr : null);
   }
@@ -185,7 +185,7 @@ class Hook
    *   hookList = a #GHookList
    *   hook = the #GHook to unref
    */
-  static void unref(HookList hookList, Hook hook)
+  static void unref(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {
     g_hook_unref(hookList ? cast(GHookList*)hookList.cPtr : null, hook ? cast(GHook*)hook.cPtr : null);
   }

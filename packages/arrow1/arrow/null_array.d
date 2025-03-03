@@ -4,9 +4,9 @@ import arrow.array;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class NullArray : Array
+class NullArray : arrow.array.Array
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

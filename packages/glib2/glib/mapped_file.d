@@ -1,6 +1,6 @@
 module glib.mapped_file;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.c.functions;
 import glib.c.types;
@@ -13,7 +13,7 @@ import gobject.boxed;
  * [glib.mapped_file.MappedFile.new_]. It has only private members and should
  * not be accessed directly.
  */
-class MappedFile : Boxed
+class MappedFile : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -85,14 +85,14 @@ class MappedFile : Boxed
    * Returns: a newly allocated #GMappedFile which must be unref'd
    *   with [glib.mapped_file.MappedFile.unref], or %NULL if the mapping failed.
    */
-  static MappedFile newFromFd(int fd, bool writable)
+  static glib.mapped_file.MappedFile newFromFd(int fd, bool writable)
   {
     GMappedFile* _cretval;
     GError *_err;
     _cretval = g_mapped_file_new_from_fd(fd, writable, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new MappedFile(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.mapped_file.MappedFile(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -103,11 +103,11 @@ class MappedFile : Boxed
    * Returns: A newly allocated #GBytes referencing data
    *   from file
    */
-  Bytes getBytes()
+  glib.bytes.Bytes getBytes()
   {
     GBytes* _cretval;
     _cretval = g_mapped_file_get_bytes(cast(GMappedFile*)cPtr);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class MappedFile : Boxed
   {
     char* _cretval;
     _cretval = g_mapped_file_get_contents(cast(GMappedFile*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 

@@ -5,11 +5,11 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.struct_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class StructArrayBuilder : ArrayBuilder
+class StructArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -28,7 +28,7 @@ class StructArrayBuilder : ArrayBuilder
     return getType();
   }
 
-  this(StructDataType dataType)
+  this(arrow.struct_data_type.StructDataType dataType)
   {
     GArrowStructArrayBuilder* _cretval;
     GError *_err;
@@ -58,19 +58,19 @@ class StructArrayBuilder : ArrayBuilder
     return _retval;
   }
 
-  ArrayBuilder getFieldBuilder(int i)
+  arrow.array_builder.ArrayBuilder getFieldBuilder(int i)
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_struct_array_builder_get_field_builder(cast(GArrowStructArrayBuilder*)cPtr, i);
-    auto _retval = ObjectG.getDObject!ArrayBuilder(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 
-  ArrayBuilder[] getFieldBuilders()
+  arrow.array_builder.ArrayBuilder[] getFieldBuilders()
   {
     GList* _cretval;
     _cretval = garrow_struct_array_builder_get_field_builders(cast(GArrowStructArrayBuilder*)cPtr);
-    auto _retval = gListToD!(ArrayBuilder, GidOwnership.None)(cast(GList*)_cretval);
+    auto _retval = gListToD!(arrow.array_builder.ArrayBuilder, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
 }

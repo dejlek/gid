@@ -1,8 +1,7 @@
 module gio.tls_connection;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -23,7 +22,7 @@ import gobject.object;
  * respectively.
  * For DTLS $(LPAREN)Datagram TLS$(RPAREN) support, see [gio.dtls_connection.DtlsConnection].
  */
-class TlsConnection : IOStream
+class TlsConnection : gio.iostream.IOStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -51,7 +50,7 @@ class TlsConnection : IOStream
    * Returns: %TRUE if one of the signal handlers has returned
    *   %TRUE to accept peer_cert
    */
-  bool emitAcceptCertificate(TlsCertificate peerCert, TlsCertificateFlags errors)
+  bool emitAcceptCertificate(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors)
   {
     bool _retval;
     _retval = g_tls_connection_emit_accept_certificate(cast(GTlsConnection*)cPtr, peerCert ? cast(GTlsCertificate*)peerCert.cPtr(No.Dup) : null, errors);
@@ -63,11 +62,11 @@ class TlsConnection : IOStream
    * [gio.tls_connection.TlsConnection.setCertificate].
    * Returns: conn's certificate, or %NULL
    */
-  TlsCertificate getCertificate()
+  gio.tls_certificate.TlsCertificate getCertificate()
   {
     GTlsCertificate* _cretval;
     _cretval = g_tls_connection_get_certificate(cast(GTlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!TlsCertificate(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -86,7 +85,7 @@ class TlsConnection : IOStream
   {
     char* _cretval;
     _cretval = g_tls_connection_get_ciphersuite_name(cast(GTlsConnection*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -95,11 +94,11 @@ class TlsConnection : IOStream
    * peer certificates. See [gio.tls_connection.TlsConnection.setDatabase].
    * Returns: the certificate database that conn uses or %NULL
    */
-  TlsDatabase getDatabase()
+  gio.tls_database.TlsDatabase getDatabase()
   {
     GTlsDatabase* _cretval;
     _cretval = g_tls_connection_get_database(cast(GTlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!TlsDatabase(cast(GTlsDatabase*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
     return _retval;
   }
 
@@ -109,11 +108,11 @@ class TlsConnection : IOStream
    * no user interaction will occur for this connection.
    * Returns: The interaction object.
    */
-  TlsInteraction getInteraction()
+  gio.tls_interaction.TlsInteraction getInteraction()
   {
     GTlsInteraction* _cretval;
     _cretval = g_tls_connection_get_interaction(cast(GTlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!TlsInteraction(cast(GTlsInteraction*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -130,7 +129,7 @@ class TlsConnection : IOStream
   {
     const(char)* _cretval;
     _cretval = g_tls_connection_get_negotiated_protocol(cast(GTlsConnection*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -140,11 +139,11 @@ class TlsConnection : IOStream
    * #GTlsConnection::accept-certificate.$(RPAREN)
    * Returns: conn's peer's certificate, or %NULL
    */
-  TlsCertificate getPeerCertificate()
+  gio.tls_certificate.TlsCertificate getPeerCertificate()
   {
     GTlsCertificate* _cretval;
     _cretval = g_tls_connection_get_peer_certificate(cast(GTlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!TlsCertificate(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -155,11 +154,11 @@ class TlsConnection : IOStream
    * See #GTlsConnection:peer-certificate-errors for more information.
    * Returns: conn's peer's certificate errors
    */
-  TlsCertificateFlags getPeerCertificateErrors()
+  gio.types.TlsCertificateFlags getPeerCertificateErrors()
   {
     GTlsCertificateFlags _cretval;
     _cretval = g_tls_connection_get_peer_certificate_errors(cast(GTlsConnection*)cPtr);
-    TlsCertificateFlags _retval = cast(TlsCertificateFlags)_cretval;
+    gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
   }
 
@@ -170,11 +169,11 @@ class TlsConnection : IOStream
    * that is not a recognized #GTlsProtocolVersion.
    * Returns: The current TLS protocol version
    */
-  TlsProtocolVersion getProtocolVersion()
+  gio.types.TlsProtocolVersion getProtocolVersion()
   {
     GTlsProtocolVersion _cretval;
     _cretval = g_tls_connection_get_protocol_version(cast(GTlsConnection*)cPtr);
-    TlsProtocolVersion _retval = cast(TlsProtocolVersion)_cretval;
+    gio.types.TlsProtocolVersion _retval = cast(gio.types.TlsProtocolVersion)_cretval;
     return _retval;
   }
 
@@ -187,11 +186,11 @@ class TlsConnection : IOStream
    *   required for compatibility. Also, rehandshaking has been removed
    *   from the TLS protocol in TLS 1.3.
    */
-  TlsRehandshakeMode getRehandshakeMode()
+  gio.types.TlsRehandshakeMode getRehandshakeMode()
   {
     GTlsRehandshakeMode _cretval;
     _cretval = g_tls_connection_get_rehandshake_mode(cast(GTlsConnection*)cPtr);
-    TlsRehandshakeMode _retval = cast(TlsRehandshakeMode)_cretval;
+    gio.types.TlsRehandshakeMode _retval = cast(gio.types.TlsRehandshakeMode)_cretval;
     return _retval;
   }
 
@@ -254,7 +253,7 @@ class TlsConnection : IOStream
    *   cancellable = a #GCancellable, or %NULL
    * Returns: success or failure
    */
-  bool handshake(Cancellable cancellable)
+  bool handshake(gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -272,14 +271,14 @@ class TlsConnection : IOStream
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the handshake is complete
    */
-  void handshakeAsync(int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void handshakeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -295,7 +294,7 @@ class TlsConnection : IOStream
    * Returns: %TRUE on success, %FALSE on failure, in which
    *   case error will be set.
    */
-  bool handshakeFinish(AsyncResult result)
+  bool handshakeFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -349,7 +348,7 @@ class TlsConnection : IOStream
    * Params:
    *   certificate = the certificate to use for conn
    */
-  void setCertificate(TlsCertificate certificate)
+  void setCertificate(gio.tls_certificate.TlsCertificate certificate)
   {
     g_tls_connection_set_certificate(cast(GTlsConnection*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null);
   }
@@ -368,7 +367,7 @@ class TlsConnection : IOStream
    * Params:
    *   database = a #GTlsDatabase
    */
-  void setDatabase(TlsDatabase database)
+  void setDatabase(gio.tls_database.TlsDatabase database)
   {
     g_tls_connection_set_database(cast(GTlsConnection*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.Dup) : null);
   }
@@ -382,7 +381,7 @@ class TlsConnection : IOStream
    * Params:
    *   interaction = an interaction object, or %NULL
    */
-  void setInteraction(TlsInteraction interaction)
+  void setInteraction(gio.tls_interaction.TlsInteraction interaction)
   {
     g_tls_connection_set_interaction(cast(GTlsConnection*)cPtr, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null);
   }
@@ -399,7 +398,7 @@ class TlsConnection : IOStream
    *   required for compatibility. Also, rehandshaking has been removed
    *   from the TLS protocol in TLS 1.3.
    */
-  void setRehandshakeMode(TlsRehandshakeMode mode)
+  void setRehandshakeMode(gio.types.TlsRehandshakeMode mode)
   {
     g_tls_connection_set_rehandshake_mode(cast(GTlsConnection*)cPtr, mode);
   }
@@ -503,8 +502,8 @@ class TlsConnection : IOStream
    *   emission to continue, which will cause the handshake to fail if
    *   no one else overrides it.
    */
-  alias AcceptCertificateCallbackDlg = bool delegate(TlsCertificate peerCert, TlsCertificateFlags errors, TlsConnection tlsConnection);
-  alias AcceptCertificateCallbackFunc = bool function(TlsCertificate peerCert, TlsCertificateFlags errors, TlsConnection tlsConnection);
+  alias AcceptCertificateCallbackDlg = bool delegate(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors, gio.tls_connection.TlsConnection tlsConnection);
+  alias AcceptCertificateCallbackFunc = bool function(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors, gio.tls_connection.TlsConnection tlsConnection);
 
   /**
    * Connect to AcceptCertificate signal.
@@ -521,9 +520,9 @@ class TlsConnection : IOStream
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto tlsConnection = getVal!TlsConnection(_paramVals);
-      auto peerCert = getVal!TlsCertificate(&_paramVals[1]);
-      auto errors = getVal!TlsCertificateFlags(&_paramVals[2]);
+      auto tlsConnection = getVal!(gio.tls_connection.TlsConnection)(_paramVals);
+      auto peerCert = getVal!(gio.tls_certificate.TlsCertificate)(&_paramVals[1]);
+      auto errors = getVal!(gio.types.TlsCertificateFlags)(&_paramVals[2]);
       _retval = _dClosure.dlg(peerCert, errors, tlsConnection);
       setVal!bool(_returnValue, _retval);
     }

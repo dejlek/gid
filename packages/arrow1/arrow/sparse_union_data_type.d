@@ -5,9 +5,9 @@ import arrow.c.types;
 import arrow.field;
 import arrow.types;
 import arrow.union_data_type;
-import gid.global;
+import gid.gid;
 
-class SparseUnionDataType : UnionDataType
+class SparseUnionDataType : arrow.union_data_type.UnionDataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,11 +26,11 @@ class SparseUnionDataType : UnionDataType
     return getType();
   }
 
-  this(Field[] fields, byte[] typeCodes)
+  this(arrow.field.Field[] fields, byte[] typeCodes)
   {
     GArrowSparseUnionDataType* _cretval;
-    auto _fields = gListFromD!(Field)(fields);
-    scope(exit) containerFree!(GList*, Field, GidOwnership.None)(_fields);
+    auto _fields = gListFromD!(arrow.field.Field)(fields);
+    scope(exit) containerFree!(GList*, arrow.field.Field, GidOwnership.None)(_fields);
     size_t _nTypeCodes;
     if (typeCodes)
       _nTypeCodes = cast(size_t)typeCodes.length;

@@ -1,6 +1,6 @@
 module gtk.event_controller_focus;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -17,7 +17,7 @@ import gtk.types;
  * which are updated to reflect focus changes inside the widget hierarchy
  * that is rooted at the controllers widget.
  */
-class EventControllerFocus : EventController
+class EventControllerFocus : gtk.event_controller.EventController
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -81,8 +81,8 @@ class EventControllerFocus : EventController
    * property for changes.
    *   eventControllerFocus = the instance the signal is connected to
    */
-  alias EnterCallbackDlg = void delegate(EventControllerFocus eventControllerFocus);
-  alias EnterCallbackFunc = void function(EventControllerFocus eventControllerFocus);
+  alias EnterCallbackDlg = void delegate(gtk.event_controller_focus.EventControllerFocus eventControllerFocus);
+  alias EnterCallbackFunc = void function(gtk.event_controller_focus.EventControllerFocus eventControllerFocus);
 
   /**
    * Connect to Enter signal.
@@ -98,7 +98,7 @@ class EventControllerFocus : EventController
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto eventControllerFocus = getVal!EventControllerFocus(_paramVals);
+      auto eventControllerFocus = getVal!(gtk.event_controller_focus.EventControllerFocus)(_paramVals);
       _dClosure.dlg(eventControllerFocus);
     }
 
@@ -117,8 +117,8 @@ class EventControllerFocus : EventController
    * property for changes.
    *   eventControllerFocus = the instance the signal is connected to
    */
-  alias LeaveCallbackDlg = void delegate(EventControllerFocus eventControllerFocus);
-  alias LeaveCallbackFunc = void function(EventControllerFocus eventControllerFocus);
+  alias LeaveCallbackDlg = void delegate(gtk.event_controller_focus.EventControllerFocus eventControllerFocus);
+  alias LeaveCallbackFunc = void function(gtk.event_controller_focus.EventControllerFocus eventControllerFocus);
 
   /**
    * Connect to Leave signal.
@@ -134,7 +134,7 @@ class EventControllerFocus : EventController
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto eventControllerFocus = getVal!EventControllerFocus(_paramVals);
+      auto eventControllerFocus = getVal!(gtk.event_controller_focus.EventControllerFocus)(_paramVals);
       _dClosure.dlg(eventControllerFocus);
     }
 

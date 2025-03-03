@@ -1,6 +1,6 @@
 module gtksource.style_scheme_chooser_button;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.actionable;
@@ -25,7 +25,7 @@ import gtksource.types;
  * In `GtkSourceStyleSchemeChooserButton`, a class@StyleSchemeChooserWidget
  * is used to provide a dialog for selecting style schemes.
  */
-class StyleSchemeChooserButton : Button, StyleSchemeChooser
+class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_chooser.StyleSchemeChooser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -6,7 +6,7 @@ import gdk.display;
 import gdk.draw_context;
 import gdk.surface;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
@@ -49,7 +49,7 @@ import gobject.object;
  * [gdk.glcontext.GLContext.getCurrent]; you can also unset any `GdkGLContext`
  * that is currently set by calling [gdk.glcontext.GLContext.clearCurrent].
  */
-class GLContext : DrawContext
+class GLContext : gdk.draw_context.DrawContext
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -82,11 +82,11 @@ class GLContext : DrawContext
    * Retrieves the current `GdkGLContext`.
    * Returns: the current `GdkGLContext`
    */
-  static GLContext getCurrent()
+  static gdk.glcontext.GLContext getCurrent()
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_current();
-    auto _retval = ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -94,11 +94,11 @@ class GLContext : DrawContext
    * Gets the allowed APIs set via [gdk.glcontext.GLContext.setAllowedApis].
    * Returns: the allowed APIs
    */
-  GLAPI getAllowedApis()
+  gdk.types.GLAPI getAllowedApis()
   {
     GdkGLAPI _cretval;
     _cretval = gdk_gl_context_get_allowed_apis(cast(GdkGLContext*)cPtr);
-    GLAPI _retval = cast(GLAPI)_cretval;
+    gdk.types.GLAPI _retval = cast(gdk.types.GLAPI)_cretval;
     return _retval;
   }
 
@@ -107,11 +107,11 @@ class GLContext : DrawContext
    * If the renderer has not been realized yet, 0 is returned.
    * Returns: the currently used API
    */
-  GLAPI getApi()
+  gdk.types.GLAPI getApi()
   {
     GdkGLAPI _cretval;
     _cretval = gdk_gl_context_get_api(cast(GdkGLContext*)cPtr);
-    GLAPI _retval = cast(GLAPI)_cretval;
+    gdk.types.GLAPI _retval = cast(gdk.types.GLAPI)_cretval;
     return _retval;
   }
 
@@ -131,11 +131,11 @@ class GLContext : DrawContext
    * Retrieves the display the context is created for
    * Returns: a `GdkDisplay`
    */
-  override Display getDisplay()
+  override gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gdk_gl_context_get_display(cast(GdkGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -175,11 +175,11 @@ class GLContext : DrawContext
    * Deprecated: Use [gdk.glcontext.GLContext.isShared] to check if contexts
    *   can be shared.
    */
-  GLContext getSharedContext()
+  gdk.glcontext.GLContext getSharedContext()
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_shared_context(cast(GdkGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!GLContext(cast(GdkGLContext*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -187,11 +187,11 @@ class GLContext : DrawContext
    * Retrieves the surface used by the context.
    * Returns: a `GdkSurface`
    */
-  override Surface getSurface()
+  override gdk.surface.Surface getSurface()
   {
     GdkSurface* _cretval;
     _cretval = gdk_gl_context_get_surface(cast(GdkGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -256,7 +256,7 @@ class GLContext : DrawContext
    *   other = the `GdkGLContext` that should be compatible with self
    * Returns: %TRUE if the two GL contexts are compatible.
    */
-  bool isShared(GLContext other)
+  bool isShared(gdk.glcontext.GLContext other)
   {
     bool _retval;
     _retval = gdk_gl_context_is_shared(cast(GdkGLContext*)cPtr, other ? cast(GdkGLContext*)other.cPtr(No.Dup) : null);
@@ -295,7 +295,7 @@ class GLContext : DrawContext
    * Params:
    *   apis = the allowed APIs
    */
-  void setAllowedApis(GLAPI apis)
+  void setAllowedApis(gdk.types.GLAPI apis)
   {
     gdk_gl_context_set_allowed_apis(cast(GdkGLContext*)cPtr, apis);
   }

@@ -5,7 +5,7 @@ import gio.proxy_resolver;
 import gio.proxy_resolver_mixin;
 
 /// Proxy object for Gio.ProxyResolver interface when a GObject has no applicable D binding
-class ProxyResolverIfaceProxy : IfaceProxy, ProxyResolver
+class ProxyResolverIfaceProxy : IfaceProxy, gio.proxy_resolver.ProxyResolver
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class ProxyResolverIfaceProxy : IfaceProxy, ProxyResolver
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(ProxyResolver);
+    return typeid(gio.proxy_resolver.ProxyResolver);
   }
 
   mixin ProxyResolverT!();

@@ -4,9 +4,9 @@ import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.key_value_partitioning_options;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 
-class HivePartitioningOptions : KeyValuePartitioningOptions
+class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

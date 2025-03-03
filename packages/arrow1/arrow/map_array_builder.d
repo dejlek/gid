@@ -5,11 +5,11 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.map_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class MapArrayBuilder : ArrayBuilder
+class MapArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -28,7 +28,7 @@ class MapArrayBuilder : ArrayBuilder
     return getType();
   }
 
-  this(MapDataType dataType)
+  this(arrow.map_data_type.MapDataType dataType)
   {
     GArrowMapArrayBuilder* _cretval;
     GError *_err;
@@ -79,27 +79,27 @@ class MapArrayBuilder : ArrayBuilder
     return _retval;
   }
 
-  ArrayBuilder getItemBuilder()
+  arrow.array_builder.ArrayBuilder getItemBuilder()
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_map_array_builder_get_item_builder(cast(GArrowMapArrayBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!ArrayBuilder(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 
-  ArrayBuilder getKeyBuilder()
+  arrow.array_builder.ArrayBuilder getKeyBuilder()
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_map_array_builder_get_key_builder(cast(GArrowMapArrayBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!ArrayBuilder(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 
-  ArrayBuilder getValueBuilder()
+  arrow.array_builder.ArrayBuilder getValueBuilder()
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_map_array_builder_get_value_builder(cast(GArrowMapArrayBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!ArrayBuilder(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 }

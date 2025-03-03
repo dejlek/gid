@@ -1,6 +1,6 @@
 module gobject.value_array;
 
-import gid.global;
+import gid.gid;
 import glib.types;
 import gobject.boxed;
 import gobject.c.functions;
@@ -31,7 +31,7 @@ import gobject.value;
  * Deprecated: Use `GArray` instead, if possible for the given use case,
  *   as described above.
  */
-class ValueArray : Boxed
+class ValueArray : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -65,9 +65,9 @@ class ValueArray : Boxed
     (cast(GValueArray*)cPtr).nValues = propval;
   }
 
-  @property Value values()
+  @property gobject.value.Value values()
   {
-    return new Value(cast(GValue*)(cast(GValueArray*)cPtr).values);
+    return new gobject.value.Value(cast(GValue*)(cast(GValueArray*)cPtr).values);
   }
 
   /**
@@ -96,11 +96,11 @@ class ValueArray : Boxed
 
    * Deprecated: Use #GArray and g_array_append_val$(LPAREN)$(RPAREN) instead.
    */
-  ValueArray append(Value value)
+  gobject.value_array.ValueArray append(gobject.value.Value value)
   {
     GValueArray* _cretval;
-    _cretval = g_value_array_append(cast(GValueArray*)cPtr, value ? cast(GValue*)value.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, No.Take) : null;
+    _cretval = g_value_array_append(cast(GValueArray*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -111,11 +111,11 @@ class ValueArray : Boxed
 
    * Deprecated: Use #GArray and [glib.array.Array.ref_] instead.
    */
-  ValueArray copy()
+  gobject.value_array.ValueArray copy()
   {
     GValueArray* _cretval;
-    _cretval = g_value_array_copy(cast(GValueArray*)cPtr);
-    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = g_value_array_copy(cast(const(GValueArray)*)cPtr);
+    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -127,11 +127,11 @@ class ValueArray : Boxed
 
    * Deprecated: Use g_array_index$(LPAREN)$(RPAREN) instead.
    */
-  Value getNth(uint index)
+  gobject.value.Value getNth(uint index)
   {
     GValue* _cretval;
     _cretval = g_value_array_get_nth(cast(GValueArray*)cPtr, index);
-    auto _retval = _cretval ? new Value(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -145,11 +145,11 @@ class ValueArray : Boxed
 
    * Deprecated: Use #GArray and g_array_insert_val$(LPAREN)$(RPAREN) instead.
    */
-  ValueArray insert(uint index, Value value)
+  gobject.value_array.ValueArray insert(uint index, gobject.value.Value value)
   {
     GValueArray* _cretval;
-    _cretval = g_value_array_insert(cast(GValueArray*)cPtr, index, value ? cast(GValue*)value.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, No.Take) : null;
+    _cretval = g_value_array_insert(cast(GValueArray*)cPtr, index, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -162,11 +162,11 @@ class ValueArray : Boxed
 
    * Deprecated: Use #GArray and g_array_prepend_val$(LPAREN)$(RPAREN) instead.
    */
-  ValueArray prepend(Value value)
+  gobject.value_array.ValueArray prepend(gobject.value.Value value)
   {
     GValueArray* _cretval;
-    _cretval = g_value_array_prepend(cast(GValueArray*)cPtr, value ? cast(GValue*)value.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, No.Take) : null;
+    _cretval = g_value_array_prepend(cast(GValueArray*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -179,11 +179,11 @@ class ValueArray : Boxed
 
    * Deprecated: Use #GArray and [glib.array.Array.removeIndex] instead.
    */
-  ValueArray remove(uint index)
+  gobject.value_array.ValueArray remove(uint index)
   {
     GValueArray* _cretval;
     _cretval = g_value_array_remove(cast(GValueArray*)cPtr, index);
-    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -198,11 +198,11 @@ class ValueArray : Boxed
 
    * Deprecated: Use #GArray and [glib.array.Array.sortWithData].
    */
-  ValueArray sort(CompareDataFunc compareFunc)
+  gobject.value_array.ValueArray sort(glib.types.CompareDataFunc compareFunc)
   {
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
-      auto _dlg = cast(CompareDataFunc*)userData;
+      auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
       int _retval = (*_dlg)(a, b);
       return _retval;
@@ -212,7 +212,7 @@ class ValueArray : Boxed
     GValueArray* _cretval;
     auto _compareFunc = compareFunc ? cast(void*)&(compareFunc) : null;
     _cretval = g_value_array_sort_with_data(cast(GValueArray*)cPtr, _compareFuncCB, _compareFunc);
-    auto _retval = _cretval ? new ValueArray(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

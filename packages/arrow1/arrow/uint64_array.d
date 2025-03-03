@@ -5,10 +5,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.numeric_array;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class UInt64Array : NumericArray
+class UInt64Array : arrow.numeric_array.NumericArray
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,7 +27,7 @@ class UInt64Array : NumericArray
     return getType();
   }
 
-  this(long length, Buffer data, Buffer nullBitmap, long nNulls)
+  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowUInt64Array* _cretval;
     _cretval = garrow_uint64_array_new(length, data ? cast(GArrowBuffer*)data.cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);

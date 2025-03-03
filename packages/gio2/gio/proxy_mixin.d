@@ -1,9 +1,8 @@
 module gio.proxy_mixin;
 
 public import gio.proxy_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.async_result;
-public import gio.async_result_mixin;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
@@ -38,14 +37,14 @@ template ProxyT()
    *   be the same as connection, in which case a reference
    *   will be added.
    */
-  override IOStream connect(IOStream connection, ProxyAddress proxyAddress, Cancellable cancellable)
+  override gio.iostream.IOStream connect(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable)
   {
     GIOStream* _cretval;
     GError *_err;
     _cretval = g_proxy_connect(cast(GProxy*)cPtr, connection ? cast(GIOStream*)connection.cPtr(No.Dup) : null, proxyAddress ? cast(GProxyAddress*)proxyAddress.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!IOStream(cast(GIOStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -57,14 +56,14 @@ template ProxyT()
    *   cancellable = a #GCancellable
    *   callback = a #GAsyncReadyCallback
    */
-  override void connectAsync(IOStream connection, ProxyAddress proxyAddress, Cancellable cancellable, AsyncReadyCallback callback)
+  override void connectAsync(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -78,14 +77,14 @@ template ProxyT()
    *   result = a #GAsyncResult
    * Returns: a #GIOStream.
    */
-  override IOStream connectFinish(AsyncResult result)
+  override gio.iostream.IOStream connectFinish(gio.async_result.AsyncResult result)
   {
     GIOStream* _cretval;
     GError *_err;
     _cretval = g_proxy_connect_finish(cast(GProxy*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!IOStream(cast(GIOStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -4,10 +4,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class UnionScalar : Scalar
+class UnionScalar : arrow.scalar.Scalar
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -33,11 +33,11 @@ class UnionScalar : Scalar
     return _retval;
   }
 
-  Scalar getValue()
+  arrow.scalar.Scalar getValue()
   {
     GArrowScalar* _cretval;
     _cretval = garrow_union_scalar_get_value(cast(GArrowUnionScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!Scalar(cast(GArrowScalar*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, No.Take);
     return _retval;
   }
 }

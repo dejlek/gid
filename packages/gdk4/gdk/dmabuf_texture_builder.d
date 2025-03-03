@@ -6,7 +6,7 @@ import gdk.c.types;
 import gdk.display;
 import gdk.texture;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import glib.types;
 import gobject.object;
@@ -53,7 +53,7 @@ import gobject.object;
  * * The Linux kernel [documentation](https://docs.kernel.org/driver-api/dma-buf.html)
  * * The header file [drm_fourcc.h](https://gitlab.freedesktop.org/mesa/drm/-/blob/main/include/drm/drm_fourcc.h)
  */
-class DmabufTextureBuilder : ObjectG
+class DmabufTextureBuilder : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -103,12 +103,12 @@ class DmabufTextureBuilder : ObjectG
    * Returns: a newly built `GdkTexture` or `NULL`
    *   if the format is not supported
    */
-  Texture build(DestroyNotify destroy, void* data)
+  gdk.texture.Texture build(glib.types.DestroyNotify destroy, void* data)
   {
     extern(C) void _destroyCallback(void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(DestroyNotify*)data;
+      auto _dlg = cast(glib.types.DestroyNotify*)data;
 
       (*_dlg)();
     }
@@ -119,7 +119,7 @@ class DmabufTextureBuilder : ObjectG
     _cretval = gdk_dmabuf_texture_builder_build(cast(GdkDmabufTextureBuilder*)cPtr, _destroyCB, data, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -128,11 +128,11 @@ class DmabufTextureBuilder : ObjectG
    * associated with.
    * Returns: the display
    */
-  Display getDisplay()
+  gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gdk_dmabuf_texture_builder_get_display(cast(GdkDmabufTextureBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -238,11 +238,11 @@ class DmabufTextureBuilder : ObjectG
    * %NULL if none was set.
    * Returns: The region
    */
-  Region getUpdateRegion()
+  cairo.region.Region getUpdateRegion()
   {
     cairo_region_t* _cretval;
     _cretval = gdk_dmabuf_texture_builder_get_update_region(cast(GdkDmabufTextureBuilder*)cPtr);
-    auto _retval = _cretval ? new Region(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -251,11 +251,11 @@ class DmabufTextureBuilder : ObjectG
    * %NULL if none was set.
    * Returns: The texture
    */
-  Texture getUpdateTexture()
+  gdk.texture.Texture getUpdateTexture()
   {
     GdkTexture* _cretval;
     _cretval = gdk_dmabuf_texture_builder_get_update_texture(cast(GdkDmabufTextureBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ class DmabufTextureBuilder : ObjectG
    * Params:
    *   display = the display
    */
-  void setDisplay(Display display)
+  void setDisplay(gdk.display.Display display)
   {
     gdk_dmabuf_texture_builder_set_display(cast(GdkDmabufTextureBuilder*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
   }
@@ -385,7 +385,7 @@ class DmabufTextureBuilder : ObjectG
    * Params:
    *   region = the region to update
    */
-  void setUpdateRegion(Region region)
+  void setUpdateRegion(cairo.region.Region region)
   {
     gdk_dmabuf_texture_builder_set_update_region(cast(GdkDmabufTextureBuilder*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
@@ -396,7 +396,7 @@ class DmabufTextureBuilder : ObjectG
    * Params:
    *   texture = the texture to update
    */
-  void setUpdateTexture(Texture texture)
+  void setUpdateTexture(gdk.texture.Texture texture)
   {
     gdk_dmabuf_texture_builder_set_update_texture(cast(GdkDmabufTextureBuilder*)cPtr, texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
   }

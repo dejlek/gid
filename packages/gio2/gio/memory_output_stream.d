@@ -1,6 +1,6 @@
 module gio.memory_output_stream;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.output_stream;
@@ -18,7 +18,7 @@ import gobject.object;
  * As of GLib 2.34, `GMemoryOutputStream` trivially implements
  * [gio.pollable_output_stream.PollableOutputStream]: it always polls as ready.
  */
-class MemoryOutputStream : OutputStream, PollableOutputStream, Seekable
+class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_stream.PollableOutputStream, gio.seekable.Seekable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,15 +45,15 @@ class MemoryOutputStream : OutputStream, PollableOutputStream, Seekable
    * for memory allocation.
    * Returns:
    */
-  static MemoryOutputStream newResizable()
+  static gio.memory_output_stream.MemoryOutputStream newResizable()
   {
     GOutputStream* _cretval;
     _cretval = g_memory_output_stream_new_resizable();
-    auto _retval = ObjectG.getDObject!MemoryOutputStream(cast(GOutputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.memory_output_stream.MemoryOutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
-  alias getData = ObjectG.getData;
+  alias getData = gobject.object.ObjectG.getData;
 
   /**
    * Gets any loaded data from the ostream.
@@ -107,15 +107,15 @@ class MemoryOutputStream : OutputStream, PollableOutputStream, Seekable
    * closed before calling this function.
    * Returns: the stream's data
    */
-  Bytes stealAsBytes()
+  glib.bytes.Bytes stealAsBytes()
   {
     GBytes* _cretval;
     _cretval = g_memory_output_stream_steal_as_bytes(cast(GMemoryOutputStream*)cPtr);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
-  alias stealData = ObjectG.stealData;
+  alias stealData = gobject.object.ObjectG.stealData;
 
   /**
    * Gets any loaded data from the ostream. Ownership of the data

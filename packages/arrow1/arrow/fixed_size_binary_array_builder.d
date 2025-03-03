@@ -5,11 +5,11 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.fixed_size_binary_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.error;
 
-class FixedSizeBinaryArrayBuilder : ArrayBuilder
+class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -28,7 +28,7 @@ class FixedSizeBinaryArrayBuilder : ArrayBuilder
     return getType();
   }
 
-  this(FixedSizeBinaryDataType dataType)
+  this(arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType dataType)
   {
     GArrowFixedSizeBinaryArrayBuilder* _cretval;
     _cretval = garrow_fixed_size_binary_array_builder_new(dataType ? cast(GArrowFixedSizeBinaryDataType*)dataType.cPtr(No.Dup) : null);
@@ -50,7 +50,7 @@ class FixedSizeBinaryArrayBuilder : ArrayBuilder
     return _retval;
   }
 
-  bool appendValueBytes(Bytes value)
+  bool appendValueBytes(glib.bytes.Bytes value)
   {
     bool _retval;
     GError *_err;
@@ -71,7 +71,7 @@ class FixedSizeBinaryArrayBuilder : ArrayBuilder
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendValues(Bytes[] values, bool[] isValids)
+  bool appendValues(glib.bytes.Bytes[] values, bool[] isValids)
   {
     bool _retval;
     long _valuesLength;
@@ -108,7 +108,7 @@ class FixedSizeBinaryArrayBuilder : ArrayBuilder
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendValuesPacked(Bytes values, bool[] isValids)
+  bool appendValuesPacked(glib.bytes.Bytes values, bool[] isValids)
   {
     bool _retval;
     long _isValidsLength;

@@ -3,7 +3,7 @@ module gtk.drop_target;
 import gdk.content_formats;
 import gdk.drop;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gobject.types;
@@ -74,7 +74,7 @@ import gtk.types;
  * UI state during a Drag-and-Drop operation $(LPAREN)e.g. switching tabs$(RPAREN), you can
  * use [gtk.drop_controller_motion.DropControllerMotion].
  */
-class DropTarget : EventController
+class DropTarget : gtk.event_controller.EventController
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -103,7 +103,7 @@ class DropTarget : EventController
    *   actions = the supported actions
    * Returns: the new `GtkDropTarget`
    */
-  this(GType type, DragAction actions)
+  this(gobject.types.GType type, gdk.types.DragAction actions)
   {
     GtkDropTarget* _cretval;
     _cretval = gtk_drop_target_new(type, actions);
@@ -114,11 +114,11 @@ class DropTarget : EventController
    * Gets the actions that this drop target supports.
    * Returns: the actions that this drop target supports
    */
-  DragAction getActions()
+  gdk.types.DragAction getActions()
   {
     GdkDragAction _cretval;
     _cretval = gtk_drop_target_get_actions(cast(GtkDropTarget*)cPtr);
-    DragAction _retval = cast(DragAction)_cretval;
+    gdk.types.DragAction _retval = cast(gdk.types.DragAction)_cretval;
     return _retval;
   }
 
@@ -127,11 +127,11 @@ class DropTarget : EventController
    * If no drop operation is going on, %NULL is returned.
    * Returns: The current drop
    */
-  Drop getCurrentDrop()
+  gdk.drop.Drop getCurrentDrop()
   {
     GdkDrop* _cretval;
     _cretval = gtk_drop_target_get_current_drop(cast(GtkDropTarget*)cPtr);
-    auto _retval = ObjectG.getDObject!Drop(cast(GdkDrop*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 
@@ -142,11 +142,11 @@ class DropTarget : EventController
 
    * Deprecated: Use [gtk.drop_target.DropTarget.getCurrentDrop] instead
    */
-  Drop getDrop()
+  gdk.drop.Drop getDrop()
   {
     GdkDrop* _cretval;
     _cretval = gtk_drop_target_get_drop(cast(GtkDropTarget*)cPtr);
-    auto _retval = ObjectG.getDObject!Drop(cast(GdkDrop*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 
@@ -155,11 +155,11 @@ class DropTarget : EventController
    * If the result is %NULL, all formats are expected to be supported.
    * Returns: the supported data formats
    */
-  ContentFormats getFormats()
+  gdk.content_formats.ContentFormats getFormats()
   {
     GdkContentFormats* _cretval;
     _cretval = gtk_drop_target_get_formats(cast(GtkDropTarget*)cPtr);
-    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -169,16 +169,16 @@ class DropTarget : EventController
    * Returns: the `G_TYPE_INVALID`-terminated array of types included in
    *   formats
    */
-  GType[] getGtypes()
+  gobject.types.GType[] getGtypes()
   {
     const(GType)* _cretval;
     size_t _cretlength;
     _cretval = gtk_drop_target_get_gtypes(cast(GtkDropTarget*)cPtr, &_cretlength);
-    GType[] _retval;
+    gobject.types.GType[] _retval;
 
     if (_cretval)
     {
-      _retval = cast(GType[] )_cretval[0 .. _cretlength];
+      _retval = cast(gobject.types.GType[] )_cretval[0 .. _cretlength];
     }
     return _retval;
   }
@@ -198,11 +198,11 @@ class DropTarget : EventController
    * Gets the current drop data, as a `GValue`.
    * Returns: The current drop data
    */
-  Value getValue()
+  gobject.value.Value getValue()
   {
     const(GValue)* _cretval;
     _cretval = gtk_drop_target_get_value(cast(GtkDropTarget*)cPtr);
-    auto _retval = _cretval ? new Value(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -224,7 +224,7 @@ class DropTarget : EventController
    * Params:
    *   actions = the supported actions
    */
-  void setActions(DragAction actions)
+  void setActions(gdk.types.DragAction actions)
   {
     gtk_drop_target_set_actions(cast(GtkDropTarget*)cPtr, actions);
   }
@@ -235,7 +235,7 @@ class DropTarget : EventController
    *   types = all supported `GType`s
    *     that can be dropped on the target
    */
-  void setGtypes(GType[] types)
+  void setGtypes(gobject.types.GType[] types)
   {
     size_t _nTypes;
     if (types)
@@ -274,8 +274,8 @@ class DropTarget : EventController
    *   dropTarget = the instance the signal is connected to
    * Returns: %TRUE if drop is accepted
    */
-  alias AcceptCallbackDlg = bool delegate(Drop drop, DropTarget dropTarget);
-  alias AcceptCallbackFunc = bool function(Drop drop, DropTarget dropTarget);
+  alias AcceptCallbackDlg = bool delegate(gdk.drop.Drop drop, gtk.drop_target.DropTarget dropTarget);
+  alias AcceptCallbackFunc = bool function(gdk.drop.Drop drop, gtk.drop_target.DropTarget dropTarget);
 
   /**
    * Connect to Accept signal.
@@ -292,8 +292,8 @@ class DropTarget : EventController
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto dropTarget = getVal!DropTarget(_paramVals);
-      auto drop = getVal!Drop(&_paramVals[1]);
+      auto dropTarget = getVal!(gtk.drop_target.DropTarget)(_paramVals);
+      auto drop = getVal!(gdk.drop.Drop)(&_paramVals[1]);
       _retval = _dClosure.dlg(drop, dropTarget);
       setVal!bool(_returnValue, _retval);
     }
@@ -317,8 +317,8 @@ class DropTarget : EventController
    *   dropTarget = the instance the signal is connected to
    * Returns: whether the drop was accepted at the given pointer position
    */
-  alias DropCallbackDlg = bool delegate(Value value, double x, double y, DropTarget dropTarget);
-  alias DropCallbackFunc = bool function(Value value, double x, double y, DropTarget dropTarget);
+  alias DropCallbackDlg = bool delegate(gobject.value.Value value, double x, double y, gtk.drop_target.DropTarget dropTarget);
+  alias DropCallbackFunc = bool function(gobject.value.Value value, double x, double y, gtk.drop_target.DropTarget dropTarget);
 
   /**
    * Connect to Drop signal.
@@ -335,10 +335,10 @@ class DropTarget : EventController
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto dropTarget = getVal!DropTarget(_paramVals);
-      auto value = getVal!Value(&_paramVals[1]);
-      auto x = getVal!double(&_paramVals[2]);
-      auto y = getVal!double(&_paramVals[3]);
+      auto dropTarget = getVal!(gtk.drop_target.DropTarget)(_paramVals);
+      auto value = getVal!(gobject.value.Value)(&_paramVals[1]);
+      auto x = getVal!(double)(&_paramVals[2]);
+      auto y = getVal!(double)(&_paramVals[3]);
       _retval = _dClosure.dlg(value, x, y, dropTarget);
       setVal!bool(_returnValue, _retval);
     }
@@ -357,8 +357,8 @@ class DropTarget : EventController
    * Returns: Preferred action for this drag operation or 0 if
    *   dropping is not supported at the current x,y location.
    */
-  alias EnterCallbackDlg = DragAction delegate(double x, double y, DropTarget dropTarget);
-  alias EnterCallbackFunc = DragAction function(double x, double y, DropTarget dropTarget);
+  alias EnterCallbackDlg = gdk.types.DragAction delegate(double x, double y, gtk.drop_target.DropTarget dropTarget);
+  alias EnterCallbackFunc = gdk.types.DragAction function(double x, double y, gtk.drop_target.DropTarget dropTarget);
 
   /**
    * Connect to Enter signal.
@@ -374,12 +374,12 @@ class DropTarget : EventController
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dropTarget = getVal!DropTarget(_paramVals);
-      auto x = getVal!double(&_paramVals[1]);
-      auto y = getVal!double(&_paramVals[2]);
+      auto dropTarget = getVal!(gtk.drop_target.DropTarget)(_paramVals);
+      auto x = getVal!(double)(&_paramVals[1]);
+      auto y = getVal!(double)(&_paramVals[2]);
       auto _dretval = _dClosure.dlg(x, y, dropTarget);
       GdkDragAction _retval = cast(GdkDragAction)_dretval;
-      setVal!DragAction(_returnValue, _retval);
+      setVal!gdk.types.DragAction(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -392,8 +392,8 @@ class DropTarget : EventController
    * [gtk.drop_target.DropTarget.enter].
    *   dropTarget = the instance the signal is connected to
    */
-  alias LeaveCallbackDlg = void delegate(DropTarget dropTarget);
-  alias LeaveCallbackFunc = void function(DropTarget dropTarget);
+  alias LeaveCallbackDlg = void delegate(gtk.drop_target.DropTarget dropTarget);
+  alias LeaveCallbackFunc = void function(gtk.drop_target.DropTarget dropTarget);
 
   /**
    * Connect to Leave signal.
@@ -409,7 +409,7 @@ class DropTarget : EventController
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dropTarget = getVal!DropTarget(_paramVals);
+      auto dropTarget = getVal!(gtk.drop_target.DropTarget)(_paramVals);
       _dClosure.dlg(dropTarget);
     }
 
@@ -426,8 +426,8 @@ class DropTarget : EventController
    * Returns: Preferred action for this drag operation or 0 if
    *   dropping is not supported at the current x,y location.
    */
-  alias MotionCallbackDlg = DragAction delegate(double x, double y, DropTarget dropTarget);
-  alias MotionCallbackFunc = DragAction function(double x, double y, DropTarget dropTarget);
+  alias MotionCallbackDlg = gdk.types.DragAction delegate(double x, double y, gtk.drop_target.DropTarget dropTarget);
+  alias MotionCallbackFunc = gdk.types.DragAction function(double x, double y, gtk.drop_target.DropTarget dropTarget);
 
   /**
    * Connect to Motion signal.
@@ -443,12 +443,12 @@ class DropTarget : EventController
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dropTarget = getVal!DropTarget(_paramVals);
-      auto x = getVal!double(&_paramVals[1]);
-      auto y = getVal!double(&_paramVals[2]);
+      auto dropTarget = getVal!(gtk.drop_target.DropTarget)(_paramVals);
+      auto x = getVal!(double)(&_paramVals[1]);
+      auto y = getVal!(double)(&_paramVals[2]);
       auto _dretval = _dClosure.dlg(x, y, dropTarget);
       GdkDragAction _retval = cast(GdkDragAction)_dretval;
-      setVal!DragAction(_returnValue, _retval);
+      setVal!gdk.types.DragAction(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

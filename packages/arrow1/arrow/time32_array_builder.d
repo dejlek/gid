@@ -5,10 +5,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.time32_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class Time32ArrayBuilder : ArrayBuilder
+class Time32ArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,7 +27,7 @@ class Time32ArrayBuilder : ArrayBuilder
     return getType();
   }
 
-  this(Time32DataType dataType)
+  this(arrow.time32_data_type.Time32DataType dataType)
   {
     GArrowTime32ArrayBuilder* _cretval;
     _cretval = garrow_time32_array_builder_new(dataType ? cast(GArrowTime32DataType*)dataType.cPtr(No.Dup) : null);

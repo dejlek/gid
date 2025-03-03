@@ -1,8 +1,8 @@
 module gtk.mount_operation;
 
 import gdk.display;
-import gid.global;
-import gio.mount_operation : DGioMountOperation = MountOperation;
+import gid.gid;
+import gio.mount_operation;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -21,7 +21,7 @@ import gtk.window;
  * When necessary, `GtkMountOperation` shows dialogs to let the user
  * enter passwords, ask questions or show processes blocking unmount.
  */
-class MountOperation : DGioMountOperation
+class MountOperation : gio.mount_operation.MountOperation
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -46,7 +46,7 @@ class MountOperation : DGioMountOperation
    *   parent = transient parent of the window
    * Returns: a new `GtkMountOperation`
    */
-  this(Window parent)
+  this(gtk.window.Window parent)
   {
     GMountOperation* _cretval;
     _cretval = gtk_mount_operation_new(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
@@ -58,11 +58,11 @@ class MountOperation : DGioMountOperation
    * will be shown.
    * Returns: the display on which windows of op are shown
    */
-  Display getDisplay()
+  gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gtk_mount_operation_get_display(cast(GtkMountOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -70,11 +70,11 @@ class MountOperation : DGioMountOperation
    * Gets the transient parent used by the `GtkMountOperation`.
    * Returns: the transient parent for windows shown by op
    */
-  Window getParent()
+  gtk.window.Window getParent()
   {
     GtkWindow* _cretval;
     _cretval = gtk_mount_operation_get_parent(cast(GtkMountOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!Window(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class MountOperation : DGioMountOperation
    * Params:
    *   display = a `GdkDisplay`
    */
-  void setDisplay(Display display)
+  void setDisplay(gdk.display.Display display)
   {
     gtk_mount_operation_set_display(cast(GtkMountOperation*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
   }
@@ -106,7 +106,7 @@ class MountOperation : DGioMountOperation
    * Params:
    *   parent = transient parent of the window
    */
-  void setParent(Window parent)
+  void setParent(gtk.window.Window parent)
   {
     gtk_mount_operation_set_parent(cast(GtkMountOperation*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
   }

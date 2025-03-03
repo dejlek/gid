@@ -1,6 +1,6 @@
 module gtk.column_view_sorter;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -36,7 +36,7 @@ import gtk.types;
  * }
  * ```
  */
-class ColumnViewSorter : Sorter
+class ColumnViewSorter : gtk.sorter.Sorter
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -81,11 +81,11 @@ class ColumnViewSorter : Sorter
    *   sortOrder = return location for the sort order
    * Returns: the positions sort column
    */
-  ColumnViewColumn getNthSortColumn(uint position, out SortType sortOrder)
+  gtk.column_view_column.ColumnViewColumn getNthSortColumn(uint position, out gtk.types.SortType sortOrder)
   {
     GtkColumnViewColumn* _cretval;
     _cretval = gtk_column_view_sorter_get_nth_sort_column(cast(GtkColumnViewSorter*)cPtr, position, &sortOrder);
-    auto _retval = ObjectG.getDObject!ColumnViewColumn(cast(GtkColumnViewColumn*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.column_view_column.ColumnViewColumn)(cast(GtkColumnViewColumn*)_cretval, No.Take);
     return _retval;
   }
 
@@ -95,11 +95,11 @@ class ColumnViewSorter : Sorter
    * in a column view header.
    * Returns: the primary sort column
    */
-  ColumnViewColumn getPrimarySortColumn()
+  gtk.column_view_column.ColumnViewColumn getPrimarySortColumn()
   {
     GtkColumnViewColumn* _cretval;
     _cretval = gtk_column_view_sorter_get_primary_sort_column(cast(GtkColumnViewSorter*)cPtr);
-    auto _retval = ObjectG.getDObject!ColumnViewColumn(cast(GtkColumnViewColumn*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.column_view_column.ColumnViewColumn)(cast(GtkColumnViewColumn*)_cretval, No.Take);
     return _retval;
   }
 
@@ -112,11 +112,11 @@ class ColumnViewSorter : Sorter
    * `GTK_SORT_ASCENDING`.
    * Returns: the primary sort order
    */
-  SortType getPrimarySortOrder()
+  gtk.types.SortType getPrimarySortOrder()
   {
     GtkSortType _cretval;
     _cretval = gtk_column_view_sorter_get_primary_sort_order(cast(GtkColumnViewSorter*)cPtr);
-    SortType _retval = cast(SortType)_cretval;
+    gtk.types.SortType _retval = cast(gtk.types.SortType)_cretval;
     return _retval;
   }
 }

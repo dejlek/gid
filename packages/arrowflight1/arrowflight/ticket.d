@@ -3,11 +3,11 @@ module arrowflight.ticket;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import gobject.object;
 
-class Ticket : ObjectG
+class Ticket : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,14 +26,14 @@ class Ticket : ObjectG
     return getType();
   }
 
-  this(Bytes data)
+  this(glib.bytes.Bytes data)
   {
     GAFlightTicket* _cretval;
     _cretval = gaflight_ticket_new(data ? cast(GBytes*)data.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
-  bool equal(Ticket otherTicket)
+  bool equal(arrowflight.ticket.Ticket otherTicket)
   {
     bool _retval;
     _retval = gaflight_ticket_equal(cast(GAFlightTicket*)cPtr, otherTicket ? cast(GAFlightTicket*)otherTicket.cPtr(No.Dup) : null);

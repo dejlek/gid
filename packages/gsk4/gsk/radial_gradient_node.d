@@ -1,6 +1,6 @@
 module gsk.radial_gradient_node;
 
-import gid.global;
+import gid.gid;
 import graphene.point;
 import gsk.c.functions;
 import gsk.c.types;
@@ -10,7 +10,7 @@ import gsk.types;
 /**
  * A render node for a radial gradient.
  */
-class RadialGradientNode : RenderNode
+class RadialGradientNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -25,11 +25,11 @@ class RadialGradientNode : RenderNode
    * Retrieves the center pointer for the gradient.
    * Returns: the center point for the gradient
    */
-  Point getCenter()
+  graphene.point.Point getCenter()
   {
     const(graphene_point_t)* _cretval;
-    _cretval = gsk_radial_gradient_node_get_center(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
+    _cretval = gsk_radial_gradient_node_get_center(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -40,7 +40,7 @@ class RadialGradientNode : RenderNode
   float getEnd()
   {
     float _retval;
-    _retval = gsk_radial_gradient_node_get_end(cast(GskRenderNode*)cPtr);
+    _retval = gsk_radial_gradient_node_get_end(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 
@@ -51,7 +51,7 @@ class RadialGradientNode : RenderNode
   float getHradius()
   {
     float _retval;
-    _retval = gsk_radial_gradient_node_get_hradius(cast(GskRenderNode*)cPtr);
+    _retval = gsk_radial_gradient_node_get_hradius(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 
@@ -62,7 +62,7 @@ class RadialGradientNode : RenderNode
   size_t getNColorStops()
   {
     size_t _retval;
-    _retval = gsk_radial_gradient_node_get_n_color_stops(cast(GskRenderNode*)cPtr);
+    _retval = gsk_radial_gradient_node_get_n_color_stops(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class RadialGradientNode : RenderNode
   float getStart()
   {
     float _retval;
-    _retval = gsk_radial_gradient_node_get_start(cast(GskRenderNode*)cPtr);
+    _retval = gsk_radial_gradient_node_get_start(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class RadialGradientNode : RenderNode
   float getVradius()
   {
     float _retval;
-    _retval = gsk_radial_gradient_node_get_vradius(cast(GskRenderNode*)cPtr);
+    _retval = gsk_radial_gradient_node_get_vradius(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 }

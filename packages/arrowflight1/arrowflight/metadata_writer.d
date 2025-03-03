@@ -4,11 +4,11 @@ import arrow.buffer;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class MetadataWriter : ObjectG
+class MetadataWriter : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -33,7 +33,7 @@ class MetadataWriter : ObjectG
    *   metadata = A #GArrowBuffer to be sent.
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool write(Buffer metadata)
+  bool write(arrow.buffer.Buffer metadata)
   {
     bool _retval;
     GError *_err;

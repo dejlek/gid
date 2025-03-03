@@ -1,6 +1,6 @@
 module gtk.box_layout;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_manager;
@@ -21,7 +21,7 @@ import gtk.types;
  * If you want to specify the amount of space placed between each child,
  * you can use the [gtk.box_layout.BoxLayout.gint] property.
  */
-class BoxLayout : LayoutManager, Orientable
+class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -48,7 +48,7 @@ class BoxLayout : LayoutManager, Orientable
    *   orientation = the orientation for the new layout
    * Returns: a new box layout
    */
-  this(Orientation orientation)
+  this(gtk.types.Orientation orientation)
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_box_layout_new(orientation);
@@ -71,11 +71,11 @@ class BoxLayout : LayoutManager, Orientable
    * Gets the value set by [gtk.box_layout.BoxLayout.setBaselinePosition].
    * Returns: the baseline position
    */
-  BaselinePosition getBaselinePosition()
+  gtk.types.BaselinePosition getBaselinePosition()
   {
     GtkBaselinePosition _cretval;
     _cretval = gtk_box_layout_get_baseline_position(cast(GtkBoxLayout*)cPtr);
-    BaselinePosition _retval = cast(BaselinePosition)_cretval;
+    gtk.types.BaselinePosition _retval = cast(gtk.types.BaselinePosition)_cretval;
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class BoxLayout : LayoutManager, Orientable
    * Params:
    *   position = a `GtkBaselinePosition`
    */
-  void setBaselinePosition(BaselinePosition position)
+  void setBaselinePosition(gtk.types.BaselinePosition position)
   {
     gtk_box_layout_set_baseline_position(cast(GtkBoxLayout*)cPtr, position);
   }

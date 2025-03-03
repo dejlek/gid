@@ -3,10 +3,10 @@ module arrowdataset.file_write_options;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class FileWriteOptions : ObjectG
+class FileWriteOptions : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

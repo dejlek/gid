@@ -8,9 +8,8 @@ import gdk.display;
 import gdk.drag;
 import gdk.surface;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.input_stream;
 import gio.types;
@@ -32,7 +31,7 @@ import gobject.value;
  * and so they are not normally needed in GTK applications. See the
  * "Drag and Drop" section of the GTK documentation for more information.
  */
-class Drop : ObjectG
+class Drop : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -58,7 +57,7 @@ class Drop : ObjectG
    * Params:
    *   action = the action performed by the destination or 0 if the drop failed
    */
-  void finish(DragAction action)
+  void finish(gdk.types.DragAction action)
   {
     gdk_drop_finish(cast(GdkDrop*)cPtr, action);
   }
@@ -78,11 +77,11 @@ class Drop : ObjectG
    * side will not change this value anymore once a drop has started.
    * Returns: The possible `GdkDragActions`
    */
-  DragAction getActions()
+  gdk.types.DragAction getActions()
   {
     GdkDragAction _cretval;
     _cretval = gdk_drop_get_actions(cast(GdkDrop*)cPtr);
-    DragAction _retval = cast(DragAction)_cretval;
+    gdk.types.DragAction _retval = cast(gdk.types.DragAction)_cretval;
     return _retval;
   }
 
@@ -90,11 +89,11 @@ class Drop : ObjectG
    * Returns the `GdkDevice` performing the drop.
    * Returns: The `GdkDevice` performing the drop.
    */
-  Device getDevice()
+  gdk.device.Device getDevice()
   {
     GdkDevice* _cretval;
     _cretval = gdk_drop_get_device(cast(GdkDrop*)cPtr);
-    auto _retval = ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -102,11 +101,11 @@ class Drop : ObjectG
    * Gets the `GdkDisplay` that self was created for.
    * Returns: a `GdkDisplay`
    */
-  Display getDisplay()
+  gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gdk_drop_get_display(cast(GdkDrop*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,11 +115,11 @@ class Drop : ObjectG
    * If it is not, %NULL is returned.
    * Returns: the corresponding `GdkDrag`
    */
-  Drag getDrag()
+  gdk.drag.Drag getDrag()
   {
     GdkDrag* _cretval;
     _cretval = gdk_drop_get_drag(cast(GdkDrop*)cPtr);
-    auto _retval = ObjectG.getDObject!Drag(cast(GdkDrag*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.drag.Drag)(cast(GdkDrag*)_cretval, No.Take);
     return _retval;
   }
 
@@ -129,11 +128,11 @@ class Drop : ObjectG
    * to be read in.
    * Returns: The possible `GdkContentFormats`
    */
-  ContentFormats getFormats()
+  gdk.content_formats.ContentFormats getFormats()
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_drop_get_formats(cast(GdkDrop*)cPtr);
-    auto _retval = _cretval ? new ContentFormats(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -141,11 +140,11 @@ class Drop : ObjectG
    * Returns the `GdkSurface` performing the drop.
    * Returns: The `GdkSurface` performing the drop.
    */
-  Surface getSurface()
+  gdk.surface.Surface getSurface()
   {
     GdkSurface* _cretval;
     _cretval = gdk_drop_get_surface(cast(GdkDrop*)cPtr);
-    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -159,14 +158,14 @@ class Drop : ObjectG
    *   callback = a `GAsyncReadyCallback` to call when
    *     the request is satisfied
    */
-  void readAsync(string[] mimeTypes, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void readAsync(string[] mimeTypes, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -192,7 +191,7 @@ class Drop : ObjectG
    *   outMimeType = return location for the used mime type
    * Returns: the `GInputStream`
    */
-  InputStream readFinish(AsyncResult result, out string outMimeType)
+  gio.input_stream.InputStream readFinish(gio.async_result.AsyncResult result, out string outMimeType)
   {
     GInputStream* _cretval;
     char* _outMimeType;
@@ -200,7 +199,7 @@ class Drop : ObjectG
     _cretval = gdk_drop_read_finish(cast(GdkDrop*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_outMimeType, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     outMimeType = _outMimeType.fromCString(No.Free);
     return _retval;
   }
@@ -220,14 +219,14 @@ class Drop : ObjectG
    *   cancellable = optional `GCancellable` object, %NULL to ignore.
    *   callback = callback to call when the request is satisfied
    */
-  void readValueAsync(GType type, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void readValueAsync(gobject.types.GType type, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -242,14 +241,14 @@ class Drop : ObjectG
    *   result = a `GAsyncResult`
    * Returns: a `GValue` containing the result.
    */
-  Value readValueFinish(AsyncResult result)
+  gobject.value.Value readValueFinish(gio.async_result.AsyncResult result)
   {
     const(GValue)* _cretval;
     GError *_err;
     _cretval = gdk_drop_read_value_finish(cast(GdkDrop*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Value(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -270,7 +269,7 @@ class Drop : ObjectG
    *   preferred = A unique action that's a member of actions indicating the
    *     preferred action
    */
-  void status(DragAction actions, DragAction preferred)
+  void status(gdk.types.DragAction actions, gdk.types.DragAction preferred)
   {
     gdk_drop_status(cast(GdkDrop*)cPtr, actions, preferred);
   }

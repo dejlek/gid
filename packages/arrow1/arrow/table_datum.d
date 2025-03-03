@@ -5,9 +5,9 @@ import arrow.c.types;
 import arrow.datum;
 import arrow.table;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class TableDatum : Datum
+class TableDatum : arrow.datum.Datum
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class TableDatum : Datum
     return getType();
   }
 
-  this(Table value)
+  this(arrow.table.Table value)
   {
     GArrowTableDatum* _cretval;
     _cretval = garrow_table_datum_new(value ? cast(GArrowTable*)value.cPtr(No.Dup) : null);

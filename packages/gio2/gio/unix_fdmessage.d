@@ -1,6 +1,6 @@
 module gio.unix_fdmessage;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_control_message;
@@ -22,7 +22,7 @@ import gobject.object;
  * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
  * file or the `GioUnix-2.0` GIR namespace when using it.
  */
-class UnixFDMessage : SocketControlMessage
+class UnixFDMessage : gio.socket_control_message.SocketControlMessage
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -59,11 +59,11 @@ class UnixFDMessage : SocketControlMessage
    *   fdList = a #GUnixFDList
    * Returns: a new #GUnixFDMessage
    */
-  static UnixFDMessage newWithFdList(UnixFDList fdList)
+  static gio.unix_fdmessage.UnixFDMessage newWithFdList(gio.unix_fdlist.UnixFDList fdList)
   {
     GSocketControlMessage* _cretval;
     _cretval = g_unix_fd_message_new_with_fd_list(fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!UnixFDMessage(cast(GSocketControlMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.unix_fdmessage.UnixFDMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -94,11 +94,11 @@ class UnixFDMessage : SocketControlMessage
    * the lifetime of message.
    * Returns: the #GUnixFDList from message
    */
-  UnixFDList getFdList()
+  gio.unix_fdlist.UnixFDList getFdList()
   {
     GUnixFDList* _cretval;
     _cretval = g_unix_fd_message_get_fd_list(cast(GUnixFDMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!UnixFDList(cast(GUnixFDList*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.Take);
     return _retval;
   }
 

@@ -1,6 +1,6 @@
 module gtk.level_bar;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -95,7 +95,7 @@ import gtk.widget;
  * # Accessibility
  * `GtkLevelBar` uses the %GTK_ACCESSIBLE_ROLE_METER role.
  */
-class LevelBar : Widget, AccessibleRange, Orientable
+class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -135,11 +135,11 @@ class LevelBar : Widget, AccessibleRange, Orientable
    *   maxValue = a positive value
    * Returns: a `GtkLevelBar`
    */
-  static LevelBar newForInterval(double minValue, double maxValue)
+  static gtk.level_bar.LevelBar newForInterval(double minValue, double maxValue)
   {
     GtkWidget* _cretval;
     _cretval = gtk_level_bar_new_for_interval(minValue, maxValue);
-    auto _retval = ObjectG.getDObject!LevelBar(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.level_bar.LevelBar)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -198,11 +198,11 @@ class LevelBar : Widget, AccessibleRange, Orientable
    * Returns the `mode` of the `GtkLevelBar`.
    * Returns: a `GtkLevelBarMode`
    */
-  LevelBarMode getMode()
+  gtk.types.LevelBarMode getMode()
   {
     GtkLevelBarMode _cretval;
     _cretval = gtk_level_bar_get_mode(cast(GtkLevelBar*)cPtr);
-    LevelBarMode _retval = cast(LevelBarMode)_cretval;
+    gtk.types.LevelBarMode _retval = cast(gtk.types.LevelBarMode)_cretval;
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class LevelBar : Widget, AccessibleRange, Orientable
    * Params:
    *   mode = a `GtkLevelBarMode`
    */
-  void setMode(LevelBarMode mode)
+  void setMode(gtk.types.LevelBarMode mode)
   {
     gtk_level_bar_set_mode(cast(GtkLevelBar*)cPtr, mode);
   }
@@ -312,8 +312,8 @@ class LevelBar : Widget, AccessibleRange, Orientable
    *   name = the name of the offset that changed value
    *   levelBar = the instance the signal is connected to
    */
-  alias OffsetChangedCallbackDlg = void delegate(string name, LevelBar levelBar);
-  alias OffsetChangedCallbackFunc = void function(string name, LevelBar levelBar);
+  alias OffsetChangedCallbackDlg = void delegate(string name, gtk.level_bar.LevelBar levelBar);
+  alias OffsetChangedCallbackFunc = void function(string name, gtk.level_bar.LevelBar levelBar);
 
   /**
    * Connect to OffsetChanged signal.
@@ -330,8 +330,8 @@ class LevelBar : Widget, AccessibleRange, Orientable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto levelBar = getVal!LevelBar(_paramVals);
-      auto name = getVal!string(&_paramVals[1]);
+      auto levelBar = getVal!(gtk.level_bar.LevelBar)(_paramVals);
+      auto name = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(name, levelBar);
     }
 

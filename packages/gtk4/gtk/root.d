@@ -2,7 +2,7 @@ module gtk.root;
 
 public import gtk.root_iface_proxy;
 import gdk.display;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -33,7 +33,7 @@ interface Root
    * Returns the display that this `GtkRoot` is on.
    * Returns: the display of root
    */
-  Display getDisplay();
+  gdk.display.Display getDisplay();
 
   /**
    * Retrieves the current focused widget within the root.
@@ -43,7 +43,7 @@ interface Root
    * widget.
    * Returns: the currently focused widget
    */
-  Widget getFocus();
+  gtk.widget.Widget getFocus();
 
   /**
    * If focus is not the current focus widget, and is focusable, sets
@@ -56,5 +56,5 @@ interface Root
    *   focus = widget to be the new focus widget, or %NULL
    *     to unset the focus widget
    */
-  void setFocus(Widget focus);
+  void setFocus(gtk.widget.Widget focus);
 }

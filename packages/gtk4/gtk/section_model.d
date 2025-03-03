@@ -1,7 +1,7 @@
 module gtk.section_model;
 
 public import gtk.section_model_iface_proxy;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -59,8 +59,8 @@ interface SectionModel
    *   nItems = number of items with changes
    *   sectionModel = the instance the signal is connected to
    */
-  alias SectionsChangedCallbackDlg = void delegate(uint position, uint nItems, SectionModel sectionModel);
-  alias SectionsChangedCallbackFunc = void function(uint position, uint nItems, SectionModel sectionModel);
+  alias SectionsChangedCallbackDlg = void delegate(uint position, uint nItems, gtk.section_model.SectionModel sectionModel);
+  alias SectionsChangedCallbackFunc = void function(uint position, uint nItems, gtk.section_model.SectionModel sectionModel);
 
   /**
    * Connect to SectionsChanged signal.

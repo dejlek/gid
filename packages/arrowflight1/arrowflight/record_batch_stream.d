@@ -6,9 +6,9 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.data_stream;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 
-class RecordBatchStream : DataStream
+class RecordBatchStream : arrowflight.data_stream.DataStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,7 +27,7 @@ class RecordBatchStream : DataStream
     return getType();
   }
 
-  this(RecordBatchReader reader, WriteOptions options)
+  this(arrow.record_batch_reader.RecordBatchReader reader, arrow.write_options.WriteOptions options)
   {
     GAFlightRecordBatchStream* _cretval;
     _cretval = gaflight_record_batch_stream_new(reader ? cast(GArrowRecordBatchReader*)reader.cPtr(No.Dup) : null, options ? cast(GArrowWriteOptions*)options.cPtr(No.Dup) : null);

@@ -1,6 +1,6 @@
 module gtk.filter;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -23,7 +23,7 @@ import gtk.types;
  * However, in particular for large lists or complex search methods, it is
  * also possible to subclass `GtkFilter` and provide one's own filter.
  */
-class Filter : ObjectG
+class Filter : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -48,14 +48,14 @@ class Filter : ObjectG
    * of the filter should then check items again via
    * [gtk.filter.Filter.match].
    * Depending on the change parameter, not all items need to
-   * be changed, but only some. Refer to the [gtk.FilterChange]
+   * be changed, but only some. Refer to the [gtk.types.FilterChange]
    * documentation for details.
    * This function is intended for implementers of `GtkFilter`
    * subclasses and should not be called from other functions.
    * Params:
    *   change = How the filter changed
    */
-  void changed(FilterChange change)
+  void changed(gtk.types.FilterChange change)
   {
     gtk_filter_changed(cast(GtkFilter*)cPtr, change);
   }
@@ -69,11 +69,11 @@ class Filter : ObjectG
    * choose to omit implementing it, but `GtkFilterListModel` uses it.
    * Returns: the strictness of self
    */
-  FilterMatch getStrictness()
+  gtk.types.FilterMatch getStrictness()
   {
     GtkFilterMatch _cretval;
     _cretval = gtk_filter_get_strictness(cast(GtkFilter*)cPtr);
-    FilterMatch _retval = cast(FilterMatch)_cretval;
+    gtk.types.FilterMatch _retval = cast(gtk.types.FilterMatch)_cretval;
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class Filter : ObjectG
    * Returns: %TRUE if the filter matches the item and a filter model should
    *   keep it, %FALSE if not.
    */
-  bool match(ObjectG item)
+  bool match(gobject.object.ObjectG item)
   {
     bool _retval;
     _retval = gtk_filter_match(cast(GtkFilter*)cPtr, item ? cast(ObjectC*)item.cPtr(No.Dup) : null);
@@ -97,14 +97,14 @@ class Filter : ObjectG
    * [gtk.filter.Filter.match].
    * `GtkFilterListModel` handles this signal automatically.
    * Depending on the change parameter, not all items need
-   * to be checked, but only some. Refer to the [gtk.FilterChange]
+   * to be checked, but only some. Refer to the [gtk.types.FilterChange]
    * documentation for details.
    * Params
    *   change = how the filter changed
    *   filter = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(FilterChange change, Filter filter);
-  alias ChangedCallbackFunc = void function(FilterChange change, Filter filter);
+  alias ChangedCallbackDlg = void delegate(gtk.types.FilterChange change, gtk.filter.Filter filter);
+  alias ChangedCallbackFunc = void function(gtk.types.FilterChange change, gtk.filter.Filter filter);
 
   /**
    * Connect to Changed signal.
@@ -120,8 +120,8 @@ class Filter : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto filter = getVal!Filter(_paramVals);
-      auto change = getVal!FilterChange(&_paramVals[1]);
+      auto filter = getVal!(gtk.filter.Filter)(_paramVals);
+      auto change = getVal!(gtk.types.FilterChange)(&_paramVals[1]);
       _dClosure.dlg(change, filter);
     }
 

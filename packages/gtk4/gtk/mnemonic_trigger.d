@@ -1,6 +1,6 @@
 module gtk.mnemonic_trigger;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.shortcut_trigger;
@@ -11,7 +11,7 @@ import gtk.types;
  * Mnemonics require a *mnemonic modifier* $(LPAREN)typically <kbd>Alt</kbd>$(RPAREN) to be
  * pressed together with the mnemonic key.
  */
-class MnemonicTrigger : ShortcutTrigger
+class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

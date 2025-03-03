@@ -4,9 +4,9 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.temporal_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class TimeDataType : TemporalDataType
+class TimeDataType : arrow.temporal_data_type.TemporalDataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -25,11 +25,11 @@ class TimeDataType : TemporalDataType
     return getType();
   }
 
-  TimeUnit getUnit()
+  arrow.types.TimeUnit getUnit()
   {
     GArrowTimeUnit _cretval;
     _cretval = garrow_time_data_type_get_unit(cast(GArrowTimeDataType*)cPtr);
-    TimeUnit _retval = cast(TimeUnit)_cretval;
+    arrow.types.TimeUnit _retval = cast(arrow.types.TimeUnit)_cretval;
     return _retval;
   }
 }

@@ -2,7 +2,7 @@ module gtk.gesture_stylus;
 
 import gdk.device_tool;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -15,7 +15,7 @@ import gtk.types;
  * The provided signals just relay the basic information of the
  * stylus events.
  */
-class GestureStylus : GestureSingle
+class GestureStylus : gtk.gesture_single.GestureSingle
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -56,7 +56,7 @@ class GestureStylus : GestureSingle
    *   values = return location for the axis values
    * Returns: %TRUE if there is a current value for the axes
    */
-  bool getAxes(AxisUse[] axes, out double[] values)
+  bool getAxes(gdk.types.AxisUse[] axes, out double[] values)
   {
     bool _retval;
     auto _axes = cast(GdkAxisUse*)(axes ~ GdkAxisUse.init).ptr;
@@ -79,7 +79,7 @@ class GestureStylus : GestureSingle
    *   value = return location for the axis value
    * Returns: %TRUE if there is a current value for the axis
    */
-  bool getAxis(AxisUse axis, out double value)
+  bool getAxis(gdk.types.AxisUse axis, out double value)
   {
     bool _retval;
     _retval = gtk_gesture_stylus_get_axis(cast(GtkGestureStylus*)cPtr, axis, cast(double*)&value);
@@ -101,7 +101,7 @@ class GestureStylus : GestureSingle
    *   backlog = coordinates and times for the backlog events
    * Returns: %TRUE if there is a backlog to unfold in the current state.
    */
-  bool getBacklog(out TimeCoord[] backlog)
+  bool getBacklog(out gdk.types.TimeCoord[] backlog)
   {
     bool _retval;
     uint _nElems;
@@ -121,11 +121,11 @@ class GestureStylus : GestureSingle
    * signals.
    * Returns: The current stylus tool
    */
-  DeviceTool getDeviceTool()
+  gdk.device_tool.DeviceTool getDeviceTool()
   {
     GdkDeviceTool* _cretval;
     _cretval = gtk_gesture_stylus_get_device_tool(cast(GtkGestureStylus*)cPtr);
-    auto _retval = ObjectG.getDObject!DeviceTool(cast(GdkDeviceTool*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
     return _retval;
   }
 
@@ -161,8 +161,8 @@ class GestureStylus : GestureSingle
    *   y = the Y coordinate of the stylus event
    *   gestureStylus = the instance the signal is connected to
    */
-  alias DownCallbackDlg = void delegate(double x, double y, GestureStylus gestureStylus);
-  alias DownCallbackFunc = void function(double x, double y, GestureStylus gestureStylus);
+  alias DownCallbackDlg = void delegate(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
+  alias DownCallbackFunc = void function(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
 
   /**
    * Connect to Down signal.
@@ -178,9 +178,9 @@ class GestureStylus : GestureSingle
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureStylus = getVal!GestureStylus(_paramVals);
-      auto x = getVal!double(&_paramVals[1]);
-      auto y = getVal!double(&_paramVals[2]);
+      auto gestureStylus = getVal!(gtk.gesture_stylus.GestureStylus)(_paramVals);
+      auto x = getVal!(double)(&_paramVals[1]);
+      auto y = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(x, y, gestureStylus);
     }
 
@@ -195,8 +195,8 @@ class GestureStylus : GestureSingle
    *   y = the Y coordinate of the stylus event
    *   gestureStylus = the instance the signal is connected to
    */
-  alias MotionCallbackDlg = void delegate(double x, double y, GestureStylus gestureStylus);
-  alias MotionCallbackFunc = void function(double x, double y, GestureStylus gestureStylus);
+  alias MotionCallbackDlg = void delegate(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
+  alias MotionCallbackFunc = void function(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
 
   /**
    * Connect to Motion signal.
@@ -212,9 +212,9 @@ class GestureStylus : GestureSingle
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureStylus = getVal!GestureStylus(_paramVals);
-      auto x = getVal!double(&_paramVals[1]);
-      auto y = getVal!double(&_paramVals[2]);
+      auto gestureStylus = getVal!(gtk.gesture_stylus.GestureStylus)(_paramVals);
+      auto x = getVal!(double)(&_paramVals[1]);
+      auto y = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(x, y, gestureStylus);
     }
 
@@ -229,8 +229,8 @@ class GestureStylus : GestureSingle
    *   y = the Y coordinate of the stylus event
    *   gestureStylus = the instance the signal is connected to
    */
-  alias ProximityCallbackDlg = void delegate(double x, double y, GestureStylus gestureStylus);
-  alias ProximityCallbackFunc = void function(double x, double y, GestureStylus gestureStylus);
+  alias ProximityCallbackDlg = void delegate(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
+  alias ProximityCallbackFunc = void function(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
 
   /**
    * Connect to Proximity signal.
@@ -246,9 +246,9 @@ class GestureStylus : GestureSingle
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureStylus = getVal!GestureStylus(_paramVals);
-      auto x = getVal!double(&_paramVals[1]);
-      auto y = getVal!double(&_paramVals[2]);
+      auto gestureStylus = getVal!(gtk.gesture_stylus.GestureStylus)(_paramVals);
+      auto x = getVal!(double)(&_paramVals[1]);
+      auto y = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(x, y, gestureStylus);
     }
 
@@ -263,8 +263,8 @@ class GestureStylus : GestureSingle
    *   y = the Y coordinate of the stylus event
    *   gestureStylus = the instance the signal is connected to
    */
-  alias UpCallbackDlg = void delegate(double x, double y, GestureStylus gestureStylus);
-  alias UpCallbackFunc = void function(double x, double y, GestureStylus gestureStylus);
+  alias UpCallbackDlg = void delegate(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
+  alias UpCallbackFunc = void function(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
 
   /**
    * Connect to Up signal.
@@ -280,9 +280,9 @@ class GestureStylus : GestureSingle
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureStylus = getVal!GestureStylus(_paramVals);
-      auto x = getVal!double(&_paramVals[1]);
-      auto y = getVal!double(&_paramVals[2]);
+      auto gestureStylus = getVal!(gtk.gesture_stylus.GestureStylus)(_paramVals);
+      auto x = getVal!(double)(&_paramVals[1]);
+      auto y = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(x, y, gestureStylus);
     }
 

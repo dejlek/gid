@@ -1,6 +1,6 @@
 module pango.tab_array;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
@@ -12,7 +12,7 @@ import pango.types;
  * Each tab stop has an alignment, a position, and optionally
  * a character to use as decimal point.
  */
-class TabArray : Boxed
+class TabArray : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -58,11 +58,11 @@ class TabArray : Boxed
    * Returns: the newly allocated `PangoTabArray`, which should
    *   be freed with [pango.tab_array.TabArray.free].
    */
-  TabArray copy()
+  pango.tab_array.TabArray copy()
   {
     PangoTabArray* _cretval;
     _cretval = pango_tab_array_copy(cast(PangoTabArray*)cPtr);
-    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class TabArray : Boxed
    *   alignment = location to store alignment
    *   location = location to store tab position
    */
-  void getTab(int tabIndex, out TabAlign alignment, out int location)
+  void getTab(int tabIndex, out pango.types.TabAlign alignment, out int location)
   {
     pango_tab_array_get_tab(cast(PangoTabArray*)cPtr, tabIndex, &alignment, cast(int*)&location);
   }
@@ -165,7 +165,7 @@ class TabArray : Boxed
    *   alignment = tab alignment
    *   location = tab location in Pango units
    */
-  void setTab(int tabIndex, TabAlign alignment, int location)
+  void setTab(int tabIndex, pango.types.TabAlign alignment, int location)
   {
     pango_tab_array_set_tab(cast(PangoTabArray*)cPtr, tabIndex, alignment, location);
   }
@@ -191,7 +191,7 @@ class TabArray : Boxed
   {
     char* _cretval;
     _cretval = pango_tab_array_to_string(cast(PangoTabArray*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -203,12 +203,12 @@ class TabArray : Boxed
    *   text = a string
    * Returns: a new `PangoTabArray`
    */
-  static TabArray fromString(string text)
+  static pango.tab_array.TabArray fromString(string text)
   {
     PangoTabArray* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
     _cretval = pango_tab_array_from_string(_text);
-    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

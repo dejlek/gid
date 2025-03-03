@@ -7,11 +7,11 @@ import arrow.int8_array;
 import arrow.sparse_union_data_type;
 import arrow.types;
 import arrow.union_array;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class SparseUnionArray : UnionArray
+class SparseUnionArray : arrow.union_array.UnionArray
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -30,11 +30,11 @@ class SparseUnionArray : UnionArray
     return getType();
   }
 
-  this(Int8Array typeIds, Array[] fields)
+  this(arrow.int8_array.Int8Array typeIds, arrow.array.Array[] fields)
   {
     GArrowSparseUnionArray* _cretval;
-    auto _fields = gListFromD!(Array)(fields);
-    scope(exit) containerFree!(GList*, Array, GidOwnership.None)(_fields);
+    auto _fields = gListFromD!(arrow.array.Array)(fields);
+    scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_fields);
     GError *_err;
     _cretval = garrow_sparse_union_array_new(typeIds ? cast(GArrowInt8Array*)typeIds.cPtr(No.Dup) : null, _fields, &_err);
     if (_err)
@@ -42,16 +42,16 @@ class SparseUnionArray : UnionArray
     this(_cretval, Yes.Take);
   }
 
-  static SparseUnionArray newDataType(SparseUnionDataType dataType, Int8Array typeIds, Array[] fields)
+  static arrow.sparse_union_array.SparseUnionArray newDataType(arrow.sparse_union_data_type.SparseUnionDataType dataType, arrow.int8_array.Int8Array typeIds, arrow.array.Array[] fields)
   {
     GArrowSparseUnionArray* _cretval;
-    auto _fields = gListFromD!(Array)(fields);
-    scope(exit) containerFree!(GList*, Array, GidOwnership.None)(_fields);
+    auto _fields = gListFromD!(arrow.array.Array)(fields);
+    scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_fields);
     GError *_err;
     _cretval = garrow_sparse_union_array_new_data_type(dataType ? cast(GArrowSparseUnionDataType*)dataType.cPtr(No.Dup) : null, typeIds ? cast(GArrowInt8Array*)typeIds.cPtr(No.Dup) : null, _fields, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!SparseUnionArray(cast(GArrowSparseUnionArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.sparse_union_array.SparseUnionArray)(cast(GArrowSparseUnionArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

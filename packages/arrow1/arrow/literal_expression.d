@@ -5,9 +5,9 @@ import arrow.c.types;
 import arrow.datum;
 import arrow.expression;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class LiteralExpression : Expression
+class LiteralExpression : arrow.expression.Expression
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class LiteralExpression : Expression
     return getType();
   }
 
-  this(Datum datum)
+  this(arrow.datum.Datum datum)
   {
     GArrowLiteralExpression* _cretval;
     _cretval = garrow_literal_expression_new(datum ? cast(GArrowDatum*)datum.cPtr(No.Dup) : null);

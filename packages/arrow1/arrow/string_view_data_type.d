@@ -4,9 +4,9 @@ import arrow.binary_view_data_type;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class StringViewDataType : BinaryViewDataType
+class StringViewDataType : arrow.binary_view_data_type.BinaryViewDataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

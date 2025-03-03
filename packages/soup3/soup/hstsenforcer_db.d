@@ -1,6 +1,6 @@
 module soup.hstsenforcer_db;
 
-import gid.global;
+import gid.gid;
 import soup.c.functions;
 import soup.c.types;
 import soup.hstsenforcer;
@@ -13,7 +13,7 @@ import soup.types;
  * #SoupHSTSEnforcerDB is a class@HSTSEnforcer that uses a SQLite
  * database as a backend for persistency.
  */
-class HSTSEnforcerDB : HSTSEnforcer
+class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

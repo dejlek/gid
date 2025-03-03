@@ -1,6 +1,6 @@
 module soup.content_sniffer;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import gobject.object;
 import soup.c.functions;
@@ -19,7 +19,7 @@ import soup.types;
  * content sniffing to a session with [soup.session.Session.addFeature] or
  * [soup.session.Session.addFeatureByType].
  */
-class ContentSniffer : ObjectG, SessionFeature
+class ContentSniffer : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -63,12 +63,12 @@ class ContentSniffer : ObjectG, SessionFeature
    * Returns: the sniffed Content-Type of buffer; this will never be %NULL,
    *   but may be `application/octet-stream`.
    */
-  string sniff(Message msg, Bytes buffer, out string[string] params)
+  string sniff(soup.message.Message msg, glib.bytes.Bytes buffer, out string[string] params)
   {
     char* _cretval;
     GHashTable* _params;
     _cretval = soup_content_sniffer_sniff(cast(SoupContentSniffer*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, buffer ? cast(GBytes*)buffer.cPtr(No.Dup) : null, &_params);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     params = gHashTableToD!(string, string, GidOwnership.Full)(_params);
     return _retval;
   }

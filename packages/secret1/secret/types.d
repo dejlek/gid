@@ -1,9 +1,8 @@
 module secret.types;
 
-import gid.global;
+import gid.gid;
 import secret.c.functions;
 import secret.c.types;
-import secret.types;
 
 
 // Enums

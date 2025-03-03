@@ -1,6 +1,6 @@
 module gio.dbus_auth_observer;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.credentials;
@@ -64,7 +64,7 @@ import gobject.object;
  * }
  * ```
  */
-class DBusAuthObserver : ObjectG
+class DBusAuthObserver : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -115,7 +115,7 @@ class DBusAuthObserver : ObjectG
    *   credentials = Credentials received from the peer or %NULL.
    * Returns: %TRUE if the peer is authorized, %FALSE if not.
    */
-  bool authorizeAuthenticatedPeer(IOStream stream, Credentials credentials)
+  bool authorizeAuthenticatedPeer(gio.iostream.IOStream stream, gio.credentials.Credentials credentials)
   {
     bool _retval;
     _retval = g_dbus_auth_observer_authorize_authenticated_peer(cast(GDBusAuthObserver*)cPtr, stream ? cast(GIOStream*)stream.cPtr(No.Dup) : null, credentials ? cast(GCredentials*)credentials.cPtr(No.Dup) : null);
@@ -129,8 +129,8 @@ class DBusAuthObserver : ObjectG
    *   dBusAuthObserver = the instance the signal is connected to
    * Returns: %TRUE if mechanism can be used to authenticate the other peer, %FALSE if not.
    */
-  alias AllowMechanismCallbackDlg = bool delegate(string mechanism, DBusAuthObserver dBusAuthObserver);
-  alias AllowMechanismCallbackFunc = bool function(string mechanism, DBusAuthObserver dBusAuthObserver);
+  alias AllowMechanismCallbackDlg = bool delegate(string mechanism, gio.dbus_auth_observer.DBusAuthObserver dBusAuthObserver);
+  alias AllowMechanismCallbackFunc = bool function(string mechanism, gio.dbus_auth_observer.DBusAuthObserver dBusAuthObserver);
 
   /**
    * Connect to AllowMechanism signal.
@@ -147,8 +147,8 @@ class DBusAuthObserver : ObjectG
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto dBusAuthObserver = getVal!DBusAuthObserver(_paramVals);
-      auto mechanism = getVal!string(&_paramVals[1]);
+      auto dBusAuthObserver = getVal!(gio.dbus_auth_observer.DBusAuthObserver)(_paramVals);
+      auto mechanism = getVal!(string)(&_paramVals[1]);
       _retval = _dClosure.dlg(mechanism, dBusAuthObserver);
       setVal!bool(_returnValue, _retval);
     }
@@ -166,8 +166,8 @@ class DBusAuthObserver : ObjectG
    *   dBusAuthObserver = the instance the signal is connected to
    * Returns: %TRUE if the peer is authorized, %FALSE if not.
    */
-  alias AuthorizeAuthenticatedPeerCallbackDlg = bool delegate(IOStream stream, Credentials credentials, DBusAuthObserver dBusAuthObserver);
-  alias AuthorizeAuthenticatedPeerCallbackFunc = bool function(IOStream stream, Credentials credentials, DBusAuthObserver dBusAuthObserver);
+  alias AuthorizeAuthenticatedPeerCallbackDlg = bool delegate(gio.iostream.IOStream stream, gio.credentials.Credentials credentials, gio.dbus_auth_observer.DBusAuthObserver dBusAuthObserver);
+  alias AuthorizeAuthenticatedPeerCallbackFunc = bool function(gio.iostream.IOStream stream, gio.credentials.Credentials credentials, gio.dbus_auth_observer.DBusAuthObserver dBusAuthObserver);
 
   /**
    * Connect to AuthorizeAuthenticatedPeer signal.
@@ -184,9 +184,9 @@ class DBusAuthObserver : ObjectG
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto dBusAuthObserver = getVal!DBusAuthObserver(_paramVals);
-      auto stream = getVal!IOStream(&_paramVals[1]);
-      auto credentials = getVal!Credentials(&_paramVals[2]);
+      auto dBusAuthObserver = getVal!(gio.dbus_auth_observer.DBusAuthObserver)(_paramVals);
+      auto stream = getVal!(gio.iostream.IOStream)(&_paramVals[1]);
+      auto credentials = getVal!(gio.credentials.Credentials)(&_paramVals[2]);
       _retval = _dClosure.dlg(stream, credentials, dBusAuthObserver);
       setVal!bool(_returnValue, _retval);
     }

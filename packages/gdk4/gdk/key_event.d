@@ -4,12 +4,12 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.event;
 import gdk.types;
-import gid.global;
+import gid.gid;
 
 /**
  * An event related to a key-based device.
  */
-class KeyEvent : Event
+class KeyEvent : gdk.event.Event
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -24,11 +24,11 @@ class KeyEvent : Event
    * Extracts the consumed modifiers from a key event.
    * Returns: the consumed modifiers or event
    */
-  ModifierType getConsumedModifiers()
+  gdk.types.ModifierType getConsumedModifiers()
   {
     GdkModifierType _cretval;
     _cretval = gdk_key_event_get_consumed_modifiers(cast(GdkEvent*)cPtr);
-    ModifierType _retval = cast(ModifierType)_cretval;
+    gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class KeyEvent : Event
    *   modifiers = return location for modifiers
    * Returns: %TRUE on success
    */
-  bool getMatch(out uint keyval, out ModifierType modifiers)
+  bool getMatch(out uint keyval, out gdk.types.ModifierType modifiers)
   {
     bool _retval;
     _retval = gdk_key_event_get_match(cast(GdkEvent*)cPtr, cast(uint*)&keyval, &modifiers);
@@ -114,11 +114,11 @@ class KeyEvent : Event
    *   modifiers = the modifiers to match
    * Returns: a `GdkKeyMatch` value describing whether event matches
    */
-  KeyMatch matches(uint keyval, ModifierType modifiers)
+  gdk.types.KeyMatch matches(uint keyval, gdk.types.ModifierType modifiers)
   {
     GdkKeyMatch _cretval;
     _cretval = gdk_key_event_matches(cast(GdkEvent*)cPtr, keyval, modifiers);
-    KeyMatch _retval = cast(KeyMatch)_cretval;
+    gdk.types.KeyMatch _retval = cast(gdk.types.KeyMatch)_cretval;
     return _retval;
   }
 }

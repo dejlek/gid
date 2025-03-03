@@ -5,10 +5,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.scalar;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class BaseBinaryScalar : Scalar
+class BaseBinaryScalar : arrow.scalar.Scalar
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,11 +27,11 @@ class BaseBinaryScalar : Scalar
     return getType();
   }
 
-  Buffer getValue()
+  arrow.buffer.Buffer getValue()
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_base_binary_scalar_get_value(cast(GArrowBaseBinaryScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!Buffer(cast(GArrowBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, No.Take);
     return _retval;
   }
 }

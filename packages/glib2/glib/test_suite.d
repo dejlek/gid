@@ -1,6 +1,6 @@
 module glib.test_suite;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -39,7 +39,7 @@ class TestSuite
    * Params:
    *   testCase = a #GTestCase
    */
-  void add(TestCase testCase)
+  void add(glib.types.TestCase testCase)
   {
     g_test_suite_add(cast(GTestSuite*)cPtr, testCase);
   }
@@ -49,7 +49,7 @@ class TestSuite
    * Params:
    *   nestedsuite = another #GTestSuite
    */
-  void addSuite(TestSuite nestedsuite)
+  void addSuite(glib.test_suite.TestSuite nestedsuite)
   {
     g_test_suite_add_suite(cast(GTestSuite*)cPtr, nestedsuite ? cast(GTestSuite*)nestedsuite.cPtr : null);
   }

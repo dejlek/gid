@@ -1,13 +1,13 @@
 module parquet.column_chunk_metadata;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import parquet.c.functions;
 import parquet.c.types;
 import parquet.statistics;
 import parquet.types;
 
-class ColumnChunkMetadata : ObjectG
+class ColumnChunkMetadata : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -33,7 +33,7 @@ class ColumnChunkMetadata : ObjectG
     return _retval;
   }
 
-  bool equal(ColumnChunkMetadata otherMetadata)
+  bool equal(parquet.column_chunk_metadata.ColumnChunkMetadata otherMetadata)
   {
     bool _retval;
     _retval = gparquet_column_chunk_metadata_equal(cast(GParquetColumnChunkMetadata*)cPtr, otherMetadata ? cast(GParquetColumnChunkMetadata*)otherMetadata.cPtr(No.Dup) : null);
@@ -47,11 +47,11 @@ class ColumnChunkMetadata : ObjectG
     return _retval;
   }
 
-  Statistics getStatistics()
+  parquet.statistics.Statistics getStatistics()
   {
     GParquetStatistics* _cretval;
     _cretval = gparquet_column_chunk_metadata_get_statistics(cast(GParquetColumnChunkMetadata*)cPtr);
-    auto _retval = ObjectG.getDObject!Statistics(cast(GParquetStatistics*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(parquet.statistics.Statistics)(cast(GParquetStatistics*)_cretval, Yes.Take);
     return _retval;
   }
 

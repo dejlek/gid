@@ -5,7 +5,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.object;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 
@@ -69,7 +69,7 @@ interface Table
    * Returns: a AtkObject* representing the
    *   table caption, or %NULL if value does not implement this interface.
    */
-  ObjectAtk getCaption();
+  atk.object.ObjectAtk getCaption();
 
   /**
    * Gets a #gint representing the column at the specified index_.
@@ -110,7 +110,7 @@ interface Table
    *   specified column header, or %NULL if value does not implement this
    *   interface.
    */
-  ObjectAtk getColumnHeader(int column);
+  atk.object.ObjectAtk getColumnHeader(int column);
 
   /**
    * Gets a #gint representing the index at the specified row and
@@ -180,7 +180,7 @@ interface Table
    *   specified row header, or %NULL if value does not implement this
    *   interface.
    */
-  ObjectAtk getRowHeader(int row);
+  atk.object.ObjectAtk getRowHeader(int row);
 
   /**
    * Gets the selected columns of the table by initializing **selected with
@@ -203,7 +203,7 @@ interface Table
    * Returns: a AtkObject* representing a summary description
    *   of the table, or zero if value does not implement this interface.
    */
-  ObjectAtk getSummary();
+  atk.object.ObjectAtk getSummary();
 
   /**
    * Gets a boolean value indicating whether the specified column
@@ -245,7 +245,7 @@ interface Table
    * Returns: an #AtkObject representing the referred
    *   to accessible
    */
-  ObjectAtk refAt(int row, int column);
+  atk.object.ObjectAtk refAt(int row, int column);
 
   /**
    * Adds the specified column to the selection.
@@ -270,7 +270,7 @@ interface Table
    * Params:
    *   caption = a #AtkObject representing the caption to set for table
    */
-  void setCaption(ObjectAtk caption);
+  void setCaption(atk.object.ObjectAtk caption);
 
   /**
    * Sets the description text for the specified column of the table.
@@ -287,7 +287,7 @@ interface Table
    *   column = a #gint representing a column in table
    *   header = an #AtkTable
    */
-  void setColumnHeader(int column, ObjectAtk header);
+  void setColumnHeader(int column, atk.object.ObjectAtk header);
 
   /**
    * Sets the description text for the specified row of table.
@@ -304,7 +304,7 @@ interface Table
    *   row = a #gint representing a row in table
    *   header = an #AtkTable
    */
-  void setRowHeader(int row, ObjectAtk header);
+  void setRowHeader(int row, atk.object.ObjectAtk header);
 
   /**
    * Sets the summary description of the table.
@@ -312,7 +312,7 @@ interface Table
    *   accessible = an #AtkObject representing the summary description
    *     to set for table
    */
-  void setSummary(ObjectAtk accessible);
+  void setSummary(atk.object.ObjectAtk accessible);
 
   /**
    * The "column-deleted" signal is emitted by an object which
@@ -322,8 +322,8 @@ interface Table
    *   arg2 = The number of columns deleted.
    *   table = the instance the signal is connected to
    */
-  alias ColumnDeletedCallbackDlg = void delegate(int arg1, int arg2, Table table);
-  alias ColumnDeletedCallbackFunc = void function(int arg1, int arg2, Table table);
+  alias ColumnDeletedCallbackDlg = void delegate(int arg1, int arg2, atk.table.Table table);
+  alias ColumnDeletedCallbackFunc = void function(int arg1, int arg2, atk.table.Table table);
 
   /**
    * Connect to ColumnDeleted signal.
@@ -343,8 +343,8 @@ interface Table
    *   arg2 = The number of colums inserted.
    *   table = the instance the signal is connected to
    */
-  alias ColumnInsertedCallbackDlg = void delegate(int arg1, int arg2, Table table);
-  alias ColumnInsertedCallbackFunc = void function(int arg1, int arg2, Table table);
+  alias ColumnInsertedCallbackDlg = void delegate(int arg1, int arg2, atk.table.Table table);
+  alias ColumnInsertedCallbackFunc = void function(int arg1, int arg2, atk.table.Table table);
 
   /**
    * Connect to ColumnInserted signal.
@@ -362,8 +362,8 @@ interface Table
    * reordered.
    *   table = the instance the signal is connected to
    */
-  alias ColumnReorderedCallbackDlg = void delegate(Table table);
-  alias ColumnReorderedCallbackFunc = void function(Table table);
+  alias ColumnReorderedCallbackDlg = void delegate(atk.table.Table table);
+  alias ColumnReorderedCallbackFunc = void function(atk.table.Table table);
 
   /**
    * Connect to ColumnReordered signal.
@@ -381,8 +381,8 @@ interface Table
    * the table changes.
    *   table = the instance the signal is connected to
    */
-  alias ModelChangedCallbackDlg = void delegate(Table table);
-  alias ModelChangedCallbackFunc = void function(Table table);
+  alias ModelChangedCallbackDlg = void delegate(atk.table.Table table);
+  alias ModelChangedCallbackFunc = void function(atk.table.Table table);
 
   /**
    * Connect to ModelChanged signal.
@@ -402,8 +402,8 @@ interface Table
    *   arg2 = The number of rows deleted.
    *   table = the instance the signal is connected to
    */
-  alias RowDeletedCallbackDlg = void delegate(int arg1, int arg2, Table table);
-  alias RowDeletedCallbackFunc = void function(int arg1, int arg2, Table table);
+  alias RowDeletedCallbackDlg = void delegate(int arg1, int arg2, atk.table.Table table);
+  alias RowDeletedCallbackFunc = void function(int arg1, int arg2, atk.table.Table table);
 
   /**
    * Connect to RowDeleted signal.
@@ -423,8 +423,8 @@ interface Table
    *   arg2 = The number of rows inserted.
    *   table = the instance the signal is connected to
    */
-  alias RowInsertedCallbackDlg = void delegate(int arg1, int arg2, Table table);
-  alias RowInsertedCallbackFunc = void function(int arg1, int arg2, Table table);
+  alias RowInsertedCallbackDlg = void delegate(int arg1, int arg2, atk.table.Table table);
+  alias RowInsertedCallbackFunc = void function(int arg1, int arg2, atk.table.Table table);
 
   /**
    * Connect to RowInserted signal.
@@ -442,8 +442,8 @@ interface Table
    * reordered.
    *   table = the instance the signal is connected to
    */
-  alias RowReorderedCallbackDlg = void delegate(Table table);
-  alias RowReorderedCallbackFunc = void function(Table table);
+  alias RowReorderedCallbackDlg = void delegate(atk.table.Table table);
+  alias RowReorderedCallbackFunc = void function(atk.table.Table table);
 
   /**
    * Connect to RowReordered signal.

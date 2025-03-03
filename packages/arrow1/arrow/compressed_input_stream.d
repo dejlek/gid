@@ -9,10 +9,10 @@ import arrow.input_stream;
 import arrow.readable;
 import arrow.readable_mixin;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class CompressedInputStream : InputStream
+class CompressedInputStream : arrow.input_stream.InputStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -31,7 +31,7 @@ class CompressedInputStream : InputStream
     return getType();
   }
 
-  this(Codec codec, InputStream raw)
+  this(arrow.codec.Codec codec, arrow.input_stream.InputStream raw)
   {
     GArrowCompressedInputStream* _cretval;
     GError *_err;

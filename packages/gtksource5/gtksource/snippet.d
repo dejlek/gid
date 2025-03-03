@@ -1,6 +1,6 @@
 module gtksource.snippet;
 
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 import gtksource.c.functions;
@@ -20,7 +20,7 @@ import gtksource.types;
  * Snippet chunks can reference other snippet chunks as well as post-process
  * the values from other chunks such as capitalization.
  */
-class Snippet : ObjectG
+class Snippet : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -63,7 +63,7 @@ class Snippet : ObjectG
    * Returns: the newly parsed #GtkSourceSnippet, or %NULL upon
    *   failure and error is set.
    */
-  static Snippet newParsed(string text)
+  static gtksource.snippet.Snippet newParsed(string text)
   {
     GtkSourceSnippet* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
@@ -71,7 +71,7 @@ class Snippet : ObjectG
     _cretval = gtk_source_snippet_new_parsed(_text, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Snippet(cast(GtkSourceSnippet*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class Snippet : ObjectG
    * Params:
    *   chunk = a #GtkSourceSnippetChunk
    */
-  void addChunk(SnippetChunk chunk)
+  void addChunk(gtksource.snippet_chunk.SnippetChunk chunk)
   {
     gtk_source_snippet_add_chunk(cast(GtkSourceSnippet*)cPtr, chunk ? cast(GtkSourceSnippetChunk*)chunk.cPtr(No.Dup) : null);
   }
@@ -90,11 +90,11 @@ class Snippet : ObjectG
    * Does a deep copy of the snippet.
    * Returns: A new #GtkSourceSnippet
    */
-  Snippet copy()
+  gtksource.snippet.Snippet copy()
   {
     GtkSourceSnippet* _cretval;
     _cretval = gtk_source_snippet_copy(cast(GtkSourceSnippet*)cPtr);
-    auto _retval = ObjectG.getDObject!Snippet(cast(GtkSourceSnippet*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -102,11 +102,11 @@ class Snippet : ObjectG
    * Gets the context used for expanding the snippet.
    * Returns: an #GtkSourceSnippetContext
    */
-  SnippetContext getContext()
+  gtksource.snippet_context.SnippetContext getContext()
   {
     GtkSourceSnippetContext* _cretval;
     _cretval = gtk_source_snippet_get_context(cast(GtkSourceSnippet*)cPtr);
-    auto _retval = ObjectG.getDObject!SnippetContext(cast(GtkSourceSnippetContext*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.snippet_context.SnippetContext)(cast(GtkSourceSnippetContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class Snippet : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_description(cast(GtkSourceSnippet*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class Snippet : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_language_id(cast(GtkSourceSnippet*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class Snippet : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_name(cast(GtkSourceSnippet*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -178,11 +178,11 @@ class Snippet : ObjectG
    *   nth = the nth chunk to get
    * Returns: an #GtkSourceSnippetChunk
    */
-  SnippetChunk getNthChunk(uint nth)
+  gtksource.snippet_chunk.SnippetChunk getNthChunk(uint nth)
   {
     GtkSourceSnippetChunk* _cretval;
     _cretval = gtk_source_snippet_get_nth_chunk(cast(GtkSourceSnippet*)cPtr, nth);
-    auto _retval = ObjectG.getDObject!SnippetChunk(cast(GtkSourceSnippetChunk*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.snippet_chunk.SnippetChunk)(cast(GtkSourceSnippetChunk*)_cretval, No.Take);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class Snippet : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_trigger(cast(GtkSourceSnippet*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

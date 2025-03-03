@@ -1,6 +1,6 @@
 module gtk.bitset;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gtk.c.functions;
 import gtk.c.types;
@@ -18,7 +18,7 @@ import gtk.types;
  * The main use case for `GtkBitset` is implementing complex selections for
  * [gtk.selection_model.SelectionModel].
  */
-class Bitset : Boxed
+class Bitset : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -46,11 +46,11 @@ class Bitset : Boxed
    * Creates a new empty bitset.
    * Returns: A new empty bitset
    */
-  static Bitset newEmpty()
+  static gtk.bitset.Bitset newEmpty()
   {
     GtkBitset* _cretval;
     _cretval = gtk_bitset_new_empty();
-    auto _retval = _cretval ? new Bitset(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.bitset.Bitset(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -61,11 +61,11 @@ class Bitset : Boxed
    *   nItems = number of consecutive values to add
    * Returns: A new bitset
    */
-  static Bitset newRange(uint start, uint nItems)
+  static gtk.bitset.Bitset newRange(uint start, uint nItems)
   {
     GtkBitset* _cretval;
     _cretval = gtk_bitset_new_range(start, nItems);
-    auto _retval = _cretval ? new Bitset(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.bitset.Bitset(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class Bitset : Boxed
   bool contains(uint value)
   {
     bool _retval;
-    _retval = gtk_bitset_contains(cast(GtkBitset*)cPtr, value);
+    _retval = gtk_bitset_contains(cast(const(GtkBitset)*)cPtr, value);
     return _retval;
   }
 
@@ -139,11 +139,11 @@ class Bitset : Boxed
    * Returns: A new bitset that contains the same
    *   values as self
    */
-  Bitset copy()
+  gtk.bitset.Bitset copy()
   {
     GtkBitset* _cretval;
-    _cretval = gtk_bitset_copy(cast(GtkBitset*)cPtr);
-    auto _retval = _cretval ? new Bitset(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gtk_bitset_copy(cast(const(GtkBitset)*)cPtr);
+    auto _retval = _cretval ? new gtk.bitset.Bitset(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -157,9 +157,9 @@ class Bitset : Boxed
    * Params:
    *   other = the `GtkBitset` to compute the difference from
    */
-  void difference(Bitset other)
+  void difference(gtk.bitset.Bitset other)
   {
-    gtk_bitset_difference(cast(GtkBitset*)cPtr, other ? cast(GtkBitset*)other.cPtr(No.Dup) : null);
+    gtk_bitset_difference(cast(GtkBitset*)cPtr, other ? cast(const(GtkBitset)*)other.cPtr(No.Dup) : null);
   }
 
   /**
@@ -168,10 +168,10 @@ class Bitset : Boxed
    *   other = another `GtkBitset`
    * Returns: %TRUE if self and other contain the same values
    */
-  bool equals(Bitset other)
+  bool equals(gtk.bitset.Bitset other)
   {
     bool _retval;
-    _retval = gtk_bitset_equals(cast(GtkBitset*)cPtr, other ? cast(GtkBitset*)other.cPtr(No.Dup) : null);
+    _retval = gtk_bitset_equals(cast(const(GtkBitset)*)cPtr, other ? cast(const(GtkBitset)*)other.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class Bitset : Boxed
   uint getMaximum()
   {
     uint _retval;
-    _retval = gtk_bitset_get_maximum(cast(GtkBitset*)cPtr);
+    _retval = gtk_bitset_get_maximum(cast(const(GtkBitset)*)cPtr);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class Bitset : Boxed
   uint getMinimum()
   {
     uint _retval;
-    _retval = gtk_bitset_get_minimum(cast(GtkBitset*)cPtr);
+    _retval = gtk_bitset_get_minimum(cast(const(GtkBitset)*)cPtr);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class Bitset : Boxed
   uint getNth(uint nth)
   {
     uint _retval;
-    _retval = gtk_bitset_get_nth(cast(GtkBitset*)cPtr, nth);
+    _retval = gtk_bitset_get_nth(cast(const(GtkBitset)*)cPtr, nth);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class Bitset : Boxed
   ulong getSize()
   {
     ulong _retval;
-    _retval = gtk_bitset_get_size(cast(GtkBitset*)cPtr);
+    _retval = gtk_bitset_get_size(cast(const(GtkBitset)*)cPtr);
     return _retval;
   }
 
@@ -243,7 +243,7 @@ class Bitset : Boxed
   ulong getSizeInRange(uint first, uint last)
   {
     ulong _retval;
-    _retval = gtk_bitset_get_size_in_range(cast(GtkBitset*)cPtr, first, last);
+    _retval = gtk_bitset_get_size_in_range(cast(const(GtkBitset)*)cPtr, first, last);
     return _retval;
   }
 
@@ -255,9 +255,9 @@ class Bitset : Boxed
    * Params:
    *   other = the `GtkBitset` to intersect with
    */
-  void intersect(Bitset other)
+  void intersect(gtk.bitset.Bitset other)
   {
-    gtk_bitset_intersect(cast(GtkBitset*)cPtr, other ? cast(GtkBitset*)other.cPtr(No.Dup) : null);
+    gtk_bitset_intersect(cast(GtkBitset*)cPtr, other ? cast(const(GtkBitset)*)other.cPtr(No.Dup) : null);
   }
 
   /**
@@ -267,7 +267,7 @@ class Bitset : Boxed
   bool isEmpty()
   {
     bool _retval;
-    _retval = gtk_bitset_is_empty(cast(GtkBitset*)cPtr);
+    _retval = gtk_bitset_is_empty(cast(const(GtkBitset)*)cPtr);
     return _retval;
   }
 
@@ -380,9 +380,9 @@ class Bitset : Boxed
    * Params:
    *   other = the `GtkBitset` to subtract
    */
-  void subtract(Bitset other)
+  void subtract(gtk.bitset.Bitset other)
   {
-    gtk_bitset_subtract(cast(GtkBitset*)cPtr, other ? cast(GtkBitset*)other.cPtr(No.Dup) : null);
+    gtk_bitset_subtract(cast(GtkBitset*)cPtr, other ? cast(const(GtkBitset)*)other.cPtr(No.Dup) : null);
   }
 
   /**
@@ -393,8 +393,8 @@ class Bitset : Boxed
    * Params:
    *   other = the `GtkBitset` to union with
    */
-  void union_(Bitset other)
+  void union_(gtk.bitset.Bitset other)
   {
-    gtk_bitset_union(cast(GtkBitset*)cPtr, other ? cast(GtkBitset*)other.cPtr(No.Dup) : null);
+    gtk_bitset_union(cast(GtkBitset*)cPtr, other ? cast(const(GtkBitset)*)other.cPtr(No.Dup) : null);
   }
 }

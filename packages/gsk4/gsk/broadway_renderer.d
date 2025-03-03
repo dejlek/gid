@@ -1,12 +1,12 @@
 module gsk.broadway_renderer;
 
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.renderer;
 import gsk.types;
 
-class BroadwayRenderer : Renderer
+class BroadwayRenderer : gsk.renderer.Renderer
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

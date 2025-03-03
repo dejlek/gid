@@ -1,9 +1,8 @@
 module gtk.app_chooser;
 
 public import gtk.app_chooser_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.app_info;
-import gio.app_info_mixin;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -47,7 +46,7 @@ interface AppChooser
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  AppInfo getAppInfo();
+  gio.app_info.AppInfo getAppInfo();
 
   /**
    * Returns the content type for which the `GtkAppChooser`

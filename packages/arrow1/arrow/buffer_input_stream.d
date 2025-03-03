@@ -9,10 +9,10 @@ import arrow.readable;
 import arrow.readable_mixin;
 import arrow.seekable_input_stream;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class BufferInputStream : SeekableInputStream
+class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -31,18 +31,18 @@ class BufferInputStream : SeekableInputStream
     return getType();
   }
 
-  this(Buffer buffer)
+  this(arrow.buffer.Buffer buffer)
   {
     GArrowBufferInputStream* _cretval;
     _cretval = garrow_buffer_input_stream_new(buffer ? cast(GArrowBuffer*)buffer.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
-  Buffer getBuffer()
+  arrow.buffer.Buffer getBuffer()
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_buffer_input_stream_get_buffer(cast(GArrowBufferInputStream*)cPtr);
-    auto _retval = ObjectG.getDObject!Buffer(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 }

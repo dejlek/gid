@@ -5,7 +5,7 @@ import atk.hypertext;
 import atk.hypertext_mixin;
 
 /// Proxy object for Atk.Hypertext interface when a GObject has no applicable D binding
-class HypertextIfaceProxy : IfaceProxy, Hypertext
+class HypertextIfaceProxy : IfaceProxy, atk.hypertext.Hypertext
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class HypertextIfaceProxy : IfaceProxy, Hypertext
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Hypertext);
+    return typeid(atk.hypertext.Hypertext);
   }
 
   mixin HypertextT!();

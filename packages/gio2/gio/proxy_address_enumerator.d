@@ -1,6 +1,6 @@
 module gio.proxy_address_enumerator;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_address_enumerator;
@@ -17,7 +17,7 @@ import gio.types;
  * configured; there should be no need to manually wrap a
  * [gio.socket_address_enumerator.SocketAddressEnumerator] instance with one.
  */
-class ProxyAddressEnumerator : SocketAddressEnumerator
+class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumerator
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

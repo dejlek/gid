@@ -6,7 +6,7 @@ import atk.property_values;
 import atk.relation_set;
 import atk.state_set;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 
@@ -31,7 +31,7 @@ import gobject.object;
  * See class@AtkObjectFactory, class@AtkRegistry.  $(LPAREN)GTK+ users see also
  * #GtkAccessible$(RPAREN).
  */
-class ObjectAtk : ObjectG
+class ObjectAtk : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -57,7 +57,7 @@ class ObjectAtk : ObjectG
    *   target = The #AtkObject which is to be the target of the relation.
    * Returns: TRUE if the relationship is added.
    */
-  bool addRelationship(RelationType relationship, ObjectAtk target)
+  bool addRelationship(atk.types.RelationType relationship, atk.object.ObjectAtk target)
   {
     bool _retval;
     _retval = atk_object_add_relationship(cast(AtkObject*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
@@ -73,7 +73,7 @@ class ObjectAtk : ObjectG
   {
     const(char)* _cretval;
     _cretval = atk_object_get_accessible_id(cast(AtkObject*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class ObjectAtk : ObjectG
   {
     const(char)* _cretval;
     _cretval = atk_object_get_description(cast(AtkObject*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class ObjectAtk : ObjectG
   {
     const(char)* _cretval;
     _cretval = atk_object_get_help_text(cast(AtkObject*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -121,11 +121,11 @@ class ObjectAtk : ObjectG
 
    * Deprecated: Use atk_component_get_layer instead.
    */
-  Layer getLayer()
+  atk.types.Layer getLayer()
   {
     AtkLayer _cretval;
     _cretval = atk_object_get_layer(cast(AtkObject*)cPtr);
-    Layer _retval = cast(Layer)_cretval;
+    atk.types.Layer _retval = cast(atk.types.Layer)_cretval;
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class ObjectAtk : ObjectG
   {
     const(char)* _cretval;
     _cretval = atk_object_get_name(cast(AtkObject*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class ObjectAtk : ObjectG
   {
     const(char)* _cretval;
     _cretval = atk_object_get_object_locale(cast(AtkObject*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -194,11 +194,11 @@ class ObjectAtk : ObjectG
    * Returns: an #AtkObject representing the accessible
    *   parent of the accessible
    */
-  ObjectAtk getParent()
+  atk.object.ObjectAtk getParent()
   {
     AtkObject* _cretval;
     _cretval = atk_object_get_parent(cast(AtkObject*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectAtk(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -206,11 +206,11 @@ class ObjectAtk : ObjectG
    * Gets the role of the accessible.
    * Returns: an #AtkRole which is the role of the accessible
    */
-  Role getRole()
+  atk.types.Role getRole()
   {
     AtkRole _cretval;
     _cretval = atk_object_get_role(cast(AtkObject*)cPtr);
-    Role _retval = cast(Role)_cretval;
+    atk.types.Role _retval = cast(atk.types.Role)_cretval;
     return _retval;
   }
 
@@ -235,7 +235,7 @@ class ObjectAtk : ObjectG
    *   state = an #AtkState whose state is changed
    *   value = a gboolean which indicates whether the state is being set on or off
    */
-  void notifyStateChange(State state, bool value)
+  void notifyStateChange(atk.types.State state, bool value)
   {
     atk_object_notify_state_change(cast(AtkObject*)cPtr, state, value);
   }
@@ -250,11 +250,11 @@ class ObjectAtk : ObjectG
    * Returns: an #AtkObject representing the accessible
    *   parent of the accessible if assigned
    */
-  ObjectAtk peekParent()
+  atk.object.ObjectAtk peekParent()
   {
     AtkObject* _cretval;
     _cretval = atk_object_peek_parent(cast(AtkObject*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectAtk(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -267,11 +267,11 @@ class ObjectAtk : ObjectG
    * Returns: an #AtkObject representing the specified
    *   accessible child of the accessible.
    */
-  ObjectAtk refAccessibleChild(int i)
+  atk.object.ObjectAtk refAccessibleChild(int i)
   {
     AtkObject* _cretval;
     _cretval = atk_object_ref_accessible_child(cast(AtkObject*)cPtr, i);
-    auto _retval = ObjectG.getDObject!ObjectAtk(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -280,11 +280,11 @@ class ObjectAtk : ObjectG
    * Returns: an #AtkRelationSet representing the relation set
    *   of the object.
    */
-  RelationSet refRelationSet()
+  atk.relation_set.RelationSet refRelationSet()
   {
     AtkRelationSet* _cretval;
     _cretval = atk_object_ref_relation_set(cast(AtkObject*)cPtr);
-    auto _retval = ObjectG.getDObject!RelationSet(cast(AtkRelationSet*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.relation_set.RelationSet)(cast(AtkRelationSet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -294,11 +294,11 @@ class ObjectAtk : ObjectG
    * Returns: a reference to an #AtkStateSet which is the state
    *   set of the accessible
    */
-  StateSet refStateSet()
+  atk.state_set.StateSet refStateSet()
   {
     AtkStateSet* _cretval;
     _cretval = atk_object_ref_state_set(cast(AtkObject*)cPtr);
-    auto _retval = ObjectG.getDObject!StateSet(cast(AtkStateSet*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class ObjectAtk : ObjectG
    *   target = The #AtkObject which is the target of the relation to be removed.
    * Returns: TRUE if the relationship is removed.
    */
-  bool removeRelationship(RelationType relationship, ObjectAtk target)
+  bool removeRelationship(atk.types.RelationType relationship, atk.object.ObjectAtk target)
   {
     bool _retval;
     _retval = atk_object_remove_relationship(cast(AtkObject*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
@@ -389,7 +389,7 @@ class ObjectAtk : ObjectG
    * Params:
    *   parent = an #AtkObject to be set as the accessible parent
    */
-  void setParent(ObjectAtk parent)
+  void setParent(atk.object.ObjectAtk parent)
   {
     atk_object_set_parent(cast(AtkObject*)cPtr, parent ? cast(AtkObject*)parent.cPtr(No.Dup) : null);
   }
@@ -399,7 +399,7 @@ class ObjectAtk : ObjectG
    * Params:
    *   role = an #AtkRole to be set as the role
    */
-  void setRole(Role role)
+  void setRole(atk.types.Role role)
   {
     atk_object_set_role(cast(AtkObject*)cPtr, role);
   }
@@ -413,8 +413,8 @@ class ObjectAtk : ObjectG
    *   arg1 = the newly focused object.
    *   objectAtk = the instance the signal is connected to
    */
-  alias ActiveDescendantChangedCallbackDlg = void delegate(ObjectAtk arg1, ObjectAtk objectAtk);
-  alias ActiveDescendantChangedCallbackFunc = void function(ObjectAtk arg1, ObjectAtk objectAtk);
+  alias ActiveDescendantChangedCallbackDlg = void delegate(atk.object.ObjectAtk arg1, atk.object.ObjectAtk objectAtk);
+  alias ActiveDescendantChangedCallbackFunc = void function(atk.object.ObjectAtk arg1, atk.object.ObjectAtk objectAtk);
 
   /**
    * Connect to ActiveDescendantChanged signal.
@@ -431,8 +431,8 @@ class ObjectAtk : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!ObjectAtk(_paramVals);
-      auto arg1 = getVal!ObjectAtk(&_paramVals[1]);
+      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
+      auto arg1 = getVal!(atk.object.ObjectAtk)(&_paramVals[1]);
       _dClosure.dlg(arg1, objectAtk);
     }
 
@@ -448,8 +448,8 @@ class ObjectAtk : ObjectG
    *   arg1 = the text to be announced.
    *   objectAtk = the instance the signal is connected to
    */
-  alias AnnouncementCallbackDlg = void delegate(string arg1, ObjectAtk objectAtk);
-  alias AnnouncementCallbackFunc = void function(string arg1, ObjectAtk objectAtk);
+  alias AnnouncementCallbackDlg = void delegate(string arg1, atk.object.ObjectAtk objectAtk);
+  alias AnnouncementCallbackFunc = void function(string arg1, atk.object.ObjectAtk objectAtk);
 
   /**
    * Connect to Announcement signal.
@@ -465,8 +465,8 @@ class ObjectAtk : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!ObjectAtk(_paramVals);
-      auto arg1 = getVal!string(&_paramVals[1]);
+      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
+      auto arg1 = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(arg1, objectAtk);
     }
 
@@ -483,8 +483,8 @@ class ObjectAtk : ObjectG
    *   arg2 = the attribute's new value, or %null if not available.
    *   objectAtk = the instance the signal is connected to
    */
-  alias AttributeChangedCallbackDlg = void delegate(string arg1, string arg2, ObjectAtk objectAtk);
-  alias AttributeChangedCallbackFunc = void function(string arg1, string arg2, ObjectAtk objectAtk);
+  alias AttributeChangedCallbackDlg = void delegate(string arg1, string arg2, atk.object.ObjectAtk objectAtk);
+  alias AttributeChangedCallbackFunc = void function(string arg1, string arg2, atk.object.ObjectAtk objectAtk);
 
   /**
    * Connect to AttributeChanged signal.
@@ -500,9 +500,9 @@ class ObjectAtk : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!ObjectAtk(_paramVals);
-      auto arg1 = getVal!string(&_paramVals[1]);
-      auto arg2 = getVal!string(&_paramVals[2]);
+      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
+      auto arg1 = getVal!(string)(&_paramVals[1]);
+      auto arg2 = getVal!(string)(&_paramVals[2]);
       _dClosure.dlg(arg1, arg2, objectAtk);
     }
 
@@ -524,8 +524,8 @@ class ObjectAtk : ObjectG
    *     NULL.
    *   objectAtk = the instance the signal is connected to
    */
-  alias ChildrenChangedCallbackDlg = void delegate(uint arg1, ObjectAtk arg2, ObjectAtk objectAtk);
-  alias ChildrenChangedCallbackFunc = void function(uint arg1, ObjectAtk arg2, ObjectAtk objectAtk);
+  alias ChildrenChangedCallbackDlg = void delegate(uint arg1, atk.object.ObjectAtk arg2, atk.object.ObjectAtk objectAtk);
+  alias ChildrenChangedCallbackFunc = void function(uint arg1, atk.object.ObjectAtk arg2, atk.object.ObjectAtk objectAtk);
 
   /**
    * Connect to ChildrenChanged signal.
@@ -542,9 +542,9 @@ class ObjectAtk : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!ObjectAtk(_paramVals);
-      auto arg1 = getVal!uint(&_paramVals[1]);
-      auto arg2 = getVal!ObjectAtk(&_paramVals[2]);
+      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
+      auto arg1 = getVal!(uint)(&_paramVals[1]);
+      auto arg2 = getVal!(atk.object.ObjectAtk)(&_paramVals[2]);
       _dClosure.dlg(arg1, arg2, objectAtk);
     }
 
@@ -562,8 +562,8 @@ class ObjectAtk : ObjectG
 
    * Deprecated: Use the #AtkObject::state-change signal instead.
    */
-  alias FocusEventCallbackDlg = void delegate(bool arg1, ObjectAtk objectAtk);
-  alias FocusEventCallbackFunc = void function(bool arg1, ObjectAtk objectAtk);
+  alias FocusEventCallbackDlg = void delegate(bool arg1, atk.object.ObjectAtk objectAtk);
+  alias FocusEventCallbackFunc = void function(bool arg1, atk.object.ObjectAtk objectAtk);
 
   /**
    * Connect to FocusEvent signal.
@@ -579,8 +579,8 @@ class ObjectAtk : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!ObjectAtk(_paramVals);
-      auto arg1 = getVal!bool(&_paramVals[1]);
+      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
+      auto arg1 = getVal!(bool)(&_paramVals[1]);
       _dClosure.dlg(arg1, objectAtk);
     }
 
@@ -597,8 +597,8 @@ class ObjectAtk : ObjectG
    *     Should be either ATK_LIVE_POLITE or ATK_LIVE_ASSERTIVE.
    *   objectAtk = the instance the signal is connected to
    */
-  alias NotificationCallbackDlg = void delegate(string arg1, int arg2, ObjectAtk objectAtk);
-  alias NotificationCallbackFunc = void function(string arg1, int arg2, ObjectAtk objectAtk);
+  alias NotificationCallbackDlg = void delegate(string arg1, int arg2, atk.object.ObjectAtk objectAtk);
+  alias NotificationCallbackFunc = void function(string arg1, int arg2, atk.object.ObjectAtk objectAtk);
 
   /**
    * Connect to Notification signal.
@@ -614,9 +614,9 @@ class ObjectAtk : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!ObjectAtk(_paramVals);
-      auto arg1 = getVal!string(&_paramVals[1]);
-      auto arg2 = getVal!int(&_paramVals[2]);
+      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
+      auto arg1 = getVal!(string)(&_paramVals[1]);
+      auto arg2 = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(arg1, arg2, objectAtk);
     }
 
@@ -642,8 +642,8 @@ class ObjectAtk : ObjectG
    *     value of the property which changed.
    *   objectAtk = the instance the signal is connected to
    */
-  alias PropertyChangeCallbackDlg = void delegate(PropertyValues arg1, ObjectAtk objectAtk);
-  alias PropertyChangeCallbackFunc = void function(PropertyValues arg1, ObjectAtk objectAtk);
+  alias PropertyChangeCallbackDlg = void delegate(atk.property_values.PropertyValues arg1, atk.object.ObjectAtk objectAtk);
+  alias PropertyChangeCallbackFunc = void function(atk.property_values.PropertyValues arg1, atk.object.ObjectAtk objectAtk);
 
   /**
    * Connect to PropertyChange signal.
@@ -660,8 +660,8 @@ class ObjectAtk : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!ObjectAtk(_paramVals);
-      auto arg1 = getVal!PropertyValues(&_paramVals[1]);
+      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
+      auto arg1 = getVal!(atk.property_values.PropertyValues)(&_paramVals[1]);
       _dClosure.dlg(arg1, objectAtk);
     }
 
@@ -678,8 +678,8 @@ class ObjectAtk : ObjectG
    *   arg2 = A boolean which indicates whether the state has been set or unset.
    *   objectAtk = the instance the signal is connected to
    */
-  alias StateChangeCallbackDlg = void delegate(string arg1, bool arg2, ObjectAtk objectAtk);
-  alias StateChangeCallbackFunc = void function(string arg1, bool arg2, ObjectAtk objectAtk);
+  alias StateChangeCallbackDlg = void delegate(string arg1, bool arg2, atk.object.ObjectAtk objectAtk);
+  alias StateChangeCallbackFunc = void function(string arg1, bool arg2, atk.object.ObjectAtk objectAtk);
 
   /**
    * Connect to StateChange signal.
@@ -696,9 +696,9 @@ class ObjectAtk : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!ObjectAtk(_paramVals);
-      auto arg1 = getVal!string(&_paramVals[1]);
-      auto arg2 = getVal!bool(&_paramVals[2]);
+      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
+      auto arg1 = getVal!(string)(&_paramVals[1]);
+      auto arg2 = getVal!(bool)(&_paramVals[2]);
       _dClosure.dlg(arg1, arg2, objectAtk);
     }
 
@@ -711,8 +711,8 @@ class ObjectAtk : ObjectG
    * appearance of the object changed.
    *   objectAtk = the instance the signal is connected to
    */
-  alias VisibleDataChangedCallbackDlg = void delegate(ObjectAtk objectAtk);
-  alias VisibleDataChangedCallbackFunc = void function(ObjectAtk objectAtk);
+  alias VisibleDataChangedCallbackDlg = void delegate(atk.object.ObjectAtk objectAtk);
+  alias VisibleDataChangedCallbackFunc = void function(atk.object.ObjectAtk objectAtk);
 
   /**
    * Connect to VisibleDataChanged signal.
@@ -728,7 +728,7 @@ class ObjectAtk : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!ObjectAtk(_paramVals);
+      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
       _dClosure.dlg(objectAtk);
     }
 

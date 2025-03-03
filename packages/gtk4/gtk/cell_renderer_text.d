@@ -1,6 +1,6 @@
 module gtk.cell_renderer_text;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -18,7 +18,7 @@ import gtk.types;
  * Deprecated: List views use widgets to display their contents.
  *   You should use [gtk.inscription.Inscription] or [gtk.label.Label] instead
  */
-class CellRendererText : CellRenderer
+class CellRendererText : gtk.cell_renderer.CellRenderer
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -79,8 +79,8 @@ class CellRendererText : CellRenderer
    *   newText = the new text
    *   cellRendererText = the instance the signal is connected to
    */
-  alias EditedCallbackDlg = void delegate(string path, string newText, CellRendererText cellRendererText);
-  alias EditedCallbackFunc = void function(string path, string newText, CellRendererText cellRendererText);
+  alias EditedCallbackDlg = void delegate(string path, string newText, gtk.cell_renderer_text.CellRendererText cellRendererText);
+  alias EditedCallbackFunc = void function(string path, string newText, gtk.cell_renderer_text.CellRendererText cellRendererText);
 
   /**
    * Connect to Edited signal.
@@ -96,9 +96,9 @@ class CellRendererText : CellRenderer
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto cellRendererText = getVal!CellRendererText(_paramVals);
-      auto path = getVal!string(&_paramVals[1]);
-      auto newText = getVal!string(&_paramVals[2]);
+      auto cellRendererText = getVal!(gtk.cell_renderer_text.CellRendererText)(_paramVals);
+      auto path = getVal!(string)(&_paramVals[1]);
+      auto newText = getVal!(string)(&_paramVals[2]);
       _dClosure.dlg(path, newText, cellRendererText);
     }
 

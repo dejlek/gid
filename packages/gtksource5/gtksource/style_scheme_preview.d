@@ -1,6 +1,6 @@
 module gtksource.style_scheme_preview;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -23,7 +23,7 @@ import gtksource.types;
  * The property@StyleSchemePreview:selected property can be used to manage
  * the selection state of a single preview widget.
  */
-class StyleSchemePreview : Widget, Actionable
+class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -51,7 +51,7 @@ class StyleSchemePreview : Widget, Actionable
    *   scheme = a #GtkSourceStyleScheme
    * Returns: a #GtkWidget
    */
-  this(StyleScheme scheme)
+  this(gtksource.style_scheme.StyleScheme scheme)
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_style_scheme_preview_new(scheme ? cast(GtkSourceStyleScheme*)scheme.cPtr(No.Dup) : null);
@@ -62,11 +62,11 @@ class StyleSchemePreview : Widget, Actionable
    * Gets the #GtkSourceStyleScheme previewed by the widget.
    * Returns: a #GtkSourceStyleScheme
    */
-  StyleScheme getScheme()
+  gtksource.style_scheme.StyleScheme getScheme()
   {
     GtkSourceStyleScheme* _cretval;
     _cretval = gtk_source_style_scheme_preview_get_scheme(cast(GtkSourceStyleSchemePreview*)cPtr);
-    auto _retval = ObjectG.getDObject!StyleScheme(cast(GtkSourceStyleScheme*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
     return _retval;
   }
 
@@ -82,8 +82,8 @@ class StyleSchemePreview : Widget, Actionable
     gtk_source_style_scheme_preview_set_selected(cast(GtkSourceStyleSchemePreview*)cPtr, selected);
   }
 
-  alias ActivateCallbackDlg = void delegate(StyleSchemePreview styleSchemePreview);
-  alias ActivateCallbackFunc = void function(StyleSchemePreview styleSchemePreview);
+  alias ActivateCallbackDlg = void delegate(gtksource.style_scheme_preview.StyleSchemePreview styleSchemePreview);
+  alias ActivateCallbackFunc = void function(gtksource.style_scheme_preview.StyleSchemePreview styleSchemePreview);
 
   /**
    * Connect to Activate signal.
@@ -99,7 +99,7 @@ class StyleSchemePreview : Widget, Actionable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto styleSchemePreview = getVal!StyleSchemePreview(_paramVals);
+      auto styleSchemePreview = getVal!(gtksource.style_scheme_preview.StyleSchemePreview)(_paramVals);
       _dClosure.dlg(styleSchemePreview);
     }
 

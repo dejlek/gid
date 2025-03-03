@@ -1,7 +1,7 @@
 module gio.initable;
 
 public import gio.initable_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -77,5 +77,5 @@ interface Initable
    * Returns: %TRUE if successful. If an error has occurred, this function will
    *   return %FALSE and set error appropriately if present.
    */
-  bool init_(Cancellable cancellable);
+  bool init_(gio.cancellable.Cancellable cancellable);
 }

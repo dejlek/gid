@@ -1,10 +1,9 @@
 module gio.converter_output_stream;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.converter;
-import gio.converter_mixin;
 import gio.filter_output_stream;
 import gio.output_stream;
 import gio.pollable_output_stream;
@@ -18,7 +17,7 @@ import gobject.object;
  * As of GLib 2.34, `GConverterOutputStream` implements
  * [gio.pollable_output_stream.PollableOutputStream].
  */
-class ConverterOutputStream : FilterOutputStream, PollableOutputStream
+class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.pollable_output_stream.PollableOutputStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -46,7 +45,7 @@ class ConverterOutputStream : FilterOutputStream, PollableOutputStream
    *   converter = a #GConverter
    * Returns: a new #GOutputStream.
    */
-  this(OutputStream baseStream, Converter converter)
+  this(gio.output_stream.OutputStream baseStream, gio.converter.Converter converter)
   {
     GOutputStream* _cretval;
     _cretval = g_converter_output_stream_new(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.Dup) : null, converter ? cast(GConverter*)(cast(ObjectG)converter).cPtr(No.Dup) : null);
@@ -57,11 +56,11 @@ class ConverterOutputStream : FilterOutputStream, PollableOutputStream
    * Gets the #GConverter that is used by converter_stream.
    * Returns: the converter of the converter output stream
    */
-  Converter getConverter()
+  gio.converter.Converter getConverter()
   {
     GConverter* _cretval;
     _cretval = g_converter_output_stream_get_converter(cast(GConverterOutputStream*)cPtr);
-    auto _retval = ObjectG.getDObject!Converter(cast(GConverter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.converter.Converter)(cast(GConverter*)_cretval, No.Take);
     return _retval;
   }
 }

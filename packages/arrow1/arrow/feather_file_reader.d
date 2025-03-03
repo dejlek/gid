@@ -5,11 +5,11 @@ import arrow.c.types;
 import arrow.seekable_input_stream;
 import arrow.table;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class FeatherFileReader : ObjectG
+class FeatherFileReader : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -28,7 +28,7 @@ class FeatherFileReader : ObjectG
     return getType();
   }
 
-  this(SeekableInputStream file)
+  this(arrow.seekable_input_stream.SeekableInputStream file)
   {
     GArrowFeatherFileReader* _cretval;
     GError *_err;
@@ -45,18 +45,18 @@ class FeatherFileReader : ObjectG
     return _retval;
   }
 
-  Table read()
+  arrow.table.Table read()
   {
     GArrowTable* _cretval;
     GError *_err;
     _cretval = garrow_feather_file_reader_read(cast(GArrowFeatherFileReader*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Table(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Table readIndices(int[] indices)
+  arrow.table.Table readIndices(int[] indices)
   {
     GArrowTable* _cretval;
     uint _nIndices;
@@ -68,11 +68,11 @@ class FeatherFileReader : ObjectG
     _cretval = garrow_feather_file_reader_read_indices(cast(GArrowFeatherFileReader*)cPtr, _indices, _nIndices, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Table(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Table readNames(string[] names)
+  arrow.table.Table readNames(string[] names)
   {
     GArrowTable* _cretval;
     uint _nNames;
@@ -88,7 +88,7 @@ class FeatherFileReader : ObjectG
     _cretval = garrow_feather_file_reader_read_names(cast(GArrowFeatherFileReader*)cPtr, _names, _nNames, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Table(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 }

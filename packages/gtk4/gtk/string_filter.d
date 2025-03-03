@@ -1,6 +1,6 @@
 module gtk.string_filter;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.expression;
@@ -19,7 +19,7 @@ import gtk.types;
  * It is also possible to make case-insensitive comparisons, with
  * [gtk.string_filter.StringFilter.setIgnoreCase].
  */
-class StringFilter : Filter
+class StringFilter : gtk.filter.Filter
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -46,7 +46,7 @@ class StringFilter : Filter
    *   expression = The expression to evaluate
    * Returns: a new `GtkStringFilter`
    */
-  this(Expression expression)
+  this(gtk.expression.Expression expression)
   {
     GtkStringFilter* _cretval;
     _cretval = gtk_string_filter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
@@ -58,11 +58,11 @@ class StringFilter : Filter
    * obtain strings from items.
    * Returns: a `GtkExpression`
    */
-  Expression getExpression()
+  gtk.expression.Expression getExpression()
   {
     GtkExpression* _cretval;
     _cretval = gtk_string_filter_get_expression(cast(GtkStringFilter*)cPtr);
-    auto _retval = _cretval ? new Expression(cast(GtkExpression*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -81,11 +81,11 @@ class StringFilter : Filter
    * Returns the match mode that the filter is using.
    * Returns: the match mode of the filter
    */
-  StringFilterMatchMode getMatchMode()
+  gtk.types.StringFilterMatchMode getMatchMode()
   {
     GtkStringFilterMatchMode _cretval;
     _cretval = gtk_string_filter_get_match_mode(cast(GtkStringFilter*)cPtr);
-    StringFilterMatchMode _retval = cast(StringFilterMatchMode)_cretval;
+    gtk.types.StringFilterMatchMode _retval = cast(gtk.types.StringFilterMatchMode)_cretval;
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class StringFilter : Filter
   {
     const(char)* _cretval;
     _cretval = gtk_string_filter_get_search(cast(GtkStringFilter*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class StringFilter : Filter
    * Params:
    *   expression = a `GtkExpression`
    */
-  void setExpression(Expression expression)
+  void setExpression(gtk.expression.Expression expression)
   {
     gtk_string_filter_set_expression(cast(GtkStringFilter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }
@@ -128,7 +128,7 @@ class StringFilter : Filter
    * Params:
    *   mode = the new match mode
    */
-  void setMatchMode(StringFilterMatchMode mode)
+  void setMatchMode(gtk.types.StringFilterMatchMode mode)
   {
     gtk_string_filter_set_match_mode(cast(GtkStringFilter*)cPtr, mode);
   }

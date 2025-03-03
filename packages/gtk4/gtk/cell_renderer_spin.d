@@ -1,6 +1,6 @@
 module gtk.cell_renderer_spin;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.cell_renderer_text;
@@ -22,7 +22,7 @@ import gtk.types;
  * Deprecated: List views use widgets to display their contents.
  *   You should use [gtk.spin_button.SpinButton] instead
  */
-class CellRendererSpin : CellRendererText
+class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

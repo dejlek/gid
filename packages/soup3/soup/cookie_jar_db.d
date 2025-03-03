@@ -1,6 +1,6 @@
 module soup.cookie_jar_db;
 
-import gid.global;
+import gid.gid;
 import soup.c.functions;
 import soup.c.types;
 import soup.cookie_jar;
@@ -16,7 +16,7 @@ import soup.types;
  * libsoup-gnome; it has just been moved into libsoup proper, and
  * renamed to avoid conflicting.$(RPAREN)
  */
-class CookieJarDB : CookieJar
+class CookieJarDB : soup.cookie_jar.CookieJar
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

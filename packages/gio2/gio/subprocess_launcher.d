@@ -1,6 +1,6 @@
 module gio.subprocess_launcher;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.subprocess;
@@ -17,7 +17,7 @@ import gobject.object;
  * options.  It can also be used to launch multiple subprocesses with
  * a similar configuration.
  */
-class SubprocessLauncher : ObjectG
+class SubprocessLauncher : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,7 +45,7 @@ class SubprocessLauncher : ObjectG
    *   flags = #GSubprocessFlags
    * Returns:
    */
-  this(SubprocessFlags flags)
+  this(gio.types.SubprocessFlags flags)
   {
     GSubprocessLauncher* _cretval;
     _cretval = g_subprocess_launcher_new(flags);
@@ -82,7 +82,7 @@ class SubprocessLauncher : ObjectG
     const(char)* _cretval;
     const(char)* _variable = variable.toCString(No.Alloc);
     _cretval = g_subprocess_launcher_getenv(cast(GSubprocessLauncher*)cPtr, _variable);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class SubprocessLauncher : ObjectG
    * Params:
    *   flags = #GSubprocessFlags
    */
-  void setFlags(SubprocessFlags flags)
+  void setFlags(gio.types.SubprocessFlags flags)
   {
     g_subprocess_launcher_set_flags(cast(GSubprocessLauncher*)cPtr, flags);
   }
@@ -224,7 +224,7 @@ class SubprocessLauncher : ObjectG
    *   argv = Command line arguments
    * Returns: A new #GSubprocess, or %NULL on error $(LPAREN)and error will be set$(RPAREN)
    */
-  Subprocess spawnv(string[] argv)
+  gio.subprocess.Subprocess spawnv(string[] argv)
   {
     GSubprocess* _cretval;
     const(char)*[] _tmpargv;
@@ -237,7 +237,7 @@ class SubprocessLauncher : ObjectG
     _cretval = g_subprocess_launcher_spawnv(cast(GSubprocessLauncher*)cPtr, _argv, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Subprocess(cast(GSubprocess*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.subprocess.Subprocess)(cast(GSubprocess*)_cretval, Yes.Take);
     return _retval;
   }
 

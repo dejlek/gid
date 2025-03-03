@@ -1,6 +1,6 @@
 module gtk.border;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gtk.c.functions;
 import gtk.c.types;
@@ -10,7 +10,7 @@ import gtk.types;
  * A struct that specifies a border around a rectangular area.
  * Each side can have different width.
  */
-class Border : Boxed
+class Border : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -90,11 +90,11 @@ class Border : Boxed
    * Copies a `GtkBorder`.
    * Returns: a copy of border_.
    */
-  Border copy()
+  gtk.border.Border copy()
   {
     GtkBorder* _cretval;
-    _cretval = gtk_border_copy(cast(GtkBorder*)cPtr);
-    auto _retval = _cretval ? new Border(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gtk_border_copy(cast(const(GtkBorder)*)cPtr);
+    auto _retval = _cretval ? new gtk.border.Border(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

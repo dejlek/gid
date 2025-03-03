@@ -1,6 +1,6 @@
 module gtk.buildable_parse_context;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -39,7 +39,7 @@ class BuildableParseContext
   {
     const(char)* _cretval;
     _cretval = gtk_buildable_parse_context_get_element(cast(GtkBuildableParseContext*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class BuildableParseContext
    *   parser = a `GtkBuildableParser`
    *   userData = user data to pass to `GtkBuildableParser` functions
    */
-  void push(BuildableParser parser, void* userData)
+  void push(gtk.types.BuildableParser parser, void* userData)
   {
     gtk_buildable_parse_context_push(cast(GtkBuildableParseContext*)cPtr, &parser, userData);
   }

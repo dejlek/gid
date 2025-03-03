@@ -5,7 +5,7 @@ import gio.remote_action_group;
 import gio.remote_action_group_mixin;
 
 /// Proxy object for Gio.RemoteActionGroup interface when a GObject has no applicable D binding
-class RemoteActionGroupIfaceProxy : IfaceProxy, RemoteActionGroup
+class RemoteActionGroupIfaceProxy : IfaceProxy, gio.remote_action_group.RemoteActionGroup
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class RemoteActionGroupIfaceProxy : IfaceProxy, RemoteActionGroup
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(RemoteActionGroup);
+    return typeid(gio.remote_action_group.RemoteActionGroup);
   }
 
   mixin RemoteActionGroupT!();

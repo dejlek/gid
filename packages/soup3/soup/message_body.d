@@ -1,6 +1,6 @@
 module soup.message_body;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import gobject.boxed;
 import soup.c.functions;
@@ -20,7 +20,7 @@ import soup.types;
  * As an added bonus, when @data is filled in, it is always terminated
  * with a `\0` byte $(LPAREN)which is not reflected in @length$(RPAREN).
  */
-class MessageBody : Boxed
+class MessageBody : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -72,7 +72,7 @@ class MessageBody : Boxed
    * Params:
    *   buffer = a #GBytes
    */
-  void appendBytes(Bytes buffer)
+  void appendBytes(glib.bytes.Bytes buffer)
   {
     soup_message_body_append_bytes(cast(SoupMessageBody*)cPtr, buffer ? cast(GBytes*)buffer.cPtr(No.Dup) : null);
   }
@@ -94,11 +94,11 @@ class MessageBody : Boxed
    * Returns: a #GBytes containing the same data as body.
    *   $(LPAREN)You must [glib.bytes.Bytes.unref] this if you do not want it.$(RPAREN)
    */
-  Bytes flatten()
+  glib.bytes.Bytes flatten()
   {
     GBytes* _cretval;
     _cretval = soup_message_body_flatten(cast(SoupMessageBody*)cPtr);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -133,11 +133,11 @@ class MessageBody : Boxed
    *   offset = an offset
    * Returns: a #GBytes
    */
-  Bytes getChunk(long offset)
+  glib.bytes.Bytes getChunk(long offset)
   {
     GBytes* _cretval;
     _cretval = soup_message_body_get_chunk(cast(SoupMessageBody*)cPtr, offset);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class MessageBody : Boxed
    * Params:
    *   chunk = a #GBytes received from the network
    */
-  void gotChunk(Bytes chunk)
+  void gotChunk(glib.bytes.Bytes chunk)
   {
     soup_message_body_got_chunk(cast(SoupMessageBody*)cPtr, chunk ? cast(GBytes*)chunk.cPtr(No.Dup) : null);
   }
@@ -196,7 +196,7 @@ class MessageBody : Boxed
    * Params:
    *   chunk = a #GBytes returned from [soup.message_body.MessageBody.getChunk]
    */
-  void wroteChunk(Bytes chunk)
+  void wroteChunk(glib.bytes.Bytes chunk)
   {
     soup_message_body_wrote_chunk(cast(SoupMessageBody*)cPtr, chunk ? cast(GBytes*)chunk.cPtr(No.Dup) : null);
   }

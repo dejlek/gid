@@ -1,6 +1,6 @@
 module soup.message_headers_iter;
 
-import gid.global;
+import gid.gid;
 import soup.c.functions;
 import soup.c.types;
 import soup.message_headers;
@@ -65,10 +65,10 @@ class MessageHeadersIter
    *     structure
    *   hdrs = a %SoupMessageHeaders
    */
-  static void init_(out MessageHeadersIter iter, MessageHeaders hdrs)
+  static void init_(out soup.message_headers_iter.MessageHeadersIter iter, soup.message_headers.MessageHeaders hdrs)
   {
     SoupMessageHeadersIter _iter;
     soup_message_headers_iter_init(&_iter, hdrs ? cast(SoupMessageHeaders*)hdrs.cPtr(No.Dup) : null);
-    iter = new MessageHeadersIter(cast(void*)&_iter);
+    iter = new soup.message_headers_iter.MessageHeadersIter(cast(void*)&_iter);
   }
 }

@@ -3,7 +3,7 @@ module cairo.text_cluster;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -18,7 +18,7 @@ import gobject.boxed;
  * See [cairo.context.Context.showTextGlyphs] for how clusters are used in advanced
  * text operations.
  */
-class TextCluster : Boxed
+class TextCluster : gobject.boxed.Boxed
 {
 
   this()

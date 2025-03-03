@@ -1,10 +1,9 @@
 module secret.item;
 
-import gid.global;
+import gid.gid;
 import gio.async_initable;
 import gio.async_initable_mixin;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.dbus_interface;
 import gio.dbus_interface_mixin;
@@ -41,7 +40,7 @@ import secret.value;
  * the attributes associated with an item.
  * Items can be created with [secret.item.Item.create] or [secret.service.Service.store].
  */
-class Item : DBusProxy, Retrievable
+class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -80,14 +79,14 @@ class Item : DBusProxy, Retrievable
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  static void create(Collection collection, Schema schema, string[string] attributes, string label, ValueSecret value, ItemCreateFlags flags, Cancellable cancellable, AsyncReadyCallback callback)
+  static void create(secret.collection.Collection collection, secret.schema.Schema schema, string[string] attributes, string label, secret.value.ValueSecret value, secret.types.ItemCreateFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -95,7 +94,7 @@ class Item : DBusProxy, Retrievable
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
     const(char)* _label = label.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_item_create(collection ? cast(SecretCollection*)collection.cPtr(No.Dup) : null, schema ? cast(SecretSchema*)schema.cPtr(No.Dup) : null, _attributes, _label, value ? cast(SecretValue*)value.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_item_create(collection ? cast(SecretCollection*)collection.cPtr(No.Dup) : null, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, _label, value ? cast(SecretValue*)value.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -105,14 +104,14 @@ class Item : DBusProxy, Retrievable
    * Returns: the new item, which should be unreferenced
    *   with [gobject.object.ObjectG.unref]
    */
-  static Item createFinish(AsyncResult result)
+  static secret.item.Item createFinish(gio.async_result.AsyncResult result)
   {
     SecretItem* _cretval;
     GError *_err;
     _cretval = secret_item_create_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Item(cast(SecretItem*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(secret.item.Item)(cast(SecretItem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -135,17 +134,17 @@ class Item : DBusProxy, Retrievable
    * Returns: the new item, which should be unreferenced
    *   with [gobject.object.ObjectG.unref]
    */
-  static Item createSync(Collection collection, Schema schema, string[string] attributes, string label, ValueSecret value, ItemCreateFlags flags, Cancellable cancellable)
+  static secret.item.Item createSync(secret.collection.Collection collection, secret.schema.Schema schema, string[string] attributes, string label, secret.value.ValueSecret value, secret.types.ItemCreateFlags flags, gio.cancellable.Cancellable cancellable)
   {
     SecretItem* _cretval;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
     const(char)* _label = label.toCString(No.Alloc);
     GError *_err;
-    _cretval = secret_item_create_sync(collection ? cast(SecretCollection*)collection.cPtr(No.Dup) : null, schema ? cast(SecretSchema*)schema.cPtr(No.Dup) : null, _attributes, _label, value ? cast(SecretValue*)value.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = secret_item_create_sync(collection ? cast(SecretCollection*)collection.cPtr(No.Dup) : null, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, _label, value ? cast(SecretValue*)value.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Item(cast(SecretItem*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(secret.item.Item)(cast(SecretItem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -158,19 +157,19 @@ class Item : DBusProxy, Retrievable
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  static void loadSecrets(Item[] items, Cancellable cancellable, AsyncReadyCallback callback)
+  static void loadSecrets(secret.item.Item[] items, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    auto _items = gListFromD!(Item)(items);
-    scope(exit) containerFree!(GList*, Item, GidOwnership.None)(_items);
+    auto _items = gListFromD!(secret.item.Item)(items);
+    scope(exit) containerFree!(GList*, secret.item.Item, GidOwnership.None)(_items);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     secret_item_load_secrets(_items, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
@@ -183,7 +182,7 @@ class Item : DBusProxy, Retrievable
    *   result = asynchronous result passed to callback
    * Returns: whether the operation succeeded or not
    */
-  static bool loadSecretsFinish(AsyncResult result)
+  static bool loadSecretsFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -204,11 +203,11 @@ class Item : DBusProxy, Retrievable
    *   cancellable = optional cancellation object
    * Returns: whether the operation succeeded or not
    */
-  static bool loadSecretsSync(Item[] items, Cancellable cancellable)
+  static bool loadSecretsSync(secret.item.Item[] items, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
-    auto _items = gListFromD!(Item)(items);
-    scope(exit) containerFree!(GList*, Item, GidOwnership.None)(_items);
+    auto _items = gListFromD!(secret.item.Item)(items);
+    scope(exit) containerFree!(GList*, secret.item.Item, GidOwnership.None)(_items);
     GError *_err;
     _retval = secret_item_load_secrets_sync(_items, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -225,14 +224,14 @@ class Item : DBusProxy, Retrievable
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void delete_(Cancellable cancellable, AsyncReadyCallback callback)
+  void delete_(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -246,7 +245,7 @@ class Item : DBusProxy, Retrievable
    *   result = asynchronous result passed to the callback
    * Returns: whether the item was successfully deleted or not
    */
-  bool deleteFinish(AsyncResult result)
+  bool deleteFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -265,7 +264,7 @@ class Item : DBusProxy, Retrievable
    *   cancellable = optional cancellation object
    * Returns: whether the item was successfully deleted or not
    */
-  bool deleteSync(Cancellable cancellable)
+  bool deleteSync(gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -307,7 +306,7 @@ class Item : DBusProxy, Retrievable
     return _retval;
   }
 
-  alias getFlags = DBusProxy.getFlags;
+  alias getFlags = gio.dbus_proxy.DBusProxy.getFlags;
 
   /**
    * Get the flags representing what features of the #SecretItem proxy
@@ -316,11 +315,11 @@ class Item : DBusProxy, Retrievable
    * and change the flags.
    * Returns: the flags for features initialized
    */
-  ItemFlags getFlags()
+  secret.types.ItemFlags getFlags()
   {
     SecretItemFlags _cretval;
     _cretval = secret_item_get_flags(cast(SecretItem*)cPtr);
-    ItemFlags _retval = cast(ItemFlags)_cretval;
+    secret.types.ItemFlags _retval = cast(secret.types.ItemFlags)_cretval;
     return _retval;
   }
 
@@ -332,7 +331,7 @@ class Item : DBusProxy, Retrievable
   {
     char* _cretval;
     _cretval = secret_item_get_label(cast(SecretItem*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -371,7 +370,7 @@ class Item : DBusProxy, Retrievable
   {
     char* _cretval;
     _cretval = secret_item_get_schema_name(cast(SecretItem*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -383,11 +382,11 @@ class Item : DBusProxy, Retrievable
    * Returns: the secret value which should be
    *   released with [secret.value.ValueSecret.unref], or %NULL
    */
-  ValueSecret getSecret()
+  secret.value.ValueSecret getSecret()
   {
     SecretValue* _cretval;
     _cretval = secret_item_get_secret(cast(SecretItem*)cPtr);
-    auto _retval = _cretval ? new ValueSecret(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new secret.value.ValueSecret(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -395,11 +394,11 @@ class Item : DBusProxy, Retrievable
    * Get the Secret Service object that this item was created with.
    * Returns: the Secret Service object
    */
-  Service getService()
+  secret.service.Service getService()
   {
     SecretService* _cretval;
     _cretval = secret_item_get_service(cast(SecretItem*)cPtr);
-    auto _retval = ObjectG.getDObject!Service(cast(SecretService*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(secret.service.Service)(cast(SecretService*)_cretval, No.Take);
     return _retval;
   }
 
@@ -413,14 +412,14 @@ class Item : DBusProxy, Retrievable
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void loadSecret(Cancellable cancellable, AsyncReadyCallback callback)
+  void loadSecret(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -436,7 +435,7 @@ class Item : DBusProxy, Retrievable
    *   result = asynchronous result passed to callback
    * Returns: whether the secret item successfully loaded or not
    */
-  bool loadSecretFinish(AsyncResult result)
+  bool loadSecretFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -456,7 +455,7 @@ class Item : DBusProxy, Retrievable
    *   cancellable = optional cancellation object
    * Returns: whether the secret item successfully loaded or not
    */
-  bool loadSecretSync(Cancellable cancellable)
+  bool loadSecretSync(gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -490,21 +489,21 @@ class Item : DBusProxy, Retrievable
    *   cancellable = optional cancellation object
    *   callback = called when the asynchronous operation completes
    */
-  void setAttributes(Schema schema, string[string] attributes, Cancellable cancellable, AsyncReadyCallback callback)
+  void setAttributes(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _attributes = gHashTableFromD!(string, string)(attributes);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_item_set_attributes(cast(SecretItem*)cPtr, schema ? cast(SecretSchema*)schema.cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_item_set_attributes(cast(SecretItem*)cPtr, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -513,7 +512,7 @@ class Item : DBusProxy, Retrievable
    *   result = asynchronous result passed to the callback
    * Returns: whether the change was successful or not
    */
-  bool setAttributesFinish(AsyncResult result)
+  bool setAttributesFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -536,13 +535,13 @@ class Item : DBusProxy, Retrievable
    *   cancellable = optional cancellation object
    * Returns: whether the change was successful or not
    */
-  bool setAttributesSync(Schema schema, string[string] attributes, Cancellable cancellable)
+  bool setAttributesSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
     GError *_err;
-    _retval = secret_item_set_attributes_sync(cast(SecretItem*)cPtr, schema ? cast(SecretSchema*)schema.cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = secret_item_set_attributes_sync(cast(SecretItem*)cPtr, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -556,14 +555,14 @@ class Item : DBusProxy, Retrievable
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void setLabel(string label, Cancellable cancellable, AsyncReadyCallback callback)
+  void setLabel(string label, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -578,7 +577,7 @@ class Item : DBusProxy, Retrievable
    *   result = asynchronous result passed to callback
    * Returns: whether the change was successful or not
    */
-  bool setLabelFinish(AsyncResult result)
+  bool setLabelFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -597,7 +596,7 @@ class Item : DBusProxy, Retrievable
    *   cancellable = optional cancellation object
    * Returns: whether the change was successful or not
    */
-  bool setLabelSync(string label, Cancellable cancellable)
+  bool setLabelSync(string label, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -618,14 +617,14 @@ class Item : DBusProxy, Retrievable
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void setSecret(ValueSecret value, Cancellable cancellable, AsyncReadyCallback callback)
+  void setSecret(secret.value.ValueSecret value, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -639,7 +638,7 @@ class Item : DBusProxy, Retrievable
    *   result = asynchronous result passed to callback
    * Returns: whether the change was successful or not
    */
-  bool setSecretFinish(AsyncResult result)
+  bool setSecretFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -660,7 +659,7 @@ class Item : DBusProxy, Retrievable
    *   cancellable = optional cancellation object
    * Returns: whether the change was successful or not
    */
-  bool setSecretSync(ValueSecret value, Cancellable cancellable)
+  bool setSecretSync(secret.value.ValueSecret value, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;

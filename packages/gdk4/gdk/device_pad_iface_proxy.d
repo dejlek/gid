@@ -5,7 +5,7 @@ import gdk.device_pad;
 import gdk.device_pad_mixin;
 
 /// Proxy object for Gdk.DevicePad interface when a GObject has no applicable D binding
-class DevicePadIfaceProxy : IfaceProxy, DevicePad
+class DevicePadIfaceProxy : IfaceProxy, gdk.device_pad.DevicePad
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class DevicePadIfaceProxy : IfaceProxy, DevicePad
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(DevicePad);
+    return typeid(gdk.device_pad.DevicePad);
   }
 
   mixin DevicePadT!();

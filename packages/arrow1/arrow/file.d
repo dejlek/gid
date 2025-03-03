@@ -4,7 +4,7 @@ public import arrow.file_iface_proxy;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
 interface File
@@ -18,7 +18,7 @@ interface File
 
   bool close();
 
-  FileMode getMode();
+  arrow.types.FileMode getMode();
 
   bool isClosed();
 

@@ -1,6 +1,6 @@
 module gtk.info_bar;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -80,7 +80,7 @@ import gtk.widget;
  *   [gtk.label.Label] and an optional [gtk.button.Button], according to
  *   your application's design.
  */
-class InfoBar : Widget
+class InfoBar : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -120,7 +120,7 @@ class InfoBar : Widget
    *   child = an activatable widget
    *   responseId = response ID for child
    */
-  void addActionWidget(Widget child, int responseId)
+  void addActionWidget(gtk.widget.Widget child, int responseId)
   {
     gtk_info_bar_add_action_widget(cast(GtkInfoBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, responseId);
   }
@@ -137,12 +137,12 @@ class InfoBar : Widget
    * Returns: the `GtkButton` widget
    *   that was added
    */
-  Button addButton(string buttonText, int responseId)
+  gtk.button.Button addButton(string buttonText, int responseId)
   {
     GtkWidget* _cretval;
     const(char)* _buttonText = buttonText.toCString(No.Alloc);
     _cretval = gtk_info_bar_add_button(cast(GtkInfoBar*)cPtr, _buttonText, responseId);
-    auto _retval = ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class InfoBar : Widget
    * Params:
    *   widget = the child to be added
    */
-  void addChild(Widget widget)
+  void addChild(gtk.widget.Widget widget)
   {
     gtk_info_bar_add_child(cast(GtkInfoBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -160,11 +160,11 @@ class InfoBar : Widget
    * Returns the message type of the message area.
    * Returns: the message type of the message area.
    */
-  MessageType getMessageType()
+  gtk.types.MessageType getMessageType()
   {
     GtkMessageType _cretval;
     _cretval = gtk_info_bar_get_message_type(cast(GtkInfoBar*)cPtr);
-    MessageType _retval = cast(MessageType)_cretval;
+    gtk.types.MessageType _retval = cast(gtk.types.MessageType)_cretval;
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class InfoBar : Widget
    * Params:
    *   widget = an action widget to remove
    */
-  void removeActionWidget(Widget widget)
+  void removeActionWidget(gtk.widget.Widget widget)
   {
     gtk_info_bar_remove_action_widget(cast(GtkInfoBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -207,7 +207,7 @@ class InfoBar : Widget
    * Params:
    *   widget = a child that has been added to the content area
    */
-  void removeChild(Widget widget)
+  void removeChild(gtk.widget.Widget widget)
   {
     gtk_info_bar_remove_child(cast(GtkInfoBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -242,7 +242,7 @@ class InfoBar : Widget
    * Params:
    *   messageType = a `GtkMessageType`
    */
-  void setMessageType(MessageType messageType)
+  void setMessageType(gtk.types.MessageType messageType)
   {
     gtk_info_bar_set_message_type(cast(GtkInfoBar*)cPtr, messageType);
   }
@@ -293,8 +293,8 @@ class InfoBar : Widget
    * The default binding for this signal is the Escape key.
    *   infoBar = the instance the signal is connected to
    */
-  alias CloseCallbackDlg = void delegate(InfoBar infoBar);
-  alias CloseCallbackFunc = void function(InfoBar infoBar);
+  alias CloseCallbackDlg = void delegate(gtk.info_bar.InfoBar infoBar);
+  alias CloseCallbackFunc = void function(gtk.info_bar.InfoBar infoBar);
 
   /**
    * Connect to Close signal.
@@ -310,7 +310,7 @@ class InfoBar : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto infoBar = getVal!InfoBar(_paramVals);
+      auto infoBar = getVal!(gtk.info_bar.InfoBar)(_paramVals);
       _dClosure.dlg(infoBar);
     }
 
@@ -327,8 +327,8 @@ class InfoBar : Widget
    *   responseId = the response ID
    *   infoBar = the instance the signal is connected to
    */
-  alias ResponseCallbackDlg = void delegate(int responseId, InfoBar infoBar);
-  alias ResponseCallbackFunc = void function(int responseId, InfoBar infoBar);
+  alias ResponseCallbackDlg = void delegate(int responseId, gtk.info_bar.InfoBar infoBar);
+  alias ResponseCallbackFunc = void function(int responseId, gtk.info_bar.InfoBar infoBar);
 
   /**
    * Connect to Response signal.
@@ -344,8 +344,8 @@ class InfoBar : Widget
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto infoBar = getVal!InfoBar(_paramVals);
-      auto responseId = getVal!int(&_paramVals[1]);
+      auto infoBar = getVal!(gtk.info_bar.InfoBar)(_paramVals);
+      auto responseId = getVal!(int)(&_paramVals[1]);
       _dClosure.dlg(responseId, infoBar);
     }
 

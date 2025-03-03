@@ -1,6 +1,6 @@
 module gtk.signal_action;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.shortcut_action;
@@ -11,7 +11,7 @@ import gtk.types;
  * Signals that are used in this way are referred to as keybinding signals,
  * and they are expected to be defined with the %G_SIGNAL_ACTION flag.
  */
-class SignalAction : ShortcutAction
+class SignalAction : gtk.shortcut_action.ShortcutAction
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,7 +54,7 @@ class SignalAction : ShortcutAction
   {
     const(char)* _cretval;
     _cretval = gtk_signal_action_get_signal_name(cast(GtkSignalAction*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

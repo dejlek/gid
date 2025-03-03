@@ -1,6 +1,6 @@
 module glib.checksum;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -22,7 +22,7 @@ import gobject.boxed;
  * one go, use the convenience functions func@GLib.compute_checksum_for_data
  * and func@GLib.compute_checksum_for_string, respectively.
  */
-class Checksum : Boxed
+class Checksum : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -64,7 +64,7 @@ class Checksum : Boxed
    * Returns: the newly created #GChecksum, or %NULL.
    *   Use [glib.checksum.Checksum.free] to free the memory allocated by it.
    */
-  this(ChecksumType checksumType)
+  this(glib.types.ChecksumType checksumType)
   {
     GChecksum* _cretval;
     _cretval = g_checksum_new(checksumType);
@@ -78,11 +78,11 @@ class Checksum : Boxed
    * Returns: the copy of the passed #GChecksum. Use
    *   [glib.checksum.Checksum.free] when finished using it.
    */
-  Checksum copy()
+  glib.checksum.Checksum copy()
   {
     GChecksum* _cretval;
-    _cretval = g_checksum_copy(cast(GChecksum*)cPtr);
-    auto _retval = _cretval ? new Checksum(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = g_checksum_copy(cast(const(GChecksum)*)cPtr);
+    auto _retval = _cretval ? new glib.checksum.Checksum(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class Checksum : Boxed
   {
     const(char)* _cretval;
     _cretval = g_checksum_get_string(cast(GChecksum*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ class Checksum : Boxed
    * Returns: the checksum length, or -1 if checksum_type is
    *   not supported.
    */
-  static ptrdiff_t typeGetLength(ChecksumType checksumType)
+  static ptrdiff_t typeGetLength(glib.types.ChecksumType checksumType)
   {
     ptrdiff_t _retval;
     _retval = g_checksum_type_get_length(checksumType);

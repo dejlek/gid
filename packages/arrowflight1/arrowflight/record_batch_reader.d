@@ -5,11 +5,11 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.stream_chunk;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class RecordBatchReader : ObjectG
+class RecordBatchReader : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -28,25 +28,25 @@ class RecordBatchReader : ObjectG
     return getType();
   }
 
-  Table readAll()
+  arrow.table.Table readAll()
   {
     GArrowTable* _cretval;
     GError *_err;
     _cretval = gaflight_record_batch_reader_read_all(cast(GAFlightRecordBatchReader*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Table(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 
-  StreamChunk readNext()
+  arrowflight.stream_chunk.StreamChunk readNext()
   {
     GAFlightStreamChunk* _cretval;
     GError *_err;
     _cretval = gaflight_record_batch_reader_read_next(cast(GAFlightRecordBatchReader*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!StreamChunk(cast(GAFlightStreamChunk*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowflight.stream_chunk.StreamChunk)(cast(GAFlightStreamChunk*)_cretval, Yes.Take);
     return _retval;
   }
 }

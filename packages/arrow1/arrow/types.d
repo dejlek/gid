@@ -2,8 +2,7 @@ module arrow.types;
 
 import arrow.c.functions;
 import arrow.c.types;
-import arrow.types;
-import gid.global;
+import gid.gid;
 
 
 // Aliases

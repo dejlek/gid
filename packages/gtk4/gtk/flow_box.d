@@ -1,8 +1,7 @@
 module gtk.flow_box;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
-import gio.list_model_mixin;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -57,7 +56,7 @@ import gtk.widget;
  * `GtkFlowBox` uses the %GTK_ACCESSIBLE_ROLE_GRID role, and `GtkFlowBoxChild`
  * uses the %GTK_ACCESSIBLE_ROLE_GRID_CELL role.
  */
-class FlowBox : Widget, Orientable
+class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -97,7 +96,7 @@ class FlowBox : Widget, Orientable
    * Params:
    *   child = the `GtkWidget` to add
    */
-  void append(Widget child)
+  void append(gtk.widget.Widget child)
   {
     gtk_flow_box_append(cast(GtkFlowBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -118,14 +117,14 @@ class FlowBox : Widget, Orientable
    *   model = the `GListModel` to be bound to box
    *   createWidgetFunc = a function that creates widgets for items
    */
-  void bindModel(ListModel model, FlowBoxCreateWidgetFunc createWidgetFunc)
+  void bindModel(gio.list_model.ListModel model, gtk.types.FlowBoxCreateWidgetFunc createWidgetFunc)
   {
     extern(C) GtkWidget* _createWidgetFuncCallback(ObjectC* item, void* userData)
     {
-      Widget _dretval;
-      auto _dlg = cast(FlowBoxCreateWidgetFunc*)userData;
+      gtk.widget.Widget _dretval;
+      auto _dlg = cast(gtk.types.FlowBoxCreateWidgetFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)item, No.Take));
+      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.Take));
       GtkWidget* _retval = cast(GtkWidget*)_dretval.cPtr(Yes.Dup);
 
       return _retval;
@@ -157,11 +156,11 @@ class FlowBox : Widget, Orientable
    *   always be a `GtkFlowBoxChild` or %NULL in case no child widget
    *   with the given index exists.
    */
-  FlowBoxChild getChildAtIndex(int idx)
+  gtk.flow_box_child.FlowBoxChild getChildAtIndex(int idx)
   {
     GtkFlowBoxChild* _cretval;
     _cretval = gtk_flow_box_get_child_at_index(cast(GtkFlowBox*)cPtr, idx);
-    auto _retval = ObjectG.getDObject!FlowBoxChild(cast(GtkFlowBoxChild*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(GtkFlowBoxChild*)_cretval, No.Take);
     return _retval;
   }
 
@@ -175,11 +174,11 @@ class FlowBox : Widget, Orientable
    *   always be a `GtkFlowBoxChild` or %NULL in case no child widget
    *   exists for the given x and y coordinates.
    */
-  FlowBoxChild getChildAtPos(int x, int y)
+  gtk.flow_box_child.FlowBoxChild getChildAtPos(int x, int y)
   {
     GtkFlowBoxChild* _cretval;
     _cretval = gtk_flow_box_get_child_at_pos(cast(GtkFlowBox*)cPtr, x, y);
-    auto _retval = ObjectG.getDObject!FlowBoxChild(cast(GtkFlowBoxChild*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(GtkFlowBoxChild*)_cretval, No.Take);
     return _retval;
   }
 
@@ -243,11 +242,11 @@ class FlowBox : Widget, Orientable
    * Returns: A `GList` containing the `GtkWidget` for each selected child.
    *   Free with [glib.list.List.free] when done.
    */
-  FlowBoxChild[] getSelectedChildren()
+  gtk.flow_box_child.FlowBoxChild[] getSelectedChildren()
   {
     GList* _cretval;
     _cretval = gtk_flow_box_get_selected_children(cast(GtkFlowBox*)cPtr);
-    auto _retval = gListToD!(FlowBoxChild, GidOwnership.Container)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gtk.flow_box_child.FlowBoxChild, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -255,11 +254,11 @@ class FlowBox : Widget, Orientable
    * Gets the selection mode of box.
    * Returns: the `GtkSelectionMode`
    */
-  SelectionMode getSelectionMode()
+  gtk.types.SelectionMode getSelectionMode()
   {
     GtkSelectionMode _cretval;
     _cretval = gtk_flow_box_get_selection_mode(cast(GtkFlowBox*)cPtr);
-    SelectionMode _retval = cast(SelectionMode)_cretval;
+    gtk.types.SelectionMode _retval = cast(gtk.types.SelectionMode)_cretval;
     return _retval;
   }
 
@@ -273,7 +272,7 @@ class FlowBox : Widget, Orientable
    *   widget = the `GtkWidget` to add
    *   position = the position to insert child in
    */
-  void insert(Widget widget, int position)
+  void insert(gtk.widget.Widget widget, int position)
   {
     gtk_flow_box_insert(cast(GtkFlowBox*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, position);
   }
@@ -309,7 +308,7 @@ class FlowBox : Widget, Orientable
    * Params:
    *   child = the `GtkWidget` to add
    */
-  void prepend(Widget child)
+  void prepend(gtk.widget.Widget child)
   {
     gtk_flow_box_prepend(cast(GtkFlowBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -319,7 +318,7 @@ class FlowBox : Widget, Orientable
    * Params:
    *   widget = the child widget to remove
    */
-  void remove(Widget widget)
+  void remove(gtk.widget.Widget widget)
   {
     gtk_flow_box_remove(cast(GtkFlowBox*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -348,7 +347,7 @@ class FlowBox : Widget, Orientable
    * Params:
    *   child = a child of box
    */
-  void selectChild(FlowBoxChild child)
+  void selectChild(gtk.flow_box_child.FlowBoxChild child)
   {
     gtk_flow_box_select_child(cast(GtkFlowBox*)cPtr, child ? cast(GtkFlowBoxChild*)child.cPtr(No.Dup) : null);
   }
@@ -360,13 +359,13 @@ class FlowBox : Widget, Orientable
    * Params:
    *   func = the function to call for each selected child
    */
-  void selectedForeach(FlowBoxForeachFunc func)
+  void selectedForeach(gtk.types.FlowBoxForeachFunc func)
   {
     extern(C) void _funcCallback(GtkFlowBox* box, GtkFlowBoxChild* child, void* userData)
     {
-      auto _dlg = cast(FlowBoxForeachFunc*)userData;
+      auto _dlg = cast(gtk.types.FlowBoxForeachFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!FlowBox(cast(void*)box, No.Take), ObjectG.getDObject!FlowBoxChild(cast(void*)child, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gtk.flow_box.FlowBox)(cast(void*)box, No.Take), ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -410,13 +409,13 @@ class FlowBox : Widget, Orientable
    *   filterFunc = callback that
    *     lets you filter which children to show
    */
-  void setFilterFunc(FlowBoxFilterFunc filterFunc)
+  void setFilterFunc(gtk.types.FlowBoxFilterFunc filterFunc)
   {
     extern(C) bool _filterFuncCallback(GtkFlowBoxChild* child, void* userData)
     {
-      auto _dlg = cast(FlowBoxFilterFunc*)userData;
+      auto _dlg = cast(gtk.types.FlowBoxFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!FlowBoxChild(cast(void*)child, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
       return _retval;
     }
     auto _filterFuncCB = filterFunc ? &_filterFuncCallback : null;
@@ -440,7 +439,7 @@ class FlowBox : Widget, Orientable
    *   adjustment = an adjustment which should be adjusted
    *     when the focus is moved among the descendents of container
    */
-  void setHadjustment(Adjustment adjustment)
+  void setHadjustment(gtk.adjustment.Adjustment adjustment)
   {
     gtk_flow_box_set_hadjustment(cast(GtkFlowBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
@@ -497,7 +496,7 @@ class FlowBox : Widget, Orientable
    * Params:
    *   mode = the new selection mode
    */
-  void setSelectionMode(SelectionMode mode)
+  void setSelectionMode(gtk.types.SelectionMode mode)
   {
     gtk_flow_box_set_selection_mode(cast(GtkFlowBox*)cPtr, mode);
   }
@@ -515,13 +514,13 @@ class FlowBox : Widget, Orientable
    * Params:
    *   sortFunc = the sort function
    */
-  void setSortFunc(FlowBoxSortFunc sortFunc)
+  void setSortFunc(gtk.types.FlowBoxSortFunc sortFunc)
   {
     extern(C) int _sortFuncCallback(GtkFlowBoxChild* child1, GtkFlowBoxChild* child2, void* userData)
     {
-      auto _dlg = cast(FlowBoxSortFunc*)userData;
+      auto _dlg = cast(gtk.types.FlowBoxSortFunc*)userData;
 
-      int _retval = (*_dlg)(ObjectG.getDObject!FlowBoxChild(cast(void*)child1, No.Take), ObjectG.getDObject!FlowBoxChild(cast(void*)child2, No.Take));
+      int _retval = (*_dlg)(ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child1, No.Take), ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child2, No.Take));
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
@@ -545,7 +544,7 @@ class FlowBox : Widget, Orientable
    *   adjustment = an adjustment which should be adjusted
    *     when the focus is moved among the descendents of container
    */
-  void setVadjustment(Adjustment adjustment)
+  void setVadjustment(gtk.adjustment.Adjustment adjustment)
   {
     gtk_flow_box_set_vadjustment(cast(GtkFlowBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
@@ -565,7 +564,7 @@ class FlowBox : Widget, Orientable
    * Params:
    *   child = a child of box
    */
-  void unselectChild(FlowBoxChild child)
+  void unselectChild(gtk.flow_box_child.FlowBoxChild child)
   {
     gtk_flow_box_unselect_child(cast(GtkFlowBox*)cPtr, child ? cast(GtkFlowBoxChild*)child.cPtr(No.Dup) : null);
   }
@@ -575,8 +574,8 @@ class FlowBox : Widget, Orientable
    * This is a [keybinding signal](class.SignalAction.html).
    *   flowBox = the instance the signal is connected to
    */
-  alias ActivateCursorChildCallbackDlg = void delegate(FlowBox flowBox);
-  alias ActivateCursorChildCallbackFunc = void function(FlowBox flowBox);
+  alias ActivateCursorChildCallbackDlg = void delegate(gtk.flow_box.FlowBox flowBox);
+  alias ActivateCursorChildCallbackFunc = void function(gtk.flow_box.FlowBox flowBox);
 
   /**
    * Connect to ActivateCursorChild signal.
@@ -592,7 +591,7 @@ class FlowBox : Widget, Orientable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto flowBox = getVal!FlowBox(_paramVals);
+      auto flowBox = getVal!(gtk.flow_box.FlowBox)(_paramVals);
       _dClosure.dlg(flowBox);
     }
 
@@ -606,8 +605,8 @@ class FlowBox : Widget, Orientable
    *   child = the child that is activated
    *   flowBox = the instance the signal is connected to
    */
-  alias ChildActivatedCallbackDlg = void delegate(FlowBoxChild child, FlowBox flowBox);
-  alias ChildActivatedCallbackFunc = void function(FlowBoxChild child, FlowBox flowBox);
+  alias ChildActivatedCallbackDlg = void delegate(gtk.flow_box_child.FlowBoxChild child, gtk.flow_box.FlowBox flowBox);
+  alias ChildActivatedCallbackFunc = void function(gtk.flow_box_child.FlowBoxChild child, gtk.flow_box.FlowBox flowBox);
 
   /**
    * Connect to ChildActivated signal.
@@ -623,8 +622,8 @@ class FlowBox : Widget, Orientable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto flowBox = getVal!FlowBox(_paramVals);
-      auto child = getVal!FlowBoxChild(&_paramVals[1]);
+      auto flowBox = getVal!(gtk.flow_box.FlowBox)(_paramVals);
+      auto child = getVal!(gtk.flow_box_child.FlowBoxChild)(&_paramVals[1]);
       _dClosure.dlg(child, flowBox);
     }
 
@@ -655,8 +654,8 @@ class FlowBox : Widget, Orientable
    * Returns: %TRUE to stop other handlers from being invoked for the event.
    *   %FALSE to propagate the event further.
    */
-  alias MoveCursorCallbackDlg = bool delegate(MovementStep step, int count, bool extend, bool modify, FlowBox flowBox);
-  alias MoveCursorCallbackFunc = bool function(MovementStep step, int count, bool extend, bool modify, FlowBox flowBox);
+  alias MoveCursorCallbackDlg = bool delegate(gtk.types.MovementStep step, int count, bool extend, bool modify, gtk.flow_box.FlowBox flowBox);
+  alias MoveCursorCallbackFunc = bool function(gtk.types.MovementStep step, int count, bool extend, bool modify, gtk.flow_box.FlowBox flowBox);
 
   /**
    * Connect to MoveCursor signal.
@@ -673,11 +672,11 @@ class FlowBox : Widget, Orientable
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto flowBox = getVal!FlowBox(_paramVals);
-      auto step = getVal!MovementStep(&_paramVals[1]);
-      auto count = getVal!int(&_paramVals[2]);
-      auto extend = getVal!bool(&_paramVals[3]);
-      auto modify = getVal!bool(&_paramVals[4]);
+      auto flowBox = getVal!(gtk.flow_box.FlowBox)(_paramVals);
+      auto step = getVal!(gtk.types.MovementStep)(&_paramVals[1]);
+      auto count = getVal!(int)(&_paramVals[2]);
+      auto extend = getVal!(bool)(&_paramVals[3]);
+      auto modify = getVal!(bool)(&_paramVals[4]);
       _retval = _dClosure.dlg(step, count, extend, modify, flowBox);
       setVal!bool(_returnValue, _retval);
     }
@@ -693,8 +692,8 @@ class FlowBox : Widget, Orientable
    * The default bindings for this signal is <kbd>Ctrl</kbd>-<kbd>a</kbd>.
    *   flowBox = the instance the signal is connected to
    */
-  alias SelectAllCallbackDlg = void delegate(FlowBox flowBox);
-  alias SelectAllCallbackFunc = void function(FlowBox flowBox);
+  alias SelectAllCallbackDlg = void delegate(gtk.flow_box.FlowBox flowBox);
+  alias SelectAllCallbackFunc = void function(gtk.flow_box.FlowBox flowBox);
 
   /**
    * Connect to SelectAll signal.
@@ -710,7 +709,7 @@ class FlowBox : Widget, Orientable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto flowBox = getVal!FlowBox(_paramVals);
+      auto flowBox = getVal!(gtk.flow_box.FlowBox)(_paramVals);
       _dClosure.dlg(flowBox);
     }
 
@@ -725,8 +724,8 @@ class FlowBox : Widget, Orientable
    * selected children.
    *   flowBox = the instance the signal is connected to
    */
-  alias SelectedChildrenChangedCallbackDlg = void delegate(FlowBox flowBox);
-  alias SelectedChildrenChangedCallbackFunc = void function(FlowBox flowBox);
+  alias SelectedChildrenChangedCallbackDlg = void delegate(gtk.flow_box.FlowBox flowBox);
+  alias SelectedChildrenChangedCallbackFunc = void function(gtk.flow_box.FlowBox flowBox);
 
   /**
    * Connect to SelectedChildrenChanged signal.
@@ -742,7 +741,7 @@ class FlowBox : Widget, Orientable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto flowBox = getVal!FlowBox(_paramVals);
+      auto flowBox = getVal!(gtk.flow_box.FlowBox)(_paramVals);
       _dClosure.dlg(flowBox);
     }
 
@@ -756,8 +755,8 @@ class FlowBox : Widget, Orientable
    * The default binding for this signal is <kbd>Ctrl</kbd>-<kbd>Space</kbd>.
    *   flowBox = the instance the signal is connected to
    */
-  alias ToggleCursorChildCallbackDlg = void delegate(FlowBox flowBox);
-  alias ToggleCursorChildCallbackFunc = void function(FlowBox flowBox);
+  alias ToggleCursorChildCallbackDlg = void delegate(gtk.flow_box.FlowBox flowBox);
+  alias ToggleCursorChildCallbackFunc = void function(gtk.flow_box.FlowBox flowBox);
 
   /**
    * Connect to ToggleCursorChild signal.
@@ -773,7 +772,7 @@ class FlowBox : Widget, Orientable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto flowBox = getVal!FlowBox(_paramVals);
+      auto flowBox = getVal!(gtk.flow_box.FlowBox)(_paramVals);
       _dClosure.dlg(flowBox);
     }
 
@@ -788,8 +787,8 @@ class FlowBox : Widget, Orientable
    * The default bindings for this signal is <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>a</kbd>.
    *   flowBox = the instance the signal is connected to
    */
-  alias UnselectAllCallbackDlg = void delegate(FlowBox flowBox);
-  alias UnselectAllCallbackFunc = void function(FlowBox flowBox);
+  alias UnselectAllCallbackDlg = void delegate(gtk.flow_box.FlowBox flowBox);
+  alias UnselectAllCallbackFunc = void function(gtk.flow_box.FlowBox flowBox);
 
   /**
    * Connect to UnselectAll signal.
@@ -805,7 +804,7 @@ class FlowBox : Widget, Orientable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto flowBox = getVal!FlowBox(_paramVals);
+      auto flowBox = getVal!(gtk.flow_box.FlowBox)(_paramVals);
       _dClosure.dlg(flowBox);
     }
 

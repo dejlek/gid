@@ -1,8 +1,7 @@
 module gtk.font_dialog;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.types;
 import glib.error;
@@ -30,7 +29,7 @@ import pango.language;
  * See [gtk.font_dialog_button.FontDialogButton] for a convenient control
  * that uses `GtkFontDialog` and presents the results.
  */
-class FontDialog : ObjectG
+class FontDialog : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -73,14 +72,14 @@ class FontDialog : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void chooseFace(Window parent, FontFace initialValue, Cancellable cancellable, AsyncReadyCallback callback)
+  void chooseFace(gtk.window.Window parent, pango.font_face.FontFace initialValue, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -95,14 +94,14 @@ class FontDialog : ObjectG
    *   result = a `GAsyncResult`
    * Returns: the selected font face
    */
-  FontFace chooseFaceFinish(AsyncResult result)
+  pango.font_face.FontFace chooseFaceFinish(gio.async_result.AsyncResult result)
   {
     PangoFontFace* _cretval;
     GError *_err;
     _cretval = gtk_font_dialog_choose_face_finish(cast(GtkFontDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!FontFace(cast(PangoFontFace*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -118,14 +117,14 @@ class FontDialog : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void chooseFamily(Window parent, FontFamily initialValue, Cancellable cancellable, AsyncReadyCallback callback)
+  void chooseFamily(gtk.window.Window parent, pango.font_family.FontFamily initialValue, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -143,14 +142,14 @@ class FontDialog : ObjectG
    *   result = a `GAsyncResult`
    * Returns: the selected family
    */
-  FontFamily chooseFamilyFinish(AsyncResult result)
+  pango.font_family.FontFamily chooseFamilyFinish(gio.async_result.AsyncResult result)
   {
     PangoFontFamily* _cretval;
     GError *_err;
     _cretval = gtk_font_dialog_choose_family_finish(cast(GtkFontDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!FontFamily(cast(PangoFontFamily*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -168,14 +167,14 @@ class FontDialog : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void chooseFont(Window parent, FontDescription initialValue, Cancellable cancellable, AsyncReadyCallback callback)
+  void chooseFont(gtk.window.Window parent, pango.font_description.FontDescription initialValue, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -198,14 +197,14 @@ class FontDialog : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void chooseFontAndFeatures(Window parent, FontDescription initialValue, Cancellable cancellable, AsyncReadyCallback callback)
+  void chooseFontAndFeatures(gtk.window.Window parent, pango.font_description.FontDescription initialValue, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -224,7 +223,7 @@ class FontDialog : ObjectG
    * Returns: `TRUE` if a font was selected. Otherwise `FALSE` is returned
    *   and error is set
    */
-  bool chooseFontAndFeaturesFinish(AsyncResult result, out FontDescription fontDesc, out string fontFeatures, out PgLanguage language)
+  bool chooseFontAndFeaturesFinish(gio.async_result.AsyncResult result, out pango.font_description.FontDescription fontDesc, out string fontFeatures, out pango.language.PgLanguage language)
   {
     bool _retval;
     PangoFontDescription* _fontDesc;
@@ -234,9 +233,9 @@ class FontDialog : ObjectG
     _retval = gtk_font_dialog_choose_font_and_features_finish(cast(GtkFontDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_fontDesc, &_fontFeatures, &_language, &_err);
     if (_err)
       throw new ErrorG(_err);
-    fontDesc = new FontDescription(cast(void*)_fontDesc, Yes.Take);
+    fontDesc = new pango.font_description.FontDescription(cast(void*)_fontDesc, Yes.Take);
     fontFeatures = _fontFeatures.fromCString(Yes.Free);
-    language = new PgLanguage(cast(void*)_language, Yes.Take);
+    language = new pango.language.PgLanguage(cast(void*)_language, Yes.Take);
     return _retval;
   }
 
@@ -247,14 +246,14 @@ class FontDialog : ObjectG
    *   result = a `GAsyncResult`
    * Returns: the selected font
    */
-  FontDescription chooseFontFinish(AsyncResult result)
+  pango.font_description.FontDescription chooseFontFinish(gio.async_result.AsyncResult result)
   {
     PangoFontDescription* _cretval;
     GError *_err;
     _cretval = gtk_font_dialog_choose_font_finish(cast(GtkFontDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new FontDescription(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -263,11 +262,11 @@ class FontDialog : ObjectG
    * in the font chooser dialog.
    * Returns: the filter
    */
-  Filter getFilter()
+  gtk.filter.Filter getFilter()
   {
     GtkFilter* _cretval;
     _cretval = gtk_font_dialog_get_filter(cast(GtkFontDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!Filter(cast(GtkFilter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.filter.Filter)(cast(GtkFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -276,11 +275,11 @@ class FontDialog : ObjectG
    * or `NULL` for the default fontmap.
    * Returns: the fontmap
    */
-  FontMap getFontMap()
+  pango.font_map.FontMap getFontMap()
   {
     PangoFontMap* _cretval;
     _cretval = gtk_font_dialog_get_font_map(cast(GtkFontDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!FontMap(cast(PangoFontMap*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -288,11 +287,11 @@ class FontDialog : ObjectG
    * Returns the language for which font features are applied.
    * Returns: the language for font features
    */
-  PgLanguage getLanguage()
+  pango.language.PgLanguage getLanguage()
   {
     PangoLanguage* _cretval;
     _cretval = gtk_font_dialog_get_language(cast(GtkFontDialog*)cPtr);
-    auto _retval = _cretval ? new PgLanguage(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.language.PgLanguage(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -318,7 +317,7 @@ class FontDialog : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_font_dialog_get_title(cast(GtkFontDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -330,7 +329,7 @@ class FontDialog : ObjectG
    * Params:
    *   filter = a `GtkFilter`
    */
-  void setFilter(Filter filter)
+  void setFilter(gtk.filter.Filter filter)
   {
     gtk_font_dialog_set_filter(cast(GtkFontDialog*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(No.Dup) : null);
   }
@@ -341,7 +340,7 @@ class FontDialog : ObjectG
    * Params:
    *   fontmap = the fontmap
    */
-  void setFontMap(FontMap fontmap)
+  void setFontMap(pango.font_map.FontMap fontmap)
   {
     gtk_font_dialog_set_font_map(cast(GtkFontDialog*)cPtr, fontmap ? cast(PangoFontMap*)fontmap.cPtr(No.Dup) : null);
   }
@@ -351,7 +350,7 @@ class FontDialog : ObjectG
    * Params:
    *   language = the language for font features
    */
-  void setLanguage(PgLanguage language)
+  void setLanguage(pango.language.PgLanguage language)
   {
     gtk_font_dialog_set_language(cast(GtkFontDialog*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
   }

@@ -1,9 +1,8 @@
 module secret.backend;
 
 public import secret.backend_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.types;
 import glib.error;
@@ -36,14 +35,14 @@ interface Backend
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  static void get(BackendFlags flags, Cancellable cancellable, AsyncReadyCallback callback)
+  static void get(secret.types.BackendFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -58,14 +57,14 @@ interface Backend
    * Returns: a new reference to a #SecretBackend proxy, which
    *   should be released with [gobject.object.ObjectG.unref].
    */
-  static Backend getFinish(AsyncResult result)
+  static secret.backend.Backend getFinish(gio.async_result.AsyncResult result)
   {
     SecretBackend* _cretval;
     GError *_err;
     _cretval = secret_backend_get_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Backend(cast(SecretBackend*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(secret.backend.Backend)(cast(SecretBackend*)_cretval, Yes.Take);
     return _retval;
   }
 }

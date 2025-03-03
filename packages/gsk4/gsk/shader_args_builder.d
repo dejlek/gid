@@ -1,6 +1,6 @@
 module gsk.shader_args_builder;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import gobject.boxed;
 import graphene.vec2;
@@ -14,7 +14,7 @@ import gsk.types;
 /**
  * An object to build the uniforms data for a `GskGLShader`.
  */
-class ShaderArgsBuilder : Boxed
+class ShaderArgsBuilder : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -47,7 +47,7 @@ class ShaderArgsBuilder : Boxed
    * Returns: The newly allocated builder, free with
    *   [gsk.shader_args_builder.ShaderArgsBuilder.unref]
    */
-  this(GLShader shader, Bytes initialValues)
+  this(gsk.glshader.GLShader shader, glib.bytes.Bytes initialValues)
   {
     GskShaderArgsBuilder* _cretval;
     _cretval = gsk_shader_args_builder_new(shader ? cast(GskGLShader*)shader.cPtr(No.Dup) : null, initialValues ? cast(GBytes*)initialValues.cPtr(No.Dup) : null);
@@ -109,9 +109,9 @@ class ShaderArgsBuilder : Boxed
    *   idx = index of the uniform
    *   value = value to set the uniform too
    */
-  void setVec2(int idx, Vec2 value)
+  void setVec2(int idx, graphene.vec2.Vec2 value)
   {
-    gsk_shader_args_builder_set_vec2(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(graphene_vec2_t*)value.cPtr(No.Dup) : null);
+    gsk_shader_args_builder_set_vec2(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(const(graphene_vec2_t)*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -121,9 +121,9 @@ class ShaderArgsBuilder : Boxed
    *   idx = index of the uniform
    *   value = value to set the uniform too
    */
-  void setVec3(int idx, Vec3 value)
+  void setVec3(int idx, graphene.vec3.Vec3 value)
   {
-    gsk_shader_args_builder_set_vec3(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(graphene_vec3_t*)value.cPtr(No.Dup) : null);
+    gsk_shader_args_builder_set_vec3(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(const(graphene_vec3_t)*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -133,9 +133,9 @@ class ShaderArgsBuilder : Boxed
    *   idx = index of the uniform
    *   value = value to set the uniform too
    */
-  void setVec4(int idx, Vec4 value)
+  void setVec4(int idx, graphene.vec4.Vec4 value)
   {
-    gsk_shader_args_builder_set_vec4(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(graphene_vec4_t*)value.cPtr(No.Dup) : null);
+    gsk_shader_args_builder_set_vec4(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(const(graphene_vec4_t)*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -150,11 +150,11 @@ class ShaderArgsBuilder : Boxed
    * Returns: the newly allocated buffer with
    *   all the args added to builder
    */
-  Bytes toArgs()
+  glib.bytes.Bytes toArgs()
   {
     GBytes* _cretval;
     _cretval = gsk_shader_args_builder_to_args(cast(GskShaderArgsBuilder*)cPtr);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

@@ -1,19 +1,18 @@
 module pango.types;
 
-import gid.global;
+import gid.gid;
 import pango.attribute;
 import pango.c.functions;
 import pango.c.types;
 import pango.font;
 import pango.fontset;
 import pango.glyph_item;
-import pango.types;
 
 
 // Aliases
 alias Glyph = PangoGlyph;
 alias GlyphUnit = PangoGlyphUnit;
-alias LayoutRun = GlyphItem;
+alias LayoutRun = pango.glyph_item.GlyphItem;
 
 // Enums
 alias Alignment = PangoAlignment;
@@ -53,8 +52,8 @@ alias RendererPrivate = PangoRendererPrivate*;
 
 // Callbacks
 alias AttrDataCopyFunc = void* delegate();
-alias AttrFilterFunc = bool delegate(Attribute attribute);
-alias FontsetForeachFunc = bool delegate(Fontset fontset, Font font);
+alias AttrFilterFunc = bool delegate(pango.attribute.Attribute attribute);
+alias FontsetForeachFunc = bool delegate(pango.fontset.Fontset fontset, pango.font.Font font);
 
 /**
  * Whether the segment should be shifted to center around the baseline.

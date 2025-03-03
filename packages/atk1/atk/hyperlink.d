@@ -6,7 +6,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.object;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 
@@ -19,7 +19,7 @@ import gobject.object;
  * allows specification of a start and end offset within the host
  * AtkHypertext object.
  */
-class Hyperlink : ObjectG, Action
+class Hyperlink : gobject.object.ObjectG, atk.action.Action
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -73,11 +73,11 @@ class Hyperlink : ObjectG, Action
    * Returns: an #AtkObject associated with this hyperlinks
    *   i-th anchor
    */
-  ObjectAtk getObject(int i)
+  atk.object.ObjectAtk getObject(int i)
   {
     AtkObject* _cretval;
     _cretval = atk_hyperlink_get_object(cast(AtkHyperlink*)cPtr, i);
-    auto _retval = ObjectG.getDObject!ObjectAtk(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class Hyperlink : ObjectG, Action
   {
     char* _cretval;
     _cretval = atk_hyperlink_get_uri(cast(AtkHyperlink*)cPtr, i);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -153,8 +153,8 @@ class Hyperlink : ObjectG, Action
    * The signal link-activated is emitted when a link is activated.
    *   hyperlink = the instance the signal is connected to
    */
-  alias LinkActivatedCallbackDlg = void delegate(Hyperlink hyperlink);
-  alias LinkActivatedCallbackFunc = void function(Hyperlink hyperlink);
+  alias LinkActivatedCallbackDlg = void delegate(atk.hyperlink.Hyperlink hyperlink);
+  alias LinkActivatedCallbackFunc = void function(atk.hyperlink.Hyperlink hyperlink);
 
   /**
    * Connect to LinkActivated signal.
@@ -170,7 +170,7 @@ class Hyperlink : ObjectG, Action
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto hyperlink = getVal!Hyperlink(_paramVals);
+      auto hyperlink = getVal!(atk.hyperlink.Hyperlink)(_paramVals);
       _dClosure.dlg(hyperlink);
     }
 

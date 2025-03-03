@@ -6,10 +6,10 @@ import arrow.output_stream;
 import arrow.record_batch_stream_writer;
 import arrow.schema;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class RecordBatchFileWriter : RecordBatchStreamWriter
+class RecordBatchFileWriter : arrow.record_batch_stream_writer.RecordBatchStreamWriter
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -28,7 +28,7 @@ class RecordBatchFileWriter : RecordBatchStreamWriter
     return getType();
   }
 
-  this(OutputStream sink, Schema schema)
+  this(arrow.output_stream.OutputStream sink, arrow.schema.Schema schema)
   {
     GArrowRecordBatchFileWriter* _cretval;
     GError *_err;

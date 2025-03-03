@@ -2,9 +2,9 @@ module pangocairo.font_map_mixin;
 
 public import pangocairo.font_map_iface_proxy;
 public import cairo.types;
-public import gid.global;
+public import gid.gid;
 public import gobject.object;
-public import pango.font_map : DPangoFontMap = FontMap;
+public import pango.font_map;
 public import pangocairo.c.functions;
 public import pangocairo.c.types;
 public import pangocairo.types;
@@ -25,11 +25,11 @@ template FontMapT()
    * Gets the type of Cairo font backend that fontmap uses.
    * Returns: the `cairo_font_type_t` cairo font backend type
    */
-  override FontType getFontType()
+  override cairo.types.FontType getFontType()
   {
     cairo_font_type_t _cretval;
     _cretval = pango_cairo_font_map_get_font_type(cast(PangoCairoFontMap*)cPtr);
-    FontType _retval = cast(FontType)_cretval;
+    cairo.types.FontType _retval = cast(cairo.types.FontType)_cretval;
     return _retval;
   }
 

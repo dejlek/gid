@@ -1,6 +1,6 @@
 module gio.socket_address;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_connectable;
@@ -15,7 +15,7 @@ import gobject.object;
  * API. This is an abstract class; use [gio.inet_socket_address.InetSocketAddress] for
  * internet sockets, or [gio.unix_socket_address.UnixSocketAddress] for UNIX domain sockets.
  */
-class SocketAddress : ObjectG, SocketConnectable
+class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConnectable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,11 +45,11 @@ class SocketAddress : ObjectG, SocketConnectable
    * Returns: a new #GSocketAddress if native could successfully
    *   be converted, otherwise %NULL
    */
-  static SocketAddress newFromNative(void* native, size_t len)
+  static gio.socket_address.SocketAddress newFromNative(void* native, size_t len)
   {
     GSocketAddress* _cretval;
     _cretval = g_socket_address_new_from_native(native, len);
-    auto _retval = ObjectG.getDObject!SocketAddress(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -57,11 +57,11 @@ class SocketAddress : ObjectG, SocketConnectable
    * Gets the socket family type of address.
    * Returns: the socket family type of address
    */
-  SocketFamily getFamily()
+  gio.types.SocketFamily getFamily()
   {
     GSocketFamily _cretval;
     _cretval = g_socket_address_get_family(cast(GSocketAddress*)cPtr);
-    SocketFamily _retval = cast(SocketFamily)_cretval;
+    gio.types.SocketFamily _retval = cast(gio.types.SocketFamily)_cretval;
     return _retval;
   }
 

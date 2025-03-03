@@ -1,7 +1,7 @@
 module gio.async_result_mixin;
 
 public import gio.async_result_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
@@ -87,11 +87,11 @@ template AsyncResultT()
    * Returns: a new reference to the source
    *   object for the res, or %NULL if there is none.
    */
-  override ObjectG getSourceObject()
+  override gobject.object.ObjectG getSourceObject()
   {
     ObjectC* _cretval;
     _cretval = g_async_result_get_source_object(cast(GAsyncResult*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 

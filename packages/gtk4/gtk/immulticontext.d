@@ -1,6 +1,6 @@
 module gtk.immulticontext;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.imcontext;
@@ -13,7 +13,7 @@ import gtk.types;
  * to implement their `im-module` property for switching between different
  * input methods.
  */
-class IMMulticontext : IMContext
+class IMMulticontext : gtk.imcontext.IMContext
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -51,7 +51,7 @@ class IMMulticontext : IMContext
   {
     const(char)* _cretval;
     _cretval = gtk_im_multicontext_get_context_id(cast(GtkIMMulticontext*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

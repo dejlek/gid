@@ -3,10 +3,10 @@ module arrow.timestamp_parser;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class TimestampParser : ObjectG
+class TimestampParser : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,7 +29,7 @@ class TimestampParser : ObjectG
   {
     const(char)* _cretval;
     _cretval = garrow_timestamp_parser_get_kind(cast(GArrowTimestampParser*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

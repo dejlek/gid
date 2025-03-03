@@ -1,6 +1,6 @@
 module glib.thread;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.error;
@@ -20,7 +20,7 @@ import gobject.boxed;
  * The structure is opaque -- none of its fields may be directly
  * accessed.
  */
-class Thread : Boxed
+class Thread : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -71,12 +71,12 @@ class Thread : Boxed
    *   func = a function to execute in the new thread
    * Returns: the new #GThread
    */
-  this(string name, ThreadFunc func)
+  this(string name, glib.types.ThreadFunc func)
   {
     extern(C) void* _funcCallback(void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(ThreadFunc*)data;
+      auto _dlg = cast(glib.types.ThreadFunc*)data;
 
       void* _retval = (*_dlg)();
       return _retval;
@@ -100,12 +100,12 @@ class Thread : Boxed
    *   func = a function to execute in the new thread
    * Returns: the new #GThread, or %NULL if an error occurred
    */
-  static Thread tryNew(string name, ThreadFunc func)
+  static glib.thread.Thread tryNew(string name, glib.types.ThreadFunc func)
   {
     extern(C) void* _funcCallback(void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(ThreadFunc*)data;
+      auto _dlg = cast(glib.types.ThreadFunc*)data;
 
       void* _retval = (*_dlg)();
       return _retval;
@@ -119,7 +119,7 @@ class Thread : Boxed
     _cretval = g_thread_try_new(_name, _funcCB, _func, &_err);
     if (_err)
       throw new ThreadException(_err);
-    auto _retval = _cretval ? new Thread(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.thread.Thread(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -145,9 +145,9 @@ class Thread : Boxed
     return _retval;
   }
 
-  static Quark errorQuark()
+  static glib.types.Quark errorQuark()
   {
-    Quark _retval;
+    glib.types.Quark _retval;
     _retval = g_thread_error_quark();
     return _retval;
   }
@@ -182,11 +182,11 @@ class Thread : Boxed
    * as [glib.thread.Thread.join]$(RPAREN) on these threads.
    * Returns: the #GThread representing the current thread
    */
-  static Thread self()
+  static glib.thread.Thread self()
   {
     GThread* _cretval;
     _cretval = g_thread_self();
-    auto _retval = _cretval ? new Thread(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.thread.Thread(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class ThreadException : ErrorG
 
   this(Code code, string msg)
   {
-    super(Thread.errorQuark, cast(int)code, msg);
+    super(glib.thread.Thread.errorQuark, cast(int)code, msg);
   }
 
   alias Code = GThreadError;

@@ -1,8 +1,7 @@
 module gtksource.file;
 
-import gid.global;
-import gio.file : DGioFile = File;
-import gio.file_mixin : DGioFileT = FileT;
+import gid.gid;
+import gio.file;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -19,7 +18,7 @@ import gtksource.types;
  * properties are updated. If an operation fails, the `GtkSourceFile` properties
  * have still the previous valid values.
  */
-class File : ObjectG
+class File : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -59,11 +58,11 @@ class File : ObjectG
     gtk_source_file_check_file_on_disk(cast(GtkSourceFile*)cPtr);
   }
 
-  CompressionType getCompressionType()
+  gtksource.types.CompressionType getCompressionType()
   {
     GtkSourceCompressionType _cretval;
     _cretval = gtk_source_file_get_compression_type(cast(GtkSourceFile*)cPtr);
-    CompressionType _retval = cast(CompressionType)_cretval;
+    gtksource.types.CompressionType _retval = cast(gtksource.types.CompressionType)_cretval;
     return _retval;
   }
 
@@ -72,27 +71,27 @@ class File : ObjectG
    * operation, the encoding is non-%NULL.
    * Returns: the character encoding.
    */
-  Encoding getEncoding()
+  gtksource.encoding.Encoding getEncoding()
   {
     const(GtkSourceEncoding)* _cretval;
     _cretval = gtk_source_file_get_encoding(cast(GtkSourceFile*)cPtr);
-    auto _retval = _cretval ? new Encoding(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
-  DGioFile getLocation()
+  gio.file.File getLocation()
   {
     GFile* _cretval;
     _cretval = gtk_source_file_get_location(cast(GtkSourceFile*)cPtr);
-    auto _retval = ObjectG.getDObject!DGioFile(cast(GFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
-  NewlineType getNewlineType()
+  gtksource.types.NewlineType getNewlineType()
   {
     GtkSourceNewlineType _cretval;
     _cretval = gtk_source_file_get_newline_type(cast(GtkSourceFile*)cPtr);
-    NewlineType _retval = cast(NewlineType)_cretval;
+    gtksource.types.NewlineType _retval = cast(gtksource.types.NewlineType)_cretval;
     return _retval;
   }
 
@@ -155,7 +154,7 @@ class File : ObjectG
    * Params:
    *   location = the new #GFile, or %NULL.
    */
-  void setLocation(DGioFile location)
+  void setLocation(gio.file.File location)
   {
     gtk_source_file_set_location(cast(GtkSourceFile*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.Dup) : null);
   }

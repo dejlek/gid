@@ -1,6 +1,6 @@
 module gobject.value;
 
-import gid.global;
+import gid.gid;
 import glib.variant;
 import gobject.boxed;
 import gobject.c.functions;
@@ -106,9 +106,9 @@ class Value : Boxed
    * Params:
    *   destValue = An initialized #GValue structure of the same type as src_value.
    */
-  void copy(Value destValue)
+  void copy(gobject.value.Value destValue)
   {
-    g_value_copy(cast(GValue*)cPtr, destValue ? cast(GValue*)destValue.cPtr(No.Dup) : null);
+    g_value_copy(cast(const(GValue)*)cPtr, destValue ? cast(GValue*)destValue.cPtr(No.Dup) : null);
   }
 
   /**
@@ -118,11 +118,11 @@ class Value : Boxed
    * Returns: object content of value,
    *   should be unreferenced when no longer needed.
    */
-  ObjectG dupObject()
+  gobject.object.ObjectG dupObject()
   {
     ObjectC* _cretval;
-    _cretval = g_value_dup_object(cast(GValue*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
+    _cretval = g_value_dup_object(cast(const(GValue)*)cPtr);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -133,8 +133,8 @@ class Value : Boxed
   string dupString()
   {
     char* _cretval;
-    _cretval = g_value_dup_string(cast(GValue*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    _cretval = g_value_dup_string(cast(const(GValue)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -144,11 +144,11 @@ class Value : Boxed
    * Returns: variant contents of value $(LPAREN)may be %NULL$(RPAREN);
    *   should be unreffed using [glib.variant.VariantG.unref] when no longer needed
    */
-  VariantG dupVariant()
+  glib.variant.VariantG dupVariant()
   {
     VariantC* _cretval;
-    _cretval = g_value_dup_variant(cast(GValue*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    _cretval = g_value_dup_variant(cast(const(GValue)*)cPtr);
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class Value : Boxed
   bool fitsPointer()
   {
     bool _retval;
-    _retval = g_value_fits_pointer(cast(GValue*)cPtr);
+    _retval = g_value_fits_pointer(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class Value : Boxed
   bool getBoolean()
   {
     bool _retval;
-    _retval = g_value_get_boolean(cast(GValue*)cPtr);
+    _retval = g_value_get_boolean(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class Value : Boxed
    */
   void* getBoxed()
   {
-    auto _retval = g_value_get_boxed(cast(GValue*)cPtr);
+    auto _retval = g_value_get_boxed(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class Value : Boxed
   char getChar()
   {
     char _retval;
-    _retval = g_value_get_char(cast(GValue*)cPtr);
+    _retval = g_value_get_char(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class Value : Boxed
   double getDouble()
   {
     double _retval;
-    _retval = g_value_get_double(cast(GValue*)cPtr);
+    _retval = g_value_get_double(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class Value : Boxed
   int getEnum()
   {
     int _retval;
-    _retval = g_value_get_enum(cast(GValue*)cPtr);
+    _retval = g_value_get_enum(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class Value : Boxed
   uint getFlags()
   {
     uint _retval;
-    _retval = g_value_get_flags(cast(GValue*)cPtr);
+    _retval = g_value_get_flags(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class Value : Boxed
   float getFloat()
   {
     float _retval;
-    _retval = g_value_get_float(cast(GValue*)cPtr);
+    _retval = g_value_get_float(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -248,10 +248,10 @@ class Value : Boxed
    * Get the contents of a %G_TYPE_GTYPE #GValue.
    * Returns: the #GType stored in value
    */
-  GType getGtype()
+  gobject.types.GType getGtype()
   {
-    GType _retval;
-    _retval = g_value_get_gtype(cast(GValue*)cPtr);
+    gobject.types.GType _retval;
+    _retval = g_value_get_gtype(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -262,7 +262,7 @@ class Value : Boxed
   int getInt()
   {
     int _retval;
-    _retval = g_value_get_int(cast(GValue*)cPtr);
+    _retval = g_value_get_int(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class Value : Boxed
   long getInt64()
   {
     long _retval;
-    _retval = g_value_get_int64(cast(GValue*)cPtr);
+    _retval = g_value_get_int64(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -284,7 +284,7 @@ class Value : Boxed
   glong getLong()
   {
     glong _retval;
-    _retval = g_value_get_long(cast(GValue*)cPtr);
+    _retval = g_value_get_long(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -292,11 +292,11 @@ class Value : Boxed
    * Get the contents of a %G_TYPE_OBJECT derived #GValue.
    * Returns: object contents of value
    */
-  ObjectG getObject()
+  gobject.object.ObjectG getObject()
   {
     ObjectC* _cretval;
-    _cretval = g_value_get_object(cast(GValue*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
+    _cretval = g_value_get_object(cast(const(GValue)*)cPtr);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -304,11 +304,11 @@ class Value : Boxed
    * Get the contents of a %G_TYPE_PARAM #GValue.
    * Returns: #GParamSpec content of value
    */
-  ParamSpec getParam()
+  gobject.param_spec.ParamSpec getParam()
   {
     GParamSpec* _cretval;
-    _cretval = g_value_get_param(cast(GValue*)cPtr);
-    auto _retval = _cretval ? new ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
+    _cretval = g_value_get_param(cast(const(GValue)*)cPtr);
+    auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -318,7 +318,7 @@ class Value : Boxed
    */
   void* getPointer()
   {
-    auto _retval = g_value_get_pointer(cast(GValue*)cPtr);
+    auto _retval = g_value_get_pointer(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -329,7 +329,7 @@ class Value : Boxed
   byte getSchar()
   {
     byte _retval;
-    _retval = g_value_get_schar(cast(GValue*)cPtr);
+    _retval = g_value_get_schar(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -340,8 +340,8 @@ class Value : Boxed
   string getString()
   {
     const(char)* _cretval;
-    _cretval = g_value_get_string(cast(GValue*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    _cretval = g_value_get_string(cast(const(GValue)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -352,7 +352,7 @@ class Value : Boxed
   ubyte getUchar()
   {
     ubyte _retval;
-    _retval = g_value_get_uchar(cast(GValue*)cPtr);
+    _retval = g_value_get_uchar(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -363,7 +363,7 @@ class Value : Boxed
   uint getUint()
   {
     uint _retval;
-    _retval = g_value_get_uint(cast(GValue*)cPtr);
+    _retval = g_value_get_uint(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -374,7 +374,7 @@ class Value : Boxed
   ulong getUint64()
   {
     ulong _retval;
-    _retval = g_value_get_uint64(cast(GValue*)cPtr);
+    _retval = g_value_get_uint64(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -385,7 +385,7 @@ class Value : Boxed
   gulong getUlong()
   {
     gulong _retval;
-    _retval = g_value_get_ulong(cast(GValue*)cPtr);
+    _retval = g_value_get_ulong(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -393,11 +393,11 @@ class Value : Boxed
    * Get the contents of a variant #GValue.
    * Returns: variant contents of value $(LPAREN)may be %NULL$(RPAREN)
    */
-  VariantG getVariant()
+  glib.variant.VariantG getVariant()
   {
     VariantC* _cretval;
-    _cretval = g_value_get_variant(cast(GValue*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    _cretval = g_value_get_variant(cast(const(GValue)*)cPtr);
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -407,11 +407,11 @@ class Value : Boxed
    *   gType = Type the #GValue should hold values of.
    * Returns: the #GValue structure that has been passed in
    */
-  Value init_(GType gType)
+  gobject.value.Value init_(gobject.types.GType gType)
   {
     GValue* _cretval;
     _cretval = g_value_init(cast(GValue*)cPtr, gType);
-    auto _retval = _cretval ? new Value(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -425,7 +425,7 @@ class Value : Boxed
    * Params:
    *   instance = the instance
    */
-  void initFromInstance(TypeInstance instance)
+  void initFromInstance(gobject.type_instance.TypeInstance instance)
   {
     g_value_init_from_instance(cast(GValue*)cPtr, instance ? cast(GTypeInstance*)instance.cPtr : null);
   }
@@ -438,7 +438,7 @@ class Value : Boxed
    */
   void* peekPointer()
   {
-    auto _retval = g_value_peek_pointer(cast(GValue*)cPtr);
+    auto _retval = g_value_peek_pointer(cast(const(GValue)*)cPtr);
     return _retval;
   }
 
@@ -447,11 +447,11 @@ class Value : Boxed
    * $(LPAREN)as if the value had just been initialized$(RPAREN).
    * Returns: the #GValue structure that has been passed in
    */
-  Value reset()
+  gobject.value.Value reset()
   {
     GValue* _cretval;
     _cretval = g_value_reset(cast(GValue*)cPtr);
-    auto _retval = _cretval ? new Value(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -544,7 +544,7 @@ class Value : Boxed
    * Params:
    *   vGtype = #GType to be set
    */
-  void setGtype(GType vGtype)
+  void setGtype(gobject.types.GType vGtype)
   {
     g_value_set_gtype(cast(GValue*)cPtr, vGtype);
   }
@@ -616,7 +616,7 @@ class Value : Boxed
    * Params:
    *   vObject = object value to be set
    */
-  void setObject(ObjectG vObject)
+  void setObject(gobject.object.ObjectG vObject)
   {
     g_value_set_object(cast(GValue*)cPtr, vObject ? cast(ObjectC*)vObject.cPtr(No.Dup) : null);
   }
@@ -626,7 +626,7 @@ class Value : Boxed
    * Params:
    *   param = the #GParamSpec to be set
    */
-  void setParam(ParamSpec param)
+  void setParam(gobject.param_spec.ParamSpec param)
   {
     g_value_set_param(cast(GValue*)cPtr, param ? cast(GParamSpec*)param.cPtr(No.Dup) : null);
   }
@@ -748,7 +748,7 @@ class Value : Boxed
    * Params:
    *   variant = a #GVariant, or %NULL
    */
-  void setVariant(VariantG variant)
+  void setVariant(glib.variant.VariantG variant)
   {
     g_value_set_variant(cast(GValue*)cPtr, variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
   }
@@ -768,7 +768,7 @@ class Value : Boxed
   {
     char* _cretval;
     _cretval = g_value_steal_string(cast(GValue*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -808,7 +808,7 @@ class Value : Boxed
    * Params:
    *   variant = a #GVariant, or %NULL
    */
-  void takeVariant(VariantG variant)
+  void takeVariant(glib.variant.VariantG variant)
   {
     g_value_take_variant(cast(GValue*)cPtr, variant ? cast(VariantC*)variant.cPtr(Yes.Dup) : null);
   }
@@ -826,10 +826,10 @@ class Value : Boxed
    * Returns: Whether a transformation rule was found and could be applied.
    *   Upon failing transformations, dest_value is left untouched.
    */
-  bool transform(Value destValue)
+  bool transform(gobject.value.Value destValue)
   {
     bool _retval;
-    _retval = g_value_transform(cast(GValue*)cPtr, destValue ? cast(GValue*)destValue.cPtr(No.Dup) : null);
+    _retval = g_value_transform(cast(const(GValue)*)cPtr, destValue ? cast(GValue*)destValue.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -852,7 +852,7 @@ class Value : Boxed
    *   destType = destination type for copying.
    * Returns: %TRUE if [gobject.value.Value.copy] is possible with src_type and dest_type.
    */
-  static bool typeCompatible(GType srcType, GType destType)
+  static bool typeCompatible(gobject.types.GType srcType, gobject.types.GType destType)
   {
     bool _retval;
     _retval = g_value_type_compatible(srcType, destType);
@@ -869,7 +869,7 @@ class Value : Boxed
    *   destType = Target type.
    * Returns: %TRUE if the transformation is possible, %FALSE otherwise.
    */
-  static bool typeTransformable(GType srcType, GType destType)
+  static bool typeTransformable(gobject.types.GType srcType, gobject.types.GType destType)
   {
     bool _retval;
     _retval = g_value_type_transformable(srcType, destType);

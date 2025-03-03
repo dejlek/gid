@@ -1,6 +1,6 @@
 module gtk.search_entry;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -50,7 +50,7 @@ import gtk.widget;
  * ## Accessibility
  * `GtkSearchEntry` uses the %GTK_ACCESSIBLE_ROLE_SEARCH_BOX role.
  */
-class SearchEntry : Widget, Editable
+class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -86,11 +86,11 @@ class SearchEntry : Widget, Editable
    * Gets the input purpose for entry.
    * Returns: The input hints
    */
-  InputHints getInputHints()
+  gtk.types.InputHints getInputHints()
   {
     GtkInputHints _cretval;
     _cretval = gtk_search_entry_get_input_hints(cast(GtkSearchEntry*)cPtr);
-    InputHints _retval = cast(InputHints)_cretval;
+    gtk.types.InputHints _retval = cast(gtk.types.InputHints)_cretval;
     return _retval;
   }
 
@@ -98,11 +98,11 @@ class SearchEntry : Widget, Editable
    * Gets the input purpose of entry.
    * Returns: The input hints
    */
-  InputPurpose getInputPurpose()
+  gtk.types.InputPurpose getInputPurpose()
   {
     GtkInputPurpose _cretval;
     _cretval = gtk_search_entry_get_input_purpose(cast(GtkSearchEntry*)cPtr);
-    InputPurpose _retval = cast(InputPurpose)_cretval;
+    gtk.types.InputPurpose _retval = cast(gtk.types.InputPurpose)_cretval;
     return _retval;
   }
 
@@ -110,11 +110,11 @@ class SearchEntry : Widget, Editable
    * Gets the widget that entry is capturing key events from.
    * Returns: The key capture widget.
    */
-  Widget getKeyCaptureWidget()
+  gtk.widget.Widget getKeyCaptureWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_entry_get_key_capture_widget(cast(GtkSearchEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class SearchEntry : Widget, Editable
   {
     const(char)* _cretval;
     _cretval = gtk_search_entry_get_placeholder_text(cast(GtkSearchEntry*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class SearchEntry : Widget, Editable
    * Params:
    *   hints = the new input hints
    */
-  void setInputHints(InputHints hints)
+  void setInputHints(gtk.types.InputHints hints)
   {
     gtk_search_entry_set_input_hints(cast(GtkSearchEntry*)cPtr, hints);
   }
@@ -157,7 +157,7 @@ class SearchEntry : Widget, Editable
    * Params:
    *   purpose = the new input purpose
    */
-  void setInputPurpose(InputPurpose purpose)
+  void setInputPurpose(gtk.types.InputPurpose purpose)
   {
     gtk_search_entry_set_input_purpose(cast(GtkSearchEntry*)cPtr, purpose);
   }
@@ -180,7 +180,7 @@ class SearchEntry : Widget, Editable
    * Params:
    *   widget = a `GtkWidget`
    */
-  void setKeyCaptureWidget(Widget widget)
+  void setKeyCaptureWidget(gtk.widget.Widget widget)
   {
     gtk_search_entry_set_key_capture_widget(cast(GtkSearchEntry*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -212,8 +212,8 @@ class SearchEntry : Widget, Editable
    * The keybindings for this signal are all forms of the Enter key.
    *   searchEntry = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(SearchEntry searchEntry);
-  alias ActivateCallbackFunc = void function(SearchEntry searchEntry);
+  alias ActivateCallbackDlg = void delegate(gtk.search_entry.SearchEntry searchEntry);
+  alias ActivateCallbackFunc = void function(gtk.search_entry.SearchEntry searchEntry);
 
   /**
    * Connect to Activate signal.
@@ -229,7 +229,7 @@ class SearchEntry : Widget, Editable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto searchEntry = getVal!SearchEntry(_paramVals);
+      auto searchEntry = getVal!(gtk.search_entry.SearchEntry)(_paramVals);
       _dClosure.dlg(searchEntry);
     }
 
@@ -246,8 +246,8 @@ class SearchEntry : Widget, Editable
    * The default bindings for this signal is Ctrl-g.
    *   searchEntry = the instance the signal is connected to
    */
-  alias NextMatchCallbackDlg = void delegate(SearchEntry searchEntry);
-  alias NextMatchCallbackFunc = void function(SearchEntry searchEntry);
+  alias NextMatchCallbackDlg = void delegate(gtk.search_entry.SearchEntry searchEntry);
+  alias NextMatchCallbackFunc = void function(gtk.search_entry.SearchEntry searchEntry);
 
   /**
    * Connect to NextMatch signal.
@@ -263,7 +263,7 @@ class SearchEntry : Widget, Editable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto searchEntry = getVal!SearchEntry(_paramVals);
+      auto searchEntry = getVal!(gtk.search_entry.SearchEntry)(_paramVals);
       _dClosure.dlg(searchEntry);
     }
 
@@ -280,8 +280,8 @@ class SearchEntry : Widget, Editable
    * The default bindings for this signal is Ctrl-Shift-g.
    *   searchEntry = the instance the signal is connected to
    */
-  alias PreviousMatchCallbackDlg = void delegate(SearchEntry searchEntry);
-  alias PreviousMatchCallbackFunc = void function(SearchEntry searchEntry);
+  alias PreviousMatchCallbackDlg = void delegate(gtk.search_entry.SearchEntry searchEntry);
+  alias PreviousMatchCallbackFunc = void function(gtk.search_entry.SearchEntry searchEntry);
 
   /**
    * Connect to PreviousMatch signal.
@@ -297,7 +297,7 @@ class SearchEntry : Widget, Editable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto searchEntry = getVal!SearchEntry(_paramVals);
+      auto searchEntry = getVal!(gtk.search_entry.SearchEntry)(_paramVals);
       _dClosure.dlg(searchEntry);
     }
 
@@ -311,8 +311,8 @@ class SearchEntry : Widget, Editable
    * property.
    *   searchEntry = the instance the signal is connected to
    */
-  alias SearchChangedCallbackDlg = void delegate(SearchEntry searchEntry);
-  alias SearchChangedCallbackFunc = void function(SearchEntry searchEntry);
+  alias SearchChangedCallbackDlg = void delegate(gtk.search_entry.SearchEntry searchEntry);
+  alias SearchChangedCallbackFunc = void function(gtk.search_entry.SearchEntry searchEntry);
 
   /**
    * Connect to SearchChanged signal.
@@ -328,7 +328,7 @@ class SearchEntry : Widget, Editable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto searchEntry = getVal!SearchEntry(_paramVals);
+      auto searchEntry = getVal!(gtk.search_entry.SearchEntry)(_paramVals);
       _dClosure.dlg(searchEntry);
     }
 
@@ -340,8 +340,8 @@ class SearchEntry : Widget, Editable
    * Emitted when the user initiated a search on the entry.
    *   searchEntry = the instance the signal is connected to
    */
-  alias SearchStartedCallbackDlg = void delegate(SearchEntry searchEntry);
-  alias SearchStartedCallbackFunc = void function(SearchEntry searchEntry);
+  alias SearchStartedCallbackDlg = void delegate(gtk.search_entry.SearchEntry searchEntry);
+  alias SearchStartedCallbackFunc = void function(gtk.search_entry.SearchEntry searchEntry);
 
   /**
    * Connect to SearchStarted signal.
@@ -357,7 +357,7 @@ class SearchEntry : Widget, Editable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto searchEntry = getVal!SearchEntry(_paramVals);
+      auto searchEntry = getVal!(gtk.search_entry.SearchEntry)(_paramVals);
       _dClosure.dlg(searchEntry);
     }
 
@@ -373,8 +373,8 @@ class SearchEntry : Widget, Editable
    * The default bindings for this signal is Escape.
    *   searchEntry = the instance the signal is connected to
    */
-  alias StopSearchCallbackDlg = void delegate(SearchEntry searchEntry);
-  alias StopSearchCallbackFunc = void function(SearchEntry searchEntry);
+  alias StopSearchCallbackDlg = void delegate(gtk.search_entry.SearchEntry searchEntry);
+  alias StopSearchCallbackFunc = void function(gtk.search_entry.SearchEntry searchEntry);
 
   /**
    * Connect to StopSearch signal.
@@ -390,7 +390,7 @@ class SearchEntry : Widget, Editable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto searchEntry = getVal!SearchEntry(_paramVals);
+      auto searchEntry = getVal!(gtk.search_entry.SearchEntry)(_paramVals);
       _dClosure.dlg(searchEntry);
     }
 

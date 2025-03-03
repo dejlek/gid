@@ -1,6 +1,6 @@
 module glib.variant_builder;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -15,7 +15,7 @@ import gobject.boxed;
  * #GVariantBuilder is not threadsafe in any way.  Do not attempt to
  * access it from more than one thread.
  */
-class VariantBuilder : Boxed
+class VariantBuilder : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -51,10 +51,10 @@ class VariantBuilder : Boxed
    *   type = a container type
    * Returns: a #GVariantBuilder
    */
-  this(VariantType type)
+  this(glib.variant_type.VariantType type)
   {
     GVariantBuilder* _cretval;
-    _cretval = g_variant_builder_new(type ? cast(GVariantType*)type.cPtr(No.Dup) : null);
+    _cretval = g_variant_builder_new(type ? cast(const(GVariantType)*)type.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -70,7 +70,7 @@ class VariantBuilder : Boxed
    * Params:
    *   value = a #GVariant
    */
-  void addValue(VariantG value)
+  void addValue(glib.variant.VariantG value)
   {
     g_variant_builder_add_value(cast(GVariantBuilder*)cPtr, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
   }
@@ -105,11 +105,11 @@ class VariantBuilder : Boxed
    * the empty array.
    * Returns: a new, floating, #GVariant
    */
-  VariantG end()
+  glib.variant.VariantG end()
   {
     VariantC* _cretval;
     _cretval = g_variant_builder_end(cast(GVariantBuilder*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -147,8 +147,8 @@ class VariantBuilder : Boxed
    * Params:
    *   type = the #GVariantType of the container
    */
-  void open(VariantType type)
+  void open(glib.variant_type.VariantType type)
   {
-    g_variant_builder_open(cast(GVariantBuilder*)cPtr, type ? cast(GVariantType*)type.cPtr(No.Dup) : null);
+    g_variant_builder_open(cast(GVariantBuilder*)cPtr, type ? cast(const(GVariantType)*)type.cPtr(No.Dup) : null);
   }
 }

@@ -1,6 +1,6 @@
 module gio.bytes_icon;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.icon;
@@ -15,7 +15,7 @@ import gobject.object;
  * `GBytesIcon` specifies an image held in memory in a common format $(LPAREN)usually
  * PNG$(RPAREN) to be used as icon.
  */
-class BytesIcon : ObjectG, Icon, LoadableIcon
+class BytesIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.LoadableIcon
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -46,7 +46,7 @@ class BytesIcon : ObjectG, Icon, LoadableIcon
    * Returns: a #GIcon for the given
    *   bytes.
    */
-  this(Bytes bytes)
+  this(glib.bytes.Bytes bytes)
   {
     GIcon* _cretval;
     _cretval = g_bytes_icon_new(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
@@ -57,11 +57,11 @@ class BytesIcon : ObjectG, Icon, LoadableIcon
    * Gets the #GBytes associated with the given icon.
    * Returns: a #GBytes.
    */
-  Bytes getBytes()
+  glib.bytes.Bytes getBytes()
   {
     GBytes* _cretval;
     _cretval = g_bytes_icon_get_bytes(cast(GBytesIcon*)cPtr);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

@@ -1,6 +1,6 @@
 module gtksource.style_scheme;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -19,7 +19,7 @@ import gtksource.types;
  * The two style schemes with IDs "classic" and "tango" follow more closely the
  * GTK theme $(LPAREN)for example for the background color$(RPAREN).
  */
-class StyleScheme : ObjectG
+class StyleScheme : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -60,7 +60,7 @@ class StyleScheme : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_style_scheme_get_description(cast(GtkSourceStyleScheme*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -68,7 +68,7 @@ class StyleScheme : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_style_scheme_get_filename(cast(GtkSourceStyleScheme*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class StyleScheme : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_style_scheme_get_id(cast(GtkSourceStyleScheme*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class StyleScheme : ObjectG
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_source_style_scheme_get_metadata(cast(GtkSourceStyleScheme*)cPtr, _name);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -101,16 +101,16 @@ class StyleScheme : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_style_scheme_get_name(cast(GtkSourceStyleScheme*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
-  Style getStyle(string styleId)
+  gtksource.style.Style getStyle(string styleId)
   {
     GtkSourceStyle* _cretval;
     const(char)* _styleId = styleId.toCString(No.Alloc);
     _cretval = gtk_source_style_scheme_get_style(cast(GtkSourceStyleScheme*)cPtr, _styleId);
-    auto _retval = ObjectG.getDObject!Style(cast(GtkSourceStyle*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.style.Style)(cast(GtkSourceStyle*)_cretval, No.Take);
     return _retval;
   }
 }

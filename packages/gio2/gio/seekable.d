@@ -1,7 +1,7 @@
 module gio.seekable;
 
 public import gio.seekable_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -64,7 +64,7 @@ interface Seekable
    *   has occurred, this function will return %FALSE and set error
    *   appropriately if present.
    */
-  bool seek(long offset, SeekType type, Cancellable cancellable);
+  bool seek(long offset, glib.types.SeekType type, gio.cancellable.Cancellable cancellable);
 
   /**
    * Tells the current position within the stream.
@@ -89,5 +89,5 @@ interface Seekable
    *   has occurred, this function will return %FALSE and set error
    *   appropriately if present.
    */
-  bool truncate(long offset, Cancellable cancellable);
+  bool truncate(long offset, gio.cancellable.Cancellable cancellable);
 }

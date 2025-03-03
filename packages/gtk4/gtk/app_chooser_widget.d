@@ -1,8 +1,7 @@
 module gtk.app_chooser_widget;
 
-import gid.global;
+import gid.gid;
 import gio.app_info;
-import gio.app_info_mixin;
 import gobject.dclosure;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -41,7 +40,7 @@ import gtk.widget;
  *   implemented according to the design of each platform and/or
  *   application requiring them.
  */
-class AppChooserWidget : Widget, AppChooser
+class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -90,7 +89,7 @@ class AppChooserWidget : Widget, AppChooser
   {
     const(char)* _cretval;
     _cretval = gtk_app_chooser_widget_get_default_text(cast(GtkAppChooserWidget*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -252,8 +251,8 @@ class AppChooserWidget : Widget, AppChooser
    *   application = the activated `GAppInfo`
    *   appChooserWidget = the instance the signal is connected to
    */
-  alias ApplicationActivatedCallbackDlg = void delegate(AppInfo application, AppChooserWidget appChooserWidget);
-  alias ApplicationActivatedCallbackFunc = void function(AppInfo application, AppChooserWidget appChooserWidget);
+  alias ApplicationActivatedCallbackDlg = void delegate(gio.app_info.AppInfo application, gtk.app_chooser_widget.AppChooserWidget appChooserWidget);
+  alias ApplicationActivatedCallbackFunc = void function(gio.app_info.AppInfo application, gtk.app_chooser_widget.AppChooserWidget appChooserWidget);
 
   /**
    * Connect to ApplicationActivated signal.
@@ -269,8 +268,8 @@ class AppChooserWidget : Widget, AppChooser
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto appChooserWidget = getVal!AppChooserWidget(_paramVals);
-      auto application = getVal!AppInfo(&_paramVals[1]);
+      auto appChooserWidget = getVal!(gtk.app_chooser_widget.AppChooserWidget)(_paramVals);
+      auto application = getVal!(gio.app_info.AppInfo)(&_paramVals[1]);
       _dClosure.dlg(application, appChooserWidget);
     }
 
@@ -284,8 +283,8 @@ class AppChooserWidget : Widget, AppChooser
    *   application = the selected `GAppInfo`
    *   appChooserWidget = the instance the signal is connected to
    */
-  alias ApplicationSelectedCallbackDlg = void delegate(AppInfo application, AppChooserWidget appChooserWidget);
-  alias ApplicationSelectedCallbackFunc = void function(AppInfo application, AppChooserWidget appChooserWidget);
+  alias ApplicationSelectedCallbackDlg = void delegate(gio.app_info.AppInfo application, gtk.app_chooser_widget.AppChooserWidget appChooserWidget);
+  alias ApplicationSelectedCallbackFunc = void function(gio.app_info.AppInfo application, gtk.app_chooser_widget.AppChooserWidget appChooserWidget);
 
   /**
    * Connect to ApplicationSelected signal.
@@ -301,8 +300,8 @@ class AppChooserWidget : Widget, AppChooser
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto appChooserWidget = getVal!AppChooserWidget(_paramVals);
-      auto application = getVal!AppInfo(&_paramVals[1]);
+      auto appChooserWidget = getVal!(gtk.app_chooser_widget.AppChooserWidget)(_paramVals);
+      auto application = getVal!(gio.app_info.AppInfo)(&_paramVals[1]);
       _dClosure.dlg(application, appChooserWidget);
     }
 

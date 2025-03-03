@@ -1,6 +1,6 @@
 module gtk.expression;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gobject.types;
 import gobject.value;
@@ -177,12 +177,12 @@ class Expression
    *     the evaluation of `self`
    * Returns: a `GtkExpressionWatch`
    */
-  ExpressionWatch bind(ObjectG target, string property, ObjectG this_)
+  gtk.expression_watch.ExpressionWatch bind(gobject.object.ObjectG target, string property, gobject.object.ObjectG this_)
   {
     GtkExpressionWatch* _cretval;
     const(char)* _property = property.toCString(No.Alloc);
     _cretval = gtk_expression_bind(cast(GtkExpression*)cPtr, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _property, this_ ? cast(ObjectC*)this_.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new ExpressionWatch(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.expression_watch.ExpressionWatch(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class Expression
    *   value = an empty `GValue`
    * Returns: `TRUE` if the expression could be evaluated
    */
-  bool evaluate(ObjectG this_, Value value)
+  bool evaluate(gobject.object.ObjectG this_, gobject.value.Value value)
   {
     bool _retval;
     _retval = gtk_expression_evaluate(cast(GtkExpression*)cPtr, this_ ? cast(ObjectC*)this_.cPtr(No.Dup) : null, value ? cast(GValue*)value.cPtr(No.Dup) : null);
@@ -213,9 +213,9 @@ class Expression
    * of this expression.
    * Returns: The type returned from [gtk.expression.Expression.evaluate]
    */
-  GType getValueType()
+  gobject.types.GType getValueType()
   {
-    GType _retval;
+    gobject.types.GType _retval;
     _retval = gtk_expression_get_value_type(cast(GtkExpression*)cPtr);
     return _retval;
   }
@@ -252,11 +252,11 @@ class Expression
    *   [gtk.expression_watch.ExpressionWatch.unwatch]. You should call [gtk.expression_watch.ExpressionWatch.ref_]
    *   if you want to keep the watch around.
    */
-  ExpressionWatch watch(ObjectG this_, ExpressionNotify notify)
+  gtk.expression_watch.ExpressionWatch watch(gobject.object.ObjectG this_, gtk.types.ExpressionNotify notify)
   {
     extern(C) void _notifyCallback(void* userData)
     {
-      auto _dlg = cast(ExpressionNotify*)userData;
+      auto _dlg = cast(gtk.types.ExpressionNotify*)userData;
 
       (*_dlg)();
     }
@@ -266,7 +266,7 @@ class Expression
     auto _notify = notify ? freezeDelegate(cast(void*)&notify) : null;
     GDestroyNotify _notifyDestroyCB = notify ? &thawDelegate : null;
     _cretval = gtk_expression_watch(cast(GtkExpression*)cPtr, this_ ? cast(ObjectC*)this_.cPtr(No.Dup) : null, _notifyCB, _notify, _notifyDestroyCB);
-    auto _retval = _cretval ? new ExpressionWatch(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.expression_watch.ExpressionWatch(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

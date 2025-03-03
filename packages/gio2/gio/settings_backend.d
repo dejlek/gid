@@ -1,6 +1,6 @@
 module gio.settings_backend;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -27,7 +27,7 @@ import gobject.object;
  * C preprocessor symbol `G_SETTINGS_ENABLE_BACKEND` before including
  * `gio/gsettingsbackend.h`.
  */
-class SettingsBackend : ObjectG
+class SettingsBackend : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -55,11 +55,11 @@ class SettingsBackend : ObjectG
    *   which will be a dummy $(LPAREN)memory$(RPAREN) settings backend if no other settings
    *   backend is available.
    */
-  static SettingsBackend getDefault()
+  static gio.settings_backend.SettingsBackend getDefault()
   {
     GSettingsBackend* _cretval;
     _cretval = g_settings_backend_get_default();
-    auto _retval = ObjectG.getDObject!SettingsBackend(cast(GSettingsBackend*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.settings_backend.SettingsBackend)(cast(GSettingsBackend*)_cretval, Yes.Take);
     return _retval;
   }
 

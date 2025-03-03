@@ -1,6 +1,6 @@
 module soup.auth_domain_basic;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import soup.auth_domain;
 import soup.c.functions;
@@ -13,7 +13,7 @@ import soup.types;
  * #SoupAuthDomainBasic handles the server side of HTTP "Basic" $(LPAREN)ie,
  * cleartext password$(RPAREN) authentication.
  */
-class AuthDomainBasic : AuthDomain
+class AuthDomainBasic : soup.auth_domain.AuthDomain
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,15 +45,15 @@ class AuthDomainBasic : AuthDomain
    * Params:
    *   callback = the callback
    */
-  void setAuthCallback(AuthDomainBasicAuthCallback callback)
+  void setAuthCallback(soup.types.AuthDomainBasicAuthCallback callback)
   {
     extern(C) bool _callbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password, void* userData)
     {
-      auto _dlg = cast(AuthDomainBasicAuthCallback*)userData;
+      auto _dlg = cast(soup.types.AuthDomainBasicAuthCallback*)userData;
       string _username = username.fromCString(No.Free);
       string _password = password.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!AuthDomainBasic(cast(void*)domain, No.Take), ObjectG.getDObject!ServerMessage(cast(void*)msg, No.Take), _username, _password);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain_basic.AuthDomainBasic)(cast(void*)domain, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username, _password);
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;

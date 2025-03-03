@@ -1,6 +1,6 @@
 module pango.fontset;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import pango.c.functions;
 import pango.c.types;
@@ -15,7 +15,7 @@ import pango.types;
  * component font for a particular Unicode character, and for finding a
  * composite set of metrics for the entire fontset.
  */
-class Fontset : ObjectG
+class Fontset : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -41,13 +41,13 @@ class Fontset : ObjectG
    * Params:
    *   func = Callback function
    */
-  void foreach_(FontsetForeachFunc func)
+  void foreach_(pango.types.FontsetForeachFunc func)
   {
     extern(C) bool _funcCallback(PangoFontset* fontset, PangoFont* font, void* userData)
     {
-      auto _dlg = cast(FontsetForeachFunc*)userData;
+      auto _dlg = cast(pango.types.FontsetForeachFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!Fontset(cast(void*)fontset, No.Take), ObjectG.getDObject!Font(cast(void*)font, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(pango.fontset.Fontset)(cast(void*)fontset, No.Take), ObjectG.getDObject!(pango.font.Font)(cast(void*)font, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -63,11 +63,11 @@ class Fontset : ObjectG
    *   wc = a Unicode character
    * Returns: a `PangoFont`
    */
-  Font getFont(uint wc)
+  pango.font.Font getFont(uint wc)
   {
     PangoFont* _cretval;
     _cretval = pango_fontset_get_font(cast(PangoFontset*)cPtr, wc);
-    auto _retval = ObjectG.getDObject!Font(cast(PangoFont*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -75,11 +75,11 @@ class Fontset : ObjectG
    * Get overall metric information for the fonts in the fontset.
    * Returns: a `PangoFontMetrics` object
    */
-  FontMetrics getMetrics()
+  pango.font_metrics.FontMetrics getMetrics()
   {
     PangoFontMetrics* _cretval;
     _cretval = pango_fontset_get_metrics(cast(PangoFontset*)cPtr);
-    auto _retval = _cretval ? new FontMetrics(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.font_metrics.FontMetrics(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

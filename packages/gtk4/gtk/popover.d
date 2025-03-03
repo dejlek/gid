@@ -1,7 +1,7 @@
 module gtk.popover;
 
 import gdk.rectangle;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -85,7 +85,7 @@ import gtk.widget;
  * solid, no border-radius, only one border width $(LPAREN)border-bottom-width is
  * used$(RPAREN) and no box-shadow.
  */
-class Popover : Widget, Native, ShortcutManager
+class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.ShortcutManager
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -146,11 +146,11 @@ class Popover : Widget, Native, ShortcutManager
    * Gets the child widget of popover.
    * Returns: the child widget of popover
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_get_child(cast(GtkPopover*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -199,12 +199,12 @@ class Popover : Widget, Native, ShortcutManager
    *   rect = location to store the rectangle
    * Returns: %TRUE if a rectangle to point to was set.
    */
-  bool getPointingTo(out Rectangle rect)
+  bool getPointingTo(out gdk.rectangle.Rectangle rect)
   {
     bool _retval;
     GdkRectangle _rect;
     _retval = gtk_popover_get_pointing_to(cast(GtkPopover*)cPtr, &_rect);
-    rect = new Rectangle(cast(void*)&_rect, No.Take);
+    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
 
@@ -212,11 +212,11 @@ class Popover : Widget, Native, ShortcutManager
    * Returns the preferred position of popover.
    * Returns: The preferred position.
    */
-  PositionType getPosition()
+  gtk.types.PositionType getPosition()
   {
     GtkPositionType _cretval;
     _cretval = gtk_popover_get_position(cast(GtkPopover*)cPtr);
-    PositionType _retval = cast(PositionType)_cretval;
+    gtk.types.PositionType _retval = cast(gtk.types.PositionType)_cretval;
     return _retval;
   }
 
@@ -283,7 +283,7 @@ class Popover : Widget, Native, ShortcutManager
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_popover_set_child(cast(GtkPopover*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -297,7 +297,7 @@ class Popover : Widget, Native, ShortcutManager
    *   widget = a child widget of popover to set as
    *     the default, or %NULL to unset the default widget for the popover
    */
-  void setDefaultWidget(Widget widget)
+  void setDefaultWidget(gtk.widget.Widget widget)
   {
     gtk_popover_set_default_widget(cast(GtkPopover*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -343,9 +343,9 @@ class Popover : Widget, Native, ShortcutManager
    * Params:
    *   rect = rectangle to point to
    */
-  void setPointingTo(Rectangle rect)
+  void setPointingTo(gdk.rectangle.Rectangle rect)
   {
-    gtk_popover_set_pointing_to(cast(GtkPopover*)cPtr, rect ? cast(GdkRectangle*)rect.cPtr(No.Dup) : null);
+    gtk_popover_set_pointing_to(cast(GtkPopover*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null);
   }
 
   /**
@@ -358,7 +358,7 @@ class Popover : Widget, Native, ShortcutManager
    * Params:
    *   position = preferred popover position
    */
-  void setPosition(PositionType position)
+  void setPosition(gtk.types.PositionType position)
   {
     gtk_popover_set_position(cast(GtkPopover*)cPtr, position);
   }
@@ -368,8 +368,8 @@ class Popover : Widget, Native, ShortcutManager
    * This is a [keybinding signal](class.SignalAction.html).
    *   popover = the instance the signal is connected to
    */
-  alias ActivateDefaultCallbackDlg = void delegate(Popover popover);
-  alias ActivateDefaultCallbackFunc = void function(Popover popover);
+  alias ActivateDefaultCallbackDlg = void delegate(gtk.popover.Popover popover);
+  alias ActivateDefaultCallbackFunc = void function(gtk.popover.Popover popover);
 
   /**
    * Connect to ActivateDefault signal.
@@ -385,7 +385,7 @@ class Popover : Widget, Native, ShortcutManager
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto popover = getVal!Popover(_paramVals);
+      auto popover = getVal!(gtk.popover.Popover)(_paramVals);
       _dClosure.dlg(popover);
     }
 
@@ -397,8 +397,8 @@ class Popover : Widget, Native, ShortcutManager
    * Emitted when the popover is closed.
    *   popover = the instance the signal is connected to
    */
-  alias ClosedCallbackDlg = void delegate(Popover popover);
-  alias ClosedCallbackFunc = void function(Popover popover);
+  alias ClosedCallbackDlg = void delegate(gtk.popover.Popover popover);
+  alias ClosedCallbackFunc = void function(gtk.popover.Popover popover);
 
   /**
    * Connect to Closed signal.
@@ -414,7 +414,7 @@ class Popover : Widget, Native, ShortcutManager
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto popover = getVal!Popover(_paramVals);
+      auto popover = getVal!(gtk.popover.Popover)(_paramVals);
       _dClosure.dlg(popover);
     }
 

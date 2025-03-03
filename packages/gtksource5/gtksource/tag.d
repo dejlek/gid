@@ -1,6 +1,6 @@
 module gtksource.tag;
 
-import gid.global;
+import gid.gid;
 import gtk.text_tag;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -13,7 +13,7 @@ import gtksource.types;
  * If, for a certain tag, [gtk.text_tag.TextTag] is sufficient, it's better that you create
  * a [gtk.text_tag.TextTag], not a class@Tag.
  */
-class Tag : TextTag
+class Tag : gtk.text_tag.TextTag
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -1,6 +1,6 @@
 module gio.socket_service;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_connection;
@@ -33,7 +33,7 @@ import gobject.object;
  * stop the service are thread-safe so these can be used from threads that
  * handle incoming clients.
  */
-class SocketService : SocketListener
+class SocketService : gio.socket_listener.SocketListener
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -128,8 +128,8 @@ class SocketService : SocketListener
    *   socketService = the instance the signal is connected to
    * Returns: %TRUE to stop other handlers from being called
    */
-  alias IncomingCallbackDlg = bool delegate(SocketConnection connection, ObjectG sourceObject, SocketService socketService);
-  alias IncomingCallbackFunc = bool function(SocketConnection connection, ObjectG sourceObject, SocketService socketService);
+  alias IncomingCallbackDlg = bool delegate(gio.socket_connection.SocketConnection connection, gobject.object.ObjectG sourceObject, gio.socket_service.SocketService socketService);
+  alias IncomingCallbackFunc = bool function(gio.socket_connection.SocketConnection connection, gobject.object.ObjectG sourceObject, gio.socket_service.SocketService socketService);
 
   /**
    * Connect to Incoming signal.
@@ -146,9 +146,9 @@ class SocketService : SocketListener
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto socketService = getVal!SocketService(_paramVals);
-      auto connection = getVal!SocketConnection(&_paramVals[1]);
-      auto sourceObject = getVal!ObjectG(&_paramVals[2]);
+      auto socketService = getVal!(gio.socket_service.SocketService)(_paramVals);
+      auto connection = getVal!(gio.socket_connection.SocketConnection)(&_paramVals[1]);
+      auto sourceObject = getVal!(gobject.object.ObjectG)(&_paramVals[2]);
       _retval = _dClosure.dlg(connection, sourceObject, socketService);
       setVal!bool(_returnValue, _retval);
     }

@@ -9,9 +9,9 @@ import arrow.resizable_buffer;
 import arrow.types;
 import arrow.writable;
 import arrow.writable_mixin;
-import gid.global;
+import gid.gid;
 
-class BufferOutputStream : OutputStream
+class BufferOutputStream : arrow.output_stream.OutputStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -30,7 +30,7 @@ class BufferOutputStream : OutputStream
     return getType();
   }
 
-  this(ResizableBuffer buffer)
+  this(arrow.resizable_buffer.ResizableBuffer buffer)
   {
     GArrowBufferOutputStream* _cretval;
     _cretval = garrow_buffer_output_stream_new(buffer ? cast(GArrowResizableBuffer*)buffer.cPtr(No.Dup) : null);

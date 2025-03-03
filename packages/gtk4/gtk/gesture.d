@@ -4,7 +4,7 @@ import gdk.device;
 import gdk.event;
 import gdk.event_sequence;
 import gdk.rectangle;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -82,7 +82,7 @@ import gtk.types;
  * - If the gesture has %GTK_PHASE_NONE, ensuring events of type
  * %GDK_TOUCHPAD_SWIPE and %GDK_TOUCHPAD_PINCH are handled by the `GtkGesture`
  */
-class Gesture : EventController
+class Gesture : gtk.event_controller.EventController
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -115,12 +115,12 @@ class Gesture : EventController
    *   rect = bounding box containing all active touches.
    * Returns: %TRUE if there are active touches, %FALSE otherwise
    */
-  bool getBoundingBox(out Rectangle rect)
+  bool getBoundingBox(out gdk.rectangle.Rectangle rect)
   {
     bool _retval;
     GdkRectangle _rect;
     _retval = gtk_gesture_get_bounding_box(cast(GtkGesture*)cPtr, &_rect);
-    rect = new Rectangle(cast(void*)&_rect, No.Take);
+    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
 
@@ -147,11 +147,11 @@ class Gesture : EventController
    * This returns %NULL if the gesture is not being interacted.
    * Returns: a `GdkDevice`
    */
-  Device getDevice()
+  gdk.device.Device getDevice()
   {
     GdkDevice* _cretval;
     _cretval = gtk_gesture_get_device(cast(GtkGesture*)cPtr);
-    auto _retval = ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -160,11 +160,11 @@ class Gesture : EventController
    * Returns: The list
    *   of `GtkGesture`s, free with [glib.list.List.free]
    */
-  Gesture[] getGroup()
+  gtk.gesture.Gesture[] getGroup()
   {
     GList* _cretval;
     _cretval = gtk_gesture_get_group(cast(GtkGesture*)cPtr);
-    auto _retval = gListToD!(Gesture, GidOwnership.Container)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gtk.gesture.Gesture, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -177,11 +177,11 @@ class Gesture : EventController
    *   sequence = a `GdkEventSequence`
    * Returns: The last event from sequence
    */
-  Event getLastEvent(EventSequence sequence)
+  gdk.event.Event getLastEvent(gdk.event_sequence.EventSequence sequence)
   {
     GdkEvent* _cretval;
     _cretval = gtk_gesture_get_last_event(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new Event(cast(GdkEvent*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -189,11 +189,11 @@ class Gesture : EventController
    * Returns the `GdkEventSequence` that was last updated on gesture.
    * Returns: The last updated sequence
    */
-  EventSequence getLastUpdatedSequence()
+  gdk.event_sequence.EventSequence getLastUpdatedSequence()
   {
     GdkEventSequence* _cretval;
     _cretval = gtk_gesture_get_last_updated_sequence(cast(GtkGesture*)cPtr);
-    auto _retval = _cretval ? new EventSequence(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.event_sequence.EventSequence(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class Gesture : EventController
    *   y = return location for Y axis of the sequence coordinates
    * Returns: %TRUE if sequence is currently interpreted
    */
-  bool getPoint(EventSequence sequence, out double x, out double y)
+  bool getPoint(gdk.event_sequence.EventSequence sequence, out double x, out double y)
   {
     bool _retval;
     _retval = gtk_gesture_get_point(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
@@ -221,11 +221,11 @@ class Gesture : EventController
    *   sequence = a `GdkEventSequence`
    * Returns: The sequence state in gesture
    */
-  EventSequenceState getSequenceState(EventSequence sequence)
+  gtk.types.EventSequenceState getSequenceState(gdk.event_sequence.EventSequence sequence)
   {
     GtkEventSequenceState _cretval;
     _cretval = gtk_gesture_get_sequence_state(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null);
-    EventSequenceState _retval = cast(EventSequenceState)_cretval;
+    gtk.types.EventSequenceState _retval = cast(gtk.types.EventSequenceState)_cretval;
     return _retval;
   }
 
@@ -237,11 +237,11 @@ class Gesture : EventController
    *   not be freed or modified, the list itself must be deleted
    *   through [glib.list.List.free]
    */
-  EventSequence[] getSequences()
+  gdk.event_sequence.EventSequence[] getSequences()
   {
     GList* _cretval;
     _cretval = gtk_gesture_get_sequences(cast(GtkGesture*)cPtr);
-    auto _retval = gListToD!(EventSequence, GidOwnership.Container)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gdk.event_sequence.EventSequence, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -262,7 +262,7 @@ class Gesture : EventController
    * Params:
    *   gesture = a `GtkGesture`
    */
-  void group(Gesture gesture)
+  void group(gtk.gesture.Gesture gesture)
   {
     gtk_gesture_group(cast(GtkGesture*)cPtr, gesture ? cast(GtkGesture*)gesture.cPtr(No.Dup) : null);
   }
@@ -274,7 +274,7 @@ class Gesture : EventController
    *   sequence = a `GdkEventSequence`
    * Returns: %TRUE if gesture is handling sequence, %FALSE otherwise
    */
-  bool handlesSequence(EventSequence sequence)
+  bool handlesSequence(gdk.event_sequence.EventSequence sequence)
   {
     bool _retval;
     _retval = gtk_gesture_handles_sequence(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null);
@@ -300,7 +300,7 @@ class Gesture : EventController
    *   other = another `GtkGesture`
    * Returns: whether the gestures are grouped
    */
-  bool isGroupedWith(Gesture other)
+  bool isGroupedWith(gtk.gesture.Gesture other)
   {
     bool _retval;
     _retval = gtk_gesture_is_grouped_with(cast(GtkGesture*)cPtr, other ? cast(GtkGesture*)other.cPtr(No.Dup) : null);
@@ -365,7 +365,7 @@ class Gesture : EventController
 
    * Deprecated: Use [gtk.gesture.Gesture.setState]
    */
-  bool setSequenceState(EventSequence sequence, EventSequenceState state)
+  bool setSequenceState(gdk.event_sequence.EventSequence sequence, gtk.types.EventSequenceState state)
   {
     bool _retval;
     _retval = gtk_gesture_set_sequence_state(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null, state);
@@ -415,7 +415,7 @@ class Gesture : EventController
    * Returns: %TRUE if the state of at least one sequence
    *   was changed successfully
    */
-  bool setState(EventSequenceState state)
+  bool setState(gtk.types.EventSequenceState state)
   {
     bool _retval;
     _retval = gtk_gesture_set_state(cast(GtkGesture*)cPtr, state);
@@ -443,8 +443,8 @@ class Gesture : EventController
    *     to be recognized
    *   gesture = the instance the signal is connected to
    */
-  alias BeginCallbackDlg = void delegate(EventSequence sequence, Gesture gesture);
-  alias BeginCallbackFunc = void function(EventSequence sequence, Gesture gesture);
+  alias BeginCallbackDlg = void delegate(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture);
+  alias BeginCallbackFunc = void function(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture);
 
   /**
    * Connect to Begin signal.
@@ -460,8 +460,8 @@ class Gesture : EventController
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gesture = getVal!Gesture(_paramVals);
-      auto sequence = getVal!EventSequence(&_paramVals[1]);
+      auto gesture = getVal!(gtk.gesture.Gesture)(_paramVals);
+      auto sequence = getVal!(gdk.event_sequence.EventSequence)(&_paramVals[1]);
       _dClosure.dlg(sequence, gesture);
     }
 
@@ -482,8 +482,8 @@ class Gesture : EventController
    *   sequence = the `GdkEventSequence` that was cancelled
    *   gesture = the instance the signal is connected to
    */
-  alias CancelCallbackDlg = void delegate(EventSequence sequence, Gesture gesture);
-  alias CancelCallbackFunc = void function(EventSequence sequence, Gesture gesture);
+  alias CancelCallbackDlg = void delegate(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture);
+  alias CancelCallbackFunc = void function(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture);
 
   /**
    * Connect to Cancel signal.
@@ -499,8 +499,8 @@ class Gesture : EventController
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gesture = getVal!Gesture(_paramVals);
-      auto sequence = getVal!EventSequence(&_paramVals[1]);
+      auto gesture = getVal!(gtk.gesture.Gesture)(_paramVals);
+      auto sequence = getVal!(gdk.event_sequence.EventSequence)(&_paramVals[1]);
       _dClosure.dlg(sequence, gesture);
     }
 
@@ -522,8 +522,8 @@ class Gesture : EventController
    *     recognition to finish
    *   gesture = the instance the signal is connected to
    */
-  alias EndCallbackDlg = void delegate(EventSequence sequence, Gesture gesture);
-  alias EndCallbackFunc = void function(EventSequence sequence, Gesture gesture);
+  alias EndCallbackDlg = void delegate(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture);
+  alias EndCallbackFunc = void function(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture);
 
   /**
    * Connect to End signal.
@@ -539,8 +539,8 @@ class Gesture : EventController
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gesture = getVal!Gesture(_paramVals);
-      auto sequence = getVal!EventSequence(&_paramVals[1]);
+      auto gesture = getVal!(gtk.gesture.Gesture)(_paramVals);
+      auto sequence = getVal!(gdk.event_sequence.EventSequence)(&_paramVals[1]);
       _dClosure.dlg(sequence, gesture);
     }
 
@@ -557,8 +557,8 @@ class Gesture : EventController
    *   state = the new sequence state
    *   gesture = the instance the signal is connected to
    */
-  alias SequenceStateChangedCallbackDlg = void delegate(EventSequence sequence, EventSequenceState state, Gesture gesture);
-  alias SequenceStateChangedCallbackFunc = void function(EventSequence sequence, EventSequenceState state, Gesture gesture);
+  alias SequenceStateChangedCallbackDlg = void delegate(gdk.event_sequence.EventSequence sequence, gtk.types.EventSequenceState state, gtk.gesture.Gesture gesture);
+  alias SequenceStateChangedCallbackFunc = void function(gdk.event_sequence.EventSequence sequence, gtk.types.EventSequenceState state, gtk.gesture.Gesture gesture);
 
   /**
    * Connect to SequenceStateChanged signal.
@@ -574,9 +574,9 @@ class Gesture : EventController
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gesture = getVal!Gesture(_paramVals);
-      auto sequence = getVal!EventSequence(&_paramVals[1]);
-      auto state = getVal!EventSequenceState(&_paramVals[2]);
+      auto gesture = getVal!(gtk.gesture.Gesture)(_paramVals);
+      auto sequence = getVal!(gdk.event_sequence.EventSequence)(&_paramVals[1]);
+      auto state = getVal!(gtk.types.EventSequenceState)(&_paramVals[2]);
       _dClosure.dlg(sequence, state, gesture);
     }
 
@@ -591,8 +591,8 @@ class Gesture : EventController
    *   sequence = the `GdkEventSequence` that was updated
    *   gesture = the instance the signal is connected to
    */
-  alias UpdateCallbackDlg = void delegate(EventSequence sequence, Gesture gesture);
-  alias UpdateCallbackFunc = void function(EventSequence sequence, Gesture gesture);
+  alias UpdateCallbackDlg = void delegate(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture);
+  alias UpdateCallbackFunc = void function(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture);
 
   /**
    * Connect to Update signal.
@@ -608,8 +608,8 @@ class Gesture : EventController
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gesture = getVal!Gesture(_paramVals);
-      auto sequence = getVal!EventSequence(&_paramVals[1]);
+      auto gesture = getVal!(gtk.gesture.Gesture)(_paramVals);
+      auto sequence = getVal!(gdk.event_sequence.EventSequence)(&_paramVals[1]);
       _dClosure.dlg(sequence, gesture);
     }
 

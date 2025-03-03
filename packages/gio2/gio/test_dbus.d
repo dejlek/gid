@@ -1,6 +1,6 @@
 module gio.test_dbus;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -72,7 +72,7 @@ import gobject.object;
  * CLEANFILES +\= gschemas.compiled
  * ```
  */
-class TestDBus : ObjectG
+class TestDBus : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -97,7 +97,7 @@ class TestDBus : ObjectG
    *   flags = a #GTestDBusFlags
    * Returns: a new #GTestDBus.
    */
-  this(TestDBusFlags flags)
+  this(gio.types.TestDBusFlags flags)
   {
     GTestDBus* _cretval;
     _cretval = g_test_dbus_new(flags);
@@ -149,7 +149,7 @@ class TestDBus : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_test_dbus_get_bus_address(cast(GTestDBus*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -157,11 +157,11 @@ class TestDBus : ObjectG
    * Get the flags of the #GTestDBus object.
    * Returns: the value of #GTestDBus:flags property
    */
-  TestDBusFlags getFlags()
+  gio.types.TestDBusFlags getFlags()
   {
     GTestDBusFlags _cretval;
     _cretval = g_test_dbus_get_flags(cast(GTestDBus*)cPtr);
-    TestDBusFlags _retval = cast(TestDBusFlags)_cretval;
+    gio.types.TestDBusFlags _retval = cast(gio.types.TestDBusFlags)_cretval;
     return _retval;
   }
 

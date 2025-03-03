@@ -1,6 +1,6 @@
 module gtk.tree_iter;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gtk.c.functions;
 import gtk.c.types;
@@ -13,7 +13,7 @@ import gtk.types;
  * model-specific data in the three @user_data
  * members.
  */
-class TreeIter : Boxed
+class TreeIter : gobject.boxed.Boxed
 {
 
   this()
@@ -60,11 +60,11 @@ class TreeIter : Boxed
    * You must free this iter with [gtk.tree_iter.TreeIter.free].
    * Returns: a newly-allocated copy of iter
    */
-  TreeIter copy()
+  gtk.tree_iter.TreeIter copy()
   {
     GtkTreeIter* _cretval;
     _cretval = gtk_tree_iter_copy(cast(GtkTreeIter*)cPtr);
-    auto _retval = _cretval ? new TreeIter(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.tree_iter.TreeIter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

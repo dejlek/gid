@@ -4701,10 +4701,10 @@ struct GChecksum;
  * [glib.completion.Completion.free].
  * Items in the completion can be simple strings $(LPAREN)e.g. filenames$(RPAREN), or
  * pointers to arbitrary data structures. If data structures are used
- * you must provide a [glib.CompletionFunc] in [glib.completion.Completion.new_],
+ * you must provide a [glib.types.CompletionFunc] in [glib.completion.Completion.new_],
  * which retrieves the item’s string from the data structure. You can change
  * the way in which strings are compared by setting a different
- * [glib.CompletionStrncmpFunc] in [glib.completion.Completion.setCompare].
+ * [glib.types.CompletionStrncmpFunc] in [glib.completion.Completion.setCompare].
  * `GCompletion` has been marked as deprecated, since this API is rarely
  * used and not very actively maintained.
 
@@ -7134,7 +7134,7 @@ struct GUnixPipe
  * parts, and return the parts; the difference between the two is that
  * [glib.uri.Uri.split] treats the ‘userinfo’ component of the URI as a
  * single element, while [glib.uri.Uri.splitWithUser] can $(LPAREN)depending on the
- * [glib.UriFlags] you pass$(RPAREN) treat it as containing a username, password,
+ * [glib.types.UriFlags] you pass$(RPAREN) treat it as containing a username, password,
  * and authentication parameters. Alternatively, [glib.uri.Uri.splitNetwork]
  * can be used when you are only interested in the components that are
  * needed to initiate a network connection to the service $(LPAREN)scheme,
@@ -7147,7 +7147,7 @@ struct GUnixPipe
  * [glib.uri.Uri.resolveRelative] takes two strings and returns a string,
  * and [glib.uri.Uri.parseRelative] takes a `GUri` and a string and returns a
  * `GUri`.
- * All of the parsing functions take a [glib.UriFlags] argument describing
+ * All of the parsing functions take a [glib.types.UriFlags] argument describing
  * exactly how to parse the URI; see the documentation for that type
  * for more details on the specific flags that you can pass. If you
  * need to choose different flags based on the type of URI, you can
@@ -7163,7 +7163,7 @@ struct GUnixPipe
  * Similarly, [glib.uri.Uri.build] and [glib.uri.Uri.buildWithUser] can be
  * used to construct a `GUri` from a set of component strings.
  * As with the parsing functions, the building functions take a
- * [glib.UriFlags] argument. In particular, it is important to keep in mind
+ * [glib.types.UriFlags] argument. In particular, it is important to keep in mind
  * whether the URI components you are using are already `%`-encoded. If so,
  * you must pass the `G_URI_FLAGS_ENCODED` flag.
  * ## `file://` URIs
@@ -7177,7 +7177,7 @@ struct GUnixPipe
  * Note that there is no `g_uri_equal $(LPAREN)$(RPAREN)` function, because comparing
  * URIs usefully requires scheme-specific knowledge that `GUri` does
  * not have. `GUri` can help with normalization if you use the various
- * encoded [glib.UriFlags] as well as `G_URI_FLAGS_SCHEME_NORMALIZE`
+ * encoded [glib.types.UriFlags] as well as `G_URI_FLAGS_SCHEME_NORMALIZE`
  * however it is not comprehensive.
  * For example, `data:,foo` and `data:;base64,Zm9v` resolve to the same
  * thing according to the `data:` URI specification which GLib does not

@@ -1,6 +1,6 @@
 module gtk.editable_label;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -37,7 +37,7 @@ import gtk.widget;
  * For all the subnodes added to the text node in various situations,
  * see [gtk.text.Text].
  */
-class EditableLabel : Widget, Editable
+class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

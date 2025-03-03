@@ -1,0 +1,15 @@
+{
+  "name": "gtk3",
+  "description": "Gtk library D binding",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["gtk"],
+  "dependencies": {
+    "gid:atk1": "*",
+    "gid:gdk3": "*",
+    "gid:xlib2": "*"
+  }
+}

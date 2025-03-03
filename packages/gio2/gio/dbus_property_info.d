@@ -1,6 +1,6 @@
 module gio.dbus_property_info;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -9,7 +9,7 @@ import gobject.boxed;
 /**
  * Information about a D-Bus property on a D-Bus interface.
  */
-class DBusPropertyInfo : Boxed
+class DBusPropertyInfo : gobject.boxed.Boxed
 {
 
   this()
@@ -70,12 +70,12 @@ class DBusPropertyInfo : Boxed
     (cast(GDBusPropertyInfo*)cPtr).signature = propval.toCString(Yes.Alloc);
   }
 
-  @property DBusPropertyInfoFlags flags()
+  @property gio.types.DBusPropertyInfoFlags flags()
   {
-    return cast(DBusPropertyInfoFlags)(cast(GDBusPropertyInfo*)cPtr).flags;
+    return cast(gio.types.DBusPropertyInfoFlags)(cast(GDBusPropertyInfo*)cPtr).flags;
   }
 
-  @property void flags(DBusPropertyInfoFlags propval)
+  @property void flags(gio.types.DBusPropertyInfoFlags propval)
   {
     (cast(GDBusPropertyInfo*)cPtr).flags = cast(GDBusPropertyInfoFlags)propval;
   }

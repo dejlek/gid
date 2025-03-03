@@ -3,7 +3,7 @@ module atk.state_set;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
@@ -12,7 +12,7 @@ import gobject.object;
  * that apply to an object at a given time. This set is not meant to be
  * modified, but rather created when #[atk.object.ObjectAtk.refStateSet] is called.
  */
-class StateSet : ObjectG
+class StateSet : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -53,7 +53,7 @@ class StateSet : ObjectG
    *   type = an #AtkStateType
    * Returns: %TRUE if  the state for type is not already in set.
    */
-  bool addState(StateType type)
+  bool addState(atk.types.StateType type)
   {
     bool _retval;
     _retval = atk_state_set_add_state(cast(AtkStateSet*)cPtr, type);
@@ -69,7 +69,7 @@ class StateSet : ObjectG
    * Params:
    *   types = an array of #AtkStateType
    */
-  void addStates(StateType[] types)
+  void addStates(atk.types.StateType[] types)
   {
     int _nTypes;
     if (types)
@@ -87,11 +87,11 @@ class StateSet : ObjectG
    * Returns: a new #AtkStateSet which is the intersection of
    *   the two sets.
    */
-  StateSet andSets(StateSet compareSet)
+  atk.state_set.StateSet andSets(atk.state_set.StateSet compareSet)
   {
     AtkStateSet* _cretval;
     _cretval = atk_state_set_and_sets(cast(AtkStateSet*)cPtr, compareSet ? cast(AtkStateSet*)compareSet.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!StateSet(cast(AtkStateSet*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class StateSet : ObjectG
    *   type = an #AtkStateType
    * Returns: %TRUE if type is the state type is in set.
    */
-  bool containsState(StateType type)
+  bool containsState(atk.types.StateType type)
   {
     bool _retval;
     _retval = atk_state_set_contains_state(cast(AtkStateSet*)cPtr, type);
@@ -123,7 +123,7 @@ class StateSet : ObjectG
    *   types = an array of #AtkStateType
    * Returns: %TRUE if all the states for type are in set.
    */
-  bool containsStates(StateType[] types)
+  bool containsStates(atk.types.StateType[] types)
   {
     bool _retval;
     int _nTypes;
@@ -153,11 +153,11 @@ class StateSet : ObjectG
    * Returns: a new #AtkStateSet which is
    *   the union of the two sets, returning %NULL is empty.
    */
-  StateSet orSets(StateSet compareSet)
+  atk.state_set.StateSet orSets(atk.state_set.StateSet compareSet)
   {
     AtkStateSet* _cretval;
     _cretval = atk_state_set_or_sets(cast(AtkStateSet*)cPtr, compareSet ? cast(AtkStateSet*)compareSet.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!StateSet(cast(AtkStateSet*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class StateSet : ObjectG
    *   type = an #AtkType
    * Returns: %TRUE if type was the state type is in set.
    */
-  bool removeState(StateType type)
+  bool removeState(atk.types.StateType type)
   {
     bool _retval;
     _retval = atk_state_set_remove_state(cast(AtkStateSet*)cPtr, type);
@@ -187,11 +187,11 @@ class StateSet : ObjectG
    * Returns: a new #AtkStateSet which contains the states
    *   which are in exactly one of the two sets.
    */
-  StateSet xorSets(StateSet compareSet)
+  atk.state_set.StateSet xorSets(atk.state_set.StateSet compareSet)
   {
     AtkStateSet* _cretval;
     _cretval = atk_state_set_xor_sets(cast(AtkStateSet*)cPtr, compareSet ? cast(AtkStateSet*)compareSet.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!StateSet(cast(AtkStateSet*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
     return _retval;
   }
 }

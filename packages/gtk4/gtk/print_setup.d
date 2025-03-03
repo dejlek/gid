@@ -1,6 +1,6 @@
 module gtk.print_setup;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gobject.object;
 import gtk.c.functions;
@@ -18,7 +18,7 @@ import gtk.types;
  * Applications may wish to store the page_setup and print_settings from the print setup
  * and copy them to the PrintDialog if they want to keep using them.
  */
-class PrintSetup : Boxed
+class PrintSetup : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -48,11 +48,11 @@ class PrintSetup : Boxed
    * if the user changed it during the setup process.
    * Returns: the page setup, or `NULL`
    */
-  PageSetup getPageSetup()
+  gtk.page_setup.PageSetup getPageSetup()
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_setup_get_page_setup(cast(GtkPrintSetup*)cPtr);
-    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -62,11 +62,11 @@ class PrintSetup : Boxed
    * if the user changed them during the setup process.
    * Returns: the print settings, or `NULL`
    */
-  PrintSettings getPrintSettings()
+  gtk.print_settings.PrintSettings getPrintSettings()
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_setup_get_print_settings(cast(GtkPrintSetup*)cPtr);
-    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 }

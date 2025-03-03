@@ -1,8 +1,7 @@
 module gtksource.snippet_manager;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
-import gio.list_model_mixin;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -18,7 +17,7 @@ import gtksource.types;
  * Use [gtksource.snippet_manager.SnippetManager.getSnippet] to retrieve snippets for
  * a given snippets.
  */
-class SnippetManager : ObjectG
+class SnippetManager : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -42,11 +41,11 @@ class SnippetManager : ObjectG
    * Returns: a #GtkSourceSnippetManager which
    *   is owned by GtkSourceView library and must not be unref'd.
    */
-  static SnippetManager getDefault()
+  static gtksource.snippet_manager.SnippetManager getDefault()
   {
     GtkSourceSnippetManager* _cretval;
     _cretval = gtk_source_snippet_manager_get_default();
-    auto _retval = ObjectG.getDObject!SnippetManager(cast(GtkSourceSnippetManager*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.snippet_manager.SnippetManager)(cast(GtkSourceSnippetManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -85,14 +84,14 @@ class SnippetManager : ObjectG
    * Returns: a #GtkSourceSnippet or %NULL if no
    *   matching snippet was found.
    */
-  Snippet getSnippet(string group, string languageId, string trigger)
+  gtksource.snippet.Snippet getSnippet(string group, string languageId, string trigger)
   {
     GtkSourceSnippet* _cretval;
     const(char)* _group = group.toCString(No.Alloc);
     const(char)* _languageId = languageId.toCString(No.Alloc);
     const(char)* _trigger = trigger.toCString(No.Alloc);
     _cretval = gtk_source_snippet_manager_get_snippet(cast(GtkSourceSnippetManager*)cPtr, _group, _languageId, _trigger);
-    auto _retval = ObjectG.getDObject!Snippet(cast(GtkSourceSnippet*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -102,11 +101,11 @@ class SnippetManager : ObjectG
    * known to the snippet manager.
    * Returns: a [gio.list_model.ListModel] of [gtksource.snippet.Snippet]
    */
-  ListModel listAll()
+  gio.list_model.ListModel listAll()
   {
     GListModel* _cretval;
     _cretval = gtk_source_snippet_manager_list_all(cast(GtkSourceSnippetManager*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -148,14 +147,14 @@ class SnippetManager : ObjectG
    *   triggerPrefix = a prefix for a trigger to activate
    * Returns: a #GListModel of #GtkSourceSnippet.
    */
-  ListModel listMatching(string group, string languageId, string triggerPrefix)
+  gio.list_model.ListModel listMatching(string group, string languageId, string triggerPrefix)
   {
     GListModel* _cretval;
     const(char)* _group = group.toCString(No.Alloc);
     const(char)* _languageId = languageId.toCString(No.Alloc);
     const(char)* _triggerPrefix = triggerPrefix.toCString(No.Alloc);
     _cretval = gtk_source_snippet_manager_list_matching(cast(GtkSourceSnippetManager*)cPtr, _group, _languageId, _triggerPrefix);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 

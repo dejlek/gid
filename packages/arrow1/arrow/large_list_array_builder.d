@@ -5,11 +5,11 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.large_list_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class LargeListArrayBuilder : ArrayBuilder
+class LargeListArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -28,7 +28,7 @@ class LargeListArrayBuilder : ArrayBuilder
     return getType();
   }
 
-  this(LargeListDataType dataType)
+  this(arrow.large_list_data_type.LargeListDataType dataType)
   {
     GArrowLargeListArrayBuilder* _cretval;
     GError *_err;
@@ -48,11 +48,11 @@ class LargeListArrayBuilder : ArrayBuilder
     return _retval;
   }
 
-  ArrayBuilder getValueBuilder()
+  arrow.array_builder.ArrayBuilder getValueBuilder()
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_large_list_array_builder_get_value_builder(cast(GArrowLargeListArrayBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!ArrayBuilder(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 }

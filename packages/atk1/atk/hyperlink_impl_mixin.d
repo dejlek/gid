@@ -5,7 +5,7 @@ public import atk.c.functions;
 public import atk.c.types;
 public import atk.hyperlink;
 public import atk.types;
-public import gid.global;
+public import gid.gid;
 public import gobject.object;
 
 /**
@@ -23,11 +23,11 @@ template HyperlinkImplT()
    * Returns: an AtkHyperlink object which points to this
    *   implementing AtkObject.
    */
-  override Hyperlink getHyperlink()
+  override atk.hyperlink.Hyperlink getHyperlink()
   {
     AtkHyperlink* _cretval;
     _cretval = atk_hyperlink_impl_get_hyperlink(cast(AtkHyperlinkImpl*)cPtr);
-    auto _retval = ObjectG.getDObject!Hyperlink(cast(AtkHyperlink*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.hyperlink.Hyperlink)(cast(AtkHyperlink*)_cretval, Yes.Take);
     return _retval;
   }
 }

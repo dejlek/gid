@@ -1,6 +1,6 @@
 module gio.dbus_object_manager_server;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_connection;
@@ -30,7 +30,7 @@ import gobject.object;
  * intended to be used with `GDBusObjectManagerServer` or any D-Bus
  * object implementing the `org.freedesktop.DBus.ObjectManager` interface.
  */
-class DBusObjectManagerServer : ObjectG, DBusObjectManager
+class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.DBusObjectManager
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -81,7 +81,7 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
    * Params:
    *   object = A #GDBusObjectSkeleton.
    */
-  void export_(DBusObjectSkeleton object)
+  void export_(gio.dbus_object_skeleton.DBusObjectSkeleton object)
   {
     g_dbus_object_manager_server_export(cast(GDBusObjectManagerServer*)cPtr, object ? cast(GDBusObjectSkeleton*)object.cPtr(No.Dup) : null);
   }
@@ -94,7 +94,7 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
    * Params:
    *   object = An object.
    */
-  void exportUniquely(DBusObjectSkeleton object)
+  void exportUniquely(gio.dbus_object_skeleton.DBusObjectSkeleton object)
   {
     g_dbus_object_manager_server_export_uniquely(cast(GDBusObjectManagerServer*)cPtr, object ? cast(GDBusObjectSkeleton*)object.cPtr(No.Dup) : null);
   }
@@ -105,11 +105,11 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
    *   manager isn't exported on a connection. The returned object should
    *   be freed with [gobject.object.ObjectG.unref].
    */
-  DBusConnection getConnection()
+  gio.dbus_connection.DBusConnection getConnection()
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_object_manager_server_get_connection(cast(GDBusObjectManagerServer*)cPtr);
-    auto _retval = ObjectG.getDObject!DBusConnection(cast(GDBusConnection*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
    *   object = An object.
    * Returns: %TRUE if object is exported
    */
-  bool isExported(DBusObjectSkeleton object)
+  bool isExported(gio.dbus_object_skeleton.DBusObjectSkeleton object)
   {
     bool _retval;
     _retval = g_dbus_object_manager_server_is_exported(cast(GDBusObjectManagerServer*)cPtr, object ? cast(GDBusObjectSkeleton*)object.cPtr(No.Dup) : null);
@@ -132,7 +132,7 @@ class DBusObjectManagerServer : ObjectG, DBusObjectManager
    * Params:
    *   connection = A #GDBusConnection or %NULL.
    */
-  void setConnection(DBusConnection connection)
+  void setConnection(gio.dbus_connection.DBusConnection connection)
   {
     g_dbus_object_manager_server_set_connection(cast(GDBusObjectManagerServer*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null);
   }

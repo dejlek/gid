@@ -1,6 +1,6 @@
 module glib.variant_type;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -250,11 +250,11 @@ class VariantType : Boxed
    * Returns: a new array #GVariantType
    *   Since 2.24
    */
-  static VariantType newArray(VariantType element)
+  static glib.variant_type.VariantType newArray(glib.variant_type.VariantType element)
   {
     GVariantType* _cretval;
-    _cretval = g_variant_type_new_array(element ? cast(GVariantType*)element.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = g_variant_type_new_array(element ? cast(const(GVariantType)*)element.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -268,11 +268,11 @@ class VariantType : Boxed
    * Returns: a new dictionary entry #GVariantType
    *   Since 2.24
    */
-  static VariantType newDictEntry(VariantType key, VariantType value)
+  static glib.variant_type.VariantType newDictEntry(glib.variant_type.VariantType key, glib.variant_type.VariantType value)
   {
     GVariantType* _cretval;
-    _cretval = g_variant_type_new_dict_entry(key ? cast(GVariantType*)key.cPtr(No.Dup) : null, value ? cast(GVariantType*)value.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = g_variant_type_new_dict_entry(key ? cast(const(GVariantType)*)key.cPtr(No.Dup) : null, value ? cast(const(GVariantType)*)value.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -285,11 +285,11 @@ class VariantType : Boxed
    * Returns: a new maybe #GVariantType
    *   Since 2.24
    */
-  static VariantType newMaybe(VariantType element)
+  static glib.variant_type.VariantType newMaybe(glib.variant_type.VariantType element)
   {
     GVariantType* _cretval;
-    _cretval = g_variant_type_new_maybe(element ? cast(GVariantType*)element.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = g_variant_type_new_maybe(element ? cast(const(GVariantType)*)element.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class VariantType : Boxed
    * Returns: a new tuple #GVariantType
    *   Since 2.24
    */
-  static VariantType newTuple(VariantType[] items)
+  static glib.variant_type.VariantType newTuple(glib.variant_type.VariantType[] items)
   {
     GVariantType* _cretval;
     int _length;
@@ -315,7 +315,7 @@ class VariantType : Boxed
       _tmpitems ~= cast(GVariantType*)obj.cPtr;
     const(GVariantType*)* _items = _tmpitems.ptr;
     _cretval = g_variant_type_new_tuple(_items, _length);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -325,11 +325,11 @@ class VariantType : Boxed
    * Returns: a new #GVariantType
    *   Since 2.24
    */
-  VariantType copy()
+  glib.variant_type.VariantType copy()
   {
     GVariantType* _cretval;
-    _cretval = g_variant_type_copy(cast(GVariantType*)cPtr);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = g_variant_type_copy(cast(const(GVariantType)*)cPtr);
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -343,8 +343,8 @@ class VariantType : Boxed
   string dupString()
   {
     char* _cretval;
-    _cretval = g_variant_type_dup_string(cast(GVariantType*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    _cretval = g_variant_type_dup_string(cast(const(GVariantType)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -354,11 +354,11 @@ class VariantType : Boxed
    * Returns: the element type of type
    *   Since 2.24
    */
-  VariantType element()
+  glib.variant_type.VariantType element()
   {
     const(GVariantType)* _cretval;
-    _cretval = g_variant_type_element(cast(GVariantType*)cPtr);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, No.Take) : null;
+    _cretval = g_variant_type_element(cast(const(GVariantType)*)cPtr);
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -376,7 +376,7 @@ class VariantType : Boxed
    * Returns: %TRUE if type1 and type2 are exactly equal
    *   Since 2.24
    */
-  bool equal(VariantType type2)
+  bool equal(glib.variant_type.VariantType type2)
   {
     bool _retval;
     _retval = g_variant_type_equal(cast(GVariantType*)cPtr, type2 ? cast(GVariantType*)type2.cPtr(No.Dup) : null);
@@ -397,11 +397,11 @@ class VariantType : Boxed
    * Returns: the first item type of type, or %NULL
    *   Since 2.24
    */
-  VariantType first()
+  glib.variant_type.VariantType first()
   {
     const(GVariantType)* _cretval;
-    _cretval = g_variant_type_first(cast(GVariantType*)cPtr);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, No.Take) : null;
+    _cretval = g_variant_type_first(cast(const(GVariantType)*)cPtr);
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -415,7 +415,7 @@ class VariantType : Boxed
   size_t getStringLength()
   {
     size_t _retval;
-    _retval = g_variant_type_get_string_length(cast(GVariantType*)cPtr);
+    _retval = g_variant_type_get_string_length(cast(const(GVariantType)*)cPtr);
     return _retval;
   }
 
@@ -446,7 +446,7 @@ class VariantType : Boxed
   bool isArray()
   {
     bool _retval;
-    _retval = g_variant_type_is_array(cast(GVariantType*)cPtr);
+    _retval = g_variant_type_is_array(cast(const(GVariantType)*)cPtr);
     return _retval;
   }
 
@@ -463,7 +463,7 @@ class VariantType : Boxed
   bool isBasic()
   {
     bool _retval;
-    _retval = g_variant_type_is_basic(cast(GVariantType*)cPtr);
+    _retval = g_variant_type_is_basic(cast(const(GVariantType)*)cPtr);
     return _retval;
   }
 
@@ -480,7 +480,7 @@ class VariantType : Boxed
   bool isContainer()
   {
     bool _retval;
-    _retval = g_variant_type_is_container(cast(GVariantType*)cPtr);
+    _retval = g_variant_type_is_container(cast(const(GVariantType)*)cPtr);
     return _retval;
   }
 
@@ -499,7 +499,7 @@ class VariantType : Boxed
   bool isDefinite()
   {
     bool _retval;
-    _retval = g_variant_type_is_definite(cast(GVariantType*)cPtr);
+    _retval = g_variant_type_is_definite(cast(const(GVariantType)*)cPtr);
     return _retval;
   }
 
@@ -515,7 +515,7 @@ class VariantType : Boxed
   bool isDictEntry()
   {
     bool _retval;
-    _retval = g_variant_type_is_dict_entry(cast(GVariantType*)cPtr);
+    _retval = g_variant_type_is_dict_entry(cast(const(GVariantType)*)cPtr);
     return _retval;
   }
 
@@ -531,7 +531,7 @@ class VariantType : Boxed
   bool isMaybe()
   {
     bool _retval;
-    _retval = g_variant_type_is_maybe(cast(GVariantType*)cPtr);
+    _retval = g_variant_type_is_maybe(cast(const(GVariantType)*)cPtr);
     return _retval;
   }
 
@@ -545,10 +545,10 @@ class VariantType : Boxed
    * Returns: %TRUE if type is a subtype of supertype
    *   Since 2.24
    */
-  bool isSubtypeOf(VariantType supertype)
+  bool isSubtypeOf(glib.variant_type.VariantType supertype)
   {
     bool _retval;
-    _retval = g_variant_type_is_subtype_of(cast(GVariantType*)cPtr, supertype ? cast(GVariantType*)supertype.cPtr(No.Dup) : null);
+    _retval = g_variant_type_is_subtype_of(cast(const(GVariantType)*)cPtr, supertype ? cast(const(GVariantType)*)supertype.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -565,7 +565,7 @@ class VariantType : Boxed
   bool isTuple()
   {
     bool _retval;
-    _retval = g_variant_type_is_tuple(cast(GVariantType*)cPtr);
+    _retval = g_variant_type_is_tuple(cast(const(GVariantType)*)cPtr);
     return _retval;
   }
 
@@ -577,7 +577,7 @@ class VariantType : Boxed
   bool isVariant()
   {
     bool _retval;
-    _retval = g_variant_type_is_variant(cast(GVariantType*)cPtr);
+    _retval = g_variant_type_is_variant(cast(const(GVariantType)*)cPtr);
     return _retval;
   }
 
@@ -589,11 +589,11 @@ class VariantType : Boxed
    * Returns: the key type of the dictionary entry
    *   Since 2.24
    */
-  VariantType key()
+  glib.variant_type.VariantType key()
   {
     const(GVariantType)* _cretval;
-    _cretval = g_variant_type_key(cast(GVariantType*)cPtr);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, No.Take) : null;
+    _cretval = g_variant_type_key(cast(const(GVariantType)*)cPtr);
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -611,7 +611,7 @@ class VariantType : Boxed
   size_t nItems()
   {
     size_t _retval;
-    _retval = g_variant_type_n_items(cast(GVariantType*)cPtr);
+    _retval = g_variant_type_n_items(cast(const(GVariantType)*)cPtr);
     return _retval;
   }
 
@@ -627,11 +627,11 @@ class VariantType : Boxed
    * Returns: the next #GVariantType after type, or %NULL
    *   Since 2.24
    */
-  VariantType next()
+  glib.variant_type.VariantType next()
   {
     const(GVariantType)* _cretval;
-    _cretval = g_variant_type_next(cast(GVariantType*)cPtr);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, No.Take) : null;
+    _cretval = g_variant_type_next(cast(const(GVariantType)*)cPtr);
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -641,20 +641,20 @@ class VariantType : Boxed
    * Returns: the value type of the dictionary entry
    *   Since 2.24
    */
-  VariantType value()
+  glib.variant_type.VariantType value()
   {
     const(GVariantType)* _cretval;
-    _cretval = g_variant_type_value(cast(GVariantType*)cPtr);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, No.Take) : null;
+    _cretval = g_variant_type_value(cast(const(GVariantType)*)cPtr);
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
-  static VariantType checked(string typeString)
+  static glib.variant_type.VariantType checked(string typeString)
   {
     const(GVariantType)* _cretval;
     const(char)* _typeString = typeString.toCString(No.Alloc);
     _cretval = g_variant_type_checked_(_typeString);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

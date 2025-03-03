@@ -4,7 +4,7 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.s3_global_options;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
 
@@ -31,7 +31,7 @@ bool s3Finalize()
  *   options = Options to initialize the S3 APIs.
  * Returns: %TRUE on success, %FALSE on error.
  */
-bool s3Initialize(S3GlobalOptions options)
+bool s3Initialize(arrow.s3_global_options.S3GlobalOptions options)
 {
   bool _retval;
   GError *_err;

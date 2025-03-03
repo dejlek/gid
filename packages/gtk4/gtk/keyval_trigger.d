@@ -1,7 +1,7 @@
 module gtk.keyval_trigger;
 
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.shortcut_trigger;
@@ -10,7 +10,7 @@ import gtk.types;
 /**
  * A `GtkShortcutTrigger` that triggers when a specific keyval and modifiers are pressed.
  */
-class KeyvalTrigger : ShortcutTrigger
+class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -37,7 +37,7 @@ class KeyvalTrigger : ShortcutTrigger
    *   modifiers = the modifiers that need to be present
    * Returns: A new `GtkShortcutTrigger`
    */
-  this(uint keyval, ModifierType modifiers)
+  this(uint keyval, gdk.types.ModifierType modifiers)
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_keyval_trigger_new(keyval, modifiers);
@@ -61,11 +61,11 @@ class KeyvalTrigger : ShortcutTrigger
    * triggering self.
    * Returns: the modifiers
    */
-  ModifierType getModifiers()
+  gdk.types.ModifierType getModifiers()
   {
     GdkModifierType _cretval;
     _cretval = gtk_keyval_trigger_get_modifiers(cast(GtkKeyvalTrigger*)cPtr);
-    ModifierType _retval = cast(ModifierType)_cretval;
+    gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }
 }

@@ -1,6 +1,6 @@
 module gtk.cell_area_context;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -17,11 +17,11 @@ import gtk.types;
  * request and render groups of data rows. However, it’s important that the
  * same context which was used to request sizes for a given `GtkTreeModel`
  * row also be used for the same row when calling other `GtkCellArea` APIs
- * such as gtk_cell_area_render$(LPAREN)$(RPAREN) and [gtk.cell_area.CellArea.event].
+ * such as [gtk.cell_area.CellArea.render] and [gtk.cell_area.CellArea.event].
 
  * Deprecated: This object will be removed in GTK 5
  */
-class CellAreaContext : ObjectG
+class CellAreaContext : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -92,11 +92,11 @@ class CellAreaContext : ObjectG
 
    * Deprecated: This object will be removed in GTK 5
    */
-  CellArea getArea()
+  gtk.cell_area.CellArea getArea()
   {
     GtkCellArea* _cretval;
     _cretval = gtk_cell_area_context_get_area(cast(GtkCellAreaContext*)cPtr);
-    auto _retval = ObjectG.getDObject!CellArea(cast(GtkCellArea*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.cell_area.CellArea)(cast(GtkCellArea*)_cretval, No.Take);
     return _retval;
   }
 

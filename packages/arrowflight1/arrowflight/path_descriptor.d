@@ -4,9 +4,9 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.descriptor;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 
-class PathDescriptor : Descriptor
+class PathDescriptor : arrowflight.descriptor.Descriptor
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

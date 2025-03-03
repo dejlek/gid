@@ -1,6 +1,6 @@
 module gio.dbus_annotation_info;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -9,7 +9,7 @@ import gobject.boxed;
 /**
  * Information about an annotation.
  */
-class DBusAnnotationInfo : Boxed
+class DBusAnnotationInfo : gobject.boxed.Boxed
 {
 
   this()
@@ -78,7 +78,7 @@ class DBusAnnotationInfo : Boxed
    *   name = The name of the annotation to look up.
    * Returns: The value or %NULL if not found. Do not free, it is owned by annotations.
    */
-  static string lookup(DBusAnnotationInfo[] annotations, string name)
+  static string lookup(gio.dbus_annotation_info.DBusAnnotationInfo[] annotations, string name)
   {
     const(char)* _cretval;
     GDBusAnnotationInfo*[] _tmpannotations;
@@ -89,7 +89,7 @@ class DBusAnnotationInfo : Boxed
 
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_dbus_annotation_info_lookup(_annotations, _name);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

@@ -1,11 +1,9 @@
 module gtk.tooltip;
 
 import gdk.paintable;
-import gdk.paintable_mixin;
 import gdk.rectangle;
-import gid.global;
+import gid.gid;
 import gio.icon;
-import gio.icon_mixin;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -36,7 +34,7 @@ import gtk.widget;
  * - Return %TRUE from your ::query-tooltip handler. This causes the tooltip
  * to be show. If you return %FALSE, it will not be shown.
  */
-class Tooltip : ObjectG
+class Tooltip : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -65,7 +63,7 @@ class Tooltip : ObjectG
    * Params:
    *   customWidget = a `GtkWidget`, or %NULL to unset the old custom widget.
    */
-  void setCustom(Widget customWidget)
+  void setCustom(gtk.widget.Widget customWidget)
   {
     gtk_tooltip_set_custom(cast(GtkTooltip*)cPtr, customWidget ? cast(GtkWidget*)customWidget.cPtr(No.Dup) : null);
   }
@@ -76,7 +74,7 @@ class Tooltip : ObjectG
    * Params:
    *   paintable = a `GdkPaintable`
    */
-  void setIcon(Paintable paintable)
+  void setIcon(gdk.paintable.Paintable paintable)
   {
     gtk_tooltip_set_icon(cast(GtkTooltip*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
@@ -88,7 +86,7 @@ class Tooltip : ObjectG
    * Params:
    *   gicon = a `GIcon` representing the icon
    */
-  void setIconFromGicon(Icon gicon)
+  void setIconFromGicon(gio.icon.Icon gicon)
   {
     gtk_tooltip_set_icon_from_gicon(cast(GtkTooltip*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.Dup) : null);
   }
@@ -143,8 +141,8 @@ class Tooltip : ObjectG
    * Params:
    *   rect = a `GdkRectangle`
    */
-  void setTipArea(Rectangle rect)
+  void setTipArea(gdk.rectangle.Rectangle rect)
   {
-    gtk_tooltip_set_tip_area(cast(GtkTooltip*)cPtr, rect ? cast(GdkRectangle*)rect.cPtr(No.Dup) : null);
+    gtk_tooltip_set_tip_area(cast(GtkTooltip*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null);
   }
 }

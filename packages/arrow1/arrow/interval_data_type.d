@@ -4,9 +4,9 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.temporal_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class IntervalDataType : TemporalDataType
+class IntervalDataType : arrow.temporal_data_type.TemporalDataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -25,11 +25,11 @@ class IntervalDataType : TemporalDataType
     return getType();
   }
 
-  IntervalType getIntervalType()
+  arrow.types.IntervalType getIntervalType()
   {
     GArrowIntervalType _cretval;
     _cretval = garrow_interval_data_type_get_interval_type(cast(GArrowIntervalDataType*)cPtr);
-    IntervalType _retval = cast(IntervalType)_cretval;
+    arrow.types.IntervalType _retval = cast(arrow.types.IntervalType)_cretval;
     return _retval;
   }
 }

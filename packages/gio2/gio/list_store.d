@@ -1,6 +1,6 @@
 module gio.list_store;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.list_model;
@@ -15,7 +15,7 @@ import gobject.types;
  * It provides insertions, deletions, and lookups in logarithmic time
  * with a fast path for the common case of iterating the list linearly.
  */
-class ListStore : ObjectG, ListModel
+class ListStore : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -123,7 +123,7 @@ class ListStore : ObjectG, ListModel
    *   itemType = the #GType of items in the list
    * Returns: a new #GListStore
    */
-  this(GType itemType)
+  this(gobject.types.GType itemType)
   {
     GListStore* _cretval;
     _cretval = g_list_store_new(itemType);
@@ -138,7 +138,7 @@ class ListStore : ObjectG, ListModel
    * Params:
    *   item = the new item
    */
-  void append(ObjectG item)
+  void append(gobject.object.ObjectG item)
   {
     g_list_store_append(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(No.Dup) : null);
   }
@@ -155,7 +155,7 @@ class ListStore : ObjectG, ListModel
    * Returns: Whether store contains item. If it was found, position will be
    *   set to the position where item occurred for the first time.
    */
-  bool find(ObjectG item, out uint position)
+  bool find(gobject.object.ObjectG item, out uint position)
   {
     bool _retval;
     _retval = g_list_store_find(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(No.Dup) : null, cast(uint*)&position);
@@ -173,7 +173,7 @@ class ListStore : ObjectG, ListModel
    *   position = the position at which to insert the new item
    *   item = the new item
    */
-  void insert(uint position, ObjectG item)
+  void insert(uint position, gobject.object.ObjectG item)
   {
     g_list_store_insert(cast(GListStore*)cPtr, position, item ? cast(ObjectC*)item.cPtr(No.Dup) : null);
   }
@@ -215,7 +215,7 @@ class ListStore : ObjectG, ListModel
    *   nRemovals = the number of items to remove
    *   additions = the items to add
    */
-  void splice(uint position, uint nRemovals, ObjectG[] additions)
+  void splice(uint position, uint nRemovals, gobject.object.ObjectG[] additions)
   {
     uint _nAdditions;
     if (additions)

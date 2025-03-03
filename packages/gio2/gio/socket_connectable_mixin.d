@@ -1,7 +1,7 @@
 module gio.socket_connectable_mixin;
 
 public import gio.socket_connectable_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.socket_address_enumerator;
@@ -70,11 +70,11 @@ template SocketConnectableT()
    * Creates a #GSocketAddressEnumerator for connectable.
    * Returns: a new #GSocketAddressEnumerator.
    */
-  override SocketAddressEnumerator enumerate()
+  override gio.socket_address_enumerator.SocketAddressEnumerator enumerate()
   {
     GSocketAddressEnumerator* _cretval;
     _cretval = g_socket_connectable_enumerate(cast(GSocketConnectable*)cPtr);
-    auto _retval = ObjectG.getDObject!SocketAddressEnumerator(cast(GSocketAddressEnumerator*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_address_enumerator.SocketAddressEnumerator)(cast(GSocketAddressEnumerator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -87,11 +87,11 @@ template SocketConnectableT()
    * calling [gio.socket_connectable.SocketConnectable.enumerate].
    * Returns: a new #GSocketAddressEnumerator.
    */
-  override SocketAddressEnumerator proxyEnumerate()
+  override gio.socket_address_enumerator.SocketAddressEnumerator proxyEnumerate()
   {
     GSocketAddressEnumerator* _cretval;
     _cretval = g_socket_connectable_proxy_enumerate(cast(GSocketConnectable*)cPtr);
-    auto _retval = ObjectG.getDObject!SocketAddressEnumerator(cast(GSocketAddressEnumerator*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_address_enumerator.SocketAddressEnumerator)(cast(GSocketAddressEnumerator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ template SocketConnectableT()
   {
     char* _cretval;
     _cretval = g_socket_connectable_to_string(cast(GSocketConnectable*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

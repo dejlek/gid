@@ -3,10 +3,10 @@ module arrowflight.server_auth_handler;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class ServerAuthHandler : ObjectG
+class ServerAuthHandler : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

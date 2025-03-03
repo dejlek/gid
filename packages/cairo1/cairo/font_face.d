@@ -3,7 +3,7 @@ module cairo.font_face;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -19,7 +19,7 @@ import gobject.boxed;
  * Memory management of #cairo_font_face_t is done with
  * [cairo.font_face.FontFace.reference] and [cairo.font_face.FontFace.destroy].
  */
-class FontFace : Boxed
+class FontFace : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -48,11 +48,11 @@ class FontFace : Boxed
    * a font face. See #cairo_font_type_t for available types.
    * Returns: The type of font_face.
    */
-  FontType getFontType()
+  cairo.types.FontType getFontType()
   {
     cairo_font_type_t _cretval;
     _cretval = cairo_font_face_get_type(cast(cairo_font_face_t*)cPtr);
-    FontType _retval = cast(FontType)_cretval;
+    cairo.types.FontType _retval = cast(cairo.types.FontType)_cretval;
     return _retval;
   }
 
@@ -65,7 +65,7 @@ class FontFace : Boxed
    *     attached to
    * Returns: the user data previously attached or %NULL.
    */
-  void* getUserData(UserDataKey key)
+  void* getUserData(cairo.types.UserDataKey key)
   {
     auto _retval = cairo_font_face_get_user_data(cast(cairo_font_face_t*)cPtr, &key);
     return _retval;
@@ -77,11 +77,11 @@ class FontFace : Boxed
    * Returns: %CAIRO_STATUS_SUCCESS or another error such as
    *   %CAIRO_STATUS_NO_MEMORY.
    */
-  Status status()
+  cairo.types.Status status()
   {
     cairo_status_t _cretval;
     _cretval = cairo_font_face_status(cast(cairo_font_face_t*)cPtr);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 }

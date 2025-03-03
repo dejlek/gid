@@ -1,6 +1,6 @@
 module gio.menu_model;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.menu_attribute_iter;
@@ -104,7 +104,7 @@ import gobject.object;
  * be rendered as ‘selected’ when the state of the action is equal to the
  * target value of the menu item.
  */
-class MenuModel : ObjectG
+class MenuModel : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -139,12 +139,12 @@ class MenuModel : ObjectG
    *     %NULL
    * Returns: the value of the attribute
    */
-  VariantG getItemAttributeValue(int itemIndex, string attribute, VariantType expectedType)
+  glib.variant.VariantG getItemAttributeValue(int itemIndex, string attribute, glib.variant_type.VariantType expectedType)
   {
     VariantC* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
-    _cretval = g_menu_model_get_item_attribute_value(cast(GMenuModel*)cPtr, itemIndex, _attribute, expectedType ? cast(GVariantType*)expectedType.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    _cretval = g_menu_model_get_item_attribute_value(cast(GMenuModel*)cPtr, itemIndex, _attribute, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -158,12 +158,12 @@ class MenuModel : ObjectG
    *   link = the link to query
    * Returns: the linked #GMenuModel, or %NULL
    */
-  MenuModel getItemLink(int itemIndex, string link)
+  gio.menu_model.MenuModel getItemLink(int itemIndex, string link)
   {
     GMenuModel* _cretval;
     const(char)* _link = link.toCString(No.Alloc);
     _cretval = g_menu_model_get_item_link(cast(GMenuModel*)cPtr, itemIndex, _link);
-    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -223,11 +223,11 @@ class MenuModel : ObjectG
    *   itemIndex = the index of the item
    * Returns: a new #GMenuAttributeIter
    */
-  MenuAttributeIter iterateItemAttributes(int itemIndex)
+  gio.menu_attribute_iter.MenuAttributeIter iterateItemAttributes(int itemIndex)
   {
     GMenuAttributeIter* _cretval;
     _cretval = g_menu_model_iterate_item_attributes(cast(GMenuModel*)cPtr, itemIndex);
-    auto _retval = ObjectG.getDObject!MenuAttributeIter(cast(GMenuAttributeIter*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_attribute_iter.MenuAttributeIter)(cast(GMenuAttributeIter*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -239,11 +239,11 @@ class MenuModel : ObjectG
    *   itemIndex = the index of the item
    * Returns: a new #GMenuLinkIter
    */
-  MenuLinkIter iterateItemLinks(int itemIndex)
+  gio.menu_link_iter.MenuLinkIter iterateItemLinks(int itemIndex)
   {
     GMenuLinkIter* _cretval;
     _cretval = g_menu_model_iterate_item_links(cast(GMenuModel*)cPtr, itemIndex);
-    auto _retval = ObjectG.getDObject!MenuLinkIter(cast(GMenuLinkIter*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_link_iter.MenuLinkIter)(cast(GMenuLinkIter*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -270,8 +270,8 @@ class MenuModel : ObjectG
    *   added = the number of items added
    *   menuModel = the instance the signal is connected to
    */
-  alias ItemsChangedCallbackDlg = void delegate(int position, int removed, int added, MenuModel menuModel);
-  alias ItemsChangedCallbackFunc = void function(int position, int removed, int added, MenuModel menuModel);
+  alias ItemsChangedCallbackDlg = void delegate(int position, int removed, int added, gio.menu_model.MenuModel menuModel);
+  alias ItemsChangedCallbackFunc = void function(int position, int removed, int added, gio.menu_model.MenuModel menuModel);
 
   /**
    * Connect to ItemsChanged signal.
@@ -287,10 +287,10 @@ class MenuModel : ObjectG
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto menuModel = getVal!MenuModel(_paramVals);
-      auto position = getVal!int(&_paramVals[1]);
-      auto removed = getVal!int(&_paramVals[2]);
-      auto added = getVal!int(&_paramVals[3]);
+      auto menuModel = getVal!(gio.menu_model.MenuModel)(_paramVals);
+      auto position = getVal!(int)(&_paramVals[1]);
+      auto removed = getVal!(int)(&_paramVals[2]);
+      auto added = getVal!(int)(&_paramVals[3]);
       _dClosure.dlg(position, removed, added, menuModel);
     }
 

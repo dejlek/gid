@@ -1,18 +1,15 @@
 module gio.drive;
 
 public import gio.drive_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
 import gio.icon;
-import gio.icon_mixin;
 import gio.mount_operation;
 import gio.types;
 import gio.volume;
-import gio.volume_mixin;
 import glib.error;
 import gobject.dclosure;
 import gobject.object;
@@ -93,7 +90,7 @@ interface Drive
 
    * Deprecated: Use [gio.drive.Drive.ejectWithOperation] instead.
    */
-  void eject(MountUnmountFlags flags, Cancellable cancellable, AsyncReadyCallback callback);
+  void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes ejecting a drive.
@@ -104,7 +101,7 @@ interface Drive
 
    * Deprecated: Use [gio.drive.Drive.ejectWithOperationFinish] instead.
    */
-  bool ejectFinish(AsyncResult result);
+  bool ejectFinish(gio.async_result.AsyncResult result);
 
   /**
    * Ejects a drive. This is an asynchronous operation, and is
@@ -117,7 +114,7 @@ interface Drive
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
    */
-  void ejectWithOperation(MountUnmountFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback);
+  void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes ejecting a drive. If any errors occurred during the operation,
@@ -126,7 +123,7 @@ interface Drive
    *   result = a #GAsyncResult.
    * Returns: %TRUE if the drive was successfully ejected. %FALSE otherwise.
    */
-  bool ejectWithOperationFinish(AsyncResult result);
+  bool ejectWithOperationFinish(gio.async_result.AsyncResult result);
 
   /**
    * Gets the kinds of identifiers that drive has.
@@ -143,7 +140,7 @@ interface Drive
    * Returns: #GIcon for the drive.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  Icon getIcon();
+  gio.icon.Icon getIcon();
 
   /**
    * Gets the identifier of the given kind for drive. The only
@@ -174,14 +171,14 @@ interface Drive
    * Gets a hint about how a drive can be started/stopped.
    * Returns: A value from the #GDriveStartStopType enumeration.
    */
-  DriveStartStopType getStartStopType();
+  gio.types.DriveStartStopType getStartStopType();
 
   /**
    * Gets the icon for drive.
    * Returns: symbolic #GIcon for the drive.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  Icon getSymbolicIcon();
+  gio.icon.Icon getSymbolicIcon();
 
   /**
    * Get a list of mountable volumes for drive.
@@ -189,7 +186,7 @@ interface Drive
    * its elements have been unreffed with [gobject.object.ObjectG.unref].
    * Returns: #GList containing any #GVolume objects on the given drive.
    */
-  Volume[] getVolumes();
+  gio.volume.Volume[] getVolumes();
 
   /**
    * Checks if the drive has media. Note that the OS may not be polling
@@ -234,7 +231,7 @@ interface Drive
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
    */
-  void pollForMedia(Cancellable cancellable, AsyncReadyCallback callback);
+  void pollForMedia(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes an operation started with [gio.drive.Drive.pollForMedia] on a drive.
@@ -243,7 +240,7 @@ interface Drive
    * Returns: %TRUE if the drive has been poll_for_mediaed successfully,
    *   %FALSE otherwise.
    */
-  bool pollForMediaFinish(AsyncResult result);
+  bool pollForMediaFinish(gio.async_result.AsyncResult result);
 
   /**
    * Asynchronously starts a drive.
@@ -257,7 +254,7 @@ interface Drive
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
    */
-  void start(DriveStartFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback);
+  void start(gio.types.DriveStartFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes starting a drive.
@@ -266,7 +263,7 @@ interface Drive
    * Returns: %TRUE if the drive has been started successfully,
    *   %FALSE otherwise.
    */
-  bool startFinish(AsyncResult result);
+  bool startFinish(gio.async_result.AsyncResult result);
 
   /**
    * Asynchronously stops a drive.
@@ -280,7 +277,7 @@ interface Drive
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
    */
-  void stop(MountUnmountFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback);
+  void stop(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes stopping a drive.
@@ -289,14 +286,14 @@ interface Drive
    * Returns: %TRUE if the drive has been stopped successfully,
    *   %FALSE otherwise.
    */
-  bool stopFinish(AsyncResult result);
+  bool stopFinish(gio.async_result.AsyncResult result);
 
   /**
    * Emitted when the drive's state has changed.
    *   drive = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(Drive drive);
-  alias ChangedCallbackFunc = void function(Drive drive);
+  alias ChangedCallbackDlg = void delegate(gio.drive.Drive drive);
+  alias ChangedCallbackFunc = void function(gio.drive.Drive drive);
 
   /**
    * Connect to Changed signal.
@@ -315,8 +312,8 @@ interface Drive
    * finalized.
    *   drive = the instance the signal is connected to
    */
-  alias DisconnectedCallbackDlg = void delegate(Drive drive);
-  alias DisconnectedCallbackFunc = void function(Drive drive);
+  alias DisconnectedCallbackDlg = void delegate(gio.drive.Drive drive);
+  alias DisconnectedCallbackFunc = void function(gio.drive.Drive drive);
 
   /**
    * Connect to Disconnected signal.
@@ -333,8 +330,8 @@ interface Drive
    * been pressed.
    *   drive = the instance the signal is connected to
    */
-  alias EjectButtonCallbackDlg = void delegate(Drive drive);
-  alias EjectButtonCallbackFunc = void function(Drive drive);
+  alias EjectButtonCallbackDlg = void delegate(gio.drive.Drive drive);
+  alias EjectButtonCallbackFunc = void function(gio.drive.Drive drive);
 
   /**
    * Connect to EjectButton signal.
@@ -351,8 +348,8 @@ interface Drive
    * been pressed.
    *   drive = the instance the signal is connected to
    */
-  alias StopButtonCallbackDlg = void delegate(Drive drive);
-  alias StopButtonCallbackFunc = void function(Drive drive);
+  alias StopButtonCallbackDlg = void delegate(gio.drive.Drive drive);
+  alias StopButtonCallbackFunc = void function(gio.drive.Drive drive);
 
   /**
    * Connect to StopButton signal.

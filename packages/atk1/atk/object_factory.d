@@ -4,7 +4,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.object;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gobject.types;
 
@@ -17,7 +17,7 @@ import gobject.types;
  * registry the factory type to be used to create an accessible of a
  * particular GType.
  */
-class ObjectFactory : ObjectG
+class ObjectFactory : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -44,11 +44,11 @@ class ObjectFactory : ObjectG
    * Returns: an #AtkObject that implements an accessibility
    *   interface on behalf of obj
    */
-  ObjectAtk createAccessible(ObjectG obj)
+  atk.object.ObjectAtk createAccessible(gobject.object.ObjectG obj)
   {
     AtkObject* _cretval;
     _cretval = atk_object_factory_create_accessible(cast(AtkObjectFactory*)cPtr, obj ? cast(ObjectC*)obj.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!ObjectAtk(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -57,9 +57,9 @@ class ObjectFactory : ObjectG
    * Returns: the type of the accessible which is created by the factory.
    *   The value G_TYPE_INVALID is returned if no type if found.
    */
-  GType getAccessibleType()
+  gobject.types.GType getAccessibleType()
   {
-    GType _retval;
+    gobject.types.GType _retval;
     _retval = atk_object_factory_get_accessible_type(cast(AtkObjectFactory*)cPtr);
     return _retval;
   }

@@ -1,13 +1,12 @@
 module gtk.tree_selection;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.tree_iter;
 import gtk.tree_model;
-import gtk.tree_model_mixin;
 import gtk.tree_path;
 import gtk.tree_view;
 import gtk.types;
@@ -38,7 +37,7 @@ import gtk.types;
 
  * Deprecated: Use [gtk.selection_model.SelectionModel] instead
  */
-class TreeSelection : ObjectG
+class TreeSelection : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -77,11 +76,11 @@ class TreeSelection : ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  SelectionMode getMode()
+  gtk.types.SelectionMode getMode()
   {
     GtkSelectionMode _cretval;
     _cretval = gtk_tree_selection_get_mode(cast(GtkTreeSelection*)cPtr);
-    SelectionMode _retval = cast(SelectionMode)_cretval;
+    gtk.types.SelectionMode _retval = cast(gtk.types.SelectionMode)_cretval;
     return _retval;
   }
 
@@ -98,14 +97,14 @@ class TreeSelection : ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  bool getSelected(out TreeModel model, out TreeIter iter)
+  bool getSelected(out gtk.tree_model.TreeModel model, out gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
     GtkTreeModel* _model;
     GtkTreeIter _iter;
     _retval = gtk_tree_selection_get_selected(cast(GtkTreeSelection*)cPtr, &_model, &_iter);
-    model = ObjectG.getDObject!TreeModel(_model, No.Take);
-    iter = new TreeIter(cast(void*)&_iter, No.Take);
+    model = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -124,13 +123,13 @@ class TreeSelection : ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  TreePath[] getSelectedRows(out TreeModel model)
+  gtk.tree_path.TreePath[] getSelectedRows(out gtk.tree_model.TreeModel model)
   {
     GList* _cretval;
     GtkTreeModel* _model;
     _cretval = gtk_tree_selection_get_selected_rows(cast(GtkTreeSelection*)cPtr, &_model);
-    auto _retval = gListToD!(TreePath, GidOwnership.Full)(cast(GList*)_cretval);
-    model = ObjectG.getDObject!TreeModel(_model, No.Take);
+    auto _retval = gListToD!(gtk.tree_path.TreePath, GidOwnership.Full)(cast(GList*)_cretval);
+    model = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
     return _retval;
   }
 
@@ -140,11 +139,11 @@ class TreeSelection : ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  TreeView getTreeView()
+  gtk.tree_view.TreeView getTreeView()
   {
     GtkTreeView* _cretval;
     _cretval = gtk_tree_selection_get_tree_view(cast(GtkTreeSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!TreeView(cast(GtkTreeView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_view.TreeView)(cast(GtkTreeView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -156,7 +155,7 @@ class TreeSelection : ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  bool iterIsSelected(TreeIter iter)
+  bool iterIsSelected(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
     _retval = gtk_tree_selection_iter_is_selected(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
@@ -172,7 +171,7 @@ class TreeSelection : ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  bool pathIsSelected(TreePath path)
+  bool pathIsSelected(gtk.tree_path.TreePath path)
   {
     bool _retval;
     _retval = gtk_tree_selection_path_is_selected(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
@@ -197,7 +196,7 @@ class TreeSelection : ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  void selectIter(TreeIter iter)
+  void selectIter(gtk.tree_iter.TreeIter iter)
   {
     gtk_tree_selection_select_iter(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
   }
@@ -209,7 +208,7 @@ class TreeSelection : ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  void selectPath(TreePath path)
+  void selectPath(gtk.tree_path.TreePath path)
   {
     gtk_tree_selection_select_path(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
@@ -223,7 +222,7 @@ class TreeSelection : ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  void selectRange(TreePath startPath, TreePath endPath)
+  void selectRange(gtk.tree_path.TreePath startPath, gtk.tree_path.TreePath endPath)
   {
     gtk_tree_selection_select_range(cast(GtkTreeSelection*)cPtr, startPath ? cast(GtkTreePath*)startPath.cPtr(No.Dup) : null, endPath ? cast(GtkTreePath*)endPath.cPtr(No.Dup) : null);
   }
@@ -237,13 +236,13 @@ class TreeSelection : ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  void selectedForeach(TreeSelectionForeachFunc func)
+  void selectedForeach(gtk.types.TreeSelectionForeachFunc func)
   {
     extern(C) void _funcCallback(GtkTreeModel* model, GtkTreePath* path, GtkTreeIter* iter, void* data)
     {
-      auto _dlg = cast(TreeSelectionForeachFunc*)data;
+      auto _dlg = cast(gtk.types.TreeSelectionForeachFunc*)data;
 
-      (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), path ? new TreePath(cast(void*)path, No.Take) : null, iter ? new TreeIter(cast(void*)iter, No.Take) : null);
+      (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -260,7 +259,7 @@ class TreeSelection : ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  void setMode(SelectionMode type)
+  void setMode(gtk.types.SelectionMode type)
   {
     gtk_tree_selection_set_mode(cast(GtkTreeSelection*)cPtr, type);
   }
@@ -276,13 +275,13 @@ class TreeSelection : ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  void setSelectFunction(TreeSelectionFunc func)
+  void setSelectFunction(gtk.types.TreeSelectionFunc func)
   {
     extern(C) bool _funcCallback(GtkTreeSelection* selection, GtkTreeModel* model, GtkTreePath* path, bool pathCurrentlySelected, void* data)
     {
-      auto _dlg = cast(TreeSelectionFunc*)data;
+      auto _dlg = cast(gtk.types.TreeSelectionFunc*)data;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!TreeSelection(cast(void*)selection, No.Take), ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), path ? new TreePath(cast(void*)path, No.Take) : null, pathCurrentlySelected);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_selection.TreeSelection)(cast(void*)selection, No.Take), ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, pathCurrentlySelected);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -309,7 +308,7 @@ class TreeSelection : ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  void unselectIter(TreeIter iter)
+  void unselectIter(gtk.tree_iter.TreeIter iter)
   {
     gtk_tree_selection_unselect_iter(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
   }
@@ -321,7 +320,7 @@ class TreeSelection : ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  void unselectPath(TreePath path)
+  void unselectPath(gtk.tree_path.TreePath path)
   {
     gtk_tree_selection_unselect_path(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
@@ -335,7 +334,7 @@ class TreeSelection : ObjectG
 
    * Deprecated: Use GtkListView or GtkColumnView
    */
-  void unselectRange(TreePath startPath, TreePath endPath)
+  void unselectRange(gtk.tree_path.TreePath startPath, gtk.tree_path.TreePath endPath)
   {
     gtk_tree_selection_unselect_range(cast(GtkTreeSelection*)cPtr, startPath ? cast(GtkTreePath*)startPath.cPtr(No.Dup) : null, endPath ? cast(GtkTreePath*)endPath.cPtr(No.Dup) : null);
   }
@@ -347,8 +346,8 @@ class TreeSelection : ObjectG
    * has happened.
    *   treeSelection = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(TreeSelection treeSelection);
-  alias ChangedCallbackFunc = void function(TreeSelection treeSelection);
+  alias ChangedCallbackDlg = void delegate(gtk.tree_selection.TreeSelection treeSelection);
+  alias ChangedCallbackFunc = void function(gtk.tree_selection.TreeSelection treeSelection);
 
   /**
    * Connect to Changed signal.
@@ -364,7 +363,7 @@ class TreeSelection : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto treeSelection = getVal!TreeSelection(_paramVals);
+      auto treeSelection = getVal!(gtk.tree_selection.TreeSelection)(_paramVals);
       _dClosure.dlg(treeSelection);
     }
 

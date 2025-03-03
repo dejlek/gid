@@ -1,6 +1,6 @@
 module gobject.object_construct_param;
 
-import gid.global;
+import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.param_spec;
@@ -31,13 +31,13 @@ class ObjectConstructParam
     return cast(void*)&cInstance;
   }
 
-  @property ParamSpec pspec()
+  @property gobject.param_spec.ParamSpec pspec()
   {
-    return new ParamSpec(cast(GParamSpec*)(cast(GObjectConstructParam*)cPtr).pspec);
+    return new gobject.param_spec.ParamSpec(cast(GParamSpec*)(cast(GObjectConstructParam*)cPtr).pspec);
   }
 
-  @property Value value()
+  @property gobject.value.Value value()
   {
-    return new Value(cast(GValue*)(cast(GObjectConstructParam*)cPtr).value);
+    return new gobject.value.Value(cast(GValue*)(cast(GObjectConstructParam*)cPtr).value);
   }
 }

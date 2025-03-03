@@ -4,14 +4,14 @@ import cairo.c.functions;
 import cairo.c.types;
 import cairo.rectangle;
 import cairo.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
  * A data structure for holding a dynamically allocated
  * array of rectangles.
  */
-class RectangleList : Boxed
+class RectangleList : gobject.boxed.Boxed
 {
 
   this()
@@ -40,19 +40,19 @@ class RectangleList : Boxed
     return getType();
   }
 
-  @property Status status()
+  @property cairo.types.Status status()
   {
-    return cast(Status)(cast(cairo_rectangle_list_t*)cPtr).status;
+    return cast(cairo.types.Status)(cast(cairo_rectangle_list_t*)cPtr).status;
   }
 
-  @property void status(Status propval)
+  @property void status(cairo.types.Status propval)
   {
     (cast(cairo_rectangle_list_t*)cPtr).status = cast(cairo_status_t)propval;
   }
 
-  @property Rectangle rectangles()
+  @property cairo.rectangle.Rectangle rectangles()
   {
-    return new Rectangle(cast(cairo_rectangle_t*)(cast(cairo_rectangle_list_t*)cPtr).rectangles);
+    return new cairo.rectangle.Rectangle(cast(cairo_rectangle_t*)(cast(cairo_rectangle_list_t*)cPtr).rectangles);
   }
 
   @property int numRectangles()

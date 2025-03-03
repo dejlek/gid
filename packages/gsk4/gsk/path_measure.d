@@ -1,6 +1,6 @@
 module gsk.path_measure;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gsk.c.functions;
 import gsk.c.types;
@@ -17,7 +17,7 @@ import gsk.types;
  * A `GskPathMeasure` struct is a reference counted struct
  * and should be treated as opaque.
  */
-class PathMeasure : Boxed
+class PathMeasure : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -48,7 +48,7 @@ class PathMeasure : Boxed
    *   path = the path to measure
    * Returns: a new `GskPathMeasure` representing path
    */
-  this(Path path)
+  this(gsk.path.Path path)
   {
     GskPathMeasure* _cretval;
     _cretval = gsk_path_measure_new(path ? cast(GskPath*)path.cPtr(No.Dup) : null);
@@ -62,11 +62,11 @@ class PathMeasure : Boxed
    *   tolerance = the tolerance for measuring operations
    * Returns: a new `GskPathMeasure` representing path
    */
-  static PathMeasure newWithTolerance(Path path, float tolerance)
+  static gsk.path_measure.PathMeasure newWithTolerance(gsk.path.Path path, float tolerance)
   {
     GskPathMeasure* _cretval;
     _cretval = gsk_path_measure_new_with_tolerance(path ? cast(GskPath*)path.cPtr(No.Dup) : null, tolerance);
-    auto _retval = _cretval ? new PathMeasure(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gsk.path_measure.PathMeasure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -86,11 +86,11 @@ class PathMeasure : Boxed
    * Returns the path that the measure was created for.
    * Returns: the path of self
    */
-  Path getPath()
+  gsk.path.Path getPath()
   {
     GskPath* _cretval;
     _cretval = gsk_path_measure_get_path(cast(GskPathMeasure*)cPtr);
-    auto _retval = _cretval ? new Path(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

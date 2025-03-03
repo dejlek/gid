@@ -3,7 +3,7 @@ module cairo.device;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -14,7 +14,7 @@ import gobject.boxed;
  * Memory management of #cairo_device_t is done with
  * [cairo.device.Device.reference] and [cairo.device.Device.destroy].
  */
-class Device : Boxed
+class Device : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -59,11 +59,11 @@ class Device : Boxed
    *   acquired. After a successful call to [cairo.device.Device.acquire],
    *   a matching call to [cairo.device.Device.release] is required.
    */
-  Status acquire()
+  cairo.types.Status acquire()
   {
     cairo_status_t _cretval;
     _cretval = cairo_device_acquire(cast(cairo_device_t*)cPtr);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -103,11 +103,11 @@ class Device : Boxed
    * for available types.
    * Returns: The type of device.
    */
-  DeviceType getDeviceType()
+  cairo.types.DeviceType getDeviceType()
   {
     cairo_device_type_t _cretval;
     _cretval = cairo_device_get_type(cast(cairo_device_t*)cPtr);
-    DeviceType _retval = cast(DeviceType)_cretval;
+    cairo.types.DeviceType _retval = cast(cairo.types.DeviceType)_cretval;
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class Device : Boxed
    *     attached to
    * Returns: the user data previously attached or %NULL.
    */
-  void* getUserData(UserDataKey key)
+  void* getUserData(cairo.types.UserDataKey key)
   {
     auto _retval = cairo_device_get_user_data(cast(cairo_device_t*)cPtr, &key);
     return _retval;
@@ -187,12 +187,12 @@ class Device : Boxed
    *   writeFunc = the write function
    * Returns: the status after the operation
    */
-  Status observerPrint(WriteFunc writeFunc)
+  cairo.types.Status observerPrint(cairo.types.WriteFunc writeFunc)
   {
     extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length)
     {
-      Status _dretval;
-      auto _dlg = cast(WriteFunc*)closure;
+      cairo.types.Status _dretval;
+      auto _dlg = cast(cairo.types.WriteFunc*)closure;
       ubyte[] _data;
       _data.length = length;
       _data[0 .. length] = data[0 .. length];
@@ -207,7 +207,7 @@ class Device : Boxed
     cairo_status_t _cretval;
     auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
     _cretval = cairo_device_observer_print(cast(cairo_device_t*)cPtr, _writeFuncCB, _writeFunc);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -237,11 +237,11 @@ class Device : Boxed
    * Returns: %CAIRO_STATUS_SUCCESS on success or an error code if
    *   the device is in an error state.
    */
-  Status status()
+  cairo.types.Status status()
   {
     cairo_status_t _cretval;
     _cretval = cairo_device_status(cast(cairo_device_t*)cPtr);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 }

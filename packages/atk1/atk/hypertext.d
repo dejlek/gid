@@ -5,7 +5,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.hyperlink;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 
@@ -37,7 +37,7 @@ interface Hypertext
    * Returns: the link in this hypertext document at
    *   index link_index
    */
-  Hyperlink getLink(int linkIndex);
+  atk.hyperlink.Hyperlink getLink(int linkIndex);
 
   /**
    * Gets the index into the array of hyperlinks that is associated with
@@ -63,8 +63,8 @@ interface Hypertext
    *   arg1 = the index of the hyperlink which is selected
    *   hypertext = the instance the signal is connected to
    */
-  alias LinkSelectedCallbackDlg = void delegate(int arg1, Hypertext hypertext);
-  alias LinkSelectedCallbackFunc = void function(int arg1, Hypertext hypertext);
+  alias LinkSelectedCallbackDlg = void delegate(int arg1, atk.hypertext.Hypertext hypertext);
+  alias LinkSelectedCallbackFunc = void function(int arg1, atk.hypertext.Hypertext hypertext);
 
   /**
    * Connect to LinkSelected signal.

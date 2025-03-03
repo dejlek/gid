@@ -1,6 +1,6 @@
 module gtk.scale_button;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -34,7 +34,7 @@ import gtk.widget;
  * `GtkScaleButton` has a single CSS node with name scalebutton and `.scale`
  * style class, and contains a `button` node with a `.toggle` style class.
  */
-class ScaleButton : Widget, AccessibleRange, Orientable
+class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -100,11 +100,11 @@ class ScaleButton : Widget, AccessibleRange, Orientable
    * See [gtk.range.Range.getAdjustment] for details.
    * Returns: the adjustment associated with the scale
    */
-  Adjustment getAdjustment()
+  gtk.adjustment.Adjustment getAdjustment()
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scale_button_get_adjustment(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -124,11 +124,11 @@ class ScaleButton : Widget, AccessibleRange, Orientable
    * Returns: the minus button
    *   of the `GtkScaleButton`
    */
-  Button getMinusButton()
+  gtk.button.Button getMinusButton()
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_minus_button(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -137,11 +137,11 @@ class ScaleButton : Widget, AccessibleRange, Orientable
    * Returns: the plus button
    *   of the `GtkScaleButton`
    */
-  Button getPlusButton()
+  gtk.button.Button getPlusButton()
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_plus_button(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -149,11 +149,11 @@ class ScaleButton : Widget, AccessibleRange, Orientable
    * Retrieves the popup of the `GtkScaleButton`.
    * Returns: the popup of the `GtkScaleButton`
    */
-  Widget getPopup()
+  gtk.widget.Widget getPopup()
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_popup(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class ScaleButton : Widget, AccessibleRange, Orientable
    * Params:
    *   adjustment = a `GtkAdjustment`
    */
-  void setAdjustment(Adjustment adjustment)
+  void setAdjustment(gtk.adjustment.Adjustment adjustment)
   {
     gtk_scale_button_set_adjustment(cast(GtkScaleButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
@@ -225,8 +225,8 @@ class ScaleButton : Widget, AccessibleRange, Orientable
    * The default binding for this signal is <kbd>Escape</kbd>.
    *   scaleButton = the instance the signal is connected to
    */
-  alias PopdownCallbackDlg = void delegate(ScaleButton scaleButton);
-  alias PopdownCallbackFunc = void function(ScaleButton scaleButton);
+  alias PopdownCallbackDlg = void delegate(gtk.scale_button.ScaleButton scaleButton);
+  alias PopdownCallbackFunc = void function(gtk.scale_button.ScaleButton scaleButton);
 
   /**
    * Connect to Popdown signal.
@@ -242,7 +242,7 @@ class ScaleButton : Widget, AccessibleRange, Orientable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto scaleButton = getVal!ScaleButton(_paramVals);
+      auto scaleButton = getVal!(gtk.scale_button.ScaleButton)(_paramVals);
       _dClosure.dlg(scaleButton);
     }
 
@@ -257,8 +257,8 @@ class ScaleButton : Widget, AccessibleRange, Orientable
    * <kbd>Enter</kbd> and <kbd>Return</kbd>.
    *   scaleButton = the instance the signal is connected to
    */
-  alias PopupCallbackDlg = void delegate(ScaleButton scaleButton);
-  alias PopupCallbackFunc = void function(ScaleButton scaleButton);
+  alias PopupCallbackDlg = void delegate(gtk.scale_button.ScaleButton scaleButton);
+  alias PopupCallbackFunc = void function(gtk.scale_button.ScaleButton scaleButton);
 
   /**
    * Connect to Popup signal.
@@ -274,7 +274,7 @@ class ScaleButton : Widget, AccessibleRange, Orientable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto scaleButton = getVal!ScaleButton(_paramVals);
+      auto scaleButton = getVal!(gtk.scale_button.ScaleButton)(_paramVals);
       _dClosure.dlg(scaleButton);
     }
 
@@ -288,8 +288,8 @@ class ScaleButton : Widget, AccessibleRange, Orientable
    *   value = the new value
    *   scaleButton = the instance the signal is connected to
    */
-  alias ValueChangedCallbackDlg = void delegate(double value, ScaleButton scaleButton);
-  alias ValueChangedCallbackFunc = void function(double value, ScaleButton scaleButton);
+  alias ValueChangedCallbackDlg = void delegate(double value, gtk.scale_button.ScaleButton scaleButton);
+  alias ValueChangedCallbackFunc = void function(double value, gtk.scale_button.ScaleButton scaleButton);
 
   /**
    * Connect to ValueChanged signal.
@@ -305,8 +305,8 @@ class ScaleButton : Widget, AccessibleRange, Orientable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto scaleButton = getVal!ScaleButton(_paramVals);
-      auto value = getVal!double(&_paramVals[1]);
+      auto scaleButton = getVal!(gtk.scale_button.ScaleButton)(_paramVals);
+      auto value = getVal!(double)(&_paramVals[1]);
       _dClosure.dlg(value, scaleButton);
     }
 

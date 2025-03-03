@@ -4,10 +4,9 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.display;
 import gdk.types;
-import gid.global;
-import gio.app_launch_context : DGioAppLaunchContext = AppLaunchContext;
+import gid.gid;
+import gio.app_launch_context;
 import gio.icon;
-import gio.icon_mixin;
 import gobject.object;
 
 /**
@@ -24,7 +23,7 @@ import gobject.object;
  * g_object_unref $(LPAREN)context$(RPAREN);
  * ```
  */
-class AppLaunchContext : DGioAppLaunchContext
+class AppLaunchContext : gio.app_launch_context.AppLaunchContext
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -43,17 +42,17 @@ class AppLaunchContext : DGioAppLaunchContext
     return getType();
   }
 
-  alias getDisplay = DGioAppLaunchContext.getDisplay;
+  alias getDisplay = gio.app_launch_context.AppLaunchContext.getDisplay;
 
   /**
    * Gets the `GdkDisplay` that context is for.
    * Returns: the display of context
    */
-  Display getDisplay()
+  gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gdk_app_launch_context_get_display(cast(GdkAppLaunchContext*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -85,7 +84,7 @@ class AppLaunchContext : DGioAppLaunchContext
    * Params:
    *   icon = a `GIcon`
    */
-  void setIcon(Icon icon)
+  void setIcon(gio.icon.Icon icon)
   {
     gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }

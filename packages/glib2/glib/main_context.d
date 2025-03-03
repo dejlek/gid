@@ -1,6 +1,6 @@
 module glib.main_context;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.cond;
@@ -13,7 +13,7 @@ import gobject.boxed;
  * The `GMainContext` struct is an opaque data
  * type representing a set of sources to be handled in a main loop.
  */
-class MainContext : Boxed
+class MainContext : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -55,11 +55,11 @@ class MainContext : Boxed
    *     set at creation time.
    * Returns: the new #GMainContext
    */
-  static MainContext newWithFlags(MainContextFlags flags)
+  static glib.main_context.MainContext newWithFlags(glib.types.MainContextFlags flags)
   {
     GMainContext* _cretval;
     _cretval = g_main_context_new_with_flags(flags);
-    auto _retval = _cretval ? new MainContext(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class MainContext : Boxed
    *     the same as the priority used for [glib.source.Source.attach] to ensure that the
    *     file descriptor is polled whenever the results may be needed.
    */
-  void addPoll(PollFD fd, int priority)
+  void addPoll(glib.types.PollFD fd, int priority)
   {
     g_main_context_add_poll(cast(GMainContext*)cPtr, &fd, priority);
   }
@@ -116,7 +116,7 @@ class MainContext : Boxed
    *     the last call to [glib.main_context.MainContext.query]
    * Returns: %TRUE if some sources are ready to be dispatched.
    */
-  bool check(int maxPriority, PollFD[] fds)
+  bool check(int maxPriority, glib.types.PollFD[] fds)
   {
     bool _retval;
     int _nFds;
@@ -149,11 +149,11 @@ class MainContext : Boxed
    *   userData = the user data from the callback.
    * Returns: the source, if one was found, otherwise %NULL
    */
-  Source findSourceByFuncsUserData(SourceFuncs funcs, void* userData)
+  glib.source.Source findSourceByFuncsUserData(glib.types.SourceFuncs funcs, void* userData)
   {
     GSource* _cretval;
     _cretval = g_main_context_find_source_by_funcs_user_data(cast(GMainContext*)cPtr, &funcs, userData);
-    auto _retval = _cretval ? new Source(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -172,11 +172,11 @@ class MainContext : Boxed
    *   sourceId = the source ID, as returned by [glib.source.Source.getId].
    * Returns: the #GSource
    */
-  Source findSourceById(uint sourceId)
+  glib.source.Source findSourceById(uint sourceId)
   {
     GSource* _cretval;
     _cretval = g_main_context_find_source_by_id(cast(GMainContext*)cPtr, sourceId);
-    auto _retval = _cretval ? new Source(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -188,11 +188,11 @@ class MainContext : Boxed
    *   userData = the user_data for the callback.
    * Returns: the source, if one was found, otherwise %NULL
    */
-  Source findSourceByUserData(void* userData)
+  glib.source.Source findSourceByUserData(void* userData)
   {
     GSource* _cretval;
     _cretval = g_main_context_find_source_by_user_data(cast(GMainContext*)cPtr, userData);
-    auto _retval = _cretval ? new Source(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -208,11 +208,11 @@ class MainContext : Boxed
    *   priority = the priority at which to run function
    *   function_ = function to call
    */
-  void invokeFull(int priority, SourceFunc function_)
+  void invokeFull(int priority, glib.types.SourceFunc function_)
   {
     extern(C) bool _function_Callback(void* userData)
     {
-      auto _dlg = cast(SourceFunc*)userData;
+      auto _dlg = cast(glib.types.SourceFunc*)userData;
 
       bool _retval = (*_dlg)();
       return _retval;
@@ -356,7 +356,7 @@ class MainContext : Boxed
    *   or, if more than n_fds records need to be stored, the number
    *   of records that need to be stored.
    */
-  int query(int maxPriority, out int timeout, ref PollFD[] fds)
+  int query(int maxPriority, out int timeout, ref glib.types.PollFD[] fds)
   {
     int _retval;
     int _nFds;
@@ -383,7 +383,7 @@ class MainContext : Boxed
    * Params:
    *   fd = a #GPollFD descriptor previously added with [glib.main_context.MainContext.addPoll]
    */
-  void removePoll(PollFD fd)
+  void removePoll(glib.types.PollFD fd)
   {
     g_main_context_remove_poll(cast(GMainContext*)cPtr, &fd);
   }
@@ -402,7 +402,7 @@ class MainContext : Boxed
 
    * Deprecated: Use [glib.main_context.MainContext.isOwner] and separate locking instead.
    */
-  bool wait(Cond cond, Mutex mutex)
+  bool wait(glib.cond.Cond cond, glib.mutex.Mutex mutex)
   {
     bool _retval;
     _retval = g_main_context_wait(cast(GMainContext*)cPtr, cond ? cast(GCond*)cond.cPtr : null, mutex ? cast(GMutex*)mutex.cPtr : null);
@@ -445,11 +445,11 @@ class MainContext : Boxed
    * [glib.main_context.MainContext.getThreadDefault].
    * Returns: the global-default main context.
    */
-  static MainContext default_()
+  static glib.main_context.MainContext default_()
   {
     GMainContext* _cretval;
     _cretval = g_main_context_default();
-    auto _retval = _cretval ? new MainContext(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -467,11 +467,11 @@ class MainContext : Boxed
    * Returns: the thread-default #GMainContext, or
    *   %NULL if the thread-default context is the global-default main context.
    */
-  static MainContext getThreadDefault()
+  static glib.main_context.MainContext getThreadDefault()
   {
     GMainContext* _cretval;
     _cretval = g_main_context_get_thread_default();
-    auto _retval = _cretval ? new MainContext(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -485,11 +485,11 @@ class MainContext : Boxed
    * Returns: the thread-default #GMainContext. Unref
    *   with [glib.main_context.MainContext.unref] when you are done with it.
    */
-  static MainContext refThreadDefault()
+  static glib.main_context.MainContext refThreadDefault()
   {
     GMainContext* _cretval;
     _cretval = g_main_context_ref_thread_default();
-    auto _retval = _cretval ? new MainContext(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

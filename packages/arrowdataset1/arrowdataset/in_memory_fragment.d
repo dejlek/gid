@@ -6,9 +6,9 @@ import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.fragment;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 
-class InMemoryFragment : Fragment
+class InMemoryFragment : arrowdataset.fragment.Fragment
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,7 +27,7 @@ class InMemoryFragment : Fragment
     return getType();
   }
 
-  this(Schema schema, RecordBatch[] recordBatches)
+  this(arrow.schema.Schema schema, arrow.record_batch.RecordBatch[] recordBatches)
   {
     GADatasetInMemoryFragment* _cretval;
     size_t _nRecordBatches;

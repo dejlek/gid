@@ -6,7 +6,7 @@ import gdk.device;
 import gdk.device_tool;
 import gdk.display;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 
@@ -14,7 +14,7 @@ import gobject.object;
  * The `GdkSeat` object represents a collection of input devices
  * that belong to a user.
  */
-class Seat : ObjectG
+class Seat : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -37,11 +37,11 @@ class Seat : ObjectG
    * Returns the capabilities this `GdkSeat` currently has.
    * Returns: the seat capabilities
    */
-  SeatCapabilities getCapabilities()
+  gdk.types.SeatCapabilities getCapabilities()
   {
     GdkSeatCapabilities _cretval;
     _cretval = gdk_seat_get_capabilities(cast(GdkSeat*)cPtr);
-    SeatCapabilities _retval = cast(SeatCapabilities)_cretval;
+    gdk.types.SeatCapabilities _retval = cast(gdk.types.SeatCapabilities)_cretval;
     return _retval;
   }
 
@@ -53,11 +53,11 @@ class Seat : ObjectG
    *   of `GdkDevices`. The list must be freed with [glib.list.List.free],
    *   the elements are owned by GTK and must not be freed.
    */
-  Device[] getDevices(SeatCapabilities capabilities)
+  gdk.device.Device[] getDevices(gdk.types.SeatCapabilities capabilities)
   {
     GList* _cretval;
     _cretval = gdk_seat_get_devices(cast(GdkSeat*)cPtr, capabilities);
-    auto _retval = gListToD!(Device, GidOwnership.Container)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gdk.device.Device, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -66,11 +66,11 @@ class Seat : ObjectG
    * Returns: a `GdkDisplay`. This object
    *   is owned by GTK and must not be freed.
    */
-  Display getDisplay()
+  gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
     _cretval = gdk_seat_get_display(cast(GdkSeat*)cPtr);
-    auto _retval = ObjectG.getDObject!Display(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -79,11 +79,11 @@ class Seat : ObjectG
    * Returns: a `GdkDevice` with keyboard
    *   capabilities. This object is owned by GTK and must not be freed.
    */
-  Device getKeyboard()
+  gdk.device.Device getKeyboard()
   {
     GdkDevice* _cretval;
     _cretval = gdk_seat_get_keyboard(cast(GdkSeat*)cPtr);
-    auto _retval = ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -92,11 +92,11 @@ class Seat : ObjectG
    * Returns: a `GdkDevice` with pointer
    *   capabilities. This object is owned by GTK and must not be freed.
    */
-  Device getPointer()
+  gdk.device.Device getPointer()
   {
     GdkDevice* _cretval;
     _cretval = gdk_seat_get_pointer(cast(GdkSeat*)cPtr);
-    auto _retval = ObjectG.getDObject!Device(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -104,11 +104,11 @@ class Seat : ObjectG
    * Returns all `GdkDeviceTools` that are known to the application.
    * Returns: A list of tools. Free with [glib.list.List.free].
    */
-  DeviceTool[] getTools()
+  gdk.device_tool.DeviceTool[] getTools()
   {
     GList* _cretval;
     _cretval = gdk_seat_get_tools(cast(GdkSeat*)cPtr);
-    auto _retval = gListToD!(DeviceTool, GidOwnership.Container)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gdk.device_tool.DeviceTool, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -118,8 +118,8 @@ class Seat : ObjectG
    *   device = the newly added `GdkDevice`.
    *   seat = the instance the signal is connected to
    */
-  alias DeviceAddedCallbackDlg = void delegate(Device device, Seat seat);
-  alias DeviceAddedCallbackFunc = void function(Device device, Seat seat);
+  alias DeviceAddedCallbackDlg = void delegate(gdk.device.Device device, gdk.seat.Seat seat);
+  alias DeviceAddedCallbackFunc = void function(gdk.device.Device device, gdk.seat.Seat seat);
 
   /**
    * Connect to DeviceAdded signal.
@@ -135,8 +135,8 @@ class Seat : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto seat = getVal!Seat(_paramVals);
-      auto device = getVal!Device(&_paramVals[1]);
+      auto seat = getVal!(gdk.seat.Seat)(_paramVals);
+      auto device = getVal!(gdk.device.Device)(&_paramVals[1]);
       _dClosure.dlg(device, seat);
     }
 
@@ -150,8 +150,8 @@ class Seat : ObjectG
    *   device = the just removed `GdkDevice`.
    *   seat = the instance the signal is connected to
    */
-  alias DeviceRemovedCallbackDlg = void delegate(Device device, Seat seat);
-  alias DeviceRemovedCallbackFunc = void function(Device device, Seat seat);
+  alias DeviceRemovedCallbackDlg = void delegate(gdk.device.Device device, gdk.seat.Seat seat);
+  alias DeviceRemovedCallbackFunc = void function(gdk.device.Device device, gdk.seat.Seat seat);
 
   /**
    * Connect to DeviceRemoved signal.
@@ -167,8 +167,8 @@ class Seat : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto seat = getVal!Seat(_paramVals);
-      auto device = getVal!Device(&_paramVals[1]);
+      auto seat = getVal!(gdk.seat.Seat)(_paramVals);
+      auto device = getVal!(gdk.device.Device)(&_paramVals[1]);
       _dClosure.dlg(device, seat);
     }
 
@@ -186,8 +186,8 @@ class Seat : ObjectG
    *   tool = the new `GdkDeviceTool` known to the seat
    *   seat = the instance the signal is connected to
    */
-  alias ToolAddedCallbackDlg = void delegate(DeviceTool tool, Seat seat);
-  alias ToolAddedCallbackFunc = void function(DeviceTool tool, Seat seat);
+  alias ToolAddedCallbackDlg = void delegate(gdk.device_tool.DeviceTool tool, gdk.seat.Seat seat);
+  alias ToolAddedCallbackFunc = void function(gdk.device_tool.DeviceTool tool, gdk.seat.Seat seat);
 
   /**
    * Connect to ToolAdded signal.
@@ -203,8 +203,8 @@ class Seat : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto seat = getVal!Seat(_paramVals);
-      auto tool = getVal!DeviceTool(&_paramVals[1]);
+      auto seat = getVal!(gdk.seat.Seat)(_paramVals);
+      auto tool = getVal!(gdk.device_tool.DeviceTool)(&_paramVals[1]);
       _dClosure.dlg(tool, seat);
     }
 
@@ -218,8 +218,8 @@ class Seat : ObjectG
    *   tool = the just removed `GdkDeviceTool`
    *   seat = the instance the signal is connected to
    */
-  alias ToolRemovedCallbackDlg = void delegate(DeviceTool tool, Seat seat);
-  alias ToolRemovedCallbackFunc = void function(DeviceTool tool, Seat seat);
+  alias ToolRemovedCallbackDlg = void delegate(gdk.device_tool.DeviceTool tool, gdk.seat.Seat seat);
+  alias ToolRemovedCallbackFunc = void function(gdk.device_tool.DeviceTool tool, gdk.seat.Seat seat);
 
   /**
    * Connect to ToolRemoved signal.
@@ -235,8 +235,8 @@ class Seat : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto seat = getVal!Seat(_paramVals);
-      auto tool = getVal!DeviceTool(&_paramVals[1]);
+      auto seat = getVal!(gdk.seat.Seat)(_paramVals);
+      auto tool = getVal!(gdk.device_tool.DeviceTool)(&_paramVals[1]);
       _dClosure.dlg(tool, seat);
     }
 

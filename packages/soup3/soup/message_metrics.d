@@ -1,6 +1,6 @@
 module soup.message_metrics;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import soup.c.functions;
 import soup.c.types;
@@ -19,7 +19,7 @@ import soup.types;
  * being loaded. You can connect to different class@Message signals to get the
  * final result of every value.
  */
-class MessageMetrics : Boxed
+class MessageMetrics : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -47,11 +47,11 @@ class MessageMetrics : Boxed
    * Copies metrics.
    * Returns: a copy of metrics
    */
-  MessageMetrics copy()
+  soup.message_metrics.MessageMetrics copy()
   {
     SoupMessageMetrics* _cretval;
     _cretval = soup_message_metrics_copy(cast(SoupMessageMetrics*)cPtr);
-    auto _retval = _cretval ? new MessageMetrics(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new soup.message_metrics.MessageMetrics(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

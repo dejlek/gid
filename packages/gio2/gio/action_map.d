@@ -1,9 +1,8 @@
 module gio.action_map;
 
 public import gio.action_map_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.action;
-import gio.action_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -37,7 +36,7 @@ interface ActionMap
    * Params:
    *   action = a #GAction
    */
-  void addAction(Action action);
+  void addAction(gio.action.Action action);
 
   /**
    * Looks up the action with the name action_name in action_map.
@@ -46,7 +45,7 @@ interface ActionMap
    *   actionName = the name of an action
    * Returns: a #GAction, or %NULL
    */
-  Action lookupAction(string actionName);
+  gio.action.Action lookupAction(string actionName);
 
   /**
    * Removes the named action from the action map.

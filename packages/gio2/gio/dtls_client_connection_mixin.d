@@ -1,13 +1,11 @@
 module gio.dtls_client_connection_mixin;
 
 public import gio.dtls_client_connection_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.datagram_based;
-public import gio.datagram_based_mixin;
 public import gio.socket_connectable;
-public import gio.socket_connectable_mixin;
 public import gio.types;
 public import glib.error;
 public import gobject.object;
@@ -26,11 +24,11 @@ template DtlsClientConnectionT()
    *   expected server identity, or %NULL if the expected identity is not
    *   known.
    */
-  override SocketConnectable getServerIdentity()
+  override gio.socket_connectable.SocketConnectable getServerIdentity()
   {
     GSocketConnectable* _cretval;
     _cretval = g_dtls_client_connection_get_server_identity(cast(GDtlsClientConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!SocketConnectable(cast(GSocketConnectable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_connectable.SocketConnectable)(cast(GSocketConnectable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -43,11 +41,11 @@ template DtlsClientConnectionT()
 
    * Deprecated: Do not attempt to ignore validation errors.
    */
-  override TlsCertificateFlags getValidationFlags()
+  override gio.types.TlsCertificateFlags getValidationFlags()
   {
     GTlsCertificateFlags _cretval;
     _cretval = g_dtls_client_connection_get_validation_flags(cast(GDtlsClientConnection*)cPtr);
-    TlsCertificateFlags _retval = cast(TlsCertificateFlags)_cretval;
+    gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
   }
 
@@ -59,7 +57,7 @@ template DtlsClientConnectionT()
    * Params:
    *   identity = a #GSocketConnectable describing the expected server identity
    */
-  override void setServerIdentity(SocketConnectable identity)
+  override void setServerIdentity(gio.socket_connectable.SocketConnectable identity)
   {
     g_dtls_client_connection_set_server_identity(cast(GDtlsClientConnection*)cPtr, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.Dup) : null);
   }
@@ -76,7 +74,7 @@ template DtlsClientConnectionT()
 
    * Deprecated: Do not attempt to ignore validation errors.
    */
-  override void setValidationFlags(TlsCertificateFlags flags)
+  override void setValidationFlags(gio.types.TlsCertificateFlags flags)
   {
     g_dtls_client_connection_set_validation_flags(cast(GDtlsClientConnection*)cPtr, flags);
   }

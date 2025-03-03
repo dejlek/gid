@@ -1,9 +1,8 @@
 module gio.loadable_icon;
 
 public import gio.loadable_icon_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -36,7 +35,7 @@ interface LoadableIcon
    *     ignore.
    * Returns: a #GInputStream to read the icon from.
    */
-  InputStream load(int size, out string type, Cancellable cancellable);
+  gio.input_stream.InputStream load(int size, out string type, gio.cancellable.Cancellable cancellable);
 
   /**
    * Loads an icon asynchronously. To finish this function, see
@@ -48,7 +47,7 @@ interface LoadableIcon
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void loadAsync(int size, Cancellable cancellable, AsyncReadyCallback callback);
+  void loadAsync(int size, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Finishes an asynchronous icon load started in [gio.loadable_icon.LoadableIcon.loadAsync].
@@ -58,5 +57,5 @@ interface LoadableIcon
    *     icon, %NULL to ignore.
    * Returns: a #GInputStream to read the icon from.
    */
-  InputStream loadFinish(AsyncResult res, out string type);
+  gio.input_stream.InputStream loadFinish(gio.async_result.AsyncResult res, out string type);
 }

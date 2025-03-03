@@ -1,10 +1,9 @@
 module gio.menu_item;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.icon;
-import gio.icon_mixin;
 import gio.menu_model;
 import gio.types;
 import glib.variant;
@@ -15,7 +14,7 @@ import gobject.object;
  * #GMenuItem is an opaque structure type.  You must access it using the
  * functions below.
  */
-class MenuItem : ObjectG
+class MenuItem : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -65,11 +64,11 @@ class MenuItem : ObjectG
    *   itemIndex = the index of an item in model
    * Returns: a new #GMenuItem.
    */
-  static MenuItem newFromModel(MenuModel model, int itemIndex)
+  static gio.menu_item.MenuItem newFromModel(gio.menu_model.MenuModel model, int itemIndex)
   {
     GMenuItem* _cretval;
     _cretval = g_menu_item_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null, itemIndex);
-    auto _retval = ObjectG.getDObject!MenuItem(cast(GMenuItem*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -133,12 +132,12 @@ class MenuItem : ObjectG
    *   section = a #GMenuModel with the items of the section
    * Returns: a new #GMenuItem
    */
-  static MenuItem newSection(string label, MenuModel section)
+  static gio.menu_item.MenuItem newSection(string label, gio.menu_model.MenuModel section)
   {
     GMenuItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = g_menu_item_new_section(_label, section ? cast(GMenuModel*)section.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!MenuItem(cast(GMenuItem*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -151,12 +150,12 @@ class MenuItem : ObjectG
    *   submenu = a #GMenuModel with the items of the submenu
    * Returns: a new #GMenuItem
    */
-  static MenuItem newSubmenu(string label, MenuModel submenu)
+  static gio.menu_item.MenuItem newSubmenu(string label, gio.menu_model.MenuModel submenu)
   {
     GMenuItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = g_menu_item_new_submenu(_label, submenu ? cast(GMenuModel*)submenu.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!MenuItem(cast(GMenuItem*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -170,12 +169,12 @@ class MenuItem : ObjectG
    *   expectedType = the expected type of the attribute
    * Returns: the attribute value, or %NULL
    */
-  VariantG getAttributeValue(string attribute, VariantType expectedType)
+  glib.variant.VariantG getAttributeValue(string attribute, glib.variant_type.VariantType expectedType)
   {
     VariantC* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
-    _cretval = g_menu_item_get_attribute_value(cast(GMenuItem*)cPtr, _attribute, expectedType ? cast(GVariantType*)expectedType.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    _cretval = g_menu_item_get_attribute_value(cast(GMenuItem*)cPtr, _attribute, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -185,12 +184,12 @@ class MenuItem : ObjectG
    *   link = the link name to query
    * Returns: the link, or %NULL
    */
-  MenuModel getLink(string link)
+  gio.menu_model.MenuModel getLink(string link)
   {
     GMenuModel* _cretval;
     const(char)* _link = link.toCString(No.Alloc);
     _cretval = g_menu_item_get_link(cast(GMenuItem*)cPtr, _link);
-    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -227,7 +226,7 @@ class MenuItem : ObjectG
    *   action = the name of the action for this item
    *   targetValue = a #GVariant to use as the action target
    */
-  void setActionAndTargetValue(string action, VariantG targetValue)
+  void setActionAndTargetValue(string action, glib.variant.VariantG targetValue)
   {
     const(char)* _action = action.toCString(No.Alloc);
     g_menu_item_set_action_and_target_value(cast(GMenuItem*)cPtr, _action, targetValue ? cast(VariantC*)targetValue.cPtr(No.Dup) : null);
@@ -253,7 +252,7 @@ class MenuItem : ObjectG
    *   attribute = the attribute to set
    *   value = a #GVariant to use as the value, or %NULL
    */
-  void setAttributeValue(string attribute, VariantG value)
+  void setAttributeValue(string attribute, glib.variant.VariantG value)
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     g_menu_item_set_attribute_value(cast(GMenuItem*)cPtr, _attribute, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
@@ -290,7 +289,7 @@ class MenuItem : ObjectG
    * Params:
    *   icon = a #GIcon, or %NULL
    */
-  void setIcon(Icon icon)
+  void setIcon(gio.icon.Icon icon)
   {
     g_menu_item_set_icon(cast(GMenuItem*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
@@ -322,7 +321,7 @@ class MenuItem : ObjectG
    *   link = type of link to establish or unset
    *   model = the #GMenuModel to link to $(LPAREN)or %NULL to unset$(RPAREN)
    */
-  void setLink(string link, MenuModel model)
+  void setLink(string link, gio.menu_model.MenuModel model)
   {
     const(char)* _link = link.toCString(No.Alloc);
     g_menu_item_set_link(cast(GMenuItem*)cPtr, _link, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
@@ -338,7 +337,7 @@ class MenuItem : ObjectG
    * Params:
    *   section = a #GMenuModel, or %NULL
    */
-  void setSection(MenuModel section)
+  void setSection(gio.menu_model.MenuModel section)
   {
     g_menu_item_set_section(cast(GMenuItem*)cPtr, section ? cast(GMenuModel*)section.cPtr(No.Dup) : null);
   }
@@ -352,7 +351,7 @@ class MenuItem : ObjectG
    * Params:
    *   submenu = a #GMenuModel, or %NULL
    */
-  void setSubmenu(MenuModel submenu)
+  void setSubmenu(gio.menu_model.MenuModel submenu)
   {
     g_menu_item_set_submenu(cast(GMenuItem*)cPtr, submenu ? cast(GMenuModel*)submenu.cPtr(No.Dup) : null);
   }

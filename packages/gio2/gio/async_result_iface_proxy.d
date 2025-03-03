@@ -5,7 +5,7 @@ import gio.async_result;
 import gio.async_result_mixin;
 
 /// Proxy object for Gio.AsyncResult interface when a GObject has no applicable D binding
-class AsyncResultIfaceProxy : IfaceProxy, AsyncResult
+class AsyncResultIfaceProxy : IfaceProxy, gio.async_result.AsyncResult
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class AsyncResultIfaceProxy : IfaceProxy, AsyncResult
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(AsyncResult);
+    return typeid(gio.async_result.AsyncResult);
   }
 
   mixin AsyncResultT!();

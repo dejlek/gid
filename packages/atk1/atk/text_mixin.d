@@ -5,7 +5,7 @@ public import atk.c.functions;
 public import atk.c.types;
 public import atk.text_range;
 public import atk.types;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 
 /**
@@ -56,20 +56,20 @@ template TextT()
    * Returns: Array of AtkTextRange. The last
    *   element of the array returned by this function will be NULL.
    */
-  override TextRange[] getBoundedRanges(TextRectangle rect, CoordType coordType, TextClipType xClipType, TextClipType yClipType)
+  override atk.text_range.TextRange[] getBoundedRanges(atk.types.TextRectangle rect, atk.types.CoordType coordType, atk.types.TextClipType xClipType, atk.types.TextClipType yClipType)
   {
     AtkTextRange** _cretval;
     _cretval = atk_text_get_bounded_ranges(cast(AtkText*)cPtr, &rect, coordType, xClipType, yClipType);
-    TextRange[] _retval;
+    atk.text_range.TextRange[] _retval;
 
     if (_cretval)
     {
       uint _cretlength;
       for (; _cretval[_cretlength] !is null; _cretlength++)
         break;
-      _retval = new TextRange[_cretlength];
+      _retval = new atk.text_range.TextRange[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = new TextRange(cast(void*)_cretval[i], Yes.Take);
+        _retval[i] = new atk.text_range.TextRange(cast(void*)_cretval[i], Yes.Take);
     }
     return _retval;
   }
@@ -124,7 +124,7 @@ template TextT()
    *   height = Pointer for the height of the bounding box
    *   coords = specify whether coordinates are relative to the screen or widget window
    */
-  override void getCharacterExtents(int offset, out int x, out int y, out int width, out int height, CoordType coords)
+  override void getCharacterExtents(int offset, out int x, out int y, out int width, out int height, atk.types.CoordType coords)
   {
     atk_text_get_character_extents(cast(AtkText*)cPtr, offset, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height, coords);
   }
@@ -152,7 +152,7 @@ template TextT()
    * Returns: the offset to the character which is located at  the specified
    *   x and y coordinates of -1 in case of failure.
    */
-  override int getOffsetAtPoint(int x, int y, CoordType coords)
+  override int getOffsetAtPoint(int x, int y, atk.types.CoordType coords)
   {
     int _retval;
     _retval = atk_text_get_offset_at_point(cast(AtkText*)cPtr, x, y, coords);
@@ -171,7 +171,7 @@ template TextT()
    *   coordType = Specify whether coordinates are relative to the screen or widget window.
    *   rect = A pointer to a AtkTextRectangle which is filled in by this function.
    */
-  override void getRangeExtents(int startOffset, int endOffset, CoordType coordType, out TextRectangle rect)
+  override void getRangeExtents(int startOffset, int endOffset, atk.types.CoordType coordType, out atk.types.TextRectangle rect)
   {
     atk_text_get_range_extents(cast(AtkText*)cPtr, startOffset, endOffset, coordType, &rect);
   }
@@ -194,7 +194,7 @@ template TextT()
   {
     char* _cretval;
     _cretval = atk_text_get_selection(cast(AtkText*)cPtr, selectionNum, cast(int*)&startOffset, cast(int*)&endOffset);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -234,11 +234,11 @@ template TextT()
    *   to free the returned string.  Returns %NULL if the offset is invalid
    *   or no implementation is available.
    */
-  override string getStringAtOffset(int offset, TextGranularity granularity, out int startOffset, out int endOffset)
+  override string getStringAtOffset(int offset, atk.types.TextGranularity granularity, out int startOffset, out int endOffset)
   {
     char* _cretval;
     _cretval = atk_text_get_string_at_offset(cast(AtkText*)cPtr, offset, granularity, cast(int*)&startOffset, cast(int*)&endOffset);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ template TextT()
   {
     char* _cretval;
     _cretval = atk_text_get_text(cast(AtkText*)cPtr, startOffset, endOffset);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -273,11 +273,11 @@ template TextT()
 
    * Deprecated: Please use [atk.text.Text.getStringAtOffset] instead.
    */
-  override string getTextAfterOffset(int offset, TextBoundary boundaryType, out int startOffset, out int endOffset)
+  override string getTextAfterOffset(int offset, atk.types.TextBoundary boundaryType, out int startOffset, out int endOffset)
   {
     char* _cretval;
     _cretval = atk_text_get_text_after_offset(cast(AtkText*)cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -313,11 +313,11 @@ template TextT()
    * Deprecated: This method is deprecated since ATK version
    *   2.9.4. Please use [atk.text.Text.getStringAtOffset] instead.
    */
-  override string getTextAtOffset(int offset, TextBoundary boundaryType, out int startOffset, out int endOffset)
+  override string getTextAtOffset(int offset, atk.types.TextBoundary boundaryType, out int startOffset, out int endOffset)
   {
     char* _cretval;
     _cretval = atk_text_get_text_at_offset(cast(AtkText*)cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -335,11 +335,11 @@ template TextT()
 
    * Deprecated: Please use [atk.text.Text.getStringAtOffset] instead.
    */
-  override string getTextBeforeOffset(int offset, TextBoundary boundaryType, out int startOffset, out int endOffset)
+  override string getTextBeforeOffset(int offset, atk.types.TextBoundary boundaryType, out int startOffset, out int endOffset)
   {
     char* _cretval;
     _cretval = atk_text_get_text_before_offset(cast(AtkText*)cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -368,7 +368,7 @@ template TextT()
    *   type = specify where the object should be made visible.
    * Returns: whether scrolling was successful.
    */
-  override bool scrollSubstringTo(int startOffset, int endOffset, ScrollType type)
+  override bool scrollSubstringTo(int startOffset, int endOffset, atk.types.ScrollType type)
   {
     bool _retval;
     _retval = atk_text_scroll_substring_to(cast(AtkText*)cPtr, startOffset, endOffset, type);
@@ -387,7 +387,7 @@ template TextT()
    *   y = y-position where to scroll to
    * Returns: whether scrolling was successful.
    */
-  override bool scrollSubstringToPoint(int startOffset, int endOffset, CoordType coords, int x, int y)
+  override bool scrollSubstringToPoint(int startOffset, int endOffset, atk.types.CoordType coords, int x, int y)
   {
     bool _retval;
     _retval = atk_text_scroll_substring_to_point(cast(AtkText*)cPtr, startOffset, endOffset, coords, x, y);
@@ -447,8 +447,8 @@ template TextT()
    * changes.
    *   text = the instance the signal is connected to
    */
-  alias TextAttributesChangedCallbackDlg = void delegate(Text text);
-  alias TextAttributesChangedCallbackFunc = void function(Text text);
+  alias TextAttributesChangedCallbackDlg = void delegate(atk.text.Text text);
+  alias TextAttributesChangedCallbackFunc = void function(atk.text.Text text);
 
   /**
    * Connect to TextAttributesChanged signal.
@@ -464,7 +464,7 @@ template TextT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
+      auto text = getVal!(atk.text.Text)(_paramVals);
       _dClosure.dlg(text);
     }
 
@@ -480,8 +480,8 @@ template TextT()
    *   arg1 = The new position of the text caret.
    *   text = the instance the signal is connected to
    */
-  alias TextCaretMovedCallbackDlg = void delegate(int arg1, Text text);
-  alias TextCaretMovedCallbackFunc = void function(int arg1, Text text);
+  alias TextCaretMovedCallbackDlg = void delegate(int arg1, atk.text.Text text);
+  alias TextCaretMovedCallbackFunc = void function(int arg1, atk.text.Text text);
 
   /**
    * Connect to TextCaretMoved signal.
@@ -497,8 +497,8 @@ template TextT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
-      auto arg1 = getVal!int(&_paramVals[1]);
+      auto text = getVal!(atk.text.Text)(_paramVals);
+      auto arg1 = getVal!(int)(&_paramVals[1]);
       _dClosure.dlg(arg1, text);
     }
 
@@ -520,8 +520,8 @@ template TextT()
    * Deprecated: Use #AtkObject::text-insert or
    *   #AtkObject::text-remove instead.
    */
-  alias TextChangedCallbackDlg = void delegate(int arg1, int arg2, Text text);
-  alias TextChangedCallbackFunc = void function(int arg1, int arg2, Text text);
+  alias TextChangedCallbackDlg = void delegate(int arg1, int arg2, atk.text.Text text);
+  alias TextChangedCallbackFunc = void function(int arg1, int arg2, atk.text.Text text);
 
   /**
    * Connect to TextChanged signal.
@@ -538,9 +538,9 @@ template TextT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
-      auto arg1 = getVal!int(&_paramVals[1]);
-      auto arg2 = getVal!int(&_paramVals[2]);
+      auto text = getVal!(atk.text.Text)(_paramVals);
+      auto arg1 = getVal!(int)(&_paramVals[1]);
+      auto arg2 = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(arg1, arg2, text);
     }
 
@@ -559,8 +559,8 @@ template TextT()
    *   arg3 = The new text inserted
    *   text = the instance the signal is connected to
    */
-  alias TextInsertCallbackDlg = void delegate(int arg1, int arg2, string arg3, Text text);
-  alias TextInsertCallbackFunc = void function(int arg1, int arg2, string arg3, Text text);
+  alias TextInsertCallbackDlg = void delegate(int arg1, int arg2, string arg3, atk.text.Text text);
+  alias TextInsertCallbackFunc = void function(int arg1, int arg2, string arg3, atk.text.Text text);
 
   /**
    * Connect to TextInsert signal.
@@ -577,10 +577,10 @@ template TextT()
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
-      auto arg1 = getVal!int(&_paramVals[1]);
-      auto arg2 = getVal!int(&_paramVals[2]);
-      auto arg3 = getVal!string(&_paramVals[3]);
+      auto text = getVal!(atk.text.Text)(_paramVals);
+      auto arg1 = getVal!(int)(&_paramVals[1]);
+      auto arg2 = getVal!(int)(&_paramVals[2]);
+      auto arg3 = getVal!(string)(&_paramVals[3]);
       _dClosure.dlg(arg1, arg2, arg3, text);
     }
 
@@ -599,8 +599,8 @@ template TextT()
    *   arg3 = The old text removed
    *   text = the instance the signal is connected to
    */
-  alias TextRemoveCallbackDlg = void delegate(int arg1, int arg2, string arg3, Text text);
-  alias TextRemoveCallbackFunc = void function(int arg1, int arg2, string arg3, Text text);
+  alias TextRemoveCallbackDlg = void delegate(int arg1, int arg2, string arg3, atk.text.Text text);
+  alias TextRemoveCallbackFunc = void function(int arg1, int arg2, string arg3, atk.text.Text text);
 
   /**
    * Connect to TextRemove signal.
@@ -617,10 +617,10 @@ template TextT()
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
-      auto arg1 = getVal!int(&_paramVals[1]);
-      auto arg2 = getVal!int(&_paramVals[2]);
-      auto arg3 = getVal!string(&_paramVals[3]);
+      auto text = getVal!(atk.text.Text)(_paramVals);
+      auto arg1 = getVal!(int)(&_paramVals[1]);
+      auto arg2 = getVal!(int)(&_paramVals[2]);
+      auto arg3 = getVal!(string)(&_paramVals[3]);
       _dClosure.dlg(arg1, arg2, arg3, text);
     }
 
@@ -633,8 +633,8 @@ template TextT()
    * selected text of an object which implements AtkText changes.
    *   text = the instance the signal is connected to
    */
-  alias TextSelectionChangedCallbackDlg = void delegate(Text text);
-  alias TextSelectionChangedCallbackFunc = void function(Text text);
+  alias TextSelectionChangedCallbackDlg = void delegate(atk.text.Text text);
+  alias TextSelectionChangedCallbackFunc = void function(atk.text.Text text);
 
   /**
    * Connect to TextSelectionChanged signal.
@@ -650,7 +650,7 @@ template TextT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
+      auto text = getVal!(atk.text.Text)(_paramVals);
       _dClosure.dlg(text);
     }
 

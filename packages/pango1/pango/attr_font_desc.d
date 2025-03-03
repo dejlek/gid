@@ -1,6 +1,6 @@
 module pango.attr_font_desc;
 
-import gid.global;
+import gid.gid;
 import pango.attribute;
 import pango.c.functions;
 import pango.c.types;
@@ -31,14 +31,14 @@ class AttrFontDesc
     return cast(void*)&cInstance;
   }
 
-  @property Attribute attr()
+  @property pango.attribute.Attribute attr()
   {
-    return new Attribute(cast(PangoAttribute*)&(cast(PangoAttrFontDesc*)cPtr).attr);
+    return new pango.attribute.Attribute(cast(PangoAttribute*)&(cast(PangoAttrFontDesc*)cPtr).attr);
   }
 
-  @property FontDescription desc()
+  @property pango.font_description.FontDescription desc()
   {
-    return new FontDescription(cast(PangoFontDescription*)(cast(PangoAttrFontDesc*)cPtr).desc);
+    return new pango.font_description.FontDescription(cast(PangoFontDescription*)(cast(PangoAttrFontDesc*)cPtr).desc);
   }
 
   /**
@@ -51,11 +51,11 @@ class AttrFontDesc
    *   `PangoAttribute`, which should be freed with
    *   [pango.attribute.Attribute.destroy]
    */
-  static Attribute new_(FontDescription desc)
+  static pango.attribute.Attribute new_(pango.font_description.FontDescription desc)
   {
     PangoAttribute* _cretval;
-    _cretval = pango_attr_font_desc_new(desc ? cast(PangoFontDescription*)desc.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new Attribute(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = pango_attr_font_desc_new(desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

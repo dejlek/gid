@@ -1,11 +1,9 @@
 module gtksource.gutter_renderer_pixbuf;
 
 import gdk.paintable;
-import gdk.paintable_mixin;
 import gdkpixbuf.pixbuf;
-import gid.global;
+import gid.gid;
 import gio.icon;
-import gio.icon_mixin;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -23,7 +21,7 @@ import gtksource.types;
  * A `GtkSourceGutterRendererPixbuf` can be used to render an image in a cell of
  * class@Gutter.
  */
-class GutterRendererPixbuf : GutterRenderer
+class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -57,11 +55,11 @@ class GutterRendererPixbuf : GutterRenderer
    * Get the gicon of the renderer
    * Returns: a #GIcon
    */
-  Icon getGicon()
+  gio.icon.Icon getGicon()
   {
     GIcon* _cretval;
     _cretval = gtk_source_gutter_renderer_pixbuf_get_gicon(cast(GtkSourceGutterRendererPixbuf*)cPtr);
-    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -69,7 +67,7 @@ class GutterRendererPixbuf : GutterRenderer
   {
     const(char)* _cretval;
     _cretval = gtk_source_gutter_renderer_pixbuf_get_icon_name(cast(GtkSourceGutterRendererPixbuf*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -78,11 +76,11 @@ class GutterRendererPixbuf : GutterRenderer
    * [gtksource.gutter_renderer_pixbuf.GutterRendererPixbuf.setPaintable]
    * Returns: a #GdkPaintable or %NULL
    */
-  Paintable getPaintable()
+  gdk.paintable.Paintable getPaintable()
   {
     GdkPaintable* _cretval;
     _cretval = gtk_source_gutter_renderer_pixbuf_get_paintable(cast(GtkSourceGutterRendererPixbuf*)cPtr);
-    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -90,11 +88,11 @@ class GutterRendererPixbuf : GutterRenderer
    * Get the pixbuf of the renderer.
    * Returns: a #GdkPixbuf
    */
-  Pixbuf getPixbuf()
+  gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
     _cretval = gtk_source_gutter_renderer_pixbuf_get_pixbuf(cast(GtkSourceGutterRendererPixbuf*)cPtr);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -105,12 +103,12 @@ class GutterRendererPixbuf : GutterRenderer
    * Params:
    *   paintable = a #GdkPaintable
    */
-  void overlayPaintable(Paintable paintable)
+  void overlayPaintable(gdk.paintable.Paintable paintable)
   {
     gtk_source_gutter_renderer_pixbuf_overlay_paintable(cast(GtkSourceGutterRendererPixbuf*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
 
-  void setGicon(Icon icon)
+  void setGicon(gio.icon.Icon icon)
   {
     gtk_source_gutter_renderer_pixbuf_set_gicon(cast(GtkSourceGutterRendererPixbuf*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
@@ -121,12 +119,12 @@ class GutterRendererPixbuf : GutterRenderer
     gtk_source_gutter_renderer_pixbuf_set_icon_name(cast(GtkSourceGutterRendererPixbuf*)cPtr, _iconName);
   }
 
-  void setPaintable(Paintable paintable)
+  void setPaintable(gdk.paintable.Paintable paintable)
   {
     gtk_source_gutter_renderer_pixbuf_set_paintable(cast(GtkSourceGutterRendererPixbuf*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
 
-  void setPixbuf(Pixbuf pixbuf)
+  void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     gtk_source_gutter_renderer_pixbuf_set_pixbuf(cast(GtkSourceGutterRendererPixbuf*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }

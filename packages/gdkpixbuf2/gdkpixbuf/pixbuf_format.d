@@ -4,7 +4,7 @@ import gdkpixbuf.c.functions;
 import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf_module_pattern;
 import gdkpixbuf.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -13,7 +13,7 @@ import gobject.boxed;
  * Only modules should access the fields directly, applications should
  * use the `gdk_pixbuf_format_*` family of functions.
  */
-class PixbufFormat : Boxed
+class PixbufFormat : gobject.boxed.Boxed
 {
 
   this()
@@ -53,9 +53,9 @@ class PixbufFormat : Boxed
     (cast(GdkPixbufFormat*)cPtr).name = propval.toCString(Yes.Alloc);
   }
 
-  @property PixbufModulePattern signature()
+  @property gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern signature()
   {
-    return new PixbufModulePattern(cast(GdkPixbufModulePattern*)(cast(GdkPixbufFormat*)cPtr).signature);
+    return new gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern(cast(GdkPixbufModulePattern*)(cast(GdkPixbufFormat*)cPtr).signature);
   }
 
   @property string domain()
@@ -116,11 +116,11 @@ class PixbufFormat : Boxed
    * Returns: the newly allocated copy of a `GdkPixbufFormat`. Use
    *   [gdkpixbuf.pixbuf_format.PixbufFormat.free] to free the resources when done
    */
-  PixbufFormat copy()
+  gdkpixbuf.pixbuf_format.PixbufFormat copy()
   {
     GdkPixbufFormat* _cretval;
-    _cretval = gdk_pixbuf_format_copy(cast(GdkPixbufFormat*)cPtr);
-    auto _retval = _cretval ? new PixbufFormat(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gdk_pixbuf_format_copy(cast(const(GdkPixbufFormat)*)cPtr);
+    auto _retval = _cretval ? new gdkpixbuf.pixbuf_format.PixbufFormat(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class PixbufFormat : Boxed
   {
     char* _cretval;
     _cretval = gdk_pixbuf_format_get_description(cast(GdkPixbufFormat*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class PixbufFormat : Boxed
   {
     char* _cretval;
     _cretval = gdk_pixbuf_format_get_license(cast(GdkPixbufFormat*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class PixbufFormat : Boxed
   {
     char* _cretval;
     _cretval = gdk_pixbuf_format_get_name(cast(GdkPixbufFormat*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 

@@ -1,6 +1,6 @@
 module pango.layout_line;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gobject.object;
 import pango.c.functions;
@@ -15,7 +15,7 @@ import pango.types;
  * [pango.layout.Layout.getLine] and are only valid until the text,
  * attributes, or settings of the parent `PangoLayout` are modified.
  */
-class LayoutLine : Boxed
+class LayoutLine : gobject.boxed.Boxed
 {
 
   this()
@@ -44,9 +44,9 @@ class LayoutLine : Boxed
     return getType();
   }
 
-  @property Layout layout()
+  @property pango.layout.Layout layout()
   {
-    return ObjectG.getDObject!Layout((cast(PangoLayoutLine*)cPtr).layout, No.Take);
+    return ObjectG.getDObject!(pango.layout.Layout)((cast(PangoLayoutLine*)cPtr).layout, No.Take);
   }
 
   @property int startIndex()
@@ -99,7 +99,7 @@ class LayoutLine : Boxed
    *   logicalRect = rectangle used to store the logical
    *     extents of the glyph string
    */
-  void getExtents(out Rectangle inkRect, out Rectangle logicalRect)
+  void getExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
     pango_layout_line_get_extents(cast(PangoLayoutLine*)cPtr, &inkRect, &logicalRect);
   }
@@ -142,7 +142,7 @@ class LayoutLine : Boxed
    *   logicalRect = rectangle used to store the logical
    *     extents of the glyph string
    */
-  void getPixelExtents(out Rectangle inkRect, out Rectangle logicalRect)
+  void getPixelExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
     pango_layout_line_get_pixel_extents(cast(PangoLayoutLine*)cPtr, &inkRect, &logicalRect);
   }
@@ -151,11 +151,11 @@ class LayoutLine : Boxed
    * Returns the resolved direction of the line.
    * Returns: the resolved direction of the line
    */
-  Direction getResolvedDirection()
+  pango.types.Direction getResolvedDirection()
   {
     PangoDirection _cretval;
     _cretval = pango_layout_line_get_resolved_direction(cast(PangoLayoutLine*)cPtr);
-    Direction _retval = cast(Direction)_cretval;
+    pango.types.Direction _retval = cast(pango.types.Direction)_cretval;
     return _retval;
   }
 

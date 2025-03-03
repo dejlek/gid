@@ -1,6 +1,6 @@
 module pango.glyph_item_iter;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
@@ -42,7 +42,7 @@ import pango.types;
  * end variables is not.
  * None of the members of a `PangoGlyphItemIter` should be modified manually.
  */
-class GlyphItemIter : Boxed
+class GlyphItemIter : gobject.boxed.Boxed
 {
 
   this()
@@ -71,9 +71,9 @@ class GlyphItemIter : Boxed
     return getType();
   }
 
-  @property GlyphItem glyphItem()
+  @property pango.glyph_item.GlyphItem glyphItem()
   {
-    return new GlyphItem(cast(PangoGlyphItem*)(cast(PangoGlyphItemIter*)cPtr).glyphItem);
+    return new pango.glyph_item.GlyphItem(cast(PangoGlyphItem*)(cast(PangoGlyphItemIter*)cPtr).glyphItem);
   }
 
   @property string text()
@@ -151,11 +151,11 @@ class GlyphItemIter : Boxed
    * Make a shallow copy of an existing `PangoGlyphItemIter` structure.
    * Returns: the newly allocated `PangoGlyphItemIter`
    */
-  GlyphItemIter copy()
+  pango.glyph_item_iter.GlyphItemIter copy()
   {
     PangoGlyphItemIter* _cretval;
     _cretval = pango_glyph_item_iter_copy(cast(PangoGlyphItemIter*)cPtr);
-    auto _retval = _cretval ? new GlyphItemIter(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.glyph_item_iter.GlyphItemIter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class GlyphItemIter : Boxed
    *   text = text corresponding to the glyph item
    * Returns: %FALSE if there are no clusters in the glyph item
    */
-  bool initEnd(GlyphItem glyphItem, string text)
+  bool initEnd(pango.glyph_item.GlyphItem glyphItem, string text)
   {
     bool _retval;
     const(char)* _text = text.toCString(No.Alloc);
@@ -185,7 +185,7 @@ class GlyphItemIter : Boxed
    *   text = text corresponding to the glyph item
    * Returns: %FALSE if there are no clusters in the glyph item
    */
-  bool initStart(GlyphItem glyphItem, string text)
+  bool initStart(pango.glyph_item.GlyphItem glyphItem, string text)
   {
     bool _retval;
     const(char)* _text = text.toCString(No.Alloc);

@@ -5,7 +5,7 @@ import atk.c.types;
 import atk.object;
 import atk.relation;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
@@ -20,7 +20,7 @@ import gobject.object;
  * content which "flows" between them, among other types of possible
  * relationships.
  */
-class RelationSet : ObjectG
+class RelationSet : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -59,7 +59,7 @@ class RelationSet : ObjectG
    * Params:
    *   relation = an #AtkRelation
    */
-  void add(Relation relation)
+  void add(atk.relation.Relation relation)
   {
     atk_relation_set_add(cast(AtkRelationSet*)cPtr, relation ? cast(AtkRelation*)relation.cPtr(No.Dup) : null);
   }
@@ -73,7 +73,7 @@ class RelationSet : ObjectG
    *   relationship = an #AtkRelationType
    *   target = an #AtkObject
    */
-  void addRelationByType(RelationType relationship, ObjectAtk target)
+  void addRelationByType(atk.types.RelationType relationship, atk.object.ObjectAtk target)
   {
     atk_relation_set_add_relation_by_type(cast(AtkRelationSet*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
   }
@@ -86,7 +86,7 @@ class RelationSet : ObjectG
    * Returns: %TRUE if relationship is the relationship type of a relation
    *   in set, %FALSE otherwise
    */
-  bool contains(RelationType relationship)
+  bool contains(atk.types.RelationType relationship)
   {
     bool _retval;
     _retval = atk_relation_set_contains(cast(AtkRelationSet*)cPtr, relationship);
@@ -103,7 +103,7 @@ class RelationSet : ObjectG
    * Returns: %TRUE if set contains a relation with the relationship
    *   type relationship with an object target, %FALSE otherwise
    */
-  bool containsTarget(RelationType relationship, ObjectAtk target)
+  bool containsTarget(atk.types.RelationType relationship, atk.object.ObjectAtk target)
   {
     bool _retval;
     _retval = atk_relation_set_contains_target(cast(AtkRelationSet*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
@@ -128,11 +128,11 @@ class RelationSet : ObjectG
    * Returns: a #AtkRelation, which is the relation at
    *   position i in the set.
    */
-  Relation getRelation(int i)
+  atk.relation.Relation getRelation(int i)
   {
     AtkRelation* _cretval;
     _cretval = atk_relation_set_get_relation(cast(AtkRelationSet*)cPtr, i);
-    auto _retval = ObjectG.getDObject!Relation(cast(AtkRelation*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.relation.Relation)(cast(AtkRelation*)_cretval, No.Take);
     return _retval;
   }
 
@@ -143,11 +143,11 @@ class RelationSet : ObjectG
    * Returns: an #AtkRelation, which is a relation matching the
    *   specified type.
    */
-  Relation getRelationByType(RelationType relationship)
+  atk.relation.Relation getRelationByType(atk.types.RelationType relationship)
   {
     AtkRelation* _cretval;
     _cretval = atk_relation_set_get_relation_by_type(cast(AtkRelationSet*)cPtr, relationship);
-    auto _retval = ObjectG.getDObject!Relation(cast(AtkRelation*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.relation.Relation)(cast(AtkRelation*)_cretval, No.Take);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class RelationSet : ObjectG
    * Params:
    *   relation = an #AtkRelation
    */
-  void remove(Relation relation)
+  void remove(atk.relation.Relation relation)
   {
     atk_relation_set_remove(cast(AtkRelationSet*)cPtr, relation ? cast(AtkRelation*)relation.cPtr(No.Dup) : null);
   }

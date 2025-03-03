@@ -1,6 +1,6 @@
 module gtk.shortcuts_group;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.box;
@@ -29,7 +29,7 @@ import gtk.types;
  * If you need to add a shortcut programmatically, use
  * [gtk.shortcuts_group.ShortcutsGroup.addShortcut].
  */
-class ShortcutsGroup : Box
+class ShortcutsGroup : gtk.box.Box
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -56,7 +56,7 @@ class ShortcutsGroup : Box
    * Params:
    *   shortcut = the `GtkShortcutsShortcut` to add
    */
-  void addShortcut(ShortcutsShortcut shortcut)
+  void addShortcut(gtk.shortcuts_shortcut.ShortcutsShortcut shortcut)
   {
     gtk_shortcuts_group_add_shortcut(cast(GtkShortcutsGroup*)cPtr, shortcut ? cast(GtkShortcutsShortcut*)shortcut.cPtr(No.Dup) : null);
   }

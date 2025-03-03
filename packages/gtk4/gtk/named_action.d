@@ -1,6 +1,6 @@
 module gtk.named_action;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.shortcut_action;
@@ -9,7 +9,7 @@ import gtk.types;
 /**
  * A `GtkShortcutAction` that activates an action by name.
  */
-class NamedAction : ShortcutAction
+class NamedAction : gtk.shortcut_action.ShortcutAction
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,7 +54,7 @@ class NamedAction : ShortcutAction
   {
     const(char)* _cretval;
     _cretval = gtk_named_action_get_action_name(cast(GtkNamedAction*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

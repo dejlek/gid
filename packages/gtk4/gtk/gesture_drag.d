@@ -1,6 +1,6 @@
 module gtk.gesture_drag;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -17,7 +17,7 @@ import gtk.types;
  * [gtk.gesture_drag.GestureDrag.getOffset] and
  * [gtk.gesture_drag.GestureDrag.getStartPoint].
  */
-class GestureDrag : GestureSingle
+class GestureDrag : gtk.gesture_single.GestureSingle
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -88,8 +88,8 @@ class GestureDrag : GestureSingle
    *   startY = Y coordinate, relative to the widget allocation
    *   gestureDrag = the instance the signal is connected to
    */
-  alias DragBeginCallbackDlg = void delegate(double startX, double startY, GestureDrag gestureDrag);
-  alias DragBeginCallbackFunc = void function(double startX, double startY, GestureDrag gestureDrag);
+  alias DragBeginCallbackDlg = void delegate(double startX, double startY, gtk.gesture_drag.GestureDrag gestureDrag);
+  alias DragBeginCallbackFunc = void function(double startX, double startY, gtk.gesture_drag.GestureDrag gestureDrag);
 
   /**
    * Connect to DragBegin signal.
@@ -105,9 +105,9 @@ class GestureDrag : GestureSingle
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureDrag = getVal!GestureDrag(_paramVals);
-      auto startX = getVal!double(&_paramVals[1]);
-      auto startY = getVal!double(&_paramVals[2]);
+      auto gestureDrag = getVal!(gtk.gesture_drag.GestureDrag)(_paramVals);
+      auto startX = getVal!(double)(&_paramVals[1]);
+      auto startY = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(startX, startY, gestureDrag);
     }
 
@@ -122,8 +122,8 @@ class GestureDrag : GestureSingle
    *   offsetY = Y offset, relative to the start point
    *   gestureDrag = the instance the signal is connected to
    */
-  alias DragEndCallbackDlg = void delegate(double offsetX, double offsetY, GestureDrag gestureDrag);
-  alias DragEndCallbackFunc = void function(double offsetX, double offsetY, GestureDrag gestureDrag);
+  alias DragEndCallbackDlg = void delegate(double offsetX, double offsetY, gtk.gesture_drag.GestureDrag gestureDrag);
+  alias DragEndCallbackFunc = void function(double offsetX, double offsetY, gtk.gesture_drag.GestureDrag gestureDrag);
 
   /**
    * Connect to DragEnd signal.
@@ -139,9 +139,9 @@ class GestureDrag : GestureSingle
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureDrag = getVal!GestureDrag(_paramVals);
-      auto offsetX = getVal!double(&_paramVals[1]);
-      auto offsetY = getVal!double(&_paramVals[2]);
+      auto gestureDrag = getVal!(gtk.gesture_drag.GestureDrag)(_paramVals);
+      auto offsetX = getVal!(double)(&_paramVals[1]);
+      auto offsetY = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(offsetX, offsetY, gestureDrag);
     }
 
@@ -156,8 +156,8 @@ class GestureDrag : GestureSingle
    *   offsetY = Y offset, relative to the start point
    *   gestureDrag = the instance the signal is connected to
    */
-  alias DragUpdateCallbackDlg = void delegate(double offsetX, double offsetY, GestureDrag gestureDrag);
-  alias DragUpdateCallbackFunc = void function(double offsetX, double offsetY, GestureDrag gestureDrag);
+  alias DragUpdateCallbackDlg = void delegate(double offsetX, double offsetY, gtk.gesture_drag.GestureDrag gestureDrag);
+  alias DragUpdateCallbackFunc = void function(double offsetX, double offsetY, gtk.gesture_drag.GestureDrag gestureDrag);
 
   /**
    * Connect to DragUpdate signal.
@@ -173,9 +173,9 @@ class GestureDrag : GestureSingle
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureDrag = getVal!GestureDrag(_paramVals);
-      auto offsetX = getVal!double(&_paramVals[1]);
-      auto offsetY = getVal!double(&_paramVals[2]);
+      auto gestureDrag = getVal!(gtk.gesture_drag.GestureDrag)(_paramVals);
+      auto offsetX = getVal!(double)(&_paramVals[1]);
+      auto offsetY = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(offsetX, offsetY, gestureDrag);
     }
 

@@ -1,12 +1,11 @@
 module vte.types;
 
-import gid.global;
+import gid.gid;
 import glib.error;
 import glib.types;
 import vte.c.functions;
 import vte.c.types;
 import vte.terminal;
-import vte.types;
 
 
 // Enums
@@ -26,8 +25,8 @@ alias WriteFlags = VteWriteFlags;
 alias TerminalClassPrivate = VteTerminalClassPrivate*;
 
 // Callbacks
-alias SelectionFunc = bool delegate(Terminal terminal, glong column, glong row);
-alias TerminalSpawnAsyncCallback = void delegate(Terminal terminal, Pid pid, ErrorG error);
+alias SelectionFunc = bool delegate(vte.terminal.Terminal terminal, glong column, glong row);
+alias TerminalSpawnAsyncCallback = void delegate(vte.terminal.Terminal terminal, glib.types.Pid pid, glib.error.ErrorG error);
 
 /**
  * The major version number of the VTE library

@@ -1,6 +1,6 @@
 module gtk.color_chooser_widget;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -34,7 +34,7 @@ import gtk.widget;
 
  * Deprecated: Direct use of `GtkColorChooserWidget` is deprecated.
  */
-class ColorChooserWidget : Widget, ColorChooser
+class ColorChooserWidget : gtk.widget.Widget, gtk.color_chooser.ColorChooser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

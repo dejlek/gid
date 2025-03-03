@@ -3,7 +3,7 @@ module gdk.content_serializer;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.cancellable;
@@ -25,7 +25,7 @@ import gobject.value;
  * serialization functions, use func@Gdk.content_register_serializer.
  * Also see [gdk.content_deserializer.ContentDeserializer].
  */
-class ContentSerializer : ObjectG, AsyncResult
+class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -51,11 +51,11 @@ class ContentSerializer : ObjectG, AsyncResult
    * This is the `GCancellable` that was passed to funccontent_serialize_async.
    * Returns: the cancellable for the current operation
    */
-  Cancellable getCancellable()
+  gio.cancellable.Cancellable getCancellable()
   {
     GCancellable* _cretval;
     _cretval = gdk_content_serializer_get_cancellable(cast(GdkContentSerializer*)cPtr);
-    auto _retval = ObjectG.getDObject!Cancellable(cast(GCancellable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -63,9 +63,9 @@ class ContentSerializer : ObjectG, AsyncResult
    * Gets the `GType` to of the object to serialize.
    * Returns: the `GType` for the current operation
    */
-  GType getGtype()
+  gobject.types.GType getGtype()
   {
-    GType _retval;
+    gobject.types.GType _retval;
     _retval = gdk_content_serializer_get_gtype(cast(GdkContentSerializer*)cPtr);
     return _retval;
   }
@@ -78,7 +78,7 @@ class ContentSerializer : ObjectG, AsyncResult
   {
     const(char)* _cretval;
     _cretval = gdk_content_serializer_get_mime_type(cast(GdkContentSerializer*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -87,11 +87,11 @@ class ContentSerializer : ObjectG, AsyncResult
    * This is the stream that was passed to funccontent_serialize_async.
    * Returns: the output stream for the current operation
    */
-  OutputStream getOutputStream()
+  gio.output_stream.OutputStream getOutputStream()
   {
     GOutputStream* _cretval;
     _cretval = gdk_content_serializer_get_output_stream(cast(GdkContentSerializer*)cPtr);
-    auto _retval = ObjectG.getDObject!OutputStream(cast(GOutputStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,11 +132,11 @@ class ContentSerializer : ObjectG, AsyncResult
    * Gets the `GValue` to read the object to serialize from.
    * Returns: the `GValue` for the current operation
    */
-  Value getValue()
+  gobject.value.Value getValue()
   {
     const(GValue)* _cretval;
     _cretval = gdk_content_serializer_get_value(cast(GdkContentSerializer*)cPtr);
-    auto _retval = _cretval ? new Value(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class ContentSerializer : ObjectG, AsyncResult
    * Params:
    *   error = a `GError`
    */
-  void returnError(ErrorG error)
+  void returnError(glib.error.ErrorG error)
   {
     gdk_content_serializer_return_error(cast(GdkContentSerializer*)cPtr, error ? cast(GError*)error.cPtr : null);
   }
@@ -165,12 +165,12 @@ class ContentSerializer : ObjectG, AsyncResult
    *   data = data to associate with this operation
    *   notify = destroy notify for data
    */
-  void setTaskData(void* data, DestroyNotify notify)
+  void setTaskData(void* data, glib.types.DestroyNotify notify)
   {
     extern(C) void _notifyCallback(void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(DestroyNotify*)data;
+      auto _dlg = cast(glib.types.DestroyNotify*)data;
 
       (*_dlg)();
     }

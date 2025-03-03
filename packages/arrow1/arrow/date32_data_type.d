@@ -4,9 +4,9 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.temporal_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class Date32DataType : TemporalDataType
+class Date32DataType : arrow.temporal_data_type.TemporalDataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

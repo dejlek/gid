@@ -10,7 +10,7 @@ public import gdk.texture;
 public import gdk.toplevel_layout;
 public import gdk.toplevel_size;
 public import gdk.types;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 
 /**
@@ -33,7 +33,7 @@ template ToplevelT()
    *   timestamp = timestamp of mouse click that began the drag $(LPAREN)use
    *     [gdk.event.Event.getTime]$(RPAREN)
    */
-  override void beginMove(Device device, int button, double x, double y, uint timestamp)
+  override void beginMove(gdk.device.Device device, int button, double x, double y, uint timestamp)
   {
     gdk_toplevel_begin_move(cast(GdkToplevel*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, button, x, y, timestamp);
   }
@@ -50,7 +50,7 @@ template ToplevelT()
    *   timestamp = timestamp of mouse click that began the drag $(LPAREN)use
    *     [gdk.event.Event.getTime]$(RPAREN)
    */
-  override void beginResize(SurfaceEdge edge, Device device, int button, double x, double y, uint timestamp)
+  override void beginResize(gdk.types.SurfaceEdge edge, gdk.device.Device device, int button, double x, double y, uint timestamp)
   {
     gdk_toplevel_begin_resize(cast(GdkToplevel*)cPtr, edge, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, button, x, y, timestamp);
   }
@@ -73,11 +73,11 @@ template ToplevelT()
    * from the `GdkToplevelState` enumeration.
    * Returns: surface state bitfield
    */
-  override ToplevelState getState()
+  override gdk.types.ToplevelState getState()
   {
     GdkToplevelState _cretval;
     _cretval = gdk_toplevel_get_state(cast(GdkToplevel*)cPtr);
-    ToplevelState _retval = cast(ToplevelState)_cretval;
+    gdk.types.ToplevelState _retval = cast(gdk.types.ToplevelState)_cretval;
     return _retval;
   }
 
@@ -102,7 +102,7 @@ template ToplevelT()
    *   event = the `GdkEvent` that is triggering the inhibit
    *     request, or %NULL if none is available
    */
-  override void inhibitSystemShortcuts(Event event)
+  override void inhibitSystemShortcuts(gdk.event.Event event)
   {
     gdk_toplevel_inhibit_system_shortcuts(cast(GdkToplevel*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
   }
@@ -143,7 +143,7 @@ template ToplevelT()
    * Params:
    *   layout = the `GdkToplevelLayout` object used to layout
    */
-  override void present(ToplevelLayout layout)
+  override void present(gdk.toplevel_layout.ToplevelLayout layout)
   {
     gdk_toplevel_present(cast(GdkToplevel*)cPtr, layout ? cast(GdkToplevelLayout*)layout.cPtr(No.Dup) : null);
   }
@@ -194,10 +194,10 @@ template ToplevelT()
    * Params:
    *   surfaces = A list of textures to use as icon, of different sizes
    */
-  override void setIconList(Texture[] surfaces)
+  override void setIconList(gdk.texture.Texture[] surfaces)
   {
-    auto _surfaces = gListFromD!(Texture)(surfaces);
-    scope(exit) containerFree!(GList*, Texture, GidOwnership.None)(_surfaces);
+    auto _surfaces = gListFromD!(gdk.texture.Texture)(surfaces);
+    scope(exit) containerFree!(GList*, gdk.texture.Texture, GidOwnership.None)(_surfaces);
     gdk_toplevel_set_icon_list(cast(GdkToplevel*)cPtr, _surfaces);
   }
 
@@ -255,7 +255,7 @@ template ToplevelT()
    * Params:
    *   parent = another toplevel `GdkSurface`
    */
-  override void setTransientFor(Surface parent)
+  override void setTransientFor(gdk.surface.Surface parent)
   {
     gdk_toplevel_set_transient_for(cast(GdkToplevel*)cPtr, parent ? cast(GdkSurface*)parent.cPtr(No.Dup) : null);
   }
@@ -270,7 +270,7 @@ template ToplevelT()
    *   event = a `GdkEvent` to show the menu for
    * Returns: %TRUE if the window menu was shown and %FALSE otherwise.
    */
-  override bool showWindowMenu(Event event)
+  override bool showWindowMenu(gdk.event.Event event)
   {
     bool _retval;
     _retval = gdk_toplevel_show_window_menu(cast(GdkToplevel*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
@@ -289,7 +289,7 @@ template ToplevelT()
     return _retval;
   }
 
-  override bool titlebarGesture(TitlebarGesture gesture)
+  override bool titlebarGesture(gdk.types.TitlebarGesture gesture)
   {
     bool _retval;
     _retval = gdk_toplevel_titlebar_gesture(cast(GdkToplevel*)cPtr, gesture);
@@ -312,8 +312,8 @@ template ToplevelT()
    *   size = a `GdkToplevelSize`
    *   toplevel = the instance the signal is connected to
    */
-  alias ComputeSizeCallbackDlg = void delegate(ToplevelSize size, Toplevel toplevel);
-  alias ComputeSizeCallbackFunc = void function(ToplevelSize size, Toplevel toplevel);
+  alias ComputeSizeCallbackDlg = void delegate(gdk.toplevel_size.ToplevelSize size, gdk.toplevel.Toplevel toplevel);
+  alias ComputeSizeCallbackFunc = void function(gdk.toplevel_size.ToplevelSize size, gdk.toplevel.Toplevel toplevel);
 
   /**
    * Connect to ComputeSize signal.
@@ -329,8 +329,8 @@ template ToplevelT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto toplevel = getVal!Toplevel(_paramVals);
-      auto size = getVal!ToplevelSize(&_paramVals[1]);
+      auto toplevel = getVal!(gdk.toplevel.Toplevel)(_paramVals);
+      auto size = getVal!(gdk.toplevel_size.ToplevelSize)(&_paramVals[1]);
       _dClosure.dlg(size, toplevel);
     }
 

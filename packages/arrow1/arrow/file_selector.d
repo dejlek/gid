@@ -3,10 +3,10 @@ module arrow.file_selector;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class FileSelector : ObjectG
+class FileSelector : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

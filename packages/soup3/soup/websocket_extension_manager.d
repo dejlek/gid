@@ -1,6 +1,6 @@
 module soup.websocket_extension_manager;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -17,7 +17,7 @@ import soup.types;
  * session with [soup.session.Session.removeFeatureByType] or disable it on
  * individual requests with [soup.message.Message.disableFeature].
  */
-class WebsocketExtensionManager : ObjectG, SessionFeature
+class WebsocketExtensionManager : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

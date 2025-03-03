@@ -1,9 +1,8 @@
 module gio.action_map_mixin;
 
 public import gio.action_map_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.action;
-public import gio.action_mixin;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
@@ -31,7 +30,7 @@ template ActionMapT()
    * Params:
    *   action = a #GAction
    */
-  override void addAction(Action action)
+  override void addAction(gio.action.Action action)
   {
     g_action_map_add_action(cast(GActionMap*)cPtr, action ? cast(GAction*)(cast(ObjectG)action).cPtr(No.Dup) : null);
   }
@@ -43,12 +42,12 @@ template ActionMapT()
    *   actionName = the name of an action
    * Returns: a #GAction, or %NULL
    */
-  override Action lookupAction(string actionName)
+  override gio.action.Action lookupAction(string actionName)
   {
     GAction* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_action_map_lookup_action(cast(GActionMap*)cPtr, _actionName);
-    auto _retval = ObjectG.getDObject!Action(cast(GAction*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.action.Action)(cast(GAction*)_cretval, No.Take);
     return _retval;
   }
 

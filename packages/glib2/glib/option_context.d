@@ -1,6 +1,6 @@
 module glib.option_context;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.option_group;
@@ -44,7 +44,7 @@ class OptionContext
    * Params:
    *   group = the group to add
    */
-  void addGroup(OptionGroup group)
+  void addGroup(glib.option_group.OptionGroup group)
   {
     g_option_context_add_group(cast(GOptionContext*)cPtr, group ? cast(GOptionGroup*)group.cPtr(Yes.Dup) : null);
   }
@@ -58,7 +58,7 @@ class OptionContext
    *     the `--help` output for the options in entries
    *     with gettext$(LPAREN)$(RPAREN), or %NULL
    */
-  void addMainEntries(OptionEntry[] entries, string translationDomain)
+  void addMainEntries(glib.types.OptionEntry[] entries, string translationDomain)
   {
     auto _entries = cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr;
     const(char)* _translationDomain = translationDomain.toCString(No.Alloc);
@@ -73,7 +73,7 @@ class OptionContext
   {
     const(char)* _cretval;
     _cretval = g_option_context_get_description(cast(GOptionContext*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -90,11 +90,11 @@ class OptionContext
    *   group = the #GOptionGroup to create help for, or %NULL
    * Returns: A newly allocated string containing the help text
    */
-  string getHelp(bool mainHelp, OptionGroup group)
+  string getHelp(bool mainHelp, glib.option_group.OptionGroup group)
   {
     char* _cretval;
     _cretval = g_option_context_get_help(cast(GOptionContext*)cPtr, mainHelp, group ? cast(GOptionGroup*)group.cPtr(No.Dup) : null);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -128,11 +128,11 @@ class OptionContext
    *   context doesn't have a main group. Note that group belongs to
    *   context and should not be modified or freed.
    */
-  OptionGroup getMainGroup()
+  glib.option_group.OptionGroup getMainGroup()
   {
     GOptionGroup* _cretval;
     _cretval = g_option_context_get_main_group(cast(GOptionContext*)cPtr);
-    auto _retval = _cretval ? new OptionGroup(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.option_group.OptionGroup(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class OptionContext
   {
     const(char)* _cretval;
     _cretval = g_option_context_get_summary(cast(GOptionContext*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class OptionContext
    * Params:
    *   group = the group to set as main group
    */
-  void setMainGroup(OptionGroup group)
+  void setMainGroup(glib.option_group.OptionGroup group)
   {
     g_option_context_set_main_group(cast(GOptionContext*)cPtr, group ? cast(GOptionGroup*)group.cPtr(Yes.Dup) : null);
   }
@@ -274,12 +274,12 @@ class OptionContext
    * Params:
    *   func = the #GTranslateFunc, or %NULL
    */
-  void setTranslateFunc(TranslateFunc func)
+  void setTranslateFunc(glib.types.TranslateFunc func)
   {
     extern(C) const(char)* _funcCallback(const(char)* str, void* data)
     {
       string _dretval;
-      auto _dlg = cast(TranslateFunc*)data;
+      auto _dlg = cast(glib.types.TranslateFunc*)data;
       string _str = str.fromCString(No.Free);
 
       _dretval = (*_dlg)(_str);

@@ -1,6 +1,6 @@
 module gtk.cclosure_expression;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.expression;
@@ -9,7 +9,7 @@ import gtk.types;
 /**
  * A variant of `GtkClosureExpression` using a C closure.
  */
-class CClosureExpression : Expression
+class CClosureExpression : gtk.expression.Expression
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

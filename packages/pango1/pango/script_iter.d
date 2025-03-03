@@ -1,6 +1,6 @@
 module pango.script_iter;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
@@ -10,7 +10,7 @@ import pango.types;
  * A `PangoScriptIter` is used to iterate through a string
  * and identify ranges in different scripts.
  */
-class ScriptIter : Boxed
+class ScriptIter : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -72,7 +72,7 @@ class ScriptIter : Boxed
    *   end = location to store end position of the range
    *   script = location to store script for range
    */
-  void getRange(out string start, out string end, out Script script)
+  void getRange(out string start, out string end, out pango.types.Script script)
   {
     char* _start;
     char* _end;

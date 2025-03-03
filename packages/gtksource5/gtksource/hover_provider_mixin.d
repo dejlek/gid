@@ -1,9 +1,8 @@
 module gtksource.hover_provider_mixin;
 
 public import gtksource.hover_provider_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.async_result;
-public import gio.async_result_mixin;
 public import gio.cancellable;
 public import gio.types;
 public import glib.error;
@@ -27,14 +26,14 @@ public import gtksource.types;
 template HoverProviderT()
 {
 
-  override void populateAsync(HoverContext context, HoverDisplay display, Cancellable cancellable, AsyncReadyCallback callback)
+  override void populateAsync(gtksource.hover_context.HoverContext context, gtksource.hover_display.HoverDisplay display, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -42,7 +41,7 @@ template HoverProviderT()
     gtk_source_hover_provider_populate_async(cast(GtkSourceHoverProvider*)cPtr, context ? cast(GtkSourceHoverContext*)context.cPtr(No.Dup) : null, display ? cast(GtkSourceHoverDisplay*)display.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
-  override bool populateFinish(AsyncResult result)
+  override bool populateFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;

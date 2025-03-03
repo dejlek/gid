@@ -1,6 +1,6 @@
 module gio.themed_icon;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.icon;
@@ -18,7 +18,7 @@ import gobject.object;
  * resolve the list of names so that fallback icons work nicely with
  * themes that inherit other themes.
  */
-class ThemedIcon : ObjectG, Icon
+class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -59,7 +59,7 @@ class ThemedIcon : ObjectG, Icon
    *   iconnames = an array of strings containing icon names.
    * Returns: a new #GThemedIcon
    */
-  static ThemedIcon newFromNames(string[] iconnames)
+  static gio.themed_icon.ThemedIcon newFromNames(string[] iconnames)
   {
     GIcon* _cretval;
     int _len;
@@ -71,7 +71,7 @@ class ThemedIcon : ObjectG, Icon
       _tmpiconnames ~= s.toCString(No.Alloc);
     char** _iconnames = _tmpiconnames.ptr;
     _cretval = g_themed_icon_new_from_names(_iconnames, _len);
-    auto _retval = ObjectG.getDObject!ThemedIcon(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.themed_icon.ThemedIcon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -93,12 +93,12 @@ class ThemedIcon : ObjectG, Icon
    *   iconname = a string containing an icon name
    * Returns: a new #GThemedIcon.
    */
-  static ThemedIcon newWithDefaultFallbacks(string iconname)
+  static gio.themed_icon.ThemedIcon newWithDefaultFallbacks(string iconname)
   {
     GIcon* _cretval;
     const(char)* _iconname = iconname.toCString(No.Alloc);
     _cretval = g_themed_icon_new_with_default_fallbacks(_iconname);
-    auto _retval = ObjectG.getDObject!ThemedIcon(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.themed_icon.ThemedIcon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 

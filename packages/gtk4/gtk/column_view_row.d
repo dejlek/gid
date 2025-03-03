@@ -1,6 +1,6 @@
 module gtk.column_view_row;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -12,7 +12,7 @@ import gtk.types;
  * It is not used to set the widgets displayed in the individual cells. For that
  * see method@GtkColumnViewColumn.set_factory and class@GtkColumnViewCell.
  */
-class ColumnViewRow : ObjectG
+class ColumnViewRow : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -39,7 +39,7 @@ class ColumnViewRow : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_row_get_accessible_description(cast(GtkColumnViewRow*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -51,7 +51,7 @@ class ColumnViewRow : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_row_get_accessible_label(cast(GtkColumnViewRow*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -84,11 +84,11 @@ class ColumnViewRow : ObjectG
    * If self is unbound, this function returns %NULL.
    * Returns: The item displayed
    */
-  ObjectG getItem()
+  gobject.object.ObjectG getItem()
   {
     ObjectC* _cretval;
     _cretval = gtk_column_view_row_get_item(cast(GtkColumnViewRow*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 

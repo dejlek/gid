@@ -1,6 +1,6 @@
 module gtk.imcontext_simple;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.imcontext;
@@ -33,7 +33,7 @@ import gtk.types;
  * yields U+00E! LATIN SMALL LETTER_A WITH ACUTE, i.e. á. Note that this
  * depends on the keyboard layout including dead keys.
  */
-class IMContextSimple : IMContext
+class IMContextSimple : gtk.imcontext.IMContext
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

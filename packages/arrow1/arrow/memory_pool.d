@@ -3,10 +3,10 @@ module arrow.memory_pool;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class MemoryPool : ObjectG
+class MemoryPool : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -25,11 +25,11 @@ class MemoryPool : ObjectG
     return getType();
   }
 
-  static MemoryPool default_()
+  static arrow.memory_pool.MemoryPool default_()
   {
     GArrowMemoryPool* _cretval;
     _cretval = garrow_memory_pool_default();
-    auto _retval = ObjectG.getDObject!MemoryPool(cast(GArrowMemoryPool*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.memory_pool.MemoryPool)(cast(GArrowMemoryPool*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -37,7 +37,7 @@ class MemoryPool : ObjectG
   {
     char* _cretval;
     _cretval = garrow_memory_pool_get_backend_name(cast(GArrowMemoryPool*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 

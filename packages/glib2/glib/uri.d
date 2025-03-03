@@ -1,6 +1,6 @@
 module glib.uri;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.c.functions;
 import glib.c.types;
@@ -89,7 +89,7 @@ import gobject.boxed;
  * parts, and return the parts; the difference between the two is that
  * [glib.uri.Uri.split] treats the ‘userinfo’ component of the URI as a
  * single element, while [glib.uri.Uri.splitWithUser] can $(LPAREN)depending on the
- * [glib.UriFlags] you pass$(RPAREN) treat it as containing a username, password,
+ * [glib.types.UriFlags] you pass$(RPAREN) treat it as containing a username, password,
  * and authentication parameters. Alternatively, [glib.uri.Uri.splitNetwork]
  * can be used when you are only interested in the components that are
  * needed to initiate a network connection to the service $(LPAREN)scheme,
@@ -102,7 +102,7 @@ import gobject.boxed;
  * [glib.uri.Uri.resolveRelative] takes two strings and returns a string,
  * and [glib.uri.Uri.parseRelative] takes a `GUri` and a string and returns a
  * `GUri`.
- * All of the parsing functions take a [glib.UriFlags] argument describing
+ * All of the parsing functions take a [glib.types.UriFlags] argument describing
  * exactly how to parse the URI; see the documentation for that type
  * for more details on the specific flags that you can pass. If you
  * need to choose different flags based on the type of URI, you can
@@ -118,7 +118,7 @@ import gobject.boxed;
  * Similarly, [glib.uri.Uri.build] and [glib.uri.Uri.buildWithUser] can be
  * used to construct a `GUri` from a set of component strings.
  * As with the parsing functions, the building functions take a
- * [glib.UriFlags] argument. In particular, it is important to keep in mind
+ * [glib.types.UriFlags] argument. In particular, it is important to keep in mind
  * whether the URI components you are using are already `%`-encoded. If so,
  * you must pass the `G_URI_FLAGS_ENCODED` flag.
  * ## `file://` URIs
@@ -132,13 +132,13 @@ import gobject.boxed;
  * Note that there is no `g_uri_equal $(LPAREN)$(RPAREN)` function, because comparing
  * URIs usefully requires scheme-specific knowledge that `GUri` does
  * not have. `GUri` can help with normalization if you use the various
- * encoded [glib.UriFlags] as well as `G_URI_FLAGS_SCHEME_NORMALIZE`
+ * encoded [glib.types.UriFlags] as well as `G_URI_FLAGS_SCHEME_NORMALIZE`
  * however it is not comprehensive.
  * For example, `data:,foo` and `data:;base64,Zm9v` resolve to the same
  * thing according to the `data:` URI specification which GLib does not
  * handle.
  */
-class Uri : Boxed
+class Uri : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -175,7 +175,7 @@ class Uri : Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_auth_params(cast(GUri*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -183,11 +183,11 @@ class Uri : Boxed
    * Gets uri's flags set upon construction.
    * Returns: uri's flags.
    */
-  UriFlags getFlags()
+  glib.types.UriFlags getFlags()
   {
     GUriFlags _cretval;
     _cretval = g_uri_get_flags(cast(GUri*)cPtr);
-    UriFlags _retval = cast(UriFlags)_cretval;
+    glib.types.UriFlags _retval = cast(glib.types.UriFlags)_cretval;
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class Uri : Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_fragment(cast(GUri*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class Uri : Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_host(cast(GUri*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class Uri : Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_password(cast(GUri*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class Uri : Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_path(cast(GUri*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -272,7 +272,7 @@ class Uri : Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_query(cast(GUri*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class Uri : Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_scheme(cast(GUri*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -300,7 +300,7 @@ class Uri : Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_user(cast(GUri*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -313,7 +313,7 @@ class Uri : Boxed
   {
     const(char)* _cretval;
     _cretval = g_uri_get_userinfo(cast(GUri*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class Uri : Boxed
    *   flags = flags describing how to parse uri_ref
    * Returns: a new #GUri, or NULL on error.
    */
-  Uri parseRelative(string uriRef, UriFlags flags)
+  glib.uri.Uri parseRelative(string uriRef, glib.types.UriFlags flags)
   {
     GUri* _cretval;
     const(char)* _uriRef = uriRef.toCString(No.Alloc);
@@ -335,7 +335,7 @@ class Uri : Boxed
     _cretval = g_uri_parse_relative(cast(GUri*)cPtr, _uriRef, flags, &_err);
     if (_err)
       throw new UriException(_err);
-    auto _retval = _cretval ? new Uri(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -357,7 +357,7 @@ class Uri : Boxed
   {
     char* _cretval;
     _cretval = g_uri_to_string(cast(GUri*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -369,11 +369,11 @@ class Uri : Boxed
    * Returns: a string representing
    *   uri, which the caller must free.
    */
-  string toStringPartial(UriHideFlags flags)
+  string toStringPartial(glib.types.UriHideFlags flags)
   {
     char* _cretval;
     _cretval = g_uri_to_string_partial(cast(GUri*)cPtr, flags);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -392,7 +392,7 @@ class Uri : Boxed
    *   fragment = the fragment, or %NULL
    * Returns: a new #GUri
    */
-  static Uri build(UriFlags flags, string scheme, string userinfo, string host, int port, string path, string query, string fragment)
+  static glib.uri.Uri build(glib.types.UriFlags flags, string scheme, string userinfo, string host, int port, string path, string query, string fragment)
   {
     GUri* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -402,7 +402,7 @@ class Uri : Boxed
     const(char)* _query = query.toCString(No.Alloc);
     const(char)* _fragment = fragment.toCString(No.Alloc);
     _cretval = g_uri_build(flags, _scheme, _userinfo, _host, port, _path, _query, _fragment);
-    auto _retval = _cretval ? new Uri(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -427,7 +427,7 @@ class Uri : Boxed
    *   fragment = the fragment, or %NULL
    * Returns: a new #GUri
    */
-  static Uri buildWithUser(UriFlags flags, string scheme, string user, string password, string authParams, string host, int port, string path, string query, string fragment)
+  static glib.uri.Uri buildWithUser(glib.types.UriFlags flags, string scheme, string user, string password, string authParams, string host, int port, string path, string query, string fragment)
   {
     GUri* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -439,13 +439,13 @@ class Uri : Boxed
     const(char)* _query = query.toCString(No.Alloc);
     const(char)* _fragment = fragment.toCString(No.Alloc);
     _cretval = g_uri_build_with_user(flags, _scheme, _user, _password, _authParams, _host, port, _path, _query, _fragment);
-    auto _retval = _cretval ? new Uri(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
-  static Quark errorQuark()
+  static glib.types.Quark errorQuark()
   {
-    Quark _retval;
+    glib.types.Quark _retval;
     _retval = g_uri_error_quark();
     return _retval;
   }
@@ -477,7 +477,7 @@ class Uri : Boxed
     auto _unescaped = cast(const(ubyte)*)unescaped.ptr;
     const(char)* _reservedCharsAllowed = reservedCharsAllowed.toCString(No.Alloc);
     _cretval = g_uri_escape_bytes(_unescaped, _length, _reservedCharsAllowed);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -503,7 +503,7 @@ class Uri : Boxed
     const(char)* _unescaped = unescaped.toCString(No.Alloc);
     const(char)* _reservedCharsAllowed = reservedCharsAllowed.toCString(No.Alloc);
     _cretval = g_uri_escape_string(_unescaped, _reservedCharsAllowed, allowUtf8);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -519,7 +519,7 @@ class Uri : Boxed
    *   flags = flags for parsing uri_string
    * Returns: %TRUE if uri_string is a valid absolute URI, %FALSE on error.
    */
-  static bool isValid(string uriString, UriFlags flags)
+  static bool isValid(string uriString, glib.types.UriFlags flags)
   {
     bool _retval;
     const(char)* _uriString = uriString.toCString(No.Alloc);
@@ -553,7 +553,7 @@ class Uri : Boxed
    *   fragment = the fragment, or %NULL
    * Returns: an absolute URI string
    */
-  static string join(UriFlags flags, string scheme, string userinfo, string host, int port, string path, string query, string fragment)
+  static string join(glib.types.UriFlags flags, string scheme, string userinfo, string host, int port, string path, string query, string fragment)
   {
     char* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -563,7 +563,7 @@ class Uri : Boxed
     const(char)* _query = query.toCString(No.Alloc);
     const(char)* _fragment = fragment.toCString(No.Alloc);
     _cretval = g_uri_join(flags, _scheme, _userinfo, _host, port, _path, _query, _fragment);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -590,7 +590,7 @@ class Uri : Boxed
    *   fragment = the fragment, or %NULL
    * Returns: an absolute URI string
    */
-  static string joinWithUser(UriFlags flags, string scheme, string user, string password, string authParams, string host, int port, string path, string query, string fragment)
+  static string joinWithUser(glib.types.UriFlags flags, string scheme, string user, string password, string authParams, string host, int port, string path, string query, string fragment)
   {
     char* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -602,7 +602,7 @@ class Uri : Boxed
     const(char)* _query = query.toCString(No.Alloc);
     const(char)* _fragment = fragment.toCString(No.Alloc);
     _cretval = g_uri_join_with_user(flags, _scheme, _user, _password, _authParams, _host, port, _path, _query, _fragment);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -644,7 +644,7 @@ class Uri : Boxed
    *   flags = flags describing how to parse uri_string
    * Returns: a new #GUri, or NULL on error.
    */
-  static Uri parse(string uriString, UriFlags flags)
+  static glib.uri.Uri parse(string uriString, glib.types.UriFlags flags)
   {
     GUri* _cretval;
     const(char)* _uriString = uriString.toCString(No.Alloc);
@@ -652,7 +652,7 @@ class Uri : Boxed
     _cretval = g_uri_parse(_uriString, flags, &_err);
     if (_err)
       throw new UriException(_err);
-    auto _retval = _cretval ? new Uri(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -690,7 +690,7 @@ class Uri : Boxed
    * Returns: A hash table of attribute/value pairs, with both names and values
    *   fully-decoded; or %NULL on error.
    */
-  static string[string] parseParams(string params, ptrdiff_t length, string separators, UriParamsFlags flags)
+  static string[string] parseParams(string params, ptrdiff_t length, string separators, glib.types.UriParamsFlags flags)
   {
     GHashTable* _cretval;
     const(char)* _params = params.toCString(No.Alloc);
@@ -721,7 +721,7 @@ class Uri : Boxed
     char* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
     _cretval = g_uri_parse_scheme(_uri);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -746,7 +746,7 @@ class Uri : Boxed
     const(char)* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
     _cretval = g_uri_peek_scheme(_uri);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -764,7 +764,7 @@ class Uri : Boxed
    * Returns: the resolved URI string,
    *   or NULL on error.
    */
-  static string resolveRelative(string baseUriString, string uriRef, UriFlags flags)
+  static string resolveRelative(string baseUriString, string uriRef, glib.types.UriFlags flags)
   {
     char* _cretval;
     const(char)* _baseUriString = baseUriString.toCString(No.Alloc);
@@ -773,7 +773,7 @@ class Uri : Boxed
     _cretval = g_uri_resolve_relative(_baseUriString, _uriRef, flags, &_err);
     if (_err)
       throw new UriException(_err);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -812,7 +812,7 @@ class Uri : Boxed
    * Returns: %TRUE if uri_ref parsed successfully, %FALSE
    *   on error.
    */
-  static bool split(string uriRef, UriFlags flags, out string scheme, out string userinfo, out string host, out int port, out string path, out string query, out string fragment)
+  static bool split(string uriRef, glib.types.UriFlags flags, out string scheme, out string userinfo, out string host, out int port, out string path, out string query, out string fragment)
   {
     bool _retval;
     const(char)* _uriRef = uriRef.toCString(No.Alloc);
@@ -854,7 +854,7 @@ class Uri : Boxed
    * Returns: %TRUE if uri_string parsed successfully,
    *   %FALSE on error.
    */
-  static bool splitNetwork(string uriString, UriFlags flags, out string scheme, out string host, out int port)
+  static bool splitNetwork(string uriString, glib.types.UriFlags flags, out string scheme, out string host, out int port)
   {
     bool _retval;
     const(char)* _uriString = uriString.toCString(No.Alloc);
@@ -904,7 +904,7 @@ class Uri : Boxed
    * Returns: %TRUE if uri_ref parsed successfully, %FALSE
    *   on error.
    */
-  static bool splitWithUser(string uriRef, UriFlags flags, out string scheme, out string user, out string password, out string authParams, out string host, out int port, out string path, out string query, out string fragment)
+  static bool splitWithUser(string uriRef, glib.types.UriFlags flags, out string scheme, out string user, out string password, out string authParams, out string host, out int port, out string path, out string query, out string fragment)
   {
     bool _retval;
     const(char)* _uriRef = uriRef.toCString(No.Alloc);
@@ -950,7 +950,7 @@ class Uri : Boxed
    *   or %NULL on error $(LPAREN)if decoding failed, using %G_URI_ERROR_FAILED error
    *   code$(RPAREN). The returned #GBytes should be unreffed when no longer needed.
    */
-  static Bytes unescapeBytes(string escapedString, ptrdiff_t length, string illegalCharacters)
+  static glib.bytes.Bytes unescapeBytes(string escapedString, ptrdiff_t length, string illegalCharacters)
   {
     GBytes* _cretval;
     const(char)* _escapedString = escapedString.toCString(No.Alloc);
@@ -959,7 +959,7 @@ class Uri : Boxed
     _cretval = g_uri_unescape_bytes(_escapedString, length, _illegalCharacters, &_err);
     if (_err)
       throw new UriException(_err);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -990,7 +990,7 @@ class Uri : Boxed
     const(char)* _escapedStringEnd = escapedStringEnd.toCString(No.Alloc);
     const(char)* _illegalCharacters = illegalCharacters.toCString(No.Alloc);
     _cretval = g_uri_unescape_segment(_escapedString, _escapedStringEnd, _illegalCharacters);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1014,7 +1014,7 @@ class Uri : Boxed
     const(char)* _escapedString = escapedString.toCString(No.Alloc);
     const(char)* _illegalCharacters = illegalCharacters.toCString(No.Alloc);
     _cretval = g_uri_unescape_string(_escapedString, _illegalCharacters);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }
@@ -1028,7 +1028,7 @@ class UriException : ErrorG
 
   this(Code code, string msg)
   {
-    super(Uri.errorQuark, cast(int)code, msg);
+    super(glib.uri.Uri.errorQuark, cast(int)code, msg);
   }
 
   alias Code = GUriError;

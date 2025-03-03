@@ -1,6 +1,6 @@
 module gtksource.hover_display;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -20,7 +20,7 @@ import gtksource.types;
  * Implement the iface@HoverProvider interface to be notified of when
  * to populate a `GtkSourceHoverDisplay` on behalf of the user.
  */
-class HoverDisplay : Widget
+class HoverDisplay : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -39,22 +39,22 @@ class HoverDisplay : Widget
     return getType();
   }
 
-  void append(Widget child)
+  void append(gtk.widget.Widget child)
   {
     gtk_source_hover_display_append(cast(GtkSourceHoverDisplay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
-  override void insertAfter(Widget child, Widget sibling)
+  override void insertAfter(gtk.widget.Widget child, gtk.widget.Widget sibling)
   {
     gtk_source_hover_display_insert_after(cast(GtkSourceHoverDisplay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null);
   }
 
-  void prepend(Widget child)
+  void prepend(gtk.widget.Widget child)
   {
     gtk_source_hover_display_prepend(cast(GtkSourceHoverDisplay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
-  void remove(Widget child)
+  void remove(gtk.widget.Widget child)
   {
     gtk_source_hover_display_remove(cast(GtkSourceHoverDisplay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

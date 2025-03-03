@@ -5,9 +5,9 @@ import arrow.c.types;
 import arrow.scalar;
 import arrow.struct_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class StructScalar : Scalar
+class StructScalar : arrow.scalar.Scalar
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,20 +26,20 @@ class StructScalar : Scalar
     return getType();
   }
 
-  this(StructDataType dataType, Scalar[] value)
+  this(arrow.struct_data_type.StructDataType dataType, arrow.scalar.Scalar[] value)
   {
     GArrowStructScalar* _cretval;
-    auto _value = gListFromD!(Scalar)(value);
-    scope(exit) containerFree!(GList*, Scalar, GidOwnership.None)(_value);
+    auto _value = gListFromD!(arrow.scalar.Scalar)(value);
+    scope(exit) containerFree!(GList*, arrow.scalar.Scalar, GidOwnership.None)(_value);
     _cretval = garrow_struct_scalar_new(dataType ? cast(GArrowStructDataType*)dataType.cPtr(No.Dup) : null, _value);
     this(_cretval, Yes.Take);
   }
 
-  Scalar[] getValue()
+  arrow.scalar.Scalar[] getValue()
   {
     GList* _cretval;
     _cretval = garrow_struct_scalar_get_value(cast(GArrowStructScalar*)cPtr);
-    auto _retval = gListToD!(Scalar, GidOwnership.None)(cast(GList*)_cretval);
+    auto _retval = gListToD!(arrow.scalar.Scalar, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
 }

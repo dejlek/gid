@@ -1,6 +1,6 @@
 module gtk.filter_list_model;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -21,7 +21,7 @@ import gtk.types;
  * [gtk.filter_list_model.FilterListModel.setIncremental] for details.
  * `GtkFilterListModel` passes through sections from the underlying model.
  */
-class FilterListModel : ObjectG, ListModel, SectionModel
+class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -51,7 +51,7 @@ class FilterListModel : ObjectG, ListModel, SectionModel
    *   filter = filter
    * Returns: a new `GtkFilterListModel`
    */
-  this(ListModel model, Filter filter)
+  this(gio.list_model.ListModel model, gtk.filter.Filter filter)
   {
     GtkFilterListModel* _cretval;
     _cretval = gtk_filter_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, filter ? cast(GtkFilter*)filter.cPtr(Yes.Dup) : null);
@@ -62,11 +62,11 @@ class FilterListModel : ObjectG, ListModel, SectionModel
    * Gets the `GtkFilter` currently set on self.
    * Returns: The filter currently in use
    */
-  Filter getFilter()
+  gtk.filter.Filter getFilter()
   {
     GtkFilter* _cretval;
     _cretval = gtk_filter_list_model_get_filter(cast(GtkFilterListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!Filter(cast(GtkFilter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.filter.Filter)(cast(GtkFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -86,11 +86,11 @@ class FilterListModel : ObjectG, ListModel, SectionModel
    * Gets the model currently filtered or %NULL if none.
    * Returns: The model that gets filtered
    */
-  ListModel getModel()
+  gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
     _cretval = gtk_filter_list_model_get_model(cast(GtkFilterListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class FilterListModel : ObjectG, ListModel, SectionModel
    * Params:
    *   filter = filter to use
    */
-  void setFilter(Filter filter)
+  void setFilter(gtk.filter.Filter filter)
   {
     gtk_filter_list_model_set_filter(cast(GtkFilterListModel*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(No.Dup) : null);
   }
@@ -157,7 +157,7 @@ class FilterListModel : ObjectG, ListModel, SectionModel
    * Params:
    *   model = The model to be filtered
    */
-  void setModel(ListModel model)
+  void setModel(gio.list_model.ListModel model)
   {
     gtk_filter_list_model_set_model(cast(GtkFilterListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

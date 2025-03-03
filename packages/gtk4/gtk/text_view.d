@@ -2,7 +2,7 @@ module gtk.text_view;
 
 import gdk.event;
 import gdk.rectangle;
-import gid.global;
+import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
 import gobject.object;
@@ -54,7 +54,7 @@ import pango.tab_array;
  * ## Accessibility
  * `GtkTextView` uses the %GTK_ACCESSIBLE_ROLE_TEXT_BOX role.
  */
-class TextView : Widget, AccessibleText, Scrollable
+class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scrollable.Scrollable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -101,11 +101,11 @@ class TextView : Widget, AccessibleText, Scrollable
    *   buffer = a `GtkTextBuffer`
    * Returns: a new `GtkTextView`.
    */
-  static TextView newWithBuffer(TextBuffer buffer)
+  static gtk.text_view.TextView newWithBuffer(gtk.text_buffer.TextBuffer buffer)
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_view_new_with_buffer(buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!TextView(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_view.TextView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class TextView : Widget, AccessibleText, Scrollable
    *   child = a `GtkWidget`
    *   anchor = a `GtkTextChildAnchor` in the `GtkTextBuffer` for text_view
    */
-  void addChildAtAnchor(Widget child, TextChildAnchor anchor)
+  void addChildAtAnchor(gtk.widget.Widget child, gtk.text_child_anchor.TextChildAnchor anchor)
   {
     gtk_text_view_add_child_at_anchor(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(No.Dup) : null);
   }
@@ -133,7 +133,7 @@ class TextView : Widget, AccessibleText, Scrollable
    *   xpos = X position of child in window coordinates
    *   ypos = Y position of child in window coordinates
    */
-  void addOverlay(Widget child, int xpos, int ypos)
+  void addOverlay(gtk.widget.Widget child, int xpos, int ypos)
   {
     gtk_text_view_add_overlay(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, xpos, ypos);
   }
@@ -151,7 +151,7 @@ class TextView : Widget, AccessibleText, Scrollable
    *   iter = a `GtkTextIter`
    * Returns: %TRUE if iter was moved and is not on the end iterator
    */
-  bool backwardDisplayLine(TextIter iter)
+  bool backwardDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
     _retval = gtk_text_view_backward_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
@@ -171,7 +171,7 @@ class TextView : Widget, AccessibleText, Scrollable
    *   iter = a `GtkTextIter`
    * Returns: %TRUE if iter was moved and is not on the end iterator
    */
-  bool backwardDisplayLineStart(TextIter iter)
+  bool backwardDisplayLineStart(gtk.text_iter.TextIter iter)
   {
     bool _retval;
     _retval = gtk_text_view_backward_display_line_start(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
@@ -187,7 +187,7 @@ class TextView : Widget, AccessibleText, Scrollable
    *   windowX = window x coordinate return location
    *   windowY = window y coordinate return location
    */
-  void bufferToWindowCoords(TextWindowType win, int bufferX, int bufferY, out int windowX, out int windowY)
+  void bufferToWindowCoords(gtk.types.TextWindowType win, int bufferX, int bufferY, out int windowX, out int windowY)
   {
     gtk_text_view_buffer_to_window_coords(cast(GtkTextView*)cPtr, win, bufferX, bufferY, cast(int*)&windowX, cast(int*)&windowY);
   }
@@ -205,7 +205,7 @@ class TextView : Widget, AccessibleText, Scrollable
    *   iter = a `GtkTextIter`
    * Returns: %TRUE if iter was moved and is not on the end iterator
    */
-  bool forwardDisplayLine(TextIter iter)
+  bool forwardDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
     _retval = gtk_text_view_forward_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
@@ -225,7 +225,7 @@ class TextView : Widget, AccessibleText, Scrollable
    *   iter = a `GtkTextIter`
    * Returns: %TRUE if iter was moved and is not on the end iterator
    */
-  bool forwardDisplayLineEnd(TextIter iter)
+  bool forwardDisplayLineEnd(gtk.text_iter.TextIter iter)
   {
     bool _retval;
     _retval = gtk_text_view_forward_display_line_end(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
@@ -262,11 +262,11 @@ class TextView : Widget, AccessibleText, Scrollable
    * of this function won’t own a new reference.
    * Returns: a `GtkTextBuffer`
    */
-  TextBuffer getBuffer()
+  gtk.text_buffer.TextBuffer getBuffer()
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_view_get_buffer(cast(GtkTextView*)cPtr);
-    auto _retval = ObjectG.getDObject!TextBuffer(cast(GtkTextBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -292,13 +292,13 @@ class TextView : Widget, AccessibleText, Scrollable
    *   strong = location to store the strong cursor position
    *   weak = location to store the weak cursor position
    */
-  void getCursorLocations(TextIter iter, out Rectangle strong, out Rectangle weak)
+  void getCursorLocations(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle strong, out gdk.rectangle.Rectangle weak)
   {
     GdkRectangle _strong;
     GdkRectangle _weak;
-    gtk_text_view_get_cursor_locations(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, &_strong, &_weak);
-    strong = new Rectangle(cast(void*)&_strong, No.Take);
-    weak = new Rectangle(cast(void*)&_weak, No.Take);
+    gtk_text_view_get_cursor_locations(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, &_strong, &_weak);
+    strong = new gdk.rectangle.Rectangle(cast(void*)&_strong, No.Take);
+    weak = new gdk.rectangle.Rectangle(cast(void*)&_weak, No.Take);
   }
 
   /**
@@ -329,11 +329,11 @@ class TextView : Widget, AccessibleText, Scrollable
    * or %NULL if none has been set.
    * Returns: the menu model
    */
-  MenuModel getExtraMenu()
+  gio.menu_model.MenuModel getExtraMenu()
   {
     GMenuModel* _cretval;
     _cretval = gtk_text_view_get_extra_menu(cast(GtkTextView*)cPtr);
-    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -346,11 +346,11 @@ class TextView : Widget, AccessibleText, Scrollable
    *   win = a `GtkTextWindowType`
    * Returns: a `GtkWidget`
    */
-  Widget getGutter(TextWindowType win)
+  gtk.widget.Widget getGutter(gtk.types.TextWindowType win)
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_view_get_gutter(cast(GtkTextView*)cPtr, win);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -371,11 +371,11 @@ class TextView : Widget, AccessibleText, Scrollable
    * Gets the `input-hints` of the `GtkTextView`.
    * Returns:
    */
-  InputHints getInputHints()
+  gtk.types.InputHints getInputHints()
   {
     GtkInputHints _cretval;
     _cretval = gtk_text_view_get_input_hints(cast(GtkTextView*)cPtr);
-    InputHints _retval = cast(InputHints)_cretval;
+    gtk.types.InputHints _retval = cast(gtk.types.InputHints)_cretval;
     return _retval;
   }
 
@@ -383,11 +383,11 @@ class TextView : Widget, AccessibleText, Scrollable
    * Gets the `input-purpose` of the `GtkTextView`.
    * Returns:
    */
-  InputPurpose getInputPurpose()
+  gtk.types.InputPurpose getInputPurpose()
   {
     GtkInputPurpose _cretval;
     _cretval = gtk_text_view_get_input_purpose(cast(GtkTextView*)cPtr);
-    InputPurpose _retval = cast(InputPurpose)_cretval;
+    gtk.types.InputPurpose _retval = cast(gtk.types.InputPurpose)_cretval;
     return _retval;
   }
 
@@ -403,12 +403,12 @@ class TextView : Widget, AccessibleText, Scrollable
    *   y = y position, in buffer coordinates
    * Returns: %TRUE if the position is over text
    */
-  bool getIterAtLocation(out TextIter iter, int x, int y)
+  bool getIterAtLocation(out gtk.text_iter.TextIter iter, int x, int y)
   {
     bool _retval;
     GtkTextIter _iter;
     _retval = gtk_text_view_get_iter_at_location(cast(GtkTextView*)cPtr, &_iter, x, y);
-    iter = new TextIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -431,12 +431,12 @@ class TextView : Widget, AccessibleText, Scrollable
    *   y = y position, in buffer coordinates
    * Returns: %TRUE if the position is over text
    */
-  bool getIterAtPosition(out TextIter iter, out int trailing, int x, int y)
+  bool getIterAtPosition(out gtk.text_iter.TextIter iter, out int trailing, int x, int y)
   {
     bool _retval;
     GtkTextIter _iter;
     _retval = gtk_text_view_get_iter_at_position(cast(GtkTextView*)cPtr, &_iter, cast(int*)&trailing, x, y);
-    iter = new TextIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -449,11 +449,11 @@ class TextView : Widget, AccessibleText, Scrollable
    *   iter = a `GtkTextIter`
    *   location = bounds of the character at iter
    */
-  void getIterLocation(TextIter iter, out Rectangle location)
+  void getIterLocation(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle location)
   {
     GdkRectangle _location;
-    gtk_text_view_get_iter_location(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, &_location);
-    location = new Rectangle(cast(void*)&_location, No.Take);
+    gtk_text_view_get_iter_location(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, &_location);
+    location = new gdk.rectangle.Rectangle(cast(void*)&_location, No.Take);
   }
 
   /**
@@ -461,11 +461,11 @@ class TextView : Widget, AccessibleText, Scrollable
    * Tags in the buffer may override the default.
    * Returns: default justification
    */
-  Justification getJustification()
+  gtk.types.Justification getJustification()
   {
     GtkJustification _cretval;
     _cretval = gtk_text_view_get_justification(cast(GtkTextView*)cPtr);
-    Justification _retval = cast(Justification)_cretval;
+    gtk.types.Justification _retval = cast(gtk.types.Justification)_cretval;
     return _retval;
   }
 
@@ -493,11 +493,11 @@ class TextView : Widget, AccessibleText, Scrollable
    *   y = a y coordinate
    *   lineTop = return location for top coordinate of the line
    */
-  void getLineAtY(out TextIter targetIter, int y, out int lineTop)
+  void getLineAtY(out gtk.text_iter.TextIter targetIter, int y, out int lineTop)
   {
     GtkTextIter _targetIter;
     gtk_text_view_get_line_at_y(cast(GtkTextView*)cPtr, &_targetIter, y, cast(int*)&lineTop);
-    targetIter = new TextIter(cast(void*)&_targetIter, No.Take);
+    targetIter = new gtk.text_iter.TextIter(cast(void*)&_targetIter, No.Take);
   }
 
   /**
@@ -510,9 +510,9 @@ class TextView : Widget, AccessibleText, Scrollable
    *   y = return location for a y coordinate
    *   height = return location for a height
    */
-  void getLineYrange(TextIter iter, out int y, out int height)
+  void getLineYrange(gtk.text_iter.TextIter iter, out int y, out int height)
   {
-    gtk_text_view_get_line_yrange(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, cast(int*)&y, cast(int*)&height);
+    gtk_text_view_get_line_yrange(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, cast(int*)&y, cast(int*)&height);
   }
 
   /**
@@ -521,11 +521,11 @@ class TextView : Widget, AccessibleText, Scrollable
    * The context may be replaced when CSS changes occur.
    * Returns: a `PangoContext`
    */
-  Context getLtrContext()
+  pango.context.Context getLtrContext()
   {
     PangoContext* _cretval;
     _cretval = gtk_text_view_get_ltr_context(cast(GtkTextView*)cPtr);
-    auto _retval = ObjectG.getDObject!Context(cast(PangoContext*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -607,11 +607,11 @@ class TextView : Widget, AccessibleText, Scrollable
    * The context may be replaced when CSS changes occur.
    * Returns: a `PangoContext`
    */
-  Context getRtlContext()
+  pango.context.Context getRtlContext()
   {
     PangoContext* _cretval;
     _cretval = gtk_text_view_get_rtl_context(cast(GtkTextView*)cPtr);
-    auto _retval = ObjectG.getDObject!Context(cast(PangoContext*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -624,11 +624,11 @@ class TextView : Widget, AccessibleText, Scrollable
    *   or %NULL if standard tabs are used; must be freed with
    *   [pango.tab_array.TabArray.free].
    */
-  TabArray getTabs()
+  pango.tab_array.TabArray getTabs()
   {
     PangoTabArray* _cretval;
     _cretval = gtk_text_view_get_tabs(cast(GtkTextView*)cPtr);
-    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -651,22 +651,22 @@ class TextView : Widget, AccessibleText, Scrollable
    * Params:
    *   visibleRect = rectangle to fill
    */
-  void getVisibleRect(out Rectangle visibleRect)
+  void getVisibleRect(out gdk.rectangle.Rectangle visibleRect)
   {
     GdkRectangle _visibleRect;
     gtk_text_view_get_visible_rect(cast(GtkTextView*)cPtr, &_visibleRect);
-    visibleRect = new Rectangle(cast(void*)&_visibleRect, No.Take);
+    visibleRect = new gdk.rectangle.Rectangle(cast(void*)&_visibleRect, No.Take);
   }
 
   /**
    * Gets the line wrapping for the view.
    * Returns: the line wrap setting
    */
-  WrapMode getWrapMode()
+  gtk.types.WrapMode getWrapMode()
   {
     GtkWrapMode _cretval;
     _cretval = gtk_text_view_get_wrap_mode(cast(GtkTextView*)cPtr);
-    WrapMode _retval = cast(WrapMode)_cretval;
+    gtk.types.WrapMode _retval = cast(gtk.types.WrapMode)_cretval;
     return _retval;
   }
 
@@ -699,7 +699,7 @@ class TextView : Widget, AccessibleText, Scrollable
    *   event = the key event
    * Returns: %TRUE if the input method handled the key event.
    */
-  bool imContextFilterKeypress(Event event)
+  bool imContextFilterKeypress(gdk.event.Event event)
   {
     bool _retval;
     _retval = gtk_text_view_im_context_filter_keypress(cast(GtkTextView*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
@@ -713,7 +713,7 @@ class TextView : Widget, AccessibleText, Scrollable
    *   mark = a `GtkTextMark`
    * Returns: %TRUE if the mark moved $(LPAREN)wasn’t already onscreen$(RPAREN)
    */
-  bool moveMarkOnscreen(TextMark mark)
+  bool moveMarkOnscreen(gtk.text_mark.TextMark mark)
   {
     bool _retval;
     _retval = gtk_text_view_move_mark_onscreen(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null);
@@ -728,7 +728,7 @@ class TextView : Widget, AccessibleText, Scrollable
    *   xpos = new X position in buffer coordinates
    *   ypos = new Y position in buffer coordinates
    */
-  void moveOverlay(Widget child, int xpos, int ypos)
+  void moveOverlay(gtk.widget.Widget child, int xpos, int ypos)
   {
     gtk_text_view_move_overlay(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, xpos, ypos);
   }
@@ -750,7 +750,7 @@ class TextView : Widget, AccessibleText, Scrollable
    *     positive moves right$(RPAREN)
    * Returns: %TRUE if iter moved and is not on the end iterator
    */
-  bool moveVisually(TextIter iter, int count)
+  bool moveVisually(gtk.text_iter.TextIter iter, int count)
   {
     bool _retval;
     _retval = gtk_text_view_move_visually(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, count);
@@ -774,7 +774,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Params:
    *   child = the child to remove
    */
-  void remove(Widget child)
+  void remove(gtk.widget.Widget child)
   {
     gtk_text_view_remove(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -808,7 +808,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Params:
    *   mark = a mark in the buffer for text_view
    */
-  void scrollMarkOnscreen(TextMark mark)
+  void scrollMarkOnscreen(gtk.text_mark.TextMark mark)
   {
     gtk_text_view_scroll_mark_onscreen(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null);
   }
@@ -836,7 +836,7 @@ class TextView : Widget, AccessibleText, Scrollable
    *   yalign = vertical alignment of mark within visible area
    * Returns: %TRUE if scrolling occurred
    */
-  bool scrollToIter(TextIter iter, double withinMargin, bool useAlign, double xalign, double yalign)
+  bool scrollToIter(gtk.text_iter.TextIter iter, double withinMargin, bool useAlign, double xalign, double yalign)
   {
     bool _retval;
     _retval = gtk_text_view_scroll_to_iter(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, withinMargin, useAlign, xalign, yalign);
@@ -859,7 +859,7 @@ class TextView : Widget, AccessibleText, Scrollable
    *   xalign = horizontal alignment of mark within visible area
    *   yalign = vertical alignment of mark within visible area
    */
-  void scrollToMark(TextMark mark, double withinMargin, bool useAlign, double xalign, double yalign)
+  void scrollToMark(gtk.text_mark.TextMark mark, double withinMargin, bool useAlign, double xalign, double yalign)
   {
     gtk_text_view_scroll_to_mark(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null, withinMargin, useAlign, xalign, yalign);
   }
@@ -901,7 +901,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Params:
    *   buffer = a `GtkTextBuffer`
    */
-  void setBuffer(TextBuffer buffer)
+  void setBuffer(gtk.text_buffer.TextBuffer buffer)
   {
     gtk_text_view_set_buffer(cast(GtkTextView*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
   }
@@ -939,7 +939,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Params:
    *   model = a `GMenuModel`
    */
-  void setExtraMenu(MenuModel model)
+  void setExtraMenu(gio.menu_model.MenuModel model)
   {
     gtk_text_view_set_extra_menu(cast(GtkTextView*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
@@ -952,7 +952,7 @@ class TextView : Widget, AccessibleText, Scrollable
    *   win = a `GtkTextWindowType`
    *   widget = a `GtkWidget`
    */
-  void setGutter(TextWindowType win, Widget widget)
+  void setGutter(gtk.types.TextWindowType win, gtk.widget.Widget widget)
   {
     gtk_text_view_set_gutter(cast(GtkTextView*)cPtr, win, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -975,7 +975,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Params:
    *   hints = the hints
    */
-  void setInputHints(InputHints hints)
+  void setInputHints(gtk.types.InputHints hints)
   {
     gtk_text_view_set_input_hints(cast(GtkTextView*)cPtr, hints);
   }
@@ -987,7 +987,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Params:
    *   purpose = the purpose
    */
-  void setInputPurpose(InputPurpose purpose)
+  void setInputPurpose(gtk.types.InputPurpose purpose)
   {
     gtk_text_view_set_input_purpose(cast(GtkTextView*)cPtr, purpose);
   }
@@ -998,7 +998,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Params:
    *   justification = justification
    */
-  void setJustification(Justification justification)
+  void setJustification(gtk.types.Justification justification)
   {
     gtk_text_view_set_justification(cast(GtkTextView*)cPtr, justification);
   }
@@ -1091,7 +1091,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Params:
    *   tabs = tabs as a `PangoTabArray`
    */
-  void setTabs(TabArray tabs)
+  void setTabs(pango.tab_array.TabArray tabs)
   {
     gtk_text_view_set_tabs(cast(GtkTextView*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }
@@ -1113,7 +1113,7 @@ class TextView : Widget, AccessibleText, Scrollable
    * Params:
    *   wrapMode = a `GtkWrapMode`
    */
-  void setWrapMode(WrapMode wrapMode)
+  void setWrapMode(gtk.types.WrapMode wrapMode)
   {
     gtk_text_view_set_wrap_mode(cast(GtkTextView*)cPtr, wrapMode);
   }
@@ -1126,10 +1126,10 @@ class TextView : Widget, AccessibleText, Scrollable
    *   iter = a `GtkTextIter`
    * Returns: %TRUE if iter begins a wrapped line
    */
-  bool startsDisplayLine(TextIter iter)
+  bool startsDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_starts_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_text_view_starts_display_line(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1143,7 +1143,7 @@ class TextView : Widget, AccessibleText, Scrollable
    *   bufferX = buffer x coordinate return location
    *   bufferY = buffer y coordinate return location
    */
-  void windowToBufferCoords(TextWindowType win, int windowX, int windowY, out int bufferX, out int bufferY)
+  void windowToBufferCoords(gtk.types.TextWindowType win, int windowX, int windowY, out int bufferX, out int bufferY)
   {
     gtk_text_view_window_to_buffer_coords(cast(GtkTextView*)cPtr, win, windowX, windowY, cast(int*)&bufferX, cast(int*)&bufferY);
   }
@@ -1155,8 +1155,8 @@ class TextView : Widget, AccessibleText, Scrollable
    * <kbd>Backspace</kbd> and <kbd>Shift</kbd>+<kbd>Backspace</kbd>.
    *   textView = the instance the signal is connected to
    */
-  alias BackspaceCallbackDlg = void delegate(TextView textView);
-  alias BackspaceCallbackFunc = void function(TextView textView);
+  alias BackspaceCallbackDlg = void delegate(gtk.text_view.TextView textView);
+  alias BackspaceCallbackFunc = void function(gtk.text_view.TextView textView);
 
   /**
    * Connect to Backspace signal.
@@ -1172,7 +1172,7 @@ class TextView : Widget, AccessibleText, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!TextView(_paramVals);
+      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
       _dClosure.dlg(textView);
     }
 
@@ -1188,8 +1188,8 @@ class TextView : Widget, AccessibleText, Scrollable
    * <kbd>Ctrl</kbd>+<kbd>Insert</kbd>.
    *   textView = the instance the signal is connected to
    */
-  alias CopyClipboardCallbackDlg = void delegate(TextView textView);
-  alias CopyClipboardCallbackFunc = void function(TextView textView);
+  alias CopyClipboardCallbackDlg = void delegate(gtk.text_view.TextView textView);
+  alias CopyClipboardCallbackFunc = void function(gtk.text_view.TextView textView);
 
   /**
    * Connect to CopyClipboard signal.
@@ -1205,7 +1205,7 @@ class TextView : Widget, AccessibleText, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!TextView(_paramVals);
+      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
       _dClosure.dlg(textView);
     }
 
@@ -1221,8 +1221,8 @@ class TextView : Widget, AccessibleText, Scrollable
    * <kbd>Shift</kbd>+<kbd>Delete</kbd>.
    *   textView = the instance the signal is connected to
    */
-  alias CutClipboardCallbackDlg = void delegate(TextView textView);
-  alias CutClipboardCallbackFunc = void function(TextView textView);
+  alias CutClipboardCallbackDlg = void delegate(gtk.text_view.TextView textView);
+  alias CutClipboardCallbackFunc = void function(gtk.text_view.TextView textView);
 
   /**
    * Connect to CutClipboard signal.
@@ -1238,7 +1238,7 @@ class TextView : Widget, AccessibleText, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!TextView(_paramVals);
+      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
       _dClosure.dlg(textView);
     }
 
@@ -1261,8 +1261,8 @@ class TextView : Widget, AccessibleText, Scrollable
    *   count = the number of type units to delete
    *   textView = the instance the signal is connected to
    */
-  alias DeleteFromCursorCallbackDlg = void delegate(DeleteType type, int count, TextView textView);
-  alias DeleteFromCursorCallbackFunc = void function(DeleteType type, int count, TextView textView);
+  alias DeleteFromCursorCallbackDlg = void delegate(gtk.types.DeleteType type, int count, gtk.text_view.TextView textView);
+  alias DeleteFromCursorCallbackFunc = void function(gtk.types.DeleteType type, int count, gtk.text_view.TextView textView);
 
   /**
    * Connect to DeleteFromCursor signal.
@@ -1278,9 +1278,9 @@ class TextView : Widget, AccessibleText, Scrollable
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!TextView(_paramVals);
-      auto type = getVal!DeleteType(&_paramVals[1]);
-      auto count = getVal!int(&_paramVals[2]);
+      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
+      auto type = getVal!(gtk.types.DeleteType)(&_paramVals[1]);
+      auto count = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(type, count, textView);
     }
 
@@ -1299,8 +1299,8 @@ class TextView : Widget, AccessibleText, Scrollable
    * Returns: %GDK_EVENT_STOP to stop other handlers from being invoked for the
    *   event. %GDK_EVENT_PROPAGATE to propagate the event further.
    */
-  alias ExtendSelectionCallbackDlg = bool delegate(TextExtendSelection granularity, TextIter location, TextIter start, TextIter end, TextView textView);
-  alias ExtendSelectionCallbackFunc = bool function(TextExtendSelection granularity, TextIter location, TextIter start, TextIter end, TextView textView);
+  alias ExtendSelectionCallbackDlg = bool delegate(gtk.types.TextExtendSelection granularity, gtk.text_iter.TextIter location, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_view.TextView textView);
+  alias ExtendSelectionCallbackFunc = bool function(gtk.types.TextExtendSelection granularity, gtk.text_iter.TextIter location, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_view.TextView textView);
 
   /**
    * Connect to ExtendSelection signal.
@@ -1317,11 +1317,11 @@ class TextView : Widget, AccessibleText, Scrollable
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto textView = getVal!TextView(_paramVals);
-      auto granularity = getVal!TextExtendSelection(&_paramVals[1]);
-      auto location = getVal!TextIter(&_paramVals[2]);
-      auto start = getVal!TextIter(&_paramVals[3]);
-      auto end = getVal!TextIter(&_paramVals[4]);
+      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
+      auto granularity = getVal!(gtk.types.TextExtendSelection)(&_paramVals[1]);
+      auto location = getVal!(gtk.text_iter.TextIter)(&_paramVals[2]);
+      auto start = getVal!(gtk.text_iter.TextIter)(&_paramVals[3]);
+      auto end = getVal!(gtk.text_iter.TextIter)(&_paramVals[4]);
       _retval = _dClosure.dlg(granularity, location, start, end, textView);
       setVal!bool(_returnValue, _retval);
     }
@@ -1339,8 +1339,8 @@ class TextView : Widget, AccessibleText, Scrollable
    *   string_ = the string to insert
    *   textView = the instance the signal is connected to
    */
-  alias InsertAtCursorCallbackDlg = void delegate(string string_, TextView textView);
-  alias InsertAtCursorCallbackFunc = void function(string string_, TextView textView);
+  alias InsertAtCursorCallbackDlg = void delegate(string string_, gtk.text_view.TextView textView);
+  alias InsertAtCursorCallbackFunc = void function(string string_, gtk.text_view.TextView textView);
 
   /**
    * Connect to InsertAtCursor signal.
@@ -1356,8 +1356,8 @@ class TextView : Widget, AccessibleText, Scrollable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!TextView(_paramVals);
-      auto string_ = getVal!string(&_paramVals[1]);
+      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
+      auto string_ = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(string_, textView);
     }
 
@@ -1373,8 +1373,8 @@ class TextView : Widget, AccessibleText, Scrollable
    * <kbd>Ctrl</kbd>+<kbd>;</kbd>
    *   textView = the instance the signal is connected to
    */
-  alias InsertEmojiCallbackDlg = void delegate(TextView textView);
-  alias InsertEmojiCallbackFunc = void function(TextView textView);
+  alias InsertEmojiCallbackDlg = void delegate(gtk.text_view.TextView textView);
+  alias InsertEmojiCallbackFunc = void function(gtk.text_view.TextView textView);
 
   /**
    * Connect to InsertEmoji signal.
@@ -1390,7 +1390,7 @@ class TextView : Widget, AccessibleText, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!TextView(_paramVals);
+      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
       _dClosure.dlg(textView);
     }
 
@@ -1423,8 +1423,8 @@ class TextView : Widget, AccessibleText, Scrollable
    *   extendSelection = %TRUE if the move should extend the selection
    *   textView = the instance the signal is connected to
    */
-  alias MoveCursorCallbackDlg = void delegate(MovementStep step, int count, bool extendSelection, TextView textView);
-  alias MoveCursorCallbackFunc = void function(MovementStep step, int count, bool extendSelection, TextView textView);
+  alias MoveCursorCallbackDlg = void delegate(gtk.types.MovementStep step, int count, bool extendSelection, gtk.text_view.TextView textView);
+  alias MoveCursorCallbackFunc = void function(gtk.types.MovementStep step, int count, bool extendSelection, gtk.text_view.TextView textView);
 
   /**
    * Connect to MoveCursor signal.
@@ -1440,10 +1440,10 @@ class TextView : Widget, AccessibleText, Scrollable
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!TextView(_paramVals);
-      auto step = getVal!MovementStep(&_paramVals[1]);
-      auto count = getVal!int(&_paramVals[2]);
-      auto extendSelection = getVal!bool(&_paramVals[3]);
+      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
+      auto step = getVal!(gtk.types.MovementStep)(&_paramVals[1]);
+      auto count = getVal!(int)(&_paramVals[2]);
+      auto extendSelection = getVal!(bool)(&_paramVals[3]);
       _dClosure.dlg(step, count, extendSelection, textView);
     }
 
@@ -1463,8 +1463,8 @@ class TextView : Widget, AccessibleText, Scrollable
    *   count = the number of step units to move
    *   textView = the instance the signal is connected to
    */
-  alias MoveViewportCallbackDlg = void delegate(ScrollStep step, int count, TextView textView);
-  alias MoveViewportCallbackFunc = void function(ScrollStep step, int count, TextView textView);
+  alias MoveViewportCallbackDlg = void delegate(gtk.types.ScrollStep step, int count, gtk.text_view.TextView textView);
+  alias MoveViewportCallbackFunc = void function(gtk.types.ScrollStep step, int count, gtk.text_view.TextView textView);
 
   /**
    * Connect to MoveViewport signal.
@@ -1480,9 +1480,9 @@ class TextView : Widget, AccessibleText, Scrollable
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!TextView(_paramVals);
-      auto step = getVal!ScrollStep(&_paramVals[1]);
-      auto count = getVal!int(&_paramVals[2]);
+      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
+      auto step = getVal!(gtk.types.ScrollStep)(&_paramVals[1]);
+      auto count = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(step, count, textView);
     }
 
@@ -1499,8 +1499,8 @@ class TextView : Widget, AccessibleText, Scrollable
    * <kbd>Shift</kbd>+<kbd>Insert</kbd>.
    *   textView = the instance the signal is connected to
    */
-  alias PasteClipboardCallbackDlg = void delegate(TextView textView);
-  alias PasteClipboardCallbackFunc = void function(TextView textView);
+  alias PasteClipboardCallbackDlg = void delegate(gtk.text_view.TextView textView);
+  alias PasteClipboardCallbackFunc = void function(gtk.text_view.TextView textView);
 
   /**
    * Connect to PasteClipboard signal.
@@ -1516,7 +1516,7 @@ class TextView : Widget, AccessibleText, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!TextView(_paramVals);
+      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
       _dClosure.dlg(textView);
     }
 
@@ -1535,8 +1535,8 @@ class TextView : Widget, AccessibleText, Scrollable
    *   preedit = the current preedit string
    *   textView = the instance the signal is connected to
    */
-  alias PreeditChangedCallbackDlg = void delegate(string preedit, TextView textView);
-  alias PreeditChangedCallbackFunc = void function(string preedit, TextView textView);
+  alias PreeditChangedCallbackDlg = void delegate(string preedit, gtk.text_view.TextView textView);
+  alias PreeditChangedCallbackFunc = void function(string preedit, gtk.text_view.TextView textView);
 
   /**
    * Connect to PreeditChanged signal.
@@ -1552,8 +1552,8 @@ class TextView : Widget, AccessibleText, Scrollable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!TextView(_paramVals);
-      auto preedit = getVal!string(&_paramVals[1]);
+      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
+      auto preedit = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(preedit, textView);
     }
 
@@ -1573,8 +1573,8 @@ class TextView : Widget, AccessibleText, Scrollable
    *   select = %TRUE to select, %FALSE to unselect
    *   textView = the instance the signal is connected to
    */
-  alias SelectAllCallbackDlg = void delegate(bool select, TextView textView);
-  alias SelectAllCallbackFunc = void function(bool select, TextView textView);
+  alias SelectAllCallbackDlg = void delegate(bool select, gtk.text_view.TextView textView);
+  alias SelectAllCallbackFunc = void function(bool select, gtk.text_view.TextView textView);
 
   /**
    * Connect to SelectAll signal.
@@ -1590,8 +1590,8 @@ class TextView : Widget, AccessibleText, Scrollable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!TextView(_paramVals);
-      auto select = getVal!bool(&_paramVals[1]);
+      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
+      auto select = getVal!(bool)(&_paramVals[1]);
       _dClosure.dlg(select, textView);
     }
 
@@ -1608,8 +1608,8 @@ class TextView : Widget, AccessibleText, Scrollable
    * This signal has no default bindings.
    *   textView = the instance the signal is connected to
    */
-  alias SetAnchorCallbackDlg = void delegate(TextView textView);
-  alias SetAnchorCallbackFunc = void function(TextView textView);
+  alias SetAnchorCallbackDlg = void delegate(gtk.text_view.TextView textView);
+  alias SetAnchorCallbackFunc = void function(gtk.text_view.TextView textView);
 
   /**
    * Connect to SetAnchor signal.
@@ -1625,7 +1625,7 @@ class TextView : Widget, AccessibleText, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!TextView(_paramVals);
+      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
       _dClosure.dlg(textView);
     }
 
@@ -1640,8 +1640,8 @@ class TextView : Widget, AccessibleText, Scrollable
    * The default binding for this signal is <kbd>F7</kbd>.
    *   textView = the instance the signal is connected to
    */
-  alias ToggleCursorVisibleCallbackDlg = void delegate(TextView textView);
-  alias ToggleCursorVisibleCallbackFunc = void function(TextView textView);
+  alias ToggleCursorVisibleCallbackDlg = void delegate(gtk.text_view.TextView textView);
+  alias ToggleCursorVisibleCallbackFunc = void function(gtk.text_view.TextView textView);
 
   /**
    * Connect to ToggleCursorVisible signal.
@@ -1657,7 +1657,7 @@ class TextView : Widget, AccessibleText, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!TextView(_paramVals);
+      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
       _dClosure.dlg(textView);
     }
 
@@ -1671,8 +1671,8 @@ class TextView : Widget, AccessibleText, Scrollable
    * The default binding for this signal is <kbd>Insert</kbd>.
    *   textView = the instance the signal is connected to
    */
-  alias ToggleOverwriteCallbackDlg = void delegate(TextView textView);
-  alias ToggleOverwriteCallbackFunc = void function(TextView textView);
+  alias ToggleOverwriteCallbackDlg = void delegate(gtk.text_view.TextView textView);
+  alias ToggleOverwriteCallbackFunc = void function(gtk.text_view.TextView textView);
 
   /**
    * Connect to ToggleOverwrite signal.
@@ -1688,7 +1688,7 @@ class TextView : Widget, AccessibleText, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!TextView(_paramVals);
+      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
       _dClosure.dlg(textView);
     }
 

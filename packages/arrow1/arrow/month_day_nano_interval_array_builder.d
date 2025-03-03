@@ -5,10 +5,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.month_day_nano;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class MonthDayNanoIntervalArrayBuilder : ArrayBuilder
+class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -34,7 +34,7 @@ class MonthDayNanoIntervalArrayBuilder : ArrayBuilder
     this(_cretval, Yes.Take);
   }
 
-  bool appendValue(MonthDayNano value)
+  bool appendValue(arrow.month_day_nano.MonthDayNano value)
   {
     bool _retval;
     GError *_err;
@@ -55,7 +55,7 @@ class MonthDayNanoIntervalArrayBuilder : ArrayBuilder
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendValues(MonthDayNano[] values, bool[] isValids)
+  bool appendValues(arrow.month_day_nano.MonthDayNano[] values, bool[] isValids)
   {
     bool _retval;
     long _valuesLength;

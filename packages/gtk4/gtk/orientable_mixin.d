@@ -1,7 +1,7 @@
 module gtk.orientable_mixin;
 
 public import gtk.orientable_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -23,11 +23,11 @@ template OrientableT()
    * Retrieves the orientation of the orientable.
    * Returns: the orientation of the orientable
    */
-  override Orientation getOrientation()
+  override gtk.types.Orientation getOrientation()
   {
     GtkOrientation _cretval;
     _cretval = gtk_orientable_get_orientation(cast(GtkOrientable*)cPtr);
-    Orientation _retval = cast(Orientation)_cretval;
+    gtk.types.Orientation _retval = cast(gtk.types.Orientation)_cretval;
     return _retval;
   }
 
@@ -36,7 +36,7 @@ template OrientableT()
    * Params:
    *   orientation = the orientable’s new orientation
    */
-  override void setOrientation(Orientation orientation)
+  override void setOrientation(gtk.types.Orientation orientation)
   {
     gtk_orientable_set_orientation(cast(GtkOrientable*)cPtr, orientation);
   }

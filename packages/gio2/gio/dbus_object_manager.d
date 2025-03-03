@@ -1,13 +1,11 @@
 module gio.dbus_object_manager;
 
 public import gio.dbus_object_manager_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_interface;
-import gio.dbus_interface_mixin;
 import gio.dbus_object;
-import gio.dbus_object_mixin;
 import gio.types;
 import gobject.dclosure;
 import gobject.object;
@@ -38,7 +36,7 @@ interface DBusObjectManager
    * Returns: A #GDBusInterface instance or %NULL. Free
    *   with [gobject.object.ObjectG.unref].
    */
-  DBusInterface getInterface(string objectPath, string interfaceName);
+  gio.dbus_interface.DBusInterface getInterface(string objectPath, string interfaceName);
 
   /**
    * Gets the #GDBusObject at object_path, if any.
@@ -47,7 +45,7 @@ interface DBusObjectManager
    * Returns: A #GDBusObject or %NULL. Free with
    *   [gobject.object.ObjectG.unref].
    */
-  DBusObject getObject(string objectPath);
+  gio.dbus_object.DBusObject getObject(string objectPath);
 
   /**
    * Gets the object path that manager is for.
@@ -62,7 +60,7 @@ interface DBusObjectManager
    *   [glib.list.List.free] after each element has been freed with
    *   [gobject.object.ObjectG.unref].
    */
-  DBusObject[] getObjects();
+  gio.dbus_object.DBusObject[] getObjects();
 
   /**
    * Emitted when interface is added to object.
@@ -73,8 +71,8 @@ interface DBusObjectManager
    *   interface_ = The #GDBusInterface that was added.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias InterfaceAddedCallbackDlg = void delegate(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
-  alias InterfaceAddedCallbackFunc = void function(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
+  alias InterfaceAddedCallbackDlg = void delegate(gio.dbus_object.DBusObject object, gio.dbus_interface.DBusInterface interface_, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
+  alias InterfaceAddedCallbackFunc = void function(gio.dbus_object.DBusObject object, gio.dbus_interface.DBusInterface interface_, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to InterfaceAdded signal.
@@ -95,8 +93,8 @@ interface DBusObjectManager
    *   interface_ = The #GDBusInterface that was removed.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias InterfaceRemovedCallbackDlg = void delegate(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
-  alias InterfaceRemovedCallbackFunc = void function(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
+  alias InterfaceRemovedCallbackDlg = void delegate(gio.dbus_object.DBusObject object, gio.dbus_interface.DBusInterface interface_, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
+  alias InterfaceRemovedCallbackFunc = void function(gio.dbus_object.DBusObject object, gio.dbus_interface.DBusInterface interface_, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to InterfaceRemoved signal.
@@ -114,8 +112,8 @@ interface DBusObjectManager
    *   object = The #GDBusObject that was added.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias ObjectAddedCallbackDlg = void delegate(DBusObject object, DBusObjectManager dBusObjectManager);
-  alias ObjectAddedCallbackFunc = void function(DBusObject object, DBusObjectManager dBusObjectManager);
+  alias ObjectAddedCallbackDlg = void delegate(gio.dbus_object.DBusObject object, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
+  alias ObjectAddedCallbackFunc = void function(gio.dbus_object.DBusObject object, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to ObjectAdded signal.
@@ -133,8 +131,8 @@ interface DBusObjectManager
    *   object = The #GDBusObject that was removed.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias ObjectRemovedCallbackDlg = void delegate(DBusObject object, DBusObjectManager dBusObjectManager);
-  alias ObjectRemovedCallbackFunc = void function(DBusObject object, DBusObjectManager dBusObjectManager);
+  alias ObjectRemovedCallbackDlg = void delegate(gio.dbus_object.DBusObject object, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
+  alias ObjectRemovedCallbackFunc = void function(gio.dbus_object.DBusObject object, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to ObjectRemoved signal.

@@ -1,6 +1,6 @@
 module glib.hook_list;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.hook;
@@ -59,9 +59,9 @@ class HookList
     (cast(GHookList*)cPtr).isSetup = propval;
   }
 
-  @property Hook hooks()
+  @property glib.hook.Hook hooks()
   {
-    return new Hook(cast(GHook*)(cast(GHookList*)cPtr).hooks);
+    return new glib.hook.Hook(cast(GHook*)(cast(GHookList*)cPtr).hooks);
   }
 
   @property GHookFinalizeFunc finalizeHook()
@@ -127,13 +127,13 @@ class HookList
    *     these are skipped
    *   marshaller = the function to call for each #GHook
    */
-  void marshal(bool mayRecurse, HookMarshaller marshaller)
+  void marshal(bool mayRecurse, glib.types.HookMarshaller marshaller)
   {
     extern(C) void _marshallerCallback(GHook* hook, void* marshalData)
     {
-      auto _dlg = cast(HookMarshaller*)marshalData;
+      auto _dlg = cast(glib.types.HookMarshaller*)marshalData;
 
-      (*_dlg)(hook ? new Hook(cast(void*)hook, No.Take) : null);
+      (*_dlg)(hook ? new glib.hook.Hook(cast(void*)hook, No.Take) : null);
     }
     auto _marshallerCB = marshaller ? &_marshallerCallback : null;
 
@@ -150,13 +150,13 @@ class HookList
    *     these are skipped
    *   marshaller = the function to call for each #GHook
    */
-  void marshalCheck(bool mayRecurse, HookCheckMarshaller marshaller)
+  void marshalCheck(bool mayRecurse, glib.types.HookCheckMarshaller marshaller)
   {
     extern(C) bool _marshallerCallback(GHook* hook, void* marshalData)
     {
-      auto _dlg = cast(HookCheckMarshaller*)marshalData;
+      auto _dlg = cast(glib.types.HookCheckMarshaller*)marshalData;
 
-      bool _retval = (*_dlg)(hook ? new Hook(cast(void*)hook, No.Take) : null);
+      bool _retval = (*_dlg)(hook ? new glib.hook.Hook(cast(void*)hook, No.Take) : null);
       return _retval;
     }
     auto _marshallerCB = marshaller ? &_marshallerCallback : null;

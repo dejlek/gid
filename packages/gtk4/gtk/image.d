@@ -1,11 +1,9 @@
 module gtk.image;
 
 import gdk.paintable;
-import gdk.paintable_mixin;
 import gdkpixbuf.pixbuf;
-import gid.global;
+import gid.gid;
 import gio.icon;
-import gio.icon_mixin;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -48,7 +46,7 @@ import gtk.widget;
  * ## Accessibility
  * `GtkImage` uses the `GTK_ACCESSIBLE_ROLE_IMG` role.
  */
-class Image : Widget
+class Image : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -93,12 +91,12 @@ class Image : Widget
    *   filename = a filename
    * Returns: a new `GtkImage`
    */
-  static Image newFromFile(string filename)
+  static gtk.image.Image newFromFile(string filename)
   {
     GtkWidget* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_image_new_from_file(_filename);
-    auto _retval = ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -111,11 +109,11 @@ class Image : Widget
    *   icon = an icon
    * Returns: a new `GtkImage` displaying the themed icon
    */
-  static Image newFromGicon(Icon icon)
+  static gtk.image.Image newFromGicon(gio.icon.Icon icon)
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_gicon(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -128,12 +126,12 @@ class Image : Widget
    *   iconName = an icon name
    * Returns: a new `GtkImage` displaying the themed icon
    */
-  static Image newFromIconName(string iconName)
+  static gtk.image.Image newFromIconName(string iconName)
   {
     GtkWidget* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_image_new_from_icon_name(_iconName);
-    auto _retval = ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -148,11 +146,11 @@ class Image : Widget
    *   paintable = a `GdkPaintable`
    * Returns: a new `GtkImage`
    */
-  static Image newFromPaintable(Paintable paintable)
+  static gtk.image.Image newFromPaintable(gdk.paintable.Paintable paintable)
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_paintable(paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -173,11 +171,11 @@ class Image : Widget
    * Deprecated: Use [gtk.image.Image.newFromPaintable] and
    *   [gdk.texture.Texture.newForPixbuf] instead
    */
-  static Image newFromPixbuf(Pixbuf pixbuf)
+  static gtk.image.Image newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -196,12 +194,12 @@ class Image : Widget
    *   resourcePath = a resource path
    * Returns: a new `GtkImage`
    */
-  static Image newFromResource(string resourcePath)
+  static gtk.image.Image newFromResource(string resourcePath)
   {
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gtk_image_new_from_resource(_resourcePath);
-    auto _retval = ObjectG.getDObject!Image(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -221,11 +219,11 @@ class Image : Widget
    * returned `GIcon`.
    * Returns: a `GIcon`
    */
-  Icon getGicon()
+  gio.icon.Icon getGicon()
   {
     GIcon* _cretval;
     _cretval = gtk_image_get_gicon(cast(GtkImage*)cPtr);
-    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -241,7 +239,7 @@ class Image : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_image_get_icon_name(cast(GtkImage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -249,11 +247,11 @@ class Image : Widget
    * Gets the icon size used by the image when rendering icons.
    * Returns: the image size used by icons
    */
-  IconSize getIconSize()
+  gtk.types.IconSize getIconSize()
   {
     GtkIconSize _cretval;
     _cretval = gtk_image_get_icon_size(cast(GtkImage*)cPtr);
-    IconSize _retval = cast(IconSize)_cretval;
+    gtk.types.IconSize _retval = cast(gtk.types.IconSize)_cretval;
     return _retval;
   }
 
@@ -265,11 +263,11 @@ class Image : Widget
    * returned paintable.
    * Returns: the displayed paintable
    */
-  Paintable getPaintable()
+  gdk.paintable.Paintable getPaintable()
   {
     GdkPaintable* _cretval;
     _cretval = gtk_image_get_paintable(cast(GtkImage*)cPtr);
-    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -291,11 +289,11 @@ class Image : Widget
    * be %GTK_IMAGE_EMPTY.
    * Returns: image representation being used
    */
-  ImageType getStorageType()
+  gtk.types.ImageType getStorageType()
   {
     GtkImageType _cretval;
     _cretval = gtk_image_get_storage_type(cast(GtkImage*)cPtr);
-    ImageType _retval = cast(ImageType)_cretval;
+    gtk.types.ImageType _retval = cast(gtk.types.ImageType)_cretval;
     return _retval;
   }
 
@@ -317,7 +315,7 @@ class Image : Widget
    * Params:
    *   icon = an icon
    */
-  void setFromGicon(Icon icon)
+  void setFromGicon(gio.icon.Icon icon)
   {
     gtk_image_set_from_gicon(cast(GtkImage*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
@@ -340,7 +338,7 @@ class Image : Widget
    * Params:
    *   paintable = a `GdkPaintable`
    */
-  void setFromPaintable(Paintable paintable)
+  void setFromPaintable(gdk.paintable.Paintable paintable)
   {
     gtk_image_set_from_paintable(cast(GtkImage*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
@@ -356,7 +354,7 @@ class Image : Widget
 
    * Deprecated: Use [gtk.image.Image.setFromPaintable] instead
    */
-  void setFromPixbuf(Pixbuf pixbuf)
+  void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     gtk_image_set_from_pixbuf(cast(GtkImage*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
@@ -378,7 +376,7 @@ class Image : Widget
    * Params:
    *   iconSize = the new icon size
    */
-  void setIconSize(IconSize iconSize)
+  void setIconSize(gtk.types.IconSize iconSize)
   {
     gtk_image_set_icon_size(cast(GtkImage*)cPtr, iconSize);
   }

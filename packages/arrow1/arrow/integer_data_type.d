@@ -4,9 +4,9 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.numeric_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class IntegerDataType : NumericDataType
+class IntegerDataType : arrow.numeric_data_type.NumericDataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

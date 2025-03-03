@@ -1,10 +1,9 @@
 module gmodule.types;
 
-import gid.global;
+import gid.gid;
 import gmodule.c.functions;
 import gmodule.c.types;
 import gmodule.module_;
-import gmodule.types;
 
 
 // Enums
@@ -12,8 +11,8 @@ alias ModuleError = GModuleError;
 alias ModuleFlags = GModuleFlags;
 
 // Callbacks
-alias ModuleCheckInit = string delegate(Module module_);
-alias ModuleUnload = void delegate(Module module_);
+alias ModuleCheckInit = string delegate(gmodule.module_.Module module_);
+alias ModuleUnload = void delegate(gmodule.module_.Module module_);
 
 enum MODULE_IMPL_AR = 7;
 

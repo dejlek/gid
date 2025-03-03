@@ -1,7 +1,7 @@
 module gio.tls_backend;
 
 public import gio.tls_backend_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.tls_database;
@@ -28,11 +28,11 @@ interface TlsBackend
    * Returns: a #GTlsBackend, which will be a
    *   dummy object if no TLS backend is available
    */
-  static TlsBackend getDefault()
+  static gio.tls_backend.TlsBackend getDefault()
   {
     GTlsBackend* _cretval;
     _cretval = g_tls_backend_get_default();
-    auto _retval = ObjectG.getDObject!TlsBackend(cast(GTlsBackend*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_backend.TlsBackend)(cast(GTlsBackend*)_cretval, No.Take);
     return _retval;
   }
 
@@ -41,48 +41,48 @@ interface TlsBackend
    * Returns: the #GType of backend's #GTlsCertificate
    *   implementation.
    */
-  GType getCertificateType();
+  gobject.types.GType getCertificateType();
 
   /**
    * Gets the #GType of backend's #GTlsClientConnection implementation.
    * Returns: the #GType of backend's #GTlsClientConnection
    *   implementation.
    */
-  GType getClientConnectionType();
+  gobject.types.GType getClientConnectionType();
 
   /**
    * Gets the default #GTlsDatabase used to verify TLS connections.
    * Returns: the default database, which should be
    *   unreffed when done.
    */
-  TlsDatabase getDefaultDatabase();
+  gio.tls_database.TlsDatabase getDefaultDatabase();
 
   /**
    * Gets the #GType of backend’s #GDtlsClientConnection implementation.
    * Returns: the #GType of backend’s #GDtlsClientConnection
    *   implementation, or %G_TYPE_INVALID if this backend doesn’t support DTLS.
    */
-  GType getDtlsClientConnectionType();
+  gobject.types.GType getDtlsClientConnectionType();
 
   /**
    * Gets the #GType of backend’s #GDtlsServerConnection implementation.
    * Returns: the #GType of backend’s #GDtlsServerConnection
    *   implementation, or %G_TYPE_INVALID if this backend doesn’t support DTLS.
    */
-  GType getDtlsServerConnectionType();
+  gobject.types.GType getDtlsServerConnectionType();
 
   /**
    * Gets the #GType of backend's #GTlsFileDatabase implementation.
    * Returns: the #GType of backend's #GTlsFileDatabase implementation.
    */
-  GType getFileDatabaseType();
+  gobject.types.GType getFileDatabaseType();
 
   /**
    * Gets the #GType of backend's #GTlsServerConnection implementation.
    * Returns: the #GType of backend's #GTlsServerConnection
    *   implementation.
    */
-  GType getServerConnectionType();
+  gobject.types.GType getServerConnectionType();
 
   /**
    * Set the default #GTlsDatabase used to verify TLS connections
@@ -94,7 +94,7 @@ interface TlsBackend
    * Params:
    *   database = the #GTlsDatabase
    */
-  void setDefaultDatabase(TlsDatabase database);
+  void setDefaultDatabase(gio.tls_database.TlsDatabase database);
 
   /**
    * Checks if DTLS is supported. DTLS support may not be available even if TLS

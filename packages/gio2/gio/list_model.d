@@ -1,7 +1,7 @@
 module gio.list_model;
 
 public import gio.list_model_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -107,7 +107,7 @@ interface ListModel
    * model.
    * Returns: the #GType of the items contained in list.
    */
-  GType getItemType();
+  gobject.types.GType getItemType();
 
   /**
    * Gets the number of items in list.
@@ -131,7 +131,7 @@ interface ListModel
    *   position = the position of the item to fetch
    * Returns: the object at position.
    */
-  ObjectG getItem(uint position);
+  gobject.object.ObjectG getItem(uint position);
 
   /**
    * Emits the #GListModel::items-changed signal on list.
@@ -170,8 +170,8 @@ interface ListModel
    *   added = the number of items added
    *   listModel = the instance the signal is connected to
    */
-  alias ItemsChangedCallbackDlg = void delegate(uint position, uint removed, uint added, ListModel listModel);
-  alias ItemsChangedCallbackFunc = void function(uint position, uint removed, uint added, ListModel listModel);
+  alias ItemsChangedCallbackDlg = void delegate(uint position, uint removed, uint added, gio.list_model.ListModel listModel);
+  alias ItemsChangedCallbackFunc = void function(uint position, uint removed, uint added, gio.list_model.ListModel listModel);
 
   /**
    * Connect to ItemsChanged signal.

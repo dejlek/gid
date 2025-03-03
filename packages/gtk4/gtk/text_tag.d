@@ -1,6 +1,6 @@
 module gtk.text_tag;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -21,7 +21,7 @@ import gtk.types;
  * whether a property has been set or not.
  * They are maintained by GTK and you should not set them independently.
  */
-class TextTag : ObjectG
+class TextTag : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

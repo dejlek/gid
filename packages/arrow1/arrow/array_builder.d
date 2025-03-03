@@ -5,11 +5,11 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class ArrayBuilder : ObjectG
+class ArrayBuilder : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -82,14 +82,14 @@ class ArrayBuilder : ObjectG
     return _retval;
   }
 
-  Array finish()
+  arrow.array.Array finish()
   {
     GArrowArray* _cretval;
     GError *_err;
     _cretval = garrow_array_builder_finish(cast(GArrowArrayBuilder*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Array(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -100,19 +100,19 @@ class ArrayBuilder : ObjectG
     return _retval;
   }
 
-  ArrayBuilder getChild(int i)
+  arrow.array_builder.ArrayBuilder getChild(int i)
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_array_builder_get_child(cast(GArrowArrayBuilder*)cPtr, i);
-    auto _retval = ObjectG.getDObject!ArrayBuilder(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 
-  ArrayBuilder[] getChildren()
+  arrow.array_builder.ArrayBuilder[] getChildren()
   {
     GList* _cretval;
     _cretval = garrow_array_builder_get_children(cast(GArrowArrayBuilder*)cPtr);
-    auto _retval = gListToD!(ArrayBuilder, GidOwnership.None)(cast(GList*)_cretval);
+    auto _retval = gListToD!(arrow.array_builder.ArrayBuilder, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -130,19 +130,19 @@ class ArrayBuilder : ObjectG
     return _retval;
   }
 
-  DataType getValueDataType()
+  arrow.data_type.DataType getValueDataType()
   {
     GArrowDataType* _cretval;
     _cretval = garrow_array_builder_get_value_data_type(cast(GArrowArrayBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!DataType(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Type getValueType()
+  arrow.types.Type getValueType()
   {
     GArrowType _cretval;
     _cretval = garrow_array_builder_get_value_type(cast(GArrowArrayBuilder*)cPtr);
-    Type _retval = cast(Type)_cretval;
+    arrow.types.Type _retval = cast(arrow.types.Type)_cretval;
     return _retval;
   }
 

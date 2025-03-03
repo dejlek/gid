@@ -4,10 +4,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.fixed_size_binary_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class DecimalDataType : FixedSizeBinaryDataType
+class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

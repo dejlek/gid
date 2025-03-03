@@ -1,6 +1,6 @@
 module gtk.spin_button;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -110,7 +110,7 @@ import gtk.widget;
  * # Accessibility
  * `GtkSpinButton` uses the %GTK_ACCESSIBLE_ROLE_SPIN_BUTTON role.
  */
-class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
+class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.cell_editable.CellEditable, gtk.editable.Editable, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -143,7 +143,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    *   digits = the number of decimal places to display
    * Returns: The new `GtkSpinButton`
    */
-  this(Adjustment adjustment, double climbRate, uint digits)
+  this(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits)
   {
     GtkWidget* _cretval;
     _cretval = gtk_spin_button_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null, climbRate, digits);
@@ -168,11 +168,11 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    *   step = Increment added or subtracted by spinning the widget
    * Returns: The new `GtkSpinButton`
    */
-  static SpinButton newWithRange(double min, double max, double step)
+  static gtk.spin_button.SpinButton newWithRange(double min, double max, double step)
   {
     GtkWidget* _cretval;
     _cretval = gtk_spin_button_new_with_range(min, max, step);
-    auto _retval = ObjectG.getDObject!SpinButton(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.spin_button.SpinButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    *   climbRate = the new climb rate
    *   digits = the number of decimal places to display in the spin button
    */
-  void configure(Adjustment adjustment, double climbRate, uint digits)
+  void configure(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits)
   {
     gtk_spin_button_configure(cast(GtkSpinButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null, climbRate, digits);
   }
@@ -206,11 +206,11 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * Get the adjustment associated with a `GtkSpinButton`.
    * Returns: the `GtkAdjustment` of spin_button
    */
-  Adjustment getAdjustment()
+  gtk.adjustment.Adjustment getAdjustment()
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_spin_button_get_adjustment(cast(GtkSpinButton*)cPtr);
-    auto _retval = ObjectG.getDObject!Adjustment(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -288,11 +288,11 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * See [gtk.spin_button.SpinButton.setUpdatePolicy].
    * Returns: the current update policy
    */
-  SpinButtonUpdatePolicy getUpdatePolicy()
+  gtk.types.SpinButtonUpdatePolicy getUpdatePolicy()
   {
     GtkSpinButtonUpdatePolicy _cretval;
     _cretval = gtk_spin_button_get_update_policy(cast(GtkSpinButton*)cPtr);
-    SpinButtonUpdatePolicy _retval = cast(SpinButtonUpdatePolicy)_cretval;
+    gtk.types.SpinButtonUpdatePolicy _retval = cast(gtk.types.SpinButtonUpdatePolicy)_cretval;
     return _retval;
   }
 
@@ -348,7 +348,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * Params:
    *   adjustment = a `GtkAdjustment` to replace the existing adjustment
    */
-  void setAdjustment(Adjustment adjustment)
+  void setAdjustment(gtk.adjustment.Adjustment adjustment)
   {
     gtk_spin_button_set_adjustment(cast(GtkSpinButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
@@ -432,7 +432,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * Params:
    *   policy = a `GtkSpinButtonUpdatePolicy` value
    */
-  void setUpdatePolicy(SpinButtonUpdatePolicy policy)
+  void setUpdatePolicy(gtk.types.SpinButtonUpdatePolicy policy)
   {
     gtk_spin_button_set_update_policy(cast(GtkSpinButton*)cPtr, policy);
   }
@@ -466,7 +466,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    *   direction = a `GtkSpinType` indicating the direction to spin
    *   increment = step increment to apply in the specified direction
    */
-  void spin(SpinType direction, double increment)
+  void spin(gtk.types.SpinType direction, double increment)
   {
     gtk_spin_button_spin(cast(GtkSpinButton*)cPtr, direction, increment);
   }
@@ -487,8 +487,8 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * pressed again.
    *   spinButton = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(SpinButton spinButton);
-  alias ActivateCallbackFunc = void function(SpinButton spinButton);
+  alias ActivateCallbackDlg = void delegate(gtk.spin_button.SpinButton spinButton);
+  alias ActivateCallbackFunc = void function(gtk.spin_button.SpinButton spinButton);
 
   /**
    * Connect to Activate signal.
@@ -504,7 +504,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto spinButton = getVal!SpinButton(_paramVals);
+      auto spinButton = getVal!(gtk.spin_button.SpinButton)(_paramVals);
       _dClosure.dlg(spinButton);
     }
 
@@ -523,8 +523,8 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    *   scroll = a `GtkScrollType` to specify the speed and amount of change
    *   spinButton = the instance the signal is connected to
    */
-  alias ChangeValueCallbackDlg = void delegate(ScrollType scroll, SpinButton spinButton);
-  alias ChangeValueCallbackFunc = void function(ScrollType scroll, SpinButton spinButton);
+  alias ChangeValueCallbackDlg = void delegate(gtk.types.ScrollType scroll, gtk.spin_button.SpinButton spinButton);
+  alias ChangeValueCallbackFunc = void function(gtk.types.ScrollType scroll, gtk.spin_button.SpinButton spinButton);
 
   /**
    * Connect to ChangeValue signal.
@@ -540,8 +540,8 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto spinButton = getVal!SpinButton(_paramVals);
-      auto scroll = getVal!ScrollType(&_paramVals[1]);
+      auto spinButton = getVal!(gtk.spin_button.SpinButton)(_paramVals);
+      auto scroll = getVal!(gtk.types.ScrollType)(&_paramVals[1]);
       _dClosure.dlg(scroll, spinButton);
     }
 
@@ -569,8 +569,8 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    *   spinButton = the instance the signal is connected to
    * Returns: %TRUE if the value has been displayed
    */
-  alias OutputCallbackDlg = bool delegate(SpinButton spinButton);
-  alias OutputCallbackFunc = bool function(SpinButton spinButton);
+  alias OutputCallbackDlg = bool delegate(gtk.spin_button.SpinButton spinButton);
+  alias OutputCallbackFunc = bool function(gtk.spin_button.SpinButton spinButton);
 
   /**
    * Connect to Output signal.
@@ -587,7 +587,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto spinButton = getVal!SpinButton(_paramVals);
+      auto spinButton = getVal!(gtk.spin_button.SpinButton)(_paramVals);
       _retval = _dClosure.dlg(spinButton);
       setVal!bool(_returnValue, _retval);
     }
@@ -601,8 +601,8 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * Also see the [gtk.spin_button.SpinButton.output] signal.
    *   spinButton = the instance the signal is connected to
    */
-  alias ValueChangedCallbackDlg = void delegate(SpinButton spinButton);
-  alias ValueChangedCallbackFunc = void function(SpinButton spinButton);
+  alias ValueChangedCallbackDlg = void delegate(gtk.spin_button.SpinButton spinButton);
+  alias ValueChangedCallbackFunc = void function(gtk.spin_button.SpinButton spinButton);
 
   /**
    * Connect to ValueChanged signal.
@@ -618,7 +618,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto spinButton = getVal!SpinButton(_paramVals);
+      auto spinButton = getVal!(gtk.spin_button.SpinButton)(_paramVals);
       _dClosure.dlg(spinButton);
     }
 
@@ -631,8 +631,8 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
    * to its minimum value or vice-versa.
    *   spinButton = the instance the signal is connected to
    */
-  alias WrappedCallbackDlg = void delegate(SpinButton spinButton);
-  alias WrappedCallbackFunc = void function(SpinButton spinButton);
+  alias WrappedCallbackDlg = void delegate(gtk.spin_button.SpinButton spinButton);
+  alias WrappedCallbackFunc = void function(gtk.spin_button.SpinButton spinButton);
 
   /**
    * Connect to Wrapped signal.
@@ -648,7 +648,7 @@ class SpinButton : Widget, AccessibleRange, CellEditable, Editable, Orientable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto spinButton = getVal!SpinButton(_paramVals);
+      auto spinButton = getVal!(gtk.spin_button.SpinButton)(_paramVals);
       _dClosure.dlg(spinButton);
     }
 

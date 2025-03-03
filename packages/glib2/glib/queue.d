@@ -1,6 +1,6 @@
 module glib.queue;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -59,11 +59,11 @@ class Queue
    * Params:
    *   freeFunc = the function to be called to free memory allocated
    */
-  void clearFull(DestroyNotify freeFunc)
+  void clearFull(glib.types.DestroyNotify freeFunc)
   {
     extern(C) void _freeFuncCallback(void* data)
     {
-      auto _dlg = cast(DestroyNotify*)data;
+      auto _dlg = cast(glib.types.DestroyNotify*)data;
 
       (*_dlg)();
     }
@@ -79,11 +79,11 @@ class Queue
    * Params:
    *   func = the function to call for each element's data
    */
-  void foreach_(Func func)
+  void foreach_(glib.types.Func func)
   {
     extern(C) void _funcCallback(void* data, void* userData)
     {
-      auto _dlg = cast(Func*)userData;
+      auto _dlg = cast(glib.types.Func*)userData;
 
       (*_dlg)(data);
     }
@@ -101,11 +101,11 @@ class Queue
    * Params:
    *   freeFunc = the function to be called to free each element's data
    */
-  void freeFull(DestroyNotify freeFunc)
+  void freeFull(glib.types.DestroyNotify freeFunc)
   {
     extern(C) void _freeFuncCallback(void* data)
     {
-      auto _dlg = cast(DestroyNotify*)data;
+      auto _dlg = cast(glib.types.DestroyNotify*)data;
 
       (*_dlg)();
     }
@@ -159,11 +159,11 @@ class Queue
    *     element comes before the second, and a positive value if the second
    *     element comes before the first.
    */
-  void insertSorted(void* data, CompareDataFunc func)
+  void insertSorted(void* data, glib.types.CompareDataFunc func)
   {
     extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData)
     {
-      auto _dlg = cast(CompareDataFunc*)userData;
+      auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
       int _retval = (*_dlg)(a, b);
       return _retval;
@@ -329,11 +329,11 @@ class Queue
    *     equal, a negative value if the first comes before the second, and
    *     a positive value if the second comes before the first.
    */
-  void sort(CompareDataFunc compareFunc)
+  void sort(glib.types.CompareDataFunc compareFunc)
   {
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
-      auto _dlg = cast(CompareDataFunc*)userData;
+      auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
       int _retval = (*_dlg)(a, b);
       return _retval;

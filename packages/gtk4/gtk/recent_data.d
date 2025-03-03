@@ -1,6 +1,6 @@
 module gtk.recent_data;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;

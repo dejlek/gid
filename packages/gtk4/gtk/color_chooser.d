@@ -2,7 +2,7 @@ module gtk.color_chooser;
 
 public import gtk.color_chooser_iface_proxy;
 import gdk.rgba;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -49,7 +49,7 @@ interface ColorChooser
 
    * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
-  void addPalette(Orientation orientation, int colorsPerLine, RGBA[] colors);
+  void addPalette(gtk.types.Orientation orientation, int colorsPerLine, gdk.rgba.RGBA[] colors);
 
   /**
    * Gets the currently-selected color.
@@ -58,7 +58,7 @@ interface ColorChooser
 
    * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
-  void getRgba(out RGBA color);
+  void getRgba(out gdk.rgba.RGBA color);
 
   /**
    * Returns whether the color chooser shows the alpha channel.
@@ -76,7 +76,7 @@ interface ColorChooser
 
    * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
-  void setRgba(RGBA color);
+  void setRgba(gdk.rgba.RGBA color);
 
   /**
    * Sets whether or not the color chooser should use the alpha channel.
@@ -99,8 +99,8 @@ interface ColorChooser
    * Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
    *   instead of widgets implementing `GtkColorChooser`
    */
-  alias ColorActivatedCallbackDlg = void delegate(RGBA color, ColorChooser colorChooser);
-  alias ColorActivatedCallbackFunc = void function(RGBA color, ColorChooser colorChooser);
+  alias ColorActivatedCallbackDlg = void delegate(gdk.rgba.RGBA color, gtk.color_chooser.ColorChooser colorChooser);
+  alias ColorActivatedCallbackFunc = void function(gdk.rgba.RGBA color, gtk.color_chooser.ColorChooser colorChooser);
 
   /**
    * Connect to ColorActivated signal.

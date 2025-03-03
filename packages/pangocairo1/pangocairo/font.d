@@ -2,7 +2,7 @@ module pangocairo.font;
 
 public import pangocairo.font_iface_proxy;
 import cairo.scaled_font;
-import gid.global;
+import gid.gid;
 import pangocairo.c.functions;
 import pangocairo.c.types;
 import pangocairo.types;
@@ -29,5 +29,5 @@ interface Font
    * Returns: the `cairo_scaled_font_t`
    *   used by font
    */
-  ScaledFont getScaledFont();
+  cairo.scaled_font.ScaledFont getScaledFont();
 }

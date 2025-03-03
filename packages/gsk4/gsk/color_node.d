@@ -1,7 +1,7 @@
 module gsk.color_node;
 
 import gdk.rgba;
-import gid.global;
+import gid.gid;
 import graphene.rect;
 import gsk.c.functions;
 import gsk.c.types;
@@ -11,7 +11,7 @@ import gsk.types;
 /**
  * A render node for a solid color.
  */
-class ColorNode : RenderNode
+class ColorNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -30,10 +30,10 @@ class ColorNode : RenderNode
    *   bounds = the rectangle to render the color into
    * Returns: A new `GskRenderNode`
    */
-  this(RGBA rgba, Rect bounds)
+  this(gdk.rgba.RGBA rgba, graphene.rect.Rect bounds)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_color_node_new(rgba ? cast(GdkRGBA*)rgba.cPtr(No.Dup) : null, bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null);
+    _cretval = gsk_color_node_new(rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -41,11 +41,11 @@ class ColorNode : RenderNode
    * Retrieves the color of the given node.
    * Returns: the color of the node
    */
-  RGBA getColor()
+  gdk.rgba.RGBA getColor()
   {
     const(GdkRGBA)* _cretval;
-    _cretval = gsk_color_node_get_color(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, No.Take) : null;
+    _cretval = gsk_color_node_get_color(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

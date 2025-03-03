@@ -5,7 +5,7 @@ import gdk.toplevel;
 import gdk.toplevel_mixin;
 
 /// Proxy object for Gdk.Toplevel interface when a GObject has no applicable D binding
-class ToplevelIfaceProxy : IfaceProxy, Toplevel
+class ToplevelIfaceProxy : IfaceProxy, gdk.toplevel.Toplevel
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class ToplevelIfaceProxy : IfaceProxy, Toplevel
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Toplevel);
+    return typeid(gdk.toplevel.Toplevel);
   }
 
   mixin ToplevelT!();

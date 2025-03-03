@@ -1,6 +1,6 @@
 module gtk.string_list;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -33,7 +33,7 @@ import gtk.types;
  * </object>
  * ```
  */
-class StringList : ObjectG, ListModel, Buildable
+class StringList : gobject.object.ObjectG, gio.list_model.ListModel, gtk.buildable.Buildable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -99,7 +99,7 @@ class StringList : ObjectG, ListModel, Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_string_list_get_string(cast(GtkStringList*)cPtr, position);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

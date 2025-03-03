@@ -1,6 +1,6 @@
 module vte.char_attributes;
 
-import gid.global;
+import gid.gid;
 import vte.c.functions;
 import vte.c.types;
 import vte.types;

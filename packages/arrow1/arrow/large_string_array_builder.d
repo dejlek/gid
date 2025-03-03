@@ -4,10 +4,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.large_binary_array_builder;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class LargeStringArrayBuilder : LargeBinaryArrayBuilder
+class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

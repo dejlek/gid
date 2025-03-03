@@ -1,14 +1,13 @@
 module gtk.tree_sortable_mixin;
 
 public import gtk.tree_sortable_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.tree_iter;
 public import gtk.tree_model;
-public import gtk.tree_model_mixin;
 public import gtk.types;
 
 /**
@@ -34,7 +33,7 @@ template TreeSortableT()
    * Returns: %TRUE if the sort column is not one of the special sort
    *   column ids.
    */
-  override bool getSortColumnId(out int sortColumnId, out SortType order)
+  override bool getSortColumnId(out int sortColumnId, out gtk.types.SortType order)
   {
     bool _retval;
     _retval = gtk_tree_sortable_get_sort_column_id(cast(GtkTreeSortable*)cPtr, cast(int*)&sortColumnId, &order);
@@ -66,13 +65,13 @@ template TreeSortableT()
    * Params:
    *   sortFunc = The comparison function
    */
-  override void setDefaultSortFunc(TreeIterCompareFunc sortFunc)
+  override void setDefaultSortFunc(gtk.types.TreeIterCompareFunc sortFunc)
   {
     extern(C) int _sortFuncCallback(GtkTreeModel* model, GtkTreeIter* a, GtkTreeIter* b, void* userData)
     {
-      auto _dlg = cast(TreeIterCompareFunc*)userData;
+      auto _dlg = cast(gtk.types.TreeIterCompareFunc*)userData;
 
-      int _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), a ? new TreeIter(cast(void*)a, No.Take) : null, b ? new TreeIter(cast(void*)b, No.Take) : null);
+      int _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
@@ -94,7 +93,7 @@ template TreeSortableT()
    *   sortColumnId = the sort column id to set
    *   order = The sort order of the column
    */
-  override void setSortColumnId(int sortColumnId, SortType order)
+  override void setSortColumnId(int sortColumnId, gtk.types.SortType order)
   {
     gtk_tree_sortable_set_sort_column_id(cast(GtkTreeSortable*)cPtr, sortColumnId, order);
   }
@@ -107,13 +106,13 @@ template TreeSortableT()
    *   sortColumnId = the sort column id to set the function for
    *   sortFunc = The comparison function
    */
-  override void setSortFunc(int sortColumnId, TreeIterCompareFunc sortFunc)
+  override void setSortFunc(int sortColumnId, gtk.types.TreeIterCompareFunc sortFunc)
   {
     extern(C) int _sortFuncCallback(GtkTreeModel* model, GtkTreeIter* a, GtkTreeIter* b, void* userData)
     {
-      auto _dlg = cast(TreeIterCompareFunc*)userData;
+      auto _dlg = cast(gtk.types.TreeIterCompareFunc*)userData;
 
-      int _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), a ? new TreeIter(cast(void*)a, No.Take) : null, b ? new TreeIter(cast(void*)b, No.Take) : null);
+      int _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
@@ -137,8 +136,8 @@ template TreeSortableT()
    * the contents of sortable are resorted.
    *   treeSortable = the instance the signal is connected to
    */
-  alias SortColumnChangedCallbackDlg = void delegate(TreeSortable treeSortable);
-  alias SortColumnChangedCallbackFunc = void function(TreeSortable treeSortable);
+  alias SortColumnChangedCallbackDlg = void delegate(gtk.tree_sortable.TreeSortable treeSortable);
+  alias SortColumnChangedCallbackFunc = void function(gtk.tree_sortable.TreeSortable treeSortable);
 
   /**
    * Connect to SortColumnChanged signal.
@@ -154,7 +153,7 @@ template TreeSortableT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto treeSortable = getVal!TreeSortable(_paramVals);
+      auto treeSortable = getVal!(gtk.tree_sortable.TreeSortable)(_paramVals);
       _dClosure.dlg(treeSortable);
     }
 

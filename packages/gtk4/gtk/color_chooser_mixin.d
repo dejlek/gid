@@ -2,7 +2,7 @@ module gtk.color_chooser_mixin;
 
 public import gtk.color_chooser_iface_proxy;
 public import gdk.rgba;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -43,7 +43,7 @@ template ColorChooserT()
 
    * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
-  override void addPalette(Orientation orientation, int colorsPerLine, RGBA[] colors)
+  override void addPalette(gtk.types.Orientation orientation, int colorsPerLine, gdk.rgba.RGBA[] colors)
   {
     int _nColors;
     if (colors)
@@ -63,11 +63,11 @@ template ColorChooserT()
 
    * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
-  override void getRgba(out RGBA color)
+  override void getRgba(out gdk.rgba.RGBA color)
   {
     GdkRGBA _color;
     gtk_color_chooser_get_rgba(cast(GtkColorChooser*)cPtr, &_color);
-    color = new RGBA(cast(void*)&_color, No.Take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
   }
 
   /**
@@ -91,9 +91,9 @@ template ColorChooserT()
 
    * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
-  override void setRgba(RGBA color)
+  override void setRgba(gdk.rgba.RGBA color)
   {
-    gtk_color_chooser_set_rgba(cast(GtkColorChooser*)cPtr, color ? cast(GdkRGBA*)color.cPtr(No.Dup) : null);
+    gtk_color_chooser_set_rgba(cast(GtkColorChooser*)cPtr, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
   }
 
   /**
@@ -120,8 +120,8 @@ template ColorChooserT()
    * Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
    *   instead of widgets implementing `GtkColorChooser`
    */
-  alias ColorActivatedCallbackDlg = void delegate(RGBA color, ColorChooser colorChooser);
-  alias ColorActivatedCallbackFunc = void function(RGBA color, ColorChooser colorChooser);
+  alias ColorActivatedCallbackDlg = void delegate(gdk.rgba.RGBA color, gtk.color_chooser.ColorChooser colorChooser);
+  alias ColorActivatedCallbackFunc = void function(gdk.rgba.RGBA color, gtk.color_chooser.ColorChooser colorChooser);
 
   /**
    * Connect to ColorActivated signal.
@@ -137,8 +137,8 @@ template ColorChooserT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto colorChooser = getVal!ColorChooser(_paramVals);
-      auto color = getVal!RGBA(&_paramVals[1]);
+      auto colorChooser = getVal!(gtk.color_chooser.ColorChooser)(_paramVals);
+      auto color = getVal!(gdk.rgba.RGBA)(&_paramVals[1]);
       _dClosure.dlg(color, colorChooser);
     }
 

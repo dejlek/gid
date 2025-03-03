@@ -6,8 +6,7 @@ import gdkpixbuf.pixbuf;
 import gdkpixbuf.pixbuf_animation;
 import gdkpixbuf.pixbuf_format;
 import gdkpixbuf.pixbuf_module;
-import gdkpixbuf.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
 
@@ -20,19 +19,19 @@ alias PixbufFormatFlags = GdkPixbufFormatFlags;
 alias PixbufRotation = GdkPixbufRotation;
 
 // Callbacks
-alias PixbufModuleFillInfoFunc = void delegate(PixbufFormat info);
-alias PixbufModuleFillVtableFunc = void delegate(PixbufModule module_);
-alias PixbufModuleIncrementLoadFunc = bool delegate(void* context, ubyte[] buf);
-alias PixbufModuleLoadAnimationFunc = PixbufAnimation delegate(void* f);
-alias PixbufModuleLoadFunc = Pixbuf delegate(void* f);
-alias PixbufModuleLoadXpmDataFunc = Pixbuf delegate(string[] data);
-alias PixbufModulePreparedFunc = void delegate(Pixbuf pixbuf, PixbufAnimation anim);
-alias PixbufModuleSaveFunc = bool delegate(void* f, Pixbuf pixbuf, string[] paramKeys, string[] paramValues);
+alias PixbufModuleFillInfoFunc = void delegate(gdkpixbuf.pixbuf_format.PixbufFormat info);
+alias PixbufModuleFillVtableFunc = void delegate(gdkpixbuf.pixbuf_module.PixbufModule module_);
+alias PixbufModuleIncrementLoadFunc = bool delegate(void* context, ubyte[] buf, GError **_err);
+alias PixbufModuleLoadAnimationFunc = gdkpixbuf.pixbuf_animation.PixbufAnimation delegate(void* f, GError **_err);
+alias PixbufModuleLoadFunc = gdkpixbuf.pixbuf.Pixbuf delegate(void* f, GError **_err);
+alias PixbufModuleLoadXpmDataFunc = gdkpixbuf.pixbuf.Pixbuf delegate(string[] data);
+alias PixbufModulePreparedFunc = void delegate(gdkpixbuf.pixbuf.Pixbuf pixbuf, gdkpixbuf.pixbuf_animation.PixbufAnimation anim);
+alias PixbufModuleSaveFunc = bool delegate(void* f, gdkpixbuf.pixbuf.Pixbuf pixbuf, string[] paramKeys, string[] paramValues, GError **_err);
 alias PixbufModuleSaveOptionSupportedFunc = bool delegate(string optionKey);
 alias PixbufModuleSizeFunc = void delegate(out int width, out int height);
-alias PixbufModuleStopLoadFunc = bool delegate(void* context);
-alias PixbufModuleUpdatedFunc = void delegate(Pixbuf pixbuf, int x, int y, int width, int height);
-alias PixbufSaveFunc = bool delegate(ubyte[] buf, out ErrorG error);
+alias PixbufModuleStopLoadFunc = bool delegate(void* context, GError **_err);
+alias PixbufModuleUpdatedFunc = void delegate(gdkpixbuf.pixbuf.Pixbuf pixbuf, int x, int y, int width, int height);
+alias PixbufSaveFunc = bool delegate(ubyte[] buf, out glib.error.ErrorG error);
 
 /**
  * Major version of gdk-pixbuf library, that is the "0" in

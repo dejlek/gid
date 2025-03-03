@@ -5,7 +5,7 @@ import gio.file;
 import gio.file_mixin;
 
 /// Proxy object for Gio.File interface when a GObject has no applicable D binding
-class FileIfaceProxy : IfaceProxy, File
+class FileIfaceProxy : IfaceProxy, gio.file.File
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class FileIfaceProxy : IfaceProxy, File
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(File);
+    return typeid(gio.file.File);
   }
 
   mixin FileT!();

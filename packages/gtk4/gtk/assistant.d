@@ -1,8 +1,7 @@
 module gtk.assistant;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
-import gio.list_model_mixin;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -31,7 +30,7 @@ import gtk.window;
  * through the pages, and controls the page flow to collect the data needed
  * for the operation.
  * `GtkAssistant` handles which buttons to show and to make sensitive based
- * on page sequence knowledge and the [gtk.AssistantPageType] of each
+ * on page sequence knowledge and the [gtk.types.AssistantPageType] of each
  * page in addition to state information like the *completed* and *committed*
  * page statuses.
  * If you have a case that doesn’t quite fit in `GtkAssistant`s way of
@@ -54,7 +53,7 @@ import gtk.window;
 
  * Deprecated: This widget will be removed in GTK 5
  */
-class Assistant : Window
+class Assistant : gtk.window.Window
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -93,7 +92,7 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  void addActionWidget(Widget child)
+  void addActionWidget(gtk.widget.Widget child)
   {
     gtk_assistant_add_action_widget(cast(GtkAssistant*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -106,7 +105,7 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  int appendPage(Widget page)
+  int appendPage(gtk.widget.Widget page)
   {
     int _retval;
     _retval = gtk_assistant_append_page(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
@@ -168,11 +167,11 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  Widget getNthPage(int pageNum)
+  gtk.widget.Widget getNthPage(int pageNum)
   {
     GtkWidget* _cretval;
     _cretval = gtk_assistant_get_nth_page(cast(GtkAssistant*)cPtr, pageNum);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -184,11 +183,11 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  AssistantPage getPage(Widget child)
+  gtk.assistant_page.AssistantPage getPage(gtk.widget.Widget child)
   {
     GtkAssistantPage* _cretval;
     _cretval = gtk_assistant_get_page(cast(GtkAssistant*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!AssistantPage(cast(GtkAssistantPage*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.assistant_page.AssistantPage)(cast(GtkAssistantPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -200,7 +199,7 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  bool getPageComplete(Widget page)
+  bool getPageComplete(gtk.widget.Widget page)
   {
     bool _retval;
     _retval = gtk_assistant_get_page_complete(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
@@ -215,11 +214,11 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  string getPageTitle(Widget page)
+  string getPageTitle(gtk.widget.Widget page)
   {
     const(char)* _cretval;
     _cretval = gtk_assistant_get_page_title(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -231,11 +230,11 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  AssistantPageType getPageType(Widget page)
+  gtk.types.AssistantPageType getPageType(gtk.widget.Widget page)
   {
     GtkAssistantPageType _cretval;
     _cretval = gtk_assistant_get_page_type(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
-    AssistantPageType _retval = cast(AssistantPageType)_cretval;
+    gtk.types.AssistantPageType _retval = cast(gtk.types.AssistantPageType)_cretval;
     return _retval;
   }
 
@@ -245,11 +244,11 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  ListModel getPages()
+  gio.list_model.ListModel getPages()
   {
     GListModel* _cretval;
     _cretval = gtk_assistant_get_pages(cast(GtkAssistant*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -263,7 +262,7 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  int insertPage(Widget page, int position)
+  int insertPage(gtk.widget.Widget page, int position)
   {
     int _retval;
     _retval = gtk_assistant_insert_page(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, position);
@@ -292,7 +291,7 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  int prependPage(Widget page)
+  int prependPage(gtk.widget.Widget page)
   {
     int _retval;
     _retval = gtk_assistant_prepend_page(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
@@ -320,7 +319,7 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  void removeActionWidget(Widget child)
+  void removeActionWidget(gtk.widget.Widget child)
   {
     gtk_assistant_remove_action_widget(cast(GtkAssistant*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -369,11 +368,11 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  void setForwardPageFunc(AssistantPageFunc pageFunc)
+  void setForwardPageFunc(gtk.types.AssistantPageFunc pageFunc)
   {
     extern(C) int _pageFuncCallback(int currentPage, void* data)
     {
-      auto _dlg = cast(AssistantPageFunc*)data;
+      auto _dlg = cast(gtk.types.AssistantPageFunc*)data;
 
       int _retval = (*_dlg)(currentPage);
       return _retval;
@@ -395,7 +394,7 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  void setPageComplete(Widget page, bool complete)
+  void setPageComplete(gtk.widget.Widget page, bool complete)
   {
     gtk_assistant_set_page_complete(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, complete);
   }
@@ -410,7 +409,7 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  void setPageTitle(Widget page, string title)
+  void setPageTitle(gtk.widget.Widget page, string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_assistant_set_page_title(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, _title);
@@ -425,7 +424,7 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  void setPageType(Widget page, AssistantPageType type)
+  void setPageType(gtk.widget.Widget page, gtk.types.AssistantPageType type)
   {
     gtk_assistant_set_page_type(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, type);
   }
@@ -460,8 +459,8 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  alias ApplyCallbackDlg = void delegate(Assistant assistant);
-  alias ApplyCallbackFunc = void function(Assistant assistant);
+  alias ApplyCallbackDlg = void delegate(gtk.assistant.Assistant assistant);
+  alias ApplyCallbackFunc = void function(gtk.assistant.Assistant assistant);
 
   /**
    * Connect to Apply signal.
@@ -477,7 +476,7 @@ class Assistant : Window
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto assistant = getVal!Assistant(_paramVals);
+      auto assistant = getVal!(gtk.assistant.Assistant)(_paramVals);
       _dClosure.dlg(assistant);
     }
 
@@ -491,8 +490,8 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  alias CancelCallbackDlg = void delegate(Assistant assistant);
-  alias CancelCallbackFunc = void function(Assistant assistant);
+  alias CancelCallbackDlg = void delegate(gtk.assistant.Assistant assistant);
+  alias CancelCallbackFunc = void function(gtk.assistant.Assistant assistant);
 
   /**
    * Connect to Cancel signal.
@@ -508,7 +507,7 @@ class Assistant : Window
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto assistant = getVal!Assistant(_paramVals);
+      auto assistant = getVal!(gtk.assistant.Assistant)(_paramVals);
       _dClosure.dlg(assistant);
     }
 
@@ -524,8 +523,8 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  alias CloseCallbackDlg = void delegate(Assistant assistant);
-  alias CloseCallbackFunc = void function(Assistant assistant);
+  alias CloseCallbackDlg = void delegate(gtk.assistant.Assistant assistant);
+  alias CloseCallbackFunc = void function(gtk.assistant.Assistant assistant);
 
   /**
    * Connect to Close signal.
@@ -541,7 +540,7 @@ class Assistant : Window
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto assistant = getVal!Assistant(_paramVals);
+      auto assistant = getVal!(gtk.assistant.Assistant)(_paramVals);
       _dClosure.dlg(assistant);
     }
 
@@ -555,8 +554,8 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  alias EscapeCallbackDlg = void delegate(Assistant assistant);
-  alias EscapeCallbackFunc = void function(Assistant assistant);
+  alias EscapeCallbackDlg = void delegate(gtk.assistant.Assistant assistant);
+  alias EscapeCallbackFunc = void function(gtk.assistant.Assistant assistant);
 
   /**
    * Connect to Escape signal.
@@ -572,7 +571,7 @@ class Assistant : Window
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto assistant = getVal!Assistant(_paramVals);
+      auto assistant = getVal!(gtk.assistant.Assistant)(_paramVals);
       _dClosure.dlg(assistant);
     }
 
@@ -591,8 +590,8 @@ class Assistant : Window
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  alias PrepareCallbackDlg = void delegate(Widget page, Assistant assistant);
-  alias PrepareCallbackFunc = void function(Widget page, Assistant assistant);
+  alias PrepareCallbackDlg = void delegate(gtk.widget.Widget page, gtk.assistant.Assistant assistant);
+  alias PrepareCallbackFunc = void function(gtk.widget.Widget page, gtk.assistant.Assistant assistant);
 
   /**
    * Connect to Prepare signal.
@@ -608,8 +607,8 @@ class Assistant : Window
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto assistant = getVal!Assistant(_paramVals);
-      auto page = getVal!Widget(&_paramVals[1]);
+      auto assistant = getVal!(gtk.assistant.Assistant)(_paramVals);
+      auto page = getVal!(gtk.widget.Widget)(&_paramVals[1]);
       _dClosure.dlg(page, assistant);
     }
 

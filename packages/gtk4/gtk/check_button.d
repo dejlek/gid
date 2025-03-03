@@ -1,6 +1,6 @@
 module gtk.check_button;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -58,7 +58,7 @@ import gtk.widget;
  * # Accessibility
  * `GtkCheckButton` uses the %GTK_ACCESSIBLE_ROLE_CHECKBOX role.
  */
-class CheckButton : Widget, Actionable
+class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -96,12 +96,12 @@ class CheckButton : Widget, Actionable
    *   label = the text for the check button.
    * Returns: a new `GtkCheckButton`
    */
-  static CheckButton newWithLabel(string label)
+  static gtk.check_button.CheckButton newWithLabel(string label)
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_check_button_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!CheckButton(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -112,12 +112,12 @@ class CheckButton : Widget, Actionable
    *     in front of the mnemonic character
    * Returns: a new `GtkCheckButton`
    */
-  static CheckButton newWithMnemonic(string label)
+  static gtk.check_button.CheckButton newWithMnemonic(string label)
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_check_button_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!CheckButton(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -136,11 +136,11 @@ class CheckButton : Widget, Actionable
    * Gets the child widget of button or `NULL` if propertyCheckButton:label is set.
    * Returns: the child widget of button
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_check_button_get_child(cast(GtkCheckButton*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class CheckButton : Widget, Actionable
   {
     const(char)* _cretval;
     _cretval = gtk_check_button_get_label(cast(GtkCheckButton*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class CheckButton : Widget, Actionable
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_check_button_set_child(cast(GtkCheckButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -222,7 +222,7 @@ class CheckButton : Widget, Actionable
    *   group = another `GtkCheckButton` to
    *     form a group with
    */
-  void setGroup(CheckButton group)
+  void setGroup(gtk.check_button.CheckButton group)
   {
     gtk_check_button_set_group(cast(GtkCheckButton*)cPtr, group ? cast(GtkCheckButton*)group.cPtr(No.Dup) : null);
   }
@@ -277,8 +277,8 @@ class CheckButton : Widget, Actionable
    * <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
    *   checkButton = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(CheckButton checkButton);
-  alias ActivateCallbackFunc = void function(CheckButton checkButton);
+  alias ActivateCallbackDlg = void delegate(gtk.check_button.CheckButton checkButton);
+  alias ActivateCallbackFunc = void function(gtk.check_button.CheckButton checkButton);
 
   /**
    * Connect to Activate signal.
@@ -294,7 +294,7 @@ class CheckButton : Widget, Actionable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto checkButton = getVal!CheckButton(_paramVals);
+      auto checkButton = getVal!(gtk.check_button.CheckButton)(_paramVals);
       _dClosure.dlg(checkButton);
     }
 
@@ -307,8 +307,8 @@ class CheckButton : Widget, Actionable
    * property changes.
    *   checkButton = the instance the signal is connected to
    */
-  alias ToggledCallbackDlg = void delegate(CheckButton checkButton);
-  alias ToggledCallbackFunc = void function(CheckButton checkButton);
+  alias ToggledCallbackDlg = void delegate(gtk.check_button.CheckButton checkButton);
+  alias ToggledCallbackFunc = void function(gtk.check_button.CheckButton checkButton);
 
   /**
    * Connect to Toggled signal.
@@ -324,7 +324,7 @@ class CheckButton : Widget, Actionable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto checkButton = getVal!CheckButton(_paramVals);
+      auto checkButton = getVal!(gtk.check_button.CheckButton)(_paramVals);
       _dClosure.dlg(checkButton);
     }
 

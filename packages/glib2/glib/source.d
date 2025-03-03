@@ -1,6 +1,6 @@
 module glib.source;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.main_context;
@@ -12,7 +12,7 @@ import gobject.boxed;
  * The `GSource` struct is an opaque data type
  * representing an event source.
  */
-class Source : Boxed
+class Source : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -50,7 +50,7 @@ class Source : Boxed
    *   structSize = size of the #GSource structure to create.
    * Returns: the newly-created #GSource.
    */
-  this(SourceFuncs sourceFuncs, uint structSize)
+  this(glib.types.SourceFuncs sourceFuncs, uint structSize)
   {
     GSource* _cretval;
     _cretval = g_source_new(&sourceFuncs, structSize);
@@ -75,7 +75,7 @@ class Source : Boxed
    * Params:
    *   childSource = a second #GSource that source should "poll"
    */
-  void addChildSource(Source childSource)
+  void addChildSource(glib.source.Source childSource)
   {
     g_source_add_child_source(cast(GSource*)cPtr, childSource ? cast(GSource*)childSource.cPtr(No.Dup) : null);
   }
@@ -95,7 +95,7 @@ class Source : Boxed
    *   fd = a #GPollFD structure holding information about a file
    *     descriptor to watch.
    */
-  void addPoll(PollFD fd)
+  void addPoll(glib.types.PollFD fd)
   {
     g_source_add_poll(cast(GSource*)cPtr, &fd);
   }
@@ -115,7 +115,7 @@ class Source : Boxed
    *   events = an event mask
    * Returns: an opaque tag
    */
-  void* addUnixFd(int fd, IOCondition events)
+  void* addUnixFd(int fd, glib.types.IOCondition events)
   {
     auto _retval = g_source_add_unix_fd(cast(GSource*)cPtr, fd, events);
     return _retval;
@@ -132,7 +132,7 @@ class Source : Boxed
    * Returns: the ID $(LPAREN)greater than 0$(RPAREN) for the source within the
    *   #GMainContext.
    */
-  uint attach(MainContext context)
+  uint attach(glib.main_context.MainContext context)
   {
     uint _retval;
     _retval = g_source_attach(cast(GSource*)cPtr, context ? cast(GMainContext*)context.cPtr(No.Dup) : null);
@@ -181,11 +181,11 @@ class Source : Boxed
    *   source is associated, or %NULL if the context has not
    *   yet been added to a source.
    */
-  MainContext getContext()
+  glib.main_context.MainContext getContext()
   {
     GMainContext* _cretval;
     _cretval = g_source_get_context(cast(GSource*)cPtr);
-    auto _retval = _cretval ? new MainContext(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class Source : Boxed
 
    * Deprecated: use [glib.source.Source.getTime] instead
    */
-  void getCurrentTime(TimeVal timeval)
+  void getCurrentTime(glib.time_val.TimeVal timeval)
   {
     g_source_get_current_time(cast(GSource*)cPtr, timeval ? cast(GTimeVal*)timeval.cPtr : null);
   }
@@ -229,7 +229,7 @@ class Source : Boxed
   {
     const(char)* _cretval;
     _cretval = g_source_get_name(cast(GSource*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -358,7 +358,7 @@ class Source : Boxed
    *   tag = the tag from [glib.source.Source.addUnixFd]
    *   newEvents = the new event mask to watch
    */
-  void modifyUnixFd(void* tag, IOCondition newEvents)
+  void modifyUnixFd(void* tag, glib.types.IOCondition newEvents)
   {
     g_source_modify_unix_fd(cast(GSource*)cPtr, tag, newEvents);
   }
@@ -375,11 +375,11 @@ class Source : Boxed
    *   tag = the tag from [glib.source.Source.addUnixFd]
    * Returns: the conditions reported on the fd
    */
-  IOCondition queryUnixFd(void* tag)
+  glib.types.IOCondition queryUnixFd(void* tag)
   {
     GIOCondition _cretval;
     _cretval = g_source_query_unix_fd(cast(GSource*)cPtr, tag);
-    IOCondition _retval = cast(IOCondition)_cretval;
+    glib.types.IOCondition _retval = cast(glib.types.IOCondition)_cretval;
     return _retval;
   }
 
@@ -391,7 +391,7 @@ class Source : Boxed
    *   childSource = a #GSource previously passed to
    *     [glib.source.Source.addChildSource].
    */
-  void removeChildSource(Source childSource)
+  void removeChildSource(glib.source.Source childSource)
   {
     g_source_remove_child_source(cast(GSource*)cPtr, childSource ? cast(GSource*)childSource.cPtr(No.Dup) : null);
   }
@@ -404,7 +404,7 @@ class Source : Boxed
    * Params:
    *   fd = a #GPollFD structure previously passed to [glib.source.Source.addPoll].
    */
-  void removePoll(PollFD fd)
+  void removePoll(glib.types.PollFD fd)
   {
     g_source_remove_poll(cast(GSource*)cPtr, &fd);
   }
@@ -444,11 +444,11 @@ class Source : Boxed
    * Params:
    *   func = a callback function
    */
-  void setCallback(SourceFunc func)
+  void setCallback(glib.types.SourceFunc func)
   {
     extern(C) bool _funcCallback(void* userData)
     {
-      auto _dlg = cast(SourceFunc*)userData;
+      auto _dlg = cast(glib.types.SourceFunc*)userData;
 
       bool _retval = (*_dlg)();
       return _retval;
@@ -475,7 +475,7 @@ class Source : Boxed
    *   callbackFuncs = functions for reference counting callback_data
    *     and getting the callback and data
    */
-  void setCallbackIndirect(void* callbackData, SourceCallbackFuncs callbackFuncs)
+  void setCallbackIndirect(void* callbackData, glib.types.SourceCallbackFuncs callbackFuncs)
   {
     g_source_set_callback_indirect(cast(GSource*)cPtr, callbackData, &callbackFuncs);
   }
@@ -499,7 +499,7 @@ class Source : Boxed
    * Params:
    *   funcs = the new #GSourceFuncs
    */
-  void setFuncs(SourceFuncs funcs)
+  void setFuncs(glib.types.SourceFuncs funcs)
   {
     g_source_set_funcs(cast(GSource*)cPtr, &funcs);
   }
@@ -621,7 +621,7 @@ class Source : Boxed
    *   userData = the user data for the callback
    * Returns: %TRUE if a source was found and removed.
    */
-  static bool removeByFuncsUserData(SourceFuncs funcs, void* userData)
+  static bool removeByFuncsUserData(glib.types.SourceFuncs funcs, void* userData)
   {
     bool _retval;
     _retval = g_source_remove_by_funcs_user_data(&funcs, userData);

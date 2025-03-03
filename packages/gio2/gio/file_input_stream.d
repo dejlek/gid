@@ -1,8 +1,7 @@
 module gio.file_input_stream;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -24,7 +23,7 @@ import gobject.object;
  * stream supports seeking, use vfunc@Gio.Seekable.can_seek.
  * To position a file input stream, use vfunc@Gio.Seekable.seek.
  */
-class FileInputStream : InputStream, Seekable
+class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -56,7 +55,7 @@ class FileInputStream : InputStream, Seekable
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: a #GFileInfo, or %NULL on error.
    */
-  FileInfo queryInfo(string attributes, Cancellable cancellable)
+  gio.file_info.FileInfo queryInfo(string attributes, gio.cancellable.Cancellable cancellable)
   {
     GFileInfo* _cretval;
     const(char)* _attributes = attributes.toCString(No.Alloc);
@@ -64,7 +63,7 @@ class FileInputStream : InputStream, Seekable
     _cretval = g_file_input_stream_query_info(cast(GFileInputStream*)cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -85,14 +84,14 @@ class FileInputStream : InputStream, Seekable
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void queryInfoAsync(string attributes, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void queryInfoAsync(string attributes, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -107,14 +106,14 @@ class FileInputStream : InputStream, Seekable
    *   result = a #GAsyncResult.
    * Returns: #GFileInfo.
    */
-  FileInfo queryInfoFinish(AsyncResult result)
+  gio.file_info.FileInfo queryInfoFinish(gio.async_result.AsyncResult result)
   {
     GFileInfo* _cretval;
     GError *_err;
     _cretval = g_file_input_stream_query_info_finish(cast(GFileInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 }

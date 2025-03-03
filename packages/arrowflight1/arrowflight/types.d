@@ -2,8 +2,7 @@ module arrowflight.types;
 
 import arrowflight.c.functions;
 import arrowflight.c.types;
-import arrowflight.types;
-import gid.global;
+import gid.gid;
 
 
 // Callbacks

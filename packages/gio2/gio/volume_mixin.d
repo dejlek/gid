@@ -1,20 +1,15 @@
 module gio.volume_mixin;
 
 public import gio.volume_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.async_result;
-public import gio.async_result_mixin;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
 public import gio.drive;
-public import gio.drive_mixin;
 public import gio.file;
-public import gio.file_mixin;
 public import gio.icon;
-public import gio.icon_mixin;
 public import gio.mount;
-public import gio.mount_mixin;
 public import gio.mount_operation;
 public import gio.types;
 public import glib.error;
@@ -29,7 +24,7 @@ public import gobject.object;
  * information about asynchronous operations, see [gio.async_result.AsyncResult] and
  * [gio.task.Task]. To mount a `GVolume`, first call [gio.volume.Volume.mount]
  * with $(LPAREN)at least$(RPAREN) the `GVolume` instance, optionally a
- * [gio.mount_operation.MountOperation] object and a [gio.AsyncReadyCallback].
+ * [gio.mount_operation.MountOperation] object and a [gio.types.AsyncReadyCallback].
  * Typically, one will only want to pass `NULL` for the
  * [gio.mount_operation.MountOperation] if automounting all volumes when a desktop session
  * starts since it’s not desirable to put up a lot of dialogs asking
@@ -94,14 +89,14 @@ template VolumeT()
 
    * Deprecated: Use [gio.volume.Volume.ejectWithOperation] instead.
    */
-  override void eject(MountUnmountFlags flags, Cancellable cancellable, AsyncReadyCallback callback)
+  override void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -118,7 +113,7 @@ template VolumeT()
 
    * Deprecated: Use [gio.volume.Volume.ejectWithOperationFinish] instead.
    */
-  override bool ejectFinish(AsyncResult result)
+  override bool ejectFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -139,14 +134,14 @@ template VolumeT()
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback, or %NULL
    */
-  override void ejectWithOperation(MountUnmountFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback)
+  override void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -161,7 +156,7 @@ template VolumeT()
    *   result = a #GAsyncResult
    * Returns: %TRUE if the volume was successfully ejected. %FALSE otherwise
    */
-  override bool ejectWithOperationFinish(AsyncResult result)
+  override bool ejectWithOperationFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -222,11 +217,11 @@ template VolumeT()
    * Returns: the activation root of volume
    *   or %NULL. Use [gobject.object.ObjectG.unref] to free.
    */
-  override File getActivationRoot()
+  override gio.file.File getActivationRoot()
   {
     GFile* _cretval;
     _cretval = g_volume_get_activation_root(cast(GVolume*)cPtr);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -236,11 +231,11 @@ template VolumeT()
    *   associated with a drive. The returned object should be unreffed
    *   with [gobject.object.ObjectG.unref] when no longer needed.
    */
-  override Drive getDrive()
+  override gio.drive.Drive getDrive()
   {
     GDrive* _cretval;
     _cretval = g_volume_get_drive(cast(GVolume*)cPtr);
-    auto _retval = ObjectG.getDObject!Drive(cast(GDrive*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.drive.Drive)(cast(GDrive*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -250,11 +245,11 @@ template VolumeT()
    *   The returned object should be unreffed with [gobject.object.ObjectG.unref]
    *   when no longer needed.
    */
-  override Icon getIcon()
+  override gio.icon.Icon getIcon()
   {
     GIcon* _cretval;
     _cretval = g_volume_get_icon(cast(GVolume*)cPtr);
-    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -273,7 +268,7 @@ template VolumeT()
     char* _cretval;
     const(char)* _kind = kind.toCString(No.Alloc);
     _cretval = g_volume_get_identifier(cast(GVolume*)cPtr, _kind);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -283,11 +278,11 @@ template VolumeT()
    *   The returned object should be unreffed with [gobject.object.ObjectG.unref]
    *   when no longer needed.
    */
-  override Mount getMount()
+  override gio.mount.Mount getMount()
   {
     GMount* _cretval;
     _cretval = g_volume_get_mount(cast(GVolume*)cPtr);
-    auto _retval = ObjectG.getDObject!Mount(cast(GMount*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -300,7 +295,7 @@ template VolumeT()
   {
     char* _cretval;
     _cretval = g_volume_get_name(cast(GVolume*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -312,7 +307,7 @@ template VolumeT()
   {
     const(char)* _cretval;
     _cretval = g_volume_get_sort_key(cast(GVolume*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -322,11 +317,11 @@ template VolumeT()
    *   The returned object should be unreffed with [gobject.object.ObjectG.unref]
    *   when no longer needed.
    */
-  override Icon getSymbolicIcon()
+  override gio.icon.Icon getSymbolicIcon()
   {
     GIcon* _cretval;
     _cretval = g_volume_get_symbolic_icon(cast(GVolume*)cPtr);
-    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -344,7 +339,7 @@ template VolumeT()
   {
     char* _cretval;
     _cretval = g_volume_get_uuid(cast(GVolume*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -358,14 +353,14 @@ template VolumeT()
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback, or %NULL
    */
-  override void mount(MountMountFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback)
+  override void mount(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -384,7 +379,7 @@ template VolumeT()
    *   result = a #GAsyncResult
    * Returns: %TRUE, %FALSE if operation failed
    */
-  override bool mountFinish(AsyncResult result)
+  override bool mountFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -409,8 +404,8 @@ template VolumeT()
    * Emitted when the volume has been changed.
    *   volume = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(Volume volume);
-  alias ChangedCallbackFunc = void function(Volume volume);
+  alias ChangedCallbackDlg = void delegate(gio.volume.Volume volume);
+  alias ChangedCallbackFunc = void function(gio.volume.Volume volume);
 
   /**
    * Connect to Changed signal.
@@ -426,7 +421,7 @@ template VolumeT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto volume = getVal!Volume(_paramVals);
+      auto volume = getVal!(gio.volume.Volume)(_paramVals);
       _dClosure.dlg(volume);
     }
 
@@ -440,8 +435,8 @@ template VolumeT()
    * release them so the object can be finalized.
    *   volume = the instance the signal is connected to
    */
-  alias RemovedCallbackDlg = void delegate(Volume volume);
-  alias RemovedCallbackFunc = void function(Volume volume);
+  alias RemovedCallbackDlg = void delegate(gio.volume.Volume volume);
+  alias RemovedCallbackFunc = void function(gio.volume.Volume volume);
 
   /**
    * Connect to Removed signal.
@@ -457,7 +452,7 @@ template VolumeT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto volume = getVal!Volume(_paramVals);
+      auto volume = getVal!(gio.volume.Volume)(_paramVals);
       _dClosure.dlg(volume);
     }
 

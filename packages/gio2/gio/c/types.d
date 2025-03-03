@@ -4305,7 +4305,7 @@ struct GCancellablePrivate;
 
 /**
  * `GCharsetConverter` is an implementation of [gio.converter.Converter] based on
- * [glib.void*].
+ * [glib.types.void*].
  */
 struct GCharsetConverter;
 
@@ -4852,7 +4852,7 @@ struct GDBusMethodInfo
  * return results and errors.
  * The normal way to obtain a `GDBusMethodInvocation` object is to receive
  * it as an argument to the `handle_method_call$(LPAREN)$(RPAREN)` function in a
- * [gio.dbus_interface_vtable.DBusInterfaceVTable] that was passed to
+ * [gio.types.DBusInterfaceVTable] that was passed to
  * [gio.dbus_connection.DBusConnection.registerObject].
  */
 struct GDBusMethodInvocation;
@@ -5240,7 +5240,7 @@ struct GDBusPropertyInfo
  * By default, `GDBusProxy` will cache all properties $(LPAREN)and listen to
  * changes$(RPAREN) of the remote object, and proxy all signals that get
  * emitted. This behaviour can be changed by passing suitable
- * [gio.DBusProxyFlags] when the proxy is created. If the proxy is for a
+ * [gio.types.DBusProxyFlags] when the proxy is created. If the proxy is for a
  * well-known name, the property cache is flushed when the name owner
  * vanishes and reloaded when a name owner appears.
  * The unique name owner of the proxy’s name is tracked and can be read from
@@ -6105,7 +6105,7 @@ struct GEmblemedIconPrivate;
  * Many `GFile` operations have both synchronous and asynchronous versions
  * to suit your application. Asynchronous versions of synchronous functions
  * simply have `_async$(LPAREN)$(RPAREN)` appended to their function names. The asynchronous
- * I/O functions call a [gio.AsyncReadyCallback] which is then used to
+ * I/O functions call a [gio.types.AsyncReadyCallback] which is then used to
  * finalize the operation, producing a [gio.async_result.AsyncResult] which is then
  * passed to the function’s matching `_finish$(LPAREN)$(RPAREN)` operation.
  * It is highly recommended to use asynchronous calls when running within a
@@ -7122,7 +7122,7 @@ struct GIOExtension;
  * extension point, and [gio.ioextension_point.IOExtensionPoint.setRequiredType] to
  * set a required type.
  * A module can implement an extension point by specifying the
- * [gobject.size_t] that implements the functionality. Additionally, each
+ * [gobject.types.size_t] that implements the functionality. Additionally, each
  * implementation of an extension point has a name, and a priority. Use
  * [gio.ioextension_point.IOExtensionPoint.implement] to implement an extension point.
  * ```c
@@ -7765,7 +7765,7 @@ struct GMemoryInputStreamPrivate;
  * should be profiled for your application. `malloc_trim$(LPAREN)$(RPAREN)`, for example, may
  * make future heap allocations slower $(LPAREN)due to releasing cached heap pages back
  * to the kernel$(RPAREN).
- * See [gio.MemoryMonitorWarningLevel] for details on the various warning
+ * See [gio.types.MemoryMonitorWarningLevel] for details on the various warning
  * levels.
  * ```c
  * static void
@@ -8029,7 +8029,7 @@ struct GMenuModelPrivate;
  * more information about asynchronous operations, see [gio.async_result.AsyncResult]
  * and [gio.task.Task]. To unmount a `GMount` instance, first call
  * [gio.mount.Mount.unmountWithOperation] with (at least) the `GMount`
- * instance and a [gio.AsyncReadyCallback].  The callback will be fired
+ * instance and a [gio.types.AsyncReadyCallback].  The callback will be fired
  * when the operation has resolved $(LPAREN)either with success or failure$(RPAREN), and a
  * [gio.async_result.AsyncResult] structure will be passed to the callback.  That
  * callback should then call [gio.mount.Mount.unmountWithOperationFinish]
@@ -9701,7 +9701,7 @@ struct GSimpleActionGroupPrivate;
  * As of GLib 2.46, `GSimpleAsyncResult` is deprecated in favor of
  * [gio.task.Task], which provides a simpler API.
  * `GSimpleAsyncResult` implements [gio.async_result.AsyncResult].
- * `GSimpleAsyncResult` handles [gio.AsyncReadyCallback]s, error
+ * `GSimpleAsyncResult` handles [gio.types.AsyncReadyCallback]s, error
  * reporting, operation cancellation and the final state of an operation,
  * completely transparent to the application. Results can be returned
  * as a pointer e.g. for functions that return data that is collected
@@ -10235,7 +10235,7 @@ struct GSocketConnectionPrivate;
  * methods.
  * To extend the set of control messages that can be received, subclass
  * this class and implement the `deserialize` method. Also, make sure your
- * class is registered with the [gobject.size_t] type system before calling
+ * class is registered with the [gobject.types.size_t] type system before calling
  * [gio.socket.Socket.receiveMessage] to read such a message.
  */
 struct GSocketControlMessage
@@ -11877,7 +11877,7 @@ struct GVfsClass
  * information about asynchronous operations, see [gio.async_result.AsyncResult] and
  * [gio.task.Task]. To mount a `GVolume`, first call [gio.volume.Volume.mount]
  * with $(LPAREN)at least$(RPAREN) the `GVolume` instance, optionally a
- * [gio.mount_operation.MountOperation] object and a [gio.AsyncReadyCallback].
+ * [gio.mount_operation.MountOperation] object and a [gio.types.AsyncReadyCallback].
  * Typically, one will only want to pass `NULL` for the
  * [gio.mount_operation.MountOperation] if automounting all volumes when a desktop session
  * starts since it’s not desirable to put up a lot of dialogs asking

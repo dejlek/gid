@@ -1,6 +1,6 @@
 module glib.variant_iter;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -74,11 +74,11 @@ class VariantIter
    * ]|
    * Returns: a #GVariant, or %NULL
    */
-  VariantG nextValue()
+  glib.variant.VariantG nextValue()
   {
     VariantC* _cretval;
     _cretval = g_variant_iter_next_value(cast(GVariantIter*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

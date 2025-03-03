@@ -1,6 +1,6 @@
 module gtk.param_spec_expression;
 
-import gid.global;
+import gid.gid;
 import gobject.param_spec;
 import gtk.c.functions;
 import gtk.c.types;
@@ -9,7 +9,7 @@ import gtk.types;
 /**
  * A `GParamSpec` for properties holding a `GtkExpression`.
  */
-class ParamSpecExpression : ParamSpec
+class ParamSpecExpression : gobject.param_spec.ParamSpec
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

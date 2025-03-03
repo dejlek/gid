@@ -1,6 +1,6 @@
 module harfbuzz.ot_name_entry;
 
-import gid.global;
+import gid.gid;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
 import harfbuzz.types;
@@ -28,22 +28,22 @@ class OtNameEntry
     return cast(void*)&cInstance;
   }
 
-  @property OtNameId nameId()
+  @property harfbuzz.types.OtNameId nameId()
   {
     return (cast(hb_ot_name_entry_t*)cPtr).nameId;
   }
 
-  @property void nameId(OtNameId propval)
+  @property void nameId(harfbuzz.types.OtNameId propval)
   {
     (cast(hb_ot_name_entry_t*)cPtr).nameId = propval;
   }
 
-  @property language_t language()
+  @property harfbuzz.types.language_t language()
   {
     return (cast(hb_ot_name_entry_t*)cPtr).language;
   }
 
-  @property void language(language_t propval)
+  @property void language(harfbuzz.types.language_t propval)
   {
     (cast(hb_ot_name_entry_t*)cPtr).language = propval;
   }

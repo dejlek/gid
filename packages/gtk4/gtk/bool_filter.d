@@ -1,6 +1,6 @@
 module gtk.bool_filter;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.expression;
@@ -11,7 +11,7 @@ import gtk.types;
  * `GtkBoolFilter` evaluates a boolean `GtkExpression`
  * to determine whether to include items.
  */
-class BoolFilter : Filter
+class BoolFilter : gtk.filter.Filter
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -36,7 +36,7 @@ class BoolFilter : Filter
    *   expression = The expression to evaluate
    * Returns: a new `GtkBoolFilter`
    */
-  this(Expression expression)
+  this(gtk.expression.Expression expression)
   {
     GtkBoolFilter* _cretval;
     _cretval = gtk_bool_filter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
@@ -48,11 +48,11 @@ class BoolFilter : Filter
    * an item should be filtered.
    * Returns: a `GtkExpression`
    */
-  Expression getExpression()
+  gtk.expression.Expression getExpression()
   {
     GtkExpression* _cretval;
     _cretval = gtk_bool_filter_get_expression(cast(GtkBoolFilter*)cPtr);
-    auto _retval = _cretval ? new Expression(cast(GtkExpression*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class BoolFilter : Filter
    * Params:
    *   expression = a `GtkExpression`
    */
-  void setExpression(Expression expression)
+  void setExpression(gtk.expression.Expression expression)
   {
     gtk_bool_filter_set_expression(cast(GtkBoolFilter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }

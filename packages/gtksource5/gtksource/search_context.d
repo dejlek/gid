@@ -1,8 +1,7 @@
 module gtksource.search_context;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.types;
 import glib.error;
@@ -61,7 +60,7 @@ import gtksource.types;
  * search and replace API: see the tests/test-search.c file. It is a mini
  * application for the search and replace, with a basic user interface.
  */
-class SearchContext : ObjectG
+class SearchContext : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -90,7 +89,7 @@ class SearchContext : ObjectG
    *   settings = a #GtkSourceSearchSettings, or %NULL.
    * Returns: a new search context.
    */
-  this(Buffer buffer, SearchSettings settings)
+  this(gtksource.buffer.Buffer buffer, gtksource.search_settings.SearchSettings settings)
   {
     GtkSourceSearchContext* _cretval;
     _cretval = gtk_source_search_context_new(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null, settings ? cast(GtkSourceSearchSettings*)settings.cPtr(No.Dup) : null);
@@ -114,14 +113,14 @@ class SearchContext : ObjectG
    *     search has wrapped around, or %NULL.
    * Returns: whether a match was found.
    */
-  bool backward(TextIter iter, out TextIter matchStart, out TextIter matchEnd, out bool hasWrappedAround)
+  bool backward(gtk.text_iter.TextIter iter, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
   {
     bool _retval;
     GtkTextIter _matchStart;
     GtkTextIter _matchEnd;
-    _retval = gtk_source_search_context_backward(cast(GtkSourceSearchContext*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, &_matchStart, &_matchEnd, cast(bool*)&hasWrappedAround);
-    matchStart = new TextIter(cast(void*)&_matchStart, No.Take);
-    matchEnd = new TextIter(cast(void*)&_matchEnd, No.Take);
+    _retval = gtk_source_search_context_backward(cast(GtkSourceSearchContext*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, &_matchStart, &_matchEnd, cast(bool*)&hasWrappedAround);
+    matchStart = new gtk.text_iter.TextIter(cast(void*)&_matchStart, No.Take);
+    matchEnd = new gtk.text_iter.TextIter(cast(void*)&_matchEnd, No.Take);
     return _retval;
   }
 
@@ -136,19 +135,19 @@ class SearchContext : ObjectG
    *   cancellable = a #GCancellable, or %NULL.
    *   callback = a #GAsyncReadyCallback to call when the operation is finished.
    */
-  void backwardAsync(TextIter iter, Cancellable cancellable, AsyncReadyCallback callback)
+  void backwardAsync(gtk.text_iter.TextIter iter, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_source_search_context_backward_async(cast(GtkSourceSearchContext*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_source_search_context_backward_async(cast(GtkSourceSearchContext*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -164,7 +163,7 @@ class SearchContext : ObjectG
    *     search has wrapped around, or %NULL.
    * Returns: whether a match was found.
    */
-  bool backwardFinish(AsyncResult result, out TextIter matchStart, out TextIter matchEnd, out bool hasWrappedAround)
+  bool backwardFinish(gio.async_result.AsyncResult result, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
   {
     bool _retval;
     GtkTextIter _matchStart;
@@ -173,8 +172,8 @@ class SearchContext : ObjectG
     _retval = gtk_source_search_context_backward_finish(cast(GtkSourceSearchContext*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_matchStart, &_matchEnd, cast(bool*)&hasWrappedAround, &_err);
     if (_err)
       throw new ErrorG(_err);
-    matchStart = new TextIter(cast(void*)&_matchStart, No.Take);
-    matchEnd = new TextIter(cast(void*)&_matchEnd, No.Take);
+    matchStart = new gtk.text_iter.TextIter(cast(void*)&_matchStart, No.Take);
+    matchEnd = new gtk.text_iter.TextIter(cast(void*)&_matchEnd, No.Take);
     return _retval;
   }
 
@@ -195,14 +194,14 @@ class SearchContext : ObjectG
    *     search has wrapped around, or %NULL.
    * Returns: whether a match was found.
    */
-  bool forward(TextIter iter, out TextIter matchStart, out TextIter matchEnd, out bool hasWrappedAround)
+  bool forward(gtk.text_iter.TextIter iter, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
   {
     bool _retval;
     GtkTextIter _matchStart;
     GtkTextIter _matchEnd;
-    _retval = gtk_source_search_context_forward(cast(GtkSourceSearchContext*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, &_matchStart, &_matchEnd, cast(bool*)&hasWrappedAround);
-    matchStart = new TextIter(cast(void*)&_matchStart, No.Take);
-    matchEnd = new TextIter(cast(void*)&_matchEnd, No.Take);
+    _retval = gtk_source_search_context_forward(cast(GtkSourceSearchContext*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, &_matchStart, &_matchEnd, cast(bool*)&hasWrappedAround);
+    matchStart = new gtk.text_iter.TextIter(cast(void*)&_matchStart, No.Take);
+    matchEnd = new gtk.text_iter.TextIter(cast(void*)&_matchEnd, No.Take);
     return _retval;
   }
 
@@ -217,19 +216,19 @@ class SearchContext : ObjectG
    *   cancellable = a #GCancellable, or %NULL.
    *   callback = a #GAsyncReadyCallback to call when the operation is finished.
    */
-  void forwardAsync(TextIter iter, Cancellable cancellable, AsyncReadyCallback callback)
+  void forwardAsync(gtk.text_iter.TextIter iter, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_source_search_context_forward_async(cast(GtkSourceSearchContext*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_source_search_context_forward_async(cast(GtkSourceSearchContext*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -244,7 +243,7 @@ class SearchContext : ObjectG
    *     search has wrapped around, or %NULL.
    * Returns: whether a match was found.
    */
-  bool forwardFinish(AsyncResult result, out TextIter matchStart, out TextIter matchEnd, out bool hasWrappedAround)
+  bool forwardFinish(gio.async_result.AsyncResult result, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
   {
     bool _retval;
     GtkTextIter _matchStart;
@@ -253,16 +252,16 @@ class SearchContext : ObjectG
     _retval = gtk_source_search_context_forward_finish(cast(GtkSourceSearchContext*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_matchStart, &_matchEnd, cast(bool*)&hasWrappedAround, &_err);
     if (_err)
       throw new ErrorG(_err);
-    matchStart = new TextIter(cast(void*)&_matchStart, No.Take);
-    matchEnd = new TextIter(cast(void*)&_matchEnd, No.Take);
+    matchStart = new gtk.text_iter.TextIter(cast(void*)&_matchStart, No.Take);
+    matchEnd = new gtk.text_iter.TextIter(cast(void*)&_matchEnd, No.Take);
     return _retval;
   }
 
-  Buffer getBuffer()
+  gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_search_context_get_buffer(cast(GtkSourceSearchContext*)cPtr);
-    auto _retval = ObjectG.getDObject!Buffer(cast(GtkSourceBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -273,11 +272,11 @@ class SearchContext : ObjectG
     return _retval;
   }
 
-  Style getMatchStyle()
+  gtksource.style.Style getMatchStyle()
   {
     GtkSourceStyle* _cretval;
     _cretval = gtk_source_search_context_get_match_style(cast(GtkSourceSearchContext*)cPtr);
-    auto _retval = ObjectG.getDObject!Style(cast(GtkSourceStyle*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.style.Style)(cast(GtkSourceStyle*)_cretval, No.Take);
     return _retval;
   }
 
@@ -293,10 +292,10 @@ class SearchContext : ObjectG
    *   position 1 $(LPAREN)not 0$(RPAREN). Returns 0 if match_start and match_end don't delimit
    *   an occurrence. Returns -1 if the position is not yet known.
    */
-  int getOccurrencePosition(TextIter matchStart, TextIter matchEnd)
+  int getOccurrencePosition(gtk.text_iter.TextIter matchStart, gtk.text_iter.TextIter matchEnd)
   {
     int _retval;
-    _retval = gtk_source_search_context_get_occurrence_position(cast(GtkSourceSearchContext*)cPtr, matchStart ? cast(GtkTextIter*)matchStart.cPtr(No.Dup) : null, matchEnd ? cast(GtkTextIter*)matchEnd.cPtr(No.Dup) : null);
+    _retval = gtk_source_search_context_get_occurrence_position(cast(GtkSourceSearchContext*)cPtr, matchStart ? cast(const(GtkTextIter)*)matchStart.cPtr(No.Dup) : null, matchEnd ? cast(const(GtkTextIter)*)matchEnd.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -317,24 +316,24 @@ class SearchContext : ObjectG
    * Regular expression patterns must follow certain rules. If
    * propertySearchSettings:search-text breaks a rule, the error can be
    * retrieved with this function.
-   * The error domain is [glib.RegexError].
+   * The error domain is [glib.types.RegexError].
    * Free the return value with [glib.error.ErrorG.free].
    * Returns: the #GError, or %NULL if the
    *   pattern is valid.
    */
-  ErrorG getRegexError()
+  glib.error.ErrorG getRegexError()
   {
     GError* _cretval;
     _cretval = gtk_source_search_context_get_regex_error(cast(GtkSourceSearchContext*)cPtr);
-    auto _retval = _cretval ? new ErrorG(cast(GError*)_cretval) : null;
+    auto _retval = _cretval ? new glib.error.ErrorG(cast(GError*)_cretval) : null;
     return _retval;
   }
 
-  SearchSettings getSettings()
+  gtksource.search_settings.SearchSettings getSettings()
   {
     GtkSourceSearchSettings* _cretval;
     _cretval = gtk_source_search_context_get_settings(cast(GtkSourceSearchContext*)cPtr);
-    auto _retval = ObjectG.getDObject!SearchSettings(cast(GtkSourceSearchSettings*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.search_settings.SearchSettings)(cast(GtkSourceSearchSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -353,7 +352,7 @@ class SearchContext : ObjectG
    *   replaceLength = the length of replace in bytes, or -1.
    * Returns: whether the match has been replaced.
    */
-  bool replace(TextIter matchStart, TextIter matchEnd, string replace, int replaceLength)
+  bool replace(gtk.text_iter.TextIter matchStart, gtk.text_iter.TextIter matchEnd, string replace, int replaceLength)
   {
     bool _retval;
     const(char)* _replace = replace.toCString(No.Alloc);
@@ -403,7 +402,7 @@ class SearchContext : ObjectG
    * Params:
    *   matchStyle = a #GtkSourceStyle, or %NULL.
    */
-  void setMatchStyle(Style matchStyle)
+  void setMatchStyle(gtksource.style.Style matchStyle)
   {
     gtk_source_search_context_set_match_style(cast(GtkSourceSearchContext*)cPtr, matchStyle ? cast(GtkSourceStyle*)matchStyle.cPtr(No.Dup) : null);
   }

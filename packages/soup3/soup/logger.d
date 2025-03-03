@@ -1,6 +1,6 @@
 module soup.logger;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -59,7 +59,7 @@ import soup.types;
  * response will still be logged on the event of the signal@Message::finished
  * signal.
  */
-class Logger : ObjectG, SessionFeature
+class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -89,7 +89,7 @@ class Logger : ObjectG, SessionFeature
    *   level = the debug level
    * Returns: a new #SoupLogger
    */
-  this(LoggerLogLevel level)
+  this(soup.types.LoggerLogLevel level)
   {
     SoupLogger* _cretval;
     _cretval = soup_logger_new(level);
@@ -123,14 +123,14 @@ class Logger : ObjectG, SessionFeature
    * Params:
    *   printer = the callback for printing logging output
    */
-  void setPrinter(LoggerPrinter printer)
+  void setPrinter(soup.types.LoggerPrinter printer)
   {
     extern(C) void _printerCallback(SoupLogger* logger, SoupLoggerLogLevel level, char direction, const(char)* data, void* userData)
     {
-      auto _dlg = cast(LoggerPrinter*)userData;
+      auto _dlg = cast(soup.types.LoggerPrinter*)userData;
       string _data = data.fromCString(No.Free);
 
-      (*_dlg)(ObjectG.getDObject!Logger(cast(void*)logger, No.Take), level, direction, _data);
+      (*_dlg)(ObjectG.getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), level, direction, _data);
     }
     auto _printerCB = printer ? &_printerCallback : null;
 
@@ -148,14 +148,14 @@ class Logger : ObjectG, SessionFeature
    * Params:
    *   requestFilter = the callback for request debugging
    */
-  void setRequestFilter(LoggerFilter requestFilter)
+  void setRequestFilter(soup.types.LoggerFilter requestFilter)
   {
     extern(C) SoupLoggerLogLevel _requestFilterCallback(SoupLogger* logger, SoupMessage* msg, void* userData)
     {
-      LoggerLogLevel _dretval;
-      auto _dlg = cast(LoggerFilter*)userData;
+      soup.types.LoggerLogLevel _dretval;
+      auto _dlg = cast(soup.types.LoggerFilter*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!Logger(cast(void*)logger, No.Take), ObjectG.getDObject!Message(cast(void*)msg, No.Take));
+      _dretval = (*_dlg)(ObjectG.getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), ObjectG.getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
       auto _retval = cast(SoupLoggerLogLevel)_dretval;
 
       return _retval;
@@ -176,14 +176,14 @@ class Logger : ObjectG, SessionFeature
    * Params:
    *   responseFilter = the callback for response debugging
    */
-  void setResponseFilter(LoggerFilter responseFilter)
+  void setResponseFilter(soup.types.LoggerFilter responseFilter)
   {
     extern(C) SoupLoggerLogLevel _responseFilterCallback(SoupLogger* logger, SoupMessage* msg, void* userData)
     {
-      LoggerLogLevel _dretval;
-      auto _dlg = cast(LoggerFilter*)userData;
+      soup.types.LoggerLogLevel _dretval;
+      auto _dlg = cast(soup.types.LoggerFilter*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!Logger(cast(void*)logger, No.Take), ObjectG.getDObject!Message(cast(void*)msg, No.Take));
+      _dretval = (*_dlg)(ObjectG.getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), ObjectG.getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
       auto _retval = cast(SoupLoggerLogLevel)_dretval;
 
       return _retval;

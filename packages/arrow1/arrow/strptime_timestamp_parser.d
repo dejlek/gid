@@ -4,9 +4,9 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.timestamp_parser;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class StrptimeTimestampParser : TimestampParser
+class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -37,7 +37,7 @@ class StrptimeTimestampParser : TimestampParser
   {
     const(char)* _cretval;
     _cretval = garrow_strptime_timestamp_parser_get_format(cast(GArrowStrptimeTimestampParser*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

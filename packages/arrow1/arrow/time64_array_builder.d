@@ -5,10 +5,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.time64_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class Time64ArrayBuilder : ArrayBuilder
+class Time64ArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,7 +27,7 @@ class Time64ArrayBuilder : ArrayBuilder
     return getType();
   }
 
-  this(Time64DataType dataType)
+  this(arrow.time64_data_type.Time64DataType dataType)
   {
     GArrowTime64ArrayBuilder* _cretval;
     _cretval = garrow_time64_array_builder_new(dataType ? cast(GArrowTime64DataType*)dataType.cPtr(No.Dup) : null);

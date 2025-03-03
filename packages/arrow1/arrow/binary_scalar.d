@@ -5,9 +5,9 @@ import arrow.buffer;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class BinaryScalar : BaseBinaryScalar
+class BinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class BinaryScalar : BaseBinaryScalar
     return getType();
   }
 
-  this(Buffer value)
+  this(arrow.buffer.Buffer value)
   {
     GArrowBinaryScalar* _cretval;
     _cretval = garrow_binary_scalar_new(value ? cast(GArrowBuffer*)value.cPtr(No.Dup) : null);

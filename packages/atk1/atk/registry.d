@@ -4,7 +4,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.object_factory;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gobject.types;
 
@@ -19,7 +19,7 @@ import gobject.types;
  * atk_registry_set_factory_type call, passing the appropriate GType
  * for application custom widget classes.
  */
-class Registry : ObjectG
+class Registry : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -46,11 +46,11 @@ class Registry : ObjectG
    * Returns: an #AtkObjectFactory appropriate for creating
    *   #AtkObjects appropriate for type.
    */
-  ObjectFactory getFactory(GType type)
+  atk.object_factory.ObjectFactory getFactory(gobject.types.GType type)
   {
     AtkObjectFactory* _cretval;
     _cretval = atk_registry_get_factory(cast(AtkRegistry*)cPtr, type);
-    auto _retval = ObjectG.getDObject!ObjectFactory(cast(AtkObjectFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.object_factory.ObjectFactory)(cast(AtkObjectFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -62,9 +62,9 @@ class Registry : ObjectG
    *     subclass
    * Returns: a #GType associated with type type
    */
-  GType getFactoryType(GType type)
+  gobject.types.GType getFactoryType(gobject.types.GType type)
   {
-    GType _retval;
+    gobject.types.GType _retval;
     _retval = atk_registry_get_factory_type(cast(AtkRegistry*)cPtr, type);
     return _retval;
   }
@@ -79,7 +79,7 @@ class Registry : ObjectG
    *   factoryType = an #AtkObjectFactory type to associate with type.  Must
    *     implement AtkObject appropriate for type.
    */
-  void setFactoryType(GType type, GType factoryType)
+  void setFactoryType(gobject.types.GType type, gobject.types.GType factoryType)
   {
     atk_registry_set_factory_type(cast(AtkRegistry*)cPtr, type, factoryType);
   }

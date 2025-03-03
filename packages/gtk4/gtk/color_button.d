@@ -1,7 +1,7 @@
 module gtk.color_button;
 
 import gdk.rgba;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -34,7 +34,7 @@ import gtk.widget;
 
  * Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
  */
-class ColorButton : Widget, ColorChooser
+class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -79,11 +79,11 @@ class ColorButton : Widget, ColorChooser
    *   rgba = A `GdkRGBA` to set the current color with
    * Returns: a new color button
    */
-  static ColorButton newWithRgba(RGBA rgba)
+  static gtk.color_button.ColorButton newWithRgba(gdk.rgba.RGBA rgba)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_color_button_new_with_rgba(rgba ? cast(GdkRGBA*)rgba.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!ColorButton(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_color_button_new_with_rgba(rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class ColorButton : Widget, ColorChooser
   {
     const(char)* _cretval;
     _cretval = gtk_color_button_get_title(cast(GtkColorButton*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -145,8 +145,8 @@ class ColorButton : Widget, ColorChooser
    * emitting it causes the button to pop up its dialog.
    *   colorButton = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(ColorButton colorButton);
-  alias ActivateCallbackFunc = void function(ColorButton colorButton);
+  alias ActivateCallbackDlg = void delegate(gtk.color_button.ColorButton colorButton);
+  alias ActivateCallbackFunc = void function(gtk.color_button.ColorButton colorButton);
 
   /**
    * Connect to Activate signal.
@@ -162,7 +162,7 @@ class ColorButton : Widget, ColorChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto colorButton = getVal!ColorButton(_paramVals);
+      auto colorButton = getVal!(gtk.color_button.ColorButton)(_paramVals);
       _dClosure.dlg(colorButton);
     }
 
@@ -179,8 +179,8 @@ class ColorButton : Widget, ColorChooser
    * the notify::rgba signal.
    *   colorButton = the instance the signal is connected to
    */
-  alias ColorSetCallbackDlg = void delegate(ColorButton colorButton);
-  alias ColorSetCallbackFunc = void function(ColorButton colorButton);
+  alias ColorSetCallbackDlg = void delegate(gtk.color_button.ColorButton colorButton);
+  alias ColorSetCallbackFunc = void function(gtk.color_button.ColorButton colorButton);
 
   /**
    * Connect to ColorSet signal.
@@ -196,7 +196,7 @@ class ColorButton : Widget, ColorChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto colorButton = getVal!ColorButton(_paramVals);
+      auto colorButton = getVal!(gtk.color_button.ColorButton)(_paramVals);
       _dClosure.dlg(colorButton);
     }
 

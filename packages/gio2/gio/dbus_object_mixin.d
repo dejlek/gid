@@ -1,11 +1,10 @@
 module gio.dbus_object_mixin;
 
 public import gio.dbus_object_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.dbus_interface;
-public import gio.dbus_interface_mixin;
 public import gio.types;
 public import gobject.dclosure;
 public import gobject.object;
@@ -27,12 +26,12 @@ template DBusObjectT()
    * Returns: %NULL if not found, otherwise a
    *   #GDBusInterface that must be freed with [gobject.object.ObjectG.unref].
    */
-  override DBusInterface getInterface(string interfaceName)
+  override gio.dbus_interface.DBusInterface getInterface(string interfaceName)
   {
     GDBusInterface* _cretval;
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
     _cretval = g_dbus_object_get_interface(cast(GDBusObject*)cPtr, _interfaceName);
-    auto _retval = ObjectG.getDObject!DBusInterface(cast(GDBusInterface*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_interface.DBusInterface)(cast(GDBusInterface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -42,11 +41,11 @@ template DBusObjectT()
    *   The returned list must be freed by [glib.list.List.free] after each element has been freed
    *   with [gobject.object.ObjectG.unref].
    */
-  override DBusInterface[] getInterfaces()
+  override gio.dbus_interface.DBusInterface[] getInterfaces()
   {
     GList* _cretval;
     _cretval = g_dbus_object_get_interfaces(cast(GDBusObject*)cPtr);
-    auto _retval = gListToD!(DBusInterface, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gio.dbus_interface.DBusInterface, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -58,7 +57,7 @@ template DBusObjectT()
   {
     const(char)* _cretval;
     _cretval = g_dbus_object_get_object_path(cast(GDBusObject*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -68,8 +67,8 @@ template DBusObjectT()
    *   interface_ = The #GDBusInterface that was added.
    *   dBusObject = the instance the signal is connected to
    */
-  alias InterfaceAddedCallbackDlg = void delegate(DBusInterface interface_, DBusObject dBusObject);
-  alias InterfaceAddedCallbackFunc = void function(DBusInterface interface_, DBusObject dBusObject);
+  alias InterfaceAddedCallbackDlg = void delegate(gio.dbus_interface.DBusInterface interface_, gio.dbus_object.DBusObject dBusObject);
+  alias InterfaceAddedCallbackFunc = void function(gio.dbus_interface.DBusInterface interface_, gio.dbus_object.DBusObject dBusObject);
 
   /**
    * Connect to InterfaceAdded signal.
@@ -85,8 +84,8 @@ template DBusObjectT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dBusObject = getVal!DBusObject(_paramVals);
-      auto interface_ = getVal!DBusInterface(&_paramVals[1]);
+      auto dBusObject = getVal!(gio.dbus_object.DBusObject)(_paramVals);
+      auto interface_ = getVal!(gio.dbus_interface.DBusInterface)(&_paramVals[1]);
       _dClosure.dlg(interface_, dBusObject);
     }
 
@@ -100,8 +99,8 @@ template DBusObjectT()
    *   interface_ = The #GDBusInterface that was removed.
    *   dBusObject = the instance the signal is connected to
    */
-  alias InterfaceRemovedCallbackDlg = void delegate(DBusInterface interface_, DBusObject dBusObject);
-  alias InterfaceRemovedCallbackFunc = void function(DBusInterface interface_, DBusObject dBusObject);
+  alias InterfaceRemovedCallbackDlg = void delegate(gio.dbus_interface.DBusInterface interface_, gio.dbus_object.DBusObject dBusObject);
+  alias InterfaceRemovedCallbackFunc = void function(gio.dbus_interface.DBusInterface interface_, gio.dbus_object.DBusObject dBusObject);
 
   /**
    * Connect to InterfaceRemoved signal.
@@ -117,8 +116,8 @@ template DBusObjectT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dBusObject = getVal!DBusObject(_paramVals);
-      auto interface_ = getVal!DBusInterface(&_paramVals[1]);
+      auto dBusObject = getVal!(gio.dbus_object.DBusObject)(_paramVals);
+      auto interface_ = getVal!(gio.dbus_interface.DBusInterface)(&_paramVals[1]);
       _dClosure.dlg(interface_, dBusObject);
     }
 

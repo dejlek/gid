@@ -1,11 +1,9 @@
 module gtksource.file_saver;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
-import gio.file : DGioFile = File;
-import gio.file_mixin : DGioFileT = FileT;
+import gio.file;
 import gio.types;
 import glib.error;
 import gobject.object;
@@ -24,7 +22,7 @@ import gtksource.types;
  * handling. If an error occurs, you can reconfigure the saver and relaunch the
  * operation with [gtksource.file_saver.FileSaver.saveAsync].
  */
-class FileSaver : ObjectG
+class FileSaver : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -53,7 +51,7 @@ class FileSaver : ObjectG
    *   file = the #GtkSourceFile.
    * Returns: a new #GtkSourceFileSaver object.
    */
-  this(Buffer buffer, File file)
+  this(gtksource.buffer.Buffer buffer, gtksource.file.File file)
   {
     GtkSourceFileSaver* _cretval;
     _cretval = gtk_source_file_saver_new(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file.cPtr(No.Dup) : null);
@@ -73,67 +71,67 @@ class FileSaver : ObjectG
    *   targetLocation = the #GFile where to save the buffer to.
    * Returns: a new #GtkSourceFileSaver object.
    */
-  static FileSaver newWithTarget(Buffer buffer, File file, DGioFile targetLocation)
+  static gtksource.file_saver.FileSaver newWithTarget(gtksource.buffer.Buffer buffer, gtksource.file.File file, gio.file.File targetLocation)
   {
     GtkSourceFileSaver* _cretval;
     _cretval = gtk_source_file_saver_new_with_target(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file.cPtr(No.Dup) : null, targetLocation ? cast(GFile*)(cast(ObjectG)targetLocation).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!FileSaver(cast(GtkSourceFileSaver*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.file_saver.FileSaver)(cast(GtkSourceFileSaver*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Buffer getBuffer()
+  gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_file_saver_get_buffer(cast(GtkSourceFileSaver*)cPtr);
-    auto _retval = ObjectG.getDObject!Buffer(cast(GtkSourceBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
-  CompressionType getCompressionType()
+  gtksource.types.CompressionType getCompressionType()
   {
     GtkSourceCompressionType _cretval;
     _cretval = gtk_source_file_saver_get_compression_type(cast(GtkSourceFileSaver*)cPtr);
-    CompressionType _retval = cast(CompressionType)_cretval;
+    gtksource.types.CompressionType _retval = cast(gtksource.types.CompressionType)_cretval;
     return _retval;
   }
 
-  Encoding getEncoding()
+  gtksource.encoding.Encoding getEncoding()
   {
     const(GtkSourceEncoding)* _cretval;
     _cretval = gtk_source_file_saver_get_encoding(cast(GtkSourceFileSaver*)cPtr);
-    auto _retval = _cretval ? new Encoding(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
-  File getFile()
+  gtksource.file.File getFile()
   {
     GtkSourceFile* _cretval;
     _cretval = gtk_source_file_saver_get_file(cast(GtkSourceFileSaver*)cPtr);
-    auto _retval = ObjectG.getDObject!File(cast(GtkSourceFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.file.File)(cast(GtkSourceFile*)_cretval, No.Take);
     return _retval;
   }
 
-  FileSaverFlags getFlags()
+  gtksource.types.FileSaverFlags getFlags()
   {
     GtkSourceFileSaverFlags _cretval;
     _cretval = gtk_source_file_saver_get_flags(cast(GtkSourceFileSaver*)cPtr);
-    FileSaverFlags _retval = cast(FileSaverFlags)_cretval;
+    gtksource.types.FileSaverFlags _retval = cast(gtksource.types.FileSaverFlags)_cretval;
     return _retval;
   }
 
-  DGioFile getLocation()
+  gio.file.File getLocation()
   {
     GFile* _cretval;
     _cretval = gtk_source_file_saver_get_location(cast(GtkSourceFileSaver*)cPtr);
-    auto _retval = ObjectG.getDObject!DGioFile(cast(GFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
-  NewlineType getNewlineType()
+  gtksource.types.NewlineType getNewlineType()
   {
     GtkSourceNewlineType _cretval;
     _cretval = gtk_source_file_saver_get_newline_type(cast(GtkSourceFileSaver*)cPtr);
-    NewlineType _retval = cast(NewlineType)_cretval;
+    gtksource.types.NewlineType _retval = cast(gtksource.types.NewlineType)_cretval;
     return _retval;
   }
 
@@ -149,11 +147,11 @@ class FileSaver : ObjectG
    *   callback = a #GAsyncReadyCallback to call when the request is
    *     satisfied.
    */
-  void saveAsync(int ioPriority, Cancellable cancellable, FileProgressCallback progressCallback, AsyncReadyCallback callback)
+  void saveAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.FileProgressCallback progressCallback, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _progressCallbackCallback(long currentNumBytes, long totalNumBytes, void* data)
     {
-      auto _dlg = cast(FileProgressCallback*)data;
+      auto _dlg = cast(gio.types.FileProgressCallback*)data;
 
       (*_dlg)(currentNumBytes, totalNumBytes);
     }
@@ -162,9 +160,9 @@ class FileSaver : ObjectG
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -185,7 +183,7 @@ class FileSaver : ObjectG
    *   result = a #GAsyncResult.
    * Returns: whether the file was saved successfully.
    */
-  bool saveFinish(AsyncResult result)
+  bool saveFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -201,7 +199,7 @@ class FileSaver : ObjectG
    * Params:
    *   compressionType = the new compression type.
    */
-  void setCompressionType(CompressionType compressionType)
+  void setCompressionType(gtksource.types.CompressionType compressionType)
   {
     gtk_source_file_saver_set_compression_type(cast(GtkSourceFileSaver*)cPtr, compressionType);
   }
@@ -212,12 +210,12 @@ class FileSaver : ObjectG
    * Params:
    *   encoding = the new encoding, or %NULL for UTF-8.
    */
-  void setEncoding(Encoding encoding)
+  void setEncoding(gtksource.encoding.Encoding encoding)
   {
-    gtk_source_file_saver_set_encoding(cast(GtkSourceFileSaver*)cPtr, encoding ? cast(GtkSourceEncoding*)encoding.cPtr(No.Dup) : null);
+    gtk_source_file_saver_set_encoding(cast(GtkSourceFileSaver*)cPtr, encoding ? cast(const(GtkSourceEncoding)*)encoding.cPtr(No.Dup) : null);
   }
 
-  void setFlags(FileSaverFlags flags)
+  void setFlags(gtksource.types.FileSaverFlags flags)
   {
     gtk_source_file_saver_set_flags(cast(GtkSourceFileSaver*)cPtr, flags);
   }
@@ -228,7 +226,7 @@ class FileSaver : ObjectG
    * Params:
    *   newlineType = the new newline type.
    */
-  void setNewlineType(NewlineType newlineType)
+  void setNewlineType(gtksource.types.NewlineType newlineType)
   {
     gtk_source_file_saver_set_newline_type(cast(GtkSourceFileSaver*)cPtr, newlineType);
   }

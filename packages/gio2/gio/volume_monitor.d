@@ -1,15 +1,12 @@
 module gio.volume_monitor;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.drive;
-import gio.drive_mixin;
 import gio.mount;
-import gio.mount_mixin;
 import gio.types;
 import gio.volume;
-import gio.volume_mixin;
 import gobject.dclosure;
 import gobject.object;
 
@@ -24,7 +21,7 @@ import gobject.object;
  * In order to receive updates about volumes and mounts monitored through GVFS,
  * a main loop must be running.
  */
-class VolumeMonitor : ObjectG
+class VolumeMonitor : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -78,11 +75,11 @@ class VolumeMonitor : ObjectG
    *   gvfs for an example of this. Also see [gio.mount.Mount.isShadowed],
    *   [gio.mount.Mount.shadow] and [gio.mount.Mount.unshadow] functions.
    */
-  static Volume adoptOrphanMount(Mount mount)
+  static gio.volume.Volume adoptOrphanMount(gio.mount.Mount mount)
   {
     GVolume* _cretval;
     _cretval = g_volume_monitor_adopt_orphan_mount(mount ? cast(GMount*)(cast(ObjectG)mount).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Volume(cast(GVolume*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -91,11 +88,11 @@ class VolumeMonitor : ObjectG
    * Returns: a reference to the #GVolumeMonitor used by gio. Call
    *   [gobject.object.ObjectG.unref] when done with it.
    */
-  static VolumeMonitor get()
+  static gio.volume_monitor.VolumeMonitor get()
   {
     GVolumeMonitor* _cretval;
     _cretval = g_volume_monitor_get();
-    auto _retval = ObjectG.getDObject!VolumeMonitor(cast(GVolumeMonitor*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.volume_monitor.VolumeMonitor)(cast(GVolumeMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -105,11 +102,11 @@ class VolumeMonitor : ObjectG
    * its elements have been unreffed with [gobject.object.ObjectG.unref].
    * Returns: a #GList of connected #GDrive objects.
    */
-  Drive[] getConnectedDrives()
+  gio.drive.Drive[] getConnectedDrives()
   {
     GList* _cretval;
     _cretval = g_volume_monitor_get_connected_drives(cast(GVolumeMonitor*)cPtr);
-    auto _retval = gListToD!(Drive, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gio.drive.Drive, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -120,12 +117,12 @@ class VolumeMonitor : ObjectG
    * Returns: a #GMount or %NULL if no such mount is available.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  Mount getMountForUuid(string uuid)
+  gio.mount.Mount getMountForUuid(string uuid)
   {
     GMount* _cretval;
     const(char)* _uuid = uuid.toCString(No.Alloc);
     _cretval = g_volume_monitor_get_mount_for_uuid(cast(GVolumeMonitor*)cPtr, _uuid);
-    auto _retval = ObjectG.getDObject!Mount(cast(GMount*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -135,11 +132,11 @@ class VolumeMonitor : ObjectG
    * its elements have been unreffed with [gobject.object.ObjectG.unref].
    * Returns: a #GList of #GMount objects.
    */
-  Mount[] getMounts()
+  gio.mount.Mount[] getMounts()
   {
     GList* _cretval;
     _cretval = g_volume_monitor_get_mounts(cast(GVolumeMonitor*)cPtr);
-    auto _retval = gListToD!(Mount, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gio.mount.Mount, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -150,12 +147,12 @@ class VolumeMonitor : ObjectG
    * Returns: a #GVolume or %NULL if no such volume is available.
    *   Free the returned object with [gobject.object.ObjectG.unref].
    */
-  Volume getVolumeForUuid(string uuid)
+  gio.volume.Volume getVolumeForUuid(string uuid)
   {
     GVolume* _cretval;
     const(char)* _uuid = uuid.toCString(No.Alloc);
     _cretval = g_volume_monitor_get_volume_for_uuid(cast(GVolumeMonitor*)cPtr, _uuid);
-    auto _retval = ObjectG.getDObject!Volume(cast(GVolume*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -165,11 +162,11 @@ class VolumeMonitor : ObjectG
    * its elements have been unreffed with [gobject.object.ObjectG.unref].
    * Returns: a #GList of #GVolume objects.
    */
-  Volume[] getVolumes()
+  gio.volume.Volume[] getVolumes()
   {
     GList* _cretval;
     _cretval = g_volume_monitor_get_volumes(cast(GVolumeMonitor*)cPtr);
-    auto _retval = gListToD!(Volume, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gio.volume.Volume, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -179,8 +176,8 @@ class VolumeMonitor : ObjectG
    *   drive = the drive that changed
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias DriveChangedCallbackDlg = void delegate(Drive drive, VolumeMonitor volumeMonitor);
-  alias DriveChangedCallbackFunc = void function(Drive drive, VolumeMonitor volumeMonitor);
+  alias DriveChangedCallbackDlg = void delegate(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor);
+  alias DriveChangedCallbackFunc = void function(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor);
 
   /**
    * Connect to DriveChanged signal.
@@ -196,8 +193,8 @@ class VolumeMonitor : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
-      auto drive = getVal!Drive(&_paramVals[1]);
+      auto volumeMonitor = getVal!(gio.volume_monitor.VolumeMonitor)(_paramVals);
+      auto drive = getVal!(gio.drive.Drive)(&_paramVals[1]);
       _dClosure.dlg(drive, volumeMonitor);
     }
 
@@ -211,8 +208,8 @@ class VolumeMonitor : ObjectG
    *   drive = a #GDrive that was connected.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias DriveConnectedCallbackDlg = void delegate(Drive drive, VolumeMonitor volumeMonitor);
-  alias DriveConnectedCallbackFunc = void function(Drive drive, VolumeMonitor volumeMonitor);
+  alias DriveConnectedCallbackDlg = void delegate(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor);
+  alias DriveConnectedCallbackFunc = void function(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor);
 
   /**
    * Connect to DriveConnected signal.
@@ -228,8 +225,8 @@ class VolumeMonitor : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
-      auto drive = getVal!Drive(&_paramVals[1]);
+      auto volumeMonitor = getVal!(gio.volume_monitor.VolumeMonitor)(_paramVals);
+      auto drive = getVal!(gio.drive.Drive)(&_paramVals[1]);
       _dClosure.dlg(drive, volumeMonitor);
     }
 
@@ -243,8 +240,8 @@ class VolumeMonitor : ObjectG
    *   drive = a #GDrive that was disconnected.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias DriveDisconnectedCallbackDlg = void delegate(Drive drive, VolumeMonitor volumeMonitor);
-  alias DriveDisconnectedCallbackFunc = void function(Drive drive, VolumeMonitor volumeMonitor);
+  alias DriveDisconnectedCallbackDlg = void delegate(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor);
+  alias DriveDisconnectedCallbackFunc = void function(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor);
 
   /**
    * Connect to DriveDisconnected signal.
@@ -260,8 +257,8 @@ class VolumeMonitor : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
-      auto drive = getVal!Drive(&_paramVals[1]);
+      auto volumeMonitor = getVal!(gio.volume_monitor.VolumeMonitor)(_paramVals);
+      auto drive = getVal!(gio.drive.Drive)(&_paramVals[1]);
       _dClosure.dlg(drive, volumeMonitor);
     }
 
@@ -275,8 +272,8 @@ class VolumeMonitor : ObjectG
    *   drive = the drive where the eject button was pressed
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias DriveEjectButtonCallbackDlg = void delegate(Drive drive, VolumeMonitor volumeMonitor);
-  alias DriveEjectButtonCallbackFunc = void function(Drive drive, VolumeMonitor volumeMonitor);
+  alias DriveEjectButtonCallbackDlg = void delegate(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor);
+  alias DriveEjectButtonCallbackFunc = void function(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor);
 
   /**
    * Connect to DriveEjectButton signal.
@@ -292,8 +289,8 @@ class VolumeMonitor : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
-      auto drive = getVal!Drive(&_paramVals[1]);
+      auto volumeMonitor = getVal!(gio.volume_monitor.VolumeMonitor)(_paramVals);
+      auto drive = getVal!(gio.drive.Drive)(&_paramVals[1]);
       _dClosure.dlg(drive, volumeMonitor);
     }
 
@@ -307,8 +304,8 @@ class VolumeMonitor : ObjectG
    *   drive = the drive where the stop button was pressed
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias DriveStopButtonCallbackDlg = void delegate(Drive drive, VolumeMonitor volumeMonitor);
-  alias DriveStopButtonCallbackFunc = void function(Drive drive, VolumeMonitor volumeMonitor);
+  alias DriveStopButtonCallbackDlg = void delegate(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor);
+  alias DriveStopButtonCallbackFunc = void function(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor);
 
   /**
    * Connect to DriveStopButton signal.
@@ -324,8 +321,8 @@ class VolumeMonitor : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
-      auto drive = getVal!Drive(&_paramVals[1]);
+      auto volumeMonitor = getVal!(gio.volume_monitor.VolumeMonitor)(_paramVals);
+      auto drive = getVal!(gio.drive.Drive)(&_paramVals[1]);
       _dClosure.dlg(drive, volumeMonitor);
     }
 
@@ -339,8 +336,8 @@ class VolumeMonitor : ObjectG
    *   mount = a #GMount that was added.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias MountAddedCallbackDlg = void delegate(Mount mount, VolumeMonitor volumeMonitor);
-  alias MountAddedCallbackFunc = void function(Mount mount, VolumeMonitor volumeMonitor);
+  alias MountAddedCallbackDlg = void delegate(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor);
+  alias MountAddedCallbackFunc = void function(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor);
 
   /**
    * Connect to MountAdded signal.
@@ -356,8 +353,8 @@ class VolumeMonitor : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
-      auto mount = getVal!Mount(&_paramVals[1]);
+      auto volumeMonitor = getVal!(gio.volume_monitor.VolumeMonitor)(_paramVals);
+      auto mount = getVal!(gio.mount.Mount)(&_paramVals[1]);
       _dClosure.dlg(mount, volumeMonitor);
     }
 
@@ -371,8 +368,8 @@ class VolumeMonitor : ObjectG
    *   mount = a #GMount that changed.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias MountChangedCallbackDlg = void delegate(Mount mount, VolumeMonitor volumeMonitor);
-  alias MountChangedCallbackFunc = void function(Mount mount, VolumeMonitor volumeMonitor);
+  alias MountChangedCallbackDlg = void delegate(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor);
+  alias MountChangedCallbackFunc = void function(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor);
 
   /**
    * Connect to MountChanged signal.
@@ -388,8 +385,8 @@ class VolumeMonitor : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
-      auto mount = getVal!Mount(&_paramVals[1]);
+      auto volumeMonitor = getVal!(gio.volume_monitor.VolumeMonitor)(_paramVals);
+      auto mount = getVal!(gio.mount.Mount)(&_paramVals[1]);
       _dClosure.dlg(mount, volumeMonitor);
     }
 
@@ -405,8 +402,8 @@ class VolumeMonitor : ObjectG
    *   mount = a #GMount that is being unmounted.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias MountPreUnmountCallbackDlg = void delegate(Mount mount, VolumeMonitor volumeMonitor);
-  alias MountPreUnmountCallbackFunc = void function(Mount mount, VolumeMonitor volumeMonitor);
+  alias MountPreUnmountCallbackDlg = void delegate(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor);
+  alias MountPreUnmountCallbackFunc = void function(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor);
 
   /**
    * Connect to MountPreUnmount signal.
@@ -422,8 +419,8 @@ class VolumeMonitor : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
-      auto mount = getVal!Mount(&_paramVals[1]);
+      auto volumeMonitor = getVal!(gio.volume_monitor.VolumeMonitor)(_paramVals);
+      auto mount = getVal!(gio.mount.Mount)(&_paramVals[1]);
       _dClosure.dlg(mount, volumeMonitor);
     }
 
@@ -437,8 +434,8 @@ class VolumeMonitor : ObjectG
    *   mount = a #GMount that was removed.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias MountRemovedCallbackDlg = void delegate(Mount mount, VolumeMonitor volumeMonitor);
-  alias MountRemovedCallbackFunc = void function(Mount mount, VolumeMonitor volumeMonitor);
+  alias MountRemovedCallbackDlg = void delegate(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor);
+  alias MountRemovedCallbackFunc = void function(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor);
 
   /**
    * Connect to MountRemoved signal.
@@ -454,8 +451,8 @@ class VolumeMonitor : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
-      auto mount = getVal!Mount(&_paramVals[1]);
+      auto volumeMonitor = getVal!(gio.volume_monitor.VolumeMonitor)(_paramVals);
+      auto mount = getVal!(gio.mount.Mount)(&_paramVals[1]);
       _dClosure.dlg(mount, volumeMonitor);
     }
 
@@ -469,8 +466,8 @@ class VolumeMonitor : ObjectG
    *   volume = a #GVolume that was added.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias VolumeAddedCallbackDlg = void delegate(Volume volume, VolumeMonitor volumeMonitor);
-  alias VolumeAddedCallbackFunc = void function(Volume volume, VolumeMonitor volumeMonitor);
+  alias VolumeAddedCallbackDlg = void delegate(gio.volume.Volume volume, gio.volume_monitor.VolumeMonitor volumeMonitor);
+  alias VolumeAddedCallbackFunc = void function(gio.volume.Volume volume, gio.volume_monitor.VolumeMonitor volumeMonitor);
 
   /**
    * Connect to VolumeAdded signal.
@@ -486,8 +483,8 @@ class VolumeMonitor : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
-      auto volume = getVal!Volume(&_paramVals[1]);
+      auto volumeMonitor = getVal!(gio.volume_monitor.VolumeMonitor)(_paramVals);
+      auto volume = getVal!(gio.volume.Volume)(&_paramVals[1]);
       _dClosure.dlg(volume, volumeMonitor);
     }
 
@@ -501,8 +498,8 @@ class VolumeMonitor : ObjectG
    *   volume = a #GVolume that changed.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias VolumeChangedCallbackDlg = void delegate(Volume volume, VolumeMonitor volumeMonitor);
-  alias VolumeChangedCallbackFunc = void function(Volume volume, VolumeMonitor volumeMonitor);
+  alias VolumeChangedCallbackDlg = void delegate(gio.volume.Volume volume, gio.volume_monitor.VolumeMonitor volumeMonitor);
+  alias VolumeChangedCallbackFunc = void function(gio.volume.Volume volume, gio.volume_monitor.VolumeMonitor volumeMonitor);
 
   /**
    * Connect to VolumeChanged signal.
@@ -518,8 +515,8 @@ class VolumeMonitor : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
-      auto volume = getVal!Volume(&_paramVals[1]);
+      auto volumeMonitor = getVal!(gio.volume_monitor.VolumeMonitor)(_paramVals);
+      auto volume = getVal!(gio.volume.Volume)(&_paramVals[1]);
       _dClosure.dlg(volume, volumeMonitor);
     }
 
@@ -533,8 +530,8 @@ class VolumeMonitor : ObjectG
    *   volume = a #GVolume that was removed.
    *   volumeMonitor = the instance the signal is connected to
    */
-  alias VolumeRemovedCallbackDlg = void delegate(Volume volume, VolumeMonitor volumeMonitor);
-  alias VolumeRemovedCallbackFunc = void function(Volume volume, VolumeMonitor volumeMonitor);
+  alias VolumeRemovedCallbackDlg = void delegate(gio.volume.Volume volume, gio.volume_monitor.VolumeMonitor volumeMonitor);
+  alias VolumeRemovedCallbackFunc = void function(gio.volume.Volume volume, gio.volume_monitor.VolumeMonitor volumeMonitor);
 
   /**
    * Connect to VolumeRemoved signal.
@@ -550,8 +547,8 @@ class VolumeMonitor : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto volumeMonitor = getVal!VolumeMonitor(_paramVals);
-      auto volume = getVal!Volume(&_paramVals[1]);
+      auto volumeMonitor = getVal!(gio.volume_monitor.VolumeMonitor)(_paramVals);
+      auto volume = getVal!(gio.volume.Volume)(&_paramVals[1]);
       _dClosure.dlg(volume, volumeMonitor);
     }
 

@@ -1,7 +1,7 @@
 module gtk.print_operation_preview_mixin;
 
 public import gtk.print_operation_preview_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -69,8 +69,8 @@ template PrintOperationPreviewT()
    *   pageSetup = the `GtkPageSetup` for the current page
    *   printOperationPreview = the instance the signal is connected to
    */
-  alias GotPageSizeCallbackDlg = void delegate(PrintContext context, PageSetup pageSetup, PrintOperationPreview printOperationPreview);
-  alias GotPageSizeCallbackFunc = void function(PrintContext context, PageSetup pageSetup, PrintOperationPreview printOperationPreview);
+  alias GotPageSizeCallbackDlg = void delegate(gtk.print_context.PrintContext context, gtk.page_setup.PageSetup pageSetup, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
+  alias GotPageSizeCallbackFunc = void function(gtk.print_context.PrintContext context, gtk.page_setup.PageSetup pageSetup, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
 
   /**
    * Connect to GotPageSize signal.
@@ -86,9 +86,9 @@ template PrintOperationPreviewT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printOperationPreview = getVal!PrintOperationPreview(_paramVals);
-      auto context = getVal!PrintContext(&_paramVals[1]);
-      auto pageSetup = getVal!PageSetup(&_paramVals[2]);
+      auto printOperationPreview = getVal!(gtk.print_operation_preview.PrintOperationPreview)(_paramVals);
+      auto context = getVal!(gtk.print_context.PrintContext)(&_paramVals[1]);
+      auto pageSetup = getVal!(gtk.page_setup.PageSetup)(&_paramVals[2]);
       _dClosure.dlg(context, pageSetup, printOperationPreview);
     }
 
@@ -104,8 +104,8 @@ template PrintOperationPreviewT()
    *   context = the current `GtkPrintContext`
    *   printOperationPreview = the instance the signal is connected to
    */
-  alias ReadyCallbackDlg = void delegate(PrintContext context, PrintOperationPreview printOperationPreview);
-  alias ReadyCallbackFunc = void function(PrintContext context, PrintOperationPreview printOperationPreview);
+  alias ReadyCallbackDlg = void delegate(gtk.print_context.PrintContext context, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
+  alias ReadyCallbackFunc = void function(gtk.print_context.PrintContext context, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
 
   /**
    * Connect to Ready signal.
@@ -121,8 +121,8 @@ template PrintOperationPreviewT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printOperationPreview = getVal!PrintOperationPreview(_paramVals);
-      auto context = getVal!PrintContext(&_paramVals[1]);
+      auto printOperationPreview = getVal!(gtk.print_operation_preview.PrintOperationPreview)(_paramVals);
+      auto context = getVal!(gtk.print_context.PrintContext)(&_paramVals[1]);
       _dClosure.dlg(context, printOperationPreview);
     }
 

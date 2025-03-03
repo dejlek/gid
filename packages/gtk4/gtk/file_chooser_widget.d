@@ -1,6 +1,6 @@
 module gtk.file_chooser_widget;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -25,7 +25,7 @@ import gtk.widget;
 
  * Deprecated: Direct use of `GtkFileChooserWidget` is deprecated
  */
-class FileChooserWidget : Widget, FileChooser
+class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -57,7 +57,7 @@ class FileChooserWidget : Widget, FileChooser
 
    * Deprecated: Direct use of `GtkFileChooserWidget` is deprecated
    */
-  this(FileChooserAction action)
+  this(gtk.types.FileChooserAction action)
   {
     GtkWidget* _cretval;
     _cretval = gtk_file_chooser_widget_new(action);
@@ -72,8 +72,8 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Alt</kbd>-<kbd>D</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias DesktopFolderCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
-  alias DesktopFolderCallbackFunc = void function(FileChooserWidget fileChooserWidget);
+  alias DesktopFolderCallbackDlg = void delegate(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
+  alias DesktopFolderCallbackFunc = void function(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to DesktopFolder signal.
@@ -89,7 +89,7 @@ class FileChooserWidget : Widget, FileChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
+      auto fileChooserWidget = getVal!(gtk.file_chooser_widget.FileChooserWidget)(_paramVals);
       _dClosure.dlg(fileChooserWidget);
     }
 
@@ -109,8 +109,8 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Alt</kbd>-<kbd>Down</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias DownFolderCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
-  alias DownFolderCallbackFunc = void function(FileChooserWidget fileChooserWidget);
+  alias DownFolderCallbackDlg = void delegate(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
+  alias DownFolderCallbackFunc = void function(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to DownFolder signal.
@@ -126,7 +126,7 @@ class FileChooserWidget : Widget, FileChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
+      auto fileChooserWidget = getVal!(gtk.file_chooser_widget.FileChooserWidget)(_paramVals);
       _dClosure.dlg(fileChooserWidget);
     }
 
@@ -142,8 +142,8 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Alt</kbd>-<kbd>Home</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias HomeFolderCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
-  alias HomeFolderCallbackFunc = void function(FileChooserWidget fileChooserWidget);
+  alias HomeFolderCallbackDlg = void delegate(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
+  alias HomeFolderCallbackFunc = void function(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to HomeFolder signal.
@@ -159,7 +159,7 @@ class FileChooserWidget : Widget, FileChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
+      auto fileChooserWidget = getVal!(gtk.file_chooser_widget.FileChooserWidget)(_paramVals);
       _dClosure.dlg(fileChooserWidget);
     }
 
@@ -182,8 +182,8 @@ class FileChooserWidget : Widget, FileChooser
    *   path = a string that gets put in the text entry for the file name
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias LocationPopupCallbackDlg = void delegate(string path, FileChooserWidget fileChooserWidget);
-  alias LocationPopupCallbackFunc = void function(string path, FileChooserWidget fileChooserWidget);
+  alias LocationPopupCallbackDlg = void delegate(string path, gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
+  alias LocationPopupCallbackFunc = void function(string path, gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to LocationPopup signal.
@@ -199,8 +199,8 @@ class FileChooserWidget : Widget, FileChooser
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
-      auto path = getVal!string(&_paramVals[1]);
+      auto fileChooserWidget = getVal!(gtk.file_chooser_widget.FileChooserWidget)(_paramVals);
+      auto path = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(path, fileChooserWidget);
     }
 
@@ -216,8 +216,8 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Control</kbd>-<kbd>V</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias LocationPopupOnPasteCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
-  alias LocationPopupOnPasteCallbackFunc = void function(FileChooserWidget fileChooserWidget);
+  alias LocationPopupOnPasteCallbackDlg = void delegate(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
+  alias LocationPopupOnPasteCallbackFunc = void function(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to LocationPopupOnPaste signal.
@@ -233,7 +233,7 @@ class FileChooserWidget : Widget, FileChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
+      auto fileChooserWidget = getVal!(gtk.file_chooser_widget.FileChooserWidget)(_paramVals);
       _dClosure.dlg(fileChooserWidget);
     }
 
@@ -250,8 +250,8 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Control</kbd>-<kbd>L</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias LocationTogglePopupCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
-  alias LocationTogglePopupCallbackFunc = void function(FileChooserWidget fileChooserWidget);
+  alias LocationTogglePopupCallbackDlg = void delegate(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
+  alias LocationTogglePopupCallbackFunc = void function(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to LocationTogglePopup signal.
@@ -267,7 +267,7 @@ class FileChooserWidget : Widget, FileChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
+      auto fileChooserWidget = getVal!(gtk.file_chooser_widget.FileChooserWidget)(_paramVals);
       _dClosure.dlg(fileChooserWidget);
     }
 
@@ -282,8 +282,8 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Alt</kbd>-<kbd>P</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias PlacesShortcutCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
-  alias PlacesShortcutCallbackFunc = void function(FileChooserWidget fileChooserWidget);
+  alias PlacesShortcutCallbackDlg = void delegate(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
+  alias PlacesShortcutCallbackFunc = void function(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to PlacesShortcut signal.
@@ -299,7 +299,7 @@ class FileChooserWidget : Widget, FileChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
+      auto fileChooserWidget = getVal!(gtk.file_chooser_widget.FileChooserWidget)(_paramVals);
       _dClosure.dlg(fileChooserWidget);
     }
 
@@ -323,8 +323,8 @@ class FileChooserWidget : Widget, FileChooser
    *   bookmarkIndex = the number of the bookmark to switch to
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias QuickBookmarkCallbackDlg = void delegate(int bookmarkIndex, FileChooserWidget fileChooserWidget);
-  alias QuickBookmarkCallbackFunc = void function(int bookmarkIndex, FileChooserWidget fileChooserWidget);
+  alias QuickBookmarkCallbackDlg = void delegate(int bookmarkIndex, gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
+  alias QuickBookmarkCallbackFunc = void function(int bookmarkIndex, gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to QuickBookmark signal.
@@ -340,8 +340,8 @@ class FileChooserWidget : Widget, FileChooser
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
-      auto bookmarkIndex = getVal!int(&_paramVals[1]);
+      auto fileChooserWidget = getVal!(gtk.file_chooser_widget.FileChooserWidget)(_paramVals);
+      auto bookmarkIndex = getVal!(int)(&_paramVals[1]);
       _dClosure.dlg(bookmarkIndex, fileChooserWidget);
     }
 
@@ -356,8 +356,8 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Alt</kbd>-<kbd>R</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias RecentShortcutCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
-  alias RecentShortcutCallbackFunc = void function(FileChooserWidget fileChooserWidget);
+  alias RecentShortcutCallbackDlg = void delegate(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
+  alias RecentShortcutCallbackFunc = void function(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to RecentShortcut signal.
@@ -373,7 +373,7 @@ class FileChooserWidget : Widget, FileChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
+      auto fileChooserWidget = getVal!(gtk.file_chooser_widget.FileChooserWidget)(_paramVals);
       _dClosure.dlg(fileChooserWidget);
     }
 
@@ -388,8 +388,8 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Alt</kbd>-<kbd>S</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias SearchShortcutCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
-  alias SearchShortcutCallbackFunc = void function(FileChooserWidget fileChooserWidget);
+  alias SearchShortcutCallbackDlg = void delegate(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
+  alias SearchShortcutCallbackFunc = void function(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to SearchShortcut signal.
@@ -405,7 +405,7 @@ class FileChooserWidget : Widget, FileChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
+      auto fileChooserWidget = getVal!(gtk.file_chooser_widget.FileChooserWidget)(_paramVals);
       _dClosure.dlg(fileChooserWidget);
     }
 
@@ -420,8 +420,8 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Control</kbd>-<kbd>H</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias ShowHiddenCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
-  alias ShowHiddenCallbackFunc = void function(FileChooserWidget fileChooserWidget);
+  alias ShowHiddenCallbackDlg = void delegate(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
+  alias ShowHiddenCallbackFunc = void function(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to ShowHidden signal.
@@ -437,7 +437,7 @@ class FileChooserWidget : Widget, FileChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
+      auto fileChooserWidget = getVal!(gtk.file_chooser_widget.FileChooserWidget)(_paramVals);
       _dClosure.dlg(fileChooserWidget);
     }
 
@@ -453,8 +453,8 @@ class FileChooserWidget : Widget, FileChooser
    * The default binding for this signal is <kbd>Alt</kbd>-<kbd>Up</kbd>.
    *   fileChooserWidget = the instance the signal is connected to
    */
-  alias UpFolderCallbackDlg = void delegate(FileChooserWidget fileChooserWidget);
-  alias UpFolderCallbackFunc = void function(FileChooserWidget fileChooserWidget);
+  alias UpFolderCallbackDlg = void delegate(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
+  alias UpFolderCallbackFunc = void function(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget);
 
   /**
    * Connect to UpFolder signal.
@@ -470,7 +470,7 @@ class FileChooserWidget : Widget, FileChooser
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fileChooserWidget = getVal!FileChooserWidget(_paramVals);
+      auto fileChooserWidget = getVal!(gtk.file_chooser_widget.FileChooserWidget)(_paramVals);
       _dClosure.dlg(fileChooserWidget);
     }
 

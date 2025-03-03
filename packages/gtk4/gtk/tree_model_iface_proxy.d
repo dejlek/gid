@@ -5,7 +5,7 @@ import gtk.tree_model;
 import gtk.tree_model_mixin;
 
 /// Proxy object for Gtk.TreeModel interface when a GObject has no applicable D binding
-class TreeModelIfaceProxy : IfaceProxy, TreeModel
+class TreeModelIfaceProxy : IfaceProxy, gtk.tree_model.TreeModel
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class TreeModelIfaceProxy : IfaceProxy, TreeModel
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(TreeModel);
+    return typeid(gtk.tree_model.TreeModel);
   }
 
   mixin TreeModelT!();

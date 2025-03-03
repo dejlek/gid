@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.frame_timings;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 
@@ -38,7 +38,7 @@ import gobject.object;
  * and the value inside the [gdk.frame_clock.FrameClock.update] signal of the clock,
  * they will stay exactly synchronized.
  */
-class FrameClock : ObjectG
+class FrameClock : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -86,11 +86,11 @@ class FrameClock : ObjectG
    *   processed, for the previous frame. Before any frames have been
    *   processed, returns %NULL.
    */
-  FrameTimings getCurrentTimings()
+  gdk.frame_timings.FrameTimings getCurrentTimings()
   {
     GdkFrameTimings* _cretval;
     _cretval = gdk_frame_clock_get_current_timings(cast(GdkFrameClock*)cPtr);
-    auto _retval = _cretval ? new FrameTimings(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.frame_timings.FrameTimings(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -189,11 +189,11 @@ class FrameClock : ObjectG
    * Returns: the `GdkFrameTimings` object
    *   for the specified frame, or %NULL if it is not available
    */
-  FrameTimings getTimings(long frameCounter)
+  gdk.frame_timings.FrameTimings getTimings(long frameCounter)
   {
     GdkFrameTimings* _cretval;
     _cretval = gdk_frame_clock_get_timings(cast(GdkFrameClock*)cPtr, frameCounter);
-    auto _retval = _cretval ? new FrameTimings(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.frame_timings.FrameTimings(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class FrameClock : ObjectG
    * Params:
    *   phase = the phase that is requested
    */
-  void requestPhase(FrameClockPhase phase)
+  void requestPhase(gdk.types.FrameClockPhase phase)
   {
     gdk_frame_clock_request_phase(cast(GdkFrameClock*)cPtr, phase);
   }
@@ -221,8 +221,8 @@ class FrameClock : ObjectG
    * Applications should generally not handle this signal.
    *   frameClock = the instance the signal is connected to
    */
-  alias AfterPaintCallbackDlg = void delegate(FrameClock frameClock);
-  alias AfterPaintCallbackFunc = void function(FrameClock frameClock);
+  alias AfterPaintCallbackDlg = void delegate(gdk.frame_clock.FrameClock frameClock);
+  alias AfterPaintCallbackFunc = void function(gdk.frame_clock.FrameClock frameClock);
 
   /**
    * Connect to AfterPaint signal.
@@ -238,7 +238,7 @@ class FrameClock : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto frameClock = getVal!FrameClock(_paramVals);
+      auto frameClock = getVal!(gdk.frame_clock.FrameClock)(_paramVals);
       _dClosure.dlg(frameClock);
     }
 
@@ -251,8 +251,8 @@ class FrameClock : ObjectG
    * Applications should generally not handle this signal.
    *   frameClock = the instance the signal is connected to
    */
-  alias BeforePaintCallbackDlg = void delegate(FrameClock frameClock);
-  alias BeforePaintCallbackFunc = void function(FrameClock frameClock);
+  alias BeforePaintCallbackDlg = void delegate(gdk.frame_clock.FrameClock frameClock);
+  alias BeforePaintCallbackFunc = void function(gdk.frame_clock.FrameClock frameClock);
 
   /**
    * Connect to BeforePaint signal.
@@ -268,7 +268,7 @@ class FrameClock : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto frameClock = getVal!FrameClock(_paramVals);
+      auto frameClock = getVal!(gdk.frame_clock.FrameClock)(_paramVals);
       _dClosure.dlg(frameClock);
     }
 
@@ -282,8 +282,8 @@ class FrameClock : ObjectG
    * Applications should not handle this signal.
    *   frameClock = the instance the signal is connected to
    */
-  alias FlushEventsCallbackDlg = void delegate(FrameClock frameClock);
-  alias FlushEventsCallbackFunc = void function(FrameClock frameClock);
+  alias FlushEventsCallbackDlg = void delegate(gdk.frame_clock.FrameClock frameClock);
+  alias FlushEventsCallbackFunc = void function(gdk.frame_clock.FrameClock frameClock);
 
   /**
    * Connect to FlushEvents signal.
@@ -299,7 +299,7 @@ class FrameClock : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto frameClock = getVal!FrameClock(_paramVals);
+      auto frameClock = getVal!(gdk.frame_clock.FrameClock)(_paramVals);
       _dClosure.dlg(frameClock);
     }
 
@@ -314,8 +314,8 @@ class FrameClock : ObjectG
    * should be performed. GTK normally handles this internally.
    *   frameClock = the instance the signal is connected to
    */
-  alias LayoutCallbackDlg = void delegate(FrameClock frameClock);
-  alias LayoutCallbackFunc = void function(FrameClock frameClock);
+  alias LayoutCallbackDlg = void delegate(gdk.frame_clock.FrameClock frameClock);
+  alias LayoutCallbackFunc = void function(gdk.frame_clock.FrameClock frameClock);
 
   /**
    * Connect to Layout signal.
@@ -331,7 +331,7 @@ class FrameClock : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto frameClock = getVal!FrameClock(_paramVals);
+      auto frameClock = getVal!(gdk.frame_clock.FrameClock)(_paramVals);
       _dClosure.dlg(frameClock);
     }
 
@@ -348,8 +348,8 @@ class FrameClock : ObjectG
    * by GTK.
    *   frameClock = the instance the signal is connected to
    */
-  alias PaintCallbackDlg = void delegate(FrameClock frameClock);
-  alias PaintCallbackFunc = void function(FrameClock frameClock);
+  alias PaintCallbackDlg = void delegate(gdk.frame_clock.FrameClock frameClock);
+  alias PaintCallbackFunc = void function(gdk.frame_clock.FrameClock frameClock);
 
   /**
    * Connect to Paint signal.
@@ -365,7 +365,7 @@ class FrameClock : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto frameClock = getVal!FrameClock(_paramVals);
+      auto frameClock = getVal!(gdk.frame_clock.FrameClock)(_paramVals);
       _dClosure.dlg(frameClock);
     }
 
@@ -379,8 +379,8 @@ class FrameClock : ObjectG
    * event processing. Applications should not handle this signal.
    *   frameClock = the instance the signal is connected to
    */
-  alias ResumeEventsCallbackDlg = void delegate(FrameClock frameClock);
-  alias ResumeEventsCallbackFunc = void function(FrameClock frameClock);
+  alias ResumeEventsCallbackDlg = void delegate(gdk.frame_clock.FrameClock frameClock);
+  alias ResumeEventsCallbackFunc = void function(gdk.frame_clock.FrameClock frameClock);
 
   /**
    * Connect to ResumeEvents signal.
@@ -396,7 +396,7 @@ class FrameClock : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto frameClock = getVal!FrameClock(_paramVals);
+      auto frameClock = getVal!(gdk.frame_clock.FrameClock)(_paramVals);
       _dClosure.dlg(frameClock);
     }
 
@@ -413,8 +413,8 @@ class FrameClock : ObjectG
    * as a more convenient interface.
    *   frameClock = the instance the signal is connected to
    */
-  alias UpdateCallbackDlg = void delegate(FrameClock frameClock);
-  alias UpdateCallbackFunc = void function(FrameClock frameClock);
+  alias UpdateCallbackDlg = void delegate(gdk.frame_clock.FrameClock frameClock);
+  alias UpdateCallbackFunc = void function(gdk.frame_clock.FrameClock frameClock);
 
   /**
    * Connect to Update signal.
@@ -430,7 +430,7 @@ class FrameClock : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto frameClock = getVal!FrameClock(_paramVals);
+      auto frameClock = getVal!(gdk.frame_clock.FrameClock)(_paramVals);
       _dClosure.dlg(frameClock);
     }
 

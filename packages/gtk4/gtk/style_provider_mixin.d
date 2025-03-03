@@ -1,7 +1,7 @@
 module gtk.style_provider_mixin;
 
 public import gtk.style_provider_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -19,8 +19,8 @@ public import gtk.types;
 template StyleProviderT()
 {
 
-  alias GtkPrivateChangedCallbackDlg = void delegate(StyleProvider styleProvider);
-  alias GtkPrivateChangedCallbackFunc = void function(StyleProvider styleProvider);
+  alias GtkPrivateChangedCallbackDlg = void delegate(gtk.style_provider.StyleProvider styleProvider);
+  alias GtkPrivateChangedCallbackFunc = void function(gtk.style_provider.StyleProvider styleProvider);
 
   /**
    * Connect to GtkPrivateChanged signal.
@@ -36,7 +36,7 @@ template StyleProviderT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto styleProvider = getVal!StyleProvider(_paramVals);
+      auto styleProvider = getVal!(gtk.style_provider.StyleProvider)(_paramVals);
       _dClosure.dlg(styleProvider);
     }
 

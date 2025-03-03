@@ -3,13 +3,13 @@ module atk.text_range;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
  * A structure used to describe a text range.
  */
-class TextRange : Boxed
+class TextRange : gobject.boxed.Boxed
 {
 
   this()
@@ -38,12 +38,12 @@ class TextRange : Boxed
     return getType();
   }
 
-  @property TextRectangle bounds()
+  @property atk.types.TextRectangle bounds()
   {
     return (cast(AtkTextRange*)cPtr).bounds;
   }
 
-  @property void bounds(TextRectangle propval)
+  @property void bounds(atk.types.TextRectangle propval)
   {
     (cast(AtkTextRange*)cPtr).bounds = propval;
   }

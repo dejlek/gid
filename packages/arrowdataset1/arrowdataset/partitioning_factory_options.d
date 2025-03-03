@@ -3,10 +3,10 @@ module arrowdataset.partitioning_factory_options;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class PartitioningFactoryOptions : ObjectG
+class PartitioningFactoryOptions : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

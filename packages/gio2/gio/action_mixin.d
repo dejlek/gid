@@ -1,7 +1,7 @@
 module gio.action_mixin;
 
 public import gio.action_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.types;
@@ -49,7 +49,7 @@ template ActionT()
    * Params:
    *   parameter = the parameter to the activation
    */
-  override void activate(VariantG parameter)
+  override void activate(glib.variant.VariantG parameter)
   {
     g_action_activate(cast(GAction*)cPtr, parameter ? cast(VariantC*)parameter.cPtr(No.Dup) : null);
   }
@@ -65,7 +65,7 @@ template ActionT()
    * Params:
    *   value = the new state
    */
-  override void changeState(VariantG value)
+  override void changeState(glib.variant.VariantG value)
   {
     g_action_change_state(cast(GAction*)cPtr, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
   }
@@ -91,7 +91,7 @@ template ActionT()
   {
     const(char)* _cretval;
     _cretval = g_action_get_name(cast(GAction*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -104,11 +104,11 @@ template ActionT()
    * #GVariant, but %NULL instead.
    * Returns: the parameter type
    */
-  override VariantType getParameterType()
+  override glib.variant_type.VariantType getParameterType()
   {
     const(GVariantType)* _cretval;
     _cretval = g_action_get_parameter_type(cast(GAction*)cPtr);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -121,11 +121,11 @@ template ActionT()
    * [glib.variant.VariantG.unref] when it is no longer required.
    * Returns: the current state of the action
    */
-  override VariantG getState()
+  override glib.variant.VariantG getState()
   {
     VariantC* _cretval;
     _cretval = g_action_get_state(cast(GAction*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -146,11 +146,11 @@ template ActionT()
    * [glib.variant.VariantG.unref] when it is no longer required.
    * Returns: the state range hint
    */
-  override VariantG getStateHint()
+  override glib.variant.VariantG getStateHint()
   {
     VariantC* _cretval;
     _cretval = g_action_get_state_hint(cast(GAction*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -167,11 +167,11 @@ template ActionT()
    * will return %NULL and you must not call [gio.action.Action.changeState].
    * Returns: the state type, if the action is stateful
    */
-  override VariantType getStateType()
+  override glib.variant_type.VariantType getStateType()
   {
     const(GVariantType)* _cretval;
     _cretval = g_action_get_state_type(cast(GAction*)cPtr);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

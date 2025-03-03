@@ -3,7 +3,7 @@ module cairo.path;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -18,7 +18,7 @@ import gobject.boxed;
  * portions $(LPAREN)defined in #cairo_path_data_type_t$(RPAREN), since the data
  * includes both headers and coordinates for each portion.
  */
-class Path : Boxed
+class Path : gobject.boxed.Boxed
 {
 
   this()
@@ -47,12 +47,12 @@ class Path : Boxed
     return getType();
   }
 
-  @property Status status()
+  @property cairo.types.Status status()
   {
-    return cast(Status)(cast(cairo_path_t*)cPtr).status;
+    return cast(cairo.types.Status)(cast(cairo_path_t*)cPtr).status;
   }
 
-  @property void status(Status propval)
+  @property void status(cairo.types.Status propval)
   {
     (cast(cairo_path_t*)cPtr).status = cast(cairo_status_t)propval;
   }

@@ -2,7 +2,7 @@ module gsk.cairo_node;
 
 import cairo.context;
 import cairo.surface;
-import gid.global;
+import gid.gid;
 import graphene.rect;
 import gsk.c.functions;
 import gsk.c.types;
@@ -12,7 +12,7 @@ import gsk.types;
 /**
  * A render node for a Cairo surface.
  */
-class CairoNode : RenderNode
+class CairoNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -31,10 +31,10 @@ class CairoNode : RenderNode
    *   bounds = the rectangle to render to
    * Returns: A new `GskRenderNode`
    */
-  this(Rect bounds)
+  this(graphene.rect.Rect bounds)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_cairo_node_new(bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null);
+    _cretval = gsk_cairo_node_new(bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -46,11 +46,11 @@ class CairoNode : RenderNode
    * Returns: a Cairo context used for drawing; use
    *   [cairo.global.destroy] when done drawing
    */
-  Context getDrawContext()
+  cairo.context.Context getDrawContext()
   {
     cairo_t* _cretval;
     _cretval = gsk_cairo_node_get_draw_context(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Context(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -58,11 +58,11 @@ class CairoNode : RenderNode
    * Retrieves the Cairo surface used by the render node.
    * Returns: a Cairo surface
    */
-  Surface getSurface()
+  cairo.surface.Surface getSurface()
   {
     cairo_surface_t* _cretval;
     _cretval = gsk_cairo_node_get_surface(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

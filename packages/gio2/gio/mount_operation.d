@@ -1,6 +1,6 @@
 module gio.mount_operation;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -28,7 +28,7 @@ import gobject.object;
  * [VeraCrypt](https://www.veracrypt.fr/) is a maintained fork of TrueCrypt with various
  * improvements and auditing fixes.
  */
-class MountOperation : ObjectG
+class MountOperation : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -90,7 +90,7 @@ class MountOperation : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_mount_operation_get_domain(cast(GMountOperation*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class MountOperation : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_mount_operation_get_password(cast(GMountOperation*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -134,11 +134,11 @@ class MountOperation : ObjectG
    * Gets the state of saving passwords for the mount operation.
    * Returns: a #GPasswordSave flag.
    */
-  PasswordSave getPasswordSave()
+  gio.types.PasswordSave getPasswordSave()
   {
     GPasswordSave _cretval;
     _cretval = g_mount_operation_get_password_save(cast(GMountOperation*)cPtr);
-    PasswordSave _retval = cast(PasswordSave)_cretval;
+    gio.types.PasswordSave _retval = cast(gio.types.PasswordSave)_cretval;
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class MountOperation : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_mount_operation_get_username(cast(GMountOperation*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class MountOperation : ObjectG
    * Params:
    *   result = a #GMountOperationResult
    */
-  void reply(MountOperationResult result)
+  void reply(gio.types.MountOperationResult result)
   {
     g_mount_operation_reply(cast(GMountOperation*)cPtr, result);
   }
@@ -242,7 +242,7 @@ class MountOperation : ObjectG
    * Params:
    *   save = a set of #GPasswordSave flags.
    */
-  void setPasswordSave(PasswordSave save)
+  void setPasswordSave(gio.types.PasswordSave save)
   {
     g_mount_operation_set_password_save(cast(GMountOperation*)cPtr, save);
   }
@@ -275,8 +275,8 @@ class MountOperation : ObjectG
    * by dismissing open password dialogs.
    *   mountOperation = the instance the signal is connected to
    */
-  alias AbortedCallbackDlg = void delegate(MountOperation mountOperation);
-  alias AbortedCallbackFunc = void function(MountOperation mountOperation);
+  alias AbortedCallbackDlg = void delegate(gio.mount_operation.MountOperation mountOperation);
+  alias AbortedCallbackFunc = void function(gio.mount_operation.MountOperation mountOperation);
 
   /**
    * Connect to Aborted signal.
@@ -292,7 +292,7 @@ class MountOperation : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto mountOperation = getVal!MountOperation(_paramVals);
+      auto mountOperation = getVal!(gio.mount_operation.MountOperation)(_paramVals);
       _dClosure.dlg(mountOperation);
     }
 
@@ -312,8 +312,8 @@ class MountOperation : ObjectG
    *   flags = a set of #GAskPasswordFlags.
    *   mountOperation = the instance the signal is connected to
    */
-  alias AskPasswordCallbackDlg = void delegate(string message, string defaultUser, string defaultDomain, AskPasswordFlags flags, MountOperation mountOperation);
-  alias AskPasswordCallbackFunc = void function(string message, string defaultUser, string defaultDomain, AskPasswordFlags flags, MountOperation mountOperation);
+  alias AskPasswordCallbackDlg = void delegate(string message, string defaultUser, string defaultDomain, gio.types.AskPasswordFlags flags, gio.mount_operation.MountOperation mountOperation);
+  alias AskPasswordCallbackFunc = void function(string message, string defaultUser, string defaultDomain, gio.types.AskPasswordFlags flags, gio.mount_operation.MountOperation mountOperation);
 
   /**
    * Connect to AskPassword signal.
@@ -329,11 +329,11 @@ class MountOperation : ObjectG
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto mountOperation = getVal!MountOperation(_paramVals);
-      auto message = getVal!string(&_paramVals[1]);
-      auto defaultUser = getVal!string(&_paramVals[2]);
-      auto defaultDomain = getVal!string(&_paramVals[3]);
-      auto flags = getVal!AskPasswordFlags(&_paramVals[4]);
+      auto mountOperation = getVal!(gio.mount_operation.MountOperation)(_paramVals);
+      auto message = getVal!(string)(&_paramVals[1]);
+      auto defaultUser = getVal!(string)(&_paramVals[2]);
+      auto defaultDomain = getVal!(string)(&_paramVals[3]);
+      auto flags = getVal!(gio.types.AskPasswordFlags)(&_paramVals[4]);
       _dClosure.dlg(message, defaultUser, defaultDomain, flags, mountOperation);
     }
 
@@ -352,8 +352,8 @@ class MountOperation : ObjectG
    *   choices = an array of strings for each possible choice.
    *   mountOperation = the instance the signal is connected to
    */
-  alias AskQuestionCallbackDlg = void delegate(string message, string[] choices, MountOperation mountOperation);
-  alias AskQuestionCallbackFunc = void function(string message, string[] choices, MountOperation mountOperation);
+  alias AskQuestionCallbackDlg = void delegate(string message, string[] choices, gio.mount_operation.MountOperation mountOperation);
+  alias AskQuestionCallbackFunc = void function(string message, string[] choices, gio.mount_operation.MountOperation mountOperation);
 
   /**
    * Connect to AskQuestion signal.
@@ -369,8 +369,8 @@ class MountOperation : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto mountOperation = getVal!MountOperation(_paramVals);
-      auto message = getVal!string(&_paramVals[1]);
+      auto mountOperation = getVal!(gio.mount_operation.MountOperation)(_paramVals);
+      auto message = getVal!(string)(&_paramVals[1]);
       auto choices = getVal!(char**)(&_paramVals[2]);
       string[] _choices;
       uint _lenchoices;
@@ -392,8 +392,8 @@ class MountOperation : ObjectG
    *   result = a #GMountOperationResult indicating how the request was handled
    *   mountOperation = the instance the signal is connected to
    */
-  alias ReplyCallbackDlg = void delegate(MountOperationResult result, MountOperation mountOperation);
-  alias ReplyCallbackFunc = void function(MountOperationResult result, MountOperation mountOperation);
+  alias ReplyCallbackDlg = void delegate(gio.types.MountOperationResult result, gio.mount_operation.MountOperation mountOperation);
+  alias ReplyCallbackFunc = void function(gio.types.MountOperationResult result, gio.mount_operation.MountOperation mountOperation);
 
   /**
    * Connect to Reply signal.
@@ -409,8 +409,8 @@ class MountOperation : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto mountOperation = getVal!MountOperation(_paramVals);
-      auto result = getVal!MountOperationResult(&_paramVals[1]);
+      auto mountOperation = getVal!(gio.mount_operation.MountOperation)(_paramVals);
+      auto result = getVal!(gio.types.MountOperationResult)(&_paramVals[1]);
       _dClosure.dlg(result, mountOperation);
     }
 
@@ -441,8 +441,8 @@ class MountOperation : ObjectG
    *     is completed
    *   mountOperation = the instance the signal is connected to
    */
-  alias ShowUnmountProgressCallbackDlg = void delegate(string message, long timeLeft, long bytesLeft, MountOperation mountOperation);
-  alias ShowUnmountProgressCallbackFunc = void function(string message, long timeLeft, long bytesLeft, MountOperation mountOperation);
+  alias ShowUnmountProgressCallbackDlg = void delegate(string message, long timeLeft, long bytesLeft, gio.mount_operation.MountOperation mountOperation);
+  alias ShowUnmountProgressCallbackFunc = void function(string message, long timeLeft, long bytesLeft, gio.mount_operation.MountOperation mountOperation);
 
   /**
    * Connect to ShowUnmountProgress signal.
@@ -458,10 +458,10 @@ class MountOperation : ObjectG
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto mountOperation = getVal!MountOperation(_paramVals);
-      auto message = getVal!string(&_paramVals[1]);
-      auto timeLeft = getVal!long(&_paramVals[2]);
-      auto bytesLeft = getVal!long(&_paramVals[3]);
+      auto mountOperation = getVal!(gio.mount_operation.MountOperation)(_paramVals);
+      auto message = getVal!(string)(&_paramVals[1]);
+      auto timeLeft = getVal!(long)(&_paramVals[2]);
+      auto bytesLeft = getVal!(long)(&_paramVals[3]);
       _dClosure.dlg(message, timeLeft, bytesLeft, mountOperation);
     }
 

@@ -1,6 +1,6 @@
 module soup.message_headers;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import soup.c.functions;
 import soup.c.types;
@@ -9,7 +9,7 @@ import soup.types;
 /**
  * The HTTP message headers associated with a request or response.
  */
-class MessageHeaders : Boxed
+class MessageHeaders : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -42,7 +42,7 @@ class MessageHeaders : Boxed
    *   type = the type of headers
    * Returns: a new #SoupMessageHeaders
    */
-  this(MessageHeadersType type)
+  this(soup.types.MessageHeadersType type)
   {
     SoupMessageHeaders* _cretval;
     _cretval = soup_message_headers_new(type);
@@ -97,11 +97,11 @@ class MessageHeaders : Boxed
    * Params:
    *   func = callback function to run for each header
    */
-  void foreach_(MessageHeadersForeachFunc func)
+  void foreach_(soup.types.MessageHeadersForeachFunc func)
   {
     extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData)
     {
-      auto _dlg = cast(MessageHeadersForeachFunc*)userData;
+      auto _dlg = cast(soup.types.MessageHeadersForeachFunc*)userData;
       string _name = name.fromCString(No.Free);
       string _value = value.fromCString(No.Free);
 
@@ -118,7 +118,7 @@ class MessageHeaders : Boxed
    * Params:
    *   ranges = an array of #SoupRange
    */
-  void freeRanges(Range ranges)
+  void freeRanges(soup.types.Range ranges)
   {
     soup_message_headers_free_ranges(cast(SoupMessageHeaders*)cPtr, &ranges);
   }
@@ -207,7 +207,7 @@ class MessageHeaders : Boxed
     const(char)* _cretval;
     GHashTable* _params;
     _cretval = soup_message_headers_get_content_type(cast(SoupMessageHeaders*)cPtr, &_params);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     params = gHashTableToD!(string, string, GidOwnership.Full)(_params);
     return _retval;
   }
@@ -219,11 +219,11 @@ class MessageHeaders : Boxed
    * actually include a body.
    * Returns: the encoding declared by hdrs.
    */
-  Encoding getEncoding()
+  soup.types.Encoding getEncoding()
   {
     SoupEncoding _cretval;
     _cretval = soup_message_headers_get_encoding(cast(SoupMessageHeaders*)cPtr);
-    Encoding _retval = cast(Encoding)_cretval;
+    soup.types.Encoding _retval = cast(soup.types.Encoding)_cretval;
     return _retval;
   }
 
@@ -233,11 +233,11 @@ class MessageHeaders : Boxed
    * %SOUP_EXPECTATION_UNRECOGNIZED.
    * Returns: the contents of hdrs's "Expect" header
    */
-  Expectation getExpectations()
+  soup.types.Expectation getExpectations()
   {
     SoupExpectation _cretval;
     _cretval = soup_message_headers_get_expectations(cast(SoupMessageHeaders*)cPtr);
-    Expectation _retval = cast(Expectation)_cretval;
+    soup.types.Expectation _retval = cast(soup.types.Expectation)_cretval;
     return _retval;
   }
 
@@ -245,11 +245,11 @@ class MessageHeaders : Boxed
    * Gets the type of headers.
    * Returns: the header's type.
    */
-  MessageHeadersType getHeadersType()
+  soup.types.MessageHeadersType getHeadersType()
   {
     SoupMessageHeadersType _cretval;
     _cretval = soup_message_headers_get_headers_type(cast(SoupMessageHeaders*)cPtr);
-    MessageHeadersType _retval = cast(MessageHeadersType)_cretval;
+    soup.types.MessageHeadersType _retval = cast(soup.types.MessageHeadersType)_cretval;
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class MessageHeaders : Boxed
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = soup_message_headers_get_list(cast(SoupMessageHeaders*)cPtr, _name);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -296,7 +296,7 @@ class MessageHeaders : Boxed
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = soup_message_headers_get_one(cast(SoupMessageHeaders*)cPtr, _name);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class MessageHeaders : Boxed
    *   "Range" header, %FALSE otherwise $(LPAREN)in which case range and length
    *   will not be set$(RPAREN).
    */
-  bool getRanges(long totalLength, out Range[] ranges)
+  bool getRanges(long totalLength, out soup.types.Range[] ranges)
   {
     bool _retval;
     int _length;
@@ -485,7 +485,7 @@ class MessageHeaders : Boxed
    * Params:
    *   encoding = a #SoupEncoding
    */
-  void setEncoding(Encoding encoding)
+  void setEncoding(soup.types.Encoding encoding)
   {
     soup_message_headers_set_encoding(cast(SoupMessageHeaders*)cPtr, encoding);
   }
@@ -503,7 +503,7 @@ class MessageHeaders : Boxed
    * Params:
    *   expectations = the expectations to set
    */
-  void setExpectations(Expectation expectations)
+  void setExpectations(soup.types.Expectation expectations)
   {
     soup_message_headers_set_expectations(cast(SoupMessageHeaders*)cPtr, expectations);
   }
@@ -530,7 +530,7 @@ class MessageHeaders : Boxed
    *   ranges = an array of #SoupRange
    *   length = the length of range
    */
-  void setRanges(Range ranges, int length)
+  void setRanges(soup.types.Range ranges, int length)
   {
     soup_message_headers_set_ranges(cast(SoupMessageHeaders*)cPtr, &ranges, length);
   }

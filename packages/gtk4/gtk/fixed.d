@@ -1,6 +1,6 @@
 module gtk.fixed;
 
-import gid.global;
+import gid.gid;
 import gsk.transform;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -44,7 +44,7 @@ import gtk.widget;
  * and prefer the simplicity of `GtkFixed`, by all means use the
  * widget. But you should be aware of the tradeoffs.
  */
-class Fixed : Widget
+class Fixed : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -83,7 +83,7 @@ class Fixed : Widget
    *   x = the horizontal position of the widget
    *   y = the vertical position of the widget
    */
-  void getChildPosition(Widget widget, out double x, out double y)
+  void getChildPosition(gtk.widget.Widget widget, out double x, out double y)
   {
     gtk_fixed_get_child_position(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
   }
@@ -95,11 +95,11 @@ class Fixed : Widget
    *   widget = a `GtkWidget`, child of fixed
    * Returns: a `GskTransform`
    */
-  Transform getChildTransform(Widget widget)
+  gsk.transform.Transform getChildTransform(gtk.widget.Widget widget)
   {
     GskTransform* _cretval;
     _cretval = gtk_fixed_get_child_transform(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class Fixed : Widget
    *   x = the horizontal position to move the widget to
    *   y = the vertical position to move the widget to
    */
-  void move(Widget widget, double x, double y)
+  void move(gtk.widget.Widget widget, double x, double y)
   {
     gtk_fixed_move(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, x, y);
   }
@@ -123,7 +123,7 @@ class Fixed : Widget
    *   x = the horizontal position to place the widget at
    *   y = the vertical position to place the widget at
    */
-  void put(Widget widget, double x, double y)
+  void put(gtk.widget.Widget widget, double x, double y)
   {
     gtk_fixed_put(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, x, y);
   }
@@ -133,7 +133,7 @@ class Fixed : Widget
    * Params:
    *   widget = the child widget to remove
    */
-  void remove(Widget widget)
+  void remove(gtk.widget.Widget widget)
   {
     gtk_fixed_remove(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -148,7 +148,7 @@ class Fixed : Widget
    *   transform = the transformation assigned to widget
    *     to reset widget's transform
    */
-  void setChildTransform(Widget widget, Transform transform)
+  void setChildTransform(gtk.widget.Widget widget, gsk.transform.Transform transform)
   {
     gtk_fixed_set_child_transform(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, transform ? cast(GskTransform*)transform.cPtr(No.Dup) : null);
   }

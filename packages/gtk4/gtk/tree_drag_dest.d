@@ -1,7 +1,7 @@
 module gtk.tree_drag_dest;
 
 public import gtk.tree_drag_dest_iface_proxy;
-import gid.global;
+import gid.gid;
 import gobject.value;
 import gtk.c.functions;
 import gtk.c.types;
@@ -37,7 +37,7 @@ interface TreeDragDest
 
    * Deprecated: Use list models instead
    */
-  bool dragDataReceived(TreePath dest, Value value);
+  bool dragDataReceived(gtk.tree_path.TreePath dest, gobject.value.Value value);
 
   /**
    * Determines whether a drop is possible before the given dest_path,
@@ -52,5 +52,5 @@ interface TreeDragDest
 
    * Deprecated: Use list models instead
    */
-  bool rowDropPossible(TreePath destPath, Value value);
+  bool rowDropPossible(gtk.tree_path.TreePath destPath, gobject.value.Value value);
 }

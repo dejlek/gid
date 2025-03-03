@@ -4,7 +4,7 @@ public import atk.window_iface_proxy;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 
 /**
@@ -28,8 +28,8 @@ interface Window
    * becomes the active window of the application or session.
    *   window = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(Window window);
-  alias ActivateCallbackFunc = void function(Window window);
+  alias ActivateCallbackDlg = void delegate(atk.window.Window window);
+  alias ActivateCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Activate signal.
@@ -46,8 +46,8 @@ interface Window
    * is created.
    *   window = the instance the signal is connected to
    */
-  alias CreateCallbackDlg = void delegate(Window window);
-  alias CreateCallbackFunc = void function(Window window);
+  alias CreateCallbackDlg = void delegate(atk.window.Window window);
+  alias CreateCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Create signal.
@@ -64,8 +64,8 @@ interface Window
    * no longer the active window of the application or session.
    *   window = the instance the signal is connected to
    */
-  alias DeactivateCallbackDlg = void delegate(Window window);
-  alias DeactivateCallbackFunc = void function(Window window);
+  alias DeactivateCallbackDlg = void delegate(atk.window.Window window);
+  alias DeactivateCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Deactivate signal.
@@ -82,8 +82,8 @@ interface Window
    * destroyed.
    *   window = the instance the signal is connected to
    */
-  alias DestroyCallbackDlg = void delegate(Window window);
-  alias DestroyCallbackFunc = void function(Window window);
+  alias DestroyCallbackDlg = void delegate(atk.window.Window window);
+  alias DestroyCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Destroy signal.
@@ -100,8 +100,8 @@ interface Window
    * is maximized.
    *   window = the instance the signal is connected to
    */
-  alias MaximizeCallbackDlg = void delegate(Window window);
-  alias MaximizeCallbackFunc = void function(Window window);
+  alias MaximizeCallbackDlg = void delegate(atk.window.Window window);
+  alias MaximizeCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Maximize signal.
@@ -118,8 +118,8 @@ interface Window
    * is minimized.
    *   window = the instance the signal is connected to
    */
-  alias MinimizeCallbackDlg = void delegate(Window window);
-  alias MinimizeCallbackFunc = void function(Window window);
+  alias MinimizeCallbackDlg = void delegate(atk.window.Window window);
+  alias MinimizeCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Minimize signal.
@@ -136,8 +136,8 @@ interface Window
    * is moved.
    *   window = the instance the signal is connected to
    */
-  alias MoveCallbackDlg = void delegate(Window window);
-  alias MoveCallbackFunc = void function(Window window);
+  alias MoveCallbackDlg = void delegate(atk.window.Window window);
+  alias MoveCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Move signal.
@@ -154,8 +154,8 @@ interface Window
    * is resized.
    *   window = the instance the signal is connected to
    */
-  alias ResizeCallbackDlg = void delegate(Window window);
-  alias ResizeCallbackFunc = void function(Window window);
+  alias ResizeCallbackDlg = void delegate(atk.window.Window window);
+  alias ResizeCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Resize signal.
@@ -172,8 +172,8 @@ interface Window
    * is restored.
    *   window = the instance the signal is connected to
    */
-  alias RestoreCallbackDlg = void delegate(Window window);
-  alias RestoreCallbackFunc = void function(Window window);
+  alias RestoreCallbackDlg = void delegate(atk.window.Window window);
+  alias RestoreCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Restore signal.

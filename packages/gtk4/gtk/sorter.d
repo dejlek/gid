@@ -1,6 +1,6 @@
 module gtk.sorter;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -24,7 +24,7 @@ import gtk.types;
  * Of course, in particular for large lists, it is also possible to subclass
  * `GtkSorter` and provide one's own sorter.
  */
-class Sorter : ObjectG
+class Sorter : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -50,13 +50,13 @@ class Sorter : ObjectG
    * [gtk.sorter.Sorter.compare].
    * Depending on the change parameter, it may be possible to
    * update the sort order without a full resorting. Refer to
-   * the [gtk.SorterChange] documentation for details.
+   * the [gtk.types.SorterChange] documentation for details.
    * This function is intended for implementers of `GtkSorter`
    * subclasses and should not be called from other functions.
    * Params:
    *   change = How the sorter changed
    */
-  void changed(SorterChange change)
+  void changed(gtk.types.SorterChange change)
   {
     gtk_sorter_changed(cast(GtkSorter*)cPtr, change);
   }
@@ -78,26 +78,26 @@ class Sorter : ObjectG
    *   %GTK_ORDERING_SMALLER if item1 < item2,
    *   %GTK_ORDERING_LARGER if item1 > item2
    */
-  Ordering compare(ObjectG item1, ObjectG item2)
+  gtk.types.Ordering compare(gobject.object.ObjectG item1, gobject.object.ObjectG item2)
   {
     GtkOrdering _cretval;
     _cretval = gtk_sorter_compare(cast(GtkSorter*)cPtr, item1 ? cast(ObjectC*)item1.cPtr(No.Dup) : null, item2 ? cast(ObjectC*)item2.cPtr(No.Dup) : null);
-    Ordering _retval = cast(Ordering)_cretval;
+    gtk.types.Ordering _retval = cast(gtk.types.Ordering)_cretval;
     return _retval;
   }
 
   /**
    * Gets the order that self conforms to.
-   * See [gtk.SorterOrder] for details
+   * See [gtk.types.SorterOrder] for details
    * of the possible return values.
    * This function is intended to allow optimizations.
    * Returns: The order
    */
-  SorterOrder getOrder()
+  gtk.types.SorterOrder getOrder()
   {
     GtkSorterOrder _cretval;
     _cretval = gtk_sorter_get_order(cast(GtkSorter*)cPtr);
-    SorterOrder _retval = cast(SorterOrder)_cretval;
+    gtk.types.SorterOrder _retval = cast(gtk.types.SorterOrder)_cretval;
     return _retval;
   }
 
@@ -108,13 +108,13 @@ class Sorter : ObjectG
    * [gtk.sort_list_model.SortListModel] handles this signal automatically.
    * Depending on the change parameter, it may be possible to update
    * the sort order without a full resorting. Refer to the
-   * [gtk.SorterChange] documentation for details.
+   * [gtk.types.SorterChange] documentation for details.
    * Params
    *   change = how the sorter changed
    *   sorter = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(SorterChange change, Sorter sorter);
-  alias ChangedCallbackFunc = void function(SorterChange change, Sorter sorter);
+  alias ChangedCallbackDlg = void delegate(gtk.types.SorterChange change, gtk.sorter.Sorter sorter);
+  alias ChangedCallbackFunc = void function(gtk.types.SorterChange change, gtk.sorter.Sorter sorter);
 
   /**
    * Connect to Changed signal.
@@ -130,8 +130,8 @@ class Sorter : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto sorter = getVal!Sorter(_paramVals);
-      auto change = getVal!SorterChange(&_paramVals[1]);
+      auto sorter = getVal!(gtk.sorter.Sorter)(_paramVals);
+      auto change = getVal!(gtk.types.SorterChange)(&_paramVals[1]);
       _dClosure.dlg(change, sorter);
     }
 

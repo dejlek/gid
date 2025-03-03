@@ -1,13 +1,13 @@
 module parquet.byte_array_statistics;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import parquet.c.functions;
 import parquet.c.types;
 import parquet.statistics;
 import parquet.types;
 
-class ByteArrayStatistics : Statistics
+class ByteArrayStatistics : parquet.statistics.Statistics
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,19 +26,19 @@ class ByteArrayStatistics : Statistics
     return getType();
   }
 
-  Bytes getMax()
+  glib.bytes.Bytes getMax()
   {
     GBytes* _cretval;
     _cretval = gparquet_byte_array_statistics_get_max(cast(GParquetByteArrayStatistics*)cPtr);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
-  Bytes getMin()
+  glib.bytes.Bytes getMin()
   {
     GBytes* _cretval;
     _cretval = gparquet_byte_array_statistics_get_min(cast(GParquetByteArrayStatistics*)cPtr);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

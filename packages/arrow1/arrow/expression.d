@@ -3,10 +3,10 @@ module arrow.expression;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class Expression : ObjectG
+class Expression : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -25,7 +25,7 @@ class Expression : ObjectG
     return getType();
   }
 
-  bool equal(Expression otherExpression)
+  bool equal(arrow.expression.Expression otherExpression)
   {
     bool _retval;
     _retval = garrow_expression_equal(cast(GArrowExpression*)cPtr, otherExpression ? cast(GArrowExpression*)otherExpression.cPtr(No.Dup) : null);
@@ -36,7 +36,7 @@ class Expression : ObjectG
   {
     char* _cretval;
     _cretval = garrow_expression_to_string(cast(GArrowExpression*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

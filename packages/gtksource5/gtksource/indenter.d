@@ -2,7 +2,7 @@ module gtksource.indenter;
 
 public import gtksource.indenter_iface_proxy;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gtk.text_iter;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -21,7 +21,7 @@ import gtksource.view;
  * vfunc@Indenter.is_trigger is called upon key-press to
  * determine of the key press should trigger an indentation.  The default
  * implementation of the interface checks to see if the key was
- * [gdk.int] or [gdk.int] without %GDK_SHIFT_MASK set.
+ * [gdk.types.int] or [gdk.types.int] without %GDK_SHIFT_MASK set.
  * vfunc@Indenter.indent is called after text has been
  * inserted into class@Buffer when
  * vfunc@Indenter.is_trigger returned %TRUE. The [gtk.text_iter.TextIter]
@@ -59,13 +59,13 @@ interface Indenter
    *   view = a #GtkSourceView
    *   iter = the location of the indentation request
    */
-  void indent(View view, TextIter iter);
+  void indent(gtksource.view.View view, gtk.text_iter.TextIter iter);
 
   /**
    * This function is used to determine if a key pressed should cause the
    * indenter to automatically indent.
    * The default implementation of this virtual method will check to see
-   * if keyval is [gdk.int] or [gdk.int] and state does
+   * if keyval is [gdk.types.int] or [gdk.types.int] and state does
    * not have %GDK_SHIFT_MASK set. This is to allow the user to avoid
    * indentation when Shift+Return is pressed. Other indenters may want
    * to copy this behavior to provide a consistent experience to users.
@@ -73,9 +73,9 @@ interface Indenter
    *   view = a #GtkSourceView
    *   location = the location where ch is to be inserted
    *   state = modifier state for the insertion
-   *   keyval = the keyval pressed such as [gdk.int]
+   *   keyval = the keyval pressed such as [gdk.types.int]
    * Returns: %TRUE if indentation should be automatically triggered;
    *   otherwise %FALSE and no indentation will be performed.
    */
-  bool isTrigger(View view, TextIter location, ModifierType state, uint keyval);
+  bool isTrigger(gtksource.view.View view, gtk.text_iter.TextIter location, gdk.types.ModifierType state, uint keyval);
 }

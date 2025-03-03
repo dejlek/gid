@@ -1,6 +1,6 @@
 module gtksource.vim_imcontext;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.imcontext;
 import gtk.text_iter;
@@ -47,7 +47,7 @@ import gtksource.view;
  * g_object_bind_property $(LPAREN)im_context, "command-text", command_label, "label", 0$(RPAREN);
  * ```
  */
-class VimIMContext : IMContext
+class VimIMContext : gtk.imcontext.IMContext
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -94,7 +94,7 @@ class VimIMContext : IMContext
   {
     const(char)* _cretval;
     _cretval = gtk_source_vim_im_context_get_command_bar_text(cast(GtkSourceVimIMContext*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class VimIMContext : IMContext
   {
     const(char)* _cretval;
     _cretval = gtk_source_vim_im_context_get_command_text(cast(GtkSourceVimIMContext*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -120,8 +120,8 @@ class VimIMContext : IMContext
    *   path = the path if provided, otherwise %NULL
    *   vimIMContext = the instance the signal is connected to
    */
-  alias EditCallbackDlg = void delegate(View view, string path, VimIMContext vimIMContext);
-  alias EditCallbackFunc = void function(View view, string path, VimIMContext vimIMContext);
+  alias EditCallbackDlg = void delegate(gtksource.view.View view, string path, gtksource.vim_imcontext.VimIMContext vimIMContext);
+  alias EditCallbackFunc = void function(gtksource.view.View view, string path, gtksource.vim_imcontext.VimIMContext vimIMContext);
 
   /**
    * Connect to Edit signal.
@@ -137,9 +137,9 @@ class VimIMContext : IMContext
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto vimIMContext = getVal!VimIMContext(_paramVals);
-      auto view = getVal!View(&_paramVals[1]);
-      auto path = getVal!string(&_paramVals[2]);
+      auto vimIMContext = getVal!(gtksource.vim_imcontext.VimIMContext)(_paramVals);
+      auto view = getVal!(gtksource.view.View)(&_paramVals[1]);
+      auto path = getVal!(string)(&_paramVals[2]);
       _dClosure.dlg(view, path, vimIMContext);
     }
 
@@ -157,8 +157,8 @@ class VimIMContext : IMContext
    *   vimIMContext = the instance the signal is connected to
    * Returns: %TRUE if handled; otherwise %FALSE.
    */
-  alias ExecuteCommandCallbackDlg = bool delegate(string command, VimIMContext vimIMContext);
-  alias ExecuteCommandCallbackFunc = bool function(string command, VimIMContext vimIMContext);
+  alias ExecuteCommandCallbackDlg = bool delegate(string command, gtksource.vim_imcontext.VimIMContext vimIMContext);
+  alias ExecuteCommandCallbackFunc = bool function(string command, gtksource.vim_imcontext.VimIMContext vimIMContext);
 
   /**
    * Connect to ExecuteCommand signal.
@@ -175,8 +175,8 @@ class VimIMContext : IMContext
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto vimIMContext = getVal!VimIMContext(_paramVals);
-      auto command = getVal!string(&_paramVals[1]);
+      auto vimIMContext = getVal!(gtksource.vim_imcontext.VimIMContext)(_paramVals);
+      auto command = getVal!(string)(&_paramVals[1]);
       _retval = _dClosure.dlg(command, vimIMContext);
       setVal!bool(_returnValue, _retval);
     }
@@ -193,8 +193,8 @@ class VimIMContext : IMContext
    *   end = the end location
    *   vimIMContext = the instance the signal is connected to
    */
-  alias FormatTextCallbackDlg = void delegate(TextIter begin, TextIter end, VimIMContext vimIMContext);
-  alias FormatTextCallbackFunc = void function(TextIter begin, TextIter end, VimIMContext vimIMContext);
+  alias FormatTextCallbackDlg = void delegate(gtk.text_iter.TextIter begin, gtk.text_iter.TextIter end, gtksource.vim_imcontext.VimIMContext vimIMContext);
+  alias FormatTextCallbackFunc = void function(gtk.text_iter.TextIter begin, gtk.text_iter.TextIter end, gtksource.vim_imcontext.VimIMContext vimIMContext);
 
   /**
    * Connect to FormatText signal.
@@ -210,9 +210,9 @@ class VimIMContext : IMContext
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto vimIMContext = getVal!VimIMContext(_paramVals);
-      auto begin = getVal!TextIter(&_paramVals[1]);
-      auto end = getVal!TextIter(&_paramVals[2]);
+      auto vimIMContext = getVal!(gtksource.vim_imcontext.VimIMContext)(_paramVals);
+      auto begin = getVal!(gtk.text_iter.TextIter)(&_paramVals[1]);
+      auto end = getVal!(gtk.text_iter.TextIter)(&_paramVals[2]);
       _dClosure.dlg(begin, end, vimIMContext);
     }
 
@@ -229,8 +229,8 @@ class VimIMContext : IMContext
    *   path = the path if provided, otherwise %NULL
    *   vimIMContext = the instance the signal is connected to
    */
-  alias WriteCallbackDlg = void delegate(View view, string path, VimIMContext vimIMContext);
-  alias WriteCallbackFunc = void function(View view, string path, VimIMContext vimIMContext);
+  alias WriteCallbackDlg = void delegate(gtksource.view.View view, string path, gtksource.vim_imcontext.VimIMContext vimIMContext);
+  alias WriteCallbackFunc = void function(gtksource.view.View view, string path, gtksource.vim_imcontext.VimIMContext vimIMContext);
 
   /**
    * Connect to Write signal.
@@ -246,9 +246,9 @@ class VimIMContext : IMContext
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto vimIMContext = getVal!VimIMContext(_paramVals);
-      auto view = getVal!View(&_paramVals[1]);
-      auto path = getVal!string(&_paramVals[2]);
+      auto vimIMContext = getVal!(gtksource.vim_imcontext.VimIMContext)(_paramVals);
+      auto view = getVal!(gtksource.view.View)(&_paramVals[1]);
+      auto path = getVal!(string)(&_paramVals[2]);
       _dClosure.dlg(view, path, vimIMContext);
     }
 

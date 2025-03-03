@@ -3,7 +3,7 @@ module gdk.drag_surface_size;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.global;
+import gid.gid;
 
 /**
  * The `GdkDragSurfaceSize` struct contains information that is useful

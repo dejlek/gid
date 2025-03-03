@@ -1,6 +1,6 @@
 module gtksource.global;
 
-import gid.global;
+import gid.gid;
 import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.types;
@@ -101,12 +101,12 @@ void init_()
  *   callback = the callback to execute
  * Returns:
  */
-size_t schedulerAdd(SchedulerCallback callback)
+size_t schedulerAdd(gtksource.types.SchedulerCallback callback)
 {
   extern(C) bool _callbackCallback(long deadline, void* userData)
   {
     ptrThawGC(userData);
-    auto _dlg = cast(SchedulerCallback*)userData;
+    auto _dlg = cast(gtksource.types.SchedulerCallback*)userData;
 
     bool _retval = (*_dlg)(deadline);
     return _retval;
@@ -130,11 +130,11 @@ size_t schedulerAdd(SchedulerCallback callback)
  *   callback = the callback to execute
  * Returns:
  */
-size_t schedulerAddFull(SchedulerCallback callback)
+size_t schedulerAddFull(gtksource.types.SchedulerCallback callback)
 {
   extern(C) bool _callbackCallback(long deadline, void* userData)
   {
-    auto _dlg = cast(SchedulerCallback*)userData;
+    auto _dlg = cast(gtksource.types.SchedulerCallback*)userData;
 
     bool _retval = (*_dlg)(deadline);
     return _retval;
@@ -181,7 +181,7 @@ string utilsEscapeSearchText(string text)
   char* _cretval;
   const(char)* _text = text.toCString(No.Alloc);
   _cretval = gtk_source_utils_escape_search_text(_text);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -201,6 +201,6 @@ string utilsUnescapeSearchText(string text)
   char* _cretval;
   const(char)* _text = text.toCString(No.Alloc);
   _cretval = gtk_source_utils_unescape_search_text(_text);
-  string _retval = _cretval.fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }

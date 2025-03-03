@@ -1,7 +1,7 @@
 module gtk.tree_model_mixin;
 
 public import gtk.tree_model_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gobject.object;
 public import gobject.types;
@@ -191,11 +191,11 @@ template TreeModelT()
    *   root = A `GtkTreePath`
    * Returns: A new `GtkTreeModel`.
    */
-  override TreeModel filterNew(TreePath root)
+  override gtk.tree_model.TreeModel filterNew(gtk.tree_path.TreePath root)
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_model_filter_new(cast(GtkTreeModel*)cPtr, root ? cast(GtkTreePath*)root.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -206,13 +206,13 @@ template TreeModelT()
    * Params:
    *   func = a function to be called on each row
    */
-  override void foreach_(TreeModelForeachFunc func)
+  override void foreach_(gtk.types.TreeModelForeachFunc func)
   {
     extern(C) bool _funcCallback(GtkTreeModel* model, GtkTreePath* path, GtkTreeIter* iter, void* data)
     {
-      auto _dlg = cast(TreeModelForeachFunc*)data;
+      auto _dlg = cast(gtk.types.TreeModelForeachFunc*)data;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!TreeModel(cast(void*)model, No.Take), path ? new TreePath(cast(void*)path, No.Take) : null, iter ? new TreeIter(cast(void*)iter, No.Take) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -227,9 +227,9 @@ template TreeModelT()
    *   index = the column index
    * Returns: the type of the column
    */
-  override GType getColumnType(int index)
+  override gobject.types.GType getColumnType(int index)
   {
-    GType _retval;
+    gobject.types.GType _retval;
     _retval = gtk_tree_model_get_column_type(cast(GtkTreeModel*)cPtr, index);
     return _retval;
   }
@@ -241,11 +241,11 @@ template TreeModelT()
    * of the tree_model.
    * Returns: the flags supported by this interface
    */
-  override TreeModelFlags getFlags()
+  override gtk.types.TreeModelFlags getFlags()
   {
     GtkTreeModelFlags _cretval;
     _cretval = gtk_tree_model_get_flags(cast(GtkTreeModel*)cPtr);
-    TreeModelFlags _retval = cast(TreeModelFlags)_cretval;
+    gtk.types.TreeModelFlags _retval = cast(gtk.types.TreeModelFlags)_cretval;
     return _retval;
   }
 
@@ -258,12 +258,12 @@ template TreeModelT()
    *   path = the `GtkTreePath`
    * Returns: %TRUE, if iter was set
    */
-  override bool getIter(out TreeIter iter, TreePath path)
+  override bool getIter(out gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path)
   {
     bool _retval;
     GtkTreeIter _iter;
     _retval = gtk_tree_model_get_iter(cast(GtkTreeModel*)cPtr, &_iter, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
-    iter = new TreeIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -275,12 +275,12 @@ template TreeModelT()
    *   iter = the uninitialized `GtkTreeIter`
    * Returns: %TRUE, if iter was set
    */
-  override bool getIterFirst(out TreeIter iter)
+  override bool getIterFirst(out gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
     GtkTreeIter _iter;
     _retval = gtk_tree_model_get_iter_first(cast(GtkTreeModel*)cPtr, &_iter);
-    iter = new TreeIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -293,13 +293,13 @@ template TreeModelT()
    *   pathString = a string representation of a `GtkTreePath`
    * Returns: %TRUE, if iter was set
    */
-  override bool getIterFromString(out TreeIter iter, string pathString)
+  override bool getIterFromString(out gtk.tree_iter.TreeIter iter, string pathString)
   {
     bool _retval;
     GtkTreeIter _iter;
     const(char)* _pathString = pathString.toCString(No.Alloc);
     _retval = gtk_tree_model_get_iter_from_string(cast(GtkTreeModel*)cPtr, &_iter, _pathString);
-    iter = new TreeIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -321,11 +321,11 @@ template TreeModelT()
    *   iter = the `GtkTreeIter`
    * Returns: a newly-created `GtkTreePath`
    */
-  override TreePath getPath(TreeIter iter)
+  override gtk.tree_path.TreePath getPath(gtk.tree_iter.TreeIter iter)
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_model_get_path(cast(GtkTreeModel*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -338,11 +338,11 @@ template TreeModelT()
    *   iter = a `GtkTreeIter`
    * Returns: a newly-allocated string
    */
-  override string getStringFromIter(TreeIter iter)
+  override string getStringFromIter(gtk.tree_iter.TreeIter iter)
   {
     char* _cretval;
     _cretval = gtk_tree_model_get_string_from_iter(cast(GtkTreeModel*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -355,11 +355,11 @@ template TreeModelT()
    *   column = the column to lookup the value at
    *   value = an empty `GValue` to set
    */
-  override void getValue(TreeIter iter, int column, out Value value)
+  override void getValue(gtk.tree_iter.TreeIter iter, int column, out gobject.value.Value value)
   {
     GValue _value;
     gtk_tree_model_get_value(cast(GtkTreeModel*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null, column, &_value);
-    value = new Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)&_value, No.Take);
   }
 
   /**
@@ -374,12 +374,12 @@ template TreeModelT()
    *   parent = the `GtkTreeIter`
    * Returns: %TRUE, if iter has been set to the first child
    */
-  override bool iterChildren(out TreeIter iter, TreeIter parent)
+  override bool iterChildren(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent)
   {
     bool _retval;
     GtkTreeIter _iter;
     _retval = gtk_tree_model_iter_children(cast(GtkTreeModel*)cPtr, &_iter, parent ? cast(GtkTreeIter*)parent.cPtr(No.Dup) : null);
-    iter = new TreeIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -389,7 +389,7 @@ template TreeModelT()
    *   iter = the `GtkTreeIter` to test for children
    * Returns: %TRUE if iter has children
    */
-  override bool iterHasChild(TreeIter iter)
+  override bool iterHasChild(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
     _retval = gtk_tree_model_iter_has_child(cast(GtkTreeModel*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
@@ -404,7 +404,7 @@ template TreeModelT()
    *   iter = the `GtkTreeIter`
    * Returns: the number of children of iter
    */
-  override int iterNChildren(TreeIter iter)
+  override int iterNChildren(gtk.tree_iter.TreeIter iter)
   {
     int _retval;
     _retval = gtk_tree_model_iter_n_children(cast(GtkTreeModel*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
@@ -419,7 +419,7 @@ template TreeModelT()
    *   iter = the `GtkTreeIter`
    * Returns: %TRUE if iter has been changed to the next node
    */
-  override bool iterNext(TreeIter iter)
+  override bool iterNext(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
     _retval = gtk_tree_model_iter_next(cast(GtkTreeModel*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
@@ -439,12 +439,12 @@ template TreeModelT()
    *   n = the index of the desired child
    * Returns: %TRUE, if parent has an n-th child
    */
-  override bool iterNthChild(out TreeIter iter, TreeIter parent, int n)
+  override bool iterNthChild(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent, int n)
   {
     bool _retval;
     GtkTreeIter _iter;
     _retval = gtk_tree_model_iter_nth_child(cast(GtkTreeModel*)cPtr, &_iter, parent ? cast(GtkTreeIter*)parent.cPtr(No.Dup) : null, n);
-    iter = new TreeIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -461,12 +461,12 @@ template TreeModelT()
    *   child = the `GtkTreeIter`
    * Returns: %TRUE, if iter is set to the parent of child
    */
-  override bool iterParent(out TreeIter iter, TreeIter child)
+  override bool iterParent(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter child)
   {
     bool _retval;
     GtkTreeIter _iter;
     _retval = gtk_tree_model_iter_parent(cast(GtkTreeModel*)cPtr, &_iter, child ? cast(GtkTreeIter*)child.cPtr(No.Dup) : null);
-    iter = new TreeIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -478,7 +478,7 @@ template TreeModelT()
    *   iter = the `GtkTreeIter`
    * Returns: %TRUE if iter has been changed to the previous node
    */
-  override bool iterPrevious(TreeIter iter)
+  override bool iterPrevious(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
     _retval = gtk_tree_model_iter_previous(cast(GtkTreeModel*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
@@ -503,7 +503,7 @@ template TreeModelT()
    * Params:
    *   iter = the `GtkTreeIter`
    */
-  override void refNode(TreeIter iter)
+  override void refNode(gtk.tree_iter.TreeIter iter)
   {
     gtk_tree_model_ref_node(cast(GtkTreeModel*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
   }
@@ -515,7 +515,7 @@ template TreeModelT()
    *   path = a `GtkTreePath` pointing to the changed row
    *   iter = a valid `GtkTreeIter` pointing to the changed row
    */
-  override void rowChanged(TreePath path, TreeIter iter)
+  override void rowChanged(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter)
   {
     gtk_tree_model_row_changed(cast(GtkTreeModel*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
   }
@@ -532,7 +532,7 @@ template TreeModelT()
    *   path = a `GtkTreePath` pointing to the previous location of
    *     the deleted row
    */
-  override void rowDeleted(TreePath path)
+  override void rowDeleted(gtk.tree_path.TreePath path)
   {
     gtk_tree_model_row_deleted(cast(GtkTreeModel*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
@@ -546,7 +546,7 @@ template TreeModelT()
    *   path = a `GtkTreePath` pointing to the changed row
    *   iter = a valid `GtkTreeIter` pointing to the changed row
    */
-  override void rowHasChildToggled(TreePath path, TreeIter iter)
+  override void rowHasChildToggled(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter)
   {
     gtk_tree_model_row_has_child_toggled(cast(GtkTreeModel*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
   }
@@ -558,7 +558,7 @@ template TreeModelT()
    *   path = a `GtkTreePath` pointing to the inserted row
    *   iter = a valid `GtkTreeIter` pointing to the inserted row
    */
-  override void rowInserted(TreePath path, TreeIter iter)
+  override void rowInserted(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter)
   {
     gtk_tree_model_row_inserted(cast(GtkTreeModel*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
   }
@@ -579,7 +579,7 @@ template TreeModelT()
    *     position before the re-ordering,
    *     i.e. new_order`[newpos] \= oldpos`
    */
-  override void rowsReordered(TreePath path, TreeIter iter, int[] newOrder)
+  override void rowsReordered(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, int[] newOrder)
   {
     int _length;
     if (newOrder)
@@ -599,7 +599,7 @@ template TreeModelT()
    * Params:
    *   iter = the `GtkTreeIter`
    */
-  override void unrefNode(TreeIter iter)
+  override void unrefNode(gtk.tree_iter.TreeIter iter)
   {
     gtk_tree_model_unref_node(cast(GtkTreeModel*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
   }
@@ -611,8 +611,8 @@ template TreeModelT()
    *   iter = a valid `GtkTreeIter` pointing to the changed row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowChangedCallbackDlg = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
-  alias RowChangedCallbackFunc = void function(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowChangedCallbackDlg = void delegate(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel);
+  alias RowChangedCallbackFunc = void function(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel);
 
   /**
    * Connect to RowChanged signal.
@@ -628,9 +628,9 @@ template TreeModelT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto treeModel = getVal!TreeModel(_paramVals);
-      auto path = getVal!TreePath(&_paramVals[1]);
-      auto iter = getVal!TreeIter(&_paramVals[2]);
+      auto treeModel = getVal!(gtk.tree_model.TreeModel)(_paramVals);
+      auto path = getVal!(gtk.tree_path.TreePath)(&_paramVals[1]);
+      auto iter = getVal!(gtk.tree_iter.TreeIter)(&_paramVals[2]);
       _dClosure.dlg(path, iter, treeModel);
     }
 
@@ -649,8 +649,8 @@ template TreeModelT()
    *   path = a `GtkTreePath` identifying the row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowDeletedCallbackDlg = void delegate(TreePath path, TreeModel treeModel);
-  alias RowDeletedCallbackFunc = void function(TreePath path, TreeModel treeModel);
+  alias RowDeletedCallbackDlg = void delegate(gtk.tree_path.TreePath path, gtk.tree_model.TreeModel treeModel);
+  alias RowDeletedCallbackFunc = void function(gtk.tree_path.TreePath path, gtk.tree_model.TreeModel treeModel);
 
   /**
    * Connect to RowDeleted signal.
@@ -666,8 +666,8 @@ template TreeModelT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto treeModel = getVal!TreeModel(_paramVals);
-      auto path = getVal!TreePath(&_paramVals[1]);
+      auto treeModel = getVal!(gtk.tree_model.TreeModel)(_paramVals);
+      auto path = getVal!(gtk.tree_path.TreePath)(&_paramVals[1]);
       _dClosure.dlg(path, treeModel);
     }
 
@@ -683,8 +683,8 @@ template TreeModelT()
    *   iter = a valid `GtkTreeIter` pointing to the row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowHasChildToggledCallbackDlg = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
-  alias RowHasChildToggledCallbackFunc = void function(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowHasChildToggledCallbackDlg = void delegate(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel);
+  alias RowHasChildToggledCallbackFunc = void function(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel);
 
   /**
    * Connect to RowHasChildToggled signal.
@@ -700,9 +700,9 @@ template TreeModelT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto treeModel = getVal!TreeModel(_paramVals);
-      auto path = getVal!TreePath(&_paramVals[1]);
-      auto iter = getVal!TreeIter(&_paramVals[2]);
+      auto treeModel = getVal!(gtk.tree_model.TreeModel)(_paramVals);
+      auto path = getVal!(gtk.tree_path.TreePath)(&_paramVals[1]);
+      auto iter = getVal!(gtk.tree_iter.TreeIter)(&_paramVals[2]);
       _dClosure.dlg(path, iter, treeModel);
     }
 
@@ -721,8 +721,8 @@ template TreeModelT()
    *   iter = a valid `GtkTreeIter` pointing to the new row
    *   treeModel = the instance the signal is connected to
    */
-  alias RowInsertedCallbackDlg = void delegate(TreePath path, TreeIter iter, TreeModel treeModel);
-  alias RowInsertedCallbackFunc = void function(TreePath path, TreeIter iter, TreeModel treeModel);
+  alias RowInsertedCallbackDlg = void delegate(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel);
+  alias RowInsertedCallbackFunc = void function(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel);
 
   /**
    * Connect to RowInserted signal.
@@ -738,9 +738,9 @@ template TreeModelT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto treeModel = getVal!TreeModel(_paramVals);
-      auto path = getVal!TreePath(&_paramVals[1]);
-      auto iter = getVal!TreeIter(&_paramVals[2]);
+      auto treeModel = getVal!(gtk.tree_model.TreeModel)(_paramVals);
+      auto path = getVal!(gtk.tree_path.TreePath)(&_paramVals[1]);
+      auto iter = getVal!(gtk.tree_iter.TreeIter)(&_paramVals[2]);
       _dClosure.dlg(path, iter, treeModel);
     }
 

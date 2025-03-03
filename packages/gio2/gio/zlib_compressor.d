@@ -1,6 +1,6 @@
 module gio.zlib_compressor;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.converter;
@@ -13,7 +13,7 @@ import gobject.object;
  * `GZlibCompressor` is an implementation of [gio.converter.Converter] that
  * compresses data using zlib.
  */
-class ZlibCompressor : ObjectG, Converter
+class ZlibCompressor : gobject.object.ObjectG, gio.converter.Converter
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -41,7 +41,7 @@ class ZlibCompressor : ObjectG, Converter
    *   level = compression level $(LPAREN)0-9$(RPAREN), -1 for default
    * Returns: a new #GZlibCompressor
    */
-  this(ZlibCompressorFormat format, int level)
+  this(gio.types.ZlibCompressorFormat format, int level)
   {
     GZlibCompressor* _cretval;
     _cretval = g_zlib_compressor_new(format, level);
@@ -52,11 +52,11 @@ class ZlibCompressor : ObjectG, Converter
    * Returns the #GZlibCompressor:file-info property.
    * Returns: a #GFileInfo, or %NULL
    */
-  FileInfo getFileInfo()
+  gio.file_info.FileInfo getFileInfo()
   {
     GFileInfo* _cretval;
     _cretval = g_zlib_compressor_get_file_info(cast(GZlibCompressor*)cPtr);
-    auto _retval = ObjectG.getDObject!FileInfo(cast(GFileInfo*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, No.Take);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ class ZlibCompressor : ObjectG, Converter
    * Params:
    *   fileInfo = a #GFileInfo
    */
-  void setFileInfo(FileInfo fileInfo)
+  void setFileInfo(gio.file_info.FileInfo fileInfo)
   {
     g_zlib_compressor_set_file_info(cast(GZlibCompressor*)cPtr, fileInfo ? cast(GFileInfo*)fileInfo.cPtr(No.Dup) : null);
   }

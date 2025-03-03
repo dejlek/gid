@@ -1,6 +1,6 @@
 module gtk.fixed_layout_child;
 
-import gid.global;
+import gid.gid;
 import gsk.transform;
 import gtk.c.functions;
 import gtk.c.types;
@@ -10,7 +10,7 @@ import gtk.types;
 /**
  * `GtkLayoutChild` subclass for children in a `GtkFixedLayout`.
  */
-class FixedLayoutChild : LayoutChild
+class FixedLayoutChild : gtk.layout_child.LayoutChild
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -33,11 +33,11 @@ class FixedLayoutChild : LayoutChild
    * Retrieves the transformation of the child.
    * Returns: a `GskTransform`
    */
-  Transform getTransform()
+  gsk.transform.Transform getTransform()
   {
     GskTransform* _cretval;
     _cretval = gtk_fixed_layout_child_get_transform(cast(GtkFixedLayoutChild*)cPtr);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -46,7 +46,7 @@ class FixedLayoutChild : LayoutChild
    * Params:
    *   transform = a `GskTransform`
    */
-  void setTransform(Transform transform)
+  void setTransform(gsk.transform.Transform transform)
   {
     gtk_fixed_layout_child_set_transform(cast(GtkFixedLayoutChild*)cPtr, transform ? cast(GskTransform*)transform.cPtr(No.Dup) : null);
   }

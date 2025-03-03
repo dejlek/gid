@@ -4,9 +4,9 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.file_system;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class AzureFileSystem : FileSystem
+class AzureFileSystem : arrow.file_system.FileSystem
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

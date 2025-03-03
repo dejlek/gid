@@ -1,6 +1,6 @@
 module gio.inet_socket_address;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.inet_address;
@@ -16,7 +16,7 @@ import gobject.object;
  * In UNIX terms, `GInetSocketAddress` corresponds to a
  * [`struct sockaddr_in` or `struct sockaddr_in6`]$(LPAREN)$(RPAREN)(man:sockaddr3type).
  */
-class InetSocketAddress : SocketAddress
+class InetSocketAddress : gio.socket_address.SocketAddress
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -42,7 +42,7 @@ class InetSocketAddress : SocketAddress
    *   port = a port number
    * Returns: a new #GInetSocketAddress
    */
-  this(InetAddress address, ushort port)
+  this(gio.inet_address.InetAddress address, ushort port)
   {
     GSocketAddress* _cretval;
     _cretval = g_inet_socket_address_new(address ? cast(GInetAddress*)address.cPtr(No.Dup) : null, port);
@@ -59,12 +59,12 @@ class InetSocketAddress : SocketAddress
    * Returns: a new #GInetSocketAddress,
    *   or %NULL if address cannot be parsed.
    */
-  static InetSocketAddress newFromString(string address, uint port)
+  static gio.inet_socket_address.InetSocketAddress newFromString(string address, uint port)
   {
     GSocketAddress* _cretval;
     const(char)* _address = address.toCString(No.Alloc);
     _cretval = g_inet_socket_address_new_from_string(_address, port);
-    auto _retval = ObjectG.getDObject!InetSocketAddress(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.inet_socket_address.InetSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -73,11 +73,11 @@ class InetSocketAddress : SocketAddress
    * Returns: the #GInetAddress for address, which must be
    *   [gobject.object.ObjectG.ref_]'d if it will be stored
    */
-  InetAddress getAddress()
+  gio.inet_address.InetAddress getAddress()
   {
     GInetAddress* _cretval;
     _cretval = g_inet_socket_address_get_address(cast(GInetSocketAddress*)cPtr);
-    auto _retval = ObjectG.getDObject!InetAddress(cast(GInetAddress*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, No.Take);
     return _retval;
   }
 

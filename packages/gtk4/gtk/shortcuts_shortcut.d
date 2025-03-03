@@ -1,6 +1,6 @@
 module gtk.shortcuts_shortcut;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -17,7 +17,7 @@ import gtk.widget;
  * with a short text.
  * This widget is only meant to be used with `GtkShortcutsWindow`.
  */
-class ShortcutsShortcut : Widget
+class ShortcutsShortcut : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

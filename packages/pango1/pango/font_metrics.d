@@ -1,6 +1,6 @@
 module pango.font_metrics;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
@@ -19,7 +19,7 @@ import pango.types;
  * <img alt\="Font metrics" src\="fontmetrics-light.png">
  * </picture>
  */
-class FontMetrics : Boxed
+class FontMetrics : gobject.boxed.Boxed
 {
 
   this()

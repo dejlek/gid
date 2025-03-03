@@ -2,9 +2,9 @@ module pangocairo.font_map;
 
 public import pangocairo.font_map_iface_proxy;
 import cairo.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
-import pango.font_map : DPangoFontMap = FontMap;
+import pango.font_map;
 import pangocairo.c.functions;
 import pangocairo.c.types;
 import pangocairo.types;
@@ -41,11 +41,11 @@ interface FontMap
    *   for the current thread. This object is owned by Pango and must
    *   not be freed.
    */
-  static DPangoFontMap getDefault()
+  static pango.font_map.FontMap getDefault()
   {
     PangoFontMap* _cretval;
     _cretval = pango_cairo_font_map_get_default();
-    auto _retval = ObjectG.getDObject!DPangoFontMap(cast(PangoFontMap*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -68,11 +68,11 @@ interface FontMap
    * Returns: the newly allocated `PangoFontMap`,
    *   which should be freed with [gobject.object.ObjectG.unref].
    */
-  static DPangoFontMap new_()
+  static pango.font_map.FontMap new_()
   {
     PangoFontMap* _cretval;
     _cretval = pango_cairo_font_map_new();
-    auto _retval = ObjectG.getDObject!DPangoFontMap(cast(PangoFontMap*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -88,11 +88,11 @@ interface FontMap
    *   [gobject.object.ObjectG.unref], or %NULL if the requested cairo font backend
    *   is not supported / compiled in.
    */
-  static DPangoFontMap newForFontType(FontType fonttype)
+  static pango.font_map.FontMap newForFontType(cairo.types.FontType fonttype)
   {
     PangoFontMap* _cretval;
     _cretval = pango_cairo_font_map_new_for_font_type(fonttype);
-    auto _retval = ObjectG.getDObject!DPangoFontMap(cast(PangoFontMap*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ interface FontMap
    * Gets the type of Cairo font backend that fontmap uses.
    * Returns: the `cairo_font_type_t` cairo font backend type
    */
-  FontType getFontType();
+  cairo.types.FontType getFontType();
 
   /**
    * Gets the resolution for the fontmap.

@@ -1,6 +1,6 @@
 module gtk.no_selection;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -19,7 +19,7 @@ import gtk.types;
  * when a `GtkSelectionModel` is required.
  * `GtkNoSelection` passes through sections from the underlying model.
  */
-class NoSelection : ObjectG, ListModel, SectionModel, SelectionModel
+class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel, gtk.selection_model.SelectionModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -48,7 +48,7 @@ class NoSelection : ObjectG, ListModel, SectionModel, SelectionModel
    *   model = the `GListModel` to manage
    * Returns: a new `GtkNoSelection`
    */
-  this(ListModel model)
+  this(gio.list_model.ListModel model)
   {
     GtkNoSelection* _cretval;
     _cretval = gtk_no_selection_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
@@ -59,11 +59,11 @@ class NoSelection : ObjectG, ListModel, SectionModel, SelectionModel
    * Gets the model that self is wrapping.
    * Returns: The model being wrapped
    */
-  ListModel getModel()
+  gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
     _cretval = gtk_no_selection_get_model(cast(GtkNoSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class NoSelection : ObjectG, ListModel, SectionModel, SelectionModel
    * Params:
    *   model = A `GListModel` to wrap
    */
-  void setModel(ListModel model)
+  void setModel(gio.list_model.ListModel model)
   {
     gtk_no_selection_set_model(cast(GtkNoSelection*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

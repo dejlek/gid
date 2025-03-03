@@ -1,6 +1,6 @@
 module gtk.list_view;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -19,7 +19,6 @@ import gtk.scroll_info;
 import gtk.scrollable;
 import gtk.scrollable_mixin;
 import gtk.selection_model;
-import gtk.selection_model_mixin;
 import gtk.types;
 
 /**
@@ -98,7 +97,7 @@ import gtk.types;
  * `GtkListView` uses the %GTK_ACCESSIBLE_ROLE_LIST role, and the list
  * items use the %GTK_ACCESSIBLE_ROLE_LIST_ITEM role.
  */
-class ListView : ListBase
+class ListView : gtk.list_base.ListBase
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -131,7 +130,7 @@ class ListView : ListBase
    *   factory = The factory to populate items with
    * Returns: a new `GtkListView` using the given model and factory
    */
-  this(SelectionModel model, ListItemFactory factory)
+  this(gtk.selection_model.SelectionModel model, gtk.list_item_factory.ListItemFactory factory)
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.Dup) : null);
@@ -153,11 +152,11 @@ class ListView : ListBase
    * Gets the factory that's currently used to populate list items.
    * Returns: The factory in use
    */
-  ListItemFactory getFactory()
+  gtk.list_item_factory.ListItemFactory getFactory()
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_list_view_get_factory(cast(GtkListView*)cPtr);
-    auto _retval = ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -165,11 +164,11 @@ class ListView : ListBase
    * Gets the factory that's currently used to populate section headers.
    * Returns: The factory in use
    */
-  ListItemFactory getHeaderFactory()
+  gtk.list_item_factory.ListItemFactory getHeaderFactory()
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_list_view_get_header_factory(cast(GtkListView*)cPtr);
-    auto _retval = ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -177,11 +176,11 @@ class ListView : ListBase
    * Gets the model that's currently used to read the items displayed.
    * Returns: The model in use
    */
-  SelectionModel getModel()
+  gtk.selection_model.SelectionModel getModel()
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_list_view_get_model(cast(GtkListView*)cPtr);
-    auto _retval = ObjectG.getDObject!SelectionModel(cast(GtkSelectionModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -213,11 +212,11 @@ class ListView : ListBase
    * Gets the behavior set for the <kbd>Tab</kbd> key.
    * Returns: The behavior of the <kbd>Tab</kbd> key
    */
-  ListTabBehavior getTabBehavior()
+  gtk.types.ListTabBehavior getTabBehavior()
   {
     GtkListTabBehavior _cretval;
     _cretval = gtk_list_view_get_tab_behavior(cast(GtkListView*)cPtr);
-    ListTabBehavior _retval = cast(ListTabBehavior)_cretval;
+    gtk.types.ListTabBehavior _retval = cast(gtk.types.ListTabBehavior)_cretval;
     return _retval;
   }
 
@@ -232,7 +231,7 @@ class ListView : ListBase
    *   scroll = details of how to perform
    *     the scroll operation or %NULL to scroll into view
    */
-  void scrollTo(uint pos, ListScrollFlags flags, ScrollInfo scroll)
+  void scrollTo(uint pos, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll)
   {
     gtk_list_view_scroll_to(cast(GtkListView*)cPtr, pos, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
   }
@@ -252,7 +251,7 @@ class ListView : ListBase
    * Params:
    *   factory = the factory to use
    */
-  void setFactory(ListItemFactory factory)
+  void setFactory(gtk.list_item_factory.ListItemFactory factory)
   {
     gtk_list_view_set_factory(cast(GtkListView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
@@ -264,7 +263,7 @@ class ListView : ListBase
    * Params:
    *   factory = the factory to use
    */
-  void setHeaderFactory(ListItemFactory factory)
+  void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory)
   {
     gtk_list_view_set_header_factory(cast(GtkListView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
@@ -275,7 +274,7 @@ class ListView : ListBase
    * Params:
    *   model = the model to use
    */
-  void setModel(SelectionModel model)
+  void setModel(gtk.selection_model.SelectionModel model)
   {
     gtk_list_view_set_model(cast(GtkListView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
@@ -307,7 +306,7 @@ class ListView : ListBase
    * Params:
    *   tabBehavior = The desired tab behavior
    */
-  void setTabBehavior(ListTabBehavior tabBehavior)
+  void setTabBehavior(gtk.types.ListTabBehavior tabBehavior)
   {
     gtk_list_view_set_tab_behavior(cast(GtkListView*)cPtr, tabBehavior);
   }
@@ -322,8 +321,8 @@ class ListView : ListBase
    *   position = position of item to activate
    *   listView = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(uint position, ListView listView);
-  alias ActivateCallbackFunc = void function(uint position, ListView listView);
+  alias ActivateCallbackDlg = void delegate(uint position, gtk.list_view.ListView listView);
+  alias ActivateCallbackFunc = void function(uint position, gtk.list_view.ListView listView);
 
   /**
    * Connect to Activate signal.
@@ -339,8 +338,8 @@ class ListView : ListBase
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listView = getVal!ListView(_paramVals);
-      auto position = getVal!uint(&_paramVals[1]);
+      auto listView = getVal!(gtk.list_view.ListView)(_paramVals);
+      auto position = getVal!(uint)(&_paramVals[1]);
       _dClosure.dlg(position, listView);
     }
 

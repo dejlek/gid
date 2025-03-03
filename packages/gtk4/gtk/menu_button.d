@@ -1,6 +1,6 @@
 module gtk.menu_button;
 
-import gid.global;
+import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
 import gobject.object;
@@ -66,7 +66,7 @@ import gtk.widget;
  * # Accessibility
  * `GtkMenuButton` uses the %GTK_ACCESSIBLE_ROLE_BUTTON role.
  */
-class MenuButton : Widget
+class MenuButton : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -139,25 +139,25 @@ class MenuButton : Widget
    * Gets the child widget of menu_button.
    * Returns: the child widget of menu_button
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_button_get_child(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
-  alias getDirection = Widget.getDirection;
+  alias getDirection = gtk.widget.Widget.getDirection;
 
   /**
    * Returns the direction the popup will be pointing at when popped up.
    * Returns: a `GtkArrowType` value
    */
-  ArrowType getDirection()
+  gtk.types.ArrowType getDirection()
   {
     GtkArrowType _cretval;
     _cretval = gtk_menu_button_get_direction(cast(GtkMenuButton*)cPtr);
-    ArrowType _retval = cast(ArrowType)_cretval;
+    gtk.types.ArrowType _retval = cast(gtk.types.ArrowType)_cretval;
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class MenuButton : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_menu_button_get_icon_name(cast(GtkMenuButton*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class MenuButton : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_menu_button_get_label(cast(GtkMenuButton*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -200,11 +200,11 @@ class MenuButton : Widget
    * Returns the `GMenuModel` used to generate the popup.
    * Returns: a `GMenuModel`
    */
-  MenuModel getMenuModel()
+  gio.menu_model.MenuModel getMenuModel()
   {
     GMenuModel* _cretval;
     _cretval = gtk_menu_button_get_menu_model(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -214,11 +214,11 @@ class MenuButton : Widget
    * returns %NULL.
    * Returns: a `GtkPopover` or %NULL
    */
-  Popover getPopover()
+  gtk.popover.Popover getPopover()
   {
     GtkPopover* _cretval;
     _cretval = gtk_menu_button_get_popover(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!Popover(cast(GtkPopover*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
     return _retval;
   }
 
@@ -307,7 +307,7 @@ class MenuButton : Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_menu_button_set_child(cast(GtkMenuButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -326,13 +326,13 @@ class MenuButton : Widget
    *     be shown, but none has been provided via other means, or %NULL
    *     to reset to default behavior.
    */
-  void setCreatePopupFunc(MenuButtonCreatePopupFunc func)
+  void setCreatePopupFunc(gtk.types.MenuButtonCreatePopupFunc func)
   {
     extern(C) void _funcCallback(GtkMenuButton* menuButton, void* userData)
     {
-      auto _dlg = cast(MenuButtonCreatePopupFunc*)userData;
+      auto _dlg = cast(gtk.types.MenuButtonCreatePopupFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!MenuButton(cast(void*)menuButton, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gtk.menu_button.MenuButton)(cast(void*)menuButton, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -341,7 +341,7 @@ class MenuButton : Widget
     gtk_menu_button_set_create_popup_func(cast(GtkMenuButton*)cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
-  alias setDirection = Widget.setDirection;
+  alias setDirection = gtk.widget.Widget.setDirection;
 
   /**
    * Sets the direction in which the popup will be popped up.
@@ -354,7 +354,7 @@ class MenuButton : Widget
    * Params:
    *   direction = a `GtkArrowType`
    */
-  void setDirection(ArrowType direction)
+  void setDirection(gtk.types.ArrowType direction)
   {
     gtk_menu_button_set_direction(cast(GtkMenuButton*)cPtr, direction);
   }
@@ -412,7 +412,7 @@ class MenuButton : Widget
    *   menuModel = a `GMenuModel`, or %NULL to unset and disable the
    *     button
    */
-  void setMenuModel(MenuModel menuModel)
+  void setMenuModel(gio.menu_model.MenuModel menuModel)
   {
     gtk_menu_button_set_menu_model(cast(GtkMenuButton*)cPtr, menuModel ? cast(GMenuModel*)menuModel.cPtr(No.Dup) : null);
   }
@@ -425,7 +425,7 @@ class MenuButton : Widget
    * Params:
    *   popover = a `GtkPopover`, or %NULL to unset and disable the button
    */
-  void setPopover(Widget popover)
+  void setPopover(gtk.widget.Widget popover)
   {
     gtk_menu_button_set_popover(cast(GtkMenuButton*)cPtr, popover ? cast(GtkWidget*)popover.cPtr(No.Dup) : null);
   }
@@ -457,8 +457,8 @@ class MenuButton : Widget
    * emitting it causes the button to pop up its menu.
    *   menuButton = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(MenuButton menuButton);
-  alias ActivateCallbackFunc = void function(MenuButton menuButton);
+  alias ActivateCallbackDlg = void delegate(gtk.menu_button.MenuButton menuButton);
+  alias ActivateCallbackFunc = void function(gtk.menu_button.MenuButton menuButton);
 
   /**
    * Connect to Activate signal.
@@ -474,7 +474,7 @@ class MenuButton : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto menuButton = getVal!MenuButton(_paramVals);
+      auto menuButton = getVal!(gtk.menu_button.MenuButton)(_paramVals);
       _dClosure.dlg(menuButton);
     }
 

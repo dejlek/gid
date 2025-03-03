@@ -4,10 +4,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.time_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class Time64DataType : TimeDataType
+class Time64DataType : arrow.time_data_type.TimeDataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class Time64DataType : TimeDataType
     return getType();
   }
 
-  this(TimeUnit unit)
+  this(arrow.types.TimeUnit unit)
   {
     GArrowTime64DataType* _cretval;
     GError *_err;

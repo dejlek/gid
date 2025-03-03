@@ -5,7 +5,7 @@ import atk.window;
 import atk.window_mixin;
 
 /// Proxy object for Atk.Window interface when a GObject has no applicable D binding
-class WindowIfaceProxy : IfaceProxy, Window
+class WindowIfaceProxy : IfaceProxy, atk.window.Window
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class WindowIfaceProxy : IfaceProxy, Window
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Window);
+    return typeid(atk.window.Window);
   }
 
   mixin WindowT!();

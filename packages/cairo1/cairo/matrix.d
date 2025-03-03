@@ -3,7 +3,7 @@ module cairo.matrix;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -15,7 +15,7 @@ import gobject.boxed;
  * y_new \= yx * x + yy * y + y0;
  * </programlisting>
  */
-class Matrix : Boxed
+class Matrix : gobject.boxed.Boxed
 {
 
   this()
@@ -180,11 +180,11 @@ class Matrix : Boxed
    *   be the inverse matrix and returns %CAIRO_STATUS_SUCCESS. Otherwise,
    *   returns %CAIRO_STATUS_INVALID_MATRIX.
    */
-  Status invert()
+  cairo.types.Status invert()
   {
     cairo_status_t _cretval;
     _cretval = cairo_matrix_invert(cast(cairo_matrix_t*)cPtr);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -199,9 +199,9 @@ class Matrix : Boxed
    *   a = a #cairo_matrix_t
    *   b = a #cairo_matrix_t
    */
-  void multiply(Matrix a, Matrix b)
+  void multiply(cairo.matrix.Matrix a, cairo.matrix.Matrix b)
   {
-    cairo_matrix_multiply(cast(cairo_matrix_t*)cPtr, a ? cast(cairo_matrix_t*)a.cPtr(No.Dup) : null, b ? cast(cairo_matrix_t*)b.cPtr(No.Dup) : null);
+    cairo_matrix_multiply(cast(cairo_matrix_t*)cPtr, a ? cast(const(cairo_matrix_t)*)a.cPtr(No.Dup) : null, b ? cast(const(cairo_matrix_t)*)b.cPtr(No.Dup) : null);
   }
 
   /**
@@ -249,7 +249,7 @@ class Matrix : Boxed
    */
   void transformDistance(out double dx, out double dy)
   {
-    cairo_matrix_transform_distance(cast(cairo_matrix_t*)cPtr, cast(double*)&dx, cast(double*)&dy);
+    cairo_matrix_transform_distance(cast(const(cairo_matrix_t)*)cPtr, cast(double*)&dx, cast(double*)&dy);
   }
 
   /**
@@ -260,7 +260,7 @@ class Matrix : Boxed
    */
   void transformPoint(out double x, out double y)
   {
-    cairo_matrix_transform_point(cast(cairo_matrix_t*)cPtr, cast(double*)&x, cast(double*)&y);
+    cairo_matrix_transform_point(cast(const(cairo_matrix_t)*)cPtr, cast(double*)&x, cast(double*)&y);
   }
 
   /**

@@ -1,0 +1,66 @@
+module gtk.hbox;
+
+import atk.implementor_iface;
+import atk.implementor_iface_mixin;
+import gid.gid;
+import gtk.box;
+import gtk.buildable;
+import gtk.buildable_mixin;
+import gtk.c.functions;
+import gtk.c.types;
+import gtk.orientable;
+import gtk.orientable_mixin;
+import gtk.types;
+
+/**
+ * #GtkHBox is a container that organizes child widgets into a single row.
+ * Use the #GtkBox packing interface to determine the arrangement,
+ * spacing, width, and alignment of #GtkHBox children.
+ * All children are allocated the same height.
+ * GtkHBox has been deprecated. You can use #GtkBox instead, which is a
+ * very quick and easy change. If you have derived your own classes from
+ * GtkHBox, you can simply change the inheritance to derive directly
+ * from #GtkBox. No further changes are needed, since the default
+ * value of the #GtkOrientable:orientation property is
+ * %GTK_ORIENTATION_HORIZONTAL.
+ * If you have a grid-like layout composed of nested boxes, and you don’t
+ * need first-child or last-child styling, the recommendation is to switch
+ * to #GtkGrid. For more information about migrating to #GtkGrid, see
+ * [Migrating from other containers to GtkGrid][gtk-migrating-GtkGrid].
+ */
+class HBox : gtk.box.Box
+{
+
+  this(void* ptr, Flag!"Take" take = No.Take)
+  {
+    super(cast(void*)ptr, take);
+  }
+
+  static GType getType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gtk_hbox_get_type != &gidSymbolNotFound ? gtk_hbox_get_type() : cast(GType)0;
+  }
+
+  override @property GType gType()
+  {
+    return getType();
+  }
+
+  /**
+   * Creates a new #GtkHBox.
+   * Params:
+   *   homogeneous = %TRUE if all children are to be given equal space allotments.
+   *   spacing = the number of pixels to place by default between children.
+   * Returns: a new #GtkHBox.
+
+   * Deprecated: You should use [gtk.box.Box.new_] with a %GTK_ORIENTATION_HORIZONTAL
+   *   #GtkOrientable:orientation instead
+   */
+  this(bool homogeneous, int spacing)
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_hbox_new(homogeneous, spacing);
+    this(_cretval, No.Take);
+  }
+}

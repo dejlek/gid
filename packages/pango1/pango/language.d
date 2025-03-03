@@ -1,6 +1,6 @@
 module pango.language;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
@@ -12,7 +12,7 @@ import pango.types;
  * `PangoLanguage` pointers can be efficiently
  * copied and compared with each other.
  */
-class PgLanguage : Boxed
+class PgLanguage : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -58,7 +58,7 @@ class PgLanguage : Boxed
   {
     const(char)* _cretval;
     _cretval = pango_language_get_sample_string(cast(PangoLanguage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -86,16 +86,16 @@ class PgLanguage : Boxed
    *   any information about this particular language tag $(LPAREN)also the case
    *   if language is %NULL$(RPAREN).
    */
-  Script[] getScripts()
+  pango.types.Script[] getScripts()
   {
     const(PangoScript)* _cretval;
     int _cretlength;
     _cretval = pango_language_get_scripts(cast(PangoLanguage*)cPtr, &_cretlength);
-    Script[] _retval;
+    pango.types.Script[] _retval;
 
     if (_cretval)
     {
-      _retval = cast(Script[] )_cretval[0 .. _cretlength];
+      _retval = cast(pango.types.Script[] )_cretval[0 .. _cretlength];
     }
     return _retval;
   }
@@ -117,7 +117,7 @@ class PgLanguage : Boxed
    *   to write language or if nothing is known about language
    *   $(LPAREN)including the case that language is %NULL$(RPAREN), %FALSE otherwise.
    */
-  bool includesScript(Script script)
+  bool includesScript(pango.types.Script script)
   {
     bool _retval;
     _retval = pango_language_includes_script(cast(PangoLanguage*)cPtr, script);
@@ -154,7 +154,7 @@ class PgLanguage : Boxed
   {
     const(char)* _cretval;
     _cretval = pango_language_to_string(cast(PangoLanguage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -172,12 +172,12 @@ class PgLanguage : Boxed
    *   language = a string representing a language tag
    * Returns: a `PangoLanguage`
    */
-  static PgLanguage fromString(string language)
+  static pango.language.PgLanguage fromString(string language)
   {
     PangoLanguage* _cretval;
     const(char)* _language = language.toCString(No.Alloc);
     _cretval = pango_language_from_string(_language);
-    auto _retval = _cretval ? new PgLanguage(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.language.PgLanguage(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -210,11 +210,11 @@ class PgLanguage : Boxed
    * just call [pango.language.PgLanguage.fromString] yourself.
    * Returns: the default language as a `PangoLanguage`
    */
-  static PgLanguage getDefault()
+  static pango.language.PgLanguage getDefault()
   {
     PangoLanguage* _cretval;
     _cretval = pango_language_get_default();
-    auto _retval = _cretval ? new PgLanguage(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.language.PgLanguage(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -231,20 +231,20 @@ class PgLanguage : Boxed
    * Returns: a %NULL-terminated array
    *   of `PangoLanguage`*
    */
-  static PgLanguage[] getPreferred()
+  static pango.language.PgLanguage[] getPreferred()
   {
     PangoLanguage** _cretval;
     _cretval = pango_language_get_preferred();
-    PgLanguage[] _retval;
+    pango.language.PgLanguage[] _retval;
 
     if (_cretval)
     {
       uint _cretlength;
       for (; _cretval[_cretlength] !is null; _cretlength++)
         break;
-      _retval = new PgLanguage[_cretlength];
+      _retval = new pango.language.PgLanguage[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = new PgLanguage(cast(void*)_cretval[i], No.Take);
+        _retval[i] = new pango.language.PgLanguage(cast(void*)_cretval[i], No.Take);
     }
     return _retval;
   }

@@ -1,6 +1,6 @@
 module gtk.never_trigger;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -10,7 +10,7 @@ import gtk.types;
 /**
  * A `GtkShortcutTrigger` that never triggers.
  */
-class NeverTrigger : ShortcutTrigger
+class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -36,11 +36,11 @@ class NeverTrigger : ShortcutTrigger
    * all virtual functions.
    * Returns: The never trigger
    */
-  static NeverTrigger get()
+  static gtk.never_trigger.NeverTrigger get()
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_never_trigger_get();
-    auto _retval = ObjectG.getDObject!NeverTrigger(cast(GtkShortcutTrigger*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.never_trigger.NeverTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
     return _retval;
   }
 }

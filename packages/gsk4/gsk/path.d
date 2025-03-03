@@ -1,7 +1,7 @@
 module gsk.path;
 
 import cairo.context;
-import gid.global;
+import gid.gid;
 import glib.string_;
 import gobject.boxed;
 import graphene.point;
@@ -28,7 +28,7 @@ import gsk.types;
  * <img alt\="A Path" src\="path-light.png">
  * </picture>
  */
-class Path : Boxed
+class Path : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -64,18 +64,18 @@ class Path : Boxed
    * - When the flags disallow certain operations, it provides
    * an approximation of the path using just the allowed operations.
    * Params:
-   *   flags = flags to pass to the foreach function. See [gsk.PathForeachFlags]
+   *   flags = flags to pass to the foreach function. See [gsk.types.PathForeachFlags]
    *     for details about flags
    *   func = the function to call for operations
    * Returns: `FALSE` if func returned FALSE`, `TRUE` otherwise.
    */
-  bool foreach_(PathForeachFlags flags, PathForeachFunc func)
+  bool foreach_(gsk.types.PathForeachFlags flags, gsk.types.PathForeachFunc func)
   {
     extern(C) bool _funcCallback(GskPathOperation op, const(graphene_point_t)* pts, size_t nPts, float weight, void* userData)
     {
-      auto _dlg = cast(PathForeachFunc*)userData;
+      auto _dlg = cast(gsk.types.PathForeachFunc*)userData;
 
-      bool _retval = (*_dlg)(op, pts ? new Point(cast(void*)pts, No.Take) : null, nPts, weight);
+      bool _retval = (*_dlg)(op, pts ? new graphene.point.Point(cast(void*)pts, No.Take) : null, nPts, weight);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -103,12 +103,12 @@ class Path : Boxed
    * Returns: `TRUE` if the path has bounds, `FALSE` if the path is known
    *   to be empty and have no bounds.
    */
-  bool getBounds(out Rect bounds)
+  bool getBounds(out graphene.rect.Rect bounds)
   {
     bool _retval;
     graphene_rect_t _bounds;
     _retval = gsk_path_get_bounds(cast(GskPath*)cPtr, &_bounds);
-    bounds = new Rect(cast(void*)&_bounds, No.Take);
+    bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.Take);
     return _retval;
   }
 
@@ -125,12 +125,12 @@ class Path : Boxed
    * Returns: `TRUE` if the path has bounds, `FALSE` if the path is known
    *   to be empty and have no bounds.
    */
-  bool getStrokeBounds(Stroke stroke, out Rect bounds)
+  bool getStrokeBounds(gsk.stroke.Stroke stroke, out graphene.rect.Rect bounds)
   {
     bool _retval;
     graphene_rect_t _bounds;
-    _retval = gsk_path_get_stroke_bounds(cast(GskPath*)cPtr, stroke ? cast(GskStroke*)stroke.cPtr(No.Dup) : null, &_bounds);
-    bounds = new Rect(cast(void*)&_bounds, No.Take);
+    _retval = gsk_path_get_stroke_bounds(cast(GskPath*)cPtr, stroke ? cast(const(GskStroke)*)stroke.cPtr(No.Dup) : null, &_bounds);
+    bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.Take);
     return _retval;
   }
 
@@ -145,10 +145,10 @@ class Path : Boxed
    *   fillRule = the fill rule to follow
    * Returns: `TRUE` if point is inside
    */
-  bool inFill(Point point, FillRule fillRule)
+  bool inFill(graphene.point.Point point, gsk.types.FillRule fillRule)
   {
     bool _retval;
-    _retval = gsk_path_in_fill(cast(GskPath*)cPtr, point ? cast(graphene_point_t*)point.cPtr(No.Dup) : null, fillRule);
+    _retval = gsk_path_in_fill(cast(GskPath*)cPtr, point ? cast(const(graphene_point_t)*)point.cPtr(No.Dup) : null, fillRule);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class Path : Boxed
    * Params:
    *   string_ = The string to print into
    */
-  void print(String string_)
+  void print(glib.string_.String string_)
   {
     gsk_path_print(cast(GskPath*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
   }
@@ -199,7 +199,7 @@ class Path : Boxed
    * Params:
    *   cr = a cairo context
    */
-  void toCairo(Context cr)
+  void toCairo(cairo.context.Context cr)
   {
     gsk_path_to_cairo(cast(GskPath*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
   }
@@ -216,7 +216,7 @@ class Path : Boxed
   {
     char* _cretval;
     _cretval = gsk_path_to_string(cast(GskPath*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -245,12 +245,12 @@ class Path : Boxed
    *   string_ = a string
    * Returns: a new `GskPath`, or `NULL` if string could not be parsed
    */
-  static Path parse(string string_)
+  static gsk.path.Path parse(string string_)
   {
     GskPath* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = gsk_path_parse(_string_);
-    auto _retval = _cretval ? new Path(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

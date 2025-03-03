@@ -3,10 +3,10 @@ module arrow.read_options;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class ReadOptions : ObjectG
+class ReadOptions : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -87,7 +87,7 @@
 //# Add missing closure parameter designations
 //!set callback[SignalEmissionHook].parameters.parameter[data][closure] 3
 
-//!class Types
+//!class types
 
   enum GTypeFundamentalShift = 2; /// Fundamental GType shift value (G_TYPE_FUNDAMENTAL_SHIFT)
 

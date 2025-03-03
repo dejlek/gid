@@ -1,6 +1,6 @@
 module gsk.global;
 
-import gid.global;
+import gid.gid;
 import gobject.value;
 import gsk.c.functions;
 import gsk.c.types;
@@ -15,11 +15,11 @@ import gsk.types;
  *   value = a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
  * Returns: a `GskRenderNode`
  */
-RenderNode valueDupRenderNode(Value value)
+gsk.render_node.RenderNode valueDupRenderNode(gobject.value.Value value)
 {
   GskRenderNode* _cretval;
-  _cretval = gsk_value_dup_render_node(value ? cast(GValue*)value.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, Yes.Take) : null;
+  _cretval = gsk_value_dup_render_node(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -29,11 +29,11 @@ RenderNode valueDupRenderNode(Value value)
  *   value = a `GValue` initialized with type `GSK_TYPE_RENDER_NODE`
  * Returns: a `GskRenderNode`
  */
-RenderNode valueGetRenderNode(Value value)
+gsk.render_node.RenderNode valueGetRenderNode(gobject.value.Value value)
 {
   GskRenderNode* _cretval;
-  _cretval = gsk_value_get_render_node(value ? cast(GValue*)value.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+  _cretval = gsk_value_get_render_node(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -44,7 +44,7 @@ RenderNode valueGetRenderNode(Value value)
  *   value = a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
  *   node = a `GskRenderNode`
  */
-void valueSetRenderNode(Value value, RenderNode node)
+void valueSetRenderNode(gobject.value.Value value, gsk.render_node.RenderNode node)
 {
   gsk_value_set_render_node(value ? cast(GValue*)value.cPtr(No.Dup) : null, node ? cast(GskRenderNode*)node.cPtr(No.Dup) : null);
 }
@@ -56,7 +56,7 @@ void valueSetRenderNode(Value value, RenderNode node)
  *   value = a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
  *   node = a `GskRenderNode`
  */
-void valueTakeRenderNode(Value value, RenderNode node)
+void valueTakeRenderNode(gobject.value.Value value, gsk.render_node.RenderNode node)
 {
   gsk_value_take_render_node(value ? cast(GValue*)value.cPtr(No.Dup) : null, node ? cast(GskRenderNode*)node.cPtr(Yes.Dup) : null);
 }

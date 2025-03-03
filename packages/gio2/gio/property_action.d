@@ -1,6 +1,6 @@
 module gio.property_action;
 
-import gid.global;
+import gid.gid;
 import gio.action;
 import gio.action_mixin;
 import gio.c.functions;
@@ -50,7 +50,7 @@ import gobject.object;
  * see [gio.settings.Settings.createAction] instead, and possibly combine its
  * use with [gio.settings.Settings.bind].
  */
-class PropertyAction : ObjectG, Action
+class PropertyAction : gobject.object.ObjectG, gio.action.Action
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -85,7 +85,7 @@ class PropertyAction : ObjectG, Action
    *   propertyName = the name of the property
    * Returns: a new #GPropertyAction
    */
-  this(string name, ObjectG object, string propertyName)
+  this(string name, gobject.object.ObjectG object, string propertyName)
   {
     GPropertyAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);

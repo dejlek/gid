@@ -1,6 +1,6 @@
 module harfbuzz.segment_properties;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -11,7 +11,7 @@ import harfbuzz.types;
  * set and retrieved using [harfbuzz.global.bufferSetSegmentProperties] and
  * [harfbuzz.global.bufferGetSegmentProperties], respectively.
  */
-class SegmentProperties : Boxed
+class SegmentProperties : gobject.boxed.Boxed
 {
 
   this()
@@ -40,32 +40,32 @@ class SegmentProperties : Boxed
     return getType();
   }
 
-  @property Direction direction()
+  @property harfbuzz.types.Direction direction()
   {
-    return cast(Direction)(cast(hb_segment_properties_t*)cPtr).direction;
+    return cast(harfbuzz.types.Direction)(cast(hb_segment_properties_t*)cPtr).direction;
   }
 
-  @property void direction(Direction propval)
+  @property void direction(harfbuzz.types.Direction propval)
   {
     (cast(hb_segment_properties_t*)cPtr).direction = cast(hb_direction_t)propval;
   }
 
-  @property Script script()
+  @property harfbuzz.types.Script script()
   {
-    return cast(Script)(cast(hb_segment_properties_t*)cPtr).script;
+    return cast(harfbuzz.types.Script)(cast(hb_segment_properties_t*)cPtr).script;
   }
 
-  @property void script(Script propval)
+  @property void script(harfbuzz.types.Script propval)
   {
     (cast(hb_segment_properties_t*)cPtr).script = cast(hb_script_t)propval;
   }
 
-  @property language_t language()
+  @property harfbuzz.types.language_t language()
   {
     return (cast(hb_segment_properties_t*)cPtr).language;
   }
 
-  @property void language(language_t propval)
+  @property void language(harfbuzz.types.language_t propval)
   {
     (cast(hb_segment_properties_t*)cPtr).language = propval;
   }

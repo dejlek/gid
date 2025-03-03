@@ -3,10 +3,10 @@ module arrow.s3_global_options;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class S3GlobalOptions : ObjectG
+class S3GlobalOptions : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

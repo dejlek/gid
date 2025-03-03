@@ -1,6 +1,6 @@
 module gio.application;
 
-import gid.global;
+import gid.gid;
 import gio.action_group;
 import gio.action_group_mixin;
 import gio.action_map;
@@ -11,7 +11,6 @@ import gio.c.types;
 import gio.cancellable;
 import gio.dbus_connection;
 import gio.file;
-import gio.file_mixin;
 import gio.notification;
 import gio.types;
 import glib.error;
@@ -126,7 +125,7 @@ import gobject.object;
  * For an example of using extra D-Bus hooks with `GApplication`, see
  * [gapplication-example-dbushooks.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-dbushooks.c).
  */
-class ApplicationGio : ObjectG, ActionGroup, ActionMap
+class ApplicationGio : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.action_map.ActionMap
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -159,7 +158,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    *   flags = the application flags
    * Returns: a new #GApplication instance
    */
-  this(string applicationId, ApplicationFlags flags)
+  this(string applicationId, gio.types.ApplicationFlags flags)
   {
     GApplication* _cretval;
     const(char)* _applicationId = applicationId.toCString(No.Alloc);
@@ -175,11 +174,11 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * If there is no default application then %NULL is returned.
    * Returns: the default application for this process, or %NULL
    */
-  static ApplicationGio getDefault()
+  static gio.application.ApplicationGio getDefault()
   {
     GApplication* _cretval;
     _cretval = g_application_get_default();
-    auto _retval = ObjectG.getDObject!ApplicationGio(cast(GApplication*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.application.ApplicationGio)(cast(GApplication*)_cretval, No.Take);
     return _retval;
   }
 
@@ -262,7 +261,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    *   argDescription = the placeholder to use for the extra argument
    *     parsed by the option in `--help` output
    */
-  void addMainOption(string longName, char shortName, OptionFlags flags, OptionArg arg, string description, string argDescription)
+  void addMainOption(string longName, char shortName, glib.types.OptionFlags flags, glib.types.OptionArg arg, string description, string argDescription)
   {
     const(char)* _longName = longName.toCString(No.Alloc);
     const(char)* _description = description.toCString(No.Alloc);
@@ -324,7 +323,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    *   entries = the
    *     main options for the application
    */
-  void addMainOptionEntries(OptionEntry[] entries)
+  void addMainOptionEntries(glib.types.OptionEntry[] entries)
   {
     auto _entries = cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr;
     g_application_add_main_option_entries(cast(GApplication*)cPtr, _entries);
@@ -354,7 +353,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * Params:
    *   group = a #GOptionGroup
    */
-  void addOptionGroup(OptionGroup group)
+  void addOptionGroup(glib.option_group.OptionGroup group)
   {
     g_application_add_option_group(cast(GApplication*)cPtr, group ? cast(GOptionGroup*)group.cPtr(Yes.Dup) : null);
   }
@@ -369,7 +368,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    *   object = a #GObject
    *   property = the name of a boolean property of object
    */
-  void bindBusyProperty(ObjectG object, string property)
+  void bindBusyProperty(gobject.object.ObjectG object, string property)
   {
     const(char)* _property = property.toCString(No.Alloc);
     g_application_bind_busy_property(cast(GApplication*)cPtr, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property);
@@ -383,7 +382,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
   {
     const(char)* _cretval;
     _cretval = g_application_get_application_id(cast(GApplication*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -400,11 +399,11 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * registered.  See [gio.application.ApplicationGio.getIsRegistered].
    * Returns: a #GDBusConnection, or %NULL
    */
-  DBusConnection getDbusConnection()
+  gio.dbus_connection.DBusConnection getDbusConnection()
   {
     GDBusConnection* _cretval;
     _cretval = g_application_get_dbus_connection(cast(GApplication*)cPtr);
-    auto _retval = ObjectG.getDObject!DBusConnection(cast(GDBusConnection*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -426,7 +425,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
   {
     const(char)* _cretval;
     _cretval = g_application_get_dbus_object_path(cast(GApplication*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -435,11 +434,11 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * See #GApplicationFlags.
    * Returns: the flags for application
    */
-  ApplicationFlags getFlags()
+  gio.types.ApplicationFlags getFlags()
   {
     GApplicationFlags _cretval;
     _cretval = g_application_get_flags(cast(GApplication*)cPtr);
-    ApplicationFlags _retval = cast(ApplicationFlags)_cretval;
+    gio.types.ApplicationFlags _retval = cast(gio.types.ApplicationFlags)_cretval;
     return _retval;
   }
 
@@ -508,7 +507,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
   {
     const(char)* _cretval;
     _cretval = g_application_get_resource_base_path(cast(GApplication*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -520,7 +519,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
   {
     const(char)* _cretval;
     _cretval = g_application_get_version(cast(GApplication*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -566,7 +565,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    *   files = an array of #GFiles to open
    *   hint = a hint $(LPAREN)or ""$(RPAREN), but never %NULL
    */
-  void open(File[] files, string hint)
+  void open(gio.file.File[] files, string hint)
   {
     int _nFiles;
     if (files)
@@ -626,7 +625,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE if registration succeeded
    */
-  bool register(Cancellable cancellable)
+  bool register(gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -759,7 +758,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    *   id = id of the notification, or %NULL
    *   notification = the #GNotification to send
    */
-  void sendNotification(string id, Notification notification)
+  void sendNotification(string id, gio.notification.Notification notification)
   {
     const(char)* _id = id.toCString(No.Alloc);
     g_application_send_notification(cast(GApplication*)cPtr, _id, notification ? cast(GNotification*)notification.cPtr(No.Dup) : null);
@@ -777,7 +776,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    *   introduce buggy behaviour $(LPAREN)ie: signals not emitted on changes to the
    *   action group$(RPAREN), so you should really use #GActionMap instead.
    */
-  void setActionGroup(ActionGroup actionGroup)
+  void setActionGroup(gio.action_group.ActionGroup actionGroup)
   {
     g_application_set_action_group(cast(GApplication*)cPtr, actionGroup ? cast(GActionGroup*)(cast(ObjectG)actionGroup).cPtr(No.Dup) : null);
   }
@@ -817,7 +816,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * Params:
    *   flags = the flags for application
    */
-  void setFlags(ApplicationFlags flags)
+  void setFlags(gio.types.ApplicationFlags flags)
   {
     g_application_set_flags(cast(GApplication*)cPtr, flags);
   }
@@ -937,7 +936,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    *   object = a #GObject
    *   property = the name of a boolean property of object
    */
-  void unbindBusyProperty(ObjectG object, string property)
+  void unbindBusyProperty(gobject.object.ObjectG object, string property)
   {
     const(char)* _property = property.toCString(No.Alloc);
     g_application_unbind_busy_property(cast(GApplication*)cPtr, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property);
@@ -980,8 +979,8 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * activation occurs. See [gio.application.ApplicationGio.activate].
    *   applicationGio = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(ApplicationGio applicationGio);
-  alias ActivateCallbackFunc = void function(ApplicationGio applicationGio);
+  alias ActivateCallbackDlg = void delegate(gio.application.ApplicationGio applicationGio);
+  alias ActivateCallbackFunc = void function(gio.application.ApplicationGio applicationGio);
 
   /**
    * Connect to Activate signal.
@@ -997,7 +996,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto applicationGio = getVal!ApplicationGio(_paramVals);
+      auto applicationGio = getVal!(gio.application.ApplicationGio)(_paramVals);
       _dClosure.dlg(applicationGio);
     }
 
@@ -1016,8 +1015,8 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * Returns: An integer that is set as the exit status for the calling
    *   process. See [gio.application_command_line.ApplicationCommandLine.setExitStatus].
    */
-  alias CommandLineCallbackDlg = int delegate(ApplicationCommandLine commandLine, ApplicationGio applicationGio);
-  alias CommandLineCallbackFunc = int function(ApplicationCommandLine commandLine, ApplicationGio applicationGio);
+  alias CommandLineCallbackDlg = int delegate(gio.application_command_line.ApplicationCommandLine commandLine, gio.application.ApplicationGio applicationGio);
+  alias CommandLineCallbackFunc = int function(gio.application_command_line.ApplicationCommandLine commandLine, gio.application.ApplicationGio applicationGio);
 
   /**
    * Connect to CommandLine signal.
@@ -1034,8 +1033,8 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       int _retval;
-      auto applicationGio = getVal!ApplicationGio(_paramVals);
-      auto commandLine = getVal!ApplicationCommandLine(&_paramVals[1]);
+      auto applicationGio = getVal!(gio.application.ApplicationGio)(_paramVals);
+      auto commandLine = getVal!(gio.application_command_line.ApplicationCommandLine)(&_paramVals[1]);
       _retval = _dClosure.dlg(commandLine, applicationGio);
       setVal!int(_returnValue, _retval);
     }
@@ -1087,8 +1086,8 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    *   and a positive value for failure. To continue, return -1 to let
    *   the default option processing continue.
    */
-  alias HandleLocalOptionsCallbackDlg = int delegate(VariantDict options, ApplicationGio applicationGio);
-  alias HandleLocalOptionsCallbackFunc = int function(VariantDict options, ApplicationGio applicationGio);
+  alias HandleLocalOptionsCallbackDlg = int delegate(glib.variant_dict.VariantDict options, gio.application.ApplicationGio applicationGio);
+  alias HandleLocalOptionsCallbackFunc = int function(glib.variant_dict.VariantDict options, gio.application.ApplicationGio applicationGio);
 
   /**
    * Connect to HandleLocalOptions signal.
@@ -1105,8 +1104,8 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       int _retval;
-      auto applicationGio = getVal!ApplicationGio(_paramVals);
-      auto options = getVal!VariantDict(&_paramVals[1]);
+      auto applicationGio = getVal!(gio.application.ApplicationGio)(_paramVals);
+      auto options = getVal!(glib.variant_dict.VariantDict)(&_paramVals[1]);
       _retval = _dClosure.dlg(options, applicationGio);
       setVal!int(_returnValue, _retval);
     }
@@ -1123,8 +1122,8 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    *   applicationGio = the instance the signal is connected to
    * Returns: %TRUE if the signal has been handled
    */
-  alias NameLostCallbackDlg = bool delegate(ApplicationGio applicationGio);
-  alias NameLostCallbackFunc = bool function(ApplicationGio applicationGio);
+  alias NameLostCallbackDlg = bool delegate(gio.application.ApplicationGio applicationGio);
+  alias NameLostCallbackFunc = bool function(gio.application.ApplicationGio applicationGio);
 
   /**
    * Connect to NameLost signal.
@@ -1141,7 +1140,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto applicationGio = getVal!ApplicationGio(_paramVals);
+      auto applicationGio = getVal!(gio.application.ApplicationGio)(_paramVals);
       _retval = _dClosure.dlg(applicationGio);
       setVal!bool(_returnValue, _retval);
     }
@@ -1158,8 +1157,8 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    *   hint = a hint provided by the calling instance
    *   applicationGio = the instance the signal is connected to
    */
-  alias OpenCallbackDlg = void delegate(File[] files, string hint, ApplicationGio applicationGio);
-  alias OpenCallbackFunc = void function(File[] files, string hint, ApplicationGio applicationGio);
+  alias OpenCallbackDlg = void delegate(gio.file.File[] files, string hint, gio.application.ApplicationGio applicationGio);
+  alias OpenCallbackFunc = void function(gio.file.File[] files, string hint, gio.application.ApplicationGio applicationGio);
 
   /**
    * Connect to Open signal.
@@ -1175,13 +1174,13 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto applicationGio = getVal!ApplicationGio(_paramVals);
+      auto applicationGio = getVal!(gio.application.ApplicationGio)(_paramVals);
       auto files = getVal!(GFile**)(&_paramVals[1]);
-      File[] _files;
-      auto nFiles = getVal!int(&_paramVals[2]);
-      auto hint = getVal!string(&_paramVals[3]);
+      gio.file.File[] _files;
+      auto nFiles = getVal!(int)(&_paramVals[2]);
+      auto hint = getVal!(string)(&_paramVals[3]);
       foreach (i; 0 .. nFiles)
-        _files ~= ObjectG.getDObject!File(files[i], No.Take);
+        _files ~= ObjectG.getDObject!(gio.file.File)(files[i], No.Take);
       _dClosure.dlg(_files, hint, applicationGio);
     }
 
@@ -1194,8 +1193,8 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * immediately after the main loop terminates.
    *   applicationGio = the instance the signal is connected to
    */
-  alias ShutdownCallbackDlg = void delegate(ApplicationGio applicationGio);
-  alias ShutdownCallbackFunc = void function(ApplicationGio applicationGio);
+  alias ShutdownCallbackDlg = void delegate(gio.application.ApplicationGio applicationGio);
+  alias ShutdownCallbackFunc = void function(gio.application.ApplicationGio applicationGio);
 
   /**
    * Connect to Shutdown signal.
@@ -1211,7 +1210,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto applicationGio = getVal!ApplicationGio(_paramVals);
+      auto applicationGio = getVal!(gio.application.ApplicationGio)(_paramVals);
       _dClosure.dlg(applicationGio);
     }
 
@@ -1224,8 +1223,8 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
    * after registration. See [gio.application.ApplicationGio.register].
    *   applicationGio = the instance the signal is connected to
    */
-  alias StartupCallbackDlg = void delegate(ApplicationGio applicationGio);
-  alias StartupCallbackFunc = void function(ApplicationGio applicationGio);
+  alias StartupCallbackDlg = void delegate(gio.application.ApplicationGio applicationGio);
+  alias StartupCallbackFunc = void function(gio.application.ApplicationGio applicationGio);
 
   /**
    * Connect to Startup signal.
@@ -1241,7 +1240,7 @@ class ApplicationGio : ObjectG, ActionGroup, ActionMap
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto applicationGio = getVal!ApplicationGio(_paramVals);
+      auto applicationGio = getVal!(gio.application.ApplicationGio)(_paramVals);
       _dClosure.dlg(applicationGio);
     }
 

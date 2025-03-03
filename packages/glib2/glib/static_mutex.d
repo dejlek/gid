@@ -1,6 +1,6 @@
 module glib.static_mutex;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.mutex;
@@ -66,16 +66,16 @@ class StaticMutex
     return cast(void*)&cInstance;
   }
 
-  @property Mutex mutex()
+  @property glib.mutex.Mutex mutex()
   {
-    return new Mutex(cast(GMutex*)(cast(GStaticMutex*)cPtr).mutex);
+    return new glib.mutex.Mutex(cast(GMutex*)(cast(GStaticMutex*)cPtr).mutex);
   }
 
-  Mutex getMutexImpl()
+  glib.mutex.Mutex getMutexImpl()
   {
     GMutex* _cretval;
     _cretval = g_static_mutex_get_mutex_impl(cast(GStaticMutex*)cPtr);
-    auto _retval = _cretval ? new Mutex(cast(GMutex*)_cretval) : null;
+    auto _retval = _cretval ? new glib.mutex.Mutex(cast(GMutex*)_cretval) : null;
     return _retval;
   }
 }

@@ -6,11 +6,11 @@ import arrow.decimal64;
 import arrow.decimal64_data_type;
 import arrow.fixed_size_binary_array_builder;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.error;
 
-class Decimal64ArrayBuilder : FixedSizeBinaryArrayBuilder
+class Decimal64ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,16 +29,16 @@ class Decimal64ArrayBuilder : FixedSizeBinaryArrayBuilder
     return getType();
   }
 
-  this(Decimal64DataType dataType)
+  this(arrow.decimal64_data_type.Decimal64DataType dataType)
   {
     GArrowDecimal64ArrayBuilder* _cretval;
     _cretval = garrow_decimal64_array_builder_new(dataType ? cast(GArrowDecimal64DataType*)dataType.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
-  alias appendValue = FixedSizeBinaryArrayBuilder.appendValue;
+  alias appendValue = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValue;
 
-  bool appendValue(Decimal64 value)
+  bool appendValue(arrow.decimal64.Decimal64 value)
   {
     bool _retval;
     GError *_err;
@@ -48,7 +48,7 @@ class Decimal64ArrayBuilder : FixedSizeBinaryArrayBuilder
     return _retval;
   }
 
-  alias appendValues = FixedSizeBinaryArrayBuilder.appendValues;
+  alias appendValues = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValues;
 
   /**
    * Append multiple values at once. It's more efficient than multiple
@@ -61,7 +61,7 @@ class Decimal64ArrayBuilder : FixedSizeBinaryArrayBuilder
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendValues(Decimal64[] values, bool[] isValids)
+  bool appendValues(arrow.decimal64.Decimal64[] values, bool[] isValids)
   {
     bool _retval;
     long _valuesLength;

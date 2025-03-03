@@ -1,6 +1,6 @@
 module gobject.enum_class;
 
-import gid.global;
+import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.enum_value;
@@ -60,8 +60,8 @@ class EnumClass
     (cast(GEnumClass*)cPtr).nValues = propval;
   }
 
-  @property EnumValue values()
+  @property gobject.enum_value.EnumValue values()
   {
-    return new EnumValue(cast(GEnumValue*)(cast(GEnumClass*)cPtr).values);
+    return new gobject.enum_value.EnumValue(cast(GEnumValue*)(cast(GEnumClass*)cPtr).values);
   }
 }

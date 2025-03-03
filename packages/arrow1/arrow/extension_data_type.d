@@ -7,10 +7,10 @@ import arrow.chunked_array;
 import arrow.data_type;
 import arrow.extension_array;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class ExtensionDataType : DataType
+class ExtensionDataType : arrow.data_type.DataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -33,23 +33,23 @@ class ExtensionDataType : DataType
   {
     char* _cretval;
     _cretval = garrow_extension_data_type_get_extension_name(cast(GArrowExtensionDataType*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
-  ExtensionArray wrapArray(Array storage)
+  arrow.extension_array.ExtensionArray wrapArray(arrow.array.Array storage)
   {
     GArrowExtensionArray* _cretval;
     _cretval = garrow_extension_data_type_wrap_array(cast(GArrowExtensionDataType*)cPtr, storage ? cast(GArrowArray*)storage.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!ExtensionArray(cast(GArrowExtensionArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.extension_array.ExtensionArray)(cast(GArrowExtensionArray*)_cretval, Yes.Take);
     return _retval;
   }
 
-  ChunkedArray wrapChunkedArray(ChunkedArray storage)
+  arrow.chunked_array.ChunkedArray wrapChunkedArray(arrow.chunked_array.ChunkedArray storage)
   {
     GArrowChunkedArray* _cretval;
     _cretval = garrow_extension_data_type_wrap_chunked_array(cast(GArrowExtensionDataType*)cPtr, storage ? cast(GArrowChunkedArray*)storage.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!ChunkedArray(cast(GArrowChunkedArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

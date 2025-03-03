@@ -1,8 +1,7 @@
 module gio.input_stream;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -22,7 +21,7 @@ import gobject.object;
  * of streaming APIs.
  * All of these functions have async variants too.
  */
-class InputStream : ObjectG
+class InputStream : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -72,7 +71,7 @@ class InputStream : ObjectG
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: %TRUE on success, %FALSE on failure
    */
-  bool close(Cancellable cancellable)
+  bool close(gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -97,14 +96,14 @@ class InputStream : ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void closeAsync(int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -118,7 +117,7 @@ class InputStream : ObjectG
    *   result = a #GAsyncResult.
    * Returns: %TRUE if the stream was closed successfully.
    */
-  bool closeFinish(AsyncResult result)
+  bool closeFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -172,7 +171,7 @@ class InputStream : ObjectG
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: Number of bytes read, or -1 on error, or 0 on end of file.
    */
-  ptrdiff_t read(ref ubyte[] buffer, Cancellable cancellable)
+  ptrdiff_t read(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable)
   {
     ptrdiff_t _retval;
     size_t _count;
@@ -205,7 +204,7 @@ class InputStream : ObjectG
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: %TRUE on success, %FALSE if there was an error
    */
-  bool readAll(ref ubyte[] buffer, out size_t bytesRead, Cancellable cancellable)
+  bool readAll(ref ubyte[] buffer, out size_t bytesRead, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     size_t _count;
@@ -231,14 +230,14 @@ class InputStream : ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void readAllAsync(ref ubyte[] buffer, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void readAllAsync(ref ubyte[] buffer, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -261,7 +260,7 @@ class InputStream : ObjectG
    *   bytesRead = location to store the number of bytes that was read from the stream
    * Returns: %TRUE on success, %FALSE if there was an error
    */
-  bool readAllFinish(AsyncResult result, out size_t bytesRead)
+  bool readAllFinish(gio.async_result.AsyncResult result, out size_t bytesRead)
   {
     bool _retval;
     GError *_err;
@@ -298,14 +297,14 @@ class InputStream : ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void readAsync(ref ubyte[] buffer, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void readAsync(ref ubyte[] buffer, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -340,14 +339,14 @@ class InputStream : ObjectG
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: a new #GBytes, or %NULL on error
    */
-  Bytes readBytes(size_t count, Cancellable cancellable)
+  glib.bytes.Bytes readBytes(size_t count, gio.cancellable.Cancellable cancellable)
   {
     GBytes* _cretval;
     GError *_err;
     _cretval = g_input_stream_read_bytes(cast(GInputStream*)cPtr, count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -375,14 +374,14 @@ class InputStream : ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void readBytesAsync(size_t count, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void readBytesAsync(size_t count, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -396,14 +395,14 @@ class InputStream : ObjectG
    *   result = a #GAsyncResult.
    * Returns: the newly-allocated #GBytes, or %NULL on error
    */
-  Bytes readBytesFinish(AsyncResult result)
+  glib.bytes.Bytes readBytesFinish(gio.async_result.AsyncResult result)
   {
     GBytes* _cretval;
     GError *_err;
     _cretval = g_input_stream_read_bytes_finish(cast(GInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -413,7 +412,7 @@ class InputStream : ObjectG
    *   result = a #GAsyncResult.
    * Returns: number of bytes read in, or -1 on error, or 0 on end of file.
    */
-  ptrdiff_t readFinish(AsyncResult result)
+  ptrdiff_t readFinish(gio.async_result.AsyncResult result)
   {
     ptrdiff_t _retval;
     GError *_err;
@@ -456,7 +455,7 @@ class InputStream : ObjectG
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    * Returns: Number of bytes skipped, or -1 on error
    */
-  ptrdiff_t skip(size_t count, Cancellable cancellable)
+  ptrdiff_t skip(size_t count, gio.cancellable.Cancellable cancellable)
   {
     ptrdiff_t _retval;
     GError *_err;
@@ -492,14 +491,14 @@ class InputStream : ObjectG
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  void skipAsync(size_t count, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void skipAsync(size_t count, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -513,7 +512,7 @@ class InputStream : ObjectG
    *   result = a #GAsyncResult.
    * Returns: the size of the bytes skipped, or `-1` on error.
    */
-  ptrdiff_t skipFinish(AsyncResult result)
+  ptrdiff_t skipFinish(gio.async_result.AsyncResult result)
   {
     ptrdiff_t _retval;
     GError *_err;

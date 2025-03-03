@@ -1,7 +1,7 @@
 module gio.pollable_input_stream_mixin;
 
 public import gio.pollable_input_stream_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
@@ -52,11 +52,11 @@ template PollableInputStreamT()
    *   cancellable = a #GCancellable, or %NULL
    * Returns: a new #GSource
    */
-  override Source createSource(Cancellable cancellable)
+  override glib.source.Source createSource(gio.cancellable.Cancellable cancellable)
   {
     GSource* _cretval;
     _cretval = g_pollable_input_stream_create_source(cast(GPollableInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new Source(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -102,7 +102,7 @@ template PollableInputStreamT()
    * Returns: the number of bytes read, or -1 on error $(LPAREN)including
    *   %G_IO_ERROR_WOULD_BLOCK$(RPAREN).
    */
-  override ptrdiff_t readNonblocking(ref ubyte[] buffer, Cancellable cancellable)
+  override ptrdiff_t readNonblocking(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable)
   {
     ptrdiff_t _retval;
     size_t _count;

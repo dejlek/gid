@@ -1,6 +1,6 @@
 module gtk.gesture_zoom;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -13,7 +13,7 @@ import gtk.types;
  * signal@Gtk.GestureZoom::scale-changed signal is emitted to report
  * the scale factor.
  */
-class GestureZoom : Gesture
+class GestureZoom : gtk.gesture.Gesture
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -65,8 +65,8 @@ class GestureZoom : Gesture
    *   scale = Scale delta, taking the initial state as 1:1
    *   gestureZoom = the instance the signal is connected to
    */
-  alias ScaleChangedCallbackDlg = void delegate(double scale, GestureZoom gestureZoom);
-  alias ScaleChangedCallbackFunc = void function(double scale, GestureZoom gestureZoom);
+  alias ScaleChangedCallbackDlg = void delegate(double scale, gtk.gesture_zoom.GestureZoom gestureZoom);
+  alias ScaleChangedCallbackFunc = void function(double scale, gtk.gesture_zoom.GestureZoom gestureZoom);
 
   /**
    * Connect to ScaleChanged signal.
@@ -82,8 +82,8 @@ class GestureZoom : Gesture
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureZoom = getVal!GestureZoom(_paramVals);
-      auto scale = getVal!double(&_paramVals[1]);
+      auto gestureZoom = getVal!(gtk.gesture_zoom.GestureZoom)(_paramVals);
+      auto scale = getVal!(double)(&_paramVals[1]);
       _dClosure.dlg(scale, gestureZoom);
     }
 

@@ -3,11 +3,11 @@ module arrowflight.criteria;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import gobject.object;
 
-class Criteria : ObjectG
+class Criteria : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class Criteria : ObjectG
     return getType();
   }
 
-  this(Bytes expression)
+  this(glib.bytes.Bytes expression)
   {
     GAFlightCriteria* _cretval;
     _cretval = gaflight_criteria_new(expression ? cast(GBytes*)expression.cPtr(No.Dup) : null);

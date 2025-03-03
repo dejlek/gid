@@ -1,6 +1,6 @@
 module gtksource.language;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -13,7 +13,7 @@ import gtksource.types;
  * Use class@LanguageManager to obtain a `GtkSourceLanguage` instance, and
  * [gtksource.buffer.Buffer.setLanguage] to apply it to a class@Buffer.
  */
-class Language : ObjectG
+class Language : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -79,7 +79,7 @@ class Language : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_language_get_id(cast(GtkSourceLanguage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class Language : ObjectG
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_source_language_get_metadata(cast(GtkSourceLanguage*)cPtr, _name);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class Language : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_language_get_name(cast(GtkSourceLanguage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class Language : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_language_get_section(cast(GtkSourceLanguage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class Language : ObjectG
     const(char)* _cretval;
     const(char)* _styleId = styleId.toCString(No.Alloc);
     _cretval = gtk_source_language_get_style_fallback(cast(GtkSourceLanguage*)cPtr, _styleId);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class Language : ObjectG
     const(char)* _cretval;
     const(char)* _styleId = styleId.toCString(No.Alloc);
     _cretval = gtk_source_language_get_style_name(cast(GtkSourceLanguage*)cPtr, _styleId);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

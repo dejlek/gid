@@ -1,7 +1,7 @@
 module gtk.event_controller_scroll;
 
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -38,7 +38,7 @@ import gtk.types;
  * of scrolling with two X/Y velocity arguments that are consistent with the
  * motion that was received.
  */
-class EventControllerScroll : EventController
+class EventControllerScroll : gtk.event_controller.EventController
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -63,7 +63,7 @@ class EventControllerScroll : EventController
    *   flags = flags affecting the controller behavior
    * Returns: a new `GtkEventControllerScroll`
    */
-  this(EventControllerScrollFlags flags)
+  this(gtk.types.EventControllerScrollFlags flags)
   {
     GtkEventController* _cretval;
     _cretval = gtk_event_controller_scroll_new(flags);
@@ -74,11 +74,11 @@ class EventControllerScroll : EventController
    * Gets the flags conditioning the scroll controller behavior.
    * Returns: the controller flags.
    */
-  EventControllerScrollFlags getFlags()
+  gtk.types.EventControllerScrollFlags getFlags()
   {
     GtkEventControllerScrollFlags _cretval;
     _cretval = gtk_event_controller_scroll_get_flags(cast(GtkEventControllerScroll*)cPtr);
-    EventControllerScrollFlags _retval = cast(EventControllerScrollFlags)_cretval;
+    gtk.types.EventControllerScrollFlags _retval = cast(gtk.types.EventControllerScrollFlags)_cretval;
     return _retval;
   }
 
@@ -89,11 +89,11 @@ class EventControllerScroll : EventController
    * %GTK_EVENT_CONTROLLER_SCROLL_DISCRETE flag is set.
    * Returns: the scroll unit.
    */
-  ScrollUnit getUnit()
+  gdk.types.ScrollUnit getUnit()
   {
     GdkScrollUnit _cretval;
     _cretval = gtk_event_controller_scroll_get_unit(cast(GtkEventControllerScroll*)cPtr);
-    ScrollUnit _retval = cast(ScrollUnit)_cretval;
+    gdk.types.ScrollUnit _retval = cast(gdk.types.ScrollUnit)_cretval;
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class EventControllerScroll : EventController
    * Params:
    *   flags = flags affecting the controller behavior
    */
-  void setFlags(EventControllerScrollFlags flags)
+  void setFlags(gtk.types.EventControllerScrollFlags flags)
   {
     gtk_event_controller_scroll_set_flags(cast(GtkEventControllerScroll*)cPtr, flags);
   }
@@ -118,8 +118,8 @@ class EventControllerScroll : EventController
    *   velY = Y velocity
    *   eventControllerScroll = the instance the signal is connected to
    */
-  alias DecelerateCallbackDlg = void delegate(double velX, double velY, EventControllerScroll eventControllerScroll);
-  alias DecelerateCallbackFunc = void function(double velX, double velY, EventControllerScroll eventControllerScroll);
+  alias DecelerateCallbackDlg = void delegate(double velX, double velY, gtk.event_controller_scroll.EventControllerScroll eventControllerScroll);
+  alias DecelerateCallbackFunc = void function(double velX, double velY, gtk.event_controller_scroll.EventControllerScroll eventControllerScroll);
 
   /**
    * Connect to Decelerate signal.
@@ -135,9 +135,9 @@ class EventControllerScroll : EventController
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto eventControllerScroll = getVal!EventControllerScroll(_paramVals);
-      auto velX = getVal!double(&_paramVals[1]);
-      auto velY = getVal!double(&_paramVals[2]);
+      auto eventControllerScroll = getVal!(gtk.event_controller_scroll.EventControllerScroll)(_paramVals);
+      auto velX = getVal!(double)(&_paramVals[1]);
+      auto velY = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(velX, velY, eventControllerScroll);
     }
 
@@ -157,8 +157,8 @@ class EventControllerScroll : EventController
    * Returns: %TRUE if the scroll event was handled,
    *   %FALSE otherwise.
    */
-  alias ScrollCallbackDlg = bool delegate(double dx, double dy, EventControllerScroll eventControllerScroll);
-  alias ScrollCallbackFunc = bool function(double dx, double dy, EventControllerScroll eventControllerScroll);
+  alias ScrollCallbackDlg = bool delegate(double dx, double dy, gtk.event_controller_scroll.EventControllerScroll eventControllerScroll);
+  alias ScrollCallbackFunc = bool function(double dx, double dy, gtk.event_controller_scroll.EventControllerScroll eventControllerScroll);
 
   /**
    * Connect to Scroll signal.
@@ -175,9 +175,9 @@ class EventControllerScroll : EventController
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto eventControllerScroll = getVal!EventControllerScroll(_paramVals);
-      auto dx = getVal!double(&_paramVals[1]);
-      auto dy = getVal!double(&_paramVals[2]);
+      auto eventControllerScroll = getVal!(gtk.event_controller_scroll.EventControllerScroll)(_paramVals);
+      auto dx = getVal!(double)(&_paramVals[1]);
+      auto dy = getVal!(double)(&_paramVals[2]);
       _retval = _dClosure.dlg(dx, dy, eventControllerScroll);
       setVal!bool(_returnValue, _retval);
     }
@@ -191,8 +191,8 @@ class EventControllerScroll : EventController
    * It will only be emitted on devices capable of it.
    *   eventControllerScroll = the instance the signal is connected to
    */
-  alias ScrollBeginCallbackDlg = void delegate(EventControllerScroll eventControllerScroll);
-  alias ScrollBeginCallbackFunc = void function(EventControllerScroll eventControllerScroll);
+  alias ScrollBeginCallbackDlg = void delegate(gtk.event_controller_scroll.EventControllerScroll eventControllerScroll);
+  alias ScrollBeginCallbackFunc = void function(gtk.event_controller_scroll.EventControllerScroll eventControllerScroll);
 
   /**
    * Connect to ScrollBegin signal.
@@ -208,7 +208,7 @@ class EventControllerScroll : EventController
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto eventControllerScroll = getVal!EventControllerScroll(_paramVals);
+      auto eventControllerScroll = getVal!(gtk.event_controller_scroll.EventControllerScroll)(_paramVals);
       _dClosure.dlg(eventControllerScroll);
     }
 
@@ -221,8 +221,8 @@ class EventControllerScroll : EventController
    * It will only be emitted on devices capable of it.
    *   eventControllerScroll = the instance the signal is connected to
    */
-  alias ScrollEndCallbackDlg = void delegate(EventControllerScroll eventControllerScroll);
-  alias ScrollEndCallbackFunc = void function(EventControllerScroll eventControllerScroll);
+  alias ScrollEndCallbackDlg = void delegate(gtk.event_controller_scroll.EventControllerScroll eventControllerScroll);
+  alias ScrollEndCallbackFunc = void function(gtk.event_controller_scroll.EventControllerScroll eventControllerScroll);
 
   /**
    * Connect to ScrollEnd signal.
@@ -238,7 +238,7 @@ class EventControllerScroll : EventController
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto eventControllerScroll = getVal!EventControllerScroll(_paramVals);
+      auto eventControllerScroll = getVal!(gtk.event_controller_scroll.EventControllerScroll)(_paramVals);
       _dClosure.dlg(eventControllerScroll);
     }
 

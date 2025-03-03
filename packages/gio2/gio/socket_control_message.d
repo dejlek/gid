@@ -1,6 +1,6 @@
 module gio.socket_control_message;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -21,10 +21,10 @@ import gobject.object;
  * methods.
  * To extend the set of control messages that can be received, subclass
  * this class and implement the `deserialize` method. Also, make sure your
- * class is registered with the [gobject.size_t] type system before calling
+ * class is registered with the [gobject.types.size_t] type system before calling
  * [gio.socket.Socket.receiveMessage] to read such a message.
  */
-class SocketControlMessage : ObjectG
+class SocketControlMessage : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -56,7 +56,7 @@ class SocketControlMessage : ObjectG
    *   data = pointer to the message data
    * Returns: the deserialized message or %NULL
    */
-  static SocketControlMessage deserialize(int level, int type, ubyte[] data)
+  static gio.socket_control_message.SocketControlMessage deserialize(int level, int type, ubyte[] data)
   {
     GSocketControlMessage* _cretval;
     size_t _size;
@@ -65,7 +65,7 @@ class SocketControlMessage : ObjectG
 
     auto _data = cast(void*)data.ptr;
     _cretval = g_socket_control_message_deserialize(level, type, _size, _data);
-    auto _retval = ObjectG.getDObject!SocketControlMessage(cast(GSocketControlMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_control_message.SocketControlMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
     return _retval;
   }
 

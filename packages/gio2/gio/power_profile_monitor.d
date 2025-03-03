@@ -1,7 +1,7 @@
 module gio.power_profile_monitor;
 
 public import gio.power_profile_monitor_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -41,11 +41,11 @@ interface PowerProfileMonitor
    * Gets a reference to the default #GPowerProfileMonitor for the system.
    * Returns: a new reference to the default #GPowerProfileMonitor
    */
-  static PowerProfileMonitor dupDefault()
+  static gio.power_profile_monitor.PowerProfileMonitor dupDefault()
   {
     GPowerProfileMonitor* _cretval;
     _cretval = g_power_profile_monitor_dup_default();
-    auto _retval = ObjectG.getDObject!PowerProfileMonitor(cast(GPowerProfileMonitor*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.power_profile_monitor.PowerProfileMonitor)(cast(GPowerProfileMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -1,6 +1,6 @@
 module gsk.transform_node;
 
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.render_node;
@@ -10,7 +10,7 @@ import gsk.types;
 /**
  * A render node applying a `GskTransform` to its single child node.
  */
-class TransformNode : RenderNode
+class TransformNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,7 +29,7 @@ class TransformNode : RenderNode
    *   transform = The transform to apply
    * Returns: A new `GskRenderNode`
    */
-  this(RenderNode child, Transform transform)
+  this(gsk.render_node.RenderNode child, gsk.transform.Transform transform)
   {
     GskRenderNode* _cretval;
     _cretval = gsk_transform_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, transform ? cast(GskTransform*)transform.cPtr(No.Dup) : null);
@@ -40,11 +40,11 @@ class TransformNode : RenderNode
    * Gets the child node that is getting transformed by the given node.
    * Returns: The child that is getting transformed
    */
-  RenderNode getChild()
+  gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_transform_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    _cretval = gsk_transform_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -52,11 +52,11 @@ class TransformNode : RenderNode
    * Retrieves the `GskTransform` used by the node.
    * Returns: a `GskTransform`
    */
-  Transform getTransform()
+  gsk.transform.Transform getTransform()
   {
     GskTransform* _cretval;
-    _cretval = gsk_transform_node_get_transform(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Transform(cast(void*)_cretval, No.Take) : null;
+    _cretval = gsk_transform_node_get_transform(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

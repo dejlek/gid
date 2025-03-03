@@ -1,8 +1,7 @@
 module gtk.app_chooser_dialog;
 
-import gid.global;
+import gid.gid;
 import gio.file;
-import gio.file_mixin;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -43,7 +42,7 @@ import gtk.window;
  *   implemented according to the design of each platform and/or
  *   application requiring them.
  */
-class AppChooserDialog : Dialog, AppChooser
+class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -75,7 +74,7 @@ class AppChooserDialog : Dialog, AppChooser
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  this(Window parent, DialogFlags flags, File file)
+  this(gtk.window.Window parent, gtk.types.DialogFlags flags, gio.file.File file)
   {
     GtkWidget* _cretval;
     _cretval = gtk_app_chooser_dialog_new(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, flags, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
@@ -93,12 +92,12 @@ class AppChooserDialog : Dialog, AppChooser
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  static AppChooserDialog newForContentType(Window parent, DialogFlags flags, string contentType)
+  static gtk.app_chooser_dialog.AppChooserDialog newForContentType(gtk.window.Window parent, gtk.types.DialogFlags flags, string contentType)
   {
     GtkWidget* _cretval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = gtk_app_chooser_dialog_new_for_content_type(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, flags, _contentType);
-    auto _retval = ObjectG.getDObject!AppChooserDialog(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.app_chooser_dialog.AppChooserDialog)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -113,7 +112,7 @@ class AppChooserDialog : Dialog, AppChooser
   {
     const(char)* _cretval;
     _cretval = gtk_app_chooser_dialog_get_heading(cast(GtkAppChooserDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -123,11 +122,11 @@ class AppChooserDialog : Dialog, AppChooser
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  Widget getWidget()
+  gtk.widget.Widget getWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_app_chooser_dialog_get_widget(cast(GtkAppChooserDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 

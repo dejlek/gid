@@ -1,6 +1,6 @@
 module gtk.event_controller_motion;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -17,7 +17,7 @@ import gtk.types;
  * which are updated to reflect changes in the pointer position as it
  * moves over the widget.
  */
-class EventControllerMotion : EventController
+class EventControllerMotion : gtk.event_controller.EventController
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -76,8 +76,8 @@ class EventControllerMotion : EventController
    *   y = coordinates of pointer location
    *   eventControllerMotion = the instance the signal is connected to
    */
-  alias EnterCallbackDlg = void delegate(double x, double y, EventControllerMotion eventControllerMotion);
-  alias EnterCallbackFunc = void function(double x, double y, EventControllerMotion eventControllerMotion);
+  alias EnterCallbackDlg = void delegate(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
+  alias EnterCallbackFunc = void function(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
 
   /**
    * Connect to Enter signal.
@@ -93,9 +93,9 @@ class EventControllerMotion : EventController
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto eventControllerMotion = getVal!EventControllerMotion(_paramVals);
-      auto x = getVal!double(&_paramVals[1]);
-      auto y = getVal!double(&_paramVals[2]);
+      auto eventControllerMotion = getVal!(gtk.event_controller_motion.EventControllerMotion)(_paramVals);
+      auto x = getVal!(double)(&_paramVals[1]);
+      auto y = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(x, y, eventControllerMotion);
     }
 
@@ -107,8 +107,8 @@ class EventControllerMotion : EventController
    * Signals that the pointer has left the widget.
    *   eventControllerMotion = the instance the signal is connected to
    */
-  alias LeaveCallbackDlg = void delegate(EventControllerMotion eventControllerMotion);
-  alias LeaveCallbackFunc = void function(EventControllerMotion eventControllerMotion);
+  alias LeaveCallbackDlg = void delegate(gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
+  alias LeaveCallbackFunc = void function(gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
 
   /**
    * Connect to Leave signal.
@@ -124,7 +124,7 @@ class EventControllerMotion : EventController
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto eventControllerMotion = getVal!EventControllerMotion(_paramVals);
+      auto eventControllerMotion = getVal!(gtk.event_controller_motion.EventControllerMotion)(_paramVals);
       _dClosure.dlg(eventControllerMotion);
     }
 
@@ -139,8 +139,8 @@ class EventControllerMotion : EventController
    *   y = the y coordinate
    *   eventControllerMotion = the instance the signal is connected to
    */
-  alias MotionCallbackDlg = void delegate(double x, double y, EventControllerMotion eventControllerMotion);
-  alias MotionCallbackFunc = void function(double x, double y, EventControllerMotion eventControllerMotion);
+  alias MotionCallbackDlg = void delegate(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
+  alias MotionCallbackFunc = void function(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
 
   /**
    * Connect to Motion signal.
@@ -156,9 +156,9 @@ class EventControllerMotion : EventController
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto eventControllerMotion = getVal!EventControllerMotion(_paramVals);
-      auto x = getVal!double(&_paramVals[1]);
-      auto y = getVal!double(&_paramVals[2]);
+      auto eventControllerMotion = getVal!(gtk.event_controller_motion.EventControllerMotion)(_paramVals);
+      auto x = getVal!(double)(&_paramVals[1]);
+      auto y = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(x, y, eventControllerMotion);
     }
 

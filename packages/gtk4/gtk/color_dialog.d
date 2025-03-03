@@ -1,9 +1,8 @@
 module gtk.color_dialog;
 
 import gdk.rgba;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.types;
 import glib.error;
@@ -25,7 +24,7 @@ import gtk.window;
  * See [gtk.color_dialog_button.ColorDialogButton] for a convenient control
  * that uses `GtkColorDialog` and presents the results.
  */
-class ColorDialog : ObjectG
+class ColorDialog : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -67,19 +66,19 @@ class ColorDialog : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void chooseRgba(Window parent, RGBA initialColor, Cancellable cancellable, AsyncReadyCallback callback)
+  void chooseRgba(gtk.window.Window parent, gdk.rgba.RGBA initialColor, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_color_dialog_choose_rgba(cast(GtkColorDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, initialColor ? cast(GdkRGBA*)initialColor.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_color_dialog_choose_rgba(cast(GtkColorDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, initialColor ? cast(const(GdkRGBA)*)initialColor.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -90,14 +89,14 @@ class ColorDialog : ObjectG
    * Returns: the selected color, or
    *   `NULL` and error is set
    */
-  RGBA chooseRgbaFinish(AsyncResult result)
+  gdk.rgba.RGBA chooseRgbaFinish(gio.async_result.AsyncResult result)
   {
     GdkRGBA* _cretval;
     GError *_err;
     _cretval = gtk_color_dialog_choose_rgba_finish(cast(GtkColorDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new RGBA(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -123,7 +122,7 @@ class ColorDialog : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_color_dialog_get_title(cast(GtkColorDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

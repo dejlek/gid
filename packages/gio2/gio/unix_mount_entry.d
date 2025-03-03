@@ -1,6 +1,6 @@
 module gio.unix_mount_entry;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -10,7 +10,7 @@ import gobject.boxed;
  * Defines a Unix mount entry $(LPAREN)e.g. <filename>/media/cdrom</filename>$(RPAREN).
  * This corresponds roughly to a mtab entry.
  */
-class UnixMountEntry : Boxed
+class UnixMountEntry : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

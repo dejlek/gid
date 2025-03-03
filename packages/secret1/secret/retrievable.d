@@ -1,9 +1,8 @@
 module secret.retrievable;
 
 public import secret.retrievable_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.types;
 import glib.error;
@@ -73,7 +72,7 @@ interface Retrievable
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void retrieveSecret(Cancellable cancellable, AsyncReadyCallback callback);
+  void retrieveSecret(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * Complete asynchronous operation to retrieve the secret value of this object.
@@ -82,7 +81,7 @@ interface Retrievable
    * Returns: the secret value which should be
    *   released with [secret.value.ValueSecret.unref], or %NULL
    */
-  ValueSecret retrieveSecretFinish(AsyncResult result);
+  secret.value.ValueSecret retrieveSecretFinish(gio.async_result.AsyncResult result);
 
   /**
    * Retrieve the secret value of this object synchronously.
@@ -95,5 +94,5 @@ interface Retrievable
    * Returns: the secret value which should be
    *   released with [secret.value.ValueSecret.unref], or %NULL
    */
-  ValueSecret retrieveSecretSync(Cancellable cancellable);
+  secret.value.ValueSecret retrieveSecretSync(gio.cancellable.Cancellable cancellable);
 }

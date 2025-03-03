@@ -1,6 +1,6 @@
 module gio.task;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
 import gio.async_result_mixin;
 import gio.c.functions;
@@ -466,7 +466,7 @@ import gobject.value;
  * dropping the reference to the source object to that main
  * context when the task is finalized
  */
-class Task : ObjectG, AsyncResult
+class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -509,14 +509,14 @@ class Task : ObjectG, AsyncResult
    *   callback = a #GAsyncReadyCallback.
    * Returns: a #GTask.
    */
-  this(ObjectG sourceObject, Cancellable cancellable, AsyncReadyCallback callback)
+  this(gobject.object.ObjectG sourceObject, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -537,7 +537,7 @@ class Task : ObjectG, AsyncResult
    * Returns: %TRUE if result and source_object are valid, %FALSE
    *   if not
    */
-  static bool isValid(AsyncResult result, ObjectG sourceObject)
+  static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectG sourceObject)
   {
     bool _retval;
     _retval = g_task_is_valid(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null);
@@ -559,14 +559,14 @@ class Task : ObjectG, AsyncResult
    *   sourceTag = an opaque pointer indicating the source of this task
    *   error = error to report
    */
-  static void reportError(ObjectG sourceObject, AsyncReadyCallback callback, void* sourceTag, ErrorG error)
+  static void reportError(gobject.object.ObjectG sourceObject, gio.types.AsyncReadyCallback callback, void* sourceTag, glib.error.ErrorG error)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -578,11 +578,11 @@ class Task : ObjectG, AsyncResult
    * Gets task's #GCancellable
    * Returns: task's #GCancellable
    */
-  Cancellable getCancellable()
+  gio.cancellable.Cancellable getCancellable()
   {
     GCancellable* _cretval;
     _cretval = g_task_get_cancellable(cast(GTask*)cPtr);
-    auto _retval = ObjectG.getDObject!Cancellable(cast(GCancellable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -620,11 +620,11 @@ class Task : ObjectG, AsyncResult
    * context is the default #GMainContext.
    * Returns: task's #GMainContext
    */
-  MainContext getContext()
+  glib.main_context.MainContext getContext()
   {
     GMainContext* _cretval;
     _cretval = g_task_get_context(cast(GTask*)cPtr);
-    auto _retval = _cretval ? new MainContext(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -636,7 +636,7 @@ class Task : ObjectG, AsyncResult
   {
     const(char)* _cretval;
     _cretval = g_task_get_name(cast(GTask*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -668,11 +668,11 @@ class Task : ObjectG, AsyncResult
    * [gio.async_result.AsyncResult.getSourceObject], but does not ref the object.
    * Returns: task's source object, or %NULL
    */
-  ObjectG getSourceObject()
+  gobject.object.ObjectG getSourceObject()
   {
     ObjectC* _cretval;
     _cretval = g_task_get_source_object(cast(GTask*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -774,7 +774,7 @@ class Task : ObjectG, AsyncResult
    *   value = return location for the #GValue
    * Returns: %TRUE if task succeeded, %FALSE on error.
    */
-  bool propagateValue(out Value value)
+  bool propagateValue(out gobject.value.Value value)
   {
     bool _retval;
     GValue _value;
@@ -782,7 +782,7 @@ class Task : ObjectG, AsyncResult
     _retval = g_task_propagate_value(cast(GTask*)cPtr, &_value, &_err);
     if (_err)
       throw new ErrorG(_err);
-    value = new Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
   }
 
@@ -812,7 +812,7 @@ class Task : ObjectG, AsyncResult
    * Params:
    *   error = the #GError result of a task function.
    */
-  void returnError(ErrorG error)
+  void returnError(glib.error.ErrorG error)
   {
     g_task_return_error(cast(GTask*)cPtr, error ? cast(GError*)error.cPtr : null);
   }
@@ -854,7 +854,7 @@ class Task : ObjectG, AsyncResult
    *   code = an error code.
    *   message = an error message
    */
-  void returnNewErrorLiteral(Quark domain, int code, string message)
+  void returnNewErrorLiteral(glib.types.Quark domain, int code, string message)
   {
     const(char)* _message = message.toCString(No.Alloc);
     g_task_return_new_error_literal(cast(GTask*)cPtr, domain, code, _message);
@@ -882,12 +882,12 @@ class Task : ObjectG, AsyncResult
    *     function
    *   resultDestroy = a #GDestroyNotify function.
    */
-  void returnPointer(void* result, DestroyNotify resultDestroy)
+  void returnPointer(void* result, glib.types.DestroyNotify resultDestroy)
   {
     extern(C) void _resultDestroyCallback(void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(DestroyNotify*)data;
+      auto _dlg = cast(glib.types.DestroyNotify*)data;
 
       (*_dlg)();
     }
@@ -906,7 +906,7 @@ class Task : ObjectG, AsyncResult
    *   result = the #GValue result of
    *     a task function
    */
-  void returnValue(Value result)
+  void returnValue(gobject.value.Value result)
   {
     g_task_return_value(cast(GTask*)cPtr, result ? cast(GValue*)result.cPtr(No.Dup) : null);
   }
@@ -930,14 +930,14 @@ class Task : ObjectG, AsyncResult
    * Params:
    *   taskFunc = a #GTaskThreadFunc
    */
-  void runInThread(TaskThreadFunc taskFunc)
+  void runInThread(gio.types.TaskThreadFunc taskFunc)
   {
     extern(C) void _taskFuncCallback(GTask* task, ObjectC* sourceObject, void* taskData, GCancellable* cancellable)
     {
       ptrThawGC(taskData);
-      auto _dlg = cast(TaskThreadFunc*)taskData;
+      auto _dlg = cast(gio.types.TaskThreadFunc*)taskData;
 
-      (*_dlg)(ObjectG.getDObject!Task(cast(void*)task, No.Take), ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!Cancellable(cast(void*)cancellable, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gio.task.Task)(cast(void*)task, No.Take), ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
     }
     auto _taskFuncCB = taskFunc ? &_taskFuncCallback : null;
     g_task_run_in_thread(cast(GTask*)cPtr, _taskFuncCB);
@@ -960,14 +960,14 @@ class Task : ObjectG, AsyncResult
    * Params:
    *   taskFunc = a #GTaskThreadFunc
    */
-  void runInThreadSync(TaskThreadFunc taskFunc)
+  void runInThreadSync(gio.types.TaskThreadFunc taskFunc)
   {
     extern(C) void _taskFuncCallback(GTask* task, ObjectC* sourceObject, void* taskData, GCancellable* cancellable)
     {
       ptrThawGC(taskData);
-      auto _dlg = cast(TaskThreadFunc*)taskData;
+      auto _dlg = cast(gio.types.TaskThreadFunc*)taskData;
 
-      (*_dlg)(ObjectG.getDObject!Task(cast(void*)task, No.Take), ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!Cancellable(cast(void*)cancellable, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gio.task.Task)(cast(void*)task, No.Take), ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
     }
     auto _taskFuncCB = taskFunc ? &_taskFuncCallback : null;
     g_task_run_in_thread_sync(cast(GTask*)cPtr, _taskFuncCB);
@@ -1104,12 +1104,12 @@ class Task : ObjectG, AsyncResult
    *   taskData = task-specific data
    *   taskDataDestroy = #GDestroyNotify for task_data
    */
-  void setTaskData(void* taskData, DestroyNotify taskDataDestroy)
+  void setTaskData(void* taskData, glib.types.DestroyNotify taskDataDestroy)
   {
     extern(C) void _taskDataDestroyCallback(void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(DestroyNotify*)data;
+      auto _dlg = cast(glib.types.DestroyNotify*)data;
 
       (*_dlg)();
     }

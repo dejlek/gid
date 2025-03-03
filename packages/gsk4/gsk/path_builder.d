@@ -1,13 +1,13 @@
 module gsk.path_builder;
 
 import cairo.path;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import graphene.point;
 import graphene.rect;
 import gsk.c.functions;
 import gsk.c.types;
-import gsk.path : DGskPath = Path;
+import gsk.path;
 import gsk.path_point;
 import gsk.rounded_rect;
 import gsk.types;
@@ -44,7 +44,7 @@ import pango.layout;
  * Note that `GskPathBuilder` will reduce the degree of added Bézier
  * curves as much as possible, to simplify rendering.
  */
-class PathBuilder : Boxed
+class PathBuilder : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -88,9 +88,9 @@ class PathBuilder : Boxed
    * Params:
    *   path =
    */
-  void addCairoPath(Path path)
+  void addCairoPath(cairo.path.Path path)
   {
-    gsk_path_builder_add_cairo_path(cast(GskPathBuilder*)cPtr, path ? cast(cairo_path_t*)path.cPtr(No.Dup) : null);
+    gsk_path_builder_add_cairo_path(cast(GskPathBuilder*)cPtr, path ? cast(const(cairo_path_t)*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -101,9 +101,9 @@ class PathBuilder : Boxed
    *   center = the center of the circle
    *   radius = the radius of the circle
    */
-  void addCircle(Point center, float radius)
+  void addCircle(graphene.point.Point center, float radius)
   {
-    gsk_path_builder_add_circle(cast(GskPathBuilder*)cPtr, center ? cast(graphene_point_t*)center.cPtr(No.Dup) : null, radius);
+    gsk_path_builder_add_circle(cast(GskPathBuilder*)cPtr, center ? cast(const(graphene_point_t)*)center.cPtr(No.Dup) : null, radius);
   }
 
   /**
@@ -111,7 +111,7 @@ class PathBuilder : Boxed
    * Params:
    *   layout = the pango layout to add
    */
-  void addLayout(Layout layout)
+  void addLayout(pango.layout.Layout layout)
   {
     gsk_path_builder_add_layout(cast(GskPathBuilder*)cPtr, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null);
   }
@@ -121,7 +121,7 @@ class PathBuilder : Boxed
    * Params:
    *   path = the path to append
    */
-  void addPath(DGskPath path)
+  void addPath(gsk.path.Path path)
   {
     gsk_path_builder_add_path(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null);
   }
@@ -134,9 +134,9 @@ class PathBuilder : Boxed
    * Params:
    *   rect = The rectangle to create a path for
    */
-  void addRect(Rect rect)
+  void addRect(graphene.rect.Rect rect)
   {
-    gsk_path_builder_add_rect(cast(GskPathBuilder*)cPtr, rect ? cast(graphene_rect_t*)rect.cPtr(No.Dup) : null);
+    gsk_path_builder_add_rect(cast(GskPathBuilder*)cPtr, rect ? cast(const(graphene_rect_t)*)rect.cPtr(No.Dup) : null);
   }
 
   /**
@@ -144,7 +144,7 @@ class PathBuilder : Boxed
    * Params:
    *   path = the path to append
    */
-  void addReversePath(DGskPath path)
+  void addReversePath(gsk.path.Path path)
   {
     gsk_path_builder_add_reverse_path(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null);
   }
@@ -155,9 +155,9 @@ class PathBuilder : Boxed
    * Params:
    *   rect = the rounded rect
    */
-  void addRoundedRect(RoundedRect rect)
+  void addRoundedRect(gsk.rounded_rect.RoundedRect rect)
   {
-    gsk_path_builder_add_rounded_rect(cast(GskPathBuilder*)cPtr, rect ? cast(GskRoundedRect*)rect.cPtr : null);
+    gsk_path_builder_add_rounded_rect(cast(GskPathBuilder*)cPtr, rect ? cast(const(GskRoundedRect)*)rect.cPtr : null);
   }
 
   /**
@@ -173,9 +173,9 @@ class PathBuilder : Boxed
    *   start = the point on path to start at
    *   end = the point on path to end at
    */
-  void addSegment(DGskPath path, PathPoint start, PathPoint end)
+  void addSegment(gsk.path.Path path, gsk.path_point.PathPoint start, gsk.path_point.PathPoint end)
   {
-    gsk_path_builder_add_segment(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, start ? cast(GskPathPoint*)start.cPtr(No.Dup) : null, end ? cast(GskPathPoint*)end.cPtr(No.Dup) : null);
+    gsk_path_builder_add_segment(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, start ? cast(const(GskPathPoint)*)start.cPtr(No.Dup) : null, end ? cast(const(GskPathPoint)*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -270,11 +270,11 @@ class PathBuilder : Boxed
    * out without a current point.
    * Returns: The current point
    */
-  Point getCurrentPoint()
+  graphene.point.Point getCurrentPoint()
   {
     const(graphene_point_t)* _cretval;
     _cretval = gsk_path_builder_get_current_point(cast(GskPathBuilder*)cPtr);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -506,11 +506,11 @@ class PathBuilder : Boxed
    * Returns: the newly created `GskPath`
    *   with all the contours added to the builder
    */
-  DGskPath toPath()
+  gsk.path.Path toPath()
   {
     GskPath* _cretval;
     _cretval = gsk_path_builder_to_path(cast(GskPathBuilder*)cPtr);
-    auto _retval = _cretval ? new DGskPath(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

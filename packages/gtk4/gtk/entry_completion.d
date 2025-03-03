@@ -1,6 +1,6 @@
 module gtk.entry_completion;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.buildable;
@@ -12,7 +12,6 @@ import gtk.cell_layout;
 import gtk.cell_layout_mixin;
 import gtk.tree_iter;
 import gtk.tree_model;
-import gtk.tree_model_mixin;
 import gtk.types;
 import gtk.widget;
 
@@ -51,7 +50,7 @@ import gtk.widget;
  * [gtk.tree_model_filter.TreeModelFilter.convertIterToChildIter] to obtain a
  * matching iter.
  */
-class EntryCompletion : ObjectG, Buildable, CellLayout
+class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cell_layout.CellLayout
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -97,11 +96,11 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
 
    * Deprecated: GtkEntryCompletion will be removed in GTK 5.
    */
-  static EntryCompletion newWithArea(CellArea area)
+  static gtk.entry_completion.EntryCompletion newWithArea(gtk.cell_area.CellArea area)
   {
     GtkEntryCompletion* _cretval;
     _cretval = gtk_entry_completion_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!EntryCompletion(cast(GtkEntryCompletion*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.entry_completion.EntryCompletion)(cast(GtkEntryCompletion*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -135,7 +134,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
     char* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = gtk_entry_completion_compute_prefix(cast(GtkEntryCompletion*)cPtr, _key);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -150,7 +149,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
   {
     const(char)* _cretval;
     _cretval = gtk_entry_completion_get_completion_prefix(cast(GtkEntryCompletion*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -160,11 +159,11 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
 
    * Deprecated: GtkEntryCompletion will be removed in GTK 5.
    */
-  Widget getEntry()
+  gtk.widget.Widget getEntry()
   {
     GtkWidget* _cretval;
     _cretval = gtk_entry_completion_get_entry(cast(GtkEntryCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -215,11 +214,11 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
 
    * Deprecated: GtkEntryCompletion will be removed in GTK 5.
    */
-  TreeModel getModel()
+  gtk.tree_model.TreeModel getModel()
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_entry_completion_get_model(cast(GtkEntryCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -324,14 +323,14 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
 
    * Deprecated: GtkEntryCompletion will be removed in GTK 5.
    */
-  void setMatchFunc(EntryCompletionMatchFunc func)
+  void setMatchFunc(gtk.types.EntryCompletionMatchFunc func)
   {
     extern(C) bool _funcCallback(GtkEntryCompletion* completion, const(char)* key, GtkTreeIter* iter, void* userData)
     {
-      auto _dlg = cast(EntryCompletionMatchFunc*)userData;
+      auto _dlg = cast(gtk.types.EntryCompletionMatchFunc*)userData;
       string _key = key.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!EntryCompletion(cast(void*)completion, No.Take), _key, iter ? new TreeIter(cast(void*)iter, No.Take) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -367,7 +366,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
 
    * Deprecated: GtkEntryCompletion will be removed in GTK 5.
    */
-  void setModel(TreeModel model)
+  void setModel(gtk.tree_model.TreeModel model)
   {
     gtk_entry_completion_set_model(cast(GtkEntryCompletion*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
@@ -445,8 +444,8 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    *   entryCompletion = the instance the signal is connected to
    * Returns: %TRUE if the signal has been handled
    */
-  alias CursorOnMatchCallbackDlg = bool delegate(TreeModel model, TreeIter iter, EntryCompletion entryCompletion);
-  alias CursorOnMatchCallbackFunc = bool function(TreeModel model, TreeIter iter, EntryCompletion entryCompletion);
+  alias CursorOnMatchCallbackDlg = bool delegate(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, gtk.entry_completion.EntryCompletion entryCompletion);
+  alias CursorOnMatchCallbackFunc = bool function(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, gtk.entry_completion.EntryCompletion entryCompletion);
 
   /**
    * Connect to CursorOnMatch signal.
@@ -463,9 +462,9 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto entryCompletion = getVal!EntryCompletion(_paramVals);
-      auto model = getVal!TreeModel(&_paramVals[1]);
-      auto iter = getVal!TreeIter(&_paramVals[2]);
+      auto entryCompletion = getVal!(gtk.entry_completion.EntryCompletion)(_paramVals);
+      auto model = getVal!(gtk.tree_model.TreeModel)(&_paramVals[1]);
+      auto iter = getVal!(gtk.tree_iter.TreeIter)(&_paramVals[2]);
       _retval = _dClosure.dlg(model, iter, entryCompletion);
       setVal!bool(_returnValue, _retval);
     }
@@ -487,8 +486,8 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    *   entryCompletion = the instance the signal is connected to
    * Returns: %TRUE if the signal has been handled
    */
-  alias InsertPrefixCallbackDlg = bool delegate(string prefix, EntryCompletion entryCompletion);
-  alias InsertPrefixCallbackFunc = bool function(string prefix, EntryCompletion entryCompletion);
+  alias InsertPrefixCallbackDlg = bool delegate(string prefix, gtk.entry_completion.EntryCompletion entryCompletion);
+  alias InsertPrefixCallbackFunc = bool function(string prefix, gtk.entry_completion.EntryCompletion entryCompletion);
 
   /**
    * Connect to InsertPrefix signal.
@@ -505,8 +504,8 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto entryCompletion = getVal!EntryCompletion(_paramVals);
-      auto prefix = getVal!string(&_paramVals[1]);
+      auto entryCompletion = getVal!(gtk.entry_completion.EntryCompletion)(_paramVals);
+      auto prefix = getVal!(string)(&_paramVals[1]);
       _retval = _dClosure.dlg(prefix, entryCompletion);
       setVal!bool(_returnValue, _retval);
     }
@@ -528,8 +527,8 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    *   entryCompletion = the instance the signal is connected to
    * Returns: %TRUE if the signal has been handled
    */
-  alias MatchSelectedCallbackDlg = bool delegate(TreeModel model, TreeIter iter, EntryCompletion entryCompletion);
-  alias MatchSelectedCallbackFunc = bool function(TreeModel model, TreeIter iter, EntryCompletion entryCompletion);
+  alias MatchSelectedCallbackDlg = bool delegate(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, gtk.entry_completion.EntryCompletion entryCompletion);
+  alias MatchSelectedCallbackFunc = bool function(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, gtk.entry_completion.EntryCompletion entryCompletion);
 
   /**
    * Connect to MatchSelected signal.
@@ -546,9 +545,9 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto entryCompletion = getVal!EntryCompletion(_paramVals);
-      auto model = getVal!TreeModel(&_paramVals[1]);
-      auto iter = getVal!TreeIter(&_paramVals[2]);
+      auto entryCompletion = getVal!(gtk.entry_completion.EntryCompletion)(_paramVals);
+      auto model = getVal!(gtk.tree_model.TreeModel)(&_paramVals[1]);
+      auto iter = getVal!(gtk.tree_iter.TreeIter)(&_paramVals[2]);
       _retval = _dClosure.dlg(model, iter, entryCompletion);
       setVal!bool(_returnValue, _retval);
     }
@@ -563,8 +562,8 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
    * In other words when `GtkEntryCompletion` is out of suggestions.
    *   entryCompletion = the instance the signal is connected to
    */
-  alias NoMatchesCallbackDlg = void delegate(EntryCompletion entryCompletion);
-  alias NoMatchesCallbackFunc = void function(EntryCompletion entryCompletion);
+  alias NoMatchesCallbackDlg = void delegate(gtk.entry_completion.EntryCompletion entryCompletion);
+  alias NoMatchesCallbackFunc = void function(gtk.entry_completion.EntryCompletion entryCompletion);
 
   /**
    * Connect to NoMatches signal.
@@ -580,7 +579,7 @@ class EntryCompletion : ObjectG, Buildable, CellLayout
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto entryCompletion = getVal!EntryCompletion(_paramVals);
+      auto entryCompletion = getVal!(gtk.entry_completion.EntryCompletion)(_paramVals);
       _dClosure.dlg(entryCompletion);
     }
 

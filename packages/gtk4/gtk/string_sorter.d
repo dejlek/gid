@@ -1,6 +1,6 @@
 module gtk.string_sorter;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.expression;
@@ -15,7 +15,7 @@ import gtk.types;
  * To obtain the strings to compare, this sorter evaluates a
  * [gtk.expression.Expression].
  */
-class StringSorter : Sorter
+class StringSorter : gtk.sorter.Sorter
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -43,7 +43,7 @@ class StringSorter : Sorter
    *   expression = The expression to evaluate
    * Returns: a new `GtkStringSorter`
    */
-  this(Expression expression)
+  this(gtk.expression.Expression expression)
   {
     GtkStringSorter* _cretval;
     _cretval = gtk_string_sorter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
@@ -54,11 +54,11 @@ class StringSorter : Sorter
    * Gets which collation method the sorter uses.
    * Returns: The collation method
    */
-  Collation getCollation()
+  gtk.types.Collation getCollation()
   {
     GtkCollation _cretval;
     _cretval = gtk_string_sorter_get_collation(cast(GtkStringSorter*)cPtr);
-    Collation _retval = cast(Collation)_cretval;
+    gtk.types.Collation _retval = cast(gtk.types.Collation)_cretval;
     return _retval;
   }
 
@@ -66,11 +66,11 @@ class StringSorter : Sorter
    * Gets the expression that is evaluated to obtain strings from items.
    * Returns: a `GtkExpression`
    */
-  Expression getExpression()
+  gtk.expression.Expression getExpression()
   {
     GtkExpression* _cretval;
     _cretval = gtk_string_sorter_get_expression(cast(GtkStringSorter*)cPtr);
-    auto _retval = _cretval ? new Expression(cast(GtkExpression*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class StringSorter : Sorter
    * Params:
    *   collation = the collation method
    */
-  void setCollation(Collation collation)
+  void setCollation(gtk.types.Collation collation)
   {
     gtk_string_sorter_set_collation(cast(GtkStringSorter*)cPtr, collation);
   }
@@ -101,7 +101,7 @@ class StringSorter : Sorter
    * Params:
    *   expression = a `GtkExpression`
    */
-  void setExpression(Expression expression)
+  void setExpression(gtk.expression.Expression expression)
   {
     gtk_string_sorter_set_expression(cast(GtkStringSorter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }

@@ -1,8 +1,7 @@
 module soup.multipart_input_stream;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.filter_input_stream;
 import gio.input_stream;
@@ -28,7 +27,7 @@ import soup.types;
  * you should not read directly from it, and the results are undefined
  * if you do.
  */
-class MultipartInputStream : FilterInputStream, PollableInputStream
+class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.pollable_input_stream.PollableInputStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -60,7 +59,7 @@ class MultipartInputStream : FilterInputStream, PollableInputStream
    *   baseStream = the #GInputStream returned by sending the request.
    * Returns: a new #SoupMultipartInputStream
    */
-  this(Message msg, InputStream baseStream)
+  this(soup.message.Message msg, gio.input_stream.InputStream baseStream)
   {
     SoupMultipartInputStream* _cretval;
     _cretval = soup_multipart_input_stream_new(msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, baseStream ? cast(GInputStream*)baseStream.cPtr(No.Dup) : null);
@@ -79,11 +78,11 @@ class MultipartInputStream : FilterInputStream, PollableInputStream
    *   containing the headers for the part currently being processed or
    *   %NULL if the headers failed to parse.
    */
-  MessageHeaders getHeaders()
+  soup.message_headers.MessageHeaders getHeaders()
   {
     SoupMessageHeaders* _cretval;
     _cretval = soup_multipart_input_stream_get_headers(cast(SoupMultipartInputStream*)cPtr);
-    auto _retval = _cretval ? new MessageHeaders(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new soup.message_headers.MessageHeaders(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -102,14 +101,14 @@ class MultipartInputStream : FilterInputStream, PollableInputStream
    * Returns: a new #GInputStream, or
    *   %NULL if there are no more parts
    */
-  InputStream nextPart(Cancellable cancellable)
+  gio.input_stream.InputStream nextPart(gio.cancellable.Cancellable cancellable)
   {
     GInputStream* _cretval;
     GError *_err;
     _cretval = soup_multipart_input_stream_next_part(cast(SoupMultipartInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -121,14 +120,14 @@ class MultipartInputStream : FilterInputStream, PollableInputStream
    *   cancellable = a #GCancellable.
    *   callback = callback to call when request is satisfied.
    */
-  void nextPartAsync(int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void nextPartAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -144,14 +143,14 @@ class MultipartInputStream : FilterInputStream, PollableInputStream
    *   [gio.input_stream.InputStream] for reading the next part or %NULL if there are no
    *   more parts.
    */
-  InputStream nextPartFinish(AsyncResult result)
+  gio.input_stream.InputStream nextPartFinish(gio.async_result.AsyncResult result)
   {
     GInputStream* _cretval;
     GError *_err;
     _cretval = soup_multipart_input_stream_next_part_finish(cast(SoupMultipartInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 }

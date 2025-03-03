@@ -7,11 +7,11 @@ import arrowdataset.c.types;
 import arrowdataset.dataset;
 import arrowdataset.scanner;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class ScannerBuilder : ObjectG
+class ScannerBuilder : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -30,7 +30,7 @@ class ScannerBuilder : ObjectG
     return getType();
   }
 
-  this(Dataset dataset)
+  this(arrowdataset.dataset.Dataset dataset)
   {
     GADatasetScannerBuilder* _cretval;
     GError *_err;
@@ -40,26 +40,26 @@ class ScannerBuilder : ObjectG
     this(_cretval, Yes.Take);
   }
 
-  static ScannerBuilder newRecordBatchReader(RecordBatchReader reader)
+  static arrowdataset.scanner_builder.ScannerBuilder newRecordBatchReader(arrow.record_batch_reader.RecordBatchReader reader)
   {
     GADatasetScannerBuilder* _cretval;
     _cretval = gadataset_scanner_builder_new_record_batch_reader(reader ? cast(GArrowRecordBatchReader*)reader.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!ScannerBuilder(cast(GADatasetScannerBuilder*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowdataset.scanner_builder.ScannerBuilder)(cast(GADatasetScannerBuilder*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Scanner finish()
+  arrowdataset.scanner.Scanner finish()
   {
     GADatasetScanner* _cretval;
     GError *_err;
     _cretval = gadataset_scanner_builder_finish(cast(GADatasetScannerBuilder*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Scanner(cast(GADatasetScanner*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowdataset.scanner.Scanner)(cast(GADatasetScanner*)_cretval, Yes.Take);
     return _retval;
   }
 
-  bool setFilter(Expression expression)
+  bool setFilter(arrow.expression.Expression expression)
   {
     bool _retval;
     GError *_err;

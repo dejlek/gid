@@ -1,12 +1,12 @@
 module gio.native_volume_monitor;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
 import gio.volume_monitor;
 
-class NativeVolumeMonitor : VolumeMonitor
+class NativeVolumeMonitor : gio.volume_monitor.VolumeMonitor
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -1,6 +1,6 @@
 module harfbuzz.draw_state;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -9,7 +9,7 @@ import harfbuzz.types;
 /**
  * Current drawing state.
  */
-class DrawState : Boxed
+class DrawState : gobject.boxed.Boxed
 {
 
   this()
@@ -38,12 +38,12 @@ class DrawState : Boxed
     return getType();
   }
 
-  @property Bool pathOpen()
+  @property harfbuzz.types.Bool pathOpen()
   {
     return (cast(hb_draw_state_t*)cPtr).pathOpen;
   }
 
-  @property void pathOpen(Bool propval)
+  @property void pathOpen(harfbuzz.types.Bool propval)
   {
     (cast(hb_draw_state_t*)cPtr).pathOpen = propval;
   }

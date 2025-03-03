@@ -1,7 +1,7 @@
 module gio.tls_server_connection;
 
 public import gio.tls_server_connection_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.iostream;
@@ -35,14 +35,14 @@ interface TlsServerConnection
    * Returns: the new
    *   #GTlsServerConnection, or %NULL on error
    */
-  static TlsServerConnection new_(IOStream baseIoStream, TlsCertificate certificate)
+  static gio.tls_server_connection.TlsServerConnection new_(gio.iostream.IOStream baseIoStream, gio.tls_certificate.TlsCertificate certificate)
   {
     GIOStream* _cretval;
     GError *_err;
     _cretval = g_tls_server_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream.cPtr(No.Dup) : null, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!TlsServerConnection(cast(GIOStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_server_connection.TlsServerConnection)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -1,9 +1,8 @@
 module gio.loadable_icon_mixin;
 
 public import gio.loadable_icon_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.async_result;
-public import gio.async_result_mixin;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
@@ -30,7 +29,7 @@ template LoadableIconT()
    *     ignore.
    * Returns: a #GInputStream to read the icon from.
    */
-  override InputStream load(int size, out string type, Cancellable cancellable)
+  override gio.input_stream.InputStream load(int size, out string type, gio.cancellable.Cancellable cancellable)
   {
     GInputStream* _cretval;
     char* _type;
@@ -38,7 +37,7 @@ template LoadableIconT()
     _cretval = g_loadable_icon_load(cast(GLoadableIcon*)cPtr, size, &_type, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     type = _type.fromCString(Yes.Free);
     return _retval;
   }
@@ -53,14 +52,14 @@ template LoadableIconT()
    *   callback = a #GAsyncReadyCallback
    *     to call when the request is satisfied
    */
-  override void loadAsync(int size, Cancellable cancellable, AsyncReadyCallback callback)
+  override void loadAsync(int size, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -76,7 +75,7 @@ template LoadableIconT()
    *     icon, %NULL to ignore.
    * Returns: a #GInputStream to read the icon from.
    */
-  override InputStream loadFinish(AsyncResult res, out string type)
+  override gio.input_stream.InputStream loadFinish(gio.async_result.AsyncResult res, out string type)
   {
     GInputStream* _cretval;
     char* _type;
@@ -84,7 +83,7 @@ template LoadableIconT()
     _cretval = g_loadable_icon_load_finish(cast(GLoadableIcon*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_type, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     type = _type.fromCString(Yes.Free);
     return _retval;
   }

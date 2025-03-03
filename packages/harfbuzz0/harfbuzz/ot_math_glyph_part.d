@@ -1,6 +1,6 @@
 module harfbuzz.ot_math_glyph_part;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -11,7 +11,7 @@ import harfbuzz.types;
  * Large variants for stretchable math glyphs $(LPAREN)such as parentheses$(RPAREN) can be constructed
  * on the fly from parts.
  */
-class OtMathGlyphPart : Boxed
+class OtMathGlyphPart : gobject.boxed.Boxed
 {
 
   this()
@@ -40,52 +40,52 @@ class OtMathGlyphPart : Boxed
     return getType();
   }
 
-  @property Codepoint glyph()
+  @property harfbuzz.types.Codepoint glyph()
   {
     return (cast(hb_ot_math_glyph_part_t*)cPtr).glyph;
   }
 
-  @property void glyph(Codepoint propval)
+  @property void glyph(harfbuzz.types.Codepoint propval)
   {
     (cast(hb_ot_math_glyph_part_t*)cPtr).glyph = propval;
   }
 
-  @property Position startConnectorLength()
+  @property harfbuzz.types.Position startConnectorLength()
   {
     return (cast(hb_ot_math_glyph_part_t*)cPtr).startConnectorLength;
   }
 
-  @property void startConnectorLength(Position propval)
+  @property void startConnectorLength(harfbuzz.types.Position propval)
   {
     (cast(hb_ot_math_glyph_part_t*)cPtr).startConnectorLength = propval;
   }
 
-  @property Position endConnectorLength()
+  @property harfbuzz.types.Position endConnectorLength()
   {
     return (cast(hb_ot_math_glyph_part_t*)cPtr).endConnectorLength;
   }
 
-  @property void endConnectorLength(Position propval)
+  @property void endConnectorLength(harfbuzz.types.Position propval)
   {
     (cast(hb_ot_math_glyph_part_t*)cPtr).endConnectorLength = propval;
   }
 
-  @property Position fullAdvance()
+  @property harfbuzz.types.Position fullAdvance()
   {
     return (cast(hb_ot_math_glyph_part_t*)cPtr).fullAdvance;
   }
 
-  @property void fullAdvance(Position propval)
+  @property void fullAdvance(harfbuzz.types.Position propval)
   {
     (cast(hb_ot_math_glyph_part_t*)cPtr).fullAdvance = propval;
   }
 
-  @property OtMathGlyphPartFlags flags()
+  @property harfbuzz.types.OtMathGlyphPartFlags flags()
   {
-    return cast(OtMathGlyphPartFlags)(cast(hb_ot_math_glyph_part_t*)cPtr).flags;
+    return cast(harfbuzz.types.OtMathGlyphPartFlags)(cast(hb_ot_math_glyph_part_t*)cPtr).flags;
   }
 
-  @property void flags(OtMathGlyphPartFlags propval)
+  @property void flags(harfbuzz.types.OtMathGlyphPartFlags propval)
   {
     (cast(hb_ot_math_glyph_part_t*)cPtr).flags = cast(hb_ot_math_glyph_part_flags_t)propval;
   }

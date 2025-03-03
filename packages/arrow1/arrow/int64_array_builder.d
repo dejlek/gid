@@ -4,10 +4,10 @@ import arrow.array_builder;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class Int64ArrayBuilder : ArrayBuilder
+class Int64ArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

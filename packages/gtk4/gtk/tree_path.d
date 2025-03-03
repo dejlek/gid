@@ -1,6 +1,6 @@
 module gtk.tree_path;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gtk.c.functions;
 import gtk.c.types;
@@ -9,7 +9,7 @@ import gtk.types;
 /**
  * An opaque structure representing a path to a row in a model.
  */
-class TreePath : Boxed
+class TreePath : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -50,11 +50,11 @@ class TreePath : Boxed
    * The string representation of this path is “0”.
    * Returns: A new `GtkTreePath`
    */
-  static TreePath newFirst()
+  static gtk.tree_path.TreePath newFirst()
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_path_new_first();
-    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -64,7 +64,7 @@ class TreePath : Boxed
    *   indices = array of indices
    * Returns: A newly created `GtkTreePath`
    */
-  static TreePath newFromIndices(int[] indices)
+  static gtk.tree_path.TreePath newFromIndices(int[] indices)
   {
     GtkTreePath* _cretval;
     size_t _length;
@@ -73,7 +73,7 @@ class TreePath : Boxed
 
     auto _indices = cast(int*)indices.ptr;
     _cretval = gtk_tree_path_new_from_indicesv(_indices, _length);
-    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -88,12 +88,12 @@ class TreePath : Boxed
    *   path = The string representation of a path
    * Returns: A newly-created `GtkTreePath`
    */
-  static TreePath newFromString(string path)
+  static gtk.tree_path.TreePath newFromString(string path)
   {
     GtkTreePath* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = gtk_tree_path_new_from_string(_path);
-    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -117,10 +117,10 @@ class TreePath : Boxed
    *   b = a `GtkTreePath` to compare with
    * Returns: the relative positions of a and b
    */
-  int compare(TreePath b)
+  int compare(gtk.tree_path.TreePath b)
   {
     int _retval;
-    _retval = gtk_tree_path_compare(cast(GtkTreePath*)cPtr, b ? cast(GtkTreePath*)b.cPtr(No.Dup) : null);
+    _retval = gtk_tree_path_compare(cast(const(GtkTreePath)*)cPtr, b ? cast(const(GtkTreePath)*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -128,11 +128,11 @@ class TreePath : Boxed
    * Creates a new `GtkTreePath` as a copy of path.
    * Returns: a new `GtkTreePath`
    */
-  TreePath copy()
+  gtk.tree_path.TreePath copy()
   {
     GtkTreePath* _cretval;
-    _cretval = gtk_tree_path_copy(cast(GtkTreePath*)cPtr);
-    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gtk_tree_path_copy(cast(const(GtkTreePath)*)cPtr);
+    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class TreePath : Boxed
    *   descendant = another `GtkTreePath`
    * Returns: %TRUE if descendant is contained inside path
    */
-  bool isAncestor(TreePath descendant)
+  bool isAncestor(gtk.tree_path.TreePath descendant)
   {
     bool _retval;
     _retval = gtk_tree_path_is_ancestor(cast(GtkTreePath*)cPtr, descendant ? cast(GtkTreePath*)descendant.cPtr(No.Dup) : null);
@@ -196,7 +196,7 @@ class TreePath : Boxed
    *   ancestor = another `GtkTreePath`
    * Returns: %TRUE if ancestor contains path somewhere below it
    */
-  bool isDescendant(TreePath ancestor)
+  bool isDescendant(gtk.tree_path.TreePath ancestor)
   {
     bool _retval;
     _retval = gtk_tree_path_is_descendant(cast(GtkTreePath*)cPtr, ancestor ? cast(GtkTreePath*)ancestor.cPtr(No.Dup) : null);
@@ -247,7 +247,7 @@ class TreePath : Boxed
   {
     char* _cretval;
     _cretval = gtk_tree_path_to_string(cast(GtkTreePath*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 

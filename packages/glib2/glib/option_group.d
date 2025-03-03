@@ -1,6 +1,6 @@
 module glib.option_group;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -14,7 +14,7 @@ import gobject.boxed;
  * getting a `GOptionGroup` holding their options, which
  * the application can then add to its #GOptionContext.
  */
-class OptionGroup : Boxed
+class OptionGroup : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,7 +54,7 @@ class OptionGroup : Boxed
    * Params:
    *   entries = a %NULL-terminated array of #GOptionEntrys
    */
-  void addEntries(OptionEntry[] entries)
+  void addEntries(glib.types.OptionEntry[] entries)
   {
     auto _entries = cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr;
     g_option_group_add_entries(cast(GOptionGroup*)cPtr, _entries);
@@ -69,12 +69,12 @@ class OptionGroup : Boxed
    * Params:
    *   func = the #GTranslateFunc, or %NULL
    */
-  void setTranslateFunc(TranslateFunc func)
+  void setTranslateFunc(glib.types.TranslateFunc func)
   {
     extern(C) const(char)* _funcCallback(const(char)* str, void* data)
     {
       string _dretval;
-      auto _dlg = cast(TranslateFunc*)data;
+      auto _dlg = cast(glib.types.TranslateFunc*)data;
       string _str = str.fromCString(No.Free);
 
       _dretval = (*_dlg)(_str);

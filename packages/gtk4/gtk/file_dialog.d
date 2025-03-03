@@ -1,13 +1,10 @@
 module gtk.file_dialog;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.file;
-import gio.file_mixin;
 import gio.list_model;
-import gio.list_model_mixin;
 import gio.types;
 import glib.error;
 import gobject.object;
@@ -28,7 +25,7 @@ import gtk.window;
  * the corresponding finish function, for example
  * [gtk.file_dialog.FileDialog.openFinish].
  */
-class FileDialog : ObjectG
+class FileDialog : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -62,7 +59,7 @@ class FileDialog : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_file_dialog_get_accept_label(cast(GtkFileDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -71,11 +68,11 @@ class FileDialog : ObjectG
    * in the file chooser dialog.
    * Returns: the current filter
    */
-  FileFilter getDefaultFilter()
+  gtk.file_filter.FileFilter getDefaultFilter()
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_dialog_get_default_filter(cast(GtkFileDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!FileFilter(cast(GtkFileFilter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -85,11 +82,11 @@ class FileDialog : ObjectG
    * Returns: the filters, as
    *   a `GListModel` of `GtkFileFilters`
    */
-  ListModel getFilters()
+  gio.list_model.ListModel getFilters()
   {
     GListModel* _cretval;
     _cretval = gtk_file_dialog_get_filters(cast(GtkFileDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -98,11 +95,11 @@ class FileDialog : ObjectG
    * the file chooser dialog.
    * Returns: the file
    */
-  File getInitialFile()
+  gio.file.File getInitialFile()
   {
     GFile* _cretval;
     _cretval = gtk_file_dialog_get_initial_file(cast(GtkFileDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -111,11 +108,11 @@ class FileDialog : ObjectG
    * initial folder in the file chooser dialog.
    * Returns: the folder
    */
-  File getInitialFolder()
+  gio.file.File getInitialFolder()
   {
     GFile* _cretval;
     _cretval = gtk_file_dialog_get_initial_folder(cast(GtkFileDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -127,7 +124,7 @@ class FileDialog : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_file_dialog_get_initial_name(cast(GtkFileDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -153,7 +150,7 @@ class FileDialog : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_file_dialog_get_title(cast(GtkFileDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -168,14 +165,14 @@ class FileDialog : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void open(Window parent, Cancellable cancellable, AsyncReadyCallback callback)
+  void open(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -191,14 +188,14 @@ class FileDialog : ObjectG
    * Returns: the file that was selected.
    *   Otherwise, `NULL` is returned and error is set
    */
-  File openFinish(AsyncResult result)
+  gio.file.File openFinish(gio.async_result.AsyncResult result)
   {
     GFile* _cretval;
     GError *_err;
     _cretval = gtk_file_dialog_open_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -215,14 +212,14 @@ class FileDialog : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void openMultiple(Window parent, Cancellable cancellable, AsyncReadyCallback callback)
+  void openMultiple(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -239,14 +236,14 @@ class FileDialog : ObjectG
    *   as a `GListModel` of `GFiles`. Otherwise, `NULL` is returned
    *   and error is set
    */
-  ListModel openMultipleFinish(AsyncResult result)
+  gio.list_model.ListModel openMultipleFinish(gio.async_result.AsyncResult result)
   {
     GListModel* _cretval;
     GError *_err;
     _cretval = gtk_file_dialog_open_multiple_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -261,14 +258,14 @@ class FileDialog : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void save(Window parent, Cancellable cancellable, AsyncReadyCallback callback)
+  void save(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -284,14 +281,14 @@ class FileDialog : ObjectG
    * Returns: the file that was selected.
    *   Otherwise, `NULL` is returned and error is set
    */
-  File saveFinish(AsyncResult result)
+  gio.file.File saveFinish(gio.async_result.AsyncResult result)
   {
     GFile* _cretval;
     GError *_err;
     _cretval = gtk_file_dialog_save_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -309,14 +306,14 @@ class FileDialog : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void selectFolder(Window parent, Cancellable cancellable, AsyncReadyCallback callback)
+  void selectFolder(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -332,14 +329,14 @@ class FileDialog : ObjectG
    * Returns: the file that was selected.
    *   Otherwise, `NULL` is returned and error is set
    */
-  File selectFolderFinish(AsyncResult result)
+  gio.file.File selectFolderFinish(gio.async_result.AsyncResult result)
   {
     GFile* _cretval;
     GError *_err;
     _cretval = gtk_file_dialog_select_folder_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -356,14 +353,14 @@ class FileDialog : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void selectMultipleFolders(Window parent, Cancellable cancellable, AsyncReadyCallback callback)
+  void selectMultipleFolders(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -380,14 +377,14 @@ class FileDialog : ObjectG
    *   as a `GListModel` of `GFiles`. Otherwise, `NULL` is returned
    *   and error is set
    */
-  ListModel selectMultipleFoldersFinish(AsyncResult result)
+  gio.list_model.ListModel selectMultipleFoldersFinish(gio.async_result.AsyncResult result)
   {
     GListModel* _cretval;
     GError *_err;
     _cretval = gtk_file_dialog_select_multiple_folders_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -413,7 +410,7 @@ class FileDialog : ObjectG
    * Params:
    *   filter = a `GtkFileFilter`
    */
-  void setDefaultFilter(FileFilter filter)
+  void setDefaultFilter(gtk.file_filter.FileFilter filter)
   {
     gtk_file_dialog_set_default_filter(cast(GtkFileDialog*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.Dup) : null);
   }
@@ -424,7 +421,7 @@ class FileDialog : ObjectG
    * Params:
    *   filters = a `GListModel` of `GtkFileFilters`
    */
-  void setFilters(ListModel filters)
+  void setFilters(gio.list_model.ListModel filters)
   {
     gtk_file_dialog_set_filters(cast(GtkFileDialog*)cPtr, filters ? cast(GListModel*)(cast(ObjectG)filters).cPtr(No.Dup) : null);
   }
@@ -439,7 +436,7 @@ class FileDialog : ObjectG
    * Params:
    *   file = a `GFile`
    */
-  void setInitialFile(File file)
+  void setInitialFile(gio.file.File file)
   {
     gtk_file_dialog_set_initial_file(cast(GtkFileDialog*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }
@@ -450,7 +447,7 @@ class FileDialog : ObjectG
    * Params:
    *   folder = a `GFile`
    */
-  void setInitialFolder(File folder)
+  void setInitialFolder(gio.file.File folder)
   {
     gtk_file_dialog_set_initial_folder(cast(GtkFileDialog*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(No.Dup) : null);
   }

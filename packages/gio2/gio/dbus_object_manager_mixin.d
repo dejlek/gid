@@ -1,13 +1,11 @@
 module gio.dbus_object_manager_mixin;
 
 public import gio.dbus_object_manager_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.dbus_interface;
-public import gio.dbus_interface_mixin;
 public import gio.dbus_object;
-public import gio.dbus_object_mixin;
 public import gio.types;
 public import gobject.dclosure;
 public import gobject.object;
@@ -32,13 +30,13 @@ template DBusObjectManagerT()
    * Returns: A #GDBusInterface instance or %NULL. Free
    *   with [gobject.object.ObjectG.unref].
    */
-  override DBusInterface getInterface(string objectPath, string interfaceName)
+  override gio.dbus_interface.DBusInterface getInterface(string objectPath, string interfaceName)
   {
     GDBusInterface* _cretval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
     _cretval = g_dbus_object_manager_get_interface(cast(GDBusObjectManager*)cPtr, _objectPath, _interfaceName);
-    auto _retval = ObjectG.getDObject!DBusInterface(cast(GDBusInterface*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_interface.DBusInterface)(cast(GDBusInterface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -49,12 +47,12 @@ template DBusObjectManagerT()
    * Returns: A #GDBusObject or %NULL. Free with
    *   [gobject.object.ObjectG.unref].
    */
-  override DBusObject getObject(string objectPath)
+  override gio.dbus_object.DBusObject getObject(string objectPath)
   {
     GDBusObject* _cretval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     _cretval = g_dbus_object_manager_get_object(cast(GDBusObjectManager*)cPtr, _objectPath);
-    auto _retval = ObjectG.getDObject!DBusObject(cast(GDBusObject*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_object.DBusObject)(cast(GDBusObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -66,7 +64,7 @@ template DBusObjectManagerT()
   {
     const(char)* _cretval;
     _cretval = g_dbus_object_manager_get_object_path(cast(GDBusObjectManager*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -77,11 +75,11 @@ template DBusObjectManagerT()
    *   [glib.list.List.free] after each element has been freed with
    *   [gobject.object.ObjectG.unref].
    */
-  override DBusObject[] getObjects()
+  override gio.dbus_object.DBusObject[] getObjects()
   {
     GList* _cretval;
     _cretval = g_dbus_object_manager_get_objects(cast(GDBusObjectManager*)cPtr);
-    auto _retval = gListToD!(DBusObject, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gio.dbus_object.DBusObject, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -94,8 +92,8 @@ template DBusObjectManagerT()
    *   interface_ = The #GDBusInterface that was added.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias InterfaceAddedCallbackDlg = void delegate(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
-  alias InterfaceAddedCallbackFunc = void function(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
+  alias InterfaceAddedCallbackDlg = void delegate(gio.dbus_object.DBusObject object, gio.dbus_interface.DBusInterface interface_, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
+  alias InterfaceAddedCallbackFunc = void function(gio.dbus_object.DBusObject object, gio.dbus_interface.DBusInterface interface_, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to InterfaceAdded signal.
@@ -111,9 +109,9 @@ template DBusObjectManagerT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dBusObjectManager = getVal!DBusObjectManager(_paramVals);
-      auto object = getVal!DBusObject(&_paramVals[1]);
-      auto interface_ = getVal!DBusInterface(&_paramVals[2]);
+      auto dBusObjectManager = getVal!(gio.dbus_object_manager.DBusObjectManager)(_paramVals);
+      auto object = getVal!(gio.dbus_object.DBusObject)(&_paramVals[1]);
+      auto interface_ = getVal!(gio.dbus_interface.DBusInterface)(&_paramVals[2]);
       _dClosure.dlg(object, interface_, dBusObjectManager);
     }
 
@@ -130,8 +128,8 @@ template DBusObjectManagerT()
    *   interface_ = The #GDBusInterface that was removed.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias InterfaceRemovedCallbackDlg = void delegate(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
-  alias InterfaceRemovedCallbackFunc = void function(DBusObject object, DBusInterface interface_, DBusObjectManager dBusObjectManager);
+  alias InterfaceRemovedCallbackDlg = void delegate(gio.dbus_object.DBusObject object, gio.dbus_interface.DBusInterface interface_, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
+  alias InterfaceRemovedCallbackFunc = void function(gio.dbus_object.DBusObject object, gio.dbus_interface.DBusInterface interface_, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to InterfaceRemoved signal.
@@ -147,9 +145,9 @@ template DBusObjectManagerT()
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dBusObjectManager = getVal!DBusObjectManager(_paramVals);
-      auto object = getVal!DBusObject(&_paramVals[1]);
-      auto interface_ = getVal!DBusInterface(&_paramVals[2]);
+      auto dBusObjectManager = getVal!(gio.dbus_object_manager.DBusObjectManager)(_paramVals);
+      auto object = getVal!(gio.dbus_object.DBusObject)(&_paramVals[1]);
+      auto interface_ = getVal!(gio.dbus_interface.DBusInterface)(&_paramVals[2]);
       _dClosure.dlg(object, interface_, dBusObjectManager);
     }
 
@@ -163,8 +161,8 @@ template DBusObjectManagerT()
    *   object = The #GDBusObject that was added.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias ObjectAddedCallbackDlg = void delegate(DBusObject object, DBusObjectManager dBusObjectManager);
-  alias ObjectAddedCallbackFunc = void function(DBusObject object, DBusObjectManager dBusObjectManager);
+  alias ObjectAddedCallbackDlg = void delegate(gio.dbus_object.DBusObject object, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
+  alias ObjectAddedCallbackFunc = void function(gio.dbus_object.DBusObject object, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to ObjectAdded signal.
@@ -180,8 +178,8 @@ template DBusObjectManagerT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dBusObjectManager = getVal!DBusObjectManager(_paramVals);
-      auto object = getVal!DBusObject(&_paramVals[1]);
+      auto dBusObjectManager = getVal!(gio.dbus_object_manager.DBusObjectManager)(_paramVals);
+      auto object = getVal!(gio.dbus_object.DBusObject)(&_paramVals[1]);
       _dClosure.dlg(object, dBusObjectManager);
     }
 
@@ -195,8 +193,8 @@ template DBusObjectManagerT()
    *   object = The #GDBusObject that was removed.
    *   dBusObjectManager = the instance the signal is connected to
    */
-  alias ObjectRemovedCallbackDlg = void delegate(DBusObject object, DBusObjectManager dBusObjectManager);
-  alias ObjectRemovedCallbackFunc = void function(DBusObject object, DBusObjectManager dBusObjectManager);
+  alias ObjectRemovedCallbackDlg = void delegate(gio.dbus_object.DBusObject object, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
+  alias ObjectRemovedCallbackFunc = void function(gio.dbus_object.DBusObject object, gio.dbus_object_manager.DBusObjectManager dBusObjectManager);
 
   /**
    * Connect to ObjectRemoved signal.
@@ -212,8 +210,8 @@ template DBusObjectManagerT()
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dBusObjectManager = getVal!DBusObjectManager(_paramVals);
-      auto object = getVal!DBusObject(&_paramVals[1]);
+      auto dBusObjectManager = getVal!(gio.dbus_object_manager.DBusObjectManager)(_paramVals);
+      auto object = getVal!(gio.dbus_object.DBusObject)(&_paramVals[1]);
       _dClosure.dlg(object, dBusObjectManager);
     }
 

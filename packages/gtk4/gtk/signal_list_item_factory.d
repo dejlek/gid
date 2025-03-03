@@ -1,6 +1,6 @@
 module gtk.signal_list_item_factory;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -42,7 +42,7 @@ import gtk.types;
  * [gtk.signal_list_item_factory.SignalListItemFactory.setup] signal and removed again during
  * [gtk.signal_list_item_factory.SignalListItemFactory.teardown].
  */
-class SignalListItemFactory : ListItemFactory
+class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -86,8 +86,8 @@ class SignalListItemFactory : ListItemFactory
    *   object = The `GObject` to bind
    *   signalListItemFactory = the instance the signal is connected to
    */
-  alias BindCallbackDlg = void delegate(ObjectG object, SignalListItemFactory signalListItemFactory);
-  alias BindCallbackFunc = void function(ObjectG object, SignalListItemFactory signalListItemFactory);
+  alias BindCallbackDlg = void delegate(gobject.object.ObjectG object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory);
+  alias BindCallbackFunc = void function(gobject.object.ObjectG object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory);
 
   /**
    * Connect to Bind signal.
@@ -103,8 +103,8 @@ class SignalListItemFactory : ListItemFactory
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto signalListItemFactory = getVal!SignalListItemFactory(_paramVals);
-      auto object = getVal!ObjectG(&_paramVals[1]);
+      auto signalListItemFactory = getVal!(gtk.signal_list_item_factory.SignalListItemFactory)(_paramVals);
+      auto object = getVal!(gobject.object.ObjectG)(&_paramVals[1]);
       _dClosure.dlg(object, signalListItemFactory);
     }
 
@@ -121,8 +121,8 @@ class SignalListItemFactory : ListItemFactory
    *   object = The `GObject` to set up
    *   signalListItemFactory = the instance the signal is connected to
    */
-  alias SetupCallbackDlg = void delegate(ObjectG object, SignalListItemFactory signalListItemFactory);
-  alias SetupCallbackFunc = void function(ObjectG object, SignalListItemFactory signalListItemFactory);
+  alias SetupCallbackDlg = void delegate(gobject.object.ObjectG object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory);
+  alias SetupCallbackFunc = void function(gobject.object.ObjectG object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory);
 
   /**
    * Connect to Setup signal.
@@ -138,8 +138,8 @@ class SignalListItemFactory : ListItemFactory
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto signalListItemFactory = getVal!SignalListItemFactory(_paramVals);
-      auto object = getVal!ObjectG(&_paramVals[1]);
+      auto signalListItemFactory = getVal!(gtk.signal_list_item_factory.SignalListItemFactory)(_paramVals);
+      auto object = getVal!(gobject.object.ObjectG)(&_paramVals[1]);
       _dClosure.dlg(object, signalListItemFactory);
     }
 
@@ -156,8 +156,8 @@ class SignalListItemFactory : ListItemFactory
    *   object = The `GObject` to tear down
    *   signalListItemFactory = the instance the signal is connected to
    */
-  alias TeardownCallbackDlg = void delegate(ObjectG object, SignalListItemFactory signalListItemFactory);
-  alias TeardownCallbackFunc = void function(ObjectG object, SignalListItemFactory signalListItemFactory);
+  alias TeardownCallbackDlg = void delegate(gobject.object.ObjectG object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory);
+  alias TeardownCallbackFunc = void function(gobject.object.ObjectG object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory);
 
   /**
    * Connect to Teardown signal.
@@ -173,8 +173,8 @@ class SignalListItemFactory : ListItemFactory
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto signalListItemFactory = getVal!SignalListItemFactory(_paramVals);
-      auto object = getVal!ObjectG(&_paramVals[1]);
+      auto signalListItemFactory = getVal!(gtk.signal_list_item_factory.SignalListItemFactory)(_paramVals);
+      auto object = getVal!(gobject.object.ObjectG)(&_paramVals[1]);
       _dClosure.dlg(object, signalListItemFactory);
     }
 
@@ -192,8 +192,8 @@ class SignalListItemFactory : ListItemFactory
    *   object = The `GObject` to unbind
    *   signalListItemFactory = the instance the signal is connected to
    */
-  alias UnbindCallbackDlg = void delegate(ObjectG object, SignalListItemFactory signalListItemFactory);
-  alias UnbindCallbackFunc = void function(ObjectG object, SignalListItemFactory signalListItemFactory);
+  alias UnbindCallbackDlg = void delegate(gobject.object.ObjectG object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory);
+  alias UnbindCallbackFunc = void function(gobject.object.ObjectG object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory);
 
   /**
    * Connect to Unbind signal.
@@ -209,8 +209,8 @@ class SignalListItemFactory : ListItemFactory
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto signalListItemFactory = getVal!SignalListItemFactory(_paramVals);
-      auto object = getVal!ObjectG(&_paramVals[1]);
+      auto signalListItemFactory = getVal!(gtk.signal_list_item_factory.SignalListItemFactory)(_paramVals);
+      auto object = getVal!(gobject.object.ObjectG)(&_paramVals[1]);
       _dClosure.dlg(object, signalListItemFactory);
     }
 

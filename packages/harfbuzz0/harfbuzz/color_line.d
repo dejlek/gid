@@ -1,6 +1,6 @@
 module harfbuzz.color_line;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -9,7 +9,7 @@ import harfbuzz.types;
 /**
  * A struct containing color information for a gradient.
  */
-class ColorLine : Boxed
+class ColorLine : gobject.boxed.Boxed
 {
 
   this()

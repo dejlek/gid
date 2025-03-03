@@ -1,6 +1,6 @@
 module gtk.expander;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -89,7 +89,7 @@ import gtk.widget;
  * # Accessibility
  * `GtkExpander` uses the %GTK_ACCESSIBLE_ROLE_BUTTON role.
  */
-class Expander : Widget
+class Expander : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -134,12 +134,12 @@ class Expander : Widget
    *     in front of the mnemonic character
    * Returns: a new `GtkExpander` widget.
    */
-  static Expander newWithMnemonic(string label)
+  static gtk.expander.Expander newWithMnemonic(string label)
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_expander_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!Expander(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.expander.Expander)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -147,11 +147,11 @@ class Expander : Widget
    * Gets the child widget of expander.
    * Returns: the child widget of expander
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_expander_get_child(cast(GtkExpander*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class Expander : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_expander_get_label(cast(GtkExpander*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -189,11 +189,11 @@ class Expander : Widget
    * Retrieves the label widget for the frame.
    * Returns: the label widget
    */
-  Widget getLabelWidget()
+  gtk.widget.Widget getLabelWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_expander_get_label_widget(cast(GtkExpander*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -237,7 +237,7 @@ class Expander : Widget
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_expander_set_child(cast(GtkExpander*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -273,7 +273,7 @@ class Expander : Widget
    * Params:
    *   labelWidget = the new label widget
    */
-  void setLabelWidget(Widget labelWidget)
+  void setLabelWidget(gtk.widget.Widget labelWidget)
   {
     gtk_expander_set_label_widget(cast(GtkExpander*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
   }
@@ -313,8 +313,8 @@ class Expander : Widget
    * Activates the `GtkExpander`.
    *   expander = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(Expander expander);
-  alias ActivateCallbackFunc = void function(Expander expander);
+  alias ActivateCallbackDlg = void delegate(gtk.expander.Expander expander);
+  alias ActivateCallbackFunc = void function(gtk.expander.Expander expander);
 
   /**
    * Connect to Activate signal.
@@ -330,7 +330,7 @@ class Expander : Widget
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto expander = getVal!Expander(_paramVals);
+      auto expander = getVal!(gtk.expander.Expander)(_paramVals);
       _dClosure.dlg(expander);
     }
 

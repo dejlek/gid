@@ -5,9 +5,9 @@ import arrow.c.types;
 import arrow.execute_node_options;
 import arrow.expression;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class FilterNodeOptions : ExecuteNodeOptions
+class FilterNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class FilterNodeOptions : ExecuteNodeOptions
     return getType();
   }
 
-  this(Expression expression)
+  this(arrow.expression.Expression expression)
   {
     GArrowFilterNodeOptions* _cretval;
     _cretval = garrow_filter_node_options_new(expression ? cast(GArrowExpression*)expression.cPtr(No.Dup) : null);

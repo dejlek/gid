@@ -1,6 +1,6 @@
 module gio.menu;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.menu_item;
@@ -16,7 +16,7 @@ import gio.types;
  * [gio.menu.Menu.insertSection]. To add a submenu, use
  * [gio.menu.Menu.insertSubmenu].
  */
-class Menu : MenuModel
+class Menu : gio.menu_model.MenuModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -68,7 +68,7 @@ class Menu : MenuModel
    * Params:
    *   item = a #GMenuItem to append
    */
-  void appendItem(MenuItem item)
+  void appendItem(gio.menu_item.MenuItem item)
   {
     g_menu_append_item(cast(GMenu*)cPtr, item ? cast(GMenuItem*)item.cPtr(No.Dup) : null);
   }
@@ -81,7 +81,7 @@ class Menu : MenuModel
    *   label = the section label, or %NULL
    *   section = a #GMenuModel with the items of the section
    */
-  void appendSection(string label, MenuModel section)
+  void appendSection(string label, gio.menu_model.MenuModel section)
   {
     const(char)* _label = label.toCString(No.Alloc);
     g_menu_append_section(cast(GMenu*)cPtr, _label, section ? cast(GMenuModel*)section.cPtr(No.Dup) : null);
@@ -95,7 +95,7 @@ class Menu : MenuModel
    *   label = the section label, or %NULL
    *   submenu = a #GMenuModel with the items of the submenu
    */
-  void appendSubmenu(string label, MenuModel submenu)
+  void appendSubmenu(string label, gio.menu_model.MenuModel submenu)
   {
     const(char)* _label = label.toCString(No.Alloc);
     g_menu_append_submenu(cast(GMenu*)cPtr, _label, submenu ? cast(GMenuModel*)submenu.cPtr(No.Dup) : null);
@@ -148,7 +148,7 @@ class Menu : MenuModel
    *   position = the position at which to insert the item
    *   item = the #GMenuItem to insert
    */
-  void insertItem(int position, MenuItem item)
+  void insertItem(int position, gio.menu_item.MenuItem item)
   {
     g_menu_insert_item(cast(GMenu*)cPtr, position, item ? cast(GMenuItem*)item.cPtr(No.Dup) : null);
   }
@@ -162,7 +162,7 @@ class Menu : MenuModel
    *   label = the section label, or %NULL
    *   section = a #GMenuModel with the items of the section
    */
-  void insertSection(int position, string label, MenuModel section)
+  void insertSection(int position, string label, gio.menu_model.MenuModel section)
   {
     const(char)* _label = label.toCString(No.Alloc);
     g_menu_insert_section(cast(GMenu*)cPtr, position, _label, section ? cast(GMenuModel*)section.cPtr(No.Dup) : null);
@@ -177,7 +177,7 @@ class Menu : MenuModel
    *   label = the section label, or %NULL
    *   submenu = a #GMenuModel with the items of the submenu
    */
-  void insertSubmenu(int position, string label, MenuModel submenu)
+  void insertSubmenu(int position, string label, gio.menu_model.MenuModel submenu)
   {
     const(char)* _label = label.toCString(No.Alloc);
     g_menu_insert_submenu(cast(GMenu*)cPtr, position, _label, submenu ? cast(GMenuModel*)submenu.cPtr(No.Dup) : null);
@@ -204,7 +204,7 @@ class Menu : MenuModel
    * Params:
    *   item = a #GMenuItem to prepend
    */
-  void prependItem(MenuItem item)
+  void prependItem(gio.menu_item.MenuItem item)
   {
     g_menu_prepend_item(cast(GMenu*)cPtr, item ? cast(GMenuItem*)item.cPtr(No.Dup) : null);
   }
@@ -217,7 +217,7 @@ class Menu : MenuModel
    *   label = the section label, or %NULL
    *   section = a #GMenuModel with the items of the section
    */
-  void prependSection(string label, MenuModel section)
+  void prependSection(string label, gio.menu_model.MenuModel section)
   {
     const(char)* _label = label.toCString(No.Alloc);
     g_menu_prepend_section(cast(GMenu*)cPtr, _label, section ? cast(GMenuModel*)section.cPtr(No.Dup) : null);
@@ -231,7 +231,7 @@ class Menu : MenuModel
    *   label = the section label, or %NULL
    *   submenu = a #GMenuModel with the items of the submenu
    */
-  void prependSubmenu(string label, MenuModel submenu)
+  void prependSubmenu(string label, gio.menu_model.MenuModel submenu)
   {
     const(char)* _label = label.toCString(No.Alloc);
     g_menu_prepend_submenu(cast(GMenu*)cPtr, _label, submenu ? cast(GMenuModel*)submenu.cPtr(No.Dup) : null);

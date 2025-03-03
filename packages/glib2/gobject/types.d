@@ -1,18 +1,17 @@
 module gobject.types;
 
-import gid.global;
+import gid.gid;
 import gobject.binding;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.closure;
 import gobject.object;
 import gobject.param_spec;
-import gobject.types;
 import gobject.value;
 
 
 // Aliases
-alias SignalCMarshaller = ClosureMarshal;
+alias SignalCMarshaller = gobject.types.ClosureMarshal;
 alias GType = gobject.c.types.GType;
 
 // Enums
@@ -33,26 +32,26 @@ alias TypeCValue = GTypeCValue;
 alias TypeFundamentalInfo = GTypeFundamentalInfo;
 
 // Callbacks
-alias BindingTransformFunc = bool delegate(Binding binding, Value fromValue, Value toValue);
+alias BindingTransformFunc = bool delegate(gobject.binding.Binding binding, gobject.value.Value fromValue, gobject.value.Value toValue);
 alias BoxedCopyFunc = void* delegate(void* boxed);
 alias BoxedFreeFunc = void delegate(void* boxed);
 alias Callback = void delegate();
-alias ClosureMarshal = void delegate(Closure closure, Value returnValue, Value[] paramValues, void* invocationHint);
-alias ClosureNotify = void delegate(Closure closure);
-alias ObjectFinalizeFunc = void delegate(ObjectG object);
-alias ObjectGetPropertyFunc = void delegate(ObjectG object, uint propertyId, Value value, ParamSpec pspec);
-alias ObjectSetPropertyFunc = void delegate(ObjectG object, uint propertyId, Value value, ParamSpec pspec);
-alias SignalAccumulator = bool delegate(SignalInvocationHint ihint, Value returnAccu, Value handlerReturn);
-alias SignalEmissionHook = bool delegate(SignalInvocationHint ihint, Value[] paramValues);
-alias ToggleNotify = void delegate(ObjectG object, bool isLastRef);
-alias TypeValueCollectFunc = string delegate(Value value, TypeCValue[] collectValues, uint collectFlags);
-alias TypeValueCopyFunc = void delegate(Value srcValue, out Value destValue);
-alias TypeValueFreeFunc = void delegate(Value value);
-alias TypeValueInitFunc = void delegate(Value value);
-alias TypeValueLCopyFunc = string delegate(Value value, TypeCValue[] collectValues, uint collectFlags);
-alias TypeValuePeekPointerFunc = void* delegate(Value value);
-alias ValueTransform = void delegate(Value srcValue, Value destValue);
-alias WeakNotify = void delegate(ObjectG whereTheObjectWas);
+alias ClosureMarshal = void delegate(gobject.closure.Closure closure, gobject.value.Value returnValue, gobject.value.Value[] paramValues, void* invocationHint);
+alias ClosureNotify = void delegate(gobject.closure.Closure closure);
+alias ObjectFinalizeFunc = void delegate(gobject.object.ObjectG object);
+alias ObjectGetPropertyFunc = void delegate(gobject.object.ObjectG object, uint propertyId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec);
+alias ObjectSetPropertyFunc = void delegate(gobject.object.ObjectG object, uint propertyId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec);
+alias SignalAccumulator = bool delegate(gobject.types.SignalInvocationHint ihint, gobject.value.Value returnAccu, gobject.value.Value handlerReturn);
+alias SignalEmissionHook = bool delegate(gobject.types.SignalInvocationHint ihint, gobject.value.Value[] paramValues);
+alias ToggleNotify = void delegate(gobject.object.ObjectG object, bool isLastRef);
+alias TypeValueCollectFunc = string delegate(gobject.value.Value value, gobject.types.TypeCValue[] collectValues, uint collectFlags);
+alias TypeValueCopyFunc = void delegate(gobject.value.Value srcValue, out gobject.value.Value destValue);
+alias TypeValueFreeFunc = void delegate(gobject.value.Value value);
+alias TypeValueInitFunc = void delegate(gobject.value.Value value);
+alias TypeValueLCopyFunc = string delegate(gobject.value.Value value, gobject.types.TypeCValue[] collectValues, uint collectFlags);
+alias TypeValuePeekPointerFunc = void* delegate(gobject.value.Value value);
+alias ValueTransform = void delegate(gobject.value.Value srcValue, gobject.value.Value destValue);
+alias WeakNotify = void delegate(gobject.object.ObjectG whereTheObjectWas);
 
 /**
  * Mask containing the bits of #GParamSpec.flags which are reserved for GLib.

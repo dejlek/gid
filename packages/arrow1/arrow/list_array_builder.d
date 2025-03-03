@@ -5,11 +5,11 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.list_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class ListArrayBuilder : ArrayBuilder
+class ListArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -28,7 +28,7 @@ class ListArrayBuilder : ArrayBuilder
     return getType();
   }
 
-  this(ListDataType dataType)
+  this(arrow.list_data_type.ListDataType dataType)
   {
     GArrowListArrayBuilder* _cretval;
     GError *_err;
@@ -58,11 +58,11 @@ class ListArrayBuilder : ArrayBuilder
     return _retval;
   }
 
-  ArrayBuilder getValueBuilder()
+  arrow.array_builder.ArrayBuilder getValueBuilder()
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_list_array_builder_get_value_builder(cast(GArrowListArrayBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!ArrayBuilder(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 }

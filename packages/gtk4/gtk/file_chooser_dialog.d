@@ -1,6 +1,6 @@
 module gtk.file_chooser_dialog;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -134,9 +134,9 @@ import gtk.types;
  * NULL$(RPAREN);
  * ```
  * This will create buttons for “Cancel” and “Open” that use predefined
- * response identifiers from [gtk.ResponseType].  For most dialog
+ * response identifiers from [gtk.types.ResponseType].  For most dialog
  * boxes you can use your own custom response codes rather than the
- * ones in [gtk.ResponseType], but `GtkFileChooserDialog` assumes that
+ * ones in [gtk.types.ResponseType], but `GtkFileChooserDialog` assumes that
  * its “accept”-type action, e.g. an “Open” or “Save” button,
  * will have one of the following response codes:
  * - %GTK_RESPONSE_ACCEPT
@@ -155,7 +155,7 @@ import gtk.types;
 
  * Deprecated: Use [gtk.file_dialog.FileDialog] instead
  */
-class FileChooserDialog : Dialog, FileChooser
+class FileChooserDialog : gtk.dialog.Dialog, gtk.file_chooser.FileChooser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

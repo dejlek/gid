@@ -5,7 +5,7 @@ import gio.drive;
 import gio.drive_mixin;
 
 /// Proxy object for Gio.Drive interface when a GObject has no applicable D binding
-class DriveIfaceProxy : IfaceProxy, Drive
+class DriveIfaceProxy : IfaceProxy, gio.drive.Drive
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class DriveIfaceProxy : IfaceProxy, Drive
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Drive);
+    return typeid(gio.drive.Drive);
   }
 
   mixin DriveT!();

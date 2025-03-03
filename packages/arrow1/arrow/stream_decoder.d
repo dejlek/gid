@@ -7,12 +7,12 @@ import arrow.read_options;
 import arrow.schema;
 import arrow.stream_listener;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.error;
 import gobject.object;
 
-class StreamDecoder : ObjectG
+class StreamDecoder : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -31,7 +31,7 @@ class StreamDecoder : ObjectG
     return getType();
   }
 
-  this(StreamListener listener, ReadOptions options)
+  this(arrow.stream_listener.StreamListener listener, arrow.read_options.ReadOptions options)
   {
     GArrowStreamDecoder* _cretval;
     _cretval = garrow_stream_decoder_new(listener ? cast(GArrowStreamListener*)listener.cPtr(No.Dup) : null, options ? cast(GArrowReadOptions*)options.cPtr(No.Dup) : null);
@@ -47,7 +47,7 @@ class StreamDecoder : ObjectG
    *   buffer = A #GArrowBuffer to be decoded.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool consumeBuffer(Buffer buffer)
+  bool consumeBuffer(arrow.buffer.Buffer buffer)
   {
     bool _retval;
     GError *_err;
@@ -66,7 +66,7 @@ class StreamDecoder : ObjectG
    *   bytes = A #GBytes to be decoded.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool consumeBytes(Bytes bytes)
+  bool consumeBytes(glib.bytes.Bytes bytes)
   {
     bool _retval;
     GError *_err;
@@ -133,11 +133,11 @@ class StreamDecoder : ObjectG
     return _retval;
   }
 
-  Schema getSchema()
+  arrow.schema.Schema getSchema()
   {
     GArrowSchema* _cretval;
     _cretval = garrow_stream_decoder_get_schema(cast(GArrowStreamDecoder*)cPtr);
-    auto _retval = ObjectG.getDObject!Schema(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 

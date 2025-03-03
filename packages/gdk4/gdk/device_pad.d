@@ -4,7 +4,7 @@ public import gdk.device_pad_iface_proxy;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.global;
+import gid.gid;
 
 /**
  * `GdkDevicePad` is an interface implemented by devices of type
@@ -39,7 +39,7 @@ interface DevicePad
    *   featureIdx = the index of the feature to get the group from
    * Returns: The group number of the queried pad feature.
    */
-  int getFeatureGroup(DevicePadFeature feature, int featureIdx);
+  int getFeatureGroup(gdk.types.DevicePadFeature feature, int featureIdx);
 
   /**
    * Returns the number of modes that group may have.
@@ -55,7 +55,7 @@ interface DevicePad
    *   feature = a pad feature
    * Returns: The amount of elements of type feature that this pad has.
    */
-  int getNFeatures(DevicePadFeature feature);
+  int getNFeatures(gdk.types.DevicePadFeature feature);
 
   /**
    * Returns the number of groups this pad device has.

@@ -1,8 +1,7 @@
 module gio.buffered_input_stream;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -26,7 +25,7 @@ import gobject.object;
  * buffered input stream's buffer, use [gio.buffered_input_stream.BufferedInputStream.setBufferSize].
  * Note that the buffer's size cannot be reduced below the size of the data within the buffer.
  */
-class BufferedInputStream : FilterInputStream, Seekable
+class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seekable.Seekable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,7 +53,7 @@ class BufferedInputStream : FilterInputStream, Seekable
    *   baseStream = a #GInputStream
    * Returns: a #GInputStream for the given base_stream.
    */
-  this(InputStream baseStream)
+  this(gio.input_stream.InputStream baseStream)
   {
     GInputStream* _cretval;
     _cretval = g_buffered_input_stream_new(baseStream ? cast(GInputStream*)baseStream.cPtr(No.Dup) : null);
@@ -69,11 +68,11 @@ class BufferedInputStream : FilterInputStream, Seekable
    *   size = a #gsize
    * Returns: a #GInputStream.
    */
-  static BufferedInputStream newSized(InputStream baseStream, size_t size)
+  static gio.buffered_input_stream.BufferedInputStream newSized(gio.input_stream.InputStream baseStream, size_t size)
   {
     GInputStream* _cretval;
     _cretval = g_buffered_input_stream_new_sized(baseStream ? cast(GInputStream*)baseStream.cPtr(No.Dup) : null, size);
-    auto _retval = ObjectG.getDObject!BufferedInputStream(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.buffered_input_stream.BufferedInputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -102,7 +101,7 @@ class BufferedInputStream : FilterInputStream, Seekable
    * Returns: the number of bytes read into stream's buffer, up to count,
    *   or -1 on error.
    */
-  ptrdiff_t fill(ptrdiff_t count, Cancellable cancellable)
+  ptrdiff_t fill(ptrdiff_t count, gio.cancellable.Cancellable cancellable)
   {
     ptrdiff_t _retval;
     GError *_err;
@@ -124,14 +123,14 @@ class BufferedInputStream : FilterInputStream, Seekable
    *   cancellable = optional #GCancellable object
    *   callback = a #GAsyncReadyCallback
    */
-  void fillAsync(ptrdiff_t count, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void fillAsync(ptrdiff_t count, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -145,7 +144,7 @@ class BufferedInputStream : FilterInputStream, Seekable
    *   result = a #GAsyncResult
    * Returns: a #gssize of the read stream, or `-1` on an error.
    */
-  ptrdiff_t fillFinish(AsyncResult result)
+  ptrdiff_t fillFinish(gio.async_result.AsyncResult result)
   {
     ptrdiff_t _retval;
     GError *_err;
@@ -233,7 +232,7 @@ class BufferedInputStream : FilterInputStream, Seekable
    *   cancellable = optional #GCancellable object, %NULL to ignore
    * Returns: the byte read from the stream, or -1 on end of stream or error.
    */
-  int readByte(Cancellable cancellable)
+  int readByte(gio.cancellable.Cancellable cancellable)
   {
     int _retval;
     GError *_err;

@@ -1,6 +1,6 @@
 module soup.auth_domain;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -23,7 +23,7 @@ import soup.types;
  * and then use a filter $(LPAREN)[soup.auth_domain.AuthDomain.setFilter] to bypass
  * authentication for those requests that don't need it.
  */
-class AuthDomain : ObjectG
+class AuthDomain : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,11 +54,11 @@ class AuthDomain : ObjectG
    * Returns: the username that msg has authenticated
    *   as, if in fact it has authenticated. %NULL otherwise.
    */
-  string accepts(ServerMessage msg)
+  string accepts(soup.server_message.ServerMessage msg)
   {
     char* _cretval;
     _cretval = soup_auth_domain_accepts(cast(SoupAuthDomain*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class AuthDomain : ObjectG
    * Params:
    *   msg = a #SoupServerMessage
    */
-  void challenge(ServerMessage msg)
+  void challenge(soup.server_message.ServerMessage msg)
   {
     soup_auth_domain_challenge(cast(SoupAuthDomain*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null);
   }
@@ -100,7 +100,7 @@ class AuthDomain : ObjectG
    *   password = a password
    * Returns: whether or not the message is authenticated
    */
-  bool checkPassword(ServerMessage msg, string username, string password)
+  bool checkPassword(soup.server_message.ServerMessage msg, string username, string password)
   {
     bool _retval;
     const(char)* _username = username.toCString(No.Alloc);
@@ -120,7 +120,7 @@ class AuthDomain : ObjectG
    *   msg = a #SoupServerMessage
    * Returns: %TRUE if domain requires msg to be authenticated
    */
-  bool covers(ServerMessage msg)
+  bool covers(soup.server_message.ServerMessage msg)
   {
     bool _retval;
     _retval = soup_auth_domain_covers(cast(SoupAuthDomain*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null);
@@ -135,7 +135,7 @@ class AuthDomain : ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_auth_domain_get_realm(cast(SoupAuthDomain*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -184,13 +184,13 @@ class AuthDomain : ObjectG
    * Params:
    *   filter = the auth filter for domain
    */
-  void setFilter(AuthDomainFilter filter)
+  void setFilter(soup.types.AuthDomainFilter filter)
   {
     extern(C) bool _filterCallback(SoupAuthDomain* domain, SoupServerMessage* msg, void* userData)
     {
-      auto _dlg = cast(AuthDomainFilter*)userData;
+      auto _dlg = cast(soup.types.AuthDomainFilter*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!AuthDomain(cast(void*)domain, No.Take), ObjectG.getDObject!ServerMessage(cast(void*)msg, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take));
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;
@@ -210,14 +210,14 @@ class AuthDomain : ObjectG
    * Params:
    *   authCallback = the auth callback
    */
-  void setGenericAuthCallback(AuthDomainGenericAuthCallback authCallback)
+  void setGenericAuthCallback(soup.types.AuthDomainGenericAuthCallback authCallback)
   {
     extern(C) bool _authCallbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, void* userData)
     {
-      auto _dlg = cast(AuthDomainGenericAuthCallback*)userData;
+      auto _dlg = cast(soup.types.AuthDomainGenericAuthCallback*)userData;
       string _username = username.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!AuthDomain(cast(void*)domain, No.Take), ObjectG.getDObject!ServerMessage(cast(void*)msg, No.Take), _username);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
       return _retval;
     }
     auto _authCallbackCB = authCallback ? &_authCallbackCallback : null;

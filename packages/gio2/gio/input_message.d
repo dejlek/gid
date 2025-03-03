@@ -1,6 +1,6 @@
 module gio.input_message;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;

@@ -1,6 +1,6 @@
 module gtk.list_box_row;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -19,7 +19,7 @@ import gtk.widget;
 /**
  * `GtkListBoxRow` is the kind of widget that can be added to a `GtkListBox`.
  */
-class ListBoxRow : Widget, Actionable
+class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -88,27 +88,27 @@ class ListBoxRow : Widget, Actionable
    * Gets the child widget of row.
    * Returns: the child widget of row
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_row_get_child(cast(GtkListBoxRow*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
   /**
    * Returns the current header of the row.
    * This can be used
-   * in a [gtk.ListBoxUpdateHeaderFunc] to see if
+   * in a [gtk.types.ListBoxUpdateHeaderFunc] to see if
    * there is a header set already, and if so to update
    * the state of it.
    * Returns: the current header
    */
-  Widget getHeader()
+  gtk.widget.Widget getHeader()
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_row_get_header(cast(GtkListBoxRow*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class ListBoxRow : Widget, Actionable
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_list_box_row_set_child(cast(GtkListBoxRow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -169,13 +169,13 @@ class ListBoxRow : Widget, Actionable
   /**
    * Sets the current header of the row.
    * This is only allowed to be called
-   * from a [gtk.ListBoxUpdateHeaderFunc].
+   * from a [gtk.types.ListBoxUpdateHeaderFunc].
    * It will replace any existing header in the row,
    * and be shown in front of the row in the listbox.
    * Params:
    *   header = the header
    */
-  void setHeader(Widget header)
+  void setHeader(gtk.widget.Widget header)
   {
     gtk_list_box_row_set_header(cast(GtkListBoxRow*)cPtr, header ? cast(GtkWidget*)header.cPtr(No.Dup) : null);
   }
@@ -197,8 +197,8 @@ class ListBoxRow : Widget, Actionable
    * `GtkListBox`.
    *   listBoxRow = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(ListBoxRow listBoxRow);
-  alias ActivateCallbackFunc = void function(ListBoxRow listBoxRow);
+  alias ActivateCallbackDlg = void delegate(gtk.list_box_row.ListBoxRow listBoxRow);
+  alias ActivateCallbackFunc = void function(gtk.list_box_row.ListBoxRow listBoxRow);
 
   /**
    * Connect to Activate signal.
@@ -214,7 +214,7 @@ class ListBoxRow : Widget, Actionable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBoxRow = getVal!ListBoxRow(_paramVals);
+      auto listBoxRow = getVal!(gtk.list_box_row.ListBoxRow)(_paramVals);
       _dClosure.dlg(listBoxRow);
     }
 

@@ -6,11 +6,11 @@ import arrow.decimal32;
 import arrow.decimal32_data_type;
 import arrow.fixed_size_binary_array_builder;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.error;
 
-class Decimal32ArrayBuilder : FixedSizeBinaryArrayBuilder
+class Decimal32ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,16 +29,16 @@ class Decimal32ArrayBuilder : FixedSizeBinaryArrayBuilder
     return getType();
   }
 
-  this(Decimal32DataType dataType)
+  this(arrow.decimal32_data_type.Decimal32DataType dataType)
   {
     GArrowDecimal32ArrayBuilder* _cretval;
     _cretval = garrow_decimal32_array_builder_new(dataType ? cast(GArrowDecimal32DataType*)dataType.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
-  alias appendValue = FixedSizeBinaryArrayBuilder.appendValue;
+  alias appendValue = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValue;
 
-  bool appendValue(Decimal32 value)
+  bool appendValue(arrow.decimal32.Decimal32 value)
   {
     bool _retval;
     GError *_err;
@@ -48,7 +48,7 @@ class Decimal32ArrayBuilder : FixedSizeBinaryArrayBuilder
     return _retval;
   }
 
-  alias appendValues = FixedSizeBinaryArrayBuilder.appendValues;
+  alias appendValues = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValues;
 
   /**
    * Append multiple values at once. It's more efficient than multiple
@@ -61,7 +61,7 @@ class Decimal32ArrayBuilder : FixedSizeBinaryArrayBuilder
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendValues(Decimal32[] values, bool[] isValids)
+  bool appendValues(arrow.decimal32.Decimal32[] values, bool[] isValids)
   {
     bool _retval;
     long _valuesLength;

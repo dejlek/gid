@@ -1,6 +1,6 @@
 module gio.filter_output_stream;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.output_stream;
@@ -13,7 +13,7 @@ import gobject.object;
  * of filtering operations are character set conversion, compression
  * and byte order flipping.
  */
-class FilterOutputStream : OutputStream
+class FilterOutputStream : gio.output_stream.OutputStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -36,11 +36,11 @@ class FilterOutputStream : OutputStream
    * Gets the base stream for the filter stream.
    * Returns: a #GOutputStream.
    */
-  OutputStream getBaseStream()
+  gio.output_stream.OutputStream getBaseStream()
   {
     GOutputStream* _cretval;
     _cretval = g_filter_output_stream_get_base_stream(cast(GFilterOutputStream*)cPtr);
-    auto _retval = ObjectG.getDObject!OutputStream(cast(GOutputStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 

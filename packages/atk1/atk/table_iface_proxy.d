@@ -5,7 +5,7 @@ import atk.table;
 import atk.table_mixin;
 
 /// Proxy object for Atk.Table interface when a GObject has no applicable D binding
-class TableIfaceProxy : IfaceProxy, Table
+class TableIfaceProxy : IfaceProxy, atk.table.Table
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class TableIfaceProxy : IfaceProxy, Table
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Table);
+    return typeid(atk.table.Table);
   }
 
   mixin TableT!();

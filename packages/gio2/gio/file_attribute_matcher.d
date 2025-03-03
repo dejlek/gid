@@ -1,6 +1,6 @@
 module gio.file_attribute_matcher;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -9,7 +9,7 @@ import gobject.boxed;
 /**
  * Determines if a string matches a file attribute.
  */
-class FileAttributeMatcher : Boxed
+class FileAttributeMatcher : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -90,7 +90,7 @@ class FileAttributeMatcher : Boxed
   {
     const(char)* _cretval;
     _cretval = g_file_attribute_matcher_enumerate_next(cast(GFileAttributeMatcher*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -138,11 +138,11 @@ class FileAttributeMatcher : Boxed
    * Returns: A file attribute matcher matching all attributes of
    *   matcher that are not matched by subtract
    */
-  FileAttributeMatcher subtract(FileAttributeMatcher subtract)
+  gio.file_attribute_matcher.FileAttributeMatcher subtract(gio.file_attribute_matcher.FileAttributeMatcher subtract)
   {
     GFileAttributeMatcher* _cretval;
     _cretval = g_file_attribute_matcher_subtract(cast(GFileAttributeMatcher*)cPtr, subtract ? cast(GFileAttributeMatcher*)subtract.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new FileAttributeMatcher(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gio.file_attribute_matcher.FileAttributeMatcher(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class FileAttributeMatcher : Boxed
   {
     char* _cretval;
     _cretval = g_file_attribute_matcher_to_string(cast(GFileAttributeMatcher*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

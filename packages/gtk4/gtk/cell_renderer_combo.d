@@ -1,6 +1,6 @@
 module gtk.cell_renderer_combo;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -23,7 +23,7 @@ import gtk.types;
  * Deprecated: List views use widgets to display their contents. You
  *   should use [gtk.drop_down.DropDown] instead
  */
-class CellRendererCombo : CellRendererText
+class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -77,8 +77,8 @@ class CellRendererCombo : CellRendererText
    *     $(LPAREN)relative to the combo box model$(RPAREN)
    *   cellRendererCombo = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(string pathString, TreeIter newIter, CellRendererCombo cellRendererCombo);
-  alias ChangedCallbackFunc = void function(string pathString, TreeIter newIter, CellRendererCombo cellRendererCombo);
+  alias ChangedCallbackDlg = void delegate(string pathString, gtk.tree_iter.TreeIter newIter, gtk.cell_renderer_combo.CellRendererCombo cellRendererCombo);
+  alias ChangedCallbackFunc = void function(string pathString, gtk.tree_iter.TreeIter newIter, gtk.cell_renderer_combo.CellRendererCombo cellRendererCombo);
 
   /**
    * Connect to Changed signal.
@@ -94,9 +94,9 @@ class CellRendererCombo : CellRendererText
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto cellRendererCombo = getVal!CellRendererCombo(_paramVals);
-      auto pathString = getVal!string(&_paramVals[1]);
-      auto newIter = getVal!TreeIter(&_paramVals[2]);
+      auto cellRendererCombo = getVal!(gtk.cell_renderer_combo.CellRendererCombo)(_paramVals);
+      auto pathString = getVal!(string)(&_paramVals[1]);
+      auto newIter = getVal!(gtk.tree_iter.TreeIter)(&_paramVals[2]);
       _dClosure.dlg(pathString, newIter, cellRendererCombo);
     }
 

@@ -1,6 +1,6 @@
 module gsk.mask_node;
 
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.render_node;
@@ -9,7 +9,7 @@ import gsk.types;
 /**
  * A render node masking one child node with another.
  */
-class MaskNode : RenderNode
+class MaskNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -31,7 +31,7 @@ class MaskNode : RenderNode
    *   maskMode = The mask mode to use
    * Returns: A new `GskRenderNode`
    */
-  this(RenderNode source, RenderNode mask, MaskMode maskMode)
+  this(gsk.render_node.RenderNode source, gsk.render_node.RenderNode mask, gsk.types.MaskMode maskMode)
   {
     GskRenderNode* _cretval;
     _cretval = gsk_mask_node_new(source ? cast(GskRenderNode*)source.cPtr(No.Dup) : null, mask ? cast(GskRenderNode*)mask.cPtr(No.Dup) : null, maskMode);
@@ -42,11 +42,11 @@ class MaskNode : RenderNode
    * Retrieves the mask `GskRenderNode` child of the node.
    * Returns: the mask child node
    */
-  RenderNode getMask()
+  gsk.render_node.RenderNode getMask()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_mask_node_get_mask(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    _cretval = gsk_mask_node_get_mask(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -54,11 +54,11 @@ class MaskNode : RenderNode
    * Retrieves the mask mode used by node.
    * Returns: the mask mode
    */
-  MaskMode getMaskMode()
+  gsk.types.MaskMode getMaskMode()
   {
     GskMaskMode _cretval;
-    _cretval = gsk_mask_node_get_mask_mode(cast(GskRenderNode*)cPtr);
-    MaskMode _retval = cast(MaskMode)_cretval;
+    _cretval = gsk_mask_node_get_mask_mode(cast(const(GskRenderNode)*)cPtr);
+    gsk.types.MaskMode _retval = cast(gsk.types.MaskMode)_cretval;
     return _retval;
   }
 
@@ -66,11 +66,11 @@ class MaskNode : RenderNode
    * Retrieves the source `GskRenderNode` child of the node.
    * Returns: the source child node
    */
-  RenderNode getSource()
+  gsk.render_node.RenderNode getSource()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_mask_node_get_source(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    _cretval = gsk_mask_node_get_source(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 }

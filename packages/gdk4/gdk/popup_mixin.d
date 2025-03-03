@@ -6,7 +6,7 @@ public import gdk.c.types;
 public import gdk.popup_layout;
 public import gdk.surface;
 public import gdk.types;
-public import gid.global;
+public import gid.gid;
 public import gobject.object;
 
 /**
@@ -34,11 +34,11 @@ template PopupT()
    * Returns the parent surface of a popup.
    * Returns: the parent surface
    */
-  override Surface getParent()
+  override gdk.surface.Surface getParent()
   {
     GdkSurface* _cretval;
     _cretval = gdk_popup_get_parent(cast(GdkPopup*)cPtr);
-    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -70,11 +70,11 @@ template PopupT()
    * or after the [gdk.surface.Surface.layout] signal is emitted.
    * Returns: the current rectangle anchor value of popup
    */
-  override Gravity getRectAnchor()
+  override gdk.types.Gravity getRectAnchor()
   {
     GdkGravity _cretval;
     _cretval = gdk_popup_get_rect_anchor(cast(GdkPopup*)cPtr);
-    Gravity _retval = cast(Gravity)_cretval;
+    gdk.types.Gravity _retval = cast(gdk.types.Gravity)_cretval;
     return _retval;
   }
 
@@ -84,11 +84,11 @@ template PopupT()
    * or after the [gdk.surface.Surface.layout] signal is emitted.
    * Returns: the current surface anchor value of popup
    */
-  override Gravity getSurfaceAnchor()
+  override gdk.types.Gravity getSurfaceAnchor()
   {
     GdkGravity _cretval;
     _cretval = gdk_popup_get_surface_anchor(cast(GdkPopup*)cPtr);
-    Gravity _retval = cast(Gravity)_cretval;
+    gdk.types.Gravity _retval = cast(gdk.types.Gravity)_cretval;
     return _retval;
   }
 
@@ -111,7 +111,7 @@ template PopupT()
    *   layout = the `GdkPopupLayout` object used to layout
    * Returns: %FALSE if it failed to be presented, otherwise %TRUE.
    */
-  override bool present(int width, int height, PopupLayout layout)
+  override bool present(int width, int height, gdk.popup_layout.PopupLayout layout)
   {
     bool _retval;
     _retval = gdk_popup_present(cast(GdkPopup*)cPtr, width, height, layout ? cast(GdkPopupLayout*)layout.cPtr(No.Dup) : null);

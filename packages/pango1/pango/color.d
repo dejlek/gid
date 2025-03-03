@@ -1,6 +1,6 @@
 module pango.color;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import pango.c.functions;
 import pango.c.types;
@@ -10,7 +10,7 @@ import pango.types;
  * The `PangoColor` structure is used to
  * represent a color in an uncalibrated RGB color-space.
  */
-class Color : Boxed
+class Color : gobject.boxed.Boxed
 {
 
   this()
@@ -78,11 +78,11 @@ class Color : Boxed
    * Returns: the newly allocated `PangoColor`,
    *   which should be freed with [pango.color.Color.free]
    */
-  Color copy()
+  pango.color.Color copy()
   {
     PangoColor* _cretval;
-    _cretval = pango_color_copy(cast(PangoColor*)cPtr);
-    auto _retval = _cretval ? new Color(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = pango_color_copy(cast(const(PangoColor)*)cPtr);
+    auto _retval = _cretval ? new pango.color.Color(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -147,8 +147,8 @@ class Color : Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = pango_color_to_string(cast(PangoColor*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    _cretval = pango_color_to_string(cast(const(PangoColor)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

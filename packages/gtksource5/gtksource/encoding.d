@@ -1,6 +1,6 @@
 module gtksource.encoding;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -12,7 +12,7 @@ import gtksource.types;
  * for example by #GtkSourceFile. Note that the text in GTK widgets is always
  * encoded in UTF-8.
  */
-class Encoding : Boxed
+class Encoding : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -40,11 +40,11 @@ class Encoding : Boxed
    * Used by language bindings.
    * Returns: a copy of enc.
    */
-  Encoding copy()
+  gtksource.encoding.Encoding copy()
   {
     GtkSourceEncoding* _cretval;
-    _cretval = gtk_source_encoding_copy(cast(GtkSourceEncoding*)cPtr);
-    auto _retval = _cretval ? new Encoding(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gtk_source_encoding_copy(cast(const(GtkSourceEncoding)*)cPtr);
+    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -56,8 +56,8 @@ class Encoding : Boxed
   string getCharset()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_encoding_get_charset(cast(GtkSourceEncoding*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    _cretval = gtk_source_encoding_get_charset(cast(const(GtkSourceEncoding)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -68,16 +68,16 @@ class Encoding : Boxed
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_encoding_get_name(cast(GtkSourceEncoding*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    _cretval = gtk_source_encoding_get_name(cast(const(GtkSourceEncoding)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
   string toString_()
   {
     char* _cretval;
-    _cretval = gtk_source_encoding_to_string(cast(GtkSourceEncoding*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    _cretval = gtk_source_encoding_to_string(cast(const(GtkSourceEncoding)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -86,11 +86,11 @@ class Encoding : Boxed
    * Returns: a list of
    *   all #GtkSourceEncoding's. Free with [glib.slist.SList.free].
    */
-  static Encoding[] getAll()
+  static gtksource.encoding.Encoding[] getAll()
   {
     GSList* _cretval;
     _cretval = gtk_source_encoding_get_all();
-    auto _retval = gSListToD!(Encoding, GidOwnership.Container)(cast(GSList*)_cretval);
+    auto _retval = gSListToD!(gtksource.encoding.Encoding, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
 
@@ -99,11 +99,11 @@ class Encoding : Boxed
    * See also funcGLib.get_charset.
    * Returns: the current locale encoding.
    */
-  static Encoding getCurrent()
+  static gtksource.encoding.Encoding getCurrent()
   {
     const(GtkSourceEncoding)* _cretval;
     _cretval = gtk_source_encoding_get_current();
-    auto _retval = _cretval ? new Encoding(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -116,11 +116,11 @@ class Encoding : Boxed
    * Returns: the list of
    *   default candidate encodings. Free with [glib.slist.SList.free].
    */
-  static Encoding[] getDefaultCandidates()
+  static gtksource.encoding.Encoding[] getDefaultCandidates()
   {
     GSList* _cretval;
     _cretval = gtk_source_encoding_get_default_candidates();
-    auto _retval = gSListToD!(Encoding, GidOwnership.Container)(cast(GSList*)_cretval);
+    auto _retval = gSListToD!(gtksource.encoding.Encoding, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
 
@@ -132,20 +132,20 @@ class Encoding : Boxed
    * Returns: the corresponding #GtkSourceEncoding, or %NULL
    *   if not found.
    */
-  static Encoding getFromCharset(string charset)
+  static gtksource.encoding.Encoding getFromCharset(string charset)
   {
     const(GtkSourceEncoding)* _cretval;
     const(char)* _charset = charset.toCString(No.Alloc);
     _cretval = gtk_source_encoding_get_from_charset(_charset);
-    auto _retval = _cretval ? new Encoding(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
-  static Encoding getUtf8()
+  static gtksource.encoding.Encoding getUtf8()
   {
     const(GtkSourceEncoding)* _cretval;
     _cretval = gtk_source_encoding_get_utf8();
-    auto _retval = _cretval ? new Encoding(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

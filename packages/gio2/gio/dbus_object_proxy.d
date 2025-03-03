@@ -1,6 +1,6 @@
 module gio.dbus_object_proxy;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_connection;
@@ -15,7 +15,7 @@ import gobject.object;
  * a `GDBusObjectProxy` yourself — typically [gio.dbus_object_manager_client.DBusObjectManagerClient]
  * is used to obtain it.
  */
-class DBusObjectProxy : ObjectG, DBusObject
+class DBusObjectProxy : gobject.object.ObjectG, gio.dbus_object.DBusObject
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -44,7 +44,7 @@ class DBusObjectProxy : ObjectG, DBusObject
    *   objectPath = the object path
    * Returns: a new #GDBusObjectProxy
    */
-  this(DBusConnection connection, string objectPath)
+  this(gio.dbus_connection.DBusConnection connection, string objectPath)
   {
     GDBusObjectProxy* _cretval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
@@ -57,11 +57,11 @@ class DBusObjectProxy : ObjectG, DBusObject
    * Returns: A #GDBusConnection. Do not free, the
    *   object is owned by proxy.
    */
-  DBusConnection getConnection()
+  gio.dbus_connection.DBusConnection getConnection()
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_object_proxy_get_connection(cast(GDBusObjectProxy*)cPtr);
-    auto _retval = ObjectG.getDObject!DBusConnection(cast(GDBusConnection*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 }

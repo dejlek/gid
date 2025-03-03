@@ -1,7 +1,7 @@
 module gio.action_group;
 
 public import gio.action_group_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -88,7 +88,7 @@ interface ActionGroup
    *   actionName = the name of an action in the group
    *   state = the new state of the named action
    */
-  void actionStateChanged(string actionName, VariantG state);
+  void actionStateChanged(string actionName, glib.variant.VariantG state);
 
   /**
    * Activate the named action within action_group.
@@ -121,7 +121,7 @@ interface ActionGroup
    *   actionName = the name of the action to activate
    *   parameter = parameters to the activation
    */
-  void activateAction(string actionName, VariantG parameter);
+  void activateAction(string actionName, glib.variant.VariantG parameter);
 
   /**
    * Request for the state of the named action within action_group to be
@@ -136,7 +136,7 @@ interface ActionGroup
    *   actionName = the name of the action to request the change on
    *   value = the new state
    */
-  void changeActionState(string actionName, VariantG value);
+  void changeActionState(string actionName, glib.variant.VariantG value);
 
   /**
    * Checks if the named action within action_group is currently enabled.
@@ -163,7 +163,7 @@ interface ActionGroup
    *   actionName = the name of the action to query
    * Returns: the parameter type
    */
-  VariantType getActionParameterType(string actionName);
+  glib.variant_type.VariantType getActionParameterType(string actionName);
 
   /**
    * Queries the current state of the named action within action_group.
@@ -176,7 +176,7 @@ interface ActionGroup
    *   actionName = the name of the action to query
    * Returns: the current state of the action
    */
-  VariantG getActionState(string actionName);
+  glib.variant.VariantG getActionState(string actionName);
 
   /**
    * Requests a hint about the valid range of values for the state of the
@@ -197,7 +197,7 @@ interface ActionGroup
    *   actionName = the name of the action to query
    * Returns: the state range hint
    */
-  VariantG getActionStateHint(string actionName);
+  glib.variant.VariantG getActionStateHint(string actionName);
 
   /**
    * Queries the type of the state of the named action within
@@ -217,7 +217,7 @@ interface ActionGroup
    *   actionName = the name of the action to query
    * Returns: the state type, if the action is stateful
    */
-  VariantType getActionStateType(string actionName);
+  glib.variant_type.VariantType getActionStateType(string actionName);
 
   /**
    * Checks if the named action exists within action_group.
@@ -268,7 +268,7 @@ interface ActionGroup
    *   state = the current state, or %NULL if stateless
    * Returns: %TRUE if the action exists, else %FALSE
    */
-  bool queryAction(string actionName, out bool enabled, out VariantType parameterType, out VariantType stateType, out VariantG stateHint, out VariantG state);
+  bool queryAction(string actionName, out bool enabled, out glib.variant_type.VariantType parameterType, out glib.variant_type.VariantType stateType, out glib.variant.VariantG stateHint, out glib.variant.VariantG state);
 
   /**
    * Signals that a new action was just added to the group.
@@ -278,8 +278,8 @@ interface ActionGroup
    *   actionName = the name of the action in action_group
    *   actionGroup = the instance the signal is connected to
    */
-  alias ActionAddedCallbackDlg = void delegate(string actionName, ActionGroup actionGroup);
-  alias ActionAddedCallbackFunc = void function(string actionName, ActionGroup actionGroup);
+  alias ActionAddedCallbackDlg = void delegate(string actionName, gio.action_group.ActionGroup actionGroup);
+  alias ActionAddedCallbackFunc = void function(string actionName, gio.action_group.ActionGroup actionGroup);
 
   /**
    * Connect to ActionAdded signal.
@@ -299,8 +299,8 @@ interface ActionGroup
    *   enabled = whether the action is enabled or not
    *   actionGroup = the instance the signal is connected to
    */
-  alias ActionEnabledChangedCallbackDlg = void delegate(string actionName, bool enabled, ActionGroup actionGroup);
-  alias ActionEnabledChangedCallbackFunc = void function(string actionName, bool enabled, ActionGroup actionGroup);
+  alias ActionEnabledChangedCallbackDlg = void delegate(string actionName, bool enabled, gio.action_group.ActionGroup actionGroup);
+  alias ActionEnabledChangedCallbackFunc = void function(string actionName, bool enabled, gio.action_group.ActionGroup actionGroup);
 
   /**
    * Connect to ActionEnabledChanged signal.
@@ -321,8 +321,8 @@ interface ActionGroup
    *   actionName = the name of the action in action_group
    *   actionGroup = the instance the signal is connected to
    */
-  alias ActionRemovedCallbackDlg = void delegate(string actionName, ActionGroup actionGroup);
-  alias ActionRemovedCallbackFunc = void function(string actionName, ActionGroup actionGroup);
+  alias ActionRemovedCallbackDlg = void delegate(string actionName, gio.action_group.ActionGroup actionGroup);
+  alias ActionRemovedCallbackFunc = void function(string actionName, gio.action_group.ActionGroup actionGroup);
 
   /**
    * Connect to ActionRemoved signal.
@@ -342,8 +342,8 @@ interface ActionGroup
    *   value = the new value of the state
    *   actionGroup = the instance the signal is connected to
    */
-  alias ActionStateChangedCallbackDlg = void delegate(string actionName, VariantG value, ActionGroup actionGroup);
-  alias ActionStateChangedCallbackFunc = void function(string actionName, VariantG value, ActionGroup actionGroup);
+  alias ActionStateChangedCallbackDlg = void delegate(string actionName, glib.variant.VariantG value, gio.action_group.ActionGroup actionGroup);
+  alias ActionStateChangedCallbackFunc = void function(string actionName, glib.variant.VariantG value, gio.action_group.ActionGroup actionGroup);
 
   /**
    * Connect to ActionStateChanged signal.

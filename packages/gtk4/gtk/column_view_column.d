@@ -1,6 +1,6 @@
 module gtk.column_view_column;
 
-import gid.global;
+import gid.gid;
 import gio.menu_model;
 import gobject.object;
 import gtk.c.functions;
@@ -21,7 +21,7 @@ import gtk.types;
  * [gtk.column_view_column.ColumnViewColumn.setSorter], to let users influence sorting
  * by clicking on the column header.
  */
-class ColumnViewColumn : ObjectG
+class ColumnViewColumn : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,7 +54,7 @@ class ColumnViewColumn : ObjectG
    *   factory = The factory to populate items with
    * Returns: a new `GtkColumnViewColumn` using the given factory
    */
-  this(string title, ListItemFactory factory)
+  this(string title, gtk.list_item_factory.ListItemFactory factory)
   {
     GtkColumnViewColumn* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -67,11 +67,11 @@ class ColumnViewColumn : ObjectG
    * If self has not been added to a column view yet, %NULL is returned.
    * Returns: The column view displaying self.
    */
-  ColumnView getColumnView()
+  gtk.column_view.ColumnView getColumnView()
   {
     GtkColumnView* _cretval;
     _cretval = gtk_column_view_column_get_column_view(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!ColumnView(cast(GtkColumnView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.column_view.ColumnView)(cast(GtkColumnView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -91,11 +91,11 @@ class ColumnViewColumn : ObjectG
    * this column.
    * Returns: The factory in use
    */
-  ListItemFactory getFactory()
+  gtk.list_item_factory.ListItemFactory getFactory()
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_column_view_column_get_factory(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!ListItemFactory(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,11 +115,11 @@ class ColumnViewColumn : ObjectG
    * for the column header.
    * Returns: the `GMenuModel`
    */
-  MenuModel getHeaderMenu()
+  gio.menu_model.MenuModel getHeaderMenu()
   {
     GMenuModel* _cretval;
     _cretval = gtk_column_view_column_get_header_menu(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class ColumnViewColumn : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_column_get_id(cast(GtkColumnViewColumn*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -150,11 +150,11 @@ class ColumnViewColumn : ObjectG
    * Returns the sorter that is associated with the column.
    * Returns: the `GtkSorter` of self
    */
-  Sorter getSorter()
+  gtk.sorter.Sorter getSorter()
   {
     GtkSorter* _cretval;
     _cretval = gtk_column_view_column_get_sorter(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!Sorter(cast(GtkSorter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class ColumnViewColumn : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_column_get_title(cast(GtkColumnViewColumn*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class ColumnViewColumn : ObjectG
    * Params:
    *   factory = the factory to use
    */
-  void setFactory(ListItemFactory factory)
+  void setFactory(gtk.list_item_factory.ListItemFactory factory)
   {
     gtk_column_view_column_set_factory(cast(GtkColumnViewColumn*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
@@ -223,7 +223,7 @@ class ColumnViewColumn : ObjectG
    * Params:
    *   menu = a `GMenuModel`
    */
-  void setHeaderMenu(MenuModel menu)
+  void setHeaderMenu(gio.menu_model.MenuModel menu)
   {
     gtk_column_view_column_set_header_menu(cast(GtkColumnViewColumn*)cPtr, menu ? cast(GMenuModel*)menu.cPtr(No.Dup) : null);
   }
@@ -263,7 +263,7 @@ class ColumnViewColumn : ObjectG
    * Params:
    *   sorter = the `GtkSorter` to associate with column
    */
-  void setSorter(Sorter sorter)
+  void setSorter(gtk.sorter.Sorter sorter)
   {
     gtk_column_view_column_set_sorter(cast(GtkColumnViewColumn*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.Dup) : null);
   }

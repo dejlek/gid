@@ -5,7 +5,7 @@ import atk.editable_text;
 import atk.editable_text_mixin;
 
 /// Proxy object for Atk.EditableText interface when a GObject has no applicable D binding
-class EditableTextIfaceProxy : IfaceProxy, EditableText
+class EditableTextIfaceProxy : IfaceProxy, atk.editable_text.EditableText
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class EditableTextIfaceProxy : IfaceProxy, EditableText
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(EditableText);
+    return typeid(atk.editable_text.EditableText);
   }
 
   mixin EditableTextT!();

@@ -1,9 +1,8 @@
 module gtksource.types;
 
-import gid.global;
+import gid.gid;
 import gtksource.c.functions;
 import gtksource.c.types;
-import gtksource.types;
 
 
 // Enums

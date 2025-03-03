@@ -175,19 +175,6 @@ __gshared extern(C)
   void function(GtkSourceFileSaver* saver, GtkSourceFileSaverFlags flags) c_gtk_source_file_saver_set_flags;
   void function(GtkSourceFileSaver* saver, GtkSourceNewlineType newlineType) c_gtk_source_file_saver_set_newline_type;
 
-  // Global
-  bool function(uint major, uint minor, uint micro) c_gtk_source_check_version;
-  void function() c_gtk_source_finalize;
-  uint function() c_gtk_source_get_major_version;
-  uint function() c_gtk_source_get_micro_version;
-  uint function() c_gtk_source_get_minor_version;
-  void function() c_gtk_source_init;
-  size_t function(GtkSourceSchedulerCallback callback, void* userData) c_gtk_source_scheduler_add;
-  size_t function(GtkSourceSchedulerCallback callback, void* userData, GDestroyNotify notify) c_gtk_source_scheduler_add_full;
-  void function(size_t handlerId) c_gtk_source_scheduler_remove;
-  char* function(const(char)* text) c_gtk_source_utils_escape_search_text;
-  char* function(const(char)* text) c_gtk_source_utils_unescape_search_text;
-
   // Gutter
   extern(C) GType function() c_gtk_source_gutter_get_type;
   GtkSourceView* function(GtkSourceGutter* gutter) c_gtk_source_gutter_get_view;
@@ -604,6 +591,19 @@ __gshared extern(C)
   void function(GtkSourceVimIMContext* self, const(char)* command) c_gtk_source_vim_im_context_execute_command;
   const(char)* function(GtkSourceVimIMContext* self) c_gtk_source_vim_im_context_get_command_bar_text;
   const(char)* function(GtkSourceVimIMContext* self) c_gtk_source_vim_im_context_get_command_text;
+
+  // global
+  bool function(uint major, uint minor, uint micro) c_gtk_source_check_version;
+  void function() c_gtk_source_finalize;
+  uint function() c_gtk_source_get_major_version;
+  uint function() c_gtk_source_get_micro_version;
+  uint function() c_gtk_source_get_minor_version;
+  void function() c_gtk_source_init;
+  size_t function(GtkSourceSchedulerCallback callback, void* userData) c_gtk_source_scheduler_add;
+  size_t function(GtkSourceSchedulerCallback callback, void* userData, GDestroyNotify notify) c_gtk_source_scheduler_add_full;
+  void function(size_t handlerId) c_gtk_source_scheduler_remove;
+  char* function(const(char)* text) c_gtk_source_utils_escape_search_text;
+  char* function(const(char)* text) c_gtk_source_utils_unescape_search_text;
 }
 
 // Buffer
@@ -766,19 +766,6 @@ alias gtk_source_file_saver_set_compression_type = c_gtk_source_file_saver_set_c
 alias gtk_source_file_saver_set_encoding = c_gtk_source_file_saver_set_encoding;
 alias gtk_source_file_saver_set_flags = c_gtk_source_file_saver_set_flags;
 alias gtk_source_file_saver_set_newline_type = c_gtk_source_file_saver_set_newline_type;
-
-// Global
-alias gtk_source_check_version = c_gtk_source_check_version;
-alias gtk_source_finalize = c_gtk_source_finalize;
-alias gtk_source_get_major_version = c_gtk_source_get_major_version;
-alias gtk_source_get_micro_version = c_gtk_source_get_micro_version;
-alias gtk_source_get_minor_version = c_gtk_source_get_minor_version;
-alias gtk_source_init = c_gtk_source_init;
-alias gtk_source_scheduler_add = c_gtk_source_scheduler_add;
-alias gtk_source_scheduler_add_full = c_gtk_source_scheduler_add_full;
-alias gtk_source_scheduler_remove = c_gtk_source_scheduler_remove;
-alias gtk_source_utils_escape_search_text = c_gtk_source_utils_escape_search_text;
-alias gtk_source_utils_unescape_search_text = c_gtk_source_utils_unescape_search_text;
 
 // Gutter
 alias gtk_source_gutter_get_type = c_gtk_source_gutter_get_type;
@@ -1197,6 +1184,19 @@ alias gtk_source_vim_im_context_execute_command = c_gtk_source_vim_im_context_ex
 alias gtk_source_vim_im_context_get_command_bar_text = c_gtk_source_vim_im_context_get_command_bar_text;
 alias gtk_source_vim_im_context_get_command_text = c_gtk_source_vim_im_context_get_command_text;
 
+// global
+alias gtk_source_check_version = c_gtk_source_check_version;
+alias gtk_source_finalize = c_gtk_source_finalize;
+alias gtk_source_get_major_version = c_gtk_source_get_major_version;
+alias gtk_source_get_micro_version = c_gtk_source_get_micro_version;
+alias gtk_source_get_minor_version = c_gtk_source_get_minor_version;
+alias gtk_source_init = c_gtk_source_init;
+alias gtk_source_scheduler_add = c_gtk_source_scheduler_add;
+alias gtk_source_scheduler_add_full = c_gtk_source_scheduler_add_full;
+alias gtk_source_scheduler_remove = c_gtk_source_scheduler_remove;
+alias gtk_source_utils_escape_search_text = c_gtk_source_utils_escape_search_text;
+alias gtk_source_utils_unescape_search_text = c_gtk_source_utils_unescape_search_text;
+
 shared static this()
 {
   // Buffer
@@ -1359,19 +1359,6 @@ shared static this()
   gidLink(cast(void**)&gtk_source_file_saver_set_encoding, "gtk_source_file_saver_set_encoding", LIBS);
   gidLink(cast(void**)&gtk_source_file_saver_set_flags, "gtk_source_file_saver_set_flags", LIBS);
   gidLink(cast(void**)&gtk_source_file_saver_set_newline_type, "gtk_source_file_saver_set_newline_type", LIBS);
-
-  // Global
-  gidLink(cast(void**)&gtk_source_check_version, "gtk_source_check_version", LIBS);
-  gidLink(cast(void**)&gtk_source_finalize, "gtk_source_finalize", LIBS);
-  gidLink(cast(void**)&gtk_source_get_major_version, "gtk_source_get_major_version", LIBS);
-  gidLink(cast(void**)&gtk_source_get_micro_version, "gtk_source_get_micro_version", LIBS);
-  gidLink(cast(void**)&gtk_source_get_minor_version, "gtk_source_get_minor_version", LIBS);
-  gidLink(cast(void**)&gtk_source_init, "gtk_source_init", LIBS);
-  gidLink(cast(void**)&gtk_source_scheduler_add, "gtk_source_scheduler_add", LIBS);
-  gidLink(cast(void**)&gtk_source_scheduler_add_full, "gtk_source_scheduler_add_full", LIBS);
-  gidLink(cast(void**)&gtk_source_scheduler_remove, "gtk_source_scheduler_remove", LIBS);
-  gidLink(cast(void**)&gtk_source_utils_escape_search_text, "gtk_source_utils_escape_search_text", LIBS);
-  gidLink(cast(void**)&gtk_source_utils_unescape_search_text, "gtk_source_utils_unescape_search_text", LIBS);
 
   // Gutter
   gidLink(cast(void**)&gtk_source_gutter_get_type, "gtk_source_gutter_get_type", LIBS);
@@ -1789,4 +1776,17 @@ shared static this()
   gidLink(cast(void**)&gtk_source_vim_im_context_execute_command, "gtk_source_vim_im_context_execute_command", LIBS);
   gidLink(cast(void**)&gtk_source_vim_im_context_get_command_bar_text, "gtk_source_vim_im_context_get_command_bar_text", LIBS);
   gidLink(cast(void**)&gtk_source_vim_im_context_get_command_text, "gtk_source_vim_im_context_get_command_text", LIBS);
+
+  // global
+  gidLink(cast(void**)&gtk_source_check_version, "gtk_source_check_version", LIBS);
+  gidLink(cast(void**)&gtk_source_finalize, "gtk_source_finalize", LIBS);
+  gidLink(cast(void**)&gtk_source_get_major_version, "gtk_source_get_major_version", LIBS);
+  gidLink(cast(void**)&gtk_source_get_micro_version, "gtk_source_get_micro_version", LIBS);
+  gidLink(cast(void**)&gtk_source_get_minor_version, "gtk_source_get_minor_version", LIBS);
+  gidLink(cast(void**)&gtk_source_init, "gtk_source_init", LIBS);
+  gidLink(cast(void**)&gtk_source_scheduler_add, "gtk_source_scheduler_add", LIBS);
+  gidLink(cast(void**)&gtk_source_scheduler_add_full, "gtk_source_scheduler_add_full", LIBS);
+  gidLink(cast(void**)&gtk_source_scheduler_remove, "gtk_source_scheduler_remove", LIBS);
+  gidLink(cast(void**)&gtk_source_utils_escape_search_text, "gtk_source_utils_escape_search_text", LIBS);
+  gidLink(cast(void**)&gtk_source_utils_unescape_search_text, "gtk_source_utils_unescape_search_text", LIBS);
 }

@@ -1,6 +1,6 @@
 module gtk.progress_bar;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.accessible_range;
@@ -55,7 +55,7 @@ import pango.types;
  * # Accessibility
  * `GtkProgressBar` uses the %GTK_ACCESSIBLE_ROLE_PROGRESS_BAR role.
  */
-class ProgressBar : Widget, AccessibleRange, Orientable
+class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -93,11 +93,11 @@ class ProgressBar : Widget, AccessibleRange, Orientable
    * See [gtk.progress_bar.ProgressBar.setEllipsize].
    * Returns: `PangoEllipsizeMode`
    */
-  EllipsizeMode getEllipsize()
+  pango.types.EllipsizeMode getEllipsize()
   {
     PangoEllipsizeMode _cretval;
     _cretval = gtk_progress_bar_get_ellipsize(cast(GtkProgressBar*)cPtr);
-    EllipsizeMode _retval = cast(EllipsizeMode)_cretval;
+    pango.types.EllipsizeMode _retval = cast(pango.types.EllipsizeMode)_cretval;
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class ProgressBar : Widget, AccessibleRange, Orientable
   {
     const(char)* _cretval;
     _cretval = gtk_progress_bar_get_text(cast(GtkProgressBar*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class ProgressBar : Widget, AccessibleRange, Orientable
    * Params:
    *   mode = a `PangoEllipsizeMode`
    */
-  void setEllipsize(EllipsizeMode mode)
+  void setEllipsize(pango.types.EllipsizeMode mode)
   {
     gtk_progress_bar_set_ellipsize(cast(GtkProgressBar*)cPtr, mode);
   }

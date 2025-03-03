@@ -5,7 +5,7 @@ import gdk.event;
 import gdk.rectangle;
 import gdk.surface;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.c.functions;
@@ -38,7 +38,7 @@ import pango.attr_list;
  * To connect a widget to the users preferred input method, you should use
  * [gtk.immulticontext.IMMulticontext].
  */
-class IMContext : ObjectG
+class IMContext : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -66,7 +66,7 @@ class IMContext : ObjectG
    *   event = a [gdk.event.Event]
    * Returns: %TRUE if an on-screen keyboard could be requested to the platform.
    */
-  bool activateOsk(Event event)
+  bool activateOsk(gdk.event.Event event)
   {
     bool _retval;
     _retval = gtk_im_context_activate_osk(cast(GtkIMContext*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
@@ -115,7 +115,7 @@ class IMContext : ObjectG
    *   group = the active keyboard group for the event
    * Returns: %TRUE if the input method handled the key event.
    */
-  bool filterKey(bool press, Surface surface, Device device, uint time, uint keycode, ModifierType state, int group)
+  bool filterKey(bool press, gdk.surface.Surface surface, gdk.device.Device device, uint time, uint keycode, gdk.types.ModifierType state, int group)
   {
     bool _retval;
     _retval = gtk_im_context_filter_key(cast(GtkIMContext*)cPtr, press, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, time, keycode, state, group);
@@ -131,7 +131,7 @@ class IMContext : ObjectG
    *   event = the key event
    * Returns: %TRUE if the input method handled the key event.
    */
-  bool filterKeypress(Event event)
+  bool filterKeypress(gdk.event.Event event)
   {
     bool _retval;
     _retval = gtk_im_context_filter_keypress(cast(GtkIMContext*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
@@ -173,13 +173,13 @@ class IMContext : ObjectG
    *   cursorPos = location to store position of cursor
    *     $(LPAREN)in characters$(RPAREN) within the preedit string.
    */
-  void getPreeditString(out string str, out AttrList attrs, out int cursorPos)
+  void getPreeditString(out string str, out pango.attr_list.AttrList attrs, out int cursorPos)
   {
     char* _str;
     PangoAttrList* _attrs;
     gtk_im_context_get_preedit_string(cast(GtkIMContext*)cPtr, &_str, &_attrs, cast(int*)&cursorPos);
     str = _str.fromCString(Yes.Free);
-    attrs = new AttrList(cast(void*)_attrs, Yes.Take);
+    attrs = new pango.attr_list.AttrList(cast(void*)_attrs, Yes.Take);
   }
 
   /**
@@ -269,7 +269,7 @@ class IMContext : ObjectG
    *   widget = the client widget. This may be %NULL to indicate
    *     that the previous client widget no longer exists.
    */
-  void setClientWidget(Widget widget)
+  void setClientWidget(gtk.widget.Widget widget)
   {
     gtk_im_context_set_client_widget(cast(GtkIMContext*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -281,9 +281,9 @@ class IMContext : ObjectG
    * Params:
    *   area = new location
    */
-  void setCursorLocation(Rectangle area)
+  void setCursorLocation(gdk.rectangle.Rectangle area)
   {
-    gtk_im_context_set_cursor_location(cast(GtkIMContext*)cPtr, area ? cast(GdkRectangle*)area.cPtr(No.Dup) : null);
+    gtk_im_context_set_cursor_location(cast(GtkIMContext*)cPtr, area ? cast(const(GdkRectangle)*)area.cPtr(No.Dup) : null);
   }
 
   /**
@@ -355,8 +355,8 @@ class IMContext : ObjectG
    *   str = the completed character$(LPAREN)s$(RPAREN) entered by the user
    *   iMContext = the instance the signal is connected to
    */
-  alias CommitCallbackDlg = void delegate(string str, IMContext iMContext);
-  alias CommitCallbackFunc = void function(string str, IMContext iMContext);
+  alias CommitCallbackDlg = void delegate(string str, gtk.imcontext.IMContext iMContext);
+  alias CommitCallbackFunc = void function(string str, gtk.imcontext.IMContext iMContext);
 
   /**
    * Connect to Commit signal.
@@ -372,8 +372,8 @@ class IMContext : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto iMContext = getVal!IMContext(_paramVals);
-      auto str = getVal!string(&_paramVals[1]);
+      auto iMContext = getVal!(gtk.imcontext.IMContext)(_paramVals);
+      auto str = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(str, iMContext);
     }
 
@@ -392,8 +392,8 @@ class IMContext : ObjectG
    *   iMContext = the instance the signal is connected to
    * Returns: %TRUE if the signal was handled.
    */
-  alias DeleteSurroundingCallbackDlg = bool delegate(int offset, int nChars, IMContext iMContext);
-  alias DeleteSurroundingCallbackFunc = bool function(int offset, int nChars, IMContext iMContext);
+  alias DeleteSurroundingCallbackDlg = bool delegate(int offset, int nChars, gtk.imcontext.IMContext iMContext);
+  alias DeleteSurroundingCallbackFunc = bool function(int offset, int nChars, gtk.imcontext.IMContext iMContext);
 
   /**
    * Connect to DeleteSurrounding signal.
@@ -410,9 +410,9 @@ class IMContext : ObjectG
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto iMContext = getVal!IMContext(_paramVals);
-      auto offset = getVal!int(&_paramVals[1]);
-      auto nChars = getVal!int(&_paramVals[2]);
+      auto iMContext = getVal!(gtk.imcontext.IMContext)(_paramVals);
+      auto offset = getVal!(int)(&_paramVals[1]);
+      auto nChars = getVal!(int)(&_paramVals[2]);
       _retval = _dClosure.dlg(offset, nChars, iMContext);
       setVal!bool(_returnValue, _retval);
     }
@@ -428,8 +428,8 @@ class IMContext : ObjectG
    * [gtk.imcontext.IMContext.getPreeditString] returns the empty string.
    *   iMContext = the instance the signal is connected to
    */
-  alias PreeditChangedCallbackDlg = void delegate(IMContext iMContext);
-  alias PreeditChangedCallbackFunc = void function(IMContext iMContext);
+  alias PreeditChangedCallbackDlg = void delegate(gtk.imcontext.IMContext iMContext);
+  alias PreeditChangedCallbackFunc = void function(gtk.imcontext.IMContext iMContext);
 
   /**
    * Connect to PreeditChanged signal.
@@ -445,7 +445,7 @@ class IMContext : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto iMContext = getVal!IMContext(_paramVals);
+      auto iMContext = getVal!(gtk.imcontext.IMContext)(_paramVals);
       _dClosure.dlg(iMContext);
     }
 
@@ -458,8 +458,8 @@ class IMContext : ObjectG
    * has been completed or canceled.
    *   iMContext = the instance the signal is connected to
    */
-  alias PreeditEndCallbackDlg = void delegate(IMContext iMContext);
-  alias PreeditEndCallbackFunc = void function(IMContext iMContext);
+  alias PreeditEndCallbackDlg = void delegate(gtk.imcontext.IMContext iMContext);
+  alias PreeditEndCallbackFunc = void function(gtk.imcontext.IMContext iMContext);
 
   /**
    * Connect to PreeditEnd signal.
@@ -475,7 +475,7 @@ class IMContext : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto iMContext = getVal!IMContext(_paramVals);
+      auto iMContext = getVal!(gtk.imcontext.IMContext)(_paramVals);
       _dClosure.dlg(iMContext);
     }
 
@@ -488,8 +488,8 @@ class IMContext : ObjectG
    * starts.
    *   iMContext = the instance the signal is connected to
    */
-  alias PreeditStartCallbackDlg = void delegate(IMContext iMContext);
-  alias PreeditStartCallbackFunc = void function(IMContext iMContext);
+  alias PreeditStartCallbackDlg = void delegate(gtk.imcontext.IMContext iMContext);
+  alias PreeditStartCallbackFunc = void function(gtk.imcontext.IMContext iMContext);
 
   /**
    * Connect to PreeditStart signal.
@@ -505,7 +505,7 @@ class IMContext : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto iMContext = getVal!IMContext(_paramVals);
+      auto iMContext = getVal!(gtk.imcontext.IMContext)(_paramVals);
       _dClosure.dlg(iMContext);
     }
 
@@ -521,8 +521,8 @@ class IMContext : ObjectG
    *   iMContext = the instance the signal is connected to
    * Returns: %TRUE if the signal was handled.
    */
-  alias RetrieveSurroundingCallbackDlg = bool delegate(IMContext iMContext);
-  alias RetrieveSurroundingCallbackFunc = bool function(IMContext iMContext);
+  alias RetrieveSurroundingCallbackDlg = bool delegate(gtk.imcontext.IMContext iMContext);
+  alias RetrieveSurroundingCallbackFunc = bool function(gtk.imcontext.IMContext iMContext);
 
   /**
    * Connect to RetrieveSurrounding signal.
@@ -539,7 +539,7 @@ class IMContext : ObjectG
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto iMContext = getVal!IMContext(_paramVals);
+      auto iMContext = getVal!(gtk.imcontext.IMContext)(_paramVals);
       _retval = _dClosure.dlg(iMContext);
       setVal!bool(_returnValue, _retval);
     }

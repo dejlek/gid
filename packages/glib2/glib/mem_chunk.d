@@ -1,6 +1,6 @@
 module glib.mem_chunk;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;

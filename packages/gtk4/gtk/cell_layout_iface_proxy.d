@@ -5,7 +5,7 @@ import gtk.cell_layout;
 import gtk.cell_layout_mixin;
 
 /// Proxy object for Gtk.CellLayout interface when a GObject has no applicable D binding
-class CellLayoutIfaceProxy : IfaceProxy, CellLayout
+class CellLayoutIfaceProxy : IfaceProxy, gtk.cell_layout.CellLayout
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class CellLayoutIfaceProxy : IfaceProxy, CellLayout
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(CellLayout);
+    return typeid(gtk.cell_layout.CellLayout);
   }
 
   mixin CellLayoutT!();

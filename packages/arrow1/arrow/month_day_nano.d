@@ -3,10 +3,10 @@ module arrow.month_day_nano;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class MonthDayNano : ObjectG
+class MonthDayNano : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -32,7 +32,7 @@ class MonthDayNano : ObjectG
     this(_cretval, Yes.Take);
   }
 
-  bool equal(MonthDayNano otherMonthNanoDay)
+  bool equal(arrow.month_day_nano.MonthDayNano otherMonthNanoDay)
   {
     bool _retval;
     _retval = garrow_month_day_nano_equal(cast(GArrowMonthDayNano*)cPtr, otherMonthNanoDay ? cast(GArrowMonthDayNano*)otherMonthNanoDay.cPtr(No.Dup) : null);

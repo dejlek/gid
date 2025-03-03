@@ -1,9 +1,8 @@
 module gio.proxy;
 
 public import gio.proxy_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.c.functions;
 import gio.c.types;
 import gio.cancellable;
@@ -38,12 +37,12 @@ interface Proxy
    * Returns: return a #GProxy or NULL if protocol
    *   is not supported.
    */
-  static Proxy getDefaultForProtocol(string protocol)
+  static gio.proxy.Proxy getDefaultForProtocol(string protocol)
   {
     GProxy* _cretval;
     const(char)* _protocol = protocol.toCString(No.Alloc);
     _cretval = g_proxy_get_default_for_protocol(_protocol);
-    auto _retval = ObjectG.getDObject!Proxy(cast(GProxy*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.proxy.Proxy)(cast(GProxy*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -60,7 +59,7 @@ interface Proxy
    *   be the same as connection, in which case a reference
    *   will be added.
    */
-  IOStream connect(IOStream connection, ProxyAddress proxyAddress, Cancellable cancellable);
+  gio.iostream.IOStream connect(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable);
 
   /**
    * Asynchronous version of [gio.proxy.Proxy.connect].
@@ -70,7 +69,7 @@ interface Proxy
    *   cancellable = a #GCancellable
    *   callback = a #GAsyncReadyCallback
    */
-  void connectAsync(IOStream connection, ProxyAddress proxyAddress, Cancellable cancellable, AsyncReadyCallback callback);
+  void connectAsync(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback);
 
   /**
    * See [gio.proxy.Proxy.connect].
@@ -78,7 +77,7 @@ interface Proxy
    *   result = a #GAsyncResult
    * Returns: a #GIOStream.
    */
-  IOStream connectFinish(AsyncResult result);
+  gio.iostream.IOStream connectFinish(gio.async_result.AsyncResult result);
 
   /**
    * Some proxy protocols expect to be passed a hostname, which they

@@ -1,7 +1,7 @@
 module gtksource.completion_proposal_mixin;
 
 public import gtksource.completion_proposal_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gtksource.c.functions;
 public import gtksource.c.types;
 public import gtksource.types;
@@ -28,7 +28,7 @@ template CompletionProposalT()
   {
     char* _cretval;
     _cretval = gtk_source_completion_proposal_get_typed_text(cast(GtkSourceCompletionProposal*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

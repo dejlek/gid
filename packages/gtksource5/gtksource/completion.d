@@ -1,13 +1,12 @@
 module gtksource.completion;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtksource.buffer;
 import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.completion_provider;
-import gtksource.completion_provider_mixin;
 import gtksource.types;
 import gtksource.view;
 import pango.attr_list;
@@ -37,7 +36,7 @@ import pango.attr_list;
  * A same iface@CompletionProvider object can be used for several
  * `GtkSourceCompletion`'s.
  */
-class Completion : ObjectG
+class Completion : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -64,13 +63,13 @@ class Completion : ObjectG
    *   casefoldQuery = the typed-text used to highlight haystack
    * Returns: a #PangoAttrList or %NULL
    */
-  static AttrList fuzzyHighlight(string haystack, string casefoldQuery)
+  static pango.attr_list.AttrList fuzzyHighlight(string haystack, string casefoldQuery)
   {
     PangoAttrList* _cretval;
     const(char)* _haystack = haystack.toCString(No.Alloc);
     const(char)* _casefoldQuery = casefoldQuery.toCString(No.Alloc);
     _cretval = gtk_source_completion_fuzzy_highlight(_haystack, _casefoldQuery);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -102,7 +101,7 @@ class Completion : ObjectG
    * Params:
    *   provider = a #GtkSourceCompletionProvider
    */
-  void addProvider(CompletionProvider provider)
+  void addProvider(gtksource.completion_provider.CompletionProvider provider)
   {
     gtk_source_completion_add_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
   }
@@ -116,11 +115,11 @@ class Completion : ObjectG
    * Gets the connected classView's classBuffer
    * Returns: A #GtkSourceBuffer
    */
-  Buffer getBuffer()
+  gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_completion_get_buffer(cast(GtkSourceCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!Buffer(cast(GtkSourceBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -135,11 +134,11 @@ class Completion : ObjectG
    * Gets the classView that owns the classCompletion.
    * Returns: A #GtkSourceView
    */
-  View getView()
+  gtksource.view.View getView()
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_completion_get_view(cast(GtkSourceCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!View(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -159,7 +158,7 @@ class Completion : ObjectG
    * Params:
    *   provider = a #GtkSourceCompletionProvider
    */
-  void removeProvider(CompletionProvider provider)
+  void removeProvider(gtksource.completion_provider.CompletionProvider provider)
   {
     gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
   }
@@ -189,8 +188,8 @@ class Completion : ObjectG
    * be hidden.
    *   completion = the instance the signal is connected to
    */
-  alias HideCallbackDlg = void delegate(Completion completion);
-  alias HideCallbackFunc = void function(Completion completion);
+  alias HideCallbackDlg = void delegate(gtksource.completion.Completion completion);
+  alias HideCallbackFunc = void function(gtksource.completion.Completion completion);
 
   /**
    * Connect to Hide signal.
@@ -206,7 +205,7 @@ class Completion : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completion = getVal!Completion(_paramVals);
+      auto completion = getVal!(gtksource.completion.Completion)(_paramVals);
       _dClosure.dlg(completion);
     }
 
@@ -221,8 +220,8 @@ class Completion : ObjectG
    *   provider = a #GtkSourceCompletionProvider
    *   completion = the instance the signal is connected to
    */
-  alias ProviderAddedCallbackDlg = void delegate(CompletionProvider provider, Completion completion);
-  alias ProviderAddedCallbackFunc = void function(CompletionProvider provider, Completion completion);
+  alias ProviderAddedCallbackDlg = void delegate(gtksource.completion_provider.CompletionProvider provider, gtksource.completion.Completion completion);
+  alias ProviderAddedCallbackFunc = void function(gtksource.completion_provider.CompletionProvider provider, gtksource.completion.Completion completion);
 
   /**
    * Connect to ProviderAdded signal.
@@ -238,8 +237,8 @@ class Completion : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completion = getVal!Completion(_paramVals);
-      auto provider = getVal!CompletionProvider(&_paramVals[1]);
+      auto completion = getVal!(gtksource.completion.Completion)(_paramVals);
+      auto provider = getVal!(gtksource.completion_provider.CompletionProvider)(&_paramVals[1]);
       _dClosure.dlg(provider, completion);
     }
 
@@ -254,8 +253,8 @@ class Completion : ObjectG
    *   provider = a #GtkSourceCompletionProvider
    *   completion = the instance the signal is connected to
    */
-  alias ProviderRemovedCallbackDlg = void delegate(CompletionProvider provider, Completion completion);
-  alias ProviderRemovedCallbackFunc = void function(CompletionProvider provider, Completion completion);
+  alias ProviderRemovedCallbackDlg = void delegate(gtksource.completion_provider.CompletionProvider provider, gtksource.completion.Completion completion);
+  alias ProviderRemovedCallbackFunc = void function(gtksource.completion_provider.CompletionProvider provider, gtksource.completion.Completion completion);
 
   /**
    * Connect to ProviderRemoved signal.
@@ -271,8 +270,8 @@ class Completion : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completion = getVal!Completion(_paramVals);
-      auto provider = getVal!CompletionProvider(&_paramVals[1]);
+      auto completion = getVal!(gtksource.completion.Completion)(_paramVals);
+      auto provider = getVal!(gtksource.completion_provider.CompletionProvider)(&_paramVals[1]);
       _dClosure.dlg(provider, completion);
     }
 
@@ -285,8 +284,8 @@ class Completion : ObjectG
    * be shown.
    *   completion = the instance the signal is connected to
    */
-  alias ShowCallbackDlg = void delegate(Completion completion);
-  alias ShowCallbackFunc = void function(Completion completion);
+  alias ShowCallbackDlg = void delegate(gtksource.completion.Completion completion);
+  alias ShowCallbackFunc = void function(gtksource.completion.Completion completion);
 
   /**
    * Connect to Show signal.
@@ -302,7 +301,7 @@ class Completion : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completion = getVal!Completion(_paramVals);
+      auto completion = getVal!(gtksource.completion.Completion)(_paramVals);
       _dClosure.dlg(completion);
     }
 

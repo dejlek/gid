@@ -1,8 +1,7 @@
 module gtk.directory_list;
 
-import gid.global;
+import gid.gid;
 import gio.file;
-import gio.file_mixin;
 import gio.list_model;
 import gio.list_model_mixin;
 import glib.error;
@@ -30,7 +29,7 @@ import gtk.types;
  * the `GFile` directly from the `GFileInfo` when operating with a `GtkListView`
  * or similar.
  */
-class DirectoryList : ObjectG, ListModel
+class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -60,7 +59,7 @@ class DirectoryList : ObjectG, ListModel
    *   file = The file to query
    * Returns: a new `GtkDirectoryList`
    */
-  this(string attributes, File file)
+  this(string attributes, gio.file.File file)
   {
     GtkDirectoryList* _cretval;
     const(char)* _attributes = attributes.toCString(No.Alloc);
@@ -76,7 +75,7 @@ class DirectoryList : ObjectG, ListModel
   {
     const(char)* _cretval;
     _cretval = gtk_directory_list_get_attributes(cast(GtkDirectoryList*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -90,11 +89,11 @@ class DirectoryList : ObjectG, ListModel
    * Returns: The loading error or %NULL if
    *   loading finished successfully
    */
-  ErrorG getError()
+  glib.error.ErrorG getError()
   {
     const(GError)* _cretval;
     _cretval = gtk_directory_list_get_error(cast(GtkDirectoryList*)cPtr);
-    auto _retval = _cretval ? new ErrorG(cast(GError*)_cretval) : null;
+    auto _retval = _cretval ? new glib.error.ErrorG(cast(GError*)_cretval) : null;
     return _retval;
   }
 
@@ -102,11 +101,11 @@ class DirectoryList : ObjectG, ListModel
    * Gets the file whose children are currently enumerated.
    * Returns: The file whose children are enumerated
    */
-  File getFile()
+  gio.file.File getFile()
   {
     GFile* _cretval;
     _cretval = gtk_directory_list_get_file(cast(GtkDirectoryList*)cPtr);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -167,7 +166,7 @@ class DirectoryList : ObjectG, ListModel
    * Params:
    *   file = the `GFile` to be enumerated
    */
-  void setFile(File file)
+  void setFile(gio.file.File file)
   {
     gtk_directory_list_set_file(cast(GtkDirectoryList*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }

@@ -1,7 +1,7 @@
 module gsk.color_stop;
 
 import gdk.rgba;
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.types;
@@ -39,8 +39,8 @@ class ColorStop
     (cast(GskColorStop*)cPtr).offset = propval;
   }
 
-  @property RGBA color()
+  @property gdk.rgba.RGBA color()
   {
-    return new RGBA(cast(GdkRGBA*)&(cast(GskColorStop*)cPtr).color);
+    return new gdk.rgba.RGBA(cast(GdkRGBA*)&(cast(GskColorStop*)cPtr).color);
   }
 }

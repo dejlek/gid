@@ -1,6 +1,6 @@
 module gtk.gesture_rotate;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -12,7 +12,7 @@ import gtk.types;
  * Whenever the angle between both handled sequences changes, the
  * signal@Gtk.GestureRotate::angle-changed signal is emitted.
  */
-class GestureRotate : Gesture
+class GestureRotate : gtk.gesture.Gesture
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -64,8 +64,8 @@ class GestureRotate : Gesture
    *   angleDelta = Difference with the starting angle, in radians
    *   gestureRotate = the instance the signal is connected to
    */
-  alias AngleChangedCallbackDlg = void delegate(double angle, double angleDelta, GestureRotate gestureRotate);
-  alias AngleChangedCallbackFunc = void function(double angle, double angleDelta, GestureRotate gestureRotate);
+  alias AngleChangedCallbackDlg = void delegate(double angle, double angleDelta, gtk.gesture_rotate.GestureRotate gestureRotate);
+  alias AngleChangedCallbackFunc = void function(double angle, double angleDelta, gtk.gesture_rotate.GestureRotate gestureRotate);
 
   /**
    * Connect to AngleChanged signal.
@@ -81,9 +81,9 @@ class GestureRotate : Gesture
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureRotate = getVal!GestureRotate(_paramVals);
-      auto angle = getVal!double(&_paramVals[1]);
-      auto angleDelta = getVal!double(&_paramVals[2]);
+      auto gestureRotate = getVal!(gtk.gesture_rotate.GestureRotate)(_paramVals);
+      auto angle = getVal!(double)(&_paramVals[1]);
+      auto angleDelta = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(angle, angleDelta, gestureRotate);
     }
 

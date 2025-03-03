@@ -1,6 +1,6 @@
 module gobject.type_query;
 
-import gid.global;
+import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.types;
@@ -29,12 +29,12 @@ class TypeQuery
     return cast(void*)&cInstance;
   }
 
-  @property GType type()
+  @property gobject.types.GType type()
   {
     return (cast(GTypeQuery*)cPtr).type;
   }
 
-  @property void type(GType propval)
+  @property void type(gobject.types.GType propval)
   {
     (cast(GTypeQuery*)cPtr).type = propval;
   }

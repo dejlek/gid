@@ -1,6 +1,6 @@
 module gobject.flags_class;
 
-import gid.global;
+import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.flags_value;
@@ -50,8 +50,8 @@ class FlagsClass
     (cast(GFlagsClass*)cPtr).nValues = propval;
   }
 
-  @property FlagsValue values()
+  @property gobject.flags_value.FlagsValue values()
   {
-    return new FlagsValue(cast(GFlagsValue*)(cast(GFlagsClass*)cPtr).values);
+    return new gobject.flags_value.FlagsValue(cast(GFlagsValue*)(cast(GFlagsClass*)cPtr).values);
   }
 }

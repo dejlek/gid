@@ -1,6 +1,6 @@
 module gio.tls_password;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -11,7 +11,7 @@ import gobject.object;
  * An abstract interface representing a password used in TLS. Often used in
  * user interaction such as unlocking a key storage token.
  */
-class TlsPassword : ObjectG
+class TlsPassword : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -37,7 +37,7 @@ class TlsPassword : ObjectG
    *   description = description of what the password is for
    * Returns: The newly allocated password object
    */
-  this(TlsPasswordFlags flags, string description)
+  this(gio.types.TlsPasswordFlags flags, string description)
   {
     GTlsPassword* _cretval;
     const(char)* _description = description.toCString(No.Alloc);
@@ -53,7 +53,7 @@ class TlsPassword : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_tls_password_get_description(cast(GTlsPassword*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -61,11 +61,11 @@ class TlsPassword : ObjectG
    * Get flags about the password.
    * Returns: The flags about the password.
    */
-  TlsPasswordFlags getFlags()
+  gio.types.TlsPasswordFlags getFlags()
   {
     GTlsPasswordFlags _cretval;
     _cretval = g_tls_password_get_flags(cast(GTlsPassword*)cPtr);
-    TlsPasswordFlags _retval = cast(TlsPasswordFlags)_cretval;
+    gio.types.TlsPasswordFlags _retval = cast(gio.types.TlsPasswordFlags)_cretval;
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class TlsPassword : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_tls_password_get_warning(cast(GTlsPassword*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class TlsPassword : ObjectG
    * Params:
    *   flags = The flags about the password
    */
-  void setFlags(TlsPasswordFlags flags)
+  void setFlags(gio.types.TlsPasswordFlags flags)
   {
     g_tls_password_set_flags(cast(GTlsPassword*)cPtr, flags);
   }
@@ -158,12 +158,12 @@ class TlsPassword : ObjectG
    *   value = the value for the password
    *   destroy = a function to use to free the password.
    */
-  void setValueFull(ubyte[] value, DestroyNotify destroy)
+  void setValueFull(ubyte[] value, glib.types.DestroyNotify destroy)
   {
     extern(C) void _destroyCallback(void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(DestroyNotify*)data;
+      auto _dlg = cast(glib.types.DestroyNotify*)data;
 
       (*_dlg)();
     }

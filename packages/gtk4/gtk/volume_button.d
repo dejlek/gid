@@ -1,6 +1,6 @@
 module gtk.volume_button;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.accessible_range;
@@ -23,7 +23,7 @@ import gtk.types;
 
  * Deprecated: This widget will be removed in GTK 5
  */
-class VolumeButton : ScaleButton
+class VolumeButton : gtk.scale_button.ScaleButton
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

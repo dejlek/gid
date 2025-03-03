@@ -1,6 +1,6 @@
 module gtksource.space_drawer;
 
-import gid.global;
+import gid.gid;
 import gio.settings;
 import gio.types;
 import glib.variant;
@@ -43,7 +43,7 @@ import gtksource.types;
  * And non-breaking spaces can always be drawn, everywhere, to distinguish them
  * from normal spaces.
  */
-class SpaceDrawer : ObjectG
+class SpaceDrawer : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -87,7 +87,7 @@ class SpaceDrawer : ObjectG
    *   key = the settings key to bind.
    *   flags = flags for the binding.
    */
-  void bindMatrixSetting(Settings settings, string key, SettingsBindFlags flags)
+  void bindMatrixSetting(gio.settings.Settings settings, string key, gio.types.SettingsBindFlags flags)
   {
     const(char)* _key = key.toCString(No.Alloc);
     gtk_source_space_drawer_bind_matrix_setting(cast(GtkSourceSpaceDrawer*)cPtr, settings ? cast(GSettings*)settings.cPtr(No.Dup) : null, _key, flags);
@@ -108,11 +108,11 @@ class SpaceDrawer : ObjectG
    * Returns: the #GtkSourceSpaceDrawer:matrix value as a new floating #GVariant
    *   instance.
    */
-  VariantG getMatrix()
+  glib.variant.VariantG getMatrix()
   {
     VariantC* _cretval;
     _cretval = gtk_source_space_drawer_get_matrix(cast(GtkSourceSpaceDrawer*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -128,11 +128,11 @@ class SpaceDrawer : ObjectG
    *   locations = one or several #GtkSourceSpaceLocationFlags.
    * Returns: a combination of #GtkSourceSpaceTypeFlags.
    */
-  SpaceTypeFlags getTypesForLocations(SpaceLocationFlags locations)
+  gtksource.types.SpaceTypeFlags getTypesForLocations(gtksource.types.SpaceLocationFlags locations)
   {
     GtkSourceSpaceTypeFlags _cretval;
     _cretval = gtk_source_space_drawer_get_types_for_locations(cast(GtkSourceSpaceDrawer*)cPtr, locations);
-    SpaceTypeFlags _retval = cast(SpaceTypeFlags)_cretval;
+    gtksource.types.SpaceTypeFlags _retval = cast(gtksource.types.SpaceTypeFlags)_cretval;
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class SpaceDrawer : ObjectG
    * Params:
    *   matrix = the new matrix value, or %NULL.
    */
-  void setMatrix(VariantG matrix)
+  void setMatrix(glib.variant.VariantG matrix)
   {
     gtk_source_space_drawer_set_matrix(cast(GtkSourceSpaceDrawer*)cPtr, matrix ? cast(VariantC*)matrix.cPtr(No.Dup) : null);
   }
@@ -167,7 +167,7 @@ class SpaceDrawer : ObjectG
    *   locations = one or several #GtkSourceSpaceLocationFlags.
    *   types = a combination of #GtkSourceSpaceTypeFlags.
    */
-  void setTypesForLocations(SpaceLocationFlags locations, SpaceTypeFlags types)
+  void setTypesForLocations(gtksource.types.SpaceLocationFlags locations, gtksource.types.SpaceTypeFlags types)
   {
     gtk_source_space_drawer_set_types_for_locations(cast(GtkSourceSpaceDrawer*)cPtr, locations, types);
   }

@@ -74,27 +74,6 @@ __gshared extern(C)
   AtkObject* function(ObjectC* obj) c_atk_gobject_accessible_for_object;
   ObjectC* function(AtkGObjectAccessible* obj) c_atk_gobject_accessible_get_object;
 
-  // Global
-  uint function(AtkEventListener focusTracker) c_atk_add_focus_tracker;
-  uint function(GSignalEmissionHook listener, const(char)* eventType) c_atk_add_global_event_listener;
-  uint function(AtkKeySnoopFunc listener, void* data) c_atk_add_key_event_listener;
-  void function(AtkEventListenerInit init_) c_atk_focus_tracker_init;
-  void function(AtkObject* object) c_atk_focus_tracker_notify;
-  uint function() c_atk_get_binary_age;
-  AtkRegistry* function() c_atk_get_default_registry;
-  AtkObject* function() c_atk_get_focus_object;
-  uint function() c_atk_get_interface_age;
-  uint function() c_atk_get_major_version;
-  uint function() c_atk_get_micro_version;
-  uint function() c_atk_get_minor_version;
-  AtkObject* function() c_atk_get_root;
-  const(char)* function() c_atk_get_toolkit_name;
-  const(char)* function() c_atk_get_toolkit_version;
-  const(char)* function() c_atk_get_version;
-  void function(uint trackerId) c_atk_remove_focus_tracker;
-  void function(uint listenerId) c_atk_remove_global_event_listener;
-  void function(uint listenerId) c_atk_remove_key_event_listener;
-
   // Hyperlink
   extern(C) GType function() c_atk_hyperlink_get_type;
   int function(AtkHyperlink* link) c_atk_hyperlink_get_end_index;
@@ -351,6 +330,27 @@ __gshared extern(C)
 
   // Window
   extern(C) GType function() c_atk_window_get_type;
+
+  // global
+  uint function(AtkEventListener focusTracker) c_atk_add_focus_tracker;
+  uint function(GSignalEmissionHook listener, const(char)* eventType) c_atk_add_global_event_listener;
+  uint function(AtkKeySnoopFunc listener, void* data) c_atk_add_key_event_listener;
+  void function(AtkEventListenerInit init_) c_atk_focus_tracker_init;
+  void function(AtkObject* object) c_atk_focus_tracker_notify;
+  uint function() c_atk_get_binary_age;
+  AtkRegistry* function() c_atk_get_default_registry;
+  AtkObject* function() c_atk_get_focus_object;
+  uint function() c_atk_get_interface_age;
+  uint function() c_atk_get_major_version;
+  uint function() c_atk_get_micro_version;
+  uint function() c_atk_get_minor_version;
+  AtkObject* function() c_atk_get_root;
+  const(char)* function() c_atk_get_toolkit_name;
+  const(char)* function() c_atk_get_toolkit_version;
+  const(char)* function() c_atk_get_version;
+  void function(uint trackerId) c_atk_remove_focus_tracker;
+  void function(uint listenerId) c_atk_remove_global_event_listener;
+  void function(uint listenerId) c_atk_remove_key_event_listener;
 }
 
 // Action
@@ -412,27 +412,6 @@ alias atk_editable_text_set_text_contents = c_atk_editable_text_set_text_content
 alias atk_gobject_accessible_get_type = c_atk_gobject_accessible_get_type;
 alias atk_gobject_accessible_for_object = c_atk_gobject_accessible_for_object;
 alias atk_gobject_accessible_get_object = c_atk_gobject_accessible_get_object;
-
-// Global
-alias atk_add_focus_tracker = c_atk_add_focus_tracker;
-alias atk_add_global_event_listener = c_atk_add_global_event_listener;
-alias atk_add_key_event_listener = c_atk_add_key_event_listener;
-alias atk_focus_tracker_init = c_atk_focus_tracker_init;
-alias atk_focus_tracker_notify = c_atk_focus_tracker_notify;
-alias atk_get_binary_age = c_atk_get_binary_age;
-alias atk_get_default_registry = c_atk_get_default_registry;
-alias atk_get_focus_object = c_atk_get_focus_object;
-alias atk_get_interface_age = c_atk_get_interface_age;
-alias atk_get_major_version = c_atk_get_major_version;
-alias atk_get_micro_version = c_atk_get_micro_version;
-alias atk_get_minor_version = c_atk_get_minor_version;
-alias atk_get_root = c_atk_get_root;
-alias atk_get_toolkit_name = c_atk_get_toolkit_name;
-alias atk_get_toolkit_version = c_atk_get_toolkit_version;
-alias atk_get_version = c_atk_get_version;
-alias atk_remove_focus_tracker = c_atk_remove_focus_tracker;
-alias atk_remove_global_event_listener = c_atk_remove_global_event_listener;
-alias atk_remove_key_event_listener = c_atk_remove_key_event_listener;
 
 // Hyperlink
 alias atk_hyperlink_get_type = c_atk_hyperlink_get_type;
@@ -691,6 +670,27 @@ alias atk_value_set_value = c_atk_value_set_value;
 // Window
 alias atk_window_get_type = c_atk_window_get_type;
 
+// global
+alias atk_add_focus_tracker = c_atk_add_focus_tracker;
+alias atk_add_global_event_listener = c_atk_add_global_event_listener;
+alias atk_add_key_event_listener = c_atk_add_key_event_listener;
+alias atk_focus_tracker_init = c_atk_focus_tracker_init;
+alias atk_focus_tracker_notify = c_atk_focus_tracker_notify;
+alias atk_get_binary_age = c_atk_get_binary_age;
+alias atk_get_default_registry = c_atk_get_default_registry;
+alias atk_get_focus_object = c_atk_get_focus_object;
+alias atk_get_interface_age = c_atk_get_interface_age;
+alias atk_get_major_version = c_atk_get_major_version;
+alias atk_get_micro_version = c_atk_get_micro_version;
+alias atk_get_minor_version = c_atk_get_minor_version;
+alias atk_get_root = c_atk_get_root;
+alias atk_get_toolkit_name = c_atk_get_toolkit_name;
+alias atk_get_toolkit_version = c_atk_get_toolkit_version;
+alias atk_get_version = c_atk_get_version;
+alias atk_remove_focus_tracker = c_atk_remove_focus_tracker;
+alias atk_remove_global_event_listener = c_atk_remove_global_event_listener;
+alias atk_remove_key_event_listener = c_atk_remove_key_event_listener;
+
 shared static this()
 {
   // Action
@@ -752,27 +752,6 @@ shared static this()
   gidLink(cast(void**)&atk_gobject_accessible_get_type, "atk_gobject_accessible_get_type", LIBS);
   gidLink(cast(void**)&atk_gobject_accessible_for_object, "atk_gobject_accessible_for_object", LIBS);
   gidLink(cast(void**)&atk_gobject_accessible_get_object, "atk_gobject_accessible_get_object", LIBS);
-
-  // Global
-  gidLink(cast(void**)&atk_add_focus_tracker, "atk_add_focus_tracker", LIBS);
-  gidLink(cast(void**)&atk_add_global_event_listener, "atk_add_global_event_listener", LIBS);
-  gidLink(cast(void**)&atk_add_key_event_listener, "atk_add_key_event_listener", LIBS);
-  gidLink(cast(void**)&atk_focus_tracker_init, "atk_focus_tracker_init", LIBS);
-  gidLink(cast(void**)&atk_focus_tracker_notify, "atk_focus_tracker_notify", LIBS);
-  gidLink(cast(void**)&atk_get_binary_age, "atk_get_binary_age", LIBS);
-  gidLink(cast(void**)&atk_get_default_registry, "atk_get_default_registry", LIBS);
-  gidLink(cast(void**)&atk_get_focus_object, "atk_get_focus_object", LIBS);
-  gidLink(cast(void**)&atk_get_interface_age, "atk_get_interface_age", LIBS);
-  gidLink(cast(void**)&atk_get_major_version, "atk_get_major_version", LIBS);
-  gidLink(cast(void**)&atk_get_micro_version, "atk_get_micro_version", LIBS);
-  gidLink(cast(void**)&atk_get_minor_version, "atk_get_minor_version", LIBS);
-  gidLink(cast(void**)&atk_get_root, "atk_get_root", LIBS);
-  gidLink(cast(void**)&atk_get_toolkit_name, "atk_get_toolkit_name", LIBS);
-  gidLink(cast(void**)&atk_get_toolkit_version, "atk_get_toolkit_version", LIBS);
-  gidLink(cast(void**)&atk_get_version, "atk_get_version", LIBS);
-  gidLink(cast(void**)&atk_remove_focus_tracker, "atk_remove_focus_tracker", LIBS);
-  gidLink(cast(void**)&atk_remove_global_event_listener, "atk_remove_global_event_listener", LIBS);
-  gidLink(cast(void**)&atk_remove_key_event_listener, "atk_remove_key_event_listener", LIBS);
 
   // Hyperlink
   gidLink(cast(void**)&atk_hyperlink_get_type, "atk_hyperlink_get_type", LIBS);
@@ -1030,4 +1009,25 @@ shared static this()
 
   // Window
   gidLink(cast(void**)&atk_window_get_type, "atk_window_get_type", LIBS);
+
+  // global
+  gidLink(cast(void**)&atk_add_focus_tracker, "atk_add_focus_tracker", LIBS);
+  gidLink(cast(void**)&atk_add_global_event_listener, "atk_add_global_event_listener", LIBS);
+  gidLink(cast(void**)&atk_add_key_event_listener, "atk_add_key_event_listener", LIBS);
+  gidLink(cast(void**)&atk_focus_tracker_init, "atk_focus_tracker_init", LIBS);
+  gidLink(cast(void**)&atk_focus_tracker_notify, "atk_focus_tracker_notify", LIBS);
+  gidLink(cast(void**)&atk_get_binary_age, "atk_get_binary_age", LIBS);
+  gidLink(cast(void**)&atk_get_default_registry, "atk_get_default_registry", LIBS);
+  gidLink(cast(void**)&atk_get_focus_object, "atk_get_focus_object", LIBS);
+  gidLink(cast(void**)&atk_get_interface_age, "atk_get_interface_age", LIBS);
+  gidLink(cast(void**)&atk_get_major_version, "atk_get_major_version", LIBS);
+  gidLink(cast(void**)&atk_get_micro_version, "atk_get_micro_version", LIBS);
+  gidLink(cast(void**)&atk_get_minor_version, "atk_get_minor_version", LIBS);
+  gidLink(cast(void**)&atk_get_root, "atk_get_root", LIBS);
+  gidLink(cast(void**)&atk_get_toolkit_name, "atk_get_toolkit_name", LIBS);
+  gidLink(cast(void**)&atk_get_toolkit_version, "atk_get_toolkit_version", LIBS);
+  gidLink(cast(void**)&atk_get_version, "atk_get_version", LIBS);
+  gidLink(cast(void**)&atk_remove_focus_tracker, "atk_remove_focus_tracker", LIBS);
+  gidLink(cast(void**)&atk_remove_global_event_listener, "atk_remove_global_event_listener", LIBS);
+  gidLink(cast(void**)&atk_remove_key_event_listener, "atk_remove_key_event_listener", LIBS);
 }

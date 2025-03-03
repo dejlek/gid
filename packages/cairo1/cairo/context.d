@@ -13,7 +13,7 @@ import cairo.scaled_font;
 import cairo.surface;
 import cairo.text_cluster;
 import cairo.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -25,7 +25,7 @@ import gobject.boxed;
  * Memory management of #cairo_t is done with
  * [cairo.global.reference] and [cairo.global.destroy].
  */
-class Context : Boxed
+class Context : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -59,9 +59,9 @@ class Context : Boxed
    * Params:
    *   path = path to be appended
    */
-  void appendPath(Path path)
+  void appendPath(cairo.path.Path path)
   {
-    cairo_append_path(cast(cairo_t*)cPtr, path ? cast(cairo_path_t*)path.cPtr(No.Dup) : null);
+    cairo_append_path(cast(cairo_t*)cPtr, path ? cast(const(cairo_path_t)*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -220,11 +220,11 @@ class Context : Boxed
    * Returns: the current clip region as a list of rectangles in user coordinates,
    *   which should be destroyed using [cairo.rectangle_list.RectangleList.destroy].
    */
-  RectangleList copyClipRectangleList()
+  cairo.rectangle_list.RectangleList copyClipRectangleList()
   {
     cairo_rectangle_list_t* _cretval;
     _cretval = cairo_copy_clip_rectangle_list(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new RectangleList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.rectangle_list.RectangleList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -261,11 +261,11 @@ class Context : Boxed
    *   returned object and should call [cairo.path.Path.destroy] when finished
    *   with it.
    */
-  Path copyPath()
+  cairo.path.Path copyPath()
   {
     cairo_path_t* _cretval;
     _cretval = cairo_copy_path(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new Path(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.path.Path(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -295,11 +295,11 @@ class Context : Boxed
    *   returned object and should call [cairo.path.Path.destroy] when finished
    *   with it.
    */
-  Path copyPathFlat()
+  cairo.path.Path copyPathFlat()
   {
     cairo_path_t* _cretval;
     _cretval = cairo_copy_path_flat(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new Path(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.path.Path(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -406,7 +406,7 @@ class Context : Boxed
    *   extents = a #cairo_font_extents_t object into which the results
    *     will be stored.
    */
-  void fontExtents(FontExtents extents)
+  void fontExtents(cairo.types.FontExtents extents)
   {
     cairo_font_extents(cast(cairo_t*)cPtr, &extents);
   }
@@ -416,11 +416,11 @@ class Context : Boxed
    * [cairo.context.Context.setAntialias].
    * Returns: the current shape antialiasing mode.
    */
-  Antialias getAntialias()
+  cairo.types.Antialias getAntialias()
   {
     cairo_antialias_t _cretval;
     _cretval = cairo_get_antialias(cast(cairo_t*)cPtr);
-    Antialias _retval = cast(Antialias)_cretval;
+    cairo.types.Antialias _retval = cast(cairo.types.Antialias)_cretval;
     return _retval;
   }
 
@@ -483,11 +483,11 @@ class Context : Boxed
    * Gets the current fill rule, as set by [cairo.context.Context.setFillRule].
    * Returns: the current fill rule.
    */
-  FillRule getFillRule()
+  cairo.types.FillRule getFillRule()
   {
     cairo_fill_rule_t _cretval;
     _cretval = cairo_get_fill_rule(cast(cairo_t*)cPtr);
-    FillRule _retval = cast(FillRule)_cretval;
+    cairo.types.FillRule _retval = cast(cairo.types.FillRule)_cretval;
     return _retval;
   }
 
@@ -504,11 +504,11 @@ class Context : Boxed
    *   [cairo.context.Context.setFontFace] with a nil font will trigger an error that
    *   will shutdown the #cairo_t object$(RPAREN).
    */
-  FontFace getFontFace()
+  cairo.font_face.FontFace getFontFace()
   {
     cairo_font_face_t* _cretval;
     _cretval = cairo_get_font_face(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new FontFace(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.font_face.FontFace(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -518,7 +518,7 @@ class Context : Boxed
    * Params:
    *   matrix = return value for the matrix
    */
-  void getFontMatrix(Matrix matrix)
+  void getFontMatrix(cairo.matrix.Matrix matrix)
   {
     cairo_get_font_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
   }
@@ -532,7 +532,7 @@ class Context : Boxed
    *   options = a #cairo_font_options_t object into which to store
    *     the retrieved options. All existing values are overwritten
    */
-  void getFontOptions(FontOptions options)
+  void getFontOptions(cairo.font_options.FontOptions options)
   {
     cairo_get_font_options(cast(cairo_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(No.Dup) : null);
   }
@@ -550,11 +550,11 @@ class Context : Boxed
    * Returns: the target surface. This object is owned by cairo. To
    *   keep a reference to it, you must call [cairo.surface.Surface.reference].
    */
-  Surface getGroupTarget()
+  cairo.surface.Surface getGroupTarget()
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_get_group_target(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -562,9 +562,9 @@ class Context : Boxed
    * Returns whether or not hairline mode is set, as set by [cairo.context.Context.setHairline].
    * Returns: whether hairline mode is set.
    */
-  Bool getHairline()
+  cairo.types.Bool getHairline()
   {
-    Bool _retval;
+    cairo.types.Bool _retval;
     _retval = cairo_get_hairline(cast(cairo_t*)cPtr);
     return _retval;
   }
@@ -573,11 +573,11 @@ class Context : Boxed
    * Gets the current line cap style, as set by [cairo.context.Context.setLineCap].
    * Returns: the current line cap style.
    */
-  LineCap getLineCap()
+  cairo.types.LineCap getLineCap()
   {
     cairo_line_cap_t _cretval;
     _cretval = cairo_get_line_cap(cast(cairo_t*)cPtr);
-    LineCap _retval = cast(LineCap)_cretval;
+    cairo.types.LineCap _retval = cast(cairo.types.LineCap)_cretval;
     return _retval;
   }
 
@@ -585,11 +585,11 @@ class Context : Boxed
    * Gets the current line join style, as set by [cairo.context.Context.setLineJoin].
    * Returns: the current line join style.
    */
-  LineJoin getLineJoin()
+  cairo.types.LineJoin getLineJoin()
   {
     cairo_line_join_t _cretval;
     _cretval = cairo_get_line_join(cast(cairo_t*)cPtr);
-    LineJoin _retval = cast(LineJoin)_cretval;
+    cairo.types.LineJoin _retval = cast(cairo.types.LineJoin)_cretval;
     return _retval;
   }
 
@@ -612,7 +612,7 @@ class Context : Boxed
    * Params:
    *   matrix = return value for the matrix
    */
-  void getMatrix(Matrix matrix)
+  void getMatrix(cairo.matrix.Matrix matrix)
   {
     cairo_get_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
   }
@@ -632,11 +632,11 @@ class Context : Boxed
    * Gets the current compositing operator for a cairo context.
    * Returns: the current compositing operator.
    */
-  Operator getOperator()
+  cairo.types.Operator getOperator()
   {
     cairo_operator_t _cretval;
     _cretval = cairo_get_operator(cast(cairo_t*)cPtr);
-    Operator _retval = cast(Operator)_cretval;
+    cairo.types.Operator _retval = cast(cairo.types.Operator)_cretval;
     return _retval;
   }
 
@@ -653,11 +653,11 @@ class Context : Boxed
    *   [cairo.context.Context.setScaledFont] with a nil font will trigger an error that
    *   will shutdown the #cairo_t object$(RPAREN).
    */
-  ScaledFont getScaledFont()
+  cairo.scaled_font.ScaledFont getScaledFont()
   {
     cairo_scaled_font_t* _cretval;
     _cretval = cairo_get_scaled_font(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new ScaledFont(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.scaled_font.ScaledFont(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -667,11 +667,11 @@ class Context : Boxed
    *   cairo. To keep a reference to it, you must call
    *   [cairo.pattern.Pattern.reference].
    */
-  Pattern getSource()
+  cairo.pattern.Pattern getSource()
   {
     cairo_pattern_t* _cretval;
     _cretval = cairo_get_source(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new Pattern(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -686,11 +686,11 @@ class Context : Boxed
    * Returns: the target surface. This object is owned by cairo. To
    *   keep a reference to it, you must call [cairo.surface.Surface.reference].
    */
-  Surface getTarget()
+  cairo.surface.Surface getTarget()
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_get_target(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -720,9 +720,9 @@ class Context : Boxed
    *   extents = a #cairo_text_extents_t object into which the results
    *     will be stored
    */
-  void glyphExtents(Glyph glyphs, int numGlyphs, TextExtents extents)
+  void glyphExtents(cairo.glyph.Glyph glyphs, int numGlyphs, cairo.types.TextExtents extents)
   {
-    cairo_glyph_extents(cast(cairo_t*)cPtr, glyphs ? cast(cairo_glyph_t*)glyphs.cPtr(No.Dup) : null, numGlyphs, &extents);
+    cairo_glyph_extents(cast(cairo_t*)cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.Dup) : null, numGlyphs, &extents);
   }
 
   /**
@@ -733,9 +733,9 @@ class Context : Boxed
    *   glyphs = array of glyphs to show
    *   numGlyphs = number of glyphs to show
    */
-  void glyphPath(Glyph glyphs, int numGlyphs)
+  void glyphPath(cairo.glyph.Glyph glyphs, int numGlyphs)
   {
-    cairo_glyph_path(cast(cairo_t*)cPtr, glyphs ? cast(cairo_glyph_t*)glyphs.cPtr(No.Dup) : null, numGlyphs);
+    cairo_glyph_path(cast(cairo_t*)cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.Dup) : null, numGlyphs);
   }
 
   /**
@@ -743,9 +743,9 @@ class Context : Boxed
    * See [cairo.context.Context.getCurrentPoint] for details on the current point.
    * Returns: whether a current point is defined.
    */
-  Bool hasCurrentPoint()
+  cairo.types.Bool hasCurrentPoint()
   {
-    Bool _retval;
+    cairo.types.Bool _retval;
     _retval = cairo_has_current_point(cast(cairo_t*)cPtr);
     return _retval;
   }
@@ -772,9 +772,9 @@ class Context : Boxed
    * Returns: A non-zero value if the point is inside, or zero if
    *   outside.
    */
-  Bool inClip(double x, double y)
+  cairo.types.Bool inClip(double x, double y)
   {
-    Bool _retval;
+    cairo.types.Bool _retval;
     _retval = cairo_in_clip(cast(cairo_t*)cPtr, x, y);
     return _retval;
   }
@@ -791,9 +791,9 @@ class Context : Boxed
    * Returns: A non-zero value if the point is inside, or zero if
    *   outside.
    */
-  Bool inFill(double x, double y)
+  cairo.types.Bool inFill(double x, double y)
   {
-    Bool _retval;
+    cairo.types.Bool _retval;
     _retval = cairo_in_fill(cast(cairo_t*)cPtr, x, y);
     return _retval;
   }
@@ -812,9 +812,9 @@ class Context : Boxed
    * Returns: A non-zero value if the point is inside, or zero if
    *   outside.
    */
-  Bool inStroke(double x, double y)
+  cairo.types.Bool inStroke(double x, double y)
   {
-    Bool _retval;
+    cairo.types.Bool _retval;
     _retval = cairo_in_stroke(cast(cairo_t*)cPtr, x, y);
     return _retval;
   }
@@ -842,7 +842,7 @@ class Context : Boxed
    * Params:
    *   pattern = a #cairo_pattern_t
    */
-  void mask(Pattern pattern)
+  void mask(cairo.pattern.Pattern pattern)
   {
     cairo_mask(cast(cairo_t*)cPtr, pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null);
   }
@@ -857,7 +857,7 @@ class Context : Boxed
    *   surfaceX = X coordinate at which to place the origin of surface
    *   surfaceY = Y coordinate at which to place the origin of surface
    */
-  void maskSurface(Surface surface, double surfaceX, double surfaceY)
+  void maskSurface(cairo.surface.Surface surface, double surfaceX, double surfaceY)
   {
     cairo_mask_surface(cast(cairo_t*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, surfaceX, surfaceY);
   }
@@ -964,11 +964,11 @@ class Context : Boxed
    *   caller owns the returned object and should call
    *   [cairo.pattern.Pattern.destroy] when finished with it.
    */
-  Pattern popGroup()
+  cairo.pattern.Pattern popGroup()
   {
     cairo_pattern_t* _cretval;
     _cretval = cairo_pop_group(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new Pattern(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1047,7 +1047,7 @@ class Context : Boxed
    *   content = a #cairo_content_t indicating the type of group that
    *     will be created
    */
-  void pushGroupWithContent(Content content)
+  void pushGroupWithContent(cairo.types.Content content)
   {
     cairo_push_group_with_content(cast(cairo_t*)cPtr, content);
   }
@@ -1251,7 +1251,7 @@ class Context : Boxed
    *   slant = the slant for the font
    *   weight = the weight for the font
    */
-  void selectFontFace(string family, FontSlant slant, FontWeight weight)
+  void selectFontFace(string family, cairo.types.FontSlant slant, cairo.types.FontWeight weight)
   {
     const(char)* _family = family.toCString(No.Alloc);
     cairo_select_font_face(cast(cairo_t*)cPtr, _family, slant, weight);
@@ -1267,7 +1267,7 @@ class Context : Boxed
    * Params:
    *   antialias = the new antialiasing mode
    */
-  void setAntialias(Antialias antialias)
+  void setAntialias(cairo.types.Antialias antialias)
   {
     cairo_set_antialias(cast(cairo_t*)cPtr, antialias);
   }
@@ -1316,7 +1316,7 @@ class Context : Boxed
    * Params:
    *   fillRule = a fill rule, specified as a #cairo_fill_rule_t
    */
-  void setFillRule(FillRule fillRule)
+  void setFillRule(cairo.types.FillRule fillRule)
   {
     cairo_set_fill_rule(cast(cairo_t*)cPtr, fillRule);
   }
@@ -1328,7 +1328,7 @@ class Context : Boxed
    * Params:
    *   fontFace = a #cairo_font_face_t, or %NULL to restore to the default font
    */
-  void setFontFace(FontFace fontFace)
+  void setFontFace(cairo.font_face.FontFace fontFace)
   {
     cairo_set_font_face(cast(cairo_t*)cPtr, fontFace ? cast(cairo_font_face_t*)fontFace.cPtr(No.Dup) : null);
   }
@@ -1344,9 +1344,9 @@ class Context : Boxed
    *   matrix = a #cairo_matrix_t describing a transform to be applied to
    *     the current font.
    */
-  void setFontMatrix(Matrix matrix)
+  void setFontMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_set_font_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
+    cairo_set_font_matrix(cast(cairo_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1358,9 +1358,9 @@ class Context : Boxed
    * Params:
    *   options = font options to use
    */
-  void setFontOptions(FontOptions options)
+  void setFontOptions(cairo.font_options.FontOptions options)
   {
-    cairo_set_font_options(cast(cairo_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(No.Dup) : null);
+    cairo_set_font_options(cast(cairo_t*)cPtr, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1401,7 +1401,7 @@ class Context : Boxed
    * Params:
    *   setHairline = whether or not to set hairline mode
    */
-  void setHairline(Bool setHairline)
+  void setHairline(cairo.types.Bool setHairline)
   {
     cairo_set_hairline(cast(cairo_t*)cPtr, setHairline);
   }
@@ -1417,7 +1417,7 @@ class Context : Boxed
    * Params:
    *   lineCap = a line cap style
    */
-  void setLineCap(LineCap lineCap)
+  void setLineCap(cairo.types.LineCap lineCap)
   {
     cairo_set_line_cap(cast(cairo_t*)cPtr, lineCap);
   }
@@ -1433,7 +1433,7 @@ class Context : Boxed
    * Params:
    *   lineJoin = a line join style
    */
-  void setLineJoin(LineJoin lineJoin)
+  void setLineJoin(cairo.types.LineJoin lineJoin)
   {
     cairo_set_line_join(cast(cairo_t*)cPtr, lineJoin);
   }
@@ -1469,9 +1469,9 @@ class Context : Boxed
    * Params:
    *   matrix = a transformation matrix from user space to device space
    */
-  void setMatrix(Matrix matrix)
+  void setMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_set_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
+    cairo_set_matrix(cast(cairo_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1508,7 +1508,7 @@ class Context : Boxed
    * Params:
    *   op = a compositing operator, specified as a #cairo_operator_t
    */
-  void setOperator(Operator op)
+  void setOperator(cairo.types.Operator op)
   {
     cairo_set_operator(cast(cairo_t*)cPtr, op);
   }
@@ -1522,9 +1522,9 @@ class Context : Boxed
    * Params:
    *   scaledFont = a #cairo_scaled_font_t
    */
-  void setScaledFont(ScaledFont scaledFont)
+  void setScaledFont(cairo.scaled_font.ScaledFont scaledFont)
   {
-    cairo_set_scaled_font(cast(cairo_t*)cPtr, scaledFont ? cast(cairo_scaled_font_t*)scaledFont.cPtr(No.Dup) : null);
+    cairo_set_scaled_font(cast(cairo_t*)cPtr, scaledFont ? cast(const(cairo_scaled_font_t)*)scaledFont.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1542,7 +1542,7 @@ class Context : Boxed
    *   source = a #cairo_pattern_t to be used as the source for
    *     subsequent drawing operations.
    */
-  void setSource(Pattern source)
+  void setSource(cairo.pattern.Pattern source)
   {
     cairo_set_source(cast(cairo_t*)cPtr, source ? cast(cairo_pattern_t*)source.cPtr(No.Dup) : null);
   }
@@ -1606,7 +1606,7 @@ class Context : Boxed
    *   x = User-space X coordinate for surface origin
    *   y = User-space Y coordinate for surface origin
    */
-  void setSourceSurface(Surface surface, double x, double y)
+  void setSourceSurface(cairo.surface.Surface surface, double x, double y)
   {
     cairo_set_source_surface(cast(cairo_t*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, x, y);
   }
@@ -1638,9 +1638,9 @@ class Context : Boxed
    *   glyphs = array of glyphs to show
    *   numGlyphs = number of glyphs to show
    */
-  void showGlyphs(Glyph glyphs, int numGlyphs)
+  void showGlyphs(cairo.glyph.Glyph glyphs, int numGlyphs)
   {
-    cairo_show_glyphs(cast(cairo_t*)cPtr, glyphs ? cast(cairo_glyph_t*)glyphs.cPtr(No.Dup) : null, numGlyphs);
+    cairo_show_glyphs(cast(cairo_t*)cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.Dup) : null, numGlyphs);
   }
 
   /**
@@ -1709,21 +1709,21 @@ class Context : Boxed
    *   numClusters = number of clusters in the mapping
    *   clusterFlags = cluster mapping flags
    */
-  void showTextGlyphs(string utf8, int utf8Len, Glyph glyphs, int numGlyphs, TextCluster clusters, int numClusters, TextClusterFlags clusterFlags)
+  void showTextGlyphs(string utf8, int utf8Len, cairo.glyph.Glyph glyphs, int numGlyphs, cairo.text_cluster.TextCluster clusters, int numClusters, cairo.types.TextClusterFlags clusterFlags)
   {
     const(char)* _utf8 = utf8.toCString(No.Alloc);
-    cairo_show_text_glyphs(cast(cairo_t*)cPtr, _utf8, utf8Len, glyphs ? cast(cairo_glyph_t*)glyphs.cPtr(No.Dup) : null, numGlyphs, clusters ? cast(cairo_text_cluster_t*)clusters.cPtr(No.Dup) : null, numClusters, clusterFlags);
+    cairo_show_text_glyphs(cast(cairo_t*)cPtr, _utf8, utf8Len, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.Dup) : null, numGlyphs, clusters ? cast(const(cairo_text_cluster_t)*)clusters.cPtr(No.Dup) : null, numClusters, clusterFlags);
   }
 
   /**
    * Checks whether an error has previously occurred for this context.
    * Returns: the current status of this context, see #cairo_status_t
    */
-  Status status()
+  cairo.types.Status status()
   {
     cairo_status_t _cretval;
     _cretval = cairo_status(cast(cairo_t*)cPtr);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -1861,7 +1861,7 @@ class Context : Boxed
    *   extents = a #cairo_text_extents_t object into which the results
    *     will be stored
    */
-  void textExtents(string utf8, TextExtents extents)
+  void textExtents(string utf8, cairo.types.TextExtents extents)
   {
     const(char)* _utf8 = utf8.toCString(No.Alloc);
     cairo_text_extents(cast(cairo_t*)cPtr, _utf8, &extents);
@@ -1899,9 +1899,9 @@ class Context : Boxed
    * Params:
    *   matrix = a transformation to be applied to the user-space axes
    */
-  void transform(Matrix matrix)
+  void transform(cairo.matrix.Matrix matrix)
   {
-    cairo_transform(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
+    cairo_transform(cast(cairo_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.Dup) : null);
   }
 
   /**

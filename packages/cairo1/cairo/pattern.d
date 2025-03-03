@@ -5,7 +5,7 @@ import cairo.c.types;
 import cairo.matrix;
 import cairo.surface;
 import cairo.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -23,7 +23,7 @@ import gobject.boxed;
  * Memory management of #cairo_pattern_t is done with
  * [cairo.pattern.Pattern.reference] and [cairo.pattern.Pattern.destroy].
  */
-class Pattern : Boxed
+class Pattern : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -109,11 +109,11 @@ class Pattern : Boxed
    *   %CAIRO_STATUS_PATTERN_TYPE_MISMATCH if pattern is not a gradient
    *   pattern.
    */
-  Status getColorStopCount(out int count)
+  cairo.types.Status getColorStopCount(out int count)
   {
     cairo_status_t _cretval;
     _cretval = cairo_pattern_get_color_stop_count(cast(cairo_pattern_t*)cPtr, cast(int*)&count);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -135,11 +135,11 @@ class Pattern : Boxed
    *   not a gradient pattern, %CAIRO_STATUS_PATTERN_TYPE_MISMATCH is
    *   returned.
    */
-  Status getColorStopRgba(int index, out double offset, out double red, out double green, out double blue, out double alpha)
+  cairo.types.Status getColorStopRgba(int index, out double offset, out double red, out double green, out double blue, out double alpha)
   {
     cairo_status_t _cretval;
     _cretval = cairo_pattern_get_color_stop_rgba(cast(cairo_pattern_t*)cPtr, index, cast(double*)&offset, cast(double*)&red, cast(double*)&green, cast(double*)&blue, cast(double*)&alpha);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -148,11 +148,11 @@ class Pattern : Boxed
    * [cairo.pattern.Pattern.setDither].
    * Returns: the current dithering mode.
    */
-  Dither getDither()
+  cairo.types.Dither getDither()
   {
     cairo_dither_t _cretval;
     _cretval = cairo_pattern_get_dither(cast(cairo_pattern_t*)cPtr);
-    Dither _retval = cast(Dither)_cretval;
+    cairo.types.Dither _retval = cast(cairo.types.Dither)_cretval;
     return _retval;
   }
 
@@ -162,11 +162,11 @@ class Pattern : Boxed
    * Returns: the current extend strategy used for drawing the
    *   pattern.
    */
-  Extend getExtend()
+  cairo.types.Extend getExtend()
   {
     cairo_extend_t _cretval;
     _cretval = cairo_pattern_get_extend(cast(cairo_pattern_t*)cPtr);
-    Extend _retval = cast(Extend)_cretval;
+    cairo.types.Extend _retval = cast(cairo.types.Extend)_cretval;
     return _retval;
   }
 
@@ -175,11 +175,11 @@ class Pattern : Boxed
    * for details on each filter.
    * Returns: the current filter used for resizing the pattern.
    */
-  Filter getFilter()
+  cairo.types.Filter getFilter()
   {
     cairo_filter_t _cretval;
     _cretval = cairo_pattern_get_filter(cast(cairo_pattern_t*)cPtr);
-    Filter _retval = cast(Filter)_cretval;
+    cairo.types.Filter _retval = cast(cairo.types.Filter)_cretval;
     return _retval;
   }
 
@@ -194,11 +194,11 @@ class Pattern : Boxed
    *   %CAIRO_STATUS_PATTERN_TYPE_MISMATCH if pattern is not a linear
    *   gradient pattern.
    */
-  Status getLinearPoints(out double x0, out double y0, out double x1, out double y1)
+  cairo.types.Status getLinearPoints(out double x0, out double y0, out double x1, out double y1)
   {
     cairo_status_t _cretval;
     _cretval = cairo_pattern_get_linear_points(cast(cairo_pattern_t*)cPtr, cast(double*)&x0, cast(double*)&y0, cast(double*)&x1, cast(double*)&y1);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class Pattern : Boxed
    * Params:
    *   matrix = return value for the matrix
    */
-  void getMatrix(Matrix matrix)
+  void getMatrix(cairo.matrix.Matrix matrix)
   {
     cairo_pattern_get_matrix(cast(cairo_pattern_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
   }
@@ -226,11 +226,11 @@ class Pattern : Boxed
    *   %CAIRO_STATUS_PATTERN_TYPE_MISMATCH if pattern is not a radial
    *   gradient pattern.
    */
-  Status getRadialCircles(out double x0, out double y0, out double r0, out double x1, out double y1, out double r1)
+  cairo.types.Status getRadialCircles(out double x0, out double y0, out double r0, out double x1, out double y1, out double r1)
   {
     cairo_status_t _cretval;
     _cretval = cairo_pattern_get_radial_circles(cast(cairo_pattern_t*)cPtr, cast(double*)&x0, cast(double*)&y0, cast(double*)&r0, cast(double*)&x1, cast(double*)&y1, cast(double*)&r1);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -246,11 +246,11 @@ class Pattern : Boxed
    *   %CAIRO_STATUS_PATTERN_TYPE_MISMATCH if the pattern is not a solid
    *   color pattern.
    */
-  Status getRgba(out double red, out double green, out double blue, out double alpha)
+  cairo.types.Status getRgba(out double red, out double green, out double blue, out double alpha)
   {
     cairo_status_t _cretval;
     _cretval = cairo_pattern_get_rgba(cast(cairo_pattern_t*)cPtr, cast(double*)&red, cast(double*)&green, cast(double*)&blue, cast(double*)&alpha);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -264,11 +264,11 @@ class Pattern : Boxed
    *   %CAIRO_STATUS_PATTERN_TYPE_MISMATCH if the pattern is not a surface
    *   pattern.
    */
-  Status getSurface(Surface surface)
+  cairo.types.Status getSurface(cairo.surface.Surface surface)
   {
     cairo_status_t _cretval;
     _cretval = cairo_pattern_get_surface(cast(cairo_pattern_t*)cPtr, surface ? cast(cairo_surface_t**)surface.cPtr(No.Dup) : null);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -277,11 +277,11 @@ class Pattern : Boxed
    * types.
    * Returns: The type of pattern.
    */
-  PatternType getPatternType()
+  cairo.types.PatternType getPatternType()
   {
     cairo_pattern_type_t _cretval;
     _cretval = cairo_pattern_get_type(cast(cairo_pattern_t*)cPtr);
-    PatternType _retval = cast(PatternType)_cretval;
+    cairo.types.PatternType _retval = cast(cairo.types.PatternType)_cretval;
     return _retval;
   }
 
@@ -294,7 +294,7 @@ class Pattern : Boxed
    *     attached to
    * Returns: the user data previously attached or %NULL.
    */
-  void* getUserData(UserDataKey key)
+  void* getUserData(cairo.types.UserDataKey key)
   {
     auto _retval = cairo_pattern_get_user_data(cast(cairo_pattern_t*)cPtr, &key);
     return _retval;
@@ -307,7 +307,7 @@ class Pattern : Boxed
    * Params:
    *   dither = a #cairo_dither_t describing the new dithering mode
    */
-  void setDither(Dither dither)
+  void setDither(cairo.types.Dither dither)
   {
     cairo_pattern_set_dither(cast(cairo_pattern_t*)cPtr, dither);
   }
@@ -322,7 +322,7 @@ class Pattern : Boxed
    *   extend = a #cairo_extend_t describing how the area outside of the
    *     pattern will be drawn
    */
-  void setExtend(Extend extend)
+  void setExtend(cairo.types.Extend extend)
   {
     cairo_pattern_set_extend(cast(cairo_pattern_t*)cPtr, extend);
   }
@@ -343,7 +343,7 @@ class Pattern : Boxed
    *   filter = a #cairo_filter_t describing the filter to use for resizing
    *     the pattern
    */
-  void setFilter(Filter filter)
+  void setFilter(cairo.types.Filter filter)
   {
     cairo_pattern_set_filter(cast(cairo_pattern_t*)cPtr, filter);
   }
@@ -372,9 +372,9 @@ class Pattern : Boxed
    * Params:
    *   matrix = a #cairo_matrix_t
    */
-  void setMatrix(Matrix matrix)
+  void setMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_pattern_set_matrix(cast(cairo_pattern_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
+    cairo_pattern_set_matrix(cast(cairo_pattern_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.Dup) : null);
   }
 
   /**
@@ -384,11 +384,11 @@ class Pattern : Boxed
    *   %CAIRO_STATUS_INVALID_MATRIX, %CAIRO_STATUS_PATTERN_TYPE_MISMATCH,
    *   or %CAIRO_STATUS_INVALID_MESH_CONSTRUCTION.
    */
-  Status status()
+  cairo.types.Status status()
   {
     cairo_status_t _cretval;
     _cretval = cairo_pattern_status(cast(cairo_pattern_t*)cPtr);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 }

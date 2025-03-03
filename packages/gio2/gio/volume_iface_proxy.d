@@ -5,7 +5,7 @@ import gio.volume;
 import gio.volume_mixin;
 
 /// Proxy object for Gio.Volume interface when a GObject has no applicable D binding
-class VolumeIfaceProxy : IfaceProxy, Volume
+class VolumeIfaceProxy : IfaceProxy, gio.volume.Volume
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class VolumeIfaceProxy : IfaceProxy, Volume
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Volume);
+    return typeid(gio.volume.Volume);
   }
 
   mixin VolumeT!();

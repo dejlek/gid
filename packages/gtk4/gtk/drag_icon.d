@@ -2,8 +2,7 @@ module gtk.drag_icon;
 
 import gdk.drag;
 import gdk.paintable;
-import gdk.paintable_mixin;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gobject.value;
 import gtk.accessible;
@@ -31,7 +30,7 @@ import gtk.widget;
  * to set whatever widget should be used for the drag icon.
  * Keep in mind that drag icons do not allow user input.
  */
-class DragIcon : Widget, Native, Root
+class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -67,11 +66,11 @@ class DragIcon : Widget, Native, Root
    * Returns: A new `GtkWidget`
    *   for displaying value as a drag icon.
    */
-  static Widget createWidgetForValue(Value value)
+  static gtk.widget.Widget createWidgetForValue(gobject.value.Value value)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_drag_icon_create_widget_for_value(value ? cast(GValue*)value.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, Yes.Take);
+    _cretval = gtk_drag_icon_create_widget_for_value(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -83,11 +82,11 @@ class DragIcon : Widget, Native, Root
    *   drag = a `GdkDrag`
    * Returns: the `GtkDragIcon`
    */
-  static Widget getForDrag(Drag drag)
+  static gtk.widget.Widget getForDrag(gdk.drag.Drag drag)
   {
     GtkWidget* _cretval;
     _cretval = gtk_drag_icon_get_for_drag(drag ? cast(GdkDrag*)drag.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -102,7 +101,7 @@ class DragIcon : Widget, Native, Root
    *   hotX = X coordinate of the hotspot
    *   hotY = Y coordinate of the hotspot
    */
-  static void setFromPaintable(Drag drag, Paintable paintable, int hotX, int hotY)
+  static void setFromPaintable(gdk.drag.Drag drag, gdk.paintable.Paintable paintable, int hotX, int hotY)
   {
     gtk_drag_icon_set_from_paintable(drag ? cast(GdkDrag*)drag.cPtr(No.Dup) : null, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null, hotX, hotY);
   }
@@ -111,11 +110,11 @@ class DragIcon : Widget, Native, Root
    * Gets the widget currently used as drag icon.
    * Returns: The drag icon
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_drag_icon_get_child(cast(GtkDragIcon*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -124,7 +123,7 @@ class DragIcon : Widget, Native, Root
    * Params:
    *   child = a `GtkWidget`
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_drag_icon_set_child(cast(GtkDragIcon*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }

@@ -3,10 +3,10 @@ module arrowflight.data_stream;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class DataStream : ObjectG
+class DataStream : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

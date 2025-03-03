@@ -1,6 +1,6 @@
 module gobject.parameter;
 
-import gid.global;
+import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.types;
@@ -43,8 +43,8 @@ class Parameter
     (cast(GParameter*)cPtr).name = propval.toCString(Yes.Alloc);
   }
 
-  @property Value value()
+  @property gobject.value.Value value()
   {
-    return new Value(cast(GValue*)&(cast(GParameter*)cPtr).value);
+    return new gobject.value.Value(cast(GValue*)&(cast(GParameter*)cPtr).value);
   }
 }

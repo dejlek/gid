@@ -1,7 +1,7 @@
 module gio.seekable_mixin;
 
 public import gio.seekable_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
@@ -68,7 +68,7 @@ template SeekableT()
    *   has occurred, this function will return %FALSE and set error
    *   appropriately if present.
    */
-  override bool seek(long offset, SeekType type, Cancellable cancellable)
+  override bool seek(long offset, glib.types.SeekType type, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -106,7 +106,7 @@ template SeekableT()
    *   has occurred, this function will return %FALSE and set error
    *   appropriately if present.
    */
-  override bool truncate(long offset, Cancellable cancellable)
+  override bool truncate(long offset, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;

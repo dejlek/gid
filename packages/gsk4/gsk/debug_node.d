@@ -1,6 +1,6 @@
 module gsk.debug_node;
 
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.render_node;
@@ -10,7 +10,7 @@ import gsk.types;
  * A render node that emits a debugging message when drawing its
  * child node.
  */
-class DebugNode : RenderNode
+class DebugNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -30,7 +30,7 @@ class DebugNode : RenderNode
    *   message = The debug message
    * Returns: A new `GskRenderNode`
    */
-  this(RenderNode child, string message)
+  this(gsk.render_node.RenderNode child, string message)
   {
     GskRenderNode* _cretval;
     char* _message = message.toCString(Yes.Alloc);
@@ -42,11 +42,11 @@ class DebugNode : RenderNode
    * Gets the child node that is getting drawn by the given node.
    * Returns: the child `GskRenderNode`
    */
-  RenderNode getChild()
+  gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_debug_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    _cretval = gsk_debug_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -57,8 +57,8 @@ class DebugNode : RenderNode
   string getMessage()
   {
     const(char)* _cretval;
-    _cretval = gsk_debug_node_get_message(cast(GskRenderNode*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    _cretval = gsk_debug_node_get_message(cast(const(GskRenderNode)*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

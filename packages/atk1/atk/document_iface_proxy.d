@@ -5,7 +5,7 @@ import atk.document;
 import atk.document_mixin;
 
 /// Proxy object for Atk.Document interface when a GObject has no applicable D binding
-class DocumentIfaceProxy : IfaceProxy, Document
+class DocumentIfaceProxy : IfaceProxy, atk.document.Document
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class DocumentIfaceProxy : IfaceProxy, Document
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Document);
+    return typeid(atk.document.Document);
   }
 
   mixin DocumentT!();

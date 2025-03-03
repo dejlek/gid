@@ -1,6 +1,6 @@
 module gio.desktop_app_info;
 
-import gid.global;
+import gid.gid;
 import gio.app_info;
 import gio.app_info_mixin;
 import gio.app_launch_context;
@@ -19,7 +19,7 @@ import gobject.object;
  * GIO interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
  * file or the `GioUnix-2.0` GIR namespace when using it.
  */
-class DesktopAppInfo : ObjectG, AppInfo
+class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -71,12 +71,12 @@ class DesktopAppInfo : ObjectG, AppInfo
    *     filename encoding
    * Returns: a new #GDesktopAppInfo or %NULL on error.
    */
-  static DesktopAppInfo newFromFilename(string filename)
+  static gio.desktop_app_info.DesktopAppInfo newFromFilename(string filename)
   {
     GDesktopAppInfo* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = g_desktop_app_info_new_from_filename(_filename);
-    auto _retval = ObjectG.getDObject!DesktopAppInfo(cast(GDesktopAppInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(GDesktopAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -86,11 +86,11 @@ class DesktopAppInfo : ObjectG, AppInfo
    *   keyFile = an opened #GKeyFile
    * Returns: a new #GDesktopAppInfo or %NULL on error.
    */
-  static DesktopAppInfo newFromKeyfile(KeyFile keyFile)
+  static gio.desktop_app_info.DesktopAppInfo newFromKeyfile(glib.key_file.KeyFile keyFile)
   {
     GDesktopAppInfo* _cretval;
     _cretval = g_desktop_app_info_new_from_keyfile(keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!DesktopAppInfo(cast(GDesktopAppInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(GDesktopAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -103,12 +103,12 @@ class DesktopAppInfo : ObjectG, AppInfo
    * Returns: a list of #GDesktopAppInfo
    *   objects.
    */
-  static DesktopAppInfo[] getImplementations(string interface_)
+  static gio.desktop_app_info.DesktopAppInfo[] getImplementations(string interface_)
   {
     GList* _cretval;
     const(char)* _interface_ = interface_.toCString(No.Alloc);
     _cretval = g_desktop_app_info_get_implementations(_interface_);
-    auto _retval = gListToD!(DesktopAppInfo, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gio.desktop_app_info.DesktopAppInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class DesktopAppInfo : ObjectG, AppInfo
     char* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_desktop_app_info_get_action_name(cast(GDesktopAppInfo*)cPtr, _actionName);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class DesktopAppInfo : ObjectG, AppInfo
   {
     const(char)* _cretval;
     _cretval = g_desktop_app_info_get_categories(cast(GDesktopAppInfo*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class DesktopAppInfo : ObjectG, AppInfo
   {
     const(char)* _cretval;
     _cretval = g_desktop_app_info_get_filename(cast(GDesktopAppInfo*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class DesktopAppInfo : ObjectG, AppInfo
   {
     const(char)* _cretval;
     _cretval = g_desktop_app_info_get_generic_name(cast(GDesktopAppInfo*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -254,7 +254,7 @@ class DesktopAppInfo : ObjectG, AppInfo
     char* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_desktop_app_info_get_locale_string(cast(GDesktopAppInfo*)cPtr, _key);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class DesktopAppInfo : ObjectG, AppInfo
   {
     const(char)* _cretval;
     _cretval = g_desktop_app_info_get_startup_wm_class(cast(GDesktopAppInfo*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -323,7 +323,7 @@ class DesktopAppInfo : ObjectG, AppInfo
     char* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_desktop_app_info_get_string(cast(GDesktopAppInfo*)cPtr, _key);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -385,7 +385,7 @@ class DesktopAppInfo : ObjectG, AppInfo
    *     [gio.desktop_app_info.DesktopAppInfo.listActions]
    *   launchContext = a #GAppLaunchContext
    */
-  void launchAction(string actionName, AppLaunchContext launchContext)
+  void launchAction(string actionName, gio.app_launch_context.AppLaunchContext launchContext)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_desktop_app_info_launch_action(cast(GDesktopAppInfo*)cPtr, _actionName, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.Dup) : null);
@@ -414,12 +414,12 @@ class DesktopAppInfo : ObjectG, AppInfo
    *   pidCallback = Callback for child processes
    * Returns: %TRUE on successful launch, %FALSE otherwise.
    */
-  bool launchUrisAsManager(string[] uris, AppLaunchContext launchContext, SpawnFlags spawnFlags, SpawnChildSetupFunc userSetup, DesktopAppLaunchCallback pidCallback)
+  bool launchUrisAsManager(string[] uris, gio.app_launch_context.AppLaunchContext launchContext, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc userSetup, gio.types.DesktopAppLaunchCallback pidCallback)
   {
     extern(C) void _userSetupCallback(void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(SpawnChildSetupFunc*)data;
+      auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
       (*_dlg)();
     }
@@ -427,9 +427,9 @@ class DesktopAppInfo : ObjectG, AppInfo
 
     extern(C) void _pidCallbackCallback(GDesktopAppInfo* appinfo, GPid pid, void* userData)
     {
-      auto _dlg = cast(DesktopAppLaunchCallback*)userData;
+      auto _dlg = cast(gio.types.DesktopAppLaunchCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!DesktopAppInfo(cast(void*)appinfo, No.Take), pid);
+      (*_dlg)(ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.Take), pid);
     }
     auto _pidCallbackCB = pidCallback ? &_pidCallbackCallback : null;
 
@@ -463,12 +463,12 @@ class DesktopAppInfo : ObjectG, AppInfo
    *   stderrFd = file descriptor to use for child's stderr, or -1
    * Returns: %TRUE on successful launch, %FALSE otherwise.
    */
-  bool launchUrisAsManagerWithFds(string[] uris, AppLaunchContext launchContext, SpawnFlags spawnFlags, SpawnChildSetupFunc userSetup, DesktopAppLaunchCallback pidCallback, int stdinFd, int stdoutFd, int stderrFd)
+  bool launchUrisAsManagerWithFds(string[] uris, gio.app_launch_context.AppLaunchContext launchContext, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc userSetup, gio.types.DesktopAppLaunchCallback pidCallback, int stdinFd, int stdoutFd, int stderrFd)
   {
     extern(C) void _userSetupCallback(void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(SpawnChildSetupFunc*)data;
+      auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
       (*_dlg)();
     }
@@ -476,9 +476,9 @@ class DesktopAppInfo : ObjectG, AppInfo
 
     extern(C) void _pidCallbackCallback(GDesktopAppInfo* appinfo, GPid pid, void* userData)
     {
-      auto _dlg = cast(DesktopAppLaunchCallback*)userData;
+      auto _dlg = cast(gio.types.DesktopAppLaunchCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!DesktopAppInfo(cast(void*)appinfo, No.Take), pid);
+      (*_dlg)(ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.Take), pid);
     }
     auto _pidCallbackCB = pidCallback ? &_pidCallbackCallback : null;
 

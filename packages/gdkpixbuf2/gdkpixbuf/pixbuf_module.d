@@ -4,7 +4,7 @@ import gdkpixbuf.c.functions;
 import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf_format;
 import gdkpixbuf.types;
-import gid.global;
+import gid.gid;
 import gmodule.module_;
 
 /**
@@ -87,14 +87,14 @@ class PixbufModule
     (cast(GdkPixbufModule*)cPtr).modulePath = propval.toCString(Yes.Alloc);
   }
 
-  @property Module module_()
+  @property gmodule.module_.Module module_()
   {
-    return new Module(cast(ModuleC*)(cast(GdkPixbufModule*)cPtr).module_);
+    return new gmodule.module_.Module(cast(ModuleC*)(cast(GdkPixbufModule*)cPtr).module_);
   }
 
-  @property PixbufFormat info()
+  @property gdkpixbuf.pixbuf_format.PixbufFormat info()
   {
-    return new PixbufFormat(cast(GdkPixbufFormat*)(cast(GdkPixbufModule*)cPtr).info);
+    return new gdkpixbuf.pixbuf_format.PixbufFormat(cast(GdkPixbufFormat*)(cast(GdkPixbufModule*)cPtr).info);
   }
 
   @property GdkPixbufModuleLoadFunc load()

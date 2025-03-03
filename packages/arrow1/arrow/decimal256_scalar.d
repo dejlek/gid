@@ -6,10 +6,10 @@ import arrow.decimal256;
 import arrow.decimal256_data_type;
 import arrow.scalar;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class Decimal256Scalar : Scalar
+class Decimal256Scalar : arrow.scalar.Scalar
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -28,18 +28,18 @@ class Decimal256Scalar : Scalar
     return getType();
   }
 
-  this(Decimal256DataType dataType, Decimal256 value)
+  this(arrow.decimal256_data_type.Decimal256DataType dataType, arrow.decimal256.Decimal256 value)
   {
     GArrowDecimal256Scalar* _cretval;
     _cretval = garrow_decimal256_scalar_new(dataType ? cast(GArrowDecimal256DataType*)dataType.cPtr(No.Dup) : null, value ? cast(GArrowDecimal256*)value.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
-  Decimal256 getValue()
+  arrow.decimal256.Decimal256 getValue()
   {
     GArrowDecimal256* _cretval;
     _cretval = garrow_decimal256_scalar_get_value(cast(GArrowDecimal256Scalar*)cPtr);
-    auto _retval = ObjectG.getDObject!Decimal256(cast(GArrowDecimal256*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -1,6 +1,6 @@
 module gtk.tree_model_sort;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -98,7 +98,7 @@ import gtk.types;
 
  * Deprecated: Use [gtk.sort_list_model.SortListModel] instead
  */
-class TreeModelSort : ObjectG, TreeDragSource, TreeModel, TreeSortable
+class TreeModelSort : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSource, gtk.tree_model.TreeModel, gtk.tree_sortable.TreeSortable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -127,11 +127,11 @@ class TreeModelSort : ObjectG, TreeDragSource, TreeModel, TreeSortable
    *   childModel = A `GtkTreeModel`
    * Returns: A new `GtkTreeModelSort`.
    */
-  static TreeModelSort newWithModel(TreeModel childModel)
+  static gtk.tree_model_sort.TreeModelSort newWithModel(gtk.tree_model.TreeModel childModel)
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_model_sort_new_with_model(childModel ? cast(GtkTreeModel*)(cast(ObjectG)childModel).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!TreeModelSort(cast(GtkTreeModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_model_sort.TreeModelSort)(cast(GtkTreeModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -158,12 +158,12 @@ class TreeModelSort : ObjectG, TreeDragSource, TreeModel, TreeSortable
    * Returns: %TRUE, if sort_iter was set, i.e. if sort_iter is a
    *   valid iterator pointer to a visible row in the child model.
    */
-  bool convertChildIterToIter(out TreeIter sortIter, TreeIter childIter)
+  bool convertChildIterToIter(out gtk.tree_iter.TreeIter sortIter, gtk.tree_iter.TreeIter childIter)
   {
     bool _retval;
     GtkTreeIter _sortIter;
     _retval = gtk_tree_model_sort_convert_child_iter_to_iter(cast(GtkTreeModelSort*)cPtr, &_sortIter, childIter ? cast(GtkTreeIter*)childIter.cPtr(No.Dup) : null);
-    sortIter = new TreeIter(cast(void*)&_sortIter, No.Take);
+    sortIter = new gtk.tree_iter.TreeIter(cast(void*)&_sortIter, No.Take);
     return _retval;
   }
 
@@ -176,11 +176,11 @@ class TreeModelSort : ObjectG, TreeDragSource, TreeModel, TreeSortable
    *   childPath = A `GtkTreePath` to convert
    * Returns: A newly allocated `GtkTreePath`
    */
-  TreePath convertChildPathToPath(TreePath childPath)
+  gtk.tree_path.TreePath convertChildPathToPath(gtk.tree_path.TreePath childPath)
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_model_sort_convert_child_path_to_path(cast(GtkTreeModelSort*)cPtr, childPath ? cast(GtkTreePath*)childPath.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -190,11 +190,11 @@ class TreeModelSort : ObjectG, TreeDragSource, TreeModel, TreeSortable
    *   childIter = An uninitialized `GtkTreeIter`
    *   sortedIter = A valid `GtkTreeIter` pointing to a row on tree_model_sort.
    */
-  void convertIterToChildIter(out TreeIter childIter, TreeIter sortedIter)
+  void convertIterToChildIter(out gtk.tree_iter.TreeIter childIter, gtk.tree_iter.TreeIter sortedIter)
   {
     GtkTreeIter _childIter;
     gtk_tree_model_sort_convert_iter_to_child_iter(cast(GtkTreeModelSort*)cPtr, &_childIter, sortedIter ? cast(GtkTreeIter*)sortedIter.cPtr(No.Dup) : null);
-    childIter = new TreeIter(cast(void*)&_childIter, No.Take);
+    childIter = new gtk.tree_iter.TreeIter(cast(void*)&_childIter, No.Take);
   }
 
   /**
@@ -207,11 +207,11 @@ class TreeModelSort : ObjectG, TreeDragSource, TreeModel, TreeSortable
    *   sortedPath = A `GtkTreePath` to convert
    * Returns: A newly allocated `GtkTreePath`
    */
-  TreePath convertPathToChildPath(TreePath sortedPath)
+  gtk.tree_path.TreePath convertPathToChildPath(gtk.tree_path.TreePath sortedPath)
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_model_sort_convert_path_to_child_path(cast(GtkTreeModelSort*)cPtr, sortedPath ? cast(GtkTreePath*)sortedPath.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -219,11 +219,11 @@ class TreeModelSort : ObjectG, TreeDragSource, TreeModel, TreeSortable
    * Returns the model the `GtkTreeModelSort` is sorting.
    * Returns: the "child model" being sorted
    */
-  TreeModel getModel()
+  gtk.tree_model.TreeModel getModel()
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_model_sort_get_model(cast(GtkTreeModelSort*)cPtr);
-    auto _retval = ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -235,7 +235,7 @@ class TreeModelSort : ObjectG, TreeDragSource, TreeModel, TreeSortable
    *   iter = A `GtkTreeIter`
    * Returns: %TRUE if the iter is valid, %FALSE if the iter is invalid.
    */
-  bool iterIsValid(TreeIter iter)
+  bool iterIsValid(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
     _retval = gtk_tree_model_sort_iter_is_valid(cast(GtkTreeModelSort*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);

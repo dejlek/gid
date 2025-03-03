@@ -1,8 +1,7 @@
 module gtk.video;
 
-import gid.global;
+import gid.gid;
 import gio.file;
-import gio.file_mixin;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -29,7 +28,7 @@ import gtk.widget;
  * you may want to use the [gdk.paintable.Paintable] API and a media framework
  * such as Gstreamer directly.
  */
-class Video : Widget
+class Video : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -65,11 +64,11 @@ class Video : Widget
    *   file = a `GFile`
    * Returns: a new `GtkVideo`
    */
-  static Video newForFile(File file)
+  static gtk.video.Video newForFile(gio.file.File file)
   {
     GtkWidget* _cretval;
     _cretval = gtk_video_new_for_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Video(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -81,12 +80,12 @@ class Video : Widget
    *   filename = filename to play back
    * Returns: a new `GtkVideo`
    */
-  static Video newForFilename(string filename)
+  static gtk.video.Video newForFilename(string filename)
   {
     GtkWidget* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_video_new_for_filename(_filename);
-    auto _retval = ObjectG.getDObject!Video(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -96,11 +95,11 @@ class Video : Widget
    *   stream = a `GtkMediaStream`
    * Returns: a new `GtkVideo`
    */
-  static Video newForMediaStream(MediaStream stream)
+  static gtk.video.Video newForMediaStream(gtk.media_stream.MediaStream stream)
   {
     GtkWidget* _cretval;
     _cretval = gtk_video_new_for_media_stream(stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Video(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -112,12 +111,12 @@ class Video : Widget
    *   resourcePath = resource path to play back
    * Returns: a new `GtkVideo`
    */
-  static Video newForResource(string resourcePath)
+  static gtk.video.Video newForResource(string resourcePath)
   {
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gtk_video_new_for_resource(_resourcePath);
-    auto _retval = ObjectG.getDObject!Video(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -137,11 +136,11 @@ class Video : Widget
    * a file.
    * Returns: The file played by self
    */
-  File getFile()
+  gio.file.File getFile()
   {
     GFile* _cretval;
     _cretval = gtk_video_get_file(cast(GtkVideo*)cPtr);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -150,11 +149,11 @@ class Video : Widget
    * See [gtk.graphics_offload.GraphicsOffload] for more information on graphics offload.
    * Returns: the graphics offload status
    */
-  GraphicsOffloadEnabled getGraphicsOffload()
+  gtk.types.GraphicsOffloadEnabled getGraphicsOffload()
   {
     GtkGraphicsOffloadEnabled _cretval;
     _cretval = gtk_video_get_graphics_offload(cast(GtkVideo*)cPtr);
-    GraphicsOffloadEnabled _retval = cast(GraphicsOffloadEnabled)_cretval;
+    gtk.types.GraphicsOffloadEnabled _retval = cast(gtk.types.GraphicsOffloadEnabled)_cretval;
     return _retval;
   }
 
@@ -173,11 +172,11 @@ class Video : Widget
    * Gets the media stream managed by self or %NULL if none.
    * Returns: The media stream managed by self
    */
-  MediaStream getMediaStream()
+  gtk.media_stream.MediaStream getMediaStream()
   {
     GtkMediaStream* _cretval;
     _cretval = gtk_video_get_media_stream(cast(GtkVideo*)cPtr);
-    auto _retval = ObjectG.getDObject!MediaStream(cast(GtkMediaStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.media_stream.MediaStream)(cast(GtkMediaStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -197,7 +196,7 @@ class Video : Widget
    * Params:
    *   file = the file to play
    */
-  void setFile(File file)
+  void setFile(gio.file.File file)
   {
     gtk_video_set_file(cast(GtkVideo*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }
@@ -220,7 +219,7 @@ class Video : Widget
    * Params:
    *   enabled = the new graphics offload status
    */
-  void setGraphicsOffload(GraphicsOffloadEnabled enabled)
+  void setGraphicsOffload(gtk.types.GraphicsOffloadEnabled enabled)
   {
     gtk_video_set_graphics_offload(cast(GtkVideo*)cPtr, enabled);
   }
@@ -245,7 +244,7 @@ class Video : Widget
    * Params:
    *   stream = The media stream to play or %NULL to unset
    */
-  void setMediaStream(MediaStream stream)
+  void setMediaStream(gtk.media_stream.MediaStream stream)
   {
     gtk_video_set_media_stream(cast(GtkVideo*)cPtr, stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);
   }

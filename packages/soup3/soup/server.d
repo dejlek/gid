@@ -1,6 +1,6 @@
 module soup.server;
 
-import gid.global;
+import gid.gid;
 import gio.iostream;
 import gio.socket;
 import gio.socket_address;
@@ -90,7 +90,7 @@ import soup.websocket_connection;
  * to $(LPAREN)or start$(RPAREN) the main loop for the current thread-default
  * [glib.main_context.MainContext].
  */
-class Server : ObjectG
+class Server : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -121,7 +121,7 @@ class Server : ObjectG
    *   accepted or any other error occurred $(LPAREN)in which case error will be
    *   set$(RPAREN).
    */
-  bool acceptIostream(IOStream stream, SocketAddress localAddr, SocketAddress remoteAddr)
+  bool acceptIostream(gio.iostream.IOStream stream, gio.socket_address.SocketAddress localAddr, gio.socket_address.SocketAddress remoteAddr)
   {
     bool _retval;
     GError *_err;
@@ -145,7 +145,7 @@ class Server : ObjectG
    * Params:
    *   authDomain = a #SoupAuthDomain
    */
-  void addAuthDomain(AuthDomain authDomain)
+  void addAuthDomain(soup.auth_domain.AuthDomain authDomain)
   {
     soup_server_add_auth_domain(cast(SoupServer*)cPtr, authDomain ? cast(SoupAuthDomain*)authDomain.cPtr(No.Dup) : null);
   }
@@ -178,15 +178,15 @@ class Server : ObjectG
    *   callback = callback to invoke for
    *     requests under path
    */
-  void addEarlyHandler(string path, ServerCallback callback)
+  void addEarlyHandler(string path, soup.types.ServerCallback callback)
   {
     extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, GHashTable* query, void* userData)
     {
-      auto _dlg = cast(ServerCallback*)userData;
+      auto _dlg = cast(soup.types.ServerCallback*)userData;
       string _path = path.fromCString(No.Free);
       auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
 
-      (*_dlg)(ObjectG.getDObject!Server(cast(void*)server, No.Take), ObjectG.getDObject!ServerMessage(cast(void*)msg, No.Take), _path, _query);
+      (*_dlg)(ObjectG.getDObject!(soup.server.Server)(cast(void*)server, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -230,15 +230,15 @@ class Server : ObjectG
    *   callback = callback to invoke for
    *     requests under path
    */
-  void addHandler(string path, ServerCallback callback)
+  void addHandler(string path, soup.types.ServerCallback callback)
   {
     extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, GHashTable* query, void* userData)
     {
-      auto _dlg = cast(ServerCallback*)userData;
+      auto _dlg = cast(soup.types.ServerCallback*)userData;
       string _path = path.fromCString(No.Free);
       auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
 
-      (*_dlg)(ObjectG.getDObject!Server(cast(void*)server, No.Take), ObjectG.getDObject!ServerMessage(cast(void*)msg, No.Take), _path, _query);
+      (*_dlg)(ObjectG.getDObject!(soup.server.Server)(cast(void*)server, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -258,7 +258,7 @@ class Server : ObjectG
    * Params:
    *   extensionType = a #GType
    */
-  void addWebsocketExtension(GType extensionType)
+  void addWebsocketExtension(gobject.types.GType extensionType)
   {
     soup_server_add_websocket_extension(cast(SoupServer*)cPtr, extensionType);
   }
@@ -287,14 +287,14 @@ class Server : ObjectG
    *   callback = callback to invoke for
    *     successful WebSocket requests under path
    */
-  void addWebsocketHandler(string path, string origin, string[] protocols, ServerWebsocketCallback callback)
+  void addWebsocketHandler(string path, string origin, string[] protocols, soup.types.ServerWebsocketCallback callback)
   {
     extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, SoupWebsocketConnection* connection, void* userData)
     {
-      auto _dlg = cast(ServerWebsocketCallback*)userData;
+      auto _dlg = cast(soup.types.ServerWebsocketCallback*)userData;
       string _path = path.fromCString(No.Free);
 
-      (*_dlg)(ObjectG.getDObject!Server(cast(void*)server, No.Take), ObjectG.getDObject!ServerMessage(cast(void*)msg, No.Take), _path, ObjectG.getDObject!WebsocketConnection(cast(void*)connection, No.Take));
+      (*_dlg)(ObjectG.getDObject!(soup.server.Server)(cast(void*)server, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, ObjectG.getDObject!(soup.websocket_connection.WebsocketConnection)(cast(void*)connection, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -331,11 +331,11 @@ class Server : ObjectG
    * Returns: a
    *   list of listening sockets.
    */
-  Socket[] getListeners()
+  gio.socket.Socket[] getListeners()
   {
     GSList* _cretval;
     _cretval = soup_server_get_listeners(cast(SoupServer*)cPtr);
-    auto _retval = gSListToD!(Socket, GidOwnership.Container)(cast(GSList*)_cretval);
+    auto _retval = gSListToD!(gio.socket.Socket, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
 
@@ -343,11 +343,11 @@ class Server : ObjectG
    * Gets the server SSL/TLS client authentication mode.
    * Returns: a #GTlsAuthenticationMode
    */
-  TlsAuthenticationMode getTlsAuthMode()
+  gio.types.TlsAuthenticationMode getTlsAuthMode()
   {
     GTlsAuthenticationMode _cretval;
     _cretval = soup_server_get_tls_auth_mode(cast(SoupServer*)cPtr);
-    TlsAuthenticationMode _retval = cast(TlsAuthenticationMode)_cretval;
+    gio.types.TlsAuthenticationMode _retval = cast(gio.types.TlsAuthenticationMode)_cretval;
     return _retval;
   }
 
@@ -355,11 +355,11 @@ class Server : ObjectG
    * Gets the server SSL/TLS certificate.
    * Returns: a #GTlsCertificate or %NULL
    */
-  TlsCertificate getTlsCertificate()
+  gio.tls_certificate.TlsCertificate getTlsCertificate()
   {
     GTlsCertificate* _cretval;
     _cretval = soup_server_get_tls_certificate(cast(SoupServer*)cPtr);
-    auto _retval = ObjectG.getDObject!TlsCertificate(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -367,11 +367,11 @@ class Server : ObjectG
    * Gets the server SSL/TLS database.
    * Returns: a #GTlsDatabase
    */
-  TlsDatabase getTlsDatabase()
+  gio.tls_database.TlsDatabase getTlsDatabase()
   {
     GTlsDatabase* _cretval;
     _cretval = soup_server_get_tls_database(cast(SoupServer*)cPtr);
-    auto _retval = ObjectG.getDObject!TlsDatabase(cast(GTlsDatabase*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
     return _retval;
   }
 
@@ -386,11 +386,11 @@ class Server : ObjectG
    * Returns: a list of #GUris, which you
    *   must free when you are done with it.
    */
-  Uri[] getUris()
+  glib.uri.Uri[] getUris()
   {
     GSList* _cretval;
     _cretval = soup_server_get_uris(cast(SoupServer*)cPtr);
-    auto _retval = gSListToD!(Uri, GidOwnership.Full)(cast(GSList*)_cretval);
+    auto _retval = gSListToD!(glib.uri.Uri, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
 
@@ -435,7 +435,7 @@ class Server : ObjectG
    *   bound or any other error occurred $(LPAREN)in which case error will be
    *   set$(RPAREN).
    */
-  bool listen(SocketAddress address, ServerListenOptions options)
+  bool listen(gio.socket_address.SocketAddress address, soup.types.ServerListenOptions options)
   {
     bool _retval;
     GError *_err;
@@ -461,7 +461,7 @@ class Server : ObjectG
    * Returns: %TRUE on success, %FALSE if port could not be bound
    *   or any other error occurred $(LPAREN)in which case error will be set$(RPAREN).
    */
-  bool listenAll(uint port, ServerListenOptions options)
+  bool listenAll(uint port, soup.types.ServerListenOptions options)
   {
     bool _retval;
     GError *_err;
@@ -485,7 +485,7 @@ class Server : ObjectG
    * Returns: %TRUE on success, %FALSE if port could not be bound
    *   or any other error occurred $(LPAREN)in which case error will be set$(RPAREN).
    */
-  bool listenLocal(uint port, ServerListenOptions options)
+  bool listenLocal(uint port, soup.types.ServerListenOptions options)
   {
     bool _retval;
     GError *_err;
@@ -504,7 +504,7 @@ class Server : ObjectG
    * Returns: %TRUE on success, %FALSE if an error occurred $(LPAREN)in
    *   which case error will be set$(RPAREN).
    */
-  bool listenSocket(Socket socket, ServerListenOptions options)
+  bool listenSocket(gio.socket.Socket socket, soup.types.ServerListenOptions options)
   {
     bool _retval;
     GError *_err;
@@ -528,7 +528,7 @@ class Server : ObjectG
 
    * Deprecated: Use [soup.server_message.ServerMessage.pause] instead.
    */
-  void pauseMessage(ServerMessage msg)
+  void pauseMessage(soup.server_message.ServerMessage msg)
   {
     soup_server_pause_message(cast(SoupServer*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null);
   }
@@ -538,7 +538,7 @@ class Server : ObjectG
    * Params:
    *   authDomain = a #SoupAuthDomain
    */
-  void removeAuthDomain(AuthDomain authDomain)
+  void removeAuthDomain(soup.auth_domain.AuthDomain authDomain)
   {
     soup_server_remove_auth_domain(cast(SoupServer*)cPtr, authDomain ? cast(SoupAuthDomain*)authDomain.cPtr(No.Dup) : null);
   }
@@ -560,7 +560,7 @@ class Server : ObjectG
    * Params:
    *   extensionType = a #GType
    */
-  void removeWebsocketExtension(GType extensionType)
+  void removeWebsocketExtension(gobject.types.GType extensionType)
   {
     soup_server_remove_websocket_extension(cast(SoupServer*)cPtr, extensionType);
   }
@@ -570,7 +570,7 @@ class Server : ObjectG
    * Params:
    *   mode = a #GTlsAuthenticationMode
    */
-  void setTlsAuthMode(TlsAuthenticationMode mode)
+  void setTlsAuthMode(gio.types.TlsAuthenticationMode mode)
   {
     soup_server_set_tls_auth_mode(cast(SoupServer*)cPtr, mode);
   }
@@ -580,7 +580,7 @@ class Server : ObjectG
    * Params:
    *   certificate = a #GTlsCertificate
    */
-  void setTlsCertificate(TlsCertificate certificate)
+  void setTlsCertificate(gio.tls_certificate.TlsCertificate certificate)
   {
     soup_server_set_tls_certificate(cast(SoupServer*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null);
   }
@@ -590,7 +590,7 @@ class Server : ObjectG
    * Params:
    *   tlsDatabase = a #GTlsDatabase
    */
-  void setTlsDatabase(TlsDatabase tlsDatabase)
+  void setTlsDatabase(gio.tls_database.TlsDatabase tlsDatabase)
   {
     soup_server_set_tls_database(cast(SoupServer*)cPtr, tlsDatabase ? cast(GTlsDatabase*)tlsDatabase.cPtr(No.Dup) : null);
   }
@@ -609,7 +609,7 @@ class Server : ObjectG
 
    * Deprecated: Use [soup.server_message.ServerMessage.unpause] instead.
    */
-  void unpauseMessage(ServerMessage msg)
+  void unpauseMessage(soup.server_message.ServerMessage msg)
   {
     soup_server_unpause_message(cast(SoupServer*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null);
   }
@@ -628,8 +628,8 @@ class Server : ObjectG
    *   message = the message
    *   server = the instance the signal is connected to
    */
-  alias RequestAbortedCallbackDlg = void delegate(ServerMessage message, Server server);
-  alias RequestAbortedCallbackFunc = void function(ServerMessage message, Server server);
+  alias RequestAbortedCallbackDlg = void delegate(soup.server_message.ServerMessage message, soup.server.Server server);
+  alias RequestAbortedCallbackFunc = void function(soup.server_message.ServerMessage message, soup.server.Server server);
 
   /**
    * Connect to RequestAborted signal.
@@ -645,8 +645,8 @@ class Server : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto server = getVal!Server(_paramVals);
-      auto message = getVal!ServerMessage(&_paramVals[1]);
+      auto server = getVal!(soup.server.Server)(_paramVals);
+      auto message = getVal!(soup.server_message.ServerMessage)(&_paramVals[1]);
       _dClosure.dlg(message, server);
     }
 
@@ -661,8 +661,8 @@ class Server : ObjectG
    *   message = the message
    *   server = the instance the signal is connected to
    */
-  alias RequestFinishedCallbackDlg = void delegate(ServerMessage message, Server server);
-  alias RequestFinishedCallbackFunc = void function(ServerMessage message, Server server);
+  alias RequestFinishedCallbackDlg = void delegate(soup.server_message.ServerMessage message, soup.server.Server server);
+  alias RequestFinishedCallbackFunc = void function(soup.server_message.ServerMessage message, soup.server.Server server);
 
   /**
    * Connect to RequestFinished signal.
@@ -678,8 +678,8 @@ class Server : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto server = getVal!Server(_paramVals);
-      auto message = getVal!ServerMessage(&_paramVals[1]);
+      auto server = getVal!(soup.server.Server)(_paramVals);
+      auto message = getVal!(soup.server_message.ServerMessage)(&_paramVals[1]);
       _dClosure.dlg(message, server);
     }
 
@@ -699,8 +699,8 @@ class Server : ObjectG
    *   message = the message
    *   server = the instance the signal is connected to
    */
-  alias RequestReadCallbackDlg = void delegate(ServerMessage message, Server server);
-  alias RequestReadCallbackFunc = void function(ServerMessage message, Server server);
+  alias RequestReadCallbackDlg = void delegate(soup.server_message.ServerMessage message, soup.server.Server server);
+  alias RequestReadCallbackFunc = void function(soup.server_message.ServerMessage message, soup.server.Server server);
 
   /**
    * Connect to RequestRead signal.
@@ -716,8 +716,8 @@ class Server : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto server = getVal!Server(_paramVals);
-      auto message = getVal!ServerMessage(&_paramVals[1]);
+      auto server = getVal!(soup.server.Server)(_paramVals);
+      auto message = getVal!(soup.server_message.ServerMessage)(&_paramVals[1]);
       _dClosure.dlg(message, server);
     }
 
@@ -740,8 +740,8 @@ class Server : ObjectG
    *   message = the new message
    *   server = the instance the signal is connected to
    */
-  alias RequestStartedCallbackDlg = void delegate(ServerMessage message, Server server);
-  alias RequestStartedCallbackFunc = void function(ServerMessage message, Server server);
+  alias RequestStartedCallbackDlg = void delegate(soup.server_message.ServerMessage message, soup.server.Server server);
+  alias RequestStartedCallbackFunc = void function(soup.server_message.ServerMessage message, soup.server.Server server);
 
   /**
    * Connect to RequestStarted signal.
@@ -757,8 +757,8 @@ class Server : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto server = getVal!Server(_paramVals);
-      auto message = getVal!ServerMessage(&_paramVals[1]);
+      auto server = getVal!(soup.server.Server)(_paramVals);
+      auto message = getVal!(soup.server_message.ServerMessage)(&_paramVals[1]);
       _dClosure.dlg(message, server);
     }
 

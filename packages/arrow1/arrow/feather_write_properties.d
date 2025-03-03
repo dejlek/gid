@@ -3,10 +3,10 @@ module arrow.feather_write_properties;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class FeatherWriteProperties : ObjectG
+class FeatherWriteProperties : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

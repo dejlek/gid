@@ -1,10 +1,9 @@
 module secret.prompt;
 
-import gid.global;
+import gid.gid;
 import gio.async_initable;
 import gio.async_initable_mixin;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.dbus_interface;
 import gio.dbus_interface_mixin;
@@ -33,7 +32,7 @@ import secret.types;
  * vfunc@Service.prompt_async and vfunc@Service.prompt_finish virtual
  * methods of the class@Service class.
  */
-class Prompt : DBusProxy
+class Prompt : gio.dbus_proxy.DBusProxy
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -67,20 +66,20 @@ class Prompt : DBusProxy
    *   cancellable = optional cancellation object
    *   callback = called when the operation completes
    */
-  void perform(string windowId, VariantType returnType, Cancellable cancellable, AsyncReadyCallback callback)
+  void perform(string windowId, glib.variant_type.VariantType returnType, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _windowId = windowId.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_prompt_perform(cast(SecretPrompt*)cPtr, _windowId, returnType ? cast(GVariantType*)returnType.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_prompt_perform(cast(SecretPrompt*)cPtr, _windowId, returnType ? cast(const(GVariantType)*)returnType.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -93,14 +92,14 @@ class Prompt : DBusProxy
    * Returns: %NULL if the prompt was dismissed or an error occurred,
    *   a variant result if the prompt was successful
    */
-  VariantG performFinish(AsyncResult result)
+  glib.variant.VariantG performFinish(gio.async_result.AsyncResult result)
   {
     VariantC* _cretval;
     GError *_err;
     _cretval = secret_prompt_perform_finish(cast(SecretPrompt*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -122,15 +121,15 @@ class Prompt : DBusProxy
    *   returnType = the variant type of the prompt result
    * Returns: %NULL if the prompt was dismissed or an error occurred
    */
-  VariantG performSync(string windowId, Cancellable cancellable, VariantType returnType)
+  glib.variant.VariantG performSync(string windowId, gio.cancellable.Cancellable cancellable, glib.variant_type.VariantType returnType)
   {
     VariantC* _cretval;
     const(char)* _windowId = windowId.toCString(No.Alloc);
     GError *_err;
-    _cretval = secret_prompt_perform_sync(cast(SecretPrompt*)cPtr, _windowId, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, returnType ? cast(GVariantType*)returnType.cPtr(No.Dup) : null, &_err);
+    _cretval = secret_prompt_perform_sync(cast(SecretPrompt*)cPtr, _windowId, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, returnType ? cast(const(GVariantType)*)returnType.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -154,15 +153,15 @@ class Prompt : DBusProxy
    *   returnType = the variant type of the prompt result
    * Returns: %NULL if the prompt was dismissed or an error occurred
    */
-  VariantG run(string windowId, Cancellable cancellable, VariantType returnType)
+  glib.variant.VariantG run(string windowId, gio.cancellable.Cancellable cancellable, glib.variant_type.VariantType returnType)
   {
     VariantC* _cretval;
     const(char)* _windowId = windowId.toCString(No.Alloc);
     GError *_err;
-    _cretval = secret_prompt_run(cast(SecretPrompt*)cPtr, _windowId, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, returnType ? cast(GVariantType*)returnType.cPtr(No.Dup) : null, &_err);
+    _cretval = secret_prompt_run(cast(SecretPrompt*)cPtr, _windowId, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, returnType ? cast(const(GVariantType)*)returnType.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

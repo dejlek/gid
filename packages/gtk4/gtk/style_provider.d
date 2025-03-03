@@ -1,7 +1,7 @@
 module gtk.style_provider;
 
 public import gtk.style_provider_iface_proxy;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -25,8 +25,8 @@ interface StyleProvider
     return cast(void function())gtk_style_provider_get_type != &gidSymbolNotFound ? gtk_style_provider_get_type() : cast(GType)0;
   }
 
-  alias GtkPrivateChangedCallbackDlg = void delegate(StyleProvider styleProvider);
-  alias GtkPrivateChangedCallbackFunc = void function(StyleProvider styleProvider);
+  alias GtkPrivateChangedCallbackDlg = void delegate(gtk.style_provider.StyleProvider styleProvider);
+  alias GtkPrivateChangedCallbackFunc = void function(gtk.style_provider.StyleProvider styleProvider);
 
   /**
    * Connect to GtkPrivateChanged signal.

@@ -1,6 +1,6 @@
 module gtk.activate_action;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -10,7 +10,7 @@ import gtk.types;
 /**
  * A `GtkShortcutAction` that calls [gtk.widget.Widget.activate].
  */
-class ActivateAction : ShortcutAction
+class ActivateAction : gtk.shortcut_action.ShortcutAction
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -35,11 +35,11 @@ class ActivateAction : ShortcutAction
    * on the given widget upon activation.
    * Returns: The activate action
    */
-  static ActivateAction get()
+  static gtk.activate_action.ActivateAction get()
   {
     GtkShortcutAction* _cretval;
     _cretval = gtk_activate_action_get();
-    auto _retval = ObjectG.getDObject!ActivateAction(cast(GtkShortcutAction*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.activate_action.ActivateAction)(cast(GtkShortcutAction*)_cretval, No.Take);
     return _retval;
   }
 }

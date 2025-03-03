@@ -1,12 +1,12 @@
 module parquet.double_statistics;
 
-import gid.global;
+import gid.gid;
 import parquet.c.functions;
 import parquet.c.types;
 import parquet.statistics;
 import parquet.types;
 
-class DoubleStatistics : Statistics
+class DoubleStatistics : parquet.statistics.Statistics
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

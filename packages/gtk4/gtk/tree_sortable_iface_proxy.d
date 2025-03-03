@@ -5,7 +5,7 @@ import gtk.tree_sortable;
 import gtk.tree_sortable_mixin;
 
 /// Proxy object for Gtk.TreeSortable interface when a GObject has no applicable D binding
-class TreeSortableIfaceProxy : IfaceProxy, TreeSortable
+class TreeSortableIfaceProxy : IfaceProxy, gtk.tree_sortable.TreeSortable
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class TreeSortableIfaceProxy : IfaceProxy, TreeSortable
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(TreeSortable);
+    return typeid(gtk.tree_sortable.TreeSortable);
   }
 
   mixin TreeSortableT!();

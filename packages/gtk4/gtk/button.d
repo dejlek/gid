@@ -1,6 +1,6 @@
 module gtk.button;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -40,7 +40,7 @@ import gtk.widget;
  * # Accessibility
  * `GtkButton` uses the %GTK_ACCESSIBLE_ROLE_BUTTON role.
  */
-class Button : Widget, Actionable
+class Button : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -82,12 +82,12 @@ class Button : Widget, Actionable
    *   iconName = an icon name
    * Returns: a new `GtkButton` displaying the themed icon
    */
-  static Button newFromIconName(string iconName)
+  static gtk.button.Button newFromIconName(string iconName)
   {
     GtkWidget* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_button_new_from_icon_name(_iconName);
-    auto _retval = ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -97,12 +97,12 @@ class Button : Widget, Actionable
    *   label = The text you want the `GtkLabel` to hold
    * Returns: The newly created `GtkButton` widget
    */
-  static Button newWithLabel(string label)
+  static gtk.button.Button newWithLabel(string label)
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_button_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -118,12 +118,12 @@ class Button : Widget, Actionable
    *     mnemonic character
    * Returns: a new `GtkButton`
    */
-  static Button newWithMnemonic(string label)
+  static gtk.button.Button newWithMnemonic(string label)
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_button_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!Button(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -143,11 +143,11 @@ class Button : Widget, Actionable
    * Gets the child widget of button.
    * Returns: the child widget of button
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_button_get_child(cast(GtkButton*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -173,7 +173,7 @@ class Button : Widget, Actionable
   {
     const(char)* _cretval;
     _cretval = gtk_button_get_icon_name(cast(GtkButton*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class Button : Widget, Actionable
   {
     const(char)* _cretval;
     _cretval = gtk_button_get_label(cast(GtkButton*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class Button : Widget, Actionable
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_button_set_child(cast(GtkButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -290,8 +290,8 @@ class Button : Widget, Actionable
    * <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
    *   button = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(Button button);
-  alias ActivateCallbackFunc = void function(Button button);
+  alias ActivateCallbackDlg = void delegate(gtk.button.Button button);
+  alias ActivateCallbackFunc = void function(gtk.button.Button button);
 
   /**
    * Connect to Activate signal.
@@ -307,7 +307,7 @@ class Button : Widget, Actionable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto button = getVal!Button(_paramVals);
+      auto button = getVal!(gtk.button.Button)(_paramVals);
       _dClosure.dlg(button);
     }
 
@@ -319,8 +319,8 @@ class Button : Widget, Actionable
    * Emitted when the button has been activated $(LPAREN)pressed and released$(RPAREN).
    *   button = the instance the signal is connected to
    */
-  alias ClickedCallbackDlg = void delegate(Button button);
-  alias ClickedCallbackFunc = void function(Button button);
+  alias ClickedCallbackDlg = void delegate(gtk.button.Button button);
+  alias ClickedCallbackFunc = void function(gtk.button.Button button);
 
   /**
    * Connect to Clicked signal.
@@ -336,7 +336,7 @@ class Button : Widget, Actionable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto button = getVal!Button(_paramVals);
+      auto button = getVal!(gtk.button.Button)(_paramVals);
       _dClosure.dlg(button);
     }
 

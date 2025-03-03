@@ -1,6 +1,6 @@
 module gtk.single_selection;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -20,7 +20,7 @@ import gtk.types;
  * stays selected. In particular, this means that changing the sort order of an
  * underlying sort model will preserve the selection.
  */
-class SingleSelection : ObjectG, ListModel, SectionModel, SelectionModel
+class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel, gtk.selection_model.SelectionModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -49,7 +49,7 @@ class SingleSelection : ObjectG, ListModel, SectionModel, SelectionModel
    *   model = the `GListModel` to manage
    * Returns: a new `GtkSingleSelection`
    */
-  this(ListModel model)
+  this(gio.list_model.ListModel model)
   {
     GtkSingleSelection* _cretval;
     _cretval = gtk_single_selection_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
@@ -84,11 +84,11 @@ class SingleSelection : ObjectG, ListModel, SectionModel, SelectionModel
    * Gets the model that self is wrapping.
    * Returns: The model being wrapped
    */
-  ListModel getModel()
+  gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
     _cretval = gtk_single_selection_get_model(cast(GtkSingleSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -109,11 +109,11 @@ class SingleSelection : ObjectG, ListModel, SectionModel, SelectionModel
    * If no item is selected, %NULL is returned.
    * Returns: The selected item
    */
-  ObjectG getSelectedItem()
+  gobject.object.ObjectG getSelectedItem()
   {
     ObjectC* _cretval;
     _cretval = gtk_single_selection_get_selected_item(cast(GtkSingleSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class SingleSelection : ObjectG, ListModel, SectionModel, SelectionModel
    * Params:
    *   model = A `GListModel` to wrap
    */
-  void setModel(ListModel model)
+  void setModel(gio.list_model.ListModel model)
   {
     gtk_single_selection_set_model(cast(GtkSingleSelection*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }

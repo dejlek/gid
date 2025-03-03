@@ -1,6 +1,6 @@
 module gsk.cairo_renderer;
 
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.renderer;
@@ -11,7 +11,7 @@ import gsk.types;
  * Since it is using cairo, this renderer cannot support
  * 3D transformations.
  */
-class CairoRenderer : Renderer
+class CairoRenderer : gsk.renderer.Renderer
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

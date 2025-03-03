@@ -6,7 +6,7 @@ import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.texture;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gio.icon;
 import gio.icon_mixin;
 import gio.loadable_icon;
@@ -16,7 +16,7 @@ import glib.bytes;
 /**
  * A `GdkTexture` representing image data in memory.
  */
-class MemoryTexture : Texture
+class MemoryTexture : gdk.texture.Texture
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -47,7 +47,7 @@ class MemoryTexture : Texture
    *   stride = rowstride for the data
    * Returns: A newly-created `GdkTexture`
    */
-  this(int width, int height, MemoryFormat format, Bytes bytes, size_t stride)
+  this(int width, int height, gdk.types.MemoryFormat format, glib.bytes.Bytes bytes, size_t stride)
   {
     GdkTexture* _cretval;
     _cretval = gdk_memory_texture_new(width, height, format, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, stride);

@@ -4,9 +4,9 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.interval_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class MonthDayNanoIntervalDataType : IntervalDataType
+class MonthDayNanoIntervalDataType : arrow.interval_data_type.IntervalDataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

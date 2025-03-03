@@ -1,6 +1,6 @@
 module glib.hmac;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -20,7 +20,7 @@ import gobject.boxed;
  * To create a new `GHmac`, use [glib.hmac.Hmac.new_]. To free a `GHmac`, use
  * [glib.hmac.Hmac.unref].
  */
-class Hmac : Boxed
+class Hmac : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -65,7 +65,7 @@ class Hmac : Boxed
    * Returns: the newly created #GHmac, or %NULL.
    *   Use [glib.hmac.Hmac.unref] to free the memory allocated by it.
    */
-  this(ChecksumType digestType, ubyte[] key)
+  this(glib.types.ChecksumType digestType, ubyte[] key)
   {
     GHmac* _cretval;
     size_t _keyLen;
@@ -84,11 +84,11 @@ class Hmac : Boxed
    * Returns: the copy of the passed #GHmac. Use [glib.hmac.Hmac.unref]
    *   when finished using it.
    */
-  Hmac copy()
+  glib.hmac.Hmac copy()
   {
     GHmac* _cretval;
-    _cretval = g_hmac_copy(cast(GHmac*)cPtr);
-    auto _retval = _cretval ? new Hmac(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = g_hmac_copy(cast(const(GHmac)*)cPtr);
+    auto _retval = _cretval ? new glib.hmac.Hmac(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class Hmac : Boxed
   {
     const(char)* _cretval;
     _cretval = g_hmac_get_string(cast(GHmac*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

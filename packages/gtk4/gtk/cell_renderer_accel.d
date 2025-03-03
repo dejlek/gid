@@ -1,7 +1,7 @@
 module gtk.cell_renderer_accel;
 
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -18,7 +18,7 @@ import gtk.types;
  *   provide their own implementation according to platform design
  *   guidelines
  */
-class CellRendererAccel : CellRendererText
+class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,8 +54,8 @@ class CellRendererAccel : CellRendererText
    *   pathString = the path identifying the row of the edited cell
    *   cellRendererAccel = the instance the signal is connected to
    */
-  alias AccelClearedCallbackDlg = void delegate(string pathString, CellRendererAccel cellRendererAccel);
-  alias AccelClearedCallbackFunc = void function(string pathString, CellRendererAccel cellRendererAccel);
+  alias AccelClearedCallbackDlg = void delegate(string pathString, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel);
+  alias AccelClearedCallbackFunc = void function(string pathString, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel);
 
   /**
    * Connect to AccelCleared signal.
@@ -71,8 +71,8 @@ class CellRendererAccel : CellRendererText
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto cellRendererAccel = getVal!CellRendererAccel(_paramVals);
-      auto pathString = getVal!string(&_paramVals[1]);
+      auto cellRendererAccel = getVal!(gtk.cell_renderer_accel.CellRendererAccel)(_paramVals);
+      auto pathString = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(pathString, cellRendererAccel);
     }
 
@@ -89,8 +89,8 @@ class CellRendererAccel : CellRendererText
    *   hardwareKeycode = the keycode of the new accelerator
    *   cellRendererAccel = the instance the signal is connected to
    */
-  alias AccelEditedCallbackDlg = void delegate(string pathString, uint accelKey, ModifierType accelMods, uint hardwareKeycode, CellRendererAccel cellRendererAccel);
-  alias AccelEditedCallbackFunc = void function(string pathString, uint accelKey, ModifierType accelMods, uint hardwareKeycode, CellRendererAccel cellRendererAccel);
+  alias AccelEditedCallbackDlg = void delegate(string pathString, uint accelKey, gdk.types.ModifierType accelMods, uint hardwareKeycode, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel);
+  alias AccelEditedCallbackFunc = void function(string pathString, uint accelKey, gdk.types.ModifierType accelMods, uint hardwareKeycode, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel);
 
   /**
    * Connect to AccelEdited signal.
@@ -106,11 +106,11 @@ class CellRendererAccel : CellRendererText
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto cellRendererAccel = getVal!CellRendererAccel(_paramVals);
-      auto pathString = getVal!string(&_paramVals[1]);
-      auto accelKey = getVal!uint(&_paramVals[2]);
-      auto accelMods = getVal!ModifierType(&_paramVals[3]);
-      auto hardwareKeycode = getVal!uint(&_paramVals[4]);
+      auto cellRendererAccel = getVal!(gtk.cell_renderer_accel.CellRendererAccel)(_paramVals);
+      auto pathString = getVal!(string)(&_paramVals[1]);
+      auto accelKey = getVal!(uint)(&_paramVals[2]);
+      auto accelMods = getVal!(gdk.types.ModifierType)(&_paramVals[3]);
+      auto hardwareKeycode = getVal!(uint)(&_paramVals[4]);
       _dClosure.dlg(pathString, accelKey, accelMods, hardwareKeycode, cellRendererAccel);
     }
 

@@ -5,7 +5,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.hyperlink;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
@@ -29,5 +29,5 @@ interface HyperlinkImpl
    * Returns: an AtkHyperlink object which points to this
    *   implementing AtkObject.
    */
-  Hyperlink getHyperlink();
+  atk.hyperlink.Hyperlink getHyperlink();
 }

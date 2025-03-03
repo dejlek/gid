@@ -1,6 +1,6 @@
 module gtk.tree_list_model;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
 import gobject.object;
@@ -12,7 +12,7 @@ import gtk.types;
 /**
  * `GtkTreeListModel` is a list model that can create child models on demand.
  */
-class TreeListModel : ObjectG, ListModel
+class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -44,14 +44,14 @@ class TreeListModel : ObjectG, ListModel
    *     of an item
    * Returns: a newly created `GtkTreeListModel`.
    */
-  this(ListModel root, bool passthrough, bool autoexpand, TreeListModelCreateModelFunc createFunc)
+  this(gio.list_model.ListModel root, bool passthrough, bool autoexpand, gtk.types.TreeListModelCreateModelFunc createFunc)
   {
     extern(C) GListModel* _createFuncCallback(ObjectC* item, void* userData)
     {
-      ListModel _dretval;
-      auto _dlg = cast(TreeListModelCreateModelFunc*)userData;
+      gio.list_model.ListModel _dretval;
+      auto _dlg = cast(gtk.types.TreeListModelCreateModelFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)item, No.Take));
+      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.Take));
       GListModel* _retval = cast(GListModel*)(cast(ObjectG)_dretval).cPtr(Yes.Dup);
 
       return _retval;
@@ -89,11 +89,11 @@ class TreeListModel : ObjectG, ListModel
    *   position = position of the child to get
    * Returns: the child in position
    */
-  TreeListRow getChildRow(uint position)
+  gtk.tree_list_row.TreeListRow getChildRow(uint position)
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_list_model_get_child_row(cast(GtkTreeListModel*)cPtr, position);
-    auto _retval = ObjectG.getDObject!TreeListRow(cast(GtkTreeListRow*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -101,11 +101,11 @@ class TreeListModel : ObjectG, ListModel
    * Gets the root model that self was created with.
    * Returns: the root model
    */
-  ListModel getModel()
+  gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
     _cretval = gtk_tree_list_model_get_model(cast(GtkTreeListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,11 +144,11 @@ class TreeListModel : ObjectG, ListModel
    *   position = the position of the row to fetch
    * Returns: The row item
    */
-  TreeListRow getRow(uint position)
+  gtk.tree_list_row.TreeListRow getRow(uint position)
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_list_model_get_row(cast(GtkTreeListModel*)cPtr, position);
-    auto _retval = ObjectG.getDObject!TreeListRow(cast(GtkTreeListRow*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
     return _retval;
   }
 

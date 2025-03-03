@@ -1,7 +1,7 @@
 module gsk.texture_node;
 
 import gdk.texture;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import graphene.rect;
 import gsk.c.functions;
@@ -12,7 +12,7 @@ import gsk.types;
 /**
  * A render node for a `GdkTexture`.
  */
-class TextureNode : RenderNode
+class TextureNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -34,10 +34,10 @@ class TextureNode : RenderNode
    *   bounds = the rectangle to render the texture into
    * Returns: A new `GskRenderNode`
    */
-  this(Texture texture, Rect bounds)
+  this(gdk.texture.Texture texture, graphene.rect.Rect bounds)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_texture_node_new(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null, bounds ? cast(graphene_rect_t*)bounds.cPtr(No.Dup) : null);
+    _cretval = gsk_texture_node_new(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -45,11 +45,11 @@ class TextureNode : RenderNode
    * Retrieves the `GdkTexture` used when creating this `GskRenderNode`.
    * Returns: the `GdkTexture`
    */
-  Texture getTexture()
+  gdk.texture.Texture getTexture()
   {
     GdkTexture* _cretval;
-    _cretval = gsk_texture_node_get_texture(cast(GskRenderNode*)cPtr);
-    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, No.Take);
+    _cretval = gsk_texture_node_get_texture(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 }

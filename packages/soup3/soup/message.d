@@ -1,12 +1,11 @@
 module soup.message;
 
-import gid.global;
+import gid.gid;
 import gio.input_stream;
 import gio.iostream;
 import gio.socket_address;
 import gio.tls_certificate;
 import gio.tls_client_connection;
-import gio.tls_client_connection_mixin;
 import gio.tls_password;
 import gio.types;
 import glib.bytes;
@@ -42,7 +41,7 @@ import soup.types;
  * Response. In libsoup, a #SoupMessage combines both the request and the
  * response.
  */
-class Message : ObjectG
+class Message : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -93,14 +92,14 @@ class Message : ObjectG
    * Returns: the new #SoupMessage, or %NULL if
    *   uri_string could not be parsed or method is not "GET, "POST" or "PUT"
    */
-  static Message newFromEncodedForm(string method, string uriString, string encodedForm)
+  static soup.message.Message newFromEncodedForm(string method, string uriString, string encodedForm)
   {
     SoupMessage* _cretval;
     const(char)* _method = method.toCString(No.Alloc);
     const(char)* _uriString = uriString.toCString(No.Alloc);
     char* _encodedForm = encodedForm.toCString(Yes.Alloc);
     _cretval = soup_message_new_from_encoded_form(_method, _uriString, _encodedForm);
-    auto _retval = ObjectG.getDObject!Message(cast(SoupMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -113,12 +112,12 @@ class Message : ObjectG
    * Returns: the new #SoupMessage, or %NULL if uri_string
    *   could not be parsed
    */
-  static Message newFromMultipart(string uriString, Multipart multipart)
+  static soup.message.Message newFromMultipart(string uriString, soup.multipart.Multipart multipart)
   {
     SoupMessage* _cretval;
     const(char)* _uriString = uriString.toCString(No.Alloc);
     _cretval = soup_message_new_from_multipart(_uriString, multipart ? cast(SoupMultipart*)multipart.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Message(cast(SoupMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -129,12 +128,12 @@ class Message : ObjectG
    *   uri = the destination endpoint
    * Returns: the new #SoupMessage
    */
-  static Message newFromUri(string method, Uri uri)
+  static soup.message.Message newFromUri(string method, glib.uri.Uri uri)
   {
     SoupMessage* _cretval;
     const(char)* _method = method.toCString(No.Alloc);
     _cretval = soup_message_new_from_uri(_method, uri ? cast(GUri*)uri.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Message(cast(SoupMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -145,11 +144,11 @@ class Message : ObjectG
    *   baseUri = the destination endpoint
    * Returns: the new #SoupMessage
    */
-  static Message newOptionsPing(Uri baseUri)
+  static soup.message.Message newOptionsPing(glib.uri.Uri baseUri)
   {
     SoupMessage* _cretval;
     _cretval = soup_message_new_options_ping(baseUri ? cast(GUri*)baseUri.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Message(cast(SoupMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -158,7 +157,7 @@ class Message : ObjectG
    * Params:
    *   flags = a set of #SoupMessageFlags values
    */
-  void addFlags(MessageFlags flags)
+  void addFlags(soup.types.MessageFlags flags)
   {
     soup_message_add_flags(cast(SoupMessage*)cPtr, flags);
   }
@@ -176,7 +175,7 @@ class Message : ObjectG
    * Params:
    *   featureType = the #GType of a #SoupSessionFeature
    */
-  void disableFeature(GType featureType)
+  void disableFeature(gobject.types.GType featureType)
   {
     soup_message_disable_feature(cast(SoupMessage*)cPtr, featureType);
   }
@@ -198,11 +197,11 @@ class Message : ObjectG
    * Gets msg's first-party [glib.uri.Uri].
    * Returns: the msg's first party #GUri
    */
-  Uri getFirstParty()
+  glib.uri.Uri getFirstParty()
   {
     GUri* _cretval;
     _cretval = soup_message_get_first_party(cast(SoupMessage*)cPtr);
-    auto _retval = _cretval ? new Uri(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -210,11 +209,11 @@ class Message : ObjectG
    * Gets the flags on msg.
    * Returns: the flags
    */
-  MessageFlags getFlags()
+  soup.types.MessageFlags getFlags()
   {
     SoupMessageFlags _cretval;
     _cretval = soup_message_get_flags(cast(SoupMessage*)cPtr);
-    MessageFlags _retval = cast(MessageFlags)_cretval;
+    soup.types.MessageFlags _retval = cast(soup.types.MessageFlags)_cretval;
     return _retval;
   }
 
@@ -235,11 +234,11 @@ class Message : ObjectG
    * response.
    * Returns: the HTTP version
    */
-  HTTPVersion getHttpVersion()
+  soup.types.HTTPVersion getHttpVersion()
   {
     SoupHTTPVersion _cretval;
     _cretval = soup_message_get_http_version(cast(SoupMessage*)cPtr);
-    HTTPVersion _retval = cast(HTTPVersion)_cretval;
+    soup.types.HTTPVersion _retval = cast(soup.types.HTTPVersion)_cretval;
     return _retval;
   }
 
@@ -274,7 +273,7 @@ class Message : ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_message_get_method(cast(SoupMessage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -284,11 +283,11 @@ class Message : ObjectG
    * return %NULL.
    * Returns: a #SoupMessageMetrics
    */
-  MessageMetrics getMetrics()
+  soup.message_metrics.MessageMetrics getMetrics()
   {
     SoupMessageMetrics* _cretval;
     _cretval = soup_message_get_metrics(cast(SoupMessage*)cPtr);
-    auto _retval = _cretval ? new MessageMetrics(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new soup.message_metrics.MessageMetrics(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -297,11 +296,11 @@ class Message : ObjectG
    * If not set this value defaults to #SOUP_MESSAGE_PRIORITY_NORMAL.
    * Returns: the priority of the message.
    */
-  MessagePriority getPriority()
+  soup.types.MessagePriority getPriority()
   {
     SoupMessagePriority _cretval;
     _cretval = soup_message_get_priority(cast(SoupMessage*)cPtr);
-    MessagePriority _retval = cast(MessagePriority)_cretval;
+    soup.types.MessagePriority _retval = cast(soup.types.MessagePriority)_cretval;
     return _retval;
   }
 
@@ -313,7 +312,7 @@ class Message : ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_message_get_reason_phrase(cast(SoupMessage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -328,11 +327,11 @@ class Message : ObjectG
    * Returns: a #GSocketAddress or %NULL if the connection
    *   hasn't been established
    */
-  SocketAddress getRemoteAddress()
+  gio.socket_address.SocketAddress getRemoteAddress()
   {
     GSocketAddress* _cretval;
     _cretval = soup_message_get_remote_address(cast(SoupMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!SocketAddress(cast(GSocketAddress*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
     return _retval;
   }
 
@@ -340,11 +339,11 @@ class Message : ObjectG
    * Returns the headers sent with the request.
    * Returns: The #SoupMessageHeaders
    */
-  MessageHeaders getRequestHeaders()
+  soup.message_headers.MessageHeaders getRequestHeaders()
   {
     SoupMessageHeaders* _cretval;
     _cretval = soup_message_get_request_headers(cast(SoupMessage*)cPtr);
-    auto _retval = _cretval ? new MessageHeaders(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new soup.message_headers.MessageHeaders(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -352,11 +351,11 @@ class Message : ObjectG
    * Returns the headers recieved with the response.
    * Returns: The #SoupMessageHeaders
    */
-  MessageHeaders getResponseHeaders()
+  soup.message_headers.MessageHeaders getResponseHeaders()
   {
     SoupMessageHeaders* _cretval;
     _cretval = soup_message_get_response_headers(cast(SoupMessage*)cPtr);
-    auto _retval = _cretval ? new MessageHeaders(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new soup.message_headers.MessageHeaders(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -364,11 +363,11 @@ class Message : ObjectG
    * Gets msg's site for cookies #GUri.
    * Returns: the msg's site for cookies #GUri
    */
-  Uri getSiteForCookies()
+  glib.uri.Uri getSiteForCookies()
   {
     GUri* _cretval;
     _cretval = soup_message_get_site_for_cookies(cast(SoupMessage*)cPtr);
-    auto _retval = _cretval ? new Uri(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -376,11 +375,11 @@ class Message : ObjectG
    * Returns the set status of this message.
    * Returns: The #SoupStatus
    */
-  Status getStatus()
+  soup.types.Status getStatus()
   {
     SoupStatus _cretval;
     _cretval = soup_message_get_status(cast(SoupMessage*)cPtr);
-    Status _retval = cast(Status)_cretval;
+    soup.types.Status _retval = cast(soup.types.Status)_cretval;
     return _retval;
   }
 
@@ -393,7 +392,7 @@ class Message : ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_message_get_tls_ciphersuite_name(cast(SoupMessage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -404,11 +403,11 @@ class Message : ObjectG
    * Returns: msg's TLS peer certificate,
    *   or %NULL if msg's connection is not SSL.
    */
-  TlsCertificate getTlsPeerCertificate()
+  gio.tls_certificate.TlsCertificate getTlsPeerCertificate()
   {
     GTlsCertificate* _cretval;
     _cretval = soup_message_get_tls_peer_certificate(cast(SoupMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!TlsCertificate(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -418,11 +417,11 @@ class Message : ObjectG
    * signalMessage::accept-certificate signal.
    * Returns: a #GTlsCertificateFlags with msg's TLS peer certificate errors.
    */
-  TlsCertificateFlags getTlsPeerCertificateErrors()
+  gio.types.TlsCertificateFlags getTlsPeerCertificateErrors()
   {
     GTlsCertificateFlags _cretval;
     _cretval = soup_message_get_tls_peer_certificate_errors(cast(SoupMessage*)cPtr);
-    TlsCertificateFlags _retval = cast(TlsCertificateFlags)_cretval;
+    gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
   }
 
@@ -431,11 +430,11 @@ class Message : ObjectG
    * If the message connection is not SSL, %G_TLS_PROTOCOL_VERSION_UNKNOWN is returned.
    * Returns: a #GTlsProtocolVersion
    */
-  TlsProtocolVersion getTlsProtocolVersion()
+  gio.types.TlsProtocolVersion getTlsProtocolVersion()
   {
     GTlsProtocolVersion _cretval;
     _cretval = soup_message_get_tls_protocol_version(cast(SoupMessage*)cPtr);
-    TlsProtocolVersion _retval = cast(TlsProtocolVersion)_cretval;
+    gio.types.TlsProtocolVersion _retval = cast(gio.types.TlsProtocolVersion)_cretval;
     return _retval;
   }
 
@@ -443,11 +442,11 @@ class Message : ObjectG
    * Gets msg's URI.
    * Returns: the URI msg is targeted for.
    */
-  Uri getUri()
+  glib.uri.Uri getUri()
   {
     GUri* _cretval;
     _cretval = soup_message_get_uri(cast(SoupMessage*)cPtr);
-    auto _retval = _cretval ? new Uri(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -459,7 +458,7 @@ class Message : ObjectG
    *   featureType = the #GType of a #SoupSessionFeature
    * Returns: %TRUE if feature is disabled, or %FALSE otherwise.
    */
-  bool isFeatureDisabled(GType featureType)
+  bool isFeatureDisabled(gobject.types.GType featureType)
   {
     bool _retval;
     _retval = soup_message_is_feature_disabled(cast(SoupMessage*)cPtr, featureType);
@@ -485,7 +484,7 @@ class Message : ObjectG
    *   flags = a set of #SoupMessageFlags values
    * Returns: %TRUE if flags are enabled in msg
    */
-  bool queryFlags(MessageFlags flags)
+  bool queryFlags(soup.types.MessageFlags flags)
   {
     bool _retval;
     _retval = soup_message_query_flags(cast(SoupMessage*)cPtr, flags);
@@ -497,7 +496,7 @@ class Message : ObjectG
    * Params:
    *   flags = a set of #SoupMessageFlags values
    */
-  void removeFlags(MessageFlags flags)
+  void removeFlags(soup.types.MessageFlags flags)
   {
     soup_message_remove_flags(cast(SoupMessage*)cPtr, flags);
   }
@@ -509,7 +508,7 @@ class Message : ObjectG
    * Params:
    *   firstParty = the #GUri for the msg's first party
    */
-  void setFirstParty(Uri firstParty)
+  void setFirstParty(glib.uri.Uri firstParty)
   {
     soup_message_set_first_party(cast(SoupMessage*)cPtr, firstParty ? cast(GUri*)firstParty.cPtr(No.Dup) : null);
   }
@@ -519,7 +518,7 @@ class Message : ObjectG
    * Params:
    *   flags = a set of #SoupMessageFlags values
    */
-  void setFlags(MessageFlags flags)
+  void setFlags(soup.types.MessageFlags flags)
   {
     soup_message_set_flags(cast(SoupMessage*)cPtr, flags);
   }
@@ -584,7 +583,7 @@ class Message : ObjectG
    * Params:
    *   priority = the #SoupMessagePriority
    */
-  void setPriority(MessagePriority priority)
+  void setPriority(soup.types.MessagePriority priority)
   {
     soup_message_set_priority(cast(SoupMessage*)cPtr, priority);
   }
@@ -600,7 +599,7 @@ class Message : ObjectG
    *   stream = a #GInputStream to read the request body from
    *   contentLength = the byte length of stream or -1 if unknown
    */
-  void setRequestBody(string contentType, InputStream stream, ptrdiff_t contentLength)
+  void setRequestBody(string contentType, gio.input_stream.InputStream stream, ptrdiff_t contentLength)
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
     soup_message_set_request_body(cast(SoupMessage*)cPtr, _contentType, stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, contentLength);
@@ -616,7 +615,7 @@ class Message : ObjectG
    *   contentType = MIME Content-Type of the body, or %NULL if unknown
    *   bytes = a #GBytes with the request body data
    */
-  void setRequestBodyFromBytes(string contentType, Bytes bytes)
+  void setRequestBodyFromBytes(string contentType, glib.bytes.Bytes bytes)
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
     soup_message_set_request_body_from_bytes(cast(SoupMessage*)cPtr, _contentType, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
@@ -633,7 +632,7 @@ class Message : ObjectG
    * Params:
    *   siteForCookies = the #GUri for the msg's site for cookies
    */
-  void setSiteForCookies(Uri siteForCookies)
+  void setSiteForCookies(glib.uri.Uri siteForCookies)
   {
     soup_message_set_site_for_cookies(cast(SoupMessage*)cPtr, siteForCookies ? cast(GUri*)siteForCookies.cPtr(No.Dup) : null);
   }
@@ -649,7 +648,7 @@ class Message : ObjectG
    * Params:
    *   certificate = the #GTlsCertificate to set, or %NULL
    */
-  void setTlsClientCertificate(TlsCertificate certificate)
+  void setTlsClientCertificate(gio.tls_certificate.TlsCertificate certificate)
   {
     soup_message_set_tls_client_certificate(cast(SoupMessage*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null);
   }
@@ -661,7 +660,7 @@ class Message : ObjectG
    * Params:
    *   uri = the new #GUri
    */
-  void setUri(Uri uri)
+  void setUri(glib.uri.Uri uri)
   {
     soup_message_set_uri(cast(SoupMessage*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null);
   }
@@ -690,8 +689,8 @@ class Message : ObjectG
    *   handlers from being invoked, or %FALSE to propagate the
    *   event further.
    */
-  alias AcceptCertificateCallbackDlg = bool delegate(TlsCertificate tlsPeerCertificate, TlsCertificateFlags tlsPeerErrors, Message message);
-  alias AcceptCertificateCallbackFunc = bool function(TlsCertificate tlsPeerCertificate, TlsCertificateFlags tlsPeerErrors, Message message);
+  alias AcceptCertificateCallbackDlg = bool delegate(gio.tls_certificate.TlsCertificate tlsPeerCertificate, gio.types.TlsCertificateFlags tlsPeerErrors, soup.message.Message message);
+  alias AcceptCertificateCallbackFunc = bool function(gio.tls_certificate.TlsCertificate tlsPeerCertificate, gio.types.TlsCertificateFlags tlsPeerErrors, soup.message.Message message);
 
   /**
    * Connect to AcceptCertificate signal.
@@ -708,9 +707,9 @@ class Message : ObjectG
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto message = getVal!Message(_paramVals);
-      auto tlsPeerCertificate = getVal!TlsCertificate(&_paramVals[1]);
-      auto tlsPeerErrors = getVal!TlsCertificateFlags(&_paramVals[2]);
+      auto message = getVal!(soup.message.Message)(_paramVals);
+      auto tlsPeerCertificate = getVal!(gio.tls_certificate.TlsCertificate)(&_paramVals[1]);
+      auto tlsPeerErrors = getVal!(gio.types.TlsCertificateFlags)(&_paramVals[2]);
       _retval = _dClosure.dlg(tlsPeerCertificate, tlsPeerErrors, message);
       setVal!bool(_returnValue, _retval);
     }
@@ -738,8 +737,8 @@ class Message : ObjectG
    * Returns: %TRUE to stop other handlers from being invoked
    *   or %FALSE to propagate the event further.
    */
-  alias AuthenticateCallbackDlg = bool delegate(Auth auth, bool retrying, Message message);
-  alias AuthenticateCallbackFunc = bool function(Auth auth, bool retrying, Message message);
+  alias AuthenticateCallbackDlg = bool delegate(soup.auth.Auth auth, bool retrying, soup.message.Message message);
+  alias AuthenticateCallbackFunc = bool function(soup.auth.Auth auth, bool retrying, soup.message.Message message);
 
   /**
    * Connect to Authenticate signal.
@@ -756,9 +755,9 @@ class Message : ObjectG
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto message = getVal!Message(_paramVals);
-      auto auth = getVal!Auth(&_paramVals[1]);
-      auto retrying = getVal!bool(&_paramVals[2]);
+      auto message = getVal!(soup.message.Message)(_paramVals);
+      auto auth = getVal!(soup.auth.Auth)(&_paramVals[1]);
+      auto retrying = getVal!(bool)(&_paramVals[2]);
       _retval = _dClosure.dlg(auth, retrying, message);
       setVal!bool(_returnValue, _retval);
     }
@@ -772,8 +771,8 @@ class Message : ObjectG
    * $(LPAREN)After signalMessage::got_body$(RPAREN).
    *   message = the instance the signal is connected to
    */
-  alias FinishedCallbackDlg = void delegate(Message message);
-  alias FinishedCallbackFunc = void function(Message message);
+  alias FinishedCallbackDlg = void delegate(soup.message.Message message);
+  alias FinishedCallbackFunc = void function(soup.message.Message message);
 
   /**
    * Connect to Finished signal.
@@ -789,7 +788,7 @@ class Message : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto message = getVal!Message(_paramVals);
+      auto message = getVal!(soup.message.Message)(_paramVals);
       _dClosure.dlg(message);
     }
 
@@ -801,8 +800,8 @@ class Message : ObjectG
    * Emitted after receiving the complete message response body.
    *   message = the instance the signal is connected to
    */
-  alias GotBodyCallbackDlg = void delegate(Message message);
-  alias GotBodyCallbackFunc = void function(Message message);
+  alias GotBodyCallbackDlg = void delegate(soup.message.Message message);
+  alias GotBodyCallbackFunc = void function(soup.message.Message message);
 
   /**
    * Connect to GotBody signal.
@@ -818,7 +817,7 @@ class Message : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto message = getVal!Message(_paramVals);
+      auto message = getVal!(soup.message.Message)(_paramVals);
       _dClosure.dlg(message);
     }
 
@@ -833,8 +832,8 @@ class Message : ObjectG
    *   chunkSize = the number of bytes read
    *   message = the instance the signal is connected to
    */
-  alias GotBodyDataCallbackDlg = void delegate(uint chunkSize, Message message);
-  alias GotBodyDataCallbackFunc = void function(uint chunkSize, Message message);
+  alias GotBodyDataCallbackDlg = void delegate(uint chunkSize, soup.message.Message message);
+  alias GotBodyDataCallbackFunc = void function(uint chunkSize, soup.message.Message message);
 
   /**
    * Connect to GotBodyData signal.
@@ -850,8 +849,8 @@ class Message : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto message = getVal!Message(_paramVals);
-      auto chunkSize = getVal!uint(&_paramVals[1]);
+      auto message = getVal!(soup.message.Message)(_paramVals);
+      auto chunkSize = getVal!(uint)(&_paramVals[1]);
       _dClosure.dlg(chunkSize, message);
     }
 
@@ -874,8 +873,8 @@ class Message : ObjectG
    * existing HTTP connection can be reused.$(RPAREN)
    *   message = the instance the signal is connected to
    */
-  alias GotHeadersCallbackDlg = void delegate(Message message);
-  alias GotHeadersCallbackFunc = void function(Message message);
+  alias GotHeadersCallbackDlg = void delegate(soup.message.Message message);
+  alias GotHeadersCallbackFunc = void function(soup.message.Message message);
 
   /**
    * Connect to GotHeaders signal.
@@ -891,7 +890,7 @@ class Message : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto message = getVal!Message(_paramVals);
+      auto message = getVal!(soup.message.Message)(_paramVals);
       _dClosure.dlg(message);
     }
 
@@ -910,8 +909,8 @@ class Message : ObjectG
    * emission finished, and msg's connection will be closed.
    *   message = the instance the signal is connected to
    */
-  alias GotInformationalCallbackDlg = void delegate(Message message);
-  alias GotInformationalCallbackFunc = void function(Message message);
+  alias GotInformationalCallbackDlg = void delegate(soup.message.Message message);
+  alias GotInformationalCallbackFunc = void function(soup.message.Message message);
 
   /**
    * Connect to GotInformational signal.
@@ -927,7 +926,7 @@ class Message : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto message = getVal!Message(_paramVals);
+      auto message = getVal!(soup.message.Message)(_paramVals);
       _dClosure.dlg(message);
     }
 
@@ -941,8 +940,8 @@ class Message : ObjectG
    * a HSTS policy.
    *   message = the instance the signal is connected to
    */
-  alias HstsEnforcedCallbackDlg = void delegate(Message message);
-  alias HstsEnforcedCallbackFunc = void function(Message message);
+  alias HstsEnforcedCallbackDlg = void delegate(soup.message.Message message);
+  alias HstsEnforcedCallbackFunc = void function(soup.message.Message message);
 
   /**
    * Connect to HstsEnforced signal.
@@ -958,7 +957,7 @@ class Message : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto message = getVal!Message(_paramVals);
+      auto message = getVal!(soup.message.Message)(_paramVals);
       _dClosure.dlg(message);
     }
 
@@ -982,8 +981,8 @@ class Message : ObjectG
    *   connection = the current state of the network connection
    *   message = the instance the signal is connected to
    */
-  alias NetworkEventCallbackDlg = void delegate(SocketClientEvent event, IOStream connection, Message message);
-  alias NetworkEventCallbackFunc = void function(SocketClientEvent event, IOStream connection, Message message);
+  alias NetworkEventCallbackDlg = void delegate(gio.types.SocketClientEvent event, gio.iostream.IOStream connection, soup.message.Message message);
+  alias NetworkEventCallbackFunc = void function(gio.types.SocketClientEvent event, gio.iostream.IOStream connection, soup.message.Message message);
 
   /**
    * Connect to NetworkEvent signal.
@@ -999,9 +998,9 @@ class Message : ObjectG
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto message = getVal!Message(_paramVals);
-      auto event = getVal!SocketClientEvent(&_paramVals[1]);
-      auto connection = getVal!IOStream(&_paramVals[2]);
+      auto message = getVal!(soup.message.Message)(_paramVals);
+      auto event = getVal!(gio.types.SocketClientEvent)(&_paramVals[1]);
+      auto connection = getVal!(gio.iostream.IOStream)(&_paramVals[2]);
       _dClosure.dlg(event, connection, message);
     }
 
@@ -1026,8 +1025,8 @@ class Message : ObjectG
    * Returns: %TRUE to handle the request, or %FALSE to make the connection
    *   fail with %G_TLS_ERROR_CERTIFICATE_REQUIRED.
    */
-  alias RequestCertificateCallbackDlg = bool delegate(TlsClientConnection tlsConnection, Message message);
-  alias RequestCertificateCallbackFunc = bool function(TlsClientConnection tlsConnection, Message message);
+  alias RequestCertificateCallbackDlg = bool delegate(gio.tls_client_connection.TlsClientConnection tlsConnection, soup.message.Message message);
+  alias RequestCertificateCallbackFunc = bool function(gio.tls_client_connection.TlsClientConnection tlsConnection, soup.message.Message message);
 
   /**
    * Connect to RequestCertificate signal.
@@ -1044,8 +1043,8 @@ class Message : ObjectG
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto message = getVal!Message(_paramVals);
-      auto tlsConnection = getVal!TlsClientConnection(&_paramVals[1]);
+      auto message = getVal!(soup.message.Message)(_paramVals);
+      auto tlsConnection = getVal!(gio.tls_client_connection.TlsClientConnection)(&_paramVals[1]);
       _retval = _dClosure.dlg(tlsConnection, message);
       setVal!bool(_returnValue, _retval);
     }
@@ -1072,8 +1071,8 @@ class Message : ObjectG
    * Returns: %TRUE to handle the request, or %FALSE to make the connection
    *   fail with %G_TLS_ERROR_CERTIFICATE_REQUIRED.
    */
-  alias RequestCertificatePasswordCallbackDlg = bool delegate(TlsPassword tlsPassword, Message message);
-  alias RequestCertificatePasswordCallbackFunc = bool function(TlsPassword tlsPassword, Message message);
+  alias RequestCertificatePasswordCallbackDlg = bool delegate(gio.tls_password.TlsPassword tlsPassword, soup.message.Message message);
+  alias RequestCertificatePasswordCallbackFunc = bool function(gio.tls_password.TlsPassword tlsPassword, soup.message.Message message);
 
   /**
    * Connect to RequestCertificatePassword signal.
@@ -1090,8 +1089,8 @@ class Message : ObjectG
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto message = getVal!Message(_paramVals);
-      auto tlsPassword = getVal!TlsPassword(&_paramVals[1]);
+      auto message = getVal!(soup.message.Message)(_paramVals);
+      auto tlsPassword = getVal!(gio.tls_password.TlsPassword)(&_paramVals[1]);
       _retval = _dClosure.dlg(tlsPassword, message);
       setVal!bool(_returnValue, _retval);
     }
@@ -1108,8 +1107,8 @@ class Message : ObjectG
    * authentication.
    *   message = the instance the signal is connected to
    */
-  alias RestartedCallbackDlg = void delegate(Message message);
-  alias RestartedCallbackFunc = void function(Message message);
+  alias RestartedCallbackDlg = void delegate(soup.message.Message message);
+  alias RestartedCallbackFunc = void function(soup.message.Message message);
 
   /**
    * Connect to Restarted signal.
@@ -1125,7 +1124,7 @@ class Message : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto message = getVal!Message(_paramVals);
+      auto message = getVal!(soup.message.Message)(_paramVals);
       _dClosure.dlg(message);
     }
 
@@ -1137,8 +1136,8 @@ class Message : ObjectG
    * Emitted just before a message is sent.
    *   message = the instance the signal is connected to
    */
-  alias StartingCallbackDlg = void delegate(Message message);
-  alias StartingCallbackFunc = void function(Message message);
+  alias StartingCallbackDlg = void delegate(soup.message.Message message);
+  alias StartingCallbackFunc = void function(soup.message.Message message);
 
   /**
    * Connect to Starting signal.
@@ -1154,7 +1153,7 @@ class Message : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto message = getVal!Message(_paramVals);
+      auto message = getVal!(soup.message.Message)(_paramVals);
       _dClosure.dlg(message);
     }
 
@@ -1167,8 +1166,8 @@ class Message : ObjectG
    * message.
    *   message = the instance the signal is connected to
    */
-  alias WroteBodyCallbackDlg = void delegate(Message message);
-  alias WroteBodyCallbackFunc = void function(Message message);
+  alias WroteBodyCallbackDlg = void delegate(soup.message.Message message);
+  alias WroteBodyCallbackFunc = void function(soup.message.Message message);
 
   /**
    * Connect to WroteBody signal.
@@ -1184,7 +1183,7 @@ class Message : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto message = getVal!Message(_paramVals);
+      auto message = getVal!(soup.message.Message)(_paramVals);
       _dClosure.dlg(message);
     }
 
@@ -1199,8 +1198,8 @@ class Message : ObjectG
    *   chunkSize = the number of bytes written
    *   message = the instance the signal is connected to
    */
-  alias WroteBodyDataCallbackDlg = void delegate(uint chunkSize, Message message);
-  alias WroteBodyDataCallbackFunc = void function(uint chunkSize, Message message);
+  alias WroteBodyDataCallbackDlg = void delegate(uint chunkSize, soup.message.Message message);
+  alias WroteBodyDataCallbackFunc = void function(uint chunkSize, soup.message.Message message);
 
   /**
    * Connect to WroteBodyData signal.
@@ -1216,8 +1215,8 @@ class Message : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto message = getVal!Message(_paramVals);
-      auto chunkSize = getVal!uint(&_paramVals[1]);
+      auto message = getVal!(soup.message.Message)(_paramVals);
+      auto chunkSize = getVal!(uint)(&_paramVals[1]);
       _dClosure.dlg(chunkSize, message);
     }
 
@@ -1230,8 +1229,8 @@ class Message : ObjectG
    * message.
    *   message = the instance the signal is connected to
    */
-  alias WroteHeadersCallbackDlg = void delegate(Message message);
-  alias WroteHeadersCallbackFunc = void function(Message message);
+  alias WroteHeadersCallbackDlg = void delegate(soup.message.Message message);
+  alias WroteHeadersCallbackFunc = void function(soup.message.Message message);
 
   /**
    * Connect to WroteHeaders signal.
@@ -1247,7 +1246,7 @@ class Message : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto message = getVal!Message(_paramVals);
+      auto message = getVal!(soup.message.Message)(_paramVals);
       _dClosure.dlg(message);
     }
 

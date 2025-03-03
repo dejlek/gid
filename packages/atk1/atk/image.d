@@ -4,7 +4,7 @@ public import atk.image_iface_proxy;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.global;
+import gid.gid;
 
 /**
  * The ATK Interface implemented by components
@@ -56,7 +56,7 @@ interface Image
    *   coordType = specifies whether the coordinates are relative to the screen
    *     or to the components top level window
    */
-  void getImagePosition(out int x, out int y, CoordType coordType);
+  void getImagePosition(out int x, out int y, atk.types.CoordType coordType);
 
   /**
    * Get the width and height in pixels for the specified image.

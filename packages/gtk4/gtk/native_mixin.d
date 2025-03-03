@@ -2,7 +2,7 @@ module gtk.native_mixin;
 
 public import gtk.native_iface_proxy;
 public import gdk.surface;
-public import gid.global;
+public import gid.gid;
 public import gobject.object;
 public import gsk.renderer;
 public import gtk.c.functions;
@@ -30,11 +30,11 @@ template NativeT()
    * Returns the renderer that is used for this `GtkNative`.
    * Returns: the renderer for self
    */
-  override Renderer getRenderer()
+  override gsk.renderer.Renderer getRenderer()
   {
     GskRenderer* _cretval;
     _cretval = gtk_native_get_renderer(cast(GtkNative*)cPtr);
-    auto _retval = ObjectG.getDObject!Renderer(cast(GskRenderer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gsk.renderer.Renderer)(cast(GskRenderer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -42,11 +42,11 @@ template NativeT()
    * Returns the surface of this `GtkNative`.
    * Returns: the surface of self
    */
-  override Surface getSurface()
+  override gdk.surface.Surface getSurface()
   {
     GdkSurface* _cretval;
     _cretval = gtk_native_get_surface(cast(GtkNative*)cPtr);
-    auto _retval = ObjectG.getDObject!Surface(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 

@@ -1,6 +1,6 @@
 module gsk.stroke_node;
 
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.path;
@@ -12,7 +12,7 @@ import gsk.types;
  * A render node that will fill the area determined by stroking the the given
  * [gsk.path.Path] using the [gsk.stroke.Stroke] attributes.
  */
-class StrokeNode : RenderNode
+class StrokeNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -33,10 +33,10 @@ class StrokeNode : RenderNode
    *   stroke = The stroke attributes to use
    * Returns: A new #GskRenderNode
    */
-  this(RenderNode child, Path path, Stroke stroke)
+  this(gsk.render_node.RenderNode child, gsk.path.Path path, gsk.stroke.Stroke stroke)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_stroke_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, path ? cast(GskPath*)path.cPtr(No.Dup) : null, stroke ? cast(GskStroke*)stroke.cPtr(No.Dup) : null);
+    _cretval = gsk_stroke_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, path ? cast(GskPath*)path.cPtr(No.Dup) : null, stroke ? cast(const(GskStroke)*)stroke.cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -44,11 +44,11 @@ class StrokeNode : RenderNode
    * Gets the child node that is getting drawn by the given node.
    * Returns: The child that is getting drawn
    */
-  RenderNode getChild()
+  gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_stroke_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    _cretval = gsk_stroke_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -57,11 +57,11 @@ class StrokeNode : RenderNode
    * the node.
    * Returns: a #GskPath
    */
-  Path getPath()
+  gsk.path.Path getPath()
   {
     GskPath* _cretval;
-    _cretval = gsk_stroke_node_get_path(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Path(cast(void*)_cretval, No.Take) : null;
+    _cretval = gsk_stroke_node_get_path(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -69,11 +69,11 @@ class StrokeNode : RenderNode
    * Retrieves the stroke attributes used in this node.
    * Returns: a #GskStroke
    */
-  Stroke getStroke()
+  gsk.stroke.Stroke getStroke()
   {
     const(GskStroke)* _cretval;
-    _cretval = gsk_stroke_node_get_stroke(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Stroke(cast(void*)_cretval, No.Take) : null;
+    _cretval = gsk_stroke_node_get_stroke(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.stroke.Stroke(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

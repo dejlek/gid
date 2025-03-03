@@ -1,6 +1,6 @@
 module gio.dbus_action_group;
 
-import gid.global;
+import gid.gid;
 import gio.action_group;
 import gio.action_group_mixin;
 import gio.c.functions;
@@ -17,7 +17,7 @@ import gobject.object;
  * `GDBusActionGroup` can be used as a proxy for an action group
  * that is exported over D-Bus with [gio.dbus_connection.DBusConnection.exportActionGroup].
  */
-class DBusActionGroup : ObjectG, ActionGroup, RemoteActionGroup
+class DBusActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.remote_action_group.RemoteActionGroup
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -58,13 +58,13 @@ class DBusActionGroup : ObjectG, ActionGroup, RemoteActionGroup
    *   objectPath = the object path at which the action group is exported
    * Returns: a #GDBusActionGroup
    */
-  static DBusActionGroup get(DBusConnection connection, string busName, string objectPath)
+  static gio.dbus_action_group.DBusActionGroup get(gio.dbus_connection.DBusConnection connection, string busName, string objectPath)
   {
     GDBusActionGroup* _cretval;
     const(char)* _busName = busName.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     _cretval = g_dbus_action_group_get(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, _busName, _objectPath);
-    auto _retval = ObjectG.getDObject!DBusActionGroup(cast(GDBusActionGroup*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_action_group.DBusActionGroup)(cast(GDBusActionGroup*)_cretval, Yes.Take);
     return _retval;
   }
 }

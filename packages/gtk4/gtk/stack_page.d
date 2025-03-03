@@ -1,6 +1,6 @@
 module gtk.stack_page;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -12,7 +12,7 @@ import gtk.widget;
 /**
  * `GtkStackPage` is an auxiliary class used by `GtkStack`.
  */
-class StackPage : ObjectG, Accessible
+class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -37,11 +37,11 @@ class StackPage : ObjectG, Accessible
    * Returns the stack child to which self belongs.
    * Returns: the child to which self belongs
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_page_get_child(cast(GtkStackPage*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -53,7 +53,7 @@ class StackPage : ObjectG, Accessible
   {
     const(char)* _cretval;
     _cretval = gtk_stack_page_get_icon_name(cast(GtkStackPage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -65,7 +65,7 @@ class StackPage : ObjectG, Accessible
   {
     const(char)* _cretval;
     _cretval = gtk_stack_page_get_name(cast(GtkStackPage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class StackPage : ObjectG, Accessible
   {
     const(char)* _cretval;
     _cretval = gtk_stack_page_get_title(cast(GtkStackPage*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

@@ -1,6 +1,6 @@
 module gio.unix_output_stream;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.file_descriptor_based;
@@ -20,7 +20,7 @@ import gio.types;
  * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config file
  * file or the `GioUnix-2.0` GIR namespace when using it.
  */
-class UnixOutputStream : OutputStream, FileDescriptorBased, PollableOutputStream
+class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_based.FileDescriptorBased, gio.pollable_output_stream.PollableOutputStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

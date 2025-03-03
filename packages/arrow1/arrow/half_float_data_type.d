@@ -4,9 +4,9 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.floating_point_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class HalfFloatDataType : FloatingPointDataType
+class HalfFloatDataType : arrow.floating_point_data_type.FloatingPointDataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

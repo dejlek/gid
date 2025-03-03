@@ -1,6 +1,6 @@
 module soup.auth_manager;
 
-import gid.global;
+import gid.gid;
 import glib.uri;
 import gobject.object;
 import soup.auth;
@@ -25,7 +25,7 @@ import soup.types;
  * always existed in the background, and you can use `g_type_from_name
  * $(LPAREN)"SoupAuthManager"$(RPAREN)` to get its alias@GLib.Type in earlier releases.$(RPAREN)
  */
-class AuthManager : ObjectG, SessionFeature
+class AuthManager : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -67,7 +67,7 @@ class AuthManager : ObjectG, SessionFeature
    *   uri = the #GUri under which auth is to be used
    *   auth = the #SoupAuth to use
    */
-  void useAuth(Uri uri, Auth auth)
+  void useAuth(glib.uri.Uri uri, soup.auth.Auth auth)
   {
     soup_auth_manager_use_auth(cast(SoupAuthManager*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, auth ? cast(SoupAuth*)auth.cPtr(No.Dup) : null);
   }

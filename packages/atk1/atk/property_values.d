@@ -3,7 +3,7 @@ module atk.property_values;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.value;
 
 /**
@@ -42,13 +42,13 @@ class PropertyValues
     (cast(AtkPropertyValues*)cPtr).propertyName = propval.toCString(Yes.Alloc);
   }
 
-  @property Value oldValue()
+  @property gobject.value.Value oldValue()
   {
-    return new Value(cast(GValue*)&(cast(AtkPropertyValues*)cPtr).oldValue);
+    return new gobject.value.Value(cast(GValue*)&(cast(AtkPropertyValues*)cPtr).oldValue);
   }
 
-  @property Value newValue()
+  @property gobject.value.Value newValue()
   {
-    return new Value(cast(GValue*)&(cast(AtkPropertyValues*)cPtr).newValue);
+    return new gobject.value.Value(cast(GValue*)&(cast(AtkPropertyValues*)cPtr).newValue);
   }
 }

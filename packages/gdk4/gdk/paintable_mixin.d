@@ -5,7 +5,7 @@ public import gdk.c.functions;
 public import gdk.c.types;
 public import gdk.snapshot;
 public import gdk.types;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 public import gobject.object;
 
@@ -88,25 +88,25 @@ template PaintableT()
    * Returns: An immutable paintable for the current
    *   contents of paintable
    */
-  override Paintable getCurrentImage()
+  override gdk.paintable.Paintable getCurrentImage()
   {
     GdkPaintable* _cretval;
     _cretval = gdk_paintable_get_current_image(cast(GdkPaintable*)cPtr);
-    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
   /**
    * Get flags for the paintable.
    * This is oftentimes useful for optimizations.
-   * See [gdk.PaintableFlags] for the flags and what they mean.
+   * See [gdk.types.PaintableFlags] for the flags and what they mean.
    * Returns: The `GdkPaintableFlags` for this paintable
    */
-  override PaintableFlags getFlags()
+  override gdk.types.PaintableFlags getFlags()
   {
     GdkPaintableFlags _cretval;
     _cretval = gdk_paintable_get_flags(cast(GdkPaintable*)cPtr);
-    PaintableFlags _retval = cast(PaintableFlags)_cretval;
+    gdk.types.PaintableFlags _retval = cast(gdk.types.PaintableFlags)_cretval;
     return _retval;
   }
 
@@ -205,7 +205,7 @@ template PaintableT()
    *   width = width to snapshot in
    *   height = height to snapshot in
    */
-  override void snapshot(Snapshot snapshot, double width, double height)
+  override void snapshot(gdk.snapshot.Snapshot snapshot, double width, double height)
   {
     gdk_paintable_snapshot(cast(GdkPaintable*)cPtr, snapshot ? cast(GdkSnapshot*)snapshot.cPtr(No.Dup) : null, width, height);
   }
@@ -216,8 +216,8 @@ template PaintableT()
    * the icon theme for an icon changing.
    *   paintable = the instance the signal is connected to
    */
-  alias InvalidateContentsCallbackDlg = void delegate(Paintable paintable);
-  alias InvalidateContentsCallbackFunc = void function(Paintable paintable);
+  alias InvalidateContentsCallbackDlg = void delegate(gdk.paintable.Paintable paintable);
+  alias InvalidateContentsCallbackFunc = void function(gdk.paintable.Paintable paintable);
 
   /**
    * Connect to InvalidateContents signal.
@@ -233,7 +233,7 @@ template PaintableT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto paintable = getVal!Paintable(_paramVals);
+      auto paintable = getVal!(gdk.paintable.Paintable)(_paramVals);
       _dClosure.dlg(paintable);
     }
 
@@ -252,8 +252,8 @@ template PaintableT()
    * the contents of a toplevel surface being resized.
    *   paintable = the instance the signal is connected to
    */
-  alias InvalidateSizeCallbackDlg = void delegate(Paintable paintable);
-  alias InvalidateSizeCallbackFunc = void function(Paintable paintable);
+  alias InvalidateSizeCallbackDlg = void delegate(gdk.paintable.Paintable paintable);
+  alias InvalidateSizeCallbackFunc = void function(gdk.paintable.Paintable paintable);
 
   /**
    * Connect to InvalidateSize signal.
@@ -269,7 +269,7 @@ template PaintableT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto paintable = getVal!Paintable(_paramVals);
+      auto paintable = getVal!(gdk.paintable.Paintable)(_paramVals);
       _dClosure.dlg(paintable);
     }
 

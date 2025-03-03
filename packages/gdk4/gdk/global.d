@@ -2,7 +2,7 @@ module gdk.global;
 
 import cairo.context;
 import cairo.region;
-import cairo.surface : DcairoSurface = Surface;
+import cairo.surface;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.event;
@@ -12,9 +12,8 @@ import gdk.surface;
 import gdk.texture;
 import gdk.types;
 import gdkpixbuf.pixbuf;
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.input_stream;
 import gio.output_stream;
@@ -57,7 +56,7 @@ import gobject.value;
  *   Cairo, use [gdk.texture.Texture.download] to download the data into a Cairo
  *   image surface.
  */
-void cairoDrawFromGl(Context cr, Surface surface, int source, int sourceType, int bufferScale, int x, int y, int width, int height)
+void cairoDrawFromGl(cairo.context.Context cr, gdk.surface.Surface surface, int source, int sourceType, int bufferScale, int x, int y, int width, int height)
 {
   gdk_cairo_draw_from_gl(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null, source, sourceType, bufferScale, x, y, width, height);
 }
@@ -68,9 +67,9 @@ void cairoDrawFromGl(Context cr, Surface surface, int source, int sourceType, in
  *   cr = a cairo context
  *   rectangle = a `GdkRectangle`
  */
-void cairoRectangle(Context cr, Rectangle rectangle)
+void cairoRectangle(cairo.context.Context cr, gdk.rectangle.Rectangle rectangle)
 {
-  gdk_cairo_rectangle(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, rectangle ? cast(GdkRectangle*)rectangle.cPtr(No.Dup) : null);
+  gdk_cairo_rectangle(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, rectangle ? cast(const(GdkRectangle)*)rectangle.cPtr(No.Dup) : null);
 }
 
 /**
@@ -79,9 +78,9 @@ void cairoRectangle(Context cr, Rectangle rectangle)
  *   cr = a cairo context
  *   region = a `cairo_region_t`
  */
-void cairoRegion(Context cr, Region region)
+void cairoRegion(cairo.context.Context cr, cairo.region.Region region)
 {
-  gdk_cairo_region(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
+  gdk_cairo_region(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
 }
 
 /**
@@ -93,11 +92,11 @@ void cairoRegion(Context cr, Region region)
  *   surface = a cairo surface
  * Returns: A `cairo_region_t`
  */
-Region cairoRegionCreateFromSurface(DcairoSurface surface)
+cairo.region.Region cairoRegionCreateFromSurface(cairo.surface.Surface surface)
 {
   cairo_region_t* _cretval;
   _cretval = gdk_cairo_region_create_from_surface(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new Region(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -111,9 +110,9 @@ Region cairoRegionCreateFromSurface(DcairoSurface surface)
  *   pixbufX = X coordinate of location to place upper left corner of pixbuf
  *   pixbufY = Y coordinate of location to place upper left corner of pixbuf
  */
-void cairoSetSourcePixbuf(Context cr, Pixbuf pixbuf, double pixbufX, double pixbufY)
+void cairoSetSourcePixbuf(cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixbuf, double pixbufX, double pixbufY)
 {
-  gdk_cairo_set_source_pixbuf(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null, pixbufX, pixbufY);
+  gdk_cairo_set_source_pixbuf(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, pixbuf ? cast(const(PixbufC)*)pixbuf.cPtr(No.Dup) : null, pixbufX, pixbufY);
 }
 
 /**
@@ -122,9 +121,9 @@ void cairoSetSourcePixbuf(Context cr, Pixbuf pixbuf, double pixbufX, double pixb
  *   cr = a cairo context
  *   rgba = a `GdkRGBA`
  */
-void cairoSetSourceRgba(Context cr, RGBA rgba)
+void cairoSetSourceRgba(cairo.context.Context cr, gdk.rgba.RGBA rgba)
 {
-  gdk_cairo_set_source_rgba(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, rgba ? cast(GdkRGBA*)rgba.cPtr(No.Dup) : null);
+  gdk_cairo_set_source_rgba(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
 }
 
 /**
@@ -141,14 +140,14 @@ void cairoSetSourceRgba(Context cr, RGBA rgba)
  *   cancellable = optional `GCancellable` object
  *   callback = callback to call when the operation is done
  */
-void contentDeserializeAsync(InputStream stream, string mimeType, GType type, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+void contentDeserializeAsync(gio.input_stream.InputStream stream, string mimeType, gobject.types.GType type, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
 {
   extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
   {
     ptrThawGC(data);
-    auto _dlg = cast(AsyncReadyCallback*)data;
+    auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-    (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+    (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -166,7 +165,7 @@ void contentDeserializeAsync(InputStream stream, string mimeType, GType type, in
  *   value is set. %FALSE if an error occurred. In this case,
  *   error is set
  */
-bool contentDeserializeFinish(AsyncResult result, out Value value)
+bool contentDeserializeFinish(gio.async_result.AsyncResult result, out gobject.value.Value value)
 {
   bool _retval;
   GValue _value;
@@ -174,7 +173,7 @@ bool contentDeserializeFinish(AsyncResult result, out Value value)
   _retval = gdk_content_deserialize_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_value, &_err);
   if (_err)
     throw new ErrorG(_err);
-  value = new Value(cast(void*)&_value, No.Take);
+  value = new gobject.value.Value(cast(void*)&_value, No.Take);
   return _retval;
 }
 
@@ -192,20 +191,20 @@ bool contentDeserializeFinish(AsyncResult result, out Value value)
  *   cancellable = optional `GCancellable` object
  *   callback = callback to call when the operation is done
  */
-void contentSerializeAsync(OutputStream stream, string mimeType, Value value, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+void contentSerializeAsync(gio.output_stream.OutputStream stream, string mimeType, gobject.value.Value value, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
 {
   extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
   {
     ptrThawGC(data);
-    auto _dlg = cast(AsyncReadyCallback*)data;
+    auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-    (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+    (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
 
   const(char)* _mimeType = mimeType.toCString(No.Alloc);
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-  gdk_content_serialize_async(stream ? cast(GOutputStream*)stream.cPtr(No.Dup) : null, _mimeType, value ? cast(GValue*)value.cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+  gdk_content_serialize_async(stream ? cast(GOutputStream*)stream.cPtr(No.Dup) : null, _mimeType, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
 }
 
 /**
@@ -215,7 +214,7 @@ void contentSerializeAsync(OutputStream stream, string mimeType, Value value, in
  * Returns: %TRUE if the operation was successful, %FALSE if an
  *   error occurred. In this case, error is set
  */
-bool contentSerializeFinish(AsyncResult result)
+bool contentSerializeFinish(gio.async_result.AsyncResult result)
 {
   bool _retval;
   GError *_err;
@@ -225,9 +224,9 @@ bool contentSerializeFinish(AsyncResult result)
   return _retval;
 }
 
-GType dragSurfaceSizeGetType()
+gobject.types.GType dragSurfaceSizeGetType()
 {
-  GType _retval;
+  gobject.types.GType _retval;
   _retval = gdk_drag_surface_size_get_type();
   return _retval;
 }
@@ -245,7 +244,7 @@ GType dragSurfaceSizeGetType()
  *   angle = return location for the relative angle between both events
  * Returns: %TRUE if the angle could be calculated.
  */
-bool eventsGetAngle(Event event1, Event event2, out double angle)
+bool eventsGetAngle(gdk.event.Event event1, gdk.event.Event event2, out double angle)
 {
   bool _retval;
   _retval = gdk_events_get_angle(event1 ? cast(GdkEvent*)event1.cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2.cPtr(No.Dup) : null, cast(double*)&angle);
@@ -263,7 +262,7 @@ bool eventsGetAngle(Event event1, Event event2, out double angle)
  *   y = return location for the Y coordinate of the center
  * Returns: %TRUE if the center could be calculated.
  */
-bool eventsGetCenter(Event event1, Event event2, out double x, out double y)
+bool eventsGetCenter(gdk.event.Event event1, gdk.event.Event event2, out double x, out double y)
 {
   bool _retval;
   _retval = gdk_events_get_center(event1 ? cast(GdkEvent*)event1.cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
@@ -280,7 +279,7 @@ bool eventsGetCenter(Event event1, Event event2, out double x, out double y)
  *   distance = return location for the distance
  * Returns: %TRUE if the distance could be calculated.
  */
-bool eventsGetDistance(Event event1, Event event2, out double distance)
+bool eventsGetDistance(gdk.event.Event event1, gdk.event.Event event2, out double distance)
 {
   bool _retval;
   _retval = gdk_events_get_distance(event1 ? cast(GdkEvent*)event1.cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2.cPtr(No.Dup) : null, cast(double*)&distance);
@@ -301,7 +300,7 @@ string internMimeType(string string_)
   const(char)* _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
   _cretval = gdk_intern_mime_type(_string_);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -378,7 +377,7 @@ string keyvalName(uint keyval)
 {
   const(char)* _cretval;
   _cretval = gdk_keyval_name(keyval);
-  string _retval = _cretval.fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -446,11 +445,11 @@ uint keyvalToUpper(uint keyval)
  * Deprecated: Use [gdk.texture.Texture] and subclasses instead
  *   cairo surfaces and pixbufs
  */
-Pixbuf pixbufGetFromSurface(DcairoSurface surface, int srcX, int srcY, int width, int height)
+gdkpixbuf.pixbuf.Pixbuf pixbufGetFromSurface(cairo.surface.Surface surface, int srcX, int srcY, int width, int height)
 {
   PixbufC* _cretval;
   _cretval = gdk_pixbuf_get_from_surface(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, srcX, srcY, width, height);
-  auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -466,11 +465,11 @@ Pixbuf pixbufGetFromSurface(DcairoSurface surface, int srcX, int srcY, int width
  * Deprecated: Use [gdk.texture.Texture] and subclasses instead
  *   cairo surfaces and pixbufs
  */
-Pixbuf pixbufGetFromTexture(Texture texture)
+gdkpixbuf.pixbuf.Pixbuf pixbufGetFromTexture(gdk.texture.Texture texture)
 {
   PixbufC* _cretval;
   _cretval = gdk_pixbuf_get_from_texture(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -507,9 +506,9 @@ void setAllowedBackends(string backends)
   gdk_set_allowed_backends(_backends);
 }
 
-GType toplevelSizeGetType()
+gobject.types.GType toplevelSizeGetType()
 {
-  GType _retval;
+  gobject.types.GType _retval;
   _retval = gdk_toplevel_size_get_type();
   return _retval;
 }

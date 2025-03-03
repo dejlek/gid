@@ -6,9 +6,9 @@ import arrow.dense_union_data_type;
 import arrow.scalar;
 import arrow.types;
 import arrow.union_scalar;
-import gid.global;
+import gid.gid;
 
-class DenseUnionScalar : UnionScalar
+class DenseUnionScalar : arrow.union_scalar.UnionScalar
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,7 +27,7 @@ class DenseUnionScalar : UnionScalar
     return getType();
   }
 
-  this(DenseUnionDataType dataType, byte typeCode, Scalar value)
+  this(arrow.dense_union_data_type.DenseUnionDataType dataType, byte typeCode, arrow.scalar.Scalar value)
   {
     GArrowDenseUnionScalar* _cretval;
     _cretval = garrow_dense_union_scalar_new(dataType ? cast(GArrowDenseUnionDataType*)dataType.cPtr(No.Dup) : null, typeCode, value ? cast(GArrowScalar*)value.cPtr(No.Dup) : null);

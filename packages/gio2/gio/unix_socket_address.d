@@ -1,6 +1,6 @@
 module gio.unix_socket_address;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_address;
@@ -27,7 +27,7 @@ import gobject.object;
  * GIO interfaces, thus you had to use the `gio-unix-2.0.pc` pkg-config file
  * when using it. This is no longer necessary since GLib 2.72.
  */
-class UnixSocketAddress : SocketAddress
+class UnixSocketAddress : gio.socket_address.SocketAddress
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -71,7 +71,7 @@ class UnixSocketAddress : SocketAddress
 
    * Deprecated: Use [gio.unix_socket_address.UnixSocketAddress.newWithType].
    */
-  static UnixSocketAddress newAbstract(string path)
+  static gio.unix_socket_address.UnixSocketAddress newAbstract(string path)
   {
     GSocketAddress* _cretval;
     int _pathLen;
@@ -80,7 +80,7 @@ class UnixSocketAddress : SocketAddress
 
     auto _path = cast(const(char)*)path.ptr;
     _cretval = g_unix_socket_address_new_abstract(_path, _pathLen);
-    auto _retval = ObjectG.getDObject!UnixSocketAddress(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class UnixSocketAddress : SocketAddress
    *   type = a #GUnixSocketAddressType
    * Returns: a new #GUnixSocketAddress
    */
-  static UnixSocketAddress newWithType(string path, UnixSocketAddressType type)
+  static gio.unix_socket_address.UnixSocketAddress newWithType(string path, gio.types.UnixSocketAddressType type)
   {
     GSocketAddress* _cretval;
     int _pathLen;
@@ -125,7 +125,7 @@ class UnixSocketAddress : SocketAddress
 
     auto _path = cast(const(char)*)path.ptr;
     _cretval = g_unix_socket_address_new_with_type(_path, _pathLen, type);
-    auto _retval = ObjectG.getDObject!UnixSocketAddress(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -144,11 +144,11 @@ class UnixSocketAddress : SocketAddress
    * Gets address's type.
    * Returns: a #GUnixSocketAddressType
    */
-  UnixSocketAddressType getAddressType()
+  gio.types.UnixSocketAddressType getAddressType()
   {
     GUnixSocketAddressType _cretval;
     _cretval = g_unix_socket_address_get_address_type(cast(GUnixSocketAddress*)cPtr);
-    UnixSocketAddressType _retval = cast(UnixSocketAddressType)_cretval;
+    gio.types.UnixSocketAddressType _retval = cast(gio.types.UnixSocketAddressType)_cretval;
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class UnixSocketAddress : SocketAddress
   {
     const(char)* _cretval;
     _cretval = g_unix_socket_address_get_path(cast(GUnixSocketAddress*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

@@ -1,6 +1,6 @@
 module soup.types;
 
-import gid.global;
+import gid.gid;
 import soup.auth_domain;
 import soup.auth_domain_basic;
 import soup.auth_domain_digest;
@@ -10,7 +10,6 @@ import soup.logger;
 import soup.message;
 import soup.server;
 import soup.server_message;
-import soup.types;
 import soup.websocket_connection;
 
 
@@ -43,15 +42,15 @@ alias WebsocketState = SoupWebsocketState;
 alias Range = SoupRange;
 
 // Callbacks
-alias AuthDomainBasicAuthCallback = bool delegate(AuthDomainBasic domain, ServerMessage msg, string username, string password);
-alias AuthDomainDigestAuthCallback = string delegate(AuthDomainDigest domain, ServerMessage msg, string username);
-alias AuthDomainFilter = bool delegate(AuthDomain domain, ServerMessage msg);
-alias AuthDomainGenericAuthCallback = bool delegate(AuthDomain domain, ServerMessage msg, string username);
-alias LoggerFilter = LoggerLogLevel delegate(Logger logger, Message msg);
-alias LoggerPrinter = void delegate(Logger logger, LoggerLogLevel level, char direction, string data);
+alias AuthDomainBasicAuthCallback = bool delegate(soup.auth_domain_basic.AuthDomainBasic domain, soup.server_message.ServerMessage msg, string username, string password);
+alias AuthDomainDigestAuthCallback = string delegate(soup.auth_domain_digest.AuthDomainDigest domain, soup.server_message.ServerMessage msg, string username);
+alias AuthDomainFilter = bool delegate(soup.auth_domain.AuthDomain domain, soup.server_message.ServerMessage msg);
+alias AuthDomainGenericAuthCallback = bool delegate(soup.auth_domain.AuthDomain domain, soup.server_message.ServerMessage msg, string username);
+alias LoggerFilter = soup.types.LoggerLogLevel delegate(soup.logger.Logger logger, soup.message.Message msg);
+alias LoggerPrinter = void delegate(soup.logger.Logger logger, soup.types.LoggerLogLevel level, char direction, string data);
 alias MessageHeadersForeachFunc = void delegate(string name, string value);
-alias ServerCallback = void delegate(Server server, ServerMessage msg, string path, string[string] query);
-alias ServerWebsocketCallback = void delegate(Server server, ServerMessage msg, string path, WebsocketConnection connection);
+alias ServerCallback = void delegate(soup.server.Server server, soup.server_message.ServerMessage msg, string path, string[string] query);
+alias ServerWebsocketCallback = void delegate(soup.server.Server server, soup.server_message.ServerMessage msg, string path, soup.websocket_connection.WebsocketConnection connection);
 
 /**
  * A constant corresponding to 1 day.

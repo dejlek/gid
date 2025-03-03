@@ -1,6 +1,6 @@
 module gtk.object_expression;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -10,7 +10,7 @@ import gtk.types;
 /**
  * A `GObject` value in a `GtkExpression`.
  */
-class ObjectExpression : Expression
+class ObjectExpression : gtk.expression.Expression
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -30,7 +30,7 @@ class ObjectExpression : Expression
    *   object = object to watch
    * Returns: a new `GtkExpression`
    */
-  this(ObjectG object)
+  this(gobject.object.ObjectG object)
   {
     GtkExpression* _cretval;
     _cretval = gtk_object_expression_new(object ? cast(ObjectC*)object.cPtr(No.Dup) : null);
@@ -41,11 +41,11 @@ class ObjectExpression : Expression
    * Gets the object that the expression evaluates to.
    * Returns: the object, or `NULL`
    */
-  ObjectG getObject()
+  gobject.object.ObjectG getObject()
   {
     ObjectC* _cretval;
     _cretval = gtk_object_expression_get_object(cast(GtkExpression*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -4,10 +4,10 @@ import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.record_batch_writer;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class StreamWriter : RecordBatchWriter
+class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -1,6 +1,6 @@
 module gtk.gesture_pan;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -20,7 +20,7 @@ import gtk.types;
  * the [gtk.gesture_pan.GesturePan.pan] signal will be emitted as input
  * events are received, containing the offset in the given axis.
  */
-class GesturePan : GestureDrag
+class GesturePan : gtk.gesture_drag.GestureDrag
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,7 +45,7 @@ class GesturePan : GestureDrag
    *   orientation = expected orientation
    * Returns: a newly created `GtkGesturePan`
    */
-  this(Orientation orientation)
+  this(gtk.types.Orientation orientation)
   {
     GtkGesture* _cretval;
     _cretval = gtk_gesture_pan_new(orientation);
@@ -56,11 +56,11 @@ class GesturePan : GestureDrag
    * Returns the orientation of the pan gestures that this gesture expects.
    * Returns: the expected orientation for pan gestures
    */
-  Orientation getOrientation()
+  gtk.types.Orientation getOrientation()
   {
     GtkOrientation _cretval;
     _cretval = gtk_gesture_pan_get_orientation(cast(GtkGesturePan*)cPtr);
-    Orientation _retval = cast(Orientation)_cretval;
+    gtk.types.Orientation _retval = cast(gtk.types.Orientation)_cretval;
     return _retval;
   }
 
@@ -69,7 +69,7 @@ class GesturePan : GestureDrag
    * Params:
    *   orientation = expected orientation
    */
-  void setOrientation(Orientation orientation)
+  void setOrientation(gtk.types.Orientation orientation)
   {
     gtk_gesture_pan_set_orientation(cast(GtkGesturePan*)cPtr, orientation);
   }
@@ -81,8 +81,8 @@ class GesturePan : GestureDrag
    *   offset = Offset along the gesture orientation
    *   gesturePan = the instance the signal is connected to
    */
-  alias PanCallbackDlg = void delegate(PanDirection direction, double offset, GesturePan gesturePan);
-  alias PanCallbackFunc = void function(PanDirection direction, double offset, GesturePan gesturePan);
+  alias PanCallbackDlg = void delegate(gtk.types.PanDirection direction, double offset, gtk.gesture_pan.GesturePan gesturePan);
+  alias PanCallbackFunc = void function(gtk.types.PanDirection direction, double offset, gtk.gesture_pan.GesturePan gesturePan);
 
   /**
    * Connect to Pan signal.
@@ -98,9 +98,9 @@ class GesturePan : GestureDrag
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gesturePan = getVal!GesturePan(_paramVals);
-      auto direction = getVal!PanDirection(&_paramVals[1]);
-      auto offset = getVal!double(&_paramVals[2]);
+      auto gesturePan = getVal!(gtk.gesture_pan.GesturePan)(_paramVals);
+      auto direction = getVal!(gtk.types.PanDirection)(&_paramVals[1]);
+      auto offset = getVal!(double)(&_paramVals[2]);
       _dClosure.dlg(direction, offset, gesturePan);
     }
 

@@ -1,7 +1,7 @@
 module gtk.buildable_mixin;
 
 public import gtk.buildable_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gtk.c.functions;
 public import gtk.c.types;
 public import gtk.types;
@@ -31,7 +31,7 @@ template BuildableT()
   {
     const(char)* _cretval;
     _cretval = gtk_buildable_get_buildable_id(cast(GtkBuildable*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

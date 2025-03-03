@@ -1,7 +1,7 @@
 module gio.action;
 
 public import gio.action_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -93,7 +93,7 @@ interface Action
    *     or %NULL for no target
    * Returns: %TRUE if successful, else %FALSE with error set
    */
-  static bool parseDetailedName(string detailedName, out string actionName, out VariantG targetValue)
+  static bool parseDetailedName(string detailedName, out string actionName, out glib.variant.VariantG targetValue)
   {
     bool _retval;
     const(char)* _detailedName = detailedName.toCString(No.Alloc);
@@ -104,7 +104,7 @@ interface Action
     if (_err)
       throw new ErrorG(_err);
     actionName = _actionName.fromCString(Yes.Free);
-    targetValue = new VariantG(cast(void*)_targetValue, Yes.Take);
+    targetValue = new glib.variant.VariantG(cast(void*)_targetValue, Yes.Take);
     return _retval;
   }
 
@@ -121,12 +121,12 @@ interface Action
    *   targetValue = a #GVariant target value, or %NULL
    * Returns: a detailed format string
    */
-  static string printDetailedName(string actionName, VariantG targetValue)
+  static string printDetailedName(string actionName, glib.variant.VariantG targetValue)
   {
     char* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_action_print_detailed_name(_actionName, targetValue ? cast(VariantC*)targetValue.cPtr(No.Dup) : null);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ interface Action
    * Params:
    *   parameter = the parameter to the activation
    */
-  void activate(VariantG parameter);
+  void activate(glib.variant.VariantG parameter);
 
   /**
    * Request for the state of action to be changed to value.
@@ -152,7 +152,7 @@ interface Action
    * Params:
    *   value = the new state
    */
-  void changeState(VariantG value);
+  void changeState(glib.variant.VariantG value);
 
   /**
    * Checks if action is currently enabled.
@@ -177,7 +177,7 @@ interface Action
    * #GVariant, but %NULL instead.
    * Returns: the parameter type
    */
-  VariantType getParameterType();
+  glib.variant_type.VariantType getParameterType();
 
   /**
    * Queries the current state of action.
@@ -188,7 +188,7 @@ interface Action
    * [glib.variant.VariantG.unref] when it is no longer required.
    * Returns: the current state of the action
    */
-  VariantG getState();
+  glib.variant.VariantG getState();
 
   /**
    * Requests a hint about the valid range of values for the state of
@@ -207,7 +207,7 @@ interface Action
    * [glib.variant.VariantG.unref] when it is no longer required.
    * Returns: the state range hint
    */
-  VariantG getStateHint();
+  glib.variant.VariantG getStateHint();
 
   /**
    * Queries the type of the state of action.
@@ -222,5 +222,5 @@ interface Action
    * will return %NULL and you must not call [gio.action.Action.changeState].
    * Returns: the state type, if the action is stateful
    */
-  VariantType getStateType();
+  glib.variant_type.VariantType getStateType();
 }

@@ -1,6 +1,6 @@
 module soup.auth_digest;
 
-import gid.global;
+import gid.gid;
 import soup.auth;
 import soup.c.functions;
 import soup.c.types;
@@ -12,7 +12,7 @@ import soup.types;
  * support for it, call [soup.session.Session.removeFeatureByType]
  * passing %SOUP_TYPE_AUTH_DIGEST.
  */
-class AuthDigest : Auth
+class AuthDigest : soup.auth.Auth
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

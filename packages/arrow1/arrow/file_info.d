@@ -3,10 +3,10 @@ module arrow.file_info;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class FileInfo : ObjectG
+class FileInfo : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -32,7 +32,7 @@ class FileInfo : ObjectG
     this(_cretval, Yes.Take);
   }
 
-  bool equal(FileInfo otherFileInfo)
+  bool equal(arrow.file_info.FileInfo otherFileInfo)
   {
     bool _retval;
     _retval = garrow_file_info_equal(cast(GArrowFileInfo*)cPtr, otherFileInfo ? cast(GArrowFileInfo*)otherFileInfo.cPtr(No.Dup) : null);
@@ -57,7 +57,7 @@ class FileInfo : ObjectG
   {
     char* _cretval;
     _cretval = garrow_file_info_to_string(cast(GArrowFileInfo*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

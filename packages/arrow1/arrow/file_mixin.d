@@ -4,7 +4,7 @@ public import arrow.file_iface_proxy;
 public import arrow.c.functions;
 public import arrow.c.types;
 public import arrow.types;
-public import gid.global;
+public import gid.gid;
 public import glib.error;
 
 template FileT()
@@ -20,11 +20,11 @@ template FileT()
     return _retval;
   }
 
-  override FileMode getMode()
+  override arrow.types.FileMode getMode()
   {
     GArrowFileMode _cretval;
     _cretval = garrow_file_get_mode(cast(GArrowFile*)cPtr);
-    FileMode _retval = cast(FileMode)_cretval;
+    arrow.types.FileMode _retval = cast(arrow.types.FileMode)_cretval;
     return _retval;
   }
 

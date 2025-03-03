@@ -1,6 +1,6 @@
 module graphene.quad;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import graphene.c.functions;
 import graphene.c.types;
@@ -13,7 +13,7 @@ import graphene.types;
  * The contents of a #graphene_quad_t are private and should never be
  * accessed directly.
  */
-class Quad : Boxed
+class Quad : gobject.boxed.Boxed
 {
 
   this()
@@ -47,11 +47,11 @@ class Quad : Boxed
    * The contents of the returned instance are undefined.
    * Returns: the newly created #graphene_quad_t instance
    */
-  static Quad alloc()
+  static graphene.quad.Quad alloc()
   {
     graphene_quad_t* _cretval;
     _cretval = graphene_quad_alloc();
-    auto _retval = _cretval ? new Quad(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new graphene.quad.Quad(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -60,11 +60,11 @@ class Quad : Boxed
    * Params:
    *   r = return location for a #graphene_rect_t
    */
-  void bounds(out Rect r)
+  void bounds(out graphene.rect.Rect r)
   {
     graphene_rect_t _r;
-    graphene_quad_bounds(cast(graphene_quad_t*)cPtr, &_r);
-    r = new Rect(cast(void*)&_r, No.Take);
+    graphene_quad_bounds(cast(const(graphene_quad_t)*)cPtr, &_r);
+    r = new graphene.rect.Rect(cast(void*)&_r, No.Take);
   }
 
   /**
@@ -73,10 +73,10 @@ class Quad : Boxed
    *   p = a #graphene_point_t
    * Returns: `true` if the point is inside the #graphene_quad_t
    */
-  bool contains(Point p)
+  bool contains(graphene.point.Point p)
   {
     bool _retval;
-    _retval = graphene_quad_contains(cast(graphene_quad_t*)cPtr, p ? cast(graphene_point_t*)p.cPtr(No.Dup) : null);
+    _retval = graphene_quad_contains(cast(const(graphene_quad_t)*)cPtr, p ? cast(const(graphene_point_t)*)p.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -86,11 +86,11 @@ class Quad : Boxed
    *   index = the index of the point to retrieve
    * Returns: a #graphene_point_t
    */
-  Point getPoint(uint index)
+  graphene.point.Point getPoint(uint index)
   {
     const(graphene_point_t)* _cretval;
-    _cretval = graphene_quad_get_point(cast(graphene_quad_t*)cPtr, index);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_quad_get_point(cast(const(graphene_quad_t)*)cPtr, index);
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -103,11 +103,11 @@ class Quad : Boxed
    *   p4 = the fourth point of the quadrilateral
    * Returns: the initialized #graphene_quad_t
    */
-  Quad init_(Point p1, Point p2, Point p3, Point p4)
+  graphene.quad.Quad init_(graphene.point.Point p1, graphene.point.Point p2, graphene.point.Point p3, graphene.point.Point p4)
   {
     graphene_quad_t* _cretval;
-    _cretval = graphene_quad_init(cast(graphene_quad_t*)cPtr, p1 ? cast(graphene_point_t*)p1.cPtr(No.Dup) : null, p2 ? cast(graphene_point_t*)p2.cPtr(No.Dup) : null, p3 ? cast(graphene_point_t*)p3.cPtr(No.Dup) : null, p4 ? cast(graphene_point_t*)p4.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new Quad(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_quad_init(cast(graphene_quad_t*)cPtr, p1 ? cast(const(graphene_point_t)*)p1.cPtr(No.Dup) : null, p2 ? cast(const(graphene_point_t)*)p2.cPtr(No.Dup) : null, p3 ? cast(const(graphene_point_t)*)p3.cPtr(No.Dup) : null, p4 ? cast(const(graphene_point_t)*)p4.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new graphene.quad.Quad(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class Quad : Boxed
    *   points = an array of 4 #graphene_point_t
    * Returns: the initialized #graphene_quad_t
    */
-  Quad initFromPoints(Point[] points)
+  graphene.quad.Quad initFromPoints(graphene.point.Point[] points)
   {
     graphene_quad_t* _cretval;
     assert(!points || points.length == 4);
@@ -126,7 +126,7 @@ class Quad : Boxed
       _tmppoints ~= *cast(graphene_point_t*)obj.cPtr;
     const(graphene_point_t)* _points = _tmppoints.ptr;
     _cretval = graphene_quad_init_from_points(cast(graphene_quad_t*)cPtr, _points);
-    auto _retval = _cretval ? new Quad(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.quad.Quad(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -137,11 +137,11 @@ class Quad : Boxed
    *   r = a #graphene_rect_t
    * Returns: the initialized #graphene_quad_t
    */
-  Quad initFromRect(Rect r)
+  graphene.quad.Quad initFromRect(graphene.rect.Rect r)
   {
     graphene_quad_t* _cretval;
-    _cretval = graphene_quad_init_from_rect(cast(graphene_quad_t*)cPtr, r ? cast(graphene_rect_t*)r.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new Quad(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_quad_init_from_rect(cast(graphene_quad_t*)cPtr, r ? cast(const(graphene_rect_t)*)r.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new graphene.quad.Quad(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

@@ -1,6 +1,6 @@
 module gtk.text;
 
-import gid.global;
+import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
 import gobject.object;
@@ -72,7 +72,7 @@ import pango.tab_array;
  * as a delegate for a `GtkEditable` implementation that will be represented
  * to accessibility.
  */
-class Text : Widget, AccessibleText, Editable
+class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable.Editable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -111,11 +111,11 @@ class Text : Widget, AccessibleText, Editable
    *   buffer = The buffer to use for the new `GtkText`.
    * Returns: a new `GtkText`
    */
-  static Text newWithBuffer(EntryBuffer buffer)
+  static gtk.text.Text newWithBuffer(gtk.entry_buffer.EntryBuffer buffer)
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Text(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text.Text)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -133,13 +133,13 @@ class Text : Widget, AccessibleText, Editable
    *   strong = location to store the strong cursor position
    *   weak = location to store the weak cursor position
    */
-  void computeCursorExtents(size_t position, out Rect strong, out Rect weak)
+  void computeCursorExtents(size_t position, out graphene.rect.Rect strong, out graphene.rect.Rect weak)
   {
     graphene_rect_t _strong;
     graphene_rect_t _weak;
     gtk_text_compute_cursor_extents(cast(GtkText*)cPtr, position, &_strong, &_weak);
-    strong = new Rect(cast(void*)&_strong, No.Take);
-    weak = new Rect(cast(void*)&_weak, No.Take);
+    strong = new graphene.rect.Rect(cast(void*)&_strong, No.Take);
+    weak = new graphene.rect.Rect(cast(void*)&_weak, No.Take);
   }
 
   /**
@@ -160,11 +160,11 @@ class Text : Widget, AccessibleText, Editable
    * See [gtk.text.Text.setAttributes].
    * Returns: the attribute list
    */
-  AttrList getAttributes()
+  pango.attr_list.AttrList getAttributes()
   {
     PangoAttrList* _cretval;
     _cretval = gtk_text_get_attributes(cast(GtkText*)cPtr);
-    auto _retval = _cretval ? new AttrList(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -173,11 +173,11 @@ class Text : Widget, AccessibleText, Editable
    * this widget.
    * Returns: A `GtkEntryBuffer` object.
    */
-  EntryBuffer getBuffer()
+  gtk.entry_buffer.EntryBuffer getBuffer()
   {
     GtkEntryBuffer* _cretval;
     _cretval = gtk_text_get_buffer(cast(GtkText*)cPtr);
-    auto _retval = ObjectG.getDObject!EntryBuffer(cast(GtkEntryBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.entry_buffer.EntryBuffer)(cast(GtkEntryBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -198,11 +198,11 @@ class Text : Widget, AccessibleText, Editable
    * See [gtk.text.Text.setExtraMenu].
    * Returns: the menu model
    */
-  MenuModel getExtraMenu()
+  gio.menu_model.MenuModel getExtraMenu()
   {
     GMenuModel* _cretval;
     _cretval = gtk_text_get_extra_menu(cast(GtkText*)cPtr);
-    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -210,11 +210,11 @@ class Text : Widget, AccessibleText, Editable
    * Gets the input hints of the `GtkText`.
    * Returns:
    */
-  InputHints getInputHints()
+  gtk.types.InputHints getInputHints()
   {
     GtkInputHints _cretval;
     _cretval = gtk_text_get_input_hints(cast(GtkText*)cPtr);
-    InputHints _retval = cast(InputHints)_cretval;
+    gtk.types.InputHints _retval = cast(gtk.types.InputHints)_cretval;
     return _retval;
   }
 
@@ -222,11 +222,11 @@ class Text : Widget, AccessibleText, Editable
    * Gets the input purpose of the `GtkText`.
    * Returns:
    */
-  InputPurpose getInputPurpose()
+  gtk.types.InputPurpose getInputPurpose()
   {
     GtkInputPurpose _cretval;
     _cretval = gtk_text_get_input_purpose(cast(GtkText*)cPtr);
-    InputPurpose _retval = cast(InputPurpose)_cretval;
+    gtk.types.InputPurpose _retval = cast(gtk.types.InputPurpose)_cretval;
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class Text : Widget, AccessibleText, Editable
   {
     const(char)* _cretval;
     _cretval = gtk_text_get_placeholder_text(cast(GtkText*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -303,11 +303,11 @@ class Text : Widget, AccessibleText, Editable
    * See [gtk.text.Text.setTabs].
    * Returns: the tabstops
    */
-  TabArray getTabs()
+  pango.tab_array.TabArray getTabs()
   {
     PangoTabArray* _cretval;
     _cretval = gtk_text_get_tabs(cast(GtkText*)cPtr);
-    auto _retval = _cretval ? new TabArray(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -383,7 +383,7 @@ class Text : Widget, AccessibleText, Editable
    * Params:
    *   attrs = a `PangoAttrList`
    */
-  void setAttributes(AttrList attrs)
+  void setAttributes(pango.attr_list.AttrList attrs)
   {
     gtk_text_set_attributes(cast(GtkText*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
@@ -394,7 +394,7 @@ class Text : Widget, AccessibleText, Editable
    * Params:
    *   buffer = a `GtkEntryBuffer`
    */
-  void setBuffer(EntryBuffer buffer)
+  void setBuffer(gtk.entry_buffer.EntryBuffer buffer)
   {
     gtk_text_set_buffer(cast(GtkText*)cPtr, buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
   }
@@ -418,7 +418,7 @@ class Text : Widget, AccessibleText, Editable
    * Params:
    *   model = a `GMenuModel`
    */
-  void setExtraMenu(MenuModel model)
+  void setExtraMenu(gio.menu_model.MenuModel model)
   {
     gtk_text_set_extra_menu(cast(GtkText*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
@@ -429,7 +429,7 @@ class Text : Widget, AccessibleText, Editable
    * Params:
    *   hints = the hints
    */
-  void setInputHints(InputHints hints)
+  void setInputHints(gtk.types.InputHints hints)
   {
     gtk_text_set_input_hints(cast(GtkText*)cPtr, hints);
   }
@@ -441,7 +441,7 @@ class Text : Widget, AccessibleText, Editable
    * Params:
    *   purpose = the purpose
    */
-  void setInputPurpose(InputPurpose purpose)
+  void setInputPurpose(gtk.types.InputPurpose purpose)
   {
     gtk_text_set_input_purpose(cast(GtkText*)cPtr, purpose);
   }
@@ -516,7 +516,7 @@ class Text : Widget, AccessibleText, Editable
    * Params:
    *   tabs = a `PangoTabArray`
    */
-  void setTabs(TabArray tabs)
+  void setTabs(pango.tab_array.TabArray tabs)
   {
     gtk_text_set_tabs(cast(GtkText*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }
@@ -569,8 +569,8 @@ class Text : Widget, AccessibleText, Editable
    * of the <kbd>Enter</kbd> key.
    *   text = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(Text text);
-  alias ActivateCallbackFunc = void function(Text text);
+  alias ActivateCallbackDlg = void delegate(gtk.text.Text text);
+  alias ActivateCallbackFunc = void function(gtk.text.Text text);
 
   /**
    * Connect to Activate signal.
@@ -586,7 +586,7 @@ class Text : Widget, AccessibleText, Editable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
+      auto text = getVal!(gtk.text.Text)(_paramVals);
       _dClosure.dlg(text);
     }
 
@@ -601,8 +601,8 @@ class Text : Widget, AccessibleText, Editable
    * <kbd>Backspace</kbd> and <kbd>Shift</kbd>+<kbd>Backspace</kbd>.
    *   text = the instance the signal is connected to
    */
-  alias BackspaceCallbackDlg = void delegate(Text text);
-  alias BackspaceCallbackFunc = void function(Text text);
+  alias BackspaceCallbackDlg = void delegate(gtk.text.Text text);
+  alias BackspaceCallbackFunc = void function(gtk.text.Text text);
 
   /**
    * Connect to Backspace signal.
@@ -618,7 +618,7 @@ class Text : Widget, AccessibleText, Editable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
+      auto text = getVal!(gtk.text.Text)(_paramVals);
       _dClosure.dlg(text);
     }
 
@@ -634,8 +634,8 @@ class Text : Widget, AccessibleText, Editable
    * <kbd>Ctrl</kbd>+<kbd>Insert</kbd>.
    *   text = the instance the signal is connected to
    */
-  alias CopyClipboardCallbackDlg = void delegate(Text text);
-  alias CopyClipboardCallbackFunc = void function(Text text);
+  alias CopyClipboardCallbackDlg = void delegate(gtk.text.Text text);
+  alias CopyClipboardCallbackFunc = void function(gtk.text.Text text);
 
   /**
    * Connect to CopyClipboard signal.
@@ -651,7 +651,7 @@ class Text : Widget, AccessibleText, Editable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
+      auto text = getVal!(gtk.text.Text)(_paramVals);
       _dClosure.dlg(text);
     }
 
@@ -667,8 +667,8 @@ class Text : Widget, AccessibleText, Editable
    * <kbd>Shift</kbd>+<kbd>Delete</kbd>.
    *   text = the instance the signal is connected to
    */
-  alias CutClipboardCallbackDlg = void delegate(Text text);
-  alias CutClipboardCallbackFunc = void function(Text text);
+  alias CutClipboardCallbackDlg = void delegate(gtk.text.Text text);
+  alias CutClipboardCallbackFunc = void function(gtk.text.Text text);
 
   /**
    * Connect to CutClipboard signal.
@@ -684,7 +684,7 @@ class Text : Widget, AccessibleText, Editable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
+      auto text = getVal!(gtk.text.Text)(_paramVals);
       _dClosure.dlg(text);
     }
 
@@ -706,8 +706,8 @@ class Text : Widget, AccessibleText, Editable
    *   count = the number of type units to delete
    *   text = the instance the signal is connected to
    */
-  alias DeleteFromCursorCallbackDlg = void delegate(DeleteType type, int count, Text text);
-  alias DeleteFromCursorCallbackFunc = void function(DeleteType type, int count, Text text);
+  alias DeleteFromCursorCallbackDlg = void delegate(gtk.types.DeleteType type, int count, gtk.text.Text text);
+  alias DeleteFromCursorCallbackFunc = void function(gtk.types.DeleteType type, int count, gtk.text.Text text);
 
   /**
    * Connect to DeleteFromCursor signal.
@@ -723,9 +723,9 @@ class Text : Widget, AccessibleText, Editable
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
-      auto type = getVal!DeleteType(&_paramVals[1]);
-      auto count = getVal!int(&_paramVals[2]);
+      auto text = getVal!(gtk.text.Text)(_paramVals);
+      auto type = getVal!(gtk.types.DeleteType)(&_paramVals[1]);
+      auto count = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(type, count, text);
     }
 
@@ -742,8 +742,8 @@ class Text : Widget, AccessibleText, Editable
    *   string_ = the string to insert
    *   text = the instance the signal is connected to
    */
-  alias InsertAtCursorCallbackDlg = void delegate(string string_, Text text);
-  alias InsertAtCursorCallbackFunc = void function(string string_, Text text);
+  alias InsertAtCursorCallbackDlg = void delegate(string string_, gtk.text.Text text);
+  alias InsertAtCursorCallbackFunc = void function(string string_, gtk.text.Text text);
 
   /**
    * Connect to InsertAtCursor signal.
@@ -759,8 +759,8 @@ class Text : Widget, AccessibleText, Editable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
-      auto string_ = getVal!string(&_paramVals[1]);
+      auto text = getVal!(gtk.text.Text)(_paramVals);
+      auto string_ = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(string_, text);
     }
 
@@ -776,8 +776,8 @@ class Text : Widget, AccessibleText, Editable
    * <kbd>Ctrl</kbd>+<kbd>;</kbd>
    *   text = the instance the signal is connected to
    */
-  alias InsertEmojiCallbackDlg = void delegate(Text text);
-  alias InsertEmojiCallbackFunc = void function(Text text);
+  alias InsertEmojiCallbackDlg = void delegate(gtk.text.Text text);
+  alias InsertEmojiCallbackFunc = void function(gtk.text.Text text);
 
   /**
    * Connect to InsertEmoji signal.
@@ -793,7 +793,7 @@ class Text : Widget, AccessibleText, Editable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
+      auto text = getVal!(gtk.text.Text)(_paramVals);
       _dClosure.dlg(text);
     }
 
@@ -823,8 +823,8 @@ class Text : Widget, AccessibleText, Editable
    *   extend = %TRUE if the move should extend the selection
    *   text = the instance the signal is connected to
    */
-  alias MoveCursorCallbackDlg = void delegate(MovementStep step, int count, bool extend, Text text);
-  alias MoveCursorCallbackFunc = void function(MovementStep step, int count, bool extend, Text text);
+  alias MoveCursorCallbackDlg = void delegate(gtk.types.MovementStep step, int count, bool extend, gtk.text.Text text);
+  alias MoveCursorCallbackFunc = void function(gtk.types.MovementStep step, int count, bool extend, gtk.text.Text text);
 
   /**
    * Connect to MoveCursor signal.
@@ -840,10 +840,10 @@ class Text : Widget, AccessibleText, Editable
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
-      auto step = getVal!MovementStep(&_paramVals[1]);
-      auto count = getVal!int(&_paramVals[2]);
-      auto extend = getVal!bool(&_paramVals[3]);
+      auto text = getVal!(gtk.text.Text)(_paramVals);
+      auto step = getVal!(gtk.types.MovementStep)(&_paramVals[1]);
+      auto count = getVal!(int)(&_paramVals[2]);
+      auto extend = getVal!(bool)(&_paramVals[3]);
       _dClosure.dlg(step, count, extend, text);
     }
 
@@ -858,8 +858,8 @@ class Text : Widget, AccessibleText, Editable
    * <kbd>Ctrl</kbd>+<kbd>v</kbd> and <kbd>Shift</kbd>+<kbd>Insert</kbd>.
    *   text = the instance the signal is connected to
    */
-  alias PasteClipboardCallbackDlg = void delegate(Text text);
-  alias PasteClipboardCallbackFunc = void function(Text text);
+  alias PasteClipboardCallbackDlg = void delegate(gtk.text.Text text);
+  alias PasteClipboardCallbackFunc = void function(gtk.text.Text text);
 
   /**
    * Connect to PasteClipboard signal.
@@ -875,7 +875,7 @@ class Text : Widget, AccessibleText, Editable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
+      auto text = getVal!(gtk.text.Text)(_paramVals);
       _dClosure.dlg(text);
     }
 
@@ -892,8 +892,8 @@ class Text : Widget, AccessibleText, Editable
    *   preedit = the current preedit string
    *   text = the instance the signal is connected to
    */
-  alias PreeditChangedCallbackDlg = void delegate(string preedit, Text text);
-  alias PreeditChangedCallbackFunc = void function(string preedit, Text text);
+  alias PreeditChangedCallbackDlg = void delegate(string preedit, gtk.text.Text text);
+  alias PreeditChangedCallbackFunc = void function(string preedit, gtk.text.Text text);
 
   /**
    * Connect to PreeditChanged signal.
@@ -909,8 +909,8 @@ class Text : Widget, AccessibleText, Editable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
-      auto preedit = getVal!string(&_paramVals[1]);
+      auto text = getVal!(gtk.text.Text)(_paramVals);
+      auto preedit = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(preedit, text);
     }
 
@@ -924,8 +924,8 @@ class Text : Widget, AccessibleText, Editable
    * The default bindings for this signal is <kbd>Insert</kbd>.
    *   text = the instance the signal is connected to
    */
-  alias ToggleOverwriteCallbackDlg = void delegate(Text text);
-  alias ToggleOverwriteCallbackFunc = void function(Text text);
+  alias ToggleOverwriteCallbackDlg = void delegate(gtk.text.Text text);
+  alias ToggleOverwriteCallbackFunc = void function(gtk.text.Text text);
 
   /**
    * Connect to ToggleOverwrite signal.
@@ -941,7 +941,7 @@ class Text : Widget, AccessibleText, Editable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto text = getVal!Text(_paramVals);
+      auto text = getVal!(gtk.text.Text)(_paramVals);
       _dClosure.dlg(text);
     }
 

@@ -3,10 +3,10 @@ module arrow.function_options;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class FunctionOptions : ObjectG
+class FunctionOptions : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -25,7 +25,7 @@ class FunctionOptions : ObjectG
     return getType();
   }
 
-  bool equal(FunctionOptions otherOptions)
+  bool equal(arrow.function_options.FunctionOptions otherOptions)
   {
     bool _retval;
     _retval = garrow_function_options_equal(cast(GArrowFunctionOptions*)cPtr, otherOptions ? cast(GArrowFunctionOptions*)otherOptions.cPtr(No.Dup) : null);
@@ -36,7 +36,7 @@ class FunctionOptions : ObjectG
   {
     char* _cretval;
     _cretval = garrow_function_options_to_string(cast(GArrowFunctionOptions*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

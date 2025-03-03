@@ -4,12 +4,12 @@ import arrow.buffer;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.error;
 import gobject.object;
 
-class MutableBuffer : Buffer
+class MutableBuffer : arrow.buffer.Buffer
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -40,15 +40,15 @@ class MutableBuffer : Buffer
     this(_cretval, Yes.Take);
   }
 
-  static MutableBuffer newBytes(Bytes data)
+  static arrow.mutable_buffer.MutableBuffer newBytes(glib.bytes.Bytes data)
   {
     GArrowMutableBuffer* _cretval;
     _cretval = garrow_mutable_buffer_new_bytes(data ? cast(GBytes*)data.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!MutableBuffer(cast(GArrowMutableBuffer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.mutable_buffer.MutableBuffer)(cast(GArrowMutableBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
-  alias setData = ObjectG.setData;
+  alias setData = gobject.object.ObjectG.setData;
 
   bool setData(long offset, ubyte[] data)
   {
@@ -65,11 +65,11 @@ class MutableBuffer : Buffer
     return _retval;
   }
 
-  override MutableBuffer slice(long offset, long size)
+  override arrow.mutable_buffer.MutableBuffer slice(long offset, long size)
   {
     GArrowMutableBuffer* _cretval;
     _cretval = garrow_mutable_buffer_slice(cast(GArrowMutableBuffer*)cPtr, offset, size);
-    auto _retval = ObjectG.getDObject!MutableBuffer(cast(GArrowMutableBuffer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.mutable_buffer.MutableBuffer)(cast(GArrowMutableBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 }

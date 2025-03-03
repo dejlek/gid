@@ -1,7 +1,7 @@
 module gio.converter;
 
 public import gio.converter_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -108,7 +108,7 @@ interface Converter
    *     written to outbuf on success
    * Returns: a #GConverterResult, %G_CONVERTER_ERROR on error.
    */
-  ConverterResult convert(ubyte[] inbuf, ubyte[] outbuf, ConverterFlags flags, out size_t bytesRead, out size_t bytesWritten);
+  gio.types.ConverterResult convert(ubyte[] inbuf, ubyte[] outbuf, gio.types.ConverterFlags flags, out size_t bytesRead, out size_t bytesWritten);
 
   /**
    * Resets all internal state in the converter, making it behave

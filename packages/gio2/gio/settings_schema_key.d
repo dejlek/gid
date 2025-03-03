@@ -1,6 +1,6 @@
 module gio.settings_schema_key;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -12,7 +12,7 @@ import gobject.boxed;
  * #GSettingsSchemaKey is an opaque data structure and can only be accessed
  * using the following functions.
  */
-class SettingsSchemaKey : Boxed
+class SettingsSchemaKey : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -42,11 +42,11 @@ class SettingsSchemaKey : Boxed
    * administrator defaults and lockdown are not visible via this API.
    * Returns: the default value for the key
    */
-  VariantG getDefaultValue()
+  glib.variant.VariantG getDefaultValue()
   {
     VariantC* _cretval;
     _cretval = g_settings_schema_key_get_default_value(cast(GSettingsSchemaKey*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -68,7 +68,7 @@ class SettingsSchemaKey : Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_key_get_description(cast(GSettingsSchemaKey*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class SettingsSchemaKey : Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_key_get_name(cast(GSettingsSchemaKey*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -115,11 +115,11 @@ class SettingsSchemaKey : Boxed
    * no longer needed.
    * Returns: a #GVariant describing the range
    */
-  VariantG getRange()
+  glib.variant.VariantG getRange()
   {
     VariantC* _cretval;
     _cretval = g_settings_schema_key_get_range(cast(GSettingsSchemaKey*)cPtr);
-    auto _retval = _cretval ? new VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class SettingsSchemaKey : Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_key_get_summary(cast(GSettingsSchemaKey*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -148,11 +148,11 @@ class SettingsSchemaKey : Boxed
    * Gets the #GVariantType of key.
    * Returns: the type of key
    */
-  VariantType getValueType()
+  glib.variant_type.VariantType getValueType()
   {
     const(GVariantType)* _cretval;
     _cretval = g_settings_schema_key_get_value_type(cast(GSettingsSchemaKey*)cPtr);
-    auto _retval = _cretval ? new VariantType(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class SettingsSchemaKey : Boxed
    *   value = the value to check
    * Returns: %TRUE if value is valid for key
    */
-  bool rangeCheck(VariantG value)
+  bool rangeCheck(glib.variant.VariantG value)
   {
     bool _retval;
     _retval = g_settings_schema_key_range_check(cast(GSettingsSchemaKey*)cPtr, value ? cast(VariantC*)value.cPtr(No.Dup) : null);

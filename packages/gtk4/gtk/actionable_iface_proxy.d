@@ -5,7 +5,7 @@ import gtk.actionable;
 import gtk.actionable_mixin;
 
 /// Proxy object for Gtk.Actionable interface when a GObject has no applicable D binding
-class ActionableIfaceProxy : IfaceProxy, Actionable
+class ActionableIfaceProxy : IfaceProxy, gtk.actionable.Actionable
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class ActionableIfaceProxy : IfaceProxy, Actionable
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Actionable);
+    return typeid(gtk.actionable.Actionable);
   }
 
   mixin ActionableT!();

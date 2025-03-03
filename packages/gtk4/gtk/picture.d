@@ -1,11 +1,9 @@
 module gtk.picture;
 
 import gdk.paintable;
-import gdk.paintable_mixin;
 import gdkpixbuf.pixbuf;
-import gid.global;
+import gid.gid;
 import gio.file;
-import gio.file_mixin;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -41,7 +39,7 @@ import gtk.widget;
  * if you want to display a fixed-size image, such as an icon.
  * ## Sizing the paintable
  * You can influence how the paintable is displayed inside the `GtkPicture`
- * by changing property@Gtk.Picture:content-fit. See [gtk.ContentFit]
+ * by changing property@Gtk.Picture:content-fit. See [gtk.types.ContentFit]
  * for details. property@Gtk.Picture:can-shrink can be unset to make sure
  * that paintables are never made smaller than their ideal size - but
  * be careful if you do not know the size of the paintable in use $(LPAREN)like
@@ -54,7 +52,7 @@ import gtk.widget;
  * ## Accessibility
  * `GtkPicture` uses the `GTK_ACCESSIBLE_ROLE_IMG` role.
  */
-class Picture : Widget
+class Picture : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -95,11 +93,11 @@ class Picture : Widget
    *   file = a `GFile`
    * Returns: a new `GtkPicture`
    */
-  static Picture newForFile(File file)
+  static gtk.picture.Picture newForFile(gio.file.File file)
   {
     GtkWidget* _cretval;
     _cretval = gtk_picture_new_for_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Picture(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -111,12 +109,12 @@ class Picture : Widget
    *   filename = a filename
    * Returns: a new `GtkPicture`
    */
-  static Picture newForFilename(string filename)
+  static gtk.picture.Picture newForFilename(string filename)
   {
     GtkWidget* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_picture_new_for_filename(_filename);
-    auto _retval = ObjectG.getDObject!Picture(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -128,11 +126,11 @@ class Picture : Widget
    *   paintable = a `GdkPaintable`
    * Returns: a new `GtkPicture`
    */
-  static Picture newForPaintable(Paintable paintable)
+  static gtk.picture.Picture newForPaintable(gdk.paintable.Paintable paintable)
   {
     GtkWidget* _cretval;
     _cretval = gtk_picture_new_for_paintable(paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Picture(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -148,11 +146,11 @@ class Picture : Widget
    * Deprecated: Use [gtk.picture.Picture.newForPaintable] and
    *   [gdk.texture.Texture.newForPixbuf] instead
    */
-  static Picture newForPixbuf(Pixbuf pixbuf)
+  static gtk.picture.Picture newForPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GtkWidget* _cretval;
     _cretval = gtk_picture_new_for_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Picture(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -164,12 +162,12 @@ class Picture : Widget
    *   resourcePath = resource path to play back
    * Returns: a new `GtkPicture`
    */
-  static Picture newForResource(string resourcePath)
+  static gtk.picture.Picture newForResource(string resourcePath)
   {
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gtk_picture_new_for_resource(_resourcePath);
-    auto _retval = ObjectG.getDObject!Picture(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -182,7 +180,7 @@ class Picture : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_picture_get_alternative_text(cast(GtkPicture*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -199,14 +197,14 @@ class Picture : Widget
 
   /**
    * Returns the fit mode for the content of the `GtkPicture`.
-   * See [gtk.ContentFit] for details.
+   * See [gtk.types.ContentFit] for details.
    * Returns: the content fit mode
    */
-  ContentFit getContentFit()
+  gtk.types.ContentFit getContentFit()
   {
     GtkContentFit _cretval;
     _cretval = gtk_picture_get_content_fit(cast(GtkPicture*)cPtr);
-    ContentFit _retval = cast(ContentFit)_cretval;
+    gtk.types.ContentFit _retval = cast(gtk.types.ContentFit)_cretval;
     return _retval;
   }
 
@@ -216,11 +214,11 @@ class Picture : Widget
    * [gtk.picture.Picture.setPaintable] was used, then %NULL is returned.
    * Returns: The `GFile` displayed by self.
    */
-  File getFile()
+  gio.file.File getFile()
   {
     GFile* _cretval;
     _cretval = gtk_picture_get_file(cast(GtkPicture*)cPtr);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -243,11 +241,11 @@ class Picture : Widget
    * Gets the `GdkPaintable` being displayed by the `GtkPicture`.
    * Returns: the displayed paintable
    */
-  Paintable getPaintable()
+  gdk.paintable.Paintable getPaintable()
   {
     GdkPaintable* _cretval;
     _cretval = gtk_picture_get_paintable(cast(GtkPicture*)cPtr);
-    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -283,11 +281,11 @@ class Picture : Widget
 
   /**
    * Sets how the content should be resized to fit the `GtkPicture`.
-   * See [gtk.ContentFit] for details.
+   * See [gtk.types.ContentFit] for details.
    * Params:
    *   contentFit = the content fit mode
    */
-  void setContentFit(ContentFit contentFit)
+  void setContentFit(gtk.types.ContentFit contentFit)
   {
     gtk_picture_set_content_fit(cast(GtkPicture*)cPtr, contentFit);
   }
@@ -298,7 +296,7 @@ class Picture : Widget
    * Params:
    *   file = a `GFile`
    */
-  void setFile(File file)
+  void setFile(gio.file.File file)
   {
     gtk_picture_set_file(cast(GtkPicture*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }
@@ -342,7 +340,7 @@ class Picture : Widget
    * Params:
    *   paintable = a `GdkPaintable`
    */
-  void setPaintable(Paintable paintable)
+  void setPaintable(gdk.paintable.Paintable paintable)
   {
     gtk_picture_set_paintable(cast(GtkPicture*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
@@ -356,7 +354,7 @@ class Picture : Widget
 
    * Deprecated: Use [gtk.picture.Picture.setPaintable] instead
    */
-  void setPixbuf(Pixbuf pixbuf)
+  void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     gtk_picture_set_pixbuf(cast(GtkPicture*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }

@@ -1,6 +1,6 @@
 module gtk.layout_manager;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -50,7 +50,7 @@ import gtk.widget;
  * [gtk.layout_manager.LayoutManager.layoutChanged] every time a property is
  * updated, in order to queue a new size measuring and allocation.
  */
-class LayoutManager : ObjectG
+class LayoutManager : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -79,7 +79,7 @@ class LayoutManager : ObjectG
    *   height = the new height of the widget
    *   baseline = the baseline position of the widget, or -1
    */
-  void allocate(Widget widget, int width, int height, int baseline)
+  void allocate(gtk.widget.Widget widget, int width, int height, int baseline)
   {
     gtk_layout_manager_allocate(cast(GtkLayoutManager*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, width, height, baseline);
   }
@@ -95,11 +95,11 @@ class LayoutManager : ObjectG
    *   child = a `GtkWidget`
    * Returns: a `GtkLayoutChild`
    */
-  LayoutChild getLayoutChild(Widget child)
+  gtk.layout_child.LayoutChild getLayoutChild(gtk.widget.Widget child)
   {
     GtkLayoutChild* _cretval;
     _cretval = gtk_layout_manager_get_layout_child(cast(GtkLayoutManager*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!LayoutChild(cast(GtkLayoutChild*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.layout_child.LayoutChild)(cast(GtkLayoutChild*)_cretval, No.Take);
     return _retval;
   }
 
@@ -107,11 +107,11 @@ class LayoutManager : ObjectG
    * Retrieves the request mode of manager.
    * Returns: a `GtkSizeRequestMode`
    */
-  SizeRequestMode getRequestMode()
+  gtk.types.SizeRequestMode getRequestMode()
   {
     GtkSizeRequestMode _cretval;
     _cretval = gtk_layout_manager_get_request_mode(cast(GtkLayoutManager*)cPtr);
-    SizeRequestMode _retval = cast(SizeRequestMode)_cretval;
+    gtk.types.SizeRequestMode _retval = cast(gtk.types.SizeRequestMode)_cretval;
     return _retval;
   }
 
@@ -119,11 +119,11 @@ class LayoutManager : ObjectG
    * Retrieves the `GtkWidget` using the given `GtkLayoutManager`.
    * Returns: a `GtkWidget`
    */
-  Widget getWidget()
+  gtk.widget.Widget getWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_layout_manager_get_widget(cast(GtkLayoutManager*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class LayoutManager : ObjectG
    *   naturalBaseline = the baseline position for the
    *     natural size
    */
-  void measure(Widget widget, Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline)
+  void measure(gtk.widget.Widget widget, gtk.types.Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline)
   {
     gtk_layout_manager_measure(cast(GtkLayoutManager*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, orientation, forSize, cast(int*)&minimum, cast(int*)&natural, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
   }

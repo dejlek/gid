@@ -4,9 +4,9 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.timestamp_parser;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class ISO8601TimestampParser : TimestampParser
+class ISO8601TimestampParser : arrow.timestamp_parser.TimestampParser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

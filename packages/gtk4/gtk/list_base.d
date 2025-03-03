@@ -1,6 +1,6 @@
 module gtk.list_base;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -19,7 +19,7 @@ import gtk.widget;
 /**
  * `GtkListBase` is the abstract base class for GTK's list widgets.
  */
-class ListBase : Widget, Orientable, Scrollable
+class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Scrollable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

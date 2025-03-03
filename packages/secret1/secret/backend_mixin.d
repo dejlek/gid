@@ -1,9 +1,8 @@
 module secret.backend_mixin;
 
 public import secret.backend_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.async_result;
-public import gio.async_result_mixin;
 public import gio.cancellable;
 public import gio.types;
 public import glib.error;

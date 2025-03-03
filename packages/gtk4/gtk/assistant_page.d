@@ -1,6 +1,6 @@
 module gtk.assistant_page;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -12,7 +12,7 @@ import gtk.widget;
 
  * Deprecated: This object will be removed in GTK 5
  */
-class AssistantPage : ObjectG
+class AssistantPage : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -37,11 +37,11 @@ class AssistantPage : ObjectG
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_assistant_page_get_child(cast(GtkAssistantPage*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 }

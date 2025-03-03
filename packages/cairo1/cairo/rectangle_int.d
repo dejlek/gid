@@ -3,13 +3,13 @@ module cairo.rectangle_int;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
  * A data structure for holding a rectangle with integer coordinates.
  */
-class RectangleInt : Boxed
+class RectangleInt : gobject.boxed.Boxed
 {
 
   this()

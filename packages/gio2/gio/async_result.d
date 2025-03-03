@@ -1,7 +1,7 @@
 module gio.async_result;
 
 public import gio.async_result_iface_proxy;
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -93,7 +93,7 @@ interface AsyncResult
    * Returns: a new reference to the source
    *   object for the res, or %NULL if there is none.
    */
-  ObjectG getSourceObject();
+  gobject.object.ObjectG getSourceObject();
 
   /**
    * Gets the user data from a #GAsyncResult.

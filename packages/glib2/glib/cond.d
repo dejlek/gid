@@ -1,6 +1,6 @@
 module glib.cond;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.mutex;
@@ -148,7 +148,7 @@ class Cond
    * Params:
    *   mutex = a #GMutex that is currently locked
    */
-  void wait(Mutex mutex)
+  void wait(glib.mutex.Mutex mutex)
   {
     g_cond_wait(cast(GCond*)cPtr, mutex ? cast(GMutex*)mutex.cPtr : null);
   }
@@ -197,7 +197,7 @@ class Cond
    *   endTime = the monotonic time to wait until
    * Returns: %TRUE on a signal, %FALSE on a timeout
    */
-  bool waitUntil(Mutex mutex, long endTime)
+  bool waitUntil(glib.mutex.Mutex mutex, long endTime)
   {
     bool _retval;
     _retval = g_cond_wait_until(cast(GCond*)cPtr, mutex ? cast(GMutex*)mutex.cPtr : null, endTime);

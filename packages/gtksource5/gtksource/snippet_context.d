@@ -1,6 +1,6 @@
 module gtksource.snippet_context;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtksource.c.functions;
@@ -16,7 +16,7 @@ import gtksource.types;
  * The class@Snippet will build the context and then expand each of the
  * chunks during the insertion/edit phase.
  */
-class SnippetContext : ObjectG
+class SnippetContext : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -61,7 +61,7 @@ class SnippetContext : ObjectG
     char* _cretval;
     const(char)* _input = input.toCString(No.Alloc);
     _cretval = gtk_source_snippet_context_expand(cast(GtkSourceSnippetContext*)cPtr, _input);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class SnippetContext : ObjectG
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     _cretval = gtk_source_snippet_context_get_variable(cast(GtkSourceSnippetContext*)cPtr, _key);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -134,8 +134,8 @@ class SnippetContext : ObjectG
    * to have changed.
    *   snippetContext = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(SnippetContext snippetContext);
-  alias ChangedCallbackFunc = void function(SnippetContext snippetContext);
+  alias ChangedCallbackDlg = void delegate(gtksource.snippet_context.SnippetContext snippetContext);
+  alias ChangedCallbackFunc = void function(gtksource.snippet_context.SnippetContext snippetContext);
 
   /**
    * Connect to Changed signal.
@@ -151,7 +151,7 @@ class SnippetContext : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto snippetContext = getVal!SnippetContext(_paramVals);
+      auto snippetContext = getVal!(gtksource.snippet_context.SnippetContext)(_paramVals);
       _dClosure.dlg(snippetContext);
     }
 

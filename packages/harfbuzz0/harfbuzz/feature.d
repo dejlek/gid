@@ -1,6 +1,6 @@
 module harfbuzz.feature;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
@@ -13,7 +13,7 @@ import harfbuzz.types;
  * Setting start to #HB_FEATURE_GLOBAL_START and end to #HB_FEATURE_GLOBAL_END
  * specifies that the feature always applies to the entire buffer.
  */
-class Feature : Boxed
+class Feature : gobject.boxed.Boxed
 {
 
   this()
@@ -42,12 +42,12 @@ class Feature : Boxed
     return getType();
   }
 
-  @property Tag tag()
+  @property harfbuzz.types.Tag tag()
   {
     return (cast(hb_feature_t*)cPtr).tag;
   }
 
-  @property void tag(Tag propval)
+  @property void tag(harfbuzz.types.Tag propval)
   {
     (cast(hb_feature_t*)cPtr).tag = propval;
   }

@@ -2,7 +2,7 @@ module gtk.cell_editable;
 
 public import gtk.cell_editable_iface_proxy;
 import gdk.event;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -48,7 +48,7 @@ interface CellEditable
    *   event = The `GdkEvent` that began the editing process, or
    *     %NULL if editing was initiated programmatically
    */
-  void startEditing(Event event);
+  void startEditing(gdk.event.Event event);
 
   /**
    * This signal is a sign for the cell renderer to update its
@@ -62,8 +62,8 @@ interface CellEditable
    * for emitting `GtkCellEditable::editing-done`.
    *   cellEditable = the instance the signal is connected to
    */
-  alias EditingDoneCallbackDlg = void delegate(CellEditable cellEditable);
-  alias EditingDoneCallbackFunc = void function(CellEditable cellEditable);
+  alias EditingDoneCallbackDlg = void delegate(gtk.cell_editable.CellEditable cellEditable);
+  alias EditingDoneCallbackFunc = void function(gtk.cell_editable.CellEditable cellEditable);
 
   /**
    * Connect to EditingDone signal.
@@ -88,8 +88,8 @@ interface CellEditable
    * for emitting `GtkCellEditable::remove-widget`.
    *   cellEditable = the instance the signal is connected to
    */
-  alias RemoveWidgetCallbackDlg = void delegate(CellEditable cellEditable);
-  alias RemoveWidgetCallbackFunc = void function(CellEditable cellEditable);
+  alias RemoveWidgetCallbackDlg = void delegate(gtk.cell_editable.CellEditable cellEditable);
+  alias RemoveWidgetCallbackFunc = void function(gtk.cell_editable.CellEditable cellEditable);
 
   /**
    * Connect to RemoveWidget signal.

@@ -1,6 +1,6 @@
 module soup.cache;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import soup.c.functions;
 import soup.c.types;
@@ -11,7 +11,7 @@ import soup.types;
 /**
  * File-based cache for HTTP resources.
  */
-class Cache : ObjectG, SessionFeature
+class Cache : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -42,7 +42,7 @@ class Cache : ObjectG, SessionFeature
    *   cacheType = the #SoupCacheType of the cache
    * Returns: a new #SoupCache
    */
-  this(string cacheDir, CacheType cacheType)
+  this(string cacheDir, soup.types.CacheType cacheType)
   {
     SoupCache* _cretval;
     const(char)* _cacheDir = cacheDir.toCString(No.Alloc);

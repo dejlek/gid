@@ -3,7 +3,7 @@ module cairo.glyph;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -21,7 +21,7 @@ import gobject.boxed;
  * drawing or measuring text, each glyph is individually positioned
  * with respect to the overall origin
  */
-class Glyph : Boxed
+class Glyph : gobject.boxed.Boxed
 {
 
   this()

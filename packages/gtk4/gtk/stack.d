@@ -1,6 +1,6 @@
 module gtk.stack;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -11,7 +11,6 @@ import gtk.c.types;
 import gtk.constraint_target;
 import gtk.constraint_target_mixin;
 import gtk.selection_model;
-import gtk.selection_model_mixin;
 import gtk.stack_page;
 import gtk.types;
 import gtk.widget;
@@ -55,7 +54,7 @@ import gtk.widget;
  * `GtkStack` uses the %GTK_ACCESSIBLE_ROLE_TAB_PANEL for the stack
  * pages, which are the accessible parent objects of the child widgets.
  */
-class Stack : Widget
+class Stack : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -91,11 +90,11 @@ class Stack : Widget
    *   child = the widget to add
    * Returns: the `GtkStackPage` for child
    */
-  StackPage addChild(Widget child)
+  gtk.stack_page.StackPage addChild(gtk.widget.Widget child)
   {
     GtkStackPage* _cretval;
     _cretval = gtk_stack_add_child(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!StackPage(cast(GtkStackPage*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.stack_page.StackPage)(cast(GtkStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -107,12 +106,12 @@ class Stack : Widget
    *   name = the name for child
    * Returns: the `GtkStackPage` for child
    */
-  StackPage addNamed(Widget child, string name)
+  gtk.stack_page.StackPage addNamed(gtk.widget.Widget child, string name)
   {
     GtkStackPage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_stack_add_named(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _name);
-    auto _retval = ObjectG.getDObject!StackPage(cast(GtkStackPage*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.stack_page.StackPage)(cast(GtkStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -127,13 +126,13 @@ class Stack : Widget
    *   title = a human-readable title for child
    * Returns: the `GtkStackPage` for child
    */
-  StackPage addTitled(Widget child, string name, string title)
+  gtk.stack_page.StackPage addTitled(gtk.widget.Widget child, string name, string title)
   {
     GtkStackPage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _title = title.toCString(No.Alloc);
     _cretval = gtk_stack_add_titled(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _name, _title);
-    auto _retval = ObjectG.getDObject!StackPage(cast(GtkStackPage*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.stack_page.StackPage)(cast(GtkStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -145,12 +144,12 @@ class Stack : Widget
    * Returns: the requested child
    *   of the `GtkStack`
    */
-  Widget getChildByName(string name)
+  gtk.widget.Widget getChildByName(string name)
   {
     GtkWidget* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_stack_get_child_by_name(cast(GtkStack*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -183,11 +182,11 @@ class Stack : Widget
    *   child = a child of stack
    * Returns: the `GtkStackPage` for child
    */
-  StackPage getPage(Widget child)
+  gtk.stack_page.StackPage getPage(gtk.widget.Widget child)
   {
     GtkStackPage* _cretval;
     _cretval = gtk_stack_get_page(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!StackPage(cast(GtkStackPage*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.stack_page.StackPage)(cast(GtkStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -198,11 +197,11 @@ class Stack : Widget
    * and modify the visible page.
    * Returns: a `GtkSelectionModel` for the stack's children
    */
-  SelectionModel getPages()
+  gtk.selection_model.SelectionModel getPages()
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_stack_get_pages(cast(GtkStack*)cPtr);
-    auto _retval = ObjectG.getDObject!SelectionModel(cast(GtkSelectionModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -235,11 +234,11 @@ class Stack : Widget
    * for transitions between pages in stack.
    * Returns: the current transition type of stack
    */
-  StackTransitionType getTransitionType()
+  gtk.types.StackTransitionType getTransitionType()
   {
     GtkStackTransitionType _cretval;
     _cretval = gtk_stack_get_transition_type(cast(GtkStack*)cPtr);
-    StackTransitionType _retval = cast(StackTransitionType)_cretval;
+    gtk.types.StackTransitionType _retval = cast(gtk.types.StackTransitionType)_cretval;
     return _retval;
   }
 
@@ -259,11 +258,11 @@ class Stack : Widget
    * Returns %NULL if there are no visible children.
    * Returns: the visible child of the `GtkStack`
    */
-  Widget getVisibleChild()
+  gtk.widget.Widget getVisibleChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_get_visible_child(cast(GtkStack*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -277,7 +276,7 @@ class Stack : Widget
   {
     const(char)* _cretval;
     _cretval = gtk_stack_get_visible_child_name(cast(GtkStack*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -286,7 +285,7 @@ class Stack : Widget
    * Params:
    *   child = the child to remove
    */
-  void remove(Widget child)
+  void remove(gtk.widget.Widget child)
   {
     gtk_stack_remove(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -340,7 +339,7 @@ class Stack : Widget
    * Params:
    *   transition = the new transition type
    */
-  void setTransitionType(StackTransitionType transition)
+  void setTransitionType(gtk.types.StackTransitionType transition)
   {
     gtk_stack_set_transition_type(cast(GtkStack*)cPtr, transition);
   }
@@ -369,7 +368,7 @@ class Stack : Widget
    * Params:
    *   child = a child of stack
    */
-  void setVisibleChild(Widget child)
+  void setVisibleChild(gtk.widget.Widget child)
   {
     gtk_stack_set_visible_child(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -383,7 +382,7 @@ class Stack : Widget
    *   name = the name of the child to make visible
    *   transition = the transition type to use
    */
-  void setVisibleChildFull(string name, StackTransitionType transition)
+  void setVisibleChildFull(string name, gtk.types.StackTransitionType transition)
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_stack_set_visible_child_full(cast(GtkStack*)cPtr, _name, transition);

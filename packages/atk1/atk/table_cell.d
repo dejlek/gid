@@ -5,7 +5,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.object;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
@@ -29,7 +29,7 @@ interface TableCell
    * Returns: a GPtrArray of AtkObjects
    *   representing the column header cells.
    */
-  ObjectAtk[] getColumnHeaderCells();
+  atk.object.ObjectAtk[] getColumnHeaderCells();
 
   /**
    * Returns the number of columns occupied by this cell accessible.
@@ -66,7 +66,7 @@ interface TableCell
    * Returns: a GPtrArray of AtkObjects
    *   representing the row header cells.
    */
-  ObjectAtk[] getRowHeaderCells();
+  atk.object.ObjectAtk[] getRowHeaderCells();
 
   /**
    * Returns the number of rows occupied by this cell accessible.
@@ -79,5 +79,5 @@ interface TableCell
    * Returns a reference to the accessible of the containing table.
    * Returns: the atk object for the containing table.
    */
-  ObjectAtk getTable();
+  atk.object.ObjectAtk getTable();
 }

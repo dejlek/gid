@@ -22,18 +22,6 @@ __gshared extern(C)
   // EventContext
   bool function(const(VteEventContext)* context, double* x, double* y) c_vte_event_context_get_coordinates;
 
-  // Global
-  GType function() c_vte_event_context_get_type;
-  bool function(const(char)* encoding) c_vte_get_encoding_supported;
-  char** function(bool includeAliases) c_vte_get_encodings;
-  VteFeatureFlags function() c_vte_get_feature_flags;
-  const(char)* function() c_vte_get_features;
-  uint function() c_vte_get_major_version;
-  uint function() c_vte_get_micro_version;
-  uint function() c_vte_get_minor_version;
-  char* function() c_vte_get_user_shell;
-  void function(ulong flags) c_vte_set_test_flags;
-
   // Pty
   extern(C) GType function() c_vte_pty_get_type;
   VtePty* function(int fd, GCancellable* cancellable, GError** _err) c_vte_pty_new_foreign_sync;
@@ -195,22 +183,22 @@ __gshared extern(C)
   void function(VteTerminal* terminal) c_vte_terminal_unselect_all;
   void function(VteTerminal* terminal, GPid childPid) c_vte_terminal_watch_child;
   bool function(VteTerminal* terminal, GOutputStream* stream, VteWriteFlags flags, GCancellable* cancellable, GError** _err) c_vte_terminal_write_contents_sync;
+
+  // global
+  GType function() c_vte_event_context_get_type;
+  bool function(const(char)* encoding) c_vte_get_encoding_supported;
+  char** function(bool includeAliases) c_vte_get_encodings;
+  VteFeatureFlags function() c_vte_get_feature_flags;
+  const(char)* function() c_vte_get_features;
+  uint function() c_vte_get_major_version;
+  uint function() c_vte_get_micro_version;
+  uint function() c_vte_get_minor_version;
+  char* function() c_vte_get_user_shell;
+  void function(ulong flags) c_vte_set_test_flags;
 }
 
 // EventContext
 alias vte_event_context_get_coordinates = c_vte_event_context_get_coordinates;
-
-// Global
-alias vte_event_context_get_type = c_vte_event_context_get_type;
-alias vte_get_encoding_supported = c_vte_get_encoding_supported;
-alias vte_get_encodings = c_vte_get_encodings;
-alias vte_get_feature_flags = c_vte_get_feature_flags;
-alias vte_get_features = c_vte_get_features;
-alias vte_get_major_version = c_vte_get_major_version;
-alias vte_get_micro_version = c_vte_get_micro_version;
-alias vte_get_minor_version = c_vte_get_minor_version;
-alias vte_get_user_shell = c_vte_get_user_shell;
-alias vte_set_test_flags = c_vte_set_test_flags;
 
 // Pty
 alias vte_pty_get_type = c_vte_pty_get_type;
@@ -374,22 +362,22 @@ alias vte_terminal_unselect_all = c_vte_terminal_unselect_all;
 alias vte_terminal_watch_child = c_vte_terminal_watch_child;
 alias vte_terminal_write_contents_sync = c_vte_terminal_write_contents_sync;
 
+// global
+alias vte_event_context_get_type = c_vte_event_context_get_type;
+alias vte_get_encoding_supported = c_vte_get_encoding_supported;
+alias vte_get_encodings = c_vte_get_encodings;
+alias vte_get_feature_flags = c_vte_get_feature_flags;
+alias vte_get_features = c_vte_get_features;
+alias vte_get_major_version = c_vte_get_major_version;
+alias vte_get_micro_version = c_vte_get_micro_version;
+alias vte_get_minor_version = c_vte_get_minor_version;
+alias vte_get_user_shell = c_vte_get_user_shell;
+alias vte_set_test_flags = c_vte_set_test_flags;
+
 shared static this()
 {
   // EventContext
   gidLink(cast(void**)&vte_event_context_get_coordinates, "vte_event_context_get_coordinates", LIBS);
-
-  // Global
-  gidLink(cast(void**)&vte_event_context_get_type, "vte_event_context_get_type", LIBS);
-  gidLink(cast(void**)&vte_get_encoding_supported, "vte_get_encoding_supported", LIBS);
-  gidLink(cast(void**)&vte_get_encodings, "vte_get_encodings", LIBS);
-  gidLink(cast(void**)&vte_get_feature_flags, "vte_get_feature_flags", LIBS);
-  gidLink(cast(void**)&vte_get_features, "vte_get_features", LIBS);
-  gidLink(cast(void**)&vte_get_major_version, "vte_get_major_version", LIBS);
-  gidLink(cast(void**)&vte_get_micro_version, "vte_get_micro_version", LIBS);
-  gidLink(cast(void**)&vte_get_minor_version, "vte_get_minor_version", LIBS);
-  gidLink(cast(void**)&vte_get_user_shell, "vte_get_user_shell", LIBS);
-  gidLink(cast(void**)&vte_set_test_flags, "vte_set_test_flags", LIBS);
 
   // Pty
   gidLink(cast(void**)&vte_pty_get_type, "vte_pty_get_type", LIBS);
@@ -552,4 +540,16 @@ shared static this()
   gidLink(cast(void**)&vte_terminal_unselect_all, "vte_terminal_unselect_all", LIBS);
   gidLink(cast(void**)&vte_terminal_watch_child, "vte_terminal_watch_child", LIBS);
   gidLink(cast(void**)&vte_terminal_write_contents_sync, "vte_terminal_write_contents_sync", LIBS);
+
+  // global
+  gidLink(cast(void**)&vte_event_context_get_type, "vte_event_context_get_type", LIBS);
+  gidLink(cast(void**)&vte_get_encoding_supported, "vte_get_encoding_supported", LIBS);
+  gidLink(cast(void**)&vte_get_encodings, "vte_get_encodings", LIBS);
+  gidLink(cast(void**)&vte_get_feature_flags, "vte_get_feature_flags", LIBS);
+  gidLink(cast(void**)&vte_get_features, "vte_get_features", LIBS);
+  gidLink(cast(void**)&vte_get_major_version, "vte_get_major_version", LIBS);
+  gidLink(cast(void**)&vte_get_micro_version, "vte_get_micro_version", LIBS);
+  gidLink(cast(void**)&vte_get_minor_version, "vte_get_minor_version", LIBS);
+  gidLink(cast(void**)&vte_get_user_shell, "vte_get_user_shell", LIBS);
+  gidLink(cast(void**)&vte_set_test_flags, "vte_set_test_flags", LIBS);
 }

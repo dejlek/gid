@@ -1,6 +1,6 @@
 module gtksource.style;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.text_tag;
 import gtksource.c.functions;
@@ -12,7 +12,7 @@ import gtksource.types;
  * The `GtkSourceStyle` structure is used to describe text attributes
  * which are set when given style is used.
  */
-class Style : ObjectG
+class Style : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -40,9 +40,9 @@ class Style : ObjectG
    * Params:
    *   tag = a #GtkTextTag to apply styles to.
    */
-  void apply(TextTag tag)
+  void apply(gtk.text_tag.TextTag tag)
   {
-    gtk_source_style_apply(cast(GtkSourceStyle*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
+    gtk_source_style_apply(cast(const(GtkSourceStyle)*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
   }
 
   /**
@@ -51,11 +51,11 @@ class Style : ObjectG
    * Returns: copy of style, call [gobject.object.ObjectG.unref]
    *   when you are done with it.
    */
-  Style copy()
+  gtksource.style.Style copy()
   {
     GtkSourceStyle* _cretval;
-    _cretval = gtk_source_style_copy(cast(GtkSourceStyle*)cPtr);
-    auto _retval = ObjectG.getDObject!Style(cast(GtkSourceStyle*)_cretval, Yes.Take);
+    _cretval = gtk_source_style_copy(cast(const(GtkSourceStyle)*)cPtr);
+    auto _retval = ObjectG.getDObject!(gtksource.style.Style)(cast(GtkSourceStyle*)_cretval, Yes.Take);
     return _retval;
   }
 }

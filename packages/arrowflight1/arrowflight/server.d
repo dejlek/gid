@@ -14,11 +14,11 @@ import arrowflight.server_call_context;
 import arrowflight.server_options;
 import arrowflight.ticket;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class Server : ObjectG, Servable
+class Server : gobject.object.ObjectG, arrowflight.servable.Servable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -39,14 +39,14 @@ class Server : ObjectG, Servable
 
   mixin ServableT!();
 
-  DataStream doGet(ServerCallContext context, Ticket ticket)
+  arrowflight.data_stream.DataStream doGet(arrowflight.server_call_context.ServerCallContext context, arrowflight.ticket.Ticket ticket)
   {
     GAFlightDataStream* _cretval;
     GError *_err;
     _cretval = gaflight_server_do_get(cast(GAFlightServer*)cPtr, context ? cast(GAFlightServerCallContext*)context.cPtr(No.Dup) : null, ticket ? cast(GAFlightTicket*)ticket.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!DataStream(cast(GAFlightDataStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowflight.data_stream.DataStream)(cast(GAFlightDataStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ class Server : ObjectG, Servable
    *   writer = A #GAFlightMetadataWriter.
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool doPut(ServerCallContext context, MessageReader reader, MetadataWriter writer)
+  bool doPut(arrowflight.server_call_context.ServerCallContext context, arrowflight.message_reader.MessageReader reader, arrowflight.metadata_writer.MetadataWriter writer)
   {
     bool _retval;
     GError *_err;
@@ -68,14 +68,14 @@ class Server : ObjectG, Servable
     return _retval;
   }
 
-  Info getFlightInfo(ServerCallContext context, Descriptor request)
+  arrowflight.info.Info getFlightInfo(arrowflight.server_call_context.ServerCallContext context, arrowflight.descriptor.Descriptor request)
   {
     GAFlightInfo* _cretval;
     GError *_err;
     _cretval = gaflight_server_get_flight_info(cast(GAFlightServer*)cPtr, context ? cast(GAFlightServerCallContext*)context.cPtr(No.Dup) : null, request ? cast(GAFlightDescriptor*)request.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Info(cast(GAFlightInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowflight.info.Info)(cast(GAFlightInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -86,18 +86,18 @@ class Server : ObjectG, Servable
     return _retval;
   }
 
-  Info[] listFlights(ServerCallContext context, Criteria criteria)
+  arrowflight.info.Info[] listFlights(arrowflight.server_call_context.ServerCallContext context, arrowflight.criteria.Criteria criteria)
   {
     GList* _cretval;
     GError *_err;
     _cretval = gaflight_server_list_flights(cast(GAFlightServer*)cPtr, context ? cast(GAFlightServerCallContext*)context.cPtr(No.Dup) : null, criteria ? cast(GAFlightCriteria*)criteria.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = gListToD!(Info, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(arrowflight.info.Info, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
-  bool listen(ServerOptions options)
+  bool listen(arrowflight.server_options.ServerOptions options)
   {
     bool _retval;
     GError *_err;

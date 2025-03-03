@@ -1,6 +1,6 @@
 module gtk.grid_layout_child;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_child;
@@ -9,7 +9,7 @@ import gtk.types;
 /**
  * `GtkLayoutChild` subclass for children in a `GtkGridLayout`.
  */
-class GridLayoutChild : LayoutChild
+class GridLayoutChild : gtk.layout_child.LayoutChild
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

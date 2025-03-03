@@ -1,7 +1,7 @@
 module gio.datagram_based_mixin;
 
 public import gio.datagram_based_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
@@ -90,11 +90,11 @@ template DatagramBasedT()
    *   condition = a #GIOCondition mask to check
    * Returns: the #GIOCondition mask of the current state
    */
-  override IOCondition conditionCheck(IOCondition condition)
+  override glib.types.IOCondition conditionCheck(glib.types.IOCondition condition)
   {
     GIOCondition _cretval;
     _cretval = g_datagram_based_condition_check(cast(GDatagramBased*)cPtr, condition);
-    IOCondition _retval = cast(IOCondition)_cretval;
+    glib.types.IOCondition _retval = cast(glib.types.IOCondition)_cretval;
     return _retval;
   }
 
@@ -111,7 +111,7 @@ template DatagramBasedT()
    *   cancellable = a #GCancellable
    * Returns: %TRUE if the condition was met, %FALSE otherwise
    */
-  override bool conditionWait(IOCondition condition, long timeout, Cancellable cancellable)
+  override bool conditionWait(glib.types.IOCondition condition, long timeout, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -138,11 +138,11 @@ template DatagramBasedT()
    *   cancellable = a #GCancellable
    * Returns: a newly allocated #GSource
    */
-  override Source createSource(IOCondition condition, Cancellable cancellable)
+  override glib.source.Source createSource(glib.types.IOCondition condition, gio.cancellable.Cancellable cancellable)
   {
     GSource* _cretval;
     _cretval = g_datagram_based_create_source(cast(GDatagramBased*)cPtr, condition, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new Source(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

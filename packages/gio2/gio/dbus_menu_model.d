@@ -1,6 +1,6 @@
 module gio.dbus_menu_model;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.dbus_connection;
@@ -13,7 +13,7 @@ import gobject.object;
  * used as a proxy for a menu model that is exported over D-Bus with
  * [gio.dbus_connection.DBusConnection.exportMenuModel].
  */
-class DBusMenuModel : MenuModel
+class DBusMenuModel : gio.menu_model.MenuModel
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -48,13 +48,13 @@ class DBusMenuModel : MenuModel
    * Returns: a #GDBusMenuModel object. Free with
    *   [gobject.object.ObjectG.unref].
    */
-  static DBusMenuModel get(DBusConnection connection, string busName, string objectPath)
+  static gio.dbus_menu_model.DBusMenuModel get(gio.dbus_connection.DBusConnection connection, string busName, string objectPath)
   {
     GDBusMenuModel* _cretval;
     const(char)* _busName = busName.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     _cretval = g_dbus_menu_model_get(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, _busName, _objectPath);
-    auto _retval = ObjectG.getDObject!DBusMenuModel(cast(GDBusMenuModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_menu_model.DBusMenuModel)(cast(GDBusMenuModel*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -3,10 +3,10 @@ module arrowdataset.key_value_partitioning_options;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class KeyValuePartitioningOptions : ObjectG
+class KeyValuePartitioningOptions : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

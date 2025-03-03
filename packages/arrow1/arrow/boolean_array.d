@@ -5,11 +5,11 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.primitive_array;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class BooleanArray : PrimitiveArray
+class BooleanArray : arrow.primitive_array.PrimitiveArray
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -28,21 +28,21 @@ class BooleanArray : PrimitiveArray
     return getType();
   }
 
-  this(long length, Buffer data, Buffer nullBitmap, long nNulls)
+  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowBooleanArray* _cretval;
     _cretval = garrow_boolean_array_new(length, data ? cast(GArrowBuffer*)data.cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);
     this(_cretval, Yes.Take);
   }
 
-  BooleanArray and(BooleanArray right)
+  arrow.boolean_array.BooleanArray and(arrow.boolean_array.BooleanArray right)
   {
     GArrowBooleanArray* _cretval;
     GError *_err;
     _cretval = garrow_boolean_array_and(cast(GArrowBooleanArray*)cPtr, right ? cast(GArrowBooleanArray*)right.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!BooleanArray(cast(GArrowBooleanArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.boolean_array.BooleanArray)(cast(GArrowBooleanArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -67,36 +67,36 @@ class BooleanArray : PrimitiveArray
     return _retval;
   }
 
-  BooleanArray invert()
+  arrow.boolean_array.BooleanArray invert()
   {
     GArrowBooleanArray* _cretval;
     GError *_err;
     _cretval = garrow_boolean_array_invert(cast(GArrowBooleanArray*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!BooleanArray(cast(GArrowBooleanArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.boolean_array.BooleanArray)(cast(GArrowBooleanArray*)_cretval, Yes.Take);
     return _retval;
   }
 
-  BooleanArray or(BooleanArray right)
+  arrow.boolean_array.BooleanArray or(arrow.boolean_array.BooleanArray right)
   {
     GArrowBooleanArray* _cretval;
     GError *_err;
     _cretval = garrow_boolean_array_or(cast(GArrowBooleanArray*)cPtr, right ? cast(GArrowBooleanArray*)right.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!BooleanArray(cast(GArrowBooleanArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.boolean_array.BooleanArray)(cast(GArrowBooleanArray*)_cretval, Yes.Take);
     return _retval;
   }
 
-  BooleanArray xor(BooleanArray right)
+  arrow.boolean_array.BooleanArray xor(arrow.boolean_array.BooleanArray right)
   {
     GArrowBooleanArray* _cretval;
     GError *_err;
     _cretval = garrow_boolean_array_xor(cast(GArrowBooleanArray*)cPtr, right ? cast(GArrowBooleanArray*)right.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!BooleanArray(cast(GArrowBooleanArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.boolean_array.BooleanArray)(cast(GArrowBooleanArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

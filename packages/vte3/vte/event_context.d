@@ -1,6 +1,6 @@
 module vte.event_context;
 
-import gid.global;
+import gid.gid;
 import vte.c.functions;
 import vte.c.types;
 import vte.types;
@@ -31,7 +31,7 @@ class EventContext
   bool getCoordinates(out double x, out double y)
   {
     bool _retval;
-    _retval = vte_event_context_get_coordinates(cast(VteEventContext*)cPtr, cast(double*)&x, cast(double*)&y);
+    _retval = vte_event_context_get_coordinates(cast(const(VteEventContext)*)cPtr, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 }

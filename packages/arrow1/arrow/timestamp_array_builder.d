@@ -5,10 +5,10 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.timestamp_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class TimestampArrayBuilder : ArrayBuilder
+class TimestampArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,7 +27,7 @@ class TimestampArrayBuilder : ArrayBuilder
     return getType();
   }
 
-  this(TimestampDataType dataType)
+  this(arrow.timestamp_data_type.TimestampDataType dataType)
   {
     GArrowTimestampArrayBuilder* _cretval;
     _cretval = garrow_timestamp_array_builder_new(dataType ? cast(GArrowTimestampDataType*)dataType.cPtr(No.Dup) : null);

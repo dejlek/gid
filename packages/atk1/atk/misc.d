@@ -3,7 +3,7 @@ module atk.misc;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
@@ -11,7 +11,7 @@ import gobject.object;
  * A set of utility functions for thread locking. This interface and
  * all his related methods are deprecated since 2.12.
  */
-class Misc : ObjectG
+class Misc : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -36,11 +36,11 @@ class Misc : ObjectG
 
    * Deprecated: Since 2.12.
    */
-  static Misc getInstance()
+  static atk.misc.Misc getInstance()
   {
     const(AtkMisc)* _cretval;
     _cretval = atk_misc_get_instance();
-    auto _retval = ObjectG.getDObject!Misc(cast(AtkMisc*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.misc.Misc)(cast(AtkMisc*)_cretval, No.Take);
     return _retval;
   }
 

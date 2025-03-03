@@ -1,6 +1,6 @@
 module gtk.layout_child;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -17,7 +17,7 @@ import gtk.widget;
  * A `GtkLayoutChild` instance is only ever valid while a widget is part
  * of a layout.
  */
-class LayoutChild : ObjectG
+class LayoutChild : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -40,11 +40,11 @@ class LayoutChild : ObjectG
    * Retrieves the `GtkWidget` associated to the given layout_child.
    * Returns: a `GtkWidget`
    */
-  Widget getChildWidget()
+  gtk.widget.Widget getChildWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_layout_child_get_child_widget(cast(GtkLayoutChild*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -53,11 +53,11 @@ class LayoutChild : ObjectG
    * given layout_child.
    * Returns: a `GtkLayoutManager`
    */
-  LayoutManager getLayoutManager()
+  gtk.layout_manager.LayoutManager getLayoutManager()
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_layout_child_get_layout_manager(cast(GtkLayoutChild*)cPtr);
-    auto _retval = ObjectG.getDObject!LayoutManager(cast(GtkLayoutManager*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.layout_manager.LayoutManager)(cast(GtkLayoutManager*)_cretval, No.Take);
     return _retval;
   }
 }

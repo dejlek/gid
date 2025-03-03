@@ -2,9 +2,8 @@ module gtk.window;
 
 import gdk.display;
 import gdk.monitor;
-import gid.global;
+import gid.gid;
 import gio.list_model;
-import gio.list_model_mixin;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -69,7 +68,7 @@ import gtk.window_group;
  * - `window.toggle-maximized`: Maximize or restore the window.
  * - `window.close`: Close the window.
  */
-class Window : Widget, Native, Root, ShortcutManager
+class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut_manager.ShortcutManager
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -122,7 +121,7 @@ class Window : Widget, Native, Root, ShortcutManager
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_default_icon_name();
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -134,11 +133,11 @@ class Window : Widget, Native, Root, ShortcutManager
    * Returns: the list
    *   of toplevel widgets
    */
-  static ListModel getToplevels()
+  static gio.list_model.ListModel getToplevels()
   {
     GListModel* _cretval;
     _cretval = gtk_window_get_toplevels();
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -152,11 +151,11 @@ class Window : Widget, Native, Root, ShortcutManager
    * Returns: list of
    *   toplevel widgets
    */
-  static Widget[] listToplevels()
+  static gtk.widget.Widget[] listToplevels()
   {
     GList* _cretval;
     _cretval = gtk_window_list_toplevels();
-    auto _retval = gListToD!(Widget, GidOwnership.Container)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gtk.widget.Widget, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -251,7 +250,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * Params:
    *   monitor = which monitor to go fullscreen on
    */
-  void fullscreenOnMonitor(MonitorG monitor)
+  void fullscreenOnMonitor(gdk.monitor.MonitorG monitor)
   {
     gtk_window_fullscreen_on_monitor(cast(GtkWindow*)cPtr, monitor ? cast(GdkMonitor*)monitor.cPtr(No.Dup) : null);
   }
@@ -260,11 +259,11 @@ class Window : Widget, Native, Root, ShortcutManager
    * Gets the `GtkApplication` associated with the window.
    * Returns: a `GtkApplication`
    */
-  Application getApplication()
+  gtk.application.Application getApplication()
   {
     GtkApplication* _cretval;
     _cretval = gtk_window_get_application(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!Application(cast(GtkApplication*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.application.Application)(cast(GtkApplication*)_cretval, No.Take);
     return _retval;
   }
 
@@ -272,11 +271,11 @@ class Window : Widget, Native, Root, ShortcutManager
    * Gets the child widget of window.
    * Returns: the child widget of window
    */
-  Widget getChild()
+  gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_child(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -311,11 +310,11 @@ class Window : Widget, Native, Root, ShortcutManager
    * Returns the default widget for window.
    * Returns: the default widget
    */
-  Widget getDefaultWidget()
+  gtk.widget.Widget getDefaultWidget()
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_default_widget(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -349,11 +348,11 @@ class Window : Widget, Native, Root, ShortcutManager
    * not be %TRUE for the widget.
    * Returns: the currently focused widget
    */
-  Widget getFocus()
+  gtk.widget.Widget getFocus()
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_focus(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -375,11 +374,11 @@ class Window : Widget, Native, Root, ShortcutManager
    * Returns: the `GtkWindowGroup` for a window
    *   or the default group
    */
-  WindowGroup getGroup()
+  gtk.window_group.WindowGroup getGroup()
   {
     GtkWindowGroup* _cretval;
     _cretval = gtk_window_get_group(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!WindowGroup(cast(GtkWindowGroup*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.window_group.WindowGroup)(cast(GtkWindowGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -414,7 +413,7 @@ class Window : Widget, Native, Root, ShortcutManager
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_icon_name(cast(GtkWindow*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -461,7 +460,7 @@ class Window : Widget, Native, Root, ShortcutManager
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_title(cast(GtkWindow*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -470,11 +469,11 @@ class Window : Widget, Native, Root, ShortcutManager
    * [gtk.window.Window.setTitlebar].
    * Returns: the custom titlebar
    */
-  Widget getTitlebar()
+  gtk.widget.Widget getTitlebar()
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_titlebar(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -482,11 +481,11 @@ class Window : Widget, Native, Root, ShortcutManager
    * Fetches the transient parent for this window.
    * Returns: the transient parent for this window
    */
-  Window getTransientFor()
+  gtk.window.Window getTransientFor()
   {
     GtkWindow* _cretval;
     _cretval = gtk_window_get_transient_for(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!Window(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -646,7 +645,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * Params:
    *   application = a `GtkApplication`, or %NULL to unset
    */
-  void setApplication(Application application)
+  void setApplication(gtk.application.Application application)
   {
     gtk_window_set_application(cast(GtkWindow*)cPtr, application ? cast(GtkApplication*)application.cPtr(No.Dup) : null);
   }
@@ -656,7 +655,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * Params:
    *   child = the child widget
    */
-  void setChild(Widget child)
+  void setChild(gtk.widget.Widget child)
   {
     gtk_window_set_child(cast(GtkWindow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -722,7 +721,7 @@ class Window : Widget, Native, Root, ShortcutManager
    *   defaultWidget = widget to be the default
    *     to unset the default widget for the toplevel
    */
-  void setDefaultWidget(Widget defaultWidget)
+  void setDefaultWidget(gtk.widget.Widget defaultWidget)
   {
     gtk_window_set_default_widget(cast(GtkWindow*)cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget.cPtr(No.Dup) : null);
   }
@@ -766,7 +765,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * Params:
    *   display = a `GdkDisplay`
    */
-  void setDisplay(Display display)
+  void setDisplay(gdk.display.Display display)
   {
     gtk_window_set_display(cast(GtkWindow*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
   }
@@ -782,7 +781,7 @@ class Window : Widget, Native, Root, ShortcutManager
    *   focus = widget to be the new focus widget, or %NULL to unset
    *     any focus widget for the toplevel window.
    */
-  void setFocus(Widget focus)
+  void setFocus(gtk.widget.Widget focus)
   {
     gtk_window_set_focus(cast(GtkWindow*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(No.Dup) : null);
   }
@@ -926,7 +925,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * Params:
    *   titlebar = the widget to use as titlebar
    */
-  void setTitlebar(Widget titlebar)
+  void setTitlebar(gtk.widget.Widget titlebar)
   {
     gtk_window_set_titlebar(cast(GtkWindow*)cPtr, titlebar ? cast(GtkWidget*)titlebar.cPtr(No.Dup) : null);
   }
@@ -944,7 +943,7 @@ class Window : Widget, Native, Root, ShortcutManager
    * Params:
    *   parent = parent window
    */
-  void setTransientFor(Window parent)
+  void setTransientFor(gtk.window.Window parent)
   {
     gtk_window_set_transient_for(cast(GtkWindow*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
   }
@@ -1003,8 +1002,8 @@ class Window : Widget, Native, Root, ShortcutManager
    * This is a [keybinding signal](class.SignalAction.html).
    *   window = the instance the signal is connected to
    */
-  alias ActivateDefaultCallbackDlg = void delegate(Window window);
-  alias ActivateDefaultCallbackFunc = void function(Window window);
+  alias ActivateDefaultCallbackDlg = void delegate(gtk.window.Window window);
+  alias ActivateDefaultCallbackFunc = void function(gtk.window.Window window);
 
   /**
    * Connect to ActivateDefault signal.
@@ -1020,7 +1019,7 @@ class Window : Widget, Native, Root, ShortcutManager
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto window = getVal!Window(_paramVals);
+      auto window = getVal!(gtk.window.Window)(_paramVals);
       _dClosure.dlg(window);
     }
 
@@ -1034,8 +1033,8 @@ class Window : Widget, Native, Root, ShortcutManager
    * This is a [keybinding signal](class.SignalAction.html).
    *   window = the instance the signal is connected to
    */
-  alias ActivateFocusCallbackDlg = void delegate(Window window);
-  alias ActivateFocusCallbackFunc = void function(Window window);
+  alias ActivateFocusCallbackDlg = void delegate(gtk.window.Window window);
+  alias ActivateFocusCallbackFunc = void function(gtk.window.Window window);
 
   /**
    * Connect to ActivateFocus signal.
@@ -1051,7 +1050,7 @@ class Window : Widget, Native, Root, ShortcutManager
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto window = getVal!Window(_paramVals);
+      auto window = getVal!(gtk.window.Window)(_paramVals);
       _dClosure.dlg(window);
     }
 
@@ -1064,8 +1063,8 @@ class Window : Widget, Native, Root, ShortcutManager
    *   window = the instance the signal is connected to
    * Returns: %TRUE to stop other handlers from being invoked for the signal
    */
-  alias CloseRequestCallbackDlg = bool delegate(Window window);
-  alias CloseRequestCallbackFunc = bool function(Window window);
+  alias CloseRequestCallbackDlg = bool delegate(gtk.window.Window window);
+  alias CloseRequestCallbackFunc = bool function(gtk.window.Window window);
 
   /**
    * Connect to CloseRequest signal.
@@ -1082,7 +1081,7 @@ class Window : Widget, Native, Root, ShortcutManager
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto window = getVal!Window(_paramVals);
+      auto window = getVal!(gtk.window.Window)(_paramVals);
       _retval = _dClosure.dlg(window);
       setVal!bool(_returnValue, _retval);
     }
@@ -1104,8 +1103,8 @@ class Window : Widget, Native, Root, ShortcutManager
    *   window = the instance the signal is connected to
    * Returns: %TRUE if the key binding was handled
    */
-  alias EnableDebuggingCallbackDlg = bool delegate(bool toggle, Window window);
-  alias EnableDebuggingCallbackFunc = bool function(bool toggle, Window window);
+  alias EnableDebuggingCallbackDlg = bool delegate(bool toggle, gtk.window.Window window);
+  alias EnableDebuggingCallbackFunc = bool function(bool toggle, gtk.window.Window window);
 
   /**
    * Connect to EnableDebugging signal.
@@ -1122,8 +1121,8 @@ class Window : Widget, Native, Root, ShortcutManager
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto window = getVal!Window(_paramVals);
-      auto toggle = getVal!bool(&_paramVals[1]);
+      auto window = getVal!(gtk.window.Window)(_paramVals);
+      auto toggle = getVal!(bool)(&_paramVals[1]);
       _retval = _dClosure.dlg(toggle, window);
       setVal!bool(_returnValue, _retval);
     }
@@ -1140,8 +1139,8 @@ class Window : Widget, Native, Root, ShortcutManager
    * Deprecated: Use [gtk.shortcut.Shortcut] and [gtk.event_controller.EventController]
    *   to implement keyboard shortcuts
    */
-  alias KeysChangedCallbackDlg = void delegate(Window window);
-  alias KeysChangedCallbackFunc = void function(Window window);
+  alias KeysChangedCallbackDlg = void delegate(gtk.window.Window window);
+  alias KeysChangedCallbackFunc = void function(gtk.window.Window window);
 
   /**
    * Connect to KeysChanged signal.
@@ -1157,7 +1156,7 @@ class Window : Widget, Native, Root, ShortcutManager
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto window = getVal!Window(_paramVals);
+      auto window = getVal!(gtk.window.Window)(_paramVals);
       _dClosure.dlg(window);
     }
 

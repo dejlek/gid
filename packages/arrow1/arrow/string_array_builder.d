@@ -4,10 +4,10 @@ import arrow.binary_array_builder;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class StringArrayBuilder : BinaryArrayBuilder
+class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -33,7 +33,7 @@ class StringArrayBuilder : BinaryArrayBuilder
     this(_cretval, Yes.Take);
   }
 
-  alias append = BinaryArrayBuilder.append;
+  alias append = arrow.binary_array_builder.BinaryArrayBuilder.append;
 
   bool append(string value)
   {

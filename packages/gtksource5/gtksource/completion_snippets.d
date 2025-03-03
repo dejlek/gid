@@ -1,6 +1,6 @@
 module gtksource.completion_snippets;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtksource.c.functions;
 import gtksource.c.types;
@@ -14,7 +14,7 @@ import gtksource.types;
  * the iface@CompletionProvider interface. The proposals are snippets
  * registered with the class@SnippetManager.
  */
-class CompletionSnippets : ObjectG, CompletionProvider
+class CompletionSnippets : gobject.object.ObjectG, gtksource.completion_provider.CompletionProvider
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

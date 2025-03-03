@@ -1,6 +1,6 @@
 module gtksource.map;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -37,7 +37,7 @@ import gtksource.view;
  * When FontConfig is available, `GtkSourceMap` will try to use a bundled
  * "block" font to make the map more legible.
  */
-class Map : View
+class Map : gtksource.view.View
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -71,11 +71,11 @@ class Map : View
    * Gets the propertyMap:view property, which is the view this widget is mapping.
    * Returns: a #GtkSourceView or %NULL.
    */
-  View getView()
+  gtksource.view.View getView()
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_map_get_view(cast(GtkSourceMap*)cPtr);
-    auto _retval = ObjectG.getDObject!View(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class Map : View
    * Params:
    *   view = a #GtkSourceView
    */
-  void setView(View view)
+  void setView(gtksource.view.View view)
   {
     gtk_source_map_set_view(cast(GtkSourceMap*)cPtr, view ? cast(GtkSourceView*)view.cPtr(No.Dup) : null);
   }

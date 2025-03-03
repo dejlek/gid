@@ -1,6 +1,6 @@
 module harfbuzz.variation;
 
-import gid.global;
+import gid.gid;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;
 import harfbuzz.types;
@@ -30,12 +30,12 @@ class Variation
     return cast(void*)&cInstance;
   }
 
-  @property Tag tag()
+  @property harfbuzz.types.Tag tag()
   {
     return (cast(hb_variation_t*)cPtr).tag;
   }
 
-  @property void tag(Tag propval)
+  @property void tag(harfbuzz.types.Tag propval)
   {
     (cast(hb_variation_t*)cPtr).tag = propval;
   }

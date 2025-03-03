@@ -1,6 +1,6 @@
 module soup.auth_domain_digest;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import soup.auth_domain;
 import soup.c.functions;
@@ -13,7 +13,7 @@ import soup.types;
  * #SoupAuthDomainDigest handles the server side of HTTP "Digest"
  * authentication.
  */
-class AuthDomainDigest : AuthDomain
+class AuthDomainDigest : soup.auth_domain.AuthDomain
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -59,7 +59,7 @@ class AuthDomainDigest : AuthDomain
     const(char)* _realm = realm.toCString(No.Alloc);
     const(char)* _password = password.toCString(No.Alloc);
     _cretval = soup_auth_domain_digest_encode_password(_username, _realm, _password);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -76,15 +76,15 @@ class AuthDomainDigest : AuthDomain
    * Params:
    *   callback = the callback
    */
-  void setAuthCallback(AuthDomainDigestAuthCallback callback)
+  void setAuthCallback(soup.types.AuthDomainDigestAuthCallback callback)
   {
     extern(C) char* _callbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, void* userData)
     {
       string _dretval;
-      auto _dlg = cast(AuthDomainDigestAuthCallback*)userData;
+      auto _dlg = cast(soup.types.AuthDomainDigestAuthCallback*)userData;
       string _username = username.fromCString(No.Free);
 
-      _dretval = (*_dlg)(ObjectG.getDObject!AuthDomainDigest(cast(void*)domain, No.Take), ObjectG.getDObject!ServerMessage(cast(void*)msg, No.Take), _username);
+      _dretval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain_digest.AuthDomainDigest)(cast(void*)domain, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
       char* _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;

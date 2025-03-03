@@ -1,11 +1,9 @@
 module gtk.print_dialog;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.file;
-import gio.file_mixin;
 import gio.output_stream;
 import gio.types;
 import glib.error;
@@ -27,7 +25,7 @@ import gtk.window;
  * [gtk.print_dialog.PrintDialog.printFile]. These APIs follows the GIO async pattern,
  * and the results can be obtained by calling the corresponding finish methods.
  */
-class PrintDialog : ObjectG
+class PrintDialog : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -66,7 +64,7 @@ class PrintDialog : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_dialog_get_accept_label(cast(GtkPrintDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -87,11 +85,11 @@ class PrintDialog : ObjectG
    * Returns the page setup.
    * Returns: the page setup
    */
-  PageSetup getPageSetup()
+  gtk.page_setup.PageSetup getPageSetup()
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_dialog_get_page_setup(cast(GtkPrintDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -99,11 +97,11 @@ class PrintDialog : ObjectG
    * Returns the print settings for the print dialog.
    * Returns: the settings
    */
-  PrintSettings getPrintSettings()
+  gtk.print_settings.PrintSettings getPrintSettings()
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_dialog_get_print_settings(cast(GtkPrintDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,7 +114,7 @@ class PrintDialog : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_dialog_get_title(cast(GtkPrintDialog*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -132,14 +130,14 @@ class PrintDialog : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void print(Window parent, PrintSetup setup, Cancellable cancellable, AsyncReadyCallback callback)
+  void print(gtk.window.Window parent, gtk.print_setup.PrintSetup setup, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -160,14 +158,14 @@ class PrintDialog : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void printFile(Window parent, PrintSetup setup, File file, Cancellable cancellable, AsyncReadyCallback callback)
+  void printFile(gtk.window.Window parent, gtk.print_setup.PrintSetup setup, gio.file.File file, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -182,7 +180,7 @@ class PrintDialog : ObjectG
    *   result = a `GAsyncResult`
    * Returns: Whether the call was successful
    */
-  bool printFileFinish(AsyncResult result)
+  bool printFileFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -207,14 +205,14 @@ class PrintDialog : ObjectG
    *   result = a `GAsyncResult`
    * Returns: a [gio.output_stream.OutputStream]
    */
-  OutputStream printFinish(AsyncResult result)
+  gio.output_stream.OutputStream printFinish(gio.async_result.AsyncResult result)
   {
     GOutputStream* _cretval;
     GError *_err;
     _cretval = gtk_print_dialog_print_finish(cast(GtkPrintDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!OutputStream(cast(GOutputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -248,7 +246,7 @@ class PrintDialog : ObjectG
    * Params:
    *   pageSetup = the new page setup
    */
-  void setPageSetup(PageSetup pageSetup)
+  void setPageSetup(gtk.page_setup.PageSetup pageSetup)
   {
     gtk_print_dialog_set_page_setup(cast(GtkPrintDialog*)cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null);
   }
@@ -258,7 +256,7 @@ class PrintDialog : ObjectG
    * Params:
    *   printSettings = the new print settings
    */
-  void setPrintSettings(PrintSettings printSettings)
+  void setPrintSettings(gtk.print_settings.PrintSettings printSettings)
   {
     gtk_print_dialog_set_print_settings(cast(GtkPrintDialog*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(No.Dup) : null);
   }
@@ -291,14 +289,14 @@ class PrintDialog : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void setup(Window parent, Cancellable cancellable, AsyncReadyCallback callback)
+  void setup(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -316,14 +314,14 @@ class PrintDialog : ObjectG
    * Returns: The `GtkPrintSetup` object that resulted from the call,
    *   or `NULL` if the call was not successful
    */
-  PrintSetup setupFinish(AsyncResult result)
+  gtk.print_setup.PrintSetup setupFinish(gio.async_result.AsyncResult result)
   {
     GtkPrintSetup* _cretval;
     GError *_err;
     _cretval = gtk_print_dialog_setup_finish(cast(GtkPrintDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new PrintSetup(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.print_setup.PrintSetup(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

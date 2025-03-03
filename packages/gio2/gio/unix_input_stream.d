@@ -1,6 +1,6 @@
 module gio.unix_input_stream;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.file_descriptor_based;
@@ -20,7 +20,7 @@ import gio.types;
  * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
  * file or the `GioUnix-2.0` GIR namespace when using it.
  */
-class UnixInputStream : InputStream, FileDescriptorBased, PollableInputStream
+class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.FileDescriptorBased, gio.pollable_input_stream.PollableInputStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

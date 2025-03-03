@@ -1,6 +1,6 @@
 module gtk.statusbar;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -43,7 +43,7 @@ import gtk.widget;
 
  * Deprecated: This widget will be removed in GTK 5
  */
-class Statusbar : Widget
+class Statusbar : gtk.widget.Widget
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -165,8 +165,8 @@ class Statusbar : Widget
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  alias TextPoppedCallbackDlg = void delegate(uint contextId, string text, Statusbar statusbar);
-  alias TextPoppedCallbackFunc = void function(uint contextId, string text, Statusbar statusbar);
+  alias TextPoppedCallbackDlg = void delegate(uint contextId, string text, gtk.statusbar.Statusbar statusbar);
+  alias TextPoppedCallbackFunc = void function(uint contextId, string text, gtk.statusbar.Statusbar statusbar);
 
   /**
    * Connect to TextPopped signal.
@@ -182,9 +182,9 @@ class Statusbar : Widget
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto statusbar = getVal!Statusbar(_paramVals);
-      auto contextId = getVal!uint(&_paramVals[1]);
-      auto text = getVal!string(&_paramVals[2]);
+      auto statusbar = getVal!(gtk.statusbar.Statusbar)(_paramVals);
+      auto contextId = getVal!(uint)(&_paramVals[1]);
+      auto text = getVal!(string)(&_paramVals[2]);
       _dClosure.dlg(contextId, text, statusbar);
     }
 
@@ -201,8 +201,8 @@ class Statusbar : Widget
 
    * Deprecated: This widget will be removed in GTK 5
    */
-  alias TextPushedCallbackDlg = void delegate(uint contextId, string text, Statusbar statusbar);
-  alias TextPushedCallbackFunc = void function(uint contextId, string text, Statusbar statusbar);
+  alias TextPushedCallbackDlg = void delegate(uint contextId, string text, gtk.statusbar.Statusbar statusbar);
+  alias TextPushedCallbackFunc = void function(uint contextId, string text, gtk.statusbar.Statusbar statusbar);
 
   /**
    * Connect to TextPushed signal.
@@ -218,9 +218,9 @@ class Statusbar : Widget
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto statusbar = getVal!Statusbar(_paramVals);
-      auto contextId = getVal!uint(&_paramVals[1]);
-      auto text = getVal!string(&_paramVals[2]);
+      auto statusbar = getVal!(gtk.statusbar.Statusbar)(_paramVals);
+      auto contextId = getVal!(uint)(&_paramVals[1]);
+      auto text = getVal!(string)(&_paramVals[2]);
       _dClosure.dlg(contextId, text, statusbar);
     }
 

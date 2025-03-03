@@ -843,11 +843,6 @@ __gshared extern(C)
   GArrowGIOOutputStream* function(GOutputStream* gioOutputStream) c_garrow_gio_output_stream_new;
   GOutputStream* function(GArrowGIOOutputStream* outputStream) c_garrow_gio_output_stream_get_raw;
 
-  // Global
-  bool function(GError** _err) c_garrow_s3_finalize;
-  bool function(GArrowS3GlobalOptions* options, GError** _err) c_garrow_s3_initialize;
-  bool function() c_garrow_s3_is_enabled;
-
   // HDFSFileSystem
   extern(C) GType function() c_garrow_hdfs_file_system_get_type;
 
@@ -1923,6 +1918,11 @@ __gshared extern(C)
   // WriteOptions
   extern(C) GType function() c_garrow_write_options_get_type;
   GArrowWriteOptions* function() c_garrow_write_options_new;
+
+  // global
+  bool function(GError** _err) c_garrow_s3_finalize;
+  bool function(GArrowS3GlobalOptions* options, GError** _err) c_garrow_s3_initialize;
+  bool function() c_garrow_s3_is_enabled;
 }
 
 // AggregateNodeOptions
@@ -2752,11 +2752,6 @@ alias garrow_gio_input_stream_get_raw = c_garrow_gio_input_stream_get_raw;
 alias garrow_gio_output_stream_get_type = c_garrow_gio_output_stream_get_type;
 alias garrow_gio_output_stream_new = c_garrow_gio_output_stream_new;
 alias garrow_gio_output_stream_get_raw = c_garrow_gio_output_stream_get_raw;
-
-// Global
-alias garrow_s3_finalize = c_garrow_s3_finalize;
-alias garrow_s3_initialize = c_garrow_s3_initialize;
-alias garrow_s3_is_enabled = c_garrow_s3_is_enabled;
 
 // HDFSFileSystem
 alias garrow_hdfs_file_system_get_type = c_garrow_hdfs_file_system_get_type;
@@ -3834,6 +3829,11 @@ alias garrow_writable_file_write_at = c_garrow_writable_file_write_at;
 alias garrow_write_options_get_type = c_garrow_write_options_get_type;
 alias garrow_write_options_new = c_garrow_write_options_new;
 
+// global
+alias garrow_s3_finalize = c_garrow_s3_finalize;
+alias garrow_s3_initialize = c_garrow_s3_initialize;
+alias garrow_s3_is_enabled = c_garrow_s3_is_enabled;
+
 shared static this()
 {
   // AggregateNodeOptions
@@ -4663,11 +4663,6 @@ shared static this()
   gidLink(cast(void**)&garrow_gio_output_stream_get_type, "garrow_gio_output_stream_get_type", LIBS);
   gidLink(cast(void**)&garrow_gio_output_stream_new, "garrow_gio_output_stream_new", LIBS);
   gidLink(cast(void**)&garrow_gio_output_stream_get_raw, "garrow_gio_output_stream_get_raw", LIBS);
-
-  // Global
-  gidLink(cast(void**)&garrow_s3_finalize, "garrow_s3_finalize", LIBS);
-  gidLink(cast(void**)&garrow_s3_initialize, "garrow_s3_initialize", LIBS);
-  gidLink(cast(void**)&garrow_s3_is_enabled, "garrow_s3_is_enabled", LIBS);
 
   // HDFSFileSystem
   gidLink(cast(void**)&garrow_hdfs_file_system_get_type, "garrow_hdfs_file_system_get_type", LIBS);
@@ -5744,4 +5739,9 @@ shared static this()
   // WriteOptions
   gidLink(cast(void**)&garrow_write_options_get_type, "garrow_write_options_get_type", LIBS);
   gidLink(cast(void**)&garrow_write_options_new, "garrow_write_options_new", LIBS);
+
+  // global
+  gidLink(cast(void**)&garrow_s3_finalize, "garrow_s3_finalize", LIBS);
+  gidLink(cast(void**)&garrow_s3_initialize, "garrow_s3_initialize", LIBS);
+  gidLink(cast(void**)&garrow_s3_is_enabled, "garrow_s3_is_enabled", LIBS);
 }

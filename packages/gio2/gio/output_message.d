@@ -1,6 +1,6 @@
 module gio.output_message;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_address;
@@ -35,17 +35,17 @@ class OutputMessage
     return cast(void*)&cInstance;
   }
 
-  @property SocketAddress address()
+  @property gio.socket_address.SocketAddress address()
   {
-    return ObjectG.getDObject!SocketAddress((cast(GOutputMessage*)cPtr).address, No.Take);
+    return ObjectG.getDObject!(gio.socket_address.SocketAddress)((cast(GOutputMessage*)cPtr).address, No.Take);
   }
 
-  @property OutputVector vectors()
+  @property gio.types.OutputVector vectors()
   {
     return *(cast(GOutputMessage*)cPtr).vectors;
   }
 
-  @property void vectors(OutputVector propval)
+  @property void vectors(gio.types.OutputVector propval)
   {
     (cast(GOutputMessage*)cPtr).vectors = &propval;
   }

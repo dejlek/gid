@@ -5,9 +5,9 @@ import arrow.c.types;
 import arrow.execute_node_options;
 import arrow.expression;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class ProjectNodeOptions : ExecuteNodeOptions
+class ProjectNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,11 +26,11 @@ class ProjectNodeOptions : ExecuteNodeOptions
     return getType();
   }
 
-  this(Expression[] expressions, string[] names)
+  this(arrow.expression.Expression[] expressions, string[] names)
   {
     GArrowProjectNodeOptions* _cretval;
-    auto _expressions = gListFromD!(Expression)(expressions);
-    scope(exit) containerFree!(GList*, Expression, GidOwnership.None)(_expressions);
+    auto _expressions = gListFromD!(arrow.expression.Expression)(expressions);
+    scope(exit) containerFree!(GList*, arrow.expression.Expression, GidOwnership.None)(_expressions);
     size_t _nNames;
     if (names)
       _nNames = cast(size_t)names.length;

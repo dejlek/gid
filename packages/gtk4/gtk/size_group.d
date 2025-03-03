@@ -1,6 +1,6 @@
 module gtk.size_group;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.buildable;
 import gtk.buildable_mixin;
@@ -65,7 +65,7 @@ import gtk.widget;
  * </object>
  * ```
  */
-class SizeGroup : ObjectG, Buildable
+class SizeGroup : gobject.object.ObjectG, gtk.buildable.Buildable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -92,7 +92,7 @@ class SizeGroup : ObjectG, Buildable
    *   mode = the mode for the new size group.
    * Returns: a newly created `GtkSizeGroup`
    */
-  this(SizeGroupMode mode)
+  this(gtk.types.SizeGroupMode mode)
   {
     GtkSizeGroup* _cretval;
     _cretval = gtk_size_group_new(mode);
@@ -112,7 +112,7 @@ class SizeGroup : ObjectG, Buildable
    * Params:
    *   widget = the `GtkWidget` to add
    */
-  void addWidget(Widget widget)
+  void addWidget(gtk.widget.Widget widget)
   {
     gtk_size_group_add_widget(cast(GtkSizeGroup*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -121,11 +121,11 @@ class SizeGroup : ObjectG, Buildable
    * Gets the current mode of the size group.
    * Returns: the current mode of the size group.
    */
-  SizeGroupMode getMode()
+  gtk.types.SizeGroupMode getMode()
   {
     GtkSizeGroupMode _cretval;
     _cretval = gtk_size_group_get_mode(cast(GtkSizeGroup*)cPtr);
-    SizeGroupMode _retval = cast(SizeGroupMode)_cretval;
+    gtk.types.SizeGroupMode _retval = cast(gtk.types.SizeGroupMode)_cretval;
     return _retval;
   }
 
@@ -134,11 +134,11 @@ class SizeGroup : ObjectG, Buildable
    * Returns: a `GSList` of
    *   widgets. The list is owned by GTK and should not be modified.
    */
-  Widget[] getWidgets()
+  gtk.widget.Widget[] getWidgets()
   {
     GSList* _cretval;
     _cretval = gtk_size_group_get_widgets(cast(GtkSizeGroup*)cPtr);
-    auto _retval = gSListToD!(Widget, GidOwnership.None)(cast(GSList*)_cretval);
+    auto _retval = gSListToD!(gtk.widget.Widget, GidOwnership.None)(cast(GSList*)_cretval);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class SizeGroup : ObjectG, Buildable
    * Params:
    *   widget = the `GtkWidget` to remove
    */
-  void removeWidget(Widget widget)
+  void removeWidget(gtk.widget.Widget widget)
   {
     gtk_size_group_remove_widget(cast(GtkSizeGroup*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
@@ -162,7 +162,7 @@ class SizeGroup : ObjectG, Buildable
    * Params:
    *   mode = the mode to set for the size group.
    */
-  void setMode(SizeGroupMode mode)
+  void setMode(gtk.types.SizeGroupMode mode)
   {
     gtk_size_group_set_mode(cast(GtkSizeGroup*)cPtr, mode);
   }

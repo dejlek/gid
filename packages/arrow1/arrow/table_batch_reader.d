@@ -5,9 +5,9 @@ import arrow.c.types;
 import arrow.record_batch_reader;
 import arrow.table;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class TableBatchReader : RecordBatchReader
+class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class TableBatchReader : RecordBatchReader
     return getType();
   }
 
-  this(Table table)
+  this(arrow.table.Table table)
   {
     GArrowTableBatchReader* _cretval;
     _cretval = garrow_table_batch_reader_new(table ? cast(GArrowTable*)table.cPtr(No.Dup) : null);

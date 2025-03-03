@@ -1,6 +1,6 @@
 module glib.scanner;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.scanner_config;
@@ -76,34 +76,34 @@ class Scanner
     (cast(GScanner*)cPtr).inputName = propval.toCString(Yes.Alloc);
   }
 
-  @property Data qdata()
+  @property glib.types.Data qdata()
   {
     return (cast(GScanner*)cPtr).qdata;
   }
 
-  @property void qdata(Data propval)
+  @property void qdata(glib.types.Data propval)
   {
     (cast(GScanner*)cPtr).qdata = propval;
   }
 
-  @property ScannerConfig config()
+  @property glib.scanner_config.ScannerConfig config()
   {
-    return new ScannerConfig(cast(GScannerConfig*)(cast(GScanner*)cPtr).config);
+    return new glib.scanner_config.ScannerConfig(cast(GScannerConfig*)(cast(GScanner*)cPtr).config);
   }
 
-  @property TokenType token()
+  @property glib.types.TokenType token()
   {
-    return cast(TokenType)(cast(GScanner*)cPtr).token;
+    return cast(glib.types.TokenType)(cast(GScanner*)cPtr).token;
   }
 
-  @property void token(TokenType propval)
+  @property void token(glib.types.TokenType propval)
   {
     (cast(GScanner*)cPtr).token = cast(GTokenType)propval;
   }
 
-  @property TokenValue value()
+  @property glib.token_value.TokenValue value()
   {
-    return new TokenValue(cast(GTokenValue*)&(cast(GScanner*)cPtr).value);
+    return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)cPtr).value);
   }
 
   @property uint line()
@@ -126,19 +126,19 @@ class Scanner
     (cast(GScanner*)cPtr).position = propval;
   }
 
-  @property TokenType nextToken()
+  @property glib.types.TokenType nextToken()
   {
-    return cast(TokenType)(cast(GScanner*)cPtr).nextToken;
+    return cast(glib.types.TokenType)(cast(GScanner*)cPtr).nextToken;
   }
 
-  @property void nextToken(TokenType propval)
+  @property void nextToken(glib.types.TokenType propval)
   {
     (cast(GScanner*)cPtr).nextToken = cast(GTokenType)propval;
   }
 
-  @property TokenValue nextValue()
+  @property glib.token_value.TokenValue nextValue()
   {
-    return new TokenValue(cast(GTokenValue*)&(cast(GScanner*)cPtr).nextValue);
+    return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)cPtr).nextValue);
   }
 
   @property uint nextLine()
@@ -202,11 +202,11 @@ class Scanner
    * field in the #GScanner structure.
    * Returns: the current token type
    */
-  TokenType curToken()
+  glib.types.TokenType curToken()
   {
     GTokenType _cretval;
     _cretval = g_scanner_cur_token(cast(GScanner*)cPtr);
-    TokenType _retval = cast(TokenType)_cretval;
+    glib.types.TokenType _retval = cast(glib.types.TokenType)_cretval;
     return _retval;
   }
 
@@ -238,11 +238,11 @@ class Scanner
    * the #GScanner structure.
    * Returns: the type of the token
    */
-  TokenType getNextToken()
+  glib.types.TokenType getNextToken()
   {
     GTokenType _cretval;
     _cretval = g_scanner_get_next_token(cast(GScanner*)cPtr);
-    TokenType _retval = cast(TokenType)_cretval;
+    glib.types.TokenType _retval = cast(glib.types.TokenType)_cretval;
     return _retval;
   }
 
@@ -297,11 +297,11 @@ class Scanner
    * any symbols that may have been added or removed in the new scope.
    * Returns: the type of the token
    */
-  TokenType peekNextToken()
+  glib.types.TokenType peekNextToken()
   {
     GTokenType _cretval;
     _cretval = g_scanner_peek_next_token(cast(GScanner*)cPtr);
-    TokenType _retval = cast(TokenType)_cretval;
+    glib.types.TokenType _retval = cast(glib.types.TokenType)_cretval;
     return _retval;
   }
 
@@ -327,11 +327,11 @@ class Scanner
    *   scopeId = the scope id
    *   func = the function to call for each symbol/value pair
    */
-  void scopeForeachSymbol(uint scopeId, HFunc func)
+  void scopeForeachSymbol(uint scopeId, glib.types.HFunc func)
   {
     extern(C) void _funcCallback(void* key, void* value, void* userData)
     {
-      auto _dlg = cast(HFunc*)userData;
+      auto _dlg = cast(glib.types.HFunc*)userData;
 
       (*_dlg)(key, value);
     }
@@ -418,7 +418,7 @@ class Scanner
    *   isError = if %TRUE it is output as an error. If %FALSE it is
    *     output as a warning.
    */
-  void unexpToken(TokenType expectedToken, string identifierSpec, string symbolSpec, string symbolName, string message, int isError)
+  void unexpToken(glib.types.TokenType expectedToken, string identifierSpec, string symbolSpec, string symbolName, string message, int isError)
   {
     const(char)* _identifierSpec = identifierSpec.toCString(No.Alloc);
     const(char)* _symbolSpec = symbolSpec.toCString(No.Alloc);

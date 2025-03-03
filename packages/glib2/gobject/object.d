@@ -1,6 +1,6 @@
 module gobject.object;
 
-import gid.global;
+import gid.gid;
 import glib.types;
 import gobject.binding;
 import gobject.c.functions;
@@ -418,13 +418,13 @@ class ObjectG
    *   binding between the two #GObject instances. The binding is released
    *   whenever the #GBinding reference count reaches zero.
    */
-  Binding bindProperty(string sourceProperty, ObjectG target, string targetProperty, BindingFlags flags)
+  gobject.binding.Binding bindProperty(string sourceProperty, gobject.object.ObjectG target, string targetProperty, gobject.types.BindingFlags flags)
   {
     GBinding* _cretval;
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
     const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
     _cretval = g_object_bind_property(cast(ObjectC*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _targetProperty, flags);
-    auto _retval = ObjectG.getDObject!Binding(cast(GBinding*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.Take);
     return _retval;
   }
 
@@ -448,13 +448,13 @@ class ObjectG
    *   binding between the two #GObject instances. The binding is released
    *   whenever the #GBinding reference count reaches zero.
    */
-  Binding bindPropertyFull(string sourceProperty, ObjectG target, string targetProperty, BindingFlags flags, Closure transformTo, Closure transformFrom)
+  gobject.binding.Binding bindPropertyFull(string sourceProperty, gobject.object.ObjectG target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo, gobject.closure.Closure transformFrom)
   {
     GBinding* _cretval;
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
     const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
     _cretval = g_object_bind_property_with_closures(cast(ObjectC*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _targetProperty, flags, transformTo ? cast(GClosure*)transformTo.cPtr(No.Dup) : null, transformFrom ? cast(GClosure*)transformFrom.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Binding(cast(GBinding*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.Take);
     return _retval;
   }
 
@@ -515,7 +515,7 @@ class ObjectG
    *   propertyName = the name of the property to get
    *   value = return location for the property value
    */
-  void getProperty(string propertyName, Value value)
+  void getProperty(string propertyName, gobject.value.Value value)
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     g_object_get_property(cast(ObjectC*)cPtr, _propertyName, value ? cast(GValue*)value.cPtr(No.Dup) : null);
@@ -528,7 +528,7 @@ class ObjectG
    *   quark = A #GQuark, naming the user data pointer
    * Returns: The user data pointer set, or %NULL
    */
-  void* getQdata(Quark quark)
+  void* getQdata(glib.types.Quark quark)
   {
     auto _retval = g_object_get_qdata(cast(ObjectC*)cPtr, quark);
     return _retval;
@@ -543,7 +543,7 @@ class ObjectG
    *   names = the names of each property to get
    *   values = the values of each property to get
    */
-  void getv(string[] names, Value[] values)
+  void getv(string[] names, gobject.value.Value[] values)
   {
     uint _nProperties;
     if (names)
@@ -627,7 +627,7 @@ class ObjectG
    * Params:
    *   pspec = the #GParamSpec of a property installed on the class of object.
    */
-  void notifyByPspec(ParamSpec pspec)
+  void notifyByPspec(gobject.param_spec.ParamSpec pspec)
   {
     g_object_notify_by_pspec(cast(ObjectC*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
   }
@@ -644,11 +644,11 @@ class ObjectG
    * under the same conditions as for [gobject.object.ObjectG.ref_].
    * Returns: object
    */
-  ObjectG refSink()
+  gobject.object.ObjectG refSink()
   {
     ObjectC* _cretval;
     _cretval = g_object_ref_sink(cast(ObjectC*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -687,10 +687,10 @@ class ObjectG
    *   propertyName = the name of the property to set
    *   value = the value
    */
-  void setProperty(string propertyName, Value value)
+  void setProperty(string propertyName, gobject.value.Value value)
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    g_object_set_property(cast(ObjectC*)cPtr, _propertyName, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    g_object_set_property(cast(ObjectC*)cPtr, _propertyName, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -746,7 +746,7 @@ class ObjectG
    *   quark = A #GQuark, naming the user data pointer
    * Returns: The user data pointer set, or %NULL
    */
-  void* stealQdata(Quark quark)
+  void* stealQdata(glib.types.Quark quark)
   {
     auto _retval = g_object_steal_qdata(cast(ObjectC*)cPtr, quark);
     return _retval;
@@ -779,7 +779,7 @@ class ObjectG
    * Params:
    *   closure = #GClosure to watch
    */
-  void watchClosure(Closure closure)
+  void watchClosure(gobject.closure.Closure closure)
   {
     g_object_watch_closure(cast(ObjectC*)cPtr, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null);
   }
@@ -810,8 +810,8 @@ class ObjectG
    *   pspec = the #GParamSpec of the property which changed.
    *   objectG = the instance the signal is connected to
    */
-  alias NotifyCallbackDlg = void delegate(ParamSpec pspec, ObjectG objectG);
-  alias NotifyCallbackFunc = void function(ParamSpec pspec, ObjectG objectG);
+  alias NotifyCallbackDlg = void delegate(gobject.param_spec.ParamSpec pspec, gobject.object.ObjectG objectG);
+  alias NotifyCallbackFunc = void function(gobject.param_spec.ParamSpec pspec, gobject.object.ObjectG objectG);
 
   /**
    * Connect to Notify signal.
@@ -828,8 +828,8 @@ class ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectG = getVal!ObjectG(_paramVals);
-      auto pspec = getVal!ParamSpec(&_paramVals[1]);
+      auto objectG = getVal!(gobject.object.ObjectG)(_paramVals);
+      auto pspec = getVal!(gobject.param_spec.ParamSpec)(&_paramVals[1]);
       _dClosure.dlg(pspec, objectG);
     }
 

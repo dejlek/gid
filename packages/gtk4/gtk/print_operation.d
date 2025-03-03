@@ -1,6 +1,6 @@
 module gtk.print_operation;
 
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.dclosure;
 import gobject.object;
@@ -66,7 +66,7 @@ import gtk.window;
  * [gtk.print_operation_preview.PrintOperationPreview.isSelected]
  * are useful when implementing a print preview.
  */
-class PrintOperation : ObjectG, PrintOperationPreview
+class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.PrintOperationPreview
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -125,11 +125,11 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Returns the default page setup.
    * Returns: the default page setup
    */
-  PageSetup getDefaultPageSetup()
+  gtk.page_setup.PageSetup getDefaultPageSetup()
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_operation_get_default_page_setup(cast(GtkPrintOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!PageSetup(cast(GtkPageSetup*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -196,11 +196,11 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * [gtk.print_operation.PrintOperation.run] have been called.
    * Returns: the current print settings of op.
    */
-  PrintSettings getPrintSettings()
+  gtk.print_settings.PrintSettings getPrintSettings()
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_operation_get_print_settings(cast(GtkPrintOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!PrintSettings(cast(GtkPrintSettings*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -209,11 +209,11 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Also see [gtk.print_operation.PrintOperation.getStatusString].
    * Returns: the status of the print operation
    */
-  PrintStatus getStatus()
+  gtk.types.PrintStatus getStatus()
   {
     GtkPrintStatus _cretval;
     _cretval = gtk_print_operation_get_status(cast(GtkPrintOperation*)cPtr);
-    PrintStatus _retval = cast(PrintStatus)_cretval;
+    gtk.types.PrintStatus _retval = cast(gtk.types.PrintStatus)_cretval;
     return _retval;
   }
 
@@ -231,7 +231,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
   {
     const(char)* _cretval;
     _cretval = gtk_print_operation_get_status_string(cast(GtkPrintOperation*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -323,14 +323,14 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   asynchronously, and will emit the [gtk.print_operation.PrintOperation.done]
    *   signal when done.
    */
-  PrintOperationResult run(PrintOperationAction action, Window parent)
+  gtk.types.PrintOperationResult run(gtk.types.PrintOperationAction action, gtk.window.Window parent)
   {
     GtkPrintOperationResult _cretval;
     GError *_err;
     _cretval = gtk_print_operation_run(cast(GtkPrintOperation*)cPtr, action, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    PrintOperationResult _retval = cast(PrintOperationResult)_cretval;
+    gtk.types.PrintOperationResult _retval = cast(gtk.types.PrintOperationResult)_cretval;
     return _retval;
   }
 
@@ -379,7 +379,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Params:
    *   defaultPageSetup = a `GtkPageSetup`
    */
-  void setDefaultPageSetup(PageSetup defaultPageSetup)
+  void setDefaultPageSetup(gtk.page_setup.PageSetup defaultPageSetup)
   {
     gtk_print_operation_set_default_page_setup(cast(GtkPrintOperation*)cPtr, defaultPageSetup ? cast(GtkPageSetup*)defaultPageSetup.cPtr(No.Dup) : null);
   }
@@ -475,7 +475,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Params:
    *   printSettings = `GtkPrintSettings`
    */
-  void setPrintSettings(PrintSettings printSettings)
+  void setPrintSettings(gtk.print_settings.PrintSettings printSettings)
   {
     gtk_print_operation_set_print_settings(cast(GtkPrintOperation*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(No.Dup) : null);
   }
@@ -523,7 +523,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Params:
    *   unit = the unit to use
    */
-  void setUnit(Unit unit)
+  void setUnit(gtk.types.Unit unit)
   {
     gtk_print_operation_set_unit(cast(GtkPrintOperation*)cPtr, unit);
   }
@@ -554,8 +554,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   context = the `GtkPrintContext` for the current operation
    *   printOperation = the instance the signal is connected to
    */
-  alias BeginPrintCallbackDlg = void delegate(PrintContext context, PrintOperation printOperation);
-  alias BeginPrintCallbackFunc = void function(PrintContext context, PrintOperation printOperation);
+  alias BeginPrintCallbackDlg = void delegate(gtk.print_context.PrintContext context, gtk.print_operation.PrintOperation printOperation);
+  alias BeginPrintCallbackFunc = void function(gtk.print_context.PrintContext context, gtk.print_operation.PrintOperation printOperation);
 
   /**
    * Connect to BeginPrint signal.
@@ -571,8 +571,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printOperation = getVal!PrintOperation(_paramVals);
-      auto context = getVal!PrintContext(&_paramVals[1]);
+      auto printOperation = getVal!(gtk.print_operation.PrintOperation)(_paramVals);
+      auto context = getVal!(gtk.print_context.PrintContext)(&_paramVals[1]);
       _dClosure.dlg(context, printOperation);
     }
 
@@ -594,8 +594,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
    * Returns: A custom widget that gets embedded in
    *   the print dialog
    */
-  alias CreateCustomWidgetCallbackDlg = ObjectG delegate(PrintOperation printOperation);
-  alias CreateCustomWidgetCallbackFunc = ObjectG function(PrintOperation printOperation);
+  alias CreateCustomWidgetCallbackDlg = gobject.object.ObjectG delegate(gtk.print_operation.PrintOperation printOperation);
+  alias CreateCustomWidgetCallbackFunc = gobject.object.ObjectG function(gtk.print_operation.PrintOperation printOperation);
 
   /**
    * Connect to CreateCustomWidget signal.
@@ -611,9 +611,9 @@ class PrintOperation : ObjectG, PrintOperationPreview
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printOperation = getVal!PrintOperation(_paramVals);
+      auto printOperation = getVal!(gtk.print_operation.PrintOperation)(_paramVals);
       auto _retval = _dClosure.dlg(printOperation);
-      setVal!ObjectG(_returnValue, _retval);
+      setVal!gobject.object.ObjectG(_returnValue, _retval);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -630,8 +630,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   widget = the custom widget added in ::create-custom-widget
    *   printOperation = the instance the signal is connected to
    */
-  alias CustomWidgetApplyCallbackDlg = void delegate(Widget widget, PrintOperation printOperation);
-  alias CustomWidgetApplyCallbackFunc = void function(Widget widget, PrintOperation printOperation);
+  alias CustomWidgetApplyCallbackDlg = void delegate(gtk.widget.Widget widget, gtk.print_operation.PrintOperation printOperation);
+  alias CustomWidgetApplyCallbackFunc = void function(gtk.widget.Widget widget, gtk.print_operation.PrintOperation printOperation);
 
   /**
    * Connect to CustomWidgetApply signal.
@@ -647,8 +647,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printOperation = getVal!PrintOperation(_paramVals);
-      auto widget = getVal!Widget(&_paramVals[1]);
+      auto printOperation = getVal!(gtk.print_operation.PrintOperation)(_paramVals);
+      auto widget = getVal!(gtk.widget.Widget)(&_paramVals[1]);
       _dClosure.dlg(widget, printOperation);
     }
 
@@ -669,8 +669,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   result = the result of the print operation
    *   printOperation = the instance the signal is connected to
    */
-  alias DoneCallbackDlg = void delegate(PrintOperationResult result, PrintOperation printOperation);
-  alias DoneCallbackFunc = void function(PrintOperationResult result, PrintOperation printOperation);
+  alias DoneCallbackDlg = void delegate(gtk.types.PrintOperationResult result, gtk.print_operation.PrintOperation printOperation);
+  alias DoneCallbackFunc = void function(gtk.types.PrintOperationResult result, gtk.print_operation.PrintOperation printOperation);
 
   /**
    * Connect to Done signal.
@@ -686,8 +686,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printOperation = getVal!PrintOperation(_paramVals);
-      auto result = getVal!PrintOperationResult(&_paramVals[1]);
+      auto printOperation = getVal!(gtk.print_operation.PrintOperation)(_paramVals);
+      auto result = getVal!(gtk.types.PrintOperationResult)(&_paramVals[1]);
       _dClosure.dlg(result, printOperation);
     }
 
@@ -740,8 +740,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   pageNr = the number of the currently printed page $(LPAREN)0-based$(RPAREN)
    *   printOperation = the instance the signal is connected to
    */
-  alias DrawPageCallbackDlg = void delegate(PrintContext context, int pageNr, PrintOperation printOperation);
-  alias DrawPageCallbackFunc = void function(PrintContext context, int pageNr, PrintOperation printOperation);
+  alias DrawPageCallbackDlg = void delegate(gtk.print_context.PrintContext context, int pageNr, gtk.print_operation.PrintOperation printOperation);
+  alias DrawPageCallbackFunc = void function(gtk.print_context.PrintContext context, int pageNr, gtk.print_operation.PrintOperation printOperation);
 
   /**
    * Connect to DrawPage signal.
@@ -757,9 +757,9 @@ class PrintOperation : ObjectG, PrintOperationPreview
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printOperation = getVal!PrintOperation(_paramVals);
-      auto context = getVal!PrintContext(&_paramVals[1]);
-      auto pageNr = getVal!int(&_paramVals[2]);
+      auto printOperation = getVal!(gtk.print_operation.PrintOperation)(_paramVals);
+      auto context = getVal!(gtk.print_context.PrintContext)(&_paramVals[1]);
+      auto pageNr = getVal!(int)(&_paramVals[2]);
       _dClosure.dlg(context, pageNr, printOperation);
     }
 
@@ -775,8 +775,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   context = the `GtkPrintContext` for the current operation
    *   printOperation = the instance the signal is connected to
    */
-  alias EndPrintCallbackDlg = void delegate(PrintContext context, PrintOperation printOperation);
-  alias EndPrintCallbackFunc = void function(PrintContext context, PrintOperation printOperation);
+  alias EndPrintCallbackDlg = void delegate(gtk.print_context.PrintContext context, gtk.print_operation.PrintOperation printOperation);
+  alias EndPrintCallbackFunc = void function(gtk.print_context.PrintContext context, gtk.print_operation.PrintOperation printOperation);
 
   /**
    * Connect to EndPrint signal.
@@ -792,8 +792,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printOperation = getVal!PrintOperation(_paramVals);
-      auto context = getVal!PrintContext(&_paramVals[1]);
+      auto printOperation = getVal!(gtk.print_operation.PrintOperation)(_paramVals);
+      auto context = getVal!(gtk.print_context.PrintContext)(&_paramVals[1]);
       _dClosure.dlg(context, printOperation);
     }
 
@@ -818,8 +818,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   printOperation = the instance the signal is connected to
    * Returns: %TRUE if pagination is complete
    */
-  alias PaginateCallbackDlg = bool delegate(PrintContext context, PrintOperation printOperation);
-  alias PaginateCallbackFunc = bool function(PrintContext context, PrintOperation printOperation);
+  alias PaginateCallbackDlg = bool delegate(gtk.print_context.PrintContext context, gtk.print_operation.PrintOperation printOperation);
+  alias PaginateCallbackFunc = bool function(gtk.print_context.PrintContext context, gtk.print_operation.PrintOperation printOperation);
 
   /**
    * Connect to Paginate signal.
@@ -836,8 +836,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto printOperation = getVal!PrintOperation(_paramVals);
-      auto context = getVal!PrintContext(&_paramVals[1]);
+      auto printOperation = getVal!(gtk.print_operation.PrintOperation)(_paramVals);
+      auto context = getVal!(gtk.print_context.PrintContext)(&_paramVals[1]);
       _retval = _dClosure.dlg(context, printOperation);
       setVal!bool(_returnValue, _retval);
     }
@@ -868,8 +868,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   printOperation = the instance the signal is connected to
    * Returns: %TRUE if the listener wants to take over control of the preview
    */
-  alias PreviewCallbackDlg = bool delegate(PrintOperationPreview preview, PrintContext context, Window parent, PrintOperation printOperation);
-  alias PreviewCallbackFunc = bool function(PrintOperationPreview preview, PrintContext context, Window parent, PrintOperation printOperation);
+  alias PreviewCallbackDlg = bool delegate(gtk.print_operation_preview.PrintOperationPreview preview, gtk.print_context.PrintContext context, gtk.window.Window parent, gtk.print_operation.PrintOperation printOperation);
+  alias PreviewCallbackFunc = bool function(gtk.print_operation_preview.PrintOperationPreview preview, gtk.print_context.PrintContext context, gtk.window.Window parent, gtk.print_operation.PrintOperation printOperation);
 
   /**
    * Connect to Preview signal.
@@ -886,10 +886,10 @@ class PrintOperation : ObjectG, PrintOperationPreview
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto printOperation = getVal!PrintOperation(_paramVals);
-      auto preview = getVal!PrintOperationPreview(&_paramVals[1]);
-      auto context = getVal!PrintContext(&_paramVals[2]);
-      auto parent = getVal!Window(&_paramVals[3]);
+      auto printOperation = getVal!(gtk.print_operation.PrintOperation)(_paramVals);
+      auto preview = getVal!(gtk.print_operation_preview.PrintOperationPreview)(&_paramVals[1]);
+      auto context = getVal!(gtk.print_context.PrintContext)(&_paramVals[2]);
+      auto parent = getVal!(gtk.window.Window)(&_paramVals[3]);
       _retval = _dClosure.dlg(preview, context, parent, printOperation);
       setVal!bool(_returnValue, _retval);
     }
@@ -909,8 +909,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   setup = the `GtkPageSetup`
    *   printOperation = the instance the signal is connected to
    */
-  alias RequestPageSetupCallbackDlg = void delegate(PrintContext context, int pageNr, PageSetup setup, PrintOperation printOperation);
-  alias RequestPageSetupCallbackFunc = void function(PrintContext context, int pageNr, PageSetup setup, PrintOperation printOperation);
+  alias RequestPageSetupCallbackDlg = void delegate(gtk.print_context.PrintContext context, int pageNr, gtk.page_setup.PageSetup setup, gtk.print_operation.PrintOperation printOperation);
+  alias RequestPageSetupCallbackFunc = void function(gtk.print_context.PrintContext context, int pageNr, gtk.page_setup.PageSetup setup, gtk.print_operation.PrintOperation printOperation);
 
   /**
    * Connect to RequestPageSetup signal.
@@ -926,10 +926,10 @@ class PrintOperation : ObjectG, PrintOperationPreview
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printOperation = getVal!PrintOperation(_paramVals);
-      auto context = getVal!PrintContext(&_paramVals[1]);
-      auto pageNr = getVal!int(&_paramVals[2]);
-      auto setup = getVal!PageSetup(&_paramVals[3]);
+      auto printOperation = getVal!(gtk.print_operation.PrintOperation)(_paramVals);
+      auto context = getVal!(gtk.print_context.PrintContext)(&_paramVals[1]);
+      auto pageNr = getVal!(int)(&_paramVals[2]);
+      auto setup = getVal!(gtk.page_setup.PageSetup)(&_paramVals[3]);
       _dClosure.dlg(context, pageNr, setup, printOperation);
     }
 
@@ -939,13 +939,13 @@ class PrintOperation : ObjectG, PrintOperationPreview
 
   /**
    * Emitted at between the various phases of the print operation.
-   * See [gtk.PrintStatus] for the phases that are being discriminated.
+   * See [gtk.types.PrintStatus] for the phases that are being discriminated.
    * Use [gtk.print_operation.PrintOperation.getStatus] to find out the current
    * status.
    *   printOperation = the instance the signal is connected to
    */
-  alias StatusChangedCallbackDlg = void delegate(PrintOperation printOperation);
-  alias StatusChangedCallbackFunc = void function(PrintOperation printOperation);
+  alias StatusChangedCallbackDlg = void delegate(gtk.print_operation.PrintOperation printOperation);
+  alias StatusChangedCallbackFunc = void function(gtk.print_operation.PrintOperation printOperation);
 
   /**
    * Connect to StatusChanged signal.
@@ -961,7 +961,7 @@ class PrintOperation : ObjectG, PrintOperationPreview
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printOperation = getVal!PrintOperation(_paramVals);
+      auto printOperation = getVal!(gtk.print_operation.PrintOperation)(_paramVals);
       _dClosure.dlg(printOperation);
     }
 
@@ -979,8 +979,8 @@ class PrintOperation : ObjectG, PrintOperationPreview
    *   settings = actual print settings
    *   printOperation = the instance the signal is connected to
    */
-  alias UpdateCustomWidgetCallbackDlg = void delegate(Widget widget, PageSetup setup, PrintSettings settings, PrintOperation printOperation);
-  alias UpdateCustomWidgetCallbackFunc = void function(Widget widget, PageSetup setup, PrintSettings settings, PrintOperation printOperation);
+  alias UpdateCustomWidgetCallbackDlg = void delegate(gtk.widget.Widget widget, gtk.page_setup.PageSetup setup, gtk.print_settings.PrintSettings settings, gtk.print_operation.PrintOperation printOperation);
+  alias UpdateCustomWidgetCallbackFunc = void function(gtk.widget.Widget widget, gtk.page_setup.PageSetup setup, gtk.print_settings.PrintSettings settings, gtk.print_operation.PrintOperation printOperation);
 
   /**
    * Connect to UpdateCustomWidget signal.
@@ -996,10 +996,10 @@ class PrintOperation : ObjectG, PrintOperationPreview
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printOperation = getVal!PrintOperation(_paramVals);
-      auto widget = getVal!Widget(&_paramVals[1]);
-      auto setup = getVal!PageSetup(&_paramVals[2]);
-      auto settings = getVal!PrintSettings(&_paramVals[3]);
+      auto printOperation = getVal!(gtk.print_operation.PrintOperation)(_paramVals);
+      auto widget = getVal!(gtk.widget.Widget)(&_paramVals[1]);
+      auto setup = getVal!(gtk.page_setup.PageSetup)(&_paramVals[2]);
+      auto settings = getVal!(gtk.print_settings.PrintSettings)(&_paramVals[3]);
       _dClosure.dlg(widget, setup, settings, printOperation);
     }
 

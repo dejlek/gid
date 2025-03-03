@@ -1,6 +1,6 @@
 module gtk.adjustment;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.initially_unowned;
 import gtk.c.functions;
@@ -17,7 +17,7 @@ import gtk.types;
  * The `GtkAdjustment` object does not update the value itself. Instead
  * it is left up to the owner of the `GtkAdjustment` to control the value.
  */
-class Adjustment : InitiallyUnowned
+class Adjustment : gobject.initially_unowned.InitiallyUnowned
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -265,8 +265,8 @@ class Adjustment : InitiallyUnowned
    * covered by the signalGtk.Adjustment::value-changed signal.
    *   adjustment = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(Adjustment adjustment);
-  alias ChangedCallbackFunc = void function(Adjustment adjustment);
+  alias ChangedCallbackDlg = void delegate(gtk.adjustment.Adjustment adjustment);
+  alias ChangedCallbackFunc = void function(gtk.adjustment.Adjustment adjustment);
 
   /**
    * Connect to Changed signal.
@@ -282,7 +282,7 @@ class Adjustment : InitiallyUnowned
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto adjustment = getVal!Adjustment(_paramVals);
+      auto adjustment = getVal!(gtk.adjustment.Adjustment)(_paramVals);
       _dClosure.dlg(adjustment);
     }
 
@@ -294,8 +294,8 @@ class Adjustment : InitiallyUnowned
    * Emitted when the value has been changed.
    *   adjustment = the instance the signal is connected to
    */
-  alias ValueChangedCallbackDlg = void delegate(Adjustment adjustment);
-  alias ValueChangedCallbackFunc = void function(Adjustment adjustment);
+  alias ValueChangedCallbackDlg = void delegate(gtk.adjustment.Adjustment adjustment);
+  alias ValueChangedCallbackFunc = void function(gtk.adjustment.Adjustment adjustment);
 
   /**
    * Connect to ValueChanged signal.
@@ -311,7 +311,7 @@ class Adjustment : InitiallyUnowned
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto adjustment = getVal!Adjustment(_paramVals);
+      auto adjustment = getVal!(gtk.adjustment.Adjustment)(_paramVals);
       _dClosure.dlg(adjustment);
     }
 

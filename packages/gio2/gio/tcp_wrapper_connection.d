@@ -1,6 +1,6 @@
 module gio.tcp_wrapper_connection;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.iostream;
@@ -17,7 +17,7 @@ import gobject.object;
  * connection it has actually created is not directly a
  * [gio.socket_connection.SocketConnection].
  */
-class TcpWrapperConnection : TcpConnection
+class TcpWrapperConnection : gio.tcp_connection.TcpConnection
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -43,7 +43,7 @@ class TcpWrapperConnection : TcpConnection
    *   socket = the #GSocket associated with base_io_stream
    * Returns: the new #GSocketConnection.
    */
-  this(IOStream baseIoStream, Socket socket)
+  this(gio.iostream.IOStream baseIoStream, gio.socket.Socket socket)
   {
     GSocketConnection* _cretval;
     _cretval = g_tcp_wrapper_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream.cPtr(No.Dup) : null, socket ? cast(GSocket*)socket.cPtr(No.Dup) : null);
@@ -54,11 +54,11 @@ class TcpWrapperConnection : TcpConnection
    * Gets conn's base #GIOStream
    * Returns: conn's base #GIOStream
    */
-  IOStream getBaseIoStream()
+  gio.iostream.IOStream getBaseIoStream()
   {
     GIOStream* _cretval;
     _cretval = g_tcp_wrapper_connection_get_base_io_stream(cast(GTcpWrapperConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!IOStream(cast(GIOStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, No.Take);
     return _retval;
   }
 }

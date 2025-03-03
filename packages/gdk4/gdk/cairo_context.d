@@ -5,7 +5,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.draw_context;
 import gdk.types;
-import gid.global;
+import gid.gid;
 
 /**
  * `GdkCairoContext` is an object representing the platform-specific
@@ -14,7 +14,7 @@ import gid.global;
  * [gdk.surface.Surface.createCairoContext], and the context
  * can then be used to draw on that surface.
  */
-class CairoContext : DrawContext
+class CairoContext : gdk.draw_context.DrawContext
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -43,11 +43,11 @@ class CairoContext : DrawContext
    * Returns: a Cairo context
    *   to draw on `GdkSurface
    */
-  Context cairoCreate()
+  cairo.context.Context cairoCreate()
   {
     cairo_t* _cretval;
     _cretval = gdk_cairo_context_cairo_create(cast(GdkCairoContext*)cPtr);
-    auto _retval = _cretval ? new Context(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

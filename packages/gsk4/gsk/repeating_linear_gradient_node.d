@@ -1,6 +1,6 @@
 module gsk.repeating_linear_gradient_node;
 
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.render_node;
@@ -9,7 +9,7 @@ import gsk.types;
 /**
  * A render node for a repeating linear gradient.
  */
-class RepeatingLinearGradientNode : RenderNode
+class RepeatingLinearGradientNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

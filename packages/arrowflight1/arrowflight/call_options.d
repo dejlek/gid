@@ -3,10 +3,10 @@ module arrowflight.call_options;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
-class CallOptions : ObjectG
+class CallOptions : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -58,11 +58,11 @@ class CallOptions : ObjectG
    * Params:
    *   func = The user's callback function.
    */
-  void foreachHeader(HeaderFunc func)
+  void foreachHeader(arrowflight.types.HeaderFunc func)
   {
     extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData)
     {
-      auto _dlg = cast(HeaderFunc*)userData;
+      auto _dlg = cast(arrowflight.types.HeaderFunc*)userData;
       string _name = name.fromCString(No.Free);
       string _value = value.fromCString(No.Free);
 

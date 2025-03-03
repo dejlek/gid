@@ -4,7 +4,7 @@ public import arrow.writable_file_iface_proxy;
 public import arrow.c.functions;
 public import arrow.c.types;
 public import arrow.types;
-public import gid.global;
+public import gid.gid;
 public import glib.error;
 
 template WritableFileT()

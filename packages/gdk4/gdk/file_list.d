@@ -3,16 +3,15 @@ module gdk.file_list;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gio.file;
-import gio.file_mixin;
 import gobject.boxed;
 import gobject.object;
 
 /**
  * An opaque type representing a list of files.
  */
-class FileList : Boxed
+class FileList : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -43,7 +42,7 @@ class FileList : Boxed
    *   files = the files to add to the list
    * Returns: the newly create files list
    */
-  static FileList newFromArray(File[] files)
+  static gdk.file_list.FileList newFromArray(gio.file.File[] files)
   {
     GdkFileList* _cretval;
     size_t _nFiles;
@@ -55,7 +54,7 @@ class FileList : Boxed
       _tmpfiles ~= obj ? cast(GFile*)(cast(ObjectG)obj).cPtr : null;
     GFile** _files = _tmpfiles.ptr;
     _cretval = gdk_file_list_new_from_array(_files, _nFiles);
-    auto _retval = _cretval ? new FileList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.file_list.FileList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -67,13 +66,13 @@ class FileList : Boxed
    *   files = a list of files
    * Returns: the newly created files list
    */
-  static FileList newFromList(File[] files)
+  static gdk.file_list.FileList newFromList(gio.file.File[] files)
   {
     GdkFileList* _cretval;
-    auto _files = gSListFromD!(File)(files);
-    scope(exit) containerFree!(GSList*, File, GidOwnership.None)(_files);
+    auto _files = gSListFromD!(gio.file.File)(files);
+    scope(exit) containerFree!(GSList*, gio.file.File, GidOwnership.None)(_files);
     _cretval = gdk_file_list_new_from_list(_files);
-    auto _retval = _cretval ? new FileList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.file_list.FileList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -82,11 +81,11 @@ class FileList : Boxed
    * This function is meant for language bindings.
    * Returns: the files inside the list
    */
-  File[] getFiles()
+  gio.file.File[] getFiles()
   {
     GSList* _cretval;
     _cretval = gdk_file_list_get_files(cast(GdkFileList*)cPtr);
-    auto _retval = gSListToD!(File, GidOwnership.Container)(cast(GSList*)_cretval);
+    auto _retval = gSListToD!(gio.file.File, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
 }

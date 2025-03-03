@@ -1,6 +1,6 @@
 module gtk.cell_renderer_toggle;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -17,7 +17,7 @@ import gtk.types;
  * Deprecated: List views use widgets to display their contents.
  *   You should use [gtk.toggle_button.ToggleButton] instead
  */
-class CellRendererToggle : CellRenderer
+class CellRendererToggle : gtk.cell_renderer.CellRenderer
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -134,8 +134,8 @@ class CellRendererToggle : CellRenderer
    *     event location
    *   cellRendererToggle = the instance the signal is connected to
    */
-  alias ToggledCallbackDlg = void delegate(string path, CellRendererToggle cellRendererToggle);
-  alias ToggledCallbackFunc = void function(string path, CellRendererToggle cellRendererToggle);
+  alias ToggledCallbackDlg = void delegate(string path, gtk.cell_renderer_toggle.CellRendererToggle cellRendererToggle);
+  alias ToggledCallbackFunc = void function(string path, gtk.cell_renderer_toggle.CellRendererToggle cellRendererToggle);
 
   /**
    * Connect to Toggled signal.
@@ -151,8 +151,8 @@ class CellRendererToggle : CellRenderer
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto cellRendererToggle = getVal!CellRendererToggle(_paramVals);
-      auto path = getVal!string(&_paramVals[1]);
+      auto cellRendererToggle = getVal!(gtk.cell_renderer_toggle.CellRendererToggle)(_paramVals);
+      auto path = getVal!(string)(&_paramVals[1]);
       _dClosure.dlg(path, cellRendererToggle);
     }
 

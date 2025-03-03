@@ -5,7 +5,7 @@ import gio.loadable_icon;
 import gio.loadable_icon_mixin;
 
 /// Proxy object for Gio.LoadableIcon interface when a GObject has no applicable D binding
-class LoadableIconIfaceProxy : IfaceProxy, LoadableIcon
+class LoadableIconIfaceProxy : IfaceProxy, gio.loadable_icon.LoadableIcon
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class LoadableIconIfaceProxy : IfaceProxy, LoadableIcon
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(LoadableIcon);
+    return typeid(gio.loadable_icon.LoadableIcon);
   }
 
   mixin LoadableIconT!();

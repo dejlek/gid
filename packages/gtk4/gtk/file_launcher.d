@@ -1,11 +1,9 @@
 module gtk.file_launcher;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.file;
-import gio.file_mixin;
 import gio.types;
 import glib.error;
 import gobject.object;
@@ -25,7 +23,7 @@ import gtk.window;
  * calling [gtk.file_launcher.FileLauncher.launchFinish].
  * To launch uris that don't represent files, use [gtk.uri_launcher.UriLauncher].
  */
-class FileLauncher : ObjectG
+class FileLauncher : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -50,7 +48,7 @@ class FileLauncher : ObjectG
    *   file = the file to open
    * Returns: the new `GtkFileLauncher`
    */
-  this(File file)
+  this(gio.file.File file)
   {
     GtkFileLauncher* _cretval;
     _cretval = gtk_file_launcher_new(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
@@ -72,11 +70,11 @@ class FileLauncher : ObjectG
    * Gets the file that will be opened.
    * Returns: the file
    */
-  File getFile()
+  gio.file.File getFile()
   {
     GFile* _cretval;
     _cretval = gtk_file_launcher_get_file(cast(GtkFileLauncher*)cPtr);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -102,14 +100,14 @@ class FileLauncher : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void launch(Window parent, Cancellable cancellable, AsyncReadyCallback callback)
+  void launch(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -125,7 +123,7 @@ class FileLauncher : ObjectG
    * Returns: `TRUE` if an application was launched,
    *   or `FALSE` and error is set
    */
-  bool launchFinish(AsyncResult result)
+  bool launchFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -147,14 +145,14 @@ class FileLauncher : ObjectG
    *   cancellable = a `GCancellable` to cancel the operation
    *   callback = a callback to call when the operation is complete
    */
-  void openContainingFolder(Window parent, Cancellable cancellable, AsyncReadyCallback callback)
+  void openContainingFolder(gtk.window.Window parent, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -170,7 +168,7 @@ class FileLauncher : ObjectG
    * Returns: `TRUE` if an application was launched,
    *   or `FALSE` and error is set
    */
-  bool openContainingFolderFinish(AsyncResult result)
+  bool openContainingFolderFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -196,7 +194,7 @@ class FileLauncher : ObjectG
    * Params:
    *   file = a `GFile`
    */
-  void setFile(File file)
+  void setFile(gio.file.File file)
   {
     gtk_file_launcher_set_file(cast(GtkFileLauncher*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }

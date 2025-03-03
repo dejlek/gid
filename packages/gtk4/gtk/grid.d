@@ -1,6 +1,6 @@
 module gtk.grid;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -86,7 +86,7 @@ import gtk.widget;
  * Until GTK 4.10, `GtkGrid` used the `GTK_ACCESSIBLE_ROLE_GROUP` role.
  * Starting from GTK 4.12, `GtkGrid` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
  */
-class Grid : Widget, Orientable
+class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -130,7 +130,7 @@ class Grid : Widget, Orientable
    *   width = the number of columns that child will span
    *   height = the number of rows that child will span
    */
-  void attach(Widget child, int column, int row, int width, int height)
+  void attach(gtk.widget.Widget child, int column, int row, int width, int height)
   {
     gtk_grid_attach(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, column, row, width, height);
   }
@@ -151,7 +151,7 @@ class Grid : Widget, Orientable
    *   width = the number of columns that child will span
    *   height = the number of rows that child will span
    */
-  void attachNextTo(Widget child, Widget sibling, PositionType side, int width, int height)
+  void attachNextTo(gtk.widget.Widget child, gtk.widget.Widget sibling, gtk.types.PositionType side, int width, int height)
   {
     gtk_grid_attach_next_to(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null, side, width, height);
   }
@@ -175,11 +175,11 @@ class Grid : Widget, Orientable
    *   row = the top edge of the cell
    * Returns: the child at the given position
    */
-  Widget getChildAt(int column, int row)
+  gtk.widget.Widget getChildAt(int column, int row)
   {
     GtkWidget* _cretval;
     _cretval = gtk_grid_get_child_at(cast(GtkGrid*)cPtr, column, row);
-    auto _retval = ObjectG.getDObject!Widget(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -212,11 +212,11 @@ class Grid : Widget, Orientable
    *   row = a row index
    * Returns: the baseline position of row
    */
-  BaselinePosition getRowBaselinePosition(int row)
+  gtk.types.BaselinePosition getRowBaselinePosition(int row)
   {
     GtkBaselinePosition _cretval;
     _cretval = gtk_grid_get_row_baseline_position(cast(GtkGrid*)cPtr, row);
-    BaselinePosition _retval = cast(BaselinePosition)_cretval;
+    gtk.types.BaselinePosition _retval = cast(gtk.types.BaselinePosition)_cretval;
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class Grid : Widget, Orientable
    *     placed next to
    *   side = the side of sibling that child is positioned next to
    */
-  void insertNextTo(Widget sibling, PositionType side)
+  void insertNextTo(gtk.widget.Widget sibling, gtk.types.PositionType side)
   {
     gtk_grid_insert_next_to(cast(GtkGrid*)cPtr, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null, side);
   }
@@ -293,7 +293,7 @@ class Grid : Widget, Orientable
    *   width = the number of columns child spans
    *   height = the number of rows child spans
    */
-  void queryChild(Widget child, out int column, out int row, out int width, out int height)
+  void queryChild(gtk.widget.Widget child, out int column, out int row, out int width, out int height)
   {
     gtk_grid_query_child(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, cast(int*)&column, cast(int*)&row, cast(int*)&width, cast(int*)&height);
   }
@@ -305,7 +305,7 @@ class Grid : Widget, Orientable
    * Params:
    *   child = the child widget to remove
    */
-  void remove(Widget child)
+  void remove(gtk.widget.Widget child)
   {
     gtk_grid_remove(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
@@ -379,7 +379,7 @@ class Grid : Widget, Orientable
    *   row = a row index
    *   pos = a `GtkBaselinePosition`
    */
-  void setRowBaselinePosition(int row, BaselinePosition pos)
+  void setRowBaselinePosition(int row, gtk.types.BaselinePosition pos)
   {
     gtk_grid_set_row_baseline_position(cast(GtkGrid*)cPtr, row, pos);
   }

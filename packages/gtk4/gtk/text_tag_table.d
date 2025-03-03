@@ -1,6 +1,6 @@
 module gtk.text_tag_table;
 
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.buildable;
@@ -29,7 +29,7 @@ import gtk.types;
  * </object>
  * ```
  */
-class TextTagTable : ObjectG, Buildable
+class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -71,7 +71,7 @@ class TextTagTable : ObjectG, Buildable
    *   tag = a `GtkTextTag`
    * Returns: %TRUE on success.
    */
-  bool add(TextTag tag)
+  bool add(gtk.text_tag.TextTag tag)
   {
     bool _retval;
     _retval = gtk_text_tag_table_add(cast(GtkTextTagTable*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
@@ -85,13 +85,13 @@ class TextTagTable : ObjectG, Buildable
    * Params:
    *   func = a function to call on each tag
    */
-  void foreach_(TextTagTableForeach func)
+  void foreach_(gtk.types.TextTagTableForeach func)
   {
     extern(C) void _funcCallback(GtkTextTag* tag, void* data)
     {
-      auto _dlg = cast(TextTagTableForeach*)data;
+      auto _dlg = cast(gtk.types.TextTagTableForeach*)data;
 
-      (*_dlg)(ObjectG.getDObject!TextTag(cast(void*)tag, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gtk.text_tag.TextTag)(cast(void*)tag, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -116,12 +116,12 @@ class TextTagTable : ObjectG, Buildable
    *   name = name of a tag
    * Returns: The tag
    */
-  TextTag lookup(string name)
+  gtk.text_tag.TextTag lookup(string name)
   {
     GtkTextTag* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_text_tag_table_lookup(cast(GtkTextTagTable*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!TextTag(cast(GtkTextTag*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_tag.TextTag)(cast(GtkTextTag*)_cretval, No.Take);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class TextTagTable : ObjectG, Buildable
    * Params:
    *   tag = a `GtkTextTag`
    */
-  void remove(TextTag tag)
+  void remove(gtk.text_tag.TextTag tag)
   {
     gtk_text_tag_table_remove(cast(GtkTextTagTable*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
   }
@@ -145,8 +145,8 @@ class TextTagTable : ObjectG, Buildable
    *   tag = the added tag.
    *   textTagTable = the instance the signal is connected to
    */
-  alias TagAddedCallbackDlg = void delegate(TextTag tag, TextTagTable textTagTable);
-  alias TagAddedCallbackFunc = void function(TextTag tag, TextTagTable textTagTable);
+  alias TagAddedCallbackDlg = void delegate(gtk.text_tag.TextTag tag, gtk.text_tag_table.TextTagTable textTagTable);
+  alias TagAddedCallbackFunc = void function(gtk.text_tag.TextTag tag, gtk.text_tag_table.TextTagTable textTagTable);
 
   /**
    * Connect to TagAdded signal.
@@ -162,8 +162,8 @@ class TextTagTable : ObjectG, Buildable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textTagTable = getVal!TextTagTable(_paramVals);
-      auto tag = getVal!TextTag(&_paramVals[1]);
+      auto textTagTable = getVal!(gtk.text_tag_table.TextTagTable)(_paramVals);
+      auto tag = getVal!(gtk.text_tag.TextTag)(&_paramVals[1]);
       _dClosure.dlg(tag, textTagTable);
     }
 
@@ -178,8 +178,8 @@ class TextTagTable : ObjectG, Buildable
    *   sizeChanged = whether the change affects the `GtkTextView` layout.
    *   textTagTable = the instance the signal is connected to
    */
-  alias TagChangedCallbackDlg = void delegate(TextTag tag, bool sizeChanged, TextTagTable textTagTable);
-  alias TagChangedCallbackFunc = void function(TextTag tag, bool sizeChanged, TextTagTable textTagTable);
+  alias TagChangedCallbackDlg = void delegate(gtk.text_tag.TextTag tag, bool sizeChanged, gtk.text_tag_table.TextTagTable textTagTable);
+  alias TagChangedCallbackFunc = void function(gtk.text_tag.TextTag tag, bool sizeChanged, gtk.text_tag_table.TextTagTable textTagTable);
 
   /**
    * Connect to TagChanged signal.
@@ -195,9 +195,9 @@ class TextTagTable : ObjectG, Buildable
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textTagTable = getVal!TextTagTable(_paramVals);
-      auto tag = getVal!TextTag(&_paramVals[1]);
-      auto sizeChanged = getVal!bool(&_paramVals[2]);
+      auto textTagTable = getVal!(gtk.text_tag_table.TextTagTable)(_paramVals);
+      auto tag = getVal!(gtk.text_tag.TextTag)(&_paramVals[1]);
+      auto sizeChanged = getVal!(bool)(&_paramVals[2]);
       _dClosure.dlg(tag, sizeChanged, textTagTable);
     }
 
@@ -213,8 +213,8 @@ class TextTagTable : ObjectG, Buildable
    *   tag = the removed tag.
    *   textTagTable = the instance the signal is connected to
    */
-  alias TagRemovedCallbackDlg = void delegate(TextTag tag, TextTagTable textTagTable);
-  alias TagRemovedCallbackFunc = void function(TextTag tag, TextTagTable textTagTable);
+  alias TagRemovedCallbackDlg = void delegate(gtk.text_tag.TextTag tag, gtk.text_tag_table.TextTagTable textTagTable);
+  alias TagRemovedCallbackFunc = void function(gtk.text_tag.TextTag tag, gtk.text_tag_table.TextTagTable textTagTable);
 
   /**
    * Connect to TagRemoved signal.
@@ -230,8 +230,8 @@ class TextTagTable : ObjectG, Buildable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textTagTable = getVal!TextTagTable(_paramVals);
-      auto tag = getVal!TextTag(&_paramVals[1]);
+      auto textTagTable = getVal!(gtk.text_tag_table.TextTagTable)(_paramVals);
+      auto tag = getVal!(gtk.text_tag.TextTag)(&_paramVals[1]);
       _dClosure.dlg(tag, textTagTable);
     }
 

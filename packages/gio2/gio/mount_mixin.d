@@ -1,22 +1,17 @@
 module gio.mount_mixin;
 
 public import gio.mount_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.async_result;
-public import gio.async_result_mixin;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
 public import gio.drive;
-public import gio.drive_mixin;
 public import gio.file;
-public import gio.file_mixin;
 public import gio.icon;
-public import gio.icon_mixin;
 public import gio.mount_operation;
 public import gio.types;
 public import gio.volume;
-public import gio.volume_mixin;
 public import glib.error;
 public import gobject.dclosure;
 public import gobject.object;
@@ -33,7 +28,7 @@ public import gobject.object;
  * more information about asynchronous operations, see [gio.async_result.AsyncResult]
  * and [gio.task.Task]. To unmount a `GMount` instance, first call
  * [gio.mount.Mount.unmountWithOperation] with (at least) the `GMount`
- * instance and a [gio.AsyncReadyCallback].  The callback will be fired
+ * instance and a [gio.types.AsyncReadyCallback].  The callback will be fired
  * when the operation has resolved $(LPAREN)either with success or failure$(RPAREN), and a
  * [gio.async_result.AsyncResult] structure will be passed to the callback.  That
  * callback should then call [gio.mount.Mount.unmountWithOperationFinish]
@@ -78,14 +73,14 @@ template MountT()
 
    * Deprecated: Use [gio.mount.Mount.ejectWithOperation] instead.
    */
-  override void eject(MountUnmountFlags flags, Cancellable cancellable, AsyncReadyCallback callback)
+  override void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -102,7 +97,7 @@ template MountT()
 
    * Deprecated: Use [gio.mount.Mount.ejectWithOperationFinish] instead.
    */
-  override bool ejectFinish(AsyncResult result)
+  override bool ejectFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -123,14 +118,14 @@ template MountT()
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
    */
-  override void ejectWithOperation(MountUnmountFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback)
+  override void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -145,7 +140,7 @@ template MountT()
    *   result = a #GAsyncResult.
    * Returns: %TRUE if the mount was successfully ejected. %FALSE otherwise.
    */
-  override bool ejectWithOperationFinish(AsyncResult result)
+  override bool ejectWithOperationFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -163,11 +158,11 @@ template MountT()
    *   The returned object should be unreffed with
    *   [gobject.object.ObjectG.unref] when no longer needed.
    */
-  override File getDefaultLocation()
+  override gio.file.File getDefaultLocation()
   {
     GFile* _cretval;
     _cretval = g_mount_get_default_location(cast(GMount*)cPtr);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -180,11 +175,11 @@ template MountT()
    *   The returned object should be unreffed with
    *   [gobject.object.ObjectG.unref] when no longer needed.
    */
-  override Drive getDrive()
+  override gio.drive.Drive getDrive()
   {
     GDrive* _cretval;
     _cretval = g_mount_get_drive(cast(GMount*)cPtr);
-    auto _retval = ObjectG.getDObject!Drive(cast(GDrive*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.drive.Drive)(cast(GDrive*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -194,11 +189,11 @@ template MountT()
    *   The returned object should be unreffed with
    *   [gobject.object.ObjectG.unref] when no longer needed.
    */
-  override Icon getIcon()
+  override gio.icon.Icon getIcon()
   {
     GIcon* _cretval;
     _cretval = g_mount_get_icon(cast(GMount*)cPtr);
-    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -212,7 +207,7 @@ template MountT()
   {
     char* _cretval;
     _cretval = g_mount_get_name(cast(GMount*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -222,11 +217,11 @@ template MountT()
    *   The returned object should be unreffed with
    *   [gobject.object.ObjectG.unref] when no longer needed.
    */
-  override File getRoot()
+  override gio.file.File getRoot()
   {
     GFile* _cretval;
     _cretval = g_mount_get_root(cast(GMount*)cPtr);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -238,7 +233,7 @@ template MountT()
   {
     const(char)* _cretval;
     _cretval = g_mount_get_sort_key(cast(GMount*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -248,11 +243,11 @@ template MountT()
    *   The returned object should be unreffed with
    *   [gobject.object.ObjectG.unref] when no longer needed.
    */
-  override Icon getSymbolicIcon()
+  override gio.icon.Icon getSymbolicIcon()
   {
     GIcon* _cretval;
     _cretval = g_mount_get_symbolic_icon(cast(GMount*)cPtr);
-    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -270,7 +265,7 @@ template MountT()
   {
     char* _cretval;
     _cretval = g_mount_get_uuid(cast(GMount*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -281,11 +276,11 @@ template MountT()
    *   The returned object should be unreffed with
    *   [gobject.object.ObjectG.unref] when no longer needed.
    */
-  override Volume getVolume()
+  override gio.volume.Volume getVolume()
   {
     GVolume* _cretval;
     _cretval = g_mount_get_volume(cast(GMount*)cPtr);
-    auto _retval = ObjectG.getDObject!Volume(cast(GVolume*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -306,14 +301,14 @@ template MountT()
    *   cancellable = optional #GCancellable object, %NULL to ignore
    *   callback = a #GAsyncReadyCallback
    */
-  override void guessContentType(bool forceRescan, Cancellable cancellable, AsyncReadyCallback callback)
+  override void guessContentType(bool forceRescan, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -332,7 +327,7 @@ template MountT()
    * Returns: a %NULL-terminated array of content types or %NULL on error.
    *   Caller should free this array with [glib.global.strfreev] when done with it.
    */
-  override string[] guessContentTypeFinish(AsyncResult result)
+  override string[] guessContentTypeFinish(gio.async_result.AsyncResult result)
   {
     char** _cretval;
     GError *_err;
@@ -369,7 +364,7 @@ template MountT()
    * Returns: a %NULL-terminated array of content types or %NULL on error.
    *   Caller should free this array with [glib.global.strfreev] when done with it.
    */
-  override string[] guessContentTypeSync(bool forceRescan, Cancellable cancellable)
+  override string[] guessContentTypeSync(bool forceRescan, gio.cancellable.Cancellable cancellable)
   {
     char** _cretval;
     GError *_err;
@@ -436,14 +431,14 @@ template MountT()
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
    */
-  override void remount(MountMountFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback)
+  override void remount(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -458,7 +453,7 @@ template MountT()
    *   result = a #GAsyncResult.
    * Returns: %TRUE if the mount was successfully remounted. %FALSE otherwise.
    */
-  override bool remountFinish(AsyncResult result)
+  override bool remountFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -490,14 +485,14 @@ template MountT()
 
    * Deprecated: Use [gio.mount.Mount.unmountWithOperation] instead.
    */
-  override void unmount(MountUnmountFlags flags, Cancellable cancellable, AsyncReadyCallback callback)
+  override void unmount(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -514,7 +509,7 @@ template MountT()
 
    * Deprecated: Use [gio.mount.Mount.unmountWithOperationFinish] instead.
    */
-  override bool unmountFinish(AsyncResult result)
+  override bool unmountFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -535,14 +530,14 @@ template MountT()
    *   cancellable = optional #GCancellable object, %NULL to ignore.
    *   callback = a #GAsyncReadyCallback, or %NULL.
    */
-  override void unmountWithOperation(MountUnmountFlags flags, MountOperation mountOperation, Cancellable cancellable, AsyncReadyCallback callback)
+  override void unmountWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -557,7 +552,7 @@ template MountT()
    *   result = a #GAsyncResult.
    * Returns: %TRUE if the mount was successfully unmounted. %FALSE otherwise.
    */
-  override bool unmountWithOperationFinish(AsyncResult result)
+  override bool unmountWithOperationFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -582,8 +577,8 @@ template MountT()
    * Emitted when the mount has been changed.
    *   mount = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(Mount mount);
-  alias ChangedCallbackFunc = void function(Mount mount);
+  alias ChangedCallbackDlg = void delegate(gio.mount.Mount mount);
+  alias ChangedCallbackFunc = void function(gio.mount.Mount mount);
 
   /**
    * Connect to Changed signal.
@@ -599,7 +594,7 @@ template MountT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto mount = getVal!Mount(_paramVals);
+      auto mount = getVal!(gio.mount.Mount)(_paramVals);
       _dClosure.dlg(mount);
     }
 
@@ -614,8 +609,8 @@ template MountT()
    * GIO was used to unmount.
    *   mount = the instance the signal is connected to
    */
-  alias PreUnmountCallbackDlg = void delegate(Mount mount);
-  alias PreUnmountCallbackFunc = void function(Mount mount);
+  alias PreUnmountCallbackDlg = void delegate(gio.mount.Mount mount);
+  alias PreUnmountCallbackFunc = void function(gio.mount.Mount mount);
 
   /**
    * Connect to PreUnmount signal.
@@ -631,7 +626,7 @@ template MountT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto mount = getVal!Mount(_paramVals);
+      auto mount = getVal!(gio.mount.Mount)(_paramVals);
       _dClosure.dlg(mount);
     }
 
@@ -646,8 +641,8 @@ template MountT()
    * finalized.
    *   mount = the instance the signal is connected to
    */
-  alias UnmountedCallbackDlg = void delegate(Mount mount);
-  alias UnmountedCallbackFunc = void function(Mount mount);
+  alias UnmountedCallbackDlg = void delegate(gio.mount.Mount mount);
+  alias UnmountedCallbackFunc = void function(gio.mount.Mount mount);
 
   /**
    * Connect to Unmounted signal.
@@ -663,7 +658,7 @@ template MountT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto mount = getVal!Mount(_paramVals);
+      auto mount = getVal!(gio.mount.Mount)(_paramVals);
       _dClosure.dlg(mount);
     }
 

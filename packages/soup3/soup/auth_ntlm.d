@@ -1,6 +1,6 @@
 module soup.auth_ntlm;
 
-import gid.global;
+import gid.gid;
 import soup.auth;
 import soup.c.functions;
 import soup.c.types;
@@ -12,7 +12,7 @@ import soup.types;
  * enable support for it, call [soup.session.Session.addFeatureByType],
  * passing %SOUP_TYPE_AUTH_NTLM.
  */
-class AuthNTLM : Auth
+class AuthNTLM : soup.auth.Auth
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

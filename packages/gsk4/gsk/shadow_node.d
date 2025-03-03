@@ -1,6 +1,6 @@
 module gsk.shadow_node;
 
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.render_node;
@@ -10,7 +10,7 @@ import gsk.types;
 /**
  * A render node drawing one or more shadows behind its single child node.
  */
-class ShadowNode : RenderNode
+class ShadowNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -25,11 +25,11 @@ class ShadowNode : RenderNode
    * Retrieves the child `GskRenderNode` of the shadow node.
    * Returns: the child render node
    */
-  RenderNode getChild()
+  gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_shadow_node_get_child(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    _cretval = gsk_shadow_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -40,7 +40,7 @@ class ShadowNode : RenderNode
   size_t getNShadows()
   {
     size_t _retval;
-    _retval = gsk_shadow_node_get_n_shadows(cast(GskRenderNode*)cPtr);
+    _retval = gsk_shadow_node_get_n_shadows(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 
@@ -50,11 +50,11 @@ class ShadowNode : RenderNode
    *   i = the given index
    * Returns: the shadow data
    */
-  Shadow getShadow(size_t i)
+  gsk.shadow.Shadow getShadow(size_t i)
   {
     const(GskShadow)* _cretval;
-    _cretval = gsk_shadow_node_get_shadow(cast(GskRenderNode*)cPtr, i);
-    auto _retval = _cretval ? new Shadow(cast(GskShadow*)_cretval) : null;
+    _cretval = gsk_shadow_node_get_shadow(cast(const(GskRenderNode)*)cPtr, i);
+    auto _retval = _cretval ? new gsk.shadow.Shadow(cast(GskShadow*)_cretval) : null;
     return _retval;
   }
 }

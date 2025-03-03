@@ -1,6 +1,6 @@
 module glib.once;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.types;
@@ -30,12 +30,12 @@ class Once
     return cast(void*)&cInstance;
   }
 
-  @property OnceStatus status()
+  @property glib.types.OnceStatus status()
   {
-    return cast(OnceStatus)(cast(GOnce*)cPtr).status;
+    return cast(glib.types.OnceStatus)(cast(GOnce*)cPtr).status;
   }
 
-  @property void status(OnceStatus propval)
+  @property void status(glib.types.OnceStatus propval)
   {
     (cast(GOnce*)cPtr).status = cast(GOnceStatus)propval;
   }

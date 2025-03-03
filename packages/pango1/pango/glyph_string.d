@@ -1,6 +1,6 @@
 module pango.glyph_string;
 
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 import pango.analysis;
 import pango.c.functions;
@@ -14,7 +14,7 @@ import pango.types;
  * The storage for the glyph information is owned by the structure
  * which simplifies memory management.
  */
-class GlyphString : Boxed
+class GlyphString : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -64,11 +64,11 @@ class GlyphString : Boxed
    * Copy a glyph string and associated storage.
    * Returns: the newly allocated `PangoGlyphString`
    */
-  GlyphString copy()
+  pango.glyph_string.GlyphString copy()
   {
     PangoGlyphString* _cretval;
     _cretval = pango_glyph_string_copy(cast(PangoGlyphString*)cPtr);
-    auto _retval = _cretval ? new GlyphString(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.glyph_string.GlyphString(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class GlyphString : Boxed
    *   inkRect = rectangle used to store the extents of the glyph string as drawn
    *   logicalRect = rectangle used to store the logical extents of the glyph string
    */
-  void extents(Font font, out Rectangle inkRect, out Rectangle logicalRect)
+  void extents(pango.font.Font font, out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
     pango_glyph_string_extents(cast(PangoGlyphString*)cPtr, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, &inkRect, &logicalRect);
   }
@@ -103,7 +103,7 @@ class GlyphString : Boxed
    *   logicalRect = rectangle used to
    *     store the logical extents of the glyph string range
    */
-  void extentsRange(int start, int end, Font font, out Rectangle inkRect, out Rectangle logicalRect)
+  void extentsRange(int start, int end, pango.font.Font font, out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
     pango_glyph_string_extents_range(cast(PangoGlyphString*)cPtr, start, end, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, &inkRect, &logicalRect);
   }
@@ -141,7 +141,7 @@ class GlyphString : Boxed
    *     or end $(LPAREN)%TRUE$(RPAREN) of the character.
    *   xPos = location to store result
    */
-  void indexToX(string text, Analysis analysis, int index, bool trailing, out int xPos)
+  void indexToX(string text, pango.analysis.Analysis analysis, int index, bool trailing, out int xPos)
   {
     int _length;
     if (text)
@@ -166,7 +166,7 @@ class GlyphString : Boxed
    *     or end $(LPAREN)%TRUE$(RPAREN) of the character.
    *   xPos = location to store result
    */
-  void indexToXFull(string text, Analysis analysis, LogAttr attrs, int index, bool trailing, out int xPos)
+  void indexToXFull(string text, pango.analysis.Analysis analysis, pango.types.LogAttr attrs, int index, bool trailing, out int xPos)
   {
     int _length;
     if (text)
@@ -201,7 +201,7 @@ class GlyphString : Boxed
    *   trailing = location to store a boolean indicating whether the
    *     user clicked on the leading or trailing edge of the character
    */
-  void xToIndex(string text, Analysis analysis, int xPos, out int index, out int trailing)
+  void xToIndex(string text, pango.analysis.Analysis analysis, int xPos, out int index, out int trailing)
   {
     int _length;
     if (text)

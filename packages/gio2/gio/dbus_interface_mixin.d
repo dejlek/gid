@@ -1,12 +1,11 @@
 module gio.dbus_interface_mixin;
 
 public import gio.dbus_interface_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.dbus_interface_info;
 public import gio.dbus_object;
-public import gio.dbus_object_mixin;
 public import gio.types;
 public import gobject.object;
 
@@ -24,11 +23,11 @@ template DBusInterfaceT()
    * Returns: A #GDBusObject or %NULL. The returned
    *   reference should be freed with [gobject.object.ObjectG.unref].
    */
-  override DBusObject getObject()
+  override gio.dbus_object.DBusObject getObject()
   {
     GDBusObject* _cretval;
     _cretval = g_dbus_interface_dup_object(cast(GDBusInterface*)cPtr);
-    auto _retval = ObjectG.getDObject!DBusObject(cast(GDBusObject*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_object.DBusObject)(cast(GDBusObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -37,11 +36,11 @@ template DBusInterfaceT()
    * implemented by interface_.
    * Returns: A #GDBusInterfaceInfo. Do not free.
    */
-  override DBusInterfaceInfo getInfo()
+  override gio.dbus_interface_info.DBusInterfaceInfo getInfo()
   {
     GDBusInterfaceInfo* _cretval;
     _cretval = g_dbus_interface_get_info(cast(GDBusInterface*)cPtr);
-    auto _retval = _cretval ? new DBusInterfaceInfo(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gio.dbus_interface_info.DBusInterfaceInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -51,7 +50,7 @@ template DBusInterfaceT()
    * Params:
    *   object = A #GDBusObject or %NULL.
    */
-  override void setObject(DBusObject object)
+  override void setObject(gio.dbus_object.DBusObject object)
   {
     g_dbus_interface_set_object(cast(GDBusInterface*)cPtr, object ? cast(GDBusObject*)(cast(ObjectG)object).cPtr(No.Dup) : null);
   }

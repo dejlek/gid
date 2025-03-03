@@ -1,8 +1,7 @@
 module gtk.constraint_layout;
 
-import gid.global;
+import gid.gid;
 import gio.list_model;
-import gio.list_model_mixin;
 import glib.error;
 import gobject.object;
 import gtk.buildable;
@@ -12,7 +11,6 @@ import gtk.c.types;
 import gtk.constraint;
 import gtk.constraint_guide;
 import gtk.constraint_target;
-import gtk.constraint_target_mixin;
 import gtk.layout_manager;
 import gtk.types;
 
@@ -141,7 +139,7 @@ import gtk.types;
  * [button1$(LPAREN)button2 / 2 + 12$(RPAREN)]
  * ```
  */
-class ConstraintLayout : LayoutManager, Buildable
+class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -187,7 +185,7 @@ class ConstraintLayout : LayoutManager, Buildable
    * Params:
    *   constraint = a [gtk.constraint.Constraint]
    */
-  void addConstraint(Constraint constraint)
+  void addConstraint(gtk.constraint.Constraint constraint)
   {
     gtk_constraint_layout_add_constraint(cast(GtkConstraintLayout*)cPtr, constraint ? cast(GtkConstraint*)constraint.cPtr(Yes.Dup) : null);
   }
@@ -265,7 +263,7 @@ class ConstraintLayout : LayoutManager, Buildable
    * Returns: the list of
    *   [gtk.constraint.Constraint] instances that were added to the layout
    */
-  Constraint[] addConstraintsFromDescription(string[] lines, int hspacing, int vspacing, ConstraintTarget[string] views)
+  gtk.constraint.Constraint[] addConstraintsFromDescription(string[] lines, int hspacing, int vspacing, gtk.constraint_target.ConstraintTarget[string] views)
   {
     GList* _cretval;
     size_t _nLines;
@@ -277,13 +275,13 @@ class ConstraintLayout : LayoutManager, Buildable
       _tmplines ~= s.toCString(No.Alloc);
     const(char*)* _lines = _tmplines.ptr;
 
-    auto _views = gHashTableFromD!(string, ConstraintTarget)(views);
+    auto _views = gHashTableFromD!(string, gtk.constraint_target.ConstraintTarget)(views);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_views);
     GError *_err;
     _cretval = gtk_constraint_layout_add_constraints_from_descriptionv(cast(GtkConstraintLayout*)cPtr, _lines, _nLines, hspacing, vspacing, _views, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = gListToD!(Constraint, GidOwnership.Container)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gtk.constraint.Constraint, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -296,7 +294,7 @@ class ConstraintLayout : LayoutManager, Buildable
    * Params:
    *   guide = a [gtk.constraint_guide.ConstraintGuide] object
    */
-  void addGuide(ConstraintGuide guide)
+  void addGuide(gtk.constraint_guide.ConstraintGuide guide)
   {
     gtk_constraint_layout_add_guide(cast(GtkConstraintLayout*)cPtr, guide ? cast(GtkConstraintGuide*)guide.cPtr(Yes.Dup) : null);
   }
@@ -312,11 +310,11 @@ class ConstraintLayout : LayoutManager, Buildable
    * Returns: a
    *   `GListModel` tracking the layout's constraints
    */
-  ListModel observeConstraints()
+  gio.list_model.ListModel observeConstraints()
   {
     GListModel* _cretval;
     _cretval = gtk_constraint_layout_observe_constraints(cast(GtkConstraintLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -331,11 +329,11 @@ class ConstraintLayout : LayoutManager, Buildable
    * Returns: a
    *   `GListModel` tracking the layout's guides
    */
-  ListModel observeGuides()
+  gio.list_model.ListModel observeGuides()
   {
     GListModel* _cretval;
     _cretval = gtk_constraint_layout_observe_guides(cast(GtkConstraintLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -353,7 +351,7 @@ class ConstraintLayout : LayoutManager, Buildable
    * Params:
    *   constraint = a [gtk.constraint.Constraint]
    */
-  void removeConstraint(Constraint constraint)
+  void removeConstraint(gtk.constraint.Constraint constraint)
   {
     gtk_constraint_layout_remove_constraint(cast(GtkConstraintLayout*)cPtr, constraint ? cast(GtkConstraint*)constraint.cPtr(No.Dup) : null);
   }
@@ -364,7 +362,7 @@ class ConstraintLayout : LayoutManager, Buildable
    * Params:
    *   guide = a [gtk.constraint_guide.ConstraintGuide] object
    */
-  void removeGuide(ConstraintGuide guide)
+  void removeGuide(gtk.constraint_guide.ConstraintGuide guide)
   {
     gtk_constraint_layout_remove_guide(cast(GtkConstraintLayout*)cPtr, guide ? cast(GtkConstraintGuide*)guide.cPtr(No.Dup) : null);
   }

@@ -4,7 +4,7 @@ public import atk.streamable_content_iface_proxy;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;
-import gid.global;
+import gid.gid;
 import glib.iochannel;
 
 /**
@@ -56,7 +56,7 @@ interface StreamableContent
    * Returns: A #GIOChannel which contains the content in the
    *   specified mime type.
    */
-  IOChannel getStream(string mimeType);
+  glib.iochannel.IOChannel getStream(string mimeType);
 
   /**
    * Get a string representing a URI in IETF standard format

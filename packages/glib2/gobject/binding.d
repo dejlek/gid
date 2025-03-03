@@ -1,6 +1,6 @@
 module gobject.binding;
 
-import gid.global;
+import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.object;
@@ -68,7 +68,7 @@ import gobject.types;
  * and target properties, instead of relying on the last reference on the
  * binding, source, and target instances to drop.
  */
-class Binding : ObjectG
+class Binding : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -95,11 +95,11 @@ class Binding : ObjectG
    * Returns: the source #GObject, or %NULL if the
    *   source does not exist any more.
    */
-  ObjectG dupSource()
+  gobject.object.ObjectG dupSource()
   {
     ObjectC* _cretval;
     _cretval = g_binding_dup_source(cast(GBinding*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -111,11 +111,11 @@ class Binding : ObjectG
    * Returns: the target #GObject, or %NULL if the
    *   target does not exist any more.
    */
-  ObjectG dupTarget()
+  gobject.object.ObjectG dupTarget()
   {
     ObjectC* _cretval;
     _cretval = g_binding_dup_target(cast(GBinding*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -123,11 +123,11 @@ class Binding : ObjectG
    * Retrieves the flags passed when constructing the #GBinding.
    * Returns: the #GBindingFlags used by the #GBinding
    */
-  BindingFlags getFlags()
+  gobject.types.BindingFlags getFlags()
   {
     GBindingFlags _cretval;
     _cretval = g_binding_get_flags(cast(GBinding*)cPtr);
-    BindingFlags _retval = cast(BindingFlags)_cretval;
+    gobject.types.BindingFlags _retval = cast(gobject.types.BindingFlags)_cretval;
     return _retval;
   }
 
@@ -145,11 +145,11 @@ class Binding : ObjectG
    * Deprecated: Use [gobject.binding.Binding.dupSource] for a safer version of this
    *   function.
    */
-  ObjectG getSource()
+  gobject.object.ObjectG getSource()
   {
     ObjectC* _cretval;
     _cretval = g_binding_get_source(cast(GBinding*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class Binding : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_binding_get_source_property(cast(GBinding*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -180,11 +180,11 @@ class Binding : ObjectG
    * Deprecated: Use [gobject.binding.Binding.dupTarget] for a safer version of this
    *   function.
    */
-  ObjectG getTarget()
+  gobject.object.ObjectG getTarget()
   {
     ObjectC* _cretval;
     _cretval = g_binding_get_target(cast(GBinding*)cPtr);
-    auto _retval = ObjectG.getDObject!ObjectG(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class Binding : ObjectG
   {
     const(char)* _cretval;
     _cretval = g_binding_get_target_property(cast(GBinding*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

@@ -1,7 +1,7 @@
 module gtk.print_operation_preview;
 
 public import gtk.print_operation_preview_iface_proxy;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gtk.c.functions;
 import gtk.c.types;
@@ -64,8 +64,8 @@ interface PrintOperationPreview
    *   pageSetup = the `GtkPageSetup` for the current page
    *   printOperationPreview = the instance the signal is connected to
    */
-  alias GotPageSizeCallbackDlg = void delegate(PrintContext context, PageSetup pageSetup, PrintOperationPreview printOperationPreview);
-  alias GotPageSizeCallbackFunc = void function(PrintContext context, PageSetup pageSetup, PrintOperationPreview printOperationPreview);
+  alias GotPageSizeCallbackDlg = void delegate(gtk.print_context.PrintContext context, gtk.page_setup.PageSetup pageSetup, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
+  alias GotPageSizeCallbackFunc = void function(gtk.print_context.PrintContext context, gtk.page_setup.PageSetup pageSetup, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
 
   /**
    * Connect to GotPageSize signal.
@@ -85,8 +85,8 @@ interface PrintOperationPreview
    *   context = the current `GtkPrintContext`
    *   printOperationPreview = the instance the signal is connected to
    */
-  alias ReadyCallbackDlg = void delegate(PrintContext context, PrintOperationPreview printOperationPreview);
-  alias ReadyCallbackFunc = void function(PrintContext context, PrintOperationPreview printOperationPreview);
+  alias ReadyCallbackDlg = void delegate(gtk.print_context.PrintContext context, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
+  alias ReadyCallbackFunc = void function(gtk.print_context.PrintContext context, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
 
   /**
    * Connect to Ready signal.

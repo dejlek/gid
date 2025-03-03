@@ -1,7 +1,7 @@
 module gtk.orientable;
 
 public import gtk.orientable_iface_proxy;
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -29,12 +29,12 @@ interface Orientable
    * Retrieves the orientation of the orientable.
    * Returns: the orientation of the orientable
    */
-  Orientation getOrientation();
+  gtk.types.Orientation getOrientation();
 
   /**
    * Sets the orientation of the orientable.
    * Params:
    *   orientation = the orientable’s new orientation
    */
-  void setOrientation(Orientation orientation);
+  void setOrientation(gtk.types.Orientation orientation);
 }

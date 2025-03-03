@@ -5,7 +5,7 @@ import gio.async_initable;
 import gio.async_initable_mixin;
 
 /// Proxy object for Gio.AsyncInitable interface when a GObject has no applicable D binding
-class AsyncInitableIfaceProxy : IfaceProxy, AsyncInitable
+class AsyncInitableIfaceProxy : IfaceProxy, gio.async_initable.AsyncInitable
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class AsyncInitableIfaceProxy : IfaceProxy, AsyncInitable
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(AsyncInitable);
+    return typeid(gio.async_initable.AsyncInitable);
   }
 
   mixin AsyncInitableT!();

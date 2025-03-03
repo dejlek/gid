@@ -5,7 +5,7 @@ import atk.streamable_content;
 import atk.streamable_content_mixin;
 
 /// Proxy object for Atk.StreamableContent interface when a GObject has no applicable D binding
-class StreamableContentIfaceProxy : IfaceProxy, StreamableContent
+class StreamableContentIfaceProxy : IfaceProxy, atk.streamable_content.StreamableContent
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class StreamableContentIfaceProxy : IfaceProxy, StreamableContent
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(StreamableContent);
+    return typeid(atk.streamable_content.StreamableContent);
   }
 
   mixin StreamableContentT!();

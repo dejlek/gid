@@ -1,6 +1,6 @@
 module gsk.conic_gradient_node;
 
-import gid.global;
+import gid.gid;
 import graphene.point;
 import gsk.c.functions;
 import gsk.c.types;
@@ -10,7 +10,7 @@ import gsk.types;
 /**
  * A render node for a conic gradient.
  */
-class ConicGradientNode : RenderNode
+class ConicGradientNode : gsk.render_node.RenderNode
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -31,7 +31,7 @@ class ConicGradientNode : RenderNode
   float getAngle()
   {
     float _retval;
-    _retval = gsk_conic_gradient_node_get_angle(cast(GskRenderNode*)cPtr);
+    _retval = gsk_conic_gradient_node_get_angle(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 
@@ -39,11 +39,11 @@ class ConicGradientNode : RenderNode
    * Retrieves the center pointer for the gradient.
    * Returns: the center point for the gradient
    */
-  Point getCenter()
+  graphene.point.Point getCenter()
   {
     const(graphene_point_t)* _cretval;
-    _cretval = gsk_conic_gradient_node_get_center(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new Point(cast(void*)_cretval, No.Take) : null;
+    _cretval = gsk_conic_gradient_node_get_center(cast(const(GskRenderNode)*)cPtr);
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -54,7 +54,7 @@ class ConicGradientNode : RenderNode
   size_t getNColorStops()
   {
     size_t _retval;
-    _retval = gsk_conic_gradient_node_get_n_color_stops(cast(GskRenderNode*)cPtr);
+    _retval = gsk_conic_gradient_node_get_n_color_stops(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 
@@ -65,7 +65,7 @@ class ConicGradientNode : RenderNode
   float getRotation()
   {
     float _retval;
-    _retval = gsk_conic_gradient_node_get_rotation(cast(GskRenderNode*)cPtr);
+    _retval = gsk_conic_gradient_node_get_rotation(cast(const(GskRenderNode)*)cPtr);
     return _retval;
   }
 }

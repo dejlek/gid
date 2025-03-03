@@ -1,6 +1,6 @@
 module gobject.param_spec;
 
-import gid.global;
+import gid.gid;
 import glib.types;
 import gobject.c.functions;
 import gobject.c.types;
@@ -73,7 +73,7 @@ class ParamSpec
   {
     const(char)* _cretval;
     _cretval = g_param_spec_get_blurb(cast(GParamSpec*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -82,11 +82,11 @@ class ParamSpec
    * The #GValue will remain valid for the life of pspec.
    * Returns: a pointer to a #GValue which must not be modified
    */
-  Value getDefaultValue()
+  gobject.value.Value getDefaultValue()
   {
     const(GValue)* _cretval;
     _cretval = g_param_spec_get_default_value(cast(GParamSpec*)cPtr);
-    auto _retval = _cretval ? new Value(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class ParamSpec
   {
     const(char)* _cretval;
     _cretval = g_param_spec_get_name(cast(GParamSpec*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -108,9 +108,9 @@ class ParamSpec
    * Gets the GQuark for the name.
    * Returns: the GQuark for pspec->name.
    */
-  Quark getNameQuark()
+  glib.types.Quark getNameQuark()
   {
-    Quark _retval;
+    glib.types.Quark _retval;
     _retval = g_param_spec_get_name_quark(cast(GParamSpec*)cPtr);
     return _retval;
   }
@@ -123,7 +123,7 @@ class ParamSpec
   {
     const(char)* _cretval;
     _cretval = g_param_spec_get_nick(cast(GParamSpec*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class ParamSpec
    *   quark = a #GQuark, naming the user data pointer
    * Returns: the user data pointer set, or %NULL
    */
-  void* getQdata(Quark quark)
+  void* getQdata(glib.types.Quark quark)
   {
     auto _retval = g_param_spec_get_qdata(cast(GParamSpec*)cPtr, quark);
     return _retval;
@@ -150,11 +150,11 @@ class ParamSpec
    * Returns: paramspec to which requests on this
    *   paramspec should be redirected, or %NULL if none.
    */
-  ParamSpec getRedirectTarget()
+  gobject.param_spec.ParamSpec getRedirectTarget()
   {
     GParamSpec* _cretval;
     _cretval = g_param_spec_get_redirect_target(cast(GParamSpec*)cPtr);
-    auto _retval = _cretval ? new ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class ParamSpec
    *   quark = a #GQuark, naming the user data pointer
    *   data = an opaque user data pointer
    */
-  void setQdata(Quark quark, void* data)
+  void setQdata(glib.types.Quark quark, void* data)
   {
     g_param_spec_set_qdata(cast(GParamSpec*)cPtr, quark, data);
   }
@@ -197,7 +197,7 @@ class ParamSpec
    *   quark = a #GQuark, naming the user data pointer
    * Returns: the user data pointer set, or %NULL
    */
-  void* stealQdata(Quark quark)
+  void* stealQdata(glib.types.Quark quark)
   {
     auto _retval = g_param_spec_steal_qdata(cast(GParamSpec*)cPtr, quark);
     return _retval;

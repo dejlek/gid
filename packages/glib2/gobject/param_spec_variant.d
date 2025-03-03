@@ -1,6 +1,6 @@
 module gobject.param_spec_variant;
 
-import gid.global;
+import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.param_spec;
@@ -14,7 +14,7 @@ import gobject.types;
  * otherwise undefined. %NULL is ordered before non-%NULL variants. Two %NULL
  * values compare equal.
  */
-class ParamSpecVariant : ParamSpec
+class ParamSpecVariant : gobject.param_spec.ParamSpec
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -2,16 +2,16 @@ module arrowflight.record_batch_writer;
 
 import arrow.buffer;
 import arrow.record_batch;
-import arrow.record_batch_writer : DArrowRecordBatchWriter = RecordBatchWriter;
+import arrow.record_batch_writer;
 import arrow.schema;
 import arrow.write_options;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class RecordBatchWriter : DArrowRecordBatchWriter
+class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -38,7 +38,7 @@ class RecordBatchWriter : DArrowRecordBatchWriter
    *   options = A #GArrowWriteOptions.
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool begin(Schema schema, WriteOptions options)
+  bool begin(arrow.schema.Schema schema, arrow.write_options.WriteOptions options)
   {
     bool _retval;
     GError *_err;
@@ -54,7 +54,7 @@ class RecordBatchWriter : DArrowRecordBatchWriter
    *   metadata = A #GArrowBuffer.
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool writeMetadata(Buffer metadata)
+  bool writeMetadata(arrow.buffer.Buffer metadata)
   {
     bool _retval;
     GError *_err;
@@ -64,7 +64,7 @@ class RecordBatchWriter : DArrowRecordBatchWriter
     return _retval;
   }
 
-  alias writeRecordBatch = DArrowRecordBatchWriter.writeRecordBatch;
+  alias writeRecordBatch = arrow.record_batch_writer.RecordBatchWriter.writeRecordBatch;
 
   /**
    * Write a record batch with metadata.
@@ -73,7 +73,7 @@ class RecordBatchWriter : DArrowRecordBatchWriter
    *   metadata = A #GArrowBuffer.
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool writeRecordBatch(RecordBatch recordBatch, Buffer metadata)
+  bool writeRecordBatch(arrow.record_batch.RecordBatch recordBatch, arrow.buffer.Buffer metadata)
   {
     bool _retval;
     GError *_err;

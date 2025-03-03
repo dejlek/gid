@@ -1,9 +1,8 @@
 module gio.dtls_connection_mixin;
 
 public import gio.dtls_connection_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.async_result;
-public import gio.async_result_mixin;
 public import gio.c.functions;
 public import gio.c.types;
 public import gio.cancellable;
@@ -57,7 +56,7 @@ template DtlsConnectionT()
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE on success, %FALSE otherwise
    */
-  override bool close(Cancellable cancellable)
+  override bool close(gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -75,14 +74,14 @@ template DtlsConnectionT()
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the close operation is complete
    */
-  override void closeAsync(int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  override void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -98,7 +97,7 @@ template DtlsConnectionT()
    * Returns: %TRUE on success, %FALSE on failure, in which
    *   case error will be set
    */
-  override bool closeFinish(AsyncResult result)
+  override bool closeFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -117,7 +116,7 @@ template DtlsConnectionT()
    * Returns: %TRUE if one of the signal handlers has returned
    *   %TRUE to accept peer_cert
    */
-  override bool emitAcceptCertificate(TlsCertificate peerCert, TlsCertificateFlags errors)
+  override bool emitAcceptCertificate(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors)
   {
     bool _retval;
     _retval = g_dtls_connection_emit_accept_certificate(cast(GDtlsConnection*)cPtr, peerCert ? cast(GTlsCertificate*)peerCert.cPtr(No.Dup) : null, errors);
@@ -129,11 +128,11 @@ template DtlsConnectionT()
    * [gio.dtls_connection.DtlsConnection.setCertificate].
    * Returns: conn's certificate, or %NULL
    */
-  override TlsCertificate getCertificate()
+  override gio.tls_certificate.TlsCertificate getCertificate()
   {
     GTlsCertificate* _cretval;
     _cretval = g_dtls_connection_get_certificate(cast(GDtlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!TlsCertificate(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -152,7 +151,7 @@ template DtlsConnectionT()
   {
     char* _cretval;
     _cretval = g_dtls_connection_get_ciphersuite_name(cast(GDtlsConnection*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -161,11 +160,11 @@ template DtlsConnectionT()
    * peer certificates. See [gio.dtls_connection.DtlsConnection.setDatabase].
    * Returns: the certificate database that conn uses or %NULL
    */
-  override TlsDatabase getDatabase()
+  override gio.tls_database.TlsDatabase getDatabase()
   {
     GTlsDatabase* _cretval;
     _cretval = g_dtls_connection_get_database(cast(GDtlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!TlsDatabase(cast(GTlsDatabase*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
     return _retval;
   }
 
@@ -175,11 +174,11 @@ template DtlsConnectionT()
    * no user interaction will occur for this connection.
    * Returns: The interaction object.
    */
-  override TlsInteraction getInteraction()
+  override gio.tls_interaction.TlsInteraction getInteraction()
   {
     GTlsInteraction* _cretval;
     _cretval = g_dtls_connection_get_interaction(cast(GDtlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!TlsInteraction(cast(GTlsInteraction*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -196,7 +195,7 @@ template DtlsConnectionT()
   {
     const(char)* _cretval;
     _cretval = g_dtls_connection_get_negotiated_protocol(cast(GDtlsConnection*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -206,11 +205,11 @@ template DtlsConnectionT()
    * #GDtlsConnection::accept-certificate.$(RPAREN)
    * Returns: conn's peer's certificate, or %NULL
    */
-  override TlsCertificate getPeerCertificate()
+  override gio.tls_certificate.TlsCertificate getPeerCertificate()
   {
     GTlsCertificate* _cretval;
     _cretval = g_dtls_connection_get_peer_certificate(cast(GDtlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!TlsCertificate(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -220,11 +219,11 @@ template DtlsConnectionT()
    * not set during the emission of #GDtlsConnection::accept-certificate.$(RPAREN)
    * Returns: conn's peer's certificate errors
    */
-  override TlsCertificateFlags getPeerCertificateErrors()
+  override gio.types.TlsCertificateFlags getPeerCertificateErrors()
   {
     GTlsCertificateFlags _cretval;
     _cretval = g_dtls_connection_get_peer_certificate_errors(cast(GDtlsConnection*)cPtr);
-    TlsCertificateFlags _retval = cast(TlsCertificateFlags)_cretval;
+    gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
   }
 
@@ -235,11 +234,11 @@ template DtlsConnectionT()
    * that is not a recognized #GTlsProtocolVersion.
    * Returns: The current DTLS protocol version
    */
-  override TlsProtocolVersion getProtocolVersion()
+  override gio.types.TlsProtocolVersion getProtocolVersion()
   {
     GTlsProtocolVersion _cretval;
     _cretval = g_dtls_connection_get_protocol_version(cast(GDtlsConnection*)cPtr);
-    TlsProtocolVersion _retval = cast(TlsProtocolVersion)_cretval;
+    gio.types.TlsProtocolVersion _retval = cast(gio.types.TlsProtocolVersion)_cretval;
     return _retval;
   }
 
@@ -252,11 +251,11 @@ template DtlsConnectionT()
    *   required for compatibility. Also, rehandshaking has been removed
    *   from the TLS protocol in TLS 1.3.
    */
-  override TlsRehandshakeMode getRehandshakeMode()
+  override gio.types.TlsRehandshakeMode getRehandshakeMode()
   {
     GTlsRehandshakeMode _cretval;
     _cretval = g_dtls_connection_get_rehandshake_mode(cast(GDtlsConnection*)cPtr);
-    TlsRehandshakeMode _retval = cast(TlsRehandshakeMode)_cretval;
+    gio.types.TlsRehandshakeMode _retval = cast(gio.types.TlsRehandshakeMode)_cretval;
     return _retval;
   }
 
@@ -300,7 +299,7 @@ template DtlsConnectionT()
    *   cancellable = a #GCancellable, or %NULL
    * Returns: success or failure
    */
-  override bool handshake(Cancellable cancellable)
+  override bool handshake(gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -318,14 +317,14 @@ template DtlsConnectionT()
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the handshake is complete
    */
-  override void handshakeAsync(int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  override void handshakeAsync(int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -341,7 +340,7 @@ template DtlsConnectionT()
    * Returns: %TRUE on success, %FALSE on failure, in which
    *   case error will be set.
    */
-  override bool handshakeFinish(AsyncResult result)
+  override bool handshakeFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -395,7 +394,7 @@ template DtlsConnectionT()
    * Params:
    *   certificate = the certificate to use for conn
    */
-  override void setCertificate(TlsCertificate certificate)
+  override void setCertificate(gio.tls_certificate.TlsCertificate certificate)
   {
     g_dtls_connection_set_certificate(cast(GDtlsConnection*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null);
   }
@@ -414,7 +413,7 @@ template DtlsConnectionT()
    * Params:
    *   database = a #GTlsDatabase
    */
-  override void setDatabase(TlsDatabase database)
+  override void setDatabase(gio.tls_database.TlsDatabase database)
   {
     g_dtls_connection_set_database(cast(GDtlsConnection*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.Dup) : null);
   }
@@ -428,7 +427,7 @@ template DtlsConnectionT()
    * Params:
    *   interaction = an interaction object, or %NULL
    */
-  override void setInteraction(TlsInteraction interaction)
+  override void setInteraction(gio.tls_interaction.TlsInteraction interaction)
   {
     g_dtls_connection_set_interaction(cast(GDtlsConnection*)cPtr, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null);
   }
@@ -445,7 +444,7 @@ template DtlsConnectionT()
    *   required for compatibility. Also, rehandshaking has been removed
    *   from the TLS protocol in TLS 1.3.
    */
-  override void setRehandshakeMode(TlsRehandshakeMode mode)
+  override void setRehandshakeMode(gio.types.TlsRehandshakeMode mode)
   {
     g_dtls_connection_set_rehandshake_mode(cast(GDtlsConnection*)cPtr, mode);
   }
@@ -501,7 +500,7 @@ template DtlsConnectionT()
    *   cancellable = a #GCancellable, or %NULL
    * Returns: %TRUE on success, %FALSE otherwise
    */
-  override bool shutdown(bool shutdownRead, bool shutdownWrite, Cancellable cancellable)
+  override bool shutdown(bool shutdownRead, bool shutdownWrite, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -521,14 +520,14 @@ template DtlsConnectionT()
    *   cancellable = a #GCancellable, or %NULL
    *   callback = callback to call when the shutdown operation is complete
    */
-  override void shutdownAsync(bool shutdownRead, bool shutdownWrite, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  override void shutdownAsync(bool shutdownRead, bool shutdownWrite, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -544,7 +543,7 @@ template DtlsConnectionT()
    * Returns: %TRUE on success, %FALSE on failure, in which
    *   case error will be set
    */
-  override bool shutdownFinish(AsyncResult result)
+  override bool shutdownFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -601,8 +600,8 @@ template DtlsConnectionT()
    *   emission to continue, which will cause the handshake to fail if
    *   no one else overrides it.
    */
-  alias AcceptCertificateCallbackDlg = bool delegate(TlsCertificate peerCert, TlsCertificateFlags errors, DtlsConnection dtlsConnection);
-  alias AcceptCertificateCallbackFunc = bool function(TlsCertificate peerCert, TlsCertificateFlags errors, DtlsConnection dtlsConnection);
+  alias AcceptCertificateCallbackDlg = bool delegate(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors, gio.dtls_connection.DtlsConnection dtlsConnection);
+  alias AcceptCertificateCallbackFunc = bool function(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors, gio.dtls_connection.DtlsConnection dtlsConnection);
 
   /**
    * Connect to AcceptCertificate signal.
@@ -619,9 +618,9 @@ template DtlsConnectionT()
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto dtlsConnection = getVal!DtlsConnection(_paramVals);
-      auto peerCert = getVal!TlsCertificate(&_paramVals[1]);
-      auto errors = getVal!TlsCertificateFlags(&_paramVals[2]);
+      auto dtlsConnection = getVal!(gio.dtls_connection.DtlsConnection)(_paramVals);
+      auto peerCert = getVal!(gio.tls_certificate.TlsCertificate)(&_paramVals[1]);
+      auto errors = getVal!(gio.types.TlsCertificateFlags)(&_paramVals[2]);
       _retval = _dClosure.dlg(peerCert, errors, dtlsConnection);
       setVal!bool(_returnValue, _retval);
     }

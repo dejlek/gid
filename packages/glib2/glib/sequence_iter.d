@@ -1,6 +1,6 @@
 module glib.sequence_iter;
 
-import gid.global;
+import gid.gid;
 import glib.c.functions;
 import glib.c.types;
 import glib.sequence;
@@ -39,7 +39,7 @@ class SequenceIter
    * Returns: a negative number if a comes before b, 0 if they are
    *   equal, and a positive number if a comes after b
    */
-  int compare(SequenceIter b)
+  int compare(glib.sequence_iter.SequenceIter b)
   {
     int _retval;
     _retval = g_sequence_iter_compare(cast(GSequenceIter*)cPtr, b ? cast(GSequenceIter*)b.cPtr : null);
@@ -61,11 +61,11 @@ class SequenceIter
    * Returns the #GSequence that iter points into.
    * Returns: the #GSequence that iter points into
    */
-  Sequence getSequence()
+  glib.sequence.Sequence getSequence()
   {
     GSequence* _cretval;
     _cretval = g_sequence_iter_get_sequence(cast(GSequenceIter*)cPtr);
-    auto _retval = _cretval ? new Sequence(cast(GSequence*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.sequence.Sequence(cast(GSequence*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -101,11 +101,11 @@ class SequenceIter
    *     from iter the returned #GSequenceIter will be
    * Returns: a #GSequenceIter which is delta positions away from iter
    */
-  SequenceIter move(int delta)
+  glib.sequence_iter.SequenceIter move(int delta)
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_iter_move(cast(GSequenceIter*)cPtr, delta);
-    auto _retval = _cretval ? new SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -114,11 +114,11 @@ class SequenceIter
    * If iter is the end iterator, the end iterator is returned.
    * Returns: a #GSequenceIter pointing to the next position after iter
    */
-  SequenceIter next()
+  glib.sequence_iter.SequenceIter next()
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_iter_next(cast(GSequenceIter*)cPtr);
-    auto _retval = _cretval ? new SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -128,11 +128,11 @@ class SequenceIter
    * Returns: a #GSequenceIter pointing to the previous position
    *   before iter
    */
-  SequenceIter prev()
+  glib.sequence_iter.SequenceIter prev()
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_iter_prev(cast(GSequenceIter*)cPtr);
-    auto _retval = _cretval ? new SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
 }

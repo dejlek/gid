@@ -5,7 +5,7 @@ import gdk.popup;
 import gdk.popup_mixin;
 
 /// Proxy object for Gdk.Popup interface when a GObject has no applicable D binding
-class PopupIfaceProxy : IfaceProxy, Popup
+class PopupIfaceProxy : IfaceProxy, gdk.popup.Popup
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class PopupIfaceProxy : IfaceProxy, Popup
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(Popup);
+    return typeid(gdk.popup.Popup);
   }
 
   mixin PopupT!();

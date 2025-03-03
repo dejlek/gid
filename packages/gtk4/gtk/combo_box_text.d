@@ -1,6 +1,6 @@
 module gtk.combo_box_text;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.accessible;
 import gtk.accessible_mixin;
@@ -65,7 +65,7 @@ import gtk.types;
  * Deprecated: Use [gtk.drop_down.DropDown] with a [gtk.string_list.StringList]
  *   instead
  */
-class ComboBoxText : ComboBox
+class ComboBoxText : gtk.combo_box.ComboBox
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -103,11 +103,11 @@ class ComboBoxText : ComboBox
 
    * Deprecated: Use [gtk.drop_down.DropDown]
    */
-  static ComboBoxText newWithEntry()
+  static gtk.combo_box_text.ComboBoxText newWithEntry()
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_text_new_with_entry();
-    auto _retval = ObjectG.getDObject!ComboBoxText(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.combo_box_text.ComboBoxText)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class ComboBoxText : ComboBox
   {
     char* _cretval;
     _cretval = gtk_combo_box_text_get_active_text(cast(GtkComboBoxText*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 

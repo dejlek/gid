@@ -6,7 +6,7 @@ import cairo.device;
 import cairo.font_options;
 import cairo.rectangle_int;
 import cairo.types;
-import gid.global;
+import gid.gid;
 import gobject.boxed;
 
 /**
@@ -29,7 +29,7 @@ import gobject.boxed;
  * Memory management of #cairo_surface_t is done with
  * [cairo.surface.Surface.reference] and [cairo.surface.Surface.destroy].
  */
-class Surface : Boxed
+class Surface : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -90,11 +90,11 @@ class Surface : Boxed
    *   pointer to a "nil" surface if other is already in an error state
    *   or any other error occurs.
    */
-  Surface createForRectangle(double x, double y, double width, double height)
+  cairo.surface.Surface createForRectangle(double x, double y, double width, double height)
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_for_rectangle(cast(cairo_surface_t*)cPtr, x, y, width, height);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -114,11 +114,11 @@ class Surface : Boxed
    *   pointer to a "nil" surface if other is already in an error state
    *   or any other error occurs.
    */
-  Surface createObserver(SurfaceObserverMode mode)
+  cairo.surface.Surface createObserver(cairo.types.SurfaceObserverMode mode)
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_observer(cast(cairo_surface_t*)cPtr, mode);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -145,11 +145,11 @@ class Surface : Boxed
    *   pointer to a "nil" surface if other is already in an error state
    *   or any other error occurs.
    */
-  Surface createSimilar(Content content, int width, int height)
+  cairo.surface.Surface createSimilar(cairo.types.Content content, int width, int height)
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_similar(cast(cairo_surface_t*)cPtr, content, width, height);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -173,11 +173,11 @@ class Surface : Boxed
    *   pointer to a "nil" surface if other is already in an error state
    *   or any other error occurs.
    */
-  Surface createSimilarImage(Format format, int width, int height)
+  cairo.surface.Surface createSimilarImage(cairo.types.Format format, int width, int height)
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_similar_image(cast(cairo_surface_t*)cPtr, format, width, height);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -220,11 +220,11 @@ class Surface : Boxed
    * #cairo_content_t.
    * Returns: The content type of surface.
    */
-  Content getContent()
+  cairo.types.Content getContent()
   {
     cairo_content_t _cretval;
     _cretval = cairo_surface_get_content(cast(cairo_surface_t*)cPtr);
-    Content _retval = cast(Content)_cretval;
+    cairo.types.Content _retval = cast(cairo.types.Content)_cretval;
     return _retval;
   }
 
@@ -234,11 +234,11 @@ class Surface : Boxed
    * Returns: The device for surface or %NULL if the surface does
    *   not have an associated device.
    */
-  Device getDevice()
+  cairo.device.Device getDevice()
   {
     cairo_device_t* _cretval;
     _cretval = cairo_surface_get_device(cast(cairo_surface_t*)cPtr);
-    auto _retval = _cretval ? new Device(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.device.Device(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -289,7 +289,7 @@ class Surface : Boxed
    *   options = a #cairo_font_options_t object into which to store
    *     the retrieved options. All existing values are overwritten
    */
-  void getFontOptions(FontOptions options)
+  void getFontOptions(cairo.font_options.FontOptions options)
   {
     cairo_surface_get_font_options(cast(cairo_surface_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(No.Dup) : null);
   }
@@ -317,11 +317,11 @@ class Surface : Boxed
    * a surface. See #cairo_surface_type_t for available types.
    * Returns: The type of surface.
    */
-  SurfaceType getSurfaceType()
+  cairo.types.SurfaceType getSurfaceType()
   {
     cairo_surface_type_t _cretval;
     _cretval = cairo_surface_get_type(cast(cairo_surface_t*)cPtr);
-    SurfaceType _retval = cast(SurfaceType)_cretval;
+    cairo.types.SurfaceType _retval = cast(cairo.types.SurfaceType)_cretval;
     return _retval;
   }
 
@@ -334,7 +334,7 @@ class Surface : Boxed
    *     attached to
    * Returns: the user data previously attached or %NULL.
    */
-  void* getUserData(UserDataKey key)
+  void* getUserData(cairo.types.UserDataKey key)
   {
     auto _retval = cairo_surface_get_user_data(cast(cairo_surface_t*)cPtr, &key);
     return _retval;
@@ -354,9 +354,9 @@ class Surface : Boxed
    * Returns: %TRUE if surface supports
    *   [cairo.context.Context.showTextGlyphs], %FALSE otherwise
    */
-  Bool hasShowTextGlyphs()
+  cairo.types.Bool hasShowTextGlyphs()
   {
-    Bool _retval;
+    cairo.types.Bool _retval;
     _retval = cairo_surface_has_show_text_glyphs(cast(cairo_surface_t*)cPtr);
     return _retval;
   }
@@ -382,11 +382,11 @@ class Surface : Boxed
    *   error status, it is guaranteed to be an image surface whose format
    *   is not %CAIRO_FORMAT_INVALID.
    */
-  Surface mapToImage(RectangleInt extents)
+  cairo.surface.Surface mapToImage(cairo.rectangle_int.RectangleInt extents)
   {
     cairo_surface_t* _cretval;
-    _cretval = cairo_surface_map_to_image(cast(cairo_surface_t*)cPtr, extents ? cast(cairo_rectangle_int_t*)extents.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new Surface(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = cairo_surface_map_to_image(cast(cairo_surface_t*)cPtr, extents ? cast(const(cairo_rectangle_int_t)*)extents.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -435,12 +435,12 @@ class Surface : Boxed
    *   writeFunc = callback for writing on a stream
    * Returns: the status of the print operation
    */
-  Status observerPrint(WriteFunc writeFunc)
+  cairo.types.Status observerPrint(cairo.types.WriteFunc writeFunc)
   {
     extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length)
     {
-      Status _dretval;
-      auto _dlg = cast(WriteFunc*)closure;
+      cairo.types.Status _dretval;
+      auto _dlg = cast(cairo.types.WriteFunc*)closure;
       ubyte[] _data;
       _data.length = length;
       _data[0 .. length] = data[0 .. length];
@@ -455,7 +455,7 @@ class Surface : Boxed
     cairo_status_t _cretval;
     auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
     _cretval = cairo_surface_observer_print(cast(cairo_surface_t*)cPtr, _writeFuncCB, _writeFunc);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -563,12 +563,12 @@ class Surface : Boxed
    * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY if a
    *   slot could not be allocated for the user data.
    */
-  Status setMimeData(string mimeType, ubyte[] data, DestroyFunc destroy)
+  cairo.types.Status setMimeData(string mimeType, ubyte[] data, cairo.types.DestroyFunc destroy)
   {
     extern(C) void _destroyCallback(void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(DestroyFunc*)data;
+      auto _dlg = cast(cairo.types.DestroyFunc*)data;
 
       (*_dlg)();
     }
@@ -583,7 +583,7 @@ class Surface : Boxed
     auto _data = cast(const(ubyte)*)data.ptr;
     auto _destroy = destroy ? freezeDelegate(cast(void*)&destroy) : null;
     _cretval = cairo_surface_set_mime_data(cast(cairo_surface_t*)cPtr, _mimeType, _data, _length, _destroyCB, _destroy);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -606,11 +606,11 @@ class Surface : Boxed
    *   %CAIRO_STATUS_INVALID_CONTENT, %CAIRO_STATUS_INVALID_FORMAT, or
    *   %CAIRO_STATUS_INVALID_VISUAL.
    */
-  Status status()
+  cairo.types.Status status()
   {
     cairo_status_t _cretval;
     _cretval = cairo_surface_status(cast(cairo_surface_t*)cPtr);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -621,9 +621,9 @@ class Surface : Boxed
    * Returns: %TRUE if surface supports
    *   mime_type, %FALSE otherwise
    */
-  Bool supportsMimeType(string mimeType)
+  cairo.types.Bool supportsMimeType(string mimeType)
   {
-    Bool _retval;
+    cairo.types.Bool _retval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
     _retval = cairo_surface_supports_mime_type(cast(cairo_surface_t*)cPtr, _mimeType);
     return _retval;
@@ -638,7 +638,7 @@ class Surface : Boxed
    * Params:
    *   image = the currently mapped image
    */
-  void unmapImage(Surface image)
+  void unmapImage(cairo.surface.Surface image)
   {
     cairo_surface_unmap_image(cast(cairo_surface_t*)cPtr, image ? cast(cairo_surface_t*)image.cPtr(No.Dup) : null);
   }
@@ -657,12 +657,12 @@ class Surface : Boxed
    *   while attempting to write the file, or %CAIRO_STATUS_PNG_ERROR if libpng
    *   returned an error.
    */
-  Status writeToPng(string filename)
+  cairo.types.Status writeToPng(string filename)
   {
     cairo_status_t _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = cairo_surface_write_to_png(cast(cairo_surface_t*)cPtr, _filename);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 
@@ -677,12 +677,12 @@ class Surface : Boxed
    *   pixel contents, or %CAIRO_STATUS_PNG_ERROR if libpng
    *   returned an error.
    */
-  Status writeToPngStream(WriteFunc writeFunc)
+  cairo.types.Status writeToPngStream(cairo.types.WriteFunc writeFunc)
   {
     extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length)
     {
-      Status _dretval;
-      auto _dlg = cast(WriteFunc*)closure;
+      cairo.types.Status _dretval;
+      auto _dlg = cast(cairo.types.WriteFunc*)closure;
       ubyte[] _data;
       _data.length = length;
       _data[0 .. length] = data[0 .. length];
@@ -697,7 +697,7 @@ class Surface : Boxed
     cairo_status_t _cretval;
     auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
     _cretval = cairo_surface_write_to_png_stream(cast(cairo_surface_t*)cPtr, _writeFuncCB, _writeFunc);
-    Status _retval = cast(Status)_cretval;
+    cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
 }

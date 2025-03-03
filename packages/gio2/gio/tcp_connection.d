@@ -1,6 +1,6 @@
 module gio.tcp_connection;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.socket_connection;
@@ -10,7 +10,7 @@ import gio.types;
  * This is the subclass of [gio.socket_connection.SocketConnection] that is created
  * for TCP/IP sockets.
  */
-class TcpConnection : SocketConnection
+class TcpConnection : gio.socket_connection.SocketConnection
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

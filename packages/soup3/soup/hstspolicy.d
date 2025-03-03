@@ -1,6 +1,6 @@
 module soup.hstspolicy;
 
-import gid.global;
+import gid.gid;
 import glib.date_time;
 import gobject.boxed;
 import soup.c.functions;
@@ -23,7 +23,7 @@ import soup.types;
  * If @include_subdomains is %TRUE, the Strict Transport Security policy
  * must also be enforced on subdomains of @domain.
  */
-class HSTSPolicy : Boxed
+class HSTSPolicy : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -78,11 +78,11 @@ class HSTSPolicy : Boxed
    * Returns: a new #SoupHSTSPolicy, or %NULL if no valid
    *   "Strict-Transport-Security" response header was found.
    */
-  static HSTSPolicy newFromResponse(Message msg)
+  static soup.hstspolicy.HSTSPolicy newFromResponse(soup.message.Message msg)
   {
     SoupHSTSPolicy* _cretval;
     _cretval = soup_hsts_policy_new_from_response(msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -97,12 +97,12 @@ class HSTSPolicy : Boxed
    *   includeSubdomains = %TRUE if the policy applies on subdomains
    * Returns: a new #SoupHSTSPolicy.
    */
-  static HSTSPolicy newFull(string domain, gulong maxAge, DateTime expires, bool includeSubdomains)
+  static soup.hstspolicy.HSTSPolicy newFull(string domain, gulong maxAge, glib.date_time.DateTime expires, bool includeSubdomains)
   {
     SoupHSTSPolicy* _cretval;
     const(char)* _domain = domain.toCString(No.Alloc);
     _cretval = soup_hsts_policy_new_full(_domain, maxAge, expires ? cast(GDateTime*)expires.cPtr(No.Dup) : null, includeSubdomains);
-    auto _retval = _cretval ? new HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -122,12 +122,12 @@ class HSTSPolicy : Boxed
    *   includeSubdomains = %TRUE if the policy applies on sub domains
    * Returns: a new #SoupHSTSPolicy.
    */
-  static HSTSPolicy newSessionPolicy(string domain, bool includeSubdomains)
+  static soup.hstspolicy.HSTSPolicy newSessionPolicy(string domain, bool includeSubdomains)
   {
     SoupHSTSPolicy* _cretval;
     const(char)* _domain = domain.toCString(No.Alloc);
     _cretval = soup_hsts_policy_new_session_policy(_domain, includeSubdomains);
-    auto _retval = _cretval ? new HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -135,11 +135,11 @@ class HSTSPolicy : Boxed
    * Copies policy.
    * Returns: a copy of policy
    */
-  HSTSPolicy copy()
+  soup.hstspolicy.HSTSPolicy copy()
   {
     SoupHSTSPolicy* _cretval;
     _cretval = soup_hsts_policy_copy(cast(SoupHSTSPolicy*)cPtr);
-    auto _retval = _cretval ? new HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class HSTSPolicy : Boxed
    *   policy2 = a #SoupHSTSPolicy
    * Returns: whether the policies are equal.
    */
-  bool equal(HSTSPolicy policy2)
+  bool equal(soup.hstspolicy.HSTSPolicy policy2)
   {
     bool _retval;
     _retval = soup_hsts_policy_equal(cast(SoupHSTSPolicy*)cPtr, policy2 ? cast(SoupHSTSPolicy*)policy2.cPtr(No.Dup) : null);
@@ -164,7 +164,7 @@ class HSTSPolicy : Boxed
   {
     const(char)* _cretval;
     _cretval = soup_hsts_policy_get_domain(cast(SoupHSTSPolicy*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -172,11 +172,11 @@ class HSTSPolicy : Boxed
    * Returns the expiration date for policy.
    * Returns: A #GDateTime or %NULL if unset
    */
-  DateTime getExpires()
+  glib.date_time.DateTime getExpires()
   {
     GDateTime* _cretval;
     _cretval = soup_hsts_policy_get_expires(cast(SoupHSTSPolicy*)cPtr);
-    auto _retval = _cretval ? new DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

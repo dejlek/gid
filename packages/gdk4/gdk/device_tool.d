@@ -3,13 +3,13 @@ module gdk.device_tool;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
  * A physical tool associated to a `GdkDevice`.
  */
-class DeviceTool : ObjectG
+class DeviceTool : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -32,11 +32,11 @@ class DeviceTool : ObjectG
    * Gets the axes of the tool.
    * Returns: the axes of tool
    */
-  AxisFlags getAxes()
+  gdk.types.AxisFlags getAxes()
   {
     GdkAxisFlags _cretval;
     _cretval = gdk_device_tool_get_axes(cast(GdkDeviceTool*)cPtr);
-    AxisFlags _retval = cast(AxisFlags)_cretval;
+    gdk.types.AxisFlags _retval = cast(gdk.types.AxisFlags)_cretval;
     return _retval;
   }
 
@@ -78,11 +78,11 @@ class DeviceTool : ObjectG
    *   figure out what sort of pen is being used, such as an airbrush
    *   or a pencil.
    */
-  DeviceToolType getToolType()
+  gdk.types.DeviceToolType getToolType()
   {
     GdkDeviceToolType _cretval;
     _cretval = gdk_device_tool_get_tool_type(cast(GdkDeviceTool*)cPtr);
-    DeviceToolType _retval = cast(DeviceToolType)_cretval;
+    gdk.types.DeviceToolType _retval = cast(gdk.types.DeviceToolType)_cretval;
     return _retval;
   }
 }

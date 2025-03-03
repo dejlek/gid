@@ -3,14 +3,14 @@ module gdk.snapshot;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.object;
 
 /**
  * Base type for snapshot operations.
  * The subclass of `GdkSnapshot` used by GTK is [GtkSnapshot](../gtk4/class.Snapshot.html).
  */
-class Snapshot : ObjectG
+class Snapshot : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

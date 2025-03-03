@@ -1,6 +1,6 @@
 module gtk.string_object;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -12,7 +12,7 @@ import gtk.types;
  * a [gtk.string_object.StringObject.utf8] property that can be used
  * for property bindings and expressions.
  */
-class StringObject : ObjectG
+class StringObject : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -53,7 +53,7 @@ class StringObject : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_string_object_get_string(cast(GtkStringObject*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

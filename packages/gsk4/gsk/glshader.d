@@ -1,6 +1,6 @@
 module gsk.glshader;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import glib.error;
 import gobject.object;
@@ -105,7 +105,7 @@ import gsk.types;
  * }
  * ```
  */
-class GLShader : ObjectG
+class GLShader : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -130,11 +130,11 @@ class GLShader : ObjectG
    *   sourcecode = GLSL sourcecode for the shader, as a `GBytes`
    * Returns: A new `GskGLShader`
    */
-  static GLShader newFromBytes(Bytes sourcecode)
+  static gsk.glshader.GLShader newFromBytes(glib.bytes.Bytes sourcecode)
   {
     GskGLShader* _cretval;
     _cretval = gsk_gl_shader_new_from_bytes(sourcecode ? cast(GBytes*)sourcecode.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!GLShader(cast(GskGLShader*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -145,12 +145,12 @@ class GLShader : ObjectG
    *     the shader
    * Returns: A new `GskGLShader`
    */
-  static GLShader newFromResource(string resourcePath)
+  static gsk.glshader.GLShader newFromResource(string resourcePath)
   {
     GskGLShader* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gsk_gl_shader_new_from_resource(_resourcePath);
-    auto _retval = ObjectG.getDObject!GLShader(cast(GskGLShader*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class GLShader : ObjectG
    *   renderer = a `GskRenderer`
    * Returns: %TRUE on success, %FALSE if an error occurred
    */
-  bool compile(Renderer renderer)
+  bool compile(gsk.renderer.Renderer renderer)
   {
     bool _retval;
     GError *_err;
@@ -202,7 +202,7 @@ class GLShader : ObjectG
    *   idx = index of the uniform
    * Returns: The value
    */
-  bool getArgBool(Bytes args, int idx)
+  bool getArgBool(glib.bytes.Bytes args, int idx)
   {
     bool _retval;
     _retval = gsk_gl_shader_get_arg_bool(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.Dup) : null, idx);
@@ -217,7 +217,7 @@ class GLShader : ObjectG
    *   idx = index of the uniform
    * Returns: The value
    */
-  float getArgFloat(Bytes args, int idx)
+  float getArgFloat(glib.bytes.Bytes args, int idx)
   {
     float _retval;
     _retval = gsk_gl_shader_get_arg_float(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.Dup) : null, idx);
@@ -232,7 +232,7 @@ class GLShader : ObjectG
    *   idx = index of the uniform
    * Returns: The value
    */
-  int getArgInt(Bytes args, int idx)
+  int getArgInt(glib.bytes.Bytes args, int idx)
   {
     int _retval;
     _retval = gsk_gl_shader_get_arg_int(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.Dup) : null, idx);
@@ -247,7 +247,7 @@ class GLShader : ObjectG
    *   idx = index of the uniform
    * Returns: The value
    */
-  uint getArgUint(Bytes args, int idx)
+  uint getArgUint(glib.bytes.Bytes args, int idx)
   {
     uint _retval;
     _retval = gsk_gl_shader_get_arg_uint(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.Dup) : null, idx);
@@ -262,7 +262,7 @@ class GLShader : ObjectG
    *   idx = index of the uniform
    *   outValue = location to store the uniform value in
    */
-  void getArgVec2(Bytes args, int idx, Vec2 outValue)
+  void getArgVec2(glib.bytes.Bytes args, int idx, graphene.vec2.Vec2 outValue)
   {
     gsk_gl_shader_get_arg_vec2(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.Dup) : null, idx, outValue ? cast(graphene_vec2_t*)outValue.cPtr(No.Dup) : null);
   }
@@ -275,7 +275,7 @@ class GLShader : ObjectG
    *   idx = index of the uniform
    *   outValue = location to store the uniform value in
    */
-  void getArgVec3(Bytes args, int idx, Vec3 outValue)
+  void getArgVec3(glib.bytes.Bytes args, int idx, graphene.vec3.Vec3 outValue)
   {
     gsk_gl_shader_get_arg_vec3(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.Dup) : null, idx, outValue ? cast(graphene_vec3_t*)outValue.cPtr(No.Dup) : null);
   }
@@ -288,7 +288,7 @@ class GLShader : ObjectG
    *   idx = index of the uniform
    *   outValue = location to store set the uniform value in
    */
-  void getArgVec4(Bytes args, int idx, Vec4 outValue)
+  void getArgVec4(glib.bytes.Bytes args, int idx, graphene.vec4.Vec4 outValue)
   {
     gsk_gl_shader_get_arg_vec4(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.Dup) : null, idx, outValue ? cast(graphene_vec4_t*)outValue.cPtr(No.Dup) : null);
   }
@@ -338,7 +338,7 @@ class GLShader : ObjectG
   {
     const(char)* _cretval;
     _cretval = gsk_gl_shader_get_resource(cast(GskGLShader*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -346,11 +346,11 @@ class GLShader : ObjectG
    * Gets the GLSL sourcecode being used to render this shader.
    * Returns: The source code for the shader
    */
-  Bytes getSource()
+  glib.bytes.Bytes getSource()
   {
     GBytes* _cretval;
     _cretval = gsk_gl_shader_get_source(cast(GskGLShader*)cPtr);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -364,7 +364,7 @@ class GLShader : ObjectG
   {
     const(char)* _cretval;
     _cretval = gsk_gl_shader_get_uniform_name(cast(GskGLShader*)cPtr, idx);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -387,11 +387,11 @@ class GLShader : ObjectG
    *   idx = index of the uniform
    * Returns: The type of the declared uniform
    */
-  GLUniformType getUniformType(int idx)
+  gsk.types.GLUniformType getUniformType(int idx)
   {
     GskGLUniformType _cretval;
     _cretval = gsk_gl_shader_get_uniform_type(cast(GskGLShader*)cPtr, idx);
-    GLUniformType _retval = cast(GLUniformType)_cretval;
+    gsk.types.GLUniformType _retval = cast(gsk.types.GLUniformType)_cretval;
     return _retval;
   }
 }

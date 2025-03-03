@@ -1,6 +1,6 @@
 module gtk.color_chooser_dialog;
 
-import gid.global;
+import gid.gid;
 import gtk.accessible;
 import gtk.accessible_mixin;
 import gtk.buildable;
@@ -37,7 +37,7 @@ import gtk.window;
 
  * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
  */
-class ColorChooserDialog : Dialog, ColorChooser
+class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -67,7 +67,7 @@ class ColorChooserDialog : Dialog, ColorChooser
 
    * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
-  this(string title, Window parent)
+  this(string title, gtk.window.Window parent)
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);

@@ -4,7 +4,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.texture;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import gobject.boxed;
 import gobject.object;
@@ -19,7 +19,7 @@ import gobject.object;
  * Create a `GdkTexture` for the existing format and then download it in a
  * different format.
  */
-class TextureDownloader : Boxed
+class TextureDownloader : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -49,7 +49,7 @@ class TextureDownloader : Boxed
    *   texture = texture to download
    * Returns: A new texture downloader
    */
-  this(Texture texture)
+  this(gdk.texture.Texture texture)
   {
     GdkTextureDownloader* _cretval;
     _cretval = gdk_texture_downloader_new(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
@@ -61,11 +61,11 @@ class TextureDownloader : Boxed
    * This function is meant for language bindings.
    * Returns: A copy of the downloader
    */
-  TextureDownloader copy()
+  gdk.texture_downloader.TextureDownloader copy()
   {
     GdkTextureDownloader* _cretval;
-    _cretval = gdk_texture_downloader_copy(cast(GdkTextureDownloader*)cPtr);
-    auto _retval = _cretval ? new TextureDownloader(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gdk_texture_downloader_copy(cast(const(GdkTextureDownloader)*)cPtr);
+    auto _retval = _cretval ? new gdk.texture_downloader.TextureDownloader(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -80,11 +80,11 @@ class TextureDownloader : Boxed
    *   outStride = The stride of the resulting data in bytes
    * Returns: The downloaded pixels
    */
-  Bytes downloadBytes(out size_t outStride)
+  glib.bytes.Bytes downloadBytes(out size_t outStride)
   {
     GBytes* _cretval;
-    _cretval = gdk_texture_downloader_download_bytes(cast(GdkTextureDownloader*)cPtr, cast(size_t*)&outStride);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gdk_texture_downloader_download_bytes(cast(const(GdkTextureDownloader)*)cPtr, cast(size_t*)&outStride);
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -92,11 +92,11 @@ class TextureDownloader : Boxed
    * Gets the format that the data will be downloaded in.
    * Returns: The format of the download
    */
-  MemoryFormat getFormat()
+  gdk.types.MemoryFormat getFormat()
   {
     GdkMemoryFormat _cretval;
-    _cretval = gdk_texture_downloader_get_format(cast(GdkTextureDownloader*)cPtr);
-    MemoryFormat _retval = cast(MemoryFormat)_cretval;
+    _cretval = gdk_texture_downloader_get_format(cast(const(GdkTextureDownloader)*)cPtr);
+    gdk.types.MemoryFormat _retval = cast(gdk.types.MemoryFormat)_cretval;
     return _retval;
   }
 
@@ -104,11 +104,11 @@ class TextureDownloader : Boxed
    * Gets the texture that the downloader will download.
    * Returns: The texture to download
    */
-  Texture getTexture()
+  gdk.texture.Texture getTexture()
   {
     GdkTexture* _cretval;
-    _cretval = gdk_texture_downloader_get_texture(cast(GdkTextureDownloader*)cPtr);
-    auto _retval = ObjectG.getDObject!Texture(cast(GdkTexture*)_cretval, No.Take);
+    _cretval = gdk_texture_downloader_get_texture(cast(const(GdkTextureDownloader)*)cPtr);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class TextureDownloader : Boxed
    * Params:
    *   format = the format to use
    */
-  void setFormat(MemoryFormat format)
+  void setFormat(gdk.types.MemoryFormat format)
   {
     gdk_texture_downloader_set_format(cast(GdkTextureDownloader*)cPtr, format);
   }
@@ -128,7 +128,7 @@ class TextureDownloader : Boxed
    * Params:
    *   texture = the new texture to download
    */
-  void setTexture(Texture texture)
+  void setTexture(gdk.texture.Texture texture)
   {
     gdk_texture_downloader_set_texture(cast(GdkTextureDownloader*)cPtr, texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
   }

@@ -1,6 +1,6 @@
 module soup.multipart;
 
-import gid.global;
+import gid.gid;
 import glib.bytes;
 import gobject.boxed;
 import soup.c.functions;
@@ -20,7 +20,7 @@ import soup.types;
  * explicitly state otherwise. In other words, don't try to use
  * #SoupMultipart for handling real MIME multiparts.
  */
-class Multipart : Boxed
+class Multipart : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -69,11 +69,11 @@ class Multipart : Boxed
    * Returns: a new #SoupMultipart $(LPAREN)or %NULL if the
    *   message couldn't be parsed or wasn't multipart$(RPAREN).
    */
-  static Multipart newFromMessage(MessageHeaders headers, Bytes body_)
+  static soup.multipart.Multipart newFromMessage(soup.message_headers.MessageHeaders headers, glib.bytes.Bytes body_)
   {
     SoupMultipart* _cretval;
     _cretval = soup_multipart_new_from_message(headers ? cast(SoupMessageHeaders*)headers.cPtr(No.Dup) : null, body_ ? cast(GBytes*)body_.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new Multipart(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new soup.multipart.Multipart(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class Multipart : Boxed
    *   contentType = the MIME type of the file, or %NULL if not known
    *   body_ = the file data
    */
-  void appendFormFile(string controlName, string filename, string contentType, Bytes body_)
+  void appendFormFile(string controlName, string filename, string contentType, glib.bytes.Bytes body_)
   {
     const(char)* _controlName = controlName.toCString(No.Alloc);
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -117,7 +117,7 @@ class Multipart : Boxed
    *   headers = the MIME part headers
    *   body_ = the MIME part body
    */
-  void appendPart(MessageHeaders headers, Bytes body_)
+  void appendPart(soup.message_headers.MessageHeaders headers, glib.bytes.Bytes body_)
   {
     soup_multipart_append_part(cast(SoupMultipart*)cPtr, headers ? cast(SoupMessageHeaders*)headers.cPtr(No.Dup) : null, body_ ? cast(GBytes*)body_.cPtr(No.Dup) : null);
   }
@@ -144,14 +144,14 @@ class Multipart : Boxed
    * Returns: %TRUE on success, %FALSE if part is out of range $(LPAREN)in
    *   which case headers and body won't be set$(RPAREN)
    */
-  bool getPart(int part, out MessageHeaders headers, out Bytes body_)
+  bool getPart(int part, out soup.message_headers.MessageHeaders headers, out glib.bytes.Bytes body_)
   {
     bool _retval;
     SoupMessageHeaders* _headers;
     GBytes* _body_;
     _retval = soup_multipart_get_part(cast(SoupMultipart*)cPtr, part, &_headers, &_body_);
-    headers = new MessageHeaders(cast(void*)_headers, No.Take);
-    body_ = new Bytes(cast(void*)_body_, No.Take);
+    headers = new soup.message_headers.MessageHeaders(cast(void*)_headers, No.Take);
+    body_ = new glib.bytes.Bytes(cast(void*)_body_, No.Take);
     return _retval;
   }
 
@@ -161,10 +161,10 @@ class Multipart : Boxed
    *   destHeaders = the headers of the HTTP message to serialize multipart to
    *   destBody = the body of the HTTP message to serialize multipart to
    */
-  void toMessage(MessageHeaders destHeaders, out Bytes destBody)
+  void toMessage(soup.message_headers.MessageHeaders destHeaders, out glib.bytes.Bytes destBody)
   {
     GBytes* _destBody;
     soup_multipart_to_message(cast(SoupMultipart*)cPtr, destHeaders ? cast(SoupMessageHeaders*)destHeaders.cPtr(No.Dup) : null, &_destBody);
-    destBody = new Bytes(cast(void*)_destBody, Yes.Take);
+    destBody = new glib.bytes.Bytes(cast(void*)_destBody, Yes.Take);
   }
 }

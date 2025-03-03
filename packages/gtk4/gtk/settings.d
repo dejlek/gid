@@ -1,7 +1,7 @@
 module gtk.settings;
 
 import gdk.display;
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -33,7 +33,7 @@ import gtk.types;
  * [gtk.settings.Settings.getForDisplay], but in many cases, it is more
  * convenient to use [gtk.widget.Widget.getSettings].
  */
-class Settings : ObjectG, StyleProvider
+class Settings : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -61,11 +61,11 @@ class Settings : ObjectG, StyleProvider
    * Returns: a `GtkSettings` object. If there is
    *   no default display, then returns %NULL.
    */
-  static Settings getDefault()
+  static gtk.settings.Settings getDefault()
   {
     GtkSettings* _cretval;
     _cretval = gtk_settings_get_default();
-    auto _retval = ObjectG.getDObject!Settings(cast(GtkSettings*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -75,11 +75,11 @@ class Settings : ObjectG, StyleProvider
    *   display = a `GdkDisplay`
    * Returns: a `GtkSettings` object
    */
-  static Settings getForDisplay(Display display)
+  static gtk.settings.Settings getForDisplay(gdk.display.Display display)
   {
     GtkSettings* _cretval;
     _cretval = gtk_settings_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Settings(cast(GtkSettings*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
     return _retval;
   }
 

@@ -10,7 +10,7 @@ import gdk.texture;
 import gdk.toplevel_layout;
 import gdk.toplevel_size;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 
 /**
@@ -39,7 +39,7 @@ interface Toplevel
    *   timestamp = timestamp of mouse click that began the drag $(LPAREN)use
    *     [gdk.event.Event.getTime]$(RPAREN)
    */
-  void beginMove(Device device, int button, double x, double y, uint timestamp);
+  void beginMove(gdk.device.Device device, int button, double x, double y, uint timestamp);
 
   /**
    * Begins an interactive resize operation.
@@ -53,7 +53,7 @@ interface Toplevel
    *   timestamp = timestamp of mouse click that began the drag $(LPAREN)use
    *     [gdk.event.Event.getTime]$(RPAREN)
    */
-  void beginResize(SurfaceEdge edge, Device device, int button, double x, double y, uint timestamp);
+  void beginResize(gdk.types.SurfaceEdge edge, gdk.device.Device device, int button, double x, double y, uint timestamp);
 
   /**
    * Sets keyboard focus to surface.
@@ -70,7 +70,7 @@ interface Toplevel
    * from the `GdkToplevelState` enumeration.
    * Returns: surface state bitfield
    */
-  ToplevelState getState();
+  gdk.types.ToplevelState getState();
 
   /**
    * Requests that the toplevel inhibit the system shortcuts.
@@ -93,7 +93,7 @@ interface Toplevel
    *   event = the `GdkEvent` that is triggering the inhibit
    *     request, or %NULL if none is available
    */
-  void inhibitSystemShortcuts(Event event);
+  void inhibitSystemShortcuts(gdk.event.Event event);
 
   /**
    * Asks to lower the toplevel below other windows.
@@ -121,7 +121,7 @@ interface Toplevel
    * Params:
    *   layout = the `GdkToplevelLayout` object used to layout
    */
-  void present(ToplevelLayout layout);
+  void present(gdk.toplevel_layout.ToplevelLayout layout);
 
   /**
    * Restore default system keyboard shortcuts which were previously
@@ -160,7 +160,7 @@ interface Toplevel
    * Params:
    *   surfaces = A list of textures to use as icon, of different sizes
    */
-  void setIconList(Texture[] surfaces);
+  void setIconList(gdk.texture.Texture[] surfaces);
 
   /**
    * Sets the toplevel to be modal.
@@ -205,7 +205,7 @@ interface Toplevel
    * Params:
    *   parent = another toplevel `GdkSurface`
    */
-  void setTransientFor(Surface parent);
+  void setTransientFor(gdk.surface.Surface parent);
 
   /**
    * Asks the windowing system to show the window menu.
@@ -217,7 +217,7 @@ interface Toplevel
    *   event = a `GdkEvent` to show the menu for
    * Returns: %TRUE if the window menu was shown and %FALSE otherwise.
    */
-  bool showWindowMenu(Event event);
+  bool showWindowMenu(gdk.event.Event event);
 
   /**
    * Returns whether the desktop environment supports
@@ -226,7 +226,7 @@ interface Toplevel
    */
   bool supportsEdgeConstraints();
 
-  bool titlebarGesture(TitlebarGesture gesture);
+  bool titlebarGesture(gdk.types.TitlebarGesture gesture);
 
   /**
    * Emitted when the size for the surface needs to be computed, when
@@ -244,8 +244,8 @@ interface Toplevel
    *   size = a `GdkToplevelSize`
    *   toplevel = the instance the signal is connected to
    */
-  alias ComputeSizeCallbackDlg = void delegate(ToplevelSize size, Toplevel toplevel);
-  alias ComputeSizeCallbackFunc = void function(ToplevelSize size, Toplevel toplevel);
+  alias ComputeSizeCallbackDlg = void delegate(gdk.toplevel_size.ToplevelSize size, gdk.toplevel.Toplevel toplevel);
+  alias ComputeSizeCallbackFunc = void function(gdk.toplevel_size.ToplevelSize size, gdk.toplevel.Toplevel toplevel);
 
   /**
    * Connect to ComputeSize signal.

@@ -1,6 +1,6 @@
 module gobject.signal_query;
 
-import gid.global;
+import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.types;
@@ -50,32 +50,32 @@ class SignalQuery
     (cast(GSignalQuery*)cPtr).signalName = propval.toCString(Yes.Alloc);
   }
 
-  @property GType itype()
+  @property gobject.types.GType itype()
   {
     return (cast(GSignalQuery*)cPtr).itype;
   }
 
-  @property void itype(GType propval)
+  @property void itype(gobject.types.GType propval)
   {
     (cast(GSignalQuery*)cPtr).itype = propval;
   }
 
-  @property SignalFlags signalFlags()
+  @property gobject.types.SignalFlags signalFlags()
   {
-    return cast(SignalFlags)(cast(GSignalQuery*)cPtr).signalFlags;
+    return cast(gobject.types.SignalFlags)(cast(GSignalQuery*)cPtr).signalFlags;
   }
 
-  @property void signalFlags(SignalFlags propval)
+  @property void signalFlags(gobject.types.SignalFlags propval)
   {
     (cast(GSignalQuery*)cPtr).signalFlags = cast(GSignalFlags)propval;
   }
 
-  @property GType returnType()
+  @property gobject.types.GType returnType()
   {
     return (cast(GSignalQuery*)cPtr).returnType;
   }
 
-  @property void returnType(GType propval)
+  @property void returnType(gobject.types.GType propval)
   {
     (cast(GSignalQuery*)cPtr).returnType = propval;
   }

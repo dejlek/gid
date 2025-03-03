@@ -1,11 +1,10 @@
 module gtk.constraint;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.constraint_target;
-import gtk.constraint_target_mixin;
 import gtk.types;
 
 /**
@@ -21,7 +20,7 @@ import gtk.types;
  * The source and target, as well as their attributes, of a `GtkConstraint`
  * instance are immutable after creation.
  */
-class Constraint : ObjectG
+class Constraint : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,7 +53,7 @@ class Constraint : ObjectG
    *   strength = the strength of the constraint
    * Returns: the newly created constraint
    */
-  this(ConstraintTarget target, ConstraintAttribute targetAttribute, ConstraintRelation relation, ConstraintTarget source, ConstraintAttribute sourceAttribute, double multiplier, double constant, int strength)
+  this(gtk.constraint_target.ConstraintTarget target, gtk.types.ConstraintAttribute targetAttribute, gtk.types.ConstraintRelation relation, gtk.constraint_target.ConstraintTarget source, gtk.types.ConstraintAttribute sourceAttribute, double multiplier, double constant, int strength)
   {
     GtkConstraint* _cretval;
     _cretval = gtk_constraint_new(target ? cast(GtkConstraintTarget*)(cast(ObjectG)target).cPtr(No.Dup) : null, targetAttribute, relation, source ? cast(GtkConstraintTarget*)(cast(ObjectG)source).cPtr(No.Dup) : null, sourceAttribute, multiplier, constant, strength);
@@ -72,11 +71,11 @@ class Constraint : ObjectG
    *   strength = the strength of the constraint
    * Returns: the newly created constraint
    */
-  static Constraint newConstant(ConstraintTarget target, ConstraintAttribute targetAttribute, ConstraintRelation relation, double constant, int strength)
+  static gtk.constraint.Constraint newConstant(gtk.constraint_target.ConstraintTarget target, gtk.types.ConstraintAttribute targetAttribute, gtk.types.ConstraintRelation relation, double constant, int strength)
   {
     GtkConstraint* _cretval;
     _cretval = gtk_constraint_new_constant(target ? cast(GtkConstraintTarget*)(cast(ObjectG)target).cPtr(No.Dup) : null, targetAttribute, relation, constant, strength);
-    auto _retval = ObjectG.getDObject!Constraint(cast(GtkConstraint*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.constraint.Constraint)(cast(GtkConstraint*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -107,11 +106,11 @@ class Constraint : ObjectG
    * The order relation between the terms of the constraint.
    * Returns: a relation type
    */
-  ConstraintRelation getRelation()
+  gtk.types.ConstraintRelation getRelation()
   {
     GtkConstraintRelation _cretval;
     _cretval = gtk_constraint_get_relation(cast(GtkConstraint*)cPtr);
-    ConstraintRelation _retval = cast(ConstraintRelation)_cretval;
+    gtk.types.ConstraintRelation _retval = cast(gtk.types.ConstraintRelation)_cretval;
     return _retval;
   }
 
@@ -122,11 +121,11 @@ class Constraint : ObjectG
    * the widget using the [gtk.constraint_layout.ConstraintLayout] as the source.
    * Returns: the source of the constraint
    */
-  ConstraintTarget getSource()
+  gtk.constraint_target.ConstraintTarget getSource()
   {
     GtkConstraintTarget* _cretval;
     _cretval = gtk_constraint_get_source(cast(GtkConstraint*)cPtr);
-    auto _retval = ObjectG.getDObject!ConstraintTarget(cast(GtkConstraintTarget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.constraint_target.ConstraintTarget)(cast(GtkConstraintTarget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -134,11 +133,11 @@ class Constraint : ObjectG
    * Retrieves the attribute of the source to be read by the constraint.
    * Returns: the source's attribute
    */
-  ConstraintAttribute getSourceAttribute()
+  gtk.types.ConstraintAttribute getSourceAttribute()
   {
     GtkConstraintAttribute _cretval;
     _cretval = gtk_constraint_get_source_attribute(cast(GtkConstraint*)cPtr);
-    ConstraintAttribute _retval = cast(ConstraintAttribute)_cretval;
+    gtk.types.ConstraintAttribute _retval = cast(gtk.types.ConstraintAttribute)_cretval;
     return _retval;
   }
 
@@ -160,11 +159,11 @@ class Constraint : ObjectG
    * the widget using the [gtk.constraint_layout.ConstraintLayout] as the target.
    * Returns: a `GtkConstraintTarget`
    */
-  ConstraintTarget getTarget()
+  gtk.constraint_target.ConstraintTarget getTarget()
   {
     GtkConstraintTarget* _cretval;
     _cretval = gtk_constraint_get_target(cast(GtkConstraint*)cPtr);
-    auto _retval = ObjectG.getDObject!ConstraintTarget(cast(GtkConstraintTarget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.constraint_target.ConstraintTarget)(cast(GtkConstraintTarget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -172,11 +171,11 @@ class Constraint : ObjectG
    * Retrieves the attribute of the target to be set by the constraint.
    * Returns: the target's attribute
    */
-  ConstraintAttribute getTargetAttribute()
+  gtk.types.ConstraintAttribute getTargetAttribute()
   {
     GtkConstraintAttribute _cretval;
     _cretval = gtk_constraint_get_target_attribute(cast(GtkConstraint*)cPtr);
-    ConstraintAttribute _retval = cast(ConstraintAttribute)_cretval;
+    gtk.types.ConstraintAttribute _retval = cast(gtk.types.ConstraintAttribute)_cretval;
     return _retval;
   }
 

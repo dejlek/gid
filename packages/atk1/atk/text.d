@@ -5,7 +5,7 @@ import atk.c.functions;
 import atk.c.types;
 import atk.text_range;
 import atk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 
 /**
@@ -57,7 +57,7 @@ interface Text
    * Returns: Array of AtkTextRange. The last
    *   element of the array returned by this function will be NULL.
    */
-  TextRange[] getBoundedRanges(TextRectangle rect, CoordType coordType, TextClipType xClipType, TextClipType yClipType);
+  atk.text_range.TextRange[] getBoundedRanges(atk.types.TextRectangle rect, atk.types.CoordType coordType, atk.types.TextClipType xClipType, atk.types.TextClipType yClipType);
 
   /**
    * Gets the offset of the position of the caret $(LPAREN)cursor$(RPAREN).
@@ -94,7 +94,7 @@ interface Text
    *   height = Pointer for the height of the bounding box
    *   coords = specify whether coordinates are relative to the screen or widget window
    */
-  void getCharacterExtents(int offset, out int x, out int y, out int width, out int height, CoordType coords);
+  void getCharacterExtents(int offset, out int x, out int y, out int width, out int height, atk.types.CoordType coords);
 
   /**
    * Gets the number of selected regions.
@@ -114,7 +114,7 @@ interface Text
    * Returns: the offset to the character which is located at  the specified
    *   x and y coordinates of -1 in case of failure.
    */
-  int getOffsetAtPoint(int x, int y, CoordType coords);
+  int getOffsetAtPoint(int x, int y, atk.types.CoordType coords);
 
   /**
    * Get the bounding box for text within the specified range.
@@ -128,7 +128,7 @@ interface Text
    *   coordType = Specify whether coordinates are relative to the screen or widget window.
    *   rect = A pointer to a AtkTextRectangle which is filled in by this function.
    */
-  void getRangeExtents(int startOffset, int endOffset, CoordType coordType, out TextRectangle rect);
+  void getRangeExtents(int startOffset, int endOffset, atk.types.CoordType coordType, out atk.types.TextRectangle rect);
 
   /**
    * Gets the text from the specified selection.
@@ -182,7 +182,7 @@ interface Text
    *   to free the returned string.  Returns %NULL if the offset is invalid
    *   or no implementation is available.
    */
-  string getStringAtOffset(int offset, TextGranularity granularity, out int startOffset, out int endOffset);
+  string getStringAtOffset(int offset, atk.types.TextGranularity granularity, out int startOffset, out int endOffset);
 
   /**
    * Gets the specified text.
@@ -209,7 +209,7 @@ interface Text
 
    * Deprecated: Please use [atk.text.Text.getStringAtOffset] instead.
    */
-  string getTextAfterOffset(int offset, TextBoundary boundaryType, out int startOffset, out int endOffset);
+  string getTextAfterOffset(int offset, atk.types.TextBoundary boundaryType, out int startOffset, out int endOffset);
 
   /**
    * Gets the specified text.
@@ -243,7 +243,7 @@ interface Text
    * Deprecated: This method is deprecated since ATK version
    *   2.9.4. Please use [atk.text.Text.getStringAtOffset] instead.
    */
-  string getTextAtOffset(int offset, TextBoundary boundaryType, out int startOffset, out int endOffset);
+  string getTextAtOffset(int offset, atk.types.TextBoundary boundaryType, out int startOffset, out int endOffset);
 
   /**
    * Gets the specified text.
@@ -259,7 +259,7 @@ interface Text
 
    * Deprecated: Please use [atk.text.Text.getStringAtOffset] instead.
    */
-  string getTextBeforeOffset(int offset, TextBoundary boundaryType, out int startOffset, out int endOffset);
+  string getTextBeforeOffset(int offset, atk.types.TextBoundary boundaryType, out int startOffset, out int endOffset);
 
   /**
    * Removes the specified selection.
@@ -281,7 +281,7 @@ interface Text
    *   type = specify where the object should be made visible.
    * Returns: whether scrolling was successful.
    */
-  bool scrollSubstringTo(int startOffset, int endOffset, ScrollType type);
+  bool scrollSubstringTo(int startOffset, int endOffset, atk.types.ScrollType type);
 
   /**
    * Move the top-left of a substring of text to a given position of the screen
@@ -295,7 +295,7 @@ interface Text
    *   y = y-position where to scroll to
    * Returns: whether scrolling was successful.
    */
-  bool scrollSubstringToPoint(int startOffset, int endOffset, CoordType coords, int x, int y);
+  bool scrollSubstringToPoint(int startOffset, int endOffset, atk.types.CoordType coords, int x, int y);
 
   /**
    * Sets the caret $(LPAREN)cursor$(RPAREN) position to the specified offset.
@@ -340,8 +340,8 @@ interface Text
    * changes.
    *   text = the instance the signal is connected to
    */
-  alias TextAttributesChangedCallbackDlg = void delegate(Text text);
-  alias TextAttributesChangedCallbackFunc = void function(Text text);
+  alias TextAttributesChangedCallbackDlg = void delegate(atk.text.Text text);
+  alias TextAttributesChangedCallbackFunc = void function(atk.text.Text text);
 
   /**
    * Connect to TextAttributesChanged signal.
@@ -361,8 +361,8 @@ interface Text
    *   arg1 = The new position of the text caret.
    *   text = the instance the signal is connected to
    */
-  alias TextCaretMovedCallbackDlg = void delegate(int arg1, Text text);
-  alias TextCaretMovedCallbackFunc = void function(int arg1, Text text);
+  alias TextCaretMovedCallbackDlg = void delegate(int arg1, atk.text.Text text);
+  alias TextCaretMovedCallbackFunc = void function(int arg1, atk.text.Text text);
 
   /**
    * Connect to TextCaretMoved signal.
@@ -388,8 +388,8 @@ interface Text
    * Deprecated: Use #AtkObject::text-insert or
    *   #AtkObject::text-remove instead.
    */
-  alias TextChangedCallbackDlg = void delegate(int arg1, int arg2, Text text);
-  alias TextChangedCallbackFunc = void function(int arg1, int arg2, Text text);
+  alias TextChangedCallbackDlg = void delegate(int arg1, int arg2, atk.text.Text text);
+  alias TextChangedCallbackFunc = void function(int arg1, int arg2, atk.text.Text text);
 
   /**
    * Connect to TextChanged signal.
@@ -413,8 +413,8 @@ interface Text
    *   arg3 = The new text inserted
    *   text = the instance the signal is connected to
    */
-  alias TextInsertCallbackDlg = void delegate(int arg1, int arg2, string arg3, Text text);
-  alias TextInsertCallbackFunc = void function(int arg1, int arg2, string arg3, Text text);
+  alias TextInsertCallbackDlg = void delegate(int arg1, int arg2, string arg3, atk.text.Text text);
+  alias TextInsertCallbackFunc = void function(int arg1, int arg2, string arg3, atk.text.Text text);
 
   /**
    * Connect to TextInsert signal.
@@ -438,8 +438,8 @@ interface Text
    *   arg3 = The old text removed
    *   text = the instance the signal is connected to
    */
-  alias TextRemoveCallbackDlg = void delegate(int arg1, int arg2, string arg3, Text text);
-  alias TextRemoveCallbackFunc = void function(int arg1, int arg2, string arg3, Text text);
+  alias TextRemoveCallbackDlg = void delegate(int arg1, int arg2, string arg3, atk.text.Text text);
+  alias TextRemoveCallbackFunc = void function(int arg1, int arg2, string arg3, atk.text.Text text);
 
   /**
    * Connect to TextRemove signal.
@@ -457,8 +457,8 @@ interface Text
    * selected text of an object which implements AtkText changes.
    *   text = the instance the signal is connected to
    */
-  alias TextSelectionChangedCallbackDlg = void delegate(Text text);
-  alias TextSelectionChangedCallbackFunc = void function(Text text);
+  alias TextSelectionChangedCallbackDlg = void delegate(atk.text.Text text);
+  alias TextSelectionChangedCallbackFunc = void function(atk.text.Text text);
 
   /**
    * Connect to TextSelectionChanged signal.

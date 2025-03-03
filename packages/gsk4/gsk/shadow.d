@@ -1,7 +1,7 @@
 module gsk.shadow;
 
 import gdk.rgba;
-import gid.global;
+import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;
 import gsk.types;
@@ -29,9 +29,9 @@ class Shadow
     return cast(void*)&cInstance;
   }
 
-  @property RGBA color()
+  @property gdk.rgba.RGBA color()
   {
-    return new RGBA(cast(GdkRGBA*)&(cast(GskShadow*)cPtr).color);
+    return new gdk.rgba.RGBA(cast(GdkRGBA*)&(cast(GskShadow*)cPtr).color);
   }
 
   @property float dx()

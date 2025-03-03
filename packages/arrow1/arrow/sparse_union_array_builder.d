@@ -5,10 +5,10 @@ import arrow.c.types;
 import arrow.sparse_union_data_type;
 import arrow.types;
 import arrow.union_array_builder;
-import gid.global;
+import gid.gid;
 import glib.error;
 
-class SparseUnionArrayBuilder : UnionArrayBuilder
+class SparseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,7 +27,7 @@ class SparseUnionArrayBuilder : UnionArrayBuilder
     return getType();
   }
 
-  this(SparseUnionDataType dataType)
+  this(arrow.sparse_union_data_type.SparseUnionDataType dataType)
   {
     GArrowSparseUnionArrayBuilder* _cretval;
     GError *_err;

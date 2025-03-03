@@ -4,15 +4,15 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.file;
 import arrow.file_mixin;
-import arrow.output_stream : DArrowOutputStream = OutputStream;
+import arrow.output_stream;
 import arrow.types;
 import arrow.writable;
 import arrow.writable_mixin;
-import gid.global;
+import gid.gid;
 import gio.output_stream;
 import gobject.object;
 
-class GIOOutputStream : DArrowOutputStream
+class GIOOutputStream : arrow.output_stream.OutputStream
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -31,18 +31,18 @@ class GIOOutputStream : DArrowOutputStream
     return getType();
   }
 
-  this(OutputStream gioOutputStream)
+  this(gio.output_stream.OutputStream gioOutputStream)
   {
     GArrowGIOOutputStream* _cretval;
     _cretval = garrow_gio_output_stream_new(gioOutputStream ? cast(GOutputStream*)gioOutputStream.cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
-  OutputStream getRaw()
+  gio.output_stream.OutputStream getRaw()
   {
     GOutputStream* _cretval;
     _cretval = garrow_gio_output_stream_get_raw(cast(GArrowGIOOutputStream*)cPtr);
-    auto _retval = ObjectG.getDObject!OutputStream(cast(GOutputStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 }

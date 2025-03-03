@@ -6,11 +6,11 @@ import arrow.c.types;
 import arrow.data_type;
 import arrow.dictionary_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class DictionaryArray : Array
+class DictionaryArray : arrow.array.Array
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -29,7 +29,7 @@ class DictionaryArray : Array
     return getType();
   }
 
-  this(DataType dataType, Array indices, Array dictionary)
+  this(arrow.data_type.DataType dataType, arrow.array.Array indices, arrow.array.Array dictionary)
   {
     GArrowDictionaryArray* _cretval;
     GError *_err;
@@ -39,27 +39,27 @@ class DictionaryArray : Array
     this(_cretval, Yes.Take);
   }
 
-  Array getDictionary()
+  arrow.array.Array getDictionary()
   {
     GArrowArray* _cretval;
     _cretval = garrow_dictionary_array_get_dictionary(cast(GArrowDictionaryArray*)cPtr);
-    auto _retval = ObjectG.getDObject!Array(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
-  DictionaryDataType getDictionaryDataType()
+  arrow.dictionary_data_type.DictionaryDataType getDictionaryDataType()
   {
     GArrowDictionaryDataType* _cretval;
     _cretval = garrow_dictionary_array_get_dictionary_data_type(cast(GArrowDictionaryArray*)cPtr);
-    auto _retval = ObjectG.getDObject!DictionaryDataType(cast(GArrowDictionaryDataType*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.dictionary_data_type.DictionaryDataType)(cast(GArrowDictionaryDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
-  Array getIndices()
+  arrow.array.Array getIndices()
   {
     GArrowArray* _cretval;
     _cretval = garrow_dictionary_array_get_indices(cast(GArrowDictionaryArray*)cPtr);
-    auto _retval = ObjectG.getDObject!Array(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -1,6 +1,6 @@
 module gtksource.gutter_lines;
 
-import gid.global;
+import gid.gid;
 import glib.types;
 import gobject.object;
 import gtk.text_buffer;
@@ -19,7 +19,7 @@ import gtksource.types;
  * passes through the text btree allowing GtkSourceView to reach more
  * frames-per-second while performing kinetic scrolling.
  */
-class GutterLines : ObjectG
+class GutterLines : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -40,9 +40,9 @@ class GutterLines : ObjectG
 
   /**
    * Adds the class name to line.
-   * name will be converted to a [glib.uint] as part of this process. A
+   * name will be converted to a [glib.types.uint] as part of this process. A
    * faster version of this function is available via
-   * [gtksource.gutter_lines.GutterLines.addQclass] for situations where the [glib.uint] is
+   * [gtksource.gutter_lines.GutterLines.addQclass] for situations where the [glib.types.uint] is
    * known ahead of time.
    * Params:
    *   line = a line number starting from zero
@@ -64,7 +64,7 @@ class GutterLines : ObjectG
    *   line = a line number starting from zero
    *   qname = a class name as a #GQuark
    */
-  void addQclass(uint line, Quark qname)
+  void addQclass(uint line, glib.types.Quark qname)
   {
     gtk_source_gutter_lines_add_qclass(cast(GtkSourceGutterLines*)cPtr, line, qname);
   }
@@ -73,11 +73,11 @@ class GutterLines : ObjectG
    * Gets the [gtk.text_buffer.TextBuffer] that the `GtkSourceGutterLines` represents.
    * Returns: a #GtkTextBuffer
    */
-  TextBuffer getBuffer()
+  gtk.text_buffer.TextBuffer getBuffer()
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_source_gutter_lines_get_buffer(cast(GtkSourceGutterLines*)cPtr);
-    auto _retval = ObjectG.getDObject!TextBuffer(cast(GtkTextBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -99,11 +99,11 @@ class GutterLines : ObjectG
    *   iter = a location for a #GtkTextIter
    *   line = the line number
    */
-  void getIterAtLine(out TextIter iter, uint line)
+  void getIterAtLine(out gtk.text_iter.TextIter iter, uint line)
   {
     GtkTextIter _iter;
     gtk_source_gutter_lines_get_iter_at_line(cast(GtkSourceGutterLines*)cPtr, &_iter, line);
-    iter = new TextIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -127,7 +127,7 @@ class GutterLines : ObjectG
    *   y = a location for the Y position in widget coordinates
    *   height = the line height based on mode
    */
-  void getLineYrange(uint line, GutterRendererAlignmentMode mode, out int y, out int height)
+  void getLineYrange(uint line, gtksource.types.GutterRendererAlignmentMode mode, out int y, out int height)
   {
     gtk_source_gutter_lines_get_line_yrange(cast(GtkSourceGutterLines*)cPtr, line, mode, cast(int*)&y, cast(int*)&height);
   }
@@ -136,11 +136,11 @@ class GutterLines : ObjectG
    * Gets the [gtk.text_view.TextView] that the `GtkSourceGutterLines` represents.
    * Returns: a #GtkTextView
    */
-  TextView getView()
+  gtk.text_view.TextView getView()
   {
     GtkTextView* _cretval;
     _cretval = gtk_source_gutter_lines_get_view(cast(GtkSourceGutterLines*)cPtr);
-    auto _retval = ObjectG.getDObject!TextView(cast(GtkTextView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_view.TextView)(cast(GtkTextView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class GutterLines : ObjectG
    *   qname = a #GQuark containing the class name
    * Returns: %TRUE if line contains qname
    */
-  bool hasQclass(uint line, Quark qname)
+  bool hasQclass(uint line, glib.types.Quark qname)
   {
     bool _retval;
     _retval = gtk_source_gutter_lines_has_qclass(cast(GtkSourceGutterLines*)cPtr, line, qname);
@@ -251,12 +251,12 @@ class GutterLines : ObjectG
 
   /**
    * Reverses a call to [gtksource.gutter_lines.GutterLines.addQclass] by removing
-   * the [glib.uint] matching qname.
+   * the [glib.types.uint] matching qname.
    * Params:
    *   line = a line number starting from zero
    *   qname = a #GQuark to remove from line
    */
-  void removeQclass(uint line, Quark qname)
+  void removeQclass(uint line, glib.types.Quark qname)
   {
     gtk_source_gutter_lines_remove_qclass(cast(GtkSourceGutterLines*)cPtr, line, qname);
   }

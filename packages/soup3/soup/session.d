@@ -1,16 +1,13 @@
 module soup.session;
 
-import gid.global;
+import gid.gid;
 import gio.async_result;
-import gio.async_result_mixin;
 import gio.cancellable;
 import gio.inet_socket_address;
 import gio.input_stream;
 import gio.output_stream;
 import gio.proxy_resolver;
-import gio.proxy_resolver_mixin;
 import gio.socket_connectable;
-import gio.socket_connectable_mixin;
 import gio.tls_database;
 import gio.tls_interaction;
 import gio.types;
@@ -23,7 +20,6 @@ import soup.c.functions;
 import soup.c.types;
 import soup.message;
 import soup.session_feature;
-import soup.session_feature_mixin;
 import soup.types;
 import soup.websocket_connection;
 
@@ -58,7 +54,7 @@ import soup.websocket_connection;
  * Note that all async methods will invoke their callbacks on the thread-default
  * context at the time of the function call.
  */
-class Session : ObjectG
+class Session : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -105,7 +101,7 @@ class Session : ObjectG
    * Params:
    *   feature = an object that implements #SoupSessionFeature
    */
-  void addFeature(SessionFeature feature)
+  void addFeature(soup.session_feature.SessionFeature feature)
   {
     soup_session_add_feature(cast(SoupSession*)cPtr, feature ? cast(SoupSessionFeature*)(cast(ObjectG)feature).cPtr(No.Dup) : null);
   }
@@ -124,7 +120,7 @@ class Session : ObjectG
    * Params:
    *   featureType = a #GType
    */
-  void addFeatureByType(GType featureType)
+  void addFeatureByType(gobject.types.GType featureType)
   {
     soup_session_add_feature_by_type(cast(SoupSession*)cPtr, featureType);
   }
@@ -138,7 +134,7 @@ class Session : ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_session_get_accept_language(cast(SoupSession*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -158,17 +154,17 @@ class Session : ObjectG
   /**
    * Gets the classMessage of the result asynchronous operation This is useful
    * to get the classMessage of an asynchronous operation started by session
-   * from its [gio.AsyncReadyCallback].
+   * from its [gio.types.AsyncReadyCallback].
    * Params:
    *   result = the #GAsyncResult passed to your callback
    * Returns: a #SoupMessage or
    *   %NULL if result is not a valid session async operation result.
    */
-  Message getAsyncResultMessage(AsyncResult result)
+  soup.message.Message getAsyncResultMessage(gio.async_result.AsyncResult result)
   {
     SoupMessage* _cretval;
     _cretval = soup_session_get_async_result_message(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Message(cast(SoupMessage*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -179,11 +175,11 @@ class Session : ObjectG
    * Returns: a #SoupSessionFeature, or %NULL. The
    *   feature is owned by session.
    */
-  SessionFeature getFeature(GType featureType)
+  soup.session_feature.SessionFeature getFeature(gobject.types.GType featureType)
   {
     SoupSessionFeature* _cretval;
     _cretval = soup_session_get_feature(cast(SoupSession*)cPtr, featureType);
-    auto _retval = ObjectG.getDObject!SessionFeature(cast(SoupSessionFeature*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(soup.session_feature.SessionFeature)(cast(SoupSessionFeature*)_cretval, No.Take);
     return _retval;
   }
 
@@ -196,11 +192,11 @@ class Session : ObjectG
    * Returns: a #SoupSessionFeature. The feature is
    *   owned by session.
    */
-  SessionFeature getFeatureForMessage(GType featureType, Message msg)
+  soup.session_feature.SessionFeature getFeatureForMessage(gobject.types.GType featureType, soup.message.Message msg)
   {
     SoupSessionFeature* _cretval;
     _cretval = soup_session_get_feature_for_message(cast(SoupSession*)cPtr, featureType, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!SessionFeature(cast(SoupSessionFeature*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(soup.session_feature.SessionFeature)(cast(SoupSessionFeature*)_cretval, No.Take);
     return _retval;
   }
 
@@ -221,11 +217,11 @@ class Session : ObjectG
    * connections in session.
    * Returns: a #GInetSocketAddress
    */
-  InetSocketAddress getLocalAddress()
+  gio.inet_socket_address.InetSocketAddress getLocalAddress()
   {
     GInetSocketAddress* _cretval;
     _cretval = soup_session_get_local_address(cast(SoupSession*)cPtr);
-    auto _retval = ObjectG.getDObject!InetSocketAddress(cast(GInetSocketAddress*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.inet_socket_address.InetSocketAddress)(cast(GInetSocketAddress*)_cretval, No.Take);
     return _retval;
   }
 
@@ -257,11 +253,11 @@ class Session : ObjectG
    * Returns: a #GProxyResolver or %NULL if proxies
    *   are disabled in session
    */
-  ProxyResolver getProxyResolver()
+  gio.proxy_resolver.ProxyResolver getProxyResolver()
   {
     GProxyResolver* _cretval;
     _cretval = soup_session_get_proxy_resolver(cast(SoupSession*)cPtr);
-    auto _retval = ObjectG.getDObject!ProxyResolver(cast(GProxyResolver*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, No.Take);
     return _retval;
   }
 
@@ -269,11 +265,11 @@ class Session : ObjectG
    * Gets the remote connectable if one set.
    * Returns: the #GSocketConnectable
    */
-  SocketConnectable getRemoteConnectable()
+  gio.socket_connectable.SocketConnectable getRemoteConnectable()
   {
     GSocketConnectable* _cretval;
     _cretval = soup_session_get_remote_connectable(cast(SoupSession*)cPtr);
-    auto _retval = ObjectG.getDObject!SocketConnectable(cast(GSocketConnectable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_connectable.SocketConnectable)(cast(GSocketConnectable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -293,11 +289,11 @@ class Session : ObjectG
    * Get the [gio.tls_database.TlsDatabase] currently used by session.
    * Returns: a #GTlsDatabase
    */
-  TlsDatabase getTlsDatabase()
+  gio.tls_database.TlsDatabase getTlsDatabase()
   {
     GTlsDatabase* _cretval;
     _cretval = soup_session_get_tls_database(cast(SoupSession*)cPtr);
-    auto _retval = ObjectG.getDObject!TlsDatabase(cast(GTlsDatabase*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
     return _retval;
   }
 
@@ -305,11 +301,11 @@ class Session : ObjectG
    * Get the [gio.tls_interaction.TlsInteraction] currently used by session.
    * Returns: a #GTlsInteraction
    */
-  TlsInteraction getTlsInteraction()
+  gio.tls_interaction.TlsInteraction getTlsInteraction()
   {
     GTlsInteraction* _cretval;
     _cretval = soup_session_get_tls_interaction(cast(SoupSession*)cPtr);
-    auto _retval = ObjectG.getDObject!TlsInteraction(cast(GTlsInteraction*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -321,7 +317,7 @@ class Session : ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_session_get_user_agent(cast(SoupSession*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -333,7 +329,7 @@ class Session : ObjectG
    *   featureType = the #GType of the class of features to check for
    * Returns: %TRUE or %FALSE
    */
-  bool hasFeature(GType featureType)
+  bool hasFeature(gobject.types.GType featureType)
   {
     bool _retval;
     _retval = soup_session_has_feature(cast(SoupSession*)cPtr, featureType);
@@ -356,14 +352,14 @@ class Session : ObjectG
    *   cancellable = a #GCancellable
    *   callback = the callback to invoke when the operation finishes
    */
-  void preconnectAsync(Message msg, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void preconnectAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -377,7 +373,7 @@ class Session : ObjectG
    *   result = the #GAsyncResult passed to your callback
    * Returns: %TRUE if the preconnect succeeded, or %FALSE in case of error.
    */
-  bool preconnectFinish(AsyncResult result)
+  bool preconnectFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
     GError *_err;
@@ -392,7 +388,7 @@ class Session : ObjectG
    * Params:
    *   feature = a feature that has previously been added to session
    */
-  void removeFeature(SessionFeature feature)
+  void removeFeature(soup.session_feature.SessionFeature feature)
   {
     soup_session_remove_feature(cast(SoupSession*)cPtr, feature ? cast(SoupSessionFeature*)(cast(ObjectG)feature).cPtr(No.Dup) : null);
   }
@@ -403,7 +399,7 @@ class Session : ObjectG
    * Params:
    *   featureType = a #GType
    */
-  void removeFeatureByType(GType featureType)
+  void removeFeatureByType(gobject.types.GType featureType)
   {
     soup_session_remove_feature_by_type(cast(SoupSession*)cPtr, featureType);
   }
@@ -430,14 +426,14 @@ class Session : ObjectG
    * Returns: a #GInputStream for reading the
    *   response body, or %NULL on error.
    */
-  InputStream send(Message msg, Cancellable cancellable)
+  gio.input_stream.InputStream send(soup.message.Message msg, gio.cancellable.Cancellable cancellable)
   {
     GInputStream* _cretval;
     GError *_err;
     _cretval = soup_session_send(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -452,14 +448,14 @@ class Session : ObjectG
    *   cancellable = a #GCancellable
    * Returns: a #GBytes, or %NULL on error.
    */
-  Bytes sendAndRead(Message msg, Cancellable cancellable)
+  glib.bytes.Bytes sendAndRead(soup.message.Message msg, gio.cancellable.Cancellable cancellable)
   {
     GBytes* _cretval;
     GError *_err;
     _cretval = soup_session_send_and_read(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -477,14 +473,14 @@ class Session : ObjectG
    *   cancellable = a #GCancellable
    *   callback = the callback to invoke
    */
-  void sendAndReadAsync(Message msg, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void sendAndReadAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -499,14 +495,14 @@ class Session : ObjectG
    *   result = the #GAsyncResult passed to your callback
    * Returns: a #GBytes, or %NULL on error.
    */
-  Bytes sendAndReadFinish(AsyncResult result)
+  glib.bytes.Bytes sendAndReadFinish(gio.async_result.AsyncResult result)
   {
     GBytes* _cretval;
     GError *_err;
     _cretval = soup_session_send_and_read_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -520,7 +516,7 @@ class Session : ObjectG
    *   cancellable = a #GCancellable
    * Returns: a #gssize containing the size of the data spliced, or -1 if an error occurred.
    */
-  ptrdiff_t sendAndSplice(Message msg, OutputStream outStream, OutputStreamSpliceFlags flags, Cancellable cancellable)
+  ptrdiff_t sendAndSplice(soup.message.Message msg, gio.output_stream.OutputStream outStream, gio.types.OutputStreamSpliceFlags flags, gio.cancellable.Cancellable cancellable)
   {
     ptrdiff_t _retval;
     GError *_err;
@@ -543,14 +539,14 @@ class Session : ObjectG
    *   cancellable = a #GCancellable
    *   callback = the callback to invoke
    */
-  void sendAndSpliceAsync(Message msg, OutputStream outStream, OutputStreamSpliceFlags flags, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void sendAndSpliceAsync(soup.message.Message msg, gio.output_stream.OutputStream outStream, gio.types.OutputStreamSpliceFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -564,7 +560,7 @@ class Session : ObjectG
    *   result = the #GAsyncResult passed to your callback
    * Returns: a #gssize containing the size of the data spliced, or -1 if an error occurred.
    */
-  ptrdiff_t sendAndSpliceFinish(AsyncResult result)
+  ptrdiff_t sendAndSpliceFinish(gio.async_result.AsyncResult result)
   {
     ptrdiff_t _retval;
     GError *_err;
@@ -587,14 +583,14 @@ class Session : ObjectG
    *   cancellable = a #GCancellable
    *   callback = the callback to invoke
    */
-  void sendAsync(Message msg, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void sendAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -611,14 +607,14 @@ class Session : ObjectG
    * Returns: a #GInputStream for reading the
    *   response body, or %NULL on error.
    */
-  InputStream sendFinish(AsyncResult result)
+  gio.input_stream.InputStream sendFinish(gio.async_result.AsyncResult result)
   {
     GInputStream* _cretval;
     GError *_err;
     _cretval = soup_session_send_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!InputStream(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -668,7 +664,7 @@ class Session : ObjectG
    * Params:
    *   proxyResolver = a #GProxyResolver or %NULL
    */
-  void setProxyResolver(ProxyResolver proxyResolver)
+  void setProxyResolver(gio.proxy_resolver.ProxyResolver proxyResolver)
   {
     soup_session_set_proxy_resolver(cast(SoupSession*)cPtr, proxyResolver ? cast(GProxyResolver*)(cast(ObjectG)proxyResolver).cPtr(No.Dup) : null);
   }
@@ -692,7 +688,7 @@ class Session : ObjectG
    * Params:
    *   tlsDatabase = a #GTlsDatabase
    */
-  void setTlsDatabase(TlsDatabase tlsDatabase)
+  void setTlsDatabase(gio.tls_database.TlsDatabase tlsDatabase)
   {
     soup_session_set_tls_database(cast(SoupSession*)cPtr, tlsDatabase ? cast(GTlsDatabase*)tlsDatabase.cPtr(No.Dup) : null);
   }
@@ -705,7 +701,7 @@ class Session : ObjectG
    * Params:
    *   tlsInteraction = a #GTlsInteraction
    */
-  void setTlsInteraction(TlsInteraction tlsInteraction)
+  void setTlsInteraction(gio.tls_interaction.TlsInteraction tlsInteraction)
   {
     soup_session_set_tls_interaction(cast(SoupSession*)cPtr, tlsInteraction ? cast(GTlsInteraction*)tlsInteraction.cPtr(No.Dup) : null);
   }
@@ -750,14 +746,14 @@ class Session : ObjectG
    *   cancellable = a #GCancellable
    *   callback = the callback to invoke
    */
-  void websocketConnectAsync(Message msg, string origin, string[] protocols, int ioPriority, Cancellable cancellable, AsyncReadyCallback callback)
+  void websocketConnectAsync(soup.message.Message msg, string origin, string[] protocols, int ioPriority, gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
-      auto _dlg = cast(AsyncReadyCallback*)data;
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)sourceObject, No.Take), ObjectG.getDObject!AsyncResult(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -782,14 +778,14 @@ class Session : ObjectG
    * Returns: a new #SoupWebsocketConnection, or
    *   %NULL on error.
    */
-  WebsocketConnection websocketConnectFinish(AsyncResult result)
+  soup.websocket_connection.WebsocketConnection websocketConnectFinish(gio.async_result.AsyncResult result)
   {
     SoupWebsocketConnection* _cretval;
     GError *_err;
     _cretval = soup_session_websocket_connect_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!WebsocketConnection(cast(SoupWebsocketConnection*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(soup.websocket_connection.WebsocketConnection)(cast(SoupWebsocketConnection*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -821,8 +817,8 @@ class Session : ObjectG
    *   msg = the request that was queued
    *   session = the instance the signal is connected to
    */
-  alias RequestQueuedCallbackDlg = void delegate(Message msg, Session session);
-  alias RequestQueuedCallbackFunc = void function(Message msg, Session session);
+  alias RequestQueuedCallbackDlg = void delegate(soup.message.Message msg, soup.session.Session session);
+  alias RequestQueuedCallbackFunc = void function(soup.message.Message msg, soup.session.Session session);
 
   /**
    * Connect to RequestQueued signal.
@@ -838,8 +834,8 @@ class Session : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto session = getVal!Session(_paramVals);
-      auto msg = getVal!Message(&_paramVals[1]);
+      auto session = getVal!(soup.session.Session)(_paramVals);
+      auto msg = getVal!(soup.message.Message)(&_paramVals[1]);
       _dClosure.dlg(msg, session);
     }
 
@@ -856,8 +852,8 @@ class Session : ObjectG
    *   msg = the request that was unqueued
    *   session = the instance the signal is connected to
    */
-  alias RequestUnqueuedCallbackDlg = void delegate(Message msg, Session session);
-  alias RequestUnqueuedCallbackFunc = void function(Message msg, Session session);
+  alias RequestUnqueuedCallbackDlg = void delegate(soup.message.Message msg, soup.session.Session session);
+  alias RequestUnqueuedCallbackFunc = void function(soup.message.Message msg, soup.session.Session session);
 
   /**
    * Connect to RequestUnqueued signal.
@@ -873,8 +869,8 @@ class Session : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto session = getVal!Session(_paramVals);
-      auto msg = getVal!Message(&_paramVals[1]);
+      auto session = getVal!(soup.session.Session)(_paramVals);
+      auto msg = getVal!(soup.message.Message)(&_paramVals[1]);
       _dClosure.dlg(msg, session);
     }
 

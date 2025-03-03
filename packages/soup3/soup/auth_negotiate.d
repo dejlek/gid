@@ -1,6 +1,6 @@
 module soup.auth_negotiate;
 
-import gid.global;
+import gid.gid;
 import soup.auth;
 import soup.c.functions;
 import soup.c.types;
@@ -16,7 +16,7 @@ import soup.types;
  * support; you can check [soup.auth_negotiate.AuthNegotiate.supported] to see if it
  * was.
  */
-class AuthNegotiate : Auth
+class AuthNegotiate : soup.auth.Auth
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

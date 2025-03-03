@@ -5,7 +5,7 @@ import gio.tls_server_connection;
 import gio.tls_server_connection_mixin;
 
 /// Proxy object for Gio.TlsServerConnection interface when a GObject has no applicable D binding
-class TlsServerConnectionIfaceProxy : IfaceProxy, TlsServerConnection
+class TlsServerConnectionIfaceProxy : IfaceProxy, gio.tls_server_connection.TlsServerConnection
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class TlsServerConnectionIfaceProxy : IfaceProxy, TlsServerConnection
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(TlsServerConnection);
+    return typeid(gio.tls_server_connection.TlsServerConnection);
   }
 
   mixin TlsServerConnectionT!();

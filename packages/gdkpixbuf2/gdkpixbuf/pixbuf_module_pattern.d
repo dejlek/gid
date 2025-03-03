@@ -3,7 +3,7 @@ module gdkpixbuf.pixbuf_module_pattern;
 import gdkpixbuf.c.functions;
 import gdkpixbuf.c.types;
 import gdkpixbuf.types;
-import gid.global;
+import gid.gid;
 
 /**
  * The signature prefix for a module.

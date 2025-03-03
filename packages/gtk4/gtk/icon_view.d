@@ -2,10 +2,9 @@ module gtk.icon_view;
 
 import gdk.content_formats;
 import gdk.paintable;
-import gdk.paintable_mixin;
 import gdk.rectangle;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 import gtk.accessible;
@@ -25,7 +24,6 @@ import gtk.scrollable_mixin;
 import gtk.tooltip;
 import gtk.tree_iter;
 import gtk.tree_model;
-import gtk.tree_model_mixin;
 import gtk.tree_path;
 import gtk.types;
 import gtk.widget;
@@ -52,7 +50,7 @@ import gtk.widget;
 
  * Deprecated: Use [gtk.grid_view.GridView] instead
  */
-class IconView : Widget, CellLayout, Scrollable
+class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.Scrollable
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -96,11 +94,11 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  static IconView newWithArea(CellArea area)
+  static gtk.icon_view.IconView newWithArea(gtk.cell_area.CellArea area)
   {
     GtkWidget* _cretval;
     _cretval = gtk_icon_view_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!IconView(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.icon_view.IconView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -112,11 +110,11 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  static IconView newWithModel(TreeModel model)
+  static gtk.icon_view.IconView newWithModel(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
     _cretval = gtk_icon_view_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!IconView(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.icon_view.IconView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -129,11 +127,11 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  Paintable createDragIcon(TreePath path)
+  gdk.paintable.Paintable createDragIcon(gtk.tree_path.TreePath path)
   {
     GdkPaintable* _cretval;
     _cretval = gtk_icon_view_create_drag_icon(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -147,7 +145,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  void enableModelDragDest(ContentFormats formats, DragAction actions)
+  void enableModelDragDest(gdk.content_formats.ContentFormats formats, gdk.types.DragAction actions)
   {
     gtk_icon_view_enable_model_drag_dest(cast(GtkIconView*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null, actions);
   }
@@ -163,7 +161,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  void enableModelDragSource(ModifierType startButtonMask, ContentFormats formats, DragAction actions)
+  void enableModelDragSource(gdk.types.ModifierType startButtonMask, gdk.content_formats.ContentFormats formats, gdk.types.DragAction actions)
   {
     gtk_icon_view_enable_model_drag_source(cast(GtkIconView*)cPtr, startButtonMask, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null, actions);
   }
@@ -193,12 +191,12 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  bool getCellRect(TreePath path, CellRenderer cell, out Rectangle rect)
+  bool getCellRect(gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell, out gdk.rectangle.Rectangle rect)
   {
     bool _retval;
     GdkRectangle _rect;
     _retval = gtk_icon_view_get_cell_rect(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, &_rect);
-    rect = new Rectangle(cast(void*)&_rect, No.Take);
+    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
 
@@ -228,7 +226,7 @@ class IconView : Widget, CellLayout, Scrollable
     return _retval;
   }
 
-  alias getCursor = Widget.getCursor;
+  alias getCursor = gtk.widget.Widget.getCursor;
 
   /**
    * Fills in path and cell with the current cursor path and cell.
@@ -244,14 +242,14 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  bool getCursor(out TreePath path, out CellRenderer cell)
+  bool getCursor(out gtk.tree_path.TreePath path, out gtk.cell_renderer.CellRenderer cell)
   {
     bool _retval;
     GtkTreePath* _path;
     GtkCellRenderer* _cell;
     _retval = gtk_icon_view_get_cursor(cast(GtkIconView*)cPtr, &_path, &_cell);
-    path = new TreePath(cast(void*)_path, Yes.Take);
-    cell = new CellRenderer(cast(void*)_cell, No.Take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    cell = new gtk.cell_renderer.CellRenderer(cast(void*)_cell, No.Take);
     return _retval;
   }
 
@@ -266,12 +264,12 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  bool getDestItemAtPos(int dragX, int dragY, out TreePath path, out IconViewDropPosition pos)
+  bool getDestItemAtPos(int dragX, int dragY, out gtk.tree_path.TreePath path, out gtk.types.IconViewDropPosition pos)
   {
     bool _retval;
     GtkTreePath* _path;
     _retval = gtk_icon_view_get_dest_item_at_pos(cast(GtkIconView*)cPtr, dragX, dragY, &_path, &pos);
-    path = new TreePath(cast(void*)_path, Yes.Take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
     return _retval;
   }
 
@@ -284,11 +282,11 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  void getDragDestItem(out TreePath path, out IconViewDropPosition pos)
+  void getDragDestItem(out gtk.tree_path.TreePath path, out gtk.types.IconViewDropPosition pos)
   {
     GtkTreePath* _path;
     gtk_icon_view_get_drag_dest_item(cast(GtkIconView*)cPtr, &_path, &pos);
-    path = new TreePath(cast(void*)_path, Yes.Take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
   }
 
   /**
@@ -303,14 +301,14 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  bool getItemAtPos(int x, int y, out TreePath path, out CellRenderer cell)
+  bool getItemAtPos(int x, int y, out gtk.tree_path.TreePath path, out gtk.cell_renderer.CellRenderer cell)
   {
     bool _retval;
     GtkTreePath* _path;
     GtkCellRenderer* _cell;
     _retval = gtk_icon_view_get_item_at_pos(cast(GtkIconView*)cPtr, x, y, &_path, &_cell);
-    path = new TreePath(cast(void*)_path, Yes.Take);
-    cell = new CellRenderer(cast(void*)_cell, No.Take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    cell = new gtk.cell_renderer.CellRenderer(cast(void*)_cell, No.Take);
     return _retval;
   }
 
@@ -323,7 +321,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  int getItemColumn(TreePath path)
+  int getItemColumn(gtk.tree_path.TreePath path)
   {
     int _retval;
     _retval = gtk_icon_view_get_item_column(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
@@ -337,11 +335,11 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  Orientation getItemOrientation()
+  gtk.types.Orientation getItemOrientation()
   {
     GtkOrientation _cretval;
     _cretval = gtk_icon_view_get_item_orientation(cast(GtkIconView*)cPtr);
-    Orientation _retval = cast(Orientation)_cretval;
+    gtk.types.Orientation _retval = cast(gtk.types.Orientation)_cretval;
     return _retval;
   }
 
@@ -367,7 +365,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  int getItemRow(TreePath path)
+  int getItemRow(gtk.tree_path.TreePath path)
   {
     int _retval;
     _retval = gtk_icon_view_get_item_row(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
@@ -420,11 +418,11 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  TreeModel getModel()
+  gtk.tree_model.TreeModel getModel()
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_icon_view_get_model(cast(GtkIconView*)cPtr);
-    auto _retval = ObjectG.getDObject!TreeModel(cast(GtkTreeModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -438,11 +436,11 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  TreePath getPathAtPos(int x, int y)
+  gtk.tree_path.TreePath getPathAtPos(int x, int y)
   {
     GtkTreePath* _cretval;
     _cretval = gtk_icon_view_get_path_at_pos(cast(GtkIconView*)cPtr, x, y);
-    auto _retval = _cretval ? new TreePath(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -503,11 +501,11 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  TreePath[] getSelectedItems()
+  gtk.tree_path.TreePath[] getSelectedItems()
   {
     GList* _cretval;
     _cretval = gtk_icon_view_get_selected_items(cast(GtkIconView*)cPtr);
-    auto _retval = gListToD!(TreePath, GidOwnership.Full)(cast(GList*)_cretval);
+    auto _retval = gListToD!(gtk.tree_path.TreePath, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
 
@@ -517,11 +515,11 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  SelectionMode getSelectionMode()
+  gtk.types.SelectionMode getSelectionMode()
   {
     GtkSelectionMode _cretval;
     _cretval = gtk_icon_view_get_selection_mode(cast(GtkIconView*)cPtr);
-    SelectionMode _retval = cast(SelectionMode)_cretval;
+    gtk.types.SelectionMode _retval = cast(gtk.types.SelectionMode)_cretval;
     return _retval;
   }
 
@@ -587,16 +585,16 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  bool getTooltipContext(int x, int y, bool keyboardTip, out TreeModel model, out TreePath path, out TreeIter iter)
+  bool getTooltipContext(int x, int y, bool keyboardTip, out gtk.tree_model.TreeModel model, out gtk.tree_path.TreePath path, out gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
     GtkTreeModel* _model;
     GtkTreePath* _path;
     GtkTreeIter _iter;
     _retval = gtk_icon_view_get_tooltip_context(cast(GtkIconView*)cPtr, x, y, keyboardTip, &_model, &_path, &_iter);
-    model = ObjectG.getDObject!TreeModel(_model, No.Take);
-    path = new TreePath(cast(void*)_path, Yes.Take);
-    iter = new TreeIter(cast(void*)&_iter, No.Take);
+    model = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -611,14 +609,14 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  bool getVisibleRange(out TreePath startPath, out TreePath endPath)
+  bool getVisibleRange(out gtk.tree_path.TreePath startPath, out gtk.tree_path.TreePath endPath)
   {
     bool _retval;
     GtkTreePath* _startPath;
     GtkTreePath* _endPath;
     _retval = gtk_icon_view_get_visible_range(cast(GtkIconView*)cPtr, &_startPath, &_endPath);
-    startPath = new TreePath(cast(void*)_startPath, Yes.Take);
-    endPath = new TreePath(cast(void*)_endPath, Yes.Take);
+    startPath = new gtk.tree_path.TreePath(cast(void*)_startPath, Yes.Take);
+    endPath = new gtk.tree_path.TreePath(cast(void*)_endPath, Yes.Take);
     return _retval;
   }
 
@@ -629,7 +627,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  void itemActivated(TreePath path)
+  void itemActivated(gtk.tree_path.TreePath path)
   {
     gtk_icon_view_item_activated(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
@@ -643,7 +641,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  bool pathIsSelected(TreePath path)
+  bool pathIsSelected(gtk.tree_path.TreePath path)
   {
     bool _retval;
     _retval = gtk_icon_view_path_is_selected(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
@@ -671,7 +669,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  void scrollToPath(TreePath path, bool useAlign, float rowAlign, float colAlign)
+  void scrollToPath(gtk.tree_path.TreePath path, bool useAlign, float rowAlign, float colAlign)
   {
     gtk_icon_view_scroll_to_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, useAlign, rowAlign, colAlign);
   }
@@ -694,7 +692,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  void selectPath(TreePath path)
+  void selectPath(gtk.tree_path.TreePath path)
   {
     gtk_icon_view_select_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
@@ -707,13 +705,13 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  void selectedForeach(IconViewForeachFunc func)
+  void selectedForeach(gtk.types.IconViewForeachFunc func)
   {
     extern(C) void _funcCallback(GtkIconView* iconView, GtkTreePath* path, void* data)
     {
-      auto _dlg = cast(IconViewForeachFunc*)data;
+      auto _dlg = cast(gtk.types.IconViewForeachFunc*)data;
 
-      (*_dlg)(ObjectG.getDObject!IconView(cast(void*)iconView, No.Take), path ? new TreePath(cast(void*)path, No.Take) : null);
+      (*_dlg)(ObjectG.getDObject!(gtk.icon_view.IconView)(cast(void*)iconView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -762,7 +760,7 @@ class IconView : Widget, CellLayout, Scrollable
     gtk_icon_view_set_columns(cast(GtkIconView*)cPtr, columns);
   }
 
-  alias setCursor = Widget.setCursor;
+  alias setCursor = gtk.widget.Widget.setCursor;
 
   /**
    * Sets the current keyboard focus to be at path, and selects it.  This is
@@ -780,7 +778,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  void setCursor(TreePath path, CellRenderer cell, bool startEditing)
+  void setCursor(gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell, bool startEditing)
   {
     gtk_icon_view_set_cursor(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, startEditing);
   }
@@ -793,7 +791,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  void setDragDestItem(TreePath path, IconViewDropPosition pos)
+  void setDragDestItem(gtk.tree_path.TreePath path, gtk.types.IconViewDropPosition pos)
   {
     gtk_icon_view_set_drag_dest_item(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, pos);
   }
@@ -806,7 +804,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  void setItemOrientation(Orientation orientation)
+  void setItemOrientation(gtk.types.Orientation orientation)
   {
     gtk_icon_view_set_item_orientation(cast(GtkIconView*)cPtr, orientation);
   }
@@ -877,7 +875,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  void setModel(TreeModel model)
+  void setModel(gtk.tree_model.TreeModel model)
   {
     gtk_icon_view_set_model(cast(GtkIconView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
@@ -937,7 +935,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  void setSelectionMode(SelectionMode mode)
+  void setSelectionMode(gtk.types.SelectionMode mode)
   {
     gtk_icon_view_set_selection_mode(cast(GtkIconView*)cPtr, mode);
   }
@@ -980,7 +978,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  void setTooltipCell(Tooltip tooltip, TreePath path, CellRenderer cell)
+  void setTooltipCell(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell)
   {
     gtk_icon_view_set_tooltip_cell(cast(GtkIconView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null);
   }
@@ -1014,7 +1012,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  void setTooltipItem(Tooltip tooltip, TreePath path)
+  void setTooltipItem(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path)
   {
     gtk_icon_view_set_tooltip_item(cast(GtkIconView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
@@ -1036,7 +1034,7 @@ class IconView : Widget, CellLayout, Scrollable
 
    * Deprecated: Use [gtk.grid_view.GridView] instead
    */
-  void unselectPath(TreePath path)
+  void unselectPath(gtk.tree_path.TreePath path)
   {
     gtk_icon_view_unselect_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
@@ -1074,8 +1072,8 @@ class IconView : Widget, CellLayout, Scrollable
    *   iconView = the instance the signal is connected to
    * Returns:
    */
-  alias ActivateCursorItemCallbackDlg = bool delegate(IconView iconView);
-  alias ActivateCursorItemCallbackFunc = bool function(IconView iconView);
+  alias ActivateCursorItemCallbackDlg = bool delegate(gtk.icon_view.IconView iconView);
+  alias ActivateCursorItemCallbackFunc = bool function(gtk.icon_view.IconView iconView);
 
   /**
    * Connect to ActivateCursorItem signal.
@@ -1092,7 +1090,7 @@ class IconView : Widget, CellLayout, Scrollable
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto iconView = getVal!IconView(_paramVals);
+      auto iconView = getVal!(gtk.icon_view.IconView)(_paramVals);
       _retval = _dClosure.dlg(iconView);
       setVal!bool(_returnValue, _retval);
     }
@@ -1113,8 +1111,8 @@ class IconView : Widget, CellLayout, Scrollable
    *   path = the `GtkTreePath` for the activated item
    *   iconView = the instance the signal is connected to
    */
-  alias ItemActivatedCallbackDlg = void delegate(TreePath path, IconView iconView);
-  alias ItemActivatedCallbackFunc = void function(TreePath path, IconView iconView);
+  alias ItemActivatedCallbackDlg = void delegate(gtk.tree_path.TreePath path, gtk.icon_view.IconView iconView);
+  alias ItemActivatedCallbackFunc = void function(gtk.tree_path.TreePath path, gtk.icon_view.IconView iconView);
 
   /**
    * Connect to ItemActivated signal.
@@ -1130,8 +1128,8 @@ class IconView : Widget, CellLayout, Scrollable
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto iconView = getVal!IconView(_paramVals);
-      auto path = getVal!TreePath(&_paramVals[1]);
+      auto iconView = getVal!(gtk.icon_view.IconView)(_paramVals);
+      auto path = getVal!(gtk.tree_path.TreePath)(&_paramVals[1]);
       _dClosure.dlg(path, iconView);
     }
 
@@ -1160,8 +1158,8 @@ class IconView : Widget, CellLayout, Scrollable
    *   iconView = the instance the signal is connected to
    * Returns:
    */
-  alias MoveCursorCallbackDlg = bool delegate(MovementStep step, int count, bool extend, bool modify, IconView iconView);
-  alias MoveCursorCallbackFunc = bool function(MovementStep step, int count, bool extend, bool modify, IconView iconView);
+  alias MoveCursorCallbackDlg = bool delegate(gtk.types.MovementStep step, int count, bool extend, bool modify, gtk.icon_view.IconView iconView);
+  alias MoveCursorCallbackFunc = bool function(gtk.types.MovementStep step, int count, bool extend, bool modify, gtk.icon_view.IconView iconView);
 
   /**
    * Connect to MoveCursor signal.
@@ -1178,11 +1176,11 @@ class IconView : Widget, CellLayout, Scrollable
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       bool _retval;
-      auto iconView = getVal!IconView(_paramVals);
-      auto step = getVal!MovementStep(&_paramVals[1]);
-      auto count = getVal!int(&_paramVals[2]);
-      auto extend = getVal!bool(&_paramVals[3]);
-      auto modify = getVal!bool(&_paramVals[4]);
+      auto iconView = getVal!(gtk.icon_view.IconView)(_paramVals);
+      auto step = getVal!(gtk.types.MovementStep)(&_paramVals[1]);
+      auto count = getVal!(int)(&_paramVals[2]);
+      auto extend = getVal!(bool)(&_paramVals[3]);
+      auto modify = getVal!(bool)(&_paramVals[4]);
       _retval = _dClosure.dlg(step, count, extend, modify, iconView);
       setVal!bool(_returnValue, _retval);
     }
@@ -1200,8 +1198,8 @@ class IconView : Widget, CellLayout, Scrollable
    * The default binding for this signal is Ctrl-a.
    *   iconView = the instance the signal is connected to
    */
-  alias SelectAllCallbackDlg = void delegate(IconView iconView);
-  alias SelectAllCallbackFunc = void function(IconView iconView);
+  alias SelectAllCallbackDlg = void delegate(gtk.icon_view.IconView iconView);
+  alias SelectAllCallbackFunc = void function(gtk.icon_view.IconView iconView);
 
   /**
    * Connect to SelectAll signal.
@@ -1217,7 +1215,7 @@ class IconView : Widget, CellLayout, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto iconView = getVal!IconView(_paramVals);
+      auto iconView = getVal!(gtk.icon_view.IconView)(_paramVals);
       _dClosure.dlg(iconView);
     }
 
@@ -1235,8 +1233,8 @@ class IconView : Widget, CellLayout, Scrollable
    * There is no default binding for this signal.
    *   iconView = the instance the signal is connected to
    */
-  alias SelectCursorItemCallbackDlg = void delegate(IconView iconView);
-  alias SelectCursorItemCallbackFunc = void function(IconView iconView);
+  alias SelectCursorItemCallbackDlg = void delegate(gtk.icon_view.IconView iconView);
+  alias SelectCursorItemCallbackFunc = void function(gtk.icon_view.IconView iconView);
 
   /**
    * Connect to SelectCursorItem signal.
@@ -1252,7 +1250,7 @@ class IconView : Widget, CellLayout, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto iconView = getVal!IconView(_paramVals);
+      auto iconView = getVal!(gtk.icon_view.IconView)(_paramVals);
       _dClosure.dlg(iconView);
     }
 
@@ -1265,8 +1263,8 @@ class IconView : Widget, CellLayout, Scrollable
    * $(LPAREN)i.e. the set of selected items$(RPAREN) changes.
    *   iconView = the instance the signal is connected to
    */
-  alias SelectionChangedCallbackDlg = void delegate(IconView iconView);
-  alias SelectionChangedCallbackFunc = void function(IconView iconView);
+  alias SelectionChangedCallbackDlg = void delegate(gtk.icon_view.IconView iconView);
+  alias SelectionChangedCallbackFunc = void function(gtk.icon_view.IconView iconView);
 
   /**
    * Connect to SelectionChanged signal.
@@ -1282,7 +1280,7 @@ class IconView : Widget, CellLayout, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto iconView = getVal!IconView(_paramVals);
+      auto iconView = getVal!(gtk.icon_view.IconView)(_paramVals);
       _dClosure.dlg(iconView);
     }
 
@@ -1301,8 +1299,8 @@ class IconView : Widget, CellLayout, Scrollable
    * There is no default binding for this signal is Ctrl-Space.
    *   iconView = the instance the signal is connected to
    */
-  alias ToggleCursorItemCallbackDlg = void delegate(IconView iconView);
-  alias ToggleCursorItemCallbackFunc = void function(IconView iconView);
+  alias ToggleCursorItemCallbackDlg = void delegate(gtk.icon_view.IconView iconView);
+  alias ToggleCursorItemCallbackFunc = void function(gtk.icon_view.IconView iconView);
 
   /**
    * Connect to ToggleCursorItem signal.
@@ -1318,7 +1316,7 @@ class IconView : Widget, CellLayout, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto iconView = getVal!IconView(_paramVals);
+      auto iconView = getVal!(gtk.icon_view.IconView)(_paramVals);
       _dClosure.dlg(iconView);
     }
 
@@ -1335,8 +1333,8 @@ class IconView : Widget, CellLayout, Scrollable
    * The default binding for this signal is Ctrl-Shift-a.
    *   iconView = the instance the signal is connected to
    */
-  alias UnselectAllCallbackDlg = void delegate(IconView iconView);
-  alias UnselectAllCallbackFunc = void function(IconView iconView);
+  alias UnselectAllCallbackDlg = void delegate(gtk.icon_view.IconView iconView);
+  alias UnselectAllCallbackFunc = void function(gtk.icon_view.IconView iconView);
 
   /**
    * Connect to UnselectAll signal.
@@ -1352,7 +1350,7 @@ class IconView : Widget, CellLayout, Scrollable
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto iconView = getVal!IconView(_paramVals);
+      auto iconView = getVal!(gtk.icon_view.IconView)(_paramVals);
       _dClosure.dlg(iconView);
     }
 

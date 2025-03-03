@@ -5,7 +5,7 @@ import gio.dbus_object_manager;
 import gio.dbus_object_manager_mixin;
 
 /// Proxy object for Gio.DBusObjectManager interface when a GObject has no applicable D binding
-class DBusObjectManagerIfaceProxy : IfaceProxy, DBusObjectManager
+class DBusObjectManagerIfaceProxy : IfaceProxy, gio.dbus_object_manager.DBusObjectManager
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class DBusObjectManagerIfaceProxy : IfaceProxy, DBusObjectManager
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(DBusObjectManager);
+    return typeid(gio.dbus_object_manager.DBusObjectManager);
   }
 
   mixin DBusObjectManagerT!();

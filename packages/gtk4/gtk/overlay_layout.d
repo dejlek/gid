@@ -1,6 +1,6 @@
 module gtk.overlay_layout;
 
-import gid.global;
+import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.layout_manager;
@@ -13,7 +13,7 @@ import gtk.types;
  * to be a `GtkOverlay`. It is only listed here so that its layout
  * properties get documented.
  */
-class OverlayLayout : LayoutManager
+class OverlayLayout : gtk.layout_manager.LayoutManager
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

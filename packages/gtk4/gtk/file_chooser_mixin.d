@@ -1,11 +1,9 @@
 module gtk.file_chooser_mixin;
 
 public import gtk.file_chooser_iface_proxy;
-public import gid.global;
+public import gid.gid;
 public import gio.file;
-public import gio.file_mixin;
 public import gio.list_model;
-public import gio.list_model_mixin;
 public import glib.error;
 public import gobject.object;
 public import gtk.c.functions;
@@ -95,7 +93,7 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override void addFilter(FileFilter filter)
+  override void addFilter(gtk.file_filter.FileFilter filter)
   {
     gtk_file_chooser_add_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.Dup) : null);
   }
@@ -110,7 +108,7 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override bool addShortcutFolder(File folder)
+  override bool addShortcutFolder(gio.file.File folder)
   {
     bool _retval;
     GError *_err;
@@ -126,11 +124,11 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override FileChooserAction getAction()
+  override gtk.types.FileChooserAction getAction()
   {
     GtkFileChooserAction _cretval;
     _cretval = gtk_file_chooser_get_action(cast(GtkFileChooser*)cPtr);
-    FileChooserAction _retval = cast(FileChooserAction)_cretval;
+    gtk.types.FileChooserAction _retval = cast(gtk.types.FileChooserAction)_cretval;
     return _retval;
   }
 
@@ -147,7 +145,7 @@ template FileChooserT()
     const(char)* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
     _cretval = gtk_file_chooser_get_choice(cast(GtkFileChooser*)cPtr, _id);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -170,11 +168,11 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override File getCurrentFolder()
+  override gio.file.File getCurrentFolder()
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_current_folder(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -194,7 +192,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_current_name(cast(GtkFileChooser*)cPtr);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -210,11 +208,11 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override File getFile()
+  override gio.file.File getFile()
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_file(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!File(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -227,11 +225,11 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override ListModel getFiles()
+  override gio.list_model.ListModel getFiles()
   {
     GListModel* _cretval;
     _cretval = gtk_file_chooser_get_files(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -241,11 +239,11 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override FileFilter getFilter()
+  override gtk.file_filter.FileFilter getFilter()
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_chooser_get_filter(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!FileFilter(cast(GtkFileFilter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -260,11 +258,11 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override ListModel getFilters()
+  override gio.list_model.ListModel getFilters()
   {
     GListModel* _cretval;
     _cretval = gtk_file_chooser_get_filters(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -290,11 +288,11 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override ListModel getShortcutFolders()
+  override gio.list_model.ListModel getShortcutFolders()
   {
     GListModel* _cretval;
     _cretval = gtk_file_chooser_get_shortcut_folders(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!ListModel(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -318,7 +316,7 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override void removeFilter(FileFilter filter)
+  override void removeFilter(gtk.file_filter.FileFilter filter)
   {
     gtk_file_chooser_remove_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.Dup) : null);
   }
@@ -332,7 +330,7 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override bool removeShortcutFolder(File folder)
+  override bool removeShortcutFolder(gio.file.File folder)
   {
     bool _retval;
     GError *_err;
@@ -353,7 +351,7 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override void setAction(FileChooserAction action)
+  override void setAction(gtk.types.FileChooserAction action)
   {
     gtk_file_chooser_set_action(cast(GtkFileChooser*)cPtr, action);
   }
@@ -398,7 +396,7 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override bool setCurrentFolder(File file)
+  override bool setCurrentFolder(gio.file.File file)
   {
     bool _retval;
     GError *_err;
@@ -472,7 +470,7 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override bool setFile(File file)
+  override bool setFile(gio.file.File file)
   {
     bool _retval;
     GError *_err;
@@ -495,7 +493,7 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override void setFilter(FileFilter filter)
+  override void setFilter(gtk.file_filter.FileFilter filter)
   {
     gtk_file_chooser_set_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.Dup) : null);
   }

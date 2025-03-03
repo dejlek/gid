@@ -2,7 +2,7 @@ module gtk.tree_drag_source_mixin;
 
 public import gtk.tree_drag_source_iface_proxy;
 public import gdk.content_provider;
-public import gid.global;
+public import gid.gid;
 public import gobject.object;
 public import gtk.c.functions;
 public import gtk.c.types;
@@ -30,7 +30,7 @@ template TreeDragSourceT()
 
    * Deprecated: Use list models instead
    */
-  override bool dragDataDelete(TreePath path)
+  override bool dragDataDelete(gtk.tree_path.TreePath path)
   {
     bool _retval;
     _retval = gtk_tree_drag_source_drag_data_delete(cast(GtkTreeDragSource*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
@@ -48,11 +48,11 @@ template TreeDragSourceT()
 
    * Deprecated: Use list models instead
    */
-  override ContentProvider dragDataGet(TreePath path)
+  override gdk.content_provider.ContentProvider dragDataGet(gtk.tree_path.TreePath path)
   {
     GdkContentProvider* _cretval;
     _cretval = gtk_tree_drag_source_drag_data_get(cast(GtkTreeDragSource*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!ContentProvider(cast(GdkContentProvider*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -66,7 +66,7 @@ template TreeDragSourceT()
 
    * Deprecated: Use list models instead
    */
-  override bool rowDraggable(TreePath path)
+  override bool rowDraggable(gtk.tree_path.TreePath path)
   {
     bool _retval;
     _retval = gtk_tree_drag_source_row_draggable(cast(GtkTreeDragSource*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);

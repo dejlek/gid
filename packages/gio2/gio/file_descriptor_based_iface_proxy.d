@@ -5,7 +5,7 @@ import gio.file_descriptor_based;
 import gio.file_descriptor_based_mixin;
 
 /// Proxy object for Gio.FileDescriptorBased interface when a GObject has no applicable D binding
-class FileDescriptorBasedIfaceProxy : IfaceProxy, FileDescriptorBased
+class FileDescriptorBasedIfaceProxy : IfaceProxy, gio.file_descriptor_based.FileDescriptorBased
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class FileDescriptorBasedIfaceProxy : IfaceProxy, FileDescriptorBased
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(FileDescriptorBased);
+    return typeid(gio.file_descriptor_based.FileDescriptorBased);
   }
 
   mixin FileDescriptorBasedT!();

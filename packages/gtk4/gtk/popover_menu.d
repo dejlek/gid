@@ -1,6 +1,6 @@
 module gtk.popover_menu;
 
-import gid.global;
+import gid.gid;
 import gio.menu_model;
 import gobject.object;
 import gtk.accessible;
@@ -111,7 +111,7 @@ import gtk.widget;
  * %GTK_ACCESSIBLE_ROLE_MENU_ITEM_RADIO roles, depending on the
  * action they are connected to.
  */
-class PopoverMenu : Popover
+class PopoverMenu : gtk.popover.Popover
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -145,11 +145,11 @@ class PopoverMenu : Popover
    *   model = a `GMenuModel`
    * Returns: the new `GtkPopoverMenu`
    */
-  static PopoverMenu newFromModel(MenuModel model)
+  static gtk.popover_menu.PopoverMenu newFromModel(gio.menu_model.MenuModel model)
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_menu_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!PopoverMenu(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -165,11 +165,11 @@ class PopoverMenu : Popover
    *   flags = flags that affect how the menu is created
    * Returns: the new `GtkPopoverMenu`
    */
-  static PopoverMenu newFromModelFull(MenuModel model, PopoverMenuFlags flags)
+  static gtk.popover_menu.PopoverMenu newFromModelFull(gio.menu_model.MenuModel model, gtk.types.PopoverMenuFlags flags)
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_menu_new_from_model_full(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null, flags);
-    auto _retval = ObjectG.getDObject!PopoverMenu(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class PopoverMenu : Popover
    *   id = the ID to insert child at
    * Returns: %TRUE if id was found and the widget added
    */
-  bool addChild(Widget child, string id)
+  bool addChild(gtk.widget.Widget child, string id)
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -194,11 +194,11 @@ class PopoverMenu : Popover
    * Returns the flags that popover uses to create/display a menu from its model.
    * Returns: the `GtkPopoverMenuFlags`
    */
-  PopoverMenuFlags getFlags()
+  gtk.types.PopoverMenuFlags getFlags()
   {
     GtkPopoverMenuFlags _cretval;
     _cretval = gtk_popover_menu_get_flags(cast(GtkPopoverMenu*)cPtr);
-    PopoverMenuFlags _retval = cast(PopoverMenuFlags)_cretval;
+    gtk.types.PopoverMenuFlags _retval = cast(gtk.types.PopoverMenuFlags)_cretval;
     return _retval;
   }
 
@@ -206,11 +206,11 @@ class PopoverMenu : Popover
    * Returns the menu model used to populate the popover.
    * Returns: the menu model of popover
    */
-  MenuModel getMenuModel()
+  gio.menu_model.MenuModel getMenuModel()
   {
     GMenuModel* _cretval;
     _cretval = gtk_popover_menu_get_menu_model(cast(GtkPopoverMenu*)cPtr);
-    auto _retval = ObjectG.getDObject!MenuModel(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class PopoverMenu : Popover
    *   child = the `GtkWidget` to remove
    * Returns: %TRUE if the widget was removed
    */
-  bool removeChild(Widget child)
+  bool removeChild(gtk.widget.Widget child)
   {
     bool _retval;
     _retval = gtk_popover_menu_remove_child(cast(GtkPopoverMenu*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
@@ -235,7 +235,7 @@ class PopoverMenu : Popover
    * Params:
    *   flags = a set of `GtkPopoverMenuFlags`
    */
-  void setFlags(PopoverMenuFlags flags)
+  void setFlags(gtk.types.PopoverMenuFlags flags)
   {
     gtk_popover_menu_set_flags(cast(GtkPopoverMenu*)cPtr, flags);
   }
@@ -248,7 +248,7 @@ class PopoverMenu : Popover
    * Params:
    *   model = a `GMenuModel`
    */
-  void setMenuModel(MenuModel model)
+  void setMenuModel(gio.menu_model.MenuModel model)
   {
     gtk_popover_menu_set_menu_model(cast(GtkPopoverMenu*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }

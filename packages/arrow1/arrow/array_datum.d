@@ -5,9 +5,9 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.datum;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class ArrayDatum : Datum
+class ArrayDatum : arrow.datum.Datum
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class ArrayDatum : Datum
     return getType();
   }
 
-  this(Array value)
+  this(arrow.array.Array value)
   {
     GArrowArrayDatum* _cretval;
     _cretval = garrow_array_datum_new(value ? cast(GArrowArray*)value.cPtr(No.Dup) : null);

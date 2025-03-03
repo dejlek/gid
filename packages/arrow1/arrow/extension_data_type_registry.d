@@ -4,11 +4,11 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.extension_data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class ExtensionDataTypeRegistry : ObjectG
+class ExtensionDataTypeRegistry : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -27,20 +27,20 @@ class ExtensionDataTypeRegistry : ObjectG
     return getType();
   }
 
-  static ExtensionDataTypeRegistry default_()
+  static arrow.extension_data_type_registry.ExtensionDataTypeRegistry default_()
   {
     GArrowExtensionDataTypeRegistry* _cretval;
     _cretval = garrow_extension_data_type_registry_default();
-    auto _retval = ObjectG.getDObject!ExtensionDataTypeRegistry(cast(GArrowExtensionDataTypeRegistry*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.extension_data_type_registry.ExtensionDataTypeRegistry)(cast(GArrowExtensionDataTypeRegistry*)_cretval, Yes.Take);
     return _retval;
   }
 
-  ExtensionDataType lookup(string name)
+  arrow.extension_data_type.ExtensionDataType lookup(string name)
   {
     GArrowExtensionDataType* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = garrow_extension_data_type_registry_lookup(cast(GArrowExtensionDataTypeRegistry*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!ExtensionDataType(cast(GArrowExtensionDataType*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.extension_data_type.ExtensionDataType)(cast(GArrowExtensionDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -50,7 +50,7 @@ class ExtensionDataTypeRegistry : ObjectG
    *   dataType = A #GArrowExtensionDataType to be registered.
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool register(ExtensionDataType dataType)
+  bool register(arrow.extension_data_type.ExtensionDataType dataType)
   {
     bool _retval;
     GError *_err;

@@ -4,9 +4,9 @@ import arrow.c.functions;
 import arrow.c.types;
 import arrow.data_type;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class LargeBinaryDataType : DataType
+class LargeBinaryDataType : arrow.data_type.DataType
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

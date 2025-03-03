@@ -5,11 +5,11 @@ import arrow.c.types;
 import arrow.record_batch;
 import arrow.schema;
 import arrow.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class StreamListener : ObjectG
+class StreamListener : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -49,7 +49,7 @@ class StreamListener : ObjectG
    *   metadata = A decoded metadata.
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool onRecordBatchDecoded(RecordBatch recordBatch, string[string] metadata)
+  bool onRecordBatchDecoded(arrow.record_batch.RecordBatch recordBatch, string[string] metadata)
   {
     bool _retval;
     auto _metadata = gHashTableFromD!(string, string)(metadata);
@@ -68,7 +68,7 @@ class StreamListener : ObjectG
    *   filteredSchema = A decoded #GArrowSchema that only has read fields.
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool onSchemaDecoded(Schema schema, Schema filteredSchema)
+  bool onSchemaDecoded(arrow.schema.Schema schema, arrow.schema.Schema filteredSchema)
   {
     bool _retval;
     GError *_err;

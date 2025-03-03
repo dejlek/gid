@@ -2,10 +2,9 @@ module rsvg.handle;
 
 import cairo.context;
 import gdkpixbuf.pixbuf;
-import gid.global;
+import gid.gid;
 import gio.cancellable;
 import gio.file;
-import gio.file_mixin;
 import gio.input_stream;
 import glib.error;
 import gobject.object;
@@ -94,7 +93,7 @@ import rsvg.types;
  * You can load an [rsvg.handle.Handle] from a simple filename or URI with
  * [rsvg.handle.Handle.newFromFile].  Note that this is a blocking operation; there
  * is no way to cancel it if loading a remote URI takes a long time.  Also, note that
- * this method does not let you specify [rsvg.HandleFlags].
+ * this method does not let you specify [rsvg.types.HandleFlags].
  * Otherwise, loading an SVG without GIO is not recommended, since librsvg will
  * need to buffer your entire data internally before actually being able to
  * parse it.  The deprecated way of doing this is by creating a handle with
@@ -133,7 +132,7 @@ import rsvg.types;
  * ordering, and panic if they are called out of order.  This will abort
  * the program as if it had a failed assertion.
  */
-class Handle : ObjectG
+class Handle : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -166,7 +165,7 @@ class Handle : ObjectG
    * a GdkPixbuf from it. When finished, free the handle with [gobject.object.ObjectG.unref]. No
    * more than one image can be loaded with one handle.
    * Note that this function creates an [rsvg.handle.Handle] with no flags set.  If you
-   * require any of [rsvg.HandleFlags] to be set, use any of
+   * require any of [rsvg.types.HandleFlags] to be set, use any of
    * [rsvg.handle.Handle.newWithFlags], [rsvg.handle.Handle.newFromStreamSync], or
    * [rsvg.handle.Handle.newFromGfileSync].
    * Returns: A new [rsvg.handle.Handle] with no flags set.
@@ -180,14 +179,14 @@ class Handle : ObjectG
 
   /**
    * Loads the SVG specified by data.  Note that this function creates an
-   * [rsvg.handle.Handle] without a base URL, and without any [rsvg.HandleFlags].  If you
+   * [rsvg.handle.Handle] without a base URL, and without any [rsvg.types.HandleFlags].  If you
    * need these, use [rsvg.handle.Handle.newFromStreamSync] instead by creating
    * a [gio.memory_input_stream.MemoryInputStream] from your data.
    * Params:
    *   data = The SVG data
    * Returns: A [rsvg.handle.Handle] or `NULL` if an error occurs.
    */
-  static Handle newFromData(ubyte[] data)
+  static rsvg.handle.Handle newFromData(ubyte[] data)
   {
     RsvgHandle* _cretval;
     size_t _dataLen;
@@ -199,20 +198,20 @@ class Handle : ObjectG
     _cretval = rsvg_handle_new_from_data(_data, _dataLen, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Handle(cast(RsvgHandle*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
 
   /**
    * Loads the SVG specified by file_name.  Note that this function, like
    * [rsvg.handle.Handle.new_], does not specify any loading flags for the resulting
-   * handle.  If you require the use of [rsvg.HandleFlags], use
+   * handle.  If you require the use of [rsvg.types.HandleFlags], use
    * [rsvg.handle.Handle.newFromGfileSync].
    * Params:
    *   filename = The file name to load, or a URI.
    * Returns: A [rsvg.handle.Handle] or `NULL` if an error occurs.
    */
-  static Handle newFromFile(string filename)
+  static rsvg.handle.Handle newFromFile(string filename)
   {
     RsvgHandle* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -220,7 +219,7 @@ class Handle : ObjectG
     _cretval = rsvg_handle_new_from_file(_filename, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Handle(cast(RsvgHandle*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -235,18 +234,18 @@ class Handle : ObjectG
    * returned in error.
    * Params:
    *   file = a `GFile`
-   *   flags = flags from [rsvg.HandleFlags]
+   *   flags = flags from [rsvg.types.HandleFlags]
    *   cancellable = a `GCancellable`, or `NULL`
    * Returns: a new [rsvg.handle.Handle] on success, or `NULL` with error filled in
    */
-  static Handle newFromGfileSync(File file, HandleFlags flags, Cancellable cancellable)
+  static rsvg.handle.Handle newFromGfileSync(gio.file.File file, rsvg.types.HandleFlags flags, gio.cancellable.Cancellable cancellable)
   {
     RsvgHandle* _cretval;
     GError *_err;
     _cretval = rsvg_handle_new_from_gfile_sync(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Handle(cast(RsvgHandle*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -262,18 +261,18 @@ class Handle : ObjectG
    * Params:
    *   inputStream = a `GInputStream`
    *   baseFile = a `GFile`, or `NULL`
-   *   flags = flags from [rsvg.HandleFlags]
+   *   flags = flags from [rsvg.types.HandleFlags]
    *   cancellable = a `GCancellable`, or `NULL`
    * Returns: a new [rsvg.handle.Handle] on success, or `NULL` with error filled in
    */
-  static Handle newFromStreamSync(InputStream inputStream, File baseFile, HandleFlags flags, Cancellable cancellable)
+  static rsvg.handle.Handle newFromStreamSync(gio.input_stream.InputStream inputStream, gio.file.File baseFile, rsvg.types.HandleFlags flags, gio.cancellable.Cancellable cancellable)
   {
     RsvgHandle* _cretval;
     GError *_err;
     _cretval = rsvg_handle_new_from_stream_sync(inputStream ? cast(GInputStream*)inputStream.cPtr(No.Dup) : null, baseFile ? cast(GFile*)(cast(ObjectG)baseFile).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!Handle(cast(RsvgHandle*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -282,14 +281,14 @@ class Handle : ObjectG
    * you can feed the resulting handle with SVG data by using
    * [rsvg.handle.Handle.readStreamSync].
    * Params:
-   *   flags = flags from [rsvg.HandleFlags]
+   *   flags = flags from [rsvg.types.HandleFlags]
    * Returns: a new [rsvg.handle.Handle]
    */
-  static Handle newWithFlags(HandleFlags flags)
+  static rsvg.handle.Handle newWithFlags(rsvg.types.HandleFlags flags)
   {
     RsvgHandle* _cretval;
     _cretval = rsvg_handle_new_with_flags(flags);
-    auto _retval = ObjectG.getDObject!Handle(cast(RsvgHandle*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -327,7 +326,7 @@ class Handle : ObjectG
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_base_uri(cast(RsvgHandle*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -335,7 +334,7 @@ class Handle : ObjectG
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_desc(cast(RsvgHandle*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -351,7 +350,7 @@ class Handle : ObjectG
    *   function is deprecated because it is not able to return exact fractional dimensions,
    *   only integer pixels.
    */
-  void getDimensions(out DimensionData dimensionData)
+  void getDimensions(out rsvg.types.DimensionData dimensionData)
   {
     rsvg_handle_get_dimensions(cast(RsvgHandle*)cPtr, &dimensionData);
   }
@@ -373,7 +372,7 @@ class Handle : ObjectG
 
    * Deprecated: Use [rsvg.handle.Handle.getGeometryForLayer] instead.
    */
-  bool getDimensionsSub(out DimensionData dimensionData, string id)
+  bool getDimensionsSub(out rsvg.types.DimensionData dimensionData, string id)
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -415,7 +414,7 @@ class Handle : ObjectG
    *   the section "[API ordering](class.Handle.html#api-ordering)" for details.
    *   Panics: this function will panic if the handle is not fully-loaded.
    */
-  bool getGeometryForElement(string id, out Rectangle outInkRect, out Rectangle outLogicalRect)
+  bool getGeometryForElement(string id, out rsvg.types.Rectangle outInkRect, out rsvg.types.Rectangle outLogicalRect)
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -457,7 +456,7 @@ class Handle : ObjectG
    *   the section "[API ordering](class.Handle.html#api-ordering)" for details.
    *   Panics: this function will panic if the handle is not fully-loaded.
    */
-  bool getGeometryForLayer(string id, Rectangle viewport, out Rectangle outInkRect, out Rectangle outLogicalRect)
+  bool getGeometryForLayer(string id, rsvg.types.Rectangle viewport, out rsvg.types.Rectangle outInkRect, out rsvg.types.Rectangle outLogicalRect)
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -511,7 +510,7 @@ class Handle : ObjectG
    *   outHasViewbox = Will be set to `TRUE` if the toplevel SVG has a `viewBox` attribute
    *   outViewbox = Will be set to the value of the `viewBox` attribute in the toplevel SVG
    */
-  void getIntrinsicDimensions(out bool outHasWidth, out Length outWidth, out bool outHasHeight, out Length outHeight, out bool outHasViewbox, out Rectangle outViewbox)
+  void getIntrinsicDimensions(out bool outHasWidth, out rsvg.types.Length outWidth, out bool outHasHeight, out rsvg.types.Length outHeight, out bool outHasViewbox, out rsvg.types.Rectangle outViewbox)
   {
     rsvg_handle_get_intrinsic_dimensions(cast(RsvgHandle*)cPtr, cast(bool*)&outHasWidth, &outWidth, cast(bool*)&outHasHeight, &outHeight, cast(bool*)&outHasViewbox, &outViewbox);
   }
@@ -574,7 +573,7 @@ class Handle : ObjectG
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_metadata(cast(RsvgHandle*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -589,11 +588,11 @@ class Handle : ObjectG
    * Returns: A pixbuf, or %NULL on error.
    *   during rendering.
    */
-  Pixbuf getPixbuf()
+  gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
     _cretval = rsvg_handle_get_pixbuf(cast(RsvgHandle*)cPtr);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -619,12 +618,12 @@ class Handle : ObjectG
    * Returns: a pixbuf, or `NULL` if an error occurs
    *   during rendering.
    */
-  Pixbuf getPixbufSub(string id)
+  gdkpixbuf.pixbuf.Pixbuf getPixbufSub(string id)
   {
     PixbufC* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
     _cretval = rsvg_handle_get_pixbuf_sub(cast(RsvgHandle*)cPtr, _id);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -647,7 +646,7 @@ class Handle : ObjectG
    *   deprecated since it is not able to return exact floating-point positions, only integer
    *   pixels.
    */
-  bool getPositionSub(out PositionData positionData, string id)
+  bool getPositionSub(out rsvg.types.PositionData positionData, string id)
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -659,7 +658,7 @@ class Handle : ObjectG
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_title(cast(RsvgHandle*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -710,7 +709,7 @@ class Handle : ObjectG
    * Returns: `TRUE` if reading stream succeeded, or `FALSE` otherwise
    *   with error filled in
    */
-  bool readStreamSync(InputStream stream, Cancellable cancellable)
+  bool readStreamSync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable)
   {
     bool _retval;
     GError *_err;
@@ -760,7 +759,7 @@ class Handle : ObjectG
    * Deprecated: Please use [rsvg.handle.Handle.renderDocument] instead; that function lets
    *   you pass a viewport and obtain a good error message.
    */
-  bool renderCairo(Context cr)
+  bool renderCairo(cairo.context.Context cr)
   {
     bool _retval;
     _retval = rsvg_handle_render_cairo(cast(RsvgHandle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
@@ -816,7 +815,7 @@ class Handle : ObjectG
    * Deprecated: Please use [rsvg.handle.Handle.renderLayer] instead; that function lets
    *   you pass a viewport and obtain a good error message.
    */
-  bool renderCairoSub(Context cr, string id)
+  bool renderCairoSub(cairo.context.Context cr, string id)
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -839,7 +838,7 @@ class Handle : ObjectG
    *   the section "[API ordering](class.Handle.html#api-ordering)" for details.
    *   Panics: this function will panic if the handle is not fully-loaded.
    */
-  bool renderDocument(Context cr, Rectangle viewport)
+  bool renderDocument(cairo.context.Context cr, rsvg.types.Rectangle viewport)
   {
     bool _retval;
     GError *_err;
@@ -875,7 +874,7 @@ class Handle : ObjectG
    *   the section "[API ordering](class.Handle.html#api-ordering)" for details.
    *   Panics: this function will panic if the handle is not fully-loaded.
    */
-  bool renderElement(Context cr, string id, Rectangle elementViewport)
+  bool renderElement(cairo.context.Context cr, string id, rsvg.types.Rectangle elementViewport)
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -915,7 +914,7 @@ class Handle : ObjectG
    *   the section "[API ordering](class.Handle.html#api-ordering)" for details.
    *   Panics: this function will panic if the handle is not fully-loaded.
    */
-  bool renderLayer(Context cr, string id, Rectangle viewport)
+  bool renderLayer(cairo.context.Context cr, string id, rsvg.types.Rectangle viewport)
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -933,7 +932,7 @@ class Handle : ObjectG
    * Params:
    *   baseFile = a `GFile`
    */
-  void setBaseGfile(File baseFile)
+  void setBaseGfile(gio.file.File baseFile)
   {
     rsvg_handle_set_base_gfile(cast(RsvgHandle*)cPtr, baseFile ? cast(GFile*)(cast(ObjectG)baseFile).cPtr(No.Dup) : null);
   }
@@ -1002,11 +1001,11 @@ class Handle : ObjectG
    *   refers to the whole SVG or to just a sub-element of it.  It is easier, and
    *   unambiguous, to use code similar to the example above.
    */
-  void setSizeCallback(SizeFunc sizeFunc)
+  void setSizeCallback(rsvg.types.SizeFunc sizeFunc)
   {
     extern(C) void _sizeFuncCallback(int* width, int* height, void* userData)
     {
-      auto _dlg = cast(SizeFunc*)userData;
+      auto _dlg = cast(rsvg.types.SizeFunc*)userData;
 
       (*_dlg)(*width, *height);
     }

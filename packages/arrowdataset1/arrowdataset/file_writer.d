@@ -5,11 +5,11 @@ import arrow.record_batch_reader;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;
-import gid.global;
+import gid.gid;
 import glib.error;
 import gobject.object;
 
-class FileWriter : ObjectG
+class FileWriter : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -38,7 +38,7 @@ class FileWriter : ObjectG
     return _retval;
   }
 
-  bool writeRecordBatch(RecordBatch recordBatch)
+  bool writeRecordBatch(arrow.record_batch.RecordBatch recordBatch)
   {
     bool _retval;
     GError *_err;
@@ -48,7 +48,7 @@ class FileWriter : ObjectG
     return _retval;
   }
 
-  bool writeRecordBatchReader(RecordBatchReader reader)
+  bool writeRecordBatchReader(arrow.record_batch_reader.RecordBatchReader reader)
   {
     bool _retval;
     GError *_err;

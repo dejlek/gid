@@ -1,6 +1,6 @@
 module gtk.custom_filter;
 
-import gid.global;
+import gid.gid;
 import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
@@ -10,7 +10,7 @@ import gtk.types;
 /**
  * `GtkCustomFilter` determines whether to include items with a callback.
  */
-class CustomFilter : Filter
+class CustomFilter : gtk.filter.Filter
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -39,13 +39,13 @@ class CustomFilter : Filter
    *   matchFunc = function to filter items
    * Returns: a new `GtkCustomFilter`
    */
-  this(CustomFilterFunc matchFunc)
+  this(gtk.types.CustomFilterFunc matchFunc)
   {
     extern(C) bool _matchFuncCallback(ObjectC* item, void* userData)
     {
-      auto _dlg = cast(CustomFilterFunc*)userData;
+      auto _dlg = cast(gtk.types.CustomFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)item, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.Take));
       return _retval;
     }
     auto _matchFuncCB = matchFunc ? &_matchFuncCallback : null;
@@ -67,13 +67,13 @@ class CustomFilter : Filter
    * Params:
    *   matchFunc = function to filter items
    */
-  void setFilterFunc(CustomFilterFunc matchFunc)
+  void setFilterFunc(gtk.types.CustomFilterFunc matchFunc)
   {
     extern(C) bool _matchFuncCallback(ObjectC* item, void* userData)
     {
-      auto _dlg = cast(CustomFilterFunc*)userData;
+      auto _dlg = cast(gtk.types.CustomFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!ObjectG(cast(void*)item, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.Take));
       return _retval;
     }
     auto _matchFuncCB = matchFunc ? &_matchFuncCallback : null;

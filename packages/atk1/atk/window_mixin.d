@@ -4,7 +4,7 @@ public import atk.window_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;
 public import atk.types;
-public import gid.global;
+public import gid.gid;
 public import gobject.dclosure;
 
 /**
@@ -22,8 +22,8 @@ template WindowT()
    * becomes the active window of the application or session.
    *   window = the instance the signal is connected to
    */
-  alias ActivateCallbackDlg = void delegate(Window window);
-  alias ActivateCallbackFunc = void function(Window window);
+  alias ActivateCallbackDlg = void delegate(atk.window.Window window);
+  alias ActivateCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Activate signal.
@@ -39,7 +39,7 @@ template WindowT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto window = getVal!Window(_paramVals);
+      auto window = getVal!(atk.window.Window)(_paramVals);
       _dClosure.dlg(window);
     }
 
@@ -52,8 +52,8 @@ template WindowT()
    * is created.
    *   window = the instance the signal is connected to
    */
-  alias CreateCallbackDlg = void delegate(Window window);
-  alias CreateCallbackFunc = void function(Window window);
+  alias CreateCallbackDlg = void delegate(atk.window.Window window);
+  alias CreateCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Create signal.
@@ -69,7 +69,7 @@ template WindowT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto window = getVal!Window(_paramVals);
+      auto window = getVal!(atk.window.Window)(_paramVals);
       _dClosure.dlg(window);
     }
 
@@ -82,8 +82,8 @@ template WindowT()
    * no longer the active window of the application or session.
    *   window = the instance the signal is connected to
    */
-  alias DeactivateCallbackDlg = void delegate(Window window);
-  alias DeactivateCallbackFunc = void function(Window window);
+  alias DeactivateCallbackDlg = void delegate(atk.window.Window window);
+  alias DeactivateCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Deactivate signal.
@@ -99,7 +99,7 @@ template WindowT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto window = getVal!Window(_paramVals);
+      auto window = getVal!(atk.window.Window)(_paramVals);
       _dClosure.dlg(window);
     }
 
@@ -112,8 +112,8 @@ template WindowT()
    * destroyed.
    *   window = the instance the signal is connected to
    */
-  alias DestroyCallbackDlg = void delegate(Window window);
-  alias DestroyCallbackFunc = void function(Window window);
+  alias DestroyCallbackDlg = void delegate(atk.window.Window window);
+  alias DestroyCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Destroy signal.
@@ -129,7 +129,7 @@ template WindowT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto window = getVal!Window(_paramVals);
+      auto window = getVal!(atk.window.Window)(_paramVals);
       _dClosure.dlg(window);
     }
 
@@ -142,8 +142,8 @@ template WindowT()
    * is maximized.
    *   window = the instance the signal is connected to
    */
-  alias MaximizeCallbackDlg = void delegate(Window window);
-  alias MaximizeCallbackFunc = void function(Window window);
+  alias MaximizeCallbackDlg = void delegate(atk.window.Window window);
+  alias MaximizeCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Maximize signal.
@@ -159,7 +159,7 @@ template WindowT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto window = getVal!Window(_paramVals);
+      auto window = getVal!(atk.window.Window)(_paramVals);
       _dClosure.dlg(window);
     }
 
@@ -172,8 +172,8 @@ template WindowT()
    * is minimized.
    *   window = the instance the signal is connected to
    */
-  alias MinimizeCallbackDlg = void delegate(Window window);
-  alias MinimizeCallbackFunc = void function(Window window);
+  alias MinimizeCallbackDlg = void delegate(atk.window.Window window);
+  alias MinimizeCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Minimize signal.
@@ -189,7 +189,7 @@ template WindowT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto window = getVal!Window(_paramVals);
+      auto window = getVal!(atk.window.Window)(_paramVals);
       _dClosure.dlg(window);
     }
 
@@ -202,8 +202,8 @@ template WindowT()
    * is moved.
    *   window = the instance the signal is connected to
    */
-  alias MoveCallbackDlg = void delegate(Window window);
-  alias MoveCallbackFunc = void function(Window window);
+  alias MoveCallbackDlg = void delegate(atk.window.Window window);
+  alias MoveCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Move signal.
@@ -219,7 +219,7 @@ template WindowT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto window = getVal!Window(_paramVals);
+      auto window = getVal!(atk.window.Window)(_paramVals);
       _dClosure.dlg(window);
     }
 
@@ -232,8 +232,8 @@ template WindowT()
    * is resized.
    *   window = the instance the signal is connected to
    */
-  alias ResizeCallbackDlg = void delegate(Window window);
-  alias ResizeCallbackFunc = void function(Window window);
+  alias ResizeCallbackDlg = void delegate(atk.window.Window window);
+  alias ResizeCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Resize signal.
@@ -249,7 +249,7 @@ template WindowT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto window = getVal!Window(_paramVals);
+      auto window = getVal!(atk.window.Window)(_paramVals);
       _dClosure.dlg(window);
     }
 
@@ -262,8 +262,8 @@ template WindowT()
    * is restored.
    *   window = the instance the signal is connected to
    */
-  alias RestoreCallbackDlg = void delegate(Window window);
-  alias RestoreCallbackFunc = void function(Window window);
+  alias RestoreCallbackDlg = void delegate(atk.window.Window window);
+  alias RestoreCallbackFunc = void function(atk.window.Window window);
 
   /**
    * Connect to Restore signal.
@@ -279,7 +279,7 @@ template WindowT()
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto window = getVal!Window(_paramVals);
+      auto window = getVal!(atk.window.Window)(_paramVals);
       _dClosure.dlg(window);
     }
 

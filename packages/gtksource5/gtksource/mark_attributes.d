@@ -1,12 +1,10 @@
 module gtksource.mark_attributes;
 
 import gdk.paintable;
-import gdk.paintable_mixin;
 import gdk.rgba;
 import gdkpixbuf.pixbuf;
-import gid.global;
+import gid.gid;
 import gio.icon;
-import gio.icon_mixin;
 import gobject.dclosure;
 import gobject.object;
 import gtk.widget;
@@ -42,7 +40,7 @@ import gtksource.types;
  * signal@MarkAttributes::query-tooltip-markup where the latter
  * takes precedence.
  */
-class MarkAttributes : ObjectG
+class MarkAttributes : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -78,12 +76,12 @@ class MarkAttributes : ObjectG
    *   background = a #GdkRGBA.
    * Returns: whether background color for attributes was set.
    */
-  bool getBackground(out RGBA background)
+  bool getBackground(out gdk.rgba.RGBA background)
   {
     bool _retval;
     GdkRGBA _background;
     _retval = gtk_source_mark_attributes_get_background(cast(GtkSourceMarkAttributes*)cPtr, &_background);
-    background = new RGBA(cast(void*)&_background, No.Take);
+    background = new gdk.rgba.RGBA(cast(void*)&_background, No.Take);
     return _retval;
   }
 
@@ -93,11 +91,11 @@ class MarkAttributes : ObjectG
    * Returns: An icon. The icon belongs to attributes and should
    *   not be unreffed.
    */
-  Icon getGicon()
+  gio.icon.Icon getGicon()
   {
     GIcon* _cretval;
     _cretval = gtk_source_mark_attributes_get_gicon(cast(GtkSourceMarkAttributes*)cPtr);
-    auto _retval = ObjectG.getDObject!Icon(cast(GIcon*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -111,7 +109,7 @@ class MarkAttributes : ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_mark_attributes_get_icon_name(cast(GtkSourceMarkAttributes*)cPtr);
-    string _retval = _cretval.fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -121,11 +119,11 @@ class MarkAttributes : ObjectG
    * Returns: A pixbuf. The pixbuf belongs to attributes and
    *   should not be unreffed.
    */
-  Pixbuf getPixbuf()
+  gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     const(PixbufC)* _cretval;
     _cretval = gtk_source_mark_attributes_get_pixbuf(cast(GtkSourceMarkAttributes*)cPtr);
-    auto _retval = ObjectG.getDObject!Pixbuf(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -137,11 +135,11 @@ class MarkAttributes : ObjectG
    * Returns: A tooltip. The returned string should be freed by
    *   using [glib.global.gfree] when done with it.
    */
-  string getTooltipMarkup(Mark mark)
+  string getTooltipMarkup(gtksource.mark.Mark mark)
   {
     char* _cretval;
     _cretval = gtk_source_mark_attributes_get_tooltip_markup(cast(GtkSourceMarkAttributes*)cPtr, mark ? cast(GtkSourceMark*)mark.cPtr(No.Dup) : null);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -153,11 +151,11 @@ class MarkAttributes : ObjectG
    * Returns: A tooltip. The returned string should be freed by
    *   using [glib.global.gfree] when done with it.
    */
-  string getTooltipText(Mark mark)
+  string getTooltipText(gtksource.mark.Mark mark)
   {
     char* _cretval;
     _cretval = gtk_source_mark_attributes_get_tooltip_text(cast(GtkSourceMarkAttributes*)cPtr, mark ? cast(GtkSourceMark*)mark.cPtr(No.Dup) : null);
-    string _retval = _cretval.fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -174,11 +172,11 @@ class MarkAttributes : ObjectG
    * Returns: A #GdkPaintable. The paintable belongs to attributes
    *   and should not be unreffed.
    */
-  Paintable renderIcon(Widget widget, int size)
+  gdk.paintable.Paintable renderIcon(gtk.widget.Widget widget, int size)
   {
     GdkPaintable* _cretval;
     _cretval = gtk_source_mark_attributes_render_icon(cast(GtkSourceMarkAttributes*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, size);
-    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -187,9 +185,9 @@ class MarkAttributes : ObjectG
    * Params:
    *   background = a #GdkRGBA.
    */
-  void setBackground(RGBA background)
+  void setBackground(gdk.rgba.RGBA background)
   {
-    gtk_source_mark_attributes_set_background(cast(GtkSourceMarkAttributes*)cPtr, background ? cast(GdkRGBA*)background.cPtr(No.Dup) : null);
+    gtk_source_mark_attributes_set_background(cast(GtkSourceMarkAttributes*)cPtr, background ? cast(const(GdkRGBA)*)background.cPtr(No.Dup) : null);
   }
 
   /**
@@ -197,7 +195,7 @@ class MarkAttributes : ObjectG
    * Params:
    *   gicon = a #GIcon to be used.
    */
-  void setGicon(Icon gicon)
+  void setGicon(gio.icon.Icon gicon)
   {
     gtk_source_mark_attributes_set_gicon(cast(GtkSourceMarkAttributes*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.Dup) : null);
   }
@@ -218,9 +216,9 @@ class MarkAttributes : ObjectG
    * Params:
    *   pixbuf = a #GdkPixbuf to be used.
    */
-  void setPixbuf(Pixbuf pixbuf)
+  void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
-    gtk_source_mark_attributes_set_pixbuf(cast(GtkSourceMarkAttributes*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    gtk_source_mark_attributes_set_pixbuf(cast(GtkSourceMarkAttributes*)cPtr, pixbuf ? cast(const(PixbufC)*)pixbuf.cPtr(No.Dup) : null);
   }
 
   /**
@@ -232,8 +230,8 @@ class MarkAttributes : ObjectG
    * Returns: A tooltip. The string should be freed with
    *   [glib.global.gfree] when done with it.
    */
-  alias QueryTooltipMarkupCallbackDlg = string delegate(Mark mark, MarkAttributes markAttributes);
-  alias QueryTooltipMarkupCallbackFunc = string function(Mark mark, MarkAttributes markAttributes);
+  alias QueryTooltipMarkupCallbackDlg = string delegate(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes);
+  alias QueryTooltipMarkupCallbackFunc = string function(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes);
 
   /**
    * Connect to QueryTooltipMarkup signal.
@@ -249,8 +247,8 @@ class MarkAttributes : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto markAttributes = getVal!MarkAttributes(_paramVals);
-      auto mark = getVal!Mark(&_paramVals[1]);
+      auto markAttributes = getVal!(gtksource.mark_attributes.MarkAttributes)(_paramVals);
+      auto mark = getVal!(gtksource.mark.Mark)(&_paramVals[1]);
       auto _retval = _dClosure.dlg(mark, markAttributes);
       setVal!string(_returnValue, _retval);
     }
@@ -268,8 +266,8 @@ class MarkAttributes : ObjectG
    * Returns: A tooltip. The string should be freed with
    *   [glib.global.gfree] when done with it.
    */
-  alias QueryTooltipTextCallbackDlg = string delegate(Mark mark, MarkAttributes markAttributes);
-  alias QueryTooltipTextCallbackFunc = string function(Mark mark, MarkAttributes markAttributes);
+  alias QueryTooltipTextCallbackDlg = string delegate(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes);
+  alias QueryTooltipTextCallbackFunc = string function(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes);
 
   /**
    * Connect to QueryTooltipText signal.
@@ -285,8 +283,8 @@ class MarkAttributes : ObjectG
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto markAttributes = getVal!MarkAttributes(_paramVals);
-      auto mark = getVal!Mark(&_paramVals[1]);
+      auto markAttributes = getVal!(gtksource.mark_attributes.MarkAttributes)(_paramVals);
+      auto mark = getVal!(gtksource.mark.Mark)(&_paramVals[1]);
       auto _retval = _dClosure.dlg(mark, markAttributes);
       setVal!string(_returnValue, _retval);
     }

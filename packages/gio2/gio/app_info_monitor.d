@@ -1,6 +1,6 @@
 module gio.app_info_monitor;
 
-import gid.global;
+import gid.gid;
 import gio.c.functions;
 import gio.c.types;
 import gio.types;
@@ -42,7 +42,7 @@ import gobject.object;
  * often come in groups $(LPAREN)like during system updates$(RPAREN) and rescanning the list
  * on every change is pointless and expensive.
  */
-class AppInfoMonitor : ObjectG
+class AppInfoMonitor : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -74,11 +74,11 @@ class AppInfoMonitor : ObjectG
    * the same main context as you created it.
    * Returns: a reference to a #GAppInfoMonitor
    */
-  static AppInfoMonitor get()
+  static gio.app_info_monitor.AppInfoMonitor get()
   {
     GAppInfoMonitor* _cretval;
     _cretval = g_app_info_monitor_get();
-    auto _retval = ObjectG.getDObject!AppInfoMonitor(cast(GAppInfoMonitor*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.app_info_monitor.AppInfoMonitor)(cast(GAppInfoMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -87,8 +87,8 @@ class AppInfoMonitor : ObjectG
    * installed or removed.
    *   appInfoMonitor = the instance the signal is connected to
    */
-  alias ChangedCallbackDlg = void delegate(AppInfoMonitor appInfoMonitor);
-  alias ChangedCallbackFunc = void function(AppInfoMonitor appInfoMonitor);
+  alias ChangedCallbackDlg = void delegate(gio.app_info_monitor.AppInfoMonitor appInfoMonitor);
+  alias ChangedCallbackFunc = void function(gio.app_info_monitor.AppInfoMonitor appInfoMonitor);
 
   /**
    * Connect to Changed signal.
@@ -104,7 +104,7 @@ class AppInfoMonitor : ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto appInfoMonitor = getVal!AppInfoMonitor(_paramVals);
+      auto appInfoMonitor = getVal!(gio.app_info_monitor.AppInfoMonitor)(_paramVals);
       _dClosure.dlg(appInfoMonitor);
     }
 

@@ -5,8 +5,7 @@ import atk.c.types;
 import atk.key_event_struct;
 import atk.object;
 import atk.property_values;
-import atk.types;
-import gid.global;
+import gid.gid;
 
 
 // Aliases
@@ -32,12 +31,12 @@ alias ValueType = AtkValueType;
 alias TextRectangle = AtkTextRectangle;
 
 // Callbacks
-alias EventListener = void delegate(ObjectAtk obj);
+alias EventListener = void delegate(atk.object.ObjectAtk obj);
 alias EventListenerInit = void delegate();
-alias FocusHandler = void delegate(ObjectAtk object, bool focusIn);
+alias FocusHandler = void delegate(atk.object.ObjectAtk object, bool focusIn);
 alias Function = bool delegate();
-alias KeySnoopFunc = int delegate(KeyEventStruct event);
-alias PropertyChangeHandler = void delegate(ObjectAtk obj, PropertyValues vals);
+alias KeySnoopFunc = int delegate(atk.key_event_struct.KeyEventStruct event);
+alias PropertyChangeHandler = void delegate(atk.object.ObjectAtk obj, atk.property_values.PropertyValues vals);
 
 /**
  * Like [atk.global.getBinaryAge], but from the headers used at

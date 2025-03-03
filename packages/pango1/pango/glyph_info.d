@@ -1,6 +1,6 @@
 module pango.glyph_info;
 
-import gid.global;
+import gid.gid;
 import pango.c.functions;
 import pango.c.types;
 import pango.types;
@@ -29,32 +29,32 @@ class GlyphInfo
     return cast(void*)&cInstance;
   }
 
-  @property Glyph glyph()
+  @property pango.types.Glyph glyph()
   {
     return (cast(PangoGlyphInfo*)cPtr).glyph;
   }
 
-  @property void glyph(Glyph propval)
+  @property void glyph(pango.types.Glyph propval)
   {
     (cast(PangoGlyphInfo*)cPtr).glyph = propval;
   }
 
-  @property GlyphGeometry geometry()
+  @property pango.types.GlyphGeometry geometry()
   {
     return (cast(PangoGlyphInfo*)cPtr).geometry;
   }
 
-  @property void geometry(GlyphGeometry propval)
+  @property void geometry(pango.types.GlyphGeometry propval)
   {
     (cast(PangoGlyphInfo*)cPtr).geometry = propval;
   }
 
-  @property GlyphVisAttr attr()
+  @property pango.types.GlyphVisAttr attr()
   {
     return (cast(PangoGlyphInfo*)cPtr).attr;
   }
 
-  @property void attr(GlyphVisAttr propval)
+  @property void attr(pango.types.GlyphVisAttr propval)
   {
     (cast(PangoGlyphInfo*)cPtr).attr = propval;
   }

@@ -5,7 +5,7 @@ import gdk.c.functions;
 import gdk.c.types;
 import gdk.snapshot;
 import gdk.types;
-import gid.global;
+import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 
@@ -71,11 +71,11 @@ interface Paintable
    *   intrinsicHeight = The intrinsic height to report. Can be 0 for no height.
    * Returns: a `GdkPaintable`
    */
-  static Paintable newEmpty(int intrinsicWidth, int intrinsicHeight)
+  static gdk.paintable.Paintable newEmpty(int intrinsicWidth, int intrinsicHeight)
   {
     GdkPaintable* _cretval;
     _cretval = gdk_paintable_new_empty(intrinsicWidth, intrinsicHeight);
-    auto _retval = ObjectG.getDObject!Paintable(cast(GdkPaintable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -110,15 +110,15 @@ interface Paintable
    * Returns: An immutable paintable for the current
    *   contents of paintable
    */
-  Paintable getCurrentImage();
+  gdk.paintable.Paintable getCurrentImage();
 
   /**
    * Get flags for the paintable.
    * This is oftentimes useful for optimizations.
-   * See [gdk.PaintableFlags] for the flags and what they mean.
+   * See [gdk.types.PaintableFlags] for the flags and what they mean.
    * Returns: The `GdkPaintableFlags` for this paintable
    */
-  PaintableFlags getFlags();
+  gdk.types.PaintableFlags getFlags();
 
   /**
    * Gets the preferred aspect ratio the paintable would like to be displayed at.
@@ -194,7 +194,7 @@ interface Paintable
    *   width = width to snapshot in
    *   height = height to snapshot in
    */
-  void snapshot(Snapshot snapshot, double width, double height);
+  void snapshot(gdk.snapshot.Snapshot snapshot, double width, double height);
 
   /**
    * Emitted when the contents of the paintable change.
@@ -202,8 +202,8 @@ interface Paintable
    * the icon theme for an icon changing.
    *   paintable = the instance the signal is connected to
    */
-  alias InvalidateContentsCallbackDlg = void delegate(Paintable paintable);
-  alias InvalidateContentsCallbackFunc = void function(Paintable paintable);
+  alias InvalidateContentsCallbackDlg = void delegate(gdk.paintable.Paintable paintable);
+  alias InvalidateContentsCallbackFunc = void function(gdk.paintable.Paintable paintable);
 
   /**
    * Connect to InvalidateContents signal.
@@ -226,8 +226,8 @@ interface Paintable
    * the contents of a toplevel surface being resized.
    *   paintable = the instance the signal is connected to
    */
-  alias InvalidateSizeCallbackDlg = void delegate(Paintable paintable);
-  alias InvalidateSizeCallbackFunc = void function(Paintable paintable);
+  alias InvalidateSizeCallbackDlg = void delegate(gdk.paintable.Paintable paintable);
+  alias InvalidateSizeCallbackFunc = void function(gdk.paintable.Paintable paintable);
 
   /**
    * Connect to InvalidateSize signal.

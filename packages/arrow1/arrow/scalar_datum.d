@@ -5,9 +5,9 @@ import arrow.c.types;
 import arrow.datum;
 import arrow.scalar;
 import arrow.types;
-import gid.global;
+import gid.gid;
 
-class ScalarDatum : Datum
+class ScalarDatum : arrow.datum.Datum
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -26,7 +26,7 @@ class ScalarDatum : Datum
     return getType();
   }
 
-  this(Scalar value)
+  this(arrow.scalar.Scalar value)
   {
     GArrowScalarDatum* _cretval;
     _cretval = garrow_scalar_datum_new(value ? cast(GArrowScalar*)value.cPtr(No.Dup) : null);

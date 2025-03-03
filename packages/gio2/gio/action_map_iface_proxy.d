@@ -5,7 +5,7 @@ import gio.action_map;
 import gio.action_map_mixin;
 
 /// Proxy object for Gio.ActionMap interface when a GObject has no applicable D binding
-class ActionMapIfaceProxy : IfaceProxy, ActionMap
+class ActionMapIfaceProxy : IfaceProxy, gio.action_map.ActionMap
 {
   this(void* ptr, Flag!"Take" take = No.Take)
   {
@@ -14,7 +14,7 @@ class ActionMapIfaceProxy : IfaceProxy, ActionMap
 
   override TypeInfo_Interface getIface()
   {
-    return typeid(ActionMap);
+    return typeid(gio.action_map.ActionMap);
   }
 
   mixin ActionMapT!();
