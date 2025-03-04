@@ -68,7 +68,7 @@ class GLTextureBuilder : gobject.object.ObjectG
    *   data = user data to pass to the destroy function
    * Returns: a newly built `GdkTexture`
    */
-  gdk.texture.Texture build(glib.types.DestroyNotify destroy, void* data)
+  gdk.texture.Texture build(glib.types.DestroyNotify destroy = null, void* data = null)
   {
     extern(C) void _destroyCallback(void* data)
     {
@@ -272,7 +272,7 @@ class GLTextureBuilder : gobject.object.ObjectG
    * Params:
    *   sync = the GLSync object
    */
-  void setSync(void* sync)
+  void setSync(void* sync = null)
   {
     gdk_gl_texture_builder_set_sync(cast(GdkGLTextureBuilder*)cPtr, sync);
   }

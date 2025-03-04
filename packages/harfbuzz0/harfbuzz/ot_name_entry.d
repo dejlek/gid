@@ -38,12 +38,12 @@ class OtNameEntry
     (cast(hb_ot_name_entry_t*)cPtr).nameId = propval;
   }
 
-  @property harfbuzz.types.language_t language()
+  @property harfbuzz.types.Language language()
   {
     return (cast(hb_ot_name_entry_t*)cPtr).language;
   }
 
-  @property void language(harfbuzz.types.language_t propval)
+  @property void language(harfbuzz.types.Language propval)
   {
     (cast(hb_ot_name_entry_t*)cPtr).language = propval;
   }

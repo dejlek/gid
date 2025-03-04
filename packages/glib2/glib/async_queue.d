@@ -248,7 +248,7 @@ class AsyncQueue
    *   item = the data to remove from the queue
    * Returns: %TRUE if the item was removed
    */
-  bool removeUnlocked(void* item)
+  bool removeUnlocked(void* item = null)
   {
     bool _retval;
     _retval = g_async_queue_remove_unlocked(cast(GAsyncQueue*)cPtr, item);

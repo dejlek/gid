@@ -346,7 +346,7 @@ class VariantG
    *     #GVariant pointers, the children
    * Returns: a floating reference to a new #GVariant array
    */
-  static glib.variant.VariantG newArray(glib.variant_type.VariantType childType, glib.variant.VariantG[] children)
+  static glib.variant.VariantG newArray(glib.variant_type.VariantType childType = null, glib.variant.VariantG[] children = null)
   {
     VariantC* _cretval;
     size_t _nChildren;

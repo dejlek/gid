@@ -621,7 +621,7 @@ class Source : gobject.boxed.Boxed
    *   userData = the user data for the callback
    * Returns: %TRUE if a source was found and removed.
    */
-  static bool removeByFuncsUserData(glib.types.SourceFuncs funcs, void* userData)
+  static bool removeByFuncsUserData(glib.types.SourceFuncs funcs, void* userData = null)
   {
     bool _retval;
     _retval = g_source_remove_by_funcs_user_data(&funcs, userData);
@@ -636,7 +636,7 @@ class Source : gobject.boxed.Boxed
    *   userData = the user_data for the callback.
    * Returns: %TRUE if a source was found and removed.
    */
-  static bool removeByUserData(void* userData)
+  static bool removeByUserData(void* userData = null)
   {
     bool _retval;
     _retval = g_source_remove_by_user_data(userData);

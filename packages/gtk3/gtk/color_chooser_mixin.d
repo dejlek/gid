@@ -38,7 +38,7 @@ template ColorChooserT()
    *   colorsPerLine = the number of colors to show in each row/column
    *   colors = the colors of the palette, or %NULL
    */
-  override void addPalette(gtk.types.Orientation orientation, int colorsPerLine, gdk.rgba.RGBA[] colors)
+  override void addPalette(gtk.types.Orientation orientation, int colorsPerLine, gdk.rgba.RGBA[] colors = null)
   {
     int _nColors;
     if (colors)

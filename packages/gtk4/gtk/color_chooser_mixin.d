@@ -43,7 +43,7 @@ template ColorChooserT()
 
    * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
-  override void addPalette(gtk.types.Orientation orientation, int colorsPerLine, gdk.rgba.RGBA[] colors)
+  override void addPalette(gtk.types.Orientation orientation, int colorsPerLine, gdk.rgba.RGBA[] colors = null)
   {
     int _nColors;
     if (colors)

@@ -377,7 +377,7 @@ class ObjectG
     return retval;
   }
 
-  static size_t compatControl(size_t what, void* data)
+  static size_t compatControl(size_t what, void* data = null)
   {
     size_t _retval;
     _retval = g_object_compat_control(what, data);
@@ -675,7 +675,7 @@ class ObjectG
    *   key = name of the key
    *   data = data to associate with that key
    */
-  void setData(string key, void* data)
+  void setData(string key, void* data = null)
   {
     const(char)* _key = key.toCString(No.Alloc);
     g_object_set_data(cast(ObjectC*)cPtr, _key, data);

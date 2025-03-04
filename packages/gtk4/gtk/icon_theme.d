@@ -350,7 +350,7 @@ class IconTheme : gobject.object.ObjectG
    *   path = NULL-terminated array of resource paths
    *     that are searched for icons
    */
-  void setResourcePath(string[] path)
+  void setResourcePath(string[] path = null)
   {
     const(char)*[] _tmppath;
     foreach (s; path)
@@ -378,7 +378,7 @@ class IconTheme : gobject.object.ObjectG
    *   path = NULL-terminated
    *     array of directories that are searched for icon themes
    */
-  void setSearchPath(string[] path)
+  void setSearchPath(string[] path = null)
   {
     const(char)*[] _tmppath;
     foreach (s; path)

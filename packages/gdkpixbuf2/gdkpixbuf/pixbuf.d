@@ -1172,7 +1172,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
    *   optionValues = values for named options
    * Returns: whether an error was set
    */
-  bool saveToBufferv(out ubyte[] buffer, string type, string[] optionKeys, string[] optionValues)
+  bool saveToBufferv(out ubyte[] buffer, string type, string[] optionKeys = null, string[] optionValues = null)
   {
     bool _retval;
     size_t _bufferSize;
@@ -1214,7 +1214,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
    *   optionValues = values for named options
    * Returns: whether an error was set
    */
-  bool saveToCallbackv(gdkpixbuf.types.PixbufSaveFunc saveFunc, string type, string[] optionKeys, string[] optionValues)
+  bool saveToCallbackv(gdkpixbuf.types.PixbufSaveFunc saveFunc, string type, string[] optionKeys = null, string[] optionValues = null)
   {
     extern(C) bool _saveFuncCallback(const(ubyte)* buf, size_t count, GError** error, void* data)
     {
@@ -1267,7 +1267,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
    * Returns: `TRUE` if the pixbuf was saved successfully, `FALSE` if an
    *   error was set.
    */
-  bool saveToStreamv(gio.output_stream.OutputStream stream, string type, string[] optionKeys, string[] optionValues, gio.cancellable.Cancellable cancellable = null)
+  bool saveToStreamv(gio.output_stream.OutputStream stream, string type, string[] optionKeys = null, string[] optionValues = null, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
     const(char)* _type = type.toCString(No.Alloc);
@@ -1305,7 +1305,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
    *   cancellable = optional `GCancellable` object, `NULL` to ignore
    *   callback = a `GAsyncReadyCallback` to call when the pixbuf is saved
    */
-  void saveToStreamvAsync(gio.output_stream.OutputStream stream, string type, string[] optionKeys, string[] optionValues, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void saveToStreamvAsync(gio.output_stream.OutputStream stream, string type, string[] optionKeys = null, string[] optionValues = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -1345,7 +1345,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
    *   optionValues = values for named options
    * Returns: whether an error was set
    */
-  bool savev(string filename, string type, string[] optionKeys, string[] optionValues)
+  bool savev(string filename, string type, string[] optionKeys = null, string[] optionValues = null)
   {
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);

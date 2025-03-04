@@ -470,7 +470,7 @@ class Value : Boxed
    * Params:
    *   vBoxed = boxed value to be set
    */
-  void setBoxed(const(void)* vBoxed)
+  void setBoxed(const(void)* vBoxed = null)
   {
     g_value_set_boxed(cast(GValue*)cPtr, vBoxed);
   }
@@ -482,7 +482,7 @@ class Value : Boxed
 
    * Deprecated: Use [gobject.value.Value.takeBoxed] instead.
    */
-  void setBoxedTakeOwnership(const(void)* vBoxed)
+  void setBoxedTakeOwnership(const(void)* vBoxed = null)
   {
     g_value_set_boxed_take_ownership(cast(GValue*)cPtr, vBoxed);
   }
@@ -555,7 +555,7 @@ class Value : Boxed
    * Params:
    *   instance = the instance
    */
-  void setInstance(void* instance)
+  void setInstance(void* instance = null)
   {
     g_value_set_instance(cast(GValue*)cPtr, instance);
   }
@@ -636,7 +636,7 @@ class Value : Boxed
    * Params:
    *   vPointer = pointer value to be set
    */
-  void setPointer(void* vPointer)
+  void setPointer(void* vPointer = null)
   {
     g_value_set_pointer(cast(GValue*)cPtr, vPointer);
   }
@@ -658,7 +658,7 @@ class Value : Boxed
    * Params:
    *   vBoxed = static boxed value to be set
    */
-  void setStaticBoxed(const(void)* vBoxed)
+  void setStaticBoxed(const(void)* vBoxed = null)
   {
     g_value_set_static_boxed(cast(GValue*)cPtr, vBoxed);
   }
@@ -779,7 +779,7 @@ class Value : Boxed
    * Params:
    *   vBoxed = duplicated unowned boxed value to be set
    */
-  void takeBoxed(const(void)* vBoxed)
+  void takeBoxed(const(void)* vBoxed = null)
   {
     g_value_take_boxed(cast(GValue*)cPtr, vBoxed);
   }

@@ -55,7 +55,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendIndices(long[] values, bool[] isValids)
+  bool appendIndices(long[] values, bool[] isValids = null)
   {
     bool _retval;
     long _valuesLength;

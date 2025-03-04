@@ -103,7 +103,7 @@ class DmabufTextureBuilder : gobject.object.ObjectG
    * Returns: a newly built `GdkTexture` or `NULL`
    *   if the format is not supported
    */
-  gdk.texture.Texture build(glib.types.DestroyNotify destroy, void* data)
+  gdk.texture.Texture build(glib.types.DestroyNotify destroy = null, void* data = null)
   {
     extern(C) void _destroyCallback(void* data)
     {

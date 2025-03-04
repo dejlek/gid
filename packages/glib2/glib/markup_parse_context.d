@@ -270,7 +270,7 @@ class MarkupParseContext : gobject.boxed.Boxed
    *   parser = a #GMarkupParser
    *   userData = user data to pass to #GMarkupParser functions
    */
-  void push(glib.types.MarkupParser parser, void* userData)
+  void push(glib.types.MarkupParser parser, void* userData = null)
   {
     g_markup_parse_context_push(cast(GMarkupParseContext*)cPtr, &parser, userData);
   }

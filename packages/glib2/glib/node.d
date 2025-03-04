@@ -56,7 +56,7 @@ class Node
    * Returns: the index of the child of node which contains
    *   data, or -1 if the data is not found
    */
-  int childIndex(void* data)
+  int childIndex(void* data = null)
   {
     int _retval;
     _retval = g_node_child_index(cast(GNode*)cPtr, data);

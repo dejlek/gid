@@ -54,7 +54,7 @@ class HalfFloatArrayBuilder : arrow.array_builder.ArrayBuilder
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendValues(ushort[] values, bool[] isValids)
+  bool appendValues(ushort[] values, bool[] isValids = null)
   {
     bool _retval;
     long _valuesLength;

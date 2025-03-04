@@ -248,7 +248,7 @@ interface DtlsConnection
    *   protocols = a %NULL-terminated
    *     array of ALPN protocol names $(LPAREN)eg, "http/1.1", "h2"$(RPAREN), or %NULL
    */
-  void setAdvertisedProtocols(string[] protocols);
+  void setAdvertisedProtocols(string[] protocols = null);
 
   /**
    * This sets the certificate that conn will present to its peer

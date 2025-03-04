@@ -109,7 +109,7 @@ class ThreadPool
    *   data = an unprocessed item in the pool
    * Returns: %TRUE if the item was found and moved
    */
-  bool moveToFront(void* data)
+  bool moveToFront(void* data = null)
   {
     bool _retval;
     _retval = g_thread_pool_move_to_front(cast(GThreadPool*)cPtr, data);
@@ -132,7 +132,7 @@ class ThreadPool
    *   data = a new task for pool
    * Returns: %TRUE on success, %FALSE if an error occurred
    */
-  bool push(void* data)
+  bool push(void* data = null)
   {
     bool _retval;
     GError *_err;

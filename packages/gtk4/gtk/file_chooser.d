@@ -70,7 +70,7 @@ interface FileChooser
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  void addChoice(string id, string label, string[] options, string[] optionLabels);
+  void addChoice(string id, string label, string[] options = null, string[] optionLabels = null);
 
   /**
    * Adds filter to the list of filters that the user can select between.

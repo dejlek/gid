@@ -59,7 +59,7 @@ class Bytes : gobject.boxed.Boxed
    *   data = the data to be used for the bytes
    * Returns: a new #GBytes
    */
-  this(ubyte[] data)
+  this(ubyte[] data = null)
   {
     GBytes* _cretval;
     size_t _size;

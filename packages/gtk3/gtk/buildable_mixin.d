@@ -66,7 +66,7 @@ template BuildableT()
    *   tagname = the name of the tag
    *   data = user data created in custom_tag_start
    */
-  override void customFinished(gtk.builder.Builder builder, gobject.object.ObjectG child, string tagname, void* data)
+  override void customFinished(gtk.builder.Builder builder, gobject.object.ObjectG child, string tagname, void* data = null)
   {
     const(char)* _tagname = tagname.toCString(No.Alloc);
     gtk_buildable_custom_finished(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.Dup) : null, child ? cast(ObjectC*)child.cPtr(No.Dup) : null, _tagname, data);

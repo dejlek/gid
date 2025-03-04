@@ -419,7 +419,7 @@ class MessageHeaders : gobject.boxed.Boxed
    *   disposition = the disposition-type
    *   params = additional parameters
    */
-  void setContentDisposition(string disposition, string[string] params)
+  void setContentDisposition(string disposition, string[string] params = null)
   {
     const(char)* _disposition = disposition.toCString(No.Alloc);
     auto _params = gHashTableFromD!(string, string)(params);
@@ -470,7 +470,7 @@ class MessageHeaders : gobject.boxed.Boxed
    *   contentType = the MIME type
    *   params = additional parameters
    */
-  void setContentType(string contentType, string[string] params)
+  void setContentType(string contentType, string[string] params = null)
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
     auto _params = gHashTableFromD!(string, string)(params);

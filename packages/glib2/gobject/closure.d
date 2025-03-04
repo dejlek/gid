@@ -159,7 +159,7 @@ class Closure : gobject.boxed.Boxed
    *   data = data to store in the data field of the newly allocated #GClosure
    * Returns: a floating reference to a new #GClosure
    */
-  static gobject.closure.Closure newSimple(uint sizeofClosure, void* data)
+  static gobject.closure.Closure newSimple(uint sizeofClosure, void* data = null)
   {
     GClosure* _cretval;
     _cretval = g_closure_new_simple(sizeofClosure, data);
@@ -198,7 +198,7 @@ class Closure : gobject.boxed.Boxed
    *     invoke the callback of closure
    *   invocationHint = a context-dependent invocation hint
    */
-  void invoke(out gobject.value.Value returnValue, gobject.value.Value[] paramValues, void* invocationHint)
+  void invoke(out gobject.value.Value returnValue, gobject.value.Value[] paramValues, void* invocationHint = null)
   {
     GValue _returnValue;
     uint _nParamValues;

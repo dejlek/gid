@@ -52,7 +52,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
    *     existing radio button group, or %NULL if you are creating a new group
    * Returns: The new #GtkRadioToolButton
    */
-  this(gtk.radio_button.RadioButton[] group)
+  this(gtk.radio_button.RadioButton[] group = null)
   {
     GtkToolItem* _cretval;
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
@@ -135,7 +135,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
    * Params:
    *   group = an existing radio button group, or %NULL
    */
-  void setGroup(gtk.radio_button.RadioButton[] group)
+  void setGroup(gtk.radio_button.RadioButton[] group = null)
   {
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);

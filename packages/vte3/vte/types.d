@@ -21,9 +21,6 @@ alias RegexError = VteRegexError;
 alias TextBlinkMode = VteTextBlinkMode;
 alias WriteFlags = VteWriteFlags;
 
-// Structs
-alias TerminalClassPrivate = VteTerminalClassPrivate*;
-
 // Callbacks
 alias SelectionFunc = bool delegate(vte.terminal.Terminal terminal, glong column, glong row);
 alias TerminalSpawnAsyncCallback = void delegate(vte.terminal.Terminal terminal, glib.types.Pid pid, glib.error.ErrorG error);

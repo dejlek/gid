@@ -465,7 +465,7 @@ class Builder : gobject.object.ObjectG
    * Params:
    *   userData = user data to pass back with all signals
    */
-  void connectSignals(void* userData)
+  void connectSignals(void* userData = null)
   {
     gtk_builder_connect_signals(cast(GtkBuilder*)cPtr, userData);
   }

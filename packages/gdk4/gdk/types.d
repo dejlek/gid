@@ -41,7 +41,6 @@ alias TouchpadGesturePhase = GdkTouchpadGesturePhase;
 alias VulkanError = GdkVulkanError;
 
 // Structs
-alias FrameClockPrivate = GdkFrameClockPrivate*;
 alias KeymapKey = GdkKeymapKey;
 alias TimeCoord = GdkTimeCoord;
 

@@ -371,7 +371,7 @@ class Clipboard : gobject.object.ObjectG
    *     information about which forms should be stored or %NULL
    *     to indicate that all forms should be stored.
    */
-  void setCanStore(gtk.target_entry.TargetEntry[] targets)
+  void setCanStore(gtk.target_entry.TargetEntry[] targets = null)
   {
     int _nTargets;
     if (targets)

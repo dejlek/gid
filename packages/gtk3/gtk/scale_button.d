@@ -65,7 +65,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
    *     later with [gtk.scale_button.ScaleButton.setIcons]
    * Returns: a new #GtkScaleButton
    */
-  this(gtk.types.IconSize size, double min, double max, double step, string[] icons)
+  this(gtk.types.IconSize size, double min, double max, double step, string[] icons = null)
   {
     GtkWidget* _cretval;
     char*[] _tmpicons;

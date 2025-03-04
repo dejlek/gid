@@ -70,7 +70,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
    *     later with [gtk.scale_button.ScaleButton.setIcons]
    * Returns: a new `GtkScaleButton`
    */
-  this(double min, double max, double step, string[] icons)
+  this(double min, double max, double step, string[] icons = null)
   {
     GtkWidget* _cretval;
     char*[] _tmpicons;

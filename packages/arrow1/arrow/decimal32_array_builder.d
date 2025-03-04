@@ -61,7 +61,7 @@ class Decimal32ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendValues(arrow.decimal32.Decimal32[] values, bool[] isValids)
+  bool appendValues(arrow.decimal32.Decimal32[] values, bool[] isValids = null)
   {
     bool _retval;
     long _valuesLength;

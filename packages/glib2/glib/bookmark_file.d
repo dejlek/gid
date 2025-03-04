@@ -916,7 +916,7 @@ class BookmarkFile : gobject.boxed.Boxed
    *   groups = an array of
    *     group names, or %NULL to remove all groups
    */
-  void setGroups(string uri, string[] groups)
+  void setGroups(string uri, string[] groups = null)
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     size_t _length;

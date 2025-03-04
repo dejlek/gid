@@ -55,7 +55,7 @@ class GLTexture : gdk.texture.Texture
    * Deprecated: [gdk.gltexture_builder.GLTextureBuilder] supersedes this function
    *   and provides extended functionality for creating GL textures.
    */
-  this(gdk.glcontext.GLContext context, uint id, int width, int height, glib.types.DestroyNotify destroy, void* data)
+  this(gdk.glcontext.GLContext context, uint id, int width, int height, glib.types.DestroyNotify destroy, void* data = null)
   {
     extern(C) void _destroyCallback(void* data)
     {

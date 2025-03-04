@@ -136,7 +136,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
    * Params:
    *   group = a list representing a radio group, or %NULL
    */
-  void setGroup(gtk.radio_action.RadioAction[] group)
+  void setGroup(gtk.radio_action.RadioAction[] group = null)
   {
     auto _group = gSListFromD!(gtk.radio_action.RadioAction)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_action.RadioAction, GidOwnership.None)(_group);

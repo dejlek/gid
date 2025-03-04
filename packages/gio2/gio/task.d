@@ -882,7 +882,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
    *     function
    *   resultDestroy = a #GDestroyNotify function.
    */
-  void returnPointer(void* result, glib.types.DestroyNotify resultDestroy = null)
+  void returnPointer(void* result = null, glib.types.DestroyNotify resultDestroy = null)
   {
     extern(C) void _resultDestroyCallback(void* data)
     {
@@ -1081,7 +1081,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
    * Params:
    *   sourceTag = an opaque pointer indicating the source of this task
    */
-  void setSourceTag(void* sourceTag)
+  void setSourceTag(void* sourceTag = null)
   {
     g_task_set_source_tag(cast(GTask*)cPtr, sourceTag);
   }
@@ -1104,7 +1104,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
    *   taskData = task-specific data
    *   taskDataDestroy = #GDestroyNotify for task_data
    */
-  void setTaskData(void* taskData, glib.types.DestroyNotify taskDataDestroy = null)
+  void setTaskData(void* taskData = null, glib.types.DestroyNotify taskDataDestroy = null)
   {
     extern(C) void _taskDataDestroyCallback(void* data)
     {

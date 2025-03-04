@@ -26,7 +26,7 @@ class SortOptions : arrow.function_options.FunctionOptions
     return getType();
   }
 
-  this(arrow.sort_key.SortKey[] sortKeys)
+  this(arrow.sort_key.SortKey[] sortKeys = null)
   {
     GArrowSortOptions* _cretval;
     auto _sortKeys = gListFromD!(arrow.sort_key.SortKey)(sortKeys);

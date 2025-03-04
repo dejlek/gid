@@ -137,7 +137,7 @@ class Once
    *     containing `NULL`
    *   result = new non-`NULL` value for `*location`
    */
-  static void initLeavePointer(void* location, void* result)
+  static void initLeavePointer(void* location, void* result = null)
   {
     g_once_init_leave_pointer(location, result);
   }

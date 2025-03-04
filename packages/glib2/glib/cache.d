@@ -62,7 +62,7 @@ class Cache
 
    * Deprecated: Use a #GHashTable instead
    */
-  void* insert(void* key)
+  void* insert(void* key = null)
   {
     auto _retval = g_cache_insert(cast(GCache*)cPtr, key);
     return _retval;
@@ -102,7 +102,7 @@ class Cache
 
    * Deprecated: Use a #GHashTable instead
    */
-  void remove(const(void)* value)
+  void remove(const(void)* value = null)
   {
     g_cache_remove(cast(GCache*)cPtr, value);
   }

@@ -158,7 +158,7 @@ class Stroke : gobject.boxed.Boxed
    * Params:
    *   dash = the array of dashes
    */
-  void setDash(float[] dash)
+  void setDash(float[] dash = null)
   {
     size_t _nDash;
     if (dash)
@@ -247,7 +247,7 @@ class Stroke : gobject.boxed.Boxed
    *   stroke2 = the second `GskStroke`
    * Returns: `TRUE` if the 2 strokes are equal, `FALSE` otherwise
    */
-  static bool equal(const(void)* stroke1, const(void)* stroke2)
+  static bool equal(const(void)* stroke1 = null, const(void)* stroke2 = null)
   {
     bool _retval;
     _retval = gsk_stroke_equal(stroke1, stroke2);

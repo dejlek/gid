@@ -215,7 +215,7 @@ class WebsocketConnection : gobject.object.ObjectG
    * Params:
    *   data = the message contents
    */
-  void sendBinary(ubyte[] data)
+  void sendBinary(ubyte[] data = null)
   {
     size_t _length;
     if (data)

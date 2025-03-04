@@ -26,7 +26,7 @@ class ProjectNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getType();
   }
 
-  this(arrow.expression.Expression[] expressions, string[] names)
+  this(arrow.expression.Expression[] expressions, string[] names = null)
   {
     GArrowProjectNodeOptions* _cretval;
     auto _expressions = gListFromD!(arrow.expression.Expression)(expressions);

@@ -49,7 +49,7 @@ class StreamListener : gobject.object.ObjectG
    *   metadata = A decoded metadata.
    * Returns: %TRUE on success, %FALSE on error.
    */
-  bool onRecordBatchDecoded(arrow.record_batch.RecordBatch recordBatch, string[string] metadata)
+  bool onRecordBatchDecoded(arrow.record_batch.RecordBatch recordBatch, string[string] metadata = null)
   {
     bool _retval;
     auto _metadata = gHashTableFromD!(string, string)(metadata);

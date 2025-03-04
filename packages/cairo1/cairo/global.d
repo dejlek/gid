@@ -1413,7 +1413,7 @@ void* rasterSourcePatternGetCallbackData(cairo.pattern.Pattern pattern)
  *   pattern = the pattern to update
  *   data = the user data to be passed to all callbacks
  */
-void rasterSourcePatternSetCallbackData(cairo.pattern.Pattern pattern, void* data)
+void rasterSourcePatternSetCallbackData(cairo.pattern.Pattern pattern, void* data = null)
 {
   cairo_raster_source_pattern_set_callback_data(pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null, data);
 }

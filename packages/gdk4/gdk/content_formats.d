@@ -71,7 +71,7 @@ class ContentFormats : gobject.boxed.Boxed
    *     array of mime types
    * Returns: the new `GdkContentFormats`.
    */
-  this(string[] mimeTypes)
+  this(string[] mimeTypes = null)
   {
     GdkContentFormats* _cretval;
     uint _nMimeTypes;

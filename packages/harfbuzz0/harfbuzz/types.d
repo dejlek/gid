@@ -65,12 +65,12 @@ alias UnicodeGeneralCategory = hb_unicode_general_category_t;
 alias AatLayoutFeatureSelectorInfo = hb_aat_layout_feature_selector_info_t;
 alias FontExtents = hb_font_extents_t;
 alias GlyphExtents = hb_glyph_extents_t;
+alias Language = hb_language_t;
 alias OtColorLayer = hb_ot_color_layer_t;
 alias OtMathKernEntry = hb_ot_math_kern_entry_t;
 alias OtVarAxis = hb_ot_var_axis_t;
 alias VarInt = hb_var_int_t;
 alias VarNum = hb_var_num_t;
-alias language_t = hb_language_t;
 
 // Callbacks
 alias BufferMessageFunc = harfbuzz.types.Bool delegate(harfbuzz.buffer.Buffer buffer, harfbuzz.font.Font font, string message);
@@ -110,7 +110,7 @@ alias PaintPushGroupFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, 
 alias PaintPushTransformFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, float xx, float yx, float xy, float yy, float dx, float dy);
 alias PaintRadialGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float r0, float x1, float y1, float r1);
 alias PaintSweepGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float startAngle, float endAngle);
-alias ReferenceTableFunc = harfbuzz.blob.Blob delegate(harfbuzz.face.HBFace face, harfbuzz.types.Tag tag);
+alias ReferenceTableFunc = harfbuzz.blob.Blob delegate(harfbuzz.face.Face face, harfbuzz.types.Tag tag);
 alias UnicodeCombiningClassFunc = harfbuzz.types.UnicodeCombiningClass delegate(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode);
 alias UnicodeComposeFunc = harfbuzz.types.Bool delegate(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint a, harfbuzz.types.Codepoint b, out harfbuzz.types.Codepoint ab);
 alias UnicodeDecomposeFunc = harfbuzz.types.Bool delegate(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint ab, out harfbuzz.types.Codepoint a, out harfbuzz.types.Codepoint b);

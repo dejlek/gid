@@ -65,7 +65,7 @@ class Date64ArrayBuilder : arrow.array_builder.ArrayBuilder
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendValues(long[] values, bool[] isValids)
+  bool appendValues(long[] values, bool[] isValids = null)
   {
     bool _retval;
     long _valuesLength;

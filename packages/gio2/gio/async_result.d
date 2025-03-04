@@ -109,7 +109,7 @@ interface AsyncResult
    * Returns: %TRUE if res has the indicated source_tag, %FALSE if
    *   not.
    */
-  bool isTagged(void* sourceTag);
+  bool isTagged(void* sourceTag = null);
 
   /**
    * If res is a #GSimpleAsyncResult, this is equivalent to

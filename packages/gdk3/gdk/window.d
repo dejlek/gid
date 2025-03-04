@@ -702,7 +702,7 @@ class Window : gobject.object.ObjectG
    *   userData = user data to look for
    * Returns: list of child windows inside window
    */
-  gdk.window.Window[] getChildrenWithUserData(void* userData)
+  gdk.window.Window[] getChildrenWithUserData(void* userData = null)
   {
     GList* _cretval;
     _cretval = gdk_window_get_children_with_user_data(cast(GdkWindow*)cPtr, userData);

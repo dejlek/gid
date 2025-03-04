@@ -233,7 +233,7 @@ class StyleContext : gobject.object.ObjectG
 
    * Deprecated: This function does nothing.
    */
-  void cancelAnimations(void* regionId)
+  void cancelAnimations(void* regionId = null)
   {
     gtk_style_context_cancel_animations(cast(GtkStyleContext*)cPtr, regionId);
   }
@@ -710,7 +710,7 @@ class StyleContext : gobject.object.ObjectG
 
    * Deprecated: This function does nothing.
    */
-  void pushAnimatableRegion(void* regionId)
+  void pushAnimatableRegion(void* regionId = null)
   {
     gtk_style_context_push_animatable_region(cast(GtkStyleContext*)cPtr, regionId);
   }

@@ -60,12 +60,12 @@ class SegmentProperties : gobject.boxed.Boxed
     (cast(hb_segment_properties_t*)cPtr).script = cast(hb_script_t)propval;
   }
 
-  @property harfbuzz.types.language_t language()
+  @property harfbuzz.types.Language language()
   {
     return (cast(hb_segment_properties_t*)cPtr).language;
   }
 
-  @property void language(harfbuzz.types.language_t propval)
+  @property void language(harfbuzz.types.Language propval)
   {
     (cast(hb_segment_properties_t*)cPtr).language = propval;
   }

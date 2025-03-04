@@ -79,7 +79,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendStrings(string[] values, bool[] isValids)
+  bool appendStrings(string[] values, bool[] isValids = null)
   {
     bool _retval;
     long _valuesLength;

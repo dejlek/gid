@@ -235,7 +235,7 @@ class DropTarget : gtk.event_controller.EventController
    *   types = all supported `GType`s
    *     that can be dropped on the target
    */
-  void setGtypes(gobject.types.GType[] types)
+  void setGtypes(gobject.types.GType[] types = null)
   {
     size_t _nTypes;
     if (types)

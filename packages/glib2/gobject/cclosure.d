@@ -53,7 +53,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalBOOLEANBOXEDBOXED(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalBOOLEANBOXEDBOXED(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_BOOLEAN__BOXED_BOXED(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -76,7 +76,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalBOOLEANFLAGS(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalBOOLEANFLAGS(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_BOOLEAN__FLAGS(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -98,7 +98,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalSTRINGOBJECTPOINTER(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalSTRINGOBJECTPOINTER(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_STRING__OBJECT_POINTER(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -119,7 +119,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDBOOLEAN(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDBOOLEAN(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__BOOLEAN(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -140,7 +140,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDBOXED(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDBOXED(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__BOXED(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -161,7 +161,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDCHAR(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDCHAR(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__CHAR(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -182,7 +182,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDDOUBLE(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDDOUBLE(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__DOUBLE(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -203,7 +203,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDENUM(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDENUM(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__ENUM(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -224,7 +224,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDFLAGS(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDFLAGS(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__FLAGS(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -245,7 +245,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDFLOAT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDFLOAT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__FLOAT(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -266,7 +266,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDINT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDINT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__INT(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -287,7 +287,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDLONG(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDLONG(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__LONG(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -308,7 +308,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDOBJECT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDOBJECT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__OBJECT(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -329,7 +329,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDPARAM(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDPARAM(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__PARAM(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -353,7 +353,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDPOINTER(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDPOINTER(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__POINTER(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -374,7 +374,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDSTRING(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDSTRING(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__STRING(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -395,7 +395,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDUCHAR(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDUCHAR(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__UCHAR(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -416,7 +416,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDUINT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDUINT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__UINT(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -437,7 +437,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDUINTPOINTER(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDUINTPOINTER(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__UINT_POINTER(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -458,7 +458,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDULONG(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDULONG(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__ULONG(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -479,7 +479,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDVARIANT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDVARIANT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__VARIANT(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -499,7 +499,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalVOIDVOID(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalVOIDVOID(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_VOID__VOID(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }
@@ -522,7 +522,7 @@ class CClosure
    *     marshaller, see [gobject.closure.Closure.setMarshal] and
    *     [gobject.closure.Closure.setMetaMarshal]
    */
-  static void marshalGeneric(gobject.closure.Closure closure, gobject.value.Value returnGvalue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint, void* marshalData)
+  static void marshalGeneric(gobject.closure.Closure closure, gobject.value.Value returnGvalue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
     g_cclosure_marshal_generic(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnGvalue ? cast(GValue*)returnGvalue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
   }

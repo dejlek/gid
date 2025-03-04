@@ -131,7 +131,7 @@ class Queue
    * Returns: the position of the first element in queue which
    *   contains data, or -1 if no element in queue contains data
    */
-  int index(const(void)* data)
+  int index(const(void)* data = null)
   {
     int _retval;
     _retval = g_queue_index(cast(GQueue*)cPtr, data);
@@ -259,7 +259,7 @@ class Queue
    * Params:
    *   data = the data for the new element.
    */
-  void pushHead(void* data)
+  void pushHead(void* data = null)
   {
     g_queue_push_head(cast(GQueue*)cPtr, data);
   }
@@ -282,7 +282,7 @@ class Queue
    * Params:
    *   data = the data for the new element
    */
-  void pushTail(void* data)
+  void pushTail(void* data = null)
   {
     g_queue_push_tail(cast(GQueue*)cPtr, data);
   }
@@ -293,7 +293,7 @@ class Queue
    *   data = the data to remove
    * Returns: %TRUE if data was found and removed from queue
    */
-  bool remove(const(void)* data)
+  bool remove(const(void)* data = null)
   {
     bool _retval;
     _retval = g_queue_remove(cast(GQueue*)cPtr, data);
@@ -306,7 +306,7 @@ class Queue
    *   data = the data to remove
    * Returns: the number of elements removed from queue
    */
-  uint removeAll(const(void)* data)
+  uint removeAll(const(void)* data = null)
   {
     uint _retval;
     _retval = g_queue_remove_all(cast(GQueue*)cPtr, data);

@@ -42,7 +42,7 @@ class Sequence
    *   data = the data for the new item
    * Returns: an iterator pointing to the new item
    */
-  glib.sequence_iter.SequenceIter append(void* data)
+  glib.sequence_iter.SequenceIter append(void* data = null)
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_append(cast(GSequence*)cPtr, data);
@@ -281,7 +281,7 @@ class Sequence
    *   data = the data for the new item
    * Returns: an iterator pointing to the new item
    */
-  glib.sequence_iter.SequenceIter prepend(void* data)
+  glib.sequence_iter.SequenceIter prepend(void* data = null)
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_prepend(cast(GSequence*)cPtr, data);
@@ -451,7 +451,7 @@ class Sequence
    *   data = the data for the new item
    * Returns: an iterator pointing to the new item
    */
-  static glib.sequence_iter.SequenceIter insertBefore(glib.sequence_iter.SequenceIter iter, void* data)
+  static glib.sequence_iter.SequenceIter insertBefore(glib.sequence_iter.SequenceIter iter, void* data = null)
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_insert_before(iter ? cast(GSequenceIter*)iter.cPtr : null, data);
@@ -546,7 +546,7 @@ class Sequence
    *   iter = a #GSequenceIter
    *   data = new data for the item
    */
-  static void set(glib.sequence_iter.SequenceIter iter, void* data)
+  static void set(glib.sequence_iter.SequenceIter iter, void* data = null)
   {
     g_sequence_set(iter ? cast(GSequenceIter*)iter.cPtr : null, data);
   }

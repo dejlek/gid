@@ -18,12 +18,6 @@ alias SchemaType = SecretSchemaType;
 alias SearchFlags = SecretSearchFlags;
 alias ServiceFlags = SecretServiceFlags;
 
-// Structs
-alias CollectionPrivate = SecretCollectionPrivate*;
-alias ItemPrivate = SecretItemPrivate*;
-alias PromptPrivate = SecretPromptPrivate*;
-alias ServicePrivate = SecretServicePrivate*;
-
 /**
  * Extension point for the secret backend.
  */

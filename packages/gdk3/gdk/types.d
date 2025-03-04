@@ -61,7 +61,6 @@ alias WindowTypeHint = GdkWindowTypeHint;
 alias WindowWindowClass = GdkWindowWindowClass;
 
 // Structs
-alias FrameClockPrivate = GdkFrameClockPrivate*;
 alias Geometry = GdkGeometry;
 alias KeymapKey = GdkKeymapKey;
 alias Point = GdkPoint;

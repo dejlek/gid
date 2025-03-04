@@ -35,7 +35,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     this(_cretval, Yes.Take);
   }
 
-  bool appendValue(ubyte[] value)
+  bool appendValue(ubyte[] value = null)
   {
     bool _retval;
     int _length;
@@ -71,7 +71,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendValues(glib.bytes.Bytes[] values, bool[] isValids)
+  bool appendValues(glib.bytes.Bytes[] values, bool[] isValids = null)
   {
     bool _retval;
     long _valuesLength;
@@ -108,7 +108,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
    *     the Nth value is null value.
    * Returns: %TRUE on success, %FALSE if there was an error.
    */
-  bool appendValuesPacked(glib.bytes.Bytes values, bool[] isValids)
+  bool appendValuesPacked(glib.bytes.Bytes values, bool[] isValids = null)
   {
     bool _retval;
     long _isValidsLength;

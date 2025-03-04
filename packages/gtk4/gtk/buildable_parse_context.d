@@ -126,7 +126,7 @@ class BuildableParseContext
    *   parser = a `GtkBuildableParser`
    *   userData = user data to pass to `GtkBuildableParser` functions
    */
-  void push(gtk.types.BuildableParser parser, void* userData)
+  void push(gtk.types.BuildableParser parser, void* userData = null)
   {
     gtk_buildable_parse_context_push(cast(GtkBuildableParseContext*)cPtr, &parser, userData);
   }

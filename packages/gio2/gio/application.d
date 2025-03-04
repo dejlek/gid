@@ -716,7 +716,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
    *   argv = the argv from main$(LPAREN)$(RPAREN), or %NULL
    * Returns: the exit status
    */
-  int run(string[] argv)
+  int run(string[] argv = null)
   {
     int _retval;
     int _argc;

@@ -304,7 +304,7 @@ class ServerMessage : gobject.object.ObjectG
    *   respUse = a #SoupMemoryUse describing how to handle resp_body
    *   respBody = a data buffer containing the body of the message response.
    */
-  void setResponse(string contentType, soup.types.MemoryUse respUse, ubyte[] respBody)
+  void setResponse(string contentType, soup.types.MemoryUse respUse, ubyte[] respBody = null)
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
     size_t _respLength;

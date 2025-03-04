@@ -71,7 +71,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
    *     radio menu item is to be attached, or %NULL
    * Returns: a new #GtkRadioMenuItem
    */
-  this(gtk.radio_menu_item.RadioMenuItem[] group)
+  this(gtk.radio_menu_item.RadioMenuItem[] group = null)
   {
     GtkWidget* _cretval;
     auto _group = gSListFromD!(gtk.radio_menu_item.RadioMenuItem)(group);
@@ -216,7 +216,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
    * Params:
    *   group = the new group, or %NULL.
    */
-  void setGroup(gtk.radio_menu_item.RadioMenuItem[] group)
+  void setGroup(gtk.radio_menu_item.RadioMenuItem[] group = null)
   {
     auto _group = gSListFromD!(gtk.radio_menu_item.RadioMenuItem)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_menu_item.RadioMenuItem, GidOwnership.None)(_group);

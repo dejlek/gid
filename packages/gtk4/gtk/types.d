@@ -169,31 +169,11 @@ alias WrapMode = GtkWrapMode;
 // Structs
 alias AccessibleTextRange = GtkAccessibleTextRange;
 alias BuildableParser = GtkBuildableParser;
-alias ButtonPrivate = GtkButtonPrivate*;
-alias CellAreaContextPrivate = GtkCellAreaContextPrivate*;
-alias CellRendererClassPrivate = GtkCellRendererClassPrivate*;
-alias CellRendererPrivate = GtkCellRendererPrivate*;
 alias CssLocation = GtkCssLocation;
-alias CssProviderPrivate = GtkCssProviderPrivate*;
 alias CssStyleChange = GtkCssStyleChange*;
-alias IMContextSimplePrivate = GtkIMContextSimplePrivate*;
-alias IMMulticontextPrivate = GtkIMMulticontextPrivate*;
-alias ListStorePrivate = GtkListStorePrivate*;
-alias MountOperationPrivate = GtkMountOperationPrivate*;
 alias PageRange = GtkPageRange;
 alias PrintBackend = GtkPrintBackend*;
-alias PrintOperationPrivate = GtkPrintOperationPrivate*;
-alias RecentManagerPrivate = GtkRecentManagerPrivate*;
 alias RequestedSize = GtkRequestedSize;
-alias TextBufferPrivate = GtkTextBufferPrivate*;
-alias TextTagPrivate = GtkTextTagPrivate*;
-alias TextViewPrivate = GtkTextViewPrivate*;
-alias TreeModelFilterPrivate = GtkTreeModelFilterPrivate*;
-alias TreeModelSortPrivate = GtkTreeModelSortPrivate*;
-alias TreeStorePrivate = GtkTreeStorePrivate*;
-alias WidgetClassPrivate = GtkWidgetClassPrivate*;
-alias WidgetPrivate = GtkWidgetPrivate*;
-alias WindowGroupPrivate = GtkWindowGroupPrivate*;
 
 // Callbacks
 alias AssistantPageFunc = int delegate(int currentPage);

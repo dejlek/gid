@@ -46,7 +46,7 @@ class GLShaderNode : gsk.render_node.RenderNode
    *     these will be rendered to textures and used as input.
    * Returns: A new `GskRenderNode`
    */
-  this(gsk.glshader.GLShader shader, graphene.rect.Rect bounds, glib.bytes.Bytes args, gsk.render_node.RenderNode[] children)
+  this(gsk.glshader.GLShader shader, graphene.rect.Rect bounds, glib.bytes.Bytes args, gsk.render_node.RenderNode[] children = null)
   {
     GskRenderNode* _cretval;
     uint _nChildren;

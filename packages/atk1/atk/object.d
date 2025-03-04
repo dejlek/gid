@@ -222,7 +222,7 @@ class ObjectAtk : gobject.object.ObjectG
    * Params:
    *   data = a #gpointer which identifies the object for which the AtkObject was created.
    */
-  void initialize(void* data)
+  void initialize(void* data = null)
   {
     atk_object_initialize(cast(AtkObject*)cPtr, data);
   }

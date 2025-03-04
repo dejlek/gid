@@ -9,7 +9,7 @@ import harfbuzz.types;
 /**
  * Data type for holding font faces.
  */
-class HBFace : gobject.boxed.Boxed
+class Face : gobject.boxed.Boxed
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)

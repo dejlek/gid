@@ -27,7 +27,7 @@ class Tensor : gobject.object.ObjectG
     return getType();
   }
 
-  this(arrow.data_type.DataType dataType, arrow.buffer.Buffer data, long[] shape, long[] strides, string[] dimensionNames)
+  this(arrow.data_type.DataType dataType, arrow.buffer.Buffer data, long[] shape, long[] strides = null, string[] dimensionNames = null)
   {
     GArrowTensor* _cretval;
     size_t _nDimensions;

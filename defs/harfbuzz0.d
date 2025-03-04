@@ -1,6 +1,7 @@
 //!gir HarfBuzz-0.0
 
-//!subtype face_t HBFace
+//!subtype face_t Face
+//!subtype language_t Language
 
 //# Disable problematic callbacks
 //!set callback[font_get_glyph_advances_func_t][introspectable] 0

@@ -185,7 +185,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   data = a string in the terminal's current encoding
    */
-  void feed(ubyte[] data)
+  void feed(ubyte[] data = null)
   {
     ptrdiff_t _length;
     if (data)
@@ -201,7 +201,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Params:
    *   text = data to send to the child
    */
-  void feedChild(ubyte[] text)
+  void feedChild(ubyte[] text = null)
   {
     ptrdiff_t _length;
     if (text)
@@ -219,7 +219,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    * Deprecated: Don't send binary data. Use [vte.terminal.Terminal.feedChild] instead to send
    *   UTF-8 text
    */
-  void feedChildBinary(ubyte[] data)
+  void feedChildBinary(ubyte[] data = null)
   {
     size_t _length;
     if (data)
@@ -1175,7 +1175,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
    *   background = the new background color, or %NULL
    *   palette = the color palette
    */
-  void setColors(gdk.rgba.RGBA foreground, gdk.rgba.RGBA background, gdk.rgba.RGBA[] palette)
+  void setColors(gdk.rgba.RGBA foreground = null, gdk.rgba.RGBA background = null, gdk.rgba.RGBA[] palette = null)
   {
     size_t _paletteSize;
     if (palette)

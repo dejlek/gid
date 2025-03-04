@@ -113,7 +113,7 @@ template AsyncResultT()
    * Returns: %TRUE if res has the indicated source_tag, %FALSE if
    *   not.
    */
-  override bool isTagged(void* sourceTag)
+  override bool isTagged(void* sourceTag = null)
   {
     bool _retval;
     _retval = g_async_result_is_tagged(cast(GAsyncResult*)cPtr, sourceTag);

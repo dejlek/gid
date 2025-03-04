@@ -48,7 +48,6 @@ alias GlyphGeometry = PangoGlyphGeometry;
 alias GlyphVisAttr = PangoGlyphVisAttr;
 alias LogAttr = PangoLogAttr;
 alias Rectangle = PangoRectangle;
-alias RendererPrivate = PangoRendererPrivate*;
 
 // Callbacks
 alias AttrDataCopyFunc = void* delegate();

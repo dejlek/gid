@@ -4501,6 +4501,11 @@ struct hb_draw_state_t
 }
 
 /**
+ * Data type for holding font faces.
+ */
+struct hb_face_t;
+
+/**
  * The #hb_feature_t is the structure that holds information about requested
  * feature application. The feature will be applied with the given value to all
  * glyphs which are in clusters between @start $(LPAREN)inclusive$(RPAREN) and @end $(LPAREN)exclusive$(RPAREN).
@@ -4685,9 +4690,12 @@ struct hb_glyph_position_t
 }
 
 /**
- * Data type for holding font faces.
+ * Data type for languages. Each #hb_language_t corresponds to a BCP 47
+ * language tag.
  */
-struct hb_face_t;
+alias hb_language_t = hb_language_t_st*;
+
+struct hb_language_t_st;
 
 /**
  * Data type for holding integer-to-integer hash maps.
@@ -5007,14 +5015,6 @@ struct hb_variation_t
    */
   float value;
 }
-
-/**
- * Data type for languages. Each #hb_language_t corresponds to a BCP 47
- * language tag.
- */
-alias hb_language_t = hb_language_t_st*;
-
-struct hb_language_t_st;
 
 alias extern(C) hb_bool_t function(hb_buffer_t* buffer, hb_font_t* font, const(char)* message, void* userData) hb_buffer_message_func_t;
 

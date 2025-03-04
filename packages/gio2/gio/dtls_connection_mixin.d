@@ -364,7 +364,7 @@ template DtlsConnectionT()
    *   protocols = a %NULL-terminated
    *     array of ALPN protocol names $(LPAREN)eg, "http/1.1", "h2"$(RPAREN), or %NULL
    */
-  override void setAdvertisedProtocols(string[] protocols)
+  override void setAdvertisedProtocols(string[] protocols = null)
   {
     char*[] _tmpprotocols;
     foreach (s; protocols)

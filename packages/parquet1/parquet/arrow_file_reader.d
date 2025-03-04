@@ -98,7 +98,7 @@ class ArrowFileReader : gobject.object.ObjectG
     return _retval;
   }
 
-  arrow.table.Table readRowGroup(int rowGroupIndex, int[] columnIndices)
+  arrow.table.Table readRowGroup(int rowGroupIndex, int[] columnIndices = null)
   {
     GArrowTable* _cretval;
     size_t _nColumnIndices;

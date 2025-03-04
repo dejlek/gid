@@ -61,7 +61,7 @@ class StringList : gobject.object.ObjectG, gio.list_model.ListModel, gtk.buildab
    *   strings = The strings to put in the model
    * Returns: a new `GtkStringList`
    */
-  this(string[] strings)
+  this(string[] strings = null)
   {
     GtkStringList* _cretval;
     char*[] _tmpstrings;
@@ -130,7 +130,7 @@ class StringList : gobject.object.ObjectG, gio.list_model.ListModel, gtk.buildab
    *   nRemovals = the number of strings to remove
    *   additions = The strings to add
    */
-  void splice(uint position, uint nRemovals, string[] additions)
+  void splice(uint position, uint nRemovals, string[] additions = null)
   {
     char*[] _tmpadditions;
     foreach (s; additions)

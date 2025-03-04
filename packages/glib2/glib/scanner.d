@@ -312,7 +312,7 @@ class Scanner
    *   symbol = the symbol to add
    *   value = the value of the symbol
    */
-  void scopeAddSymbol(uint scopeId, string symbol, void* value)
+  void scopeAddSymbol(uint scopeId, string symbol, void* value = null)
   {
     const(char)* _symbol = symbol.toCString(No.Alloc);
     g_scanner_scope_add_symbol(cast(GScanner*)cPtr, scopeId, _symbol, value);

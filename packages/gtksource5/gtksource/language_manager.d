@@ -217,7 +217,7 @@ class LanguageManager : gobject.object.ObjectG
    *   dirs = a %NULL-terminated array of
    *     strings or %NULL.
    */
-  void setSearchPath(string[] dirs)
+  void setSearchPath(string[] dirs = null)
   {
     char*[] _tmpdirs;
     foreach (s; dirs)

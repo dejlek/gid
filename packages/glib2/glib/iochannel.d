@@ -555,7 +555,7 @@ class IOChannel : gobject.boxed.Boxed
    *     and the Unicode paragraph separator. Autodetection should not be
    *     used for anything other than file-based channels.
    */
-  void setLineTerm(string lineTerm)
+  void setLineTerm(string lineTerm = null)
   {
     int _length;
     if (lineTerm)

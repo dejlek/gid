@@ -50,7 +50,7 @@ class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyReso
    *     to not use a proxy for.
    * Returns: a new #GSimpleProxyResolver
    */
-  static gio.proxy_resolver.ProxyResolver new_(string defaultProxy, string[] ignoreHosts)
+  static gio.proxy_resolver.ProxyResolver new_(string defaultProxy = null, string[] ignoreHosts = null)
   {
     GProxyResolver* _cretval;
     const(char)* _defaultProxy = defaultProxy.toCString(No.Alloc);

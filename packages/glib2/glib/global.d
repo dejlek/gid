@@ -84,7 +84,7 @@ void* alignedAlloc0(size_t nBlocks, size_t nBlockBytes, size_t alignment)
  * Params:
  *   mem = the memory to deallocate
  */
-void alignedFree(void* mem)
+void alignedFree(void* mem = null)
 {
   g_aligned_free(mem);
 }
@@ -865,7 +865,7 @@ size_t atomicPointerAnd(void* atomic, size_t val)
  *   newval = the value to conditionally replace with
  * Returns: %TRUE if the exchange took place
  */
-bool atomicPointerCompareAndExchange(void* atomic, void* oldval, void* newval)
+bool atomicPointerCompareAndExchange(void* atomic, void* oldval = null, void* newval = null)
 {
   bool _retval;
   _retval = g_atomic_pointer_compare_and_exchange(atomic, oldval, newval);
@@ -906,7 +906,7 @@ bool atomicPointerCompareAndExchangeFull(void* atomic, void* oldval, void* newva
  *   newval = the value to replace with
  * Returns: the value of atomic before the exchange
  */
-void* atomicPointerExchange(void* atomic, void* newval)
+void* atomicPointerExchange(void* atomic = null, void* newval = null)
 {
   auto _retval = g_atomic_pointer_exchange(atomic, newval);
   return _retval;
@@ -961,7 +961,7 @@ size_t atomicPointerOr(void* atomic, size_t val)
  *   atomic = a pointer to a #gpointer-sized value
  *   newval = a new value to store
  */
-void atomicPointerSet(void* atomic, void* newval)
+void atomicPointerSet(void* atomic, void* newval = null)
 {
   g_atomic_pointer_set(atomic, newval);
 }
@@ -1184,7 +1184,7 @@ ubyte[] base64Decode(string text)
  *   encoded string representing data. The returned string must
  *   be freed with [glib.global.gfree].
  */
-string base64Encode(ubyte[] data)
+string base64Encode(ubyte[] data = null)
 {
   char* _cretval;
   size_t _len;
@@ -2066,7 +2066,7 @@ string dgettext(string domain, string msgid)
  *   v2 = a key to compare with v1
  * Returns: %TRUE if the two keys match.
  */
-bool directEqual(const(void)* v1, const(void)* v2)
+bool directEqual(const(void)* v1 = null, const(void)* v2 = null)
 {
   bool _retval;
   _retval = g_direct_equal(v1, v2);
@@ -2084,7 +2084,7 @@ bool directEqual(const(void)* v1, const(void)* v2)
  *   v = a #gpointer key
  * Returns: a hash value corresponding to the key.
  */
-uint directHash(const(void)* v)
+uint directHash(const(void)* v = null)
 {
   uint _retval;
   _retval = g_direct_hash(v);
@@ -2879,7 +2879,7 @@ string formatSizeFull(ulong size, glib.types.FormatSizeFlags flags)
  * Params:
  *   mem = the memory to free
  */
-void gfree(void* mem)
+void gfree(void* mem = null)
 {
   g_free(mem);
 }
@@ -2914,7 +2914,7 @@ void freeSized(void* mem, size_t size)
  * Returns: A FILE* if the file was successfully opened, or %NULL if
  *   an error occurred.
  */
-void* freopen(string filename, string mode, void* stream)
+void* freopen(string filename, string mode, void* stream = null)
 {
   const(char)* _filename = filename.toCString(No.Alloc);
   const(char)* _mode = mode.toCString(No.Alloc);
@@ -3831,7 +3831,7 @@ uint idleAdd(int priority, glib.types.SourceFunc function_)
  *   data = the data for the idle source's callback.
  * Returns: %TRUE if an idle source was found and removed.
  */
-bool idleRemoveByData(void* data)
+bool idleRemoveByData(void* data = null)
 {
   bool _retval;
   _retval = g_idle_remove_by_data(data);
@@ -4170,7 +4170,7 @@ string localeToUtf8(ubyte[] opsysstring, out size_t bytesRead, out size_t bytesW
  *   message = the message
  *   unusedData = data passed from funcGLib.log which is unused
  */
-void logDefaultHandler(string logDomain, glib.types.LogLevelFlags logLevel, string message, void* unusedData)
+void logDefaultHandler(string logDomain, glib.types.LogLevelFlags logLevel, string message = null, void* unusedData = null)
 {
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
   const(char)* _message = message.toCString(No.Alloc);
@@ -4343,7 +4343,7 @@ void logVariant(string logDomain, glib.types.LogLevelFlags logLevel, glib.varian
  *   domains = `NULL`-terminated array with domains to be printed.
  *     `NULL` or an array with no values means none. Array with a single value `"all"` means all.
  */
-void logWriterDefaultSetDebugDomains(string[] domains)
+void logWriterDefaultSetDebugDomains(string[] domains = null)
 {
   const(char)*[] _tmpdomains;
   foreach (s; domains)
@@ -5081,7 +5081,7 @@ void pointerBitLockAndGet(void* address, uint lockBit, out size_t outPtr)
  *     from this pointer are set in the result.
  * Returns: the mangled pointer.
  */
-void* pointerBitLockMaskPtr(void* ptr, uint lockBit, bool set, size_t preserveMask, void* preservePtr)
+void* pointerBitLockMaskPtr(void* ptr, uint lockBit, bool set, size_t preserveMask, void* preservePtr = null)
 {
   auto _retval = g_pointer_bit_lock_mask_ptr(ptr, lockBit, set, preserveMask, preservePtr);
   return _retval;
@@ -5977,7 +5977,7 @@ void* sliceAlloc0(size_t blockSize)
  * Returns: a pointer to the allocated memory block,
  *   which will be %NULL if and only if mem_size is 0
  */
-void* sliceCopy(size_t blockSize, const(void)* memBlock)
+void* sliceCopy(size_t blockSize, const(void)* memBlock = null)
 {
   auto _retval = g_slice_copy(blockSize, memBlock);
   return _retval;
@@ -5997,7 +5997,7 @@ void* sliceCopy(size_t blockSize, const(void)* memBlock)
  *   blockSize = the size of the block
  *   memBlock = a pointer to the block to free
  */
-void sliceFree1(size_t blockSize, void* memBlock)
+void sliceFree1(size_t blockSize, void* memBlock = null)
 {
   g_slice_free1(blockSize, memBlock);
 }
@@ -7156,7 +7156,7 @@ string strdup(string str = null)
  * Returns: a
  *   newly-allocated array of strings. Use funcGLib.strfreev to free it.
  */
-string[] strdupv(string[] strArray)
+string[] strdupv(string[] strArray = null)
 {
   char** _cretval;
   char*[] _tmpstrArray;
@@ -7959,7 +7959,7 @@ string testLogTypeName(glib.types.TestLogType logType)
  * Params:
  *   gfreePointer = the pointer to be stored.
  */
-void testQueueFree(void* gfreePointer)
+void testQueueFree(void* gfreePointer = null)
 {
   g_test_queue_free(gfreePointer);
 }

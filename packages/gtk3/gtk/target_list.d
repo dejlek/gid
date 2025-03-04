@@ -45,7 +45,7 @@ class TargetList : gobject.boxed.Boxed
    *     of #GtkTargetEntry
    * Returns: the new #GtkTargetList.
    */
-  this(gtk.target_entry.TargetEntry[] targets)
+  this(gtk.target_entry.TargetEntry[] targets = null)
   {
     GtkTargetList* _cretval;
     uint _ntargets;

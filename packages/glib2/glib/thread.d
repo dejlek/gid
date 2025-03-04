@@ -166,7 +166,7 @@ class Thread : gobject.boxed.Boxed
    * Params:
    *   retval = the return value of this thread
    */
-  static void exit(void* retval)
+  static void exit(void* retval = null)
   {
     g_thread_exit(retval);
   }

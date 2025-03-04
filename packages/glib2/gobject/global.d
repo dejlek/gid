@@ -936,7 +936,7 @@ gobject.types.GType pointerTypeRegisterStatic(string name)
  *   dummy = standard #GSignalAccumulator parameter
  * Returns: standard #GSignalAccumulator result
  */
-bool signalAccumulatorFirstWins(gobject.types.SignalInvocationHint ihint, gobject.value.Value returnAccu, gobject.value.Value handlerReturn, void* dummy)
+bool signalAccumulatorFirstWins(gobject.types.SignalInvocationHint ihint, gobject.value.Value returnAccu, gobject.value.Value handlerReturn, void* dummy = null)
 {
   bool _retval;
   _retval = g_signal_accumulator_first_wins(&ihint, returnAccu ? cast(GValue*)returnAccu.cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn.cPtr(No.Dup) : null, dummy);
@@ -958,7 +958,7 @@ bool signalAccumulatorFirstWins(gobject.types.SignalInvocationHint ihint, gobjec
  *   dummy = standard #GSignalAccumulator parameter
  * Returns: standard #GSignalAccumulator result
  */
-bool signalAccumulatorTrueHandled(gobject.types.SignalInvocationHint ihint, gobject.value.Value returnAccu, gobject.value.Value handlerReturn, void* dummy)
+bool signalAccumulatorTrueHandled(gobject.types.SignalInvocationHint ihint, gobject.value.Value returnAccu, gobject.value.Value handlerReturn, void* dummy = null)
 {
   bool _retval;
   _retval = g_signal_accumulator_true_handled(&ihint, returnAccu ? cast(GValue*)returnAccu.cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn.cPtr(No.Dup) : null, dummy);
@@ -1106,7 +1106,7 @@ void signalHandlerDisconnect(gobject.object.ObjectG instance, gulong handlerId)
  *   func = The C closure callback of the handler $(LPAREN)useless for non-C closures$(RPAREN).
  * Returns: A valid non-0 signal handler id for a successful match.
  */
-gulong signalHandlerFind(gobject.object.ObjectG instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure, void* func)
+gulong signalHandlerFind(gobject.object.ObjectG instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
 {
   gulong _retval;
   _retval = g_signal_handler_find(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, func, null);
@@ -1170,7 +1170,7 @@ void signalHandlerUnblock(gobject.object.ObjectG instance, gulong handlerId)
  *   func = The C closure callback of the handlers $(LPAREN)useless for non-C closures$(RPAREN).
  * Returns: The number of handlers that matched.
  */
-uint signalHandlersBlockMatched(gobject.object.ObjectG instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure, void* func)
+uint signalHandlersBlockMatched(gobject.object.ObjectG instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
 {
   uint _retval;
   _retval = g_signal_handlers_block_matched(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, func, null);
@@ -1211,7 +1211,7 @@ void signalHandlersDestroy(gobject.object.ObjectG instance)
  *   func = The C closure callback of the handlers $(LPAREN)useless for non-C closures$(RPAREN).
  * Returns: The number of handlers that matched.
  */
-uint signalHandlersDisconnectMatched(gobject.object.ObjectG instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure, void* func)
+uint signalHandlersDisconnectMatched(gobject.object.ObjectG instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
 {
   uint _retval;
   _retval = g_signal_handlers_disconnect_matched(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, func, null);
@@ -1241,7 +1241,7 @@ uint signalHandlersDisconnectMatched(gobject.object.ObjectG instance, gobject.ty
  *   func = The C closure callback of the handlers $(LPAREN)useless for non-C closures$(RPAREN).
  * Returns: The number of handlers that matched.
  */
-uint signalHandlersUnblockMatched(gobject.object.ObjectG instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure, void* func)
+uint signalHandlersUnblockMatched(gobject.object.ObjectG instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
 {
   uint _retval;
   _retval = g_signal_handlers_unblock_matched(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, func, null);
@@ -1378,7 +1378,7 @@ string signalName(uint signalId)
  *     each parameter $(LPAREN)may be %NULL if n_params is zero$(RPAREN)
  * Returns: the signal id
  */
-uint signalNewv(string signalName, gobject.types.GType itype, gobject.types.SignalFlags signalFlags, gobject.closure.Closure classClosure, gobject.types.SignalAccumulator accumulator, gobject.types.SignalCMarshaller cMarshaller, gobject.types.GType returnType, gobject.types.GType[] paramTypes)
+uint signalNewv(string signalName, gobject.types.GType itype, gobject.types.SignalFlags signalFlags, gobject.closure.Closure classClosure, gobject.types.SignalAccumulator accumulator, gobject.types.SignalCMarshaller cMarshaller, gobject.types.GType returnType, gobject.types.GType[] paramTypes = null)
 {
   extern(C) bool _accumulatorCallback(GSignalInvocationHint* ihint, GValue* returnAccu, const(GValue)* handlerReturn, void* data)
   {
@@ -1954,7 +1954,7 @@ void typeQuery(gobject.types.GType type, out gobject.type_query.TypeQuery query)
  *   quark = a #GQuark id to identify the data
  *   data = the data
  */
-void typeSetQdata(gobject.types.GType type, glib.types.Quark quark, void* data)
+void typeSetQdata(gobject.types.GType type, glib.types.Quark quark, void* data = null)
 {
   g_type_set_qdata(type, quark, data);
 }

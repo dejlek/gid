@@ -108,7 +108,6 @@ alias OptionEntry = GOptionEntry;
 alias PollFD = GPollFD;
 alias SourceCallbackFuncs = GSourceCallbackFuncs;
 alias SourceFuncs = GSourceFuncs;
-alias SourcePrivate = GSourcePrivate*;
 alias StatBuf = GStatBuf*;
 alias TestCase = GTestCase*;
 alias TestConfig = GTestConfig;

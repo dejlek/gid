@@ -1230,7 +1230,7 @@ class Settings : gobject.object.ObjectG
    * Returns: %TRUE if setting the key succeeded,
    *   %FALSE if the key was not writable
    */
-  bool setStrv(string key, string[] value)
+  bool setStrv(string key, string[] value = null)
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);

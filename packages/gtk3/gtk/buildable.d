@@ -61,7 +61,7 @@ interface Buildable
    *   tagname = the name of the tag
    *   data = user data created in custom_tag_start
    */
-  void customFinished(gtk.builder.Builder builder, gobject.object.ObjectG child, string tagname, void* data);
+  void customFinished(gtk.builder.Builder builder, gobject.object.ObjectG child, string tagname, void* data = null);
 
   /**
    * This is called for each unknown element under `<child>`.

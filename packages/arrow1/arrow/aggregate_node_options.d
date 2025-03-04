@@ -27,7 +27,7 @@ class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getType();
   }
 
-  this(arrow.aggregation.Aggregation[] aggregations, string[] keys)
+  this(arrow.aggregation.Aggregation[] aggregations, string[] keys = null)
   {
     GArrowAggregateNodeOptions* _cretval;
     auto _aggregations = gListFromD!(arrow.aggregation.Aggregation)(aggregations);

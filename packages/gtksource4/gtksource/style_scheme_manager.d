@@ -160,7 +160,7 @@ class StyleSchemeManager : gobject.object.ObjectG
    * Params:
    *   path = a %NULL-terminated array of strings or %NULL.
    */
-  void setSearchPath(string[] path)
+  void setSearchPath(string[] path = null)
   {
     char*[] _tmppath;
     foreach (s; path)

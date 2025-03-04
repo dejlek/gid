@@ -86,7 +86,7 @@ class SettingsBackend : gobject.object.ObjectG
    *   key = the name of the key
    *   originTag = the origin tag
    */
-  void changed(string key, void* originTag)
+  void changed(string key, void* originTag = null)
   {
     const(char)* _key = key.toCString(No.Alloc);
     g_settings_backend_changed(cast(GSettingsBackend*)cPtr, _key, originTag);
@@ -115,7 +115,7 @@ class SettingsBackend : gobject.object.ObjectG
    *   items = the %NULL-terminated list of changed keys
    *   originTag = the origin tag
    */
-  void keysChanged(string path, string[] items, void* originTag)
+  void keysChanged(string path, string[] items, void* originTag = null)
   {
     const(char)* _path = path.toCString(No.Alloc);
     char*[] _tmpitems;
@@ -148,7 +148,7 @@ class SettingsBackend : gobject.object.ObjectG
    *   path = the path containing the changes
    *   originTag = the origin tag
    */
-  void pathChanged(string path, void* originTag)
+  void pathChanged(string path, void* originTag = null)
   {
     const(char)* _path = path.toCString(No.Alloc);
     g_settings_backend_path_changed(cast(GSettingsBackend*)cPtr, _path, originTag);

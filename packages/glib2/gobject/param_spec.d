@@ -169,7 +169,7 @@ class ParamSpec
    *   quark = a #GQuark, naming the user data pointer
    *   data = an opaque user data pointer
    */
-  void setQdata(glib.types.Quark quark, void* data)
+  void setQdata(glib.types.Quark quark, void* data = null)
   {
     g_param_spec_set_qdata(cast(GParamSpec*)cPtr, quark, data);
   }

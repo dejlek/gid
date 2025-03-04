@@ -192,7 +192,7 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
 
    * Deprecated: Use [gio.task.Task.new_] instead.
    */
-  this(gobject.object.ObjectG sourceObject, gio.types.AsyncReadyCallback callback, void* sourceTag)
+  this(gobject.object.ObjectG sourceObject = null, gio.types.AsyncReadyCallback callback = null, void* sourceTag = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {
@@ -257,7 +257,7 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
 
    * Deprecated: Use #GTask and [gio.task.Task.isValid] instead.
    */
-  static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectG source, void* sourceTag)
+  static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectG source = null, void* sourceTag = null)
   {
     bool _retval;
     _retval = g_simple_async_result_is_valid(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, source ? cast(ObjectC*)source.cPtr(No.Dup) : null, sourceTag);

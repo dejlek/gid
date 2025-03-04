@@ -64,7 +64,7 @@ template FileChooserT()
 
    * Deprecated: Use [gtk.file_dialog.FileDialog] instead
    */
-  override void addChoice(string id, string label, string[] options, string[] optionLabels)
+  override void addChoice(string id, string label, string[] options = null, string[] optionLabels = null)
   {
     const(char)* _id = id.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);

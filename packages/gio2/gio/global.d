@@ -531,7 +531,7 @@ bool contentTypeIsUnknown(string type)
  *     directories to load MIME data from, including any `mime/` subdirectory,
  *     and with the first directory to try listed first
  */
-void contentTypeSetMimeDirs(string[] dirs)
+void contentTypeSetMimeDirs(string[] dirs = null)
 {
   char*[] _tmpdirs;
   foreach (s; dirs)

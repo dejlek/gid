@@ -149,7 +149,7 @@ class MainContext : gobject.boxed.Boxed
    *   userData = the user data from the callback.
    * Returns: the source, if one was found, otherwise %NULL
    */
-  glib.source.Source findSourceByFuncsUserData(glib.types.SourceFuncs funcs, void* userData)
+  glib.source.Source findSourceByFuncsUserData(glib.types.SourceFuncs funcs, void* userData = null)
   {
     GSource* _cretval;
     _cretval = g_main_context_find_source_by_funcs_user_data(cast(GMainContext*)cPtr, &funcs, userData);
@@ -188,7 +188,7 @@ class MainContext : gobject.boxed.Boxed
    *   userData = the user_data for the callback.
    * Returns: the source, if one was found, otherwise %NULL
    */
-  glib.source.Source findSourceByUserData(void* userData)
+  glib.source.Source findSourceByUserData(void* userData = null)
   {
     GSource* _cretval;
     _cretval = g_main_context_find_source_by_user_data(cast(GMainContext*)cPtr, userData);

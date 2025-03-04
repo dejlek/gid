@@ -110,7 +110,7 @@ class RadioButton : gtk.check_button.CheckButton
    *     radio button group, or %NULL if you are creating a new group.
    * Returns: a new radio button
    */
-  this(gtk.radio_button.RadioButton[] group)
+  this(gtk.radio_button.RadioButton[] group = null)
   {
     GtkWidget* _cretval;
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
@@ -261,7 +261,7 @@ class RadioButton : gtk.check_button.CheckButton
    *   group = an existing radio
    *     button group, such as one returned from [gtk.radio_button.RadioButton.getGroup], or %NULL.
    */
-  void setGroup(gtk.radio_button.RadioButton[] group)
+  void setGroup(gtk.radio_button.RadioButton[] group = null)
   {
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);

@@ -314,7 +314,7 @@ template AppInfoT()
    *   context = a #GAppLaunchContext or %NULL
    * Returns: %TRUE on successful launch, %FALSE otherwise.
    */
-  override bool launch(gio.file.File[] files, gio.app_launch_context.AppLaunchContext context = null)
+  override bool launch(gio.file.File[] files = null, gio.app_launch_context.AppLaunchContext context = null)
   {
     bool _retval;
     auto _files = gListFromD!(gio.file.File)(files);
@@ -342,7 +342,7 @@ template AppInfoT()
    *   context = a #GAppLaunchContext or %NULL
    * Returns: %TRUE on successful launch, %FALSE otherwise.
    */
-  override bool launchUris(string[] uris, gio.app_launch_context.AppLaunchContext context = null)
+  override bool launchUris(string[] uris = null, gio.app_launch_context.AppLaunchContext context = null)
   {
     bool _retval;
     auto _uris = gListFromD!(string)(uris);
@@ -366,7 +366,7 @@ template AppInfoT()
    *   cancellable = a #GCancellable
    *   callback = a #GAsyncReadyCallback to call when the request is done
    */
-  override void launchUrisAsync(string[] uris, gio.app_launch_context.AppLaunchContext context = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void launchUrisAsync(string[] uris = null, gio.app_launch_context.AppLaunchContext context = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
     {

@@ -134,7 +134,7 @@ interface FileChooser
    *   options = ids for the options of the choice, or %NULL for a boolean choice
    *   optionLabels = user-visible labels for the options, must be the same length as options
    */
-  void addChoice(string id, string label, string[] options, string[] optionLabels);
+  void addChoice(string id, string label, string[] options = null, string[] optionLabels = null);
 
   /**
    * Adds filter to the list of filters that the user can select between.

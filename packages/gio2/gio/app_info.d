@@ -528,7 +528,7 @@ interface AppInfo
    *   context = a #GAppLaunchContext or %NULL
    * Returns: %TRUE on successful launch, %FALSE otherwise.
    */
-  bool launch(gio.file.File[] files, gio.app_launch_context.AppLaunchContext context = null);
+  bool launch(gio.file.File[] files = null, gio.app_launch_context.AppLaunchContext context = null);
 
   /**
    * Launches the application. This passes the uris to the launched application
@@ -546,7 +546,7 @@ interface AppInfo
    *   context = a #GAppLaunchContext or %NULL
    * Returns: %TRUE on successful launch, %FALSE otherwise.
    */
-  bool launchUris(string[] uris, gio.app_launch_context.AppLaunchContext context = null);
+  bool launchUris(string[] uris = null, gio.app_launch_context.AppLaunchContext context = null);
 
   /**
    * Async version of [gio.app_info.AppInfo.launchUris].
@@ -560,7 +560,7 @@ interface AppInfo
    *   cancellable = a #GCancellable
    *   callback = a #GAsyncReadyCallback to call when the request is done
    */
-  void launchUrisAsync(string[] uris, gio.app_launch_context.AppLaunchContext context = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
+  void launchUrisAsync(string[] uris = null, gio.app_launch_context.AppLaunchContext context = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null);
 
   /**
    * Finishes a [gio.app_info.AppInfo.launchUrisAsync] operation.

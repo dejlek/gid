@@ -33,6 +33,9 @@ __gshared extern(C)
   // DrawState
   extern(C) GType function() c_hb_gobject_draw_state_get_type;
 
+  // Face
+  extern(C) GType function() c_hb_gobject_face_get_type;
+
   // Feature
   extern(C) GType function() c_hb_gobject_feature_get_type;
 
@@ -47,9 +50,6 @@ __gshared extern(C)
 
   // GlyphPosition
   extern(C) GType function() c_hb_gobject_glyph_position_get_type;
-
-  // HBFace
-  extern(C) GType function() c_hb_gobject_face_get_type;
 
   // Map
   extern(C) GType function() c_hb_gobject_map_get_type;
@@ -600,6 +600,9 @@ alias hb_gobject_draw_funcs_get_type = c_hb_gobject_draw_funcs_get_type;
 // DrawState
 alias hb_gobject_draw_state_get_type = c_hb_gobject_draw_state_get_type;
 
+// Face
+alias hb_gobject_face_get_type = c_hb_gobject_face_get_type;
+
 // Feature
 alias hb_gobject_feature_get_type = c_hb_gobject_feature_get_type;
 
@@ -614,9 +617,6 @@ alias hb_gobject_glyph_info_get_type = c_hb_gobject_glyph_info_get_type;
 
 // GlyphPosition
 alias hb_gobject_glyph_position_get_type = c_hb_gobject_glyph_position_get_type;
-
-// HBFace
-alias hb_gobject_face_get_type = c_hb_gobject_face_get_type;
 
 // Map
 alias hb_gobject_map_get_type = c_hb_gobject_map_get_type;
@@ -1168,6 +1168,9 @@ shared static this()
   // DrawState
   gidLink(cast(void**)&hb_gobject_draw_state_get_type, "hb_gobject_draw_state_get_type", LIBS);
 
+  // Face
+  gidLink(cast(void**)&hb_gobject_face_get_type, "hb_gobject_face_get_type", LIBS);
+
   // Feature
   gidLink(cast(void**)&hb_gobject_feature_get_type, "hb_gobject_feature_get_type", LIBS);
 
@@ -1182,9 +1185,6 @@ shared static this()
 
   // GlyphPosition
   gidLink(cast(void**)&hb_gobject_glyph_position_get_type, "hb_gobject_glyph_position_get_type", LIBS);
-
-  // HBFace
-  gidLink(cast(void**)&hb_gobject_face_get_type, "hb_gobject_face_get_type", LIBS);
 
   // Map
   gidLink(cast(void**)&hb_gobject_map_get_type, "hb_gobject_map_get_type", LIBS);

@@ -49,7 +49,7 @@ interface ColorChooser
 
    * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
    */
-  void addPalette(gtk.types.Orientation orientation, int colorsPerLine, gdk.rgba.RGBA[] colors);
+  void addPalette(gtk.types.Orientation orientation, int colorsPerLine, gdk.rgba.RGBA[] colors = null);
 
   /**
    * Gets the currently-selected color.

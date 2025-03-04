@@ -44,7 +44,7 @@ interface ColorChooser
    *   colorsPerLine = the number of colors to show in each row/column
    *   colors = the colors of the palette, or %NULL
    */
-  void addPalette(gtk.types.Orientation orientation, int colorsPerLine, gdk.rgba.RGBA[] colors);
+  void addPalette(gtk.types.Orientation orientation, int colorsPerLine, gdk.rgba.RGBA[] colors = null);
 
   /**
    * Gets the currently-selected color.
