@@ -8,10 +8,12 @@ import gtk.shortcut_trigger;
 import gtk.types;
 
 /**
- * A `GtkShortcutTrigger` that combines two triggers.
- * The `GtkAlternativeTrigger` triggers when either of two trigger.
- * This can be cascaded to combine more than two triggers.
- */
+    A [gtk.shortcut_trigger.ShortcutTrigger] that combines two triggers.
+  
+  The [gtk.alternative_trigger.AlternativeTrigger] triggers when either of two trigger.
+  
+  This can be cascaded to combine more than two triggers.
+*/
 class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
@@ -32,15 +34,16 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /**
-   * Creates a `GtkShortcutTrigger` that will trigger whenever
-   * either of the two given triggers gets triggered.
-   * Note that nesting is allowed, so if you want more than two
-   * alternative, create a new alternative trigger for each option.
-   * Params:
-   *   first = The first trigger that may trigger
-   *   second = The second trigger that may trigger
-   * Returns: a new `GtkShortcutTrigger`
-   */
+      Creates a [gtk.shortcut_trigger.ShortcutTrigger] that will trigger whenever
+    either of the two given triggers gets triggered.
+    
+    Note that nesting is allowed, so if you want more than two
+    alternative, create a new alternative trigger for each option.
+    Params:
+      first =       The first trigger that may trigger
+      second =       The second trigger that may trigger
+    Returns:     a new [gtk.shortcut_trigger.ShortcutTrigger]
+  */
   this(gtk.shortcut_trigger.ShortcutTrigger first, gtk.shortcut_trigger.ShortcutTrigger second)
   {
     GtkShortcutTrigger* _cretval;
@@ -49,12 +52,13 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /**
-   * Gets the first of the two alternative triggers that may
-   * trigger self.
-   * [gtk.alternative_trigger.AlternativeTrigger.getSecond] will return
-   * the other one.
-   * Returns: the first alternative trigger
-   */
+      Gets the first of the two alternative triggers that may
+    trigger self.
+    
+    [gtk.alternative_trigger.AlternativeTrigger.getSecond] will return
+    the other one.
+    Returns:     the first alternative trigger
+  */
   gtk.shortcut_trigger.ShortcutTrigger getFirst()
   {
     GtkShortcutTrigger* _cretval;
@@ -64,12 +68,13 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /**
-   * Gets the second of the two alternative triggers that may
-   * trigger self.
-   * [gtk.alternative_trigger.AlternativeTrigger.getFirst] will return
-   * the other one.
-   * Returns: the second alternative trigger
-   */
+      Gets the second of the two alternative triggers that may
+    trigger self.
+    
+    [gtk.alternative_trigger.AlternativeTrigger.getFirst] will return
+    the other one.
+    Returns:     the second alternative trigger
+  */
   gtk.shortcut_trigger.ShortcutTrigger getSecond()
   {
     GtkShortcutTrigger* _cretval;

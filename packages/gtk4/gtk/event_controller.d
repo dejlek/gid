@@ -11,16 +11,19 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkEventController` is the base class for event controllers.
- * These are ancillary objects associated to widgets, which react
- * to `GdkEvents`, and possibly trigger actions as a consequence.
- * Event controllers are added to a widget with
- * [gtk.widget.Widget.addController]. It is rarely necessary to
- * explicitly remove a controller with [gtk.widget.Widget.removeController].
- * See the chapter on [input handling](input-handling.html) for
- * an overview of the basic concepts, such as the capture and bubble
- * phases of event propagation.
- */
+    [gtk.event_controller.EventController] is the base class for event controllers.
+  
+  These are ancillary objects associated to widgets, which react
+  to `GdkEvents`, and possibly trigger actions as a consequence.
+  
+  Event controllers are added to a widget with
+  [gtk.widget.Widget.addController]. It is rarely necessary to
+  explicitly remove a controller with [gtk.widget.Widget.removeController].
+  
+  See the chapter on [input handling](input-handling.html) for
+  an overview of the basic concepts, such as the capture and bubble
+  phases of event propagation.
+*/
 class EventController : gobject.object.ObjectG
 {
 
@@ -41,11 +44,12 @@ class EventController : gobject.object.ObjectG
   }
 
   /**
-   * Returns the event that is currently being handled by the controller.
-   * At other times, %NULL is returned.
-   * Returns: the event that is currently
-   *   handled by controller
-   */
+      Returns the event that is currently being handled by the controller.
+    
+    At other times, null is returned.
+    Returns:     the event that is currently
+        handled by controller
+  */
   gdk.event.Event getCurrentEvent()
   {
     GdkEvent* _cretval;
@@ -55,12 +59,13 @@ class EventController : gobject.object.ObjectG
   }
 
   /**
-   * Returns the device of the event that is currently being
-   * handled by the controller.
-   * At other times, %NULL is returned.
-   * Returns: device of the event is
-   *   currently handled by controller
-   */
+      Returns the device of the event that is currently being
+    handled by the controller.
+    
+    At other times, null is returned.
+    Returns:     device of the event is
+        currently handled by controller
+  */
   gdk.device.Device getCurrentEventDevice()
   {
     GdkDevice* _cretval;
@@ -70,11 +75,12 @@ class EventController : gobject.object.ObjectG
   }
 
   /**
-   * Returns the modifier state of the event that is currently being
-   * handled by the controller.
-   * At other times, 0 is returned.
-   * Returns: modifier state of the event is currently handled by controller
-   */
+      Returns the modifier state of the event that is currently being
+    handled by the controller.
+    
+    At other times, 0 is returned.
+    Returns:     modifier state of the event is currently handled by controller
+  */
   gdk.types.ModifierType getCurrentEventState()
   {
     GdkModifierType _cretval;
@@ -84,11 +90,12 @@ class EventController : gobject.object.ObjectG
   }
 
   /**
-   * Returns the timestamp of the event that is currently being
-   * handled by the controller.
-   * At other times, 0 is returned.
-   * Returns: timestamp of the event is currently handled by controller
-   */
+      Returns the timestamp of the event that is currently being
+    handled by the controller.
+    
+    At other times, 0 is returned.
+    Returns:     timestamp of the event is currently handled by controller
+  */
   uint getCurrentEventTime()
   {
     uint _retval;
@@ -97,9 +104,9 @@ class EventController : gobject.object.ObjectG
   }
 
   /**
-   * Gets the name of controller.
-   * Returns: The controller name
-   */
+      Gets the name of controller.
+    Returns:     The controller name
+  */
   string getName()
   {
     const(char)* _cretval;
@@ -109,9 +116,9 @@ class EventController : gobject.object.ObjectG
   }
 
   /**
-   * Gets the propagation limit of the event controller.
-   * Returns: the propagation limit
-   */
+      Gets the propagation limit of the event controller.
+    Returns:     the propagation limit
+  */
   gtk.types.PropagationLimit getPropagationLimit()
   {
     GtkPropagationLimit _cretval;
@@ -121,9 +128,9 @@ class EventController : gobject.object.ObjectG
   }
 
   /**
-   * Gets the propagation phase at which controller handles events.
-   * Returns: the propagation phase
-   */
+      Gets the propagation phase at which controller handles events.
+    Returns:     the propagation phase
+  */
   gtk.types.PropagationPhase getPropagationPhase()
   {
     GtkPropagationPhase _cretval;
@@ -133,9 +140,9 @@ class EventController : gobject.object.ObjectG
   }
 
   /**
-   * Returns the `GtkWidget` this controller relates to.
-   * Returns: a `GtkWidget`
-   */
+      Returns the [gtk.widget.Widget] this controller relates to.
+    Returns:     a [gtk.widget.Widget]
+  */
   gtk.widget.Widget getWidget()
   {
     GtkWidget* _cretval;
@@ -145,18 +152,18 @@ class EventController : gobject.object.ObjectG
   }
 
   /**
-   * Resets the controller to a clean state.
-   */
+      Resets the controller to a clean state.
+  */
   void reset()
   {
     gtk_event_controller_reset(cast(GtkEventController*)cPtr);
   }
 
   /**
-   * Sets a name on the controller that can be used for debugging.
-   * Params:
-   *   name = a name for controller
-   */
+      Sets a name on the controller that can be used for debugging.
+    Params:
+      name =       a name for controller
+  */
   void setName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
@@ -164,35 +171,37 @@ class EventController : gobject.object.ObjectG
   }
 
   /**
-   * Sets the event propagation limit on the event controller.
-   * If the limit is set to %GTK_LIMIT_SAME_NATIVE, the controller
-   * won't handle events that are targeted at widgets on a different
-   * surface, such as popovers.
-   * Params:
-   *   limit = the propagation limit
-   */
+      Sets the event propagation limit on the event controller.
+    
+    If the limit is set to [gtk.types.PropagationLimit.SameNative], the controller
+    won't handle events that are targeted at widgets on a different
+    surface, such as popovers.
+    Params:
+      limit =       the propagation limit
+  */
   void setPropagationLimit(gtk.types.PropagationLimit limit)
   {
     gtk_event_controller_set_propagation_limit(cast(GtkEventController*)cPtr, limit);
   }
 
   /**
-   * Sets the propagation phase at which a controller handles events.
-   * If phase is %GTK_PHASE_NONE, no automatic event handling will be
-   * performed, but other additional gesture maintenance will.
-   * Params:
-   *   phase = a propagation phase
-   */
+      Sets the propagation phase at which a controller handles events.
+    
+    If phase is [gtk.types.PropagationPhase.None], no automatic event handling will be
+    performed, but other additional gesture maintenance will.
+    Params:
+      phase =       a propagation phase
+  */
   void setPropagationPhase(gtk.types.PropagationPhase phase)
   {
     gtk_event_controller_set_propagation_phase(cast(GtkEventController*)cPtr, phase);
   }
 
   /**
-   * Sets a name on the controller that can be used for debugging.
-   * Params:
-   *   name = a name for controller, must be a static string
-   */
+      Sets a name on the controller that can be used for debugging.
+    Params:
+      name =       a name for controller, must be a static string
+  */
   void setStaticName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);

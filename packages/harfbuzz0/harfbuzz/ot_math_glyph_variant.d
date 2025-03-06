@@ -7,8 +7,8 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * Data type to hold math-variant information for a glyph.
- */
+    Data type to hold math-variant information for a glyph.
+*/
 class OtMathGlyphVariant : gobject.boxed.Boxed
 {
 

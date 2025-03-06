@@ -13,6 +13,7 @@ import parquet.c.types;
 import parquet.types;
 import parquet.writer_properties;
 
+/** */
 class ArrowFileWriter : gobject.object.ObjectG
 {
 
@@ -32,6 +33,7 @@ class ArrowFileWriter : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   static parquet.arrow_file_writer.ArrowFileWriter newArrow(arrow.schema.Schema schema, arrow.output_stream.OutputStream sink, parquet.writer_properties.WriterProperties writerProperties = null)
   {
     GParquetArrowFileWriter* _cretval;
@@ -43,6 +45,7 @@ class ArrowFileWriter : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   static parquet.arrow_file_writer.ArrowFileWriter newPath(arrow.schema.Schema schema, string path, parquet.writer_properties.WriterProperties writerProperties = null)
   {
     GParquetArrowFileWriter* _cretval;
@@ -55,6 +58,7 @@ class ArrowFileWriter : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool close()
   {
     bool _retval;
@@ -65,6 +69,7 @@ class ArrowFileWriter : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.schema.Schema getSchema()
   {
     GArrowSchema* _cretval;
@@ -74,9 +79,9 @@ class ArrowFileWriter : gobject.object.ObjectG
   }
 
   /**
-   * Start a new buffered row group.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Start a new buffered row group.
+    Returns:     true on success, false if there was an error.
+  */
   bool newBufferedRowGroup()
   {
     bool _retval;
@@ -88,11 +93,11 @@ class ArrowFileWriter : gobject.object.ObjectG
   }
 
   /**
-   * Start a new row group.
-   * Params:
-   *   chunkSize = The max number of rows in a row group.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Start a new row group.
+    Params:
+      chunkSize =       The max number of rows in a row group.
+    Returns:     true on success, false if there was an error.
+  */
   bool newRowGroup(size_t chunkSize)
   {
     bool _retval;
@@ -104,11 +109,11 @@ class ArrowFileWriter : gobject.object.ObjectG
   }
 
   /**
-   * Start a chunked array as a column chunk.
-   * Params:
-   *   chunkedArray = A #GArrowChunkedArray to be written.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Start a chunked array as a column chunk.
+    Params:
+      chunkedArray =       A #GArrowChunkedArray to be written.
+    Returns:     true on success, false if there was an error.
+  */
   bool writeChunkedArray(arrow.chunked_array.ChunkedArray chunkedArray)
   {
     bool _retval;
@@ -120,19 +125,22 @@ class ArrowFileWriter : gobject.object.ObjectG
   }
 
   /**
-   * Write a record batch into the buffered row group.
-   * Multiple record batches can be written into the same row group
-   * through this function.
-   * [parquet.writer_properties.WriterProperties.getMaxRowGroupLength] is respected
-   * and a new row group will be created if the current row group
-   * exceeds the limit.
-   * Record batches get flushed to the output stream once
-   * gparquet_file_writer_new_buffered_row_group$(LPAREN)$(RPAREN) or
-   * gparquet_file_writer_close$(LPAREN)$(RPAREN) is called.
-   * Params:
-   *   recordBatch = A record batch to be written.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Write a record batch into the buffered row group.
+    
+    Multiple record batches can be written into the same row group
+    through this function.
+    
+    [parquet.writer_properties.WriterProperties.getMaxRowGroupLength] is respected
+    and a new row group will be created if the current row group
+    exceeds the limit.
+    
+    Record batches get flushed to the output stream once
+    gparquet_file_writer_new_buffered_row_group() or
+    gparquet_file_writer_close() is called.
+    Params:
+      recordBatch =       A record batch to be written.
+    Returns:     true on success, false if there was an error.
+  */
   bool writeRecordBatch(arrow.record_batch.RecordBatch recordBatch)
   {
     bool _retval;
@@ -143,6 +151,7 @@ class ArrowFileWriter : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool writeTable(arrow.table.Table table, size_t chunkSize)
   {
     bool _retval;

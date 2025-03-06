@@ -7,6 +7,7 @@ import arrow.expression;
 import arrow.types;
 import gid.gid;
 
+/** */
 class FilterNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
@@ -26,6 +27,7 @@ class FilterNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getType();
   }
 
+  /** */
   this(arrow.expression.Expression expression)
   {
     GArrowFilterNodeOptions* _cretval;

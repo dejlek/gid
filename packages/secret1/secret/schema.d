@@ -7,48 +7,60 @@ import secret.c.types;
 import secret.types;
 
 /**
- * Represents a set of attributes that are stored with an item.
- * These schemas are used for interoperability between various services storing
- * the same types of items.
- * Each schema has a name like `org.gnome.keyring.NetworkPassword`, and defines a
- * set of attributes, and types $(LPAREN)string, integer, boolean$(RPAREN) for those attributes.
- * Attributes are stored as strings in the Secret Service, and the attribute types
- * simply define standard ways to store integer and boolean values as strings.
- * Attributes are represented in libsecret via a [glib.hash_table.HashTable] with
- * string keys and values. Even for values that defined as an integer or boolean in
- * the schema, the attribute values in the [glib.hash_table.HashTable] are strings.
- * Boolean values are stored as the strings 'true' and 'false'. Integer values are
- * stored in decimal, with a preceding negative sign for negative integers.
- * Schemas are handled entirely on the client side by this library. The name of the
- * schema is automatically stored as an attribute on the item.
- * Normally when looking up passwords only those with matching schema names are
- * returned. If the schema @flags contain the `SECRET_SCHEMA_DONT_MATCH_NAME` flag,
- * then lookups will not check that the schema name matches that on the item, only
- * the schema's attributes are matched. This is useful when you are looking up
- * items that are not stored by the libsecret library. Other libraries such as
- * libgnome-keyring don't store the schema name.
- * Additional schemas can be defined via the struct@Schema structure like this:
- * ```c
- * // in a header:
- * const SecretSchema * example_get_schema $(LPAREN)void$(RPAREN) G_GNUC_CONST;
- * #define EXAMPLE_SCHEMA  example_get_schema $(LPAREN)$(RPAREN)
- * // in a .c file
- * const SecretSchema *
- * example_get_schema $(LPAREN)void$(RPAREN)
- * {
- * static const SecretSchema the_schema \= {
- * "org.example.Password", SECRET_SCHEMA_NONE,
- * {
- * {  "number", SECRET_SCHEMA_ATTRIBUTE_INTEGER },
- * {  "string", SECRET_SCHEMA_ATTRIBUTE_STRING },
- * {  "even", SECRET_SCHEMA_ATTRIBUTE_BOOLEAN },
- * {  NULL, 0 },
- * }
- * };
- * return &the_schema;
- * }
- * ```
- */
+    Represents a set of attributes that are stored with an item.
+  
+  These schemas are used for interoperability between various services storing
+  the same types of items.
+  
+  Each schema has a name like `org.gnome.keyring.NetworkPassword`, and defines a
+  set of attributes, and types (string, integer, boolean) for those attributes.
+  
+  Attributes are stored as strings in the Secret Service, and the attribute types
+  simply define standard ways to store integer and boolean values as strings.
+  Attributes are represented in libsecret via a [glib.hash_table.HashTable] with
+  string keys and values. Even for values that defined as an integer or boolean in
+  the schema, the attribute values in the [glib.hash_table.HashTable] are strings.
+  Boolean values are stored as the strings 'true' and 'false'. Integer values are
+  stored in decimal, with a preceding negative sign for negative integers.
+  
+  Schemas are handled entirely on the client side by this library. The name of the
+  schema is automatically stored as an attribute on the item.
+  
+  Normally when looking up passwords only those with matching schema names are
+  returned. If the schema @flags contain the [secret.types.SchemaFlags.DontMatchName] flag,
+  then lookups will not check that the schema name matches that on the item, only
+  the schema's attributes are matched. This is useful when you are looking up
+  items that are not stored by the libsecret library. Other libraries such as
+  libgnome-keyring don't store the schema name.
+  
+  Additional schemas can be defined via the `struct@Schema` structure like this:
+  
+  ```c
+  // in a header:
+  
+  const SecretSchema * example_get_schema (void) G_GNUC_CONST;
+  
+  #define EXAMPLE_SCHEMA  example_get_schema ()
+  
+  
+  // in a .c file
+  
+  const SecretSchema *
+  example_get_schema (void)
+  {
+      static const SecretSchema the_schema = {
+          "org.example.Password", SECRET_SCHEMA_NONE,
+          {
+              {  "number", SECRET_SCHEMA_ATTRIBUTE_INTEGER },
+              {  "string", SECRET_SCHEMA_ATTRIBUTE_STRING },
+              {  "even", SECRET_SCHEMA_ATTRIBUTE_BOOLEAN },
+              {  NULL, 0 },
+          }
+      };
+      return &the_schema;
+  }
+  ```
+*/
 class Schema : gobject.boxed.Boxed
 {
 

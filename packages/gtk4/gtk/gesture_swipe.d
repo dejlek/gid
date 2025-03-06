@@ -8,16 +8,19 @@ import gtk.gesture_single;
 import gtk.types;
 
 /**
- * `GtkGestureSwipe` is a `GtkGesture` for swipe gestures.
- * After a press/move/.../move/release sequence happens, the
- * [gtk.gesture_swipe.GestureSwipe.swipe] signal will be emitted,
- * providing the velocity and directionality of the sequence
- * at the time it was lifted.
- * If the velocity is desired in intermediate points,
- * [gtk.gesture_swipe.GestureSwipe.getVelocity] can be called in a
- * [gtk.gesture.Gesture.update] handler.
- * All velocities are reported in pixels/sec units.
- */
+    [gtk.gesture_swipe.GestureSwipe] is a [gtk.gesture.Gesture] for swipe gestures.
+  
+  After a press/move/.../move/release sequence happens, the
+  [gtk.gesture_swipe.GestureSwipe.swipe] signal will be emitted,
+  providing the velocity and directionality of the sequence
+  at the time it was lifted.
+  
+  If the velocity is desired in intermediate points,
+  [gtk.gesture_swipe.GestureSwipe.getVelocity] can be called in a
+  [gtk.gesture.Gesture.update] handler.
+  
+  All velocities are reported in pixels/sec units.
+*/
 class GestureSwipe : gtk.gesture_single.GestureSingle
 {
 
@@ -38,9 +41,9 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Returns a newly created `GtkGesture` that recognizes swipes.
-   * Returns: a newly created `GtkGestureSwipe`
-   */
+      Returns a newly created [gtk.gesture.Gesture] that recognizes swipes.
+    Returns:     a newly created [gtk.gesture_swipe.GestureSwipe]
+  */
   this()
   {
     GtkGesture* _cretval;
@@ -49,15 +52,16 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Gets the current velocity.
-   * If the gesture is recognized, this function returns %TRUE and fills
-   * in velocity_x and velocity_y with the recorded velocity, as per the
-   * last events processed.
-   * Params:
-   *   velocityX = return value for the velocity in the X axis, in pixels/sec
-   *   velocityY = return value for the velocity in the Y axis, in pixels/sec
-   * Returns: whether velocity could be calculated
-   */
+      Gets the current velocity.
+    
+    If the gesture is recognized, this function returns true and fills
+    in velocity_x and velocity_y with the recorded velocity, as per the
+    last events processed.
+    Params:
+      velocityX =       return value for the velocity in the X axis, in pixels/sec
+      velocityY =       return value for the velocity in the Y axis, in pixels/sec
+    Returns:     whether velocity could be calculated
+  */
   bool getVelocity(out double velocityX, out double velocityY)
   {
     bool _retval;
@@ -66,23 +70,29 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Emitted when the recognized gesture is finished.
-   * Velocity and direction are a product of previously recorded events.
-   * Params
-   *   velocityX = velocity in the X axis, in pixels/sec
-   *   velocityY = velocity in the Y axis, in pixels/sec
-   *   gestureSwipe = the instance the signal is connected to
-   */
+      Emitted when the recognized gesture is finished.
+    
+    Velocity and direction are a product of previously recorded events.
+  
+    ## Parameters
+    $(LIST
+      * $(B velocityX)       velocity in the X axis, in pixels/sec
+      * $(B velocityY)       velocity in the Y axis, in pixels/sec
+      * $(B gestureSwipe) the instance the signal is connected to
+    )
+  */
   alias SwipeCallbackDlg = void delegate(double velocityX, double velocityY, gtk.gesture_swipe.GestureSwipe gestureSwipe);
+
+  /** ditto */
   alias SwipeCallbackFunc = void function(double velocityX, double velocityY, gtk.gesture_swipe.GestureSwipe gestureSwipe);
 
   /**
-   * Connect to Swipe signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Swipe signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectSwipe(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SwipeCallbackDlg) || is(T : SwipeCallbackFunc))
   {

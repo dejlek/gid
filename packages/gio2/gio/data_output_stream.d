@@ -12,9 +12,9 @@ import gio.types;
 import glib.error;
 
 /**
- * Data output stream implements [gio.output_stream.OutputStream] and includes functions
- * for writing data directly to an output stream.
- */
+    Data output stream implements [gio.output_stream.OutputStream] and includes functions
+  for writing data directly to an output stream.
+*/
 class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekable.Seekable
 {
 
@@ -37,11 +37,11 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   mixin SeekableT!();
 
   /**
-   * Creates a new data output stream for base_stream.
-   * Params:
-   *   baseStream = a #GOutputStream.
-   * Returns: #GDataOutputStream.
-   */
+      Creates a new data output stream for base_stream.
+    Params:
+      baseStream =       a #GOutputStream.
+    Returns:     #GDataOutputStream.
+  */
   this(gio.output_stream.OutputStream baseStream)
   {
     GDataOutputStream* _cretval;
@@ -50,9 +50,9 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   }
 
   /**
-   * Gets the byte order for the stream.
-   * Returns: the #GDataStreamByteOrder for the stream.
-   */
+      Gets the byte order for the stream.
+    Returns:     the #GDataStreamByteOrder for the stream.
+  */
   gio.types.DataStreamByteOrder getByteOrder()
   {
     GDataStreamByteOrder _cretval;
@@ -62,12 +62,12 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   }
 
   /**
-   * Puts a byte into the output stream.
-   * Params:
-   *   data = a #guchar.
-   *   cancellable = optional #GCancellable object, %NULL to ignore.
-   * Returns: %TRUE if data was successfully added to the stream.
-   */
+      Puts a byte into the output stream.
+    Params:
+      data =       a #guchar.
+      cancellable =       optional #GCancellable object, null to ignore.
+    Returns:     true if data was successfully added to the stream.
+  */
   bool putByte(ubyte data, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
@@ -79,12 +79,12 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   }
 
   /**
-   * Puts a signed 16-bit integer into the output stream.
-   * Params:
-   *   data = a #gint16.
-   *   cancellable = optional #GCancellable object, %NULL to ignore.
-   * Returns: %TRUE if data was successfully added to the stream.
-   */
+      Puts a signed 16-bit integer into the output stream.
+    Params:
+      data =       a #gint16.
+      cancellable =       optional #GCancellable object, null to ignore.
+    Returns:     true if data was successfully added to the stream.
+  */
   bool putInt16(short data, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
@@ -96,12 +96,12 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   }
 
   /**
-   * Puts a signed 32-bit integer into the output stream.
-   * Params:
-   *   data = a #gint32.
-   *   cancellable = optional #GCancellable object, %NULL to ignore.
-   * Returns: %TRUE if data was successfully added to the stream.
-   */
+      Puts a signed 32-bit integer into the output stream.
+    Params:
+      data =       a #gint32.
+      cancellable =       optional #GCancellable object, null to ignore.
+    Returns:     true if data was successfully added to the stream.
+  */
   bool putInt32(int data, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
@@ -113,12 +113,12 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   }
 
   /**
-   * Puts a signed 64-bit integer into the stream.
-   * Params:
-   *   data = a #gint64.
-   *   cancellable = optional #GCancellable object, %NULL to ignore.
-   * Returns: %TRUE if data was successfully added to the stream.
-   */
+      Puts a signed 64-bit integer into the stream.
+    Params:
+      data =       a #gint64.
+      cancellable =       optional #GCancellable object, null to ignore.
+    Returns:     true if data was successfully added to the stream.
+  */
   bool putInt64(long data, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
@@ -130,12 +130,12 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   }
 
   /**
-   * Puts a string into the output stream.
-   * Params:
-   *   str = a string.
-   *   cancellable = optional #GCancellable object, %NULL to ignore.
-   * Returns: %TRUE if string was successfully added to the stream.
-   */
+      Puts a string into the output stream.
+    Params:
+      str =       a string.
+      cancellable =       optional #GCancellable object, null to ignore.
+    Returns:     true if string was successfully added to the stream.
+  */
   bool putString(string str, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
@@ -148,12 +148,12 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   }
 
   /**
-   * Puts an unsigned 16-bit integer into the output stream.
-   * Params:
-   *   data = a #guint16.
-   *   cancellable = optional #GCancellable object, %NULL to ignore.
-   * Returns: %TRUE if data was successfully added to the stream.
-   */
+      Puts an unsigned 16-bit integer into the output stream.
+    Params:
+      data =       a #guint16.
+      cancellable =       optional #GCancellable object, null to ignore.
+    Returns:     true if data was successfully added to the stream.
+  */
   bool putUint16(ushort data, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
@@ -165,12 +165,12 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   }
 
   /**
-   * Puts an unsigned 32-bit integer into the stream.
-   * Params:
-   *   data = a #guint32.
-   *   cancellable = optional #GCancellable object, %NULL to ignore.
-   * Returns: %TRUE if data was successfully added to the stream.
-   */
+      Puts an unsigned 32-bit integer into the stream.
+    Params:
+      data =       a #guint32.
+      cancellable =       optional #GCancellable object, null to ignore.
+    Returns:     true if data was successfully added to the stream.
+  */
   bool putUint32(uint data, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
@@ -182,12 +182,12 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   }
 
   /**
-   * Puts an unsigned 64-bit integer into the stream.
-   * Params:
-   *   data = a #guint64.
-   *   cancellable = optional #GCancellable object, %NULL to ignore.
-   * Returns: %TRUE if data was successfully added to the stream.
-   */
+      Puts an unsigned 64-bit integer into the stream.
+    Params:
+      data =       a #guint64.
+      cancellable =       optional #GCancellable object, null to ignore.
+    Returns:     true if data was successfully added to the stream.
+  */
   bool putUint64(ulong data, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
@@ -199,10 +199,10 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   }
 
   /**
-   * Sets the byte order of the data output stream to order.
-   * Params:
-   *   order = a %GDataStreamByteOrder.
-   */
+      Sets the byte order of the data output stream to order.
+    Params:
+      order =       a [gio.types.DataStreamByteOrder].
+  */
   void setByteOrder(gio.types.DataStreamByteOrder order)
   {
     g_data_output_stream_set_byte_order(cast(GDataOutputStream*)cPtr, order);

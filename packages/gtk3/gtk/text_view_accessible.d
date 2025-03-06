@@ -14,6 +14,7 @@ import gtk.c.types;
 import gtk.container_accessible;
 import gtk.types;
 
+/** */
 class TextViewAccessible : gtk.container_accessible.ContainerAccessible, atk.editable_text.EditableText, atk.streamable_content.StreamableContent, atk.text.Text
 {
 

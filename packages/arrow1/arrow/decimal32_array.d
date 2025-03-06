@@ -9,6 +9,7 @@ import gid.gid;
 import glib.bytes;
 import gobject.object;
 
+/** */
 class Decimal32Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
 {
 
@@ -28,6 +29,7 @@ class Decimal32Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
     return getType();
   }
 
+  /** */
   string formatValue(long i)
   {
     char* _cretval;
@@ -38,6 +40,7 @@ class Decimal32Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
 
   alias getValue = arrow.fixed_size_binary_array.FixedSizeBinaryArray.getValue;
 
+  /** */
   arrow.decimal32.Decimal32 getValue(long i)
   {
     GArrowDecimal32* _cretval;

@@ -8,6 +8,7 @@ import arrow.time64_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class Time64Array : arrow.numeric_array.NumericArray
 {
 
@@ -27,6 +28,7 @@ class Time64Array : arrow.numeric_array.NumericArray
     return getType();
   }
 
+  /** */
   this(arrow.time64_data_type.Time64DataType dataType, long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowTime64Array* _cretval;
@@ -34,6 +36,7 @@ class Time64Array : arrow.numeric_array.NumericArray
     this(_cretval, Yes.Take);
   }
 
+  /** */
   long getValue(long i)
   {
     long _retval;
@@ -41,6 +44,7 @@ class Time64Array : arrow.numeric_array.NumericArray
     return _retval;
   }
 
+  /** */
   long[] getValues()
   {
     const(long)* _cretval;

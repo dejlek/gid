@@ -9,6 +9,7 @@ import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.types;
 
+/** */
 class SpaceDrawer : gobject.object.ObjectG
 {
 
@@ -29,10 +30,10 @@ class SpaceDrawer : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #GtkSourceSpaceDrawer object. Useful for storing space drawing
-   * settings independently of a #GtkSourceView.
-   * Returns: a new #GtkSourceSpaceDrawer.
-   */
+      Creates a new #GtkSourceSpaceDrawer object. Useful for storing space drawing
+    settings independently of a #GtkSourceView.
+    Returns:     a new #GtkSourceSpaceDrawer.
+  */
   this()
   {
     GtkSourceSpaceDrawer* _cretval;
@@ -41,24 +42,27 @@ class SpaceDrawer : gobject.object.ObjectG
   }
 
   /**
-   * Binds the #GtkSourceSpaceDrawer:matrix property to a #GSettings key.
-   * The #GSettings key must be of the same type as the
-   * #GtkSourceSpaceDrawer:matrix property, that is, `"au"`.
-   * The [gio.settings.Settings.bind] function cannot be used, because the default GIO
-   * mapping functions don't support #GVariant properties $(LPAREN)maybe it will be
-   * supported by a future GIO version, in which case this function can be
-   * deprecated$(RPAREN).
-   * Params:
-   *   settings = a #GSettings object.
-   *   key = the settings key to bind.
-   *   flags = flags for the binding.
-   */
+      Binds the #GtkSourceSpaceDrawer:matrix property to a #GSettings key.
+    
+    The #GSettings key must be of the same type as the
+    #GtkSourceSpaceDrawer:matrix property, that is, `"au"`.
+    
+    The [gio.settings.Settings.bind] function cannot be used, because the default GIO
+    mapping functions don't support #GVariant properties (maybe it will be
+    supported by a future GIO version, in which case this function can be
+    deprecated).
+    Params:
+      settings =       a #GSettings object.
+      key =       the settings key to bind.
+      flags =       flags for the binding.
+  */
   void bindMatrixSetting(gio.settings.Settings settings, string key, gio.types.SettingsBindFlags flags)
   {
     const(char)* _key = key.toCString(No.Alloc);
     gtk_source_space_drawer_bind_matrix_setting(cast(GtkSourceSpaceDrawer*)cPtr, settings ? cast(GSettings*)settings.cPtr(No.Dup) : null, _key, flags);
   }
 
+  /** */
   bool getEnableMatrix()
   {
     bool _retval;
@@ -67,13 +71,14 @@ class SpaceDrawer : gobject.object.ObjectG
   }
 
   /**
-   * Gets the value of the #GtkSourceSpaceDrawer:matrix property, as a #GVariant.
-   * An empty array can be returned in case the matrix is a zero matrix.
-   * The [gtksource.space_drawer.SpaceDrawer.getTypesForLocations] function may be more
-   * convenient to use.
-   * Returns: the #GtkSourceSpaceDrawer:matrix value as a new floating #GVariant
-   *   instance.
-   */
+      Gets the value of the #GtkSourceSpaceDrawer:matrix property, as a #GVariant.
+    An empty array can be returned in case the matrix is a zero matrix.
+    
+    The [gtksource.space_drawer.SpaceDrawer.getTypesForLocations] function may be more
+    convenient to use.
+    Returns:     the #GtkSourceSpaceDrawer:matrix value as a new floating #GVariant
+        instance.
+  */
   glib.variant.VariantG getMatrix()
   {
     VariantC* _cretval;
@@ -83,17 +88,18 @@ class SpaceDrawer : gobject.object.ObjectG
   }
 
   /**
-   * If only one location is specified, this function returns what kind of
-   * white spaces are drawn at that location. The value is retrieved from the
-   * #GtkSourceSpaceDrawer:matrix property.
-   * If several locations are specified, this function returns the logical AND for
-   * those locations. Which means that if a certain kind of white space is present
-   * in the return value, then that kind of white space is drawn at all the
-   * specified locations.
-   * Params:
-   *   locations = one or several #GtkSourceSpaceLocationFlags.
-   * Returns: a combination of #GtkSourceSpaceTypeFlags.
-   */
+      If only one location is specified, this function returns what kind of
+    white spaces are drawn at that location. The value is retrieved from the
+    #GtkSourceSpaceDrawer:matrix property.
+    
+    If several locations are specified, this function returns the logical AND for
+    those locations. Which means that if a certain kind of white space is present
+    in the return value, then that kind of white space is drawn at all the
+    specified locations.
+    Params:
+      locations =       one or several #GtkSourceSpaceLocationFlags.
+    Returns:     a combination of #GtkSourceSpaceTypeFlags.
+  */
   gtksource.types.SpaceTypeFlags getTypesForLocations(gtksource.types.SpaceLocationFlags locations)
   {
     GtkSourceSpaceTypeFlags _cretval;
@@ -103,36 +109,38 @@ class SpaceDrawer : gobject.object.ObjectG
   }
 
   /**
-   * Sets whether the #GtkSourceSpaceDrawer:matrix property is enabled.
-   * Params:
-   *   enableMatrix = the new value.
-   */
+      Sets whether the #GtkSourceSpaceDrawer:matrix property is enabled.
+    Params:
+      enableMatrix =       the new value.
+  */
   void setEnableMatrix(bool enableMatrix)
   {
     gtk_source_space_drawer_set_enable_matrix(cast(GtkSourceSpaceDrawer*)cPtr, enableMatrix);
   }
 
   /**
-   * Sets a new value to the #GtkSourceSpaceDrawer:matrix property, as a
-   * #GVariant. If matrix is %NULL, then an empty array is set.
-   * If matrix is floating, it is consumed.
-   * The [gtksource.space_drawer.SpaceDrawer.setTypesForLocations] function may be more
-   * convenient to use.
-   * Params:
-   *   matrix = the new matrix value, or %NULL.
-   */
+      Sets a new value to the #GtkSourceSpaceDrawer:matrix property, as a
+    #GVariant. If matrix is null, then an empty array is set.
+    
+    If matrix is floating, it is consumed.
+    
+    The [gtksource.space_drawer.SpaceDrawer.setTypesForLocations] function may be more
+    convenient to use.
+    Params:
+      matrix =       the new matrix value, or null.
+  */
   void setMatrix(glib.variant.VariantG matrix = null)
   {
     gtk_source_space_drawer_set_matrix(cast(GtkSourceSpaceDrawer*)cPtr, matrix ? cast(VariantC*)matrix.cPtr(No.Dup) : null);
   }
 
   /**
-   * Modifies the #GtkSourceSpaceDrawer:matrix property at the specified
-   * locations.
-   * Params:
-   *   locations = one or several #GtkSourceSpaceLocationFlags.
-   *   types = a combination of #GtkSourceSpaceTypeFlags.
-   */
+      Modifies the #GtkSourceSpaceDrawer:matrix property at the specified
+    locations.
+    Params:
+      locations =       one or several #GtkSourceSpaceLocationFlags.
+      types =       a combination of #GtkSourceSpaceTypeFlags.
+  */
   void setTypesForLocations(gtksource.types.SpaceLocationFlags locations, gtksource.types.SpaceTypeFlags types)
   {
     gtk_source_space_drawer_set_types_for_locations(cast(GtkSourceSpaceDrawer*)cPtr, locations, types);

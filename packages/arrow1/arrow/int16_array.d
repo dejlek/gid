@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class Int16Array : arrow.numeric_array.NumericArray
 {
 
@@ -27,6 +28,7 @@ class Int16Array : arrow.numeric_array.NumericArray
     return getType();
   }
 
+  /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowInt16Array* _cretval;
@@ -34,6 +36,7 @@ class Int16Array : arrow.numeric_array.NumericArray
     this(_cretval, Yes.Take);
   }
 
+  /** */
   short getValue(long i)
   {
     short _retval;
@@ -41,6 +44,7 @@ class Int16Array : arrow.numeric_array.NumericArray
     return _retval;
   }
 
+  /** */
   short[] getValues()
   {
     const(short)* _cretval;
@@ -55,6 +59,7 @@ class Int16Array : arrow.numeric_array.NumericArray
     return _retval;
   }
 
+  /** */
   long sum()
   {
     long _retval;

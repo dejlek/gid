@@ -9,6 +9,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class RunEndEncodedArray : arrow.array.Array
 {
 
@@ -28,6 +29,7 @@ class RunEndEncodedArray : arrow.array.Array
     return getType();
   }
 
+  /** */
   this(arrow.data_type.DataType dataType, long logicalLength, arrow.array.Array runEnds, arrow.array.Array values, long logicalOffset)
   {
     GArrowRunEndEncodedArray* _cretval;
@@ -38,6 +40,7 @@ class RunEndEncodedArray : arrow.array.Array
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.array.Array decode()
   {
     GArrowArray* _cretval;
@@ -49,6 +52,7 @@ class RunEndEncodedArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   long findPhysicalLength()
   {
     long _retval;
@@ -56,6 +60,7 @@ class RunEndEncodedArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   long findPhysicalOffset()
   {
     long _retval;
@@ -63,6 +68,7 @@ class RunEndEncodedArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   arrow.array.Array getLogicalRunEnds()
   {
     GArrowArray* _cretval;
@@ -74,6 +80,7 @@ class RunEndEncodedArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   arrow.array.Array getLogicalValues()
   {
     GArrowArray* _cretval;
@@ -82,6 +89,7 @@ class RunEndEncodedArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   arrow.array.Array getRunEnds()
   {
     GArrowArray* _cretval;
@@ -90,6 +98,7 @@ class RunEndEncodedArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   arrow.array.Array getValues()
   {
     GArrowArray* _cretval;

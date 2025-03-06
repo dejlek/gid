@@ -8,12 +8,14 @@ import gid.gid;
 import gobject.boxed;
 
 /**
- * A #cairo_region_t represents a set of integer-aligned rectangles.
- * It allows set-theoretical operations like [cairo.region.Region.union_] and
- * [cairo.region.Region.intersect] to be performed on them.
- * Memory management of #cairo_region_t is done with
- * [cairo.region.Region.reference] and [cairo.region.Region.destroy].
- */
+    A #cairo_region_t represents a set of integer-aligned rectangles.
+  
+  It allows set-theoretical operations like [cairo.region.Region.union_] and
+  [cairo.region.Region.intersect] to be performed on them.
+  
+  Memory management of #cairo_region_t is done with
+  [cairo.region.Region.reference] and [cairo.region.Region.destroy].
+*/
 class Region : gobject.boxed.Boxed
 {
 
@@ -39,12 +41,12 @@ class Region : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether $(LPAREN)x, y$(RPAREN) is contained in region.
-   * Params:
-   *   x = the x coordinate of a point
-   *   y = the y coordinate of a point
-   * Returns: %TRUE if $(LPAREN)x, y$(RPAREN) is contained in region, %FALSE if it is not.
-   */
+      Checks whether (x, y) is contained in region.
+    Params:
+      x =       the x coordinate of a point
+      y =       the y coordinate of a point
+    Returns:     true if (x, y) is contained in region, false if it is not.
+  */
   cairo.types.Bool containsPoint(int x, int y)
   {
     cairo.types.Bool _retval;
@@ -53,14 +55,14 @@ class Region : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether rectangle is inside, outside or partially contained
-   * in region
-   * Params:
-   *   rectangle = a #cairo_rectangle_int_t
-   * Returns: %CAIRO_REGION_OVERLAP_IN if rectangle is entirely inside region,
-   *   %CAIRO_REGION_OVERLAP_OUT if rectangle is entirely outside region, or
-   *   %CAIRO_REGION_OVERLAP_PART if rectangle is partially inside and partially outside region.
-   */
+      Checks whether rectangle is inside, outside or partially contained
+    in region
+    Params:
+      rectangle =       a #cairo_rectangle_int_t
+    Returns:     [cairo.types.RegionOverlap.In] if rectangle is entirely inside region,
+        [cairo.types.RegionOverlap.Out] if rectangle is entirely outside region, or
+        [cairo.types.RegionOverlap.Part] if rectangle is partially inside and partially outside region.
+  */
   cairo.types.RegionOverlap containsRectangle(cairo.rectangle_int.RectangleInt rectangle)
   {
     cairo_region_overlap_t _cretval;
@@ -70,13 +72,13 @@ class Region : gobject.boxed.Boxed
   }
 
   /**
-   * Allocates a new region object copying the area from original.
-   * Returns: A newly allocated #cairo_region_t. Free with
-   *   [cairo.region.Region.destroy]. This function always returns a
-   *   valid pointer; if memory cannot be allocated, then a special
-   *   error object is returned where all operations on the object do nothing.
-   *   You can check for this with [cairo.region.Region.status].
-   */
+      Allocates a new region object copying the area from original.
+    Returns:     A newly allocated #cairo_region_t. Free with
+        [cairo.region.Region.destroy]. This function always returns a
+        valid pointer; if memory cannot be allocated, then a special
+        error object is returned where all operations on the object do nothing.
+        You can check for this with [cairo.region.Region.status].
+  */
   cairo.region.Region copy()
   {
     cairo_region_t* _cretval;
@@ -86,13 +88,13 @@ class Region : gobject.boxed.Boxed
   }
 
   /**
-   * Compares whether region_a is equivalent to region_b. %NULL as an argument
-   * is equal to itself, but not to any non-%NULL region.
-   * Params:
-   *   b = a #cairo_region_t or %NULL
-   * Returns: %TRUE if both regions contained the same coverage,
-   *   %FALSE if it is not or any region is in an error status.
-   */
+      Compares whether region_a is equivalent to region_b. null as an argument
+    is equal to itself, but not to any non-null region.
+    Params:
+      b =       a #cairo_region_t or null
+    Returns:     true if both regions contained the same coverage,
+      false if it is not or any region is in an error status.
+  */
   cairo.types.Bool equal(cairo.region.Region b)
   {
     cairo.types.Bool _retval;
@@ -101,32 +103,32 @@ class Region : gobject.boxed.Boxed
   }
 
   /**
-   * Gets the bounding rectangle of region as a #cairo_rectangle_int_t
-   * Params:
-   *   extents = rectangle into which to store the extents
-   */
+      Gets the bounding rectangle of region as a #cairo_rectangle_int_t
+    Params:
+      extents =       rectangle into which to store the extents
+  */
   void getExtents(cairo.rectangle_int.RectangleInt extents)
   {
     cairo_region_get_extents(cast(const(cairo_region_t)*)cPtr, extents ? cast(cairo_rectangle_int_t*)extents.cPtr(No.Dup) : null);
   }
 
   /**
-   * Stores the nth rectangle from the region in rectangle.
-   * Params:
-   *   nth = a number indicating which rectangle should be returned
-   *   rectangle = return location for a #cairo_rectangle_int_t
-   */
+      Stores the nth rectangle from the region in rectangle.
+    Params:
+      nth =       a number indicating which rectangle should be returned
+      rectangle =       return location for a #cairo_rectangle_int_t
+  */
   void getRectangle(int nth, cairo.rectangle_int.RectangleInt rectangle)
   {
     cairo_region_get_rectangle(cast(const(cairo_region_t)*)cPtr, nth, rectangle ? cast(cairo_rectangle_int_t*)rectangle.cPtr(No.Dup) : null);
   }
 
   /**
-   * Computes the intersection of dst with other and places the result in dst
-   * Params:
-   *   other = another #cairo_region_t
-   * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
-   */
+      Computes the intersection of dst with other and places the result in dst
+    Params:
+      other =       another #cairo_region_t
+    Returns:     [cairo.types.Status.Success] or [cairo.types.Status.NoMemory]
+  */
   cairo.types.Status intersect(cairo.region.Region other)
   {
     cairo_status_t _cretval;
@@ -136,12 +138,12 @@ class Region : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the intersection of dst with rectangle and places the
-   * result in dst
-   * Params:
-   *   rectangle = a #cairo_rectangle_int_t
-   * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
-   */
+      Computes the intersection of dst with rectangle and places the
+    result in dst
+    Params:
+      rectangle =       a #cairo_rectangle_int_t
+    Returns:     [cairo.types.Status.Success] or [cairo.types.Status.NoMemory]
+  */
   cairo.types.Status intersectRectangle(cairo.rectangle_int.RectangleInt rectangle)
   {
     cairo_status_t _cretval;
@@ -151,9 +153,9 @@ class Region : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether region is empty.
-   * Returns: %TRUE if region is empty, %FALSE if it isn't.
-   */
+      Checks whether region is empty.
+    Returns:     true if region is empty, false if it isn't.
+  */
   cairo.types.Bool isEmpty()
   {
     cairo.types.Bool _retval;
@@ -162,9 +164,9 @@ class Region : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the number of rectangles contained in region.
-   * Returns: The number of rectangles contained in region.
-   */
+      Returns the number of rectangles contained in region.
+    Returns:     The number of rectangles contained in region.
+  */
   int numRectangles()
   {
     int _retval;
@@ -173,10 +175,10 @@ class Region : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether an error has previous occurred for this
-   * region object.
-   * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
-   */
+      Checks whether an error has previous occurred for this
+    region object.
+    Returns:     [cairo.types.Status.Success] or [cairo.types.Status.NoMemory]
+  */
   cairo.types.Status status()
   {
     cairo_status_t _cretval;
@@ -186,11 +188,11 @@ class Region : gobject.boxed.Boxed
   }
 
   /**
-   * Subtracts other from dst and places the result in dst
-   * Params:
-   *   other = another #cairo_region_t
-   * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
-   */
+      Subtracts other from dst and places the result in dst
+    Params:
+      other =       another #cairo_region_t
+    Returns:     [cairo.types.Status.Success] or [cairo.types.Status.NoMemory]
+  */
   cairo.types.Status subtract(cairo.region.Region other)
   {
     cairo_status_t _cretval;
@@ -200,11 +202,11 @@ class Region : gobject.boxed.Boxed
   }
 
   /**
-   * Subtracts rectangle from dst and places the result in dst
-   * Params:
-   *   rectangle = a #cairo_rectangle_int_t
-   * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
-   */
+      Subtracts rectangle from dst and places the result in dst
+    Params:
+      rectangle =       a #cairo_rectangle_int_t
+    Returns:     [cairo.types.Status.Success] or [cairo.types.Status.NoMemory]
+  */
   cairo.types.Status subtractRectangle(cairo.rectangle_int.RectangleInt rectangle)
   {
     cairo_status_t _cretval;
@@ -214,22 +216,22 @@ class Region : gobject.boxed.Boxed
   }
 
   /**
-   * Translates region by $(LPAREN)dx, dy$(RPAREN).
-   * Params:
-   *   dx = Amount to translate in the x direction
-   *   dy = Amount to translate in the y direction
-   */
+      Translates region by (dx, dy).
+    Params:
+      dx =       Amount to translate in the x direction
+      dy =       Amount to translate in the y direction
+  */
   void translate(int dx, int dy)
   {
     cairo_region_translate(cast(cairo_region_t*)cPtr, dx, dy);
   }
 
   /**
-   * Computes the union of dst with other and places the result in dst
-   * Params:
-   *   other = another #cairo_region_t
-   * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
-   */
+      Computes the union of dst with other and places the result in dst
+    Params:
+      other =       another #cairo_region_t
+    Returns:     [cairo.types.Status.Success] or [cairo.types.Status.NoMemory]
+  */
   cairo.types.Status union_(cairo.region.Region other)
   {
     cairo_status_t _cretval;
@@ -239,11 +241,11 @@ class Region : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the union of dst with rectangle and places the result in dst.
-   * Params:
-   *   rectangle = a #cairo_rectangle_int_t
-   * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
-   */
+      Computes the union of dst with rectangle and places the result in dst.
+    Params:
+      rectangle =       a #cairo_rectangle_int_t
+    Returns:     [cairo.types.Status.Success] or [cairo.types.Status.NoMemory]
+  */
   cairo.types.Status unionRectangle(cairo.rectangle_int.RectangleInt rectangle)
   {
     cairo_status_t _cretval;
@@ -253,13 +255,13 @@ class Region : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the exclusive difference of dst with other and places the
-   * result in dst. That is, dst will be set to contain all areas that
-   * are either in dst or in other, but not in both.
-   * Params:
-   *   other = another #cairo_region_t
-   * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
-   */
+      Computes the exclusive difference of dst with other and places the
+    result in dst. That is, dst will be set to contain all areas that
+    are either in dst or in other, but not in both.
+    Params:
+      other =       another #cairo_region_t
+    Returns:     [cairo.types.Status.Success] or [cairo.types.Status.NoMemory]
+  */
   cairo.types.Status xor(cairo.region.Region other)
   {
     cairo_status_t _cretval;
@@ -269,13 +271,13 @@ class Region : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the exclusive difference of dst with rectangle and places the
-   * result in dst. That is, dst will be set to contain all areas that are
-   * either in dst or in rectangle, but not in both.
-   * Params:
-   *   rectangle = a #cairo_rectangle_int_t
-   * Returns: %CAIRO_STATUS_SUCCESS or %CAIRO_STATUS_NO_MEMORY
-   */
+      Computes the exclusive difference of dst with rectangle and places the
+    result in dst. That is, dst will be set to contain all areas that are
+    either in dst or in rectangle, but not in both.
+    Params:
+      rectangle =       a #cairo_rectangle_int_t
+    Returns:     [cairo.types.Status.Success] or [cairo.types.Status.NoMemory]
+  */
   cairo.types.Status xorRectangle(cairo.rectangle_int.RectangleInt rectangle)
   {
     cairo_status_t _cretval;

@@ -7,6 +7,7 @@ import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
 
+/** */
 class AccelGroupEntry
 {
   GtkAccelGroupEntry cInstance;

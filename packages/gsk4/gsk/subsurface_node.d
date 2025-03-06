@@ -7,8 +7,8 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node that potentially diverts a part of the scene graph to a subsurface.
- */
+    A render node that potentially diverts a part of the scene graph to a subsurface.
+*/
 class SubsurfaceNode : gsk.render_node.RenderNode
 {
 
@@ -21,9 +21,9 @@ class SubsurfaceNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Gets the child node that is getting drawn by the given node.
-   * Returns: the child `GskRenderNode`
-   */
+      Gets the child node that is getting drawn by the given node.
+    Returns:     the child [gsk.render_node.RenderNode]
+  */
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;

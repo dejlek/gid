@@ -7,9 +7,10 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Base type for snapshot operations.
- * The subclass of `GdkSnapshot` used by GTK is [GtkSnapshot](../gtk4/class.Snapshot.html).
- */
+    Base type for snapshot operations.
+  
+  The subclass of [gdk.snapshot.Snapshot] used by GTK is [GtkSnapshot](../gtk4/class.Snapshot.html).
+*/
 class Snapshot : gobject.object.ObjectG
 {
 

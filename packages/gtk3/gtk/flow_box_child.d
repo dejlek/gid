@@ -11,6 +11,7 @@ import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
 
+/** */
 class FlowBoxChild : gtk.bin.Bin
 {
 
@@ -31,10 +32,10 @@ class FlowBoxChild : gtk.bin.Bin
   }
 
   /**
-   * Creates a new #GtkFlowBoxChild, to be used as a child
-   * of a #GtkFlowBox.
-   * Returns: a new #GtkFlowBoxChild
-   */
+      Creates a new #GtkFlowBoxChild, to be used as a child
+    of a #GtkFlowBox.
+    Returns:     a new #GtkFlowBoxChild
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -43,31 +44,33 @@ class FlowBoxChild : gtk.bin.Bin
   }
 
   /**
-   * Marks child as changed, causing any state that depends on this
-   * to be updated. This affects sorting and filtering.
-   * Note that calls to this method must be in sync with the data
-   * used for the sorting and filtering functions. For instance, if
-   * the list is mirroring some external data set, and *two* children
-   * changed in the external data set when you call
-   * [gtk.flow_box_child.FlowBoxChild.changed] on the first child, the sort function
-   * must only read the new data for the first of the two changed
-   * children, otherwise the resorting of the children will be wrong.
-   * This generally means that if you don’t fully control the data
-   * model, you have to duplicate the data that affects the sorting
-   * and filtering functions into the widgets themselves. Another
-   * alternative is to call [gtk.flow_box.FlowBox.invalidateSort] on any
-   * model change, but that is more expensive.
-   */
+      Marks child as changed, causing any state that depends on this
+    to be updated. This affects sorting and filtering.
+    
+    Note that calls to this method must be in sync with the data
+    used for the sorting and filtering functions. For instance, if
+    the list is mirroring some external data set, and *two* children
+    changed in the external data set when you call
+    [gtk.flow_box_child.FlowBoxChild.changed] on the first child, the sort function
+    must only read the new data for the first of the two changed
+    children, otherwise the resorting of the children will be wrong.
+    
+    This generally means that if you don’t fully control the data
+    model, you have to duplicate the data that affects the sorting
+    and filtering functions into the widgets themselves. Another
+    alternative is to call [gtk.flow_box.FlowBox.invalidateSort] on any
+    model change, but that is more expensive.
+  */
   void changed()
   {
     gtk_flow_box_child_changed(cast(GtkFlowBoxChild*)cPtr);
   }
 
   /**
-   * Gets the current index of the child in its #GtkFlowBox container.
-   * Returns: the index of the child, or -1 if the child is not
-   *   in a flow box.
-   */
+      Gets the current index of the child in its #GtkFlowBox container.
+    Returns:     the index of the child, or -1 if the child is not
+          in a flow box.
+  */
   int getIndex()
   {
     int _retval;
@@ -76,10 +79,10 @@ class FlowBoxChild : gtk.bin.Bin
   }
 
   /**
-   * Returns whether the child is currently selected in its
-   * #GtkFlowBox container.
-   * Returns: %TRUE if child is selected
-   */
+      Returns whether the child is currently selected in its
+    #GtkFlowBox container.
+    Returns:     true if child is selected
+  */
   bool isSelected()
   {
     bool _retval;
@@ -88,24 +91,31 @@ class FlowBoxChild : gtk.bin.Bin
   }
 
   /**
-   * The ::activate signal is emitted when the user activates
-   * a child widget in a #GtkFlowBox, either by clicking or
-   * double-clicking, or by using the Space or Enter key.
-   * While this signal is used as a
-   * [keybinding signal][GtkBindingSignal],
-   * it can be used by applications for their own purposes.
-   *   flowBoxChild = the instance the signal is connected to
-   */
+      The ::activate signal is emitted when the user activates
+    a child widget in a #GtkFlowBox, either by clicking or
+    double-clicking, or by using the Space or Enter key.
+    
+    While this signal is used as a
+    [keybinding signal][GtkBindingSignal],
+    it can be used by applications for their own purposes.
+  
+    ## Parameters
+    $(LIST
+      * $(B flowBoxChild) the instance the signal is connected to
+    )
+  */
   alias ActivateCallbackDlg = void delegate(gtk.flow_box_child.FlowBoxChild flowBoxChild);
+
+  /** ditto */
   alias ActivateCallbackFunc = void function(gtk.flow_box_child.FlowBoxChild flowBoxChild);
 
   /**
-   * Connect to Activate signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Activate signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {

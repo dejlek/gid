@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
 {
 
@@ -26,6 +27,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
     return getType();
   }
 
+  /** */
   this(long initialSize)
   {
     GArrowResizableBuffer* _cretval;
@@ -36,6 +38,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool reserve(long newCapacity)
   {
     bool _retval;
@@ -46,6 +49,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
     return _retval;
   }
 
+  /** */
   bool resize(long newSize)
   {
     bool _retval;

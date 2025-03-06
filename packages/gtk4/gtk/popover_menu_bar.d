@@ -15,28 +15,36 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkPopoverMenuBar` presents a horizontal bar of items that pop
- * up popover menus when clicked.
- * ![An example GtkPopoverMenuBar](menubar.png)
- * The only way to create instances of `GtkPopoverMenuBar` is
- * from a `GMenuModel`.
- * # CSS nodes
- * ```
- * menubar
- * ├── item[.active]
- * ┊   ╰── popover
- * ╰── item
- * ╰── popover
- * ```
- * `GtkPopoverMenuBar` has a single CSS node with name menubar, below which
- * each item has its CSS node, and below that the corresponding popover.
- * The item whose popover is currently open gets the .active
- * style class.
- * # Accessibility
- * `GtkPopoverMenuBar` uses the %GTK_ACCESSIBLE_ROLE_MENU_BAR role,
- * the menu items use the %GTK_ACCESSIBLE_ROLE_MENU_ITEM role and
- * the menus use the %GTK_ACCESSIBLE_ROLE_MENU role.
- */
+    [gtk.popover_menu_bar.PopoverMenuBar] presents a horizontal bar of items that pop
+  up popover menus when clicked.
+  
+  ![An example GtkPopoverMenuBar](menubar.png)
+  
+  The only way to create instances of [gtk.popover_menu_bar.PopoverMenuBar] is
+  from a [gio.menu_model.MenuModel].
+  
+  # CSS nodes
+  
+  ```
+  menubar
+  ├── item[.active]
+  ┊   ╰── popover
+  ╰── item
+      ╰── popover
+  ```
+  
+  [gtk.popover_menu_bar.PopoverMenuBar] has a single CSS node with name menubar, below which
+  each item has its CSS node, and below that the corresponding popover.
+  
+  The item whose popover is currently open gets the .active
+  style class.
+  
+  # Accessibility
+  
+  [gtk.popover_menu_bar.PopoverMenuBar] uses the [gtk.types.AccessibleRole.MenuBar] role,
+  the menu items use the [gtk.types.AccessibleRole.MenuItem] role and
+  the menus use the [gtk.types.AccessibleRole.Menu] role.
+*/
 class PopoverMenuBar : gtk.widget.Widget
 {
 
@@ -57,11 +65,11 @@ class PopoverMenuBar : gtk.widget.Widget
   }
 
   /**
-   * Creates a `GtkPopoverMenuBar` from a `GMenuModel`.
-   * Params:
-   *   model = a `GMenuModel`
-   * Returns: a new `GtkPopoverMenuBar`
-   */
+      Creates a [gtk.popover_menu_bar.PopoverMenuBar] from a [gio.menu_model.MenuModel].
+    Params:
+      model =       a [gio.menu_model.MenuModel]
+    Returns:     a new [gtk.popover_menu_bar.PopoverMenuBar]
+  */
   static gtk.popover_menu_bar.PopoverMenuBar newFromModel(gio.menu_model.MenuModel model = null)
   {
     GtkWidget* _cretval;
@@ -71,14 +79,15 @@ class PopoverMenuBar : gtk.widget.Widget
   }
 
   /**
-   * Adds a custom widget to a generated menubar.
-   * For this to work, the menu model of bar must have an
-   * item with a `custom` attribute that matches id.
-   * Params:
-   *   child = the `GtkWidget` to add
-   *   id = the ID to insert child at
-   * Returns: %TRUE if id was found and the widget added
-   */
+      Adds a custom widget to a generated menubar.
+    
+    For this to work, the menu model of bar must have an
+    item with a `custom` attribute that matches id.
+    Params:
+      child =       the [gtk.widget.Widget] to add
+      id =       the ID to insert child at
+    Returns:     true if id was found and the widget added
+  */
   bool addChild(gtk.widget.Widget child, string id)
   {
     bool _retval;
@@ -88,9 +97,9 @@ class PopoverMenuBar : gtk.widget.Widget
   }
 
   /**
-   * Returns the model from which the contents of bar are taken.
-   * Returns: a `GMenuModel`
-   */
+      Returns the model from which the contents of bar are taken.
+    Returns:     a [gio.menu_model.MenuModel]
+  */
   gio.menu_model.MenuModel getMenuModel()
   {
     GMenuModel* _cretval;
@@ -100,12 +109,12 @@ class PopoverMenuBar : gtk.widget.Widget
   }
 
   /**
-   * Removes a widget that has previously been added with
-   * [gtk.popover_menu_bar.PopoverMenuBar.addChild].
-   * Params:
-   *   child = the `GtkWidget` to remove
-   * Returns: %TRUE if the widget was removed
-   */
+      Removes a widget that has previously been added with
+    [gtk.popover_menu_bar.PopoverMenuBar.addChild].
+    Params:
+      child =       the [gtk.widget.Widget] to remove
+    Returns:     true if the widget was removed
+  */
   bool removeChild(gtk.widget.Widget child)
   {
     bool _retval;
@@ -114,11 +123,11 @@ class PopoverMenuBar : gtk.widget.Widget
   }
 
   /**
-   * Sets a menu model from which bar should take
-   * its contents.
-   * Params:
-   *   model = a `GMenuModel`
-   */
+      Sets a menu model from which bar should take
+    its contents.
+    Params:
+      model =       a [gio.menu_model.MenuModel]
+  */
   void setMenuModel(gio.menu_model.MenuModel model = null)
   {
     gtk_popover_menu_bar_set_menu_model(cast(GtkPopoverMenuBar*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);

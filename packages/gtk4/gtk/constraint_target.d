@@ -7,10 +7,11 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * The `GtkConstraintTarget` interface is implemented by objects that
- * can be used as source or target in `GtkConstraint`s.
- * Besides `GtkWidget`, it is also implemented by `GtkConstraintGuide`.
- */
+    The [gtk.constraint_target.ConstraintTarget] interface is implemented by objects that
+  can be used as source or target in [gtk.constraint.Constraint]s.
+  
+  Besides [gtk.widget.Widget], it is also implemented by [gtk.constraint_guide.ConstraintGuide].
+*/
 interface ConstraintTarget
 {
 

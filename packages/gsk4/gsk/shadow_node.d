@@ -8,8 +8,8 @@ import gsk.shadow;
 import gsk.types;
 
 /**
- * A render node drawing one or more shadows behind its single child node.
- */
+    A render node drawing one or more shadows behind its single child node.
+*/
 class ShadowNode : gsk.render_node.RenderNode
 {
 
@@ -22,9 +22,9 @@ class ShadowNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the child `GskRenderNode` of the shadow node.
-   * Returns: the child render node
-   */
+      Retrieves the child [gsk.render_node.RenderNode] of the shadow node.
+    Returns:     the child render node
+  */
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
@@ -34,9 +34,9 @@ class ShadowNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the number of shadows in the node.
-   * Returns: the number of shadows.
-   */
+      Retrieves the number of shadows in the node.
+    Returns:     the number of shadows.
+  */
   size_t getNShadows()
   {
     size_t _retval;
@@ -45,11 +45,11 @@ class ShadowNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the shadow data at the given index i.
-   * Params:
-   *   i = the given index
-   * Returns: the shadow data
-   */
+      Retrieves the shadow data at the given index i.
+    Params:
+      i =       the given index
+    Returns:     the shadow data
+  */
   gsk.shadow.Shadow getShadow(size_t i)
   {
     const(GskShadow)* _cretval;

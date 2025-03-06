@@ -6,6 +6,7 @@ import gdk.types;
 import gid.gid;
 import gobject.boxed;
 
+/** */
 class EventSequence : gobject.boxed.Boxed
 {
 

@@ -7,8 +7,8 @@ import gdk.types;
 import gid.gid;
 
 /**
- * An event related to a pointer or touch device motion.
- */
+    An event related to a pointer or touch device motion.
+*/
 class MotionEvent : gdk.event.Event
 {
 

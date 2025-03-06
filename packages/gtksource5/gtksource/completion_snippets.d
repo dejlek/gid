@@ -9,11 +9,12 @@ import gtksource.completion_provider_mixin;
 import gtksource.types;
 
 /**
- * A iface@CompletionProvider for the completion of snippets.
- * The `GtkSourceCompletionSnippets` is an example of an implementation of
- * the iface@CompletionProvider interface. The proposals are snippets
- * registered with the class@SnippetManager.
- */
+    A `iface@CompletionProvider` for the completion of snippets.
+  
+  The [gtksource.completion_snippets.CompletionSnippets] is an example of an implementation of
+  the `iface@CompletionProvider` interface. The proposals are snippets
+  registered with the `class@SnippetManager`.
+*/
 class CompletionSnippets : gobject.object.ObjectG, gtksource.completion_provider.CompletionProvider
 {
 
@@ -35,6 +36,7 @@ class CompletionSnippets : gobject.object.ObjectG, gtksource.completion_provider
 
   mixin CompletionProviderT!();
 
+  /** */
   this()
   {
     GtkSourceCompletionSnippets* _cretval;

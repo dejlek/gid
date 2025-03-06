@@ -13,9 +13,9 @@ import gtk.orientable_mixin;
 import gtk.types;
 
 /**
- * A GtkShortcutsShortcut represents a single keyboard shortcut or gesture
- * with a short text. This widget is only meant to be used with #GtkShortcutsWindow.
- */
+    A GtkShortcutsShortcut represents a single keyboard shortcut or gesture
+  with a short text. This widget is only meant to be used with #GtkShortcutsWindow.
+*/
 class ShortcutsShortcut : gtk.box.Box
 {
 

@@ -6,6 +6,7 @@ import arrow.scalar;
 import arrow.types;
 import gid.gid;
 
+/** */
 class MonthIntervalScalar : arrow.scalar.Scalar
 {
 
@@ -25,6 +26,7 @@ class MonthIntervalScalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   this(int value)
   {
     GArrowMonthIntervalScalar* _cretval;
@@ -32,6 +34,7 @@ class MonthIntervalScalar : arrow.scalar.Scalar
     this(_cretval, Yes.Take);
   }
 
+  /** */
   int getValue()
   {
     int _retval;

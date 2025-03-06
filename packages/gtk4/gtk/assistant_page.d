@@ -8,10 +8,10 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkAssistantPage` is an auxiliary object used by `GtkAssistant.
+    [gtk.assistant_page.AssistantPage] is an auxiliary object used by `GtkAssistant.
 
- * Deprecated: This object will be removed in GTK 5
- */
+  Deprecated:     This object will be removed in GTK 5
+*/
 class AssistantPage : gobject.object.ObjectG
 {
 
@@ -32,11 +32,11 @@ class AssistantPage : gobject.object.ObjectG
   }
 
   /**
-   * Returns the child to which page belongs.
-   * Returns: the child to which page belongs
-
-   * Deprecated: This widget will be removed in GTK 5
-   */
+      Returns the child to which page belongs.
+    Returns:     the child to which page belongs
+  
+    Deprecated:     This widget will be removed in GTK 5
+  */
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;

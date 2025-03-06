@@ -7,9 +7,10 @@ import gsk.renderer;
 import gsk.types;
 
 /**
- * A GSK renderer that is using Vulkan.
- * This renderer will fail to realize if Vulkan is not supported.
- */
+    A GSK renderer that is using Vulkan.
+  
+  This renderer will fail to realize if Vulkan is not supported.
+*/
 class VulkanRenderer : gsk.renderer.Renderer
 {
 
@@ -29,6 +30,7 @@ class VulkanRenderer : gsk.renderer.Renderer
     return getType();
   }
 
+  /** */
   this()
   {
     GskRenderer* _cretval;

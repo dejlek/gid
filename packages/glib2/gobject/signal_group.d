@@ -9,22 +9,28 @@ import gobject.object;
 import gobject.types;
 
 /**
- * `GSignalGroup` manages a collection of signals on a `GObject`.
- * `GSignalGroup` simplifies the process of connecting  many signals to a `GObject`
- * as a group. As such there is no API to disconnect a signal from the group.
- * In particular, this allows you to:
- * - Change the target instance, which automatically causes disconnection
- * of the signals from the old instance and connecting to the new instance.
- * - Block and unblock signals as a group
- * - Ensuring that blocked state transfers across target instances.
- * One place you might want to use such a structure is with `GtkTextView` and
- * `GtkTextBuffer`. Often times, you'll need to connect to many signals on
- * `GtkTextBuffer` from a `GtkTextView` subclass. This allows you to create a
- * signal group during instance construction, simply bind the
- * `GtkTextView:buffer` property to `GSignalGroup:target` and connect
- * all the signals you need. When the `GtkTextView:buffer` property changes
- * all of the signals will be transitioned correctly.
- */
+    [gobject.signal_group.SignalGroup] manages a collection of signals on a [gobject.object.ObjectG].
+  
+  [gobject.signal_group.SignalGroup] simplifies the process of connecting  many signals to a [gobject.object.ObjectG]
+  as a group. As such there is no API to disconnect a signal from the group.
+  
+  In particular, this allows you to:
+  
+   $(LIST
+      * Change the target instance, which automatically causes disconnection
+        of the signals from the old instance and connecting to the new instance.
+      * Block and unblock signals as a group
+      * Ensuring that blocked state transfers across target instances.
+   )
+     
+  One place you might want to use such a structure is with [gtk.text_view.TextView] and
+  [gtk.text_buffer.TextBuffer]. Often times, you'll need to connect to many signals on
+  [gtk.text_buffer.TextBuffer] from a [gtk.text_view.TextView] subclass. This allows you to create a
+  signal group during instance construction, simply bind the
+  `GtkTextView:buffer` property to `GSignalGroup:target` and connect
+  all the signals you need. When the `GtkTextView:buffer` property changes
+  all of the signals will be transitioned correctly.
+*/
 class SignalGroup : gobject.object.ObjectG
 {
 
@@ -45,11 +51,11 @@ class SignalGroup : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #GSignalGroup for target instances of target_type.
-   * Params:
-   *   targetType = the #GType of the target instance.
-   * Returns: a new #GSignalGroup
-   */
+      Creates a new #GSignalGroup for target instances of target_type.
+    Params:
+      targetType =       the #GType of the target instance.
+    Returns:     a new #GSignalGroup
+  */
   this(gobject.types.GType targetType)
   {
     GSignalGroup* _cretval;
@@ -58,25 +64,27 @@ class SignalGroup : gobject.object.ObjectG
   }
 
   /**
-   * Blocks all signal handlers managed by self so they will not
-   * be called during any signal emissions. Must be unblocked exactly
-   * the same number of times it has been blocked to become active again.
-   * This blocked state will be kept across changes of the target instance.
-   */
+      Blocks all signal handlers managed by self so they will not
+    be called during any signal emissions. Must be unblocked exactly
+    the same number of times it has been blocked to become active again.
+    
+    This blocked state will be kept across changes of the target instance.
+  */
   void block()
   {
     g_signal_group_block(cast(GSignalGroup*)cPtr);
   }
 
   /**
-   * Connects closure to the signal detailed_signal on #GSignalGroup:target.
-   * You cannot connect a signal handler after #GSignalGroup:target has been set.
-   * Params:
-   *   detailedSignal = a string of the form `signal-name` with optional `::signal-detail`
-   *   closure = the closure to connect.
-   *   after = whether the handler should be called before or after the
-   *     default handler of the signal.
-   */
+      Connects closure to the signal detailed_signal on #GSignalGroup:target.
+    
+    You cannot connect a signal handler after #GSignalGroup:target has been set.
+    Params:
+      detailedSignal =       a string of the form `signal-name` with optional `::signal-detail`
+      closure =       the closure to connect.
+      after =       whether the handler should be called before or after the
+         default handler of the signal.
+  */
   void connectClosure(string detailedSignal, gobject.closure.Closure closure, bool after)
   {
     const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
@@ -84,9 +92,9 @@ class SignalGroup : gobject.object.ObjectG
   }
 
   /**
-   * Gets the target instance used when connecting signals.
-   * Returns: The target instance
-   */
+      Gets the target instance used when connecting signals.
+    Returns:     The target instance
+  */
   gobject.object.ObjectG dupTarget()
   {
     ObjectC* _cretval;
@@ -96,50 +104,56 @@ class SignalGroup : gobject.object.ObjectG
   }
 
   /**
-   * Sets the target instance used when connecting signals. Any signal
-   * that has been registered with [gobject.signal_group.SignalGroup.connectObject] or
-   * similar functions will be connected to this object.
-   * If the target instance was previously set, signals will be
-   * disconnected from that object prior to connecting to target.
-   * Params:
-   *   target = The target instance used
-   *     when connecting signals.
-   */
+      Sets the target instance used when connecting signals. Any signal
+    that has been registered with [gobject.signal_group.SignalGroup.connectObject] or
+    similar functions will be connected to this object.
+    
+    If the target instance was previously set, signals will be
+    disconnected from that object prior to connecting to target.
+    Params:
+      target =       The target instance used
+            when connecting signals.
+  */
   void setTarget(gobject.object.ObjectG target = null)
   {
     g_signal_group_set_target(cast(GSignalGroup*)cPtr, target ? cast(ObjectC*)target.cPtr(No.Dup) : null);
   }
 
   /**
-   * Unblocks all signal handlers managed by self so they will be
-   * called again during any signal emissions unless it is blocked
-   * again. Must be unblocked exactly the same number of times it
-   * has been blocked to become active again.
-   */
+      Unblocks all signal handlers managed by self so they will be
+    called again during any signal emissions unless it is blocked
+    again. Must be unblocked exactly the same number of times it
+    has been blocked to become active again.
+  */
   void unblock()
   {
     g_signal_group_unblock(cast(GSignalGroup*)cPtr);
   }
 
   /**
-   * This signal is emitted when #GSignalGroup:target is set to a new value
-   * other than %NULL. It is similar to #GObject::notify on `target` except it
-   * will not emit when #GSignalGroup:target is %NULL and also allows for
-   * receiving the #GObject without a data-race.
-   * Params
-   *   instance = a #GObject containing the new value for #GSignalGroup:target
-   *   signalGroup = the instance the signal is connected to
-   */
+      This signal is emitted when #GSignalGroup:target is set to a new value
+    other than null. It is similar to #GObject::notify on `target` except it
+    will not emit when #GSignalGroup:target is null and also allows for
+    receiving the #GObject without a data-race.
+  
+    ## Parameters
+    $(LIST
+      * $(B instance)       a #GObject containing the new value for #GSignalGroup:target
+      * $(B signalGroup) the instance the signal is connected to
+    )
+  */
   alias BindCallbackDlg = void delegate(gobject.object.ObjectG instance, gobject.signal_group.SignalGroup signalGroup);
+
+  /** ditto */
   alias BindCallbackFunc = void function(gobject.object.ObjectG instance, gobject.signal_group.SignalGroup signalGroup);
 
   /**
-   * Connect to Bind signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Bind signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectBind(T)(T callback, Flag!"After" after = No.After)
   if (is(T : BindCallbackDlg) || is(T : BindCallbackFunc))
   {
@@ -157,22 +171,29 @@ class SignalGroup : gobject.object.ObjectG
   }
 
   /**
-   * This signal is emitted when the target instance of self is set to a
-   * new #GObject.
-   * This signal will only be emitted if the previous target of self is
-   * non-%NULL.
-   *   signalGroup = the instance the signal is connected to
-   */
+      This signal is emitted when the target instance of self is set to a
+    new #GObject.
+    
+    This signal will only be emitted if the previous target of self is
+    non-null.
+  
+    ## Parameters
+    $(LIST
+      * $(B signalGroup) the instance the signal is connected to
+    )
+  */
   alias UnbindCallbackDlg = void delegate(gobject.signal_group.SignalGroup signalGroup);
+
+  /** ditto */
   alias UnbindCallbackFunc = void function(gobject.signal_group.SignalGroup signalGroup);
 
   /**
-   * Connect to Unbind signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Unbind signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectUnbind(T)(T callback, Flag!"After" after = No.After)
   if (is(T : UnbindCallbackDlg) || is(T : UnbindCallbackFunc))
   {

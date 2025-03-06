@@ -6,6 +6,7 @@ import arrowflight.c.types;
 import arrowflight.types;
 import gid.gid;
 
+/** */
 interface Servable
 {
 

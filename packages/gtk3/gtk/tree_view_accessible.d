@@ -14,6 +14,7 @@ import gtk.cell_accessible_parent_mixin;
 import gtk.container_accessible;
 import gtk.types;
 
+/** */
 class TreeViewAccessible : gtk.container_accessible.ContainerAccessible, atk.selection.Selection, atk.table.Table, gtk.cell_accessible_parent.CellAccessibleParent
 {
 

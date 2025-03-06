@@ -8,6 +8,7 @@ import arrow.union_array_builder;
 import gid.gid;
 import glib.error;
 
+/** */
 class SparseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
 {
 
@@ -27,6 +28,7 @@ class SparseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
     return getType();
   }
 
+  /** */
   this(arrow.sparse_union_data_type.SparseUnionDataType dataType = null)
   {
     GArrowSparseUnionArrayBuilder* _cretval;

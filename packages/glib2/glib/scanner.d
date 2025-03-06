@@ -8,18 +8,21 @@ import glib.token_value;
 import glib.types;
 
 /**
- * `GScanner` provides a general-purpose lexical scanner.
- * You should set @input_name after creating the scanner, since
- * it is used by the default message handler when displaying
- * warnings and errors. If you are scanning a file, the filename
- * would be a good choice.
- * The @user_data and @max_parse_errors fields are not used.
- * If you need to associate extra data with the scanner you
- * can place them here.
- * If you want to use your own message handler you can set the
- * @msg_handler field. The type of the message handler function
- * is declared by #GScannerMsgFunc.
- */
+    [glib.scanner.Scanner] provides a general-purpose lexical scanner.
+  
+  You should set @input_name after creating the scanner, since
+  it is used by the default message handler when displaying
+  warnings and errors. If you are scanning a file, the filename
+  would be a good choice.
+  
+  The @user_data and @max_parse_errors fields are not used.
+  If you need to associate extra data with the scanner you
+  can place them here.
+  
+  If you want to use your own message handler you can set the
+  @msg_handler field. The type of the message handler function
+  is declared by #GScannerMsgFunc.
+*/
 class Scanner
 {
   GScanner cInstance;
@@ -172,11 +175,11 @@ class Scanner
   }
 
   /**
-   * Returns the current line in the input stream $(LPAREN)counting
-   * from 1$(RPAREN). This is the line of the last token parsed via
-   * [glib.scanner.Scanner.getNextToken].
-   * Returns: the current line
-   */
+      Returns the current line in the input stream (counting
+    from 1). This is the line of the last token parsed via
+    [glib.scanner.Scanner.getNextToken].
+    Returns:     the current line
+  */
   uint curLine()
   {
     uint _retval;
@@ -185,11 +188,11 @@ class Scanner
   }
 
   /**
-   * Returns the current position in the current line $(LPAREN)counting
-   * from 0$(RPAREN). This is the position of the last token parsed via
-   * [glib.scanner.Scanner.getNextToken].
-   * Returns: the current position on the line
-   */
+      Returns the current position in the current line (counting
+    from 0). This is the position of the last token parsed via
+    [glib.scanner.Scanner.getNextToken].
+    Returns:     the current position on the line
+  */
   uint curPosition()
   {
     uint _retval;
@@ -198,10 +201,10 @@ class Scanner
   }
 
   /**
-   * Gets the current token type. This is simply the token
-   * field in the #GScanner structure.
-   * Returns: the current token type
-   */
+      Gets the current token type. This is simply the token
+    field in the #GScanner structure.
+    Returns:     the current token type
+  */
   glib.types.TokenType curToken()
   {
     GTokenType _cretval;
@@ -211,19 +214,19 @@ class Scanner
   }
 
   /**
-   * Frees all memory used by the #GScanner.
-   */
+      Frees all memory used by the #GScanner.
+  */
   void destroy()
   {
     g_scanner_destroy(cast(GScanner*)cPtr);
   }
 
   /**
-   * Returns %TRUE if the scanner has reached the end of
-   * the file or text buffer.
-   * Returns: %TRUE if the scanner has reached the end of
-   *   the file or text buffer
-   */
+      Returns true if the scanner has reached the end of
+    the file or text buffer.
+    Returns:     true if the scanner has reached the end of
+          the file or text buffer
+  */
   bool eof()
   {
     bool _retval;
@@ -232,12 +235,12 @@ class Scanner
   }
 
   /**
-   * Parses the next token just like [glib.scanner.Scanner.peekNextToken]
-   * and also removes it from the input stream. The token data is
-   * placed in the token, value, line, and position fields of
-   * the #GScanner structure.
-   * Returns: the type of the token
-   */
+      Parses the next token just like [glib.scanner.Scanner.peekNextToken]
+    and also removes it from the input stream. The token data is
+    placed in the token, value, line, and position fields of
+    the #GScanner structure.
+    Returns:     the type of the token
+  */
   glib.types.TokenType getNextToken()
   {
     GTokenType _cretval;
@@ -247,21 +250,21 @@ class Scanner
   }
 
   /**
-   * Prepares to scan a file.
-   * Params:
-   *   inputFd = a file descriptor
-   */
+      Prepares to scan a file.
+    Params:
+      inputFd =       a file descriptor
+  */
   void inputFile(int inputFd)
   {
     g_scanner_input_file(cast(GScanner*)cPtr, inputFd);
   }
 
   /**
-   * Prepares to scan a text buffer.
-   * Params:
-   *   text = the text buffer to scan
-   *   textLen = the length of the text buffer
-   */
+      Prepares to scan a text buffer.
+    Params:
+      text =       the text buffer to scan
+      textLen =       the length of the text buffer
+  */
   void inputText(string text, uint textLen)
   {
     const(char)* _text = text.toCString(No.Alloc);
@@ -269,14 +272,14 @@ class Scanner
   }
 
   /**
-   * Looks up a symbol in the current scope and return its value.
-   * If the symbol is not bound in the current scope, %NULL is
-   * returned.
-   * Params:
-   *   symbol = the symbol to look up
-   * Returns: the value of symbol in the current scope, or %NULL
-   *   if symbol is not bound in the current scope
-   */
+      Looks up a symbol in the current scope and return its value.
+    If the symbol is not bound in the current scope, null is
+    returned.
+    Params:
+      symbol =       the symbol to look up
+    Returns:     the value of symbol in the current scope, or null
+          if symbol is not bound in the current scope
+  */
   void* lookupSymbol(string symbol)
   {
     const(char)* _symbol = symbol.toCString(No.Alloc);
@@ -285,18 +288,19 @@ class Scanner
   }
 
   /**
-   * Parses the next token, without removing it from the input stream.
-   * The token data is placed in the next_token, next_value, next_line,
-   * and next_position fields of the #GScanner structure.
-   * Note that, while the token is not removed from the input stream
-   * $(LPAREN)i.e. the next call to [glib.scanner.Scanner.getNextToken] will return the
-   * same token$(RPAREN), it will not be reevaluated. This can lead to surprising
-   * results when changing scope or the scanner configuration after peeking
-   * the next token. Getting the next token after switching the scope or
-   * configuration will return whatever was peeked before, regardless of
-   * any symbols that may have been added or removed in the new scope.
-   * Returns: the type of the token
-   */
+      Parses the next token, without removing it from the input stream.
+    The token data is placed in the next_token, next_value, next_line,
+    and next_position fields of the #GScanner structure.
+    
+    Note that, while the token is not removed from the input stream
+    (i.e. the next call to [glib.scanner.Scanner.getNextToken] will return the
+    same token), it will not be reevaluated. This can lead to surprising
+    results when changing scope or the scanner configuration after peeking
+    the next token. Getting the next token after switching the scope or
+    configuration will return whatever was peeked before, regardless of
+    any symbols that may have been added or removed in the new scope.
+    Returns:     the type of the token
+  */
   glib.types.TokenType peekNextToken()
   {
     GTokenType _cretval;
@@ -306,12 +310,12 @@ class Scanner
   }
 
   /**
-   * Adds a symbol to the given scope.
-   * Params:
-   *   scopeId = the scope id
-   *   symbol = the symbol to add
-   *   value = the value of the symbol
-   */
+      Adds a symbol to the given scope.
+    Params:
+      scopeId =       the scope id
+      symbol =       the symbol to add
+      value =       the value of the symbol
+  */
   void scopeAddSymbol(uint scopeId, string symbol, void* value = null)
   {
     const(char)* _symbol = symbol.toCString(No.Alloc);
@@ -319,14 +323,14 @@ class Scanner
   }
 
   /**
-   * Calls the given function for each of the symbol/value pairs
-   * in the given scope of the #GScanner. The function is passed
-   * the symbol and value of each pair, and the given user_data
-   * parameter.
-   * Params:
-   *   scopeId = the scope id
-   *   func = the function to call for each symbol/value pair
-   */
+      Calls the given function for each of the symbol/value pairs
+    in the given scope of the #GScanner. The function is passed
+    the symbol and value of each pair, and the given user_data
+    parameter.
+    Params:
+      scopeId =       the scope id
+      func =       the function to call for each symbol/value pair
+  */
   void scopeForeachSymbol(uint scopeId, glib.types.HFunc func)
   {
     extern(C) void _funcCallback(void* key, void* value, void* userData)
@@ -342,14 +346,14 @@ class Scanner
   }
 
   /**
-   * Looks up a symbol in a scope and return its value. If the
-   * symbol is not bound in the scope, %NULL is returned.
-   * Params:
-   *   scopeId = the scope id
-   *   symbol = the symbol to look up
-   * Returns: the value of symbol in the given scope, or %NULL
-   *   if symbol is not bound in the given scope.
-   */
+      Looks up a symbol in a scope and return its value. If the
+    symbol is not bound in the scope, null is returned.
+    Params:
+      scopeId =       the scope id
+      symbol =       the symbol to look up
+    Returns:     the value of symbol in the given scope, or null
+          if symbol is not bound in the given scope.
+  */
   void* scopeLookupSymbol(uint scopeId, string symbol)
   {
     const(char)* _symbol = symbol.toCString(No.Alloc);
@@ -358,11 +362,11 @@ class Scanner
   }
 
   /**
-   * Removes a symbol from a scope.
-   * Params:
-   *   scopeId = the scope id
-   *   symbol = the symbol to remove
-   */
+      Removes a symbol from a scope.
+    Params:
+      scopeId =       the scope id
+      symbol =       the symbol to remove
+  */
   void scopeRemoveSymbol(uint scopeId, string symbol)
   {
     const(char)* _symbol = symbol.toCString(No.Alloc);
@@ -370,11 +374,11 @@ class Scanner
   }
 
   /**
-   * Sets the current scope.
-   * Params:
-   *   scopeId = the new scope id
-   * Returns: the old scope id
-   */
+      Sets the current scope.
+    Params:
+      scopeId =       the new scope id
+    Returns:     the old scope id
+  */
   uint setScope(uint scopeId)
   {
     uint _retval;
@@ -383,41 +387,41 @@ class Scanner
   }
 
   /**
-   * Rewinds the filedescriptor to the current buffer position
-   * and blows the file read ahead buffer. This is useful for
-   * third party uses of the scanners filedescriptor, which hooks
-   * onto the current scanning position.
-   */
+      Rewinds the filedescriptor to the current buffer position
+    and blows the file read ahead buffer. This is useful for
+    third party uses of the scanners filedescriptor, which hooks
+    onto the current scanning position.
+  */
   void syncFileOffset()
   {
     g_scanner_sync_file_offset(cast(GScanner*)cPtr);
   }
 
   /**
-   * Outputs a message through the scanner's msg_handler,
-   * resulting from an unexpected token in the input stream.
-   * Note that you should not call [glib.scanner.Scanner.peekNextToken]
-   * followed by [glib.scanner.Scanner.unexpToken] without an intermediate
-   * call to [glib.scanner.Scanner.getNextToken], as [glib.scanner.Scanner.unexpToken]
-   * evaluates the scanner's current token $(LPAREN)not the peeked token$(RPAREN)
-   * to construct part of the message.
-   * Params:
-   *   expectedToken = the expected token
-   *   identifierSpec = a string describing how the scanner's user
-   *     refers to identifiers $(LPAREN)%NULL defaults to "identifier"$(RPAREN).
-   *     This is used if expected_token is %G_TOKEN_IDENTIFIER or
-   *     %G_TOKEN_IDENTIFIER_NULL.
-   *   symbolSpec = a string describing how the scanner's user refers
-   *     to symbols $(LPAREN)%NULL defaults to "symbol"$(RPAREN). This is used if
-   *     expected_token is %G_TOKEN_SYMBOL or any token value greater
-   *     than %G_TOKEN_LAST.
-   *   symbolName = the name of the symbol, if the scanner's current
-   *     token is a symbol.
-   *   message = a message string to output at the end of the
-   *     warning/error, or %NULL.
-   *   isError = if %TRUE it is output as an error. If %FALSE it is
-   *     output as a warning.
-   */
+      Outputs a message through the scanner's msg_handler,
+    resulting from an unexpected token in the input stream.
+    Note that you should not call [glib.scanner.Scanner.peekNextToken]
+    followed by [glib.scanner.Scanner.unexpToken] without an intermediate
+    call to [glib.scanner.Scanner.getNextToken], as [glib.scanner.Scanner.unexpToken]
+    evaluates the scanner's current token (not the peeked token)
+    to construct part of the message.
+    Params:
+      expectedToken =       the expected token
+      identifierSpec =       a string describing how the scanner's user
+            refers to identifiers (null defaults to "identifier").
+            This is used if expected_token is `G_TOKEN_IDENTIFIER` or
+            `G_TOKEN_IDENTIFIER_NULL`.
+      symbolSpec =       a string describing how the scanner's user refers
+            to symbols (null defaults to "symbol"). This is used if
+            expected_token is `G_TOKEN_SYMBOL` or any token value greater
+            than `G_TOKEN_LAST`.
+      symbolName =       the name of the symbol, if the scanner's current
+            token is a symbol.
+      message =       a message string to output at the end of the
+            warning/error, or null.
+      isError =       if true it is output as an error. If false it is
+            output as a warning.
+  */
   void unexpToken(glib.types.TokenType expectedToken, string identifierSpec, string symbolSpec, string symbolName, string message, int isError)
   {
     const(char)* _identifierSpec = identifierSpec.toCString(No.Alloc);

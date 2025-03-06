@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class UnionArray : arrow.array.Array
 {
 
@@ -26,6 +27,7 @@ class UnionArray : arrow.array.Array
     return getType();
   }
 
+  /** */
   int getChildId(long i)
   {
     int _retval;
@@ -33,6 +35,7 @@ class UnionArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   arrow.array.Array getField(int i)
   {
     GArrowArray* _cretval;
@@ -41,6 +44,7 @@ class UnionArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   byte getTypeCode(long i)
   {
     byte _retval;

@@ -9,8 +9,8 @@ import gsk.rounded_rect;
 import gsk.types;
 
 /**
- * A render node for a border.
- */
+    A render node for a border.
+*/
 class BorderNode : gsk.render_node.RenderNode
 {
 
@@ -23,17 +23,18 @@ class BorderNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Creates a `GskRenderNode` that will stroke a border rectangle inside the
-   * given outline.
-   * The 4 sides of the border can have different widths and colors.
-   * Params:
-   *   outline = a `GskRoundedRect` describing the outline of the border
-   *   borderWidth = the stroke width of the border on
-   *     the top, right, bottom and left side respectively.
-   *   borderColor = the color used on the top, right,
-   *     bottom and left side.
-   * Returns: A new `GskRenderNode`
-   */
+      Creates a [gsk.render_node.RenderNode] that will stroke a border rectangle inside the
+    given outline.
+    
+    The 4 sides of the border can have different widths and colors.
+    Params:
+      outline =       a [gsk.rounded_rect.RoundedRect] describing the outline of the border
+      borderWidth =       the stroke width of the border on
+            the top, right, bottom and left side respectively.
+      borderColor =       the color used on the top, right,
+            bottom and left side.
+    Returns:     A new [gsk.render_node.RenderNode]
+  */
   this(gsk.rounded_rect.RoundedRect outline, float[] borderWidth, gdk.rgba.RGBA[] borderColor)
   {
     GskRenderNode* _cretval;
@@ -49,10 +50,10 @@ class BorderNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the colors of the border.
-   * Returns: an array of 4 `GdkRGBA` structs
-   *   for the top, right, bottom and left color of the border
-   */
+      Retrieves the colors of the border.
+    Returns:     an array of 4 [gdk.rgba.RGBA] structs
+          for the top, right, bottom and left color of the border
+  */
   gdk.rgba.RGBA getColors()
   {
     const(GdkRGBA)* _cretval;
@@ -62,9 +63,9 @@ class BorderNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the outline of the border.
-   * Returns: the outline of the border
-   */
+      Retrieves the outline of the border.
+    Returns:     the outline of the border
+  */
   gsk.rounded_rect.RoundedRect getOutline()
   {
     const(GskRoundedRect)* _cretval;
@@ -74,11 +75,11 @@ class BorderNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the stroke widths of the border.
-   * Returns: an array of 4 floats
-   *   for the top, right, bottom and left stroke width of the border,
-   *   respectively
-   */
+      Retrieves the stroke widths of the border.
+    Returns:     an array of 4 floats
+        for the top, right, bottom and left stroke width of the border,
+        respectively
+  */
   float[] getWidths()
   {
     const(float)* _cretval;

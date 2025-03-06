@@ -9,12 +9,14 @@ import gtksource.style_scheme;
 import gtksource.types;
 
 /**
- * Interface implemented by widgets for choosing style schemes.
- * `GtkSourceStyleSchemeChooser` is an interface that is implemented by widgets
- * for choosing style schemes.
- * In GtkSourceView, the main widgets that implement this interface are
- * class@StyleSchemeChooserWidget and class@StyleSchemeChooserButton.
- */
+    Interface implemented by widgets for choosing style schemes.
+  
+  [gtksource.style_scheme_chooser.StyleSchemeChooser] is an interface that is implemented by widgets
+  for choosing style schemes.
+  
+  In GtkSourceView, the main widgets that implement this interface are
+  `class@StyleSchemeChooserWidget` and `class@StyleSchemeChooserButton`.
+*/
 interface StyleSchemeChooser
 {
 
@@ -25,15 +27,15 @@ interface StyleSchemeChooser
   }
 
   /**
-   * Gets the currently-selected scheme.
-   * Returns: the currently-selected scheme.
-   */
+      Gets the currently-selected scheme.
+    Returns:     the currently-selected scheme.
+  */
   gtksource.style_scheme.StyleScheme getStyleScheme();
 
   /**
-   * Sets the scheme.
-   * Params:
-   *   scheme = a #GtkSourceStyleScheme
-   */
+      Sets the scheme.
+    Params:
+      scheme =       a #GtkSourceStyleScheme
+  */
   void setStyleScheme(gtksource.style_scheme.StyleScheme scheme);
 }

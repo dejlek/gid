@@ -10,6 +10,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class ExtensionDataType : arrow.data_type.DataType
 {
 
@@ -29,6 +30,7 @@ class ExtensionDataType : arrow.data_type.DataType
     return getType();
   }
 
+  /** */
   string getExtensionName()
   {
     char* _cretval;
@@ -37,6 +39,7 @@ class ExtensionDataType : arrow.data_type.DataType
     return _retval;
   }
 
+  /** */
   arrow.extension_array.ExtensionArray wrapArray(arrow.array.Array storage)
   {
     GArrowExtensionArray* _cretval;
@@ -45,6 +48,7 @@ class ExtensionDataType : arrow.data_type.DataType
     return _retval;
   }
 
+  /** */
   arrow.chunked_array.ChunkedArray wrapChunkedArray(arrow.chunked_array.ChunkedArray storage)
   {
     GArrowChunkedArray* _cretval;

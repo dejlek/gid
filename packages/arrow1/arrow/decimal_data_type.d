@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType
 {
 
@@ -26,6 +27,7 @@ class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTyp
     return getType();
   }
 
+  /** */
   this(int precision, int scale)
   {
     GArrowDecimalDataType* _cretval;
@@ -36,6 +38,7 @@ class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTyp
     this(_cretval, Yes.Take);
   }
 
+  /** */
   int getPrecision()
   {
     int _retval;
@@ -43,6 +46,7 @@ class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTyp
     return _retval;
   }
 
+  /** */
   int getScale()
   {
     int _retval;

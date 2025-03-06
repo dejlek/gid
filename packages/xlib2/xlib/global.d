@@ -6,6 +6,7 @@ import xlib.c.types;
 import xlib.types;
 
 
+/** */
 void openDisplay()
 {
   XOpenDisplay();

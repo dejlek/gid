@@ -6,6 +6,7 @@ import arrow.temporal_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class IntervalDataType : arrow.temporal_data_type.TemporalDataType
 {
 
@@ -25,6 +26,7 @@ class IntervalDataType : arrow.temporal_data_type.TemporalDataType
     return getType();
   }
 
+  /** */
   arrow.types.IntervalType getIntervalType()
   {
     GArrowIntervalType _cretval;

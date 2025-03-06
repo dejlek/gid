@@ -7,6 +7,7 @@ import atk.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class Implementor
 {
   AtkImplementor* cInstancePtr;
@@ -28,11 +29,11 @@ class Implementor
   }
 
   /**
-   * Gets a reference to an object's #AtkObject implementation, if
-   * the object implements #AtkObjectIface
-   * Returns: a reference to an object's #AtkObject
-   *   implementation
-   */
+      Gets a reference to an object's #AtkObject implementation, if
+    the object implements #AtkObjectIface
+    Returns:     a reference to an object's #AtkObject
+      implementation
+  */
   atk.object.ObjectAtk refAccessible()
   {
     AtkObject* _cretval;

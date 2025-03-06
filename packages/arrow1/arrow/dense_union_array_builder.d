@@ -8,6 +8,7 @@ import arrow.union_array_builder;
 import gid.gid;
 import glib.error;
 
+/** */
 class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
 {
 
@@ -27,6 +28,7 @@ class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
     return getType();
   }
 
+  /** */
   this(arrow.dense_union_data_type.DenseUnionDataType dataType = null)
   {
     GArrowDenseUnionArrayBuilder* _cretval;

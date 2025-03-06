@@ -10,9 +10,9 @@ import glib.variant;
 import gobject.object;
 
 /**
- * A type for representing D-Bus messages that can be sent or received
- * on a [gio.dbus_connection.DBusConnection].
- */
+    A type for representing D-Bus messages that can be sent or received
+  on a [gio.dbus_connection.DBusConnection].
+*/
 class DBusMessage : gobject.object.ObjectG
 {
 
@@ -33,9 +33,9 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new empty #GDBusMessage.
-   * Returns: A #GDBusMessage. Free with [gobject.object.ObjectG.unref].
-   */
+      Creates a new empty #GDBusMessage.
+    Returns:     A #GDBusMessage. Free with [gobject.object.ObjectG.unref].
+  */
   this()
   {
     GDBusMessage* _cretval;
@@ -44,17 +44,18 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #GDBusMessage from the data stored at blob. The byte
-   * order that the message was in can be retrieved using
-   * [gio.dbus_message.DBusMessage.getByteOrder].
-   * If the blob cannot be parsed, contains invalid fields, or contains invalid
-   * headers, %G_IO_ERROR_INVALID_ARGUMENT will be returned.
-   * Params:
-   *   blob = A blob representing a binary D-Bus message.
-   *   capabilities = A #GDBusCapabilityFlags describing what protocol features are supported.
-   * Returns: A new #GDBusMessage or %NULL if error is set. Free with
-   *   [gobject.object.ObjectG.unref].
-   */
+      Creates a new #GDBusMessage from the data stored at blob. The byte
+    order that the message was in can be retrieved using
+    [gio.dbus_message.DBusMessage.getByteOrder].
+    
+    If the blob cannot be parsed, contains invalid fields, or contains invalid
+    headers, [gio.types.IOErrorEnum.InvalidArgument] will be returned.
+    Params:
+      blob =       A blob representing a binary D-Bus message.
+      capabilities =       A #GDBusCapabilityFlags describing what protocol features are supported.
+    Returns:     A new #GDBusMessage or null if error is set. Free with
+      [gobject.object.ObjectG.unref].
+  */
   static gio.dbus_message.DBusMessage newFromBlob(ubyte[] blob, gio.types.DBusCapabilityFlags capabilities)
   {
     GDBusMessage* _cretval;
@@ -72,14 +73,14 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #GDBusMessage for a method call.
-   * Params:
-   *   name = A valid D-Bus name or %NULL.
-   *   path = A valid object path.
-   *   interface_ = A valid D-Bus interface name or %NULL.
-   *   method = A valid method name.
-   * Returns: A #GDBusMessage. Free with [gobject.object.ObjectG.unref].
-   */
+      Creates a new #GDBusMessage for a method call.
+    Params:
+      name =       A valid D-Bus name or null.
+      path =       A valid object path.
+      interface_ =       A valid D-Bus interface name or null.
+      method =       A valid method name.
+    Returns:     A #GDBusMessage. Free with [gobject.object.ObjectG.unref].
+  */
   static gio.dbus_message.DBusMessage newMethodCall(string name, string path, string interface_, string method)
   {
     GDBusMessage* _cretval;
@@ -93,13 +94,13 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #GDBusMessage for a signal emission.
-   * Params:
-   *   path = A valid object path.
-   *   interface_ = A valid D-Bus interface name.
-   *   signal = A valid signal name.
-   * Returns: A #GDBusMessage. Free with [gobject.object.ObjectG.unref].
-   */
+      Creates a new #GDBusMessage for a signal emission.
+    Params:
+      path =       A valid object path.
+      interface_ =       A valid D-Bus interface name.
+      signal =       A valid signal name.
+    Returns:     A #GDBusMessage. Free with [gobject.object.ObjectG.unref].
+  */
   static gio.dbus_message.DBusMessage newSignal(string path, string interface_, string signal)
   {
     GDBusMessage* _cretval;
@@ -112,14 +113,14 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Utility function to calculate how many bytes are needed to
-   * completely deserialize the D-Bus message stored at blob.
-   * Params:
-   *   blob = A blob representing a binary D-Bus message.
-   * Returns: Number of bytes needed or -1 if error is set $(LPAREN)e.g. if
-   *   blob contains invalid data or not enough data is available to
-   *   determine the size$(RPAREN).
-   */
+      Utility function to calculate how many bytes are needed to
+    completely deserialize the D-Bus message stored at blob.
+    Params:
+      blob =       A blob representing a binary D-Bus message.
+    Returns:     Number of bytes needed or -1 if error is set (e.g. if
+      blob contains invalid data or not enough data is available to
+      determine the size).
+  */
   static ptrdiff_t bytesNeeded(ubyte[] blob)
   {
     ptrdiff_t _retval;
@@ -136,14 +137,15 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Copies message. The copy is a deep copy and the returned
-   * #GDBusMessage is completely identical except that it is guaranteed
-   * to not be locked.
-   * This operation can fail if e.g. message contains file descriptors
-   * and the per-process or system-wide open files limit is reached.
-   * Returns: A new #GDBusMessage or %NULL if error is set.
-   *   Free with [gobject.object.ObjectG.unref].
-   */
+      Copies message. The copy is a deep copy and the returned
+    #GDBusMessage is completely identical except that it is guaranteed
+    to not be locked.
+    
+    This operation can fail if e.g. message contains file descriptors
+    and the per-process or system-wide open files limit is reached.
+    Returns:     A new #GDBusMessage or null if error is set.
+          Free with [gobject.object.ObjectG.unref].
+  */
   gio.dbus_message.DBusMessage copy()
   {
     GDBusMessage* _cretval;
@@ -156,12 +158,13 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Convenience to get the first item in the body of message.
-   * See [gio.dbus_message.DBusMessage.getArg0Path] for returning object-path-typed
-   * arg0 values.
-   * Returns: The string item or %NULL if the first item in the body of
-   *   message is not a string.
-   */
+      Convenience to get the first item in the body of message.
+    
+    See [gio.dbus_message.DBusMessage.getArg0Path] for returning object-path-typed
+    arg0 values.
+    Returns:     The string item or null if the first item in the body of
+      message is not a string.
+  */
   string getArg0()
   {
     const(char)* _cretval;
@@ -171,11 +174,12 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Convenience to get the first item in the body of message.
-   * See [gio.dbus_message.DBusMessage.getArg0] for returning string-typed arg0 values.
-   * Returns: The object path item or `NULL` if the first item in the
-   *   body of message is not an object path.
-   */
+      Convenience to get the first item in the body of message.
+    
+    See [gio.dbus_message.DBusMessage.getArg0] for returning string-typed arg0 values.
+    Returns:     The object path item or `NULL` if the first item in the
+        body of message is not an object path.
+  */
   string getArg0Path()
   {
     const(char)* _cretval;
@@ -185,10 +189,10 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Gets the body of a message.
-   * Returns: A #GVariant or %NULL if the body is
-   *   empty. Do not free, it is owned by message.
-   */
+      Gets the body of a message.
+    Returns:     A #GVariant or null if the body is
+      empty. Do not free, it is owned by message.
+  */
   glib.variant.VariantG getBody()
   {
     VariantC* _cretval;
@@ -198,9 +202,9 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Gets the byte order of message.
-   * Returns: The byte order.
-   */
+      Gets the byte order of message.
+    Returns:     The byte order.
+  */
   gio.types.DBusMessageByteOrder getByteOrder()
   {
     GDBusMessageByteOrder _cretval;
@@ -210,9 +214,9 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_DESTINATION header field.
-   * Returns: The value.
-   */
+      Convenience getter for the [gio.types.DBusMessageHeaderField.Destination] header field.
+    Returns:     The value.
+  */
   string getDestination()
   {
     const(char)* _cretval;
@@ -222,9 +226,9 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field.
-   * Returns: The value.
-   */
+      Convenience getter for the [gio.types.DBusMessageHeaderField.ErrorName] header field.
+    Returns:     The value.
+  */
   string getErrorName()
   {
     const(char)* _cretval;
@@ -234,9 +238,9 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Gets the flags for message.
-   * Returns: Flags that are set $(LPAREN)typically values from the #GDBusMessageFlags enumeration bitwise ORed together$(RPAREN).
-   */
+      Gets the flags for message.
+    Returns:     Flags that are set (typically values from the #GDBusMessageFlags enumeration bitwise ORed together).
+  */
   gio.types.DBusMessageFlags getFlags()
   {
     GDBusMessageFlags _cretval;
@@ -246,14 +250,15 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Gets a header field on message.
-   * The caller is responsible for checking the type of the returned #GVariant
-   * matches what is expected.
-   * Params:
-   *   headerField = A 8-bit unsigned integer $(LPAREN)typically a value from the #GDBusMessageHeaderField enumeration$(RPAREN)
-   * Returns: A #GVariant with the value if the header was found, %NULL
-   *   otherwise. Do not free, it is owned by message.
-   */
+      Gets a header field on message.
+    
+    The caller is responsible for checking the type of the returned #GVariant
+    matches what is expected.
+    Params:
+      headerField =       A 8-bit unsigned integer (typically a value from the #GDBusMessageHeaderField enumeration)
+    Returns:     A #GVariant with the value if the header was found, null
+      otherwise. Do not free, it is owned by message.
+  */
   glib.variant.VariantG getHeader(gio.types.DBusMessageHeaderField headerField)
   {
     VariantC* _cretval;
@@ -263,11 +268,11 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Gets an array of all header fields on message that are set.
-   * Returns: An array of header fields
-   *   terminated by %G_DBUS_MESSAGE_HEADER_FIELD_INVALID.  Each element
-   *   is a #guchar. Free with [glib.global.gfree].
-   */
+      Gets an array of all header fields on message that are set.
+    Returns:     An array of header fields
+      terminated by [gio.types.DBusMessageHeaderField.Invalid].  Each element
+      is a #guchar. Free with [glib.global.gfree].
+  */
   ubyte[] getHeaderFields()
   {
     ubyte* _cretval;
@@ -285,9 +290,9 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_INTERFACE header field.
-   * Returns: The value.
-   */
+      Convenience getter for the [gio.types.DBusMessageHeaderField.Interface] header field.
+    Returns:     The value.
+  */
   string getInterface()
   {
     const(char)* _cretval;
@@ -297,11 +302,11 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Checks whether message is locked. To monitor changes to this
-   * value, conncet to the #GObject::notify signal to listen for changes
-   * on the #GDBusMessage:locked property.
-   * Returns: %TRUE if message is locked, %FALSE otherwise.
-   */
+      Checks whether message is locked. To monitor changes to this
+    value, conncet to the #GObject::notify signal to listen for changes
+    on the #GDBusMessage:locked property.
+    Returns:     true if message is locked, false otherwise.
+  */
   bool getLocked()
   {
     bool _retval;
@@ -310,9 +315,9 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_MEMBER header field.
-   * Returns: The value.
-   */
+      Convenience getter for the [gio.types.DBusMessageHeaderField.Member] header field.
+    Returns:     The value.
+  */
   string getMember()
   {
     const(char)* _cretval;
@@ -322,9 +327,9 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Gets the type of message.
-   * Returns: A 8-bit unsigned integer $(LPAREN)typically a value from the #GDBusMessageType enumeration$(RPAREN).
-   */
+      Gets the type of message.
+    Returns:     A 8-bit unsigned integer (typically a value from the #GDBusMessageType enumeration).
+  */
   gio.types.DBusMessageType getMessageType()
   {
     GDBusMessageType _cretval;
@@ -334,9 +339,9 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_NUM_UNIX_FDS header field.
-   * Returns: The value.
-   */
+      Convenience getter for the [gio.types.DBusMessageHeaderField.NumUnixFds] header field.
+    Returns:     The value.
+  */
   uint getNumUnixFds()
   {
     uint _retval;
@@ -345,9 +350,9 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_PATH header field.
-   * Returns: The value.
-   */
+      Convenience getter for the [gio.types.DBusMessageHeaderField.Path] header field.
+    Returns:     The value.
+  */
   string getPath()
   {
     const(char)* _cretval;
@@ -357,9 +362,9 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_REPLY_SERIAL header field.
-   * Returns: The value.
-   */
+      Convenience getter for the [gio.types.DBusMessageHeaderField.ReplySerial] header field.
+    Returns:     The value.
+  */
   uint getReplySerial()
   {
     uint _retval;
@@ -368,9 +373,9 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_SENDER header field.
-   * Returns: The value.
-   */
+      Convenience getter for the [gio.types.DBusMessageHeaderField.Sender] header field.
+    Returns:     The value.
+  */
   string getSender()
   {
     const(char)* _cretval;
@@ -380,9 +385,9 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Gets the serial for message.
-   * Returns: A #guint32.
-   */
+      Gets the serial for message.
+    Returns:     A #guint32.
+  */
   uint getSerial()
   {
     uint _retval;
@@ -391,10 +396,11 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_SIGNATURE header field.
-   * This will always be non-%NULL, but may be an empty string.
-   * Returns: The value.
-   */
+      Convenience getter for the [gio.types.DBusMessageHeaderField.Signature] header field.
+    
+    This will always be non-null, but may be an empty string.
+    Returns:     The value.
+  */
   string getSignature()
   {
     const(char)* _cretval;
@@ -404,16 +410,18 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Gets the UNIX file descriptors associated with message, if any.
-   * This method is only available on UNIX.
-   * The file descriptors normally correspond to %G_VARIANT_TYPE_HANDLE
-   * values in the body of the message. For example,
-   * if [glib.variant.VariantG.getHandle] returns 5, that is intended to be a reference
-   * to the file descriptor that can be accessed by
-   * `g_unix_fd_list_get $(LPAREN)list, 5, ...$(RPAREN)`.
-   * Returns: A #GUnixFDList or %NULL if no file descriptors are
-   *   associated. Do not free, this object is owned by message.
-   */
+      Gets the UNIX file descriptors associated with message, if any.
+    
+    This method is only available on UNIX.
+    
+    The file descriptors normally correspond to `G_VARIANT_TYPE_HANDLE`
+    values in the body of the message. For example,
+    if [glib.variant.VariantG.getHandle] returns 5, that is intended to be a reference
+    to the file descriptor that can be accessed by
+    `g_unix_fd_list_get (list, 5, ...)`.
+    Returns:     A #GUnixFDList or null if no file descriptors are
+      associated. Do not free, this object is owned by message.
+  */
   gio.unix_fdlist.UnixFDList getUnixFdList()
   {
     GUnixFDList* _cretval;
@@ -423,20 +431,20 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * If message is locked, does nothing. Otherwise locks the message.
-   */
+      If message is locked, does nothing. Otherwise locks the message.
+  */
   void lock()
   {
     g_dbus_message_lock(cast(GDBusMessage*)cPtr);
   }
 
   /**
-   * Creates a new #GDBusMessage that is an error reply to method_call_message.
-   * Params:
-   *   errorName = A valid D-Bus error name.
-   *   errorMessage = The D-Bus error message.
-   * Returns: A #GDBusMessage. Free with [gobject.object.ObjectG.unref].
-   */
+      Creates a new #GDBusMessage that is an error reply to method_call_message.
+    Params:
+      errorName =       A valid D-Bus error name.
+      errorMessage =       The D-Bus error message.
+    Returns:     A #GDBusMessage. Free with [gobject.object.ObjectG.unref].
+  */
   gio.dbus_message.DBusMessage newMethodErrorLiteral(string errorName, string errorMessage)
   {
     GDBusMessage* _cretval;
@@ -448,9 +456,9 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #GDBusMessage that is a reply to method_call_message.
-   * Returns: #GDBusMessage. Free with [gobject.object.ObjectG.unref].
-   */
+      Creates a new #GDBusMessage that is a reply to method_call_message.
+    Returns:     #GDBusMessage. Free with [gobject.object.ObjectG.unref].
+  */
   gio.dbus_message.DBusMessage newMethodReply()
   {
     GDBusMessage* _cretval;
@@ -460,41 +468,42 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Produces a human-readable multi-line description of message.
-   * The contents of the description has no ABI guarantees, the contents
-   * and formatting is subject to change at any time. Typical output
-   * looks something like this:
-   * ```
-   * Flags:   none
-   * Version: 0
-   * Serial:  4
-   * Headers:
-   * path -> objectpath '/org/gtk/GDBus/TestObject'
-   * interface -> 'org.gtk.GDBus.TestInterface'
-   * member -> 'GimmeStdout'
-   * destination -> ':1.146'
-   * Body: $(LPAREN)$(RPAREN)
-   * UNIX File Descriptors:
-   * $(LPAREN)none$(RPAREN)
-   * ```
-   * or
-   * ```
-   * Flags:   no-reply-expected
-   * Version: 0
-   * Serial:  477
-   * Headers:
-   * reply-serial -> uint32 4
-   * destination -> ':1.159'
-   * sender -> ':1.146'
-   * num-unix-fds -> uint32 1
-   * Body: $(LPAREN)$(RPAREN)
-   * UNIX File Descriptors:
-   * fd 12: dev\=0:10,mode\=020620,ino\=5,uid\=500,gid\=5,rdev\=136:2,size\=0,atime\=1273085037,mtime\=1273085851,ctime\=1272982635
-   * ```
-   * Params:
-   *   indent = Indentation level.
-   * Returns: A string that should be freed with funcGLib.free.
-   */
+      Produces a human-readable multi-line description of message.
+    
+    The contents of the description has no ABI guarantees, the contents
+    and formatting is subject to change at any time. Typical output
+    looks something like this:
+    ```
+    Flags:   none
+    Version: 0
+    Serial:  4
+    Headers:
+      path -> objectpath '/org/gtk/GDBus/TestObject'
+      interface -> 'org.gtk.GDBus.TestInterface'
+      member -> 'GimmeStdout'
+      destination -> ':1.146'
+    Body: ()
+    UNIX File Descriptors:
+      (none)
+    ```
+    or
+    ```
+    Flags:   no-reply-expected
+    Version: 0
+    Serial:  477
+    Headers:
+      reply-serial -> uint32 4
+      destination -> ':1.159'
+      sender -> ':1.146'
+      num-unix-fds -> uint32 1
+    Body: ()
+    UNIX File Descriptors:
+      fd 12: dev=0:10,mode=020620,ino=5,uid=500,gid=5,rdev=136:2,size=0,atime=1273085037,mtime=1273085851,ctime=1272982635
+    ```
+    Params:
+      indent =       Indentation level.
+    Returns:     A string that should be freed with `funcGLib.free`.
+  */
   string print(uint indent)
   {
     char* _cretval;
@@ -504,33 +513,34 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Sets the body message. As a side-effect the
-   * %G_DBUS_MESSAGE_HEADER_FIELD_SIGNATURE header field is set to the
-   * type string of body $(LPAREN)or cleared if body is %NULL$(RPAREN).
-   * If body is floating, message assumes ownership of body.
-   * Params:
-   *   body_ = Either %NULL or a #GVariant that is a tuple.
-   */
+      Sets the body message. As a side-effect the
+    [gio.types.DBusMessageHeaderField.Signature] header field is set to the
+    type string of body (or cleared if body is null).
+    
+    If body is floating, message assumes ownership of body.
+    Params:
+      body_ =       Either null or a #GVariant that is a tuple.
+  */
   void setBody(glib.variant.VariantG body_)
   {
     g_dbus_message_set_body(cast(GDBusMessage*)cPtr, body_ ? cast(VariantC*)body_.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the byte order of message.
-   * Params:
-   *   byteOrder = The byte order.
-   */
+      Sets the byte order of message.
+    Params:
+      byteOrder =       The byte order.
+  */
   void setByteOrder(gio.types.DBusMessageByteOrder byteOrder)
   {
     g_dbus_message_set_byte_order(cast(GDBusMessage*)cPtr, byteOrder);
   }
 
   /**
-   * Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_DESTINATION header field.
-   * Params:
-   *   value = The value to set.
-   */
+      Convenience setter for the [gio.types.DBusMessageHeaderField.Destination] header field.
+    Params:
+      value =       The value to set.
+  */
   void setDestination(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
@@ -538,10 +548,10 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field.
-   * Params:
-   *   value = The value to set.
-   */
+      Convenience setter for the [gio.types.DBusMessageHeaderField.ErrorName] header field.
+    Params:
+      value =       The value to set.
+  */
   void setErrorName(string value)
   {
     const(char)* _value = value.toCString(No.Alloc);
@@ -549,33 +559,34 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Sets the flags to set on message.
-   * Params:
-   *   flags = Flags for message that are set $(LPAREN)typically values from the #GDBusMessageFlags
-   *     enumeration bitwise ORed together$(RPAREN).
-   */
+      Sets the flags to set on message.
+    Params:
+      flags =       Flags for message that are set (typically values from the #GDBusMessageFlags
+        enumeration bitwise ORed together).
+  */
   void setFlags(gio.types.DBusMessageFlags flags)
   {
     g_dbus_message_set_flags(cast(GDBusMessage*)cPtr, flags);
   }
 
   /**
-   * Sets a header field on message.
-   * If value is floating, message assumes ownership of value.
-   * Params:
-   *   headerField = A 8-bit unsigned integer $(LPAREN)typically a value from the #GDBusMessageHeaderField enumeration$(RPAREN)
-   *   value = A #GVariant to set the header field or %NULL to clear the header field.
-   */
+      Sets a header field on message.
+    
+    If value is floating, message assumes ownership of value.
+    Params:
+      headerField =       A 8-bit unsigned integer (typically a value from the #GDBusMessageHeaderField enumeration)
+      value =       A #GVariant to set the header field or null to clear the header field.
+  */
   void setHeader(gio.types.DBusMessageHeaderField headerField, glib.variant.VariantG value = null)
   {
     g_dbus_message_set_header(cast(GDBusMessage*)cPtr, headerField, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
   }
 
   /**
-   * Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_INTERFACE header field.
-   * Params:
-   *   value = The value to set.
-   */
+      Convenience setter for the [gio.types.DBusMessageHeaderField.Interface] header field.
+    Params:
+      value =       The value to set.
+  */
   void setInterface(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
@@ -583,10 +594,10 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_MEMBER header field.
-   * Params:
-   *   value = The value to set.
-   */
+      Convenience setter for the [gio.types.DBusMessageHeaderField.Member] header field.
+    Params:
+      value =       The value to set.
+  */
   void setMember(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
@@ -594,30 +605,30 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Sets message to be of type.
-   * Params:
-   *   type = A 8-bit unsigned integer $(LPAREN)typically a value from the #GDBusMessageType enumeration$(RPAREN).
-   */
+      Sets message to be of type.
+    Params:
+      type =       A 8-bit unsigned integer (typically a value from the #GDBusMessageType enumeration).
+  */
   void setMessageType(gio.types.DBusMessageType type)
   {
     g_dbus_message_set_message_type(cast(GDBusMessage*)cPtr, type);
   }
 
   /**
-   * Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_NUM_UNIX_FDS header field.
-   * Params:
-   *   value = The value to set.
-   */
+      Convenience setter for the [gio.types.DBusMessageHeaderField.NumUnixFds] header field.
+    Params:
+      value =       The value to set.
+  */
   void setNumUnixFds(uint value)
   {
     g_dbus_message_set_num_unix_fds(cast(GDBusMessage*)cPtr, value);
   }
 
   /**
-   * Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_PATH header field.
-   * Params:
-   *   value = The value to set.
-   */
+      Convenience setter for the [gio.types.DBusMessageHeaderField.Path] header field.
+    Params:
+      value =       The value to set.
+  */
   void setPath(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
@@ -625,20 +636,20 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_REPLY_SERIAL header field.
-   * Params:
-   *   value = The value to set.
-   */
+      Convenience setter for the [gio.types.DBusMessageHeaderField.ReplySerial] header field.
+    Params:
+      value =       The value to set.
+  */
   void setReplySerial(uint value)
   {
     g_dbus_message_set_reply_serial(cast(GDBusMessage*)cPtr, value);
   }
 
   /**
-   * Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_SENDER header field.
-   * Params:
-   *   value = The value to set.
-   */
+      Convenience setter for the [gio.types.DBusMessageHeaderField.Sender] header field.
+    Params:
+      value =       The value to set.
+  */
   void setSender(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
@@ -646,20 +657,20 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Sets the serial for message.
-   * Params:
-   *   serial = A #guint32.
-   */
+      Sets the serial for message.
+    Params:
+      serial =       A #guint32.
+  */
   void setSerial(uint serial)
   {
     g_dbus_message_set_serial(cast(GDBusMessage*)cPtr, serial);
   }
 
   /**
-   * Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_SIGNATURE header field.
-   * Params:
-   *   value = The value to set.
-   */
+      Convenience setter for the [gio.types.DBusMessageHeaderField.Signature] header field.
+    Params:
+      value =       The value to set.
+  */
   void setSignature(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
@@ -667,32 +678,34 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * Sets the UNIX file descriptors associated with message. As a
-   * side-effect the %G_DBUS_MESSAGE_HEADER_FIELD_NUM_UNIX_FDS header
-   * field is set to the number of fds in fd_list $(LPAREN)or cleared if
-   * fd_list is %NULL$(RPAREN).
-   * This method is only available on UNIX.
-   * When designing D-Bus APIs that are intended to be interoperable,
-   * please note that non-GDBus implementations of D-Bus can usually only
-   * access file descriptors if they are referenced by a value of type
-   * %G_VARIANT_TYPE_HANDLE in the body of the message.
-   * Params:
-   *   fdList = A #GUnixFDList or %NULL.
-   */
+      Sets the UNIX file descriptors associated with message. As a
+    side-effect the [gio.types.DBusMessageHeaderField.NumUnixFds] header
+    field is set to the number of fds in fd_list (or cleared if
+    fd_list is null).
+    
+    This method is only available on UNIX.
+    
+    When designing D-Bus APIs that are intended to be interoperable,
+    please note that non-GDBus implementations of D-Bus can usually only
+    access file descriptors if they are referenced by a value of type
+    `G_VARIANT_TYPE_HANDLE` in the body of the message.
+    Params:
+      fdList =       A #GUnixFDList or null.
+  */
   void setUnixFdList(gio.unix_fdlist.UnixFDList fdList = null)
   {
     g_dbus_message_set_unix_fd_list(cast(GDBusMessage*)cPtr, fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
   }
 
   /**
-   * Serializes message to a blob. The byte order returned by
-   * [gio.dbus_message.DBusMessage.getByteOrder] will be used.
-   * Params:
-   *   capabilities = A #GDBusCapabilityFlags describing what protocol features are supported.
-   * Returns: A pointer to a
-   *   valid binary D-Bus message of out_size bytes generated by message
-   *   or %NULL if error is set. Free with [glib.global.gfree].
-   */
+      Serializes message to a blob. The byte order returned by
+    [gio.dbus_message.DBusMessage.getByteOrder] will be used.
+    Params:
+      capabilities =       A #GDBusCapabilityFlags describing what protocol features are supported.
+    Returns:     A pointer to a
+      valid binary D-Bus message of out_size bytes generated by message
+      or null if error is set. Free with [glib.global.gfree].
+  */
   ubyte[] toBlob(gio.types.DBusCapabilityFlags capabilities)
   {
     ubyte* _cretval;
@@ -711,14 +724,15 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-   * If message is not of type %G_DBUS_MESSAGE_TYPE_ERROR does
-   * nothing and returns %FALSE.
-   * Otherwise this method encodes the error in message as a #GError
-   * using g_dbus_error_set_dbus_error$(LPAREN)$(RPAREN) using the information in the
-   * %G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field of message as
-   * well as the first string item in message's body.
-   * Returns: %TRUE if error was set, %FALSE otherwise.
-   */
+      If message is not of type [gio.types.DBusMessageType.Error] does
+    nothing and returns false.
+    
+    Otherwise this method encodes the error in message as a #GError
+    using g_dbus_error_set_dbus_error() using the information in the
+    [gio.types.DBusMessageHeaderField.ErrorName] header field of message as
+    well as the first string item in message's body.
+    Returns:     true if error was set, false otherwise.
+  */
   bool toGerror()
   {
     bool _retval;

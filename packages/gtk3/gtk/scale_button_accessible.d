@@ -14,6 +14,7 @@ import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
 
+/** */
 class ScaleButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.value.Value
 {
 

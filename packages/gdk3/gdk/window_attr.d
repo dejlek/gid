@@ -9,8 +9,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Attributes to use for a newly-created window.
- */
+    Attributes to use for a newly-created window.
+*/
 class WindowAttr
 {
   GdkWindowAttr cInstance;

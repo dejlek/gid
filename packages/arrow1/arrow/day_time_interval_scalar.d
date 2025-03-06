@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class DayTimeIntervalScalar : arrow.scalar.Scalar
 {
 
@@ -27,6 +28,7 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   this(arrow.day_millisecond.DayMillisecond value)
   {
     GArrowDayTimeIntervalScalar* _cretval;
@@ -34,6 +36,7 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.day_millisecond.DayMillisecond getValue()
   {
     GArrowDayMillisecond* _cretval;

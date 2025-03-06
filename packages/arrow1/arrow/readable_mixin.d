@@ -10,9 +10,11 @@ public import glib.bytes;
 public import glib.error;
 public import gobject.object;
 
+/** */
 template ReadableT()
 {
 
+  /** */
   override arrow.buffer.Buffer read(long nBytes)
   {
     GArrowBuffer* _cretval;
@@ -24,6 +26,7 @@ template ReadableT()
     return _retval;
   }
 
+  /** */
   override glib.bytes.Bytes readBytes(long nBytes)
   {
     GBytes* _cretval;

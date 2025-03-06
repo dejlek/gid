@@ -6,8 +6,8 @@ import vte.c.types;
 import vte.types;
 
 /**
- * Provides context information for a context menu event.
- */
+    Provides context information for a context menu event.
+*/
 class EventContext
 {
   VteEventContext* cInstancePtr;
@@ -28,6 +28,7 @@ class EventContext
     return cast(void*)cInstancePtr;
   }
 
+  /** */
   bool getCoordinates(out double x, out double y)
   {
     bool _retval;

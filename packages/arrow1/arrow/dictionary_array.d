@@ -10,6 +10,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class DictionaryArray : arrow.array.Array
 {
 
@@ -29,6 +30,7 @@ class DictionaryArray : arrow.array.Array
     return getType();
   }
 
+  /** */
   this(arrow.data_type.DataType dataType, arrow.array.Array indices, arrow.array.Array dictionary)
   {
     GArrowDictionaryArray* _cretval;
@@ -39,6 +41,7 @@ class DictionaryArray : arrow.array.Array
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.array.Array getDictionary()
   {
     GArrowArray* _cretval;
@@ -47,6 +50,7 @@ class DictionaryArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   arrow.dictionary_data_type.DictionaryDataType getDictionaryDataType()
   {
     GArrowDictionaryDataType* _cretval;
@@ -55,6 +59,7 @@ class DictionaryArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   arrow.array.Array getIndices()
   {
     GArrowArray* _cretval;

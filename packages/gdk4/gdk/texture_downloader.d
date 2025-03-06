@@ -10,15 +10,17 @@ import gobject.boxed;
 import gobject.object;
 
 /**
- * The `GdkTextureDownloader` is used to download the contents of a
- * [gdk.texture.Texture].
- * It is intended to be created as a short-term object for a single download,
- * but can be used for multiple downloads of different textures or with different
- * settings.
- * `GdkTextureDownloader` can be used to convert data between different formats.
- * Create a `GdkTexture` for the existing format and then download it in a
- * different format.
- */
+    The [gdk.texture_downloader.TextureDownloader] is used to download the contents of a
+  [gdk.texture.Texture].
+  
+  It is intended to be created as a short-term object for a single download,
+  but can be used for multiple downloads of different textures or with different
+  settings.
+  
+  [gdk.texture_downloader.TextureDownloader] can be used to convert data between different formats.
+  Create a [gdk.texture.Texture] for the existing format and then download it in a
+  different format.
+*/
 class TextureDownloader : gobject.boxed.Boxed
 {
 
@@ -44,11 +46,11 @@ class TextureDownloader : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a new texture downloader for texture.
-   * Params:
-   *   texture = texture to download
-   * Returns: A new texture downloader
-   */
+      Creates a new texture downloader for texture.
+    Params:
+      texture =       texture to download
+    Returns:     A new texture downloader
+  */
   this(gdk.texture.Texture texture)
   {
     GdkTextureDownloader* _cretval;
@@ -57,10 +59,11 @@ class TextureDownloader : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a copy of the downloader.
-   * This function is meant for language bindings.
-   * Returns: A copy of the downloader
-   */
+      Creates a copy of the downloader.
+    
+    This function is meant for language bindings.
+    Returns:     A copy of the downloader
+  */
   gdk.texture_downloader.TextureDownloader copy()
   {
     GdkTextureDownloader* _cretval;
@@ -70,16 +73,17 @@ class TextureDownloader : gobject.boxed.Boxed
   }
 
   /**
-   * Downloads the given texture pixels into a `GBytes`. The rowstride will
-   * be stored in the stride value.
-   * This function will abort if it tries to download a large texture and
-   * fails to allocate memory. If you think that may happen, you should handle
-   * memory allocation yourself and use [gdk.texture_downloader.TextureDownloader.downloadInto]
-   * once allocation succeeded.
-   * Params:
-   *   outStride = The stride of the resulting data in bytes
-   * Returns: The downloaded pixels
-   */
+      Downloads the given texture pixels into a [glib.bytes.Bytes]. The rowstride will
+    be stored in the stride value.
+    
+    This function will abort if it tries to download a large texture and
+    fails to allocate memory. If you think that may happen, you should handle
+    memory allocation yourself and use [gdk.texture_downloader.TextureDownloader.downloadInto]
+    once allocation succeeded.
+    Params:
+      outStride =       The stride of the resulting data in bytes
+    Returns:     The downloaded pixels
+  */
   glib.bytes.Bytes downloadBytes(out size_t outStride)
   {
     GBytes* _cretval;
@@ -89,9 +93,9 @@ class TextureDownloader : gobject.boxed.Boxed
   }
 
   /**
-   * Gets the format that the data will be downloaded in.
-   * Returns: The format of the download
-   */
+      Gets the format that the data will be downloaded in.
+    Returns:     The format of the download
+  */
   gdk.types.MemoryFormat getFormat()
   {
     GdkMemoryFormat _cretval;
@@ -101,9 +105,9 @@ class TextureDownloader : gobject.boxed.Boxed
   }
 
   /**
-   * Gets the texture that the downloader will download.
-   * Returns: The texture to download
-   */
+      Gets the texture that the downloader will download.
+    Returns:     The texture to download
+  */
   gdk.texture.Texture getTexture()
   {
     GdkTexture* _cretval;
@@ -113,21 +117,22 @@ class TextureDownloader : gobject.boxed.Boxed
   }
 
   /**
-   * Sets the format the downloader will download.
-   * By default, GDK_MEMORY_DEFAULT is set.
-   * Params:
-   *   format = the format to use
-   */
+      Sets the format the downloader will download.
+    
+    By default, GDK_MEMORY_DEFAULT is set.
+    Params:
+      format =       the format to use
+  */
   void setFormat(gdk.types.MemoryFormat format)
   {
     gdk_texture_downloader_set_format(cast(GdkTextureDownloader*)cPtr, format);
   }
 
   /**
-   * Changes the texture the downloader will download.
-   * Params:
-   *   texture = the new texture to download
-   */
+      Changes the texture the downloader will download.
+    Params:
+      texture =       the new texture to download
+  */
   void setTexture(gdk.texture.Texture texture)
   {
     gdk_texture_downloader_set_texture(cast(GdkTextureDownloader*)cPtr, texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);

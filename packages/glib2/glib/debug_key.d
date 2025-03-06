@@ -6,9 +6,9 @@ import glib.c.types;
 import glib.types;
 
 /**
- * Associates a string with a bit flag.
- * Used in [glib.global.parseDebugString].
- */
+    Associates a string with a bit flag.
+  Used in [glib.global.parseDebugString].
+*/
 class DebugKey
 {
   GDebugKey cInstance;

@@ -10,6 +10,7 @@ import gtk.c.types;
 import gtk.types;
 import gtk.window_accessible;
 
+/** */
 class PlugAccessible : gtk.window_accessible.WindowAccessible
 {
 
@@ -29,6 +30,7 @@ class PlugAccessible : gtk.window_accessible.WindowAccessible
     return getType();
   }
 
+  /** */
   string getId()
   {
     char* _cretval;

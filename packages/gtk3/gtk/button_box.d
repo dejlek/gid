@@ -13,6 +13,7 @@ import gtk.orientable_mixin;
 import gtk.types;
 import gtk.widget;
 
+/** */
 class ButtonBox : gtk.box.Box
 {
 
@@ -33,11 +34,11 @@ class ButtonBox : gtk.box.Box
   }
 
   /**
-   * Creates a new #GtkButtonBox.
-   * Params:
-   *   orientation = the box's orientation.
-   * Returns: a new #GtkButtonBox.
-   */
+      Creates a new #GtkButtonBox.
+    Params:
+      orientation =       the box's orientation.
+    Returns:     a new #GtkButtonBox.
+  */
   this(gtk.types.Orientation orientation)
   {
     GtkWidget* _cretval;
@@ -46,12 +47,12 @@ class ButtonBox : gtk.box.Box
   }
 
   /**
-   * Returns whether the child is exempted from homogenous
-   * sizing.
-   * Params:
-   *   child = a child of widget
-   * Returns: %TRUE if the child is not subject to homogenous sizing
-   */
+      Returns whether the child is exempted from homogenous
+    sizing.
+    Params:
+      child =       a child of widget
+    Returns:     true if the child is not subject to homogenous sizing
+  */
   bool getChildNonHomogeneous(gtk.widget.Widget child)
   {
     bool _retval;
@@ -60,11 +61,11 @@ class ButtonBox : gtk.box.Box
   }
 
   /**
-   * Returns whether child should appear in a secondary group of children.
-   * Params:
-   *   child = a child of widget
-   * Returns: whether child should appear in a secondary group of children.
-   */
+      Returns whether child should appear in a secondary group of children.
+    Params:
+      child =       a child of widget
+    Returns:     whether child should appear in a secondary group of children.
+  */
   bool getChildSecondary(gtk.widget.Widget child)
   {
     bool _retval;
@@ -73,9 +74,9 @@ class ButtonBox : gtk.box.Box
   }
 
   /**
-   * Retrieves the method being used to arrange the buttons in a button box.
-   * Returns: the method used to lay out buttons in widget.
-   */
+      Retrieves the method being used to arrange the buttons in a button box.
+    Returns:     the method used to lay out buttons in widget.
+  */
   gtk.types.ButtonBoxStyle getLayout()
   {
     GtkButtonBoxStyle _cretval;
@@ -85,43 +86,44 @@ class ButtonBox : gtk.box.Box
   }
 
   /**
-   * Sets whether the child is exempted from homogeous sizing.
-   * Params:
-   *   child = a child of widget
-   *   nonHomogeneous = the new value
-   */
+      Sets whether the child is exempted from homogeous sizing.
+    Params:
+      child =       a child of widget
+      nonHomogeneous =       the new value
+  */
   void setChildNonHomogeneous(gtk.widget.Widget child, bool nonHomogeneous)
   {
     gtk_button_box_set_child_non_homogeneous(cast(GtkButtonBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, nonHomogeneous);
   }
 
   /**
-   * Sets whether child should appear in a secondary group of children.
-   * A typical use of a secondary child is the help button in a dialog.
-   * This group appears after the other children if the style
-   * is %GTK_BUTTONBOX_START, %GTK_BUTTONBOX_SPREAD or
-   * %GTK_BUTTONBOX_EDGE, and before the other children if the style
-   * is %GTK_BUTTONBOX_END. For horizontal button boxes, the definition
-   * of before/after depends on direction of the widget $(LPAREN)see
-   * [gtk.widget.Widget.setDirection]$(RPAREN). If the style is %GTK_BUTTONBOX_START
-   * or %GTK_BUTTONBOX_END, then the secondary children are aligned at
-   * the other end of the button box from the main children. For the
-   * other styles, they appear immediately next to the main children.
-   * Params:
-   *   child = a child of widget
-   *   isSecondary = if %TRUE, the child appears in a secondary group of the
-   *     button box.
-   */
+      Sets whether child should appear in a secondary group of children.
+    A typical use of a secondary child is the help button in a dialog.
+    
+    This group appears after the other children if the style
+    is [gtk.types.ButtonBoxStyle.Start], [gtk.types.ButtonBoxStyle.Spread] or
+    [gtk.types.ButtonBoxStyle.Edge], and before the other children if the style
+    is [gtk.types.ButtonBoxStyle.End]. For horizontal button boxes, the definition
+    of before/after depends on direction of the widget (see
+    [gtk.widget.Widget.setDirection]). If the style is [gtk.types.ButtonBoxStyle.Start]
+    or [gtk.types.ButtonBoxStyle.End], then the secondary children are aligned at
+    the other end of the button box from the main children. For the
+    other styles, they appear immediately next to the main children.
+    Params:
+      child =       a child of widget
+      isSecondary =       if true, the child appears in a secondary group of the
+                       button box.
+  */
   void setChildSecondary(gtk.widget.Widget child, bool isSecondary)
   {
     gtk_button_box_set_child_secondary(cast(GtkButtonBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, isSecondary);
   }
 
   /**
-   * Changes the way buttons are arranged in their container.
-   * Params:
-   *   layoutStyle = the new layout style
-   */
+      Changes the way buttons are arranged in their container.
+    Params:
+      layoutStyle =       the new layout style
+  */
   void setLayout(gtk.types.ButtonBoxStyle layoutStyle)
   {
     gtk_button_box_set_layout(cast(GtkButtonBox*)cPtr, layoutStyle);

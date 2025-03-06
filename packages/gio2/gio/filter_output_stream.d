@@ -8,11 +8,11 @@ import gio.types;
 import gobject.object;
 
 /**
- * Base class for output stream implementations that perform some
- * kind of filtering operation on a base stream. Typical examples
- * of filtering operations are character set conversion, compression
- * and byte order flipping.
- */
+    Base class for output stream implementations that perform some
+  kind of filtering operation on a base stream. Typical examples
+  of filtering operations are character set conversion, compression
+  and byte order flipping.
+*/
 class FilterOutputStream : gio.output_stream.OutputStream
 {
 
@@ -33,9 +33,9 @@ class FilterOutputStream : gio.output_stream.OutputStream
   }
 
   /**
-   * Gets the base stream for the filter stream.
-   * Returns: a #GOutputStream.
-   */
+      Gets the base stream for the filter stream.
+    Returns:     a #GOutputStream.
+  */
   gio.output_stream.OutputStream getBaseStream()
   {
     GOutputStream* _cretval;
@@ -45,10 +45,10 @@ class FilterOutputStream : gio.output_stream.OutputStream
   }
 
   /**
-   * Returns whether the base stream will be closed when stream is
-   * closed.
-   * Returns: %TRUE if the base stream will be closed.
-   */
+      Returns whether the base stream will be closed when stream is
+    closed.
+    Returns:     true if the base stream will be closed.
+  */
   bool getCloseBaseStream()
   {
     bool _retval;
@@ -57,10 +57,10 @@ class FilterOutputStream : gio.output_stream.OutputStream
   }
 
   /**
-   * Sets whether the base stream will be closed when stream is closed.
-   * Params:
-   *   closeBase = %TRUE to close the base stream.
-   */
+      Sets whether the base stream will be closed when stream is closed.
+    Params:
+      closeBase =       true to close the base stream.
+  */
   void setCloseBaseStream(bool closeBase)
   {
     g_filter_output_stream_set_close_base_stream(cast(GFilterOutputStream*)cPtr, closeBase);

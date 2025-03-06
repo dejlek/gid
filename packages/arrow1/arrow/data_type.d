@@ -7,6 +7,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class DataType : gobject.object.ObjectG
 {
 
@@ -26,6 +27,7 @@ class DataType : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   static arrow.data_type.DataType import_(void* cAbiSchema)
   {
     GArrowDataType* _cretval;
@@ -37,6 +39,7 @@ class DataType : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equal(arrow.data_type.DataType otherDataType)
   {
     bool _retval;
@@ -44,6 +47,7 @@ class DataType : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   void* export_()
   {
     GError *_err;
@@ -53,6 +57,7 @@ class DataType : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.types.Type getId()
   {
     GArrowType _cretval;
@@ -61,6 +66,7 @@ class DataType : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getName()
   {
     char* _cretval;
@@ -69,6 +75,7 @@ class DataType : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;

@@ -8,8 +8,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Generated during touchpad swipe gestures.
- */
+    Generated during touchpad swipe gestures.
+*/
 class EventTouchpadSwipe
 {
   GdkEventTouchpadSwipe cInstance;

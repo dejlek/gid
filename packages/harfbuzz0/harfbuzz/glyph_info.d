@@ -7,9 +7,9 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * The #hb_glyph_info_t is the structure that holds information about the
- * glyphs and their relation to input text.
- */
+    The #hb_glyph_info_t is the structure that holds information about the
+  glyphs and their relation to input text.
+*/
 class GlyphInfo : gobject.boxed.Boxed
 {
 

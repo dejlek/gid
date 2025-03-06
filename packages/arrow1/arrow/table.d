@@ -20,6 +20,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class Table : gobject.object.ObjectG
 {
 
@@ -39,6 +40,7 @@ class Table : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   static arrow.table.Table newArrays(arrow.schema.Schema schema, arrow.array.Array[] arrays)
   {
     GArrowTable* _cretval;
@@ -59,6 +61,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   static arrow.table.Table newChunkedArrays(arrow.schema.Schema schema, arrow.chunked_array.ChunkedArray[] chunkedArrays)
   {
     GArrowTable* _cretval;
@@ -79,6 +82,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   static arrow.table.Table newRecordBatches(arrow.schema.Schema schema, arrow.record_batch.RecordBatch[] recordBatches)
   {
     GArrowTable* _cretval;
@@ -99,6 +103,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table addColumn(uint i, arrow.field.Field field, arrow.chunked_array.ChunkedArray chunkedArray)
   {
     GArrowTable* _cretval;
@@ -110,6 +115,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table combineChunks()
   {
     GArrowTable* _cretval;
@@ -121,6 +127,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table concatenate(arrow.table.Table[] otherTables, arrow.table_concatenate_options.TableConcatenateOptions options = null)
   {
     GArrowTable* _cretval;
@@ -134,6 +141,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equal(arrow.table.Table otherTable)
   {
     bool _retval;
@@ -141,6 +149,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equalMetadata(arrow.table.Table otherTable, bool checkMetadata)
   {
     bool _retval;
@@ -148,6 +157,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table filter(arrow.boolean_array.BooleanArray filter, arrow.filter_options.FilterOptions options = null)
   {
     GArrowTable* _cretval;
@@ -159,6 +169,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table filterChunkedArray(arrow.chunked_array.ChunkedArray filter, arrow.filter_options.FilterOptions options = null)
   {
     GArrowTable* _cretval;
@@ -170,6 +181,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.chunked_array.ChunkedArray getColumnData(int i)
   {
     GArrowChunkedArray* _cretval;
@@ -178,6 +190,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   uint getNColumns()
   {
     uint _retval;
@@ -185,6 +198,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   ulong getNRows()
   {
     ulong _retval;
@@ -192,6 +206,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.schema.Schema getSchema()
   {
     GArrowSchema* _cretval;
@@ -200,6 +215,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table removeColumn(uint i)
   {
     GArrowTable* _cretval;
@@ -211,6 +227,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table replaceColumn(uint i, arrow.field.Field field, arrow.chunked_array.ChunkedArray chunkedArray)
   {
     GArrowTable* _cretval;
@@ -222,6 +239,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table slice(long offset, long length)
   {
     GArrowTable* _cretval;
@@ -230,6 +248,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.uint64_array.UInt64Array sortIndices(arrow.sort_options.SortOptions options)
   {
     GArrowUInt64Array* _cretval;
@@ -241,6 +260,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table take(arrow.array.Array indices, arrow.take_options.TakeOptions options = null)
   {
     GArrowTable* _cretval;
@@ -252,6 +272,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table takeChunkedArray(arrow.chunked_array.ChunkedArray indices, arrow.take_options.TakeOptions options = null)
   {
     GArrowTable* _cretval;
@@ -263,6 +284,7 @@ class Table : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;
@@ -275,12 +297,12 @@ class Table : gobject.object.ObjectG
   }
 
   /**
-   * Writes the table as Feather format data to the sink.
-   * Params:
-   *   sink = The output.
-   *   properties = The properties for this write.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Writes the table as Feather format data to the sink.
+    Params:
+      sink =       The output.
+      properties =       The properties for this write.
+    Returns:     true on success, false if there was an error.
+  */
   bool writeAsFeather(arrow.output_stream.OutputStream sink, arrow.feather_write_properties.FeatherWriteProperties properties = null)
   {
     bool _retval;

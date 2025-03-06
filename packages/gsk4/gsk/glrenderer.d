@@ -6,6 +6,7 @@ import gsk.c.types;
 import gsk.renderer;
 import gsk.types;
 
+/** */
 class GLRenderer : gsk.renderer.Renderer
 {
 
@@ -26,9 +27,9 @@ class GLRenderer : gsk.renderer.Renderer
   }
 
   /**
-   * Creates a new `GskRenderer` using the new OpenGL renderer.
-   * Returns: a new GL renderer
-   */
+      Creates a new [gsk.renderer.Renderer] using the new OpenGL renderer.
+    Returns:     a new GL renderer
+  */
   this()
   {
     GskRenderer* _cretval;

@@ -6,6 +6,7 @@ import arrow.timestamp_parser;
 import arrow.types;
 import gid.gid;
 
+/** */
 class ISO8601TimestampParser : arrow.timestamp_parser.TimestampParser
 {
 
@@ -25,6 +26,7 @@ class ISO8601TimestampParser : arrow.timestamp_parser.TimestampParser
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowISO8601TimestampParser* _cretval;

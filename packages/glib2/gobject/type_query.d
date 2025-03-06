@@ -6,9 +6,10 @@ import gobject.c.types;
 import gobject.types;
 
 /**
- * A structure holding information for a specific type.
- * See also: [gobject.global.typeQuery]
- */
+    A structure holding information for a specific type.
+  
+  See also: [gobject.global.typeQuery]
+*/
 class TypeQuery
 {
   GTypeQuery cInstance;

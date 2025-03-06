@@ -6,6 +6,7 @@ import arrow.function_options;
 import arrow.types;
 import gid.gid;
 
+/** */
 class UTF8NormalizeOptions : arrow.function_options.FunctionOptions
 {
 
@@ -25,6 +26,7 @@ class UTF8NormalizeOptions : arrow.function_options.FunctionOptions
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowUTF8NormalizeOptions* _cretval;

@@ -7,9 +7,9 @@ import gio.types;
 import gobject.boxed;
 
 /**
- * Defines a Unix mount entry $(LPAREN)e.g. <filename>/media/cdrom</filename>$(RPAREN).
- * This corresponds roughly to a mtab entry.
- */
+    Defines a Unix mount entry (e.g. <filename>/media/cdrom</filename>).
+  This corresponds roughly to a mtab entry.
+*/
 class UnixMountEntry : gobject.boxed.Boxed
 {
 

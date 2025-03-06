@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class PrimitiveArray : arrow.array.Array
 {
 
@@ -27,6 +28,7 @@ class PrimitiveArray : arrow.array.Array
     return getType();
   }
 
+  /** */
   arrow.buffer.Buffer getBuffer()
   {
     GArrowBuffer* _cretval;
@@ -35,6 +37,7 @@ class PrimitiveArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   arrow.buffer.Buffer getDataBuffer()
   {
     GArrowBuffer* _cretval;

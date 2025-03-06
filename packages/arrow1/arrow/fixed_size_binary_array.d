@@ -9,6 +9,7 @@ import arrow.types;
 import gid.gid;
 import glib.bytes;
 
+/** */
 class FixedSizeBinaryArray : arrow.primitive_array.PrimitiveArray
 {
 
@@ -28,6 +29,7 @@ class FixedSizeBinaryArray : arrow.primitive_array.PrimitiveArray
     return getType();
   }
 
+  /** */
   this(arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType dataType, long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowFixedSizeBinaryArray* _cretval;
@@ -35,6 +37,7 @@ class FixedSizeBinaryArray : arrow.primitive_array.PrimitiveArray
     this(_cretval, Yes.Take);
   }
 
+  /** */
   int getByteWidth()
   {
     int _retval;
@@ -42,6 +45,7 @@ class FixedSizeBinaryArray : arrow.primitive_array.PrimitiveArray
     return _retval;
   }
 
+  /** */
   glib.bytes.Bytes getValue(long i)
   {
     GBytes* _cretval;
@@ -50,6 +54,7 @@ class FixedSizeBinaryArray : arrow.primitive_array.PrimitiveArray
     return _retval;
   }
 
+  /** */
   glib.bytes.Bytes getValuesBytes()
   {
     GBytes* _cretval;

@@ -12,6 +12,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
 {
 
@@ -31,6 +32,7 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
     return getType();
   }
 
+  /** */
   this(string path)
   {
     GArrowFileInputStream* _cretval;
@@ -42,6 +44,7 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
     this(_cretval, Yes.Take);
   }
 
+  /** */
   static arrow.file_input_stream.FileInputStream newFileDescriptor(int fileDescriptor)
   {
     GArrowFileInputStream* _cretval;
@@ -53,6 +56,7 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
     return _retval;
   }
 
+  /** */
   int getFileDescriptor()
   {
     int _retval;

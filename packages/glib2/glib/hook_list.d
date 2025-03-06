@@ -7,8 +7,8 @@ import glib.hook;
 import glib.types;
 
 /**
- * The #GHookList struct represents a list of hook functions.
- */
+    The #GHookList struct represents a list of hook functions.
+*/
 class HookList
 {
   GHookList cInstance;
@@ -75,58 +75,58 @@ class HookList
   }
 
   /**
-   * Removes all the #GHook elements from a #GHookList.
-   */
+      Removes all the #GHook elements from a #GHookList.
+  */
   void clear()
   {
     g_hook_list_clear(cast(GHookList*)cPtr);
   }
 
   /**
-   * Initializes a #GHookList.
-   * This must be called before the #GHookList is used.
-   * Params:
-   *   hookSize = the size of each element in the #GHookList,
-   *     typically `sizeof $(LPAREN)GHook$(RPAREN)`.
-   */
+      Initializes a #GHookList.
+    This must be called before the #GHookList is used.
+    Params:
+      hookSize =       the size of each element in the #GHookList,
+            typically `sizeof (GHook)`.
+  */
   void init_(uint hookSize)
   {
     g_hook_list_init(cast(GHookList*)cPtr, hookSize);
   }
 
   /**
-   * Calls all of the #GHook functions in a #GHookList.
-   * Params:
-   *   mayRecurse = %TRUE if functions which are already running
-   *     $(LPAREN)e.g. in another thread$(RPAREN) can be called. If set to %FALSE,
-   *     these are skipped
-   */
+      Calls all of the #GHook functions in a #GHookList.
+    Params:
+      mayRecurse =       true if functions which are already running
+            (e.g. in another thread) can be called. If set to false,
+            these are skipped
+  */
   void invoke(bool mayRecurse)
   {
     g_hook_list_invoke(cast(GHookList*)cPtr, mayRecurse);
   }
 
   /**
-   * Calls all of the #GHook functions in a #GHookList.
-   * Any function which returns %FALSE is removed from the #GHookList.
-   * Params:
-   *   mayRecurse = %TRUE if functions which are already running
-   *     $(LPAREN)e.g. in another thread$(RPAREN) can be called. If set to %FALSE,
-   *     these are skipped
-   */
+      Calls all of the #GHook functions in a #GHookList.
+    Any function which returns false is removed from the #GHookList.
+    Params:
+      mayRecurse =       true if functions which are already running
+            (e.g. in another thread) can be called. If set to false,
+            these are skipped
+  */
   void invokeCheck(bool mayRecurse)
   {
     g_hook_list_invoke_check(cast(GHookList*)cPtr, mayRecurse);
   }
 
   /**
-   * Calls a function on each valid #GHook.
-   * Params:
-   *   mayRecurse = %TRUE if hooks which are currently running
-   *     $(LPAREN)e.g. in another thread$(RPAREN) are considered valid. If set to %FALSE,
-   *     these are skipped
-   *   marshaller = the function to call for each #GHook
-   */
+      Calls a function on each valid #GHook.
+    Params:
+      mayRecurse =       true if hooks which are currently running
+            (e.g. in another thread) are considered valid. If set to false,
+            these are skipped
+      marshaller =       the function to call for each #GHook
+  */
   void marshal(bool mayRecurse, glib.types.HookMarshaller marshaller)
   {
     extern(C) void _marshallerCallback(GHook* hook, void* marshalData)
@@ -142,14 +142,14 @@ class HookList
   }
 
   /**
-   * Calls a function on each valid #GHook and destroys it if the
-   * function returns %FALSE.
-   * Params:
-   *   mayRecurse = %TRUE if hooks which are currently running
-   *     $(LPAREN)e.g. in another thread$(RPAREN) are considered valid. If set to %FALSE,
-   *     these are skipped
-   *   marshaller = the function to call for each #GHook
-   */
+      Calls a function on each valid #GHook and destroys it if the
+    function returns false.
+    Params:
+      mayRecurse =       true if hooks which are currently running
+            (e.g. in another thread) are considered valid. If set to false,
+            these are skipped
+      marshaller =       the function to call for each #GHook
+  */
   void marshalCheck(bool mayRecurse, glib.types.HookCheckMarshaller marshaller)
   {
     extern(C) bool _marshallerCallback(GHook* hook, void* marshalData)

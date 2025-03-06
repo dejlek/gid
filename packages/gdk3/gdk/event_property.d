@@ -9,8 +9,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Describes a property change on a window.
- */
+    Describes a property change on a window.
+*/
 class EventProperty
 {
   GdkEventProperty cInstance;

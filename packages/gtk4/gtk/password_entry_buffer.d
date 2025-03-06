@@ -7,10 +7,11 @@ import gtk.entry_buffer;
 import gtk.types;
 
 /**
- * A `GtkEntryBuffer` that locks the underlying memory to prevent it
- * from being swapped to disk.
- * `GtkPasswordEntry` uses a `GtkPasswordEntryBuffer`.
- */
+    A [gtk.entry_buffer.EntryBuffer] that locks the underlying memory to prevent it
+  from being swapped to disk.
+  
+  [gtk.password_entry.PasswordEntry] uses a [gtk.password_entry_buffer.PasswordEntryBuffer].
+*/
 class PasswordEntryBuffer : gtk.entry_buffer.EntryBuffer
 {
 
@@ -31,9 +32,9 @@ class PasswordEntryBuffer : gtk.entry_buffer.EntryBuffer
   }
 
   /**
-   * Creates a new `GtkEntryBuffer` using secure memory allocations.
-   * Returns: the newly created instance
-   */
+      Creates a new [gtk.entry_buffer.EntryBuffer] using secure memory allocations.
+    Returns:     the newly created instance
+  */
   this()
   {
     GtkEntryBuffer* _cretval;

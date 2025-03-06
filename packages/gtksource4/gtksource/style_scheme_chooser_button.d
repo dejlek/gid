@@ -16,6 +16,7 @@ import gtksource.style_scheme_chooser;
 import gtksource.style_scheme_chooser_mixin;
 import gtksource.types;
 
+/** */
 class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_chooser.StyleSchemeChooser
 {
 
@@ -38,9 +39,9 @@ class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_choos
   mixin StyleSchemeChooserT!();
 
   /**
-   * Creates a new #GtkSourceStyleSchemeChooserButton.
-   * Returns: a new #GtkSourceStyleSchemeChooserButton.
-   */
+      Creates a new #GtkSourceStyleSchemeChooserButton.
+    Returns:     a new #GtkSourceStyleSchemeChooserButton.
+  */
   this()
   {
     GtkWidget* _cretval;

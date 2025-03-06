@@ -12,6 +12,7 @@ import gtk.dialog;
 import gtk.types;
 import gtk.widget;
 
+/** */
 class ColorSelectionDialog : gtk.dialog.Dialog
 {
 
@@ -32,11 +33,11 @@ class ColorSelectionDialog : gtk.dialog.Dialog
   }
 
   /**
-   * Creates a new #GtkColorSelectionDialog.
-   * Params:
-   *   title = a string containing the title text for the dialog.
-   * Returns: a #GtkColorSelectionDialog.
-   */
+      Creates a new #GtkColorSelectionDialog.
+    Params:
+      title =       a string containing the title text for the dialog.
+    Returns:     a #GtkColorSelectionDialog.
+  */
   this(string title)
   {
     GtkWidget* _cretval;
@@ -46,9 +47,9 @@ class ColorSelectionDialog : gtk.dialog.Dialog
   }
 
   /**
-   * Retrieves the #GtkColorSelection widget embedded in the dialog.
-   * Returns: the embedded #GtkColorSelection
-   */
+      Retrieves the #GtkColorSelection widget embedded in the dialog.
+    Returns:     the embedded #GtkColorSelection
+  */
   gtk.widget.Widget getColorSelection()
   {
     GtkWidget* _cretval;

@@ -21,19 +21,23 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkScaleButton` provides a button which pops up a scale widget.
- * This kind of widget is commonly used for volume controls in multimedia
- * applications, and GTK provides a [gtk.volume_button.VolumeButton] subclass that
- * is tailored for this use case.
- * # CSS nodes
- * ```
- * scalebutton.scale
- * ╰── button.toggle
- * ╰── <icon>
- * ```
- * `GtkScaleButton` has a single CSS node with name scalebutton and `.scale`
- * style class, and contains a `button` node with a `.toggle` style class.
- */
+    [gtk.scale_button.ScaleButton] provides a button which pops up a scale widget.
+  
+  This kind of widget is commonly used for volume controls in multimedia
+  applications, and GTK provides a [gtk.volume_button.VolumeButton] subclass that
+  is tailored for this use case.
+  
+  # CSS nodes
+  
+  ```
+  scalebutton.scale
+  ╰── button.toggle
+      ╰── <icon>
+  ```
+  
+  [gtk.scale_button.ScaleButton] has a single CSS node with name scalebutton and `.scale`
+  style class, and contains a `button` node with a `.toggle` style class.
+*/
 class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orientable.Orientable
 {
 
@@ -57,19 +61,20 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   mixin OrientableT!();
 
   /**
-   * Creates a `GtkScaleButton`.
-   * The new scale button has a range between min and max,
-   * with a stepping of step.
-   * Params:
-   *   min = the minimum value of the scale $(LPAREN)usually 0$(RPAREN)
-   *   max = the maximum value of the scale $(LPAREN)usually 100$(RPAREN)
-   *   step = the stepping of value when a scroll-wheel event,
-   *     or up/down arrow event occurs $(LPAREN)usually 2$(RPAREN)
-   *   icons = a %NULL-terminated
-   *     array of icon names, or %NULL if you want to set the list
-   *     later with [gtk.scale_button.ScaleButton.setIcons]
-   * Returns: a new `GtkScaleButton`
-   */
+      Creates a [gtk.scale_button.ScaleButton].
+    
+    The new scale button has a range between min and max,
+    with a stepping of step.
+    Params:
+      min =       the minimum value of the scale (usually 0)
+      max =       the maximum value of the scale (usually 100)
+      step =       the stepping of value when a scroll-wheel event,
+          or up/down arrow event occurs (usually 2)
+      icons =       a null-terminated
+          array of icon names, or null if you want to set the list
+          later with [gtk.scale_button.ScaleButton.setIcons]
+    Returns:     a new [gtk.scale_button.ScaleButton]
+  */
   this(double min, double max, double step, string[] icons = null)
   {
     GtkWidget* _cretval;
@@ -83,11 +88,12 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 
   /**
-   * Queries a `GtkScaleButton` and returns its current state.
-   * Returns %TRUE if the scale button is pressed in and %FALSE
-   * if it is raised.
-   * Returns: whether the button is pressed
-   */
+      Queries a [gtk.scale_button.ScaleButton] and returns its current state.
+    
+    Returns true if the scale button is pressed in and false
+    if it is raised.
+    Returns:     whether the button is pressed
+  */
   bool getActive()
   {
     bool _retval;
@@ -96,10 +102,11 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 
   /**
-   * Gets the `GtkAdjustment` associated with the `GtkScaleButton`’s scale.
-   * See [gtk.range.Range.getAdjustment] for details.
-   * Returns: the adjustment associated with the scale
-   */
+      Gets the [gtk.adjustment.Adjustment] associated with the [gtk.scale_button.ScaleButton]’s scale.
+    
+    See [gtk.range.Range.getAdjustment] for details.
+    Returns:     the adjustment associated with the scale
+  */
   gtk.adjustment.Adjustment getAdjustment()
   {
     GtkAdjustment* _cretval;
@@ -109,9 +116,9 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 
   /**
-   * Returns whether the button has a frame.
-   * Returns: %TRUE if the button has a frame
-   */
+      Returns whether the button has a frame.
+    Returns:     true if the button has a frame
+  */
   bool getHasFrame()
   {
     bool _retval;
@@ -120,10 +127,10 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 
   /**
-   * Retrieves the minus button of the `GtkScaleButton`.
-   * Returns: the minus button
-   *   of the `GtkScaleButton`
-   */
+      Retrieves the minus button of the [gtk.scale_button.ScaleButton].
+    Returns:     the minus button
+        of the [gtk.scale_button.ScaleButton]
+  */
   gtk.button.Button getMinusButton()
   {
     GtkWidget* _cretval;
@@ -133,10 +140,10 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 
   /**
-   * Retrieves the plus button of the `GtkScaleButton.`
-   * Returns: the plus button
-   *   of the `GtkScaleButton`
-   */
+      Retrieves the plus button of the `GtkScaleButton.`
+    Returns:     the plus button
+        of the [gtk.scale_button.ScaleButton]
+  */
   gtk.button.Button getPlusButton()
   {
     GtkWidget* _cretval;
@@ -146,9 +153,9 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 
   /**
-   * Retrieves the popup of the `GtkScaleButton`.
-   * Returns: the popup of the `GtkScaleButton`
-   */
+      Retrieves the popup of the [gtk.scale_button.ScaleButton].
+    Returns:     the popup of the [gtk.scale_button.ScaleButton]
+  */
   gtk.widget.Widget getPopup()
   {
     GtkWidget* _cretval;
@@ -158,9 +165,9 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 
   /**
-   * Gets the current value of the scale button.
-   * Returns: current value of the scale button
-   */
+      Gets the current value of the scale button.
+    Returns:     current value of the scale button
+  */
   double getValue()
   {
     double _retval;
@@ -169,32 +176,33 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 
   /**
-   * Sets the `GtkAdjustment` to be used as a model
-   * for the `GtkScaleButton`’s scale.
-   * See [gtk.range.Range.setAdjustment] for details.
-   * Params:
-   *   adjustment = a `GtkAdjustment`
-   */
+      Sets the [gtk.adjustment.Adjustment] to be used as a model
+    for the [gtk.scale_button.ScaleButton]’s scale.
+    
+    See [gtk.range.Range.setAdjustment] for details.
+    Params:
+      adjustment =       a [gtk.adjustment.Adjustment]
+  */
   void setAdjustment(gtk.adjustment.Adjustment adjustment)
   {
     gtk_scale_button_set_adjustment(cast(GtkScaleButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the style of the button.
-   * Params:
-   *   hasFrame = whether the button should have a visible frame
-   */
+      Sets the style of the button.
+    Params:
+      hasFrame =       whether the button should have a visible frame
+  */
   void setHasFrame(bool hasFrame)
   {
     gtk_scale_button_set_has_frame(cast(GtkScaleButton*)cPtr, hasFrame);
   }
 
   /**
-   * Sets the icons to be used by the scale button.
-   * Params:
-   *   icons = a %NULL-terminated array of icon names
-   */
+      Sets the icons to be used by the scale button.
+    Params:
+      icons =       a null-terminated array of icon names
+  */
   void setIcons(string[] icons)
   {
     char*[] _tmpicons;
@@ -206,35 +214,45 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 
   /**
-   * Sets the current value of the scale.
-   * If the value is outside the minimum or maximum range values,
-   * it will be clamped to fit inside them.
-   * The scale button emits the signalGtk.ScaleButton::value-changed
-   * signal if the value changes.
-   * Params:
-   *   value = new value of the scale button
-   */
+      Sets the current value of the scale.
+    
+    If the value is outside the minimum or maximum range values,
+    it will be clamped to fit inside them.
+    
+    The scale button emits the `signalGtk.ScaleButton::value-changed`
+    signal if the value changes.
+    Params:
+      value =       new value of the scale button
+  */
   void setValue(double value)
   {
     gtk_scale_button_set_value(cast(GtkScaleButton*)cPtr, value);
   }
 
   /**
-   * Emitted to dismiss the popup.
-   * This is a [keybinding signal](class.SignalAction.html).
-   * The default binding for this signal is <kbd>Escape</kbd>.
-   *   scaleButton = the instance the signal is connected to
-   */
+      Emitted to dismiss the popup.
+    
+    This is a [keybinding signal](class.SignalAction.html).
+    
+    The default binding for this signal is <kbd>Escape</kbd>.
+  
+    ## Parameters
+    $(LIST
+      * $(B scaleButton) the instance the signal is connected to
+    )
+  */
   alias PopdownCallbackDlg = void delegate(gtk.scale_button.ScaleButton scaleButton);
+
+  /** ditto */
   alias PopdownCallbackFunc = void function(gtk.scale_button.ScaleButton scaleButton);
 
   /**
-   * Connect to Popdown signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Popdown signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectPopdown(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PopdownCallbackDlg) || is(T : PopdownCallbackFunc))
   {
@@ -251,22 +269,30 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 
   /**
-   * Emitted to popup the scale widget.
-   * This is a [keybinding signal](class.SignalAction.html).
-   * The default bindings for this signal are <kbd>Space</kbd>,
-   * <kbd>Enter</kbd> and <kbd>Return</kbd>.
-   *   scaleButton = the instance the signal is connected to
-   */
+      Emitted to popup the scale widget.
+    
+    This is a [keybinding signal](class.SignalAction.html).
+    
+    The default bindings for this signal are <kbd>Space</kbd>,
+    <kbd>Enter</kbd> and <kbd>Return</kbd>.
+  
+    ## Parameters
+    $(LIST
+      * $(B scaleButton) the instance the signal is connected to
+    )
+  */
   alias PopupCallbackDlg = void delegate(gtk.scale_button.ScaleButton scaleButton);
+
+  /** ditto */
   alias PopupCallbackFunc = void function(gtk.scale_button.ScaleButton scaleButton);
 
   /**
-   * Connect to Popup signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Popup signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectPopup(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PopupCallbackDlg) || is(T : PopupCallbackFunc))
   {
@@ -283,21 +309,26 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 
   /**
-   * Emitted when the value field has changed.
-   * Params
-   *   value = the new value
-   *   scaleButton = the instance the signal is connected to
-   */
+      Emitted when the value field has changed.
+  
+    ## Parameters
+    $(LIST
+      * $(B value)       the new value
+      * $(B scaleButton) the instance the signal is connected to
+    )
+  */
   alias ValueChangedCallbackDlg = void delegate(double value, gtk.scale_button.ScaleButton scaleButton);
+
+  /** ditto */
   alias ValueChangedCallbackFunc = void function(double value, gtk.scale_button.ScaleButton scaleButton);
 
   /**
-   * Connect to ValueChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ValueChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ValueChangedCallbackDlg) || is(T : ValueChangedCallbackFunc))
   {

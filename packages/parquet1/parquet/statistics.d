@@ -6,6 +6,7 @@ import parquet.c.functions;
 import parquet.c.types;
 import parquet.types;
 
+/** */
 class Statistics : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class Statistics : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   bool equal(parquet.statistics.Statistics otherStatistics)
   {
     bool _retval;
@@ -32,6 +34,7 @@ class Statistics : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getNDistinctValues()
   {
     long _retval;
@@ -39,6 +42,7 @@ class Statistics : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getNNulls()
   {
     long _retval;
@@ -46,6 +50,7 @@ class Statistics : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getNValues()
   {
     long _retval;
@@ -53,6 +58,7 @@ class Statistics : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool hasMinMax()
   {
     bool _retval;
@@ -60,6 +66,7 @@ class Statistics : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool hasNDistinctValues()
   {
     bool _retval;
@@ -67,6 +74,7 @@ class Statistics : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool hasNNulls()
   {
     bool _retval;

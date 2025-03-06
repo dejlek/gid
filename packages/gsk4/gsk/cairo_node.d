@@ -10,8 +10,8 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node for a Cairo surface.
- */
+    A render node for a Cairo surface.
+*/
 class CairoNode : gsk.render_node.RenderNode
 {
 
@@ -24,13 +24,14 @@ class CairoNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Creates a `GskRenderNode` that will render a cairo surface
-   * into the area given by bounds.
-   * You can draw to the cairo surface using [gsk.cairo_node.CairoNode.getDrawContext].
-   * Params:
-   *   bounds = the rectangle to render to
-   * Returns: A new `GskRenderNode`
-   */
+      Creates a [gsk.render_node.RenderNode] that will render a cairo surface
+    into the area given by bounds.
+    
+    You can draw to the cairo surface using [gsk.cairo_node.CairoNode.getDrawContext].
+    Params:
+      bounds =       the rectangle to render to
+    Returns:     A new [gsk.render_node.RenderNode]
+  */
   this(graphene.rect.Rect bounds)
   {
     GskRenderNode* _cretval;
@@ -39,13 +40,14 @@ class CairoNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Creates a Cairo context for drawing using the surface associated
-   * to the render node.
-   * If no surface exists yet, a surface will be created optimized for
-   * rendering to renderer.
-   * Returns: a Cairo context used for drawing; use
-   *   [cairo.global.destroy] when done drawing
-   */
+      Creates a Cairo context for drawing using the surface associated
+    to the render node.
+    
+    If no surface exists yet, a surface will be created optimized for
+    rendering to renderer.
+    Returns:     a Cairo context used for drawing; use
+        [cairo.global.destroy] when done drawing
+  */
   cairo.context.Context getDrawContext()
   {
     cairo_t* _cretval;
@@ -55,9 +57,9 @@ class CairoNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the Cairo surface used by the render node.
-   * Returns: a Cairo surface
-   */
+      Retrieves the Cairo surface used by the render node.
+    Returns:     a Cairo surface
+  */
   cairo.surface.Surface getSurface()
   {
     cairo_surface_t* _cretval;

@@ -11,8 +11,8 @@ import gtk.filter;
 import gtk.types;
 
 /**
- * `GtkMultiFilter` is the base class for filters that combine multiple filters.
- */
+    [gtk.multi_filter.MultiFilter] is the base class for filters that combine multiple filters.
+*/
 class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.Buildable
 {
 
@@ -36,23 +36,24 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
   mixin BuildableT!();
 
   /**
-   * Adds a filter to self to use for matching.
-   * Params:
-   *   filter = A new filter to use
-   */
+      Adds a filter to self to use for matching.
+    Params:
+      filter =       A new filter to use
+  */
   void append(gtk.filter.Filter filter)
   {
     gtk_multi_filter_append(cast(GtkMultiFilter*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(Yes.Dup) : null);
   }
 
   /**
-   * Removes the filter at the given position from the list of filters used
-   * by self.
-   * If position is larger than the number of filters, nothing happens and
-   * the function returns.
-   * Params:
-   *   position = position of filter to remove
-   */
+      Removes the filter at the given position from the list of filters used
+    by self.
+    
+    If position is larger than the number of filters, nothing happens and
+    the function returns.
+    Params:
+      position =       position of filter to remove
+  */
   void remove(uint position)
   {
     gtk_multi_filter_remove(cast(GtkMultiFilter*)cPtr, position);

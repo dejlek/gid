@@ -6,6 +6,7 @@ import arrowdataset.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class Fragment : gobject.object.ObjectG
 {
 

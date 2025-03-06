@@ -7,8 +7,8 @@ import gtk.expression;
 import gtk.types;
 
 /**
- * A variant of `GtkClosureExpression` using a C closure.
- */
+    A variant of [gtk.closure_expression.ClosureExpression] using a C closure.
+*/
 class CClosureExpression : gtk.expression.Expression
 {
 

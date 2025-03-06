@@ -8,13 +8,14 @@ import gid.gid;
 import gobject.object;
 
 /**
- * An object used to describe a relation between a
- * object and one or more other objects.
- * An AtkRelation describes a relation between an object and one or
- * more other objects. The actual relations that an object has with
- * other objects are defined as an AtkRelationSet, which is a set of
- * AtkRelations.
- */
+    An object used to describe a relation between a
+   object and one or more other objects.
+  
+  An AtkRelation describes a relation between an object and one or
+  more other objects. The actual relations that an object has with
+  other objects are defined as an AtkRelationSet, which is a set of
+  AtkRelations.
+*/
 class Relation : gobject.object.ObjectG
 {
 
@@ -35,15 +36,15 @@ class Relation : gobject.object.ObjectG
   }
 
   /**
-   * Create a new relation for the specified key and the specified list
-   * of targets.  See also [atk.object.ObjectAtk.addRelationship].
-   * Params:
-   *   targets = an array of pointers to
-   *     #AtkObjects
-   *   relationship = an #AtkRelationType with which to create the new
-   *     #AtkRelation
-   * Returns: a pointer to a new #AtkRelation
-   */
+      Create a new relation for the specified key and the specified list
+    of targets.  See also [atk.object.ObjectAtk.addRelationship].
+    Params:
+      targets =       an array of pointers to
+         #AtkObjects
+      relationship =       an #AtkRelationType with which to create the new
+         #AtkRelation
+    Returns:     a pointer to a new #AtkRelation
+  */
   this(atk.object.ObjectAtk[] targets, atk.types.RelationType relationship)
   {
     AtkRelation* _cretval;
@@ -60,20 +61,20 @@ class Relation : gobject.object.ObjectG
   }
 
   /**
-   * Adds the specified AtkObject to the target for the relation, if it is
-   * not already present.  See also [atk.object.ObjectAtk.addRelationship].
-   * Params:
-   *   target = an #AtkObject
-   */
+      Adds the specified AtkObject to the target for the relation, if it is
+    not already present.  See also [atk.object.ObjectAtk.addRelationship].
+    Params:
+      target =       an #AtkObject
+  */
   void addTarget(atk.object.ObjectAtk target)
   {
     atk_relation_add_target(cast(AtkRelation*)cPtr, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
   }
 
   /**
-   * Gets the type of relation
-   * Returns: the type of relation
-   */
+      Gets the type of relation
+    Returns:     the type of relation
+  */
   atk.types.RelationType getRelationType()
   {
     AtkRelationType _cretval;
@@ -83,9 +84,9 @@ class Relation : gobject.object.ObjectG
   }
 
   /**
-   * Gets the target list of relation
-   * Returns: the target list of relation
-   */
+      Gets the target list of relation
+    Returns:     the target list of relation
+  */
   atk.object.ObjectAtk[] getTarget()
   {
     GPtrArray* _cretval;
@@ -95,11 +96,11 @@ class Relation : gobject.object.ObjectG
   }
 
   /**
-   * Remove the specified AtkObject from the target for the relation.
-   * Params:
-   *   target = an #AtkObject
-   * Returns: TRUE if the removal is successful.
-   */
+      Remove the specified AtkObject from the target for the relation.
+    Params:
+      target =       an #AtkObject
+    Returns:     TRUE if the removal is successful.
+  */
   bool removeTarget(atk.object.ObjectAtk target)
   {
     bool _retval;

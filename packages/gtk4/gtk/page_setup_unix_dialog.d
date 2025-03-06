@@ -23,16 +23,20 @@ import gtk.types;
 import gtk.window;
 
 /**
- * `GtkPageSetupUnixDialog` implements a page setup dialog for platforms
- * which don’t provide a native page setup dialog, like Unix.
- * ![An example GtkPageSetupUnixDialog](pagesetupdialog.png)
- * It can be used very much like any other GTK dialog, at the
- * cost of the portability offered by the high-level printing
- * API in [gtk.print_operation.PrintOperation].
- * ## CSS nodes
- * `GtkPageSetupUnixDialog` has a single CSS node with the name `window` and
- * style class `.pagesetup`.
- */
+    [gtk.page_setup_unix_dialog.PageSetupUnixDialog] implements a page setup dialog for platforms
+  which don’t provide a native page setup dialog, like Unix.
+  
+  ![An example GtkPageSetupUnixDialog](pagesetupdialog.png)
+  
+  It can be used very much like any other GTK dialog, at the
+  cost of the portability offered by the high-level printing
+  API in [gtk.print_operation.PrintOperation].
+  
+  ## CSS nodes
+  
+  [gtk.page_setup_unix_dialog.PageSetupUnixDialog] has a single CSS node with the name `window` and
+  style class `.pagesetup`.
+*/
 class PageSetupUnixDialog : gtk.dialog.Dialog
 {
 
@@ -53,12 +57,12 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   }
 
   /**
-   * Creates a new page setup dialog.
-   * Params:
-   *   title = the title of the dialog
-   *   parent = transient parent of the dialog
-   * Returns: the new `GtkPageSetupUnixDialog`
-   */
+      Creates a new page setup dialog.
+    Params:
+      title =       the title of the dialog
+      parent =       transient parent of the dialog
+    Returns:     the new [gtk.page_setup_unix_dialog.PageSetupUnixDialog]
+  */
   this(string title = null, gtk.window.Window parent = null)
   {
     GtkWidget* _cretval;
@@ -68,9 +72,9 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   }
 
   /**
-   * Gets the currently selected page setup from the dialog.
-   * Returns: the current page setup
-   */
+      Gets the currently selected page setup from the dialog.
+    Returns:     the current page setup
+  */
   gtk.page_setup.PageSetup getPageSetup()
   {
     GtkPageSetup* _cretval;
@@ -80,9 +84,9 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   }
 
   /**
-   * Gets the current print settings from the dialog.
-   * Returns: the current print settings
-   */
+      Gets the current print settings from the dialog.
+    Returns:     the current print settings
+  */
   gtk.print_settings.PrintSettings getPrintSettings()
   {
     GtkPrintSettings* _cretval;
@@ -92,22 +96,22 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   }
 
   /**
-   * Sets the `GtkPageSetup` from which the page setup
-   * dialog takes its values.
-   * Params:
-   *   pageSetup = a `GtkPageSetup`
-   */
+      Sets the [gtk.page_setup.PageSetup] from which the page setup
+    dialog takes its values.
+    Params:
+      pageSetup =       a [gtk.page_setup.PageSetup]
+  */
   void setPageSetup(gtk.page_setup.PageSetup pageSetup)
   {
     gtk_page_setup_unix_dialog_set_page_setup(cast(GtkPageSetupUnixDialog*)cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the `GtkPrintSettings` from which the page setup dialog
-   * takes its values.
-   * Params:
-   *   printSettings = a `GtkPrintSettings`
-   */
+      Sets the [gtk.print_settings.PrintSettings] from which the page setup dialog
+    takes its values.
+    Params:
+      printSettings =       a [gtk.print_settings.PrintSettings]
+  */
   void setPrintSettings(gtk.print_settings.PrintSettings printSettings = null)
   {
     gtk_page_setup_unix_dialog_set_print_settings(cast(GtkPageSetupUnixDialog*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(No.Dup) : null);

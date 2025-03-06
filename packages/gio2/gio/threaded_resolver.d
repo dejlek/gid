@@ -7,9 +7,9 @@ import gio.resolver;
 import gio.types;
 
 /**
- * #GThreadedResolver is an implementation of #GResolver which calls the libc
- * lookup functions in threads to allow them to run asynchronously.
- */
+    #GThreadedResolver is an implementation of #GResolver which calls the libc
+  lookup functions in threads to allow them to run asynchronously.
+*/
 class ThreadedResolver : gio.resolver.Resolver
 {
 

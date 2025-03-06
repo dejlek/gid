@@ -8,6 +8,7 @@ import gid.gid;
 import glib.bytes;
 import glib.error;
 
+/** */
 class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
@@ -27,6 +28,7 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowBinaryArrayBuilder* _cretval;
@@ -34,6 +36,7 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool append(ubyte[] value)
   {
     bool _retval;
@@ -49,6 +52,7 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   bool appendValue(ubyte[] value)
   {
     bool _retval;
@@ -64,6 +68,7 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   bool appendValueBytes(glib.bytes.Bytes value)
   {
     bool _retval;
@@ -75,16 +80,16 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-   * Append multiple values at once. It's more efficient than multiple
-   * `append` and `append_null` calls.
-   * Params:
-   *   values = The array of #GBytes.
-   *   isValids = The array of
-   *     boolean that shows whether the Nth value is valid or not. If the
-   *     Nth is_valids is %TRUE, the Nth values is valid value. Otherwise
-   *     the Nth value is null value.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append multiple values at once. It's more efficient than multiple
+    `append` and `append_null` calls.
+    Params:
+      values =       The array of #GBytes.
+      isValids =       The array of
+          boolean that shows whether the Nth value is valid or not. If the
+          Nth is_valids is true, the Nth values is valid value. Otherwise
+          the Nth value is null value.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendValues(glib.bytes.Bytes[] values, bool[] isValids = null)
   {
     bool _retval;

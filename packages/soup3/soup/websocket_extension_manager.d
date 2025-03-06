@@ -9,14 +9,15 @@ import soup.session_feature_mixin;
 import soup.types;
 
 /**
- * SoupWebsocketExtensionManager is the iface@SessionFeature that handles WebSockets
- * extensions for a class@Session.
- * A #SoupWebsocketExtensionManager is added to the session by default, and normally
- * you don't need to worry about it at all. However, if you want to
- * disable WebSocket extensions, you can remove the feature from the
- * session with [soup.session.Session.removeFeatureByType] or disable it on
- * individual requests with [soup.message.Message.disableFeature].
- */
+    SoupWebsocketExtensionManager is the `iface@SessionFeature` that handles WebSockets
+  extensions for a `class@Session`.
+  
+  A #SoupWebsocketExtensionManager is added to the session by default, and normally
+  you don't need to worry about it at all. However, if you want to
+  disable WebSocket extensions, you can remove the feature from the
+  session with [soup.session.Session.removeFeatureByType] or disable it on
+  individual requests with [soup.message.Message.disableFeature].
+*/
 class WebsocketExtensionManager : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 

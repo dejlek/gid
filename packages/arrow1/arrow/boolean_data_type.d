@@ -6,6 +6,7 @@ import arrow.fixed_width_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class BooleanDataType : arrow.fixed_width_data_type.FixedWidthDataType
 {
 
@@ -25,6 +26,7 @@ class BooleanDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowBooleanDataType* _cretval;

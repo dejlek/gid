@@ -6,6 +6,7 @@ import arrowflight.descriptor;
 import arrowflight.types;
 import gid.gid;
 
+/** */
 class PathDescriptor : arrowflight.descriptor.Descriptor
 {
 
@@ -25,6 +26,7 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
     return getType();
   }
 
+  /** */
   this(string[] paths)
   {
     GAFlightPathDescriptor* _cretval;
@@ -40,6 +42,7 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
     this(_cretval, Yes.Take);
   }
 
+  /** */
   string[] getPaths()
   {
     char** _cretval;

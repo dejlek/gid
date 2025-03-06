@@ -8,8 +8,8 @@ import gtk.shortcut_trigger;
 import gtk.types;
 
 /**
- * A `GtkShortcutTrigger` that triggers when a specific keyval and modifiers are pressed.
- */
+    A [gtk.shortcut_trigger.ShortcutTrigger] that triggers when a specific keyval and modifiers are pressed.
+*/
 class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
@@ -30,13 +30,13 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /**
-   * Creates a `GtkShortcutTrigger` that will trigger whenever
-   * the key with the given keyval and modifiers is pressed.
-   * Params:
-   *   keyval = The keyval to trigger for
-   *   modifiers = the modifiers that need to be present
-   * Returns: A new `GtkShortcutTrigger`
-   */
+      Creates a [gtk.shortcut_trigger.ShortcutTrigger] that will trigger whenever
+    the key with the given keyval and modifiers is pressed.
+    Params:
+      keyval =       The keyval to trigger for
+      modifiers =       the modifiers that need to be present
+    Returns:     A new [gtk.shortcut_trigger.ShortcutTrigger]
+  */
   this(uint keyval, gdk.types.ModifierType modifiers)
   {
     GtkShortcutTrigger* _cretval;
@@ -45,10 +45,10 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /**
-   * Gets the keyval that must be pressed to succeed
-   * triggering self.
-   * Returns: the keyval
-   */
+      Gets the keyval that must be pressed to succeed
+    triggering self.
+    Returns:     the keyval
+  */
   uint getKeyval()
   {
     uint _retval;
@@ -57,10 +57,10 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /**
-   * Gets the modifiers that must be present to succeed
-   * triggering self.
-   * Returns: the modifiers
-   */
+      Gets the modifiers that must be present to succeed
+    triggering self.
+    Returns:     the modifiers
+  */
   gdk.types.ModifierType getModifiers()
   {
     GdkModifierType _cretval;

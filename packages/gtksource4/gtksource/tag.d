@@ -6,6 +6,7 @@ import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.types;
 
+/** */
 class Tag : gtk.text_tag.TextTag
 {
 
@@ -26,14 +27,15 @@ class Tag : gtk.text_tag.TextTag
   }
 
   /**
-   * Creates a #GtkSourceTag. Configure the tag using object arguments,
-   * i.e. using [gobject.object.ObjectG.set].
-   * For usual cases, [gtksource.buffer.Buffer.createSourceTag] is more convenient to
-   * use.
-   * Params:
-   *   name = tag name, or %NULL.
-   * Returns: a new #GtkSourceTag.
-   */
+      Creates a #GtkSourceTag. Configure the tag using object arguments,
+    i.e. using [gobject.object.ObjectG.set].
+    
+    For usual cases, [gtksource.buffer.Buffer.createSourceTag] is more convenient to
+    use.
+    Params:
+      name =       tag name, or null.
+    Returns:     a new #GtkSourceTag.
+  */
   this(string name = null)
   {
     GtkTextTag* _cretval;

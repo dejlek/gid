@@ -6,6 +6,7 @@ import arrowdataset.key_value_partitioning_options;
 import arrowdataset.types;
 import gid.gid;
 
+/** */
 class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions
 {
 
@@ -25,6 +26,7 @@ class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyV
     return getType();
   }
 
+  /** */
   this()
   {
     GADatasetHivePartitioningOptions* _cretval;

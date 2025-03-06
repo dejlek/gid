@@ -8,10 +8,11 @@ import gtksource.c.types;
 import gtksource.types;
 
 /**
- * Represents a style.
- * The `GtkSourceStyle` structure is used to describe text attributes
- * which are set when given style is used.
- */
+    Represents a style.
+  
+  The [gtksource.style.Style] structure is used to describe text attributes
+  which are set when given style is used.
+*/
 class Style : gobject.object.ObjectG
 {
 
@@ -32,25 +33,27 @@ class Style : gobject.object.ObjectG
   }
 
   /**
-   * This function modifies the [gtk.text_tag.TextTag] properties that are related to the
-   * #GtkSourceStyle properties. Other [gtk.text_tag.TextTag] properties are left untouched.
-   * If style is non-%NULL, applies style to tag.
-   * If style is %NULL, the related *-set properties of [gtk.text_tag.TextTag] are set to
-   * %FALSE.
-   * Params:
-   *   tag = a #GtkTextTag to apply styles to.
-   */
+      This function modifies the [gtk.text_tag.TextTag] properties that are related to the
+    #GtkSourceStyle properties. Other [gtk.text_tag.TextTag] properties are left untouched.
+    
+    If style is non-null, applies style to tag.
+    
+    If style is null, the related *-set properties of [gtk.text_tag.TextTag] are set to
+    false.
+    Params:
+      tag =       a #GtkTextTag to apply styles to.
+  */
   void apply(gtk.text_tag.TextTag tag)
   {
     gtk_source_style_apply(cast(const(GtkSourceStyle)*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
   }
 
   /**
-   * Creates a copy of style, that is a new #GtkSourceStyle instance which
-   * has the same attributes set.
-   * Returns: copy of style, call [gobject.object.ObjectG.unref]
-   *   when you are done with it.
-   */
+      Creates a copy of style, that is a new #GtkSourceStyle instance which
+    has the same attributes set.
+    Returns:     copy of style, call [gobject.object.ObjectG.unref]
+      when you are done with it.
+  */
   gtksource.style.Style copy()
   {
     GtkSourceStyle* _cretval;

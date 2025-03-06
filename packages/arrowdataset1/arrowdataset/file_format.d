@@ -12,6 +12,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class FileFormat : gobject.object.ObjectG
 {
 
@@ -31,6 +32,7 @@ class FileFormat : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   bool equal(arrowdataset.file_format.FileFormat otherFormat)
   {
     bool _retval;
@@ -38,6 +40,7 @@ class FileFormat : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrowdataset.file_write_options.FileWriteOptions getDefaultWriteOptions()
   {
     GADatasetFileWriteOptions* _cretval;
@@ -46,6 +49,7 @@ class FileFormat : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getTypeName()
   {
     char* _cretval;
@@ -54,6 +58,7 @@ class FileFormat : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrowdataset.file_writer.FileWriter openWriter(arrow.output_stream.OutputStream destination, arrow.file_system.FileSystem fileSystem, string path, arrow.schema.Schema schema, arrowdataset.file_write_options.FileWriteOptions options)
   {
     GADatasetFileWriter* _cretval;

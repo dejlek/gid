@@ -7,6 +7,7 @@ import arrow.table;
 import arrow.types;
 import gid.gid;
 
+/** */
 class TableDatum : arrow.datum.Datum
 {
 
@@ -26,6 +27,7 @@ class TableDatum : arrow.datum.Datum
     return getType();
   }
 
+  /** */
   this(arrow.table.Table value)
   {
     GArrowTableDatum* _cretval;

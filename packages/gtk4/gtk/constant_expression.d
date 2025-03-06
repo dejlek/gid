@@ -8,8 +8,8 @@ import gtk.expression;
 import gtk.types;
 
 /**
- * A constant value in a `GtkExpression`.
- */
+    A constant value in a [gtk.expression.Expression].
+*/
 class ConstantExpression : gtk.expression.Expression
 {
 
@@ -22,11 +22,11 @@ class ConstantExpression : gtk.expression.Expression
   }
 
   /**
-   * Creates an expression that always evaluates to the given `value`.
-   * Params:
-   *   value = a `GValue`
-   * Returns: a new `GtkExpression`
-   */
+      Creates an expression that always evaluates to the given `value`.
+    Params:
+      value =       a [gobject.value.Value]
+    Returns:     a new [gtk.expression.Expression]
+  */
   static gtk.constant_expression.ConstantExpression newForValue(gobject.value.Value value)
   {
     GtkExpression* _cretval;
@@ -36,9 +36,9 @@ class ConstantExpression : gtk.expression.Expression
   }
 
   /**
-   * Gets the value that a constant expression evaluates to.
-   * Returns: the value
-   */
+      Gets the value that a constant expression evaluates to.
+    Returns:     the value
+  */
   gobject.value.Value getValue()
   {
     const(GValue)* _cretval;

@@ -7,8 +7,8 @@ import gobject.param_spec;
 import gobject.types;
 
 /**
- * A #GParamSpec derived structure that contains the meta data for float properties.
- */
+    A #GParamSpec derived structure that contains the meta data for float properties.
+*/
 class ParamSpecFloat : gobject.param_spec.ParamSpec
 {
 

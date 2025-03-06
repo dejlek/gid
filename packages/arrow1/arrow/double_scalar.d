@@ -6,6 +6,7 @@ import arrow.scalar;
 import arrow.types;
 import gid.gid;
 
+/** */
 class DoubleScalar : arrow.scalar.Scalar
 {
 
@@ -25,6 +26,7 @@ class DoubleScalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   this(double value)
   {
     GArrowDoubleScalar* _cretval;
@@ -32,6 +34,7 @@ class DoubleScalar : arrow.scalar.Scalar
     this(_cretval, Yes.Take);
   }
 
+  /** */
   double getValue()
   {
     double _retval;

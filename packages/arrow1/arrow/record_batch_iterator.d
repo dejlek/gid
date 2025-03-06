@@ -8,6 +8,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class RecordBatchIterator : gobject.object.ObjectG
 {
 
@@ -27,6 +28,7 @@ class RecordBatchIterator : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrow.record_batch.RecordBatch[] recordBatches)
   {
     GArrowRecordBatchIterator* _cretval;
@@ -36,6 +38,7 @@ class RecordBatchIterator : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool equal(arrow.record_batch_iterator.RecordBatchIterator otherIterator)
   {
     bool _retval;
@@ -43,6 +46,7 @@ class RecordBatchIterator : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.record_batch.RecordBatch next()
   {
     GArrowRecordBatch* _cretval;
@@ -54,6 +58,7 @@ class RecordBatchIterator : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.record_batch.RecordBatch[] toList()
   {
     GList* _cretval;

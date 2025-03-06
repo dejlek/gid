@@ -8,8 +8,8 @@ import gdkpixbuf.types;
 import gid.gid;
 
 /**
- * An opaque struct representing a simple animation.
- */
+    An opaque struct representing a simple animation.
+*/
 class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
 {
 
@@ -30,13 +30,13 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   }
 
   /**
-   * Creates a new, empty animation.
-   * Params:
-   *   width = the width of the animation
-   *   height = the height of the animation
-   *   rate = the speed of the animation, in frames per second
-   * Returns: a newly allocated #GdkPixbufSimpleAnim
-   */
+      Creates a new, empty animation.
+    Params:
+      width =       the width of the animation
+      height =       the height of the animation
+      rate =       the speed of the animation, in frames per second
+    Returns:     a newly allocated #GdkPixbufSimpleAnim
+  */
   this(int width, int height, float rate)
   {
     GdkPixbufSimpleAnim* _cretval;
@@ -45,21 +45,21 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   }
 
   /**
-   * Adds a new frame to animation. The pixbuf must
-   * have the dimensions specified when the animation
-   * was constructed.
-   * Params:
-   *   pixbuf = the pixbuf to add
-   */
+      Adds a new frame to animation. The pixbuf must
+    have the dimensions specified when the animation
+    was constructed.
+    Params:
+      pixbuf =       the pixbuf to add
+  */
   void addFrame(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     gdk_pixbuf_simple_anim_add_frame(cast(GdkPixbufSimpleAnim*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
 
   /**
-   * Gets whether animation should loop indefinitely when it reaches the end.
-   * Returns: %TRUE if the animation loops forever, %FALSE otherwise
-   */
+      Gets whether animation should loop indefinitely when it reaches the end.
+    Returns:     true if the animation loops forever, false otherwise
+  */
   bool getLoop()
   {
     bool _retval;
@@ -68,10 +68,10 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   }
 
   /**
-   * Sets whether animation should loop indefinitely when it reaches the end.
-   * Params:
-   *   loop = whether to loop the animation
-   */
+      Sets whether animation should loop indefinitely when it reaches the end.
+    Params:
+      loop =       whether to loop the animation
+  */
   void setLoop(bool loop)
   {
     gdk_pixbuf_simple_anim_set_loop(cast(GdkPixbufSimpleAnim*)cPtr, loop);

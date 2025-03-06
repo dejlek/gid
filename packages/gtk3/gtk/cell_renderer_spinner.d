@@ -7,16 +7,17 @@ import gtk.cell_renderer;
 import gtk.types;
 
 /**
- * GtkCellRendererSpinner renders a spinning animation in a cell, very
- * similar to #GtkSpinner. It can often be used as an alternative
- * to a #GtkCellRendererProgress for displaying indefinite activity,
- * instead of actual progress.
- * To start the animation in a cell, set the #GtkCellRendererSpinner:active
- * property to %TRUE and increment the #GtkCellRendererSpinner:pulse property
- * at regular intervals. The usual way to set the cell renderer properties
- * for each cell is to bind them to columns in your tree model using e.g.
- * [gtk.tree_view_column.TreeViewColumn.addAttribute].
- */
+    GtkCellRendererSpinner renders a spinning animation in a cell, very
+  similar to #GtkSpinner. It can often be used as an alternative
+  to a #GtkCellRendererProgress for displaying indefinite activity,
+  instead of actual progress.
+  
+  To start the animation in a cell, set the #GtkCellRendererSpinner:active
+  property to true and increment the #GtkCellRendererSpinner:pulse property
+  at regular intervals. The usual way to set the cell renderer properties
+  for each cell is to bind them to columns in your tree model using e.g.
+  [gtk.tree_view_column.TreeViewColumn.addAttribute].
+*/
 class CellRendererSpinner : gtk.cell_renderer.CellRenderer
 {
 
@@ -37,10 +38,10 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
   }
 
   /**
-   * Returns a new cell renderer which will show a spinner to indicate
-   * activity.
-   * Returns: a new #GtkCellRenderer
-   */
+      Returns a new cell renderer which will show a spinner to indicate
+    activity.
+    Returns:     a new #GtkCellRenderer
+  */
   this()
   {
     GtkCellRenderer* _cretval;

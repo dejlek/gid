@@ -8,21 +8,25 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * A `GtkFilter` object describes the filtering to be performed by a
- * [gtk.filter_list_model.FilterListModel].
- * The model will use the filter to determine if it should include items
- * or not by calling [gtk.filter.Filter.match] for each item and only
- * keeping the ones that the function returns %TRUE for.
- * Filters may change what items they match through their lifetime. In that
- * case, they will emit the [gtk.filter.Filter.changed] signal to notify
- * that previous filter results are no longer valid and that items should
- * be checked again via [gtk.filter.Filter.match].
- * GTK provides various pre-made filter implementations for common filtering
- * operations. These filters often include properties that can be linked to
- * various widgets to easily allow searches.
- * However, in particular for large lists or complex search methods, it is
- * also possible to subclass `GtkFilter` and provide one's own filter.
- */
+    A [gtk.filter.Filter] object describes the filtering to be performed by a
+  [gtk.filter_list_model.FilterListModel].
+  
+  The model will use the filter to determine if it should include items
+  or not by calling [gtk.filter.Filter.match] for each item and only
+  keeping the ones that the function returns true for.
+  
+  Filters may change what items they match through their lifetime. In that
+  case, they will emit the [gtk.filter.Filter.changed] signal to notify
+  that previous filter results are no longer valid and that items should
+  be checked again via [gtk.filter.Filter.match].
+  
+  GTK provides various pre-made filter implementations for common filtering
+  operations. These filters often include properties that can be linked to
+  various widgets to easily allow searches.
+  
+  However, in particular for large lists or complex search methods, it is
+  also possible to subclass [gtk.filter.Filter] and provide one's own filter.
+*/
 class Filter : gobject.object.ObjectG
 {
 
@@ -43,32 +47,38 @@ class Filter : gobject.object.ObjectG
   }
 
   /**
-   * Notifies all users of the filter that it has changed.
-   * This emits the [gtk.filter.Filter.changed] signal. Users
-   * of the filter should then check items again via
-   * [gtk.filter.Filter.match].
-   * Depending on the change parameter, not all items need to
-   * be changed, but only some. Refer to the [gtk.types.FilterChange]
-   * documentation for details.
-   * This function is intended for implementers of `GtkFilter`
-   * subclasses and should not be called from other functions.
-   * Params:
-   *   change = How the filter changed
-   */
+      Notifies all users of the filter that it has changed.
+    
+    This emits the [gtk.filter.Filter.changed] signal. Users
+    of the filter should then check items again via
+    [gtk.filter.Filter.match].
+    
+    Depending on the change parameter, not all items need to
+    be changed, but only some. Refer to the [gtk.types.FilterChange]
+    documentation for details.
+    
+    This function is intended for implementers of [gtk.filter.Filter]
+    subclasses and should not be called from other functions.
+    Params:
+      change =       How the filter changed
+  */
   void changed(gtk.types.FilterChange change)
   {
     gtk_filter_changed(cast(GtkFilter*)cPtr, change);
   }
 
   /**
-   * Gets the known strictness of filters.
-   * If the strictness is not known, %GTK_FILTER_MATCH_SOME is returned.
-   * This value may change after emission of the [gtk.filter.Filter.changed]
-   * signal.
-   * This function is meant purely for optimization purposes, filters can
-   * choose to omit implementing it, but `GtkFilterListModel` uses it.
-   * Returns: the strictness of self
-   */
+      Gets the known strictness of filters.
+    
+    If the strictness is not known, [gtk.types.FilterMatch.Some] is returned.
+    
+    This value may change after emission of the [gtk.filter.Filter.changed]
+    signal.
+    
+    This function is meant purely for optimization purposes, filters can
+    choose to omit implementing it, but [gtk.filter_list_model.FilterListModel] uses it.
+    Returns:     the strictness of self
+  */
   gtk.types.FilterMatch getStrictness()
   {
     GtkFilterMatch _cretval;
@@ -78,12 +88,12 @@ class Filter : gobject.object.ObjectG
   }
 
   /**
-   * Checks if the given item is matched by the filter or not.
-   * Params:
-   *   item = The item to check
-   * Returns: %TRUE if the filter matches the item and a filter model should
-   *   keep it, %FALSE if not.
-   */
+      Checks if the given item is matched by the filter or not.
+    Params:
+      item =       The item to check
+    Returns:     true if the filter matches the item and a filter model should
+        keep it, false if not.
+  */
   bool match(gobject.object.ObjectG item)
   {
     bool _retval;
@@ -92,27 +102,35 @@ class Filter : gobject.object.ObjectG
   }
 
   /**
-   * Emitted whenever the filter changed.
-   * Users of the filter should then check items again via
-   * [gtk.filter.Filter.match].
-   * `GtkFilterListModel` handles this signal automatically.
-   * Depending on the change parameter, not all items need
-   * to be checked, but only some. Refer to the [gtk.types.FilterChange]
-   * documentation for details.
-   * Params
-   *   change = how the filter changed
-   *   filter = the instance the signal is connected to
-   */
+      Emitted whenever the filter changed.
+    
+    Users of the filter should then check items again via
+    [gtk.filter.Filter.match].
+    
+    [gtk.filter_list_model.FilterListModel] handles this signal automatically.
+    
+    Depending on the change parameter, not all items need
+    to be checked, but only some. Refer to the [gtk.types.FilterChange]
+    documentation for details.
+  
+    ## Parameters
+    $(LIST
+      * $(B change)       how the filter changed
+      * $(B filter) the instance the signal is connected to
+    )
+  */
   alias ChangedCallbackDlg = void delegate(gtk.types.FilterChange change, gtk.filter.Filter filter);
+
+  /** ditto */
   alias ChangedCallbackFunc = void function(gtk.types.FilterChange change, gtk.filter.Filter filter);
 
   /**
-   * Connect to Changed signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Changed signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {

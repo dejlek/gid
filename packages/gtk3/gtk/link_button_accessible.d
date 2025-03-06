@@ -14,6 +14,7 @@ import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
 
+/** */
 class LinkButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.hyperlink_impl.HyperlinkImpl
 {
 

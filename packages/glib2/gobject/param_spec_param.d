@@ -7,9 +7,9 @@ import gobject.param_spec;
 import gobject.types;
 
 /**
- * A #GParamSpec derived structure that contains the meta data for %G_TYPE_PARAM
- * properties.
- */
+    A #GParamSpec derived structure that contains the meta data for `G_TYPE_PARAM`
+  properties.
+*/
 class ParamSpecParam : gobject.param_spec.ParamSpec
 {
 

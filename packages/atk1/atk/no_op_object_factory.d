@@ -7,11 +7,12 @@ import atk.types;
 import gid.gid;
 
 /**
- * The AtkObjectFactory which creates an AtkNoOpObject.
- * The AtkObjectFactory which creates an AtkNoOpObject. An instance of
- * this is created by an AtkRegistry if no factory type has not been
- * specified to create an accessible object of a particular type.
- */
+    The AtkObjectFactory which creates an AtkNoOpObject.
+  
+  The AtkObjectFactory which creates an AtkNoOpObject. An instance of
+  this is created by an AtkRegistry if no factory type has not been
+  specified to create an accessible object of a particular type.
+*/
 class NoOpObjectFactory : atk.object_factory.ObjectFactory
 {
 
@@ -32,10 +33,10 @@ class NoOpObjectFactory : atk.object_factory.ObjectFactory
   }
 
   /**
-   * Creates an instance of an #AtkObjectFactory which generates primitive
-   * $(LPAREN)non-functioning$(RPAREN) #AtkObjects.
-   * Returns: an instance of an #AtkObjectFactory
-   */
+      Creates an instance of an #AtkObjectFactory which generates primitive
+    (non-functioning) #AtkObjects.
+    Returns:     an instance of an #AtkObjectFactory
+  */
   this()
   {
     AtkObjectFactory* _cretval;

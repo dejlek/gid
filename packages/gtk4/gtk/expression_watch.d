@@ -8,10 +8,11 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * An opaque structure representing a watched `GtkExpression`.
- * The contents of `GtkExpressionWatch` should only be accessed through the
- * provided API.
- */
+    An opaque structure representing a watched [gtk.expression.Expression].
+  
+  The contents of [gtk.expression_watch.ExpressionWatch] should only be accessed through the
+  provided API.
+*/
 class ExpressionWatch : gobject.boxed.Boxed
 {
 
@@ -37,14 +38,15 @@ class ExpressionWatch : gobject.boxed.Boxed
   }
 
   /**
-   * Evaluates the watched expression and on success stores the result
-   * in `value`.
-   * This is equivalent to calling [gtk.expression.Expression.evaluate] with the
-   * expression and this pointer originally used to create `watch`.
-   * Params:
-   *   value = an empty `GValue` to be set
-   * Returns: `TRUE` if the expression could be evaluated and `value` was set
-   */
+      Evaluates the watched expression and on success stores the result
+    in `value`.
+    
+    This is equivalent to calling [gtk.expression.Expression.evaluate] with the
+    expression and this pointer originally used to create `watch`.
+    Params:
+      value =       an empty [gobject.value.Value] to be set
+    Returns:     `TRUE` if the expression could be evaluated and `value` was set
+  */
   bool evaluate(gobject.value.Value value)
   {
     bool _retval;
@@ -53,10 +55,11 @@ class ExpressionWatch : gobject.boxed.Boxed
   }
 
   /**
-   * Stops watching an expression.
-   * See [gtk.expression.Expression.watch] for how the watch
-   * was established.
-   */
+      Stops watching an expression.
+    
+    See [gtk.expression.Expression.watch] for how the watch
+    was established.
+  */
   void unwatch()
   {
     gtk_expression_watch_unwatch(cast(GtkExpressionWatch*)cPtr);

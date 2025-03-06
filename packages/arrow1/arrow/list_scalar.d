@@ -7,6 +7,7 @@ import arrow.list_array;
 import arrow.types;
 import gid.gid;
 
+/** */
 class ListScalar : arrow.base_list_scalar.BaseListScalar
 {
 
@@ -26,6 +27,7 @@ class ListScalar : arrow.base_list_scalar.BaseListScalar
     return getType();
   }
 
+  /** */
   this(arrow.list_array.ListArray value)
   {
     GArrowListScalar* _cretval;

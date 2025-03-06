@@ -8,8 +8,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Generated when a setting is modified.
- */
+    Generated when a setting is modified.
+*/
 class EventSetting
 {
   GdkEventSetting cInstance;

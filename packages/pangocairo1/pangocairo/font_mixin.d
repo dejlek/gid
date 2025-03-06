@@ -8,21 +8,22 @@ public import pangocairo.c.types;
 public import pangocairo.types;
 
 /**
- * `PangoCairoFont` is an interface exported by fonts for
- * use with Cairo.
- * The actual type of the font will depend on the particular
- * font technology Cairo was compiled to use.
- */
+    [pangocairo.font.Font] is an interface exported by fonts for
+  use with Cairo.
+  
+  The actual type of the font will depend on the particular
+  font technology Cairo was compiled to use.
+*/
 template FontT()
 {
 
   /**
-   * Gets the `cairo_scaled_font_t` used by font.
-   * The scaled font can be referenced and kept using
-   * [cairo.scaled_font.ScaledFont.reference].
-   * Returns: the `cairo_scaled_font_t`
-   *   used by font
-   */
+      Gets the [cairo.scaled_font.ScaledFont] used by font.
+    The scaled font can be referenced and kept using
+    [cairo.scaled_font.ScaledFont.reference].
+    Returns:     the [cairo.scaled_font.ScaledFont]
+        used by font
+  */
   override cairo.scaled_font.ScaledFont getScaledFont()
   {
     cairo_scaled_font_t* _cretval;

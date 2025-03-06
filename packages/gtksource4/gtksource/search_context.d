@@ -14,6 +14,7 @@ import gtksource.search_settings;
 import gtksource.style;
 import gtksource.types;
 
+/** */
 class SearchContext : gobject.object.ObjectG
 {
 
@@ -34,15 +35,15 @@ class SearchContext : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new search context, associated with buffer, and customized with
-   * settings. If settings is %NULL, a new #GtkSourceSearchSettings object will
-   * be created, that you can retrieve with
-   * [gtksource.search_context.SearchContext.getSettings].
-   * Params:
-   *   buffer = a #GtkSourceBuffer.
-   *   settings = a #GtkSourceSearchSettings, or %NULL.
-   * Returns: a new search context.
-   */
+      Creates a new search context, associated with buffer, and customized with
+    settings. If settings is null, a new #GtkSourceSearchSettings object will
+    be created, that you can retrieve with
+    [gtksource.search_context.SearchContext.getSettings].
+    Params:
+      buffer =       a #GtkSourceBuffer.
+      settings =       a #GtkSourceSearchSettings, or null.
+    Returns:     a new search context.
+  */
   this(gtksource.buffer.Buffer buffer, gtksource.search_settings.SearchSettings settings = null)
   {
     GtkSourceSearchContext* _cretval;
@@ -51,22 +52,24 @@ class SearchContext : gobject.object.ObjectG
   }
 
   /**
-   * Synchronous backward search. It is recommended to use the asynchronous
-   * functions instead, to not block the user interface. However, if you are sure
-   * that the buffer is small, this function is more convenient to use.
-   * If the #GtkSourceSearchSettings:wrap-around property is %FALSE, this function
-   * doesn't try to wrap around.
-   * The has_wrapped_around out parameter is set independently of whether a match
-   * is found. So if this function returns %FALSE, has_wrapped_around will have
-   * the same value as the #GtkSourceSearchSettings:wrap-around property.
-   * Params:
-   *   iter = start of search.
-   *   matchStart = return location for start of match, or %NULL.
-   *   matchEnd = return location for end of match, or %NULL.
-   *   hasWrappedAround = return location to know whether the
-   *     search has wrapped around, or %NULL.
-   * Returns: whether a match was found.
-   */
+      Synchronous backward search. It is recommended to use the asynchronous
+    functions instead, to not block the user interface. However, if you are sure
+    that the buffer is small, this function is more convenient to use.
+    
+    If the #GtkSourceSearchSettings:wrap-around property is false, this function
+    doesn't try to wrap around.
+    
+    The has_wrapped_around out parameter is set independently of whether a match
+    is found. So if this function returns false, has_wrapped_around will have
+    the same value as the #GtkSourceSearchSettings:wrap-around property.
+    Params:
+      iter =       start of search.
+      matchStart =       return location for start of match, or null.
+      matchEnd =       return location for end of match, or null.
+      hasWrappedAround =       return location to know whether the
+          search has wrapped around, or null.
+    Returns:     whether a match was found.
+  */
   bool backward(gtk.text_iter.TextIter iter, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
   {
     bool _retval;
@@ -79,18 +82,21 @@ class SearchContext : gobject.object.ObjectG
   }
 
   /**
-   * The asynchronous version of [gtksource.search_context.SearchContext.backward].
-   * See the documentation of [gtksource.search_context.SearchContext.backward] for more
-   * details.
-   * See the #GAsyncResult documentation to know how to use this function.
-   * If the operation is cancelled, the callback will only be called if
-   * cancellable was not %NULL. [gtksource.search_context.SearchContext.backwardAsync] takes
-   * ownership of cancellable, so you can unref it after calling this function.
-   * Params:
-   *   iter = start of search.
-   *   cancellable = a #GCancellable, or %NULL.
-   *   callback = a #GAsyncReadyCallback to call when the operation is finished.
-   */
+      The asynchronous version of [gtksource.search_context.SearchContext.backward].
+    
+    See the documentation of [gtksource.search_context.SearchContext.backward] for more
+    details.
+    
+    See the #GAsyncResult documentation to know how to use this function.
+    
+    If the operation is cancelled, the callback will only be called if
+    cancellable was not null. [gtksource.search_context.SearchContext.backwardAsync] takes
+    ownership of cancellable, so you can unref it after calling this function.
+    Params:
+      iter =       start of search.
+      cancellable =       a #GCancellable, or null.
+      callback =       a #GAsyncReadyCallback to call when the operation is finished.
+  */
   void backwardAsync(gtk.text_iter.TextIter iter, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -107,18 +113,19 @@ class SearchContext : gobject.object.ObjectG
   }
 
   /**
-   * Finishes a backward search started with
-   * [gtksource.search_context.SearchContext.backwardAsync].
-   * See the documentation of [gtksource.search_context.SearchContext.backward] for more
-   * details.
-   * Params:
-   *   result = a #GAsyncResult.
-   *   matchStart = return location for start of match, or %NULL.
-   *   matchEnd = return location for end of match, or %NULL.
-   *   hasWrappedAround = return location to know whether the
-   *     search has wrapped around, or %NULL.
-   * Returns: whether a match was found.
-   */
+      Finishes a backward search started with
+    [gtksource.search_context.SearchContext.backwardAsync].
+    
+    See the documentation of [gtksource.search_context.SearchContext.backward] for more
+    details.
+    Params:
+      result =       a #GAsyncResult.
+      matchStart =       return location for start of match, or null.
+      matchEnd =       return location for end of match, or null.
+      hasWrappedAround =       return location to know whether the
+          search has wrapped around, or null.
+    Returns:     whether a match was found.
+  */
   bool backwardFinish(gio.async_result.AsyncResult result, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
   {
     bool _retval;
@@ -134,22 +141,24 @@ class SearchContext : gobject.object.ObjectG
   }
 
   /**
-   * Synchronous forward search. It is recommended to use the asynchronous
-   * functions instead, to not block the user interface. However, if you are sure
-   * that the buffer is small, this function is more convenient to use.
-   * If the #GtkSourceSearchSettings:wrap-around property is %FALSE, this function
-   * doesn't try to wrap around.
-   * The has_wrapped_around out parameter is set independently of whether a match
-   * is found. So if this function returns %FALSE, has_wrapped_around will have
-   * the same value as the #GtkSourceSearchSettings:wrap-around property.
-   * Params:
-   *   iter = start of search.
-   *   matchStart = return location for start of match, or %NULL.
-   *   matchEnd = return location for end of match, or %NULL.
-   *   hasWrappedAround = return location to know whether the
-   *     search has wrapped around, or %NULL.
-   * Returns: whether a match was found.
-   */
+      Synchronous forward search. It is recommended to use the asynchronous
+    functions instead, to not block the user interface. However, if you are sure
+    that the buffer is small, this function is more convenient to use.
+    
+    If the #GtkSourceSearchSettings:wrap-around property is false, this function
+    doesn't try to wrap around.
+    
+    The has_wrapped_around out parameter is set independently of whether a match
+    is found. So if this function returns false, has_wrapped_around will have
+    the same value as the #GtkSourceSearchSettings:wrap-around property.
+    Params:
+      iter =       start of search.
+      matchStart =       return location for start of match, or null.
+      matchEnd =       return location for end of match, or null.
+      hasWrappedAround =       return location to know whether the
+          search has wrapped around, or null.
+    Returns:     whether a match was found.
+  */
   bool forward(gtk.text_iter.TextIter iter, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
   {
     bool _retval;
@@ -162,18 +171,21 @@ class SearchContext : gobject.object.ObjectG
   }
 
   /**
-   * The asynchronous version of [gtksource.search_context.SearchContext.forward].
-   * See the documentation of [gtksource.search_context.SearchContext.forward] for more
-   * details.
-   * See the #GAsyncResult documentation to know how to use this function.
-   * If the operation is cancelled, the callback will only be called if
-   * cancellable was not %NULL. [gtksource.search_context.SearchContext.forwardAsync] takes
-   * ownership of cancellable, so you can unref it after calling this function.
-   * Params:
-   *   iter = start of search.
-   *   cancellable = a #GCancellable, or %NULL.
-   *   callback = a #GAsyncReadyCallback to call when the operation is finished.
-   */
+      The asynchronous version of [gtksource.search_context.SearchContext.forward].
+    
+    See the documentation of [gtksource.search_context.SearchContext.forward] for more
+    details.
+    
+    See the #GAsyncResult documentation to know how to use this function.
+    
+    If the operation is cancelled, the callback will only be called if
+    cancellable was not null. [gtksource.search_context.SearchContext.forwardAsync] takes
+    ownership of cancellable, so you can unref it after calling this function.
+    Params:
+      iter =       start of search.
+      cancellable =       a #GCancellable, or null.
+      callback =       a #GAsyncReadyCallback to call when the operation is finished.
+  */
   void forwardAsync(gtk.text_iter.TextIter iter, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -190,18 +202,19 @@ class SearchContext : gobject.object.ObjectG
   }
 
   /**
-   * Finishes a forward search started with
-   * [gtksource.search_context.SearchContext.forwardAsync].
-   * See the documentation of [gtksource.search_context.SearchContext.forward] for more
-   * details.
-   * Params:
-   *   result = a #GAsyncResult.
-   *   matchStart = return location for start of match, or %NULL.
-   *   matchEnd = return location for end of match, or %NULL.
-   *   hasWrappedAround = return location to know whether the
-   *     search has wrapped around, or %NULL.
-   * Returns: whether a match was found.
-   */
+      Finishes a forward search started with
+    [gtksource.search_context.SearchContext.forwardAsync].
+    
+    See the documentation of [gtksource.search_context.SearchContext.forward] for more
+    details.
+    Params:
+      result =       a #GAsyncResult.
+      matchStart =       return location for start of match, or null.
+      matchEnd =       return location for end of match, or null.
+      hasWrappedAround =       return location to know whether the
+          search has wrapped around, or null.
+    Returns:     whether a match was found.
+  */
   bool forwardFinish(gio.async_result.AsyncResult result, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
   {
     bool _retval;
@@ -216,6 +229,7 @@ class SearchContext : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
@@ -224,6 +238,7 @@ class SearchContext : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool getHighlight()
   {
     bool _retval;
@@ -231,6 +246,7 @@ class SearchContext : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gtksource.style.Style getMatchStyle()
   {
     GtkSourceStyle* _cretval;
@@ -240,17 +256,17 @@ class SearchContext : gobject.object.ObjectG
   }
 
   /**
-   * Gets the position of a search occurrence. If the buffer is not already fully
-   * scanned, the position may be unknown, and -1 is returned. If 0 is returned,
-   * it means that this part of the buffer has already been scanned, and that
-   * match_start and match_end don't delimit an occurrence.
-   * Params:
-   *   matchStart = the start of the occurrence.
-   *   matchEnd = the end of the occurrence.
-   * Returns: the position of the search occurrence. The first occurrence has the
-   *   position 1 $(LPAREN)not 0$(RPAREN). Returns 0 if match_start and match_end don't delimit
-   *   an occurrence. Returns -1 if the position is not yet known.
-   */
+      Gets the position of a search occurrence. If the buffer is not already fully
+    scanned, the position may be unknown, and -1 is returned. If 0 is returned,
+    it means that this part of the buffer has already been scanned, and that
+    match_start and match_end don't delimit an occurrence.
+    Params:
+      matchStart =       the start of the occurrence.
+      matchEnd =       the end of the occurrence.
+    Returns:     the position of the search occurrence. The first occurrence has the
+      position 1 (not 0). Returns 0 if match_start and match_end don't delimit
+      an occurrence. Returns -1 if the position is not yet known.
+  */
   int getOccurrencePosition(gtk.text_iter.TextIter matchStart, gtk.text_iter.TextIter matchEnd)
   {
     int _retval;
@@ -259,11 +275,11 @@ class SearchContext : gobject.object.ObjectG
   }
 
   /**
-   * Gets the total number of search occurrences. If the buffer is not already
-   * fully scanned, the total number of occurrences is unknown, and -1 is
-   * returned.
-   * Returns: the total number of search occurrences, or -1 if unknown.
-   */
+      Gets the total number of search occurrences. If the buffer is not already
+    fully scanned, the total number of occurrences is unknown, and -1 is
+    returned.
+    Returns:     the total number of search occurrences, or -1 if unknown.
+  */
   int getOccurrencesCount()
   {
     int _retval;
@@ -272,12 +288,13 @@ class SearchContext : gobject.object.ObjectG
   }
 
   /**
-   * Regular expression patterns must follow certain rules. If
-   * #GtkSourceSearchSettings:search-text breaks a rule, the error can be retrieved
-   * with this function. The error domain is #G_REGEX_ERROR.
-   * Free the return value with [glib.error.ErrorG.free].
-   * Returns: the #GError, or %NULL if the pattern is valid.
-   */
+      Regular expression patterns must follow certain rules. If
+    #GtkSourceSearchSettings:search-text breaks a rule, the error can be retrieved
+    with this function. The error domain is #G_REGEX_ERROR.
+    
+    Free the return value with [glib.error.ErrorG.free].
+    Returns:     the #GError, or null if the pattern is valid.
+  */
   glib.error.ErrorG getRegexError()
   {
     GError* _cretval;
@@ -286,6 +303,7 @@ class SearchContext : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gtksource.search_settings.SearchSettings getSettings()
   {
     GtkSourceSearchSettings* _cretval;
@@ -295,20 +313,22 @@ class SearchContext : gobject.object.ObjectG
   }
 
   /**
-   * Replaces a search match by another text. If match_start and match_end
-   * doesn't correspond to a search match, %FALSE is returned.
-   * match_start and match_end iters are revalidated to point to the replacement
-   * text boundaries.
-   * For a regular expression replacement, you can check if replace is valid by
-   * calling [glib.regex.Regex.checkReplacement]. The replace text can contain
-   * backreferences; read the [glib.regex.Regex.replace] documentation for more details.
-   * Params:
-   *   matchStart = the start of the match to replace.
-   *   matchEnd = the end of the match to replace.
-   *   replace = the replacement text.
-   *   replaceLength = the length of replace in bytes, or -1.
-   * Returns: whether the match has been replaced.
-   */
+      Replaces a search match by another text. If match_start and match_end
+    doesn't correspond to a search match, false is returned.
+    
+    match_start and match_end iters are revalidated to point to the replacement
+    text boundaries.
+    
+    For a regular expression replacement, you can check if replace is valid by
+    calling [glib.regex.Regex.checkReplacement]. The replace text can contain
+    backreferences; read the [glib.regex.Regex.replace] documentation for more details.
+    Params:
+      matchStart =       the start of the match to replace.
+      matchEnd =       the end of the match to replace.
+      replace =       the replacement text.
+      replaceLength =       the length of replace in bytes, or -1.
+    Returns:     whether the match has been replaced.
+  */
   bool replace(gtk.text_iter.TextIter matchStart, gtk.text_iter.TextIter matchEnd, string replace, int replaceLength)
   {
     bool _retval;
@@ -321,16 +341,17 @@ class SearchContext : gobject.object.ObjectG
   }
 
   /**
-   * Replaces all search matches by another text. It is a synchronous function, so
-   * it can block the user interface.
-   * For a regular expression replacement, you can check if replace is valid by
-   * calling [glib.regex.Regex.checkReplacement]. The replace text can contain
-   * backreferences; read the [glib.regex.Regex.replace] documentation for more details.
-   * Params:
-   *   replace = the replacement text.
-   *   replaceLength = the length of replace in bytes, or -1.
-   * Returns: the number of replaced matches.
-   */
+      Replaces all search matches by another text. It is a synchronous function, so
+    it can block the user interface.
+    
+    For a regular expression replacement, you can check if replace is valid by
+    calling [glib.regex.Regex.checkReplacement]. The replace text can contain
+    backreferences; read the [glib.regex.Regex.replace] documentation for more details.
+    Params:
+      replace =       the replacement text.
+      replaceLength =       the length of replace in bytes, or -1.
+    Returns:     the number of replaced matches.
+  */
   uint replaceAll(string replace, int replaceLength)
   {
     uint _retval;
@@ -343,23 +364,23 @@ class SearchContext : gobject.object.ObjectG
   }
 
   /**
-   * Enables or disables the search occurrences highlighting.
-   * Params:
-   *   highlight = the setting.
-   */
+      Enables or disables the search occurrences highlighting.
+    Params:
+      highlight =       the setting.
+  */
   void setHighlight(bool highlight)
   {
     gtk_source_search_context_set_highlight(cast(GtkSourceSearchContext*)cPtr, highlight);
   }
 
   /**
-   * Set the style to apply on search matches. If match_style is %NULL, default
-   * theme's scheme 'match-style' will be used.
-   * To enable or disable the search highlighting, use
-   * [gtksource.search_context.SearchContext.setHighlight].
-   * Params:
-   *   matchStyle = a #GtkSourceStyle, or %NULL.
-   */
+      Set the style to apply on search matches. If match_style is null, default
+    theme's scheme 'match-style' will be used.
+    To enable or disable the search highlighting, use
+    [gtksource.search_context.SearchContext.setHighlight].
+    Params:
+      matchStyle =       a #GtkSourceStyle, or null.
+  */
   void setMatchStyle(gtksource.style.Style matchStyle = null)
   {
     gtk_source_search_context_set_match_style(cast(GtkSourceSearchContext*)cPtr, matchStyle ? cast(GtkSourceStyle*)matchStyle.cPtr(No.Dup) : null);

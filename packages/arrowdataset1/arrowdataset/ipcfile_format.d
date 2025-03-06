@@ -6,6 +6,7 @@ import arrowdataset.file_format;
 import arrowdataset.types;
 import gid.gid;
 
+/** */
 class IPCFileFormat : arrowdataset.file_format.FileFormat
 {
 
@@ -25,6 +26,7 @@ class IPCFileFormat : arrowdataset.file_format.FileFormat
     return getType();
   }
 
+  /** */
   this()
   {
     GADatasetIPCFileFormat* _cretval;

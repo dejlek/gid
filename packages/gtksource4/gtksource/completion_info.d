@@ -12,6 +12,7 @@ import gtksource.c.functions;
 import gtksource.c.types;
 import gtksource.types;
 
+/** */
 class CompletionInfo : gtk.window.Window
 {
 
@@ -31,6 +32,7 @@ class CompletionInfo : gtk.window.Window
     return getType();
   }
 
+  /** */
   this()
   {
     GtkSourceCompletionInfo* _cretval;
@@ -39,14 +41,14 @@ class CompletionInfo : gtk.window.Window
   }
 
   /**
-   * Moves the #GtkSourceCompletionInfo to iter. If iter is %NULL info is
-   * moved to the cursor position. Moving will respect the #GdkGravity setting
-   * of the info window and will ensure the line at iter is not occluded by
-   * the window.
-   * Params:
-   *   view = a #GtkTextView on which the info window should be positioned.
-   *   iter = a #GtkTextIter.
-   */
+      Moves the #GtkSourceCompletionInfo to iter. If iter is null info is
+    moved to the cursor position. Moving will respect the #GdkGravity setting
+    of the info window and will ensure the line at iter is not occluded by
+    the window.
+    Params:
+      view =       a #GtkTextView on which the info window should be positioned.
+      iter =       a #GtkTextIter.
+  */
   void moveToIter(gtk.text_view.TextView view, gtk.text_iter.TextIter iter = null)
   {
     gtk_source_completion_info_move_to_iter(cast(GtkSourceCompletionInfo*)cPtr, view ? cast(GtkTextView*)view.cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);

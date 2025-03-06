@@ -7,6 +7,7 @@ import arrow.function_options;
 import arrow.types;
 import gid.gid;
 
+/** */
 class RunEndEncodeOptions : arrow.function_options.FunctionOptions
 {
 
@@ -26,6 +27,7 @@ class RunEndEncodeOptions : arrow.function_options.FunctionOptions
     return getType();
   }
 
+  /** */
   this(arrow.data_type.DataType runEndDataType = null)
   {
     GArrowRunEndEncodeOptions* _cretval;

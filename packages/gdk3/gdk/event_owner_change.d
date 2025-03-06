@@ -9,10 +9,10 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Generated when the owner of a selection changes. On X11, this
- * information is only available if the X server supports the XFIXES
- * extension.
- */
+    Generated when the owner of a selection changes. On X11, this
+  information is only available if the X server supports the XFIXES
+  extension.
+*/
 class EventOwnerChange
 {
   GdkEventOwnerChange cInstance;

@@ -8,14 +8,16 @@ import gtksource.c.types;
 import gtksource.types;
 
 /**
- * Context for expanding class@SnippetChunk.
- * This class is currently used primary as a hashtable. However, the longer
- * term goal is to have it hold onto a `GjsContext` as well as other languages
- * so that class@SnippetChunk can expand themselves by executing
- * script within the context.
- * The class@Snippet will build the context and then expand each of the
- * chunks during the insertion/edit phase.
- */
+    Context for expanding `class@SnippetChunk`.
+  
+  This class is currently used primary as a hashtable. However, the longer
+  term goal is to have it hold onto a `GjsContext` as well as other languages
+  so that `class@SnippetChunk` can expand themselves by executing
+  script within the context.
+  
+  The `class@Snippet` will build the context and then expand each of the
+  chunks during the insertion/edit phase.
+*/
 class SnippetContext : gobject.object.ObjectG
 {
 
@@ -36,11 +38,12 @@ class SnippetContext : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #GtkSourceSnippetContext.
-   * Generally, this isn't needed unless you are controlling the
-   * expansion of snippets manually.
-   * Returns: a #GtkSourceSnippetContext
-   */
+      Creates a new #GtkSourceSnippetContext.
+    
+    Generally, this isn't needed unless you are controlling the
+    expansion of snippets manually.
+    Returns:     a #GtkSourceSnippetContext
+  */
   this()
   {
     GtkSourceSnippetContext* _cretval;
@@ -49,13 +52,14 @@ class SnippetContext : gobject.object.ObjectG
   }
 
   /**
-   * Removes all variables from the context.
-   */
+      Removes all variables from the context.
+  */
   void clearVariables()
   {
     gtk_source_snippet_context_clear_variables(cast(GtkSourceSnippetContext*)cPtr);
   }
 
+  /** */
   string expand(string input)
   {
     char* _cretval;
@@ -66,11 +70,11 @@ class SnippetContext : gobject.object.ObjectG
   }
 
   /**
-   * Gets the current value for a variable named key.
-   * Params:
-   *   key = the name of the variable
-   * Returns: the value for the variable, or %NULL
-   */
+      Gets the current value for a variable named key.
+    Params:
+      key =       the name of the variable
+    Returns:     the value for the variable, or null
+  */
   string getVariable(string key)
   {
     const(char)* _cretval;
@@ -81,14 +85,16 @@ class SnippetContext : gobject.object.ObjectG
   }
 
   /**
-   * Sets a constatnt within the context.
-   * This is similar to a variable set with [gtksource.snippet_context.SnippetContext.setVariable]
-   * but is expected to not change during use of the snippet.
-   * Examples would be the date or users name.
-   * Params:
-   *   key = the constant name
-   *   value = the value of the constant
-   */
+      Sets a constatnt within the context.
+    
+    This is similar to a variable set with [gtksource.snippet_context.SnippetContext.setVariable]
+    but is expected to not change during use of the snippet.
+    
+    Examples would be the date or users name.
+    Params:
+      key =       the constant name
+      value =       the value of the constant
+  */
   void setConstant(string key, string value)
   {
     const(char)* _key = key.toCString(No.Alloc);
@@ -96,30 +102,34 @@ class SnippetContext : gobject.object.ObjectG
     gtk_source_snippet_context_set_constant(cast(GtkSourceSnippetContext*)cPtr, _key, _value);
   }
 
+  /** */
   void setLinePrefix(string linePrefix)
   {
     const(char)* _linePrefix = linePrefix.toCString(No.Alloc);
     gtk_source_snippet_context_set_line_prefix(cast(GtkSourceSnippetContext*)cPtr, _linePrefix);
   }
 
+  /** */
   void setTabWidth(int tabWidth)
   {
     gtk_source_snippet_context_set_tab_width(cast(GtkSourceSnippetContext*)cPtr, tabWidth);
   }
 
+  /** */
   void setUseSpaces(bool useSpaces)
   {
     gtk_source_snippet_context_set_use_spaces(cast(GtkSourceSnippetContext*)cPtr, useSpaces);
   }
 
   /**
-   * Sets a variable within the context.
-   * This variable may be overridden by future updates to the
-   * context.
-   * Params:
-   *   key = the variable name
-   *   value = the value for the variable
-   */
+      Sets a variable within the context.
+    
+    This variable may be overridden by future updates to the
+    context.
+    Params:
+      key =       the variable name
+      value =       the value for the variable
+  */
   void setVariable(string key, string value)
   {
     const(char)* _key = key.toCString(No.Alloc);
@@ -128,22 +138,28 @@ class SnippetContext : gobject.object.ObjectG
   }
 
   /**
-   * The signal is emitted when a change has been
-   * discovered in one of the chunks of the snippet which has
-   * caused a variable or other dynamic data within the context
-   * to have changed.
-   *   snippetContext = the instance the signal is connected to
-   */
+      The signal is emitted when a change has been
+    discovered in one of the chunks of the snippet which has
+    caused a variable or other dynamic data within the context
+    to have changed.
+  
+    ## Parameters
+    $(LIST
+      * $(B snippetContext) the instance the signal is connected to
+    )
+  */
   alias ChangedCallbackDlg = void delegate(gtksource.snippet_context.SnippetContext snippetContext);
+
+  /** ditto */
   alias ChangedCallbackFunc = void function(gtksource.snippet_context.SnippetContext snippetContext);
 
   /**
-   * Connect to Changed signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Changed signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {

@@ -6,6 +6,7 @@ import arrow.scalar;
 import arrow.types;
 import gid.gid;
 
+/** */
 class NullScalar : arrow.scalar.Scalar
 {
 
@@ -25,6 +26,7 @@ class NullScalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowNullScalar* _cretval;

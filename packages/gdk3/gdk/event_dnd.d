@@ -9,8 +9,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Generated during DND operations.
- */
+    Generated during DND operations.
+*/
 class EventDND
 {
   GdkEventDND cInstance;

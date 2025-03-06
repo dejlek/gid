@@ -7,6 +7,7 @@ import gid.gid;
 import glib.bytes;
 import gobject.object;
 
+/** */
 class Criteria : gobject.object.ObjectG
 {
 
@@ -26,6 +27,7 @@ class Criteria : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(glib.bytes.Bytes expression)
   {
     GAFlightCriteria* _cretval;

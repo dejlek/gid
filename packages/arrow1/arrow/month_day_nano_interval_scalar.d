@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
 {
 
@@ -27,6 +28,7 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   this(arrow.month_day_nano.MonthDayNano value)
   {
     GArrowMonthDayNanoIntervalScalar* _cretval;
@@ -34,6 +36,7 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.month_day_nano.MonthDayNano getValue()
   {
     GArrowMonthDayNano* _cretval;

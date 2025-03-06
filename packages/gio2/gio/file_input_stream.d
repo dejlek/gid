@@ -14,15 +14,16 @@ import glib.error;
 import gobject.object;
 
 /**
- * `GFileInputStream` provides input streams that take their
- * content from a file.
- * `GFileInputStream` implements [gio.seekable.Seekable], which allows the input
- * stream to jump to arbitrary positions in the file, provided the
- * filesystem of the file allows it. To find the position of a file
- * input stream, use [gio.seekable.Seekable.tell]. To find out if a file input
- * stream supports seeking, use vfunc@Gio.Seekable.can_seek.
- * To position a file input stream, use vfunc@Gio.Seekable.seek.
- */
+    [gio.file_input_stream.FileInputStream] provides input streams that take their
+  content from a file.
+  
+  [gio.file_input_stream.FileInputStream] implements [gio.seekable.Seekable], which allows the input
+  stream to jump to arbitrary positions in the file, provided the
+  filesystem of the file allows it. To find the position of a file
+  input stream, use [gio.seekable.Seekable.tell]. To find out if a file input
+  stream supports seeking, use `vfunc@Gio.Seekable.can_seek`.
+  To position a file input stream, use `vfunc@Gio.Seekable.seek`.
+*/
 class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
 {
 
@@ -45,16 +46,16 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
   mixin SeekableT!();
 
   /**
-   * Queries a file input stream the given attributes. This function blocks
-   * while querying the stream. For the asynchronous $(LPAREN)non-blocking$(RPAREN) version
-   * of this function, see [gio.file_input_stream.FileInputStream.queryInfoAsync]. While the
-   * stream is blocked, the stream will set the pending flag internally, and
-   * any other operations on the stream will fail with %G_IO_ERROR_PENDING.
-   * Params:
-   *   attributes = a file attribute query string.
-   *   cancellable = optional #GCancellable object, %NULL to ignore.
-   * Returns: a #GFileInfo, or %NULL on error.
-   */
+      Queries a file input stream the given attributes. This function blocks
+    while querying the stream. For the asynchronous (non-blocking) version
+    of this function, see [gio.file_input_stream.FileInputStream.queryInfoAsync]. While the
+    stream is blocked, the stream will set the pending flag internally, and
+    any other operations on the stream will fail with [gio.types.IOErrorEnum.Pending].
+    Params:
+      attributes =       a file attribute query string.
+      cancellable =       optional #GCancellable object, null to ignore.
+    Returns:     a #GFileInfo, or null on error.
+  */
   gio.file_info.FileInfo queryInfo(string attributes, gio.cancellable.Cancellable cancellable = null)
   {
     GFileInfo* _cretval;
@@ -68,22 +69,24 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
   }
 
   /**
-   * Queries the stream information asynchronously.
-   * When the operation is finished callback will be called.
-   * You can then call [gio.file_input_stream.FileInputStream.queryInfoFinish]
-   * to get the result of the operation.
-   * For the synchronous version of this function,
-   * see [gio.file_input_stream.FileInputStream.queryInfo].
-   * If cancellable is not %NULL, then the operation can be cancelled by
-   * triggering the cancellable object from another thread. If the operation
-   * was cancelled, the error %G_IO_ERROR_CANCELLED will be set
-   * Params:
-   *   attributes = a file attribute query string.
-   *   ioPriority = the [I/O priority][io-priority] of the request
-   *   cancellable = optional #GCancellable object, %NULL to ignore.
-   *   callback = a #GAsyncReadyCallback
-   *     to call when the request is satisfied
-   */
+      Queries the stream information asynchronously.
+    When the operation is finished callback will be called.
+    You can then call [gio.file_input_stream.FileInputStream.queryInfoFinish]
+    to get the result of the operation.
+    
+    For the synchronous version of this function,
+    see [gio.file_input_stream.FileInputStream.queryInfo].
+    
+    If cancellable is not null, then the operation can be cancelled by
+    triggering the cancellable object from another thread. If the operation
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be set
+    Params:
+      attributes =       a file attribute query string.
+      ioPriority =       the [I/O priority][io-priority] of the request
+      cancellable =       optional #GCancellable object, null to ignore.
+      callback =       a #GAsyncReadyCallback
+          to call when the request is satisfied
+  */
   void queryInfoAsync(string attributes, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -101,11 +104,11 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
   }
 
   /**
-   * Finishes an asynchronous info query operation.
-   * Params:
-   *   result = a #GAsyncResult.
-   * Returns: #GFileInfo.
-   */
+      Finishes an asynchronous info query operation.
+    Params:
+      result =       a #GAsyncResult.
+    Returns:     #GFileInfo.
+  */
   gio.file_info.FileInfo queryInfoFinish(gio.async_result.AsyncResult result)
   {
     GFileInfo* _cretval;

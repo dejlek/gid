@@ -7,13 +7,14 @@ import gid.gid;
 import gobject.boxed;
 
 /**
- * A given range or subrange, to be used with #AtkValue
- * #AtkRange are used on #AtkValue, in order to represent the full
- * range of a given component $(LPAREN)for example an slider or a range
- * control$(RPAREN), or to define each individual subrange this full range is
- * splitted if available. See #AtkValue documentation for further
- * details.
- */
+    A given range or subrange, to be used with #AtkValue
+  
+  #AtkRange are used on #AtkValue, in order to represent the full
+  range of a given component (for example an slider or a range
+  control), or to define each individual subrange this full range is
+  splitted if available. See #AtkValue documentation for further
+  details.
+*/
 class Range : gobject.boxed.Boxed
 {
 
@@ -39,13 +40,13 @@ class Range : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a new #AtkRange.
-   * Params:
-   *   lowerLimit = inferior limit for this range
-   *   upperLimit = superior limit for this range
-   *   description = human readable description of this range.
-   * Returns: a new #AtkRange
-   */
+      Creates a new #AtkRange.
+    Params:
+      lowerLimit =       inferior limit for this range
+      upperLimit =       superior limit for this range
+      description =       human readable description of this range.
+    Returns:     a new #AtkRange
+  */
   this(double lowerLimit, double upperLimit, string description)
   {
     AtkRange* _cretval;
@@ -55,9 +56,9 @@ class Range : gobject.boxed.Boxed
   }
 
   /**
-   * Returns a new #AtkRange that is a exact copy of src
-   * Returns: a new #AtkRange copy of src
-   */
+      Returns a new #AtkRange that is a exact copy of src
+    Returns:     a new #AtkRange copy of src
+  */
   atk.range.Range copy()
   {
     AtkRange* _cretval;
@@ -67,9 +68,9 @@ class Range : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the human readable description of range
-   * Returns: the human-readable description of range
-   */
+      Returns the human readable description of range
+    Returns:     the human-readable description of range
+  */
   string getDescription()
   {
     const(char)* _cretval;
@@ -79,9 +80,9 @@ class Range : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the lower limit of range
-   * Returns: the lower limit of range
-   */
+      Returns the lower limit of range
+    Returns:     the lower limit of range
+  */
   double getLowerLimit()
   {
     double _retval;
@@ -90,9 +91,9 @@ class Range : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the upper limit of range
-   * Returns: the upper limit of range
-   */
+      Returns the upper limit of range
+    Returns:     the upper limit of range
+  */
   double getUpperLimit()
   {
     double _retval;

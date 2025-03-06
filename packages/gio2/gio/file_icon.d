@@ -12,10 +12,11 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GFileIcon` specifies an icon by pointing to an image file
- * to be used as icon.
- * It implements [gio.loadable_icon.LoadableIcon].
- */
+    [gio.file_icon.FileIcon] specifies an icon by pointing to an image file
+  to be used as icon.
+  
+  It implements [gio.loadable_icon.LoadableIcon].
+*/
 class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.LoadableIcon
 {
 
@@ -39,12 +40,12 @@ class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadab
   mixin LoadableIconT!();
 
   /**
-   * Creates a new icon for a file.
-   * Params:
-   *   file = a #GFile.
-   * Returns: a #GIcon for the given
-   *   file, or %NULL on error.
-   */
+      Creates a new icon for a file.
+    Params:
+      file =       a #GFile.
+    Returns:     a #GIcon for the given
+        file, or null on error.
+  */
   this(gio.file.File file)
   {
     GIcon* _cretval;
@@ -53,9 +54,9 @@ class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadab
   }
 
   /**
-   * Gets the #GFile associated with the given icon.
-   * Returns: a #GFile.
-   */
+      Gets the #GFile associated with the given icon.
+    Returns:     a #GFile.
+  */
   gio.file.File getFile()
   {
     GFile* _cretval;

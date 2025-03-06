@@ -9,10 +9,11 @@ import gio.socket_connectable_mixin;
 import gio.types;
 
 /**
- * A socket address of some unknown native type.
- * This corresponds to a general `struct sockaddr` of a type not otherwise
- * handled by GLib.
- */
+    A socket address of some unknown native type.
+  
+  This corresponds to a general `struct sockaddr` of a type not otherwise
+  handled by GLib.
+*/
 class NativeSocketAddress : gio.socket_address.SocketAddress
 {
 
@@ -33,12 +34,12 @@ class NativeSocketAddress : gio.socket_address.SocketAddress
   }
 
   /**
-   * Creates a new #GNativeSocketAddress for native and len.
-   * Params:
-   *   native = a native address object
-   *   len = the length of native, in bytes
-   * Returns: a new #GNativeSocketAddress
-   */
+      Creates a new #GNativeSocketAddress for native and len.
+    Params:
+      native =       a native address object
+      len =       the length of native, in bytes
+    Returns:     a new #GNativeSocketAddress
+  */
   this(void* native, size_t len)
   {
     GSocketAddress* _cretval;

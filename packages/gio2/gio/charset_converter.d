@@ -12,9 +12,9 @@ import glib.error;
 import gobject.object;
 
 /**
- * `GCharsetConverter` is an implementation of [gio.converter.Converter] based on
- * [glib.types.void*].
- */
+    [gio.charset_converter.CharsetConverter] is an implementation of [gio.converter.Converter] based on
+  [glib.types.void*].
+*/
 class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.initable.Initable
 {
 
@@ -38,12 +38,12 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
   mixin InitableT!();
 
   /**
-   * Creates a new #GCharsetConverter.
-   * Params:
-   *   toCharset = destination charset
-   *   fromCharset = source charset
-   * Returns: a new #GCharsetConverter or %NULL on error.
-   */
+      Creates a new #GCharsetConverter.
+    Params:
+      toCharset =       destination charset
+      fromCharset =       source charset
+    Returns:     a new #GCharsetConverter or null on error.
+  */
   this(string toCharset, string fromCharset)
   {
     GCharsetConverter* _cretval;
@@ -57,9 +57,9 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
   }
 
   /**
-   * Gets the number of fallbacks that converter has applied so far.
-   * Returns: the number of fallbacks that converter has applied
-   */
+      Gets the number of fallbacks that converter has applied so far.
+    Returns:     the number of fallbacks that converter has applied
+  */
   uint getNumFallbacks()
   {
     uint _retval;
@@ -68,9 +68,9 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
   }
 
   /**
-   * Gets the #GCharsetConverter:use-fallback property.
-   * Returns: %TRUE if fallbacks are used by converter
-   */
+      Gets the #GCharsetConverter:use-fallback property.
+    Returns:     true if fallbacks are used by converter
+  */
   bool getUseFallback()
   {
     bool _retval;
@@ -79,10 +79,10 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
   }
 
   /**
-   * Sets the #GCharsetConverter:use-fallback property.
-   * Params:
-   *   useFallback = %TRUE to use fallbacks
-   */
+      Sets the #GCharsetConverter:use-fallback property.
+    Params:
+      useFallback =       true to use fallbacks
+  */
   void setUseFallback(bool useFallback)
   {
     g_charset_converter_set_use_fallback(cast(GCharsetConverter*)cPtr, useFallback);

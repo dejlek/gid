@@ -12,9 +12,9 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * #GtkGestureStylus is a #GtkGesture implementation specific to stylus
- * input. The provided signals just provide the basic information
- */
+    #GtkGestureStylus is a #GtkGesture implementation specific to stylus
+  input. The provided signals just provide the basic information
+*/
 class GestureStylus : gtk.gesture_single.GestureSingle
 {
 
@@ -35,11 +35,11 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Creates a new #GtkGestureStylus.
-   * Params:
-   *   widget = a #GtkWidget
-   * Returns: a newly created stylus gesture
-   */
+      Creates a new #GtkGestureStylus.
+    Params:
+      widget =       a #GtkWidget
+    Returns:     a newly created stylus gesture
+  */
   this(gtk.widget.Widget widget)
   {
     GtkGesture* _cretval;
@@ -48,15 +48,15 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Returns the current value for the requested axis. This function
-   * must be called from either the #GtkGestureStylus:down,
-   * #GtkGestureStylus:motion, #GtkGestureStylus:up or #GtkGestureStylus:proximity
-   * signals.
-   * Params:
-   *   axis = requested device axis
-   *   value = return location for the axis value
-   * Returns: #TRUE if there is a current value for the axis
-   */
+      Returns the current value for the requested axis. This function
+    must be called from either the #GtkGestureStylus:down,
+    #GtkGestureStylus:motion, #GtkGestureStylus:up or #GtkGestureStylus:proximity
+    signals.
+    Params:
+      axis =       requested device axis
+      value =       return location for the axis value
+    Returns:     #TRUE if there is a current value for the axis
+  */
   bool getAxis(gdk.types.AxisUse axis, out double value)
   {
     bool _retval;
@@ -65,12 +65,12 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Returns the #GdkDeviceTool currently driving input through this gesture.
-   * This function must be called from either the #GtkGestureStylus::down,
-   * #GtkGestureStylus::motion, #GtkGestureStylus::up or #GtkGestureStylus::proximity
-   * signal handlers.
-   * Returns: The current stylus tool
-   */
+      Returns the #GdkDeviceTool currently driving input through this gesture.
+    This function must be called from either the #GtkGestureStylus::down,
+    #GtkGestureStylus::motion, #GtkGestureStylus::up or #GtkGestureStylus::proximity
+    signal handlers.
+    Returns:     The current stylus tool
+  */
   gdk.device_tool.DeviceTool getDeviceTool()
   {
     GdkDeviceTool* _cretval;
@@ -79,16 +79,19 @@ class GestureStylus : gtk.gesture_single.GestureSingle
     return _retval;
   }
 
+  /** */
   alias DownCallbackDlg = void delegate(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus);
+
+  /** ditto */
   alias DownCallbackFunc = void function(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus);
 
   /**
-   * Connect to Down signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Down signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectDown(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DownCallbackDlg) || is(T : DownCallbackFunc))
   {
@@ -106,16 +109,19 @@ class GestureStylus : gtk.gesture_single.GestureSingle
     return connectSignalClosure("down", closure, after);
   }
 
+  /** */
   alias MotionCallbackDlg = void delegate(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus);
+
+  /** ditto */
   alias MotionCallbackFunc = void function(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus);
 
   /**
-   * Connect to Motion signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Motion signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectMotion(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MotionCallbackDlg) || is(T : MotionCallbackFunc))
   {
@@ -133,16 +139,19 @@ class GestureStylus : gtk.gesture_single.GestureSingle
     return connectSignalClosure("motion", closure, after);
   }
 
+  /** */
   alias ProximityCallbackDlg = void delegate(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus);
+
+  /** ditto */
   alias ProximityCallbackFunc = void function(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus);
 
   /**
-   * Connect to Proximity signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Proximity signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectProximity(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ProximityCallbackDlg) || is(T : ProximityCallbackFunc))
   {
@@ -160,16 +169,19 @@ class GestureStylus : gtk.gesture_single.GestureSingle
     return connectSignalClosure("proximity", closure, after);
   }
 
+  /** */
   alias UpCallbackDlg = void delegate(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus);
+
+  /** ditto */
   alias UpCallbackFunc = void function(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus);
 
   /**
-   * Connect to Up signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Up signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectUp(T)(T callback, Flag!"After" after = No.After)
   if (is(T : UpCallbackDlg) || is(T : UpCallbackFunc))
   {

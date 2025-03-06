@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class ReadOptions : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class ReadOptions : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowReadOptions* _cretval;
@@ -32,6 +34,7 @@ class ReadOptions : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   int[] getIncludedFields()
   {
     int* _cretval;
@@ -46,6 +49,7 @@ class ReadOptions : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   void setIncludedFields(int[] fields)
   {
     size_t _nFields;

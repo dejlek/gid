@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class WriteOptions : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class WriteOptions : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowWriteOptions* _cretval;

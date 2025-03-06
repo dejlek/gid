@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class MemoryPool : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class MemoryPool : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   static arrow.memory_pool.MemoryPool default_()
   {
     GArrowMemoryPool* _cretval;
@@ -33,6 +35,7 @@ class MemoryPool : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getBackendName()
   {
     char* _cretval;
@@ -41,6 +44,7 @@ class MemoryPool : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getBytesAllocated()
   {
     long _retval;
@@ -49,10 +53,10 @@ class MemoryPool : gobject.object.ObjectG
   }
 
   /**
-   * Return peak memory allocation in this memory pool.
-   * Returns: Maximum bytes allocated. If not known $(LPAREN)or not implemented$(RPAREN),
-   *   returns -1.
-   */
+      Return peak memory allocation in this memory pool.
+    Returns:     Maximum bytes allocated. If not known (or not implemented),
+        returns -1.
+  */
   long getMaxMemory()
   {
     long _retval;

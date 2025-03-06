@@ -8,8 +8,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Generated during %GDK_SOURCE_TABLET_PAD button presses and releases.
- */
+    Generated during [gdk.types.InputSource.TabletPad] button presses and releases.
+*/
 class EventPadButton
 {
   GdkEventPadButton cInstance;

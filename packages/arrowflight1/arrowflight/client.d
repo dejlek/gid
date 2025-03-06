@@ -17,6 +17,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class Client : gobject.object.ObjectG
 {
 
@@ -36,6 +37,7 @@ class Client : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrowflight.location.Location location, arrowflight.client_options.ClientOptions options = null)
   {
     GAFlightClient* _cretval;
@@ -47,15 +49,15 @@ class Client : gobject.object.ObjectG
   }
 
   /**
-   * Authenticates to the server using basic HTTP style authentication.
-   * Params:
-   *   user = User name to be used.
-   *   password = Password to be used.
-   *   options = A #GAFlightCallOptions.
-   *   bearerName = Bearer token name on success.
-   *   bearerValue = Bearer token value on success.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Authenticates to the server using basic HTTP style authentication.
+    Params:
+      user =       User name to be used.
+      password =       Password to be used.
+      options =       A #GAFlightCallOptions.
+      bearerName =       Bearer token name on success.
+      bearerValue =       Bearer token value on success.
+    Returns:     true on success, false if there was an error.
+  */
   bool authenticateBasicToken(string user, string password, arrowflight.call_options.CallOptions options, out string bearerName, out string bearerValue)
   {
     bool _retval;
@@ -72,6 +74,7 @@ class Client : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool close()
   {
     bool _retval;
@@ -82,6 +85,7 @@ class Client : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrowflight.stream_reader.StreamReader doGet(arrowflight.ticket.Ticket ticket, arrowflight.call_options.CallOptions options = null)
   {
     GAFlightStreamReader* _cretval;
@@ -94,19 +98,20 @@ class Client : gobject.object.ObjectG
   }
 
   /**
-   * Upload data to a Flight described by the given descriptor. The
-   * caller must call [arrow.record_batch_writer.RecordBatchWriter.close] on the
-   * returned stream once they are done writing.
-   * The reader and writer are linked; closing the writer will also
-   * close the reader. Use garrow_flight_stream_writer_done_writing$(LPAREN)$(RPAREN) to
-   * only close the write side of the channel.
-   * Params:
-   *   descriptor = A #GAFlightDescriptor.
-   *   schema = A #GArrowSchema.
-   *   options = A #GAFlightCallOptions.
-   * Returns: The #GAFlighDoPutResult holding a reader and a writer on success,
-   *   %NULL on error.
-   */
+      Upload data to a Flight described by the given descriptor. The
+    caller must call [arrow.record_batch_writer.RecordBatchWriter.close] on the
+    returned stream once they are done writing.
+    
+    The reader and writer are linked; closing the writer will also
+    close the reader. Use garrow_flight_stream_writer_done_writing() to
+    only close the write side of the channel.
+    Params:
+      descriptor =       A #GAFlightDescriptor.
+      schema =       A #GArrowSchema.
+      options =       A #GAFlightCallOptions.
+    Returns:     The #GAFlighDoPutResult holding a reader and a writer on success,
+        null on error.
+  */
   arrowflight.do_put_result.DoPutResult doPut(arrowflight.descriptor.Descriptor descriptor, arrow.schema.Schema schema, arrowflight.call_options.CallOptions options = null)
   {
     GAFlightDoPutResult* _cretval;
@@ -118,6 +123,7 @@ class Client : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrowflight.info.Info getFlightInfo(arrowflight.descriptor.Descriptor descriptor, arrowflight.call_options.CallOptions options = null)
   {
     GAFlightInfo* _cretval;
@@ -129,6 +135,7 @@ class Client : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrowflight.info.Info[] listFlights(arrowflight.criteria.Criteria criteria = null, arrowflight.call_options.CallOptions options = null)
   {
     GList* _cretval;

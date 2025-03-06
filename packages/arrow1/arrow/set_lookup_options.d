@@ -7,6 +7,7 @@ import arrow.function_options;
 import arrow.types;
 import gid.gid;
 
+/** */
 class SetLookupOptions : arrow.function_options.FunctionOptions
 {
 
@@ -26,6 +27,7 @@ class SetLookupOptions : arrow.function_options.FunctionOptions
     return getType();
   }
 
+  /** */
   this(arrow.datum.Datum valueSet = null)
   {
     GArrowSetLookupOptions* _cretval;

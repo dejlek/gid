@@ -7,9 +7,9 @@ import gobject.enum_value;
 import gobject.types;
 
 /**
- * The class of an enumeration type holds information about its
- * possible values.
- */
+    The class of an enumeration type holds information about its
+  possible values.
+*/
 class EnumClass
 {
   GEnumClass cInstance;

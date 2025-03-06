@@ -12,6 +12,7 @@ import glib.bytes;
 import glib.error;
 import gobject.object;
 
+/** */
 class StreamDecoder : gobject.object.ObjectG
 {
 
@@ -31,6 +32,7 @@ class StreamDecoder : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrow.stream_listener.StreamListener listener, arrow.read_options.ReadOptions options = null)
   {
     GArrowStreamDecoder* _cretval;
@@ -39,14 +41,15 @@ class StreamDecoder : gobject.object.ObjectG
   }
 
   /**
-   * Feed data to the decoder as a #GArrowBuffer.
-   * If the decoder can read one or more record batches by the data, the
-   * decoder calls vfuncGArrowStreamListener.on_record_batch_decoded
-   * with a decoded record batch multiple times.
-   * Params:
-   *   buffer = A #GArrowBuffer to be decoded.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Feed data to the decoder as a #GArrowBuffer.
+    
+    If the decoder can read one or more record batches by the data, the
+    decoder calls `vfuncGArrowStreamListener.on_record_batch_decoded`
+    with a decoded record batch multiple times.
+    Params:
+      buffer =       A #GArrowBuffer to be decoded.
+    Returns:     true on success, false if there was an error.
+  */
   bool consumeBuffer(arrow.buffer.Buffer buffer)
   {
     bool _retval;
@@ -58,14 +61,15 @@ class StreamDecoder : gobject.object.ObjectG
   }
 
   /**
-   * Feed data to the decoder as a raw data.
-   * If the decoder can read one or more record batches by the data, the
-   * decoder calls vfuncGArrowStreamListener.on_record_batch_decoded
-   * with a decoded record batch multiple times.
-   * Params:
-   *   bytes = A #GBytes to be decoded.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Feed data to the decoder as a raw data.
+    
+    If the decoder can read one or more record batches by the data, the
+    decoder calls `vfuncGArrowStreamListener.on_record_batch_decoded`
+    with a decoded record batch multiple times.
+    Params:
+      bytes =       A #GBytes to be decoded.
+    Returns:     true on success, false if there was an error.
+  */
   bool consumeBytes(glib.bytes.Bytes bytes)
   {
     bool _retval;
@@ -77,55 +81,64 @@ class StreamDecoder : gobject.object.ObjectG
   }
 
   /**
-   * This method is provided for users who want to optimize performance.
-   * Normal users don't need to use this method.
-   * Here is an example usage for normal users:
-   * garrow_stream_decoder_consume_buffer$(LPAREN)decoder, buffer1$(RPAREN);
-   * garrow_stream_decoder_consume_buffer$(LPAREN)decoder, buffer2$(RPAREN);
-   * garrow_stream_decoder_consume_buffer$(LPAREN)decoder, buffer3$(RPAREN);
-   * Decoder has internal buffer. If consumed data isn't enough to
-   * advance the state of the decoder, consumed data is buffered to
-   * the internal buffer. It causes performance overhead.
-   * If you pass garrow_stream_decoer_get_next_required_size$(LPAREN)$(RPAREN) size data
-   * to each
-   * [arrow.stream_decoder.StreamDecoder.consumeBytes]/[arrow.stream_decoder.StreamDecoder.consumeBuffer]
-   * call, the decoder doesn't use its internal buffer. It improves
-   * performance.
-   * Here is an example usage to avoid using internal buffer:
-   * buffer1 \= get_data$(LPAREN)garrow_stream_decoder_get_next_required_size$(LPAREN)decoder$(RPAREN)$(RPAREN);
-   * garrow_stream_decoder_consume_buffer$(LPAREN)buffer1$(RPAREN);
-   * buffer2 \= get_data$(LPAREN)garrow_stream_decoder_get_next_required_size$(LPAREN)decoder$(RPAREN)$(RPAREN);
-   * garrow_stream_decoder_consume_buffer$(LPAREN)buffer2$(RPAREN);
-   * Users can use this method to avoid creating small chunks. Record
-   * batch data must be contiguous data. If users pass small chunks to
-   * the decoder, the decoder needs concatenate small chunks
-   * internally. It causes performance overhead.
-   * Here is an example usage to reduce small chunks:
-   * GArrowResizablBuffer *buffer \= garrow_resizable_buffer_new$(LPAREN)1024, NULL$(RPAREN);
-   * while $(LPAREN)$(LPAREN)small_chunk \= get_data$(LPAREN)&small_chunk_size$(RPAREN)$(RPAREN)$(RPAREN) {
-   * size_t current_buffer_size \= garrow_buffer_get_size$(LPAREN)GARROW_BUFFER$(LPAREN)buffer$(RPAREN)$(RPAREN);
-   * garrow_resizable_buffer_resize$(LPAREN)buffer, current_buffer_size + small_chunk_size,
-   * NULL$(RPAREN);
-   * garrow_mutable_buffer_set_data$(LPAREN)GARROW_MUTABLE_BUFFER$(LPAREN)buffer$(RPAREN),
-   * current_buffer_size,
-   * small_chunk,
-   * small_chunk_size,
-   * NULL$(RPAREN);
-   * if $(LPAREN)garrow_buffer_get_size$(LPAREN)GARROW_BUFFER$(LPAREN)buffer$(RPAREN)$(RPAREN) <
-   * garrow_stream_decoder_get_next_required_size$(LPAREN)decoder$(RPAREN)$(RPAREN) {
-   * continue;
-   * }
-   * garrow_stream_decoder_consume_buffer$(LPAREN)decoder, GARROW_BUFFER$(LPAREN)buffer$(RPAREN), NULL$(RPAREN);
-   * g_object_unref$(LPAREN)buffer$(RPAREN);
-   * buffer \= garrow_resizable_buffer_new$(LPAREN)1024, NULL$(RPAREN);
-   * }
-   * if $(LPAREN)garrow_buffer_get_size$(LPAREN)GARROW_BUFFER$(LPAREN)buffer$(RPAREN)$(RPAREN) > 0$(RPAREN) {
-   * garrow_stream_decoder_consume_buffer$(LPAREN)decoder, GARROW_BUFFER$(LPAREN)buffer$(RPAREN), NULL$(RPAREN);
-   * }
-   * g_object_unref$(LPAREN)buffer$(RPAREN);
-   * Returns: The number of bytes needed to advance the state of
-   *   the decoder.
-   */
+      This method is provided for users who want to optimize performance.
+    Normal users don't need to use this method.
+    
+    Here is an example usage for normal users:
+    
+        garrow_stream_decoder_consume_buffer(decoder, buffer1);
+        garrow_stream_decoder_consume_buffer(decoder, buffer2);
+        garrow_stream_decoder_consume_buffer(decoder, buffer3);
+    
+    Decoder has internal buffer. If consumed data isn't enough to
+    advance the state of the decoder, consumed data is buffered to
+    the internal buffer. It causes performance overhead.
+    
+    If you pass garrow_stream_decoer_get_next_required_size() size data
+    to each
+    [arrow.stream_decoder.StreamDecoder.consumeBytes]/[arrow.stream_decoder.StreamDecoder.consumeBuffer]
+    call, the decoder doesn't use its internal buffer. It improves
+    performance.
+    
+    Here is an example usage to avoid using internal buffer:
+    
+        buffer1 = get_data(garrow_stream_decoder_get_next_required_size(decoder));
+        garrow_stream_decoder_consume_buffer(buffer1);
+        buffer2 = get_data(garrow_stream_decoder_get_next_required_size(decoder));
+        garrow_stream_decoder_consume_buffer(buffer2);
+    
+    Users can use this method to avoid creating small chunks. Record
+    batch data must be contiguous data. If users pass small chunks to
+    the decoder, the decoder needs concatenate small chunks
+    internally. It causes performance overhead.
+    
+    Here is an example usage to reduce small chunks:
+    
+        GArrowResizablBuffer *buffer = garrow_resizable_buffer_new(1024, NULL);
+        while ((small_chunk = get_data(&small_chunk_size))) {
+          size_t current_buffer_size = garrow_buffer_get_size(GARROW_BUFFER(buffer));
+          garrow_resizable_buffer_resize(buffer, current_buffer_size + small_chunk_size,
+    NULL);
+          garrow_mutable_buffer_set_data(GARROW_MUTABLE_BUFFER(buffer),
+                                         current_buffer_size,
+                                         small_chunk,
+                                         small_chunk_size,
+                                         NULL);
+          if (garrow_buffer_get_size(GARROW_BUFFER(buffer)) <
+              garrow_stream_decoder_get_next_required_size(decoder)) {
+            continue;
+          }
+          garrow_stream_decoder_consume_buffer(decoder, GARROW_BUFFER(buffer), NULL);
+          g_object_unref(buffer);
+          buffer = garrow_resizable_buffer_new(1024, NULL);
+        }
+        if (garrow_buffer_get_size(GARROW_BUFFER(buffer)) > 0) {
+          garrow_stream_decoder_consume_buffer(decoder, GARROW_BUFFER(buffer), NULL);
+        }
+        g_object_unref(buffer);
+    Returns:     The number of bytes needed to advance the state of
+        the decoder.
+  */
   size_t getNextRequiredSize()
   {
     size_t _retval;
@@ -133,6 +146,7 @@ class StreamDecoder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.schema.Schema getSchema()
   {
     GArrowSchema* _cretval;
@@ -142,10 +156,11 @@ class StreamDecoder : gobject.object.ObjectG
   }
 
   /**
-   * Reset the internal status.
-   * You can reuse this decoder for new stream after calling this.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Reset the internal status.
+    
+    You can reuse this decoder for new stream after calling this.
+    Returns:     true on success, false if there was an error.
+  */
   bool reset()
   {
     bool _retval;

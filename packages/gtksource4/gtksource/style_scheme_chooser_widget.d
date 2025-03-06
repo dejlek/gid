@@ -12,6 +12,7 @@ import gtksource.style_scheme_chooser;
 import gtksource.style_scheme_chooser_mixin;
 import gtksource.types;
 
+/** */
 class StyleSchemeChooserWidget : gtk.bin.Bin, gtksource.style_scheme_chooser.StyleSchemeChooser
 {
 
@@ -34,9 +35,9 @@ class StyleSchemeChooserWidget : gtk.bin.Bin, gtksource.style_scheme_chooser.Sty
   mixin StyleSchemeChooserT!();
 
   /**
-   * Creates a new #GtkSourceStyleSchemeChooserWidget.
-   * Returns: a new  #GtkSourceStyleSchemeChooserWidget.
-   */
+      Creates a new #GtkSourceStyleSchemeChooserWidget.
+    Returns:     a new  #GtkSourceStyleSchemeChooserWidget.
+  */
   this()
   {
     GtkWidget* _cretval;

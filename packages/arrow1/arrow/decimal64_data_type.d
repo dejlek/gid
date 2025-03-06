@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class Decimal64DataType : arrow.decimal_data_type.DecimalDataType
 {
 
@@ -26,6 +27,7 @@ class Decimal64DataType : arrow.decimal_data_type.DecimalDataType
     return getType();
   }
 
+  /** */
   this(int precision, int scale)
   {
     GArrowDecimal64DataType* _cretval;
@@ -36,6 +38,7 @@ class Decimal64DataType : arrow.decimal_data_type.DecimalDataType
     this(_cretval, Yes.Take);
   }
 
+  /** */
   static int maxPrecision()
   {
     int _retval;

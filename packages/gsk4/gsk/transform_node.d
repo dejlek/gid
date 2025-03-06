@@ -8,8 +8,8 @@ import gsk.transform;
 import gsk.types;
 
 /**
- * A render node applying a `GskTransform` to its single child node.
- */
+    A render node applying a [gsk.transform.Transform] to its single child node.
+*/
 class TransformNode : gsk.render_node.RenderNode
 {
 
@@ -22,13 +22,13 @@ class TransformNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Creates a `GskRenderNode` that will transform the given child
-   * with the given transform.
-   * Params:
-   *   child = The node to transform
-   *   transform = The transform to apply
-   * Returns: A new `GskRenderNode`
-   */
+      Creates a [gsk.render_node.RenderNode] that will transform the given child
+    with the given transform.
+    Params:
+      child =       The node to transform
+      transform =       The transform to apply
+    Returns:     A new [gsk.render_node.RenderNode]
+  */
   this(gsk.render_node.RenderNode child, gsk.transform.Transform transform)
   {
     GskRenderNode* _cretval;
@@ -37,9 +37,9 @@ class TransformNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Gets the child node that is getting transformed by the given node.
-   * Returns: The child that is getting transformed
-   */
+      Gets the child node that is getting transformed by the given node.
+    Returns:     The child that is getting transformed
+  */
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
@@ -49,9 +49,9 @@ class TransformNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the `GskTransform` used by the node.
-   * Returns: a `GskTransform`
-   */
+      Retrieves the [gsk.transform.Transform] used by the node.
+    Returns:     a [gsk.transform.Transform]
+  */
   gsk.transform.Transform getTransform()
   {
     GskTransform* _cretval;

@@ -18,30 +18,39 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkPasswordEntry` is an entry that has been tailored for entering secrets.
- * ![An example GtkPasswordEntry](password-entry.png)
- * It does not show its contents in clear text, does not allow to copy it
- * to the clipboard, and it shows a warning when Caps Lock is engaged. If
- * the underlying platform allows it, `GtkPasswordEntry` will also place
- * the text in a non-pageable memory area, to avoid it being written out
- * to disk by the operating system.
- * Optionally, it can offer a way to reveal the contents in clear text.
- * `GtkPasswordEntry` provides only minimal API and should be used with
- * the [gtk.editable.Editable] API.
- * # CSS Nodes
- * ```
- * entry.password
- * ╰── text
- * ├── image.caps-lock-indicator
- * ┊
- * ```
- * `GtkPasswordEntry` has a single CSS node with name entry that carries
- * a .passwordstyle class. The text Css node below it has a child with
- * name image and style class .caps-lock-indicator for the Caps Lock
- * icon, and possibly other children.
- * # Accessibility
- * `GtkPasswordEntry` uses the %GTK_ACCESSIBLE_ROLE_TEXT_BOX role.
- */
+    [gtk.password_entry.PasswordEntry] is an entry that has been tailored for entering secrets.
+  
+  ![An example GtkPasswordEntry](password-entry.png)
+  
+  It does not show its contents in clear text, does not allow to copy it
+  to the clipboard, and it shows a warning when Caps Lock is engaged. If
+  the underlying platform allows it, [gtk.password_entry.PasswordEntry] will also place
+  the text in a non-pageable memory area, to avoid it being written out
+  to disk by the operating system.
+  
+  Optionally, it can offer a way to reveal the contents in clear text.
+  
+  [gtk.password_entry.PasswordEntry] provides only minimal API and should be used with
+  the [gtk.editable.Editable] API.
+  
+  # CSS Nodes
+  
+  ```
+  entry.password
+  ╰── text
+      ├── image.caps-lock-indicator
+      ┊
+  ```
+  
+  [gtk.password_entry.PasswordEntry] has a single CSS node with name entry that carries
+  a .passwordstyle class. The text Css node below it has a child with
+  name image and style class .caps-lock-indicator for the Caps Lock
+  icon, and possibly other children.
+  
+  # Accessibility
+  
+  [gtk.password_entry.PasswordEntry] uses the [gtk.types.AccessibleRole.TextBox] role.
+*/
 class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
 {
 
@@ -64,9 +73,9 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   mixin EditableT!();
 
   /**
-   * Creates a `GtkPasswordEntry`.
-   * Returns: a new `GtkPasswordEntry`
-   */
+      Creates a [gtk.password_entry.PasswordEntry].
+    Returns:     a new [gtk.password_entry.PasswordEntry]
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -75,9 +84,9 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   }
 
   /**
-   * Gets the menu model set with [gtk.password_entry.PasswordEntry.setExtraMenu].
-   * Returns: the menu model
-   */
+      Gets the menu model set with [gtk.password_entry.PasswordEntry.setExtraMenu].
+    Returns:     the menu model
+  */
   gio.menu_model.MenuModel getExtraMenu()
   {
     GMenuModel* _cretval;
@@ -87,10 +96,10 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   }
 
   /**
-   * Returns whether the entry is showing an icon to
-   * reveal the contents.
-   * Returns: %TRUE if an icon is shown
-   */
+      Returns whether the entry is showing an icon to
+    reveal the contents.
+    Returns:     true if an icon is shown
+  */
   bool getShowPeekIcon()
   {
     bool _retval;
@@ -99,43 +108,51 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   }
 
   /**
-   * Sets a menu model to add when constructing
-   * the context menu for entry.
-   * Params:
-   *   model = a `GMenuModel`
-   */
+      Sets a menu model to add when constructing
+    the context menu for entry.
+    Params:
+      model =       a [gio.menu_model.MenuModel]
+  */
   void setExtraMenu(gio.menu_model.MenuModel model = null)
   {
     gtk_password_entry_set_extra_menu(cast(GtkPasswordEntry*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets whether the entry should have a clickable icon
-   * to reveal the contents.
-   * Setting this to %FALSE also hides the text again.
-   * Params:
-   *   showPeekIcon = whether to show the peek icon
-   */
+      Sets whether the entry should have a clickable icon
+    to reveal the contents.
+    
+    Setting this to false also hides the text again.
+    Params:
+      showPeekIcon =       whether to show the peek icon
+  */
   void setShowPeekIcon(bool showPeekIcon)
   {
     gtk_password_entry_set_show_peek_icon(cast(GtkPasswordEntry*)cPtr, showPeekIcon);
   }
 
   /**
-   * Emitted when the entry is activated.
-   * The keybindings for this signal are all forms of the Enter key.
-   *   passwordEntry = the instance the signal is connected to
-   */
+      Emitted when the entry is activated.
+    
+    The keybindings for this signal are all forms of the Enter key.
+  
+    ## Parameters
+    $(LIST
+      * $(B passwordEntry) the instance the signal is connected to
+    )
+  */
   alias ActivateCallbackDlg = void delegate(gtk.password_entry.PasswordEntry passwordEntry);
+
+  /** ditto */
   alias ActivateCallbackFunc = void function(gtk.password_entry.PasswordEntry passwordEntry);
 
   /**
-   * Connect to Activate signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Activate signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {

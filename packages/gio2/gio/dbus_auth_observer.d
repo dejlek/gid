@@ -10,60 +10,70 @@ import gobject.dclosure;
 import gobject.object;
 
 /**
- * `GDBusAuthObserver` provides a mechanism for participating
- * in how a [gio.dbus_server.DBusServer] [](or a gio.dbus_connection.DBusConnection)
- * authenticates remote peers.
- * Simply instantiate a `GDBusAuthObserver` and connect to the
- * signals you are interested in. Note that new signals may be added
- * in the future.
- * ## Controlling Authentication Mechanisms
- * By default, a `GDBusServer` or server-side `GDBusConnection` will allow
- * any authentication mechanism to be used. If you only want to allow D-Bus
- * connections with the `EXTERNAL` mechanism, which makes use of credentials
- * passing and is the recommended mechanism for modern Unix platforms such
- * as Linux and the BSD family, you would use a signal handler like this:
- * ```c
- * static gboolean
- * on_allow_mechanism $(LPAREN)GDBusAuthObserver *observer,
- * const gchar       *mechanism,
- * gpointer           user_data$(RPAREN)
- * {
- * if $(LPAREN)g_strcmp0 $(LPAREN)mechanism, "EXTERNAL"$(RPAREN) \=\= 0$(RPAREN)
- * {
- * return TRUE;
- * }
- * return FALSE;
- * }
- * ```
- * ## Controlling Authorization
- * By default, a `GDBusServer` or server-side `GDBusConnection` will accept
- * connections from any successfully authenticated user $(LPAREN)but not from
- * anonymous connections using the `ANONYMOUS` mechanism$(RPAREN). If you only
- * want to allow D-Bus connections from processes owned by the same uid
- * as the server, since GLib 2.68, you should use the
- * `G_DBUS_SERVER_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER` flag. It’s equivalent
- * to the following signal handler:
- * ```c
- * static gboolean
- * on_authorize_authenticated_peer $(LPAREN)GDBusAuthObserver *observer,
- * GIOStream         *stream,
- * GCredentials      *credentials,
- * gpointer           user_data$(RPAREN)
- * {
- * gboolean authorized;
- * authorized \= FALSE;
- * if $(LPAREN)credentials !\= NULL$(RPAREN)
- * {
- * GCredentials *own_credentials;
- * own_credentials \= g_credentials_new $(LPAREN)$(RPAREN);
- * if $(LPAREN)g_credentials_is_same_user $(LPAREN)credentials, own_credentials, NULL$(RPAREN)$(RPAREN)
- * authorized \= TRUE;
- * g_object_unref $(LPAREN)own_credentials$(RPAREN);
- * }
- * return authorized;
- * }
- * ```
- */
+    [gio.dbus_auth_observer.DBusAuthObserver] provides a mechanism for participating
+  in how a [gio.dbus_server.DBusServer] (or a [gio.dbus_connection.DBusConnection])
+  authenticates remote peers.
+  
+  Simply instantiate a [gio.dbus_auth_observer.DBusAuthObserver] and connect to the
+  signals you are interested in. Note that new signals may be added
+  in the future.
+  
+  ## Controlling Authentication Mechanisms
+  
+  By default, a [gio.dbus_server.DBusServer] or server-side [gio.dbus_connection.DBusConnection] will allow
+  any authentication mechanism to be used. If you only want to allow D-Bus
+  connections with the `EXTERNAL` mechanism, which makes use of credentials
+  passing and is the recommended mechanism for modern Unix platforms such
+  as Linux and the BSD family, you would use a signal handler like this:
+  
+  ```c
+  static gboolean
+  on_allow_mechanism (GDBusAuthObserver *observer,
+                      const gchar       *mechanism,
+                      gpointer           user_data)
+  {
+    if (g_strcmp0 (mechanism, "EXTERNAL") == 0)
+      {
+        return TRUE;
+      }
+  
+    return FALSE;
+  }
+  ```
+  
+  ## Controlling Authorization
+  
+  By default, a [gio.dbus_server.DBusServer] or server-side [gio.dbus_connection.DBusConnection] will accept
+  connections from any successfully authenticated user (but not from
+  anonymous connections using the `ANONYMOUS` mechanism). If you only
+  want to allow D-Bus connections from processes owned by the same uid
+  as the server, since GLib 2.68, you should use the
+  [gio.types.DBusServerFlags.AuthenticationRequireSameUser] flag. It’s equivalent
+  to the following signal handler:
+  
+  ```c
+  static gboolean
+  on_authorize_authenticated_peer (GDBusAuthObserver *observer,
+                                   GIOStream         *stream,
+                                   GCredentials      *credentials,
+                                   gpointer           user_data)
+  {
+    gboolean authorized;
+  
+    authorized = FALSE;
+    if (credentials != NULL)
+      {
+        GCredentials *own_credentials;
+        own_credentials = g_credentials_new ();
+        if (g_credentials_is_same_user (credentials, own_credentials, NULL))
+          authorized = TRUE;
+        g_object_unref (own_credentials);
+      }
+  
+    return authorized;
+  }
+  ```
+*/
 class DBusAuthObserver : gobject.object.ObjectG
 {
 
@@ -84,9 +94,9 @@ class DBusAuthObserver : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #GDBusAuthObserver object.
-   * Returns: A #GDBusAuthObserver. Free with [gobject.object.ObjectG.unref].
-   */
+      Creates a new #GDBusAuthObserver object.
+    Returns:     A #GDBusAuthObserver. Free with [gobject.object.ObjectG.unref].
+  */
   this()
   {
     GDBusAuthObserver* _cretval;
@@ -95,11 +105,11 @@ class DBusAuthObserver : gobject.object.ObjectG
   }
 
   /**
-   * Emits the #GDBusAuthObserver::allow-mechanism signal on observer.
-   * Params:
-   *   mechanism = The name of the mechanism, e.g. `DBUS_COOKIE_SHA1`.
-   * Returns: %TRUE if mechanism can be used to authenticate the other peer, %FALSE if not.
-   */
+      Emits the #GDBusAuthObserver::allow-mechanism signal on observer.
+    Params:
+      mechanism =       The name of the mechanism, e.g. `DBUS_COOKIE_SHA1`.
+    Returns:     true if mechanism can be used to authenticate the other peer, false if not.
+  */
   bool allowMechanism(string mechanism)
   {
     bool _retval;
@@ -109,12 +119,12 @@ class DBusAuthObserver : gobject.object.ObjectG
   }
 
   /**
-   * Emits the #GDBusAuthObserver::authorize-authenticated-peer signal on observer.
-   * Params:
-   *   stream = A #GIOStream for the #GDBusConnection.
-   *   credentials = Credentials received from the peer or %NULL.
-   * Returns: %TRUE if the peer is authorized, %FALSE if not.
-   */
+      Emits the #GDBusAuthObserver::authorize-authenticated-peer signal on observer.
+    Params:
+      stream =       A #GIOStream for the #GDBusConnection.
+      credentials =       Credentials received from the peer or null.
+    Returns:     true if the peer is authorized, false if not.
+  */
   bool authorizeAuthenticatedPeer(gio.iostream.IOStream stream, gio.credentials.Credentials credentials = null)
   {
     bool _retval;
@@ -123,22 +133,27 @@ class DBusAuthObserver : gobject.object.ObjectG
   }
 
   /**
-   * Emitted to check if mechanism is allowed to be used.
-   * Params
-   *   mechanism = The name of the mechanism, e.g. `DBUS_COOKIE_SHA1`.
-   *   dBusAuthObserver = the instance the signal is connected to
-   * Returns: %TRUE if mechanism can be used to authenticate the other peer, %FALSE if not.
-   */
+      Emitted to check if mechanism is allowed to be used.
+  
+    ## Parameters
+    $(LIST
+      * $(B mechanism)       The name of the mechanism, e.g. `DBUS_COOKIE_SHA1`.
+      * $(B dBusAuthObserver) the instance the signal is connected to
+    )
+    Returns:     true if mechanism can be used to authenticate the other peer, false if not.
+  */
   alias AllowMechanismCallbackDlg = bool delegate(string mechanism, gio.dbus_auth_observer.DBusAuthObserver dBusAuthObserver);
+
+  /** ditto */
   alias AllowMechanismCallbackFunc = bool function(string mechanism, gio.dbus_auth_observer.DBusAuthObserver dBusAuthObserver);
 
   /**
-   * Connect to AllowMechanism signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to AllowMechanism signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectAllowMechanism(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AllowMechanismCallbackDlg) || is(T : AllowMechanismCallbackFunc))
   {
@@ -158,24 +173,29 @@ class DBusAuthObserver : gobject.object.ObjectG
   }
 
   /**
-   * Emitted to check if a peer that is successfully authenticated
-   * is authorized.
-   * Params
-   *   stream = A #GIOStream for the #GDBusConnection.
-   *   credentials = Credentials received from the peer or %NULL.
-   *   dBusAuthObserver = the instance the signal is connected to
-   * Returns: %TRUE if the peer is authorized, %FALSE if not.
-   */
+      Emitted to check if a peer that is successfully authenticated
+    is authorized.
+  
+    ## Parameters
+    $(LIST
+      * $(B stream)       A #GIOStream for the #GDBusConnection.
+      * $(B credentials)       Credentials received from the peer or null.
+      * $(B dBusAuthObserver) the instance the signal is connected to
+    )
+    Returns:     true if the peer is authorized, false if not.
+  */
   alias AuthorizeAuthenticatedPeerCallbackDlg = bool delegate(gio.iostream.IOStream stream, gio.credentials.Credentials credentials, gio.dbus_auth_observer.DBusAuthObserver dBusAuthObserver);
+
+  /** ditto */
   alias AuthorizeAuthenticatedPeerCallbackFunc = bool function(gio.iostream.IOStream stream, gio.credentials.Credentials credentials, gio.dbus_auth_observer.DBusAuthObserver dBusAuthObserver);
 
   /**
-   * Connect to AuthorizeAuthenticatedPeer signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to AuthorizeAuthenticatedPeer signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectAuthorizeAuthenticatedPeer(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AuthorizeAuthenticatedPeerCallbackDlg) || is(T : AuthorizeAuthenticatedPeerCallbackFunc))
   {

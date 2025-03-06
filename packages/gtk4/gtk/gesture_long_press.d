@@ -8,18 +8,22 @@ import gtk.gesture_single;
 import gtk.types;
 
 /**
- * `GtkGestureLongPress` is a `GtkGesture` for long presses.
- * This gesture is also known as “Press and Hold”.
- * When the timeout is exceeded, the gesture is triggering the
- * [gtk.gesture_long_press.GestureLongPress.pressed] signal.
- * If the touchpoint is lifted before the timeout passes, or if
- * it drifts too far of the initial press point, the
- * [gtk.gesture_long_press.GestureLongPress.cancelled] signal will be emitted.
- * How long the timeout is before the ::pressed signal gets emitted is
- * determined by the property@Gtk.Settings:gtk-long-press-time setting.
- * It can be modified by the property@Gtk.GestureLongPress:delay-factor
- * property.
- */
+    [gtk.gesture_long_press.GestureLongPress] is a [gtk.gesture.Gesture] for long presses.
+  
+  This gesture is also known as “Press and Hold”.
+  
+  When the timeout is exceeded, the gesture is triggering the
+  [gtk.gesture_long_press.GestureLongPress.pressed] signal.
+  
+  If the touchpoint is lifted before the timeout passes, or if
+  it drifts too far of the initial press point, the
+  [gtk.gesture_long_press.GestureLongPress.cancelled] signal will be emitted.
+  
+  How long the timeout is before the ::pressed signal gets emitted is
+  determined by the `property@Gtk.Settings:gtk-long-press-time` setting.
+  It can be modified by the `property@Gtk.GestureLongPress:delay-factor`
+  property.
+*/
 class GestureLongPress : gtk.gesture_single.GestureSingle
 {
 
@@ -40,9 +44,9 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Returns a newly created `GtkGesture` that recognizes long presses.
-   * Returns: a newly created `GtkGestureLongPress`.
-   */
+      Returns a newly created [gtk.gesture.Gesture] that recognizes long presses.
+    Returns:     a newly created [gtk.gesture_long_press.GestureLongPress].
+  */
   this()
   {
     GtkGesture* _cretval;
@@ -51,9 +55,9 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Returns the delay factor.
-   * Returns: the delay factor
-   */
+      Returns the delay factor.
+    Returns:     the delay factor
+  */
   double getDelayFactor()
   {
     double _retval;
@@ -62,32 +66,39 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Applies the given delay factor.
-   * The default long press time will be multiplied by this value.
-   * Valid values are in the range [0.5..2.0].
-   * Params:
-   *   delayFactor = The delay factor to apply
-   */
+      Applies the given delay factor.
+    
+    The default long press time will be multiplied by this value.
+    Valid values are in the range [0.5..2.0].
+    Params:
+      delayFactor =       The delay factor to apply
+  */
   void setDelayFactor(double delayFactor)
   {
     gtk_gesture_long_press_set_delay_factor(cast(GtkGestureLongPress*)cPtr, delayFactor);
   }
 
   /**
-   * Emitted whenever a press moved too far, or was released
-   * before [gtk.gesture_long_press.GestureLongPress.pressed] happened.
-   *   gestureLongPress = the instance the signal is connected to
-   */
+      Emitted whenever a press moved too far, or was released
+    before [gtk.gesture_long_press.GestureLongPress.pressed] happened.
+  
+    ## Parameters
+    $(LIST
+      * $(B gestureLongPress) the instance the signal is connected to
+    )
+  */
   alias CancelledCallbackDlg = void delegate(gtk.gesture_long_press.GestureLongPress gestureLongPress);
+
+  /** ditto */
   alias CancelledCallbackFunc = void function(gtk.gesture_long_press.GestureLongPress gestureLongPress);
 
   /**
-   * Connect to Cancelled signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Cancelled signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectCancelled(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CancelledCallbackDlg) || is(T : CancelledCallbackFunc))
   {
@@ -104,23 +115,28 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Emitted whenever a press goes unmoved/unreleased longer than
-   * what the GTK defaults tell.
-   * Params
-   *   x = the X coordinate where the press happened, relative to the widget allocation
-   *   y = the Y coordinate where the press happened, relative to the widget allocation
-   *   gestureLongPress = the instance the signal is connected to
-   */
+      Emitted whenever a press goes unmoved/unreleased longer than
+    what the GTK defaults tell.
+  
+    ## Parameters
+    $(LIST
+      * $(B x)       the X coordinate where the press happened, relative to the widget allocation
+      * $(B y)       the Y coordinate where the press happened, relative to the widget allocation
+      * $(B gestureLongPress) the instance the signal is connected to
+    )
+  */
   alias PressedCallbackDlg = void delegate(double x, double y, gtk.gesture_long_press.GestureLongPress gestureLongPress);
+
+  /** ditto */
   alias PressedCallbackFunc = void function(double x, double y, gtk.gesture_long_press.GestureLongPress gestureLongPress);
 
   /**
-   * Connect to Pressed signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Pressed signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectPressed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PressedCallbackDlg) || is(T : PressedCallbackFunc))
   {

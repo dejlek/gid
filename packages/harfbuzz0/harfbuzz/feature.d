@@ -7,12 +7,12 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * The #hb_feature_t is the structure that holds information about requested
- * feature application. The feature will be applied with the given value to all
- * glyphs which are in clusters between @start $(LPAREN)inclusive$(RPAREN) and @end $(LPAREN)exclusive$(RPAREN).
- * Setting start to #HB_FEATURE_GLOBAL_START and end to #HB_FEATURE_GLOBAL_END
- * specifies that the feature always applies to the entire buffer.
- */
+    The #hb_feature_t is the structure that holds information about requested
+  feature application. The feature will be applied with the given value to all
+  glyphs which are in clusters between @start (inclusive) and @end (exclusive).
+  Setting start to #HB_FEATURE_GLOBAL_START and end to #HB_FEATURE_GLOBAL_END
+  specifies that the feature always applies to the entire buffer.
+*/
 class Feature : gobject.boxed.Boxed
 {
 

@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class Time64DataType : arrow.time_data_type.TimeDataType
 {
 
@@ -26,6 +27,7 @@ class Time64DataType : arrow.time_data_type.TimeDataType
     return getType();
   }
 
+  /** */
   this(arrow.types.TimeUnit unit)
   {
     GArrowTime64DataType* _cretval;

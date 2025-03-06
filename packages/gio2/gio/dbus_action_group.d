@@ -12,11 +12,12 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GDBusActionGroup` is an implementation of the [gio.action_group.ActionGroup]
- * interface.
- * `GDBusActionGroup` can be used as a proxy for an action group
- * that is exported over D-Bus with [gio.dbus_connection.DBusConnection.exportActionGroup].
- */
+    [gio.dbus_action_group.DBusActionGroup] is an implementation of the [gio.action_group.ActionGroup]
+  interface.
+  
+  [gio.dbus_action_group.DBusActionGroup] can be used as a proxy for an action group
+  that is exported over D-Bus with [gio.dbus_connection.DBusConnection.exportActionGroup].
+*/
 class DBusActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.remote_action_group.RemoteActionGroup
 {
 
@@ -40,24 +41,26 @@ class DBusActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, gi
   mixin RemoteActionGroupT!();
 
   /**
-   * Obtains a #GDBusActionGroup for the action group which is exported at
-   * the given bus_name and object_path.
-   * The thread default main context is taken at the time of this call.
-   * All signals on the menu model $(LPAREN)and any linked models$(RPAREN) are reported
-   * with respect to this context.  All calls on the returned menu model
-   * $(LPAREN)and linked models$(RPAREN) must also originate from this same context, with
-   * the thread default main context unchanged.
-   * This call is non-blocking.  The returned action group may or may not
-   * already be filled in.  The correct thing to do is connect the signals
-   * for the action group to monitor for changes and then to call
-   * [gio.action_group.ActionGroup.listActions] to get the initial list.
-   * Params:
-   *   connection = A #GDBusConnection
-   *   busName = the bus name which exports the action
-   *     group or %NULL if connection is not a message bus connection
-   *   objectPath = the object path at which the action group is exported
-   * Returns: a #GDBusActionGroup
-   */
+      Obtains a #GDBusActionGroup for the action group which is exported at
+    the given bus_name and object_path.
+    
+    The thread default main context is taken at the time of this call.
+    All signals on the menu model (and any linked models) are reported
+    with respect to this context.  All calls on the returned menu model
+    (and linked models) must also originate from this same context, with
+    the thread default main context unchanged.
+    
+    This call is non-blocking.  The returned action group may or may not
+    already be filled in.  The correct thing to do is connect the signals
+    for the action group to monitor for changes and then to call
+    [gio.action_group.ActionGroup.listActions] to get the initial list.
+    Params:
+      connection =       A #GDBusConnection
+      busName =       the bus name which exports the action
+            group or null if connection is not a message bus connection
+      objectPath =       the object path at which the action group is exported
+    Returns:     a #GDBusActionGroup
+  */
   static gio.dbus_action_group.DBusActionGroup get(gio.dbus_connection.DBusConnection connection, string busName, string objectPath)
   {
     GDBusActionGroup* _cretval;

@@ -9,6 +9,7 @@ import glib.bytes;
 import glib.error;
 import gobject.object;
 
+/** */
 class MutableBuffer : arrow.buffer.Buffer
 {
 
@@ -28,6 +29,7 @@ class MutableBuffer : arrow.buffer.Buffer
     return getType();
   }
 
+  /** */
   this(ubyte[] data)
   {
     GArrowMutableBuffer* _cretval;
@@ -40,6 +42,7 @@ class MutableBuffer : arrow.buffer.Buffer
     this(_cretval, Yes.Take);
   }
 
+  /** */
   static arrow.mutable_buffer.MutableBuffer newBytes(glib.bytes.Bytes data)
   {
     GArrowMutableBuffer* _cretval;
@@ -50,6 +53,7 @@ class MutableBuffer : arrow.buffer.Buffer
 
   alias setData = gobject.object.ObjectG.setData;
 
+  /** */
   bool setData(long offset, ubyte[] data)
   {
     bool _retval;
@@ -65,6 +69,7 @@ class MutableBuffer : arrow.buffer.Buffer
     return _retval;
   }
 
+  /** */
   override arrow.mutable_buffer.MutableBuffer slice(long offset, long size)
   {
     GArrowMutableBuffer* _cretval;

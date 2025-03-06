@@ -7,10 +7,11 @@ import gobject.object;
 import gobject.types;
 
 /**
- * A type for objects that have an initially floating reference.
- * All the fields in the `GInitiallyUnowned` structure are private to the
- * implementation and should never be accessed directly.
- */
+    A type for objects that have an initially floating reference.
+  
+  All the fields in the [gobject.initially_unowned.InitiallyUnowned] structure are private to the
+  implementation and should never be accessed directly.
+*/
 class InitiallyUnowned : gobject.object.ObjectG
 {
 

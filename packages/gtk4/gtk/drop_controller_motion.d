@@ -10,13 +10,15 @@ import gtk.event_controller;
 import gtk.types;
 
 /**
- * `GtkDropControllerMotion` is an event controller tracking
- * the pointer during Drag-and-Drop operations.
- * It is modeled after [gtk.event_controller_motion.EventControllerMotion] so if you
- * have used that, this should feel really familiar.
- * This controller is not able to accept drops, use [gtk.drop_target.DropTarget]
- * for that purpose.
- */
+    [gtk.drop_controller_motion.DropControllerMotion] is an event controller tracking
+  the pointer during Drag-and-Drop operations.
+  
+  It is modeled after [gtk.event_controller_motion.EventControllerMotion] so if you
+  have used that, this should feel really familiar.
+  
+  This controller is not able to accept drops, use [gtk.drop_target.DropTarget]
+  for that purpose.
+*/
 class DropControllerMotion : gtk.event_controller.EventController
 {
 
@@ -37,10 +39,10 @@ class DropControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Creates a new event controller that will handle pointer motion
-   * events during drag and drop.
-   * Returns: a new `GtkDropControllerMotion`
-   */
+      Creates a new event controller that will handle pointer motion
+    events during drag and drop.
+    Returns:     a new [gtk.drop_controller_motion.DropControllerMotion]
+  */
   this()
   {
     GtkEventController* _cretval;
@@ -49,10 +51,10 @@ class DropControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Returns if a Drag-and-Drop operation is within the widget
-   * self or one of its children.
-   * Returns: %TRUE if a dragging pointer is within self or one of its children.
-   */
+      Returns if a Drag-and-Drop operation is within the widget
+    self or one of its children.
+    Returns:     true if a dragging pointer is within self or one of its children.
+  */
   bool containsPointer()
   {
     bool _retval;
@@ -61,11 +63,11 @@ class DropControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Returns the `GdkDrop` of a current Drag-and-Drop operation
-   * over the widget of self.
-   * Returns: The `GdkDrop` currently
-   *   happening within self
-   */
+      Returns the [gdk.drop.Drop] of a current Drag-and-Drop operation
+    over the widget of self.
+    Returns:     The [gdk.drop.Drop] currently
+        happening within self
+  */
   gdk.drop.Drop getDrop()
   {
     GdkDrop* _cretval;
@@ -75,11 +77,11 @@ class DropControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Returns if a Drag-and-Drop operation is within the widget
-   * self, not one of its children.
-   * Returns: %TRUE if a dragging pointer is within self but
-   *   not one of its children
-   */
+      Returns if a Drag-and-Drop operation is within the widget
+    self, not one of its children.
+    Returns:     true if a dragging pointer is within self but
+        not one of its children
+  */
   bool isPointer()
   {
     bool _retval;
@@ -88,22 +90,27 @@ class DropControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Signals that the pointer has entered the widget.
-   * Params
-   *   x = coordinates of pointer location
-   *   y = coordinates of pointer location
-   *   dropControllerMotion = the instance the signal is connected to
-   */
+      Signals that the pointer has entered the widget.
+  
+    ## Parameters
+    $(LIST
+      * $(B x)       coordinates of pointer location
+      * $(B y)       coordinates of pointer location
+      * $(B dropControllerMotion) the instance the signal is connected to
+    )
+  */
   alias EnterCallbackDlg = void delegate(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
+
+  /** ditto */
   alias EnterCallbackFunc = void function(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
 
   /**
-   * Connect to Enter signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Enter signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectEnter(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EnterCallbackDlg) || is(T : EnterCallbackFunc))
   {
@@ -122,19 +129,25 @@ class DropControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Signals that the pointer has left the widget.
-   *   dropControllerMotion = the instance the signal is connected to
-   */
+      Signals that the pointer has left the widget.
+  
+    ## Parameters
+    $(LIST
+      * $(B dropControllerMotion) the instance the signal is connected to
+    )
+  */
   alias LeaveCallbackDlg = void delegate(gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
+
+  /** ditto */
   alias LeaveCallbackFunc = void function(gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
 
   /**
-   * Connect to Leave signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Leave signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectLeave(T)(T callback, Flag!"After" after = No.After)
   if (is(T : LeaveCallbackDlg) || is(T : LeaveCallbackFunc))
   {
@@ -151,22 +164,27 @@ class DropControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Emitted when the pointer moves inside the widget.
-   * Params
-   *   x = the x coordinate
-   *   y = the y coordinate
-   *   dropControllerMotion = the instance the signal is connected to
-   */
+      Emitted when the pointer moves inside the widget.
+  
+    ## Parameters
+    $(LIST
+      * $(B x)       the x coordinate
+      * $(B y)       the y coordinate
+      * $(B dropControllerMotion) the instance the signal is connected to
+    )
+  */
   alias MotionCallbackDlg = void delegate(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
+
+  /** ditto */
   alias MotionCallbackFunc = void function(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
 
   /**
-   * Connect to Motion signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Motion signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectMotion(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MotionCallbackDlg) || is(T : MotionCallbackFunc))
   {

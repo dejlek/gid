@@ -9,8 +9,8 @@ import gtk.expression;
 import gtk.types;
 
 /**
- * A `GObject` property value in a `GtkExpression`.
- */
+    A [gobject.object.ObjectG] property value in a [gtk.expression.Expression].
+*/
 class PropertyExpression : gtk.expression.Expression
 {
 
@@ -23,21 +23,24 @@ class PropertyExpression : gtk.expression.Expression
   }
 
   /**
-   * Creates an expression that looks up a property.
-   * The object to use is found by evaluating the `expression`,
-   * or using the `this` argument when `expression` is `NULL`.
-   * If the resulting object conforms to `this_type`, its property named
-   * `property_name` will be queried. Otherwise, this expression's
-   * evaluation will fail.
-   * The given `this_type` must have a property with `property_name`.
-   * Params:
-   *   thisType = The type to expect for the this type
-   *   expression = Expression to
-   *     evaluate to get the object to query or `NULL` to
-   *     query the `this` object
-   *   propertyName = name of the property
-   * Returns: a new `GtkExpression`
-   */
+      Creates an expression that looks up a property.
+    
+    The object to use is found by evaluating the `expression`,
+    or using the `this` argument when `expression` is `NULL`.
+    
+    If the resulting object conforms to `this_type`, its property named
+    `property_name` will be queried. Otherwise, this expression's
+    evaluation will fail.
+    
+    The given `this_type` must have a property with `property_name`.
+    Params:
+      thisType =       The type to expect for the this type
+      expression =       Expression to
+          evaluate to get the object to query or `NULL` to
+          query the `this` object
+      propertyName =       name of the property
+    Returns:     a new [gtk.expression.Expression]
+  */
   this(gobject.types.GType thisType, gtk.expression.Expression expression, string propertyName)
   {
     GtkExpression* _cretval;
@@ -47,19 +50,21 @@ class PropertyExpression : gtk.expression.Expression
   }
 
   /**
-   * Creates an expression that looks up a property.
-   * The object to use is found by evaluating the `expression`,
-   * or using the `this` argument when `expression` is `NULL`.
-   * If the resulting object conforms to `this_type`, its
-   * property specified by `pspec` will be queried.
-   * Otherwise, this expression's evaluation will fail.
-   * Params:
-   *   expression = Expression to
-   *     evaluate to get the object to query or `NULL` to
-   *     query the `this` object
-   *   pspec = the `GParamSpec` for the property to query
-   * Returns: a new `GtkExpression`
-   */
+      Creates an expression that looks up a property.
+    
+    The object to use is found by evaluating the `expression`,
+    or using the `this` argument when `expression` is `NULL`.
+    
+    If the resulting object conforms to `this_type`, its
+    property specified by `pspec` will be queried.
+    Otherwise, this expression's evaluation will fail.
+    Params:
+      expression =       Expression to
+          evaluate to get the object to query or `NULL` to
+          query the `this` object
+      pspec =       the [gobject.param_spec.ParamSpec] for the property to query
+    Returns:     a new [gtk.expression.Expression]
+  */
   static gtk.property_expression.PropertyExpression newForPspec(gtk.expression.Expression expression, gobject.param_spec.ParamSpec pspec)
   {
     GtkExpression* _cretval;
@@ -69,10 +74,10 @@ class PropertyExpression : gtk.expression.Expression
   }
 
   /**
-   * Gets the expression specifying the object of
-   * a property expression.
-   * Returns: the object expression
-   */
+      Gets the expression specifying the object of
+    a property expression.
+    Returns:     the object expression
+  */
   gtk.expression.Expression getExpression()
   {
     GtkExpression* _cretval;
@@ -82,10 +87,10 @@ class PropertyExpression : gtk.expression.Expression
   }
 
   /**
-   * Gets the `GParamSpec` specifying the property of
-   * a property expression.
-   * Returns: the `GParamSpec` for the property
-   */
+      Gets the [gobject.param_spec.ParamSpec] specifying the property of
+    a property expression.
+    Returns:     the [gobject.param_spec.ParamSpec] for the property
+  */
   gobject.param_spec.ParamSpec getPspec()
   {
     GParamSpec* _cretval;

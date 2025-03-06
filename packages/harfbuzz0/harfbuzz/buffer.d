@@ -7,9 +7,9 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * The main structure holding the input text and its properties before shaping,
- * and output glyphs and their information after shaping.
- */
+    The main structure holding the input text and its properties before shaping,
+  and output glyphs and their information after shaping.
+*/
 class Buffer : gobject.boxed.Boxed
 {
 

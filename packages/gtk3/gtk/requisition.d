@@ -7,10 +7,10 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * A #GtkRequisition-struct represents the desired size of a widget. See
- * [GtkWidget’s geometry management section][geometry-management] for
- * more information.
- */
+    A #GtkRequisition-struct represents the desired size of a widget. See
+  [GtkWidget’s geometry management section][geometry-management] for
+  more information.
+*/
 class Requisition : gobject.boxed.Boxed
 {
 
@@ -56,10 +56,10 @@ class Requisition : gobject.boxed.Boxed
   }
 
   /**
-   * Allocates a new #GtkRequisition-struct and initializes its elements to zero.
-   * Returns: a new empty #GtkRequisition. The newly allocated #GtkRequisition should
-   *   be freed with [gtk.requisition.Requisition.free].
-   */
+      Allocates a new #GtkRequisition-struct and initializes its elements to zero.
+    Returns:     a new empty #GtkRequisition. The newly allocated #GtkRequisition should
+        be freed with [gtk.requisition.Requisition.free].
+  */
   this()
   {
     GtkRequisition* _cretval;
@@ -68,9 +68,9 @@ class Requisition : gobject.boxed.Boxed
   }
 
   /**
-   * Copies a #GtkRequisition.
-   * Returns: a copy of requisition
-   */
+      Copies a #GtkRequisition.
+    Returns:     a copy of requisition
+  */
   gtk.requisition.Requisition copy()
   {
     GtkRequisition* _cretval;

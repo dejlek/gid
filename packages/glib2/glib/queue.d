@@ -6,9 +6,9 @@ import glib.c.types;
 import glib.types;
 
 /**
- * Contains the public fields of a
- * [Queue][glib-Double-ended-Queues].
- */
+    Contains the public fields of a
+  [Queue][glib-Double-ended-Queues].
+*/
 class Queue
 {
   GQueue cInstance;
@@ -45,20 +45,20 @@ class Queue
   }
 
   /**
-   * Removes all the elements in queue. If queue elements contain
-   * dynamically-allocated memory, they should be freed first.
-   */
+      Removes all the elements in queue. If queue elements contain
+    dynamically-allocated memory, they should be freed first.
+  */
   void clear()
   {
     g_queue_clear(cast(GQueue*)cPtr);
   }
 
   /**
-   * Convenience method, which frees all the memory used by a #GQueue,
-   * and calls the provided free_func on each item in the #GQueue.
-   * Params:
-   *   freeFunc = the function to be called to free memory allocated
-   */
+      Convenience method, which frees all the memory used by a #GQueue,
+    and calls the provided free_func on each item in the #GQueue.
+    Params:
+      freeFunc =       the function to be called to free memory allocated
+  */
   void clearFull(glib.types.DestroyNotify freeFunc = null)
   {
     extern(C) void _freeFuncCallback(void* data)
@@ -72,13 +72,14 @@ class Queue
   }
 
   /**
-   * Calls func for each element in the queue passing user_data to the
-   * function.
-   * It is safe for func to remove the element from queue, but it must
-   * not modify any part of the queue after that element.
-   * Params:
-   *   func = the function to call for each element's data
-   */
+      Calls func for each element in the queue passing user_data to the
+    function.
+    
+    It is safe for func to remove the element from queue, but it must
+    not modify any part of the queue after that element.
+    Params:
+      func =       the function to call for each element's data
+  */
   void foreach_(glib.types.Func func)
   {
     extern(C) void _funcCallback(void* data, void* userData)
@@ -94,13 +95,14 @@ class Queue
   }
 
   /**
-   * Convenience method, which frees all the memory used by a #GQueue,
-   * and calls the specified destroy function on every element's data.
-   * free_func should not modify the queue $(LPAREN)eg, by removing the freed
-   * element from it$(RPAREN).
-   * Params:
-   *   freeFunc = the function to be called to free each element's data
-   */
+      Convenience method, which frees all the memory used by a #GQueue,
+    and calls the specified destroy function on every element's data.
+    
+    free_func should not modify the queue (eg, by removing the freed
+    element from it).
+    Params:
+      freeFunc =       the function to be called to free each element's data
+  */
   void freeFull(glib.types.DestroyNotify freeFunc)
   {
     extern(C) void _freeFuncCallback(void* data)
@@ -114,9 +116,9 @@ class Queue
   }
 
   /**
-   * Returns the number of items in queue.
-   * Returns: the number of items in queue
-   */
+      Returns the number of items in queue.
+    Returns:     the number of items in queue
+  */
   uint getLength()
   {
     uint _retval;
@@ -125,12 +127,12 @@ class Queue
   }
 
   /**
-   * Returns the position of the first element in queue which contains data.
-   * Params:
-   *   data = the data to find
-   * Returns: the position of the first element in queue which
-   *   contains data, or -1 if no element in queue contains data
-   */
+      Returns the position of the first element in queue which contains data.
+    Params:
+      data =       the data to find
+    Returns:     the position of the first element in queue which
+          contains data, or -1 if no element in queue contains data
+  */
   int index(const(void)* data = null)
   {
     int _retval;
@@ -139,26 +141,26 @@ class Queue
   }
 
   /**
-   * A statically-allocated #GQueue must be initialized with this function
-   * before it can be used. Alternatively you can initialize it with
-   * %G_QUEUE_INIT. It is not necessary to initialize queues created with
-   * [glib.queue.Queue.new_].
-   */
+      A statically-allocated #GQueue must be initialized with this function
+    before it can be used. Alternatively you can initialize it with
+    `G_QUEUE_INIT`. It is not necessary to initialize queues created with
+    [glib.queue.Queue.new_].
+  */
   void init_()
   {
     g_queue_init(cast(GQueue*)cPtr);
   }
 
   /**
-   * Inserts data into queue using func to determine the new position.
-   * Params:
-   *   data = the data to insert
-   *   func = the #GCompareDataFunc used to compare elements in the queue. It is
-   *     called with two elements of the queue and user_data. It should
-   *     return 0 if the elements are equal, a negative value if the first
-   *     element comes before the second, and a positive value if the second
-   *     element comes before the first.
-   */
+      Inserts data into queue using func to determine the new position.
+    Params:
+      data =       the data to insert
+      func =       the #GCompareDataFunc used to compare elements in the queue. It is
+            called with two elements of the queue and user_data. It should
+            return 0 if the elements are equal, a negative value if the first
+            element comes before the second, and a positive value if the second
+            element comes before the first.
+  */
   void insertSorted(void* data, glib.types.CompareDataFunc func)
   {
     extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData)
@@ -175,9 +177,9 @@ class Queue
   }
 
   /**
-   * Returns %TRUE if the queue is empty.
-   * Returns: %TRUE if the queue is empty
-   */
+      Returns true if the queue is empty.
+    Returns:     true if the queue is empty
+  */
   bool isEmpty()
   {
     bool _retval;
@@ -186,10 +188,10 @@ class Queue
   }
 
   /**
-   * Returns the first element of the queue.
-   * Returns: the data of the first element in the queue, or %NULL
-   *   if the queue is empty
-   */
+      Returns the first element of the queue.
+    Returns:     the data of the first element in the queue, or null
+          if the queue is empty
+  */
   void* peekHead()
   {
     auto _retval = g_queue_peek_head(cast(GQueue*)cPtr);
@@ -197,12 +199,12 @@ class Queue
   }
 
   /**
-   * Returns the n'th element of queue.
-   * Params:
-   *   n = the position of the element
-   * Returns: the data for the n'th element of queue,
-   *   or %NULL if n is off the end of queue
-   */
+      Returns the n'th element of queue.
+    Params:
+      n =       the position of the element
+    Returns:     the data for the n'th element of queue,
+          or null if n is off the end of queue
+  */
   void* peekNth(uint n)
   {
     auto _retval = g_queue_peek_nth(cast(GQueue*)cPtr, n);
@@ -210,10 +212,10 @@ class Queue
   }
 
   /**
-   * Returns the last element of the queue.
-   * Returns: the data of the last element in the queue, or %NULL
-   *   if the queue is empty
-   */
+      Returns the last element of the queue.
+    Returns:     the data of the last element in the queue, or null
+          if the queue is empty
+  */
   void* peekTail()
   {
     auto _retval = g_queue_peek_tail(cast(GQueue*)cPtr);
@@ -221,10 +223,10 @@ class Queue
   }
 
   /**
-   * Removes the first element of the queue and returns its data.
-   * Returns: the data of the first element in the queue, or %NULL
-   *   if the queue is empty
-   */
+      Removes the first element of the queue and returns its data.
+    Returns:     the data of the first element in the queue, or null
+          if the queue is empty
+  */
   void* popHead()
   {
     auto _retval = g_queue_pop_head(cast(GQueue*)cPtr);
@@ -232,11 +234,11 @@ class Queue
   }
 
   /**
-   * Removes the n'th element of queue and returns its data.
-   * Params:
-   *   n = the position of the element
-   * Returns: the element's data, or %NULL if n is off the end of queue
-   */
+      Removes the n'th element of queue and returns its data.
+    Params:
+      n =       the position of the element
+    Returns:     the element's data, or null if n is off the end of queue
+  */
   void* popNth(uint n)
   {
     auto _retval = g_queue_pop_nth(cast(GQueue*)cPtr, n);
@@ -244,10 +246,10 @@ class Queue
   }
 
   /**
-   * Removes the last element of the queue and returns its data.
-   * Returns: the data of the last element in the queue, or %NULL
-   *   if the queue is empty
-   */
+      Removes the last element of the queue and returns its data.
+    Returns:     the data of the last element in the queue, or null
+          if the queue is empty
+  */
   void* popTail()
   {
     auto _retval = g_queue_pop_tail(cast(GQueue*)cPtr);
@@ -255,44 +257,44 @@ class Queue
   }
 
   /**
-   * Adds a new element at the head of the queue.
-   * Params:
-   *   data = the data for the new element.
-   */
+      Adds a new element at the head of the queue.
+    Params:
+      data =       the data for the new element.
+  */
   void pushHead(void* data = null)
   {
     g_queue_push_head(cast(GQueue*)cPtr, data);
   }
 
   /**
-   * Inserts a new element into queue at the given position.
-   * Params:
-   *   data = the data for the new element
-   *   n = the position to insert the new element. If n is negative or
-   *     larger than the number of elements in the queue, the element is
-   *     added to the end of the queue.
-   */
+      Inserts a new element into queue at the given position.
+    Params:
+      data =       the data for the new element
+      n =       the position to insert the new element. If n is negative or
+            larger than the number of elements in the queue, the element is
+            added to the end of the queue.
+  */
   void pushNth(void* data, int n)
   {
     g_queue_push_nth(cast(GQueue*)cPtr, data, n);
   }
 
   /**
-   * Adds a new element at the tail of the queue.
-   * Params:
-   *   data = the data for the new element
-   */
+      Adds a new element at the tail of the queue.
+    Params:
+      data =       the data for the new element
+  */
   void pushTail(void* data = null)
   {
     g_queue_push_tail(cast(GQueue*)cPtr, data);
   }
 
   /**
-   * Removes the first element in queue that contains data.
-   * Params:
-   *   data = the data to remove
-   * Returns: %TRUE if data was found and removed from queue
-   */
+      Removes the first element in queue that contains data.
+    Params:
+      data =       the data to remove
+    Returns:     true if data was found and removed from queue
+  */
   bool remove(const(void)* data = null)
   {
     bool _retval;
@@ -301,11 +303,11 @@ class Queue
   }
 
   /**
-   * Remove all elements whose data equals data from queue.
-   * Params:
-   *   data = the data to remove
-   * Returns: the number of elements removed from queue
-   */
+      Remove all elements whose data equals data from queue.
+    Params:
+      data =       the data to remove
+    Returns:     the number of elements removed from queue
+  */
   uint removeAll(const(void)* data = null)
   {
     uint _retval;
@@ -314,21 +316,21 @@ class Queue
   }
 
   /**
-   * Reverses the order of the items in queue.
-   */
+      Reverses the order of the items in queue.
+  */
   void reverse()
   {
     g_queue_reverse(cast(GQueue*)cPtr);
   }
 
   /**
-   * Sorts queue using compare_func.
-   * Params:
-   *   compareFunc = the #GCompareDataFunc used to sort queue. This function
-   *     is passed two elements of the queue and should return 0 if they are
-   *     equal, a negative value if the first comes before the second, and
-   *     a positive value if the second comes before the first.
-   */
+      Sorts queue using compare_func.
+    Params:
+      compareFunc =       the #GCompareDataFunc used to sort queue. This function
+            is passed two elements of the queue and should return 0 if they are
+            equal, a negative value if the first comes before the second, and
+            a positive value if the second comes before the first.
+  */
   void sort(glib.types.CompareDataFunc compareFunc)
   {
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)

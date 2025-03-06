@@ -5,6 +5,7 @@ import vte.c.functions;
 import vte.c.types;
 import vte.types;
 
+/** */
 class CharAttributes
 {
   VteCharAttributes cInstance;

@@ -6,6 +6,7 @@ import gdkpixbuf.pixbuf_animation_iter;
 import gdkpixbuf.types;
 import gid.gid;
 
+/** */
 class PixbufSimpleAnimIter : gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter
 {
 

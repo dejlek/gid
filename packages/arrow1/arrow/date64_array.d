@@ -7,6 +7,7 @@ import arrow.numeric_array;
 import arrow.types;
 import gid.gid;
 
+/** */
 class Date64Array : arrow.numeric_array.NumericArray
 {
 
@@ -26,6 +27,7 @@ class Date64Array : arrow.numeric_array.NumericArray
     return getType();
   }
 
+  /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowDate64Array* _cretval;
@@ -33,6 +35,7 @@ class Date64Array : arrow.numeric_array.NumericArray
     this(_cretval, Yes.Take);
   }
 
+  /** */
   long getValue(long i)
   {
     long _retval;
@@ -40,6 +43,7 @@ class Date64Array : arrow.numeric_array.NumericArray
     return _retval;
   }
 
+  /** */
   long[] getValues()
   {
     const(long)* _cretval;

@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class EqualOptions : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class EqualOptions : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowEqualOptions* _cretval;
@@ -32,6 +34,7 @@ class EqualOptions : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool isApprox()
   {
     bool _retval;

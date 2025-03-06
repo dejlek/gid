@@ -11,9 +11,9 @@ import glib.error;
 import gobject.object;
 
 /**
- * `GDtlsClientConnection` is the client-side subclass of
- * [gio.dtls_connection.DtlsConnection], representing a client-side DTLS connection.
- */
+    [gio.dtls_client_connection.DtlsClientConnection] is the client-side subclass of
+  [gio.dtls_connection.DtlsConnection], representing a client-side DTLS connection.
+*/
 interface DtlsClientConnection
 {
 
@@ -24,14 +24,14 @@ interface DtlsClientConnection
   }
 
   /**
-   * Creates a new #GDtlsClientConnection wrapping base_socket which is
-   * assumed to communicate with the server identified by server_identity.
-   * Params:
-   *   baseSocket = the #GDatagramBased to wrap
-   *   serverIdentity = the expected identity of the server
-   * Returns: the new
-   *   #GDtlsClientConnection, or %NULL on error
-   */
+      Creates a new #GDtlsClientConnection wrapping base_socket which is
+    assumed to communicate with the server identified by server_identity.
+    Params:
+      baseSocket =       the #GDatagramBased to wrap
+      serverIdentity =       the expected identity of the server
+    Returns:     the new
+        #GDtlsClientConnection, or null on error
+  */
   static gio.dtls_client_connection.DtlsClientConnection new_(gio.datagram_based.DatagramBased baseSocket, gio.socket_connectable.SocketConnectable serverIdentity = null)
   {
     GDatagramBased* _cretval;
@@ -44,45 +44,47 @@ interface DtlsClientConnection
   }
 
   /**
-   * Gets conn's expected server identity
-   * Returns: a #GSocketConnectable describing the
-   *   expected server identity, or %NULL if the expected identity is not
-   *   known.
-   */
+      Gets conn's expected server identity
+    Returns:     a #GSocketConnectable describing the
+      expected server identity, or null if the expected identity is not
+      known.
+  */
   gio.socket_connectable.SocketConnectable getServerIdentity();
 
   /**
-   * Gets conn's validation flags
-   * This function does not work as originally designed and is impossible
-   * to use correctly. See #GDtlsClientConnection:validation-flags for more
-   * information.
-   * Returns: the validation flags
-
-   * Deprecated: Do not attempt to ignore validation errors.
-   */
+      Gets conn's validation flags
+    
+    This function does not work as originally designed and is impossible
+    to use correctly. See #GDtlsClientConnection:validation-flags for more
+    information.
+    Returns:     the validation flags
+  
+    Deprecated:     Do not attempt to ignore validation errors.
+  */
   gio.types.TlsCertificateFlags getValidationFlags();
 
   /**
-   * Sets conn's expected server identity, which is used both to tell
-   * servers on virtual hosts which certificate to present, and also
-   * to let conn know what name to look for in the certificate when
-   * performing %G_TLS_CERTIFICATE_BAD_IDENTITY validation, if enabled.
-   * Params:
-   *   identity = a #GSocketConnectable describing the expected server identity
-   */
+      Sets conn's expected server identity, which is used both to tell
+    servers on virtual hosts which certificate to present, and also
+    to let conn know what name to look for in the certificate when
+    performing [gio.types.TlsCertificateFlags.BadIdentity] validation, if enabled.
+    Params:
+      identity =       a #GSocketConnectable describing the expected server identity
+  */
   void setServerIdentity(gio.socket_connectable.SocketConnectable identity);
 
   /**
-   * Sets conn's validation flags, to override the default set of
-   * checks performed when validating a server certificate. By default,
-   * %G_TLS_CERTIFICATE_VALIDATE_ALL is used.
-   * This function does not work as originally designed and is impossible
-   * to use correctly. See #GDtlsClientConnection:validation-flags for more
-   * information.
-   * Params:
-   *   flags = the #GTlsCertificateFlags to use
-
-   * Deprecated: Do not attempt to ignore validation errors.
-   */
+      Sets conn's validation flags, to override the default set of
+    checks performed when validating a server certificate. By default,
+    [gio.types.TlsCertificateFlags.ValidateAll] is used.
+    
+    This function does not work as originally designed and is impossible
+    to use correctly. See #GDtlsClientConnection:validation-flags for more
+    information.
+    Params:
+      flags =       the #GTlsCertificateFlags to use
+  
+    Deprecated:     Do not attempt to ignore validation errors.
+  */
   void setValidationFlags(gio.types.TlsCertificateFlags flags);
 }

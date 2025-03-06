@@ -15,17 +15,23 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkSeparator` is a horizontal or vertical separator widget.
- * ![An example GtkSeparator](separator.png)
- * A `GtkSeparator` can be used to group the widgets within a window.
- * It displays a line with a shadow to make it appear sunken into the
- * interface.
- * # CSS nodes
- * `GtkSeparator` has a single CSS node with name separator. The node
- * gets one of the .horizontal or .vertical style classes.
- * # Accessibility
- * `GtkSeparator` uses the %GTK_ACCESSIBLE_ROLE_SEPARATOR role.
- */
+    [gtk.separator.Separator] is a horizontal or vertical separator widget.
+  
+  ![An example GtkSeparator](separator.png)
+  
+  A [gtk.separator.Separator] can be used to group the widgets within a window.
+  It displays a line with a shadow to make it appear sunken into the
+  interface.
+  
+  # CSS nodes
+  
+  [gtk.separator.Separator] has a single CSS node with name separator. The node
+  gets one of the .horizontal or .vertical style classes.
+  
+  # Accessibility
+  
+  [gtk.separator.Separator] uses the [gtk.types.AccessibleRole.Separator] role.
+*/
 class Separator : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
@@ -48,11 +54,11 @@ class Separator : gtk.widget.Widget, gtk.orientable.Orientable
   mixin OrientableT!();
 
   /**
-   * Creates a new `GtkSeparator` with the given orientation.
-   * Params:
-   *   orientation = the separator’s orientation.
-   * Returns: a new `GtkSeparator`.
-   */
+      Creates a new [gtk.separator.Separator] with the given orientation.
+    Params:
+      orientation =       the separator’s orientation.
+    Returns:     a new [gtk.separator.Separator].
+  */
   this(gtk.types.Orientation orientation)
   {
     GtkWidget* _cretval;

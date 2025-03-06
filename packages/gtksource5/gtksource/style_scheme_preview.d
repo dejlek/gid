@@ -18,11 +18,13 @@ import gtksource.style_scheme;
 import gtksource.types;
 
 /**
- * A preview widget for class@StyleScheme.
- * This widget provides a convenient [gtk.widget.Widget] to preview a class@StyleScheme.
- * The property@StyleSchemePreview:selected property can be used to manage
- * the selection state of a single preview widget.
- */
+    A preview widget for `class@StyleScheme`.
+  
+  This widget provides a convenient [gtk.widget.Widget] to preview a `class@StyleScheme`.
+  
+  The `property@StyleSchemePreview:selected` property can be used to manage
+  the selection state of a single preview widget.
+*/
 class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
@@ -45,12 +47,12 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
   mixin ActionableT!();
 
   /**
-   * Creates a new #GtkSourceStyleSchemePreview to preview the style scheme
-   * provided in scheme.
-   * Params:
-   *   scheme = a #GtkSourceStyleScheme
-   * Returns: a #GtkWidget
-   */
+      Creates a new #GtkSourceStyleSchemePreview to preview the style scheme
+    provided in scheme.
+    Params:
+      scheme =       a #GtkSourceStyleScheme
+    Returns:     a #GtkWidget
+  */
   this(gtksource.style_scheme.StyleScheme scheme)
   {
     GtkWidget* _cretval;
@@ -59,9 +61,9 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-   * Gets the #GtkSourceStyleScheme previewed by the widget.
-   * Returns: a #GtkSourceStyleScheme
-   */
+      Gets the #GtkSourceStyleScheme previewed by the widget.
+    Returns:     a #GtkSourceStyleScheme
+  */
   gtksource.style_scheme.StyleScheme getScheme()
   {
     GtkSourceStyleScheme* _cretval;
@@ -70,6 +72,7 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
     return _retval;
   }
 
+  /** */
   bool getSelected()
   {
     bool _retval;
@@ -77,21 +80,25 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
     return _retval;
   }
 
+  /** */
   void setSelected(bool selected)
   {
     gtk_source_style_scheme_preview_set_selected(cast(GtkSourceStyleSchemePreview*)cPtr, selected);
   }
 
+  /** */
   alias ActivateCallbackDlg = void delegate(gtksource.style_scheme_preview.StyleSchemePreview styleSchemePreview);
+
+  /** ditto */
   alias ActivateCallbackFunc = void function(gtksource.style_scheme_preview.StyleSchemePreview styleSchemePreview);
 
   /**
-   * Connect to Activate signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Activate signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {

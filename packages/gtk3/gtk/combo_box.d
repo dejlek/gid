@@ -22,53 +22,61 @@ import gtk.tree_model;
 import gtk.types;
 
 /**
- * A GtkComboBox is a widget that allows the user to choose from a list of
- * valid choices. The GtkComboBox displays the selected choice. When
- * activated, the GtkComboBox displays a popup which allows the user to
- * make a new choice. The style in which the selected value is displayed,
- * and the style of the popup is determined by the current theme. It may
- * be similar to a Windows-style combo box.
- * The GtkComboBox uses the model-view pattern; the list of valid choices
- * is specified in the form of a tree model, and the display of the choices
- * can be adapted to the data in the model by using cell renderers, as you
- * would in a tree view. This is possible since GtkComboBox implements the
- * #GtkCellLayout interface. The tree model holding the valid choices is
- * not restricted to a flat list, it can be a real tree, and the popup will
- * reflect the tree structure.
- * To allow the user to enter values not in the model, the “has-entry”
- * property allows the GtkComboBox to contain a #GtkEntry. This entry
- * can be accessed by calling [gtk.bin.Bin.getChild] on the combo box.
- * For a simple list of textual choices, the model-view API of GtkComboBox
- * can be a bit overwhelming. In this case, #GtkComboBoxText offers a
- * simple alternative. Both GtkComboBox and #GtkComboBoxText can contain
- * an entry.
- * # CSS nodes
- * |[<!-- language\="plain" -->
- * combobox
- * ├── box.linked
- * │   ╰── button.combo
- * │       ╰── box
- * │           ├── cellview
- * │           ╰── arrow
- * ╰── window.popup
- * ]|
- * A normal combobox contains a box with the .linked class, a button
- * with the .combo class and inside those buttons, there are a cellview and
- * an arrow.
- * |[<!-- language\="plain" -->
- * combobox
- * ├── box.linked
- * │   ├── entry.combo
- * │   ╰── button.combo
- * │       ╰── box
- * │           ╰── arrow
- * ╰── window.popup
- * ]|
- * A GtkComboBox with an entry has a single CSS node with name combobox. It
- * contains a box with the .linked class. That box contains an entry and a
- * button, both with the .combo class added.
- * The button also contains another node with name arrow.
- */
+    A GtkComboBox is a widget that allows the user to choose from a list of
+  valid choices. The GtkComboBox displays the selected choice. When
+  activated, the GtkComboBox displays a popup which allows the user to
+  make a new choice. The style in which the selected value is displayed,
+  and the style of the popup is determined by the current theme. It may
+  be similar to a Windows-style combo box.
+  
+  The GtkComboBox uses the model-view pattern; the list of valid choices
+  is specified in the form of a tree model, and the display of the choices
+  can be adapted to the data in the model by using cell renderers, as you
+  would in a tree view. This is possible since GtkComboBox implements the
+  #GtkCellLayout interface. The tree model holding the valid choices is
+  not restricted to a flat list, it can be a real tree, and the popup will
+  reflect the tree structure.
+  
+  To allow the user to enter values not in the model, the “has-entry”
+  property allows the GtkComboBox to contain a #GtkEntry. This entry
+  can be accessed by calling [gtk.bin.Bin.getChild] on the combo box.
+  
+  For a simple list of textual choices, the model-view API of GtkComboBox
+  can be a bit overwhelming. In this case, #GtkComboBoxText offers a
+  simple alternative. Both GtkComboBox and #GtkComboBoxText can contain
+  an entry.
+  
+  # CSS nodes
+  
+  ```plain
+  combobox
+  ├── box.linked
+  │   ╰── button.combo
+  │       ╰── box
+  │           ├── cellview
+  │           ╰── arrow
+  ╰── window.popup
+  ```
+  
+  A normal combobox contains a box with the .linked class, a button
+  with the .combo class and inside those buttons, there are a cellview and
+  an arrow.
+  
+  ```plain
+  combobox
+  ├── box.linked
+  │   ├── entry.combo
+  │   ╰── button.combo
+  │       ╰── box
+  │           ╰── arrow
+  ╰── window.popup
+  ```
+  
+  A GtkComboBox with an entry has a single CSS node with name combobox. It
+  contains a box with the .linked class. That box contains an entry and a
+  button, both with the .combo class added.
+  The button also contains another node with name arrow.
+*/
 class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.CellLayout
 {
 
@@ -92,9 +100,9 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   mixin CellLayoutT!();
 
   /**
-   * Creates a new empty #GtkComboBox.
-   * Returns: A new #GtkComboBox.
-   */
+      Creates a new empty #GtkComboBox.
+    Returns:     A new #GtkComboBox.
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -103,11 +111,11 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Creates a new empty #GtkComboBox using area to layout cells.
-   * Params:
-   *   area = the #GtkCellArea to use to layout cell renderers
-   * Returns: A new #GtkComboBox.
-   */
+      Creates a new empty #GtkComboBox using area to layout cells.
+    Params:
+      area =       the #GtkCellArea to use to layout cell renderers
+    Returns:     A new #GtkComboBox.
+  */
   static gtk.combo_box.ComboBox newWithArea(gtk.cell_area.CellArea area)
   {
     GtkWidget* _cretval;
@@ -117,12 +125,13 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Creates a new empty #GtkComboBox with an entry.
-   * The new combo box will use area to layout cells.
-   * Params:
-   *   area = the #GtkCellArea to use to layout cell renderers
-   * Returns: A new #GtkComboBox.
-   */
+      Creates a new empty #GtkComboBox with an entry.
+    
+    The new combo box will use area to layout cells.
+    Params:
+      area =       the #GtkCellArea to use to layout cell renderers
+    Returns:     A new #GtkComboBox.
+  */
   static gtk.combo_box.ComboBox newWithAreaAndEntry(gtk.cell_area.CellArea area)
   {
     GtkWidget* _cretval;
@@ -132,9 +141,9 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Creates a new empty #GtkComboBox with an entry.
-   * Returns: A new #GtkComboBox.
-   */
+      Creates a new empty #GtkComboBox with an entry.
+    Returns:     A new #GtkComboBox.
+  */
   static gtk.combo_box.ComboBox newWithEntry()
   {
     GtkWidget* _cretval;
@@ -144,11 +153,11 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Creates a new #GtkComboBox with the model initialized to model.
-   * Params:
-   *   model = A #GtkTreeModel.
-   * Returns: A new #GtkComboBox.
-   */
+      Creates a new #GtkComboBox with the model initialized to model.
+    Params:
+      model =       A #GtkTreeModel.
+    Returns:     A new #GtkComboBox.
+  */
   static gtk.combo_box.ComboBox newWithModel(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
@@ -158,12 +167,12 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Creates a new empty #GtkComboBox with an entry
-   * and with the model initialized to model.
-   * Params:
-   *   model = A #GtkTreeModel
-   * Returns: A new #GtkComboBox
-   */
+      Creates a new empty #GtkComboBox with an entry
+    and with the model initialized to model.
+    Params:
+      model =       A #GtkTreeModel
+    Returns:     A new #GtkComboBox
+  */
   static gtk.combo_box.ComboBox newWithModelAndEntry(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
@@ -173,14 +182,14 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Returns the index of the currently active item, or -1 if there’s no
-   * active item. If the model is a non-flat treemodel, and the active item
-   * is not an immediate child of the root of the tree, this function returns
-   * `gtk_tree_path_get_indices $(LPAREN)path$(RPAREN)[0]`, where
-   * `path` is the #GtkTreePath of the active item.
-   * Returns: An integer which is the index of the currently active item,
-   *   or -1 if there’s no active item.
-   */
+      Returns the index of the currently active item, or -1 if there’s no
+    active item. If the model is a non-flat treemodel, and the active item
+    is not an immediate child of the root of the tree, this function returns
+    `gtk_tree_path_get_indices (path)[0]`, where
+    `path` is the #GtkTreePath of the active item.
+    Returns:     An integer which is the index of the currently active item,
+          or -1 if there’s no active item.
+  */
   int getActive()
   {
     int _retval;
@@ -189,17 +198,19 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Returns the ID of the active row of combo_box.  This value is taken
-   * from the active row and the column specified by the #GtkComboBox:id-column
-   * property of combo_box $(LPAREN)see [gtk.combo_box.ComboBox.setIdColumn]$(RPAREN).
-   * The returned value is an interned string which means that you can
-   * compare the pointer by value to other interned strings and that you
-   * must not free it.
-   * If the #GtkComboBox:id-column property of combo_box is not set, or if
-   * no row is active, or if the active row has a %NULL ID value, then %NULL
-   * is returned.
-   * Returns: the ID of the active row, or %NULL
-   */
+      Returns the ID of the active row of combo_box.  This value is taken
+    from the active row and the column specified by the #GtkComboBox:id-column
+    property of combo_box (see [gtk.combo_box.ComboBox.setIdColumn]).
+    
+    The returned value is an interned string which means that you can
+    compare the pointer by value to other interned strings and that you
+    must not free it.
+    
+    If the #GtkComboBox:id-column property of combo_box is not set, or if
+    no row is active, or if the active row has a null ID value, then null
+    is returned.
+    Returns:     the ID of the active row, or null
+  */
   string getActiveId()
   {
     const(char)* _cretval;
@@ -209,12 +220,12 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Sets iter to point to the currently active item, if any item is active.
-   * Otherwise, iter is left unchanged.
-   * Params:
-   *   iter = A #GtkTreeIter
-   * Returns: %TRUE if iter was set, %FALSE otherwise
-   */
+      Sets iter to point to the currently active item, if any item is active.
+    Otherwise, iter is left unchanged.
+    Params:
+      iter =       A #GtkTreeIter
+    Returns:     true if iter was set, false otherwise
+  */
   bool getActiveIter(out gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
@@ -225,9 +236,9 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Gets the current value of the :add-tearoffs property.
-   * Returns: the current value of the :add-tearoffs property.
-   */
+      Gets the current value of the :add-tearoffs property.
+    Returns:     the current value of the :add-tearoffs property.
+  */
   bool getAddTearoffs()
   {
     bool _retval;
@@ -236,14 +247,14 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Returns whether the combo box sets the dropdown button
-   * sensitive or not when there are no items in the model.
-   * Returns: %GTK_SENSITIVITY_ON if the dropdown button
-   *   is sensitive when the model is empty, %GTK_SENSITIVITY_OFF
-   *   if the button is always insensitive or
-   *   %GTK_SENSITIVITY_AUTO if it is only sensitive as long as
-   *   the model has one item to be selected.
-   */
+      Returns whether the combo box sets the dropdown button
+    sensitive or not when there are no items in the model.
+    Returns:     [gtk.types.SensitivityType.On] if the dropdown button
+         is sensitive when the model is empty, [gtk.types.SensitivityType.Off]
+         if the button is always insensitive or
+         [gtk.types.SensitivityType.Auto] if it is only sensitive as long as
+         the model has one item to be selected.
+  */
   gtk.types.SensitivityType getButtonSensitivity()
   {
     GtkSensitivityType _cretval;
@@ -253,9 +264,9 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Returns the column with column span information for combo_box.
-   * Returns: the column span column.
-   */
+      Returns the column with column span information for combo_box.
+    Returns:     the column span column.
+  */
   int getColumnSpanColumn()
   {
     int _retval;
@@ -264,10 +275,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Returns the column which combo_box is using to get the strings
-   * from to display in the internal entry.
-   * Returns: A column in the data source model of combo_box.
-   */
+      Returns the column which combo_box is using to get the strings
+    from to display in the internal entry.
+    Returns:     A column in the data source model of combo_box.
+  */
   int getEntryTextColumn()
   {
     int _retval;
@@ -276,13 +287,13 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Returns whether the combo box grabs focus when it is clicked
-   * with the mouse. See [gtk.combo_box.ComboBox.setFocusOnClick].
-   * Returns: %TRUE if the combo box grabs focus when it is
-   *   clicked with the mouse.
-
-   * Deprecated: Use [gtk.widget.Widget.getFocusOnClick] instead
-   */
+      Returns whether the combo box grabs focus when it is clicked
+    with the mouse. See [gtk.combo_box.ComboBox.setFocusOnClick].
+    Returns:     true if the combo box grabs focus when it is
+          clicked with the mouse.
+  
+    Deprecated:     Use [gtk.widget.Widget.getFocusOnClick] instead
+  */
   override bool getFocusOnClick()
   {
     bool _retval;
@@ -291,9 +302,9 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Returns whether the combo box has an entry.
-   * Returns: whether there is an entry in combo_box.
-   */
+      Returns whether the combo box has an entry.
+    Returns:     whether there is an entry in combo_box.
+  */
   bool getHasEntry()
   {
     bool _retval;
@@ -302,10 +313,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Returns the column which combo_box is using to get string IDs
-   * for values from.
-   * Returns: A column in the data source model of combo_box.
-   */
+      Returns the column which combo_box is using to get string IDs
+    for values from.
+    Returns:     A column in the data source model of combo_box.
+  */
   int getIdColumn()
   {
     int _retval;
@@ -314,10 +325,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Returns the #GtkTreeModel which is acting as data source for combo_box.
-   * Returns: A #GtkTreeModel which was passed
-   *   during construction.
-   */
+      Returns the #GtkTreeModel which is acting as data source for combo_box.
+    Returns:     A #GtkTreeModel which was passed
+          during construction.
+  */
   gtk.tree_model.TreeModel getModel()
   {
     GtkTreeModel* _cretval;
@@ -327,12 +338,13 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Gets the accessible object corresponding to the combo box’s popup.
-   * This function is mostly intended for use by accessibility technologies;
-   * applications should have little use for it.
-   * Returns: the accessible object corresponding
-   *   to the combo box’s popup.
-   */
+      Gets the accessible object corresponding to the combo box’s popup.
+    
+    This function is mostly intended for use by accessibility technologies;
+    applications should have little use for it.
+    Returns:     the accessible object corresponding
+          to the combo box’s popup.
+  */
   atk.object.ObjectAtk getPopupAccessible()
   {
     AtkObject* _cretval;
@@ -342,10 +354,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Gets whether the popup uses a fixed width matching
-   * the allocated width of the combo box.
-   * Returns: %TRUE if the popup uses a fixed width
-   */
+      Gets whether the popup uses a fixed width matching
+    the allocated width of the combo box.
+    Returns:     true if the popup uses a fixed width
+  */
   bool getPopupFixedWidth()
   {
     bool _retval;
@@ -354,9 +366,9 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Returns the column with row span information for combo_box.
-   * Returns: the row span column.
-   */
+      Returns the column with row span information for combo_box.
+    Returns:     the row span column.
+  */
   int getRowSpanColumn()
   {
     int _retval;
@@ -365,11 +377,11 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Gets the current title of the menu in tearoff mode. See
-   * [gtk.combo_box.ComboBox.setAddTearoffs].
-   * Returns: the menu’s title in tearoff mode. This is an internal copy of the
-   *   string which must not be freed.
-   */
+      Gets the current title of the menu in tearoff mode. See
+    [gtk.combo_box.ComboBox.setAddTearoffs].
+    Returns:     the menu’s title in tearoff mode. This is an internal copy of the
+      string which must not be freed.
+  */
   string getTitle()
   {
     const(char)* _cretval;
@@ -379,11 +391,11 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Returns the wrap width which is used to determine the number of columns
-   * for the popup menu. If the wrap width is larger than 1, the combo box
-   * is in table mode.
-   * Returns: the wrap width.
-   */
+      Returns the wrap width which is used to determine the number of columns
+    for the popup menu. If the wrap width is larger than 1, the combo box
+    is in table mode.
+    Returns:     the wrap width.
+  */
   int getWrapWidth()
   {
     int _retval;
@@ -392,61 +404,65 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Hides the menu or dropdown list of combo_box.
-   * This function is mostly intended for use by accessibility technologies;
-   * applications should have little use for it.
-   */
+      Hides the menu or dropdown list of combo_box.
+    
+    This function is mostly intended for use by accessibility technologies;
+    applications should have little use for it.
+  */
   void popdown()
   {
     gtk_combo_box_popdown(cast(GtkComboBox*)cPtr);
   }
 
   /**
-   * Pops up the menu or dropdown list of combo_box.
-   * This function is mostly intended for use by accessibility technologies;
-   * applications should have little use for it.
-   * Before calling this, combo_box must be mapped, or nothing will happen.
-   */
+      Pops up the menu or dropdown list of combo_box.
+    
+    This function is mostly intended for use by accessibility technologies;
+    applications should have little use for it.
+    
+    Before calling this, combo_box must be mapped, or nothing will happen.
+  */
   void popup()
   {
     gtk_combo_box_popup(cast(GtkComboBox*)cPtr);
   }
 
   /**
-   * Pops up the menu or dropdown list of combo_box, the popup window
-   * will be grabbed so only device and its associated pointer/keyboard
-   * are the only #GdkDevices able to send events to it.
-   * Params:
-   *   device = a #GdkDevice
-   */
+      Pops up the menu or dropdown list of combo_box, the popup window
+    will be grabbed so only device and its associated pointer/keyboard
+    are the only #GdkDevices able to send events to it.
+    Params:
+      device =       a #GdkDevice
+  */
   void popupForDevice(gdk.device.Device device)
   {
     gtk_combo_box_popup_for_device(cast(GtkComboBox*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the active item of combo_box to be the item at index.
-   * Params:
-   *   index = An index in the model passed during construction, or -1 to have
-   *     no active item
-   */
+      Sets the active item of combo_box to be the item at index.
+    Params:
+      index =       An index in the model passed during construction, or -1 to have
+        no active item
+  */
   void setActive(int index)
   {
     gtk_combo_box_set_active(cast(GtkComboBox*)cPtr, index);
   }
 
   /**
-   * Changes the active row of combo_box to the one that has an ID equal to
-   * active_id, or unsets the active row if active_id is %NULL.  Rows having
-   * a %NULL ID string cannot be made active by this function.
-   * If the #GtkComboBox:id-column property of combo_box is unset or if no
-   * row has the given ID then the function does nothing and returns %FALSE.
-   * Params:
-   *   activeId = the ID of the row to select, or %NULL
-   * Returns: %TRUE if a row with a matching ID was found.  If a %NULL
-   *   active_id was given to unset the active row, the function
-   *   always returns %TRUE.
-   */
+      Changes the active row of combo_box to the one that has an ID equal to
+    active_id, or unsets the active row if active_id is null.  Rows having
+    a null ID string cannot be made active by this function.
+    
+    If the #GtkComboBox:id-column property of combo_box is unset or if no
+    row has the given ID then the function does nothing and returns false.
+    Params:
+      activeId =       the ID of the row to select, or null
+    Returns:     true if a row with a matching ID was found.  If a null
+               active_id was given to unset the active row, the function
+               always returns true.
+  */
   bool setActiveId(string activeId = null)
   {
     bool _retval;
@@ -456,126 +472,128 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Sets the current active item to be the one referenced by iter, or
-   * unsets the active item if iter is %NULL.
-   * Params:
-   *   iter = The #GtkTreeIter, or %NULL
-   */
+      Sets the current active item to be the one referenced by iter, or
+    unsets the active item if iter is null.
+    Params:
+      iter =       The #GtkTreeIter, or null
+  */
   void setActiveIter(gtk.tree_iter.TreeIter iter = null)
   {
     gtk_combo_box_set_active_iter(cast(GtkComboBox*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets whether the popup menu should have a tearoff
-   * menu item.
-   * Params:
-   *   addTearoffs = %TRUE to add tearoff menu items
-   */
+      Sets whether the popup menu should have a tearoff
+    menu item.
+    Params:
+      addTearoffs =       true to add tearoff menu items
+  */
   void setAddTearoffs(bool addTearoffs)
   {
     gtk_combo_box_set_add_tearoffs(cast(GtkComboBox*)cPtr, addTearoffs);
   }
 
   /**
-   * Sets whether the dropdown button of the combo box should be
-   * always sensitive $(LPAREN)%GTK_SENSITIVITY_ON$(RPAREN), never sensitive $(LPAREN)%GTK_SENSITIVITY_OFF$(RPAREN)
-   * or only if there is at least one item to display $(LPAREN)%GTK_SENSITIVITY_AUTO$(RPAREN).
-   * Params:
-   *   sensitivity = specify the sensitivity of the dropdown button
-   */
+      Sets whether the dropdown button of the combo box should be
+    always sensitive ([gtk.types.SensitivityType.On]), never sensitive ([gtk.types.SensitivityType.Off])
+    or only if there is at least one item to display ([gtk.types.SensitivityType.Auto]).
+    Params:
+      sensitivity =       specify the sensitivity of the dropdown button
+  */
   void setButtonSensitivity(gtk.types.SensitivityType sensitivity)
   {
     gtk_combo_box_set_button_sensitivity(cast(GtkComboBox*)cPtr, sensitivity);
   }
 
   /**
-   * Sets the column with column span information for combo_box to be
-   * column_span. The column span column contains integers which indicate
-   * how many columns an item should span.
-   * Params:
-   *   columnSpan = A column in the model passed during construction
-   */
+      Sets the column with column span information for combo_box to be
+    column_span. The column span column contains integers which indicate
+    how many columns an item should span.
+    Params:
+      columnSpan =       A column in the model passed during construction
+  */
   void setColumnSpanColumn(int columnSpan)
   {
     gtk_combo_box_set_column_span_column(cast(GtkComboBox*)cPtr, columnSpan);
   }
 
   /**
-   * Sets the model column which combo_box should use to get strings from
-   * to be text_column. The column text_column in the model of combo_box
-   * must be of type %G_TYPE_STRING.
-   * This is only relevant if combo_box has been created with
-   * #GtkComboBox:has-entry as %TRUE.
-   * Params:
-   *   textColumn = A column in model to get the strings from for
-   *     the internal entry
-   */
+      Sets the model column which combo_box should use to get strings from
+    to be text_column. The column text_column in the model of combo_box
+    must be of type `G_TYPE_STRING`.
+    
+    This is only relevant if combo_box has been created with
+    #GtkComboBox:has-entry as true.
+    Params:
+      textColumn =       A column in model to get the strings from for
+            the internal entry
+  */
   void setEntryTextColumn(int textColumn)
   {
     gtk_combo_box_set_entry_text_column(cast(GtkComboBox*)cPtr, textColumn);
   }
 
   /**
-   * Sets whether the combo box will grab focus when it is clicked with
-   * the mouse. Making mouse clicks not grab focus is useful in places
-   * like toolbars where you don’t want the keyboard focus removed from
-   * the main area of the application.
-   * Params:
-   *   focusOnClick = whether the combo box grabs focus when clicked
-   *     with the mouse
-
-   * Deprecated: Use [gtk.widget.Widget.setFocusOnClick] instead
-   */
+      Sets whether the combo box will grab focus when it is clicked with
+    the mouse. Making mouse clicks not grab focus is useful in places
+    like toolbars where you don’t want the keyboard focus removed from
+    the main area of the application.
+    Params:
+      focusOnClick =       whether the combo box grabs focus when clicked
+           with the mouse
+  
+    Deprecated:     Use [gtk.widget.Widget.setFocusOnClick] instead
+  */
   override void setFocusOnClick(bool focusOnClick)
   {
     gtk_combo_box_set_focus_on_click(cast(GtkComboBox*)cPtr, focusOnClick);
   }
 
   /**
-   * Sets the model column which combo_box should use to get string IDs
-   * for values from. The column id_column in the model of combo_box
-   * must be of type %G_TYPE_STRING.
-   * Params:
-   *   idColumn = A column in model to get string IDs for values from
-   */
+      Sets the model column which combo_box should use to get string IDs
+    for values from. The column id_column in the model of combo_box
+    must be of type `G_TYPE_STRING`.
+    Params:
+      idColumn =       A column in model to get string IDs for values from
+  */
   void setIdColumn(int idColumn)
   {
     gtk_combo_box_set_id_column(cast(GtkComboBox*)cPtr, idColumn);
   }
 
   /**
-   * Sets the model used by combo_box to be model. Will unset a previously set
-   * model $(LPAREN)if applicable$(RPAREN). If model is %NULL, then it will unset the model.
-   * Note that this function does not clear the cell renderers, you have to
-   * call [gtk.cell_layout.CellLayout.clear] yourself if you need to set up different
-   * cell renderers for the new model.
-   * Params:
-   *   model = A #GtkTreeModel
-   */
+      Sets the model used by combo_box to be model. Will unset a previously set
+    model (if applicable). If model is null, then it will unset the model.
+    
+    Note that this function does not clear the cell renderers, you have to
+    call [gtk.cell_layout.CellLayout.clear] yourself if you need to set up different
+    cell renderers for the new model.
+    Params:
+      model =       A #GtkTreeModel
+  */
   void setModel(gtk.tree_model.TreeModel model = null)
   {
     gtk_combo_box_set_model(cast(GtkComboBox*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**
-   * Specifies whether the popup’s width should be a fixed width
-   * matching the allocated width of the combo box.
-   * Params:
-   *   fixed = whether to use a fixed popup width
-   */
+      Specifies whether the popup’s width should be a fixed width
+    matching the allocated width of the combo box.
+    Params:
+      fixed =       whether to use a fixed popup width
+  */
   void setPopupFixedWidth(bool fixed)
   {
     gtk_combo_box_set_popup_fixed_width(cast(GtkComboBox*)cPtr, fixed);
   }
 
   /**
-   * Sets the row separator function, which is used to determine
-   * whether a row should be drawn as a separator. If the row separator
-   * function is %NULL, no separators are drawn. This is the default value.
-   * Params:
-   *   func = a #GtkTreeViewRowSeparatorFunc
-   */
+      Sets the row separator function, which is used to determine
+    whether a row should be drawn as a separator. If the row separator
+    function is null, no separators are drawn. This is the default value.
+    Params:
+      func =       a #GtkTreeViewRowSeparatorFunc
+  */
   void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func)
   {
     extern(C) bool _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
@@ -593,22 +611,22 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Sets the column with row span information for combo_box to be row_span.
-   * The row span column contains integers which indicate how many rows
-   * an item should span.
-   * Params:
-   *   rowSpan = A column in the model passed during construction.
-   */
+      Sets the column with row span information for combo_box to be row_span.
+    The row span column contains integers which indicate how many rows
+    an item should span.
+    Params:
+      rowSpan =       A column in the model passed during construction.
+  */
   void setRowSpanColumn(int rowSpan)
   {
     gtk_combo_box_set_row_span_column(cast(GtkComboBox*)cPtr, rowSpan);
   }
 
   /**
-   * Sets the menu’s title in tearoff mode.
-   * Params:
-   *   title = a title for the menu in tearoff mode
-   */
+      Sets the menu’s title in tearoff mode.
+    Params:
+      title =       a title for the menu in tearoff mode
+  */
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
@@ -616,36 +634,42 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * Sets the wrap width of combo_box to be width. The wrap width is basically
-   * the preferred number of columns when you want the popup to be layed out
-   * in a table.
-   * Params:
-   *   width = Preferred number of columns
-   */
+      Sets the wrap width of combo_box to be width. The wrap width is basically
+    the preferred number of columns when you want the popup to be layed out
+    in a table.
+    Params:
+      width =       Preferred number of columns
+  */
   void setWrapWidth(int width)
   {
     gtk_combo_box_set_wrap_width(cast(GtkComboBox*)cPtr, width);
   }
 
   /**
-   * The changed signal is emitted when the active
-   * item is changed. The can be due to the user selecting
-   * a different item from the list, or due to a
-   * call to [gtk.combo_box.ComboBox.setActiveIter].
-   * It will also be emitted while typing into the entry of a combo box
-   * with an entry.
-   *   comboBox = the instance the signal is connected to
-   */
+      The changed signal is emitted when the active
+    item is changed. The can be due to the user selecting
+    a different item from the list, or due to a
+    call to [gtk.combo_box.ComboBox.setActiveIter].
+    It will also be emitted while typing into the entry of a combo box
+    with an entry.
+  
+    ## Parameters
+    $(LIST
+      * $(B comboBox) the instance the signal is connected to
+    )
+  */
   alias ChangedCallbackDlg = void delegate(gtk.combo_box.ComboBox comboBox);
+
+  /** ditto */
   alias ChangedCallbackFunc = void function(gtk.combo_box.ComboBox comboBox);
 
   /**
-   * Connect to Changed signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Changed signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
@@ -662,48 +686,59 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * For combo boxes that are created with an entry $(LPAREN)See GtkComboBox:has-entry$(RPAREN).
-   * A signal which allows you to change how the text displayed in a combo box's
-   * entry is displayed.
-   * Connect a signal handler which returns an allocated string representing
-   * path. That string will then be used to set the text in the combo box's entry.
-   * The default signal handler uses the text from the GtkComboBox::entry-text-column
-   * model column.
-   * Here's an example signal handler which fetches data from the model and
-   * displays it in the entry.
-   * |[<!-- language\="C" -->
-   * static gchar*
-   * format_entry_text_callback $(LPAREN)GtkComboBox *combo,
-   * const gchar *path,
-   * gpointer     user_data$(RPAREN)
-   * {
-   * GtkTreeIter iter;
-   * GtkTreeModel model;
-   * gdouble      value;
-   * model \= gtk_combo_box_get_model $(LPAREN)combo$(RPAREN);
-   * gtk_tree_model_get_iter_from_string $(LPAREN)model, &iter, path$(RPAREN);
-   * gtk_tree_model_get $(LPAREN)model, &iter,
-   * THE_DOUBLE_VALUE_COLUMN, &value,
-   * -1$(RPAREN);
-   * return g_strdup_printf $(LPAREN)"%g", value$(RPAREN);
-   * }
-   * ]|
-   * Params
-   *   path = the GtkTreePath string from the combo box's current model to format text for
-   *   comboBox = the instance the signal is connected to
-   * Returns: a newly allocated string representing path
-   *   for the current GtkComboBox model.
-   */
+      For combo boxes that are created with an entry (See GtkComboBox:has-entry).
+    
+    A signal which allows you to change how the text displayed in a combo box's
+    entry is displayed.
+    
+    Connect a signal handler which returns an allocated string representing
+    path. That string will then be used to set the text in the combo box's entry.
+    The default signal handler uses the text from the GtkComboBox::entry-text-column
+    model column.
+    
+    Here's an example signal handler which fetches data from the model and
+    displays it in the entry.
+    ```c
+    static gchar*
+    format_entry_text_callback (GtkComboBox *combo,
+                                const gchar *path,
+                                gpointer     user_data)
+    {
+      GtkTreeIter iter;
+      GtkTreeModel model;
+      gdouble      value;
+    
+      model = gtk_combo_box_get_model (combo);
+    
+      gtk_tree_model_get_iter_from_string (model, &iter, path);
+      gtk_tree_model_get (model, &iter,
+                          THE_DOUBLE_VALUE_COLUMN, &value,
+                          -1);
+    
+      return g_strdup_printf ("%g", value);
+    }
+    ```
+  
+    ## Parameters
+    $(LIST
+      * $(B path)       the GtkTreePath string from the combo box's current model to format text for
+      * $(B comboBox) the instance the signal is connected to
+    )
+    Returns:     a newly allocated string representing path
+      for the current GtkComboBox model.
+  */
   alias FormatEntryTextCallbackDlg = string delegate(string path, gtk.combo_box.ComboBox comboBox);
+
+  /** ditto */
   alias FormatEntryTextCallbackFunc = string function(string path, gtk.combo_box.ComboBox comboBox);
 
   /**
-   * Connect to FormatEntryText signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to FormatEntryText signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectFormatEntryText(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FormatEntryTextCallbackDlg) || is(T : FormatEntryTextCallbackFunc))
   {
@@ -722,23 +757,28 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * The ::move-active signal is a
-   * [keybinding signal][GtkBindingSignal]
-   * which gets emitted to move the active selection.
-   * Params
-   *   scrollType = a #GtkScrollType
-   *   comboBox = the instance the signal is connected to
-   */
+      The ::move-active signal is a
+    [keybinding signal][GtkBindingSignal]
+    which gets emitted to move the active selection.
+  
+    ## Parameters
+    $(LIST
+      * $(B scrollType)       a #GtkScrollType
+      * $(B comboBox) the instance the signal is connected to
+    )
+  */
   alias MoveActiveCallbackDlg = void delegate(gtk.types.ScrollType scrollType, gtk.combo_box.ComboBox comboBox);
+
+  /** ditto */
   alias MoveActiveCallbackFunc = void function(gtk.types.ScrollType scrollType, gtk.combo_box.ComboBox comboBox);
 
   /**
-   * Connect to MoveActive signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to MoveActive signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectMoveActive(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveActiveCallbackDlg) || is(T : MoveActiveCallbackFunc))
   {
@@ -756,23 +796,30 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * The ::popdown signal is a
-   * [keybinding signal][GtkBindingSignal]
-   * which gets emitted to popdown the combo box list.
-   * The default bindings for this signal are Alt+Up and Escape.
-   *   comboBox = the instance the signal is connected to
-   * Returns:
-   */
+      The ::popdown signal is a
+    [keybinding signal][GtkBindingSignal]
+    which gets emitted to popdown the combo box list.
+    
+    The default bindings for this signal are Alt+Up and Escape.
+  
+    ## Parameters
+    $(LIST
+      * $(B comboBox) the instance the signal is connected to
+    )
+    Returns: 
+  */
   alias PopdownCallbackDlg = bool delegate(gtk.combo_box.ComboBox comboBox);
+
+  /** ditto */
   alias PopdownCallbackFunc = bool function(gtk.combo_box.ComboBox comboBox);
 
   /**
-   * Connect to Popdown signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Popdown signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectPopdown(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PopdownCallbackDlg) || is(T : PopdownCallbackFunc))
   {
@@ -791,22 +838,29 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /**
-   * The ::popup signal is a
-   * [keybinding signal][GtkBindingSignal]
-   * which gets emitted to popup the combo box list.
-   * The default binding for this signal is Alt+Down.
-   *   comboBox = the instance the signal is connected to
-   */
+      The ::popup signal is a
+    [keybinding signal][GtkBindingSignal]
+    which gets emitted to popup the combo box list.
+    
+    The default binding for this signal is Alt+Down.
+  
+    ## Parameters
+    $(LIST
+      * $(B comboBox) the instance the signal is connected to
+    )
+  */
   alias PopupCallbackDlg = void delegate(gtk.combo_box.ComboBox comboBox);
+
+  /** ditto */
   alias PopupCallbackFunc = void function(gtk.combo_box.ComboBox comboBox);
 
   /**
-   * Connect to Popup signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Popup signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectPopup(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PopupCallbackDlg) || is(T : PopupCallbackFunc))
   {

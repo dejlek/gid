@@ -8,6 +8,7 @@ import arrowflight.data_stream;
 import arrowflight.types;
 import gid.gid;
 
+/** */
 class RecordBatchStream : arrowflight.data_stream.DataStream
 {
 
@@ -27,6 +28,7 @@ class RecordBatchStream : arrowflight.data_stream.DataStream
     return getType();
   }
 
+  /** */
   this(arrow.record_batch_reader.RecordBatchReader reader, arrow.write_options.WriteOptions options = null)
   {
     GAFlightRecordBatchStream* _cretval;

@@ -1,3 +1,7 @@
 *.a
+*.o
 *.so
 dub.selections.json
+doc/api
+doc/doc_packages
+doc/gen-adrdox

@@ -6,6 +6,7 @@ import arrow.data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class LargeStringDataType : arrow.data_type.DataType
 {
 
@@ -25,6 +26,7 @@ class LargeStringDataType : arrow.data_type.DataType
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowLargeStringDataType* _cretval;

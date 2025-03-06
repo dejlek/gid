@@ -8,8 +8,8 @@ import gobject.dclosure;
 import gobject.object;
 
 /**
- * Watches #GUnixMounts for changes.
- */
+    Watches #GUnixMounts for changes.
+*/
 class UnixMountMonitor : gobject.object.ObjectG
 {
 
@@ -30,13 +30,14 @@ class UnixMountMonitor : gobject.object.ObjectG
   }
 
   /**
-   * Deprecated alias for [gio.unix_mount_monitor.UnixMountMonitor.get].
-   * This function was never a true constructor, which is why it was
-   * renamed.
-   * Returns: a #GUnixMountMonitor.
-
-   * Deprecated: Use [gio.unix_mount_monitor.UnixMountMonitor.get] instead.
-   */
+      Deprecated alias for [gio.unix_mount_monitor.UnixMountMonitor.get].
+    
+    This function was never a true constructor, which is why it was
+    renamed.
+    Returns:     a #GUnixMountMonitor.
+  
+    Deprecated:     Use [gio.unix_mount_monitor.UnixMountMonitor.get] instead.
+  */
   this()
   {
     GUnixMountMonitor* _cretval;
@@ -45,15 +46,17 @@ class UnixMountMonitor : gobject.object.ObjectG
   }
 
   /**
-   * Gets the #GUnixMountMonitor for the current thread-default main
-   * context.
-   * The mount monitor can be used to monitor for changes to the list of
-   * mounted filesystems as well as the list of mount points $(LPAREN)ie: fstab
-   * entries$(RPAREN).
-   * You must only call [gobject.object.ObjectG.unref] on the return value from under
-   * the same main context as you called this function.
-   * Returns: the #GUnixMountMonitor.
-   */
+      Gets the #GUnixMountMonitor for the current thread-default main
+    context.
+    
+    The mount monitor can be used to monitor for changes to the list of
+    mounted filesystems as well as the list of mount points (ie: fstab
+    entries).
+    
+    You must only call [gobject.object.ObjectG.unref] on the return value from under
+    the same main context as you called this function.
+    Returns:     the #GUnixMountMonitor.
+  */
   static gio.unix_mount_monitor.UnixMountMonitor get()
   {
     GUnixMountMonitor* _cretval;
@@ -63,37 +66,44 @@ class UnixMountMonitor : gobject.object.ObjectG
   }
 
   /**
-   * This function does nothing.
-   * Before 2.44, this was a partially-effective way of controlling the
-   * rate at which events would be reported under some uncommon
-   * circumstances.  Since mount_monitor is a singleton, it also meant
-   * that calling this function would have side effects for other users of
-   * the monitor.
-   * Params:
-   *   limitMsec = a integer with the limit in milliseconds to
-   *     poll for changes.
-
-   * Deprecated: This function does nothing.  Don't call it.
-   */
+      This function does nothing.
+    
+    Before 2.44, this was a partially-effective way of controlling the
+    rate at which events would be reported under some uncommon
+    circumstances.  Since mount_monitor is a singleton, it also meant
+    that calling this function would have side effects for other users of
+    the monitor.
+    Params:
+      limitMsec =       a integer with the limit in milliseconds to
+            poll for changes.
+  
+    Deprecated:     This function does nothing.  Don't call it.
+  */
   void setRateLimit(int limitMsec)
   {
     g_unix_mount_monitor_set_rate_limit(cast(GUnixMountMonitor*)cPtr, limitMsec);
   }
 
   /**
-   * Emitted when the unix mount points have changed.
-   *   unixMountMonitor = the instance the signal is connected to
-   */
+      Emitted when the unix mount points have changed.
+  
+    ## Parameters
+    $(LIST
+      * $(B unixMountMonitor) the instance the signal is connected to
+    )
+  */
   alias MountpointsChangedCallbackDlg = void delegate(gio.unix_mount_monitor.UnixMountMonitor unixMountMonitor);
+
+  /** ditto */
   alias MountpointsChangedCallbackFunc = void function(gio.unix_mount_monitor.UnixMountMonitor unixMountMonitor);
 
   /**
-   * Connect to MountpointsChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to MountpointsChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectMountpointsChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MountpointsChangedCallbackDlg) || is(T : MountpointsChangedCallbackFunc))
   {
@@ -110,19 +120,25 @@ class UnixMountMonitor : gobject.object.ObjectG
   }
 
   /**
-   * Emitted when the unix mounts have changed.
-   *   unixMountMonitor = the instance the signal is connected to
-   */
+      Emitted when the unix mounts have changed.
+  
+    ## Parameters
+    $(LIST
+      * $(B unixMountMonitor) the instance the signal is connected to
+    )
+  */
   alias MountsChangedCallbackDlg = void delegate(gio.unix_mount_monitor.UnixMountMonitor unixMountMonitor);
+
+  /** ditto */
   alias MountsChangedCallbackFunc = void function(gio.unix_mount_monitor.UnixMountMonitor unixMountMonitor);
 
   /**
-   * Connect to MountsChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to MountsChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectMountsChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MountsChangedCallbackDlg) || is(T : MountsChangedCallbackFunc))
   {

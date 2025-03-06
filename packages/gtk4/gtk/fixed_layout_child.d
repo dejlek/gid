@@ -8,8 +8,8 @@ import gtk.layout_child;
 import gtk.types;
 
 /**
- * `GtkLayoutChild` subclass for children in a `GtkFixedLayout`.
- */
+    [gtk.layout_child.LayoutChild] subclass for children in a [gtk.fixed_layout.FixedLayout].
+*/
 class FixedLayoutChild : gtk.layout_child.LayoutChild
 {
 
@@ -30,9 +30,9 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
   }
 
   /**
-   * Retrieves the transformation of the child.
-   * Returns: a `GskTransform`
-   */
+      Retrieves the transformation of the child.
+    Returns:     a [gsk.transform.Transform]
+  */
   gsk.transform.Transform getTransform()
   {
     GskTransform* _cretval;
@@ -42,10 +42,10 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
   }
 
   /**
-   * Sets the transformation of the child of a `GtkFixedLayout`.
-   * Params:
-   *   transform = a `GskTransform`
-   */
+      Sets the transformation of the child of a [gtk.fixed_layout.FixedLayout].
+    Params:
+      transform =       a [gsk.transform.Transform]
+  */
   void setTransform(gsk.transform.Transform transform)
   {
     gtk_fixed_layout_child_set_transform(cast(GtkFixedLayoutChild*)cPtr, transform ? cast(GskTransform*)transform.cPtr(No.Dup) : null);

@@ -9,6 +9,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class RecordBatchWriter : gobject.object.ObjectG
 {
 
@@ -28,6 +29,7 @@ class RecordBatchWriter : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   bool close()
   {
     bool _retval;
@@ -38,6 +40,7 @@ class RecordBatchWriter : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isClosed()
   {
     bool _retval;
@@ -45,6 +48,7 @@ class RecordBatchWriter : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool writeRecordBatch(arrow.record_batch.RecordBatch recordBatch)
   {
     bool _retval;
@@ -55,6 +59,7 @@ class RecordBatchWriter : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool writeTable(arrow.table.Table table)
   {
     bool _retval;

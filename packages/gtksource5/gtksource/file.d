@@ -9,15 +9,16 @@ import gtksource.encoding;
 import gtksource.types;
 
 /**
- * On-disk representation of a class@Buffer.
- * A `GtkSourceFile` object is the on-disk representation of a class@Buffer.
- * With a `GtkSourceFile`, you can create and configure a class@FileLoader
- * and class@FileSaver which take by default the values of the
- * `GtkSourceFile` properties $(LPAREN)except for the file loader which auto-detect some
- * properties$(RPAREN). On a successful load or save operation, the `GtkSourceFile`
- * properties are updated. If an operation fails, the `GtkSourceFile` properties
- * have still the previous valid values.
- */
+    On-disk representation of a `class@Buffer`.
+  
+  A [gtksource.file.File] object is the on-disk representation of a `class@Buffer`.
+  With a [gtksource.file.File], you can create and configure a `class@FileLoader`
+  and `class@FileSaver` which take by default the values of the
+  [gtksource.file.File] properties (except for the file loader which auto-detect some
+  properties). On a successful load or save operation, the [gtksource.file.File]
+  properties are updated. If an operation fails, the [gtksource.file.File] properties
+  have still the previous valid values.
+*/
 class File : gobject.object.ObjectG
 {
 
@@ -37,6 +38,7 @@ class File : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GtkSourceFile* _cretval;
@@ -45,19 +47,22 @@ class File : gobject.object.ObjectG
   }
 
   /**
-   * Checks synchronously the file on disk, to know whether the file is externally
-   * modified, or has been deleted, and whether the file is read-only.
-   * #GtkSourceFile doesn't create a [gio.file_monitor.FileMonitor] to track those properties, so
-   * this function needs to be called instead. Creating lots of [gio.file_monitor.FileMonitor]'s
-   * would take lots of resources.
-   * Since this function is synchronous, it is advised to call it only on local
-   * files. See [gtksource.file.File.isLocal].
-   */
+      Checks synchronously the file on disk, to know whether the file is externally
+    modified, or has been deleted, and whether the file is read-only.
+    
+    #GtkSourceFile doesn't create a [gio.file_monitor.FileMonitor] to track those properties, so
+    this function needs to be called instead. Creating lots of [gio.file_monitor.FileMonitor]'s
+    would take lots of resources.
+    
+    Since this function is synchronous, it is advised to call it only on local
+    files. See [gtksource.file.File.isLocal].
+  */
   void checkFileOnDisk()
   {
     gtk_source_file_check_file_on_disk(cast(GtkSourceFile*)cPtr);
   }
 
+  /** */
   gtksource.types.CompressionType getCompressionType()
   {
     GtkSourceCompressionType _cretval;
@@ -67,10 +72,10 @@ class File : gobject.object.ObjectG
   }
 
   /**
-   * The encoding is initially %NULL. After a successful file loading or saving
-   * operation, the encoding is non-%NULL.
-   * Returns: the character encoding.
-   */
+      The encoding is initially null. After a successful file loading or saving
+    operation, the encoding is non-null.
+    Returns:     the character encoding.
+  */
   gtksource.encoding.Encoding getEncoding()
   {
     const(GtkSourceEncoding)* _cretval;
@@ -79,6 +84,7 @@ class File : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gio.file.File getLocation()
   {
     GFile* _cretval;
@@ -87,6 +93,7 @@ class File : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gtksource.types.NewlineType getNewlineType()
   {
     GtkSourceNewlineType _cretval;
@@ -96,12 +103,13 @@ class File : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the file has been deleted. If the
-   * propertyFile:location is %NULL, returns %FALSE.
-   * To have an up-to-date value, you must first call
-   * [gtksource.file.File.checkFileOnDisk].
-   * Returns: whether the file has been deleted.
-   */
+      Returns whether the file has been deleted. If the
+    `propertyFile:location` is null, returns false.
+    
+    To have an up-to-date value, you must first call
+    [gtksource.file.File.checkFileOnDisk].
+    Returns:     whether the file has been deleted.
+  */
   bool isDeleted()
   {
     bool _retval;
@@ -110,12 +118,13 @@ class File : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the file is externally modified. If the
-   * propertyFile:location is %NULL, returns %FALSE.
-   * To have an up-to-date value, you must first call
-   * [gtksource.file.File.checkFileOnDisk].
-   * Returns: whether the file is externally modified.
-   */
+      Returns whether the file is externally modified. If the
+    `propertyFile:location` is null, returns false.
+    
+    To have an up-to-date value, you must first call
+    [gtksource.file.File.checkFileOnDisk].
+    Returns:     whether the file is externally modified.
+  */
   bool isExternallyModified()
   {
     bool _retval;
@@ -124,10 +133,10 @@ class File : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the file is local. If the propertyFile:location is %NULL,
-   * returns %FALSE.
-   * Returns: whether the file is local.
-   */
+      Returns whether the file is local. If the `propertyFile:location` is null,
+    returns false.
+    Returns:     whether the file is local.
+  */
   bool isLocal()
   {
     bool _retval;
@@ -136,12 +145,13 @@ class File : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the file is read-only. If the
-   * propertyFile:location is %NULL, returns %FALSE.
-   * To have an up-to-date value, you must first call
-   * [gtksource.file.File.checkFileOnDisk].
-   * Returns: whether the file is read-only.
-   */
+      Returns whether the file is read-only. If the
+    `propertyFile:location` is null, returns false.
+    
+    To have an up-to-date value, you must first call
+    [gtksource.file.File.checkFileOnDisk].
+    Returns:     whether the file is read-only.
+  */
   bool isReadonly()
   {
     bool _retval;
@@ -150,10 +160,10 @@ class File : gobject.object.ObjectG
   }
 
   /**
-   * Sets the location.
-   * Params:
-   *   location = the new #GFile, or %NULL.
-   */
+      Sets the location.
+    Params:
+      location =       the new #GFile, or null.
+  */
   void setLocation(gio.file.File location = null)
   {
     gtk_source_file_set_location(cast(GtkSourceFile*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.Dup) : null);

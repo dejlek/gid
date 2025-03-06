@@ -6,9 +6,9 @@ import gobject.c.types;
 import gobject.types;
 
 /**
- * A structure which contains a single flags value, its name, and its
- * nickname.
- */
+    A structure which contains a single flags value, its name, and its
+  nickname.
+*/
 class FlagsValue
 {
   GFlagsValue cInstance;

@@ -9,12 +9,12 @@ import gsk.types;
 
 
 /**
- * Retrieves the `GskRenderNode` stored inside the given `value`, and acquires
- * a reference to it.
- * Params:
- *   value = a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
- * Returns: a `GskRenderNode`
- */
+    Retrieves the [gsk.render_node.RenderNode] stored inside the given `value`, and acquires
+  a reference to it.
+  Params:
+    value =       a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
+  Returns:     a [gsk.render_node.RenderNode]
+*/
 gsk.render_node.RenderNode valueDupRenderNode(gobject.value.Value value)
 {
   GskRenderNode* _cretval;
@@ -24,11 +24,11 @@ gsk.render_node.RenderNode valueDupRenderNode(gobject.value.Value value)
 }
 
 /**
- * Retrieves the `GskRenderNode` stored inside the given `value`.
- * Params:
- *   value = a `GValue` initialized with type `GSK_TYPE_RENDER_NODE`
- * Returns: a `GskRenderNode`
- */
+    Retrieves the [gsk.render_node.RenderNode] stored inside the given `value`.
+  Params:
+    value =       a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
+  Returns:     a [gsk.render_node.RenderNode]
+*/
 gsk.render_node.RenderNode valueGetRenderNode(gobject.value.Value value)
 {
   GskRenderNode* _cretval;
@@ -38,24 +38,26 @@ gsk.render_node.RenderNode valueGetRenderNode(gobject.value.Value value)
 }
 
 /**
- * Stores the given `GskRenderNode` inside `value`.
- * The [gobject.value.Value] will acquire a reference to the `node`.
- * Params:
- *   value = a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
- *   node = a `GskRenderNode`
- */
+    Stores the given [gsk.render_node.RenderNode] inside `value`.
+  
+  The [gobject.value.Value] will acquire a reference to the `node`.
+  Params:
+    value =       a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
+    node =       a [gsk.render_node.RenderNode]
+*/
 void valueSetRenderNode(gobject.value.Value value, gsk.render_node.RenderNode node)
 {
   gsk_value_set_render_node(value ? cast(GValue*)value.cPtr(No.Dup) : null, node ? cast(GskRenderNode*)node.cPtr(No.Dup) : null);
 }
 
 /**
- * Stores the given `GskRenderNode` inside `value`.
- * This function transfers the ownership of the `node` to the `GValue`.
- * Params:
- *   value = a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
- *   node = a `GskRenderNode`
- */
+    Stores the given [gsk.render_node.RenderNode] inside `value`.
+  
+  This function transfers the ownership of the `node` to the [gobject.value.Value].
+  Params:
+    value =       a [gobject.value.Value] initialized with type `GSK_TYPE_RENDER_NODE`
+    node =       a [gsk.render_node.RenderNode]
+*/
 void valueTakeRenderNode(gobject.value.Value value, gsk.render_node.RenderNode node = null)
 {
   gsk_value_take_render_node(value ? cast(GValue*)value.cPtr(No.Dup) : null, node ? cast(GskRenderNode*)node.cPtr(Yes.Dup) : null);

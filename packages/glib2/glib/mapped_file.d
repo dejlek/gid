@@ -9,10 +9,10 @@ import glib.types;
 import gobject.boxed;
 
 /**
- * The #GMappedFile represents a file mapping created with
- * [glib.mapped_file.MappedFile.new_]. It has only private members and should
- * not be accessed directly.
- */
+    The #GMappedFile represents a file mapping created with
+  [glib.mapped_file.MappedFile.new_]. It has only private members and should
+  not be accessed directly.
+*/
 class MappedFile : gobject.boxed.Boxed
 {
 
@@ -38,26 +38,29 @@ class MappedFile : gobject.boxed.Boxed
   }
 
   /**
-   * Maps a file into memory. On UNIX, this is using the mmap$(LPAREN)$(RPAREN) function.
-   * If writable is %TRUE, the mapped buffer may be modified, otherwise
-   * it is an error to modify the mapped buffer. Modifications to the buffer
-   * are not visible to other processes mapping the same file, and are not
-   * written back to the file.
-   * Note that modifications of the underlying file might affect the contents
-   * of the #GMappedFile. Therefore, mapping should only be used if the file
-   * will not be modified, or if all modifications of the file are done
-   * atomically $(LPAREN)e.g. using [glib.global.fileSetContents]$(RPAREN).
-   * If filename is the name of an empty, regular file, the function
-   * will successfully return an empty #GMappedFile. In other cases of
-   * size 0 $(LPAREN)e.g. device files such as /dev/null$(RPAREN), error will be set
-   * to the #GFileError value %G_FILE_ERROR_INVAL.
-   * Params:
-   *   filename = The path of the file to load, in the GLib
-   *     filename encoding
-   *   writable = whether the mapping should be writable
-   * Returns: a newly allocated #GMappedFile which must be unref'd
-   *   with [glib.mapped_file.MappedFile.unref], or %NULL if the mapping failed.
-   */
+      Maps a file into memory. On UNIX, this is using the mmap() function.
+    
+    If writable is true, the mapped buffer may be modified, otherwise
+    it is an error to modify the mapped buffer. Modifications to the buffer
+    are not visible to other processes mapping the same file, and are not
+    written back to the file.
+    
+    Note that modifications of the underlying file might affect the contents
+    of the #GMappedFile. Therefore, mapping should only be used if the file
+    will not be modified, or if all modifications of the file are done
+    atomically (e.g. using [glib.global.fileSetContents]).
+    
+    If filename is the name of an empty, regular file, the function
+    will successfully return an empty #GMappedFile. In other cases of
+    size 0 (e.g. device files such as /dev/null), error will be set
+    to the #GFileError value `G_FILE_ERROR_INVAL`.
+    Params:
+      filename =       The path of the file to load, in the GLib
+            filename encoding
+      writable =       whether the mapping should be writable
+    Returns:     a newly allocated #GMappedFile which must be unref'd
+         with [glib.mapped_file.MappedFile.unref], or null if the mapping failed.
+  */
   this(string filename, bool writable)
   {
     GMappedFile* _cretval;
@@ -70,21 +73,23 @@ class MappedFile : gobject.boxed.Boxed
   }
 
   /**
-   * Maps a file into memory. On UNIX, this is using the mmap$(LPAREN)$(RPAREN) function.
-   * If writable is %TRUE, the mapped buffer may be modified, otherwise
-   * it is an error to modify the mapped buffer. Modifications to the buffer
-   * are not visible to other processes mapping the same file, and are not
-   * written back to the file.
-   * Note that modifications of the underlying file might affect the contents
-   * of the #GMappedFile. Therefore, mapping should only be used if the file
-   * will not be modified, or if all modifications of the file are done
-   * atomically $(LPAREN)e.g. using [glib.global.fileSetContents]$(RPAREN).
-   * Params:
-   *   fd = The file descriptor of the file to load
-   *   writable = whether the mapping should be writable
-   * Returns: a newly allocated #GMappedFile which must be unref'd
-   *   with [glib.mapped_file.MappedFile.unref], or %NULL if the mapping failed.
-   */
+      Maps a file into memory. On UNIX, this is using the mmap() function.
+    
+    If writable is true, the mapped buffer may be modified, otherwise
+    it is an error to modify the mapped buffer. Modifications to the buffer
+    are not visible to other processes mapping the same file, and are not
+    written back to the file.
+    
+    Note that modifications of the underlying file might affect the contents
+    of the #GMappedFile. Therefore, mapping should only be used if the file
+    will not be modified, or if all modifications of the file are done
+    atomically (e.g. using [glib.global.fileSetContents]).
+    Params:
+      fd =       The file descriptor of the file to load
+      writable =       whether the mapping should be writable
+    Returns:     a newly allocated #GMappedFile which must be unref'd
+         with [glib.mapped_file.MappedFile.unref], or null if the mapping failed.
+  */
   static glib.mapped_file.MappedFile newFromFd(int fd, bool writable)
   {
     GMappedFile* _cretval;
@@ -97,12 +102,12 @@ class MappedFile : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a new #GBytes which references the data mapped from file.
-   * The mapped contents of the file must not be modified after creating this
-   * bytes object, because a #GBytes should be immutable.
-   * Returns: A newly allocated #GBytes referencing data
-   *   from file
-   */
+      Creates a new #GBytes which references the data mapped from file.
+    The mapped contents of the file must not be modified after creating this
+    bytes object, because a #GBytes should be immutable.
+    Returns:     A newly allocated #GBytes referencing data
+          from file
+  */
   glib.bytes.Bytes getBytes()
   {
     GBytes* _cretval;
@@ -112,12 +117,14 @@ class MappedFile : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the contents of a #GMappedFile.
-   * Note that the contents may not be zero-terminated,
-   * even if the #GMappedFile is backed by a text file.
-   * If the file is empty then %NULL is returned.
-   * Returns: the contents of file, or %NULL.
-   */
+      Returns the contents of a #GMappedFile.
+    
+    Note that the contents may not be zero-terminated,
+    even if the #GMappedFile is backed by a text file.
+    
+    If the file is empty then null is returned.
+    Returns:     the contents of file, or null.
+  */
   string getContents()
   {
     char* _cretval;
@@ -127,9 +134,9 @@ class MappedFile : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the length of the contents of a #GMappedFile.
-   * Returns: the length of the contents of file.
-   */
+      Returns the length of the contents of a #GMappedFile.
+    Returns:     the length of the contents of file.
+  */
   size_t getLength()
   {
     size_t _retval;

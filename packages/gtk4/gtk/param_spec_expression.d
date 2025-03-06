@@ -7,8 +7,8 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * A `GParamSpec` for properties holding a `GtkExpression`.
- */
+    A [gobject.param_spec.ParamSpec] for properties holding a [gtk.expression.Expression].
+*/
 class ParamSpecExpression : gobject.param_spec.ParamSpec
 {
 

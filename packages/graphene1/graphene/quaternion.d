@@ -11,10 +11,11 @@ import graphene.vec3;
 import graphene.vec4;
 
 /**
- * A quaternion.
- * The contents of the #graphene_quaternion_t structure are private
- * and should never be accessed directly.
- */
+    A quaternion.
+  
+  The contents of the #graphene_quaternion_t structure are private
+  and should never be accessed directly.
+*/
 class Quaternion : gobject.boxed.Boxed
 {
 
@@ -45,10 +46,11 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Allocates a new #graphene_quaternion_t.
-   * The contents of the returned value are undefined.
-   * Returns: the newly allocated #graphene_quaternion_t
-   */
+      Allocates a new #graphene_quaternion_t.
+    
+    The contents of the returned value are undefined.
+    Returns:     the newly allocated #graphene_quaternion_t
+  */
   static graphene.quaternion.Quaternion alloc()
   {
     graphene_quaternion_t* _cretval;
@@ -58,11 +60,11 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Adds two #graphene_quaternion_t a and b.
-   * Params:
-   *   b = a #graphene_quaternion_t
-   *   res = the result of the operation
-   */
+      Adds two #graphene_quaternion_t a and b.
+    Params:
+      b =       a #graphene_quaternion_t
+      res =       the result of the operation
+  */
   void add(graphene.quaternion.Quaternion b, out graphene.quaternion.Quaternion res)
   {
     graphene_quaternion_t _res;
@@ -71,11 +73,11 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the dot product of two #graphene_quaternion_t.
-   * Params:
-   *   b = a #graphene_quaternion_t
-   * Returns: the value of the dot products
-   */
+      Computes the dot product of two #graphene_quaternion_t.
+    Params:
+      b =       a #graphene_quaternion_t
+    Returns:     the value of the dot products
+  */
   float dot(graphene.quaternion.Quaternion b)
   {
     float _retval;
@@ -84,11 +86,11 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether the given quaternions are equal.
-   * Params:
-   *   b = a #graphene_quaternion_t
-   * Returns: `true` if the quaternions are equal
-   */
+      Checks whether the given quaternions are equal.
+    Params:
+      b =       a #graphene_quaternion_t
+    Returns:     `true` if the quaternions are equal
+  */
   bool equal(graphene.quaternion.Quaternion b)
   {
     bool _retval;
@@ -97,14 +99,14 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_quaternion_t using the given four values.
-   * Params:
-   *   x = the first component of the quaternion
-   *   y = the second component of the quaternion
-   *   z = the third component of the quaternion
-   *   w = the fourth component of the quaternion
-   * Returns: the initialized quaternion
-   */
+      Initializes a #graphene_quaternion_t using the given four values.
+    Params:
+      x =       the first component of the quaternion
+      y =       the second component of the quaternion
+      z =       the third component of the quaternion
+      w =       the fourth component of the quaternion
+    Returns:     the initialized quaternion
+  */
   graphene.quaternion.Quaternion init_(float x, float y, float z, float w)
   {
     graphene_quaternion_t* _cretval;
@@ -114,13 +116,13 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_quaternion_t using an angle on a
-   * specific axis.
-   * Params:
-   *   angle = the rotation on a given axis, in degrees
-   *   axis = the axis of rotation, expressed as a vector
-   * Returns: the initialized quaternion
-   */
+      Initializes a #graphene_quaternion_t using an angle on a
+    specific axis.
+    Params:
+      angle =       the rotation on a given axis, in degrees
+      axis =       the axis of rotation, expressed as a vector
+    Returns:     the initialized quaternion
+  */
   graphene.quaternion.Quaternion initFromAngleVec3(float angle, graphene.vec3.Vec3 axis)
   {
     graphene_quaternion_t* _cretval;
@@ -130,16 +132,17 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_quaternion_t using the values of
-   * the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
-   * on each axis.
-   * See also: [graphene.quaternion.Quaternion.initFromEuler]
-   * Params:
-   *   degX = rotation angle on the X axis $(LPAREN)yaw$(RPAREN), in degrees
-   *   degY = rotation angle on the Y axis $(LPAREN)pitch$(RPAREN), in degrees
-   *   degZ = rotation angle on the Z axis $(LPAREN)roll$(RPAREN), in degrees
-   * Returns: the initialized quaternion
-   */
+      Initializes a #graphene_quaternion_t using the values of
+    the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
+    on each axis.
+    
+    See also: [graphene.quaternion.Quaternion.initFromEuler]
+    Params:
+      degX =       rotation angle on the X axis (yaw), in degrees
+      degY =       rotation angle on the Y axis (pitch), in degrees
+      degZ =       rotation angle on the Z axis (roll), in degrees
+    Returns:     the initialized quaternion
+  */
   graphene.quaternion.Quaternion initFromAngles(float degX, float degY, float degZ)
   {
     graphene_quaternion_t* _cretval;
@@ -149,11 +152,11 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_quaternion_t using the given #graphene_euler_t.
-   * Params:
-   *   e = a #graphene_euler_t
-   * Returns: the initialized #graphene_quaternion_t
-   */
+      Initializes a #graphene_quaternion_t using the given #graphene_euler_t.
+    Params:
+      e =       a #graphene_euler_t
+    Returns:     the initialized #graphene_quaternion_t
+  */
   graphene.quaternion.Quaternion initFromEuler(graphene.euler.Euler e)
   {
     graphene_quaternion_t* _cretval;
@@ -163,12 +166,12 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_quaternion_t using the rotation components
-   * of a transformation matrix.
-   * Params:
-   *   m = a #graphene_matrix_t
-   * Returns: the initialized quaternion
-   */
+      Initializes a #graphene_quaternion_t using the rotation components
+    of a transformation matrix.
+    Params:
+      m =       a #graphene_matrix_t
+    Returns:     the initialized quaternion
+  */
   graphene.quaternion.Quaternion initFromMatrix(graphene.matrix.Matrix m)
   {
     graphene_quaternion_t* _cretval;
@@ -178,11 +181,11 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_quaternion_t with the values from src.
-   * Params:
-   *   src = a #graphene_quaternion_t
-   * Returns: the initialized quaternion
-   */
+      Initializes a #graphene_quaternion_t with the values from src.
+    Params:
+      src =       a #graphene_quaternion_t
+    Returns:     the initialized quaternion
+  */
   graphene.quaternion.Quaternion initFromQuaternion(graphene.quaternion.Quaternion src)
   {
     graphene_quaternion_t* _cretval;
@@ -192,16 +195,17 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_quaternion_t using the values of
-   * the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
-   * on each axis.
-   * See also: [graphene.quaternion.Quaternion.initFromEuler]
-   * Params:
-   *   radX = rotation angle on the X axis $(LPAREN)yaw$(RPAREN), in radians
-   *   radY = rotation angle on the Y axis $(LPAREN)pitch$(RPAREN), in radians
-   *   radZ = rotation angle on the Z axis $(LPAREN)roll$(RPAREN), in radians
-   * Returns: the initialized quaternion
-   */
+      Initializes a #graphene_quaternion_t using the values of
+    the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
+    on each axis.
+    
+    See also: [graphene.quaternion.Quaternion.initFromEuler]
+    Params:
+      radX =       rotation angle on the X axis (yaw), in radians
+      radY =       rotation angle on the Y axis (pitch), in radians
+      radZ =       rotation angle on the Z axis (roll), in radians
+    Returns:     the initialized quaternion
+  */
   graphene.quaternion.Quaternion initFromRadians(float radX, float radY, float radZ)
   {
     graphene_quaternion_t* _cretval;
@@ -211,11 +215,11 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_quaternion_t with the values from src.
-   * Params:
-   *   src = a #graphene_vec4_t
-   * Returns: the initialized quaternion
-   */
+      Initializes a #graphene_quaternion_t with the values from src.
+    Params:
+      src =       a #graphene_vec4_t
+    Returns:     the initialized quaternion
+  */
   graphene.quaternion.Quaternion initFromVec4(graphene.vec4.Vec4 src)
   {
     graphene_quaternion_t* _cretval;
@@ -225,10 +229,10 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_quaternion_t using the identity
-   * transformation.
-   * Returns: the initialized quaternion
-   */
+      Initializes a #graphene_quaternion_t using the identity
+    transformation.
+    Returns:     the initialized quaternion
+  */
   graphene.quaternion.Quaternion initIdentity()
   {
     graphene_quaternion_t* _cretval;
@@ -238,12 +242,12 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Inverts a #graphene_quaternion_t, and returns the conjugate
-   * quaternion of q.
-   * Params:
-   *   res = return location for the inverted
-   *     quaternion
-   */
+      Inverts a #graphene_quaternion_t, and returns the conjugate
+    quaternion of q.
+    Params:
+      res =       return location for the inverted
+          quaternion
+  */
   void invert(out graphene.quaternion.Quaternion res)
   {
     graphene_quaternion_t _res;
@@ -252,11 +256,11 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Multiplies two #graphene_quaternion_t a and b.
-   * Params:
-   *   b = a #graphene_quaternion_t
-   *   res = the result of the operation
-   */
+      Multiplies two #graphene_quaternion_t a and b.
+    Params:
+      b =       a #graphene_quaternion_t
+      res =       the result of the operation
+  */
   void multiply(graphene.quaternion.Quaternion b, out graphene.quaternion.Quaternion res)
   {
     graphene_quaternion_t _res;
@@ -265,11 +269,11 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Normalizes a #graphene_quaternion_t.
-   * Params:
-   *   res = return location for the normalized
-   *     quaternion
-   */
+      Normalizes a #graphene_quaternion_t.
+    Params:
+      res =       return location for the normalized
+          quaternion
+  */
   void normalize(out graphene.quaternion.Quaternion res)
   {
     graphene_quaternion_t _res;
@@ -278,12 +282,12 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Scales all the elements of a #graphene_quaternion_t q using
-   * the given scalar factor.
-   * Params:
-   *   factor = a scaling factor
-   *   res = the result of the operation
-   */
+      Scales all the elements of a #graphene_quaternion_t q using
+    the given scalar factor.
+    Params:
+      factor =       a scaling factor
+      res =       the result of the operation
+  */
   void scale(float factor, out graphene.quaternion.Quaternion res)
   {
     graphene_quaternion_t _res;
@@ -292,15 +296,15 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Interpolates between the two given quaternions using a spherical
-   * linear interpolation, or [SLERP](http://en.wikipedia.org/wiki/Slerp),
-   * using the given interpolation factor.
-   * Params:
-   *   b = a #graphene_quaternion_t
-   *   factor = the linear interpolation factor
-   *   res = return location for the interpolated
-   *     quaternion
-   */
+      Interpolates between the two given quaternions using a spherical
+    linear interpolation, or [SLERP](http://en.wikipedia.org/wiki/Slerp),
+    using the given interpolation factor.
+    Params:
+      b =       a #graphene_quaternion_t
+      factor =       the linear interpolation factor
+      res =       return location for the interpolated
+          quaternion
+  */
   void slerp(graphene.quaternion.Quaternion b, float factor, out graphene.quaternion.Quaternion res)
   {
     graphene_quaternion_t _res;
@@ -309,11 +313,11 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Converts a quaternion into an angle, axis pair.
-   * Params:
-   *   angle = return location for the angle, in degrees
-   *   axis = return location for the rotation axis
-   */
+      Converts a quaternion into an angle, axis pair.
+    Params:
+      angle =       return location for the angle, in degrees
+      axis =       return location for the rotation axis
+  */
   void toAngleVec3(out float angle, out graphene.vec3.Vec3 axis)
   {
     graphene_vec3_t _axis;
@@ -322,28 +326,28 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Converts a #graphene_quaternion_t to its corresponding rotations
-   * on the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
-   * on each axis.
-   * Params:
-   *   degX = return location for the rotation angle on
-   *     the X axis $(LPAREN)yaw$(RPAREN), in degrees
-   *   degY = return location for the rotation angle on
-   *     the Y axis $(LPAREN)pitch$(RPAREN), in degrees
-   *   degZ = return location for the rotation angle on
-   *     the Z axis $(LPAREN)roll$(RPAREN), in degrees
-   */
+      Converts a #graphene_quaternion_t to its corresponding rotations
+    on the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
+    on each axis.
+    Params:
+      degX =       return location for the rotation angle on
+          the X axis (yaw), in degrees
+      degY =       return location for the rotation angle on
+          the Y axis (pitch), in degrees
+      degZ =       return location for the rotation angle on
+          the Z axis (roll), in degrees
+  */
   void toAngles(out float degX, out float degY, out float degZ)
   {
     graphene_quaternion_to_angles(cast(const(graphene_quaternion_t)*)cPtr, cast(float*)&degX, cast(float*)&degY, cast(float*)&degZ);
   }
 
   /**
-   * Converts a quaternion into a transformation matrix expressing
-   * the rotation defined by the #graphene_quaternion_t.
-   * Params:
-   *   m = a #graphene_matrix_t
-   */
+      Converts a quaternion into a transformation matrix expressing
+    the rotation defined by the #graphene_quaternion_t.
+    Params:
+      m =       a #graphene_matrix_t
+  */
   void toMatrix(out graphene.matrix.Matrix m)
   {
     graphene_matrix_t _m;
@@ -352,29 +356,29 @@ class Quaternion : gobject.boxed.Boxed
   }
 
   /**
-   * Converts a #graphene_quaternion_t to its corresponding rotations
-   * on the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
-   * on each axis.
-   * Params:
-   *   radX = return location for the rotation angle on
-   *     the X axis $(LPAREN)yaw$(RPAREN), in radians
-   *   radY = return location for the rotation angle on
-   *     the Y axis $(LPAREN)pitch$(RPAREN), in radians
-   *   radZ = return location for the rotation angle on
-   *     the Z axis $(LPAREN)roll$(RPAREN), in radians
-   */
+      Converts a #graphene_quaternion_t to its corresponding rotations
+    on the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
+    on each axis.
+    Params:
+      radX =       return location for the rotation angle on
+          the X axis (yaw), in radians
+      radY =       return location for the rotation angle on
+          the Y axis (pitch), in radians
+      radZ =       return location for the rotation angle on
+          the Z axis (roll), in radians
+  */
   void toRadians(out float radX, out float radY, out float radZ)
   {
     graphene_quaternion_to_radians(cast(const(graphene_quaternion_t)*)cPtr, cast(float*)&radX, cast(float*)&radY, cast(float*)&radZ);
   }
 
   /**
-   * Copies the components of a #graphene_quaternion_t into a
-   * #graphene_vec4_t.
-   * Params:
-   *   res = return location for a
-   *     #graphene_vec4_t
-   */
+      Copies the components of a #graphene_quaternion_t into a
+    #graphene_vec4_t.
+    Params:
+      res =       return location for a
+          #graphene_vec4_t
+  */
   void toVec4(out graphene.vec4.Vec4 res)
   {
     graphene_vec4_t _res;

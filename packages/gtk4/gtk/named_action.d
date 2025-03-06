@@ -7,8 +7,8 @@ import gtk.shortcut_action;
 import gtk.types;
 
 /**
- * A `GtkShortcutAction` that activates an action by name.
- */
+    A [gtk.shortcut_action.ShortcutAction] that activates an action by name.
+*/
 class NamedAction : gtk.shortcut_action.ShortcutAction
 {
 
@@ -29,15 +29,17 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
-   * Creates an action that when activated, activates
-   * the named action on the widget.
-   * It also passes the given arguments to it.
-   * See [gtk.widget.Widget.insertActionGroup] for
-   * how to add actions to widgets.
-   * Params:
-   *   name = the detailed name of the action
-   * Returns: a new `GtkShortcutAction`
-   */
+      Creates an action that when activated, activates
+    the named action on the widget.
+    
+    It also passes the given arguments to it.
+    
+    See [gtk.widget.Widget.insertActionGroup] for
+    how to add actions to widgets.
+    Params:
+      name =       the detailed name of the action
+    Returns:     a new [gtk.shortcut_action.ShortcutAction]
+  */
   this(string name)
   {
     GtkShortcutAction* _cretval;
@@ -47,9 +49,9 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
-   * Returns the name of the action that will be activated.
-   * Returns: the name of the action to activate
-   */
+      Returns the name of the action that will be activated.
+    Returns:     the name of the action to activate
+  */
   string getActionName()
   {
     const(char)* _cretval;

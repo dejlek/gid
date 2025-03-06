@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class FloatArray : arrow.numeric_array.NumericArray
 {
 
@@ -27,6 +28,7 @@ class FloatArray : arrow.numeric_array.NumericArray
     return getType();
   }
 
+  /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowFloatArray* _cretval;
@@ -34,6 +36,7 @@ class FloatArray : arrow.numeric_array.NumericArray
     this(_cretval, Yes.Take);
   }
 
+  /** */
   float getValue(long i)
   {
     float _retval;
@@ -41,6 +44,7 @@ class FloatArray : arrow.numeric_array.NumericArray
     return _retval;
   }
 
+  /** */
   float[] getValues()
   {
     const(float)* _cretval;
@@ -55,6 +59,7 @@ class FloatArray : arrow.numeric_array.NumericArray
     return _retval;
   }
 
+  /** */
   double sum()
   {
     double _retval;

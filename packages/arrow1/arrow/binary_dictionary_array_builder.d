@@ -10,6 +10,7 @@ import gid.gid;
 import glib.bytes;
 import glib.error;
 
+/** */
 class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
@@ -29,6 +30,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowBinaryDictionaryArrayBuilder* _cretval;
@@ -36,6 +38,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool appendArray(arrow.binary_array.BinaryArray array)
   {
     bool _retval;
@@ -47,15 +50,15 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-   * Append dictionary indices directly without modifying the internal memo.
-   * Params:
-   *   values = The array of indices.
-   *   isValids = The array of
-   *     %TRUE or %FALSE that shows whether the Nth value is valid or not. If the
-   *     Nth `is_valids` is %TRUE, the Nth `values` is valid value. Otherwise
-   *     the Nth value is null value.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append dictionary indices directly without modifying the internal memo.
+    Params:
+      values =       The array of indices.
+      isValids =       The array of
+          true or false that shows whether the Nth value is valid or not. If the
+          Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
+          the Nth value is null value.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendIndices(long[] values, bool[] isValids = null)
   {
     bool _retval;
@@ -76,6 +79,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   bool appendValue(ubyte[] value)
   {
     bool _retval;
@@ -91,6 +95,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   bool appendValueBytes(glib.bytes.Bytes value)
   {
     bool _retval;
@@ -101,6 +106,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   bool finishDelta(out arrow.array.Array outIndices, out arrow.array.Array outDelta)
   {
     bool _retval;
@@ -115,6 +121,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   long getDictionaryLength()
   {
     long _retval;
@@ -122,6 +129,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   bool insertMemoValues(arrow.binary_array.BinaryArray values)
   {
     bool _retval;
@@ -133,8 +141,8 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-   * Reset and also clear accumulated dictionary values in memo table.
-   */
+      Reset and also clear accumulated dictionary values in memo table.
+  */
   void resetFull()
   {
     garrow_binary_dictionary_array_builder_reset_full(cast(GArrowBinaryDictionaryArrayBuilder*)cPtr);

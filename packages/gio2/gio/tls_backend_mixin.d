@@ -10,19 +10,19 @@ public import gobject.object;
 public import gobject.types;
 
 /**
- * TLS $(LPAREN)Transport Layer Security, aka SSL$(RPAREN) and DTLS backend. This is an
- * internal type used to coordinate the different classes implemented
- * by a TLS backend.
- */
+    TLS (Transport Layer Security, aka SSL) and DTLS backend. This is an
+  internal type used to coordinate the different classes implemented
+  by a TLS backend.
+*/
 template TlsBackendT()
 {
 
 
   /**
-   * Gets the #GType of backend's #GTlsCertificate implementation.
-   * Returns: the #GType of backend's #GTlsCertificate
-   *   implementation.
-   */
+      Gets the #GType of backend's #GTlsCertificate implementation.
+    Returns:     the #GType of backend's #GTlsCertificate
+        implementation.
+  */
   override gobject.types.GType getCertificateType()
   {
     gobject.types.GType _retval;
@@ -31,10 +31,10 @@ template TlsBackendT()
   }
 
   /**
-   * Gets the #GType of backend's #GTlsClientConnection implementation.
-   * Returns: the #GType of backend's #GTlsClientConnection
-   *   implementation.
-   */
+      Gets the #GType of backend's #GTlsClientConnection implementation.
+    Returns:     the #GType of backend's #GTlsClientConnection
+        implementation.
+  */
   override gobject.types.GType getClientConnectionType()
   {
     gobject.types.GType _retval;
@@ -43,10 +43,10 @@ template TlsBackendT()
   }
 
   /**
-   * Gets the default #GTlsDatabase used to verify TLS connections.
-   * Returns: the default database, which should be
-   *   unreffed when done.
-   */
+      Gets the default #GTlsDatabase used to verify TLS connections.
+    Returns:     the default database, which should be
+                    unreffed when done.
+  */
   override gio.tls_database.TlsDatabase getDefaultDatabase()
   {
     GTlsDatabase* _cretval;
@@ -56,10 +56,10 @@ template TlsBackendT()
   }
 
   /**
-   * Gets the #GType of backend’s #GDtlsClientConnection implementation.
-   * Returns: the #GType of backend’s #GDtlsClientConnection
-   *   implementation, or %G_TYPE_INVALID if this backend doesn’t support DTLS.
-   */
+      Gets the #GType of backend’s #GDtlsClientConnection implementation.
+    Returns:     the #GType of backend’s #GDtlsClientConnection
+        implementation, or `G_TYPE_INVALID` if this backend doesn’t support DTLS.
+  */
   override gobject.types.GType getDtlsClientConnectionType()
   {
     gobject.types.GType _retval;
@@ -68,10 +68,10 @@ template TlsBackendT()
   }
 
   /**
-   * Gets the #GType of backend’s #GDtlsServerConnection implementation.
-   * Returns: the #GType of backend’s #GDtlsServerConnection
-   *   implementation, or %G_TYPE_INVALID if this backend doesn’t support DTLS.
-   */
+      Gets the #GType of backend’s #GDtlsServerConnection implementation.
+    Returns:     the #GType of backend’s #GDtlsServerConnection
+        implementation, or `G_TYPE_INVALID` if this backend doesn’t support DTLS.
+  */
   override gobject.types.GType getDtlsServerConnectionType()
   {
     gobject.types.GType _retval;
@@ -80,9 +80,9 @@ template TlsBackendT()
   }
 
   /**
-   * Gets the #GType of backend's #GTlsFileDatabase implementation.
-   * Returns: the #GType of backend's #GTlsFileDatabase implementation.
-   */
+      Gets the #GType of backend's #GTlsFileDatabase implementation.
+    Returns:     the #GType of backend's #GTlsFileDatabase implementation.
+  */
   override gobject.types.GType getFileDatabaseType()
   {
     gobject.types.GType _retval;
@@ -91,10 +91,10 @@ template TlsBackendT()
   }
 
   /**
-   * Gets the #GType of backend's #GTlsServerConnection implementation.
-   * Returns: the #GType of backend's #GTlsServerConnection
-   *   implementation.
-   */
+      Gets the #GType of backend's #GTlsServerConnection implementation.
+    Returns:     the #GType of backend's #GTlsServerConnection
+        implementation.
+  */
   override gobject.types.GType getServerConnectionType()
   {
     gobject.types.GType _retval;
@@ -103,25 +103,27 @@ template TlsBackendT()
   }
 
   /**
-   * Set the default #GTlsDatabase used to verify TLS connections
-   * Any subsequent call to [gio.tls_backend.TlsBackend.getDefaultDatabase] will return
-   * the database set in this call.  Existing databases and connections are not
-   * modified.
-   * Setting a %NULL default database will reset to using the system default
-   * database as if [gio.tls_backend.TlsBackend.setDefaultDatabase] had never been called.
-   * Params:
-   *   database = the #GTlsDatabase
-   */
+      Set the default #GTlsDatabase used to verify TLS connections
+    
+    Any subsequent call to [gio.tls_backend.TlsBackend.getDefaultDatabase] will return
+    the database set in this call.  Existing databases and connections are not
+    modified.
+    
+    Setting a null default database will reset to using the system default
+    database as if [gio.tls_backend.TlsBackend.setDefaultDatabase] had never been called.
+    Params:
+      database =       the #GTlsDatabase
+  */
   override void setDefaultDatabase(gio.tls_database.TlsDatabase database = null)
   {
     g_tls_backend_set_default_database(cast(GTlsBackend*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.Dup) : null);
   }
 
   /**
-   * Checks if DTLS is supported. DTLS support may not be available even if TLS
-   * support is available, and vice-versa.
-   * Returns: whether DTLS is supported
-   */
+      Checks if DTLS is supported. DTLS support may not be available even if TLS
+    support is available, and vice-versa.
+    Returns:     whether DTLS is supported
+  */
   override bool supportsDtls()
   {
     bool _retval;
@@ -130,10 +132,10 @@ template TlsBackendT()
   }
 
   /**
-   * Checks if TLS is supported; if this returns %FALSE for the default
-   * #GTlsBackend, it means no "real" TLS backend is available.
-   * Returns: whether or not TLS is supported
-   */
+      Checks if TLS is supported; if this returns false for the default
+    #GTlsBackend, it means no "real" TLS backend is available.
+    Returns:     whether or not TLS is supported
+  */
   override bool supportsTls()
   {
     bool _retval;

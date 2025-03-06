@@ -11,6 +11,7 @@ import arrow.writable;
 import arrow.writable_mixin;
 import gid.gid;
 
+/** */
 class BufferOutputStream : arrow.output_stream.OutputStream
 {
 
@@ -30,6 +31,7 @@ class BufferOutputStream : arrow.output_stream.OutputStream
     return getType();
   }
 
+  /** */
   this(arrow.resizable_buffer.ResizableBuffer buffer)
   {
     GArrowBufferOutputStream* _cretval;

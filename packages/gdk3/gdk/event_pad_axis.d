@@ -8,8 +8,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Generated during %GDK_SOURCE_TABLET_PAD interaction with tactile sensors.
- */
+    Generated during [gdk.types.InputSource.TabletPad] interaction with tactile sensors.
+*/
 class EventPadAxis
 {
   GdkEventPadAxis cInstance;

@@ -6,6 +6,7 @@ import arrow.numeric_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class FloatingPointDataType : arrow.numeric_data_type.NumericDataType
 {
 

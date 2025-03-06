@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class Datum : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class Datum : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   bool equal(arrow.datum.Datum otherDatum)
   {
     bool _retval;
@@ -32,6 +34,7 @@ class Datum : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isArray()
   {
     bool _retval;
@@ -39,6 +42,7 @@ class Datum : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isArrayLike()
   {
     bool _retval;
@@ -46,6 +50,7 @@ class Datum : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isScalar()
   {
     bool _retval;
@@ -53,6 +58,7 @@ class Datum : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isValue()
   {
     bool _retval;
@@ -60,6 +66,7 @@ class Datum : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;

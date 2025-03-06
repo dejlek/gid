@@ -7,8 +7,8 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * A struct containing color information for a gradient.
- */
+    A struct containing color information for a gradient.
+*/
 class ColorLine : gobject.boxed.Boxed
 {
 

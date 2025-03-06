@@ -15,11 +15,12 @@ import pango.language;
 import pango.types;
 
 /**
- * A `PangoFontMap` represents the set of fonts available for a
- * particular rendering system.
- * This is a virtual object with implementations being specific to
- * particular rendering systems.
- */
+    A [pango.font_map.FontMap] represents the set of fonts available for a
+  particular rendering system.
+  
+  This is a virtual object with implementations being specific to
+  particular rendering systems.
+*/
 class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
@@ -42,29 +43,32 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
   mixin ListModelT!();
 
   /**
-   * Forces a change in the context, which will cause any `PangoContext`
-   * using this fontmap to change.
-   * This function is only useful when implementing a new backend
-   * for Pango, something applications won't do. Backends should
-   * call this function if they have attached extra data to the
-   * context and such data is changed.
-   */
+      Forces a change in the context, which will cause any [pango.context.Context]
+    using this fontmap to change.
+    
+    This function is only useful when implementing a new backend
+    for Pango, something applications won't do. Backends should
+    call this function if they have attached extra data to the
+    context and such data is changed.
+  */
   void changed()
   {
     pango_font_map_changed(cast(PangoFontMap*)cPtr);
   }
 
   /**
-   * Creates a `PangoContext` connected to fontmap.
-   * This is equivalent to [pango.context.Context.new_] followed by
-   * [pango.context.Context.setFontMap].
-   * If you are using Pango as part of a higher-level system,
-   * that system may have it's own way of create a `PangoContext`.
-   * For instance, the GTK toolkit has, among others,
-   * [gtk.widget.Widget.getPangoContext]. Use those instead.
-   * Returns: the newly allocated `PangoContext`,
-   *   which should be freed with [gobject.object.ObjectG.unref].
-   */
+      Creates a [pango.context.Context] connected to fontmap.
+    
+    This is equivalent to [pango.context.Context.new_] followed by
+    [pango.context.Context.setFontMap].
+    
+    If you are using Pango as part of a higher-level system,
+    that system may have it's own way of create a [pango.context.Context].
+    For instance, the GTK toolkit has, among others,
+    [gtk.widget.Widget.getPangoContext]. Use those instead.
+    Returns:     the newly allocated [pango.context.Context],
+        which should be freed with [gobject.object.ObjectG.unref].
+  */
   pango.context.Context createContext()
   {
     PangoContext* _cretval;
@@ -74,11 +78,11 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * Gets a font family by name.
-   * Params:
-   *   name = a family name
-   * Returns: the `PangoFontFamily`
-   */
+      Gets a font family by name.
+    Params:
+      name =       a family name
+    Returns:     the [pango.font_family.FontFamily]
+  */
   pango.font_family.FontFamily getFamily(string name)
   {
     PangoFontFamily* _cretval;
@@ -89,17 +93,20 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * Returns the current serial number of fontmap.
-   * The serial number is initialized to an small number larger than zero
-   * when a new fontmap is created and is increased whenever the fontmap
-   * is changed. It may wrap, but will never have the value 0. Since it can
-   * wrap, never compare it with "less than", always use "not equals".
-   * The fontmap can only be changed using backend-specific API, like changing
-   * fontmap resolution.
-   * This can be used to automatically detect changes to a `PangoFontMap`,
-   * like in `PangoContext`.
-   * Returns: The current serial number of fontmap.
-   */
+      Returns the current serial number of fontmap.
+    
+    The serial number is initialized to an small number larger than zero
+    when a new fontmap is created and is increased whenever the fontmap
+    is changed. It may wrap, but will never have the value 0. Since it can
+    wrap, never compare it with "less than", always use "not equals".
+    
+    The fontmap can only be changed using backend-specific API, like changing
+    fontmap resolution.
+    
+    This can be used to automatically detect changes to a [pango.font_map.FontMap],
+    like in [pango.context.Context].
+    Returns:     The current serial number of fontmap.
+  */
   uint getSerial()
   {
     uint _retval;
@@ -108,15 +115,17 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * List all families for a fontmap.
-   * Note that the returned families are not in any particular order.
-   * `PangoFontMap` also implemented the [gio.list_model.ListModel] interface
-   * for enumerating families.
-   * Params:
-   *   families = location to
-   *     store a pointer to an array of `PangoFontFamily` *.
-   *     This array should be freed with [glib.global.gfree].
-   */
+      List all families for a fontmap.
+    
+    Note that the returned families are not in any particular order.
+    
+    [pango.font_map.FontMap] also implemented the [gio.list_model.ListModel] interface
+    for enumerating families.
+    Params:
+      families =       location to
+          store a pointer to an array of [pango.font_family.FontFamily] *.
+          This array should be freed with [glib.global.gfree].
+  */
   void listFamilies(out pango.font_family.FontFamily[] families)
   {
     int _nFamilies;
@@ -129,13 +138,13 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * Load the font in the fontmap that is the closest match for desc.
-   * Params:
-   *   context = the `PangoContext` the font will be used with
-   *   desc = a `PangoFontDescription` describing the font to load
-   * Returns: the newly allocated `PangoFont`
-   *   loaded, or %NULL if no font matched.
-   */
+      Load the font in the fontmap that is the closest match for desc.
+    Params:
+      context =       the [pango.context.Context] the font will be used with
+      desc =       a [pango.font_description.FontDescription] describing the font to load
+    Returns:     the newly allocated [pango.font.Font]
+        loaded, or null if no font matched.
+  */
   pango.font.Font loadFont(pango.context.Context context, pango.font_description.FontDescription desc)
   {
     PangoFont* _cretval;
@@ -145,15 +154,15 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * Load a set of fonts in the fontmap that can be used to render
-   * a font matching desc.
-   * Params:
-   *   context = the `PangoContext` the font will be used with
-   *   desc = a `PangoFontDescription` describing the font to load
-   *   language = a `PangoLanguage` the fonts will be used for
-   * Returns: the newly allocated
-   *   `PangoFontset` loaded, or %NULL if no font matched.
-   */
+      Load a set of fonts in the fontmap that can be used to render
+    a font matching desc.
+    Params:
+      context =       the [pango.context.Context] the font will be used with
+      desc =       a [pango.font_description.FontDescription] describing the font to load
+      language =       a [pango.language.Language] the fonts will be used for
+    Returns:     the newly allocated
+        [pango.fontset.Fontset] loaded, or null if no font matched.
+  */
   pango.fontset.Fontset loadFontset(pango.context.Context context, pango.font_description.FontDescription desc, pango.language.Language language)
   {
     PangoFontset* _cretval;
@@ -163,17 +172,17 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * Returns a new font that is like font, except that its size
-   * is multiplied by scale, its backend-dependent configuration
-   * $(LPAREN)e.g. cairo font options$(RPAREN) is replaced by the one in context,
-   * and its variations are replaced by variations.
-   * Params:
-   *   font = a font in fontmap
-   *   scale = the scale factor to apply
-   *   context = a `PangoContext`
-   *   variations = font variations to use
-   * Returns: the modified font
-   */
+      Returns a new font that is like font, except that its size
+    is multiplied by scale, its backend-dependent configuration
+    (e.g. cairo font options) is replaced by the one in context,
+    and its variations are replaced by variations.
+    Params:
+      font =       a font in fontmap
+      scale =       the scale factor to apply
+      context =       a [pango.context.Context]
+      variations =       font variations to use
+    Returns:     the modified font
+  */
   pango.font.Font reloadFont(pango.font.Font font, double scale, pango.context.Context context = null, string variations = null)
   {
     PangoFont* _cretval;

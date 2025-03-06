@@ -8,6 +8,7 @@ import gtk.c.types;
 import gtk.container_accessible;
 import gtk.types;
 
+/** */
 class FrameAccessible : gtk.container_accessible.ContainerAccessible
 {
 

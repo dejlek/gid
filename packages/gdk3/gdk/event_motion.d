@@ -9,8 +9,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Generated when the pointer moves.
- */
+    Generated when the pointer moves.
+*/
 class EventMotion
 {
   GdkEventMotion cInstance;

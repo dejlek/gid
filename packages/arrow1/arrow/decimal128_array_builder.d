@@ -10,6 +10,7 @@ import gid.gid;
 import glib.bytes;
 import glib.error;
 
+/** */
 class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder
 {
 
@@ -29,6 +30,7 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
     return getType();
   }
 
+  /** */
   this(arrow.decimal128_data_type.Decimal128DataType dataType)
   {
     GArrowDecimal128ArrayBuilder* _cretval;
@@ -36,6 +38,7 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool append(arrow.decimal128.Decimal128 value)
   {
     bool _retval;
@@ -48,6 +51,7 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
 
   alias appendValue = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValue;
 
+  /** */
   bool appendValue(arrow.decimal128.Decimal128 value = null)
   {
     bool _retval;
@@ -61,16 +65,16 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
   alias appendValues = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValues;
 
   /**
-   * Append multiple values at once. It's more efficient than multiple
-   * `append` and `append_null` calls.
-   * Params:
-   *   values = The array of #GArrowDecimal128.
-   *   isValids = The array of
-   *     boolean that shows whether the Nth value is valid or not. If the
-   *     Nth is_valids is %TRUE, the Nth values is valid value. Otherwise
-   *     the Nth value is null value.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append multiple values at once. It's more efficient than multiple
+    `append` and `append_null` calls.
+    Params:
+      values =       The array of #GArrowDecimal128.
+      isValids =       The array of
+          boolean that shows whether the Nth value is valid or not. If the
+          Nth is_valids is true, the Nth values is valid value. Otherwise
+          the Nth value is null value.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendValues(arrow.decimal128.Decimal128[] values, bool[] isValids = null)
   {
     bool _retval;

@@ -10,9 +10,9 @@ import gobject.boxed;
 import glib.types;
 
 /**
- * The `GError` structure contains information about
- * an error that has occurred.
- */
+    The [glib.error.ErrorG] structure contains information about
+  an error that has occurred.
+*/
 class ErrorG : Exception
 {
   private GError* errPtr;
@@ -70,8 +70,8 @@ class ErrorG : Exception
   }
 
   /**
-   * a new #GError
-   */
+  * a new #GError
+  */
   static ErrorG newLiteral(Quark domain, int code, string message)
   {
     GError* _cretval;
@@ -82,8 +82,8 @@ class ErrorG : Exception
   }
 
   /**
-   * a new #GError
-   */
+  * a new #GError
+  */
   ErrorG copy()
   {
     GError* _cretval;
@@ -93,8 +93,8 @@ class ErrorG : Exception
   }
 
   /**
-   * whether @error has @domain and @code
-   */
+  * whether @error has @domain and @code
+  */
   bool matches(Quark domain, int code)
   {
     bool _retval;

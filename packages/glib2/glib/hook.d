@@ -7,8 +7,8 @@ import glib.hook_list;
 import glib.types;
 
 /**
- * The #GHook struct represents a single hook function in a #GHookList.
- */
+    The #GHook struct represents a single hook function in a #GHookList.
+*/
 class Hook
 {
   GHook cInstance;
@@ -80,12 +80,12 @@ class Hook
   }
 
   /**
-   * Compares the ids of two #GHook elements, returning a negative value
-   * if the second id is greater than the first.
-   * Params:
-   *   sibling = a #GHook to compare with new_hook
-   * Returns: a value <\= 0 if the id of sibling is >\= the id of new_hook
-   */
+      Compares the ids of two #GHook elements, returning a negative value
+    if the second id is greater than the first.
+    Params:
+      sibling =       a #GHook to compare with new_hook
+    Returns:     a value <= 0 if the id of sibling is >= the id of new_hook
+  */
   int compareIds(glib.hook.Hook sibling)
   {
     int _retval;
@@ -94,12 +94,12 @@ class Hook
   }
 
   /**
-   * Destroys a #GHook, given its ID.
-   * Params:
-   *   hookList = a #GHookList
-   *   hookId = a hook ID
-   * Returns: %TRUE if the #GHook was found in the #GHookList and destroyed
-   */
+      Destroys a #GHook, given its ID.
+    Params:
+      hookList =       a #GHookList
+      hookId =       a hook ID
+    Returns:     true if the #GHook was found in the #GHookList and destroyed
+  */
   static bool destroy(glib.hook_list.HookList hookList, gulong hookId)
   {
     bool _retval;
@@ -108,48 +108,48 @@ class Hook
   }
 
   /**
-   * Removes one #GHook from a #GHookList, marking it
-   * inactive and calling [glib.hook.Hook.unref] on it.
-   * Params:
-   *   hookList = a #GHookList
-   *   hook = the #GHook to remove
-   */
+      Removes one #GHook from a #GHookList, marking it
+    inactive and calling [glib.hook.Hook.unref] on it.
+    Params:
+      hookList =       a #GHookList
+      hook =       the #GHook to remove
+  */
   static void destroyLink(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {
     g_hook_destroy_link(hookList ? cast(GHookList*)hookList.cPtr : null, hook ? cast(GHook*)hook.cPtr : null);
   }
 
   /**
-   * Calls the #GHookList finalize_hook function if it exists,
-   * and frees the memory allocated for the #GHook.
-   * Params:
-   *   hookList = a #GHookList
-   *   hook = the #GHook to free
-   */
+      Calls the #GHookList finalize_hook function if it exists,
+    and frees the memory allocated for the #GHook.
+    Params:
+      hookList =       a #GHookList
+      hook =       the #GHook to free
+  */
   static void free(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {
     g_hook_free(hookList ? cast(GHookList*)hookList.cPtr : null, hook ? cast(GHook*)hook.cPtr : null);
   }
 
   /**
-   * Inserts a #GHook into a #GHookList, before a given #GHook.
-   * Params:
-   *   hookList = a #GHookList
-   *   sibling = the #GHook to insert the new #GHook before
-   *   hook = the #GHook to insert
-   */
+      Inserts a #GHook into a #GHookList, before a given #GHook.
+    Params:
+      hookList =       a #GHookList
+      sibling =       the #GHook to insert the new #GHook before
+      hook =       the #GHook to insert
+  */
   static void insertBefore(glib.hook_list.HookList hookList, glib.hook.Hook sibling, glib.hook.Hook hook)
   {
     g_hook_insert_before(hookList ? cast(GHookList*)hookList.cPtr : null, sibling ? cast(GHook*)sibling.cPtr : null, hook ? cast(GHook*)hook.cPtr : null);
   }
 
   /**
-   * Inserts a #GHook into a #GHookList, sorted by the given function.
-   * Params:
-   *   hookList = a #GHookList
-   *   hook = the #GHook to insert
-   *   func = the comparison function used to sort the #GHook elements
-   */
+      Inserts a #GHook into a #GHookList, sorted by the given function.
+    Params:
+      hookList =       a #GHookList
+      hook =       the #GHook to insert
+      func =       the comparison function used to sort the #GHook elements
+  */
   static void insertSorted(glib.hook_list.HookList hookList, glib.hook.Hook hook, glib.types.HookCompareFunc func)
   {
     static glib.types.HookCompareFunc _static_func;
@@ -167,24 +167,24 @@ class Hook
   }
 
   /**
-   * Prepends a #GHook on the start of a #GHookList.
-   * Params:
-   *   hookList = a #GHookList
-   *   hook = the #GHook to add to the start of hook_list
-   */
+      Prepends a #GHook on the start of a #GHookList.
+    Params:
+      hookList =       a #GHookList
+      hook =       the #GHook to add to the start of hook_list
+  */
   static void prepend(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {
     g_hook_prepend(hookList ? cast(GHookList*)hookList.cPtr : null, hook ? cast(GHook*)hook.cPtr : null);
   }
 
   /**
-   * Decrements the reference count of a #GHook.
-   * If the reference count falls to 0, the #GHook is removed
-   * from the #GHookList and [glib.hook.Hook.free] is called to free it.
-   * Params:
-   *   hookList = a #GHookList
-   *   hook = the #GHook to unref
-   */
+      Decrements the reference count of a #GHook.
+    If the reference count falls to 0, the #GHook is removed
+    from the #GHookList and [glib.hook.Hook.free] is called to free it.
+    Params:
+      hookList =       a #GHookList
+      hook =       the #GHook to unref
+  */
   static void unref(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {
     g_hook_unref(hookList ? cast(GHookList*)hookList.cPtr : null, hook ? cast(GHook*)hook.cPtr : null);

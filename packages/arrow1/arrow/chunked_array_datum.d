@@ -7,6 +7,7 @@ import arrow.datum;
 import arrow.types;
 import gid.gid;
 
+/** */
 class ChunkedArrayDatum : arrow.datum.Datum
 {
 
@@ -26,6 +27,7 @@ class ChunkedArrayDatum : arrow.datum.Datum
     return getType();
   }
 
+  /** */
   this(arrow.chunked_array.ChunkedArray value)
   {
     GArrowChunkedArrayDatum* _cretval;

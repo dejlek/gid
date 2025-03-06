@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class Aggregation : gobject.object.ObjectG
 {
 
@@ -26,6 +27,7 @@ class Aggregation : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(string function_, arrow.function_options.FunctionOptions options, string input, string output)
   {
     GArrowAggregation* _cretval;

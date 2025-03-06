@@ -7,8 +7,8 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * Data structure for holding user-data keys.
- */
+    Data structure for holding user-data keys.
+*/
 class UserDataKey : gobject.boxed.Boxed
 {
 

@@ -10,10 +10,10 @@ import gtk.text_buffer;
 import gtk.types;
 
 /**
- * A #GtkTargetList-struct is a reference counted list
- * of #GtkTargetPair and should be treated as
- * opaque.
- */
+    A #GtkTargetList-struct is a reference counted list
+  of #GtkTargetPair and should be treated as
+  opaque.
+*/
 class TargetList : gobject.boxed.Boxed
 {
 
@@ -39,12 +39,12 @@ class TargetList : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a new #GtkTargetList from an array of #GtkTargetEntry.
-   * Params:
-   *   targets = Pointer to an array
-   *     of #GtkTargetEntry
-   * Returns: the new #GtkTargetList.
-   */
+      Creates a new #GtkTargetList from an array of #GtkTargetEntry.
+    Params:
+      targets =       Pointer to an array
+          of #GtkTargetEntry
+    Returns:     the new #GtkTargetList.
+  */
   this(gtk.target_entry.TargetEntry[] targets = null)
   {
     GtkTargetList* _cretval;
@@ -61,51 +61,51 @@ class TargetList : gobject.boxed.Boxed
   }
 
   /**
-   * Appends another target to a #GtkTargetList.
-   * Params:
-   *   target = the interned atom representing the target
-   *   flags = the flags for this target
-   *   info = an ID that will be passed back to the application
-   */
+      Appends another target to a #GtkTargetList.
+    Params:
+      target =       the interned atom representing the target
+      flags =       the flags for this target
+      info =       an ID that will be passed back to the application
+  */
   void add(gdk.atom.Atom target, uint flags, uint info)
   {
     gtk_target_list_add(cast(GtkTargetList*)cPtr, target ? cast(GdkAtom)target.cPtr : null, flags, info);
   }
 
   /**
-   * Appends the image targets supported by #GtkSelectionData to
-   * the target list. All targets are added with the same info.
-   * Params:
-   *   info = an ID that will be passed back to the application
-   *   writable = whether to add only targets for which GTK+ knows
-   *     how to convert a pixbuf into the format
-   */
+      Appends the image targets supported by #GtkSelectionData to
+    the target list. All targets are added with the same info.
+    Params:
+      info =       an ID that will be passed back to the application
+      writable =       whether to add only targets for which GTK+ knows
+          how to convert a pixbuf into the format
+  */
   void addImageTargets(uint info, bool writable)
   {
     gtk_target_list_add_image_targets(cast(GtkTargetList*)cPtr, info, writable);
   }
 
   /**
-   * Appends the rich text targets registered with
-   * [gtk.text_buffer.TextBuffer.registerSerializeFormat] or
-   * [gtk.text_buffer.TextBuffer.registerDeserializeFormat] to the target list. All
-   * targets are added with the same info.
-   * Params:
-   *   info = an ID that will be passed back to the application
-   *   deserializable = if %TRUE, then deserializable rich text formats
-   *     will be added, serializable formats otherwise.
-   *   buffer = a #GtkTextBuffer.
-   */
+      Appends the rich text targets registered with
+    [gtk.text_buffer.TextBuffer.registerSerializeFormat] or
+    [gtk.text_buffer.TextBuffer.registerDeserializeFormat] to the target list. All
+    targets are added with the same info.
+    Params:
+      info =       an ID that will be passed back to the application
+      deserializable =       if true, then deserializable rich text formats
+                         will be added, serializable formats otherwise.
+      buffer =       a #GtkTextBuffer.
+  */
   void addRichTextTargets(uint info, bool deserializable, gtk.text_buffer.TextBuffer buffer)
   {
     gtk_target_list_add_rich_text_targets(cast(GtkTargetList*)cPtr, info, deserializable, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
   }
 
   /**
-   * Prepends a table of #GtkTargetEntry to a target list.
-   * Params:
-   *   targets = the table of #GtkTargetEntry
-   */
+      Prepends a table of #GtkTargetEntry to a target list.
+    Params:
+      targets =       the table of #GtkTargetEntry
+  */
   void addTable(gtk.target_entry.TargetEntry[] targets)
   {
     uint _ntargets;
@@ -120,38 +120,39 @@ class TargetList : gobject.boxed.Boxed
   }
 
   /**
-   * Appends the text targets supported by #GtkSelectionData to
-   * the target list. All targets are added with the same info.
-   * Params:
-   *   info = an ID that will be passed back to the application
-   */
+      Appends the text targets supported by #GtkSelectionData to
+    the target list. All targets are added with the same info.
+    Params:
+      info =       an ID that will be passed back to the application
+  */
   void addTextTargets(uint info)
   {
     gtk_target_list_add_text_targets(cast(GtkTargetList*)cPtr, info);
   }
 
   /**
-   * Appends the URI targets supported by #GtkSelectionData to
-   * the target list. All targets are added with the same info.
-   * Since 3.24.37, this includes the application/vnd.portal.files
-   * target when possible, to allow sending files between sandboxed
-   * apps via the FileTransfer portal.
-   * Params:
-   *   info = an ID that will be passed back to the application
-   */
+      Appends the URI targets supported by #GtkSelectionData to
+    the target list. All targets are added with the same info.
+    
+    Since 3.24.37, this includes the application/vnd.portal.files
+    target when possible, to allow sending files between sandboxed
+    apps via the FileTransfer portal.
+    Params:
+      info =       an ID that will be passed back to the application
+  */
   void addUriTargets(uint info)
   {
     gtk_target_list_add_uri_targets(cast(GtkTargetList*)cPtr, info);
   }
 
   /**
-   * Looks up a given target in a #GtkTargetList.
-   * Params:
-   *   target = an interned atom representing the target to search for
-   *   info = a pointer to the location to store
-   *     application info for target, or %NULL
-   * Returns: %TRUE if the target was found, otherwise %FALSE
-   */
+      Looks up a given target in a #GtkTargetList.
+    Params:
+      target =       an interned atom representing the target to search for
+      info =       a pointer to the location to store
+               application info for target, or null
+    Returns:     true if the target was found, otherwise false
+  */
   bool find(gdk.atom.Atom target, out uint info)
   {
     bool _retval;
@@ -160,10 +161,10 @@ class TargetList : gobject.boxed.Boxed
   }
 
   /**
-   * Removes a target from a target list.
-   * Params:
-   *   target = the interned atom representing the target
-   */
+      Removes a target from a target list.
+    Params:
+      target =       the interned atom representing the target
+  */
   void remove(gdk.atom.Atom target)
   {
     gtk_target_list_remove(cast(GtkTargetList*)cPtr, target ? cast(GdkAtom)target.cPtr : null);

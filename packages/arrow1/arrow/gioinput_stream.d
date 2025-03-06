@@ -12,6 +12,7 @@ import gid.gid;
 import gio.input_stream;
 import gobject.object;
 
+/** */
 class GIOInputStream : arrow.seekable_input_stream.SeekableInputStream
 {
 
@@ -31,6 +32,7 @@ class GIOInputStream : arrow.seekable_input_stream.SeekableInputStream
     return getType();
   }
 
+  /** */
   this(gio.input_stream.InputStream gioInputStream)
   {
     GArrowGIOInputStream* _cretval;
@@ -38,6 +40,7 @@ class GIOInputStream : arrow.seekable_input_stream.SeekableInputStream
     this(_cretval, Yes.Take);
   }
 
+  /** */
   gio.input_stream.InputStream getRaw()
   {
     GInputStream* _cretval;

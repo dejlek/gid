@@ -12,6 +12,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class DenseUnionArray : arrow.union_array.UnionArray
 {
 
@@ -31,6 +32,7 @@ class DenseUnionArray : arrow.union_array.UnionArray
     return getType();
   }
 
+  /** */
   this(arrow.int8_array.Int8Array typeIds, arrow.int32_array.Int32Array valueOffsets, arrow.array.Array[] fields)
   {
     GArrowDenseUnionArray* _cretval;
@@ -43,6 +45,7 @@ class DenseUnionArray : arrow.union_array.UnionArray
     this(_cretval, Yes.Take);
   }
 
+  /** */
   static arrow.dense_union_array.DenseUnionArray newDataType(arrow.dense_union_data_type.DenseUnionDataType dataType, arrow.int8_array.Int8Array typeIds, arrow.int32_array.Int32Array valueOffsets, arrow.array.Array[] fields)
   {
     GArrowDenseUnionArray* _cretval;
@@ -56,6 +59,7 @@ class DenseUnionArray : arrow.union_array.UnionArray
     return _retval;
   }
 
+  /** */
   int getValueOffset(long i)
   {
     int _retval;

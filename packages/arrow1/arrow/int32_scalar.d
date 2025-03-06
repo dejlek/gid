@@ -6,6 +6,7 @@ import arrow.scalar;
 import arrow.types;
 import gid.gid;
 
+/** */
 class Int32Scalar : arrow.scalar.Scalar
 {
 
@@ -25,6 +26,7 @@ class Int32Scalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   this(int value)
   {
     GArrowInt32Scalar* _cretval;
@@ -32,6 +34,7 @@ class Int32Scalar : arrow.scalar.Scalar
     this(_cretval, Yes.Take);
   }
 
+  /** */
   int getValue()
   {
     int _retval;

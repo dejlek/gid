@@ -6,8 +6,8 @@ import gio.c.types;
 import gio.types;
 
 /**
- * Information about a specific attribute.
- */
+    Information about a specific attribute.
+*/
 class FileAttributeInfo
 {
   GFileAttributeInfo cInstance;

@@ -7,15 +7,18 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * The `GtkOrientable` interface is implemented by all widgets that can be
- * oriented horizontally or vertically.
- * `GtkOrientable` is more flexible in that it allows the orientation to be
- * changed at runtime, allowing the widgets to “flip”.
- * ## CSS nodes
- * `GtkWidget` types implementing the `GtkOrientable` interface will
- * automatically acquire the `horizontal` or `vertical` CSS class depending on
- * the value of the [gtk.orientable.Orientable.Orientation] property.
- */
+    The [gtk.orientable.Orientable] interface is implemented by all widgets that can be
+  oriented horizontally or vertically.
+  
+  [gtk.orientable.Orientable] is more flexible in that it allows the orientation to be
+  changed at runtime, allowing the widgets to “flip”.
+  
+  ## CSS nodes
+  
+  [gtk.widget.Widget] types implementing the [gtk.orientable.Orientable] interface will
+  automatically acquire the `horizontal` or `vertical` CSS class depending on
+  the value of the [gtk.orientable.Orientable.Orientation] property.
+*/
 interface Orientable
 {
 
@@ -26,15 +29,15 @@ interface Orientable
   }
 
   /**
-   * Retrieves the orientation of the orientable.
-   * Returns: the orientation of the orientable
-   */
+      Retrieves the orientation of the orientable.
+    Returns:     the orientation of the orientable
+  */
   gtk.types.Orientation getOrientation();
 
   /**
-   * Sets the orientation of the orientable.
-   * Params:
-   *   orientation = the orientable’s new orientation
-   */
+      Sets the orientation of the orientable.
+    Params:
+      orientation =       the orientable’s new orientation
+  */
   void setOrientation(gtk.types.Orientation orientation);
 }

@@ -10,6 +10,7 @@ import gtk.notebook_accessible;
 import gtk.types;
 import gtk.widget;
 
+/** */
 class NotebookPageAccessible : atk.object.ObjectAtk, atk.component.Component
 {
 
@@ -31,6 +32,7 @@ class NotebookPageAccessible : atk.object.ObjectAtk, atk.component.Component
 
   mixin ComponentT!();
 
+  /** */
   this(gtk.notebook_accessible.NotebookAccessible notebook, gtk.widget.Widget child)
   {
     AtkObject* _cretval;
@@ -38,6 +40,7 @@ class NotebookPageAccessible : atk.object.ObjectAtk, atk.component.Component
     this(_cretval, Yes.Take);
   }
 
+  /** */
   void invalidate()
   {
     gtk_notebook_page_accessible_invalidate(cast(GtkNotebookPageAccessible*)cPtr);

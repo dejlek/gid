@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class JSONReadOptions : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class JSONReadOptions : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowJSONReadOptions* _cretval;

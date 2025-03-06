@@ -7,11 +7,11 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * Data type for holding a set of integers. #hb_set_t's are
- * used to gather and contain glyph IDs, Unicode code
- * points, and various other collections of discrete
- * values.
- */
+    Data type for holding a set of integers. #hb_set_t's are
+  used to gather and contain glyph IDs, Unicode code
+  points, and various other collections of discrete
+  values.
+*/
 class Set : gobject.boxed.Boxed
 {
 

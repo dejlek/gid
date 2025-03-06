@@ -8,8 +8,8 @@ import gsk.rounded_rect;
 import gsk.types;
 
 /**
- * A render node applying a rounded rectangle clip to its single child.
- */
+    A render node applying a rounded rectangle clip to its single child.
+*/
 class RoundedClipNode : gsk.render_node.RenderNode
 {
 
@@ -22,13 +22,13 @@ class RoundedClipNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Creates a `GskRenderNode` that will clip the child to the area
-   * given by clip.
-   * Params:
-   *   child = The node to draw
-   *   clip = The clip to apply
-   * Returns: A new `GskRenderNode`
-   */
+      Creates a [gsk.render_node.RenderNode] that will clip the child to the area
+    given by clip.
+    Params:
+      child =       The node to draw
+      clip =       The clip to apply
+    Returns:     A new [gsk.render_node.RenderNode]
+  */
   this(gsk.render_node.RenderNode child, gsk.rounded_rect.RoundedRect clip)
   {
     GskRenderNode* _cretval;
@@ -37,9 +37,9 @@ class RoundedClipNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Gets the child node that is getting clipped by the given node.
-   * Returns: The child that is getting clipped
-   */
+      Gets the child node that is getting clipped by the given node.
+    Returns:     The child that is getting clipped
+  */
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
@@ -49,9 +49,9 @@ class RoundedClipNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the rounded rectangle used to clip the contents of the node.
-   * Returns: a rounded rectangle
-   */
+      Retrieves the rounded rectangle used to clip the contents of the node.
+    Returns:     a rounded rectangle
+  */
   gsk.rounded_rect.RoundedRect getClip()
   {
     const(GskRoundedRect)* _cretval;

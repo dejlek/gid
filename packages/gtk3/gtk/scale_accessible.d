@@ -10,6 +10,7 @@ import gtk.c.types;
 import gtk.range_accessible;
 import gtk.types;
 
+/** */
 class ScaleAccessible : gtk.range_accessible.RangeAccessible
 {
 

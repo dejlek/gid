@@ -8,10 +8,10 @@ import gobject.dclosure;
 import gobject.object;
 
 /**
- * Completes partial file and directory names given a partial string by
- * looking in the file system for clues. Can return a list of possible
- * completion strings for widget implementations.
- */
+    Completes partial file and directory names given a partial string by
+  looking in the file system for clues. Can return a list of possible
+  completion strings for widget implementations.
+*/
 class FilenameCompleter : gobject.object.ObjectG
 {
 
@@ -32,9 +32,9 @@ class FilenameCompleter : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new filename completer.
-   * Returns: a #GFilenameCompleter.
-   */
+      Creates a new filename completer.
+    Returns:     a #GFilenameCompleter.
+  */
   this()
   {
     GFilenameCompleter* _cretval;
@@ -43,13 +43,13 @@ class FilenameCompleter : gobject.object.ObjectG
   }
 
   /**
-   * Obtains a completion for initial_text from completer.
-   * Params:
-   *   initialText = text to be completed.
-   * Returns: a completed string, or %NULL if no
-   *   completion exists. This string is not owned by GIO, so remember to [glib.global.gfree]
-   *   it when finished.
-   */
+      Obtains a completion for initial_text from completer.
+    Params:
+      initialText =       text to be completed.
+    Returns:     a completed string, or null if no
+          completion exists. This string is not owned by GIO, so remember to [glib.global.gfree]
+          it when finished.
+  */
   string getCompletionSuffix(string initialText)
   {
     char* _cretval;
@@ -60,12 +60,12 @@ class FilenameCompleter : gobject.object.ObjectG
   }
 
   /**
-   * Gets an array of completion strings for a given initial text.
-   * Params:
-   *   initialText = text to be completed.
-   * Returns: array of strings with possible completions for initial_text.
-   *   This array must be freed by [glib.global.strfreev] when finished.
-   */
+      Gets an array of completion strings for a given initial text.
+    Params:
+      initialText =       text to be completed.
+    Returns:     array of strings with possible completions for initial_text.
+      This array must be freed by [glib.global.strfreev] when finished.
+  */
   string[] getCompletions(string initialText)
   {
     char** _cretval;
@@ -86,30 +86,36 @@ class FilenameCompleter : gobject.object.ObjectG
   }
 
   /**
-   * If dirs_only is %TRUE, completer will only
-   * complete directory names, and not file names.
-   * Params:
-   *   dirsOnly = a #gboolean.
-   */
+      If dirs_only is true, completer will only
+    complete directory names, and not file names.
+    Params:
+      dirsOnly =       a #gboolean.
+  */
   void setDirsOnly(bool dirsOnly)
   {
     g_filename_completer_set_dirs_only(cast(GFilenameCompleter*)cPtr, dirsOnly);
   }
 
   /**
-   * Emitted when the file name completion information comes available.
-   *   filenameCompleter = the instance the signal is connected to
-   */
+      Emitted when the file name completion information comes available.
+  
+    ## Parameters
+    $(LIST
+      * $(B filenameCompleter) the instance the signal is connected to
+    )
+  */
   alias GotCompletionDataCallbackDlg = void delegate(gio.filename_completer.FilenameCompleter filenameCompleter);
+
+  /** ditto */
   alias GotCompletionDataCallbackFunc = void function(gio.filename_completer.FilenameCompleter filenameCompleter);
 
   /**
-   * Connect to GotCompletionData signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to GotCompletionData signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectGotCompletionData(T)(T callback, Flag!"After" after = No.After)
   if (is(T : GotCompletionDataCallbackDlg) || is(T : GotCompletionDataCallbackFunc))
   {

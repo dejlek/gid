@@ -8,6 +8,7 @@ import arrow.types;
 import arrow.union_scalar;
 import gid.gid;
 
+/** */
 class DenseUnionScalar : arrow.union_scalar.UnionScalar
 {
 
@@ -27,6 +28,7 @@ class DenseUnionScalar : arrow.union_scalar.UnionScalar
     return getType();
   }
 
+  /** */
   this(arrow.dense_union_data_type.DenseUnionDataType dataType, byte typeCode, arrow.scalar.Scalar value)
   {
     GArrowDenseUnionScalar* _cretval;

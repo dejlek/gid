@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class Tensor : gobject.object.ObjectG
 {
 
@@ -27,6 +28,7 @@ class Tensor : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrow.data_type.DataType dataType, arrow.buffer.Buffer data, long[] shape, long[] strides = null, string[] dimensionNames = null)
   {
     GArrowTensor* _cretval;
@@ -52,6 +54,7 @@ class Tensor : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool equal(arrow.tensor.Tensor otherTensor)
   {
     bool _retval;
@@ -59,6 +62,7 @@ class Tensor : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.buffer.Buffer getBuffer()
   {
     GArrowBuffer* _cretval;
@@ -67,6 +71,7 @@ class Tensor : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getDimensionName(int i)
   {
     const(char)* _cretval;
@@ -75,6 +80,7 @@ class Tensor : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   int getNDimensions()
   {
     int _retval;
@@ -82,6 +88,7 @@ class Tensor : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long[] getShape()
   {
     long* _cretval;
@@ -96,6 +103,7 @@ class Tensor : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getSize()
   {
     long _retval;
@@ -103,6 +111,7 @@ class Tensor : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long[] getStrides()
   {
     long* _cretval;
@@ -117,6 +126,7 @@ class Tensor : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.data_type.DataType getValueDataType()
   {
     GArrowDataType* _cretval;
@@ -125,6 +135,7 @@ class Tensor : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.types.Type getValueType()
   {
     GArrowType _cretval;
@@ -133,6 +144,7 @@ class Tensor : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isColumnMajor()
   {
     bool _retval;
@@ -140,6 +152,7 @@ class Tensor : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isContiguous()
   {
     bool _retval;
@@ -147,6 +160,7 @@ class Tensor : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isMutable()
   {
     bool _retval;
@@ -154,6 +168,7 @@ class Tensor : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isRowMajor()
   {
     bool _retval;

@@ -7,6 +7,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class Codec : gobject.object.ObjectG
 {
 
@@ -26,6 +27,7 @@ class Codec : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrow.types.CompressionType type)
   {
     GArrowCodec* _cretval;
@@ -36,6 +38,7 @@ class Codec : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   int getCompressionLevel()
   {
     int _retval;
@@ -43,6 +46,7 @@ class Codec : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.types.CompressionType getCompressionType()
   {
     GArrowCompressionType _cretval;
@@ -51,6 +55,7 @@ class Codec : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getName()
   {
     const(char)* _cretval;

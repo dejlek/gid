@@ -7,6 +7,7 @@ import arrow.types;
 import arrow.union_data_type;
 import gid.gid;
 
+/** */
 class DenseUnionDataType : arrow.union_data_type.UnionDataType
 {
 
@@ -26,6 +27,7 @@ class DenseUnionDataType : arrow.union_data_type.UnionDataType
     return getType();
   }
 
+  /** */
   this(arrow.field.Field[] fields, byte[] typeCodes)
   {
     GArrowDenseUnionDataType* _cretval;

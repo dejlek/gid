@@ -7,9 +7,9 @@ import glib.types;
 import gobject.boxed;
 
 /**
- * The GRand struct is an opaque data structure. It should only be
- * accessed through the g_rand_* functions.
- */
+    The GRand struct is an opaque data structure. It should only be
+  accessed through the g_rand_* functions.
+*/
 class Rand : gobject.boxed.Boxed
 {
 
@@ -35,12 +35,13 @@ class Rand : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a new random number generator initialized with a seed taken
-   * either from `/dev/urandom` $(LPAREN)if existing$(RPAREN) or from the current time
-   * $(LPAREN)as a fallback$(RPAREN).
-   * On Windows, the seed is taken from rand_s$(LPAREN)$(RPAREN).
-   * Returns: the new #GRand
-   */
+      Creates a new random number generator initialized with a seed taken
+    either from `/dev/urandom` (if existing) or from the current time
+    (as a fallback).
+    
+    On Windows, the seed is taken from rand_s().
+    Returns:     the new #GRand
+  */
   this()
   {
     GRand* _cretval;
@@ -49,11 +50,11 @@ class Rand : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a new random number generator initialized with seed.
-   * Params:
-   *   seed = a value to initialize the random number generator
-   * Returns: the new #GRand
-   */
+      Creates a new random number generator initialized with seed.
+    Params:
+      seed =       a value to initialize the random number generator
+    Returns:     the new #GRand
+  */
   static glib.rand.Rand newWithSeed(uint seed)
   {
     GRand* _cretval;
@@ -63,11 +64,11 @@ class Rand : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a new random number generator initialized with seed.
-   * Params:
-   *   seed = an array of seeds to initialize the random number generator
-   * Returns: the new #GRand
-   */
+      Creates a new random number generator initialized with seed.
+    Params:
+      seed =       an array of seeds to initialize the random number generator
+    Returns:     the new #GRand
+  */
   static glib.rand.Rand newWithSeedArray(uint[] seed)
   {
     GRand* _cretval;
@@ -82,11 +83,11 @@ class Rand : gobject.boxed.Boxed
   }
 
   /**
-   * Copies a #GRand into a new one with the same exact state as before.
-   * This way you can take a snapshot of the random number generator for
-   * replaying later.
-   * Returns: the new #GRand
-   */
+      Copies a #GRand into a new one with the same exact state as before.
+    This way you can take a snapshot of the random number generator for
+    replaying later.
+    Returns:     the new #GRand
+  */
   glib.rand.Rand copy()
   {
     GRand* _cretval;
@@ -96,10 +97,10 @@ class Rand : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the next random #gdouble from rand_ equally distributed over
-   * the range [0..1$(RPAREN).
-   * Returns: a random number
-   */
+      Returns the next random #gdouble from rand_ equally distributed over
+    the range [0..1).
+    Returns:     a random number
+  */
   double double_()
   {
     double _retval;
@@ -108,13 +109,13 @@ class Rand : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the next random #gdouble from rand_ equally distributed over
-   * the range [begin..end$(RPAREN).
-   * Params:
-   *   begin = lower closed bound of the interval
-   *   end = upper open bound of the interval
-   * Returns: a random number
-   */
+      Returns the next random #gdouble from rand_ equally distributed over
+    the range [begin..end).
+    Params:
+      begin =       lower closed bound of the interval
+      end =       upper open bound of the interval
+    Returns:     a random number
+  */
   double doubleRange(double begin, double end)
   {
     double _retval;
@@ -123,10 +124,10 @@ class Rand : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the next random #guint32 from rand_ equally distributed over
-   * the range [0..2^32-1].
-   * Returns: a random number
-   */
+      Returns the next random #guint32 from rand_ equally distributed over
+    the range [0..2^32-1].
+    Returns:     a random number
+  */
   uint int_()
   {
     uint _retval;
@@ -135,13 +136,13 @@ class Rand : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the next random #gint32 from rand_ equally distributed over
-   * the range [begin..end-1].
-   * Params:
-   *   begin = lower closed bound of the interval
-   *   end = upper open bound of the interval
-   * Returns: a random number
-   */
+      Returns the next random #gint32 from rand_ equally distributed over
+    the range [begin..end-1].
+    Params:
+      begin =       lower closed bound of the interval
+      end =       upper open bound of the interval
+    Returns:     a random number
+  */
   int intRange(int begin, int end)
   {
     int _retval;
@@ -150,24 +151,24 @@ class Rand : gobject.boxed.Boxed
   }
 
   /**
-   * Sets the seed for the random number generator #GRand to seed.
-   * Params:
-   *   seed = a value to reinitialize the random number generator
-   */
+      Sets the seed for the random number generator #GRand to seed.
+    Params:
+      seed =       a value to reinitialize the random number generator
+  */
   void setSeed(uint seed)
   {
     g_rand_set_seed(cast(GRand*)cPtr, seed);
   }
 
   /**
-   * Initializes the random number generator by an array of longs.
-   * Array can be of arbitrary size, though only the first 624 values
-   * are taken.  This function is useful if you have many low entropy
-   * seeds, or if you require more then 32 bits of actual entropy for
-   * your application.
-   * Params:
-   *   seed = array to initialize with
-   */
+      Initializes the random number generator by an array of longs.
+    Array can be of arbitrary size, though only the first 624 values
+    are taken.  This function is useful if you have many low entropy
+    seeds, or if you require more then 32 bits of actual entropy for
+    your application.
+    Params:
+      seed =       array to initialize with
+  */
   void setSeedArray(uint[] seed)
   {
     uint _seedLength;

@@ -11,15 +11,16 @@ import gio.pollable_input_stream_mixin;
 import gio.types;
 
 /**
- * `GUnixInputStream` implements [gio.input_stream.InputStream] for reading from a UNIX
- * file descriptor, including asynchronous operations. $(LPAREN)If the file
- * descriptor refers to a socket or pipe, this will use `poll$(LPAREN)$(RPAREN)` to do
- * asynchronous I/O. If it refers to a regular file, it will fall back
- * to doing asynchronous I/O in another thread.$(RPAREN)
- * Note that `<gio/gunixinputstream.h>` belongs to the UNIX-specific GIO
- * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
- * file or the `GioUnix-2.0` GIR namespace when using it.
- */
+    [gio.unix_input_stream.UnixInputStream] implements [gio.input_stream.InputStream] for reading from a UNIX
+  file descriptor, including asynchronous operations. (If the file
+  descriptor refers to a socket or pipe, this will use `poll()` to do
+  asynchronous I/O. If it refers to a regular file, it will fall back
+  to doing asynchronous I/O in another thread.)
+  
+  Note that `<gio/gunixinputstream.h>` belongs to the UNIX-specific GIO
+  interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
+  file or the `GioUnix-2.0` GIR namespace when using it.
+*/
 class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.FileDescriptorBased, gio.pollable_input_stream.PollableInputStream
 {
 
@@ -43,14 +44,15 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
   mixin PollableInputStreamT!();
 
   /**
-   * Creates a new #GUnixInputStream for the given fd.
-   * If close_fd is %TRUE, the file descriptor will be closed
-   * when the stream is closed.
-   * Params:
-   *   fd = a UNIX file descriptor
-   *   closeFd = %TRUE to close the file descriptor when done
-   * Returns: a new #GUnixInputStream
-   */
+      Creates a new #GUnixInputStream for the given fd.
+    
+    If close_fd is true, the file descriptor will be closed
+    when the stream is closed.
+    Params:
+      fd =       a UNIX file descriptor
+      closeFd =       true to close the file descriptor when done
+    Returns:     a new #GUnixInputStream
+  */
   this(int fd, bool closeFd)
   {
     GInputStream* _cretval;
@@ -59,10 +61,10 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
   }
 
   /**
-   * Returns whether the file descriptor of stream will be
-   * closed when the stream is closed.
-   * Returns: %TRUE if the file descriptor is closed when done
-   */
+      Returns whether the file descriptor of stream will be
+    closed when the stream is closed.
+    Returns:     true if the file descriptor is closed when done
+  */
   bool getCloseFd()
   {
     bool _retval;
@@ -71,9 +73,9 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
   }
 
   /**
-   * Return the UNIX file descriptor that the stream reads from.
-   * Returns: The file descriptor of stream
-   */
+      Return the UNIX file descriptor that the stream reads from.
+    Returns:     The file descriptor of stream
+  */
   int getFd()
   {
     int _retval;
@@ -82,11 +84,11 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
   }
 
   /**
-   * Sets whether the file descriptor of stream shall be closed
-   * when the stream is closed.
-   * Params:
-   *   closeFd = %TRUE to close the file descriptor when done
-   */
+      Sets whether the file descriptor of stream shall be closed
+    when the stream is closed.
+    Params:
+      closeFd =       true to close the file descriptor when done
+  */
   void setCloseFd(bool closeFd)
   {
     g_unix_input_stream_set_close_fd(cast(GUnixInputStream*)cPtr, closeFd);

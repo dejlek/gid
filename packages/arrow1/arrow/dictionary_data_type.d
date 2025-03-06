@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
 {
 
@@ -27,6 +28,7 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return getType();
   }
 
+  /** */
   this(arrow.data_type.DataType indexDataType, arrow.data_type.DataType valueDataType, bool ordered)
   {
     GArrowDictionaryDataType* _cretval;
@@ -34,6 +36,7 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.data_type.DataType getIndexDataType()
   {
     GArrowDataType* _cretval;
@@ -42,6 +45,7 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return _retval;
   }
 
+  /** */
   arrow.data_type.DataType getValueDataType()
   {
     GArrowDataType* _cretval;
@@ -50,6 +54,7 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return _retval;
   }
 
+  /** */
   bool isOrdered()
   {
     bool _retval;

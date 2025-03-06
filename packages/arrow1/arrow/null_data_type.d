@@ -6,6 +6,7 @@ import arrow.data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class NullDataType : arrow.data_type.DataType
 {
 
@@ -25,6 +26,7 @@ class NullDataType : arrow.data_type.DataType
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowNullDataType* _cretval;

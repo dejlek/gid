@@ -13,6 +13,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
 {
 
@@ -32,6 +33,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
     return getType();
   }
 
+  /** */
   this(arrowdataset.file_format.FileFormat fileFormat)
   {
     GADatasetFileSystemDatasetFactory* _cretval;
@@ -39,6 +41,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool addPath(string path)
   {
     bool _retval;
@@ -50,6 +53,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
     return _retval;
   }
 
+  /** */
   override arrowdataset.file_system_dataset.FileSystemDataset finish(arrowdataset.finish_options.FinishOptions options = null)
   {
     GADatasetFileSystemDataset* _cretval;
@@ -61,6 +65,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
     return _retval;
   }
 
+  /** */
   bool setFileSystem(arrow.file_system.FileSystem fileSystem)
   {
     bool _retval;
@@ -71,6 +76,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
     return _retval;
   }
 
+  /** */
   bool setFileSystemUri(string uri)
   {
     bool _retval;

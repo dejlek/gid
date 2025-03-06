@@ -10,9 +10,9 @@ import gtk.selection_model;
 import gtk.types;
 
 /**
- * `GtkSelectionFilterModel` is a list model that presents the selection from
- * a `GtkSelectionModel`.
- */
+    [gtk.selection_filter_model.SelectionFilterModel] is a list model that presents the selection from
+  a [gtk.selection_model.SelectionModel].
+*/
 class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
@@ -35,12 +35,12 @@ class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
   mixin ListModelT!();
 
   /**
-   * Creates a new `GtkSelectionFilterModel` that will include the
-   * selected items from the underlying selection model.
-   * Params:
-   *   model = the selection model to filter
-   * Returns: a new `GtkSelectionFilterModel`
-   */
+      Creates a new [gtk.selection_filter_model.SelectionFilterModel] that will include the
+    selected items from the underlying selection model.
+    Params:
+      model =       the selection model to filter
+    Returns:     a new [gtk.selection_filter_model.SelectionFilterModel]
+  */
   this(gtk.selection_model.SelectionModel model = null)
   {
     GtkSelectionFilterModel* _cretval;
@@ -49,9 +49,9 @@ class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * Gets the model currently filtered or %NULL if none.
-   * Returns: The model that gets filtered
-   */
+      Gets the model currently filtered or null if none.
+    Returns:     The model that gets filtered
+  */
   gtk.selection_model.SelectionModel getModel()
   {
     GtkSelectionModel* _cretval;
@@ -61,14 +61,15 @@ class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * Sets the model to be filtered.
-   * Note that GTK makes no effort to ensure that model conforms to
-   * the item type of self. It assumes that the caller knows what they
-   * are doing and have set up an appropriate filter to ensure that item
-   * types match.
-   * Params:
-   *   model = The model to be filtered
-   */
+      Sets the model to be filtered.
+    
+    Note that GTK makes no effort to ensure that model conforms to
+    the item type of self. It assumes that the caller knows what they
+    are doing and have set up an appropriate filter to ensure that item
+    types match.
+    Params:
+      model =       The model to be filtered
+  */
   void setModel(gtk.selection_model.SelectionModel model = null)
   {
     gtk_selection_filter_model_set_model(cast(GtkSelectionFilterModel*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);

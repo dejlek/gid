@@ -11,6 +11,7 @@ import gtksource.completion_proposal;
 import gtksource.completion_provider;
 import gtksource.types;
 
+/** */
 class CompletionContext : gobject.initially_unowned.InitiallyUnowned
 {
 
@@ -31,17 +32,17 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-   * Providers can use this function to add proposals to the completion. They
-   * can do so asynchronously by means of the finished argument. Providers must
-   * ensure that they always call this function with finished set to %TRUE
-   * once each population $(LPAREN)even if no proposals need to be added$(RPAREN).
-   * Population occurs when the [gtksource.completion_provider.CompletionProvider.populate]
-   * function is called.
-   * Params:
-   *   provider = a #GtkSourceCompletionProvider.
-   *   proposals = The list of proposals to add.
-   *   finished = Whether the provider is finished adding proposals.
-   */
+      Providers can use this function to add proposals to the completion. They
+    can do so asynchronously by means of the finished argument. Providers must
+    ensure that they always call this function with finished set to true
+    once each population (even if no proposals need to be added).
+    Population occurs when the [gtksource.completion_provider.CompletionProvider.populate]
+    function is called.
+    Params:
+      provider =       a #GtkSourceCompletionProvider.
+      proposals =       The list of proposals to add.
+      finished =       Whether the provider is finished adding proposals.
+  */
   void addProposals(gtksource.completion_provider.CompletionProvider provider, gtksource.completion_proposal.CompletionProposal[] proposals, bool finished)
   {
     auto _proposals = gListFromD!(gtksource.completion_proposal.CompletionProposal)(proposals);
@@ -50,9 +51,9 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-   * Get the context activation.
-   * Returns: The context activation.
-   */
+      Get the context activation.
+    Returns:     The context activation.
+  */
   gtksource.types.CompletionActivation getActivation()
   {
     GtkSourceCompletionActivation _cretval;
@@ -62,12 +63,12 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-   * Get the iter at which the completion was invoked. Providers can use this
-   * to determine how and if to match proposals.
-   * Params:
-   *   iter = a #GtkTextIter.
-   * Returns: %TRUE if iter is correctly set, %FALSE otherwise.
-   */
+      Get the iter at which the completion was invoked. Providers can use this
+    to determine how and if to match proposals.
+    Params:
+      iter =       a #GtkTextIter.
+    Returns:     true if iter is correctly set, false otherwise.
+  */
   bool getIter(out gtk.text_iter.TextIter iter)
   {
     bool _retval;
@@ -78,21 +79,27 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-   * Emitted when the current population of proposals has been cancelled.
-   * Providers adding proposals asynchronously should connect to this signal
-   * to know when to cancel running proposal queries.
-   *   completionContext = the instance the signal is connected to
-   */
+      Emitted when the current population of proposals has been cancelled.
+    Providers adding proposals asynchronously should connect to this signal
+    to know when to cancel running proposal queries.
+  
+    ## Parameters
+    $(LIST
+      * $(B completionContext) the instance the signal is connected to
+    )
+  */
   alias CancelledCallbackDlg = void delegate(gtksource.completion_context.CompletionContext completionContext);
+
+  /** ditto */
   alias CancelledCallbackFunc = void function(gtksource.completion_context.CompletionContext completionContext);
 
   /**
-   * Connect to Cancelled signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Cancelled signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectCancelled(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CancelledCallbackDlg) || is(T : CancelledCallbackFunc))
   {

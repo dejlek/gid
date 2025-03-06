@@ -11,26 +11,29 @@ import gobject.dclosure;
 import gobject.object;
 
 /**
- * The base object class for the Accessibility Toolkit API.
- * This class is the primary class for accessibility support via the
- * Accessibility ToolKit $(LPAREN)ATK$(RPAREN).  Objects which are instances of
- * #AtkObject $(LPAREN)or instances of AtkObject-derived types$(RPAREN) are queried
- * for properties which relate basic $(LPAREN)and generic$(RPAREN) properties of a UI
- * component such as name and description.  Instances of #AtkObject
- * may also be queried as to whether they implement other ATK
- * interfaces $(LPAREN)e.g. #AtkAction, #AtkComponent, etc.$(RPAREN), as appropriate
- * to the role which a given UI component plays in a user interface.
- * All UI components in an application which provide useful
- * information or services to the user must provide corresponding
- * #AtkObject instances on request $(LPAREN)in GTK+, for instance, usually on
- * a call to #gtk_widget_get_accessible $(LPAREN)$(RPAREN)$(RPAREN), either via ATK support
- * built into the toolkit for the widget class or ancestor class, or
- * in the case of custom widgets, if the inherited #AtkObject
- * implementation is insufficient, via instances of a new #AtkObject
- * subclass.
- * See class@AtkObjectFactory, class@AtkRegistry.  $(LPAREN)GTK+ users see also
- * #GtkAccessible$(RPAREN).
- */
+    The base object class for the Accessibility Toolkit API.
+  
+  This class is the primary class for accessibility support via the
+  Accessibility ToolKit (ATK).  Objects which are instances of
+  #AtkObject (or instances of AtkObject-derived types) are queried
+  for properties which relate basic (and generic) properties of a UI
+  component such as name and description.  Instances of #AtkObject
+  may also be queried as to whether they implement other ATK
+  interfaces (e.g. #AtkAction, #AtkComponent, etc.), as appropriate
+  to the role which a given UI component plays in a user interface.
+  
+  All UI components in an application which provide useful
+  information or services to the user must provide corresponding
+  #AtkObject instances on request (in GTK+, for instance, usually on
+  a call to #gtk_widget_get_accessible ()), either via ATK support
+  built into the toolkit for the widget class or ancestor class, or
+  in the case of custom widgets, if the inherited #AtkObject
+  implementation is insufficient, via instances of a new #AtkObject
+  subclass.
+  
+  See `class@AtkObjectFactory`, `class@AtkRegistry`.  (GTK+ users see also
+  #GtkAccessible).
+*/
 class ObjectAtk : gobject.object.ObjectG
 {
 
@@ -51,12 +54,12 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Adds a relationship of the specified type with the specified target.
-   * Params:
-   *   relationship = The #AtkRelationType of the relation
-   *   target = The #AtkObject which is to be the target of the relation.
-   * Returns: TRUE if the relationship is added.
-   */
+      Adds a relationship of the specified type with the specified target.
+    Params:
+      relationship =       The #AtkRelationType of the relation
+      target =       The #AtkObject which is to be the target of the relation.
+    Returns:     TRUE if the relationship is added.
+  */
   bool addRelationship(atk.types.RelationType relationship, atk.object.ObjectAtk target)
   {
     bool _retval;
@@ -65,10 +68,10 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Gets the accessible id of the accessible.
-   * Returns: a character string representing the accessible id of the object, or
-   *   NULL if no such string was set.
-   */
+      Gets the accessible id of the accessible.
+    Returns:     a character string representing the accessible id of the object, or
+      NULL if no such string was set.
+  */
   string getAccessibleId()
   {
     const(char)* _cretval;
@@ -78,10 +81,10 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Gets the accessible description of the accessible.
-   * Returns: a character string representing the accessible description
-   *   of the accessible.
-   */
+      Gets the accessible description of the accessible.
+    Returns:     a character string representing the accessible description
+      of the accessible.
+  */
   string getDescription()
   {
     const(char)* _cretval;
@@ -91,10 +94,10 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Gets the help text associated with the accessible.
-   * Returns: a character string representing the help text or the object, or
-   *   NULL if no such string was set.
-   */
+      Gets the help text associated with the accessible.
+    Returns:     a character string representing the help text or the object, or
+      NULL if no such string was set.
+  */
   string getHelpText()
   {
     const(char)* _cretval;
@@ -104,10 +107,10 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Gets the 0-based index of this accessible in its parent; returns -1 if the
-   * accessible does not have an accessible parent.
-   * Returns: an integer which is the index of the accessible in its parent
-   */
+      Gets the 0-based index of this accessible in its parent; returns -1 if the
+    accessible does not have an accessible parent.
+    Returns:     an integer which is the index of the accessible in its parent
+  */
   int getIndexInParent()
   {
     int _retval;
@@ -116,11 +119,11 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Gets the layer of the accessible.
-   * Returns: an #AtkLayer which is the layer of the accessible
-
-   * Deprecated: Use atk_component_get_layer instead.
-   */
+      Gets the layer of the accessible.
+    Returns:     an #AtkLayer which is the layer of the accessible
+  
+    Deprecated:     Use atk_component_get_layer instead.
+  */
   atk.types.Layer getLayer()
   {
     AtkLayer _cretval;
@@ -130,14 +133,14 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Gets the zorder of the accessible. The value G_MININT will be returned
-   * if the layer of the accessible is not ATK_LAYER_MDI.
-   * Returns: a gint which is the zorder of the accessible, i.e. the depth at
-   *   which the component is shown in relation to other components in the same
-   *   container.
-
-   * Deprecated: Use atk_component_get_mdi_zorder instead.
-   */
+      Gets the zorder of the accessible. The value G_MININT will be returned
+    if the layer of the accessible is not ATK_LAYER_MDI.
+    Returns:     a gint which is the zorder of the accessible, i.e. the depth at
+      which the component is shown in relation to other components in the same
+      container.
+  
+    Deprecated:     Use atk_component_get_mdi_zorder instead.
+  */
   int getMdiZorder()
   {
     int _retval;
@@ -146,10 +149,10 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Gets the number of accessible children of the accessible.
-   * Returns: an integer representing the number of accessible children
-   *   of the accessible.
-   */
+      Gets the number of accessible children of the accessible.
+    Returns:     an integer representing the number of accessible children
+      of the accessible.
+  */
   int getNAccessibleChildren()
   {
     int _retval;
@@ -158,9 +161,9 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Gets the accessible name of the accessible.
-   * Returns: a character string representing the accessible name of the object.
-   */
+      Gets the accessible name of the accessible.
+    Returns:     a character string representing the accessible name of the object.
+  */
   string getName()
   {
     const(char)* _cretval;
@@ -170,11 +173,11 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale
-   * of accessible.
-   * Returns: a UTF-8 string indicating the POSIX-style LC_MESSAGES
-   *   locale of accessible.
-   */
+      Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale
+    of accessible.
+    Returns:     a UTF-8 string indicating the POSIX-style LC_MESSAGES
+               locale of accessible.
+  */
   string getObjectLocale()
   {
     const(char)* _cretval;
@@ -184,16 +187,17 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Gets the accessible parent of the accessible. By default this is
-   * the one assigned with [atk.object.ObjectAtk.setParent], but it is assumed
-   * that ATK implementors have ways to get the parent of the object
-   * without the need of assigning it manually with
-   * [atk.object.ObjectAtk.setParent], and will return it with this method.
-   * If you are only interested on the parent assigned with
-   * [atk.object.ObjectAtk.setParent], use [atk.object.ObjectAtk.peekParent].
-   * Returns: an #AtkObject representing the accessible
-   *   parent of the accessible
-   */
+      Gets the accessible parent of the accessible. By default this is
+    the one assigned with [atk.object.ObjectAtk.setParent], but it is assumed
+    that ATK implementors have ways to get the parent of the object
+    without the need of assigning it manually with
+    [atk.object.ObjectAtk.setParent], and will return it with this method.
+    
+    If you are only interested on the parent assigned with
+    [atk.object.ObjectAtk.setParent], use [atk.object.ObjectAtk.peekParent].
+    Returns:     an #AtkObject representing the accessible
+      parent of the accessible
+  */
   atk.object.ObjectAtk getParent()
   {
     AtkObject* _cretval;
@@ -203,9 +207,9 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Gets the role of the accessible.
-   * Returns: an #AtkRole which is the role of the accessible
-   */
+      Gets the role of the accessible.
+    Returns:     an #AtkRole which is the role of the accessible
+  */
   atk.types.Role getRole()
   {
     AtkRole _cretval;
@@ -215,41 +219,43 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * This function is called when implementing subclasses of #AtkObject.
-   * It does initialization required for the new object. It is intended
-   * that this function should called only in the ..._new$(LPAREN)$(RPAREN) functions used
-   * to create an instance of a subclass of #AtkObject
-   * Params:
-   *   data = a #gpointer which identifies the object for which the AtkObject was created.
-   */
+      This function is called when implementing subclasses of #AtkObject.
+    It does initialization required for the new object. It is intended
+    that this function should called only in the ..._new() functions used
+    to create an instance of a subclass of #AtkObject
+    Params:
+      data =       a #gpointer which identifies the object for which the AtkObject was created.
+  */
   void initialize(void* data = null)
   {
     atk_object_initialize(cast(AtkObject*)cPtr, data);
   }
 
   /**
-   * Emits a state-change signal for the specified state.
-   * Note that as a general rule when the state of an existing object changes,
-   * emitting a notification is expected.
-   * Params:
-   *   state = an #AtkState whose state is changed
-   *   value = a gboolean which indicates whether the state is being set on or off
-   */
+      Emits a state-change signal for the specified state.
+    
+    Note that as a general rule when the state of an existing object changes,
+    emitting a notification is expected.
+    Params:
+      state =       an #AtkState whose state is changed
+      value =       a gboolean which indicates whether the state is being set on or off
+  */
   void notifyStateChange(atk.types.State state, bool value)
   {
     atk_object_notify_state_change(cast(AtkObject*)cPtr, state, value);
   }
 
   /**
-   * Gets the accessible parent of the accessible, if it has been
-   * manually assigned with atk_object_set_parent. Otherwise, this
-   * function returns %NULL.
-   * This method is intended as an utility for ATK implementors, and not
-   * to be exposed to accessible tools. See [atk.object.ObjectAtk.getParent] for
-   * further reference.
-   * Returns: an #AtkObject representing the accessible
-   *   parent of the accessible if assigned
-   */
+      Gets the accessible parent of the accessible, if it has been
+    manually assigned with atk_object_set_parent. Otherwise, this
+    function returns null.
+    
+    This method is intended as an utility for ATK implementors, and not
+    to be exposed to accessible tools. See [atk.object.ObjectAtk.getParent] for
+    further reference.
+    Returns:     an #AtkObject representing the accessible
+      parent of the accessible if assigned
+  */
   atk.object.ObjectAtk peekParent()
   {
     AtkObject* _cretval;
@@ -259,14 +265,14 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Gets a reference to the specified accessible child of the object.
-   * The accessible children are 0-based so the first accessible child is
-   * at index 0, the second at index 1 and so on.
-   * Params:
-   *   i = a gint representing the position of the child, starting from 0
-   * Returns: an #AtkObject representing the specified
-   *   accessible child of the accessible.
-   */
+      Gets a reference to the specified accessible child of the object.
+    The accessible children are 0-based so the first accessible child is
+    at index 0, the second at index 1 and so on.
+    Params:
+      i =       a gint representing the position of the child, starting from 0
+    Returns:     an #AtkObject representing the specified
+      accessible child of the accessible.
+  */
   atk.object.ObjectAtk refAccessibleChild(int i)
   {
     AtkObject* _cretval;
@@ -276,10 +282,10 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Gets the #AtkRelationSet associated with the object.
-   * Returns: an #AtkRelationSet representing the relation set
-   *   of the object.
-   */
+      Gets the #AtkRelationSet associated with the object.
+    Returns:     an #AtkRelationSet representing the relation set
+      of the object.
+  */
   atk.relation_set.RelationSet refRelationSet()
   {
     AtkRelationSet* _cretval;
@@ -289,11 +295,11 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Gets a reference to the state set of the accessible; the caller must
-   * unreference it when it is no longer needed.
-   * Returns: a reference to an #AtkStateSet which is the state
-   *   set of the accessible
-   */
+      Gets a reference to the state set of the accessible; the caller must
+    unreference it when it is no longer needed.
+    Returns:     a reference to an #AtkStateSet which is the state
+      set of the accessible
+  */
   atk.state_set.StateSet refStateSet()
   {
     AtkStateSet* _cretval;
@@ -303,24 +309,24 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Removes a property change handler.
-   * Params:
-   *   handlerId = a guint which identifies the handler to be removed.
-
-   * Deprecated: See [atk.object.ObjectAtk.connectPropertyChangeHandler]
-   */
+      Removes a property change handler.
+    Params:
+      handlerId =       a guint which identifies the handler to be removed.
+  
+    Deprecated:     See [atk.object.ObjectAtk.connectPropertyChangeHandler]
+  */
   void removePropertyChangeHandler(uint handlerId)
   {
     atk_object_remove_property_change_handler(cast(AtkObject*)cPtr, handlerId);
   }
 
   /**
-   * Removes a relationship of the specified type with the specified target.
-   * Params:
-   *   relationship = The #AtkRelationType of the relation
-   *   target = The #AtkObject which is the target of the relation to be removed.
-   * Returns: TRUE if the relationship is removed.
-   */
+      Removes a relationship of the specified type with the specified target.
+    Params:
+      relationship =       The #AtkRelationType of the relation
+      target =       The #AtkObject which is the target of the relation to be removed.
+    Returns:     TRUE if the relationship is removed.
+  */
   bool removeRelationship(atk.types.RelationType relationship, atk.object.ObjectAtk target)
   {
     bool _retval;
@@ -329,14 +335,14 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Sets the accessible ID of the accessible.  This is not meant to be presented
-   * to the user, but to be an ID which is stable over application development.
-   * Typically, this is the gtkbuilder ID. Such an ID will be available for
-   * instance to identify a given well-known accessible object for tailored screen
-   * reading, or for automatic regression testing.
-   * Params:
-   *   id = a character string to be set as the accessible id
-   */
+      Sets the accessible ID of the accessible.  This is not meant to be presented
+    to the user, but to be an ID which is stable over application development.
+    Typically, this is the gtkbuilder ID. Such an ID will be available for
+    instance to identify a given well-known accessible object for tailored screen
+    reading, or for automatic regression testing.
+    Params:
+      id =       a character string to be set as the accessible id
+  */
   void setAccessibleId(string id)
   {
     const(char)* _id = id.toCString(No.Alloc);
@@ -344,13 +350,13 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Sets the accessible description of the accessible. You can't set
-   * the description to NULL. This is reserved for the initial value. In
-   * this aspect NULL is similar to ATK_ROLE_UNKNOWN. If you want to set
-   * the name to a empty value you can use "".
-   * Params:
-   *   description = a character string to be set as the accessible description
-   */
+      Sets the accessible description of the accessible. You can't set
+    the description to NULL. This is reserved for the initial value. In
+    this aspect NULL is similar to ATK_ROLE_UNKNOWN. If you want to set
+    the name to a empty value you can use "".
+    Params:
+      description =       a character string to be set as the accessible description
+  */
   void setDescription(string description)
   {
     const(char)* _description = description.toCString(No.Alloc);
@@ -358,12 +364,12 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Sets the help text associated with the accessible. This can be used to
-   * expose context-sensitive information to help a user understand how to
-   * interact with the object.
-   * Params:
-   *   helpText = a character string to be set as the accessible's help text
-   */
+      Sets the help text associated with the accessible. This can be used to
+    expose context-sensitive information to help a user understand how to
+    interact with the object.
+    Params:
+      helpText =       a character string to be set as the accessible's help text
+  */
   void setHelpText(string helpText)
   {
     const(char)* _helpText = helpText.toCString(No.Alloc);
@@ -371,13 +377,13 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Sets the accessible name of the accessible. You can't set the name
-   * to NULL. This is reserved for the initial value. In this aspect
-   * NULL is similar to ATK_ROLE_UNKNOWN. If you want to set the name to
-   * a empty value you can use "".
-   * Params:
-   *   name = a character string to be set as the accessible name
-   */
+      Sets the accessible name of the accessible. You can't set the name
+    to NULL. This is reserved for the initial value. In this aspect
+    NULL is similar to ATK_ROLE_UNKNOWN. If you want to set the name to
+    a empty value you can use "".
+    Params:
+      name =       a character string to be set as the accessible name
+  */
   void setName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
@@ -385,45 +391,50 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * Sets the accessible parent of the accessible. parent can be NULL.
-   * Params:
-   *   parent = an #AtkObject to be set as the accessible parent
-   */
+      Sets the accessible parent of the accessible. parent can be NULL.
+    Params:
+      parent =       an #AtkObject to be set as the accessible parent
+  */
   void setParent(atk.object.ObjectAtk parent)
   {
     atk_object_set_parent(cast(AtkObject*)cPtr, parent ? cast(AtkObject*)parent.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the role of the accessible.
-   * Params:
-   *   role = an #AtkRole to be set as the role
-   */
+      Sets the role of the accessible.
+    Params:
+      role =       an #AtkRole to be set as the role
+  */
   void setRole(atk.types.Role role)
   {
     atk_object_set_role(cast(AtkObject*)cPtr, role);
   }
 
   /**
-   * The "active-descendant-changed" signal is emitted by an object
-   * which has the state ATK_STATE_MANAGES_DESCENDANTS when the focus
-   * object in the object changes. For instance, a table will emit the
-   * signal when the cell in the table which has focus changes.
-   * Params
-   *   arg1 = the newly focused object.
-   *   objectAtk = the instance the signal is connected to
-   */
+      The "active-descendant-changed" signal is emitted by an object
+    which has the state ATK_STATE_MANAGES_DESCENDANTS when the focus
+    object in the object changes. For instance, a table will emit the
+    signal when the cell in the table which has focus changes.
+  
+    ## Parameters
+    $(LIST
+      * $(B arg1)       the newly focused object.
+      * $(B objectAtk) the instance the signal is connected to
+    )
+  */
   alias ActiveDescendantChangedCallbackDlg = void delegate(atk.object.ObjectAtk arg1, atk.object.ObjectAtk objectAtk);
+
+  /** ditto */
   alias ActiveDescendantChangedCallbackFunc = void function(atk.object.ObjectAtk arg1, atk.object.ObjectAtk objectAtk);
 
   /**
-   * Connect to ActiveDescendantChanged signal.
-   * Params:
-   *   detail = Signal detail or null (default)
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ActiveDescendantChanged signal.
+    Params:
+      detail = Signal detail or null (default)
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectActiveDescendantChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : ActiveDescendantChangedCallbackDlg) || is(T : ActiveDescendantChangedCallbackFunc))
   {
@@ -441,23 +452,29 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * The "announcement" signal can be emitted to pass an announcement on to
-   * be read by a screen reader.
-   * Depcrecated $(LPAREN)2.50$(RPAREN): Use AtkObject::notification instead.
-   * Params
-   *   arg1 = the text to be announced.
-   *   objectAtk = the instance the signal is connected to
-   */
+      The "announcement" signal can be emitted to pass an announcement on to
+    be read by a screen reader.
+    
+    Depcrecated (2.50): Use AtkObject::notification instead.
+  
+    ## Parameters
+    $(LIST
+      * $(B arg1)       the text to be announced.
+      * $(B objectAtk) the instance the signal is connected to
+    )
+  */
   alias AnnouncementCallbackDlg = void delegate(string arg1, atk.object.ObjectAtk objectAtk);
+
+  /** ditto */
   alias AnnouncementCallbackFunc = void function(string arg1, atk.object.ObjectAtk objectAtk);
 
   /**
-   * Connect to Announcement signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Announcement signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectAnnouncement(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AnnouncementCallbackDlg) || is(T : AnnouncementCallbackFunc))
   {
@@ -475,24 +492,29 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * The "attribute-changed" signal should be emitted when one of an object's
-   * attributes changes.
-   * Params
-   *   arg1 = the name of the attribute being modified, or %NULL if not
-   *     available.
-   *   arg2 = the attribute's new value, or %null if not available.
-   *   objectAtk = the instance the signal is connected to
-   */
+      The "attribute-changed" signal should be emitted when one of an object's
+    attributes changes.
+  
+    ## Parameters
+    $(LIST
+      * $(B arg1)       the name of the attribute being modified, or null if not
+                 available.
+      * $(B arg2)       the attribute's new value, or null if not available.
+      * $(B objectAtk) the instance the signal is connected to
+    )
+  */
   alias AttributeChangedCallbackDlg = void delegate(string arg1, string arg2, atk.object.ObjectAtk objectAtk);
+
+  /** ditto */
   alias AttributeChangedCallbackFunc = void function(string arg1, string arg2, atk.object.ObjectAtk objectAtk);
 
   /**
-   * Connect to AttributeChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to AttributeChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectAttributeChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AttributeChangedCallbackDlg) || is(T : AttributeChangedCallbackFunc))
   {
@@ -511,30 +533,35 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * The signal "children-changed" is emitted when a child is added or
-   * removed from an object. It supports two details: "add" and
-   * "remove"
-   * Params
-   *   arg1 = The index of the added or removed child. The value can be
-   *     -1. This is used if the value is not known by the implementor
-   *     when the child is added/removed or irrelevant.
-   *   arg2 = A gpointer to the child AtkObject which was added or
-   *     removed. If the child was removed, it is possible that it is not
-   *     available for the implementor. In that case this pointer can be
-   *     NULL.
-   *   objectAtk = the instance the signal is connected to
-   */
+      The signal "children-changed" is emitted when a child is added or
+    removed from an object. It supports two details: "add" and
+    "remove"
+  
+    ## Parameters
+    $(LIST
+      * $(B arg1)       The index of the added or removed child. The value can be
+        -1. This is used if the value is not known by the implementor
+        when the child is added/removed or irrelevant.
+      * $(B arg2)       A gpointer to the child AtkObject which was added or
+        removed. If the child was removed, it is possible that it is not
+        available for the implementor. In that case this pointer can be
+        NULL.
+      * $(B objectAtk) the instance the signal is connected to
+    )
+  */
   alias ChildrenChangedCallbackDlg = void delegate(uint arg1, atk.object.ObjectAtk arg2, atk.object.ObjectAtk objectAtk);
+
+  /** ditto */
   alias ChildrenChangedCallbackFunc = void function(uint arg1, atk.object.ObjectAtk arg2, atk.object.ObjectAtk objectAtk);
 
   /**
-   * Connect to ChildrenChanged signal.
-   * Params:
-   *   detail = Signal detail or null (default)
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ChildrenChanged signal.
+    Params:
+      detail = Signal detail or null (default)
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectChildrenChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : ChildrenChangedCallbackDlg) || is(T : ChildrenChangedCallbackFunc))
   {
@@ -553,25 +580,30 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * The signal "focus-event" is emitted when an object gained or lost
-   * focus.
-   * Params
-   *   arg1 = a boolean value which indicates whether the object gained
-   *     or lost focus.
-   *   objectAtk = the instance the signal is connected to
-
-   * Deprecated: Use the #AtkObject::state-change signal instead.
-   */
+      The signal "focus-event" is emitted when an object gained or lost
+    focus.
+  
+    ## Parameters
+    $(LIST
+      * $(B arg1)       a boolean value which indicates whether the object gained
+        or lost focus.
+      * $(B objectAtk) the instance the signal is connected to
+    )
+  
+    Deprecated:     Use the #AtkObject::state-change signal instead.
+  */
   alias FocusEventCallbackDlg = void delegate(bool arg1, atk.object.ObjectAtk objectAtk);
+
+  /** ditto */
   alias FocusEventCallbackFunc = void function(bool arg1, atk.object.ObjectAtk objectAtk);
 
   /**
-   * Connect to FocusEvent signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to FocusEvent signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectFocusEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FocusEventCallbackDlg) || is(T : FocusEventCallbackFunc))
   {
@@ -589,24 +621,29 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * The "notification" signal can be emitted to pass an announcement on to
-   * be read by a screen reader.
-   * Params
-   *   arg1 = the text to be announced.
-   *   arg2 = an #AtkLive specifying the politeness of the notification.
-   *     Should be either ATK_LIVE_POLITE or ATK_LIVE_ASSERTIVE.
-   *   objectAtk = the instance the signal is connected to
-   */
+      The "notification" signal can be emitted to pass an announcement on to
+    be read by a screen reader.
+  
+    ## Parameters
+    $(LIST
+      * $(B arg1)       the text to be announced.
+      * $(B arg2)       an #AtkLive specifying the politeness of the notification.
+        Should be either ATK_LIVE_POLITE or ATK_LIVE_ASSERTIVE.
+      * $(B objectAtk) the instance the signal is connected to
+    )
+  */
   alias NotificationCallbackDlg = void delegate(string arg1, int arg2, atk.object.ObjectAtk objectAtk);
+
+  /** ditto */
   alias NotificationCallbackFunc = void function(string arg1, int arg2, atk.object.ObjectAtk objectAtk);
 
   /**
-   * Connect to Notification signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Notification signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectNotification(T)(T callback, Flag!"After" after = No.After)
   if (is(T : NotificationCallbackDlg) || is(T : NotificationCallbackFunc))
   {
@@ -625,34 +662,40 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * The signal "property-change" is emitted when an object's property
-   * value changes. arg1 contains an #AtkPropertyValues with the name
-   * and the new value of the property whose value has changed. Note
-   * that, as with GObject notify, getting this signal does not
-   * guarantee that the value of the property has actually changed; it
-   * may also be emitted when the setter of the property is called to
-   * reinstate the previous value.
-   * Toolkit implementor note: ATK implementors should use
-   * [gobject.object.ObjectG.notify] to emit property-changed
-   * notifications. #AtkObject::property-changed is needed by the
-   * implementation of [atk.global.addGlobalEventListener] because GObject
-   * notify doesn't support emission hooks.
-   * Params
-   *   arg1 = an #AtkPropertyValues containing the new
-   *     value of the property which changed.
-   *   objectAtk = the instance the signal is connected to
-   */
+      The signal "property-change" is emitted when an object's property
+    value changes. arg1 contains an #AtkPropertyValues with the name
+    and the new value of the property whose value has changed. Note
+    that, as with GObject notify, getting this signal does not
+    guarantee that the value of the property has actually changed; it
+    may also be emitted when the setter of the property is called to
+    reinstate the previous value.
+    
+    Toolkit implementor note: ATK implementors should use
+    [gobject.object.ObjectG.notify] to emit property-changed
+    notifications. #AtkObject::property-changed is needed by the
+    implementation of [atk.global.addGlobalEventListener] because GObject
+    notify doesn't support emission hooks.
+  
+    ## Parameters
+    $(LIST
+      * $(B arg1)       an #AtkPropertyValues containing the new
+        value of the property which changed.
+      * $(B objectAtk) the instance the signal is connected to
+    )
+  */
   alias PropertyChangeCallbackDlg = void delegate(atk.property_values.PropertyValues arg1, atk.object.ObjectAtk objectAtk);
+
+  /** ditto */
   alias PropertyChangeCallbackFunc = void function(atk.property_values.PropertyValues arg1, atk.object.ObjectAtk objectAtk);
 
   /**
-   * Connect to PropertyChange signal.
-   * Params:
-   *   detail = Signal detail or null (default)
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to PropertyChange signal.
+    Params:
+      detail = Signal detail or null (default)
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectPropertyChange(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : PropertyChangeCallbackDlg) || is(T : PropertyChangeCallbackFunc))
   {
@@ -670,25 +713,30 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * The "state-change" signal is emitted when an object's state
-   * changes.  The detail value identifies the state type which has
-   * changed.
-   * Params
-   *   arg1 = The name of the state which has changed
-   *   arg2 = A boolean which indicates whether the state has been set or unset.
-   *   objectAtk = the instance the signal is connected to
-   */
+      The "state-change" signal is emitted when an object's state
+    changes.  The detail value identifies the state type which has
+    changed.
+  
+    ## Parameters
+    $(LIST
+      * $(B arg1)       The name of the state which has changed
+      * $(B arg2)       A boolean which indicates whether the state has been set or unset.
+      * $(B objectAtk) the instance the signal is connected to
+    )
+  */
   alias StateChangeCallbackDlg = void delegate(string arg1, bool arg2, atk.object.ObjectAtk objectAtk);
+
+  /** ditto */
   alias StateChangeCallbackFunc = void function(string arg1, bool arg2, atk.object.ObjectAtk objectAtk);
 
   /**
-   * Connect to StateChange signal.
-   * Params:
-   *   detail = Signal detail or null (default)
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to StateChange signal.
+    Params:
+      detail = Signal detail or null (default)
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectStateChange(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : StateChangeCallbackDlg) || is(T : StateChangeCallbackFunc))
   {
@@ -707,20 +755,26 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-   * The "visible-data-changed" signal is emitted when the visual
-   * appearance of the object changed.
-   *   objectAtk = the instance the signal is connected to
-   */
+      The "visible-data-changed" signal is emitted when the visual
+    appearance of the object changed.
+  
+    ## Parameters
+    $(LIST
+      * $(B objectAtk) the instance the signal is connected to
+    )
+  */
   alias VisibleDataChangedCallbackDlg = void delegate(atk.object.ObjectAtk objectAtk);
+
+  /** ditto */
   alias VisibleDataChangedCallbackFunc = void function(atk.object.ObjectAtk objectAtk);
 
   /**
-   * Connect to VisibleDataChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to VisibleDataChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectVisibleDataChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : VisibleDataChangedCallbackDlg) || is(T : VisibleDataChangedCallbackFunc))
   {

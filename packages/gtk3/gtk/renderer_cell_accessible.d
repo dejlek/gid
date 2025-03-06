@@ -13,6 +13,7 @@ import gtk.cell_accessible;
 import gtk.cell_renderer;
 import gtk.types;
 
+/** */
 class RendererCellAccessible : gtk.cell_accessible.CellAccessible
 {
 
@@ -32,6 +33,7 @@ class RendererCellAccessible : gtk.cell_accessible.CellAccessible
     return getType();
   }
 
+  /** */
   this(gtk.cell_renderer.CellRenderer renderer)
   {
     AtkObject* _cretval;

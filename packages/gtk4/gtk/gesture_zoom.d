@@ -8,11 +8,12 @@ import gtk.gesture;
 import gtk.types;
 
 /**
- * `GtkGestureZoom` is a `GtkGesture` for 2-finger pinch/zoom gestures.
- * Whenever the distance between both tracked sequences changes, the
- * signal@Gtk.GestureZoom::scale-changed signal is emitted to report
- * the scale factor.
- */
+    [gtk.gesture_zoom.GestureZoom] is a [gtk.gesture.Gesture] for 2-finger pinch/zoom gestures.
+  
+  Whenever the distance between both tracked sequences changes, the
+  `signal@Gtk.GestureZoom::scale-changed` signal is emitted to report
+  the scale factor.
+*/
 class GestureZoom : gtk.gesture.Gesture
 {
 
@@ -33,10 +34,10 @@ class GestureZoom : gtk.gesture.Gesture
   }
 
   /**
-   * Returns a newly created `GtkGesture` that recognizes
-   * pinch/zoom gestures.
-   * Returns: a newly created `GtkGestureZoom`
-   */
+      Returns a newly created [gtk.gesture.Gesture] that recognizes
+    pinch/zoom gestures.
+    Returns:     a newly created [gtk.gesture_zoom.GestureZoom]
+  */
   this()
   {
     GtkGesture* _cretval;
@@ -45,13 +46,14 @@ class GestureZoom : gtk.gesture.Gesture
   }
 
   /**
-   * Gets the scale delta.
-   * If gesture is active, this function returns the zooming
-   * difference since the gesture was recognized $(LPAREN)hence the
-   * starting point is considered 1:1$(RPAREN). If gesture is not
-   * active, 1 is returned.
-   * Returns: the scale delta
-   */
+      Gets the scale delta.
+    
+    If gesture is active, this function returns the zooming
+    difference since the gesture was recognized (hence the
+    starting point is considered 1:1). If gesture is not
+    active, 1 is returned.
+    Returns:     the scale delta
+  */
   double getScaleDelta()
   {
     double _retval;
@@ -60,21 +62,26 @@ class GestureZoom : gtk.gesture.Gesture
   }
 
   /**
-   * Emitted whenever the distance between both tracked sequences changes.
-   * Params
-   *   scale = Scale delta, taking the initial state as 1:1
-   *   gestureZoom = the instance the signal is connected to
-   */
+      Emitted whenever the distance between both tracked sequences changes.
+  
+    ## Parameters
+    $(LIST
+      * $(B scale)       Scale delta, taking the initial state as 1:1
+      * $(B gestureZoom) the instance the signal is connected to
+    )
+  */
   alias ScaleChangedCallbackDlg = void delegate(double scale, gtk.gesture_zoom.GestureZoom gestureZoom);
+
+  /** ditto */
   alias ScaleChangedCallbackFunc = void function(double scale, gtk.gesture_zoom.GestureZoom gestureZoom);
 
   /**
-   * Connect to ScaleChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ScaleChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectScaleChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ScaleChangedCallbackDlg) || is(T : ScaleChangedCallbackFunc))
   {

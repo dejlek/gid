@@ -17,16 +17,18 @@ import soup.message_headers;
 import soup.types;
 
 /**
- * Handles streams of multipart messages.
- * This adds support for the multipart responses. For handling the
- * multiple parts the user needs to wrap the [gio.input_stream.InputStream] obtained by
- * sending the request with a class@MultipartInputStream and use
- * [soup.multipart_input_stream.MultipartInputStream.nextPart] before reading. Responses
- * which are not wrapped will be treated like non-multipart responses.
- * Note that although #SoupMultipartInputStream is a [gio.input_stream.InputStream],
- * you should not read directly from it, and the results are undefined
- * if you do.
- */
+    Handles streams of multipart messages.
+  
+  This adds support for the multipart responses. For handling the
+  multiple parts the user needs to wrap the [gio.input_stream.InputStream] obtained by
+  sending the request with a `class@MultipartInputStream` and use
+  [soup.multipart_input_stream.MultipartInputStream.nextPart] before reading. Responses
+  which are not wrapped will be treated like non-multipart responses.
+  
+  Note that although #SoupMultipartInputStream is a [gio.input_stream.InputStream],
+  you should not read directly from it, and the results are undefined
+  if you do.
+*/
 class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.pollable_input_stream.PollableInputStream
 {
 
@@ -49,16 +51,17 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   mixin PollableInputStreamT!();
 
   /**
-   * Creates a new #SoupMultipartInputStream that wraps the
-   * [gio.input_stream.InputStream] obtained by sending the classMessage.
-   * Reads should not be done directly through this object, use the input streams
-   * returned by [soup.multipart_input_stream.MultipartInputStream.nextPart] or its async
-   * counterpart instead.
-   * Params:
-   *   msg = the #SoupMessage the response is related to.
-   *   baseStream = the #GInputStream returned by sending the request.
-   * Returns: a new #SoupMultipartInputStream
-   */
+      Creates a new #SoupMultipartInputStream that wraps the
+    [gio.input_stream.InputStream] obtained by sending the `classMessage`.
+    
+    Reads should not be done directly through this object, use the input streams
+    returned by [soup.multipart_input_stream.MultipartInputStream.nextPart] or its async
+    counterpart instead.
+    Params:
+      msg =       the #SoupMessage the response is related to.
+      baseStream =       the #GInputStream returned by sending the request.
+    Returns:     a new #SoupMultipartInputStream
+  */
   this(soup.message.Message msg, gio.input_stream.InputStream baseStream)
   {
     SoupMultipartInputStream* _cretval;
@@ -67,17 +70,19 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   }
 
   /**
-   * Obtains the headers for the part currently being processed.
-   * Note that the structMessageHeaders that are returned are owned by the
-   * #SoupMultipartInputStream and will be replaced when a call is made to
-   * [soup.multipart_input_stream.MultipartInputStream.nextPart] or its async counterpart, so if
-   * keeping the headers is required, a copy must be made.
-   * Note that if a part had no headers at all an empty structMessageHeaders
-   * will be returned.
-   * Returns: a #SoupMessageHeaders
-   *   containing the headers for the part currently being processed or
-   *   %NULL if the headers failed to parse.
-   */
+      Obtains the headers for the part currently being processed.
+    
+    Note that the `structMessageHeaders` that are returned are owned by the
+    #SoupMultipartInputStream and will be replaced when a call is made to
+    [soup.multipart_input_stream.MultipartInputStream.nextPart] or its async counterpart, so if
+    keeping the headers is required, a copy must be made.
+    
+    Note that if a part had no headers at all an empty `structMessageHeaders`
+    will be returned.
+    Returns:     a #SoupMessageHeaders
+        containing the headers for the part currently being processed or
+        null if the headers failed to parse.
+  */
   soup.message_headers.MessageHeaders getHeaders()
   {
     SoupMessageHeaders* _cretval;
@@ -87,20 +92,22 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   }
 
   /**
-   * Obtains an input stream for the next part.
-   * When dealing with a multipart response the input stream needs to be wrapped
-   * in a #SoupMultipartInputStream and this function or its async counterpart
-   * need to be called to obtain the first part for reading.
-   * After calling this function,
-   * [soup.multipart_input_stream.MultipartInputStream.getHeaders] can be used to obtain the
-   * headers for the first part. A read of 0 bytes indicates the end of
-   * the part; a new call to this function should be done at that point,
-   * to obtain the next part.
-   * Params:
-   *   cancellable = a #GCancellable
-   * Returns: a new #GInputStream, or
-   *   %NULL if there are no more parts
-   */
+      Obtains an input stream for the next part.
+    
+    When dealing with a multipart response the input stream needs to be wrapped
+    in a #SoupMultipartInputStream and this function or its async counterpart
+    need to be called to obtain the first part for reading.
+    
+    After calling this function,
+    [soup.multipart_input_stream.MultipartInputStream.getHeaders] can be used to obtain the
+    headers for the first part. A read of 0 bytes indicates the end of
+    the part; a new call to this function should be done at that point,
+    to obtain the next part.
+    Params:
+      cancellable =       a #GCancellable
+    Returns:     a new #GInputStream, or
+        null if there are no more parts
+  */
   gio.input_stream.InputStream nextPart(gio.cancellable.Cancellable cancellable = null)
   {
     GInputStream* _cretval;
@@ -113,13 +120,14 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   }
 
   /**
-   * Obtains a [gio.input_stream.InputStream] for the next request.
-   * See [soup.multipart_input_stream.MultipartInputStream.nextPart] for details on the workflow.
-   * Params:
-   *   ioPriority = the I/O priority for the request.
-   *   cancellable = a #GCancellable.
-   *   callback = callback to call when request is satisfied.
-   */
+      Obtains a [gio.input_stream.InputStream] for the next request.
+    
+    See [soup.multipart_input_stream.MultipartInputStream.nextPart] for details on the workflow.
+    Params:
+      ioPriority =       the I/O priority for the request.
+      cancellable =       a #GCancellable.
+      callback =       callback to call when request is satisfied.
+  */
   void nextPartAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -136,13 +144,13 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   }
 
   /**
-   * Finishes an asynchronous request for the next part.
-   * Params:
-   *   result = a #GAsyncResult.
-   * Returns: a newly created
-   *   [gio.input_stream.InputStream] for reading the next part or %NULL if there are no
-   *   more parts.
-   */
+      Finishes an asynchronous request for the next part.
+    Params:
+      result =       a #GAsyncResult.
+    Returns:     a newly created
+        [gio.input_stream.InputStream] for reading the next part or null if there are no
+        more parts.
+  */
   gio.input_stream.InputStream nextPartFinish(gio.async_result.AsyncResult result)
   {
     GInputStream* _cretval;

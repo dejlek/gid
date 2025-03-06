@@ -14,15 +14,21 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkWindowHandle` is a titlebar area widget.
- * When added into a window, it can be dragged to move the window, and handles
- * right click, double click and middle click as expected of a titlebar.
- * # CSS nodes
- * `GtkWindowHandle` has a single CSS node with the name `windowhandle`.
- * # Accessibility
- * Until GTK 4.10, `GtkWindowHandle` used the `GTK_ACCESSIBLE_ROLE_GROUP` role.
- * Starting from GTK 4.12, `GtkWindowHandle` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
- */
+    [gtk.window_handle.WindowHandle] is a titlebar area widget.
+  
+  When added into a window, it can be dragged to move the window, and handles
+  right click, double click and middle click as expected of a titlebar.
+  
+  # CSS nodes
+  
+  [gtk.window_handle.WindowHandle] has a single CSS node with the name `windowhandle`.
+  
+  # Accessibility
+  
+  Until GTK 4.10, [gtk.window_handle.WindowHandle] used the [gtk.types.AccessibleRole.Group] role.
+  
+  Starting from GTK 4.12, [gtk.window_handle.WindowHandle] uses the [gtk.types.AccessibleRole.Generic] role.
+*/
 class WindowHandle : gtk.widget.Widget
 {
 
@@ -43,9 +49,9 @@ class WindowHandle : gtk.widget.Widget
   }
 
   /**
-   * Creates a new `GtkWindowHandle`.
-   * Returns: a new `GtkWindowHandle`.
-   */
+      Creates a new [gtk.window_handle.WindowHandle].
+    Returns:     a new [gtk.window_handle.WindowHandle].
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -54,9 +60,9 @@ class WindowHandle : gtk.widget.Widget
   }
 
   /**
-   * Gets the child widget of self.
-   * Returns: the child widget of self
-   */
+      Gets the child widget of self.
+    Returns:     the child widget of self
+  */
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
@@ -66,10 +72,10 @@ class WindowHandle : gtk.widget.Widget
   }
 
   /**
-   * Sets the child widget of self.
-   * Params:
-   *   child = the child widget
-   */
+      Sets the child widget of self.
+    Params:
+      child =       the child widget
+  */
   void setChild(gtk.widget.Widget child = null)
   {
     gtk_window_handle_set_child(cast(GtkWindowHandle*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);

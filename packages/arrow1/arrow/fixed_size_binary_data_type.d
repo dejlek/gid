@@ -6,6 +6,7 @@ import arrow.fixed_width_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
 {
 
@@ -25,6 +26,7 @@ class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return getType();
   }
 
+  /** */
   this(int byteWidth)
   {
     GArrowFixedSizeBinaryDataType* _cretval;
@@ -32,6 +34,7 @@ class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
     this(_cretval, Yes.Take);
   }
 
+  /** */
   int getByteWidth()
   {
     int _retval;

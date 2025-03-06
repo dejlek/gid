@@ -7,10 +7,11 @@ import gtk.shortcut_action;
 import gtk.types;
 
 /**
- * A `GtkShortcut`Action that emits a signal.
- * Signals that are used in this way are referred to as keybinding signals,
- * and they are expected to be defined with the %G_SIGNAL_ACTION flag.
- */
+    A [gtk.shortcut.Shortcut]Action that emits a signal.
+  
+  Signals that are used in this way are referred to as keybinding signals,
+  and they are expected to be defined with the `G_SIGNAL_ACTION` flag.
+*/
 class SignalAction : gtk.shortcut_action.ShortcutAction
 {
 
@@ -31,13 +32,14 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
-   * Creates an action that when activated, emits the given action signal
-   * on the provided widget.
-   * It will also unpack the args into arguments passed to the signal.
-   * Params:
-   *   signalName = name of the signal to emit
-   * Returns: a new `GtkShortcutAction`
-   */
+      Creates an action that when activated, emits the given action signal
+    on the provided widget.
+    
+    It will also unpack the args into arguments passed to the signal.
+    Params:
+      signalName =       name of the signal to emit
+    Returns:     a new [gtk.shortcut_action.ShortcutAction]
+  */
   this(string signalName)
   {
     GtkShortcutAction* _cretval;
@@ -47,9 +49,9 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
-   * Returns the name of the signal that will be emitted.
-   * Returns: the name of the signal to emit
-   */
+      Returns the name of the signal that will be emitted.
+    Returns:     the name of the signal to emit
+  */
   string getSignalName()
   {
     const(char)* _cretval;

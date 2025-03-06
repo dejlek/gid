@@ -11,11 +11,12 @@ import gio.types;
 import gobject.object;
 
 /**
- * An IPv4 or IPv6 socket address. That is, the combination of a
- * [gio.inet_address.InetAddress] and a port number.
- * In UNIX terms, `GInetSocketAddress` corresponds to a
- * [`struct sockaddr_in` or `struct sockaddr_in6`]$(LPAREN)$(RPAREN)(man:sockaddr3type).
- */
+    An IPv4 or IPv6 socket address. That is, the combination of a
+  [gio.inet_address.InetAddress] and a port number.
+  
+  In UNIX terms, [gio.inet_socket_address.InetSocketAddress] corresponds to a
+  [`struct sockaddr_in` or `struct sockaddr_in6`](man:sockaddr(3type)).
+*/
 class InetSocketAddress : gio.socket_address.SocketAddress
 {
 
@@ -36,12 +37,12 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   }
 
   /**
-   * Creates a new #GInetSocketAddress for address and port.
-   * Params:
-   *   address = a #GInetAddress
-   *   port = a port number
-   * Returns: a new #GInetSocketAddress
-   */
+      Creates a new #GInetSocketAddress for address and port.
+    Params:
+      address =       a #GInetAddress
+      port =       a port number
+    Returns:     a new #GInetSocketAddress
+  */
   this(gio.inet_address.InetAddress address, ushort port)
   {
     GSocketAddress* _cretval;
@@ -50,15 +51,16 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   }
 
   /**
-   * Creates a new #GInetSocketAddress for address and port.
-   * If address is an IPv6 address, it can also contain a scope ID
-   * $(LPAREN)separated from the address by a `%`$(RPAREN).
-   * Params:
-   *   address = the string form of an IP address
-   *   port = a port number
-   * Returns: a new #GInetSocketAddress,
-   *   or %NULL if address cannot be parsed.
-   */
+      Creates a new #GInetSocketAddress for address and port.
+    
+    If address is an IPv6 address, it can also contain a scope ID
+    (separated from the address by a `%`).
+    Params:
+      address =       the string form of an IP address
+      port =       a port number
+    Returns:     a new #GInetSocketAddress,
+      or null if address cannot be parsed.
+  */
   static gio.inet_socket_address.InetSocketAddress newFromString(string address, uint port)
   {
     GSocketAddress* _cretval;
@@ -69,10 +71,10 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   }
 
   /**
-   * Gets address's #GInetAddress.
-   * Returns: the #GInetAddress for address, which must be
-   *   [gobject.object.ObjectG.ref_]'d if it will be stored
-   */
+      Gets address's #GInetAddress.
+    Returns:     the #GInetAddress for address, which must be
+      [gobject.object.ObjectG.ref_]'d if it will be stored
+  */
   gio.inet_address.InetAddress getAddress()
   {
     GInetAddress* _cretval;
@@ -82,10 +84,10 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   }
 
   /**
-   * Gets the `sin6_flowinfo` field from address,
-   * which must be an IPv6 address.
-   * Returns: the flowinfo field
-   */
+      Gets the `sin6_flowinfo` field from address,
+    which must be an IPv6 address.
+    Returns:     the flowinfo field
+  */
   uint getFlowinfo()
   {
     uint _retval;
@@ -94,9 +96,9 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   }
 
   /**
-   * Gets address's port.
-   * Returns: the port for address
-   */
+      Gets address's port.
+    Returns:     the port for address
+  */
   ushort getPort()
   {
     ushort _retval;
@@ -105,10 +107,10 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   }
 
   /**
-   * Gets the `sin6_scope_id` field from address,
-   * which must be an IPv6 address.
-   * Returns: the scope id field
-   */
+      Gets the `sin6_scope_id` field from address,
+    which must be an IPv6 address.
+    Returns:     the scope id field
+  */
   uint getScopeId()
   {
     uint _retval;

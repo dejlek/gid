@@ -7,9 +7,9 @@ import gobject.flags_value;
 import gobject.types;
 
 /**
- * The class of a flags type holds information about its
- * possible values.
- */
+    The class of a flags type holds information about its
+  possible values.
+*/
 class FlagsClass
 {
   GFlagsClass cInstance;

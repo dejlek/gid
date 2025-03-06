@@ -8,6 +8,7 @@ import parquet.c.types;
 import parquet.row_group_metadata;
 import parquet.types;
 
+/** */
 class FileMetadata : gobject.object.ObjectG
 {
 
@@ -27,6 +28,7 @@ class FileMetadata : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   bool canDecompress()
   {
     bool _retval;
@@ -34,6 +36,7 @@ class FileMetadata : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equal(parquet.file_metadata.FileMetadata otherMetadata)
   {
     bool _retval;
@@ -41,6 +44,7 @@ class FileMetadata : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getCreatedBy()
   {
     const(char)* _cretval;
@@ -49,6 +53,7 @@ class FileMetadata : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   int getNColumns()
   {
     int _retval;
@@ -56,6 +61,7 @@ class FileMetadata : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   int getNRowGroups()
   {
     int _retval;
@@ -63,6 +69,7 @@ class FileMetadata : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getNRows()
   {
     long _retval;
@@ -70,6 +77,7 @@ class FileMetadata : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   int getNSchemaElements()
   {
     int _retval;
@@ -77,6 +85,7 @@ class FileMetadata : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   parquet.row_group_metadata.RowGroupMetadata getRowGroup(int index)
   {
     GParquetRowGroupMetadata* _cretval;
@@ -88,6 +97,7 @@ class FileMetadata : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   uint getSize()
   {
     uint _retval;

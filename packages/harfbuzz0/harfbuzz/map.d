@@ -7,8 +7,8 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * Data type for holding integer-to-integer hash maps.
- */
+    Data type for holding integer-to-integer hash maps.
+*/
 class Map : gobject.boxed.Boxed
 {
 

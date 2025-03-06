@@ -6,8 +6,8 @@ import gobject.c.types;
 import gobject.types;
 
 /**
- * An opaque structure used as the base of all type instances.
- */
+    An opaque structure used as the base of all type instances.
+*/
 class TypeInstance
 {
   GTypeInstance cInstance;
@@ -28,6 +28,7 @@ class TypeInstance
     return cast(void*)&cInstance;
   }
 
+  /** */
   void* getPrivate(gobject.types.GType privateType)
   {
     auto _retval = g_type_instance_get_private(cast(GTypeInstance*)cPtr, privateType);

@@ -10,12 +10,13 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * `GtkATContext` is an abstract class provided by GTK to communicate to
- * platform-specific assistive technologies API.
- * Each platform supported by GTK implements a `GtkATContext` subclass, and
- * is responsible for updating the accessible state in response to state
- * changes in `GtkAccessible`.
- */
+    [gtk.atcontext.ATContext] is an abstract class provided by GTK to communicate to
+  platform-specific assistive technologies API.
+  
+  Each platform supported by GTK implements a [gtk.atcontext.ATContext] subclass, and
+  is responsible for updating the accessible state in response to state
+  changes in [gtk.accessible.Accessible].
+*/
 class ATContext : gobject.object.ObjectG
 {
 
@@ -36,16 +37,17 @@ class ATContext : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new `GtkATContext` instance for the given accessible role,
-   * accessible instance, and display connection.
-   * The `GtkATContext` implementation being instantiated will depend on the
-   * platform.
-   * Params:
-   *   accessibleRole = the accessible role used by the `GtkATContext`
-   *   accessible = the `GtkAccessible` implementation using the `GtkATContext`
-   *   display = the `GdkDisplay` used by the `GtkATContext`
-   * Returns: the `GtkATContext`
-   */
+      Creates a new [gtk.atcontext.ATContext] instance for the given accessible role,
+    accessible instance, and display connection.
+    
+    The [gtk.atcontext.ATContext] implementation being instantiated will depend on the
+    platform.
+    Params:
+      accessibleRole =       the accessible role used by the [gtk.atcontext.ATContext]
+      accessible =       the [gtk.accessible.Accessible] implementation using the [gtk.atcontext.ATContext]
+      display =       the [gdk.display.Display] used by the [gtk.atcontext.ATContext]
+    Returns:     the [gtk.atcontext.ATContext]
+  */
   static gtk.atcontext.ATContext create(gtk.types.AccessibleRole accessibleRole, gtk.accessible.Accessible accessible, gdk.display.Display display)
   {
     GtkATContext* _cretval;
@@ -55,9 +57,9 @@ class ATContext : gobject.object.ObjectG
   }
 
   /**
-   * Retrieves the `GtkAccessible` using this context.
-   * Returns: a `GtkAccessible`
-   */
+      Retrieves the [gtk.accessible.Accessible] using this context.
+    Returns:     a [gtk.accessible.Accessible]
+  */
   gtk.accessible.Accessible getAccessible()
   {
     GtkAccessible* _cretval;
@@ -67,9 +69,9 @@ class ATContext : gobject.object.ObjectG
   }
 
   /**
-   * Retrieves the accessible role of this context.
-   * Returns: a `GtkAccessibleRole`
-   */
+      Retrieves the accessible role of this context.
+    Returns:     a [gtk.types.AccessibleRole]
+  */
   gtk.types.AccessibleRole getAccessibleRole()
   {
     GtkAccessibleRole _cretval;
@@ -79,20 +81,26 @@ class ATContext : gobject.object.ObjectG
   }
 
   /**
-   * Emitted when the attributes of the accessible for the
-   * `GtkATContext` instance change.
-   *   aTContext = the instance the signal is connected to
-   */
+      Emitted when the attributes of the accessible for the
+    [gtk.atcontext.ATContext] instance change.
+  
+    ## Parameters
+    $(LIST
+      * $(B aTContext) the instance the signal is connected to
+    )
+  */
   alias StateChangeCallbackDlg = void delegate(gtk.atcontext.ATContext aTContext);
+
+  /** ditto */
   alias StateChangeCallbackFunc = void function(gtk.atcontext.ATContext aTContext);
 
   /**
-   * Connect to StateChange signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to StateChange signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectStateChange(T)(T callback, Flag!"After" after = No.After)
   if (is(T : StateChangeCallbackDlg) || is(T : StateChangeCallbackFunc))
   {

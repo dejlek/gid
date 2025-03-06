@@ -6,8 +6,8 @@ import glib.c.types;
 import glib.types;
 
 /**
- * The #GNode struct represents one node in a [n-ary tree][glib-N-ary-Trees].
- */
+    The #GNode struct represents one node in a [n-ary tree][glib-N-ary-Trees].
+*/
 class Node
 {
   GNode cInstance;
@@ -49,13 +49,13 @@ class Node
   }
 
   /**
-   * Gets the position of the first child of a #GNode
-   * which contains the given data.
-   * Params:
-   *   data = the data to find
-   * Returns: the index of the child of node which contains
-   *   data, or -1 if the data is not found
-   */
+      Gets the position of the first child of a #GNode
+    which contains the given data.
+    Params:
+      data =       the data to find
+    Returns:     the index of the child of node which contains
+          data, or -1 if the data is not found
+  */
   int childIndex(void* data = null)
   {
     int _retval;
@@ -64,13 +64,13 @@ class Node
   }
 
   /**
-   * Gets the position of a #GNode with respect to its siblings.
-   * child must be a child of node. The first child is numbered 0,
-   * the second 1, and so on.
-   * Params:
-   *   child = a child of node
-   * Returns: the position of child with respect to its siblings
-   */
+      Gets the position of a #GNode with respect to its siblings.
+    child must be a child of node. The first child is numbered 0,
+    the second 1, and so on.
+    Params:
+      child =       a child of node
+    Returns:     the position of child with respect to its siblings
+  */
   int childPosition(glib.node.Node child)
   {
     int _retval;
@@ -79,14 +79,14 @@ class Node
   }
 
   /**
-   * Calls a function for each of the children of a #GNode. Note that it
-   * doesn't descend beneath the child nodes. func must not do anything
-   * that would modify the structure of the tree.
-   * Params:
-   *   flags = which types of children are to be visited, one of
-   *     %G_TRAVERSE_ALL, %G_TRAVERSE_LEAVES and %G_TRAVERSE_NON_LEAVES
-   *   func = the function to call for each visited node
-   */
+      Calls a function for each of the children of a #GNode. Note that it
+    doesn't descend beneath the child nodes. func must not do anything
+    that would modify the structure of the tree.
+    Params:
+      flags =       which types of children are to be visited, one of
+            `G_TRAVERSE_ALL`, `G_TRAVERSE_LEAVES` and `G_TRAVERSE_NON_LEAVES`
+      func =       the function to call for each visited node
+  */
   void childrenForeach(glib.types.TraverseFlags flags, glib.types.NodeForeachFunc func)
   {
     extern(C) void _funcCallback(GNode* node, void* data)
@@ -102,11 +102,12 @@ class Node
   }
 
   /**
-   * Gets the depth of a #GNode.
-   * If node is %NULL the depth is 0. The root node has a depth of 1.
-   * For the children of the root node the depth is 2. And so on.
-   * Returns: the depth of the #GNode
-   */
+      Gets the depth of a #GNode.
+    
+    If node is null the depth is 0. The root node has a depth of 1.
+    For the children of the root node the depth is 2. And so on.
+    Returns:     the depth of the #GNode
+  */
   uint depth()
   {
     uint _retval;
@@ -115,22 +116,22 @@ class Node
   }
 
   /**
-   * Removes root and its children from the tree, freeing any memory
-   * allocated.
-   */
+      Removes root and its children from the tree, freeing any memory
+    allocated.
+  */
   void destroy()
   {
     g_node_destroy(cast(GNode*)cPtr);
   }
 
   /**
-   * Returns %TRUE if node is an ancestor of descendant.
-   * This is true if node is the parent of descendant,
-   * or if node is the grandparent of descendant etc.
-   * Params:
-   *   descendant = a #GNode
-   * Returns: %TRUE if node is an ancestor of descendant
-   */
+      Returns true if node is an ancestor of descendant.
+    This is true if node is the parent of descendant,
+    or if node is the grandparent of descendant etc.
+    Params:
+      descendant =       a #GNode
+    Returns:     true if node is an ancestor of descendant
+  */
   bool isAncestor(glib.node.Node descendant)
   {
     bool _retval;
@@ -139,12 +140,13 @@ class Node
   }
 
   /**
-   * Gets the maximum height of all branches beneath a #GNode.
-   * This is the maximum distance from the #GNode to all leaf nodes.
-   * If root is %NULL, 0 is returned. If root has no children,
-   * 1 is returned. If root has children, 2 is returned. And so on.
-   * Returns: the maximum height of the tree beneath root
-   */
+      Gets the maximum height of all branches beneath a #GNode.
+    This is the maximum distance from the #GNode to all leaf nodes.
+    
+    If root is null, 0 is returned. If root has no children,
+    1 is returned. If root has children, 2 is returned. And so on.
+    Returns:     the maximum height of the tree beneath root
+  */
   uint maxHeight()
   {
     uint _retval;
@@ -153,9 +155,9 @@ class Node
   }
 
   /**
-   * Gets the number of children of a #GNode.
-   * Returns: the number of children of node
-   */
+      Gets the number of children of a #GNode.
+    Returns:     the number of children of node
+  */
   uint nChildren()
   {
     uint _retval;
@@ -164,12 +166,12 @@ class Node
   }
 
   /**
-   * Gets the number of nodes in a tree.
-   * Params:
-   *   flags = which types of children are to be counted, one of
-   *     %G_TRAVERSE_ALL, %G_TRAVERSE_LEAVES and %G_TRAVERSE_NON_LEAVES
-   * Returns: the number of nodes in the tree
-   */
+      Gets the number of nodes in a tree.
+    Params:
+      flags =       which types of children are to be counted, one of
+            `G_TRAVERSE_ALL`, `G_TRAVERSE_LEAVES` and `G_TRAVERSE_NON_LEAVES`
+    Returns:     the number of nodes in the tree
+  */
   uint nNodes(glib.types.TraverseFlags flags)
   {
     uint _retval;
@@ -178,30 +180,30 @@ class Node
   }
 
   /**
-   * Reverses the order of the children of a #GNode.
-   * $(LPAREN)It doesn't change the order of the grandchildren.$(RPAREN)
-   */
+      Reverses the order of the children of a #GNode.
+    (It doesn't change the order of the grandchildren.)
+  */
   void reverseChildren()
   {
     g_node_reverse_children(cast(GNode*)cPtr);
   }
 
   /**
-   * Traverses a tree starting at the given root #GNode.
-   * It calls the given function for each node visited.
-   * The traversal can be halted at any point by returning %TRUE from func.
-   * func must not do anything that would modify the structure of the tree.
-   * Params:
-   *   order = the order in which nodes are visited - %G_IN_ORDER,
-   *     %G_PRE_ORDER, %G_POST_ORDER, or %G_LEVEL_ORDER.
-   *   flags = which types of children are to be visited, one of
-   *     %G_TRAVERSE_ALL, %G_TRAVERSE_LEAVES and %G_TRAVERSE_NON_LEAVES
-   *   maxDepth = the maximum depth of the traversal. Nodes below this
-   *     depth will not be visited. If max_depth is -1 all nodes in
-   *     the tree are visited. If depth is 1, only the root is visited.
-   *     If depth is 2, the root and its children are visited. And so on.
-   *   func = the function to call for each visited #GNode
-   */
+      Traverses a tree starting at the given root #GNode.
+    It calls the given function for each node visited.
+    The traversal can be halted at any point by returning true from func.
+    func must not do anything that would modify the structure of the tree.
+    Params:
+      order =       the order in which nodes are visited - `G_IN_ORDER`,
+            `G_PRE_ORDER`, `G_POST_ORDER`, or `G_LEVEL_ORDER`.
+      flags =       which types of children are to be visited, one of
+            `G_TRAVERSE_ALL`, `G_TRAVERSE_LEAVES` and `G_TRAVERSE_NON_LEAVES`
+      maxDepth =       the maximum depth of the traversal. Nodes below this
+            depth will not be visited. If max_depth is -1 all nodes in
+            the tree are visited. If depth is 1, only the root is visited.
+            If depth is 2, the root and its children are visited. And so on.
+      func =       the function to call for each visited #GNode
+  */
   void traverse(glib.types.TraverseType order, glib.types.TraverseFlags flags, int maxDepth, glib.types.NodeTraverseFunc func)
   {
     extern(C) bool _funcCallback(GNode* node, void* data)
@@ -218,18 +220,20 @@ class Node
   }
 
   /**
-   * Unlinks a #GNode from a tree, resulting in two separate trees.
-   */
+      Unlinks a #GNode from a tree, resulting in two separate trees.
+  */
   void unlink()
   {
     g_node_unlink(cast(GNode*)cPtr);
   }
 
+  /** */
   static void popAllocator()
   {
     g_node_pop_allocator();
   }
 
+  /** */
   static void pushAllocator(glib.types.Allocator allocator)
   {
     g_node_push_allocator(allocator);

@@ -7,9 +7,9 @@ import pango.c.types;
 import pango.types;
 
 /**
- * The `PangoAttrFloat` structure is used to represent attributes with
- * a float or double value.
- */
+    The [pango.attr_float.AttrFloat] structure is used to represent attributes with
+  a float or double value.
+*/
 class AttrFloat
 {
   PangoAttrFloat cInstance;

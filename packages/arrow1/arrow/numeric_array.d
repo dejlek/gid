@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class NumericArray : arrow.primitive_array.PrimitiveArray
 {
 
@@ -26,6 +27,7 @@ class NumericArray : arrow.primitive_array.PrimitiveArray
     return getType();
   }
 
+  /** */
   double mean()
   {
     double _retval;

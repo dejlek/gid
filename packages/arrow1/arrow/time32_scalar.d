@@ -7,6 +7,7 @@ import arrow.time32_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class Time32Scalar : arrow.scalar.Scalar
 {
 
@@ -26,6 +27,7 @@ class Time32Scalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   this(arrow.time32_data_type.Time32DataType dataType, int value)
   {
     GArrowTime32Scalar* _cretval;
@@ -33,6 +35,7 @@ class Time32Scalar : arrow.scalar.Scalar
     this(_cretval, Yes.Take);
   }
 
+  /** */
   int getValue()
   {
     int _retval;

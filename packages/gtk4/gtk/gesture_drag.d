@@ -8,15 +8,16 @@ import gtk.gesture_single;
 import gtk.types;
 
 /**
- * `GtkGestureDrag` is a `GtkGesture` implementation for drags.
- * The drag operation itself can be tracked throughout the
- * signal@Gtk.GestureDrag::drag-begin,
- * signal@Gtk.GestureDrag::drag-update and
- * signal@Gtk.GestureDrag::drag-end signals, and the relevant
- * coordinates can be extracted through
- * [gtk.gesture_drag.GestureDrag.getOffset] and
- * [gtk.gesture_drag.GestureDrag.getStartPoint].
- */
+    [gtk.gesture_drag.GestureDrag] is a [gtk.gesture.Gesture] implementation for drags.
+  
+  The drag operation itself can be tracked throughout the
+  `signal@Gtk.GestureDrag::drag-begin`,
+  `signal@Gtk.GestureDrag::drag-update` and
+  `signal@Gtk.GestureDrag::drag-end` signals, and the relevant
+  coordinates can be extracted through
+  [gtk.gesture_drag.GestureDrag.getOffset] and
+  [gtk.gesture_drag.GestureDrag.getStartPoint].
+*/
 class GestureDrag : gtk.gesture_single.GestureSingle
 {
 
@@ -37,9 +38,9 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Returns a newly created `GtkGesture` that recognizes drags.
-   * Returns: a newly created `GtkGestureDrag`
-   */
+      Returns a newly created [gtk.gesture.Gesture] that recognizes drags.
+    Returns:     a newly created [gtk.gesture_drag.GestureDrag]
+  */
   this()
   {
     GtkGesture* _cretval;
@@ -48,15 +49,16 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Gets the offset from the start point.
-   * If the gesture is active, this function returns %TRUE and
-   * fills in x and y with the coordinates of the current point,
-   * as an offset to the starting drag point.
-   * Params:
-   *   x = X offset for the current point
-   *   y = Y offset for the current point
-   * Returns: %TRUE if the gesture is active
-   */
+      Gets the offset from the start point.
+    
+    If the gesture is active, this function returns true and
+    fills in x and y with the coordinates of the current point,
+    as an offset to the starting drag point.
+    Params:
+      x =       X offset for the current point
+      y =       Y offset for the current point
+    Returns:     true if the gesture is active
+  */
   bool getOffset(out double x, out double y)
   {
     bool _retval;
@@ -65,15 +67,16 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Gets the point where the drag started.
-   * If the gesture is active, this function returns %TRUE
-   * and fills in x and y with the drag start coordinates,
-   * in widget-relative coordinates.
-   * Params:
-   *   x = X coordinate for the drag start point
-   *   y = Y coordinate for the drag start point
-   * Returns: %TRUE if the gesture is active
-   */
+      Gets the point where the drag started.
+    
+    If the gesture is active, this function returns true
+    and fills in x and y with the drag start coordinates,
+    in widget-relative coordinates.
+    Params:
+      x =       X coordinate for the drag start point
+      y =       Y coordinate for the drag start point
+    Returns:     true if the gesture is active
+  */
   bool getStartPoint(out double x, out double y)
   {
     bool _retval;
@@ -82,22 +85,27 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Emitted whenever dragging starts.
-   * Params
-   *   startX = X coordinate, relative to the widget allocation
-   *   startY = Y coordinate, relative to the widget allocation
-   *   gestureDrag = the instance the signal is connected to
-   */
+      Emitted whenever dragging starts.
+  
+    ## Parameters
+    $(LIST
+      * $(B startX)       X coordinate, relative to the widget allocation
+      * $(B startY)       Y coordinate, relative to the widget allocation
+      * $(B gestureDrag) the instance the signal is connected to
+    )
+  */
   alias DragBeginCallbackDlg = void delegate(double startX, double startY, gtk.gesture_drag.GestureDrag gestureDrag);
+
+  /** ditto */
   alias DragBeginCallbackFunc = void function(double startX, double startY, gtk.gesture_drag.GestureDrag gestureDrag);
 
   /**
-   * Connect to DragBegin signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to DragBegin signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectDragBegin(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragBeginCallbackDlg) || is(T : DragBeginCallbackFunc))
   {
@@ -116,22 +124,27 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Emitted whenever the dragging is finished.
-   * Params
-   *   offsetX = X offset, relative to the start point
-   *   offsetY = Y offset, relative to the start point
-   *   gestureDrag = the instance the signal is connected to
-   */
+      Emitted whenever the dragging is finished.
+  
+    ## Parameters
+    $(LIST
+      * $(B offsetX)       X offset, relative to the start point
+      * $(B offsetY)       Y offset, relative to the start point
+      * $(B gestureDrag) the instance the signal is connected to
+    )
+  */
   alias DragEndCallbackDlg = void delegate(double offsetX, double offsetY, gtk.gesture_drag.GestureDrag gestureDrag);
+
+  /** ditto */
   alias DragEndCallbackFunc = void function(double offsetX, double offsetY, gtk.gesture_drag.GestureDrag gestureDrag);
 
   /**
-   * Connect to DragEnd signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to DragEnd signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectDragEnd(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragEndCallbackDlg) || is(T : DragEndCallbackFunc))
   {
@@ -150,22 +163,27 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Emitted whenever the dragging point moves.
-   * Params
-   *   offsetX = X offset, relative to the start point
-   *   offsetY = Y offset, relative to the start point
-   *   gestureDrag = the instance the signal is connected to
-   */
+      Emitted whenever the dragging point moves.
+  
+    ## Parameters
+    $(LIST
+      * $(B offsetX)       X offset, relative to the start point
+      * $(B offsetY)       Y offset, relative to the start point
+      * $(B gestureDrag) the instance the signal is connected to
+    )
+  */
   alias DragUpdateCallbackDlg = void delegate(double offsetX, double offsetY, gtk.gesture_drag.GestureDrag gestureDrag);
+
+  /** ditto */
   alias DragUpdateCallbackFunc = void function(double offsetX, double offsetY, gtk.gesture_drag.GestureDrag gestureDrag);
 
   /**
-   * Connect to DragUpdate signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to DragUpdate signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectDragUpdate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragUpdateCallbackDlg) || is(T : DragUpdateCallbackFunc))
   {

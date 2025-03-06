@@ -9,6 +9,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
@@ -28,6 +29,7 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowSinkNodeOptions* _cretval;
@@ -35,6 +37,7 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.record_batch_reader.RecordBatchReader getReader(arrow.schema.Schema schema)
   {
     GArrowRecordBatchReader* _cretval;

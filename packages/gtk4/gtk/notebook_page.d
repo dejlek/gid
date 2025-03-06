@@ -8,8 +8,8 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkNotebookPage` is an auxiliary object used by `GtkNotebook`.
- */
+    [gtk.notebook_page.NotebookPage] is an auxiliary object used by [gtk.notebook.Notebook].
+*/
 class NotebookPage : gobject.object.ObjectG
 {
 
@@ -30,9 +30,9 @@ class NotebookPage : gobject.object.ObjectG
   }
 
   /**
-   * Returns the notebook child to which page belongs.
-   * Returns: the child to which page belongs
-   */
+      Returns the notebook child to which page belongs.
+    Returns:     the child to which page belongs
+  */
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;

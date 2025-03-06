@@ -16,30 +16,40 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkSwitch` is a "light switch" that has two states: on or off.
- * ![An example GtkSwitch](switch.png)
- * The user can control which state should be active by clicking the
- * empty area, or by dragging the handle.
- * `GtkSwitch` can also handle situations where the underlying state
- * changes with a delay. In this case, the slider position indicates
- * the user's recent change $(LPAREN)as indicated by the [gtk.switch_.Switch.gboolean]
- * property$(RPAREN), and the color indicates whether the underlying state $(LPAREN)represented
- * by the [gtk.switch_.Switch.gboolean] property$(RPAREN) has been updated yet.
- * ![GtkSwitch with delayed state change](switch-state.png)
- * See signal@Gtk.Switch::state-set for details.
- * # CSS nodes
- * ```
- * switch
- * ├── image
- * ├── image
- * ╰── slider
- * ```
- * `GtkSwitch` has four css nodes, the main node with the name switch and
- * subnodes for the slider and the on and off images. Neither of them is
- * using any style classes.
- * # Accessibility
- * `GtkSwitch` uses the %GTK_ACCESSIBLE_ROLE_SWITCH role.
- */
+    [gtk.switch_.Switch] is a "light switch" that has two states: on or off.
+  
+  ![An example GtkSwitch](switch.png)
+  
+  The user can control which state should be active by clicking the
+  empty area, or by dragging the handle.
+  
+  [gtk.switch_.Switch] can also handle situations where the underlying state
+  changes with a delay. In this case, the slider position indicates
+  the user's recent change (as indicated by the [gtk.switch_.Switch.gboolean]
+  property), and the color indicates whether the underlying state (represented
+  by the [gtk.switch_.Switch.gboolean] property) has been updated yet.
+  
+  ![GtkSwitch with delayed state change](switch-state.png)
+  
+  See `signal@Gtk.Switch::state-set` for details.
+  
+  # CSS nodes
+  
+  ```
+  switch
+  ├── image
+  ├── image
+  ╰── slider
+  ```
+  
+  [gtk.switch_.Switch] has four css nodes, the main node with the name switch and
+  subnodes for the slider and the on and off images. Neither of them is
+  using any style classes.
+  
+  # Accessibility
+  
+  [gtk.switch_.Switch] uses the [gtk.types.AccessibleRole.Switch] role.
+*/
 class Switch : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
@@ -62,9 +72,9 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
   mixin ActionableT!();
 
   /**
-   * Creates a new `GtkSwitch` widget.
-   * Returns: the newly created `GtkSwitch` instance
-   */
+      Creates a new [gtk.switch_.Switch] widget.
+    Returns:     the newly created [gtk.switch_.Switch] instance
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -73,9 +83,9 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-   * Gets whether the `GtkSwitch` is in its “on” or “off” state.
-   * Returns: %TRUE if the `GtkSwitch` is active, and %FALSE otherwise
-   */
+      Gets whether the [gtk.switch_.Switch] is in its “on” or “off” state.
+    Returns:     true if the [gtk.switch_.Switch] is active, and false otherwise
+  */
   bool getActive()
   {
     bool _retval;
@@ -84,9 +94,9 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-   * Gets the underlying state of the `GtkSwitch`.
-   * Returns: the underlying state
-   */
+      Gets the underlying state of the [gtk.switch_.Switch].
+    Returns:     the underlying state
+  */
   bool getState()
   {
     bool _retval;
@@ -95,44 +105,53 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-   * Changes the state of self to the desired one.
-   * Params:
-   *   isActive = %TRUE if self should be active, and %FALSE otherwise
-   */
+      Changes the state of self to the desired one.
+    Params:
+      isActive =       true if self should be active, and false otherwise
+  */
   void setActive(bool isActive)
   {
     gtk_switch_set_active(cast(GtkSwitch*)cPtr, isActive);
   }
 
   /**
-   * Sets the underlying state of the `GtkSwitch`.
-   * This function is typically called from a signalGtk.Switch::state-set
-   * signal handler in order to set up delayed state changes.
-   * See signalGtk.Switch::state-set for details.
-   * Params:
-   *   state = the new state
-   */
+      Sets the underlying state of the [gtk.switch_.Switch].
+    
+    This function is typically called from a `signalGtk.Switch::state-set`
+    signal handler in order to set up delayed state changes.
+    
+    See `signalGtk.Switch::state-set` for details.
+    Params:
+      state =       the new state
+  */
   void setState(bool state)
   {
     gtk_switch_set_state(cast(GtkSwitch*)cPtr, state);
   }
 
   /**
-   * Emitted to animate the switch.
-   * Applications should never connect to this signal,
-   * but use the [gtk.switch_.Switch.gboolean] property.
-   *   switch_ = the instance the signal is connected to
-   */
+      Emitted to animate the switch.
+    
+    Applications should never connect to this signal,
+    but use the [gtk.switch_.Switch.gboolean] property.
+  
+    ## Parameters
+    $(LIST
+      * $(B switch_) the instance the signal is connected to
+    )
+  */
   alias ActivateCallbackDlg = void delegate(gtk.switch_.Switch switch_);
+
+  /** ditto */
   alias ActivateCallbackFunc = void function(gtk.switch_.Switch switch_);
 
   /**
-   * Connect to Activate signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Activate signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
@@ -149,33 +168,41 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-   * Emitted to change the underlying state.
-   * The ::state-set signal is emitted when the user changes the switch
-   * position. The default handler keeps the state in sync with the
-   * [gtk.switch_.Switch.gboolean] property.
-   * To implement delayed state change, applications can connect to this
-   * signal, initiate the change of the underlying state, and call
-   * [gtk.switch_.Switch.setState] when the underlying state change is
-   * complete. The signal handler should return %TRUE to prevent the
-   * default handler from running.
-   * Visually, the underlying state is represented by the trough color of
-   * the switch, while the [gtk.switch_.Switch.gboolean] property is
-   * represented by the position of the switch.
-   * Params
-   *   state = the new state of the switch
-   *   switch_ = the instance the signal is connected to
-   * Returns: %TRUE to stop the signal emission
-   */
+      Emitted to change the underlying state.
+    
+    The ::state-set signal is emitted when the user changes the switch
+    position. The default handler keeps the state in sync with the
+    [gtk.switch_.Switch.gboolean] property.
+    
+    To implement delayed state change, applications can connect to this
+    signal, initiate the change of the underlying state, and call
+    [gtk.switch_.Switch.setState] when the underlying state change is
+    complete. The signal handler should return true to prevent the
+    default handler from running.
+    
+    Visually, the underlying state is represented by the trough color of
+    the switch, while the [gtk.switch_.Switch.gboolean] property is
+    represented by the position of the switch.
+  
+    ## Parameters
+    $(LIST
+      * $(B state)       the new state of the switch
+      * $(B switch_) the instance the signal is connected to
+    )
+    Returns:     true to stop the signal emission
+  */
   alias StateSetCallbackDlg = bool delegate(bool state, gtk.switch_.Switch switch_);
+
+  /** ditto */
   alias StateSetCallbackFunc = bool function(bool state, gtk.switch_.Switch switch_);
 
   /**
-   * Connect to StateSet signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to StateSet signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectStateSet(T)(T callback, Flag!"After" after = No.After)
   if (is(T : StateSetCallbackDlg) || is(T : StateSetCallbackFunc))
   {

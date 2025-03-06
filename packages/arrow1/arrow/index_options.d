@@ -6,6 +6,7 @@ import arrow.function_options;
 import arrow.types;
 import gid.gid;
 
+/** */
 class IndexOptions : arrow.function_options.FunctionOptions
 {
 
@@ -25,6 +26,7 @@ class IndexOptions : arrow.function_options.FunctionOptions
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowIndexOptions* _cretval;

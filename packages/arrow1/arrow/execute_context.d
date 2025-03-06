@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class ExecuteContext : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class ExecuteContext : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowExecuteContext* _cretval;

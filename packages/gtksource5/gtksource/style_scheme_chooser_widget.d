@@ -15,15 +15,17 @@ import gtksource.style_scheme_chooser_mixin;
 import gtksource.types;
 
 /**
- * A widget for choosing style schemes.
- * The `GtkSourceStyleSchemeChooserWidget` widget lets the user select a
- * style scheme. By default, the chooser presents a predefined list
- * of style schemes.
- * To change the initially selected style scheme,
- * use [gtksource.style_scheme_chooser.StyleSchemeChooser.setStyleScheme].
- * To get the selected style scheme
- * use [gtksource.style_scheme_chooser.StyleSchemeChooser.getStyleScheme].
- */
+    A widget for choosing style schemes.
+  
+  The [gtksource.style_scheme_chooser_widget.StyleSchemeChooserWidget] widget lets the user select a
+  style scheme. By default, the chooser presents a predefined list
+  of style schemes.
+  
+  To change the initially selected style scheme,
+  use [gtksource.style_scheme_chooser.StyleSchemeChooser.setStyleScheme].
+  To get the selected style scheme
+  use [gtksource.style_scheme_chooser.StyleSchemeChooser.getStyleScheme].
+*/
 class StyleSchemeChooserWidget : gtk.widget.Widget, gtksource.style_scheme_chooser.StyleSchemeChooser
 {
 
@@ -46,9 +48,9 @@ class StyleSchemeChooserWidget : gtk.widget.Widget, gtksource.style_scheme_choos
   mixin StyleSchemeChooserT!();
 
   /**
-   * Creates a new #GtkSourceStyleSchemeChooserWidget.
-   * Returns: a new  #GtkSourceStyleSchemeChooserWidget.
-   */
+      Creates a new #GtkSourceStyleSchemeChooserWidget.
+    Returns:     a new  #GtkSourceStyleSchemeChooserWidget.
+  */
   this()
   {
     GtkWidget* _cretval;

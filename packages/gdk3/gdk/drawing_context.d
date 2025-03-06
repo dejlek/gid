@@ -10,14 +10,17 @@ import gid.gid;
 import gobject.object;
 
 /**
- * #GdkDrawingContext is an object that represents the current drawing
- * state of a #GdkWindow.
- * It's possible to use a #GdkDrawingContext to draw on a #GdkWindow
- * via rendering API like Cairo or OpenGL.
- * A #GdkDrawingContext can only be created by calling [gdk.window.Window.beginDrawFrame]
- * and will be valid until a call to [gdk.window.Window.endDrawFrame].
- * #GdkDrawingContext is available since GDK 3.22
- */
+    #GdkDrawingContext is an object that represents the current drawing
+  state of a #GdkWindow.
+  
+  It's possible to use a #GdkDrawingContext to draw on a #GdkWindow
+  via rendering API like Cairo or OpenGL.
+  
+  A #GdkDrawingContext can only be created by calling [gdk.window.Window.beginDrawFrame]
+  and will be valid until a call to [gdk.window.Window.endDrawFrame].
+  
+  #GdkDrawingContext is available since GDK 3.22
+*/
 class DrawingContext : gobject.object.ObjectG
 {
 
@@ -38,15 +41,16 @@ class DrawingContext : gobject.object.ObjectG
   }
 
   /**
-   * Retrieves a Cairo context to be used to draw on the #GdkWindow
-   * that created the #GdkDrawingContext.
-   * The returned context is guaranteed to be valid as long as the
-   * #GdkDrawingContext is valid, that is between a call to
-   * [gdk.window.Window.beginDrawFrame] and [gdk.window.Window.endDrawFrame].
-   * Returns: a Cairo context to be used to draw
-   *   the contents of the #GdkWindow. The context is owned by the
-   *   #GdkDrawingContext and should not be destroyed
-   */
+      Retrieves a Cairo context to be used to draw on the #GdkWindow
+    that created the #GdkDrawingContext.
+    
+    The returned context is guaranteed to be valid as long as the
+    #GdkDrawingContext is valid, that is between a call to
+    [gdk.window.Window.beginDrawFrame] and [gdk.window.Window.endDrawFrame].
+    Returns:     a Cairo context to be used to draw
+        the contents of the #GdkWindow. The context is owned by the
+        #GdkDrawingContext and should not be destroyed
+  */
   cairo.context.Context getCairoContext()
   {
     cairo_t* _cretval;
@@ -56,9 +60,9 @@ class DrawingContext : gobject.object.ObjectG
   }
 
   /**
-   * Retrieves a copy of the clip region used when creating the context.
-   * Returns: a Cairo region
-   */
+      Retrieves a copy of the clip region used when creating the context.
+    Returns:     a Cairo region
+  */
   cairo.region.Region getClip()
   {
     cairo_region_t* _cretval;
@@ -68,9 +72,9 @@ class DrawingContext : gobject.object.ObjectG
   }
 
   /**
-   * Retrieves the window that created the drawing context.
-   * Returns: a #GdkWindow
-   */
+      Retrieves the window that created the drawing context.
+    Returns:     a #GdkWindow
+  */
   gdk.window.Window getWindow()
   {
     GdkWindow* _cretval;
@@ -80,9 +84,9 @@ class DrawingContext : gobject.object.ObjectG
   }
 
   /**
-   * Checks whether the given #GdkDrawingContext is valid.
-   * Returns: %TRUE if the context is valid
-   */
+      Checks whether the given #GdkDrawingContext is valid.
+    Returns:     true if the context is valid
+  */
   bool isValid()
   {
     bool _retval;

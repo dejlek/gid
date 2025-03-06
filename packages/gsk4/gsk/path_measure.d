@@ -8,15 +8,17 @@ import gsk.path;
 import gsk.types;
 
 /**
- * `GskPathMeasure` is an object that allows measurements
- * on `GskPath`s such as determining the length of the path.
- * Many measuring operations require sampling the path length
- * at intermediate points. Therefore, a `GskPathMeasure` has
- * a tolerance that determines what precision is required
- * for such approximations.
- * A `GskPathMeasure` struct is a reference counted struct
- * and should be treated as opaque.
- */
+    [gsk.path_measure.PathMeasure] is an object that allows measurements
+  on [gsk.path.Path]s such as determining the length of the path.
+  
+  Many measuring operations require sampling the path length
+  at intermediate points. Therefore, a [gsk.path_measure.PathMeasure] has
+  a tolerance that determines what precision is required
+  for such approximations.
+  
+  A [gsk.path_measure.PathMeasure] struct is a reference counted struct
+  and should be treated as opaque.
+*/
 class PathMeasure : gobject.boxed.Boxed
 {
 
@@ -42,12 +44,12 @@ class PathMeasure : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a measure object for the given path with the
-   * default tolerance.
-   * Params:
-   *   path = the path to measure
-   * Returns: a new `GskPathMeasure` representing path
-   */
+      Creates a measure object for the given path with the
+    default tolerance.
+    Params:
+      path =       the path to measure
+    Returns:     a new [gsk.path_measure.PathMeasure] representing path
+  */
   this(gsk.path.Path path)
   {
     GskPathMeasure* _cretval;
@@ -56,12 +58,12 @@ class PathMeasure : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a measure object for the given path and tolerance.
-   * Params:
-   *   path = the path to measure
-   *   tolerance = the tolerance for measuring operations
-   * Returns: a new `GskPathMeasure` representing path
-   */
+      Creates a measure object for the given path and tolerance.
+    Params:
+      path =       the path to measure
+      tolerance =       the tolerance for measuring operations
+    Returns:     a new [gsk.path_measure.PathMeasure] representing path
+  */
   static gsk.path_measure.PathMeasure newWithTolerance(gsk.path.Path path, float tolerance)
   {
     GskPathMeasure* _cretval;
@@ -71,10 +73,11 @@ class PathMeasure : gobject.boxed.Boxed
   }
 
   /**
-   * Gets the length of the path being measured.
-   * The length is cached, so this function does not do any work.
-   * Returns: The length of the path measured by self
-   */
+      Gets the length of the path being measured.
+    
+    The length is cached, so this function does not do any work.
+    Returns:     The length of the path measured by self
+  */
   float getLength()
   {
     float _retval;
@@ -83,9 +86,9 @@ class PathMeasure : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the path that the measure was created for.
-   * Returns: the path of self
-   */
+      Returns the path that the measure was created for.
+    Returns:     the path of self
+  */
   gsk.path.Path getPath()
   {
     GskPath* _cretval;
@@ -95,9 +98,9 @@ class PathMeasure : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the tolerance that the measure was created with.
-   * Returns: the tolerance of self
-   */
+      Returns the tolerance that the measure was created with.
+    Returns:     the tolerance of self
+  */
   float getTolerance()
   {
     float _retval;

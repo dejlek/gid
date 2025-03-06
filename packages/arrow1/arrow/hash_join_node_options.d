@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
@@ -26,6 +27,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getType();
   }
 
+  /** */
   this(arrow.types.JoinType type, string[] leftKeys, string[] rightKeys)
   {
     GArrowHashJoinNodeOptions* _cretval;
@@ -54,6 +56,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool setLeftOutputs(string[] outputs)
   {
     bool _retval;
@@ -73,6 +76,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return _retval;
   }
 
+  /** */
   bool setRightOutputs(string[] outputs)
   {
     bool _retval;

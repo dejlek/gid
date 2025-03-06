@@ -10,6 +10,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class JSONReader : gobject.object.ObjectG
 {
 
@@ -29,6 +30,7 @@ class JSONReader : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrow.input_stream.InputStream input, arrow.jsonread_options.JSONReadOptions options = null)
   {
     GArrowJSONReader* _cretval;
@@ -39,6 +41,7 @@ class JSONReader : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.table.Table read()
   {
     GArrowTable* _cretval;

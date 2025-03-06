@@ -8,6 +8,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class MetadataWriter : gobject.object.ObjectG
 {
 
@@ -28,11 +29,11 @@ class MetadataWriter : gobject.object.ObjectG
   }
 
   /**
-   * Writes metadata to the client.
-   * Params:
-   *   metadata = A #GArrowBuffer to be sent.
-   * Returns: %TRUE on success, %FALSE on error.
-   */
+      Writes metadata to the client.
+    Params:
+      metadata =       A #GArrowBuffer to be sent.
+    Returns:     true on success, false on error.
+  */
   bool write(arrow.buffer.Buffer metadata)
   {
     bool _retval;

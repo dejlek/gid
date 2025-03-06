@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class FieldExpression : arrow.expression.Expression
 {
 
@@ -26,6 +27,7 @@ class FieldExpression : arrow.expression.Expression
     return getType();
   }
 
+  /** */
   this(string reference)
   {
     GArrowFieldExpression* _cretval;

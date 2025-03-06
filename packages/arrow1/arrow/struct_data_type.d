@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class StructDataType : arrow.data_type.DataType
 {
 
@@ -27,6 +28,7 @@ class StructDataType : arrow.data_type.DataType
     return getType();
   }
 
+  /** */
   this(arrow.field.Field[] fields)
   {
     GArrowStructDataType* _cretval;
@@ -36,6 +38,7 @@ class StructDataType : arrow.data_type.DataType
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.field.Field getField(int i)
   {
     GArrowField* _cretval;
@@ -44,6 +47,7 @@ class StructDataType : arrow.data_type.DataType
     return _retval;
   }
 
+  /** */
   arrow.field.Field getFieldByName(string name)
   {
     GArrowField* _cretval;
@@ -53,6 +57,7 @@ class StructDataType : arrow.data_type.DataType
     return _retval;
   }
 
+  /** */
   int getFieldIndex(string name)
   {
     int _retval;
@@ -61,6 +66,7 @@ class StructDataType : arrow.data_type.DataType
     return _retval;
   }
 
+  /** */
   arrow.field.Field[] getFields()
   {
     GList* _cretval;
@@ -69,6 +75,7 @@ class StructDataType : arrow.data_type.DataType
     return _retval;
   }
 
+  /** */
   int getNFields()
   {
     int _retval;

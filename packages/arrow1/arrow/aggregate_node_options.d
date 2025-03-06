@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
@@ -27,6 +28,7 @@ class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getType();
   }
 
+  /** */
   this(arrow.aggregation.Aggregation[] aggregations, string[] keys = null)
   {
     GArrowAggregateNodeOptions* _cretval;

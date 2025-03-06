@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class ExtensionArray : arrow.array.Array
 {
 
@@ -26,6 +27,7 @@ class ExtensionArray : arrow.array.Array
     return getType();
   }
 
+  /** */
   arrow.array.Array getStorage()
   {
     GArrowArray* _cretval;

@@ -6,6 +6,7 @@ import arrow.scalar;
 import arrow.types;
 import gid.gid;
 
+/** */
 class HalfFloatScalar : arrow.scalar.Scalar
 {
 
@@ -25,6 +26,7 @@ class HalfFloatScalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   this(ushort value)
   {
     GArrowHalfFloatScalar* _cretval;
@@ -32,6 +34,7 @@ class HalfFloatScalar : arrow.scalar.Scalar
     this(_cretval, Yes.Take);
   }
 
+  /** */
   ushort getValue()
   {
     ushort _retval;

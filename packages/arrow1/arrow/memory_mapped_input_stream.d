@@ -11,6 +11,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
 {
 
@@ -30,6 +31,7 @@ class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
     return getType();
   }
 
+  /** */
   this(string path)
   {
     GArrowMemoryMappedInputStream* _cretval;

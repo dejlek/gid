@@ -6,6 +6,7 @@ import arrow.data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class FixedWidthDataType : arrow.data_type.DataType
 {
 
@@ -25,6 +26,7 @@ class FixedWidthDataType : arrow.data_type.DataType
     return getType();
   }
 
+  /** */
   int getBitWidth()
   {
     int _retval;

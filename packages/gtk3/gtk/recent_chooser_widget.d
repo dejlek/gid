@@ -17,14 +17,16 @@ import gtk.recent_manager;
 import gtk.types;
 
 /**
- * #GtkRecentChooserWidget is a widget suitable for selecting recently used
- * files.  It is the main building block of a #GtkRecentChooserDialog.  Most
- * applications will only need to use the latter; you can use
- * #GtkRecentChooserWidget as part of a larger window if you have special needs.
- * Note that #GtkRecentChooserWidget does not have any methods of its own.
- * Instead, you should use the functions that work on a #GtkRecentChooser.
- * Recently used files are supported since GTK+ 2.10.
- */
+    #GtkRecentChooserWidget is a widget suitable for selecting recently used
+  files.  It is the main building block of a #GtkRecentChooserDialog.  Most
+  applications will only need to use the latter; you can use
+  #GtkRecentChooserWidget as part of a larger window if you have special needs.
+  
+  Note that #GtkRecentChooserWidget does not have any methods of its own.
+  Instead, you should use the functions that work on a #GtkRecentChooser.
+  
+  Recently used files are supported since GTK+ 2.10.
+*/
 class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
 {
 
@@ -47,10 +49,10 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
   mixin RecentChooserT!();
 
   /**
-   * Creates a new #GtkRecentChooserWidget object.  This is an embeddable widget
-   * used to access the recently used resources list.
-   * Returns: a new #GtkRecentChooserWidget
-   */
+      Creates a new #GtkRecentChooserWidget object.  This is an embeddable widget
+    used to access the recently used resources list.
+    Returns:     a new #GtkRecentChooserWidget
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -59,13 +61,14 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
   }
 
   /**
-   * Creates a new #GtkRecentChooserWidget with a specified recent manager.
-   * This is useful if you have implemented your own recent manager, or if you
-   * have a customized instance of a #GtkRecentManager object.
-   * Params:
-   *   manager = a #GtkRecentManager
-   * Returns: a new #GtkRecentChooserWidget
-   */
+      Creates a new #GtkRecentChooserWidget with a specified recent manager.
+    
+    This is useful if you have implemented your own recent manager, or if you
+    have a customized instance of a #GtkRecentManager object.
+    Params:
+      manager =       a #GtkRecentManager
+    Returns:     a new #GtkRecentChooserWidget
+  */
   static gtk.recent_chooser_widget.RecentChooserWidget newForManager(gtk.recent_manager.RecentManager manager)
   {
     GtkWidget* _cretval;

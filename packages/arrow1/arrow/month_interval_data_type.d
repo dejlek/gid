@@ -6,6 +6,7 @@ import arrow.interval_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class MonthIntervalDataType : arrow.interval_data_type.IntervalDataType
 {
 
@@ -25,6 +26,7 @@ class MonthIntervalDataType : arrow.interval_data_type.IntervalDataType
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowMonthIntervalDataType* _cretval;

@@ -8,8 +8,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Generated when the state of a toplevel window changes.
- */
+    Generated when the state of a toplevel window changes.
+*/
 class EventWindowState
 {
   GdkEventWindowState cInstance;

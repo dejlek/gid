@@ -17,8 +17,8 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkListBase` is the abstract base class for GTK's list widgets.
- */
+    [gtk.list_base.ListBase] is the abstract base class for GTK's list widgets.
+*/
 class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Scrollable
 {
 

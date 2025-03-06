@@ -8,16 +8,20 @@ import secret.c.types;
 import secret.types;
 
 /**
- * A value containing a secret
- * A #SecretValue contains a password or other secret value.
- * Use [secret.value.Value.get] to get the actual secret data, such as a password.
- * The secret data is not necessarily null-terminated, unless the content type
- * is "text/plain".
- * Each #SecretValue has a content type. For passwords, this is `text/plain`.
- * Use [secret.value.Value.getContentType] to look at the content type.
- * #SecretValue is reference counted and immutable. The secret data is only
- * freed when all references have been released via [secret.value.Value.unref].
- */
+    A value containing a secret
+  
+  A #SecretValue contains a password or other secret value.
+  
+  Use [secret.value.Value.get] to get the actual secret data, such as a password.
+  The secret data is not necessarily null-terminated, unless the content type
+  is "text/plain".
+  
+  Each #SecretValue has a content type. For passwords, this is `text/plain`.
+  Use [secret.value.Value.getContentType] to look at the content type.
+  
+  #SecretValue is reference counted and immutable. The secret data is only
+  freed when all references have been released via [secret.value.Value.unref].
+*/
 class Value : gobject.boxed.Boxed
 {
 
@@ -43,16 +47,18 @@ class Value : gobject.boxed.Boxed
   }
 
   /**
-   * Create a #SecretValue for the secret data passed in.
-   * The secret data is copied into non-pageable 'secure' memory.
-   * If the length is less than zero, then secret is assumed to be
-   * null-terminated.
-   * Params:
-   *   secret = the secret data
-   *   length = the length of the data
-   *   contentType = the content type of the data
-   * Returns: the new #SecretValue
-   */
+      Create a #SecretValue for the secret data passed in.
+    
+    The secret data is copied into non-pageable 'secure' memory.
+    
+    If the length is less than zero, then secret is assumed to be
+    null-terminated.
+    Params:
+      secret =       the secret data
+      length =       the length of the data
+      contentType =       the content type of the data
+    Returns:     the new #SecretValue
+  */
   this(string secret, ptrdiff_t length, string contentType)
   {
     SecretValue* _cretval;
@@ -63,18 +69,20 @@ class Value : gobject.boxed.Boxed
   }
 
   /**
-   * Create a #SecretValue for the secret data passed in.
-   * The secret data is not copied, and will later be freed with the destroy
-   * function.
-   * If the length is less than zero, then secret is assumed to be
-   * null-terminated.
-   * Params:
-   *   secretData = the secret data
-   *   length = the length of the data
-   *   contentType = the content type of the data
-   *   destroy = function to call to free the secret data
-   * Returns: the new #SecretValue
-   */
+      Create a #SecretValue for the secret data passed in.
+    
+    The secret data is not copied, and will later be freed with the destroy
+    function.
+    
+    If the length is less than zero, then secret is assumed to be
+    null-terminated.
+    Params:
+      secretData =       the secret data
+      length =       the length of the data
+      contentType =       the content type of the data
+      destroy =       function to call to free the secret data
+    Returns:     the new #SecretValue
+  */
   static secret.value.Value newFull(string secretData, ptrdiff_t length, string contentType, glib.types.DestroyNotify destroy)
   {
     extern(C) void _destroyCallback(void* data)
@@ -95,12 +103,13 @@ class Value : gobject.boxed.Boxed
   }
 
   /**
-   * Get the secret data in the #SecretValue.
-   * The value is not necessarily null-terminated unless it was created with
-   * [secret.value.Value.new_] or a null-terminated string was passed to
-   * [secret.value.Value.newFull].
-   * Returns: the secret data
-   */
+      Get the secret data in the #SecretValue.
+    
+    The value is not necessarily null-terminated unless it was created with
+    [secret.value.Value.new_] or a null-terminated string was passed to
+    [secret.value.Value.newFull].
+    Returns:     the secret data
+  */
   ubyte[] get()
   {
     const(ubyte)* _cretval;
@@ -116,10 +125,10 @@ class Value : gobject.boxed.Boxed
   }
 
   /**
-   * Get the content type of the secret value, such as
-   * `text/plain`.
-   * Returns: the content type
-   */
+      Get the content type of the secret value, such as
+    `text/plain`.
+    Returns:     the content type
+  */
   string getContentType()
   {
     const(char)* _cretval;
@@ -129,11 +138,12 @@ class Value : gobject.boxed.Boxed
   }
 
   /**
-   * Get the secret data in the #SecretValue if it contains a textual
-   * value.
-   * The content type must be `text/plain`.
-   * Returns: the content type
-   */
+      Get the secret data in the #SecretValue if it contains a textual
+    value.
+    
+    The content type must be `text/plain`.
+    Returns:     the content type
+  */
   string getText()
   {
     const(char)* _cretval;
@@ -143,13 +153,13 @@ class Value : gobject.boxed.Boxed
   }
 
   /**
-   * Unreference a #SecretValue and steal the secret data in
-   * #SecretValue as nonpageable memory.
-   * Params:
-   *   length = the length of the secret
-   * Returns: a new password string stored in nonpageable memory
-   *   which must be freed with funcpassword_free when done
-   */
+      Unreference a #SecretValue and steal the secret data in
+    #SecretValue as nonpageable memory.
+    Params:
+      length =       the length of the secret
+    Returns:     a new password string stored in nonpageable memory
+        which must be freed with `funcpassword_free` when done
+  */
   string unrefToPassword(ref size_t length)
   {
     char* _cretval;

@@ -12,9 +12,9 @@ public import secret.c.types;
 public import secret.types;
 
 /**
- * #SecretBackend represents a backend implementation of password
- * storage.
- */
+    #SecretBackend represents a backend implementation of password
+  storage.
+*/
 template BackendT()
 {
 

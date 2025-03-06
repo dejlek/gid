@@ -12,11 +12,12 @@ import gobject.dclosure;
 import gobject.object;
 
 /**
- * A `GDBusObjectSkeleton` instance is essentially a group of D-Bus
- * interfaces. The set of exported interfaces on the object may be
- * dynamic and change at runtime.
- * This type is intended to be used with [gio.dbus_object_manager.DBusObjectManager].
- */
+    A [gio.dbus_object_skeleton.DBusObjectSkeleton] instance is essentially a group of D-Bus
+  interfaces. The set of exported interfaces on the object may be
+  dynamic and change at runtime.
+  
+  This type is intended to be used with [gio.dbus_object_manager.DBusObjectManager].
+*/
 class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
 {
 
@@ -39,11 +40,11 @@ class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
   mixin DBusObjectT!();
 
   /**
-   * Creates a new #GDBusObjectSkeleton.
-   * Params:
-   *   objectPath = An object path.
-   * Returns: A #GDBusObjectSkeleton. Free with [gobject.object.ObjectG.unref].
-   */
+      Creates a new #GDBusObjectSkeleton.
+    Params:
+      objectPath =       An object path.
+    Returns:     A #GDBusObjectSkeleton. Free with [gobject.object.ObjectG.unref].
+  */
   this(string objectPath)
   {
     GDBusObjectSkeleton* _cretval;
@@ -53,46 +54,49 @@ class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
   }
 
   /**
-   * Adds interface_ to object.
-   * If object already contains a #GDBusInterfaceSkeleton with the same
-   * interface name, it is removed before interface_ is added.
-   * Note that object takes its own reference on interface_ and holds
-   * it until removed.
-   * Params:
-   *   interface_ = A #GDBusInterfaceSkeleton.
-   */
+      Adds interface_ to object.
+    
+    If object already contains a #GDBusInterfaceSkeleton with the same
+    interface name, it is removed before interface_ is added.
+    
+    Note that object takes its own reference on interface_ and holds
+    it until removed.
+    Params:
+      interface_ =       A #GDBusInterfaceSkeleton.
+  */
   void addInterface(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_)
   {
     g_dbus_object_skeleton_add_interface(cast(GDBusObjectSkeleton*)cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_.cPtr(No.Dup) : null);
   }
 
   /**
-   * This method simply calls [gio.dbus_interface_skeleton.DBusInterfaceSkeleton.flush] on all
-   * interfaces belonging to object. See that method for when flushing
-   * is useful.
-   */
+      This method simply calls [gio.dbus_interface_skeleton.DBusInterfaceSkeleton.flush] on all
+    interfaces belonging to object. See that method for when flushing
+    is useful.
+  */
   void flush()
   {
     g_dbus_object_skeleton_flush(cast(GDBusObjectSkeleton*)cPtr);
   }
 
   /**
-   * Removes interface_ from object.
-   * Params:
-   *   interface_ = A #GDBusInterfaceSkeleton.
-   */
+      Removes interface_ from object.
+    Params:
+      interface_ =       A #GDBusInterfaceSkeleton.
+  */
   void removeInterface(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_)
   {
     g_dbus_object_skeleton_remove_interface(cast(GDBusObjectSkeleton*)cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_.cPtr(No.Dup) : null);
   }
 
   /**
-   * Removes the #GDBusInterface with interface_name from object.
-   * If no D-Bus interface of the given interface exists, this function
-   * does nothing.
-   * Params:
-   *   interfaceName = A D-Bus interface name.
-   */
+      Removes the #GDBusInterface with interface_name from object.
+    
+    If no D-Bus interface of the given interface exists, this function
+    does nothing.
+    Params:
+      interfaceName =       A D-Bus interface name.
+  */
   void removeInterfaceByName(string interfaceName)
   {
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
@@ -100,10 +104,10 @@ class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
   }
 
   /**
-   * Sets the object path for object.
-   * Params:
-   *   objectPath = A valid D-Bus object path.
-   */
+      Sets the object path for object.
+    Params:
+      objectPath =       A valid D-Bus object path.
+  */
   void setObjectPath(string objectPath)
   {
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
@@ -111,28 +115,35 @@ class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
   }
 
   /**
-   * Emitted when a method is invoked by a remote caller and used to
-   * determine if the method call is authorized.
-   * This signal is like #GDBusInterfaceSkeleton's
-   * #GDBusInterfaceSkeleton::g-authorize-method signal,
-   * except that it is for the enclosing object.
-   * The default class handler just returns %TRUE.
-   * Params
-   *   interface_ = The #GDBusInterfaceSkeleton that invocation is for.
-   *   invocation = A #GDBusMethodInvocation.
-   *   dBusObjectSkeleton = the instance the signal is connected to
-   * Returns: %TRUE if the call is authorized, %FALSE otherwise.
-   */
+      Emitted when a method is invoked by a remote caller and used to
+    determine if the method call is authorized.
+    
+    This signal is like #GDBusInterfaceSkeleton's
+    #GDBusInterfaceSkeleton::g-authorize-method signal,
+    except that it is for the enclosing object.
+    
+    The default class handler just returns true.
+  
+    ## Parameters
+    $(LIST
+      * $(B interface_)       The #GDBusInterfaceSkeleton that invocation is for.
+      * $(B invocation)       A #GDBusMethodInvocation.
+      * $(B dBusObjectSkeleton) the instance the signal is connected to
+    )
+    Returns:     true if the call is authorized, false otherwise.
+  */
   alias AuthorizeMethodCallbackDlg = bool delegate(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_, gio.dbus_method_invocation.DBusMethodInvocation invocation, gio.dbus_object_skeleton.DBusObjectSkeleton dBusObjectSkeleton);
+
+  /** ditto */
   alias AuthorizeMethodCallbackFunc = bool function(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_, gio.dbus_method_invocation.DBusMethodInvocation invocation, gio.dbus_object_skeleton.DBusObjectSkeleton dBusObjectSkeleton);
 
   /**
-   * Connect to AuthorizeMethod signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to AuthorizeMethod signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectAuthorizeMethod(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AuthorizeMethodCallbackDlg) || is(T : AuthorizeMethodCallbackFunc))
   {

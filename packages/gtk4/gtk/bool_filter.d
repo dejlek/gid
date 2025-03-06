@@ -8,9 +8,9 @@ import gtk.filter;
 import gtk.types;
 
 /**
- * `GtkBoolFilter` evaluates a boolean `GtkExpression`
- * to determine whether to include items.
- */
+    [gtk.bool_filter.BoolFilter] evaluates a boolean [gtk.expression.Expression]
+  to determine whether to include items.
+*/
 class BoolFilter : gtk.filter.Filter
 {
 
@@ -31,11 +31,11 @@ class BoolFilter : gtk.filter.Filter
   }
 
   /**
-   * Creates a new bool filter.
-   * Params:
-   *   expression = The expression to evaluate
-   * Returns: a new `GtkBoolFilter`
-   */
+      Creates a new bool filter.
+    Params:
+      expression =       The expression to evaluate
+    Returns:     a new [gtk.bool_filter.BoolFilter]
+  */
   this(gtk.expression.Expression expression = null)
   {
     GtkBoolFilter* _cretval;
@@ -44,10 +44,10 @@ class BoolFilter : gtk.filter.Filter
   }
 
   /**
-   * Gets the expression that the filter uses to evaluate if
-   * an item should be filtered.
-   * Returns: a `GtkExpression`
-   */
+      Gets the expression that the filter uses to evaluate if
+    an item should be filtered.
+    Returns:     a [gtk.expression.Expression]
+  */
   gtk.expression.Expression getExpression()
   {
     GtkExpression* _cretval;
@@ -57,9 +57,9 @@ class BoolFilter : gtk.filter.Filter
   }
 
   /**
-   * Returns whether the filter inverts the expression.
-   * Returns: %TRUE if the filter inverts
-   */
+      Returns whether the filter inverts the expression.
+    Returns:     true if the filter inverts
+  */
   bool getInvert()
   {
     bool _retval;
@@ -68,22 +68,23 @@ class BoolFilter : gtk.filter.Filter
   }
 
   /**
-   * Sets the expression that the filter uses to check if items
-   * should be filtered.
-   * The expression must have a value type of %G_TYPE_BOOLEAN.
-   * Params:
-   *   expression = a `GtkExpression`
-   */
+      Sets the expression that the filter uses to check if items
+    should be filtered.
+    
+    The expression must have a value type of `G_TYPE_BOOLEAN`.
+    Params:
+      expression =       a [gtk.expression.Expression]
+  */
   void setExpression(gtk.expression.Expression expression = null)
   {
     gtk_bool_filter_set_expression(cast(GtkBoolFilter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets whether the filter should invert the expression.
-   * Params:
-   *   invert = %TRUE to invert
-   */
+      Sets whether the filter should invert the expression.
+    Params:
+      invert =       true to invert
+  */
   void setInvert(bool invert)
   {
     gtk_bool_filter_set_invert(cast(GtkBoolFilter*)cPtr, invert);

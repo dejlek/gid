@@ -6,9 +6,9 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * A GtkRecentFilterInfo struct is used
- * to pass information about the tested file to [gtk.recent_filter.RecentFilter.filter].
- */
+    A GtkRecentFilterInfo struct is used
+  to pass information about the tested file to [gtk.recent_filter.RecentFilter.filter].
+*/
 class RecentFilterInfo
 {
   GtkRecentFilterInfo cInstance;

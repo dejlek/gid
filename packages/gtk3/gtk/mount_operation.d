@@ -10,8 +10,8 @@ import gtk.types;
 import gtk.window;
 
 /**
- * This should not be accessed directly. Use the accessor functions below.
- */
+    This should not be accessed directly. Use the accessor functions below.
+*/
 class MountOperation : gio.mount_operation.MountOperation
 {
 
@@ -32,11 +32,11 @@ class MountOperation : gio.mount_operation.MountOperation
   }
 
   /**
-   * Creates a new #GtkMountOperation
-   * Params:
-   *   parent = transient parent of the window, or %NULL
-   * Returns: a new #GtkMountOperation
-   */
+      Creates a new #GtkMountOperation
+    Params:
+      parent =       transient parent of the window, or null
+    Returns:     a new #GtkMountOperation
+  */
   this(gtk.window.Window parent = null)
   {
     GMountOperation* _cretval;
@@ -45,9 +45,9 @@ class MountOperation : gio.mount_operation.MountOperation
   }
 
   /**
-   * Gets the transient parent used by the #GtkMountOperation
-   * Returns: the transient parent for windows shown by op
-   */
+      Gets the transient parent used by the #GtkMountOperation
+    Returns:     the transient parent for windows shown by op
+  */
   gtk.window.Window getParent()
   {
     GtkWindow* _cretval;
@@ -57,10 +57,10 @@ class MountOperation : gio.mount_operation.MountOperation
   }
 
   /**
-   * Gets the screen on which windows of the #GtkMountOperation
-   * will be shown.
-   * Returns: the screen on which windows of op are shown
-   */
+      Gets the screen on which windows of the #GtkMountOperation
+    will be shown.
+    Returns:     the screen on which windows of op are shown
+  */
   gdk.screen.Screen getScreen()
   {
     GdkScreen* _cretval;
@@ -70,10 +70,10 @@ class MountOperation : gio.mount_operation.MountOperation
   }
 
   /**
-   * Returns whether the #GtkMountOperation is currently displaying
-   * a window.
-   * Returns: %TRUE if op is currently displaying a window
-   */
+      Returns whether the #GtkMountOperation is currently displaying
+    a window.
+    Returns:     true if op is currently displaying a window
+  */
   bool isShowing()
   {
     bool _retval;
@@ -82,21 +82,21 @@ class MountOperation : gio.mount_operation.MountOperation
   }
 
   /**
-   * Sets the transient parent for windows shown by the
-   * #GtkMountOperation.
-   * Params:
-   *   parent = transient parent of the window, or %NULL
-   */
+      Sets the transient parent for windows shown by the
+    #GtkMountOperation.
+    Params:
+      parent =       transient parent of the window, or null
+  */
   void setParent(gtk.window.Window parent = null)
   {
     gtk_mount_operation_set_parent(cast(GtkMountOperation*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the screen to show windows of the #GtkMountOperation on.
-   * Params:
-   *   screen = a #GdkScreen
-   */
+      Sets the screen to show windows of the #GtkMountOperation on.
+    Params:
+      screen =       a #GdkScreen
+  */
   void setScreen(gdk.screen.Screen screen)
   {
     gtk_mount_operation_set_screen(cast(GtkMountOperation*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);

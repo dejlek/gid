@@ -7,6 +7,7 @@ import gtk.c.types;
 import gtk.types;
 import gtk.window;
 
+/** */
 class ToplevelAccessible : atk.object.ObjectAtk
 {
 
@@ -26,6 +27,7 @@ class ToplevelAccessible : atk.object.ObjectAtk
     return getType();
   }
 
+  /** */
   gtk.window.Window[] getChildren()
   {
     GList* _cretval;

@@ -8,8 +8,8 @@ import gtk.shortcut_action;
 import gtk.types;
 
 /**
- * A `GtkShortcutAction` that does nothing.
- */
+    A [gtk.shortcut_action.ShortcutAction] that does nothing.
+*/
 class NothingAction : gtk.shortcut_action.ShortcutAction
 {
 
@@ -30,11 +30,12 @@ class NothingAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
-   * Gets the nothing action.
-   * This is an action that does nothing and where
-   * activating it always fails.
-   * Returns: The nothing action
-   */
+      Gets the nothing action.
+    
+    This is an action that does nothing and where
+    activating it always fails.
+    Returns:     The nothing action
+  */
   static gtk.nothing_action.NothingAction get()
   {
     GtkShortcutAction* _cretval;

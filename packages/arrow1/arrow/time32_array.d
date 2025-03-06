@@ -8,6 +8,7 @@ import arrow.time32_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class Time32Array : arrow.numeric_array.NumericArray
 {
 
@@ -27,6 +28,7 @@ class Time32Array : arrow.numeric_array.NumericArray
     return getType();
   }
 
+  /** */
   this(arrow.time32_data_type.Time32DataType dataType, long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowTime32Array* _cretval;
@@ -34,6 +36,7 @@ class Time32Array : arrow.numeric_array.NumericArray
     this(_cretval, Yes.Take);
   }
 
+  /** */
   int getValue(long i)
   {
     int _retval;
@@ -41,6 +44,7 @@ class Time32Array : arrow.numeric_array.NumericArray
     return _retval;
   }
 
+  /** */
   int[] getValues()
   {
     const(int)* _cretval;

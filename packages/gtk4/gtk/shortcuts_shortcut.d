@@ -13,10 +13,11 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * A `GtkShortcutsShortcut` represents a single keyboard shortcut or gesture
- * with a short text.
- * This widget is only meant to be used with `GtkShortcutsWindow`.
- */
+    A [gtk.shortcuts_shortcut.ShortcutsShortcut] represents a single keyboard shortcut or gesture
+  with a short text.
+  
+  This widget is only meant to be used with [gtk.shortcuts_window.ShortcutsWindow].
+*/
 class ShortcutsShortcut : gtk.widget.Widget
 {
 

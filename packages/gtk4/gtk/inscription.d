@@ -17,16 +17,19 @@ import pango.attr_list;
 import pango.types;
 
 /**
- * `GtkInscription` is a widget to show text in a predefined area.
- * You likely want to use `GtkLabel` instead as this widget is intended only
- * for a small subset of use cases. The main scenario envisaged is inside lists
- * such as `GtkColumnView`.
- * While a `GtkLabel` sizes itself depending on the text that is displayed,
- * `GtkInscription` is given a size and inscribes the given text into that
- * space as well as it can.
- * Users of this widget should take care to plan behaviour for the common case
- * where the text doesn't fit exactly in the allocated space.
- */
+    [gtk.inscription.Inscription] is a widget to show text in a predefined area.
+  
+  You likely want to use [gtk.label.Label] instead as this widget is intended only
+  for a small subset of use cases. The main scenario envisaged is inside lists
+  such as [gtk.column_view.ColumnView].
+  
+  While a [gtk.label.Label] sizes itself depending on the text that is displayed,
+  [gtk.inscription.Inscription] is given a size and inscribes the given text into that
+  space as well as it can.
+  
+  Users of this widget should take care to plan behaviour for the common case
+  where the text doesn't fit exactly in the allocated space.
+*/
 class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
 {
 
@@ -49,11 +52,11 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   mixin AccessibleTextT!();
 
   /**
-   * Creates a new `GtkInscription` with the given text.
-   * Params:
-   *   text = The text to display.
-   * Returns: a new `GtkInscription`
-   */
+      Creates a new [gtk.inscription.Inscription] with the given text.
+    Params:
+      text =       The text to display.
+    Returns:     a new [gtk.inscription.Inscription]
+  */
   this(string text = null)
   {
     GtkWidget* _cretval;
@@ -63,9 +66,9 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
-   * Gets the inscription's attribute list.
-   * Returns: the attribute list
-   */
+      Gets the inscription's attribute list.
+    Returns:     the attribute list
+  */
   pango.attr_list.AttrList getAttributes()
   {
     PangoAttrList* _cretval;
@@ -75,10 +78,11 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
-   * Gets the `min-chars` of the inscription.
-   * See the propertyGtk.Inscription:min-chars property.
-   * Returns: the min-chars property
-   */
+      Gets the `min-chars` of the inscription.
+    
+    See the `propertyGtk.Inscription:min-chars` property.
+    Returns:     the min-chars property
+  */
   uint getMinChars()
   {
     uint _retval;
@@ -87,10 +91,11 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
-   * Gets the `min-lines` of the inscription.
-   * See the propertyGtk.Inscription:min-lines property.
-   * Returns: the min-lines property
-   */
+      Gets the `min-lines` of the inscription.
+    
+    See the `propertyGtk.Inscription:min-lines` property.
+    Returns:     the min-lines property
+  */
   uint getMinLines()
   {
     uint _retval;
@@ -99,10 +104,11 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
-   * Gets the `nat-chars` of the inscription.
-   * See the propertyGtk.Inscription:nat-chars property.
-   * Returns: the nat-chars property
-   */
+      Gets the `nat-chars` of the inscription.
+    
+    See the `propertyGtk.Inscription:nat-chars` property.
+    Returns:     the nat-chars property
+  */
   uint getNatChars()
   {
     uint _retval;
@@ -111,10 +117,11 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
-   * Gets the `nat-lines` of the inscription.
-   * See the propertyGtk.Inscription:nat-lines property.
-   * Returns: the nat-lines property
-   */
+      Gets the `nat-lines` of the inscription.
+    
+    See the `propertyGtk.Inscription:nat-lines` property.
+    Returns:     the nat-lines property
+  */
   uint getNatLines()
   {
     uint _retval;
@@ -123,9 +130,9 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
-   * Gets the text that is displayed.
-   * Returns: The displayed text
-   */
+      Gets the text that is displayed.
+    Returns:     The displayed text
+  */
   string getText()
   {
     const(char)* _cretval;
@@ -135,9 +142,9 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
-   * Gets the inscription's overflow method.
-   * Returns: the overflow method
-   */
+      Gets the inscription's overflow method.
+    Returns:     the overflow method
+  */
   gtk.types.InscriptionOverflow getTextOverflow()
   {
     GtkInscriptionOverflow _cretval;
@@ -147,10 +154,11 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
-   * Returns line wrap mode used by the inscription.
-   * See [gtk.inscription.Inscription.setWrapMode].
-   * Returns: the line wrap mode
-   */
+      Returns line wrap mode used by the inscription.
+    
+    See [gtk.inscription.Inscription.setWrapMode].
+    Returns:     the line wrap mode
+  */
   pango.types.WrapMode getWrapMode()
   {
     PangoWrapMode _cretval;
@@ -160,10 +168,11 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
-   * Gets the `xalign` of the inscription.
-   * See the [gtk.inscription.Inscription.gfloat] property.
-   * Returns: the xalign property
-   */
+      Gets the `xalign` of the inscription.
+    
+    See the [gtk.inscription.Inscription.gfloat] property.
+    Returns:     the xalign property
+  */
   float getXalign()
   {
     float _retval;
@@ -172,10 +181,11 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
-   * Gets the `yalign` of the inscription.
-   * See the [gtk.inscription.Inscription.gfloat] property.
-   * Returns: the yalign property
-   */
+      Gets the `yalign` of the inscription.
+    
+    See the [gtk.inscription.Inscription.gfloat] property.
+    Returns:     the yalign property
+  */
   float getYalign()
   {
     float _retval;
@@ -184,22 +194,24 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
-   * Apply attributes to the inscription text.
-   * These attributes will not be evaluated for sizing the inscription.
-   * Params:
-   *   attrs = a [pango.attr_list.AttrList]
-   */
+      Apply attributes to the inscription text.
+    
+    These attributes will not be evaluated for sizing the inscription.
+    Params:
+      attrs =       a [pango.attr_list.AttrList]
+  */
   void setAttributes(pango.attr_list.AttrList attrs = null)
   {
     gtk_inscription_set_attributes(cast(GtkInscription*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
 
   /**
-   * Utility function to set the text and attributes to be displayed.
-   * See the [gtk.inscription.Inscription.utf8] property.
-   * Params:
-   *   markup = The markup to display
-   */
+      Utility function to set the text and attributes to be displayed.
+    
+    See the [gtk.inscription.Inscription.utf8] property.
+    Params:
+      markup =       The markup to display
+  */
   void setMarkup(string markup = null)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
@@ -207,54 +219,58 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
-   * Sets the `min-chars` of the inscription.
-   * See the propertyGtk.Inscription:min-chars property.
-   * Params:
-   *   minChars = the minimum number of characters that should fit, approximately
-   */
+      Sets the `min-chars` of the inscription.
+    
+    See the `propertyGtk.Inscription:min-chars` property.
+    Params:
+      minChars =       the minimum number of characters that should fit, approximately
+  */
   void setMinChars(uint minChars)
   {
     gtk_inscription_set_min_chars(cast(GtkInscription*)cPtr, minChars);
   }
 
   /**
-   * Sets the `min-lines` of the inscription.
-   * See the propertyGtk.Inscription:min-lines property.
-   * Params:
-   *   minLines = the minimum number of lines that should fit, approximately
-   */
+      Sets the `min-lines` of the inscription.
+    
+    See the `propertyGtk.Inscription:min-lines` property.
+    Params:
+      minLines =       the minimum number of lines that should fit, approximately
+  */
   void setMinLines(uint minLines)
   {
     gtk_inscription_set_min_lines(cast(GtkInscription*)cPtr, minLines);
   }
 
   /**
-   * Sets the `nat-chars` of the inscription.
-   * See the propertyGtk.Inscription:nat-chars property.
-   * Params:
-   *   natChars = the number of characters that should ideally fit, approximately
-   */
+      Sets the `nat-chars` of the inscription.
+    
+    See the `propertyGtk.Inscription:nat-chars` property.
+    Params:
+      natChars =       the number of characters that should ideally fit, approximately
+  */
   void setNatChars(uint natChars)
   {
     gtk_inscription_set_nat_chars(cast(GtkInscription*)cPtr, natChars);
   }
 
   /**
-   * Sets the `nat-lines` of the inscription.
-   * See the propertyGtk.Inscription:nat-lines property.
-   * Params:
-   *   natLines = the number of lines that should ideally fit
-   */
+      Sets the `nat-lines` of the inscription.
+    
+    See the `propertyGtk.Inscription:nat-lines` property.
+    Params:
+      natLines =       the number of lines that should ideally fit
+  */
   void setNatLines(uint natLines)
   {
     gtk_inscription_set_nat_lines(cast(GtkInscription*)cPtr, natLines);
   }
 
   /**
-   * Sets the text to be displayed.
-   * Params:
-   *   text = The text to display
-   */
+      Sets the text to be displayed.
+    Params:
+      text =       The text to display
+  */
   void setText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
@@ -262,42 +278,44 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
-   * Sets what to do when the text doesn't fit.
-   * Params:
-   *   overflow = the overflow method to use
-   */
+      Sets what to do when the text doesn't fit.
+    Params:
+      overflow =       the overflow method to use
+  */
   void setTextOverflow(gtk.types.InscriptionOverflow overflow)
   {
     gtk_inscription_set_text_overflow(cast(GtkInscription*)cPtr, overflow);
   }
 
   /**
-   * Controls how line wrapping is done.
-   * Params:
-   *   wrapMode = the line wrapping mode
-   */
+      Controls how line wrapping is done.
+    Params:
+      wrapMode =       the line wrapping mode
+  */
   void setWrapMode(pango.types.WrapMode wrapMode)
   {
     gtk_inscription_set_wrap_mode(cast(GtkInscription*)cPtr, wrapMode);
   }
 
   /**
-   * Sets the `xalign` of the inscription.
-   * See the [gtk.inscription.Inscription.gfloat] property.
-   * Params:
-   *   xalign = the new xalign value, between 0 and 1
-   */
+      Sets the `xalign` of the inscription.
+    
+    See the [gtk.inscription.Inscription.gfloat] property.
+    Params:
+      xalign =       the new xalign value, between 0 and 1
+  */
   void setXalign(float xalign)
   {
     gtk_inscription_set_xalign(cast(GtkInscription*)cPtr, xalign);
   }
 
   /**
-   * Sets the `yalign` of the inscription.
-   * See the [gtk.inscription.Inscription.gfloat] property.
-   * Params:
-   *   yalign = the new yalign value, between 0 and 1
-   */
+      Sets the `yalign` of the inscription.
+    
+    See the [gtk.inscription.Inscription.gfloat] property.
+    Params:
+      yalign =       the new yalign value, between 0 and 1
+  */
   void setYalign(float yalign)
   {
     gtk_inscription_set_yalign(cast(GtkInscription*)cPtr, yalign);

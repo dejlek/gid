@@ -9,6 +9,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class MapArray : arrow.list_array.ListArray
 {
 
@@ -28,6 +29,7 @@ class MapArray : arrow.list_array.ListArray
     return getType();
   }
 
+  /** */
   this(arrow.array.Array offsets, arrow.array.Array keys, arrow.array.Array items)
   {
     GArrowMapArray* _cretval;
@@ -38,6 +40,7 @@ class MapArray : arrow.list_array.ListArray
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.array.Array getItems()
   {
     GArrowArray* _cretval;
@@ -46,6 +49,7 @@ class MapArray : arrow.list_array.ListArray
     return _retval;
   }
 
+  /** */
   arrow.array.Array getKeys()
   {
     GArrowArray* _cretval;

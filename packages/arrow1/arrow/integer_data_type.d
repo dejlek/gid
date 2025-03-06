@@ -6,6 +6,7 @@ import arrow.numeric_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class IntegerDataType : arrow.numeric_data_type.NumericDataType
 {
 
@@ -25,6 +26,7 @@ class IntegerDataType : arrow.numeric_data_type.NumericDataType
     return getType();
   }
 
+  /** */
   bool isSigned()
   {
     bool _retval;

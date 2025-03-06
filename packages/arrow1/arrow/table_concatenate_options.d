@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class TableConcatenateOptions : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class TableConcatenateOptions : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowTableConcatenateOptions* _cretval;

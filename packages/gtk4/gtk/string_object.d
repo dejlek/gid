@@ -7,11 +7,12 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * `GtkStringObject` is the type of items in a `GtkStringList`.
- * A `GtkStringObject` is a wrapper around a `const char*`; it has
- * a [gtk.string_object.StringObject.utf8] property that can be used
- * for property bindings and expressions.
- */
+    [gtk.string_object.StringObject] is the type of items in a [gtk.string_list.StringList].
+  
+  A [gtk.string_object.StringObject] is a wrapper around a `const char*`; it has
+  a [gtk.string_object.StringObject.utf8] property that can be used
+  for property bindings and expressions.
+*/
 class StringObject : gobject.object.ObjectG
 {
 
@@ -32,11 +33,11 @@ class StringObject : gobject.object.ObjectG
   }
 
   /**
-   * Wraps a string in an object for use with `GListModel`.
-   * Params:
-   *   string_ = The string to wrap
-   * Returns: a new `GtkStringObject`
-   */
+      Wraps a string in an object for use with [gio.list_model.ListModel].
+    Params:
+      string_ =       The string to wrap
+    Returns:     a new [gtk.string_object.StringObject]
+  */
   this(string string_)
   {
     GtkStringObject* _cretval;
@@ -46,9 +47,9 @@ class StringObject : gobject.object.ObjectG
   }
 
   /**
-   * Returns the string contained in a `GtkStringObject`.
-   * Returns: the string of self
-   */
+      Returns the string contained in a [gtk.string_object.StringObject].
+    Returns:     the string of self
+  */
   string getString()
   {
     const(char)* _cretval;

@@ -13,11 +13,12 @@ import gtk.separator;
 import gtk.types;
 
 /**
- * The #GtkVSeparator widget is a vertical separator, used to group the
- * widgets within a window. It displays a vertical line with a shadow to
- * make it appear sunken into the interface.
- * GtkVSeparator has been deprecated, use #GtkSeparator instead.
- */
+    The #GtkVSeparator widget is a vertical separator, used to group the
+  widgets within a window. It displays a vertical line with a shadow to
+  make it appear sunken into the interface.
+  
+  GtkVSeparator has been deprecated, use #GtkSeparator instead.
+*/
 class VSeparator : gtk.separator.Separator
 {
 
@@ -38,11 +39,11 @@ class VSeparator : gtk.separator.Separator
   }
 
   /**
-   * Creates a new #GtkVSeparator.
-   * Returns: a new #GtkVSeparator.
-
-   * Deprecated: Use [gtk.separator.Separator.new_] with %GTK_ORIENTATION_VERTICAL instead
-   */
+      Creates a new #GtkVSeparator.
+    Returns:     a new #GtkVSeparator.
+  
+    Deprecated:     Use [gtk.separator.Separator.new_] with [gtk.types.Orientation.Vertical] instead
+  */
   this()
   {
     GtkWidget* _cretval;

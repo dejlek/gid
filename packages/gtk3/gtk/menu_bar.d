@@ -13,12 +13,14 @@ import gtk.menu_shell;
 import gtk.types;
 
 /**
- * The #GtkMenuBar is a subclass of #GtkMenuShell which contains one or
- * more #GtkMenuItems. The result is a standard menu bar which can hold
- * many menu items.
- * # CSS nodes
- * GtkMenuBar has a single CSS node with name menubar.
- */
+    The #GtkMenuBar is a subclass of #GtkMenuShell which contains one or
+  more #GtkMenuItems. The result is a standard menu bar which can hold
+  many menu items.
+  
+  # CSS nodes
+  
+  GtkMenuBar has a single CSS node with name menubar.
+*/
 class MenuBar : gtk.menu_shell.MenuShell
 {
 
@@ -39,9 +41,9 @@ class MenuBar : gtk.menu_shell.MenuShell
   }
 
   /**
-   * Creates a new #GtkMenuBar
-   * Returns: the new menu bar, as a #GtkWidget
-   */
+      Creates a new #GtkMenuBar
+    Returns:     the new menu bar, as a #GtkWidget
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -50,16 +52,17 @@ class MenuBar : gtk.menu_shell.MenuShell
   }
 
   /**
-   * Creates a new #GtkMenuBar and populates it with menu items
-   * and submenus according to model.
-   * The created menu items are connected to actions found in the
-   * #GtkApplicationWindow to which the menu bar belongs - typically
-   * by means of being contained within the #GtkApplicationWindows
-   * widget hierarchy.
-   * Params:
-   *   model = a #GMenuModel
-   * Returns: a new #GtkMenuBar
-   */
+      Creates a new #GtkMenuBar and populates it with menu items
+    and submenus according to model.
+    
+    The created menu items are connected to actions found in the
+    #GtkApplicationWindow to which the menu bar belongs - typically
+    by means of being contained within the #GtkApplicationWindows
+    widget hierarchy.
+    Params:
+      model =       a #GMenuModel
+    Returns:     a new #GtkMenuBar
+  */
   static gtk.menu_bar.MenuBar newFromModel(gio.menu_model.MenuModel model)
   {
     GtkWidget* _cretval;
@@ -69,10 +72,10 @@ class MenuBar : gtk.menu_shell.MenuShell
   }
 
   /**
-   * Retrieves the current child pack direction of the menubar.
-   * See [gtk.menu_bar.MenuBar.setChildPackDirection].
-   * Returns: the child pack direction
-   */
+      Retrieves the current child pack direction of the menubar.
+    See [gtk.menu_bar.MenuBar.setChildPackDirection].
+    Returns:     the child pack direction
+  */
   gtk.types.PackDirection getChildPackDirection()
   {
     GtkPackDirection _cretval;
@@ -82,10 +85,10 @@ class MenuBar : gtk.menu_shell.MenuShell
   }
 
   /**
-   * Retrieves the current pack direction of the menubar.
-   * See [gtk.menu_bar.MenuBar.setPackDirection].
-   * Returns: the pack direction
-   */
+      Retrieves the current pack direction of the menubar.
+    See [gtk.menu_bar.MenuBar.setPackDirection].
+    Returns:     the pack direction
+  */
   gtk.types.PackDirection getPackDirection()
   {
     GtkPackDirection _cretval;
@@ -95,20 +98,20 @@ class MenuBar : gtk.menu_shell.MenuShell
   }
 
   /**
-   * Sets how widgets should be packed inside the children of a menubar.
-   * Params:
-   *   childPackDir = a new #GtkPackDirection
-   */
+      Sets how widgets should be packed inside the children of a menubar.
+    Params:
+      childPackDir =       a new #GtkPackDirection
+  */
   void setChildPackDirection(gtk.types.PackDirection childPackDir)
   {
     gtk_menu_bar_set_child_pack_direction(cast(GtkMenuBar*)cPtr, childPackDir);
   }
 
   /**
-   * Sets how items should be packed inside a menubar.
-   * Params:
-   *   packDir = a new #GtkPackDirection
-   */
+      Sets how items should be packed inside a menubar.
+    Params:
+      packDir =       a new #GtkPackDirection
+  */
   void setPackDirection(gtk.types.PackDirection packDir)
   {
     gtk_menu_bar_set_pack_direction(cast(GtkMenuBar*)cPtr, packDir);

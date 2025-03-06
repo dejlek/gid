@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class StructFieldOptions : arrow.function_options.FunctionOptions
 {
 
@@ -26,6 +27,7 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowStructFieldOptions* _cretval;
@@ -33,6 +35,7 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
     this(_cretval, Yes.Take);
   }
 
+  /** */
   void setFieldRef(string fieldRef)
   {
     const(char)* _fieldRef = fieldRef.toCString(No.Alloc);

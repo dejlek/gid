@@ -6,10 +6,10 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * A GtkBindingSignal stores the necessary information to
- * activate a widget in response to a key press via a signal
- * emission.
- */
+    A GtkBindingSignal stores the necessary information to
+  activate a widget in response to a key press via a signal
+  emission.
+*/
 class BindingSignal
 {
   GtkBindingSignal cInstance;

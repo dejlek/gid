@@ -6,6 +6,7 @@ import arrowflight.descriptor;
 import arrowflight.types;
 import gid.gid;
 
+/** */
 class CommandDescriptor : arrowflight.descriptor.Descriptor
 {
 
@@ -25,6 +26,7 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
     return getType();
   }
 
+  /** */
   this(string command)
   {
     GAFlightCommandDescriptor* _cretval;
@@ -33,6 +35,7 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
     this(_cretval, Yes.Take);
   }
 
+  /** */
   string getCommand()
   {
     char* _cretval;

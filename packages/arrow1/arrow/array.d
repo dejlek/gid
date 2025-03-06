@@ -21,6 +21,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class Array : gobject.object.ObjectG
 {
 
@@ -40,6 +41,7 @@ class Array : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   static arrow.array.Array import_(void* cAbiArray, arrow.data_type.DataType dataType)
   {
     GArrowArray* _cretval;
@@ -51,6 +53,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array.Array cast_(arrow.data_type.DataType targetDataType, arrow.cast_options.CastOptions options = null)
   {
     GArrowArray* _cretval;
@@ -62,6 +65,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array.Array concatenate(arrow.array.Array[] otherArrays)
   {
     GArrowArray* _cretval;
@@ -75,6 +79,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long count(arrow.count_options.CountOptions options = null)
   {
     long _retval;
@@ -85,6 +90,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.struct_array.StructArray countValues()
   {
     GArrowStructArray* _cretval;
@@ -96,6 +102,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.dictionary_array.DictionaryArray dictionaryEncode()
   {
     GArrowDictionaryArray* _cretval;
@@ -107,6 +114,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string diffUnified(arrow.array.Array otherArray)
   {
     char* _cretval;
@@ -115,6 +123,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equal(arrow.array.Array otherArray)
   {
     bool _retval;
@@ -122,6 +131,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equalApprox(arrow.array.Array otherArray)
   {
     bool _retval;
@@ -129,6 +139,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equalOptions(arrow.array.Array otherArray, arrow.equal_options.EqualOptions options = null)
   {
     bool _retval;
@@ -136,6 +147,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equalRange(long startIndex, arrow.array.Array otherArray, long otherStartIndex, long endIndex, arrow.equal_options.EqualOptions options = null)
   {
     bool _retval;
@@ -143,6 +155,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool export_(out void* cAbiArray, out void* cAbiSchema)
   {
     bool _retval;
@@ -153,6 +166,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array.Array filter(arrow.boolean_array.BooleanArray filter, arrow.filter_options.FilterOptions options = null)
   {
     GArrowArray* _cretval;
@@ -164,6 +178,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getLength()
   {
     long _retval;
@@ -171,6 +186,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getNNulls()
   {
     long _retval;
@@ -178,6 +194,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.buffer.Buffer getNullBitmap()
   {
     GArrowBuffer* _cretval;
@@ -186,6 +203,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getOffset()
   {
     long _retval;
@@ -193,6 +211,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.data_type.DataType getValueDataType()
   {
     GArrowDataType* _cretval;
@@ -201,6 +220,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.types.Type getValueType()
   {
     GArrowType _cretval;
@@ -209,6 +229,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.boolean_array.BooleanArray isIn(arrow.array.Array right)
   {
     GArrowBooleanArray* _cretval;
@@ -220,6 +241,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.boolean_array.BooleanArray isInChunkedArray(arrow.chunked_array.ChunkedArray right)
   {
     GArrowBooleanArray* _cretval;
@@ -231,6 +253,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isNull(long i)
   {
     bool _retval;
@@ -238,6 +261,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isValid(long i)
   {
     bool _retval;
@@ -245,6 +269,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.run_end_encoded_array.RunEndEncodedArray runEndEncode(arrow.run_end_encode_options.RunEndEncodeOptions options = null)
   {
     GArrowRunEndEncodedArray* _cretval;
@@ -256,6 +281,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array.Array slice(long offset, long length)
   {
     GArrowArray* _cretval;
@@ -264,6 +290,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.uint64_array.UInt64Array sortIndices(arrow.types.SortOrder order)
   {
     GArrowUInt64Array* _cretval;
@@ -275,6 +302,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.uint64_array.UInt64Array sortToIndices()
   {
     GArrowUInt64Array* _cretval;
@@ -286,6 +314,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array.Array take(arrow.array.Array indices, arrow.take_options.TakeOptions options = null)
   {
     GArrowArray* _cretval;
@@ -297,6 +326,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.chunked_array.ChunkedArray takeChunkedArray(arrow.chunked_array.ChunkedArray indices, arrow.take_options.TakeOptions options = null)
   {
     GArrowChunkedArray* _cretval;
@@ -308,6 +338,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;
@@ -319,6 +350,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array.Array unique()
   {
     GArrowArray* _cretval;
@@ -330,6 +362,7 @@ class Array : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array.Array view(arrow.data_type.DataType returnType)
   {
     GArrowArray* _cretval;

@@ -9,8 +9,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * An event related to drag and drop operations.
- */
+    An event related to drag and drop operations.
+*/
 class DNDEvent : gdk.event.Event
 {
 
@@ -23,9 +23,9 @@ class DNDEvent : gdk.event.Event
   }
 
   /**
-   * Gets the `GdkDrop` object from a DND event.
-   * Returns: the drop
-   */
+      Gets the [gdk.drop.Drop] object from a DND event.
+    Returns:     the drop
+  */
   gdk.drop.Drop getDrop()
   {
     GdkDrop* _cretval;

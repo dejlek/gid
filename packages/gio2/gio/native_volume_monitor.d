@@ -6,6 +6,7 @@ import gio.c.types;
 import gio.types;
 import gio.volume_monitor;
 
+/** */
 class NativeVolumeMonitor : gio.volume_monitor.VolumeMonitor
 {
 

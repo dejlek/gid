@@ -7,13 +7,14 @@ public import arrow.types;
 public import gid.gid;
 public import glib.error;
 
+/** */
 template WritableT()
 {
 
   /**
-   * It ensures writing all data on memory to storage.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      It ensures writing all data on memory to storage.
+    Returns:     true on success, false if there was an error.
+  */
   override bool flush()
   {
     bool _retval;
@@ -24,6 +25,7 @@ template WritableT()
     return _retval;
   }
 
+  /** */
   override bool write(ubyte[] data)
   {
     bool _retval;

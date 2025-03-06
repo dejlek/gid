@@ -15,50 +15,58 @@ import gtk.types;
 import xlib.types;
 
 /**
- * Together with #GtkPlug, #GtkSocket provides the ability to embed
- * widgets from one process into another process in a fashion that
- * is transparent to the user. One process creates a #GtkSocket widget
- * and passes that widget’s window ID to the other process, which then
- * creates a #GtkPlug with that window ID. Any widgets contained in the
- * #GtkPlug then will appear inside the first application’s window.
- * The socket’s window ID is obtained by using [gtk.socket.Socket.getId].
- * Before using this function, the socket must have been realized,
- * and for hence, have been added to its parent.
- * ## Obtaining the window ID of a socket.
- * |[<!-- language\="C" -->
- * GtkWidget *socket \= gtk_socket_new $(LPAREN)$(RPAREN);
- * gtk_widget_show $(LPAREN)socket$(RPAREN);
- * gtk_container_add $(LPAREN)GTK_CONTAINER $(LPAREN)parent$(RPAREN), socket$(RPAREN);
- * // The following call is only necessary if one of
- * // the ancestors of the socket is not yet visible.
- * gtk_widget_realize $(LPAREN)socket$(RPAREN);
- * g_print $(LPAREN)"The ID of the sockets window is %#x\n",
- * gtk_socket_get_id $(LPAREN)socket$(RPAREN)$(RPAREN);
- * ]|
- * Note that if you pass the window ID of the socket to another
- * process that will create a plug in the socket, you must make
- * sure that the socket widget is not destroyed until that plug
- * is created. Violating this rule will cause unpredictable
- * consequences, the most likely consequence being that the plug
- * will appear as a separate toplevel window. You can check if
- * the plug has been created by using [gtk.socket.Socket.getPlugWindow].
- * If it returns a non-%NULL value, then the plug has been
- * successfully created inside of the socket.
- * When GTK+ is notified that the embedded window has been destroyed,
- * then it will destroy the socket as well. You should always,
- * therefore, be prepared for your sockets to be destroyed at any
- * time when the main event loop is running. To prevent this from
- * happening, you can connect to the #GtkSocket::plug-removed signal.
- * The communication between a #GtkSocket and a #GtkPlug follows the
- * [XEmbed Protocol](http://www.freedesktop.org/Standards/xembed-spec).
- * This protocol has also been implemented in other toolkits, e.g. Qt,
- * allowing the same level of integration when embedding a Qt widget
- * in GTK or vice versa.
- * The #GtkPlug and #GtkSocket widgets are only available when GTK+
- * is compiled for the X11 platform and %GDK_WINDOWING_X11 is defined.
- * They can only be used on a #GdkX11Display. To use #GtkPlug and
- * #GtkSocket, you need to include the `gtk/gtkx.h` header.
- */
+    Together with #GtkPlug, #GtkSocket provides the ability to embed
+  widgets from one process into another process in a fashion that
+  is transparent to the user. One process creates a #GtkSocket widget
+  and passes that widget’s window ID to the other process, which then
+  creates a #GtkPlug with that window ID. Any widgets contained in the
+  #GtkPlug then will appear inside the first application’s window.
+  
+  The socket’s window ID is obtained by using [gtk.socket.Socket.getId].
+  Before using this function, the socket must have been realized,
+  and for hence, have been added to its parent.
+  
+  ## Obtaining the window ID of a socket.
+  
+  ```c
+  GtkWidget *socket = gtk_socket_new ();
+  gtk_widget_show (socket);
+  gtk_container_add (GTK_CONTAINER (parent), socket);
+  
+  // The following call is only necessary if one of
+  // the ancestors of the socket is not yet visible.
+  gtk_widget_realize (socket);
+  g_print ("The ID of the sockets window is %#x\n",
+           gtk_socket_get_id (socket));
+  ```
+  
+  Note that if you pass the window ID of the socket to another
+  process that will create a plug in the socket, you must make
+  sure that the socket widget is not destroyed until that plug
+  is created. Violating this rule will cause unpredictable
+  consequences, the most likely consequence being that the plug
+  will appear as a separate toplevel window. You can check if
+  the plug has been created by using [gtk.socket.Socket.getPlugWindow].
+  If it returns a non-null value, then the plug has been
+  successfully created inside of the socket.
+  
+  When GTK+ is notified that the embedded window has been destroyed,
+  then it will destroy the socket as well. You should always,
+  therefore, be prepared for your sockets to be destroyed at any
+  time when the main event loop is running. To prevent this from
+  happening, you can connect to the #GtkSocket::plug-removed signal.
+  
+  The communication between a #GtkSocket and a #GtkPlug follows the
+  [XEmbed Protocol](http://www.freedesktop.org/Standards/xembed-spec).
+  This protocol has also been implemented in other toolkits, e.g. Qt,
+  allowing the same level of integration when embedding a Qt widget
+  in GTK or vice versa.
+  
+  The #GtkPlug and #GtkSocket widgets are only available when GTK+
+  is compiled for the X11 platform and `GDK_WINDOWING_X11` is defined.
+  They can only be used on a #GdkX11Display. To use #GtkPlug and
+  #GtkSocket, you need to include the `gtk/gtkx.h` header.
+*/
 class Socket : gtk.container.Container
 {
 
@@ -79,9 +87,9 @@ class Socket : gtk.container.Container
   }
 
   /**
-   * Create a new empty #GtkSocket.
-   * Returns: the new #GtkSocket.
-   */
+      Create a new empty #GtkSocket.
+    Returns:     the new #GtkSocket.
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -90,32 +98,35 @@ class Socket : gtk.container.Container
   }
 
   /**
-   * Adds an XEMBED client, such as a #GtkPlug, to the #GtkSocket.  The
-   * client may be in the same process or in a different process.
-   * To embed a #GtkPlug in a #GtkSocket, you can either create the
-   * #GtkPlug with `gtk_plug_new $(LPAREN)0$(RPAREN)`, call
-   * [gtk.plug.Plug.getId] to get the window ID of the plug, and then pass that to the
-   * [gtk.socket.Socket.addId], or you can call [gtk.socket.Socket.getId] to get the
-   * window ID for the socket, and call [gtk.plug.Plug.new_] passing in that
-   * ID.
-   * The #GtkSocket must have already be added into a toplevel window
-   * before you can make this call.
-   * Params:
-   *   window = the Window of a client participating in the XEMBED protocol.
-   */
+      Adds an XEMBED client, such as a #GtkPlug, to the #GtkSocket.  The
+    client may be in the same process or in a different process.
+    
+    To embed a #GtkPlug in a #GtkSocket, you can either create the
+    #GtkPlug with `gtk_plug_new (0)`, call
+    [gtk.plug.Plug.getId] to get the window ID of the plug, and then pass that to the
+    [gtk.socket.Socket.addId], or you can call [gtk.socket.Socket.getId] to get the
+    window ID for the socket, and call [gtk.plug.Plug.new_] passing in that
+    ID.
+    
+    The #GtkSocket must have already be added into a toplevel window
+     before you can make this call.
+    Params:
+      window =       the Window of a client participating in the XEMBED protocol.
+  */
   void addId(xlib.types.Window window)
   {
     gtk_socket_add_id(cast(GtkSocket*)cPtr, window);
   }
 
   /**
-   * Gets the window ID of a #GtkSocket widget, which can then
-   * be used to create a client embedded inside the socket, for
-   * instance with [gtk.plug.Plug.new_].
-   * The #GtkSocket must have already be added into a toplevel window
-   * before you can make this call.
-   * Returns: the window ID for the socket
-   */
+      Gets the window ID of a #GtkSocket widget, which can then
+    be used to create a client embedded inside the socket, for
+    instance with [gtk.plug.Plug.new_].
+    
+    The #GtkSocket must have already be added into a toplevel window
+    before you can make this call.
+    Returns:     the window ID for the socket
+  */
   xlib.types.Window getId()
   {
     xlib.types.Window _retval;
@@ -124,11 +135,11 @@ class Socket : gtk.container.Container
   }
 
   /**
-   * Retrieves the window of the plug. Use this to check if the plug has
-   * been created inside of the socket.
-   * Returns: the window of the plug if
-   *   available, or %NULL
-   */
+      Retrieves the window of the plug. Use this to check if the plug has
+    been created inside of the socket.
+    Returns:     the window of the plug if
+      available, or null
+  */
   gdk.window.Window getPlugWindow()
   {
     GdkWindow* _cretval;
@@ -138,20 +149,26 @@ class Socket : gtk.container.Container
   }
 
   /**
-   * This signal is emitted when a client is successfully
-   * added to the socket.
-   *   socket = the instance the signal is connected to
-   */
+      This signal is emitted when a client is successfully
+    added to the socket.
+  
+    ## Parameters
+    $(LIST
+      * $(B socket) the instance the signal is connected to
+    )
+  */
   alias PlugAddedCallbackDlg = void delegate(gtk.socket.Socket socket);
+
+  /** ditto */
   alias PlugAddedCallbackFunc = void function(gtk.socket.Socket socket);
 
   /**
-   * Connect to PlugAdded signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to PlugAdded signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectPlugAdded(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PlugAddedCallbackDlg) || is(T : PlugAddedCallbackFunc))
   {
@@ -168,22 +185,28 @@ class Socket : gtk.container.Container
   }
 
   /**
-   * This signal is emitted when a client is removed from the socket.
-   * The default action is to destroy the #GtkSocket widget, so if you
-   * want to reuse it you must add a signal handler that returns %TRUE.
-   *   socket = the instance the signal is connected to
-   * Returns: %TRUE to stop other handlers from being invoked.
-   */
+      This signal is emitted when a client is removed from the socket.
+    The default action is to destroy the #GtkSocket widget, so if you
+    want to reuse it you must add a signal handler that returns true.
+  
+    ## Parameters
+    $(LIST
+      * $(B socket) the instance the signal is connected to
+    )
+    Returns:     true to stop other handlers from being invoked.
+  */
   alias PlugRemovedCallbackDlg = bool delegate(gtk.socket.Socket socket);
+
+  /** ditto */
   alias PlugRemovedCallbackFunc = bool function(gtk.socket.Socket socket);
 
   /**
-   * Connect to PlugRemoved signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to PlugRemoved signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectPlugRemoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PlugRemovedCallbackDlg) || is(T : PlugRemovedCallbackFunc))
   {

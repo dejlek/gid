@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 interface File
 {
 
@@ -16,11 +17,15 @@ interface File
     return cast(void function())garrow_file_get_type != &gidSymbolNotFound ? garrow_file_get_type() : cast(GType)0;
   }
 
+  /** */
   bool close();
 
+  /** */
   arrow.types.FileMode getMode();
 
+  /** */
   bool isClosed();
 
+  /** */
   long tell();
 }

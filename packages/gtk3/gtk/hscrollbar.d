@@ -14,14 +14,15 @@ import gtk.scrollbar;
 import gtk.types;
 
 /**
- * The #GtkHScrollbar widget is a widget arranged horizontally creating a
- * scrollbar. See #GtkScrollbar for details on
- * scrollbars. #GtkAdjustment pointers may be added to handle the
- * adjustment of the scrollbar or it may be left %NULL in which case one
- * will be created for you. See #GtkScrollbar for a description of what the
- * fields in an adjustment represent for a scrollbar.
- * GtkHScrollbar has been deprecated, use #GtkScrollbar instead.
- */
+    The #GtkHScrollbar widget is a widget arranged horizontally creating a
+  scrollbar. See #GtkScrollbar for details on
+  scrollbars. #GtkAdjustment pointers may be added to handle the
+  adjustment of the scrollbar or it may be left null in which case one
+  will be created for you. See #GtkScrollbar for a description of what the
+  fields in an adjustment represent for a scrollbar.
+  
+  GtkHScrollbar has been deprecated, use #GtkScrollbar instead.
+*/
 class HScrollbar : gtk.scrollbar.Scrollbar
 {
 
@@ -42,13 +43,13 @@ class HScrollbar : gtk.scrollbar.Scrollbar
   }
 
   /**
-   * Creates a new horizontal scrollbar.
-   * Params:
-   *   adjustment = the #GtkAdjustment to use, or %NULL to create a new adjustment
-   * Returns: the new #GtkHScrollbar
-
-   * Deprecated: Use [gtk.scrollbar.Scrollbar.new_] with %GTK_ORIENTATION_HORIZONTAL instead
-   */
+      Creates a new horizontal scrollbar.
+    Params:
+      adjustment =       the #GtkAdjustment to use, or null to create a new adjustment
+    Returns:     the new #GtkHScrollbar
+  
+    Deprecated:     Use [gtk.scrollbar.Scrollbar.new_] with [gtk.types.Orientation.Horizontal] instead
+  */
   this(gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;

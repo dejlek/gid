@@ -6,6 +6,7 @@ import arrow.scalar;
 import arrow.types;
 import gid.gid;
 
+/** */
 class ExtensionScalar : arrow.scalar.Scalar
 {
 

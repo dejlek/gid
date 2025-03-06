@@ -10,6 +10,7 @@ import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
 
+/** */
 class EntryIconAccessible : atk.object.ObjectAtk, atk.action.Action, atk.component.Component
 {
 

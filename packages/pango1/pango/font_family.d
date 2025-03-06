@@ -10,11 +10,12 @@ import pango.font_face;
 import pango.types;
 
 /**
- * A `PangoFontFamily` is used to represent a family of related
- * font faces.
- * The font faces in a family share a common design, but differ in
- * slant, weight, width or other aspects.
- */
+    A [pango.font_family.FontFamily] is used to represent a family of related
+  font faces.
+  
+  The font faces in a family share a common design, but differ in
+  slant, weight, width or other aspects.
+*/
 class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
@@ -37,14 +38,14 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
   mixin ListModelT!();
 
   /**
-   * Gets the `PangoFontFace` of family with the given name.
-   * Params:
-   *   name = the name of a face. If the name is %NULL,
-   *     the family's default face $(LPAREN)fontconfig calls it "Regular"$(RPAREN)
-   *     will be returned.
-   * Returns: the `PangoFontFace`,
-   *   or %NULL if no face with the given name exists.
-   */
+      Gets the [pango.font_face.FontFace] of family with the given name.
+    Params:
+      name =       the name of a face. If the name is null,
+          the family's default face (fontconfig calls it "Regular")
+          will be returned.
+    Returns:     the [pango.font_face.FontFace],
+        or null if no face with the given name exists.
+  */
   pango.font_face.FontFace getFace(string name = null)
   {
     PangoFontFace* _cretval;
@@ -55,13 +56,14 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * Gets the name of the family.
-   * The name is unique among all fonts for the font backend and can
-   * be used in a `PangoFontDescription` to specify that a face from
-   * this family is desired.
-   * Returns: the name of the family. This string is owned
-   *   by the family object and must not be modified or freed.
-   */
+      Gets the name of the family.
+    
+    The name is unique among all fonts for the font backend and can
+    be used in a [pango.font_description.FontDescription] to specify that a face from
+    this family is desired.
+    Returns:     the name of the family. This string is owned
+        by the family object and must not be modified or freed.
+  */
   string getName()
   {
     const(char)* _cretval;
@@ -71,20 +73,22 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * A monospace font is a font designed for text display where the the
-   * characters form a regular grid.
-   * For Western languages this would
-   * mean that the advance width of all characters are the same, but
-   * this categorization also includes Asian fonts which include
-   * double-width characters: characters that occupy two grid cells.
-   * [glib.global.unicharIswide] returns a result that indicates whether a
-   * character is typically double-width in a monospace font.
-   * The best way to find out the grid-cell size is to call
-   * [pango.font_metrics.FontMetrics.getApproximateDigitWidth], since the
-   * results of [pango.font_metrics.FontMetrics.getApproximateCharWidth] may
-   * be affected by double-width characters.
-   * Returns: %TRUE if the family is monospace.
-   */
+      A monospace font is a font designed for text display where the the
+    characters form a regular grid.
+    
+    For Western languages this would
+    mean that the advance width of all characters are the same, but
+    this categorization also includes Asian fonts which include
+    double-width characters: characters that occupy two grid cells.
+    [glib.global.unicharIswide] returns a result that indicates whether a
+    character is typically double-width in a monospace font.
+    
+    The best way to find out the grid-cell size is to call
+    [pango.font_metrics.FontMetrics.getApproximateDigitWidth], since the
+    results of [pango.font_metrics.FontMetrics.getApproximateCharWidth] may
+    be affected by double-width characters.
+    Returns:     true if the family is monospace.
+  */
   bool isMonospace()
   {
     bool _retval;
@@ -93,12 +97,13 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * A variable font is a font which has axes that can be modified to
-   * produce different faces.
-   * Such axes are also known as _variations_; see
-   * [pango.font_description.FontDescription.setVariations] for more information.
-   * Returns: %TRUE if the family is variable
-   */
+      A variable font is a font which has axes that can be modified to
+    produce different faces.
+    
+    Such axes are also known as _variations_; see
+    [pango.font_description.FontDescription.setVariations] for more information.
+    Returns:     true if the family is variable
+  */
   bool isVariable()
   {
     bool _retval;
@@ -107,18 +112,21 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * Lists the different font faces that make up family.
-   * The faces in a family share a common design, but differ in slant, weight,
-   * width and other aspects.
-   * Note that the returned faces are not in any particular order, and
-   * multiple faces may have the same name or characteristics.
-   * `PangoFontFamily` also implemented the [gio.list_model.ListModel] interface
-   * for enumerating faces.
-   * Params:
-   *   faces = location to store an array of pointers to `PangoFontFace` objects,
-   *     or %NULL. This array should be freed with [glib.global.gfree] when it is no
-   *     longer needed.
-   */
+      Lists the different font faces that make up family.
+    
+    The faces in a family share a common design, but differ in slant, weight,
+    width and other aspects.
+    
+    Note that the returned faces are not in any particular order, and
+    multiple faces may have the same name or characteristics.
+    
+    [pango.font_family.FontFamily] also implemented the [gio.list_model.ListModel] interface
+    for enumerating faces.
+    Params:
+      faces =       location to store an array of pointers to [pango.font_face.FontFace] objects,
+          or null. This array should be freed with [glib.global.gfree] when it is no
+          longer needed.
+  */
   void listFaces(out pango.font_face.FontFace[] faces)
   {
     int _nFaces;

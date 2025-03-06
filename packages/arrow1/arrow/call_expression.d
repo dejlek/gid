@@ -7,6 +7,7 @@ import arrow.function_options;
 import arrow.types;
 import gid.gid;
 
+/** */
 class CallExpression : arrow.expression.Expression
 {
 
@@ -26,6 +27,7 @@ class CallExpression : arrow.expression.Expression
     return getType();
   }
 
+  /** */
   this(string function_, arrow.expression.Expression[] arguments, arrow.function_options.FunctionOptions options = null)
   {
     GArrowCallExpression* _cretval;

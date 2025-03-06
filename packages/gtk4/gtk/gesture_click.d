@@ -9,13 +9,14 @@ import gtk.gesture_single;
 import gtk.types;
 
 /**
- * `GtkGestureClick` is a `GtkGesture` implementation for clicks.
- * It is able to recognize multiple clicks on a nearby zone, which
- * can be listened for through the [gtk.gesture_click.GestureClick.pressed]
- * signal. Whenever time or distance between clicks exceed the GTK
- * defaults, [gtk.gesture_click.GestureClick.stopped] is emitted, and the
- * click counter is reset.
- */
+    [gtk.gesture_click.GestureClick] is a [gtk.gesture.Gesture] implementation for clicks.
+  
+  It is able to recognize multiple clicks on a nearby zone, which
+  can be listened for through the [gtk.gesture_click.GestureClick.pressed]
+  signal. Whenever time or distance between clicks exceed the GTK
+  defaults, [gtk.gesture_click.GestureClick.stopped] is emitted, and the
+  click counter is reset.
+*/
 class GestureClick : gtk.gesture_single.GestureSingle
 {
 
@@ -36,10 +37,10 @@ class GestureClick : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Returns a newly created `GtkGesture` that recognizes
-   * single and multiple presses.
-   * Returns: a newly created `GtkGestureClick`
-   */
+      Returns a newly created [gtk.gesture.Gesture] that recognizes
+    single and multiple presses.
+    Returns:     a newly created [gtk.gesture_click.GestureClick]
+  */
   this()
   {
     GtkGesture* _cretval;
@@ -48,23 +49,28 @@ class GestureClick : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Emitted whenever a button or touch press happens.
-   * Params
-   *   nPress = how many touch/button presses happened with this one
-   *   x = The X coordinate, in widget allocation coordinates
-   *   y = The Y coordinate, in widget allocation coordinates
-   *   gestureClick = the instance the signal is connected to
-   */
+      Emitted whenever a button or touch press happens.
+  
+    ## Parameters
+    $(LIST
+      * $(B nPress)       how many touch/button presses happened with this one
+      * $(B x)       The X coordinate, in widget allocation coordinates
+      * $(B y)       The Y coordinate, in widget allocation coordinates
+      * $(B gestureClick) the instance the signal is connected to
+    )
+  */
   alias PressedCallbackDlg = void delegate(int nPress, double x, double y, gtk.gesture_click.GestureClick gestureClick);
+
+  /** ditto */
   alias PressedCallbackFunc = void function(int nPress, double x, double y, gtk.gesture_click.GestureClick gestureClick);
 
   /**
-   * Connect to Pressed signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Pressed signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectPressed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PressedCallbackDlg) || is(T : PressedCallbackFunc))
   {
@@ -84,27 +90,33 @@ class GestureClick : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Emitted when a button or touch is released.
-   * n_press will report the number of press that is paired to
-   * this event, note that [gtk.gesture_click.GestureClick.stopped] may
-   * have been emitted between the press and its release, n_press
-   * will only start over at the next press.
-   * Params
-   *   nPress = number of press that is paired with this release
-   *   x = The X coordinate, in widget allocation coordinates
-   *   y = The Y coordinate, in widget allocation coordinates
-   *   gestureClick = the instance the signal is connected to
-   */
+      Emitted when a button or touch is released.
+    
+    n_press will report the number of press that is paired to
+    this event, note that [gtk.gesture_click.GestureClick.stopped] may
+    have been emitted between the press and its release, n_press
+    will only start over at the next press.
+  
+    ## Parameters
+    $(LIST
+      * $(B nPress)       number of press that is paired with this release
+      * $(B x)       The X coordinate, in widget allocation coordinates
+      * $(B y)       The Y coordinate, in widget allocation coordinates
+      * $(B gestureClick) the instance the signal is connected to
+    )
+  */
   alias ReleasedCallbackDlg = void delegate(int nPress, double x, double y, gtk.gesture_click.GestureClick gestureClick);
+
+  /** ditto */
   alias ReleasedCallbackFunc = void function(int nPress, double x, double y, gtk.gesture_click.GestureClick gestureClick);
 
   /**
-   * Connect to Released signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Released signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectReleased(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ReleasedCallbackDlg) || is(T : ReleasedCallbackFunc))
   {
@@ -124,19 +136,25 @@ class GestureClick : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Emitted whenever any time/distance threshold has been exceeded.
-   *   gestureClick = the instance the signal is connected to
-   */
+      Emitted whenever any time/distance threshold has been exceeded.
+  
+    ## Parameters
+    $(LIST
+      * $(B gestureClick) the instance the signal is connected to
+    )
+  */
   alias StoppedCallbackDlg = void delegate(gtk.gesture_click.GestureClick gestureClick);
+
+  /** ditto */
   alias StoppedCallbackFunc = void function(gtk.gesture_click.GestureClick gestureClick);
 
   /**
-   * Connect to Stopped signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Stopped signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectStopped(T)(T callback, Flag!"After" after = No.After)
   if (is(T : StoppedCallbackDlg) || is(T : StoppedCallbackFunc))
   {
@@ -153,28 +171,34 @@ class GestureClick : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Emitted whenever the gesture receives a release
-   * event that had no previous corresponding press.
-   * Due to implicit grabs, this can only happen on situations
-   * where input is grabbed elsewhere mid-press or the pressed
-   * widget voluntarily relinquishes its implicit grab.
-   * Params
-   *   x = X coordinate of the event
-   *   y = Y coordinate of the event
-   *   button = Button being released
-   *   sequence = Sequence being released
-   *   gestureClick = the instance the signal is connected to
-   */
+      Emitted whenever the gesture receives a release
+    event that had no previous corresponding press.
+    
+    Due to implicit grabs, this can only happen on situations
+    where input is grabbed elsewhere mid-press or the pressed
+    widget voluntarily relinquishes its implicit grab.
+  
+    ## Parameters
+    $(LIST
+      * $(B x)       X coordinate of the event
+      * $(B y)       Y coordinate of the event
+      * $(B button)       Button being released
+      * $(B sequence)       Sequence being released
+      * $(B gestureClick) the instance the signal is connected to
+    )
+  */
   alias UnpairedReleaseCallbackDlg = void delegate(double x, double y, uint button, gdk.event_sequence.EventSequence sequence, gtk.gesture_click.GestureClick gestureClick);
+
+  /** ditto */
   alias UnpairedReleaseCallbackFunc = void function(double x, double y, uint button, gdk.event_sequence.EventSequence sequence, gtk.gesture_click.GestureClick gestureClick);
 
   /**
-   * Connect to UnpairedRelease signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to UnpairedRelease signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectUnpairedRelease(T)(T callback, Flag!"After" after = No.After)
   if (is(T : UnpairedReleaseCallbackDlg) || is(T : UnpairedReleaseCallbackFunc))
   {

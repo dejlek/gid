@@ -8,6 +8,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class Schema : gobject.object.ObjectG
 {
 
@@ -27,6 +28,7 @@ class Schema : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrow.field.Field[] fields)
   {
     GArrowSchema* _cretval;
@@ -36,6 +38,7 @@ class Schema : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   static arrow.schema.Schema import_(void* cAbiSchema)
   {
     GArrowSchema* _cretval;
@@ -47,6 +50,7 @@ class Schema : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.schema.Schema addField(uint i, arrow.field.Field field)
   {
     GArrowSchema* _cretval;
@@ -58,6 +62,7 @@ class Schema : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equal(arrow.schema.Schema otherSchema)
   {
     bool _retval;
@@ -65,6 +70,7 @@ class Schema : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   void* export_()
   {
     GError *_err;
@@ -74,6 +80,7 @@ class Schema : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.field.Field getField(uint i)
   {
     GArrowField* _cretval;
@@ -82,6 +89,7 @@ class Schema : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.field.Field getFieldByName(string name)
   {
     GArrowField* _cretval;
@@ -91,6 +99,7 @@ class Schema : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   int getFieldIndex(string name)
   {
     int _retval;
@@ -99,6 +108,7 @@ class Schema : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.field.Field[] getFields()
   {
     GList* _cretval;
@@ -107,6 +117,7 @@ class Schema : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string[string] getMetadata()
   {
     GHashTable* _cretval;
@@ -115,6 +126,7 @@ class Schema : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool hasMetadata()
   {
     bool _retval;
@@ -122,6 +134,7 @@ class Schema : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   uint nFields()
   {
     uint _retval;
@@ -129,6 +142,7 @@ class Schema : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.schema.Schema removeField(uint i)
   {
     GArrowSchema* _cretval;
@@ -140,6 +154,7 @@ class Schema : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.schema.Schema replaceField(uint i, arrow.field.Field field)
   {
     GArrowSchema* _cretval;
@@ -151,6 +166,7 @@ class Schema : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;
@@ -159,6 +175,7 @@ class Schema : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toStringMetadata(bool showMetadata)
   {
     char* _cretval;
@@ -167,6 +184,7 @@ class Schema : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.schema.Schema withMetadata(string[string] metadata)
   {
     GArrowSchema* _cretval;

@@ -17,53 +17,67 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * A #GtkToggleButton is a #GtkButton which will remain “pressed-in” when
- * clicked. Clicking again will cause the toggle button to return to its
- * normal state.
- * A toggle button is created by calling either [gtk.toggle_button.ToggleButton.new_] or
- * [gtk.toggle_button.ToggleButton.newWithLabel]. If using the former, it is advisable to
- * pack a widget, $(LPAREN)such as a #GtkLabel and/or a #GtkImage$(RPAREN), into the toggle
- * button’s container. $(LPAREN)See #GtkButton for more information$(RPAREN).
- * The state of a #GtkToggleButton can be set specifically using
- * [gtk.toggle_button.ToggleButton.setActive], and retrieved using
- * [gtk.toggle_button.ToggleButton.getActive].
- * To simply switch the state of a toggle button, use [gtk.toggle_button.ToggleButton.toggled].
- * # CSS nodes
- * GtkToggleButton has a single CSS node with name button. To differentiate
- * it from a plain #GtkButton, it gets the .toggle style class.
- * ## Creating two #GtkToggleButton widgets.
- * |[<!-- language\="C" -->
- * static void output_state $(LPAREN)GtkToggleButton *source, gpointer user_data$(RPAREN) {
- * printf $(LPAREN)"Active: %d\n", gtk_toggle_button_get_active $(LPAREN)source$(RPAREN)$(RPAREN);
- * }
- * void make_toggles $(LPAREN)void$(RPAREN) {
- * GtkWidget *window, *toggle1, *toggle2;
- * GtkWidget *box;
- * const char *text;
- * window \= gtk_window_new $(LPAREN)GTK_WINDOW_TOPLEVEL$(RPAREN);
- * box \= gtk_box_new $(LPAREN)GTK_ORIENTATION_VERTICAL, 12$(RPAREN);
- * text \= "Hi, I’m a toggle button.";
- * toggle1 \= gtk_toggle_button_new_with_label $(LPAREN)text$(RPAREN);
- * // Makes this toggle button invisible
- * gtk_toggle_button_set_mode $(LPAREN)GTK_TOGGLE_BUTTON $(LPAREN)toggle1$(RPAREN),
- * TRUE$(RPAREN);
- * g_signal_connect $(LPAREN)toggle1, "toggled",
- * G_CALLBACK $(LPAREN)output_state$(RPAREN),
- * NULL$(RPAREN);
- * gtk_container_add $(LPAREN)GTK_CONTAINER $(LPAREN)box$(RPAREN), toggle1$(RPAREN);
- * text \= "Hi, I’m a toggle button.";
- * toggle2 \= gtk_toggle_button_new_with_label $(LPAREN)text$(RPAREN);
- * gtk_toggle_button_set_mode $(LPAREN)GTK_TOGGLE_BUTTON $(LPAREN)toggle2$(RPAREN),
- * FALSE$(RPAREN);
- * g_signal_connect $(LPAREN)toggle2, "toggled",
- * G_CALLBACK $(LPAREN)output_state$(RPAREN),
- * NULL$(RPAREN);
- * gtk_container_add $(LPAREN)GTK_CONTAINER $(LPAREN)box$(RPAREN), toggle2$(RPAREN);
- * gtk_container_add $(LPAREN)GTK_CONTAINER $(LPAREN)window$(RPAREN), box$(RPAREN);
- * gtk_widget_show_all $(LPAREN)window$(RPAREN);
- * }
- * ]|
- */
+    A #GtkToggleButton is a #GtkButton which will remain “pressed-in” when
+  clicked. Clicking again will cause the toggle button to return to its
+  normal state.
+  
+  A toggle button is created by calling either [gtk.toggle_button.ToggleButton.new_] or
+  [gtk.toggle_button.ToggleButton.newWithLabel]. If using the former, it is advisable to
+  pack a widget, (such as a #GtkLabel and/or a #GtkImage), into the toggle
+  button’s container. (See #GtkButton for more information).
+  
+  The state of a #GtkToggleButton can be set specifically using
+  [gtk.toggle_button.ToggleButton.setActive], and retrieved using
+  [gtk.toggle_button.ToggleButton.getActive].
+  
+  To simply switch the state of a toggle button, use [gtk.toggle_button.ToggleButton.toggled].
+  
+  # CSS nodes
+  
+  GtkToggleButton has a single CSS node with name button. To differentiate
+  it from a plain #GtkButton, it gets the .toggle style class.
+  
+  ## Creating two #GtkToggleButton widgets.
+  
+  ```c
+  static void output_state (GtkToggleButton *source, gpointer user_data) {
+    printf ("Active: %d\n", gtk_toggle_button_get_active (source));
+  }
+  
+  void make_toggles (void) {
+    GtkWidget *window, *toggle1, *toggle2;
+    GtkWidget *box;
+    const char *text;
+  
+    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
+  
+    text = "Hi, I’m a toggle button.";
+    toggle1 = gtk_toggle_button_new_with_label (text);
+  
+    // Makes this toggle button invisible
+    gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (toggle1),
+                                TRUE);
+  
+    g_signal_connect (toggle1, "toggled",
+                      G_CALLBACK (output_state),
+                      NULL);
+    gtk_container_add (GTK_CONTAINER (box), toggle1);
+  
+    text = "Hi, I’m a toggle button.";
+    toggle2 = gtk_toggle_button_new_with_label (text);
+    gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (toggle2),
+                                FALSE);
+    g_signal_connect (toggle2, "toggled",
+                      G_CALLBACK (output_state),
+                      NULL);
+    gtk_container_add (GTK_CONTAINER (box), toggle2);
+  
+    gtk_container_add (GTK_CONTAINER (window), box);
+    gtk_widget_show_all (window);
+  }
+  ```
+*/
 class ToggleButton : gtk.button.Button
 {
 
@@ -84,9 +98,9 @@ class ToggleButton : gtk.button.Button
   }
 
   /**
-   * Creates a new toggle button. A widget should be packed into the button, as in [gtk.button.Button.new_].
-   * Returns: a new toggle button.
-   */
+      Creates a new toggle button. A widget should be packed into the button, as in [gtk.button.Button.new_].
+    Returns:     a new toggle button.
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -95,11 +109,11 @@ class ToggleButton : gtk.button.Button
   }
 
   /**
-   * Creates a new toggle button with a text label.
-   * Params:
-   *   label = a string containing the message to be placed in the toggle button.
-   * Returns: a new toggle button.
-   */
+      Creates a new toggle button with a text label.
+    Params:
+      label =       a string containing the message to be placed in the toggle button.
+    Returns:     a new toggle button.
+  */
   static gtk.toggle_button.ToggleButton newWithLabel(string label)
   {
     GtkWidget* _cretval;
@@ -110,14 +124,14 @@ class ToggleButton : gtk.button.Button
   }
 
   /**
-   * Creates a new #GtkToggleButton containing a label. The label
-   * will be created using [gtk.label.Label.newWithMnemonic], so underscores
-   * in label indicate the mnemonic for the button.
-   * Params:
-   *   label = the text of the button, with an underscore in front of the
-   *     mnemonic character
-   * Returns: a new #GtkToggleButton
-   */
+      Creates a new #GtkToggleButton containing a label. The label
+    will be created using [gtk.label.Label.newWithMnemonic], so underscores
+    in label indicate the mnemonic for the button.
+    Params:
+      label =       the text of the button, with an underscore in front of the
+                mnemonic character
+    Returns:     a new #GtkToggleButton
+  */
   static gtk.toggle_button.ToggleButton newWithMnemonic(string label)
   {
     GtkWidget* _cretval;
@@ -128,10 +142,10 @@ class ToggleButton : gtk.button.Button
   }
 
   /**
-   * Queries a #GtkToggleButton and returns its current state. Returns %TRUE if
-   * the toggle button is pressed in and %FALSE if it is raised.
-   * Returns: a #gboolean value.
-   */
+      Queries a #GtkToggleButton and returns its current state. Returns true if
+    the toggle button is pressed in and false if it is raised.
+    Returns:     a #gboolean value.
+  */
   bool getActive()
   {
     bool _retval;
@@ -140,9 +154,9 @@ class ToggleButton : gtk.button.Button
   }
 
   /**
-   * Gets the value set by [gtk.toggle_button.ToggleButton.setInconsistent].
-   * Returns: %TRUE if the button is displayed as inconsistent, %FALSE otherwise
-   */
+      Gets the value set by [gtk.toggle_button.ToggleButton.setInconsistent].
+    Returns:     true if the button is displayed as inconsistent, false otherwise
+  */
   bool getInconsistent()
   {
     bool _retval;
@@ -151,11 +165,11 @@ class ToggleButton : gtk.button.Button
   }
 
   /**
-   * Retrieves whether the button is displayed as a separate indicator
-   * and label. See [gtk.toggle_button.ToggleButton.setMode].
-   * Returns: %TRUE if the togglebutton is drawn as a separate indicator
-   *   and label.
-   */
+      Retrieves whether the button is displayed as a separate indicator
+    and label. See [gtk.toggle_button.ToggleButton.setMode].
+    Returns:     true if the togglebutton is drawn as a separate indicator
+        and label.
+  */
   bool getMode()
   {
     bool _retval;
@@ -164,78 +178,86 @@ class ToggleButton : gtk.button.Button
   }
 
   /**
-   * Sets the status of the toggle button. Set to %TRUE if you want the
-   * GtkToggleButton to be “pressed in”, and %FALSE to raise it.
-   * This action causes the #GtkToggleButton::toggled signal and the
-   * #GtkButton::clicked signal to be emitted.
-   * Params:
-   *   isActive = %TRUE or %FALSE.
-   */
+      Sets the status of the toggle button. Set to true if you want the
+    GtkToggleButton to be “pressed in”, and false to raise it.
+    This action causes the #GtkToggleButton::toggled signal and the
+    #GtkButton::clicked signal to be emitted.
+    Params:
+      isActive =       true or false.
+  */
   void setActive(bool isActive)
   {
     gtk_toggle_button_set_active(cast(GtkToggleButton*)cPtr, isActive);
   }
 
   /**
-   * If the user has selected a range of elements $(LPAREN)such as some text or
-   * spreadsheet cells$(RPAREN) that are affected by a toggle button, and the
-   * current values in that range are inconsistent, you may want to
-   * display the toggle in an “in between” state. This function turns on
-   * “in between” display.  Normally you would turn off the inconsistent
-   * state again if the user toggles the toggle button. This has to be
-   * done manually, [gtk.toggle_button.ToggleButton.setInconsistent] only affects
-   * visual appearance, it doesn’t affect the semantics of the button.
-   * Params:
-   *   setting = %TRUE if state is inconsistent
-   */
+      If the user has selected a range of elements (such as some text or
+    spreadsheet cells) that are affected by a toggle button, and the
+    current values in that range are inconsistent, you may want to
+    display the toggle in an “in between” state. This function turns on
+    “in between” display.  Normally you would turn off the inconsistent
+    state again if the user toggles the toggle button. This has to be
+    done manually, [gtk.toggle_button.ToggleButton.setInconsistent] only affects
+    visual appearance, it doesn’t affect the semantics of the button.
+    Params:
+      setting =       true if state is inconsistent
+  */
   void setInconsistent(bool setting)
   {
     gtk_toggle_button_set_inconsistent(cast(GtkToggleButton*)cPtr, setting);
   }
 
   /**
-   * Sets whether the button is displayed as a separate indicator and label.
-   * You can call this function on a checkbutton or a radiobutton with
-   * draw_indicator \= %FALSE to make the button look like a normal button.
-   * This can be used to create linked strip of buttons that work like
-   * a #GtkStackSwitcher.
-   * This function only affects instances of classes like #GtkCheckButton
-   * and #GtkRadioButton that derive from #GtkToggleButton,
-   * not instances of #GtkToggleButton itself.
-   * Params:
-   *   drawIndicator = if %TRUE, draw the button as a separate indicator
-   *     and label; if %FALSE, draw the button like a normal button
-   */
+      Sets whether the button is displayed as a separate indicator and label.
+    You can call this function on a checkbutton or a radiobutton with
+    draw_indicator = false to make the button look like a normal button.
+    
+    This can be used to create linked strip of buttons that work like
+    a #GtkStackSwitcher.
+    
+    This function only affects instances of classes like #GtkCheckButton
+    and #GtkRadioButton that derive from #GtkToggleButton,
+    not instances of #GtkToggleButton itself.
+    Params:
+      drawIndicator =       if true, draw the button as a separate indicator
+        and label; if false, draw the button like a normal button
+  */
   void setMode(bool drawIndicator)
   {
     gtk_toggle_button_set_mode(cast(GtkToggleButton*)cPtr, drawIndicator);
   }
 
   /**
-   * Emits the #GtkToggleButton::toggled signal on the
-   * #GtkToggleButton. There is no good reason for an
-   * application ever to call this function.
-   */
+      Emits the #GtkToggleButton::toggled signal on the
+    #GtkToggleButton. There is no good reason for an
+    application ever to call this function.
+  */
   void toggled()
   {
     gtk_toggle_button_toggled(cast(GtkToggleButton*)cPtr);
   }
 
   /**
-   * Should be connected if you wish to perform an action whenever the
-   * #GtkToggleButton's state is changed.
-   *   toggleButton = the instance the signal is connected to
-   */
+      Should be connected if you wish to perform an action whenever the
+    #GtkToggleButton's state is changed.
+  
+    ## Parameters
+    $(LIST
+      * $(B toggleButton) the instance the signal is connected to
+    )
+  */
   alias ToggledCallbackDlg = void delegate(gtk.toggle_button.ToggleButton toggleButton);
+
+  /** ditto */
   alias ToggledCallbackFunc = void function(gtk.toggle_button.ToggleButton toggleButton);
 
   /**
-   * Connect to Toggled signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Toggled signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectToggled(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToggledCallbackDlg) || is(T : ToggledCallbackFunc))
   {

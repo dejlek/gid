@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class S3GlobalOptions : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class S3GlobalOptions : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowS3GlobalOptions* _cretval;

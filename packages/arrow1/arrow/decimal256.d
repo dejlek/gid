@@ -8,6 +8,7 @@ import glib.bytes;
 import glib.error;
 import gobject.object;
 
+/** */
 class Decimal256 : gobject.object.ObjectG
 {
 
@@ -27,6 +28,7 @@ class Decimal256 : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   static arrow.decimal256.Decimal256 newInteger(long data)
   {
     GArrowDecimal256* _cretval;
@@ -35,6 +37,7 @@ class Decimal256 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   static arrow.decimal256.Decimal256 newString(string data)
   {
     GArrowDecimal256* _cretval;
@@ -48,13 +51,14 @@ class Decimal256 : gobject.object.ObjectG
   }
 
   /**
-   * Computes the absolute value of the decimal destructively.
-   */
+      Computes the absolute value of the decimal destructively.
+  */
   void abs()
   {
     garrow_decimal256_abs(cast(GArrowDecimal256*)cPtr);
   }
 
+  /** */
   arrow.decimal256.Decimal256 copy()
   {
     GArrowDecimal256* _cretval;
@@ -63,6 +67,7 @@ class Decimal256 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.decimal256.Decimal256 divide(arrow.decimal256.Decimal256 right, out arrow.decimal256.Decimal256 remainder)
   {
     GArrowDecimal256* _cretval;
@@ -76,6 +81,7 @@ class Decimal256 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equal(arrow.decimal256.Decimal256 otherDecimal)
   {
     bool _retval;
@@ -83,6 +89,7 @@ class Decimal256 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool greaterThan(arrow.decimal256.Decimal256 otherDecimal)
   {
     bool _retval;
@@ -90,6 +97,7 @@ class Decimal256 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool greaterThanOrEqual(arrow.decimal256.Decimal256 otherDecimal)
   {
     bool _retval;
@@ -97,6 +105,7 @@ class Decimal256 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool lessThan(arrow.decimal256.Decimal256 otherDecimal)
   {
     bool _retval;
@@ -104,6 +113,7 @@ class Decimal256 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool lessThanOrEqual(arrow.decimal256.Decimal256 otherDecimal)
   {
     bool _retval;
@@ -111,6 +121,7 @@ class Decimal256 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.decimal256.Decimal256 multiply(arrow.decimal256.Decimal256 right)
   {
     GArrowDecimal256* _cretval;
@@ -120,13 +131,14 @@ class Decimal256 : gobject.object.ObjectG
   }
 
   /**
-   * Negate the current value of the decimal destructively.
-   */
+      Negate the current value of the decimal destructively.
+  */
   void negate()
   {
     garrow_decimal256_negate(cast(GArrowDecimal256*)cPtr);
   }
 
+  /** */
   bool notEqual(arrow.decimal256.Decimal256 otherDecimal)
   {
     bool _retval;
@@ -134,6 +146,7 @@ class Decimal256 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.decimal256.Decimal256 plus(arrow.decimal256.Decimal256 right)
   {
     GArrowDecimal256* _cretval;
@@ -142,6 +155,7 @@ class Decimal256 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.decimal256.Decimal256 rescale(int originalScale, int newScale)
   {
     GArrowDecimal256* _cretval;
@@ -153,6 +167,7 @@ class Decimal256 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   glib.bytes.Bytes toBytes()
   {
     GBytes* _cretval;
@@ -161,6 +176,7 @@ class Decimal256 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;
@@ -169,6 +185,7 @@ class Decimal256 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toStringScale(int scale)
   {
     char* _cretval;

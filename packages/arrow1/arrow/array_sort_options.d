@@ -6,6 +6,7 @@ import arrow.function_options;
 import arrow.types;
 import gid.gid;
 
+/** */
 class ArraySortOptions : arrow.function_options.FunctionOptions
 {
 
@@ -25,6 +26,7 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
     return getType();
   }
 
+  /** */
   this(arrow.types.SortOrder order)
   {
     GArrowArraySortOptions* _cretval;
@@ -34,6 +36,7 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
 
   alias equal = arrow.function_options.FunctionOptions.equal;
 
+  /** */
   bool equal(arrow.array_sort_options.ArraySortOptions otherOptions)
   {
     bool _retval;

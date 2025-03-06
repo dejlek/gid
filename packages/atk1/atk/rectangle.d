@@ -7,9 +7,9 @@ import gid.gid;
 import gobject.boxed;
 
 /**
- * A data structure for holding a rectangle. Those coordinates are
- * relative to the component top-level parent.
- */
+    A data structure for holding a rectangle. Those coordinates are
+  relative to the component top-level parent.
+*/
 class Rectangle : gobject.boxed.Boxed
 {
 

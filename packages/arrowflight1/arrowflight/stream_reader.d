@@ -6,6 +6,7 @@ import arrowflight.record_batch_reader;
 import arrowflight.types;
 import gid.gid;
 
+/** */
 class StreamReader : arrowflight.record_batch_reader.RecordBatchReader
 {
 

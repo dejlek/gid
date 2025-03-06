@@ -7,10 +7,10 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * A `GtkRequisition` represents the desired size of a widget. See
- * [GtkWidget’s geometry management section](class.Widget.html#height-for-width-geometry-management) for
- * more information.
- */
+    A [gtk.requisition.Requisition] represents the desired size of a widget. See
+  [GtkWidget’s geometry management section](class.Widget.html#height-for-width-geometry-management) for
+  more information.
+*/
 class Requisition : gobject.boxed.Boxed
 {
 
@@ -56,12 +56,13 @@ class Requisition : gobject.boxed.Boxed
   }
 
   /**
-   * Allocates a new `GtkRequisition`.
-   * The struct is initialized to zero.
-   * Returns: a new empty `GtkRequisition`. The newly
-   *   allocated `GtkRequisition` should be freed with
-   *   [gtk.requisition.Requisition.free]
-   */
+      Allocates a new [gtk.requisition.Requisition].
+    
+    The struct is initialized to zero.
+    Returns:     a new empty [gtk.requisition.Requisition]. The newly
+        allocated [gtk.requisition.Requisition] should be freed with
+        [gtk.requisition.Requisition.free]
+  */
   this()
   {
     GtkRequisition* _cretval;
@@ -70,9 +71,9 @@ class Requisition : gobject.boxed.Boxed
   }
 
   /**
-   * Copies a `GtkRequisition`.
-   * Returns: a copy of requisition
-   */
+      Copies a [gtk.requisition.Requisition].
+    Returns:     a copy of requisition
+  */
   gtk.requisition.Requisition copy()
   {
     GtkRequisition* _cretval;

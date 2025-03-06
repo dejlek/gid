@@ -7,6 +7,7 @@ import arrowflight.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class ServerOptions : gobject.object.ObjectG
 {
 
@@ -26,6 +27,7 @@ class ServerOptions : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrowflight.location.Location location)
   {
     GAFlightServerOptions* _cretval;

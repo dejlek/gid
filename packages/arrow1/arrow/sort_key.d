@@ -7,6 +7,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class SortKey : gobject.object.ObjectG
 {
 
@@ -26,6 +27,7 @@ class SortKey : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(string target, arrow.types.SortOrder order)
   {
     GArrowSortKey* _cretval;
@@ -37,6 +39,7 @@ class SortKey : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool equal(arrow.sort_key.SortKey otherSortKey)
   {
     bool _retval;

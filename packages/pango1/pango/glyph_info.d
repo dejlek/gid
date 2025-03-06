@@ -6,9 +6,9 @@ import pango.c.types;
 import pango.types;
 
 /**
- * A `PangoGlyphInfo` structure represents a single glyph with
- * positioning information and visual attributes.
- */
+    A [pango.glyph_info.GlyphInfo] structure represents a single glyph with
+  positioning information and visual attributes.
+*/
 class GlyphInfo
 {
   PangoGlyphInfo cInstance;

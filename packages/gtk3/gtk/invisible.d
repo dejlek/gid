@@ -13,11 +13,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * The #GtkInvisible widget is used internally in GTK+, and is probably not
- * very useful for application developers.
- * It is used for reliable pointer grabs and selection handling in the code
- * for drag-and-drop.
- */
+    The #GtkInvisible widget is used internally in GTK+, and is probably not
+  very useful for application developers.
+  
+  It is used for reliable pointer grabs and selection handling in the code
+  for drag-and-drop.
+*/
 class Invisible : gtk.widget.Widget
 {
 
@@ -38,9 +39,9 @@ class Invisible : gtk.widget.Widget
   }
 
   /**
-   * Creates a new #GtkInvisible.
-   * Returns: a new #GtkInvisible.
-   */
+      Creates a new #GtkInvisible.
+    Returns:     a new #GtkInvisible.
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -49,12 +50,12 @@ class Invisible : gtk.widget.Widget
   }
 
   /**
-   * Creates a new #GtkInvisible object for a specified screen
-   * Params:
-   *   screen = a #GdkScreen which identifies on which
-   *     the new #GtkInvisible will be created.
-   * Returns: a newly created #GtkInvisible object
-   */
+      Creates a new #GtkInvisible object for a specified screen
+    Params:
+      screen =       a #GdkScreen which identifies on which
+            the new #GtkInvisible will be created.
+    Returns:     a newly created #GtkInvisible object
+  */
   static gtk.invisible.Invisible newForScreen(gdk.screen.Screen screen)
   {
     GtkWidget* _cretval;
@@ -64,9 +65,9 @@ class Invisible : gtk.widget.Widget
   }
 
   /**
-   * Returns the #GdkScreen object associated with invisible
-   * Returns: the associated #GdkScreen.
-   */
+      Returns the #GdkScreen object associated with invisible
+    Returns:     the associated #GdkScreen.
+  */
   override gdk.screen.Screen getScreen()
   {
     GdkScreen* _cretval;
@@ -76,10 +77,10 @@ class Invisible : gtk.widget.Widget
   }
 
   /**
-   * Sets the #GdkScreen where the #GtkInvisible object will be displayed.
-   * Params:
-   *   screen = a #GdkScreen.
-   */
+      Sets the #GdkScreen where the #GtkInvisible object will be displayed.
+    Params:
+      screen =       a #GdkScreen.
+  */
   void setScreen(gdk.screen.Screen screen)
   {
     gtk_invisible_set_screen(cast(GtkInvisible*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);

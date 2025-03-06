@@ -9,15 +9,16 @@ import gtk.cell_renderer_text;
 import gtk.types;
 
 /**
- * Renders a keyboard accelerator in a cell
- * `GtkCellRendererAccel` displays a keyboard accelerator $(LPAREN)i.e. a key
- * combination like `Control + a`$(RPAREN). If the cell renderer is editable,
- * the accelerator can be changed by simply typing the new combination.
+    Renders a keyboard accelerator in a cell
+  
+  [gtk.cell_renderer_accel.CellRendererAccel] displays a keyboard accelerator (i.e. a key
+  combination like `Control + a`). If the cell renderer is editable,
+  the accelerator can be changed by simply typing the new combination.
 
- * Deprecated: Applications editing keyboard accelerators should
- *   provide their own implementation according to platform design
- *   guidelines
- */
+  Deprecated:     Applications editing keyboard accelerators should
+      provide their own implementation according to platform design
+      guidelines
+*/
 class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
 {
 
@@ -38,9 +39,9 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
   }
 
   /**
-   * Creates a new `GtkCellRendererAccel`.
-   * Returns: the new cell renderer
-   */
+      Creates a new [gtk.cell_renderer_accel.CellRendererAccel].
+    Returns:     the new cell renderer
+  */
   this()
   {
     GtkCellRenderer* _cretval;
@@ -49,21 +50,26 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
   }
 
   /**
-   * Gets emitted when the user has removed the accelerator.
-   * Params
-   *   pathString = the path identifying the row of the edited cell
-   *   cellRendererAccel = the instance the signal is connected to
-   */
+      Gets emitted when the user has removed the accelerator.
+  
+    ## Parameters
+    $(LIST
+      * $(B pathString)       the path identifying the row of the edited cell
+      * $(B cellRendererAccel) the instance the signal is connected to
+    )
+  */
   alias AccelClearedCallbackDlg = void delegate(string pathString, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel);
+
+  /** ditto */
   alias AccelClearedCallbackFunc = void function(string pathString, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel);
 
   /**
-   * Connect to AccelCleared signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to AccelCleared signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectAccelCleared(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AccelClearedCallbackDlg) || is(T : AccelClearedCallbackFunc))
   {
@@ -81,24 +87,29 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
   }
 
   /**
-   * Gets emitted when the user has selected a new accelerator.
-   * Params
-   *   pathString = the path identifying the row of the edited cell
-   *   accelKey = the new accelerator keyval
-   *   accelMods = the new accelerator modifier mask
-   *   hardwareKeycode = the keycode of the new accelerator
-   *   cellRendererAccel = the instance the signal is connected to
-   */
+      Gets emitted when the user has selected a new accelerator.
+  
+    ## Parameters
+    $(LIST
+      * $(B pathString)       the path identifying the row of the edited cell
+      * $(B accelKey)       the new accelerator keyval
+      * $(B accelMods)       the new accelerator modifier mask
+      * $(B hardwareKeycode)       the keycode of the new accelerator
+      * $(B cellRendererAccel) the instance the signal is connected to
+    )
+  */
   alias AccelEditedCallbackDlg = void delegate(string pathString, uint accelKey, gdk.types.ModifierType accelMods, uint hardwareKeycode, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel);
+
+  /** ditto */
   alias AccelEditedCallbackFunc = void function(string pathString, uint accelKey, gdk.types.ModifierType accelMods, uint hardwareKeycode, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel);
 
   /**
-   * Connect to AccelEdited signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to AccelEdited signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectAccelEdited(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AccelEditedCallbackDlg) || is(T : AccelEditedCallbackFunc))
   {

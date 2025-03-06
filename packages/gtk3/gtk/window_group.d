@@ -10,20 +10,22 @@ import gtk.widget;
 import gtk.window;
 
 /**
- * A #GtkWindowGroup restricts the effect of grabs to windows
- * in the same group, thereby making window groups almost behave
- * like separate applications.
- * A window can be a member in at most one window group at a time.
- * Windows that have not been explicitly assigned to a group are
- * implicitly treated like windows of the default window group.
- * GtkWindowGroup objects are referenced by each window in the group,
- * so once you have added all windows to a GtkWindowGroup, you can drop
- * the initial reference to the window group with [gobject.object.ObjectG.unref]. If the
- * windows in the window group are subsequently destroyed, then they will
- * be removed from the window group and drop their references on the window
- * group; when all window have been removed, the window group will be
- * freed.
- */
+    A #GtkWindowGroup restricts the effect of grabs to windows
+  in the same group, thereby making window groups almost behave
+  like separate applications.
+  
+  A window can be a member in at most one window group at a time.
+  Windows that have not been explicitly assigned to a group are
+  implicitly treated like windows of the default window group.
+  
+  GtkWindowGroup objects are referenced by each window in the group,
+  so once you have added all windows to a GtkWindowGroup, you can drop
+  the initial reference to the window group with [gobject.object.ObjectG.unref]. If the
+  windows in the window group are subsequently destroyed, then they will
+  be removed from the window group and drop their references on the window
+  group; when all window have been removed, the window group will be
+  freed.
+*/
 class WindowGroup : gobject.object.ObjectG
 {
 
@@ -44,10 +46,10 @@ class WindowGroup : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #GtkWindowGroup object. Grabs added with
-   * [gtk.widget.Widget.grabAdd] only affect windows within the same #GtkWindowGroup.
-   * Returns: a new #GtkWindowGroup.
-   */
+      Creates a new #GtkWindowGroup object. Grabs added with
+    [gtk.widget.Widget.grabAdd] only affect windows within the same #GtkWindowGroup.
+    Returns:     a new #GtkWindowGroup.
+  */
   this()
   {
     GtkWindowGroup* _cretval;
@@ -56,21 +58,21 @@ class WindowGroup : gobject.object.ObjectG
   }
 
   /**
-   * Adds a window to a #GtkWindowGroup.
-   * Params:
-   *   window = the #GtkWindow to add
-   */
+      Adds a window to a #GtkWindowGroup.
+    Params:
+      window =       the #GtkWindow to add
+  */
   void addWindow(gtk.window.Window window)
   {
     gtk_window_group_add_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
   }
 
   /**
-   * Returns the current grab widget for device, or %NULL if none.
-   * Params:
-   *   device = a #GdkDevice
-   * Returns: The grab widget, or %NULL
-   */
+      Returns the current grab widget for device, or null if none.
+    Params:
+      device =       a #GdkDevice
+    Returns:     The grab widget, or null
+  */
   gtk.widget.Widget getCurrentDeviceGrab(gdk.device.Device device)
   {
     GtkWidget* _cretval;
@@ -80,10 +82,10 @@ class WindowGroup : gobject.object.ObjectG
   }
 
   /**
-   * Gets the current grab widget of the given group,
-   * see [gtk.widget.Widget.grabAdd].
-   * Returns: the current grab widget of the group
-   */
+      Gets the current grab widget of the given group,
+    see [gtk.widget.Widget.grabAdd].
+    Returns:     the current grab widget of the group
+  */
   gtk.widget.Widget getCurrentGrab()
   {
     GtkWidget* _cretval;
@@ -93,10 +95,10 @@ class WindowGroup : gobject.object.ObjectG
   }
 
   /**
-   * Returns a list of the #GtkWindows that belong to window_group.
-   * Returns: A
-   *   newly-allocated list of windows inside the group.
-   */
+      Returns a list of the #GtkWindows that belong to window_group.
+    Returns:     A
+        newly-allocated list of windows inside the group.
+  */
   gtk.window.Window[] listWindows()
   {
     GList* _cretval;
@@ -106,10 +108,10 @@ class WindowGroup : gobject.object.ObjectG
   }
 
   /**
-   * Removes a window from a #GtkWindowGroup.
-   * Params:
-   *   window = the #GtkWindow to remove
-   */
+      Removes a window from a #GtkWindowGroup.
+    Params:
+      window =       the #GtkWindow to remove
+  */
   void removeWindow(gtk.window.Window window)
   {
     gtk_window_group_remove_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);

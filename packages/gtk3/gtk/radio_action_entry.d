@@ -6,9 +6,9 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * #GtkRadioActionEntry structs are used with
- * [gtk.action_group.ActionGroup.addRadioActions] to construct groups of radio actions.
- */
+    #GtkRadioActionEntry structs are used with
+  [gtk.action_group.ActionGroup.addRadioActions] to construct groups of radio actions.
+*/
 class RadioActionEntry
 {
   GtkRadioActionEntry cInstance;

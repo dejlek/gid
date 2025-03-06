@@ -8,12 +8,13 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkListHeader` is used by list widgets to represent the headers they
- * display.
- * `GtkListHeader` objects are managed just like [gtk.list_item.ListItem]
- * objects via their factory, but provide a different set of properties suitable
- * for managing the header instead of individual items.
- */
+    [gtk.list_header.ListHeader] is used by list widgets to represent the headers they
+  display.
+  
+  [gtk.list_header.ListHeader] objects are managed just like [gtk.list_item.ListItem]
+  objects via their factory, but provide a different set of properties suitable
+  for managing the header instead of individual items.
+*/
 class ListHeader : gobject.object.ObjectG
 {
 
@@ -34,10 +35,10 @@ class ListHeader : gobject.object.ObjectG
   }
 
   /**
-   * Gets the child previously set via [gtk.list_header.ListHeader.setChild] or
-   * %NULL if none was set.
-   * Returns: The child
-   */
+      Gets the child previously set via [gtk.list_header.ListHeader.setChild] or
+    null if none was set.
+    Returns:     The child
+  */
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
@@ -47,11 +48,12 @@ class ListHeader : gobject.object.ObjectG
   }
 
   /**
-   * Gets the end position in the model of the section that self is
-   * currently the header for.
-   * If self is unbound, %GTK_INVALID_LIST_POSITION is returned.
-   * Returns: The end position of the section
-   */
+      Gets the end position in the model of the section that self is
+    currently the header for.
+    
+    If self is unbound, `GTK_INVALID_LIST_POSITION` is returned.
+    Returns:     The end position of the section
+  */
   uint getEnd()
   {
     uint _retval;
@@ -60,12 +62,13 @@ class ListHeader : gobject.object.ObjectG
   }
 
   /**
-   * Gets the model item at the start of the section.
-   * This is the item that occupies the list model at position
-   * [gtk.list_header.ListHeader.guint].
-   * If self is unbound, this function returns %NULL.
-   * Returns: The item displayed
-   */
+      Gets the model item at the start of the section.
+    This is the item that occupies the list model at position
+    [gtk.list_header.ListHeader.guint].
+    
+    If self is unbound, this function returns null.
+    Returns:     The item displayed
+  */
   gobject.object.ObjectG getItem()
   {
     ObjectC* _cretval;
@@ -75,10 +78,11 @@ class ListHeader : gobject.object.ObjectG
   }
 
   /**
-   * Gets the the number of items in the section.
-   * If self is unbound, 0 is returned.
-   * Returns: The number of items in the section
-   */
+      Gets the the number of items in the section.
+    
+    If self is unbound, 0 is returned.
+    Returns:     The number of items in the section
+  */
   uint getNItems()
   {
     uint _retval;
@@ -87,11 +91,12 @@ class ListHeader : gobject.object.ObjectG
   }
 
   /**
-   * Gets the start position in the model of the section that self is
-   * currently the header for.
-   * If self is unbound, %GTK_INVALID_LIST_POSITION is returned.
-   * Returns: The start position of the section
-   */
+      Gets the start position in the model of the section that self is
+    currently the header for.
+    
+    If self is unbound, `GTK_INVALID_LIST_POSITION` is returned.
+    Returns:     The start position of the section
+  */
   uint getStart()
   {
     uint _retval;
@@ -100,13 +105,14 @@ class ListHeader : gobject.object.ObjectG
   }
 
   /**
-   * Sets the child to be used for this listitem.
-   * This function is typically called by applications when
-   * setting up a header so that the widget can be reused when
-   * binding it multiple times.
-   * Params:
-   *   child = The list item's child or %NULL to unset
-   */
+      Sets the child to be used for this listitem.
+    
+    This function is typically called by applications when
+    setting up a header so that the widget can be reused when
+    binding it multiple times.
+    Params:
+      child =       The list item's child or null to unset
+  */
   void setChild(gtk.widget.Widget child = null)
   {
     gtk_list_header_set_child(cast(GtkListHeader*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);

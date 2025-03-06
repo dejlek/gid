@@ -6,10 +6,10 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * Data type for holding variation data. Registered OpenType
- * variation-axis tags are listed in
- * [OpenType Axis Tag Registry](https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg).
- */
+    Data type for holding variation data. Registered OpenType
+  variation-axis tags are listed in
+  [OpenType Axis Tag Registry](https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg).
+*/
 class Variation
 {
   hb_variation_t cInstance;

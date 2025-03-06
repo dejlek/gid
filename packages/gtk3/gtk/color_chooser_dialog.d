@@ -14,9 +14,9 @@ import gtk.types;
 import gtk.window;
 
 /**
- * The #GtkColorChooserDialog widget is a dialog for choosing
- * a color. It implements the #GtkColorChooser interface.
- */
+    The #GtkColorChooserDialog widget is a dialog for choosing
+  a color. It implements the #GtkColorChooser interface.
+*/
 class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
 {
 
@@ -39,12 +39,12 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
   mixin ColorChooserT!();
 
   /**
-   * Creates a new #GtkColorChooserDialog.
-   * Params:
-   *   title = Title of the dialog, or %NULL
-   *   parent = Transient parent of the dialog, or %NULL
-   * Returns: a new #GtkColorChooserDialog
-   */
+      Creates a new #GtkColorChooserDialog.
+    Params:
+      title =       Title of the dialog, or null
+      parent =       Transient parent of the dialog, or null
+    Returns:     a new #GtkColorChooserDialog
+  */
   this(string title = null, gtk.window.Window parent = null)
   {
     GtkWidget* _cretval;

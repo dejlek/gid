@@ -9,14 +9,16 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkLayoutChild` is the base class for objects that are meant to hold
- * layout properties.
- * If a `GtkLayoutManager` has per-child properties, like their packing type,
- * or the horizontal and vertical span, or the icon name, then the layout
- * manager should use a `GtkLayoutChild` implementation to store those properties.
- * A `GtkLayoutChild` instance is only ever valid while a widget is part
- * of a layout.
- */
+    [gtk.layout_child.LayoutChild] is the base class for objects that are meant to hold
+  layout properties.
+  
+  If a [gtk.layout_manager.LayoutManager] has per-child properties, like their packing type,
+  or the horizontal and vertical span, or the icon name, then the layout
+  manager should use a [gtk.layout_child.LayoutChild] implementation to store those properties.
+  
+  A [gtk.layout_child.LayoutChild] instance is only ever valid while a widget is part
+  of a layout.
+*/
 class LayoutChild : gobject.object.ObjectG
 {
 
@@ -37,9 +39,9 @@ class LayoutChild : gobject.object.ObjectG
   }
 
   /**
-   * Retrieves the `GtkWidget` associated to the given layout_child.
-   * Returns: a `GtkWidget`
-   */
+      Retrieves the [gtk.widget.Widget] associated to the given layout_child.
+    Returns:     a [gtk.widget.Widget]
+  */
   gtk.widget.Widget getChildWidget()
   {
     GtkWidget* _cretval;
@@ -49,10 +51,10 @@ class LayoutChild : gobject.object.ObjectG
   }
 
   /**
-   * Retrieves the `GtkLayoutManager` instance that created the
-   * given layout_child.
-   * Returns: a `GtkLayoutManager`
-   */
+      Retrieves the [gtk.layout_manager.LayoutManager] instance that created the
+    given layout_child.
+    Returns:     a [gtk.layout_manager.LayoutManager]
+  */
   gtk.layout_manager.LayoutManager getLayoutManager()
   {
     GtkLayoutManager* _cretval;

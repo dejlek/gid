@@ -17,22 +17,27 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * A GtkLinkButton is a #GtkButton with a hyperlink, similar to the one
- * used by web browsers, which triggers an action when clicked. It is useful
- * to show quick links to resources.
- * A link button is created by calling either [gtk.link_button.LinkButton.new_] or
- * [gtk.link_button.LinkButton.newWithLabel]. If using the former, the URI you pass
- * to the constructor is used as a label for the widget.
- * The URI bound to a GtkLinkButton can be set specifically using
- * [gtk.link_button.LinkButton.setUri], and retrieved using [gtk.link_button.LinkButton.getUri].
- * By default, GtkLinkButton calls [gtk.global.showUriOnWindow] when the button is
- * clicked. This behaviour can be overridden by connecting to the
- * #GtkLinkButton::activate-link signal and returning %TRUE from the
- * signal handler.
- * # CSS nodes
- * GtkLinkButton has a single CSS node with name button. To differentiate
- * it from a plain #GtkButton, it gets the .link style class.
- */
+    A GtkLinkButton is a #GtkButton with a hyperlink, similar to the one
+  used by web browsers, which triggers an action when clicked. It is useful
+  to show quick links to resources.
+  
+  A link button is created by calling either [gtk.link_button.LinkButton.new_] or
+  [gtk.link_button.LinkButton.newWithLabel]. If using the former, the URI you pass
+  to the constructor is used as a label for the widget.
+  
+  The URI bound to a GtkLinkButton can be set specifically using
+  [gtk.link_button.LinkButton.setUri], and retrieved using [gtk.link_button.LinkButton.getUri].
+  
+  By default, GtkLinkButton calls [gtk.global.showUriOnWindow] when the button is
+  clicked. This behaviour can be overridden by connecting to the
+  #GtkLinkButton::activate-link signal and returning true from the
+  signal handler.
+  
+  # CSS nodes
+  
+  GtkLinkButton has a single CSS node with name button. To differentiate
+  it from a plain #GtkButton, it gets the .link style class.
+*/
 class LinkButton : gtk.button.Button
 {
 
@@ -53,11 +58,11 @@ class LinkButton : gtk.button.Button
   }
 
   /**
-   * Creates a new #GtkLinkButton with the URI as its text.
-   * Params:
-   *   uri = a valid URI
-   * Returns: a new link button widget.
-   */
+      Creates a new #GtkLinkButton with the URI as its text.
+    Params:
+      uri =       a valid URI
+    Returns:     a new link button widget.
+  */
   this(string uri)
   {
     GtkWidget* _cretval;
@@ -67,12 +72,12 @@ class LinkButton : gtk.button.Button
   }
 
   /**
-   * Creates a new #GtkLinkButton containing a label.
-   * Params:
-   *   uri = a valid URI
-   *   label = the text of the button
-   * Returns: a new link button widget.
-   */
+      Creates a new #GtkLinkButton containing a label.
+    Params:
+      uri =       a valid URI
+      label =       the text of the button
+    Returns:     a new link button widget.
+  */
   static gtk.link_button.LinkButton newWithLabel(string uri, string label = null)
   {
     GtkWidget* _cretval;
@@ -84,10 +89,10 @@ class LinkButton : gtk.button.Button
   }
 
   /**
-   * Retrieves the URI set using [gtk.link_button.LinkButton.setUri].
-   * Returns: a valid URI.  The returned string is owned by the link button
-   *   and should not be modified or freed.
-   */
+      Retrieves the URI set using [gtk.link_button.LinkButton.setUri].
+    Returns:     a valid URI.  The returned string is owned by the link button
+        and should not be modified or freed.
+  */
   string getUri()
   {
     const(char)* _cretval;
@@ -97,12 +102,13 @@ class LinkButton : gtk.button.Button
   }
 
   /**
-   * Retrieves the “visited” state of the URI where the #GtkLinkButton
-   * points. The button becomes visited when it is clicked. If the URI
-   * is changed on the button, the “visited” state is unset again.
-   * The state may also be changed using [gtk.link_button.LinkButton.setVisited].
-   * Returns: %TRUE if the link has been visited, %FALSE otherwise
-   */
+      Retrieves the “visited” state of the URI where the #GtkLinkButton
+    points. The button becomes visited when it is clicked. If the URI
+    is changed on the button, the “visited” state is unset again.
+    
+    The state may also be changed using [gtk.link_button.LinkButton.setVisited].
+    Returns:     true if the link has been visited, false otherwise
+  */
   bool getVisited()
   {
     bool _retval;
@@ -111,11 +117,11 @@ class LinkButton : gtk.button.Button
   }
 
   /**
-   * Sets uri as the URI where the #GtkLinkButton points. As a side-effect
-   * this unsets the “visited” state of the button.
-   * Params:
-   *   uri = a valid URI
-   */
+      Sets uri as the URI where the #GtkLinkButton points. As a side-effect
+    this unsets the “visited” state of the button.
+    Params:
+      uri =       a valid URI
+  */
   void setUri(string uri)
   {
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -123,37 +129,45 @@ class LinkButton : gtk.button.Button
   }
 
   /**
-   * Sets the “visited” state of the URI where the #GtkLinkButton
-   * points.  See [gtk.link_button.LinkButton.getVisited] for more details.
-   * Params:
-   *   visited = the new “visited” state
-   */
+      Sets the “visited” state of the URI where the #GtkLinkButton
+    points.  See [gtk.link_button.LinkButton.getVisited] for more details.
+    Params:
+      visited =       the new “visited” state
+  */
   void setVisited(bool visited)
   {
     gtk_link_button_set_visited(cast(GtkLinkButton*)cPtr, visited);
   }
 
   /**
-   * The ::activate-link signal is emitted each time the #GtkLinkButton
-   * has been clicked.
-   * The default handler will call [gtk.global.showUriOnWindow] with the URI stored inside
-   * the #GtkLinkButton:uri property.
-   * To override the default behavior, you can connect to the ::activate-link
-   * signal and stop the propagation of the signal by returning %TRUE from
-   * your handler.
-   *   linkButton = the instance the signal is connected to
-   * Returns:
-   */
+      The ::activate-link signal is emitted each time the #GtkLinkButton
+    has been clicked.
+    
+    The default handler will call [gtk.global.showUriOnWindow] with the URI stored inside
+    the #GtkLinkButton:uri property.
+    
+    To override the default behavior, you can connect to the ::activate-link
+    signal and stop the propagation of the signal by returning true from
+    your handler.
+  
+    ## Parameters
+    $(LIST
+      * $(B linkButton) the instance the signal is connected to
+    )
+    Returns: 
+  */
   alias ActivateLinkCallbackDlg = bool delegate(gtk.link_button.LinkButton linkButton);
+
+  /** ditto */
   alias ActivateLinkCallbackFunc = bool function(gtk.link_button.LinkButton linkButton);
 
   /**
-   * Connect to ActivateLink signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ActivateLink signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectActivateLink(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateLinkCallbackDlg) || is(T : ActivateLinkCallbackFunc))
   {

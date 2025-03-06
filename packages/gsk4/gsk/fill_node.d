@@ -8,9 +8,9 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node filling the area given by [gsk.path.Path]
- * and [gsk.types.FillRule] with the child node.
- */
+    A render node filling the area given by [gsk.path.Path]
+  and [gsk.types.FillRule] with the child node.
+*/
 class FillNode : gsk.render_node.RenderNode
 {
 
@@ -23,14 +23,14 @@ class FillNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Creates a `GskRenderNode` that will fill the child in the area
-   * given by path and fill_rule.
-   * Params:
-   *   child = The node to fill the area with
-   *   path = The path describing the area to fill
-   *   fillRule = The fill rule to use
-   * Returns: A new `GskRenderNode`
-   */
+      Creates a [gsk.render_node.RenderNode] that will fill the child in the area
+    given by path and fill_rule.
+    Params:
+      child =       The node to fill the area with
+      path =       The path describing the area to fill
+      fillRule =       The fill rule to use
+    Returns:     A new [gsk.render_node.RenderNode]
+  */
   this(gsk.render_node.RenderNode child, gsk.path.Path path, gsk.types.FillRule fillRule)
   {
     GskRenderNode* _cretval;
@@ -39,9 +39,9 @@ class FillNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Gets the child node that is getting drawn by the given node.
-   * Returns: The child that is getting drawn
-   */
+      Gets the child node that is getting drawn by the given node.
+    Returns:     The child that is getting drawn
+  */
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
@@ -51,9 +51,9 @@ class FillNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the fill rule used to determine how the path is filled.
-   * Returns: a `GskFillRule`
-   */
+      Retrieves the fill rule used to determine how the path is filled.
+    Returns:     a [gsk.types.FillRule]
+  */
   gsk.types.FillRule getFillRule()
   {
     GskFillRule _cretval;
@@ -63,10 +63,10 @@ class FillNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the path used to describe the area filled with the contents of
-   * the node.
-   * Returns: a `GskPath`
-   */
+      Retrieves the path used to describe the area filled with the contents of
+    the node.
+    Returns:     a [gsk.path.Path]
+  */
   gsk.path.Path getPath()
   {
     GskPath* _cretval;

@@ -82,12 +82,12 @@ version(Windows)
 
       if (auto symPtr = GetProcAddress(handle, cast(char*)toStringz(symbol)))
       {
-         *funcPtr = symPtr;
+        *funcPtr = symPtr;
         return;
       }
     }
 
-     *funcPtr = &gidSymbolNotFound;
+    *funcPtr = &gidSymbolNotFound;
 
     debug
     {
@@ -147,7 +147,7 @@ else // Linux or OSX
       {
         if (auto symPtr = dlsym(handle, cast(char*)toStringz(symbol)))
         {
-           *funcPtr = symPtr;
+          *funcPtr = symPtr;
           return;
         }
       }
@@ -155,7 +155,7 @@ else // Linux or OSX
         throw new Error("Failed to load library '" ~ lib ~ "': " ~ dlerror().fromStringz.idup);
     }
 
-     *funcPtr = &gidSymbolNotFound;
+    *funcPtr = &gidSymbolNotFound;
 
     debug
     {
@@ -198,6 +198,7 @@ void gidSymbolNotFound()
 {
   throw new Error("Attempted to execute a dynamic library function which was not found");
 }
+/** */
 class loader
 {
 }

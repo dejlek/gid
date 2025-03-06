@@ -9,20 +9,24 @@ import soup.message;
 import soup.types;
 
 /**
- * #SoupHSTSPolicy implements HTTP policies, as described by
- * [RFC 6797](http://tools.ietf.org/html/rfc6797).
- * @domain represents the host that this policy applies to. The domain
- * must be IDNA-canonicalized. [soup.hstspolicy.HSTSPolicy.new_] and related methods
- * will do this for you.
- * @max_age contains the 'max-age' value from the Strict Transport
- * Security header and indicates the time to live of this policy,
- * in seconds.
- * @expires will be non-%NULL if the policy has been set by the host and
- * hence has an expiry time. If @expires is %NULL, it indicates that the
- * policy is a permanent session policy set by the user agent.
- * If @include_subdomains is %TRUE, the Strict Transport Security policy
- * must also be enforced on subdomains of @domain.
- */
+    #SoupHSTSPolicy implements HTTP policies, as described by
+  [RFC 6797](http://tools.ietf.org/html/rfc6797).
+  
+  @domain represents the host that this policy applies to. The domain
+  must be IDNA-canonicalized. [soup.hstspolicy.HSTSPolicy.new_] and related methods
+  will do this for you.
+  
+  @max_age contains the 'max-age' value from the Strict Transport
+  Security header and indicates the time to live of this policy,
+  in seconds.
+  
+  @expires will be non-null if the policy has been set by the host and
+  hence has an expiry time. If @expires is null, it indicates that the
+  policy is a permanent session policy set by the user agent.
+  
+  If @include_subdomains is true, the Strict Transport Security policy
+  must also be enforced on subdomains of @domain.
+*/
 class HSTSPolicy : gobject.boxed.Boxed
 {
 
@@ -48,20 +52,23 @@ class HSTSPolicy : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a new #SoupHSTSPolicy with the given attributes.
-   * domain is a domain on which the strict transport security policy
-   * represented by this object must be enforced.
-   * max_age is used to set the "expires" attribute on the policy; pass
-   * %SOUP_HSTS_POLICY_MAX_AGE_PAST for an already-expired policy, or a
-   * lifetime in seconds.
-   * If include_subdomains is %TRUE, the strict transport security policy
-   * must also be enforced on all subdomains of domain.
-   * Params:
-   *   domain = policy domain or hostname
-   *   maxAge = max age of the policy
-   *   includeSubdomains = %TRUE if the policy applies on subdomains
-   * Returns: a new #SoupHSTSPolicy.
-   */
+      Creates a new #SoupHSTSPolicy with the given attributes.
+    
+    domain is a domain on which the strict transport security policy
+    represented by this object must be enforced.
+    
+    max_age is used to set the "expires" attribute on the policy; pass
+    `SOUP_HSTS_POLICY_MAX_AGE_PAST` for an already-expired policy, or a
+    lifetime in seconds.
+    
+    If include_subdomains is true, the strict transport security policy
+    must also be enforced on all subdomains of domain.
+    Params:
+      domain =       policy domain or hostname
+      maxAge =       max age of the policy
+      includeSubdomains =       true if the policy applies on subdomains
+    Returns:     a new #SoupHSTSPolicy.
+  */
   this(string domain, gulong maxAge, bool includeSubdomains)
   {
     SoupHSTSPolicy* _cretval;
@@ -71,13 +78,13 @@ class HSTSPolicy : gobject.boxed.Boxed
   }
 
   /**
-   * Parses msg's first "Strict-Transport-Security" response header and
-   * returns a #SoupHSTSPolicy.
-   * Params:
-   *   msg = a #SoupMessage
-   * Returns: a new #SoupHSTSPolicy, or %NULL if no valid
-   *   "Strict-Transport-Security" response header was found.
-   */
+      Parses msg's first "Strict-Transport-Security" response header and
+    returns a #SoupHSTSPolicy.
+    Params:
+      msg =       a #SoupMessage
+    Returns:     a new #SoupHSTSPolicy, or null if no valid
+        "Strict-Transport-Security" response header was found.
+  */
   static soup.hstspolicy.HSTSPolicy newFromResponse(soup.message.Message msg)
   {
     SoupHSTSPolicy* _cretval;
@@ -87,16 +94,17 @@ class HSTSPolicy : gobject.boxed.Boxed
   }
 
   /**
-   * Full version of [soup.hstspolicy.HSTSPolicy.new_], to use with an existing
-   * expiration date.
-   * See [soup.hstspolicy.HSTSPolicy.new_] for details.
-   * Params:
-   *   domain = policy domain or hostname
-   *   maxAge = max age of the policy
-   *   expires = the date of expiration of the policy or %NULL for a permanent policy
-   *   includeSubdomains = %TRUE if the policy applies on subdomains
-   * Returns: a new #SoupHSTSPolicy.
-   */
+      Full version of [soup.hstspolicy.HSTSPolicy.new_], to use with an existing
+    expiration date.
+    
+    See [soup.hstspolicy.HSTSPolicy.new_] for details.
+    Params:
+      domain =       policy domain or hostname
+      maxAge =       max age of the policy
+      expires =       the date of expiration of the policy or null for a permanent policy
+      includeSubdomains =       true if the policy applies on subdomains
+    Returns:     a new #SoupHSTSPolicy.
+  */
   static soup.hstspolicy.HSTSPolicy newFull(string domain, gulong maxAge, glib.date_time.DateTime expires, bool includeSubdomains)
   {
     SoupHSTSPolicy* _cretval;
@@ -107,21 +115,24 @@ class HSTSPolicy : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a new session #SoupHSTSPolicy with the given attributes.
-   * A session policy is a policy that is valid during the lifetime of
-   * the classHSTSEnforcer it is added to. Contrary to regular policies,
-   * it has no expiration date and is not stored in persistent
-   * enforcers. These policies are useful for user-agent to load their
-   * own or user-defined rules.
-   * domain is a domain on which the strict transport security policy
-   * represented by this object must be enforced.
-   * If include_subdomains is %TRUE, the strict transport security policy
-   * must also be enforced on all subdomains of domain.
-   * Params:
-   *   domain = policy domain or hostname
-   *   includeSubdomains = %TRUE if the policy applies on sub domains
-   * Returns: a new #SoupHSTSPolicy.
-   */
+      Creates a new session #SoupHSTSPolicy with the given attributes.
+    
+    A session policy is a policy that is valid during the lifetime of
+    the `classHSTSEnforcer` it is added to. Contrary to regular policies,
+    it has no expiration date and is not stored in persistent
+    enforcers. These policies are useful for user-agent to load their
+    own or user-defined rules.
+    
+    domain is a domain on which the strict transport security policy
+    represented by this object must be enforced.
+    
+    If include_subdomains is true, the strict transport security policy
+    must also be enforced on all subdomains of domain.
+    Params:
+      domain =       policy domain or hostname
+      includeSubdomains =       true if the policy applies on sub domains
+    Returns:     a new #SoupHSTSPolicy.
+  */
   static soup.hstspolicy.HSTSPolicy newSessionPolicy(string domain, bool includeSubdomains)
   {
     SoupHSTSPolicy* _cretval;
@@ -132,9 +143,9 @@ class HSTSPolicy : gobject.boxed.Boxed
   }
 
   /**
-   * Copies policy.
-   * Returns: a copy of policy
-   */
+      Copies policy.
+    Returns:     a copy of policy
+  */
   soup.hstspolicy.HSTSPolicy copy()
   {
     SoupHSTSPolicy* _cretval;
@@ -144,11 +155,11 @@ class HSTSPolicy : gobject.boxed.Boxed
   }
 
   /**
-   * Tests if policy1 and policy2 are equal.
-   * Params:
-   *   policy2 = a #SoupHSTSPolicy
-   * Returns: whether the policies are equal.
-   */
+      Tests if policy1 and policy2 are equal.
+    Params:
+      policy2 =       a #SoupHSTSPolicy
+    Returns:     whether the policies are equal.
+  */
   bool equal(soup.hstspolicy.HSTSPolicy policy2)
   {
     bool _retval;
@@ -157,9 +168,9 @@ class HSTSPolicy : gobject.boxed.Boxed
   }
 
   /**
-   * Gets policy's domain.
-   * Returns: policy's domain.
-   */
+      Gets policy's domain.
+    Returns:     policy's domain.
+  */
   string getDomain()
   {
     const(char)* _cretval;
@@ -169,9 +180,9 @@ class HSTSPolicy : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the expiration date for policy.
-   * Returns: A #GDateTime or %NULL if unset
-   */
+      Returns the expiration date for policy.
+    Returns:     A #GDateTime or null if unset
+  */
   glib.date_time.DateTime getExpires()
   {
     GDateTime* _cretval;
@@ -181,9 +192,9 @@ class HSTSPolicy : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the max age for policy.
-   * Returns: Max age in seconds
-   */
+      Returns the max age for policy.
+    Returns:     Max age in seconds
+  */
   gulong getMaxAge()
   {
     gulong _retval;
@@ -192,9 +203,9 @@ class HSTSPolicy : gobject.boxed.Boxed
   }
 
   /**
-   * Gets whether policy include its subdomains.
-   * Returns: %TRUE if policy includes subdomains, %FALSE otherwise.
-   */
+      Gets whether policy include its subdomains.
+    Returns:     true if policy includes subdomains, false otherwise.
+  */
   bool includesSubdomains()
   {
     bool _retval;
@@ -203,10 +214,11 @@ class HSTSPolicy : gobject.boxed.Boxed
   }
 
   /**
-   * Gets whether policy is expired.
-   * Permanent policies never expire.
-   * Returns: %TRUE if policy is expired, %FALSE otherwise.
-   */
+      Gets whether policy is expired.
+    
+    Permanent policies never expire.
+    Returns:     true if policy is expired, false otherwise.
+  */
   bool isExpired()
   {
     bool _retval;
@@ -215,10 +227,11 @@ class HSTSPolicy : gobject.boxed.Boxed
   }
 
   /**
-   * Gets whether policy is a non-permanent, non-expirable session policy.
-   * See [soup.hstspolicy.HSTSPolicy.newSessionPolicy] for details.
-   * Returns: %TRUE if policy is permanent, %FALSE otherwise
-   */
+      Gets whether policy is a non-permanent, non-expirable session policy.
+    
+    See [soup.hstspolicy.HSTSPolicy.newSessionPolicy] for details.
+    Returns:     true if policy is permanent, false otherwise
+  */
   bool isSessionPolicy()
   {
     bool _retval;

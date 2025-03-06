@@ -15,6 +15,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class ExecutePlan : gobject.object.ObjectG
 {
 
@@ -34,6 +35,7 @@ class ExecutePlan : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowExecutePlan* _cretval;
@@ -45,14 +47,14 @@ class ExecutePlan : gobject.object.ObjectG
   }
 
   /**
-   * This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for aggregate
-   * node.
-   * Params:
-   *   input = A #GArrowExecuteNode.
-   *   options = A #GArrowAggregateNodeOptions.
-   * Returns: A newly built and added #GArrowExecuteNode
-   *   for aggregation on success, %NULL on error.
-   */
+      This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for aggregate
+    node.
+    Params:
+      input =       A #GArrowExecuteNode.
+      options =       A #GArrowAggregateNodeOptions.
+    Returns:     A newly built and added #GArrowExecuteNode
+        for aggregation on success, null on error.
+  */
   arrow.execute_node.ExecuteNode buildAggregateNode(arrow.execute_node.ExecuteNode input, arrow.aggregate_node_options.AggregateNodeOptions options)
   {
     GArrowExecuteNode* _cretval;
@@ -65,14 +67,14 @@ class ExecutePlan : gobject.object.ObjectG
   }
 
   /**
-   * This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for filter
-   * node.
-   * Params:
-   *   input = A #GArrowExecuteNode.
-   *   options = A #GArrowFilterNodeOptions.
-   * Returns: A newly built and added #GArrowExecuteNode
-   *   for filter on success, %NULL on error.
-   */
+      This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for filter
+    node.
+    Params:
+      input =       A #GArrowExecuteNode.
+      options =       A #GArrowFilterNodeOptions.
+    Returns:     A newly built and added #GArrowExecuteNode
+        for filter on success, null on error.
+  */
   arrow.execute_node.ExecuteNode buildFilterNode(arrow.execute_node.ExecuteNode input, arrow.filter_node_options.FilterNodeOptions options)
   {
     GArrowExecuteNode* _cretval;
@@ -85,15 +87,15 @@ class ExecutePlan : gobject.object.ObjectG
   }
 
   /**
-   * This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for hash
-   * join node.
-   * Params:
-   *   left = A left #GArrowExecuteNode.
-   *   right = A right #GArrowExecuteNode.
-   *   options = A #GArrowHashJoinNodeOptions.
-   * Returns: A newly built and added #GArrowExecuteNode
-   *   for hash join on success, %NULL on error.
-   */
+      This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for hash
+    join node.
+    Params:
+      left =       A left #GArrowExecuteNode.
+      right =       A right #GArrowExecuteNode.
+      options =       A #GArrowHashJoinNodeOptions.
+    Returns:     A newly built and added #GArrowExecuteNode
+        for hash join on success, null on error.
+  */
   arrow.execute_node.ExecuteNode buildHashJoinNode(arrow.execute_node.ExecuteNode left, arrow.execute_node.ExecuteNode right, arrow.hash_join_node_options.HashJoinNodeOptions options)
   {
     GArrowExecuteNode* _cretval;
@@ -105,6 +107,7 @@ class ExecutePlan : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.execute_node.ExecuteNode buildNode(string factoryName, arrow.execute_node.ExecuteNode[] inputs, arrow.execute_node_options.ExecuteNodeOptions options)
   {
     GArrowExecuteNode* _cretval;
@@ -120,14 +123,14 @@ class ExecutePlan : gobject.object.ObjectG
   }
 
   /**
-   * This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for project
-   * node.
-   * Params:
-   *   input = A #GArrowExecuteNode.
-   *   options = A #GArrowProjectNodeOptions.
-   * Returns: A newly built and added #GArrowExecuteNode
-   *   for project on success, %NULL on error.
-   */
+      This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for project
+    node.
+    Params:
+      input =       A #GArrowExecuteNode.
+      options =       A #GArrowProjectNodeOptions.
+    Returns:     A newly built and added #GArrowExecuteNode
+        for project on success, null on error.
+  */
   arrow.execute_node.ExecuteNode buildProjectNode(arrow.execute_node.ExecuteNode input, arrow.project_node_options.ProjectNodeOptions options)
   {
     GArrowExecuteNode* _cretval;
@@ -140,14 +143,14 @@ class ExecutePlan : gobject.object.ObjectG
   }
 
   /**
-   * This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for sink
-   * node.
-   * Params:
-   *   input = A #GArrowExecuteNode.
-   *   options = A #GArrowSinkNodeOptions.
-   * Returns: A newly built and added #GArrowExecuteNode
-   *   for sink on success, %NULL on error.
-   */
+      This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for sink
+    node.
+    Params:
+      input =       A #GArrowExecuteNode.
+      options =       A #GArrowSinkNodeOptions.
+    Returns:     A newly built and added #GArrowExecuteNode
+        for sink on success, null on error.
+  */
   arrow.execute_node.ExecuteNode buildSinkNode(arrow.execute_node.ExecuteNode input, arrow.sink_node_options.SinkNodeOptions options)
   {
     GArrowExecuteNode* _cretval;
@@ -160,13 +163,13 @@ class ExecutePlan : gobject.object.ObjectG
   }
 
   /**
-   * This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for source
-   * node.
-   * Params:
-   *   options = A #GArrowSourceNodeOptions.
-   * Returns: A newly built and added #GArrowExecuteNode
-   *   for source on success, %NULL on error.
-   */
+      This is a shortcut of [arrow.execute_plan.ExecutePlan.buildNode] for source
+    node.
+    Params:
+      options =       A #GArrowSourceNodeOptions.
+    Returns:     A newly built and added #GArrowExecuteNode
+        for source on success, null on error.
+  */
   arrow.execute_node.ExecuteNode buildSourceNode(arrow.source_node_options.SourceNodeOptions options)
   {
     GArrowExecuteNode* _cretval;
@@ -178,6 +181,7 @@ class ExecutePlan : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.execute_node.ExecuteNode[] getNodes()
   {
     GList* _cretval;
@@ -187,21 +191,22 @@ class ExecutePlan : gobject.object.ObjectG
   }
 
   /**
-   * Starts this plan.
-   */
+      Starts this plan.
+  */
   void start()
   {
     garrow_execute_plan_start(cast(GArrowExecutePlan*)cPtr);
   }
 
   /**
-   * Stops this plan.
-   */
+      Stops this plan.
+  */
   void stop()
   {
     garrow_execute_plan_stop(cast(GArrowExecutePlan*)cPtr);
   }
 
+  /** */
   bool validate()
   {
     bool _retval;
@@ -213,9 +218,9 @@ class ExecutePlan : gobject.object.ObjectG
   }
 
   /**
-   * Waits for finishing this plan.
-   * Returns: %TRUE on success, %FALSE on error.
-   */
+      Waits for finishing this plan.
+    Returns:     true on success, false on error.
+  */
   bool wait()
   {
     bool _retval;

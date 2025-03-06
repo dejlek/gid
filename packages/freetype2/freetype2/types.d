@@ -6,6 +6,12 @@ import gid.gid;
 
 
 // Structs
+
+/** */
 alias Bitmap = FT_Bitmap;
+
+/** */
 alias Face = FT_Face;
+
+/** */
 alias Library = FT_Library;

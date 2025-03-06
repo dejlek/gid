@@ -11,9 +11,9 @@ public import glib.error;
 public import gobject.object;
 
 /**
- * `GTlsServerConnection` is the server-side subclass of
- * [gio.tls_connection.TlsConnection], representing a server-side TLS connection.
- */
+    [gio.tls_server_connection.TlsServerConnection] is the server-side subclass of
+  [gio.tls_connection.TlsConnection], representing a server-side TLS connection.
+*/
 template TlsServerConnectionT()
 {
 

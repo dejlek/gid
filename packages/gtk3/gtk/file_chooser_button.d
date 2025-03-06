@@ -18,34 +18,41 @@ import gtk.orientable_mixin;
 import gtk.types;
 
 /**
- * The #GtkFileChooserButton is a widget that lets the user select a
- * file.  It implements the #GtkFileChooser interface.  Visually, it is a
- * file name with a button to bring up a #GtkFileChooserDialog.
- * The user can then use that dialog to change the file associated with
- * that button.  This widget does not support setting the
- * #GtkFileChooser:select-multiple property to %TRUE.
- * ## Create a button to let the user select a file in /etc
- * |[<!-- language\="C" -->
- * {
- * GtkWidget *button;
- * button \= gtk_file_chooser_button_new $(LPAREN)_$(LPAREN)"Select a file"$(RPAREN),
- * GTK_FILE_CHOOSER_ACTION_OPEN$(RPAREN);
- * gtk_file_chooser_set_current_folder $(LPAREN)GTK_FILE_CHOOSER $(LPAREN)button$(RPAREN),
- * "/etc"$(RPAREN);
- * }
- * ]|
- * The #GtkFileChooserButton supports the #GtkFileChooserActions
- * %GTK_FILE_CHOOSER_ACTION_OPEN and %GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER.
- * > The #GtkFileChooserButton will ellipsize the label, and will thus
- * > request little horizontal space.  To give the button more space,
- * > you should call [gtk.widget.Widget.getPreferredSize],
- * > [gtk.file_chooser_button.FileChooserButton.setWidthChars], or pack the button in
- * > such a way that other interface elements give space to the
- * > widget.
- * # CSS nodes
- * GtkFileChooserButton has a CSS node with name “filechooserbutton”, containing
- * a subnode for the internal button with name “button” and style class “.file”.
- */
+    The #GtkFileChooserButton is a widget that lets the user select a
+  file.  It implements the #GtkFileChooser interface.  Visually, it is a
+  file name with a button to bring up a #GtkFileChooserDialog.
+  The user can then use that dialog to change the file associated with
+  that button.  This widget does not support setting the
+  #GtkFileChooser:select-multiple property to true.
+  
+  ## Create a button to let the user select a file in /etc
+  
+  ```c
+  {
+    GtkWidget *button;
+  
+    button = gtk_file_chooser_button_new (_("Select a file"),
+                                          GTK_FILE_CHOOSER_ACTION_OPEN);
+    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (button),
+                                         "/etc");
+  }
+  ```
+  
+  The #GtkFileChooserButton supports the #GtkFileChooserActions
+  [gtk.types.FileChooserAction.Open] and [gtk.types.FileChooserAction.SelectFolder].
+  
+  > The #GtkFileChooserButton will ellipsize the label, and will thus
+  > request little horizontal space.  To give the button more space,
+  > you should call [gtk.widget.Widget.getPreferredSize],
+  > [gtk.file_chooser_button.FileChooserButton.setWidthChars], or pack the button in
+  > such a way that other interface elements give space to the
+  > widget.
+  
+  # CSS nodes
+  
+  GtkFileChooserButton has a CSS node with name “filechooserbutton”, containing
+  a subnode for the internal button with name “button” and style class “.file”.
+*/
 class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
 {
 
@@ -68,12 +75,12 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   mixin FileChooserT!();
 
   /**
-   * Creates a new file-selecting button widget.
-   * Params:
-   *   title = the title of the browse dialog.
-   *   action = the open mode for the widget.
-   * Returns: a new button widget.
-   */
+      Creates a new file-selecting button widget.
+    Params:
+      title =       the title of the browse dialog.
+      action =       the open mode for the widget.
+    Returns:     a new button widget.
+  */
   this(string title, gtk.types.FileChooserAction action)
   {
     GtkWidget* _cretval;
@@ -83,18 +90,20 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   }
 
   /**
-   * Creates a #GtkFileChooserButton widget which uses dialog as its
-   * file-picking window.
-   * Note that dialog must be a #GtkDialog $(LPAREN)or subclass$(RPAREN) which
-   * implements the #GtkFileChooser interface and must not have
-   * %GTK_DIALOG_DESTROY_WITH_PARENT set.
-   * Also note that the dialog needs to have its confirmative button
-   * added with response %GTK_RESPONSE_ACCEPT or %GTK_RESPONSE_OK in
-   * order for the button to take over the file selected in the dialog.
-   * Params:
-   *   dialog = the widget to use as dialog
-   * Returns: a new button widget.
-   */
+      Creates a #GtkFileChooserButton widget which uses dialog as its
+    file-picking window.
+    
+    Note that dialog must be a #GtkDialog (or subclass) which
+    implements the #GtkFileChooser interface and must not have
+    [gtk.types.DialogFlags.DestroyWithParent] set.
+    
+    Also note that the dialog needs to have its confirmative button
+    added with response [gtk.types.ResponseType.Accept] or [gtk.types.ResponseType.Ok] in
+    order for the button to take over the file selected in the dialog.
+    Params:
+      dialog =       the widget to use as dialog
+    Returns:     a new button widget.
+  */
   static gtk.file_chooser_button.FileChooserButton newWithDialog(gtk.dialog.Dialog dialog)
   {
     GtkWidget* _cretval;
@@ -104,13 +113,13 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   }
 
   /**
-   * Returns whether the button grabs focus when it is clicked with the mouse.
-   * See [gtk.file_chooser_button.FileChooserButton.setFocusOnClick].
-   * Returns: %TRUE if the button grabs focus when it is clicked with
-   *   the mouse.
-
-   * Deprecated: Use [gtk.widget.Widget.getFocusOnClick] instead
-   */
+      Returns whether the button grabs focus when it is clicked with the mouse.
+    See [gtk.file_chooser_button.FileChooserButton.setFocusOnClick].
+    Returns:     true if the button grabs focus when it is clicked with
+                    the mouse.
+  
+    Deprecated:     Use [gtk.widget.Widget.getFocusOnClick] instead
+  */
   override bool getFocusOnClick()
   {
     bool _retval;
@@ -119,10 +128,10 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   }
 
   /**
-   * Retrieves the title of the browse dialog used by button. The returned value
-   * should not be modified or freed.
-   * Returns: a pointer to the browse dialog’s title.
-   */
+      Retrieves the title of the browse dialog used by button. The returned value
+    should not be modified or freed.
+    Returns:     a pointer to the browse dialog’s title.
+  */
   string getTitle()
   {
     const(char)* _cretval;
@@ -132,9 +141,9 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   }
 
   /**
-   * Retrieves the width in characters of the button widget’s entry and/or label.
-   * Returns: an integer width $(LPAREN)in characters$(RPAREN) that the button will use to size itself.
-   */
+      Retrieves the width in characters of the button widget’s entry and/or label.
+    Returns:     an integer width (in characters) that the button will use to size itself.
+  */
   int getWidthChars()
   {
     int _retval;
@@ -143,25 +152,25 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   }
 
   /**
-   * Sets whether the button will grab focus when it is clicked with the mouse.
-   * Making mouse clicks not grab focus is useful in places like toolbars where
-   * you don’t want the keyboard focus removed from the main area of the
-   * application.
-   * Params:
-   *   focusOnClick = whether the button grabs focus when clicked with the mouse
-
-   * Deprecated: Use [gtk.widget.Widget.setFocusOnClick] instead
-   */
+      Sets whether the button will grab focus when it is clicked with the mouse.
+    Making mouse clicks not grab focus is useful in places like toolbars where
+    you don’t want the keyboard focus removed from the main area of the
+    application.
+    Params:
+      focusOnClick =       whether the button grabs focus when clicked with the mouse
+  
+    Deprecated:     Use [gtk.widget.Widget.setFocusOnClick] instead
+  */
   override void setFocusOnClick(bool focusOnClick)
   {
     gtk_file_chooser_button_set_focus_on_click(cast(GtkFileChooserButton*)cPtr, focusOnClick);
   }
 
   /**
-   * Modifies the title of the browse dialog used by button.
-   * Params:
-   *   title = the new browse dialog title.
-   */
+      Modifies the title of the browse dialog used by button.
+    Params:
+      title =       the new browse dialog title.
+  */
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
@@ -169,31 +178,38 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   }
 
   /**
-   * Sets the width $(LPAREN)in characters$(RPAREN) that button will use to n_chars.
-   * Params:
-   *   nChars = the new width, in characters.
-   */
+      Sets the width (in characters) that button will use to n_chars.
+    Params:
+      nChars =       the new width, in characters.
+  */
   void setWidthChars(int nChars)
   {
     gtk_file_chooser_button_set_width_chars(cast(GtkFileChooserButton*)cPtr, nChars);
   }
 
   /**
-   * The ::file-set signal is emitted when the user selects a file.
-   * Note that this signal is only emitted when the user
-   * changes the file.
-   *   fileChooserButton = the instance the signal is connected to
-   */
+      The ::file-set signal is emitted when the user selects a file.
+    
+    Note that this signal is only emitted when the user
+    changes the file.
+  
+    ## Parameters
+    $(LIST
+      * $(B fileChooserButton) the instance the signal is connected to
+    )
+  */
   alias FileSetCallbackDlg = void delegate(gtk.file_chooser_button.FileChooserButton fileChooserButton);
+
+  /** ditto */
   alias FileSetCallbackFunc = void function(gtk.file_chooser_button.FileChooserButton fileChooserButton);
 
   /**
-   * Connect to FileSet signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to FileSet signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectFileSet(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FileSetCallbackDlg) || is(T : FileSetCallbackFunc))
   {

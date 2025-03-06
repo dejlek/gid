@@ -14,18 +14,21 @@ public import gtksource.hover_display;
 public import gtksource.types;
 
 /**
- * Interface to populate interactive tooltips.
- * `GtkSourceHoverProvider` is an interface that should be implemented to extend
- * the contents of a class@HoverDisplay. This is typical in editors that
- * interact external tooling such as those utilizing Language Server Protocol.
- * If you can populate the class@HoverDisplay synchronously, use
- * vfunc@HoverProvider.populate. Otherwise, interface implementations that
- * may take additional time should use vfunc@HoverProvider.populate_async
- * to avoid blocking the main loop.
- */
+    Interface to populate interactive tooltips.
+  
+  [gtksource.hover_provider.HoverProvider] is an interface that should be implemented to extend
+  the contents of a `class@HoverDisplay`. This is typical in editors that
+  interact external tooling such as those utilizing Language Server Protocol.
+  
+  If you can populate the `class@HoverDisplay` synchronously, use
+  `vfunc@HoverProvider.populate`. Otherwise, interface implementations that
+  may take additional time should use `vfunc@HoverProvider.populate_async`
+  to avoid blocking the main loop.
+*/
 template HoverProviderT()
 {
 
+  /** */
   override void populateAsync(gtksource.hover_context.HoverContext context, gtksource.hover_display.HoverDisplay display, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -41,6 +44,7 @@ template HoverProviderT()
     gtk_source_hover_provider_populate_async(cast(GtkSourceHoverProvider*)cPtr, context ? cast(GtkSourceHoverContext*)context.cPtr(No.Dup) : null, display ? cast(GtkSourceHoverDisplay*)display.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
+  /** */
   override bool populateFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;

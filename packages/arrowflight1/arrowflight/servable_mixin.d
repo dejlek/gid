@@ -6,6 +6,7 @@ public import arrowflight.c.types;
 public import arrowflight.types;
 public import gid.gid;
 
+/** */
 template ServableT()
 {
 }

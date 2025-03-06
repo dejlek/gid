@@ -15,6 +15,7 @@ import gtk.orientable;
 import gtk.orientable_mixin;
 import gtk.types;
 
+/** */
 class ColorSelection : gtk.box.Box
 {
 
@@ -35,9 +36,9 @@ class ColorSelection : gtk.box.Box
   }
 
   /**
-   * Creates a new GtkColorSelection.
-   * Returns: a new #GtkColorSelection
-   */
+      Creates a new GtkColorSelection.
+    Returns:     a new #GtkColorSelection
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -46,14 +47,14 @@ class ColorSelection : gtk.box.Box
   }
 
   /**
-   * Parses a color palette string; the string is a colon-separated
-   * list of color names readable by [gdk.color.Color.parse].
-   * Params:
-   *   str = a string encoding a color palette
-   *   colors = return location for
-   *     allocated array of #GdkColor
-   * Returns: %TRUE if a palette was successfully parsed
-   */
+      Parses a color palette string; the string is a colon-separated
+    list of color names readable by [gdk.color.Color.parse].
+    Params:
+      str =       a string encoding a color palette
+      colors =       return location for
+            allocated array of #GdkColor
+    Returns:     true if a palette was successfully parsed
+  */
   static bool paletteFromString(string str, out gdk.color.Color[] colors)
   {
     bool _retval;
@@ -69,11 +70,11 @@ class ColorSelection : gtk.box.Box
   }
 
   /**
-   * Encodes a palette as a string, useful for persistent storage.
-   * Params:
-   *   colors = an array of colors
-   * Returns: allocated string encoding the palette
-   */
+      Encodes a palette as a string, useful for persistent storage.
+    Params:
+      colors =       an array of colors
+    Returns:     allocated string encoding the palette
+  */
   static string paletteToString(gdk.color.Color[] colors)
   {
     char* _cretval;
@@ -91,9 +92,9 @@ class ColorSelection : gtk.box.Box
   }
 
   /**
-   * Returns the current alpha value.
-   * Returns: an integer between 0 and 65535
-   */
+      Returns the current alpha value.
+    Returns:     an integer between 0 and 65535
+  */
   ushort getCurrentAlpha()
   {
     ushort _retval;
@@ -102,12 +103,12 @@ class ColorSelection : gtk.box.Box
   }
 
   /**
-   * Sets color to be the current color in the GtkColorSelection widget.
-   * Params:
-   *   color = a #GdkColor to fill in with the current color
-
-   * Deprecated: Use [gtk.color_selection.ColorSelection.getCurrentRgba] instead.
-   */
+      Sets color to be the current color in the GtkColorSelection widget.
+    Params:
+      color =       a #GdkColor to fill in with the current color
+  
+    Deprecated:     Use [gtk.color_selection.ColorSelection.getCurrentRgba] instead.
+  */
   void getCurrentColor(out gdk.color.Color color)
   {
     GdkColor _color;
@@ -116,10 +117,10 @@ class ColorSelection : gtk.box.Box
   }
 
   /**
-   * Sets rgba to be the current color in the GtkColorSelection widget.
-   * Params:
-   *   rgba = a #GdkRGBA to fill in with the current color
-   */
+      Sets rgba to be the current color in the GtkColorSelection widget.
+    Params:
+      rgba =       a #GdkRGBA to fill in with the current color
+  */
   void getCurrentRgba(out gdk.rgba.RGBA rgba)
   {
     GdkRGBA _rgba;
@@ -128,10 +129,10 @@ class ColorSelection : gtk.box.Box
   }
 
   /**
-   * Determines whether the colorsel has an opacity control.
-   * Returns: %TRUE if the colorsel has an opacity control,
-   *   %FALSE if it does't
-   */
+      Determines whether the colorsel has an opacity control.
+    Returns:     true if the colorsel has an opacity control,
+          false if it does't
+  */
   bool getHasOpacityControl()
   {
     bool _retval;
@@ -140,9 +141,9 @@ class ColorSelection : gtk.box.Box
   }
 
   /**
-   * Determines whether the color selector has a color palette.
-   * Returns: %TRUE if the selector has a palette, %FALSE if it hasn't
-   */
+      Determines whether the color selector has a color palette.
+    Returns:     true if the selector has a palette, false if it hasn't
+  */
   bool getHasPalette()
   {
     bool _retval;
@@ -151,9 +152,9 @@ class ColorSelection : gtk.box.Box
   }
 
   /**
-   * Returns the previous alpha value.
-   * Returns: an integer between 0 and 65535
-   */
+      Returns the previous alpha value.
+    Returns:     an integer between 0 and 65535
+  */
   ushort getPreviousAlpha()
   {
     ushort _retval;
@@ -162,12 +163,12 @@ class ColorSelection : gtk.box.Box
   }
 
   /**
-   * Fills color in with the original color value.
-   * Params:
-   *   color = a #GdkColor to fill in with the original color value
-
-   * Deprecated: Use [gtk.color_selection.ColorSelection.getPreviousRgba] instead.
-   */
+      Fills color in with the original color value.
+    Params:
+      color =       a #GdkColor to fill in with the original color value
+  
+    Deprecated:     Use [gtk.color_selection.ColorSelection.getPreviousRgba] instead.
+  */
   void getPreviousColor(out gdk.color.Color color)
   {
     GdkColor _color;
@@ -176,10 +177,10 @@ class ColorSelection : gtk.box.Box
   }
 
   /**
-   * Fills rgba in with the original color value.
-   * Params:
-   *   rgba = a #GdkRGBA to fill in with the original color value
-   */
+      Fills rgba in with the original color value.
+    Params:
+      rgba =       a #GdkRGBA to fill in with the original color value
+  */
   void getPreviousRgba(out gdk.rgba.RGBA rgba)
   {
     GdkRGBA _rgba;
@@ -188,10 +189,10 @@ class ColorSelection : gtk.box.Box
   }
 
   /**
-   * Gets the current state of the colorsel.
-   * Returns: %TRUE if the user is currently dragging
-   *   a color around, and %FALSE if the selection has stopped
-   */
+      Gets the current state of the colorsel.
+    Returns:     true if the user is currently dragging
+          a color around, and false if the selection has stopped
+  */
   bool isAdjusting()
   {
     bool _retval;
@@ -200,120 +201,132 @@ class ColorSelection : gtk.box.Box
   }
 
   /**
-   * Sets the current opacity to be alpha.
-   * The first time this is called, it will also set
-   * the original opacity to be alpha too.
-   * Params:
-   *   alpha = an integer between 0 and 65535
-   */
+      Sets the current opacity to be alpha.
+    
+    The first time this is called, it will also set
+    the original opacity to be alpha too.
+    Params:
+      alpha =       an integer between 0 and 65535
+  */
   void setCurrentAlpha(ushort alpha)
   {
     gtk_color_selection_set_current_alpha(cast(GtkColorSelection*)cPtr, alpha);
   }
 
   /**
-   * Sets the current color to be color.
-   * The first time this is called, it will also set
-   * the original color to be color too.
-   * Params:
-   *   color = a #GdkColor to set the current color with
-
-   * Deprecated: Use [gtk.color_selection.ColorSelection.setCurrentRgba] instead.
-   */
+      Sets the current color to be color.
+    
+    The first time this is called, it will also set
+    the original color to be color too.
+    Params:
+      color =       a #GdkColor to set the current color with
+  
+    Deprecated:     Use [gtk.color_selection.ColorSelection.setCurrentRgba] instead.
+  */
   void setCurrentColor(gdk.color.Color color)
   {
     gtk_color_selection_set_current_color(cast(GtkColorSelection*)cPtr, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the current color to be rgba.
-   * The first time this is called, it will also set
-   * the original color to be rgba too.
-   * Params:
-   *   rgba = A #GdkRGBA to set the current color with
-   */
+      Sets the current color to be rgba.
+    
+    The first time this is called, it will also set
+    the original color to be rgba too.
+    Params:
+      rgba =       A #GdkRGBA to set the current color with
+  */
   void setCurrentRgba(gdk.rgba.RGBA rgba)
   {
     gtk_color_selection_set_current_rgba(cast(GtkColorSelection*)cPtr, rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the colorsel to use or not use opacity.
-   * Params:
-   *   hasOpacity = %TRUE if colorsel can set the opacity, %FALSE otherwise
-   */
+      Sets the colorsel to use or not use opacity.
+    Params:
+      hasOpacity =       true if colorsel can set the opacity, false otherwise
+  */
   void setHasOpacityControl(bool hasOpacity)
   {
     gtk_color_selection_set_has_opacity_control(cast(GtkColorSelection*)cPtr, hasOpacity);
   }
 
   /**
-   * Shows and hides the palette based upon the value of has_palette.
-   * Params:
-   *   hasPalette = %TRUE if palette is to be visible, %FALSE otherwise
-   */
+      Shows and hides the palette based upon the value of has_palette.
+    Params:
+      hasPalette =       true if palette is to be visible, false otherwise
+  */
   void setHasPalette(bool hasPalette)
   {
     gtk_color_selection_set_has_palette(cast(GtkColorSelection*)cPtr, hasPalette);
   }
 
   /**
-   * Sets the “previous” alpha to be alpha.
-   * This function should be called with some hesitations,
-   * as it might seem confusing to have that alpha change.
-   * Params:
-   *   alpha = an integer between 0 and 65535
-   */
+      Sets the “previous” alpha to be alpha.
+    
+    This function should be called with some hesitations,
+    as it might seem confusing to have that alpha change.
+    Params:
+      alpha =       an integer between 0 and 65535
+  */
   void setPreviousAlpha(ushort alpha)
   {
     gtk_color_selection_set_previous_alpha(cast(GtkColorSelection*)cPtr, alpha);
   }
 
   /**
-   * Sets the “previous” color to be color.
-   * This function should be called with some hesitations,
-   * as it might seem confusing to have that color change.
-   * Calling [gtk.color_selection.ColorSelection.setCurrentColor] will also
-   * set this color the first time it is called.
-   * Params:
-   *   color = a #GdkColor to set the previous color with
-
-   * Deprecated: Use [gtk.color_selection.ColorSelection.setPreviousRgba] instead.
-   */
+      Sets the “previous” color to be color.
+    
+    This function should be called with some hesitations,
+    as it might seem confusing to have that color change.
+    Calling [gtk.color_selection.ColorSelection.setCurrentColor] will also
+    set this color the first time it is called.
+    Params:
+      color =       a #GdkColor to set the previous color with
+  
+    Deprecated:     Use [gtk.color_selection.ColorSelection.setPreviousRgba] instead.
+  */
   void setPreviousColor(gdk.color.Color color)
   {
     gtk_color_selection_set_previous_color(cast(GtkColorSelection*)cPtr, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the “previous” color to be rgba.
-   * This function should be called with some hesitations,
-   * as it might seem confusing to have that color change.
-   * Calling [gtk.color_selection.ColorSelection.setCurrentRgba] will also
-   * set this color the first time it is called.
-   * Params:
-   *   rgba = a #GdkRGBA to set the previous color with
-   */
+      Sets the “previous” color to be rgba.
+    
+    This function should be called with some hesitations,
+    as it might seem confusing to have that color change.
+    Calling [gtk.color_selection.ColorSelection.setCurrentRgba] will also
+    set this color the first time it is called.
+    Params:
+      rgba =       a #GdkRGBA to set the previous color with
+  */
   void setPreviousRgba(gdk.rgba.RGBA rgba)
   {
     gtk_color_selection_set_previous_rgba(cast(GtkColorSelection*)cPtr, rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
   }
 
   /**
-   * This signal is emitted when the color changes in the #GtkColorSelection
-   * according to its update policy.
-   *   colorSelection = the instance the signal is connected to
-   */
+      This signal is emitted when the color changes in the #GtkColorSelection
+    according to its update policy.
+  
+    ## Parameters
+    $(LIST
+      * $(B colorSelection) the instance the signal is connected to
+    )
+  */
   alias ColorChangedCallbackDlg = void delegate(gtk.color_selection.ColorSelection colorSelection);
+
+  /** ditto */
   alias ColorChangedCallbackFunc = void function(gtk.color_selection.ColorSelection colorSelection);
 
   /**
-   * Connect to ColorChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ColorChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectColorChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ColorChangedCallbackDlg) || is(T : ColorChangedCallbackFunc))
   {

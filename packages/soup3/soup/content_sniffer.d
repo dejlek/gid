@@ -11,14 +11,15 @@ import soup.session_feature_mixin;
 import soup.types;
 
 /**
- * Sniffs the mime type of messages.
- * A #SoupContentSniffer tries to detect the actual content type of
- * the files that are being downloaded by looking at some of the data
- * before the class@Message emits its signal@Message::got-headers signal.
- * #SoupContentSniffer implements iface@SessionFeature, so you can add
- * content sniffing to a session with [soup.session.Session.addFeature] or
- * [soup.session.Session.addFeatureByType].
- */
+    Sniffs the mime type of messages.
+  
+  A #SoupContentSniffer tries to detect the actual content type of
+  the files that are being downloaded by looking at some of the data
+  before the `class@Message` emits its `signal@Message::got-headers` signal.
+  #SoupContentSniffer implements `iface@SessionFeature`, so you can add
+  content sniffing to a session with [soup.session.Session.addFeature] or
+  [soup.session.Session.addFeatureByType].
+*/
 class ContentSniffer : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
@@ -41,9 +42,9 @@ class ContentSniffer : gobject.object.ObjectG, soup.session_feature.SessionFeatu
   mixin SessionFeatureT!();
 
   /**
-   * Creates a new #SoupContentSniffer.
-   * Returns: a new #SoupContentSniffer
-   */
+      Creates a new #SoupContentSniffer.
+    Returns:     a new #SoupContentSniffer
+  */
   this()
   {
     SoupContentSniffer* _cretval;
@@ -52,17 +53,18 @@ class ContentSniffer : gobject.object.ObjectG, soup.session_feature.SessionFeatu
   }
 
   /**
-   * Sniffs buffer to determine its Content-Type.
-   * The result may also be influenced by the Content-Type declared in msg's
-   * response headers.
-   * Params:
-   *   msg = the message to sniff
-   *   buffer = a buffer containing the start of msg's response body
-   *   params = return
-   *     location for Content-Type parameters $(LPAREN)eg, "charset"$(RPAREN), or %NULL
-   * Returns: the sniffed Content-Type of buffer; this will never be %NULL,
-   *   but may be `application/octet-stream`.
-   */
+      Sniffs buffer to determine its Content-Type.
+    
+    The result may also be influenced by the Content-Type declared in msg's
+    response headers.
+    Params:
+      msg =       the message to sniff
+      buffer =       a buffer containing the start of msg's response body
+      params =       return
+          location for Content-Type parameters (eg, "charset"), or null
+    Returns:     the sniffed Content-Type of buffer; this will never be null,
+        but may be `application/octet-stream`.
+  */
   string sniff(soup.message.Message msg, glib.bytes.Bytes buffer, out string[string] params)
   {
     char* _cretval;

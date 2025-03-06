@@ -9,6 +9,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class RecordBatchStreamWriter : arrow.record_batch_writer.RecordBatchWriter
 {
 
@@ -28,6 +29,7 @@ class RecordBatchStreamWriter : arrow.record_batch_writer.RecordBatchWriter
     return getType();
   }
 
+  /** */
   this(arrow.output_stream.OutputStream sink, arrow.schema.Schema schema)
   {
     GArrowRecordBatchStreamWriter* _cretval;

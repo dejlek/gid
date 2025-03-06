@@ -10,10 +10,11 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * Defines a part of a CSS document.
- * Because sections are nested into one another, you can use
- * [gtk.css_section.CssSection.getParent] to get the containing region.
- */
+    Defines a part of a CSS document.
+  
+  Because sections are nested into one another, you can use
+  [gtk.css_section.CssSection.getParent] to get the containing region.
+*/
 class CssSection : gobject.boxed.Boxed
 {
 
@@ -39,15 +40,15 @@ class CssSection : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a new `GtkCssSection` referring to the section
-   * in the given `file` from the `start` location to the
-   * `end` location.
-   * Params:
-   *   file = The file this section refers to
-   *   start = The start location
-   *   end = The end location
-   * Returns: a new `GtkCssSection`
-   */
+      Creates a new [gtk.css_section.CssSection] referring to the section
+    in the given `file` from the `start` location to the
+    `end` location.
+    Params:
+      file =       The file this section refers to
+      start =       The start location
+      end =       The end location
+    Returns:     a new [gtk.css_section.CssSection]
+  */
   this(gio.file.File file, gtk.types.CssLocation start, gtk.types.CssLocation end)
   {
     GtkCssSection* _cretval;
@@ -56,10 +57,10 @@ class CssSection : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the location in the CSS document where this section ends.
-   * Returns: The end location of
-   *   this section
-   */
+      Returns the location in the CSS document where this section ends.
+    Returns:     The end location of
+        this section
+  */
   gtk.types.CssLocation getEndLocation()
   {
     const(GtkCssLocation)* _cretval;
@@ -71,12 +72,13 @@ class CssSection : gobject.boxed.Boxed
   }
 
   /**
-   * Gets the file that section was parsed from.
-   * If no such file exists, for example because the CSS was loaded via
-   * [gtk.css_provider.CssProvider.loadFromData], then `NULL` is returned.
-   * Returns: the `GFile` from which the `section`
-   *   was parsed
-   */
+      Gets the file that section was parsed from.
+    
+    If no such file exists, for example because the CSS was loaded via
+    [gtk.css_provider.CssProvider.loadFromData], then `NULL` is returned.
+    Returns:     the [gio.file.File] from which the `section`
+        was parsed
+  */
   gio.file.File getFile()
   {
     GFile* _cretval;
@@ -86,15 +88,16 @@ class CssSection : gobject.boxed.Boxed
   }
 
   /**
-   * Gets the parent section for the given `section`.
-   * The parent section is the section that contains this `section`. A special
-   * case are sections of  type `GTK_CSS_SECTION_DOCUMEN`T. Their parent will
-   * either be `NULL` if they are the original CSS document that was loaded by
-   * [gtk.css_provider.CssProvider.loadFromFile] or a section of type
-   * `GTK_CSS_SECTION_IMPORT` if it was loaded with an `import` rule from
-   * a different file.
-   * Returns: the parent section
-   */
+      Gets the parent section for the given `section`.
+    
+    The parent section is the section that contains this `section`. A special
+    case are sections of  type `GTK_CSS_SECTION_DOCUMEN`T. Their parent will
+    either be `NULL` if they are the original CSS document that was loaded by
+    [gtk.css_provider.CssProvider.loadFromFile] or a section of type
+    [gtk.types.CssSectionType.Import] if it was loaded with an `import` rule from
+    a different file.
+    Returns:     the parent section
+  */
   gtk.css_section.CssSection getParent()
   {
     GtkCssSection* _cretval;
@@ -104,10 +107,10 @@ class CssSection : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the location in the CSS document where this section starts.
-   * Returns: The start location of
-   *   this section
-   */
+      Returns the location in the CSS document where this section starts.
+    Returns:     The start location of
+        this section
+  */
   gtk.types.CssLocation getStartLocation()
   {
     const(GtkCssLocation)* _cretval;
@@ -119,22 +122,23 @@ class CssSection : gobject.boxed.Boxed
   }
 
   /**
-   * Prints the `section` into `string` in a human-readable form.
-   * This is a form like `gtk.css:32:1-23` to denote line 32, characters
-   * 1 to 23 in the file `gtk.css`.
-   * Params:
-   *   string_ = a `GString` to print to
-   */
+      Prints the `section` into `string` in a human-readable form.
+    
+    This is a form like `gtk.css:32:1-23` to denote line 32, characters
+    1 to 23 in the file `gtk.css`.
+    Params:
+      string_ =       a [glib.string_.String] to print to
+  */
   void print(glib.string_.String string_)
   {
     gtk_css_section_print(cast(const(GtkCssSection)*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
   }
 
   /**
-   * Prints the section into a human-readable text form using
-   * [gtk.css_section.CssSection.print].
-   * Returns: A new string.
-   */
+      Prints the section into a human-readable text form using
+    [gtk.css_section.CssSection.print].
+    Returns:     A new string.
+  */
   string toString_()
   {
     char* _cretval;

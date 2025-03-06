@@ -13,9 +13,9 @@ import gtk.orientable_mixin;
 import gtk.types;
 
 /**
- * #GtkShortcutLabel is a widget that represents a single keyboard shortcut or gesture
- * in the user interface.
- */
+    #GtkShortcutLabel is a widget that represents a single keyboard shortcut or gesture
+  in the user interface.
+*/
 class ShortcutLabel : gtk.box.Box
 {
 
@@ -36,11 +36,11 @@ class ShortcutLabel : gtk.box.Box
   }
 
   /**
-   * Creates a new #GtkShortcutLabel with accelerator set.
-   * Params:
-   *   accelerator = the initial accelerator
-   * Returns: a newly-allocated #GtkShortcutLabel
-   */
+      Creates a new #GtkShortcutLabel with accelerator set.
+    Params:
+      accelerator =       the initial accelerator
+    Returns:     a newly-allocated #GtkShortcutLabel
+  */
   this(string accelerator)
   {
     GtkWidget* _cretval;
@@ -50,9 +50,9 @@ class ShortcutLabel : gtk.box.Box
   }
 
   /**
-   * Retrieves the current accelerator of self.
-   * Returns: the current accelerator.
-   */
+      Retrieves the current accelerator of self.
+    Returns:     the current accelerator.
+  */
   string getAccelerator()
   {
     const(char)* _cretval;
@@ -62,10 +62,10 @@ class ShortcutLabel : gtk.box.Box
   }
 
   /**
-   * Retrieves the text that is displayed when no accelerator is set.
-   * Returns: the current text displayed when no
-   *   accelerator is set.
-   */
+      Retrieves the text that is displayed when no accelerator is set.
+    Returns:     the current text displayed when no
+      accelerator is set.
+  */
   string getDisabledText()
   {
     const(char)* _cretval;
@@ -75,10 +75,10 @@ class ShortcutLabel : gtk.box.Box
   }
 
   /**
-   * Sets the accelerator to be displayed by self.
-   * Params:
-   *   accelerator = the new accelerator
-   */
+      Sets the accelerator to be displayed by self.
+    Params:
+      accelerator =       the new accelerator
+  */
   void setAccelerator(string accelerator)
   {
     const(char)* _accelerator = accelerator.toCString(No.Alloc);
@@ -86,10 +86,10 @@ class ShortcutLabel : gtk.box.Box
   }
 
   /**
-   * Sets the text to be displayed by self when no accelerator is set.
-   * Params:
-   *   disabledText = the text to be displayed when no accelerator is set
-   */
+      Sets the text to be displayed by self when no accelerator is set.
+    Params:
+      disabledText =       the text to be displayed when no accelerator is set
+  */
   void setDisabledText(string disabledText)
   {
     const(char)* _disabledText = disabledText.toCString(No.Alloc);

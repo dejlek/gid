@@ -7,6 +7,7 @@ import arrow.table;
 import arrow.types;
 import gid.gid;
 
+/** */
 class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
 {
 
@@ -26,6 +27,7 @@ class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
     return getType();
   }
 
+  /** */
   this(arrow.table.Table table)
   {
     GArrowTableBatchReader* _cretval;
@@ -34,12 +36,13 @@ class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
   }
 
   /**
-   * Set the desired maximum chunk size of record batches.
-   * The actual chunk size of each record batch may be smaller,
-   * depending on actual chunking characteristics of each table column.
-   * Params:
-   *   maxChunkSize = The maximum chunk size of record batches.
-   */
+      Set the desired maximum chunk size of record batches.
+    
+    The actual chunk size of each record batch may be smaller,
+    depending on actual chunking characteristics of each table column.
+    Params:
+      maxChunkSize =       The maximum chunk size of record batches.
+  */
   void setMaxChunkSize(long maxChunkSize)
   {
     garrow_table_batch_reader_set_max_chunk_size(cast(GArrowTableBatchReader*)cPtr, maxChunkSize);

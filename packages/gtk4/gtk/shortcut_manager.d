@@ -7,16 +7,19 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * The `GtkShortcutManager` interface is used to implement
- * shortcut scopes.
- * This is important for [gtk.native.Native] widgets that have their
- * own surface, since the event controllers that are used to implement
- * managed and global scopes are limited to the same native.
- * Examples for widgets implementing `GtkShortcutManager` are
- * [gtk.window.Window] and [gtk.popover.Popover].
- * Every widget that implements `GtkShortcutManager` will be used as a
- * %GTK_SHORTCUT_SCOPE_MANAGED.
- */
+    The [gtk.shortcut_manager.ShortcutManager] interface is used to implement
+  shortcut scopes.
+  
+  This is important for [gtk.native.Native] widgets that have their
+  own surface, since the event controllers that are used to implement
+  managed and global scopes are limited to the same native.
+  
+  Examples for widgets implementing [gtk.shortcut_manager.ShortcutManager] are
+  [gtk.window.Window] and [gtk.popover.Popover].
+  
+  Every widget that implements [gtk.shortcut_manager.ShortcutManager] will be used as a
+  [gtk.types.ShortcutScope.Managed].
+*/
 interface ShortcutManager
 {
 

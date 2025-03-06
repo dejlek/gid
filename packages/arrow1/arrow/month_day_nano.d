@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class MonthDayNano : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class MonthDayNano : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(int month, int day, long nanosecond)
   {
     GArrowMonthDayNano* _cretval;
@@ -32,6 +34,7 @@ class MonthDayNano : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool equal(arrow.month_day_nano.MonthDayNano otherMonthNanoDay)
   {
     bool _retval;

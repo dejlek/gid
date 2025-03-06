@@ -6,6 +6,7 @@ import arrow.integer_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class Int16DataType : arrow.integer_data_type.IntegerDataType
 {
 
@@ -25,6 +26,7 @@ class Int16DataType : arrow.integer_data_type.IntegerDataType
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowInt16DataType* _cretval;

@@ -6,6 +6,7 @@ import arrow.timestamp_parser;
 import arrow.types;
 import gid.gid;
 
+/** */
 class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
 {
 
@@ -25,6 +26,7 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
     return getType();
   }
 
+  /** */
   this(string format)
   {
     GArrowStrptimeTimestampParser* _cretval;
@@ -33,6 +35,7 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
     this(_cretval, Yes.Take);
   }
 
+  /** */
   string getFormat()
   {
     const(char)* _cretval;

@@ -12,6 +12,7 @@ import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
 
+/** */
 class LockButtonAccessible : gtk.button_accessible.ButtonAccessible
 {
 

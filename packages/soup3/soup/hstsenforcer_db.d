@@ -9,10 +9,11 @@ import soup.session_feature_mixin;
 import soup.types;
 
 /**
- * Persistent HTTP Strict Transport Security enforcer.
- * #SoupHSTSEnforcerDB is a class@HSTSEnforcer that uses a SQLite
- * database as a backend for persistency.
- */
+    Persistent HTTP Strict Transport Security enforcer.
+  
+  #SoupHSTSEnforcerDB is a `class@HSTSEnforcer` that uses a SQLite
+  database as a backend for persistency.
+*/
 class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
 {
 
@@ -33,17 +34,18 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
   }
 
   /**
-   * Creates a #SoupHSTSEnforcerDB.
-   * filename will be read in during the initialization of a
-   * #SoupHSTSEnforcerDB, in order to create an initial set of HSTS
-   * policies. If the file doesn't exist, a new database will be created
-   * and initialized. Changes to the policies during the lifetime of a
-   * #SoupHSTSEnforcerDB will be written to filename when
-   * signalHSTSEnforcer::changed is emitted.
-   * Params:
-   *   filename = the filename of the database to read/write from.
-   * Returns: the new #SoupHSTSEnforcer
-   */
+      Creates a #SoupHSTSEnforcerDB.
+    
+    filename will be read in during the initialization of a
+    #SoupHSTSEnforcerDB, in order to create an initial set of HSTS
+    policies. If the file doesn't exist, a new database will be created
+    and initialized. Changes to the policies during the lifetime of a
+    #SoupHSTSEnforcerDB will be written to filename when
+    `signalHSTSEnforcer::changed` is emitted.
+    Params:
+      filename =       the filename of the database to read/write from.
+    Returns:     the new #SoupHSTSEnforcer
+  */
   this(string filename)
   {
     SoupHSTSEnforcer* _cretval;

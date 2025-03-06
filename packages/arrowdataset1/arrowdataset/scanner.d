@@ -9,6 +9,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class Scanner : gobject.object.ObjectG
 {
 
@@ -28,6 +29,7 @@ class Scanner : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   arrow.record_batch_reader.RecordBatchReader toRecordBatchReader()
   {
     GArrowRecordBatchReader* _cretval;
@@ -39,6 +41,7 @@ class Scanner : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table toTable()
   {
     GArrowTable* _cretval;

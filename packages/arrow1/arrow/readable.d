@@ -10,6 +10,7 @@ import glib.bytes;
 import glib.error;
 import gobject.object;
 
+/** */
 interface Readable
 {
 
@@ -19,7 +20,9 @@ interface Readable
     return cast(void function())garrow_readable_get_type != &gidSymbolNotFound ? garrow_readable_get_type() : cast(GType)0;
   }
 
+  /** */
   arrow.buffer.Buffer read(long nBytes);
 
+  /** */
   glib.bytes.Bytes readBytes(long nBytes);
 }

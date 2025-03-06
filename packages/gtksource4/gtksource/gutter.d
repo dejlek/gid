@@ -9,6 +9,7 @@ import gtksource.gutter_renderer;
 import gtksource.types;
 import gtksource.view;
 
+/** */
 class Gutter : gobject.object.ObjectG
 {
 
@@ -29,12 +30,12 @@ class Gutter : gobject.object.ObjectG
   }
 
   /**
-   * Finds the #GtkSourceGutterRenderer at $(LPAREN)x, y$(RPAREN).
-   * Params:
-   *   x = The x position to get identified.
-   *   y = The y position to get identified.
-   * Returns: the renderer at $(LPAREN)x, y$(RPAREN) or %NULL.
-   */
+      Finds the #GtkSourceGutterRenderer at (x, y).
+    Params:
+      x =       The x position to get identified.
+      y =       The y position to get identified.
+    Returns:     the renderer at (x, y) or null.
+  */
   gtksource.gutter_renderer.GutterRenderer getRendererAtPos(int x, int y)
   {
     GtkSourceGutterRenderer* _cretval;
@@ -43,6 +44,7 @@ class Gutter : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gtksource.view.View getView()
   {
     GtkSourceView* _cretval;
@@ -51,6 +53,7 @@ class Gutter : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gtk.types.TextWindowType getWindowType()
   {
     GtkTextWindowType _cretval;
@@ -60,14 +63,14 @@ class Gutter : gobject.object.ObjectG
   }
 
   /**
-   * Insert renderer into the gutter. If renderer is yet unowned then gutter
-   * claims its ownership. Otherwise just increases renderer's reference count.
-   * renderer cannot be already inserted to another gutter.
-   * Params:
-   *   renderer = a gutter renderer $(LPAREN)must inherit from #GtkSourceGutterRenderer$(RPAREN).
-   *   position = the renderer position.
-   * Returns: %TRUE if operation succeeded. Otherwise %FALSE.
-   */
+      Insert renderer into the gutter. If renderer is yet unowned then gutter
+    claims its ownership. Otherwise just increases renderer's reference count.
+    renderer cannot be already inserted to another gutter.
+    Params:
+      renderer =       a gutter renderer (must inherit from #GtkSourceGutterRenderer).
+      position =       the renderer position.
+    Returns:     true if operation succeeded. Otherwise false.
+  */
   bool insert(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {
     bool _retval;
@@ -76,30 +79,30 @@ class Gutter : gobject.object.ObjectG
   }
 
   /**
-   * Invalidates the drawable area of the gutter. You can use this to force a
-   * redraw of the gutter if something has changed and needs to be redrawn.
-   */
+      Invalidates the drawable area of the gutter. You can use this to force a
+    redraw of the gutter if something has changed and needs to be redrawn.
+  */
   void queueDraw()
   {
     gtk_source_gutter_queue_draw(cast(GtkSourceGutter*)cPtr);
   }
 
   /**
-   * Removes renderer from gutter.
-   * Params:
-   *   renderer = a #GtkSourceGutterRenderer.
-   */
+      Removes renderer from gutter.
+    Params:
+      renderer =       a #GtkSourceGutterRenderer.
+  */
   void remove(gtksource.gutter_renderer.GutterRenderer renderer)
   {
     gtk_source_gutter_remove(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.Dup) : null);
   }
 
   /**
-   * Reorders renderer in gutter to new position.
-   * Params:
-   *   renderer = a #GtkCellRenderer.
-   *   position = the new renderer position.
-   */
+      Reorders renderer in gutter to new position.
+    Params:
+      renderer =       a #GtkCellRenderer.
+      position =       the new renderer position.
+  */
   void reorder(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {
     gtk_source_gutter_reorder(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.Dup) : null, position);

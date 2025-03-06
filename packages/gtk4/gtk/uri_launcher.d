@@ -12,16 +12,19 @@ import gtk.types;
 import gtk.window;
 
 /**
- * A `GtkUriLauncher` object collects the arguments that are needed to open a uri
- * with an application.
- * Depending on system configuration, user preferences and available APIs, this
- * may or may not show an app chooser dialog or launch the default application
- * right away.
- * The operation is started with the [gtk.uri_launcher.UriLauncher.launch] function.
- * This API follows the GIO async pattern, and the result can be obtained by
- * calling [gtk.uri_launcher.UriLauncher.launchFinish].
- * To launch a file, use [gtk.file_launcher.FileLauncher].
- */
+    A [gtk.uri_launcher.UriLauncher] object collects the arguments that are needed to open a uri
+  with an application.
+  
+  Depending on system configuration, user preferences and available APIs, this
+  may or may not show an app chooser dialog or launch the default application
+  right away.
+  
+  The operation is started with the [gtk.uri_launcher.UriLauncher.launch] function.
+  This API follows the GIO async pattern, and the result can be obtained by
+  calling [gtk.uri_launcher.UriLauncher.launchFinish].
+  
+  To launch a file, use [gtk.file_launcher.FileLauncher].
+*/
 class UriLauncher : gobject.object.ObjectG
 {
 
@@ -42,11 +45,11 @@ class UriLauncher : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new `GtkUriLauncher` object.
-   * Params:
-   *   uri = the uri to open
-   * Returns: the new `GtkUriLauncher`
-   */
+      Creates a new [gtk.uri_launcher.UriLauncher] object.
+    Params:
+      uri =       the uri to open
+    Returns:     the new [gtk.uri_launcher.UriLauncher]
+  */
   this(string uri = null)
   {
     GtkUriLauncher* _cretval;
@@ -56,9 +59,9 @@ class UriLauncher : gobject.object.ObjectG
   }
 
   /**
-   * Gets the uri that will be opened.
-   * Returns: the uri
-   */
+      Gets the uri that will be opened.
+    Returns:     the uri
+  */
   string getUri()
   {
     const(char)* _cretval;
@@ -68,16 +71,18 @@ class UriLauncher : gobject.object.ObjectG
   }
 
   /**
-   * Launch an application to open the uri.
-   * This may present an app chooser dialog to the user.
-   * The callback will be called when the operation is completed.
-   * It should call [gtk.uri_launcher.UriLauncher.launchFinish] to obtain
-   * the result.
-   * Params:
-   *   parent = the parent `GtkWindow`
-   *   cancellable = a `GCancellable` to cancel the operation
-   *   callback = a callback to call when the operation is complete
-   */
+      Launch an application to open the uri.
+    
+    This may present an app chooser dialog to the user.
+    
+    The callback will be called when the operation is completed.
+    It should call [gtk.uri_launcher.UriLauncher.launchFinish] to obtain
+    the result.
+    Params:
+      parent =       the parent [gtk.window.Window]
+      cancellable =       a [gio.cancellable.Cancellable] to cancel the operation
+      callback =       a callback to call when the operation is complete
+  */
   void launch(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -94,13 +99,13 @@ class UriLauncher : gobject.object.ObjectG
   }
 
   /**
-   * Finishes the [gtk.uri_launcher.UriLauncher.launch] call and
-   * returns the result.
-   * Params:
-   *   result = a `GAsyncResult`
-   * Returns: `TRUE` if an application was launched,
-   *   or `FALSE` and error is set
-   */
+      Finishes the [gtk.uri_launcher.UriLauncher.launch] call and
+    returns the result.
+    Params:
+      result =       a [gio.async_result.AsyncResult]
+    Returns:     `TRUE` if an application was launched,
+          or `FALSE` and error is set
+  */
   bool launchFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
@@ -112,10 +117,10 @@ class UriLauncher : gobject.object.ObjectG
   }
 
   /**
-   * Sets the uri that will be opened.
-   * Params:
-   *   uri = the uri
-   */
+      Sets the uri that will be opened.
+    Params:
+      uri =       the uri
+  */
   void setUri(string uri = null)
   {
     const(char)* _uri = uri.toCString(No.Alloc);

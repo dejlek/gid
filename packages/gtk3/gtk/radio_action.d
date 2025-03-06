@@ -10,10 +10,10 @@ import gtk.toggle_action;
 import gtk.types;
 
 /**
- * A #GtkRadioAction is similar to #GtkRadioMenuItem. A number of radio
- * actions can be linked together so that only one may be active at any
- * one time.
- */
+    A #GtkRadioAction is similar to #GtkRadioMenuItem. A number of radio
+  actions can be linked together so that only one may be active at any
+  one time.
+*/
 class RadioAction : gtk.toggle_action.ToggleAction
 {
 
@@ -34,20 +34,20 @@ class RadioAction : gtk.toggle_action.ToggleAction
   }
 
   /**
-   * Creates a new #GtkRadioAction object. To add the action to
-   * a #GtkActionGroup and set the accelerator for the action,
-   * call [gtk.action_group.ActionGroup.addActionWithAccel].
-   * Params:
-   *   name = A unique name for the action
-   *   label = The label displayed in menu items and on buttons,
-   *     or %NULL
-   *   tooltip = A tooltip for this action, or %NULL
-   *   stockId = The stock icon to display in widgets representing
-   *     this action, or %NULL
-   *   value = The value which [gtk.radio_action.RadioAction.getCurrentValue] should
-   *     return if this action is selected.
-   * Returns: a new #GtkRadioAction
-   */
+      Creates a new #GtkRadioAction object. To add the action to
+    a #GtkActionGroup and set the accelerator for the action,
+    call [gtk.action_group.ActionGroup.addActionWithAccel].
+    Params:
+      name =       A unique name for the action
+      label =       The label displayed in menu items and on buttons,
+          or null
+      tooltip =       A tooltip for this action, or null
+      stockId =       The stock icon to display in widgets representing
+          this action, or null
+      value =       The value which [gtk.radio_action.RadioAction.getCurrentValue] should
+          return if this action is selected.
+    Returns:     a new #GtkRadioAction
+  */
   this(string name, string label, string tooltip, string stockId, int value)
   {
     GtkRadioAction* _cretval;
@@ -60,10 +60,10 @@ class RadioAction : gtk.toggle_action.ToggleAction
   }
 
   /**
-   * Obtains the value property of the currently active member of
-   * the group to which action belongs.
-   * Returns: The value of the currently active group member
-   */
+      Obtains the value property of the currently active member of
+    the group to which action belongs.
+    Returns:     The value of the currently active group member
+  */
   int getCurrentValue()
   {
     int _retval;
@@ -72,22 +72,25 @@ class RadioAction : gtk.toggle_action.ToggleAction
   }
 
   /**
-   * Returns the list representing the radio group for this object.
-   * Note that the returned list is only valid until the next change
-   * to the group.
-   * A common way to set up a group of radio group is the following:
-   * |[<!-- language\="C" -->
-   * GSList *group \= NULL;
-   * GtkRadioAction *action;
-   * while $(LPAREN) ...more actions to add... /$(RPAREN)
-   * {
-   * action \= gtk_radio_action_new $(LPAREN)...$(RPAREN);
-   * gtk_radio_action_set_group $(LPAREN)action, group$(RPAREN);
-   * group \= gtk_radio_action_get_group $(LPAREN)action$(RPAREN);
-   * }
-   * ]|
-   * Returns: the list representing the radio group for this object
-   */
+      Returns the list representing the radio group for this object.
+    Note that the returned list is only valid until the next change
+    to the group.
+    
+    A common way to set up a group of radio group is the following:
+    ```c
+      GSList *group = NULL;
+      GtkRadioAction *action;
+     
+      while ( ...more actions to add... /)
+        {
+           action = gtk_radio_action_new (...);
+           
+           gtk_radio_action_set_group (action, group);
+           group = gtk_radio_action_get_group (action);
+        }
+    ```
+    Returns:     the list representing the radio group for this object
+  */
   gtk.radio_action.RadioAction[] getGroup()
   {
     GSList* _cretval;
@@ -97,45 +100,49 @@ class RadioAction : gtk.toggle_action.ToggleAction
   }
 
   /**
-   * Joins a radio action object to the group of another radio action object.
-   * Use this in language bindings instead of the [gtk.radio_action.RadioAction.getGroup]
-   * and [gtk.radio_action.RadioAction.setGroup] methods
-   * A common way to set up a group of radio actions is the following:
-   * |[<!-- language\="C" -->
-   * GtkRadioAction *action;
-   * GtkRadioAction *last_action;
-   * while $(LPAREN) ...more actions to add... /$(RPAREN)
-   * {
-   * action \= gtk_radio_action_new $(LPAREN)...$(RPAREN);
-   * gtk_radio_action_join_group $(LPAREN)action, last_action$(RPAREN);
-   * last_action \= action;
-   * }
-   * ]|
-   * Params:
-   *   groupSource = a radio action object whos group we are
-   *     joining, or %NULL to remove the radio action from its group
-   */
+      Joins a radio action object to the group of another radio action object.
+    
+    Use this in language bindings instead of the [gtk.radio_action.RadioAction.getGroup]
+    and [gtk.radio_action.RadioAction.setGroup] methods
+    
+    A common way to set up a group of radio actions is the following:
+    ```c
+      GtkRadioAction *action;
+      GtkRadioAction *last_action;
+     
+      while ( ...more actions to add... /)
+        {
+           action = gtk_radio_action_new (...);
+           
+           gtk_radio_action_join_group (action, last_action);
+           last_action = action;
+        }
+    ```
+    Params:
+      groupSource =       a radio action object whos group we are
+          joining, or null to remove the radio action from its group
+  */
   void joinGroup(gtk.radio_action.RadioAction groupSource = null)
   {
     gtk_radio_action_join_group(cast(GtkRadioAction*)cPtr, groupSource ? cast(GtkRadioAction*)groupSource.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the currently active group member to the member with value
-   * property current_value.
-   * Params:
-   *   currentValue = the new value
-   */
+      Sets the currently active group member to the member with value
+    property current_value.
+    Params:
+      currentValue =       the new value
+  */
   void setCurrentValue(int currentValue)
   {
     gtk_radio_action_set_current_value(cast(GtkRadioAction*)cPtr, currentValue);
   }
 
   /**
-   * Sets the radio group for the radio action object.
-   * Params:
-   *   group = a list representing a radio group, or %NULL
-   */
+      Sets the radio group for the radio action object.
+    Params:
+      group =       a list representing a radio group, or null
+  */
   void setGroup(gtk.radio_action.RadioAction[] group = null)
   {
     auto _group = gSListFromD!(gtk.radio_action.RadioAction)(group);
@@ -144,23 +151,28 @@ class RadioAction : gtk.toggle_action.ToggleAction
   }
 
   /**
-   * The ::changed signal is emitted on every member of a radio group when the
-   * active member is changed. The signal gets emitted after the ::activate signals
-   * for the previous and current active members.
-   * Params
-   *   current = the member of action's group which has just been activated
-   *   radioAction = the instance the signal is connected to
-   */
+      The ::changed signal is emitted on every member of a radio group when the
+    active member is changed. The signal gets emitted after the ::activate signals
+    for the previous and current active members.
+  
+    ## Parameters
+    $(LIST
+      * $(B current)       the member of action's group which has just been activated
+      * $(B radioAction) the instance the signal is connected to
+    )
+  */
   alias ChangedCallbackDlg = void delegate(gtk.radio_action.RadioAction current, gtk.radio_action.RadioAction radioAction);
+
+  /** ditto */
   alias ChangedCallbackFunc = void function(gtk.radio_action.RadioAction current, gtk.radio_action.RadioAction radioAction);
 
   /**
-   * Connect to Changed signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Changed signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {

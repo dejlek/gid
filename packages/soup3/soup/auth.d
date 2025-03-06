@@ -10,13 +10,15 @@ import soup.message;
 import soup.types;
 
 /**
- * The abstract base class for handling authentication.
- * Specific HTTP Authentication mechanisms are implemented by its subclasses,
- * but applications never need to be aware of the specific subclasses being
- * used.
- * #SoupAuth objects store the authentication data associated with a given bit
- * of web space. They are created automatically by class@Session.
- */
+    The abstract base class for handling authentication.
+  
+  Specific HTTP Authentication mechanisms are implemented by its subclasses,
+  but applications never need to be aware of the specific subclasses being
+  used.
+  
+  #SoupAuth objects store the authentication data associated with a given bit
+  of web space. They are created automatically by `class@Session`.
+*/
 class Auth : gobject.object.ObjectG
 {
 
@@ -37,17 +39,18 @@ class Auth : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #SoupAuth of type type with the information from
-   * msg and auth_header.
-   * This is called by classSession; you will normally not create auths
-   * yourself.
-   * Params:
-   *   type = the type of auth to create $(LPAREN)a subtype of #SoupAuth$(RPAREN)
-   *   msg = the #SoupMessage the auth is being created for
-   *   authHeader = the WWW-Authenticate/Proxy-Authenticate header
-   * Returns: the new #SoupAuth, or %NULL if it could
-   *   not be created
-   */
+      Creates a new #SoupAuth of type type with the information from
+    msg and auth_header.
+    
+    This is called by `classSession`; you will normally not create auths
+    yourself.
+    Params:
+      type =       the type of auth to create (a subtype of #SoupAuth)
+      msg =       the #SoupMessage the auth is being created for
+      authHeader =       the WWW-Authenticate/Proxy-Authenticate header
+    Returns:     the new #SoupAuth, or null if it could
+        not be created
+  */
   this(gobject.types.GType type, soup.message.Message msg, string authHeader)
   {
     SoupAuth* _cretval;
@@ -57,13 +60,14 @@ class Auth : gobject.object.ObjectG
   }
 
   /**
-   * Call this on an auth to authenticate it.
-   * Normally this will cause the auth's message to be requeued with the new
-   * authentication info.
-   * Params:
-   *   username = the username provided by the user or client
-   *   password = the password provided by the user or client
-   */
+      Call this on an auth to authenticate it.
+    
+    Normally this will cause the auth's message to be requeued with the new
+    authentication info.
+    Params:
+      username =       the username provided by the user or client
+      password =       the password provided by the user or client
+  */
   void authenticate(string username, string password)
   {
     const(char)* _username = username.toCString(No.Alloc);
@@ -72,10 +76,10 @@ class Auth : gobject.object.ObjectG
   }
 
   /**
-   * Tests if auth is able to authenticate by providing credentials to the
-   * [soup.auth.Auth.authenticate].
-   * Returns: %TRUE if auth is able to accept credentials.
-   */
+      Tests if auth is able to authenticate by providing credentials to the
+    [soup.auth.Auth.authenticate].
+    Returns:     true if auth is able to accept credentials.
+  */
   bool canAuthenticate()
   {
     bool _retval;
@@ -84,20 +88,21 @@ class Auth : gobject.object.ObjectG
   }
 
   /**
-   * Call this on an auth to cancel it.
-   * You need to cancel an auth to complete an asynchronous authenticate operation
-   * when no credentials are provided $(LPAREN)[soup.auth.Auth.authenticate] is not called$(RPAREN).
-   * The #SoupAuth will be cancelled on dispose if it hans't been authenticated.
-   */
+      Call this on an auth to cancel it.
+    
+    You need to cancel an auth to complete an asynchronous authenticate operation
+    when no credentials are provided ([soup.auth.Auth.authenticate] is not called).
+    The #SoupAuth will be cancelled on dispose if it hans't been authenticated.
+  */
   void cancel()
   {
     soup_auth_cancel(cast(SoupAuth*)cPtr);
   }
 
   /**
-   * Returns the authority $(LPAREN)host:port$(RPAREN) that auth is associated with.
-   * Returns: the authority
-   */
+      Returns the authority (host:port) that auth is associated with.
+    Returns:     the authority
+  */
   string getAuthority()
   {
     const(char)* _cretval;
@@ -107,13 +112,14 @@ class Auth : gobject.object.ObjectG
   }
 
   /**
-   * Generates an appropriate "Authorization" header for msg.
-   * $(LPAREN)The session will only call this if [soup.auth.Auth.isAuthenticated] returned
-   * %TRUE.$(RPAREN)
-   * Params:
-   *   msg = the #SoupMessage to be authorized
-   * Returns: the "Authorization" header, which must be freed.
-   */
+      Generates an appropriate "Authorization" header for msg.
+    
+    (The session will only call this if [soup.auth.Auth.isAuthenticated] returned
+    true.)
+    Params:
+      msg =       the #SoupMessage to be authorized
+    Returns:     the "Authorization" header, which must be freed.
+  */
   string getAuthorization(soup.message.Message msg)
   {
     char* _cretval;
@@ -123,13 +129,14 @@ class Auth : gobject.object.ObjectG
   }
 
   /**
-   * Gets an opaque identifier for auth.
-   * The identifier can be used as a hash key or the like. #SoupAuth objects from
-   * the same server with the same identifier refer to the same authentication
-   * domain $(LPAREN)eg, the URLs associated with them take the same usernames and
-   * passwords$(RPAREN).
-   * Returns: the identifier
-   */
+      Gets an opaque identifier for auth.
+    
+    The identifier can be used as a hash key or the like. #SoupAuth objects from
+    the same server with the same identifier refer to the same authentication
+    domain (eg, the URLs associated with them take the same usernames and
+    passwords).
+    Returns:     the identifier
+  */
   string getInfo()
   {
     char* _cretval;
@@ -139,16 +146,17 @@ class Auth : gobject.object.ObjectG
   }
 
   /**
-   * Returns a list of paths on the server which auth extends over.
-   * $(LPAREN)All subdirectories of these paths are also assumed to be part
-   * of auth's protection space, unless otherwise discovered not to
-   * be.$(RPAREN)
-   * Params:
-   *   sourceUri = the URI of the request that auth was generated in
-   *     response to.
-   * Returns: the list of
-   *   paths, which can be freed with [soup.auth.Auth.freeProtectionSpace].
-   */
+      Returns a list of paths on the server which auth extends over.
+    
+    (All subdirectories of these paths are also assumed to be part
+    of auth's protection space, unless otherwise discovered not to
+    be.)
+    Params:
+      sourceUri =       the URI of the request that auth was generated in
+          response to.
+    Returns:     the list of
+        paths, which can be freed with [soup.auth.Auth.freeProtectionSpace].
+  */
   string[] getProtectionSpace(glib.uri.Uri sourceUri)
   {
     GSList* _cretval;
@@ -158,12 +166,13 @@ class Auth : gobject.object.ObjectG
   }
 
   /**
-   * Returns auth's realm.
-   * This is an identifier that distinguishes separate authentication spaces on a
-   * given server, and may be some string that is meaningful to the user.
-   * $(LPAREN)Although it is probably not localized.$(RPAREN)
-   * Returns: the realm name
-   */
+      Returns auth's realm.
+    
+    This is an identifier that distinguishes separate authentication spaces on a
+    given server, and may be some string that is meaningful to the user.
+    (Although it is probably not localized.)
+    Returns:     the realm name
+  */
   string getRealm()
   {
     const(char)* _cretval;
@@ -173,10 +182,10 @@ class Auth : gobject.object.ObjectG
   }
 
   /**
-   * soup_auth_get_scheme_name: $(LPAREN)attributes org.gtk.Method.get_property\=scheme-name$(RPAREN)
-   * Returns auth's scheme name. $(LPAREN)Eg, "Basic", "Digest", or "NTLM"$(RPAREN)
-   * Returns: the scheme name
-   */
+      soup_auth_get_scheme_name: (attributes org.gtk.Method.get_property=scheme-name)
+    Returns auth's scheme name. (Eg, "Basic", "Digest", or "NTLM")
+    Returns:     the scheme name
+  */
   string getSchemeName()
   {
     const(char)* _cretval;
@@ -186,9 +195,9 @@ class Auth : gobject.object.ObjectG
   }
 
   /**
-   * Tests if auth has been given a username and password.
-   * Returns: %TRUE if auth has been given a username and password
-   */
+      Tests if auth has been given a username and password.
+    Returns:     true if auth has been given a username and password
+  */
   bool isAuthenticated()
   {
     bool _retval;
@@ -197,9 +206,9 @@ class Auth : gobject.object.ObjectG
   }
 
   /**
-   * Tests if auth has been cancelled
-   * Returns: %TRUE if auth has been cancelled
-   */
+      Tests if auth has been cancelled
+    Returns:     true if auth has been cancelled
+  */
   bool isCancelled()
   {
     bool _retval;
@@ -208,10 +217,10 @@ class Auth : gobject.object.ObjectG
   }
 
   /**
-   * Tests whether or not auth is associated with a proxy server rather
-   * than an "origin" server.
-   * Returns: %TRUE or %FALSE
-   */
+      Tests whether or not auth is associated with a proxy server rather
+    than an "origin" server.
+    Returns:     true or false
+  */
   bool isForProxy()
   {
     bool _retval;
@@ -220,14 +229,15 @@ class Auth : gobject.object.ObjectG
   }
 
   /**
-   * Tests if auth is ready to make a request for msg with.
-   * For most auths, this is equivalent to [soup.auth.Auth.isAuthenticated], but for
-   * some auth types $(LPAREN)eg, NTLM$(RPAREN), the auth may be sendable $(LPAREN)eg, as an
-   * authentication request$(RPAREN) even before it is authenticated.
-   * Params:
-   *   msg = a #SoupMessage
-   * Returns: %TRUE if auth is ready to make a request with.
-   */
+      Tests if auth is ready to make a request for msg with.
+    
+    For most auths, this is equivalent to [soup.auth.Auth.isAuthenticated], but for
+    some auth types (eg, NTLM), the auth may be sendable (eg, as an
+    authentication request) even before it is authenticated.
+    Params:
+      msg =       a #SoupMessage
+    Returns:     true if auth is ready to make a request with.
+  */
   bool isReady(soup.message.Message msg)
   {
     bool _retval;
@@ -236,16 +246,17 @@ class Auth : gobject.object.ObjectG
   }
 
   /**
-   * Updates auth with the information from msg and auth_header,
-   * possibly un-authenticating it.
-   * As with [soup.auth.Auth.new_], this is normally only used by classSession.
-   * Params:
-   *   msg = the #SoupMessage auth is being updated for
-   *   authHeader = the WWW-Authenticate/Proxy-Authenticate header
-   * Returns: %TRUE if auth is still a valid $(LPAREN)but potentially
-   *   unauthenticated$(RPAREN) #SoupAuth. %FALSE if something about auth_params
-   *   could not be parsed or incorporated into auth at all.
-   */
+      Updates auth with the information from msg and auth_header,
+    possibly un-authenticating it.
+    
+    As with [soup.auth.Auth.new_], this is normally only used by `classSession`.
+    Params:
+      msg =       the #SoupMessage auth is being updated for
+      authHeader =       the WWW-Authenticate/Proxy-Authenticate header
+    Returns:     true if auth is still a valid (but potentially
+        unauthenticated) #SoupAuth. false if something about auth_params
+        could not be parsed or incorporated into auth at all.
+  */
   bool update(soup.message.Message msg, string authHeader)
   {
     bool _retval;

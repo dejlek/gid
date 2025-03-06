@@ -7,6 +7,7 @@ import arrow.sort_key;
 import arrow.types;
 import gid.gid;
 
+/** */
 class SortOptions : arrow.function_options.FunctionOptions
 {
 
@@ -26,6 +27,7 @@ class SortOptions : arrow.function_options.FunctionOptions
     return getType();
   }
 
+  /** */
   this(arrow.sort_key.SortKey[] sortKeys = null)
   {
     GArrowSortOptions* _cretval;
@@ -36,10 +38,10 @@ class SortOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-   * Add a sort key to be used.
-   * Params:
-   *   sortKey = The sort key to be added.
-   */
+      Add a sort key to be used.
+    Params:
+      sortKey =       The sort key to be added.
+  */
   void addSortKey(arrow.sort_key.SortKey sortKey)
   {
     garrow_sort_options_add_sort_key(cast(GArrowSortOptions*)cPtr, sortKey ? cast(GArrowSortKey*)sortKey.cPtr(No.Dup) : null);
@@ -47,6 +49,7 @@ class SortOptions : arrow.function_options.FunctionOptions
 
   alias equal = arrow.function_options.FunctionOptions.equal;
 
+  /** */
   bool equal(arrow.sort_options.SortOptions otherOptions)
   {
     bool _retval;
@@ -54,6 +57,7 @@ class SortOptions : arrow.function_options.FunctionOptions
     return _retval;
   }
 
+  /** */
   arrow.sort_key.SortKey[] getSortKeys()
   {
     GList* _cretval;
@@ -63,10 +67,10 @@ class SortOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-   * Set sort keys to be used.
-   * Params:
-   *   sortKeys = The sort keys to be used.
-   */
+      Set sort keys to be used.
+    Params:
+      sortKeys =       The sort keys to be used.
+  */
   void setSortKeys(arrow.sort_key.SortKey[] sortKeys)
   {
     auto _sortKeys = gListFromD!(arrow.sort_key.SortKey)(sortKeys);

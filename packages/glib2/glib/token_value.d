@@ -6,8 +6,8 @@ import glib.c.types;
 import glib.types;
 
 /**
- * A union holding the value of the token.
- */
+    A union holding the value of the token.
+*/
 class TokenValue
 {
   GTokenValue cInstance;

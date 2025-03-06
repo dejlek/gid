@@ -7,11 +7,12 @@ import gtksource.c.types;
 import gtksource.types;
 
 /**
- * Character encoding.
- * The #GtkSourceEncoding boxed type represents a character encoding. It is used
- * for example by #GtkSourceFile. Note that the text in GTK widgets is always
- * encoded in UTF-8.
- */
+    Character encoding.
+  
+  The #GtkSourceEncoding boxed type represents a character encoding. It is used
+  for example by #GtkSourceFile. Note that the text in GTK widgets is always
+  encoded in UTF-8.
+*/
 class Encoding : gobject.boxed.Boxed
 {
 
@@ -37,9 +38,9 @@ class Encoding : gobject.boxed.Boxed
   }
 
   /**
-   * Used by language bindings.
-   * Returns: a copy of enc.
-   */
+      Used by language bindings.
+    Returns:     a copy of enc.
+  */
   gtksource.encoding.Encoding copy()
   {
     GtkSourceEncoding* _cretval;
@@ -49,10 +50,10 @@ class Encoding : gobject.boxed.Boxed
   }
 
   /**
-   * Gets the character set of the #GtkSourceEncoding, such as "UTF-8" or
-   * "ISO-8859-1".
-   * Returns: the character set of the #GtkSourceEncoding.
-   */
+      Gets the character set of the #GtkSourceEncoding, such as "UTF-8" or
+    "ISO-8859-1".
+    Returns:     the character set of the #GtkSourceEncoding.
+  */
   string getCharset()
   {
     const(char)* _cretval;
@@ -62,9 +63,9 @@ class Encoding : gobject.boxed.Boxed
   }
 
   /**
-   * Gets the name of the #GtkSourceEncoding such as "Unicode" or "Western".
-   * Returns: the name of the #GtkSourceEncoding.
-   */
+      Gets the name of the #GtkSourceEncoding such as "Unicode" or "Western".
+    Returns:     the name of the #GtkSourceEncoding.
+  */
   string getName()
   {
     const(char)* _cretval;
@@ -73,6 +74,7 @@ class Encoding : gobject.boxed.Boxed
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;
@@ -82,10 +84,10 @@ class Encoding : gobject.boxed.Boxed
   }
 
   /**
-   * Gets all encodings.
-   * Returns: a list of
-   *   all #GtkSourceEncoding's. Free with [glib.slist.SList.free].
-   */
+      Gets all encodings.
+    Returns:     a list of
+      all #GtkSourceEncoding's. Free with [glib.slist.SList.free].
+  */
   static gtksource.encoding.Encoding[] getAll()
   {
     GSList* _cretval;
@@ -95,10 +97,11 @@ class Encoding : gobject.boxed.Boxed
   }
 
   /**
-   * Gets the #GtkSourceEncoding for the current locale.
-   * See also funcGLib.get_charset.
-   * Returns: the current locale encoding.
-   */
+      Gets the #GtkSourceEncoding for the current locale.
+    
+    See also `funcGLib.get_charset`.
+    Returns:     the current locale encoding.
+  */
   static gtksource.encoding.Encoding getCurrent()
   {
     const(GtkSourceEncoding)* _cretval;
@@ -108,14 +111,16 @@ class Encoding : gobject.boxed.Boxed
   }
 
   /**
-   * Gets the list of default candidate encodings to try when loading a file.
-   * See [gtksource.file_loader.FileLoader.setCandidateEncodings].
-   * This function returns a different list depending on the current locale $(LPAREN)i.e.
-   * language, country and default encoding$(RPAREN). The UTF-8 encoding and the current
-   * locale encoding are guaranteed to be present in the returned list.
-   * Returns: the list of
-   *   default candidate encodings. Free with [glib.slist.SList.free].
-   */
+      Gets the list of default candidate encodings to try when loading a file.
+    
+    See [gtksource.file_loader.FileLoader.setCandidateEncodings].
+    
+    This function returns a different list depending on the current locale (i.e.
+    language, country and default encoding). The UTF-8 encoding and the current
+    locale encoding are guaranteed to be present in the returned list.
+    Returns:     the list of
+      default candidate encodings. Free with [glib.slist.SList.free].
+  */
   static gtksource.encoding.Encoding[] getDefaultCandidates()
   {
     GSList* _cretval;
@@ -125,13 +130,13 @@ class Encoding : gobject.boxed.Boxed
   }
 
   /**
-   * Gets a #GtkSourceEncoding from a character set such as "UTF-8" or
-   * "ISO-8859-1".
-   * Params:
-   *   charset = a character set.
-   * Returns: the corresponding #GtkSourceEncoding, or %NULL
-   *   if not found.
-   */
+      Gets a #GtkSourceEncoding from a character set such as "UTF-8" or
+    "ISO-8859-1".
+    Params:
+      charset =       a character set.
+    Returns:     the corresponding #GtkSourceEncoding, or null
+      if not found.
+  */
   static gtksource.encoding.Encoding getFromCharset(string charset)
   {
     const(GtkSourceEncoding)* _cretval;
@@ -141,6 +146,7 @@ class Encoding : gobject.boxed.Boxed
     return _retval;
   }
 
+  /** */
   static gtksource.encoding.Encoding getUtf8()
   {
     const(GtkSourceEncoding)* _cretval;

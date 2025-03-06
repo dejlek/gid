@@ -7,12 +7,14 @@ import gtk.layout_manager;
 import gtk.types;
 
 /**
- * `GtkOverlayLayout` is the layout manager used by [gtk.overlay.Overlay].
- * It places widgets as overlays on top of the main child.
- * This is not a reusable layout manager, since it expects its widget
- * to be a `GtkOverlay`. It is only listed here so that its layout
- * properties get documented.
- */
+    [gtk.overlay_layout.OverlayLayout] is the layout manager used by [gtk.overlay.Overlay].
+  
+  It places widgets as overlays on top of the main child.
+  
+  This is not a reusable layout manager, since it expects its widget
+  to be a [gtk.overlay.Overlay]. It is only listed here so that its layout
+  properties get documented.
+*/
 class OverlayLayout : gtk.layout_manager.LayoutManager
 {
 
@@ -33,9 +35,9 @@ class OverlayLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
-   * Creates a new `GtkOverlayLayout` instance.
-   * Returns: the newly created instance
-   */
+      Creates a new [gtk.overlay_layout.OverlayLayout] instance.
+    Returns:     the newly created instance
+  */
   this()
   {
     GtkLayoutManager* _cretval;

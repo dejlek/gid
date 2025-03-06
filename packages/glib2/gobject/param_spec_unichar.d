@@ -7,8 +7,8 @@ import gobject.param_spec;
 import gobject.types;
 
 /**
- * A #GParamSpec derived structure that contains the meta data for unichar $(LPAREN)unsigned integer$(RPAREN) properties.
- */
+    A #GParamSpec derived structure that contains the meta data for unichar (unsigned integer) properties.
+*/
 class ParamSpecUnichar : gobject.param_spec.ParamSpec
 {
 

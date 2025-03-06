@@ -8,9 +8,9 @@ import glib.types;
 import gobject.object;
 
 /**
- * An abstract interface representing a password used in TLS. Often used in
- * user interaction such as unlocking a key storage token.
- */
+    An abstract interface representing a password used in TLS. Often used in
+  user interaction such as unlocking a key storage token.
+*/
 class TlsPassword : gobject.object.ObjectG
 {
 
@@ -31,12 +31,12 @@ class TlsPassword : gobject.object.ObjectG
   }
 
   /**
-   * Create a new #GTlsPassword object.
-   * Params:
-   *   flags = the password flags
-   *   description = description of what the password is for
-   * Returns: The newly allocated password object
-   */
+      Create a new #GTlsPassword object.
+    Params:
+      flags =       the password flags
+      description =       description of what the password is for
+    Returns:     The newly allocated password object
+  */
   this(gio.types.TlsPasswordFlags flags, string description)
   {
     GTlsPassword* _cretval;
@@ -46,9 +46,9 @@ class TlsPassword : gobject.object.ObjectG
   }
 
   /**
-   * Get a description string about what the password will be used for.
-   * Returns: The description of the password.
-   */
+      Get a description string about what the password will be used for.
+    Returns:     The description of the password.
+  */
   string getDescription()
   {
     const(char)* _cretval;
@@ -58,9 +58,9 @@ class TlsPassword : gobject.object.ObjectG
   }
 
   /**
-   * Get flags about the password.
-   * Returns: The flags about the password.
-   */
+      Get flags about the password.
+    Returns:     The flags about the password.
+  */
   gio.types.TlsPasswordFlags getFlags()
   {
     GTlsPasswordFlags _cretval;
@@ -70,13 +70,13 @@ class TlsPassword : gobject.object.ObjectG
   }
 
   /**
-   * Get the password value. If length is not %NULL then it will be
-   * filled in with the length of the password value. $(LPAREN)Note that the
-   * password value is not nul-terminated, so you can only pass %NULL
-   * for length in contexts where you know the password will have a
-   * certain fixed length.$(RPAREN)
-   * Returns: The password value $(LPAREN)owned by the password object$(RPAREN).
-   */
+      Get the password value. If length is not null then it will be
+    filled in with the length of the password value. (Note that the
+    password value is not nul-terminated, so you can only pass null
+    for length in contexts where you know the password will have a
+    certain fixed length.)
+    Returns:     The password value (owned by the password object).
+  */
   ubyte[] getValue()
   {
     const(ubyte)* _cretval;
@@ -92,11 +92,11 @@ class TlsPassword : gobject.object.ObjectG
   }
 
   /**
-   * Get a user readable translated warning. Usually this warning is a
-   * representation of the password flags returned from
-   * [gio.tls_password.TlsPassword.getFlags].
-   * Returns: The warning.
-   */
+      Get a user readable translated warning. Usually this warning is a
+    representation of the password flags returned from
+    [gio.tls_password.TlsPassword.getFlags].
+    Returns:     The warning.
+  */
   string getWarning()
   {
     const(char)* _cretval;
@@ -106,10 +106,10 @@ class TlsPassword : gobject.object.ObjectG
   }
 
   /**
-   * Set a description string about what the password will be used for.
-   * Params:
-   *   description = The description of the password
-   */
+      Set a description string about what the password will be used for.
+    Params:
+      description =       The description of the password
+  */
   void setDescription(string description)
   {
     const(char)* _description = description.toCString(No.Alloc);
@@ -117,25 +117,26 @@ class TlsPassword : gobject.object.ObjectG
   }
 
   /**
-   * Set flags about the password.
-   * Params:
-   *   flags = The flags about the password
-   */
+      Set flags about the password.
+    Params:
+      flags =       The flags about the password
+  */
   void setFlags(gio.types.TlsPasswordFlags flags)
   {
     g_tls_password_set_flags(cast(GTlsPassword*)cPtr, flags);
   }
 
   /**
-   * Set the value for this password. The value will be copied by the password
-   * object.
-   * Specify the length, for a non-nul-terminated password. Pass -1 as
-   * length if using a nul-terminated password, and length will be
-   * calculated automatically. $(LPAREN)Note that the terminating nul is not
-   * considered part of the password in this case.$(RPAREN)
-   * Params:
-   *   value = the new password value
-   */
+      Set the value for this password. The value will be copied by the password
+    object.
+    
+    Specify the length, for a non-nul-terminated password. Pass -1 as
+    length if using a nul-terminated password, and length will be
+    calculated automatically. (Note that the terminating nul is not
+    considered part of the password in this case.)
+    Params:
+      value =       the new password value
+  */
   void setValue(ubyte[] value)
   {
     ptrdiff_t _length;
@@ -147,17 +148,19 @@ class TlsPassword : gobject.object.ObjectG
   }
 
   /**
-   * Provide the value for this password.
-   * The value will be owned by the password object, and later freed using
-   * the destroy function callback.
-   * Specify the length, for a non-nul-terminated password. Pass -1 as
-   * length if using a nul-terminated password, and length will be
-   * calculated automatically. $(LPAREN)Note that the terminating nul is not
-   * considered part of the password in this case.$(RPAREN)
-   * Params:
-   *   value = the value for the password
-   *   destroy = a function to use to free the password.
-   */
+      Provide the value for this password.
+    
+    The value will be owned by the password object, and later freed using
+    the destroy function callback.
+    
+    Specify the length, for a non-nul-terminated password. Pass -1 as
+    length if using a nul-terminated password, and length will be
+    calculated automatically. (Note that the terminating nul is not
+    considered part of the password in this case.)
+    Params:
+      value =       the value for the password
+      destroy =       a function to use to free the password.
+  */
   void setValueFull(ubyte[] value, glib.types.DestroyNotify destroy = null)
   {
     extern(C) void _destroyCallback(void* data)
@@ -178,12 +181,12 @@ class TlsPassword : gobject.object.ObjectG
   }
 
   /**
-   * Set a user readable translated warning. Usually this warning is a
-   * representation of the password flags returned from
-   * [gio.tls_password.TlsPassword.getFlags].
-   * Params:
-   *   warning = The user readable warning
-   */
+      Set a user readable translated warning. Usually this warning is a
+    representation of the password flags returned from
+    [gio.tls_password.TlsPassword.getFlags].
+    Params:
+      warning =       The user readable warning
+  */
   void setWarning(string warning)
   {
     const(char)* _warning = warning.toCString(No.Alloc);

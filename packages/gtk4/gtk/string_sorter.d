@@ -8,13 +8,15 @@ import gtk.sorter;
 import gtk.types;
 
 /**
- * `GtkStringSorter` is a `GtkSorter` that compares strings.
- * It does the comparison in a linguistically correct way using the
- * current locale by normalizing Unicode strings and possibly case-folding
- * them before performing the comparison.
- * To obtain the strings to compare, this sorter evaluates a
- * [gtk.expression.Expression].
- */
+    [gtk.string_sorter.StringSorter] is a [gtk.sorter.Sorter] that compares strings.
+  
+  It does the comparison in a linguistically correct way using the
+  current locale by normalizing Unicode strings and possibly case-folding
+  them before performing the comparison.
+  
+  To obtain the strings to compare, this sorter evaluates a
+  [gtk.expression.Expression].
+*/
 class StringSorter : gtk.sorter.Sorter
 {
 
@@ -35,14 +37,15 @@ class StringSorter : gtk.sorter.Sorter
   }
 
   /**
-   * Creates a new string sorter that compares items using the given
-   * expression.
-   * Unless an expression is set on it, this sorter will always
-   * compare items as invalid.
-   * Params:
-   *   expression = The expression to evaluate
-   * Returns: a new `GtkStringSorter`
-   */
+      Creates a new string sorter that compares items using the given
+    expression.
+    
+    Unless an expression is set on it, this sorter will always
+    compare items as invalid.
+    Params:
+      expression =       The expression to evaluate
+    Returns:     a new [gtk.string_sorter.StringSorter]
+  */
   this(gtk.expression.Expression expression = null)
   {
     GtkStringSorter* _cretval;
@@ -51,9 +54,9 @@ class StringSorter : gtk.sorter.Sorter
   }
 
   /**
-   * Gets which collation method the sorter uses.
-   * Returns: The collation method
-   */
+      Gets which collation method the sorter uses.
+    Returns:     The collation method
+  */
   gtk.types.Collation getCollation()
   {
     GtkCollation _cretval;
@@ -63,9 +66,9 @@ class StringSorter : gtk.sorter.Sorter
   }
 
   /**
-   * Gets the expression that is evaluated to obtain strings from items.
-   * Returns: a `GtkExpression`
-   */
+      Gets the expression that is evaluated to obtain strings from items.
+    Returns:     a [gtk.expression.Expression]
+  */
   gtk.expression.Expression getExpression()
   {
     GtkExpression* _cretval;
@@ -75,9 +78,9 @@ class StringSorter : gtk.sorter.Sorter
   }
 
   /**
-   * Gets whether the sorter ignores case differences.
-   * Returns: %TRUE if self is ignoring case differences
-   */
+      Gets whether the sorter ignores case differences.
+    Returns:     true if self is ignoring case differences
+  */
   bool getIgnoreCase()
   {
     bool _retval;
@@ -86,31 +89,32 @@ class StringSorter : gtk.sorter.Sorter
   }
 
   /**
-   * Sets the collation method to use for sorting.
-   * Params:
-   *   collation = the collation method
-   */
+      Sets the collation method to use for sorting.
+    Params:
+      collation =       the collation method
+  */
   void setCollation(gtk.types.Collation collation)
   {
     gtk_string_sorter_set_collation(cast(GtkStringSorter*)cPtr, collation);
   }
 
   /**
-   * Sets the expression that is evaluated to obtain strings from items.
-   * The expression must have the type %G_TYPE_STRING.
-   * Params:
-   *   expression = a `GtkExpression`
-   */
+      Sets the expression that is evaluated to obtain strings from items.
+    
+    The expression must have the type `G_TYPE_STRING`.
+    Params:
+      expression =       a [gtk.expression.Expression]
+  */
   void setExpression(gtk.expression.Expression expression = null)
   {
     gtk_string_sorter_set_expression(cast(GtkStringSorter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets whether the sorter will ignore case differences.
-   * Params:
-   *   ignoreCase = %TRUE to ignore case differences
-   */
+      Sets whether the sorter will ignore case differences.
+    Params:
+      ignoreCase =       true to ignore case differences
+  */
   void setIgnoreCase(bool ignoreCase)
   {
     gtk_string_sorter_set_ignore_case(cast(GtkStringSorter*)cPtr, ignoreCase);

@@ -15,10 +15,12 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkMediaControls` is a widget to show controls for a video.
- * ![An example GtkMediaControls](media-controls.png)
- * Usually, `GtkMediaControls` is used as part of [gtk.video.Video].
- */
+    [gtk.media_controls.MediaControls] is a widget to show controls for a video.
+  
+  ![An example GtkMediaControls](media-controls.png)
+  
+  Usually, [gtk.media_controls.MediaControls] is used as part of [gtk.video.Video].
+*/
 class MediaControls : gtk.widget.Widget
 {
 
@@ -39,11 +41,11 @@ class MediaControls : gtk.widget.Widget
   }
 
   /**
-   * Creates a new `GtkMediaControls` managing the stream passed to it.
-   * Params:
-   *   stream = a `GtkMediaStream` to manage
-   * Returns: a new `GtkMediaControls`
-   */
+      Creates a new [gtk.media_controls.MediaControls] managing the stream passed to it.
+    Params:
+      stream =       a [gtk.media_stream.MediaStream] to manage
+    Returns:     a new [gtk.media_controls.MediaControls]
+  */
   this(gtk.media_stream.MediaStream stream = null)
   {
     GtkWidget* _cretval;
@@ -52,9 +54,9 @@ class MediaControls : gtk.widget.Widget
   }
 
   /**
-   * Gets the media stream managed by controls or %NULL if none.
-   * Returns: The media stream managed by controls
-   */
+      Gets the media stream managed by controls or null if none.
+    Returns:     The media stream managed by controls
+  */
   gtk.media_stream.MediaStream getMediaStream()
   {
     GtkMediaStream* _cretval;
@@ -64,10 +66,10 @@ class MediaControls : gtk.widget.Widget
   }
 
   /**
-   * Sets the stream that is controlled by controls.
-   * Params:
-   *   stream = a `GtkMediaStream`
-   */
+      Sets the stream that is controlled by controls.
+    Params:
+      stream =       a [gtk.media_stream.MediaStream]
+  */
   void setMediaStream(gtk.media_stream.MediaStream stream = null)
   {
     gtk_media_controls_set_media_stream(cast(GtkMediaControls*)cPtr, stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);

@@ -14,15 +14,21 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkAspectFrame` preserves the aspect ratio of its child.
- * The frame can respect the aspect ratio of the child widget,
- * or use its own aspect ratio.
- * # CSS nodes
- * `GtkAspectFrame` uses a CSS node with name `frame`.
- * # Accessibility
- * Until GTK 4.10, `GtkAspectFrame` used the `GTK_ACCESSIBLE_ROLE_GROUP` role.
- * Starting from GTK 4.12, `GtkAspectFrame` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
- */
+    [gtk.aspect_frame.AspectFrame] preserves the aspect ratio of its child.
+  
+  The frame can respect the aspect ratio of the child widget,
+  or use its own aspect ratio.
+  
+  # CSS nodes
+  
+  [gtk.aspect_frame.AspectFrame] uses a CSS node with name `frame`.
+  
+  # Accessibility
+  
+  Until GTK 4.10, [gtk.aspect_frame.AspectFrame] used the [gtk.types.AccessibleRole.Group] role.
+  
+  Starting from GTK 4.12, [gtk.aspect_frame.AspectFrame] uses the [gtk.types.AccessibleRole.Generic] role.
+*/
 class AspectFrame : gtk.widget.Widget
 {
 
@@ -43,17 +49,17 @@ class AspectFrame : gtk.widget.Widget
   }
 
   /**
-   * Create a new `GtkAspectFrame`.
-   * Params:
-   *   xalign = Horizontal alignment of the child within the parent.
-   *     Ranges from 0.0 $(LPAREN)left aligned$(RPAREN) to 1.0 $(LPAREN)right aligned$(RPAREN)
-   *   yalign = Vertical alignment of the child within the parent.
-   *     Ranges from 0.0 $(LPAREN)top aligned$(RPAREN) to 1.0 $(LPAREN)bottom aligned$(RPAREN)
-   *   ratio = The desired aspect ratio.
-   *   obeyChild = If %TRUE, ratio is ignored, and the aspect
-   *     ratio is taken from the requistion of the child.
-   * Returns: the new `GtkAspectFrame`.
-   */
+      Create a new [gtk.aspect_frame.AspectFrame].
+    Params:
+      xalign =       Horizontal alignment of the child within the parent.
+          Ranges from 0.0 (left aligned) to 1.0 (right aligned)
+      yalign =       Vertical alignment of the child within the parent.
+          Ranges from 0.0 (top aligned) to 1.0 (bottom aligned)
+      ratio =       The desired aspect ratio.
+      obeyChild =       If true, ratio is ignored, and the aspect
+          ratio is taken from the requistion of the child.
+    Returns:     the new [gtk.aspect_frame.AspectFrame].
+  */
   this(float xalign, float yalign, float ratio, bool obeyChild)
   {
     GtkWidget* _cretval;
@@ -62,9 +68,9 @@ class AspectFrame : gtk.widget.Widget
   }
 
   /**
-   * Gets the child widget of self.
-   * Returns: the child widget of self
-   */
+      Gets the child widget of self.
+    Returns:     the child widget of self
+  */
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
@@ -74,10 +80,10 @@ class AspectFrame : gtk.widget.Widget
   }
 
   /**
-   * Returns whether the child's size request should override
-   * the set aspect ratio of the `GtkAspectFrame`.
-   * Returns: whether to obey the child's size request
-   */
+      Returns whether the child's size request should override
+    the set aspect ratio of the [gtk.aspect_frame.AspectFrame].
+    Returns:     whether to obey the child's size request
+  */
   bool getObeyChild()
   {
     bool _retval;
@@ -86,9 +92,9 @@ class AspectFrame : gtk.widget.Widget
   }
 
   /**
-   * Returns the desired aspect ratio of the child.
-   * Returns: the desired aspect ratio
-   */
+      Returns the desired aspect ratio of the child.
+    Returns:     the desired aspect ratio
+  */
   float getRatio()
   {
     float _retval;
@@ -97,10 +103,10 @@ class AspectFrame : gtk.widget.Widget
   }
 
   /**
-   * Returns the horizontal alignment of the child within the
-   * allocation of the `GtkAspectFrame`.
-   * Returns: the horizontal alignment
-   */
+      Returns the horizontal alignment of the child within the
+    allocation of the [gtk.aspect_frame.AspectFrame].
+    Returns:     the horizontal alignment
+  */
   float getXalign()
   {
     float _retval;
@@ -109,10 +115,10 @@ class AspectFrame : gtk.widget.Widget
   }
 
   /**
-   * Returns the vertical alignment of the child within the
-   * allocation of the `GtkAspectFrame`.
-   * Returns: the vertical alignment
-   */
+      Returns the vertical alignment of the child within the
+    allocation of the [gtk.aspect_frame.AspectFrame].
+    Returns:     the vertical alignment
+  */
   float getYalign()
   {
     float _retval;
@@ -121,55 +127,55 @@ class AspectFrame : gtk.widget.Widget
   }
 
   /**
-   * Sets the child widget of self.
-   * Params:
-   *   child = the child widget
-   */
+      Sets the child widget of self.
+    Params:
+      child =       the child widget
+  */
   void setChild(gtk.widget.Widget child = null)
   {
     gtk_aspect_frame_set_child(cast(GtkAspectFrame*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets whether the aspect ratio of the child's size
-   * request should override the set aspect ratio of
-   * the `GtkAspectFrame`.
-   * Params:
-   *   obeyChild = If %TRUE, ratio is ignored, and the aspect
-   *     ratio is taken from the requisition of the child.
-   */
+      Sets whether the aspect ratio of the child's size
+    request should override the set aspect ratio of
+    the [gtk.aspect_frame.AspectFrame].
+    Params:
+      obeyChild =       If true, ratio is ignored, and the aspect
+           ratio is taken from the requisition of the child.
+  */
   void setObeyChild(bool obeyChild)
   {
     gtk_aspect_frame_set_obey_child(cast(GtkAspectFrame*)cPtr, obeyChild);
   }
 
   /**
-   * Sets the desired aspect ratio of the child.
-   * Params:
-   *   ratio = aspect ratio of the child
-   */
+      Sets the desired aspect ratio of the child.
+    Params:
+      ratio =       aspect ratio of the child
+  */
   void setRatio(float ratio)
   {
     gtk_aspect_frame_set_ratio(cast(GtkAspectFrame*)cPtr, ratio);
   }
 
   /**
-   * Sets the horizontal alignment of the child within the allocation
-   * of the `GtkAspectFrame`.
-   * Params:
-   *   xalign = horizontal alignment, from 0.0 $(LPAREN)left aligned$(RPAREN) to 1.0 $(LPAREN)right aligned$(RPAREN)
-   */
+      Sets the horizontal alignment of the child within the allocation
+    of the [gtk.aspect_frame.AspectFrame].
+    Params:
+      xalign =       horizontal alignment, from 0.0 (left aligned) to 1.0 (right aligned)
+  */
   void setXalign(float xalign)
   {
     gtk_aspect_frame_set_xalign(cast(GtkAspectFrame*)cPtr, xalign);
   }
 
   /**
-   * Sets the vertical alignment of the child within the allocation
-   * of the `GtkAspectFrame`.
-   * Params:
-   *   yalign = horizontal alignment, from 0.0 $(LPAREN)top aligned$(RPAREN) to 1.0 $(LPAREN)bottom aligned$(RPAREN)
-   */
+      Sets the vertical alignment of the child within the allocation
+    of the [gtk.aspect_frame.AspectFrame].
+    Params:
+      yalign =       horizontal alignment, from 0.0 (top aligned) to 1.0 (bottom aligned)
+  */
   void setYalign(float yalign)
   {
     gtk_aspect_frame_set_yalign(cast(GtkAspectFrame*)cPtr, yalign);

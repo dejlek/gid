@@ -12,6 +12,7 @@ import gid.gid;
 import gio.output_stream;
 import gobject.object;
 
+/** */
 class GIOOutputStream : arrow.output_stream.OutputStream
 {
 
@@ -31,6 +32,7 @@ class GIOOutputStream : arrow.output_stream.OutputStream
     return getType();
   }
 
+  /** */
   this(gio.output_stream.OutputStream gioOutputStream)
   {
     GArrowGIOOutputStream* _cretval;
@@ -38,6 +40,7 @@ class GIOOutputStream : arrow.output_stream.OutputStream
     this(_cretval, Yes.Take);
   }
 
+  /** */
   gio.output_stream.OutputStream getRaw()
   {
     GOutputStream* _cretval;

@@ -7,14 +7,16 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * Information about a color stop on a color line.
- * Color lines typically have offsets ranging between 0 and 1,
- * but that is not required.
- * Note: despite @color being unpremultiplied here, interpolation in
- * gradients shall happen in premultiplied space. See the OpenType spec
- * [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
- * section for details.
- */
+    Information about a color stop on a color line.
+  
+  Color lines typically have offsets ranging between 0 and 1,
+  but that is not required.
+  
+  Note: despite @color being unpremultiplied here, interpolation in
+  gradients shall happen in premultiplied space. See the OpenType spec
+  [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
+  section for details.
+*/
 class ColorStop : gobject.boxed.Boxed
 {
 

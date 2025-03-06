@@ -9,6 +9,7 @@ import gid.gid;
 import gobject.dclosure;
 import gobject.object;
 
+/** */
 class DragContext : gobject.object.ObjectG
 {
 
@@ -29,10 +30,10 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-   * Determines the bitmask of actions proposed by the source if
-   * [gdk.drag_context.DragContext.getSuggestedAction] returns %GDK_ACTION_ASK.
-   * Returns: the #GdkDragAction flags
-   */
+      Determines the bitmask of actions proposed by the source if
+    [gdk.drag_context.DragContext.getSuggestedAction] returns [gdk.types.DragAction.Ask].
+    Returns:     the #GdkDragAction flags
+  */
   gdk.types.DragAction getActions()
   {
     GdkDragAction _cretval;
@@ -42,9 +43,9 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-   * Returns the destination window for the DND operation.
-   * Returns: a #GdkWindow
-   */
+      Returns the destination window for the DND operation.
+    Returns:     a #GdkWindow
+  */
   gdk.window.Window getDestWindow()
   {
     GdkWindow* _cretval;
@@ -54,9 +55,9 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-   * Returns the #GdkDevice associated to the drag context.
-   * Returns: The #GdkDevice associated to context.
-   */
+      Returns the #GdkDevice associated to the drag context.
+    Returns:     The #GdkDevice associated to context.
+  */
   gdk.device.Device getDevice()
   {
     GdkDevice* _cretval;
@@ -66,14 +67,14 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-   * Returns the window on which the drag icon should be rendered
-   * during the drag operation. Note that the window may not be
-   * available until the drag operation has begun. GDK will move
-   * the window in accordance with the ongoing drag operation.
-   * The window is owned by context and will be destroyed when
-   * the drag operation is over.
-   * Returns: the drag window, or %NULL
-   */
+      Returns the window on which the drag icon should be rendered
+    during the drag operation. Note that the window may not be
+    available until the drag operation has begun. GDK will move
+    the window in accordance with the ongoing drag operation.
+    The window is owned by context and will be destroyed when
+    the drag operation is over.
+    Returns:     the drag window, or null
+  */
   gdk.window.Window getDragWindow()
   {
     GdkWindow* _cretval;
@@ -83,9 +84,9 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-   * Returns the drag protocol that is used by this context.
-   * Returns: the drag protocol
-   */
+      Returns the drag protocol that is used by this context.
+    Returns:     the drag protocol
+  */
   gdk.types.DragProtocol getProtocol()
   {
     GdkDragProtocol _cretval;
@@ -95,9 +96,9 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-   * Determines the action chosen by the drag destination.
-   * Returns: a #GdkDragAction value
-   */
+      Determines the action chosen by the drag destination.
+    Returns:     a #GdkDragAction value
+  */
   gdk.types.DragAction getSelectedAction()
   {
     GdkDragAction _cretval;
@@ -107,9 +108,9 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-   * Returns the #GdkWindow where the DND operation started.
-   * Returns: a #GdkWindow
-   */
+      Returns the #GdkWindow where the DND operation started.
+    Returns:     a #GdkWindow
+  */
   gdk.window.Window getSourceWindow()
   {
     GdkWindow* _cretval;
@@ -119,9 +120,9 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-   * Determines the suggested drag action of the context.
-   * Returns: a #GdkDragAction value
-   */
+      Determines the suggested drag action of the context.
+    Returns:     a #GdkDragAction value
+  */
   gdk.types.DragAction getSuggestedAction()
   {
     GdkDragAction _cretval;
@@ -131,26 +132,29 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-   * Requests the drag and drop operation to be managed by context.
-   * When a drag and drop operation becomes managed, the #GdkDragContext
-   * will internally handle all input and source-side #GdkEventDND events
-   * as required by the windowing system.
-   * Once the drag and drop operation is managed, the drag context will
-   * emit the following signals:
-   * - The #GdkDragContext::action-changed signal whenever the final action
-   * to be performed by the drag and drop operation changes.
-   * - The #GdkDragContext::drop-performed signal after the user performs
-   * the drag and drop gesture $(LPAREN)typically by releasing the mouse button$(RPAREN).
-   * - The #GdkDragContext::dnd-finished signal after the drag and drop
-   * operation concludes $(LPAREN)after all #GdkSelection transfers happen$(RPAREN).
-   * - The #GdkDragContext::cancel signal if the drag and drop operation is
-   * finished but doesn't happen over an accepting destination, or is
-   * cancelled through other means.
-   * Params:
-   *   ipcWindow = Window to use for IPC messaging/events
-   *   actions = the actions supported by the drag source
-   * Returns: #TRUE if the drag and drop operation is managed.
-   */
+      Requests the drag and drop operation to be managed by context.
+    When a drag and drop operation becomes managed, the #GdkDragContext
+    will internally handle all input and source-side #GdkEventDND events
+    as required by the windowing system.
+    
+    Once the drag and drop operation is managed, the drag context will
+    emit the following signals:
+    $(LIST
+      * The #GdkDragContext::action-changed signal whenever the final action
+        to be performed by the drag and drop operation changes.
+      * The #GdkDragContext::drop-performed signal after the user performs
+        the drag and drop gesture (typically by releasing the mouse button).
+      * The #GdkDragContext::dnd-finished signal after the drag and drop
+        operation concludes (after all #GdkSelection transfers happen).
+      * The #GdkDragContext::cancel signal if the drag and drop operation is
+        finished but doesn't happen over an accepting destination, or is
+        cancelled through other means.
+    )
+    Params:
+      ipcWindow =       Window to use for IPC messaging/events
+      actions =       the actions supported by the drag source
+    Returns:     #TRUE if the drag and drop operation is managed.
+  */
   bool manageDnd(gdk.window.Window ipcWindow, gdk.types.DragAction actions)
   {
     bool _retval;
@@ -159,48 +163,54 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-   * Associates a #GdkDevice to context, so all Drag and Drop events
-   * for context are emitted as if they came from this device.
-   * Params:
-   *   device = a #GdkDevice
-   */
+      Associates a #GdkDevice to context, so all Drag and Drop events
+    for context are emitted as if they came from this device.
+    Params:
+      device =       a #GdkDevice
+  */
   void setDevice(gdk.device.Device device)
   {
     gdk_drag_context_set_device(cast(GdkDragContext*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the position of the drag window that will be kept
-   * under the cursor hotspot. Initially, the hotspot is at the
-   * top left corner of the drag window.
-   * Params:
-   *   hotX = x coordinate of the drag window hotspot
-   *   hotY = y coordinate of the drag window hotspot
-   */
+      Sets the position of the drag window that will be kept
+    under the cursor hotspot. Initially, the hotspot is at the
+    top left corner of the drag window.
+    Params:
+      hotX =       x coordinate of the drag window hotspot
+      hotY =       y coordinate of the drag window hotspot
+  */
   void setHotspot(int hotX, int hotY)
   {
     gdk_drag_context_set_hotspot(cast(GdkDragContext*)cPtr, hotX, hotY);
   }
 
   /**
-   * A new action is being chosen for the drag and drop operation.
-   * This signal will only be emitted if the #GdkDragContext manages
-   * the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
-   * for more information.
-   * Params
-   *   action = The action currently chosen
-   *   dragContext = the instance the signal is connected to
-   */
+      A new action is being chosen for the drag and drop operation.
+    
+    This signal will only be emitted if the #GdkDragContext manages
+    the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
+    for more information.
+  
+    ## Parameters
+    $(LIST
+      * $(B action)       The action currently chosen
+      * $(B dragContext) the instance the signal is connected to
+    )
+  */
   alias ActionChangedCallbackDlg = void delegate(gdk.types.DragAction action, gdk.drag_context.DragContext dragContext);
+
+  /** ditto */
   alias ActionChangedCallbackFunc = void function(gdk.types.DragAction action, gdk.drag_context.DragContext dragContext);
 
   /**
-   * Connect to ActionChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ActionChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectActionChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActionChangedCallbackDlg) || is(T : ActionChangedCallbackFunc))
   {
@@ -218,24 +228,30 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-   * The drag and drop operation was cancelled.
-   * This signal will only be emitted if the #GdkDragContext manages
-   * the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
-   * for more information.
-   * Params
-   *   reason = The reason the context was cancelled
-   *   dragContext = the instance the signal is connected to
-   */
+      The drag and drop operation was cancelled.
+    
+    This signal will only be emitted if the #GdkDragContext manages
+    the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
+    for more information.
+  
+    ## Parameters
+    $(LIST
+      * $(B reason)       The reason the context was cancelled
+      * $(B dragContext) the instance the signal is connected to
+    )
+  */
   alias CancelCallbackDlg = void delegate(gdk.types.DragCancelReason reason, gdk.drag_context.DragContext dragContext);
+
+  /** ditto */
   alias CancelCallbackFunc = void function(gdk.types.DragCancelReason reason, gdk.drag_context.DragContext dragContext);
 
   /**
-   * Connect to Cancel signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Cancel signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectCancel(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CancelCallbackDlg) || is(T : CancelCallbackFunc))
   {
@@ -253,24 +269,31 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-   * The drag and drop operation was finished, the drag destination
-   * finished reading all data. The drag source can now free all
-   * miscellaneous data.
-   * This signal will only be emitted if the #GdkDragContext manages
-   * the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
-   * for more information.
-   *   dragContext = the instance the signal is connected to
-   */
+      The drag and drop operation was finished, the drag destination
+    finished reading all data. The drag source can now free all
+    miscellaneous data.
+    
+    This signal will only be emitted if the #GdkDragContext manages
+    the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
+    for more information.
+  
+    ## Parameters
+    $(LIST
+      * $(B dragContext) the instance the signal is connected to
+    )
+  */
   alias DndFinishedCallbackDlg = void delegate(gdk.drag_context.DragContext dragContext);
+
+  /** ditto */
   alias DndFinishedCallbackFunc = void function(gdk.drag_context.DragContext dragContext);
 
   /**
-   * Connect to DndFinished signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to DndFinished signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectDndFinished(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DndFinishedCallbackDlg) || is(T : DndFinishedCallbackFunc))
   {
@@ -287,24 +310,30 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-   * The drag and drop operation was performed on an accepting client.
-   * This signal will only be emitted if the #GdkDragContext manages
-   * the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
-   * for more information.
-   * Params
-   *   time = the time at which the drop happened.
-   *   dragContext = the instance the signal is connected to
-   */
+      The drag and drop operation was performed on an accepting client.
+    
+    This signal will only be emitted if the #GdkDragContext manages
+    the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
+    for more information.
+  
+    ## Parameters
+    $(LIST
+      * $(B time)       the time at which the drop happened.
+      * $(B dragContext) the instance the signal is connected to
+    )
+  */
   alias DropPerformedCallbackDlg = void delegate(int time, gdk.drag_context.DragContext dragContext);
+
+  /** ditto */
   alias DropPerformedCallbackFunc = void function(int time, gdk.drag_context.DragContext dragContext);
 
   /**
-   * Connect to DropPerformed signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to DropPerformed signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectDropPerformed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DropPerformedCallbackDlg) || is(T : DropPerformedCallbackFunc))
   {

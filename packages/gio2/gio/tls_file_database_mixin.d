@@ -9,10 +9,10 @@ public import glib.error;
 public import gobject.object;
 
 /**
- * `GTlsFileDatabase` is implemented by [gio.tls_database.TlsDatabase] objects which
- * load their certificate information from a file. It is an interface which
- * TLS library specific subtypes implement.
- */
+    [gio.tls_file_database.TlsFileDatabase] is implemented by [gio.tls_database.TlsDatabase] objects which
+  load their certificate information from a file. It is an interface which
+  TLS library specific subtypes implement.
+*/
 template TlsFileDatabaseT()
 {
 

@@ -7,8 +7,8 @@ import vte.c.types;
 import vte.types;
 
 /**
- * Provides context information for a context menu event.
- */
+    Provides context information for a context menu event.
+*/
 class EventContext
 {
   VteEventContext* cInstancePtr;
@@ -29,6 +29,7 @@ class EventContext
     return cast(void*)cInstancePtr;
   }
 
+  /** */
   gdk.event.Event getEvent()
   {
     GdkEvent* _cretval;

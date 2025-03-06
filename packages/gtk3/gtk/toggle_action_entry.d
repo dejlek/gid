@@ -6,9 +6,9 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * #GtkToggleActionEntry structs are used with
- * [gtk.action_group.ActionGroup.addToggleActions] to construct toggle actions.
- */
+    #GtkToggleActionEntry structs are used with
+  [gtk.action_group.ActionGroup.addToggleActions] to construct toggle actions.
+*/
 class ToggleActionEntry
 {
   GtkToggleActionEntry cInstance;

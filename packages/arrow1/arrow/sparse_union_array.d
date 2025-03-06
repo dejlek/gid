@@ -11,6 +11,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class SparseUnionArray : arrow.union_array.UnionArray
 {
 
@@ -30,6 +31,7 @@ class SparseUnionArray : arrow.union_array.UnionArray
     return getType();
   }
 
+  /** */
   this(arrow.int8_array.Int8Array typeIds, arrow.array.Array[] fields)
   {
     GArrowSparseUnionArray* _cretval;
@@ -42,6 +44,7 @@ class SparseUnionArray : arrow.union_array.UnionArray
     this(_cretval, Yes.Take);
   }
 
+  /** */
   static arrow.sparse_union_array.SparseUnionArray newDataType(arrow.sparse_union_data_type.SparseUnionDataType dataType, arrow.int8_array.Int8Array typeIds, arrow.array.Array[] fields)
   {
     GArrowSparseUnionArray* _cretval;

@@ -7,8 +7,8 @@ import gid.gid;
 import gobject.boxed;
 
 /**
- * A structure used to describe a text range.
- */
+    A structure used to describe a text range.
+*/
 class TextRange : gobject.boxed.Boxed
 {
 

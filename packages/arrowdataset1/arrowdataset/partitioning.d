@@ -6,6 +6,7 @@ import arrowdataset.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class Partitioning : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class Partitioning : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   static arrowdataset.partitioning.Partitioning createDefault()
   {
     GADatasetPartitioning* _cretval;
@@ -33,6 +35,7 @@ class Partitioning : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getTypeName()
   {
     char* _cretval;

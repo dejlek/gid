@@ -9,16 +9,17 @@ import gio.output_stream;
 import gio.types;
 
 /**
- * `GSimpleIOStream` creates a [gio.iostream.IOStream] from an arbitrary
- * [gio.input_stream.InputStream] and [gio.output_stream.OutputStream]. This allows any pair of
- * input and output streams to be used with [gio.iostream.IOStream] methods.
- * This is useful when you obtained a [gio.input_stream.InputStream] and a
- * [gio.output_stream.OutputStream] by other means, for instance creating them with
- * platform specific methods as
- * [`[gio.unix_input_stream.UnixInputStream.new_]`](../gio-unix/ctor.UnixInputStream.new.html)
- * $(LPAREN)from `gio-unix-2.0.pc` / `GioUnix-2.0`$(RPAREN), and you want to
- * take advantage of the methods provided by [gio.iostream.IOStream].
- */
+    [gio.simple_iostream.SimpleIOStream] creates a [gio.iostream.IOStream] from an arbitrary
+  [gio.input_stream.InputStream] and [gio.output_stream.OutputStream]. This allows any pair of
+  input and output streams to be used with [gio.iostream.IOStream] methods.
+  
+  This is useful when you obtained a [gio.input_stream.InputStream] and a
+  [gio.output_stream.OutputStream] by other means, for instance creating them with
+  platform specific methods as
+  [`[gio.unix_input_stream.UnixInputStream.new_]`](../gio-unix/ctor.UnixInputStream.new.html)
+  (from `gio-unix-2.0.pc` / `GioUnix-2.0`), and you want to
+  take advantage of the methods provided by [gio.iostream.IOStream].
+*/
 class SimpleIOStream : gio.iostream.IOStream
 {
 
@@ -39,13 +40,13 @@ class SimpleIOStream : gio.iostream.IOStream
   }
 
   /**
-   * Creates a new #GSimpleIOStream wrapping input_stream and output_stream.
-   * See also #GIOStream.
-   * Params:
-   *   inputStream = a #GInputStream.
-   *   outputStream = a #GOutputStream.
-   * Returns: a new #GSimpleIOStream instance.
-   */
+      Creates a new #GSimpleIOStream wrapping input_stream and output_stream.
+    See also #GIOStream.
+    Params:
+      inputStream =       a #GInputStream.
+      outputStream =       a #GOutputStream.
+    Returns:     a new #GSimpleIOStream instance.
+  */
   this(gio.input_stream.InputStream inputStream, gio.output_stream.OutputStream outputStream)
   {
     GIOStream* _cretval;

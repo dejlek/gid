@@ -10,9 +10,9 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Generated when all or part of a window becomes visible and needs to be
- * redrawn.
- */
+    Generated when all or part of a window becomes visible and needs to be
+  redrawn.
+*/
 class EventExpose
 {
   GdkEventExpose cInstance;

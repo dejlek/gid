@@ -7,6 +7,7 @@ import arrow.struct_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class StructScalar : arrow.scalar.Scalar
 {
 
@@ -26,6 +27,7 @@ class StructScalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   this(arrow.struct_data_type.StructDataType dataType, arrow.scalar.Scalar[] value)
   {
     GArrowStructScalar* _cretval;
@@ -35,6 +37,7 @@ class StructScalar : arrow.scalar.Scalar
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.scalar.Scalar[] getValue()
   {
     GList* _cretval;

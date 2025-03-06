@@ -12,6 +12,7 @@ import parquet.c.types;
 import parquet.file_metadata;
 import parquet.types;
 
+/** */
 class ArrowFileReader : gobject.object.ObjectG
 {
 
@@ -31,6 +32,7 @@ class ArrowFileReader : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   static parquet.arrow_file_reader.ArrowFileReader newArrow(arrow.seekable_input_stream.SeekableInputStream source)
   {
     GParquetArrowFileReader* _cretval;
@@ -42,6 +44,7 @@ class ArrowFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   static parquet.arrow_file_reader.ArrowFileReader newPath(string path)
   {
     GParquetArrowFileReader* _cretval;
@@ -54,6 +57,7 @@ class ArrowFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   parquet.file_metadata.FileMetadata getMetadata()
   {
     GParquetFileMetadata* _cretval;
@@ -62,6 +66,7 @@ class ArrowFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   int getNRowGroups()
   {
     int _retval;
@@ -69,6 +74,7 @@ class ArrowFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getNRows()
   {
     long _retval;
@@ -76,6 +82,7 @@ class ArrowFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.schema.Schema getSchema()
   {
     GArrowSchema* _cretval;
@@ -87,6 +94,7 @@ class ArrowFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.chunked_array.ChunkedArray readColumnData(int i)
   {
     GArrowChunkedArray* _cretval;
@@ -98,6 +106,7 @@ class ArrowFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table readRowGroup(int rowGroupIndex, int[] columnIndices = null)
   {
     GArrowTable* _cretval;
@@ -114,6 +123,7 @@ class ArrowFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table readTable()
   {
     GArrowTable* _cretval;
@@ -125,6 +135,7 @@ class ArrowFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   void setUseThreads(bool useThreads)
   {
     gparquet_arrow_file_reader_set_use_threads(cast(GParquetArrowFileReader*)cPtr, useThreads);

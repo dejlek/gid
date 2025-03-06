@@ -6,9 +6,9 @@ import gobject.c.types;
 import gobject.types;
 
 /**
- * The #GTypeValueTable provides the functions required by the #GValue
- * implementation, to serve as a container for values of a type.
- */
+    The #GTypeValueTable provides the functions required by the #GValue
+  implementation, to serve as a container for values of a type.
+*/
 class TypeValueTable
 {
   GTypeValueTable cInstance;

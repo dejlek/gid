@@ -10,14 +10,16 @@ import gio.initable_mixin;
 import gobject.dclosure;
 
 /**
- * `GdkVulkanContext` is an object representing the platform-specific
- * Vulkan draw context.
- * `GdkVulkanContext`s are created for a surface using
- * [gdk.surface.Surface.createVulkanContext], and the context will match
- * the characteristics of the surface.
- * Support for `GdkVulkanContext` is platform-specific and context creation
- * can fail, returning %NULL context.
- */
+    [gdk.vulkan_context.VulkanContext] is an object representing the platform-specific
+  Vulkan draw context.
+  
+  [gdk.vulkan_context.VulkanContext]s are created for a surface using
+  [gdk.surface.Surface.createVulkanContext], and the context will match
+  the characteristics of the surface.
+  
+  Support for [gdk.vulkan_context.VulkanContext] is platform-specific and context creation
+  can fail, returning null context.
+*/
 class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
 {
 
@@ -40,21 +42,28 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
   mixin InitableT!();
 
   /**
-   * Emitted when the images managed by this context have changed.
-   * Usually this means that the swapchain had to be recreated,
-   * for example in response to a change of the surface size.
-   *   vulkanContext = the instance the signal is connected to
-   */
+      Emitted when the images managed by this context have changed.
+    
+    Usually this means that the swapchain had to be recreated,
+    for example in response to a change of the surface size.
+  
+    ## Parameters
+    $(LIST
+      * $(B vulkanContext) the instance the signal is connected to
+    )
+  */
   alias ImagesUpdatedCallbackDlg = void delegate(gdk.vulkan_context.VulkanContext vulkanContext);
+
+  /** ditto */
   alias ImagesUpdatedCallbackFunc = void function(gdk.vulkan_context.VulkanContext vulkanContext);
 
   /**
-   * Connect to ImagesUpdated signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ImagesUpdated signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectImagesUpdated(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ImagesUpdatedCallbackDlg) || is(T : ImagesUpdatedCallbackFunc))
   {

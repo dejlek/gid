@@ -6,6 +6,7 @@ import arrowdataset.partitioning;
 import arrowdataset.types;
 import gid.gid;
 
+/** */
 class KeyValuePartitioning : arrowdataset.partitioning.Partitioning
 {
 

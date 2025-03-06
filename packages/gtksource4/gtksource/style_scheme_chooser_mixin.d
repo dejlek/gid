@@ -8,13 +8,14 @@ public import gtksource.c.types;
 public import gtksource.style_scheme;
 public import gtksource.types;
 
+/** */
 template StyleSchemeChooserT()
 {
 
   /**
-   * Gets the currently-selected scheme.
-   * Returns: the currently-selected scheme.
-   */
+      Gets the currently-selected scheme.
+    Returns:     the currently-selected scheme.
+  */
   override gtksource.style_scheme.StyleScheme getStyleScheme()
   {
     GtkSourceStyleScheme* _cretval;
@@ -24,10 +25,10 @@ template StyleSchemeChooserT()
   }
 
   /**
-   * Sets the scheme.
-   * Params:
-   *   scheme = a #GtkSourceStyleScheme
-   */
+      Sets the scheme.
+    Params:
+      scheme =       a #GtkSourceStyleScheme
+  */
   override void setStyleScheme(gtksource.style_scheme.StyleScheme scheme)
   {
     gtk_source_style_scheme_chooser_set_style_scheme(cast(GtkSourceStyleSchemeChooser*)cPtr, scheme ? cast(GtkSourceStyleScheme*)scheme.cPtr(No.Dup) : null);

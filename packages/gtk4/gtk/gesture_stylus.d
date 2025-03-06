@@ -11,10 +11,11 @@ import gtk.gesture_single;
 import gtk.types;
 
 /**
- * `GtkGestureStylus` is a `GtkGesture` specific to stylus input.
- * The provided signals just relay the basic information of the
- * stylus events.
- */
+    [gtk.gesture_stylus.GestureStylus] is a [gtk.gesture.Gesture] specific to stylus input.
+  
+  The provided signals just relay the basic information of the
+  stylus events.
+*/
 class GestureStylus : gtk.gesture_single.GestureSingle
 {
 
@@ -35,9 +36,9 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Creates a new `GtkGestureStylus`.
-   * Returns: a newly created stylus gesture
-   */
+      Creates a new [gtk.gesture_stylus.GestureStylus].
+    Returns:     a newly created stylus gesture
+  */
   this()
   {
     GtkGesture* _cretval;
@@ -46,16 +47,17 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Returns the current values for the requested axes.
-   * This function must be called from the handler of one of the
-   * [gtk.gesture_stylus.GestureStylus.down], [gtk.gesture_stylus.GestureStylus.motion],
-   * [gtk.gesture_stylus.GestureStylus.up] or [gtk.gesture_stylus.GestureStylus.proximity]
-   * signals.
-   * Params:
-   *   axes = array of requested axes, terminated with %GDK_AXIS_IGNORE
-   *   values = return location for the axis values
-   * Returns: %TRUE if there is a current value for the axes
-   */
+      Returns the current values for the requested axes.
+    
+    This function must be called from the handler of one of the
+    [gtk.gesture_stylus.GestureStylus.down], [gtk.gesture_stylus.GestureStylus.motion],
+    [gtk.gesture_stylus.GestureStylus.up] or [gtk.gesture_stylus.GestureStylus.proximity]
+    signals.
+    Params:
+      axes =       array of requested axes, terminated with [gdk.types.AxisUse.Ignore]
+      values =       return location for the axis values
+    Returns:     true if there is a current value for the axes
+  */
   bool getAxes(gdk.types.AxisUse[] axes, out double[] values)
   {
     bool _retval;
@@ -69,16 +71,17 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Returns the current value for the requested axis.
-   * This function must be called from the handler of one of the
-   * [gtk.gesture_stylus.GestureStylus.down], [gtk.gesture_stylus.GestureStylus.motion],
-   * [gtk.gesture_stylus.GestureStylus.up] or [gtk.gesture_stylus.GestureStylus.proximity]
-   * signals.
-   * Params:
-   *   axis = requested device axis
-   *   value = return location for the axis value
-   * Returns: %TRUE if there is a current value for the axis
-   */
+      Returns the current value for the requested axis.
+    
+    This function must be called from the handler of one of the
+    [gtk.gesture_stylus.GestureStylus.down], [gtk.gesture_stylus.GestureStylus.motion],
+    [gtk.gesture_stylus.GestureStylus.up] or [gtk.gesture_stylus.GestureStylus.proximity]
+    signals.
+    Params:
+      axis =       requested device axis
+      value =       return location for the axis value
+    Returns:     true if there is a current value for the axis
+  */
   bool getAxis(gdk.types.AxisUse axis, out double value)
   {
     bool _retval;
@@ -87,20 +90,23 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Returns the accumulated backlog of tracking information.
-   * By default, GTK will limit rate of input events. On stylus input
-   * where accuracy of strokes is paramount, this function returns the
-   * accumulated coordinate/timing state before the emission of the
-   * current [Gtk.GestureStylus::motion] signal.
-   * This function may only be called within a [gtk.gesture_stylus.GestureStylus.motion]
-   * signal handler, the state given in this signal and obtainable through
-   * [gtk.gesture_stylus.GestureStylus.getAxis] express the latest (most up-to-date)
-   * state in motion history.
-   * The backlog is provided in chronological order.
-   * Params:
-   *   backlog = coordinates and times for the backlog events
-   * Returns: %TRUE if there is a backlog to unfold in the current state.
-   */
+      Returns the accumulated backlog of tracking information.
+    
+    By default, GTK will limit rate of input events. On stylus input
+    where accuracy of strokes is paramount, this function returns the
+    accumulated coordinate/timing state before the emission of the
+    current [Gtk.GestureStylus::motion] signal.
+    
+    This function may only be called within a [gtk.gesture_stylus.GestureStylus.motion]
+    signal handler, the state given in this signal and obtainable through
+    [gtk.gesture_stylus.GestureStylus.getAxis] express the latest (most up-to-date)
+    state in motion history.
+    
+    The backlog is provided in chronological order.
+    Params:
+      backlog =       coordinates and times for the backlog events
+    Returns:     true if there is a backlog to unfold in the current state.
+  */
   bool getBacklog(out gdk.types.TimeCoord[] backlog)
   {
     bool _retval;
@@ -114,13 +120,14 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Returns the `GdkDeviceTool` currently driving input through this gesture.
-   * This function must be called from the handler of one of the
-   * [gtk.gesture_stylus.GestureStylus.down], [gtk.gesture_stylus.GestureStylus.motion],
-   * [gtk.gesture_stylus.GestureStylus.up] or [gtk.gesture_stylus.GestureStylus.proximity]
-   * signals.
-   * Returns: The current stylus tool
-   */
+      Returns the [gdk.device_tool.DeviceTool] currently driving input through this gesture.
+    
+    This function must be called from the handler of one of the
+    [gtk.gesture_stylus.GestureStylus.down], [gtk.gesture_stylus.GestureStylus.motion],
+    [gtk.gesture_stylus.GestureStylus.up] or [gtk.gesture_stylus.GestureStylus.proximity]
+    signals.
+    Returns:     The current stylus tool
+  */
   gdk.device_tool.DeviceTool getDeviceTool()
   {
     GdkDeviceTool* _cretval;
@@ -130,11 +137,12 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Checks whether the gesture is for styluses only.
-   * Stylus-only gestures will signal events exclusively from stylus
-   * input devices.
-   * Returns: %TRUE if the gesture is only for stylus events
-   */
+      Checks whether the gesture is for styluses only.
+    
+    Stylus-only gestures will signal events exclusively from stylus
+    input devices.
+    Returns:     true if the gesture is only for stylus events
+  */
   bool getStylusOnly()
   {
     bool _retval;
@@ -143,34 +151,40 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Sets the state of stylus-only
-   * If true, the gesture will exclusively handle events from stylus input devices,
-   * otherwise it'll handle events from any pointing device.
-   * Params:
-   *   stylusOnly = whether the gesture is used exclusively for stylus events
-   */
+      Sets the state of stylus-only
+    
+    If true, the gesture will exclusively handle events from stylus input devices,
+    otherwise it'll handle events from any pointing device.
+    Params:
+      stylusOnly =       whether the gesture is used exclusively for stylus events
+  */
   void setStylusOnly(bool stylusOnly)
   {
     gtk_gesture_stylus_set_stylus_only(cast(GtkGestureStylus*)cPtr, stylusOnly);
   }
 
   /**
-   * Emitted when the stylus touches the device.
-   * Params
-   *   x = the X coordinate of the stylus event
-   *   y = the Y coordinate of the stylus event
-   *   gestureStylus = the instance the signal is connected to
-   */
+      Emitted when the stylus touches the device.
+  
+    ## Parameters
+    $(LIST
+      * $(B x)       the X coordinate of the stylus event
+      * $(B y)       the Y coordinate of the stylus event
+      * $(B gestureStylus) the instance the signal is connected to
+    )
+  */
   alias DownCallbackDlg = void delegate(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
+
+  /** ditto */
   alias DownCallbackFunc = void function(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
 
   /**
-   * Connect to Down signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Down signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectDown(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DownCallbackDlg) || is(T : DownCallbackFunc))
   {
@@ -189,22 +203,27 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Emitted when the stylus moves while touching the device.
-   * Params
-   *   x = the X coordinate of the stylus event
-   *   y = the Y coordinate of the stylus event
-   *   gestureStylus = the instance the signal is connected to
-   */
+      Emitted when the stylus moves while touching the device.
+  
+    ## Parameters
+    $(LIST
+      * $(B x)       the X coordinate of the stylus event
+      * $(B y)       the Y coordinate of the stylus event
+      * $(B gestureStylus) the instance the signal is connected to
+    )
+  */
   alias MotionCallbackDlg = void delegate(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
+
+  /** ditto */
   alias MotionCallbackFunc = void function(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
 
   /**
-   * Connect to Motion signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Motion signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectMotion(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MotionCallbackDlg) || is(T : MotionCallbackFunc))
   {
@@ -223,22 +242,27 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Emitted when the stylus is in proximity of the device.
-   * Params
-   *   x = the X coordinate of the stylus event
-   *   y = the Y coordinate of the stylus event
-   *   gestureStylus = the instance the signal is connected to
-   */
+      Emitted when the stylus is in proximity of the device.
+  
+    ## Parameters
+    $(LIST
+      * $(B x)       the X coordinate of the stylus event
+      * $(B y)       the Y coordinate of the stylus event
+      * $(B gestureStylus) the instance the signal is connected to
+    )
+  */
   alias ProximityCallbackDlg = void delegate(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
+
+  /** ditto */
   alias ProximityCallbackFunc = void function(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
 
   /**
-   * Connect to Proximity signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Proximity signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectProximity(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ProximityCallbackDlg) || is(T : ProximityCallbackFunc))
   {
@@ -257,22 +281,27 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Emitted when the stylus no longer touches the device.
-   * Params
-   *   x = the X coordinate of the stylus event
-   *   y = the Y coordinate of the stylus event
-   *   gestureStylus = the instance the signal is connected to
-   */
+      Emitted when the stylus no longer touches the device.
+  
+    ## Parameters
+    $(LIST
+      * $(B x)       the X coordinate of the stylus event
+      * $(B y)       the Y coordinate of the stylus event
+      * $(B gestureStylus) the instance the signal is connected to
+    )
+  */
   alias UpCallbackDlg = void delegate(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
+
+  /** ditto */
   alias UpCallbackFunc = void function(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus);
 
   /**
-   * Connect to Up signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Up signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectUp(T)(T callback, Flag!"After" after = No.After)
   if (is(T : UpCallbackDlg) || is(T : UpCallbackFunc))
   {

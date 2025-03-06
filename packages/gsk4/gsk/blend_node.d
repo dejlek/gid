@@ -7,8 +7,8 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node applying a blending function between its two child nodes.
- */
+    A render node applying a blending function between its two child nodes.
+*/
 class BlendNode : gsk.render_node.RenderNode
 {
 
@@ -21,14 +21,14 @@ class BlendNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Creates a `GskRenderNode` that will use blend_mode to blend the top
-   * node onto the bottom node.
-   * Params:
-   *   bottom = The bottom node to be drawn
-   *   top = The node to be blended onto the bottom node
-   *   blendMode = The blend mode to use
-   * Returns: A new `GskRenderNode`
-   */
+      Creates a [gsk.render_node.RenderNode] that will use blend_mode to blend the top
+    node onto the bottom node.
+    Params:
+      bottom =       The bottom node to be drawn
+      top =       The node to be blended onto the bottom node
+      blendMode =       The blend mode to use
+    Returns:     A new [gsk.render_node.RenderNode]
+  */
   this(gsk.render_node.RenderNode bottom, gsk.render_node.RenderNode top, gsk.types.BlendMode blendMode)
   {
     GskRenderNode* _cretval;
@@ -37,9 +37,9 @@ class BlendNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the blend mode used by node.
-   * Returns: the blend mode
-   */
+      Retrieves the blend mode used by node.
+    Returns:     the blend mode
+  */
   gsk.types.BlendMode getBlendMode()
   {
     GskBlendMode _cretval;
@@ -49,9 +49,9 @@ class BlendNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the bottom `GskRenderNode` child of the node.
-   * Returns: the bottom child node
-   */
+      Retrieves the bottom [gsk.render_node.RenderNode] child of the node.
+    Returns:     the bottom child node
+  */
   gsk.render_node.RenderNode getBottomChild()
   {
     GskRenderNode* _cretval;
@@ -61,9 +61,9 @@ class BlendNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the top `GskRenderNode` child of the node.
-   * Returns: the top child node
-   */
+      Retrieves the top [gsk.render_node.RenderNode] child of the node.
+    Returns:     the top child node
+  */
   gsk.render_node.RenderNode getTopChild()
   {
     GskRenderNode* _cretval;

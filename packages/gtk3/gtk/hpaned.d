@@ -13,12 +13,13 @@ import gtk.paned;
 import gtk.types;
 
 /**
- * The HPaned widget is a container widget with two
- * children arranged horizontally. The division between
- * the two panes is adjustable by the user by dragging
- * a handle. See #GtkPaned for details.
- * GtkHPaned has been deprecated, use #GtkPaned instead.
- */
+    The HPaned widget is a container widget with two
+  children arranged horizontally. The division between
+  the two panes is adjustable by the user by dragging
+  a handle. See #GtkPaned for details.
+  
+  GtkHPaned has been deprecated, use #GtkPaned instead.
+*/
 class HPaned : gtk.paned.Paned
 {
 
@@ -39,11 +40,11 @@ class HPaned : gtk.paned.Paned
   }
 
   /**
-   * Create a new #GtkHPaned
-   * Returns: the new #GtkHPaned
-
-   * Deprecated: Use [gtk.paned.Paned.new_] with %GTK_ORIENTATION_HORIZONTAL instead
-   */
+      Create a new #GtkHPaned
+    Returns:     the new #GtkHPaned
+  
+    Deprecated:     Use [gtk.paned.Paned.new_] with [gtk.types.Orientation.Horizontal] instead
+  */
   this()
   {
     GtkWidget* _cretval;

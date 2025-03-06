@@ -6,15 +6,17 @@ import glib.c.types;
 import glib.types;
 
 /**
- * A `GCache` allows sharing of complex data structures, in order to
- * save system resources.
- * `GCache` uses keys and values. A `GCache` key describes the properties
- * of a particular resource. A `GCache` value is the actual resource.
- * `GCache` has been marked as deprecated, since this API is rarely
- * used and not very actively maintained.
+    A [glib.cache.Cache] allows sharing of complex data structures, in order to
+  save system resources.
+  
+  [glib.cache.Cache] uses keys and values. A [glib.cache.Cache] key describes the properties
+  of a particular resource. A [glib.cache.Cache] value is the actual resource.
+  
+  [glib.cache.Cache] has been marked as deprecated, since this API is rarely
+  used and not very actively maintained.
 
- * Deprecated: Use a #GHashTable instead
- */
+  Deprecated:     Use a #GHashTable instead
+*/
 class Cache
 {
   GCache* cInstancePtr;
@@ -36,32 +38,33 @@ class Cache
   }
 
   /**
-   * Frees the memory allocated for the #GCache.
-   * Note that it does not destroy the keys and values which were
-   * contained in the #GCache.
-
-   * Deprecated: Use a #GHashTable instead
-   */
+      Frees the memory allocated for the #GCache.
+    
+    Note that it does not destroy the keys and values which were
+    contained in the #GCache.
+  
+    Deprecated:     Use a #GHashTable instead
+  */
   void destroy()
   {
     g_cache_destroy(cast(GCache*)cPtr);
   }
 
   /**
-   * Gets the value corresponding to the given key, creating it if
-   * necessary. It first checks if the value already exists in the
-   * #GCache, by using the key_equal_func function passed to
-   * [glib.cache.Cache.new_]. If it does already exist it is returned, and its
-   * reference count is increased by one. If the value does not currently
-   * exist, if is created by calling the value_new_func. The key is
-   * duplicated by calling key_dup_func and the duplicated key and value
-   * are inserted into the #GCache.
-   * Params:
-   *   key = a key describing a #GCache object
-   * Returns: a pointer to a #GCache value
-
-   * Deprecated: Use a #GHashTable instead
-   */
+      Gets the value corresponding to the given key, creating it if
+    necessary. It first checks if the value already exists in the
+    #GCache, by using the key_equal_func function passed to
+    [glib.cache.Cache.new_]. If it does already exist it is returned, and its
+    reference count is increased by one. If the value does not currently
+    exist, if is created by calling the value_new_func. The key is
+    duplicated by calling key_dup_func and the duplicated key and value
+    are inserted into the #GCache.
+    Params:
+      key =       a key describing a #GCache object
+    Returns:     a pointer to a #GCache value
+  
+    Deprecated:     Use a #GHashTable instead
+  */
   void* insert(void* key = null)
   {
     auto _retval = g_cache_insert(cast(GCache*)cPtr, key);
@@ -69,16 +72,17 @@ class Cache
   }
 
   /**
-   * Calls the given function for each of the keys in the #GCache.
-   * NOTE func is passed three parameters, the value and key of a cache
-   * entry and the user_data. The order of value and key is different
-   * from the order in which [glib.hash_table.HashTable.foreach_] passes key-value
-   * pairs to its callback function !
-   * Params:
-   *   func = the function to call with each #GCache key
-
-   * Deprecated: Use a #GHashTable instead
-   */
+      Calls the given function for each of the keys in the #GCache.
+    
+    NOTE func is passed three parameters, the value and key of a cache
+    entry and the user_data. The order of value and key is different
+    from the order in which [glib.hash_table.HashTable.foreach_] passes key-value
+    pairs to its callback function !
+    Params:
+      func =       the function to call with each #GCache key
+  
+    Deprecated:     Use a #GHashTable instead
+  */
   void keyForeach(glib.types.HFunc func)
   {
     extern(C) void _funcCallback(void* key, void* value, void* userData)
@@ -94,27 +98,27 @@ class Cache
   }
 
   /**
-   * Decreases the reference count of the given value. If it drops to 0
-   * then the value and its corresponding key are destroyed, using the
-   * value_destroy_func and key_destroy_func passed to [glib.cache.Cache.new_].
-   * Params:
-   *   value = the value to remove
-
-   * Deprecated: Use a #GHashTable instead
-   */
+      Decreases the reference count of the given value. If it drops to 0
+    then the value and its corresponding key are destroyed, using the
+    value_destroy_func and key_destroy_func passed to [glib.cache.Cache.new_].
+    Params:
+      value =       the value to remove
+  
+    Deprecated:     Use a #GHashTable instead
+  */
   void remove(const(void)* value = null)
   {
     g_cache_remove(cast(GCache*)cPtr, value);
   }
 
   /**
-   * Calls the given function for each of the values in the #GCache.
-   * Params:
-   *   func = the function to call with each #GCache value
-
-   * Deprecated: The reason is that it passes pointers to internal
-   *   data structures to func; use [glib.cache.Cache.keyForeach] instead
-   */
+      Calls the given function for each of the values in the #GCache.
+    Params:
+      func =       the function to call with each #GCache value
+  
+    Deprecated:     The reason is that it passes pointers to internal
+         data structures to func; use [glib.cache.Cache.keyForeach] instead
+  */
   void valueForeach(glib.types.HFunc func)
   {
     extern(C) void _funcCallback(void* key, void* value, void* userData)

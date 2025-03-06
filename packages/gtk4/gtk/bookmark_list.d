@@ -9,13 +9,15 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * `GtkBookmarkList` is a list model that wraps `GBookmarkFile`.
- * It presents a `GListModel` and fills it asynchronously with the
- * `GFileInfo`s returned from that function.
- * The `GFileInfo`s in the list have some attributes in the recent
- * namespace added: `recent::private` $(LPAREN)boolean$(RPAREN) and `recent:applications`
- * $(LPAREN)stringv$(RPAREN).
- */
+    [gtk.bookmark_list.BookmarkList] is a list model that wraps [glib.bookmark_file.BookmarkFile].
+  
+  It presents a [gio.list_model.ListModel] and fills it asynchronously with the
+  [gio.file_info.FileInfo]s returned from that function.
+  
+  The [gio.file_info.FileInfo]s in the list have some attributes in the recent
+  namespace added: `recent::private` (boolean) and `recent:applications`
+  (stringv).
+*/
 class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
@@ -38,12 +40,12 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
   mixin ListModelT!();
 
   /**
-   * Creates a new `GtkBookmarkList` with the given attributes.
-   * Params:
-   *   filename = The bookmark file to load
-   *   attributes = The attributes to query
-   * Returns: a new `GtkBookmarkList`
-   */
+      Creates a new [gtk.bookmark_list.BookmarkList] with the given attributes.
+    Params:
+      filename =       The bookmark file to load
+      attributes =       The attributes to query
+    Returns:     a new [gtk.bookmark_list.BookmarkList]
+  */
   this(string filename = null, string attributes = null)
   {
     GtkBookmarkList* _cretval;
@@ -54,9 +56,9 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * Gets the attributes queried on the children.
-   * Returns: The queried attributes
-   */
+      Gets the attributes queried on the children.
+    Returns:     The queried attributes
+  */
   string getAttributes()
   {
     const(char)* _cretval;
@@ -66,10 +68,10 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * Returns the filename of the bookmark file that
-   * this list is loading.
-   * Returns: the filename of the .xbel file
-   */
+      Returns the filename of the bookmark file that
+    this list is loading.
+    Returns:     the filename of the .xbel file
+  */
   string getFilename()
   {
     const(char)* _cretval;
@@ -79,9 +81,9 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * Gets the IO priority to use while loading file.
-   * Returns: The IO priority.
-   */
+      Gets the IO priority to use while loading file.
+    Returns:     The IO priority.
+  */
   int getIoPriority()
   {
     int _retval;
@@ -90,12 +92,13 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * Returns %TRUE if the files are currently being loaded.
-   * Files will be added to self from time to time while loading is
-   * going on. The order in which are added is undefined and may change
-   * in between runs.
-   * Returns: %TRUE if self is loading
-   */
+      Returns true if the files are currently being loaded.
+    
+    Files will be added to self from time to time while loading is
+    going on. The order in which are added is undefined and may change
+    in between runs.
+    Returns:     true if self is loading
+  */
   bool isLoading()
   {
     bool _retval;
@@ -104,12 +107,13 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * Sets the attributes to be enumerated and starts the enumeration.
-   * If attributes is %NULL, no attributes will be queried, but a list
-   * of `GFileInfo`s will still be created.
-   * Params:
-   *   attributes = the attributes to enumerate
-   */
+      Sets the attributes to be enumerated and starts the enumeration.
+    
+    If attributes is null, no attributes will be queried, but a list
+    of [gio.file_info.FileInfo]s will still be created.
+    Params:
+      attributes =       the attributes to enumerate
+  */
   void setAttributes(string attributes = null)
   {
     const(char)* _attributes = attributes.toCString(No.Alloc);
@@ -117,11 +121,12 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-   * Sets the IO priority to use while loading files.
-   * The default IO priority is %G_PRIORITY_DEFAULT.
-   * Params:
-   *   ioPriority = IO priority to use
-   */
+      Sets the IO priority to use while loading files.
+    
+    The default IO priority is `G_PRIORITY_DEFAULT`.
+    Params:
+      ioPriority =       IO priority to use
+  */
   void setIoPriority(int ioPriority)
   {
     gtk_bookmark_list_set_io_priority(cast(GtkBookmarkList*)cPtr, ioPriority);

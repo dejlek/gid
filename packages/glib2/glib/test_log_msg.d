@@ -5,6 +5,7 @@ import glib.c.functions;
 import glib.c.types;
 import glib.types;
 
+/** */
 class TestLogMsg
 {
   GTestLogMsg cInstance;

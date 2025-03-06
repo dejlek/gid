@@ -7,16 +7,17 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GInetAddress` represents an IPv4 or IPv6 internet address. Use
- * [gio.resolver.Resolver.lookupByName] or
- * [gio.resolver.Resolver.lookupByNameAsync] to look up the `GInetAddress` for
- * a hostname. Use [gio.resolver.Resolver.lookupByAddress] or
- * [gio.resolver.Resolver.lookupByAddressAsync] to look up the hostname for a
- * `GInetAddress`.
- * To actually connect to a remote host, you will need a
- * [gio.inet_socket_address.InetSocketAddress] $(LPAREN)which includes a `GInetAddress` as well as a
- * port number$(RPAREN).
- */
+    [gio.inet_address.InetAddress] represents an IPv4 or IPv6 internet address. Use
+  [gio.resolver.Resolver.lookupByName] or
+  [gio.resolver.Resolver.lookupByNameAsync] to look up the [gio.inet_address.InetAddress] for
+  a hostname. Use [gio.resolver.Resolver.lookupByAddress] or
+  [gio.resolver.Resolver.lookupByAddressAsync] to look up the hostname for a
+  [gio.inet_address.InetAddress].
+  
+  To actually connect to a remote host, you will need a
+  [gio.inet_socket_address.InetSocketAddress] (which includes a [gio.inet_address.InetAddress] as well as a
+  port number).
+*/
 class InetAddress : gobject.object.ObjectG
 {
 
@@ -37,14 +38,14 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Creates a #GInetAddress for the "any" address $(LPAREN)unassigned/"don't
-   * care"$(RPAREN) for family.
-   * Params:
-   *   family = the address family
-   * Returns: a new #GInetAddress corresponding to the "any" address
-   *   for family.
-   *   Free the returned object with [gobject.object.ObjectG.unref].
-   */
+      Creates a #GInetAddress for the "any" address (unassigned/"don't
+    care") for family.
+    Params:
+      family =       the address family
+    Returns:     a new #GInetAddress corresponding to the "any" address
+      for family.
+          Free the returned object with [gobject.object.ObjectG.unref].
+  */
   static gio.inet_address.InetAddress newAny(gio.types.SocketFamily family)
   {
     GInetAddress* _cretval;
@@ -54,15 +55,15 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #GInetAddress from the given family and bytes.
-   * bytes should be 4 bytes for %G_SOCKET_FAMILY_IPV4 and 16 bytes for
-   * %G_SOCKET_FAMILY_IPV6.
-   * Params:
-   *   bytes = raw address data
-   *   family = the address family of bytes
-   * Returns: a new #GInetAddress corresponding to family and bytes.
-   *   Free the returned object with [gobject.object.ObjectG.unref].
-   */
+      Creates a new #GInetAddress from the given family and bytes.
+    bytes should be 4 bytes for [gio.types.SocketFamily.Ipv4] and 16 bytes for
+    [gio.types.SocketFamily.Ipv6].
+    Params:
+      bytes =       raw address data
+      family =       the address family of bytes
+    Returns:     a new #GInetAddress corresponding to family and bytes.
+          Free the returned object with [gobject.object.ObjectG.unref].
+  */
   static gio.inet_address.InetAddress newFromBytes(ubyte[] bytes, gio.types.SocketFamily family)
   {
     GInetAddress* _cretval;
@@ -73,13 +74,13 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Parses string as an IP address and creates a new #GInetAddress.
-   * Params:
-   *   string_ = a string representation of an IP address
-   * Returns: a new #GInetAddress corresponding
-   *   to string, or %NULL if string could not be parsed.
-   *   Free the returned object with [gobject.object.ObjectG.unref].
-   */
+      Parses string as an IP address and creates a new #GInetAddress.
+    Params:
+      string_ =       a string representation of an IP address
+    Returns:     a new #GInetAddress corresponding
+      to string, or null if string could not be parsed.
+          Free the returned object with [gobject.object.ObjectG.unref].
+  */
   static gio.inet_address.InetAddress newFromString(string string_)
   {
     GInetAddress* _cretval;
@@ -90,13 +91,13 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Creates a #GInetAddress for the loopback address for family.
-   * Params:
-   *   family = the address family
-   * Returns: a new #GInetAddress corresponding to the loopback address
-   *   for family.
-   *   Free the returned object with [gobject.object.ObjectG.unref].
-   */
+      Creates a #GInetAddress for the loopback address for family.
+    Params:
+      family =       the address family
+    Returns:     a new #GInetAddress corresponding to the loopback address
+      for family.
+          Free the returned object with [gobject.object.ObjectG.unref].
+  */
   static gio.inet_address.InetAddress newLoopback(gio.types.SocketFamily family)
   {
     GInetAddress* _cretval;
@@ -106,11 +107,11 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Checks if two #GInetAddress instances are equal, e.g. the same address.
-   * Params:
-   *   otherAddress = Another #GInetAddress.
-   * Returns: %TRUE if address and other_address are equal, %FALSE otherwise.
-   */
+      Checks if two #GInetAddress instances are equal, e.g. the same address.
+    Params:
+      otherAddress =       Another #GInetAddress.
+    Returns:     true if address and other_address are equal, false otherwise.
+  */
   bool equal(gio.inet_address.InetAddress otherAddress)
   {
     bool _retval;
@@ -119,9 +120,9 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Gets address's family
-   * Returns: address's family
-   */
+      Gets address's family
+    Returns:     address's family
+  */
   gio.types.SocketFamily getFamily()
   {
     GSocketFamily _cretval;
@@ -131,9 +132,9 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Tests whether address is the "any" address for its family.
-   * Returns: %TRUE if address is the "any" address for its family.
-   */
+      Tests whether address is the "any" address for its family.
+    Returns:     true if address is the "any" address for its family.
+  */
   bool getIsAny()
   {
     bool _retval;
@@ -142,11 +143,11 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Tests whether address is a link-local address $(LPAREN)that is, if it
-   * identifies a host on a local network that is not connected to the
-   * Internet$(RPAREN).
-   * Returns: %TRUE if address is a link-local address.
-   */
+      Tests whether address is a link-local address (that is, if it
+    identifies a host on a local network that is not connected to the
+    Internet).
+    Returns:     true if address is a link-local address.
+  */
   bool getIsLinkLocal()
   {
     bool _retval;
@@ -155,9 +156,9 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Tests whether address is the loopback address for its family.
-   * Returns: %TRUE if address is the loopback address for its family.
-   */
+      Tests whether address is the loopback address for its family.
+    Returns:     true if address is the loopback address for its family.
+  */
   bool getIsLoopback()
   {
     bool _retval;
@@ -166,9 +167,9 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Tests whether address is a global multicast address.
-   * Returns: %TRUE if address is a global multicast address.
-   */
+      Tests whether address is a global multicast address.
+    Returns:     true if address is a global multicast address.
+  */
   bool getIsMcGlobal()
   {
     bool _retval;
@@ -177,9 +178,9 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Tests whether address is a link-local multicast address.
-   * Returns: %TRUE if address is a link-local multicast address.
-   */
+      Tests whether address is a link-local multicast address.
+    Returns:     true if address is a link-local multicast address.
+  */
   bool getIsMcLinkLocal()
   {
     bool _retval;
@@ -188,9 +189,9 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Tests whether address is a node-local multicast address.
-   * Returns: %TRUE if address is a node-local multicast address.
-   */
+      Tests whether address is a node-local multicast address.
+    Returns:     true if address is a node-local multicast address.
+  */
   bool getIsMcNodeLocal()
   {
     bool _retval;
@@ -199,9 +200,9 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Tests whether address is an organization-local multicast address.
-   * Returns: %TRUE if address is an organization-local multicast address.
-   */
+      Tests whether address is an organization-local multicast address.
+    Returns:     true if address is an organization-local multicast address.
+  */
   bool getIsMcOrgLocal()
   {
     bool _retval;
@@ -210,9 +211,9 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Tests whether address is a site-local multicast address.
-   * Returns: %TRUE if address is a site-local multicast address.
-   */
+      Tests whether address is a site-local multicast address.
+    Returns:     true if address is a site-local multicast address.
+  */
   bool getIsMcSiteLocal()
   {
     bool _retval;
@@ -221,9 +222,9 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Tests whether address is a multicast address.
-   * Returns: %TRUE if address is a multicast address.
-   */
+      Tests whether address is a multicast address.
+    Returns:     true if address is a multicast address.
+  */
   bool getIsMulticast()
   {
     bool _retval;
@@ -232,12 +233,12 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Tests whether address is a site-local address such as 10.0.0.1
-   * $(LPAREN)that is, the address identifies a host on a local network that can
-   * not be reached directly from the Internet, but which may have
-   * outgoing Internet connectivity via a NAT or firewall$(RPAREN).
-   * Returns: %TRUE if address is a site-local address.
-   */
+      Tests whether address is a site-local address such as 10.0.0.1
+    (that is, the address identifies a host on a local network that can
+    not be reached directly from the Internet, but which may have
+    outgoing Internet connectivity via a NAT or firewall).
+    Returns:     true if address is a site-local address.
+  */
   bool getIsSiteLocal()
   {
     bool _retval;
@@ -246,10 +247,10 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Gets the size of the native raw binary address for address. This
-   * is the size of the data that you get from [gio.inet_address.InetAddress.toBytes].
-   * Returns: the number of bytes used for the native version of address.
-   */
+      Gets the size of the native raw binary address for address. This
+    is the size of the data that you get from [gio.inet_address.InetAddress.toBytes].
+    Returns:     the number of bytes used for the native version of address.
+  */
   size_t getNativeSize()
   {
     size_t _retval;
@@ -258,10 +259,10 @@ class InetAddress : gobject.object.ObjectG
   }
 
   /**
-   * Converts address to string form.
-   * Returns: a representation of address as a string, which should be
-   *   freed after use.
-   */
+      Converts address to string form.
+    Returns:     a representation of address as a string, which should be
+      freed after use.
+  */
   string toString_()
   {
     char* _cretval;

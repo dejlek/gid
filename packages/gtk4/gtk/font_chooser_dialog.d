@@ -22,21 +22,28 @@ import gtk.types;
 import gtk.window;
 
 /**
- * The `GtkFontChooserDialog` widget is a dialog for selecting a font.
- * ![An example GtkFontChooserDialog](fontchooser.png)
- * `GtkFontChooserDialog` implements the [gtk.font_chooser.FontChooser] interface
- * and does not provide much API of its own.
- * To create a `GtkFontChooserDialog`, use [gtk.font_chooser_dialog.FontChooserDialog.new_].
- * # GtkFontChooserDialog as GtkBuildable
- * The `GtkFontChooserDialog` implementation of the `GtkBuildable`
- * interface exposes the buttons with the names “select_button”
- * and “cancel_button”.
- * ## CSS nodes
- * `GtkFontChooserDialog` has a single CSS node with the name `window` and style
- * class `.fontchooser`.
+    The [gtk.font_chooser_dialog.FontChooserDialog] widget is a dialog for selecting a font.
+  
+  ![An example GtkFontChooserDialog](fontchooser.png)
+  
+  [gtk.font_chooser_dialog.FontChooserDialog] implements the [gtk.font_chooser.FontChooser] interface
+  and does not provide much API of its own.
+  
+  To create a [gtk.font_chooser_dialog.FontChooserDialog], use [gtk.font_chooser_dialog.FontChooserDialog.new_].
+  
+  # GtkFontChooserDialog as GtkBuildable
+  
+  The [gtk.font_chooser_dialog.FontChooserDialog] implementation of the [gtk.buildable.Buildable]
+  interface exposes the buttons with the names “select_button”
+  and “cancel_button”.
+  
+  ## CSS nodes
+  
+  [gtk.font_chooser_dialog.FontChooserDialog] has a single CSS node with the name `window` and style
+  class `.fontchooser`.
 
- * Deprecated: Use [gtk.font_dialog.FontDialog] instead
- */
+  Deprecated:     Use [gtk.font_dialog.FontDialog] instead
+*/
 class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
 {
 
@@ -59,14 +66,14 @@ class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
   mixin FontChooserT!();
 
   /**
-   * Creates a new `GtkFontChooserDialog`.
-   * Params:
-   *   title = Title of the dialog
-   *   parent = Transient parent of the dialog
-   * Returns: a new `GtkFontChooserDialog`
-
-   * Deprecated: Use [gtk.font_dialog.FontDialog] instead
-   */
+      Creates a new [gtk.font_chooser_dialog.FontChooserDialog].
+    Params:
+      title =       Title of the dialog
+      parent =       Transient parent of the dialog
+    Returns:     a new [gtk.font_chooser_dialog.FontChooserDialog]
+  
+    Deprecated:     Use [gtk.font_dialog.FontDialog] instead
+  */
   this(string title = null, gtk.window.Window parent = null)
   {
     GtkWidget* _cretval;

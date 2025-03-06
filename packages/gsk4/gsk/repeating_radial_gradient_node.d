@@ -7,8 +7,8 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node for a repeating radial gradient.
- */
+    A render node for a repeating radial gradient.
+*/
 class RepeatingRadialGradientNode : gsk.render_node.RenderNode
 {
 

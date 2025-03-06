@@ -9,12 +9,13 @@ import pango.layout;
 import pango.types;
 
 /**
- * A `PangoLayoutLine` represents one of the lines resulting from laying
- * out a paragraph via `PangoLayout`.
- * `PangoLayoutLine` structures are obtained by calling
- * [pango.layout.Layout.getLine] and are only valid until the text,
- * attributes, or settings of the parent `PangoLayout` are modified.
- */
+    A [pango.layout_line.LayoutLine] represents one of the lines resulting from laying
+  out a paragraph via [pango.layout.Layout].
+  
+  [pango.layout_line.LayoutLine] structures are obtained by calling
+  [pango.layout.Layout.getLine] and are only valid until the text,
+  attributes, or settings of the parent [pango.layout.Layout] are modified.
+*/
 class LayoutLine : gobject.boxed.Boxed
 {
 
@@ -90,39 +91,41 @@ class LayoutLine : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the logical and ink extents of a layout line.
-   * See [pango.font.Font.getGlyphExtents] for details
-   * about the interpretation of the rectangles.
-   * Params:
-   *   inkRect = rectangle used to store the extents of
-   *     the glyph string as drawn
-   *   logicalRect = rectangle used to store the logical
-   *     extents of the glyph string
-   */
+      Computes the logical and ink extents of a layout line.
+    
+    See [pango.font.Font.getGlyphExtents] for details
+    about the interpretation of the rectangles.
+    Params:
+      inkRect =       rectangle used to store the extents of
+          the glyph string as drawn
+      logicalRect =       rectangle used to store the logical
+          extents of the glyph string
+  */
   void getExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
     pango_layout_line_get_extents(cast(PangoLayoutLine*)cPtr, &inkRect, &logicalRect);
   }
 
   /**
-   * Computes the height of the line, as the maximum of the heights
-   * of fonts used in this line.
-   * Note that the actual baseline-to-baseline distance between lines
-   * of text is influenced by other factors, such as
-   * [pango.layout.Layout.setSpacing] and
-   * [pango.layout.Layout.setLineSpacing].
-   * Params:
-   *   height = return location for the line height
-   */
+      Computes the height of the line, as the maximum of the heights
+    of fonts used in this line.
+    
+    Note that the actual baseline-to-baseline distance between lines
+    of text is influenced by other factors, such as
+    [pango.layout.Layout.setSpacing] and
+    [pango.layout.Layout.setLineSpacing].
+    Params:
+      height =       return location for the line height
+  */
   void getHeight(out int height)
   {
     pango_layout_line_get_height(cast(PangoLayoutLine*)cPtr, cast(int*)&height);
   }
 
   /**
-   * Returns the length of the line, in bytes.
-   * Returns: the length of the line
-   */
+      Returns the length of the line, in bytes.
+    Returns:     the length of the line
+  */
   int getLength()
   {
     int _retval;
@@ -131,26 +134,27 @@ class LayoutLine : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the logical and ink extents of layout_line in device units.
-   * This function just calls [pango.layout_line.LayoutLine.getExtents] followed by
-   * two funcextents_to_pixels calls, rounding ink_rect and logical_rect
-   * such that the rounded rectangles fully contain the unrounded one $(LPAREN)that is,
-   * passes them as first argument to funcextents_to_pixels$(RPAREN).
-   * Params:
-   *   inkRect = rectangle used to store the extents of
-   *     the glyph string as drawn
-   *   logicalRect = rectangle used to store the logical
-   *     extents of the glyph string
-   */
+      Computes the logical and ink extents of layout_line in device units.
+    
+    This function just calls [pango.layout_line.LayoutLine.getExtents] followed by
+    two `funcextents_to_pixels` calls, rounding ink_rect and logical_rect
+    such that the rounded rectangles fully contain the unrounded one (that is,
+    passes them as first argument to `funcextents_to_pixels`).
+    Params:
+      inkRect =       rectangle used to store the extents of
+          the glyph string as drawn
+      logicalRect =       rectangle used to store the logical
+          extents of the glyph string
+  */
   void getPixelExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
     pango_layout_line_get_pixel_extents(cast(PangoLayoutLine*)cPtr, &inkRect, &logicalRect);
   }
 
   /**
-   * Returns the resolved direction of the line.
-   * Returns: the resolved direction of the line
-   */
+      Returns the resolved direction of the line.
+    Returns:     the resolved direction of the line
+  */
   pango.types.Direction getResolvedDirection()
   {
     PangoDirection _cretval;
@@ -160,10 +164,10 @@ class LayoutLine : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the start index of the line, as byte index
-   * into the text of the layout.
-   * Returns: the start index of the line
-   */
+      Returns the start index of the line, as byte index
+    into the text of the layout.
+    Returns:     the start index of the line
+  */
   int getStartIndex()
   {
     int _retval;
@@ -172,27 +176,28 @@ class LayoutLine : gobject.boxed.Boxed
   }
 
   /**
-   * Gets a list of visual ranges corresponding to a given logical range.
-   * This list is not necessarily minimal - there may be consecutive
-   * ranges which are adjacent. The ranges will be sorted from left to
-   * right. The ranges are with respect to the left edge of the entire
-   * layout, not with respect to the line.
-   * Params:
-   *   startIndex = Start byte index of the logical range. If this value
-   *     is less than the start index for the line, then the first range
-   *     will extend all the way to the leading edge of the layout. Otherwise,
-   *     it will start at the leading edge of the first character.
-   *   endIndex = Ending byte index of the logical range. If this value is
-   *     greater than the end index for the line, then the last range will
-   *     extend all the way to the trailing edge of the layout. Otherwise,
-   *     it will end at the trailing edge of the last character.
-   *   ranges = location to
-   *     store a pointer to an array of ranges. The array will be of length
-   *     `2*n_ranges`, with each range starting at `$(LPAREN)*ranges$(RPAREN)[2*n]` and of
-   *     width `$(LPAREN)*ranges$(RPAREN)[2*n + 1] - (*ranges)[2*n]`. This array must be freed
-   *     with [glib.global.gfree]. The coordinates are relative to the layout and are in
-   *     Pango units.
-   */
+      Gets a list of visual ranges corresponding to a given logical range.
+    
+    This list is not necessarily minimal - there may be consecutive
+    ranges which are adjacent. The ranges will be sorted from left to
+    right. The ranges are with respect to the left edge of the entire
+    layout, not with respect to the line.
+    Params:
+      startIndex =       Start byte index of the logical range. If this value
+          is less than the start index for the line, then the first range
+          will extend all the way to the leading edge of the layout. Otherwise,
+          it will start at the leading edge of the first character.
+      endIndex =       Ending byte index of the logical range. If this value is
+          greater than the end index for the line, then the last range will
+          extend all the way to the trailing edge of the layout. Otherwise,
+          it will end at the trailing edge of the last character.
+      ranges =       location to
+          store a pointer to an array of ranges. The array will be of length
+          `2*n_ranges`, with each range starting at `(*ranges)[2*n]` and of
+          width `(*ranges)[2*n + 1] - (*ranges)[2*n]`. This array must be freed
+          with [glib.global.gfree]. The coordinates are relative to the layout and are in
+          Pango units.
+  */
   void getXRanges(int startIndex, int endIndex, out int[] ranges)
   {
     int _nRanges;
@@ -204,39 +209,40 @@ class LayoutLine : gobject.boxed.Boxed
   }
 
   /**
-   * Converts an index within a line to a X position.
-   * Params:
-   *   index = byte offset of a grapheme within the layout
-   *   trailing = an integer indicating the edge of the grapheme to retrieve
-   *     the position of. If > 0, the trailing edge of the grapheme,
-   *     if 0, the leading of the grapheme
-   *   xPos = location to store the x_offset $(LPAREN)in Pango units$(RPAREN)
-   */
+      Converts an index within a line to a X position.
+    Params:
+      index =       byte offset of a grapheme within the layout
+      trailing =       an integer indicating the edge of the grapheme to retrieve
+          the position of. If > 0, the trailing edge of the grapheme,
+          if 0, the leading of the grapheme
+      xPos =       location to store the x_offset (in Pango units)
+  */
   void indexToX(int index, bool trailing, out int xPos)
   {
     pango_layout_line_index_to_x(cast(PangoLayoutLine*)cPtr, index, trailing, cast(int*)&xPos);
   }
 
   /**
-   * Converts from x offset to the byte index of the corresponding character
-   * within the text of the layout.
-   * If x_pos is outside the line, index_ and trailing will point to the very
-   * first or very last position in the line. This determination is based on the
-   * resolved direction of the paragraph; for example, if the resolved direction
-   * is right-to-left, then an X position to the right of the line $(LPAREN)after it$(RPAREN)
-   * results in 0 being stored in index_ and trailing. An X position to the
-   * left of the line results in index_ pointing to the $(LPAREN)logical$(RPAREN) last grapheme
-   * in the line and trailing being set to the number of characters in that
-   * grapheme. The reverse is true for a left-to-right line.
-   * Params:
-   *   xPos = the X offset $(LPAREN)in Pango units$(RPAREN) from the left edge of the line.
-   *   index = location to store calculated byte index for the grapheme
-   *     in which the user clicked
-   *   trailing = location to store an integer indicating where in the
-   *     grapheme the user clicked. It will either be zero, or the number of
-   *     characters in the grapheme. 0 represents the leading edge of the grapheme.
-   * Returns: %FALSE if x_pos was outside the line, %TRUE if inside
-   */
+      Converts from x offset to the byte index of the corresponding character
+    within the text of the layout.
+    
+    If x_pos is outside the line, index_ and trailing will point to the very
+    first or very last position in the line. This determination is based on the
+    resolved direction of the paragraph; for example, if the resolved direction
+    is right-to-left, then an X position to the right of the line (after it)
+    results in 0 being stored in index_ and trailing. An X position to the
+    left of the line results in index_ pointing to the (logical) last grapheme
+    in the line and trailing being set to the number of characters in that
+    grapheme. The reverse is true for a left-to-right line.
+    Params:
+      xPos =       the X offset (in Pango units) from the left edge of the line.
+      index =       location to store calculated byte index for the grapheme
+          in which the user clicked
+      trailing =       location to store an integer indicating where in the
+          grapheme the user clicked. It will either be zero, or the number of
+          characters in the grapheme. 0 represents the leading edge of the grapheme.
+    Returns:     false if x_pos was outside the line, true if inside
+  */
   bool xToIndex(int xPos, out int index, out int trailing)
   {
     bool _retval;

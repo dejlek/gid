@@ -9,10 +9,11 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * #GtkEventControllerMotion is an event controller meant for situations
- * where you need to track the position of the pointer.
- * This object was added in 3.24.
- */
+    #GtkEventControllerMotion is an event controller meant for situations
+  where you need to track the position of the pointer.
+  
+  This object was added in 3.24.
+*/
 class EventControllerMotion : gtk.event_controller.EventController
 {
 
@@ -33,12 +34,12 @@ class EventControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Creates a new event controller that will handle motion events
-   * for the given widget.
-   * Params:
-   *   widget = a #GtkWidget
-   * Returns: a new #GtkEventControllerMotion
-   */
+      Creates a new event controller that will handle motion events
+    for the given widget.
+    Params:
+      widget =       a #GtkWidget
+    Returns:     a new #GtkEventControllerMotion
+  */
   this(gtk.widget.Widget widget)
   {
     GtkEventController* _cretval;
@@ -47,22 +48,27 @@ class EventControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Signals that the pointer has entered the widget.
-   * Params
-   *   x = the x coordinate
-   *   y = the y coordinate
-   *   eventControllerMotion = the instance the signal is connected to
-   */
+      Signals that the pointer has entered the widget.
+  
+    ## Parameters
+    $(LIST
+      * $(B x)       the x coordinate
+      * $(B y)       the y coordinate
+      * $(B eventControllerMotion) the instance the signal is connected to
+    )
+  */
   alias EnterCallbackDlg = void delegate(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
+
+  /** ditto */
   alias EnterCallbackFunc = void function(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
 
   /**
-   * Connect to Enter signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Enter signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectEnter(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EnterCallbackDlg) || is(T : EnterCallbackFunc))
   {
@@ -81,19 +87,25 @@ class EventControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Signals that pointer has left the widget.
-   *   eventControllerMotion = the instance the signal is connected to
-   */
+      Signals that pointer has left the widget.
+  
+    ## Parameters
+    $(LIST
+      * $(B eventControllerMotion) the instance the signal is connected to
+    )
+  */
   alias LeaveCallbackDlg = void delegate(gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
+
+  /** ditto */
   alias LeaveCallbackFunc = void function(gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
 
   /**
-   * Connect to Leave signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Leave signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectLeave(T)(T callback, Flag!"After" after = No.After)
   if (is(T : LeaveCallbackDlg) || is(T : LeaveCallbackFunc))
   {
@@ -110,22 +122,27 @@ class EventControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Emitted when the pointer moves inside the widget.
-   * Params
-   *   x = the x coordinate
-   *   y = the y coordinate
-   *   eventControllerMotion = the instance the signal is connected to
-   */
+      Emitted when the pointer moves inside the widget.
+  
+    ## Parameters
+    $(LIST
+      * $(B x)       the x coordinate
+      * $(B y)       the y coordinate
+      * $(B eventControllerMotion) the instance the signal is connected to
+    )
+  */
   alias MotionCallbackDlg = void delegate(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
+
+  /** ditto */
   alias MotionCallbackFunc = void function(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
 
   /**
-   * Connect to Motion signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Motion signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectMotion(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MotionCallbackDlg) || is(T : MotionCallbackFunc))
   {

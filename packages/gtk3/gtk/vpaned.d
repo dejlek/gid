@@ -13,12 +13,13 @@ import gtk.paned;
 import gtk.types;
 
 /**
- * The VPaned widget is a container widget with two
- * children arranged vertically. The division between
- * the two panes is adjustable by the user by dragging
- * a handle. See #GtkPaned for details.
- * GtkVPaned has been deprecated, use #GtkPaned instead.
- */
+    The VPaned widget is a container widget with two
+  children arranged vertically. The division between
+  the two panes is adjustable by the user by dragging
+  a handle. See #GtkPaned for details.
+  
+  GtkVPaned has been deprecated, use #GtkPaned instead.
+*/
 class VPaned : gtk.paned.Paned
 {
 
@@ -39,11 +40,11 @@ class VPaned : gtk.paned.Paned
   }
 
   /**
-   * Create a new #GtkVPaned
-   * Returns: the new #GtkVPaned
-
-   * Deprecated: Use [gtk.paned.Paned.new_] with %GTK_ORIENTATION_VERTICAL instead
-   */
+      Create a new #GtkVPaned
+    Returns:     the new #GtkVPaned
+  
+    Deprecated:     Use [gtk.paned.Paned.new_] with [gtk.types.Orientation.Vertical] instead
+  */
   this()
   {
     GtkWidget* _cretval;

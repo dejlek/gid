@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class DayTimeIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
@@ -27,6 +28,7 @@ class DayTimeIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowDayTimeIntervalArrayBuilder* _cretval;
@@ -34,6 +36,7 @@ class DayTimeIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool appendValue(arrow.day_millisecond.DayMillisecond value)
   {
     bool _retval;
@@ -45,16 +48,16 @@ class DayTimeIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-   * Append multiple values at once. It's more efficient than multiple
-   * `append` calls.
-   * Params:
-   *   values = The array of a #GArrowDayMillisecond.
-   *   isValids = The array of
-   *     boolean that shows whether the Nth value is valid or not. If the
-   *     Nth `is_valids` is %TRUE, the Nth `values` is valid value. Otherwise
-   *     the Nth value is null value.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append multiple values at once. It's more efficient than multiple
+    `append` calls.
+    Params:
+      values =       The array of a #GArrowDayMillisecond.
+      isValids =       The array of
+          boolean that shows whether the Nth value is valid or not. If the
+          Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
+          the Nth value is null value.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendValues(arrow.day_millisecond.DayMillisecond[] values, bool[] isValids = null)
   {
     bool _retval;

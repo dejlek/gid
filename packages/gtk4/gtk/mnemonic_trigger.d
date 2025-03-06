@@ -7,10 +7,11 @@ import gtk.shortcut_trigger;
 import gtk.types;
 
 /**
- * A `GtkShortcutTrigger` that triggers when a specific mnemonic is pressed.
- * Mnemonics require a *mnemonic modifier* $(LPAREN)typically <kbd>Alt</kbd>$(RPAREN) to be
- * pressed together with the mnemonic key.
- */
+    A [gtk.shortcut_trigger.ShortcutTrigger] that triggers when a specific mnemonic is pressed.
+  
+  Mnemonics require a *mnemonic modifier* (typically <kbd>Alt</kbd>) to be
+  pressed together with the mnemonic key.
+*/
 class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
@@ -31,14 +32,15 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /**
-   * Creates a `GtkShortcutTrigger` that will trigger whenever the key with
-   * the given keyval is pressed and mnemonics have been activated.
-   * Mnemonics are activated by calling code when a key event with the right
-   * modifiers is detected.
-   * Params:
-   *   keyval = The keyval to trigger for
-   * Returns: A new `GtkShortcutTrigger`
-   */
+      Creates a [gtk.shortcut_trigger.ShortcutTrigger] that will trigger whenever the key with
+    the given keyval is pressed and mnemonics have been activated.
+    
+    Mnemonics are activated by calling code when a key event with the right
+    modifiers is detected.
+    Params:
+      keyval =       The keyval to trigger for
+    Returns:     A new [gtk.shortcut_trigger.ShortcutTrigger]
+  */
   this(uint keyval)
   {
     GtkShortcutTrigger* _cretval;
@@ -47,9 +49,9 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /**
-   * Gets the keyval that must be pressed to succeed triggering self.
-   * Returns: the keyval
-   */
+      Gets the keyval that must be pressed to succeed triggering self.
+    Returns:     the keyval
+  */
   uint getKeyval()
   {
     uint _retval;

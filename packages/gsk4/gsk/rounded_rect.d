@@ -9,17 +9,20 @@ import gsk.c.types;
 import gsk.types;
 
 /**
- * A rectangular region with rounded corners.
- * Application code should normalize rectangles using
- * [gsk.rounded_rect.RoundedRect.normalize]; this function will ensure that
- * the bounds of the rectangle are normalized and ensure that the corner
- * values are positive and the corners do not overlap.
- * All functions taking a `GskRoundedRect` as an argument will internally
- * operate on a normalized copy; all functions returning a `GskRoundedRect`
- * will always return a normalized one.
- * The algorithm used for normalizing corner sizes is described in
- * [the CSS specification](https://drafts.csswg.org/css-backgrounds-3/#border-radius).
- */
+    A rectangular region with rounded corners.
+  
+  Application code should normalize rectangles using
+  [gsk.rounded_rect.RoundedRect.normalize]; this function will ensure that
+  the bounds of the rectangle are normalized and ensure that the corner
+  values are positive and the corners do not overlap.
+  
+  All functions taking a [gsk.rounded_rect.RoundedRect] as an argument will internally
+  operate on a normalized copy; all functions returning a [gsk.rounded_rect.RoundedRect]
+  will always return a normalized one.
+  
+  The algorithm used for normalizing corner sizes is described in
+  [the CSS specification](https://drafts.csswg.org/css-backgrounds-3/#border-radius).
+*/
 class RoundedRect
 {
   GskRoundedRect cInstance;
@@ -46,11 +49,11 @@ class RoundedRect
   }
 
   /**
-   * Checks if the given point is inside the rounded rectangle.
-   * Params:
-   *   point = the point to check
-   * Returns: %TRUE if the point is inside the rounded rectangle
-   */
+      Checks if the given point is inside the rounded rectangle.
+    Params:
+      point =       the point to check
+    Returns:     true if the point is inside the rounded rectangle
+  */
   bool containsPoint(graphene.point.Point point)
   {
     bool _retval;
@@ -59,11 +62,11 @@ class RoundedRect
   }
 
   /**
-   * Checks if the given rect is contained inside the rounded rectangle.
-   * Params:
-   *   rect = the rectangle to check
-   * Returns: %TRUE if the rect is fully contained inside the rounded rectangle
-   */
+      Checks if the given rect is contained inside the rounded rectangle.
+    Params:
+      rect =       the rectangle to check
+    Returns:     true if the rect is fully contained inside the rounded rectangle
+  */
   bool containsRect(graphene.rect.Rect rect)
   {
     bool _retval;
@@ -72,17 +75,18 @@ class RoundedRect
   }
 
   /**
-   * Initializes the given `GskRoundedRect` with the given values.
-   * This function will implicitly normalize the `GskRoundedRect`
-   * before returning.
-   * Params:
-   *   bounds = a `graphene_rect_t` describing the bounds
-   *   topLeft = the rounding radius of the top left corner
-   *   topRight = the rounding radius of the top right corner
-   *   bottomRight = the rounding radius of the bottom right corner
-   *   bottomLeft = the rounding radius of the bottom left corner
-   * Returns: the initialized rectangle
-   */
+      Initializes the given [gsk.rounded_rect.RoundedRect] with the given values.
+    
+    This function will implicitly normalize the [gsk.rounded_rect.RoundedRect]
+    before returning.
+    Params:
+      bounds =       a [graphene.rect.Rect] describing the bounds
+      topLeft =       the rounding radius of the top left corner
+      topRight =       the rounding radius of the top right corner
+      bottomRight =       the rounding radius of the bottom right corner
+      bottomLeft =       the rounding radius of the bottom left corner
+    Returns:     the initialized rectangle
+  */
   gsk.rounded_rect.RoundedRect init_(graphene.rect.Rect bounds, graphene.size.Size topLeft, graphene.size.Size topRight, graphene.size.Size bottomRight, graphene.size.Size bottomLeft)
   {
     GskRoundedRect* _cretval;
@@ -92,13 +96,14 @@ class RoundedRect
   }
 
   /**
-   * Initializes self using the given src rectangle.
-   * This function will not normalize the `GskRoundedRect`,
-   * so make sure the source is normalized.
-   * Params:
-   *   src = a `GskRoundedRect`
-   * Returns: the initialized rectangle
-   */
+      Initializes self using the given src rectangle.
+    
+    This function will not normalize the [gsk.rounded_rect.RoundedRect],
+    so make sure the source is normalized.
+    Params:
+      src =       a [gsk.rounded_rect.RoundedRect]
+    Returns:     the initialized rectangle
+  */
   gsk.rounded_rect.RoundedRect initCopy(gsk.rounded_rect.RoundedRect src)
   {
     GskRoundedRect* _cretval;
@@ -108,13 +113,13 @@ class RoundedRect
   }
 
   /**
-   * Initializes self to the given bounds and sets the radius
-   * of all four corners to radius.
-   * Params:
-   *   bounds = a `graphene_rect_t`
-   *   radius = the border radius
-   * Returns: the initialized rectangle
-   */
+      Initializes self to the given bounds and sets the radius
+    of all four corners to radius.
+    Params:
+      bounds =       a [graphene.rect.Rect]
+      radius =       the border radius
+    Returns:     the initialized rectangle
+  */
   gsk.rounded_rect.RoundedRect initFromRect(graphene.rect.Rect bounds, float radius)
   {
     GskRoundedRect* _cretval;
@@ -124,11 +129,11 @@ class RoundedRect
   }
 
   /**
-   * Checks if part of the given rect is contained inside the rounded rectangle.
-   * Params:
-   *   rect = the rectangle to check
-   * Returns: %TRUE if the rect intersects with the rounded rectangle
-   */
+      Checks if part of the given rect is contained inside the rounded rectangle.
+    Params:
+      rect =       the rectangle to check
+    Returns:     true if the rect intersects with the rounded rectangle
+  */
   bool intersectsRect(graphene.rect.Rect rect)
   {
     bool _retval;
@@ -137,12 +142,13 @@ class RoundedRect
   }
 
   /**
-   * Checks if all corners of self are right angles and the
-   * rectangle covers all of its bounds.
-   * This information can be used to decide if [gsk.clip_node.ClipNode.new_]
-   * or [gsk.rounded_clip_node.RoundedClipNode.new_] should be called.
-   * Returns: %TRUE if the rectangle is rectilinear
-   */
+      Checks if all corners of self are right angles and the
+    rectangle covers all of its bounds.
+    
+    This information can be used to decide if [gsk.clip_node.ClipNode.new_]
+    or [gsk.rounded_clip_node.RoundedClipNode.new_] should be called.
+    Returns:     true if the rectangle is rectilinear
+  */
   bool isRectilinear()
   {
     bool _retval;
@@ -151,12 +157,13 @@ class RoundedRect
   }
 
   /**
-   * Normalizes the passed rectangle.
-   * This function will ensure that the bounds of the rectangle
-   * are normalized and ensure that the corner values are positive
-   * and the corners do not overlap.
-   * Returns: the normalized rectangle
-   */
+      Normalizes the passed rectangle.
+    
+    This function will ensure that the bounds of the rectangle
+    are normalized and ensure that the corner values are positive
+    and the corners do not overlap.
+    Returns:     the normalized rectangle
+  */
   gsk.rounded_rect.RoundedRect normalize()
   {
     GskRoundedRect* _cretval;
@@ -166,13 +173,14 @@ class RoundedRect
   }
 
   /**
-   * Offsets the bound's origin by dx and dy.
-   * The size and corners of the rectangle are unchanged.
-   * Params:
-   *   dx = the horizontal offset
-   *   dy = the vertical offset
-   * Returns: the offset rectangle
-   */
+      Offsets the bound's origin by dx and dy.
+    
+    The size and corners of the rectangle are unchanged.
+    Params:
+      dx =       the horizontal offset
+      dy =       the vertical offset
+    Returns:     the offset rectangle
+  */
   gsk.rounded_rect.RoundedRect offset(float dx, float dy)
   {
     GskRoundedRect* _cretval;
@@ -182,19 +190,21 @@ class RoundedRect
   }
 
   /**
-   * Shrinks $(LPAREN)or grows$(RPAREN) the given rectangle by moving the 4 sides
-   * according to the offsets given.
-   * The corner radii will be changed in a way that tries to keep
-   * the center of the corner circle intact. This emulates CSS behavior.
-   * This function also works for growing rectangles if you pass
-   * negative values for the top, right, bottom or left.
-   * Params:
-   *   top = How far to move the top side downwards
-   *   right = How far to move the right side to the left
-   *   bottom = How far to move the bottom side upwards
-   *   left = How far to move the left side to the right
-   * Returns: the resized `GskRoundedRect`
-   */
+      Shrinks (or grows) the given rectangle by moving the 4 sides
+    according to the offsets given.
+    
+    The corner radii will be changed in a way that tries to keep
+    the center of the corner circle intact. This emulates CSS behavior.
+    
+    This function also works for growing rectangles if you pass
+    negative values for the top, right, bottom or left.
+    Params:
+      top =       How far to move the top side downwards
+      right =       How far to move the right side to the left
+      bottom =       How far to move the bottom side upwards
+      left =       How far to move the left side to the right
+    Returns:     the resized [gsk.rounded_rect.RoundedRect]
+  */
   gsk.rounded_rect.RoundedRect shrink(float top, float right, float bottom, float left)
   {
     GskRoundedRect* _cretval;

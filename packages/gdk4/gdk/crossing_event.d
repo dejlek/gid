@@ -7,8 +7,8 @@ import gdk.types;
 import gid.gid;
 
 /**
- * An event caused by a pointing device moving between surfaces.
- */
+    An event caused by a pointing device moving between surfaces.
+*/
 class CrossingEvent : gdk.event.Event
 {
 
@@ -21,9 +21,9 @@ class CrossingEvent : gdk.event.Event
   }
 
   /**
-   * Extracts the notify detail from a crossing event.
-   * Returns: the notify detail of event
-   */
+      Extracts the notify detail from a crossing event.
+    Returns:     the notify detail of event
+  */
   gdk.types.NotifyType getDetail()
   {
     GdkNotifyType _cretval;
@@ -33,9 +33,9 @@ class CrossingEvent : gdk.event.Event
   }
 
   /**
-   * Checks if the event surface is the focus surface.
-   * Returns: %TRUE if the surface is the focus surface
-   */
+      Checks if the event surface is the focus surface.
+    Returns:     true if the surface is the focus surface
+  */
   bool getFocus()
   {
     bool _retval;
@@ -44,9 +44,9 @@ class CrossingEvent : gdk.event.Event
   }
 
   /**
-   * Extracts the crossing mode from a crossing event.
-   * Returns: the mode of event
-   */
+      Extracts the crossing mode from a crossing event.
+    Returns:     the mode of event
+  */
   gdk.types.CrossingMode getMode()
   {
     GdkCrossingMode _cretval;

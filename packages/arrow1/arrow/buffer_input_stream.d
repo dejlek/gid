@@ -12,6 +12,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
 {
 
@@ -31,6 +32,7 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
     return getType();
   }
 
+  /** */
   this(arrow.buffer.Buffer buffer)
   {
     GArrowBufferInputStream* _cretval;
@@ -38,6 +40,7 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.buffer.Buffer getBuffer()
   {
     GArrowBuffer* _cretval;

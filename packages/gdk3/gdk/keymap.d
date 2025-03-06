@@ -10,13 +10,13 @@ import gobject.object;
 import pango.types;
 
 /**
- * A #GdkKeymap defines the translation from keyboard state
- * $(LPAREN)including a hardware key, a modifier mask, and active keyboard group$(RPAREN)
- * to a keyval. This translation has two phases. The first phase is
- * to determine the effective keyboard group and level for the keyboard
- * state; the second phase is to look up the keycode/group/level triplet
- * in the keymap and see what keyval it corresponds to.
- */
+    A #GdkKeymap defines the translation from keyboard state
+  (including a hardware key, a modifier mask, and active keyboard group)
+  to a keyval. This translation has two phases. The first phase is
+  to determine the effective keyboard group and level for the keyboard
+  state; the second phase is to look up the keycode/group/level triplet
+  in the keymap and see what keyval it corresponds to.
+*/
 class Keymap : gobject.object.ObjectG
 {
 
@@ -37,11 +37,11 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * Returns the #GdkKeymap attached to the default display.
-   * Returns: the #GdkKeymap attached to the default display.
-
-   * Deprecated: Use [gdk.keymap.Keymap.getForDisplay] instead
-   */
+      Returns the #GdkKeymap attached to the default display.
+    Returns:     the #GdkKeymap attached to the default display.
+  
+    Deprecated:     Use [gdk.keymap.Keymap.getForDisplay] instead
+  */
   static gdk.keymap.Keymap getDefault()
   {
     GdkKeymap* _cretval;
@@ -51,11 +51,11 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * Returns the #GdkKeymap attached to display.
-   * Params:
-   *   display = the #GdkDisplay.
-   * Returns: the #GdkKeymap attached to display.
-   */
+      Returns the #GdkKeymap attached to display.
+    Params:
+      display =       the #GdkDisplay.
+    Returns:     the #GdkKeymap attached to display.
+  */
   static gdk.keymap.Keymap getForDisplay(gdk.display.Display display)
   {
     GdkKeymap* _cretval;
@@ -65,26 +65,28 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * Maps the non-virtual modifiers $(LPAREN)i.e Mod2, Mod3, ...$(RPAREN) which are set
-   * in state to the virtual modifiers $(LPAREN)i.e. Super, Hyper and Meta$(RPAREN) and
-   * set the corresponding bits in state.
-   * GDK already does this before delivering key events, but for
-   * compatibility reasons, it only sets the first virtual modifier
-   * it finds, whereas this function sets all matching virtual modifiers.
-   * This function is useful when matching key events against
-   * accelerators.
-   * Params:
-   *   state = pointer to the modifier mask to change
-   */
+      Maps the non-virtual modifiers (i.e Mod2, Mod3, ...) which are set
+    in state to the virtual modifiers (i.e. Super, Hyper and Meta) and
+    set the corresponding bits in state.
+    
+    GDK already does this before delivering key events, but for
+    compatibility reasons, it only sets the first virtual modifier
+    it finds, whereas this function sets all matching virtual modifiers.
+    
+    This function is useful when matching key events against
+    accelerators.
+    Params:
+      state =       pointer to the modifier mask to change
+  */
   void addVirtualModifiers(ref gdk.types.ModifierType state)
   {
     gdk_keymap_add_virtual_modifiers(cast(GdkKeymap*)cPtr, &state);
   }
 
   /**
-   * Returns whether the Caps Lock modifer is locked.
-   * Returns: %TRUE if Caps Lock is on
-   */
+      Returns whether the Caps Lock modifer is locked.
+    Returns:     true if Caps Lock is on
+  */
   bool getCapsLockState()
   {
     bool _retval;
@@ -93,11 +95,11 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * Returns the direction of effective layout of the keymap.
-   * Returns: %PANGO_DIRECTION_LTR or %PANGO_DIRECTION_RTL
-   *   if it can determine the direction. %PANGO_DIRECTION_NEUTRAL
-   *   otherwise.
-   */
+      Returns the direction of effective layout of the keymap.
+    Returns:     [pango.types.Direction.Ltr] or [pango.types.Direction.Rtl]
+        if it can determine the direction. [pango.types.Direction.Neutral]
+        otherwise.
+  */
   pango.types.Direction getDirection()
   {
     PangoDirection _cretval;
@@ -107,20 +109,20 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * Returns the keyvals bound to hardware_keycode.
-   * The Nth #GdkKeymapKey in keys is bound to the Nth
-   * keyval in keyvals. Free the returned arrays with [glib.global.gfree].
-   * When a keycode is pressed by the user, the keyval from
-   * this list of entries is selected by considering the effective
-   * keyboard group and level. See [gdk.keymap.Keymap.translateKeyboardState].
-   * Params:
-   *   hardwareKeycode = a keycode
-   *   keys = return
-   *     location for array of #GdkKeymapKey, or %NULL
-   *   keyvals = return
-   *     location for array of keyvals, or %NULL
-   * Returns: %TRUE if there were any entries
-   */
+      Returns the keyvals bound to hardware_keycode.
+    The Nth #GdkKeymapKey in keys is bound to the Nth
+    keyval in keyvals. Free the returned arrays with [glib.global.gfree].
+    When a keycode is pressed by the user, the keyval from
+    this list of entries is selected by considering the effective
+    keyboard group and level. See [gdk.keymap.Keymap.translateKeyboardState].
+    Params:
+      hardwareKeycode =       a keycode
+      keys =       return
+            location for array of #GdkKeymapKey, or null
+      keyvals =       return
+            location for array of keyvals, or null
+    Returns:     true if there were any entries
+  */
   bool getEntriesForKeycode(uint hardwareKeycode, out gdk.types.KeymapKey[] keys, out uint[] keyvals)
   {
     bool _retval;
@@ -138,23 +140,23 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * Obtains a list of keycode/group/level combinations that will
-   * generate keyval. Groups and levels are two kinds of keyboard mode;
-   * in general, the level determines whether the top or bottom symbol
-   * on a key is used, and the group determines whether the left or
-   * right symbol is used. On US keyboards, the shift key changes the
-   * keyboard level, and there are no groups. A group switch key might
-   * convert a keyboard between Hebrew to English modes, for example.
-   * #GdkEventKey contains a %group field that indicates the active
-   * keyboard group. The level is computed from the modifier mask.
-   * The returned array should be freed
-   * with [glib.global.gfree].
-   * Params:
-   *   keyval = a keyval, such as %GDK_KEY_a, %GDK_KEY_Up, %GDK_KEY_Return, etc.
-   *   keys = return location
-   *     for an array of #GdkKeymapKey
-   * Returns: %TRUE if keys were found and returned
-   */
+      Obtains a list of keycode/group/level combinations that will
+    generate keyval. Groups and levels are two kinds of keyboard mode;
+    in general, the level determines whether the top or bottom symbol
+    on a key is used, and the group determines whether the left or
+    right symbol is used. On US keyboards, the shift key changes the
+    keyboard level, and there are no groups. A group switch key might
+    convert a keyboard between Hebrew to English modes, for example.
+    #GdkEventKey contains a `group` field that indicates the active
+    keyboard group. The level is computed from the modifier mask.
+    The returned array should be freed
+    with [glib.global.gfree].
+    Params:
+      keyval =       a keyval, such as `GDK_KEY_a`, `GDK_KEY_Up`, `GDK_KEY_Return`, etc.
+      keys =       return location
+            for an array of #GdkKeymapKey
+    Returns:     true if keys were found and returned
+  */
   bool getEntriesForKeyval(uint keyval, out gdk.types.KeymapKey[] keys)
   {
     bool _retval;
@@ -168,18 +170,19 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * Returns the modifier mask the keymap’s windowing system backend
-   * uses for a particular purpose.
-   * Note that this function always returns real hardware modifiers, not
-   * virtual ones $(LPAREN)e.g. it will return #GDK_MOD1_MASK rather than
-   * #GDK_META_MASK if the backend maps MOD1 to META$(RPAREN), so there are use
-   * cases where the return value of this function has to be transformed
-   * by [gdk.keymap.Keymap.addVirtualModifiers] in order to contain the
-   * expected result.
-   * Params:
-   *   intent = the use case for the modifier mask
-   * Returns: the modifier mask used for intent.
-   */
+      Returns the modifier mask the keymap’s windowing system backend
+    uses for a particular purpose.
+    
+    Note that this function always returns real hardware modifiers, not
+    virtual ones (e.g. it will return #GDK_MOD1_MASK rather than
+    #GDK_META_MASK if the backend maps MOD1 to META), so there are use
+    cases where the return value of this function has to be transformed
+    by [gdk.keymap.Keymap.addVirtualModifiers] in order to contain the
+    expected result.
+    Params:
+      intent =       the use case for the modifier mask
+    Returns:     the modifier mask used for intent.
+  */
   gdk.types.ModifierType getModifierMask(gdk.types.ModifierIntent intent)
   {
     GdkModifierType _cretval;
@@ -189,9 +192,9 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * Returns the current modifier state.
-   * Returns: the current modifier state.
-   */
+      Returns the current modifier state.
+    Returns:     the current modifier state.
+  */
   uint getModifierState()
   {
     uint _retval;
@@ -200,9 +203,9 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the Num Lock modifer is locked.
-   * Returns: %TRUE if Num Lock is on
-   */
+      Returns whether the Num Lock modifer is locked.
+    Returns:     true if Num Lock is on
+  */
   bool getNumLockState()
   {
     bool _retval;
@@ -211,9 +214,9 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the Scroll Lock modifer is locked.
-   * Returns: %TRUE if Scroll Lock is on
-   */
+      Returns whether the Scroll Lock modifer is locked.
+    Returns:     true if Scroll Lock is on
+  */
   bool getScrollLockState()
   {
     bool _retval;
@@ -222,10 +225,10 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * Determines if keyboard layouts for both right-to-left and left-to-right
-   * languages are in use.
-   * Returns: %TRUE if there are layouts in both directions, %FALSE otherwise
-   */
+      Determines if keyboard layouts for both right-to-left and left-to-right
+    languages are in use.
+    Returns:     true if there are layouts in both directions, false otherwise
+  */
   bool haveBidiLayouts()
   {
     bool _retval;
@@ -234,15 +237,15 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * Looks up the keyval mapped to a keycode/group/level triplet.
-   * If no keyval is bound to key, returns 0. For normal user input,
-   * you want to use [gdk.keymap.Keymap.translateKeyboardState] instead of
-   * this function, since the effective group/level may not be
-   * the same as the current keyboard state.
-   * Params:
-   *   key = a #GdkKeymapKey with keycode, group, and level initialized
-   * Returns: a keyval, or 0 if none was mapped to the given key
-   */
+      Looks up the keyval mapped to a keycode/group/level triplet.
+    If no keyval is bound to key, returns 0. For normal user input,
+    you want to use [gdk.keymap.Keymap.translateKeyboardState] instead of
+    this function, since the effective group/level may not be
+    the same as the current keyboard state.
+    Params:
+      key =       a #GdkKeymapKey with keycode, group, and level initialized
+    Returns:     a keyval, or 0 if none was mapped to the given key
+  */
   uint lookupKey(gdk.types.KeymapKey key)
   {
     uint _retval;
@@ -251,18 +254,19 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * Maps the virtual modifiers $(LPAREN)i.e. Super, Hyper and Meta$(RPAREN) which
-   * are set in state to their non-virtual counterparts $(LPAREN)i.e. Mod2,
-   * Mod3,...$(RPAREN) and set the corresponding bits in state.
-   * This function is useful when matching key events against
-   * accelerators.
-   * Params:
-   *   state = pointer to the modifier state to map
-   * Returns: %FALSE if two virtual modifiers were mapped to the
-   *   same non-virtual modifier. Note that %FALSE is also returned
-   *   if a virtual modifier is mapped to a non-virtual modifier that
-   *   was already set in state.
-   */
+      Maps the virtual modifiers (i.e. Super, Hyper and Meta) which
+    are set in state to their non-virtual counterparts (i.e. Mod2,
+    Mod3,...) and set the corresponding bits in state.
+    
+    This function is useful when matching key events against
+    accelerators.
+    Params:
+      state =       pointer to the modifier state to map
+    Returns:     false if two virtual modifiers were mapped to the
+          same non-virtual modifier. Note that false is also returned
+          if a virtual modifier is mapped to a non-virtual modifier that
+          was already set in state.
+  */
   bool mapVirtualModifiers(ref gdk.types.ModifierType state)
   {
     bool _retval;
@@ -271,61 +275,65 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * Translates the contents of a #GdkEventKey into a keyval, effective
-   * group, and level. Modifiers that affected the translation and
-   * are thus unavailable for application use are returned in
-   * consumed_modifiers.
-   * See [Groups][key-group-explanation] for an explanation of
-   * groups and levels. The effective_group is the group that was
-   * actually used for the translation; some keys such as Enter are not
-   * affected by the active keyboard group. The level is derived from
-   * state. For convenience, #GdkEventKey already contains the translated
-   * keyval, so this function isn’t as useful as you might think.
-   * consumed_modifiers gives modifiers that should be masked outfrom state
-   * when comparing this key press to a hot key. For instance, on a US keyboard,
-   * the `plus` symbol is shifted, so when comparing a key press to a
-   * `<Control>plus` accelerator `<Shift>` should be masked out.
-   * |[<!-- language\="C" -->
-   * // We want to ignore irrelevant modifiers like ScrollLock
-   * #define ALL_ACCELS_MASK $(LPAREN)GDK_CONTROL_MASK | GDK_SHIFT_MASK | GDK_MOD1_MASK$(RPAREN)
-   * gdk_keymap_translate_keyboard_state $(LPAREN)keymap, event->hardware_keycode,
-   * event->state, event->group,
-   * &keyval, NULL, NULL, &consumed$(RPAREN);
-   * if $(LPAREN)keyval \=\= GDK_PLUS &&
-   * $(LPAREN)event->state & ~consumed & ALL_ACCELS_MASK$(RPAREN) \=\= GDK_CONTROL_MASK$(RPAREN)
-   * // Control was pressed
-   * ]|
-   * An older interpretation consumed_modifiers was that it contained
-   * all modifiers that might affect the translation of the key;
-   * this allowed accelerators to be stored with irrelevant consumed
-   * modifiers, by doing:
-   * |[<!-- language\="C" -->
-   * // XXX Don’t do this XXX
-   * if $(LPAREN)keyval \=\= accel_keyval &&
-   * $(LPAREN)event->state & ~consumed & ALL_ACCELS_MASK$(RPAREN) \=\= $(LPAREN)accel_mods & ~consumed$(RPAREN)$(RPAREN)
-   * // Accelerator was pressed
-   * ]|
-   * However, this did not work if multi-modifier combinations were
-   * used in the keymap, since, for instance, `<Control>` would be
-   * masked out even if only `<Control><Alt>` was used in the keymap.
-   * To support this usage as well as well as possible, all single
-   * modifier combinations that could affect the key for any combination
-   * of modifiers will be returned in consumed_modifiers; multi-modifier
-   * combinations are returned only when actually found in state. When
-   * you store accelerators, you should always store them with consumed
-   * modifiers removed. Store `<Control>plus`, not `<Control><Shift>plus`,
-   * Params:
-   *   hardwareKeycode = a keycode
-   *   state = a modifier state
-   *   group = active keyboard group
-   *   keyval = return location for keyval, or %NULL
-   *   effectiveGroup = return location for effective
-   *     group, or %NULL
-   *   level = return location for level, or %NULL
-   *   consumedModifiers = return location for modifiers
-   *     that were used to determine the group or level, or %NULL
-   * Returns: %TRUE if there was a keyval bound to the keycode/state/group
-   */
+      Translates the contents of a #GdkEventKey into a keyval, effective
+    group, and level. Modifiers that affected the translation and
+    are thus unavailable for application use are returned in
+    consumed_modifiers.
+    See [Groups][key-group-explanation] for an explanation of
+    groups and levels. The effective_group is the group that was
+    actually used for the translation; some keys such as Enter are not
+    affected by the active keyboard group. The level is derived from
+    state. For convenience, #GdkEventKey already contains the translated
+    keyval, so this function isn’t as useful as you might think.
+    
+    consumed_modifiers gives modifiers that should be masked outfrom state
+    when comparing this key press to a hot key. For instance, on a US keyboard,
+    the `plus` symbol is shifted, so when comparing a key press to a
+    `<Control>plus` accelerator `<Shift>` should be masked out.
+    
+    ```c
+    // We want to ignore irrelevant modifiers like ScrollLock
+    #define ALL_ACCELS_MASK (GDK_CONTROL_MASK | GDK_SHIFT_MASK | GDK_MOD1_MASK)
+    gdk_keymap_translate_keyboard_state (keymap, event->hardware_keycode,
+                                         event->state, event->group,
+                                         &keyval, NULL, NULL, &consumed);
+    if (keyval == GDK_PLUS &&
+        (event->state & ~consumed & ALL_ACCELS_MASK) == GDK_CONTROL_MASK)
+      // Control was pressed
+    ```
+    
+    An older interpretation consumed_modifiers was that it contained
+    all modifiers that might affect the translation of the key;
+    this allowed accelerators to be stored with irrelevant consumed
+    modifiers, by doing:
+    ```c
+    // XXX Don’t do this XXX
+    if (keyval == accel_keyval &&
+        (event->state & ~consumed & ALL_ACCELS_MASK) == (accel_mods & ~consumed))
+      // Accelerator was pressed
+    ```
+    
+    However, this did not work if multi-modifier combinations were
+    used in the keymap, since, for instance, `<Control>` would be
+    masked out even if only `<Control><Alt>` was used in the keymap.
+    To support this usage as well as well as possible, all single
+    modifier combinations that could affect the key for any combination
+    of modifiers will be returned in consumed_modifiers; multi-modifier
+    combinations are returned only when actually found in state. When
+    you store accelerators, you should always store them with consumed
+    modifiers removed. Store `<Control>plus`, not `<Control><Shift>plus`,
+    Params:
+      hardwareKeycode =       a keycode
+      state =       a modifier state
+      group =       active keyboard group
+      keyval =       return location for keyval, or null
+      effectiveGroup =       return location for effective
+            group, or null
+      level =       return location for level, or null
+      consumedModifiers =       return location for modifiers
+            that were used to determine the group or level, or null
+    Returns:     true if there was a keyval bound to the keycode/state/group
+  */
   bool translateKeyboardState(uint hardwareKeycode, gdk.types.ModifierType state, int group, out uint keyval, out int effectiveGroup, out int level, out gdk.types.ModifierType consumedModifiers)
   {
     bool _retval;
@@ -334,20 +342,26 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * The ::direction-changed signal gets emitted when the direction of
-   * the keymap changes.
-   *   keymap = the instance the signal is connected to
-   */
+      The ::direction-changed signal gets emitted when the direction of
+    the keymap changes.
+  
+    ## Parameters
+    $(LIST
+      * $(B keymap) the instance the signal is connected to
+    )
+  */
   alias DirectionChangedCallbackDlg = void delegate(gdk.keymap.Keymap keymap);
+
+  /** ditto */
   alias DirectionChangedCallbackFunc = void function(gdk.keymap.Keymap keymap);
 
   /**
-   * Connect to DirectionChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to DirectionChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectDirectionChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DirectionChangedCallbackDlg) || is(T : DirectionChangedCallbackFunc))
   {
@@ -364,20 +378,26 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * The ::keys-changed signal is emitted when the mapping represented by
-   * keymap changes.
-   *   keymap = the instance the signal is connected to
-   */
+      The ::keys-changed signal is emitted when the mapping represented by
+    keymap changes.
+  
+    ## Parameters
+    $(LIST
+      * $(B keymap) the instance the signal is connected to
+    )
+  */
   alias KeysChangedCallbackDlg = void delegate(gdk.keymap.Keymap keymap);
+
+  /** ditto */
   alias KeysChangedCallbackFunc = void function(gdk.keymap.Keymap keymap);
 
   /**
-   * Connect to KeysChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to KeysChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectKeysChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : KeysChangedCallbackDlg) || is(T : KeysChangedCallbackFunc))
   {
@@ -394,21 +414,27 @@ class Keymap : gobject.object.ObjectG
   }
 
   /**
-   * The ::state-changed signal is emitted when the state of the
-   * keyboard changes, e.g when Caps Lock is turned on or off.
-   * See [gdk.keymap.Keymap.getCapsLockState].
-   *   keymap = the instance the signal is connected to
-   */
+      The ::state-changed signal is emitted when the state of the
+    keyboard changes, e.g when Caps Lock is turned on or off.
+    See [gdk.keymap.Keymap.getCapsLockState].
+  
+    ## Parameters
+    $(LIST
+      * $(B keymap) the instance the signal is connected to
+    )
+  */
   alias StateChangedCallbackDlg = void delegate(gdk.keymap.Keymap keymap);
+
+  /** ditto */
   alias StateChangedCallbackFunc = void function(gdk.keymap.Keymap keymap);
 
   /**
-   * Connect to StateChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to StateChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectStateChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : StateChangedCallbackDlg) || is(T : StateChangedCallbackFunc))
   {

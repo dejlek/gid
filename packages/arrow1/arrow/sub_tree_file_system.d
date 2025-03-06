@@ -6,6 +6,7 @@ import arrow.file_system;
 import arrow.types;
 import gid.gid;
 
+/** */
 class SubTreeFileSystem : arrow.file_system.FileSystem
 {
 
@@ -25,6 +26,7 @@ class SubTreeFileSystem : arrow.file_system.FileSystem
     return getType();
   }
 
+  /** */
   this(string basePath, arrow.file_system.FileSystem baseFileSystem)
   {
     GArrowSubTreeFileSystem* _cretval;

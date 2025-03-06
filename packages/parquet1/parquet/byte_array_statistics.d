@@ -7,6 +7,7 @@ import parquet.c.types;
 import parquet.statistics;
 import parquet.types;
 
+/** */
 class ByteArrayStatistics : parquet.statistics.Statistics
 {
 
@@ -26,6 +27,7 @@ class ByteArrayStatistics : parquet.statistics.Statistics
     return getType();
   }
 
+  /** */
   glib.bytes.Bytes getMax()
   {
     GBytes* _cretval;
@@ -34,6 +36,7 @@ class ByteArrayStatistics : parquet.statistics.Statistics
     return _retval;
   }
 
+  /** */
   glib.bytes.Bytes getMin()
   {
     GBytes* _cretval;

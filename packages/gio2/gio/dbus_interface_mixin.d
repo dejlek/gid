@@ -10,19 +10,20 @@ public import gio.types;
 public import gobject.object;
 
 /**
- * Base type for D-Bus interfaces.
- * The `GDBusInterface` type is the base type for D-Bus interfaces both
- * on the service side $(LPAREN)see [gio.dbus_interface_skeleton.DBusInterfaceSkeleton]$(RPAREN) and client side
- * $(LPAREN)see [gio.dbus_proxy.DBusProxy]$(RPAREN).
- */
+    Base type for D-Bus interfaces.
+  
+  The [gio.dbus_interface.DBusInterface] type is the base type for D-Bus interfaces both
+  on the service side (see [gio.dbus_interface_skeleton.DBusInterfaceSkeleton]) and client side
+  (see [gio.dbus_proxy.DBusProxy]).
+*/
 template DBusInterfaceT()
 {
 
   /**
-   * Gets the #GDBusObject that interface_ belongs to, if any.
-   * Returns: A #GDBusObject or %NULL. The returned
-   *   reference should be freed with [gobject.object.ObjectG.unref].
-   */
+      Gets the #GDBusObject that interface_ belongs to, if any.
+    Returns:     A #GDBusObject or null. The returned
+      reference should be freed with [gobject.object.ObjectG.unref].
+  */
   override gio.dbus_object.DBusObject getObject()
   {
     GDBusObject* _cretval;
@@ -32,10 +33,10 @@ template DBusInterfaceT()
   }
 
   /**
-   * Gets D-Bus introspection information for the D-Bus interface
-   * implemented by interface_.
-   * Returns: A #GDBusInterfaceInfo. Do not free.
-   */
+      Gets D-Bus introspection information for the D-Bus interface
+    implemented by interface_.
+    Returns:     A #GDBusInterfaceInfo. Do not free.
+  */
   override gio.dbus_interface_info.DBusInterfaceInfo getInfo()
   {
     GDBusInterfaceInfo* _cretval;
@@ -45,11 +46,12 @@ template DBusInterfaceT()
   }
 
   /**
-   * Sets the #GDBusObject for interface_ to object.
-   * Note that interface_ will hold a weak reference to object.
-   * Params:
-   *   object = A #GDBusObject or %NULL.
-   */
+      Sets the #GDBusObject for interface_ to object.
+    
+    Note that interface_ will hold a weak reference to object.
+    Params:
+      object =       A #GDBusObject or null.
+  */
   override void setObject(gio.dbus_object.DBusObject object = null)
   {
     g_dbus_interface_set_object(cast(GDBusInterface*)cPtr, object ? cast(GDBusObject*)(cast(ObjectG)object).cPtr(No.Dup) : null);

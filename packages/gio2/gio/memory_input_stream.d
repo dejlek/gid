@@ -13,11 +13,12 @@ import glib.bytes;
 import gobject.object;
 
 /**
- * `GMemoryInputStream` is a class for using arbitrary
- * memory chunks as input for GIO streaming input operations.
- * As of GLib 2.34, `GMemoryInputStream` implements
- * [gio.pollable_input_stream.PollableInputStream].
- */
+    [gio.memory_input_stream.MemoryInputStream] is a class for using arbitrary
+  memory chunks as input for GIO streaming input operations.
+  
+  As of GLib 2.34, [gio.memory_input_stream.MemoryInputStream] implements
+  [gio.pollable_input_stream.PollableInputStream].
+*/
 class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_stream.PollableInputStream, gio.seekable.Seekable
 {
 
@@ -41,9 +42,9 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
   mixin SeekableT!();
 
   /**
-   * Creates a new empty #GMemoryInputStream.
-   * Returns: a new #GInputStream
-   */
+      Creates a new empty #GMemoryInputStream.
+    Returns:     a new #GInputStream
+  */
   this()
   {
     GInputStream* _cretval;
@@ -52,11 +53,11 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
   }
 
   /**
-   * Creates a new #GMemoryInputStream with data from the given bytes.
-   * Params:
-   *   bytes = a #GBytes
-   * Returns: new #GInputStream read from bytes
-   */
+      Creates a new #GMemoryInputStream with data from the given bytes.
+    Params:
+      bytes =       a #GBytes
+    Returns:     new #GInputStream read from bytes
+  */
   static gio.memory_input_stream.MemoryInputStream newFromBytes(glib.bytes.Bytes bytes)
   {
     GInputStream* _cretval;
@@ -66,10 +67,10 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
   }
 
   /**
-   * Appends bytes to data that can be read from the input stream.
-   * Params:
-   *   bytes = input data
-   */
+      Appends bytes to data that can be read from the input stream.
+    Params:
+      bytes =       input data
+  */
   void addBytes(glib.bytes.Bytes bytes)
   {
     g_memory_input_stream_add_bytes(cast(GMemoryInputStream*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);

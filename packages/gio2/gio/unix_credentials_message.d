@@ -9,23 +9,26 @@ import gio.types;
 import gobject.object;
 
 /**
- * This [gio.socket_control_message.SocketControlMessage] contains a [gio.credentials.Credentials]
- * instance.  It may be sent using [gio.socket.Socket.sendMessage] and received
- * using [gio.socket.Socket.receiveMessage] over UNIX sockets $(LPAREN)ie: sockets in
- * the `G_SOCKET_FAMILY_UNIX` family$(RPAREN).
- * For an easier way to send and receive credentials over
- * stream-oriented UNIX sockets, see
- * [gio.unix_connection.UnixConnection.sendCredentials] and
- * [gio.unix_connection.UnixConnection.receiveCredentials]. To receive credentials of
- * a foreign process connected to a socket, use
- * [gio.socket.Socket.getCredentials].
- * Since GLib 2.72, `GUnixCredentialMessage` is available on all platforms. It
- * requires underlying system support $(LPAREN)such as Windows 10 with `AF_UNIX`$(RPAREN) at run
- * time.
- * Before GLib 2.72, `<gio/gunixcredentialsmessage.h>` belonged to the UNIX-specific
- * GIO interfaces, thus you had to use the `gio-unix-2.0.pc` pkg-config file
- * when using it. This is no longer necessary since GLib 2.72.
- */
+    This [gio.socket_control_message.SocketControlMessage] contains a [gio.credentials.Credentials]
+  instance.  It may be sent using [gio.socket.Socket.sendMessage] and received
+  using [gio.socket.Socket.receiveMessage] over UNIX sockets (ie: sockets in
+  the [gio.types.SocketFamily.Unix] family).
+  
+  For an easier way to send and receive credentials over
+  stream-oriented UNIX sockets, see
+  [gio.unix_connection.UnixConnection.sendCredentials] and
+  [gio.unix_connection.UnixConnection.receiveCredentials]. To receive credentials of
+  a foreign process connected to a socket, use
+  [gio.socket.Socket.getCredentials].
+  
+  Since GLib 2.72, `GUnixCredentialMessage` is available on all platforms. It
+  requires underlying system support (such as Windows 10 with `AF_UNIX`) at run
+  time.
+  
+  Before GLib 2.72, `<gio/gunixcredentialsmessage.h>` belonged to the UNIX-specific
+  GIO interfaces, thus you had to use the `gio-unix-2.0.pc` pkg-config file
+  when using it. This is no longer necessary since GLib 2.72.
+*/
 class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
 {
 
@@ -46,9 +49,9 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   }
 
   /**
-   * Creates a new #GUnixCredentialsMessage with credentials matching the current processes.
-   * Returns: a new #GUnixCredentialsMessage
-   */
+      Creates a new #GUnixCredentialsMessage with credentials matching the current processes.
+    Returns:     a new #GUnixCredentialsMessage
+  */
   this()
   {
     GSocketControlMessage* _cretval;
@@ -57,11 +60,11 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   }
 
   /**
-   * Creates a new #GUnixCredentialsMessage holding credentials.
-   * Params:
-   *   credentials = A #GCredentials object.
-   * Returns: a new #GUnixCredentialsMessage
-   */
+      Creates a new #GUnixCredentialsMessage holding credentials.
+    Params:
+      credentials =       A #GCredentials object.
+    Returns:     a new #GUnixCredentialsMessage
+  */
   static gio.unix_credentials_message.UnixCredentialsMessage newWithCredentials(gio.credentials.Credentials credentials)
   {
     GSocketControlMessage* _cretval;
@@ -71,9 +74,9 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   }
 
   /**
-   * Checks if passing #GCredentials on a #GSocket is supported on this platform.
-   * Returns: %TRUE if supported, %FALSE otherwise
-   */
+      Checks if passing #GCredentials on a #GSocket is supported on this platform.
+    Returns:     true if supported, false otherwise
+  */
   static bool isSupported()
   {
     bool _retval;
@@ -82,9 +85,9 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   }
 
   /**
-   * Gets the credentials stored in message.
-   * Returns: A #GCredentials instance. Do not free, it is owned by message.
-   */
+      Gets the credentials stored in message.
+    Returns:     A #GCredentials instance. Do not free, it is owned by message.
+  */
   gio.credentials.Credentials getCredentials()
   {
     GCredentials* _cretval;

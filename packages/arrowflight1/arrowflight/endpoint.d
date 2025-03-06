@@ -8,6 +8,7 @@ import arrowflight.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class Endpoint : gobject.object.ObjectG
 {
 
@@ -27,6 +28,7 @@ class Endpoint : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrowflight.ticket.Ticket ticket, arrowflight.location.Location[] locations)
   {
     GAFlightEndpoint* _cretval;
@@ -36,6 +38,7 @@ class Endpoint : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool equal(arrowflight.endpoint.Endpoint otherEndpoint)
   {
     bool _retval;
@@ -43,6 +46,7 @@ class Endpoint : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrowflight.location.Location[] getLocations()
   {
     GList* _cretval;

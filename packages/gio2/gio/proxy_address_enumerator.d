@@ -7,16 +7,17 @@ import gio.socket_address_enumerator;
 import gio.types;
 
 /**
- * `GProxyAddressEnumerator` is a wrapper around
- * [gio.socket_address_enumerator.SocketAddressEnumerator] which takes the [gio.socket_address.SocketAddress]
- * instances returned by the [gio.socket_address_enumerator.SocketAddressEnumerator]
- * and wraps them in [gio.proxy_address.ProxyAddress] instances, using the given
- * property@Gio.ProxyAddressEnumerator:proxy-resolver.
- * This enumerator will be returned $(LPAREN)for example, by
- * [gio.socket_connectable.SocketConnectable.enumerate]$(RPAREN) as appropriate when a proxy is
- * configured; there should be no need to manually wrap a
- * [gio.socket_address_enumerator.SocketAddressEnumerator] instance with one.
- */
+    [gio.proxy_address_enumerator.ProxyAddressEnumerator] is a wrapper around
+  [gio.socket_address_enumerator.SocketAddressEnumerator] which takes the [gio.socket_address.SocketAddress]
+  instances returned by the [gio.socket_address_enumerator.SocketAddressEnumerator]
+  and wraps them in [gio.proxy_address.ProxyAddress] instances, using the given
+  `property@Gio.ProxyAddressEnumerator:proxy-resolver`.
+  
+  This enumerator will be returned (for example, by
+  [gio.socket_connectable.SocketConnectable.enumerate]) as appropriate when a proxy is
+  configured; there should be no need to manually wrap a
+  [gio.socket_address_enumerator.SocketAddressEnumerator] instance with one.
+*/
 class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumerator
 {
 

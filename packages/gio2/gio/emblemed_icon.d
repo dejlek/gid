@@ -10,12 +10,13 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GEmblemedIcon` is an implementation of [gio.icon.Icon] that supports
- * adding an emblem to an icon. Adding multiple emblems to an
- * icon is ensured via [gio.emblemed_icon.EmblemedIcon.addEmblem].
- * Note that `GEmblemedIcon` allows no control over the position
- * of the emblems. See also [gio.emblem.Emblem] for more information.
- */
+    [gio.emblemed_icon.EmblemedIcon] is an implementation of [gio.icon.Icon] that supports
+  adding an emblem to an icon. Adding multiple emblems to an
+  icon is ensured via [gio.emblemed_icon.EmblemedIcon.addEmblem].
+  
+  Note that [gio.emblemed_icon.EmblemedIcon] allows no control over the position
+  of the emblems. See also [gio.emblem.Emblem] for more information.
+*/
 class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
 {
 
@@ -38,12 +39,12 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
   mixin IconT!();
 
   /**
-   * Creates a new emblemed icon for icon with the emblem emblem.
-   * Params:
-   *   icon = a #GIcon
-   *   emblem = a #GEmblem, or %NULL
-   * Returns: a new #GIcon
-   */
+      Creates a new emblemed icon for icon with the emblem emblem.
+    Params:
+      icon =       a #GIcon
+      emblem =       a #GEmblem, or null
+    Returns:     a new #GIcon
+  */
   this(gio.icon.Icon icon, gio.emblem.Emblem emblem = null)
   {
     GIcon* _cretval;
@@ -52,28 +53,28 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
   }
 
   /**
-   * Adds emblem to the #GList of #GEmblems.
-   * Params:
-   *   emblem = a #GEmblem
-   */
+      Adds emblem to the #GList of #GEmblems.
+    Params:
+      emblem =       a #GEmblem
+  */
   void addEmblem(gio.emblem.Emblem emblem)
   {
     g_emblemed_icon_add_emblem(cast(GEmblemedIcon*)cPtr, emblem ? cast(GEmblem*)emblem.cPtr(No.Dup) : null);
   }
 
   /**
-   * Removes all the emblems from icon.
-   */
+      Removes all the emblems from icon.
+  */
   void clearEmblems()
   {
     g_emblemed_icon_clear_emblems(cast(GEmblemedIcon*)cPtr);
   }
 
   /**
-   * Gets the list of emblems for the icon.
-   * Returns: a #GList of
-   *   #GEmblems that is owned by emblemed
-   */
+      Gets the list of emblems for the icon.
+    Returns:     a #GList of
+          #GEmblems that is owned by emblemed
+  */
   gio.emblem.Emblem[] getEmblems()
   {
     GList* _cretval;
@@ -83,9 +84,9 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
   }
 
   /**
-   * Gets the main icon for emblemed.
-   * Returns: a #GIcon that is owned by emblemed
-   */
+      Gets the main icon for emblemed.
+    Returns:     a #GIcon that is owned by emblemed
+  */
   gio.icon.Icon getIcon()
   {
     GIcon* _cretval;

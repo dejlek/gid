@@ -8,17 +8,20 @@ import gtksource.style;
 import gtksource.types;
 
 /**
- * Controls the appearance of class@View.
- * #GtkSourceStyleScheme contains all the text styles to be used in
- * class@View and class@Buffer. For instance, it contains text styles
- * for syntax highlighting, it may contain foreground and background color for
- * non-highlighted text, color for the line numbers, current line highlighting,
- * bracket matching, etc.
- * Style schemes are stored in XML files. The format of a scheme file is
- * documented in the [style scheme reference](./style-reference.html).
- * The two style schemes with IDs "classic" and "tango" follow more closely the
- * GTK theme $(LPAREN)for example for the background color$(RPAREN).
- */
+    Controls the appearance of `class@View`.
+  
+  #GtkSourceStyleScheme contains all the text styles to be used in
+  `class@View` and `class@Buffer`. For instance, it contains text styles
+  for syntax highlighting, it may contain foreground and background color for
+  non-highlighted text, color for the line numbers, current line highlighting,
+  bracket matching, etc.
+  
+  Style schemes are stored in XML files. The format of a scheme file is
+  documented in the [style scheme reference](./style-reference.html).
+  
+  The two style schemes with IDs "classic" and "tango" follow more closely the
+  GTK theme (for example for the background color).
+*/
 class StyleScheme : gobject.object.ObjectG
 {
 
@@ -38,6 +41,7 @@ class StyleScheme : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   string[] getAuthors()
   {
     const(char*)* _cretval;
@@ -56,6 +60,7 @@ class StyleScheme : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getDescription()
   {
     const(char)* _cretval;
@@ -64,6 +69,7 @@ class StyleScheme : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getFilename()
   {
     const(char)* _cretval;
@@ -72,6 +78,7 @@ class StyleScheme : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getId()
   {
     const(char)* _cretval;
@@ -81,13 +88,13 @@ class StyleScheme : gobject.object.ObjectG
   }
 
   /**
-   * Gets a metadata property from the style scheme.
-   * Params:
-   *   name = metadata property name.
-   * Returns: value of property name stored in
-   *   the metadata of scheme or %NULL if scheme does not contain the
-   *   specified metadata property.
-   */
+      Gets a metadata property from the style scheme.
+    Params:
+      name =       metadata property name.
+    Returns:     value of property name stored in
+        the metadata of scheme or null if scheme does not contain the
+        specified metadata property.
+  */
   string getMetadata(string name)
   {
     const(char)* _cretval;
@@ -97,6 +104,7 @@ class StyleScheme : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getName()
   {
     const(char)* _cretval;
@@ -105,6 +113,7 @@ class StyleScheme : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gtksource.style.Style getStyle(string styleId)
   {
     GtkSourceStyle* _cretval;

@@ -8,8 +8,8 @@ import gtk.shortcut_trigger;
 import gtk.types;
 
 /**
- * A `GtkShortcutTrigger` that never triggers.
- */
+    A [gtk.shortcut_trigger.ShortcutTrigger] that never triggers.
+*/
 class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
@@ -30,12 +30,13 @@ class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /**
-   * Gets the never trigger.
-   * This is a singleton for a trigger that never triggers.
-   * Use this trigger instead of %NULL because it implements
-   * all virtual functions.
-   * Returns: The never trigger
-   */
+      Gets the never trigger.
+    
+    This is a singleton for a trigger that never triggers.
+    Use this trigger instead of null because it implements
+    all virtual functions.
+    Returns:     The never trigger
+  */
   static gtk.never_trigger.NeverTrigger get()
   {
     GtkShortcutTrigger* _cretval;

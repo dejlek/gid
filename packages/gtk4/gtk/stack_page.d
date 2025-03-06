@@ -10,8 +10,8 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkStackPage` is an auxiliary class used by `GtkStack`.
- */
+    [gtk.stack_page.StackPage] is an auxiliary class used by [gtk.stack.Stack].
+*/
 class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 {
 
@@ -34,9 +34,9 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   mixin AccessibleT!();
 
   /**
-   * Returns the stack child to which self belongs.
-   * Returns: the child to which self belongs
-   */
+      Returns the stack child to which self belongs.
+    Returns:     the child to which self belongs
+  */
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
@@ -46,9 +46,9 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   }
 
   /**
-   * Returns the icon name of the page.
-   * Returns: The value of the propertyGtk.StackPage:icon-name property
-   */
+      Returns the icon name of the page.
+    Returns:     The value of the `propertyGtk.StackPage:icon-name` property
+  */
   string getIconName()
   {
     const(char)* _cretval;
@@ -58,9 +58,9 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   }
 
   /**
-   * Returns the name of the page.
-   * Returns: The value of the [gtk.stack_page.StackPage.utf8] property
-   */
+      Returns the name of the page.
+    Returns:     The value of the [gtk.stack_page.StackPage.utf8] property
+  */
   string getName()
   {
     const(char)* _cretval;
@@ -70,10 +70,10 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   }
 
   /**
-   * Returns whether the page is marked as “needs attention”.
-   * Returns: The value of the propertyGtk.StackPage:needs-attention
-   *   property.
-   */
+      Returns whether the page is marked as “needs attention”.
+    Returns:     The value of the `propertyGtk.StackPage:needs-attention`
+        property.
+  */
   bool getNeedsAttention()
   {
     bool _retval;
@@ -82,9 +82,9 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   }
 
   /**
-   * Gets the page title.
-   * Returns: The value of the [gtk.stack_page.StackPage.utf8] property
-   */
+      Gets the page title.
+    Returns:     The value of the [gtk.stack_page.StackPage.utf8] property
+  */
   string getTitle()
   {
     const(char)* _cretval;
@@ -94,9 +94,9 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   }
 
   /**
-   * Gets whether underlines in the page title indicate mnemonics.
-   * Returns: The value of the propertyGtk.StackPage:use-underline property
-   */
+      Gets whether underlines in the page title indicate mnemonics.
+    Returns:     The value of the `propertyGtk.StackPage:use-underline` property
+  */
   bool getUseUnderline()
   {
     bool _retval;
@@ -105,11 +105,12 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   }
 
   /**
-   * Returns whether page is visible in its `GtkStack`.
-   * This is independent from the [gtk.widget.Widget.gboolean]
-   * property of its widget.
-   * Returns: %TRUE if page is visible
-   */
+      Returns whether page is visible in its [gtk.stack.Stack].
+    
+    This is independent from the [gtk.widget.Widget.gboolean]
+    property of its widget.
+    Returns:     true if page is visible
+  */
   bool getVisible()
   {
     bool _retval;
@@ -118,10 +119,10 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   }
 
   /**
-   * Sets the icon name of the page.
-   * Params:
-   *   setting = the new value to set
-   */
+      Sets the icon name of the page.
+    Params:
+      setting =       the new value to set
+  */
   void setIconName(string setting)
   {
     const(char)* _setting = setting.toCString(No.Alloc);
@@ -129,10 +130,10 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   }
 
   /**
-   * Sets the name of the page.
-   * Params:
-   *   setting = the new value to set
-   */
+      Sets the name of the page.
+    Params:
+      setting =       the new value to set
+  */
   void setName(string setting)
   {
     const(char)* _setting = setting.toCString(No.Alloc);
@@ -140,20 +141,20 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   }
 
   /**
-   * Sets whether the page is marked as “needs attention”.
-   * Params:
-   *   setting = the new value to set
-   */
+      Sets whether the page is marked as “needs attention”.
+    Params:
+      setting =       the new value to set
+  */
   void setNeedsAttention(bool setting)
   {
     gtk_stack_page_set_needs_attention(cast(GtkStackPage*)cPtr, setting);
   }
 
   /**
-   * Sets the page title.
-   * Params:
-   *   setting = the new value to set
-   */
+      Sets the page title.
+    Params:
+      setting =       the new value to set
+  */
   void setTitle(string setting)
   {
     const(char)* _setting = setting.toCString(No.Alloc);
@@ -161,20 +162,20 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
   }
 
   /**
-   * Sets whether underlines in the page title indicate mnemonics.
-   * Params:
-   *   setting = the new value to set
-   */
+      Sets whether underlines in the page title indicate mnemonics.
+    Params:
+      setting =       the new value to set
+  */
   void setUseUnderline(bool setting)
   {
     gtk_stack_page_set_use_underline(cast(GtkStackPage*)cPtr, setting);
   }
 
   /**
-   * Sets whether page is visible in its `GtkStack`.
-   * Params:
-   *   visible = The new property value
-   */
+      Sets whether page is visible in its [gtk.stack.Stack].
+    Params:
+      visible =       The new property value
+  */
   void setVisible(bool visible)
   {
     gtk_stack_page_set_visible(cast(GtkStackPage*)cPtr, visible);

@@ -14,6 +14,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class OutputStream : gobject.object.ObjectG, arrow.file.File, arrow.writable.Writable
 {
 
@@ -36,6 +37,7 @@ class OutputStream : gobject.object.ObjectG, arrow.file.File, arrow.writable.Wri
   mixin FileT!();
   mixin WritableT!();
 
+  /** */
   bool align_(int alignment)
   {
     bool _retval;
@@ -46,6 +48,7 @@ class OutputStream : gobject.object.ObjectG, arrow.file.File, arrow.writable.Wri
     return _retval;
   }
 
+  /** */
   long writeRecordBatch(arrow.record_batch.RecordBatch recordBatch, arrow.write_options.WriteOptions options = null)
   {
     long _retval;
@@ -56,6 +59,7 @@ class OutputStream : gobject.object.ObjectG, arrow.file.File, arrow.writable.Wri
     return _retval;
   }
 
+  /** */
   long writeTensor(arrow.tensor.Tensor tensor)
   {
     long _retval;

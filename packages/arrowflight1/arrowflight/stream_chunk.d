@@ -8,6 +8,7 @@ import arrowflight.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class StreamChunk : gobject.object.ObjectG
 {
 
@@ -29,6 +30,7 @@ class StreamChunk : gobject.object.ObjectG
 
   alias getData = gobject.object.ObjectG.getData;
 
+  /** */
   arrow.record_batch.RecordBatch getData()
   {
     GArrowRecordBatch* _cretval;
@@ -37,6 +39,7 @@ class StreamChunk : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.buffer.Buffer getMetadata()
   {
     GArrowBuffer* _cretval;

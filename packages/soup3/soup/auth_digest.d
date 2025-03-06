@@ -7,11 +7,12 @@ import soup.c.types;
 import soup.types;
 
 /**
- * HTTP "Digest" authentication.
- * class@Sessions support this by default; if you want to disable
- * support for it, call [soup.session.Session.removeFeatureByType]
- * passing %SOUP_TYPE_AUTH_DIGEST.
- */
+    HTTP "Digest" authentication.
+  
+  `class@Session`s support this by default; if you want to disable
+  support for it, call [soup.session.Session.removeFeatureByType]
+  passing `SOUP_TYPE_AUTH_DIGEST`.
+*/
 class AuthDigest : soup.auth.Auth
 {
 

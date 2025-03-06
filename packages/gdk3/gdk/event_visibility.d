@@ -8,13 +8,13 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Generated when the window visibility status has changed.
+    Generated when the window visibility status has changed.
 
- * Deprecated: Modern composited windowing systems with pervasive
- *   transparency make it impossible to track the visibility of a window
- *   reliably, so this event can not be guaranteed to provide useful
- *   information.
- */
+  Deprecated:     Modern composited windowing systems with pervasive
+        transparency make it impossible to track the visibility of a window
+        reliably, so this event can not be guaranteed to provide useful
+        information.
+*/
 class EventVisibility
 {
   GdkEventVisibility cInstance;

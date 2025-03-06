@@ -7,9 +7,11 @@ public import arrow.types;
 public import gid.gid;
 public import glib.error;
 
+/** */
 template WritableFileT()
 {
 
+  /** */
   override bool writeAt(long position, ubyte[] data)
   {
     bool _retval;

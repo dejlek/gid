@@ -15,13 +15,15 @@ import pango.matrix;
 import pango.types;
 
 /**
- * A `PangoContext` stores global information used to control the
- * itemization process.
- * The information stored by `PangoContext` includes the fontmap used
- * to look up fonts, and default values such as the default language,
- * default gravity, or default font.
- * To obtain a `PangoContext`, use [pango.font_map.FontMap.createContext].
- */
+    A [pango.context.Context] stores global information used to control the
+  itemization process.
+  
+  The information stored by [pango.context.Context] includes the fontmap used
+  to look up fonts, and default values such as the default language,
+  default gravity, or default font.
+  
+  To obtain a [pango.context.Context], use [pango.font_map.FontMap.createContext].
+*/
 class Context : gobject.object.ObjectG
 {
 
@@ -42,18 +44,20 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new `PangoContext` initialized to default values.
-   * This function is not particularly useful as it should always
-   * be followed by a [pango.context.Context.setFontMap] call, and the
-   * function [pango.font_map.FontMap.createContext] does these two steps
-   * together and hence users are recommended to use that.
-   * If you are using Pango as part of a higher-level system,
-   * that system may have it's own way of create a `PangoContext`.
-   * For instance, the GTK toolkit has, among others,
-   * `[gtk.widget.Widget.getPangoContext]`. Use those instead.
-   * Returns: the newly allocated `PangoContext`, which should
-   *   be freed with [gobject.object.ObjectG.unref].
-   */
+      Creates a new [pango.context.Context] initialized to default values.
+    
+    This function is not particularly useful as it should always
+    be followed by a [pango.context.Context.setFontMap] call, and the
+    function [pango.font_map.FontMap.createContext] does these two steps
+    together and hence users are recommended to use that.
+    
+    If you are using Pango as part of a higher-level system,
+    that system may have it's own way of create a [pango.context.Context].
+    For instance, the GTK toolkit has, among others,
+    `[gtk.widget.Widget.getPangoContext]`. Use those instead.
+    Returns:     the newly allocated [pango.context.Context], which should
+        be freed with [gobject.object.ObjectG.unref].
+  */
   this()
   {
     PangoContext* _cretval;
@@ -62,23 +66,25 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * Forces a change in the context, which will cause any `PangoLayout`
-   * using this context to re-layout.
-   * This function is only useful when implementing a new backend
-   * for Pango, something applications won't do. Backends should
-   * call this function if they have attached extra data to the context
-   * and such data is changed.
-   */
+      Forces a change in the context, which will cause any [pango.layout.Layout]
+    using this context to re-layout.
+    
+    This function is only useful when implementing a new backend
+    for Pango, something applications won't do. Backends should
+    call this function if they have attached extra data to the context
+    and such data is changed.
+  */
   void changed()
   {
     pango_context_changed(cast(PangoContext*)cPtr);
   }
 
   /**
-   * Retrieves the base direction for the context.
-   * See [pango.context.Context.setBaseDir].
-   * Returns: the base direction for the context.
-   */
+      Retrieves the base direction for the context.
+    
+    See [pango.context.Context.setBaseDir].
+    Returns:     the base direction for the context.
+  */
   pango.types.Direction getBaseDir()
   {
     PangoDirection _cretval;
@@ -88,10 +94,11 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * Retrieves the base gravity for the context.
-   * See [pango.context.Context.setBaseGravity].
-   * Returns: the base gravity for the context.
-   */
+      Retrieves the base gravity for the context.
+    
+    See [pango.context.Context.setBaseGravity].
+    Returns:     the base gravity for the context.
+  */
   pango.types.Gravity getBaseGravity()
   {
     PangoGravity _cretval;
@@ -101,10 +108,10 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * Retrieve the default font description for the context.
-   * Returns: a pointer to the context's default font
-   *   description. This value must not be modified or freed.
-   */
+      Retrieve the default font description for the context.
+    Returns:     a pointer to the context's default font
+        description. This value must not be modified or freed.
+  */
   pango.font_description.FontDescription getFontDescription()
   {
     PangoFontDescription* _cretval;
@@ -114,11 +121,11 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * Gets the `PangoFontMap` used to look up fonts for this context.
-   * Returns: the font map for the.
-   *   `PangoContext` This value is owned by Pango and should not be
-   *   unreferenced.
-   */
+      Gets the [pango.font_map.FontMap] used to look up fonts for this context.
+    Returns:     the font map for the.
+        [pango.context.Context] This value is owned by Pango and should not be
+        unreferenced.
+  */
   pango.font_map.FontMap getFontMap()
   {
     PangoFontMap* _cretval;
@@ -128,13 +135,14 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * Retrieves the gravity for the context.
-   * This is similar to [pango.context.Context.getBaseGravity],
-   * except for when the base gravity is %PANGO_GRAVITY_AUTO for
-   * which funcPango.Gravity.get_for_matrix is used to return the
-   * gravity from the current context matrix.
-   * Returns: the resolved gravity for the context.
-   */
+      Retrieves the gravity for the context.
+    
+    This is similar to [pango.context.Context.getBaseGravity],
+    except for when the base gravity is [pango.types.Gravity.Auto] for
+    which `funcPango.Gravity.get_for_matrix` is used to return the
+    gravity from the current context matrix.
+    Returns:     the resolved gravity for the context.
+  */
   pango.types.Gravity getGravity()
   {
     PangoGravity _cretval;
@@ -144,10 +152,11 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * Retrieves the gravity hint for the context.
-   * See [pango.context.Context.setGravityHint] for details.
-   * Returns: the gravity hint for the context.
-   */
+      Retrieves the gravity hint for the context.
+    
+    See [pango.context.Context.setGravityHint] for details.
+    Returns:     the gravity hint for the context.
+  */
   pango.types.GravityHint getGravityHint()
   {
     PangoGravityHint _cretval;
@@ -157,9 +166,9 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * Retrieves the global language tag for the context.
-   * Returns: the global language tag.
-   */
+      Retrieves the global language tag for the context.
+    Returns:     the global language tag.
+  */
   pango.language.Language getLanguage()
   {
     PangoLanguage* _cretval;
@@ -169,14 +178,15 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * Gets the transformation matrix that will be applied when
-   * rendering with this context.
-   * See [pango.context.Context.setMatrix].
-   * Returns: the matrix, or %NULL if no
-   *   matrix has been set $(LPAREN)which is the same as the identity matrix$(RPAREN).
-   *   The returned matrix is owned by Pango and must not be modified
-   *   or freed.
-   */
+      Gets the transformation matrix that will be applied when
+    rendering with this context.
+    
+    See [pango.context.Context.setMatrix].
+    Returns:     the matrix, or null if no
+        matrix has been set (which is the same as the identity matrix).
+        The returned matrix is owned by Pango and must not be modified
+        or freed.
+  */
   pango.matrix.Matrix getMatrix()
   {
     const(PangoMatrix)* _cretval;
@@ -186,26 +196,28 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * Get overall metric information for a particular font description.
-   * Since the metrics may be substantially different for different scripts,
-   * a language tag can be provided to indicate that the metrics should be
-   * retrieved that correspond to the script$(LPAREN)s$(RPAREN) used by that language.
-   * The `PangoFontDescription` is interpreted in the same way as by funcitemize,
-   * and the family name may be a comma separated list of names. If characters
-   * from multiple of these families would be used to render the string, then
-   * the returned fonts would be a composite of the metrics for the fonts loaded
-   * for the individual families.
-   * Params:
-   *   desc = a `PangoFontDescription` structure. %NULL means that the
-   *     font description from the context will be used.
-   *   language = language tag used to determine which script to get
-   *     the metrics for. %NULL means that the language tag from the context
-   *     will be used. If no language tag is set on the context, metrics
-   *     for the default language $(LPAREN)as determined by [pango.language.Language.getDefault]
-   *     will be returned.
-   * Returns: a `PangoFontMetrics` object. The caller must call
-   *   [pango.font_metrics.FontMetrics.unref] when finished using the object.
-   */
+      Get overall metric information for a particular font description.
+    
+    Since the metrics may be substantially different for different scripts,
+    a language tag can be provided to indicate that the metrics should be
+    retrieved that correspond to the script(s) used by that language.
+    
+    The [pango.font_description.FontDescription] is interpreted in the same way as by `funcitemize`,
+    and the family name may be a comma separated list of names. If characters
+    from multiple of these families would be used to render the string, then
+    the returned fonts would be a composite of the metrics for the fonts loaded
+    for the individual families.
+    Params:
+      desc =       a [pango.font_description.FontDescription] structure. null means that the
+          font description from the context will be used.
+      language =       language tag used to determine which script to get
+          the metrics for. null means that the language tag from the context
+          will be used. If no language tag is set on the context, metrics
+          for the default language (as determined by [pango.language.Language.getDefault]
+          will be returned.
+    Returns:     a [pango.font_metrics.FontMetrics] object. The caller must call
+        [pango.font_metrics.FontMetrics.unref] when finished using the object.
+  */
   pango.font_metrics.FontMetrics getMetrics(pango.font_description.FontDescription desc = null, pango.language.Language language = null)
   {
     PangoFontMetrics* _cretval;
@@ -215,10 +227,10 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether font rendering with this context should
-   * round glyph positions and widths.
-   * Returns:
-   */
+      Returns whether font rendering with this context should
+    round glyph positions and widths.
+    Returns: 
+  */
   bool getRoundGlyphPositions()
   {
     bool _retval;
@@ -227,18 +239,20 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * Returns the current serial number of context.
-   * The serial number is initialized to an small number larger than zero
-   * when a new context is created and is increased whenever the context
-   * is changed using any of the setter functions, or the `PangoFontMap` it
-   * uses to find fonts has changed. The serial may wrap, but will never
-   * have the value 0. Since it can wrap, never compare it with "less than",
-   * always use "not equals".
-   * This can be used to automatically detect changes to a `PangoContext`,
-   * and is only useful when implementing objects that need update when their
-   * `PangoContext` changes, like `PangoLayout`.
-   * Returns: The current serial number of context.
-   */
+      Returns the current serial number of context.
+    
+    The serial number is initialized to an small number larger than zero
+    when a new context is created and is increased whenever the context
+    is changed using any of the setter functions, or the [pango.font_map.FontMap] it
+    uses to find fonts has changed. The serial may wrap, but will never
+    have the value 0. Since it can wrap, never compare it with "less than",
+    always use "not equals".
+    
+    This can be used to automatically detect changes to a [pango.context.Context],
+    and is only useful when implementing objects that need update when their
+    [pango.context.Context] changes, like [pango.layout.Layout].
+    Returns:     The current serial number of context.
+  */
   uint getSerial()
   {
     uint _retval;
@@ -247,12 +261,12 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * List all families for a context.
-   * Params:
-   *   families = location
-   *     to store a pointer to an array of `PangoFontFamily`. This array should
-   *     be freed with [glib.global.gfree].
-   */
+      List all families for a context.
+    Params:
+      families =       location
+          to store a pointer to an array of [pango.font_family.FontFamily]. This array should
+          be freed with [glib.global.gfree].
+  */
   void listFamilies(out pango.font_family.FontFamily[] families)
   {
     int _nFamilies;
@@ -265,13 +279,13 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * Loads the font in one of the fontmaps in the context
-   * that is the closest match for desc.
-   * Params:
-   *   desc = a `PangoFontDescription` describing the font to load
-   * Returns: the newly allocated `PangoFont`
-   *   that was loaded, or %NULL if no font matched.
-   */
+      Loads the font in one of the fontmaps in the context
+    that is the closest match for desc.
+    Params:
+      desc =       a [pango.font_description.FontDescription] describing the font to load
+    Returns:     the newly allocated [pango.font.Font]
+        that was loaded, or null if no font matched.
+  */
   pango.font.Font loadFont(pango.font_description.FontDescription desc)
   {
     PangoFont* _cretval;
@@ -281,14 +295,14 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * Load a set of fonts in the context that can be used to render
-   * a font matching desc.
-   * Params:
-   *   desc = a `PangoFontDescription` describing the fonts to load
-   *   language = a `PangoLanguage` the fonts will be used for
-   * Returns: the newly allocated
-   *   `PangoFontset` loaded, or %NULL if no font matched.
-   */
+      Load a set of fonts in the context that can be used to render
+    a font matching desc.
+    Params:
+      desc =       a [pango.font_description.FontDescription] describing the fonts to load
+      language =       a [pango.language.Language] the fonts will be used for
+    Returns:     the newly allocated
+        [pango.fontset.Fontset] loaded, or null if no font matched.
+  */
   pango.fontset.Fontset loadFontset(pango.font_description.FontDescription desc, pango.language.Language language)
   {
     PangoFontset* _cretval;
@@ -298,110 +312,118 @@ class Context : gobject.object.ObjectG
   }
 
   /**
-   * Sets the base direction for the context.
-   * The base direction is used in applying the Unicode bidirectional
-   * algorithm; if the direction is %PANGO_DIRECTION_LTR or
-   * %PANGO_DIRECTION_RTL, then the value will be used as the paragraph
-   * direction in the Unicode bidirectional algorithm. A value of
-   * %PANGO_DIRECTION_WEAK_LTR or %PANGO_DIRECTION_WEAK_RTL is used only
-   * for paragraphs that do not contain any strong characters themselves.
-   * Params:
-   *   direction = the new base direction
-   */
+      Sets the base direction for the context.
+    
+    The base direction is used in applying the Unicode bidirectional
+    algorithm; if the direction is [pango.types.Direction.Ltr] or
+    [pango.types.Direction.Rtl], then the value will be used as the paragraph
+    direction in the Unicode bidirectional algorithm. A value of
+    [pango.types.Direction.WeakLtr] or [pango.types.Direction.WeakRtl] is used only
+    for paragraphs that do not contain any strong characters themselves.
+    Params:
+      direction =       the new base direction
+  */
   void setBaseDir(pango.types.Direction direction)
   {
     pango_context_set_base_dir(cast(PangoContext*)cPtr, direction);
   }
 
   /**
-   * Sets the base gravity for the context.
-   * The base gravity is used in laying vertical text out.
-   * Params:
-   *   gravity = the new base gravity
-   */
+      Sets the base gravity for the context.
+    
+    The base gravity is used in laying vertical text out.
+    Params:
+      gravity =       the new base gravity
+  */
   void setBaseGravity(pango.types.Gravity gravity)
   {
     pango_context_set_base_gravity(cast(PangoContext*)cPtr, gravity);
   }
 
   /**
-   * Set the default font description for the context
-   * Params:
-   *   desc = the new pango font description
-   */
+      Set the default font description for the context
+    Params:
+      desc =       the new pango font description
+  */
   void setFontDescription(pango.font_description.FontDescription desc = null)
   {
     pango_context_set_font_description(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the font map to be searched when fonts are looked-up
-   * in this context.
-   * This is only for internal use by Pango backends, a `PangoContext`
-   * obtained via one of the recommended methods should already have a
-   * suitable font map.
-   * Params:
-   *   fontMap = the `PangoFontMap` to set.
-   */
+      Sets the font map to be searched when fonts are looked-up
+    in this context.
+    
+    This is only for internal use by Pango backends, a [pango.context.Context]
+    obtained via one of the recommended methods should already have a
+    suitable font map.
+    Params:
+      fontMap =       the [pango.font_map.FontMap] to set.
+  */
   void setFontMap(pango.font_map.FontMap fontMap = null)
   {
     pango_context_set_font_map(cast(PangoContext*)cPtr, fontMap ? cast(PangoFontMap*)fontMap.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the gravity hint for the context.
-   * The gravity hint is used in laying vertical text out, and
-   * is only relevant if gravity of the context as returned by
-   * [pango.context.Context.getGravity] is set to %PANGO_GRAVITY_EAST
-   * or %PANGO_GRAVITY_WEST.
-   * Params:
-   *   hint = the new gravity hint
-   */
+      Sets the gravity hint for the context.
+    
+    The gravity hint is used in laying vertical text out, and
+    is only relevant if gravity of the context as returned by
+    [pango.context.Context.getGravity] is set to [pango.types.Gravity.East]
+    or [pango.types.Gravity.West].
+    Params:
+      hint =       the new gravity hint
+  */
   void setGravityHint(pango.types.GravityHint hint)
   {
     pango_context_set_gravity_hint(cast(PangoContext*)cPtr, hint);
   }
 
   /**
-   * Sets the global language tag for the context.
-   * The default language for the locale of the running process
-   * can be found using [pango.language.Language.getDefault].
-   * Params:
-   *   language = the new language tag.
-   */
+      Sets the global language tag for the context.
+    
+    The default language for the locale of the running process
+    can be found using [pango.language.Language.getDefault].
+    Params:
+      language =       the new language tag.
+  */
   void setLanguage(pango.language.Language language = null)
   {
     pango_context_set_language(cast(PangoContext*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the transformation matrix that will be applied when rendering
-   * with this context.
-   * Note that reported metrics are in the user space coordinates before
-   * the application of the matrix, not device-space coordinates after the
-   * application of the matrix. So, they don't scale with the matrix, though
-   * they may change slightly for different matrices, depending on how the
-   * text is fit to the pixel grid.
-   * Params:
-   *   matrix = a `PangoMatrix`, or %NULL to unset any existing
-   *     matrix. $(LPAREN)No matrix set is the same as setting the identity matrix.$(RPAREN)
-   */
+      Sets the transformation matrix that will be applied when rendering
+    with this context.
+    
+    Note that reported metrics are in the user space coordinates before
+    the application of the matrix, not device-space coordinates after the
+    application of the matrix. So, they don't scale with the matrix, though
+    they may change slightly for different matrices, depending on how the
+    text is fit to the pixel grid.
+    Params:
+      matrix =       a [pango.matrix.Matrix], or null to unset any existing
+        matrix. (No matrix set is the same as setting the identity matrix.)
+  */
   void setMatrix(pango.matrix.Matrix matrix = null)
   {
     pango_context_set_matrix(cast(PangoContext*)cPtr, matrix ? cast(const(PangoMatrix)*)matrix.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets whether font rendering with this context should
-   * round glyph positions and widths to integral positions,
-   * in device units.
-   * This is useful when the renderer can't handle subpixel
-   * positioning of glyphs.
-   * The default value is to round glyph positions, to remain
-   * compatible with previous Pango behavior.
-   * Params:
-   *   roundPositions = whether to round glyph positions
-   */
+      Sets whether font rendering with this context should
+    round glyph positions and widths to integral positions,
+    in device units.
+    
+    This is useful when the renderer can't handle subpixel
+    positioning of glyphs.
+    
+    The default value is to round glyph positions, to remain
+    compatible with previous Pango behavior.
+    Params:
+      roundPositions =       whether to round glyph positions
+  */
   void setRoundGlyphPositions(bool roundPositions)
   {
     pango_context_set_round_glyph_positions(cast(PangoContext*)cPtr, roundPositions);

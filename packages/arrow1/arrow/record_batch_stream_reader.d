@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class RecordBatchStreamReader : arrow.record_batch_reader.RecordBatchReader
 {
 
@@ -27,6 +28,7 @@ class RecordBatchStreamReader : arrow.record_batch_reader.RecordBatchReader
     return getType();
   }
 
+  /** */
   this(arrow.input_stream.InputStream stream)
   {
     GArrowRecordBatchStreamReader* _cretval;

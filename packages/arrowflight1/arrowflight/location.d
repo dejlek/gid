@@ -7,6 +7,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class Location : gobject.object.ObjectG
 {
 
@@ -26,6 +27,7 @@ class Location : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(string uri)
   {
     GAFlightLocation* _cretval;
@@ -37,6 +39,7 @@ class Location : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool equal(arrowflight.location.Location otherLocation)
   {
     bool _retval;
@@ -44,6 +47,7 @@ class Location : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getScheme()
   {
     char* _cretval;
@@ -52,6 +56,7 @@ class Location : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;

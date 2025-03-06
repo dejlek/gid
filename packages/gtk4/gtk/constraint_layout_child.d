@@ -7,8 +7,8 @@ import gtk.layout_child;
 import gtk.types;
 
 /**
- * `GtkLayoutChild` subclass for children in a `GtkConstraintLayout`.
- */
+    [gtk.layout_child.LayoutChild] subclass for children in a [gtk.constraint_layout.ConstraintLayout].
+*/
 class ConstraintLayoutChild : gtk.layout_child.LayoutChild
 {
 

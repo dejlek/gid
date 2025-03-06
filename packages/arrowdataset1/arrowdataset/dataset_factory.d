@@ -9,6 +9,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class DatasetFactory : gobject.object.ObjectG
 {
 
@@ -28,6 +29,7 @@ class DatasetFactory : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   arrowdataset.dataset.Dataset finish(arrowdataset.finish_options.FinishOptions options = null)
   {
     GADatasetDataset* _cretval;

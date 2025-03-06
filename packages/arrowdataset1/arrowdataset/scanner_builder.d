@@ -11,6 +11,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class ScannerBuilder : gobject.object.ObjectG
 {
 
@@ -30,6 +31,7 @@ class ScannerBuilder : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrowdataset.dataset.Dataset dataset)
   {
     GADatasetScannerBuilder* _cretval;
@@ -40,6 +42,7 @@ class ScannerBuilder : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   static arrowdataset.scanner_builder.ScannerBuilder newRecordBatchReader(arrow.record_batch_reader.RecordBatchReader reader)
   {
     GADatasetScannerBuilder* _cretval;
@@ -48,6 +51,7 @@ class ScannerBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrowdataset.scanner.Scanner finish()
   {
     GADatasetScanner* _cretval;
@@ -59,6 +63,7 @@ class ScannerBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool setFilter(arrow.expression.Expression expression)
   {
     bool _retval;

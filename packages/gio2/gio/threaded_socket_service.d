@@ -10,20 +10,23 @@ import gobject.dclosure;
 import gobject.object;
 
 /**
- * A `GThreadedSocketService` is a simple subclass of [gio.socket_service.SocketService]
- * that handles incoming connections by creating a worker thread and
- * dispatching the connection to it by emitting the
- * [gio.threaded_socket_service.ThreadedSocketService.run] in the new thread.
- * The signal handler may perform blocking I/O and need not return
- * until the connection is closed.
- * The service is implemented using a thread pool, so there is a
- * limited amount of threads available to serve incoming requests.
- * The service automatically stops the [gio.socket_service.SocketService] from accepting
- * new connections when all threads are busy.
- * As with [gio.socket_service.SocketService], you may connect to
- * [gio.threaded_socket_service.ThreadedSocketService.run], or subclass and override the default
- * handler.
- */
+    A [gio.threaded_socket_service.ThreadedSocketService] is a simple subclass of [gio.socket_service.SocketService]
+  that handles incoming connections by creating a worker thread and
+  dispatching the connection to it by emitting the
+  [gio.threaded_socket_service.ThreadedSocketService.run] in the new thread.
+  
+  The signal handler may perform blocking I/O and need not return
+  until the connection is closed.
+  
+  The service is implemented using a thread pool, so there is a
+  limited amount of threads available to serve incoming requests.
+  The service automatically stops the [gio.socket_service.SocketService] from accepting
+  new connections when all threads are busy.
+  
+  As with [gio.socket_service.SocketService], you may connect to
+  [gio.threaded_socket_service.ThreadedSocketService.run], or subclass and override the default
+  handler.
+*/
 class ThreadedSocketService : gio.socket_service.SocketService
 {
 
@@ -44,13 +47,13 @@ class ThreadedSocketService : gio.socket_service.SocketService
   }
 
   /**
-   * Creates a new #GThreadedSocketService with no listeners. Listeners
-   * must be added with one of the #GSocketListener "add" methods.
-   * Params:
-   *   maxThreads = the maximal number of threads to execute concurrently
-   *     handling incoming clients, -1 means no limit
-   * Returns: a new #GSocketService.
-   */
+      Creates a new #GThreadedSocketService with no listeners. Listeners
+    must be added with one of the #GSocketListener "add" methods.
+    Params:
+      maxThreads =       the maximal number of threads to execute concurrently
+          handling incoming clients, -1 means no limit
+    Returns:     a new #GSocketService.
+  */
   this(int maxThreads)
   {
     GSocketService* _cretval;
@@ -59,26 +62,31 @@ class ThreadedSocketService : gio.socket_service.SocketService
   }
 
   /**
-   * The ::run signal is emitted in a worker thread in response to an
-   * incoming connection. This thread is dedicated to handling
-   * connection and may perform blocking IO. The signal handler need
-   * not return until the connection is closed.
-   * Params
-   *   connection = a new #GSocketConnection object.
-   *   sourceObject = the source_object passed to [gio.socket_listener.SocketListener.addAddress].
-   *   threadedSocketService = the instance the signal is connected to
-   * Returns: %TRUE to stop further signal handlers from being called
-   */
+      The ::run signal is emitted in a worker thread in response to an
+    incoming connection. This thread is dedicated to handling
+    connection and may perform blocking IO. The signal handler need
+    not return until the connection is closed.
+  
+    ## Parameters
+    $(LIST
+      * $(B connection)       a new #GSocketConnection object.
+      * $(B sourceObject)       the source_object passed to [gio.socket_listener.SocketListener.addAddress].
+      * $(B threadedSocketService) the instance the signal is connected to
+    )
+    Returns:     true to stop further signal handlers from being called
+  */
   alias RunCallbackDlg = bool delegate(gio.socket_connection.SocketConnection connection, gobject.object.ObjectG sourceObject, gio.threaded_socket_service.ThreadedSocketService threadedSocketService);
+
+  /** ditto */
   alias RunCallbackFunc = bool function(gio.socket_connection.SocketConnection connection, gobject.object.ObjectG sourceObject, gio.threaded_socket_service.ThreadedSocketService threadedSocketService);
 
   /**
-   * Connect to Run signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Run signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectRun(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RunCallbackDlg) || is(T : RunCallbackFunc))
   {

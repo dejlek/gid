@@ -7,8 +7,8 @@ import gdk.types;
 import gid.gid;
 
 /**
- * An event related to a touch-based device.
- */
+    An event related to a touch-based device.
+*/
 class TouchEvent : gdk.event.Event
 {
 
@@ -21,9 +21,9 @@ class TouchEvent : gdk.event.Event
   }
 
   /**
-   * Extracts whether a touch event is emulating a pointer event.
-   * Returns: %TRUE if event is emulating
-   */
+      Extracts whether a touch event is emulating a pointer event.
+    Returns:     true if event is emulating
+  */
   bool getEmulatingPointer()
   {
     bool _retval;

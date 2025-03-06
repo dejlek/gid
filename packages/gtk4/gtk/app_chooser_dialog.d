@@ -25,23 +25,28 @@ import gtk.widget;
 import gtk.window;
 
 /**
- * `GtkAppChooserDialog` shows a `GtkAppChooserWidget` inside a `GtkDialog`.
- * ![An example GtkAppChooserDialog](appchooserdialog.png)
- * Note that `GtkAppChooserDialog` does not have any interesting methods
- * of its own. Instead, you should get the embedded `GtkAppChooserWidget`
- * using [gtk.app_chooser_dialog.AppChooserDialog.getWidget] and call its methods if
- * the generic [gtk.app_chooser.AppChooser] interface is not sufficient for
- * your needs.
- * To set the heading that is shown above the `GtkAppChooserWidget`,
- * use [gtk.app_chooser_dialog.AppChooserDialog.setHeading].
- * ## CSS nodes
- * `GtkAppChooserDialog` has a single CSS node with the name `window` and style
- * class `.appchooser`.
+    [gtk.app_chooser_dialog.AppChooserDialog] shows a [gtk.app_chooser_widget.AppChooserWidget] inside a [gtk.dialog.Dialog].
+  
+  ![An example GtkAppChooserDialog](appchooserdialog.png)
+  
+  Note that [gtk.app_chooser_dialog.AppChooserDialog] does not have any interesting methods
+  of its own. Instead, you should get the embedded [gtk.app_chooser_widget.AppChooserWidget]
+  using [gtk.app_chooser_dialog.AppChooserDialog.getWidget] and call its methods if
+  the generic [gtk.app_chooser.AppChooser] interface is not sufficient for
+  your needs.
+  
+  To set the heading that is shown above the [gtk.app_chooser_widget.AppChooserWidget],
+  use [gtk.app_chooser_dialog.AppChooserDialog.setHeading].
+  
+  ## CSS nodes
+  
+  [gtk.app_chooser_dialog.AppChooserDialog] has a single CSS node with the name `window` and style
+  class `.appchooser`.
 
- * Deprecated: The application selection widgets should be
- *   implemented according to the design of each platform and/or
- *   application requiring them.
- */
+  Deprecated:     The application selection widgets should be
+      implemented according to the design of each platform and/or
+      application requiring them.
+*/
 class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
 {
 
@@ -64,16 +69,17 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   mixin AppChooserT!();
 
   /**
-   * Creates a new `GtkAppChooserDialog` for the provided `GFile`.
-   * The dialog will show applications that can open the file.
-   * Params:
-   *   parent = a `GtkWindow`
-   *   flags = flags for this dialog
-   *   file = a `GFile`
-   * Returns: a newly created `GtkAppChooserDialog`
-
-   * Deprecated: This widget will be removed in GTK 5
-   */
+      Creates a new [gtk.app_chooser_dialog.AppChooserDialog] for the provided [gio.file.File].
+    
+    The dialog will show applications that can open the file.
+    Params:
+      parent =       a [gtk.window.Window]
+      flags =       flags for this dialog
+      file =       a [gio.file.File]
+    Returns:     a newly created [gtk.app_chooser_dialog.AppChooserDialog]
+  
+    Deprecated:     This widget will be removed in GTK 5
+  */
   this(gtk.window.Window parent, gtk.types.DialogFlags flags, gio.file.File file)
   {
     GtkWidget* _cretval;
@@ -82,16 +88,17 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   }
 
   /**
-   * Creates a new `GtkAppChooserDialog` for the provided content type.
-   * The dialog will show applications that can open the content type.
-   * Params:
-   *   parent = a `GtkWindow`
-   *   flags = flags for this dialog
-   *   contentType = a content type string
-   * Returns: a newly created `GtkAppChooserDialog`
-
-   * Deprecated: This widget will be removed in GTK 5
-   */
+      Creates a new [gtk.app_chooser_dialog.AppChooserDialog] for the provided content type.
+    
+    The dialog will show applications that can open the content type.
+    Params:
+      parent =       a [gtk.window.Window]
+      flags =       flags for this dialog
+      contentType =       a content type string
+    Returns:     a newly created [gtk.app_chooser_dialog.AppChooserDialog]
+  
+    Deprecated:     This widget will be removed in GTK 5
+  */
   static gtk.app_chooser_dialog.AppChooserDialog newForContentType(gtk.window.Window parent, gtk.types.DialogFlags flags, string contentType)
   {
     GtkWidget* _cretval;
@@ -102,12 +109,12 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   }
 
   /**
-   * Returns the text to display at the top of the dialog.
-   * Returns: the text to display at the top of the dialog,
-   *   or %NULL, in which case a default text is displayed
-
-   * Deprecated: This widget will be removed in GTK 5
-   */
+      Returns the text to display at the top of the dialog.
+    Returns:     the text to display at the top of the dialog,
+        or null, in which case a default text is displayed
+  
+    Deprecated:     This widget will be removed in GTK 5
+  */
   string getHeading()
   {
     const(char)* _cretval;
@@ -117,11 +124,11 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   }
 
   /**
-   * Returns the `GtkAppChooserWidget` of this dialog.
-   * Returns: the `GtkAppChooserWidget` of self
-
-   * Deprecated: This widget will be removed in GTK 5
-   */
+      Returns the [gtk.app_chooser_widget.AppChooserWidget] of this dialog.
+    Returns:     the [gtk.app_chooser_widget.AppChooserWidget] of self
+  
+    Deprecated:     This widget will be removed in GTK 5
+  */
   gtk.widget.Widget getWidget()
   {
     GtkWidget* _cretval;
@@ -131,13 +138,14 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   }
 
   /**
-   * Sets the text to display at the top of the dialog.
-   * If the heading is not set, the dialog displays a default text.
-   * Params:
-   *   heading = a string containing Pango markup
-
-   * Deprecated: This widget will be removed in GTK 5
-   */
+      Sets the text to display at the top of the dialog.
+    
+    If the heading is not set, the dialog displays a default text.
+    Params:
+      heading =       a string containing Pango markup
+  
+    Deprecated:     This widget will be removed in GTK 5
+  */
   void setHeading(string heading)
   {
     const(char)* _heading = heading.toCString(No.Alloc);

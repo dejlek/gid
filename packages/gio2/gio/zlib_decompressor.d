@@ -10,9 +10,9 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GZlibDecompressor` is an implementation of [gio.converter.Converter] that
- * decompresses data compressed with zlib.
- */
+    [gio.zlib_decompressor.ZlibDecompressor] is an implementation of [gio.converter.Converter] that
+  decompresses data compressed with zlib.
+*/
 class ZlibDecompressor : gobject.object.ObjectG, gio.converter.Converter
 {
 
@@ -35,11 +35,11 @@ class ZlibDecompressor : gobject.object.ObjectG, gio.converter.Converter
   mixin ConverterT!();
 
   /**
-   * Creates a new #GZlibDecompressor.
-   * Params:
-   *   format = The format to use for the compressed data
-   * Returns: a new #GZlibDecompressor
-   */
+      Creates a new #GZlibDecompressor.
+    Params:
+      format =       The format to use for the compressed data
+    Returns:     a new #GZlibDecompressor
+  */
   this(gio.types.ZlibCompressorFormat format)
   {
     GZlibDecompressor* _cretval;
@@ -48,13 +48,13 @@ class ZlibDecompressor : gobject.object.ObjectG, gio.converter.Converter
   }
 
   /**
-   * Retrieves the #GFileInfo constructed from the GZIP header data
-   * of compressed data processed by compressor, or %NULL if decompressor's
-   * #GZlibDecompressor:format property is not %G_ZLIB_COMPRESSOR_FORMAT_GZIP,
-   * or the header data was not fully processed yet, or it not present in the
-   * data stream at all.
-   * Returns: a #GFileInfo, or %NULL
-   */
+      Retrieves the #GFileInfo constructed from the GZIP header data
+    of compressed data processed by compressor, or null if decompressor's
+    #GZlibDecompressor:format property is not [gio.types.ZlibCompressorFormat.Gzip],
+    or the header data was not fully processed yet, or it not present in the
+    data stream at all.
+    Returns:     a #GFileInfo, or null
+  */
   gio.file_info.FileInfo getFileInfo()
   {
     GFileInfo* _cretval;

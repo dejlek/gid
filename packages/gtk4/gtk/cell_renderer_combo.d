@@ -9,20 +9,22 @@ import gtk.tree_iter;
 import gtk.types;
 
 /**
- * Renders a combobox in a cell
- * `GtkCellRendererCombo` renders text in a cell like `GtkCellRendererText` from
- * which it is derived. But while `GtkCellRendererText` offers a simple entry to
- * edit the text, `GtkCellRendererCombo` offers a `GtkComboBox`
- * widget to edit the text. The values to display in the combo box are taken from
- * the tree model specified in the `GtkCellRendererCombo`:model property.
- * The combo cell renderer takes care of adding a text cell renderer to the combo
- * box and sets it to display the column specified by its
- * `GtkCellRendererCombo`:text-column property. Further properties of the combo box
- * can be set in a handler for the `GtkCellRenderer::editing-started` signal.
+    Renders a combobox in a cell
+  
+  [gtk.cell_renderer_combo.CellRendererCombo] renders text in a cell like [gtk.cell_renderer_text.CellRendererText] from
+  which it is derived. But while [gtk.cell_renderer_text.CellRendererText] offers a simple entry to
+  edit the text, [gtk.cell_renderer_combo.CellRendererCombo] offers a [gtk.combo_box.ComboBox]
+  widget to edit the text. The values to display in the combo box are taken from
+  the tree model specified in the [gtk.cell_renderer_combo.CellRendererCombo]:model property.
+  
+  The combo cell renderer takes care of adding a text cell renderer to the combo
+  box and sets it to display the column specified by its
+  [gtk.cell_renderer_combo.CellRendererCombo]:text-column property. Further properties of the combo box
+  can be set in a handler for the `GtkCellRenderer::editing-started` signal.
 
- * Deprecated: List views use widgets to display their contents. You
- *   should use [gtk.drop_down.DropDown] instead
- */
+  Deprecated:     List views use widgets to display their contents. You
+      should use [gtk.drop_down.DropDown] instead
+*/
 class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
 {
 
@@ -43,15 +45,15 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
   }
 
   /**
-   * Creates a new `GtkCellRendererCombo`.
-   * Adjust how text is drawn using object properties.
-   * Object properties can be set globally $(LPAREN)with [gobject.object.ObjectG.set]$(RPAREN).
-   * Also, with `GtkTreeViewColumn`, you can bind a property to a value
-   * in a `GtkTreeModel`. For example, you can bind the “text” property
-   * on the cell renderer to a string value in the model, thus rendering
-   * a different string in each row of the `GtkTreeView`.
-   * Returns: the new cell renderer
-   */
+      Creates a new [gtk.cell_renderer_combo.CellRendererCombo].
+    Adjust how text is drawn using object properties.
+    Object properties can be set globally (with [gobject.object.ObjectG.set]).
+    Also, with [gtk.tree_view_column.TreeViewColumn], you can bind a property to a value
+    in a [gtk.tree_model.TreeModel]. For example, you can bind the “text” property
+    on the cell renderer to a string value in the model, thus rendering
+    a different string in each row of the [gtk.tree_view.TreeView].
+    Returns:     the new cell renderer
+  */
   this()
   {
     GtkCellRenderer* _cretval;
@@ -60,33 +62,39 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
   }
 
   /**
-   * This signal is emitted each time after the user selected an item in
-   * the combo box, either by using the mouse or the arrow keys.  Contrary
-   * to GtkComboBox, GtkCellRendererCombo::changed is not emitted for
-   * changes made to a selected item in the entry.  The argument new_iter
-   * corresponds to the newly selected item in the combo box and it is relative
-   * to the GtkTreeModel set via the model property on GtkCellRendererCombo.
-   * Note that as soon as you change the model displayed in the tree view,
-   * the tree view will immediately cease the editing operating.  This
-   * means that you most probably want to refrain from changing the model
-   * until the combo cell renderer emits the edited or editing_canceled signal.
-   * Params
-   *   pathString = a string of the path identifying the edited cell
-   *     $(LPAREN)relative to the tree view model$(RPAREN)
-   *   newIter = the new iter selected in the combo box
-   *     $(LPAREN)relative to the combo box model$(RPAREN)
-   *   cellRendererCombo = the instance the signal is connected to
-   */
+      This signal is emitted each time after the user selected an item in
+    the combo box, either by using the mouse or the arrow keys.  Contrary
+    to GtkComboBox, GtkCellRendererCombo::changed is not emitted for
+    changes made to a selected item in the entry.  The argument new_iter
+    corresponds to the newly selected item in the combo box and it is relative
+    to the GtkTreeModel set via the model property on GtkCellRendererCombo.
+    
+    Note that as soon as you change the model displayed in the tree view,
+    the tree view will immediately cease the editing operating.  This
+    means that you most probably want to refrain from changing the model
+    until the combo cell renderer emits the edited or editing_canceled signal.
+  
+    ## Parameters
+    $(LIST
+      * $(B pathString)       a string of the path identifying the edited cell
+                      (relative to the tree view model)
+      * $(B newIter)       the new iter selected in the combo box
+                   (relative to the combo box model)
+      * $(B cellRendererCombo) the instance the signal is connected to
+    )
+  */
   alias ChangedCallbackDlg = void delegate(string pathString, gtk.tree_iter.TreeIter newIter, gtk.cell_renderer_combo.CellRendererCombo cellRendererCombo);
+
+  /** ditto */
   alias ChangedCallbackFunc = void function(string pathString, gtk.tree_iter.TreeIter newIter, gtk.cell_renderer_combo.CellRendererCombo cellRendererCombo);
 
   /**
-   * Connect to Changed signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Changed signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {

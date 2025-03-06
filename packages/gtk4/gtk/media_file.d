@@ -12,12 +12,15 @@ import gtk.media_stream;
 import gtk.types;
 
 /**
- * `GtkMediaFile` implements `GtkMediaStream` for files.
- * This provides a simple way to play back video files with GTK.
- * GTK provides a GIO extension point for `GtkMediaFile` implementations
- * to allow for external implementations using various media frameworks.
- * GTK itself includes an implementation using GStreamer.
- */
+    [gtk.media_file.MediaFile] implements [gtk.media_stream.MediaStream] for files.
+  
+  This provides a simple way to play back video files with GTK.
+  
+  GTK provides a GIO extension point for [gtk.media_file.MediaFile] implementations
+  to allow for external implementations using various media frameworks.
+  
+  GTK itself includes an implementation using GStreamer.
+*/
 class MediaFile : gtk.media_stream.MediaStream
 {
 
@@ -38,9 +41,9 @@ class MediaFile : gtk.media_stream.MediaStream
   }
 
   /**
-   * Creates a new empty media file.
-   * Returns: a new `GtkMediaFile`
-   */
+      Creates a new empty media file.
+    Returns:     a new [gtk.media_file.MediaFile]
+  */
   this()
   {
     GtkMediaStream* _cretval;
@@ -49,11 +52,11 @@ class MediaFile : gtk.media_stream.MediaStream
   }
 
   /**
-   * Creates a new media file to play file.
-   * Params:
-   *   file = The file to play
-   * Returns: a new `GtkMediaFile` playing file
-   */
+      Creates a new media file to play file.
+    Params:
+      file =       The file to play
+    Returns:     a new [gtk.media_file.MediaFile] playing file
+  */
   static gtk.media_file.MediaFile newForFile(gio.file.File file)
   {
     GtkMediaStream* _cretval;
@@ -63,13 +66,14 @@ class MediaFile : gtk.media_stream.MediaStream
   }
 
   /**
-   * Creates a new media file for the given filename.
-   * This is a utility function that converts the given filename
-   * to a `GFile` and calls [gtk.media_file.MediaFile.newForFile].
-   * Params:
-   *   filename = filename to open
-   * Returns: a new `GtkMediaFile` playing filename
-   */
+      Creates a new media file for the given filename.
+    
+    This is a utility function that converts the given filename
+    to a [gio.file.File] and calls [gtk.media_file.MediaFile.newForFile].
+    Params:
+      filename =       filename to open
+    Returns:     a new [gtk.media_file.MediaFile] playing filename
+  */
   static gtk.media_file.MediaFile newForFilename(string filename)
   {
     GtkMediaStream* _cretval;
@@ -80,13 +84,14 @@ class MediaFile : gtk.media_stream.MediaStream
   }
 
   /**
-   * Creates a new media file to play stream.
-   * If you want the resulting media to be seekable,
-   * the stream should implement the `GSeekable` interface.
-   * Params:
-   *   stream = The stream to play
-   * Returns: a new `GtkMediaFile`
-   */
+      Creates a new media file to play stream.
+    
+    If you want the resulting media to be seekable,
+    the stream should implement the [gio.seekable.Seekable] interface.
+    Params:
+      stream =       The stream to play
+    Returns:     a new [gtk.media_file.MediaFile]
+  */
   static gtk.media_file.MediaFile newForInputStream(gio.input_stream.InputStream stream)
   {
     GtkMediaStream* _cretval;
@@ -96,13 +101,14 @@ class MediaFile : gtk.media_stream.MediaStream
   }
 
   /**
-   * Creates a new new media file for the given resource.
-   * This is a utility function that converts the given resource
-   * to a `GFile` and calls [gtk.media_file.MediaFile.newForFile].
-   * Params:
-   *   resourcePath = resource path to open
-   * Returns: a new `GtkMediaFile` playing resource_path
-   */
+      Creates a new new media file for the given resource.
+    
+    This is a utility function that converts the given resource
+    to a [gio.file.File] and calls [gtk.media_file.MediaFile.newForFile].
+    Params:
+      resourcePath =       resource path to open
+    Returns:     a new [gtk.media_file.MediaFile] playing resource_path
+  */
   static gtk.media_file.MediaFile newForResource(string resourcePath)
   {
     GtkMediaStream* _cretval;
@@ -113,19 +119,20 @@ class MediaFile : gtk.media_stream.MediaStream
   }
 
   /**
-   * Resets the media file to be empty.
-   */
+      Resets the media file to be empty.
+  */
   void clear()
   {
     gtk_media_file_clear(cast(GtkMediaFile*)cPtr);
   }
 
   /**
-   * Returns the file that self is currently playing from.
-   * When self is not playing or not playing from a file,
-   * %NULL is returned.
-   * Returns: The currently playing file
-   */
+      Returns the file that self is currently playing from.
+    
+    When self is not playing or not playing from a file,
+    null is returned.
+    Returns:     The currently playing file
+  */
   gio.file.File getFile()
   {
     GFile* _cretval;
@@ -135,11 +142,12 @@ class MediaFile : gtk.media_stream.MediaStream
   }
 
   /**
-   * Returns the stream that self is currently playing from.
-   * When self is not playing or not playing from a stream,
-   * %NULL is returned.
-   * Returns: The currently playing stream
-   */
+      Returns the stream that self is currently playing from.
+    
+    When self is not playing or not playing from a stream,
+    null is returned.
+    Returns:     The currently playing stream
+  */
   gio.input_stream.InputStream getInputStream()
   {
     GInputStream* _cretval;
@@ -149,23 +157,25 @@ class MediaFile : gtk.media_stream.MediaStream
   }
 
   /**
-   * Sets the `GtkMediaFile` to play the given file.
-   * If any file is still playing, stop playing it.
-   * Params:
-   *   file = the file to play
-   */
+      Sets the [gtk.media_file.MediaFile] to play the given file.
+    
+    If any file is still playing, stop playing it.
+    Params:
+      file =       the file to play
+  */
   void setFile(gio.file.File file = null)
   {
     gtk_media_file_set_file(cast(GtkMediaFile*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the `GtkMediaFile to play the given file.
-   * This is a utility function that converts the given filename
-   * to a `GFile` and calls [gtk.media_file.MediaFile.setFile].
-   * Params:
-   *   filename = name of file to play
-   */
+      Sets the `GtkMediaFile to play the given file.
+    
+    This is a utility function that converts the given filename
+    to a [gio.file.File] and calls [gtk.media_file.MediaFile.setFile].
+    Params:
+      filename =       name of file to play
+  */
   void setFilename(string filename = null)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -173,25 +183,28 @@ class MediaFile : gtk.media_stream.MediaStream
   }
 
   /**
-   * Sets the `GtkMediaFile` to play the given stream.
-   * If anything is still playing, stop playing it.
-   * Full control about the stream is assumed for the duration of
-   * playback. The stream will not be closed.
-   * Params:
-   *   stream = the stream to play from
-   */
+      Sets the [gtk.media_file.MediaFile] to play the given stream.
+    
+    If anything is still playing, stop playing it.
+    
+    Full control about the stream is assumed for the duration of
+    playback. The stream will not be closed.
+    Params:
+      stream =       the stream to play from
+  */
   void setInputStream(gio.input_stream.InputStream stream = null)
   {
     gtk_media_file_set_input_stream(cast(GtkMediaFile*)cPtr, stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the `GtkMediaFile to play the given resource.
-   * This is a utility function that converts the given resource_path
-   * to a `GFile` and calls [gtk.media_file.MediaFile.setFile].
-   * Params:
-   *   resourcePath = path to resource to play
-   */
+      Sets the `GtkMediaFile to play the given resource.
+    
+    This is a utility function that converts the given resource_path
+    to a [gio.file.File] and calls [gtk.media_file.MediaFile.setFile].
+    Params:
+      resourcePath =       path to resource to play
+  */
   void setResource(string resourcePath = null)
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);

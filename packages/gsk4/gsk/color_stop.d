@@ -7,8 +7,8 @@ import gsk.c.types;
 import gsk.types;
 
 /**
- * A color stop in a gradient node.
- */
+    A color stop in a gradient node.
+*/
 class ColorStop
 {
   GskColorStop cInstance;

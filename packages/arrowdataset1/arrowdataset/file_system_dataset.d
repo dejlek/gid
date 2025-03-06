@@ -9,6 +9,7 @@ import arrowdataset.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class FileSystemDataset : arrowdataset.dataset.Dataset
 {
 
@@ -28,6 +29,7 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
     return getType();
   }
 
+  /** */
   static bool writeScanner(arrowdataset.scanner.Scanner scanner, arrowdataset.file_system_dataset_write_options.FileSystemDatasetWriteOptions options)
   {
     bool _retval;

@@ -9,6 +9,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class RecordBatchReader : gobject.object.ObjectG
 {
 
@@ -28,6 +29,7 @@ class RecordBatchReader : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   arrow.table.Table readAll()
   {
     GArrowTable* _cretval;
@@ -39,6 +41,7 @@ class RecordBatchReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrowflight.stream_chunk.StreamChunk readNext()
   {
     GAFlightStreamChunk* _cretval;

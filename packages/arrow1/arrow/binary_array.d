@@ -9,6 +9,7 @@ import gid.gid;
 import glib.bytes;
 import gobject.object;
 
+/** */
 class BinaryArray : arrow.array.Array
 {
 
@@ -28,6 +29,7 @@ class BinaryArray : arrow.array.Array
     return getType();
   }
 
+  /** */
   this(long length, arrow.buffer.Buffer valueOffsets, arrow.buffer.Buffer valueData, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowBinaryArray* _cretval;
@@ -35,6 +37,7 @@ class BinaryArray : arrow.array.Array
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.buffer.Buffer getBuffer()
   {
     GArrowBuffer* _cretval;
@@ -43,6 +46,7 @@ class BinaryArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   arrow.buffer.Buffer getDataBuffer()
   {
     GArrowBuffer* _cretval;
@@ -51,6 +55,7 @@ class BinaryArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   arrow.buffer.Buffer getOffsetsBuffer()
   {
     GArrowBuffer* _cretval;
@@ -59,6 +64,7 @@ class BinaryArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   glib.bytes.Bytes getValue(long i)
   {
     GBytes* _cretval;

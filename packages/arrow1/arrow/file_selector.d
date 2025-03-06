@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class FileSelector : gobject.object.ObjectG
 {
 

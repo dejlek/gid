@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class FileInfo : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class FileInfo : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowFileInfo* _cretval;
@@ -32,6 +34,7 @@ class FileInfo : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool equal(arrow.file_info.FileInfo otherFileInfo)
   {
     bool _retval;
@@ -39,6 +42,7 @@ class FileInfo : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isDir()
   {
     bool _retval;
@@ -46,6 +50,7 @@ class FileInfo : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isFile()
   {
     bool _retval;
@@ -53,6 +58,7 @@ class FileInfo : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;

@@ -7,9 +7,9 @@ import gid.gid;
 import gobject.boxed;
 
 /**
- * A #GdkRGBA is used to represent a $(LPAREN)possibly translucent$(RPAREN)
- * color, in a way that is compatible with cairo’s notion of color.
- */
+    A #GdkRGBA is used to represent a (possibly translucent)
+  color, in a way that is compatible with cairo’s notion of color.
+*/
 class RGBA : gobject.boxed.Boxed
 {
 
@@ -80,10 +80,11 @@ class RGBA : gobject.boxed.Boxed
   }
 
   /**
-   * Makes a copy of a #GdkRGBA.
-   * The result must be freed through [gdk.rgba.RGBA.free].
-   * Returns: A newly allocated #GdkRGBA, with the same contents as rgba
-   */
+      Makes a copy of a #GdkRGBA.
+    
+    The result must be freed through [gdk.rgba.RGBA.free].
+    Returns:     A newly allocated #GdkRGBA, with the same contents as rgba
+  */
   gdk.rgba.RGBA copy()
   {
     GdkRGBA* _cretval;
@@ -93,11 +94,11 @@ class RGBA : gobject.boxed.Boxed
   }
 
   /**
-   * Compares two RGBA colors.
-   * Params:
-   *   p2 = another #GdkRGBA pointer
-   * Returns: %TRUE if the two colors compare equal
-   */
+      Compares two RGBA colors.
+    Params:
+      p2 =       another #GdkRGBA pointer
+    Returns:     true if the two colors compare equal
+  */
   bool equal(gdk.rgba.RGBA p2)
   {
     bool _retval;
@@ -106,10 +107,10 @@ class RGBA : gobject.boxed.Boxed
   }
 
   /**
-   * A hash function suitable for using for a hash
-   * table that stores #GdkRGBAs.
-   * Returns: The hash value for p
-   */
+      A hash function suitable for using for a hash
+    table that stores #GdkRGBAs.
+    Returns:     The hash value for p
+  */
   uint hash()
   {
     uint _retval;
@@ -118,23 +119,27 @@ class RGBA : gobject.boxed.Boxed
   }
 
   /**
-   * Parses a textual representation of a color, filling in
-   * the red, green, blue and alpha fields of the rgba #GdkRGBA.
-   * The string can be either one of:
-   * - A standard name $(LPAREN)Taken from the X11 rgb.txt file$(RPAREN).
-   * - A hexadecimal value in the form “\#rgb”, “\#rrggbb”,
-   * “\#rrrgggbbb” or ”\#rrrrggggbbbb”
-   * - A RGB color in the form “rgb$(LPAREN)r,g,b$(RPAREN)” $(LPAREN)In this case the color will
-   * have full opacity$(RPAREN)
-   * - A RGBA color in the form “rgba$(LPAREN)r,g,b,a$(RPAREN)”
-   * Where “r”, “g”, “b” and “a” are respectively the red, green, blue and
-   * alpha color values. In the last two cases, “r”, “g”, and “b” are either integers
-   * in the range 0 to 255 or percentage values in the range 0% to 100%, and
-   * a is a floating point value in the range 0 to 1.
-   * Params:
-   *   spec = the string specifying the color
-   * Returns: %TRUE if the parsing succeeded
-   */
+      Parses a textual representation of a color, filling in
+    the red, green, blue and alpha fields of the rgba #GdkRGBA.
+    
+    The string can be either one of:
+    $(LIST
+      * A standard name (Taken from the X11 rgb.txt file).
+      * A hexadecimal value in the form “\#rgb”, “\#rrggbb”,
+        “\#rrrgggbbb” or ”\#rrrrggggbbbb”
+      * A RGB color in the form “rgb(r,g,b)” (In this case the color will
+        have full opacity)
+      * A RGBA color in the form “rgba(r,g,b,a)”
+    )
+      
+    Where “r”, “g”, “b” and “a” are respectively the red, green, blue and
+    alpha color values. In the last two cases, “r”, “g”, and “b” are either integers
+    in the range 0 to 255 or percentage values in the range 0% to 100%, and
+    a is a floating point value in the range 0 to 1.
+    Params:
+      spec =       the string specifying the color
+    Returns:     true if the parsing succeeded
+  */
   bool parse(string spec)
   {
     bool _retval;
@@ -144,21 +149,23 @@ class RGBA : gobject.boxed.Boxed
   }
 
   /**
-   * Returns a textual specification of rgba in the form
-   * `rgb$(LPAREN)r,g,b$(RPAREN)` or
-   * `rgba$(LPAREN)r g,b,a$(RPAREN)`,
-   * where “r”, “g”, “b” and “a” represent the red, green,
-   * blue and alpha values respectively. “r”, “g”, and “b” are
-   * represented as integers in the range 0 to 255, and “a”
-   * is represented as a floating point value in the range 0 to 1.
-   * These string forms are string forms that are supported by
-   * the CSS3 colors module, and can be parsed by [gdk.rgba.RGBA.parse].
-   * Note that this string representation may lose some
-   * precision, since “r”, “g” and “b” are represented as 8-bit
-   * integers. If this is a concern, you should use a
-   * different representation.
-   * Returns: A newly allocated text string
-   */
+      Returns a textual specification of rgba in the form
+    `rgb(r,g,b)` or
+    `rgba(r g,b,a)`,
+    where “r”, “g”, “b” and “a” represent the red, green,
+    blue and alpha values respectively. “r”, “g”, and “b” are
+    represented as integers in the range 0 to 255, and “a”
+    is represented as a floating point value in the range 0 to 1.
+    
+    These string forms are string forms that are supported by
+    the CSS3 colors module, and can be parsed by [gdk.rgba.RGBA.parse].
+    
+    Note that this string representation may lose some
+    precision, since “r”, “g” and “b” are represented as 8-bit
+    integers. If this is a concern, you should use a
+    different representation.
+    Returns:     A newly allocated text string
+  */
   string toString_()
   {
     char* _cretval;

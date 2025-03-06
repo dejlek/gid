@@ -6,8 +6,8 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * The #_GtkMountOperationHandlerProxy structure contains only private data and should only be accessed using the provided API.
- */
+    The #_GtkMountOperationHandlerProxy structure contains only private data and should only be accessed using the provided API.
+*/
 class MountOperationHandlerProxy
 {
   _GtkMountOperationHandlerProxy cInstance;

@@ -7,8 +7,8 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node applying a blur effect to its single child.
- */
+    A render node applying a blur effect to its single child.
+*/
 class BlurNode : gsk.render_node.RenderNode
 {
 
@@ -21,12 +21,12 @@ class BlurNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Creates a render node that blurs the child.
-   * Params:
-   *   child = the child node to blur
-   *   radius = the blur radius. Must be positive
-   * Returns: a new `GskRenderNode`
-   */
+      Creates a render node that blurs the child.
+    Params:
+      child =       the child node to blur
+      radius =       the blur radius. Must be positive
+    Returns:     a new [gsk.render_node.RenderNode]
+  */
   this(gsk.render_node.RenderNode child, float radius)
   {
     GskRenderNode* _cretval;
@@ -35,9 +35,9 @@ class BlurNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the child `GskRenderNode` of the blur node.
-   * Returns: the blurred child node
-   */
+      Retrieves the child [gsk.render_node.RenderNode] of the blur node.
+    Returns:     the blurred child node
+  */
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
@@ -47,9 +47,9 @@ class BlurNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the blur radius of the node.
-   * Returns: the blur radius
-   */
+      Retrieves the blur radius of the node.
+    Returns:     the blur radius
+  */
   float getRadius()
   {
     float _retval;

@@ -10,11 +10,11 @@ import gio.types;
 import gobject.object;
 
 /**
- * A `GDBusObjectProxy` is an object used to represent a remote object
- * with one or more D-Bus interfaces. Normally, you don’t instantiate
- * a `GDBusObjectProxy` yourself — typically [gio.dbus_object_manager_client.DBusObjectManagerClient]
- * is used to obtain it.
- */
+    A [gio.dbus_object_proxy.DBusObjectProxy] is an object used to represent a remote object
+  with one or more D-Bus interfaces. Normally, you don’t instantiate
+  a [gio.dbus_object_proxy.DBusObjectProxy] yourself — typically [gio.dbus_object_manager_client.DBusObjectManagerClient]
+  is used to obtain it.
+*/
 class DBusObjectProxy : gobject.object.ObjectG, gio.dbus_object.DBusObject
 {
 
@@ -37,13 +37,13 @@ class DBusObjectProxy : gobject.object.ObjectG, gio.dbus_object.DBusObject
   mixin DBusObjectT!();
 
   /**
-   * Creates a new #GDBusObjectProxy for the given connection and
-   * object path.
-   * Params:
-   *   connection = a #GDBusConnection
-   *   objectPath = the object path
-   * Returns: a new #GDBusObjectProxy
-   */
+      Creates a new #GDBusObjectProxy for the given connection and
+    object path.
+    Params:
+      connection =       a #GDBusConnection
+      objectPath =       the object path
+    Returns:     a new #GDBusObjectProxy
+  */
   this(gio.dbus_connection.DBusConnection connection, string objectPath)
   {
     GDBusObjectProxy* _cretval;
@@ -53,10 +53,10 @@ class DBusObjectProxy : gobject.object.ObjectG, gio.dbus_object.DBusObject
   }
 
   /**
-   * Gets the connection that proxy is for.
-   * Returns: A #GDBusConnection. Do not free, the
-   *   object is owned by proxy.
-   */
+      Gets the connection that proxy is for.
+    Returns:     A #GDBusConnection. Do not free, the
+        object is owned by proxy.
+  */
   gio.dbus_connection.DBusConnection getConnection()
   {
     GDBusConnection* _cretval;

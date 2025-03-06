@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
@@ -26,6 +27,7 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
     return getType();
   }
 
+  /** */
   byte appendChild(arrow.array_builder.ArrayBuilder child, string fieldName = null)
   {
     byte _retval;
@@ -35,18 +37,20 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-   * Append an element to the union array.
-   * If builder is #GArrowDenseUnionArrayBuilder, this must be followed by an
-   * append to the appropriate child builder.
-   * If builder is #GArrowSparseUnionArrayBuilder, this must be
-   * followed by appends to all child builders. The corresponding child
-   * builder must be appended to independently after this method is
-   * called, and all other child builders must have null or empty value
-   * appended.
-   * Params:
-   *   value = A type ID value.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append an element to the union array.
+    
+    If builder is #GArrowDenseUnionArrayBuilder, this must be followed by an
+    append to the appropriate child builder.
+    
+    If builder is #GArrowSparseUnionArrayBuilder, this must be
+    followed by appends to all child builders. The corresponding child
+    builder must be appended to independently after this method is
+    called, and all other child builders must have null or empty value
+    appended.
+    Params:
+      value =       A type ID value.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendValue(byte value)
   {
     bool _retval;

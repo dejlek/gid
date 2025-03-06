@@ -21,47 +21,53 @@ import gobject.dclosure;
 import gobject.object;
 
 /**
- * `GDBusProxy` is a base class used for proxies to access a D-Bus
- * interface on a remote object. A `GDBusProxy` can be constructed for
- * both well-known and unique names.
- * By default, `GDBusProxy` will cache all properties $(LPAREN)and listen to
- * changes$(RPAREN) of the remote object, and proxy all signals that get
- * emitted. This behaviour can be changed by passing suitable
- * [gio.types.DBusProxyFlags] when the proxy is created. If the proxy is for a
- * well-known name, the property cache is flushed when the name owner
- * vanishes and reloaded when a name owner appears.
- * The unique name owner of the proxy’s name is tracked and can be read from
- * property@Gio.DBusProxy:g-name-owner. Connect to the
- * [gobject.object.ObjectG.notify] signal to get notified of changes.
- * Additionally, only signals and property changes emitted from the current name
- * owner are considered and calls are always sent to the current name owner.
- * This avoids a number of race conditions when the name is lost by one owner
- * and claimed by another. However, if no name owner currently exists,
- * then calls will be sent to the well-known name which may result in
- * the message bus launching an owner $(LPAREN)unless
- * `G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START` is set$(RPAREN).
- * If the proxy is for a stateless D-Bus service, where the name owner may
- * be started and stopped between calls, the
- * property@Gio.DBusProxy:g-name-owner tracking of `GDBusProxy` will cause the
- * proxy to drop signal and property changes from the service after it has
- * restarted for the first time. When interacting with a stateless D-Bus
- * service, do not use `GDBusProxy` — use direct D-Bus method calls and signal
- * connections.
- * The generic signal@Gio.DBusProxy::g-properties-changed and
- * signal@Gio.DBusProxy::g-signal signals are not very convenient to work
- * with. Therefore, the recommended way of working with proxies is to subclass
- * `GDBusProxy`, and have more natural properties and signals in your derived
- * class. This [example](migrating-gdbus.html#using-gdbus-codegen) shows how
- * this can easily be done using the [`gdbus-codegen`](gdbus-codegen.html) tool.
- * A `GDBusProxy` instance can be used from multiple threads but note
- * that all signals $(LPAREN)e.g. signal@Gio.DBusProxy::g-signal,
- * signal@Gio.DBusProxy::g-properties-changed and
- * [gobject.object.ObjectG.notify]$(RPAREN) are emitted in the thread-default main
- * context $(LPAREN)see [glib.main_context.MainContext.pushThreadDefault]$(RPAREN) of the thread
- * where the instance was constructed.
- * An example using a proxy for a well-known name can be found in
- * [`gdbus-example-watch-proxy.c`](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-watch-proxy.c).
- */
+    [gio.dbus_proxy.DBusProxy] is a base class used for proxies to access a D-Bus
+  interface on a remote object. A [gio.dbus_proxy.DBusProxy] can be constructed for
+  both well-known and unique names.
+  
+  By default, [gio.dbus_proxy.DBusProxy] will cache all properties (and listen to
+  changes) of the remote object, and proxy all signals that get
+  emitted. This behaviour can be changed by passing suitable
+  [gio.types.DBusProxyFlags] when the proxy is created. If the proxy is for a
+  well-known name, the property cache is flushed when the name owner
+  vanishes and reloaded when a name owner appears.
+  
+  The unique name owner of the proxy’s name is tracked and can be read from
+  `property@Gio.DBusProxy:g-name-owner`. Connect to the
+  [gobject.object.ObjectG.notify] signal to get notified of changes.
+  Additionally, only signals and property changes emitted from the current name
+  owner are considered and calls are always sent to the current name owner.
+  This avoids a number of race conditions when the name is lost by one owner
+  and claimed by another. However, if no name owner currently exists,
+  then calls will be sent to the well-known name which may result in
+  the message bus launching an owner (unless
+  [gio.types.DBusProxyFlags.DoNotAutoStart] is set).
+  
+  If the proxy is for a stateless D-Bus service, where the name owner may
+  be started and stopped between calls, the
+  `property@Gio.DBusProxy:g-name-owner` tracking of [gio.dbus_proxy.DBusProxy] will cause the
+  proxy to drop signal and property changes from the service after it has
+  restarted for the first time. When interacting with a stateless D-Bus
+  service, do not use [gio.dbus_proxy.DBusProxy] — use direct D-Bus method calls and signal
+  connections.
+  
+  The generic `signal@Gio.DBusProxy::g-properties-changed` and
+  `signal@Gio.DBusProxy::g-signal` signals are not very convenient to work
+  with. Therefore, the recommended way of working with proxies is to subclass
+  [gio.dbus_proxy.DBusProxy], and have more natural properties and signals in your derived
+  class. This [example](migrating-gdbus.html#using-gdbus-codegen) shows how
+  this can easily be done using the [`gdbus-codegen`](gdbus-codegen.html) tool.
+  
+  A [gio.dbus_proxy.DBusProxy] instance can be used from multiple threads but note
+  that all signals (e.g. `signal@Gio.DBusProxy::g-signal`,
+  `signal@Gio.DBusProxy::g-properties-changed` and
+  [gobject.object.ObjectG.notify]) are emitted in the thread-default main
+  context (see [glib.main_context.MainContext.pushThreadDefault]) of the thread
+  where the instance was constructed.
+  
+  An example using a proxy for a well-known name can be found in
+  [`gdbus-example-watch-proxy.c`](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-watch-proxy.c).
+*/
 class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.dbus_interface.DBusInterface, gio.initable.Initable
 {
 
@@ -86,12 +92,12 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   mixin InitableT!();
 
   /**
-   * Finishes creating a #GDBusProxy.
-   * Params:
-   *   res = A #GAsyncResult obtained from the #GAsyncReadyCallback function passed to [gio.dbus_proxy.DBusProxy.new_].
-   * Returns: A #GDBusProxy or %NULL if error is set.
-   *   Free with [gobject.object.ObjectG.unref].
-   */
+      Finishes creating a #GDBusProxy.
+    Params:
+      res =       A #GAsyncResult obtained from the #GAsyncReadyCallback function passed to [gio.dbus_proxy.DBusProxy.new_].
+    Returns:     A #GDBusProxy or null if error is set.
+         Free with [gobject.object.ObjectG.unref].
+  */
   static gio.dbus_proxy.DBusProxy newFinish(gio.async_result.AsyncResult res)
   {
     GDBusProxy* _cretval;
@@ -104,12 +110,12 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Finishes creating a #GDBusProxy.
-   * Params:
-   *   res = A #GAsyncResult obtained from the #GAsyncReadyCallback function passed to [gio.dbus_proxy.DBusProxy.newForBus].
-   * Returns: A #GDBusProxy or %NULL if error is set.
-   *   Free with [gobject.object.ObjectG.unref].
-   */
+      Finishes creating a #GDBusProxy.
+    Params:
+      res =       A #GAsyncResult obtained from the #GAsyncReadyCallback function passed to [gio.dbus_proxy.DBusProxy.newForBus].
+    Returns:     A #GDBusProxy or null if error is set.
+         Free with [gobject.object.ObjectG.unref].
+  */
   static gio.dbus_proxy.DBusProxy newForBusFinish(gio.async_result.AsyncResult res)
   {
     GDBusProxy* _cretval;
@@ -122,20 +128,21 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Like [gio.dbus_proxy.DBusProxy.newSync] but takes a #GBusType instead of a #GDBusConnection.
-   * #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
-   * Params:
-   *   busType = A #GBusType.
-   *   flags = Flags used when constructing the proxy.
-   *   info = A #GDBusInterfaceInfo specifying the minimal interface
-   *     that proxy conforms to or %NULL.
-   *   name = A bus name $(LPAREN)well-known or unique$(RPAREN).
-   *   objectPath = An object path.
-   *   interfaceName = A D-Bus interface name.
-   *   cancellable = A #GCancellable or %NULL.
-   * Returns: A #GDBusProxy or %NULL if error is set.
-   *   Free with [gobject.object.ObjectG.unref].
-   */
+      Like [gio.dbus_proxy.DBusProxy.newSync] but takes a #GBusType instead of a #GDBusConnection.
+    
+    #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
+    Params:
+      busType =       A #GBusType.
+      flags =       Flags used when constructing the proxy.
+      info =       A #GDBusInterfaceInfo specifying the minimal interface
+               that proxy conforms to or null.
+      name =       A bus name (well-known or unique).
+      objectPath =       An object path.
+      interfaceName =       A D-Bus interface name.
+      cancellable =       A #GCancellable or null.
+    Returns:     A #GDBusProxy or null if error is set.
+         Free with [gobject.object.ObjectG.unref].
+  */
   static gio.dbus_proxy.DBusProxy newForBusSync(gio.types.BusType busType, gio.types.DBusProxyFlags flags, gio.dbus_interface_info.DBusInterfaceInfo info, string name, string objectPath, string interfaceName, gio.cancellable.Cancellable cancellable = null)
   {
     GDBusProxy* _cretval;
@@ -151,34 +158,39 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Creates a proxy for accessing interface_name on the remote object
-   * at object_path owned by name at connection and synchronously
-   * loads D-Bus properties unless the
-   * %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES flag is used.
-   * If the %G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS flag is not set, also sets up
-   * match rules for signals. Connect to the #GDBusProxy::g-signal signal
-   * to handle signals from the remote object.
-   * If both %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES and
-   * %G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS are set, this constructor is
-   * guaranteed to return immediately without blocking.
-   * If name is a well-known name and the
-   * %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START and %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION
-   * flags aren't set and no name owner currently exists, the message bus
-   * will be requested to launch a name owner for the name.
-   * This is a synchronous failable constructor. See [gio.dbus_proxy.DBusProxy.new_]
-   * and [gio.dbus_proxy.DBusProxy.newFinish] for the asynchronous version.
-   * #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
-   * Params:
-   *   connection = A #GDBusConnection.
-   *   flags = Flags used when constructing the proxy.
-   *   info = A #GDBusInterfaceInfo specifying the minimal interface that proxy conforms to or %NULL.
-   *   name = A bus name $(LPAREN)well-known or unique$(RPAREN) or %NULL if connection is not a message bus connection.
-   *   objectPath = An object path.
-   *   interfaceName = A D-Bus interface name.
-   *   cancellable = A #GCancellable or %NULL.
-   * Returns: A #GDBusProxy or %NULL if error is set.
-   *   Free with [gobject.object.ObjectG.unref].
-   */
+      Creates a proxy for accessing interface_name on the remote object
+    at object_path owned by name at connection and synchronously
+    loads D-Bus properties unless the
+    [gio.types.DBusProxyFlags.DoNotLoadProperties] flag is used.
+    
+    If the [gio.types.DBusProxyFlags.DoNotConnectSignals] flag is not set, also sets up
+    match rules for signals. Connect to the #GDBusProxy::g-signal signal
+    to handle signals from the remote object.
+    
+    If both [gio.types.DBusProxyFlags.DoNotLoadProperties] and
+    [gio.types.DBusProxyFlags.DoNotConnectSignals] are set, this constructor is
+    guaranteed to return immediately without blocking.
+    
+    If name is a well-known name and the
+    [gio.types.DBusProxyFlags.DoNotAutoStart] and [gio.types.DBusProxyFlags.DoNotAutoStartAtConstruction]
+    flags aren't set and no name owner currently exists, the message bus
+    will be requested to launch a name owner for the name.
+    
+    This is a synchronous failable constructor. See [gio.dbus_proxy.DBusProxy.new_]
+    and [gio.dbus_proxy.DBusProxy.newFinish] for the asynchronous version.
+    
+    #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
+    Params:
+      connection =       A #GDBusConnection.
+      flags =       Flags used when constructing the proxy.
+      info =       A #GDBusInterfaceInfo specifying the minimal interface that proxy conforms to or null.
+      name =       A bus name (well-known or unique) or null if connection is not a message bus connection.
+      objectPath =       An object path.
+      interfaceName =       A D-Bus interface name.
+      cancellable =       A #GCancellable or null.
+    Returns:     A #GDBusProxy or null if error is set.
+         Free with [gobject.object.ObjectG.unref].
+  */
   static gio.dbus_proxy.DBusProxy newSync(gio.dbus_connection.DBusConnection connection, gio.types.DBusProxyFlags flags, gio.dbus_interface_info.DBusInterfaceInfo info, string name, string objectPath, string interfaceName, gio.cancellable.Cancellable cancellable = null)
   {
     GDBusProxy* _cretval;
@@ -194,37 +206,43 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Creates a proxy for accessing interface_name on the remote object
-   * at object_path owned by name at connection and asynchronously
-   * loads D-Bus properties unless the
-   * %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES flag is used. Connect to
-   * the #GDBusProxy::g-properties-changed signal to get notified about
-   * property changes.
-   * If the %G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS flag is not set, also sets up
-   * match rules for signals. Connect to the #GDBusProxy::g-signal signal
-   * to handle signals from the remote object.
-   * If both %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES and
-   * %G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS are set, this constructor is
-   * guaranteed to complete immediately without blocking.
-   * If name is a well-known name and the
-   * %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START and %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION
-   * flags aren't set and no name owner currently exists, the message bus
-   * will be requested to launch a name owner for the name.
-   * This is a failable asynchronous constructor - when the proxy is
-   * ready, callback will be invoked and you can use
-   * [gio.dbus_proxy.DBusProxy.newFinish] to get the result.
-   * See [gio.dbus_proxy.DBusProxy.newSync] and for a synchronous version of this constructor.
-   * #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
-   * Params:
-   *   connection = A #GDBusConnection.
-   *   flags = Flags used when constructing the proxy.
-   *   info = A #GDBusInterfaceInfo specifying the minimal interface that proxy conforms to or %NULL.
-   *   name = A bus name $(LPAREN)well-known or unique$(RPAREN) or %NULL if connection is not a message bus connection.
-   *   objectPath = An object path.
-   *   interfaceName = A D-Bus interface name.
-   *   cancellable = A #GCancellable or %NULL.
-   *   callback = Callback function to invoke when the proxy is ready.
-   */
+      Creates a proxy for accessing interface_name on the remote object
+    at object_path owned by name at connection and asynchronously
+    loads D-Bus properties unless the
+    [gio.types.DBusProxyFlags.DoNotLoadProperties] flag is used. Connect to
+    the #GDBusProxy::g-properties-changed signal to get notified about
+    property changes.
+    
+    If the [gio.types.DBusProxyFlags.DoNotConnectSignals] flag is not set, also sets up
+    match rules for signals. Connect to the #GDBusProxy::g-signal signal
+    to handle signals from the remote object.
+    
+    If both [gio.types.DBusProxyFlags.DoNotLoadProperties] and
+    [gio.types.DBusProxyFlags.DoNotConnectSignals] are set, this constructor is
+    guaranteed to complete immediately without blocking.
+    
+    If name is a well-known name and the
+    [gio.types.DBusProxyFlags.DoNotAutoStart] and [gio.types.DBusProxyFlags.DoNotAutoStartAtConstruction]
+    flags aren't set and no name owner currently exists, the message bus
+    will be requested to launch a name owner for the name.
+    
+    This is a failable asynchronous constructor - when the proxy is
+    ready, callback will be invoked and you can use
+    [gio.dbus_proxy.DBusProxy.newFinish] to get the result.
+    
+    See [gio.dbus_proxy.DBusProxy.newSync] and for a synchronous version of this constructor.
+    
+    #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
+    Params:
+      connection =       A #GDBusConnection.
+      flags =       Flags used when constructing the proxy.
+      info =       A #GDBusInterfaceInfo specifying the minimal interface that proxy conforms to or null.
+      name =       A bus name (well-known or unique) or null if connection is not a message bus connection.
+      objectPath =       An object path.
+      interfaceName =       A D-Bus interface name.
+      cancellable =       A #GCancellable or null.
+      callback =       Callback function to invoke when the proxy is ready.
+  */
   static void new_(gio.dbus_connection.DBusConnection connection, gio.types.DBusProxyFlags flags, gio.dbus_interface_info.DBusInterfaceInfo info, string name, string objectPath, string interfaceName, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -244,18 +262,19 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Like [gio.dbus_proxy.DBusProxy.new_] but takes a #GBusType instead of a #GDBusConnection.
-   * #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
-   * Params:
-   *   busType = A #GBusType.
-   *   flags = Flags used when constructing the proxy.
-   *   info = A #GDBusInterfaceInfo specifying the minimal interface that proxy conforms to or %NULL.
-   *   name = A bus name $(LPAREN)well-known or unique$(RPAREN).
-   *   objectPath = An object path.
-   *   interfaceName = A D-Bus interface name.
-   *   cancellable = A #GCancellable or %NULL.
-   *   callback = Callback function to invoke when the proxy is ready.
-   */
+      Like [gio.dbus_proxy.DBusProxy.new_] but takes a #GBusType instead of a #GDBusConnection.
+    
+    #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
+    Params:
+      busType =       A #GBusType.
+      flags =       Flags used when constructing the proxy.
+      info =       A #GDBusInterfaceInfo specifying the minimal interface that proxy conforms to or null.
+      name =       A bus name (well-known or unique).
+      objectPath =       An object path.
+      interfaceName =       A D-Bus interface name.
+      cancellable =       A #GCancellable or null.
+      callback =       Callback function to invoke when the proxy is ready.
+  */
   static void newForBus(gio.types.BusType busType, gio.types.DBusProxyFlags flags, gio.dbus_interface_info.DBusInterfaceInfo info, string name, string objectPath, string interfaceName, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -275,52 +294,58 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Asynchronously invokes the method_name method on proxy.
-   * If method_name contains any dots, then name is split into interface and
-   * method name parts. This allows using proxy for invoking methods on
-   * other interfaces.
-   * If the #GDBusConnection associated with proxy is closed then
-   * the operation will fail with %G_IO_ERROR_CLOSED. If
-   * cancellable is canceled, the operation will fail with
-   * %G_IO_ERROR_CANCELLED. If parameters contains a value not
-   * compatible with the D-Bus protocol, the operation fails with
-   * %G_IO_ERROR_INVALID_ARGUMENT.
-   * If the parameters #GVariant is floating, it is consumed. This allows
-   * convenient 'inline' use of [glib.variant.VariantG.new_], e.g.:
-   * |[<!-- language\="C" -->
-   * g_dbus_proxy_call $(LPAREN)proxy,
-   * "TwoStrings",
-   * g_variant_new $(LPAREN)"$(LPAREN)ss$(RPAREN)",
-   * "Thing One",
-   * "Thing Two"$(RPAREN),
-   * G_DBUS_CALL_FLAGS_NONE,
-   * -1,
-   * NULL,
-   * $(LPAREN)GAsyncReadyCallback$(RPAREN) two_strings_done,
-   * &data$(RPAREN);
-   * ]|
-   * If proxy has an expected interface $(LPAREN)see
-   * #GDBusProxy:g-interface-info$(RPAREN) and method_name is referenced by it,
-   * then the return value is checked against the return type.
-   * This is an asynchronous method. When the operation is finished,
-   * callback will be invoked in the
-   * [thread-default main context][g-main-context-push-thread-default]
-   * of the thread you are calling this method from.
-   * You can then call [gio.dbus_proxy.DBusProxy.callFinish] to get the result of
-   * the operation. See [gio.dbus_proxy.DBusProxy.callSync] for the synchronous
-   * version of this method.
-   * If callback is %NULL then the D-Bus method call message will be sent with
-   * the %G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED flag set.
-   * Params:
-   *   methodName = Name of method to invoke.
-   *   parameters = A #GVariant tuple with parameters for the signal or %NULL if not passing parameters.
-   *   flags = Flags from the #GDBusCallFlags enumeration.
-   *   timeoutMsec = The timeout in milliseconds $(LPAREN)with %G_MAXINT meaning
-   *     "infinite"$(RPAREN) or -1 to use the proxy default timeout.
-   *   cancellable = A #GCancellable or %NULL.
-   *   callback = A #GAsyncReadyCallback to call when the request is satisfied or %NULL if you don't
-   *     care about the result of the method invocation.
-   */
+      Asynchronously invokes the method_name method on proxy.
+    
+    If method_name contains any dots, then name is split into interface and
+    method name parts. This allows using proxy for invoking methods on
+    other interfaces.
+    
+    If the #GDBusConnection associated with proxy is closed then
+    the operation will fail with [gio.types.IOErrorEnum.Closed]. If
+    cancellable is canceled, the operation will fail with
+    [gio.types.IOErrorEnum.Cancelled]. If parameters contains a value not
+    compatible with the D-Bus protocol, the operation fails with
+    [gio.types.IOErrorEnum.InvalidArgument].
+    
+    If the parameters #GVariant is floating, it is consumed. This allows
+    convenient 'inline' use of [glib.variant.VariantG.new_], e.g.:
+    ```c
+     g_dbus_proxy_call (proxy,
+                        "TwoStrings",
+                        g_variant_new ("(ss)",
+                                       "Thing One",
+                                       "Thing Two"),
+                        G_DBUS_CALL_FLAGS_NONE,
+                        -1,
+                        NULL,
+                        (GAsyncReadyCallback) two_strings_done,
+                        &data);
+    ```
+    
+    If proxy has an expected interface (see
+    #GDBusProxy:g-interface-info) and method_name is referenced by it,
+    then the return value is checked against the return type.
+    
+    This is an asynchronous method. When the operation is finished,
+    callback will be invoked in the
+    [thread-default main context][g-main-context-push-thread-default]
+    of the thread you are calling this method from.
+    You can then call [gio.dbus_proxy.DBusProxy.callFinish] to get the result of
+    the operation. See [gio.dbus_proxy.DBusProxy.callSync] for the synchronous
+    version of this method.
+    
+    If callback is null then the D-Bus method call message will be sent with
+    the [gio.types.DBusMessageFlags.NoReplyExpected] flag set.
+    Params:
+      methodName =       Name of method to invoke.
+      parameters =       A #GVariant tuple with parameters for the signal or null if not passing parameters.
+      flags =       Flags from the #GDBusCallFlags enumeration.
+      timeoutMsec =       The timeout in milliseconds (with `G_MAXINT` meaning
+                       "infinite") or -1 to use the proxy default timeout.
+      cancellable =       A #GCancellable or null.
+      callback =       A #GAsyncReadyCallback to call when the request is satisfied or null if you don't
+        care about the result of the method invocation.
+  */
   void call(string methodName, glib.variant.VariantG parameters, gio.types.DBusCallFlags flags, int timeoutMsec, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -338,12 +363,12 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Finishes an operation started with [gio.dbus_proxy.DBusProxy.call].
-   * Params:
-   *   res = A #GAsyncResult obtained from the #GAsyncReadyCallback passed to [gio.dbus_proxy.DBusProxy.call].
-   * Returns: %NULL if error is set. Otherwise a #GVariant tuple with
-   *   return values. Free with [glib.variant.VariantG.unref].
-   */
+      Finishes an operation started with [gio.dbus_proxy.DBusProxy.call].
+    Params:
+      res =       A #GAsyncResult obtained from the #GAsyncReadyCallback passed to [gio.dbus_proxy.DBusProxy.call].
+    Returns:     null if error is set. Otherwise a #GVariant tuple with
+      return values. Free with [glib.variant.VariantG.unref].
+  */
   glib.variant.VariantG callFinish(gio.async_result.AsyncResult res)
   {
     VariantC* _cretval;
@@ -356,46 +381,51 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Synchronously invokes the method_name method on proxy.
-   * If method_name contains any dots, then name is split into interface and
-   * method name parts. This allows using proxy for invoking methods on
-   * other interfaces.
-   * If the #GDBusConnection associated with proxy is disconnected then
-   * the operation will fail with %G_IO_ERROR_CLOSED. If
-   * cancellable is canceled, the operation will fail with
-   * %G_IO_ERROR_CANCELLED. If parameters contains a value not
-   * compatible with the D-Bus protocol, the operation fails with
-   * %G_IO_ERROR_INVALID_ARGUMENT.
-   * If the parameters #GVariant is floating, it is consumed. This allows
-   * convenient 'inline' use of [glib.variant.VariantG.new_], e.g.:
-   * |[<!-- language\="C" -->
-   * g_dbus_proxy_call_sync $(LPAREN)proxy,
-   * "TwoStrings",
-   * g_variant_new $(LPAREN)"$(LPAREN)ss$(RPAREN)",
-   * "Thing One",
-   * "Thing Two"$(RPAREN),
-   * G_DBUS_CALL_FLAGS_NONE,
-   * -1,
-   * NULL,
-   * &error$(RPAREN);
-   * ]|
-   * The calling thread is blocked until a reply is received. See
-   * [gio.dbus_proxy.DBusProxy.call] for the asynchronous version of this
-   * method.
-   * If proxy has an expected interface $(LPAREN)see
-   * #GDBusProxy:g-interface-info$(RPAREN) and method_name is referenced by it,
-   * then the return value is checked against the return type.
-   * Params:
-   *   methodName = Name of method to invoke.
-   *   parameters = A #GVariant tuple with parameters for the signal
-   *     or %NULL if not passing parameters.
-   *   flags = Flags from the #GDBusCallFlags enumeration.
-   *   timeoutMsec = The timeout in milliseconds $(LPAREN)with %G_MAXINT meaning
-   *     "infinite"$(RPAREN) or -1 to use the proxy default timeout.
-   *   cancellable = A #GCancellable or %NULL.
-   * Returns: %NULL if error is set. Otherwise a #GVariant tuple with
-   *   return values. Free with [glib.variant.VariantG.unref].
-   */
+      Synchronously invokes the method_name method on proxy.
+    
+    If method_name contains any dots, then name is split into interface and
+    method name parts. This allows using proxy for invoking methods on
+    other interfaces.
+    
+    If the #GDBusConnection associated with proxy is disconnected then
+    the operation will fail with [gio.types.IOErrorEnum.Closed]. If
+    cancellable is canceled, the operation will fail with
+    [gio.types.IOErrorEnum.Cancelled]. If parameters contains a value not
+    compatible with the D-Bus protocol, the operation fails with
+    [gio.types.IOErrorEnum.InvalidArgument].
+    
+    If the parameters #GVariant is floating, it is consumed. This allows
+    convenient 'inline' use of [glib.variant.VariantG.new_], e.g.:
+    ```c
+     g_dbus_proxy_call_sync (proxy,
+                             "TwoStrings",
+                             g_variant_new ("(ss)",
+                                            "Thing One",
+                                            "Thing Two"),
+                             G_DBUS_CALL_FLAGS_NONE,
+                             -1,
+                             NULL,
+                             &error);
+    ```
+    
+    The calling thread is blocked until a reply is received. See
+    [gio.dbus_proxy.DBusProxy.call] for the asynchronous version of this
+    method.
+    
+    If proxy has an expected interface (see
+    #GDBusProxy:g-interface-info) and method_name is referenced by it,
+    then the return value is checked against the return type.
+    Params:
+      methodName =       Name of method to invoke.
+      parameters =       A #GVariant tuple with parameters for the signal
+                     or null if not passing parameters.
+      flags =       Flags from the #GDBusCallFlags enumeration.
+      timeoutMsec =       The timeout in milliseconds (with `G_MAXINT` meaning
+                       "infinite") or -1 to use the proxy default timeout.
+      cancellable =       A #GCancellable or null.
+    Returns:     null if error is set. Otherwise a #GVariant tuple with
+      return values. Free with [glib.variant.VariantG.unref].
+  */
   glib.variant.VariantG callSync(string methodName, glib.variant.VariantG parameters, gio.types.DBusCallFlags flags, int timeoutMsec, gio.cancellable.Cancellable cancellable = null)
   {
     VariantC* _cretval;
@@ -409,19 +439,20 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Like [gio.dbus_proxy.DBusProxy.call] but also takes a #GUnixFDList object.
-   * This method is only available on UNIX.
-   * Params:
-   *   methodName = Name of method to invoke.
-   *   parameters = A #GVariant tuple with parameters for the signal or %NULL if not passing parameters.
-   *   flags = Flags from the #GDBusCallFlags enumeration.
-   *   timeoutMsec = The timeout in milliseconds $(LPAREN)with %G_MAXINT meaning
-   *     "infinite"$(RPAREN) or -1 to use the proxy default timeout.
-   *   fdList = A #GUnixFDList or %NULL.
-   *   cancellable = A #GCancellable or %NULL.
-   *   callback = A #GAsyncReadyCallback to call when the request is satisfied or %NULL if you don't
-   *     care about the result of the method invocation.
-   */
+      Like [gio.dbus_proxy.DBusProxy.call] but also takes a #GUnixFDList object.
+    
+    This method is only available on UNIX.
+    Params:
+      methodName =       Name of method to invoke.
+      parameters =       A #GVariant tuple with parameters for the signal or null if not passing parameters.
+      flags =       Flags from the #GDBusCallFlags enumeration.
+      timeoutMsec =       The timeout in milliseconds (with `G_MAXINT` meaning
+                       "infinite") or -1 to use the proxy default timeout.
+      fdList =       A #GUnixFDList or null.
+      cancellable =       A #GCancellable or null.
+      callback =       A #GAsyncReadyCallback to call when the request is satisfied or null if you don't
+        care about the result of the method invocation.
+  */
   void callWithUnixFdList(string methodName, glib.variant.VariantG parameters, gio.types.DBusCallFlags flags, int timeoutMsec, gio.unix_fdlist.UnixFDList fdList = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -439,13 +470,13 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Finishes an operation started with [gio.dbus_proxy.DBusProxy.callWithUnixFdList].
-   * Params:
-   *   outFdList = Return location for a #GUnixFDList or %NULL.
-   *   res = A #GAsyncResult obtained from the #GAsyncReadyCallback passed to [gio.dbus_proxy.DBusProxy.callWithUnixFdList].
-   * Returns: %NULL if error is set. Otherwise a #GVariant tuple with
-   *   return values. Free with [glib.variant.VariantG.unref].
-   */
+      Finishes an operation started with [gio.dbus_proxy.DBusProxy.callWithUnixFdList].
+    Params:
+      outFdList =       Return location for a #GUnixFDList or null.
+      res =       A #GAsyncResult obtained from the #GAsyncReadyCallback passed to [gio.dbus_proxy.DBusProxy.callWithUnixFdList].
+    Returns:     null if error is set. Otherwise a #GVariant tuple with
+      return values. Free with [glib.variant.VariantG.unref].
+  */
   glib.variant.VariantG callWithUnixFdListFinish(out gio.unix_fdlist.UnixFDList outFdList, gio.async_result.AsyncResult res)
   {
     VariantC* _cretval;
@@ -460,21 +491,22 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Like [gio.dbus_proxy.DBusProxy.callSync] but also takes and returns #GUnixFDList objects.
-   * This method is only available on UNIX.
-   * Params:
-   *   methodName = Name of method to invoke.
-   *   parameters = A #GVariant tuple with parameters for the signal
-   *     or %NULL if not passing parameters.
-   *   flags = Flags from the #GDBusCallFlags enumeration.
-   *   timeoutMsec = The timeout in milliseconds $(LPAREN)with %G_MAXINT meaning
-   *     "infinite"$(RPAREN) or -1 to use the proxy default timeout.
-   *   fdList = A #GUnixFDList or %NULL.
-   *   outFdList = Return location for a #GUnixFDList or %NULL.
-   *   cancellable = A #GCancellable or %NULL.
-   * Returns: %NULL if error is set. Otherwise a #GVariant tuple with
-   *   return values. Free with [glib.variant.VariantG.unref].
-   */
+      Like [gio.dbus_proxy.DBusProxy.callSync] but also takes and returns #GUnixFDList objects.
+    
+    This method is only available on UNIX.
+    Params:
+      methodName =       Name of method to invoke.
+      parameters =       A #GVariant tuple with parameters for the signal
+                     or null if not passing parameters.
+      flags =       Flags from the #GDBusCallFlags enumeration.
+      timeoutMsec =       The timeout in milliseconds (with `G_MAXINT` meaning
+                       "infinite") or -1 to use the proxy default timeout.
+      fdList =       A #GUnixFDList or null.
+      outFdList =       Return location for a #GUnixFDList or null.
+      cancellable =       A #GCancellable or null.
+    Returns:     null if error is set. Otherwise a #GVariant tuple with
+      return values. Free with [glib.variant.VariantG.unref].
+  */
   glib.variant.VariantG callWithUnixFdListSync(string methodName, glib.variant.VariantG parameters, gio.types.DBusCallFlags flags, int timeoutMsec, gio.unix_fdlist.UnixFDList fdList, out gio.unix_fdlist.UnixFDList outFdList, gio.cancellable.Cancellable cancellable = null)
   {
     VariantC* _cretval;
@@ -490,17 +522,18 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Looks up the value for a property from the cache. This call does no
-   * blocking IO.
-   * If proxy has an expected interface $(LPAREN)see
-   * #GDBusProxy:g-interface-info$(RPAREN) and property_name is referenced by
-   * it, then value is checked against the type of the property.
-   * Params:
-   *   propertyName = Property name.
-   * Returns: A reference to the #GVariant instance
-   *   that holds the value for property_name or %NULL if the value is not in
-   *   the cache. The returned reference must be freed with [glib.variant.VariantG.unref].
-   */
+      Looks up the value for a property from the cache. This call does no
+    blocking IO.
+    
+    If proxy has an expected interface (see
+    #GDBusProxy:g-interface-info) and property_name is referenced by
+    it, then value is checked against the type of the property.
+    Params:
+      propertyName =       Property name.
+    Returns:     A reference to the #GVariant instance
+         that holds the value for property_name or null if the value is not in
+         the cache. The returned reference must be freed with [glib.variant.VariantG.unref].
+  */
   glib.variant.VariantG getCachedProperty(string propertyName)
   {
     VariantC* _cretval;
@@ -511,12 +544,12 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Gets the names of all cached properties on proxy.
-   * Returns: A
-   *   %NULL-terminated array of strings or %NULL if
-   *   proxy has no cached properties. Free the returned array with
-   *   [glib.global.strfreev].
-   */
+      Gets the names of all cached properties on proxy.
+    Returns:     A
+               null-terminated array of strings or null if
+               proxy has no cached properties. Free the returned array with
+               [glib.global.strfreev].
+  */
   string[] getCachedPropertyNames()
   {
     char** _cretval;
@@ -536,9 +569,9 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Gets the connection proxy is for.
-   * Returns: A #GDBusConnection owned by proxy. Do not free.
-   */
+      Gets the connection proxy is for.
+    Returns:     A #GDBusConnection owned by proxy. Do not free.
+  */
   gio.dbus_connection.DBusConnection getConnection()
   {
     GDBusConnection* _cretval;
@@ -548,12 +581,13 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Gets the timeout to use if -1 $(LPAREN)specifying default timeout$(RPAREN) is
-   * passed as timeout_msec in the [gio.dbus_proxy.DBusProxy.call] and
-   * [gio.dbus_proxy.DBusProxy.callSync] functions.
-   * See the #GDBusProxy:g-default-timeout property for more details.
-   * Returns: Timeout to use for proxy.
-   */
+      Gets the timeout to use if -1 (specifying default timeout) is
+    passed as timeout_msec in the [gio.dbus_proxy.DBusProxy.call] and
+    [gio.dbus_proxy.DBusProxy.callSync] functions.
+    
+    See the #GDBusProxy:g-default-timeout property for more details.
+    Returns:     Timeout to use for proxy.
+  */
   int getDefaultTimeout()
   {
     int _retval;
@@ -562,9 +596,9 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Gets the flags that proxy was constructed with.
-   * Returns: Flags from the #GDBusProxyFlags enumeration.
-   */
+      Gets the flags that proxy was constructed with.
+    Returns:     Flags from the #GDBusProxyFlags enumeration.
+  */
   gio.types.DBusProxyFlags getFlags()
   {
     GDBusProxyFlags _cretval;
@@ -574,12 +608,12 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Returns the #GDBusInterfaceInfo, if any, specifying the interface
-   * that proxy conforms to. See the #GDBusProxy:g-interface-info
-   * property for more details.
-   * Returns: A #GDBusInterfaceInfo or %NULL.
-   *   Do not unref the returned object, it is owned by proxy.
-   */
+      Returns the #GDBusInterfaceInfo, if any, specifying the interface
+    that proxy conforms to. See the #GDBusProxy:g-interface-info
+    property for more details.
+    Returns:     A #GDBusInterfaceInfo or null.
+         Do not unref the returned object, it is owned by proxy.
+  */
   gio.dbus_interface_info.DBusInterfaceInfo getInterfaceInfo()
   {
     GDBusInterfaceInfo* _cretval;
@@ -589,9 +623,9 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Gets the D-Bus interface name proxy is for.
-   * Returns: A string owned by proxy. Do not free.
-   */
+      Gets the D-Bus interface name proxy is for.
+    Returns:     A string owned by proxy. Do not free.
+  */
   string getInterfaceName()
   {
     const(char)* _cretval;
@@ -601,12 +635,13 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Gets the name that proxy was constructed for.
-   * When connected to a message bus, this will usually be non-%NULL.
-   * However, it may be %NULL for a proxy that communicates using a peer-to-peer
-   * pattern.
-   * Returns: A string owned by proxy. Do not free.
-   */
+      Gets the name that proxy was constructed for.
+    
+    When connected to a message bus, this will usually be non-null.
+    However, it may be null for a proxy that communicates using a peer-to-peer
+    pattern.
+    Returns:     A string owned by proxy. Do not free.
+  */
   string getName()
   {
     const(char)* _cretval;
@@ -616,13 +651,13 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * The unique name that owns the name that proxy is for or %NULL if
-   * no-one currently owns that name. You may connect to the
-   * #GObject::notify signal to track changes to the
-   * #GDBusProxy:g-name-owner property.
-   * Returns: The name owner or %NULL if no name
-   *   owner exists. Free with [glib.global.gfree].
-   */
+      The unique name that owns the name that proxy is for or null if
+    no-one currently owns that name. You may connect to the
+    #GObject::notify signal to track changes to the
+    #GDBusProxy:g-name-owner property.
+    Returns:     The name owner or null if no name
+         owner exists. Free with [glib.global.gfree].
+  */
   string getNameOwner()
   {
     char* _cretval;
@@ -632,9 +667,9 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Gets the object path proxy is for.
-   * Returns: A string owned by proxy. Do not free.
-   */
+      Gets the object path proxy is for.
+    Returns:     A string owned by proxy. Do not free.
+  */
   string getObjectPath()
   {
     const(char)* _cretval;
@@ -644,38 +679,43 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * If value is not %NULL, sets the cached value for the property with
-   * name property_name to the value in value.
-   * If value is %NULL, then the cached value is removed from the
-   * property cache.
-   * If proxy has an expected interface $(LPAREN)see
-   * #GDBusProxy:g-interface-info$(RPAREN) and property_name is referenced by
-   * it, then value is checked against the type of the property.
-   * If the value #GVariant is floating, it is consumed. This allows
-   * convenient 'inline' use of [glib.variant.VariantG.new_], e.g.
-   * |[<!-- language\="C" -->
-   * g_dbus_proxy_set_cached_property $(LPAREN)proxy,
-   * "SomeProperty",
-   * g_variant_new $(LPAREN)"$(LPAREN)si$(RPAREN)",
-   * "A String",
-   * 42$(RPAREN)$(RPAREN);
-   * ]|
-   * Normally you will not need to use this method since proxy
-   * is tracking changes using the
-   * `org.freedesktop.DBus.Properties.PropertiesChanged`
-   * D-Bus signal. However, for performance reasons an object may
-   * decide to not use this signal for some properties and instead
-   * use a proprietary out-of-band mechanism to transmit changes.
-   * As a concrete example, consider an object with a property
-   * `ChatroomParticipants` which is an array of strings. Instead of
-   * transmitting the same $(LPAREN)long$(RPAREN) array every time the property changes,
-   * it is more efficient to only transmit the delta using e.g. signals
-   * `ChatroomParticipantJoined$(LPAREN)String name$(RPAREN)` and
-   * `ChatroomParticipantParted$(LPAREN)String name$(RPAREN)`.
-   * Params:
-   *   propertyName = Property name.
-   *   value = Value for the property or %NULL to remove it from the cache.
-   */
+      If value is not null, sets the cached value for the property with
+    name property_name to the value in value.
+    
+    If value is null, then the cached value is removed from the
+    property cache.
+    
+    If proxy has an expected interface (see
+    #GDBusProxy:g-interface-info) and property_name is referenced by
+    it, then value is checked against the type of the property.
+    
+    If the value #GVariant is floating, it is consumed. This allows
+    convenient 'inline' use of [glib.variant.VariantG.new_], e.g.
+    ```c
+     g_dbus_proxy_set_cached_property (proxy,
+                                       "SomeProperty",
+                                       g_variant_new ("(si)",
+                                                     "A String",
+                                                     42));
+    ```
+    
+    Normally you will not need to use this method since proxy
+    is tracking changes using the
+    `org.freedesktop.DBus.Properties.PropertiesChanged`
+    D-Bus signal. However, for performance reasons an object may
+    decide to not use this signal for some properties and instead
+    use a proprietary out-of-band mechanism to transmit changes.
+    
+    As a concrete example, consider an object with a property
+    `ChatroomParticipants` which is an array of strings. Instead of
+    transmitting the same (long) array every time the property changes,
+    it is more efficient to only transmit the delta using e.g. signals
+    `ChatroomParticipantJoined(String name)` and
+    `ChatroomParticipantParted(String name)`.
+    Params:
+      propertyName =       Property name.
+      value =       Value for the property or null to remove it from the cache.
+  */
   void setCachedProperty(string propertyName, glib.variant.VariantG value = null)
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -683,57 +723,65 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Sets the timeout to use if -1 $(LPAREN)specifying default timeout$(RPAREN) is
-   * passed as timeout_msec in the [gio.dbus_proxy.DBusProxy.call] and
-   * [gio.dbus_proxy.DBusProxy.callSync] functions.
-   * See the #GDBusProxy:g-default-timeout property for more details.
-   * Params:
-   *   timeoutMsec = Timeout in milliseconds.
-   */
+      Sets the timeout to use if -1 (specifying default timeout) is
+    passed as timeout_msec in the [gio.dbus_proxy.DBusProxy.call] and
+    [gio.dbus_proxy.DBusProxy.callSync] functions.
+    
+    See the #GDBusProxy:g-default-timeout property for more details.
+    Params:
+      timeoutMsec =       Timeout in milliseconds.
+  */
   void setDefaultTimeout(int timeoutMsec)
   {
     g_dbus_proxy_set_default_timeout(cast(GDBusProxy*)cPtr, timeoutMsec);
   }
 
   /**
-   * Ensure that interactions with proxy conform to the given
-   * interface. See the #GDBusProxy:g-interface-info property for more
-   * details.
-   * Params:
-   *   info = Minimum interface this proxy conforms to
-   *     or %NULL to unset.
-   */
+      Ensure that interactions with proxy conform to the given
+    interface. See the #GDBusProxy:g-interface-info property for more
+    details.
+    Params:
+      info =       Minimum interface this proxy conforms to
+           or null to unset.
+  */
   void setInterfaceInfo(gio.dbus_interface_info.DBusInterfaceInfo info = null)
   {
     g_dbus_proxy_set_interface_info(cast(GDBusProxy*)cPtr, info ? cast(GDBusInterfaceInfo*)info.cPtr(No.Dup) : null);
   }
 
   /**
-   * Emitted when one or more D-Bus properties on proxy changes. The
-   * local cache has already been updated when this signal fires. Note
-   * that both changed_properties and invalidated_properties are
-   * guaranteed to never be %NULL $(LPAREN)either may be empty though$(RPAREN).
-   * If the proxy has the flag
-   * %G_DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES set, then
-   * invalidated_properties will always be empty.
-   * This signal corresponds to the
-   * `PropertiesChanged` D-Bus signal on the
-   * `org.freedesktop.DBus.Properties` interface.
-   * Params
-   *   changedProperties = A #GVariant containing the properties that changed $(LPAREN)type: `a{sv}`$(RPAREN)
-   *   invalidatedProperties = A %NULL terminated array of properties that was invalidated
-   *   dBusProxy = the instance the signal is connected to
-   */
+      Emitted when one or more D-Bus properties on proxy changes. The
+    local cache has already been updated when this signal fires. Note
+    that both changed_properties and invalidated_properties are
+    guaranteed to never be null (either may be empty though).
+    
+    If the proxy has the flag
+    [gio.types.DBusProxyFlags.GetInvalidatedProperties] set, then
+    invalidated_properties will always be empty.
+    
+    This signal corresponds to the
+    `PropertiesChanged` D-Bus signal on the
+    `org.freedesktop.DBus.Properties` interface.
+  
+    ## Parameters
+    $(LIST
+      * $(B changedProperties)       A #GVariant containing the properties that changed (type: `a{sv}`)
+      * $(B invalidatedProperties)       A null terminated array of properties that was invalidated
+      * $(B dBusProxy) the instance the signal is connected to
+    )
+  */
   alias GPropertiesChangedCallbackDlg = void delegate(glib.variant.VariantG changedProperties, string[] invalidatedProperties, gio.dbus_proxy.DBusProxy dBusProxy);
+
+  /** ditto */
   alias GPropertiesChangedCallbackFunc = void function(glib.variant.VariantG changedProperties, string[] invalidatedProperties, gio.dbus_proxy.DBusProxy dBusProxy);
 
   /**
-   * Connect to GPropertiesChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to GPropertiesChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectGPropertiesChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : GPropertiesChangedCallbackDlg) || is(T : GPropertiesChangedCallbackFunc))
   {
@@ -759,27 +807,33 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
   }
 
   /**
-   * Emitted when a signal from the remote object and interface that proxy is for, has been received.
-   * Since 2.72 this signal supports detailed connections. You can connect to
-   * the detailed signal `g-signal::x` in order to receive callbacks only when
-   * signal `x` is received from the remote object.
-   * Params
-   *   senderName = The sender of the signal or %NULL if the connection is not a bus connection.
-   *   signalName = The name of the signal.
-   *   parameters = A #GVariant tuple with parameters for the signal.
-   *   dBusProxy = the instance the signal is connected to
-   */
+      Emitted when a signal from the remote object and interface that proxy is for, has been received.
+    
+    Since 2.72 this signal supports detailed connections. You can connect to
+    the detailed signal `g-signal::x` in order to receive callbacks only when
+    signal `x` is received from the remote object.
+  
+    ## Parameters
+    $(LIST
+      * $(B senderName)       The sender of the signal or null if the connection is not a bus connection.
+      * $(B signalName)       The name of the signal.
+      * $(B parameters)       A #GVariant tuple with parameters for the signal.
+      * $(B dBusProxy) the instance the signal is connected to
+    )
+  */
   alias GSignalCallbackDlg = void delegate(string senderName, string signalName, glib.variant.VariantG parameters, gio.dbus_proxy.DBusProxy dBusProxy);
+
+  /** ditto */
   alias GSignalCallbackFunc = void function(string senderName, string signalName, glib.variant.VariantG parameters, gio.dbus_proxy.DBusProxy dBusProxy);
 
   /**
-   * Connect to GSignal signal.
-   * Params:
-   *   detail = Signal detail or null (default)
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to GSignal signal.
+    Params:
+      detail = Signal detail or null (default)
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectGSignal(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : GSignalCallbackDlg) || is(T : GSignalCallbackFunc))
   {

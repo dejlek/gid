@@ -7,8 +7,8 @@ import gid.gid;
 import gobject.boxed;
 
 /**
- * A data structure for holding a rectangle with integer coordinates.
- */
+    A data structure for holding a rectangle with integer coordinates.
+*/
 class RectangleInt : gobject.boxed.Boxed
 {
 

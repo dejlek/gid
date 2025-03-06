@@ -7,8 +7,8 @@ import gsk.c.types;
 import gsk.types;
 
 /**
- * The shadow parameters in a shadow node.
- */
+    The shadow parameters in a shadow node.
+*/
 class Shadow
 {
   GskShadow cInstance;

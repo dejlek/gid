@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class BaseBinaryScalar : arrow.scalar.Scalar
 {
 
@@ -27,6 +28,7 @@ class BaseBinaryScalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   arrow.buffer.Buffer getValue()
   {
     GArrowBuffer* _cretval;

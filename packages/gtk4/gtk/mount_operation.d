@@ -10,17 +10,20 @@ import gtk.types;
 import gtk.window;
 
 /**
- * `GtkMountOperation` is an implementation of `GMountOperation`.
- * The functions and objects described here make working with GTK and
- * GIO more convenient.
- * `GtkMountOperation` is needed when mounting volumes:
- * It is an implementation of `GMountOperation` that can be used with
- * GIO functions for mounting volumes such as
- * [gio.file.File.mountEnclosingVolume], [gio.file.File.mountMountable],
- * [gio.volume.Volume.mount], [gio.mount.Mount.unmountWithOperation] and others.
- * When necessary, `GtkMountOperation` shows dialogs to let the user
- * enter passwords, ask questions or show processes blocking unmount.
- */
+    [gtk.mount_operation.MountOperation] is an implementation of [gio.mount_operation.MountOperation].
+  
+  The functions and objects described here make working with GTK and
+  GIO more convenient.
+  
+  [gtk.mount_operation.MountOperation] is needed when mounting volumes:
+  It is an implementation of [gio.mount_operation.MountOperation] that can be used with
+  GIO functions for mounting volumes such as
+  [gio.file.File.mountEnclosingVolume], [gio.file.File.mountMountable],
+  [gio.volume.Volume.mount], [gio.mount.Mount.unmountWithOperation] and others.
+  
+  When necessary, [gtk.mount_operation.MountOperation] shows dialogs to let the user
+  enter passwords, ask questions or show processes blocking unmount.
+*/
 class MountOperation : gio.mount_operation.MountOperation
 {
 
@@ -41,11 +44,11 @@ class MountOperation : gio.mount_operation.MountOperation
   }
 
   /**
-   * Creates a new `GtkMountOperation`.
-   * Params:
-   *   parent = transient parent of the window
-   * Returns: a new `GtkMountOperation`
-   */
+      Creates a new [gtk.mount_operation.MountOperation].
+    Params:
+      parent =       transient parent of the window
+    Returns:     a new [gtk.mount_operation.MountOperation]
+  */
   this(gtk.window.Window parent = null)
   {
     GMountOperation* _cretval;
@@ -54,10 +57,10 @@ class MountOperation : gio.mount_operation.MountOperation
   }
 
   /**
-   * Gets the display on which windows of the `GtkMountOperation`
-   * will be shown.
-   * Returns: the display on which windows of op are shown
-   */
+      Gets the display on which windows of the [gtk.mount_operation.MountOperation]
+    will be shown.
+    Returns:     the display on which windows of op are shown
+  */
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
@@ -67,9 +70,9 @@ class MountOperation : gio.mount_operation.MountOperation
   }
 
   /**
-   * Gets the transient parent used by the `GtkMountOperation`.
-   * Returns: the transient parent for windows shown by op
-   */
+      Gets the transient parent used by the [gtk.mount_operation.MountOperation].
+    Returns:     the transient parent for windows shown by op
+  */
   gtk.window.Window getParent()
   {
     GtkWindow* _cretval;
@@ -79,10 +82,10 @@ class MountOperation : gio.mount_operation.MountOperation
   }
 
   /**
-   * Returns whether the `GtkMountOperation` is currently displaying
-   * a window.
-   * Returns: %TRUE if op is currently displaying a window
-   */
+      Returns whether the [gtk.mount_operation.MountOperation] is currently displaying
+    a window.
+    Returns:     true if op is currently displaying a window
+  */
   bool isShowing()
   {
     bool _retval;
@@ -91,21 +94,21 @@ class MountOperation : gio.mount_operation.MountOperation
   }
 
   /**
-   * Sets the display to show windows of the `GtkMountOperation` on.
-   * Params:
-   *   display = a `GdkDisplay`
-   */
+      Sets the display to show windows of the [gtk.mount_operation.MountOperation] on.
+    Params:
+      display =       a [gdk.display.Display]
+  */
   void setDisplay(gdk.display.Display display)
   {
     gtk_mount_operation_set_display(cast(GtkMountOperation*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the transient parent for windows shown by the
-   * `GtkMountOperation`.
-   * Params:
-   *   parent = transient parent of the window
-   */
+      Sets the transient parent for windows shown by the
+    [gtk.mount_operation.MountOperation].
+    Params:
+      parent =       transient parent of the window
+  */
   void setParent(gtk.window.Window parent = null)
   {
     gtk_mount_operation_set_parent(cast(GtkMountOperation*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);

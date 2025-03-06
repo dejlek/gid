@@ -6,6 +6,7 @@ import parquet.c.types;
 import parquet.statistics;
 import parquet.types;
 
+/** */
 class BooleanStatistics : parquet.statistics.Statistics
 {
 
@@ -25,6 +26,7 @@ class BooleanStatistics : parquet.statistics.Statistics
     return getType();
   }
 
+  /** */
   bool getMax()
   {
     bool _retval;
@@ -32,6 +34,7 @@ class BooleanStatistics : parquet.statistics.Statistics
     return _retval;
   }
 
+  /** */
   bool getMin()
   {
     bool _retval;

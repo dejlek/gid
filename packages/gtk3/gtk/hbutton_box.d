@@ -12,6 +12,7 @@ import gtk.orientable;
 import gtk.orientable_mixin;
 import gtk.types;
 
+/** */
 class HButtonBox : gtk.button_box.ButtonBox
 {
 
@@ -32,11 +33,11 @@ class HButtonBox : gtk.button_box.ButtonBox
   }
 
   /**
-   * Creates a new horizontal button box.
-   * Returns: a new button box #GtkWidget.
-
-   * Deprecated: Use [gtk.button_box.ButtonBox.new_] with %GTK_ORIENTATION_HORIZONTAL instead
-   */
+      Creates a new horizontal button box.
+    Returns:     a new button box #GtkWidget.
+  
+    Deprecated:     Use [gtk.button_box.ButtonBox.new_] with [gtk.types.Orientation.Horizontal] instead
+  */
   this()
   {
     GtkWidget* _cretval;

@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class MapDataType : arrow.list_data_type.ListDataType
 {
 
@@ -27,6 +28,7 @@ class MapDataType : arrow.list_data_type.ListDataType
     return getType();
   }
 
+  /** */
   this(arrow.data_type.DataType keyType, arrow.data_type.DataType itemType)
   {
     GArrowMapDataType* _cretval;
@@ -34,6 +36,7 @@ class MapDataType : arrow.list_data_type.ListDataType
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.data_type.DataType getItemType()
   {
     GArrowDataType* _cretval;
@@ -42,6 +45,7 @@ class MapDataType : arrow.list_data_type.ListDataType
     return _retval;
   }
 
+  /** */
   arrow.data_type.DataType getKeyType()
   {
     GArrowDataType* _cretval;

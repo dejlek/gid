@@ -15,15 +15,18 @@ import gobject.types;
 import gobject.value;
 
 /**
- * A `GdkContentDeserializer` is used to deserialize content received via
- * inter-application data transfers.
- * The `GdkContentDeserializer` transforms serialized content that is
- * identified by a mime type into an object identified by a GType.
- * GTK provides serializers and deserializers for common data types
- * such as text, colors, images or file lists. To register your own
- * deserialization functions, use func@content_register_deserializer.
- * Also see [gdk.content_serializer.ContentSerializer].
- */
+    A [gdk.content_deserializer.ContentDeserializer] is used to deserialize content received via
+  inter-application data transfers.
+  
+  The [gdk.content_deserializer.ContentDeserializer] transforms serialized content that is
+  identified by a mime type into an object identified by a GType.
+  
+  GTK provides serializers and deserializers for common data types
+  such as text, colors, images or file lists. To register your own
+  deserialization functions, use `func@content_register_deserializer`.
+  
+  Also see [gdk.content_serializer.ContentSerializer].
+*/
 class ContentDeserializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 {
 
@@ -46,10 +49,11 @@ class ContentDeserializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   mixin AsyncResultT!();
 
   /**
-   * Gets the cancellable for the current operation.
-   * This is the `GCancellable` that was passed to funcGdk.content_deserialize_async.
-   * Returns: the cancellable for the current operation
-   */
+      Gets the cancellable for the current operation.
+    
+    This is the [gio.cancellable.Cancellable] that was passed to `funcGdk.content_deserialize_async`.
+    Returns:     the cancellable for the current operation
+  */
   gio.cancellable.Cancellable getCancellable()
   {
     GCancellable* _cretval;
@@ -59,9 +63,9 @@ class ContentDeserializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   }
 
   /**
-   * Gets the `GType` to create an instance of.
-   * Returns: the `GType` for the current operation
-   */
+      Gets the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] to create an instance of.
+    Returns:     the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] for the current operation
+  */
   gobject.types.GType getGtype()
   {
     gobject.types.GType _retval;
@@ -70,10 +74,11 @@ class ContentDeserializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   }
 
   /**
-   * Gets the input stream for the current operation.
-   * This is the stream that was passed to funcGdk.content_deserialize_async.
-   * Returns: the input stream for the current operation
-   */
+      Gets the input stream for the current operation.
+    
+    This is the stream that was passed to `funcGdk.content_deserialize_async`.
+    Returns:     the input stream for the current operation
+  */
   gio.input_stream.InputStream getInputStream()
   {
     GInputStream* _cretval;
@@ -83,9 +88,9 @@ class ContentDeserializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   }
 
   /**
-   * Gets the mime type to deserialize from.
-   * Returns: the mime type for the current operation
-   */
+      Gets the mime type to deserialize from.
+    Returns:     the mime type for the current operation
+  */
   string getMimeType()
   {
     const(char)* _cretval;
@@ -95,10 +100,11 @@ class ContentDeserializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   }
 
   /**
-   * Gets the I/O priority for the current operation.
-   * This is the priority that was passed to funcGdk.content_deserialize_async.
-   * Returns: the I/O priority for the current operation
-   */
+      Gets the I/O priority for the current operation.
+    
+    This is the priority that was passed to `funcGdk.content_deserialize_async`.
+    Returns:     the I/O priority for the current operation
+  */
   int getPriority()
   {
     int _retval;
@@ -107,10 +113,11 @@ class ContentDeserializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   }
 
   /**
-   * Gets the data that was associated with the current operation.
-   * See [gdk.content_deserializer.ContentDeserializer.setTaskData].
-   * Returns: the task data for deserializer
-   */
+      Gets the data that was associated with the current operation.
+    
+    See [gdk.content_deserializer.ContentDeserializer.setTaskData].
+    Returns:     the task data for deserializer
+  */
   void* getTaskData()
   {
     auto _retval = gdk_content_deserializer_get_task_data(cast(GdkContentDeserializer*)cPtr);
@@ -118,9 +125,9 @@ class ContentDeserializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   }
 
   /**
-   * Gets the user data that was passed when the deserializer was registered.
-   * Returns: the user data for this deserializer
-   */
+      Gets the user data that was passed when the deserializer was registered.
+    Returns:     the user data for this deserializer
+  */
   void* getUserData()
   {
     auto _retval = gdk_content_deserializer_get_user_data(cast(GdkContentDeserializer*)cPtr);
@@ -128,9 +135,9 @@ class ContentDeserializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   }
 
   /**
-   * Gets the `GValue` to store the deserialized object in.
-   * Returns: the `GValue` for the current operation
-   */
+      Gets the [gobject.value.Value] to store the deserialized object in.
+    Returns:     the [gobject.value.Value] for the current operation
+  */
   gobject.value.Value getValue()
   {
     GValue* _cretval;
@@ -140,30 +147,31 @@ class ContentDeserializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   }
 
   /**
-   * Indicate that the deserialization has ended with an error.
-   * This function consumes error.
-   * Params:
-   *   error = a `GError`
-   */
+      Indicate that the deserialization has ended with an error.
+    
+    This function consumes error.
+    Params:
+      error =       a [glib.error.ErrorG]
+  */
   void returnError(glib.error.ErrorG error)
   {
     gdk_content_deserializer_return_error(cast(GdkContentDeserializer*)cPtr, error ? cast(GError*)error.cPtr : null);
   }
 
   /**
-   * Indicate that the deserialization has been successfully completed.
-   */
+      Indicate that the deserialization has been successfully completed.
+  */
   void returnSuccess()
   {
     gdk_content_deserializer_return_success(cast(GdkContentDeserializer*)cPtr);
   }
 
   /**
-   * Associate data with the current deserialization operation.
-   * Params:
-   *   data = data to associate with this operation
-   *   notify = destroy notify for data
-   */
+      Associate data with the current deserialization operation.
+    Params:
+      data =       data to associate with this operation
+      notify =       destroy notify for data
+  */
   void setTaskData(void* data, glib.types.DestroyNotify notify)
   {
     extern(C) void _notifyCallback(void* data)

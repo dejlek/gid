@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class LocalFileSystemOptions : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class LocalFileSystemOptions : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowLocalFileSystemOptions* _cretval;

@@ -7,9 +7,9 @@ import gobject.param_spec;
 import gobject.types;
 
 /**
- * A #GParamSpec derived structure that contains the meta data for enum
- * properties.
- */
+    A #GParamSpec derived structure that contains the meta data for enum
+  properties.
+*/
 class ParamSpecEnum : gobject.param_spec.ParamSpec
 {
 

@@ -7,6 +7,7 @@ import gtksource.c.types;
 import gtksource.style;
 import gtksource.types;
 
+/** */
 class StyleScheme : gobject.object.ObjectG
 {
 
@@ -26,6 +27,7 @@ class StyleScheme : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   string[] getAuthors()
   {
     const(char*)* _cretval;
@@ -44,6 +46,7 @@ class StyleScheme : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getDescription()
   {
     const(char)* _cretval;
@@ -52,6 +55,7 @@ class StyleScheme : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getFilename()
   {
     const(char)* _cretval;
@@ -60,6 +64,7 @@ class StyleScheme : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getId()
   {
     const(char)* _cretval;
@@ -68,6 +73,7 @@ class StyleScheme : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getName()
   {
     const(char)* _cretval;
@@ -76,6 +82,7 @@ class StyleScheme : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gtksource.style.Style getStyle(string styleId)
   {
     GtkSourceStyle* _cretval;

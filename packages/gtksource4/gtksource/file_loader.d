@@ -15,6 +15,7 @@ import gtksource.encoding;
 import gtksource.file;
 import gtksource.types;
 
+/** */
 class FileLoader : gobject.object.ObjectG
 {
 
@@ -35,16 +36,16 @@ class FileLoader : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #GtkSourceFileLoader object. The contents is read from the
-   * #GtkSourceFile's location. If not already done, call
-   * [gtksource.file.File.setLocation] before calling this constructor. The previous
-   * location is anyway not needed, because as soon as the file loading begins,
-   * the buffer is emptied.
-   * Params:
-   *   buffer = the #GtkSourceBuffer to load the contents into.
-   *   file = the #GtkSourceFile.
-   * Returns: a new #GtkSourceFileLoader object.
-   */
+      Creates a new #GtkSourceFileLoader object. The contents is read from the
+    #GtkSourceFile's location. If not already done, call
+    [gtksource.file.File.setLocation] before calling this constructor. The previous
+    location is anyway not needed, because as soon as the file loading begins,
+    the buffer is emptied.
+    Params:
+      buffer =       the #GtkSourceBuffer to load the contents into.
+      file =       the #GtkSourceFile.
+    Returns:     a new #GtkSourceFileLoader object.
+  */
   this(gtksource.buffer.Buffer buffer, gtksource.file.File file)
   {
     GtkSourceFileLoader* _cretval;
@@ -53,13 +54,13 @@ class FileLoader : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #GtkSourceFileLoader object. The contents is read from stream.
-   * Params:
-   *   buffer = the #GtkSourceBuffer to load the contents into.
-   *   file = the #GtkSourceFile.
-   *   stream = the #GInputStream to load, e.g. stdin.
-   * Returns: a new #GtkSourceFileLoader object.
-   */
+      Creates a new #GtkSourceFileLoader object. The contents is read from stream.
+    Params:
+      buffer =       the #GtkSourceBuffer to load the contents into.
+      file =       the #GtkSourceFile.
+      stream =       the #GInputStream to load, e.g. stdin.
+    Returns:     a new #GtkSourceFileLoader object.
+  */
   static gtksource.file_loader.FileLoader newFromStream(gtksource.buffer.Buffer buffer, gtksource.file.File file, gio.input_stream.InputStream stream)
   {
     GtkSourceFileLoader* _cretval;
@@ -68,6 +69,7 @@ class FileLoader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
@@ -76,6 +78,7 @@ class FileLoader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gtksource.types.CompressionType getCompressionType()
   {
     GtkSourceCompressionType _cretval;
@@ -84,6 +87,7 @@ class FileLoader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gtksource.encoding.Encoding getEncoding()
   {
     const(GtkSourceEncoding)* _cretval;
@@ -92,6 +96,7 @@ class FileLoader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gtksource.file.File getFile()
   {
     GtkSourceFile* _cretval;
@@ -100,6 +105,7 @@ class FileLoader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gio.input_stream.InputStream getInputStream()
   {
     GInputStream* _cretval;
@@ -108,6 +114,7 @@ class FileLoader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gio.file.File getLocation()
   {
     GFile* _cretval;
@@ -116,6 +123,7 @@ class FileLoader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gtksource.types.NewlineType getNewlineType()
   {
     GtkSourceNewlineType _cretval;
@@ -125,18 +133,18 @@ class FileLoader : gobject.object.ObjectG
   }
 
   /**
-   * Loads asynchronously the file or input stream contents into the
-   * #GtkSourceBuffer. See the #GAsyncResult documentation to know how to use this
-   * function.
-   * Params:
-   *   ioPriority = the I/O priority of the request. E.g. %G_PRIORITY_LOW,
-   *     %G_PRIORITY_DEFAULT or %G_PRIORITY_HIGH.
-   *   cancellable = optional #GCancellable object, %NULL to ignore.
-   *   progressCallback = function to call back with
-   *     progress information, or %NULL if progress information is not needed.
-   *   callback = a #GAsyncReadyCallback to call when the request is
-   *     satisfied.
-   */
+      Loads asynchronously the file or input stream contents into the
+    #GtkSourceBuffer. See the #GAsyncResult documentation to know how to use this
+    function.
+    Params:
+      ioPriority =       the I/O priority of the request. E.g. `G_PRIORITY_LOW`,
+          `G_PRIORITY_DEFAULT` or `G_PRIORITY_HIGH`.
+      cancellable =       optional #GCancellable object, null to ignore.
+      progressCallback =       function to call back with
+          progress information, or null if progress information is not needed.
+      callback =       a #GAsyncReadyCallback to call when the request is
+          satisfied.
+  */
   void loadAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _progressCallbackCallback(long currentNumBytes, long totalNumBytes, void* data)
@@ -163,14 +171,15 @@ class FileLoader : gobject.object.ObjectG
   }
 
   /**
-   * Finishes a file loading started with [gtksource.file_loader.FileLoader.loadAsync].
-   * If the contents has been loaded, the following #GtkSourceFile properties will
-   * be updated: the location, the encoding, the newline type and the compression
-   * type.
-   * Params:
-   *   result = a #GAsyncResult.
-   * Returns: whether the contents has been loaded successfully.
-   */
+      Finishes a file loading started with [gtksource.file_loader.FileLoader.loadAsync].
+    
+    If the contents has been loaded, the following #GtkSourceFile properties will
+    be updated: the location, the encoding, the newline type and the compression
+    type.
+    Params:
+      result =       a #GAsyncResult.
+    Returns:     whether the contents has been loaded successfully.
+  */
   bool loadFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
@@ -182,19 +191,21 @@ class FileLoader : gobject.object.ObjectG
   }
 
   /**
-   * Sets the candidate encodings for the file loading. The encodings are tried in
-   * the same order as the list.
-   * For convenience, candidate_encodings can contain duplicates. Only the first
-   * occurrence of a duplicated encoding is kept in the list.
-   * By default the candidate encodings are $(LPAREN)in that order in the list$(RPAREN):
-   * 1. If set, the #GtkSourceFile's encoding as returned by
-   * [gtksource.file.File.getEncoding].
-   * 2. The default candidates as returned by
-   * [gtksource.encoding.Encoding.getDefaultCandidates].
-   * Params:
-   *   candidateEncodings = a list of
-   *     #GtkSourceEncoding<!-- -->s.
-   */
+      Sets the candidate encodings for the file loading. The encodings are tried in
+    the same order as the list.
+    
+    For convenience, candidate_encodings can contain duplicates. Only the first
+    occurrence of a duplicated encoding is kept in the list.
+    
+    By default the candidate encodings are (in that order in the list):
+    1. If set, the #GtkSourceFile's encoding as returned by
+    [gtksource.file.File.getEncoding].
+    2. The default candidates as returned by
+    [gtksource.encoding.Encoding.getDefaultCandidates].
+    Params:
+      candidateEncodings =       a list of
+          #GtkSourceEncoding<!-- -->s.
+  */
   void setCandidateEncodings(gtksource.encoding.Encoding[] candidateEncodings)
   {
     auto _candidateEncodings = gSListFromD!(gtksource.encoding.Encoding)(candidateEncodings);

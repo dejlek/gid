@@ -8,8 +8,8 @@ import gio.types;
 import gobject.object;
 
 /**
- * Entry point for using GIO functionality.
- */
+    Entry point for using GIO functionality.
+*/
 class Vfs : gobject.object.ObjectG
 {
 
@@ -30,10 +30,10 @@ class Vfs : gobject.object.ObjectG
   }
 
   /**
-   * Gets the default #GVfs for the system.
-   * Returns: a #GVfs, which will be the local
-   *   file system #GVfs if no other implementation is available.
-   */
+      Gets the default #GVfs for the system.
+    Returns:     a #GVfs, which will be the local
+          file system #GVfs if no other implementation is available.
+  */
   static gio.vfs.Vfs getDefault()
   {
     GVfs* _cretval;
@@ -43,9 +43,9 @@ class Vfs : gobject.object.ObjectG
   }
 
   /**
-   * Gets the local #GVfs for the system.
-   * Returns: a #GVfs.
-   */
+      Gets the local #GVfs for the system.
+    Returns:     a #GVfs.
+  */
   static gio.vfs.Vfs getLocal()
   {
     GVfs* _cretval;
@@ -55,12 +55,12 @@ class Vfs : gobject.object.ObjectG
   }
 
   /**
-   * Gets a #GFile for path.
-   * Params:
-   *   path = a string containing a VFS path.
-   * Returns: a #GFile.
-   *   Free the returned object with [gobject.object.ObjectG.unref].
-   */
+      Gets a #GFile for path.
+    Params:
+      path =       a string containing a VFS path.
+    Returns:     a #GFile.
+          Free the returned object with [gobject.object.ObjectG.unref].
+  */
   gio.file.File getFileForPath(string path)
   {
     GFile* _cretval;
@@ -71,15 +71,16 @@ class Vfs : gobject.object.ObjectG
   }
 
   /**
-   * Gets a #GFile for uri.
-   * This operation never fails, but the returned object
-   * might not support any I/O operation if the URI
-   * is malformed or if the URI scheme is not supported.
-   * Params:
-   *   uri = a string containing a URI
-   * Returns: a #GFile.
-   *   Free the returned object with [gobject.object.ObjectG.unref].
-   */
+      Gets a #GFile for uri.
+    
+    This operation never fails, but the returned object
+    might not support any I/O operation if the URI
+    is malformed or if the URI scheme is not supported.
+    Params:
+      uri =       a string containing a URI
+    Returns:     a #GFile.
+          Free the returned object with [gobject.object.ObjectG.unref].
+  */
   gio.file.File getFileForUri(string uri)
   {
     GFile* _cretval;
@@ -90,11 +91,11 @@ class Vfs : gobject.object.ObjectG
   }
 
   /**
-   * Gets a list of URI schemes supported by vfs.
-   * Returns: a %NULL-terminated array of strings.
-   *   The returned array belongs to GIO and must
-   *   not be freed or modified.
-   */
+      Gets a list of URI schemes supported by vfs.
+    Returns:     a null-terminated array of strings.
+          The returned array belongs to GIO and must
+          not be freed or modified.
+  */
   string[] getSupportedUriSchemes()
   {
     const(char*)* _cretval;
@@ -114,10 +115,10 @@ class Vfs : gobject.object.ObjectG
   }
 
   /**
-   * Checks if the VFS is active.
-   * Returns: %TRUE if construction of the vfs was successful
-   *   and it is now active.
-   */
+      Checks if the VFS is active.
+    Returns:     true if construction of the vfs was successful
+          and it is now active.
+  */
   bool isActive()
   {
     bool _retval;
@@ -126,14 +127,14 @@ class Vfs : gobject.object.ObjectG
   }
 
   /**
-   * This operation never fails, but the returned object might
-   * not support any I/O operations if the parse_name cannot
-   * be parsed by the #GVfs module.
-   * Params:
-   *   parseName = a string to be parsed by the VFS module.
-   * Returns: a #GFile for the given parse_name.
-   *   Free the returned object with [gobject.object.ObjectG.unref].
-   */
+      This operation never fails, but the returned object might
+    not support any I/O operations if the parse_name cannot
+    be parsed by the #GVfs module.
+    Params:
+      parseName =       a string to be parsed by the VFS module.
+    Returns:     a #GFile for the given parse_name.
+          Free the returned object with [gobject.object.ObjectG.unref].
+  */
   gio.file.File parseName(string parseName)
   {
     GFile* _cretval;
@@ -144,30 +145,33 @@ class Vfs : gobject.object.ObjectG
   }
 
   /**
-   * Registers uri_func and parse_name_func as the #GFile URI and parse name
-   * lookup functions for URIs with a scheme matching scheme.
-   * Note that scheme is registered only within the running application, as
-   * opposed to desktop-wide as it happens with GVfs backends.
-   * When a #GFile is requested with an URI containing scheme $(LPAREN)e.g. through
-   * [gio.file.File.newForUri]$(RPAREN), uri_func will be called to allow a custom
-   * constructor. The implementation of uri_func should not be blocking, and
-   * must not call [gio.vfs.Vfs.registerUriScheme] or [gio.vfs.Vfs.unregisterUriScheme].
-   * When [gio.file.File.parseName] is called with a parse name obtained from such file,
-   * parse_name_func will be called to allow the #GFile to be created again. In
-   * that case, it's responsibility of parse_name_func to make sure the parse
-   * name matches what the custom #GFile implementation returned when
-   * [gio.file.File.getParseName] was previously called. The implementation of
-   * parse_name_func should not be blocking, and must not call
-   * [gio.vfs.Vfs.registerUriScheme] or [gio.vfs.Vfs.unregisterUriScheme].
-   * It's an error to call this function twice with the same scheme. To unregister
-   * a custom URI scheme, use [gio.vfs.Vfs.unregisterUriScheme].
-   * Params:
-   *   scheme = an URI scheme, e.g. "http"
-   *   uriFunc = a #GVfsFileLookupFunc
-   *   parseNameFunc = a #GVfsFileLookupFunc
-   * Returns: %TRUE if scheme was successfully registered, or %FALSE if a handler
-   *   for scheme already exists.
-   */
+      Registers uri_func and parse_name_func as the #GFile URI and parse name
+    lookup functions for URIs with a scheme matching scheme.
+    Note that scheme is registered only within the running application, as
+    opposed to desktop-wide as it happens with GVfs backends.
+    
+    When a #GFile is requested with an URI containing scheme (e.g. through
+    [gio.file.File.newForUri]), uri_func will be called to allow a custom
+    constructor. The implementation of uri_func should not be blocking, and
+    must not call [gio.vfs.Vfs.registerUriScheme] or [gio.vfs.Vfs.unregisterUriScheme].
+    
+    When [gio.file.File.parseName] is called with a parse name obtained from such file,
+    parse_name_func will be called to allow the #GFile to be created again. In
+    that case, it's responsibility of parse_name_func to make sure the parse
+    name matches what the custom #GFile implementation returned when
+    [gio.file.File.getParseName] was previously called. The implementation of
+    parse_name_func should not be blocking, and must not call
+    [gio.vfs.Vfs.registerUriScheme] or [gio.vfs.Vfs.unregisterUriScheme].
+    
+    It's an error to call this function twice with the same scheme. To unregister
+    a custom URI scheme, use [gio.vfs.Vfs.unregisterUriScheme].
+    Params:
+      scheme =       an URI scheme, e.g. "http"
+      uriFunc =       a #GVfsFileLookupFunc
+      parseNameFunc =       a #GVfsFileLookupFunc
+    Returns:     true if scheme was successfully registered, or false if a handler
+          for scheme already exists.
+  */
   bool registerUriScheme(string scheme, gio.types.VfsFileLookupFunc uriFunc = null, gio.types.VfsFileLookupFunc parseNameFunc = null)
   {
     extern(C) GFile* _uriFuncCallback(GVfs* vfs, const(char)* identifier, void* userData)
@@ -207,13 +211,13 @@ class Vfs : gobject.object.ObjectG
   }
 
   /**
-   * Unregisters the URI handler for scheme previously registered with
-   * [gio.vfs.Vfs.registerUriScheme].
-   * Params:
-   *   scheme = an URI scheme, e.g. "http"
-   * Returns: %TRUE if scheme was successfully unregistered, or %FALSE if a
-   *   handler for scheme does not exist.
-   */
+      Unregisters the URI handler for scheme previously registered with
+    [gio.vfs.Vfs.registerUriScheme].
+    Params:
+      scheme =       an URI scheme, e.g. "http"
+    Returns:     true if scheme was successfully unregistered, or false if a
+          handler for scheme does not exist.
+  */
   bool unregisterUriScheme(string scheme)
   {
     bool _retval;

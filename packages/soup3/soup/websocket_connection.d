@@ -13,24 +13,28 @@ import soup.types;
 import soup.websocket_extension;
 
 /**
- * The WebSocket Protocol
- * Provides support for the [WebSocket](http://tools.ietf.org/html/rfc6455)
- * protocol.
- * To connect to a WebSocket server, create a class@Session and call
- * [soup.session.Session.websocketConnectAsync]. To accept WebSocket
- * connections, create a class@Server and add a handler to it with
- * [soup.server.Server.addWebsocketHandler].
- * $(LPAREN)Lower-level support is available via
- * func@websocket_client_prepare_handshake and
- * func@websocket_client_verify_handshake, for handling the client side of the
- * WebSocket handshake, and func@websocket_server_process_handshake for
- * handling the server side.$(RPAREN)
- * #SoupWebsocketConnection handles the details of WebSocket communication. You
- * can use [soup.websocket_connection.WebsocketConnection.sendText] and
- * [soup.websocket_connection.WebsocketConnection.sendBinary] to send data, and the
- * signal@WebsocketConnection::message signal to receive data.
- * $(LPAREN)#SoupWebsocketConnection currently only supports asynchronous I/O.$(RPAREN)
- */
+    The WebSocket Protocol
+  
+  Provides support for the [WebSocket](http://tools.ietf.org/html/rfc6455)
+  protocol.
+  
+  To connect to a WebSocket server, create a `class@Session` and call
+  [soup.session.Session.websocketConnectAsync]. To accept WebSocket
+  connections, create a `class@Server` and add a handler to it with
+  [soup.server.Server.addWebsocketHandler].
+  
+  (Lower-level support is available via
+  `func@websocket_client_prepare_handshake` and
+  `func@websocket_client_verify_handshake`, for handling the client side of the
+  WebSocket handshake, and `func@websocket_server_process_handshake` for
+  handling the server side.)
+  
+  #SoupWebsocketConnection handles the details of WebSocket communication. You
+  can use [soup.websocket_connection.WebsocketConnection.sendText] and
+  [soup.websocket_connection.WebsocketConnection.sendBinary] to send data, and the
+  `signal@WebsocketConnection::message` signal to receive data.
+  (#SoupWebsocketConnection currently only supports asynchronous I/O.)
+*/
 class WebsocketConnection : gobject.object.ObjectG
 {
 
@@ -51,18 +55,20 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Close the connection in an orderly fashion.
-   * Note that until the signalWebsocketConnection::closed signal fires, the connection
-   * is not yet completely closed. The close message is not even sent until the
-   * main loop runs.
-   * The code and data are sent to the peer along with the close request.
-   * If code is %SOUP_WEBSOCKET_CLOSE_NO_STATUS a close message with no body
-   * $(LPAREN)without code and data$(RPAREN) is sent.
-   * Note that the data must be UTF-8 valid.
-   * Params:
-   *   code = close code
-   *   data = close data
-   */
+      Close the connection in an orderly fashion.
+    
+    Note that until the `signalWebsocketConnection::closed` signal fires, the connection
+    is not yet completely closed. The close message is not even sent until the
+    main loop runs.
+    
+    The code and data are sent to the peer along with the close request.
+    If code is [soup.types.WebsocketCloseCode.NoStatus] a close message with no body
+    (without code and data) is sent.
+    Note that the data must be UTF-8 valid.
+    Params:
+      code =       close code
+      data =       close data
+  */
   void close(ushort code, string data = null)
   {
     const(char)* _data = data.toCString(No.Alloc);
@@ -70,13 +76,14 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Get the close code received from the WebSocket peer.
-   * This only becomes valid once the WebSocket is in the
-   * %SOUP_WEBSOCKET_STATE_CLOSED state. The value will often be in the
-   * enumWebsocketCloseCode enumeration, but may also be an application
-   * defined close code.
-   * Returns: the close code or zero.
-   */
+      Get the close code received from the WebSocket peer.
+    
+    This only becomes valid once the WebSocket is in the
+    [soup.types.WebsocketState.Closed] state. The value will often be in the
+    `enumWebsocketCloseCode` enumeration, but may also be an application
+    defined close code.
+    Returns:     the close code or zero.
+  */
   ushort getCloseCode()
   {
     ushort _retval;
@@ -85,12 +92,13 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Get the close data received from the WebSocket peer.
-   * This only becomes valid once the WebSocket is in the
-   * %SOUP_WEBSOCKET_STATE_CLOSED state. The data may be freed once
-   * the main loop is run, so copy it if you need to keep it around.
-   * Returns: the close data or %NULL
-   */
+      Get the close data received from the WebSocket peer.
+    
+    This only becomes valid once the WebSocket is in the
+    [soup.types.WebsocketState.Closed] state. The data may be freed once
+    the main loop is run, so copy it if you need to keep it around.
+    Returns:     the close data or null
+  */
   string getCloseData()
   {
     const(char)* _cretval;
@@ -100,9 +108,9 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Get the connection type $(LPAREN)client/server$(RPAREN) of the connection.
-   * Returns: the connection type
-   */
+      Get the connection type (client/server) of the connection.
+    Returns:     the connection type
+  */
   soup.types.WebsocketConnectionType getConnectionType()
   {
     SoupWebsocketConnectionType _cretval;
@@ -112,9 +120,9 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Get the extensions chosen via negotiation with the peer.
-   * Returns: a #GList of #SoupWebsocketExtension objects
-   */
+      Get the extensions chosen via negotiation with the peer.
+    Returns:     a #GList of #SoupWebsocketExtension objects
+  */
   soup.websocket_extension.WebsocketExtension[] getExtensions()
   {
     GList* _cretval;
@@ -124,9 +132,9 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Get the I/O stream the WebSocket is communicating over.
-   * Returns: the WebSocket's I/O stream.
-   */
+      Get the I/O stream the WebSocket is communicating over.
+    Returns:     the WebSocket's I/O stream.
+  */
   gio.iostream.IOStream getIoStream()
   {
     GIOStream* _cretval;
@@ -136,9 +144,9 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Gets the keepalive interval in seconds or 0 if disabled.
-   * Returns: the keepalive interval.
-   */
+      Gets the keepalive interval in seconds or 0 if disabled.
+    Returns:     the keepalive interval.
+  */
   uint getKeepaliveInterval()
   {
     uint _retval;
@@ -147,9 +155,9 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Gets the maximum payload size allowed for incoming packets.
-   * Returns: the maximum payload size.
-   */
+      Gets the maximum payload size allowed for incoming packets.
+    Returns:     the maximum payload size.
+  */
   ulong getMaxIncomingPayloadSize()
   {
     ulong _retval;
@@ -158,9 +166,9 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Get the origin of the WebSocket.
-   * Returns: the origin
-   */
+      Get the origin of the WebSocket.
+    Returns:     the origin
+  */
   string getOrigin()
   {
     const(char)* _cretval;
@@ -170,9 +178,9 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Get the protocol chosen via negotiation with the peer.
-   * Returns: the chosen protocol
-   */
+      Get the protocol chosen via negotiation with the peer.
+    Returns:     the chosen protocol
+  */
   string getProtocol()
   {
     const(char)* _cretval;
@@ -182,9 +190,9 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Get the current state of the WebSocket.
-   * Returns: the state
-   */
+      Get the current state of the WebSocket.
+    Returns:     the state
+  */
   soup.types.WebsocketState getState()
   {
     SoupWebsocketState _cretval;
@@ -194,11 +202,12 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Get the URI of the WebSocket.
-   * For servers this represents the address of the WebSocket, and
-   * for clients it is the address connected to.
-   * Returns: the URI
-   */
+      Get the URI of the WebSocket.
+    
+    For servers this represents the address of the WebSocket, and
+    for clients it is the address connected to.
+    Returns:     the URI
+  */
   glib.uri.Uri getUri()
   {
     GUri* _cretval;
@@ -208,13 +217,15 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Send a binary message to the peer.
-   * If length is 0, data may be %NULL.
-   * The message is queued to be sent and will be sent when the main loop
-   * is run.
-   * Params:
-   *   data = the message contents
-   */
+      Send a binary message to the peer.
+    
+    If length is 0, data may be null.
+    
+    The message is queued to be sent and will be sent when the main loop
+    is run.
+    Params:
+      data =       the message contents
+  */
   void sendBinary(ubyte[] data = null)
   {
     size_t _length;
@@ -226,28 +237,31 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Send a message of the given type to the peer. Note that this method,
-   * allows to send text messages containing %NULL characters.
-   * The message is queued to be sent and will be sent when the main loop
-   * is run.
-   * Params:
-   *   type = the type of message contents
-   *   message = the message data as #GBytes
-   */
+      Send a message of the given type to the peer. Note that this method,
+    allows to send text messages containing null characters.
+    
+    The message is queued to be sent and will be sent when the main loop
+    is run.
+    Params:
+      type =       the type of message contents
+      message =       the message data as #GBytes
+  */
   void sendMessage(soup.types.WebsocketDataType type, glib.bytes.Bytes message)
   {
     soup_websocket_connection_send_message(cast(SoupWebsocketConnection*)cPtr, type, message ? cast(GBytes*)message.cPtr(No.Dup) : null);
   }
 
   /**
-   * Send a %NULL-terminated text $(LPAREN)UTF-8$(RPAREN) message to the peer.
-   * If you need to send text messages containing %NULL characters use
-   * [soup.websocket_connection.WebsocketConnection.sendMessage] instead.
-   * The message is queued to be sent and will be sent when the main loop
-   * is run.
-   * Params:
-   *   text = the message contents
-   */
+      Send a null-terminated text (UTF-8) message to the peer.
+    
+    If you need to send text messages containing null characters use
+    [soup.websocket_connection.WebsocketConnection.sendMessage] instead.
+    
+    The message is queued to be sent and will be sent when the main loop
+    is run.
+    Params:
+      text =       the message contents
+  */
   void sendText(string text)
   {
     const(char)* _text = text.toCString(No.Alloc);
@@ -255,46 +269,56 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Sets the interval in seconds on when to send a ping message which will serve
-   * as a keepalive message.
-   * If set to 0 the keepalive message is disabled.
-   * Params:
-   *   interval = the interval to send a ping message or 0 to disable it
-   */
+      Sets the interval in seconds on when to send a ping message which will serve
+    as a keepalive message.
+    
+    If set to 0 the keepalive message is disabled.
+    Params:
+      interval =       the interval to send a ping message or 0 to disable it
+  */
   void setKeepaliveInterval(uint interval)
   {
     soup_websocket_connection_set_keepalive_interval(cast(SoupWebsocketConnection*)cPtr, interval);
   }
 
   /**
-   * Sets the maximum payload size allowed for incoming packets.
-   * It does not limit the outgoing packet size.
-   * Params:
-   *   maxIncomingPayloadSize = the maximum payload size
-   */
+      Sets the maximum payload size allowed for incoming packets.
+    
+    It does not limit the outgoing packet size.
+    Params:
+      maxIncomingPayloadSize =       the maximum payload size
+  */
   void setMaxIncomingPayloadSize(ulong maxIncomingPayloadSize)
   {
     soup_websocket_connection_set_max_incoming_payload_size(cast(SoupWebsocketConnection*)cPtr, maxIncomingPayloadSize);
   }
 
   /**
-   * Emitted when the connection has completely closed.
-   * This happens either due to an orderly close from the peer, one
-   * initiated via [soup.websocket_connection.WebsocketConnection.close] or a fatal error
-   * condition that caused a close.
-   * This signal will be emitted once.
-   *   websocketConnection = the instance the signal is connected to
-   */
+      Emitted when the connection has completely closed.
+    
+    This happens either due to an orderly close from the peer, one
+    initiated via [soup.websocket_connection.WebsocketConnection.close] or a fatal error
+    condition that caused a close.
+    
+    This signal will be emitted once.
+  
+    ## Parameters
+    $(LIST
+      * $(B websocketConnection) the instance the signal is connected to
+    )
+  */
   alias ClosedCallbackDlg = void delegate(soup.websocket_connection.WebsocketConnection websocketConnection);
+
+  /** ditto */
   alias ClosedCallbackFunc = void function(soup.websocket_connection.WebsocketConnection websocketConnection);
 
   /**
-   * Connect to Closed signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Closed signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectClosed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ClosedCallbackDlg) || is(T : ClosedCallbackFunc))
   {
@@ -311,19 +335,25 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * This signal will be emitted during an orderly close.
-   *   websocketConnection = the instance the signal is connected to
-   */
+      This signal will be emitted during an orderly close.
+  
+    ## Parameters
+    $(LIST
+      * $(B websocketConnection) the instance the signal is connected to
+    )
+  */
   alias ClosingCallbackDlg = void delegate(soup.websocket_connection.WebsocketConnection websocketConnection);
+
+  /** ditto */
   alias ClosingCallbackFunc = void function(soup.websocket_connection.WebsocketConnection websocketConnection);
 
   /**
-   * Connect to Closing signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Closing signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectClosing(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ClosingCallbackDlg) || is(T : ClosingCallbackFunc))
   {
@@ -340,23 +370,29 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Emitted when an error occurred on the WebSocket.
-   * This may be fired multiple times. Fatal errors will be followed by
-   * the signalWebsocketConnection::closed signal being emitted.
-   * Params
-   *   error = the error that occured
-   *   websocketConnection = the instance the signal is connected to
-   */
+      Emitted when an error occurred on the WebSocket.
+    
+    This may be fired multiple times. Fatal errors will be followed by
+    the `signalWebsocketConnection::closed` signal being emitted.
+  
+    ## Parameters
+    $(LIST
+      * $(B error)       the error that occured
+      * $(B websocketConnection) the instance the signal is connected to
+    )
+  */
   alias ErrorCallbackDlg = void delegate(glib.error.ErrorG error, soup.websocket_connection.WebsocketConnection websocketConnection);
+
+  /** ditto */
   alias ErrorCallbackFunc = void function(glib.error.ErrorG error, soup.websocket_connection.WebsocketConnection websocketConnection);
 
   /**
-   * Connect to Error signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Error signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectError(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ErrorCallbackDlg) || is(T : ErrorCallbackFunc))
   {
@@ -374,25 +410,31 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Emitted when we receive a message from the peer.
-   * As a convenience, the message data will always be
-   * %NULL-terminated, but the NUL byte will not be included in
-   * the length count.
-   * Params
-   *   type = the type of message contents
-   *   message = the message data
-   *   websocketConnection = the instance the signal is connected to
-   */
+      Emitted when we receive a message from the peer.
+    
+    As a convenience, the message data will always be
+    null-terminated, but the NUL byte will not be included in
+    the length count.
+  
+    ## Parameters
+    $(LIST
+      * $(B type)       the type of message contents
+      * $(B message)       the message data
+      * $(B websocketConnection) the instance the signal is connected to
+    )
+  */
   alias MessageCallbackDlg = void delegate(int type, glib.bytes.Bytes message, soup.websocket_connection.WebsocketConnection websocketConnection);
+
+  /** ditto */
   alias MessageCallbackFunc = void function(int type, glib.bytes.Bytes message, soup.websocket_connection.WebsocketConnection websocketConnection);
 
   /**
-   * Connect to Message signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Message signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectMessage(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MessageCallbackDlg) || is(T : MessageCallbackFunc))
   {
@@ -411,25 +453,31 @@ class WebsocketConnection : gobject.object.ObjectG
   }
 
   /**
-   * Emitted when we receive a Pong frame $(LPAREN)solicited or
-   * unsolicited$(RPAREN) from the peer.
-   * As a convenience, the message data will always be
-   * %NULL-terminated, but the NUL byte will not be included in
-   * the length count.
-   * Params
-   *   message = the application data $(LPAREN)if any$(RPAREN)
-   *   websocketConnection = the instance the signal is connected to
-   */
+      Emitted when we receive a Pong frame (solicited or
+    unsolicited) from the peer.
+    
+    As a convenience, the message data will always be
+    null-terminated, but the NUL byte will not be included in
+    the length count.
+  
+    ## Parameters
+    $(LIST
+      * $(B message)       the application data (if any)
+      * $(B websocketConnection) the instance the signal is connected to
+    )
+  */
   alias PongCallbackDlg = void delegate(glib.bytes.Bytes message, soup.websocket_connection.WebsocketConnection websocketConnection);
+
+  /** ditto */
   alias PongCallbackFunc = void function(glib.bytes.Bytes message, soup.websocket_connection.WebsocketConnection websocketConnection);
 
   /**
-   * Connect to Pong signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Pong signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectPong(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PongCallbackDlg) || is(T : PongCallbackFunc))
   {

@@ -10,6 +10,7 @@ import gtk.c.types;
 import gtk.types;
 import gtk.widget_accessible;
 
+/** */
 class ArrowAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
 {
 

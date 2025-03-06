@@ -6,6 +6,7 @@ import parquet.c.types;
 import parquet.statistics;
 import parquet.types;
 
+/** */
 class Int32Statistics : parquet.statistics.Statistics
 {
 
@@ -25,6 +26,7 @@ class Int32Statistics : parquet.statistics.Statistics
     return getType();
   }
 
+  /** */
   int getMax()
   {
     int _retval;
@@ -32,6 +34,7 @@ class Int32Statistics : parquet.statistics.Statistics
     return _retval;
   }
 
+  /** */
   int getMin()
   {
     int _retval;

@@ -25,73 +25,78 @@ import gobject.value;
 
 
 /**
- * The main way to not draw GL content in GTK.
- * It takes a render buffer ID $(LPAREN)source_type \=\= GL_RENDERBUFFER$(RPAREN) or a texture
- * id $(LPAREN)source_type \=\= GL_TEXTURE$(RPAREN) and draws it onto cr with an OVER operation,
- * respecting the current clip. The top left corner of the rectangle specified
- * by x, y, width and height will be drawn at the current $(LPAREN)0,0$(RPAREN) position of
- * the `cairo_t`.
- * This will work for *all* `cairo_t`, as long as surface is realized, but the
- * fallback implementation that reads back the pixels from the buffer may be
- * used in the general case. In the case of direct drawing to a surface with
- * no special effects applied to cr it will however use a more efficient
- * approach.
- * For GL_RENDERBUFFER the code will always fall back to software for buffers
- * with alpha components, so make sure you use GL_TEXTURE if using alpha.
- * Calling this may change the current GL context.
- * Params:
- *   cr = a cairo context
- *   surface = The surface we're rendering for $(LPAREN)not necessarily into$(RPAREN)
- *   source = The GL ID of the source buffer
- *   sourceType = The type of the source
- *   bufferScale = The scale-factor that the source buffer is allocated for
- *   x = The source x position in source to start copying from in GL coordinates
- *   y = The source y position in source to start copying from in GL coordinates
- *   width = The width of the region to draw
- *   height = The height of the region to draw
+    The main way to not draw GL content in GTK.
+  
+  It takes a render buffer ID (source_type == GL_RENDERBUFFER) or a texture
+  id (source_type == GL_TEXTURE) and draws it onto cr with an OVER operation,
+  respecting the current clip. The top left corner of the rectangle specified
+  by x, y, width and height will be drawn at the current (0,0) position of
+  the [cairo.context.Context].
+  
+  This will work for *all* [cairo.context.Context], as long as surface is realized, but the
+  fallback implementation that reads back the pixels from the buffer may be
+  used in the general case. In the case of direct drawing to a surface with
+  no special effects applied to cr it will however use a more efficient
+  approach.
+  
+  For GL_RENDERBUFFER the code will always fall back to software for buffers
+  with alpha components, so make sure you use GL_TEXTURE if using alpha.
+  
+  Calling this may change the current GL context.
+  Params:
+    cr =       a cairo context
+    surface =       The surface we're rendering for (not necessarily into)
+    source =       The GL ID of the source buffer
+    sourceType =       The type of the source
+    bufferScale =       The scale-factor that the source buffer is allocated for
+    x =       The source x position in source to start copying from in GL coordinates
+    y =       The source y position in source to start copying from in GL coordinates
+    width =       The width of the region to draw
+    height =       The height of the region to draw
 
- * Deprecated: The function is overly complex and produces broken output
- *   in various combinations of arguments. If you want to draw with GL textures
- *   in GTK, use [gdk.gltexture.GLTexture.new_]; if you want to use that texture in
- *   Cairo, use [gdk.texture.Texture.download] to download the data into a Cairo
- *   image surface.
- */
+  Deprecated:     The function is overly complex and produces broken output
+      in various combinations of arguments. If you want to draw with GL textures
+      in GTK, use [gdk.gltexture.GLTexture.new_]; if you want to use that texture in
+      Cairo, use [gdk.texture.Texture.download] to download the data into a Cairo
+      image surface.
+*/
 void cairoDrawFromGl(cairo.context.Context cr, gdk.surface.Surface surface, int source, int sourceType, int bufferScale, int x, int y, int width, int height)
 {
   gdk_cairo_draw_from_gl(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null, source, sourceType, bufferScale, x, y, width, height);
 }
 
 /**
- * Adds the given rectangle to the current path of cr.
- * Params:
- *   cr = a cairo context
- *   rectangle = a `GdkRectangle`
- */
+    Adds the given rectangle to the current path of cr.
+  Params:
+    cr =       a cairo context
+    rectangle =       a [gtk.types.Rectangle]
+*/
 void cairoRectangle(cairo.context.Context cr, gdk.rectangle.Rectangle rectangle)
 {
   gdk_cairo_rectangle(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, rectangle ? cast(const(GdkRectangle)*)rectangle.cPtr(No.Dup) : null);
 }
 
 /**
- * Adds the given region to the current path of cr.
- * Params:
- *   cr = a cairo context
- *   region = a `cairo_region_t`
- */
+    Adds the given region to the current path of cr.
+  Params:
+    cr =       a cairo context
+    region =       a [cairo.region.Region]
+*/
 void cairoRegion(cairo.context.Context cr, cairo.region.Region region)
 {
   gdk_cairo_region(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
 }
 
 /**
- * Creates region that covers the area where the given
- * surface is more than 50% opaque.
- * This function takes into account device offsets that might be
- * set with [cairo.surface.Surface.setDeviceOffset].
- * Params:
- *   surface = a cairo surface
- * Returns: A `cairo_region_t`
- */
+    Creates region that covers the area where the given
+  surface is more than 50% opaque.
+  
+  This function takes into account device offsets that might be
+  set with [cairo.surface.Surface.setDeviceOffset].
+  Params:
+    surface =       a cairo surface
+  Returns:     A [cairo.region.Region]
+*/
 cairo.region.Region cairoRegionCreateFromSurface(cairo.surface.Surface surface)
 {
   cairo_region_t* _cretval;
@@ -101,45 +106,48 @@ cairo.region.Region cairoRegionCreateFromSurface(cairo.surface.Surface surface)
 }
 
 /**
- * Sets the given pixbuf as the source pattern for cr.
- * The pattern has an extend mode of %CAIRO_EXTEND_NONE and is aligned
- * so that the origin of pixbuf is pixbuf_x, pixbuf_y.
- * Params:
- *   cr = a cairo context
- *   pixbuf = a `GdkPixbuf`
- *   pixbufX = X coordinate of location to place upper left corner of pixbuf
- *   pixbufY = Y coordinate of location to place upper left corner of pixbuf
- */
+    Sets the given pixbuf as the source pattern for cr.
+  
+  The pattern has an extend mode of [cairo.types.Extend.None] and is aligned
+  so that the origin of pixbuf is pixbuf_x, pixbuf_y.
+  Params:
+    cr =       a cairo context
+    pixbuf =       a [gdkpixbuf.pixbuf.Pixbuf]
+    pixbufX =       X coordinate of location to place upper left corner of pixbuf
+    pixbufY =       Y coordinate of location to place upper left corner of pixbuf
+*/
 void cairoSetSourcePixbuf(cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixbuf, double pixbufX, double pixbufY)
 {
   gdk_cairo_set_source_pixbuf(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, pixbuf ? cast(const(PixbufC)*)pixbuf.cPtr(No.Dup) : null, pixbufX, pixbufY);
 }
 
 /**
- * Sets the specified `GdkRGBA` as the source color of cr.
- * Params:
- *   cr = a cairo context
- *   rgba = a `GdkRGBA`
- */
+    Sets the specified [gdk.rgba.RGBA] as the source color of cr.
+  Params:
+    cr =       a cairo context
+    rgba =       a [gdk.rgba.RGBA]
+*/
 void cairoSetSourceRgba(cairo.context.Context cr, gdk.rgba.RGBA rgba)
 {
   gdk_cairo_set_source_rgba(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
 }
 
 /**
- * Read content from the given input stream and deserialize it, asynchronously.
- * The default I/O priority is %G_PRIORITY_DEFAULT $(LPAREN)i.e. 0$(RPAREN), and lower numbers
- * indicate a higher priority.
- * When the operation is finished, callback will be called. You must then
- * call funcGdk.content_deserialize_finish to get the result of the operation.
- * Params:
- *   stream = a `GInputStream` to read the serialized content from
- *   mimeType = the mime type to deserialize from
- *   type = the GType to deserialize from
- *   ioPriority = the I/O priority of the operation
- *   cancellable = optional `GCancellable` object
- *   callback = callback to call when the operation is done
- */
+    Read content from the given input stream and deserialize it, asynchronously.
+  
+  The default I/O priority is `G_PRIORITY_DEFAULT` (i.e. 0), and lower numbers
+  indicate a higher priority.
+  
+  When the operation is finished, callback will be called. You must then
+  call `funcGdk.content_deserialize_finish` to get the result of the operation.
+  Params:
+    stream =       a [gio.input_stream.InputStream] to read the serialized content from
+    mimeType =       the mime type to deserialize from
+    type =       the GType to deserialize from
+    ioPriority =       the I/O priority of the operation
+    cancellable =       optional [gio.cancellable.Cancellable] object
+    callback =       callback to call when the operation is done
+*/
 void contentDeserializeAsync(gio.input_stream.InputStream stream, string mimeType, gobject.types.GType type, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
 {
   extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -157,14 +165,14 @@ void contentDeserializeAsync(gio.input_stream.InputStream stream, string mimeTyp
 }
 
 /**
- * Finishes a content deserialization operation.
- * Params:
- *   result = the `GAsyncResult`
- *   value = return location for the result of the operation
- * Returns: %TRUE if the operation was successful. In this case,
- *   value is set. %FALSE if an error occurred. In this case,
- *   error is set
- */
+    Finishes a content deserialization operation.
+  Params:
+    result =       the [gio.async_result.AsyncResult]
+    value =       return location for the result of the operation
+  Returns:     true if the operation was successful. In this case,
+      value is set. false if an error occurred. In this case,
+      error is set
+*/
 bool contentDeserializeFinish(gio.async_result.AsyncResult result, out gobject.value.Value value)
 {
   bool _retval;
@@ -178,19 +186,21 @@ bool contentDeserializeFinish(gio.async_result.AsyncResult result, out gobject.v
 }
 
 /**
- * Serialize content and write it to the given output stream, asynchronously.
- * The default I/O priority is %G_PRIORITY_DEFAULT $(LPAREN)i.e. 0$(RPAREN), and lower numbers
- * indicate a higher priority.
- * When the operation is finished, callback will be called. You must then
- * call funcGdk.content_serialize_finish to get the result of the operation.
- * Params:
- *   stream = a `GOutputStream` to write the serialized content to
- *   mimeType = the mime type to serialize to
- *   value = the content to serialize
- *   ioPriority = the I/O priority of the operation
- *   cancellable = optional `GCancellable` object
- *   callback = callback to call when the operation is done
- */
+    Serialize content and write it to the given output stream, asynchronously.
+  
+  The default I/O priority is `G_PRIORITY_DEFAULT` (i.e. 0), and lower numbers
+  indicate a higher priority.
+  
+  When the operation is finished, callback will be called. You must then
+  call `funcGdk.content_serialize_finish` to get the result of the operation.
+  Params:
+    stream =       a [gio.output_stream.OutputStream] to write the serialized content to
+    mimeType =       the mime type to serialize to
+    value =       the content to serialize
+    ioPriority =       the I/O priority of the operation
+    cancellable =       optional [gio.cancellable.Cancellable] object
+    callback =       callback to call when the operation is done
+*/
 void contentSerializeAsync(gio.output_stream.OutputStream stream, string mimeType, gobject.value.Value value, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
 {
   extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -208,12 +218,12 @@ void contentSerializeAsync(gio.output_stream.OutputStream stream, string mimeTyp
 }
 
 /**
- * Finishes a content serialization operation.
- * Params:
- *   result = the `GAsyncResult`
- * Returns: %TRUE if the operation was successful, %FALSE if an
- *   error occurred. In this case, error is set
- */
+    Finishes a content serialization operation.
+  Params:
+    result =       the [gio.async_result.AsyncResult]
+  Returns:     true if the operation was successful, false if an
+      error occurred. In this case, error is set
+*/
 bool contentSerializeFinish(gio.async_result.AsyncResult result)
 {
   bool _retval;
@@ -224,6 +234,7 @@ bool contentSerializeFinish(gio.async_result.AsyncResult result)
   return _retval;
 }
 
+/** */
 gobject.types.GType dragSurfaceSizeGetType()
 {
   gobject.types.GType _retval;
@@ -232,18 +243,20 @@ gobject.types.GType dragSurfaceSizeGetType()
 }
 
 /**
- * Returns the relative angle from event1 to event2.
- * The relative angle is the angle between the X axis and the line
- * through both events' positions. The rotation direction for positive
- * angles is from the positive X axis towards the positive Y axis.
- * This assumes that both events have X/Y information.
- * If not, this function returns %FALSE.
- * Params:
- *   event1 = first `GdkEvent`
- *   event2 = second `GdkEvent`
- *   angle = return location for the relative angle between both events
- * Returns: %TRUE if the angle could be calculated.
- */
+    Returns the relative angle from event1 to event2.
+  
+  The relative angle is the angle between the X axis and the line
+  through both events' positions. The rotation direction for positive
+  angles is from the positive X axis towards the positive Y axis.
+  
+  This assumes that both events have X/Y information.
+  If not, this function returns false.
+  Params:
+    event1 =       first [gdk.event.Event]
+    event2 =       second [gdk.event.Event]
+    angle =       return location for the relative angle between both events
+  Returns:     true if the angle could be calculated.
+*/
 bool eventsGetAngle(gdk.event.Event event1, gdk.event.Event event2, out double angle)
 {
   bool _retval;
@@ -252,16 +265,17 @@ bool eventsGetAngle(gdk.event.Event event1, gdk.event.Event event2, out double a
 }
 
 /**
- * Returns the point halfway between the events' positions.
- * This assumes that both events have X/Y information.
- * If not, this function returns %FALSE.
- * Params:
- *   event1 = first `GdkEvent`
- *   event2 = second `GdkEvent`
- *   x = return location for the X coordinate of the center
- *   y = return location for the Y coordinate of the center
- * Returns: %TRUE if the center could be calculated.
- */
+    Returns the point halfway between the events' positions.
+  
+  This assumes that both events have X/Y information.
+  If not, this function returns false.
+  Params:
+    event1 =       first [gdk.event.Event]
+    event2 =       second [gdk.event.Event]
+    x =       return location for the X coordinate of the center
+    y =       return location for the Y coordinate of the center
+  Returns:     true if the center could be calculated.
+*/
 bool eventsGetCenter(gdk.event.Event event1, gdk.event.Event event2, out double x, out double y)
 {
   bool _retval;
@@ -270,15 +284,16 @@ bool eventsGetCenter(gdk.event.Event event1, gdk.event.Event event2, out double 
 }
 
 /**
- * Returns the distance between the event locations.
- * This assumes that both events have X/Y information.
- * If not, this function returns %FALSE.
- * Params:
- *   event1 = first `GdkEvent`
- *   event2 = second `GdkEvent`
- *   distance = return location for the distance
- * Returns: %TRUE if the distance could be calculated.
- */
+    Returns the distance between the event locations.
+  
+  This assumes that both events have X/Y information.
+  If not, this function returns false.
+  Params:
+    event1 =       first [gdk.event.Event]
+    event2 =       second [gdk.event.Event]
+    distance =       return location for the distance
+  Returns:     true if the distance could be calculated.
+*/
 bool eventsGetDistance(gdk.event.Event event1, gdk.event.Event event2, out double distance)
 {
   bool _retval;
@@ -287,14 +302,15 @@ bool eventsGetDistance(gdk.event.Event event1, gdk.event.Event event2, out doubl
 }
 
 /**
- * Canonicalizes the given mime type and interns the result.
- * If string is not a valid mime type, %NULL is returned instead.
- * See RFC 2048 for the syntax if mime types.
- * Params:
- *   string_ = string of a potential mime type
- * Returns: An interned string for the canonicalized
- *   mime type or %NULL if the string wasn't a valid mime type
- */
+    Canonicalizes the given mime type and interns the result.
+  
+  If string is not a valid mime type, null is returned instead.
+  See RFC 2048 for the syntax if mime types.
+  Params:
+    string_ =       string of a potential mime type
+  Returns:     An interned string for the canonicalized
+      mime type or null if the string wasn't a valid mime type
+*/
 string internMimeType(string string_)
 {
   const(char)* _cretval;
@@ -305,28 +321,30 @@ string internMimeType(string string_)
 }
 
 /**
- * Obtains the upper- and lower-case versions of the keyval symbol.
- * Examples of keyvals are `GDK_KEY_a`, `GDK_KEY_Enter`, `GDK_KEY_F1`, etc.
- * Params:
- *   symbol = a keyval
- *   lower = return location for lowercase version of symbol
- *   upper = return location for uppercase version of symbol
- */
+    Obtains the upper- and lower-case versions of the keyval symbol.
+  
+  Examples of keyvals are `GDK_KEY_a`, `GDK_KEY_Enter`, `GDK_KEY_F1`, etc.
+  Params:
+    symbol =       a keyval
+    lower =       return location for lowercase version of symbol
+    upper =       return location for uppercase version of symbol
+*/
 void keyvalConvertCase(uint symbol, out uint lower, out uint upper)
 {
   gdk_keyval_convert_case(symbol, cast(uint*)&lower, cast(uint*)&upper);
 }
 
 /**
- * Converts a key name to a key value.
- * The names are the same as those in the
- * `gdk/gdkkeysyms.h` header file
- * but without the leading “GDK_KEY_”.
- * Params:
- *   keyvalName = a key name
- * Returns: the corresponding key value, or %GDK_KEY_VoidSymbol
- *   if the key name is not a valid key
- */
+    Converts a key name to a key value.
+  
+  The names are the same as those in the
+  `gdk/gdkkeysyms.h` header file
+  but without the leading “GDK_KEY_”.
+  Params:
+    keyvalName =       a key name
+  Returns:     the corresponding key value, or `GDK_KEY_VoidSymbol`
+      if the key name is not a valid key
+*/
 uint keyvalFromName(string keyvalName)
 {
   uint _retval;
@@ -336,12 +354,12 @@ uint keyvalFromName(string keyvalName)
 }
 
 /**
- * Returns %TRUE if the given key value is in lower case.
- * Params:
- *   keyval = a key value.
- * Returns: %TRUE if keyval is in lower case, or if keyval is not
- *   subject to case conversion.
- */
+    Returns true if the given key value is in lower case.
+  Params:
+    keyval =       a key value.
+  Returns:     true if keyval is in lower case, or if keyval is not
+      subject to case conversion.
+*/
 bool keyvalIsLower(uint keyval)
 {
   bool _retval;
@@ -350,12 +368,12 @@ bool keyvalIsLower(uint keyval)
 }
 
 /**
- * Returns %TRUE if the given key value is in upper case.
- * Params:
- *   keyval = a key value.
- * Returns: %TRUE if keyval is in upper case, or if keyval is not subject to
- *   case conversion.
- */
+    Returns true if the given key value is in upper case.
+  Params:
+    keyval =       a key value.
+  Returns:     true if keyval is in upper case, or if keyval is not subject to
+     case conversion.
+*/
 bool keyvalIsUpper(uint keyval)
 {
   bool _retval;
@@ -364,15 +382,16 @@ bool keyvalIsUpper(uint keyval)
 }
 
 /**
- * Converts a key value into a symbolic name.
- * The names are the same as those in the
- * `gdk/gdkkeysyms.h` header file
- * but without the leading “GDK_KEY_”.
- * Params:
- *   keyval = a key value
- * Returns: a string containing the name
- *   of the key
- */
+    Converts a key value into a symbolic name.
+  
+  The names are the same as those in the
+  `gdk/gdkkeysyms.h` header file
+  but without the leading “GDK_KEY_”.
+  Params:
+    keyval =       a key value
+  Returns:     a string containing the name
+      of the key
+*/
 string keyvalName(uint keyval)
 {
   const(char)* _cretval;
@@ -382,12 +401,12 @@ string keyvalName(uint keyval)
 }
 
 /**
- * Converts a key value to lower case, if applicable.
- * Params:
- *   keyval = a key value.
- * Returns: the lower case form of keyval, or keyval itself if it is already
- *   in lower case or it is not subject to case conversion.
- */
+    Converts a key value to lower case, if applicable.
+  Params:
+    keyval =       a key value.
+  Returns:     the lower case form of keyval, or keyval itself if it is already
+     in lower case or it is not subject to case conversion.
+*/
 uint keyvalToLower(uint keyval)
 {
   uint _retval;
@@ -396,16 +415,17 @@ uint keyvalToLower(uint keyval)
 }
 
 /**
- * Convert from a GDK key symbol to the corresponding Unicode
- * character.
- * Note that the conversion does not take the current locale
- * into consideration, which might be expected for particular
- * keyvals, such as %GDK_KEY_KP_Decimal.
- * Params:
- *   keyval = a GDK key symbol
- * Returns: the corresponding unicode character, or 0 if there
- *   is no corresponding character.
- */
+    Convert from a GDK key symbol to the corresponding Unicode
+  character.
+  
+  Note that the conversion does not take the current locale
+  into consideration, which might be expected for particular
+  keyvals, such as `GDK_KEY_KP_Decimal`.
+  Params:
+    keyval =       a GDK key symbol
+  Returns:     the corresponding unicode character, or 0 if there
+      is no corresponding character.
+*/
 uint keyvalToUnicode(uint keyval)
 {
   uint _retval;
@@ -414,12 +434,12 @@ uint keyvalToUnicode(uint keyval)
 }
 
 /**
- * Converts a key value to upper case, if applicable.
- * Params:
- *   keyval = a key value.
- * Returns: the upper case form of keyval, or keyval itself if it is already
- *   in upper case or it is not subject to case conversion.
- */
+    Converts a key value to upper case, if applicable.
+  Params:
+    keyval =       a key value.
+  Returns:     the upper case form of keyval, or keyval itself if it is already
+      in upper case or it is not subject to case conversion.
+*/
 uint keyvalToUpper(uint keyval)
 {
   uint _retval;
@@ -428,23 +448,25 @@ uint keyvalToUpper(uint keyval)
 }
 
 /**
- * Transfers image data from a `cairo_surface_t` and converts it
- * to a `GdkPixbuf`.
- * This allows you to efficiently read individual pixels from cairo surfaces.
- * This function will create an RGB pixbuf with 8 bits per channel.
- * The pixbuf will contain an alpha channel if the surface contains one.
- * Params:
- *   surface = surface to copy from
- *   srcX = Source X coordinate within surface
- *   srcY = Source Y coordinate within surface
- *   width = Width in pixels of region to get
- *   height = Height in pixels of region to get
- * Returns: A newly-created pixbuf with a
- *   reference count of 1
+    Transfers image data from a [cairo.surface.Surface] and converts it
+  to a [gdkpixbuf.pixbuf.Pixbuf].
+  
+  This allows you to efficiently read individual pixels from cairo surfaces.
+  
+  This function will create an RGB pixbuf with 8 bits per channel.
+  The pixbuf will contain an alpha channel if the surface contains one.
+  Params:
+    surface =       surface to copy from
+    srcX =       Source X coordinate within surface
+    srcY =       Source Y coordinate within surface
+    width =       Width in pixels of region to get
+    height =       Height in pixels of region to get
+  Returns:     A newly-created pixbuf with a
+      reference count of 1
 
- * Deprecated: Use [gdk.texture.Texture] and subclasses instead
- *   cairo surfaces and pixbufs
- */
+  Deprecated:     Use [gdk.texture.Texture] and subclasses instead
+      cairo surfaces and pixbufs
+*/
 gdkpixbuf.pixbuf.Pixbuf pixbufGetFromSurface(cairo.surface.Surface surface, int srcX, int srcY, int width, int height)
 {
   PixbufC* _cretval;
@@ -454,17 +476,18 @@ gdkpixbuf.pixbuf.Pixbuf pixbufGetFromSurface(cairo.surface.Surface surface, int 
 }
 
 /**
- * Creates a new pixbuf from texture.
- * This should generally not be used in newly written code as later
- * stages will almost certainly convert the pixbuf back into a texture
- * to draw it on screen.
- * Params:
- *   texture = a `GdkTexture`
- * Returns: a new `GdkPixbuf`
+    Creates a new pixbuf from texture.
+  
+  This should generally not be used in newly written code as later
+  stages will almost certainly convert the pixbuf back into a texture
+  to draw it on screen.
+  Params:
+    texture =       a [gdk.texture.Texture]
+  Returns:     a new [gdkpixbuf.pixbuf.Pixbuf]
 
- * Deprecated: Use [gdk.texture.Texture] and subclasses instead
- *   cairo surfaces and pixbufs
- */
+  Deprecated:     Use [gdk.texture.Texture] and subclasses instead
+      cairo surfaces and pixbufs
+*/
 gdkpixbuf.pixbuf.Pixbuf pixbufGetFromTexture(gdk.texture.Texture texture)
 {
   PixbufC* _cretval;
@@ -474,38 +497,51 @@ gdkpixbuf.pixbuf.Pixbuf pixbufGetFromTexture(gdk.texture.Texture texture)
 }
 
 /**
- * Sets a list of backends that GDK should try to use.
- * This can be useful if your application does not
- * work with certain GDK backends.
- * By default, GDK tries all included backends.
- * For example:
- * ```c
- * gdk_set_allowed_backends $(LPAREN)"wayland,macos,*"$(RPAREN);
- * ```
- * instructs GDK to try the Wayland backend first, followed by the
- * MacOs backend, and then all others.
- * If the `GDK_BACKEND` environment variable is set, it determines
- * what backends are tried in what order, while still respecting the
- * set of allowed backends that are specified by this function.
- * The possible backend names are:
- * - `broadway`
- * - `macos`
- * - `wayland`.
- * - `win32`
- * - `x11`
- * You can also include a `*` in the list to try all remaining backends.
- * This call must happen prior to functions that open a display, such
- * as [gdk.display.Display.open], `[gtk.global.init_]`, or `[gtk.global.initCheck]`
- * in order to take effect.
- * Params:
- *   backends = a comma-separated list of backends
- */
+    Sets a list of backends that GDK should try to use.
+  
+  This can be useful if your application does not
+  work with certain GDK backends.
+  
+  By default, GDK tries all included backends.
+  
+  For example:
+  
+  ```c
+  gdk_set_allowed_backends ("wayland,macos,*");
+  ```
+  
+  instructs GDK to try the Wayland backend first, followed by the
+  MacOs backend, and then all others.
+  
+  If the `GDK_BACKEND` environment variable is set, it determines
+  what backends are tried in what order, while still respecting the
+  set of allowed backends that are specified by this function.
+  
+  The possible backend names are:
+  
+    $(LIST
+        * `broadway`
+        * `macos`
+        * `wayland`.
+        * `win32`
+        * `x11`
+    )
+      
+  You can also include a `*` in the list to try all remaining backends.
+  
+  This call must happen prior to functions that open a display, such
+  as [gdk.display.Display.open], `[gtk.global.init_]`, or `[gtk.global.initCheck]`
+  in order to take effect.
+  Params:
+    backends =       a comma-separated list of backends
+*/
 void setAllowedBackends(string backends)
 {
   const(char)* _backends = backends.toCString(No.Alloc);
   gdk_set_allowed_backends(_backends);
 }
 
+/** */
 gobject.types.GType toplevelSizeGetType()
 {
   gobject.types.GType _retval;
@@ -514,12 +550,12 @@ gobject.types.GType toplevelSizeGetType()
 }
 
 /**
- * Convert from a Unicode character to a key symbol.
- * Params:
- *   wc = a Unicode character
- * Returns: the corresponding GDK key symbol, if one exists.
- *   or, if there is no corresponding symbol, wc | 0x01000000
- */
+    Convert from a Unicode character to a key symbol.
+  Params:
+    wc =       a Unicode character
+  Returns:     the corresponding GDK key symbol, if one exists.
+      or, if there is no corresponding symbol, wc | 0x01000000
+*/
 uint unicodeToKeyval(uint wc)
 {
   uint _retval;

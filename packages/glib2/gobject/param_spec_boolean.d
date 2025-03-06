@@ -7,8 +7,8 @@ import gobject.param_spec;
 import gobject.types;
 
 /**
- * A #GParamSpec derived structure that contains the meta data for boolean properties.
- */
+    A #GParamSpec derived structure that contains the meta data for boolean properties.
+*/
 class ParamSpecBoolean : gobject.param_spec.ParamSpec
 {
 

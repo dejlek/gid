@@ -16,42 +16,47 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * #GtkEntryCompletion is an auxiliary object to be used in conjunction with
- * #GtkEntry to provide the completion functionality. It implements the
- * #GtkCellLayout interface, to allow the user to add extra cells to the
- * #GtkTreeView with completion matches.
- * “Completion functionality” means that when the user modifies the text
- * in the entry, #GtkEntryCompletion checks which rows in the model match
- * the current content of the entry, and displays a list of matches.
- * By default, the matching is done by comparing the entry text
- * case-insensitively against the text column of the model $(LPAREN)see
- * [gtk.entry_completion.EntryCompletion.setTextColumn]$(RPAREN), but this can be overridden
- * with a custom match function $(LPAREN)see [gtk.entry_completion.EntryCompletion.setMatchFunc]$(RPAREN).
- * When the user selects a completion, the content of the entry is
- * updated. By default, the content of the entry is replaced by the
- * text column of the model, but this can be overridden by connecting
- * to the #GtkEntryCompletion::match-selected signal and updating the
- * entry in the signal handler. Note that you should return %TRUE from
- * the signal handler to suppress the default behaviour.
- * To add completion functionality to an entry, use [gtk.entry.Entry.setCompletion].
- * In addition to regular completion matches, which will be inserted into the
- * entry when they are selected, #GtkEntryCompletion also allows to display
- * “actions” in the popup window. Their appearance is similar to menuitems,
- * to differentiate them clearly from completion strings. When an action is
- * selected, the #GtkEntryCompletion::action-activated signal is emitted.
- * GtkEntryCompletion uses a #GtkTreeModelFilter model to represent the
- * subset of the entire model that is currently matching. While the
- * GtkEntryCompletion signals #GtkEntryCompletion::match-selected and
- * #GtkEntryCompletion::cursor-on-match take the original model and an
- * iter pointing to that model as arguments, other callbacks and signals
- * $(LPAREN)such as #GtkCellLayoutDataFuncs or #GtkCellArea::apply-attributes$(RPAREN)
- * will generally take the filter model as argument. As long as you are
- * only calling [gtk.tree_model.TreeModel.get], this will make no difference to
- * you. If for some reason, you need the original model, use
- * [gtk.tree_model_filter.TreeModelFilter.getModel]. Don’t forget to use
- * [gtk.tree_model_filter.TreeModelFilter.convertIterToChildIter] to obtain a
- * matching iter.
- */
+    #GtkEntryCompletion is an auxiliary object to be used in conjunction with
+  #GtkEntry to provide the completion functionality. It implements the
+  #GtkCellLayout interface, to allow the user to add extra cells to the
+  #GtkTreeView with completion matches.
+  
+  “Completion functionality” means that when the user modifies the text
+  in the entry, #GtkEntryCompletion checks which rows in the model match
+  the current content of the entry, and displays a list of matches.
+  By default, the matching is done by comparing the entry text
+  case-insensitively against the text column of the model (see
+  [gtk.entry_completion.EntryCompletion.setTextColumn]), but this can be overridden
+  with a custom match function (see [gtk.entry_completion.EntryCompletion.setMatchFunc]).
+  
+  When the user selects a completion, the content of the entry is
+  updated. By default, the content of the entry is replaced by the
+  text column of the model, but this can be overridden by connecting
+  to the #GtkEntryCompletion::match-selected signal and updating the
+  entry in the signal handler. Note that you should return true from
+  the signal handler to suppress the default behaviour.
+  
+  To add completion functionality to an entry, use [gtk.entry.Entry.setCompletion].
+  
+  In addition to regular completion matches, which will be inserted into the
+  entry when they are selected, #GtkEntryCompletion also allows to display
+  “actions” in the popup window. Their appearance is similar to menuitems,
+  to differentiate them clearly from completion strings. When an action is
+  selected, the #GtkEntryCompletion::action-activated signal is emitted.
+  
+  GtkEntryCompletion uses a #GtkTreeModelFilter model to represent the
+  subset of the entire model that is currently matching. While the
+  GtkEntryCompletion signals #GtkEntryCompletion::match-selected and
+  #GtkEntryCompletion::cursor-on-match take the original model and an
+  iter pointing to that model as arguments, other callbacks and signals
+  (such as #GtkCellLayoutDataFuncs or #GtkCellArea::apply-attributes)
+  will generally take the filter model as argument. As long as you are
+  only calling [gtk.tree_model.TreeModel.get], this will make no difference to
+  you. If for some reason, you need the original model, use
+  [gtk.tree_model_filter.TreeModelFilter.getModel]. Don’t forget to use
+  [gtk.tree_model_filter.TreeModelFilter.convertIterToChildIter] to obtain a
+  matching iter.
+*/
 class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cell_layout.CellLayout
 {
 
@@ -75,9 +80,9 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   mixin CellLayoutT!();
 
   /**
-   * Creates a new #GtkEntryCompletion object.
-   * Returns: A newly created #GtkEntryCompletion object
-   */
+      Creates a new #GtkEntryCompletion object.
+    Returns:     A newly created #GtkEntryCompletion object
+  */
   this()
   {
     GtkEntryCompletion* _cretval;
@@ -86,13 +91,13 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Creates a new #GtkEntryCompletion object using the
-   * specified area to layout cells in the underlying
-   * #GtkTreeViewColumn for the drop-down menu.
-   * Params:
-   *   area = the #GtkCellArea used to layout cells
-   * Returns: A newly created #GtkEntryCompletion object
-   */
+      Creates a new #GtkEntryCompletion object using the
+    specified area to layout cells in the underlying
+    #GtkTreeViewColumn for the drop-down menu.
+    Params:
+      area =       the #GtkCellArea used to layout cells
+    Returns:     A newly created #GtkEntryCompletion object
+  */
   static gtk.entry_completion.EntryCompletion newWithArea(gtk.cell_area.CellArea area)
   {
     GtkEntryCompletion* _cretval;
@@ -102,25 +107,25 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Requests a completion operation, or in other words a refiltering of the
-   * current list with completions, using the current key. The completion list
-   * view will be updated accordingly.
-   */
+      Requests a completion operation, or in other words a refiltering of the
+    current list with completions, using the current key. The completion list
+    view will be updated accordingly.
+  */
   void complete()
   {
     gtk_entry_completion_complete(cast(GtkEntryCompletion*)cPtr);
   }
 
   /**
-   * Computes the common prefix that is shared by all rows in completion
-   * that start with key. If no row matches key, %NULL will be returned.
-   * Note that a text column must have been set for this function to work,
-   * see [gtk.entry_completion.EntryCompletion.setTextColumn] for details.
-   * Params:
-   *   key = The text to complete for
-   * Returns: The common prefix all rows starting with
-   *   key or %NULL if no row matches key.
-   */
+      Computes the common prefix that is shared by all rows in completion
+    that start with key. If no row matches key, null will be returned.
+    Note that a text column must have been set for this function to work,
+    see [gtk.entry_completion.EntryCompletion.setTextColumn] for details.
+    Params:
+      key =       The text to complete for
+    Returns:     The common prefix all rows starting with
+        key or null if no row matches key.
+  */
   string computePrefix(string key)
   {
     char* _cretval;
@@ -131,22 +136,23 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Deletes the action at index_ from completion’s action list.
-   * Note that index_ is a relative position and the position of an
-   * action may have changed since it was inserted.
-   * Params:
-   *   index = the index of the item to delete
-   */
+      Deletes the action at index_ from completion’s action list.
+    
+    Note that index_ is a relative position and the position of an
+    action may have changed since it was inserted.
+    Params:
+      index =       the index of the item to delete
+  */
   void deleteAction(int index)
   {
     gtk_entry_completion_delete_action(cast(GtkEntryCompletion*)cPtr, index);
   }
 
   /**
-   * Get the original text entered by the user that triggered
-   * the completion or %NULL if there’s no completion ongoing.
-   * Returns: the prefix for the current completion
-   */
+      Get the original text entered by the user that triggered
+    the completion or null if there’s no completion ongoing.
+    Returns:     the prefix for the current completion
+  */
   string getCompletionPrefix()
   {
     const(char)* _cretval;
@@ -156,9 +162,9 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Gets the entry completion has been attached to.
-   * Returns: The entry completion has been attached to
-   */
+      Gets the entry completion has been attached to.
+    Returns:     The entry completion has been attached to
+  */
   gtk.widget.Widget getEntry()
   {
     GtkWidget* _cretval;
@@ -168,10 +174,10 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Returns whether the common prefix of the possible completions should
-   * be automatically inserted in the entry.
-   * Returns: %TRUE if inline completion is turned on
-   */
+      Returns whether the common prefix of the possible completions should
+    be automatically inserted in the entry.
+    Returns:     true if inline completion is turned on
+  */
   bool getInlineCompletion()
   {
     bool _retval;
@@ -180,9 +186,9 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Returns %TRUE if inline-selection mode is turned on.
-   * Returns: %TRUE if inline-selection mode is on
-   */
+      Returns true if inline-selection mode is turned on.
+    Returns:     true if inline-selection mode is on
+  */
   bool getInlineSelection()
   {
     bool _retval;
@@ -191,9 +197,9 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Returns the minimum key length as set for completion.
-   * Returns: The currently used minimum key length
-   */
+      Returns the minimum key length as set for completion.
+    Returns:     The currently used minimum key length
+  */
   int getMinimumKeyLength()
   {
     int _retval;
@@ -202,11 +208,11 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Returns the model the #GtkEntryCompletion is using as data source.
-   * Returns %NULL if the model is unset.
-   * Returns: A #GtkTreeModel, or %NULL if none
-   *   is currently being used
-   */
+      Returns the model the #GtkEntryCompletion is using as data source.
+    Returns null if the model is unset.
+    Returns:     A #GtkTreeModel, or null if none
+          is currently being used
+  */
   gtk.tree_model.TreeModel getModel()
   {
     GtkTreeModel* _cretval;
@@ -216,9 +222,9 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Returns whether the completions should be presented in a popup window.
-   * Returns: %TRUE if popup completion is turned on
-   */
+      Returns whether the completions should be presented in a popup window.
+    Returns:     true if popup completion is turned on
+  */
   bool getPopupCompletion()
   {
     bool _retval;
@@ -227,11 +233,11 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Returns whether the  completion popup window will be resized to the
-   * width of the entry.
-   * Returns: %TRUE if the popup window will be resized to the width of
-   *   the entry
-   */
+      Returns whether the  completion popup window will be resized to the
+    width of the entry.
+    Returns:     true if the popup window will be resized to the width of
+        the entry
+  */
   bool getPopupSetWidth()
   {
     bool _retval;
@@ -240,11 +246,11 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Returns whether the completion popup window will appear even if there is
-   * only a single match.
-   * Returns: %TRUE if the popup window will appear regardless of the
-   *   number of matches
-   */
+      Returns whether the completion popup window will appear even if there is
+    only a single match.
+    Returns:     true if the popup window will appear regardless of the
+         number of matches
+  */
   bool getPopupSingleMatch()
   {
     bool _retval;
@@ -253,9 +259,9 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Returns the column in the model of completion to get strings from.
-   * Returns: the column containing the strings
-   */
+      Returns the column in the model of completion to get strings from.
+    Returns:     the column containing the strings
+  */
   int getTextColumn()
   {
     int _retval;
@@ -264,12 +270,12 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Inserts an action in completion’s action item list at position index_
-   * with markup markup.
-   * Params:
-   *   index = the index of the item to insert
-   *   markup = markup of the item to insert
-   */
+      Inserts an action in completion’s action item list at position index_
+    with markup markup.
+    Params:
+      index =       the index of the item to insert
+      markup =       markup of the item to insert
+  */
   void insertActionMarkup(int index, string markup)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
@@ -277,15 +283,16 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Inserts an action in completion’s action item list at position index_
-   * with text text. If you want the action item to have markup, use
-   * [gtk.entry_completion.EntryCompletion.insertActionMarkup].
-   * Note that index_ is a relative position in the list of actions and
-   * the position of an action can change when deleting a different action.
-   * Params:
-   *   index = the index of the item to insert
-   *   text = text of the item to insert
-   */
+      Inserts an action in completion’s action item list at position index_
+    with text text. If you want the action item to have markup, use
+    [gtk.entry_completion.EntryCompletion.insertActionMarkup].
+    
+    Note that index_ is a relative position in the list of actions and
+    the position of an action can change when deleting a different action.
+    Params:
+      index =       the index of the item to insert
+      text =       text of the item to insert
+  */
   void insertActionText(int index, string text)
   {
     const(char)* _text = text.toCString(No.Alloc);
@@ -293,42 +300,42 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Requests a prefix insertion.
-   */
+      Requests a prefix insertion.
+  */
   void insertPrefix()
   {
     gtk_entry_completion_insert_prefix(cast(GtkEntryCompletion*)cPtr);
   }
 
   /**
-   * Sets whether the common prefix of the possible completions should
-   * be automatically inserted in the entry.
-   * Params:
-   *   inlineCompletion = %TRUE to do inline completion
-   */
+      Sets whether the common prefix of the possible completions should
+    be automatically inserted in the entry.
+    Params:
+      inlineCompletion =       true to do inline completion
+  */
   void setInlineCompletion(bool inlineCompletion)
   {
     gtk_entry_completion_set_inline_completion(cast(GtkEntryCompletion*)cPtr, inlineCompletion);
   }
 
   /**
-   * Sets whether it is possible to cycle through the possible completions
-   * inside the entry.
-   * Params:
-   *   inlineSelection = %TRUE to do inline selection
-   */
+      Sets whether it is possible to cycle through the possible completions
+    inside the entry.
+    Params:
+      inlineSelection =       true to do inline selection
+  */
   void setInlineSelection(bool inlineSelection)
   {
     gtk_entry_completion_set_inline_selection(cast(GtkEntryCompletion*)cPtr, inlineSelection);
   }
 
   /**
-   * Sets the match function for completion to be func. The match function
-   * is used to determine if a row should or should not be in the completion
-   * list.
-   * Params:
-   *   func = the #GtkEntryCompletionMatchFunc to use
-   */
+      Sets the match function for completion to be func. The match function
+    is used to determine if a row should or should not be in the completion
+    list.
+    Params:
+      func =       the #GtkEntryCompletionMatchFunc to use
+  */
   void setMatchFunc(gtk.types.EntryCompletionMatchFunc func)
   {
     extern(C) bool _funcCallback(GtkEntryCompletion* completion, const(char)* key, GtkTreeIter* iter, void* userData)
@@ -347,97 +354,103 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Requires the length of the search key for completion to be at least
-   * length. This is useful for long lists, where completing using a small
-   * key takes a lot of time and will come up with meaningless results anyway
-   * $(LPAREN)ie, a too large dataset$(RPAREN).
-   * Params:
-   *   length = the minimum length of the key in order to start completing
-   */
+      Requires the length of the search key for completion to be at least
+    length. This is useful for long lists, where completing using a small
+    key takes a lot of time and will come up with meaningless results anyway
+    (ie, a too large dataset).
+    Params:
+      length =       the minimum length of the key in order to start completing
+  */
   void setMinimumKeyLength(int length)
   {
     gtk_entry_completion_set_minimum_key_length(cast(GtkEntryCompletion*)cPtr, length);
   }
 
   /**
-   * Sets the model for a #GtkEntryCompletion. If completion already has
-   * a model set, it will remove it before setting the new model.
-   * If model is %NULL, then it will unset the model.
-   * Params:
-   *   model = the #GtkTreeModel
-   */
+      Sets the model for a #GtkEntryCompletion. If completion already has
+    a model set, it will remove it before setting the new model.
+    If model is null, then it will unset the model.
+    Params:
+      model =       the #GtkTreeModel
+  */
   void setModel(gtk.tree_model.TreeModel model = null)
   {
     gtk_entry_completion_set_model(cast(GtkEntryCompletion*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets whether the completions should be presented in a popup window.
-   * Params:
-   *   popupCompletion = %TRUE to do popup completion
-   */
+      Sets whether the completions should be presented in a popup window.
+    Params:
+      popupCompletion =       true to do popup completion
+  */
   void setPopupCompletion(bool popupCompletion)
   {
     gtk_entry_completion_set_popup_completion(cast(GtkEntryCompletion*)cPtr, popupCompletion);
   }
 
   /**
-   * Sets whether the completion popup window will be resized to be the same
-   * width as the entry.
-   * Params:
-   *   popupSetWidth = %TRUE to make the width of the popup the same as the entry
-   */
+      Sets whether the completion popup window will be resized to be the same
+    width as the entry.
+    Params:
+      popupSetWidth =       true to make the width of the popup the same as the entry
+  */
   void setPopupSetWidth(bool popupSetWidth)
   {
     gtk_entry_completion_set_popup_set_width(cast(GtkEntryCompletion*)cPtr, popupSetWidth);
   }
 
   /**
-   * Sets whether the completion popup window will appear even if there is
-   * only a single match. You may want to set this to %FALSE if you
-   * are using [inline completion][GtkEntryCompletion--inline-completion].
-   * Params:
-   *   popupSingleMatch = %TRUE if the popup should appear even for a single
-   *     match
-   */
+      Sets whether the completion popup window will appear even if there is
+    only a single match. You may want to set this to false if you
+    are using [inline completion][GtkEntryCompletion--inline-completion].
+    Params:
+      popupSingleMatch =       true if the popup should appear even for a single
+            match
+  */
   void setPopupSingleMatch(bool popupSingleMatch)
   {
     gtk_entry_completion_set_popup_single_match(cast(GtkEntryCompletion*)cPtr, popupSingleMatch);
   }
 
   /**
-   * Convenience function for setting up the most used case of this code: a
-   * completion list with just strings. This function will set up completion
-   * to have a list displaying all $(LPAREN)and just$(RPAREN) strings in the completion list,
-   * and to get those strings from column in the model of completion.
-   * This functions creates and adds a #GtkCellRendererText for the selected
-   * column. If you need to set the text column, but don't want the cell
-   * renderer, use [gobject.object.ObjectG.set] to set the #GtkEntryCompletion:text-column
-   * property directly.
-   * Params:
-   *   column = the column in the model of completion to get strings from
-   */
+      Convenience function for setting up the most used case of this code: a
+    completion list with just strings. This function will set up completion
+    to have a list displaying all (and just) strings in the completion list,
+    and to get those strings from column in the model of completion.
+    
+    This functions creates and adds a #GtkCellRendererText for the selected
+    column. If you need to set the text column, but don't want the cell
+    renderer, use [gobject.object.ObjectG.set] to set the #GtkEntryCompletion:text-column
+    property directly.
+    Params:
+      column =       the column in the model of completion to get strings from
+  */
   void setTextColumn(int column)
   {
     gtk_entry_completion_set_text_column(cast(GtkEntryCompletion*)cPtr, column);
   }
 
   /**
-   * Gets emitted when an action is activated.
-   * Params
-   *   index = the index of the activated action
-   *   entryCompletion = the instance the signal is connected to
-   */
+      Gets emitted when an action is activated.
+  
+    ## Parameters
+    $(LIST
+      * $(B index)       the index of the activated action
+      * $(B entryCompletion) the instance the signal is connected to
+    )
+  */
   alias ActionActivatedCallbackDlg = void delegate(int index, gtk.entry_completion.EntryCompletion entryCompletion);
+
+  /** ditto */
   alias ActionActivatedCallbackFunc = void function(int index, gtk.entry_completion.EntryCompletion entryCompletion);
 
   /**
-   * Connect to ActionActivated signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ActionActivated signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectActionActivated(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActionActivatedCallbackDlg) || is(T : ActionActivatedCallbackFunc))
   {
@@ -455,28 +468,34 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Gets emitted when a match from the cursor is on a match
-   * of the list. The default behaviour is to replace the contents
-   * of the entry with the contents of the text column in the row
-   * pointed to by iter.
-   * Note that model is the model that was passed to
-   * [gtk.entry_completion.EntryCompletion.setModel].
-   * Params
-   *   model = the #GtkTreeModel containing the matches
-   *   iter = a #GtkTreeIter positioned at the selected match
-   *   entryCompletion = the instance the signal is connected to
-   * Returns: %TRUE if the signal has been handled
-   */
+      Gets emitted when a match from the cursor is on a match
+    of the list. The default behaviour is to replace the contents
+    of the entry with the contents of the text column in the row
+    pointed to by iter.
+    
+    Note that model is the model that was passed to
+    [gtk.entry_completion.EntryCompletion.setModel].
+  
+    ## Parameters
+    $(LIST
+      * $(B model)       the #GtkTreeModel containing the matches
+      * $(B iter)       a #GtkTreeIter positioned at the selected match
+      * $(B entryCompletion) the instance the signal is connected to
+    )
+    Returns:     true if the signal has been handled
+  */
   alias CursorOnMatchCallbackDlg = bool delegate(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, gtk.entry_completion.EntryCompletion entryCompletion);
+
+  /** ditto */
   alias CursorOnMatchCallbackFunc = bool function(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, gtk.entry_completion.EntryCompletion entryCompletion);
 
   /**
-   * Connect to CursorOnMatch signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to CursorOnMatch signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectCursorOnMatch(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CursorOnMatchCallbackDlg) || is(T : CursorOnMatchCallbackFunc))
   {
@@ -497,28 +516,34 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Gets emitted when the inline autocompletion is triggered.
-   * The default behaviour is to make the entry display the
-   * whole prefix and select the newly inserted part.
-   * Applications may connect to this signal in order to insert only a
-   * smaller part of the prefix into the entry - e.g. the entry used in
-   * the #GtkFileChooser inserts only the part of the prefix up to the
-   * next '/'.
-   * Params
-   *   prefix = the common prefix of all possible completions
-   *   entryCompletion = the instance the signal is connected to
-   * Returns: %TRUE if the signal has been handled
-   */
+      Gets emitted when the inline autocompletion is triggered.
+    The default behaviour is to make the entry display the
+    whole prefix and select the newly inserted part.
+    
+    Applications may connect to this signal in order to insert only a
+    smaller part of the prefix into the entry - e.g. the entry used in
+    the #GtkFileChooser inserts only the part of the prefix up to the
+    next '/'.
+  
+    ## Parameters
+    $(LIST
+      * $(B prefix)       the common prefix of all possible completions
+      * $(B entryCompletion) the instance the signal is connected to
+    )
+    Returns:     true if the signal has been handled
+  */
   alias InsertPrefixCallbackDlg = bool delegate(string prefix, gtk.entry_completion.EntryCompletion entryCompletion);
+
+  /** ditto */
   alias InsertPrefixCallbackFunc = bool function(string prefix, gtk.entry_completion.EntryCompletion entryCompletion);
 
   /**
-   * Connect to InsertPrefix signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to InsertPrefix signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectInsertPrefix(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InsertPrefixCallbackDlg) || is(T : InsertPrefixCallbackFunc))
   {
@@ -538,28 +563,34 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Gets emitted when a match from the list is selected.
-   * The default behaviour is to replace the contents of the
-   * entry with the contents of the text column in the row
-   * pointed to by iter.
-   * Note that model is the model that was passed to
-   * [gtk.entry_completion.EntryCompletion.setModel].
-   * Params
-   *   model = the #GtkTreeModel containing the matches
-   *   iter = a #GtkTreeIter positioned at the selected match
-   *   entryCompletion = the instance the signal is connected to
-   * Returns: %TRUE if the signal has been handled
-   */
+      Gets emitted when a match from the list is selected.
+    The default behaviour is to replace the contents of the
+    entry with the contents of the text column in the row
+    pointed to by iter.
+    
+    Note that model is the model that was passed to
+    [gtk.entry_completion.EntryCompletion.setModel].
+  
+    ## Parameters
+    $(LIST
+      * $(B model)       the #GtkTreeModel containing the matches
+      * $(B iter)       a #GtkTreeIter positioned at the selected match
+      * $(B entryCompletion) the instance the signal is connected to
+    )
+    Returns:     true if the signal has been handled
+  */
   alias MatchSelectedCallbackDlg = bool delegate(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, gtk.entry_completion.EntryCompletion entryCompletion);
+
+  /** ditto */
   alias MatchSelectedCallbackFunc = bool function(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, gtk.entry_completion.EntryCompletion entryCompletion);
 
   /**
-   * Connect to MatchSelected signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to MatchSelected signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectMatchSelected(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MatchSelectedCallbackDlg) || is(T : MatchSelectedCallbackFunc))
   {
@@ -580,22 +611,28 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   }
 
   /**
-   * Gets emitted when the filter model has zero
-   * number of rows in completion_complete method.
-   * $(LPAREN)In other words when GtkEntryCompletion is out of
-   * suggestions$(RPAREN)
-   *   entryCompletion = the instance the signal is connected to
-   */
+      Gets emitted when the filter model has zero
+    number of rows in completion_complete method.
+    (In other words when GtkEntryCompletion is out of
+     suggestions)
+  
+    ## Parameters
+    $(LIST
+      * $(B entryCompletion) the instance the signal is connected to
+    )
+  */
   alias NoMatchesCallbackDlg = void delegate(gtk.entry_completion.EntryCompletion entryCompletion);
+
+  /** ditto */
   alias NoMatchesCallbackFunc = void function(gtk.entry_completion.EntryCompletion entryCompletion);
 
   /**
-   * Connect to NoMatches signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to NoMatches signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectNoMatches(T)(T callback, Flag!"After" after = No.After)
   if (is(T : NoMatchesCallbackDlg) || is(T : NoMatchesCallbackFunc))
   {

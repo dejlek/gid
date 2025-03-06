@@ -8,15 +8,16 @@ import gtk.event_controller;
 import gtk.types;
 
 /**
- * `GtkEventControllerMotion` is an event controller tracking the pointer
- * position.
- * The event controller offers [gtk.event_controller_motion.EventControllerMotion.enter]
- * and [gtk.event_controller_motion.EventControllerMotion.leave] signals, as well as
- * property@Gtk.EventControllerMotion:is-pointer and
- * property@Gtk.EventControllerMotion:contains-pointer properties
- * which are updated to reflect changes in the pointer position as it
- * moves over the widget.
- */
+    [gtk.event_controller_motion.EventControllerMotion] is an event controller tracking the pointer
+  position.
+  
+  The event controller offers [gtk.event_controller_motion.EventControllerMotion.enter]
+  and [gtk.event_controller_motion.EventControllerMotion.leave] signals, as well as
+  `property@Gtk.EventControllerMotion:is-pointer` and
+  `property@Gtk.EventControllerMotion:contains-pointer` properties
+  which are updated to reflect changes in the pointer position as it
+  moves over the widget.
+*/
 class EventControllerMotion : gtk.event_controller.EventController
 {
 
@@ -37,9 +38,9 @@ class EventControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Creates a new event controller that will handle motion events.
-   * Returns: a new `GtkEventControllerMotion`
-   */
+      Creates a new event controller that will handle motion events.
+    Returns:     a new [gtk.event_controller_motion.EventControllerMotion]
+  */
   this()
   {
     GtkEventController* _cretval;
@@ -48,9 +49,9 @@ class EventControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Returns if a pointer is within self or one of its children.
-   * Returns: %TRUE if a pointer is within self or one of its children
-   */
+      Returns if a pointer is within self or one of its children.
+    Returns:     true if a pointer is within self or one of its children
+  */
   bool containsPointer()
   {
     bool _retval;
@@ -59,9 +60,9 @@ class EventControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Returns if a pointer is within self, but not one of its children.
-   * Returns: %TRUE if a pointer is within self but not one of its children
-   */
+      Returns if a pointer is within self, but not one of its children.
+    Returns:     true if a pointer is within self but not one of its children
+  */
   bool isPointer()
   {
     bool _retval;
@@ -70,22 +71,27 @@ class EventControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Signals that the pointer has entered the widget.
-   * Params
-   *   x = coordinates of pointer location
-   *   y = coordinates of pointer location
-   *   eventControllerMotion = the instance the signal is connected to
-   */
+      Signals that the pointer has entered the widget.
+  
+    ## Parameters
+    $(LIST
+      * $(B x)       coordinates of pointer location
+      * $(B y)       coordinates of pointer location
+      * $(B eventControllerMotion) the instance the signal is connected to
+    )
+  */
   alias EnterCallbackDlg = void delegate(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
+
+  /** ditto */
   alias EnterCallbackFunc = void function(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
 
   /**
-   * Connect to Enter signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Enter signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectEnter(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EnterCallbackDlg) || is(T : EnterCallbackFunc))
   {
@@ -104,19 +110,25 @@ class EventControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Signals that the pointer has left the widget.
-   *   eventControllerMotion = the instance the signal is connected to
-   */
+      Signals that the pointer has left the widget.
+  
+    ## Parameters
+    $(LIST
+      * $(B eventControllerMotion) the instance the signal is connected to
+    )
+  */
   alias LeaveCallbackDlg = void delegate(gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
+
+  /** ditto */
   alias LeaveCallbackFunc = void function(gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
 
   /**
-   * Connect to Leave signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Leave signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectLeave(T)(T callback, Flag!"After" after = No.After)
   if (is(T : LeaveCallbackDlg) || is(T : LeaveCallbackFunc))
   {
@@ -133,22 +145,27 @@ class EventControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-   * Emitted when the pointer moves inside the widget.
-   * Params
-   *   x = the x coordinate
-   *   y = the y coordinate
-   *   eventControllerMotion = the instance the signal is connected to
-   */
+      Emitted when the pointer moves inside the widget.
+  
+    ## Parameters
+    $(LIST
+      * $(B x)       the x coordinate
+      * $(B y)       the y coordinate
+      * $(B eventControllerMotion) the instance the signal is connected to
+    )
+  */
   alias MotionCallbackDlg = void delegate(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
+
+  /** ditto */
   alias MotionCallbackFunc = void function(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion);
 
   /**
-   * Connect to Motion signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Motion signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectMotion(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MotionCallbackDlg) || is(T : MotionCallbackFunc))
   {

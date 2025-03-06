@@ -7,6 +7,7 @@ import arrow.record_batch;
 import arrow.types;
 import gid.gid;
 
+/** */
 class RecordBatchDatum : arrow.datum.Datum
 {
 
@@ -26,6 +27,7 @@ class RecordBatchDatum : arrow.datum.Datum
     return getType();
   }
 
+  /** */
   this(arrow.record_batch.RecordBatch value)
   {
     GArrowRecordBatchDatum* _cretval;

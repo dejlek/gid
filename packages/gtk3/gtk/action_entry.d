@@ -6,9 +6,9 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * #GtkActionEntry structs are used with [gtk.action_group.ActionGroup.addActions] to
- * construct actions.
- */
+    #GtkActionEntry structs are used with [gtk.action_group.ActionGroup.addActions] to
+  construct actions.
+*/
 class ActionEntry
 {
   GtkActionEntry cInstance;

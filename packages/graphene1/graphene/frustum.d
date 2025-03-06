@@ -12,10 +12,11 @@ import graphene.sphere;
 import graphene.types;
 
 /**
- * A 3D volume delimited by 2D clip planes.
- * The contents of the `graphene_frustum_t` are private, and should not be
- * modified directly.
- */
+    A 3D volume delimited by 2D clip planes.
+  
+  The contents of the [graphene.frustum.Frustum] are private, and should not be
+  modified directly.
+*/
 class Frustum : gobject.boxed.Boxed
 {
 
@@ -46,12 +47,13 @@ class Frustum : gobject.boxed.Boxed
   }
 
   /**
-   * Allocates a new #graphene_frustum_t structure.
-   * The contents of the returned structure are undefined.
-   * Returns: the newly allocated #graphene_frustum_t
-   *   structure. Use [graphene.frustum.Frustum.free] to free the resources
-   *   allocated by this function.
-   */
+      Allocates a new #graphene_frustum_t structure.
+    
+    The contents of the returned structure are undefined.
+    Returns:     the newly allocated #graphene_frustum_t
+        structure. Use [graphene.frustum.Frustum.free] to free the resources
+        allocated by this function.
+  */
   static graphene.frustum.Frustum alloc()
   {
     graphene_frustum_t* _cretval;
@@ -61,12 +63,12 @@ class Frustum : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether a point is inside the volume defined by the given
-   * #graphene_frustum_t.
-   * Params:
-   *   point = a #graphene_point3d_t
-   * Returns: `true` if the point is inside the frustum
-   */
+      Checks whether a point is inside the volume defined by the given
+    #graphene_frustum_t.
+    Params:
+      point =       a #graphene_point3d_t
+    Returns:     `true` if the point is inside the frustum
+  */
   bool containsPoint(graphene.point3_d.Point3D point)
   {
     bool _retval;
@@ -75,11 +77,11 @@ class Frustum : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether the two given #graphene_frustum_t are equal.
-   * Params:
-   *   b = a #graphene_frustum_t
-   * Returns: `true` if the given frustums are equal
-   */
+      Checks whether the two given #graphene_frustum_t are equal.
+    Params:
+      b =       a #graphene_frustum_t
+    Returns:     `true` if the given frustums are equal
+  */
   bool equal(graphene.frustum.Frustum b)
   {
     bool _retval;
@@ -88,11 +90,11 @@ class Frustum : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the planes that define the given #graphene_frustum_t.
-   * Params:
-   *   planes = return location for an array
-   *     of 6 #graphene_plane_t
-   */
+      Retrieves the planes that define the given #graphene_frustum_t.
+    Params:
+      planes =       return location for an array
+          of 6 #graphene_plane_t
+  */
   void getPlanes(ref graphene.plane.Plane[] planes)
   {
     graphene_plane_t[] _planes;
@@ -104,17 +106,17 @@ class Frustum : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes the given #graphene_frustum_t using the provided
-   * clipping planes.
-   * Params:
-   *   p0 = a clipping plane
-   *   p1 = a clipping plane
-   *   p2 = a clipping plane
-   *   p3 = a clipping plane
-   *   p4 = a clipping plane
-   *   p5 = a clipping plane
-   * Returns: the initialized frustum
-   */
+      Initializes the given #graphene_frustum_t using the provided
+    clipping planes.
+    Params:
+      p0 =       a clipping plane
+      p1 =       a clipping plane
+      p2 =       a clipping plane
+      p3 =       a clipping plane
+      p4 =       a clipping plane
+      p5 =       a clipping plane
+    Returns:     the initialized frustum
+  */
   graphene.frustum.Frustum init_(graphene.plane.Plane p0, graphene.plane.Plane p1, graphene.plane.Plane p2, graphene.plane.Plane p3, graphene.plane.Plane p4, graphene.plane.Plane p5)
   {
     graphene_frustum_t* _cretval;
@@ -124,12 +126,12 @@ class Frustum : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes the given #graphene_frustum_t using the clipping
-   * planes of another #graphene_frustum_t.
-   * Params:
-   *   src = a #graphene_frustum_t
-   * Returns: the initialized frustum
-   */
+      Initializes the given #graphene_frustum_t using the clipping
+    planes of another #graphene_frustum_t.
+    Params:
+      src =       a #graphene_frustum_t
+    Returns:     the initialized frustum
+  */
   graphene.frustum.Frustum initFromFrustum(graphene.frustum.Frustum src)
   {
     graphene_frustum_t* _cretval;
@@ -139,11 +141,11 @@ class Frustum : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_frustum_t using the given matrix.
-   * Params:
-   *   matrix = a #graphene_matrix_t
-   * Returns: the initialized frustum
-   */
+      Initializes a #graphene_frustum_t using the given matrix.
+    Params:
+      matrix =       a #graphene_matrix_t
+    Returns:     the initialized frustum
+  */
   graphene.frustum.Frustum initFromMatrix(graphene.matrix.Matrix matrix)
   {
     graphene_frustum_t* _cretval;
@@ -153,12 +155,12 @@ class Frustum : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether the given box intersects a plane of
-   * a #graphene_frustum_t.
-   * Params:
-   *   box = a #graphene_box_t
-   * Returns: `true` if the box intersects the frustum
-   */
+      Checks whether the given box intersects a plane of
+    a #graphene_frustum_t.
+    Params:
+      box =       a #graphene_box_t
+    Returns:     `true` if the box intersects the frustum
+  */
   bool intersectsBox(graphene.box.Box box)
   {
     bool _retval;
@@ -167,12 +169,12 @@ class Frustum : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether the given sphere intersects a plane of
-   * a #graphene_frustum_t.
-   * Params:
-   *   sphere = a #graphene_sphere_t
-   * Returns: `true` if the sphere intersects the frustum
-   */
+      Checks whether the given sphere intersects a plane of
+    a #graphene_frustum_t.
+    Params:
+      sphere =       a #graphene_sphere_t
+    Returns:     `true` if the sphere intersects the frustum
+  */
   bool intersectsSphere(graphene.sphere.Sphere sphere)
   {
     bool _retval;

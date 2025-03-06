@@ -8,10 +8,11 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * A `GtkTextChildAnchor` is a spot in a `GtkTextBuffer` where child widgets can
- * be “anchored”.
- * The anchor can have multiple widgets anchored, to allow for multiple views.
- */
+    A [gtk.text_child_anchor.TextChildAnchor] is a spot in a [gtk.text_buffer.TextBuffer] where child widgets can
+  be “anchored”.
+  
+  The anchor can have multiple widgets anchored, to allow for multiple views.
+*/
 class TextChildAnchor : gobject.object.ObjectG
 {
 
@@ -32,13 +33,14 @@ class TextChildAnchor : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new `GtkTextChildAnchor`.
-   * Usually you would then insert it into a `GtkTextBuffer` with
-   * [gtk.text_buffer.TextBuffer.insertChildAnchor]. To perform the
-   * creation and insertion in one step, use the convenience
-   * function [gtk.text_buffer.TextBuffer.createChildAnchor].
-   * Returns: a new `GtkTextChildAnchor`
-   */
+      Creates a new [gtk.text_child_anchor.TextChildAnchor].
+    
+    Usually you would then insert it into a [gtk.text_buffer.TextBuffer] with
+    [gtk.text_buffer.TextBuffer.insertChildAnchor]. To perform the
+    creation and insertion in one step, use the convenience
+    function [gtk.text_buffer.TextBuffer.createChildAnchor].
+    Returns:     a new [gtk.text_child_anchor.TextChildAnchor]
+  */
   this()
   {
     GtkTextChildAnchor* _cretval;
@@ -47,13 +49,14 @@ class TextChildAnchor : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new `GtkTextChildAnchor` with the given replacement character.
-   * Usually you would then insert it into a `GtkTextBuffer` with
-   * [gtk.text_buffer.TextBuffer.insertChildAnchor].
-   * Params:
-   *   character =
-   * Returns: a new `GtkTextChildAnchor`
-   */
+      Creates a new [gtk.text_child_anchor.TextChildAnchor] with the given replacement character.
+    
+    Usually you would then insert it into a [gtk.text_buffer.TextBuffer] with
+    [gtk.text_buffer.TextBuffer.insertChildAnchor].
+    Params:
+      character = 
+    Returns:     a new [gtk.text_child_anchor.TextChildAnchor]
+  */
   static gtk.text_child_anchor.TextChildAnchor newWithReplacement(string character)
   {
     GtkTextChildAnchor* _cretval;
@@ -64,15 +67,16 @@ class TextChildAnchor : gobject.object.ObjectG
   }
 
   /**
-   * Determines whether a child anchor has been deleted from
-   * the buffer.
-   * Keep in mind that the child anchor will be unreferenced
-   * when removed from the buffer, so you need to hold your own
-   * reference $(LPAREN)with [gobject.object.ObjectG.ref_]$(RPAREN) if you plan to use this
-   * function — otherwise all deleted child anchors will also
-   * be finalized.
-   * Returns: %TRUE if the child anchor has been deleted from its buffer
-   */
+      Determines whether a child anchor has been deleted from
+    the buffer.
+    
+    Keep in mind that the child anchor will be unreferenced
+    when removed from the buffer, so you need to hold your own
+    reference (with [gobject.object.ObjectG.ref_]) if you plan to use this
+    function — otherwise all deleted child anchors will also
+    be finalized.
+    Returns:     true if the child anchor has been deleted from its buffer
+  */
   bool getDeleted()
   {
     bool _retval;
@@ -81,11 +85,12 @@ class TextChildAnchor : gobject.object.ObjectG
   }
 
   /**
-   * Gets a list of all widgets anchored at this child anchor.
-   * The order in which the widgets are returned is not defined.
-   * Returns: an
-   *   array of widgets anchored at anchor
-   */
+      Gets a list of all widgets anchored at this child anchor.
+    
+    The order in which the widgets are returned is not defined.
+    Returns:     an
+        array of widgets anchored at anchor
+  */
   gtk.widget.Widget[] getWidgets()
   {
     GtkWidget** _cretval;

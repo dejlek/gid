@@ -15,16 +15,17 @@ import gtk.types;
 import gtk.window;
 
 /**
- * A `GtkFileDialog` object collects the arguments that
- * are needed to present a file chooser dialog to the
- * user, such as a title for the dialog and whether it
- * should be modal.
- * The dialog is shown with [gtk.file_dialog.FileDialog.open],
- * [gtk.file_dialog.FileDialog.save], etc. These APIs follow the
- * GIO async pattern, and the result can be obtained by calling
- * the corresponding finish function, for example
- * [gtk.file_dialog.FileDialog.openFinish].
- */
+    A [gtk.file_dialog.FileDialog] object collects the arguments that
+  are needed to present a file chooser dialog to the
+  user, such as a title for the dialog and whether it
+  should be modal.
+  
+  The dialog is shown with [gtk.file_dialog.FileDialog.open],
+  [gtk.file_dialog.FileDialog.save], etc. These APIs follow the
+  GIO async pattern, and the result can be obtained by calling
+  the corresponding finish function, for example
+  [gtk.file_dialog.FileDialog.openFinish].
+*/
 class FileDialog : gobject.object.ObjectG
 {
 
@@ -45,9 +46,9 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new `GtkFileDialog` object.
-   * Returns: the new `GtkFileDialog`
-   */
+      Creates a new [gtk.file_dialog.FileDialog] object.
+    Returns:     the new [gtk.file_dialog.FileDialog]
+  */
   this()
   {
     GtkFileDialog* _cretval;
@@ -55,6 +56,7 @@ class FileDialog : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   string getAcceptLabel()
   {
     const(char)* _cretval;
@@ -64,10 +66,10 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Gets the filter that will be selected by default
-   * in the file chooser dialog.
-   * Returns: the current filter
-   */
+      Gets the filter that will be selected by default
+    in the file chooser dialog.
+    Returns:     the current filter
+  */
   gtk.file_filter.FileFilter getDefaultFilter()
   {
     GtkFileFilter* _cretval;
@@ -77,11 +79,11 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Gets the filters that will be offered to the user
-   * in the file chooser dialog.
-   * Returns: the filters, as
-   *   a `GListModel` of `GtkFileFilters`
-   */
+      Gets the filters that will be offered to the user
+    in the file chooser dialog.
+    Returns:     the filters, as
+        a [gio.list_model.ListModel] of `GtkFileFilters`
+  */
   gio.list_model.ListModel getFilters()
   {
     GListModel* _cretval;
@@ -91,10 +93,10 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Gets the file that will be initially selected in
-   * the file chooser dialog.
-   * Returns: the file
-   */
+      Gets the file that will be initially selected in
+    the file chooser dialog.
+    Returns:     the file
+  */
   gio.file.File getInitialFile()
   {
     GFile* _cretval;
@@ -104,10 +106,10 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Gets the folder that will be set as the
-   * initial folder in the file chooser dialog.
-   * Returns: the folder
-   */
+      Gets the folder that will be set as the
+    initial folder in the file chooser dialog.
+    Returns:     the folder
+  */
   gio.file.File getInitialFolder()
   {
     GFile* _cretval;
@@ -117,9 +119,9 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Gets the name for the file that should be initially set.
-   * Returns: the name
-   */
+      Gets the name for the file that should be initially set.
+    Returns:     the name
+  */
   string getInitialName()
   {
     const(char)* _cretval;
@@ -129,11 +131,11 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the file chooser dialog
-   * blocks interaction with the parent window
-   * while it is presented.
-   * Returns: `TRUE` if the file chooser dialog is modal
-   */
+      Returns whether the file chooser dialog
+    blocks interaction with the parent window
+    while it is presented.
+    Returns:     `TRUE` if the file chooser dialog is modal
+  */
   bool getModal()
   {
     bool _retval;
@@ -142,10 +144,10 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Returns the title that will be shown on the
-   * file chooser dialog.
-   * Returns: the title
-   */
+      Returns the title that will be shown on the
+    file chooser dialog.
+    Returns:     the title
+  */
   string getTitle()
   {
     const(char)* _cretval;
@@ -155,16 +157,17 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * This function initiates a file selection operation by
-   * presenting a file chooser dialog to the user.
-   * The callback will be called when the dialog is dismissed.
-   * It should call [gtk.file_dialog.FileDialog.openFinish]
-   * to obtain the result.
-   * Params:
-   *   parent = the parent `GtkWindow`
-   *   cancellable = a `GCancellable` to cancel the operation
-   *   callback = a callback to call when the operation is complete
-   */
+      This function initiates a file selection operation by
+    presenting a file chooser dialog to the user.
+    
+    The callback will be called when the dialog is dismissed.
+    It should call [gtk.file_dialog.FileDialog.openFinish]
+    to obtain the result.
+    Params:
+      parent =       the parent [gtk.window.Window]
+      cancellable =       a [gio.cancellable.Cancellable] to cancel the operation
+      callback =       a callback to call when the operation is complete
+  */
   void open(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -181,13 +184,13 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Finishes the [gtk.file_dialog.FileDialog.open] call and
-   * returns the resulting file.
-   * Params:
-   *   result = a `GAsyncResult`
-   * Returns: the file that was selected.
-   *   Otherwise, `NULL` is returned and error is set
-   */
+      Finishes the [gtk.file_dialog.FileDialog.open] call and
+    returns the resulting file.
+    Params:
+      result =       a [gio.async_result.AsyncResult]
+    Returns:     the file that was selected.
+        Otherwise, `NULL` is returned and error is set
+  */
   gio.file.File openFinish(gio.async_result.AsyncResult result)
   {
     GFile* _cretval;
@@ -200,18 +203,20 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * This function initiates a multi-file selection operation by
-   * presenting a file chooser dialog to the user.
-   * The file chooser will initially be opened in the directory
-   * propertyGtk.FileDialog:initial-folder.
-   * The callback will be called when the dialog is dismissed.
-   * It should call [gtk.file_dialog.FileDialog.openMultipleFinish]
-   * to obtain the result.
-   * Params:
-   *   parent = the parent `GtkWindow`
-   *   cancellable = a `GCancellable` to cancel the operation
-   *   callback = a callback to call when the operation is complete
-   */
+      This function initiates a multi-file selection operation by
+    presenting a file chooser dialog to the user.
+    
+    The file chooser will initially be opened in the directory
+    `propertyGtk.FileDialog:initial-folder`.
+    
+    The callback will be called when the dialog is dismissed.
+    It should call [gtk.file_dialog.FileDialog.openMultipleFinish]
+    to obtain the result.
+    Params:
+      parent =       the parent [gtk.window.Window]
+      cancellable =       a [gio.cancellable.Cancellable] to cancel the operation
+      callback =       a callback to call when the operation is complete
+  */
   void openMultiple(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -228,14 +233,14 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Finishes the [gtk.file_dialog.FileDialog.open] call and
-   * returns the resulting files in a `GListModel`.
-   * Params:
-   *   result = a `GAsyncResult`
-   * Returns: the file that was selected,
-   *   as a `GListModel` of `GFiles`. Otherwise, `NULL` is returned
-   *   and error is set
-   */
+      Finishes the [gtk.file_dialog.FileDialog.open] call and
+    returns the resulting files in a [gio.list_model.ListModel].
+    Params:
+      result =       a [gio.async_result.AsyncResult]
+    Returns:     the file that was selected,
+        as a [gio.list_model.ListModel] of `GFiles`. Otherwise, `NULL` is returned
+        and error is set
+  */
   gio.list_model.ListModel openMultipleFinish(gio.async_result.AsyncResult result)
   {
     GListModel* _cretval;
@@ -248,16 +253,17 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * This function initiates a file save operation by
-   * presenting a file chooser dialog to the user.
-   * The callback will be called when the dialog is dismissed.
-   * It should call [gtk.file_dialog.FileDialog.saveFinish]
-   * to obtain the result.
-   * Params:
-   *   parent = the parent `GtkWindow`
-   *   cancellable = a `GCancellable` to cancel the operation
-   *   callback = a callback to call when the operation is complete
-   */
+      This function initiates a file save operation by
+    presenting a file chooser dialog to the user.
+    
+    The callback will be called when the dialog is dismissed.
+    It should call [gtk.file_dialog.FileDialog.saveFinish]
+    to obtain the result.
+    Params:
+      parent =       the parent [gtk.window.Window]
+      cancellable =       a [gio.cancellable.Cancellable] to cancel the operation
+      callback =       a callback to call when the operation is complete
+  */
   void save(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -274,13 +280,13 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Finishes the [gtk.file_dialog.FileDialog.save] call and
-   * returns the resulting file.
-   * Params:
-   *   result = a `GAsyncResult`
-   * Returns: the file that was selected.
-   *   Otherwise, `NULL` is returned and error is set
-   */
+      Finishes the [gtk.file_dialog.FileDialog.save] call and
+    returns the resulting file.
+    Params:
+      result =       a [gio.async_result.AsyncResult]
+    Returns:     the file that was selected.
+        Otherwise, `NULL` is returned and error is set
+  */
   gio.file.File saveFinish(gio.async_result.AsyncResult result)
   {
     GFile* _cretval;
@@ -293,19 +299,21 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * This function initiates a directory selection operation by
-   * presenting a file chooser dialog to the user.
-   * If you pass initial_folder, the file chooser will initially be
-   * opened in the parent directory of that folder, otherwise, it
-   * will be in the directory propertyGtk.FileDialog:initial-folder.
-   * The callback will be called when the dialog is dismissed.
-   * It should call [gtk.file_dialog.FileDialog.selectFolderFinish]
-   * to obtain the result.
-   * Params:
-   *   parent = the parent `GtkWindow`
-   *   cancellable = a `GCancellable` to cancel the operation
-   *   callback = a callback to call when the operation is complete
-   */
+      This function initiates a directory selection operation by
+    presenting a file chooser dialog to the user.
+    
+    If you pass initial_folder, the file chooser will initially be
+    opened in the parent directory of that folder, otherwise, it
+    will be in the directory `propertyGtk.FileDialog:initial-folder`.
+    
+    The callback will be called when the dialog is dismissed.
+    It should call [gtk.file_dialog.FileDialog.selectFolderFinish]
+    to obtain the result.
+    Params:
+      parent =       the parent [gtk.window.Window]
+      cancellable =       a [gio.cancellable.Cancellable] to cancel the operation
+      callback =       a callback to call when the operation is complete
+  */
   void selectFolder(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -322,13 +330,13 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Finishes the [gtk.file_dialog.FileDialog.selectFolder] call and
-   * returns the resulting file.
-   * Params:
-   *   result = a `GAsyncResult`
-   * Returns: the file that was selected.
-   *   Otherwise, `NULL` is returned and error is set
-   */
+      Finishes the [gtk.file_dialog.FileDialog.selectFolder] call and
+    returns the resulting file.
+    Params:
+      result =       a [gio.async_result.AsyncResult]
+    Returns:     the file that was selected.
+        Otherwise, `NULL` is returned and error is set
+  */
   gio.file.File selectFolderFinish(gio.async_result.AsyncResult result)
   {
     GFile* _cretval;
@@ -341,18 +349,20 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * This function initiates a multi-directory selection operation by
-   * presenting a file chooser dialog to the user.
-   * The file chooser will initially be opened in the directory
-   * propertyGtk.FileDialog:initial-folder.
-   * The callback will be called when the dialog is dismissed.
-   * It should call [gtk.file_dialog.FileDialog.selectMultipleFoldersFinish]
-   * to obtain the result.
-   * Params:
-   *   parent = the parent `GtkWindow`
-   *   cancellable = a `GCancellable` to cancel the operation
-   *   callback = a callback to call when the operation is complete
-   */
+      This function initiates a multi-directory selection operation by
+    presenting a file chooser dialog to the user.
+    
+    The file chooser will initially be opened in the directory
+    `propertyGtk.FileDialog:initial-folder`.
+    
+    The callback will be called when the dialog is dismissed.
+    It should call [gtk.file_dialog.FileDialog.selectMultipleFoldersFinish]
+    to obtain the result.
+    Params:
+      parent =       the parent [gtk.window.Window]
+      cancellable =       a [gio.cancellable.Cancellable] to cancel the operation
+      callback =       a callback to call when the operation is complete
+  */
   void selectMultipleFolders(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -369,14 +379,14 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Finishes the [gtk.file_dialog.FileDialog.selectMultipleFolders]
-   * call and returns the resulting files in a `GListModel`.
-   * Params:
-   *   result = a `GAsyncResult`
-   * Returns: the file that was selected,
-   *   as a `GListModel` of `GFiles`. Otherwise, `NULL` is returned
-   *   and error is set
-   */
+      Finishes the [gtk.file_dialog.FileDialog.selectMultipleFolders]
+    call and returns the resulting files in a [gio.list_model.ListModel].
+    Params:
+      result =       a [gio.async_result.AsyncResult]
+    Returns:     the file that was selected,
+        as a [gio.list_model.ListModel] of `GFiles`. Otherwise, `NULL` is returned
+        and error is set
+  */
   gio.list_model.ListModel selectMultipleFoldersFinish(gio.async_result.AsyncResult result)
   {
     GListModel* _cretval;
@@ -389,12 +399,13 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Sets the label shown on the file chooser's accept button.
-   * Leaving the accept label unset or setting it as `NULL` will fall back to
-   * a default label, depending on what API is used to launch the file dialog.
-   * Params:
-   *   acceptLabel = the new accept label
-   */
+      Sets the label shown on the file chooser's accept button.
+    
+    Leaving the accept label unset or setting it as `NULL` will fall back to
+    a default label, depending on what API is used to launch the file dialog.
+    Params:
+      acceptLabel =       the new accept label
+  */
   void setAcceptLabel(string acceptLabel = null)
   {
     const(char)* _acceptLabel = acceptLabel.toCString(No.Alloc);
@@ -402,64 +413,67 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Sets the filter that will be selected by default
-   * in the file chooser dialog.
-   * If set to %NULL, the first item in [gtk.file_dialog.FileDialog.Gio.ListModel]
-   * will be used as the default filter. If that list is empty, the dialog
-   * will be unfiltered.
-   * Params:
-   *   filter = a `GtkFileFilter`
-   */
+      Sets the filter that will be selected by default
+    in the file chooser dialog.
+    
+    If set to null, the first item in [gtk.file_dialog.FileDialog.Gio.ListModel]
+    will be used as the default filter. If that list is empty, the dialog
+    will be unfiltered.
+    Params:
+      filter =       a [gtk.file_filter.FileFilter]
+  */
   void setDefaultFilter(gtk.file_filter.FileFilter filter = null)
   {
     gtk_file_dialog_set_default_filter(cast(GtkFileDialog*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the filters that will be offered to the user
-   * in the file chooser dialog.
-   * Params:
-   *   filters = a `GListModel` of `GtkFileFilters`
-   */
+      Sets the filters that will be offered to the user
+    in the file chooser dialog.
+    Params:
+      filters =       a [gio.list_model.ListModel] of `GtkFileFilters`
+  */
   void setFilters(gio.list_model.ListModel filters = null)
   {
     gtk_file_dialog_set_filters(cast(GtkFileDialog*)cPtr, filters ? cast(GListModel*)(cast(ObjectG)filters).cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the file that will be initially selected in
-   * the file chooser dialog.
-   * This function is a shortcut for calling both
-   * [gtk.file_dialog.FileDialog.setInitialFolder] and
-   * [gtk.file_dialog.FileDialog.setInitialName] with the directory and
-   * name of file respectively.
-   * Params:
-   *   file = a `GFile`
-   */
+      Sets the file that will be initially selected in
+    the file chooser dialog.
+    
+    This function is a shortcut for calling both
+    [gtk.file_dialog.FileDialog.setInitialFolder] and
+    [gtk.file_dialog.FileDialog.setInitialName] with the directory and
+    name of file respectively.
+    Params:
+      file =       a [gio.file.File]
+  */
   void setInitialFile(gio.file.File file = null)
   {
     gtk_file_dialog_set_initial_file(cast(GtkFileDialog*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the folder that will be set as the
-   * initial folder in the file chooser dialog.
-   * Params:
-   *   folder = a `GFile`
-   */
+      Sets the folder that will be set as the
+    initial folder in the file chooser dialog.
+    Params:
+      folder =       a [gio.file.File]
+  */
   void setInitialFolder(gio.file.File folder = null)
   {
     gtk_file_dialog_set_initial_folder(cast(GtkFileDialog*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the name for the file that should be initially set.
-   * For saving dialogs, this will usually be pre-entered into the name field.
-   * If a file with this name already exists in the directory set via
-   * propertyGtk.FileDialog:initial-folder, the dialog should preselect it.
-   * Params:
-   *   name = a UTF8 string
-   */
+      Sets the name for the file that should be initially set.
+    For saving dialogs, this will usually be pre-entered into the name field.
+    
+    If a file with this name already exists in the directory set via
+    `propertyGtk.FileDialog:initial-folder`, the dialog should preselect it.
+    Params:
+      name =       a UTF8 string
+  */
   void setInitialName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
@@ -467,23 +481,23 @@ class FileDialog : gobject.object.ObjectG
   }
 
   /**
-   * Sets whether the file chooser dialog
-   * blocks interaction with the parent window
-   * while it is presented.
-   * Params:
-   *   modal = the new value
-   */
+      Sets whether the file chooser dialog
+    blocks interaction with the parent window
+    while it is presented.
+    Params:
+      modal =       the new value
+  */
   void setModal(bool modal)
   {
     gtk_file_dialog_set_modal(cast(GtkFileDialog*)cPtr, modal);
   }
 
   /**
-   * Sets the title that will be shown on the
-   * file chooser dialog.
-   * Params:
-   *   title = the new title
-   */
+      Sets the title that will be shown on the
+    file chooser dialog.
+    Params:
+      title =       the new title
+  */
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);

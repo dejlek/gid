@@ -7,10 +7,10 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * A #GtkTargetEntry represents a single type of
- * data than can be supplied for by a widget for a selection
- * or for supplied or received during drag-and-drop.
- */
+    A #GtkTargetEntry represents a single type of
+  data than can be supplied for by a widget for a selection
+  or for supplied or received during drag-and-drop.
+*/
 class TargetEntry : gobject.boxed.Boxed
 {
 
@@ -67,14 +67,14 @@ class TargetEntry : gobject.boxed.Boxed
   }
 
   /**
-   * Makes a new #GtkTargetEntry.
-   * Params:
-   *   target = String identifier for target
-   *   flags = Set of flags, see #GtkTargetFlags
-   *   info = an ID that will be passed back to the application
-   * Returns: a pointer to a new #GtkTargetEntry.
-   *   Free with [gtk.target_entry.TargetEntry.free]
-   */
+      Makes a new #GtkTargetEntry.
+    Params:
+      target =       String identifier for target
+      flags =       Set of flags, see #GtkTargetFlags
+      info =       an ID that will be passed back to the application
+    Returns:     a pointer to a new #GtkTargetEntry.
+          Free with [gtk.target_entry.TargetEntry.free]
+  */
   this(string target, uint flags, uint info)
   {
     GtkTargetEntry* _cretval;
@@ -84,10 +84,10 @@ class TargetEntry : gobject.boxed.Boxed
   }
 
   /**
-   * Makes a copy of a #GtkTargetEntry and its data.
-   * Returns: a pointer to a copy of data.
-   *   Free with [gtk.target_entry.TargetEntry.free]
-   */
+      Makes a copy of a #GtkTargetEntry and its data.
+    Returns:     a pointer to a copy of data.
+          Free with [gtk.target_entry.TargetEntry.free]
+  */
   gtk.target_entry.TargetEntry copy()
   {
     GtkTargetEntry* _cretval;

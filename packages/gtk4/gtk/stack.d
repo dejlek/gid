@@ -16,44 +16,54 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkStack` is a container which only shows one of its children
- * at a time.
- * In contrast to `GtkNotebook`, `GtkStack` does not provide a means
- * for users to change the visible child. Instead, a separate widget
- * such as [gtk.stack_switcher.StackSwitcher] or [gtk.stack_sidebar.StackSidebar] can
- * be used with `GtkStack` to provide this functionality.
- * Transitions between pages can be animated as slides or fades. This
- * can be controlled with [gtk.stack.Stack.setTransitionType].
- * These animations respect the property@Gtk.Settings:gtk-enable-animations
- * setting.
- * `GtkStack` maintains a [gtk.stack_page.StackPage] object for each added
- * child, which holds additional per-child properties. You
- * obtain the `GtkStackPage` for a child with [gtk.stack.Stack.getPage]
- * and you can obtain a `GtkSelectionModel` containing all the pages
- * with [gtk.stack.Stack.getPages].
- * # GtkStack as GtkBuildable
- * To set child-specific properties in a .ui file, create `GtkStackPage`
- * objects explicitly, and set the child widget as a property on it:
- * ```xml
- * <object class\="GtkStack" id\="stack">
- * <child>
- * <object class\="GtkStackPage">
- * <property name\="name">page1</property>
- * <property name\="title">In the beginning…</property>
- * <property name\="child">
- * <object class\="GtkLabel">
- * <property name\="label">It was dark</property>
- * </object>
- * </property>
- * </object>
- * </child>
- * ```
- * # CSS nodes
- * `GtkStack` has a single CSS node named stack.
- * # Accessibility
- * `GtkStack` uses the %GTK_ACCESSIBLE_ROLE_TAB_PANEL for the stack
- * pages, which are the accessible parent objects of the child widgets.
- */
+    [gtk.stack.Stack] is a container which only shows one of its children
+  at a time.
+  
+  In contrast to [gtk.notebook.Notebook], [gtk.stack.Stack] does not provide a means
+  for users to change the visible child. Instead, a separate widget
+  such as [gtk.stack_switcher.StackSwitcher] or [gtk.stack_sidebar.StackSidebar] can
+  be used with [gtk.stack.Stack] to provide this functionality.
+  
+  Transitions between pages can be animated as slides or fades. This
+  can be controlled with [gtk.stack.Stack.setTransitionType].
+  These animations respect the `property@Gtk.Settings:gtk-enable-animations`
+  setting.
+  
+  [gtk.stack.Stack] maintains a [gtk.stack_page.StackPage] object for each added
+  child, which holds additional per-child properties. You
+  obtain the [gtk.stack_page.StackPage] for a child with [gtk.stack.Stack.getPage]
+  and you can obtain a [gtk.selection_model.SelectionModel] containing all the pages
+  with [gtk.stack.Stack.getPages].
+  
+  # GtkStack as GtkBuildable
+  
+  To set child-specific properties in a .ui file, create [gtk.stack_page.StackPage]
+  objects explicitly, and set the child widget as a property on it:
+  
+  ```xml
+    <object class="GtkStack" id="stack">
+      <child>
+        <object class="GtkStackPage">
+          <property name="name">page1</property>
+          <property name="title">In the beginning…</property>
+          <property name="child">
+            <object class="GtkLabel">
+              <property name="label">It was dark</property>
+            </object>
+          </property>
+        </object>
+      </child>
+  ```
+  
+  # CSS nodes
+  
+  [gtk.stack.Stack] has a single CSS node named stack.
+  
+  # Accessibility
+  
+  [gtk.stack.Stack] uses the [gtk.types.AccessibleRole.TabPanel] for the stack
+  pages, which are the accessible parent objects of the child widgets.
+*/
 class Stack : gtk.widget.Widget
 {
 
@@ -74,9 +84,9 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Creates a new `GtkStack`.
-   * Returns: a new `GtkStack`
-   */
+      Creates a new [gtk.stack.Stack].
+    Returns:     a new [gtk.stack.Stack]
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -85,11 +95,11 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Adds a child to stack.
-   * Params:
-   *   child = the widget to add
-   * Returns: the `GtkStackPage` for child
-   */
+      Adds a child to stack.
+    Params:
+      child =       the widget to add
+    Returns:     the [gtk.stack_page.StackPage] for child
+  */
   gtk.stack_page.StackPage addChild(gtk.widget.Widget child)
   {
     GtkStackPage* _cretval;
@@ -99,13 +109,14 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Adds a child to stack.
-   * The child is identified by the name.
-   * Params:
-   *   child = the widget to add
-   *   name = the name for child
-   * Returns: the `GtkStackPage` for child
-   */
+      Adds a child to stack.
+    
+    The child is identified by the name.
+    Params:
+      child =       the widget to add
+      name =       the name for child
+    Returns:     the [gtk.stack_page.StackPage] for child
+  */
   gtk.stack_page.StackPage addNamed(gtk.widget.Widget child, string name = null)
   {
     GtkStackPage* _cretval;
@@ -116,16 +127,17 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Adds a child to stack.
-   * The child is identified by the name. The title
-   * will be used by `GtkStackSwitcher` to represent
-   * child in a tab bar, so it should be short.
-   * Params:
-   *   child = the widget to add
-   *   name = the name for child
-   *   title = a human-readable title for child
-   * Returns: the `GtkStackPage` for child
-   */
+      Adds a child to stack.
+    
+    The child is identified by the name. The title
+    will be used by [gtk.stack_switcher.StackSwitcher] to represent
+    child in a tab bar, so it should be short.
+    Params:
+      child =       the widget to add
+      name =       the name for child
+      title =       a human-readable title for child
+    Returns:     the [gtk.stack_page.StackPage] for child
+  */
   gtk.stack_page.StackPage addTitled(gtk.widget.Widget child, string name, string title)
   {
     GtkStackPage* _cretval;
@@ -137,13 +149,14 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Finds the child with the name given as the argument.
-   * Returns %NULL if there is no child with this name.
-   * Params:
-   *   name = the name of the child to find
-   * Returns: the requested child
-   *   of the `GtkStack`
-   */
+      Finds the child with the name given as the argument.
+    
+    Returns null if there is no child with this name.
+    Params:
+      name =       the name of the child to find
+    Returns:     the requested child
+        of the [gtk.stack.Stack]
+  */
   gtk.widget.Widget getChildByName(string name)
   {
     GtkWidget* _cretval;
@@ -154,9 +167,9 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Gets whether stack is horizontally homogeneous.
-   * Returns: whether stack is horizontally homogeneous.
-   */
+      Gets whether stack is horizontally homogeneous.
+    Returns:     whether stack is horizontally homogeneous.
+  */
   bool getHhomogeneous()
   {
     bool _retval;
@@ -165,10 +178,10 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Returns whether the `GtkStack` is set up to interpolate between
-   * the sizes of children on page switch.
-   * Returns: %TRUE if child sizes are interpolated
-   */
+      Returns whether the [gtk.stack.Stack] is set up to interpolate between
+    the sizes of children on page switch.
+    Returns:     true if child sizes are interpolated
+  */
   bool getInterpolateSize()
   {
     bool _retval;
@@ -177,11 +190,11 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Returns the `GtkStackPage` object for child.
-   * Params:
-   *   child = a child of stack
-   * Returns: the `GtkStackPage` for child
-   */
+      Returns the [gtk.stack_page.StackPage] object for child.
+    Params:
+      child =       a child of stack
+    Returns:     the [gtk.stack_page.StackPage] for child
+  */
   gtk.stack_page.StackPage getPage(gtk.widget.Widget child)
   {
     GtkStackPage* _cretval;
@@ -191,12 +204,13 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Returns a `GListModel` that contains the pages of the stack.
-   * This can be used to keep an up-to-date view. The model also
-   * implements [gtk.selection_model.SelectionModel] and can be used to track
-   * and modify the visible page.
-   * Returns: a `GtkSelectionModel` for the stack's children
-   */
+      Returns a [gio.list_model.ListModel] that contains the pages of the stack.
+    
+    This can be used to keep an up-to-date view. The model also
+    implements [gtk.selection_model.SelectionModel] and can be used to track
+    and modify the visible page.
+    Returns:     a [gtk.selection_model.SelectionModel] for the stack's children
+  */
   gtk.selection_model.SelectionModel getPages()
   {
     GtkSelectionModel* _cretval;
@@ -206,10 +220,10 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Returns the amount of time $(LPAREN)in milliseconds$(RPAREN) that
-   * transitions between pages in stack will take.
-   * Returns: the transition duration
-   */
+      Returns the amount of time (in milliseconds) that
+    transitions between pages in stack will take.
+    Returns:     the transition duration
+  */
   uint getTransitionDuration()
   {
     uint _retval;
@@ -218,10 +232,10 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Returns whether the stack is currently in a transition from one page to
-   * another.
-   * Returns: %TRUE if the transition is currently running, %FALSE otherwise.
-   */
+      Returns whether the stack is currently in a transition from one page to
+    another.
+    Returns:     true if the transition is currently running, false otherwise.
+  */
   bool getTransitionRunning()
   {
     bool _retval;
@@ -230,10 +244,10 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Gets the type of animation that will be used
-   * for transitions between pages in stack.
-   * Returns: the current transition type of stack
-   */
+      Gets the type of animation that will be used
+    for transitions between pages in stack.
+    Returns:     the current transition type of stack
+  */
   gtk.types.StackTransitionType getTransitionType()
   {
     GtkStackTransitionType _cretval;
@@ -243,9 +257,9 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Gets whether stack is vertically homogeneous.
-   * Returns: whether stack is vertically homogeneous.
-   */
+      Gets whether stack is vertically homogeneous.
+    Returns:     whether stack is vertically homogeneous.
+  */
   bool getVhomogeneous()
   {
     bool _retval;
@@ -254,10 +268,11 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Gets the currently visible child of stack.
-   * Returns %NULL if there are no visible children.
-   * Returns: the visible child of the `GtkStack`
-   */
+      Gets the currently visible child of stack.
+    
+    Returns null if there are no visible children.
+    Returns:     the visible child of the [gtk.stack.Stack]
+  */
   gtk.widget.Widget getVisibleChild()
   {
     GtkWidget* _cretval;
@@ -267,11 +282,12 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Returns the name of the currently visible child of stack.
-   * Returns %NULL if there is no visible child.
-   * Returns: the name of the visible child
-   *   of the `GtkStack`
-   */
+      Returns the name of the currently visible child of stack.
+    
+    Returns null if there is no visible child.
+    Returns:     the name of the visible child
+        of the [gtk.stack.Stack]
+  */
   string getVisibleChildName()
   {
     const(char)* _cretval;
@@ -281,107 +297,115 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Removes a child widget from stack.
-   * Params:
-   *   child = the child to remove
-   */
+      Removes a child widget from stack.
+    Params:
+      child =       the child to remove
+  */
   void remove(gtk.widget.Widget child)
   {
     gtk_stack_remove(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the `GtkStack` to be horizontally homogeneous or not.
-   * If it is homogeneous, the `GtkStack` will request the same
-   * width for all its children. If it isn't, the stack
-   * may change width when a different child becomes visible.
-   * Params:
-   *   hhomogeneous = %TRUE to make stack horizontally homogeneous
-   */
+      Sets the [gtk.stack.Stack] to be horizontally homogeneous or not.
+    
+    If it is homogeneous, the [gtk.stack.Stack] will request the same
+    width for all its children. If it isn't, the stack
+    may change width when a different child becomes visible.
+    Params:
+      hhomogeneous =       true to make stack horizontally homogeneous
+  */
   void setHhomogeneous(bool hhomogeneous)
   {
     gtk_stack_set_hhomogeneous(cast(GtkStack*)cPtr, hhomogeneous);
   }
 
   /**
-   * Sets whether or not stack will interpolate its size when
-   * changing the visible child.
-   * If the propertyGtk.Stack:interpolate-size property is set
-   * to %TRUE, stack will interpolate its size between the current
-   * one and the one it'll take after changing the visible child,
-   * according to the set transition duration.
-   * Params:
-   *   interpolateSize = the new value
-   */
+      Sets whether or not stack will interpolate its size when
+    changing the visible child.
+    
+    If the `propertyGtk.Stack:interpolate-size` property is set
+    to true, stack will interpolate its size between the current
+    one and the one it'll take after changing the visible child,
+    according to the set transition duration.
+    Params:
+      interpolateSize =       the new value
+  */
   void setInterpolateSize(bool interpolateSize)
   {
     gtk_stack_set_interpolate_size(cast(GtkStack*)cPtr, interpolateSize);
   }
 
   /**
-   * Sets the duration that transitions between pages in stack
-   * will take.
-   * Params:
-   *   duration = the new duration, in milliseconds
-   */
+      Sets the duration that transitions between pages in stack
+    will take.
+    Params:
+      duration =       the new duration, in milliseconds
+  */
   void setTransitionDuration(uint duration)
   {
     gtk_stack_set_transition_duration(cast(GtkStack*)cPtr, duration);
   }
 
   /**
-   * Sets the type of animation that will be used for
-   * transitions between pages in stack.
-   * Available types include various kinds of fades and slides.
-   * The transition type can be changed without problems
-   * at runtime, so it is possible to change the animation
-   * based on the page that is about to become current.
-   * Params:
-   *   transition = the new transition type
-   */
+      Sets the type of animation that will be used for
+    transitions between pages in stack.
+    
+    Available types include various kinds of fades and slides.
+    
+    The transition type can be changed without problems
+    at runtime, so it is possible to change the animation
+    based on the page that is about to become current.
+    Params:
+      transition =       the new transition type
+  */
   void setTransitionType(gtk.types.StackTransitionType transition)
   {
     gtk_stack_set_transition_type(cast(GtkStack*)cPtr, transition);
   }
 
   /**
-   * Sets the `GtkStack` to be vertically homogeneous or not.
-   * If it is homogeneous, the `GtkStack` will request the same
-   * height for all its children. If it isn't, the stack
-   * may change height when a different child becomes visible.
-   * Params:
-   *   vhomogeneous = %TRUE to make stack vertically homogeneous
-   */
+      Sets the [gtk.stack.Stack] to be vertically homogeneous or not.
+    
+    If it is homogeneous, the [gtk.stack.Stack] will request the same
+    height for all its children. If it isn't, the stack
+    may change height when a different child becomes visible.
+    Params:
+      vhomogeneous =       true to make stack vertically homogeneous
+  */
   void setVhomogeneous(bool vhomogeneous)
   {
     gtk_stack_set_vhomogeneous(cast(GtkStack*)cPtr, vhomogeneous);
   }
 
   /**
-   * Makes child the visible child of stack.
-   * If child is different from the currently visible child,
-   * the transition between the two will be animated with the
-   * current transition type of stack.
-   * Note that the child widget has to be visible itself
-   * $(LPAREN)see [gtk.widget.Widget.show]$(RPAREN) in order to become the visible
-   * child of stack.
-   * Params:
-   *   child = a child of stack
-   */
+      Makes child the visible child of stack.
+    
+    If child is different from the currently visible child,
+    the transition between the two will be animated with the
+    current transition type of stack.
+    
+    Note that the child widget has to be visible itself
+    (see [gtk.widget.Widget.show]) in order to become the visible
+    child of stack.
+    Params:
+      child =       a child of stack
+  */
   void setVisibleChild(gtk.widget.Widget child)
   {
     gtk_stack_set_visible_child(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
-   * Makes the child with the given name visible.
-   * Note that the child widget has to be visible itself
-   * $(LPAREN)see [gtk.widget.Widget.show]$(RPAREN) in order to become the visible
-   * child of stack.
-   * Params:
-   *   name = the name of the child to make visible
-   *   transition = the transition type to use
-   */
+      Makes the child with the given name visible.
+    
+    Note that the child widget has to be visible itself
+    (see [gtk.widget.Widget.show]) in order to become the visible
+    child of stack.
+    Params:
+      name =       the name of the child to make visible
+      transition =       the transition type to use
+  */
   void setVisibleChildFull(string name, gtk.types.StackTransitionType transition)
   {
     const(char)* _name = name.toCString(No.Alloc);
@@ -389,16 +413,18 @@ class Stack : gtk.widget.Widget
   }
 
   /**
-   * Makes the child with the given name visible.
-   * If child is different from the currently visible child,
-   * the transition between the two will be animated with the
-   * current transition type of stack.
-   * Note that the child widget has to be visible itself
-   * $(LPAREN)see [gtk.widget.Widget.show]$(RPAREN) in order to become the visible
-   * child of stack.
-   * Params:
-   *   name = the name of the child to make visible
-   */
+      Makes the child with the given name visible.
+    
+    If child is different from the currently visible child,
+    the transition between the two will be animated with the
+    current transition type of stack.
+    
+    Note that the child widget has to be visible itself
+    (see [gtk.widget.Widget.show]) in order to become the visible
+    child of stack.
+    Params:
+      name =       the name of the child to make visible
+  */
   void setVisibleChildName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);

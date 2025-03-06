@@ -7,8 +7,8 @@ import gio.types;
 import gobject.boxed;
 
 /**
- * Information about a signal on a D-Bus interface.
- */
+    Information about a signal on a D-Bus interface.
+*/
 class DBusSignalInfo : gobject.boxed.Boxed
 {
 

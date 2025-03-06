@@ -7,13 +7,14 @@ import glib.types;
 import gobject.boxed;
 
 /**
- * A `GOptionGroup` struct defines the options in a single
- * group. The struct has only private fields and should not be directly accessed.
- * All options in a group share the same translation function. Libraries which
- * need to parse commandline options are expected to provide a function for
- * getting a `GOptionGroup` holding their options, which
- * the application can then add to its #GOptionContext.
- */
+    A [glib.option_group.OptionGroup] struct defines the options in a single
+  group. The struct has only private fields and should not be directly accessed.
+  
+  All options in a group share the same translation function. Libraries which
+  need to parse commandline options are expected to provide a function for
+  getting a [glib.option_group.OptionGroup] holding their options, which
+  the application can then add to its #GOptionContext.
+*/
 class OptionGroup : gobject.boxed.Boxed
 {
 
@@ -50,10 +51,10 @@ class OptionGroup : gobject.boxed.Boxed
 
 
   /**
-   * Adds the options specified in entries to group.
-   * Params:
-   *   entries = a %NULL-terminated array of #GOptionEntrys
-   */
+      Adds the options specified in entries to group.
+    Params:
+      entries =       a null-terminated array of #GOptionEntrys
+  */
   void addEntries(glib.types.OptionEntry[] entries)
   {
     auto _entries = cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr;
@@ -61,14 +62,15 @@ class OptionGroup : gobject.boxed.Boxed
   }
 
   /**
-   * Sets the function which is used to translate user-visible strings,
-   * for `--help` output. Different groups can use different
-   * #GTranslateFuncs. If func is %NULL, strings are not translated.
-   * If you are using gettext$(LPAREN)$(RPAREN), you only need to set the translation
-   * domain, see [glib.option_group.OptionGroup.setTranslationDomain].
-   * Params:
-   *   func = the #GTranslateFunc, or %NULL
-   */
+      Sets the function which is used to translate user-visible strings,
+    for `--help` output. Different groups can use different
+    #GTranslateFuncs. If func is null, strings are not translated.
+    
+    If you are using gettext(), you only need to set the translation
+    domain, see [glib.option_group.OptionGroup.setTranslationDomain].
+    Params:
+      func =       the #GTranslateFunc, or null
+  */
   void setTranslateFunc(glib.types.TranslateFunc func = null)
   {
     extern(C) const(char)* _funcCallback(const(char)* str, void* data)
@@ -90,11 +92,11 @@ class OptionGroup : gobject.boxed.Boxed
   }
 
   /**
-   * A convenience function to use gettext$(LPAREN)$(RPAREN) for translating
-   * user-visible strings.
-   * Params:
-   *   domain = the domain to use
-   */
+      A convenience function to use gettext() for translating
+    user-visible strings.
+    Params:
+      domain =       the domain to use
+  */
   void setTranslationDomain(string domain)
   {
     const(char)* _domain = domain.toCString(No.Alloc);

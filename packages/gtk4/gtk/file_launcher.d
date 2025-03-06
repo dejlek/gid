@@ -13,16 +13,19 @@ import gtk.types;
 import gtk.window;
 
 /**
- * A `GtkFileLauncher` object collects the arguments that are needed to open a
- * file with an application.
- * Depending on system configuration, user preferences and available APIs, this
- * may or may not show an app chooser dialog or launch the default application
- * right away.
- * The operation is started with the [gtk.file_launcher.FileLauncher.launch] function.
- * This API follows the GIO async pattern, and the result can be obtained by
- * calling [gtk.file_launcher.FileLauncher.launchFinish].
- * To launch uris that don't represent files, use [gtk.uri_launcher.UriLauncher].
- */
+    A [gtk.file_launcher.FileLauncher] object collects the arguments that are needed to open a
+  file with an application.
+  
+  Depending on system configuration, user preferences and available APIs, this
+  may or may not show an app chooser dialog or launch the default application
+  right away.
+  
+  The operation is started with the [gtk.file_launcher.FileLauncher.launch] function.
+  This API follows the GIO async pattern, and the result can be obtained by
+  calling [gtk.file_launcher.FileLauncher.launchFinish].
+  
+  To launch uris that don't represent files, use [gtk.uri_launcher.UriLauncher].
+*/
 class FileLauncher : gobject.object.ObjectG
 {
 
@@ -43,11 +46,11 @@ class FileLauncher : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new `GtkFileLauncher` object.
-   * Params:
-   *   file = the file to open
-   * Returns: the new `GtkFileLauncher`
-   */
+      Creates a new [gtk.file_launcher.FileLauncher] object.
+    Params:
+      file =       the file to open
+    Returns:     the new [gtk.file_launcher.FileLauncher]
+  */
   this(gio.file.File file = null)
   {
     GtkFileLauncher* _cretval;
@@ -56,9 +59,9 @@ class FileLauncher : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether to ask the user to choose an app for opening the file.
-   * Returns: `TRUE` if always asking for app
-   */
+      Returns whether to ask the user to choose an app for opening the file.
+    Returns:     `TRUE` if always asking for app
+  */
   bool getAlwaysAsk()
   {
     bool _retval;
@@ -67,9 +70,9 @@ class FileLauncher : gobject.object.ObjectG
   }
 
   /**
-   * Gets the file that will be opened.
-   * Returns: the file
-   */
+      Gets the file that will be opened.
+    Returns:     the file
+  */
   gio.file.File getFile()
   {
     GFile* _cretval;
@@ -79,9 +82,9 @@ class FileLauncher : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether to make the file writable for the handler.
-   * Returns: `TRUE` if the file will be made writable
-   */
+      Returns whether to make the file writable for the handler.
+    Returns:     `TRUE` if the file will be made writable
+  */
   bool getWritable()
   {
     bool _retval;
@@ -90,16 +93,18 @@ class FileLauncher : gobject.object.ObjectG
   }
 
   /**
-   * Launch an application to open the file.
-   * This may present an app chooser dialog to the user.
-   * The callback will be called when the operation is completed.
-   * It should call [gtk.file_launcher.FileLauncher.launchFinish] to obtain
-   * the result.
-   * Params:
-   *   parent = the parent `GtkWindow`
-   *   cancellable = a `GCancellable` to cancel the operation
-   *   callback = a callback to call when the operation is complete
-   */
+      Launch an application to open the file.
+    
+    This may present an app chooser dialog to the user.
+    
+    The callback will be called when the operation is completed.
+    It should call [gtk.file_launcher.FileLauncher.launchFinish] to obtain
+    the result.
+    Params:
+      parent =       the parent [gtk.window.Window]
+      cancellable =       a [gio.cancellable.Cancellable] to cancel the operation
+      callback =       a callback to call when the operation is complete
+  */
   void launch(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -116,13 +121,13 @@ class FileLauncher : gobject.object.ObjectG
   }
 
   /**
-   * Finishes the [gtk.file_launcher.FileLauncher.launch] call and
-   * returns the result.
-   * Params:
-   *   result = a `GAsyncResult`
-   * Returns: `TRUE` if an application was launched,
-   *   or `FALSE` and error is set
-   */
+      Finishes the [gtk.file_launcher.FileLauncher.launch] call and
+    returns the result.
+    Params:
+      result =       a [gio.async_result.AsyncResult]
+    Returns:     `TRUE` if an application was launched,
+          or `FALSE` and error is set
+  */
   bool launchFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
@@ -134,17 +139,19 @@ class FileLauncher : gobject.object.ObjectG
   }
 
   /**
-   * Launch a file manager to show the file in its parent directory.
-   * This is only supported native files. It will fail if file
-   * is e.g. a http:// uri.
-   * The callback will be called when the operation is completed.
-   * It should call [gtk.file_launcher.FileLauncher.openContainingFolderFinish]
-   * to obtain the result.
-   * Params:
-   *   parent = the parent `GtkWindow`
-   *   cancellable = a `GCancellable` to cancel the operation
-   *   callback = a callback to call when the operation is complete
-   */
+      Launch a file manager to show the file in its parent directory.
+    
+    This is only supported native files. It will fail if file
+    is e.g. a http:// uri.
+    
+    The callback will be called when the operation is completed.
+    It should call [gtk.file_launcher.FileLauncher.openContainingFolderFinish]
+    to obtain the result.
+    Params:
+      parent =       the parent [gtk.window.Window]
+      cancellable =       a [gio.cancellable.Cancellable] to cancel the operation
+      callback =       a callback to call when the operation is complete
+  */
   void openContainingFolder(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -161,13 +168,13 @@ class FileLauncher : gobject.object.ObjectG
   }
 
   /**
-   * Finishes the [gtk.file_launcher.FileLauncher.openContainingFolder]
-   * call and returns the result.
-   * Params:
-   *   result = a `GAsyncResult`
-   * Returns: `TRUE` if an application was launched,
-   *   or `FALSE` and error is set
-   */
+      Finishes the [gtk.file_launcher.FileLauncher.openContainingFolder]
+    call and returns the result.
+    Params:
+      result =       a [gio.async_result.AsyncResult]
+    Returns:     `TRUE` if an application was launched,
+          or `FALSE` and error is set
+  */
   bool openContainingFolderFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
@@ -179,31 +186,31 @@ class FileLauncher : gobject.object.ObjectG
   }
 
   /**
-   * Sets whether to awlays ask the user to choose an app for opening the file.
-   * If `FALSE`, the file might be opened with a default app or the previous choice.
-   * Params:
-   *   alwaysAsk = a `gboolean`
-   */
+      Sets whether to awlays ask the user to choose an app for opening the file.
+    If `FALSE`, the file might be opened with a default app or the previous choice.
+    Params:
+      alwaysAsk =       a [glib.types.SOURCE_REMOVE]
+  */
   void setAlwaysAsk(bool alwaysAsk)
   {
     gtk_file_launcher_set_always_ask(cast(GtkFileLauncher*)cPtr, alwaysAsk);
   }
 
   /**
-   * Sets the file that will be opened.
-   * Params:
-   *   file = a `GFile`
-   */
+      Sets the file that will be opened.
+    Params:
+      file =       a [gio.file.File]
+  */
   void setFile(gio.file.File file = null)
   {
     gtk_file_launcher_set_file(cast(GtkFileLauncher*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets whether to make the file writable for the handler.
-   * Params:
-   *   writable = a `gboolean`
-   */
+      Sets whether to make the file writable for the handler.
+    Params:
+      writable =       a [glib.types.SOURCE_REMOVE]
+  */
   void setWritable(bool writable)
   {
     gtk_file_launcher_set_writable(cast(GtkFileLauncher*)cPtr, writable);

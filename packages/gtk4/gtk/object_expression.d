@@ -8,8 +8,8 @@ import gtk.expression;
 import gtk.types;
 
 /**
- * A `GObject` value in a `GtkExpression`.
- */
+    A [gobject.object.ObjectG] value in a [gtk.expression.Expression].
+*/
 class ObjectExpression : gtk.expression.Expression
 {
 
@@ -22,14 +22,17 @@ class ObjectExpression : gtk.expression.Expression
   }
 
   /**
-   * Creates an expression evaluating to the given `object` with a weak reference.
-   * Once the `object` is disposed, it will fail to evaluate.
-   * This expression is meant to break reference cycles.
-   * If you want to keep a reference to `object`, use [gtk.constant_expression.ConstantExpression.new_].
-   * Params:
-   *   object = object to watch
-   * Returns: a new `GtkExpression`
-   */
+      Creates an expression evaluating to the given `object` with a weak reference.
+    
+    Once the `object` is disposed, it will fail to evaluate.
+    
+    This expression is meant to break reference cycles.
+    
+    If you want to keep a reference to `object`, use [gtk.constant_expression.ConstantExpression.new_].
+    Params:
+      object =       object to watch
+    Returns:     a new [gtk.expression.Expression]
+  */
   this(gobject.object.ObjectG object)
   {
     GtkExpression* _cretval;
@@ -38,9 +41,9 @@ class ObjectExpression : gtk.expression.Expression
   }
 
   /**
-   * Gets the object that the expression evaluates to.
-   * Returns: the object, or `NULL`
-   */
+      Gets the object that the expression evaluates to.
+    Returns:     the object, or `NULL`
+  */
   gobject.object.ObjectG getObject()
   {
     ObjectC* _cretval;

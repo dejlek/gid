@@ -7,6 +7,7 @@ import arrow.expression;
 import arrow.types;
 import gid.gid;
 
+/** */
 class LiteralExpression : arrow.expression.Expression
 {
 
@@ -26,6 +27,7 @@ class LiteralExpression : arrow.expression.Expression
     return getType();
   }
 
+  /** */
   this(arrow.datum.Datum datum)
   {
     GArrowLiteralExpression* _cretval;

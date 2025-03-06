@@ -8,15 +8,17 @@ import gtksource.language;
 import gtksource.types;
 
 /**
- * Provides access to class@Languages.
- * `GtkSourceLanguageManager` is an object which processes language description
- * files and creates and stores class@Language objects, and provides API to
- * access them.
- * Use [gtksource.language_manager.LanguageManager.getDefault] to retrieve the default
- * instance of `GtkSourceLanguageManager`, and
- * [gtksource.language_manager.LanguageManager.guessLanguage] to get a class@Language for
- * given file name and content type.
- */
+    Provides access to `class@Language`s.
+  
+  [gtksource.language_manager.LanguageManager] is an object which processes language description
+  files and creates and stores `class@Language` objects, and provides API to
+  access them.
+  
+  Use [gtksource.language_manager.LanguageManager.getDefault] to retrieve the default
+  instance of [gtksource.language_manager.LanguageManager], and
+  [gtksource.language_manager.LanguageManager.guessLanguage] to get a `class@Language` for
+  given file name and content type.
+*/
 class LanguageManager : gobject.object.ObjectG
 {
 
@@ -37,11 +39,12 @@ class LanguageManager : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new language manager.
-   * If you do not need more than one language manager or a private language manager
-   * instance then use [gtksource.language_manager.LanguageManager.getDefault] instead.
-   * Returns: a new #GtkSourceLanguageManager.
-   */
+      Creates a new language manager.
+    
+    If you do not need more than one language manager or a private language manager
+    instance then use [gtksource.language_manager.LanguageManager.getDefault] instead.
+    Returns:     a new #GtkSourceLanguageManager.
+  */
   this()
   {
     GtkSourceLanguageManager* _cretval;
@@ -50,10 +53,10 @@ class LanguageManager : gobject.object.ObjectG
   }
 
   /**
-   * Returns the default #GtkSourceLanguageManager instance.
-   * Returns: a #GtkSourceLanguageManager.
-   *   Return value is owned by GtkSourceView library and must not be unref'ed.
-   */
+      Returns the default #GtkSourceLanguageManager instance.
+    Returns:     a #GtkSourceLanguageManager.
+      Return value is owned by GtkSourceView library and must not be unref'ed.
+  */
   static gtksource.language_manager.LanguageManager getDefault()
   {
     GtkSourceLanguageManager* _cretval;
@@ -63,12 +66,13 @@ class LanguageManager : gobject.object.ObjectG
   }
 
   /**
-   * Appends path to the list of directories where the manager looks for
-   * language files.
-   * See [gtksource.language_manager.LanguageManager.setSearchPath] for details.
-   * Params:
-   *   path = a directory or a filename.
-   */
+      Appends path to the list of directories where the manager looks for
+    language files.
+    
+    See [gtksource.language_manager.LanguageManager.setSearchPath] for details.
+    Params:
+      path =       a directory or a filename.
+  */
   void appendSearchPath(string path)
   {
     const(char)* _path = path.toCString(No.Alloc);
@@ -76,14 +80,14 @@ class LanguageManager : gobject.object.ObjectG
   }
 
   /**
-   * Gets the classLanguage identified by the given id in the language
-   * manager.
-   * Params:
-   *   id = a language id.
-   * Returns: a #GtkSourceLanguage, or %NULL
-   *   if there is no language identified by the given id. Return value is
-   *   owned by lm and should not be freed.
-   */
+      Gets the `classLanguage` identified by the given id in the language
+    manager.
+    Params:
+      id =       a language id.
+    Returns:     a #GtkSourceLanguage, or null
+      if there is no language identified by the given id. Return value is
+      owned by lm and should not be freed.
+  */
   gtksource.language.Language getLanguage(string id)
   {
     GtkSourceLanguage* _cretval;
@@ -94,12 +98,12 @@ class LanguageManager : gobject.object.ObjectG
   }
 
   /**
-   * Returns the ids of the available languages.
-   * Returns: a %NULL-terminated array of strings containing the ids of the available
-   *   languages or %NULL if no language is available.
-   *   The array is sorted alphabetically according to the language name.
-   *   The array is owned by lm and must not be modified.
-   */
+      Returns the ids of the available languages.
+    Returns:     a null-terminated array of strings containing the ids of the available
+      languages or null if no language is available.
+      The array is sorted alphabetically according to the language name.
+      The array is owned by lm and must not be modified.
+  */
   string[] getLanguageIds()
   {
     const(char*)* _cretval;
@@ -119,11 +123,11 @@ class LanguageManager : gobject.object.ObjectG
   }
 
   /**
-   * Gets the list directories where lm looks for language files.
-   * Returns: %NULL-terminated array
-   *   containing a list of language files directories.
-   *   The array is owned by lm and must not be modified.
-   */
+      Gets the list directories where lm looks for language files.
+    Returns:     null-terminated array
+      containing a list of language files directories.
+      The array is owned by lm and must not be modified.
+  */
   string[] getSearchPath()
   {
     const(char*)* _cretval;
@@ -143,42 +147,50 @@ class LanguageManager : gobject.object.ObjectG
   }
 
   /**
-   * Picks a classLanguage for given file name and content type,
-   * according to the information in lang files.
-   * Either filename or content_type may be %NULL. This function can be used as follows:
-   * ```c
-   * GtkSourceLanguage *lang;
-   * GtkSourceLanguageManager *manager;
-   * lm \= gtk_source_language_manager_get_default $(LPAREN)$(RPAREN);
-   * lang \= gtk_source_language_manager_guess_language $(LPAREN)manager, filename, NULL$(RPAREN);
-   * gtk_source_buffer_set_language $(LPAREN)buffer, lang$(RPAREN);
-   * ```
-   * or
-   * ```c
-   * GtkSourceLanguage *lang \= NULL;
-   * GtkSourceLanguageManager *manager;
-   * gboolean result_uncertain;
-   * gchar *content_type;
-   * content_type \= g_content_type_guess $(LPAREN)filename, NULL, 0, &result_uncertain$(RPAREN);
-   * if $(LPAREN)result_uncertain$(RPAREN)
-   * {
-   * g_free $(LPAREN)content_type$(RPAREN);
-   * content_type \= NULL;
-   * }
-   * manager \= gtk_source_language_manager_get_default $(LPAREN)$(RPAREN);
-   * lang \= gtk_source_language_manager_guess_language $(LPAREN)manager, filename, content_type$(RPAREN);
-   * gtk_source_buffer_set_language $(LPAREN)buffer, lang$(RPAREN);
-   * g_free $(LPAREN)content_type$(RPAREN);
-   * ```
-   * etc. Use [gtksource.language.Language.getMimeTypes] and [gtksource.language.Language.getGlobs]
-   * if you need full control over file -> language mapping.
-   * Params:
-   *   filename = a filename in Glib filename encoding, or %NULL.
-   *   contentType = a content type $(LPAREN)as in GIO API$(RPAREN), or %NULL.
-   * Returns: a #GtkSourceLanguage, or %NULL if there
-   *   is no suitable language for given filename and/or content_type. Return
-   *   value is owned by lm and should not be freed.
-   */
+      Picks a `classLanguage` for given file name and content type,
+    according to the information in lang files.
+    
+    Either filename or content_type may be null. This function can be used as follows:
+    
+    ```c
+    GtkSourceLanguage *lang;
+    GtkSourceLanguageManager *manager;
+    lm = gtk_source_language_manager_get_default ();
+    lang = gtk_source_language_manager_guess_language (manager, filename, NULL);
+    gtk_source_buffer_set_language (buffer, lang);
+    ```
+    
+    or
+    
+    ```c
+    GtkSourceLanguage *lang = NULL;
+    GtkSourceLanguageManager *manager;
+    gboolean result_uncertain;
+    gchar *content_type;
+    
+    content_type = g_content_type_guess (filename, NULL, 0, &result_uncertain);
+    if (result_uncertain)
+      {
+        g_free (content_type);
+        content_type = NULL;
+      }
+    
+    manager = gtk_source_language_manager_get_default ();
+    lang = gtk_source_language_manager_guess_language (manager, filename, content_type);
+    gtk_source_buffer_set_language (buffer, lang);
+    
+    g_free (content_type);
+    ```
+    
+    etc. Use [gtksource.language.Language.getMimeTypes] and [gtksource.language.Language.getGlobs]
+    if you need full control over file -> language mapping.
+    Params:
+      filename =       a filename in Glib filename encoding, or null.
+      contentType =       a content type (as in GIO API), or null.
+    Returns:     a #GtkSourceLanguage, or null if there
+      is no suitable language for given filename and/or content_type. Return
+      value is owned by lm and should not be freed.
+  */
   gtksource.language.Language guessLanguage(string filename = null, string contentType = null)
   {
     GtkSourceLanguage* _cretval;
@@ -190,12 +202,13 @@ class LanguageManager : gobject.object.ObjectG
   }
 
   /**
-   * Prepends path to the list of directories where the manager looks
-   * for language files.
-   * See [gtksource.language_manager.LanguageManager.setSearchPath] for details.
-   * Params:
-   *   path = a directory or a filename.
-   */
+      Prepends path to the list of directories where the manager looks
+    for language files.
+    
+    See [gtksource.language_manager.LanguageManager.setSearchPath] for details.
+    Params:
+      path =       a directory or a filename.
+  */
   void prependSearchPath(string path)
   {
     const(char)* _path = path.toCString(No.Alloc);
@@ -203,20 +216,23 @@ class LanguageManager : gobject.object.ObjectG
   }
 
   /**
-   * Sets the list of directories where the lm looks for
-   * language files.
-   * If dirs is %NULL, the search path is reset to default.
-   * At the moment this function can be called only before the
-   * language files are loaded for the first time. In practice
-   * to set a custom search path for a `GtkSourceLanguageManager`,
-   * you have to call this function right after creating it.
-   * Since GtkSourceView 5.4 this function will allow you to provide
-   * paths in the form of "resource:///" URIs to embedded `GResource`s.
-   * They must contain the path of a directory within the `GResource`.
-   * Params:
-   *   dirs = a %NULL-terminated array of
-   *     strings or %NULL.
-   */
+      Sets the list of directories where the lm looks for
+    language files.
+    
+    If dirs is null, the search path is reset to default.
+    
+    At the moment this function can be called only before the
+    language files are loaded for the first time. In practice
+    to set a custom search path for a [gtksource.language_manager.LanguageManager],
+    you have to call this function right after creating it.
+    
+    Since GtkSourceView 5.4 this function will allow you to provide
+    paths in the form of "resource:///" URIs to embedded [gio.resource.Resource]s.
+    They must contain the path of a directory within the [gio.resource.Resource].
+    Params:
+      dirs =       a null-terminated array of
+          strings or null.
+  */
   void setSearchPath(string[] dirs = null)
   {
     char*[] _tmpdirs;

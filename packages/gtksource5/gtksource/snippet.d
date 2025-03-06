@@ -10,16 +10,19 @@ import gtksource.snippet_context;
 import gtksource.types;
 
 /**
- * Quick insertion code snippets.
- * The `GtkSourceSnippet` represents a series of chunks that can quickly be
- * inserted into the class@View.
- * Snippets are defined in XML files which are loaded by the
- * class@SnippetManager. Alternatively, applications can create snippets
- * on demand and insert them into the class@View using
- * [gtksource.view.View.pushSnippet].
- * Snippet chunks can reference other snippet chunks as well as post-process
- * the values from other chunks such as capitalization.
- */
+    Quick insertion code snippets.
+  
+  The [gtksource.snippet.Snippet] represents a series of chunks that can quickly be
+  inserted into the `class@View`.
+  
+  Snippets are defined in XML files which are loaded by the
+  `class@SnippetManager`. Alternatively, applications can create snippets
+  on demand and insert them into the `class@View` using
+  [gtksource.view.View.pushSnippet].
+  
+  Snippet chunks can reference other snippet chunks as well as post-process
+  the values from other chunks such as capitalization.
+*/
 class Snippet : gobject.object.ObjectG
 {
 
@@ -40,12 +43,12 @@ class Snippet : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #GtkSourceSnippet
-   * Params:
-   *   trigger = the trigger word
-   *   languageId = the source language
-   * Returns: A new #GtkSourceSnippet
-   */
+      Creates a new #GtkSourceSnippet
+    Params:
+      trigger =       the trigger word
+      languageId =       the source language
+    Returns:     A new #GtkSourceSnippet
+  */
   this(string trigger = null, string languageId = null)
   {
     GtkSourceSnippet* _cretval;
@@ -56,13 +59,13 @@ class Snippet : gobject.object.ObjectG
   }
 
   /**
-   * Parses the snippet formatted text into a series of chunks and adds them
-   * to a new #GtkSourceSnippet.
-   * Params:
-   *   text = the formatted snippet text to parse
-   * Returns: the newly parsed #GtkSourceSnippet, or %NULL upon
-   *   failure and error is set.
-   */
+      Parses the snippet formatted text into a series of chunks and adds them
+    to a new #GtkSourceSnippet.
+    Params:
+      text =       the formatted snippet text to parse
+    Returns:     the newly parsed #GtkSourceSnippet, or null upon
+        failure and error is set.
+  */
   static gtksource.snippet.Snippet newParsed(string text)
   {
     GtkSourceSnippet* _cretval;
@@ -76,20 +79,21 @@ class Snippet : gobject.object.ObjectG
   }
 
   /**
-   * Appends chunk to the snippet.
-   * This may only be called before the snippet has been expanded.
-   * Params:
-   *   chunk = a #GtkSourceSnippetChunk
-   */
+      Appends chunk to the snippet.
+    
+    This may only be called before the snippet has been expanded.
+    Params:
+      chunk =       a #GtkSourceSnippetChunk
+  */
   void addChunk(gtksource.snippet_chunk.SnippetChunk chunk)
   {
     gtk_source_snippet_add_chunk(cast(GtkSourceSnippet*)cPtr, chunk ? cast(GtkSourceSnippetChunk*)chunk.cPtr(No.Dup) : null);
   }
 
   /**
-   * Does a deep copy of the snippet.
-   * Returns: A new #GtkSourceSnippet
-   */
+      Does a deep copy of the snippet.
+    Returns:     A new #GtkSourceSnippet
+  */
   gtksource.snippet.Snippet copy()
   {
     GtkSourceSnippet* _cretval;
@@ -99,9 +103,9 @@ class Snippet : gobject.object.ObjectG
   }
 
   /**
-   * Gets the context used for expanding the snippet.
-   * Returns: an #GtkSourceSnippetContext
-   */
+      Gets the context used for expanding the snippet.
+    Returns:     an #GtkSourceSnippetContext
+  */
   gtksource.snippet_context.SnippetContext getContext()
   {
     GtkSourceSnippetContext* _cretval;
@@ -111,9 +115,9 @@ class Snippet : gobject.object.ObjectG
   }
 
   /**
-   * Gets the description for the snippet.
-   * Returns:
-   */
+      Gets the description for the snippet.
+    Returns: 
+  */
   string getDescription()
   {
     const(char)* _cretval;
@@ -123,10 +127,11 @@ class Snippet : gobject.object.ObjectG
   }
 
   /**
-   * Gets the current focus for the snippet.
-   * This is changed as the user tabs through focus locations.
-   * Returns: The focus position, or -1 if unset.
-   */
+      Gets the current focus for the snippet.
+    
+    This is changed as the user tabs through focus locations.
+    Returns:     The focus position, or -1 if unset.
+  */
   int getFocusPosition()
   {
     int _retval;
@@ -135,11 +140,12 @@ class Snippet : gobject.object.ObjectG
   }
 
   /**
-   * Gets the language-id used for the source snippet.
-   * The language identifier should be one that matches a
-   * source language propertyLanguage:id property.
-   * Returns: the language identifier
-   */
+      Gets the language-id used for the source snippet.
+    
+    The language identifier should be one that matches a
+    source language `propertyLanguage:id` property.
+    Returns:     the language identifier
+  */
   string getLanguageId()
   {
     const(char)* _cretval;
@@ -149,10 +155,11 @@ class Snippet : gobject.object.ObjectG
   }
 
   /**
-   * Gets the number of chunks in the snippet.
-   * Note that not all chunks are editable.
-   * Returns: The number of chunks.
-   */
+      Gets the number of chunks in the snippet.
+    
+    Note that not all chunks are editable.
+    Returns:     The number of chunks.
+  */
   uint getNChunks()
   {
     uint _retval;
@@ -161,9 +168,9 @@ class Snippet : gobject.object.ObjectG
   }
 
   /**
-   * Gets the name for the snippet.
-   * Returns:
-   */
+      Gets the name for the snippet.
+    Returns: 
+  */
   string getName()
   {
     const(char)* _cretval;
@@ -173,11 +180,11 @@ class Snippet : gobject.object.ObjectG
   }
 
   /**
-   * Gets the chunk at nth.
-   * Params:
-   *   nth = the nth chunk to get
-   * Returns: an #GtkSourceSnippetChunk
-   */
+      Gets the chunk at nth.
+    Params:
+      nth =       the nth chunk to get
+    Returns:     an #GtkSourceSnippetChunk
+  */
   gtksource.snippet_chunk.SnippetChunk getNthChunk(uint nth)
   {
     GtkSourceSnippetChunk* _cretval;
@@ -187,11 +194,12 @@ class Snippet : gobject.object.ObjectG
   }
 
   /**
-   * Gets the trigger for the source snippet.
-   * A trigger is a word that can be expanded into the full snippet when
-   * the user presses Tab.
-   * Returns: A string or %NULL
-   */
+      Gets the trigger for the source snippet.
+    
+    A trigger is a word that can be expanded into the full snippet when
+    the user presses Tab.
+    Returns:     A string or null
+  */
   string getTrigger()
   {
     const(char)* _cretval;
@@ -201,10 +209,10 @@ class Snippet : gobject.object.ObjectG
   }
 
   /**
-   * Sets the description for the snippet.
-   * Params:
-   *   description = the snippet description
-   */
+      Sets the description for the snippet.
+    Params:
+      description =       the snippet description
+  */
   void setDescription(string description)
   {
     const(char)* _description = description.toCString(No.Alloc);
@@ -212,11 +220,12 @@ class Snippet : gobject.object.ObjectG
   }
 
   /**
-   * Sets the language identifier for the snippet.
-   * This should match the propertyLanguage:id identifier.
-   * Params:
-   *   languageId = the language identifier for the snippet
-   */
+      Sets the language identifier for the snippet.
+    
+    This should match the `propertyLanguage:id` identifier.
+    Params:
+      languageId =       the language identifier for the snippet
+  */
   void setLanguageId(string languageId)
   {
     const(char)* _languageId = languageId.toCString(No.Alloc);
@@ -224,10 +233,10 @@ class Snippet : gobject.object.ObjectG
   }
 
   /**
-   * Sets the name for the snippet.
-   * Params:
-   *   name = the snippet name
-   */
+      Sets the name for the snippet.
+    Params:
+      name =       the snippet name
+  */
   void setName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
@@ -235,10 +244,10 @@ class Snippet : gobject.object.ObjectG
   }
 
   /**
-   * Sets the trigger for the snippet.
-   * Params:
-   *   trigger = the trigger word
-   */
+      Sets the trigger for the snippet.
+    Params:
+      trigger =       the trigger word
+  */
   void setTrigger(string trigger)
   {
     const(char)* _trigger = trigger.toCString(No.Alloc);

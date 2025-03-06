@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
 {
 
@@ -26,6 +27,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowStringArrayBuilder* _cretval;
@@ -35,6 +37,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
 
   alias append = arrow.binary_array_builder.BinaryArrayBuilder.append;
 
+  /** */
   bool append(string value)
   {
     bool _retval;
@@ -46,6 +49,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
     return _retval;
   }
 
+  /** */
   bool appendString(string value)
   {
     bool _retval;
@@ -57,6 +61,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
     return _retval;
   }
 
+  /** */
   bool appendStringLen(string value, int length)
   {
     bool _retval;
@@ -69,16 +74,16 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
   }
 
   /**
-   * Append multiple values at once. It's more efficient than multiple
-   * `append` and `append_null` calls.
-   * Params:
-   *   values = The array of strings.
-   *   isValids = The array of
-   *     boolean that shows whether the Nth value is valid or not. If the
-   *     Nth is_valids is %TRUE, the Nth values is valid value. Otherwise
-   *     the Nth value is null value.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append multiple values at once. It's more efficient than multiple
+    `append` and `append_null` calls.
+    Params:
+      values =       The array of strings.
+      isValids =       The array of
+          boolean that shows whether the Nth value is valid or not. If the
+          Nth is_valids is true, the Nth values is valid value. Otherwise
+          the Nth value is null value.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendStrings(string[] values, bool[] isValids = null)
   {
     bool _retval;

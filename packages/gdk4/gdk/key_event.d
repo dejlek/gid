@@ -7,8 +7,8 @@ import gdk.types;
 import gid.gid;
 
 /**
- * An event related to a key-based device.
- */
+    An event related to a key-based device.
+*/
 class KeyEvent : gdk.event.Event
 {
 
@@ -21,9 +21,9 @@ class KeyEvent : gdk.event.Event
   }
 
   /**
-   * Extracts the consumed modifiers from a key event.
-   * Returns: the consumed modifiers or event
-   */
+      Extracts the consumed modifiers from a key event.
+    Returns:     the consumed modifiers or event
+  */
   gdk.types.ModifierType getConsumedModifiers()
   {
     GdkModifierType _cretval;
@@ -33,9 +33,9 @@ class KeyEvent : gdk.event.Event
   }
 
   /**
-   * Extracts the keycode from a key event.
-   * Returns: the keycode of event
-   */
+      Extracts the keycode from a key event.
+    Returns:     the keycode of event
+  */
   uint getKeycode()
   {
     uint _retval;
@@ -44,9 +44,9 @@ class KeyEvent : gdk.event.Event
   }
 
   /**
-   * Extracts the keyval from a key event.
-   * Returns: the keyval of event
-   */
+      Extracts the keyval from a key event.
+    Returns:     the keyval of event
+  */
   uint getKeyval()
   {
     uint _retval;
@@ -55,9 +55,9 @@ class KeyEvent : gdk.event.Event
   }
 
   /**
-   * Extracts the layout from a key event.
-   * Returns: the layout of event
-   */
+      Extracts the layout from a key event.
+    Returns:     the layout of event
+  */
   uint getLayout()
   {
     uint _retval;
@@ -66,9 +66,9 @@ class KeyEvent : gdk.event.Event
   }
 
   /**
-   * Extracts the shift level from a key event.
-   * Returns: the shift level of event
-   */
+      Extracts the shift level from a key event.
+    Returns:     the shift level of event
+  */
   uint getLevel()
   {
     uint _retval;
@@ -77,14 +77,15 @@ class KeyEvent : gdk.event.Event
   }
 
   /**
-   * Gets a keyval and modifier combination that will match
-   * the event.
-   * See [gdk.key_event.KeyEvent.matches].
-   * Params:
-   *   keyval = return location for a keyval
-   *   modifiers = return location for modifiers
-   * Returns: %TRUE on success
-   */
+      Gets a keyval and modifier combination that will match
+    the event.
+    
+    See [gdk.key_event.KeyEvent.matches].
+    Params:
+      keyval =       return location for a keyval
+      modifiers =       return location for modifiers
+    Returns:     true on success
+  */
   bool getMatch(out uint keyval, out gdk.types.ModifierType modifiers)
   {
     bool _retval;
@@ -93,9 +94,9 @@ class KeyEvent : gdk.event.Event
   }
 
   /**
-   * Extracts whether the key event is for a modifier key.
-   * Returns: %TRUE if the event is for a modifier key
-   */
+      Extracts whether the key event is for a modifier key.
+    Returns:     true if the event is for a modifier key
+  */
   bool isModifier()
   {
     bool _retval;
@@ -104,16 +105,19 @@ class KeyEvent : gdk.event.Event
   }
 
   /**
-   * Matches a key event against a keyval and modifiers.
-   * This is typically used to trigger keyboard shortcuts such as Ctrl-C.
-   * Partial matches are possible where the combination matches
-   * if the currently active group is ignored.
-   * Note that we ignore Caps Lock for matching.
-   * Params:
-   *   keyval = the keyval to match
-   *   modifiers = the modifiers to match
-   * Returns: a `GdkKeyMatch` value describing whether event matches
-   */
+      Matches a key event against a keyval and modifiers.
+    
+    This is typically used to trigger keyboard shortcuts such as Ctrl-C.
+    
+    Partial matches are possible where the combination matches
+    if the currently active group is ignored.
+    
+    Note that we ignore Caps Lock for matching.
+    Params:
+      keyval =       the keyval to match
+      modifiers =       the modifiers to match
+    Returns:     a [gdk.types.KeyMatch] value describing whether event matches
+  */
   gdk.types.KeyMatch matches(uint keyval, gdk.types.ModifierType modifiers)
   {
     GdkKeyMatch _cretval;

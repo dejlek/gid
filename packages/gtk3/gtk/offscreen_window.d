@@ -14,21 +14,24 @@ import gtk.types;
 import gtk.window;
 
 /**
- * GtkOffscreenWindow is strictly intended to be used for obtaining
- * snapshots of widgets that are not part of a normal widget hierarchy.
- * Since #GtkOffscreenWindow is a toplevel widget you cannot obtain
- * snapshots of a full window with it since you cannot pack a toplevel
- * widget in another toplevel.
- * The idea is to take a widget and manually set the state of it,
- * add it to a GtkOffscreenWindow and then retrieve the snapshot
- * as a #cairo_surface_t or #GdkPixbuf.
- * GtkOffscreenWindow derives from #GtkWindow only as an implementation
- * detail.  Applications should not use any API specific to #GtkWindow
- * to operate on this object.  It should be treated as a #GtkBin that
- * has no parent widget.
- * When contained offscreen widgets are redrawn, GtkOffscreenWindow
- * will emit a #GtkWidget::damage-event signal.
- */
+    GtkOffscreenWindow is strictly intended to be used for obtaining
+  snapshots of widgets that are not part of a normal widget hierarchy.
+  Since #GtkOffscreenWindow is a toplevel widget you cannot obtain
+  snapshots of a full window with it since you cannot pack a toplevel
+  widget in another toplevel.
+  
+  The idea is to take a widget and manually set the state of it,
+  add it to a GtkOffscreenWindow and then retrieve the snapshot
+  as a #cairo_surface_t or #GdkPixbuf.
+  
+  GtkOffscreenWindow derives from #GtkWindow only as an implementation
+  detail.  Applications should not use any API specific to #GtkWindow
+  to operate on this object.  It should be treated as a #GtkBin that
+  has no parent widget.
+  
+  When contained offscreen widgets are redrawn, GtkOffscreenWindow
+  will emit a #GtkWidget::damage-event signal.
+*/
 class OffscreenWindow : gtk.window.Window
 {
 
@@ -49,10 +52,10 @@ class OffscreenWindow : gtk.window.Window
   }
 
   /**
-   * Creates a toplevel container widget that is used to retrieve
-   * snapshots of widgets without showing them on the screen.
-   * Returns: A pointer to a #GtkWidget
-   */
+      Creates a toplevel container widget that is used to retrieve
+    snapshots of widgets without showing them on the screen.
+    Returns:     A pointer to a #GtkWidget
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -61,12 +64,12 @@ class OffscreenWindow : gtk.window.Window
   }
 
   /**
-   * Retrieves a snapshot of the contained widget in the form of
-   * a #GdkPixbuf.  This is a new pixbuf with a reference count of 1,
-   * and the application should unreference it once it is no longer
-   * needed.
-   * Returns: A #GdkPixbuf pointer, or %NULL.
-   */
+      Retrieves a snapshot of the contained widget in the form of
+    a #GdkPixbuf.  This is a new pixbuf with a reference count of 1,
+    and the application should unreference it once it is no longer
+    needed.
+    Returns:     A #GdkPixbuf pointer, or null.
+  */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
@@ -76,12 +79,12 @@ class OffscreenWindow : gtk.window.Window
   }
 
   /**
-   * Retrieves a snapshot of the contained widget in the form of
-   * a #cairo_surface_t.  If you need to keep this around over window
-   * resizes then you should add a reference to it.
-   * Returns: A #cairo_surface_t pointer to the offscreen
-   *   surface, or %NULL.
-   */
+      Retrieves a snapshot of the contained widget in the form of
+    a #cairo_surface_t.  If you need to keep this around over window
+    resizes then you should add a reference to it.
+    Returns:     A #cairo_surface_t pointer to the offscreen
+          surface, or null.
+  */
   cairo.surface.Surface getSurface()
   {
     cairo_surface_t* _cretval;

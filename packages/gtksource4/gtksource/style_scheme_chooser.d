@@ -8,6 +8,7 @@ import gtksource.c.types;
 import gtksource.style_scheme;
 import gtksource.types;
 
+/** */
 interface StyleSchemeChooser
 {
 
@@ -18,15 +19,15 @@ interface StyleSchemeChooser
   }
 
   /**
-   * Gets the currently-selected scheme.
-   * Returns: the currently-selected scheme.
-   */
+      Gets the currently-selected scheme.
+    Returns:     the currently-selected scheme.
+  */
   gtksource.style_scheme.StyleScheme getStyleScheme();
 
   /**
-   * Sets the scheme.
-   * Params:
-   *   scheme = a #GtkSourceStyleScheme
-   */
+      Sets the scheme.
+    Params:
+      scheme =       a #GtkSourceStyleScheme
+  */
   void setStyleScheme(gtksource.style_scheme.StyleScheme scheme);
 }

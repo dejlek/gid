@@ -9,45 +9,52 @@ import glib.variant;
 import gobject.object;
 
 /**
- * `GNotification` is a mechanism for creating a notification to be shown
- * to the user — typically as a pop-up notification presented by the
- * desktop environment shell.
- * The key difference between `GNotification` and other similar APIs is
- * that, if supported by the desktop environment, notifications sent
- * with `GNotification` will persist after the application has exited,
- * and even across system reboots.
- * Since the user may click on a notification while the application is
- * not running, applications using `GNotification` should be able to be
- * started as a D-Bus service, using [gio.application.Application].
- * In order for `GNotification` to work, the application must have installed
- * a `.desktop` file. For example:
- * ```
- * [Desktop Entry]
- * Name\=Test Application
- * Comment\=Description of what Test Application does
- * Exec\=gnome-test-application
- * Icon\=org.gnome.TestApplication
- * Terminal\=false
- * Type\=Application
- * Categories\=GNOME;GTK;TestApplication Category;
- * StartupNotify\=true
- * DBusActivatable\=true
- * X-GNOME-UsesNotifications\=true
- * ```
- * The `X-GNOME-UsesNotifications` key indicates to GNOME Control Center
- * that this application uses notifications, so it can be listed in the
- * Control Center’s ‘Notifications’ panel.
- * The `.desktop` file must be named as `org.gnome.TestApplication.desktop`,
- * where `org.gnome.TestApplication` is the ID passed to
- * [gio.application.Application.new_].
- * User interaction with a notification $(LPAREN)either the default action, or
- * buttons$(RPAREN) must be associated with actions on the application $(LPAREN)ie:
- * `app.` actions$(RPAREN).  It is not possible to route user interaction
- * through the notification itself, because the object will not exist if
- * the application is autostarted as a result of a notification being
- * clicked.
- * A notification can be sent with [gio.application.Application.sendNotification].
- */
+    [gio.notification.Notification] is a mechanism for creating a notification to be shown
+  to the user — typically as a pop-up notification presented by the
+  desktop environment shell.
+  
+  The key difference between [gio.notification.Notification] and other similar APIs is
+  that, if supported by the desktop environment, notifications sent
+  with [gio.notification.Notification] will persist after the application has exited,
+  and even across system reboots.
+  
+  Since the user may click on a notification while the application is
+  not running, applications using [gio.notification.Notification] should be able to be
+  started as a D-Bus service, using [gio.application.Application].
+  
+  In order for [gio.notification.Notification] to work, the application must have installed
+  a `.desktop` file. For example:
+  ```
+  [Desktop Entry]
+  Name=Test Application
+  Comment=Description of what Test Application does
+  Exec=gnome-test-application
+  Icon=org.gnome.TestApplication
+  Terminal=false
+  Type=Application
+  Categories=GNOME;GTK;TestApplication Category;
+  StartupNotify=true
+  DBusActivatable=true
+  X-GNOME-UsesNotifications=true
+  ```
+  
+  The `X-GNOME-UsesNotifications` key indicates to GNOME Control Center
+  that this application uses notifications, so it can be listed in the
+  Control Center’s ‘Notifications’ panel.
+  
+  The `.desktop` file must be named as `org.gnome.TestApplication.desktop`,
+  where `org.gnome.TestApplication` is the ID passed to
+  [gio.application.Application.new_].
+  
+  User interaction with a notification (either the default action, or
+  buttons) must be associated with actions on the application (ie:
+  `app.` actions).  It is not possible to route user interaction
+  through the notification itself, because the object will not exist if
+  the application is autostarted as a result of a notification being
+  clicked.
+  
+  A notification can be sent with [gio.application.Application.sendNotification].
+*/
 class Notification : gobject.object.ObjectG
 {
 
@@ -68,15 +75,16 @@ class Notification : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #GNotification with title as its title.
-   * After populating notification with more details, it can be sent to
-   * the desktop shell with [gio.application.Application.sendNotification]. Changing
-   * any properties after this call will not have any effect until
-   * resending notification.
-   * Params:
-   *   title = the title of the notification
-   * Returns: a new #GNotification instance
-   */
+      Creates a new #GNotification with title as its title.
+    
+    After populating notification with more details, it can be sent to
+    the desktop shell with [gio.application.Application.sendNotification]. Changing
+    any properties after this call will not have any effect until
+    resending notification.
+    Params:
+      title =       the title of the notification
+    Returns:     a new #GNotification instance
+  */
   this(string title)
   {
     GNotification* _cretval;
@@ -86,17 +94,18 @@ class Notification : gobject.object.ObjectG
   }
 
   /**
-   * Adds a button to notification that activates the action in
-   * detailed_action when clicked. That action must be an
-   * application-wide action $(LPAREN)starting with "app."$(RPAREN). If detailed_action
-   * contains a target, the action will be activated with that target as
-   * its parameter.
-   * See [gio.action.Action.parseDetailedName] for a description of the format
-   * for detailed_action.
-   * Params:
-   *   label = label of the button
-   *   detailedAction = a detailed action name
-   */
+      Adds a button to notification that activates the action in
+    detailed_action when clicked. That action must be an
+    application-wide action (starting with "app."). If detailed_action
+    contains a target, the action will be activated with that target as
+    its parameter.
+    
+    See [gio.action.Action.parseDetailedName] for a description of the format
+    for detailed_action.
+    Params:
+      label =       label of the button
+      detailedAction =       a detailed action name
+  */
   void addButton(string label, string detailedAction)
   {
     const(char)* _label = label.toCString(No.Alloc);
@@ -105,15 +114,16 @@ class Notification : gobject.object.ObjectG
   }
 
   /**
-   * Adds a button to notification that activates action when clicked.
-   * action must be an application-wide action $(LPAREN)it must start with "app."$(RPAREN).
-   * If target is non-%NULL, action will be activated with target as
-   * its parameter.
-   * Params:
-   *   label = label of the button
-   *   action = an action name
-   *   target = a #GVariant to use as action's parameter, or %NULL
-   */
+      Adds a button to notification that activates action when clicked.
+    action must be an application-wide action (it must start with "app.").
+    
+    If target is non-null, action will be activated with target as
+    its parameter.
+    Params:
+      label =       label of the button
+      action =       an action name
+      target =       a #GVariant to use as action's parameter, or null
+  */
   void addButtonWithTarget(string label, string action, glib.variant.VariantG target = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
@@ -122,10 +132,10 @@ class Notification : gobject.object.ObjectG
   }
 
   /**
-   * Sets the body of notification to body.
-   * Params:
-   *   body_ = the new body for notification, or %NULL
-   */
+      Sets the body of notification to body.
+    Params:
+      body_ =       the new body for notification, or null
+  */
   void setBody(string body_ = null)
   {
     const(char)* _body_ = body_.toCString(No.Alloc);
@@ -133,14 +143,15 @@ class Notification : gobject.object.ObjectG
   }
 
   /**
-   * Sets the type of notification to category. Categories have a main
-   * type like `email`, `im` or `device` and can have a detail separated
-   * by a `.`, e.g. `im.received` or `email.arrived`. Setting the category
-   * helps the notification server to select proper feedback to the user.
-   * Standard categories are [listed in the specification](https://specifications.freedesktop.org/notification-spec/latest/ar01s06.html).
-   * Params:
-   *   category = the category for notification, or %NULL for no category
-   */
+      Sets the type of notification to category. Categories have a main
+    type like `email`, `im` or `device` and can have a detail separated
+    by a `.`, e.g. `im.received` or `email.arrived`. Setting the category
+    helps the notification server to select proper feedback to the user.
+    
+    Standard categories are [listed in the specification](https://specifications.freedesktop.org/notification-spec/latest/ar01s06.html).
+    Params:
+      category =       the category for notification, or null for no category
+  */
   void setCategory(string category = null)
   {
     const(char)* _category = category.toCString(No.Alloc);
@@ -148,18 +159,20 @@ class Notification : gobject.object.ObjectG
   }
 
   /**
-   * Sets the default action of notification to detailed_action. This
-   * action is activated when the notification is clicked on.
-   * The action in detailed_action must be an application-wide action $(LPAREN)it
-   * must start with "app."$(RPAREN). If detailed_action contains a target, the
-   * given action will be activated with that target as its parameter.
-   * See [gio.action.Action.parseDetailedName] for a description of the format
-   * for detailed_action.
-   * When no default action is set, the application that the notification
-   * was sent on is activated.
-   * Params:
-   *   detailedAction = a detailed action name
-   */
+      Sets the default action of notification to detailed_action. This
+    action is activated when the notification is clicked on.
+    
+    The action in detailed_action must be an application-wide action (it
+    must start with "app."). If detailed_action contains a target, the
+    given action will be activated with that target as its parameter.
+    See [gio.action.Action.parseDetailedName] for a description of the format
+    for detailed_action.
+    
+    When no default action is set, the application that the notification
+    was sent on is activated.
+    Params:
+      detailedAction =       a detailed action name
+  */
   void setDefaultAction(string detailedAction)
   {
     const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
@@ -167,17 +180,19 @@ class Notification : gobject.object.ObjectG
   }
 
   /**
-   * Sets the default action of notification to action. This action is
-   * activated when the notification is clicked on. It must be an
-   * application-wide action $(LPAREN)start with "app."$(RPAREN).
-   * If target is non-%NULL, action will be activated with target as
-   * its parameter. If target is floating, it will be consumed.
-   * When no default action is set, the application that the notification
-   * was sent on is activated.
-   * Params:
-   *   action = an action name
-   *   target = a #GVariant to use as action's parameter, or %NULL
-   */
+      Sets the default action of notification to action. This action is
+    activated when the notification is clicked on. It must be an
+    application-wide action (start with "app.").
+    
+    If target is non-null, action will be activated with target as
+    its parameter. If target is floating, it will be consumed.
+    
+    When no default action is set, the application that the notification
+    was sent on is activated.
+    Params:
+      action =       an action name
+      target =       a #GVariant to use as action's parameter, or null
+  */
   void setDefaultActionAndTarget(string action, glib.variant.VariantG target = null)
   {
     const(char)* _action = action.toCString(No.Alloc);
@@ -185,31 +200,31 @@ class Notification : gobject.object.ObjectG
   }
 
   /**
-   * Sets the icon of notification to icon.
-   * Params:
-   *   icon = the icon to be shown in notification, as a #GIcon
-   */
+      Sets the icon of notification to icon.
+    Params:
+      icon =       the icon to be shown in notification, as a #GIcon
+  */
   void setIcon(gio.icon.Icon icon)
   {
     g_notification_set_icon(cast(GNotification*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the priority of notification to priority. See
-   * #GNotificationPriority for possible values.
-   * Params:
-   *   priority = a #GNotificationPriority
-   */
+      Sets the priority of notification to priority. See
+    #GNotificationPriority for possible values.
+    Params:
+      priority =       a #GNotificationPriority
+  */
   void setPriority(gio.types.NotificationPriority priority)
   {
     g_notification_set_priority(cast(GNotification*)cPtr, priority);
   }
 
   /**
-   * Sets the title of notification to title.
-   * Params:
-   *   title = the new title for notification
-   */
+      Sets the title of notification to title.
+    Params:
+      title =       the new title for notification
+  */
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
@@ -217,13 +232,13 @@ class Notification : gobject.object.ObjectG
   }
 
   /**
-   * Deprecated in favor of [gio.notification.Notification.setPriority].
-   * Params:
-   *   urgent = %TRUE if notification is urgent
-
-   * Deprecated: Since 2.42, this has been deprecated in favour of
-   *   [gio.notification.Notification.setPriority].
-   */
+      Deprecated in favor of [gio.notification.Notification.setPriority].
+    Params:
+      urgent =       true if notification is urgent
+  
+    Deprecated:     Since 2.42, this has been deprecated in favour of
+         [gio.notification.Notification.setPriority].
+  */
   void setUrgent(bool urgent)
   {
     g_notification_set_urgent(cast(GNotification*)cPtr, urgent);

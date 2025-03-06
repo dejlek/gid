@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
@@ -27,6 +28,7 @@ class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowMonthDayNanoIntervalArrayBuilder* _cretval;
@@ -34,6 +36,7 @@ class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool appendValue(arrow.month_day_nano.MonthDayNano value)
   {
     bool _retval;
@@ -45,16 +48,16 @@ class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-   * Append multiple values at once. It's more efficient than multiple
-   * `append` calls.
-   * Params:
-   *   values = The array of a #GArrowMonthDayNano.
-   *   isValids = The array of
-   *     boolean that shows whether the Nth value is valid or not. If the
-   *     Nth `is_valids` is %TRUE, the Nth `values` is valid value. Otherwise
-   *     the Nth value is null value.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append multiple values at once. It's more efficient than multiple
+    `append` calls.
+    Params:
+      values =       The array of a #GArrowMonthDayNano.
+      isValids =       The array of
+          boolean that shows whether the Nth value is valid or not. If the
+          Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
+          the Nth value is null value.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendValues(arrow.month_day_nano.MonthDayNano[] values, bool[] isValids = null)
   {
     bool _retval;

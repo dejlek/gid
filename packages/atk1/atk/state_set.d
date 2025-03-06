@@ -7,11 +7,12 @@ import gid.gid;
 import gobject.object;
 
 /**
- * An AtkStateSet contains the states of an object.
- * An AtkStateSet is a read-only representation of the full set of #AtkStates
- * that apply to an object at a given time. This set is not meant to be
- * modified, but rather created when #[atk.object.ObjectAtk.refStateSet] is called.
- */
+    An AtkStateSet contains the states of an object.
+  
+  An AtkStateSet is a read-only representation of the full set of #AtkStates
+  that apply to an object at a given time. This set is not meant to be
+  modified, but rather created when #[atk.object.ObjectAtk.refStateSet] is called.
+*/
 class StateSet : gobject.object.ObjectG
 {
 
@@ -32,9 +33,9 @@ class StateSet : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new empty state set.
-   * Returns: a new #AtkStateSet
-   */
+      Creates a new empty state set.
+    Returns:     a new #AtkStateSet
+  */
   this()
   {
     AtkStateSet* _cretval;
@@ -43,16 +44,17 @@ class StateSet : gobject.object.ObjectG
   }
 
   /**
-   * Adds the state of the specified type to the state set if it is not already
-   * present.
-   * Note that because an #AtkStateSet is a read-only object, this method should
-   * be used to add a state to a newly-created set which will then be returned by
-   * #atk_object_ref_state_set. It should not be used to modify the existing state
-   * of an object. See also #atk_object_notify_state_change.
-   * Params:
-   *   type = an #AtkStateType
-   * Returns: %TRUE if  the state for type is not already in set.
-   */
+      Adds the state of the specified type to the state set if it is not already
+    present.
+    
+    Note that because an #AtkStateSet is a read-only object, this method should
+    be used to add a state to a newly-created set which will then be returned by
+    #atk_object_ref_state_set. It should not be used to modify the existing state
+    of an object. See also #atk_object_notify_state_change.
+    Params:
+      type =       an #AtkStateType
+    Returns:     true if  the state for type is not already in set.
+  */
   bool addState(atk.types.StateType type)
   {
     bool _retval;
@@ -61,14 +63,15 @@ class StateSet : gobject.object.ObjectG
   }
 
   /**
-   * Adds the states of the specified types to the state set.
-   * Note that because an #AtkStateSet is a read-only object, this method should
-   * be used to add states to a newly-created set which will then be returned by
-   * #atk_object_ref_state_set. It should not be used to modify the existing state
-   * of an object. See also #atk_object_notify_state_change.
-   * Params:
-   *   types = an array of #AtkStateType
-   */
+      Adds the states of the specified types to the state set.
+    
+    Note that because an #AtkStateSet is a read-only object, this method should
+    be used to add states to a newly-created set which will then be returned by
+    #atk_object_ref_state_set. It should not be used to modify the existing state
+    of an object. See also #atk_object_notify_state_change.
+    Params:
+      types =       an array of #AtkStateType
+  */
   void addStates(atk.types.StateType[] types)
   {
     int _nTypes;
@@ -80,13 +83,13 @@ class StateSet : gobject.object.ObjectG
   }
 
   /**
-   * Constructs the intersection of the two sets, returning %NULL if the
-   * intersection is empty.
-   * Params:
-   *   compareSet = another #AtkStateSet
-   * Returns: a new #AtkStateSet which is the intersection of
-   *   the two sets.
-   */
+      Constructs the intersection of the two sets, returning null if the
+    intersection is empty.
+    Params:
+      compareSet =       another #AtkStateSet
+    Returns:     a new #AtkStateSet which is the intersection of
+      the two sets.
+  */
   atk.state_set.StateSet andSets(atk.state_set.StateSet compareSet)
   {
     AtkStateSet* _cretval;
@@ -96,19 +99,19 @@ class StateSet : gobject.object.ObjectG
   }
 
   /**
-   * Removes all states from the state set.
-   */
+      Removes all states from the state set.
+  */
   void clearStates()
   {
     atk_state_set_clear_states(cast(AtkStateSet*)cPtr);
   }
 
   /**
-   * Checks whether the state for the specified type is in the specified set.
-   * Params:
-   *   type = an #AtkStateType
-   * Returns: %TRUE if type is the state type is in set.
-   */
+      Checks whether the state for the specified type is in the specified set.
+    Params:
+      type =       an #AtkStateType
+    Returns:     true if type is the state type is in set.
+  */
   bool containsState(atk.types.StateType type)
   {
     bool _retval;
@@ -117,12 +120,12 @@ class StateSet : gobject.object.ObjectG
   }
 
   /**
-   * Checks whether the states for all the specified types are in the
-   * specified set.
-   * Params:
-   *   types = an array of #AtkStateType
-   * Returns: %TRUE if all the states for type are in set.
-   */
+      Checks whether the states for all the specified types are in the
+    specified set.
+    Params:
+      types =       an array of #AtkStateType
+    Returns:     true if all the states for type are in set.
+  */
   bool containsStates(atk.types.StateType[] types)
   {
     bool _retval;
@@ -136,9 +139,9 @@ class StateSet : gobject.object.ObjectG
   }
 
   /**
-   * Checks whether the state set is empty, i.e. has no states set.
-   * Returns: %TRUE if set has no states set, otherwise %FALSE
-   */
+      Checks whether the state set is empty, i.e. has no states set.
+    Returns:     true if set has no states set, otherwise false
+  */
   bool isEmpty()
   {
     bool _retval;
@@ -147,12 +150,12 @@ class StateSet : gobject.object.ObjectG
   }
 
   /**
-   * Constructs the union of the two sets.
-   * Params:
-   *   compareSet = another #AtkStateSet
-   * Returns: a new #AtkStateSet which is
-   *   the union of the two sets, returning %NULL is empty.
-   */
+      Constructs the union of the two sets.
+    Params:
+      compareSet =       another #AtkStateSet
+    Returns:     a new #AtkStateSet which is
+      the union of the two sets, returning null is empty.
+  */
   atk.state_set.StateSet orSets(atk.state_set.StateSet compareSet)
   {
     AtkStateSet* _cretval;
@@ -162,15 +165,16 @@ class StateSet : gobject.object.ObjectG
   }
 
   /**
-   * Removes the state for the specified type from the state set.
-   * Note that because an #AtkStateSet is a read-only object, this method should
-   * be used to remove a state to a newly-created set which will then be returned
-   * by #atk_object_ref_state_set. It should not be used to modify the existing
-   * state of an object. See also #atk_object_notify_state_change.
-   * Params:
-   *   type = an #AtkType
-   * Returns: %TRUE if type was the state type is in set.
-   */
+      Removes the state for the specified type from the state set.
+    
+    Note that because an #AtkStateSet is a read-only object, this method should
+    be used to remove a state to a newly-created set which will then be returned
+    by #atk_object_ref_state_set. It should not be used to modify the existing
+    state of an object. See also #atk_object_notify_state_change.
+    Params:
+      type =       an #AtkType
+    Returns:     true if type was the state type is in set.
+  */
   bool removeState(atk.types.StateType type)
   {
     bool _retval;
@@ -179,14 +183,14 @@ class StateSet : gobject.object.ObjectG
   }
 
   /**
-   * Constructs the exclusive-or of the two sets, returning %NULL is empty.
-   * The set returned by this operation contains the states in exactly
-   * one of the two sets.
-   * Params:
-   *   compareSet = another #AtkStateSet
-   * Returns: a new #AtkStateSet which contains the states
-   *   which are in exactly one of the two sets.
-   */
+      Constructs the exclusive-or of the two sets, returning null is empty.
+    The set returned by this operation contains the states in exactly
+    one of the two sets.
+    Params:
+      compareSet =       another #AtkStateSet
+    Returns:     a new #AtkStateSet which contains the states
+      which are in exactly one of the two sets.
+  */
   atk.state_set.StateSet xorSets(atk.state_set.StateSet compareSet)
   {
     AtkStateSet* _cretval;

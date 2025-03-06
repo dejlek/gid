@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class ExecuteNode : gobject.object.ObjectG
 {
 
@@ -26,6 +27,7 @@ class ExecuteNode : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   string getKindName()
   {
     const(char)* _cretval;
@@ -34,6 +36,7 @@ class ExecuteNode : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.schema.Schema getOutputSchema()
   {
     GArrowSchema* _cretval;

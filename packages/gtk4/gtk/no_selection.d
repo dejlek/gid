@@ -13,12 +13,14 @@ import gtk.selection_model_mixin;
 import gtk.types;
 
 /**
- * `GtkNoSelection` is a `GtkSelectionModel` that does not allow selecting
- * anything.
- * This model is meant to be used as a simple wrapper around a `GListModel`
- * when a `GtkSelectionModel` is required.
- * `GtkNoSelection` passes through sections from the underlying model.
- */
+    [gtk.no_selection.NoSelection] is a [gtk.selection_model.SelectionModel] that does not allow selecting
+  anything.
+  
+  This model is meant to be used as a simple wrapper around a [gio.list_model.ListModel]
+  when a [gtk.selection_model.SelectionModel] is required.
+  
+  [gtk.no_selection.NoSelection] passes through sections from the underlying model.
+*/
 class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel, gtk.selection_model.SelectionModel
 {
 
@@ -43,11 +45,11 @@ class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sectio
   mixin SelectionModelT!();
 
   /**
-   * Creates a new selection to handle model.
-   * Params:
-   *   model = the `GListModel` to manage
-   * Returns: a new `GtkNoSelection`
-   */
+      Creates a new selection to handle model.
+    Params:
+      model =       the [gio.list_model.ListModel] to manage
+    Returns:     a new [gtk.no_selection.NoSelection]
+  */
   this(gio.list_model.ListModel model = null)
   {
     GtkNoSelection* _cretval;
@@ -56,9 +58,9 @@ class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sectio
   }
 
   /**
-   * Gets the model that self is wrapping.
-   * Returns: The model being wrapped
-   */
+      Gets the model that self is wrapping.
+    Returns:     The model being wrapped
+  */
   gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
@@ -68,11 +70,12 @@ class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sectio
   }
 
   /**
-   * Sets the model that self should wrap.
-   * If model is %NULL, this model will be empty.
-   * Params:
-   *   model = A `GListModel` to wrap
-   */
+      Sets the model that self should wrap.
+    
+    If model is null, this model will be empty.
+    Params:
+      model =       A [gio.list_model.ListModel] to wrap
+  */
   void setModel(gio.list_model.ListModel model = null)
   {
     gtk_no_selection_set_model(cast(GtkNoSelection*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);

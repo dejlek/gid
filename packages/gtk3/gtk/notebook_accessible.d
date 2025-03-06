@@ -10,6 +10,7 @@ import gtk.c.types;
 import gtk.container_accessible;
 import gtk.types;
 
+/** */
 class NotebookAccessible : gtk.container_accessible.ContainerAccessible, atk.selection.Selection
 {
 

@@ -7,8 +7,8 @@ import gtk.layout_child;
 import gtk.types;
 
 /**
- * `GtkLayoutChild` subclass for children in a `GtkGridLayout`.
- */
+    [gtk.layout_child.LayoutChild] subclass for children in a [gtk.grid_layout.GridLayout].
+*/
 class GridLayoutChild : gtk.layout_child.LayoutChild
 {
 
@@ -29,9 +29,9 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
   }
 
   /**
-   * Retrieves the column number to which child attaches its left side.
-   * Returns: the column number
-   */
+      Retrieves the column number to which child attaches its left side.
+    Returns:     the column number
+  */
   int getColumn()
   {
     int _retval;
@@ -40,9 +40,9 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
   }
 
   /**
-   * Retrieves the number of columns that child spans to.
-   * Returns: the number of columns
-   */
+      Retrieves the number of columns that child spans to.
+    Returns:     the number of columns
+  */
   int getColumnSpan()
   {
     int _retval;
@@ -51,9 +51,9 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
   }
 
   /**
-   * Retrieves the row number to which child attaches its top side.
-   * Returns: the row number
-   */
+      Retrieves the row number to which child attaches its top side.
+    Returns:     the row number
+  */
   int getRow()
   {
     int _retval;
@@ -62,9 +62,9 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
   }
 
   /**
-   * Retrieves the number of rows that child spans to.
-   * Returns: the number of row
-   */
+      Retrieves the number of rows that child spans to.
+    Returns:     the number of row
+  */
   int getRowSpan()
   {
     int _retval;
@@ -73,40 +73,40 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
   }
 
   /**
-   * Sets the column number to attach the left side of child.
-   * Params:
-   *   column = the attach point for child
-   */
+      Sets the column number to attach the left side of child.
+    Params:
+      column =       the attach point for child
+  */
   void setColumn(int column)
   {
     gtk_grid_layout_child_set_column(cast(GtkGridLayoutChild*)cPtr, column);
   }
 
   /**
-   * Sets the number of columns child spans to.
-   * Params:
-   *   span = the span of child
-   */
+      Sets the number of columns child spans to.
+    Params:
+      span =       the span of child
+  */
   void setColumnSpan(int span)
   {
     gtk_grid_layout_child_set_column_span(cast(GtkGridLayoutChild*)cPtr, span);
   }
 
   /**
-   * Sets the row to place child in.
-   * Params:
-   *   row = the row for child
-   */
+      Sets the row to place child in.
+    Params:
+      row =       the row for child
+  */
   void setRow(int row)
   {
     gtk_grid_layout_child_set_row(cast(GtkGridLayoutChild*)cPtr, row);
   }
 
   /**
-   * Sets the number of rows child spans to.
-   * Params:
-   *   span = the span of child
-   */
+      Sets the number of rows child spans to.
+    Params:
+      span =       the span of child
+  */
   void setRowSpan(int span)
   {
     gtk_grid_layout_child_set_row_span(cast(GtkGridLayoutChild*)cPtr, span);

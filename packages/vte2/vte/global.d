@@ -7,6 +7,7 @@ import vte.c.types;
 import vte.types;
 
 
+/** */
 gobject.types.GType eventContextGetType()
 {
   gobject.types.GType _retval;
@@ -15,14 +16,16 @@ gobject.types.GType eventContextGetType()
 }
 
 /**
- * Queries whether the legacy encoding encoding is supported.
- * If ICU support is not available, this function always returns %FALSE.
- * Note that UTF-8 is always supported; you can select it by
- * passing %NULL to [vte.terminal.Terminal.setEncoding].
- * Params:
- *   encoding = the name of the legacy encoding
- * Returns: %TRUE iff the legacy encoding encoding is supported
- */
+    Queries whether the legacy encoding encoding is supported.
+  
+  If ICU support is not available, this function always returns false.
+  
+  Note that UTF-8 is always supported; you can select it by
+  passing null to [vte.terminal.Terminal.setEncoding].
+  Params:
+    encoding =       the name of the legacy encoding
+  Returns:     true iff the legacy encoding encoding is supported
+*/
 bool getEncodingSupported(string encoding)
 {
   bool _retval;
@@ -32,15 +35,16 @@ bool getEncodingSupported(string encoding)
 }
 
 /**
- * Gets the list of supported legacy encodings.
- * If ICU support is not available, this returns an empty vector.
- * Note that UTF-8 is always supported; you can select it by
- * passing %NULL to [vte.terminal.Terminal.setEncoding].
- * Params:
- *   includeAliases = whether to include alias names
- * Returns: the list of supported encodings; free with
- *   [glib.global.strfreev]
- */
+    Gets the list of supported legacy encodings.
+  
+  If ICU support is not available, this returns an empty vector.
+  Note that UTF-8 is always supported; you can select it by
+  passing null to [vte.terminal.Terminal.setEncoding].
+  Params:
+    includeAliases =       whether to include alias names
+  Returns:     the list of supported encodings; free with
+      [glib.global.strfreev]
+*/
 string[] getEncodings(bool includeAliases)
 {
   char** _cretval;
@@ -60,9 +64,9 @@ string[] getEncodings(bool includeAliases)
 }
 
 /**
- * Gets features VTE was compiled with.
- * Returns: flags from #VteFeatureFlags
- */
+    Gets features VTE was compiled with.
+  Returns:     flags from #VteFeatureFlags
+*/
 vte.types.FeatureFlags getFeatureFlags()
 {
   VteFeatureFlags _cretval;
@@ -72,9 +76,9 @@ vte.types.FeatureFlags getFeatureFlags()
 }
 
 /**
- * Gets a list of features vte was compiled with.
- * Returns: a string with features
- */
+    Gets a list of features vte was compiled with.
+  Returns:     a string with features
+*/
 string getFeatures()
 {
   const(char)* _cretval;
@@ -84,12 +88,12 @@ string getFeatures()
 }
 
 /**
- * Returns the major version of the VTE library at runtime.
- * Contrast this with %VTE_MAJOR_VERSION which represents
- * the version of the VTE library that the code was compiled
- * with.
- * Returns: the major version
- */
+    Returns the major version of the VTE library at runtime.
+  Contrast this with `VTE_MAJOR_VERSION` which represents
+  the version of the VTE library that the code was compiled
+  with.
+  Returns:     the major version
+*/
 uint getMajorVersion()
 {
   uint _retval;
@@ -98,12 +102,12 @@ uint getMajorVersion()
 }
 
 /**
- * Returns the micro version of the VTE library at runtime.
- * Contrast this with %VTE_MICRO_VERSION which represents
- * the version of the VTE library that the code was compiled
- * with.
- * Returns: the micro version
- */
+    Returns the micro version of the VTE library at runtime.
+  Contrast this with `VTE_MICRO_VERSION` which represents
+  the version of the VTE library that the code was compiled
+  with.
+  Returns:     the micro version
+*/
 uint getMicroVersion()
 {
   uint _retval;
@@ -112,12 +116,12 @@ uint getMicroVersion()
 }
 
 /**
- * Returns the minor version of the VTE library at runtime.
- * Contrast this with %VTE_MINOR_VERSION which represents
- * the version of the VTE library that the code was compiled
- * with.
- * Returns: the minor version
- */
+    Returns the minor version of the VTE library at runtime.
+  Contrast this with `VTE_MINOR_VERSION` which represents
+  the version of the VTE library that the code was compiled
+  with.
+  Returns:     the minor version
+*/
 uint getMinorVersion()
 {
   uint _retval;
@@ -126,11 +130,11 @@ uint getMinorVersion()
 }
 
 /**
- * Gets the user's shell, or %NULL. In the latter case, the
- * system default $(LPAREN)usually "/bin/sh"$(RPAREN) should be used.
- * Returns: a newly allocated string with the
- *   user's shell, or %NULL
- */
+    Gets the user's shell, or null. In the latter case, the
+  system default (usually "/bin/sh") should be used.
+  Returns:     a newly allocated string with the
+      user's shell, or null
+*/
 string getUserShell()
 {
   char* _cretval;

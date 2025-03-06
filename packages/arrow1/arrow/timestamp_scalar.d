@@ -7,6 +7,7 @@ import arrow.timestamp_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class TimestampScalar : arrow.scalar.Scalar
 {
 
@@ -26,6 +27,7 @@ class TimestampScalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   this(arrow.timestamp_data_type.TimestampDataType dataType, long value)
   {
     GArrowTimestampScalar* _cretval;
@@ -33,6 +35,7 @@ class TimestampScalar : arrow.scalar.Scalar
     this(_cretval, Yes.Take);
   }
 
+  /** */
   long getValue()
   {
     long _retval;

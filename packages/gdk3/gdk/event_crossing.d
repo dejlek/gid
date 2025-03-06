@@ -8,8 +8,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Generated when the pointer enters or leaves a window.
- */
+    Generated when the pointer enters or leaves a window.
+*/
 class EventCrossing
 {
   GdkEventCrossing cInstance;

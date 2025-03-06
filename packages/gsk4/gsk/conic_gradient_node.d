@@ -8,8 +8,8 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node for a conic gradient.
- */
+    A render node for a conic gradient.
+*/
 class ConicGradientNode : gsk.render_node.RenderNode
 {
 
@@ -22,12 +22,14 @@ class ConicGradientNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the angle for the gradient in radians, normalized in [0, 2 * PI].
-   * The angle is starting at the top and going clockwise, as expressed
-   * in the css specification:
-   * angle \= 90 - [gsk.conic_gradient_node.ConicGradientNode.getRotation]
-   * Returns: the angle for the gradient
-   */
+      Retrieves the angle for the gradient in radians, normalized in [0, 2 * PI].
+    
+    The angle is starting at the top and going clockwise, as expressed
+    in the css specification:
+    
+        angle = 90 - [gsk.conic_gradient_node.ConicGradientNode.getRotation]
+    Returns:     the angle for the gradient
+  */
   float getAngle()
   {
     float _retval;
@@ -36,9 +38,9 @@ class ConicGradientNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the center pointer for the gradient.
-   * Returns: the center point for the gradient
-   */
+      Retrieves the center pointer for the gradient.
+    Returns:     the center point for the gradient
+  */
   graphene.point.Point getCenter()
   {
     const(graphene_point_t)* _cretval;
@@ -48,9 +50,9 @@ class ConicGradientNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the number of color stops in the gradient.
-   * Returns: the number of color stops
-   */
+      Retrieves the number of color stops in the gradient.
+    Returns:     the number of color stops
+  */
   size_t getNColorStops()
   {
     size_t _retval;
@@ -59,9 +61,9 @@ class ConicGradientNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the rotation for the gradient in degrees.
-   * Returns: the rotation for the gradient
-   */
+      Retrieves the rotation for the gradient in degrees.
+    Returns:     the rotation for the gradient
+  */
   float getRotation()
   {
     float _retval;

@@ -12,6 +12,7 @@ import gtk.c.types;
 import gtk.toggle_button_accessible;
 import gtk.types;
 
+/** */
 class RadioButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessible
 {
 

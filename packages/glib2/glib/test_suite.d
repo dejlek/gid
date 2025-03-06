@@ -6,8 +6,8 @@ import glib.c.types;
 import glib.types;
 
 /**
- * An opaque structure representing a test suite.
- */
+    An opaque structure representing a test suite.
+*/
 class TestSuite
 {
   GTestSuite* cInstancePtr;
@@ -35,20 +35,20 @@ class TestSuite
   }
 
   /**
-   * Adds test_case to suite.
-   * Params:
-   *   testCase = a #GTestCase
-   */
+      Adds test_case to suite.
+    Params:
+      testCase =       a #GTestCase
+  */
   void add(glib.types.TestCase testCase)
   {
     g_test_suite_add(cast(GTestSuite*)cPtr, testCase);
   }
 
   /**
-   * Adds nestedsuite to suite.
-   * Params:
-   *   nestedsuite = another #GTestSuite
-   */
+      Adds nestedsuite to suite.
+    Params:
+      nestedsuite =       another #GTestSuite
+  */
   void addSuite(glib.test_suite.TestSuite nestedsuite)
   {
     g_test_suite_add_suite(cast(GTestSuite*)cPtr, nestedsuite ? cast(GTestSuite*)nestedsuite.cPtr : null);

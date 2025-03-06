@@ -8,9 +8,9 @@ import gobject.types;
 import gobject.value;
 
 /**
- * The GObjectConstructParam struct is an auxiliary structure used to hand
- * #GParamSpec/#GValue pairs to the @constructor of a #GObjectClass.
- */
+    The GObjectConstructParam struct is an auxiliary structure used to hand
+  #GParamSpec/#GValue pairs to the @constructor of a #GObjectClass.
+*/
 class ObjectConstructParam
 {
   GObjectConstructParam cInstance;

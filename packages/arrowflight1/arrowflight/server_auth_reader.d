@@ -8,6 +8,7 @@ import glib.bytes;
 import glib.error;
 import gobject.object;
 
+/** */
 class ServerAuthReader : gobject.object.ObjectG
 {
 
@@ -28,10 +29,10 @@ class ServerAuthReader : gobject.object.ObjectG
   }
 
   /**
-   * Reads a message from the client.
-   * Returns: Read data as #GBytes on
-   *   success, %NULL on error.
-   */
+      Reads a message from the client.
+    Returns:     Read data as #GBytes on
+        success, null on error.
+  */
   glib.bytes.Bytes read()
   {
     GBytes* _cretval;

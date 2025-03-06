@@ -6,8 +6,8 @@ import atk.types;
 import gid.gid;
 
 /**
- * Encapsulates information about a key event.
- */
+    Encapsulates information about a key event.
+*/
 class KeyEventStruct
 {
   AtkKeyEventStruct cInstance;

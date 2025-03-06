@@ -7,11 +7,12 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * The `GtkScrollInfo` can be used to provide more accurate data on how a scroll
- * operation should be performed.
- * Scrolling functions usually allow passing a %NULL scroll info which will cause
- * the default values to be used and just scroll the element into view.
- */
+    The [gtk.scroll_info.ScrollInfo] can be used to provide more accurate data on how a scroll
+  operation should be performed.
+  
+  Scrolling functions usually allow passing a null scroll info which will cause
+  the default values to be used and just scroll the element into view.
+*/
 class ScrollInfo : gobject.boxed.Boxed
 {
 
@@ -37,9 +38,9 @@ class ScrollInfo : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a new scroll info for scrolling an element into view.
-   * Returns: A new scroll info
-   */
+      Creates a new scroll info for scrolling an element into view.
+    Returns:     A new scroll info
+  */
   this()
   {
     GtkScrollInfo* _cretval;
@@ -48,9 +49,9 @@ class ScrollInfo : gobject.boxed.Boxed
   }
 
   /**
-   * Checks if horizontal scrolling is enabled.
-   * Returns: %TRUE if horizontal scrolling is enabled.
-   */
+      Checks if horizontal scrolling is enabled.
+    Returns:     true if horizontal scrolling is enabled.
+  */
   bool getEnableHorizontal()
   {
     bool _retval;
@@ -59,9 +60,9 @@ class ScrollInfo : gobject.boxed.Boxed
   }
 
   /**
-   * Checks if vertical scrolling is enabled.
-   * Returns: %TRUE if vertical scrolling is enabled.
-   */
+      Checks if vertical scrolling is enabled.
+    Returns:     true if vertical scrolling is enabled.
+  */
   bool getEnableVertical()
   {
     bool _retval;
@@ -70,22 +71,22 @@ class ScrollInfo : gobject.boxed.Boxed
   }
 
   /**
-   * Turns horizontal scrolling on or off.
-   * Params:
-   *   horizontal = if scrolling in the horizontal direction
-   *     should happen
-   */
+      Turns horizontal scrolling on or off.
+    Params:
+      horizontal =       if scrolling in the horizontal direction
+            should happen
+  */
   void setEnableHorizontal(bool horizontal)
   {
     gtk_scroll_info_set_enable_horizontal(cast(GtkScrollInfo*)cPtr, horizontal);
   }
 
   /**
-   * Turns vertical scrolling on or off.
-   * Params:
-   *   vertical = if scrolling in the vertical direction
-   *     should happen
-   */
+      Turns vertical scrolling on or off.
+    Params:
+      vertical =       if scrolling in the vertical direction
+            should happen
+  */
   void setEnableVertical(bool vertical)
   {
     gtk_scroll_info_set_enable_vertical(cast(GtkScrollInfo*)cPtr, vertical);

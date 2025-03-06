@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 interface Writable
 {
 
@@ -17,10 +18,11 @@ interface Writable
   }
 
   /**
-   * It ensures writing all data on memory to storage.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      It ensures writing all data on memory to storage.
+    Returns:     true on success, false if there was an error.
+  */
   bool flush();
 
+  /** */
   bool write(ubyte[] data);
 }

@@ -7,11 +7,13 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * Data type for holding variation-axis values.
- * The minimum, default, and maximum values are in un-normalized, user scales.
- * <note>Note: at present, the only flag defined for @flags is
- * #HB_OT_VAR_AXIS_FLAG_HIDDEN.</note>
- */
+    Data type for holding variation-axis values.
+  
+  The minimum, default, and maximum values are in un-normalized, user scales.
+  
+  <note>Note: at present, the only flag defined for @flags is
+  #HB_OT_VAR_AXIS_FLAG_HIDDEN.</note>
+*/
 class OtVarAxisInfo : gobject.boxed.Boxed
 {
 

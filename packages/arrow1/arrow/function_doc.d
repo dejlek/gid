@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class FunctionDoc : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class FunctionDoc : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   string[] getArgNames()
   {
     char** _cretval;
@@ -43,6 +45,7 @@ class FunctionDoc : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getDescription()
   {
     char* _cretval;
@@ -51,6 +54,7 @@ class FunctionDoc : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getOptionsClassName()
   {
     char* _cretval;
@@ -59,6 +63,7 @@ class FunctionDoc : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getSummary()
   {
     char* _cretval;

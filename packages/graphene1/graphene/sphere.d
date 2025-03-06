@@ -10,8 +10,8 @@ import graphene.types;
 import graphene.vec3;
 
 /**
- * A sphere, represented by its center and radius.
- */
+    A sphere, represented by its center and radius.
+*/
 class Sphere : gobject.boxed.Boxed
 {
 
@@ -42,11 +42,12 @@ class Sphere : gobject.boxed.Boxed
   }
 
   /**
-   * Allocates a new #graphene_sphere_t.
-   * The contents of the newly allocated structure are undefined.
-   * Returns: the newly allocated #graphene_sphere_t. Use
-   *   [graphene.sphere.Sphere.free] to free the resources allocated by this function
-   */
+      Allocates a new #graphene_sphere_t.
+    
+    The contents of the newly allocated structure are undefined.
+    Returns:     the newly allocated #graphene_sphere_t. Use
+        [graphene.sphere.Sphere.free] to free the resources allocated by this function
+  */
   static graphene.sphere.Sphere alloc()
   {
     graphene_sphere_t* _cretval;
@@ -56,12 +57,12 @@ class Sphere : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether the given point is contained in the volume
-   * of a #graphene_sphere_t.
-   * Params:
-   *   point = a #graphene_point3d_t
-   * Returns: `true` if the sphere contains the point
-   */
+      Checks whether the given point is contained in the volume
+    of a #graphene_sphere_t.
+    Params:
+      point =       a #graphene_point3d_t
+    Returns:     `true` if the sphere contains the point
+  */
   bool containsPoint(graphene.point3_d.Point3D point)
   {
     bool _retval;
@@ -70,12 +71,12 @@ class Sphere : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the distance of the given point from the surface of
-   * a #graphene_sphere_t.
-   * Params:
-   *   point = a #graphene_point3d_t
-   * Returns: the distance of the point
-   */
+      Computes the distance of the given point from the surface of
+    a #graphene_sphere_t.
+    Params:
+      point =       a #graphene_point3d_t
+    Returns:     the distance of the point
+  */
   float distance(graphene.point3_d.Point3D point)
   {
     float _retval;
@@ -84,11 +85,11 @@ class Sphere : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether two #graphene_sphere_t are equal.
-   * Params:
-   *   b = a #graphene_sphere_t
-   * Returns: `true` if the spheres are equal
-   */
+      Checks whether two #graphene_sphere_t are equal.
+    Params:
+      b =       a #graphene_sphere_t
+    Returns:     `true` if the spheres are equal
+  */
   bool equal(graphene.sphere.Sphere b)
   {
     bool _retval;
@@ -97,11 +98,11 @@ class Sphere : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the bounding box capable of containing the
-   * given #graphene_sphere_t.
-   * Params:
-   *   box = return location for the bounding box
-   */
+      Computes the bounding box capable of containing the
+    given #graphene_sphere_t.
+    Params:
+      box =       return location for the bounding box
+  */
   void getBoundingBox(out graphene.box.Box box)
   {
     graphene_box_t _box;
@@ -110,11 +111,11 @@ class Sphere : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the coordinates of the center of a #graphene_sphere_t.
-   * Params:
-   *   center = return location for the coordinates of
-   *     the center
-   */
+      Retrieves the coordinates of the center of a #graphene_sphere_t.
+    Params:
+      center =       return location for the coordinates of
+          the center
+  */
   void getCenter(out graphene.point3_d.Point3D center)
   {
     graphene_point3d_t _center;
@@ -123,9 +124,9 @@ class Sphere : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the radius of a #graphene_sphere_t.
-   * Returns:
-   */
+      Retrieves the radius of a #graphene_sphere_t.
+    Returns: 
+  */
   float getRadius()
   {
     float _retval;
@@ -134,13 +135,13 @@ class Sphere : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes the given #graphene_sphere_t with the given center and radius.
-   * Params:
-   *   center = the coordinates of the center of the sphere, or %NULL
-   *     for a center in $(LPAREN)0, 0, 0$(RPAREN)
-   *   radius = the radius of the sphere
-   * Returns: the initialized #graphene_sphere_t
-   */
+      Initializes the given #graphene_sphere_t with the given center and radius.
+    Params:
+      center =       the coordinates of the center of the sphere, or null
+          for a center in (0, 0, 0)
+      radius =       the radius of the sphere
+    Returns:     the initialized #graphene_sphere_t
+  */
   graphene.sphere.Sphere init_(graphene.point3_d.Point3D center, float radius)
   {
     graphene_sphere_t* _cretval;
@@ -150,15 +151,16 @@ class Sphere : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes the given #graphene_sphere_t using the given array
-   * of 3D coordinates so that the sphere includes them.
-   * The center of the sphere can either be specified, or will be center
-   * of the 3D volume that encompasses all points.
-   * Params:
-   *   points = an array of #graphene_point3d_t
-   *   center = the center of the sphere
-   * Returns: the initialized #graphene_sphere_t
-   */
+      Initializes the given #graphene_sphere_t using the given array
+    of 3D coordinates so that the sphere includes them.
+    
+    The center of the sphere can either be specified, or will be center
+    of the 3D volume that encompasses all points.
+    Params:
+      points =       an array of #graphene_point3d_t
+      center =       the center of the sphere
+    Returns:     the initialized #graphene_sphere_t
+  */
   graphene.sphere.Sphere initFromPoints(graphene.point3_d.Point3D[] points, graphene.point3_d.Point3D center = null)
   {
     graphene_sphere_t* _cretval;
@@ -176,15 +178,16 @@ class Sphere : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes the given #graphene_sphere_t using the given array
-   * of 3D coordinates so that the sphere includes them.
-   * The center of the sphere can either be specified, or will be center
-   * of the 3D volume that encompasses all vectors.
-   * Params:
-   *   vectors = an array of #graphene_vec3_t
-   *   center = the center of the sphere
-   * Returns: the initialized #graphene_sphere_t
-   */
+      Initializes the given #graphene_sphere_t using the given array
+    of 3D coordinates so that the sphere includes them.
+    
+    The center of the sphere can either be specified, or will be center
+    of the 3D volume that encompasses all vectors.
+    Params:
+      vectors =       an array of #graphene_vec3_t
+      center =       the center of the sphere
+    Returns:     the initialized #graphene_sphere_t
+  */
   graphene.sphere.Sphere initFromVectors(graphene.vec3.Vec3[] vectors, graphene.point3_d.Point3D center = null)
   {
     graphene_sphere_t* _cretval;
@@ -202,9 +205,9 @@ class Sphere : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether the sphere has a zero radius.
-   * Returns: `true` if the sphere is empty
-   */
+      Checks whether the sphere has a zero radius.
+    Returns:     `true` if the sphere is empty
+  */
   bool isEmpty()
   {
     bool _retval;
@@ -213,12 +216,12 @@ class Sphere : gobject.boxed.Boxed
   }
 
   /**
-   * Translates the center of the given #graphene_sphere_t using the point
-   * coordinates as the delta of the translation.
-   * Params:
-   *   point = the coordinates of the translation
-   *   res = return location for the translated sphere
-   */
+      Translates the center of the given #graphene_sphere_t using the point
+    coordinates as the delta of the translation.
+    Params:
+      point =       the coordinates of the translation
+      res =       return location for the translated sphere
+  */
   void translate(graphene.point3_d.Point3D point, out graphene.sphere.Sphere res)
   {
     graphene_sphere_t _res;

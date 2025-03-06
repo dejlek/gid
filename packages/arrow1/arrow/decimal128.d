@@ -8,6 +8,7 @@ import glib.bytes;
 import glib.error;
 import gobject.object;
 
+/** */
 class Decimal128 : gobject.object.ObjectG
 {
 
@@ -27,6 +28,7 @@ class Decimal128 : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   static arrow.decimal128.Decimal128 newInteger(long data)
   {
     GArrowDecimal128* _cretval;
@@ -35,6 +37,7 @@ class Decimal128 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   static arrow.decimal128.Decimal128 newString(string data)
   {
     GArrowDecimal128* _cretval;
@@ -48,13 +51,14 @@ class Decimal128 : gobject.object.ObjectG
   }
 
   /**
-   * Computes the absolute value of the decimal destructively.
-   */
+      Computes the absolute value of the decimal destructively.
+  */
   void abs()
   {
     garrow_decimal128_abs(cast(GArrowDecimal128*)cPtr);
   }
 
+  /** */
   arrow.decimal128.Decimal128 copy()
   {
     GArrowDecimal128* _cretval;
@@ -63,6 +67,7 @@ class Decimal128 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.decimal128.Decimal128 divide(arrow.decimal128.Decimal128 right, out arrow.decimal128.Decimal128 remainder)
   {
     GArrowDecimal128* _cretval;
@@ -76,6 +81,7 @@ class Decimal128 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equal(arrow.decimal128.Decimal128 otherDecimal)
   {
     bool _retval;
@@ -83,6 +89,7 @@ class Decimal128 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool greaterThan(arrow.decimal128.Decimal128 otherDecimal)
   {
     bool _retval;
@@ -90,6 +97,7 @@ class Decimal128 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool greaterThanOrEqual(arrow.decimal128.Decimal128 otherDecimal)
   {
     bool _retval;
@@ -97,6 +105,7 @@ class Decimal128 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool lessThan(arrow.decimal128.Decimal128 otherDecimal)
   {
     bool _retval;
@@ -104,6 +113,7 @@ class Decimal128 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool lessThanOrEqual(arrow.decimal128.Decimal128 otherDecimal)
   {
     bool _retval;
@@ -111,6 +121,7 @@ class Decimal128 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.decimal128.Decimal128 minus(arrow.decimal128.Decimal128 right)
   {
     GArrowDecimal128* _cretval;
@@ -119,6 +130,7 @@ class Decimal128 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.decimal128.Decimal128 multiply(arrow.decimal128.Decimal128 right)
   {
     GArrowDecimal128* _cretval;
@@ -128,13 +140,14 @@ class Decimal128 : gobject.object.ObjectG
   }
 
   /**
-   * Negate the current value of the decimal destructively.
-   */
+      Negate the current value of the decimal destructively.
+  */
   void negate()
   {
     garrow_decimal128_negate(cast(GArrowDecimal128*)cPtr);
   }
 
+  /** */
   bool notEqual(arrow.decimal128.Decimal128 otherDecimal)
   {
     bool _retval;
@@ -142,6 +155,7 @@ class Decimal128 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.decimal128.Decimal128 plus(arrow.decimal128.Decimal128 right)
   {
     GArrowDecimal128* _cretval;
@@ -150,6 +164,7 @@ class Decimal128 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.decimal128.Decimal128 rescale(int originalScale, int newScale)
   {
     GArrowDecimal128* _cretval;
@@ -161,6 +176,7 @@ class Decimal128 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   glib.bytes.Bytes toBytes()
   {
     GBytes* _cretval;
@@ -169,6 +185,7 @@ class Decimal128 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long toInteger()
   {
     long _retval;
@@ -176,6 +193,7 @@ class Decimal128 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;
@@ -184,6 +202,7 @@ class Decimal128 : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toStringScale(int scale)
   {
     char* _cretval;

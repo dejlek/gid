@@ -7,8 +7,8 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node controlling the opacity of its single child node.
- */
+    A render node controlling the opacity of its single child node.
+*/
 class OpacityNode : gsk.render_node.RenderNode
 {
 
@@ -21,13 +21,13 @@ class OpacityNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Creates a `GskRenderNode` that will drawn the child with reduced
-   * opacity.
-   * Params:
-   *   child = The node to draw
-   *   opacity = The opacity to apply
-   * Returns: A new `GskRenderNode`
-   */
+      Creates a [gsk.render_node.RenderNode] that will drawn the child with reduced
+    opacity.
+    Params:
+      child =       The node to draw
+      opacity =       The opacity to apply
+    Returns:     A new [gsk.render_node.RenderNode]
+  */
   this(gsk.render_node.RenderNode child, float opacity)
   {
     GskRenderNode* _cretval;
@@ -36,9 +36,9 @@ class OpacityNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Gets the child node that is getting opacityed by the given node.
-   * Returns: The child that is getting opacityed
-   */
+      Gets the child node that is getting opacityed by the given node.
+    Returns:     The child that is getting opacityed
+  */
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
@@ -48,9 +48,9 @@ class OpacityNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Gets the transparency factor for an opacity node.
-   * Returns: the opacity factor
-   */
+      Gets the transparency factor for an opacity node.
+    Returns:     the opacity factor
+  */
   float getOpacity()
   {
     float _retval;

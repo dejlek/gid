@@ -6,6 +6,7 @@ import arrow.c.types;
 import arrow.types;
 import gid.gid;
 
+/** */
 class NullArray : arrow.array.Array
 {
 
@@ -25,6 +26,7 @@ class NullArray : arrow.array.Array
     return getType();
   }
 
+  /** */
   this(long length)
   {
     GArrowNullArray* _cretval;

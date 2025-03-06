@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class SlowFileSystem : arrow.file_system.FileSystem
 {
 
@@ -27,14 +28,15 @@ class SlowFileSystem : arrow.file_system.FileSystem
   }
 
   /**
-   * The latency is normally distributed with a standard deviation of
-   * average_latency * 0.1.
-   * The random seed is given by the default random device.
-   * Params:
-   *   baseFileSystem = A #GArrowFileSystem as the base file system.
-   *   averageLatency = The average value of the latency.
-   * Returns: A newly created #GArrowSlowFileSystem.
-   */
+      The latency is normally distributed with a standard deviation of
+    average_latency * 0.1.
+    
+    The random seed is given by the default random device.
+    Params:
+      baseFileSystem =       A #GArrowFileSystem as the base file system.
+      averageLatency =       The average value of the latency.
+    Returns:     A newly created #GArrowSlowFileSystem.
+  */
   static arrow.slow_file_system.SlowFileSystem newAverageLatency(arrow.file_system.FileSystem baseFileSystem, double averageLatency)
   {
     GArrowSlowFileSystem* _cretval;
@@ -44,14 +46,14 @@ class SlowFileSystem : arrow.file_system.FileSystem
   }
 
   /**
-   * The latency is normally distributed with a standard deviation of
-   * average_latency * 0.1.
-   * Params:
-   *   baseFileSystem = A #GArrowFileSystem as the base file system.
-   *   averageLatency = The average value of the latency.
-   *   seed = A random seed.
-   * Returns: A newly created #GArrowSlowFileSystem.
-   */
+      The latency is normally distributed with a standard deviation of
+    average_latency * 0.1.
+    Params:
+      baseFileSystem =       A #GArrowFileSystem as the base file system.
+      averageLatency =       The average value of the latency.
+      seed =       A random seed.
+    Returns:     A newly created #GArrowSlowFileSystem.
+  */
   static arrow.slow_file_system.SlowFileSystem newAverageLatencyAndSeed(arrow.file_system.FileSystem baseFileSystem, double averageLatency, int seed)
   {
     GArrowSlowFileSystem* _cretval;

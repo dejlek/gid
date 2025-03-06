@@ -9,6 +9,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
@@ -28,6 +29,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowStringDictionaryArrayBuilder* _cretval;
@@ -35,6 +37,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool appendArray(arrow.string_array.StringArray array)
   {
     bool _retval;
@@ -46,15 +49,15 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-   * Append dictionary indices directly without modifying the internal memo.
-   * Params:
-   *   values = The array of indices.
-   *   isValids = The array of
-   *     %TRUE or %FALSE that shows whether the Nth value is valid or not. If the
-   *     Nth `is_valids` is %TRUE, the Nth `values` is valid value. Otherwise
-   *     the Nth value is null value.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append dictionary indices directly without modifying the internal memo.
+    Params:
+      values =       The array of indices.
+      isValids =       The array of
+          true or false that shows whether the Nth value is valid or not. If the
+          Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
+          the Nth value is null value.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendIndices(long[] values, bool[] isValids = null)
   {
     bool _retval;
@@ -75,6 +78,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   bool appendString(string value)
   {
     bool _retval;
@@ -86,6 +90,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   bool finishDelta(out arrow.array.Array outIndices, out arrow.array.Array outDelta)
   {
     bool _retval;
@@ -100,6 +105,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   long getDictionaryLength()
   {
     long _retval;
@@ -107,6 +113,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   bool insertMemoValues(arrow.string_array.StringArray values)
   {
     bool _retval;
@@ -118,8 +125,8 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-   * Reset and also clear accumulated dictionary values in memo table.
-   */
+      Reset and also clear accumulated dictionary values in memo table.
+  */
   void resetFull()
   {
     garrow_string_dictionary_array_builder_reset_full(cast(GArrowStringDictionaryArrayBuilder*)cPtr);

@@ -12,8 +12,8 @@ import graphene.vec2;
 import graphene.vec3;
 
 /**
- * A triangle.
- */
+    A triangle.
+*/
 class Triangle : gobject.boxed.Boxed
 {
 
@@ -44,12 +44,13 @@ class Triangle : gobject.boxed.Boxed
   }
 
   /**
-   * Allocates a new #graphene_triangle_t.
-   * The contents of the returned structure are undefined.
-   * Returns: the newly allocated #graphene_triangle_t
-   *   structure. Use [graphene.triangle.Triangle.free] to free the resources
-   *   allocated by this function
-   */
+      Allocates a new #graphene_triangle_t.
+    
+    The contents of the returned structure are undefined.
+    Returns:     the newly allocated #graphene_triangle_t
+        structure. Use [graphene.triangle.Triangle.free] to free the resources
+        allocated by this function
+  */
   static graphene.triangle.Triangle alloc()
   {
     graphene_triangle_t* _cretval;
@@ -59,11 +60,11 @@ class Triangle : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether the given triangle t contains the point p.
-   * Params:
-   *   p = a #graphene_point3d_t
-   * Returns: `true` if the point is inside the triangle
-   */
+      Checks whether the given triangle t contains the point p.
+    Params:
+      p =       a #graphene_point3d_t
+    Returns:     `true` if the point is inside the triangle
+  */
   bool containsPoint(graphene.point3_d.Point3D p)
   {
     bool _retval;
@@ -72,11 +73,11 @@ class Triangle : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether the two given #graphene_triangle_t are equal.
-   * Params:
-   *   b = a #graphene_triangle_t
-   * Returns: `true` if the triangles are equal
-   */
+      Checks whether the two given #graphene_triangle_t are equal.
+    Params:
+      b =       a #graphene_triangle_t
+    Returns:     `true` if the triangles are equal
+  */
   bool equal(graphene.triangle.Triangle b)
   {
     bool _retval;
@@ -85,9 +86,9 @@ class Triangle : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the area of the given #graphene_triangle_t.
-   * Returns: the area of the triangle
-   */
+      Computes the area of the given #graphene_triangle_t.
+    Returns:     the area of the triangle
+  */
   float getArea()
   {
     float _retval;
@@ -96,23 +97,30 @@ class Triangle : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the [barycentric coordinates](http://en.wikipedia.org/wiki/Barycentric_coordinate_system)
-   * of the given point p.
-   * The point p must lie on the same plane as the triangle t; if the
-   * point is not coplanar, the result of this function is undefined.
-   * If we place the origin in the coordinates of the triangle's A point,
-   * the barycentric coordinates are `u`, which is on the AC vector; and `v`
-   * which is on the AB vector:
-   * ![](triangle-barycentric.png)
-   * The returned #graphene_vec2_t contains the following values, in order:
-   * - `res.x \= u`
-   * - `res.y \= v`
-   * Params:
-   *   p = a #graphene_point3d_t
-   *   res = return location for the vector
-   *     with the barycentric coordinates
-   * Returns: `true` if the barycentric coordinates are valid
-   */
+      Computes the [barycentric coordinates](http://en.wikipedia.org/wiki/Barycentric_coordinate_system)
+    of the given point p.
+    
+    The point p must lie on the same plane as the triangle t; if the
+    point is not coplanar, the result of this function is undefined.
+    
+    If we place the origin in the coordinates of the triangle's A point,
+    the barycentric coordinates are `u`, which is on the AC vector; and `v`
+    which is on the AB vector:
+    
+    ![](triangle-barycentric.png)
+    
+    The returned #graphene_vec2_t contains the following values, in order:
+    
+     $(LIST
+        * `res.x = u`
+        * `res.y = v`
+     )
+    Params:
+      p =       a #graphene_point3d_t
+      res =       return location for the vector
+          with the barycentric coordinates
+    Returns:     `true` if the barycentric coordinates are valid
+  */
   bool getBarycoords(graphene.point3_d.Point3D p, out graphene.vec2.Vec2 res)
   {
     bool _retval;
@@ -123,10 +131,10 @@ class Triangle : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the bounding box of the given #graphene_triangle_t.
-   * Params:
-   *   res = return location for the box
-   */
+      Computes the bounding box of the given #graphene_triangle_t.
+    Params:
+      res =       return location for the box
+  */
   void getBoundingBox(out graphene.box.Box res)
   {
     graphene_box_t _res;
@@ -135,13 +143,14 @@ class Triangle : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the coordinates of the midpoint of the given #graphene_triangle_t.
-   * The midpoint G is the [centroid](https://en.wikipedia.org/wiki/Centroid#Triangle_centroid)
-   * of the triangle, i.e. the intersection of its medians.
-   * Params:
-   *   res = return location for the coordinates of
-   *     the midpoint
-   */
+      Computes the coordinates of the midpoint of the given #graphene_triangle_t.
+    
+    The midpoint G is the [centroid](https://en.wikipedia.org/wiki/Centroid#Triangle_centroid)
+    of the triangle, i.e. the intersection of its medians.
+    Params:
+      res =       return location for the coordinates of
+          the midpoint
+  */
   void getMidpoint(out graphene.point3_d.Point3D res)
   {
     graphene_point3d_t _res;
@@ -150,10 +159,10 @@ class Triangle : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the normal vector of the given #graphene_triangle_t.
-   * Params:
-   *   res = return location for the normal vector
-   */
+      Computes the normal vector of the given #graphene_triangle_t.
+    Params:
+      res =       return location for the normal vector
+  */
   void getNormal(out graphene.vec3.Vec3 res)
   {
     graphene_vec3_t _res;
@@ -162,10 +171,10 @@ class Triangle : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the plane based on the vertices of the given #graphene_triangle_t.
-   * Params:
-   *   res = return location for the plane
-   */
+      Computes the plane based on the vertices of the given #graphene_triangle_t.
+    Params:
+      res =       return location for the plane
+  */
   void getPlane(out graphene.plane.Plane res)
   {
     graphene_plane_t _res;
@@ -174,16 +183,16 @@ class Triangle : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the three vertices of the given #graphene_triangle_t and returns
-   * their coordinates as #graphene_point3d_t.
-   * Params:
-   *   a = return location for the coordinates
-   *     of the first vertex
-   *   b = return location for the coordinates
-   *     of the second vertex
-   *   c = return location for the coordinates
-   *     of the third vertex
-   */
+      Retrieves the three vertices of the given #graphene_triangle_t and returns
+    their coordinates as #graphene_point3d_t.
+    Params:
+      a =       return location for the coordinates
+          of the first vertex
+      b =       return location for the coordinates
+          of the second vertex
+      c =       return location for the coordinates
+          of the third vertex
+  */
   void getPoints(out graphene.point3_d.Point3D a, out graphene.point3_d.Point3D b, out graphene.point3_d.Point3D c)
   {
     graphene_point3d_t _a;
@@ -196,23 +205,29 @@ class Triangle : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the UV coordinates of the given point p.
-   * The point p must lie on the same plane as the triangle t; if the point
-   * is not coplanar, the result of this function is undefined. If p is %NULL,
-   * the point will be set in $(LPAREN)0, 0, 0$(RPAREN).
-   * The UV coordinates will be placed in the res vector:
-   * - `res.x \= u`
-   * - `res.y \= v`
-   * See also: [graphene.triangle.Triangle.getBarycoords]
-   * Params:
-   *   p = a #graphene_point3d_t
-   *   uvA = the UV coordinates of the first point
-   *   uvB = the UV coordinates of the second point
-   *   uvC = the UV coordinates of the third point
-   *   res = a vector containing the UV coordinates
-   *     of the given point p
-   * Returns: `true` if the coordinates are valid
-   */
+      Computes the UV coordinates of the given point p.
+    
+    The point p must lie on the same plane as the triangle t; if the point
+    is not coplanar, the result of this function is undefined. If p is null,
+    the point will be set in (0, 0, 0).
+    
+    The UV coordinates will be placed in the res vector:
+    
+     $(LIST
+        * `res.x = u`
+        * `res.y = v`
+     )
+       
+    See also: [graphene.triangle.Triangle.getBarycoords]
+    Params:
+      p =       a #graphene_point3d_t
+      uvA =       the UV coordinates of the first point
+      uvB =       the UV coordinates of the second point
+      uvC =       the UV coordinates of the third point
+      res =       a vector containing the UV coordinates
+          of the given point p
+    Returns:     `true` if the coordinates are valid
+  */
   bool getUv(graphene.point3_d.Point3D p, graphene.vec2.Vec2 uvA, graphene.vec2.Vec2 uvB, graphene.vec2.Vec2 uvC, out graphene.vec2.Vec2 res)
   {
     bool _retval;
@@ -223,12 +238,12 @@ class Triangle : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the three vertices of the given #graphene_triangle_t.
-   * Params:
-   *   a = return location for the first vertex
-   *   b = return location for the second vertex
-   *   c = return location for the third vertex
-   */
+      Retrieves the three vertices of the given #graphene_triangle_t.
+    Params:
+      a =       return location for the first vertex
+      b =       return location for the second vertex
+      c =       return location for the third vertex
+  */
   void getVertices(out graphene.vec3.Vec3 a, out graphene.vec3.Vec3 b, out graphene.vec3.Vec3 c)
   {
     graphene_vec3_t _a;
@@ -241,15 +256,15 @@ class Triangle : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_triangle_t using the three given arrays
-   * of floating point values, each representing the coordinates of
-   * a point in 3D space.
-   * Params:
-   *   a = an array of 3 floating point values
-   *   b = an array of 3 floating point values
-   *   c = an array of 3 floating point values
-   * Returns: the initialized #graphene_triangle_t
-   */
+      Initializes a #graphene_triangle_t using the three given arrays
+    of floating point values, each representing the coordinates of
+    a point in 3D space.
+    Params:
+      a =       an array of 3 floating point values
+      b =       an array of 3 floating point values
+      c =       an array of 3 floating point values
+    Returns:     the initialized #graphene_triangle_t
+  */
   graphene.triangle.Triangle initFromFloat(float[] a, float[] b, float[] c)
   {
     graphene_triangle_t* _cretval;
@@ -265,13 +280,13 @@ class Triangle : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_triangle_t using the three given 3D points.
-   * Params:
-   *   a = a #graphene_point3d_t
-   *   b = a #graphene_point3d_t
-   *   c = a #graphene_point3d_t
-   * Returns: the initialized #graphene_triangle_t
-   */
+      Initializes a #graphene_triangle_t using the three given 3D points.
+    Params:
+      a =       a #graphene_point3d_t
+      b =       a #graphene_point3d_t
+      c =       a #graphene_point3d_t
+    Returns:     the initialized #graphene_triangle_t
+  */
   graphene.triangle.Triangle initFromPoint3d(graphene.point3_d.Point3D a = null, graphene.point3_d.Point3D b = null, graphene.point3_d.Point3D c = null)
   {
     graphene_triangle_t* _cretval;
@@ -281,13 +296,13 @@ class Triangle : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_triangle_t using the three given vectors.
-   * Params:
-   *   a = a #graphene_vec3_t
-   *   b = a #graphene_vec3_t
-   *   c = a #graphene_vec3_t
-   * Returns: the initialized #graphene_triangle_t
-   */
+      Initializes a #graphene_triangle_t using the three given vectors.
+    Params:
+      a =       a #graphene_vec3_t
+      b =       a #graphene_vec3_t
+      c =       a #graphene_vec3_t
+    Returns:     the initialized #graphene_triangle_t
+  */
   graphene.triangle.Triangle initFromVec3(graphene.vec3.Vec3 a = null, graphene.vec3.Vec3 b = null, graphene.vec3.Vec3 c = null)
   {
     graphene_triangle_t* _cretval;

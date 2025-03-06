@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArrayBuilder
 {
 
@@ -26,6 +27,7 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowLargeStringArrayBuilder* _cretval;
@@ -33,6 +35,7 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool appendString(string value)
   {
     bool _retval;
@@ -44,6 +47,7 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
     return _retval;
   }
 
+  /** */
   bool appendStringLen(string value, long length)
   {
     bool _retval;
@@ -56,16 +60,16 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
   }
 
   /**
-   * Append multiple values at once. It's more efficient than multiple
-   * `append` and `append_null` calls.
-   * Params:
-   *   values = The array of strings.
-   *   isValids = The array of
-   *     boolean that shows whether the Nth value is valid or not. If the
-   *     Nth is_valids is %TRUE, the Nth values is valid value. Otherwise
-   *     the Nth value is null value.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append multiple values at once. It's more efficient than multiple
+    `append` and `append_null` calls.
+    Params:
+      values =       The array of strings.
+      isValids =       The array of
+          boolean that shows whether the Nth value is valid or not. If the
+          Nth is_valids is true, the Nth values is valid value. Otherwise
+          the Nth value is null value.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendStrings(string[] values, bool[] isValids = null)
   {
     bool _retval;

@@ -6,6 +6,7 @@ import arrowdataset.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class FinishOptions : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class FinishOptions : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GADatasetFinishOptions* _cretval;

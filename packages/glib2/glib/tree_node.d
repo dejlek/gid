@@ -6,8 +6,8 @@ import glib.c.types;
 import glib.types;
 
 /**
- * An opaque type which identifies a specific node in a #GTree.
- */
+    An opaque type which identifies a specific node in a #GTree.
+*/
 class TreeNode
 {
   GTreeNode* cInstancePtr;
@@ -29,9 +29,9 @@ class TreeNode
   }
 
   /**
-   * Gets the key stored at a particular tree node.
-   * Returns: the key at the node.
-   */
+      Gets the key stored at a particular tree node.
+    Returns:     the key at the node.
+  */
   void* key()
   {
     auto _retval = g_tree_node_key(cast(GTreeNode*)cPtr);
@@ -39,10 +39,10 @@ class TreeNode
   }
 
   /**
-   * Returns the next in-order node of the tree, or %NULL
-   * if the passed node was already the last one.
-   * Returns: the next node in the tree
-   */
+      Returns the next in-order node of the tree, or null
+    if the passed node was already the last one.
+    Returns:     the next node in the tree
+  */
   glib.tree_node.TreeNode next()
   {
     GTreeNode* _cretval;
@@ -52,10 +52,10 @@ class TreeNode
   }
 
   /**
-   * Returns the previous in-order node of the tree, or %NULL
-   * if the passed node was already the first one.
-   * Returns: the previous node in the tree
-   */
+      Returns the previous in-order node of the tree, or null
+    if the passed node was already the first one.
+    Returns:     the previous node in the tree
+  */
   glib.tree_node.TreeNode previous()
   {
     GTreeNode* _cretval;
@@ -65,9 +65,9 @@ class TreeNode
   }
 
   /**
-   * Gets the value stored at a particular tree node.
-   * Returns: the value at the node.
-   */
+      Gets the value stored at a particular tree node.
+    Returns:     the value at the node.
+  */
   void* value()
   {
     auto _retval = g_tree_node_value(cast(GTreeNode*)cPtr);

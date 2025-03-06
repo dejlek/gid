@@ -9,6 +9,7 @@ import gtksource.c.types;
 import gtksource.gutter_renderer;
 import gtksource.types;
 
+/** */
 class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
 {
 
@@ -29,9 +30,9 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   }
 
   /**
-   * Create a new #GtkSourceGutterRendererPixbuf.
-   * Returns: A #GtkSourceGutterRenderer
-   */
+      Create a new #GtkSourceGutterRendererPixbuf.
+    Returns:     A #GtkSourceGutterRenderer
+  */
   this()
   {
     GtkSourceGutterRenderer* _cretval;
@@ -40,9 +41,9 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   }
 
   /**
-   * Get the gicon of the renderer
-   * Returns: a #GIcon
-   */
+      Get the gicon of the renderer
+    Returns:     a #GIcon
+  */
   gio.icon.Icon getGicon()
   {
     GIcon* _cretval;
@@ -51,6 +52,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
     return _retval;
   }
 
+  /** */
   string getIconName()
   {
     const(char)* _cretval;
@@ -60,9 +62,9 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   }
 
   /**
-   * Get the pixbuf of the renderer.
-   * Returns: a #GdkPixbuf
-   */
+      Get the pixbuf of the renderer.
+    Returns:     a #GdkPixbuf
+  */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
@@ -71,17 +73,20 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
     return _retval;
   }
 
+  /** */
   void setGicon(gio.icon.Icon icon = null)
   {
     gtk_source_gutter_renderer_pixbuf_set_gicon(cast(GtkSourceGutterRendererPixbuf*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
+  /** */
   void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_source_gutter_renderer_pixbuf_set_icon_name(cast(GtkSourceGutterRendererPixbuf*)cPtr, _iconName);
   }
 
+  /** */
   void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     gtk_source_gutter_renderer_pixbuf_set_pixbuf(cast(GtkSourceGutterRendererPixbuf*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);

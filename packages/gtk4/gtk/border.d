@@ -7,9 +7,10 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * A struct that specifies a border around a rectangular area.
- * Each side can have different width.
- */
+    A struct that specifies a border around a rectangular area.
+  
+  Each side can have different width.
+*/
 class Border : gobject.boxed.Boxed
 {
 
@@ -75,10 +76,10 @@ class Border : gobject.boxed.Boxed
   }
 
   /**
-   * Allocates a new `GtkBorder` struct and initializes its elements to zero.
-   * Returns: a newly allocated `GtkBorder` struct.
-   *   Free with [gtk.border.Border.free]
-   */
+      Allocates a new [gtk.border.Border] struct and initializes its elements to zero.
+    Returns:     a newly allocated [gtk.border.Border] struct.
+       Free with [gtk.border.Border.free]
+  */
   this()
   {
     GtkBorder* _cretval;
@@ -87,9 +88,9 @@ class Border : gobject.boxed.Boxed
   }
 
   /**
-   * Copies a `GtkBorder`.
-   * Returns: a copy of border_.
-   */
+      Copies a [gtk.border.Border].
+    Returns:     a copy of border_.
+  */
   gtk.border.Border copy()
   {
     GtkBorder* _cretval;

@@ -11,24 +11,25 @@ public import glib.error;
 public import gobject.object;
 
 /**
- * `GProxyResolver` provides synchronous and asynchronous network proxy
- * resolution. `GProxyResolver` is used within [gio.socket_client.SocketClient] through
- * the method [gio.socket_connectable.SocketConnectable.proxyEnumerate].
- * Implementations of `GProxyResolver` based on
- * [libproxy](https://github.com/libproxy/libproxy) and GNOME settings can be
- * found in [glib-networking](https://gitlab.gnome.org/GNOME/glib-networking).
- * GIO comes with an implementation for use inside Flatpak portals.
- */
+    [gio.proxy_resolver.ProxyResolver] provides synchronous and asynchronous network proxy
+  resolution. [gio.proxy_resolver.ProxyResolver] is used within [gio.socket_client.SocketClient] through
+  the method [gio.socket_connectable.SocketConnectable.proxyEnumerate].
+  
+  Implementations of [gio.proxy_resolver.ProxyResolver] based on
+  [libproxy](https://github.com/libproxy/libproxy) and GNOME settings can be
+  found in [glib-networking](https://gitlab.gnome.org/GNOME/glib-networking).
+  GIO comes with an implementation for use inside Flatpak portals.
+*/
 template ProxyResolverT()
 {
 
 
   /**
-   * Checks if resolver can be used on this system. $(LPAREN)This is used
-   * internally; [gio.proxy_resolver.ProxyResolver.getDefault] will only return a proxy
-   * resolver that returns %TRUE for this method.$(RPAREN)
-   * Returns: %TRUE if resolver is supported.
-   */
+      Checks if resolver can be used on this system. (This is used
+    internally; [gio.proxy_resolver.ProxyResolver.getDefault] will only return a proxy
+    resolver that returns true for this method.)
+    Returns:     true if resolver is supported.
+  */
   override bool isSupported()
   {
     bool _retval;
@@ -37,26 +38,28 @@ template ProxyResolverT()
   }
 
   /**
-   * Looks into the system proxy configuration to determine what proxy,
-   * if any, to use to connect to uri. The returned proxy URIs are of
-   * the form `<protocol>://[user[:password]@]host[:port]` or
-   * `direct://`, where <protocol> could be http, rtsp, socks
-   * or other proxying protocol.
-   * If you don't know what network protocol is being used on the
-   * socket, you should use `none` as the URI protocol.
-   * In this case, the resolver might still return a generic proxy type
-   * $(LPAREN)such as SOCKS$(RPAREN), but would not return protocol-specific proxy types
-   * $(LPAREN)such as http$(RPAREN).
-   * `direct://` is used when no proxy is needed.
-   * Direct connection should not be attempted unless it is part of the
-   * returned array of proxies.
-   * Params:
-   *   uri = a URI representing the destination to connect to
-   *   cancellable = a #GCancellable, or %NULL
-   * Returns: A
-   *   NULL-terminated array of proxy URIs. Must be freed
-   *   with [glib.global.strfreev].
-   */
+      Looks into the system proxy configuration to determine what proxy,
+    if any, to use to connect to uri. The returned proxy URIs are of
+    the form `<protocol>://[user[:password]@]host[:port]` or
+    `direct://`, where <protocol> could be http, rtsp, socks
+    or other proxying protocol.
+    
+    If you don't know what network protocol is being used on the
+    socket, you should use `none` as the URI protocol.
+    In this case, the resolver might still return a generic proxy type
+    (such as SOCKS), but would not return protocol-specific proxy types
+    (such as http).
+    
+    `direct://` is used when no proxy is needed.
+    Direct connection should not be attempted unless it is part of the
+    returned array of proxies.
+    Params:
+      uri =       a URI representing the destination to connect to
+      cancellable =       a #GCancellable, or null
+    Returns:     A
+                    NULL-terminated array of proxy URIs. Must be freed
+                    with [glib.global.strfreev].
+  */
   override string[] lookup(string uri, gio.cancellable.Cancellable cancellable = null)
   {
     char** _cretval;
@@ -80,13 +83,13 @@ template ProxyResolverT()
   }
 
   /**
-   * Asynchronous lookup of proxy. See [gio.proxy_resolver.ProxyResolver.lookup] for more
-   * details.
-   * Params:
-   *   uri = a URI representing the destination to connect to
-   *   cancellable = a #GCancellable, or %NULL
-   *   callback = callback to call after resolution completes
-   */
+      Asynchronous lookup of proxy. See [gio.proxy_resolver.ProxyResolver.lookup] for more
+    details.
+    Params:
+      uri =       a URI representing the destination to connect to
+      cancellable =       a #GCancellable, or null
+      callback =       callback to call after resolution completes
+  */
   override void lookupAsync(string uri, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -104,15 +107,15 @@ template ProxyResolverT()
   }
 
   /**
-   * Call this function to obtain the array of proxy URIs when
-   * [gio.proxy_resolver.ProxyResolver.lookupAsync] is complete. See
-   * [gio.proxy_resolver.ProxyResolver.lookup] for more details.
-   * Params:
-   *   result = the result passed to your #GAsyncReadyCallback
-   * Returns: A
-   *   NULL-terminated array of proxy URIs. Must be freed
-   *   with [glib.global.strfreev].
-   */
+      Call this function to obtain the array of proxy URIs when
+    [gio.proxy_resolver.ProxyResolver.lookupAsync] is complete. See
+    [gio.proxy_resolver.ProxyResolver.lookup] for more details.
+    Params:
+      result =       the result passed to your #GAsyncReadyCallback
+    Returns:     A
+                    NULL-terminated array of proxy URIs. Must be freed
+                    with [glib.global.strfreev].
+  */
   override string[] lookupFinish(gio.async_result.AsyncResult result)
   {
     char** _cretval;

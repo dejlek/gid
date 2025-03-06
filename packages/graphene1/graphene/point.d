@@ -8,8 +8,8 @@ import graphene.types;
 import graphene.vec2;
 
 /**
- * A point with two coordinates.
- */
+    A point with two coordinates.
+*/
 class Point : gobject.boxed.Boxed
 {
 
@@ -60,26 +60,30 @@ class Point : gobject.boxed.Boxed
   }
 
   /**
-   * Allocates a new #graphene_point_t structure.
-   * The coordinates of the returned point are $(LPAREN)0, 0$(RPAREN).
-   * It's possible to chain this function with [graphene.point.Point.init_]
-   * or [graphene.point.Point.initFromPoint], e.g.:
-   * |[<!-- language\="C" -->
-   * graphene_point_t *
-   * point_new $(LPAREN)float x, float y$(RPAREN)
-   * {
-   * return graphene_point_init $(LPAREN)graphene_point_alloc $(LPAREN)$(RPAREN), x, y$(RPAREN);
-   * }
-   * graphene_point_t *
-   * point_copy $(LPAREN)const graphene_point_t *p$(RPAREN)
-   * {
-   * return graphene_point_init_from_point $(LPAREN)graphene_point_alloc $(LPAREN)$(RPAREN), p$(RPAREN);
-   * }
-   * ]|
-   * Returns: the newly allocated #graphene_point_t.
-   *   Use [graphene.point.Point.free] to free the resources allocated by
-   *   this function.
-   */
+      Allocates a new #graphene_point_t structure.
+    
+    The coordinates of the returned point are (0, 0).
+    
+    It's possible to chain this function with [graphene.point.Point.init_]
+    or [graphene.point.Point.initFromPoint], e.g.:
+    
+    ```c
+      graphene_point_t *
+      point_new (float x, float y)
+      {
+        return graphene_point_init (graphene_point_alloc (), x, y);
+      }
+    
+      graphene_point_t *
+      point_copy (const graphene_point_t *p)
+      {
+        return graphene_point_init_from_point (graphene_point_alloc (), p);
+      }
+    ```
+    Returns:     the newly allocated #graphene_point_t.
+        Use [graphene.point.Point.free] to free the resources allocated by
+        this function.
+  */
   static graphene.point.Point alloc()
   {
     graphene_point_t* _cretval;
@@ -89,13 +93,13 @@ class Point : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the distance between a and b.
-   * Params:
-   *   b = a #graphene_point_t
-   *   dX = distance component on the X axis
-   *   dY = distance component on the Y axis
-   * Returns: the distance between the two points
-   */
+      Computes the distance between a and b.
+    Params:
+      b =       a #graphene_point_t
+      dX =       distance component on the X axis
+      dY =       distance component on the Y axis
+    Returns:     the distance between the two points
+  */
   float distance(graphene.point.Point b, out float dX, out float dY)
   {
     float _retval;
@@ -104,15 +108,16 @@ class Point : gobject.boxed.Boxed
   }
 
   /**
-   * Checks if the two points a and b point to the same
-   * coordinates.
-   * This function accounts for floating point fluctuations; if
-   * you want to control the fuzziness of the match, you can use
-   * [graphene.point.Point.near] instead.
-   * Params:
-   *   b = a #graphene_point_t
-   * Returns: `true` if the points have the same coordinates
-   */
+      Checks if the two points a and b point to the same
+    coordinates.
+    
+    This function accounts for floating point fluctuations; if
+    you want to control the fuzziness of the match, you can use
+    [graphene.point.Point.near] instead.
+    Params:
+      b =       a #graphene_point_t
+    Returns:     `true` if the points have the same coordinates
+  */
   bool equal(graphene.point.Point b)
   {
     bool _retval;
@@ -121,13 +126,14 @@ class Point : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes p to the given x and y coordinates.
-   * It's safe to call this function multiple times.
-   * Params:
-   *   x = the X coordinate
-   *   y = the Y coordinate
-   * Returns: the initialized point
-   */
+      Initializes p to the given x and y coordinates.
+    
+    It's safe to call this function multiple times.
+    Params:
+      x =       the X coordinate
+      y =       the Y coordinate
+    Returns:     the initialized point
+  */
   graphene.point.Point init_(float x, float y)
   {
     graphene_point_t* _cretval;
@@ -137,11 +143,11 @@ class Point : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes p with the same coordinates of src.
-   * Params:
-   *   src = the #graphene_point_t to use
-   * Returns: the initialized point
-   */
+      Initializes p with the same coordinates of src.
+    Params:
+      src =       the #graphene_point_t to use
+    Returns:     the initialized point
+  */
   graphene.point.Point initFromPoint(graphene.point.Point src)
   {
     graphene_point_t* _cretval;
@@ -151,11 +157,11 @@ class Point : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes p with the coordinates inside the given #graphene_vec2_t.
-   * Params:
-   *   src = a #graphene_vec2_t
-   * Returns: the initialized point
-   */
+      Initializes p with the coordinates inside the given #graphene_vec2_t.
+    Params:
+      src =       a #graphene_vec2_t
+    Returns:     the initialized point
+  */
   graphene.point.Point initFromVec2(graphene.vec2.Vec2 src)
   {
     graphene_point_t* _cretval;
@@ -165,14 +171,14 @@ class Point : gobject.boxed.Boxed
   }
 
   /**
-   * Linearly interpolates the coordinates of a and b using the
-   * given factor.
-   * Params:
-   *   b = a #graphene_point_t
-   *   factor = the linear interpolation factor
-   *   res = return location for the interpolated
-   *     point
-   */
+      Linearly interpolates the coordinates of a and b using the
+    given factor.
+    Params:
+      b =       a #graphene_point_t
+      factor =       the linear interpolation factor
+      res =       return location for the interpolated
+          point
+  */
   void interpolate(graphene.point.Point b, double factor, out graphene.point.Point res)
   {
     graphene_point_t _res;
@@ -181,13 +187,13 @@ class Point : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether the two points a and b are within
-   * the threshold of epsilon.
-   * Params:
-   *   b = a #graphene_point_t
-   *   epsilon = threshold between the two points
-   * Returns: `true` if the distance is within epsilon
-   */
+      Checks whether the two points a and b are within
+    the threshold of epsilon.
+    Params:
+      b =       a #graphene_point_t
+      epsilon =       threshold between the two points
+    Returns:     `true` if the distance is within epsilon
+  */
   bool near(graphene.point.Point b, float epsilon)
   {
     bool _retval;
@@ -196,11 +202,11 @@ class Point : gobject.boxed.Boxed
   }
 
   /**
-   * Stores the coordinates of the given #graphene_point_t into a
-   * #graphene_vec2_t.
-   * Params:
-   *   v = return location for the vertex
-   */
+      Stores the coordinates of the given #graphene_point_t into a
+    #graphene_vec2_t.
+    Params:
+      v =       return location for the vertex
+  */
   void toVec2(out graphene.vec2.Vec2 v)
   {
     graphene_vec2_t _v;
@@ -209,9 +215,9 @@ class Point : gobject.boxed.Boxed
   }
 
   /**
-   * Returns a point fixed at $(LPAREN)0, 0$(RPAREN).
-   * Returns: a fixed point
-   */
+      Returns a point fixed at (0, 0).
+    Returns:     a fixed point
+  */
   static graphene.point.Point zero()
   {
     const(graphene_point_t)* _cretval;

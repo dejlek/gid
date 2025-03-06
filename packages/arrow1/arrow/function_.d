@@ -12,6 +12,7 @@ import glib.error;
 import gobject.object;
 import gobject.types;
 
+/** */
 class Function : gobject.object.ObjectG
 {
 
@@ -31,6 +32,7 @@ class Function : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   static arrow.function_.Function[] all()
   {
     GList* _cretval;
@@ -39,6 +41,7 @@ class Function : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   static arrow.function_.Function find(string name)
   {
     GArrowFunction* _cretval;
@@ -48,6 +51,7 @@ class Function : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equal(arrow.function_.Function otherFunction)
   {
     bool _retval;
@@ -55,6 +59,7 @@ class Function : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.datum.Datum execute(arrow.datum.Datum[] args, arrow.function_options.FunctionOptions options = null, arrow.execute_context.ExecuteContext context = null)
   {
     GArrowDatum* _cretval;
@@ -68,6 +73,7 @@ class Function : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.function_options.FunctionOptions getDefaultOptions()
   {
     GArrowFunctionOptions* _cretval;
@@ -76,6 +82,7 @@ class Function : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.function_doc.FunctionDoc getDoc()
   {
     GArrowFunctionDoc* _cretval;
@@ -84,6 +91,7 @@ class Function : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getName()
   {
     const(char)* _cretval;
@@ -92,6 +100,7 @@ class Function : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gobject.types.GType getOptionsType()
   {
     gobject.types.GType _retval;
@@ -99,6 +108,7 @@ class Function : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;

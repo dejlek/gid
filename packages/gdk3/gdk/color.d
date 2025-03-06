@@ -7,11 +7,11 @@ import gid.gid;
 import gobject.boxed;
 
 /**
- * A #GdkColor is used to describe a color,
- * similar to the XColor struct used in the X11 drawing API.
+    A #GdkColor is used to describe a color,
+  similar to the XColor struct used in the X11 drawing API.
 
- * Deprecated: Use #GdkRGBA
- */
+  Deprecated:     Use #GdkRGBA
+*/
 class Color : gobject.boxed.Boxed
 {
 
@@ -82,12 +82,13 @@ class Color : gobject.boxed.Boxed
   }
 
   /**
-   * Makes a copy of a #GdkColor.
-   * The result must be freed using [gdk.color.Color.free].
-   * Returns: a copy of color
-
-   * Deprecated: Use #GdkRGBA
-   */
+      Makes a copy of a #GdkColor.
+    
+    The result must be freed using [gdk.color.Color.free].
+    Returns:     a copy of color
+  
+    Deprecated:     Use #GdkRGBA
+  */
   gdk.color.Color copy()
   {
     GdkColor* _cretval;
@@ -97,13 +98,13 @@ class Color : gobject.boxed.Boxed
   }
 
   /**
-   * Compares two colors.
-   * Params:
-   *   colorb = another #GdkColor
-   * Returns: %TRUE if the two colors compare equal
-
-   * Deprecated: Use #GdkRGBA
-   */
+      Compares two colors.
+    Params:
+      colorb =       another #GdkColor
+    Returns:     true if the two colors compare equal
+  
+    Deprecated:     Use #GdkRGBA
+  */
   bool equal(gdk.color.Color colorb)
   {
     bool _retval;
@@ -112,12 +113,12 @@ class Color : gobject.boxed.Boxed
   }
 
   /**
-   * A hash function suitable for using for a hash
-   * table that stores #GdkColors.
-   * Returns: The hash function applied to color
-
-   * Deprecated: Use #GdkRGBA
-   */
+      A hash function suitable for using for a hash
+    table that stores #GdkColors.
+    Returns:     The hash function applied to color
+  
+    Deprecated:     Use #GdkRGBA
+  */
   uint hash()
   {
     uint _retval;
@@ -126,14 +127,15 @@ class Color : gobject.boxed.Boxed
   }
 
   /**
-   * Returns a textual specification of color in the hexadecimal
-   * form “\#rrrrggggbbbb” where “r”, “g” and “b” are hex digits
-   * representing the red, green and blue components respectively.
-   * The returned string can be parsed by [gdk.color.Color.parse].
-   * Returns: a newly-allocated text string
-
-   * Deprecated: Use #GdkRGBA
-   */
+      Returns a textual specification of color in the hexadecimal
+    form “\#rrrrggggbbbb” where “r”, “g” and “b” are hex digits
+    representing the red, green and blue components respectively.
+    
+    The returned string can be parsed by [gdk.color.Color.parse].
+    Returns:     a newly-allocated text string
+  
+    Deprecated:     Use #GdkRGBA
+  */
   string toString_()
   {
     char* _cretval;
@@ -143,22 +145,23 @@ class Color : gobject.boxed.Boxed
   }
 
   /**
-   * Parses a textual specification of a color and fill in the
-   * red, green, and blue fields of a #GdkColor.
-   * The string can either one of a large set of standard names
-   * $(LPAREN)taken from the X11 `rgb.txt` file$(RPAREN), or it can be a hexadecimal
-   * value in the form “\#rgb” “\#rrggbb”, “\#rrrgggbbb” or
-   * “\#rrrrggggbbbb” where “r”, “g” and “b” are hex digits of
-   * the red, green, and blue components of the color, respectively.
-   * $(LPAREN)White in the four forms is “\#fff”, “\#ffffff”, “\#fffffffff”
-   * and “\#ffffffffffff”$(RPAREN).
-   * Params:
-   *   spec = the string specifying the color
-   *   color = the #GdkColor to fill in
-   * Returns: %TRUE if the parsing succeeded
-
-   * Deprecated: Use #GdkRGBA
-   */
+      Parses a textual specification of a color and fill in the
+    red, green, and blue fields of a #GdkColor.
+    
+    The string can either one of a large set of standard names
+    (taken from the X11 `rgb.txt` file), or it can be a hexadecimal
+    value in the form “\#rgb” “\#rrggbb”, “\#rrrgggbbb” or
+    “\#rrrrggggbbbb” where “r”, “g” and “b” are hex digits of
+    the red, green, and blue components of the color, respectively.
+    (White in the four forms is “\#fff”, “\#ffffff”, “\#fffffffff”
+    and “\#ffffffffffff”).
+    Params:
+      spec =       the string specifying the color
+      color =       the #GdkColor to fill in
+    Returns:     true if the parsing succeeded
+  
+    Deprecated:     Use #GdkRGBA
+  */
   static bool parse(string spec, out gdk.color.Color color)
   {
     bool _retval;

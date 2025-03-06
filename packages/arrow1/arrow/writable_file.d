@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 interface WritableFile
 {
 
@@ -16,5 +17,6 @@ interface WritableFile
     return cast(void function())garrow_writable_file_get_type != &gidSymbolNotFound ? garrow_writable_file_get_type() : cast(GType)0;
   }
 
+  /** */
   bool writeAt(long position, ubyte[] data);
 }

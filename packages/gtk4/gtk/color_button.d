@@ -18,22 +18,27 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * The `GtkColorButton` allows to open a color chooser dialog to change
- * the color.
- * ![An example GtkColorButton](color-button.png)
- * It is suitable widget for selecting a color in a preference dialog.
- * # CSS nodes
- * ```
- * colorbutton
- * ╰── button.color
- * ╰── [content]
- * ```
- * `GtkColorButton` has a single CSS node with name colorbutton which
- * contains a button node. To differentiate it from a plain `GtkButton`,
- * it gets the .color style class.
+    The [gtk.color_button.ColorButton] allows to open a color chooser dialog to change
+  the color.
+  
+  ![An example GtkColorButton](color-button.png)
+  
+  It is suitable widget for selecting a color in a preference dialog.
+  
+  # CSS nodes
+  
+  ```
+  colorbutton
+  ╰── button.color
+      ╰── [content]
+  ```
+  
+  [gtk.color_button.ColorButton] has a single CSS node with name colorbutton which
+  contains a button node. To differentiate it from a plain [gtk.button.Button],
+  it gets the .color style class.
 
- * Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
- */
+  Deprecated:     Use [gtk.color_dialog_button.ColorDialogButton] instead
+*/
 class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
 {
 
@@ -56,16 +61,17 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   mixin ColorChooserT!();
 
   /**
-   * Creates a new color button.
-   * This returns a widget in the form of a small button containing
-   * a swatch representing the current selected color. When the button
-   * is clicked, a color chooser dialog will open, allowing the user
-   * to select a color. The swatch will be updated to reflect the new
-   * color when the user finishes.
-   * Returns: a new color button
-
-   * Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
-   */
+      Creates a new color button.
+    
+    This returns a widget in the form of a small button containing
+    a swatch representing the current selected color. When the button
+    is clicked, a color chooser dialog will open, allowing the user
+    to select a color. The swatch will be updated to reflect the new
+    color when the user finishes.
+    Returns:     a new color button
+  
+    Deprecated:     Use [gtk.color_dialog_button.ColorDialogButton] instead
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -74,11 +80,11 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   }
 
   /**
-   * Creates a new color button showing the given color.
-   * Params:
-   *   rgba = A `GdkRGBA` to set the current color with
-   * Returns: a new color button
-   */
+      Creates a new color button showing the given color.
+    Params:
+      rgba =       A [gdk.rgba.RGBA] to set the current color with
+    Returns:     a new color button
+  */
   static gtk.color_button.ColorButton newWithRgba(gdk.rgba.RGBA rgba)
   {
     GtkWidget* _cretval;
@@ -88,11 +94,11 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   }
 
   /**
-   * Gets whether the dialog is modal.
-   * Returns: %TRUE if the dialog is modal
-
-   * Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
-   */
+      Gets whether the dialog is modal.
+    Returns:     true if the dialog is modal
+  
+    Deprecated:     Use [gtk.color_dialog_button.ColorDialogButton] instead
+  */
   bool getModal()
   {
     bool _retval;
@@ -101,11 +107,11 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   }
 
   /**
-   * Gets the title of the color chooser dialog.
-   * Returns: An internal string, do not free the return value
-
-   * Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
-   */
+      Gets the title of the color chooser dialog.
+    Returns:     An internal string, do not free the return value
+  
+    Deprecated:     Use [gtk.color_dialog_button.ColorDialogButton] instead
+  */
   string getTitle()
   {
     const(char)* _cretval;
@@ -115,24 +121,24 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   }
 
   /**
-   * Sets whether the dialog should be modal.
-   * Params:
-   *   modal = %TRUE to make the dialog modal
-
-   * Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
-   */
+      Sets whether the dialog should be modal.
+    Params:
+      modal =       true to make the dialog modal
+  
+    Deprecated:     Use [gtk.color_dialog_button.ColorDialogButton] instead
+  */
   void setModal(bool modal)
   {
     gtk_color_button_set_modal(cast(GtkColorButton*)cPtr, modal);
   }
 
   /**
-   * Sets the title for the color chooser dialog.
-   * Params:
-   *   title = String containing new window title
-
-   * Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
-   */
+      Sets the title for the color chooser dialog.
+    Params:
+      title =       String containing new window title
+  
+    Deprecated:     Use [gtk.color_dialog_button.ColorDialogButton] instead
+  */
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
@@ -140,21 +146,28 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   }
 
   /**
-   * Emitted to when the color button is activated.
-   * The `::activate` signal on `GtkMenuButton` is an action signal and
-   * emitting it causes the button to pop up its dialog.
-   *   colorButton = the instance the signal is connected to
-   */
+      Emitted to when the color button is activated.
+    
+    The `::activate` signal on [gtk.menu_button.MenuButton] is an action signal and
+    emitting it causes the button to pop up its dialog.
+  
+    ## Parameters
+    $(LIST
+      * $(B colorButton) the instance the signal is connected to
+    )
+  */
   alias ActivateCallbackDlg = void delegate(gtk.color_button.ColorButton colorButton);
+
+  /** ditto */
   alias ActivateCallbackFunc = void function(gtk.color_button.ColorButton colorButton);
 
   /**
-   * Connect to Activate signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Activate signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
@@ -171,24 +184,32 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   }
 
   /**
-   * Emitted when the user selects a color.
-   * When handling this signal, use [gtk.color_chooser.ColorChooser.getRgba]
-   * to find out which color was just selected.
-   * Note that this signal is only emitted when the user changes the color.
-   * If you need to react to programmatic color changes as well, use
-   * the notify::rgba signal.
-   *   colorButton = the instance the signal is connected to
-   */
+      Emitted when the user selects a color.
+    
+    When handling this signal, use [gtk.color_chooser.ColorChooser.getRgba]
+    to find out which color was just selected.
+    
+    Note that this signal is only emitted when the user changes the color.
+    If you need to react to programmatic color changes as well, use
+    the notify::rgba signal.
+  
+    ## Parameters
+    $(LIST
+      * $(B colorButton) the instance the signal is connected to
+    )
+  */
   alias ColorSetCallbackDlg = void delegate(gtk.color_button.ColorButton colorButton);
+
+  /** ditto */
   alias ColorSetCallbackFunc = void function(gtk.color_button.ColorButton colorButton);
 
   /**
-   * Connect to ColorSet signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ColorSet signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectColorSet(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ColorSetCallbackDlg) || is(T : ColorSetCallbackFunc))
   {

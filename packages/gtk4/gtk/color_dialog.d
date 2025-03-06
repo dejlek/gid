@@ -13,17 +13,19 @@ import gtk.types;
 import gtk.window;
 
 /**
- * A `GtkColorDialog` object collects the arguments that
- * are needed to present a color chooser dialog to the
- * user, such as a title for the dialog and whether it
- * should be modal.
- * The dialog is shown with the [gtk.color_dialog.ColorDialog.chooseRgba]
- * function. This API follows the GIO async pattern, and the
- * result can be obtained by calling
- * [gtk.color_dialog.ColorDialog.chooseRgbaFinish].
- * See [gtk.color_dialog_button.ColorDialogButton] for a convenient control
- * that uses `GtkColorDialog` and presents the results.
- */
+    A [gtk.color_dialog.ColorDialog] object collects the arguments that
+  are needed to present a color chooser dialog to the
+  user, such as a title for the dialog and whether it
+  should be modal.
+  
+  The dialog is shown with the [gtk.color_dialog.ColorDialog.chooseRgba]
+  function. This API follows the GIO async pattern, and the
+  result can be obtained by calling
+  [gtk.color_dialog.ColorDialog.chooseRgbaFinish].
+  
+  See [gtk.color_dialog_button.ColorDialogButton] for a convenient control
+  that uses [gtk.color_dialog.ColorDialog] and presents the results.
+*/
 class ColorDialog : gobject.object.ObjectG
 {
 
@@ -44,9 +46,9 @@ class ColorDialog : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new `GtkColorDialog` object.
-   * Returns: the new `GtkColorDialog`
-   */
+      Creates a new [gtk.color_dialog.ColorDialog] object.
+    Returns:     the new [gtk.color_dialog.ColorDialog]
+  */
   this()
   {
     GtkColorDialog* _cretval;
@@ -55,17 +57,18 @@ class ColorDialog : gobject.object.ObjectG
   }
 
   /**
-   * This function initiates a color choice operation by
-   * presenting a color chooser dialog to the user.
-   * The callback will be called when the dialog is dismissed.
-   * It should call [gtk.color_dialog.ColorDialog.chooseRgbaFinish]
-   * to obtain the result.
-   * Params:
-   *   parent = the parent `GtkWindow`
-   *   initialColor = the color to select initially
-   *   cancellable = a `GCancellable` to cancel the operation
-   *   callback = a callback to call when the operation is complete
-   */
+      This function initiates a color choice operation by
+    presenting a color chooser dialog to the user.
+    
+    The callback will be called when the dialog is dismissed.
+    It should call [gtk.color_dialog.ColorDialog.chooseRgbaFinish]
+    to obtain the result.
+    Params:
+      parent =       the parent [gtk.window.Window]
+      initialColor =       the color to select initially
+      cancellable =       a [gio.cancellable.Cancellable] to cancel the operation
+      callback =       a callback to call when the operation is complete
+  */
   void chooseRgba(gtk.window.Window parent = null, gdk.rgba.RGBA initialColor = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -82,13 +85,13 @@ class ColorDialog : gobject.object.ObjectG
   }
 
   /**
-   * Finishes the [gtk.color_dialog.ColorDialog.chooseRgba] call and
-   * returns the resulting color.
-   * Params:
-   *   result = a `GAsyncResult`
-   * Returns: the selected color, or
-   *   `NULL` and error is set
-   */
+      Finishes the [gtk.color_dialog.ColorDialog.chooseRgba] call and
+    returns the resulting color.
+    Params:
+      result =       a [gio.async_result.AsyncResult]
+    Returns:     the selected color, or
+        `NULL` and error is set
+  */
   gdk.rgba.RGBA chooseRgbaFinish(gio.async_result.AsyncResult result)
   {
     GdkRGBA* _cretval;
@@ -101,11 +104,11 @@ class ColorDialog : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the color chooser dialog
-   * blocks interaction with the parent window
-   * while it is presented.
-   * Returns: `TRUE` if the color chooser dialog is modal
-   */
+      Returns whether the color chooser dialog
+    blocks interaction with the parent window
+    while it is presented.
+    Returns:     `TRUE` if the color chooser dialog is modal
+  */
   bool getModal()
   {
     bool _retval;
@@ -114,10 +117,10 @@ class ColorDialog : gobject.object.ObjectG
   }
 
   /**
-   * Returns the title that will be shown on the
-   * color chooser dialog.
-   * Returns: the title
-   */
+      Returns the title that will be shown on the
+    color chooser dialog.
+    Returns:     the title
+  */
   string getTitle()
   {
     const(char)* _cretval;
@@ -127,9 +130,9 @@ class ColorDialog : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether colors may have alpha.
-   * Returns: `TRUE` if colors may have alpha
-   */
+      Returns whether colors may have alpha.
+    Returns:     `TRUE` if colors may have alpha
+  */
   bool getWithAlpha()
   {
     bool _retval;
@@ -138,23 +141,23 @@ class ColorDialog : gobject.object.ObjectG
   }
 
   /**
-   * Sets whether the color chooser dialog
-   * blocks interaction with the parent window
-   * while it is presented.
-   * Params:
-   *   modal = the new value
-   */
+      Sets whether the color chooser dialog
+    blocks interaction with the parent window
+    while it is presented.
+    Params:
+      modal =       the new value
+  */
   void setModal(bool modal)
   {
     gtk_color_dialog_set_modal(cast(GtkColorDialog*)cPtr, modal);
   }
 
   /**
-   * Sets the title that will be shown on the
-   * color chooser dialog.
-   * Params:
-   *   title = the new title
-   */
+      Sets the title that will be shown on the
+    color chooser dialog.
+    Params:
+      title =       the new title
+  */
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
@@ -162,10 +165,10 @@ class ColorDialog : gobject.object.ObjectG
   }
 
   /**
-   * Sets whether colors may have alpha.
-   * Params:
-   *   withAlpha = the new value
-   */
+      Sets whether colors may have alpha.
+    Params:
+      withAlpha =       the new value
+  */
   void setWithAlpha(bool withAlpha)
   {
     gtk_color_dialog_set_with_alpha(cast(GtkColorDialog*)cPtr, withAlpha);

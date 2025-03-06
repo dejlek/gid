@@ -7,8 +7,8 @@ import gdk.types;
 import gid.gid;
 
 /**
- * An event related to closing a top-level surface.
- */
+    An event related to closing a top-level surface.
+*/
 class DeleteEvent : gdk.event.Event
 {
 

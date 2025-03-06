@@ -11,9 +11,9 @@ import glib.error;
 import gobject.object;
 
 /**
- * `GDtlsServerConnection` is the server-side subclass of
- * [gio.dtls_connection.DtlsConnection], representing a server-side DTLS connection.
- */
+    [gio.dtls_server_connection.DtlsServerConnection] is the server-side subclass of
+  [gio.dtls_connection.DtlsConnection], representing a server-side DTLS connection.
+*/
 interface DtlsServerConnection
 {
 
@@ -24,13 +24,13 @@ interface DtlsServerConnection
   }
 
   /**
-   * Creates a new #GDtlsServerConnection wrapping base_socket.
-   * Params:
-   *   baseSocket = the #GDatagramBased to wrap
-   *   certificate = the default server certificate, or %NULL
-   * Returns: the new
-   *   #GDtlsServerConnection, or %NULL on error
-   */
+      Creates a new #GDtlsServerConnection wrapping base_socket.
+    Params:
+      baseSocket =       the #GDatagramBased to wrap
+      certificate =       the default server certificate, or null
+    Returns:     the new
+        #GDtlsServerConnection, or null on error
+  */
   static gio.dtls_server_connection.DtlsServerConnection new_(gio.datagram_based.DatagramBased baseSocket, gio.tls_certificate.TlsCertificate certificate = null)
   {
     GDatagramBased* _cretval;

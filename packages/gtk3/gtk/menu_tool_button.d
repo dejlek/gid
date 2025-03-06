@@ -18,24 +18,29 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * A #GtkMenuToolButton is a #GtkToolItem that contains a button and
- * a small additional button with an arrow. When clicked, the arrow
- * button pops up a dropdown menu.
- * Use [gtk.menu_tool_button.MenuToolButton.new_] to create a new
- * #GtkMenuToolButton.
- * # GtkMenuToolButton as GtkBuildable
- * The GtkMenuToolButton implementation of the GtkBuildable interface
- * supports adding a menu by specifying “menu” as the “type” attribute
- * of a `<child>` element.
- * An example for a UI definition fragment with menus:
- * |[<!-- language\="xml" -->
- * <object class\="GtkMenuToolButton">
- * <child type\="menu">
- * <object class\="GtkMenu"/>
- * </child>
- * </object>
- * ]|
- */
+    A #GtkMenuToolButton is a #GtkToolItem that contains a button and
+  a small additional button with an arrow. When clicked, the arrow
+  button pops up a dropdown menu.
+  
+  Use [gtk.menu_tool_button.MenuToolButton.new_] to create a new
+  #GtkMenuToolButton.
+  
+  # GtkMenuToolButton as GtkBuildable
+  
+  The GtkMenuToolButton implementation of the GtkBuildable interface
+  supports adding a menu by specifying “menu” as the “type” attribute
+  of a `<child>` element.
+  
+  An example for a UI definition fragment with menus:
+  
+  ```xml
+  <object class="GtkMenuToolButton">
+    <child type="menu">
+      <object class="GtkMenu"/>
+    </child>
+  </object>
+  ```
+*/
 class MenuToolButton : gtk.tool_button.ToolButton
 {
 
@@ -56,13 +61,13 @@ class MenuToolButton : gtk.tool_button.ToolButton
   }
 
   /**
-   * Creates a new #GtkMenuToolButton using icon_widget as icon and
-   * label as label.
-   * Params:
-   *   iconWidget = a widget that will be used as icon widget, or %NULL
-   *   label = a string that will be used as label, or %NULL
-   * Returns: the new #GtkMenuToolButton
-   */
+      Creates a new #GtkMenuToolButton using icon_widget as icon and
+    label as label.
+    Params:
+      iconWidget =       a widget that will be used as icon widget, or null
+      label =       a string that will be used as label, or null
+    Returns:     the new #GtkMenuToolButton
+  */
   this(gtk.widget.Widget iconWidget = null, string label = null)
   {
     GtkToolItem* _cretval;
@@ -72,15 +77,15 @@ class MenuToolButton : gtk.tool_button.ToolButton
   }
 
   /**
-   * Creates a new #GtkMenuToolButton.
-   * The new #GtkMenuToolButton will contain an icon and label from
-   * the stock item indicated by stock_id.
-   * Params:
-   *   stockId = the name of a stock item
-   * Returns: the new #GtkMenuToolButton
-
-   * Deprecated: Use [gtk.menu_tool_button.MenuToolButton.new_] instead.
-   */
+      Creates a new #GtkMenuToolButton.
+    The new #GtkMenuToolButton will contain an icon and label from
+    the stock item indicated by stock_id.
+    Params:
+      stockId =       the name of a stock item
+    Returns:     the new #GtkMenuToolButton
+  
+    Deprecated:     Use [gtk.menu_tool_button.MenuToolButton.new_] instead.
+  */
   static gtk.menu_tool_button.MenuToolButton newFromStock(string stockId)
   {
     GtkToolItem* _cretval;
@@ -91,10 +96,10 @@ class MenuToolButton : gtk.tool_button.ToolButton
   }
 
   /**
-   * Gets the #GtkMenu associated with #GtkMenuToolButton.
-   * Returns: the #GtkMenu associated
-   *   with #GtkMenuToolButton
-   */
+      Gets the #GtkMenu associated with #GtkMenuToolButton.
+    Returns:     the #GtkMenu associated
+          with #GtkMenuToolButton
+  */
   gtk.widget.Widget getMenu()
   {
     GtkWidget* _cretval;
@@ -104,12 +109,12 @@ class MenuToolButton : gtk.tool_button.ToolButton
   }
 
   /**
-   * Sets the tooltip markup text to be used as tooltip for the arrow button
-   * which pops up the menu.  See [gtk.tool_item.ToolItem.setTooltipText] for setting
-   * a tooltip on the whole #GtkMenuToolButton.
-   * Params:
-   *   markup = markup text to be used as tooltip text for button’s arrow button
-   */
+      Sets the tooltip markup text to be used as tooltip for the arrow button
+    which pops up the menu.  See [gtk.tool_item.ToolItem.setTooltipText] for setting
+    a tooltip on the whole #GtkMenuToolButton.
+    Params:
+      markup =       markup text to be used as tooltip text for button’s arrow button
+  */
   void setArrowTooltipMarkup(string markup)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
@@ -117,12 +122,12 @@ class MenuToolButton : gtk.tool_button.ToolButton
   }
 
   /**
-   * Sets the tooltip text to be used as tooltip for the arrow button which
-   * pops up the menu.  See [gtk.tool_item.ToolItem.setTooltipText] for setting a tooltip
-   * on the whole #GtkMenuToolButton.
-   * Params:
-   *   text = text to be used as tooltip text for button’s arrow button
-   */
+      Sets the tooltip text to be used as tooltip for the arrow button which
+    pops up the menu.  See [gtk.tool_item.ToolItem.setTooltipText] for setting a tooltip
+    on the whole #GtkMenuToolButton.
+    Params:
+      text =       text to be used as tooltip text for button’s arrow button
+  */
   void setArrowTooltipText(string text)
   {
     const(char)* _text = text.toCString(No.Alloc);
@@ -130,35 +135,43 @@ class MenuToolButton : gtk.tool_button.ToolButton
   }
 
   /**
-   * Sets the #GtkMenu that is popped up when the user clicks on the arrow.
-   * If menu is NULL, the arrow button becomes insensitive.
-   * Params:
-   *   menu = the #GtkMenu associated with #GtkMenuToolButton
-   */
+      Sets the #GtkMenu that is popped up when the user clicks on the arrow.
+    If menu is NULL, the arrow button becomes insensitive.
+    Params:
+      menu =       the #GtkMenu associated with #GtkMenuToolButton
+  */
   void setMenu(gtk.widget.Widget menu)
   {
     gtk_menu_tool_button_set_menu(cast(GtkMenuToolButton*)cPtr, menu ? cast(GtkWidget*)menu.cPtr(No.Dup) : null);
   }
 
   /**
-   * The ::show-menu signal is emitted before the menu is shown.
-   * It can be used to populate the menu on demand, using
-   * [gtk.menu_tool_button.MenuToolButton.setMenu].
-   * Note that even if you populate the menu dynamically in this way,
-   * you must set an empty menu on the #GtkMenuToolButton beforehand,
-   * since the arrow is made insensitive if the menu is not set.
-   *   menuToolButton = the instance the signal is connected to
-   */
+      The ::show-menu signal is emitted before the menu is shown.
+    
+    It can be used to populate the menu on demand, using
+    [gtk.menu_tool_button.MenuToolButton.setMenu].
+    
+    Note that even if you populate the menu dynamically in this way,
+    you must set an empty menu on the #GtkMenuToolButton beforehand,
+    since the arrow is made insensitive if the menu is not set.
+  
+    ## Parameters
+    $(LIST
+      * $(B menuToolButton) the instance the signal is connected to
+    )
+  */
   alias ShowMenuCallbackDlg = void delegate(gtk.menu_tool_button.MenuToolButton menuToolButton);
+
+  /** ditto */
   alias ShowMenuCallbackFunc = void function(gtk.menu_tool_button.MenuToolButton menuToolButton);
 
   /**
-   * Connect to ShowMenu signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ShowMenu signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectShowMenu(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ShowMenuCallbackDlg) || is(T : ShowMenuCallbackFunc))
   {

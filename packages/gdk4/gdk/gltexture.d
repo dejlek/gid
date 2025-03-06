@@ -15,8 +15,8 @@ import gio.loadable_icon_mixin;
 import glib.types;
 
 /**
- * A GdkTexture representing a GL texture object.
- */
+    A GdkTexture representing a GL texture object.
+*/
 class GLTexture : gdk.texture.Texture
 {
 
@@ -37,24 +37,25 @@ class GLTexture : gdk.texture.Texture
   }
 
   /**
-   * Creates a new texture for an existing GL texture.
-   * Note that the GL texture must not be modified until destroy is called,
-   * which will happen when the GdkTexture object is finalized, or due to
-   * an explicit call of [gdk.gltexture.GLTexture.release].
-   * Params:
-   *   context = a `GdkGLContext`
-   *   id = the ID of a texture that was created with context
-   *   width = the nominal width of the texture
-   *   height = the nominal height of the texture
-   *   destroy = a destroy notify that will be called when the GL resources
-   *     are released
-   *   data = data that gets passed to destroy
-   * Returns: A newly-created
-   *   `GdkTexture`
-
-   * Deprecated: [gdk.gltexture_builder.GLTextureBuilder] supersedes this function
-   *   and provides extended functionality for creating GL textures.
-   */
+      Creates a new texture for an existing GL texture.
+    
+    Note that the GL texture must not be modified until destroy is called,
+    which will happen when the GdkTexture object is finalized, or due to
+    an explicit call of [gdk.gltexture.GLTexture.release].
+    Params:
+      context =       a [gdk.glcontext.GLContext]
+      id =       the ID of a texture that was created with context
+      width =       the nominal width of the texture
+      height =       the nominal height of the texture
+      destroy =       a destroy notify that will be called when the GL resources
+          are released
+      data =       data that gets passed to destroy
+    Returns:     A newly-created
+        [gdk.texture.Texture]
+  
+    Deprecated:     [gdk.gltexture_builder.GLTextureBuilder] supersedes this function
+        and provides extended functionality for creating GL textures.
+  */
   this(gdk.glcontext.GLContext context, uint id, int width, int height, glib.types.DestroyNotify destroy, void* data = null)
   {
     extern(C) void _destroyCallback(void* data)
@@ -72,11 +73,12 @@ class GLTexture : gdk.texture.Texture
   }
 
   /**
-   * Releases the GL resources held by a `GdkGLTexture`.
-   * The texture contents are still available via the
-   * [gdk.texture.Texture.download] function, after this
-   * function has been called.
-   */
+      Releases the GL resources held by a [gdk.gltexture.GLTexture].
+    
+    The texture contents are still available via the
+    [gdk.texture.Texture.download] function, after this
+    function has been called.
+  */
   void release()
   {
     gdk_gl_texture_release(cast(GdkGLTexture*)cPtr);

@@ -7,8 +7,8 @@ import gdk.types;
 import gid.gid;
 
 /**
- * An event related to a keyboard focus change.
- */
+    An event related to a keyboard focus change.
+*/
 class FocusEvent : gdk.event.Event
 {
 
@@ -21,10 +21,10 @@ class FocusEvent : gdk.event.Event
   }
 
   /**
-   * Extracts whether this event is about focus entering or
-   * leaving the surface.
-   * Returns: %TRUE of the focus is entering
-   */
+      Extracts whether this event is about focus entering or
+    leaving the surface.
+    Returns:     true of the focus is entering
+  */
   bool getIn()
   {
     bool _retval;

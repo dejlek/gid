@@ -9,14 +9,15 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Generated from button presses for the buttons 4 to 7. Wheel mice are
- * usually configured to generate button press events for buttons 4 and 5
- * when the wheel is turned.
- * Some GDK backends can also generate “smooth” scroll events, which
- * can be recognized by the %GDK_SCROLL_SMOOTH scroll direction. For
- * these, the scroll deltas can be obtained with
- * [gdk.event.Event.getScrollDeltas].
- */
+    Generated from button presses for the buttons 4 to 7. Wheel mice are
+  usually configured to generate button press events for buttons 4 and 5
+  when the wheel is turned.
+  
+  Some GDK backends can also generate “smooth” scroll events, which
+  can be recognized by the [gdk.types.ScrollDirection.Smooth] scroll direction. For
+  these, the scroll deltas can be obtained with
+  [gdk.event.Event.getScrollDeltas].
+*/
 class EventScroll
 {
   GdkEventScroll cInstance;

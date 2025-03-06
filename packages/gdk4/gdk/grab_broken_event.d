@@ -9,8 +9,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * An event related to a broken windowing system grab.
- */
+    An event related to a broken windowing system grab.
+*/
 class GrabBrokenEvent : gdk.event.Event
 {
 
@@ -23,9 +23,9 @@ class GrabBrokenEvent : gdk.event.Event
   }
 
   /**
-   * Extracts the grab surface from a grab broken event.
-   * Returns: the grab surface of event
-   */
+      Extracts the grab surface from a grab broken event.
+    Returns:     the grab surface of event
+  */
   gdk.surface.Surface getGrabSurface()
   {
     GdkSurface* _cretval;
@@ -35,9 +35,9 @@ class GrabBrokenEvent : gdk.event.Event
   }
 
   /**
-   * Checks whether the grab broken event is for an implicit grab.
-   * Returns: %TRUE if the an implicit grab was broken
-   */
+      Checks whether the grab broken event is for an implicit grab.
+    Returns:     true if the an implicit grab was broken
+  */
   bool getImplicit()
   {
     bool _retval;

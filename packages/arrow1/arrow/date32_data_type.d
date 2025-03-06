@@ -6,6 +6,7 @@ import arrow.temporal_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class Date32DataType : arrow.temporal_data_type.TemporalDataType
 {
 
@@ -25,6 +26,7 @@ class Date32DataType : arrow.temporal_data_type.TemporalDataType
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowDate32DataType* _cretval;

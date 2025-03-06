@@ -12,6 +12,7 @@ import gtk.c.types;
 import gtk.container_accessible;
 import gtk.types;
 
+/** */
 class ComboBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.action.Action, atk.selection.Selection
 {
 

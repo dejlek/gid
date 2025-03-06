@@ -8,8 +8,8 @@ import gtk.filter;
 import gtk.types;
 
 /**
- * `GtkCustomFilter` determines whether to include items with a callback.
- */
+    [gtk.custom_filter.CustomFilter] determines whether to include items with a callback.
+*/
 class CustomFilter : gtk.filter.Filter
 {
 
@@ -30,15 +30,17 @@ class CustomFilter : gtk.filter.Filter
   }
 
   /**
-   * Creates a new filter using the given match_func to filter
-   * items.
-   * If match_func is %NULL, the filter matches all items.
-   * If the filter func changes its filtering behavior,
-   * [gtk.filter.Filter.changed] needs to be called.
-   * Params:
-   *   matchFunc = function to filter items
-   * Returns: a new `GtkCustomFilter`
-   */
+      Creates a new filter using the given match_func to filter
+    items.
+    
+    If match_func is null, the filter matches all items.
+    
+    If the filter func changes its filtering behavior,
+    [gtk.filter.Filter.changed] needs to be called.
+    Params:
+      matchFunc =       function to filter items
+    Returns:     a new [gtk.custom_filter.CustomFilter]
+  */
   this(gtk.types.CustomFilterFunc matchFunc = null)
   {
     extern(C) bool _matchFuncCallback(ObjectC* item, void* userData)
@@ -58,15 +60,18 @@ class CustomFilter : gtk.filter.Filter
   }
 
   /**
-   * Sets the function used for filtering items.
-   * If match_func is %NULL, the filter matches all items.
-   * If the filter func changes its filtering behavior,
-   * [gtk.filter.Filter.changed] needs to be called.
-   * If a previous function was set, its user_destroy will be
-   * called now.
-   * Params:
-   *   matchFunc = function to filter items
-   */
+      Sets the function used for filtering items.
+    
+    If match_func is null, the filter matches all items.
+    
+    If the filter func changes its filtering behavior,
+    [gtk.filter.Filter.changed] needs to be called.
+    
+    If a previous function was set, its user_destroy will be
+    called now.
+    Params:
+      matchFunc =       function to filter items
+  */
   void setFilterFunc(gtk.types.CustomFilterFunc matchFunc = null)
   {
     extern(C) bool _matchFuncCallback(ObjectC* item, void* userData)

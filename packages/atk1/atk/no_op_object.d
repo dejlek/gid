@@ -32,12 +32,13 @@ import gid.gid;
 import gobject.object;
 
 /**
- * An AtkObject which purports to implement all ATK interfaces.
- * An AtkNoOpObject is an AtkObject which purports to implement all
- * ATK interfaces. It is the type of AtkObject which is created if an
- * accessible object is requested for an object type for which no
- * factory type is specified.
- */
+    An AtkObject which purports to implement all ATK interfaces.
+  
+  An AtkNoOpObject is an AtkObject which purports to implement all
+  ATK interfaces. It is the type of AtkObject which is created if an
+  accessible object is requested for an object type for which no
+  factory type is specified.
+*/
 class NoOpObject : atk.object.ObjectAtk, atk.action.Action, atk.component.Component, atk.document.Document, atk.editable_text.EditableText, atk.hypertext.Hypertext, atk.image.Image, atk.selection.Selection, atk.table.Table, atk.table_cell.TableCell, atk.text.Text, atk.value.Value, atk.window.Window
 {
 
@@ -74,12 +75,12 @@ class NoOpObject : atk.object.ObjectAtk, atk.action.Action, atk.component.Compon
   alias setDescription = atk.object.ObjectAtk.setDescription;
 
   /**
-   * Provides a default $(LPAREN)non-functioning stub$(RPAREN) #AtkObject.
-   * Application maintainers should not use this method.
-   * Params:
-   *   obj = a #GObject
-   * Returns: a default $(LPAREN)non-functioning stub$(RPAREN) #AtkObject
-   */
+      Provides a default (non-functioning stub) #AtkObject.
+    Application maintainers should not use this method.
+    Params:
+      obj =       a #GObject
+    Returns:     a default (non-functioning stub) #AtkObject
+  */
   this(gobject.object.ObjectG obj)
   {
     AtkObject* _cretval;

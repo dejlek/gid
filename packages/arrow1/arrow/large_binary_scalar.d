@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.types;
 import gid.gid;
 
+/** */
 class LargeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
 {
 
@@ -26,6 +27,7 @@ class LargeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
     return getType();
   }
 
+  /** */
   this(arrow.buffer.Buffer value)
   {
     GArrowLargeBinaryScalar* _cretval;

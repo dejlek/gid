@@ -10,6 +10,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class RecordBatchFileReader : gobject.object.ObjectG
 {
 
@@ -29,6 +30,7 @@ class RecordBatchFileReader : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrow.seekable_input_stream.SeekableInputStream file)
   {
     GArrowRecordBatchFileReader* _cretval;
@@ -39,6 +41,7 @@ class RecordBatchFileReader : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   uint getNRecordBatches()
   {
     uint _retval;
@@ -46,6 +49,7 @@ class RecordBatchFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.record_batch.RecordBatch getRecordBatch(uint i)
   {
     GArrowRecordBatch* _cretval;
@@ -57,6 +61,7 @@ class RecordBatchFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.schema.Schema getSchema()
   {
     GArrowSchema* _cretval;
@@ -65,6 +70,7 @@ class RecordBatchFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.types.MetadataVersion getVersion()
   {
     GArrowMetadataVersion _cretval;
@@ -73,6 +79,7 @@ class RecordBatchFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.record_batch.RecordBatch readRecordBatch(uint i)
   {
     GArrowRecordBatch* _cretval;

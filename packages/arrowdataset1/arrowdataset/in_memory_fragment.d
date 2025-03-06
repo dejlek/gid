@@ -8,6 +8,7 @@ import arrowdataset.fragment;
 import arrowdataset.types;
 import gid.gid;
 
+/** */
 class InMemoryFragment : arrowdataset.fragment.Fragment
 {
 
@@ -27,6 +28,7 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
     return getType();
   }
 
+  /** */
   this(arrow.schema.Schema schema, arrow.record_batch.RecordBatch[] recordBatches)
   {
     GADatasetInMemoryFragment* _cretval;

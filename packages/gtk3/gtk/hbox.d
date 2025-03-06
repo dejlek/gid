@@ -13,21 +13,25 @@ import gtk.orientable_mixin;
 import gtk.types;
 
 /**
- * #GtkHBox is a container that organizes child widgets into a single row.
- * Use the #GtkBox packing interface to determine the arrangement,
- * spacing, width, and alignment of #GtkHBox children.
- * All children are allocated the same height.
- * GtkHBox has been deprecated. You can use #GtkBox instead, which is a
- * very quick and easy change. If you have derived your own classes from
- * GtkHBox, you can simply change the inheritance to derive directly
- * from #GtkBox. No further changes are needed, since the default
- * value of the #GtkOrientable:orientation property is
- * %GTK_ORIENTATION_HORIZONTAL.
- * If you have a grid-like layout composed of nested boxes, and you don’t
- * need first-child or last-child styling, the recommendation is to switch
- * to #GtkGrid. For more information about migrating to #GtkGrid, see
- * [Migrating from other containers to GtkGrid][gtk-migrating-GtkGrid].
- */
+    #GtkHBox is a container that organizes child widgets into a single row.
+  
+  Use the #GtkBox packing interface to determine the arrangement,
+  spacing, width, and alignment of #GtkHBox children.
+  
+  All children are allocated the same height.
+  
+  GtkHBox has been deprecated. You can use #GtkBox instead, which is a
+  very quick and easy change. If you have derived your own classes from
+  GtkHBox, you can simply change the inheritance to derive directly
+  from #GtkBox. No further changes are needed, since the default
+  value of the #GtkOrientable:orientation property is
+  [gtk.types.Orientation.Horizontal].
+  
+  If you have a grid-like layout composed of nested boxes, and you don’t
+  need first-child or last-child styling, the recommendation is to switch
+  to #GtkGrid. For more information about migrating to #GtkGrid, see
+  [Migrating from other containers to GtkGrid][gtk-migrating-GtkGrid].
+*/
 class HBox : gtk.box.Box
 {
 
@@ -48,15 +52,15 @@ class HBox : gtk.box.Box
   }
 
   /**
-   * Creates a new #GtkHBox.
-   * Params:
-   *   homogeneous = %TRUE if all children are to be given equal space allotments.
-   *   spacing = the number of pixels to place by default between children.
-   * Returns: a new #GtkHBox.
-
-   * Deprecated: You should use [gtk.box.Box.new_] with a %GTK_ORIENTATION_HORIZONTAL
-   *   #GtkOrientable:orientation instead
-   */
+      Creates a new #GtkHBox.
+    Params:
+      homogeneous =       true if all children are to be given equal space allotments.
+      spacing =       the number of pixels to place by default between children.
+    Returns:     a new #GtkHBox.
+  
+    Deprecated:     You should use [gtk.box.Box.new_] with a [gtk.types.Orientation.Horizontal]
+        #GtkOrientable:orientation instead
+  */
   this(bool homogeneous, int spacing)
   {
     GtkWidget* _cretval;

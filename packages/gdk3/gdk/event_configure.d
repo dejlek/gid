@@ -8,8 +8,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Generated when a window size or position has changed.
- */
+    Generated when a window size or position has changed.
+*/
 class EventConfigure
 {
   GdkEventConfigure cInstance;

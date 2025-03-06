@@ -8,9 +8,9 @@ import pango.font_description;
 import pango.types;
 
 /**
- * The `PangoAttrFontDesc` structure is used to store an attribute that
- * sets all aspects of the font description at once.
- */
+    The [pango.attr_font_desc.AttrFontDesc] structure is used to store an attribute that
+  sets all aspects of the font description at once.
+*/
 class AttrFontDesc
 {
   PangoAttrFontDesc cInstance;
@@ -42,15 +42,16 @@ class AttrFontDesc
   }
 
   /**
-   * Create a new font description attribute.
-   * This attribute allows setting family, style, weight, variant,
-   * stretch, and size simultaneously.
-   * Params:
-   *   desc = the font description
-   * Returns: the newly allocated
-   *   `PangoAttribute`, which should be freed with
-   *   [pango.attribute.Attribute.destroy]
-   */
+      Create a new font description attribute.
+    
+    This attribute allows setting family, style, weight, variant,
+    stretch, and size simultaneously.
+    Params:
+      desc =       the font description
+    Returns:     the newly allocated
+        [pango.attribute.Attribute], which should be freed with
+        [pango.attribute.Attribute.destroy]
+  */
   static pango.attribute.Attribute new_(pango.font_description.FontDescription desc)
   {
     PangoAttribute* _cretval;

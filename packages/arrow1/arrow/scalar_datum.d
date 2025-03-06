@@ -7,6 +7,7 @@ import arrow.scalar;
 import arrow.types;
 import gid.gid;
 
+/** */
 class ScalarDatum : arrow.datum.Datum
 {
 
@@ -26,6 +27,7 @@ class ScalarDatum : arrow.datum.Datum
     return getType();
   }
 
+  /** */
   this(arrow.scalar.Scalar value)
   {
     GArrowScalarDatum* _cretval;

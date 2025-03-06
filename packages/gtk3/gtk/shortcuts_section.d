@@ -14,15 +14,17 @@ import gtk.orientable_mixin;
 import gtk.types;
 
 /**
- * A GtkShortcutsSection collects all the keyboard shortcuts and gestures
- * for a major application mode. If your application needs multiple sections,
- * you should give each section a unique #GtkShortcutsSection:section-name and
- * a #GtkShortcutsSection:title that can be shown in the section selector of
- * the GtkShortcutsWindow.
- * The #GtkShortcutsSection:max-height property can be used to influence how
- * the groups in the section are distributed over pages and columns.
- * This widget is only meant to be used with #GtkShortcutsWindow.
- */
+    A GtkShortcutsSection collects all the keyboard shortcuts and gestures
+  for a major application mode. If your application needs multiple sections,
+  you should give each section a unique #GtkShortcutsSection:section-name and
+  a #GtkShortcutsSection:title that can be shown in the section selector of
+  the GtkShortcutsWindow.
+  
+  The #GtkShortcutsSection:max-height property can be used to influence how
+  the groups in the section are distributed over pages and columns.
+  
+  This widget is only meant to be used with #GtkShortcutsWindow.
+*/
 class ShortcutsSection : gtk.box.Box
 {
 
@@ -42,16 +44,19 @@ class ShortcutsSection : gtk.box.Box
     return getType();
   }
 
+  /** */
   alias ChangeCurrentPageCallbackDlg = bool delegate(int object, gtk.shortcuts_section.ShortcutsSection shortcutsSection);
+
+  /** ditto */
   alias ChangeCurrentPageCallbackFunc = bool function(int object, gtk.shortcuts_section.ShortcutsSection shortcutsSection);
 
   /**
-   * Connect to ChangeCurrentPage signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ChangeCurrentPage signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectChangeCurrentPage(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangeCurrentPageCallbackDlg) || is(T : ChangeCurrentPageCallbackFunc))
   {

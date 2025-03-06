@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class DayMillisecond : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class DayMillisecond : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(int day, int millisecond)
   {
     GArrowDayMillisecond* _cretval;
@@ -32,6 +34,7 @@ class DayMillisecond : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool equal(arrow.day_millisecond.DayMillisecond otherDayMillisecond)
   {
     bool _retval;
@@ -39,6 +42,7 @@ class DayMillisecond : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool lessThan(arrow.day_millisecond.DayMillisecond otherDayMillisecond)
   {
     bool _retval;

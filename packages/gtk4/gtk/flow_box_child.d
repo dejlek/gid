@@ -15,8 +15,8 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkFlowBoxChild` is the kind of widget that can be added to a `GtkFlowBox`.
- */
+    [gtk.flow_box_child.FlowBoxChild] is the kind of widget that can be added to a [gtk.flow_box.FlowBox].
+*/
 class FlowBoxChild : gtk.widget.Widget
 {
 
@@ -37,10 +37,11 @@ class FlowBoxChild : gtk.widget.Widget
   }
 
   /**
-   * Creates a new `GtkFlowBoxChild`.
-   * This should only be used as a child of a `GtkFlowBox`.
-   * Returns: a new `GtkFlowBoxChild`
-   */
+      Creates a new [gtk.flow_box_child.FlowBoxChild].
+    
+    This should only be used as a child of a [gtk.flow_box.FlowBox].
+    Returns:     a new [gtk.flow_box_child.FlowBoxChild]
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -49,31 +50,35 @@ class FlowBoxChild : gtk.widget.Widget
   }
 
   /**
-   * Marks child as changed, causing any state that depends on this
-   * to be updated.
-   * This affects sorting and filtering.
-   * Note that calls to this method must be in sync with the data
-   * used for the sorting and filtering functions. For instance, if
-   * the list is mirroring some external data set, and *two* children
-   * changed in the external data set when you call
-   * [gtk.flow_box_child.FlowBoxChild.changed] on the first child, the sort function
-   * must only read the new data for the first of the two changed
-   * children, otherwise the resorting of the children will be wrong.
-   * This generally means that if you don’t fully control the data
-   * model, you have to duplicate the data that affects the sorting
-   * and filtering functions into the widgets themselves.
-   * Another alternative is to call [gtk.flow_box.FlowBox.invalidateSort]
-   * on any model change, but that is more expensive.
-   */
+      Marks child as changed, causing any state that depends on this
+    to be updated.
+    
+    This affects sorting and filtering.
+    
+    Note that calls to this method must be in sync with the data
+    used for the sorting and filtering functions. For instance, if
+    the list is mirroring some external data set, and *two* children
+    changed in the external data set when you call
+    [gtk.flow_box_child.FlowBoxChild.changed] on the first child, the sort function
+    must only read the new data for the first of the two changed
+    children, otherwise the resorting of the children will be wrong.
+    
+    This generally means that if you don’t fully control the data
+    model, you have to duplicate the data that affects the sorting
+    and filtering functions into the widgets themselves.
+    
+    Another alternative is to call [gtk.flow_box.FlowBox.invalidateSort]
+    on any model change, but that is more expensive.
+  */
   void changed()
   {
     gtk_flow_box_child_changed(cast(GtkFlowBoxChild*)cPtr);
   }
 
   /**
-   * Gets the child widget of self.
-   * Returns: the child widget of self
-   */
+      Gets the child widget of self.
+    Returns:     the child widget of self
+  */
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
@@ -83,10 +88,10 @@ class FlowBoxChild : gtk.widget.Widget
   }
 
   /**
-   * Gets the current index of the child in its `GtkFlowBox` container.
-   * Returns: the index of the child, or -1 if the child is not
-   *   in a flow box
-   */
+      Gets the current index of the child in its [gtk.flow_box.FlowBox] container.
+    Returns:     the index of the child, or -1 if the child is not
+        in a flow box
+  */
   int getIndex()
   {
     int _retval;
@@ -95,10 +100,10 @@ class FlowBoxChild : gtk.widget.Widget
   }
 
   /**
-   * Returns whether the child is currently selected in its
-   * `GtkFlowBox` container.
-   * Returns: %TRUE if child is selected
-   */
+      Returns whether the child is currently selected in its
+    [gtk.flow_box.FlowBox] container.
+    Returns:     true if child is selected
+  */
   bool isSelected()
   {
     bool _retval;
@@ -107,34 +112,43 @@ class FlowBoxChild : gtk.widget.Widget
   }
 
   /**
-   * Sets the child widget of self.
-   * Params:
-   *   child = the child widget
-   */
+      Sets the child widget of self.
+    Params:
+      child =       the child widget
+  */
   void setChild(gtk.widget.Widget child = null)
   {
     gtk_flow_box_child_set_child(cast(GtkFlowBoxChild*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
-   * Emitted when the user activates a child widget in a `GtkFlowBox`.
-   * This can happen either by clicking or double-clicking,
-   * or via a keybinding.
-   * This is a [keybinding signal](class.SignalAction.html),
-   * but it can be used by applications for their own purposes.
-   * The default bindings are <kbd>Space</kbd> and <kbd>Enter</kbd>.
-   *   flowBoxChild = the instance the signal is connected to
-   */
+      Emitted when the user activates a child widget in a [gtk.flow_box.FlowBox].
+    
+    This can happen either by clicking or double-clicking,
+    or via a keybinding.
+    
+    This is a [keybinding signal](class.SignalAction.html),
+    but it can be used by applications for their own purposes.
+    
+    The default bindings are <kbd>Space</kbd> and <kbd>Enter</kbd>.
+  
+    ## Parameters
+    $(LIST
+      * $(B flowBoxChild) the instance the signal is connected to
+    )
+  */
   alias ActivateCallbackDlg = void delegate(gtk.flow_box_child.FlowBoxChild flowBoxChild);
+
+  /** ditto */
   alias ActivateCallbackFunc = void function(gtk.flow_box_child.FlowBoxChild flowBoxChild);
 
   /**
-   * Connect to Activate signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Activate signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {

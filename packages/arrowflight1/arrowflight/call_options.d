@@ -6,6 +6,7 @@ import arrowflight.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class CallOptions : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class CallOptions : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GAFlightCallOptions* _cretval;
@@ -33,11 +35,11 @@ class CallOptions : gobject.object.ObjectG
   }
 
   /**
-   * Add a header.
-   * Params:
-   *   name = A header name.
-   *   value = A header value.
-   */
+      Add a header.
+    Params:
+      name =       A header name.
+      value =       A header value.
+  */
   void addHeader(string name, string value)
   {
     const(char)* _name = name.toCString(No.Alloc);
@@ -46,18 +48,18 @@ class CallOptions : gobject.object.ObjectG
   }
 
   /**
-   * Clear all headers.
-   */
+      Clear all headers.
+  */
   void clearHeaders()
   {
     gaflight_call_options_clear_headers(cast(GAFlightCallOptions*)cPtr);
   }
 
   /**
-   * Iterates over all headers in the options.
-   * Params:
-   *   func = The user's callback function.
-   */
+      Iterates over all headers in the options.
+    Params:
+      func =       The user's callback function.
+  */
   void foreachHeader(arrowflight.types.HeaderFunc func)
   {
     extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData)

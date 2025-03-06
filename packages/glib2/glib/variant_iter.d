@@ -7,9 +7,9 @@ import glib.types;
 import glib.variant;
 
 /**
- * #GVariantIter is an opaque data structure and can only be accessed
- * using the following functions.
- */
+    #GVariantIter is an opaque data structure and can only be accessed
+  using the following functions.
+*/
 class VariantIter
 {
   GVariantIter cInstance;
@@ -36,12 +36,13 @@ class VariantIter
   }
 
   /**
-   * Queries the number of child items in the container that we are
-   * iterating over.  This is the total number of items -- not the number
-   * of items remaining.
-   * This function might be useful for preallocation of arrays.
-   * Returns: the number of children in the container
-   */
+      Queries the number of child items in the container that we are
+    iterating over.  This is the total number of items -- not the number
+    of items remaining.
+    
+    This function might be useful for preallocation of arrays.
+    Returns:     the number of children in the container
+  */
   size_t nChildren()
   {
     size_t _retval;
@@ -50,30 +51,35 @@ class VariantIter
   }
 
   /**
-   * Gets the next item in the container.  If no more items remain then
-   * %NULL is returned.
-   * Use [glib.variant.VariantG.unref] to drop your reference on the return value when
-   * you no longer need it.
-   * Here is an example for iterating with [glib.variant_iter.VariantIter.nextValue]:
-   * |[<!-- language\="C" -->
-   * // recursively iterate a container
-   * void
-   * iterate_container_recursive $(LPAREN)GVariant *container$(RPAREN)
-   * {
-   * GVariantIter iter;
-   * GVariant *child;
-   * g_variant_iter_init $(LPAREN)&iter, container$(RPAREN);
-   * while $(LPAREN)$(LPAREN)child \= g_variant_iter_next_value $(LPAREN)&iter$(RPAREN)$(RPAREN)$(RPAREN)
-   * {
-   * g_print $(LPAREN)"type '%s'\n", g_variant_get_type_string $(LPAREN)child$(RPAREN)$(RPAREN);
-   * if $(LPAREN)g_variant_is_container $(LPAREN)child$(RPAREN)$(RPAREN)
-   * iterate_container_recursive $(LPAREN)child$(RPAREN);
-   * g_variant_unref $(LPAREN)child$(RPAREN);
-   * }
-   * }
-   * ]|
-   * Returns: a #GVariant, or %NULL
-   */
+      Gets the next item in the container.  If no more items remain then
+    null is returned.
+    
+    Use [glib.variant.VariantG.unref] to drop your reference on the return value when
+    you no longer need it.
+    
+    Here is an example for iterating with [glib.variant_iter.VariantIter.nextValue]:
+    ```c
+      // recursively iterate a container
+      void
+      iterate_container_recursive (GVariant *container)
+      {
+        GVariantIter iter;
+        GVariant *child;
+    
+        g_variant_iter_init (&iter, container);
+        while ((child = g_variant_iter_next_value (&iter)))
+          {
+            g_print ("type '%s'\n", g_variant_get_type_string (child));
+    
+            if (g_variant_is_container (child))
+              iterate_container_recursive (child);
+    
+            g_variant_unref (child);
+          }
+      }
+    ```
+    Returns:     a #GVariant, or null
+  */
   glib.variant.VariantG nextValue()
   {
     VariantC* _cretval;

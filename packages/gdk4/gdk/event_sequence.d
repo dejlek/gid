@@ -7,9 +7,9 @@ import gid.gid;
 import gobject.boxed;
 
 /**
- * `GdkEventSequence` is an opaque type representing a sequence
- * of related touch events.
- */
+    [gdk.event_sequence.EventSequence] is an opaque type representing a sequence
+  of related touch events.
+*/
 class EventSequence : gobject.boxed.Boxed
 {
 

@@ -8,6 +8,7 @@ import arrow.fixed_size_binary_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class FixedSizeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
 {
 
@@ -27,6 +28,7 @@ class FixedSizeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
     return getType();
   }
 
+  /** */
   this(arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType dataType, arrow.buffer.Buffer value)
   {
     GArrowFixedSizeBinaryScalar* _cretval;

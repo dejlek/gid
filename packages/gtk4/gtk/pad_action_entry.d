@@ -6,8 +6,8 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * Struct defining a pad action entry.
- */
+    Struct defining a pad action entry.
+*/
 class PadActionEntry
 {
   GtkPadActionEntry cInstance;

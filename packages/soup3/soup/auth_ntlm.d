@@ -7,11 +7,12 @@ import soup.c.types;
 import soup.types;
 
 /**
- * HTTP-based NTLM authentication.
- * class@Sessions do not support this type by default; if you want to
- * enable support for it, call [soup.session.Session.addFeatureByType],
- * passing %SOUP_TYPE_AUTH_NTLM.
- */
+    HTTP-based NTLM authentication.
+  
+  `class@Session`s do not support this type by default; if you want to
+  enable support for it, call [soup.session.Session.addFeatureByType],
+  passing `SOUP_TYPE_AUTH_NTLM`.
+*/
 class AuthNTLM : soup.auth.Auth
 {
 

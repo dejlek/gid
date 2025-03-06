@@ -9,9 +9,9 @@ import glib.error;
 
 
 /**
- * Finalize the S3 APIs.
- * Returns: %TRUE on success, %FALSE on error.
- */
+    Finalize the S3 APIs.
+  Returns:     true on success, false on error.
+*/
 bool s3Finalize()
 {
   bool _retval;
@@ -23,14 +23,14 @@ bool s3Finalize()
 }
 
 /**
- * Normally, you don't need to call this function because the S3 APIs
- * are initialized with the default options automatically. If you want
- * to call this function, you must call this function before you use
- * any #GArrowS3FileSystem related APIs.
- * Params:
- *   options = Options to initialize the S3 APIs.
- * Returns: %TRUE on success, %FALSE on error.
- */
+    Normally, you don't need to call this function because the S3 APIs
+  are initialized with the default options automatically. If you want
+  to call this function, you must call this function before you use
+  any #GArrowS3FileSystem related APIs.
+  Params:
+    options =       Options to initialize the S3 APIs.
+  Returns:     true on success, false on error.
+*/
 bool s3Initialize(arrow.s3_global_options.S3GlobalOptions options = null)
 {
   bool _retval;
@@ -41,6 +41,7 @@ bool s3Initialize(arrow.s3_global_options.S3GlobalOptions options = null)
   return _retval;
 }
 
+/** */
 bool s3IsEnabled()
 {
   bool _retval;

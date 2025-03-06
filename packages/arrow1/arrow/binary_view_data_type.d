@@ -6,6 +6,7 @@ import arrow.data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class BinaryViewDataType : arrow.data_type.DataType
 {
 
@@ -25,6 +26,7 @@ class BinaryViewDataType : arrow.data_type.DataType
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowBinaryViewDataType* _cretval;

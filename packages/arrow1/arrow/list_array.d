@@ -9,6 +9,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class ListArray : arrow.array.Array
 {
 
@@ -28,6 +29,7 @@ class ListArray : arrow.array.Array
     return getType();
   }
 
+  /** */
   this(arrow.data_type.DataType dataType, long length, arrow.buffer.Buffer valueOffsets, arrow.array.Array values, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowListArray* _cretval;
@@ -35,6 +37,7 @@ class ListArray : arrow.array.Array
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.array.Array getValue(long i)
   {
     GArrowArray* _cretval;
@@ -43,6 +46,7 @@ class ListArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   int getValueLength(long i)
   {
     int _retval;
@@ -50,6 +54,7 @@ class ListArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   int getValueOffset(long i)
   {
     int _retval;
@@ -57,6 +62,7 @@ class ListArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   int[] getValueOffsets()
   {
     const(int)* _cretval;
@@ -73,6 +79,7 @@ class ListArray : arrow.array.Array
 
   alias getValueType = arrow.array.Array.getValueType;
 
+  /** */
   arrow.data_type.DataType getValueType()
   {
     GArrowDataType* _cretval;
@@ -81,6 +88,7 @@ class ListArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   arrow.array.Array getValues()
   {
     GArrowArray* _cretval;

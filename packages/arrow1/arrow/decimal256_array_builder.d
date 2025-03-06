@@ -10,6 +10,7 @@ import gid.gid;
 import glib.bytes;
 import glib.error;
 
+/** */
 class Decimal256ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder
 {
 
@@ -29,6 +30,7 @@ class Decimal256ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
     return getType();
   }
 
+  /** */
   this(arrow.decimal256_data_type.Decimal256DataType dataType)
   {
     GArrowDecimal256ArrayBuilder* _cretval;
@@ -38,6 +40,7 @@ class Decimal256ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
 
   alias appendValue = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValue;
 
+  /** */
   bool appendValue(arrow.decimal256.Decimal256 value = null)
   {
     bool _retval;
@@ -51,16 +54,16 @@ class Decimal256ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
   alias appendValues = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValues;
 
   /**
-   * Append multiple values at once. It's more efficient than multiple
-   * `append` and `append_null` calls.
-   * Params:
-   *   values = The array of #GArrowDecimal256.
-   *   isValids = The array of
-   *     boolean that shows whether the Nth value is valid or not. If the
-   *     Nth is_valids is %TRUE, the Nth values is valid value. Otherwise
-   *     the Nth value is null value.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append multiple values at once. It's more efficient than multiple
+    `append` and `append_null` calls.
+    Params:
+      values =       The array of #GArrowDecimal256.
+      isValids =       The array of
+          boolean that shows whether the Nth value is valid or not. If the
+          Nth is_valids is true, the Nth values is valid value. Otherwise
+          the Nth value is null value.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendValues(arrow.decimal256.Decimal256[] values, bool[] isValids = null)
   {
     bool _retval;

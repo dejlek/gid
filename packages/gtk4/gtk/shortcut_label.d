@@ -13,9 +13,10 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkShortcutLabel` displays a single keyboard shortcut or gesture.
- * The main use case for `GtkShortcutLabel` is inside a [gtk.shortcuts_window.ShortcutsWindow].
- */
+    [gtk.shortcut_label.ShortcutLabel] displays a single keyboard shortcut or gesture.
+  
+  The main use case for [gtk.shortcut_label.ShortcutLabel] is inside a [gtk.shortcuts_window.ShortcutsWindow].
+*/
 class ShortcutLabel : gtk.widget.Widget
 {
 
@@ -36,11 +37,11 @@ class ShortcutLabel : gtk.widget.Widget
   }
 
   /**
-   * Creates a new `GtkShortcutLabel` with accelerator set.
-   * Params:
-   *   accelerator = the initial accelerator
-   * Returns: a newly-allocated `GtkShortcutLabel`
-   */
+      Creates a new [gtk.shortcut_label.ShortcutLabel] with accelerator set.
+    Params:
+      accelerator =       the initial accelerator
+    Returns:     a newly-allocated [gtk.shortcut_label.ShortcutLabel]
+  */
   this(string accelerator)
   {
     GtkWidget* _cretval;
@@ -50,9 +51,9 @@ class ShortcutLabel : gtk.widget.Widget
   }
 
   /**
-   * Retrieves the current accelerator of self.
-   * Returns: the current accelerator.
-   */
+      Retrieves the current accelerator of self.
+    Returns:     the current accelerator.
+  */
   string getAccelerator()
   {
     const(char)* _cretval;
@@ -62,10 +63,10 @@ class ShortcutLabel : gtk.widget.Widget
   }
 
   /**
-   * Retrieves the text that is displayed when no accelerator is set.
-   * Returns: the current text displayed when no
-   *   accelerator is set.
-   */
+      Retrieves the text that is displayed when no accelerator is set.
+    Returns:     the current text displayed when no
+      accelerator is set.
+  */
   string getDisabledText()
   {
     const(char)* _cretval;
@@ -75,10 +76,10 @@ class ShortcutLabel : gtk.widget.Widget
   }
 
   /**
-   * Sets the accelerator to be displayed by self.
-   * Params:
-   *   accelerator = the new accelerator
-   */
+      Sets the accelerator to be displayed by self.
+    Params:
+      accelerator =       the new accelerator
+  */
   void setAccelerator(string accelerator)
   {
     const(char)* _accelerator = accelerator.toCString(No.Alloc);
@@ -86,10 +87,10 @@ class ShortcutLabel : gtk.widget.Widget
   }
 
   /**
-   * Sets the text to be displayed by self when no accelerator is set.
-   * Params:
-   *   disabledText = the text to be displayed when no accelerator is set
-   */
+      Sets the text to be displayed by self when no accelerator is set.
+    Params:
+      disabledText =       the text to be displayed when no accelerator is set
+  */
   void setDisabledText(string disabledText)
   {
     const(char)* _disabledText = disabledText.toCString(No.Alloc);

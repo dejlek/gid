@@ -7,6 +7,7 @@ import arrow.local_file_system_options;
 import arrow.types;
 import gid.gid;
 
+/** */
 class LocalFileSystem : arrow.file_system.FileSystem
 {
 
@@ -26,6 +27,7 @@ class LocalFileSystem : arrow.file_system.FileSystem
     return getType();
   }
 
+  /** */
   this(arrow.local_file_system_options.LocalFileSystemOptions options = null)
   {
     GArrowLocalFileSystem* _cretval;

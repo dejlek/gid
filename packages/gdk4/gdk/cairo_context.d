@@ -8,12 +8,13 @@ import gdk.types;
 import gid.gid;
 
 /**
- * `GdkCairoContext` is an object representing the platform-specific
- * draw context.
- * `GdkCairoContext`s are created for a surface using
- * [gdk.surface.Surface.createCairoContext], and the context
- * can then be used to draw on that surface.
- */
+    [gdk.cairo_context.CairoContext] is an object representing the platform-specific
+  draw context.
+  
+  [gdk.cairo_context.CairoContext]s are created for a surface using
+  [gdk.surface.Surface.createCairoContext], and the context
+  can then be used to draw on that surface.
+*/
 class CairoContext : gdk.draw_context.DrawContext
 {
 
@@ -34,15 +35,17 @@ class CairoContext : gdk.draw_context.DrawContext
   }
 
   /**
-   * Retrieves a Cairo context to be used to draw on the `GdkSurface`
-   * of context.
-   * A call to [gdk.draw_context.DrawContext.beginFrame] with this
-   * context must have been done or this function will return %NULL.
-   * The returned context is guaranteed to be valid until
-   * [gdk.draw_context.DrawContext.endFrame] is called.
-   * Returns: a Cairo context
-   *   to draw on `GdkSurface
-   */
+      Retrieves a Cairo context to be used to draw on the [gdk.surface.Surface]
+    of context.
+    
+    A call to [gdk.draw_context.DrawContext.beginFrame] with this
+    context must have been done or this function will return null.
+    
+    The returned context is guaranteed to be valid until
+    [gdk.draw_context.DrawContext.endFrame] is called.
+    Returns:     a Cairo context
+        to draw on `GdkSurface
+  */
   cairo.context.Context cairoCreate()
   {
     cairo_t* _cretval;

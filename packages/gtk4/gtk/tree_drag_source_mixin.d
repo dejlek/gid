@@ -10,26 +10,26 @@ public import gtk.tree_path;
 public import gtk.types;
 
 /**
- * Interface for Drag-and-Drop destinations in `GtkTreeView`.
+    Interface for Drag-and-Drop destinations in [gtk.tree_view.TreeView].
 
- * Deprecated: List views use widgets to display their contents.
- *   You can use [gtk.drag_source.DragSource] to implement a drag source
- */
+  Deprecated:     List views use widgets to display their contents.
+      You can use [gtk.drag_source.DragSource] to implement a drag source
+*/
 template TreeDragSourceT()
 {
 
   /**
-   * Asks the `GtkTreeDragSource` to delete the row at path, because
-   * it was moved somewhere else via drag-and-drop. Returns %FALSE
-   * if the deletion fails because path no longer exists, or for
-   * some model-specific reason. Should robustly handle a path no
-   * longer found in the model!
-   * Params:
-   *   path = row that was being dragged
-   * Returns: %TRUE if the row was successfully deleted
-
-   * Deprecated: Use list models instead
-   */
+      Asks the [gtk.tree_drag_source.TreeDragSource] to delete the row at path, because
+    it was moved somewhere else via drag-and-drop. Returns false
+    if the deletion fails because path no longer exists, or for
+    some model-specific reason. Should robustly handle a path no
+    longer found in the model!
+    Params:
+      path =       row that was being dragged
+    Returns:     true if the row was successfully deleted
+  
+    Deprecated:     Use list models instead
+  */
   override bool dragDataDelete(gtk.tree_path.TreePath path)
   {
     bool _retval;
@@ -38,16 +38,16 @@ template TreeDragSourceT()
   }
 
   /**
-   * Asks the `GtkTreeDragSource` to return a `GdkContentProvider` representing
-   * the row at path. Should robustly handle a path no
-   * longer found in the model!
-   * Params:
-   *   path = row that was dragged
-   * Returns: a `GdkContentProvider` for the
-   *   given path
-
-   * Deprecated: Use list models instead
-   */
+      Asks the [gtk.tree_drag_source.TreeDragSource] to return a [gdk.content_provider.ContentProvider] representing
+    the row at path. Should robustly handle a path no
+    longer found in the model!
+    Params:
+      path =       row that was dragged
+    Returns:     a [gdk.content_provider.ContentProvider] for the
+         given path
+  
+    Deprecated:     Use list models instead
+  */
   override gdk.content_provider.ContentProvider dragDataGet(gtk.tree_path.TreePath path)
   {
     GdkContentProvider* _cretval;
@@ -57,15 +57,15 @@ template TreeDragSourceT()
   }
 
   /**
-   * Asks the `GtkTreeDragSource` whether a particular row can be used as
-   * the source of a DND operation. If the source doesn’t implement
-   * this interface, the row is assumed draggable.
-   * Params:
-   *   path = row on which user is initiating a drag
-   * Returns: %TRUE if the row can be dragged
-
-   * Deprecated: Use list models instead
-   */
+      Asks the [gtk.tree_drag_source.TreeDragSource] whether a particular row can be used as
+    the source of a DND operation. If the source doesn’t implement
+    this interface, the row is assumed draggable.
+    Params:
+      path =       row on which user is initiating a drag
+    Returns:     true if the row can be dragged
+  
+    Deprecated:     Use list models instead
+  */
   override bool rowDraggable(gtk.tree_path.TreePath path)
   {
     bool _retval;

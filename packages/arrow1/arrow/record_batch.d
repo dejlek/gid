@@ -17,6 +17,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class RecordBatch : gobject.object.ObjectG
 {
 
@@ -36,6 +37,7 @@ class RecordBatch : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrow.schema.Schema schema, uint nRows, arrow.array.Array[] columns)
   {
     GArrowRecordBatch* _cretval;
@@ -48,6 +50,7 @@ class RecordBatch : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   static arrow.record_batch.RecordBatch import_(void* cAbiArray, arrow.schema.Schema schema)
   {
     GArrowRecordBatch* _cretval;
@@ -59,6 +62,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.record_batch.RecordBatch addColumn(uint i, arrow.field.Field field, arrow.array.Array column)
   {
     GArrowRecordBatch* _cretval;
@@ -70,6 +74,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equal(arrow.record_batch.RecordBatch otherRecordBatch)
   {
     bool _retval;
@@ -77,6 +82,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equalMetadata(arrow.record_batch.RecordBatch otherRecordBatch, bool checkMetadata)
   {
     bool _retval;
@@ -84,6 +90,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool export_(out void* cAbiArray, out void* cAbiSchema)
   {
     bool _retval;
@@ -94,6 +101,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.record_batch.RecordBatch filter(arrow.boolean_array.BooleanArray filter, arrow.filter_options.FilterOptions options = null)
   {
     GArrowRecordBatch* _cretval;
@@ -105,6 +113,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array.Array getColumnData(int i)
   {
     GArrowArray* _cretval;
@@ -113,6 +122,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getColumnName(int i)
   {
     const(char)* _cretval;
@@ -121,6 +131,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   uint getNColumns()
   {
     uint _retval;
@@ -128,6 +139,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getNRows()
   {
     long _retval;
@@ -135,6 +147,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.schema.Schema getSchema()
   {
     GArrowSchema* _cretval;
@@ -143,6 +156,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.record_batch.RecordBatch removeColumn(uint i)
   {
     GArrowRecordBatch* _cretval;
@@ -154,6 +168,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.buffer.Buffer serialize(arrow.write_options.WriteOptions options = null)
   {
     GArrowBuffer* _cretval;
@@ -165,6 +180,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.record_batch.RecordBatch slice(long offset, long length)
   {
     GArrowRecordBatch* _cretval;
@@ -173,6 +189,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.uint64_array.UInt64Array sortIndices(arrow.sort_options.SortOptions options)
   {
     GArrowUInt64Array* _cretval;
@@ -184,6 +201,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.record_batch.RecordBatch take(arrow.array.Array indices, arrow.take_options.TakeOptions options = null)
   {
     GArrowRecordBatch* _cretval;
@@ -195,6 +213,7 @@ class RecordBatch : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;

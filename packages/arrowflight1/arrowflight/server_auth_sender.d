@@ -8,6 +8,7 @@ import glib.bytes;
 import glib.error;
 import gobject.object;
 
+/** */
 class ServerAuthSender : gobject.object.ObjectG
 {
 
@@ -28,11 +29,11 @@ class ServerAuthSender : gobject.object.ObjectG
   }
 
   /**
-   * Writes a message to the client.
-   * Params:
-   *   message = A #GBytes to be sent.
-   * Returns: %TRUE on success, %FALSE on error.
-   */
+      Writes a message to the client.
+    Params:
+      message =       A #GBytes to be sent.
+    Returns:     true on success, false on error.
+  */
   bool write(glib.bytes.Bytes message)
   {
     bool _retval;

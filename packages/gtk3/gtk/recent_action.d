@@ -13,14 +13,15 @@ import gtk.recent_manager;
 import gtk.types;
 
 /**
- * A #GtkRecentAction represents a list of recently used files, which
- * can be shown by widgets such as #GtkRecentChooserDialog or
- * #GtkRecentChooserMenu.
- * To construct a submenu showing recently used files, use a #GtkRecentAction
- * as the action for a `<menuitem>`. To construct a menu toolbutton showing
- * the recently used files in the popup menu, use a #GtkRecentAction as the
- * action for a `<toolitem>` element.
- */
+    A #GtkRecentAction represents a list of recently used files, which
+  can be shown by widgets such as #GtkRecentChooserDialog or
+  #GtkRecentChooserMenu.
+  
+  To construct a submenu showing recently used files, use a #GtkRecentAction
+  as the action for a `<menuitem>`. To construct a menu toolbutton showing
+  the recently used files in the popup menu, use a #GtkRecentAction as the
+  action for a `<toolitem>` element.
+*/
 class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
 {
 
@@ -43,18 +44,18 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   mixin RecentChooserT!();
 
   /**
-   * Creates a new #GtkRecentAction object. To add the action to
-   * a #GtkActionGroup and set the accelerator for the action,
-   * call [gtk.action_group.ActionGroup.addActionWithAccel].
-   * Params:
-   *   name = a unique name for the action
-   *   label = the label displayed in menu items and on buttons,
-   *     or %NULL
-   *   tooltip = a tooltip for the action, or %NULL
-   *   stockId = the stock icon to display in widgets representing
-   *     the action, or %NULL
-   * Returns: the newly created #GtkRecentAction.
-   */
+      Creates a new #GtkRecentAction object. To add the action to
+    a #GtkActionGroup and set the accelerator for the action,
+    call [gtk.action_group.ActionGroup.addActionWithAccel].
+    Params:
+      name =       a unique name for the action
+      label =       the label displayed in menu items and on buttons,
+          or null
+      tooltip =       a tooltip for the action, or null
+      stockId =       the stock icon to display in widgets representing
+          the action, or null
+    Returns:     the newly created #GtkRecentAction.
+  */
   this(string name, string label = null, string tooltip = null, string stockId = null)
   {
     GtkAction* _cretval;
@@ -67,20 +68,20 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   }
 
   /**
-   * Creates a new #GtkRecentAction object. To add the action to
-   * a #GtkActionGroup and set the accelerator for the action,
-   * call [gtk.action_group.ActionGroup.addActionWithAccel].
-   * Params:
-   *   name = a unique name for the action
-   *   label = the label displayed in menu items and on buttons,
-   *     or %NULL
-   *   tooltip = a tooltip for the action, or %NULL
-   *   stockId = the stock icon to display in widgets representing
-   *     the action, or %NULL
-   *   manager = a #GtkRecentManager, or %NULL for using the default
-   *     #GtkRecentManager
-   * Returns: the newly created #GtkRecentAction
-   */
+      Creates a new #GtkRecentAction object. To add the action to
+    a #GtkActionGroup and set the accelerator for the action,
+    call [gtk.action_group.ActionGroup.addActionWithAccel].
+    Params:
+      name =       a unique name for the action
+      label =       the label displayed in menu items and on buttons,
+          or null
+      tooltip =       a tooltip for the action, or null
+      stockId =       the stock icon to display in widgets representing
+          the action, or null
+      manager =       a #GtkRecentManager, or null for using the default
+          #GtkRecentManager
+    Returns:     the newly created #GtkRecentAction
+  */
   static gtk.recent_action.RecentAction newForManager(string name, string label = null, string tooltip = null, string stockId = null, gtk.recent_manager.RecentManager manager = null)
   {
     GtkAction* _cretval;
@@ -94,9 +95,9 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   }
 
   /**
-   * Returns the value set by [gtk.recent_chooser_menu.RecentChooserMenu.setShowNumbers].
-   * Returns: %TRUE if numbers should be shown.
-   */
+      Returns the value set by [gtk.recent_chooser_menu.RecentChooserMenu.setShowNumbers].
+    Returns:     true if numbers should be shown.
+  */
   bool getShowNumbers()
   {
     bool _retval;
@@ -105,13 +106,13 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   }
 
   /**
-   * Sets whether a number should be added to the items shown by the
-   * widgets representing action. The numbers are shown to provide
-   * a unique character for a mnemonic to be used inside the menu item's
-   * label. Only the first ten items get a number to avoid clashes.
-   * Params:
-   *   showNumbers = %TRUE if the shown items should be numbered
-   */
+      Sets whether a number should be added to the items shown by the
+    widgets representing action. The numbers are shown to provide
+    a unique character for a mnemonic to be used inside the menu item's
+    label. Only the first ten items get a number to avoid clashes.
+    Params:
+      showNumbers =       true if the shown items should be numbered
+  */
   void setShowNumbers(bool showNumbers)
   {
     gtk_recent_action_set_show_numbers(cast(GtkRecentAction*)cPtr, showNumbers);

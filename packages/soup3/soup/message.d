@@ -22,25 +22,29 @@ import soup.multipart;
 import soup.types;
 
 /**
- * Represents an HTTP message being sent or received.
- * A #SoupMessage represents an HTTP message that is being sent or
- * received.
- * You would create a #SoupMessage with [soup.message.Message.new_] or
- * [soup.message.Message.newFromUri], set up its fields appropriately, and send it.
- * property@Message:status-code will normally be a enum@Status value, eg,
- * %SOUP_STATUS_OK, though of course it might actually be an unknown status
- * code. property@Message:reason-phrase is the actual text returned from the
- * server, which may or may not correspond to the "standard" description of
- * @status_code. At any rate, it is almost certainly not localized, and not very
- * descriptive even if it is in the user's language; you should not use
- * property@Message:reason-phrase in user-visible messages. Rather, you should
- * look at property@Message:status-code, and determine an end-user-appropriate
- * message based on that and on what you were trying to do.
- * Note that libsoup's terminology here does not quite match the HTTP
- * specification: in RFC 2616, an "HTTP-message" is *either* a Request, *or* a
- * Response. In libsoup, a #SoupMessage combines both the request and the
- * response.
- */
+    Represents an HTTP message being sent or received.
+  
+  A #SoupMessage represents an HTTP message that is being sent or
+  received.
+  
+  You would create a #SoupMessage with [soup.message.Message.new_] or
+  [soup.message.Message.newFromUri], set up its fields appropriately, and send it.
+  
+  `property@Message:status-code` will normally be a `enum@Status` value, eg,
+  [soup.types.Status.Ok], though of course it might actually be an unknown status
+  code. `property@Message:reason-phrase` is the actual text returned from the
+  server, which may or may not correspond to the "standard" description of
+  @status_code. At any rate, it is almost certainly not localized, and not very
+  descriptive even if it is in the user's language; you should not use
+  `property@Message:reason-phrase` in user-visible messages. Rather, you should
+  look at `property@Message:status-code`, and determine an end-user-appropriate
+  message based on that and on what you were trying to do.
+  
+  Note that libsoup's terminology here does not quite match the HTTP
+  specification: in RFC 2616, an "HTTP-message" is *either* a Request, *or* a
+  Response. In libsoup, a #SoupMessage combines both the request and the
+  response.
+*/
 class Message : gobject.object.ObjectG
 {
 
@@ -61,13 +65,13 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new empty #SoupMessage, which will connect to uri.
-   * Params:
-   *   method = the HTTP method for the created request
-   *   uriString = the destination endpoint $(LPAREN)as a string$(RPAREN)
-   * Returns: the new #SoupMessage $(LPAREN)or %NULL if uri
-   *   could not be parsed$(RPAREN).
-   */
+      Creates a new empty #SoupMessage, which will connect to uri.
+    Params:
+      method =       the HTTP method for the created request
+      uriString =       the destination endpoint (as a string)
+    Returns:     the new #SoupMessage (or null if uri
+        could not be parsed).
+  */
   this(string method, string uriString)
   {
     SoupMessage* _cretval;
@@ -78,20 +82,21 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #SoupMessage and sets it up to send the given encoded_form
-   * to uri via method. If method is "GET", it will include the form data
-   * into uri's query field, and if method is "POST" or "PUT", it will be set as
-   * request body.
-   * This function takes the ownership of encoded_form, that will be released
-   * with funcGLib.free when no longer in use. See also funcform_encode,
-   * funcform_encode_hash and funcform_encode_datalist.
-   * Params:
-   *   method = the HTTP method for the created request $(LPAREN)GET, POST or PUT$(RPAREN)
-   *   uriString = the destination endpoint $(LPAREN)as a string$(RPAREN)
-   *   encodedForm = a encoded form
-   * Returns: the new #SoupMessage, or %NULL if
-   *   uri_string could not be parsed or method is not "GET, "POST" or "PUT"
-   */
+      Creates a new #SoupMessage and sets it up to send the given encoded_form
+    to uri via method. If method is "GET", it will include the form data
+    into uri's query field, and if method is "POST" or "PUT", it will be set as
+    request body.
+    
+    This function takes the ownership of encoded_form, that will be released
+    with `funcGLib.free` when no longer in use. See also `funcform_encode`,
+    `funcform_encode_hash` and `funcform_encode_datalist`.
+    Params:
+      method =       the HTTP method for the created request (GET, POST or PUT)
+      uriString =       the destination endpoint (as a string)
+      encodedForm =       a encoded form
+    Returns:     the new #SoupMessage, or null if
+        uri_string could not be parsed or method is not "GET, "POST" or "PUT"
+  */
   static soup.message.Message newFromEncodedForm(string method, string uriString, string encodedForm)
   {
     SoupMessage* _cretval;
@@ -104,14 +109,14 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #SoupMessage and sets it up to send multipart to
-   * uri_string via POST.
-   * Params:
-   *   uriString = the destination endpoint
-   *   multipart = a #SoupMultipart
-   * Returns: the new #SoupMessage, or %NULL if uri_string
-   *   could not be parsed
-   */
+      Creates a new #SoupMessage and sets it up to send multipart to
+    uri_string via POST.
+    Params:
+      uriString =       the destination endpoint
+      multipart =       a #SoupMultipart
+    Returns:     the new #SoupMessage, or null if uri_string
+        could not be parsed
+  */
   static soup.message.Message newFromMultipart(string uriString, soup.multipart.Multipart multipart)
   {
     SoupMessage* _cretval;
@@ -122,12 +127,12 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new empty #SoupMessage, which will connect to uri.
-   * Params:
-   *   method = the HTTP method for the created request
-   *   uri = the destination endpoint
-   * Returns: the new #SoupMessage
-   */
+      Creates a new empty #SoupMessage, which will connect to uri.
+    Params:
+      method =       the HTTP method for the created request
+      uri =       the destination endpoint
+    Returns:     the new #SoupMessage
+  */
   static soup.message.Message newFromUri(string method, glib.uri.Uri uri)
   {
     SoupMessage* _cretval;
@@ -138,12 +143,12 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new #SoupMessage to send `OPTIONS *` to a server. The path of
-   * base_uri will be ignored.
-   * Params:
-   *   baseUri = the destination endpoint
-   * Returns: the new #SoupMessage
-   */
+      Creates a new #SoupMessage to send `OPTIONS *` to a server. The path of
+    base_uri will be ignored.
+    Params:
+      baseUri =       the destination endpoint
+    Returns:     the new #SoupMessage
+  */
   static soup.message.Message newOptionsPing(glib.uri.Uri baseUri)
   {
     SoupMessage* _cretval;
@@ -153,39 +158,42 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Adds flags to the set of msg's flags.
-   * Params:
-   *   flags = a set of #SoupMessageFlags values
-   */
+      Adds flags to the set of msg's flags.
+    Params:
+      flags =       a set of #SoupMessageFlags values
+  */
   void addFlags(soup.types.MessageFlags flags)
   {
     soup_message_add_flags(cast(SoupMessage*)cPtr, flags);
   }
 
   /**
-   * Disables the actions of ifaceSessionFeatures with the
-   * given feature_type $(LPAREN)or a subclass of that type$(RPAREN) on msg.
-   * msg is processed as though the feature$(LPAREN)s$(RPAREN) hadn't been added to the
-   * session. Eg, passing #SOUP_TYPE_CONTENT_SNIFFER for feature_type
-   * will disable Content-Type sniffing on the message.
-   * You must call this before queueing msg on a session; calling it on
-   * a message that has already been queued is undefined. In particular,
-   * you cannot call this on a message that is being requeued after a
-   * redirect or authentication.
-   * Params:
-   *   featureType = the #GType of a #SoupSessionFeature
-   */
+      Disables the actions of `ifaceSessionFeature`s with the
+    given feature_type (or a subclass of that type) on msg.
+    
+    msg is processed as though the feature(s) hadn't been added to the
+    session. Eg, passing #SOUP_TYPE_CONTENT_SNIFFER for feature_type
+    will disable Content-Type sniffing on the message.
+    
+    You must call this before queueing msg on a session; calling it on
+    a message that has already been queued is undefined. In particular,
+    you cannot call this on a message that is being requeued after a
+    redirect or authentication.
+    Params:
+      featureType =       the #GType of a #SoupSessionFeature
+  */
   void disableFeature(gobject.types.GType featureType)
   {
     soup_message_disable_feature(cast(SoupMessage*)cPtr, featureType);
   }
 
   /**
-   * Returns the unique idenfier for the last connection used.
-   * This may be 0 if it was a cached resource or it has not gotten
-   * a connection yet.
-   * Returns: An id or 0 if no connection.
-   */
+      Returns the unique idenfier for the last connection used.
+    
+    This may be 0 if it was a cached resource or it has not gotten
+    a connection yet.
+    Returns:     An id or 0 if no connection.
+  */
   ulong getConnectionId()
   {
     ulong _retval;
@@ -194,9 +202,9 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Gets msg's first-party [glib.uri.Uri].
-   * Returns: the msg's first party #GUri
-   */
+      Gets msg's first-party [glib.uri.Uri].
+    Returns:     the msg's first party #GUri
+  */
   glib.uri.Uri getFirstParty()
   {
     GUri* _cretval;
@@ -206,9 +214,9 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Gets the flags on msg.
-   * Returns: the flags
-   */
+      Gets the flags on msg.
+    Returns:     the flags
+  */
   soup.types.MessageFlags getFlags()
   {
     SoupMessageFlags _cretval;
@@ -218,9 +226,9 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether HTTP/1 version is currently demanded for the msg send.
-   * Returns: %TRUE, when HTTP/1 is demanded, %FALSE otherwise.
-   */
+      Returns whether HTTP/1 version is currently demanded for the msg send.
+    Returns:     true, when HTTP/1 is demanded, false otherwise.
+  */
   bool getForceHttp1()
   {
     bool _retval;
@@ -229,11 +237,12 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Gets the HTTP version of msg.
-   * This is the minimum of the version from the request and the version from the
-   * response.
-   * Returns: the HTTP version
-   */
+      Gets the HTTP version of msg.
+    
+    This is the minimum of the version from the request and the version from the
+    response.
+    Returns:     the HTTP version
+  */
   soup.types.HTTPVersion getHttpVersion()
   {
     SoupHTTPVersion _cretval;
@@ -243,9 +252,9 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Gets whether msg is intended to be used to send `OPTIONS *` to a server.
-   * Returns: %TRUE if the message is options ping, or %FALSE otherwise
-   */
+      Gets whether msg is intended to be used to send `OPTIONS *` to a server.
+    Returns:     true if the message is options ping, or false otherwise
+  */
   bool getIsOptionsPing()
   {
     bool _retval;
@@ -254,10 +263,11 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Returns if this message is set as a top level navigation.
-   * Used for same-site policy checks.
-   * Returns: Whether the current request is a top-level navitation
-   */
+      Returns if this message is set as a top level navigation.
+    
+    Used for same-site policy checks.
+    Returns:     Whether the current request is a top-level navitation
+  */
   bool getIsTopLevelNavigation()
   {
     bool _retval;
@@ -266,9 +276,9 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Returns the method of this message.
-   * Returns: A method such as %SOUP_METHOD_GET
-   */
+      Returns the method of this message.
+    Returns:     A method such as `SOUP_METHOD_GET`
+  */
   string getMethod()
   {
     const(char)* _cretval;
@@ -278,11 +288,12 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Get the structMessageMetrics of msg.
-   * If the flag %SOUP_MESSAGE_COLLECT_METRICS is not enabled for msg this will
-   * return %NULL.
-   * Returns: a #SoupMessageMetrics
-   */
+      Get the `structMessageMetrics` of msg.
+    
+    If the flag [soup.types.MessageFlags.CollectMetrics] is not enabled for msg this will
+    return null.
+    Returns:     a #SoupMessageMetrics
+  */
   soup.message_metrics.MessageMetrics getMetrics()
   {
     SoupMessageMetrics* _cretval;
@@ -292,10 +303,11 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Retrieves the enumMessagePriority.
-   * If not set this value defaults to #SOUP_MESSAGE_PRIORITY_NORMAL.
-   * Returns: the priority of the message.
-   */
+      Retrieves the `enumMessagePriority`.
+    
+    If not set this value defaults to #SOUP_MESSAGE_PRIORITY_NORMAL.
+    Returns:     the priority of the message.
+  */
   soup.types.MessagePriority getPriority()
   {
     SoupMessagePriority _cretval;
@@ -305,9 +317,9 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Returns the reason phrase for the status of this message.
-   * Returns: the phrase
-   */
+      Returns the reason phrase for the status of this message.
+    Returns:     the phrase
+  */
   string getReasonPhrase()
   {
     const(char)* _cretval;
@@ -317,16 +329,17 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Get the remote [gio.socket_address.SocketAddress] of the connection associated with
-   * the message.
-   * The returned address can be %NULL if the connection hasn't been established
-   * yet, or the resource was loaded from the disk cache. In case of proxy
-   * connections, the remote address returned is a [gio.proxy_address.ProxyAddress]. If
-   * propertySession:remote-connectable is set the returned address id for the
-   * connection to the session's remote connectable.
-   * Returns: a #GSocketAddress or %NULL if the connection
-   *   hasn't been established
-   */
+      Get the remote [gio.socket_address.SocketAddress] of the connection associated with
+    the message.
+    
+    The returned address can be null if the connection hasn't been established
+    yet, or the resource was loaded from the disk cache. In case of proxy
+    connections, the remote address returned is a [gio.proxy_address.ProxyAddress]. If
+    `propertySession:remote-connectable` is set the returned address id for the
+    connection to the session's remote connectable.
+    Returns:     a #GSocketAddress or null if the connection
+          hasn't been established
+  */
   gio.socket_address.SocketAddress getRemoteAddress()
   {
     GSocketAddress* _cretval;
@@ -336,9 +349,9 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Returns the headers sent with the request.
-   * Returns: The #SoupMessageHeaders
-   */
+      Returns the headers sent with the request.
+    Returns:     The #SoupMessageHeaders
+  */
   soup.message_headers.MessageHeaders getRequestHeaders()
   {
     SoupMessageHeaders* _cretval;
@@ -348,9 +361,9 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Returns the headers recieved with the response.
-   * Returns: The #SoupMessageHeaders
-   */
+      Returns the headers recieved with the response.
+    Returns:     The #SoupMessageHeaders
+  */
   soup.message_headers.MessageHeaders getResponseHeaders()
   {
     SoupMessageHeaders* _cretval;
@@ -360,9 +373,9 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Gets msg's site for cookies #GUri.
-   * Returns: the msg's site for cookies #GUri
-   */
+      Gets msg's site for cookies #GUri.
+    Returns:     the msg's site for cookies #GUri
+  */
   glib.uri.Uri getSiteForCookies()
   {
     GUri* _cretval;
@@ -372,9 +385,9 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Returns the set status of this message.
-   * Returns: The #SoupStatus
-   */
+      Returns the set status of this message.
+    Returns:     The #SoupStatus
+  */
   soup.types.Status getStatus()
   {
     SoupStatus _cretval;
@@ -384,10 +397,10 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Gets the name of the TLS ciphersuite negotiated for msg's connection.
-   * Returns: the name of the TLS ciphersuite,
-   *   or %NULL if msg's connection is not SSL.
-   */
+      Gets the name of the TLS ciphersuite negotiated for msg's connection.
+    Returns:     the name of the TLS ciphersuite,
+        or null if msg's connection is not SSL.
+  */
   string getTlsCiphersuiteName()
   {
     const(char)* _cretval;
@@ -397,12 +410,13 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Gets the peer's [gio.tls_certificate.TlsCertificate] associated with msg's connection.
-   * Note that this is not set yet during the emission of
-   * signalMessage::accept-certificate signal.
-   * Returns: msg's TLS peer certificate,
-   *   or %NULL if msg's connection is not SSL.
-   */
+      Gets the peer's [gio.tls_certificate.TlsCertificate] associated with msg's connection.
+    
+    Note that this is not set yet during the emission of
+    `signalMessage::accept-certificate` signal.
+    Returns:     msg's TLS peer certificate,
+        or null if msg's connection is not SSL.
+  */
   gio.tls_certificate.TlsCertificate getTlsPeerCertificate()
   {
     GTlsCertificate* _cretval;
@@ -412,11 +426,11 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Gets the errors associated with validating msg's TLS peer certificate.
-   * Note that this is not set yet during the emission of
-   * signalMessage::accept-certificate signal.
-   * Returns: a #GTlsCertificateFlags with msg's TLS peer certificate errors.
-   */
+      Gets the errors associated with validating msg's TLS peer certificate.
+    Note that this is not set yet during the emission of
+    `signalMessage::accept-certificate` signal.
+    Returns:     a #GTlsCertificateFlags with msg's TLS peer certificate errors.
+  */
   gio.types.TlsCertificateFlags getTlsPeerCertificateErrors()
   {
     GTlsCertificateFlags _cretval;
@@ -426,10 +440,11 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Gets the TLS protocol version negotiated for msg's connection.
-   * If the message connection is not SSL, %G_TLS_PROTOCOL_VERSION_UNKNOWN is returned.
-   * Returns: a #GTlsProtocolVersion
-   */
+      Gets the TLS protocol version negotiated for msg's connection.
+    
+    If the message connection is not SSL, [gio.types.TlsProtocolVersion.Unknown] is returned.
+    Returns:     a #GTlsProtocolVersion
+  */
   gio.types.TlsProtocolVersion getTlsProtocolVersion()
   {
     GTlsProtocolVersion _cretval;
@@ -439,9 +454,9 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Gets msg's URI.
-   * Returns: the URI msg is targeted for.
-   */
+      Gets msg's URI.
+    Returns:     the URI msg is targeted for.
+  */
   glib.uri.Uri getUri()
   {
     GUri* _cretval;
@@ -451,13 +466,14 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Get whether ifaceSessionFeatures of the given feature_type
-   * $(LPAREN)or a subclass of that type$(RPAREN) are disabled on msg.
-   * See [soup.message.Message.disableFeature].
-   * Params:
-   *   featureType = the #GType of a #SoupSessionFeature
-   * Returns: %TRUE if feature is disabled, or %FALSE otherwise.
-   */
+      Get whether `ifaceSessionFeature`s of the given feature_type
+    (or a subclass of that type) are disabled on msg.
+    
+    See [soup.message.Message.disableFeature].
+    Params:
+      featureType =       the #GType of a #SoupSessionFeature
+    Returns:     true if feature is disabled, or false otherwise.
+  */
   bool isFeatureDisabled(gobject.types.GType featureType)
   {
     bool _retval;
@@ -466,11 +482,12 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Determines whether or not msg's connection can be kept alive for
-   * further requests after processing msg.
-   * The result is based on the HTTP version, Connection header, etc.
-   * Returns: %TRUE or %FALSE.
-   */
+      Determines whether or not msg's connection can be kept alive for
+    further requests after processing msg.
+    
+    The result is based on the HTTP version, Connection header, etc.
+    Returns:     true or false.
+  */
   bool isKeepalive()
   {
     bool _retval;
@@ -479,11 +496,11 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Queries if flags are present in the set of msg's flags.
-   * Params:
-   *   flags = a set of #SoupMessageFlags values
-   * Returns: %TRUE if flags are enabled in msg
-   */
+      Queries if flags are present in the set of msg's flags.
+    Params:
+      flags =       a set of #SoupMessageFlags values
+    Returns:     true if flags are enabled in msg
+  */
   bool queryFlags(soup.types.MessageFlags flags)
   {
     bool _retval;
@@ -492,78 +509,82 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Removes flags from the set of msg's flags.
-   * Params:
-   *   flags = a set of #SoupMessageFlags values
-   */
+      Removes flags from the set of msg's flags.
+    Params:
+      flags =       a set of #SoupMessageFlags values
+  */
   void removeFlags(soup.types.MessageFlags flags)
   {
     soup_message_remove_flags(cast(SoupMessage*)cPtr, flags);
   }
 
   /**
-   * Sets first_party as the main document #GUri for msg.
-   * For details of when and how this is used refer to the documentation for
-   * enumCookieJarAcceptPolicy.
-   * Params:
-   *   firstParty = the #GUri for the msg's first party
-   */
+      Sets first_party as the main document #GUri for msg.
+    
+    For details of when and how this is used refer to the documentation for
+    `enumCookieJarAcceptPolicy`.
+    Params:
+      firstParty =       the #GUri for the msg's first party
+  */
   void setFirstParty(glib.uri.Uri firstParty)
   {
     soup_message_set_first_party(cast(SoupMessage*)cPtr, firstParty ? cast(GUri*)firstParty.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the specified flags on msg.
-   * Params:
-   *   flags = a set of #SoupMessageFlags values
-   */
+      Sets the specified flags on msg.
+    Params:
+      flags =       a set of #SoupMessageFlags values
+  */
   void setFlags(soup.types.MessageFlags flags)
   {
     soup_message_set_flags(cast(SoupMessage*)cPtr, flags);
   }
 
   /**
-   * Sets whether HTTP/1 version should be used when sending this message.
-   * Some connections can still override it, if needed.
-   * Note the value is unset after the message send is finished.
-   * Params:
-   *   value = value to set
-   */
+      Sets whether HTTP/1 version should be used when sending this message.
+    Some connections can still override it, if needed.
+    
+    Note the value is unset after the message send is finished.
+    Params:
+      value =       value to set
+  */
   void setForceHttp1(bool value)
   {
     soup_message_set_force_http1(cast(SoupMessage*)cPtr, value);
   }
 
   /**
-   * Set whether msg is intended to be used to send `OPTIONS *` to a server.
-   * When set to %TRUE, the path of propertyMessage:uri will be ignored and
-   * propertyMessage:method set to %SOUP_METHOD_OPTIONS.
-   * Params:
-   *   isOptionsPing = the value to set
-   */
+      Set whether msg is intended to be used to send `OPTIONS *` to a server.
+    
+    When set to true, the path of `propertyMessage:uri` will be ignored and
+    `propertyMessage:method` set to `SOUP_METHOD_OPTIONS`.
+    Params:
+      isOptionsPing =       the value to set
+  */
   void setIsOptionsPing(bool isOptionsPing)
   {
     soup_message_set_is_options_ping(cast(SoupMessage*)cPtr, isOptionsPing);
   }
 
   /**
-   * Sets whether the current request is a top-level navitation.
-   * See the [same-site spec](https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00)
-   * for more information.
-   * Params:
-   *   isTopLevelNavigation = if %TRUE indicate the current request is a top-level navigation
-   */
+      Sets whether the current request is a top-level navitation.
+    
+    See the [same-site spec](https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00)
+    for more information.
+    Params:
+      isTopLevelNavigation =       if true indicate the current request is a top-level navigation
+  */
   void setIsTopLevelNavigation(bool isTopLevelNavigation)
   {
     soup_message_set_is_top_level_navigation(cast(SoupMessage*)cPtr, isTopLevelNavigation);
   }
 
   /**
-   * Set msg's HTTP method to method.
-   * Params:
-   *   method = the value to set
-   */
+      Set msg's HTTP method to method.
+    Params:
+      method =       the value to set
+  */
   void setMethod(string method)
   {
     const(char)* _method = method.toCString(No.Alloc);
@@ -571,34 +592,38 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Sets the priority of a message.
-   * Note that this won't have any effect unless used before the message is added
-   * to the session's message processing queue.
-   * The message will be placed just before any other previously added
-   * message with lower priority $(LPAREN)messages with the same priority are
-   * processed on a FIFO basis$(RPAREN).
-   * Setting priorities does not currently work with synchronous messages
-   * because in the synchronous/blocking case, priority ends up being determined
-   * semi-randomly by thread scheduling.
-   * Params:
-   *   priority = the #SoupMessagePriority
-   */
+      Sets the priority of a message.
+    
+    Note that this won't have any effect unless used before the message is added
+    to the session's message processing queue.
+    
+    The message will be placed just before any other previously added
+    message with lower priority (messages with the same priority are
+    processed on a FIFO basis).
+    
+    Setting priorities does not currently work with synchronous messages
+    because in the synchronous/blocking case, priority ends up being determined
+    semi-randomly by thread scheduling.
+    Params:
+      priority =       the #SoupMessagePriority
+  */
   void setPriority(soup.types.MessagePriority priority)
   {
     soup_message_set_priority(cast(SoupMessage*)cPtr, priority);
   }
 
   /**
-   * Set the request body of a #SoupMessage.
-   * If content_type is %NULL and stream is not %NULL the Content-Type header will
-   * not be changed if present.
-   * The request body needs to be set again in case msg is restarted
-   * $(LPAREN)in case of redirection or authentication$(RPAREN).
-   * Params:
-   *   contentType = MIME Content-Type of the body, or %NULL if unknown
-   *   stream = a #GInputStream to read the request body from
-   *   contentLength = the byte length of stream or -1 if unknown
-   */
+      Set the request body of a #SoupMessage.
+    
+    If content_type is null and stream is not null the Content-Type header will
+    not be changed if present.
+    The request body needs to be set again in case msg is restarted
+    (in case of redirection or authentication).
+    Params:
+      contentType =       MIME Content-Type of the body, or null if unknown
+      stream =       a #GInputStream to read the request body from
+      contentLength =       the byte length of stream or -1 if unknown
+  */
   void setRequestBody(string contentType, gio.input_stream.InputStream stream, ptrdiff_t contentLength)
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
@@ -606,15 +631,16 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Set the request body of a #SoupMessage from [glib.bytes.Bytes].
-   * If content_type is %NULL and bytes is not %NULL the Content-Type header will
-   * not be changed if present.
-   * The request body needs to be set again in case msg is restarted
-   * $(LPAREN)in case of redirection or authentication$(RPAREN).
-   * Params:
-   *   contentType = MIME Content-Type of the body, or %NULL if unknown
-   *   bytes = a #GBytes with the request body data
-   */
+      Set the request body of a #SoupMessage from [glib.bytes.Bytes].
+    
+    If content_type is null and bytes is not null the Content-Type header will
+    not be changed if present.
+    The request body needs to be set again in case msg is restarted
+    (in case of redirection or authentication).
+    Params:
+      contentType =       MIME Content-Type of the body, or null if unknown
+      bytes =       a #GBytes with the request body data
+  */
   void setRequestBodyFromBytes(string contentType = null, glib.bytes.Bytes bytes = null)
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
@@ -622,83 +648,94 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Sets site_for_cookies as the policy URL for same-site cookies for msg.
-   * It is either the URL of the top-level document or %NULL depending on whether
-   * the registrable domain of this document's URL matches the registrable domain
-   * of its parent's/opener's URL. For the top-level document it is set to the
-   * document's URL.
-   * See the [same-site spec](https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00)
-   * for more information.
-   * Params:
-   *   siteForCookies = the #GUri for the msg's site for cookies
-   */
+      Sets site_for_cookies as the policy URL for same-site cookies for msg.
+    
+    It is either the URL of the top-level document or null depending on whether
+    the registrable domain of this document's URL matches the registrable domain
+    of its parent's/opener's URL. For the top-level document it is set to the
+    document's URL.
+    
+    See the [same-site spec](https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00)
+    for more information.
+    Params:
+      siteForCookies =       the #GUri for the msg's site for cookies
+  */
   void setSiteForCookies(glib.uri.Uri siteForCookies = null)
   {
     soup_message_set_site_for_cookies(cast(SoupMessage*)cPtr, siteForCookies ? cast(GUri*)siteForCookies.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the certificate to be used by msg's connection when a
-   * client certificate is requested during the TLS handshake.
-   * You can call this as a response to signalMessage::request-certificate
-   * signal, or before the connection is started. If certificate is %NULL
-   * the handshake will continue without providing a GTlsCertificate.
-   * Note that the [gio.tls_certificate.TlsCertificate] set by this function will be ignored if
-   * propertySession:tls-interaction is not %NULL.
-   * Params:
-   *   certificate = the #GTlsCertificate to set, or %NULL
-   */
+      Sets the certificate to be used by msg's connection when a
+    client certificate is requested during the TLS handshake.
+    
+    You can call this as a response to `signalMessage::request-certificate`
+    signal, or before the connection is started. If certificate is null
+    the handshake will continue without providing a GTlsCertificate.
+    Note that the [gio.tls_certificate.TlsCertificate] set by this function will be ignored if
+    `propertySession:tls-interaction` is not null.
+    Params:
+      certificate =       the #GTlsCertificate to set, or null
+  */
   void setTlsClientCertificate(gio.tls_certificate.TlsCertificate certificate = null)
   {
     soup_message_set_tls_client_certificate(cast(SoupMessage*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets msg's URI to uri.
-   * If msg has already been sent and you want to re-send it with the new URI,
-   * you need to send it again.
-   * Params:
-   *   uri = the new #GUri
-   */
+      Sets msg's URI to uri.
+    
+    If msg has already been sent and you want to re-send it with the new URI,
+    you need to send it again.
+    Params:
+      uri =       the new #GUri
+  */
   void setUri(glib.uri.Uri uri)
   {
     soup_message_set_uri(cast(SoupMessage*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null);
   }
 
   /**
-   * Completes a certificate password request.
-   * You must call this as a response to
-   * signalMessage::request-certificate-password signal, to notify msg that
-   * the [gio.tls_password.TlsPassword] has already been updated.
-   */
+      Completes a certificate password request.
+    
+    You must call this as a response to
+    `signalMessage::request-certificate-password` signal, to notify msg that
+    the [gio.tls_password.TlsPassword] has already been updated.
+  */
   void tlsClientCertificatePasswordRequestComplete()
   {
     soup_message_tls_client_certificate_password_request_complete(cast(SoupMessage*)cPtr);
   }
 
   /**
-   * Emitted during the msg's connection TLS handshake
-   * after an unacceptable TLS certificate has been received.
-   * You can return %TRUE to accept tls_certificate despite
-   * tls_errors.
-   * Params
-   *   tlsPeerCertificate = the peer's #GTlsCertificate
-   *   tlsPeerErrors = the tls errors of tls_certificate
-   *   message = the instance the signal is connected to
-   * Returns: %TRUE to accept the TLS certificate and stop other
-   *   handlers from being invoked, or %FALSE to propagate the
-   *   event further.
-   */
+      Emitted during the msg's connection TLS handshake
+    after an unacceptable TLS certificate has been received.
+    
+    You can return true to accept tls_certificate despite
+    tls_errors.
+  
+    ## Parameters
+    $(LIST
+      * $(B tlsPeerCertificate)       the peer's #GTlsCertificate
+      * $(B tlsPeerErrors)       the tls errors of tls_certificate
+      * $(B message) the instance the signal is connected to
+    )
+    Returns:     true to accept the TLS certificate and stop other
+        handlers from being invoked, or false to propagate the
+        event further.
+  */
   alias AcceptCertificateCallbackDlg = bool delegate(gio.tls_certificate.TlsCertificate tlsPeerCertificate, gio.types.TlsCertificateFlags tlsPeerErrors, soup.message.Message message);
+
+  /** ditto */
   alias AcceptCertificateCallbackFunc = bool function(gio.tls_certificate.TlsCertificate tlsPeerCertificate, gio.types.TlsCertificateFlags tlsPeerErrors, soup.message.Message message);
 
   /**
-   * Connect to AcceptCertificate signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to AcceptCertificate signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AcceptCertificateCallbackDlg) || is(T : AcceptCertificateCallbackFunc))
   {
@@ -719,34 +756,42 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Emitted when the message requires authentication.
-   * If credentials are available call [soup.auth.Auth.authenticate] on
-   * auth. If these credentials fail, the signal will be emitted again,
-   * with retrying set to %TRUE, which will continue until you return
-   * without calling [soup.auth.Auth.authenticate] on auth.
-   * Note that this may be emitted before msg's body has been
-   * fully read.
-   * You can authenticate auth asynchronously by calling
-   * [gobject.object.ObjectG.ref_] on auth and returning %TRUE. The operation will
-   * complete once either [soup.auth.Auth.authenticate] or
-   * [soup.auth.Auth.cancel] are called.
-   * Params
-   *   auth = the #SoupAuth to authenticate
-   *   retrying = %TRUE if this is the second $(LPAREN)or later$(RPAREN) attempt
-   *   message = the instance the signal is connected to
-   * Returns: %TRUE to stop other handlers from being invoked
-   *   or %FALSE to propagate the event further.
-   */
+      Emitted when the message requires authentication.
+    
+    If credentials are available call [soup.auth.Auth.authenticate] on
+    auth. If these credentials fail, the signal will be emitted again,
+    with retrying set to true, which will continue until you return
+    without calling [soup.auth.Auth.authenticate] on auth.
+    
+    Note that this may be emitted before msg's body has been
+    fully read.
+    
+    You can authenticate auth asynchronously by calling
+    [gobject.object.ObjectG.ref_] on auth and returning true. The operation will
+    complete once either [soup.auth.Auth.authenticate] or
+    [soup.auth.Auth.cancel] are called.
+  
+    ## Parameters
+    $(LIST
+      * $(B auth)       the #SoupAuth to authenticate
+      * $(B retrying)       true if this is the second (or later) attempt
+      * $(B message) the instance the signal is connected to
+    )
+    Returns:     true to stop other handlers from being invoked
+        or false to propagate the event further.
+  */
   alias AuthenticateCallbackDlg = bool delegate(soup.auth.Auth auth, bool retrying, soup.message.Message message);
+
+  /** ditto */
   alias AuthenticateCallbackFunc = bool function(soup.auth.Auth auth, bool retrying, soup.message.Message message);
 
   /**
-   * Connect to Authenticate signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Authenticate signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectAuthenticate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AuthenticateCallbackDlg) || is(T : AuthenticateCallbackFunc))
   {
@@ -767,20 +812,27 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Emitted when all HTTP processing is finished for a message.
-   * $(LPAREN)After signalMessage::got_body$(RPAREN).
-   *   message = the instance the signal is connected to
-   */
+      Emitted when all HTTP processing is finished for a message.
+    
+    (After `signalMessage::got_body`).
+  
+    ## Parameters
+    $(LIST
+      * $(B message) the instance the signal is connected to
+    )
+  */
   alias FinishedCallbackDlg = void delegate(soup.message.Message message);
+
+  /** ditto */
   alias FinishedCallbackFunc = void function(soup.message.Message message);
 
   /**
-   * Connect to Finished signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Finished signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectFinished(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FinishedCallbackDlg) || is(T : FinishedCallbackFunc))
   {
@@ -797,19 +849,25 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Emitted after receiving the complete message response body.
-   *   message = the instance the signal is connected to
-   */
+      Emitted after receiving the complete message response body.
+  
+    ## Parameters
+    $(LIST
+      * $(B message) the instance the signal is connected to
+    )
+  */
   alias GotBodyCallbackDlg = void delegate(soup.message.Message message);
+
+  /** ditto */
   alias GotBodyCallbackFunc = void function(soup.message.Message message);
 
   /**
-   * Connect to GotBody signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to GotBody signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectGotBody(T)(T callback, Flag!"After" after = No.After)
   if (is(T : GotBodyCallbackDlg) || is(T : GotBodyCallbackFunc))
   {
@@ -826,22 +884,27 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Emitted after reading a portion of the message
-   * body from the network.
-   * Params
-   *   chunkSize = the number of bytes read
-   *   message = the instance the signal is connected to
-   */
+      Emitted after reading a portion of the message
+    body from the network.
+  
+    ## Parameters
+    $(LIST
+      * $(B chunkSize)       the number of bytes read
+      * $(B message) the instance the signal is connected to
+    )
+  */
   alias GotBodyDataCallbackDlg = void delegate(uint chunkSize, soup.message.Message message);
+
+  /** ditto */
   alias GotBodyDataCallbackFunc = void function(uint chunkSize, soup.message.Message message);
 
   /**
-   * Connect to GotBodyData signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to GotBodyData signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectGotBodyData(T)(T callback, Flag!"After" after = No.After)
   if (is(T : GotBodyDataCallbackDlg) || is(T : GotBodyDataCallbackFunc))
   {
@@ -859,30 +922,38 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Emitted after receiving the Status-Line and response headers.
-   * See also [soup.message.Message.addHeaderHandler] and
-   * [soup.message.Message.addStatusCodeHandler], which can be used to
-   * connect to a subset of emissions of this signal.
-   * If you cancel or requeue msg while processing this signal,
-   * then the current HTTP I/O will be stopped after this signal
-   * emission finished, and msg's connection will be closed.
-   * $(LPAREN)If you need to requeue a message--eg, after handling
-   * authentication or redirection--it is usually better to
-   * requeue it from a signalMessage::got-body handler rather
-   * than a signalMessage::got_headers handler, so that the
-   * existing HTTP connection can be reused.$(RPAREN)
-   *   message = the instance the signal is connected to
-   */
+      Emitted after receiving the Status-Line and response headers.
+    
+    See also [soup.message.Message.addHeaderHandler] and
+    [soup.message.Message.addStatusCodeHandler], which can be used to
+    connect to a subset of emissions of this signal.
+    
+    If you cancel or requeue msg while processing this signal,
+    then the current HTTP I/O will be stopped after this signal
+    emission finished, and msg's connection will be closed.
+    (If you need to requeue a message--eg, after handling
+    authentication or redirection--it is usually better to
+    requeue it from a `signalMessage::got-body` handler rather
+    than a `signalMessage::got_headers` handler, so that the
+    existing HTTP connection can be reused.)
+  
+    ## Parameters
+    $(LIST
+      * $(B message) the instance the signal is connected to
+    )
+  */
   alias GotHeadersCallbackDlg = void delegate(soup.message.Message message);
+
+  /** ditto */
   alias GotHeadersCallbackFunc = void function(soup.message.Message message);
 
   /**
-   * Connect to GotHeaders signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to GotHeaders signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectGotHeaders(T)(T callback, Flag!"After" after = No.After)
   if (is(T : GotHeadersCallbackDlg) || is(T : GotHeadersCallbackFunc))
   {
@@ -899,26 +970,34 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Emitted after receiving a 1xx $(LPAREN)Informational$(RPAREN) response for
-   * a $(LPAREN)client-side$(RPAREN) message.
-   * The response_headers will be filled in with the headers associated
-   * with the informational response; however, those header values will be
-   * erased after this signal is done.
-   * If you cancel or requeue msg while processing this signal,
-   * then the current HTTP I/O will be stopped after this signal
-   * emission finished, and msg's connection will be closed.
-   *   message = the instance the signal is connected to
-   */
+      Emitted after receiving a 1xx (Informational) response for
+    a (client-side) message.
+    
+    The response_headers will be filled in with the headers associated
+    with the informational response; however, those header values will be
+    erased after this signal is done.
+    
+    If you cancel or requeue msg while processing this signal,
+    then the current HTTP I/O will be stopped after this signal
+    emission finished, and msg's connection will be closed.
+  
+    ## Parameters
+    $(LIST
+      * $(B message) the instance the signal is connected to
+    )
+  */
   alias GotInformationalCallbackDlg = void delegate(soup.message.Message message);
+
+  /** ditto */
   alias GotInformationalCallbackFunc = void function(soup.message.Message message);
 
   /**
-   * Connect to GotInformational signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to GotInformational signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectGotInformational(T)(T callback, Flag!"After" after = No.After)
   if (is(T : GotInformationalCallbackDlg) || is(T : GotInformationalCallbackFunc))
   {
@@ -935,21 +1014,27 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Emitted when classHSTSEnforcer has upgraded the protocol
-   * for msg to HTTPS as a result of matching its domain with
-   * a HSTS policy.
-   *   message = the instance the signal is connected to
-   */
+      Emitted when `classHSTSEnforcer` has upgraded the protocol
+    for msg to HTTPS as a result of matching its domain with
+    a HSTS policy.
+  
+    ## Parameters
+    $(LIST
+      * $(B message) the instance the signal is connected to
+    )
+  */
   alias HstsEnforcedCallbackDlg = void delegate(soup.message.Message message);
+
+  /** ditto */
   alias HstsEnforcedCallbackFunc = void function(soup.message.Message message);
 
   /**
-   * Connect to HstsEnforced signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to HstsEnforced signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectHstsEnforced(T)(T callback, Flag!"After" after = No.After)
   if (is(T : HstsEnforcedCallbackDlg) || is(T : HstsEnforcedCallbackFunc))
   {
@@ -966,31 +1051,38 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Emitted to indicate that some network-related event
-   * related to msg has occurred.
-   * This essentially proxies the [gio.socket_client.SocketClient.event] signal,
-   * but only for events that occur while msg "owns" the connection; if
-   * msg is sent on an existing persistent connection, then this signal
-   * will not be emitted. $(LPAREN)If you want to force the message to be sent on
-   * a new connection, set the %SOUP_MESSAGE_NEW_CONNECTION flag on it.$(RPAREN)
-   * See [gio.socket_client.SocketClient.event] for more information on what
-   * the different values of event correspond to, and what
-   * connection will be in each case.
-   * Params
-   *   event = the network event
-   *   connection = the current state of the network connection
-   *   message = the instance the signal is connected to
-   */
+      Emitted to indicate that some network-related event
+    related to msg has occurred.
+    
+    This essentially proxies the [gio.socket_client.SocketClient.event] signal,
+    but only for events that occur while msg "owns" the connection; if
+    msg is sent on an existing persistent connection, then this signal
+    will not be emitted. (If you want to force the message to be sent on
+    a new connection, set the [soup.types.MessageFlags.NewConnection] flag on it.)
+    
+    See [gio.socket_client.SocketClient.event] for more information on what
+    the different values of event correspond to, and what
+    connection will be in each case.
+  
+    ## Parameters
+    $(LIST
+      * $(B event)       the network event
+      * $(B connection)       the current state of the network connection
+      * $(B message) the instance the signal is connected to
+    )
+  */
   alias NetworkEventCallbackDlg = void delegate(gio.types.SocketClientEvent event, gio.iostream.IOStream connection, soup.message.Message message);
+
+  /** ditto */
   alias NetworkEventCallbackFunc = void function(gio.types.SocketClientEvent event, gio.iostream.IOStream connection, soup.message.Message message);
 
   /**
-   * Connect to NetworkEvent signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to NetworkEvent signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectNetworkEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : NetworkEventCallbackDlg) || is(T : NetworkEventCallbackFunc))
   {
@@ -1009,32 +1101,38 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Emitted during the msg's connection TLS handshake when
-   * tls_connection requests a certificate from the client.
-   * You can set the client certificate by calling
-   * [soup.message.Message.setTlsClientCertificate] and returning %TRUE. It's
-   * possible to handle the request asynchornously by returning %TRUE and
-   * call [soup.message.Message.setTlsClientCertificate] later once the
-   * certificate is available. Note that this signal is not emitted if
-   * propertySession:tls-interaction was set, or if
-   * [soup.message.Message.setTlsClientCertificate] was called before the
-   * connection TLS handshake started.
-   * Params
-   *   tlsConnection = the #GTlsClientConnection
-   *   message = the instance the signal is connected to
-   * Returns: %TRUE to handle the request, or %FALSE to make the connection
-   *   fail with %G_TLS_ERROR_CERTIFICATE_REQUIRED.
-   */
+      Emitted during the msg's connection TLS handshake when
+    tls_connection requests a certificate from the client.
+    
+    You can set the client certificate by calling
+    [soup.message.Message.setTlsClientCertificate] and returning true. It's
+    possible to handle the request asynchornously by returning true and
+    call [soup.message.Message.setTlsClientCertificate] later once the
+    certificate is available. Note that this signal is not emitted if
+    `propertySession:tls-interaction` was set, or if
+    [soup.message.Message.setTlsClientCertificate] was called before the
+    connection TLS handshake started.
+  
+    ## Parameters
+    $(LIST
+      * $(B tlsConnection)       the #GTlsClientConnection
+      * $(B message) the instance the signal is connected to
+    )
+    Returns:     true to handle the request, or false to make the connection
+        fail with [gio.types.TlsError.CertificateRequired].
+  */
   alias RequestCertificateCallbackDlg = bool delegate(gio.tls_client_connection.TlsClientConnection tlsConnection, soup.message.Message message);
+
+  /** ditto */
   alias RequestCertificateCallbackFunc = bool function(gio.tls_client_connection.TlsClientConnection tlsConnection, soup.message.Message message);
 
   /**
-   * Connect to RequestCertificate signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to RequestCertificate signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectRequestCertificate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RequestCertificateCallbackDlg) || is(T : RequestCertificateCallbackFunc))
   {
@@ -1054,33 +1152,39 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Emitted during the msg's connection TLS handshake when
-   * tls_connection requests a certificate password from the client.
-   * You can set the certificate password on password, then call
-   * [soup.message.Message.tlsClientCertificatePasswordRequestComplete] and
-   * return %TRUE to handle the signal synchronously. It's possible to
-   * handle the request asynchornously by calling
-   * [gobject.object.ObjectG.ref_] on password, then returning %TRUE and
-   * call
-   * [soup.message.Message.tlsClientCertificatePasswordRequestComplete]
-   * later after setting the password on password. Note that this signal
-   * is not emitted if propertySession:tls-interaction was set.
-   * Params
-   *   tlsPassword = the #GTlsPassword
-   *   message = the instance the signal is connected to
-   * Returns: %TRUE to handle the request, or %FALSE to make the connection
-   *   fail with %G_TLS_ERROR_CERTIFICATE_REQUIRED.
-   */
+      Emitted during the msg's connection TLS handshake when
+    tls_connection requests a certificate password from the client.
+    
+    You can set the certificate password on password, then call
+    [soup.message.Message.tlsClientCertificatePasswordRequestComplete] and
+    return true to handle the signal synchronously. It's possible to
+    handle the request asynchornously by calling
+    [gobject.object.ObjectG.ref_] on password, then returning true and
+    call
+    [soup.message.Message.tlsClientCertificatePasswordRequestComplete]
+    later after setting the password on password. Note that this signal
+    is not emitted if `propertySession:tls-interaction` was set.
+  
+    ## Parameters
+    $(LIST
+      * $(B tlsPassword)       the #GTlsPassword
+      * $(B message) the instance the signal is connected to
+    )
+    Returns:     true to handle the request, or false to make the connection
+        fail with [gio.types.TlsError.CertificateRequired].
+  */
   alias RequestCertificatePasswordCallbackDlg = bool delegate(gio.tls_password.TlsPassword tlsPassword, soup.message.Message message);
+
+  /** ditto */
   alias RequestCertificatePasswordCallbackFunc = bool function(gio.tls_password.TlsPassword tlsPassword, soup.message.Message message);
 
   /**
-   * Connect to RequestCertificatePassword signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to RequestCertificatePassword signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectRequestCertificatePassword(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RequestCertificatePasswordCallbackDlg) || is(T : RequestCertificatePasswordCallbackFunc))
   {
@@ -1100,23 +1204,30 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Emitted when a request that was already sent once is now
-   * being sent again.
-   * e.g. because the first attempt received a
-   * redirection response, or because we needed to use
-   * authentication.
-   *   message = the instance the signal is connected to
-   */
+      Emitted when a request that was already sent once is now
+    being sent again.
+    
+    e.g. because the first attempt received a
+    redirection response, or because we needed to use
+    authentication.
+  
+    ## Parameters
+    $(LIST
+      * $(B message) the instance the signal is connected to
+    )
+  */
   alias RestartedCallbackDlg = void delegate(soup.message.Message message);
+
+  /** ditto */
   alias RestartedCallbackFunc = void function(soup.message.Message message);
 
   /**
-   * Connect to Restarted signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Restarted signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectRestarted(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RestartedCallbackDlg) || is(T : RestartedCallbackFunc))
   {
@@ -1133,19 +1244,25 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Emitted just before a message is sent.
-   *   message = the instance the signal is connected to
-   */
+      Emitted just before a message is sent.
+  
+    ## Parameters
+    $(LIST
+      * $(B message) the instance the signal is connected to
+    )
+  */
   alias StartingCallbackDlg = void delegate(soup.message.Message message);
+
+  /** ditto */
   alias StartingCallbackFunc = void function(soup.message.Message message);
 
   /**
-   * Connect to Starting signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Starting signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectStarting(T)(T callback, Flag!"After" after = No.After)
   if (is(T : StartingCallbackDlg) || is(T : StartingCallbackFunc))
   {
@@ -1162,20 +1279,26 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Emitted immediately after writing the complete body for a
-   * message.
-   *   message = the instance the signal is connected to
-   */
+      Emitted immediately after writing the complete body for a
+    message.
+  
+    ## Parameters
+    $(LIST
+      * $(B message) the instance the signal is connected to
+    )
+  */
   alias WroteBodyCallbackDlg = void delegate(soup.message.Message message);
+
+  /** ditto */
   alias WroteBodyCallbackFunc = void function(soup.message.Message message);
 
   /**
-   * Connect to WroteBody signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to WroteBody signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectWroteBody(T)(T callback, Flag!"After" after = No.After)
   if (is(T : WroteBodyCallbackDlg) || is(T : WroteBodyCallbackFunc))
   {
@@ -1192,22 +1315,27 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Emitted immediately after writing a portion of the message
-   * body to the network.
-   * Params
-   *   chunkSize = the number of bytes written
-   *   message = the instance the signal is connected to
-   */
+      Emitted immediately after writing a portion of the message
+    body to the network.
+  
+    ## Parameters
+    $(LIST
+      * $(B chunkSize)       the number of bytes written
+      * $(B message) the instance the signal is connected to
+    )
+  */
   alias WroteBodyDataCallbackDlg = void delegate(uint chunkSize, soup.message.Message message);
+
+  /** ditto */
   alias WroteBodyDataCallbackFunc = void function(uint chunkSize, soup.message.Message message);
 
   /**
-   * Connect to WroteBodyData signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to WroteBodyData signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectWroteBodyData(T)(T callback, Flag!"After" after = No.After)
   if (is(T : WroteBodyDataCallbackDlg) || is(T : WroteBodyDataCallbackFunc))
   {
@@ -1225,20 +1353,26 @@ class Message : gobject.object.ObjectG
   }
 
   /**
-   * Emitted immediately after writing the request headers for a
-   * message.
-   *   message = the instance the signal is connected to
-   */
+      Emitted immediately after writing the request headers for a
+    message.
+  
+    ## Parameters
+    $(LIST
+      * $(B message) the instance the signal is connected to
+    )
+  */
   alias WroteHeadersCallbackDlg = void delegate(soup.message.Message message);
+
+  /** ditto */
   alias WroteHeadersCallbackFunc = void function(soup.message.Message message);
 
   /**
-   * Connect to WroteHeaders signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to WroteHeaders signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectWroteHeaders(T)(T callback, Flag!"After" after = No.After)
   if (is(T : WroteHeadersCallbackDlg) || is(T : WroteHeadersCallbackFunc))
   {

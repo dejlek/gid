@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
 {
 
@@ -27,6 +28,7 @@ class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return getType();
   }
 
+  /** */
   this(arrow.data_type.DataType runEndDataType, arrow.data_type.DataType valueDataType)
   {
     GArrowRunEndEncodedDataType* _cretval;
@@ -34,6 +36,7 @@ class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.data_type.DataType getRunEndDataType()
   {
     GArrowDataType* _cretval;
@@ -42,6 +45,7 @@ class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return _retval;
   }
 
+  /** */
   arrow.data_type.DataType getValueDataType()
   {
     GArrowDataType* _cretval;

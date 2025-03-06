@@ -9,9 +9,9 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Generated when a selection is requested or ownership of a selection
- * is taken over by another client application.
- */
+    Generated when a selection is requested or ownership of a selection
+  is taken over by another client application.
+*/
 class EventSelection
 {
   GdkEventSelection cInstance;

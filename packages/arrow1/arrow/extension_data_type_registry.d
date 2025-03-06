@@ -8,6 +8,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class ExtensionDataTypeRegistry : gobject.object.ObjectG
 {
 
@@ -27,6 +28,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   static arrow.extension_data_type_registry.ExtensionDataTypeRegistry default_()
   {
     GArrowExtensionDataTypeRegistry* _cretval;
@@ -35,6 +37,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.extension_data_type.ExtensionDataType lookup(string name)
   {
     GArrowExtensionDataType* _cretval;
@@ -45,11 +48,11 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
   }
 
   /**
-   * Register the given data_type to the registry.
-   * Params:
-   *   dataType = A #GArrowExtensionDataType to be registered.
-   * Returns: %TRUE on success, %FALSE on error.
-   */
+      Register the given data_type to the registry.
+    Params:
+      dataType =       A #GArrowExtensionDataType to be registered.
+    Returns:     true on success, false on error.
+  */
   bool register(arrow.extension_data_type.ExtensionDataType dataType)
   {
     bool _retval;
@@ -61,12 +64,12 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
   }
 
   /**
-   * Unregister an extension data type that has the given name from the
-   * registry.
-   * Params:
-   *   name = An extension data type name to be unregistered.
-   * Returns: %TRUE on success, %FALSE on error.
-   */
+      Unregister an extension data type that has the given name from the
+    registry.
+    Params:
+      name =       An extension data type name to be unregistered.
+    Returns:     true on success, false on error.
+  */
   bool unregister(string name)
   {
     bool _retval;

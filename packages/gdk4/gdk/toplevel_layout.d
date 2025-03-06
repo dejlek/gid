@@ -9,14 +9,16 @@ import gobject.boxed;
 import gobject.object;
 
 /**
- * The `GdkToplevelLayout` struct contains information that
- * is necessary to present a sovereign window on screen.
- * The `GdkToplevelLayout` struct is necessary for using
- * [gdk.toplevel.Toplevel.present].
- * Toplevel surfaces are sovereign windows that can be presented
- * to the user in various states $(LPAREN)maximized, on all workspaces,
- * etc$(RPAREN).
- */
+    The [gdk.toplevel_layout.ToplevelLayout] struct contains information that
+  is necessary to present a sovereign window on screen.
+  
+  The [gdk.toplevel_layout.ToplevelLayout] struct is necessary for using
+  [gdk.toplevel.Toplevel.present].
+  
+  Toplevel surfaces are sovereign windows that can be presented
+  to the user in various states (maximized, on all workspaces,
+  etc).
+*/
 class ToplevelLayout : gobject.boxed.Boxed
 {
 
@@ -42,13 +44,15 @@ class ToplevelLayout : gobject.boxed.Boxed
   }
 
   /**
-   * Create a toplevel layout description.
-   * Used together with [gdk.toplevel.Toplevel.present] to describe
-   * how a toplevel surface should be placed and behave on-screen.
-   * The size is in ”application pixels”, not
-   * ”device pixels” $(LPAREN)see [gdk.surface.Surface.getScaleFactor]$(RPAREN).
-   * Returns: newly created instance of `GdkToplevelLayout`
-   */
+      Create a toplevel layout description.
+    
+    Used together with [gdk.toplevel.Toplevel.present] to describe
+    how a toplevel surface should be placed and behave on-screen.
+    
+    The size is in ”application pixels”, not
+    ”device pixels” (see [gdk.surface.Surface.getScaleFactor]).
+    Returns:     newly created instance of [gdk.toplevel_layout.ToplevelLayout]
+  */
   this()
   {
     GdkToplevelLayout* _cretval;
@@ -57,9 +61,9 @@ class ToplevelLayout : gobject.boxed.Boxed
   }
 
   /**
-   * Create a new `GdkToplevelLayout` and copy the contents of layout into it.
-   * Returns: a copy of layout.
-   */
+      Create a new [gdk.toplevel_layout.ToplevelLayout] and copy the contents of layout into it.
+    Returns:     a copy of layout.
+  */
   gdk.toplevel_layout.ToplevelLayout copy()
   {
     GdkToplevelLayout* _cretval;
@@ -69,12 +73,12 @@ class ToplevelLayout : gobject.boxed.Boxed
   }
 
   /**
-   * Check whether layout and other has identical layout properties.
-   * Params:
-   *   other = another `GdkToplevelLayout`
-   * Returns: %TRUE if layout and other have identical layout properties,
-   *   otherwise %FALSE.
-   */
+      Check whether layout and other has identical layout properties.
+    Params:
+      other =       another [gdk.toplevel_layout.ToplevelLayout]
+    Returns:     true if layout and other have identical layout properties,
+        otherwise false.
+  */
   bool equal(gdk.toplevel_layout.ToplevelLayout other)
   {
     bool _retval;
@@ -83,13 +87,13 @@ class ToplevelLayout : gobject.boxed.Boxed
   }
 
   /**
-   * If the layout specifies whether to the toplevel should go fullscreen,
-   * the value pointed to by fullscreen is set to %TRUE if it should go
-   * fullscreen, or %FALSE, if it should go unfullscreen.
-   * Params:
-   *   fullscreen = location to store whether the toplevel should be fullscreen
-   * Returns: whether the layout specifies the fullscreen state for the toplevel
-   */
+      If the layout specifies whether to the toplevel should go fullscreen,
+    the value pointed to by fullscreen is set to true if it should go
+    fullscreen, or false, if it should go unfullscreen.
+    Params:
+      fullscreen =       location to store whether the toplevel should be fullscreen
+    Returns:     whether the layout specifies the fullscreen state for the toplevel
+  */
   bool getFullscreen(out bool fullscreen)
   {
     bool _retval;
@@ -98,10 +102,10 @@ class ToplevelLayout : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the monitor that the layout is fullscreening
-   * the surface on.
-   * Returns: the monitor on which layout fullscreens
-   */
+      Returns the monitor that the layout is fullscreening
+    the surface on.
+    Returns:     the monitor on which layout fullscreens
+  */
   gdk.monitor.MonitorG getFullscreenMonitor()
   {
     GdkMonitor* _cretval;
@@ -111,13 +115,13 @@ class ToplevelLayout : gobject.boxed.Boxed
   }
 
   /**
-   * If the layout specifies whether to the toplevel should go maximized,
-   * the value pointed to by maximized is set to %TRUE if it should go
-   * fullscreen, or %FALSE, if it should go unmaximized.
-   * Params:
-   *   maximized = set to %TRUE if the toplevel should be maximized
-   * Returns: whether the layout specifies the maximized state for the toplevel
-   */
+      If the layout specifies whether to the toplevel should go maximized,
+    the value pointed to by maximized is set to true if it should go
+    fullscreen, or false, if it should go unmaximized.
+    Params:
+      maximized =       set to true if the toplevel should be maximized
+    Returns:     whether the layout specifies the maximized state for the toplevel
+  */
   bool getMaximized(out bool maximized)
   {
     bool _retval;
@@ -126,10 +130,10 @@ class ToplevelLayout : gobject.boxed.Boxed
   }
 
   /**
-   * Returns whether the layout should allow the user
-   * to resize the surface.
-   * Returns: %TRUE if the layout is resizable
-   */
+      Returns whether the layout should allow the user
+    to resize the surface.
+    Returns:     true if the layout is resizable
+  */
   bool getResizable()
   {
     bool _retval;
@@ -138,34 +142,34 @@ class ToplevelLayout : gobject.boxed.Boxed
   }
 
   /**
-   * Sets whether the layout should cause the surface
-   * to be fullscreen when presented.
-   * Params:
-   *   fullscreen = %TRUE to fullscreen the surface
-   *   monitor = the monitor to fullscreen on
-   */
+      Sets whether the layout should cause the surface
+    to be fullscreen when presented.
+    Params:
+      fullscreen =       true to fullscreen the surface
+      monitor =       the monitor to fullscreen on
+  */
   void setFullscreen(bool fullscreen, gdk.monitor.MonitorG monitor = null)
   {
     gdk_toplevel_layout_set_fullscreen(cast(GdkToplevelLayout*)cPtr, fullscreen, monitor ? cast(GdkMonitor*)monitor.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets whether the layout should cause the surface
-   * to be maximized when presented.
-   * Params:
-   *   maximized = %TRUE to maximize
-   */
+      Sets whether the layout should cause the surface
+    to be maximized when presented.
+    Params:
+      maximized =       true to maximize
+  */
   void setMaximized(bool maximized)
   {
     gdk_toplevel_layout_set_maximized(cast(GdkToplevelLayout*)cPtr, maximized);
   }
 
   /**
-   * Sets whether the layout should allow the user
-   * to resize the surface after it has been presented.
-   * Params:
-   *   resizable = %TRUE to allow resizing
-   */
+      Sets whether the layout should allow the user
+    to resize the surface after it has been presented.
+    Params:
+      resizable =       true to allow resizing
+  */
   void setResizable(bool resizable)
   {
     gdk_toplevel_layout_set_resizable(cast(GdkToplevelLayout*)cPtr, resizable);

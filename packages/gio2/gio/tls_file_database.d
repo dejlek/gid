@@ -9,10 +9,10 @@ import glib.error;
 import gobject.object;
 
 /**
- * `GTlsFileDatabase` is implemented by [gio.tls_database.TlsDatabase] objects which
- * load their certificate information from a file. It is an interface which
- * TLS library specific subtypes implement.
- */
+    [gio.tls_file_database.TlsFileDatabase] is implemented by [gio.tls_database.TlsDatabase] objects which
+  load their certificate information from a file. It is an interface which
+  TLS library specific subtypes implement.
+*/
 interface TlsFileDatabase
 {
 
@@ -23,14 +23,15 @@ interface TlsFileDatabase
   }
 
   /**
-   * Creates a new #GTlsFileDatabase which uses anchor certificate authorities
-   * in anchors to verify certificate chains.
-   * The certificates in anchors must be PEM encoded.
-   * Params:
-   *   anchors = filename of anchor certificate authorities.
-   * Returns: the new
-   *   #GTlsFileDatabase, or %NULL on error
-   */
+      Creates a new #GTlsFileDatabase which uses anchor certificate authorities
+    in anchors to verify certificate chains.
+    
+    The certificates in anchors must be PEM encoded.
+    Params:
+      anchors =       filename of anchor certificate authorities.
+    Returns:     the new
+      #GTlsFileDatabase, or null on error
+  */
   static gio.tls_file_database.TlsFileDatabase new_(string anchors)
   {
     GTlsDatabase* _cretval;

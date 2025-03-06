@@ -7,6 +7,7 @@ import gtk.c.types;
 import gtk.types;
 import gtk.widget;
 
+/** */
 class FixedChild
 {
   GtkFixedChild cInstance;

@@ -12,9 +12,9 @@ import glib.bytes;
 import gobject.object;
 
 /**
- * `GBytesIcon` specifies an image held in memory in a common format $(LPAREN)usually
- * PNG$(RPAREN) to be used as icon.
- */
+    [gio.bytes_icon.BytesIcon] specifies an image held in memory in a common format (usually
+  PNG) to be used as icon.
+*/
 class BytesIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.LoadableIcon
 {
 
@@ -38,14 +38,15 @@ class BytesIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loada
   mixin LoadableIconT!();
 
   /**
-   * Creates a new icon for a bytes.
-   * This cannot fail, but loading and interpreting the bytes may fail later on
-   * $(LPAREN)for example, if [gio.loadable_icon.LoadableIcon.load] is called$(RPAREN) if the image is invalid.
-   * Params:
-   *   bytes = a #GBytes.
-   * Returns: a #GIcon for the given
-   *   bytes.
-   */
+      Creates a new icon for a bytes.
+    
+    This cannot fail, but loading and interpreting the bytes may fail later on
+    (for example, if [gio.loadable_icon.LoadableIcon.load] is called) if the image is invalid.
+    Params:
+      bytes =       a #GBytes.
+    Returns:     a #GIcon for the given
+        bytes.
+  */
   this(glib.bytes.Bytes bytes)
   {
     GIcon* _cretval;
@@ -54,9 +55,9 @@ class BytesIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loada
   }
 
   /**
-   * Gets the #GBytes associated with the given icon.
-   * Returns: a #GBytes.
-   */
+      Gets the #GBytes associated with the given icon.
+    Returns:     a #GBytes.
+  */
   glib.bytes.Bytes getBytes()
   {
     GBytes* _cretval;

@@ -7,10 +7,10 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * Data type for blobs. A blob wraps a chunk of binary
- * data and facilitates its lifecycle management between
- * a client program and HarfBuzz.
- */
+    Data type for blobs. A blob wraps a chunk of binary
+  data and facilitates its lifecycle management between
+  a client program and HarfBuzz.
+*/
 class Blob : gobject.boxed.Boxed
 {
 

@@ -13,6 +13,7 @@ import vte.c.functions;
 import vte.c.types;
 import vte.types;
 
+/** */
 class Pty : gobject.object.ObjectG, gio.initable.Initable
 {
 
@@ -35,15 +36,17 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
   mixin InitableT!();
 
   /**
-   * Creates a new #VtePty for the PTY master fd.
-   * No entry will be made in the lastlog, utmp or wtmp system files.
-   * Note that the newly created #VtePty will take ownership of fd
-   * and close it on finalize.
-   * Params:
-   *   fd = a file descriptor to the PTY
-   *   cancellable = a #GCancellable, or %NULL
-   * Returns: a new #VtePty for fd, or %NULL on error with error filled in
-   */
+      Creates a new #VtePty for the PTY master fd.
+    
+    No entry will be made in the lastlog, utmp or wtmp system files.
+    
+    Note that the newly created #VtePty will take ownership of fd
+    and close it on finalize.
+    Params:
+      fd =       a file descriptor to the PTY
+      cancellable =       a #GCancellable, or null
+    Returns:     a new #VtePty for fd, or null on error with error filled in
+  */
   static vte.pty.Pty newForeignSync(int fd, gio.cancellable.Cancellable cancellable = null)
   {
     VtePty* _cretval;
@@ -56,31 +59,38 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
   }
 
   /**
-   * Allocates a new pseudo-terminal.
-   * You can later use fork$(LPAREN)$(RPAREN) or the [glib.global.spawnAsync] family of functions
-   * to start a process on the PTY.
-   * If using fork$(LPAREN)$(RPAREN), you MUST call [vte.pty.Pty.childSetup] in the child.
-   * If using [glib.global.spawnAsync] and friends, you MUST either use
-   * [vte.pty.Pty.childSetup] directly as the child setup function, or call
-   * [vte.pty.Pty.childSetup] from your own child setup function supplied.
-   * When using [vte.terminal.Terminal.spawnSync] with a custom child setup
-   * function, [vte.pty.Pty.childSetup] will be called before the supplied
-   * function; you must not call it again.
-   * Also, you MUST pass the %G_SPAWN_DO_NOT_REAP_CHILD flag.
-   * Note also that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,
-   * and %G_SPAWN_CHILD_INHERITS_STDIN are not supported, since stdin, stdout
-   * and stderr of the child process will always be connected to the PTY.
-   * Note that you should set the PTY's size using [vte.pty.Pty.setSize] before
-   * spawning the child process, so that the child process has the correct
-   * size from the start instead of starting with a default size and then
-   * shortly afterwards receiving a <literal>SIGWINCH</literal> signal. You
-   * should prefer using [vte.terminal.Terminal.ptyNewSync] which does this
-   * automatically.
-   * Params:
-   *   flags = flags from #VtePtyFlags
-   *   cancellable = a #GCancellable, or %NULL
-   * Returns: a new #VtePty, or %NULL on error with error filled in
-   */
+      Allocates a new pseudo-terminal.
+    
+    You can later use fork() or the [glib.global.spawnAsync] family of functions
+    to start a process on the PTY.
+    
+    If using fork(), you MUST call [vte.pty.Pty.childSetup] in the child.
+    
+    If using [glib.global.spawnAsync] and friends, you MUST either use
+    [vte.pty.Pty.childSetup] directly as the child setup function, or call
+    [vte.pty.Pty.childSetup] from your own child setup function supplied.
+    
+    When using [vte.terminal.Terminal.spawnSync] with a custom child setup
+    function, [vte.pty.Pty.childSetup] will be called before the supplied
+    function; you must not call it again.
+    
+    Also, you MUST pass the `G_SPAWN_DO_NOT_REAP_CHILD` flag.
+    
+    Note also that `G_SPAWN_STDOUT_TO_DEV_NULL`, `G_SPAWN_STDERR_TO_DEV_NULL`,
+    and `G_SPAWN_CHILD_INHERITS_STDIN` are not supported, since stdin, stdout
+    and stderr of the child process will always be connected to the PTY.
+    
+    Note that you should set the PTY's size using [vte.pty.Pty.setSize] before
+    spawning the child process, so that the child process has the correct
+    size from the start instead of starting with a default size and then
+    shortly afterwards receiving a <literal>SIGWINCH</literal> signal. You
+    should prefer using [vte.terminal.Terminal.ptyNewSync] which does this
+    automatically.
+    Params:
+      flags =       flags from #VtePtyFlags
+      cancellable =       a #GCancellable, or null
+    Returns:     a new #VtePty, or null on error with error filled in
+  */
   static vte.pty.Pty newSync(vte.types.PtyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     VtePty* _cretval;
@@ -92,19 +102,21 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
     return _retval;
   }
 
+  /** */
   void childSetup()
   {
     vte_pty_child_setup(cast(VtePty*)cPtr);
   }
 
   /**
-   * Since 0.42 this is a no-op.
-   */
+      Since 0.42 this is a no-op.
+  */
   void close()
   {
     vte_pty_close(cast(VtePty*)cPtr);
   }
 
+  /** */
   int getFd()
   {
     int _retval;
@@ -113,13 +125,14 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
   }
 
   /**
-   * Reads the pseudo terminal's window size.
-   * If getting the window size failed, error will be set to a #GIOError.
-   * Params:
-   *   rows = a location to store the number of rows, or %NULL
-   *   columns = a location to store the number of columns, or %NULL
-   * Returns: %TRUE on success, %FALSE on failure with error filled in
-   */
+      Reads the pseudo terminal's window size.
+    
+    If getting the window size failed, error will be set to a #GIOError.
+    Params:
+      rows =       a location to store the number of rows, or null
+      columns =       a location to store the number of columns, or null
+    Returns:     true on success, false on failure with error filled in
+  */
   bool getSize(out int rows, out int columns)
   {
     bool _retval;
@@ -131,14 +144,15 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
   }
 
   /**
-   * Attempts to resize the pseudo terminal's window size.  If successful, the
-   * OS kernel will send <literal>SIGWINCH</literal> to the child process group.
-   * If setting the window size failed, error will be set to a #GIOError.
-   * Params:
-   *   rows = the desired number of rows
-   *   columns = the desired number of columns
-   * Returns: %TRUE on success, %FALSE on failure with error filled in
-   */
+      Attempts to resize the pseudo terminal's window size.  If successful, the
+    OS kernel will send <literal>SIGWINCH</literal> to the child process group.
+    
+    If setting the window size failed, error will be set to a #GIOError.
+    Params:
+      rows =       the desired number of rows
+      columns =       the desired number of columns
+    Returns:     true on success, false on failure with error filled in
+  */
   bool setSize(int rows, int columns)
   {
     bool _retval;
@@ -150,13 +164,13 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
   }
 
   /**
-   * Tells the kernel whether the terminal is UTF-8 or not, in case it can make
-   * use of the info.  Linux 2.6.5 or so defines IUTF8 to make the line
-   * discipline do multibyte backspace correctly.
-   * Params:
-   *   utf8 = whether or not the pty is in UTF-8 mode
-   * Returns: %TRUE on success, %FALSE on failure with error filled in
-   */
+      Tells the kernel whether the terminal is UTF-8 or not, in case it can make
+    use of the info.  Linux 2.6.5 or so defines IUTF8 to make the line
+    discipline do multibyte backspace correctly.
+    Params:
+      utf8 =       whether or not the pty is in UTF-8 mode
+    Returns:     true on success, false on failure with error filled in
+  */
   bool setUtf8(bool utf8)
   {
     bool _retval;
@@ -168,21 +182,21 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
   }
 
   /**
-   * Like [vte.pty.Pty.spawnWithFdsAsync], except that this function does not
-   * allow passing file descriptors to the child process. See [vte.pty.Pty.spawnWithFdsAsync]
-   * for more information.
-   * Params:
-   *   workingDirectory = the name of a directory the command should start
-   *     in, or %NULL to use the current working directory
-   *   argv = child's argument vector
-   *   envv = a list of environment
-   *     variables to be added to the environment before starting the process, or %NULL
-   *   spawnFlags = flags from #GSpawnFlags
-   *   childSetup = an extra child setup function to run in the child just before exec$(LPAREN)$(RPAREN), or %NULL
-   *   timeout = a timeout value in ms, -1 for the default timeout, or G_MAXINT to wait indefinitely
-   *   cancellable = a #GCancellable, or %NULL
-   *   callback = a #GAsyncReadyCallback, or %NULL
-   */
+      Like [vte.pty.Pty.spawnWithFdsAsync], except that this function does not
+    allow passing file descriptors to the child process. See [vte.pty.Pty.spawnWithFdsAsync]
+    for more information.
+    Params:
+      workingDirectory =       the name of a directory the command should start
+          in, or null to use the current working directory
+      argv =       child's argument vector
+      envv =       a list of environment
+          variables to be added to the environment before starting the process, or null
+      spawnFlags =       flags from #GSpawnFlags
+      childSetup =       an extra child setup function to run in the child just before exec(), or null
+      timeout =       a timeout value in ms, -1 for the default timeout, or G_MAXINT to wait indefinitely
+      cancellable =       a #GCancellable, or null
+      callback =       a #GAsyncReadyCallback, or null
+  */
   void spawnAsync(string workingDirectory, string[] argv, string[] envv, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _childSetupCallback(void* data)
@@ -221,6 +235,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
     vte_pty_spawn_async(cast(VtePty*)cPtr, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
+  /** */
   bool spawnFinish(gio.async_result.AsyncResult result, out glib.types.Pid childPid)
   {
     bool _retval;
@@ -232,47 +247,51 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
   }
 
   /**
-   * Starts the specified command under the pseudo-terminal pty.
-   * The argv and envv lists should be %NULL-terminated.
-   * The "TERM" environment variable is automatically set to a default value,
-   * but can be overridden from envv.
-   * pty_flags controls logging the session to the specified system log files.
-   * Note also that %G_SPAWN_STDOUT_TO_DEV_NULL, %G_SPAWN_STDERR_TO_DEV_NULL,
-   * and %G_SPAWN_CHILD_INHERITS_STDIN are not supported in spawn_flags, since
-   * stdin, stdout and stderr of the child process will always be connected to
-   * the PTY. Also %G_SPAWN_LEAVE_DESCRIPTORS_OPEN is not supported; and
-   * %G_SPAWN_DO_NOT_REAP_CHILD will always be added to spawn_flags.
-   * If fds is not %NULL, the child process will map the file descriptors from
-   * fds according to map_fds; n_map_fds must be less or equal to n_fds.
-   * This function will take ownership of the file descriptors in fds;
-   * you must not use or close them after this call. All file descriptors in fds
-   * must have the FD_CLOEXEC flag set on them; it will be unset in the child process
-   * before calling man:execve$(LPAREN)2$(RPAREN). Note also that no file descriptor may be mapped
-   * to stdin, stdout, or stderr $(LPAREN)file descriptors 0, 1, or 2$(RPAREN), since these will be
-   * assigned to the PTY. All open file descriptors apart from those mapped as above
-   * will be closed when execve$(LPAREN)$(RPAREN) is called.
-   * Beginning with 0.60, and on linux only, and unless %VTE_SPAWN_NO_SYSTEMD_SCOPE is
-   * passed in spawn_flags, the newly created child process will be moved to its own
-   * systemd user scope; and if %VTE_SPAWN_REQUIRE_SYSTEMD_SCOPE is passed, and creation
-   * of the systemd user scope fails, the whole spawn will fail.
-   * You can override the options used for the systemd user scope by
-   * providing a systemd override file for 'vte-spawn-.scope' unit. See man:systemd.unit$(LPAREN)5$(RPAREN)
-   * for further information.
-   * See vte_pty_new$(LPAREN)$(RPAREN), and [vte.terminal.Terminal.watchChild] for more information.
-   * Params:
-   *   workingDirectory = the name of a directory the command should start
-   *     in, or %NULL to use the current working directory
-   *   argv = child's argument vector
-   *   envv = a list of environment
-   *     variables to be added to the environment before starting the process, or %NULL
-   *   fds = an array of file descriptors, or %NULL
-   *   mapFds = an array of integers, or %NULL
-   *   spawnFlags = flags from #GSpawnFlags
-   *   childSetup = an extra child setup function to run in the child just before exec$(LPAREN)$(RPAREN), or %NULL
-   *   timeout = a timeout value in ms, -1 for the default timeout, or G_MAXINT to wait indefinitely
-   *   cancellable = a #GCancellable, or %NULL
-   *   callback = a #GAsyncReadyCallback, or %NULL
-   */
+      Starts the specified command under the pseudo-terminal pty.
+    The argv and envv lists should be null-terminated.
+    The "TERM" environment variable is automatically set to a default value,
+    but can be overridden from envv.
+    pty_flags controls logging the session to the specified system log files.
+    
+    Note also that `G_SPAWN_STDOUT_TO_DEV_NULL`, `G_SPAWN_STDERR_TO_DEV_NULL`,
+    and `G_SPAWN_CHILD_INHERITS_STDIN` are not supported in spawn_flags, since
+    stdin, stdout and stderr of the child process will always be connected to
+    the PTY. Also `G_SPAWN_LEAVE_DESCRIPTORS_OPEN` is not supported; and
+    `G_SPAWN_DO_NOT_REAP_CHILD` will always be added to spawn_flags.
+    
+    If fds is not null, the child process will map the file descriptors from
+    fds according to map_fds; n_map_fds must be less or equal to n_fds.
+    This function will take ownership of the file descriptors in fds;
+    you must not use or close them after this call. All file descriptors in fds
+    must have the FD_CLOEXEC flag set on them; it will be unset in the child process
+    before calling man:execve(2). Note also that no file descriptor may be mapped
+    to stdin, stdout, or stderr (file descriptors 0, 1, or 2), since these will be
+    assigned to the PTY. All open file descriptors apart from those mapped as above
+    will be closed when execve() is called.
+    
+    Beginning with 0.60, and on linux only, and unless `VTE_SPAWN_NO_SYSTEMD_SCOPE` is
+    passed in spawn_flags, the newly created child process will be moved to its own
+    systemd user scope; and if `VTE_SPAWN_REQUIRE_SYSTEMD_SCOPE` is passed, and creation
+    of the systemd user scope fails, the whole spawn will fail.
+    You can override the options used for the systemd user scope by
+    providing a systemd override file for 'vte-spawn-.scope' unit. See man:systemd.unit(5)
+    for further information.
+    
+    See vte_pty_new(), and [vte.terminal.Terminal.watchChild] for more information.
+    Params:
+      workingDirectory =       the name of a directory the command should start
+          in, or null to use the current working directory
+      argv =       child's argument vector
+      envv =       a list of environment
+          variables to be added to the environment before starting the process, or null
+      fds =       an array of file descriptors, or null
+      mapFds =       an array of integers, or null
+      spawnFlags =       flags from #GSpawnFlags
+      childSetup =       an extra child setup function to run in the child just before exec(), or null
+      timeout =       a timeout value in ms, -1 for the default timeout, or G_MAXINT to wait indefinitely
+      cancellable =       a #GCancellable, or null
+      callback =       a #GAsyncReadyCallback, or null
+  */
   void spawnWithFdsAsync(string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _childSetupCallback(void* data)

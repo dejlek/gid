@@ -9,9 +9,9 @@ import pango.language;
 import pango.types;
 
 /**
- * The `PangoAnalysis` structure stores information about
- * the properties of a segment of text.
- */
+    The [pango.analysis.Analysis] structure stores information about
+  the properties of a segment of text.
+*/
 class Analysis
 {
   PangoAnalysis cInstance;

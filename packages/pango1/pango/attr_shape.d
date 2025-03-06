@@ -7,9 +7,9 @@ import pango.c.types;
 import pango.types;
 
 /**
- * The `PangoAttrShape` structure is used to represent attributes which
- * impose shape restrictions.
- */
+    The [pango.attr_shape.AttrShape] structure is used to represent attributes which
+  impose shape restrictions.
+*/
 class AttrShape
 {
   PangoAttrShape cInstance;
@@ -76,18 +76,19 @@ class AttrShape
   }
 
   /**
-   * Create a new shape attribute.
-   * A shape is used to impose a particular ink and logical
-   * rectangle on the result of shaping a particular glyph.
-   * This might be used, for instance, for embedding a picture
-   * or a widget inside a `PangoLayout`.
-   * Params:
-   *   inkRect = ink rectangle to assign to each character
-   *   logicalRect = logical rectangle to assign to each character
-   * Returns: the newly allocated
-   *   `PangoAttribute`, which should be freed with
-   *   [pango.attribute.Attribute.destroy]
-   */
+      Create a new shape attribute.
+    
+    A shape is used to impose a particular ink and logical
+    rectangle on the result of shaping a particular glyph.
+    This might be used, for instance, for embedding a picture
+    or a widget inside a [pango.layout.Layout].
+    Params:
+      inkRect =       ink rectangle to assign to each character
+      logicalRect =       logical rectangle to assign to each character
+    Returns:     the newly allocated
+        [pango.attribute.Attribute], which should be freed with
+        [pango.attribute.Attribute.destroy]
+  */
   static pango.attribute.Attribute new_(pango.types.Rectangle inkRect, pango.types.Rectangle logicalRect)
   {
     PangoAttribute* _cretval;

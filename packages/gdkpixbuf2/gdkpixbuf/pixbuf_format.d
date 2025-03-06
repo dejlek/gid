@@ -8,11 +8,12 @@ import gid.gid;
 import gobject.boxed;
 
 /**
- * A `GdkPixbufFormat` contains information about the image format accepted
- * by a module.
- * Only modules should access the fields directly, applications should
- * use the `gdk_pixbuf_format_*` family of functions.
- */
+    A [gdkpixbuf.pixbuf_format.PixbufFormat] contains information about the image format accepted
+  by a module.
+  
+  Only modules should access the fields directly, applications should
+  use the `gdk_pixbuf_format_*` family of functions.
+*/
 class PixbufFormat : gobject.boxed.Boxed
 {
 
@@ -112,10 +113,10 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a copy of `format`.
-   * Returns: the newly allocated copy of a `GdkPixbufFormat`. Use
-   *   [gdkpixbuf.pixbuf_format.PixbufFormat.free] to free the resources when done
-   */
+      Creates a copy of `format`.
+    Returns:     the newly allocated copy of a [gdkpixbuf.pixbuf_format.PixbufFormat]. Use
+        [gdkpixbuf.pixbuf_format.PixbufFormat.free] to free the resources when done
+  */
   gdkpixbuf.pixbuf_format.PixbufFormat copy()
   {
     GdkPixbufFormat* _cretval;
@@ -125,9 +126,9 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /**
-   * Returns a description of the format.
-   * Returns: a description of the format.
-   */
+      Returns a description of the format.
+    Returns:     a description of the format.
+  */
   string getDescription()
   {
     char* _cretval;
@@ -137,11 +138,11 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the filename extensions typically used for files in the
-   * given format.
-   * Returns: an array of
-   *   filename extensions
-   */
+      Returns the filename extensions typically used for files in the
+    given format.
+    Returns:     an array of
+        filename extensions
+  */
   string[] getExtensions()
   {
     char** _cretval;
@@ -161,11 +162,12 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /**
-   * Returns information about the license of the image loader for the format.
-   * The returned string should be a shorthand for a well known license, e.g.
-   * "LGPL", "GPL", "QPL", "GPL/QPL", or "other" to indicate some other license.
-   * Returns: a string describing the license of the pixbuf format
-   */
+      Returns information about the license of the image loader for the format.
+    
+    The returned string should be a shorthand for a well known license, e.g.
+    "LGPL", "GPL", "QPL", "GPL/QPL", or "other" to indicate some other license.
+    Returns:     a string describing the license of the pixbuf format
+  */
   string getLicense()
   {
     char* _cretval;
@@ -175,9 +177,9 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the mime types supported by the format.
-   * Returns: an array of mime types
-   */
+      Returns the mime types supported by the format.
+    Returns:     an array of mime types
+  */
   string[] getMimeTypes()
   {
     char** _cretval;
@@ -197,9 +199,9 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /**
-   * Returns the name of the format.
-   * Returns: the name of the format.
-   */
+      Returns the name of the format.
+    Returns:     the name of the format.
+  */
   string getName()
   {
     char* _cretval;
@@ -209,10 +211,11 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /**
-   * Returns whether this image format is disabled.
-   * See [gdkpixbuf.pixbuf_format.PixbufFormat.setDisabled].
-   * Returns: whether this image format is disabled.
-   */
+      Returns whether this image format is disabled.
+    
+    See [gdkpixbuf.pixbuf_format.PixbufFormat.setDisabled].
+    Returns:     whether this image format is disabled.
+  */
   bool isDisabled()
   {
     bool _retval;
@@ -221,13 +224,14 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /**
-   * Returns `TRUE` if the save option specified by option_key is supported when
-   * saving a pixbuf using the module implementing format.
-   * See [gdkpixbuf.pixbuf.Pixbuf.save] for more information about option keys.
-   * Params:
-   *   optionKey = the name of an option
-   * Returns: `TRUE` if the specified option is supported
-   */
+      Returns `TRUE` if the save option specified by option_key is supported when
+    saving a pixbuf using the module implementing format.
+    
+    See [gdkpixbuf.pixbuf.Pixbuf.save] for more information about option keys.
+    Params:
+      optionKey =       the name of an option
+    Returns:     `TRUE` if the specified option is supported
+  */
   bool isSaveOptionSupported(string optionKey)
   {
     bool _retval;
@@ -237,12 +241,13 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /**
-   * Returns whether this image format is scalable.
-   * If a file is in a scalable format, it is preferable to load it at
-   * the desired size, rather than loading it at the default size and
-   * scaling the resulting pixbuf to the desired size.
-   * Returns: whether this image format is scalable.
-   */
+      Returns whether this image format is scalable.
+    
+    If a file is in a scalable format, it is preferable to load it at
+    the desired size, rather than loading it at the default size and
+    scaling the resulting pixbuf to the desired size.
+    Returns:     whether this image format is scalable.
+  */
   bool isScalable()
   {
     bool _retval;
@@ -251,9 +256,9 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /**
-   * Returns whether pixbufs can be saved in the given format.
-   * Returns: whether pixbufs can be saved in the given format.
-   */
+      Returns whether pixbufs can be saved in the given format.
+    Returns:     whether pixbufs can be saved in the given format.
+  */
   bool isWritable()
   {
     bool _retval;
@@ -262,14 +267,16 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /**
-   * Disables or enables an image format.
-   * If a format is disabled, GdkPixbuf won't use the image loader for
-   * this format to load images.
-   * Applications can use this to avoid using image loaders with an
-   * inappropriate license, see [gdkpixbuf.pixbuf_format.PixbufFormat.getLicense].
-   * Params:
-   *   disabled = `TRUE` to disable the format format
-   */
+      Disables or enables an image format.
+    
+    If a format is disabled, GdkPixbuf won't use the image loader for
+    this format to load images.
+    
+    Applications can use this to avoid using image loaders with an
+    inappropriate license, see [gdkpixbuf.pixbuf_format.PixbufFormat.getLicense].
+    Params:
+      disabled =       `TRUE` to disable the format format
+  */
   void setDisabled(bool disabled)
   {
     gdk_pixbuf_format_set_disabled(cast(GdkPixbufFormat*)cPtr, disabled);

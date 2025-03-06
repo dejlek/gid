@@ -14,6 +14,7 @@ import glib.bytes;
 import glib.error;
 import gobject.object;
 
+/** */
 class SeekableInputStream : arrow.input_stream.InputStream
 {
 
@@ -33,6 +34,7 @@ class SeekableInputStream : arrow.input_stream.InputStream
     return getType();
   }
 
+  /** */
   ulong getSize()
   {
     ulong _retval;
@@ -43,6 +45,7 @@ class SeekableInputStream : arrow.input_stream.InputStream
     return _retval;
   }
 
+  /** */
   bool getSupportZeroCopy()
   {
     bool _retval;
@@ -50,6 +53,7 @@ class SeekableInputStream : arrow.input_stream.InputStream
     return _retval;
   }
 
+  /** */
   glib.bytes.Bytes peek(long nBytes)
   {
     GBytes* _cretval;
@@ -61,6 +65,7 @@ class SeekableInputStream : arrow.input_stream.InputStream
     return _retval;
   }
 
+  /** */
   arrow.buffer.Buffer readAt(long position, long nBytes)
   {
     GArrowBuffer* _cretval;
@@ -72,6 +77,7 @@ class SeekableInputStream : arrow.input_stream.InputStream
     return _retval;
   }
 
+  /** */
   glib.bytes.Bytes readAtBytes(long position, long nBytes)
   {
     GBytes* _cretval;

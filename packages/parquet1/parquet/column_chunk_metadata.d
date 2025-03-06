@@ -7,6 +7,7 @@ import parquet.c.types;
 import parquet.statistics;
 import parquet.types;
 
+/** */
 class ColumnChunkMetadata : gobject.object.ObjectG
 {
 
@@ -26,6 +27,7 @@ class ColumnChunkMetadata : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   bool canDecompress()
   {
     bool _retval;
@@ -33,6 +35,7 @@ class ColumnChunkMetadata : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equal(parquet.column_chunk_metadata.ColumnChunkMetadata otherMetadata)
   {
     bool _retval;
@@ -40,6 +43,7 @@ class ColumnChunkMetadata : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getFileOffset()
   {
     long _retval;
@@ -47,6 +51,7 @@ class ColumnChunkMetadata : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   parquet.statistics.Statistics getStatistics()
   {
     GParquetStatistics* _cretval;
@@ -55,6 +60,7 @@ class ColumnChunkMetadata : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getTotalCompressedSize()
   {
     long _retval;
@@ -62,6 +68,7 @@ class ColumnChunkMetadata : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getTotalSize()
   {
     long _retval;

@@ -9,10 +9,11 @@ import graphene.rect;
 import graphene.types;
 
 /**
- * A 4 vertex quadrilateral, as represented by four #graphene_point_t.
- * The contents of a #graphene_quad_t are private and should never be
- * accessed directly.
- */
+    A 4 vertex quadrilateral, as represented by four #graphene_point_t.
+  
+  The contents of a #graphene_quad_t are private and should never be
+  accessed directly.
+*/
 class Quad : gobject.boxed.Boxed
 {
 
@@ -43,10 +44,11 @@ class Quad : gobject.boxed.Boxed
   }
 
   /**
-   * Allocates a new #graphene_quad_t instance.
-   * The contents of the returned instance are undefined.
-   * Returns: the newly created #graphene_quad_t instance
-   */
+      Allocates a new #graphene_quad_t instance.
+    
+    The contents of the returned instance are undefined.
+    Returns:     the newly created #graphene_quad_t instance
+  */
   static graphene.quad.Quad alloc()
   {
     graphene_quad_t* _cretval;
@@ -56,10 +58,10 @@ class Quad : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the bounding rectangle of q and places it into r.
-   * Params:
-   *   r = return location for a #graphene_rect_t
-   */
+      Computes the bounding rectangle of q and places it into r.
+    Params:
+      r =       return location for a #graphene_rect_t
+  */
   void bounds(out graphene.rect.Rect r)
   {
     graphene_rect_t _r;
@@ -68,11 +70,11 @@ class Quad : gobject.boxed.Boxed
   }
 
   /**
-   * Checks if the given #graphene_quad_t contains the given #graphene_point_t.
-   * Params:
-   *   p = a #graphene_point_t
-   * Returns: `true` if the point is inside the #graphene_quad_t
-   */
+      Checks if the given #graphene_quad_t contains the given #graphene_point_t.
+    Params:
+      p =       a #graphene_point_t
+    Returns:     `true` if the point is inside the #graphene_quad_t
+  */
   bool contains(graphene.point.Point p)
   {
     bool _retval;
@@ -81,11 +83,11 @@ class Quad : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the point of a #graphene_quad_t at the given index.
-   * Params:
-   *   index = the index of the point to retrieve
-   * Returns: a #graphene_point_t
-   */
+      Retrieves the point of a #graphene_quad_t at the given index.
+    Params:
+      index =       the index of the point to retrieve
+    Returns:     a #graphene_point_t
+  */
   graphene.point.Point getPoint(uint index)
   {
     const(graphene_point_t)* _cretval;
@@ -95,14 +97,14 @@ class Quad : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_quad_t with the given points.
-   * Params:
-   *   p1 = the first point of the quadrilateral
-   *   p2 = the second point of the quadrilateral
-   *   p3 = the third point of the quadrilateral
-   *   p4 = the fourth point of the quadrilateral
-   * Returns: the initialized #graphene_quad_t
-   */
+      Initializes a #graphene_quad_t with the given points.
+    Params:
+      p1 =       the first point of the quadrilateral
+      p2 =       the second point of the quadrilateral
+      p3 =       the third point of the quadrilateral
+      p4 =       the fourth point of the quadrilateral
+    Returns:     the initialized #graphene_quad_t
+  */
   graphene.quad.Quad init_(graphene.point.Point p1, graphene.point.Point p2, graphene.point.Point p3, graphene.point.Point p4)
   {
     graphene_quad_t* _cretval;
@@ -112,11 +114,11 @@ class Quad : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_quad_t using an array of points.
-   * Params:
-   *   points = an array of 4 #graphene_point_t
-   * Returns: the initialized #graphene_quad_t
-   */
+      Initializes a #graphene_quad_t using an array of points.
+    Params:
+      points =       an array of 4 #graphene_point_t
+    Returns:     the initialized #graphene_quad_t
+  */
   graphene.quad.Quad initFromPoints(graphene.point.Point[] points)
   {
     graphene_quad_t* _cretval;
@@ -131,12 +133,12 @@ class Quad : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_quad_t using the four corners of the
-   * given #graphene_rect_t.
-   * Params:
-   *   r = a #graphene_rect_t
-   * Returns: the initialized #graphene_quad_t
-   */
+      Initializes a #graphene_quad_t using the four corners of the
+    given #graphene_rect_t.
+    Params:
+      r =       a #graphene_rect_t
+    Returns:     the initialized #graphene_quad_t
+  */
   graphene.quad.Quad initFromRect(graphene.rect.Rect r)
   {
     graphene_quad_t* _cretval;

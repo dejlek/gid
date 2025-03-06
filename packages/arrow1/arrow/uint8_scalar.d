@@ -6,6 +6,7 @@ import arrow.scalar;
 import arrow.types;
 import gid.gid;
 
+/** */
 class UInt8Scalar : arrow.scalar.Scalar
 {
 
@@ -25,6 +26,7 @@ class UInt8Scalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   this(ubyte value)
   {
     GArrowUInt8Scalar* _cretval;
@@ -32,6 +34,7 @@ class UInt8Scalar : arrow.scalar.Scalar
     this(_cretval, Yes.Take);
   }
 
+  /** */
   ubyte getValue()
   {
     ubyte _retval;

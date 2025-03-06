@@ -6,6 +6,7 @@ import arrowflight.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class Descriptor : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class Descriptor : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   bool equal(arrowflight.descriptor.Descriptor otherDescriptor)
   {
     bool _retval;
@@ -32,6 +34,7 @@ class Descriptor : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;

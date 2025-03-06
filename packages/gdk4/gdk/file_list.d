@@ -9,8 +9,8 @@ import gobject.boxed;
 import gobject.object;
 
 /**
- * An opaque type representing a list of files.
- */
+    An opaque type representing a list of files.
+*/
 class FileList : gobject.boxed.Boxed
 {
 
@@ -36,12 +36,13 @@ class FileList : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a new `GdkFileList` for the given array of files.
-   * This function is meant to be used by language bindings.
-   * Params:
-   *   files = the files to add to the list
-   * Returns: the newly create files list
-   */
+      Creates a new [gdk.file_list.FileList] for the given array of files.
+    
+    This function is meant to be used by language bindings.
+    Params:
+      files =       the files to add to the list
+    Returns:     the newly create files list
+  */
   static gdk.file_list.FileList newFromArray(gio.file.File[] files)
   {
     GdkFileList* _cretval;
@@ -59,13 +60,14 @@ class FileList : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a new files list container from a singly linked list of
-   * `GFile` instances.
-   * This function is meant to be used by language bindings
-   * Params:
-   *   files = a list of files
-   * Returns: the newly created files list
-   */
+      Creates a new files list container from a singly linked list of
+    [gio.file.File] instances.
+    
+    This function is meant to be used by language bindings
+    Params:
+      files =       a list of files
+    Returns:     the newly created files list
+  */
   static gdk.file_list.FileList newFromList(gio.file.File[] files)
   {
     GdkFileList* _cretval;
@@ -77,10 +79,11 @@ class FileList : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the list of files inside a `GdkFileList`.
-   * This function is meant for language bindings.
-   * Returns: the files inside the list
-   */
+      Retrieves the list of files inside a [gdk.file_list.FileList].
+    
+    This function is meant for language bindings.
+    Returns:     the files inside the list
+  */
   gio.file.File[] getFiles()
   {
     GSList* _cretval;

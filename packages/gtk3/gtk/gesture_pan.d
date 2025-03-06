@@ -9,19 +9,21 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * #GtkGesturePan is a #GtkGesture implementation able to recognize
- * pan gestures, those are drags that are locked to happen along one
- * axis. The axis that a #GtkGesturePan handles is defined at
- * construct time, and can be changed through
- * [gtk.gesture_pan.GesturePan.setOrientation].
- * When the gesture starts to be recognized, #GtkGesturePan will
- * attempt to determine as early as possible whether the sequence
- * is moving in the expected direction, and denying the sequence if
- * this does not happen.
- * Once a panning gesture along the expected axis is recognized,
- * the #GtkGesturePan::pan signal will be emitted as input events
- * are received, containing the offset in the given axis.
- */
+    #GtkGesturePan is a #GtkGesture implementation able to recognize
+  pan gestures, those are drags that are locked to happen along one
+  axis. The axis that a #GtkGesturePan handles is defined at
+  construct time, and can be changed through
+  [gtk.gesture_pan.GesturePan.setOrientation].
+  
+  When the gesture starts to be recognized, #GtkGesturePan will
+  attempt to determine as early as possible whether the sequence
+  is moving in the expected direction, and denying the sequence if
+  this does not happen.
+  
+  Once a panning gesture along the expected axis is recognized,
+  the #GtkGesturePan::pan signal will be emitted as input events
+  are received, containing the offset in the given axis.
+*/
 class GesturePan : gtk.gesture_drag.GestureDrag
 {
 
@@ -42,12 +44,12 @@ class GesturePan : gtk.gesture_drag.GestureDrag
   }
 
   /**
-   * Returns a newly created #GtkGesture that recognizes pan gestures.
-   * Params:
-   *   widget = a #GtkWidget
-   *   orientation = expected orientation
-   * Returns: a newly created #GtkGesturePan
-   */
+      Returns a newly created #GtkGesture that recognizes pan gestures.
+    Params:
+      widget =       a #GtkWidget
+      orientation =       expected orientation
+    Returns:     a newly created #GtkGesturePan
+  */
   this(gtk.widget.Widget widget, gtk.types.Orientation orientation)
   {
     GtkGesture* _cretval;
@@ -56,9 +58,9 @@ class GesturePan : gtk.gesture_drag.GestureDrag
   }
 
   /**
-   * Returns the orientation of the pan gestures that this gesture expects.
-   * Returns: the expected orientation for pan gestures
-   */
+      Returns the orientation of the pan gestures that this gesture expects.
+    Returns:     the expected orientation for pan gestures
+  */
   gtk.types.Orientation getOrientation()
   {
     GtkOrientation _cretval;
@@ -68,33 +70,38 @@ class GesturePan : gtk.gesture_drag.GestureDrag
   }
 
   /**
-   * Sets the orientation to be expected on pan gestures.
-   * Params:
-   *   orientation = expected orientation
-   */
+      Sets the orientation to be expected on pan gestures.
+    Params:
+      orientation =       expected orientation
+  */
   void setOrientation(gtk.types.Orientation orientation)
   {
     gtk_gesture_pan_set_orientation(cast(GtkGesturePan*)cPtr, orientation);
   }
 
   /**
-   * This signal is emitted once a panning gesture along the
-   * expected axis is detected.
-   * Params
-   *   direction = current direction of the pan gesture
-   *   offset = Offset along the gesture orientation
-   *   gesturePan = the instance the signal is connected to
-   */
+      This signal is emitted once a panning gesture along the
+    expected axis is detected.
+  
+    ## Parameters
+    $(LIST
+      * $(B direction)       current direction of the pan gesture
+      * $(B offset)       Offset along the gesture orientation
+      * $(B gesturePan) the instance the signal is connected to
+    )
+  */
   alias PanCallbackDlg = void delegate(gtk.types.PanDirection direction, double offset, gtk.gesture_pan.GesturePan gesturePan);
+
+  /** ditto */
   alias PanCallbackFunc = void function(gtk.types.PanDirection direction, double offset, gtk.gesture_pan.GesturePan gesturePan);
 
   /**
-   * Connect to Pan signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Pan signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectPan(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PanCallbackDlg) || is(T : PanCallbackFunc))
   {

@@ -7,8 +7,8 @@ import gdk.types;
 import gid.gid;
 
 /**
- * An event related to a button on a pointer device.
- */
+    An event related to a button on a pointer device.
+*/
 class ButtonEvent : gdk.event.Event
 {
 
@@ -21,9 +21,9 @@ class ButtonEvent : gdk.event.Event
   }
 
   /**
-   * Extract the button number from a button event.
-   * Returns: the button of event
-   */
+      Extract the button number from a button event.
+    Returns:     the button of event
+  */
   uint getButton()
   {
     uint _retval;

@@ -10,18 +10,22 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * `GtkNative` is the interface implemented by all widgets that have
- * their own `GdkSurface`.
- * The obvious example of a `GtkNative` is `GtkWindow`.
- * Every widget that is not itself a `GtkNative` is contained in one,
- * and you can get it with [gtk.widget.Widget.getNative].
- * To get the surface of a `GtkNative`, use [gtk.native.Native.getSurface].
- * It is also possible to find the `GtkNative` to which a surface
- * belongs, with [gtk.native.Native.getForSurface].
- * In addition to a [gdk.surface.Surface], a `GtkNative` also provides
- * a [gsk.renderer.Renderer] for rendering on that surface. To get the
- * renderer, use [gtk.native.Native.getRenderer].
- */
+    [gtk.native.Native] is the interface implemented by all widgets that have
+  their own [gdk.surface.Surface].
+  
+  The obvious example of a [gtk.native.Native] is [gtk.window.Window].
+  
+  Every widget that is not itself a [gtk.native.Native] is contained in one,
+  and you can get it with [gtk.widget.Widget.getNative].
+  
+  To get the surface of a [gtk.native.Native], use [gtk.native.Native.getSurface].
+  It is also possible to find the [gtk.native.Native] to which a surface
+  belongs, with [gtk.native.Native.getForSurface].
+  
+  In addition to a [gdk.surface.Surface], a [gtk.native.Native] also provides
+  a [gsk.renderer.Renderer] for rendering on that surface. To get the
+  renderer, use [gtk.native.Native.getRenderer].
+*/
 interface Native
 {
 
@@ -32,11 +36,11 @@ interface Native
   }
 
   /**
-   * Finds the `GtkNative` associated with the surface.
-   * Params:
-   *   surface = a `GdkSurface`
-   * Returns: the `GtkNative` that is associated with surface
-   */
+      Finds the [gtk.native.Native] associated with the surface.
+    Params:
+      surface =       a [gdk.surface.Surface]
+    Returns:     the [gtk.native.Native] that is associated with surface
+  */
   static gtk.native.Native getForSurface(gdk.surface.Surface surface)
   {
     GtkNative* _cretval;
@@ -46,36 +50,39 @@ interface Native
   }
 
   /**
-   * Returns the renderer that is used for this `GtkNative`.
-   * Returns: the renderer for self
-   */
+      Returns the renderer that is used for this [gtk.native.Native].
+    Returns:     the renderer for self
+  */
   gsk.renderer.Renderer getRenderer();
 
   /**
-   * Returns the surface of this `GtkNative`.
-   * Returns: the surface of self
-   */
+      Returns the surface of this [gtk.native.Native].
+    Returns:     the surface of self
+  */
   gdk.surface.Surface getSurface();
 
   /**
-   * Retrieves the surface transform of self.
-   * This is the translation from self's surface coordinates into
-   * self's widget coordinates.
-   * Params:
-   *   x = return location for the x coordinate
-   *   y = return location for the y coordinate
-   */
+      Retrieves the surface transform of self.
+    
+    This is the translation from self's surface coordinates into
+    self's widget coordinates.
+    Params:
+      x =       return location for the x coordinate
+      y =       return location for the y coordinate
+  */
   void getSurfaceTransform(out double x, out double y);
 
   /**
-   * Realizes a `GtkNative`.
-   * This should only be used by subclasses.
-   */
+      Realizes a [gtk.native.Native].
+    
+    This should only be used by subclasses.
+  */
   void realize();
 
   /**
-   * Unrealizes a `GtkNative`.
-   * This should only be used by subclasses.
-   */
+      Unrealizes a [gtk.native.Native].
+    
+    This should only be used by subclasses.
+  */
   void unrealize();
 }

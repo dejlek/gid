@@ -6,6 +6,7 @@ import gsk.c.types;
 import gsk.renderer;
 import gsk.types;
 
+/** */
 class NglRenderer : gsk.renderer.Renderer
 {
 
@@ -25,6 +26,7 @@ class NglRenderer : gsk.renderer.Renderer
     return getType();
   }
 
+  /** */
   this()
   {
     GskRenderer* _cretval;

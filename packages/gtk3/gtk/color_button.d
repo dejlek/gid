@@ -21,13 +21,15 @@ import gtk.color_chooser_mixin;
 import gtk.types;
 
 /**
- * The #GtkColorButton is a button which displays the currently selected
- * color and allows to open a color selection dialog to change the color.
- * It is suitable widget for selecting a color in a preference dialog.
- * # CSS nodes
- * GtkColorButton has a single CSS node with name button. To differentiate
- * it from a plain #GtkButton, it gets the .color style class.
- */
+    The #GtkColorButton is a button which displays the currently selected
+  color and allows to open a color selection dialog to change the color.
+  It is suitable widget for selecting a color in a preference dialog.
+  
+  # CSS nodes
+  
+  GtkColorButton has a single CSS node with name button. To differentiate
+  it from a plain #GtkButton, it gets the .color style class.
+*/
 class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
 {
 
@@ -50,14 +52,15 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   mixin ColorChooserT!();
 
   /**
-   * Creates a new color button.
-   * This returns a widget in the form of a small button containing
-   * a swatch representing the current selected color. When the button
-   * is clicked, a color-selection dialog will open, allowing the user
-   * to select a color. The swatch will be updated to reflect the new
-   * color when the user finishes.
-   * Returns: a new color button
-   */
+      Creates a new color button.
+    
+    This returns a widget in the form of a small button containing
+    a swatch representing the current selected color. When the button
+    is clicked, a color-selection dialog will open, allowing the user
+    to select a color. The swatch will be updated to reflect the new
+    color when the user finishes.
+    Returns:     a new color button
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -66,13 +69,13 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   }
 
   /**
-   * Creates a new color button.
-   * Params:
-   *   color = A #GdkColor to set the current color with
-   * Returns: a new color button
-
-   * Deprecated: Use [gtk.color_button.ColorButton.newWithRgba] instead.
-   */
+      Creates a new color button.
+    Params:
+      color =       A #GdkColor to set the current color with
+    Returns:     a new color button
+  
+    Deprecated:     Use [gtk.color_button.ColorButton.newWithRgba] instead.
+  */
   static gtk.color_button.ColorButton newWithColor(gdk.color.Color color)
   {
     GtkWidget* _cretval;
@@ -82,11 +85,11 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   }
 
   /**
-   * Creates a new color button.
-   * Params:
-   *   rgba = A #GdkRGBA to set the current color with
-   * Returns: a new color button
-   */
+      Creates a new color button.
+    Params:
+      rgba =       A #GdkRGBA to set the current color with
+    Returns:     a new color button
+  */
   static gtk.color_button.ColorButton newWithRgba(gdk.rgba.RGBA rgba)
   {
     GtkWidget* _cretval;
@@ -96,11 +99,11 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   }
 
   /**
-   * Returns the current alpha value.
-   * Returns: an integer between 0 and 65535
-
-   * Deprecated: Use [gtk.color_chooser.ColorChooser.getRgba] instead.
-   */
+      Returns the current alpha value.
+    Returns:     an integer between 0 and 65535
+  
+    Deprecated:     Use [gtk.color_chooser.ColorChooser.getRgba] instead.
+  */
   ushort getAlpha()
   {
     ushort _retval;
@@ -109,12 +112,12 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   }
 
   /**
-   * Sets color to be the current color in the #GtkColorButton widget.
-   * Params:
-   *   color = a #GdkColor to fill in with the current color
-
-   * Deprecated: Use [gtk.color_chooser.ColorChooser.getRgba] instead.
-   */
+      Sets color to be the current color in the #GtkColorButton widget.
+    Params:
+      color =       a #GdkColor to fill in with the current color
+  
+    Deprecated:     Use [gtk.color_chooser.ColorChooser.getRgba] instead.
+  */
   void getColor(out gdk.color.Color color)
   {
     GdkColor _color;
@@ -123,9 +126,9 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   }
 
   /**
-   * Gets the title of the color selection dialog.
-   * Returns: An internal string, do not free the return value
-   */
+      Gets the title of the color selection dialog.
+    Returns:     An internal string, do not free the return value
+  */
   string getTitle()
   {
     const(char)* _cretval;
@@ -135,11 +138,11 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   }
 
   /**
-   * Does the color selection dialog use the alpha channel ?
-   * Returns: %TRUE if the color sample uses alpha channel, %FALSE if not
-
-   * Deprecated: Use [gtk.color_chooser.ColorChooser.getUseAlpha] instead.
-   */
+      Does the color selection dialog use the alpha channel ?
+    Returns:     true if the color sample uses alpha channel, false if not
+  
+    Deprecated:     Use [gtk.color_chooser.ColorChooser.getUseAlpha] instead.
+  */
   bool getUseAlpha()
   {
     bool _retval;
@@ -148,34 +151,34 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   }
 
   /**
-   * Sets the current opacity to be alpha.
-   * Params:
-   *   alpha = an integer between 0 and 65535
-
-   * Deprecated: Use [gtk.color_chooser.ColorChooser.setRgba] instead.
-   */
+      Sets the current opacity to be alpha.
+    Params:
+      alpha =       an integer between 0 and 65535
+  
+    Deprecated:     Use [gtk.color_chooser.ColorChooser.setRgba] instead.
+  */
   void setAlpha(ushort alpha)
   {
     gtk_color_button_set_alpha(cast(GtkColorButton*)cPtr, alpha);
   }
 
   /**
-   * Sets the current color to be color.
-   * Params:
-   *   color = A #GdkColor to set the current color with
-
-   * Deprecated: Use [gtk.color_chooser.ColorChooser.setRgba] instead.
-   */
+      Sets the current color to be color.
+    Params:
+      color =       A #GdkColor to set the current color with
+  
+    Deprecated:     Use [gtk.color_chooser.ColorChooser.setRgba] instead.
+  */
   void setColor(gdk.color.Color color)
   {
     gtk_color_button_set_color(cast(GtkColorButton*)cPtr, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the title for the color selection dialog.
-   * Params:
-   *   title = String containing new window title
-   */
+      Sets the title for the color selection dialog.
+    Params:
+      title =       String containing new window title
+  */
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
@@ -183,36 +186,43 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   }
 
   /**
-   * Sets whether or not the color button should use the alpha channel.
-   * Params:
-   *   useAlpha = %TRUE if color button should use alpha channel, %FALSE if not
-
-   * Deprecated: Use [gtk.color_chooser.ColorChooser.setUseAlpha] instead.
-   */
+      Sets whether or not the color button should use the alpha channel.
+    Params:
+      useAlpha =       true if color button should use alpha channel, false if not
+  
+    Deprecated:     Use [gtk.color_chooser.ColorChooser.setUseAlpha] instead.
+  */
   void setUseAlpha(bool useAlpha)
   {
     gtk_color_button_set_use_alpha(cast(GtkColorButton*)cPtr, useAlpha);
   }
 
   /**
-   * The ::color-set signal is emitted when the user selects a color.
-   * When handling this signal, use [gtk.color_button.ColorButton.getRgba] to
-   * find out which color was just selected.
-   * Note that this signal is only emitted when the user
-   * changes the color. If you need to react to programmatic color changes
-   * as well, use the notify::color signal.
-   *   colorButton = the instance the signal is connected to
-   */
+      The ::color-set signal is emitted when the user selects a color.
+    When handling this signal, use [gtk.color_button.ColorButton.getRgba] to
+    find out which color was just selected.
+    
+    Note that this signal is only emitted when the user
+    changes the color. If you need to react to programmatic color changes
+    as well, use the notify::color signal.
+  
+    ## Parameters
+    $(LIST
+      * $(B colorButton) the instance the signal is connected to
+    )
+  */
   alias ColorSetCallbackDlg = void delegate(gtk.color_button.ColorButton colorButton);
+
+  /** ditto */
   alias ColorSetCallbackFunc = void function(gtk.color_button.ColorButton colorButton);
 
   /**
-   * Connect to ColorSet signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ColorSet signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectColorSet(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ColorSetCallbackDlg) || is(T : ColorSetCallbackFunc))
   {

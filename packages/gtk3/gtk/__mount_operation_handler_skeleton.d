@@ -6,8 +6,8 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * The #_GtkMountOperationHandlerSkeleton structure contains only private data and should only be accessed using the provided API.
- */
+    The #_GtkMountOperationHandlerSkeleton structure contains only private data and should only be accessed using the provided API.
+*/
 class MountOperationHandlerSkeleton
 {
   _GtkMountOperationHandlerSkeleton cInstance;

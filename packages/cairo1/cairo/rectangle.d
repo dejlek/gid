@@ -7,8 +7,8 @@ import gid.gid;
 import gobject.boxed;
 
 /**
- * A data structure for holding a rectangle.
- */
+    A data structure for holding a rectangle.
+*/
 class Rectangle : gobject.boxed.Boxed
 {
 

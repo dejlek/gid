@@ -7,6 +7,7 @@ import arrow.expression;
 import arrow.types;
 import gid.gid;
 
+/** */
 class ProjectNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
@@ -26,6 +27,7 @@ class ProjectNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getType();
   }
 
+  /** */
   this(arrow.expression.Expression[] expressions, string[] names = null)
   {
     GArrowProjectNodeOptions* _cretval;

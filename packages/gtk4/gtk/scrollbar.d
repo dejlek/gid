@@ -17,39 +17,49 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * The `GtkScrollbar` widget is a horizontal or vertical scrollbar.
- * ![An example GtkScrollbar](scrollbar.png)
- * Its position and movement are controlled by the adjustment that is passed to
- * or created by [gtk.scrollbar.Scrollbar.new_]. See [gtk.adjustment.Adjustment] for more
- * details. The [gtk.adjustment.Adjustment.gdouble] field sets the position of the
- * thumb and must be between [gtk.adjustment.Adjustment.gdouble] and
- * [gtk.adjustment.Adjustment.gdouble] - property@Gtk.Adjustment:page-size.
- * The property@Gtk.Adjustment:page-size represents the size of the visible
- * scrollable area.
- * The fields property@Gtk.Adjustment:step-increment and
- * property@Gtk.Adjustment:page-increment fields are added to or subtracted
- * from the [gtk.adjustment.Adjustment.gdouble] when the user asks to move by a step
- * $(LPAREN)using e.g. the cursor arrow keys$(RPAREN) or by a page $(LPAREN)using e.g. the Page Down/Up
- * keys$(RPAREN).
- * # CSS nodes
- * ```
- * scrollbar
- * ╰── range[.fine-tune]
- * ╰── trough
- * ╰── slider
- * ```
- * `GtkScrollbar` has a main CSS node with name scrollbar and a subnode for its
- * contents. The main node gets the .horizontal or .vertical style classes applied,
- * depending on the scrollbar's orientation.
- * The range node gets the style class .fine-tune added when the scrollbar is
- * in 'fine-tuning' mode.
- * Other style classes that may be added to scrollbars inside
- * [gtk.scrolled_window.ScrolledWindow] include the positional classes $(LPAREN).left, .right,
- * .top, .bottom$(RPAREN) and style classes related to overlay scrolling $(LPAREN).overlay-indicator,
- * .dragging, .hovering$(RPAREN).
- * # Accessibility
- * `GtkScrollbar` uses the %GTK_ACCESSIBLE_ROLE_SCROLLBAR role.
- */
+    The [gtk.scrollbar.Scrollbar] widget is a horizontal or vertical scrollbar.
+  
+  ![An example GtkScrollbar](scrollbar.png)
+  
+  Its position and movement are controlled by the adjustment that is passed to
+  or created by [gtk.scrollbar.Scrollbar.new_]. See [gtk.adjustment.Adjustment] for more
+  details. The [gtk.adjustment.Adjustment.gdouble] field sets the position of the
+  thumb and must be between [gtk.adjustment.Adjustment.gdouble] and
+  [gtk.adjustment.Adjustment.gdouble] - `property@Gtk.Adjustment:page-size`.
+  The `property@Gtk.Adjustment:page-size` represents the size of the visible
+  scrollable area.
+  
+  The fields `property@Gtk.Adjustment:step-increment` and
+  `property@Gtk.Adjustment:page-increment` fields are added to or subtracted
+  from the [gtk.adjustment.Adjustment.gdouble] when the user asks to move by a step
+  (using e.g. the cursor arrow keys) or by a page (using e.g. the Page Down/Up
+  keys).
+  
+  # CSS nodes
+  
+  ```
+  scrollbar
+  ╰── range[.fine-tune]
+      ╰── trough
+          ╰── slider
+  ```
+  
+  [gtk.scrollbar.Scrollbar] has a main CSS node with name scrollbar and a subnode for its
+  contents. The main node gets the .horizontal or .vertical style classes applied,
+  depending on the scrollbar's orientation.
+  
+  The range node gets the style class .fine-tune added when the scrollbar is
+  in 'fine-tuning' mode.
+  
+  Other style classes that may be added to scrollbars inside
+  [gtk.scrolled_window.ScrolledWindow] include the positional classes (.left, .right,
+  .top, .bottom) and style classes related to overlay scrolling (.overlay-indicator,
+  .dragging, .hovering).
+  
+  # Accessibility
+  
+  [gtk.scrollbar.Scrollbar] uses the [gtk.types.AccessibleRole.Scrollbar] role.
+*/
 class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
@@ -72,13 +82,13 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
   mixin OrientableT!();
 
   /**
-   * Creates a new scrollbar with the given orientation.
-   * Params:
-   *   orientation = the scrollbar’s orientation.
-   *   adjustment = the [gtk.adjustment.Adjustment] to use, or %NULL
-   *     to create a new adjustment.
-   * Returns: the new `GtkScrollbar`.
-   */
+      Creates a new scrollbar with the given orientation.
+    Params:
+      orientation =       the scrollbar’s orientation.
+      adjustment =       the [gtk.adjustment.Adjustment] to use, or null
+          to create a new adjustment.
+    Returns:     the new [gtk.scrollbar.Scrollbar].
+  */
   this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;
@@ -87,9 +97,9 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-   * Returns the scrollbar's adjustment.
-   * Returns: the scrollbar's adjustment
-   */
+      Returns the scrollbar's adjustment.
+    Returns:     the scrollbar's adjustment
+  */
   gtk.adjustment.Adjustment getAdjustment()
   {
     GtkAdjustment* _cretval;
@@ -99,10 +109,10 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-   * Makes the scrollbar use the given adjustment.
-   * Params:
-   *   adjustment = the adjustment to set
-   */
+      Makes the scrollbar use the given adjustment.
+    Params:
+      adjustment =       the adjustment to set
+  */
   void setAdjustment(gtk.adjustment.Adjustment adjustment = null)
   {
     gtk_scrollbar_set_adjustment(cast(GtkScrollbar*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);

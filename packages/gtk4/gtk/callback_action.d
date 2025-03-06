@@ -10,8 +10,8 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * A `GtkShortcutAction` that invokes a callback.
- */
+    A [gtk.shortcut_action.ShortcutAction] that invokes a callback.
+*/
 class CallbackAction : gtk.shortcut_action.ShortcutAction
 {
 
@@ -32,12 +32,12 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
-   * Create a custom action that calls the given callback when
-   * activated.
-   * Params:
-   *   callback = the callback to call
-   * Returns: A new shortcut action
-   */
+      Create a custom action that calls the given callback when
+    activated.
+    Params:
+      callback =       the callback to call
+    Returns:     A new shortcut action
+  */
   this(gtk.types.ShortcutFunc callback = null)
   {
     extern(C) bool _callbackCallback(GtkWidget* widget, VariantC* args, void* userData)

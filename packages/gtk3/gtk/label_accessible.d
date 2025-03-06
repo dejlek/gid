@@ -12,6 +12,7 @@ import gtk.c.types;
 import gtk.types;
 import gtk.widget_accessible;
 
+/** */
 class LabelAccessible : gtk.widget_accessible.WidgetAccessible, atk.hypertext.Hypertext, atk.text.Text
 {
 

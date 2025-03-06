@@ -8,8 +8,8 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node applying a rectangular clip to its single child node.
- */
+    A render node applying a rectangular clip to its single child node.
+*/
 class ClipNode : gsk.render_node.RenderNode
 {
 
@@ -22,13 +22,13 @@ class ClipNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Creates a `GskRenderNode` that will clip the child to the area
-   * given by clip.
-   * Params:
-   *   child = The node to draw
-   *   clip = The clip to apply
-   * Returns: A new `GskRenderNode`
-   */
+      Creates a [gsk.render_node.RenderNode] that will clip the child to the area
+    given by clip.
+    Params:
+      child =       The node to draw
+      clip =       The clip to apply
+    Returns:     A new [gsk.render_node.RenderNode]
+  */
   this(gsk.render_node.RenderNode child, graphene.rect.Rect clip)
   {
     GskRenderNode* _cretval;
@@ -37,9 +37,9 @@ class ClipNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Gets the child node that is getting clipped by the given node.
-   * Returns: The child that is getting clipped
-   */
+      Gets the child node that is getting clipped by the given node.
+    Returns:     The child that is getting clipped
+  */
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
@@ -49,9 +49,9 @@ class ClipNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the clip rectangle for node.
-   * Returns: a clip rectangle
-   */
+      Retrieves the clip rectangle for node.
+    Returns:     a clip rectangle
+  */
   graphene.rect.Rect getClip()
   {
     const(graphene_rect_t)* _cretval;

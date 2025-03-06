@@ -9,13 +9,14 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * #GtkGestureLongPress is a #GtkGesture implementation able to recognize
- * long presses, triggering the #GtkGestureLongPress::pressed after the
- * timeout is exceeded.
- * If the touchpoint is lifted before the timeout passes, or if it drifts
- * too far of the initial press point, the #GtkGestureLongPress::cancelled
- * signal will be emitted.
- */
+    #GtkGestureLongPress is a #GtkGesture implementation able to recognize
+  long presses, triggering the #GtkGestureLongPress::pressed after the
+  timeout is exceeded.
+  
+  If the touchpoint is lifted before the timeout passes, or if it drifts
+  too far of the initial press point, the #GtkGestureLongPress::cancelled
+  signal will be emitted.
+*/
 class GestureLongPress : gtk.gesture_single.GestureSingle
 {
 
@@ -36,11 +37,11 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * Returns a newly created #GtkGesture that recognizes long presses.
-   * Params:
-   *   widget = a #GtkWidget
-   * Returns: a newly created #GtkGestureLongPress
-   */
+      Returns a newly created #GtkGesture that recognizes long presses.
+    Params:
+      widget =       a #GtkWidget
+    Returns:     a newly created #GtkGestureLongPress
+  */
   this(gtk.widget.Widget widget)
   {
     GtkGesture* _cretval;
@@ -49,20 +50,26 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * This signal is emitted whenever a press moved too far, or was released
-   * before #GtkGestureLongPress::pressed happened.
-   *   gestureLongPress = the instance the signal is connected to
-   */
+      This signal is emitted whenever a press moved too far, or was released
+    before #GtkGestureLongPress::pressed happened.
+  
+    ## Parameters
+    $(LIST
+      * $(B gestureLongPress) the instance the signal is connected to
+    )
+  */
   alias CancelledCallbackDlg = void delegate(gtk.gesture_long_press.GestureLongPress gestureLongPress);
+
+  /** ditto */
   alias CancelledCallbackFunc = void function(gtk.gesture_long_press.GestureLongPress gestureLongPress);
 
   /**
-   * Connect to Cancelled signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Cancelled signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectCancelled(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CancelledCallbackDlg) || is(T : CancelledCallbackFunc))
   {
@@ -79,23 +86,28 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   }
 
   /**
-   * This signal is emitted whenever a press goes unmoved/unreleased longer than
-   * what the GTK+ defaults tell.
-   * Params
-   *   x = the X coordinate where the press happened, relative to the widget allocation
-   *   y = the Y coordinate where the press happened, relative to the widget allocation
-   *   gestureLongPress = the instance the signal is connected to
-   */
+      This signal is emitted whenever a press goes unmoved/unreleased longer than
+    what the GTK+ defaults tell.
+  
+    ## Parameters
+    $(LIST
+      * $(B x)       the X coordinate where the press happened, relative to the widget allocation
+      * $(B y)       the Y coordinate where the press happened, relative to the widget allocation
+      * $(B gestureLongPress) the instance the signal is connected to
+    )
+  */
   alias PressedCallbackDlg = void delegate(double x, double y, gtk.gesture_long_press.GestureLongPress gestureLongPress);
+
+  /** ditto */
   alias PressedCallbackFunc = void function(double x, double y, gtk.gesture_long_press.GestureLongPress gestureLongPress);
 
   /**
-   * Connect to Pressed signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Pressed signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectPressed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PressedCallbackDlg) || is(T : PressedCallbackFunc))
   {

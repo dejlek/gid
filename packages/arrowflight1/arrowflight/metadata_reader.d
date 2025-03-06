@@ -8,6 +8,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class MetadataReader : gobject.object.ObjectG
 {
 
@@ -27,6 +28,7 @@ class MetadataReader : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   arrow.buffer.Buffer read()
   {
     GArrowBuffer* _cretval;

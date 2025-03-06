@@ -6,6 +6,7 @@ import gdk.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class DeviceTool : gobject.object.ObjectG
 {
 
@@ -26,16 +27,17 @@ class DeviceTool : gobject.object.ObjectG
   }
 
   /**
-   * Gets the hardware ID of this tool, or 0 if it's not known. When
-   * non-zero, the identificator is unique for the given tool model,
-   * meaning that two identical tools will share the same hardware_id,
-   * but will have different serial numbers $(LPAREN)see [gdk.device_tool.DeviceTool.getSerial]$(RPAREN).
-   * This is a more concrete $(LPAREN)and device specific$(RPAREN) method to identify
-   * a #GdkDeviceTool than [gdk.device_tool.DeviceTool.getToolType], as a tablet
-   * may support multiple devices with the same #GdkDeviceToolType,
-   * but having different hardware identificators.
-   * Returns: The hardware identificator of this tool.
-   */
+      Gets the hardware ID of this tool, or 0 if it's not known. When
+    non-zero, the identificator is unique for the given tool model,
+    meaning that two identical tools will share the same hardware_id,
+    but will have different serial numbers (see [gdk.device_tool.DeviceTool.getSerial]).
+    
+    This is a more concrete (and device specific) method to identify
+    a #GdkDeviceTool than [gdk.device_tool.DeviceTool.getToolType], as a tablet
+    may support multiple devices with the same #GdkDeviceToolType,
+    but having different hardware identificators.
+    Returns:     The hardware identificator of this tool.
+  */
   ulong getHardwareId()
   {
     ulong _retval;
@@ -44,10 +46,10 @@ class DeviceTool : gobject.object.ObjectG
   }
 
   /**
-   * Gets the serial of this tool, this value can be used to identify a
-   * physical tool $(LPAREN)eg. a tablet pen$(RPAREN) across program executions.
-   * Returns: The serial ID for this tool
-   */
+      Gets the serial of this tool, this value can be used to identify a
+    physical tool (eg. a tablet pen) across program executions.
+    Returns:     The serial ID for this tool
+  */
   ulong getSerial()
   {
     ulong _retval;
@@ -56,10 +58,10 @@ class DeviceTool : gobject.object.ObjectG
   }
 
   /**
-   * Gets the #GdkDeviceToolType of the tool.
-   * Returns: The physical type for this tool. This can be used to figure out what
-   *   sort of pen is being used, such as an airbrush or a pencil.
-   */
+      Gets the #GdkDeviceToolType of the tool.
+    Returns:     The physical type for this tool. This can be used to figure out what
+      sort of pen is being used, such as an airbrush or a pencil.
+  */
   gdk.types.DeviceToolType getToolType()
   {
     GdkDeviceToolType _cretval;

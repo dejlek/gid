@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class LargeListDataType : arrow.data_type.DataType
 {
 
@@ -27,6 +28,7 @@ class LargeListDataType : arrow.data_type.DataType
     return getType();
   }
 
+  /** */
   this(arrow.field.Field field)
   {
     GArrowLargeListDataType* _cretval;
@@ -34,6 +36,7 @@ class LargeListDataType : arrow.data_type.DataType
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.field.Field getField()
   {
     GArrowField* _cretval;

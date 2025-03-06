@@ -6,8 +6,8 @@ import gio.c.types;
 import gio.types;
 
 /**
- * Struct used in [gio.global.dbusErrorRegisterErrorDomain].
- */
+    Struct used in [gio.global.dbusErrorRegisterErrorDomain].
+*/
 class DBusErrorEntry
 {
   GDBusErrorEntry cInstance;

@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class TimestampParser : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class TimestampParser : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   string getKind()
   {
     const(char)* _cretval;

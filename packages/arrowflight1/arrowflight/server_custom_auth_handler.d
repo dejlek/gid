@@ -11,6 +11,7 @@ import gid.gid;
 import glib.bytes;
 import glib.error;
 
+/** */
 class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandler
 {
 
@@ -31,13 +32,13 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
   }
 
   /**
-   * Authenticates the client on initial connection. The server can send
-   * and read responses from the client at any time.
-   * Params:
-   *   context = A #GAFlightServerCallContext.
-   *   sender = A #GAFlightServerAuthSender.
-   *   reader = A #GAFlightServerAuthReader.
-   */
+      Authenticates the client on initial connection. The server can send
+    and read responses from the client at any time.
+    Params:
+      context =       A #GAFlightServerCallContext.
+      sender =       A #GAFlightServerAuthSender.
+      reader =       A #GAFlightServerAuthReader.
+  */
   void authenticate(arrowflight.server_call_context.ServerCallContext context, arrowflight.server_auth_sender.ServerAuthSender sender, arrowflight.server_auth_reader.ServerAuthReader reader)
   {
     GError *_err;
@@ -47,14 +48,14 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
   }
 
   /**
-   * Validates a per-call client token.
-   * Params:
-   *   context = A #GAFlightServerCallContext.
-   *   token = The client token. May be the empty string if the client does not
-   *     provide a token.
-   * Returns: The identity of the peer, if
-   *   this authentication method supports it.
-   */
+      Validates a per-call client token.
+    Params:
+      context =       A #GAFlightServerCallContext.
+      token =       The client token. May be the empty string if the client does not
+          provide a token.
+    Returns:     The identity of the peer, if
+        this authentication method supports it.
+  */
   glib.bytes.Bytes isValid(arrowflight.server_call_context.ServerCallContext context, glib.bytes.Bytes token)
   {
     GBytes* _cretval;

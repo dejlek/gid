@@ -9,6 +9,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class DayTimeIntervalArray : arrow.primitive_array.PrimitiveArray
 {
 
@@ -28,6 +29,7 @@ class DayTimeIntervalArray : arrow.primitive_array.PrimitiveArray
     return getType();
   }
 
+  /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowDayTimeIntervalArray* _cretval;
@@ -35,6 +37,7 @@ class DayTimeIntervalArray : arrow.primitive_array.PrimitiveArray
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.day_millisecond.DayMillisecond getValue(long i)
   {
     GArrowDayMillisecond* _cretval;
@@ -43,6 +46,7 @@ class DayTimeIntervalArray : arrow.primitive_array.PrimitiveArray
     return _retval;
   }
 
+  /** */
   arrow.day_millisecond.DayMillisecond[] getValues()
   {
     GList* _cretval;

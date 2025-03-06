@@ -14,13 +14,15 @@ import gtk.types;
 import gtk.window;
 
 /**
- * The #GtkFontChooserDialog widget is a dialog for selecting a font.
- * It implements the #GtkFontChooser interface.
- * # GtkFontChooserDialog as GtkBuildable
- * The GtkFontChooserDialog implementation of the #GtkBuildable
- * interface exposes the buttons with the names “select_button”
- * and “cancel_button”.
- */
+    The #GtkFontChooserDialog widget is a dialog for selecting a font.
+  It implements the #GtkFontChooser interface.
+  
+  # GtkFontChooserDialog as GtkBuildable
+  
+  The GtkFontChooserDialog implementation of the #GtkBuildable
+  interface exposes the buttons with the names “select_button”
+  and “cancel_button”.
+*/
 class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
 {
 
@@ -43,12 +45,12 @@ class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
   mixin FontChooserT!();
 
   /**
-   * Creates a new #GtkFontChooserDialog.
-   * Params:
-   *   title = Title of the dialog, or %NULL
-   *   parent = Transient parent of the dialog, or %NULL
-   * Returns: a new #GtkFontChooserDialog
-   */
+      Creates a new #GtkFontChooserDialog.
+    Params:
+      title =       Title of the dialog, or null
+      parent =       Transient parent of the dialog, or null
+    Returns:     a new #GtkFontChooserDialog
+  */
   this(string title = null, gtk.window.Window parent = null)
   {
     GtkWidget* _cretval;

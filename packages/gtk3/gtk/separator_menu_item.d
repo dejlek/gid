@@ -15,12 +15,14 @@ import gtk.menu_item;
 import gtk.types;
 
 /**
- * The #GtkSeparatorMenuItem is a separator used to group
- * items within a menu. It displays a horizontal line with a shadow to
- * make it appear sunken into the interface.
- * # CSS nodes
- * GtkSeparatorMenuItem has a single CSS node with name separator.
- */
+    The #GtkSeparatorMenuItem is a separator used to group
+  items within a menu. It displays a horizontal line with a shadow to
+  make it appear sunken into the interface.
+  
+  # CSS nodes
+  
+  GtkSeparatorMenuItem has a single CSS node with name separator.
+*/
 class SeparatorMenuItem : gtk.menu_item.MenuItem
 {
 
@@ -41,9 +43,9 @@ class SeparatorMenuItem : gtk.menu_item.MenuItem
   }
 
   /**
-   * Creates a new #GtkSeparatorMenuItem.
-   * Returns: a new #GtkSeparatorMenuItem.
-   */
+      Creates a new #GtkSeparatorMenuItem.
+    Returns:     a new #GtkSeparatorMenuItem.
+  */
   this()
   {
     GtkWidget* _cretval;

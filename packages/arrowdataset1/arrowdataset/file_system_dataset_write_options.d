@@ -6,6 +6,7 @@ import arrowdataset.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class FileSystemDatasetWriteOptions : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class FileSystemDatasetWriteOptions : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GADatasetFileSystemDatasetWriteOptions* _cretval;

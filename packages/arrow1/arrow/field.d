@@ -8,6 +8,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class Field : gobject.object.ObjectG
 {
 
@@ -27,6 +28,7 @@ class Field : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(string name, arrow.data_type.DataType dataType)
   {
     GArrowField* _cretval;
@@ -35,6 +37,7 @@ class Field : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   static arrow.field.Field newFull(string name, arrow.data_type.DataType dataType, bool nullable)
   {
     GArrowField* _cretval;
@@ -44,6 +47,7 @@ class Field : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   static arrow.field.Field import_(void* cAbiSchema)
   {
     GArrowField* _cretval;
@@ -55,6 +59,7 @@ class Field : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equal(arrow.field.Field otherField)
   {
     bool _retval;
@@ -62,6 +67,7 @@ class Field : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   void* export_()
   {
     GError *_err;
@@ -71,6 +77,7 @@ class Field : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.data_type.DataType getDataType()
   {
     GArrowDataType* _cretval;
@@ -79,6 +86,7 @@ class Field : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string[string] getMetadata()
   {
     GHashTable* _cretval;
@@ -87,6 +95,7 @@ class Field : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getName()
   {
     const(char)* _cretval;
@@ -95,6 +104,7 @@ class Field : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool hasMetadata()
   {
     bool _retval;
@@ -102,6 +112,7 @@ class Field : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isNullable()
   {
     bool _retval;
@@ -109,6 +120,7 @@ class Field : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.field.Field removeMetadata()
   {
     GArrowField* _cretval;
@@ -117,6 +129,7 @@ class Field : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;
@@ -125,6 +138,7 @@ class Field : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toStringMetadata(bool showMetadata)
   {
     char* _cretval;
@@ -133,6 +147,7 @@ class Field : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.field.Field withMergedMetadata(string[string] metadata)
   {
     GArrowField* _cretval;
@@ -143,6 +158,7 @@ class Field : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.field.Field withMetadata(string[string] metadata)
   {
     GArrowField* _cretval;

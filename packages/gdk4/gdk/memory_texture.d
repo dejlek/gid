@@ -14,8 +14,8 @@ import gio.loadable_icon_mixin;
 import glib.bytes;
 
 /**
- * A `GdkTexture` representing image data in memory.
- */
+    A [gdk.texture.Texture] representing image data in memory.
+*/
 class MemoryTexture : gdk.texture.Texture
 {
 
@@ -36,17 +36,18 @@ class MemoryTexture : gdk.texture.Texture
   }
 
   /**
-   * Creates a new texture for a blob of image data.
-   * The `GBytes` must contain stride × height pixels
-   * in the given format.
-   * Params:
-   *   width = the width of the texture
-   *   height = the height of the texture
-   *   format = the format of the data
-   *   bytes = the `GBytes` containing the pixel data
-   *   stride = rowstride for the data
-   * Returns: A newly-created `GdkTexture`
-   */
+      Creates a new texture for a blob of image data.
+    
+    The [glib.bytes.Bytes] must contain stride × height pixels
+    in the given format.
+    Params:
+      width =       the width of the texture
+      height =       the height of the texture
+      format =       the format of the data
+      bytes =       the [glib.bytes.Bytes] containing the pixel data
+      stride =       rowstride for the data
+    Returns:     A newly-created [gdk.texture.Texture]
+  */
   this(int width, int height, gdk.types.MemoryFormat format, glib.bytes.Bytes bytes, size_t stride)
   {
     GdkTexture* _cretval;

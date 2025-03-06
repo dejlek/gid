@@ -6,9 +6,9 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * A #GtkFileFilterInfo-struct is used to pass information about the
- * tested file to [gtk.file_filter.FileFilter.filter].
- */
+    A #GtkFileFilterInfo-struct is used to pass information about the
+  tested file to [gtk.file_filter.FileFilter.filter].
+*/
 class FileFilterInfo
 {
   GtkFileFilterInfo cInstance;

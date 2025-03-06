@@ -22,21 +22,28 @@ import gtk.types;
 import gtk.window;
 
 /**
- * A dialog for choosing a color.
- * ![An example GtkColorChooserDialog](colorchooser.png)
- * `GtkColorChooserDialog` implements the [gtk.color_chooser.ColorChooser] interface
- * and does not provide much API of its own.
- * To create a `GtkColorChooserDialog`, use [gtk.color_chooser_dialog.ColorChooserDialog.new_].
- * To change the initially selected color, use
- * [gtk.color_chooser.ColorChooser.setRgba]. To get the selected color use
- * [gtk.color_chooser.ColorChooser.getRgba].
- * `GtkColorChooserDialog` has been deprecated in favor of [gtk.color_dialog.ColorDialog].
- * ## CSS nodes
- * `GtkColorChooserDialog` has a single CSS node with the name `window` and style
- * class `.colorchooser`.
+    A dialog for choosing a color.
+  
+  ![An example GtkColorChooserDialog](colorchooser.png)
+  
+  [gtk.color_chooser_dialog.ColorChooserDialog] implements the [gtk.color_chooser.ColorChooser] interface
+  and does not provide much API of its own.
+  
+  To create a [gtk.color_chooser_dialog.ColorChooserDialog], use [gtk.color_chooser_dialog.ColorChooserDialog.new_].
+  
+  To change the initially selected color, use
+  [gtk.color_chooser.ColorChooser.setRgba]. To get the selected color use
+  [gtk.color_chooser.ColorChooser.getRgba].
+  
+  [gtk.color_chooser_dialog.ColorChooserDialog] has been deprecated in favor of [gtk.color_dialog.ColorDialog].
+  
+  ## CSS nodes
+  
+  [gtk.color_chooser_dialog.ColorChooserDialog] has a single CSS node with the name `window` and style
+  class `.colorchooser`.
 
- * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
- */
+  Deprecated:     Use [gtk.color_dialog.ColorDialog] instead
+*/
 class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
 {
 
@@ -59,14 +66,14 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
   mixin ColorChooserT!();
 
   /**
-   * Creates a new `GtkColorChooserDialog`.
-   * Params:
-   *   title = Title of the dialog
-   *   parent = Transient parent of the dialog
-   * Returns: a new `GtkColorChooserDialog`
-
-   * Deprecated: Use [gtk.color_dialog.ColorDialog] instead
-   */
+      Creates a new [gtk.color_chooser_dialog.ColorChooserDialog].
+    Params:
+      title =       Title of the dialog
+      parent =       Transient parent of the dialog
+    Returns:     a new [gtk.color_chooser_dialog.ColorChooserDialog]
+  
+    Deprecated:     Use [gtk.color_dialog.ColorDialog] instead
+  */
   this(string title = null, gtk.window.Window parent = null)
   {
     GtkWidget* _cretval;

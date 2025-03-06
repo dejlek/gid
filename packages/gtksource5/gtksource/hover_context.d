@@ -10,15 +10,18 @@ import gtksource.types;
 import gtksource.view;
 
 /**
- * Context for populating class@HoverDisplay contents.
- * `GtkSourceHoverContext` contains information about the request to populate
- * contents for a class@HoverDisplay.
- * It can be used to retrieve the class@View, class@Buffer, and
- * [gtk.text_iter.TextIter] for the regions of text which are being displayed.
- * Use [gtksource.hover_context.HoverContext.getBounds] to get the word that was
- * requested. [gtksource.hover_context.HoverContext.getIter] will get you the location
- * of the pointer when the request was made.
- */
+    Context for populating `class@HoverDisplay` contents.
+  
+  [gtksource.hover_context.HoverContext] contains information about the request to populate
+  contents for a `class@HoverDisplay`.
+  
+  It can be used to retrieve the `class@View`, `class@Buffer`, and
+  [gtk.text_iter.TextIter] for the regions of text which are being displayed.
+  
+  Use [gtksource.hover_context.HoverContext.getBounds] to get the word that was
+  requested. [gtksource.hover_context.HoverContext.getIter] will get you the location
+  of the pointer when the request was made.
+*/
 class HoverContext : gobject.object.ObjectG
 {
 
@@ -39,16 +42,18 @@ class HoverContext : gobject.object.ObjectG
   }
 
   /**
-   * Gets the current word bounds of the hover.
-   * If begin is non-%NULL, it will be set to the start position of the
-   * current word being hovered.
-   * If end is non-%NULL, it will be set to the end position for the
-   * current word being hovered.
-   * Params:
-   *   begin = a #GtkTextIter
-   *   end = a #GtkTextIter
-   * Returns: %TRUE if the marks are still valid and begin or end was set.
-   */
+      Gets the current word bounds of the hover.
+    
+    If begin is non-null, it will be set to the start position of the
+    current word being hovered.
+    
+    If end is non-null, it will be set to the end position for the
+    current word being hovered.
+    Params:
+      begin =       a #GtkTextIter
+      end =       a #GtkTextIter
+    Returns:     true if the marks are still valid and begin or end was set.
+  */
   bool getBounds(out gtk.text_iter.TextIter begin, out gtk.text_iter.TextIter end)
   {
     bool _retval;
@@ -61,9 +66,9 @@ class HoverContext : gobject.object.ObjectG
   }
 
   /**
-   * A convenience function to get the buffer.
-   * Returns: The #GtkSourceBuffer for the view
-   */
+      A convenience function to get the buffer.
+    Returns:     The #GtkSourceBuffer for the view
+  */
   gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
@@ -72,6 +77,7 @@ class HoverContext : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool getIter(gtk.text_iter.TextIter iter)
   {
     bool _retval;
@@ -79,6 +85,7 @@ class HoverContext : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gtksource.view.View getView()
   {
     GtkSourceView* _cretval;

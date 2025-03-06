@@ -18,30 +18,35 @@ import gtk.shortcut_manager_mixin;
 import gtk.types;
 
 /**
- * The `GtkEmojiChooser` is used by text widgets such as `GtkEntry` or
- * `GtkTextView` to let users insert Emoji characters.
- * ![An example GtkEmojiChooser](emojichooser.png)
- * `GtkEmojiChooser` emits the signal@Gtk.EmojiChooser::emoji-picked
- * signal when an Emoji is selected.
- * # CSS nodes
- * ```
- * popover
- * ├── box.emoji-searchbar
- * │   ╰── entry.search
- * ╰── box.emoji-toolbar
- * ├── button.image-button.emoji-section
- * ├── ...
- * ╰── button.image-button.emoji-section
- * ```
- * Every `GtkEmojiChooser` consists of a main node called popover.
- * The contents of the popover are largely implementation defined
- * and supposed to inherit general styles.
- * The top searchbar used to search emoji and gets the .emoji-searchbar
- * style class itself.
- * The bottom toolbar used to switch between different emoji categories
- * consists of buttons with the .emoji-section style class and gets the
- * .emoji-toolbar style class itself.
- */
+    The [gtk.emoji_chooser.EmojiChooser] is used by text widgets such as [gtk.entry.Entry] or
+  [gtk.text_view.TextView] to let users insert Emoji characters.
+  
+  ![An example GtkEmojiChooser](emojichooser.png)
+  
+  [gtk.emoji_chooser.EmojiChooser] emits the `signal@Gtk.EmojiChooser::emoji-picked`
+  signal when an Emoji is selected.
+  
+  # CSS nodes
+  
+  ```
+  popover
+  ├── box.emoji-searchbar
+  │   ╰── entry.search
+  ╰── box.emoji-toolbar
+      ├── button.image-button.emoji-section
+      ├── ...
+      ╰── button.image-button.emoji-section
+  ```
+  
+  Every [gtk.emoji_chooser.EmojiChooser] consists of a main node called popover.
+  The contents of the popover are largely implementation defined
+  and supposed to inherit general styles.
+  The top searchbar used to search emoji and gets the .emoji-searchbar
+  style class itself.
+  The bottom toolbar used to switch between different emoji categories
+  consists of buttons with the .emoji-section style class and gets the
+  .emoji-toolbar style class itself.
+*/
 class EmojiChooser : gtk.popover.Popover
 {
 
@@ -62,9 +67,9 @@ class EmojiChooser : gtk.popover.Popover
   }
 
   /**
-   * Creates a new `GtkEmojiChooser`.
-   * Returns: a new `GtkEmojiChooser`
-   */
+      Creates a new [gtk.emoji_chooser.EmojiChooser].
+    Returns:     a new [gtk.emoji_chooser.EmojiChooser]
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -73,21 +78,26 @@ class EmojiChooser : gtk.popover.Popover
   }
 
   /**
-   * Emitted when the user selects an Emoji.
-   * Params
-   *   text = the Unicode sequence for the picked Emoji, in UTF-8
-   *   emojiChooser = the instance the signal is connected to
-   */
+      Emitted when the user selects an Emoji.
+  
+    ## Parameters
+    $(LIST
+      * $(B text)       the Unicode sequence for the picked Emoji, in UTF-8
+      * $(B emojiChooser) the instance the signal is connected to
+    )
+  */
   alias EmojiPickedCallbackDlg = void delegate(string text, gtk.emoji_chooser.EmojiChooser emojiChooser);
+
+  /** ditto */
   alias EmojiPickedCallbackFunc = void function(string text, gtk.emoji_chooser.EmojiChooser emojiChooser);
 
   /**
-   * Connect to EmojiPicked signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to EmojiPicked signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectEmojiPicked(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EmojiPickedCallbackDlg) || is(T : EmojiPickedCallbackFunc))
   {

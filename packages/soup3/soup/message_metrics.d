@@ -7,18 +7,21 @@ import soup.c.types;
 import soup.types;
 
 /**
- * Contains metrics collected while loading a class@Message either from the
- * network or the disk cache.
- * Metrics are not collected by default for a class@Message, you need to add the
- * flag %SOUP_MESSAGE_COLLECT_METRICS to enable the feature.
- * Temporal metrics are expressed as a monotonic time and always start with a
- * fetch start event and finish with response end. All other events are optional.
- * An event can be 0 because it hasn't happened yet, because it's optional or
- * because the load failed before the event reached.
- * Size metrics are expressed in bytes and are updated while the class@Message is
- * being loaded. You can connect to different class@Message signals to get the
- * final result of every value.
- */
+    Contains metrics collected while loading a `class@Message` either from the
+  network or the disk cache.
+  
+  Metrics are not collected by default for a `class@Message`, you need to add the
+  flag [soup.types.MessageFlags.CollectMetrics] to enable the feature.
+  
+  Temporal metrics are expressed as a monotonic time and always start with a
+  fetch start event and finish with response end. All other events are optional.
+  An event can be 0 because it hasn't happened yet, because it's optional or
+  because the load failed before the event reached.
+  
+  Size metrics are expressed in bytes and are updated while the `class@Message` is
+  being loaded. You can connect to different `class@Message` signals to get the
+  final result of every value.
+*/
 class MessageMetrics : gobject.boxed.Boxed
 {
 
@@ -44,9 +47,9 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Copies metrics.
-   * Returns: a copy of metrics
-   */
+      Copies metrics.
+    Returns:     a copy of metrics
+  */
   soup.message_metrics.MessageMetrics copy()
   {
     SoupMessageMetrics* _cretval;
@@ -56,14 +59,15 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Get the time immediately after the classMessage completed the
-   * connection to the server. This includes the time for the proxy
-   * negotiation and TLS handshake.
-   * It will be 0 if no network connection was required to fetch the resource $(LPAREN)a
-   * persistent connection was used or resource was loaded from the local disk
-   * cache$(RPAREN).
-   * Returns: the connection end time
-   */
+      Get the time immediately after the `classMessage` completed the
+    connection to the server. This includes the time for the proxy
+    negotiation and TLS handshake.
+    
+    It will be 0 if no network connection was required to fetch the resource (a
+    persistent connection was used or resource was loaded from the local disk
+    cache).
+    Returns:     the connection end time
+  */
   ulong getConnectEnd()
   {
     ulong _retval;
@@ -72,13 +76,14 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Get the time immediately before the classMessage started to
-   * establish the connection to the server.
-   * It will be 0 if no network connection was required to fetch the resource $(LPAREN)a
-   * persistent connection was used or resource was loaded from the local disk
-   * cache$(RPAREN).
-   * Returns: the connection start time
-   */
+      Get the time immediately before the `classMessage` started to
+    establish the connection to the server.
+    
+    It will be 0 if no network connection was required to fetch the resource (a
+    persistent connection was used or resource was loaded from the local disk
+    cache).
+    Returns:     the connection start time
+  */
   ulong getConnectStart()
   {
     ulong _retval;
@@ -87,13 +92,14 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Get the time immediately after the classMessage completed the
-   * domain lookup name for the resource.
-   * It will be 0 if no domain lookup was required to fetch the resource $(LPAREN)a
-   * persistent connection was used or resource was loaded from the local disk
-   * cache$(RPAREN).
-   * Returns: the domain lookup end time
-   */
+      Get the time immediately after the `classMessage` completed the
+    domain lookup name for the resource.
+    
+    It will be 0 if no domain lookup was required to fetch the resource (a
+    persistent connection was used or resource was loaded from the local disk
+    cache).
+    Returns:     the domain lookup end time
+  */
   ulong getDnsEnd()
   {
     ulong _retval;
@@ -102,13 +108,14 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Get the time immediately before the classMessage started the
-   * domain lookup name for the resource.
-   * It will be 0 if no domain lookup was required to fetch the resource $(LPAREN)a
-   * persistent connection was used or resource was loaded from the local disk
-   * cache$(RPAREN).
-   * Returns: the domain lookup start time
-   */
+      Get the time immediately before the `classMessage` started the
+    domain lookup name for the resource.
+    
+    It will be 0 if no domain lookup was required to fetch the resource (a
+    persistent connection was used or resource was loaded from the local disk
+    cache).
+    Returns:     the domain lookup start time
+  */
   ulong getDnsStart()
   {
     ulong _retval;
@@ -117,10 +124,10 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Get the time immediately before the classMessage started to
-   * fetch a resource either from a remote server or local disk cache.
-   * Returns: the fetch start time
-   */
+      Get the time immediately before the `classMessage` started to
+    fetch a resource either from a remote server or local disk cache.
+    Returns:     the fetch start time
+  */
   ulong getFetchStart()
   {
     ulong _retval;
@@ -129,14 +136,15 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Get the number of bytes sent to the network for the request body.
-   * This is the size of the body sent, after encodings are applied, so it might
-   * be greater than the value returned by
-   * [soup.message_metrics.MessageMetrics.getRequestBodySize]. This value is available right
-   * before signalMessage::wrote-body signal is emitted, but you might get an
-   * intermediate value if called before.
-   * Returns: the request body bytes sent
-   */
+      Get the number of bytes sent to the network for the request body.
+    
+    This is the size of the body sent, after encodings are applied, so it might
+    be greater than the value returned by
+    [soup.message_metrics.MessageMetrics.getRequestBodySize]. This value is available right
+    before `signalMessage::wrote-body` signal is emitted, but you might get an
+    intermediate value if called before.
+    Returns:     the request body bytes sent
+  */
   ulong getRequestBodyBytesSent()
   {
     ulong _retval;
@@ -145,12 +153,13 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Get the request body size in bytes. This is the size of the original body
-   * given to the request before any encoding is applied.
-   * This value is available right before signalMessage::wrote-body signal is
-   * emitted, but you might get an intermediate value if called before.
-   * Returns: the request body size
-   */
+      Get the request body size in bytes. This is the size of the original body
+    given to the request before any encoding is applied.
+    
+    This value is available right before `signalMessage::wrote-body` signal is
+    emitted, but you might get an intermediate value if called before.
+    Returns:     the request body size
+  */
   ulong getRequestBodySize()
   {
     ulong _retval;
@@ -159,11 +168,12 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Get the number of bytes sent to the network for the request headers.
-   * This value is available right before signalMessage::wrote-headers signal
-   * is emitted, but you might get an intermediate value if called before.
-   * Returns: the request headers bytes sent
-   */
+      Get the number of bytes sent to the network for the request headers.
+    
+    This value is available right before `signalMessage::wrote-headers` signal
+    is emitted, but you might get an intermediate value if called before.
+    Returns:     the request headers bytes sent
+  */
   ulong getRequestHeaderBytesSent()
   {
     ulong _retval;
@@ -172,10 +182,10 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Get the time immediately before the classMessage started the
-   * request of the resource from the server or the local disk cache.
-   * Returns: the request start time
-   */
+      Get the time immediately before the `classMessage` started the
+    request of the resource from the server or the local disk cache.
+    Returns:     the request start time
+  */
   ulong getRequestStart()
   {
     ulong _retval;
@@ -184,12 +194,13 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Get the number of bytes received from the network for the response body.
-   * This value is available right before signalMessage::got-body signal is
-   * emitted, but you might get an intermediate value if called before. For
-   * resources loaded from the disk cache this value is always 0.
-   * Returns: the response body bytes received
-   */
+      Get the number of bytes received from the network for the response body.
+    
+    This value is available right before `signalMessage::got-body` signal is
+    emitted, but you might get an intermediate value if called before. For
+    resources loaded from the disk cache this value is always 0.
+    Returns:     the response body bytes received
+  */
   ulong getResponseBodyBytesReceived()
   {
     ulong _retval;
@@ -198,14 +209,15 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Get the response body size in bytes.
-   * This is the size of the body as given to the user after all encodings are
-   * applied, so it might be greater than the value returned by
-   * [soup.message_metrics.MessageMetrics.getResponseBodyBytesReceived]. This value is
-   * available right before signalMessage::got-body signal is emitted, but you
-   * might get an intermediate value if called before.
-   * Returns: the response body size
-   */
+      Get the response body size in bytes.
+    
+    This is the size of the body as given to the user after all encodings are
+    applied, so it might be greater than the value returned by
+    [soup.message_metrics.MessageMetrics.getResponseBodyBytesReceived]. This value is
+    available right before `signalMessage::got-body` signal is emitted, but you
+    might get an intermediate value if called before.
+    Returns:     the response body size
+  */
   ulong getResponseBodySize()
   {
     ulong _retval;
@@ -214,12 +226,13 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Get the time immediately after the classMessage received the last
-   * bytes of the response from the server or the local disk cache.
-   * In case of load failure, this returns the time immediately before the
-   * fetch is aborted.
-   * Returns: the response end time
-   */
+      Get the time immediately after the `classMessage` received the last
+    bytes of the response from the server or the local disk cache.
+    
+    In case of load failure, this returns the time immediately before the
+    fetch is aborted.
+    Returns:     the response end time
+  */
   ulong getResponseEnd()
   {
     ulong _retval;
@@ -228,12 +241,13 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Get the number of bytes received from the network for the response headers.
-   * This value is available right before signalMessage::got-headers signal
-   * is emitted, but you might get an intermediate value if called before.
-   * For resources loaded from the disk cache this value is always 0.
-   * Returns: the response headers bytes received
-   */
+      Get the number of bytes received from the network for the response headers.
+    
+    This value is available right before `signalMessage::got-headers` signal
+    is emitted, but you might get an intermediate value if called before.
+    For resources loaded from the disk cache this value is always 0.
+    Returns:     the response headers bytes received
+  */
   ulong getResponseHeaderBytesReceived()
   {
     ulong _retval;
@@ -242,10 +256,10 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Get the time immediately after the classMessage received the first
-   * bytes of the response from the server or the local disk cache.
-   * Returns: the response start time
-   */
+      Get the time immediately after the `classMessage` received the first
+    bytes of the response from the server or the local disk cache.
+    Returns:     the response start time
+  */
   ulong getResponseStart()
   {
     ulong _retval;
@@ -254,13 +268,14 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /**
-   * Get the time immediately before the classMessage started the
-   * TLS handshake.
-   * It will be 0 if no TLS handshake was required to fetch the resource
-   * $(LPAREN)connection was not secure, a persistent connection was used or resource was
-   * loaded from the local disk cache$(RPAREN).
-   * Returns: the tls start time
-   */
+      Get the time immediately before the `classMessage` started the
+    TLS handshake.
+    
+    It will be 0 if no TLS handshake was required to fetch the resource
+    (connection was not secure, a persistent connection was used or resource was
+    loaded from the local disk cache).
+    Returns:     the tls start time
+  */
   ulong getTlsStart()
   {
     ulong _retval;

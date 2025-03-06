@@ -7,14 +7,15 @@ import pango.c.types;
 import pango.types;
 
 /**
- * A `PangoCoverage` structure is a map from Unicode characters
- * to [pango.types.CoverageLevel] values.
- * It is often necessary in Pango to determine if a particular
- * font can represent a particular character, and also how well
- * it can represent that character. The `PangoCoverage` is a data
- * structure that is used to represent that information. It is an
- * opaque structure with no public fields.
- */
+    A [pango.coverage.Coverage] structure is a map from Unicode characters
+  to [pango.types.CoverageLevel] values.
+  
+  It is often necessary in Pango to determine if a particular
+  font can represent a particular character, and also how well
+  it can represent that character. The [pango.coverage.Coverage] is a data
+  structure that is used to represent that information. It is an
+  opaque structure with no public fields.
+*/
 class Coverage : gobject.object.ObjectG
 {
 
@@ -35,11 +36,11 @@ class Coverage : gobject.object.ObjectG
   }
 
   /**
-   * Create a new `PangoCoverage`
-   * Returns: the newly allocated `PangoCoverage`, initialized
-   *   to %PANGO_COVERAGE_NONE with a reference count of one, which
-   *   should be freed with [pango.coverage.Coverage.unref].
-   */
+      Create a new [pango.coverage.Coverage]
+    Returns:     the newly allocated [pango.coverage.Coverage], initialized
+        to [pango.types.CoverageLevel.None] with a reference count of one, which
+        should be freed with [pango.coverage.Coverage.unref].
+  */
   this()
   {
     PangoCoverage* _cretval;
@@ -48,15 +49,15 @@ class Coverage : gobject.object.ObjectG
   }
 
   /**
-   * Convert data generated from [pango.coverage.Coverage.toBytes]
-   * back to a `PangoCoverage`.
-   * Params:
-   *   bytes = binary data
-   *     representing a `PangoCoverage`
-   * Returns: a newly allocated `PangoCoverage`
-
-   * Deprecated: This returns %NULL
-   */
+      Convert data generated from [pango.coverage.Coverage.toBytes]
+    back to a [pango.coverage.Coverage].
+    Params:
+      bytes =       binary data
+          representing a [pango.coverage.Coverage]
+    Returns:     a newly allocated [pango.coverage.Coverage]
+  
+    Deprecated:     This returns null
+  */
   static pango.coverage.Coverage fromBytes(ubyte[] bytes)
   {
     PangoCoverage* _cretval;
@@ -71,11 +72,11 @@ class Coverage : gobject.object.ObjectG
   }
 
   /**
-   * Copy an existing `PangoCoverage`.
-   * Returns: the newly allocated `PangoCoverage`,
-   *   with a reference count of one, which should be freed with
-   *   [pango.coverage.Coverage.unref].
-   */
+      Copy an existing [pango.coverage.Coverage].
+    Returns:     the newly allocated [pango.coverage.Coverage],
+        with a reference count of one, which should be freed with
+        [pango.coverage.Coverage.unref].
+  */
   pango.coverage.Coverage copy()
   {
     PangoCoverage* _cretval;
@@ -85,11 +86,11 @@ class Coverage : gobject.object.ObjectG
   }
 
   /**
-   * Determine whether a particular index is covered by coverage.
-   * Params:
-   *   index = the index to check
-   * Returns: the coverage level of coverage for character index_.
-   */
+      Determine whether a particular index is covered by coverage.
+    Params:
+      index =       the index to check
+    Returns:     the coverage level of coverage for character index_.
+  */
   pango.types.CoverageLevel get(int index)
   {
     PangoCoverageLevel _cretval;
@@ -99,37 +100,37 @@ class Coverage : gobject.object.ObjectG
   }
 
   /**
-   * Set the coverage for each index in coverage to be the max $(LPAREN)better$(RPAREN)
-   * value of the current coverage for the index and the coverage for
-   * the corresponding index in other.
-   * Params:
-   *   other = another `PangoCoverage`
-
-   * Deprecated: This function does nothing
-   */
+      Set the coverage for each index in coverage to be the max (better)
+    value of the current coverage for the index and the coverage for
+    the corresponding index in other.
+    Params:
+      other =       another [pango.coverage.Coverage]
+  
+    Deprecated:     This function does nothing
+  */
   void max(pango.coverage.Coverage other)
   {
     pango_coverage_max(cast(PangoCoverage*)cPtr, other ? cast(PangoCoverage*)other.cPtr(No.Dup) : null);
   }
 
   /**
-   * Modify a particular index within coverage
-   * Params:
-   *   index = the index to modify
-   *   level = the new level for index_
-   */
+      Modify a particular index within coverage
+    Params:
+      index =       the index to modify
+      level =       the new level for index_
+  */
   void set(int index, pango.types.CoverageLevel level)
   {
     pango_coverage_set(cast(PangoCoverage*)cPtr, index, level);
   }
 
   /**
-   * Convert a `PangoCoverage` structure into a flat binary format.
-   * Params:
-   *   bytes = location to store result $(LPAREN)must be freed with [glib.global.gfree]$(RPAREN)
-
-   * Deprecated: This returns %NULL
-   */
+      Convert a [pango.coverage.Coverage] structure into a flat binary format.
+    Params:
+      bytes =       location to store result (must be freed with [glib.global.gfree])
+  
+    Deprecated:     This returns null
+  */
   void toBytes(out ubyte[] bytes)
   {
     int _nBytes;

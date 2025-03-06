@@ -7,9 +7,11 @@ public import arrow.types;
 public import gid.gid;
 public import glib.error;
 
+/** */
 template FileT()
 {
 
+  /** */
   override bool close()
   {
     bool _retval;
@@ -20,6 +22,7 @@ template FileT()
     return _retval;
   }
 
+  /** */
   override arrow.types.FileMode getMode()
   {
     GArrowFileMode _cretval;
@@ -28,6 +31,7 @@ template FileT()
     return _retval;
   }
 
+  /** */
   override bool isClosed()
   {
     bool _retval;
@@ -35,6 +39,7 @@ template FileT()
     return _retval;
   }
 
+  /** */
   override long tell()
   {
     long _retval;

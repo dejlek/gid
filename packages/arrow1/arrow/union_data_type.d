@@ -8,6 +8,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class UnionDataType : arrow.data_type.DataType
 {
 
@@ -27,6 +28,7 @@ class UnionDataType : arrow.data_type.DataType
     return getType();
   }
 
+  /** */
   arrow.field.Field getField(int i)
   {
     GArrowField* _cretval;
@@ -35,6 +37,7 @@ class UnionDataType : arrow.data_type.DataType
     return _retval;
   }
 
+  /** */
   arrow.field.Field[] getFields()
   {
     GList* _cretval;
@@ -43,6 +46,7 @@ class UnionDataType : arrow.data_type.DataType
     return _retval;
   }
 
+  /** */
   int getNFields()
   {
     int _retval;
@@ -50,6 +54,7 @@ class UnionDataType : arrow.data_type.DataType
     return _retval;
   }
 
+  /** */
   byte[] getTypeCodes()
   {
     byte* _cretval;

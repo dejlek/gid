@@ -9,10 +9,11 @@ import pango.c.types;
 import pango.types;
 
 /**
- * The `PangoItem` structure stores information about a segment of text.
- * You typically obtain `PangoItems` by itemizing a piece of text
- * with func@itemize.
- */
+    The [pango.item.Item] structure stores information about a segment of text.
+  
+  You typically obtain `PangoItems` by itemizing a piece of text
+  with `func@itemize`.
+*/
 class Item : gobject.boxed.Boxed
 {
 
@@ -73,10 +74,10 @@ class Item : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a new `PangoItem` structure initialized to default values.
-   * Returns: the newly allocated `PangoItem`, which should
-   *   be freed with [pango.item.Item.free].
-   */
+      Creates a new [pango.item.Item] structure initialized to default values.
+    Returns:     the newly allocated [pango.item.Item], which should
+        be freed with [pango.item.Item.free].
+  */
   this()
   {
     PangoItem* _cretval;
@@ -85,27 +86,29 @@ class Item : gobject.boxed.Boxed
   }
 
   /**
-   * Add attributes to a `PangoItem`.
-   * The idea is that you have attributes that don't affect itemization,
-   * such as font features, so you filter them out using
-   * [pango.attr_list.AttrList.filter], itemize your text, then reapply the
-   * attributes to the resulting items using this function.
-   * The iter should be positioned before the range of the item,
-   * and will be advanced past it. This function is meant to be called
-   * in a loop over the items resulting from itemization, while passing
-   * the iter to each call.
-   * Params:
-   *   iter = a `PangoAttrIterator`
-   */
+      Add attributes to a [pango.item.Item].
+    
+    The idea is that you have attributes that don't affect itemization,
+    such as font features, so you filter them out using
+    [pango.attr_list.AttrList.filter], itemize your text, then reapply the
+    attributes to the resulting items using this function.
+    
+    The iter should be positioned before the range of the item,
+    and will be advanced past it. This function is meant to be called
+    in a loop over the items resulting from itemization, while passing
+    the iter to each call.
+    Params:
+      iter =       a [pango.attr_iterator.AttrIterator]
+  */
   void applyAttrs(pango.attr_iterator.AttrIterator iter)
   {
     pango_item_apply_attrs(cast(PangoItem*)cPtr, iter ? cast(PangoAttrIterator*)iter.cPtr(No.Dup) : null);
   }
 
   /**
-   * Copy an existing `PangoItem` structure.
-   * Returns: the newly allocated `PangoItem`
-   */
+      Copy an existing [pango.item.Item] structure.
+    Returns:     the newly allocated [pango.item.Item]
+  */
   pango.item.Item copy()
   {
     PangoItem* _cretval;
@@ -115,24 +118,25 @@ class Item : gobject.boxed.Boxed
   }
 
   /**
-   * Modifies orig to cover only the text after split_index, and
-   * returns a new item that covers the text before split_index that
-   * used to be in orig.
-   * You can think of split_index as the length of the returned item.
-   * split_index may not be 0, and it may not be greater than or equal
-   * to the length of orig $(LPAREN)that is, there must be at least one byte
-   * assigned to each item, you can't create a zero-length item$(RPAREN).
-   * split_offset is the length of the first item in chars, and must be
-   * provided because the text used to generate the item isn't available,
-   * so `[pango.item.Item.split]` can't count the char length of the split items
-   * itself.
-   * Params:
-   *   splitIndex = byte index of position to split item, relative to the
-   *     start of the item
-   *   splitOffset = number of chars between start of orig and split_index
-   * Returns: new item representing text before split_index, which
-   *   should be freed with [pango.item.Item.free].
-   */
+      Modifies orig to cover only the text after split_index, and
+    returns a new item that covers the text before split_index that
+    used to be in orig.
+    
+    You can think of split_index as the length of the returned item.
+    split_index may not be 0, and it may not be greater than or equal
+    to the length of orig (that is, there must be at least one byte
+    assigned to each item, you can't create a zero-length item).
+    split_offset is the length of the first item in chars, and must be
+    provided because the text used to generate the item isn't available,
+    so `[pango.item.Item.split]` can't count the char length of the split items
+    itself.
+    Params:
+      splitIndex =       byte index of position to split item, relative to the
+          start of the item
+      splitOffset =       number of chars between start of orig and split_index
+    Returns:     new item representing text before split_index, which
+        should be freed with [pango.item.Item.free].
+  */
   pango.item.Item split(int splitIndex, int splitOffset)
   {
     PangoItem* _cretval;

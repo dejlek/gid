@@ -7,13 +7,14 @@ import gtk.layout_manager;
 import gtk.types;
 
 /**
- * `GtkBinLayout` is a `GtkLayoutManager` subclass useful for create "bins" of
- * widgets.
- * `GtkBinLayout` will stack each child of a widget on top of each other,
- * using the [gtk.widget.Widget.gboolean], [gtk.widget.Widget.gboolean],
- * [gtk.widget.Widget.Align], and [gtk.widget.Widget.Align] properties
- * of each child to determine where they should be positioned.
- */
+    [gtk.bin_layout.BinLayout] is a [gtk.layout_manager.LayoutManager] subclass useful for create "bins" of
+  widgets.
+  
+  [gtk.bin_layout.BinLayout] will stack each child of a widget on top of each other,
+  using the [gtk.widget.Widget.gboolean], [gtk.widget.Widget.gboolean],
+  [gtk.widget.Widget.Align], and [gtk.widget.Widget.Align] properties
+  of each child to determine where they should be positioned.
+*/
 class BinLayout : gtk.layout_manager.LayoutManager
 {
 
@@ -34,9 +35,9 @@ class BinLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
-   * Creates a new `GtkBinLayout` instance.
-   * Returns: the newly created `GtkBinLayout`
-   */
+      Creates a new [gtk.bin_layout.BinLayout] instance.
+    Returns:     the newly created [gtk.bin_layout.BinLayout]
+  */
   this()
   {
     GtkLayoutManager* _cretval;

@@ -17,12 +17,13 @@ import gtk.scale_button;
 import gtk.types;
 
 /**
- * `GtkVolumeButton` is a `GtkScaleButton` subclass tailored for
- * volume control.
- * ![An example GtkVolumeButton](volumebutton.png)
+    [gtk.volume_button.VolumeButton] is a [gtk.scale_button.ScaleButton] subclass tailored for
+  volume control.
+  
+  ![An example GtkVolumeButton](volumebutton.png)
 
- * Deprecated: This widget will be removed in GTK 5
- */
+  Deprecated:     This widget will be removed in GTK 5
+*/
 class VolumeButton : gtk.scale_button.ScaleButton
 {
 
@@ -43,14 +44,15 @@ class VolumeButton : gtk.scale_button.ScaleButton
   }
 
   /**
-   * Creates a `GtkVolumeButton`.
-   * The button has a range between 0.0 and 1.0, with a stepping of 0.02.
-   * Volume values can be obtained and modified using the functions from
-   * [gtk.scale_button.ScaleButton].
-   * Returns: a new `GtkVolumeButton`
-
-   * Deprecated: This widget will be removed in GTK 5
-   */
+      Creates a [gtk.volume_button.VolumeButton].
+    
+    The button has a range between 0.0 and 1.0, with a stepping of 0.02.
+    Volume values can be obtained and modified using the functions from
+    [gtk.scale_button.ScaleButton].
+    Returns:     a new [gtk.volume_button.VolumeButton]
+  
+    Deprecated:     This widget will be removed in GTK 5
+  */
   this()
   {
     GtkWidget* _cretval;

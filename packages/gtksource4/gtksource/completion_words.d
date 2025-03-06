@@ -10,6 +10,7 @@ import gtksource.completion_provider;
 import gtksource.completion_provider_mixin;
 import gtksource.types;
 
+/** */
 class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.CompletionProvider
 {
 
@@ -31,6 +32,7 @@ class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.Co
 
   mixin CompletionProviderT!();
 
+  /** */
   this(string name = null, gdkpixbuf.pixbuf.Pixbuf icon = null)
   {
     GtkSourceCompletionWords* _cretval;
@@ -40,20 +42,20 @@ class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.Co
   }
 
   /**
-   * Registers buffer in the words provider.
-   * Params:
-   *   buffer = a #GtkTextBuffer
-   */
+      Registers buffer in the words provider.
+    Params:
+      buffer =       a #GtkTextBuffer
+  */
   void register(gtk.text_buffer.TextBuffer buffer)
   {
     gtk_source_completion_words_register(cast(GtkSourceCompletionWords*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
   }
 
   /**
-   * Unregisters buffer from the words provider.
-   * Params:
-   *   buffer = a #GtkTextBuffer
-   */
+      Unregisters buffer from the words provider.
+    Params:
+      buffer =       a #GtkTextBuffer
+  */
   void unregister(gtk.text_buffer.TextBuffer buffer)
   {
     gtk_source_completion_words_unregister(cast(GtkSourceCompletionWords*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);

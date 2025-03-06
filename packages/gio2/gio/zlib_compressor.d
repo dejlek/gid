@@ -10,9 +10,9 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GZlibCompressor` is an implementation of [gio.converter.Converter] that
- * compresses data using zlib.
- */
+    [gio.zlib_compressor.ZlibCompressor] is an implementation of [gio.converter.Converter] that
+  compresses data using zlib.
+*/
 class ZlibCompressor : gobject.object.ObjectG, gio.converter.Converter
 {
 
@@ -35,12 +35,12 @@ class ZlibCompressor : gobject.object.ObjectG, gio.converter.Converter
   mixin ConverterT!();
 
   /**
-   * Creates a new #GZlibCompressor.
-   * Params:
-   *   format = The format to use for the compressed data
-   *   level = compression level $(LPAREN)0-9$(RPAREN), -1 for default
-   * Returns: a new #GZlibCompressor
-   */
+      Creates a new #GZlibCompressor.
+    Params:
+      format =       The format to use for the compressed data
+      level =       compression level (0-9), -1 for default
+    Returns:     a new #GZlibCompressor
+  */
   this(gio.types.ZlibCompressorFormat format, int level)
   {
     GZlibCompressor* _cretval;
@@ -49,9 +49,9 @@ class ZlibCompressor : gobject.object.ObjectG, gio.converter.Converter
   }
 
   /**
-   * Returns the #GZlibCompressor:file-info property.
-   * Returns: a #GFileInfo, or %NULL
-   */
+      Returns the #GZlibCompressor:file-info property.
+    Returns:     a #GFileInfo, or null
+  */
   gio.file_info.FileInfo getFileInfo()
   {
     GFileInfo* _cretval;
@@ -61,16 +61,17 @@ class ZlibCompressor : gobject.object.ObjectG, gio.converter.Converter
   }
 
   /**
-   * Sets file_info in compressor. If non-%NULL, and compressor's
-   * #GZlibCompressor:format property is %G_ZLIB_COMPRESSOR_FORMAT_GZIP,
-   * it will be used to set the file name and modification time in
-   * the GZIP header of the compressed data.
-   * Note: it is an error to call this function while a compression is in
-   * progress; it may only be called immediately after creation of compressor,
-   * or after resetting it with [gio.converter.Converter.reset].
-   * Params:
-   *   fileInfo = a #GFileInfo
-   */
+      Sets file_info in compressor. If non-null, and compressor's
+    #GZlibCompressor:format property is [gio.types.ZlibCompressorFormat.Gzip],
+    it will be used to set the file name and modification time in
+    the GZIP header of the compressed data.
+    
+    Note: it is an error to call this function while a compression is in
+    progress; it may only be called immediately after creation of compressor,
+    or after resetting it with [gio.converter.Converter.reset].
+    Params:
+      fileInfo =       a #GFileInfo
+  */
   void setFileInfo(gio.file_info.FileInfo fileInfo = null)
   {
     g_zlib_compressor_set_file_info(cast(GZlibCompressor*)cPtr, fileInfo ? cast(GFileInfo*)fileInfo.cPtr(No.Dup) : null);

@@ -9,6 +9,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class StreamListener : gobject.object.ObjectG
 {
 
@@ -29,9 +30,9 @@ class StreamListener : gobject.object.ObjectG
   }
 
   /**
-   * Processes an EOS event.
-   * Returns: %TRUE on success, %FALSE on error.
-   */
+      Processes an EOS event.
+    Returns:     true on success, false on error.
+  */
   bool onEos()
   {
     bool _retval;
@@ -43,12 +44,12 @@ class StreamListener : gobject.object.ObjectG
   }
 
   /**
-   * Processes a decoded record batch.
-   * Params:
-   *   recordBatch = A decoded #GArrowRecordBatch.
-   *   metadata = A decoded metadata.
-   * Returns: %TRUE on success, %FALSE on error.
-   */
+      Processes a decoded record batch.
+    Params:
+      recordBatch =       A decoded #GArrowRecordBatch.
+      metadata =       A decoded metadata.
+    Returns:     true on success, false on error.
+  */
   bool onRecordBatchDecoded(arrow.record_batch.RecordBatch recordBatch, string[string] metadata = null)
   {
     bool _retval;
@@ -62,12 +63,12 @@ class StreamListener : gobject.object.ObjectG
   }
 
   /**
-   * Processes a decoded schema.
-   * Params:
-   *   schema = A decoded #GArrowSchema.
-   *   filteredSchema = A decoded #GArrowSchema that only has read fields.
-   * Returns: %TRUE on success, %FALSE on error.
-   */
+      Processes a decoded schema.
+    Params:
+      schema =       A decoded #GArrowSchema.
+      filteredSchema =       A decoded #GArrowSchema that only has read fields.
+    Returns:     true on success, false on error.
+  */
   bool onSchemaDecoded(arrow.schema.Schema schema, arrow.schema.Schema filteredSchema)
   {
     bool _retval;

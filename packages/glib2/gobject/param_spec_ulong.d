@@ -7,8 +7,8 @@ import gobject.param_spec;
 import gobject.types;
 
 /**
- * A #GParamSpec derived structure that contains the meta data for unsigned long integer properties.
- */
+    A #GParamSpec derived structure that contains the meta data for unsigned long integer properties.
+*/
 class ParamSpecULong : gobject.param_spec.ParamSpec
 {
 

@@ -10,19 +10,22 @@ import glib.error;
 import gobject.object;
 
 /**
- * A `GPermission` represents the status of the caller’s permission to
- * perform a certain action.
- * You can query if the action is currently allowed and if it is
- * possible to acquire the permission so that the action will be allowed
- * in the future.
- * There is also an API to actually acquire the permission and one to
- * release it.
- * As an example, a `GPermission` might represent the ability for the
- * user to write to a [gio.settings.Settings] object.  This `GPermission` object
- * could then be used to decide if it is appropriate to show a “Click here to
- * unlock” button in a dialog and to provide the mechanism to invoke
- * when that button is clicked.
- */
+    A [gio.permission.Permission] represents the status of the caller’s permission to
+  perform a certain action.
+  
+  You can query if the action is currently allowed and if it is
+  possible to acquire the permission so that the action will be allowed
+  in the future.
+  
+  There is also an API to actually acquire the permission and one to
+  release it.
+  
+  As an example, a [gio.permission.Permission] might represent the ability for the
+  user to write to a [gio.settings.Settings] object.  This [gio.permission.Permission] object
+  could then be used to decide if it is appropriate to show a “Click here to
+  unlock” button in a dialog and to provide the mechanism to invoke
+  when that button is clicked.
+*/
 class Permission : gobject.object.ObjectG
 {
 
@@ -43,21 +46,25 @@ class Permission : gobject.object.ObjectG
   }
 
   /**
-   * Attempts to acquire the permission represented by permission.
-   * The precise method by which this happens depends on the permission
-   * and the underlying authentication mechanism.  A simple example is
-   * that a dialog may appear asking the user to enter their password.
-   * You should check with [gio.permission.Permission.getCanAcquire] before calling
-   * this function.
-   * If the permission is acquired then %TRUE is returned.  Otherwise,
-   * %FALSE is returned and error is set appropriately.
-   * This call is blocking, likely for a very long time $(LPAREN)in the case that
-   * user interaction is required$(RPAREN).  See [gio.permission.Permission.acquireAsync] for
-   * the non-blocking version.
-   * Params:
-   *   cancellable = a #GCancellable, or %NULL
-   * Returns: %TRUE if the permission was successfully acquired
-   */
+      Attempts to acquire the permission represented by permission.
+    
+    The precise method by which this happens depends on the permission
+    and the underlying authentication mechanism.  A simple example is
+    that a dialog may appear asking the user to enter their password.
+    
+    You should check with [gio.permission.Permission.getCanAcquire] before calling
+    this function.
+    
+    If the permission is acquired then true is returned.  Otherwise,
+    false is returned and error is set appropriately.
+    
+    This call is blocking, likely for a very long time (in the case that
+    user interaction is required).  See [gio.permission.Permission.acquireAsync] for
+    the non-blocking version.
+    Params:
+      cancellable =       a #GCancellable, or null
+    Returns:     true if the permission was successfully acquired
+  */
   bool acquire(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
@@ -69,13 +76,14 @@ class Permission : gobject.object.ObjectG
   }
 
   /**
-   * Attempts to acquire the permission represented by permission.
-   * This is the first half of the asynchronous version of
-   * [gio.permission.Permission.acquire].
-   * Params:
-   *   cancellable = a #GCancellable, or %NULL
-   *   callback = the #GAsyncReadyCallback to call when done
-   */
+      Attempts to acquire the permission represented by permission.
+    
+    This is the first half of the asynchronous version of
+    [gio.permission.Permission.acquire].
+    Params:
+      cancellable =       a #GCancellable, or null
+      callback =       the #GAsyncReadyCallback to call when done
+  */
   void acquireAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -92,14 +100,15 @@ class Permission : gobject.object.ObjectG
   }
 
   /**
-   * Collects the result of attempting to acquire the permission
-   * represented by permission.
-   * This is the second half of the asynchronous version of
-   * [gio.permission.Permission.acquire].
-   * Params:
-   *   result = the #GAsyncResult given to the #GAsyncReadyCallback
-   * Returns: %TRUE if the permission was successfully acquired
-   */
+      Collects the result of attempting to acquire the permission
+    represented by permission.
+    
+    This is the second half of the asynchronous version of
+    [gio.permission.Permission.acquire].
+    Params:
+      result =       the #GAsyncResult given to the #GAsyncReadyCallback
+    Returns:     true if the permission was successfully acquired
+  */
   bool acquireFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;
@@ -111,11 +120,11 @@ class Permission : gobject.object.ObjectG
   }
 
   /**
-   * Gets the value of the 'allowed' property.  This property is %TRUE if
-   * the caller currently has permission to perform the action that
-   * permission represents the permission to perform.
-   * Returns: the value of the 'allowed' property
-   */
+      Gets the value of the 'allowed' property.  This property is true if
+    the caller currently has permission to perform the action that
+    permission represents the permission to perform.
+    Returns:     the value of the 'allowed' property
+  */
   bool getAllowed()
   {
     bool _retval;
@@ -124,11 +133,11 @@ class Permission : gobject.object.ObjectG
   }
 
   /**
-   * Gets the value of the 'can-acquire' property.  This property is %TRUE
-   * if it is generally possible to acquire the permission by calling
-   * [gio.permission.Permission.acquire].
-   * Returns: the value of the 'can-acquire' property
-   */
+      Gets the value of the 'can-acquire' property.  This property is true
+    if it is generally possible to acquire the permission by calling
+    [gio.permission.Permission.acquire].
+    Returns:     the value of the 'can-acquire' property
+  */
   bool getCanAcquire()
   {
     bool _retval;
@@ -137,11 +146,11 @@ class Permission : gobject.object.ObjectG
   }
 
   /**
-   * Gets the value of the 'can-release' property.  This property is %TRUE
-   * if it is generally possible to release the permission by calling
-   * [gio.permission.Permission.release].
-   * Returns: the value of the 'can-release' property
-   */
+      Gets the value of the 'can-release' property.  This property is true
+    if it is generally possible to release the permission by calling
+    [gio.permission.Permission.release].
+    Returns:     the value of the 'can-release' property
+  */
   bool getCanRelease()
   {
     bool _retval;
@@ -150,36 +159,41 @@ class Permission : gobject.object.ObjectG
   }
 
   /**
-   * This function is called by the #GPermission implementation to update
-   * the properties of the permission.  You should never call this
-   * function except from a #GPermission implementation.
-   * GObject notify signals are generated, as appropriate.
-   * Params:
-   *   allowed = the new value for the 'allowed' property
-   *   canAcquire = the new value for the 'can-acquire' property
-   *   canRelease = the new value for the 'can-release' property
-   */
+      This function is called by the #GPermission implementation to update
+    the properties of the permission.  You should never call this
+    function except from a #GPermission implementation.
+    
+    GObject notify signals are generated, as appropriate.
+    Params:
+      allowed =       the new value for the 'allowed' property
+      canAcquire =       the new value for the 'can-acquire' property
+      canRelease =       the new value for the 'can-release' property
+  */
   void implUpdate(bool allowed, bool canAcquire, bool canRelease)
   {
     g_permission_impl_update(cast(GPermission*)cPtr, allowed, canAcquire, canRelease);
   }
 
   /**
-   * Attempts to release the permission represented by permission.
-   * The precise method by which this happens depends on the permission
-   * and the underlying authentication mechanism.  In most cases the
-   * permission will be dropped immediately without further action.
-   * You should check with [gio.permission.Permission.getCanRelease] before calling
-   * this function.
-   * If the permission is released then %TRUE is returned.  Otherwise,
-   * %FALSE is returned and error is set appropriately.
-   * This call is blocking, likely for a very long time $(LPAREN)in the case that
-   * user interaction is required$(RPAREN).  See [gio.permission.Permission.releaseAsync] for
-   * the non-blocking version.
-   * Params:
-   *   cancellable = a #GCancellable, or %NULL
-   * Returns: %TRUE if the permission was successfully released
-   */
+      Attempts to release the permission represented by permission.
+    
+    The precise method by which this happens depends on the permission
+    and the underlying authentication mechanism.  In most cases the
+    permission will be dropped immediately without further action.
+    
+    You should check with [gio.permission.Permission.getCanRelease] before calling
+    this function.
+    
+    If the permission is released then true is returned.  Otherwise,
+    false is returned and error is set appropriately.
+    
+    This call is blocking, likely for a very long time (in the case that
+    user interaction is required).  See [gio.permission.Permission.releaseAsync] for
+    the non-blocking version.
+    Params:
+      cancellable =       a #GCancellable, or null
+    Returns:     true if the permission was successfully released
+  */
   bool release(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
@@ -191,13 +205,14 @@ class Permission : gobject.object.ObjectG
   }
 
   /**
-   * Attempts to release the permission represented by permission.
-   * This is the first half of the asynchronous version of
-   * [gio.permission.Permission.release].
-   * Params:
-   *   cancellable = a #GCancellable, or %NULL
-   *   callback = the #GAsyncReadyCallback to call when done
-   */
+      Attempts to release the permission represented by permission.
+    
+    This is the first half of the asynchronous version of
+    [gio.permission.Permission.release].
+    Params:
+      cancellable =       a #GCancellable, or null
+      callback =       the #GAsyncReadyCallback to call when done
+  */
   void releaseAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -214,14 +229,15 @@ class Permission : gobject.object.ObjectG
   }
 
   /**
-   * Collects the result of attempting to release the permission
-   * represented by permission.
-   * This is the second half of the asynchronous version of
-   * [gio.permission.Permission.release].
-   * Params:
-   *   result = the #GAsyncResult given to the #GAsyncReadyCallback
-   * Returns: %TRUE if the permission was successfully released
-   */
+      Collects the result of attempting to release the permission
+    represented by permission.
+    
+    This is the second half of the asynchronous version of
+    [gio.permission.Permission.release].
+    Params:
+      result =       the #GAsyncResult given to the #GAsyncReadyCallback
+    Returns:     true if the permission was successfully released
+  */
   bool releaseFinish(gio.async_result.AsyncResult result)
   {
     bool _retval;

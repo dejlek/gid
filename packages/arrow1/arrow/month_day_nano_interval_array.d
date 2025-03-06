@@ -9,6 +9,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class MonthDayNanoIntervalArray : arrow.primitive_array.PrimitiveArray
 {
 
@@ -28,6 +29,7 @@ class MonthDayNanoIntervalArray : arrow.primitive_array.PrimitiveArray
     return getType();
   }
 
+  /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowMonthDayNanoIntervalArray* _cretval;
@@ -35,6 +37,7 @@ class MonthDayNanoIntervalArray : arrow.primitive_array.PrimitiveArray
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.month_day_nano.MonthDayNano getValue(long i)
   {
     GArrowMonthDayNano* _cretval;
@@ -43,6 +46,7 @@ class MonthDayNanoIntervalArray : arrow.primitive_array.PrimitiveArray
     return _retval;
   }
 
+  /** */
   arrow.month_day_nano.MonthDayNano[] getValues()
   {
     GList* _cretval;

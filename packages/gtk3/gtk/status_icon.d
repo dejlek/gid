@@ -16,35 +16,40 @@ import gtk.tooltip;
 import gtk.types;
 
 /**
- * The “system tray” or notification area is normally used for transient icons
- * that indicate some special state. For example, a system tray icon might
- * appear to tell the user that they have new mail, or have an incoming instant
- * message, or something along those lines. The basic idea is that creating an
- * icon in the notification area is less annoying than popping up a dialog.
- * A #GtkStatusIcon object can be used to display an icon in a “system tray”.
- * The icon can have a tooltip, and the user can interact with it by
- * activating it or popping up a context menu.
- * It is very important to notice that status icons depend on the existence
- * of a notification area being available to the user; you should not use status
- * icons as the only way to convey critical information regarding your application,
- * as the notification area may not exist on the user's environment, or may have
- * been removed. You should always check that a status icon has been embedded into
- * a notification area by using [gtk.status_icon.StatusIcon.isEmbedded], and gracefully
- * recover if the function returns %FALSE.
- * On X11, the implementation follows the
- * [FreeDesktop System Tray Specification](http://www.freedesktop.org/wiki/Specifications/systemtray-spec).
- * Implementations of the “tray” side of this specification can
- * be found e.g. in the GNOME 2 and KDE panel applications.
- * Note that a GtkStatusIcon is not a widget, but just a #GObject. Making it a
- * widget would be impractical, since the system tray on Windows doesn’t allow
- * to embed arbitrary widgets.
- * GtkStatusIcon has been deprecated in 3.14. You should consider using
- * notifications or more modern platform-specific APIs instead. GLib provides
- * the #GNotification API which works well with #GtkApplication on multiple
- * platforms and environments, and should be the preferred mechanism to notify
- * the users of transient status updates. See this [HowDoI](https://wiki.gnome.org/HowDoI/GNotification)
- * for code examples.
- */
+    The “system tray” or notification area is normally used for transient icons
+  that indicate some special state. For example, a system tray icon might
+  appear to tell the user that they have new mail, or have an incoming instant
+  message, or something along those lines. The basic idea is that creating an
+  icon in the notification area is less annoying than popping up a dialog.
+  
+  A #GtkStatusIcon object can be used to display an icon in a “system tray”.
+  The icon can have a tooltip, and the user can interact with it by
+  activating it or popping up a context menu.
+  
+  It is very important to notice that status icons depend on the existence
+  of a notification area being available to the user; you should not use status
+  icons as the only way to convey critical information regarding your application,
+  as the notification area may not exist on the user's environment, or may have
+  been removed. You should always check that a status icon has been embedded into
+  a notification area by using [gtk.status_icon.StatusIcon.isEmbedded], and gracefully
+  recover if the function returns false.
+  
+  On X11, the implementation follows the
+  [FreeDesktop System Tray Specification](http://www.freedesktop.org/wiki/Specifications/systemtray-spec).
+  Implementations of the “tray” side of this specification can
+  be found e.g. in the GNOME 2 and KDE panel applications.
+  
+  Note that a GtkStatusIcon is not a widget, but just a #GObject. Making it a
+  widget would be impractical, since the system tray on Windows doesn’t allow
+  to embed arbitrary widgets.
+  
+  GtkStatusIcon has been deprecated in 3.14. You should consider using
+  notifications or more modern platform-specific APIs instead. GLib provides
+  the #GNotification API which works well with #GtkApplication on multiple
+  platforms and environments, and should be the preferred mechanism to notify
+  the users of transient status updates. See this [HowDoI](https://wiki.gnome.org/HowDoI/GNotification)
+  for code examples.
+*/
 class StatusIcon : gobject.object.ObjectG
 {
 
@@ -65,12 +70,12 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Creates an empty status icon object.
-   * Returns: a new #GtkStatusIcon
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications
-   */
+      Creates an empty status icon object.
+    Returns:     a new #GtkStatusIcon
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications
+  */
   this()
   {
     GtkStatusIcon* _cretval;
@@ -79,16 +84,17 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Creates a status icon displaying the file filename.
-   * The image will be scaled down to fit in the available
-   * space in the notification area, if necessary.
-   * Params:
-   *   filename = a filename
-   * Returns: a new #GtkStatusIcon
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications
-   */
+      Creates a status icon displaying the file filename.
+    
+    The image will be scaled down to fit in the available
+    space in the notification area, if necessary.
+    Params:
+      filename =       a filename
+    Returns:     a new #GtkStatusIcon
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications
+  */
   static gtk.status_icon.StatusIcon newFromFile(string filename)
   {
     GtkStatusIcon* _cretval;
@@ -99,15 +105,15 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Creates a status icon displaying a #GIcon. If the icon is a
-   * themed icon, it will be updated when the theme changes.
-   * Params:
-   *   icon = a #GIcon
-   * Returns: a new #GtkStatusIcon
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications
-   */
+      Creates a status icon displaying a #GIcon. If the icon is a
+    themed icon, it will be updated when the theme changes.
+    Params:
+      icon =       a #GIcon
+    Returns:     a new #GtkStatusIcon
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications
+  */
   static gtk.status_icon.StatusIcon newFromGicon(gio.icon.Icon icon)
   {
     GtkStatusIcon* _cretval;
@@ -117,16 +123,16 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Creates a status icon displaying an icon from the current icon theme.
-   * If the current icon theme is changed, the icon will be updated
-   * appropriately.
-   * Params:
-   *   iconName = an icon name
-   * Returns: a new #GtkStatusIcon
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications
-   */
+      Creates a status icon displaying an icon from the current icon theme.
+    If the current icon theme is changed, the icon will be updated
+    appropriately.
+    Params:
+      iconName =       an icon name
+    Returns:     a new #GtkStatusIcon
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications
+  */
   static gtk.status_icon.StatusIcon newFromIconName(string iconName)
   {
     GtkStatusIcon* _cretval;
@@ -137,16 +143,17 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Creates a status icon displaying pixbuf.
-   * The image will be scaled down to fit in the available
-   * space in the notification area, if necessary.
-   * Params:
-   *   pixbuf = a #GdkPixbuf
-   * Returns: a new #GtkStatusIcon
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications
-   */
+      Creates a status icon displaying pixbuf.
+    
+    The image will be scaled down to fit in the available
+    space in the notification area, if necessary.
+    Params:
+      pixbuf =       a #GdkPixbuf
+    Returns:     a new #GtkStatusIcon
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications
+  */
   static gtk.status_icon.StatusIcon newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GtkStatusIcon* _cretval;
@@ -156,17 +163,17 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Creates a status icon displaying a stock icon. Sample stock icon
-   * names are #GTK_STOCK_OPEN, #GTK_STOCK_QUIT. You can register your
-   * own stock icon names, see [gtk.icon_factory.IconFactory.addDefault] and
-   * [gtk.icon_factory.IconFactory.add].
-   * Params:
-   *   stockId = a stock icon id
-   * Returns: a new #GtkStatusIcon
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications
-   */
+      Creates a status icon displaying a stock icon. Sample stock icon
+    names are #GTK_STOCK_OPEN, #GTK_STOCK_QUIT. You can register your
+    own stock icon names, see [gtk.icon_factory.IconFactory.addDefault] and
+    [gtk.icon_factory.IconFactory.add].
+    Params:
+      stockId =       a stock icon id
+    Returns:     a new #GtkStatusIcon
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications
+  */
   static gtk.status_icon.StatusIcon newFromStock(string stockId)
   {
     GtkStatusIcon* _cretval;
@@ -177,54 +184,56 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Menu positioning function to use with [gtk.menu.Menu.popup]
-   * to position menu aligned to the status icon user_data.
-   * Params:
-   *   menu = the #GtkMenu
-   *   x = return location for the x position
-   *   y = return location for the y position
-   *   pushIn = whether the first menu item should be offset
-   *     $(LPAREN)pushed in$(RPAREN) to be aligned with the menu popup position
-   *     $(LPAREN)only useful for GtkOptionMenu$(RPAREN).
-   *   userData = the status icon to position the menu on
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; notifications do not have menus,
-   *   but can have buttons, and actions associated with each button
-   */
+      Menu positioning function to use with [gtk.menu.Menu.popup]
+    to position menu aligned to the status icon user_data.
+    Params:
+      menu =       the #GtkMenu
+      x =       return location for the x position
+      y =       return location for the y position
+      pushIn =       whether the first menu item should be offset
+                  (pushed in) to be aligned with the menu popup position
+                  (only useful for GtkOptionMenu).
+      userData =       the status icon to position the menu on
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; notifications do not have menus,
+        but can have buttons, and actions associated with each button
+  */
   static void positionMenu(gtk.menu.Menu menu, ref int x, ref int y, out bool pushIn, gtk.status_icon.StatusIcon userData)
   {
     gtk_status_icon_position_menu(menu ? cast(GtkMenu*)menu.cPtr(No.Dup) : null, cast(int*)&x, cast(int*)&y, cast(bool*)&pushIn, userData ? cast(GtkStatusIcon*)userData.cPtr(No.Dup) : null);
   }
 
   /**
-   * Obtains information about the location of the status icon
-   * on screen. This information can be used to e.g. position
-   * popups like notification bubbles.
-   * See [gtk.status_icon.StatusIcon.positionMenu] for a more convenient
-   * alternative for positioning menus.
-   * Note that some platforms do not allow GTK+ to provide
-   * this information, and even on platforms that do allow it,
-   * the information is not reliable unless the status icon
-   * is embedded in a notification area, see
-   * [gtk.status_icon.StatusIcon.isEmbedded].
-   * Params:
-   *   screen = return location for
-   *     the screen, or %NULL if the information is not needed
-   *   area = return location for the area occupied by
-   *     the status icon, or %NULL
-   *   orientation = return location for the
-   *     orientation of the panel in which the status icon is embedded,
-   *     or %NULL. A panel at the top or bottom of the screen is
-   *     horizontal, a panel at the left or right is vertical.
-   * Returns: %TRUE if the location information has
-   *   been filled in
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function, as the platform is responsible for the
-   *   presentation of notifications
-   */
+      Obtains information about the location of the status icon
+    on screen. This information can be used to e.g. position
+    popups like notification bubbles.
+    
+    See [gtk.status_icon.StatusIcon.positionMenu] for a more convenient
+    alternative for positioning menus.
+    
+    Note that some platforms do not allow GTK+ to provide
+    this information, and even on platforms that do allow it,
+    the information is not reliable unless the status icon
+    is embedded in a notification area, see
+    [gtk.status_icon.StatusIcon.isEmbedded].
+    Params:
+      screen =       return location for
+                 the screen, or null if the information is not needed
+      area =       return location for the area occupied by
+               the status icon, or null
+      orientation =       return location for the
+           orientation of the panel in which the status icon is embedded,
+           or null. A panel at the top or bottom of the screen is
+           horizontal, a panel at the left or right is vertical.
+    Returns:     true if the location information has
+                    been filled in
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function, as the platform is responsible for the
+        presentation of notifications
+  */
   bool getGeometry(out gdk.screen.Screen screen, out gdk.rectangle.Rectangle area, out gtk.types.Orientation orientation)
   {
     bool _retval;
@@ -237,18 +246,19 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Retrieves the #GIcon being displayed by the #GtkStatusIcon.
-   * The storage type of the status icon must be %GTK_IMAGE_EMPTY or
-   * %GTK_IMAGE_GICON $(LPAREN)see [gtk.status_icon.StatusIcon.getStorageType]$(RPAREN).
-   * The caller of this function does not own a reference to the
-   * returned #GIcon.
-   * If this function fails, icon is left unchanged;
-   * Returns: the displayed icon, or %NULL if the image is empty
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function
-   */
+      Retrieves the #GIcon being displayed by the #GtkStatusIcon.
+    The storage type of the status icon must be [gtk.types.ImageType.Empty] or
+    [gtk.types.ImageType.Gicon] (see [gtk.status_icon.StatusIcon.getStorageType]).
+    The caller of this function does not own a reference to the
+    returned #GIcon.
+    
+    If this function fails, icon is left unchanged;
+    Returns:     the displayed icon, or null if the image is empty
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function
+  */
   gio.icon.Icon getGicon()
   {
     GIcon* _cretval;
@@ -258,14 +268,14 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Returns the current value of the has-tooltip property.
-   * See #GtkStatusIcon:has-tooltip for more information.
-   * Returns: current value of has-tooltip on status_icon.
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function
-   */
+      Returns the current value of the has-tooltip property.
+    See #GtkStatusIcon:has-tooltip for more information.
+    Returns:     current value of has-tooltip on status_icon.
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function
+  */
   bool getHasTooltip()
   {
     bool _retval;
@@ -274,17 +284,17 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Gets the name of the icon being displayed by the #GtkStatusIcon.
-   * The storage type of the status icon must be %GTK_IMAGE_EMPTY or
-   * %GTK_IMAGE_ICON_NAME $(LPAREN)see [gtk.status_icon.StatusIcon.getStorageType]$(RPAREN).
-   * The returned string is owned by the #GtkStatusIcon and should not
-   * be freed or modified.
-   * Returns: name of the displayed icon, or %NULL if the image is empty.
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function
-   */
+      Gets the name of the icon being displayed by the #GtkStatusIcon.
+    The storage type of the status icon must be [gtk.types.ImageType.Empty] or
+    [gtk.types.ImageType.IconName] (see [gtk.status_icon.StatusIcon.getStorageType]).
+    The returned string is owned by the #GtkStatusIcon and should not
+    be freed or modified.
+    Returns:     name of the displayed icon, or null if the image is empty.
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function
+  */
   string getIconName()
   {
     const(char)* _cretval;
@@ -294,18 +304,18 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Gets the #GdkPixbuf being displayed by the #GtkStatusIcon.
-   * The storage type of the status icon must be %GTK_IMAGE_EMPTY or
-   * %GTK_IMAGE_PIXBUF $(LPAREN)see [gtk.status_icon.StatusIcon.getStorageType]$(RPAREN).
-   * The caller of this function does not own a reference to the
-   * returned pixbuf.
-   * Returns: the displayed pixbuf,
-   *   or %NULL if the image is empty.
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function
-   */
+      Gets the #GdkPixbuf being displayed by the #GtkStatusIcon.
+    The storage type of the status icon must be [gtk.types.ImageType.Empty] or
+    [gtk.types.ImageType.Pixbuf] (see [gtk.status_icon.StatusIcon.getStorageType]).
+    The caller of this function does not own a reference to the
+    returned pixbuf.
+    Returns:     the displayed pixbuf,
+          or null if the image is empty.
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function
+  */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
@@ -315,13 +325,13 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Returns the #GdkScreen associated with status_icon.
-   * Returns: a #GdkScreen.
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function, as notifications are managed by the platform
-   */
+      Returns the #GdkScreen associated with status_icon.
+    Returns:     a #GdkScreen.
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function, as notifications are managed by the platform
+  */
   gdk.screen.Screen getScreen()
   {
     GdkScreen* _cretval;
@@ -331,20 +341,21 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Gets the size in pixels that is available for the image.
-   * Stock icons and named icons adapt their size automatically
-   * if the size of the notification area changes. For other
-   * storage types, the size-changed signal can be used to
-   * react to size changes.
-   * Note that the returned size is only meaningful while the
-   * status icon is embedded $(LPAREN)see [gtk.status_icon.StatusIcon.isEmbedded]$(RPAREN).
-   * Returns: the size that is available for the image
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function, as the representation of a notification
-   *   is left to the platform
-   */
+      Gets the size in pixels that is available for the image.
+    Stock icons and named icons adapt their size automatically
+    if the size of the notification area changes. For other
+    storage types, the size-changed signal can be used to
+    react to size changes.
+    
+    Note that the returned size is only meaningful while the
+    status icon is embedded (see [gtk.status_icon.StatusIcon.isEmbedded]).
+    Returns:     the size that is available for the image
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function, as the representation of a notification
+        is left to the platform
+  */
   int getSize()
   {
     int _retval;
@@ -353,16 +364,16 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Gets the id of the stock icon being displayed by the #GtkStatusIcon.
-   * The storage type of the status icon must be %GTK_IMAGE_EMPTY or
-   * %GTK_IMAGE_STOCK $(LPAREN)see [gtk.status_icon.StatusIcon.getStorageType]$(RPAREN).
-   * The returned string is owned by the #GtkStatusIcon and should not
-   * be freed or modified.
-   * Returns: stock id of the displayed stock icon,
-   *   or %NULL if the image is empty.
-
-   * Deprecated: Use [gtk.status_icon.StatusIcon.getIconName] instead.
-   */
+      Gets the id of the stock icon being displayed by the #GtkStatusIcon.
+    The storage type of the status icon must be [gtk.types.ImageType.Empty] or
+    [gtk.types.ImageType.Stock] (see [gtk.status_icon.StatusIcon.getStorageType]).
+    The returned string is owned by the #GtkStatusIcon and should not
+    be freed or modified.
+    Returns:     stock id of the displayed stock icon,
+        or null if the image is empty.
+  
+    Deprecated:     Use [gtk.status_icon.StatusIcon.getIconName] instead.
+  */
   string getStock()
   {
     const(char)* _cretval;
@@ -372,16 +383,16 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Gets the type of representation being used by the #GtkStatusIcon
-   * to store image data. If the #GtkStatusIcon has no image data,
-   * the return value will be %GTK_IMAGE_EMPTY.
-   * Returns: the image representation being used
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function, and #GNotification only supports #GIcon
-   *   instances
-   */
+      Gets the type of representation being used by the #GtkStatusIcon
+    to store image data. If the #GtkStatusIcon has no image data,
+    the return value will be [gtk.types.ImageType.Empty].
+    Returns:     the image representation being used
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function, and #GNotification only supports #GIcon
+        instances
+  */
   gtk.types.ImageType getStorageType()
   {
     GtkImageType _cretval;
@@ -391,13 +402,13 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Gets the title of this tray icon. See [gtk.status_icon.StatusIcon.setTitle].
-   * Returns: the title of the status icon
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function
-   */
+      Gets the title of this tray icon. See [gtk.status_icon.StatusIcon.setTitle].
+    Returns:     the title of the status icon
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function
+  */
   string getTitle()
   {
     const(char)* _cretval;
@@ -407,14 +418,14 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Gets the contents of the tooltip for status_icon.
-   * Returns: the tooltip text, or %NULL. You should free the
-   *   returned string with [glib.global.gfree] when done.
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function
-   */
+      Gets the contents of the tooltip for status_icon.
+    Returns:     the tooltip text, or null. You should free the
+        returned string with [glib.global.gfree] when done.
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function
+  */
   string getTooltipMarkup()
   {
     char* _cretval;
@@ -424,14 +435,14 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Gets the contents of the tooltip for status_icon.
-   * Returns: the tooltip text, or %NULL. You should free the
-   *   returned string with [glib.global.gfree] when done.
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function
-   */
+      Gets the contents of the tooltip for status_icon.
+    Returns:     the tooltip text, or null. You should free the
+        returned string with [glib.global.gfree] when done.
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function
+  */
   string getTooltipText()
   {
     char* _cretval;
@@ -441,16 +452,16 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the status icon is visible or not.
-   * Note that being visible does not guarantee that
-   * the user can actually see the icon, see also
-   * [gtk.status_icon.StatusIcon.isEmbedded].
-   * Returns: %TRUE if the status icon is visible
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function
-   */
+      Returns whether the status icon is visible or not.
+    Note that being visible does not guarantee that
+    the user can actually see the icon, see also
+    [gtk.status_icon.StatusIcon.isEmbedded].
+    Returns:     true if the status icon is visible
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function
+  */
   bool getVisible()
   {
     bool _retval;
@@ -459,22 +470,24 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * This function is only useful on the X11/freedesktop.org platform.
-   * It returns a window ID for the widget in the underlying
-   * status icon implementation.  This is useful for the Galago
-   * notification service, which can send a window ID in the protocol
-   * in order for the server to position notification windows
-   * pointing to a status icon reliably.
-   * This function is not intended for other use cases which are
-   * more likely to be met by one of the non-X11 specific methods, such
-   * as [gtk.status_icon.StatusIcon.positionMenu].
-   * Returns: An 32 bit unsigned integer identifier for the
-   *   underlying X11 Window
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function
-   */
+      This function is only useful on the X11/freedesktop.org platform.
+    
+    It returns a window ID for the widget in the underlying
+    status icon implementation.  This is useful for the Galago
+    notification service, which can send a window ID in the protocol
+    in order for the server to position notification windows
+    pointing to a status icon reliably.
+    
+    This function is not intended for other use cases which are
+    more likely to be met by one of the non-X11 specific methods, such
+    as [gtk.status_icon.StatusIcon.positionMenu].
+    Returns:     An 32 bit unsigned integer identifier for the
+      underlying X11 Window
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function
+  */
   uint getX11WindowId()
   {
     uint _retval;
@@ -483,15 +496,15 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the status icon is embedded in a notification
-   * area.
-   * Returns: %TRUE if the status icon is embedded in
-   *   a notification area.
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function
-   */
+      Returns whether the status icon is embedded in a notification
+    area.
+    Returns:     true if the status icon is embedded in
+        a notification area.
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function
+  */
   bool isEmbedded()
   {
     bool _retval;
@@ -500,15 +513,15 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Makes status_icon display the file filename.
-   * See [gtk.status_icon.StatusIcon.newFromFile] for details.
-   * Params:
-   *   filename = a filename
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; you can use [gio.notification.Notification.setIcon]
-   *   to associate a #GIcon with a notification
-   */
+      Makes status_icon display the file filename.
+    See [gtk.status_icon.StatusIcon.newFromFile] for details.
+    Params:
+      filename =       a filename
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; you can use [gio.notification.Notification.setIcon]
+        to associate a #GIcon with a notification
+  */
   void setFromFile(string filename)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -516,31 +529,31 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Makes status_icon display the #GIcon.
-   * See [gtk.status_icon.StatusIcon.newFromGicon] for details.
-   * Params:
-   *   icon = a GIcon
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; you can use [gio.notification.Notification.setIcon]
-   *   to associate a #GIcon with a notification
-   */
+      Makes status_icon display the #GIcon.
+    See [gtk.status_icon.StatusIcon.newFromGicon] for details.
+    Params:
+      icon =       a GIcon
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; you can use [gio.notification.Notification.setIcon]
+        to associate a #GIcon with a notification
+  */
   void setFromGicon(gio.icon.Icon icon)
   {
     gtk_status_icon_set_from_gicon(cast(GtkStatusIcon*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
-   * Makes status_icon display the icon named icon_name from the
-   * current icon theme.
-   * See [gtk.status_icon.StatusIcon.newFromIconName] for details.
-   * Params:
-   *   iconName = an icon name
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; you can use [gio.notification.Notification.setIcon]
-   *   to associate a #GIcon with a notification
-   */
+      Makes status_icon display the icon named icon_name from the
+    current icon theme.
+    See [gtk.status_icon.StatusIcon.newFromIconName] for details.
+    Params:
+      iconName =       an icon name
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; you can use [gio.notification.Notification.setIcon]
+        to associate a #GIcon with a notification
+  */
   void setFromIconName(string iconName)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
@@ -548,28 +561,28 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Makes status_icon display pixbuf.
-   * See [gtk.status_icon.StatusIcon.newFromPixbuf] for details.
-   * Params:
-   *   pixbuf = a #GdkPixbuf or %NULL
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; you can use [gio.notification.Notification.setIcon]
-   *   to associate a #GIcon with a notification
-   */
+      Makes status_icon display pixbuf.
+    See [gtk.status_icon.StatusIcon.newFromPixbuf] for details.
+    Params:
+      pixbuf =       a #GdkPixbuf or null
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; you can use [gio.notification.Notification.setIcon]
+        to associate a #GIcon with a notification
+  */
   void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     gtk_status_icon_set_from_pixbuf(cast(GtkStatusIcon*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
 
   /**
-   * Makes status_icon display the stock icon with the id stock_id.
-   * See [gtk.status_icon.StatusIcon.newFromStock] for details.
-   * Params:
-   *   stockId = a stock icon id
-
-   * Deprecated: Use [gtk.status_icon.StatusIcon.setFromIconName] instead.
-   */
+      Makes status_icon display the stock icon with the id stock_id.
+    See [gtk.status_icon.StatusIcon.newFromStock] for details.
+    Params:
+      stockId =       a stock icon id
+  
+    Deprecated:     Use [gtk.status_icon.StatusIcon.setFromIconName] instead.
+  */
   void setFromStock(string stockId)
   {
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -577,34 +590,34 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Sets the has-tooltip property on status_icon to has_tooltip.
-   * See #GtkStatusIcon:has-tooltip for more information.
-   * Params:
-   *   hasTooltip = whether or not status_icon has a tooltip
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function, but notifications can display an arbitrary
-   *   amount of text using [gio.notification.Notification.setBody]
-   */
+      Sets the has-tooltip property on status_icon to has_tooltip.
+    See #GtkStatusIcon:has-tooltip for more information.
+    Params:
+      hasTooltip =       whether or not status_icon has a tooltip
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function, but notifications can display an arbitrary
+        amount of text using [gio.notification.Notification.setBody]
+  */
   void setHasTooltip(bool hasTooltip)
   {
     gtk_status_icon_set_has_tooltip(cast(GtkStatusIcon*)cPtr, hasTooltip);
   }
 
   /**
-   * Sets the name of this tray icon.
-   * This should be a string identifying this icon. It is may be
-   * used for sorting the icons in the tray and will not be shown to
-   * the user.
-   * Params:
-   *   name = the name
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function, as notifications are associated with a
-   *   unique application identifier by #GApplication
-   */
+      Sets the name of this tray icon.
+    This should be a string identifying this icon. It is may be
+    used for sorting the icons in the tray and will not be shown to
+    the user.
+    Params:
+      name =       the name
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function, as notifications are associated with a
+        unique application identifier by #GApplication
+  */
   void setName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
@@ -612,34 +625,34 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Sets the #GdkScreen where status_icon is displayed; if
-   * the icon is already mapped, it will be unmapped, and
-   * then remapped on the new screen.
-   * Params:
-   *   screen = a #GdkScreen
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function, as GTK typically only has one #GdkScreen
-   *   and notifications are managed by the platform
-   */
+      Sets the #GdkScreen where status_icon is displayed; if
+    the icon is already mapped, it will be unmapped, and
+    then remapped on the new screen.
+    Params:
+      screen =       a #GdkScreen
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function, as GTK typically only has one #GdkScreen
+        and notifications are managed by the platform
+  */
   void setScreen(gdk.screen.Screen screen)
   {
     gtk_status_icon_set_screen(cast(GtkStatusIcon*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the title of this tray icon.
-   * This should be a short, human-readable, localized string
-   * describing the tray icon. It may be used by tools like screen
-   * readers to render the tray icon.
-   * Params:
-   *   title = the title
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; you should use [gio.notification.Notification.setTitle]
-   *   and [gio.notification.Notification.setBody] to present text inside your notification
-   */
+      Sets the title of this tray icon.
+    This should be a short, human-readable, localized string
+    describing the tray icon. It may be used by tools like screen
+    readers to render the tray icon.
+    Params:
+      title =       the title
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; you should use [gio.notification.Notification.setTitle]
+        and [gio.notification.Notification.setBody] to present text inside your notification
+  */
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
@@ -647,19 +660,21 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Sets markup as the contents of the tooltip, which is marked up with
-   * the [Pango text markup language][PangoMarkupFormat].
-   * This function will take care of setting #GtkStatusIcon:has-tooltip to %TRUE
-   * and of the default handler for the #GtkStatusIcon::query-tooltip signal.
-   * See also the #GtkStatusIcon:tooltip-markup property and
-   * [gtk.tooltip.Tooltip.setMarkup].
-   * Params:
-   *   markup = the contents of the tooltip for status_icon, or %NULL
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function
-   */
+      Sets markup as the contents of the tooltip, which is marked up with
+     the [Pango text markup language][PangoMarkupFormat].
+    
+    This function will take care of setting #GtkStatusIcon:has-tooltip to true
+    and of the default handler for the #GtkStatusIcon::query-tooltip signal.
+    
+    See also the #GtkStatusIcon:tooltip-markup property and
+    [gtk.tooltip.Tooltip.setMarkup].
+    Params:
+      markup =       the contents of the tooltip for status_icon, or null
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function
+  */
   void setTooltipMarkup(string markup = null)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
@@ -667,19 +682,21 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Sets text as the contents of the tooltip.
-   * This function will take care of setting #GtkStatusIcon:has-tooltip to
-   * %TRUE and of the default handler for the #GtkStatusIcon::query-tooltip
-   * signal.
-   * See also the #GtkStatusIcon:tooltip-text property and
-   * [gtk.tooltip.Tooltip.setText].
-   * Params:
-   *   text = the contents of the tooltip for status_icon
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function
-   */
+      Sets text as the contents of the tooltip.
+    
+    This function will take care of setting #GtkStatusIcon:has-tooltip to
+    true and of the default handler for the #GtkStatusIcon::query-tooltip
+    signal.
+    
+    See also the #GtkStatusIcon:tooltip-text property and
+    [gtk.tooltip.Tooltip.setText].
+    Params:
+      text =       the contents of the tooltip for status_icon
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function
+  */
   void setTooltipText(string text)
   {
     const(char)* _text = text.toCString(No.Alloc);
@@ -687,36 +704,43 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Shows or hides a status icon.
-   * Params:
-   *   visible = %TRUE to show the status icon, %FALSE to hide it
-
-   * Deprecated: Use #GNotification and #GtkApplication to
-   *   provide status notifications; there is no direct replacement
-   *   for this function, as notifications are managed by the platform
-   */
+      Shows or hides a status icon.
+    Params:
+      visible =       true to show the status icon, false to hide it
+  
+    Deprecated:     Use #GNotification and #GtkApplication to
+        provide status notifications; there is no direct replacement
+        for this function, as notifications are managed by the platform
+  */
   void setVisible(bool visible)
   {
     gtk_status_icon_set_visible(cast(GtkStatusIcon*)cPtr, visible);
   }
 
   /**
-   * Gets emitted when the user activates the status icon.
-   * If and how status icons can activated is platform-dependent.
-   * Unlike most G_SIGNAL_ACTION signals, this signal is meant to
-   * be used by applications and should be wrapped by language bindings.
-   *   statusIcon = the instance the signal is connected to
-   */
+      Gets emitted when the user activates the status icon.
+    If and how status icons can activated is platform-dependent.
+    
+    Unlike most G_SIGNAL_ACTION signals, this signal is meant to
+    be used by applications and should be wrapped by language bindings.
+  
+    ## Parameters
+    $(LIST
+      * $(B statusIcon) the instance the signal is connected to
+    )
+  */
   alias ActivateCallbackDlg = void delegate(gtk.status_icon.StatusIcon statusIcon);
+
+  /** ditto */
   alias ActivateCallbackFunc = void function(gtk.status_icon.StatusIcon statusIcon);
 
   /**
-   * Connect to Activate signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Activate signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
@@ -733,27 +757,33 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * The ::button-press-event signal will be emitted when a button
-   * $(LPAREN)typically from a mouse$(RPAREN) is pressed.
-   * Whether this event is emitted is platform-dependent.  Use the ::activate
-   * and ::popup-menu signals in preference.
-   * Params
-   *   event = the #GdkEventButton which triggered
-   *     this signal
-   *   statusIcon = the instance the signal is connected to
-   * Returns: %TRUE to stop other handlers from being invoked
-   *   for the event. %FALSE to propagate the event further.
-   */
+      The ::button-press-event signal will be emitted when a button
+    (typically from a mouse) is pressed.
+    
+    Whether this event is emitted is platform-dependent.  Use the ::activate
+    and ::popup-menu signals in preference.
+  
+    ## Parameters
+    $(LIST
+      * $(B event)       the #GdkEventButton which triggered
+                                        this signal
+      * $(B statusIcon) the instance the signal is connected to
+    )
+    Returns:     true to stop other handlers from being invoked
+      for the event. false to propagate the event further.
+  */
   alias ButtonPressEventCallbackDlg = bool delegate(gdk.event_button.EventButton event, gtk.status_icon.StatusIcon statusIcon);
+
+  /** ditto */
   alias ButtonPressEventCallbackFunc = bool function(gdk.event_button.EventButton event, gtk.status_icon.StatusIcon statusIcon);
 
   /**
-   * Connect to ButtonPressEvent signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ButtonPressEvent signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectButtonPressEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ButtonPressEventCallbackDlg) || is(T : ButtonPressEventCallbackFunc))
   {
@@ -773,27 +803,33 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * The ::button-release-event signal will be emitted when a button
-   * $(LPAREN)typically from a mouse$(RPAREN) is released.
-   * Whether this event is emitted is platform-dependent.  Use the ::activate
-   * and ::popup-menu signals in preference.
-   * Params
-   *   event = the #GdkEventButton which triggered
-   *     this signal
-   *   statusIcon = the instance the signal is connected to
-   * Returns: %TRUE to stop other handlers from being invoked
-   *   for the event. %FALSE to propagate the event further.
-   */
+      The ::button-release-event signal will be emitted when a button
+    (typically from a mouse) is released.
+    
+    Whether this event is emitted is platform-dependent.  Use the ::activate
+    and ::popup-menu signals in preference.
+  
+    ## Parameters
+    $(LIST
+      * $(B event)       the #GdkEventButton which triggered
+                                        this signal
+      * $(B statusIcon) the instance the signal is connected to
+    )
+    Returns:     true to stop other handlers from being invoked
+      for the event. false to propagate the event further.
+  */
   alias ButtonReleaseEventCallbackDlg = bool delegate(gdk.event_button.EventButton event, gtk.status_icon.StatusIcon statusIcon);
+
+  /** ditto */
   alias ButtonReleaseEventCallbackFunc = bool function(gdk.event_button.EventButton event, gtk.status_icon.StatusIcon statusIcon);
 
   /**
-   * Connect to ButtonReleaseEvent signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ButtonReleaseEvent signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectButtonReleaseEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ButtonReleaseEventCallbackDlg) || is(T : ButtonReleaseEventCallbackFunc))
   {
@@ -813,30 +849,37 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Gets emitted when the user brings up the context menu
-   * of the status icon. Whether status icons can have context
-   * menus and how these are activated is platform-dependent.
-   * The button and activate_time parameters should be
-   * passed as the last to arguments to [gtk.menu.Menu.popup].
-   * Unlike most G_SIGNAL_ACTION signals, this signal is meant to
-   * be used by applications and should be wrapped by language bindings.
-   * Params
-   *   button = the button that was pressed, or 0 if the
-   *     signal is not emitted in response to a button press event
-   *   activateTime = the timestamp of the event that
-   *     triggered the signal emission
-   *   statusIcon = the instance the signal is connected to
-   */
+      Gets emitted when the user brings up the context menu
+    of the status icon. Whether status icons can have context
+    menus and how these are activated is platform-dependent.
+    
+    The button and activate_time parameters should be
+    passed as the last to arguments to [gtk.menu.Menu.popup].
+    
+    Unlike most G_SIGNAL_ACTION signals, this signal is meant to
+    be used by applications and should be wrapped by language bindings.
+  
+    ## Parameters
+    $(LIST
+      * $(B button)       the button that was pressed, or 0 if the
+          signal is not emitted in response to a button press event
+      * $(B activateTime)       the timestamp of the event that
+          triggered the signal emission
+      * $(B statusIcon) the instance the signal is connected to
+    )
+  */
   alias PopupMenuCallbackDlg = void delegate(uint button, uint activateTime, gtk.status_icon.StatusIcon statusIcon);
+
+  /** ditto */
   alias PopupMenuCallbackFunc = void function(uint button, uint activateTime, gtk.status_icon.StatusIcon statusIcon);
 
   /**
-   * Connect to PopupMenu signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to PopupMenu signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectPopupMenu(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PopupMenuCallbackDlg) || is(T : PopupMenuCallbackFunc))
   {
@@ -855,38 +898,46 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Emitted when the hover timeout has expired with the
-   * cursor hovering above status_icon; or emitted when status_icon got
-   * focus in keyboard mode.
-   * Using the given coordinates, the signal handler should determine
-   * whether a tooltip should be shown for status_icon. If this is
-   * the case %TRUE should be returned, %FALSE otherwise. Note that if
-   * keyboard_mode is %TRUE, the values of x and y are undefined and
-   * should not be used.
-   * The signal handler is free to manipulate tooltip with the therefore
-   * destined function calls.
-   * Whether this signal is emitted is platform-dependent.
-   * For plain text tooltips, use #GtkStatusIcon:tooltip-text in preference.
-   * Params
-   *   x = the x coordinate of the cursor position where the request has been
-   *     emitted, relative to status_icon
-   *   y = the y coordinate of the cursor position where the request has been
-   *     emitted, relative to status_icon
-   *   keyboardMode = %TRUE if the tooltip was trigged using the keyboard
-   *   tooltip = a #GtkTooltip
-   *   statusIcon = the instance the signal is connected to
-   * Returns: %TRUE if tooltip should be shown right now, %FALSE otherwise.
-   */
+      Emitted when the hover timeout has expired with the
+    cursor hovering above status_icon; or emitted when status_icon got
+    focus in keyboard mode.
+    
+    Using the given coordinates, the signal handler should determine
+    whether a tooltip should be shown for status_icon. If this is
+    the case true should be returned, false otherwise. Note that if
+    keyboard_mode is true, the values of x and y are undefined and
+    should not be used.
+    
+    The signal handler is free to manipulate tooltip with the therefore
+    destined function calls.
+    
+    Whether this signal is emitted is platform-dependent.
+    For plain text tooltips, use #GtkStatusIcon:tooltip-text in preference.
+  
+    ## Parameters
+    $(LIST
+      * $(B x)       the x coordinate of the cursor position where the request has been
+            emitted, relative to status_icon
+      * $(B y)       the y coordinate of the cursor position where the request has been
+            emitted, relative to status_icon
+      * $(B keyboardMode)       true if the tooltip was trigged using the keyboard
+      * $(B tooltip)       a #GtkTooltip
+      * $(B statusIcon) the instance the signal is connected to
+    )
+    Returns:     true if tooltip should be shown right now, false otherwise.
+  */
   alias QueryTooltipCallbackDlg = bool delegate(int x, int y, bool keyboardMode, gtk.tooltip.Tooltip tooltip, gtk.status_icon.StatusIcon statusIcon);
+
+  /** ditto */
   alias QueryTooltipCallbackFunc = bool function(int x, int y, bool keyboardMode, gtk.tooltip.Tooltip tooltip, gtk.status_icon.StatusIcon statusIcon);
 
   /**
-   * Connect to QueryTooltip signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to QueryTooltip signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectQueryTooltip(T)(T callback, Flag!"After" after = No.After)
   if (is(T : QueryTooltipCallbackDlg) || is(T : QueryTooltipCallbackFunc))
   {
@@ -909,27 +960,33 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * The ::scroll-event signal is emitted when a button in the 4 to 7
-   * range is pressed. Wheel mice are usually configured to generate
-   * button press events for buttons 4 and 5 when the wheel is turned.
-   * Whether this event is emitted is platform-dependent.
-   * Params
-   *   event = the #GdkEventScroll which triggered
-   *     this signal
-   *   statusIcon = the instance the signal is connected to
-   * Returns: %TRUE to stop other handlers from being invoked for the event.
-   *   %FALSE to propagate the event further.
-   */
+      The ::scroll-event signal is emitted when a button in the 4 to 7
+    range is pressed. Wheel mice are usually configured to generate
+    button press events for buttons 4 and 5 when the wheel is turned.
+    
+    Whether this event is emitted is platform-dependent.
+  
+    ## Parameters
+    $(LIST
+      * $(B event)       the #GdkEventScroll which triggered
+                                        this signal
+      * $(B statusIcon) the instance the signal is connected to
+    )
+    Returns:     true to stop other handlers from being invoked for the event.
+        false to propagate the event further.
+  */
   alias ScrollEventCallbackDlg = bool delegate(gdk.event_scroll.EventScroll event, gtk.status_icon.StatusIcon statusIcon);
+
+  /** ditto */
   alias ScrollEventCallbackFunc = bool function(gdk.event_scroll.EventScroll event, gtk.status_icon.StatusIcon statusIcon);
 
   /**
-   * Connect to ScrollEvent signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ScrollEvent signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectScrollEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ScrollEventCallbackDlg) || is(T : ScrollEventCallbackFunc))
   {
@@ -949,24 +1006,29 @@ class StatusIcon : gobject.object.ObjectG
   }
 
   /**
-   * Gets emitted when the size available for the image
-   * changes, e.g. because the notification area got resized.
-   * Params
-   *   size = the new size
-   *   statusIcon = the instance the signal is connected to
-   * Returns: %TRUE if the icon was updated for the new
-   *   size. Otherwise, GTK+ will scale the icon as necessary.
-   */
+      Gets emitted when the size available for the image
+    changes, e.g. because the notification area got resized.
+  
+    ## Parameters
+    $(LIST
+      * $(B size)       the new size
+      * $(B statusIcon) the instance the signal is connected to
+    )
+    Returns:     true if the icon was updated for the new
+      size. Otherwise, GTK+ will scale the icon as necessary.
+  */
   alias SizeChangedCallbackDlg = bool delegate(int size, gtk.status_icon.StatusIcon statusIcon);
+
+  /** ditto */
   alias SizeChangedCallbackFunc = bool function(int size, gtk.status_icon.StatusIcon statusIcon);
 
   /**
-   * Connect to SizeChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to SizeChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectSizeChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SizeChangedCallbackDlg) || is(T : SizeChangedCallbackFunc))
   {

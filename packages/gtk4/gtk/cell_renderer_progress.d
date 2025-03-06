@@ -9,13 +9,14 @@ import gtk.orientable_mixin;
 import gtk.types;
 
 /**
- * Renders numbers as progress bars
- * `GtkCellRendererProgress` renders a numeric value as a progress par in a cell.
- * Additionally, it can display a text on top of the progress bar.
+    Renders numbers as progress bars
+  
+  [gtk.cell_renderer_progress.CellRendererProgress] renders a numeric value as a progress par in a cell.
+  Additionally, it can display a text on top of the progress bar.
 
- * Deprecated: List views use widgets to display their contents.
- *   You should use [gtk.progress_bar.ProgressBar] instead
- */
+  Deprecated:     List views use widgets to display their contents.
+      You should use [gtk.progress_bar.ProgressBar] instead
+*/
 class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orientable
 {
 
@@ -38,9 +39,9 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
   mixin OrientableT!();
 
   /**
-   * Creates a new `GtkCellRendererProgress`.
-   * Returns: the new cell renderer
-   */
+      Creates a new [gtk.cell_renderer_progress.CellRendererProgress].
+    Returns:     the new cell renderer
+  */
   this()
   {
     GtkCellRenderer* _cretval;

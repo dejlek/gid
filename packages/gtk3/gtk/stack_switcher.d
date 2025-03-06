@@ -15,23 +15,29 @@ import gtk.stack;
 import gtk.types;
 
 /**
- * The GtkStackSwitcher widget acts as a controller for a
- * #GtkStack; it shows a row of buttons to switch between
- * the various pages of the associated stack widget.
- * All the content for the buttons comes from the child properties
- * of the #GtkStack; the button visibility in a #GtkStackSwitcher
- * widget is controlled by the visibility of the child in the
- * #GtkStack.
- * It is possible to associate multiple #GtkStackSwitcher widgets
- * with the same #GtkStack widget.
- * The GtkStackSwitcher widget was added in 3.10.
- * # CSS nodes
- * GtkStackSwitcher has a single CSS node named stackswitcher and
- * style class .stack-switcher.
- * When circumstances require it, GtkStackSwitcher adds the
- * .needs-attention style class to the widgets representing the
- * stack pages.
- */
+    The GtkStackSwitcher widget acts as a controller for a
+  #GtkStack; it shows a row of buttons to switch between
+  the various pages of the associated stack widget.
+  
+  All the content for the buttons comes from the child properties
+  of the #GtkStack; the button visibility in a #GtkStackSwitcher
+  widget is controlled by the visibility of the child in the
+  #GtkStack.
+  
+  It is possible to associate multiple #GtkStackSwitcher widgets
+  with the same #GtkStack widget.
+  
+  The GtkStackSwitcher widget was added in 3.10.
+  
+  # CSS nodes
+  
+  GtkStackSwitcher has a single CSS node named stackswitcher and
+  style class .stack-switcher.
+  
+  When circumstances require it, GtkStackSwitcher adds the
+  .needs-attention style class to the widgets representing the
+  stack pages.
+*/
 class StackSwitcher : gtk.box.Box
 {
 
@@ -52,9 +58,9 @@ class StackSwitcher : gtk.box.Box
   }
 
   /**
-   * Create a new #GtkStackSwitcher.
-   * Returns: a new #GtkStackSwitcher.
-   */
+      Create a new #GtkStackSwitcher.
+    Returns:     a new #GtkStackSwitcher.
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -63,11 +69,11 @@ class StackSwitcher : gtk.box.Box
   }
 
   /**
-   * Retrieves the stack.
-   * See [gtk.stack_switcher.StackSwitcher.setStack].
-   * Returns: the stack, or %NULL if
-   *   none has been set explicitly.
-   */
+      Retrieves the stack.
+    See [gtk.stack_switcher.StackSwitcher.setStack].
+    Returns:     the stack, or null if
+         none has been set explicitly.
+  */
   gtk.stack.Stack getStack()
   {
     GtkStack* _cretval;
@@ -77,10 +83,10 @@ class StackSwitcher : gtk.box.Box
   }
 
   /**
-   * Sets the stack to control.
-   * Params:
-   *   stack = a #GtkStack
-   */
+      Sets the stack to control.
+    Params:
+      stack =       a #GtkStack
+  */
   void setStack(gtk.stack.Stack stack = null)
   {
     gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)cPtr, stack ? cast(GtkStack*)stack.cPtr(No.Dup) : null);

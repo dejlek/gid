@@ -6,6 +6,7 @@ import arrowflight.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class ServerAuthHandler : gobject.object.ObjectG
 {
 

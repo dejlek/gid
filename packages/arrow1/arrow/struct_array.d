@@ -10,6 +10,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class StructArray : arrow.array.Array
 {
 
@@ -29,6 +30,7 @@ class StructArray : arrow.array.Array
     return getType();
   }
 
+  /** */
   this(arrow.data_type.DataType dataType, long length, arrow.array.Array[] fields, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowStructArray* _cretval;
@@ -38,6 +40,7 @@ class StructArray : arrow.array.Array
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.array.Array[] flatten()
   {
     GList* _cretval;
@@ -49,6 +52,7 @@ class StructArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   arrow.array.Array getField(int i)
   {
     GArrowArray* _cretval;
@@ -57,6 +61,7 @@ class StructArray : arrow.array.Array
     return _retval;
   }
 
+  /** */
   arrow.array.Array[] getFields()
   {
     GList* _cretval;

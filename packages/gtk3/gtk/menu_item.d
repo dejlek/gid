@@ -19,43 +19,55 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * The #GtkMenuItem widget and the derived widgets are the only valid
- * children for menus. Their function is to correctly handle highlighting,
- * alignment, events and submenus.
- * As a GtkMenuItem derives from #GtkBin it can hold any valid child widget,
- * although only a few are really useful.
- * By default, a GtkMenuItem sets a #GtkAccelLabel as its child.
- * GtkMenuItem has direct functions to set the label and its mnemonic.
- * For more advanced label settings, you can fetch the child widget from the GtkBin.
- * An example for setting markup and accelerator on a MenuItem:
- * |[<!-- language\="C" -->
- * GtkWidget *menu_item \= gtk_menu_item_new_with_label $(LPAREN)"Example Menu Item"$(RPAREN);
- * GtkWidget *child \= gtk_bin_get_child $(LPAREN)GTK_BIN $(LPAREN)menu_item$(RPAREN)$(RPAREN);
- * gtk_label_set_markup $(LPAREN)GTK_LABEL $(LPAREN)child$(RPAREN), "<i>new label</i> with <b>markup</b>"$(RPAREN);
- * gtk_accel_label_set_accel $(LPAREN)GTK_ACCEL_LABEL $(LPAREN)child$(RPAREN), GDK_KEY_1, 0$(RPAREN);
- * ]|
- * # GtkMenuItem as GtkBuildable
- * The GtkMenuItem implementation of the #GtkBuildable interface supports
- * adding a submenu by specifying “submenu” as the “type” attribute of
- * a `<child>` element.
- * An example of UI definition fragment with submenus:
- * |[<!-- language\="xml" -->
- * <object class\="GtkMenuItem">
- * <child type\="submenu">
- * <object class\="GtkMenu"/>
- * </child>
- * </object>
- * ]|
- * # CSS nodes
- * |[<!-- language\="plain" -->
- * menuitem
- * ├── <child>
- * ╰── [arrow.right]
- * ]|
- * GtkMenuItem has a single CSS node with name menuitem. If the menuitem
- * has a submenu, it gets another CSS node with name arrow, which has
- * the .left or .right style class.
- */
+    The #GtkMenuItem widget and the derived widgets are the only valid
+  children for menus. Their function is to correctly handle highlighting,
+  alignment, events and submenus.
+  
+  As a GtkMenuItem derives from #GtkBin it can hold any valid child widget,
+  although only a few are really useful.
+  
+  By default, a GtkMenuItem sets a #GtkAccelLabel as its child.
+  GtkMenuItem has direct functions to set the label and its mnemonic.
+  For more advanced label settings, you can fetch the child widget from the GtkBin.
+  
+  An example for setting markup and accelerator on a MenuItem:
+  
+  ```c
+  GtkWidget *menu_item = gtk_menu_item_new_with_label ("Example Menu Item");
+  
+  GtkWidget *child = gtk_bin_get_child (GTK_BIN (menu_item));
+  gtk_label_set_markup (GTK_LABEL (child), "<i>new label</i> with <b>markup</b>");
+  gtk_accel_label_set_accel (GTK_ACCEL_LABEL (child), GDK_KEY_1, 0);
+  ```
+  
+  # GtkMenuItem as GtkBuildable
+  
+  The GtkMenuItem implementation of the #GtkBuildable interface supports
+  adding a submenu by specifying “submenu” as the “type” attribute of
+  a `<child>` element.
+  
+  An example of UI definition fragment with submenus:
+  
+  ```xml
+  <object class="GtkMenuItem">
+    <child type="submenu">
+      <object class="GtkMenu"/>
+    </child>
+  </object>
+  ```
+  
+  # CSS nodes
+  
+  ```plain
+  menuitem
+  ├── <child>
+  ╰── [arrow.right]
+  ```
+  
+  GtkMenuItem has a single CSS node with name menuitem. If the menuitem
+  has a submenu, it gets another CSS node with name arrow, which has
+  the .left or .right style class.
+*/
 class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatable
 {
 
@@ -79,9 +91,9 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   mixin ActivatableT!();
 
   /**
-   * Creates a new #GtkMenuItem.
-   * Returns: the newly created #GtkMenuItem
-   */
+      Creates a new #GtkMenuItem.
+    Returns:     the newly created #GtkMenuItem
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -90,11 +102,11 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /**
-   * Creates a new #GtkMenuItem whose child is a #GtkLabel.
-   * Params:
-   *   label = the text for the label
-   * Returns: the newly created #GtkMenuItem
-   */
+      Creates a new #GtkMenuItem whose child is a #GtkLabel.
+    Params:
+      label =       the text for the label
+    Returns:     the newly created #GtkMenuItem
+  */
   static gtk.menu_item.MenuItem newWithLabel(string label)
   {
     GtkWidget* _cretval;
@@ -105,14 +117,15 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /**
-   * Creates a new #GtkMenuItem containing a label.
-   * The label will be created using [gtk.label.Label.newWithMnemonic],
-   * so underscores in label indicate the mnemonic for the menu item.
-   * Params:
-   *   label = The text of the button, with an underscore in front of the
-   *     mnemonic character
-   * Returns: a new #GtkMenuItem
-   */
+      Creates a new #GtkMenuItem containing a label.
+    
+    The label will be created using [gtk.label.Label.newWithMnemonic],
+    so underscores in label indicate the mnemonic for the menu item.
+    Params:
+      label =       The text of the button, with an underscore in front of the
+            mnemonic character
+    Returns:     a new #GtkMenuItem
+  */
   static gtk.menu_item.MenuItem newWithMnemonic(string label)
   {
     GtkWidget* _cretval;
@@ -125,27 +138,28 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   alias activate = gtk.widget.Widget.activate;
 
   /**
-   * Emits the #GtkMenuItem::activate signal on the given item
-   */
+      Emits the #GtkMenuItem::activate signal on the given item
+  */
   void activate()
   {
     gtk_menu_item_activate(cast(GtkMenuItem*)cPtr);
   }
 
   /**
-   * Emits the #GtkMenuItem::deselect signal on the given item.
-   */
+      Emits the #GtkMenuItem::deselect signal on the given item.
+  */
   void deselect()
   {
     gtk_menu_item_deselect(cast(GtkMenuItem*)cPtr);
   }
 
   /**
-   * Retrieve the accelerator path that was previously set on menu_item.
-   * See [gtk.menu_item.MenuItem.setAccelPath] for details.
-   * Returns: the accelerator path corresponding to
-   *   this menu item’s functionality, or %NULL if not set
-   */
+      Retrieve the accelerator path that was previously set on menu_item.
+    
+    See [gtk.menu_item.MenuItem.setAccelPath] for details.
+    Returns:     the accelerator path corresponding to
+          this menu item’s functionality, or null if not set
+  */
   string getAccelPath()
   {
     const(char)* _cretval;
@@ -155,10 +169,10 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /**
-   * Sets text on the menu_item label
-   * Returns: The text in the menu_item label. This is the internal
-   *   string used by the label, and must not be modified.
-   */
+      Sets text on the menu_item label
+    Returns:     The text in the menu_item label. This is the internal
+        string used by the label, and must not be modified.
+  */
   string getLabel()
   {
     const(char)* _cretval;
@@ -168,12 +182,12 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /**
-   * Returns whether the menu_item reserves space for
-   * the submenu indicator, regardless if it has a submenu
-   * or not.
-   * Returns: %TRUE if menu_item always reserves space for the
-   *   submenu indicator
-   */
+      Returns whether the menu_item reserves space for
+    the submenu indicator, regardless if it has a submenu
+    or not.
+    Returns:     true if menu_item always reserves space for the
+          submenu indicator
+  */
   bool getReserveIndicator()
   {
     bool _retval;
@@ -182,13 +196,13 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /**
-   * Gets whether the menu item appears justified at the right
-   * side of the menu bar.
-   * Returns: %TRUE if the menu item will appear at the
-   *   far right if added to a menu bar.
-
-   * Deprecated: See [gtk.menu_item.MenuItem.setRightJustified]
-   */
+      Gets whether the menu item appears justified at the right
+    side of the menu bar.
+    Returns:     true if the menu item will appear at the
+        far right if added to a menu bar.
+  
+    Deprecated:     See [gtk.menu_item.MenuItem.setRightJustified]
+  */
   bool getRightJustified()
   {
     bool _retval;
@@ -197,10 +211,10 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /**
-   * Gets the submenu underneath this menu item, if any.
-   * See [gtk.menu_item.MenuItem.setSubmenu].
-   * Returns: submenu for this menu item, or %NULL if none
-   */
+      Gets the submenu underneath this menu item, if any.
+    See [gtk.menu_item.MenuItem.setSubmenu].
+    Returns:     submenu for this menu item, or null if none
+  */
   gtk.widget.Widget getSubmenu()
   {
     GtkWidget* _cretval;
@@ -210,11 +224,11 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /**
-   * Checks if an underline in the text indicates the next character
-   * should be used for the mnemonic accelerator key.
-   * Returns: %TRUE if an embedded underline in the label
-   *   indicates the mnemonic accelerator key.
-   */
+      Checks if an underline in the text indicates the next character
+    should be used for the mnemonic accelerator key.
+    Returns:     true if an embedded underline in the label
+          indicates the mnemonic accelerator key.
+  */
   bool getUseUnderline()
   {
     bool _retval;
@@ -223,8 +237,8 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /**
-   * Emits the #GtkMenuItem::select signal on the given item.
-   */
+      Emits the #GtkMenuItem::select signal on the given item.
+  */
   void select()
   {
     gtk_menu_item_select(cast(GtkMenuItem*)cPtr);
@@ -233,26 +247,29 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   alias setAccelPath = gtk.widget.Widget.setAccelPath;
 
   /**
-   * Set the accelerator path on menu_item, through which runtime
-   * changes of the menu item’s accelerator caused by the user can be
-   * identified and saved to persistent storage $(LPAREN)see [gtk.accel_map.AccelMap.save]
-   * on this$(RPAREN). To set up a default accelerator for this menu item, call
-   * [gtk.accel_map.AccelMap.addEntry] with the same accel_path. See also
-   * [gtk.accel_map.AccelMap.addEntry] on the specifics of accelerator paths,
-   * and [gtk.menu.Menu.setAccelPath] for a more convenient variant of
-   * this function.
-   * This function is basically a convenience wrapper that handles
-   * calling [gtk.widget.Widget.setAccelPath] with the appropriate accelerator
-   * group for the menu item.
-   * Note that you do need to set an accelerator on the parent menu with
-   * [gtk.menu.Menu.setAccelGroup] for this to work.
-   * Note that accel_path string will be stored in a #GQuark.
-   * Therefore, if you pass a static string, you can save some memory
-   * by interning it first with [glib.global.internStaticString].
-   * Params:
-   *   accelPath = accelerator path, corresponding to this menu
-   *     item’s functionality, or %NULL to unset the current path.
-   */
+      Set the accelerator path on menu_item, through which runtime
+    changes of the menu item’s accelerator caused by the user can be
+    identified and saved to persistent storage (see [gtk.accel_map.AccelMap.save]
+    on this). To set up a default accelerator for this menu item, call
+    [gtk.accel_map.AccelMap.addEntry] with the same accel_path. See also
+    [gtk.accel_map.AccelMap.addEntry] on the specifics of accelerator paths,
+    and [gtk.menu.Menu.setAccelPath] for a more convenient variant of
+    this function.
+    
+    This function is basically a convenience wrapper that handles
+    calling [gtk.widget.Widget.setAccelPath] with the appropriate accelerator
+    group for the menu item.
+    
+    Note that you do need to set an accelerator on the parent menu with
+    [gtk.menu.Menu.setAccelGroup] for this to work.
+    
+    Note that accel_path string will be stored in a #GQuark.
+    Therefore, if you pass a static string, you can save some memory
+    by interning it first with [glib.global.internStaticString].
+    Params:
+      accelPath =       accelerator path, corresponding to this menu
+            item’s functionality, or null to unset the current path.
+  */
   void setAccelPath(string accelPath = null)
   {
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
@@ -260,10 +277,10 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /**
-   * Sets text on the menu_item label
-   * Params:
-   *   label = the text you want to set
-   */
+      Sets text on the menu_item label
+    Params:
+      label =       the text you want to set
+  */
   void setLabel(string label)
   {
     const(char)* _label = label.toCString(No.Alloc);
@@ -271,93 +288,100 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /**
-   * Sets whether the menu_item should reserve space for
-   * the submenu indicator, regardless if it actually has
-   * a submenu or not.
-   * There should be little need for applications to call
-   * this functions.
-   * Params:
-   *   reserve = the new value
-   */
+      Sets whether the menu_item should reserve space for
+    the submenu indicator, regardless if it actually has
+    a submenu or not.
+    
+    There should be little need for applications to call
+    this functions.
+    Params:
+      reserve =       the new value
+  */
   void setReserveIndicator(bool reserve)
   {
     gtk_menu_item_set_reserve_indicator(cast(GtkMenuItem*)cPtr, reserve);
   }
 
   /**
-   * Sets whether the menu item appears justified at the right
-   * side of a menu bar. This was traditionally done for “Help”
-   * menu items, but is now considered a bad idea. $(LPAREN)If the widget
-   * layout is reversed for a right-to-left language like Hebrew
-   * or Arabic, right-justified-menu-items appear at the left.$(RPAREN)
-   * Params:
-   *   rightJustified = if %TRUE the menu item will appear at the
-   *     far right if added to a menu bar
-
-   * Deprecated: If you insist on using it, use
-   *   [gtk.widget.Widget.setHexpand] and [gtk.widget.Widget.setHalign].
-   */
+      Sets whether the menu item appears justified at the right
+    side of a menu bar. This was traditionally done for “Help”
+    menu items, but is now considered a bad idea. (If the widget
+    layout is reversed for a right-to-left language like Hebrew
+    or Arabic, right-justified-menu-items appear at the left.)
+    Params:
+      rightJustified =       if true the menu item will appear at the
+          far right if added to a menu bar
+  
+    Deprecated:     If you insist on using it, use
+        [gtk.widget.Widget.setHexpand] and [gtk.widget.Widget.setHalign].
+  */
   void setRightJustified(bool rightJustified)
   {
     gtk_menu_item_set_right_justified(cast(GtkMenuItem*)cPtr, rightJustified);
   }
 
   /**
-   * Sets or replaces the menu item’s submenu, or removes it when a %NULL
-   * submenu is passed.
-   * Params:
-   *   submenu = the submenu, or %NULL
-   */
+      Sets or replaces the menu item’s submenu, or removes it when a null
+    submenu is passed.
+    Params:
+      submenu =       the submenu, or null
+  */
   void setSubmenu(gtk.menu.Menu submenu = null)
   {
     gtk_menu_item_set_submenu(cast(GtkMenuItem*)cPtr, submenu ? cast(GtkWidget*)submenu.cPtr(No.Dup) : null);
   }
 
   /**
-   * If true, an underline in the text indicates the next character
-   * should be used for the mnemonic accelerator key.
-   * Params:
-   *   setting = %TRUE if underlines in the text indicate mnemonics
-   */
+      If true, an underline in the text indicates the next character
+    should be used for the mnemonic accelerator key.
+    Params:
+      setting =       true if underlines in the text indicate mnemonics
+  */
   void setUseUnderline(bool setting)
   {
     gtk_menu_item_set_use_underline(cast(GtkMenuItem*)cPtr, setting);
   }
 
   /**
-   * Emits the #GtkMenuItem::toggle-size-allocate signal on the given item.
-   * Params:
-   *   allocation = the allocation to use as signal data.
-   */
+      Emits the #GtkMenuItem::toggle-size-allocate signal on the given item.
+    Params:
+      allocation =       the allocation to use as signal data.
+  */
   void toggleSizeAllocate(int allocation)
   {
     gtk_menu_item_toggle_size_allocate(cast(GtkMenuItem*)cPtr, allocation);
   }
 
   /**
-   * Emits the #GtkMenuItem::toggle-size-request signal on the given item.
-   * Params:
-   *   requisition = the requisition to use as signal data.
-   */
+      Emits the #GtkMenuItem::toggle-size-request signal on the given item.
+    Params:
+      requisition =       the requisition to use as signal data.
+  */
   void toggleSizeRequest(ref int requisition)
   {
     gtk_menu_item_toggle_size_request(cast(GtkMenuItem*)cPtr, cast(int*)&requisition);
   }
 
   /**
-   * Emitted when the item is activated.
-   *   menuItem = the instance the signal is connected to
-   */
+      Emitted when the item is activated.
+  
+    ## Parameters
+    $(LIST
+      * $(B menuItem) the instance the signal is connected to
+    )
+  */
   alias ActivateCallbackDlg = void delegate(gtk.menu_item.MenuItem menuItem);
+
+  /** ditto */
   alias ActivateCallbackFunc = void function(gtk.menu_item.MenuItem menuItem);
 
   /**
-   * Connect to Activate signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Activate signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
@@ -374,21 +398,27 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /**
-   * Emitted when the item is activated, but also if the menu item has a
-   * submenu. For normal applications, the relevant signal is
-   * #GtkMenuItem::activate.
-   *   menuItem = the instance the signal is connected to
-   */
+      Emitted when the item is activated, but also if the menu item has a
+    submenu. For normal applications, the relevant signal is
+    #GtkMenuItem::activate.
+  
+    ## Parameters
+    $(LIST
+      * $(B menuItem) the instance the signal is connected to
+    )
+  */
   alias ActivateItemCallbackDlg = void delegate(gtk.menu_item.MenuItem menuItem);
+
+  /** ditto */
   alias ActivateItemCallbackFunc = void function(gtk.menu_item.MenuItem menuItem);
 
   /**
-   * Connect to ActivateItem signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ActivateItem signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectActivateItem(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateItemCallbackDlg) || is(T : ActivateItemCallbackFunc))
   {
@@ -404,16 +434,19 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     return connectSignalClosure("activate-item", closure, after);
   }
 
+  /** */
   alias DeselectCallbackDlg = void delegate(gtk.menu_item.MenuItem menuItem);
+
+  /** ditto */
   alias DeselectCallbackFunc = void function(gtk.menu_item.MenuItem menuItem);
 
   /**
-   * Connect to Deselect signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Deselect signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectDeselect(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DeselectCallbackDlg) || is(T : DeselectCallbackFunc))
   {
@@ -429,16 +462,19 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     return connectSignalClosure("deselect", closure, after);
   }
 
+  /** */
   alias SelectCallbackDlg = void delegate(gtk.menu_item.MenuItem menuItem);
+
+  /** ditto */
   alias SelectCallbackFunc = void function(gtk.menu_item.MenuItem menuItem);
 
   /**
-   * Connect to Select signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Select signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectSelect(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SelectCallbackDlg) || is(T : SelectCallbackFunc))
   {
@@ -454,16 +490,19 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     return connectSignalClosure("select", closure, after);
   }
 
+  /** */
   alias ToggleSizeAllocateCallbackDlg = void delegate(int object, gtk.menu_item.MenuItem menuItem);
+
+  /** ditto */
   alias ToggleSizeAllocateCallbackFunc = void function(int object, gtk.menu_item.MenuItem menuItem);
 
   /**
-   * Connect to ToggleSizeAllocate signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ToggleSizeAllocate signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectToggleSizeAllocate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToggleSizeAllocateCallbackDlg) || is(T : ToggleSizeAllocateCallbackFunc))
   {
@@ -480,16 +519,19 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     return connectSignalClosure("toggle-size-allocate", closure, after);
   }
 
+  /** */
   alias ToggleSizeRequestCallbackDlg = void delegate(void* object, gtk.menu_item.MenuItem menuItem);
+
+  /** ditto */
   alias ToggleSizeRequestCallbackFunc = void function(void* object, gtk.menu_item.MenuItem menuItem);
 
   /**
-   * Connect to ToggleSizeRequest signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ToggleSizeRequest signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectToggleSizeRequest(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToggleSizeRequestCallbackDlg) || is(T : ToggleSizeRequestCallbackFunc))
   {

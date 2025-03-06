@@ -6,10 +6,10 @@ import glib.c.types;
 import glib.types;
 
 /**
- * Specifies the #GScanner parser configuration. Most settings can
- * be changed during the parsing phase and will affect the lexical
- * parsing of the next unpeeked token.
- */
+    Specifies the #GScanner parser configuration. Most settings can
+  be changed during the parsing phase and will affect the lexical
+  parsing of the next unpeeked token.
+*/
 class ScannerConfig
 {
   GScannerConfig cInstance;

@@ -10,6 +10,7 @@ import arrowdataset.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitioning
 {
 
@@ -29,6 +30,7 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
     return getType();
   }
 
+  /** */
   this(arrow.schema.Schema schema, arrow.array.Array[] dictionaries = null, arrowdataset.hive_partitioning_options.HivePartitioningOptions options = null)
   {
     GADatasetHivePartitioning* _cretval;
@@ -41,6 +43,7 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
     this(_cretval, Yes.Take);
   }
 
+  /** */
   string getNullFallback()
   {
     char* _cretval;

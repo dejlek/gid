@@ -14,6 +14,7 @@ import gtk.c.types;
 import gtk.renderer_cell_accessible;
 import gtk.types;
 
+/** */
 class ImageCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessible, atk.image.Image
 {
 

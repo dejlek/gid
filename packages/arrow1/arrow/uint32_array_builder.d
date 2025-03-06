@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class UInt32ArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
@@ -26,6 +27,7 @@ class UInt32ArrayBuilder : arrow.array_builder.ArrayBuilder
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowUInt32ArrayBuilder* _cretval;
@@ -33,6 +35,7 @@ class UInt32ArrayBuilder : arrow.array_builder.ArrayBuilder
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool append(uint value)
   {
     bool _retval;
@@ -43,6 +46,7 @@ class UInt32ArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   bool appendValue(uint value)
   {
     bool _retval;
@@ -54,16 +58,16 @@ class UInt32ArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-   * Append multiple values at once. It's more efficient than multiple
-   * `append` and `append_null` calls.
-   * Params:
-   *   values = The array of uint32.
-   *   isValids = The array of
-   *     boolean that shows whether the Nth value is valid or not. If the
-   *     Nth `is_valids` is %TRUE, the Nth `values` is valid value. Otherwise
-   *     the Nth value is null value.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append multiple values at once. It's more efficient than multiple
+    `append` and `append_null` calls.
+    Params:
+      values =       The array of uint32.
+      isValids =       The array of
+          boolean that shows whether the Nth value is valid or not. If the
+          Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
+          the Nth value is null value.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendValues(uint[] values, bool[] isValids = null)
   {
     bool _retval;

@@ -9,9 +9,9 @@ import gobject.boxed;
 import gobject.types;
 
 /**
- * A `GdkContentFormatsBuilder` is an auxiliary struct used to create
- * new `GdkContentFormats`, and should not be kept around.
- */
+    A [gdk.content_formats_builder.ContentFormatsBuilder] is an auxiliary struct used to create
+  new [gdk.content_formats.ContentFormats], and should not be kept around.
+*/
 class ContentFormatsBuilder : gobject.boxed.Boxed
 {
 
@@ -37,11 +37,12 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
   }
 
   /**
-   * Create a new `GdkContentFormatsBuilder` object.
-   * The resulting builder would create an empty `GdkContentFormats`.
-   * Use addition functions to add types to it.
-   * Returns: a new `GdkContentFormatsBuilder`
-   */
+      Create a new [gdk.content_formats_builder.ContentFormatsBuilder] object.
+    
+    The resulting builder would create an empty [gdk.content_formats.ContentFormats].
+    Use addition functions to add types to it.
+    Returns:     a new [gdk.content_formats_builder.ContentFormatsBuilder]
+  */
   this()
   {
     GdkContentFormatsBuilder* _cretval;
@@ -50,31 +51,31 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
   }
 
   /**
-   * Appends all formats from formats to builder, skipping those that
-   * already exist.
-   * Params:
-   *   formats = the formats to add
-   */
+      Appends all formats from formats to builder, skipping those that
+    already exist.
+    Params:
+      formats =       the formats to add
+  */
   void addFormats(gdk.content_formats.ContentFormats formats)
   {
     gdk_content_formats_builder_add_formats(cast(GdkContentFormatsBuilder*)cPtr, formats ? cast(const(GdkContentFormats)*)formats.cPtr(No.Dup) : null);
   }
 
   /**
-   * Appends type to builder if it has not already been added.
-   * Params:
-   *   type = a `GType`
-   */
+      Appends type to builder if it has not already been added.
+    Params:
+      type =       a [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]
+  */
   void addGtype(gobject.types.GType type)
   {
     gdk_content_formats_builder_add_gtype(cast(GdkContentFormatsBuilder*)cPtr, type);
   }
 
   /**
-   * Appends mime_type to builder if it has not already been added.
-   * Params:
-   *   mimeType = a mime type
-   */
+      Appends mime_type to builder if it has not already been added.
+    Params:
+      mimeType =       a mime type
+  */
   void addMimeType(string mimeType)
   {
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
@@ -82,14 +83,16 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a new `GdkContentFormats` from the given builder.
-   * The given `GdkContentFormatsBuilder` is reset once this function returns;
-   * you cannot call this function multiple times on the same builder instance.
-   * This function is intended primarily for bindings. C code should use
-   * [gdk.content_formats_builder.ContentFormatsBuilder.freeToFormats].
-   * Returns: the newly created `GdkContentFormats`
-   *   with all the formats added to builder
-   */
+      Creates a new [gdk.content_formats.ContentFormats] from the given builder.
+    
+    The given [gdk.content_formats_builder.ContentFormatsBuilder] is reset once this function returns;
+    you cannot call this function multiple times on the same builder instance.
+    
+    This function is intended primarily for bindings. C code should use
+    [gdk.content_formats_builder.ContentFormatsBuilder.freeToFormats].
+    Returns:     the newly created [gdk.content_formats.ContentFormats]
+        with all the formats added to builder
+  */
   gdk.content_formats.ContentFormats toFormats()
   {
     GdkContentFormats* _cretval;

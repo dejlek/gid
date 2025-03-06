@@ -10,14 +10,16 @@ import gtk.paper_size;
 import gtk.types;
 
 /**
- * A `GtkPrinter` object represents a printer.
- * You only need to deal directly with printers if you use the
- * non-portable [gtk.print_unix_dialog.PrintUnixDialog] API.
- * A `GtkPrinter` allows to get status information about the printer,
- * such as its description, its location, the number of queued jobs,
- * etc. Most importantly, a `GtkPrinter` object can be used to create
- * a [gtk.print_job.PrintJob] object, which lets you print to the printer.
- */
+    A [gtk.printer.Printer] object represents a printer.
+  
+  You only need to deal directly with printers if you use the
+  non-portable [gtk.print_unix_dialog.PrintUnixDialog] API.
+  
+  A [gtk.printer.Printer] allows to get status information about the printer,
+  such as its description, its location, the number of queued jobs,
+  etc. Most importantly, a [gtk.printer.Printer] object can be used to create
+  a [gtk.print_job.PrintJob] object, which lets you print to the printer.
+*/
 class Printer : gobject.object.ObjectG
 {
 
@@ -38,13 +40,13 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new `GtkPrinter`.
-   * Params:
-   *   name = the name of the printer
-   *   backend = a `GtkPrintBackend`
-   *   virtual = whether the printer is virtual
-   * Returns: a new `GtkPrinter`
-   */
+      Creates a new [gtk.printer.Printer].
+    Params:
+      name =       the name of the printer
+      backend =       a [gtk.types.PrintBackend]
+      virtual =       whether the printer is virtual
+    Returns:     a new [gtk.printer.Printer]
+  */
   this(string name, gtk.types.PrintBackend backend, bool virtual)
   {
     GtkPrinter* _cretval;
@@ -54,10 +56,10 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the printer accepts input in
-   * PDF format.
-   * Returns: %TRUE if printer accepts PDF
-   */
+      Returns whether the printer accepts input in
+    PDF format.
+    Returns:     true if printer accepts PDF
+  */
   bool acceptsPdf()
   {
     bool _retval;
@@ -66,10 +68,10 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the printer accepts input in
-   * PostScript format.
-   * Returns: %TRUE if printer accepts PostScript
-   */
+      Returns whether the printer accepts input in
+    PostScript format.
+    Returns:     true if printer accepts PostScript
+  */
   bool acceptsPs()
   {
     bool _retval;
@@ -78,12 +80,12 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Compares two printers.
-   * Params:
-   *   b = another `GtkPrinter`
-   * Returns: 0 if the printer match, a negative value if a < b,
-   *   or a positive value if a > b
-   */
+      Compares two printers.
+    Params:
+      b =       another [gtk.printer.Printer]
+    Returns:     0 if the printer match, a negative value if a < b,
+        or a positive value if a > b
+  */
   int compare(gtk.printer.Printer b)
   {
     int _retval;
@@ -92,9 +94,9 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Returns the backend of the printer.
-   * Returns: the backend of printer
-   */
+      Returns the backend of the printer.
+    Returns:     the backend of printer
+  */
   gtk.types.PrintBackend getBackend()
   {
     auto _retval = gtk_printer_get_backend(cast(GtkPrinter*)cPtr);
@@ -102,15 +104,17 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Returns the printer’s capabilities.
-   * This is useful when you’re using `GtkPrintUnixDialog`’s
-   * manual-capabilities setting and need to know which settings
-   * the printer can handle and which you must handle yourself.
-   * This will return 0 unless the printer’s details are
-   * available, see [gtk.printer.Printer.hasDetails] and
-   * [gtk.printer.Printer.requestDetails].
-   * Returns: the printer’s capabilities
-   */
+      Returns the printer’s capabilities.
+    
+    This is useful when you’re using [gtk.print_unix_dialog.PrintUnixDialog]’s
+    manual-capabilities setting and need to know which settings
+    the printer can handle and which you must handle yourself.
+    
+    This will return 0 unless the printer’s details are
+    available, see [gtk.printer.Printer.hasDetails] and
+    [gtk.printer.Printer.requestDetails].
+    Returns:     the printer’s capabilities
+  */
   gtk.types.PrintCapabilities getCapabilities()
   {
     GtkPrintCapabilities _cretval;
@@ -120,10 +124,10 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Returns default page size of printer.
-   * Returns: a newly allocated `GtkPageSetup` with default page size
-   *   of the printer.
-   */
+      Returns default page size of printer.
+    Returns:     a newly allocated [gtk.page_setup.PageSetup] with default page size
+        of the printer.
+  */
   gtk.page_setup.PageSetup getDefaultPageSize()
   {
     GtkPageSetup* _cretval;
@@ -133,9 +137,9 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Gets the description of the printer.
-   * Returns: the description of printer
-   */
+      Gets the description of the printer.
+    Returns:     the description of printer
+  */
   string getDescription()
   {
     const(char)* _cretval;
@@ -145,19 +149,21 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Retrieve the hard margins of printer.
-   * These are the margins that define the area at the borders
-   * of the paper that the printer cannot print to.
-   * Note: This will not succeed unless the printer’s details are
-   * available, see [gtk.printer.Printer.hasDetails] and
-   * [gtk.printer.Printer.requestDetails].
-   * Params:
-   *   top = a location to store the top margin in
-   *   bottom = a location to store the bottom margin in
-   *   left = a location to store the left margin in
-   *   right = a location to store the right margin in
-   * Returns: %TRUE iff the hard margins were retrieved
-   */
+      Retrieve the hard margins of printer.
+    
+    These are the margins that define the area at the borders
+    of the paper that the printer cannot print to.
+    
+    Note: This will not succeed unless the printer’s details are
+    available, see [gtk.printer.Printer.hasDetails] and
+    [gtk.printer.Printer.requestDetails].
+    Params:
+      top =       a location to store the top margin in
+      bottom =       a location to store the bottom margin in
+      left =       a location to store the left margin in
+      right =       a location to store the right margin in
+    Returns:     true iff the hard margins were retrieved
+  */
   bool getHardMargins(out double top, out double bottom, out double left, out double right)
   {
     bool _retval;
@@ -166,20 +172,22 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Retrieve the hard margins of printer for paper_size.
-   * These are the margins that define the area at the borders
-   * of the paper that the printer cannot print to.
-   * Note: This will not succeed unless the printer’s details are
-   * available, see [gtk.printer.Printer.hasDetails] and
-   * [gtk.printer.Printer.requestDetails].
-   * Params:
-   *   paperSize = a `GtkPaperSize`
-   *   top = a location to store the top margin in
-   *   bottom = a location to store the bottom margin in
-   *   left = a location to store the left margin in
-   *   right = a location to store the right margin in
-   * Returns: %TRUE iff the hard margins were retrieved
-   */
+      Retrieve the hard margins of printer for paper_size.
+    
+    These are the margins that define the area at the borders
+    of the paper that the printer cannot print to.
+    
+    Note: This will not succeed unless the printer’s details are
+    available, see [gtk.printer.Printer.hasDetails] and
+    [gtk.printer.Printer.requestDetails].
+    Params:
+      paperSize =       a [gtk.paper_size.PaperSize]
+      top =       a location to store the top margin in
+      bottom =       a location to store the bottom margin in
+      left =       a location to store the left margin in
+      right =       a location to store the right margin in
+    Returns:     true iff the hard margins were retrieved
+  */
   bool getHardMarginsForPaperSize(gtk.paper_size.PaperSize paperSize, out double top, out double bottom, out double left, out double right)
   {
     bool _retval;
@@ -188,9 +196,9 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Gets the name of the icon to use for the printer.
-   * Returns: the icon name for printer
-   */
+      Gets the name of the icon to use for the printer.
+    Returns:     the icon name for printer
+  */
   string getIconName()
   {
     const(char)* _cretval;
@@ -200,9 +208,9 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Gets the number of jobs currently queued on the printer.
-   * Returns: the number of jobs on printer
-   */
+      Gets the number of jobs currently queued on the printer.
+    Returns:     the number of jobs on printer
+  */
   int getJobCount()
   {
     int _retval;
@@ -211,9 +219,9 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Returns a description of the location of the printer.
-   * Returns: the location of printer
-   */
+      Returns a description of the location of the printer.
+    Returns:     the location of printer
+  */
   string getLocation()
   {
     const(char)* _cretval;
@@ -223,9 +231,9 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Returns the name of the printer.
-   * Returns: the name of printer
-   */
+      Returns the name of the printer.
+    Returns:     the name of printer
+  */
   string getName()
   {
     const(char)* _cretval;
@@ -235,10 +243,10 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Returns the state message describing the current state
-   * of the printer.
-   * Returns: the state message of printer
-   */
+      Returns the state message describing the current state
+    of the printer.
+    Returns:     the state message of printer
+  */
   string getStateMessage()
   {
     const(char)* _cretval;
@@ -248,9 +256,9 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the printer details are available.
-   * Returns: %TRUE if printer details are available
-   */
+      Returns whether the printer details are available.
+    Returns:     true if printer details are available
+  */
   bool hasDetails()
   {
     bool _retval;
@@ -259,9 +267,9 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the printer is accepting jobs
-   * Returns: %TRUE if printer is accepting jobs
-   */
+      Returns whether the printer is accepting jobs
+    Returns:     true if printer is accepting jobs
+  */
   bool isAcceptingJobs()
   {
     bool _retval;
@@ -270,10 +278,10 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the printer is currently active $(LPAREN)i.e.
-   * accepts new jobs$(RPAREN).
-   * Returns: %TRUE if printer is active
-   */
+      Returns whether the printer is currently active (i.e.
+    accepts new jobs).
+    Returns:     true if printer is active
+  */
   bool isActive()
   {
     bool _retval;
@@ -282,9 +290,9 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the printer is the default printer.
-   * Returns: %TRUE if printer is the default
-   */
+      Returns whether the printer is the default printer.
+    Returns:     true if printer is the default
+  */
   bool isDefault()
   {
     bool _retval;
@@ -293,11 +301,12 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the printer is currently paused.
-   * A paused printer still accepts jobs, but it is not
-   * printing them.
-   * Returns: %TRUE if printer is paused
-   */
+      Returns whether the printer is currently paused.
+    
+    A paused printer still accepts jobs, but it is not
+    printing them.
+    Returns:     true if printer is paused
+  */
   bool isPaused()
   {
     bool _retval;
@@ -306,11 +315,11 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the printer is virtual $(LPAREN)i.e. does not
-   * represent actual printer hardware, but something like
-   * a CUPS class$(RPAREN).
-   * Returns: %TRUE if printer is virtual
-   */
+      Returns whether the printer is virtual (i.e. does not
+    represent actual printer hardware, but something like
+    a CUPS class).
+    Returns:     true if printer is virtual
+  */
   bool isVirtual()
   {
     bool _retval;
@@ -319,13 +328,14 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Lists all the paper sizes printer supports.
-   * This will return and empty list unless the printer’s details
-   * are available, see [gtk.printer.Printer.hasDetails] and
-   * [gtk.printer.Printer.requestDetails].
-   * Returns: a newly
-   *   allocated list of newly allocated `GtkPageSetup`s.
-   */
+      Lists all the paper sizes printer supports.
+    
+    This will return and empty list unless the printer’s details
+    are available, see [gtk.printer.Printer.hasDetails] and
+    [gtk.printer.Printer.requestDetails].
+    Returns:     a newly
+        allocated list of newly allocated [gtk.page_setup.PageSetup]s.
+  */
   gtk.page_setup.PageSetup[] listPapers()
   {
     GList* _cretval;
@@ -335,35 +345,42 @@ class Printer : gobject.object.ObjectG
   }
 
   /**
-   * Requests the printer details.
-   * When the details are available, the
-   * signalGtk.Printer::details-acquired signal
-   * will be emitted on printer.
-   */
+      Requests the printer details.
+    
+    When the details are available, the
+    `signalGtk.Printer::details-acquired` signal
+    will be emitted on printer.
+  */
   void requestDetails()
   {
     gtk_printer_request_details(cast(GtkPrinter*)cPtr);
   }
 
   /**
-   * Emitted in response to a request for detailed information
-   * about a printer from the print backend.
-   * The success parameter indicates if the information was
-   * actually obtained.
-   * Params
-   *   success = %TRUE if the details were successfully acquired
-   *   printer = the instance the signal is connected to
-   */
+      Emitted in response to a request for detailed information
+    about a printer from the print backend.
+    
+    The success parameter indicates if the information was
+    actually obtained.
+  
+    ## Parameters
+    $(LIST
+      * $(B success)       true if the details were successfully acquired
+      * $(B printer) the instance the signal is connected to
+    )
+  */
   alias DetailsAcquiredCallbackDlg = void delegate(bool success, gtk.printer.Printer printer);
+
+  /** ditto */
   alias DetailsAcquiredCallbackFunc = void function(bool success, gtk.printer.Printer printer);
 
   /**
-   * Connect to DetailsAcquired signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to DetailsAcquired signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectDetailsAcquired(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DetailsAcquiredCallbackDlg) || is(T : DetailsAcquiredCallbackFunc))
   {

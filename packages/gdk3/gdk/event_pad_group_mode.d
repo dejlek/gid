@@ -8,8 +8,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Generated during %GDK_SOURCE_TABLET_PAD mode switches in a group.
- */
+    Generated during [gdk.types.InputSource.TabletPad] mode switches in a group.
+*/
 class EventPadGroupMode
 {
   GdkEventPadGroupMode cInstance;

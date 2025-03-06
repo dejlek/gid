@@ -8,8 +8,8 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node repeating its single child node.
- */
+    A render node repeating its single child node.
+*/
 class RepeatNode : gsk.render_node.RenderNode
 {
 
@@ -22,15 +22,15 @@ class RepeatNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Creates a `GskRenderNode` that will repeat the drawing of child across
-   * the given bounds.
-   * Params:
-   *   bounds = The bounds of the area to be painted
-   *   child = The child to repeat
-   *   childBounds = The area of the child to repeat or %NULL to
-   *     use the child's bounds
-   * Returns: A new `GskRenderNode`
-   */
+      Creates a [gsk.render_node.RenderNode] that will repeat the drawing of child across
+    the given bounds.
+    Params:
+      bounds =       The bounds of the area to be painted
+      child =       The child to repeat
+      childBounds =       The area of the child to repeat or null to
+            use the child's bounds
+    Returns:     A new [gsk.render_node.RenderNode]
+  */
   this(graphene.rect.Rect bounds, gsk.render_node.RenderNode child, graphene.rect.Rect childBounds = null)
   {
     GskRenderNode* _cretval;
@@ -39,9 +39,9 @@ class RepeatNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the child of node.
-   * Returns: a `GskRenderNode`
-   */
+      Retrieves the child of node.
+    Returns:     a [gsk.render_node.RenderNode]
+  */
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
@@ -51,9 +51,9 @@ class RepeatNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the bounding rectangle of the child of node.
-   * Returns: a bounding rectangle
-   */
+      Retrieves the bounding rectangle of the child of node.
+    Returns:     a bounding rectangle
+  */
   graphene.rect.Rect getChildBounds()
   {
     const(graphene_rect_t)* _cretval;

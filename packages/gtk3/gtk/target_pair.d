@@ -7,10 +7,10 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * A #GtkTargetPair is used to represent the same
- * information as a table of #GtkTargetEntry, but in
- * an efficient form.
- */
+    A #GtkTargetPair is used to represent the same
+  information as a table of #GtkTargetEntry, but in
+  an efficient form.
+*/
 class TargetPair
 {
   GtkTargetPair cInstance;

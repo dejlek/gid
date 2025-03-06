@@ -6,6 +6,7 @@ import arrowflight.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class ClientOptions : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class ClientOptions : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GAFlightClientOptions* _cretval;

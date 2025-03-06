@@ -7,16 +7,18 @@ import gobject.param_spec;
 import gobject.types;
 
 /**
- * A #GParamSpec derived structure that redirects operations to
- * other types of #GParamSpec.
- * All operations other than getting or setting the value are redirected,
- * including accessing the nick and blurb, validating a value, and so
- * forth.
- * See [gobject.param_spec.ParamSpec.getRedirectTarget] for retrieving the overridden
- * property. #GParamSpecOverride is used in implementing
- * [gobject.object_class.ObjectClass.overrideProperty], and will not be directly useful
- * unless you are implementing a new base type similar to GObject.
- */
+    A #GParamSpec derived structure that redirects operations to
+  other types of #GParamSpec.
+  
+  All operations other than getting or setting the value are redirected,
+  including accessing the nick and blurb, validating a value, and so
+  forth.
+  
+  See [gobject.param_spec.ParamSpec.getRedirectTarget] for retrieving the overridden
+  property. #GParamSpecOverride is used in implementing
+  [gobject.object_class.ObjectClass.overrideProperty], and will not be directly useful
+  unless you are implementing a new base type similar to GObject.
+*/
 class ParamSpecOverride : gobject.param_spec.ParamSpec
 {
 

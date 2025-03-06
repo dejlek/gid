@@ -12,6 +12,7 @@ import gtk.c.types;
 import gtk.check_menu_item_accessible;
 import gtk.types;
 
+/** */
 class RadioMenuItemAccessible : gtk.check_menu_item_accessible.CheckMenuItemAccessible
 {
 

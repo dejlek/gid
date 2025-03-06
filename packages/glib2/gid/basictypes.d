@@ -12,6 +12,7 @@ else
   alias gulong = ulong;
   alias glong = long;
 }
+/** */
 class basictypes
 {
 }

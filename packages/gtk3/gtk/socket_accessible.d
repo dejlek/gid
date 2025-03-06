@@ -8,6 +8,7 @@ import gtk.c.types;
 import gtk.container_accessible;
 import gtk.types;
 
+/** */
 class SocketAccessible : gtk.container_accessible.ContainerAccessible
 {
 
@@ -27,6 +28,7 @@ class SocketAccessible : gtk.container_accessible.ContainerAccessible
     return getType();
   }
 
+  /** */
   void embed(string path)
   {
     char* _path = path.toCString(No.Alloc);

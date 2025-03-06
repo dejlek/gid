@@ -10,6 +10,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class RecordBatchBuilder : gobject.object.ObjectG
 {
 
@@ -29,6 +30,7 @@ class RecordBatchBuilder : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrow.schema.Schema schema)
   {
     GArrowRecordBatchBuilder* _cretval;
@@ -39,6 +41,7 @@ class RecordBatchBuilder : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.record_batch.RecordBatch flush()
   {
     GArrowRecordBatch* _cretval;
@@ -50,6 +53,7 @@ class RecordBatchBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array_builder.ArrayBuilder getColumnBuilder(int i)
   {
     GArrowArrayBuilder* _cretval;
@@ -58,6 +62,7 @@ class RecordBatchBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array_builder.ArrayBuilder getField(int i)
   {
     GArrowArrayBuilder* _cretval;
@@ -66,6 +71,7 @@ class RecordBatchBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getInitialCapacity()
   {
     long _retval;
@@ -73,6 +79,7 @@ class RecordBatchBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   int getNColumns()
   {
     int _retval;
@@ -80,6 +87,7 @@ class RecordBatchBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   int getNFields()
   {
     int _retval;
@@ -87,6 +95,7 @@ class RecordBatchBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.schema.Schema getSchema()
   {
     GArrowSchema* _cretval;
@@ -95,6 +104,7 @@ class RecordBatchBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   void setInitialCapacity(long capacity)
   {
     garrow_record_batch_builder_set_initial_capacity(cast(GArrowRecordBatchBuilder*)cPtr, capacity);

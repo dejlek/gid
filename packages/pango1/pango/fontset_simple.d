@@ -9,11 +9,12 @@ import pango.language;
 import pango.types;
 
 /**
- * `PangoFontsetSimple` is a implementation of the abstract
- * `PangoFontset` base class as an array of fonts.
- * When creating a `PangoFontsetSimple`, you have to provide
- * the array of fonts that make up the fontset.
- */
+    [pango.fontset_simple.FontsetSimple] is a implementation of the abstract
+  [pango.fontset.Fontset] base class as an array of fonts.
+  
+  When creating a [pango.fontset_simple.FontsetSimple], you have to provide
+  the array of fonts that make up the fontset.
+*/
 class FontsetSimple : pango.fontset.Fontset
 {
 
@@ -34,11 +35,11 @@ class FontsetSimple : pango.fontset.Fontset
   }
 
   /**
-   * Creates a new `PangoFontsetSimple` for the given language.
-   * Params:
-   *   language = a `PangoLanguage` tag
-   * Returns: the newly allocated `PangoFontsetSimple`
-   */
+      Creates a new [pango.fontset_simple.FontsetSimple] for the given language.
+    Params:
+      language =       a [pango.language.Language] tag
+    Returns:     the newly allocated [pango.fontset_simple.FontsetSimple]
+  */
   this(pango.language.Language language)
   {
     PangoFontsetSimple* _cretval;
@@ -47,20 +48,21 @@ class FontsetSimple : pango.fontset.Fontset
   }
 
   /**
-   * Adds a font to the fontset.
-   * The fontset takes ownership of font.
-   * Params:
-   *   font = a `PangoFont`.
-   */
+      Adds a font to the fontset.
+    
+    The fontset takes ownership of font.
+    Params:
+      font =       a [pango.font.Font].
+  */
   void append(pango.font.Font font)
   {
     pango_fontset_simple_append(cast(PangoFontsetSimple*)cPtr, font ? cast(PangoFont*)font.cPtr(Yes.Dup) : null);
   }
 
   /**
-   * Returns the number of fonts in the fontset.
-   * Returns: the size of fontset
-   */
+      Returns the number of fonts in the fontset.
+    Returns:     the size of fontset
+  */
   int size()
   {
     int _retval;

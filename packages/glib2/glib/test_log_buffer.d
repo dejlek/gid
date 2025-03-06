@@ -5,6 +5,7 @@ import glib.c.functions;
 import glib.c.types;
 import glib.types;
 
+/** */
 class TestLogBuffer
 {
   GTestLogBuffer cInstance;
@@ -26,10 +27,10 @@ class TestLogBuffer
   }
 
   /**
-   * Internal function for gtester to decode test log messages, no ABI guarantees provided.
-   * Params:
-   *   bytes =
-   */
+      Internal function for gtester to decode test log messages, no ABI guarantees provided.
+    Params:
+      bytes = 
+  */
   void push(ubyte[] bytes)
   {
     uint _nBytes;

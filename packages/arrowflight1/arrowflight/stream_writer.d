@@ -7,6 +7,7 @@ import arrowflight.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
 {
 
@@ -26,6 +27,7 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
     return getType();
   }
 
+  /** */
   bool doneWriting()
   {
     bool _retval;

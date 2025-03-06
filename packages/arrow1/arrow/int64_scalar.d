@@ -6,6 +6,7 @@ import arrow.scalar;
 import arrow.types;
 import gid.gid;
 
+/** */
 class Int64Scalar : arrow.scalar.Scalar
 {
 
@@ -25,6 +26,7 @@ class Int64Scalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   this(long value)
   {
     GArrowInt64Scalar* _cretval;
@@ -32,6 +34,7 @@ class Int64Scalar : arrow.scalar.Scalar
     this(_cretval, Yes.Take);
   }
 
+  /** */
   long getValue()
   {
     long _retval;

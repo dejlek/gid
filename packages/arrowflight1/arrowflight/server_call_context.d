@@ -6,6 +6,7 @@ import arrowflight.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class ServerCallContext : gobject.object.ObjectG
 {
 
@@ -26,10 +27,10 @@ class ServerCallContext : gobject.object.ObjectG
   }
 
   /**
-   * Iterates over all incoming headers.
-   * Params:
-   *   func = The user's callback function.
-   */
+      Iterates over all incoming headers.
+    Params:
+      func =       The user's callback function.
+  */
   void foreachIncomingHeader(arrowflight.types.HeaderFunc func)
   {
     extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData)

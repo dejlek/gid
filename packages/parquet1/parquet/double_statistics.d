@@ -6,6 +6,7 @@ import parquet.c.types;
 import parquet.statistics;
 import parquet.types;
 
+/** */
 class DoubleStatistics : parquet.statistics.Statistics
 {
 
@@ -25,6 +26,7 @@ class DoubleStatistics : parquet.statistics.Statistics
     return getType();
   }
 
+  /** */
   double getMax()
   {
     double _retval;
@@ -32,6 +34,7 @@ class DoubleStatistics : parquet.statistics.Statistics
     return _retval;
   }
 
+  /** */
   double getMin()
   {
     double _retval;

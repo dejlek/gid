@@ -11,24 +11,29 @@ public import gtk.c.types;
 public import gtk.cell_accessible;
 public import gtk.types;
 
+/** */
 template CellAccessibleParentT()
 {
 
+  /** */
   override void activate(gtk.cell_accessible.CellAccessible cell)
   {
     gtk_cell_accessible_parent_activate(cast(GtkCellAccessibleParent*)cPtr, cell ? cast(GtkCellAccessible*)cell.cPtr(No.Dup) : null);
   }
 
+  /** */
   override void edit(gtk.cell_accessible.CellAccessible cell)
   {
     gtk_cell_accessible_parent_edit(cast(GtkCellAccessibleParent*)cPtr, cell ? cast(GtkCellAccessible*)cell.cPtr(No.Dup) : null);
   }
 
+  /** */
   override void expandCollapse(gtk.cell_accessible.CellAccessible cell)
   {
     gtk_cell_accessible_parent_expand_collapse(cast(GtkCellAccessibleParent*)cPtr, cell ? cast(GtkCellAccessible*)cell.cPtr(No.Dup) : null);
   }
 
+  /** */
   override void getCellArea(gtk.cell_accessible.CellAccessible cell, out gdk.rectangle.Rectangle cellRect)
   {
     GdkRectangle _cellRect;
@@ -36,16 +41,19 @@ template CellAccessibleParentT()
     cellRect = new gdk.rectangle.Rectangle(cast(void*)&_cellRect, No.Take);
   }
 
+  /** */
   override void getCellExtents(gtk.cell_accessible.CellAccessible cell, out int x, out int y, out int width, out int height, atk.types.CoordType coordType)
   {
     gtk_cell_accessible_parent_get_cell_extents(cast(GtkCellAccessibleParent*)cPtr, cell ? cast(GtkCellAccessible*)cell.cPtr(No.Dup) : null, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height, coordType);
   }
 
+  /** */
   override void getCellPosition(gtk.cell_accessible.CellAccessible cell, out int row, out int column)
   {
     gtk_cell_accessible_parent_get_cell_position(cast(GtkCellAccessibleParent*)cPtr, cell ? cast(GtkCellAccessible*)cell.cPtr(No.Dup) : null, cast(int*)&row, cast(int*)&column);
   }
 
+  /** */
   override int getChildIndex(gtk.cell_accessible.CellAccessible cell)
   {
     int _retval;
@@ -53,6 +61,7 @@ template CellAccessibleParentT()
     return _retval;
   }
 
+  /** */
   override atk.object.ObjectAtk[] getColumnHeaderCells(gtk.cell_accessible.CellAccessible cell)
   {
     GPtrArray* _cretval;
@@ -61,6 +70,7 @@ template CellAccessibleParentT()
     return _retval;
   }
 
+  /** */
   override gtk.types.CellRendererState getRendererState(gtk.cell_accessible.CellAccessible cell)
   {
     GtkCellRendererState _cretval;
@@ -69,6 +79,7 @@ template CellAccessibleParentT()
     return _retval;
   }
 
+  /** */
   override atk.object.ObjectAtk[] getRowHeaderCells(gtk.cell_accessible.CellAccessible cell)
   {
     GPtrArray* _cretval;
@@ -77,6 +88,7 @@ template CellAccessibleParentT()
     return _retval;
   }
 
+  /** */
   override bool grabFocus(gtk.cell_accessible.CellAccessible cell)
   {
     bool _retval;
@@ -84,6 +96,7 @@ template CellAccessibleParentT()
     return _retval;
   }
 
+  /** */
   override void updateRelationset(gtk.cell_accessible.CellAccessible cell, atk.relation_set.RelationSet relationset)
   {
     gtk_cell_accessible_parent_update_relationset(cast(GtkCellAccessibleParent*)cPtr, cell ? cast(GtkCellAccessible*)cell.cPtr(No.Dup) : null, relationset ? cast(AtkRelationSet*)relationset.cPtr(No.Dup) : null);

@@ -7,8 +7,8 @@ import gio.types;
 import gobject.boxed;
 
 /**
- * Information about an annotation.
- */
+    Information about an annotation.
+*/
 class DBusAnnotationInfo : gobject.boxed.Boxed
 {
 
@@ -71,13 +71,14 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
   }
 
   /**
-   * Looks up the value of an annotation.
-   * The cost of this function is O$(LPAREN)n$(RPAREN) in number of annotations.
-   * Params:
-   *   annotations = A %NULL-terminated array of annotations or %NULL.
-   *   name = The name of the annotation to look up.
-   * Returns: The value or %NULL if not found. Do not free, it is owned by annotations.
-   */
+      Looks up the value of an annotation.
+    
+    The cost of this function is O(n) in number of annotations.
+    Params:
+      annotations =       A null-terminated array of annotations or null.
+      name =       The name of the annotation to look up.
+    Returns:     The value or null if not found. Do not free, it is owned by annotations.
+  */
   static string lookup(gio.dbus_annotation_info.DBusAnnotationInfo[] annotations, string name)
   {
     const(char)* _cretval;

@@ -7,6 +7,7 @@ import gid.gid;
 import glib.bytes;
 import gobject.object;
 
+/** */
 class Ticket : gobject.object.ObjectG
 {
 
@@ -26,6 +27,7 @@ class Ticket : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(glib.bytes.Bytes data)
   {
     GAFlightTicket* _cretval;
@@ -33,6 +35,7 @@ class Ticket : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool equal(arrowflight.ticket.Ticket otherTicket)
   {
     bool _retval;

@@ -21,14 +21,16 @@ import gobject.dclosure;
 import gobject.object;
 
 /**
- * A `GdkSurface` is a rectangular region on the screen.
- * It’s a low-level object, used to implement high-level objects
- * such as [GtkWindow](../gtk4/class.Window.html).
- * The surfaces you see in practice are either [gdk.toplevel.Toplevel] or
- * [gdk.popup.Popup], and those interfaces provide much of the required
- * API to interact with these surfaces. Other, more specialized surface
- * types exist, but you will rarely interact with them directly.
- */
+    A [gdk.surface.Surface] is a rectangular region on the screen.
+  
+  It’s a low-level object, used to implement high-level objects
+  such as [GtkWindow](../gtk4/class.Window.html).
+  
+  The surfaces you see in practice are either [gdk.toplevel.Toplevel] or
+  [gdk.popup.Popup], and those interfaces provide much of the required
+  API to interact with these surfaces. Other, more specialized surface
+  types exist, but you will rarely interact with them directly.
+*/
 class Surface : gobject.object.ObjectG
 {
 
@@ -49,14 +51,15 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Create a new popup surface.
-   * The surface will be attached to parent and can be positioned
-   * relative to it using [gdk.popup.Popup.present].
-   * Params:
-   *   parent = the parent surface to attach the surface to
-   *   autohide = whether to hide the surface on outside clicks
-   * Returns: a new `GdkSurface`
-   */
+      Create a new popup surface.
+    
+    The surface will be attached to parent and can be positioned
+    relative to it using [gdk.popup.Popup.present].
+    Params:
+      parent =       the parent surface to attach the surface to
+      autohide =       whether to hide the surface on outside clicks
+    Returns:     a new [gdk.surface.Surface]
+  */
   static gdk.surface.Surface newPopup(gdk.surface.Surface parent, bool autohide)
   {
     GdkSurface* _cretval;
@@ -66,11 +69,11 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new toplevel surface.
-   * Params:
-   *   display = the display to create the surface on
-   * Returns: the new `GdkSurface`
-   */
+      Creates a new toplevel surface.
+    Params:
+      display =       the display to create the surface on
+    Returns:     the new [gdk.surface.Surface]
+  */
   static gdk.surface.Surface newToplevel(gdk.display.Display display)
   {
     GdkSurface* _cretval;
@@ -80,19 +83,20 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Emits a short beep associated to surface.
-   * If the display of surface does not support per-surface beeps,
-   * emits a short beep on the display just as [gdk.display.Display.beep].
-   */
+      Emits a short beep associated to surface.
+    
+    If the display of surface does not support per-surface beeps,
+    emits a short beep on the display just as [gdk.display.Display.beep].
+  */
   void beep()
   {
     gdk_surface_beep(cast(GdkSurface*)cPtr);
   }
 
   /**
-   * Creates a new `GdkCairoContext` for rendering on surface.
-   * Returns: the newly created `GdkCairoContext`
-   */
+      Creates a new [gdk.cairo_context.CairoContext] for rendering on surface.
+    Returns:     the newly created [gdk.cairo_context.CairoContext]
+  */
   gdk.cairo_context.CairoContext createCairoContext()
   {
     GdkCairoContext* _cretval;
@@ -102,13 +106,14 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Creates a new `GdkGLContext` for the `GdkSurface`.
-   * The context is disconnected from any particular surface or surface.
-   * If the creation of the `GdkGLContext` failed, error will be set.
-   * Before using the returned `GdkGLContext`, you will need to
-   * call [gdk.glcontext.GLContext.makeCurrent] or [gdk.glcontext.GLContext.realize].
-   * Returns: the newly created `GdkGLContext`
-   */
+      Creates a new [gdk.glcontext.GLContext] for the [gdk.surface.Surface].
+    
+    The context is disconnected from any particular surface or surface.
+    If the creation of the [gdk.glcontext.GLContext] failed, error will be set.
+    Before using the returned [gdk.glcontext.GLContext], you will need to
+    call [gdk.glcontext.GLContext.makeCurrent] or [gdk.glcontext.GLContext.realize].
+    Returns:     the newly created [gdk.glcontext.GLContext]
+  */
   gdk.glcontext.GLContext createGlContext()
   {
     GdkGLContext* _cretval;
@@ -121,28 +126,31 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Create a new Cairo surface that is as compatible as possible with the
-   * given surface.
-   * For example the new surface will have the same fallback resolution
-   * and font options as surface. Generally, the new surface will also
-   * use the same backend as surface, unless that is not possible for
-   * some reason. The type of the returned surface may be examined with
-   * [cairo.surface.Surface.getSurfaceType].
-   * Initially the surface contents are all 0 $(LPAREN)transparent if contents
-   * have transparency, black otherwise.$(RPAREN)
-   * This function always returns a valid pointer, but it will return a
-   * pointer to a “nil” surface if other is already in an error state
-   * or any other error occurs.
-   * Params:
-   *   content = the content for the new surface
-   *   width = width of the new surface
-   *   height = height of the new surface
-   * Returns: a pointer to the newly allocated surface. The caller
-   *   owns the surface and should call [cairo.surface.Surface.destroy] when done
-   *   with it.
-
-   * Deprecated: Create a suitable cairo image surface yourself
-   */
+      Create a new Cairo surface that is as compatible as possible with the
+    given surface.
+    
+    For example the new surface will have the same fallback resolution
+    and font options as surface. Generally, the new surface will also
+    use the same backend as surface, unless that is not possible for
+    some reason. The type of the returned surface may be examined with
+    [cairo.surface.Surface.getSurfaceType].
+    
+    Initially the surface contents are all 0 (transparent if contents
+    have transparency, black otherwise.)
+    
+    This function always returns a valid pointer, but it will return a
+    pointer to a “nil” surface if other is already in an error state
+    or any other error occurs.
+    Params:
+      content =       the content for the new surface
+      width =       width of the new surface
+      height =       height of the new surface
+    Returns:     a pointer to the newly allocated surface. The caller
+        owns the surface and should call [cairo.surface.Surface.destroy] when done
+        with it.
+  
+    Deprecated:     Create a suitable cairo image surface yourself
+  */
   cairo.surface.Surface createSimilarSurface(cairo.types.Content content, int width, int height)
   {
     cairo_surface_t* _cretval;
@@ -152,12 +160,12 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Sets an error and returns %NULL.
-   * Returns: %NULL
-
-   * Deprecated: GTK does not expose any Vulkan internals. This
-   *   function is a leftover that was accidentally exposed.
-   */
+      Sets an error and returns null.
+    Returns:     null
+  
+    Deprecated:     GTK does not expose any Vulkan internals. This
+        function is a leftover that was accidentally exposed.
+  */
   gdk.vulkan_context.VulkanContext createVulkanContext()
   {
     GdkVulkanContext* _cretval;
@@ -170,27 +178,31 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Destroys the window system resources associated with surface and
-   * decrements surface's reference count.
-   * The window system resources for all children of surface are also
-   * destroyed, but the children’s reference counts are not decremented.
-   * Note that a surface will not be destroyed automatically when its
-   * reference count reaches zero. You must call this function yourself
-   * before that happens.
-   */
+      Destroys the window system resources associated with surface and
+    decrements surface's reference count.
+    
+    The window system resources for all children of surface are also
+    destroyed, but the children’s reference counts are not decremented.
+    
+    Note that a surface will not be destroyed automatically when its
+    reference count reaches zero. You must call this function yourself
+    before that happens.
+  */
   void destroy()
   {
     gdk_surface_destroy(cast(GdkSurface*)cPtr);
   }
 
   /**
-   * Retrieves a `GdkCursor` pointer for the cursor currently set on the
-   * `GdkSurface`.
-   * If the return value is %NULL then there is no custom cursor set on
-   * the surface, and it is using the cursor for its parent surface.
-   * Use [gdk.surface.Surface.setCursor] to unset the cursor of the surface.
-   * Returns: a `GdkCursor`
-   */
+      Retrieves a [gdk.cursor.Cursor] pointer for the cursor currently set on the
+    [gdk.surface.Surface].
+    
+    If the return value is null then there is no custom cursor set on
+    the surface, and it is using the cursor for its parent surface.
+    
+    Use [gdk.surface.Surface.setCursor] to unset the cursor of the surface.
+    Returns:     a [gdk.cursor.Cursor]
+  */
   gdk.cursor.Cursor getCursor()
   {
     GdkCursor* _cretval;
@@ -200,15 +212,17 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Retrieves a `GdkCursor` pointer for the device currently set on the
-   * specified `GdkSurface`.
-   * If the return value is %NULL then there is no custom cursor set on the
-   * specified surface, and it is using the cursor for its parent surface.
-   * Use [gdk.surface.Surface.setCursor] to unset the cursor of the surface.
-   * Params:
-   *   device = a pointer `GdkDevice`
-   * Returns: a `GdkCursor`
-   */
+      Retrieves a [gdk.cursor.Cursor] pointer for the device currently set on the
+    specified [gdk.surface.Surface].
+    
+    If the return value is null then there is no custom cursor set on the
+    specified surface, and it is using the cursor for its parent surface.
+    
+    Use [gdk.surface.Surface.setCursor] to unset the cursor of the surface.
+    Params:
+      device =       a pointer [gdk.device.Device]
+    Returns:     a [gdk.cursor.Cursor]
+  */
   gdk.cursor.Cursor getDeviceCursor(gdk.device.Device device)
   {
     GdkCursor* _cretval;
@@ -218,16 +232,17 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Obtains the current device position and modifier state.
-   * The position is given in coordinates relative to the upper
-   * left corner of surface.
-   * Params:
-   *   device = pointer `GdkDevice` to query to
-   *   x = return location for the X coordinate of device
-   *   y = return location for the Y coordinate of device
-   *   mask = return location for the modifier mask
-   * Returns: %TRUE if the device is over the surface
-   */
+      Obtains the current device position and modifier state.
+    
+    The position is given in coordinates relative to the upper
+    left corner of surface.
+    Params:
+      device =       pointer [gdk.device.Device] to query to
+      x =       return location for the X coordinate of device
+      y =       return location for the Y coordinate of device
+      mask =       return location for the modifier mask
+    Returns:     true if the device is over the surface
+  */
   bool getDevicePosition(gdk.device.Device device, out double x, out double y, out gdk.types.ModifierType mask)
   {
     bool _retval;
@@ -236,9 +251,9 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Gets the `GdkDisplay` associated with a `GdkSurface`.
-   * Returns: the `GdkDisplay` associated with surface
-   */
+      Gets the [gdk.display.Display] associated with a [gdk.surface.Surface].
+    Returns:     the [gdk.display.Display] associated with surface
+  */
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
@@ -248,11 +263,12 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Gets the frame clock for the surface.
-   * The frame clock for a surface never changes unless the surface is
-   * reparented to a new toplevel surface.
-   * Returns: the frame clock
-   */
+      Gets the frame clock for the surface.
+    
+    The frame clock for a surface never changes unless the surface is
+    reparented to a new toplevel surface.
+    Returns:     the frame clock
+  */
   gdk.frame_clock.FrameClock getFrameClock()
   {
     GdkFrameClock* _cretval;
@@ -262,11 +278,12 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Returns the height of the given surface.
-   * Surface size is reported in ”application pixels”, not
-   * ”device pixels” $(LPAREN)see [gdk.surface.Surface.getScaleFactor]$(RPAREN).
-   * Returns: The height of surface
-   */
+      Returns the height of the given surface.
+    
+    Surface size is reported in ”application pixels”, not
+    ”device pixels” (see [gdk.surface.Surface.getScaleFactor]).
+    Returns:     The height of surface
+  */
   int getHeight()
   {
     int _retval;
@@ -275,11 +292,12 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Checks whether the surface has been mapped.
-   * A surface is mapped with [gdk.toplevel.Toplevel.present]
-   * or [gdk.popup.Popup.present].
-   * Returns: %TRUE if the surface is mapped
-   */
+      Checks whether the surface has been mapped.
+    
+    A surface is mapped with [gdk.toplevel.Toplevel.present]
+    or [gdk.popup.Popup.present].
+    Returns:     true if the surface is mapped
+  */
   bool getMapped()
   {
     bool _retval;
@@ -288,16 +306,19 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Returns the internal scale that maps from surface coordinates
-   * to the actual device pixels.
-   * When the scale is bigger than 1, the windowing system prefers to get
-   * buffers with a resolution that is bigger than the surface size $(LPAREN)e.g.
-   * to show the surface on a high-resolution display, or in a magnifier$(RPAREN).
-   * Compare with [gdk.surface.Surface.getScaleFactor], which returns the
-   * next larger integer.
-   * The scale may change during the lifetime of the surface.
-   * Returns: the scale
-   */
+      Returns the internal scale that maps from surface coordinates
+    to the actual device pixels.
+    
+    When the scale is bigger than 1, the windowing system prefers to get
+    buffers with a resolution that is bigger than the surface size (e.g.
+    to show the surface on a high-resolution display, or in a magnifier).
+    
+    Compare with [gdk.surface.Surface.getScaleFactor], which returns the
+    next larger integer.
+    
+    The scale may change during the lifetime of the surface.
+    Returns:     the scale
+  */
   double getScale()
   {
     double _retval;
@@ -306,17 +327,19 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Returns the internal scale factor that maps from surface coordinates
-   * to the actual device pixels.
-   * On traditional systems this is 1, but on very high density outputs
-   * this can be a higher value $(LPAREN)often 2$(RPAREN). A higher value means that drawing
-   * is automatically scaled up to a higher resolution, so any code doing
-   * drawing will automatically look nicer. However, if you are supplying
-   * pixel-based data the scale value can be used to determine whether to
-   * use a pixel resource with higher resolution data.
-   * The scale factor may change during the lifetime of the surface.
-   * Returns: the scale factor
-   */
+      Returns the internal scale factor that maps from surface coordinates
+    to the actual device pixels.
+    
+    On traditional systems this is 1, but on very high density outputs
+    this can be a higher value (often 2). A higher value means that drawing
+    is automatically scaled up to a higher resolution, so any code doing
+    drawing will automatically look nicer. However, if you are supplying
+    pixel-based data the scale value can be used to determine whether to
+    use a pixel resource with higher resolution data.
+    
+    The scale factor may change during the lifetime of the surface.
+    Returns:     the scale factor
+  */
   int getScaleFactor()
   {
     int _retval;
@@ -325,11 +348,12 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Returns the width of the given surface.
-   * Surface size is reported in ”application pixels”, not
-   * ”device pixels” $(LPAREN)see [gdk.surface.Surface.getScaleFactor]$(RPAREN).
-   * Returns: The width of surface
-   */
+      Returns the width of the given surface.
+    
+    Surface size is reported in ”application pixels”, not
+    ”device pixels” (see [gdk.surface.Surface.getScaleFactor]).
+    Returns:     The width of surface
+  */
   int getWidth()
   {
     int _retval;
@@ -338,21 +362,22 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Hide the surface.
-   * For toplevel surfaces, withdraws them, so they will no longer be
-   * known to the window manager; for all surfaces, unmaps them, so
-   * they won’t be displayed. Normally done automatically as
-   * part of [[gtk.widget.Widget.hide]](../gtk4/method.Widget.hide.html).
-   */
+      Hide the surface.
+    
+    For toplevel surfaces, withdraws them, so they will no longer be
+    known to the window manager; for all surfaces, unmaps them, so
+    they won’t be displayed. Normally done automatically as
+    part of [[gtk.widget.Widget.hide]](../gtk4/method.Widget.hide.html).
+  */
   void hide()
   {
     gdk_surface_hide(cast(GdkSurface*)cPtr);
   }
 
   /**
-   * Check to see if a surface is destroyed.
-   * Returns: %TRUE if the surface is destroyed
-   */
+      Check to see if a surface is destroyed.
+    Returns:     true if the surface is destroyed
+  */
   bool isDestroyed()
   {
     bool _retval;
@@ -361,107 +386,120 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Forces a [gdk.surface.Surface.render] signal emission for surface
-   * to be scheduled.
-   * This function is useful for implementations that track invalid
-   * regions on their own.
-   */
+      Forces a [gdk.surface.Surface.render] signal emission for surface
+    to be scheduled.
+    
+    This function is useful for implementations that track invalid
+    regions on their own.
+  */
   void queueRender()
   {
     gdk_surface_queue_render(cast(GdkSurface*)cPtr);
   }
 
   /**
-   * Request a layout phase from the surface's frame clock.
-   * See [gdk.frame_clock.FrameClock.requestPhase].
-   */
+      Request a layout phase from the surface's frame clock.
+    
+    See [gdk.frame_clock.FrameClock.requestPhase].
+  */
   void requestLayout()
   {
     gdk_surface_request_layout(cast(GdkSurface*)cPtr);
   }
 
   /**
-   * Sets the default mouse pointer for a `GdkSurface`.
-   * Passing %NULL for the cursor argument means that surface will use
-   * the cursor of its parent surface. Most surfaces should use this default.
-   * Note that cursor must be for the same display as surface.
-   * Use [gdk.cursor.Cursor.newFromName] or [gdk.cursor.Cursor.newFromTexture]
-   * to create the cursor. To make the cursor invisible, use %GDK_BLANK_CURSOR.
-   * Params:
-   *   cursor = a `GdkCursor`
-   */
+      Sets the default mouse pointer for a [gdk.surface.Surface].
+    
+    Passing null for the cursor argument means that surface will use
+    the cursor of its parent surface. Most surfaces should use this default.
+    Note that cursor must be for the same display as surface.
+    
+    Use [gdk.cursor.Cursor.newFromName] or [gdk.cursor.Cursor.newFromTexture]
+    to create the cursor. To make the cursor invisible, use [gdk.types.CursorType.BlankCursor].
+    Params:
+      cursor =       a [gdk.cursor.Cursor]
+  */
   void setCursor(gdk.cursor.Cursor cursor = null)
   {
     gdk_surface_set_cursor(cast(GdkSurface*)cPtr, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets a specific `GdkCursor` for a given device when it gets inside surface.
-   * Passing %NULL for the cursor argument means that surface will use the
-   * cursor of its parent surface. Most surfaces should use this default.
-   * Use [gdk.cursor.Cursor.newFromName] or [gdk.cursor.Cursor.newFromTexture]
-   * to create the cursor. To make the cursor invisible, use %GDK_BLANK_CURSOR.
-   * Params:
-   *   device = a pointer `GdkDevice`
-   *   cursor = a `GdkCursor`
-   */
+      Sets a specific [gdk.cursor.Cursor] for a given device when it gets inside surface.
+    
+    Passing null for the cursor argument means that surface will use the
+    cursor of its parent surface. Most surfaces should use this default.
+    
+    Use [gdk.cursor.Cursor.newFromName] or [gdk.cursor.Cursor.newFromTexture]
+    to create the cursor. To make the cursor invisible, use [gdk.types.CursorType.BlankCursor].
+    Params:
+      device =       a pointer [gdk.device.Device]
+      cursor =       a [gdk.cursor.Cursor]
+  */
   void setDeviceCursor(gdk.device.Device device, gdk.cursor.Cursor cursor)
   {
     gdk_surface_set_device_cursor(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
 
   /**
-   * Apply the region to the surface for the purpose of event
-   * handling.
-   * Mouse events which happen while the pointer position corresponds
-   * to an unset bit in the mask will be passed on the surface below
-   * surface.
-   * An input region is typically used with RGBA surfaces. The alpha
-   * channel of the surface defines which pixels are invisible and
-   * allows for nicely antialiased borders, and the input region
-   * controls where the surface is “clickable”.
-   * Use [gdk.display.Display.supportsInputShapes] to find out if
-   * a particular backend supports input regions.
-   * Params:
-   *   region = region of surface to be reactive
-   */
+      Apply the region to the surface for the purpose of event
+    handling.
+    
+    Mouse events which happen while the pointer position corresponds
+    to an unset bit in the mask will be passed on the surface below
+    surface.
+    
+    An input region is typically used with RGBA surfaces. The alpha
+    channel of the surface defines which pixels are invisible and
+    allows for nicely antialiased borders, and the input region
+    controls where the surface is “clickable”.
+    
+    Use [gdk.display.Display.supportsInputShapes] to find out if
+    a particular backend supports input regions.
+    Params:
+      region =       region of surface to be reactive
+  */
   void setInputRegion(cairo.region.Region region)
   {
     gdk_surface_set_input_region(cast(GdkSurface*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
 
   /**
-   * Marks a region of the `GdkSurface` as opaque.
-   * For optimisation purposes, compositing window managers may
-   * like to not draw obscured regions of surfaces, or turn off blending
-   * during for these regions. With RGB windows with no transparency,
-   * this is just the shape of the window, but with ARGB32 windows, the
-   * compositor does not know what regions of the window are transparent
-   * or not.
-   * This function only works for toplevel surfaces.
-   * GTK will update this property automatically if the surface background
-   * is opaque, as we know where the opaque regions are. If your surface
-   * background is not opaque, please update this property in your
-   * [GtkWidgetClass.css_changed](../gtk4/vfunc.Widget.css_changed.html) handler.
-   * Params:
-   *   region = a region, or %NULL to make the entire
-   *     surface opaque
-   */
+      Marks a region of the [gdk.surface.Surface] as opaque.
+    
+    For optimisation purposes, compositing window managers may
+    like to not draw obscured regions of surfaces, or turn off blending
+    during for these regions. With RGB windows with no transparency,
+    this is just the shape of the window, but with ARGB32 windows, the
+    compositor does not know what regions of the window are transparent
+    or not.
+    
+    This function only works for toplevel surfaces.
+    
+    GTK will update this property automatically if the surface background
+    is opaque, as we know where the opaque regions are. If your surface
+    background is not opaque, please update this property in your
+    [GtkWidgetClass.css_changed](../gtk4/vfunc.Widget.css_changed.html) handler.
+    Params:
+      region =       a region, or null to make the entire
+          surface opaque
+  */
   void setOpaqueRegion(cairo.region.Region region = null)
   {
     gdk_surface_set_opaque_region(cast(GdkSurface*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
 
   /**
-   * Translates coordinates between two surfaces.
-   * Note that this only works if to and from are popups or
-   * transient-for to the same toplevel $(LPAREN)directly or indirectly$(RPAREN).
-   * Params:
-   *   to = the target surface
-   *   x = coordinates to translate
-   *   y = coordinates to translate
-   * Returns: %TRUE if the coordinates were successfully translated
-   */
+      Translates coordinates between two surfaces.
+    
+    Note that this only works if to and from are popups or
+    transient-for to the same toplevel (directly or indirectly).
+    Params:
+      to =       the target surface
+      x =       coordinates to translate
+      y =       coordinates to translate
+    Returns:     true if the coordinates were successfully translated
+  */
   bool translateCoordinates(gdk.surface.Surface to, ref double x, ref double y)
   {
     bool _retval;
@@ -470,21 +508,26 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Emitted when surface starts being present on the monitor.
-   * Params
-   *   monitor = the monitor
-   *   surface = the instance the signal is connected to
-   */
+      Emitted when surface starts being present on the monitor.
+  
+    ## Parameters
+    $(LIST
+      * $(B monitor)       the monitor
+      * $(B surface) the instance the signal is connected to
+    )
+  */
   alias EnterMonitorCallbackDlg = void delegate(gdk.monitor.MonitorG monitor, gdk.surface.Surface surface);
+
+  /** ditto */
   alias EnterMonitorCallbackFunc = void function(gdk.monitor.MonitorG monitor, gdk.surface.Surface surface);
 
   /**
-   * Connect to EnterMonitor signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to EnterMonitor signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectEnterMonitor(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EnterMonitorCallbackDlg) || is(T : EnterMonitorCallbackFunc))
   {
@@ -502,22 +545,27 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Emitted when GDK receives an input event for surface.
-   * Params
-   *   event = an input event
-   *   surface = the instance the signal is connected to
-   * Returns: %TRUE to indicate that the event has been handled
-   */
+      Emitted when GDK receives an input event for surface.
+  
+    ## Parameters
+    $(LIST
+      * $(B event)       an input event
+      * $(B surface) the instance the signal is connected to
+    )
+    Returns:     true to indicate that the event has been handled
+  */
   alias EventCallbackDlg = bool delegate(gdk.event.Event event, gdk.surface.Surface surface);
+
+  /** ditto */
   alias EventCallbackFunc = bool function(gdk.event.Event event, gdk.surface.Surface surface);
 
   /**
-   * Connect to Event signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Event signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EventCallbackDlg) || is(T : EventCallbackFunc))
   {
@@ -537,25 +585,31 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Emitted when the size of surface is changed, or when relayout should
-   * be performed.
-   * Surface size is reported in ”application pixels”, not
-   * ”device pixels” $(LPAREN)see [gdk.surface.Surface.getScaleFactor]$(RPAREN).
-   * Params
-   *   width = the current width
-   *   height = the current height
-   *   surface = the instance the signal is connected to
-   */
+      Emitted when the size of surface is changed, or when relayout should
+    be performed.
+    
+    Surface size is reported in ”application pixels”, not
+    ”device pixels” (see [gdk.surface.Surface.getScaleFactor]).
+  
+    ## Parameters
+    $(LIST
+      * $(B width)       the current width
+      * $(B height)       the current height
+      * $(B surface) the instance the signal is connected to
+    )
+  */
   alias LayoutCallbackDlg = void delegate(int width, int height, gdk.surface.Surface surface);
+
+  /** ditto */
   alias LayoutCallbackFunc = void function(int width, int height, gdk.surface.Surface surface);
 
   /**
-   * Connect to Layout signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Layout signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectLayout(T)(T callback, Flag!"After" after = No.After)
   if (is(T : LayoutCallbackDlg) || is(T : LayoutCallbackFunc))
   {
@@ -574,21 +628,26 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Emitted when surface stops being present on the monitor.
-   * Params
-   *   monitor = the monitor
-   *   surface = the instance the signal is connected to
-   */
+      Emitted when surface stops being present on the monitor.
+  
+    ## Parameters
+    $(LIST
+      * $(B monitor)       the monitor
+      * $(B surface) the instance the signal is connected to
+    )
+  */
   alias LeaveMonitorCallbackDlg = void delegate(gdk.monitor.MonitorG monitor, gdk.surface.Surface surface);
+
+  /** ditto */
   alias LeaveMonitorCallbackFunc = void function(gdk.monitor.MonitorG monitor, gdk.surface.Surface surface);
 
   /**
-   * Connect to LeaveMonitor signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to LeaveMonitor signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectLeaveMonitor(T)(T callback, Flag!"After" after = No.After)
   if (is(T : LeaveMonitorCallbackDlg) || is(T : LeaveMonitorCallbackFunc))
   {
@@ -606,22 +665,27 @@ class Surface : gobject.object.ObjectG
   }
 
   /**
-   * Emitted when part of the surface needs to be redrawn.
-   * Params
-   *   region = the region that needs to be redrawn
-   *   surface = the instance the signal is connected to
-   * Returns: %TRUE to indicate that the signal has been handled
-   */
+      Emitted when part of the surface needs to be redrawn.
+  
+    ## Parameters
+    $(LIST
+      * $(B region)       the region that needs to be redrawn
+      * $(B surface) the instance the signal is connected to
+    )
+    Returns:     true to indicate that the signal has been handled
+  */
   alias RenderCallbackDlg = bool delegate(cairo.region.Region region, gdk.surface.Surface surface);
+
+  /** ditto */
   alias RenderCallbackFunc = bool function(cairo.region.Region region, gdk.surface.Surface surface);
 
   /**
-   * Connect to Render signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Render signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectRender(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RenderCallbackDlg) || is(T : RenderCallbackFunc))
   {

@@ -17,8 +17,8 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkListBoxRow` is the kind of widget that can be added to a `GtkListBox`.
- */
+    [gtk.list_box_row.ListBoxRow] is the kind of widget that can be added to a [gtk.list_box.ListBox].
+*/
 class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
@@ -41,9 +41,9 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   mixin ActionableT!();
 
   /**
-   * Creates a new `GtkListBoxRow`.
-   * Returns: a new `GtkListBoxRow`
-   */
+      Creates a new [gtk.list_box_row.ListBoxRow].
+    Returns:     a new [gtk.list_box_row.ListBoxRow]
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -52,31 +52,34 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-   * Marks row as changed, causing any state that depends on this
-   * to be updated.
-   * This affects sorting, filtering and headers.
-   * Note that calls to this method must be in sync with the data
-   * used for the row functions. For instance, if the list is
-   * mirroring some external data set, and *two* rows changed in the
-   * external data set then when you call [gtk.list_box_row.ListBoxRow.changed]
-   * on the first row the sort function must only read the new data
-   * for the first of the two changed rows, otherwise the resorting
-   * of the rows will be wrong.
-   * This generally means that if you don’t fully control the data
-   * model you have to duplicate the data that affects the listbox
-   * row functions into the row widgets themselves. Another alternative
-   * is to call [gtk.list_box.ListBox.invalidateSort] on any model change,
-   * but that is more expensive.
-   */
+      Marks row as changed, causing any state that depends on this
+    to be updated.
+    
+    This affects sorting, filtering and headers.
+    
+    Note that calls to this method must be in sync with the data
+    used for the row functions. For instance, if the list is
+    mirroring some external data set, and *two* rows changed in the
+    external data set then when you call [gtk.list_box_row.ListBoxRow.changed]
+    on the first row the sort function must only read the new data
+    for the first of the two changed rows, otherwise the resorting
+    of the rows will be wrong.
+    
+    This generally means that if you don’t fully control the data
+    model you have to duplicate the data that affects the listbox
+    row functions into the row widgets themselves. Another alternative
+    is to call [gtk.list_box.ListBox.invalidateSort] on any model change,
+    but that is more expensive.
+  */
   void changed()
   {
     gtk_list_box_row_changed(cast(GtkListBoxRow*)cPtr);
   }
 
   /**
-   * Gets whether the row is activatable.
-   * Returns: %TRUE if the row is activatable
-   */
+      Gets whether the row is activatable.
+    Returns:     true if the row is activatable
+  */
   bool getActivatable()
   {
     bool _retval;
@@ -85,9 +88,9 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-   * Gets the child widget of row.
-   * Returns: the child widget of row
-   */
+      Gets the child widget of row.
+    Returns:     the child widget of row
+  */
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
@@ -97,13 +100,14 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-   * Returns the current header of the row.
-   * This can be used
-   * in a [gtk.types.ListBoxUpdateHeaderFunc] to see if
-   * there is a header set already, and if so to update
-   * the state of it.
-   * Returns: the current header
-   */
+      Returns the current header of the row.
+    
+    This can be used
+    in a [gtk.types.ListBoxUpdateHeaderFunc] to see if
+    there is a header set already, and if so to update
+    the state of it.
+    Returns:     the current header
+  */
   gtk.widget.Widget getHeader()
   {
     GtkWidget* _cretval;
@@ -113,9 +117,9 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-   * Gets the current index of the row in its `GtkListBox` container.
-   * Returns: the index of the row, or -1 if the row is not in a listbox
-   */
+      Gets the current index of the row in its [gtk.list_box.ListBox] container.
+    Returns:     the index of the row, or -1 if the row is not in a listbox
+  */
   int getIndex()
   {
     int _retval;
@@ -124,9 +128,9 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-   * Gets whether the row can be selected.
-   * Returns: %TRUE if the row is selectable
-   */
+      Gets whether the row can be selected.
+    Returns:     true if the row is selectable
+  */
   bool getSelectable()
   {
     bool _retval;
@@ -135,10 +139,10 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-   * Returns whether the child is currently selected in its
-   * `GtkListBox` container.
-   * Returns: %TRUE if row is selected
-   */
+      Returns whether the child is currently selected in its
+    [gtk.list_box.ListBox] container.
+    Returns:     true if row is selected
+  */
   bool isSelected()
   {
     bool _retval;
@@ -147,66 +151,74 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-   * Set whether the row is activatable.
-   * Params:
-   *   activatable = %TRUE to mark the row as activatable
-   */
+      Set whether the row is activatable.
+    Params:
+      activatable =       true to mark the row as activatable
+  */
   void setActivatable(bool activatable)
   {
     gtk_list_box_row_set_activatable(cast(GtkListBoxRow*)cPtr, activatable);
   }
 
   /**
-   * Sets the child widget of self.
-   * Params:
-   *   child = the child widget
-   */
+      Sets the child widget of self.
+    Params:
+      child =       the child widget
+  */
   void setChild(gtk.widget.Widget child = null)
   {
     gtk_list_box_row_set_child(cast(GtkListBoxRow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the current header of the row.
-   * This is only allowed to be called
-   * from a [gtk.types.ListBoxUpdateHeaderFunc].
-   * It will replace any existing header in the row,
-   * and be shown in front of the row in the listbox.
-   * Params:
-   *   header = the header
-   */
+      Sets the current header of the row.
+    
+    This is only allowed to be called
+    from a [gtk.types.ListBoxUpdateHeaderFunc].
+    It will replace any existing header in the row,
+    and be shown in front of the row in the listbox.
+    Params:
+      header =       the header
+  */
   void setHeader(gtk.widget.Widget header = null)
   {
     gtk_list_box_row_set_header(cast(GtkListBoxRow*)cPtr, header ? cast(GtkWidget*)header.cPtr(No.Dup) : null);
   }
 
   /**
-   * Set whether the row can be selected.
-   * Params:
-   *   selectable = %TRUE to mark the row as selectable
-   */
+      Set whether the row can be selected.
+    Params:
+      selectable =       true to mark the row as selectable
+  */
   void setSelectable(bool selectable)
   {
     gtk_list_box_row_set_selectable(cast(GtkListBoxRow*)cPtr, selectable);
   }
 
   /**
-   * This is a keybinding signal, which will cause this row to be activated.
-   * If you want to be notified when the user activates a row $(LPAREN)by key or not$(RPAREN),
-   * use the signalGtk.ListBox::row-activated signal on the row’s parent
-   * `GtkListBox`.
-   *   listBoxRow = the instance the signal is connected to
-   */
+      This is a keybinding signal, which will cause this row to be activated.
+    
+    If you want to be notified when the user activates a row (by key or not),
+    use the `signalGtk.ListBox::row-activated` signal on the row’s parent
+    [gtk.list_box.ListBox].
+  
+    ## Parameters
+    $(LIST
+      * $(B listBoxRow) the instance the signal is connected to
+    )
+  */
   alias ActivateCallbackDlg = void delegate(gtk.list_box_row.ListBoxRow listBoxRow);
+
+  /** ditto */
   alias ActivateCallbackFunc = void function(gtk.list_box_row.ListBoxRow listBoxRow);
 
   /**
-   * Connect to Activate signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Activate signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {

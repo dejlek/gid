@@ -10,11 +10,12 @@ import gtksource.completion_provider_mixin;
 import gtksource.types;
 
 /**
- * A iface@CompletionProvider for the completion of words.
- * The `GtkSourceCompletionWords` is an example of an implementation of
- * the iface@CompletionProvider interface. The proposals are words
- * appearing in the registered [gtk.text_buffer.TextBuffer]s.
- */
+    A `iface@CompletionProvider` for the completion of words.
+  
+  The [gtksource.completion_words.CompletionWords] is an example of an implementation of
+  the `iface@CompletionProvider` interface. The proposals are words
+  appearing in the registered [gtk.text_buffer.TextBuffer]s.
+*/
 class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.CompletionProvider
 {
 
@@ -36,6 +37,7 @@ class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.Co
 
   mixin CompletionProviderT!();
 
+  /** */
   this(string title = null)
   {
     GtkSourceCompletionWords* _cretval;
@@ -45,20 +47,20 @@ class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.Co
   }
 
   /**
-   * Registers buffer in the words provider.
-   * Params:
-   *   buffer = a #GtkTextBuffer
-   */
+      Registers buffer in the words provider.
+    Params:
+      buffer =       a #GtkTextBuffer
+  */
   void register(gtk.text_buffer.TextBuffer buffer)
   {
     gtk_source_completion_words_register(cast(GtkSourceCompletionWords*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
   }
 
   /**
-   * Unregisters buffer from the words provider.
-   * Params:
-   *   buffer = a #GtkTextBuffer
-   */
+      Unregisters buffer from the words provider.
+    Params:
+      buffer =       a #GtkTextBuffer
+  */
   void unregister(gtk.text_buffer.TextBuffer buffer)
   {
     gtk_source_completion_words_unregister(cast(GtkSourceCompletionWords*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);

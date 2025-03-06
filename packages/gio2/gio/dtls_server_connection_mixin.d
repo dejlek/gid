@@ -11,9 +11,9 @@ public import glib.error;
 public import gobject.object;
 
 /**
- * `GDtlsServerConnection` is the server-side subclass of
- * [gio.dtls_connection.DtlsConnection], representing a server-side DTLS connection.
- */
+    [gio.dtls_server_connection.DtlsServerConnection] is the server-side subclass of
+  [gio.dtls_connection.DtlsConnection], representing a server-side DTLS connection.
+*/
 template DtlsServerConnectionT()
 {
 

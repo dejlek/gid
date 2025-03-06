@@ -17,34 +17,42 @@ import gtk.check_menu_item;
 import gtk.types;
 
 /**
- * A radio menu item is a check menu item that belongs to a group. At each
- * instant exactly one of the radio menu items from a group is selected.
- * The group list does not need to be freed, as each #GtkRadioMenuItem will
- * remove itself and its list item when it is destroyed.
- * The correct way to create a group of radio menu items is approximatively
- * this:
- * ## How to create a group of radio menu items.
- * |[<!-- language\="C" -->
- * GSList *group \= NULL;
- * GtkWidget *item;
- * gint i;
- * for $(LPAREN)i \= 0; i < 5; i++$(RPAREN)
- * {
- * item \= gtk_radio_menu_item_new_with_label $(LPAREN)group, "This is an example"$(RPAREN);
- * group \= gtk_radio_menu_item_get_group $(LPAREN)GTK_RADIO_MENU_ITEM $(LPAREN)item$(RPAREN)$(RPAREN);
- * if $(LPAREN)i \=\= 1$(RPAREN)
- * gtk_check_menu_item_set_active $(LPAREN)GTK_CHECK_MENU_ITEM $(LPAREN)item$(RPAREN), TRUE$(RPAREN);
- * }
- * ]|
- * # CSS nodes
- * |[<!-- language\="plain" -->
- * menuitem
- * ├── radio.left
- * ╰── <child>
- * ]|
- * GtkRadioMenuItem has a main CSS node with name menuitem, and a subnode
- * with name radio, which gets the .left or .right style class.
- */
+    A radio menu item is a check menu item that belongs to a group. At each
+  instant exactly one of the radio menu items from a group is selected.
+  
+  The group list does not need to be freed, as each #GtkRadioMenuItem will
+  remove itself and its list item when it is destroyed.
+  
+  The correct way to create a group of radio menu items is approximatively
+  this:
+  
+  ## How to create a group of radio menu items.
+  
+  ```c
+  GSList *group = NULL;
+  GtkWidget *item;
+  gint i;
+  
+  for (i = 0; i < 5; i++)
+  {
+    item = gtk_radio_menu_item_new_with_label (group, "This is an example");
+    group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (item));
+    if (i == 1)
+      gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), TRUE);
+  }
+  ```
+  
+  # CSS nodes
+  
+  ```plain
+  menuitem
+  ├── radio.left
+  ╰── <child>
+  ```
+  
+  GtkRadioMenuItem has a main CSS node with name menuitem, and a subnode
+  with name radio, which gets the .left or .right style class.
+*/
 class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
 {
 
@@ -65,12 +73,12 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
   }
 
   /**
-   * Creates a new #GtkRadioMenuItem.
-   * Params:
-   *   group = the group to which the
-   *     radio menu item is to be attached, or %NULL
-   * Returns: a new #GtkRadioMenuItem
-   */
+      Creates a new #GtkRadioMenuItem.
+    Params:
+      group =       the group to which the
+          radio menu item is to be attached, or null
+    Returns:     a new #GtkRadioMenuItem
+  */
   this(gtk.radio_menu_item.RadioMenuItem[] group = null)
   {
     GtkWidget* _cretval;
@@ -81,11 +89,11 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
   }
 
   /**
-   * Creates a new #GtkRadioMenuItem adding it to the same group as group.
-   * Params:
-   *   group = An existing #GtkRadioMenuItem
-   * Returns: The new #GtkRadioMenuItem
-   */
+      Creates a new #GtkRadioMenuItem adding it to the same group as group.
+    Params:
+      group =       An existing #GtkRadioMenuItem
+    Returns:     The new #GtkRadioMenuItem
+  */
   static gtk.radio_menu_item.RadioMenuItem newFromWidget(gtk.radio_menu_item.RadioMenuItem group = null)
   {
     GtkWidget* _cretval;
@@ -95,12 +103,12 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
   }
 
   /**
-   * Creates a new #GtkRadioMenuItem whose child is a simple #GtkLabel.
-   * Params:
-   *   group = group the radio menu item is inside, or %NULL
-   *   label = the text for the label
-   * Returns: A new #GtkRadioMenuItem
-   */
+      Creates a new #GtkRadioMenuItem whose child is a simple #GtkLabel.
+    Params:
+      group =       group the radio menu item is inside, or null
+      label =       the text for the label
+    Returns:     A new #GtkRadioMenuItem
+  */
   static gtk.radio_menu_item.RadioMenuItem newWithLabel(gtk.radio_menu_item.RadioMenuItem[] group, string label)
   {
     GtkWidget* _cretval;
@@ -113,13 +121,13 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
   }
 
   /**
-   * Creates a new GtkRadioMenuItem whose child is a simple GtkLabel.
-   * The new #GtkRadioMenuItem is added to the same group as group.
-   * Params:
-   *   group = an existing #GtkRadioMenuItem
-   *   label = the text for the label
-   * Returns: The new #GtkRadioMenuItem
-   */
+      Creates a new GtkRadioMenuItem whose child is a simple GtkLabel.
+    The new #GtkRadioMenuItem is added to the same group as group.
+    Params:
+      group =       an existing #GtkRadioMenuItem
+      label =       the text for the label
+    Returns:     The new #GtkRadioMenuItem
+  */
   static gtk.radio_menu_item.RadioMenuItem newWithLabelFromWidget(gtk.radio_menu_item.RadioMenuItem group = null, string label = null)
   {
     GtkWidget* _cretval;
@@ -130,15 +138,15 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
   }
 
   /**
-   * Creates a new #GtkRadioMenuItem containing a label. The label
-   * will be created using [gtk.label.Label.newWithMnemonic], so underscores
-   * in label indicate the mnemonic for the menu item.
-   * Params:
-   *   group = group the radio menu item is inside, or %NULL
-   *   label = the text of the button, with an underscore in front of the
-   *     mnemonic character
-   * Returns: a new #GtkRadioMenuItem
-   */
+      Creates a new #GtkRadioMenuItem containing a label. The label
+    will be created using [gtk.label.Label.newWithMnemonic], so underscores
+    in label indicate the mnemonic for the menu item.
+    Params:
+      group =       group the radio menu item is inside, or null
+      label =       the text of the button, with an underscore in front of the
+                mnemonic character
+    Returns:     a new #GtkRadioMenuItem
+  */
   static gtk.radio_menu_item.RadioMenuItem newWithMnemonic(gtk.radio_menu_item.RadioMenuItem[] group, string label)
   {
     GtkWidget* _cretval;
@@ -151,16 +159,17 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
   }
 
   /**
-   * Creates a new GtkRadioMenuItem containing a label. The label will be
-   * created using [gtk.label.Label.newWithMnemonic], so underscores in label
-   * indicate the mnemonic for the menu item.
-   * The new #GtkRadioMenuItem is added to the same group as group.
-   * Params:
-   *   group = An existing #GtkRadioMenuItem
-   *   label = the text of the button, with an underscore in front of the
-   *     mnemonic character
-   * Returns: The new #GtkRadioMenuItem
-   */
+      Creates a new GtkRadioMenuItem containing a label. The label will be
+    created using [gtk.label.Label.newWithMnemonic], so underscores in label
+    indicate the mnemonic for the menu item.
+    
+    The new #GtkRadioMenuItem is added to the same group as group.
+    Params:
+      group =       An existing #GtkRadioMenuItem
+      label =       the text of the button, with an underscore in front of the
+                mnemonic character
+    Returns:     The new #GtkRadioMenuItem
+  */
   static gtk.radio_menu_item.RadioMenuItem newWithMnemonicFromWidget(gtk.radio_menu_item.RadioMenuItem group = null, string label = null)
   {
     GtkWidget* _cretval;
@@ -171,11 +180,11 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
   }
 
   /**
-   * Returns the group to which the radio menu item belongs, as a #GList of
-   * #GtkRadioMenuItem. The list belongs to GTK+ and should not be freed.
-   * Returns: the group
-   *   of radio_menu_item
-   */
+      Returns the group to which the radio menu item belongs, as a #GList of
+    #GtkRadioMenuItem. The list belongs to GTK+ and should not be freed.
+    Returns:     the group
+          of radio_menu_item
+  */
   gtk.radio_menu_item.RadioMenuItem[] getGroup()
   {
     GSList* _cretval;
@@ -185,37 +194,43 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
   }
 
   /**
-   * Joins a #GtkRadioMenuItem object to the group of another #GtkRadioMenuItem
-   * object.
-   * This function should be used by language bindings to avoid the memory
-   * manangement of the opaque #GSList of [gtk.radio_menu_item.RadioMenuItem.getGroup]
-   * and [gtk.radio_menu_item.RadioMenuItem.setGroup].
-   * A common way to set up a group of #GtkRadioMenuItem instances is:
-   * |[
-   * GtkRadioMenuItem *last_item \= NULL;
-   * while $(LPAREN) ...more items to add... $(RPAREN)
-   * {
-   * GtkRadioMenuItem *radio_item;
-   * radio_item \= gtk_radio_menu_item_new $(LPAREN)...$(RPAREN);
-   * gtk_radio_menu_item_join_group $(LPAREN)radio_item, last_item$(RPAREN);
-   * last_item \= radio_item;
-   * }
-   * ]|
-   * Params:
-   *   groupSource = a #GtkRadioMenuItem whose group we are
-   *     joining, or %NULL to remove the radio_menu_item from its current
-   *     group
-   */
+      Joins a #GtkRadioMenuItem object to the group of another #GtkRadioMenuItem
+    object.
+    
+    This function should be used by language bindings to avoid the memory
+    manangement of the opaque #GSList of [gtk.radio_menu_item.RadioMenuItem.getGroup]
+    and [gtk.radio_menu_item.RadioMenuItem.setGroup].
+    
+    A common way to set up a group of #GtkRadioMenuItem instances is:
+    
+    ```
+      GtkRadioMenuItem *last_item = NULL;
+    
+      while ( ...more items to add... )
+        {
+          GtkRadioMenuItem *radio_item;
+    
+          radio_item = gtk_radio_menu_item_new (...);
+    
+          gtk_radio_menu_item_join_group (radio_item, last_item);
+          last_item = radio_item;
+        }
+    ```
+    Params:
+      groupSource =       a #GtkRadioMenuItem whose group we are
+          joining, or null to remove the radio_menu_item from its current
+          group
+  */
   void joinGroup(gtk.radio_menu_item.RadioMenuItem groupSource = null)
   {
     gtk_radio_menu_item_join_group(cast(GtkRadioMenuItem*)cPtr, groupSource ? cast(GtkRadioMenuItem*)groupSource.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the group of a radio menu item, or changes it.
-   * Params:
-   *   group = the new group, or %NULL.
-   */
+      Sets the group of a radio menu item, or changes it.
+    Params:
+      group =       the new group, or null.
+  */
   void setGroup(gtk.radio_menu_item.RadioMenuItem[] group = null)
   {
     auto _group = gSListFromD!(gtk.radio_menu_item.RadioMenuItem)(group);
@@ -223,16 +238,19 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
     gtk_radio_menu_item_set_group(cast(GtkRadioMenuItem*)cPtr, _group);
   }
 
+  /** */
   alias GroupChangedCallbackDlg = void delegate(gtk.radio_menu_item.RadioMenuItem radioMenuItem);
+
+  /** ditto */
   alias GroupChangedCallbackFunc = void function(gtk.radio_menu_item.RadioMenuItem radioMenuItem);
 
   /**
-   * Connect to GroupChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to GroupChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectGroupChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : GroupChangedCallbackDlg) || is(T : GroupChangedCallbackFunc))
   {

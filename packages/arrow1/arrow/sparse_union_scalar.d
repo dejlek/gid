@@ -8,6 +8,7 @@ import arrow.types;
 import arrow.union_scalar;
 import gid.gid;
 
+/** */
 class SparseUnionScalar : arrow.union_scalar.UnionScalar
 {
 
@@ -27,6 +28,7 @@ class SparseUnionScalar : arrow.union_scalar.UnionScalar
     return getType();
   }
 
+  /** */
   this(arrow.sparse_union_data_type.SparseUnionDataType dataType, byte typeCode, arrow.scalar.Scalar value)
   {
     GArrowSparseUnionScalar* _cretval;

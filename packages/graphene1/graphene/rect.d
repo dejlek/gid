@@ -10,17 +10,19 @@ import graphene.types;
 import graphene.vec2;
 
 /**
- * The location and size of a rectangle region.
- * The width and height of a #graphene_rect_t can be negative; for instance,
- * a #graphene_rect_t with an origin of [ 0, 0 ] and a size of [ 10, 10 ] is
- * equivalent to a #graphene_rect_t with an origin of [ 10, 10 ] and a size
- * of [ -10, -10 ].
- * Application code can normalize rectangles using [graphene.rect.Rect.normalize];
- * this function will ensure that the width and height of a rectangle are
- * positive values. All functions taking a #graphene_rect_t as an argument
- * will internally operate on a normalized copy; all functions returning a
- * #graphene_rect_t will always return a normalized rectangle.
- */
+    The location and size of a rectangle region.
+  
+  The width and height of a #graphene_rect_t can be negative; for instance,
+  a #graphene_rect_t with an origin of [ 0, 0 ] and a size of [ 10, 10 ] is
+  equivalent to a #graphene_rect_t with an origin of [ 10, 10 ] and a size
+  of [ -10, -10 ].
+  
+  Application code can normalize rectangles using [graphene.rect.Rect.normalize];
+  this function will ensure that the width and height of a rectangle are
+  positive values. All functions taking a #graphene_rect_t as an argument
+  will internally operate on a normalized copy; all functions returning a
+  #graphene_rect_t will always return a normalized rectangle.
+*/
 class Rect : gobject.boxed.Boxed
 {
 
@@ -61,11 +63,11 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether a #graphene_rect_t contains the given coordinates.
-   * Params:
-   *   p = a #graphene_point_t
-   * Returns: `true` if the rectangle contains the point
-   */
+      Checks whether a #graphene_rect_t contains the given coordinates.
+    Params:
+      p =       a #graphene_point_t
+    Returns:     `true` if the rectangle contains the point
+  */
   bool containsPoint(graphene.point.Point p)
   {
     bool _retval;
@@ -74,12 +76,12 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether a #graphene_rect_t fully contains the given
-   * rectangle.
-   * Params:
-   *   b = a #graphene_rect_t
-   * Returns: `true` if the rectangle a fully contains b
-   */
+      Checks whether a #graphene_rect_t fully contains the given
+    rectangle.
+    Params:
+      b =       a #graphene_rect_t
+    Returns:     `true` if the rectangle a fully contains b
+  */
   bool containsRect(graphene.rect.Rect b)
   {
     bool _retval;
@@ -88,11 +90,11 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether the two given rectangle are equal.
-   * Params:
-   *   b = a #graphene_rect_t
-   * Returns: `true` if the rectangles are equal
-   */
+      Checks whether the two given rectangle are equal.
+    Params:
+      b =       a #graphene_rect_t
+    Returns:     `true` if the rectangles are equal
+  */
   bool equal(graphene.rect.Rect b)
   {
     bool _retval;
@@ -101,11 +103,11 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Expands a #graphene_rect_t to contain the given #graphene_point_t.
-   * Params:
-   *   p = a #graphene_point_t
-   *   res = return location for the expanded rectangle
-   */
+      Expands a #graphene_rect_t to contain the given #graphene_point_t.
+    Params:
+      p =       a #graphene_point_t
+      res =       return location for the expanded rectangle
+  */
   void expand(graphene.point.Point p, out graphene.rect.Rect res)
   {
     graphene_rect_t _res;
@@ -114,9 +116,9 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Compute the area of given normalized rectangle.
-   * Returns: the area of the normalized rectangle
-   */
+      Compute the area of given normalized rectangle.
+    Returns:     the area of the normalized rectangle
+  */
   float getArea()
   {
     float _retval;
@@ -125,10 +127,10 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the coordinates of the bottom-left corner of the given rectangle.
-   * Params:
-   *   p = return location for a #graphene_point_t
-   */
+      Retrieves the coordinates of the bottom-left corner of the given rectangle.
+    Params:
+      p =       return location for a #graphene_point_t
+  */
   void getBottomLeft(out graphene.point.Point p)
   {
     graphene_point_t _p;
@@ -137,10 +139,10 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the coordinates of the bottom-right corner of the given rectangle.
-   * Params:
-   *   p = return location for a #graphene_point_t
-   */
+      Retrieves the coordinates of the bottom-right corner of the given rectangle.
+    Params:
+      p =       return location for a #graphene_point_t
+  */
   void getBottomRight(out graphene.point.Point p)
   {
     graphene_point_t _p;
@@ -149,10 +151,10 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the coordinates of the center of the given rectangle.
-   * Params:
-   *   p = return location for a #graphene_point_t
-   */
+      Retrieves the coordinates of the center of the given rectangle.
+    Params:
+      p =       return location for a #graphene_point_t
+  */
   void getCenter(out graphene.point.Point p)
   {
     graphene_point_t _p;
@@ -161,9 +163,9 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the normalized height of the given rectangle.
-   * Returns: the normalized height of the rectangle
-   */
+      Retrieves the normalized height of the given rectangle.
+    Returns:     the normalized height of the rectangle
+  */
   float getHeight()
   {
     float _retval;
@@ -172,10 +174,10 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the coordinates of the top-left corner of the given rectangle.
-   * Params:
-   *   p = return location for a #graphene_point_t
-   */
+      Retrieves the coordinates of the top-left corner of the given rectangle.
+    Params:
+      p =       return location for a #graphene_point_t
+  */
   void getTopLeft(out graphene.point.Point p)
   {
     graphene_point_t _p;
@@ -184,10 +186,10 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the coordinates of the top-right corner of the given rectangle.
-   * Params:
-   *   p = return location for a #graphene_point_t
-   */
+      Retrieves the coordinates of the top-right corner of the given rectangle.
+    Params:
+      p =       return location for a #graphene_point_t
+  */
   void getTopRight(out graphene.point.Point p)
   {
     graphene_point_t _p;
@@ -196,11 +198,11 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the four vertices of a #graphene_rect_t.
-   * Params:
-   *   vertices = return location for an array
-   *     of 4 #graphene_vec2_t
-   */
+      Computes the four vertices of a #graphene_rect_t.
+    Params:
+      vertices =       return location for an array
+         of 4 #graphene_vec2_t
+  */
   void getVertices(ref graphene.vec2.Vec2[] vertices)
   {
     graphene_vec2_t[] _vertices;
@@ -212,9 +214,9 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the normalized width of the given rectangle.
-   * Returns: the normalized width of the rectangle
-   */
+      Retrieves the normalized width of the given rectangle.
+    Returns:     the normalized width of the rectangle
+  */
   float getWidth()
   {
     float _retval;
@@ -223,10 +225,10 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the normalized X coordinate of the origin of the given
-   * rectangle.
-   * Returns: the normalized X coordinate of the rectangle
-   */
+      Retrieves the normalized X coordinate of the origin of the given
+    rectangle.
+    Returns:     the normalized X coordinate of the rectangle
+  */
   float getX()
   {
     float _retval;
@@ -235,10 +237,10 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the normalized Y coordinate of the origin of the given
-   * rectangle.
-   * Returns: the normalized Y coordinate of the rectangle
-   */
+      Retrieves the normalized Y coordinate of the origin of the given
+    rectangle.
+    Returns:     the normalized Y coordinate of the rectangle
+  */
   float getY()
   {
     float _retval;
@@ -247,16 +249,17 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes the given #graphene_rect_t with the given values.
-   * This function will implicitly normalize the #graphene_rect_t
-   * before returning.
-   * Params:
-   *   x = the X coordinate of the graphene_rect_t.origin
-   *   y = the Y coordinate of the graphene_rect_t.origin
-   *   width = the width of the graphene_rect_t.size
-   *   height = the height of the graphene_rect_t.size
-   * Returns: the initialized rectangle
-   */
+      Initializes the given #graphene_rect_t with the given values.
+    
+    This function will implicitly normalize the #graphene_rect_t
+    before returning.
+    Params:
+      x =       the X coordinate of the graphene_rect_t.origin
+      y =       the Y coordinate of the graphene_rect_t.origin
+      width =       the width of the graphene_rect_t.size
+      height =       the height of the graphene_rect_t.size
+    Returns:     the initialized rectangle
+  */
   graphene.rect.Rect init_(float x, float y, float width, float height)
   {
     graphene_rect_t* _cretval;
@@ -266,13 +269,14 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes r using the given src rectangle.
-   * This function will implicitly normalize the #graphene_rect_t
-   * before returning.
-   * Params:
-   *   src = a #graphene_rect_t
-   * Returns: the initialized rectangle
-   */
+      Initializes r using the given src rectangle.
+    
+    This function will implicitly normalize the #graphene_rect_t
+    before returning.
+    Params:
+      src =       a #graphene_rect_t
+    Returns:     the initialized rectangle
+  */
   graphene.rect.Rect initFromRect(graphene.rect.Rect src)
   {
     graphene_rect_t* _cretval;
@@ -282,22 +286,25 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Changes the given rectangle to be smaller, or larger depending on the
-   * given inset parameters.
-   * To create an inset rectangle, use positive d_x or d_y values; to
-   * create a larger, encompassing rectangle, use negative d_x or d_y
-   * values.
-   * The origin of the rectangle is offset by d_x and d_y, while the size
-   * is adjusted by `$(LPAREN)2 * d_x, 2 * d_y$(RPAREN)`. If d_x and d_y are positive
-   * values, the size of the rectangle is decreased; if d_x and d_y are
-   * negative values, the size of the rectangle is increased.
-   * If the size of the resulting inset rectangle has a negative width or
-   * height then the size will be set to zero.
-   * Params:
-   *   dX = the horizontal inset
-   *   dY = the vertical inset
-   * Returns: the inset rectangle
-   */
+      Changes the given rectangle to be smaller, or larger depending on the
+    given inset parameters.
+    
+    To create an inset rectangle, use positive d_x or d_y values; to
+    create a larger, encompassing rectangle, use negative d_x or d_y
+    values.
+    
+    The origin of the rectangle is offset by d_x and d_y, while the size
+    is adjusted by `(2 * d_x, 2 * d_y)`. If d_x and d_y are positive
+    values, the size of the rectangle is decreased; if d_x and d_y are
+    negative values, the size of the rectangle is increased.
+    
+    If the size of the resulting inset rectangle has a negative width or
+    height then the size will be set to zero.
+    Params:
+      dX =       the horizontal inset
+      dY =       the vertical inset
+    Returns:     the inset rectangle
+  */
   graphene.rect.Rect inset(float dX, float dY)
   {
     graphene_rect_t* _cretval;
@@ -307,22 +314,25 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Changes the given rectangle to be smaller, or larger depending on the
-   * given inset parameters.
-   * To create an inset rectangle, use positive d_x or d_y values; to
-   * create a larger, encompassing rectangle, use negative d_x or d_y
-   * values.
-   * The origin of the rectangle is offset by d_x and d_y, while the size
-   * is adjusted by `$(LPAREN)2 * d_x, 2 * d_y$(RPAREN)`. If d_x and d_y are positive
-   * values, the size of the rectangle is decreased; if d_x and d_y are
-   * negative values, the size of the rectangle is increased.
-   * If the size of the resulting inset rectangle has a negative width or
-   * height then the size will be set to zero.
-   * Params:
-   *   dX = the horizontal inset
-   *   dY = the vertical inset
-   *   res = return location for the inset rectangle
-   */
+      Changes the given rectangle to be smaller, or larger depending on the
+    given inset parameters.
+    
+    To create an inset rectangle, use positive d_x or d_y values; to
+    create a larger, encompassing rectangle, use negative d_x or d_y
+    values.
+    
+    The origin of the rectangle is offset by d_x and d_y, while the size
+    is adjusted by `(2 * d_x, 2 * d_y)`. If d_x and d_y are positive
+    values, the size of the rectangle is decreased; if d_x and d_y are
+    negative values, the size of the rectangle is increased.
+    
+    If the size of the resulting inset rectangle has a negative width or
+    height then the size will be set to zero.
+    Params:
+      dX =       the horizontal inset
+      dY =       the vertical inset
+      res =       return location for the inset rectangle
+  */
   void insetR(float dX, float dY, out graphene.rect.Rect res)
   {
     graphene_rect_t _res;
@@ -331,14 +341,14 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Linearly interpolates the origin and size of the two given
-   * rectangles.
-   * Params:
-   *   b = a #graphene_rect_t
-   *   factor = the linear interpolation factor
-   *   res = return location for the
-   *     interpolated rectangle
-   */
+      Linearly interpolates the origin and size of the two given
+    rectangles.
+    Params:
+      b =       a #graphene_rect_t
+      factor =       the linear interpolation factor
+      res =       return location for the
+          interpolated rectangle
+  */
   void interpolate(graphene.rect.Rect b, double factor, out graphene.rect.Rect res)
   {
     graphene_rect_t _res;
@@ -347,17 +357,20 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the intersection of the two given rectangles.
-   * ![](rectangle-intersection.png)
-   * The intersection in the image above is the blue outline.
-   * If the two rectangles do not intersect, res will contain
-   * a degenerate rectangle with origin in $(LPAREN)0, 0$(RPAREN) and a size of 0.
-   * Params:
-   *   b = a #graphene_rect_t
-   *   res = return location for
-   *     a #graphene_rect_t
-   * Returns: `true` if the two rectangles intersect
-   */
+      Computes the intersection of the two given rectangles.
+    
+    ![](rectangle-intersection.png)
+    
+    The intersection in the image above is the blue outline.
+    
+    If the two rectangles do not intersect, res will contain
+    a degenerate rectangle with origin in (0, 0) and a size of 0.
+    Params:
+      b =       a #graphene_rect_t
+      res =       return location for
+          a #graphene_rect_t
+    Returns:     `true` if the two rectangles intersect
+  */
   bool intersection(graphene.rect.Rect b, out graphene.rect.Rect res)
   {
     bool _retval;
@@ -368,12 +381,13 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Normalizes the passed rectangle.
-   * This function ensures that the size of the rectangle is made of
-   * positive values, and that the origin is the top-left corner of
-   * the rectangle.
-   * Returns: the normalized rectangle
-   */
+      Normalizes the passed rectangle.
+    
+    This function ensures that the size of the rectangle is made of
+    positive values, and that the origin is the top-left corner of
+    the rectangle.
+    Returns:     the normalized rectangle
+  */
   graphene.rect.Rect normalize()
   {
     graphene_rect_t* _cretval;
@@ -383,14 +397,15 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Normalizes the passed rectangle.
-   * This function ensures that the size of the rectangle is made of
-   * positive values, and that the origin is in the top-left corner
-   * of the rectangle.
-   * Params:
-   *   res = the return location for the
-   *     normalized rectangle
-   */
+      Normalizes the passed rectangle.
+    
+    This function ensures that the size of the rectangle is made of
+    positive values, and that the origin is in the top-left corner
+    of the rectangle.
+    Params:
+      res =       the return location for the
+          normalized rectangle
+  */
   void normalizeR(out graphene.rect.Rect res)
   {
     graphene_rect_t _res;
@@ -399,13 +414,14 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Offsets the origin by d_x and d_y.
-   * The size of the rectangle is unchanged.
-   * Params:
-   *   dX = the horizontal offset
-   *   dY = the vertical offset
-   * Returns: the offset rectangle
-   */
+      Offsets the origin by d_x and d_y.
+    
+    The size of the rectangle is unchanged.
+    Params:
+      dX =       the horizontal offset
+      dY =       the vertical offset
+    Returns:     the offset rectangle
+  */
   graphene.rect.Rect offset(float dX, float dY)
   {
     graphene_rect_t* _cretval;
@@ -415,14 +431,15 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Offsets the origin of the given rectangle by d_x and d_y.
-   * The size of the rectangle is left unchanged.
-   * Params:
-   *   dX = the horizontal offset
-   *   dY = the vertical offset
-   *   res = return location for the offset
-   *     rectangle
-   */
+      Offsets the origin of the given rectangle by d_x and d_y.
+    
+    The size of the rectangle is left unchanged.
+    Params:
+      dX =       the horizontal offset
+      dY =       the vertical offset
+      res =       return location for the offset
+          rectangle
+  */
   void offsetR(float dX, float dY, out graphene.rect.Rect res)
   {
     graphene_rect_t _res;
@@ -431,20 +448,21 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Rounds the origin and size of the given rectangle to
-   * their nearest integer values; the rounding is guaranteed
-   * to be large enough to have an area bigger or equal to the
-   * original rectangle, but might not fully contain its extents.
-   * Use [graphene.rect.Rect.roundExtents] in case you need to round
-   * to a rectangle that covers fully the original one.
-   * This function is the equivalent of calling `floor` on
-   * the coordinates of the origin, and `ceil` on the size.
-   * Params:
-   *   res = return location for the
-   *     rounded rectangle
-
-   * Deprecated: Use [graphene.rect.Rect.roundExtents] instead
-   */
+      Rounds the origin and size of the given rectangle to
+    their nearest integer values; the rounding is guaranteed
+    to be large enough to have an area bigger or equal to the
+    original rectangle, but might not fully contain its extents.
+    Use [graphene.rect.Rect.roundExtents] in case you need to round
+    to a rectangle that covers fully the original one.
+    
+    This function is the equivalent of calling `floor` on
+    the coordinates of the origin, and `ceil` on the size.
+    Params:
+      res =       return location for the
+          rounded rectangle
+  
+    Deprecated:     Use [graphene.rect.Rect.roundExtents] instead
+  */
   void round(out graphene.rect.Rect res)
   {
     graphene_rect_t _res;
@@ -453,29 +471,31 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Rounds the origin of the given rectangle to its nearest
-   * integer value and and recompute the size so that the
-   * rectangle is large enough to contain all the conrners
-   * of the original rectangle.
-   * This function is the equivalent of calling `floor` on
-   * the coordinates of the origin, and recomputing the size
-   * calling `ceil` on the bottom-right coordinates.
-   * If you want to be sure that the rounded rectangle
-   * completely covers the area that was covered by the
-   * original rectangle — i.e. you want to cover the area
-   * including all its corners — this function will make sure
-   * that the size is recomputed taking into account the ceiling
-   * of the coordinates of the bottom-right corner.
-   * If the difference between the original coordinates and the
-   * coordinates of the rounded rectangle is greater than the
-   * difference between the original size and and the rounded
-   * size, then the move of the origin would not be compensated
-   * by a move in the anti-origin, leaving the corners of the
-   * original rectangle outside the rounded one.
-   * Params:
-   *   res = return location for the
-   *     rectangle with rounded extents
-   */
+      Rounds the origin of the given rectangle to its nearest
+    integer value and and recompute the size so that the
+    rectangle is large enough to contain all the conrners
+    of the original rectangle.
+    
+    This function is the equivalent of calling `floor` on
+    the coordinates of the origin, and recomputing the size
+    calling `ceil` on the bottom-right coordinates.
+    
+    If you want to be sure that the rounded rectangle
+    completely covers the area that was covered by the
+    original rectangle — i.e. you want to cover the area
+    including all its corners — this function will make sure
+    that the size is recomputed taking into account the ceiling
+    of the coordinates of the bottom-right corner.
+    If the difference between the original coordinates and the
+    coordinates of the rounded rectangle is greater than the
+    difference between the original size and and the rounded
+    size, then the move of the origin would not be compensated
+    by a move in the anti-origin, leaving the corners of the
+    original rectangle outside the rounded one.
+    Params:
+      res =       return location for the
+          rectangle with rounded extents
+  */
   void roundExtents(out graphene.rect.Rect res)
   {
     graphene_rect_t _res;
@@ -484,13 +504,13 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Rounds the origin and the size of the given rectangle to
-   * their nearest integer values; the rounding is guaranteed
-   * to be large enough to contain the original rectangle.
-   * Returns: the pixel-aligned rectangle.
-
-   * Deprecated: Use [graphene.rect.Rect.round] instead
-   */
+      Rounds the origin and the size of the given rectangle to
+    their nearest integer values; the rounding is guaranteed
+    to be large enough to contain the original rectangle.
+    Returns:     the pixel-aligned rectangle.
+  
+    Deprecated:     Use [graphene.rect.Rect.round] instead
+  */
   graphene.rect.Rect roundToPixel()
   {
     graphene_rect_t* _cretval;
@@ -500,14 +520,14 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Scales the size and origin of a rectangle horizontaly by s_h,
-   * and vertically by s_v. The result res is normalized.
-   * Params:
-   *   sH = horizontal scale factor
-   *   sV = vertical scale factor
-   *   res = return location for the
-   *     scaled rectangle
-   */
+      Scales the size and origin of a rectangle horizontaly by s_h,
+    and vertically by s_v. The result res is normalized.
+    Params:
+      sH =       horizontal scale factor
+      sV =       vertical scale factor
+      res =       return location for the
+          scaled rectangle
+  */
   void scale(float sH, float sV, out graphene.rect.Rect res)
   {
     graphene_rect_t _res;
@@ -516,13 +536,15 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the union of the two given rectangles.
-   * ![](rectangle-union.png)
-   * The union in the image above is the blue outline.
-   * Params:
-   *   b = a #graphene_rect_t
-   *   res = return location for a #graphene_rect_t
-   */
+      Computes the union of the two given rectangles.
+    
+    ![](rectangle-union.png)
+    
+    The union in the image above is the blue outline.
+    Params:
+      b =       a #graphene_rect_t
+      res =       return location for a #graphene_rect_t
+  */
   void union_(graphene.rect.Rect b, out graphene.rect.Rect res)
   {
     graphene_rect_t _res;
@@ -531,10 +553,11 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Allocates a new #graphene_rect_t.
-   * The contents of the returned rectangle are undefined.
-   * Returns: the newly allocated rectangle
-   */
+      Allocates a new #graphene_rect_t.
+    
+    The contents of the returned rectangle are undefined.
+    Returns:     the newly allocated rectangle
+  */
   static graphene.rect.Rect alloc()
   {
     graphene_rect_t* _cretval;
@@ -544,10 +567,10 @@ class Rect : gobject.boxed.Boxed
   }
 
   /**
-   * Returns a degenerate rectangle with origin fixed at $(LPAREN)0, 0$(RPAREN) and
-   * a size of 0, 0.
-   * Returns: a fixed rectangle
-   */
+      Returns a degenerate rectangle with origin fixed at (0, 0) and
+    a size of 0, 0.
+    Returns:     a fixed rectangle
+  */
   static graphene.rect.Rect zero()
   {
     const(graphene_rect_t)* _cretval;

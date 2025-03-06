@@ -8,8 +8,8 @@ import gtk.shortcut_action;
 import gtk.types;
 
 /**
- * A `GtkShortcutAction` that calls [gtk.widget.Widget.mnemonicActivate].
- */
+    A [gtk.shortcut_action.ShortcutAction] that calls [gtk.widget.Widget.mnemonicActivate].
+*/
 class MnemonicAction : gtk.shortcut_action.ShortcutAction
 {
 
@@ -30,11 +30,12 @@ class MnemonicAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
-   * Gets the mnemonic action.
-   * This is an action that calls [gtk.widget.Widget.mnemonicActivate]
-   * on the given widget upon activation.
-   * Returns: The mnemonic action
-   */
+      Gets the mnemonic action.
+    
+    This is an action that calls [gtk.widget.Widget.mnemonicActivate]
+    on the given widget upon activation.
+    Returns:     The mnemonic action
+  */
   static gtk.mnemonic_action.MnemonicAction get()
   {
     GtkShortcutAction* _cretval;

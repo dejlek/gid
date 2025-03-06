@@ -8,8 +8,8 @@ import gtk.shortcut_action;
 import gtk.types;
 
 /**
- * A `GtkShortcutAction` that calls [gtk.widget.Widget.activate].
- */
+    A [gtk.shortcut_action.ShortcutAction] that calls [gtk.widget.Widget.activate].
+*/
 class ActivateAction : gtk.shortcut_action.ShortcutAction
 {
 
@@ -30,11 +30,12 @@ class ActivateAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
-   * Gets the activate action.
-   * This is an action that calls [gtk.widget.Widget.activate]
-   * on the given widget upon activation.
-   * Returns: The activate action
-   */
+      Gets the activate action.
+    
+    This is an action that calls [gtk.widget.Widget.activate]
+    on the given widget upon activation.
+    Returns:     The activate action
+  */
   static gtk.activate_action.ActivateAction get()
   {
     GtkShortcutAction* _cretval;

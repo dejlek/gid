@@ -7,10 +7,11 @@ import gsk.renderer;
 import gsk.types;
 
 /**
- * A GSK renderer that is using cairo.
- * Since it is using cairo, this renderer cannot support
- * 3D transformations.
- */
+    A GSK renderer that is using cairo.
+  
+  Since it is using cairo, this renderer cannot support
+  3D transformations.
+*/
 class CairoRenderer : gsk.renderer.Renderer
 {
 
@@ -31,14 +32,16 @@ class CairoRenderer : gsk.renderer.Renderer
   }
 
   /**
-   * Creates a new Cairo renderer.
-   * The Cairo renderer is the fallback renderer drawing in ways similar
-   * to how GTK 3 drew its content. Its primary use is as comparison tool.
-   * The Cairo renderer is incomplete. It cannot render 3D transformed
-   * content and will instead render an error marker. Its usage should be
-   * avoided.
-   * Returns: a new Cairo renderer.
-   */
+      Creates a new Cairo renderer.
+    
+    The Cairo renderer is the fallback renderer drawing in ways similar
+    to how GTK 3 drew its content. Its primary use is as comparison tool.
+    
+    The Cairo renderer is incomplete. It cannot render 3D transformed
+    content and will instead render an error marker. Its usage should be
+    avoided.
+    Returns:     a new Cairo renderer.
+  */
   this()
   {
     GskRenderer* _cretval;

@@ -6,9 +6,10 @@ import gobject.c.types;
 import gobject.types;
 
 /**
- * A structure holding in-depth information for a specific signal.
- * See also: [gobject.global.signalQuery]
- */
+    A structure holding in-depth information for a specific signal.
+  
+  See also: [gobject.global.signalQuery]
+*/
 class SignalQuery
 {
   GSignalQuery cInstance;

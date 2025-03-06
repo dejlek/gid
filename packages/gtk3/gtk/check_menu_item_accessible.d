@@ -12,6 +12,7 @@ import gtk.c.types;
 import gtk.menu_item_accessible;
 import gtk.types;
 
+/** */
 class CheckMenuItemAccessible : gtk.menu_item_accessible.MenuItemAccessible
 {
 

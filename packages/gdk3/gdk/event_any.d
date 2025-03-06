@@ -8,10 +8,10 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Contains the fields which are common to all event structs.
- * Any event pointer can safely be cast to a pointer to a #GdkEventAny to
- * access these fields.
- */
+    Contains the fields which are common to all event structs.
+  Any event pointer can safely be cast to a pointer to a #GdkEventAny to
+  access these fields.
+*/
 class EventAny
 {
   GdkEventAny cInstance;

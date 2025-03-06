@@ -6,6 +6,7 @@ import arrow.scalar;
 import arrow.types;
 import gid.gid;
 
+/** */
 class BooleanScalar : arrow.scalar.Scalar
 {
 
@@ -25,6 +26,7 @@ class BooleanScalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   this(bool value)
   {
     GArrowBooleanScalar* _cretval;
@@ -32,6 +34,7 @@ class BooleanScalar : arrow.scalar.Scalar
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool getValue()
   {
     bool _retval;

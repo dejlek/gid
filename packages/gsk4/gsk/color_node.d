@@ -9,8 +9,8 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node for a solid color.
- */
+    A render node for a solid color.
+*/
 class ColorNode : gsk.render_node.RenderNode
 {
 
@@ -23,13 +23,13 @@ class ColorNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Creates a `GskRenderNode` that will render the color specified by rgba into
-   * the area given by bounds.
-   * Params:
-   *   rgba = a `GdkRGBA` specifying a color
-   *   bounds = the rectangle to render the color into
-   * Returns: A new `GskRenderNode`
-   */
+      Creates a [gsk.render_node.RenderNode] that will render the color specified by rgba into
+    the area given by bounds.
+    Params:
+      rgba =       a [gdk.rgba.RGBA] specifying a color
+      bounds =       the rectangle to render the color into
+    Returns:     A new [gsk.render_node.RenderNode]
+  */
   this(gdk.rgba.RGBA rgba, graphene.rect.Rect bounds)
   {
     GskRenderNode* _cretval;
@@ -38,9 +38,9 @@ class ColorNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the color of the given node.
-   * Returns: the color of the node
-   */
+      Retrieves the color of the given node.
+    Returns:     the color of the node
+  */
   gdk.rgba.RGBA getColor()
   {
     const(GdkRGBA)* _cretval;

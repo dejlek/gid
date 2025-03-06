@@ -7,10 +7,11 @@ import graphene.c.types;
 import graphene.types;
 
 /**
- * A structure capable of holding a vector with two dimensions, x and y.
- * The contents of the #graphene_vec2_t structure are private and should
- * never be accessed directly.
- */
+    A structure capable of holding a vector with two dimensions, x and y.
+  
+  The contents of the #graphene_vec2_t structure are private and should
+  never be accessed directly.
+*/
 class Vec2 : gobject.boxed.Boxed
 {
 
@@ -41,13 +42,15 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Allocates a new #graphene_vec2_t structure.
-   * The contents of the returned structure are undefined.
-   * Use [graphene.vec2.Vec2.init_] to initialize the vector.
-   * Returns: the newly allocated #graphene_vec2_t
-   *   structure. Use [graphene.vec2.Vec2.free] to free the resources allocated
-   *   by this function.
-   */
+      Allocates a new #graphene_vec2_t structure.
+    
+    The contents of the returned structure are undefined.
+    
+    Use [graphene.vec2.Vec2.init_] to initialize the vector.
+    Returns:     the newly allocated #graphene_vec2_t
+        structure. Use [graphene.vec2.Vec2.free] to free the resources allocated
+        by this function.
+  */
   static graphene.vec2.Vec2 alloc()
   {
     graphene_vec2_t* _cretval;
@@ -57,12 +60,12 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Adds each component of the two passed vectors and places
-   * each result into the components of res.
-   * Params:
-   *   b = a #graphene_vec2_t
-   *   res = return location for the result
-   */
+      Adds each component of the two passed vectors and places
+    each result into the components of res.
+    Params:
+      b =       a #graphene_vec2_t
+      res =       return location for the result
+  */
   void add(graphene.vec2.Vec2 b, out graphene.vec2.Vec2 res)
   {
     graphene_vec2_t _res;
@@ -71,13 +74,13 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Divides each component of the first operand a by the corresponding
-   * component of the second operand b, and places the results into the
-   * vector res.
-   * Params:
-   *   b = a #graphene_vec2_t
-   *   res = return location for the result
-   */
+      Divides each component of the first operand a by the corresponding
+    component of the second operand b, and places the results into the
+    vector res.
+    Params:
+      b =       a #graphene_vec2_t
+      res =       return location for the result
+  */
   void divide(graphene.vec2.Vec2 b, out graphene.vec2.Vec2 res)
   {
     graphene_vec2_t _res;
@@ -86,11 +89,11 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the dot product of the two given vectors.
-   * Params:
-   *   b = a #graphene_vec2_t
-   * Returns: the dot product of the vectors
-   */
+      Computes the dot product of the two given vectors.
+    Params:
+      b =       a #graphene_vec2_t
+    Returns:     the dot product of the vectors
+  */
   float dot(graphene.vec2.Vec2 b)
   {
     float _retval;
@@ -99,11 +102,11 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Checks whether the two given #graphene_vec2_t are equal.
-   * Params:
-   *   v2 = a #graphene_vec2_t
-   * Returns: `true` if the two vectors are equal, and false otherwise
-   */
+      Checks whether the two given #graphene_vec2_t are equal.
+    Params:
+      v2 =       a #graphene_vec2_t
+    Returns:     `true` if the two vectors are equal, and false otherwise
+  */
   bool equal(graphene.vec2.Vec2 v2)
   {
     bool _retval;
@@ -112,9 +115,9 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the X component of the #graphene_vec2_t.
-   * Returns: the value of the X component
-   */
+      Retrieves the X component of the #graphene_vec2_t.
+    Returns:     the value of the X component
+  */
   float getX()
   {
     float _retval;
@@ -123,9 +126,9 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the Y component of the #graphene_vec2_t.
-   * Returns: the value of the Y component
-   */
+      Retrieves the Y component of the #graphene_vec2_t.
+    Returns:     the value of the Y component
+  */
   float getY()
   {
     float _retval;
@@ -134,13 +137,14 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes a #graphene_vec2_t using the given values.
-   * This function can be called multiple times.
-   * Params:
-   *   x = the X field of the vector
-   *   y = the Y field of the vector
-   * Returns: the initialized vector
-   */
+      Initializes a #graphene_vec2_t using the given values.
+    
+    This function can be called multiple times.
+    Params:
+      x =       the X field of the vector
+      y =       the Y field of the vector
+    Returns:     the initialized vector
+  */
   graphene.vec2.Vec2 init_(float x, float y)
   {
     graphene_vec2_t* _cretval;
@@ -150,12 +154,12 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Initializes v with the contents of the given array.
-   * Params:
-   *   src = an array of floating point values
-   *     with at least two elements
-   * Returns: the initialized vector
-   */
+      Initializes v with the contents of the given array.
+    Params:
+      src =       an array of floating point values
+          with at least two elements
+    Returns:     the initialized vector
+  */
   graphene.vec2.Vec2 initFromFloat(float[] src)
   {
     graphene_vec2_t* _cretval;
@@ -167,11 +171,11 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Copies the contents of src into v.
-   * Params:
-   *   src = a #graphene_vec2_t
-   * Returns: the initialized vector
-   */
+      Copies the contents of src into v.
+    Params:
+      src =       a #graphene_vec2_t
+    Returns:     the initialized vector
+  */
   graphene.vec2.Vec2 initFromVec2(graphene.vec2.Vec2 src)
   {
     graphene_vec2_t* _cretval;
@@ -181,12 +185,12 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Linearly interpolates v1 and v2 using the given factor.
-   * Params:
-   *   v2 = a #graphene_vec2_t
-   *   factor = the interpolation factor
-   *   res = the interpolated vector
-   */
+      Linearly interpolates v1 and v2 using the given factor.
+    Params:
+      v2 =       a #graphene_vec2_t
+      factor =       the interpolation factor
+      res =       the interpolated vector
+  */
   void interpolate(graphene.vec2.Vec2 v2, double factor, out graphene.vec2.Vec2 res)
   {
     graphene_vec2_t _res;
@@ -195,9 +199,9 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the length of the given vector.
-   * Returns: the length of the vector
-   */
+      Computes the length of the given vector.
+    Returns:     the length of the vector
+  */
   float length()
   {
     float _retval;
@@ -206,12 +210,12 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Compares the two given vectors and places the maximum
-   * values of each component into res.
-   * Params:
-   *   b = a #graphene_vec2_t
-   *   res = the resulting vector
-   */
+      Compares the two given vectors and places the maximum
+    values of each component into res.
+    Params:
+      b =       a #graphene_vec2_t
+      res =       the resulting vector
+  */
   void max(graphene.vec2.Vec2 b, out graphene.vec2.Vec2 res)
   {
     graphene_vec2_t _res;
@@ -220,12 +224,12 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Compares the two given vectors and places the minimum
-   * values of each component into res.
-   * Params:
-   *   b = a #graphene_vec2_t
-   *   res = the resulting vector
-   */
+      Compares the two given vectors and places the minimum
+    values of each component into res.
+    Params:
+      b =       a #graphene_vec2_t
+      res =       the resulting vector
+  */
   void min(graphene.vec2.Vec2 b, out graphene.vec2.Vec2 res)
   {
     graphene_vec2_t _res;
@@ -234,12 +238,12 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Multiplies each component of the two passed vectors and places
-   * each result into the components of res.
-   * Params:
-   *   b = a #graphene_vec2_t
-   *   res = return location for the result
-   */
+      Multiplies each component of the two passed vectors and places
+    each result into the components of res.
+    Params:
+      b =       a #graphene_vec2_t
+      res =       return location for the result
+  */
   void multiply(graphene.vec2.Vec2 b, out graphene.vec2.Vec2 res)
   {
     graphene_vec2_t _res;
@@ -248,13 +252,13 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Compares the two given #graphene_vec2_t vectors and checks
-   * whether their values are within the given epsilon.
-   * Params:
-   *   v2 = a #graphene_vec2_t
-   *   epsilon = the threshold between the two vectors
-   * Returns: `true` if the two vectors are near each other
-   */
+      Compares the two given #graphene_vec2_t vectors and checks
+    whether their values are within the given epsilon.
+    Params:
+      v2 =       a #graphene_vec2_t
+      epsilon =       the threshold between the two vectors
+    Returns:     `true` if the two vectors are near each other
+  */
   bool near(graphene.vec2.Vec2 v2, float epsilon)
   {
     bool _retval;
@@ -263,10 +267,10 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Negates the given #graphene_vec2_t.
-   * Params:
-   *   res = return location for the result vector
-   */
+      Negates the given #graphene_vec2_t.
+    Params:
+      res =       return location for the result vector
+  */
   void negate(out graphene.vec2.Vec2 res)
   {
     graphene_vec2_t _res;
@@ -275,11 +279,11 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Computes the normalized vector for the given vector v.
-   * Params:
-   *   res = return location for the
-   *     normalized vector
-   */
+      Computes the normalized vector for the given vector v.
+    Params:
+      res =       return location for the
+          normalized vector
+  */
   void normalize(out graphene.vec2.Vec2 res)
   {
     graphene_vec2_t _res;
@@ -288,11 +292,11 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Multiplies all components of the given vector with the given scalar factor.
-   * Params:
-   *   factor = the scalar factor
-   *   res = return location for the result vector
-   */
+      Multiplies all components of the given vector with the given scalar factor.
+    Params:
+      factor =       the scalar factor
+      res =       return location for the result vector
+  */
   void scale(float factor, out graphene.vec2.Vec2 res)
   {
     graphene_vec2_t _res;
@@ -301,13 +305,13 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Subtracts from each component of the first operand a the
-   * corresponding component of the second operand b and places
-   * each result into the components of res.
-   * Params:
-   *   b = a #graphene_vec2_t
-   *   res = return location for the result
-   */
+      Subtracts from each component of the first operand a the
+    corresponding component of the second operand b and places
+    each result into the components of res.
+    Params:
+      b =       a #graphene_vec2_t
+      res =       return location for the result
+  */
   void subtract(graphene.vec2.Vec2 b, out graphene.vec2.Vec2 res)
   {
     graphene_vec2_t _res;
@@ -316,20 +320,20 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Stores the components of v into an array.
-   * Params:
-   *   dest = return location
-   *     for an array of floating point values with at least 2 elements
-   */
+      Stores the components of v into an array.
+    Params:
+      dest =       return location
+          for an array of floating point values with at least 2 elements
+  */
   void toFloat(ref float[] dest)
   {
     graphene_vec2_to_float(cast(const(graphene_vec2_t)*)cPtr, dest.ptr);
   }
 
   /**
-   * Retrieves a constant vector with $(LPAREN)1, 1$(RPAREN) components.
-   * Returns: the one vector
-   */
+      Retrieves a constant vector with (1, 1) components.
+    Returns:     the one vector
+  */
   static graphene.vec2.Vec2 one()
   {
     const(graphene_vec2_t)* _cretval;
@@ -339,9 +343,9 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves a constant vector with $(LPAREN)1, 0$(RPAREN) components.
-   * Returns: the X axis vector
-   */
+      Retrieves a constant vector with (1, 0) components.
+    Returns:     the X axis vector
+  */
   static graphene.vec2.Vec2 xAxis()
   {
     const(graphene_vec2_t)* _cretval;
@@ -351,9 +355,9 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves a constant vector with $(LPAREN)0, 1$(RPAREN) components.
-   * Returns: the Y axis vector
-   */
+      Retrieves a constant vector with (0, 1) components.
+    Returns:     the Y axis vector
+  */
   static graphene.vec2.Vec2 yAxis()
   {
     const(graphene_vec2_t)* _cretval;
@@ -363,9 +367,9 @@ class Vec2 : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves a constant vector with $(LPAREN)0, 0$(RPAREN) components.
-   * Returns: the zero vector
-   */
+      Retrieves a constant vector with (0, 0) components.
+    Returns:     the zero vector
+  */
   static graphene.vec2.Vec2 zero()
   {
     const(graphene_vec2_t)* _cretval;

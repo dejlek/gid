@@ -7,8 +7,8 @@ import gobject.param_spec;
 import gobject.types;
 
 /**
- * A #GParamSpec derived structure that contains the meta data for unsigned character properties.
- */
+    A #GParamSpec derived structure that contains the meta data for unsigned character properties.
+*/
 class ParamSpecUChar : gobject.param_spec.ParamSpec
 {
 

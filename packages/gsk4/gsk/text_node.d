@@ -12,8 +12,8 @@ import pango.font;
 import pango.glyph_string;
 
 /**
- * A render node drawing a set of glyphs.
- */
+    A render node drawing a set of glyphs.
+*/
 class TextNode : gsk.render_node.RenderNode
 {
 
@@ -26,16 +26,17 @@ class TextNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Creates a render node that renders the given glyphs.
-   * Note that color may not be used if the font contains
-   * color glyphs.
-   * Params:
-   *   font = the `PangoFont` containing the glyphs
-   *   glyphs = the `PangoGlyphString` to render
-   *   color = the foreground color to render with
-   *   offset = offset of the baseline
-   * Returns: a new `GskRenderNode`
-   */
+      Creates a render node that renders the given glyphs.
+    
+    Note that color may not be used if the font contains
+    color glyphs.
+    Params:
+      font =       the [pango.font.Font] containing the glyphs
+      glyphs =       the [pango.glyph_string.GlyphString] to render
+      color =       the foreground color to render with
+      offset =       offset of the baseline
+    Returns:     a new [gsk.render_node.RenderNode]
+  */
   this(pango.font.Font font, pango.glyph_string.GlyphString glyphs, gdk.rgba.RGBA color, graphene.point.Point offset)
   {
     GskRenderNode* _cretval;
@@ -44,9 +45,9 @@ class TextNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the color used by the text node.
-   * Returns: the text color
-   */
+      Retrieves the color used by the text node.
+    Returns:     the text color
+  */
   gdk.rgba.RGBA getColor()
   {
     const(GdkRGBA)* _cretval;
@@ -56,9 +57,9 @@ class TextNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Returns the font used by the text node.
-   * Returns: the font
-   */
+      Returns the font used by the text node.
+    Returns:     the font
+  */
   pango.font.Font getFont()
   {
     PangoFont* _cretval;
@@ -68,9 +69,9 @@ class TextNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the number of glyphs in the text node.
-   * Returns: the number of glyphs
-   */
+      Retrieves the number of glyphs in the text node.
+    Returns:     the number of glyphs
+  */
   uint getNumGlyphs()
   {
     uint _retval;
@@ -79,9 +80,9 @@ class TextNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the offset applied to the text.
-   * Returns: a point with the horizontal and vertical offsets
-   */
+      Retrieves the offset applied to the text.
+    Returns:     a point with the horizontal and vertical offsets
+  */
   graphene.point.Point getOffset()
   {
     const(graphene_point_t)* _cretval;
@@ -91,9 +92,9 @@ class TextNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Checks whether the text node has color glyphs.
-   * Returns: %TRUE if the text node has color glyphs
-   */
+      Checks whether the text node has color glyphs.
+    Returns:     true if the text node has color glyphs
+  */
   bool hasColorGlyphs()
   {
     bool _retval;

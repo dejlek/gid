@@ -7,8 +7,8 @@ import gdk.types;
 import gid.gid;
 
 /**
- * An event related to a pad-based device.
- */
+    An event related to a pad-based device.
+*/
 class PadEvent : gdk.event.Event
 {
 
@@ -21,21 +21,21 @@ class PadEvent : gdk.event.Event
   }
 
   /**
-   * Extracts the information from a pad strip or ring event.
-   * Params:
-   *   index = Return location for the axis index
-   *   value = Return location for the axis value
-   */
+      Extracts the information from a pad strip or ring event.
+    Params:
+      index =       Return location for the axis index
+      value =       Return location for the axis value
+  */
   void getAxisValue(out uint index, out double value)
   {
     gdk_pad_event_get_axis_value(cast(GdkEvent*)cPtr, cast(uint*)&index, cast(double*)&value);
   }
 
   /**
-   * Extracts information about the pressed button from
-   * a pad event.
-   * Returns: the button of event
-   */
+      Extracts information about the pressed button from
+    a pad event.
+    Returns:     the button of event
+  */
   uint getButton()
   {
     uint _retval;
@@ -44,11 +44,11 @@ class PadEvent : gdk.event.Event
   }
 
   /**
-   * Extracts group and mode information from a pad event.
-   * Params:
-   *   group = return location for the group
-   *   mode = return location for the mode
-   */
+      Extracts group and mode information from a pad event.
+    Params:
+      group =       return location for the group
+      mode =       return location for the mode
+  */
   void getGroupMode(out uint group, out uint mode)
   {
     gdk_pad_event_get_group_mode(cast(GdkEvent*)cPtr, cast(uint*)&group, cast(uint*)&mode);

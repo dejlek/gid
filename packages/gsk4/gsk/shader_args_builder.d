@@ -12,8 +12,8 @@ import gsk.glshader;
 import gsk.types;
 
 /**
- * An object to build the uniforms data for a `GskGLShader`.
- */
+    An object to build the uniforms data for a [gsk.glshader.GLShader].
+*/
 class ShaderArgsBuilder : gobject.boxed.Boxed
 {
 
@@ -39,14 +39,14 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   }
 
   /**
-   * Allocates a builder that can be used to construct a new uniform data
-   * chunk.
-   * Params:
-   *   shader = a `GskGLShader`
-   *   initialValues = optional `GBytes` with initial values
-   * Returns: The newly allocated builder, free with
-   *   [gsk.shader_args_builder.ShaderArgsBuilder.unref]
-   */
+      Allocates a builder that can be used to construct a new uniform data
+    chunk.
+    Params:
+      shader =       a [gsk.glshader.GLShader]
+      initialValues =       optional [glib.bytes.Bytes] with initial values
+    Returns:     The newly allocated builder, free with
+          [gsk.shader_args_builder.ShaderArgsBuilder.unref]
+  */
   this(gsk.glshader.GLShader shader, glib.bytes.Bytes initialValues = null)
   {
     GskShaderArgsBuilder* _cretval;
@@ -55,101 +55,111 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   }
 
   /**
-   * Sets the value of the uniform idx.
-   * The uniform must be of bool type.
-   * Params:
-   *   idx = index of the uniform
-   *   value = value to set the uniform to
-   */
+      Sets the value of the uniform idx.
+    
+    The uniform must be of bool type.
+    Params:
+      idx =       index of the uniform
+      value =       value to set the uniform to
+  */
   void setBool(int idx, bool value)
   {
     gsk_shader_args_builder_set_bool(cast(GskShaderArgsBuilder*)cPtr, idx, value);
   }
 
   /**
-   * Sets the value of the uniform idx.
-   * The uniform must be of float type.
-   * Params:
-   *   idx = index of the uniform
-   *   value = value to set the uniform to
-   */
+      Sets the value of the uniform idx.
+    
+    The uniform must be of float type.
+    Params:
+      idx =       index of the uniform
+      value =       value to set the uniform to
+  */
   void setFloat(int idx, float value)
   {
     gsk_shader_args_builder_set_float(cast(GskShaderArgsBuilder*)cPtr, idx, value);
   }
 
   /**
-   * Sets the value of the uniform idx.
-   * The uniform must be of int type.
-   * Params:
-   *   idx = index of the uniform
-   *   value = value to set the uniform to
-   */
+      Sets the value of the uniform idx.
+    
+    The uniform must be of int type.
+    Params:
+      idx =       index of the uniform
+      value =       value to set the uniform to
+  */
   void setInt(int idx, int value)
   {
     gsk_shader_args_builder_set_int(cast(GskShaderArgsBuilder*)cPtr, idx, value);
   }
 
   /**
-   * Sets the value of the uniform idx.
-   * The uniform must be of uint type.
-   * Params:
-   *   idx = index of the uniform
-   *   value = value to set the uniform to
-   */
+      Sets the value of the uniform idx.
+    
+    The uniform must be of uint type.
+    Params:
+      idx =       index of the uniform
+      value =       value to set the uniform to
+  */
   void setUint(int idx, uint value)
   {
     gsk_shader_args_builder_set_uint(cast(GskShaderArgsBuilder*)cPtr, idx, value);
   }
 
   /**
-   * Sets the value of the uniform idx.
-   * The uniform must be of vec2 type.
-   * Params:
-   *   idx = index of the uniform
-   *   value = value to set the uniform too
-   */
+      Sets the value of the uniform idx.
+    
+    The uniform must be of vec2 type.
+    Params:
+      idx =       index of the uniform
+      value =       value to set the uniform too
+  */
   void setVec2(int idx, graphene.vec2.Vec2 value)
   {
     gsk_shader_args_builder_set_vec2(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(const(graphene_vec2_t)*)value.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the value of the uniform idx.
-   * The uniform must be of vec3 type.
-   * Params:
-   *   idx = index of the uniform
-   *   value = value to set the uniform too
-   */
+      Sets the value of the uniform idx.
+    
+    The uniform must be of vec3 type.
+    Params:
+      idx =       index of the uniform
+      value =       value to set the uniform too
+  */
   void setVec3(int idx, graphene.vec3.Vec3 value)
   {
     gsk_shader_args_builder_set_vec3(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(const(graphene_vec3_t)*)value.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the value of the uniform idx.
-   * The uniform must be of vec4 type.
-   * Params:
-   *   idx = index of the uniform
-   *   value = value to set the uniform too
-   */
+      Sets the value of the uniform idx.
+    
+    The uniform must be of vec4 type.
+    Params:
+      idx =       index of the uniform
+      value =       value to set the uniform too
+  */
   void setVec4(int idx, graphene.vec4.Vec4 value)
   {
     gsk_shader_args_builder_set_vec4(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(const(graphene_vec4_t)*)value.cPtr(No.Dup) : null);
   }
 
   /**
-   * Creates a new `GBytes` args from the current state of the
-   * given builder.
-   * Any uniforms of the shader that have not been explicitly set on
-   * the builder are zero-initialized.
-   * The given `GskShaderArgsBuilder` is reset once this function returns;
-   * you cannot call this function multiple times on the same builder instance.
-   * This function is intended primarily for bindings. C code should use
-   * [gsk.shader_args_builder.ShaderArgsBuilder.freeToArgs].
-   * Returns: the newly allocated buffer with
-   *   all the args added to builder
-   */
+      Creates a new [glib.bytes.Bytes] args from the current state of the
+    given builder.
+    
+    Any uniforms of the shader that have not been explicitly set on
+    the builder are zero-initialized.
+    
+    The given [gsk.shader_args_builder.ShaderArgsBuilder] is reset once this function returns;
+    you cannot call this function multiple times on the same builder instance.
+    
+    This function is intended primarily for bindings. C code should use
+    [gsk.shader_args_builder.ShaderArgsBuilder.freeToArgs].
+    Returns:     the newly allocated buffer with
+        all the args added to builder
+  */
   glib.bytes.Bytes toArgs()
   {
     GBytes* _cretval;

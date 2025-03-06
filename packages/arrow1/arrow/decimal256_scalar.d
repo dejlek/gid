@@ -9,6 +9,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class Decimal256Scalar : arrow.scalar.Scalar
 {
 
@@ -28,6 +29,7 @@ class Decimal256Scalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   this(arrow.decimal256_data_type.Decimal256DataType dataType, arrow.decimal256.Decimal256 value)
   {
     GArrowDecimal256Scalar* _cretval;
@@ -35,6 +37,7 @@ class Decimal256Scalar : arrow.scalar.Scalar
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.decimal256.Decimal256 getValue()
   {
     GArrowDecimal256* _cretval;

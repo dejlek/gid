@@ -10,6 +10,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class RecordBatchReader : gobject.object.ObjectG
 {
 
@@ -29,6 +30,7 @@ class RecordBatchReader : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrow.record_batch.RecordBatch[] recordBatches, arrow.schema.Schema schema = null)
   {
     GArrowRecordBatchReader* _cretval;
@@ -41,6 +43,7 @@ class RecordBatchReader : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   static arrow.record_batch_reader.RecordBatchReader import_(void* cAbiArrayStream)
   {
     GArrowRecordBatchReader* _cretval;
@@ -52,6 +55,7 @@ class RecordBatchReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   void* export_()
   {
     GError *_err;
@@ -61,6 +65,7 @@ class RecordBatchReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.record_batch.RecordBatch getNextRecordBatch()
   {
     GArrowRecordBatch* _cretval;
@@ -72,6 +77,7 @@ class RecordBatchReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.schema.Schema getSchema()
   {
     GArrowSchema* _cretval;
@@ -80,6 +86,7 @@ class RecordBatchReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   gobject.object.ObjectG[] getSources()
   {
     GList* _cretval;
@@ -88,6 +95,7 @@ class RecordBatchReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table readAll()
   {
     GArrowTable* _cretval;
@@ -99,6 +107,7 @@ class RecordBatchReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.record_batch.RecordBatch readNext()
   {
     GArrowRecordBatch* _cretval;
@@ -110,6 +119,7 @@ class RecordBatchReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.record_batch.RecordBatch readNextRecordBatch()
   {
     GArrowRecordBatch* _cretval;

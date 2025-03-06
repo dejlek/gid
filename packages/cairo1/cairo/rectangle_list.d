@@ -8,9 +8,9 @@ import gid.gid;
 import gobject.boxed;
 
 /**
- * A data structure for holding a dynamically allocated
- * array of rectangles.
- */
+    A data structure for holding a dynamically allocated
+  array of rectangles.
+*/
 class RectangleList : gobject.boxed.Boxed
 {
 

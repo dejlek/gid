@@ -17,12 +17,15 @@ import gtk.tool_button;
 import gtk.types;
 
 /**
- * A #GtkToggleToolButton is a #GtkToolItem that contains a toggle
- * button.
- * Use [gtk.toggle_tool_button.ToggleToolButton.new_] to create a new GtkToggleToolButton.
- * # CSS nodes
- * GtkToggleToolButton has a single CSS node with name togglebutton.
- */
+    A #GtkToggleToolButton is a #GtkToolItem that contains a toggle
+  button.
+  
+  Use [gtk.toggle_tool_button.ToggleToolButton.new_] to create a new GtkToggleToolButton.
+  
+  # CSS nodes
+  
+  GtkToggleToolButton has a single CSS node with name togglebutton.
+*/
 class ToggleToolButton : gtk.tool_button.ToolButton
 {
 
@@ -43,9 +46,9 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   }
 
   /**
-   * Returns a new #GtkToggleToolButton
-   * Returns: a newly created #GtkToggleToolButton
-   */
+      Returns a new #GtkToggleToolButton
+    Returns:     a newly created #GtkToggleToolButton
+  */
   this()
   {
     GtkToolItem* _cretval;
@@ -54,16 +57,17 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   }
 
   /**
-   * Creates a new #GtkToggleToolButton containing the image and text from a
-   * stock item. Some stock ids have preprocessor macros like #GTK_STOCK_OK
-   * and #GTK_STOCK_APPLY.
-   * It is an error if stock_id is not a name of a stock item.
-   * Params:
-   *   stockId = the name of the stock item
-   * Returns: A new #GtkToggleToolButton
-
-   * Deprecated: Use [gtk.toggle_tool_button.ToggleToolButton.new_] instead.
-   */
+      Creates a new #GtkToggleToolButton containing the image and text from a
+    stock item. Some stock ids have preprocessor macros like #GTK_STOCK_OK
+    and #GTK_STOCK_APPLY.
+    
+    It is an error if stock_id is not a name of a stock item.
+    Params:
+      stockId =       the name of the stock item
+    Returns:     A new #GtkToggleToolButton
+  
+    Deprecated:     Use [gtk.toggle_tool_button.ToggleToolButton.new_] instead.
+  */
   static gtk.toggle_tool_button.ToggleToolButton newFromStock(string stockId)
   {
     GtkToolItem* _cretval;
@@ -74,10 +78,10 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   }
 
   /**
-   * Queries a #GtkToggleToolButton and returns its current state.
-   * Returns %TRUE if the toggle button is pressed in and %FALSE if it is raised.
-   * Returns: %TRUE if the toggle tool button is pressed in, %FALSE if not
-   */
+      Queries a #GtkToggleToolButton and returns its current state.
+    Returns true if the toggle button is pressed in and false if it is raised.
+    Returns:     true if the toggle tool button is pressed in, false if not
+  */
   bool getActive()
   {
     bool _retval;
@@ -86,31 +90,37 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   }
 
   /**
-   * Sets the status of the toggle tool button. Set to %TRUE if you
-   * want the GtkToggleButton to be “pressed in”, and %FALSE to raise it.
-   * This action causes the toggled signal to be emitted.
-   * Params:
-   *   isActive = whether button should be active
-   */
+      Sets the status of the toggle tool button. Set to true if you
+    want the GtkToggleButton to be “pressed in”, and false to raise it.
+    This action causes the toggled signal to be emitted.
+    Params:
+      isActive =       whether button should be active
+  */
   void setActive(bool isActive)
   {
     gtk_toggle_tool_button_set_active(cast(GtkToggleToolButton*)cPtr, isActive);
   }
 
   /**
-   * Emitted whenever the toggle tool button changes state.
-   *   toggleToolButton = the instance the signal is connected to
-   */
+      Emitted whenever the toggle tool button changes state.
+  
+    ## Parameters
+    $(LIST
+      * $(B toggleToolButton) the instance the signal is connected to
+    )
+  */
   alias ToggledCallbackDlg = void delegate(gtk.toggle_tool_button.ToggleToolButton toggleToolButton);
+
+  /** ditto */
   alias ToggledCallbackFunc = void function(gtk.toggle_tool_button.ToggleToolButton toggleToolButton);
 
   /**
-   * Connect to Toggled signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Toggled signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectToggled(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToggledCallbackDlg) || is(T : ToggledCallbackFunc))
   {

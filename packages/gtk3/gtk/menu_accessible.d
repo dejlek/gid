@@ -10,6 +10,7 @@ import gtk.c.types;
 import gtk.menu_shell_accessible;
 import gtk.types;
 
+/** */
 class MenuAccessible : gtk.menu_shell_accessible.MenuShellAccessible
 {
 

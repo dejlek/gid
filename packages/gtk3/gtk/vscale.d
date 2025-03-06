@@ -15,12 +15,14 @@ import gtk.scale;
 import gtk.types;
 
 /**
- * The #GtkVScale widget is used to allow the user to select a value using
- * a vertical slider. To create one, use [gtk.hscale.HScale.newWithRange].
- * The position to show the current value, and the number of decimal places
- * shown can be set using the parent #GtkScale class’s functions.
- * GtkVScale has been deprecated, use #GtkScale instead.
- */
+    The #GtkVScale widget is used to allow the user to select a value using
+  a vertical slider. To create one, use [gtk.hscale.HScale.newWithRange].
+  
+  The position to show the current value, and the number of decimal places
+  shown can be set using the parent #GtkScale class’s functions.
+  
+  GtkVScale has been deprecated, use #GtkScale instead.
+*/
 class VScale : gtk.scale.Scale
 {
 
@@ -41,13 +43,13 @@ class VScale : gtk.scale.Scale
   }
 
   /**
-   * Creates a new #GtkVScale.
-   * Params:
-   *   adjustment = the #GtkAdjustment which sets the range of the scale.
-   * Returns: a new #GtkVScale.
-
-   * Deprecated: Use [gtk.scale.Scale.new_] with %GTK_ORIENTATION_VERTICAL instead
-   */
+      Creates a new #GtkVScale.
+    Params:
+      adjustment =       the #GtkAdjustment which sets the range of the scale.
+    Returns:     a new #GtkVScale.
+  
+    Deprecated:     Use [gtk.scale.Scale.new_] with [gtk.types.Orientation.Vertical] instead
+  */
   this(gtk.adjustment.Adjustment adjustment)
   {
     GtkWidget* _cretval;
@@ -56,21 +58,22 @@ class VScale : gtk.scale.Scale
   }
 
   /**
-   * Creates a new vertical scale widget that lets the user input a
-   * number between min and max $(LPAREN)including min and max$(RPAREN) with the
-   * increment step.  step must be nonzero; it’s the distance the
-   * slider moves when using the arrow keys to adjust the scale value.
-   * Note that the way in which the precision is derived works best if step
-   * is a power of ten. If the resulting precision is not suitable for your
-   * needs, use [gtk.scale.Scale.setDigits] to correct it.
-   * Params:
-   *   min = minimum value
-   *   max = maximum value
-   *   step = step increment $(LPAREN)tick size$(RPAREN) used with keyboard shortcuts
-   * Returns: a new #GtkVScale
-
-   * Deprecated: Use [gtk.scale.Scale.newWithRange] with %GTK_ORIENTATION_VERTICAL instead
-   */
+      Creates a new vertical scale widget that lets the user input a
+    number between min and max (including min and max) with the
+    increment step.  step must be nonzero; it’s the distance the
+    slider moves when using the arrow keys to adjust the scale value.
+    
+    Note that the way in which the precision is derived works best if step
+    is a power of ten. If the resulting precision is not suitable for your
+    needs, use [gtk.scale.Scale.setDigits] to correct it.
+    Params:
+      min =       minimum value
+      max =       maximum value
+      step =       step increment (tick size) used with keyboard shortcuts
+    Returns:     a new #GtkVScale
+  
+    Deprecated:     Use [gtk.scale.Scale.newWithRange] with [gtk.types.Orientation.Vertical] instead
+  */
   static gtk.vscale.VScale newWithRange(double min, double max, double step)
   {
     GtkWidget* _cretval;

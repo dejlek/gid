@@ -7,6 +7,7 @@ import parquet.c.functions;
 import parquet.c.types;
 import parquet.types;
 
+/** */
 class WriterProperties : gobject.object.ObjectG
 {
 
@@ -26,6 +27,7 @@ class WriterProperties : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GParquetWriterProperties* _cretval;
@@ -33,18 +35,21 @@ class WriterProperties : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   void disableDictionary(string path = null)
   {
     const(char)* _path = path.toCString(No.Alloc);
     gparquet_writer_properties_disable_dictionary(cast(GParquetWriterProperties*)cPtr, _path);
   }
 
+  /** */
   void enableDictionary(string path = null)
   {
     const(char)* _path = path.toCString(No.Alloc);
     gparquet_writer_properties_enable_dictionary(cast(GParquetWriterProperties*)cPtr, _path);
   }
 
+  /** */
   long getBatchSize()
   {
     long _retval;
@@ -52,6 +57,7 @@ class WriterProperties : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.types.CompressionType getCompressionPath(string path)
   {
     GArrowCompressionType _cretval;
@@ -61,6 +67,7 @@ class WriterProperties : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getDataPageSize()
   {
     long _retval;
@@ -68,6 +75,7 @@ class WriterProperties : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getDictionaryPageSizeLimit()
   {
     long _retval;
@@ -75,6 +83,7 @@ class WriterProperties : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getMaxRowGroupLength()
   {
     long _retval;
@@ -82,6 +91,7 @@ class WriterProperties : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isDictionaryEnabled(string path)
   {
     bool _retval;
@@ -90,27 +100,32 @@ class WriterProperties : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   void setBatchSize(long batchSize)
   {
     gparquet_writer_properties_set_batch_size(cast(GParquetWriterProperties*)cPtr, batchSize);
   }
 
+  /** */
   void setCompression(arrow.types.CompressionType compressionType, string path = null)
   {
     const(char)* _path = path.toCString(No.Alloc);
     gparquet_writer_properties_set_compression(cast(GParquetWriterProperties*)cPtr, compressionType, _path);
   }
 
+  /** */
   void setDataPageSize(long dataPageSize)
   {
     gparquet_writer_properties_set_data_page_size(cast(GParquetWriterProperties*)cPtr, dataPageSize);
   }
 
+  /** */
   void setDictionaryPageSizeLimit(long limit)
   {
     gparquet_writer_properties_set_dictionary_page_size_limit(cast(GParquetWriterProperties*)cPtr, limit);
   }
 
+  /** */
   void setMaxRowGroupLength(long length)
   {
     gparquet_writer_properties_set_max_row_group_length(cast(GParquetWriterProperties*)cPtr, length);

@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class UnionScalar : arrow.scalar.Scalar
 {
 
@@ -26,6 +27,7 @@ class UnionScalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   byte getTypeCode()
   {
     byte _retval;
@@ -33,6 +35,7 @@ class UnionScalar : arrow.scalar.Scalar
     return _retval;
   }
 
+  /** */
   arrow.scalar.Scalar getValue()
   {
     GArrowScalar* _cretval;

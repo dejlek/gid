@@ -9,6 +9,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class FeatherFileReader : gobject.object.ObjectG
 {
 
@@ -28,6 +29,7 @@ class FeatherFileReader : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrow.seekable_input_stream.SeekableInputStream file)
   {
     GArrowFeatherFileReader* _cretval;
@@ -38,6 +40,7 @@ class FeatherFileReader : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   int getVersion()
   {
     int _retval;
@@ -45,6 +48,7 @@ class FeatherFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table read()
   {
     GArrowTable* _cretval;
@@ -56,6 +60,7 @@ class FeatherFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table readIndices(int[] indices)
   {
     GArrowTable* _cretval;
@@ -72,6 +77,7 @@ class FeatherFileReader : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table readNames(string[] names)
   {
     GArrowTable* _cretval;

@@ -10,6 +10,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
@@ -29,6 +30,7 @@ class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getType();
   }
 
+  /** */
   static arrow.source_node_options.SourceNodeOptions newRecordBatch(arrow.record_batch.RecordBatch recordBatch)
   {
     GArrowSourceNodeOptions* _cretval;
@@ -37,6 +39,7 @@ class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return _retval;
   }
 
+  /** */
   static arrow.source_node_options.SourceNodeOptions newRecordBatchReader(arrow.record_batch_reader.RecordBatchReader reader)
   {
     GArrowSourceNodeOptions* _cretval;
@@ -45,6 +48,7 @@ class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return _retval;
   }
 
+  /** */
   static arrow.source_node_options.SourceNodeOptions newTable(arrow.table.Table table)
   {
     GArrowSourceNodeOptions* _cretval;

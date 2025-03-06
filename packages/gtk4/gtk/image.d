@@ -17,35 +17,46 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * The `GtkImage` widget displays an image.
- * ![An example GtkImage](image.png)
- * Various kinds of object can be displayed as an image; most typically,
- * you would load a `GdkTexture` from a file, using the convenience function
- * [gtk.image.Image.newFromFile], for instance:
- * ```c
- * GtkWidget *image \= gtk_image_new_from_file $(LPAREN)"myfile.png"$(RPAREN);
- * ```
- * If the file isn’t loaded successfully, the image will contain a
- * “broken image” icon similar to that used in many web browsers.
- * If you want to handle errors in loading the file yourself,
- * for example by displaying an error message, then load the image with
- * [gdk.texture.Texture.newFromFile], then create the `GtkImage` with
- * [gtk.image.Image.newFromPaintable].
- * Sometimes an application will want to avoid depending on external data
- * files, such as image files. See the documentation of `GResource` inside
- * GIO, for details. In this case, [gtk.image.Image.utf8],
- * [gtk.image.Image.newFromResource], and [gtk.image.Image.setFromResource]
- * should be used.
- * `GtkImage` displays its image as an icon, with a size that is determined
- * by the application. See [gtk.picture.Picture] if you want to show an image
- * at is actual size.
- * ## CSS nodes
- * `GtkImage` has a single CSS node with the name `image`. The style classes
- * `.normal-icons` or `.large-icons` may appear, depending on the
- * property@Gtk.Image:icon-size property.
- * ## Accessibility
- * `GtkImage` uses the `GTK_ACCESSIBLE_ROLE_IMG` role.
- */
+    The [gtk.image.Image] widget displays an image.
+  
+  ![An example GtkImage](image.png)
+  
+  Various kinds of object can be displayed as an image; most typically,
+  you would load a [gdk.texture.Texture] from a file, using the convenience function
+  [gtk.image.Image.newFromFile], for instance:
+  
+  ```c
+  GtkWidget *image = gtk_image_new_from_file ("myfile.png");
+  ```
+  
+  If the file isn’t loaded successfully, the image will contain a
+  “broken image” icon similar to that used in many web browsers.
+  
+  If you want to handle errors in loading the file yourself,
+  for example by displaying an error message, then load the image with
+  [gdk.texture.Texture.newFromFile], then create the [gtk.image.Image] with
+  [gtk.image.Image.newFromPaintable].
+  
+  Sometimes an application will want to avoid depending on external data
+  files, such as image files. See the documentation of [gio.resource.Resource] inside
+  GIO, for details. In this case, [gtk.image.Image.utf8],
+  [gtk.image.Image.newFromResource], and [gtk.image.Image.setFromResource]
+  should be used.
+  
+  [gtk.image.Image] displays its image as an icon, with a size that is determined
+  by the application. See [gtk.picture.Picture] if you want to show an image
+  at is actual size.
+  
+  ## CSS nodes
+  
+  [gtk.image.Image] has a single CSS node with the name `image`. The style classes
+  `.normal-icons` or `.large-icons` may appear, depending on the
+  `property@Gtk.Image:icon-size` property.
+  
+  ## Accessibility
+  
+  [gtk.image.Image] uses the [gtk.types.AccessibleRole.Img] role.
+*/
 class Image : gtk.widget.Widget
 {
 
@@ -66,9 +77,9 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Creates a new empty `GtkImage` widget.
-   * Returns: a newly created `GtkImage` widget.
-   */
+      Creates a new empty [gtk.image.Image] widget.
+    Returns:     a newly created [gtk.image.Image] widget.
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -77,20 +88,23 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Creates a new `GtkImage` displaying the file filename.
-   * If the file isn’t found or can’t be loaded, the resulting `GtkImage`
-   * will display a “broken image” icon. This function never returns %NULL,
-   * it always returns a valid `GtkImage` widget.
-   * If you need to detect failures to load the file, use
-   * [gdk.texture.Texture.newFromFile] to load the file yourself,
-   * then create the `GtkImage` from the texture.
-   * The storage type $(LPAREN)see [gtk.image.Image.getStorageType]$(RPAREN)
-   * of the returned image is not defined, it will be whatever
-   * is appropriate for displaying the file.
-   * Params:
-   *   filename = a filename
-   * Returns: a new `GtkImage`
-   */
+      Creates a new [gtk.image.Image] displaying the file filename.
+    
+    If the file isn’t found or can’t be loaded, the resulting [gtk.image.Image]
+    will display a “broken image” icon. This function never returns null,
+    it always returns a valid [gtk.image.Image] widget.
+    
+    If you need to detect failures to load the file, use
+    [gdk.texture.Texture.newFromFile] to load the file yourself,
+    then create the [gtk.image.Image] from the texture.
+    
+    The storage type (see [gtk.image.Image.getStorageType])
+    of the returned image is not defined, it will be whatever
+    is appropriate for displaying the file.
+    Params:
+      filename =       a filename
+    Returns:     a new [gtk.image.Image]
+  */
   static gtk.image.Image newFromFile(string filename)
   {
     GtkWidget* _cretval;
@@ -101,14 +115,15 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Creates a `GtkImage` displaying an icon from the current icon theme.
-   * If the icon name isn’t known, a “broken image” icon will be
-   * displayed instead. If the current icon theme is changed, the icon
-   * will be updated appropriately.
-   * Params:
-   *   icon = an icon
-   * Returns: a new `GtkImage` displaying the themed icon
-   */
+      Creates a [gtk.image.Image] displaying an icon from the current icon theme.
+    
+    If the icon name isn’t known, a “broken image” icon will be
+    displayed instead. If the current icon theme is changed, the icon
+    will be updated appropriately.
+    Params:
+      icon =       an icon
+    Returns:     a new [gtk.image.Image] displaying the themed icon
+  */
   static gtk.image.Image newFromGicon(gio.icon.Icon icon)
   {
     GtkWidget* _cretval;
@@ -118,14 +133,15 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Creates a `GtkImage` displaying an icon from the current icon theme.
-   * If the icon name isn’t known, a “broken image” icon will be
-   * displayed instead. If the current icon theme is changed, the icon
-   * will be updated appropriately.
-   * Params:
-   *   iconName = an icon name
-   * Returns: a new `GtkImage` displaying the themed icon
-   */
+      Creates a [gtk.image.Image] displaying an icon from the current icon theme.
+    
+    If the icon name isn’t known, a “broken image” icon will be
+    displayed instead. If the current icon theme is changed, the icon
+    will be updated appropriately.
+    Params:
+      iconName =       an icon name
+    Returns:     a new [gtk.image.Image] displaying the themed icon
+  */
   static gtk.image.Image newFromIconName(string iconName = null)
   {
     GtkWidget* _cretval;
@@ -136,16 +152,18 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Creates a new `GtkImage` displaying paintable.
-   * The `GtkImage` does not assume a reference to the paintable; you still
-   * need to unref it if you own references. `GtkImage` will add its own
-   * reference rather than adopting yours.
-   * The `GtkImage` will track changes to the paintable and update
-   * its size and contents in response to it.
-   * Params:
-   *   paintable = a `GdkPaintable`
-   * Returns: a new `GtkImage`
-   */
+      Creates a new [gtk.image.Image] displaying paintable.
+    
+    The [gtk.image.Image] does not assume a reference to the paintable; you still
+    need to unref it if you own references. [gtk.image.Image] will add its own
+    reference rather than adopting yours.
+    
+    The [gtk.image.Image] will track changes to the paintable and update
+    its size and contents in response to it.
+    Params:
+      paintable =       a [gdk.paintable.Paintable]
+    Returns:     a new [gtk.image.Image]
+  */
   static gtk.image.Image newFromPaintable(gdk.paintable.Paintable paintable = null)
   {
     GtkWidget* _cretval;
@@ -155,22 +173,25 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Creates a new `GtkImage` displaying pixbuf.
-   * The `GtkImage` does not assume a reference to the pixbuf; you still
-   * need to unref it if you own references. `GtkImage` will add its own
-   * reference rather than adopting yours.
-   * This is a helper for [gtk.image.Image.newFromPaintable], and you can't
-   * get back the exact pixbuf once this is called, only a texture.
-   * Note that this function just creates an `GtkImage` from the pixbuf.
-   * The `GtkImage` created will not react to state changes. Should you
-   * want that, you should use [gtk.image.Image.newFromIconName].
-   * Params:
-   *   pixbuf = a `GdkPixbuf`
-   * Returns: a new `GtkImage`
-
-   * Deprecated: Use [gtk.image.Image.newFromPaintable] and
-   *   [gdk.texture.Texture.newForPixbuf] instead
-   */
+      Creates a new [gtk.image.Image] displaying pixbuf.
+    
+    The [gtk.image.Image] does not assume a reference to the pixbuf; you still
+    need to unref it if you own references. [gtk.image.Image] will add its own
+    reference rather than adopting yours.
+    
+    This is a helper for [gtk.image.Image.newFromPaintable], and you can't
+    get back the exact pixbuf once this is called, only a texture.
+    
+    Note that this function just creates an [gtk.image.Image] from the pixbuf.
+    The [gtk.image.Image] created will not react to state changes. Should you
+    want that, you should use [gtk.image.Image.newFromIconName].
+    Params:
+      pixbuf =       a [gdkpixbuf.pixbuf.Pixbuf]
+    Returns:     a new [gtk.image.Image]
+  
+    Deprecated:     Use [gtk.image.Image.newFromPaintable] and
+        [gdk.texture.Texture.newForPixbuf] instead
+  */
   static gtk.image.Image newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     GtkWidget* _cretval;
@@ -180,20 +201,23 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Creates a new `GtkImage` displaying the resource file resource_path.
-   * If the file isn’t found or can’t be loaded, the resulting `GtkImage` will
-   * display a “broken image” icon. This function never returns %NULL,
-   * it always returns a valid `GtkImage` widget.
-   * If you need to detect failures to load the file, use
-   * [gdkpixbuf.pixbuf.Pixbuf.newFromFile] to load the file yourself,
-   * then create the `GtkImage` from the pixbuf.
-   * The storage type $(LPAREN)see [gtk.image.Image.getStorageType]$(RPAREN) of
-   * the returned image is not defined, it will be whatever is
-   * appropriate for displaying the file.
-   * Params:
-   *   resourcePath = a resource path
-   * Returns: a new `GtkImage`
-   */
+      Creates a new [gtk.image.Image] displaying the resource file resource_path.
+    
+    If the file isn’t found or can’t be loaded, the resulting [gtk.image.Image] will
+    display a “broken image” icon. This function never returns null,
+    it always returns a valid [gtk.image.Image] widget.
+    
+    If you need to detect failures to load the file, use
+    [gdkpixbuf.pixbuf.Pixbuf.newFromFile] to load the file yourself,
+    then create the [gtk.image.Image] from the pixbuf.
+    
+    The storage type (see [gtk.image.Image.getStorageType]) of
+    the returned image is not defined, it will be whatever is
+    appropriate for displaying the file.
+    Params:
+      resourcePath =       a resource path
+    Returns:     a new [gtk.image.Image]
+  */
   static gtk.image.Image newFromResource(string resourcePath)
   {
     GtkWidget* _cretval;
@@ -204,21 +228,22 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Resets the image to be empty.
-   */
+      Resets the image to be empty.
+  */
   void clear()
   {
     gtk_image_clear(cast(GtkImage*)cPtr);
   }
 
   /**
-   * Gets the `GIcon` being displayed by the `GtkImage`.
-   * The storage type of the image must be %GTK_IMAGE_EMPTY or
-   * %GTK_IMAGE_GICON $(LPAREN)see [gtk.image.Image.getStorageType]$(RPAREN).
-   * The caller of this function does not own a reference to the
-   * returned `GIcon`.
-   * Returns: a `GIcon`
-   */
+      Gets the [gio.icon.Icon] being displayed by the [gtk.image.Image].
+    
+    The storage type of the image must be [gtk.types.ImageType.Empty] or
+    [gtk.types.ImageType.Gicon] (see [gtk.image.Image.getStorageType]).
+    The caller of this function does not own a reference to the
+    returned [gio.icon.Icon].
+    Returns:     a [gio.icon.Icon]
+  */
   gio.icon.Icon getGicon()
   {
     GIcon* _cretval;
@@ -228,13 +253,14 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Gets the icon name and size being displayed by the `GtkImage`.
-   * The storage type of the image must be %GTK_IMAGE_EMPTY or
-   * %GTK_IMAGE_ICON_NAME $(LPAREN)see [gtk.image.Image.getStorageType]$(RPAREN).
-   * The returned string is owned by the `GtkImage` and should not
-   * be freed.
-   * Returns: the icon name
-   */
+      Gets the icon name and size being displayed by the [gtk.image.Image].
+    
+    The storage type of the image must be [gtk.types.ImageType.Empty] or
+    [gtk.types.ImageType.IconName] (see [gtk.image.Image.getStorageType]).
+    The returned string is owned by the [gtk.image.Image] and should not
+    be freed.
+    Returns:     the icon name
+  */
   string getIconName()
   {
     const(char)* _cretval;
@@ -244,9 +270,9 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Gets the icon size used by the image when rendering icons.
-   * Returns: the image size used by icons
-   */
+      Gets the icon size used by the image when rendering icons.
+    Returns:     the image size used by icons
+  */
   gtk.types.IconSize getIconSize()
   {
     GtkIconSize _cretval;
@@ -256,13 +282,14 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Gets the image `GdkPaintable` being displayed by the `GtkImage`.
-   * The storage type of the image must be %GTK_IMAGE_EMPTY or
-   * %GTK_IMAGE_PAINTABLE $(LPAREN)see [gtk.image.Image.getStorageType]$(RPAREN).
-   * The caller of this function does not own a reference to the
-   * returned paintable.
-   * Returns: the displayed paintable
-   */
+      Gets the image [gdk.paintable.Paintable] being displayed by the [gtk.image.Image].
+    
+    The storage type of the image must be [gtk.types.ImageType.Empty] or
+    [gtk.types.ImageType.Paintable] (see [gtk.image.Image.getStorageType]).
+    The caller of this function does not own a reference to the
+    returned paintable.
+    Returns:     the displayed paintable
+  */
   gdk.paintable.Paintable getPaintable()
   {
     GdkPaintable* _cretval;
@@ -272,9 +299,9 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Gets the pixel size used for named icons.
-   * Returns: the pixel size used for named icons.
-   */
+      Gets the pixel size used for named icons.
+    Returns:     the pixel size used for named icons.
+  */
   int getPixelSize()
   {
     int _retval;
@@ -283,12 +310,13 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Gets the type of representation being used by the `GtkImage`
-   * to store image data.
-   * If the `GtkImage` has no image data, the return value will
-   * be %GTK_IMAGE_EMPTY.
-   * Returns: image representation being used
-   */
+      Gets the type of representation being used by the [gtk.image.Image]
+    to store image data.
+    
+    If the [gtk.image.Image] has no image data, the return value will
+    be [gtk.types.ImageType.Empty].
+    Returns:     image representation being used
+  */
   gtk.types.ImageType getStorageType()
   {
     GtkImageType _cretval;
@@ -298,11 +326,12 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Sets a `GtkImage` to show a file.
-   * See [gtk.image.Image.newFromFile] for details.
-   * Params:
-   *   filename = a filename
-   */
+      Sets a [gtk.image.Image] to show a file.
+    
+    See [gtk.image.Image.newFromFile] for details.
+    Params:
+      filename =       a filename
+  */
   void setFromFile(string filename = null)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -310,22 +339,24 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Sets a `GtkImage` to show a `GIcon`.
-   * See [gtk.image.Image.newFromGicon] for details.
-   * Params:
-   *   icon = an icon
-   */
+      Sets a [gtk.image.Image] to show a [gio.icon.Icon].
+    
+    See [gtk.image.Image.newFromGicon] for details.
+    Params:
+      icon =       an icon
+  */
   void setFromGicon(gio.icon.Icon icon)
   {
     gtk_image_set_from_gicon(cast(GtkImage*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets a `GtkImage` to show a named icon.
-   * See [gtk.image.Image.newFromIconName] for details.
-   * Params:
-   *   iconName = an icon name
-   */
+      Sets a [gtk.image.Image] to show a named icon.
+    
+    See [gtk.image.Image.newFromIconName] for details.
+    Params:
+      iconName =       an icon name
+  */
   void setFromIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
@@ -333,38 +364,42 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Sets a `GtkImage` to show a `GdkPaintable`.
-   * See [gtk.image.Image.newFromPaintable] for details.
-   * Params:
-   *   paintable = a `GdkPaintable`
-   */
+      Sets a [gtk.image.Image] to show a [gdk.paintable.Paintable].
+    
+    See [gtk.image.Image.newFromPaintable] for details.
+    Params:
+      paintable =       a [gdk.paintable.Paintable]
+  */
   void setFromPaintable(gdk.paintable.Paintable paintable = null)
   {
     gtk_image_set_from_paintable(cast(GtkImage*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets a `GtkImage` to show a `GdkPixbuf`.
-   * See [gtk.image.Image.newFromPixbuf] for details.
-   * Note: This is a helper for [gtk.image.Image.setFromPaintable],
-   * and you can't get back the exact pixbuf once this is called,
-   * only a paintable.
-   * Params:
-   *   pixbuf = a `GdkPixbuf` or `NULL`
-
-   * Deprecated: Use [gtk.image.Image.setFromPaintable] instead
-   */
+      Sets a [gtk.image.Image] to show a [gdkpixbuf.pixbuf.Pixbuf].
+    
+    See [gtk.image.Image.newFromPixbuf] for details.
+    
+    Note: This is a helper for [gtk.image.Image.setFromPaintable],
+    and you can't get back the exact pixbuf once this is called,
+    only a paintable.
+    Params:
+      pixbuf =       a [gdkpixbuf.pixbuf.Pixbuf] or `NULL`
+  
+    Deprecated:     Use [gtk.image.Image.setFromPaintable] instead
+  */
   void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     gtk_image_set_from_pixbuf(cast(GtkImage*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets a `GtkImage` to show a resource.
-   * See [gtk.image.Image.newFromResource] for details.
-   * Params:
-   *   resourcePath = a resource path
-   */
+      Sets a [gtk.image.Image] to show a resource.
+    
+    See [gtk.image.Image.newFromResource] for details.
+    Params:
+      resourcePath =       a resource path
+  */
   void setFromResource(string resourcePath = null)
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -372,22 +407,23 @@ class Image : gtk.widget.Widget
   }
 
   /**
-   * Suggests an icon size to the theme for named icons.
-   * Params:
-   *   iconSize = the new icon size
-   */
+      Suggests an icon size to the theme for named icons.
+    Params:
+      iconSize =       the new icon size
+  */
   void setIconSize(gtk.types.IconSize iconSize)
   {
     gtk_image_set_icon_size(cast(GtkImage*)cPtr, iconSize);
   }
 
   /**
-   * Sets the pixel size to use for named icons.
-   * If the pixel size is set to a value !\= -1, it is used instead
-   * of the icon size set by [gtk.image.Image.setFromIconName].
-   * Params:
-   *   pixelSize = the new pixel size
-   */
+      Sets the pixel size to use for named icons.
+    
+    If the pixel size is set to a value != -1, it is used instead
+    of the icon size set by [gtk.image.Image.setFromIconName].
+    Params:
+      pixelSize =       the new pixel size
+  */
   void setPixelSize(int pixelSize)
   {
     gtk_image_set_pixel_size(cast(GtkImage*)cPtr, pixelSize);

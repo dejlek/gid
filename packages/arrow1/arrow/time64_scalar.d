@@ -7,6 +7,7 @@ import arrow.time64_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class Time64Scalar : arrow.scalar.Scalar
 {
 
@@ -26,6 +27,7 @@ class Time64Scalar : arrow.scalar.Scalar
     return getType();
   }
 
+  /** */
   this(arrow.time64_data_type.Time64DataType dataType, long value)
   {
     GArrowTime64Scalar* _cretval;
@@ -33,6 +35,7 @@ class Time64Scalar : arrow.scalar.Scalar
     this(_cretval, Yes.Take);
   }
 
+  /** */
   long getValue()
   {
     long _retval;

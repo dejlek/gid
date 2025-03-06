@@ -7,8 +7,8 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * Current drawing state.
- */
+    Current drawing state.
+*/
 class DrawState : gobject.boxed.Boxed
 {
 

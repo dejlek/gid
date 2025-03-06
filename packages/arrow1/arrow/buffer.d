@@ -8,6 +8,7 @@ import glib.bytes;
 import glib.error;
 import gobject.object;
 
+/** */
 class Buffer : gobject.object.ObjectG
 {
 
@@ -27,6 +28,7 @@ class Buffer : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(ubyte[] data)
   {
     GArrowBuffer* _cretval;
@@ -39,6 +41,7 @@ class Buffer : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   static arrow.buffer.Buffer newBytes(glib.bytes.Bytes data)
   {
     GArrowBuffer* _cretval;
@@ -47,6 +50,7 @@ class Buffer : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.buffer.Buffer copy(long start, long size)
   {
     GArrowBuffer* _cretval;
@@ -58,6 +62,7 @@ class Buffer : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equal(arrow.buffer.Buffer otherBuffer)
   {
     bool _retval;
@@ -65,6 +70,7 @@ class Buffer : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equalNBytes(arrow.buffer.Buffer otherBuffer, long nBytes)
   {
     bool _retval;
@@ -72,6 +78,7 @@ class Buffer : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getCapacity()
   {
     long _retval;
@@ -81,6 +88,7 @@ class Buffer : gobject.object.ObjectG
 
   alias getData = gobject.object.ObjectG.getData;
 
+  /** */
   glib.bytes.Bytes getData()
   {
     GBytes* _cretval;
@@ -89,6 +97,7 @@ class Buffer : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   glib.bytes.Bytes getMutableData()
   {
     GBytes* _cretval;
@@ -97,6 +106,7 @@ class Buffer : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.buffer.Buffer getParent()
   {
     GArrowBuffer* _cretval;
@@ -105,6 +115,7 @@ class Buffer : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getSize()
   {
     long _retval;
@@ -112,6 +123,7 @@ class Buffer : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isMutable()
   {
     bool _retval;
@@ -119,6 +131,7 @@ class Buffer : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.buffer.Buffer slice(long offset, long size)
   {
     GArrowBuffer* _cretval;

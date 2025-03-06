@@ -13,11 +13,13 @@ import gio.loadable_icon;
 import gio.loadable_icon_mixin;
 
 /**
- * A `GdkTexture` representing a DMA buffer.
- * To create a `GdkDmabufTexture`, use the auxiliary
- * [gdk.dmabuf_texture_builder.DmabufTextureBuilder] object.
- * Dma-buf textures can only be created on Linux.
- */
+    A [gdk.texture.Texture] representing a DMA buffer.
+  
+  To create a [gdk.dmabuf_texture.DmabufTexture], use the auxiliary
+  [gdk.dmabuf_texture_builder.DmabufTextureBuilder] object.
+  
+  Dma-buf textures can only be created on Linux.
+*/
 class DmabufTexture : gdk.texture.Texture
 {
 

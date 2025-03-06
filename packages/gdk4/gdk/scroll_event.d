@@ -7,8 +7,8 @@ import gdk.types;
 import gid.gid;
 
 /**
- * An event related to a scrolling motion.
- */
+    An event related to a scrolling motion.
+*/
 class ScrollEvent : gdk.event.Event
 {
 
@@ -21,24 +21,26 @@ class ScrollEvent : gdk.event.Event
   }
 
   /**
-   * Extracts the scroll deltas of a scroll event.
-   * The deltas will be zero unless the scroll direction
-   * is %GDK_SCROLL_SMOOTH.
-   * For the representation unit of these deltas, see
-   * [gdk.scroll_event.ScrollEvent.getUnit].
-   * Params:
-   *   deltaX = return location for x scroll delta
-   *   deltaY = return location for y scroll delta
-   */
+      Extracts the scroll deltas of a scroll event.
+    
+    The deltas will be zero unless the scroll direction
+    is [gdk.types.ScrollDirection.Smooth].
+    
+    For the representation unit of these deltas, see
+    [gdk.scroll_event.ScrollEvent.getUnit].
+    Params:
+      deltaX =       return location for x scroll delta
+      deltaY =       return location for y scroll delta
+  */
   void getDeltas(out double deltaX, out double deltaY)
   {
     gdk_scroll_event_get_deltas(cast(GdkEvent*)cPtr, cast(double*)&deltaX, cast(double*)&deltaY);
   }
 
   /**
-   * Extracts the direction of a scroll event.
-   * Returns: the scroll direction of event
-   */
+      Extracts the direction of a scroll event.
+    Returns:     the scroll direction of event
+  */
   gdk.types.ScrollDirection getDirection()
   {
     GdkScrollDirection _cretval;
@@ -48,11 +50,12 @@ class ScrollEvent : gdk.event.Event
   }
 
   /**
-   * Extracts the scroll delta unit of a scroll event.
-   * The unit will always be %GDK_SCROLL_UNIT_WHEEL if the scroll direction is not
-   * %GDK_SCROLL_SMOOTH.
-   * Returns: the scroll unit.
-   */
+      Extracts the scroll delta unit of a scroll event.
+    
+    The unit will always be [gdk.types.ScrollUnit.Wheel] if the scroll direction is not
+    [gdk.types.ScrollDirection.Smooth].
+    Returns:     the scroll unit.
+  */
   gdk.types.ScrollUnit getUnit()
   {
     GdkScrollUnit _cretval;
@@ -62,15 +65,17 @@ class ScrollEvent : gdk.event.Event
   }
 
   /**
-   * Check whether a scroll event is a stop scroll event.
-   * Scroll sequences with smooth scroll information may provide
-   * a stop scroll event once the interaction with the device finishes,
-   * e.g. by lifting a finger. This stop scroll event is the signal
-   * that a widget may trigger kinetic scrolling based on the current
-   * velocity.
-   * Stop scroll events always have a delta of 0/0.
-   * Returns: %TRUE if the event is a scroll stop event
-   */
+      Check whether a scroll event is a stop scroll event.
+    
+    Scroll sequences with smooth scroll information may provide
+    a stop scroll event once the interaction with the device finishes,
+    e.g. by lifting a finger. This stop scroll event is the signal
+    that a widget may trigger kinetic scrolling based on the current
+    velocity.
+    
+    Stop scroll events always have a delta of 0/0.
+    Returns:     true if the event is a scroll stop event
+  */
   bool isStop()
   {
     bool _retval;

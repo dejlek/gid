@@ -8,9 +8,9 @@ import pango.color;
 import pango.types;
 
 /**
- * The `PangoAttrColor` structure is used to represent attributes that
- * are colors.
- */
+    The [pango.attr_color.AttrColor] structure is used to represent attributes that
+  are colors.
+*/
 class AttrColor
 {
   PangoAttrColor cInstance;

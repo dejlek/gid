@@ -8,8 +8,8 @@ import glib.types;
 import gobject.boxed;
 
 /**
- * An opaque structure representing an opened directory.
- */
+    An opaque structure representing an opened directory.
+*/
 class Dir : gobject.boxed.Boxed
 {
 
@@ -35,17 +35,17 @@ class Dir : gobject.boxed.Boxed
   }
 
   /**
-   * Opens a directory for reading. The names of the files in the
-   * directory can then be retrieved using [glib.dir.Dir.readName].  Note
-   * that the ordering is not defined.
-   * Params:
-   *   path = the path to the directory you are interested in. On Unix
-   *     in the on-disk encoding. On Windows in UTF-8
-   *   flags = Currently must be set to 0. Reserved for future use.
-   * Returns: a newly allocated #GDir on success, %NULL on failure.
-   *   If non-%NULL, you must free the result with [glib.dir.Dir.close]
-   *   when you are finished with it.
-   */
+      Opens a directory for reading. The names of the files in the
+    directory can then be retrieved using [glib.dir.Dir.readName].  Note
+    that the ordering is not defined.
+    Params:
+      path =       the path to the directory you are interested in. On Unix
+                in the on-disk encoding. On Windows in UTF-8
+      flags =       Currently must be set to 0. Reserved for future use.
+    Returns:     a newly allocated #GDir on success, null on failure.
+        If non-null, you must free the result with [glib.dir.Dir.close]
+        when you are finished with it.
+  */
   static glib.dir.Dir open(string path, uint flags)
   {
     GDir* _cretval;
@@ -59,20 +59,23 @@ class Dir : gobject.boxed.Boxed
   }
 
   /**
-   * Retrieves the name of another entry in the directory, or %NULL.
-   * The order of entries returned from this function is not defined,
-   * and may vary by file system or other operating-system dependent
-   * factors.
-   * %NULL may also be returned in case of errors. On Unix, you can
-   * check `errno` to find out if %NULL was returned because of an error.
-   * On Unix, the '.' and '..' entries are omitted, and the returned
-   * name is in the on-disk encoding.
-   * On Windows, as is true of all GLib functions which operate on
-   * filenames, the returned name is in UTF-8.
-   * Returns: The entry's name or %NULL if there are no
-   *   more entries. The return value is owned by GLib and
-   *   must not be modified or freed.
-   */
+      Retrieves the name of another entry in the directory, or null.
+    The order of entries returned from this function is not defined,
+    and may vary by file system or other operating-system dependent
+    factors.
+    
+    null may also be returned in case of errors. On Unix, you can
+    check `errno` to find out if null was returned because of an error.
+    
+    On Unix, the '.' and '..' entries are omitted, and the returned
+    name is in the on-disk encoding.
+    
+    On Windows, as is true of all GLib functions which operate on
+    filenames, the returned name is in UTF-8.
+    Returns:     The entry's name or null if there are no
+        more entries. The return value is owned by GLib and
+        must not be modified or freed.
+  */
   string readName()
   {
     const(char)* _cretval;
@@ -82,32 +85,34 @@ class Dir : gobject.boxed.Boxed
   }
 
   /**
-   * Resets the given directory. The next call to [glib.dir.Dir.readName]
-   * will return the first entry again.
-   */
+      Resets the given directory. The next call to [glib.dir.Dir.readName]
+    will return the first entry again.
+  */
   void rewind()
   {
     g_dir_rewind(cast(GDir*)cPtr);
   }
 
   /**
-   * Creates a subdirectory in the preferred directory for temporary
-   * files $(LPAREN)as returned by [glib.global.getTmpDir]$(RPAREN).
-   * tmpl should be a string in the GLib file name encoding containing
-   * a sequence of six 'X' characters, as the parameter to [glib.global.mkstemp].
-   * However, unlike these functions, the template should only be a
-   * basename, no directory components are allowed. If template is
-   * %NULL, a default template is used.
-   * Note that in contrast to [glib.global.mkdtemp] $(LPAREN)$(RPAREN)(and mkdtemp) tmpl is not
-   * modified, and might thus be a read-only literal string.
-   * Params:
-   *   tmpl = Template for directory name,
-   *     as in [glib.global.mkdtemp], basename only, or %NULL for a default template
-   * Returns: The actual name used. This string
-   *   should be freed with [glib.global.gfree] when not needed any longer and is
-   *   is in the GLib file name encoding. In case of errors, %NULL is
-   *   returned and error will be set.
-   */
+      Creates a subdirectory in the preferred directory for temporary
+    files (as returned by [glib.global.getTmpDir]).
+    
+    tmpl should be a string in the GLib file name encoding containing
+    a sequence of six 'X' characters, as the parameter to [glib.global.mkstemp].
+    However, unlike these functions, the template should only be a
+    basename, no directory components are allowed. If template is
+    null, a default template is used.
+    
+    Note that in contrast to [glib.global.mkdtemp] (and mkdtemp()) tmpl is not
+    modified, and might thus be a read-only literal string.
+    Params:
+      tmpl =       Template for directory name,
+          as in [glib.global.mkdtemp], basename only, or null for a default template
+    Returns:     The actual name used. This string
+        should be freed with [glib.global.gfree] when not needed any longer and is
+        is in the GLib file name encoding. In case of errors, null is
+        returned and error will be set.
+  */
   static string makeTmp(string tmpl = null)
   {
     char* _cretval;

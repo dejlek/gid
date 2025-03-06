@@ -9,6 +9,7 @@ import gid.gid;
 import glib.bytes;
 import glib.error;
 
+/** */
 class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
@@ -28,6 +29,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return getType();
   }
 
+  /** */
   this(arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType dataType)
   {
     GArrowFixedSizeBinaryArrayBuilder* _cretval;
@@ -35,6 +37,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool appendValue(ubyte[] value = null)
   {
     bool _retval;
@@ -50,6 +53,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   bool appendValueBytes(glib.bytes.Bytes value)
   {
     bool _retval;
@@ -61,16 +65,16 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-   * Append multiple values at once. It's more efficient than multiple
-   * `append` and `append_null` calls.
-   * Params:
-   *   values = The array of #GBytes.
-   *   isValids = The array of
-   *     boolean that shows whether the Nth value is valid or not. If the
-   *     Nth is_valids is %TRUE, the Nth values is valid value. Otherwise
-   *     the Nth value is null value.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append multiple values at once. It's more efficient than multiple
+    `append` and `append_null` calls.
+    Params:
+      values =       The array of #GBytes.
+      isValids =       The array of
+          boolean that shows whether the Nth value is valid or not. If the
+          Nth is_valids is true, the Nth values is valid value. Otherwise
+          the Nth value is null value.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendValues(glib.bytes.Bytes[] values, bool[] isValids = null)
   {
     bool _retval;
@@ -96,18 +100,19 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-   * Append multiple values at once. It's more efficient than multiple
-   * `append` and `append_null` calls.
-   * This is more efficient than
-   * [arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValues].
-   * Params:
-   *   values = A #GBytes that contains multiple values.
-   *   isValids = The array of
-   *     boolean that shows whether the Nth value is valid or not. If the
-   *     Nth is_valids is %TRUE, the Nth values is valid value. Otherwise
-   *     the Nth value is null value.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append multiple values at once. It's more efficient than multiple
+    `append` and `append_null` calls.
+    
+    This is more efficient than
+    [arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValues].
+    Params:
+      values =       A #GBytes that contains multiple values.
+      isValids =       The array of
+          boolean that shows whether the Nth value is valid or not. If the
+          Nth is_valids is true, the Nth values is valid value. Otherwise
+          the Nth value is null value.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendValuesPacked(glib.bytes.Bytes values, bool[] isValids = null)
   {
     bool _retval;

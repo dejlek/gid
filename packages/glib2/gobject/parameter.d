@@ -7,11 +7,11 @@ import gobject.types;
 import gobject.value;
 
 /**
- * The GParameter struct is an auxiliary structure used
- * to hand parameter name/value pairs to [gobject.object.ObjectG.newv].
+    The GParameter struct is an auxiliary structure used
+  to hand parameter name/value pairs to [gobject.object.ObjectG.newv].
 
- * Deprecated: This type is not introspectable.
- */
+  Deprecated:     This type is not introspectable.
+*/
 class Parameter
 {
   GParameter cInstance;

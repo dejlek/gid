@@ -10,6 +10,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class Scalar : gobject.object.ObjectG
 {
 
@@ -29,6 +30,7 @@ class Scalar : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   static arrow.scalar.Scalar parse(arrow.data_type.DataType dataType, ubyte[] data)
   {
     GArrowScalar* _cretval;
@@ -45,6 +47,7 @@ class Scalar : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.scalar.Scalar cast_(arrow.data_type.DataType dataType, arrow.cast_options.CastOptions options = null)
   {
     GArrowScalar* _cretval;
@@ -56,6 +59,7 @@ class Scalar : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equal(arrow.scalar.Scalar otherScalar)
   {
     bool _retval;
@@ -63,6 +67,7 @@ class Scalar : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equalOptions(arrow.scalar.Scalar otherScalar, arrow.equal_options.EqualOptions options = null)
   {
     bool _retval;
@@ -70,6 +75,7 @@ class Scalar : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.data_type.DataType getDataType()
   {
     GArrowDataType* _cretval;
@@ -78,6 +84,7 @@ class Scalar : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool isValid()
   {
     bool _retval;
@@ -85,6 +92,7 @@ class Scalar : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;

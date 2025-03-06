@@ -21,40 +21,58 @@ import gtk.types;
 import gtk.window;
 
 /**
- * A `GtkShortcutsWindow` shows information about the keyboard shortcuts
- * and gestures of an application.
- * The shortcuts can be grouped, and you can have multiple sections in this
- * window, corresponding to the major modes of your application.
- * Additionally, the shortcuts can be filtered by the current view, to avoid
- * showing information that is not relevant in the current application context.
- * The recommended way to construct a `GtkShortcutsWindow` is with
- * [gtk.builder.Builder], by using the `<child>` tag to populate a
- * `GtkShortcutsWindow` with one or more [gtk.shortcuts_section.ShortcutsSection] objects,
- * which contain one or more [gtk.shortcuts_group.ShortcutsGroup] instances, which, in turn,
- * contain [gtk.shortcuts_shortcut.ShortcutsShortcut] instances.
- * If you need to add a section programmatically, use [gtk.shortcuts_window.ShortcutsWindow.addSection]
- * instead of [gtk.window.Window.setChild], as the shortcuts window manages
- * its children directly.
- * # A simple example:
- * ![](gedit-shortcuts.png)
- * This example has as single section. As you can see, the shortcut groups
- * are arranged in columns, and spread across several pages if there are too
- * many to find on a single page.
- * The .ui file for this example can be found [here](https://gitlab.gnome.org/GNOME/gtk/tree/main/demos/gtk-demo/shortcuts-gedit.ui).
- * # An example with multiple views:
- * ![](clocks-shortcuts.png)
- * This example shows a `GtkShortcutsWindow` that has been configured to show only
- * the shortcuts relevant to the "stopwatch" view.
- * The .ui file for this example can be found [here](https://gitlab.gnome.org/GNOME/gtk/tree/main/demos/gtk-demo/shortcuts-clocks.ui).
- * # An example with multiple sections:
- * ![](builder-shortcuts.png)
- * This example shows a `GtkShortcutsWindow` with two sections, "Editor Shortcuts"
- * and "Terminal Shortcuts".
- * The .ui file for this example can be found [here](https://gitlab.gnome.org/GNOME/gtk/tree/main/demos/gtk-demo/shortcuts-builder.ui).
- * ## CSS nodes
- * `GtkShortcutsWindow` has a single CSS node with the name `window` and style
- * class `.shortcuts`.
- */
+    A [gtk.shortcuts_window.ShortcutsWindow] shows information about the keyboard shortcuts
+  and gestures of an application.
+  
+  The shortcuts can be grouped, and you can have multiple sections in this
+  window, corresponding to the major modes of your application.
+  
+  Additionally, the shortcuts can be filtered by the current view, to avoid
+  showing information that is not relevant in the current application context.
+  
+  The recommended way to construct a [gtk.shortcuts_window.ShortcutsWindow] is with
+  [gtk.builder.Builder], by using the `<child>` tag to populate a
+  [gtk.shortcuts_window.ShortcutsWindow] with one or more [gtk.shortcuts_section.ShortcutsSection] objects,
+  which contain one or more [gtk.shortcuts_group.ShortcutsGroup] instances, which, in turn,
+  contain [gtk.shortcuts_shortcut.ShortcutsShortcut] instances.
+  
+  If you need to add a section programmatically, use [gtk.shortcuts_window.ShortcutsWindow.addSection]
+  instead of [gtk.window.Window.setChild], as the shortcuts window manages
+  its children directly.
+  
+  # A simple example:
+  
+  ![](gedit-shortcuts.png)
+  
+  This example has as single section. As you can see, the shortcut groups
+  are arranged in columns, and spread across several pages if there are too
+  many to find on a single page.
+  
+  The .ui file for this example can be found [here](https://gitlab.gnome.org/GNOME/gtk/tree/main/demos/gtk-demo/shortcuts-gedit.ui).
+  
+  # An example with multiple views:
+  
+  ![](clocks-shortcuts.png)
+  
+  This example shows a [gtk.shortcuts_window.ShortcutsWindow] that has been configured to show only
+  the shortcuts relevant to the "stopwatch" view.
+  
+  The .ui file for this example can be found [here](https://gitlab.gnome.org/GNOME/gtk/tree/main/demos/gtk-demo/shortcuts-clocks.ui).
+  
+  # An example with multiple sections:
+  
+  ![](builder-shortcuts.png)
+  
+  This example shows a [gtk.shortcuts_window.ShortcutsWindow] with two sections, "Editor Shortcuts"
+  and "Terminal Shortcuts".
+  
+  The .ui file for this example can be found [here](https://gitlab.gnome.org/GNOME/gtk/tree/main/demos/gtk-demo/shortcuts-builder.ui).
+  
+  ## CSS nodes
+  
+  [gtk.shortcuts_window.ShortcutsWindow] has a single CSS node with the name `window` and style
+  class `.shortcuts`.
+*/
 class ShortcutsWindow : gtk.window.Window
 {
 
@@ -75,35 +93,45 @@ class ShortcutsWindow : gtk.window.Window
   }
 
   /**
-   * Adds a section to the shortcuts window.
-   * This is the programmatic equivalent to using [gtk.builder.Builder] and a
-   * `<child>` tag to add the child.
-   * Using [gtk.window.Window.setChild] is not appropriate as the shortcuts
-   * window manages its children internally.
-   * Params:
-   *   section = the `GtkShortcutsSection` to add
-   */
+      Adds a section to the shortcuts window.
+    
+    This is the programmatic equivalent to using [gtk.builder.Builder] and a
+    `<child>` tag to add the child.
+    
+    Using [gtk.window.Window.setChild] is not appropriate as the shortcuts
+    window manages its children internally.
+    Params:
+      section =       the [gtk.shortcuts_section.ShortcutsSection] to add
+  */
   void addSection(gtk.shortcuts_section.ShortcutsSection section)
   {
     gtk_shortcuts_window_add_section(cast(GtkShortcutsWindow*)cPtr, section ? cast(GtkShortcutsSection*)section.cPtr(No.Dup) : null);
   }
 
   /**
-   * Emitted when the user uses a keybinding to close the window.
-   * This is a [keybinding signal](class.SignalAction.html).
-   * The default binding for this signal is the Escape key.
-   *   shortcutsWindow = the instance the signal is connected to
-   */
+      Emitted when the user uses a keybinding to close the window.
+    
+    This is a [keybinding signal](class.SignalAction.html).
+    
+    The default binding for this signal is the Escape key.
+  
+    ## Parameters
+    $(LIST
+      * $(B shortcutsWindow) the instance the signal is connected to
+    )
+  */
   alias CloseCallbackDlg = void delegate(gtk.shortcuts_window.ShortcutsWindow shortcutsWindow);
+
+  /** ditto */
   alias CloseCallbackFunc = void function(gtk.shortcuts_window.ShortcutsWindow shortcutsWindow);
 
   /**
-   * Connect to Close signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Close signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectClose(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CloseCallbackDlg) || is(T : CloseCallbackFunc))
   {
@@ -120,21 +148,29 @@ class ShortcutsWindow : gtk.window.Window
   }
 
   /**
-   * Emitted when the user uses a keybinding to start a search.
-   * This is a [keybinding signal](class.SignalAction.html).
-   * The default binding for this signal is Control-F.
-   *   shortcutsWindow = the instance the signal is connected to
-   */
+      Emitted when the user uses a keybinding to start a search.
+    
+    This is a [keybinding signal](class.SignalAction.html).
+    
+    The default binding for this signal is Control-F.
+  
+    ## Parameters
+    $(LIST
+      * $(B shortcutsWindow) the instance the signal is connected to
+    )
+  */
   alias SearchCallbackDlg = void delegate(gtk.shortcuts_window.ShortcutsWindow shortcutsWindow);
+
+  /** ditto */
   alias SearchCallbackFunc = void function(gtk.shortcuts_window.ShortcutsWindow shortcutsWindow);
 
   /**
-   * Connect to Search signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Search signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectSearch(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SearchCallbackDlg) || is(T : SearchCallbackFunc))
   {

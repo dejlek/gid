@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class FeatherWriteProperties : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class FeatherWriteProperties : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowFeatherWriteProperties* _cretval;

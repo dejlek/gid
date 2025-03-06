@@ -6,6 +6,7 @@ import arrowdataset.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class PartitioningFactoryOptions : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class PartitioningFactoryOptions : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this()
   {
     GADatasetPartitioningFactoryOptions* _cretval;

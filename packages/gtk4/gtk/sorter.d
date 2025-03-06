@@ -8,22 +8,27 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * `GtkSorter` is an object to describe sorting criteria.
- * Its primary user is [gtk.sort_list_model.SortListModel]
- * The model will use a sorter to determine the order in which
- * its items should appear by calling [gtk.sorter.Sorter.compare]
- * for pairs of items.
- * Sorters may change their sorting behavior through their lifetime.
- * In that case, they will emit the [gtk.sorter.Sorter.changed] signal
- * to notify that the sort order is no longer valid and should be updated
- * by calling [gtk.sorter.Sorter.compare] again.
- * GTK provides various pre-made sorter implementations for common sorting
- * operations. [gtk.column_view.ColumnView] has built-in support for sorting lists
- * via the [gtk.column_view_column.ColumnViewColumn.Sorter] property, where the user can
- * change the sorting by clicking on list headers.
- * Of course, in particular for large lists, it is also possible to subclass
- * `GtkSorter` and provide one's own sorter.
- */
+    [gtk.sorter.Sorter] is an object to describe sorting criteria.
+  
+  Its primary user is [gtk.sort_list_model.SortListModel]
+  
+  The model will use a sorter to determine the order in which
+  its items should appear by calling [gtk.sorter.Sorter.compare]
+  for pairs of items.
+  
+  Sorters may change their sorting behavior through their lifetime.
+  In that case, they will emit the [gtk.sorter.Sorter.changed] signal
+  to notify that the sort order is no longer valid and should be updated
+  by calling [gtk.sorter.Sorter.compare] again.
+  
+  GTK provides various pre-made sorter implementations for common sorting
+  operations. [gtk.column_view.ColumnView] has built-in support for sorting lists
+  via the [gtk.column_view_column.ColumnViewColumn.Sorter] property, where the user can
+  change the sorting by clicking on list headers.
+  
+  Of course, in particular for large lists, it is also possible to subclass
+  [gtk.sorter.Sorter] and provide one's own sorter.
+*/
 class Sorter : gobject.object.ObjectG
 {
 
@@ -44,40 +49,48 @@ class Sorter : gobject.object.ObjectG
   }
 
   /**
-   * Notifies all users of the sorter that it has changed.
-   * This emits the [gtk.sorter.Sorter.changed] signal. Users
-   * of the sorter should then update the sort order via
-   * [gtk.sorter.Sorter.compare].
-   * Depending on the change parameter, it may be possible to
-   * update the sort order without a full resorting. Refer to
-   * the [gtk.types.SorterChange] documentation for details.
-   * This function is intended for implementers of `GtkSorter`
-   * subclasses and should not be called from other functions.
-   * Params:
-   *   change = How the sorter changed
-   */
+      Notifies all users of the sorter that it has changed.
+    
+    This emits the [gtk.sorter.Sorter.changed] signal. Users
+    of the sorter should then update the sort order via
+    [gtk.sorter.Sorter.compare].
+    
+    Depending on the change parameter, it may be possible to
+    update the sort order without a full resorting. Refer to
+    the [gtk.types.SorterChange] documentation for details.
+    
+    This function is intended for implementers of [gtk.sorter.Sorter]
+    subclasses and should not be called from other functions.
+    Params:
+      change =       How the sorter changed
+  */
   void changed(gtk.types.SorterChange change)
   {
     gtk_sorter_changed(cast(GtkSorter*)cPtr, change);
   }
 
   /**
-   * Compares two given items according to the sort order implemented
-   * by the sorter.
-   * Sorters implement a partial order:
-   * * It is reflexive, ie a \= a
-   * * It is antisymmetric, ie if a < b and b < a, then a \= b
-   * * It is transitive, ie given any 3 items with a ≤ b and b ≤ c,
-   * then a ≤ c
-   * The sorter may signal it conforms to additional constraints
-   * via the return value of [gtk.sorter.Sorter.getOrder].
-   * Params:
-   *   item1 = first item to compare
-   *   item2 = second item to compare
-   * Returns: %GTK_ORDERING_EQUAL if item1 \=\= item2,
-   *   %GTK_ORDERING_SMALLER if item1 < item2,
-   *   %GTK_ORDERING_LARGER if item1 > item2
-   */
+      Compares two given items according to the sort order implemented
+    by the sorter.
+    
+    Sorters implement a partial order:
+    
+    $(LIST
+      * It is reflexive, ie a = a
+      * It is antisymmetric, ie if a < b and b < a, then a = b
+      * It is transitive, ie given any 3 items with a ≤ b and b ≤ c,
+        then a ≤ c
+    )
+      
+    The sorter may signal it conforms to additional constraints
+    via the return value of [gtk.sorter.Sorter.getOrder].
+    Params:
+      item1 =       first item to compare
+      item2 =       second item to compare
+    Returns:     [gtk.types.Ordering.Equal] if item1 == item2,
+        [gtk.types.Ordering.Smaller] if item1 < item2,
+        [gtk.types.Ordering.Larger] if item1 > item2
+  */
   gtk.types.Ordering compare(gobject.object.ObjectG item1, gobject.object.ObjectG item2)
   {
     GtkOrdering _cretval;
@@ -87,12 +100,14 @@ class Sorter : gobject.object.ObjectG
   }
 
   /**
-   * Gets the order that self conforms to.
-   * See [gtk.types.SorterOrder] for details
-   * of the possible return values.
-   * This function is intended to allow optimizations.
-   * Returns: The order
-   */
+      Gets the order that self conforms to.
+    
+    See [gtk.types.SorterOrder] for details
+    of the possible return values.
+    
+    This function is intended to allow optimizations.
+    Returns:     The order
+  */
   gtk.types.SorterOrder getOrder()
   {
     GtkSorterOrder _cretval;
@@ -102,27 +117,35 @@ class Sorter : gobject.object.ObjectG
   }
 
   /**
-   * Emitted whenever the sorter changed.
-   * Users of the sorter should then update the sort order
-   * again via [gtk.sorter.Sorter.compare].
-   * [gtk.sort_list_model.SortListModel] handles this signal automatically.
-   * Depending on the change parameter, it may be possible to update
-   * the sort order without a full resorting. Refer to the
-   * [gtk.types.SorterChange] documentation for details.
-   * Params
-   *   change = how the sorter changed
-   *   sorter = the instance the signal is connected to
-   */
+      Emitted whenever the sorter changed.
+    
+    Users of the sorter should then update the sort order
+    again via [gtk.sorter.Sorter.compare].
+    
+    [gtk.sort_list_model.SortListModel] handles this signal automatically.
+    
+    Depending on the change parameter, it may be possible to update
+    the sort order without a full resorting. Refer to the
+    [gtk.types.SorterChange] documentation for details.
+  
+    ## Parameters
+    $(LIST
+      * $(B change)       how the sorter changed
+      * $(B sorter) the instance the signal is connected to
+    )
+  */
   alias ChangedCallbackDlg = void delegate(gtk.types.SorterChange change, gtk.sorter.Sorter sorter);
+
+  /** ditto */
   alias ChangedCallbackFunc = void function(gtk.types.SorterChange change, gtk.sorter.Sorter sorter);
 
   /**
-   * Connect to Changed signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Changed signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {

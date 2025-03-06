@@ -6,6 +6,7 @@ import arrow.floating_point_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class FloatDataType : arrow.floating_point_data_type.FloatingPointDataType
 {
 
@@ -25,6 +26,7 @@ class FloatDataType : arrow.floating_point_data_type.FloatingPointDataType
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowFloatDataType* _cretval;

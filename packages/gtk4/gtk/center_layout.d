@@ -9,12 +9,14 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkCenterLayout` is a layout manager that manages up to three children.
- * The start widget is allocated at the start of the layout $(LPAREN)left in
- * left-to-right locales and right in right-to-left ones$(RPAREN), and the end
- * widget at the end.
- * The center widget is centered regarding the full width of the layout's.
- */
+    [gtk.center_layout.CenterLayout] is a layout manager that manages up to three children.
+  
+  The start widget is allocated at the start of the layout (left in
+  left-to-right locales and right in right-to-left ones), and the end
+  widget at the end.
+  
+  The center widget is centered regarding the full width of the layout's.
+*/
 class CenterLayout : gtk.layout_manager.LayoutManager
 {
 
@@ -35,9 +37,9 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
-   * Creates a new `GtkCenterLayout`.
-   * Returns: the newly created `GtkCenterLayout`
-   */
+      Creates a new [gtk.center_layout.CenterLayout].
+    Returns:     the newly created [gtk.center_layout.CenterLayout]
+  */
   this()
   {
     GtkLayoutManager* _cretval;
@@ -46,9 +48,9 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
-   * Returns the baseline position of the layout.
-   * Returns: The current baseline position of self.
-   */
+      Returns the baseline position of the layout.
+    Returns:     The current baseline position of self.
+  */
   gtk.types.BaselinePosition getBaselinePosition()
   {
     GtkBaselinePosition _cretval;
@@ -58,9 +60,9 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
-   * Returns the center widget of the layout.
-   * Returns: the current center widget of self
-   */
+      Returns the center widget of the layout.
+    Returns:     the current center widget of self
+  */
   gtk.widget.Widget getCenterWidget()
   {
     GtkWidget* _cretval;
@@ -70,9 +72,9 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
-   * Returns the end widget of the layout.
-   * Returns: the current end widget of self
-   */
+      Returns the end widget of the layout.
+    Returns:     the current end widget of self
+  */
   gtk.widget.Widget getEndWidget()
   {
     GtkWidget* _cretval;
@@ -82,9 +84,9 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
-   * Gets the current orienration of the layout manager.
-   * Returns: The current orientation of self
-   */
+      Gets the current orienration of the layout manager.
+    Returns:     The current orientation of self
+  */
   gtk.types.Orientation getOrientation()
   {
     GtkOrientation _cretval;
@@ -94,9 +96,9 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
-   * Gets whether self shrinks the center widget after other children.
-   * Returns: whether to shrink the center widget after others
-   */
+      Gets whether self shrinks the center widget after other children.
+    Returns:     whether to shrink the center widget after others
+  */
   bool getShrinkCenterLast()
   {
     bool _retval;
@@ -105,9 +107,9 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
-   * Returns the start widget of the layout.
-   * Returns: The current start widget of self
-   */
+      Returns the start widget of the layout.
+    Returns:     The current start widget of self
+  */
   gtk.widget.Widget getStartWidget()
   {
     GtkWidget* _cretval;
@@ -117,68 +119,73 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
-   * Sets the new baseline position of self
-   * Params:
-   *   baselinePosition = the new baseline position
-   */
+      Sets the new baseline position of self
+    Params:
+      baselinePosition =       the new baseline position
+  */
   void setBaselinePosition(gtk.types.BaselinePosition baselinePosition)
   {
     gtk_center_layout_set_baseline_position(cast(GtkCenterLayout*)cPtr, baselinePosition);
   }
 
   /**
-   * Sets the new center widget of self.
-   * To remove the existing center widget, pass %NULL.
-   * Params:
-   *   widget = the new center widget
-   */
+      Sets the new center widget of self.
+    
+    To remove the existing center widget, pass null.
+    Params:
+      widget =       the new center widget
+  */
   void setCenterWidget(gtk.widget.Widget widget = null)
   {
     gtk_center_layout_set_center_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the new end widget of self.
-   * To remove the existing center widget, pass %NULL.
-   * Params:
-   *   widget = the new end widget
-   */
+      Sets the new end widget of self.
+    
+    To remove the existing center widget, pass null.
+    Params:
+      widget =       the new end widget
+  */
   void setEndWidget(gtk.widget.Widget widget = null)
   {
     gtk_center_layout_set_end_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the orientation of self.
-   * Params:
-   *   orientation = the new orientation
-   */
+      Sets the orientation of self.
+    Params:
+      orientation =       the new orientation
+  */
   void setOrientation(gtk.types.Orientation orientation)
   {
     gtk_center_layout_set_orientation(cast(GtkCenterLayout*)cPtr, orientation);
   }
 
   /**
-   * Sets whether to shrink the center widget after other children.
-   * By default, when there's no space to give all three children their
-   * natural widths, the start and end widgets start shrinking and the
-   * center child keeps natural width until they reach minimum width.
-   * If set to `FALSE`, start and end widgets keep natural width and the
-   * center widget starts shrinking instead.
-   * Params:
-   *   shrinkCenterLast = whether to shrink the center widget after others
-   */
+      Sets whether to shrink the center widget after other children.
+    
+    By default, when there's no space to give all three children their
+    natural widths, the start and end widgets start shrinking and the
+    center child keeps natural width until they reach minimum width.
+    
+    If set to `FALSE`, start and end widgets keep natural width and the
+    center widget starts shrinking instead.
+    Params:
+      shrinkCenterLast =       whether to shrink the center widget after others
+  */
   void setShrinkCenterLast(bool shrinkCenterLast)
   {
     gtk_center_layout_set_shrink_center_last(cast(GtkCenterLayout*)cPtr, shrinkCenterLast);
   }
 
   /**
-   * Sets the new start widget of self.
-   * To remove the existing start widget, pass %NULL.
-   * Params:
-   *   widget = the new start widget
-   */
+      Sets the new start widget of self.
+    
+    To remove the existing start widget, pass null.
+    Params:
+      widget =       the new start widget
+  */
   void setStartWidget(gtk.widget.Widget widget = null)
   {
     gtk_center_layout_set_start_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);

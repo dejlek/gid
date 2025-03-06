@@ -10,8 +10,8 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * Deprecated
- */
+    Deprecated
+*/
 class RcProperty
 {
   GtkRcProperty cInstance;
@@ -69,18 +69,18 @@ class RcProperty
   }
 
   /**
-   * A #GtkRcPropertyParser for use with [gtk.settings.Settings.installPropertyParser]
-   * or [gtk.widget_class.WidgetClass.installStylePropertyParser] which parses
-   * borders in the form
-   * `"{ left, right, top, bottom }"` for integers
-   * left, right, top and bottom.
-   * Params:
-   *   pspec = a #GParamSpec
-   *   gstring = the #GString to be parsed
-   *   propertyValue = a #GValue which must hold boxed values.
-   * Returns: %TRUE if gstring could be parsed and property_value
-   *   has been set to the resulting #GtkBorder.
-   */
+      A #GtkRcPropertyParser for use with [gtk.settings.Settings.installPropertyParser]
+    or [gtk.widget_class.WidgetClass.installStylePropertyParser] which parses
+    borders in the form
+    `"{ left, right, top, bottom }"` for integers
+    left, right, top and bottom.
+    Params:
+      pspec =       a #GParamSpec
+      gstring =       the #GString to be parsed
+      propertyValue =       a #GValue which must hold boxed values.
+    Returns:     true if gstring could be parsed and property_value
+      has been set to the resulting #GtkBorder.
+  */
   static bool parseBorder(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
   {
     bool _retval;
@@ -89,19 +89,19 @@ class RcProperty
   }
 
   /**
-   * A #GtkRcPropertyParser for use with [gtk.settings.Settings.installPropertyParser]
-   * or [gtk.widget_class.WidgetClass.installStylePropertyParser] which parses a
-   * color given either by its name or in the form
-   * `{ red, green, blue }` where red, green and
-   * blue are integers between 0 and 65535 or floating-point numbers
-   * between 0 and 1.
-   * Params:
-   *   pspec = a #GParamSpec
-   *   gstring = the #GString to be parsed
-   *   propertyValue = a #GValue which must hold #GdkColor values.
-   * Returns: %TRUE if gstring could be parsed and property_value
-   *   has been set to the resulting #GdkColor.
-   */
+      A #GtkRcPropertyParser for use with [gtk.settings.Settings.installPropertyParser]
+    or [gtk.widget_class.WidgetClass.installStylePropertyParser] which parses a
+    color given either by its name or in the form
+    `{ red, green, blue }` where red, green and
+    blue are integers between 0 and 65535 or floating-point numbers
+    between 0 and 1.
+    Params:
+      pspec =       a #GParamSpec
+      gstring =       the #GString to be parsed
+      propertyValue =       a #GValue which must hold #GdkColor values.
+    Returns:     true if gstring could be parsed and property_value
+      has been set to the resulting #GdkColor.
+  */
   static bool parseColor(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
   {
     bool _retval;
@@ -110,19 +110,20 @@ class RcProperty
   }
 
   /**
-   * A #GtkRcPropertyParser for use with [gtk.settings.Settings.installPropertyParser]
-   * or [gtk.widget_class.WidgetClass.installStylePropertyParser] which parses a single
-   * enumeration value.
-   * The enumeration value can be specified by its name, its nickname or
-   * its numeric value. For consistency with flags parsing, the value
-   * may be surrounded by parentheses.
-   * Params:
-   *   pspec = a #GParamSpec
-   *   gstring = the #GString to be parsed
-   *   propertyValue = a #GValue which must hold enum values.
-   * Returns: %TRUE if gstring could be parsed and property_value
-   *   has been set to the resulting #GEnumValue.
-   */
+      A #GtkRcPropertyParser for use with [gtk.settings.Settings.installPropertyParser]
+    or [gtk.widget_class.WidgetClass.installStylePropertyParser] which parses a single
+    enumeration value.
+    
+    The enumeration value can be specified by its name, its nickname or
+    its numeric value. For consistency with flags parsing, the value
+    may be surrounded by parentheses.
+    Params:
+      pspec =       a #GParamSpec
+      gstring =       the #GString to be parsed
+      propertyValue =       a #GValue which must hold enum values.
+    Returns:     true if gstring could be parsed and property_value
+      has been set to the resulting #GEnumValue.
+  */
   static bool parseEnum(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
   {
     bool _retval;
@@ -131,18 +132,19 @@ class RcProperty
   }
 
   /**
-   * A #GtkRcPropertyParser for use with [gtk.settings.Settings.installPropertyParser]
-   * or [gtk.widget_class.WidgetClass.installStylePropertyParser] which parses flags.
-   * Flags can be specified by their name, their nickname or
-   * numerically. Multiple flags can be specified in the form
-   * `"$(LPAREN) flag1 | flag2 | ... $(RPAREN)"`.
-   * Params:
-   *   pspec = a #GParamSpec
-   *   gstring = the #GString to be parsed
-   *   propertyValue = a #GValue which must hold flags values.
-   * Returns: %TRUE if gstring could be parsed and property_value
-   *   has been set to the resulting flags value.
-   */
+      A #GtkRcPropertyParser for use with [gtk.settings.Settings.installPropertyParser]
+    or [gtk.widget_class.WidgetClass.installStylePropertyParser] which parses flags.
+    
+    Flags can be specified by their name, their nickname or
+    numerically. Multiple flags can be specified in the form
+    `"( flag1 | flag2 | ... )"`.
+    Params:
+      pspec =       a #GParamSpec
+      gstring =       the #GString to be parsed
+      propertyValue =       a #GValue which must hold flags values.
+    Returns:     true if gstring could be parsed and property_value
+      has been set to the resulting flags value.
+  */
   static bool parseFlags(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
   {
     bool _retval;
@@ -151,17 +153,17 @@ class RcProperty
   }
 
   /**
-   * A #GtkRcPropertyParser for use with [gtk.settings.Settings.installPropertyParser]
-   * or [gtk.widget_class.WidgetClass.installStylePropertyParser] which parses a
-   * requisition in the form
-   * `"{ width, height }"` for integers %width and %height.
-   * Params:
-   *   pspec = a #GParamSpec
-   *   gstring = the #GString to be parsed
-   *   propertyValue = a #GValue which must hold boxed values.
-   * Returns: %TRUE if gstring could be parsed and property_value
-   *   has been set to the resulting #GtkRequisition.
-   */
+      A #GtkRcPropertyParser for use with [gtk.settings.Settings.installPropertyParser]
+    or [gtk.widget_class.WidgetClass.installStylePropertyParser] which parses a
+    requisition in the form
+    `"{ width, height }"` for integers `width` and `height`.
+    Params:
+      pspec =       a #GParamSpec
+      gstring =       the #GString to be parsed
+      propertyValue =       a #GValue which must hold boxed values.
+    Returns:     true if gstring could be parsed and property_value
+      has been set to the resulting #GtkRequisition.
+  */
   static bool parseRequisition(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
   {
     bool _retval;

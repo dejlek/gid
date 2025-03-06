@@ -8,10 +8,11 @@ import gtk.gesture;
 import gtk.types;
 
 /**
- * `GtkGestureRotate` is a `GtkGesture` for 2-finger rotations.
- * Whenever the angle between both handled sequences changes, the
- * signal@Gtk.GestureRotate::angle-changed signal is emitted.
- */
+    [gtk.gesture_rotate.GestureRotate] is a [gtk.gesture.Gesture] for 2-finger rotations.
+  
+  Whenever the angle between both handled sequences changes, the
+  `signal@Gtk.GestureRotate::angle-changed` signal is emitted.
+*/
 class GestureRotate : gtk.gesture.Gesture
 {
 
@@ -32,10 +33,10 @@ class GestureRotate : gtk.gesture.Gesture
   }
 
   /**
-   * Returns a newly created `GtkGesture` that recognizes 2-touch
-   * rotation gestures.
-   * Returns: a newly created `GtkGestureRotate`
-   */
+      Returns a newly created [gtk.gesture.Gesture] that recognizes 2-touch
+    rotation gestures.
+    Returns:     a newly created [gtk.gesture_rotate.GestureRotate]
+  */
   this()
   {
     GtkGesture* _cretval;
@@ -44,12 +45,13 @@ class GestureRotate : gtk.gesture.Gesture
   }
 
   /**
-   * Gets the angle delta in radians.
-   * If gesture is active, this function returns the angle difference
-   * in radians since the gesture was first recognized. If gesture is
-   * not active, 0 is returned.
-   * Returns: the angle delta in radians
-   */
+      Gets the angle delta in radians.
+    
+    If gesture is active, this function returns the angle difference
+    in radians since the gesture was first recognized. If gesture is
+    not active, 0 is returned.
+    Returns:     the angle delta in radians
+  */
   double getAngleDelta()
   {
     double _retval;
@@ -58,22 +60,27 @@ class GestureRotate : gtk.gesture.Gesture
   }
 
   /**
-   * Emitted when the angle between both tracked points changes.
-   * Params
-   *   angle = Current angle in radians
-   *   angleDelta = Difference with the starting angle, in radians
-   *   gestureRotate = the instance the signal is connected to
-   */
+      Emitted when the angle between both tracked points changes.
+  
+    ## Parameters
+    $(LIST
+      * $(B angle)       Current angle in radians
+      * $(B angleDelta)       Difference with the starting angle, in radians
+      * $(B gestureRotate) the instance the signal is connected to
+    )
+  */
   alias AngleChangedCallbackDlg = void delegate(double angle, double angleDelta, gtk.gesture_rotate.GestureRotate gestureRotate);
+
+  /** ditto */
   alias AngleChangedCallbackFunc = void function(double angle, double angleDelta, gtk.gesture_rotate.GestureRotate gestureRotate);
 
   /**
-   * Connect to AngleChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to AngleChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectAngleChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AngleChangedCallbackDlg) || is(T : AngleChangedCallbackFunc))
   {

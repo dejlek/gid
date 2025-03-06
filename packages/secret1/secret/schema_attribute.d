@@ -7,8 +7,8 @@ import secret.c.types;
 import secret.types;
 
 /**
- * An attribute in a #SecretSchema.
- */
+    An attribute in a #SecretSchema.
+*/
 class SchemaAttribute : gobject.boxed.Boxed
 {
 

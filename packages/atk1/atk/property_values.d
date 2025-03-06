@@ -7,10 +7,10 @@ import gid.gid;
 import gobject.value;
 
 /**
- * Note: @old_value field of #AtkPropertyValues will not contain a
- * valid value. This is a field defined with the purpose of contain
- * the previous value of the property, but is not used anymore.
- */
+    Note: @old_value field of #AtkPropertyValues will not contain a
+  valid value. This is a field defined with the purpose of contain
+  the previous value of the property, but is not used anymore.
+*/
 class PropertyValues
 {
   AtkPropertyValues cInstance;

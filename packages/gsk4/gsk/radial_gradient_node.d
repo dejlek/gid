@@ -8,8 +8,8 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node for a radial gradient.
- */
+    A render node for a radial gradient.
+*/
 class RadialGradientNode : gsk.render_node.RenderNode
 {
 
@@ -22,9 +22,9 @@ class RadialGradientNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the center pointer for the gradient.
-   * Returns: the center point for the gradient
-   */
+      Retrieves the center pointer for the gradient.
+    Returns:     the center point for the gradient
+  */
   graphene.point.Point getCenter()
   {
     const(graphene_point_t)* _cretval;
@@ -34,9 +34,9 @@ class RadialGradientNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the end value for the gradient.
-   * Returns: the end value for the gradient
-   */
+      Retrieves the end value for the gradient.
+    Returns:     the end value for the gradient
+  */
   float getEnd()
   {
     float _retval;
@@ -45,9 +45,9 @@ class RadialGradientNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the horizontal radius for the gradient.
-   * Returns: the horizontal radius for the gradient
-   */
+      Retrieves the horizontal radius for the gradient.
+    Returns:     the horizontal radius for the gradient
+  */
   float getHradius()
   {
     float _retval;
@@ -56,9 +56,9 @@ class RadialGradientNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the number of color stops in the gradient.
-   * Returns: the number of color stops
-   */
+      Retrieves the number of color stops in the gradient.
+    Returns:     the number of color stops
+  */
   size_t getNColorStops()
   {
     size_t _retval;
@@ -67,9 +67,9 @@ class RadialGradientNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the start value for the gradient.
-   * Returns: the start value for the gradient
-   */
+      Retrieves the start value for the gradient.
+    Returns:     the start value for the gradient
+  */
   float getStart()
   {
     float _retval;
@@ -78,9 +78,9 @@ class RadialGradientNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the vertical radius for the gradient.
-   * Returns: the vertical radius for the gradient
-   */
+      Retrieves the vertical radius for the gradient.
+    Returns:     the vertical radius for the gradient
+  */
   float getVradius()
   {
     float _retval;

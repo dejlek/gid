@@ -7,6 +7,7 @@ import gdkpixbuf.pixbuf_animation;
 import gdkpixbuf.types;
 import gid.gid;
 
+/** */
 class PixbufNonAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
 {
 
@@ -26,6 +27,7 @@ class PixbufNonAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
     return getType();
   }
 
+  /** */
   this(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GdkPixbufAnimation* _cretval;

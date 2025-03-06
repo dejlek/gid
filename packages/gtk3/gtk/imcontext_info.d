@@ -6,8 +6,8 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * Bookkeeping information about a loadable input method.
- */
+    Bookkeeping information about a loadable input method.
+*/
 class IMContextInfo
 {
   GtkIMContextInfo cInstance;

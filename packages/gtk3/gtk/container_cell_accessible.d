@@ -12,6 +12,7 @@ import gtk.c.types;
 import gtk.cell_accessible;
 import gtk.types;
 
+/** */
 class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
 {
 
@@ -31,6 +32,7 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
     return getType();
   }
 
+  /** */
   this()
   {
     GtkContainerCellAccessible* _cretval;
@@ -38,15 +40,16 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
     this(_cretval, Yes.Take);
   }
 
+  /** */
   void addChild(gtk.cell_accessible.CellAccessible child)
   {
     gtk_container_cell_accessible_add_child(cast(GtkContainerCellAccessible*)cPtr, child ? cast(GtkCellAccessible*)child.cPtr(No.Dup) : null);
   }
 
   /**
-   * Get a list of children.
-   * Returns:
-   */
+      Get a list of children.
+    Returns: 
+  */
   gtk.cell_accessible.CellAccessible[] getChildren()
   {
     GList* _cretval;
@@ -55,6 +58,7 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
     return _retval;
   }
 
+  /** */
   void removeChild(gtk.cell_accessible.CellAccessible child)
   {
     gtk_container_cell_accessible_remove_child(cast(GtkContainerCellAccessible*)cPtr, child ? cast(GtkCellAccessible*)child.cPtr(No.Dup) : null);

@@ -21,15 +21,18 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkDragIcon` is a `GtkRoot` implementation for drag icons.
- * A drag icon moves with the pointer during a Drag-and-Drop operation
- * and is destroyed when the drag ends.
- * To set up a drag icon and associate it with an ongoing drag operation,
- * use [gtk.drag_icon.DragIcon.getForDrag] to get the icon for a drag. You can
- * then use it like any other widget and use [gtk.drag_icon.DragIcon.setChild]
- * to set whatever widget should be used for the drag icon.
- * Keep in mind that drag icons do not allow user input.
- */
+    [gtk.drag_icon.DragIcon] is a [gtk.root.Root] implementation for drag icons.
+  
+  A drag icon moves with the pointer during a Drag-and-Drop operation
+  and is destroyed when the drag ends.
+  
+  To set up a drag icon and associate it with an ongoing drag operation,
+  use [gtk.drag_icon.DragIcon.getForDrag] to get the icon for a drag. You can
+  then use it like any other widget and use [gtk.drag_icon.DragIcon.setChild]
+  to set whatever widget should be used for the drag icon.
+  
+  Keep in mind that drag icons do not allow user input.
+*/
 class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
 {
 
@@ -53,19 +56,21 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   mixin RootT!();
 
   /**
-   * Creates a widget that can be used as a drag icon for the given
-   * value.
-   * Supported types include strings, `GdkRGBA` and `GtkTextBuffer`.
-   * If GTK does not know how to create a widget for a given value,
-   * it will return %NULL.
-   * This method is used to set the default drag icon on drag-and-drop
-   * operations started by `GtkDragSource`, so you don't need to set
-   * a drag icon using this function there.
-   * Params:
-   *   value = a `GValue`
-   * Returns: A new `GtkWidget`
-   *   for displaying value as a drag icon.
-   */
+      Creates a widget that can be used as a drag icon for the given
+    value.
+    
+    Supported types include strings, [gdk.rgba.RGBA] and [gtk.text_buffer.TextBuffer].
+    If GTK does not know how to create a widget for a given value,
+    it will return null.
+    
+    This method is used to set the default drag icon on drag-and-drop
+    operations started by [gtk.drag_source.DragSource], so you don't need to set
+    a drag icon using this function there.
+    Params:
+      value =       a [gobject.value.Value]
+    Returns:     A new [gtk.widget.Widget]
+        for displaying value as a drag icon.
+  */
   static gtk.widget.Widget createWidgetForValue(gobject.value.Value value)
   {
     GtkWidget* _cretval;
@@ -75,13 +80,14 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   }
 
   /**
-   * Gets the `GtkDragIcon` in use with drag.
-   * If no drag icon exists yet, a new one will be created
-   * and shown.
-   * Params:
-   *   drag = a `GdkDrag`
-   * Returns: the `GtkDragIcon`
-   */
+      Gets the [gtk.drag_icon.DragIcon] in use with drag.
+    
+    If no drag icon exists yet, a new one will be created
+    and shown.
+    Params:
+      drag =       a [gdk.drag.Drag]
+    Returns:     the [gtk.drag_icon.DragIcon]
+  */
   static gtk.widget.Widget getForDrag(gdk.drag.Drag drag)
   {
     GtkWidget* _cretval;
@@ -91,25 +97,26 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   }
 
   /**
-   * Creates a `GtkDragIcon` that shows paintable, and associates
-   * it with the drag operation.
-   * The hotspot position on the paintable is aligned with the
-   * hotspot of the cursor.
-   * Params:
-   *   drag = a `GdkDrag`
-   *   paintable = a `GdkPaintable` to display
-   *   hotX = X coordinate of the hotspot
-   *   hotY = Y coordinate of the hotspot
-   */
+      Creates a [gtk.drag_icon.DragIcon] that shows paintable, and associates
+    it with the drag operation.
+    
+    The hotspot position on the paintable is aligned with the
+    hotspot of the cursor.
+    Params:
+      drag =       a [gdk.drag.Drag]
+      paintable =       a [gdk.paintable.Paintable] to display
+      hotX =       X coordinate of the hotspot
+      hotY =       Y coordinate of the hotspot
+  */
   static void setFromPaintable(gdk.drag.Drag drag, gdk.paintable.Paintable paintable, int hotX, int hotY)
   {
     gtk_drag_icon_set_from_paintable(drag ? cast(GdkDrag*)drag.cPtr(No.Dup) : null, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null, hotX, hotY);
   }
 
   /**
-   * Gets the widget currently used as drag icon.
-   * Returns: The drag icon
-   */
+      Gets the widget currently used as drag icon.
+    Returns:     The drag icon
+  */
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
@@ -119,10 +126,10 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   }
 
   /**
-   * Sets the widget to display as the drag icon.
-   * Params:
-   *   child = a `GtkWidget`
-   */
+      Sets the widget to display as the drag icon.
+    Params:
+      child =       a [gtk.widget.Widget]
+  */
   void setChild(gtk.widget.Widget child = null)
   {
     gtk_drag_icon_set_child(cast(GtkDragIcon*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);

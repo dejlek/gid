@@ -7,6 +7,7 @@ import arrow.c.types;
 import arrow.types;
 import gid.gid;
 
+/** */
 class StringArray : arrow.binary_array.BinaryArray
 {
 
@@ -26,6 +27,7 @@ class StringArray : arrow.binary_array.BinaryArray
     return getType();
   }
 
+  /** */
   this(long length, arrow.buffer.Buffer valueOffsets, arrow.buffer.Buffer valueData, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowStringArray* _cretval;
@@ -33,6 +35,7 @@ class StringArray : arrow.binary_array.BinaryArray
     this(_cretval, Yes.Take);
   }
 
+  /** */
   string getString(long i)
   {
     char* _cretval;

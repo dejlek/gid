@@ -7,8 +7,8 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * Data type for holding font faces.
- */
+    Data type for holding font faces.
+*/
 class Face : gobject.boxed.Boxed
 {
 

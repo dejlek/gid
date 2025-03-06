@@ -13,12 +13,13 @@ import glib.types;
 import gobject.object;
 
 /**
- * `GDesktopAppInfo` is an implementation of [gio.app_info.AppInfo] based on
- * desktop files.
- * Note that `<gio/gdesktopappinfo.h>` belongs to the UNIX-specific
- * GIO interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
- * file or the `GioUnix-2.0` GIR namespace when using it.
- */
+    [gio.desktop_app_info.DesktopAppInfo] is an implementation of [gio.app_info.AppInfo] based on
+  desktop files.
+  
+  Note that `<gio/gdesktopappinfo.h>` belongs to the UNIX-specific
+  GIO interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
+  file or the `GioUnix-2.0` GIR namespace when using it.
+*/
 class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
 {
 
@@ -41,21 +42,22 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   mixin AppInfoT!();
 
   /**
-   * Creates a new #GDesktopAppInfo based on a desktop file id.
-   * A desktop file id is the basename of the desktop file, including the
-   * .desktop extension. GIO is looking for a desktop file with this name
-   * in the `applications` subdirectories of the XDG
-   * data directories $(LPAREN)i.e. the directories specified in the `XDG_DATA_HOME`
-   * and `XDG_DATA_DIRS` environment variables$(RPAREN). GIO also supports the
-   * prefix-to-subdirectory mapping that is described in the
-   * [Menu Spec](http://standards.freedesktop.org/menu-spec/latest/)
-   * $(LPAREN)i.e. a desktop id of kde-foo.desktop will match
-   * `/usr/share/applications/kde/foo.desktop`$(RPAREN).
-   * Params:
-   *   desktopId = the desktop file id
-   * Returns: a new #GDesktopAppInfo, or %NULL if no desktop
-   *   file with that id exists.
-   */
+      Creates a new #GDesktopAppInfo based on a desktop file id.
+    
+    A desktop file id is the basename of the desktop file, including the
+    .desktop extension. GIO is looking for a desktop file with this name
+    in the `applications` subdirectories of the XDG
+    data directories (i.e. the directories specified in the `XDG_DATA_HOME`
+    and `XDG_DATA_DIRS` environment variables). GIO also supports the
+    prefix-to-subdirectory mapping that is described in the
+    [Menu Spec](http://standards.freedesktop.org/menu-spec/latest/)
+    (i.e. a desktop id of kde-foo.desktop will match
+    `/usr/share/applications/kde/foo.desktop`).
+    Params:
+      desktopId =       the desktop file id
+    Returns:     a new #GDesktopAppInfo, or null if no desktop
+          file with that id exists.
+  */
   this(string desktopId)
   {
     GDesktopAppInfo* _cretval;
@@ -65,12 +67,12 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Creates a new #GDesktopAppInfo.
-   * Params:
-   *   filename = the path of a desktop file, in the GLib
-   *     filename encoding
-   * Returns: a new #GDesktopAppInfo or %NULL on error.
-   */
+      Creates a new #GDesktopAppInfo.
+    Params:
+      filename =       the path of a desktop file, in the GLib
+             filename encoding
+    Returns:     a new #GDesktopAppInfo or null on error.
+  */
   static gio.desktop_app_info.DesktopAppInfo newFromFilename(string filename)
   {
     GDesktopAppInfo* _cretval;
@@ -81,11 +83,11 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Creates a new #GDesktopAppInfo.
-   * Params:
-   *   keyFile = an opened #GKeyFile
-   * Returns: a new #GDesktopAppInfo or %NULL on error.
-   */
+      Creates a new #GDesktopAppInfo.
+    Params:
+      keyFile =       an opened #GKeyFile
+    Returns:     a new #GDesktopAppInfo or null on error.
+  */
   static gio.desktop_app_info.DesktopAppInfo newFromKeyfile(glib.key_file.KeyFile keyFile)
   {
     GDesktopAppInfo* _cretval;
@@ -95,14 +97,15 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Gets all applications that implement interface.
-   * An application implements an interface if that interface is listed in
-   * the Implements\= line of the desktop file of the application.
-   * Params:
-   *   interface_ = the name of the interface
-   * Returns: a list of #GDesktopAppInfo
-   *   objects.
-   */
+      Gets all applications that implement interface.
+    
+    An application implements an interface if that interface is listed in
+    the Implements= line of the desktop file of the application.
+    Params:
+      interface_ =       the name of the interface
+    Returns:     a list of #GDesktopAppInfo
+      objects.
+  */
   static gio.desktop_app_info.DesktopAppInfo[] getImplementations(string interface_)
   {
     GList* _cretval;
@@ -113,18 +116,19 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Sets the name of the desktop that the application is running in.
-   * This is used by [gio.app_info.AppInfo.shouldShow] and
-   * [gio.desktop_app_info.DesktopAppInfo.getShowIn] to evaluate the
-   * `OnlyShowIn` and `NotShowIn`
-   * desktop entry fields.
-   * Should be called only once; subsequent calls are ignored.
-   * Params:
-   *   desktopEnv = a string specifying what desktop this is
-
-   * Deprecated: do not use this API.  Since 2.42 the value of the
-   *   `XDG_CURRENT_DESKTOP` environment variable will be used.
-   */
+      Sets the name of the desktop that the application is running in.
+    This is used by [gio.app_info.AppInfo.shouldShow] and
+    [gio.desktop_app_info.DesktopAppInfo.getShowIn] to evaluate the
+    `OnlyShowIn` and `NotShowIn`
+    desktop entry fields.
+    
+    Should be called only once; subsequent calls are ignored.
+    Params:
+      desktopEnv =       a string specifying what desktop this is
+  
+    Deprecated:     do not use this API.  Since 2.42 the value of the
+      `XDG_CURRENT_DESKTOP` environment variable will be used.
+  */
   static void setDesktopEnv(string desktopEnv)
   {
     const(char)* _desktopEnv = desktopEnv.toCString(No.Alloc);
@@ -132,15 +136,16 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Gets the user-visible display name of the "additional application
-   * action" specified by action_name.
-   * This corresponds to the "Name" key within the keyfile group for the
-   * action.
-   * Params:
-   *   actionName = the name of the action as from
-   *     [gio.desktop_app_info.DesktopAppInfo.listActions]
-   * Returns: the locale-specific action name
-   */
+      Gets the user-visible display name of the "additional application
+    action" specified by action_name.
+    
+    This corresponds to the "Name" key within the keyfile group for the
+    action.
+    Params:
+      actionName =       the name of the action as from
+          [gio.desktop_app_info.DesktopAppInfo.listActions]
+    Returns:     the locale-specific action name
+  */
   string getActionName(string actionName)
   {
     char* _cretval;
@@ -151,13 +156,14 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Looks up a boolean value in the keyfile backing info.
-   * The key is looked up in the "Desktop Entry" group.
-   * Params:
-   *   key = the key to look up
-   * Returns: the boolean value, or %FALSE if the key
-   *   is not found
-   */
+      Looks up a boolean value in the keyfile backing info.
+    
+    The key is looked up in the "Desktop Entry" group.
+    Params:
+      key =       the key to look up
+    Returns:     the boolean value, or false if the key
+          is not found
+  */
   bool getBoolean(string key)
   {
     bool _retval;
@@ -167,10 +173,10 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Gets the categories from the desktop file.
-   * Returns: The unparsed Categories key from the desktop file;
-   *   i.e. no attempt is made to split it by ';' or validate it.
-   */
+      Gets the categories from the desktop file.
+    Returns:     The unparsed Categories key from the desktop file;
+          i.e. no attempt is made to split it by ';' or validate it.
+  */
   string getCategories()
   {
     const(char)* _cretval;
@@ -180,12 +186,12 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * When info was created from a known filename, return it.  In some
-   * situations such as the #GDesktopAppInfo returned from
-   * [gio.desktop_app_info.DesktopAppInfo.newFromKeyfile], this function will return %NULL.
-   * Returns: The full path to the file for info,
-   *   or %NULL if not known.
-   */
+      When info was created from a known filename, return it.  In some
+    situations such as the #GDesktopAppInfo returned from
+    [gio.desktop_app_info.DesktopAppInfo.newFromKeyfile], this function will return null.
+    Returns:     The full path to the file for info,
+          or null if not known.
+  */
   string getFilename()
   {
     const(char)* _cretval;
@@ -195,9 +201,9 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Gets the generic name from the desktop file.
-   * Returns: The value of the GenericName key
-   */
+      Gets the generic name from the desktop file.
+    Returns:     The value of the GenericName key
+  */
   string getGenericName()
   {
     const(char)* _cretval;
@@ -207,10 +213,10 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * A desktop file is hidden if the Hidden key in it is
-   * set to True.
-   * Returns: %TRUE if hidden, %FALSE otherwise.
-   */
+      A desktop file is hidden if the Hidden key in it is
+    set to True.
+    Returns:     true if hidden, false otherwise.
+  */
   bool getIsHidden()
   {
     bool _retval;
@@ -219,9 +225,9 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Gets the keywords from the desktop file.
-   * Returns: The value of the Keywords key
-   */
+      Gets the keywords from the desktop file.
+    Returns:     The value of the Keywords key
+  */
   string[] getKeywords()
   {
     const(char*)* _cretval;
@@ -241,14 +247,15 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Looks up a localized string value in the keyfile backing info
-   * translated to the current locale.
-   * The key is looked up in the "Desktop Entry" group.
-   * Params:
-   *   key = the key to look up
-   * Returns: a newly allocated string, or %NULL if the key
-   *   is not found
-   */
+      Looks up a localized string value in the keyfile backing info
+    translated to the current locale.
+    
+    The key is looked up in the "Desktop Entry" group.
+    Params:
+      key =       the key to look up
+    Returns:     a newly allocated string, or null if the key
+          is not found
+  */
   string getLocaleString(string key)
   {
     char* _cretval;
@@ -259,11 +266,11 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Gets the value of the NoDisplay key, which helps determine if the
-   * application info should be shown in menus. See
-   * %G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY and [gio.app_info.AppInfo.shouldShow].
-   * Returns: The value of the NoDisplay key
-   */
+      Gets the value of the NoDisplay key, which helps determine if the
+    application info should be shown in menus. See
+    `G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY` and [gio.app_info.AppInfo.shouldShow].
+    Returns:     The value of the NoDisplay key
+  */
   bool getNodisplay()
   {
     bool _retval;
@@ -272,21 +279,23 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Checks if the application info should be shown in menus that list available
-   * applications for a specific name of the desktop, based on the
-   * `OnlyShowIn` and `NotShowIn` keys.
-   * desktop_env should typically be given as %NULL, in which case the
-   * `XDG_CURRENT_DESKTOP` environment variable is consulted.  If you want
-   * to override the default mechanism then you may specify desktop_env,
-   * but this is not recommended.
-   * Note that [gio.app_info.AppInfo.shouldShow] for info will include this check $(LPAREN)with
-   * %NULL for desktop_env$(RPAREN) as well as additional checks.
-   * Params:
-   *   desktopEnv = a string specifying a desktop name
-   * Returns: %TRUE if the info should be shown in desktop_env according to the
-   *   `OnlyShowIn` and `NotShowIn` keys, %FALSE
-   *   otherwise.
-   */
+      Checks if the application info should be shown in menus that list available
+    applications for a specific name of the desktop, based on the
+    `OnlyShowIn` and `NotShowIn` keys.
+    
+    desktop_env should typically be given as null, in which case the
+    `XDG_CURRENT_DESKTOP` environment variable is consulted.  If you want
+    to override the default mechanism then you may specify desktop_env,
+    but this is not recommended.
+    
+    Note that [gio.app_info.AppInfo.shouldShow] for info will include this check (with
+    null for desktop_env) as well as additional checks.
+    Params:
+      desktopEnv =       a string specifying a desktop name
+    Returns:     true if the info should be shown in desktop_env according to the
+      `OnlyShowIn` and `NotShowIn` keys, false
+      otherwise.
+  */
   bool getShowIn(string desktopEnv = null)
   {
     bool _retval;
@@ -296,12 +305,12 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Retrieves the StartupWMClass field from info. This represents the
-   * WM_CLASS property of the main window of the application, if launched
-   * through info.
-   * Returns: the startup WM class, or %NULL if none is set
-   *   in the desktop file.
-   */
+      Retrieves the StartupWMClass field from info. This represents the
+    WM_CLASS property of the main window of the application, if launched
+    through info.
+    Returns:     the startup WM class, or null if none is set
+      in the desktop file.
+  */
   string getStartupWmClass()
   {
     const(char)* _cretval;
@@ -311,13 +320,14 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Looks up a string value in the keyfile backing info.
-   * The key is looked up in the "Desktop Entry" group.
-   * Params:
-   *   key = the key to look up
-   * Returns: a newly allocated string, or %NULL if the key
-   *   is not found
-   */
+      Looks up a string value in the keyfile backing info.
+    
+    The key is looked up in the "Desktop Entry" group.
+    Params:
+      key =       the key to look up
+    Returns:     a newly allocated string, or null if the key
+          is not found
+  */
   string getString(string key)
   {
     char* _cretval;
@@ -328,13 +338,14 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Looks up a string list value in the keyfile backing info.
-   * The key is looked up in the "Desktop Entry" group.
-   * Params:
-   *   key = the key to look up
-   * Returns: a %NULL-terminated string array or %NULL if the specified
-   *   key cannot be found. The array should be freed with [glib.global.strfreev].
-   */
+      Looks up a string list value in the keyfile backing info.
+    
+    The key is looked up in the "Desktop Entry" group.
+    Params:
+      key =       the key to look up
+    Returns:     a null-terminated string array or null if the specified
+       key cannot be found. The array should be freed with [glib.global.strfreev].
+  */
   string[] getStringList(string key)
   {
     char** _cretval;
@@ -353,12 +364,12 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Returns whether key exists in the "Desktop Entry" group
-   * of the keyfile backing info.
-   * Params:
-   *   key = the key to look up
-   * Returns: %TRUE if the key exists
-   */
+      Returns whether key exists in the "Desktop Entry" group
+    of the keyfile backing info.
+    Params:
+      key =       the key to look up
+    Returns:     true if the key exists
+  */
   bool hasKey(string key)
   {
     bool _retval;
@@ -368,23 +379,26 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Activates the named application action.
-   * You may only call this function on action names that were
-   * returned from [gio.desktop_app_info.DesktopAppInfo.listActions].
-   * Note that if the main entry of the desktop file indicates that the
-   * application supports startup notification, and launch_context is
-   * non-%NULL, then startup notification will be used when activating the
-   * action $(LPAREN)and as such, invocation of the action on the receiving side
-   * must signal the end of startup notification when it is completed$(RPAREN).
-   * This is the expected behaviour of applications declaring additional
-   * actions, as per the desktop file specification.
-   * As with [gio.app_info.AppInfo.launch] there is no way to detect failures that
-   * occur while using this function.
-   * Params:
-   *   actionName = the name of the action as from
-   *     [gio.desktop_app_info.DesktopAppInfo.listActions]
-   *   launchContext = a #GAppLaunchContext
-   */
+      Activates the named application action.
+    
+    You may only call this function on action names that were
+    returned from [gio.desktop_app_info.DesktopAppInfo.listActions].
+    
+    Note that if the main entry of the desktop file indicates that the
+    application supports startup notification, and launch_context is
+    non-null, then startup notification will be used when activating the
+    action (and as such, invocation of the action on the receiving side
+    must signal the end of startup notification when it is completed).
+    This is the expected behaviour of applications declaring additional
+    actions, as per the desktop file specification.
+    
+    As with [gio.app_info.AppInfo.launch] there is no way to detect failures that
+    occur while using this function.
+    Params:
+      actionName =       the name of the action as from
+          [gio.desktop_app_info.DesktopAppInfo.listActions]
+      launchContext =       a #GAppLaunchContext
+  */
   void launchAction(string actionName, gio.app_launch_context.AppLaunchContext launchContext = null)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -392,28 +406,30 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * This function performs the equivalent of [gio.app_info.AppInfo.launchUris],
-   * but is intended primarily for operating system components that
-   * launch applications.  Ordinary applications should use
-   * [gio.app_info.AppInfo.launchUris].
-   * If the application is launched via GSpawn, then spawn_flags, user_setup
-   * and user_setup_data are used for the call to [glib.global.spawnAsync].
-   * Additionally, pid_callback $(LPAREN)with pid_callback_data$(RPAREN) will be called to
-   * inform about the PID of the created process. See [glib.global.spawnAsyncWithPipes]
-   * for information on certain parameter conditions that can enable an
-   * optimized posix_spawn$(LPAREN)$(RPAREN) codepath to be used.
-   * If application launching occurs via some other mechanism $(LPAREN)eg: D-Bus
-   * activation$(RPAREN) then spawn_flags, user_setup, user_setup_data,
-   * pid_callback and pid_callback_data are ignored.
-   * Params:
-   *   uris = List of URIs
-   *   launchContext = a #GAppLaunchContext
-   *   spawnFlags = #GSpawnFlags, used for each process
-   *   userSetup = a #GSpawnChildSetupFunc, used once
-   *     for each process.
-   *   pidCallback = Callback for child processes
-   * Returns: %TRUE on successful launch, %FALSE otherwise.
-   */
+      This function performs the equivalent of [gio.app_info.AppInfo.launchUris],
+    but is intended primarily for operating system components that
+    launch applications.  Ordinary applications should use
+    [gio.app_info.AppInfo.launchUris].
+    
+    If the application is launched via GSpawn, then spawn_flags, user_setup
+    and user_setup_data are used for the call to [glib.global.spawnAsync].
+    Additionally, pid_callback (with pid_callback_data) will be called to
+    inform about the PID of the created process. See [glib.global.spawnAsyncWithPipes]
+    for information on certain parameter conditions that can enable an
+    optimized posix_spawn() codepath to be used.
+    
+    If application launching occurs via some other mechanism (eg: D-Bus
+    activation) then spawn_flags, user_setup, user_setup_data,
+    pid_callback and pid_callback_data are ignored.
+    Params:
+      uris =       List of URIs
+      launchContext =       a #GAppLaunchContext
+      spawnFlags =       #GSpawnFlags, used for each process
+      userSetup =       a #GSpawnChildSetupFunc, used once
+            for each process.
+      pidCallback =       Callback for child processes
+    Returns:     true on successful launch, false otherwise.
+  */
   bool launchUrisAsManager(string[] uris, gio.app_launch_context.AppLaunchContext launchContext, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc userSetup = null, gio.types.DesktopAppLaunchCallback pidCallback = null)
   {
     extern(C) void _userSetupCallback(void* data)
@@ -446,23 +462,24 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Equivalent to [gio.desktop_app_info.DesktopAppInfo.launchUrisAsManager] but allows
-   * you to pass in file descriptors for the stdin, stdout and stderr streams
-   * of the launched process.
-   * If application launching occurs via some non-spawn mechanism $(LPAREN)e.g. D-Bus
-   * activation$(RPAREN) then stdin_fd, stdout_fd and stderr_fd are ignored.
-   * Params:
-   *   uris = List of URIs
-   *   launchContext = a #GAppLaunchContext
-   *   spawnFlags = #GSpawnFlags, used for each process
-   *   userSetup = a #GSpawnChildSetupFunc, used once
-   *     for each process.
-   *   pidCallback = Callback for child processes
-   *   stdinFd = file descriptor to use for child's stdin, or -1
-   *   stdoutFd = file descriptor to use for child's stdout, or -1
-   *   stderrFd = file descriptor to use for child's stderr, or -1
-   * Returns: %TRUE on successful launch, %FALSE otherwise.
-   */
+      Equivalent to [gio.desktop_app_info.DesktopAppInfo.launchUrisAsManager] but allows
+    you to pass in file descriptors for the stdin, stdout and stderr streams
+    of the launched process.
+    
+    If application launching occurs via some non-spawn mechanism (e.g. D-Bus
+    activation) then stdin_fd, stdout_fd and stderr_fd are ignored.
+    Params:
+      uris =       List of URIs
+      launchContext =       a #GAppLaunchContext
+      spawnFlags =       #GSpawnFlags, used for each process
+      userSetup =       a #GSpawnChildSetupFunc, used once
+            for each process.
+      pidCallback =       Callback for child processes
+      stdinFd =       file descriptor to use for child's stdin, or -1
+      stdoutFd =       file descriptor to use for child's stdout, or -1
+      stderrFd =       file descriptor to use for child's stderr, or -1
+    Returns:     true on successful launch, false otherwise.
+  */
   bool launchUrisAsManagerWithFds(string[] uris, gio.app_launch_context.AppLaunchContext launchContext, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc userSetup, gio.types.DesktopAppLaunchCallback pidCallback, int stdinFd, int stdoutFd, int stderrFd)
   {
     extern(C) void _userSetupCallback(void* data)
@@ -495,12 +512,13 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   }
 
   /**
-   * Returns the list of "additional application actions" supported on the
-   * desktop file, as per the desktop file specification.
-   * As per the specification, this is the list of actions that are
-   * explicitly listed in the "Actions" key of the [Desktop Entry] group.
-   * Returns: a list of strings, always non-%NULL
-   */
+      Returns the list of "additional application actions" supported on the
+    desktop file, as per the desktop file specification.
+    
+    As per the specification, this is the list of actions that are
+    explicitly listed in the "Actions" key of the [Desktop Entry] group.
+    Returns:     a list of strings, always non-null
+  */
   string[] listActions()
   {
     const(char*)* _cretval;

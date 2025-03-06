@@ -18,6 +18,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class Server : gobject.object.ObjectG, arrowflight.servable.Servable
 {
 
@@ -39,6 +40,7 @@ class Server : gobject.object.ObjectG, arrowflight.servable.Servable
 
   mixin ServableT!();
 
+  /** */
   arrowflight.data_stream.DataStream doGet(arrowflight.server_call_context.ServerCallContext context, arrowflight.ticket.Ticket ticket)
   {
     GAFlightDataStream* _cretval;
@@ -51,13 +53,13 @@ class Server : gobject.object.ObjectG, arrowflight.servable.Servable
   }
 
   /**
-   * Processes a stream of IPC payloads sent from a client.
-   * Params:
-   *   context = A #GAFlightServerCallContext.
-   *   reader = A #GAFlightMessageReader.
-   *   writer = A #GAFlightMetadataWriter.
-   * Returns: %TRUE on success, %FALSE on error.
-   */
+      Processes a stream of IPC payloads sent from a client.
+    Params:
+      context =       A #GAFlightServerCallContext.
+      reader =       A #GAFlightMessageReader.
+      writer =       A #GAFlightMetadataWriter.
+    Returns:     true on success, false on error.
+  */
   bool doPut(arrowflight.server_call_context.ServerCallContext context, arrowflight.message_reader.MessageReader reader, arrowflight.metadata_writer.MetadataWriter writer)
   {
     bool _retval;
@@ -68,6 +70,7 @@ class Server : gobject.object.ObjectG, arrowflight.servable.Servable
     return _retval;
   }
 
+  /** */
   arrowflight.info.Info getFlightInfo(arrowflight.server_call_context.ServerCallContext context, arrowflight.descriptor.Descriptor request)
   {
     GAFlightInfo* _cretval;
@@ -79,6 +82,7 @@ class Server : gobject.object.ObjectG, arrowflight.servable.Servable
     return _retval;
   }
 
+  /** */
   int getPort()
   {
     int _retval;
@@ -86,6 +90,7 @@ class Server : gobject.object.ObjectG, arrowflight.servable.Servable
     return _retval;
   }
 
+  /** */
   arrowflight.info.Info[] listFlights(arrowflight.server_call_context.ServerCallContext context, arrowflight.criteria.Criteria criteria = null)
   {
     GList* _cretval;
@@ -97,6 +102,7 @@ class Server : gobject.object.ObjectG, arrowflight.servable.Servable
     return _retval;
   }
 
+  /** */
   bool listen(arrowflight.server_options.ServerOptions options)
   {
     bool _retval;
@@ -108,10 +114,10 @@ class Server : gobject.object.ObjectG, arrowflight.servable.Servable
   }
 
   /**
-   * Shuts down the serve. This function can be called from signal
-   * handler or another thread.
-   * Returns: %TRUE on success, %FALSE on error.
-   */
+      Shuts down the serve. This function can be called from signal
+    handler or another thread.
+    Returns:     true on success, false on error.
+  */
   bool shutdown()
   {
     bool _retval;
@@ -122,6 +128,7 @@ class Server : gobject.object.ObjectG, arrowflight.servable.Servable
     return _retval;
   }
 
+  /** */
   bool wait()
   {
     bool _retval;

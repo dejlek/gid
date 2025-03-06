@@ -15,20 +15,26 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * The `GtkFontChooserWidget` widget lets the user select a font.
- * It is used in the `GtkFontChooserDialog` widget to provide a
- * dialog for selecting fonts.
- * To set the font which is initially selected, use
- * [gtk.font_chooser.FontChooser.setFont] or [gtk.font_chooser.FontChooser.setFontDesc].
- * To get the selected font use [gtk.font_chooser.FontChooser.getFont] or
- * [gtk.font_chooser.FontChooser.getFontDesc].
- * To change the text which is shown in the preview area, use
- * [gtk.font_chooser.FontChooser.setPreviewText].
- * # CSS nodes
- * `GtkFontChooserWidget` has a single CSS node with name fontchooser.
+    The [gtk.font_chooser_widget.FontChooserWidget] widget lets the user select a font.
+  
+  It is used in the [gtk.font_chooser_dialog.FontChooserDialog] widget to provide a
+  dialog for selecting fonts.
+  
+  To set the font which is initially selected, use
+  [gtk.font_chooser.FontChooser.setFont] or [gtk.font_chooser.FontChooser.setFontDesc].
+  
+  To get the selected font use [gtk.font_chooser.FontChooser.getFont] or
+  [gtk.font_chooser.FontChooser.getFontDesc].
+  
+  To change the text which is shown in the preview area, use
+  [gtk.font_chooser.FontChooser.setPreviewText].
+  
+  # CSS nodes
+  
+  [gtk.font_chooser_widget.FontChooserWidget] has a single CSS node with name fontchooser.
 
- * Deprecated: Direct use of `GtkFontChooserWidget` is deprecated.
- */
+  Deprecated:     Direct use of [gtk.font_chooser_widget.FontChooserWidget] is deprecated.
+*/
 class FontChooserWidget : gtk.widget.Widget, gtk.font_chooser.FontChooser
 {
 
@@ -51,11 +57,11 @@ class FontChooserWidget : gtk.widget.Widget, gtk.font_chooser.FontChooser
   mixin FontChooserT!();
 
   /**
-   * Creates a new `GtkFontChooserWidget`.
-   * Returns: a new `GtkFontChooserWidget`
-
-   * Deprecated: Direct use of `GtkFontChooserWidget` is deprecated.
-   */
+      Creates a new [gtk.font_chooser_widget.FontChooserWidget].
+    Returns:     a new [gtk.font_chooser_widget.FontChooserWidget]
+  
+    Deprecated:     Direct use of [gtk.font_chooser_widget.FontChooserWidget] is deprecated.
+  */
   this()
   {
     GtkWidget* _cretval;

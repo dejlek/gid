@@ -18,24 +18,29 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * #GtkToolButtons are #GtkToolItems containing buttons.
- * Use [gtk.tool_button.ToolButton.new_] to create a new #GtkToolButton.
- * The label of a #GtkToolButton is determined by the properties
- * #GtkToolButton:label-widget, #GtkToolButton:label, and
- * #GtkToolButton:stock-id. If #GtkToolButton:label-widget is
- * non-%NULL, then that widget is used as the label. Otherwise, if
- * #GtkToolButton:label is non-%NULL, that string is used as the label.
- * Otherwise, if #GtkToolButton:stock-id is non-%NULL, the label is
- * determined by the stock item. Otherwise, the button does not have a label.
- * The icon of a #GtkToolButton is determined by the properties
- * #GtkToolButton:icon-widget and #GtkToolButton:stock-id. If
- * #GtkToolButton:icon-widget is non-%NULL, then
- * that widget is used as the icon. Otherwise, if #GtkToolButton:stock-id is
- * non-%NULL, the icon is determined by the stock item. Otherwise,
- * the button does not have a icon.
- * # CSS nodes
- * GtkToolButton has a single CSS node with name toolbutton.
- */
+    #GtkToolButtons are #GtkToolItems containing buttons.
+  
+  Use [gtk.tool_button.ToolButton.new_] to create a new #GtkToolButton.
+  
+  The label of a #GtkToolButton is determined by the properties
+  #GtkToolButton:label-widget, #GtkToolButton:label, and
+  #GtkToolButton:stock-id. If #GtkToolButton:label-widget is
+  non-null, then that widget is used as the label. Otherwise, if
+  #GtkToolButton:label is non-null, that string is used as the label.
+  Otherwise, if #GtkToolButton:stock-id is non-null, the label is
+  determined by the stock item. Otherwise, the button does not have a label.
+  
+  The icon of a #GtkToolButton is determined by the properties
+  #GtkToolButton:icon-widget and #GtkToolButton:stock-id. If
+  #GtkToolButton:icon-widget is non-null, then
+  that widget is used as the icon. Otherwise, if #GtkToolButton:stock-id is
+  non-null, the icon is determined by the stock item. Otherwise,
+  the button does not have a icon.
+  
+  # CSS nodes
+  
+  GtkToolButton has a single CSS node with name toolbutton.
+*/
 class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
 {
 
@@ -58,13 +63,13 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   mixin ActionableT!();
 
   /**
-   * Creates a new #GtkToolButton using icon_widget as contents and label as
-   * label.
-   * Params:
-   *   iconWidget = a widget that will be used as the button contents, or %NULL
-   *   label = a string that will be used as label, or %NULL
-   * Returns: A new #GtkToolButton
-   */
+      Creates a new #GtkToolButton using icon_widget as contents and label as
+    label.
+    Params:
+      iconWidget =       a widget that will be used as the button contents, or null
+      label =       a string that will be used as label, or null
+    Returns:     A new #GtkToolButton
+  */
   this(gtk.widget.Widget iconWidget = null, string label = null)
   {
     GtkToolItem* _cretval;
@@ -74,17 +79,18 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   }
 
   /**
-   * Creates a new #GtkToolButton containing the image and text from a
-   * stock item. Some stock ids have preprocessor macros like #GTK_STOCK_OK
-   * and #GTK_STOCK_APPLY.
-   * It is an error if stock_id is not a name of a stock item.
-   * Params:
-   *   stockId = the name of the stock item
-   * Returns: A new #GtkToolButton
-
-   * Deprecated: Use [gtk.tool_button.ToolButton.new_] together with
-   *   [gtk.image.Image.newFromIconName] instead.
-   */
+      Creates a new #GtkToolButton containing the image and text from a
+    stock item. Some stock ids have preprocessor macros like #GTK_STOCK_OK
+    and #GTK_STOCK_APPLY.
+    
+    It is an error if stock_id is not a name of a stock item.
+    Params:
+      stockId =       the name of the stock item
+    Returns:     A new #GtkToolButton
+  
+    Deprecated:     Use [gtk.tool_button.ToolButton.new_] together with
+      [gtk.image.Image.newFromIconName] instead.
+  */
   static gtk.tool_button.ToolButton newFromStock(string stockId)
   {
     GtkToolItem* _cretval;
@@ -95,11 +101,11 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   }
 
   /**
-   * Returns the name of the themed icon for the tool button,
-   * see [gtk.tool_button.ToolButton.setIconName].
-   * Returns: the icon name or %NULL if the tool button has
-   *   no themed icon
-   */
+      Returns the name of the themed icon for the tool button,
+    see [gtk.tool_button.ToolButton.setIconName].
+    Returns:     the icon name or null if the tool button has
+      no themed icon
+  */
   string getIconName()
   {
     const(char)* _cretval;
@@ -109,11 +115,11 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   }
 
   /**
-   * Return the widget used as icon widget on button.
-   * See [gtk.tool_button.ToolButton.setIconWidget].
-   * Returns: The widget used as icon
-   *   on button, or %NULL.
-   */
+      Return the widget used as icon widget on button.
+    See [gtk.tool_button.ToolButton.setIconWidget].
+    Returns:     The widget used as icon
+          on button, or null.
+  */
   gtk.widget.Widget getIconWidget()
   {
     GtkWidget* _cretval;
@@ -123,11 +129,11 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   }
 
   /**
-   * Returns the label used by the tool button, or %NULL if the tool button
-   * doesn’t have a label. or uses a the label from a stock item. The returned
-   * string is owned by GTK+, and must not be modified or freed.
-   * Returns: The label, or %NULL
-   */
+      Returns the label used by the tool button, or null if the tool button
+    doesn’t have a label. or uses a the label from a stock item. The returned
+    string is owned by GTK+, and must not be modified or freed.
+    Returns:     The label, or null
+  */
   string getLabel()
   {
     const(char)* _cretval;
@@ -137,11 +143,11 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   }
 
   /**
-   * Returns the widget used as label on button.
-   * See [gtk.tool_button.ToolButton.setLabelWidget].
-   * Returns: The widget used as label
-   *   on button, or %NULL.
-   */
+      Returns the widget used as label on button.
+    See [gtk.tool_button.ToolButton.setLabelWidget].
+    Returns:     The widget used as label
+          on button, or null.
+  */
   gtk.widget.Widget getLabelWidget()
   {
     GtkWidget* _cretval;
@@ -151,12 +157,12 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   }
 
   /**
-   * Returns the name of the stock item. See [gtk.tool_button.ToolButton.setStockId].
-   * The returned string is owned by GTK+ and must not be freed or modifed.
-   * Returns: the name of the stock item for button.
-
-   * Deprecated: Use [gtk.tool_button.ToolButton.getIconName] instead.
-   */
+      Returns the name of the stock item. See [gtk.tool_button.ToolButton.setStockId].
+    The returned string is owned by GTK+ and must not be freed or modifed.
+    Returns:     the name of the stock item for button.
+  
+    Deprecated:     Use [gtk.tool_button.ToolButton.getIconName] instead.
+  */
   string getStockId()
   {
     const(char)* _cretval;
@@ -166,11 +172,11 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   }
 
   /**
-   * Returns whether underscores in the label property are used as mnemonics
-   * on menu items on the overflow menu. See [gtk.tool_button.ToolButton.setUseUnderline].
-   * Returns: %TRUE if underscores in the label property are used as
-   *   mnemonics on menu items on the overflow menu.
-   */
+      Returns whether underscores in the label property are used as mnemonics
+    on menu items on the overflow menu. See [gtk.tool_button.ToolButton.setUseUnderline].
+    Returns:     true if underscores in the label property are used as
+      mnemonics on menu items on the overflow menu.
+  */
   bool getUseUnderline()
   {
     bool _retval;
@@ -179,14 +185,14 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   }
 
   /**
-   * Sets the icon for the tool button from a named themed icon.
-   * See the docs for #GtkIconTheme for more details.
-   * The #GtkToolButton:icon-name property only has an effect if not
-   * overridden by non-%NULL #GtkToolButton:label-widget,
-   * #GtkToolButton:icon-widget and #GtkToolButton:stock-id properties.
-   * Params:
-   *   iconName = the name of the themed icon
-   */
+      Sets the icon for the tool button from a named themed icon.
+    See the docs for #GtkIconTheme for more details.
+    The #GtkToolButton:icon-name property only has an effect if not
+    overridden by non-null #GtkToolButton:label-widget,
+    #GtkToolButton:icon-widget and #GtkToolButton:stock-id properties.
+    Params:
+      iconName =       the name of the themed icon
+  */
   void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
@@ -194,27 +200,27 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   }
 
   /**
-   * Sets icon as the widget used as icon on button. If icon_widget is
-   * %NULL the icon is determined by the #GtkToolButton:stock-id property. If the
-   * #GtkToolButton:stock-id property is also %NULL, button will not have an icon.
-   * Params:
-   *   iconWidget = the widget used as icon, or %NULL
-   */
+      Sets icon as the widget used as icon on button. If icon_widget is
+    null the icon is determined by the #GtkToolButton:stock-id property. If the
+    #GtkToolButton:stock-id property is also null, button will not have an icon.
+    Params:
+      iconWidget =       the widget used as icon, or null
+  */
   void setIconWidget(gtk.widget.Widget iconWidget = null)
   {
     gtk_tool_button_set_icon_widget(cast(GtkToolButton*)cPtr, iconWidget ? cast(GtkWidget*)iconWidget.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets label as the label used for the tool button. The #GtkToolButton:label
-   * property only has an effect if not overridden by a non-%NULL
-   * #GtkToolButton:label-widget property. If both the #GtkToolButton:label-widget
-   * and #GtkToolButton:label properties are %NULL, the label is determined by the
-   * #GtkToolButton:stock-id property. If the #GtkToolButton:stock-id property is
-   * also %NULL, button will not have a label.
-   * Params:
-   *   label = a string that will be used as label, or %NULL.
-   */
+      Sets label as the label used for the tool button. The #GtkToolButton:label
+    property only has an effect if not overridden by a non-null
+    #GtkToolButton:label-widget property. If both the #GtkToolButton:label-widget
+    and #GtkToolButton:label properties are null, the label is determined by the
+    #GtkToolButton:stock-id property. If the #GtkToolButton:stock-id property is
+    also null, button will not have a label.
+    Params:
+      label =       a string that will be used as label, or null.
+  */
   void setLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
@@ -222,28 +228,28 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   }
 
   /**
-   * Sets label_widget as the widget that will be used as the label
-   * for button. If label_widget is %NULL the #GtkToolButton:label property is used
-   * as label. If #GtkToolButton:label is also %NULL, the label in the stock item
-   * determined by the #GtkToolButton:stock-id property is used as label. If
-   * #GtkToolButton:stock-id is also %NULL, button does not have a label.
-   * Params:
-   *   labelWidget = the widget used as label, or %NULL
-   */
+      Sets label_widget as the widget that will be used as the label
+    for button. If label_widget is null the #GtkToolButton:label property is used
+    as label. If #GtkToolButton:label is also null, the label in the stock item
+    determined by the #GtkToolButton:stock-id property is used as label. If
+    #GtkToolButton:stock-id is also null, button does not have a label.
+    Params:
+      labelWidget =       the widget used as label, or null
+  */
   void setLabelWidget(gtk.widget.Widget labelWidget = null)
   {
     gtk_tool_button_set_label_widget(cast(GtkToolButton*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
   }
 
   /**
-   * Sets the name of the stock item. See [gtk.tool_button.ToolButton.newFromStock].
-   * The stock_id property only has an effect if not overridden by non-%NULL
-   * #GtkToolButton:label-widget and #GtkToolButton:icon-widget properties.
-   * Params:
-   *   stockId = a name of a stock item, or %NULL
-
-   * Deprecated: Use [gtk.tool_button.ToolButton.setIconName] instead.
-   */
+      Sets the name of the stock item. See [gtk.tool_button.ToolButton.newFromStock].
+    The stock_id property only has an effect if not overridden by non-null
+    #GtkToolButton:label-widget and #GtkToolButton:icon-widget properties.
+    Params:
+      stockId =       a name of a stock item, or null
+  
+    Deprecated:     Use [gtk.tool_button.ToolButton.setIconName] instead.
+  */
   void setStockId(string stockId = null)
   {
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -251,36 +257,43 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   }
 
   /**
-   * If set, an underline in the label property indicates that the next character
-   * should be used for the mnemonic accelerator key in the overflow menu. For
-   * example, if the label property is “_Open” and use_underline is %TRUE,
-   * the label on the tool button will be “Open” and the item on the overflow
-   * menu will have an underlined “O”.
-   * Labels shown on tool buttons never have mnemonics on them; this property
-   * only affects the menu item on the overflow menu.
-   * Params:
-   *   useUnderline = whether the button label has the form “_Open”
-   */
+      If set, an underline in the label property indicates that the next character
+    should be used for the mnemonic accelerator key in the overflow menu. For
+    example, if the label property is “_Open” and use_underline is true,
+    the label on the tool button will be “Open” and the item on the overflow
+    menu will have an underlined “O”.
+    
+    Labels shown on tool buttons never have mnemonics on them; this property
+    only affects the menu item on the overflow menu.
+    Params:
+      useUnderline =       whether the button label has the form “_Open”
+  */
   void setUseUnderline(bool useUnderline)
   {
     gtk_tool_button_set_use_underline(cast(GtkToolButton*)cPtr, useUnderline);
   }
 
   /**
-   * This signal is emitted when the tool button is clicked with the mouse
-   * or activated with the keyboard.
-   *   toolButton = the instance the signal is connected to
-   */
+      This signal is emitted when the tool button is clicked with the mouse
+    or activated with the keyboard.
+  
+    ## Parameters
+    $(LIST
+      * $(B toolButton) the instance the signal is connected to
+    )
+  */
   alias ClickedCallbackDlg = void delegate(gtk.tool_button.ToolButton toolButton);
+
+  /** ditto */
   alias ClickedCallbackFunc = void function(gtk.tool_button.ToolButton toolButton);
 
   /**
-   * Connect to Clicked signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Clicked signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectClicked(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ClickedCallbackDlg) || is(T : ClickedCallbackFunc))
   {

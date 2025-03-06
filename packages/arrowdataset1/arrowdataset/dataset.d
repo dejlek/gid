@@ -10,6 +10,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class Dataset : gobject.object.ObjectG
 {
 
@@ -29,6 +30,7 @@ class Dataset : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   arrowdataset.scanner_builder.ScannerBuilder beginScan()
   {
     GADatasetScannerBuilder* _cretval;
@@ -40,6 +42,7 @@ class Dataset : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getTypeName()
   {
     char* _cretval;
@@ -48,6 +51,7 @@ class Dataset : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.record_batch_reader.RecordBatchReader toRecordBatchReader()
   {
     GArrowRecordBatchReader* _cretval;
@@ -59,6 +63,7 @@ class Dataset : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.table.Table toTable()
   {
     GArrowTable* _cretval;

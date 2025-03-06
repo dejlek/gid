@@ -9,10 +9,11 @@ import soup.server_message;
 import soup.types;
 
 /**
- * Server-side "Digest" authentication.
- * #SoupAuthDomainDigest handles the server side of HTTP "Digest"
- * authentication.
- */
+    Server-side "Digest" authentication.
+  
+  #SoupAuthDomainDigest handles the server side of HTTP "Digest"
+  authentication.
+*/
 class AuthDomainDigest : soup.auth_domain.AuthDomain
 {
 
@@ -33,25 +34,27 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
   }
 
   /**
-   * Encodes the username/realm/password triplet for Digest
-   * authentication.
-   * That is, it returns a stringified MD5 hash of
-   * username, realm, and password concatenated together. This is
-   * the form that is needed as the return value of
-   * #SoupAuthDomainDigest's auth handler.
-   * For security reasons, you should store the encoded hash, rather
-   * than storing the cleartext password itself and calling this method
-   * only when you need to verify it. This way, if your server is
-   * compromised, the attackers will not gain access to cleartext
-   * passwords which might also be usable at other sites. $(LPAREN)Note also
-   * that the encoded password returned by this method is identical to
-   * the encoded password stored in an Apache .htdigest file.$(RPAREN)
-   * Params:
-   *   username = a username
-   *   realm = an auth realm name
-   *   password = the password for username in realm
-   * Returns: the encoded password
-   */
+      Encodes the username/realm/password triplet for Digest
+    authentication.
+    
+    That is, it returns a stringified MD5 hash of
+    username, realm, and password concatenated together. This is
+    the form that is needed as the return value of
+    #SoupAuthDomainDigest's auth handler.
+    
+    For security reasons, you should store the encoded hash, rather
+    than storing the cleartext password itself and calling this method
+    only when you need to verify it. This way, if your server is
+    compromised, the attackers will not gain access to cleartext
+    passwords which might also be usable at other sites. (Note also
+    that the encoded password returned by this method is identical to
+    the encoded password stored in an Apache .htdigest file.)
+    Params:
+      username =       a username
+      realm =       an auth realm name
+      password =       the password for username in realm
+    Returns:     the encoded password
+  */
   static string encodePassword(string username, string realm, string password)
   {
     char* _cretval;
@@ -64,18 +67,20 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
   }
 
   /**
-   * Sets the callback that domain will use to authenticate incoming
-   * requests.
-   * For each request containing authorization, domain will
-   * invoke the callback, and then either accept or reject the request
-   * based on callback's return value.
-   * You can also set the auth callback by setting the
-   * propertyAuthDomainDigest:auth-callback and
-   * propertyAuthDomainDigest:auth-data properties, which can also be used to
-   * set the callback at construct time.
-   * Params:
-   *   callback = the callback
-   */
+      Sets the callback that domain will use to authenticate incoming
+    requests.
+    
+    For each request containing authorization, domain will
+    invoke the callback, and then either accept or reject the request
+    based on callback's return value.
+    
+    You can also set the auth callback by setting the
+    `propertyAuthDomainDigest:auth-callback` and
+    `propertyAuthDomainDigest:auth-data` properties, which can also be used to
+    set the callback at construct time.
+    Params:
+      callback =       the callback
+  */
   void setAuthCallback(soup.types.AuthDomainDigestAuthCallback callback)
   {
     extern(C) char* _callbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, void* userData)

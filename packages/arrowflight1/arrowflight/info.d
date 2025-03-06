@@ -11,6 +11,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class Info : gobject.object.ObjectG
 {
 
@@ -30,6 +31,7 @@ class Info : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrow.schema.Schema schema, arrowflight.descriptor.Descriptor descriptor, arrowflight.endpoint.Endpoint[] endpoints, long totalRecords, long totalBytes)
   {
     GAFlightInfo* _cretval;
@@ -42,6 +44,7 @@ class Info : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool equal(arrowflight.info.Info otherInfo)
   {
     bool _retval;
@@ -49,6 +52,7 @@ class Info : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrowflight.descriptor.Descriptor getDescriptor()
   {
     GAFlightDescriptor* _cretval;
@@ -57,6 +61,7 @@ class Info : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrowflight.endpoint.Endpoint[] getEndpoints()
   {
     GList* _cretval;
@@ -65,6 +70,7 @@ class Info : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.schema.Schema getSchema(arrow.read_options.ReadOptions options = null)
   {
     GArrowSchema* _cretval;
@@ -76,6 +82,7 @@ class Info : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getTotalBytes()
   {
     long _retval;
@@ -83,6 +90,7 @@ class Info : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getTotalRecords()
   {
     long _retval;

@@ -7,9 +7,9 @@ import pango.c.types;
 import pango.types;
 
 /**
- * The `PangoAttrInt` structure is used to represent attributes with
- * an integer or enumeration value.
- */
+    The [pango.attr_int.AttrInt] structure is used to represent attributes with
+  an integer or enumeration value.
+*/
 class AttrInt
 {
   PangoAttrInt cInstance;

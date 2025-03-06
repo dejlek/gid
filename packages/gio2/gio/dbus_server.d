@@ -14,24 +14,27 @@ import gobject.dclosure;
 import gobject.object;
 
 /**
- * `GDBusServer` is a helper for listening to and accepting D-Bus
- * connections. This can be used to create a new D-Bus server, allowing two
- * peers to use the D-Bus protocol for their own specialized communication.
- * A server instance provided in this way will not perform message routing or
- * implement the
- * [`org.freedesktop.DBus` interface](https://dbus.freedesktop.org/doc/dbus-specification.html#message-bus-messages).
- * To just export an object on a well-known name on a message bus, such as the
- * session or system bus, you should instead use func@Gio.bus_own_name.
- * An example of peer-to-peer communication with GDBus can be found
- * in [gdbus-example-peer.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-peer.c).
- * Note that a minimal `GDBusServer` will accept connections from any
- * peer. In many use-cases it will be necessary to add a
- * [gio.dbus_auth_observer.DBusAuthObserver] that only accepts connections that have
- * successfully authenticated as the same user that is running the
- * `GDBusServer`. Since GLib 2.68 this can be achieved more simply by passing
- * the `G_DBUS_SERVER_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER` flag to the
- * server.
- */
+    [gio.dbus_server.DBusServer] is a helper for listening to and accepting D-Bus
+  connections. This can be used to create a new D-Bus server, allowing two
+  peers to use the D-Bus protocol for their own specialized communication.
+  A server instance provided in this way will not perform message routing or
+  implement the
+  [`org.freedesktop.DBus` interface](https://dbus.freedesktop.org/doc/dbus-specification.html#message-bus-messages).
+  
+  To just export an object on a well-known name on a message bus, such as the
+  session or system bus, you should instead use `func@Gio.bus_own_name`.
+  
+  An example of peer-to-peer communication with GDBus can be found
+  in [gdbus-example-peer.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-peer.c).
+  
+  Note that a minimal [gio.dbus_server.DBusServer] will accept connections from any
+  peer. In many use-cases it will be necessary to add a
+  [gio.dbus_auth_observer.DBusAuthObserver] that only accepts connections that have
+  successfully authenticated as the same user that is running the
+  [gio.dbus_server.DBusServer]. Since GLib 2.68 this can be achieved more simply by passing
+  the [gio.types.DBusServerFlags.AuthenticationRequireSameUser] flag to the
+  server.
+*/
 class DBusServer : gobject.object.ObjectG, gio.initable.Initable
 {
 
@@ -54,29 +57,35 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
   mixin InitableT!();
 
   /**
-   * Creates a new D-Bus server that listens on the first address in
-   * address that works.
-   * Once constructed, you can use [gio.dbus_server.DBusServer.getClientAddress] to
-   * get a D-Bus address string that clients can use to connect.
-   * To have control over the available authentication mechanisms and
-   * the users that are authorized to connect, it is strongly recommended
-   * to provide a non-%NULL #GDBusAuthObserver.
-   * Connect to the #GDBusServer::new-connection signal to handle
-   * incoming connections.
-   * The returned #GDBusServer isn't active - you have to start it with
-   * [gio.dbus_server.DBusServer.start].
-   * #GDBusServer is used in this [example][gdbus-peer-to-peer].
-   * This is a synchronous failable constructor. There is currently no
-   * asynchronous version.
-   * Params:
-   *   address = A D-Bus address.
-   *   flags = Flags from the #GDBusServerFlags enumeration.
-   *   guid = A D-Bus GUID.
-   *   observer = A #GDBusAuthObserver or %NULL.
-   *   cancellable = A #GCancellable or %NULL.
-   * Returns: A #GDBusServer or %NULL if error is set. Free with
-   *   [gobject.object.ObjectG.unref].
-   */
+      Creates a new D-Bus server that listens on the first address in
+    address that works.
+    
+    Once constructed, you can use [gio.dbus_server.DBusServer.getClientAddress] to
+    get a D-Bus address string that clients can use to connect.
+    
+    To have control over the available authentication mechanisms and
+    the users that are authorized to connect, it is strongly recommended
+    to provide a non-null #GDBusAuthObserver.
+    
+    Connect to the #GDBusServer::new-connection signal to handle
+    incoming connections.
+    
+    The returned #GDBusServer isn't active - you have to start it with
+    [gio.dbus_server.DBusServer.start].
+    
+    #GDBusServer is used in this [example][gdbus-peer-to-peer].
+    
+    This is a synchronous failable constructor. There is currently no
+    asynchronous version.
+    Params:
+      address =       A D-Bus address.
+      flags =       Flags from the #GDBusServerFlags enumeration.
+      guid =       A D-Bus GUID.
+      observer =       A #GDBusAuthObserver or null.
+      cancellable =       A #GCancellable or null.
+    Returns:     A #GDBusServer or null if error is set. Free with
+      [gobject.object.ObjectG.unref].
+  */
   static gio.dbus_server.DBusServer newSync(string address, gio.types.DBusServerFlags flags, string guid, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null)
   {
     GDBusServer* _cretval;
@@ -91,13 +100,14 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
   }
 
   /**
-   * Gets a
-   * [D-Bus address](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses)
-   * string that can be used by clients to connect to server.
-   * This is valid and non-empty if initializing the #GDBusServer succeeded.
-   * Returns: A D-Bus address string. Do not free, the string is owned
-   *   by server.
-   */
+      Gets a
+    [D-Bus address](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses)
+    string that can be used by clients to connect to server.
+    
+    This is valid and non-empty if initializing the #GDBusServer succeeded.
+    Returns:     A D-Bus address string. Do not free, the string is owned
+      by server.
+  */
   string getClientAddress()
   {
     const(char)* _cretval;
@@ -107,9 +117,9 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
   }
 
   /**
-   * Gets the flags for server.
-   * Returns: A set of flags from the #GDBusServerFlags enumeration.
-   */
+      Gets the flags for server.
+    Returns:     A set of flags from the #GDBusServerFlags enumeration.
+  */
   gio.types.DBusServerFlags getFlags()
   {
     GDBusServerFlags _cretval;
@@ -119,9 +129,9 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
   }
 
   /**
-   * Gets the GUID for server, as provided to [gio.dbus_server.DBusServer.newSync].
-   * Returns: A D-Bus GUID. Do not free this string, it is owned by server.
-   */
+      Gets the GUID for server, as provided to [gio.dbus_server.DBusServer.newSync].
+    Returns:     A D-Bus GUID. Do not free this string, it is owned by server.
+  */
   string getGuid()
   {
     const(char)* _cretval;
@@ -131,9 +141,9 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
   }
 
   /**
-   * Gets whether server is active.
-   * Returns: %TRUE if server is active, %FALSE otherwise.
-   */
+      Gets whether server is active.
+    Returns:     true if server is active, false otherwise.
+  */
   bool isActive()
   {
     bool _retval;
@@ -142,56 +152,64 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
   }
 
   /**
-   * Starts server.
-   */
+      Starts server.
+  */
   void start()
   {
     g_dbus_server_start(cast(GDBusServer*)cPtr);
   }
 
   /**
-   * Stops server.
-   */
+      Stops server.
+  */
   void stop()
   {
     g_dbus_server_stop(cast(GDBusServer*)cPtr);
   }
 
   /**
-   * Emitted when a new authenticated connection has been made. Use
-   * [gio.dbus_connection.DBusConnection.getPeerCredentials] to figure out what
-   * identity $(LPAREN)if any$(RPAREN), was authenticated.
-   * If you want to accept the connection, take a reference to the
-   * connection object and return %TRUE. When you are done with the
-   * connection call [gio.dbus_connection.DBusConnection.close] and give up your
-   * reference. Note that the other peer may disconnect at any time -
-   * a typical thing to do when accepting a connection is to listen to
-   * the #GDBusConnection::closed signal.
-   * If #GDBusServer:flags contains %G_DBUS_SERVER_FLAGS_RUN_IN_THREAD
-   * then the signal is emitted in a new thread dedicated to the
-   * connection. Otherwise the signal is emitted in the
-   * [thread-default main context][g-main-context-push-thread-default]
-   * of the thread that server was constructed in.
-   * You are guaranteed that signal handlers for this signal runs
-   * before incoming messages on connection are processed. This means
-   * that it's suitable to call [gio.dbus_connection.DBusConnection.registerObject] or
-   * similar from the signal handler.
-   * Params
-   *   connection = A #GDBusConnection for the new connection.
-   *   dBusServer = the instance the signal is connected to
-   * Returns: %TRUE to claim connection, %FALSE to let other handlers
-   *   run.
-   */
+      Emitted when a new authenticated connection has been made. Use
+    [gio.dbus_connection.DBusConnection.getPeerCredentials] to figure out what
+    identity (if any), was authenticated.
+    
+    If you want to accept the connection, take a reference to the
+    connection object and return true. When you are done with the
+    connection call [gio.dbus_connection.DBusConnection.close] and give up your
+    reference. Note that the other peer may disconnect at any time -
+    a typical thing to do when accepting a connection is to listen to
+    the #GDBusConnection::closed signal.
+    
+    If #GDBusServer:flags contains [gio.types.DBusServerFlags.RunInThread]
+    then the signal is emitted in a new thread dedicated to the
+    connection. Otherwise the signal is emitted in the
+    [thread-default main context][g-main-context-push-thread-default]
+    of the thread that server was constructed in.
+    
+    You are guaranteed that signal handlers for this signal runs
+    before incoming messages on connection are processed. This means
+    that it's suitable to call [gio.dbus_connection.DBusConnection.registerObject] or
+    similar from the signal handler.
+  
+    ## Parameters
+    $(LIST
+      * $(B connection)       A #GDBusConnection for the new connection.
+      * $(B dBusServer) the instance the signal is connected to
+    )
+    Returns:     true to claim connection, false to let other handlers
+      run.
+  */
   alias NewConnectionCallbackDlg = bool delegate(gio.dbus_connection.DBusConnection connection, gio.dbus_server.DBusServer dBusServer);
+
+  /** ditto */
   alias NewConnectionCallbackFunc = bool function(gio.dbus_connection.DBusConnection connection, gio.dbus_server.DBusServer dBusServer);
 
   /**
-   * Connect to NewConnection signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to NewConnection signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectNewConnection(T)(T callback, Flag!"After" after = No.After)
   if (is(T : NewConnectionCallbackDlg) || is(T : NewConnectionCallbackFunc))
   {

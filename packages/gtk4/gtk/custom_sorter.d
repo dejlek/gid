@@ -7,9 +7,9 @@ import gtk.sorter;
 import gtk.types;
 
 /**
- * `GtkCustomSorter` is a `GtkSorter` implementation that sorts via a callback
- * function.
- */
+    [gtk.custom_sorter.CustomSorter] is a [gtk.sorter.Sorter] implementation that sorts via a callback
+  function.
+*/
 class CustomSorter : gtk.sorter.Sorter
 {
 
@@ -34,13 +34,13 @@ class CustomSorter : gtk.sorter.Sorter
   alias CustomSortDelegate = int delegate(ObjectG aObj, ObjectG bObj);
 
   /**
-   * Creates a new `GtkSorter` that works by calling
-   * sortFunc to compare items.
-   * If sortFunc is null, all items are considered equal.
-   * Params:
-   *   sortFunc = the callback delegate to use for sorting
-   * Returns: a new `CustomSorter`
-   */
+  * Creates a new `GtkSorter` that works by calling
+  * sortFunc to compare items.
+  * If sortFunc is null, all items are considered equal.
+  * Params:
+  *   sortFunc = the callback delegate to use for sorting
+  * Returns: a new `CustomSorter`
+  */
   this(CustomSortDelegate sortFunc)
   {
     extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData)
@@ -60,15 +60,15 @@ class CustomSorter : gtk.sorter.Sorter
   }
 
   /**
-   * Sets $(LPAREN)or unsets$(RPAREN) the function used for sorting items.
-   * If sort_func is %NULL, all items are considered equal.
-   * If the sort func changes its sorting behavior,
-   * [Gtk.Sorter.changed] needs to be called.
-   * If a previous function was set, its user_destroy will be
-   * called now.
-   * Params:
-   *   sortFunc = function to sort items
-   */
+  * Sets $(LPAREN)or unsets$(RPAREN) the function used for sorting items.
+  * If sort_func is %NULL, all items are considered equal.
+  * If the sort func changes its sorting behavior,
+  * [Gtk.Sorter.changed] needs to be called.
+  * If a previous function was set, its user_destroy will be
+  * called now.
+  * Params:
+  *   sortFunc = function to sort items
+  */
   void setSortFunc(CustomSortDelegate sortFunc)
   {
     extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData)

@@ -11,6 +11,7 @@ import arrow.writable_mixin;
 import gid.gid;
 import glib.error;
 
+/** */
 class FileOutputStream : arrow.output_stream.OutputStream
 {
 
@@ -30,6 +31,7 @@ class FileOutputStream : arrow.output_stream.OutputStream
     return getType();
   }
 
+  /** */
   this(string path, bool append)
   {
     GArrowFileOutputStream* _cretval;

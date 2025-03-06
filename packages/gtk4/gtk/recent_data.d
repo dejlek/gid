@@ -6,9 +6,9 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * Meta-data to be passed to [gtk.recent_manager.RecentManager.addFull] when
- * registering a recently used resource.
- */
+    Meta-data to be passed to [gtk.recent_manager.RecentManager.addFull] when
+  registering a recently used resource.
+*/
 class RecentData
 {
   GtkRecentData cInstance;

@@ -10,6 +10,7 @@ import arrowdataset.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartitioning
 {
 
@@ -29,6 +30,7 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
     return getType();
   }
 
+  /** */
   this(arrow.schema.Schema schema, arrow.array.Array[] dictionaries = null, arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions options = null)
   {
     GADatasetDirectoryPartitioning* _cretval;

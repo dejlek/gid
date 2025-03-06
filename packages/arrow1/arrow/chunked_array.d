@@ -13,6 +13,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class ChunkedArray : gobject.object.ObjectG
 {
 
@@ -32,6 +33,7 @@ class ChunkedArray : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   this(arrow.array.Array[] chunks)
   {
     GArrowChunkedArray* _cretval;
@@ -44,6 +46,7 @@ class ChunkedArray : gobject.object.ObjectG
     this(_cretval, Yes.Take);
   }
 
+  /** */
   static arrow.chunked_array.ChunkedArray newEmpty(arrow.data_type.DataType dataType)
   {
     GArrowChunkedArray* _cretval;
@@ -55,6 +58,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array.Array combine()
   {
     GArrowArray* _cretval;
@@ -66,6 +70,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool equal(arrow.chunked_array.ChunkedArray otherChunkedArray)
   {
     bool _retval;
@@ -73,6 +78,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.chunked_array.ChunkedArray filter(arrow.boolean_array.BooleanArray filter, arrow.filter_options.FilterOptions options = null)
   {
     GArrowChunkedArray* _cretval;
@@ -84,6 +90,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.chunked_array.ChunkedArray filterChunkedArray(arrow.chunked_array.ChunkedArray filter, arrow.filter_options.FilterOptions options = null)
   {
     GArrowChunkedArray* _cretval;
@@ -95,6 +102,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array.Array getChunk(uint i)
   {
     GArrowArray* _cretval;
@@ -103,6 +111,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array.Array[] getChunks()
   {
     GList* _cretval;
@@ -111,6 +120,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   ulong getLength()
   {
     ulong _retval;
@@ -118,6 +128,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   uint getNChunks()
   {
     uint _retval;
@@ -125,6 +136,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   ulong getNNulls()
   {
     ulong _retval;
@@ -132,6 +144,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   ulong getNRows()
   {
     ulong _retval;
@@ -139,6 +152,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.data_type.DataType getValueDataType()
   {
     GArrowDataType* _cretval;
@@ -147,6 +161,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.types.Type getValueType()
   {
     GArrowType _cretval;
@@ -155,6 +170,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.chunked_array.ChunkedArray slice(ulong offset, ulong length)
   {
     GArrowChunkedArray* _cretval;
@@ -163,6 +179,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.uint64_array.UInt64Array sortIndices(arrow.types.SortOrder order)
   {
     GArrowUInt64Array* _cretval;
@@ -174,6 +191,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.chunked_array.ChunkedArray take(arrow.array.Array indices, arrow.take_options.TakeOptions options = null)
   {
     GArrowChunkedArray* _cretval;
@@ -185,6 +203,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.chunked_array.ChunkedArray takeChunkedArray(arrow.chunked_array.ChunkedArray indices, arrow.take_options.TakeOptions options = null)
   {
     GArrowChunkedArray* _cretval;
@@ -196,6 +215,7 @@ class ChunkedArray : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;

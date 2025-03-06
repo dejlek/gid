@@ -16,6 +16,7 @@ import gtk.c.types;
 import gtk.entry_accessible;
 import gtk.types;
 
+/** */
 class SpinButtonAccessible : gtk.entry_accessible.EntryAccessible, atk.value.Value
 {
 

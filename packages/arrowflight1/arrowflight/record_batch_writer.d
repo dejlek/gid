@@ -11,6 +11,7 @@ import arrowflight.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
 {
 
@@ -31,13 +32,13 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   }
 
   /**
-   * Begins writing data with the given schema. Only used with
-   * `DoExchange`.
-   * Params:
-   *   schema = A #GArrowSchema.
-   *   options = A #GArrowWriteOptions.
-   * Returns: %TRUE on success, %FALSE on error.
-   */
+      Begins writing data with the given schema. Only used with
+    `DoExchange`.
+    Params:
+      schema =       A #GArrowSchema.
+      options =       A #GArrowWriteOptions.
+    Returns:     true on success, false on error.
+  */
   bool begin(arrow.schema.Schema schema, arrow.write_options.WriteOptions options = null)
   {
     bool _retval;
@@ -49,11 +50,11 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   }
 
   /**
-   * Write metadata.
-   * Params:
-   *   metadata = A #GArrowBuffer.
-   * Returns: %TRUE on success, %FALSE on error.
-   */
+      Write metadata.
+    Params:
+      metadata =       A #GArrowBuffer.
+    Returns:     true on success, false on error.
+  */
   bool writeMetadata(arrow.buffer.Buffer metadata)
   {
     bool _retval;
@@ -67,12 +68,12 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   alias writeRecordBatch = arrow.record_batch_writer.RecordBatchWriter.writeRecordBatch;
 
   /**
-   * Write a record batch with metadata.
-   * Params:
-   *   recordBatch = A #GArrowRecordBatch.
-   *   metadata = A #GArrowBuffer.
-   * Returns: %TRUE on success, %FALSE on error.
-   */
+      Write a record batch with metadata.
+    Params:
+      recordBatch =       A #GArrowRecordBatch.
+      metadata =       A #GArrowBuffer.
+    Returns:     true on success, false on error.
+  */
   bool writeRecordBatch(arrow.record_batch.RecordBatch recordBatch, arrow.buffer.Buffer metadata = null)
   {
     bool _retval;

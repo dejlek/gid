@@ -17,21 +17,27 @@ import gobject.dclosure;
 import gobject.object;
 
 /**
- * #GdkDisplay objects purpose are two fold:
- * - To manage and provide information about input devices $(LPAREN)pointers and keyboards$(RPAREN)
- * - To manage and provide information about the available #GdkScreens
- * GdkDisplay objects are the GDK representation of an X Display,
- * which can be described as a workstation consisting of
- * a keyboard, a pointing device $(LPAREN)such as a mouse$(RPAREN) and one or more
- * screens.
- * It is used to open and keep track of various GdkScreen objects
- * currently instantiated by the application. It is also used to
- * access the keyboard$(LPAREN)s$(RPAREN) and mouse pointer$(LPAREN)s$(RPAREN) of the display.
- * Most of the input device handling has been factored out into
- * the separate #GdkDeviceManager object. Every display has a
- * device manager, which you can obtain using
- * [gdk.display.Display.getDeviceManager].
- */
+    #GdkDisplay objects purpose are two fold:
+  
+  $(LIST
+    * To manage and provide information about input devices (pointers and keyboards)
+    
+    * To manage and provide information about the available #GdkScreens
+  )
+    
+  GdkDisplay objects are the GDK representation of an X Display,
+  which can be described as a workstation consisting of
+  a keyboard, a pointing device (such as a mouse) and one or more
+  screens.
+  It is used to open and keep track of various GdkScreen objects
+  currently instantiated by the application. It is also used to
+  access the keyboard(s) and mouse pointer(s) of the display.
+  
+  Most of the input device handling has been factored out into
+  the separate #GdkDeviceManager object. Every display has a
+  device manager, which you can obtain using
+  [gdk.display.Display.getDeviceManager].
+*/
 class Display : gobject.object.ObjectG
 {
 
@@ -52,12 +58,12 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Gets the default #GdkDisplay. This is a convenience
-   * function for:
-   * `gdk_display_manager_get_default_display $(LPAREN)gdk_display_manager_get $(LPAREN)$(RPAREN)$(RPAREN)`.
-   * Returns: a #GdkDisplay, or %NULL if
-   *   there is no default display.
-   */
+      Gets the default #GdkDisplay. This is a convenience
+    function for:
+    `gdk_display_manager_get_default_display (gdk_display_manager_get ())`.
+    Returns:     a #GdkDisplay, or null if
+        there is no default display.
+  */
   static gdk.display.Display getDefault()
   {
     GdkDisplay* _cretval;
@@ -67,12 +73,12 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Opens a display.
-   * Params:
-   *   displayName = the name of the display to open
-   * Returns: a #GdkDisplay, or %NULL if the
-   *   display could not be opened
-   */
+      Opens a display.
+    Params:
+      displayName =       the name of the display to open
+    Returns:     a #GdkDisplay, or null if the
+          display could not be opened
+  */
   static gdk.display.Display open(string displayName)
   {
     GdkDisplay* _cretval;
@@ -83,17 +89,17 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Opens the default display specified by command line arguments or
-   * environment variables, sets it as the default display, and returns
-   * it. [gdk.global.parseArgs] must have been called first. If the default
-   * display has previously been set, simply returns that. An internal
-   * function that should not be used by applications.
-   * Returns: the default display, if it
-   *   could be opened, otherwise %NULL.
-
-   * Deprecated: This symbol was never meant to be used outside
-   *   of GTK+
-   */
+      Opens the default display specified by command line arguments or
+    environment variables, sets it as the default display, and returns
+    it. [gdk.global.parseArgs] must have been called first. If the default
+    display has previously been set, simply returns that. An internal
+    function that should not be used by applications.
+    Returns:     the default display, if it
+        could be opened, otherwise null.
+  
+    Deprecated:     This symbol was never meant to be used outside
+        of GTK+
+  */
   static gdk.display.Display openDefaultLibgtkOnly()
   {
     GdkDisplay* _cretval;
@@ -103,28 +109,28 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Emits a short beep on display
-   */
+      Emits a short beep on display
+  */
   void beep()
   {
     gdk_display_beep(cast(GdkDisplay*)cPtr);
   }
 
   /**
-   * Closes the connection to the windowing system for the given display,
-   * and cleans up associated resources.
-   */
+      Closes the connection to the windowing system for the given display,
+    and cleans up associated resources.
+  */
   void close()
   {
     gdk_display_close(cast(GdkDisplay*)cPtr);
   }
 
   /**
-   * Returns %TRUE if there is an ongoing grab on device for display.
-   * Params:
-   *   device = a #GdkDevice
-   * Returns: %TRUE if there is a grab in effect for device.
-   */
+      Returns true if there is an ongoing grab on device for display.
+    Params:
+      device =       a #GdkDevice
+    Returns:     true if there is a grab in effect for device.
+  */
   bool deviceIsGrabbed(gdk.device.Device device)
   {
     bool _retval;
@@ -133,26 +139,27 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Flushes any requests queued for the windowing system; this happens automatically
-   * when the main loop blocks waiting for new events, but if your application
-   * is drawing without returning control to the main loop, you may need
-   * to call this function explicitly. A common case where this function
-   * needs to be called is when an application is executing drawing commands
-   * from a thread other than the thread where the main loop is running.
-   * This is most useful for X11. On windowing systems where requests are
-   * handled synchronously, this function will do nothing.
-   */
+      Flushes any requests queued for the windowing system; this happens automatically
+    when the main loop blocks waiting for new events, but if your application
+    is drawing without returning control to the main loop, you may need
+    to call this function explicitly. A common case where this function
+    needs to be called is when an application is executing drawing commands
+    from a thread other than the thread where the main loop is running.
+    
+    This is most useful for X11. On windowing systems where requests are
+    handled synchronously, this function will do nothing.
+  */
   void flush()
   {
     gdk_display_flush(cast(GdkDisplay*)cPtr);
   }
 
   /**
-   * Returns a #GdkAppLaunchContext suitable for launching
-   * applications on the given display.
-   * Returns: a new #GdkAppLaunchContext for display.
-   *   Free with [gobject.object.ObjectG.unref] when done
-   */
+      Returns a #GdkAppLaunchContext suitable for launching
+    applications on the given display.
+    Returns:     a new #GdkAppLaunchContext for display.
+          Free with [gobject.object.ObjectG.unref] when done
+  */
   gdk.app_launch_context.AppLaunchContext getAppLaunchContext()
   {
     GdkAppLaunchContext* _cretval;
@@ -162,9 +169,9 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Returns the default size to use for cursors on display.
-   * Returns: the default cursor size.
-   */
+      Returns the default size to use for cursors on display.
+    Returns:     the default cursor size.
+  */
   uint getDefaultCursorSize()
   {
     uint _retval;
@@ -173,12 +180,12 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Returns the default group leader window for all toplevel windows
-   * on display. This window is implicitly created by GDK.
-   * See [gdk.window.Window.setGroup].
-   * Returns: The default group leader window
-   *   for display
-   */
+      Returns the default group leader window for all toplevel windows
+    on display. This window is implicitly created by GDK.
+    See [gdk.window.Window.setGroup].
+    Returns:     The default group leader window
+      for display
+  */
   gdk.window.Window getDefaultGroup()
   {
     GdkWindow* _cretval;
@@ -188,9 +195,9 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Get the default #GdkScreen for display.
-   * Returns: the default #GdkScreen object for display
-   */
+      Get the default #GdkScreen for display.
+    Returns:     the default #GdkScreen object for display
+  */
   gdk.screen.Screen getDefaultScreen()
   {
     GdkScreen* _cretval;
@@ -200,9 +207,9 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Returns the default #GdkSeat for this display.
-   * Returns: the default seat.
-   */
+      Returns the default #GdkSeat for this display.
+    Returns:     the default seat.
+  */
   gdk.seat.Seat getDefaultSeat()
   {
     GdkSeat* _cretval;
@@ -212,13 +219,13 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Returns the #GdkDeviceManager associated to display.
-   * Returns: A #GdkDeviceManager, or
-   *   %NULL. This memory is owned by GDK and must not be freed
-   *   or unreferenced.
-
-   * Deprecated: Use [gdk.display.Display.getDefaultSeat] and #GdkSeat operations.
-   */
+      Returns the #GdkDeviceManager associated to display.
+    Returns:     A #GdkDeviceManager, or
+               null. This memory is owned by GDK and must not be freed
+               or unreferenced.
+  
+    Deprecated:     Use [gdk.display.Display.getDefaultSeat] and #GdkSeat operations.
+  */
   gdk.device_manager.DeviceManager getDeviceManager()
   {
     GdkDeviceManager* _cretval;
@@ -228,12 +235,12 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Gets the next #GdkEvent to be processed for display, fetching events from the
-   * windowing system if necessary.
-   * Returns: the next #GdkEvent to be processed, or %NULL
-   *   if no events are pending. The returned #GdkEvent should be freed
-   *   with [gdk.event.Event.free].
-   */
+      Gets the next #GdkEvent to be processed for display, fetching events from the
+    windowing system if necessary.
+    Returns:     the next #GdkEvent to be processed, or null
+      if no events are pending. The returned #GdkEvent should be freed
+      with [gdk.event.Event.free].
+  */
   gdk.event.Event getEvent()
   {
     GdkEvent* _cretval;
@@ -243,23 +250,23 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Gets the maximal size to use for cursors on display.
-   * Params:
-   *   width = the return location for the maximal cursor width
-   *   height = the return location for the maximal cursor height
-   */
+      Gets the maximal size to use for cursors on display.
+    Params:
+      width =       the return location for the maximal cursor width
+      height =       the return location for the maximal cursor height
+  */
   void getMaximalCursorSize(out uint width, out uint height)
   {
     gdk_display_get_maximal_cursor_size(cast(GdkDisplay*)cPtr, cast(uint*)&width, cast(uint*)&height);
   }
 
   /**
-   * Gets a monitor associated with this display.
-   * Params:
-   *   monitorNum = number of the monitor
-   * Returns: the #GdkMonitor, or %NULL if
-   *   monitor_num is not a valid monitor number
-   */
+      Gets a monitor associated with this display.
+    Params:
+      monitorNum =       number of the monitor
+    Returns:     the #GdkMonitor, or null if
+         monitor_num is not a valid monitor number
+  */
   gdk.monitor.Monitor getMonitor(int monitorNum)
   {
     GdkMonitor* _cretval;
@@ -269,13 +276,13 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Gets the monitor in which the point $(LPAREN)x, y$(RPAREN) is located,
-   * or a nearby monitor if the point is not in any monitor.
-   * Params:
-   *   x = the x coordinate of the point
-   *   y = the y coordinate of the point
-   * Returns: the monitor containing the point
-   */
+      Gets the monitor in which the point (x, y) is located,
+    or a nearby monitor if the point is not in any monitor.
+    Params:
+      x =       the x coordinate of the point
+      y =       the y coordinate of the point
+    Returns:     the monitor containing the point
+  */
   gdk.monitor.Monitor getMonitorAtPoint(int x, int y)
   {
     GdkMonitor* _cretval;
@@ -285,13 +292,13 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Gets the monitor in which the largest area of window
-   * resides, or a monitor close to window if it is outside
-   * of all monitors.
-   * Params:
-   *   window = a #GdkWindow
-   * Returns: the monitor with the largest overlap with window
-   */
+      Gets the monitor in which the largest area of window
+    resides, or a monitor close to window if it is outside
+    of all monitors.
+    Params:
+      window =       a #GdkWindow
+    Returns:     the monitor with the largest overlap with window
+  */
   gdk.monitor.Monitor getMonitorAtWindow(gdk.window.Window window)
   {
     GdkMonitor* _cretval;
@@ -301,11 +308,12 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Gets the number of monitors that belong to display.
-   * The returned number is valid until the next emission of the
-   * #GdkDisplay::monitor-added or #GdkDisplay::monitor-removed signal.
-   * Returns: the number of monitors
-   */
+      Gets the number of monitors that belong to display.
+    
+    The returned number is valid until the next emission of the
+    #GdkDisplay::monitor-added or #GdkDisplay::monitor-removed signal.
+    Returns:     the number of monitors
+  */
   int getNMonitors()
   {
     int _retval;
@@ -314,11 +322,11 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Gets the number of screen managed by the display.
-   * Returns: number of screens.
-
-   * Deprecated: The number of screens is always 1.
-   */
+      Gets the number of screen managed by the display.
+    Returns:     number of screens.
+  
+    Deprecated:     The number of screens is always 1.
+  */
   int getNScreens()
   {
     int _retval;
@@ -327,10 +335,10 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Gets the name of the display.
-   * Returns: a string representing the display name. This string is owned
-   *   by GDK and should not be modified or freed.
-   */
+      Gets the name of the display.
+    Returns:     a string representing the display name. This string is owned
+      by GDK and should not be modified or freed.
+  */
   string getName()
   {
     const(char)* _cretval;
@@ -340,17 +348,17 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Gets the current location of the pointer and the current modifier
-   * mask for a given display.
-   * Params:
-   *   screen = location to store the screen that the
-   *     cursor is on, or %NULL.
-   *   x = location to store root window X coordinate of pointer, or %NULL.
-   *   y = location to store root window Y coordinate of pointer, or %NULL.
-   *   mask = location to store current modifier mask, or %NULL
-
-   * Deprecated: Use [gdk.device.Device.getPosition] instead.
-   */
+      Gets the current location of the pointer and the current modifier
+    mask for a given display.
+    Params:
+      screen =       location to store the screen that the
+                 cursor is on, or null.
+      x =       location to store root window X coordinate of pointer, or null.
+      y =       location to store root window Y coordinate of pointer, or null.
+      mask =       location to store current modifier mask, or null
+  
+    Deprecated:     Use [gdk.device.Device.getPosition] instead.
+  */
   void getPointer(out gdk.screen.Screen screen, out int x, out int y, out gdk.types.ModifierType mask)
   {
     GdkScreen* _screen;
@@ -359,14 +367,15 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Gets the primary monitor for the display.
-   * The primary monitor is considered the monitor where the “main desktop”
-   * lives. While normal application windows typically allow the window
-   * manager to place the windows, specialized desktop applications
-   * such as panels should place themselves on the primary monitor.
-   * Returns: the primary monitor, or %NULL if no primary
-   *   monitor is configured by the user
-   */
+      Gets the primary monitor for the display.
+    
+    The primary monitor is considered the monitor where the “main desktop”
+    lives. While normal application windows typically allow the window
+    manager to place the windows, specialized desktop applications
+    such as panels should place themselves on the primary monitor.
+    Returns:     the primary monitor, or null if no primary
+          monitor is configured by the user
+  */
   gdk.monitor.Monitor getPrimaryMonitor()
   {
     GdkMonitor* _cretval;
@@ -376,13 +385,13 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Returns a screen object for one of the screens of the display.
-   * Params:
-   *   screenNum = the screen number
-   * Returns: the #GdkScreen object
-
-   * Deprecated: There is only one screen; use [gdk.display.Display.getDefaultScreen] to get it.
-   */
+      Returns a screen object for one of the screens of the display.
+    Params:
+      screenNum =       the screen number
+    Returns:     the #GdkScreen object
+  
+    Deprecated:     There is only one screen; use [gdk.display.Display.getDefaultScreen] to get it.
+  */
   gdk.screen.Screen getScreen(int screenNum)
   {
     GdkScreen* _cretval;
@@ -392,20 +401,20 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Obtains the window underneath the mouse pointer, returning the location
-   * of the pointer in that window in win_x, win_y for screen. Returns %NULL
-   * if the window under the mouse pointer is not known to GDK $(LPAREN)for example,
-   * belongs to another application$(RPAREN).
-   * Params:
-   *   winX = return location for x coordinate of the pointer location relative
-   *     to the window origin, or %NULL
-   *   winY = return location for y coordinate of the pointer location relative
-   *     &    to the window origin, or %NULL
-   * Returns: the window under the mouse
-   *   pointer, or %NULL
-
-   * Deprecated: Use [gdk.device.Device.getWindowAtPosition] instead.
-   */
+      Obtains the window underneath the mouse pointer, returning the location
+    of the pointer in that window in win_x, win_y for screen. Returns null
+    if the window under the mouse pointer is not known to GDK (for example,
+    belongs to another application).
+    Params:
+      winX =       return location for x coordinate of the pointer location relative
+           to the window origin, or null
+      winY =       return location for y coordinate of the pointer location relative
+         &    to the window origin, or null
+    Returns:     the window under the mouse
+        pointer, or null
+  
+    Deprecated:     Use [gdk.device.Device.getWindowAtPosition] instead.
+  */
   gdk.window.Window getWindowAtPointer(out int winX, out int winY)
   {
     GdkWindow* _cretval;
@@ -415,10 +424,10 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether the display has events that are waiting
-   * to be processed.
-   * Returns: %TRUE if there are events ready to be processed.
-   */
+      Returns whether the display has events that are waiting
+    to be processed.
+    Returns:     true if there are events ready to be processed.
+  */
   bool hasPending()
   {
     bool _retval;
@@ -427,9 +436,9 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Finds out if the display has been closed.
-   * Returns: %TRUE if the display is closed.
-   */
+      Finds out if the display has been closed.
+    Returns:     true if the display is closed.
+  */
   bool isClosed()
   {
     bool _retval;
@@ -438,25 +447,25 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Release any keyboard grab
-   * Params:
-   *   time = a timestap $(LPAREN)e.g #GDK_CURRENT_TIME$(RPAREN).
-
-   * Deprecated: Use [gdk.device.Device.ungrab], together with [gdk.device.Device.grab]
-   *   instead.
-   */
+      Release any keyboard grab
+    Params:
+      time =       a timestap (e.g #GDK_CURRENT_TIME).
+  
+    Deprecated:     Use [gdk.device.Device.ungrab], together with [gdk.device.Device.grab]
+                  instead.
+  */
   void keyboardUngrab(uint time)
   {
     gdk_display_keyboard_ungrab(cast(GdkDisplay*)cPtr, time);
   }
 
   /**
-   * Returns the list of available input devices attached to display.
-   * The list is statically allocated and should not be freed.
-   * Returns: a list of #GdkDevice
-
-   * Deprecated: Use [gdk.device_manager.DeviceManager.listDevices] instead.
-   */
+      Returns the list of available input devices attached to display.
+    The list is statically allocated and should not be freed.
+    Returns:     a list of #GdkDevice
+  
+    Deprecated:     Use [gdk.device_manager.DeviceManager.listDevices] instead.
+  */
   gdk.device.Device[] listDevices()
   {
     GList* _cretval;
@@ -466,10 +475,10 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Returns the list of seats known to display.
-   * Returns: the
-   *   list of seats known to the #GdkDisplay
-   */
+      Returns the list of seats known to display.
+    Returns:     the
+               list of seats known to the #GdkDisplay
+  */
   gdk.seat.Seat[] listSeats()
   {
     GList* _cretval;
@@ -479,16 +488,17 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Indicates to the GUI environment that the application has
-   * finished loading, using a given identifier.
-   * GTK+ will call this function automatically for #GtkWindow
-   * with custom startup-notification identifier unless
-   * [gtk.window.Window.setAutoStartupNotification] is called to
-   * disable that feature.
-   * Params:
-   *   startupId = a startup-notification identifier, for which
-   *     notification process should be completed
-   */
+      Indicates to the GUI environment that the application has
+    finished loading, using a given identifier.
+    
+    GTK+ will call this function automatically for #GtkWindow
+    with custom startup-notification identifier unless
+    [gtk.window.Window.setAutoStartupNotification] is called to
+    disable that feature.
+    Params:
+      startupId =       a startup-notification identifier, for which
+            notification process should be completed
+  */
   void notifyStartupComplete(string startupId)
   {
     const(char)* _startupId = startupId.toCString(No.Alloc);
@@ -496,14 +506,14 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Gets a copy of the first #GdkEvent in the display’s event queue, without
-   * removing the event from the queue.  $(LPAREN)Note that this function will
-   * not get more events from the windowing system.  It only checks the events
-   * that have already been moved to the GDK event queue.$(RPAREN)
-   * Returns: a copy of the first #GdkEvent on the event
-   *   queue, or %NULL if no events are in the queue. The returned
-   *   #GdkEvent should be freed with [gdk.event.Event.free].
-   */
+      Gets a copy of the first #GdkEvent in the display’s event queue, without
+    removing the event from the queue.  (Note that this function will
+    not get more events from the windowing system.  It only checks the events
+    that have already been moved to the GDK event queue.)
+    Returns:     a copy of the first #GdkEvent on the event
+      queue, or null if no events are in the queue. The returned
+      #GdkEvent should be freed with [gdk.event.Event.free].
+  */
   gdk.event.Event peekEvent()
   {
     GdkEvent* _cretval;
@@ -513,11 +523,11 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Test if the pointer is grabbed.
-   * Returns: %TRUE if an active X pointer grab is in effect
-
-   * Deprecated: Use [gdk.display.Display.deviceIsGrabbed] instead.
-   */
+      Test if the pointer is grabbed.
+    Returns:     true if an active X pointer grab is in effect
+  
+    Deprecated:     Use [gdk.display.Display.deviceIsGrabbed] instead.
+  */
   bool pointerIsGrabbed()
   {
     bool _retval;
@@ -526,38 +536,38 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Release any pointer grab.
-   * Params:
-   *   time = a timestap $(LPAREN)e.g. %GDK_CURRENT_TIME$(RPAREN).
-
-   * Deprecated: Use [gdk.device.Device.ungrab], together with [gdk.device.Device.grab]
-   *   instead.
-   */
+      Release any pointer grab.
+    Params:
+      time =       a timestap (e.g. `GDK_CURRENT_TIME`).
+  
+    Deprecated:     Use [gdk.device.Device.ungrab], together with [gdk.device.Device.grab]
+                  instead.
+  */
   void pointerUngrab(uint time)
   {
     gdk_display_pointer_ungrab(cast(GdkDisplay*)cPtr, time);
   }
 
   /**
-   * Appends a copy of the given event onto the front of the event
-   * queue for display.
-   * Params:
-   *   event = a #GdkEvent.
-   */
+      Appends a copy of the given event onto the front of the event
+    queue for display.
+    Params:
+      event =       a #GdkEvent.
+  */
   void putEvent(gdk.event.Event event)
   {
     gdk_display_put_event(cast(GdkDisplay*)cPtr, event ? cast(const(GdkEvent)*)event.cPtr : null);
   }
 
   /**
-   * Request #GdkEventOwnerChange events for ownership changes
-   * of the selection named by the given atom.
-   * Params:
-   *   selection = the #GdkAtom naming the selection for which
-   *     ownership change notification is requested
-   * Returns: whether #GdkEventOwnerChange events will
-   *   be sent.
-   */
+      Request #GdkEventOwnerChange events for ownership changes
+    of the selection named by the given atom.
+    Params:
+      selection =       the #GdkAtom naming the selection for which
+                    ownership change notification is requested
+    Returns:     whether #GdkEventOwnerChange events will
+                    be sent.
+  */
   bool requestSelectionNotification(gdk.atom.Atom selection)
   {
     bool _retval;
@@ -566,39 +576,39 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Sets the double click distance $(LPAREN)two clicks within this distance
-   * count as a double click and result in a #GDK_2BUTTON_PRESS event$(RPAREN).
-   * See also [gdk.display.Display.setDoubleClickTime].
-   * Applications should not set this, it is a global
-   * user-configured setting.
-   * Params:
-   *   distance = distance in pixels
-   */
+      Sets the double click distance (two clicks within this distance
+    count as a double click and result in a #GDK_2BUTTON_PRESS event).
+    See also [gdk.display.Display.setDoubleClickTime].
+    Applications should not set this, it is a global
+    user-configured setting.
+    Params:
+      distance =       distance in pixels
+  */
   void setDoubleClickDistance(uint distance)
   {
     gdk_display_set_double_click_distance(cast(GdkDisplay*)cPtr, distance);
   }
 
   /**
-   * Sets the double click time $(LPAREN)two clicks within this time interval
-   * count as a double click and result in a #GDK_2BUTTON_PRESS event$(RPAREN).
-   * Applications should not set this, it is a global
-   * user-configured setting.
-   * Params:
-   *   msec = double click time in milliseconds $(LPAREN)thousandths of a second$(RPAREN)
-   */
+      Sets the double click time (two clicks within this time interval
+    count as a double click and result in a #GDK_2BUTTON_PRESS event).
+    Applications should not set this, it is a global
+    user-configured setting.
+    Params:
+      msec =       double click time in milliseconds (thousandths of a second)
+  */
   void setDoubleClickTime(uint msec)
   {
     gdk_display_set_double_click_time(cast(GdkDisplay*)cPtr, msec);
   }
 
   /**
-   * Returns whether the speicifed display supports clipboard
-   * persistance; i.e. if it’s possible to store the clipboard data after an
-   * application has quit. On X11 this checks if a clipboard daemon is
-   * running.
-   * Returns: %TRUE if the display supports clipboard persistance.
-   */
+      Returns whether the speicifed display supports clipboard
+    persistance; i.e. if it’s possible to store the clipboard data after an
+    application has quit. On X11 this checks if a clipboard daemon is
+    running.
+    Returns:     true if the display supports clipboard persistance.
+  */
   bool supportsClipboardPersistence()
   {
     bool _retval;
@@ -607,15 +617,16 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Returns %TRUE if [gdk.window.Window.setComposited] can be used
-   * to redirect drawing on the window using compositing.
-   * Currently this only works on X11 with XComposite and
-   * XDamage extensions available.
-   * Returns: %TRUE if windows may be composited.
-
-   * Deprecated: Compositing is an outdated technology that
-   *   only ever worked on X11.
-   */
+      Returns true if [gdk.window.Window.setComposited] can be used
+    to redirect drawing on the window using compositing.
+    
+    Currently this only works on X11 with XComposite and
+    XDamage extensions available.
+    Returns:     true if windows may be composited.
+  
+    Deprecated:     Compositing is an outdated technology that
+        only ever worked on X11.
+  */
   bool supportsComposite()
   {
     bool _retval;
@@ -624,11 +635,11 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Returns %TRUE if cursors can use an 8bit alpha channel
-   * on display. Otherwise, cursors are restricted to bilevel
-   * alpha $(LPAREN)i.e. a mask$(RPAREN).
-   * Returns: whether cursors can have alpha channels.
-   */
+      Returns true if cursors can use an 8bit alpha channel
+    on display. Otherwise, cursors are restricted to bilevel
+    alpha (i.e. a mask).
+    Returns:     whether cursors can have alpha channels.
+  */
   bool supportsCursorAlpha()
   {
     bool _retval;
@@ -637,11 +648,11 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Returns %TRUE if multicolored cursors are supported
-   * on display. Otherwise, cursors have only a forground
-   * and a background color.
-   * Returns: whether cursors can have multiple colors.
-   */
+      Returns true if multicolored cursors are supported
+    on display. Otherwise, cursors have only a forground
+    and a background color.
+    Returns:     whether cursors can have multiple colors.
+  */
   bool supportsCursorColor()
   {
     bool _retval;
@@ -650,10 +661,10 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Returns %TRUE if gdk_window_input_shape_combine_mask$(LPAREN)$(RPAREN) can
-   * be used to modify the input shape of windows on display.
-   * Returns: %TRUE if windows with modified input shape are supported
-   */
+      Returns true if gdk_window_input_shape_combine_mask() can
+    be used to modify the input shape of windows on display.
+    Returns:     true if windows with modified input shape are supported
+  */
   bool supportsInputShapes()
   {
     bool _retval;
@@ -662,11 +673,11 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Returns whether #GdkEventOwnerChange events will be
-   * sent when the owner of a selection changes.
-   * Returns: whether #GdkEventOwnerChange events will
-   *   be sent.
-   */
+      Returns whether #GdkEventOwnerChange events will be
+    sent when the owner of a selection changes.
+    Returns:     whether #GdkEventOwnerChange events will
+                    be sent.
+  */
   bool supportsSelectionNotification()
   {
     bool _retval;
@@ -675,10 +686,10 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Returns %TRUE if gdk_window_shape_combine_mask$(LPAREN)$(RPAREN) can
-   * be used to create shaped windows on display.
-   * Returns: %TRUE if shaped windows are supported
-   */
+      Returns true if gdk_window_shape_combine_mask() can
+    be used to create shaped windows on display.
+    Returns:     true if shaped windows are supported
+  */
   bool supportsShapes()
   {
     bool _retval;
@@ -687,60 +698,67 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * Flushes any requests queued for the windowing system and waits until all
-   * requests have been handled. This is often used for making sure that the
-   * display is synchronized with the current state of the program. Calling
-   * [gdk.display.Display.sync] before [gdk.global.errorTrapPop] makes sure that any errors
-   * generated from earlier requests are handled before the error trap is
-   * removed.
-   * This is most useful for X11. On windowing systems where requests are
-   * handled synchronously, this function will do nothing.
-   */
+      Flushes any requests queued for the windowing system and waits until all
+    requests have been handled. This is often used for making sure that the
+    display is synchronized with the current state of the program. Calling
+    [gdk.display.Display.sync] before [gdk.global.errorTrapPop] makes sure that any errors
+    generated from earlier requests are handled before the error trap is
+    removed.
+    
+    This is most useful for X11. On windowing systems where requests are
+    handled synchronously, this function will do nothing.
+  */
   void sync()
   {
     gdk_display_sync(cast(GdkDisplay*)cPtr);
   }
 
   /**
-   * Warps the pointer of display to the point x,y on
-   * the screen screen, unless the pointer is confined
-   * to a window by a grab, in which case it will be moved
-   * as far as allowed by the grab. Warping the pointer
-   * creates events as if the user had moved the mouse
-   * instantaneously to the destination.
-   * Note that the pointer should normally be under the
-   * control of the user. This function was added to cover
-   * some rare use cases like keyboard navigation support
-   * for the color picker in the #GtkColorSelectionDialog.
-   * Params:
-   *   screen = the screen of display to warp the pointer to
-   *   x = the x coordinate of the destination
-   *   y = the y coordinate of the destination
-
-   * Deprecated: Use [gdk.device.Device.warp] instead.
-   */
+      Warps the pointer of display to the point x,y on
+    the screen screen, unless the pointer is confined
+    to a window by a grab, in which case it will be moved
+    as far as allowed by the grab. Warping the pointer
+    creates events as if the user had moved the mouse
+    instantaneously to the destination.
+    
+    Note that the pointer should normally be under the
+    control of the user. This function was added to cover
+    some rare use cases like keyboard navigation support
+    for the color picker in the #GtkColorSelectionDialog.
+    Params:
+      screen =       the screen of display to warp the pointer to
+      x =       the x coordinate of the destination
+      y =       the y coordinate of the destination
+  
+    Deprecated:     Use [gdk.device.Device.warp] instead.
+  */
   void warpPointer(gdk.screen.Screen screen, int x, int y)
   {
     gdk_display_warp_pointer(cast(GdkDisplay*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null, x, y);
   }
 
   /**
-   * The ::closed signal is emitted when the connection to the windowing
-   * system for display is closed.
-   * Params
-   *   isError = %TRUE if the display was closed due to an error
-   *   display = the instance the signal is connected to
-   */
+      The ::closed signal is emitted when the connection to the windowing
+    system for display is closed.
+  
+    ## Parameters
+    $(LIST
+      * $(B isError)       true if the display was closed due to an error
+      * $(B display) the instance the signal is connected to
+    )
+  */
   alias ClosedCallbackDlg = void delegate(bool isError, gdk.display.Display display);
+
+  /** ditto */
   alias ClosedCallbackFunc = void function(bool isError, gdk.display.Display display);
 
   /**
-   * Connect to Closed signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Closed signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectClosed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ClosedCallbackDlg) || is(T : ClosedCallbackFunc))
   {
@@ -758,22 +776,27 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * The ::monitor-added signal is emitted whenever a monitor is
-   * added.
-   * Params
-   *   monitor = the monitor that was just added
-   *   display = the instance the signal is connected to
-   */
+      The ::monitor-added signal is emitted whenever a monitor is
+    added.
+  
+    ## Parameters
+    $(LIST
+      * $(B monitor)       the monitor that was just added
+      * $(B display) the instance the signal is connected to
+    )
+  */
   alias MonitorAddedCallbackDlg = void delegate(gdk.monitor.Monitor monitor, gdk.display.Display display);
+
+  /** ditto */
   alias MonitorAddedCallbackFunc = void function(gdk.monitor.Monitor monitor, gdk.display.Display display);
 
   /**
-   * Connect to MonitorAdded signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to MonitorAdded signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectMonitorAdded(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MonitorAddedCallbackDlg) || is(T : MonitorAddedCallbackFunc))
   {
@@ -791,22 +814,27 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * The ::monitor-removed signal is emitted whenever a monitor is
-   * removed.
-   * Params
-   *   monitor = the monitor that was just removed
-   *   display = the instance the signal is connected to
-   */
+      The ::monitor-removed signal is emitted whenever a monitor is
+    removed.
+  
+    ## Parameters
+    $(LIST
+      * $(B monitor)       the monitor that was just removed
+      * $(B display) the instance the signal is connected to
+    )
+  */
   alias MonitorRemovedCallbackDlg = void delegate(gdk.monitor.Monitor monitor, gdk.display.Display display);
+
+  /** ditto */
   alias MonitorRemovedCallbackFunc = void function(gdk.monitor.Monitor monitor, gdk.display.Display display);
 
   /**
-   * Connect to MonitorRemoved signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to MonitorRemoved signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectMonitorRemoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MonitorRemovedCallbackDlg) || is(T : MonitorRemovedCallbackFunc))
   {
@@ -824,20 +852,26 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * The ::opened signal is emitted when the connection to the windowing
-   * system for display is opened.
-   *   display = the instance the signal is connected to
-   */
+      The ::opened signal is emitted when the connection to the windowing
+    system for display is opened.
+  
+    ## Parameters
+    $(LIST
+      * $(B display) the instance the signal is connected to
+    )
+  */
   alias OpenedCallbackDlg = void delegate(gdk.display.Display display);
+
+  /** ditto */
   alias OpenedCallbackFunc = void function(gdk.display.Display display);
 
   /**
-   * Connect to Opened signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Opened signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectOpened(T)(T callback, Flag!"After" after = No.After)
   if (is(T : OpenedCallbackDlg) || is(T : OpenedCallbackFunc))
   {
@@ -854,22 +888,27 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * The ::seat-added signal is emitted whenever a new seat is made
-   * known to the windowing system.
-   * Params
-   *   seat = the seat that was just added
-   *   display = the instance the signal is connected to
-   */
+      The ::seat-added signal is emitted whenever a new seat is made
+    known to the windowing system.
+  
+    ## Parameters
+    $(LIST
+      * $(B seat)       the seat that was just added
+      * $(B display) the instance the signal is connected to
+    )
+  */
   alias SeatAddedCallbackDlg = void delegate(gdk.seat.Seat seat, gdk.display.Display display);
+
+  /** ditto */
   alias SeatAddedCallbackFunc = void function(gdk.seat.Seat seat, gdk.display.Display display);
 
   /**
-   * Connect to SeatAdded signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to SeatAdded signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectSeatAdded(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SeatAddedCallbackDlg) || is(T : SeatAddedCallbackFunc))
   {
@@ -887,22 +926,27 @@ class Display : gobject.object.ObjectG
   }
 
   /**
-   * The ::seat-removed signal is emitted whenever a seat is removed
-   * by the windowing system.
-   * Params
-   *   seat = the seat that was just removed
-   *   display = the instance the signal is connected to
-   */
+      The ::seat-removed signal is emitted whenever a seat is removed
+    by the windowing system.
+  
+    ## Parameters
+    $(LIST
+      * $(B seat)       the seat that was just removed
+      * $(B display) the instance the signal is connected to
+    )
+  */
   alias SeatRemovedCallbackDlg = void delegate(gdk.seat.Seat seat, gdk.display.Display display);
+
+  /** ditto */
   alias SeatRemovedCallbackFunc = void function(gdk.seat.Seat seat, gdk.display.Display display);
 
   /**
-   * Connect to SeatRemoved signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to SeatRemoved signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectSeatRemoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SeatRemovedCallbackDlg) || is(T : SeatRemovedCallbackFunc))
   {

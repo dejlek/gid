@@ -9,11 +9,12 @@ import gtk.event_controller;
 import gtk.types;
 
 /**
- * `GtkEventControllerLegacy` is an event controller that provides raw
- * access to the event stream.
- * It should only be used as a last resort if none of the other event
- * controllers or gestures do the job.
- */
+    [gtk.event_controller_legacy.EventControllerLegacy] is an event controller that provides raw
+  access to the event stream.
+  
+  It should only be used as a last resort if none of the other event
+  controllers or gestures do the job.
+*/
 class EventControllerLegacy : gtk.event_controller.EventController
 {
 
@@ -34,9 +35,9 @@ class EventControllerLegacy : gtk.event_controller.EventController
   }
 
   /**
-   * Creates a new legacy event controller.
-   * Returns: the newly created event controller.
-   */
+      Creates a new legacy event controller.
+    Returns:     the newly created event controller.
+  */
   this()
   {
     GtkEventController* _cretval;
@@ -45,23 +46,28 @@ class EventControllerLegacy : gtk.event_controller.EventController
   }
 
   /**
-   * Emitted for each GDK event delivered to controller.
-   * Params
-   *   event = the `GdkEvent` which triggered this signal
-   *   eventControllerLegacy = the instance the signal is connected to
-   * Returns: %TRUE to stop other handlers from being invoked for the event
-   *   and the emission of this signal. %FALSE to propagate the event further.
-   */
+      Emitted for each GDK event delivered to controller.
+  
+    ## Parameters
+    $(LIST
+      * $(B event)       the [gdk.event.Event] which triggered this signal
+      * $(B eventControllerLegacy) the instance the signal is connected to
+    )
+    Returns:     true to stop other handlers from being invoked for the event
+        and the emission of this signal. false to propagate the event further.
+  */
   alias EventCallbackDlg = bool delegate(gdk.event.Event event, gtk.event_controller_legacy.EventControllerLegacy eventControllerLegacy);
+
+  /** ditto */
   alias EventCallbackFunc = bool function(gdk.event.Event event, gtk.event_controller_legacy.EventControllerLegacy eventControllerLegacy);
 
   /**
-   * Connect to Event signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Event signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EventCallbackDlg) || is(T : EventCallbackFunc))
   {

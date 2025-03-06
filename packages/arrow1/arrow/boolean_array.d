@@ -9,6 +9,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class BooleanArray : arrow.primitive_array.PrimitiveArray
 {
 
@@ -28,6 +29,7 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
     return getType();
   }
 
+  /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowBooleanArray* _cretval;
@@ -35,6 +37,7 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.boolean_array.BooleanArray and(arrow.boolean_array.BooleanArray right)
   {
     GArrowBooleanArray* _cretval;
@@ -46,6 +49,7 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
     return _retval;
   }
 
+  /** */
   bool getValue(long i)
   {
     bool _retval;
@@ -53,6 +57,7 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
     return _retval;
   }
 
+  /** */
   bool[] getValues()
   {
     bool* _cretval;
@@ -67,6 +72,7 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
     return _retval;
   }
 
+  /** */
   arrow.boolean_array.BooleanArray invert()
   {
     GArrowBooleanArray* _cretval;
@@ -78,6 +84,7 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
     return _retval;
   }
 
+  /** */
   arrow.boolean_array.BooleanArray or(arrow.boolean_array.BooleanArray right)
   {
     GArrowBooleanArray* _cretval;
@@ -89,6 +96,7 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
     return _retval;
   }
 
+  /** */
   arrow.boolean_array.BooleanArray xor(arrow.boolean_array.BooleanArray right)
   {
     GArrowBooleanArray* _cretval;

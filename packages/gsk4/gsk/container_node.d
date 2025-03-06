@@ -7,8 +7,8 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node that can contain other render nodes.
- */
+    A render node that can contain other render nodes.
+*/
 class ContainerNode : gsk.render_node.RenderNode
 {
 
@@ -21,12 +21,13 @@ class ContainerNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Creates a new `GskRenderNode` instance for holding the given children.
-   * The new node will acquire a reference to each of the children.
-   * Params:
-   *   children = The children of the node
-   * Returns: the new `GskRenderNode`
-   */
+      Creates a new [gsk.render_node.RenderNode] instance for holding the given children.
+    
+    The new node will acquire a reference to each of the children.
+    Params:
+      children =       The children of the node
+    Returns:     the new [gsk.render_node.RenderNode]
+  */
   this(gsk.render_node.RenderNode[] children)
   {
     GskRenderNode* _cretval;
@@ -43,11 +44,11 @@ class ContainerNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Gets one of the children of container.
-   * Params:
-   *   idx = the position of the child to get
-   * Returns: the idx'th child of container
-   */
+      Gets one of the children of container.
+    Params:
+      idx =       the position of the child to get
+    Returns:     the idx'th child of container
+  */
   gsk.render_node.RenderNode getChild(uint idx)
   {
     GskRenderNode* _cretval;
@@ -57,9 +58,9 @@ class ContainerNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the number of direct children of node.
-   * Returns: the number of children of the `GskRenderNode`
-   */
+      Retrieves the number of direct children of node.
+    Returns:     the number of children of the [gsk.render_node.RenderNode]
+  */
   uint getNChildren()
   {
     uint _retval;

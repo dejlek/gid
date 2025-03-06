@@ -13,6 +13,7 @@ import gtksource.c.types;
 import gtksource.types;
 import gtksource.view;
 
+/** */
 class Map : gtksource.view.View
 {
 
@@ -33,9 +34,9 @@ class Map : gtksource.view.View
   }
 
   /**
-   * Creates a new #GtkSourceMap.
-   * Returns: a new #GtkSourceMap.
-   */
+      Creates a new #GtkSourceMap.
+    Returns:     a new #GtkSourceMap.
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -44,9 +45,9 @@ class Map : gtksource.view.View
   }
 
   /**
-   * Gets the #GtkSourceMap:view property, which is the view this widget is mapping.
-   * Returns: a #GtkSourceView or %NULL.
-   */
+      Gets the #GtkSourceMap:view property, which is the view this widget is mapping.
+    Returns:     a #GtkSourceView or null.
+  */
   gtksource.view.View getView()
   {
     GtkSourceView* _cretval;
@@ -56,10 +57,10 @@ class Map : gtksource.view.View
   }
 
   /**
-   * Sets the view that map will be doing the mapping to.
-   * Params:
-   *   view = a #GtkSourceView
-   */
+      Sets the view that map will be doing the mapping to.
+    Params:
+      view =       a #GtkSourceView
+  */
   void setView(gtksource.view.View view)
   {
     gtk_source_map_set_view(cast(GtkSourceMap*)cPtr, view ? cast(GtkSourceView*)view.cPtr(No.Dup) : null);

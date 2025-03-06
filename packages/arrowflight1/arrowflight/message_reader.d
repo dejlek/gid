@@ -8,6 +8,7 @@ import arrowflight.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
 {
 
@@ -27,6 +28,7 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
     return getType();
   }
 
+  /** */
   arrowflight.descriptor.Descriptor getDescriptor()
   {
     GAFlightDescriptor* _cretval;

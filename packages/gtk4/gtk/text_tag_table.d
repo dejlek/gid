@@ -11,24 +11,28 @@ import gtk.text_tag;
 import gtk.types;
 
 /**
- * The collection of tags in a `GtkTextBuffer`
- * You may wish to begin by reading the
- * [text widget conceptual overview](section-text-widget.html),
- * which gives an overview of all the objects and data types
- * related to the text widget and how they work together.
- * # GtkTextTagTables as GtkBuildable
- * The `GtkTextTagTable` implementation of the `GtkBuildable` interface
- * supports adding tags by specifying “tag” as the “type” attribute
- * of a `<child>` element.
- * An example of a UI definition fragment specifying tags:
- * ```xml
- * <object class\="GtkTextTagTable">
- * <child type\="tag">
- * <object class\="GtkTextTag"/>
- * </child>
- * </object>
- * ```
- */
+    The collection of tags in a [gtk.text_buffer.TextBuffer]
+  
+  You may wish to begin by reading the
+  [text widget conceptual overview](section-text-widget.html),
+  which gives an overview of all the objects and data types
+  related to the text widget and how they work together.
+  
+  # GtkTextTagTables as GtkBuildable
+  
+  The [gtk.text_tag_table.TextTagTable] implementation of the [gtk.buildable.Buildable] interface
+  supports adding tags by specifying “tag” as the “type” attribute
+  of a `<child>` element.
+  
+  An example of a UI definition fragment specifying tags:
+  ```xml
+  <object class="GtkTextTagTable">
+   <child type="tag">
+     <object class="GtkTextTag"/>
+   </child>
+  </object>
+  ```
+*/
 class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
 {
 
@@ -51,10 +55,11 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
   mixin BuildableT!();
 
   /**
-   * Creates a new `GtkTextTagTable`.
-   * The table contains no tags by default.
-   * Returns: a new `GtkTextTagTable`
-   */
+      Creates a new [gtk.text_tag_table.TextTagTable].
+    
+    The table contains no tags by default.
+    Returns:     a new [gtk.text_tag_table.TextTagTable]
+  */
   this()
   {
     GtkTextTagTable* _cretval;
@@ -63,14 +68,16 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
   }
 
   /**
-   * Add a tag to the table.
-   * The tag is assigned the highest priority in the table.
-   * tag must not be in a tag table already, and may not have
-   * the same name as an already-added tag.
-   * Params:
-   *   tag = a `GtkTextTag`
-   * Returns: %TRUE on success.
-   */
+      Add a tag to the table.
+    
+    The tag is assigned the highest priority in the table.
+    
+    tag must not be in a tag table already, and may not have
+    the same name as an already-added tag.
+    Params:
+      tag =       a [gtk.text_tag.TextTag]
+    Returns:     true on success.
+  */
   bool add(gtk.text_tag.TextTag tag)
   {
     bool _retval;
@@ -79,12 +86,13 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
   }
 
   /**
-   * Calls func on each tag in table, with user data data.
-   * Note that the table may not be modified while iterating
-   * over it $(LPAREN)you can’t add/remove tags$(RPAREN).
-   * Params:
-   *   func = a function to call on each tag
-   */
+      Calls func on each tag in table, with user data data.
+    
+    Note that the table may not be modified while iterating
+    over it (you can’t add/remove tags).
+    Params:
+      func =       a function to call on each tag
+  */
   void foreach_(gtk.types.TextTagTableForeach func)
   {
     extern(C) void _funcCallback(GtkTextTag* tag, void* data)
@@ -100,9 +108,9 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
   }
 
   /**
-   * Returns the size of the table $(LPAREN)number of tags$(RPAREN)
-   * Returns: number of tags in table
-   */
+      Returns the size of the table (number of tags)
+    Returns:     number of tags in table
+  */
   int getSize()
   {
     int _retval;
@@ -111,11 +119,11 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
   }
 
   /**
-   * Look up a named tag.
-   * Params:
-   *   name = name of a tag
-   * Returns: The tag
-   */
+      Look up a named tag.
+    Params:
+      name =       name of a tag
+    Returns:     The tag
+  */
   gtk.text_tag.TextTag lookup(string name)
   {
     GtkTextTag* _cretval;
@@ -126,35 +134,41 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
   }
 
   /**
-   * Remove a tag from the table.
-   * If a `GtkTextBuffer` has table as its tag table, the tag is
-   * removed from the buffer. The table’s reference to the tag is
-   * removed, so the tag will end up destroyed if you don’t have
-   * a reference to it.
-   * Params:
-   *   tag = a `GtkTextTag`
-   */
+      Remove a tag from the table.
+    
+    If a [gtk.text_buffer.TextBuffer] has table as its tag table, the tag is
+    removed from the buffer. The table’s reference to the tag is
+    removed, so the tag will end up destroyed if you don’t have
+    a reference to it.
+    Params:
+      tag =       a [gtk.text_tag.TextTag]
+  */
   void remove(gtk.text_tag.TextTag tag)
   {
     gtk_text_tag_table_remove(cast(GtkTextTagTable*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
   }
 
   /**
-   * Emitted every time a new tag is added in the `GtkTextTagTable`.
-   * Params
-   *   tag = the added tag.
-   *   textTagTable = the instance the signal is connected to
-   */
+      Emitted every time a new tag is added in the [gtk.text_tag_table.TextTagTable].
+  
+    ## Parameters
+    $(LIST
+      * $(B tag)       the added tag.
+      * $(B textTagTable) the instance the signal is connected to
+    )
+  */
   alias TagAddedCallbackDlg = void delegate(gtk.text_tag.TextTag tag, gtk.text_tag_table.TextTagTable textTagTable);
+
+  /** ditto */
   alias TagAddedCallbackFunc = void function(gtk.text_tag.TextTag tag, gtk.text_tag_table.TextTagTable textTagTable);
 
   /**
-   * Connect to TagAdded signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to TagAdded signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectTagAdded(T)(T callback, Flag!"After" after = No.After)
   if (is(T : TagAddedCallbackDlg) || is(T : TagAddedCallbackFunc))
   {
@@ -172,22 +186,27 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
   }
 
   /**
-   * Emitted every time a tag in the `GtkTextTagTable` changes.
-   * Params
-   *   tag = the changed tag.
-   *   sizeChanged = whether the change affects the `GtkTextView` layout.
-   *   textTagTable = the instance the signal is connected to
-   */
+      Emitted every time a tag in the [gtk.text_tag_table.TextTagTable] changes.
+  
+    ## Parameters
+    $(LIST
+      * $(B tag)       the changed tag.
+      * $(B sizeChanged)       whether the change affects the [gtk.text_view.TextView] layout.
+      * $(B textTagTable) the instance the signal is connected to
+    )
+  */
   alias TagChangedCallbackDlg = void delegate(gtk.text_tag.TextTag tag, bool sizeChanged, gtk.text_tag_table.TextTagTable textTagTable);
+
+  /** ditto */
   alias TagChangedCallbackFunc = void function(gtk.text_tag.TextTag tag, bool sizeChanged, gtk.text_tag_table.TextTagTable textTagTable);
 
   /**
-   * Connect to TagChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to TagChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectTagChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : TagChangedCallbackDlg) || is(T : TagChangedCallbackFunc))
   {
@@ -206,23 +225,29 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
   }
 
   /**
-   * Emitted every time a tag is removed from the `GtkTextTagTable`.
-   * The tag is still valid by the time the signal is emitted, but
-   * it is not associated with a tag table any more.
-   * Params
-   *   tag = the removed tag.
-   *   textTagTable = the instance the signal is connected to
-   */
+      Emitted every time a tag is removed from the [gtk.text_tag_table.TextTagTable].
+    
+    The tag is still valid by the time the signal is emitted, but
+    it is not associated with a tag table any more.
+  
+    ## Parameters
+    $(LIST
+      * $(B tag)       the removed tag.
+      * $(B textTagTable) the instance the signal is connected to
+    )
+  */
   alias TagRemovedCallbackDlg = void delegate(gtk.text_tag.TextTag tag, gtk.text_tag_table.TextTagTable textTagTable);
+
+  /** ditto */
   alias TagRemovedCallbackFunc = void function(gtk.text_tag.TextTag tag, gtk.text_tag_table.TextTagTable textTagTable);
 
   /**
-   * Connect to TagRemoved signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to TagRemoved signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectTagRemoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : TagRemovedCallbackDlg) || is(T : TagRemovedCallbackFunc))
   {

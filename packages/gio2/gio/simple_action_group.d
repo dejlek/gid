@@ -12,10 +12,10 @@ import gio.types;
 import gobject.object;
 
 /**
- * `GSimpleActionGroup` is a hash table filled with [gio.action.Action] objects,
- * implementing the [gio.action_group.ActionGroup] and [gio.action_map.ActionMap]
- * interfaces.
- */
+    [gio.simple_action_group.SimpleActionGroup] is a hash table filled with [gio.action.Action] objects,
+  implementing the [gio.action_group.ActionGroup] and [gio.action_map.ActionMap]
+  interfaces.
+*/
 class SimpleActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.action_map.ActionMap
 {
 
@@ -39,9 +39,9 @@ class SimpleActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, 
   mixin ActionMapT!();
 
   /**
-   * Creates a new, empty, #GSimpleActionGroup.
-   * Returns: a new #GSimpleActionGroup
-   */
+      Creates a new, empty, #GSimpleActionGroup.
+    Returns:     a new #GSimpleActionGroup
+  */
   this()
   {
     GSimpleActionGroup* _cretval;
@@ -50,29 +50,32 @@ class SimpleActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, 
   }
 
   /**
-   * Adds an action to the action group.
-   * If the action group already contains an action with the same name as
-   * action then the old action is dropped from the group.
-   * The action group takes its own reference on action.
-   * Params:
-   *   action = a #GAction
-
-   * Deprecated: Use [gio.action_map.ActionMap.addAction]
-   */
+      Adds an action to the action group.
+    
+    If the action group already contains an action with the same name as
+    action then the old action is dropped from the group.
+    
+    The action group takes its own reference on action.
+    Params:
+      action =       a #GAction
+  
+    Deprecated:     Use [gio.action_map.ActionMap.addAction]
+  */
   void insert(gio.action.Action action)
   {
     g_simple_action_group_insert(cast(GSimpleActionGroup*)cPtr, action ? cast(GAction*)(cast(ObjectG)action).cPtr(No.Dup) : null);
   }
 
   /**
-   * Looks up the action with the name action_name in the group.
-   * If no such action exists, returns %NULL.
-   * Params:
-   *   actionName = the name of an action
-   * Returns: a #GAction, or %NULL
-
-   * Deprecated: Use [gio.action_map.ActionMap.lookupAction]
-   */
+      Looks up the action with the name action_name in the group.
+    
+    If no such action exists, returns null.
+    Params:
+      actionName =       the name of an action
+    Returns:     a #GAction, or null
+  
+    Deprecated:     Use [gio.action_map.ActionMap.lookupAction]
+  */
   gio.action.Action lookup(string actionName)
   {
     GAction* _cretval;
@@ -83,13 +86,14 @@ class SimpleActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, 
   }
 
   /**
-   * Removes the named action from the action group.
-   * If no action of this name is in the group then nothing happens.
-   * Params:
-   *   actionName = the name of the action
-
-   * Deprecated: Use [gio.action_map.ActionMap.removeAction]
-   */
+      Removes the named action from the action group.
+    
+    If no action of this name is in the group then nothing happens.
+    Params:
+      actionName =       the name of the action
+  
+    Deprecated:     Use [gio.action_map.ActionMap.removeAction]
+  */
   void remove(string actionName)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);

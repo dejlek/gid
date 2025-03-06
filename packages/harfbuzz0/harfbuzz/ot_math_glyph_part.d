@@ -7,10 +7,10 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * Data type to hold information for a "part" component of a math-variant glyph.
- * Large variants for stretchable math glyphs $(LPAREN)such as parentheses$(RPAREN) can be constructed
- * on the fly from parts.
- */
+    Data type to hold information for a "part" component of a math-variant glyph.
+  Large variants for stretchable math glyphs (such as parentheses) can be constructed
+  on the fly from parts.
+*/
 class OtMathGlyphPart : gobject.boxed.Boxed
 {
 

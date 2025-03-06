@@ -8,9 +8,9 @@ import pango.language;
 import pango.types;
 
 /**
- * The `PangoAttrLanguage` structure is used to represent attributes that
- * are languages.
- */
+    The [pango.attr_language.AttrLanguage] structure is used to represent attributes that
+  are languages.
+*/
 class AttrLanguage
 {
   PangoAttrLanguage cInstance;
@@ -42,13 +42,13 @@ class AttrLanguage
   }
 
   /**
-   * Create a new language tag attribute.
-   * Params:
-   *   language = language tag
-   * Returns: the newly allocated
-   *   `PangoAttribute`, which should be freed with
-   *   [pango.attribute.Attribute.destroy]
-   */
+      Create a new language tag attribute.
+    Params:
+      language =       language tag
+    Returns:     the newly allocated
+        [pango.attribute.Attribute], which should be freed with
+        [pango.attribute.Attribute.destroy]
+  */
   static pango.attribute.Attribute new_(pango.language.Language language)
   {
     PangoAttribute* _cretval;

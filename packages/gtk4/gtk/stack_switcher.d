@@ -17,29 +17,40 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * The `GtkStackSwitcher` shows a row of buttons to switch between `GtkStack`
- * pages.
- * ![An example GtkStackSwitcher](stackswitcher.png)
- * It acts as a controller for the associated `GtkStack`.
- * All the content for the buttons comes from the properties of the stacks
- * [gtk.stack_page.StackPage] objects; the button visibility in a `GtkStackSwitcher`
- * widget is controlled by the visibility of the child in the `GtkStack`.
- * It is possible to associate multiple `GtkStackSwitcher` widgets
- * with the same `GtkStack` widget.
- * # CSS nodes
- * `GtkStackSwitcher` has a single CSS node named stackswitcher and
- * style class .stack-switcher.
- * When circumstances require it, `GtkStackSwitcher` adds the
- * .needs-attention style class to the widgets representing the
- * stack pages.
- * # Accessibility
- * `GtkStackSwitcher` uses the %GTK_ACCESSIBLE_ROLE_TAB_LIST role
- * and uses the %GTK_ACCESSIBLE_ROLE_TAB for its buttons.
- * # Orientable
- * Since GTK 4.4, `GtkStackSwitcher` implements `GtkOrientable` allowing
- * the stack switcher to be made vertical with
- * `[gtk.orientable.Orientable.setOrientation]`.
- */
+    The [gtk.stack_switcher.StackSwitcher] shows a row of buttons to switch between [gtk.stack.Stack]
+  pages.
+  
+  ![An example GtkStackSwitcher](stackswitcher.png)
+  
+  It acts as a controller for the associated [gtk.stack.Stack].
+  
+  All the content for the buttons comes from the properties of the stacks
+  [gtk.stack_page.StackPage] objects; the button visibility in a [gtk.stack_switcher.StackSwitcher]
+  widget is controlled by the visibility of the child in the [gtk.stack.Stack].
+  
+  It is possible to associate multiple [gtk.stack_switcher.StackSwitcher] widgets
+  with the same [gtk.stack.Stack] widget.
+  
+  # CSS nodes
+  
+  [gtk.stack_switcher.StackSwitcher] has a single CSS node named stackswitcher and
+  style class .stack-switcher.
+  
+  When circumstances require it, [gtk.stack_switcher.StackSwitcher] adds the
+  .needs-attention style class to the widgets representing the
+  stack pages.
+  
+  # Accessibility
+  
+  [gtk.stack_switcher.StackSwitcher] uses the [gtk.types.AccessibleRole.TabList] role
+  and uses the [gtk.types.AccessibleRole.Tab] for its buttons.
+  
+  # Orientable
+  
+  Since GTK 4.4, [gtk.stack_switcher.StackSwitcher] implements [gtk.orientable.Orientable] allowing
+  the stack switcher to be made vertical with
+  `[gtk.orientable.Orientable.setOrientation]`.
+*/
 class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
@@ -62,9 +73,9 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
   mixin OrientableT!();
 
   /**
-   * Create a new `GtkStackSwitcher`.
-   * Returns: a new `GtkStackSwitcher`.
-   */
+      Create a new [gtk.stack_switcher.StackSwitcher].
+    Returns:     a new [gtk.stack_switcher.StackSwitcher].
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -73,9 +84,9 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-   * Retrieves the stack.
-   * Returns: the stack
-   */
+      Retrieves the stack.
+    Returns:     the stack
+  */
   gtk.stack.Stack getStack()
   {
     GtkStack* _cretval;
@@ -85,10 +96,10 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-   * Sets the stack to control.
-   * Params:
-   *   stack = a `GtkStack`
-   */
+      Sets the stack to control.
+    Params:
+      stack =       a [gtk.stack.Stack]
+  */
   void setStack(gtk.stack.Stack stack = null)
   {
     gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)cPtr, stack ? cast(GtkStack*)stack.cPtr(No.Dup) : null);

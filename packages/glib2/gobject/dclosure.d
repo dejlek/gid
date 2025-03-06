@@ -11,8 +11,9 @@ import gobject.closure;
 public import gobject.value;
 
 /**
- * Closure used for D delegates.
- */
+* Closure used for D delegates.
+*/
+/** */
 class DClosure : Closure
 {
   this(T)(T dlg, GClosureMarshal cMarshal)

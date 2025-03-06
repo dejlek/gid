@@ -21,14 +21,16 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * `GtkRange` is the common base class for widgets which visualize an
- * adjustment.
- * Widgets that are derived from `GtkRange` include
- * [gtk.scale.Scale] and [gtk.scrollbar.Scrollbar].
- * Apart from signals for monitoring the parameters of the adjustment,
- * `GtkRange` provides properties and methods for setting a
- * “fill level” on range widgets. See [gtk.range.Range.setFillLevel].
- */
+    [gtk.range.Range] is the common base class for widgets which visualize an
+  adjustment.
+  
+  Widgets that are derived from [gtk.range.Range] include
+  [gtk.scale.Scale] and [gtk.scrollbar.Scrollbar].
+  
+  Apart from signals for monitoring the parameters of the adjustment,
+  [gtk.range.Range] provides properties and methods for setting a
+  “fill level” on range widgets. See [gtk.range.Range.setFillLevel].
+*/
 class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orientable.Orientable
 {
 
@@ -52,9 +54,9 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   mixin OrientableT!();
 
   /**
-   * Get the adjustment which is the “model” object for `GtkRange`.
-   * Returns: a `GtkAdjustment`
-   */
+      Get the adjustment which is the “model” object for [gtk.range.Range].
+    Returns:     a [gtk.adjustment.Adjustment]
+  */
   gtk.adjustment.Adjustment getAdjustment()
   {
     GtkAdjustment* _cretval;
@@ -64,9 +66,9 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-   * Gets the current position of the fill level indicator.
-   * Returns: The current fill level
-   */
+      Gets the current position of the fill level indicator.
+    Returns:     The current fill level
+  */
   double getFillLevel()
   {
     double _retval;
@@ -75,10 +77,11 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-   * Gets whether the `GtkRange` respects text direction.
-   * See [gtk.range.Range.setFlippable].
-   * Returns: %TRUE if the range is flippable
-   */
+      Gets whether the [gtk.range.Range] respects text direction.
+    
+    See [gtk.range.Range.setFlippable].
+    Returns:     true if the range is flippable
+  */
   bool getFlippable()
   {
     bool _retval;
@@ -87,10 +90,11 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-   * Gets whether the range is inverted.
-   * See [gtk.range.Range.setInverted].
-   * Returns: %TRUE if the range is inverted
-   */
+      Gets whether the range is inverted.
+    
+    See [gtk.range.Range.setInverted].
+    Returns:     true if the range is inverted
+  */
   bool getInverted()
   {
     bool _retval;
@@ -99,12 +103,13 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-   * This function returns the area that contains the range’s trough,
-   * in coordinates relative to range's origin.
-   * This function is useful mainly for `GtkRange` subclasses.
-   * Params:
-   *   rangeRect = return location for the range rectangle
-   */
+      This function returns the area that contains the range’s trough,
+    in coordinates relative to range's origin.
+    
+    This function is useful mainly for [gtk.range.Range] subclasses.
+    Params:
+      rangeRect =       return location for the range rectangle
+  */
   void getRangeRect(out gdk.rectangle.Rectangle rangeRect)
   {
     GdkRectangle _rangeRect;
@@ -113,9 +118,9 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-   * Gets whether the range is restricted to the fill level.
-   * Returns: %TRUE if range is restricted to the fill level.
-   */
+      Gets whether the range is restricted to the fill level.
+    Returns:     true if range is restricted to the fill level.
+  */
   bool getRestrictToFillLevel()
   {
     bool _retval;
@@ -124,11 +129,12 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-   * Gets the number of digits to round the value to when
-   * it changes.
-   * See signalGtk.Range::change-value.
-   * Returns: the number of digits to round to
-   */
+      Gets the number of digits to round the value to when
+    it changes.
+    
+    See `signalGtk.Range::change-value`.
+    Returns:     the number of digits to round to
+  */
   int getRoundDigits()
   {
     int _retval;
@@ -137,9 +143,9 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-   * Gets whether the range displays the fill level graphically.
-   * Returns: %TRUE if range shows the fill level.
-   */
+      Gets whether the range displays the fill level graphically.
+    Returns:     true if range shows the fill level.
+  */
   bool getShowFillLevel()
   {
     bool _retval;
@@ -148,23 +154,25 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-   * This function returns sliders range along the long dimension,
-   * in widget->window coordinates.
-   * This function is useful mainly for `GtkRange` subclasses.
-   * Params:
-   *   sliderStart = return location for the slider's start
-   *   sliderEnd = return location for the slider's end
-   */
+      This function returns sliders range along the long dimension,
+    in widget->window coordinates.
+    
+    This function is useful mainly for [gtk.range.Range] subclasses.
+    Params:
+      sliderStart =       return location for the slider's start
+      sliderEnd =       return location for the slider's end
+  */
   void getSliderRange(out int sliderStart, out int sliderEnd)
   {
     gtk_range_get_slider_range(cast(GtkRange*)cPtr, cast(int*)&sliderStart, cast(int*)&sliderEnd);
   }
 
   /**
-   * This function is useful mainly for `GtkRange` subclasses.
-   * See [gtk.range.Range.setSliderSizeFixed].
-   * Returns: whether the range’s slider has a fixed size.
-   */
+      This function is useful mainly for [gtk.range.Range] subclasses.
+    
+    See [gtk.range.Range.setSliderSizeFixed].
+    Returns:     whether the range’s slider has a fixed size.
+  */
   bool getSliderSizeFixed()
   {
     bool _retval;
@@ -173,9 +181,9 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-   * Gets the current value of the range.
-   * Returns: current value of the range.
-   */
+      Gets the current value of the range.
+    Returns:     current value of the range.
+  */
   double getValue()
   {
     double _retval;
@@ -184,177 +192,197 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-   * Sets the adjustment to be used as the “model” object for the `GtkRange`
-   * The adjustment indicates the current range value, the minimum and
-   * maximum range values, the step/page increments used for keybindings
-   * and scrolling, and the page size.
-   * The page size is normally 0 for `GtkScale` and nonzero for `GtkScrollbar`,
-   * and indicates the size of the visible area of the widget being scrolled.
-   * The page size affects the size of the scrollbar slider.
-   * Params:
-   *   adjustment = a `GtkAdjustment`
-   */
+      Sets the adjustment to be used as the “model” object for the [gtk.range.Range]
+    
+    The adjustment indicates the current range value, the minimum and
+    maximum range values, the step/page increments used for keybindings
+    and scrolling, and the page size.
+    
+    The page size is normally 0 for [gtk.scale.Scale] and nonzero for [gtk.scrollbar.Scrollbar],
+    and indicates the size of the visible area of the widget being scrolled.
+    The page size affects the size of the scrollbar slider.
+    Params:
+      adjustment =       a [gtk.adjustment.Adjustment]
+  */
   void setAdjustment(gtk.adjustment.Adjustment adjustment)
   {
     gtk_range_set_adjustment(cast(GtkRange*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
 
   /**
-   * Set the new position of the fill level indicator.
-   * The “fill level” is probably best described by its most prominent
-   * use case, which is an indicator for the amount of pre-buffering in
-   * a streaming media player. In that use case, the value of the range
-   * would indicate the current play position, and the fill level would
-   * be the position up to which the file/stream has been downloaded.
-   * This amount of prebuffering can be displayed on the range’s trough
-   * and is themeable separately from the trough. To enable fill level
-   * display, use [gtk.range.Range.setShowFillLevel]. The range defaults
-   * to not showing the fill level.
-   * Additionally, it’s possible to restrict the range’s slider position
-   * to values which are smaller than the fill level. This is controlled
-   * by [gtk.range.Range.setRestrictToFillLevel] and is by default
-   * enabled.
-   * Params:
-   *   fillLevel = the new position of the fill level indicator
-   */
+      Set the new position of the fill level indicator.
+    
+    The “fill level” is probably best described by its most prominent
+    use case, which is an indicator for the amount of pre-buffering in
+    a streaming media player. In that use case, the value of the range
+    would indicate the current play position, and the fill level would
+    be the position up to which the file/stream has been downloaded.
+    
+    This amount of prebuffering can be displayed on the range’s trough
+    and is themeable separately from the trough. To enable fill level
+    display, use [gtk.range.Range.setShowFillLevel]. The range defaults
+    to not showing the fill level.
+    
+    Additionally, it’s possible to restrict the range’s slider position
+    to values which are smaller than the fill level. This is controlled
+    by [gtk.range.Range.setRestrictToFillLevel] and is by default
+    enabled.
+    Params:
+      fillLevel =       the new position of the fill level indicator
+  */
   void setFillLevel(double fillLevel)
   {
     gtk_range_set_fill_level(cast(GtkRange*)cPtr, fillLevel);
   }
 
   /**
-   * Sets whether the `GtkRange` respects text direction.
-   * If a range is flippable, it will switch its direction
-   * if it is horizontal and its direction is %GTK_TEXT_DIR_RTL.
-   * See [gtk.widget.Widget.getDirection].
-   * Params:
-   *   flippable = %TRUE to make the range flippable
-   */
+      Sets whether the [gtk.range.Range] respects text direction.
+    
+    If a range is flippable, it will switch its direction
+    if it is horizontal and its direction is [gtk.types.TextDirection.Rtl].
+    
+    See [gtk.widget.Widget.getDirection].
+    Params:
+      flippable =       true to make the range flippable
+  */
   void setFlippable(bool flippable)
   {
     gtk_range_set_flippable(cast(GtkRange*)cPtr, flippable);
   }
 
   /**
-   * Sets the step and page sizes for the range.
-   * The step size is used when the user clicks the `GtkScrollbar`
-   * arrows or moves a `GtkScale` via arrow keys. The page size
-   * is used for example when moving via Page Up or Page Down keys.
-   * Params:
-   *   step = step size
-   *   page = page size
-   */
+      Sets the step and page sizes for the range.
+    
+    The step size is used when the user clicks the [gtk.scrollbar.Scrollbar]
+    arrows or moves a [gtk.scale.Scale] via arrow keys. The page size
+    is used for example when moving via Page Up or Page Down keys.
+    Params:
+      step =       step size
+      page =       page size
+  */
   void setIncrements(double step, double page)
   {
     gtk_range_set_increments(cast(GtkRange*)cPtr, step, page);
   }
 
   /**
-   * Sets whether to invert the range.
-   * Ranges normally move from lower to higher values as the
-   * slider moves from top to bottom or left to right. Inverted
-   * ranges have higher values at the top or on the right rather
-   * than on the bottom or left.
-   * Params:
-   *   setting = %TRUE to invert the range
-   */
+      Sets whether to invert the range.
+    
+    Ranges normally move from lower to higher values as the
+    slider moves from top to bottom or left to right. Inverted
+    ranges have higher values at the top or on the right rather
+    than on the bottom or left.
+    Params:
+      setting =       true to invert the range
+  */
   void setInverted(bool setting)
   {
     gtk_range_set_inverted(cast(GtkRange*)cPtr, setting);
   }
 
   /**
-   * Sets the allowable values in the `GtkRange`.
-   * The range value is clamped to be between min and max.
-   * $(LPAREN)If the range has a non-zero page size, it is clamped
-   * between min and max - page-size.$(RPAREN)
-   * Params:
-   *   min = minimum range value
-   *   max = maximum range value
-   */
+      Sets the allowable values in the [gtk.range.Range].
+    
+    The range value is clamped to be between min and max.
+    (If the range has a non-zero page size, it is clamped
+    between min and max - page-size.)
+    Params:
+      min =       minimum range value
+      max =       maximum range value
+  */
   void setRange(double min, double max)
   {
     gtk_range_set_range(cast(GtkRange*)cPtr, min, max);
   }
 
   /**
-   * Sets whether the slider is restricted to the fill level.
-   * See [gtk.range.Range.setFillLevel] for a general description
-   * of the fill level concept.
-   * Params:
-   *   restrictToFillLevel = Whether the fill level restricts slider movement.
-   */
+      Sets whether the slider is restricted to the fill level.
+    
+    See [gtk.range.Range.setFillLevel] for a general description
+    of the fill level concept.
+    Params:
+      restrictToFillLevel =       Whether the fill level restricts slider movement.
+  */
   void setRestrictToFillLevel(bool restrictToFillLevel)
   {
     gtk_range_set_restrict_to_fill_level(cast(GtkRange*)cPtr, restrictToFillLevel);
   }
 
   /**
-   * Sets the number of digits to round the value to when
-   * it changes.
-   * See signalGtk.Range::change-value.
-   * Params:
-   *   roundDigits = the precision in digits, or -1
-   */
+      Sets the number of digits to round the value to when
+    it changes.
+    
+    See `signalGtk.Range::change-value`.
+    Params:
+      roundDigits =       the precision in digits, or -1
+  */
   void setRoundDigits(int roundDigits)
   {
     gtk_range_set_round_digits(cast(GtkRange*)cPtr, roundDigits);
   }
 
   /**
-   * Sets whether a graphical fill level is show on the trough.
-   * See [gtk.range.Range.setFillLevel] for a general description
-   * of the fill level concept.
-   * Params:
-   *   showFillLevel = Whether a fill level indicator graphics is shown.
-   */
+      Sets whether a graphical fill level is show on the trough.
+    
+    See [gtk.range.Range.setFillLevel] for a general description
+    of the fill level concept.
+    Params:
+      showFillLevel =       Whether a fill level indicator graphics is shown.
+  */
   void setShowFillLevel(bool showFillLevel)
   {
     gtk_range_set_show_fill_level(cast(GtkRange*)cPtr, showFillLevel);
   }
 
   /**
-   * Sets whether the range’s slider has a fixed size, or a size that
-   * depends on its adjustment’s page size.
-   * This function is useful mainly for `GtkRange` subclasses.
-   * Params:
-   *   sizeFixed = %TRUE to make the slider size constant
-   */
+      Sets whether the range’s slider has a fixed size, or a size that
+    depends on its adjustment’s page size.
+    
+    This function is useful mainly for [gtk.range.Range] subclasses.
+    Params:
+      sizeFixed =       true to make the slider size constant
+  */
   void setSliderSizeFixed(bool sizeFixed)
   {
     gtk_range_set_slider_size_fixed(cast(GtkRange*)cPtr, sizeFixed);
   }
 
   /**
-   * Sets the current value of the range.
-   * If the value is outside the minimum or maximum range values,
-   * it will be clamped to fit inside them. The range emits the
-   * signalGtk.Range::value-changed signal if the value changes.
-   * Params:
-   *   value = new value of the range
-   */
+      Sets the current value of the range.
+    
+    If the value is outside the minimum or maximum range values,
+    it will be clamped to fit inside them. The range emits the
+    `signalGtk.Range::value-changed` signal if the value changes.
+    Params:
+      value =       new value of the range
+  */
   void setValue(double value)
   {
     gtk_range_set_value(cast(GtkRange*)cPtr, value);
   }
 
   /**
-   * Emitted before clamping a value, to give the application a
-   * chance to adjust the bounds.
-   * Params
-   *   value = the value before we clamp
-   *   range = the instance the signal is connected to
-   */
+      Emitted before clamping a value, to give the application a
+    chance to adjust the bounds.
+  
+    ## Parameters
+    $(LIST
+      * $(B value)       the value before we clamp
+      * $(B range) the instance the signal is connected to
+    )
+  */
   alias AdjustBoundsCallbackDlg = void delegate(double value, gtk.range.Range range);
+
+  /** ditto */
   alias AdjustBoundsCallbackFunc = void function(double value, gtk.range.Range range);
 
   /**
-   * Connect to AdjustBounds signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to AdjustBounds signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectAdjustBounds(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AdjustBoundsCallbackDlg) || is(T : AdjustBoundsCallbackFunc))
   {
@@ -372,33 +400,40 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-   * Emitted when a scroll action is performed on a range.
-   * It allows an application to determine the type of scroll event
-   * that occurred and the resultant new value. The application can
-   * handle the event itself and return %TRUE to prevent further
-   * processing. Or, by returning %FALSE, it can pass the event to
-   * other handlers until the default GTK handler is reached.
-   * The value parameter is unrounded. An application that overrides
-   * the ::change-value signal is responsible for clamping the value
-   * to the desired number of decimal digits; the default GTK
-   * handler clamps the value based on propertyGtk.Range:round-digits.
-   * Params
-   *   scroll = the type of scroll action that was performed
-   *   value = the new value resulting from the scroll action
-   *   range = the instance the signal is connected to
-   * Returns: %TRUE to prevent other handlers from being invoked for
-   *   the signal, %FALSE to propagate the signal further
-   */
+      Emitted when a scroll action is performed on a range.
+    
+    It allows an application to determine the type of scroll event
+    that occurred and the resultant new value. The application can
+    handle the event itself and return true to prevent further
+    processing. Or, by returning false, it can pass the event to
+    other handlers until the default GTK handler is reached.
+    
+    The value parameter is unrounded. An application that overrides
+    the ::change-value signal is responsible for clamping the value
+    to the desired number of decimal digits; the default GTK
+    handler clamps the value based on `propertyGtk.Range:round-digits`.
+  
+    ## Parameters
+    $(LIST
+      * $(B scroll)       the type of scroll action that was performed
+      * $(B value)       the new value resulting from the scroll action
+      * $(B range) the instance the signal is connected to
+    )
+    Returns:     true to prevent other handlers from being invoked for
+          the signal, false to propagate the signal further
+  */
   alias ChangeValueCallbackDlg = bool delegate(gtk.types.ScrollType scroll, double value, gtk.range.Range range);
+
+  /** ditto */
   alias ChangeValueCallbackFunc = bool function(gtk.types.ScrollType scroll, double value, gtk.range.Range range);
 
   /**
-   * Connect to ChangeValue signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ChangeValue signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectChangeValue(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangeValueCallbackDlg) || is(T : ChangeValueCallbackFunc))
   {
@@ -419,22 +454,28 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-   * Virtual function that moves the slider.
-   * Used for keybindings.
-   * Params
-   *   step = how to move the slider
-   *   range = the instance the signal is connected to
-   */
+      Virtual function that moves the slider.
+    
+    Used for keybindings.
+  
+    ## Parameters
+    $(LIST
+      * $(B step)       how to move the slider
+      * $(B range) the instance the signal is connected to
+    )
+  */
   alias MoveSliderCallbackDlg = void delegate(gtk.types.ScrollType step, gtk.range.Range range);
+
+  /** ditto */
   alias MoveSliderCallbackFunc = void function(gtk.types.ScrollType step, gtk.range.Range range);
 
   /**
-   * Connect to MoveSlider signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to MoveSlider signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectMoveSlider(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveSliderCallbackDlg) || is(T : MoveSliderCallbackFunc))
   {
@@ -452,19 +493,25 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-   * Emitted when the range value changes.
-   *   range = the instance the signal is connected to
-   */
+      Emitted when the range value changes.
+  
+    ## Parameters
+    $(LIST
+      * $(B range) the instance the signal is connected to
+    )
+  */
   alias ValueChangedCallbackDlg = void delegate(gtk.range.Range range);
+
+  /** ditto */
   alias ValueChangedCallbackFunc = void function(gtk.range.Range range);
 
   /**
-   * Connect to ValueChanged signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ValueChanged signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ValueChangedCallbackDlg) || is(T : ValueChangedCallbackFunc))
   {

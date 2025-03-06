@@ -7,9 +7,9 @@ import pango.c.types;
 import pango.types;
 
 /**
- * The `PangoAttrString` structure is used to represent attributes with
- * a string value.
- */
+    The [pango.attr_string.AttrString] structure is used to represent attributes with
+  a string value.
+*/
 class AttrString
 {
   PangoAttrString cInstance;

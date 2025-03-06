@@ -8,8 +8,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Describes a key press or key release event.
- */
+    Describes a key press or key release event.
+*/
 class EventKey
 {
   GdkEventKey cInstance;

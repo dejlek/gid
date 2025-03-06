@@ -7,10 +7,10 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * The structure that holds various text properties of an #hb_buffer_t. Can be
- * set and retrieved using [harfbuzz.global.bufferSetSegmentProperties] and
- * [harfbuzz.global.bufferGetSegmentProperties], respectively.
- */
+    The structure that holds various text properties of an #hb_buffer_t. Can be
+  set and retrieved using [harfbuzz.global.bufferSetSegmentProperties] and
+  [harfbuzz.global.bufferGetSegmentProperties], respectively.
+*/
 class SegmentProperties : gobject.boxed.Boxed
 {
 

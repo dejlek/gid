@@ -7,8 +7,8 @@ import gio.types;
 import gobject.boxed;
 
 /**
- * Information about an argument for a method or a signal.
- */
+    Information about an argument for a method or a signal.
+*/
 class DBusArgInfo : gobject.boxed.Boxed
 {
 

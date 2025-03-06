@@ -6,6 +6,7 @@ import arrow.types;
 import gid.gid;
 import gobject.object;
 
+/** */
 class Expression : gobject.object.ObjectG
 {
 
@@ -25,6 +26,7 @@ class Expression : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   bool equal(arrow.expression.Expression otherExpression)
   {
     bool _retval;
@@ -32,6 +34,7 @@ class Expression : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string toString_()
   {
     char* _cretval;

@@ -11,11 +11,11 @@ import pango.language;
 import pango.tab_array;
 
 /**
- * Using #GtkTextAttributes directly should rarely be necessary.
- * It’s primarily useful with [gtk.text_iter.TextIter.getAttributes].
- * As with most GTK+ structs, the fields in this struct should only
- * be read, never modified directly.
- */
+    Using #GtkTextAttributes directly should rarely be necessary.
+  It’s primarily useful with [gtk.text_iter.TextIter.getAttributes].
+  As with most GTK+ structs, the fields in this struct should only
+  be read, never modified directly.
+*/
 class TextAttributes : gobject.boxed.Boxed
 {
 
@@ -211,11 +211,11 @@ class TextAttributes : gobject.boxed.Boxed
   }
 
   /**
-   * Creates a #GtkTextAttributes, which describes
-   * a set of properties on some text.
-   * Returns: a new #GtkTextAttributes,
-   *   free with [gtk.text_attributes.TextAttributes.unref].
-   */
+      Creates a #GtkTextAttributes, which describes
+    a set of properties on some text.
+    Returns:     a new #GtkTextAttributes,
+          free with [gtk.text_attributes.TextAttributes.unref].
+  */
   this()
   {
     GtkTextAttributes* _cretval;
@@ -224,10 +224,10 @@ class TextAttributes : gobject.boxed.Boxed
   }
 
   /**
-   * Copies src and returns a new #GtkTextAttributes.
-   * Returns: a copy of src,
-   *   free with [gtk.text_attributes.TextAttributes.unref]
-   */
+      Copies src and returns a new #GtkTextAttributes.
+    Returns:     a copy of src,
+          free with [gtk.text_attributes.TextAttributes.unref]
+  */
   gtk.text_attributes.TextAttributes copy()
   {
     GtkTextAttributes* _cretval;
@@ -237,11 +237,11 @@ class TextAttributes : gobject.boxed.Boxed
   }
 
   /**
-   * Copies the values from src to dest so that dest has
-   * the same values as src. Frees existing values in dest.
-   * Params:
-   *   dest = another #GtkTextAttributes
-   */
+      Copies the values from src to dest so that dest has
+    the same values as src. Frees existing values in dest.
+    Params:
+      dest =       another #GtkTextAttributes
+  */
   void copyValues(gtk.text_attributes.TextAttributes dest)
   {
     gtk_text_attributes_copy_values(cast(GtkTextAttributes*)cPtr, dest ? cast(GtkTextAttributes*)dest.cPtr(No.Dup) : null);

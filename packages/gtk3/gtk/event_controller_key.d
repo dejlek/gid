@@ -12,10 +12,11 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * #GtkEventControllerKey is an event controller meant for situations
- * where you need access to key events.
- * This object was added in 3.24.
- */
+    #GtkEventControllerKey is an event controller meant for situations
+  where you need access to key events.
+  
+  This object was added in 3.24.
+*/
 class EventControllerKey : gtk.event_controller.EventController
 {
 
@@ -35,6 +36,7 @@ class EventControllerKey : gtk.event_controller.EventController
     return getType();
   }
 
+  /** */
   this(gtk.widget.Widget widget)
   {
     GtkEventController* _cretval;
@@ -42,6 +44,7 @@ class EventControllerKey : gtk.event_controller.EventController
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool forward(gtk.widget.Widget widget)
   {
     bool _retval;
@@ -49,6 +52,7 @@ class EventControllerKey : gtk.event_controller.EventController
     return _retval;
   }
 
+  /** */
   uint getGroup()
   {
     uint _retval;
@@ -57,9 +61,9 @@ class EventControllerKey : gtk.event_controller.EventController
   }
 
   /**
-   * Gets the IM context of a key controller.
-   * Returns: the IM context
-   */
+      Gets the IM context of a key controller.
+    Returns:     the IM context
+  */
   gtk.imcontext.IMContext getImContext()
   {
     GtkIMContext* _cretval;
@@ -68,21 +72,25 @@ class EventControllerKey : gtk.event_controller.EventController
     return _retval;
   }
 
+  /** */
   void setImContext(gtk.imcontext.IMContext imContext)
   {
     gtk_event_controller_key_set_im_context(cast(GtkEventControllerKey*)cPtr, imContext ? cast(GtkIMContext*)imContext.cPtr(No.Dup) : null);
   }
 
+  /** */
   alias FocusInCallbackDlg = void delegate(gtk.event_controller_key.EventControllerKey eventControllerKey);
+
+  /** ditto */
   alias FocusInCallbackFunc = void function(gtk.event_controller_key.EventControllerKey eventControllerKey);
 
   /**
-   * Connect to FocusIn signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to FocusIn signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectFocusIn(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FocusInCallbackDlg) || is(T : FocusInCallbackFunc))
   {
@@ -98,16 +106,19 @@ class EventControllerKey : gtk.event_controller.EventController
     return connectSignalClosure("focus-in", closure, after);
   }
 
+  /** */
   alias FocusOutCallbackDlg = void delegate(gtk.event_controller_key.EventControllerKey eventControllerKey);
+
+  /** ditto */
   alias FocusOutCallbackFunc = void function(gtk.event_controller_key.EventControllerKey eventControllerKey);
 
   /**
-   * Connect to FocusOut signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to FocusOut signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectFocusOut(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FocusOutCallbackDlg) || is(T : FocusOutCallbackFunc))
   {
@@ -123,16 +134,19 @@ class EventControllerKey : gtk.event_controller.EventController
     return connectSignalClosure("focus-out", closure, after);
   }
 
+  /** */
   alias ImUpdateCallbackDlg = void delegate(gtk.event_controller_key.EventControllerKey eventControllerKey);
+
+  /** ditto */
   alias ImUpdateCallbackFunc = void function(gtk.event_controller_key.EventControllerKey eventControllerKey);
 
   /**
-   * Connect to ImUpdate signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to ImUpdate signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectImUpdate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ImUpdateCallbackDlg) || is(T : ImUpdateCallbackFunc))
   {
@@ -149,24 +163,29 @@ class EventControllerKey : gtk.event_controller.EventController
   }
 
   /**
-   * This signal is emitted whenever a key is pressed.
-   * Params
-   *   keyval = the pressed key.
-   *   keycode = the raw code of the pressed key.
-   *   state = the bitmask, representing the state of modifier keys and pointer buttons. See #GdkModifierType.
-   *   eventControllerKey = the instance the signal is connected to
-   * Returns: %TRUE if the key press was handled, %FALSE otherwise.
-   */
+      This signal is emitted whenever a key is pressed.
+  
+    ## Parameters
+    $(LIST
+      * $(B keyval)       the pressed key.
+      * $(B keycode)       the raw code of the pressed key.
+      * $(B state)       the bitmask, representing the state of modifier keys and pointer buttons. See #GdkModifierType.
+      * $(B eventControllerKey) the instance the signal is connected to
+    )
+    Returns:     true if the key press was handled, false otherwise.
+  */
   alias KeyPressedCallbackDlg = bool delegate(uint keyval, uint keycode, gdk.types.ModifierType state, gtk.event_controller_key.EventControllerKey eventControllerKey);
+
+  /** ditto */
   alias KeyPressedCallbackFunc = bool function(uint keyval, uint keycode, gdk.types.ModifierType state, gtk.event_controller_key.EventControllerKey eventControllerKey);
 
   /**
-   * Connect to KeyPressed signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to KeyPressed signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectKeyPressed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : KeyPressedCallbackDlg) || is(T : KeyPressedCallbackFunc))
   {
@@ -188,23 +207,28 @@ class EventControllerKey : gtk.event_controller.EventController
   }
 
   /**
-   * This signal is emitted whenever a key is released.
-   * Params
-   *   keyval = the released key.
-   *   keycode = the raw code of the released key.
-   *   state = the bitmask, representing the state of modifier keys and pointer buttons. See #GdkModifierType.
-   *   eventControllerKey = the instance the signal is connected to
-   */
+      This signal is emitted whenever a key is released.
+  
+    ## Parameters
+    $(LIST
+      * $(B keyval)       the released key.
+      * $(B keycode)       the raw code of the released key.
+      * $(B state)       the bitmask, representing the state of modifier keys and pointer buttons. See #GdkModifierType.
+      * $(B eventControllerKey) the instance the signal is connected to
+    )
+  */
   alias KeyReleasedCallbackDlg = void delegate(uint keyval, uint keycode, gdk.types.ModifierType state, gtk.event_controller_key.EventControllerKey eventControllerKey);
+
+  /** ditto */
   alias KeyReleasedCallbackFunc = void function(uint keyval, uint keycode, gdk.types.ModifierType state, gtk.event_controller_key.EventControllerKey eventControllerKey);
 
   /**
-   * Connect to KeyReleased signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to KeyReleased signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectKeyReleased(T)(T callback, Flag!"After" after = No.After)
   if (is(T : KeyReleasedCallbackDlg) || is(T : KeyReleasedCallbackFunc))
   {
@@ -223,16 +247,19 @@ class EventControllerKey : gtk.event_controller.EventController
     return connectSignalClosure("key-released", closure, after);
   }
 
+  /** */
   alias ModifiersCallbackDlg = bool delegate(gdk.types.ModifierType object, gtk.event_controller_key.EventControllerKey eventControllerKey);
+
+  /** ditto */
   alias ModifiersCallbackFunc = bool function(gdk.types.ModifierType object, gtk.event_controller_key.EventControllerKey eventControllerKey);
 
   /**
-   * Connect to Modifiers signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Modifiers signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectModifiers(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ModifiersCallbackDlg) || is(T : ModifiersCallbackFunc))
   {

@@ -6,6 +6,7 @@ import arrow.function_options;
 import arrow.types;
 import gid.gid;
 
+/** */
 class QuantileOptions : arrow.function_options.FunctionOptions
 {
 
@@ -25,6 +26,7 @@ class QuantileOptions : arrow.function_options.FunctionOptions
     return getType();
   }
 
+  /** */
   this()
   {
     GArrowQuantileOptions* _cretval;
@@ -32,6 +34,7 @@ class QuantileOptions : arrow.function_options.FunctionOptions
     this(_cretval, Yes.Take);
   }
 
+  /** */
   double[] getQs()
   {
     const(double)* _cretval;
@@ -46,11 +49,13 @@ class QuantileOptions : arrow.function_options.FunctionOptions
     return _retval;
   }
 
+  /** */
   void setQ(double q)
   {
     garrow_quantile_options_set_q(cast(GArrowQuantileOptions*)cPtr, q);
   }
 
+  /** */
   void setQs(double[] qs)
   {
     size_t _n;

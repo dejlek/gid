@@ -10,16 +10,17 @@ import gobject.dclosure;
 import gobject.object;
 
 /**
- * The ATK interface which provides standard mechanism for manipulating hyperlinks.
- * An interface used for objects which implement linking between
- * multiple resource or content locations, or multiple 'markers'
- * within a single document.  A Hypertext instance is associated with
- * one or more Hyperlinks, which are associated with particular
- * offsets within the Hypertext's included content.  While this
- * interface is derived from Text, there is no requirement that
- * Hypertext instances have textual content; they may implement Image
- * as well, and Hyperlinks need not have non-zero text offsets.
- */
+    The ATK interface which provides standard mechanism for manipulating hyperlinks.
+  
+  An interface used for objects which implement linking between
+  multiple resource or content locations, or multiple 'markers'
+  within a single document.  A Hypertext instance is associated with
+  one or more Hyperlinks, which are associated with particular
+  offsets within the Hypertext's included content.  While this
+  interface is derived from Text, there is no requirement that
+  Hypertext instances have textual content; they may implement Image
+  as well, and Hyperlinks need not have non-zero text offsets.
+*/
 interface Hypertext
 {
 
@@ -30,49 +31,54 @@ interface Hypertext
   }
 
   /**
-   * Gets the link in this hypertext document at index
-   * link_index
-   * Params:
-   *   linkIndex = an integer specifying the desired link
-   * Returns: the link in this hypertext document at
-   *   index link_index
-   */
+      Gets the link in this hypertext document at index
+    link_index
+    Params:
+      linkIndex =       an integer specifying the desired link
+    Returns:     the link in this hypertext document at
+      index link_index
+  */
   atk.hyperlink.Hyperlink getLink(int linkIndex);
 
   /**
-   * Gets the index into the array of hyperlinks that is associated with
-   * the character specified by char_index.
-   * Params:
-   *   charIndex = a character index
-   * Returns: an index into the array of hyperlinks in hypertext,
-   *   or -1 if there is no hyperlink associated with this character.
-   */
+      Gets the index into the array of hyperlinks that is associated with
+    the character specified by char_index.
+    Params:
+      charIndex =       a character index
+    Returns:     an index into the array of hyperlinks in hypertext,
+      or -1 if there is no hyperlink associated with this character.
+  */
   int getLinkIndex(int charIndex);
 
   /**
-   * Gets the number of links within this hypertext document.
-   * Returns: the number of links within this hypertext document
-   */
+      Gets the number of links within this hypertext document.
+    Returns:     the number of links within this hypertext document
+  */
   int getNLinks();
 
   /**
-   * The "link-selected" signal is emitted by an AtkHyperText
-   * object when one of the hyperlinks associated with the object
-   * is selected.
-   * Params
-   *   arg1 = the index of the hyperlink which is selected
-   *   hypertext = the instance the signal is connected to
-   */
+      The "link-selected" signal is emitted by an AtkHyperText
+    object when one of the hyperlinks associated with the object
+    is selected.
+  
+    ## Parameters
+    $(LIST
+      * $(B arg1)       the index of the hyperlink which is selected
+      * $(B hypertext) the instance the signal is connected to
+    )
+  */
   alias LinkSelectedCallbackDlg = void delegate(int arg1, atk.hypertext.Hypertext hypertext);
+
+  /** ditto */
   alias LinkSelectedCallbackFunc = void function(int arg1, atk.hypertext.Hypertext hypertext);
 
   /**
-   * Connect to LinkSelected signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to LinkSelected signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectLinkSelected(T)(T callback, Flag!"After" after = No.After)
   if (is(T : LinkSelectedCallbackDlg) || is(T : LinkSelectedCallbackFunc));
   }

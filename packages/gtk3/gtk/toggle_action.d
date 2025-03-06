@@ -10,9 +10,9 @@ import gtk.c.types;
 import gtk.types;
 
 /**
- * A #GtkToggleAction corresponds roughly to a #GtkCheckMenuItem. It has an
- * “active” state specifying whether the action has been checked or not.
- */
+    A #GtkToggleAction corresponds roughly to a #GtkCheckMenuItem. It has an
+  “active” state specifying whether the action has been checked or not.
+*/
 class ToggleAction : gtk.action.Action
 {
 
@@ -33,18 +33,18 @@ class ToggleAction : gtk.action.Action
   }
 
   /**
-   * Creates a new #GtkToggleAction object. To add the action to
-   * a #GtkActionGroup and set the accelerator for the action,
-   * call [gtk.action_group.ActionGroup.addActionWithAccel].
-   * Params:
-   *   name = A unique name for the action
-   *   label = The label displayed in menu items and on buttons,
-   *     or %NULL
-   *   tooltip = A tooltip for the action, or %NULL
-   *   stockId = The stock icon to display in widgets representing
-   *     the action, or %NULL
-   * Returns: a new #GtkToggleAction
-   */
+      Creates a new #GtkToggleAction object. To add the action to
+    a #GtkActionGroup and set the accelerator for the action,
+    call [gtk.action_group.ActionGroup.addActionWithAccel].
+    Params:
+      name =       A unique name for the action
+      label =       The label displayed in menu items and on buttons,
+                or null
+      tooltip =       A tooltip for the action, or null
+      stockId =       The stock icon to display in widgets representing
+                   the action, or null
+    Returns:     a new #GtkToggleAction
+  */
   this(string name, string label = null, string tooltip = null, string stockId = null)
   {
     GtkToggleAction* _cretval;
@@ -57,9 +57,9 @@ class ToggleAction : gtk.action.Action
   }
 
   /**
-   * Returns the checked state of the toggle action.
-   * Returns: the checked state of the toggle action
-   */
+      Returns the checked state of the toggle action.
+    Returns:     the checked state of the toggle action
+  */
   bool getActive()
   {
     bool _retval;
@@ -68,9 +68,9 @@ class ToggleAction : gtk.action.Action
   }
 
   /**
-   * Returns whether the action should have proxies like a radio action.
-   * Returns: whether the action should have proxies like a radio action.
-   */
+      Returns whether the action should have proxies like a radio action.
+    Returns:     whether the action should have proxies like a radio action.
+  */
   bool getDrawAsRadio()
   {
     bool _retval;
@@ -79,49 +79,55 @@ class ToggleAction : gtk.action.Action
   }
 
   /**
-   * Sets the checked state on the toggle action.
-   * Params:
-   *   isActive = whether the action should be checked or not
-   */
+      Sets the checked state on the toggle action.
+    Params:
+      isActive =       whether the action should be checked or not
+  */
   void setActive(bool isActive)
   {
     gtk_toggle_action_set_active(cast(GtkToggleAction*)cPtr, isActive);
   }
 
   /**
-   * Sets whether the action should have proxies like a radio action.
-   * Params:
-   *   drawAsRadio = whether the action should have proxies like a radio
-   *     action
-   */
+      Sets whether the action should have proxies like a radio action.
+    Params:
+      drawAsRadio =       whether the action should have proxies like a radio
+           action
+  */
   void setDrawAsRadio(bool drawAsRadio)
   {
     gtk_toggle_action_set_draw_as_radio(cast(GtkToggleAction*)cPtr, drawAsRadio);
   }
 
   /**
-   * Emits the “toggled” signal on the toggle action.
-   */
+      Emits the “toggled” signal on the toggle action.
+  */
   void toggled()
   {
     gtk_toggle_action_toggled(cast(GtkToggleAction*)cPtr);
   }
 
   /**
-   * Should be connected if you wish to perform an action
-   * whenever the #GtkToggleAction state is changed.
-   *   toggleAction = the instance the signal is connected to
-   */
+      Should be connected if you wish to perform an action
+    whenever the #GtkToggleAction state is changed.
+  
+    ## Parameters
+    $(LIST
+      * $(B toggleAction) the instance the signal is connected to
+    )
+  */
   alias ToggledCallbackDlg = void delegate(gtk.toggle_action.ToggleAction toggleAction);
+
+  /** ditto */
   alias ToggledCallbackFunc = void function(gtk.toggle_action.ToggleAction toggleAction);
 
   /**
-   * Connect to Toggled signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Toggled signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectToggled(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToggledCallbackDlg) || is(T : ToggledCallbackFunc))
   {

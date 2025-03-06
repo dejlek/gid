@@ -7,21 +7,22 @@ public import gtk.c.types;
 public import gtk.types;
 
 /**
- * The #GtkOrientable interface is implemented by all widgets that can be
- * oriented horizontally or vertically. Historically, such widgets have been
- * realized as subclasses of a common base class $(LPAREN)e.g #GtkBox/#GtkHBox/#GtkVBox
- * or #GtkScale/#GtkHScale/#GtkVScale$(RPAREN). #GtkOrientable is more flexible in that
- * it allows the orientation to be changed at runtime, allowing the widgets
- * to “flip”.
- * #GtkOrientable was introduced in GTK+ 2.16.
- */
+    The #GtkOrientable interface is implemented by all widgets that can be
+  oriented horizontally or vertically. Historically, such widgets have been
+  realized as subclasses of a common base class (e.g #GtkBox/#GtkHBox/#GtkVBox
+  or #GtkScale/#GtkHScale/#GtkVScale). #GtkOrientable is more flexible in that
+  it allows the orientation to be changed at runtime, allowing the widgets
+  to “flip”.
+  
+  #GtkOrientable was introduced in GTK+ 2.16.
+*/
 template OrientableT()
 {
 
   /**
-   * Retrieves the orientation of the orientable.
-   * Returns: the orientation of the orientable.
-   */
+      Retrieves the orientation of the orientable.
+    Returns:     the orientation of the orientable.
+  */
   override gtk.types.Orientation getOrientation()
   {
     GtkOrientation _cretval;
@@ -31,10 +32,10 @@ template OrientableT()
   }
 
   /**
-   * Sets the orientation of the orientable.
-   * Params:
-   *   orientation = the orientable’s new orientation.
-   */
+      Sets the orientation of the orientable.
+    Params:
+      orientation =       the orientable’s new orientation.
+  */
   override void setOrientation(gtk.types.Orientation orientation)
   {
     gtk_orientable_set_orientation(cast(GtkOrientable*)cPtr, orientation);

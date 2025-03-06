@@ -10,6 +10,7 @@ import gtk.c.types;
 import gtk.types;
 import gtk.widget_accessible;
 
+/** */
 class SpinnerAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
 {
 

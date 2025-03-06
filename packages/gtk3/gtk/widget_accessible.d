@@ -8,6 +8,7 @@ import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
 
+/** */
 class WidgetAccessible : gtk.accessible.Accessible, atk.component.Component
 {
 

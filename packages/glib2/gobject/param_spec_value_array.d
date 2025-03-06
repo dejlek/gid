@@ -7,8 +7,8 @@ import gobject.param_spec;
 import gobject.types;
 
 /**
- * A #GParamSpec derived structure that contains the meta data for #GValueArray properties.
- */
+    A #GParamSpec derived structure that contains the meta data for #GValueArray properties.
+*/
 class ParamSpecValueArray : gobject.param_spec.ParamSpec
 {
 

@@ -8,8 +8,8 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node for a linear gradient.
- */
+    A render node for a linear gradient.
+*/
 class LinearGradientNode : gsk.render_node.RenderNode
 {
 
@@ -22,9 +22,9 @@ class LinearGradientNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the final point of the linear gradient.
-   * Returns: the final point
-   */
+      Retrieves the final point of the linear gradient.
+    Returns:     the final point
+  */
   graphene.point.Point getEnd()
   {
     const(graphene_point_t)* _cretval;
@@ -34,9 +34,9 @@ class LinearGradientNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the number of color stops in the gradient.
-   * Returns: the number of color stops
-   */
+      Retrieves the number of color stops in the gradient.
+    Returns:     the number of color stops
+  */
   size_t getNColorStops()
   {
     size_t _retval;
@@ -45,9 +45,9 @@ class LinearGradientNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the initial point of the linear gradient.
-   * Returns: the initial point
-   */
+      Retrieves the initial point of the linear gradient.
+    Returns:     the initial point
+  */
   graphene.point.Point getStart()
   {
     const(graphene_point_t)* _cretval;

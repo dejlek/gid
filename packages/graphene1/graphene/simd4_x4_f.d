@@ -5,6 +5,7 @@ import graphene.c.functions;
 import graphene.c.types;
 import graphene.types;
 
+/** */
 class Simd4X4F
 {
   graphene_simd4x4f_t cInstance;

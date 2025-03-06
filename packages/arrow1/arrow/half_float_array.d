@@ -7,6 +7,7 @@ import arrow.numeric_array;
 import arrow.types;
 import gid.gid;
 
+/** */
 class HalfFloatArray : arrow.numeric_array.NumericArray
 {
 
@@ -26,6 +27,7 @@ class HalfFloatArray : arrow.numeric_array.NumericArray
     return getType();
   }
 
+  /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowHalfFloatArray* _cretval;
@@ -33,6 +35,7 @@ class HalfFloatArray : arrow.numeric_array.NumericArray
     this(_cretval, Yes.Take);
   }
 
+  /** */
   ushort getValue(long i)
   {
     ushort _retval;
@@ -40,6 +43,7 @@ class HalfFloatArray : arrow.numeric_array.NumericArray
     return _retval;
   }
 
+  /** */
   ushort[] getValues()
   {
     const(ushort)* _cretval;

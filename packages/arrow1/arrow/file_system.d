@@ -12,6 +12,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class FileSystem : gobject.object.ObjectG
 {
 
@@ -32,14 +33,14 @@ class FileSystem : gobject.object.ObjectG
   }
 
   /**
-   * This is a factory function to create a specific #GArrowFileSystem
-   * object.
-   * Params:
-   *   uri = An URI to specify file system with options. If you only have an
-   *     absolute path, [glib.global.filenameToUri] will help you.
-   * Returns: The newly created file system
-   *   that is an object of a subclass of #GArrowFileSystem.
-   */
+      This is a factory function to create a specific #GArrowFileSystem
+    object.
+    Params:
+      uri =       An URI to specify file system with options. If you only have an
+          absolute path, [glib.global.filenameToUri] will help you.
+    Returns:     The newly created file system
+        that is an object of a subclass of #GArrowFileSystem.
+  */
   static arrow.file_system.FileSystem create(string uri)
   {
     GArrowFileSystem* _cretval;
@@ -53,14 +54,14 @@ class FileSystem : gobject.object.ObjectG
   }
 
   /**
-   * Copy a file.
-   * If the destination exists and is a directory, an error is returned.
-   * Otherwise, it is replaced.
-   * Params:
-   *   src = The path of the source file.
-   *   dest = The path of the destination.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Copy a file.
+    If the destination exists and is a directory, an error is returned.
+    Otherwise, it is replaced.
+    Params:
+      src =       The path of the source file.
+      dest =       The path of the destination.
+    Returns:     true on success, false if there was an error.
+  */
   bool copyFile(string src, string dest)
   {
     bool _retval;
@@ -74,13 +75,13 @@ class FileSystem : gobject.object.ObjectG
   }
 
   /**
-   * Create a directory and subdirectories.
-   * This function succeeds if the directory already exists.
-   * Params:
-   *   path = The paths of the directory.
-   *   recursive = Whether creating directory recursively or not.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Create a directory and subdirectories.
+    This function succeeds if the directory already exists.
+    Params:
+      path =       The paths of the directory.
+      recursive =       Whether creating directory recursively or not.
+    Returns:     true on success, false if there was an error.
+  */
   bool createDir(string path, bool recursive)
   {
     bool _retval;
@@ -93,11 +94,11 @@ class FileSystem : gobject.object.ObjectG
   }
 
   /**
-   * Delete a directory and its contents, recursively.
-   * Params:
-   *   path = The paths of the directory.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Delete a directory and its contents, recursively.
+    Params:
+      path =       The paths of the directory.
+    Returns:     true on success, false if there was an error.
+  */
   bool deleteDir(string path)
   {
     bool _retval;
@@ -110,14 +111,14 @@ class FileSystem : gobject.object.ObjectG
   }
 
   /**
-   * Delete a directory's contents, recursively. Like
-   * [arrow.file_system.FileSystem.deleteDir], but doesn't delete the directory
-   * itself. Passing an empty path $(LPAREN)`""`$(RPAREN) will wipe the entire file
-   * system tree.
-   * Params:
-   *   path = The paths of the directory.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Delete a directory's contents, recursively. Like
+    [arrow.file_system.FileSystem.deleteDir], but doesn't delete the directory
+    itself. Passing an empty path (`""`) will wipe the entire file
+    system tree.
+    Params:
+      path =       The paths of the directory.
+    Returns:     true on success, false if there was an error.
+  */
   bool deleteDirContents(string path)
   {
     bool _retval;
@@ -130,11 +131,11 @@ class FileSystem : gobject.object.ObjectG
   }
 
   /**
-   * Delete a file.
-   * Params:
-   *   path = The paths of the file to be delete.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Delete a file.
+    Params:
+      path =       The paths of the file to be delete.
+    Returns:     true on success, false if there was an error.
+  */
   bool deleteFile(string path)
   {
     bool _retval;
@@ -147,11 +148,11 @@ class FileSystem : gobject.object.ObjectG
   }
 
   /**
-   * Delete many files.
-   * Params:
-   *   paths = The paths of the files to be delete.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Delete many files.
+    Params:
+      paths =       The paths of the files to be delete.
+    Returns:     true on success, false if there was an error.
+  */
   bool deleteFiles(string[] paths)
   {
     bool _retval;
@@ -172,16 +173,17 @@ class FileSystem : gobject.object.ObjectG
   }
 
   /**
-   * Get information for the given target.
-   * Any symlink is automatically dereferenced, recursively.
-   * A non-existing or unreachable file returns an OK status and has
-   * a #GArrowFileType of value %GARROW_FILE_TYPE_NOT_FOUND.
-   * An error status indicates a truly exceptional condition
-   * $(LPAREN)low-level I/O error, etc.$(RPAREN).
-   * Params:
-   *   path = The path of the target.
-   * Returns: A #GArrowFileInfo.
-   */
+      Get information for the given target.
+    
+    Any symlink is automatically dereferenced, recursively.
+    A non-existing or unreachable file returns an OK status and has
+    a #GArrowFileType of value [arrow.types.FileType.NotFound].
+    An error status indicates a truly exceptional condition
+    (low-level I/O error, etc.).
+    Params:
+      path =       The path of the target.
+    Returns:     A #GArrowFileInfo.
+  */
   arrow.file_info.FileInfo getFileInfo(string path)
   {
     GArrowFileInfo* _cretval;
@@ -195,12 +197,12 @@ class FileSystem : gobject.object.ObjectG
   }
 
   /**
-   * Get information same as [arrow.file_system.FileSystem.getFileInfo]
-   * for the given many targets at once.
-   * Params:
-   *   paths = The paths of the targets.
-   * Returns: A list of #GArrowFileInfo.
-   */
+      Get information same as [arrow.file_system.FileSystem.getFileInfo]
+    for the given many targets at once.
+    Params:
+      paths =       The paths of the targets.
+    Returns:     A list of #GArrowFileInfo.
+  */
   arrow.file_info.FileInfo[] getFileInfosPaths(string[] paths)
   {
     GList* _cretval;
@@ -222,14 +224,15 @@ class FileSystem : gobject.object.ObjectG
   }
 
   /**
-   * Get information same as [arrow.file_system.FileSystem.getFileInfo]
-   * according to a selector.
-   * The selector's base directory will not be part of the results,
-   * even if it exists.
-   * Params:
-   *   fileSelector = A #GArrowFileSelector.
-   * Returns: A list of #GArrowFileInfo.
-   */
+      Get information same as [arrow.file_system.FileSystem.getFileInfo]
+    according to a selector.
+    
+    The selector's base directory will not be part of the results,
+    even if it exists.
+    Params:
+      fileSelector =       A #GArrowFileSelector.
+    Returns:     A list of #GArrowFileInfo.
+  */
   arrow.file_info.FileInfo[] getFileInfosSelector(arrow.file_selector.FileSelector fileSelector)
   {
     GList* _cretval;
@@ -241,6 +244,7 @@ class FileSystem : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   string getTypeName()
   {
     char* _cretval;
@@ -250,16 +254,18 @@ class FileSystem : gobject.object.ObjectG
   }
 
   /**
-   * Move / rename a file or a directory.
-   * If the destination exists:
-   * - if it is a non-empty directory, an error is returned
-   * - otherwise, if it has the same type as the source, it is replaced
-   * - otherwise, behavior is unspecified $(LPAREN)implementation-dependent$(RPAREN).
-   * Params:
-   *   src = The path of the source file.
-   *   dest = The path of the destination.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Move / rename a file or a directory.
+    If the destination exists:
+    $(LIST
+      * if it is a non-empty directory, an error is returned
+      * otherwise, if it has the same type as the source, it is replaced
+      * otherwise, behavior is unspecified (implementation-dependent).
+    )
+    Params:
+      src =       The path of the source file.
+      dest =       The path of the destination.
+    Returns:     true on success, false if there was an error.
+  */
   bool move(string src, string dest)
   {
     bool _retval;
@@ -273,13 +279,13 @@ class FileSystem : gobject.object.ObjectG
   }
 
   /**
-   * Open an output stream for appending.
-   * If the target doesn't exist, a new empty file is created.
-   * Params:
-   *   path = The path of the output stream.
-   * Returns: A newly created #GArrowOutputStream
-   *   for appending.
-   */
+      Open an output stream for appending.
+    If the target doesn't exist, a new empty file is created.
+    Params:
+      path =       The path of the output stream.
+    Returns:     A newly created #GArrowOutputStream
+        for appending.
+  */
   arrow.output_stream.OutputStream openAppendStream(string path)
   {
     GArrowOutputStream* _cretval;
@@ -293,12 +299,12 @@ class FileSystem : gobject.object.ObjectG
   }
 
   /**
-   * Open an input file for random access reading.
-   * Params:
-   *   path = The path of the input file.
-   * Returns: A newly created
-   *   #GArrowSeekableInputStream.
-   */
+      Open an input file for random access reading.
+    Params:
+      path =       The path of the input file.
+    Returns:     A newly created
+        #GArrowSeekableInputStream.
+  */
   arrow.seekable_input_stream.SeekableInputStream openInputFile(string path)
   {
     GArrowSeekableInputStream* _cretval;
@@ -312,12 +318,12 @@ class FileSystem : gobject.object.ObjectG
   }
 
   /**
-   * Open an input stream for sequential reading.
-   * Params:
-   *   path = The path of the input stream.
-   * Returns: A newly created
-   *   #GArrowInputStream.
-   */
+      Open an input stream for sequential reading.
+    Params:
+      path =       The path of the input stream.
+    Returns:     A newly created
+        #GArrowInputStream.
+  */
   arrow.input_stream.InputStream openInputStream(string path)
   {
     GArrowInputStream* _cretval;
@@ -331,13 +337,13 @@ class FileSystem : gobject.object.ObjectG
   }
 
   /**
-   * Open an output stream for sequential writing.
-   * If the target already exists, the existing data is truncated.
-   * Params:
-   *   path = The path of the output stream.
-   * Returns: A newly created
-   *   #GArrowOutputStream.
-   */
+      Open an output stream for sequential writing.
+    If the target already exists, the existing data is truncated.
+    Params:
+      path =       The path of the output stream.
+    Returns:     A newly created
+        #GArrowOutputStream.
+  */
   arrow.output_stream.OutputStream openOutputStream(string path)
   {
     GArrowOutputStream* _cretval;

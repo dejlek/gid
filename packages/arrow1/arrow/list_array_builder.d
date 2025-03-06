@@ -9,6 +9,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class ListArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
@@ -28,6 +29,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
     return getType();
   }
 
+  /** */
   this(arrow.list_data_type.ListDataType dataType)
   {
     GArrowListArrayBuilder* _cretval;
@@ -38,6 +40,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool append()
   {
     bool _retval;
@@ -48,6 +51,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   bool appendValue()
   {
     bool _retval;
@@ -58,6 +62,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   arrow.array_builder.ArrayBuilder getValueBuilder()
   {
     GArrowArrayBuilder* _cretval;

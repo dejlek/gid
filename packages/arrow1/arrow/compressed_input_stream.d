@@ -12,6 +12,7 @@ import arrow.types;
 import gid.gid;
 import glib.error;
 
+/** */
 class CompressedInputStream : arrow.input_stream.InputStream
 {
 
@@ -31,6 +32,7 @@ class CompressedInputStream : arrow.input_stream.InputStream
     return getType();
   }
 
+  /** */
   this(arrow.codec.Codec codec, arrow.input_stream.InputStream raw)
   {
     GArrowCompressedInputStream* _cretval;

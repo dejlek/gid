@@ -9,6 +9,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class MapArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
@@ -28,6 +29,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
     return getType();
   }
 
+  /** */
   this(arrow.map_data_type.MapDataType dataType)
   {
     GArrowMapArrayBuilder* _cretval;
@@ -38,6 +40,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
     this(_cretval, Yes.Take);
   }
 
+  /** */
   bool appendValue()
   {
     bool _retval;
@@ -49,16 +52,16 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-   * Append multiple values at once. It's more efficient than multiple
-   * `append` and `append_null` calls.
-   * Params:
-   *   offsets = The array of signed int.
-   *   isValids = The array of
-   *     boolean that shows whether the Nth value is valid or not. If the
-   *     Nth `is_valids` is %TRUE, the Nth `values` is valid value. Otherwise
-   *     the Nth value is null value.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append multiple values at once. It's more efficient than multiple
+    `append` and `append_null` calls.
+    Params:
+      offsets =       The array of signed int.
+      isValids =       The array of
+          boolean that shows whether the Nth value is valid or not. If the
+          Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
+          the Nth value is null value.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendValues(int[] offsets, bool[] isValids = null)
   {
     bool _retval;
@@ -79,6 +82,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   arrow.array_builder.ArrayBuilder getItemBuilder()
   {
     GArrowArrayBuilder* _cretval;
@@ -87,6 +91,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   arrow.array_builder.ArrayBuilder getKeyBuilder()
   {
     GArrowArrayBuilder* _cretval;
@@ -95,6 +100,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
     return _retval;
   }
 
+  /** */
   arrow.array_builder.ArrayBuilder getValueBuilder()
   {
     GArrowArrayBuilder* _cretval;

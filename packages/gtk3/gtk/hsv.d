@@ -12,14 +12,15 @@ import gtk.types;
 import gtk.widget;
 
 /**
- * #GtkHSV is the “color wheel” part of a complete color selector widget.
- * It allows to select a color by determining its HSV components in an
- * intuitive way. Moving the selection around the outer ring changes the hue,
- * and moving the selection point inside the inner triangle changes value and
- * saturation.
- * #GtkHSV has been deprecated together with #GtkColorSelection, where
- * it was used.
- */
+    #GtkHSV is the “color wheel” part of a complete color selector widget.
+  It allows to select a color by determining its HSV components in an
+  intuitive way. Moving the selection around the outer ring changes the hue,
+  and moving the selection point inside the inner triangle changes value and
+  saturation.
+  
+  #GtkHSV has been deprecated together with #GtkColorSelection, where
+  it was used.
+*/
 class HSV : gtk.widget.Widget
 {
 
@@ -40,9 +41,9 @@ class HSV : gtk.widget.Widget
   }
 
   /**
-   * Creates a new HSV color selector.
-   * Returns: A newly-created HSV color selector.
-   */
+      Creates a new HSV color selector.
+    Returns:     A newly-created HSV color selector.
+  */
   this()
   {
     GtkWidget* _cretval;
@@ -51,55 +52,56 @@ class HSV : gtk.widget.Widget
   }
 
   /**
-   * Converts a color from HSV space to RGB.
-   * Input values must be in the [0.0, 1.0] range;
-   * output values will be in the same range.
-   * Params:
-   *   h = Hue
-   *   s = Saturation
-   *   v = Value
-   *   r = Return value for the red component
-   *   g = Return value for the green component
-   *   b = Return value for the blue component
-   */
+      Converts a color from HSV space to RGB.
+    
+    Input values must be in the [0.0, 1.0] range;
+    output values will be in the same range.
+    Params:
+      h =       Hue
+      s =       Saturation
+      v =       Value
+      r =       Return value for the red component
+      g =       Return value for the green component
+      b =       Return value for the blue component
+  */
   static void toRgb(double h, double s, double v, out double r, out double g, out double b)
   {
     gtk_hsv_to_rgb(h, s, v, cast(double*)&r, cast(double*)&g, cast(double*)&b);
   }
 
   /**
-   * Queries the current color in an HSV color selector.
-   * Returned values will be in the [0.0, 1.0] range.
-   * Params:
-   *   h = Return value for the hue
-   *   s = Return value for the saturation
-   *   v = Return value for the value
-   */
+      Queries the current color in an HSV color selector.
+    Returned values will be in the [0.0, 1.0] range.
+    Params:
+      h =       Return value for the hue
+      s =       Return value for the saturation
+      v =       Return value for the value
+  */
   void getColor(out double h, out double s, out double v)
   {
     gtk_hsv_get_color(cast(GtkHSV*)cPtr, cast(double*)&h, cast(double*)&s, cast(double*)&v);
   }
 
   /**
-   * Queries the size and ring width of an HSV color selector.
-   * Params:
-   *   size = Return value for the diameter of the hue ring
-   *   ringWidth = Return value for the width of the hue ring
-   */
+      Queries the size and ring width of an HSV color selector.
+    Params:
+      size =       Return value for the diameter of the hue ring
+      ringWidth =       Return value for the width of the hue ring
+  */
   void getMetrics(out int size, out int ringWidth)
   {
     gtk_hsv_get_metrics(cast(GtkHSV*)cPtr, cast(int*)&size, cast(int*)&ringWidth);
   }
 
   /**
-   * An HSV color selector can be said to be adjusting if multiple rapid
-   * changes are being made to its value, for example, when the user is
-   * adjusting the value with the mouse. This function queries whether
-   * the HSV color selector is being adjusted or not.
-   * Returns: %TRUE if clients can ignore changes to the color value,
-   *   since they may be transitory, or %FALSE if they should consider
-   *   the color value status to be final.
-   */
+      An HSV color selector can be said to be adjusting if multiple rapid
+    changes are being made to its value, for example, when the user is
+    adjusting the value with the mouse. This function queries whether
+    the HSV color selector is being adjusted or not.
+    Returns:     true if clients can ignore changes to the color value,
+          since they may be transitory, or false if they should consider
+          the color value status to be final.
+  */
   bool isAdjusting()
   {
     bool _retval;
@@ -108,39 +110,42 @@ class HSV : gtk.widget.Widget
   }
 
   /**
-   * Sets the current color in an HSV color selector.
-   * Color component values must be in the [0.0, 1.0] range.
-   * Params:
-   *   h = Hue
-   *   s = Saturation
-   *   v = Value
-   */
+      Sets the current color in an HSV color selector.
+    Color component values must be in the [0.0, 1.0] range.
+    Params:
+      h =       Hue
+      s =       Saturation
+      v =       Value
+  */
   void setColor(double h, double s, double v)
   {
     gtk_hsv_set_color(cast(GtkHSV*)cPtr, h, s, v);
   }
 
   /**
-   * Sets the size and ring width of an HSV color selector.
-   * Params:
-   *   size = Diameter for the hue ring
-   *   ringWidth = Width of the hue ring
-   */
+      Sets the size and ring width of an HSV color selector.
+    Params:
+      size =       Diameter for the hue ring
+      ringWidth =       Width of the hue ring
+  */
   void setMetrics(int size, int ringWidth)
   {
     gtk_hsv_set_metrics(cast(GtkHSV*)cPtr, size, ringWidth);
   }
 
+  /** */
   alias ChangedCallbackDlg = void delegate(gtk.hsv.HSV hSV);
+
+  /** ditto */
   alias ChangedCallbackFunc = void function(gtk.hsv.HSV hSV);
 
   /**
-   * Connect to Changed signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Changed signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
@@ -156,16 +161,19 @@ class HSV : gtk.widget.Widget
     return connectSignalClosure("changed", closure, after);
   }
 
+  /** */
   alias MoveCallbackDlg = void delegate(gtk.types.DirectionType object, gtk.hsv.HSV hSV);
+
+  /** ditto */
   alias MoveCallbackFunc = void function(gtk.types.DirectionType object, gtk.hsv.HSV hSV);
 
   /**
-   * Connect to Move signal.
-   * Params:
-   *   callback = signal callback delegate or function to connect
-   *   after = Yes.After to execute callback after default handler, No.After to execute before (default)
-   * Returns: Signal ID
-   */
+    Connect to Move signal.
+    Params:
+      callback = signal callback delegate or function to connect
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+    Returns: Signal ID
+  */
   ulong connectMove(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveCallbackDlg) || is(T : MoveCallbackFunc))
   {

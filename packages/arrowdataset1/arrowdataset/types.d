@@ -5,30 +5,39 @@ import arrowdataset.c.types;
 import gid.gid;
 
 
-// Enums
-alias SegmentEncoding = GADatasetSegmentEncoding;
+/**
+    They are corresponding to `arrow::dataset::SegmentEncoding` values.
+*/
+enum SegmentEncoding
+{
+  /**
+      No encoding.
+  */
+  None = 0,
+
+  /**
+      Segment values are URL-encoded.
+  */
+  Uri = 1,
+}
 
 /**
- * The major version.
- */
+    The major version.
+*/
 enum VERSION_MAJOR = 20;
 
-
 /**
- * The micro version.
- */
+    The micro version.
+*/
 enum VERSION_MICRO = 0;
 
-
 /**
- * The minor version.
- */
+    The minor version.
+*/
 enum VERSION_MINOR = 0;
 
-
 /**
- * The version tag. Normally, it's an empty string. It's "SNAPSHOT"
- * for snapshot version.
- */
+    The version tag. Normally, it's an empty string. It's "SNAPSHOT"
+  for snapshot version.
+*/
 enum VERSION_TAG = "SNAPSHOT";
-

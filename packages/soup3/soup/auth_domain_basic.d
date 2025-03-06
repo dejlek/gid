@@ -9,10 +9,11 @@ import soup.server_message;
 import soup.types;
 
 /**
- * Server-side "Basic" authentication.
- * #SoupAuthDomainBasic handles the server side of HTTP "Basic" $(LPAREN)ie,
- * cleartext password$(RPAREN) authentication.
- */
+    Server-side "Basic" authentication.
+  
+  #SoupAuthDomainBasic handles the server side of HTTP "Basic" (ie,
+  cleartext password) authentication.
+*/
 class AuthDomainBasic : soup.auth_domain.AuthDomain
 {
 
@@ -33,18 +34,20 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
   }
 
   /**
-   * Sets the callback that domain will use to authenticate incoming
-   * requests.
-   * For each request containing authorization, domain will invoke the callback,
-   * and then either accept or reject the request based on callback's return
-   * value.
-   * You can also set the auth callback by setting the
-   * propertyAuthDomainBasic:auth-callback and
-   * propertyAuthDomainBasic:auth-data properties, which can also be used to
-   * set the callback at construct time.
-   * Params:
-   *   callback = the callback
-   */
+      Sets the callback that domain will use to authenticate incoming
+    requests.
+    
+    For each request containing authorization, domain will invoke the callback,
+    and then either accept or reject the request based on callback's return
+    value.
+    
+    You can also set the auth callback by setting the
+    `propertyAuthDomainBasic:auth-callback` and
+    `propertyAuthDomainBasic:auth-data` properties, which can also be used to
+    set the callback at construct time.
+    Params:
+      callback =       the callback
+  */
   void setAuthCallback(soup.types.AuthDomainBasicAuthCallback callback)
   {
     extern(C) bool _callbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password, void* userData)

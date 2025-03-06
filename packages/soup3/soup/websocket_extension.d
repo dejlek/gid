@@ -9,9 +9,10 @@ import soup.c.types;
 import soup.types;
 
 /**
- * A WebSocket extension
- * #SoupWebsocketExtension is the base class for WebSocket extension objects.
- */
+    A WebSocket extension
+  
+  #SoupWebsocketExtension is the base class for WebSocket extension objects.
+*/
 class WebsocketExtension : gobject.object.ObjectG
 {
 
@@ -32,11 +33,12 @@ class WebsocketExtension : gobject.object.ObjectG
   }
 
   /**
-   * Get the parameters strings to be included in the request header.
-   * If the extension doesn't include any parameter in the request, this function
-   * returns %NULL.
-   * Returns: a new allocated string with the parameters
-   */
+      Get the parameters strings to be included in the request header.
+    
+    If the extension doesn't include any parameter in the request, this function
+    returns null.
+    Returns:     a new allocated string with the parameters
+  */
   string getRequestParams()
   {
     char* _cretval;
@@ -46,11 +48,12 @@ class WebsocketExtension : gobject.object.ObjectG
   }
 
   /**
-   * Get the parameters strings to be included in the response header.
-   * If the extension doesn't include any parameter in the response, this function
-   * returns %NULL.
-   * Returns: a new allocated string with the parameters
-   */
+      Get the parameters strings to be included in the response header.
+    
+    If the extension doesn't include any parameter in the response, this function
+    returns null.
+    Returns:     a new allocated string with the parameters
+  */
   string getResponseParams()
   {
     char* _cretval;
@@ -60,16 +63,18 @@ class WebsocketExtension : gobject.object.ObjectG
   }
 
   /**
-   * Process a message after it's received.
-   * If the payload isn't changed the given payload is just returned, otherwise
-   * [glib.bytes.Bytes.unref] is called on the given payload and a new
-   * [glib.bytes.Bytes] is returned with the new data.
-   * Extensions using reserved bits of the header will reset them in header.
-   * Params:
-   *   header = the message header
-   *   payload = the payload data
-   * Returns: the message payload data, or %NULL in case of error
-   */
+      Process a message after it's received.
+    
+    If the payload isn't changed the given payload is just returned, otherwise
+    [glib.bytes.Bytes.unref] is called on the given payload and a new
+    [glib.bytes.Bytes] is returned with the new data.
+    
+    Extensions using reserved bits of the header will reset them in header.
+    Params:
+      header =       the message header
+      payload =       the payload data
+    Returns:     the message payload data, or null in case of error
+  */
   glib.bytes.Bytes processIncomingMessage(ref ubyte header, glib.bytes.Bytes payload)
   {
     GBytes* _cretval;
@@ -82,16 +87,18 @@ class WebsocketExtension : gobject.object.ObjectG
   }
 
   /**
-   * Process a message before it's sent.
-   * If the payload isn't changed the given payload is just returned, otherwise
-   * methodGlib.Bytes.unref is called on the given payload and a new
-   * [glib.bytes.Bytes] is returned with the new data.
-   * Extensions using reserved bits of the header will change them in header.
-   * Params:
-   *   header = the message header
-   *   payload = the payload data
-   * Returns: the message payload data, or %NULL in case of error
-   */
+      Process a message before it's sent.
+    
+    If the payload isn't changed the given payload is just returned, otherwise
+    `methodGlib.Bytes.unref` is called on the given payload and a new
+    [glib.bytes.Bytes] is returned with the new data.
+    
+    Extensions using reserved bits of the header will change them in header.
+    Params:
+      header =       the message header
+      payload =       the payload data
+    Returns:     the message payload data, or null in case of error
+  */
   glib.bytes.Bytes processOutgoingMessage(ref ubyte header, glib.bytes.Bytes payload)
   {
     GBytes* _cretval;

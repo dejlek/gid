@@ -9,6 +9,7 @@ import gid.gid;
 import glib.error;
 import gobject.object;
 
+/** */
 class ArrayBuilder : gobject.object.ObjectG
 {
 
@@ -28,6 +29,7 @@ class ArrayBuilder : gobject.object.ObjectG
     return getType();
   }
 
+  /** */
   bool appendEmptyValue()
   {
     bool _retval;
@@ -39,12 +41,12 @@ class ArrayBuilder : gobject.object.ObjectG
   }
 
   /**
-   * Append multiple empty values at once. It's more efficient than multiple
-   * [arrow.array_builder.ArrayBuilder.appendEmptyValue] calls.
-   * Params:
-   *   n = The number of null values to be appended.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append multiple empty values at once. It's more efficient than multiple
+    [arrow.array_builder.ArrayBuilder.appendEmptyValue] calls.
+    Params:
+      n =       The number of null values to be appended.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendEmptyValues(long n)
   {
     bool _retval;
@@ -55,6 +57,7 @@ class ArrayBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool appendNull()
   {
     bool _retval;
@@ -66,12 +69,12 @@ class ArrayBuilder : gobject.object.ObjectG
   }
 
   /**
-   * Append multiple nulls at once. It's more efficient than multiple
-   * [arrow.array_builder.ArrayBuilder.appendNull] calls.
-   * Params:
-   *   n = The number of null values to be appended.
-   * Returns: %TRUE on success, %FALSE if there was an error.
-   */
+      Append multiple nulls at once. It's more efficient than multiple
+    [arrow.array_builder.ArrayBuilder.appendNull] calls.
+    Params:
+      n =       The number of null values to be appended.
+    Returns:     true on success, false if there was an error.
+  */
   bool appendNulls(long n)
   {
     bool _retval;
@@ -82,6 +85,7 @@ class ArrayBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array.Array finish()
   {
     GArrowArray* _cretval;
@@ -93,6 +97,7 @@ class ArrayBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getCapacity()
   {
     long _retval;
@@ -100,6 +105,7 @@ class ArrayBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array_builder.ArrayBuilder getChild(int i)
   {
     GArrowArrayBuilder* _cretval;
@@ -108,6 +114,7 @@ class ArrayBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.array_builder.ArrayBuilder[] getChildren()
   {
     GList* _cretval;
@@ -116,6 +123,7 @@ class ArrayBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getLength()
   {
     long _retval;
@@ -123,6 +131,7 @@ class ArrayBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   long getNNulls()
   {
     long _retval;
@@ -130,6 +139,7 @@ class ArrayBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.data_type.DataType getValueDataType()
   {
     GArrowDataType* _cretval;
@@ -138,6 +148,7 @@ class ArrayBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   arrow.types.Type getValueType()
   {
     GArrowType _cretval;
@@ -146,6 +157,7 @@ class ArrayBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   bool reserve(long additionalCapacity)
   {
     bool _retval;
@@ -156,11 +168,13 @@ class ArrayBuilder : gobject.object.ObjectG
     return _retval;
   }
 
+  /** */
   void reset()
   {
     garrow_array_builder_reset(cast(GArrowArrayBuilder*)cPtr);
   }
 
+  /** */
   bool resize(long capacity)
   {
     bool _retval;

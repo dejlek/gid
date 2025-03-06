@@ -6,8 +6,8 @@ import harfbuzz.c.types;
 import harfbuzz.types;
 
 /**
- * Structure representing a name ID in a particular language.
- */
+    Structure representing a name ID in a particular language.
+*/
 class OtNameEntry
 {
   hb_ot_name_entry_t cInstance;

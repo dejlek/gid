@@ -24,11 +24,11 @@ enum GidOwnership
 }
 
 /**
- * Prevent the garbage collector from freeing or moving a memory region.
- * Necessary when passing data to C which might not have any remaining pointers to it in D heap memory.
- * Params:
- *   ptr = Pointer to anywhere inside the region to prevent collection/move of
- */
+* Prevent the garbage collector from freeing or moving a memory region.
+* Necessary when passing data to C which might not have any remaining pointers to it in D heap memory.
+* Params:
+*   ptr = Pointer to anywhere inside the region to prevent collection/move of
+*/
 void ptrFreezeGC(const void* ptr)
 {
   GC.addRoot(ptr);
@@ -36,10 +36,10 @@ void ptrFreezeGC(const void* ptr)
 }
 
 /**
- * Re-enable garbage collection and moving of a memory region which was frozen by ptrFreezeGC().
- * Params:
- *   ptr = Pointer to anywhere inside the region to re-enable garbage collection of
- */
+* Re-enable garbage collection and moving of a memory region which was frozen by ptrFreezeGC().
+* Params:
+*   ptr = Pointer to anywhere inside the region to re-enable garbage collection of
+*/
 void ptrThawGC(const void* ptr)
 {
   GC.removeRoot(ptr);
@@ -49,10 +49,10 @@ void ptrThawGC(const void* ptr)
 }
 
 /**
- * GDestroyNotify callback which can be used to re-enable garbage collection and moving for a memory region frozen by ptrFreezeGC().
- * Params:
- *   ptr = The data to re-enable garbage collection and moving of.
- */
+* GDestroyNotify callback which can be used to re-enable garbage collection and moving for a memory region frozen by ptrFreezeGC().
+* Params:
+*   ptr = The data to re-enable garbage collection and moving of.
+*/
 extern(C) void ptrThawDestroyNotify(void* ptr)
 {
   GC.removeRoot(ptr);
@@ -60,11 +60,11 @@ extern(C) void ptrThawDestroyNotify(void* ptr)
 }
 
 /**
- * Freeze a delegate to C heap memory and pin the context in the GC.
- * Params:
- *   dlg = Pointer to the delegate to freeze
- * Returns: The duplicated delegate in C heap memory
- */
+* Freeze a delegate to C heap memory and pin the context in the GC.
+* Params:
+*   dlg = Pointer to the delegate to freeze
+* Returns: The duplicated delegate in C heap memory
+*/
 void* freezeDelegate(void* dlg)
 {
   auto dlgCast = cast(void delegate()*)dlg;
@@ -73,10 +73,10 @@ void* freezeDelegate(void* dlg)
 }
 
 /**
- * Destroy a C heap memory allocated duplicated delegate and unpin context in the GC which was created with freezeDelegate().
- * Params:
- *   dlg = The C heap memory allocated delegate
- */
+* Destroy a C heap memory allocated duplicated delegate and unpin context in the GC which was created with freezeDelegate().
+* Params:
+*   dlg = The C heap memory allocated delegate
+*/
 extern(C) void thawDelegate(void* dlg)
 {
   ptrThawGC((cast(void delegate()*)dlg).ptr);
@@ -84,12 +84,12 @@ extern(C) void thawDelegate(void* dlg)
 }
 
 /**
- * Convert a D string to a zero terminated C string, with allocation parameter.
- * Params:
- *   dstr = String to convert
- *   alloc = Yes.Alloc if string is being transferred to C (use g_malloc), No.Alloc for D allocation (no transfer)
- * Returns: Zero terminated C string (D or C allocation)
- */
+* Convert a D string to a zero terminated C string, with allocation parameter.
+* Params:
+*   dstr = String to convert
+*   alloc = Yes.Alloc if string is being transferred to C (use g_malloc), No.Alloc for D allocation (no transfer)
+* Returns: Zero terminated C string (D or C allocation)
+*/
 char* toCString(string dstr, Flag!"Alloc" alloc)
 {
   if (dstr is null)
@@ -111,12 +111,12 @@ char* toCString(string dstr, Flag!"Alloc" alloc)
 }
 
 /**
- * Convert a C string to a D string, with parameter to consume (free) the C string with g_free().
- * Params:
- *   cstr = Zero terminated C string
- *   free = Yes.Free to free the C string with g_free, No.Free to just copy it
- * Returns: The D string copy
- */
+* Convert a C string to a D string, with parameter to consume (free) the C string with g_free().
+* Params:
+*   cstr = Zero terminated C string
+*   free = Yes.Free to free the C string with g_free, No.Free to just copy it
+* Returns: The D string copy
+*/
 string fromCString(const(char)* cstr, Flag!"Free" free)
 {
   if (!cstr)
@@ -131,22 +131,22 @@ string fromCString(const(char)* cstr, Flag!"Free" free)
 }
 
 /**
- * An alias for g_malloc0 for allocating memory for interfacing with glib.
- */
+* An alias for g_malloc0 for allocating memory for interfacing with glib.
+*/
 alias safeMalloc = g_malloc0;
 
 /**
- * Free a pointer allocated with malloc() but only if it is not null.
- */
+* Free a pointer allocated with malloc() but only if it is not null.
+*/
 alias safeFree = g_free;
 
 /**
- * Duplicate a zero terminate C string.
- * Params:
- *   s = The zero terminated string to duplicate
- * Returns: The duplicate string
- * Throws: OutOfMemoryError
- */
+* Duplicate a zero terminate C string.
+* Params:
+*   s = The zero terminated string to duplicate
+* Returns: The duplicate string
+* Throws: OutOfMemoryError
+*/
 char* strdup(const(char)* s)
 {
   if (!s)
@@ -164,25 +164,25 @@ char* strdup(const(char)* s)
 }
 
 /**
- * Zero a memory area.
- * Params:
- *   p = Pointer to the memory area
- *   len = Length in bytes of memory area
- */
+* Zero a memory area.
+* Params:
+*   p = Pointer to the memory area
+*   len = Length in bytes of memory area
+*/
 void zero(void* p, size_t len)
 {
   memset(p, 0, len);
 }
 
 /**
- * Template to copy a D array for use by C.
- * Params:
- *   T = The array type
- *   alloc = Yes.Alloc to use g_malloc() to allocate the array, No.Alloc to use D memory (defaults to No)
- *   zeroTerm = Yes.ZeroTerminated if the resulting array should be zero terminated (defaults to No)
- *   array = The array to copy
- * Returns: C array or null if array is empty
- */
+* Template to copy a D array for use by C.
+* Params:
+*   T = The array type
+*   alloc = Yes.Alloc to use g_malloc() to allocate the array, No.Alloc to use D memory (defaults to No)
+*   zeroTerm = Yes.ZeroTerminated if the resulting array should be zero terminated (defaults to No)
+*   array = The array to copy
+* Returns: C array or null if array is empty
+*/
 T* arrayDtoC(T, Flag!"Alloc" alloc = No.Alloc, Flag!"ZeroTerm" zeroTerm = No.ZeroTerm)(T[] array)
 {
   if (array.length == 0)
@@ -233,12 +233,12 @@ T* arrayDtoC(T, Flag!"Alloc" alloc = No.Alloc, Flag!"ZeroTerm" zeroTerm = No.Zer
 }
 
 /**
- * Convert a GLib GByteArray to a D array.
- * Params:
- *   ownership = The ownership of the GArray, None (default): do nothing with it, Container: free container only, Full: unref
- *   gByteArray = The GArray instance
- * Returns: D array of the given type
- */
+* Convert a GLib GByteArray to a D array.
+* Params:
+*   ownership = The ownership of the GArray, None (default): do nothing with it, Container: free container only, Full: unref
+*   gByteArray = The GArray instance
+* Returns: D array of the given type
+*/
 ubyte[] gByteArrayToD(GidOwnership ownership = GidOwnership.None)(GByteArray* gByteArray)
 {
   ubyte[] a;
@@ -258,12 +258,12 @@ ubyte[] gByteArrayToD(GidOwnership ownership = GidOwnership.None)(GByteArray* gB
 }
 
 /**
- * Convert a GLib GBytes to a D array.
- * Params:
- *   ownership = The ownership of the GBytes, None (default): do nothing with it, Container/Full: unref
- *   gBytes = The GBytes instance
- * Returns: D array of the given type
- */
+* Convert a GLib GBytes to a D array.
+* Params:
+*   ownership = The ownership of the GBytes, None (default): do nothing with it, Container/Full: unref
+*   gBytes = The GBytes instance
+* Returns: D array of the given type
+*/
 ubyte[] gBytesToD(GidOwnership ownership = GidOwnership.None)(GBytes* gBytes)
 {
   ubyte[] a;
@@ -281,13 +281,13 @@ ubyte[] gBytesToD(GidOwnership ownership = GidOwnership.None)(GBytes* gBytes)
 }
 
 /**
- * Convert a GLib GArray to a D array.
- * Params:
- *   T = The type of elements in the array
- *   ownership = The ownership of the GArray, None (default): do nothing with it, Container: free container only, Full: unref
- *   gArray = The GArray instance
- * Returns: D array of the given type
- */
+* Convert a GLib GArray to a D array.
+* Params:
+*   T = The type of elements in the array
+*   ownership = The ownership of the GArray, None (default): do nothing with it, Container: free container only, Full: unref
+*   gArray = The GArray instance
+* Returns: D array of the given type
+*/
 T[] gArrayGToD(T, GidOwnership ownership = GidOwnership.None)(GArray* gArray)
 if (containerTypeIsSupported!T)
 {
@@ -316,13 +316,13 @@ if (containerTypeIsSupported!T)
 }
 
 /**
- * Convert a GLib GPtrArray to a D array.
- * Params:
- *   T = The type of elements in the pointer array
- *   ownership = The ownership of the GPtrArray, None (default): do nothing with it, Container: free container only, Full: unref
- *   ptrArray = The pointer array instance
- * Returns: D array of the given type
- */
+* Convert a GLib GPtrArray to a D array.
+* Params:
+*   T = The type of elements in the pointer array
+*   ownership = The ownership of the GPtrArray, None (default): do nothing with it, Container: free container only, Full: unref
+*   ptrArray = The pointer array instance
+* Returns: D array of the given type
+*/
 T[] gPtrArrayToD(T, GidOwnership ownership = GidOwnership.None)(GPtrArray* ptrArray)
 if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
 {
@@ -345,13 +345,13 @@ if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
 }
 
 /**
- * Convert a GLib GList to a D array.
- * Params:
- *   T = The type of elements in the list
- *   ownership = The ownership of the GList, None (default): do nothing with it, Container: free list only, Full: free list and items
- *   list = The list
- * Returns: D array of the given type
- */
+* Convert a GLib GList to a D array.
+* Params:
+*   T = The type of elements in the list
+*   ownership = The ownership of the GList, None (default): do nothing with it, Container: free list only, Full: free list and items
+*   list = The list
+* Returns: D array of the given type
+*/
 T[] gListToD(T, GidOwnership ownership = GidOwnership.None)(GList* list)
 if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
 {
@@ -379,13 +379,13 @@ if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
 }
 
 /**
- * Convert a GLib GSList to a D array.
- * Params:
- *   T = The type of elements in the list
- *   ownership = The ownership of the GSList, None (default): do nothing with it, Container: free list only, Full: free list and items
- *   list = The list
- * Returns: D array of the given type
- */
+* Convert a GLib GSList to a D array.
+* Params:
+*   T = The type of elements in the list
+*   ownership = The ownership of the GSList, None (default): do nothing with it, Container: free list only, Full: free list and items
+*   list = The list
+* Returns: D array of the given type
+*/
 T[] gSListToD(T, GidOwnership ownership = GidOwnership.None)(GSList* list)
 if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
 {
@@ -413,14 +413,14 @@ if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
 }
 
 /**
- * Template to convert a GHashTable to a D associative array.
- *   `K`: The key D type
- *   `V`: The value D type
- *   `owned`: Set to true if caller takes ownership of hash (frees it), false to leave it alone (default)
- * Params:
- *   hash = The hash table to convert
- * Returns: The D associative array which is a copy of the data in hash
- */
+* Template to convert a GHashTable to a D associative array.
+*   `K`: The key D type
+*   `V`: The value D type
+*   `owned`: Set to true if caller takes ownership of hash (frees it), false to leave it alone (default)
+* Params:
+*   hash = The hash table to convert
+* Returns: The D associative array which is a copy of the data in hash
+*/
 V[K] gHashTableToD(K, V, GidOwnership ownership = GidOwnership.None)(GHashTable* hash)
 if ((is(K == string) || is(K == const(void)*))
   && (is(V : ObjectG) || is(V == interface) || is(V == string) || is(V == void*)))
@@ -445,11 +445,11 @@ if ((is(K == string) || is(K == const(void)*))
 }
 
 /**
- * Template to convert a D ubyte array to a GByteArray for passing to C functions
- * Params:
- *   a = The D array
- * Returns: New GArray which should be freed with containerFree!() template (if ownership not taken by C code)
- */
+* Template to convert a D ubyte array to a GByteArray for passing to C functions
+* Params:
+*   a = The D array
+* Returns: New GArray which should be freed with containerFree!() template (if ownership not taken by C code)
+*/
 GByteArray* gByteArrayFromD(ubyte[] a)
 {
   auto gByteArray = g_byte_array_sized_new(cast(uint)a.length);
@@ -461,24 +461,24 @@ GByteArray* gByteArrayFromD(ubyte[] a)
 }
 
 /**
- * Template to convert a D ubyte array to a GBytes for passing to C functions
- * Params:
- *   a = The D array
- * Returns: New GBytes which should be freed with containerFree!() template (if ownership not taken by C code)
- */
+* Template to convert a D ubyte array to a GBytes for passing to C functions
+* Params:
+*   a = The D array
+* Returns: New GBytes which should be freed with containerFree!() template (if ownership not taken by C code)
+*/
 GBytes* gBytesFromD(ubyte[] a)
 {
   return g_bytes_new(cast(const(void)*)a.ptr, a.length);
 }
 
 /**
- * Template to convert a D array to a GArray for passing to C functions
- * Params:
- *   T = Type of the array values
- *   zeroTerminated = Set to true to enable zero termination in GArray (defaults to false)
- *   a = The D array
- * Returns: New GArray which should be freed with containerFree!() template (if ownership not taken by C code)
- */
+* Template to convert a D array to a GArray for passing to C functions
+* Params:
+*   T = Type of the array values
+*   zeroTerminated = Set to true to enable zero termination in GArray (defaults to false)
+*   a = The D array
+* Returns: New GArray which should be freed with containerFree!() template (if ownership not taken by C code)
+*/
 GArray* gArrayGFromD(T, bool zeroTerminated = false)(T[] a)
 if (containerTypeIsSupported!T)
 {
@@ -489,7 +489,7 @@ if (containerTypeIsSupported!T)
     extern(C) void clearFunc(void* elem)
     {
       containerFreeItem!T(*cast(void**)elem);
-       *cast(void**)elem = null;
+      *cast(void**)elem = null;
     }
 
     g_array_set_clear_func(gArray, &clearFunc);
@@ -505,13 +505,13 @@ if (containerTypeIsSupported!T)
 }
 
 /**
- * Template to convert a D array to a GPtrArray for passing to C functions
- * Params:
- *   T = Type of the array values
- *   zeroTerminated = Set to true to enable zero termination in GPtrArray (defaults to false)
- *   a = The D array
- * Returns: New GPtrArray which should be freed with containerFree!() template (if ownership not taken by C code)
- */
+* Template to convert a D array to a GPtrArray for passing to C functions
+* Params:
+*   T = Type of the array values
+*   zeroTerminated = Set to true to enable zero termination in GPtrArray (defaults to false)
+*   a = The D array
+* Returns: New GPtrArray which should be freed with containerFree!() template (if ownership not taken by C code)
+*/
 GPtrArray* gPtrArrayFromD(T, bool zeroTerminated = false)(T[] a)
 if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
 {
@@ -536,12 +536,12 @@ if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
 }
 
 /**
- * Template to convert a D array to a GList for passing to C functions
- * Params:
- *   T = Type of the array values
- *   a = The D array
- * Returns: New GList which should be freed with containerFree!() template (if ownership not taken by C code)
- */
+* Template to convert a D array to a GList for passing to C functions
+* Params:
+*   T = Type of the array values
+*   a = The D array
+* Returns: New GList which should be freed with containerFree!() template (if ownership not taken by C code)
+*/
 GList* gListFromD(T)(T[] a)
 if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
 {
@@ -557,13 +557,13 @@ if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
 }
 
 /**
- * Template to convert a D array to a GSList for passing to C functions
- * Params:
- *   T = Type of the array values
- *   zeroTerminated = Set to true to enable zero termination in GArray (defaults to false)
- *   a = The D array
- * Returns: New GSList which should be freed with containerFree!() template (if ownership not taken by C code)
- */
+* Template to convert a D array to a GSList for passing to C functions
+* Params:
+*   T = Type of the array values
+*   zeroTerminated = Set to true to enable zero termination in GArray (defaults to false)
+*   a = The D array
+* Returns: New GSList which should be freed with containerFree!() template (if ownership not taken by C code)
+*/
 GSList* gSListFromD(T)(T[] a)
 if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
 {
@@ -579,13 +579,13 @@ if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
 }
 
 /**
- * Convert a D map to a GHashTable.
- * Params:
- *   K = The key type
- *   V = The value type
- *   map = The D map
- * Returns: A newly allocated GHashTable.
- */
+* Convert a D map to a GHashTable.
+* Params:
+*   K = The key type
+*   V = The value type
+*   map = The D map
+* Returns: A newly allocated GHashTable.
+*/
 GHashTable* gHashTableFromD(K, V)(V[K] map)
 if ((is(K == string) || is(K == const(void)*))
   && (is(V : ObjectG) || is(V == interface) || is(V == string) || is(V == void*)))
@@ -618,22 +618,22 @@ if ((is(K == string) || is(K == const(void)*))
 }
 
 /**
- * Check if a type is a Boxed or Reffed type
- * Params:
- *   T = Type to check
- * Returns: true if type is a boxed or reffed type
- */
+* Check if a type is a Boxed or Reffed type
+* Params:
+*   T = Type to check
+* Returns: true if type is a boxed or reffed type
+*/
 bool isTypeBoxedOrReffed(T)()
 {
   return __traits(compiles, {auto c = new T(cast(void*)null, No.Take); c.cPtr(Yes.Dup);});
 }
 
 /**
- * Check if a type is supported for the purpose of transforming between C and D containers
- * Params:
- *   T = The type to check
- * Returns: true if the type can be used for container C to/from D transformation
- */
+* Check if a type is supported for the purpose of transforming between C and D containers
+* Params:
+*   T = The type to check
+* Returns: true if the type can be used for container C to/from D transformation
+*/
 bool containerTypeIsSupported(T)()
 {
   return is(T : ObjectG) || is(T == interface) || is(T == string) || isTypeBoxedOrReffed!T || containerTypeIsSimple!T
@@ -641,22 +641,22 @@ bool containerTypeIsSupported(T)()
 }
 
 /**
- * Check if a type is considered a simple container type (can be copied directly)
- * Params:
- *   T = The D type to check
- * Returns: bool if type is considered simple
- */
+* Check if a type is considered a simple container type (can be copied directly)
+* Params:
+*   T = The D type to check
+* Returns: bool if type is considered simple
+*/
 bool containerTypeIsSimple(T)()
 {
   return isScalarType!T || is(T == struct) || is(T == union);
 }
 
 /**
- * Get the size required for the type of an element for a container.
- * Params:
- *   T = The type
- * Returns: The element size in bytes
- */
+* Get the size required for the type of an element for a container.
+* Params:
+*   T = The type
+* Returns: The element size in bytes
+*/
 uint containerTypeSize(T)()
 if (containerTypeIsSupported!T)
 {
@@ -667,14 +667,14 @@ if (containerTypeIsSupported!T)
 }
 
 /**
- * Free a GLib container type.
- * Params:
- *   CT = The C struct type pointer of the container type
- *   T = The type of the item stored in the container
- *   ownership = The ownership of the container from the perspective of a called C function
- *     (None is the default and frees container and items, Container frees only the container, Full does nothing)
- *   container = The GLib C container pointer
- */
+* Free a GLib container type.
+* Params:
+*   CT = The C struct type pointer of the container type
+*   T = The type of the item stored in the container
+*   ownership = The ownership of the container from the perspective of a called C function
+*     (None is the default and frees container and items, Container frees only the container, Full does nothing)
+*   container = The GLib C container pointer
+*/
 void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT container)
 {
   static if (ownership == GidOwnership.Full)
@@ -748,12 +748,12 @@ void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT contain
 }
 
 /**
- * Template to get a D value from a container C data item. Used internally for transforming C containers.
- * Params:
- *   T = The D item type
- *   data = The container C data pointer
- * Returns: The D item which is a copy of the C item
- */
+* Template to get a D value from a container C data item. Used internally for transforming C containers.
+* Params:
+*   T = The D item type
+*   data = The container C data pointer
+* Returns: The D item which is a copy of the C item
+*/
 T containerGetItem(T)(void* data)
 if (containerTypeIsSupported!T)
 {
@@ -772,40 +772,40 @@ if (containerTypeIsSupported!T)
 }
 
 /**
- * Template to set a C container item from a D value. Used internally for transforming C containers.
- * Params:
- *   T = The D item type
- *   data = The container C data pointer
- */
+* Template to set a C container item from a D value. Used internally for transforming C containers.
+* Params:
+*   T = The D item type
+*   data = The container C data pointer
+*/
 void containerSetItem(T)(T val, void* data)
 if (containerTypeIsSupported!T)
 {
   static if (is(T : ObjectG) || isTypeBoxedOrReffed!T)
-     *(cast(void**)data) = val.cPtr(Yes.Dup);
+    *(cast(void**)data) = val.cPtr(Yes.Dup);
   else static if (is(T == interface))
   {
     if (auto objG = cast(ObjectG)val)
-       *(cast(void**)data) = objG.cPtr(Yes.Dup);
+      *(cast(void**)data) = objG.cPtr(Yes.Dup);
     else
       assert(0, "Object implementing " ~ T.stringof ~ " interface is not an ObjectG");
   }
   else static if (is(T == string))
-     *cast(char**)data = toCString(val, Yes.Alloc); // Transfer the string to C (use g_malloc)
+    *cast(char**)data = toCString(val, Yes.Alloc); // Transfer the string to C (use g_malloc)
   else static if (is(T == void*) || is(T == const(void)*))
-     *(cast(void**)data) = cast(void*)val;
+    *(cast(void**)data) = cast(void*)val;
   else static if (containerTypeIsSimple!T)
-     *(cast(T*)data) = val;
+    *(cast(T*)data) = val;
   else
     assert(0);
 }
 
 /**
- * Free a container C item. Used internally for binding containers.
- * Does nothing if the type does not need to be freed.
- * Params:
- *   T = The D item type
- *   data = The container C data pointer
- */
+* Free a container C item. Used internally for binding containers.
+* Does nothing if the type does not need to be freed.
+* Params:
+*   T = The D item type
+*   data = The container C data pointer
+*/
 void containerFreeItem(T)(void* data)
 if (containerTypeIsSupported!T)
 {
@@ -820,6 +820,7 @@ if (containerTypeIsSupported!T)
 }
 
 /// Exception class used for ObjectG constructor errors
+/** */
 class GidConstructException : Exception
 {
   this(string msg)

@@ -13,9 +13,9 @@ import gtk.selection_model_mixin;
 import gtk.types;
 
 /**
- * `GtkMultiSelection` is a `GtkSelectionModel` that allows selecting multiple
- * elements.
- */
+    [gtk.multi_selection.MultiSelection] is a [gtk.selection_model.SelectionModel] that allows selecting multiple
+  elements.
+*/
 class MultiSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel, gtk.selection_model.SelectionModel
 {
 
@@ -40,11 +40,11 @@ class MultiSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sec
   mixin SelectionModelT!();
 
   /**
-   * Creates a new selection to handle model.
-   * Params:
-   *   model = the `GListModel` to manage
-   * Returns: a new `GtkMultiSelection`
-   */
+      Creates a new selection to handle model.
+    Params:
+      model =       the [gio.list_model.ListModel] to manage
+    Returns:     a new [gtk.multi_selection.MultiSelection]
+  */
   this(gio.list_model.ListModel model = null)
   {
     GtkMultiSelection* _cretval;
@@ -53,9 +53,9 @@ class MultiSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sec
   }
 
   /**
-   * Returns the underlying model of self.
-   * Returns: the underlying model
-   */
+      Returns the underlying model of self.
+    Returns:     the underlying model
+  */
   gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
@@ -65,11 +65,12 @@ class MultiSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sec
   }
 
   /**
-   * Sets the model that self should wrap.
-   * If model is %NULL, self will be empty.
-   * Params:
-   *   model = A `GListModel` to wrap
-   */
+      Sets the model that self should wrap.
+    
+    If model is null, self will be empty.
+    Params:
+      model =       A [gio.list_model.ListModel] to wrap
+  */
   void setModel(gio.list_model.ListModel model = null)
   {
     gtk_multi_selection_set_model(cast(GtkMultiSelection*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);

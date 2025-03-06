@@ -12,6 +12,7 @@ import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
 
+/** */
 class CellAccessible : gtk.accessible.Accessible, atk.action.Action, atk.component.Component, atk.table_cell.TableCell
 {
 

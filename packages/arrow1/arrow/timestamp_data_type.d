@@ -7,6 +7,7 @@ import arrow.types;
 import gid.gid;
 import glib.time_zone;
 
+/** */
 class TimestampDataType : arrow.temporal_data_type.TemporalDataType
 {
 
@@ -26,6 +27,7 @@ class TimestampDataType : arrow.temporal_data_type.TemporalDataType
     return getType();
   }
 
+  /** */
   this(arrow.types.TimeUnit unit, glib.time_zone.TimeZone timeZone = null)
   {
     GArrowTimestampDataType* _cretval;
@@ -33,6 +35,7 @@ class TimestampDataType : arrow.temporal_data_type.TemporalDataType
     this(_cretval, Yes.Take);
   }
 
+  /** */
   arrow.types.TimeUnit getUnit()
   {
     GArrowTimeUnit _cretval;

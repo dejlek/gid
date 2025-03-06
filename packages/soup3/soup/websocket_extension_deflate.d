@@ -7,11 +7,12 @@ import soup.types;
 import soup.websocket_extension;
 
 /**
- * A SoupWebsocketExtensionDeflate is a class@WebsocketExtension
- * implementing permessage-deflate $(LPAREN)RFC 7692$(RPAREN).
- * This extension is used by default in a class@Session when class@WebsocketExtensionManager
- * feature is present, and always used by class@Server.
- */
+    A SoupWebsocketExtensionDeflate is a `class@WebsocketExtension`
+  implementing permessage-deflate (RFC 7692).
+  
+  This extension is used by default in a `class@Session` when `class@WebsocketExtensionManager`
+  feature is present, and always used by `class@Server`.
+*/
 class WebsocketExtensionDeflate : soup.websocket_extension.WebsocketExtension
 {
 

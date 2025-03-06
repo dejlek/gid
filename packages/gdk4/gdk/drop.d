@@ -19,18 +19,21 @@ import gobject.types;
 import gobject.value;
 
 /**
- * The `GdkDrop` object represents the target of an ongoing DND operation.
- * Possible drop sites get informed about the status of the ongoing drag
- * operation with events of type %GDK_DRAG_ENTER, %GDK_DRAG_LEAVE,
- * %GDK_DRAG_MOTION and %GDK_DROP_START. The `GdkDrop` object can be obtained
- * from these [gdk.event.Event] types using [gdk.dndevent.DNDEvent.getDrop].
- * The actual data transfer is initiated from the target side via an async
- * read, using one of the `GdkDrop` methods for this purpose:
- * [gdk.drop.Drop.readAsync] or [gdk.drop.Drop.readValueAsync].
- * GTK provides a higher level abstraction based on top of these functions,
- * and so they are not normally needed in GTK applications. See the
- * "Drag and Drop" section of the GTK documentation for more information.
- */
+    The [gdk.drop.Drop] object represents the target of an ongoing DND operation.
+  
+  Possible drop sites get informed about the status of the ongoing drag
+  operation with events of type [gdk.types.EventType.DragEnter], [gdk.types.EventType.DragLeave],
+  [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart]. The [gdk.drop.Drop] object can be obtained
+  from these [gdk.event.Event] types using [gdk.dndevent.DNDEvent.getDrop].
+  
+  The actual data transfer is initiated from the target side via an async
+  read, using one of the [gdk.drop.Drop] methods for this purpose:
+  [gdk.drop.Drop.readAsync] or [gdk.drop.Drop.readValueAsync].
+  
+  GTK provides a higher level abstraction based on top of these functions,
+  and so they are not normally needed in GTK applications. See the
+  "Drag and Drop" section of the GTK documentation for more information.
+*/
 class Drop : gobject.object.ObjectG
 {
 
@@ -51,32 +54,35 @@ class Drop : gobject.object.ObjectG
   }
 
   /**
-   * Ends the drag operation after a drop.
-   * The action must be a single action selected from the actions
-   * available via [gdk.drop.Drop.getActions].
-   * Params:
-   *   action = the action performed by the destination or 0 if the drop failed
-   */
+      Ends the drag operation after a drop.
+    
+    The action must be a single action selected from the actions
+    available via [gdk.drop.Drop.getActions].
+    Params:
+      action =       the action performed by the destination or 0 if the drop failed
+  */
   void finish(gdk.types.DragAction action)
   {
     gdk_drop_finish(cast(GdkDrop*)cPtr, action);
   }
 
   /**
-   * Returns the possible actions for this `GdkDrop`.
-   * If this value contains multiple actions - i.e.
-   * funcGdk.DragAction.is_unique returns %FALSE for the result -
-   * [gdk.drop.Drop.finish] must choose the action to use when
-   * accepting the drop. This will only happen if you passed
-   * %GDK_ACTION_ASK as one of the possible actions in
-   * [gdk.drop.Drop.status]. %GDK_ACTION_ASK itself will not
-   * be included in the actions returned by this function.
-   * This value may change over the lifetime of the [gdk.drop.Drop]
-   * both as a response to source side actions as well as to calls to
-   * [gdk.drop.Drop.status] or [gdk.drop.Drop.finish]. The source
-   * side will not change this value anymore once a drop has started.
-   * Returns: The possible `GdkDragActions`
-   */
+      Returns the possible actions for this [gdk.drop.Drop].
+    
+    If this value contains multiple actions - i.e.
+    `funcGdk.DragAction.is_unique` returns false for the result -
+    [gdk.drop.Drop.finish] must choose the action to use when
+    accepting the drop. This will only happen if you passed
+    [gdk.types.DragAction.Ask] as one of the possible actions in
+    [gdk.drop.Drop.status]. [gdk.types.DragAction.Ask] itself will not
+    be included in the actions returned by this function.
+    
+    This value may change over the lifetime of the [gdk.drop.Drop]
+    both as a response to source side actions as well as to calls to
+    [gdk.drop.Drop.status] or [gdk.drop.Drop.finish]. The source
+    side will not change this value anymore once a drop has started.
+    Returns:     The possible `GdkDragActions`
+  */
   gdk.types.DragAction getActions()
   {
     GdkDragAction _cretval;
@@ -86,9 +92,9 @@ class Drop : gobject.object.ObjectG
   }
 
   /**
-   * Returns the `GdkDevice` performing the drop.
-   * Returns: The `GdkDevice` performing the drop.
-   */
+      Returns the [gdk.device.Device] performing the drop.
+    Returns:     The [gdk.device.Device] performing the drop.
+  */
   gdk.device.Device getDevice()
   {
     GdkDevice* _cretval;
@@ -98,9 +104,9 @@ class Drop : gobject.object.ObjectG
   }
 
   /**
-   * Gets the `GdkDisplay` that self was created for.
-   * Returns: a `GdkDisplay`
-   */
+      Gets the [gdk.display.Display] that self was created for.
+    Returns:     a [gdk.display.Display]
+  */
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
@@ -110,11 +116,12 @@ class Drop : gobject.object.ObjectG
   }
 
   /**
-   * If this is an in-app drag-and-drop operation, returns the `GdkDrag`
-   * that corresponds to this drop.
-   * If it is not, %NULL is returned.
-   * Returns: the corresponding `GdkDrag`
-   */
+      If this is an in-app drag-and-drop operation, returns the [gdk.drag.Drag]
+    that corresponds to this drop.
+    
+    If it is not, null is returned.
+    Returns:     the corresponding [gdk.drag.Drag]
+  */
   gdk.drag.Drag getDrag()
   {
     GdkDrag* _cretval;
@@ -124,10 +131,10 @@ class Drop : gobject.object.ObjectG
   }
 
   /**
-   * Returns the `GdkContentFormats` that the drop offers the data
-   * to be read in.
-   * Returns: The possible `GdkContentFormats`
-   */
+      Returns the [gdk.content_formats.ContentFormats] that the drop offers the data
+    to be read in.
+    Returns:     The possible [gdk.content_formats.ContentFormats]
+  */
   gdk.content_formats.ContentFormats getFormats()
   {
     GdkContentFormats* _cretval;
@@ -137,9 +144,9 @@ class Drop : gobject.object.ObjectG
   }
 
   /**
-   * Returns the `GdkSurface` performing the drop.
-   * Returns: The `GdkSurface` performing the drop.
-   */
+      Returns the [gdk.surface.Surface] performing the drop.
+    Returns:     The [gdk.surface.Surface] performing the drop.
+  */
   gdk.surface.Surface getSurface()
   {
     GdkSurface* _cretval;
@@ -149,15 +156,15 @@ class Drop : gobject.object.ObjectG
   }
 
   /**
-   * Asynchronously read the dropped data from a `GdkDrop`
-   * in a format that complies with one of the mime types.
-   * Params:
-   *   mimeTypes = pointer to an array of mime types
-   *   ioPriority = the I/O priority for the read operation
-   *   cancellable = optional `GCancellable` object
-   *   callback = a `GAsyncReadyCallback` to call when
-   *     the request is satisfied
-   */
+      Asynchronously read the dropped data from a [gdk.drop.Drop]
+    in a format that complies with one of the mime types.
+    Params:
+      mimeTypes =       pointer to an array of mime types
+      ioPriority =       the I/O priority for the read operation
+      cancellable =       optional [gio.cancellable.Cancellable] object
+      callback =       a [gio.types.AsyncReadyCallback] to call when
+          the request is satisfied
+  */
   void readAsync(string[] mimeTypes, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -180,17 +187,19 @@ class Drop : gobject.object.ObjectG
   }
 
   /**
-   * Finishes an async drop read operation.
-   * Note that you must not use blocking read calls on the returned stream
-   * in the GTK thread, since some platforms might require communication with
-   * GTK to complete the data transfer. You can use async APIs such as
-   * [gio.input_stream.InputStream.readBytesAsync].
-   * See [gdk.drop.Drop.readAsync].
-   * Params:
-   *   result = a `GAsyncResult`
-   *   outMimeType = return location for the used mime type
-   * Returns: the `GInputStream`
-   */
+      Finishes an async drop read operation.
+    
+    Note that you must not use blocking read calls on the returned stream
+    in the GTK thread, since some platforms might require communication with
+    GTK to complete the data transfer. You can use async APIs such as
+    [gio.input_stream.InputStream.readBytesAsync].
+    
+    See [gdk.drop.Drop.readAsync].
+    Params:
+      result =       a [gio.async_result.AsyncResult]
+      outMimeType =       return location for the used mime type
+    Returns:     the [gio.input_stream.InputStream]
+  */
   gio.input_stream.InputStream readFinish(gio.async_result.AsyncResult result, out string outMimeType)
   {
     GInputStream* _cretval;
@@ -205,20 +214,22 @@ class Drop : gobject.object.ObjectG
   }
 
   /**
-   * Asynchronously request the drag operation's contents converted
-   * to the given type.
-   * When the operation is finished callback will be called. You must
-   * then call [gdk.drop.Drop.readValueFinish] to get the resulting
-   * `GValue`.
-   * For local drag-and-drop operations that are available in the given
-   * `GType`, the value will be copied directly. Otherwise, GDK will
-   * try to use funcGdk.content_deserialize_async to convert the data.
-   * Params:
-   *   type = a `GType` to read
-   *   ioPriority = the I/O priority of the request.
-   *   cancellable = optional `GCancellable` object, %NULL to ignore.
-   *   callback = callback to call when the request is satisfied
-   */
+      Asynchronously request the drag operation's contents converted
+    to the given type.
+    
+    When the operation is finished callback will be called. You must
+    then call [gdk.drop.Drop.readValueFinish] to get the resulting
+    [gobject.value.Value].
+    
+    For local drag-and-drop operations that are available in the given
+    [gobject.types.TYPE_FLAG_RESERVED_ID_BIT], the value will be copied directly. Otherwise, GDK will
+    try to use `funcGdk.content_deserialize_async` to convert the data.
+    Params:
+      type =       a [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] to read
+      ioPriority =       the I/O priority of the request.
+      cancellable =       optional [gio.cancellable.Cancellable] object, null to ignore.
+      callback =       callback to call when the request is satisfied
+  */
   void readValueAsync(gobject.types.GType type, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
     extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
@@ -235,12 +246,13 @@ class Drop : gobject.object.ObjectG
   }
 
   /**
-   * Finishes an async drop read.
-   * See [gdk.drop.Drop.readValueAsync].
-   * Params:
-   *   result = a `GAsyncResult`
-   * Returns: a `GValue` containing the result.
-   */
+      Finishes an async drop read.
+    
+    See [gdk.drop.Drop.readValueAsync].
+    Params:
+      result =       a [gio.async_result.AsyncResult]
+    Returns:     a [gobject.value.Value] containing the result.
+  */
   gobject.value.Value readValueFinish(gio.async_result.AsyncResult result)
   {
     const(GValue)* _cretval;
@@ -253,22 +265,25 @@ class Drop : gobject.object.ObjectG
   }
 
   /**
-   * Selects all actions that are potentially supported by the destination.
-   * When calling this function, do not restrict the passed in actions to
-   * the ones provided by [gdk.drop.Drop.getActions]. Those actions may
-   * change in the future, even depending on the actions you provide here.
-   * The preferred action is a hint to the drag-and-drop mechanism about which
-   * action to use when multiple actions are possible.
-   * This function should be called by drag destinations in response to
-   * %GDK_DRAG_ENTER or %GDK_DRAG_MOTION events. If the destination does
-   * not yet know the exact actions it supports, it should set any possible
-   * actions first and then later call this function again.
-   * Params:
-   *   actions = Supported actions of the destination, or 0 to indicate
-   *     that a drop will not be accepted
-   *   preferred = A unique action that's a member of actions indicating the
-   *     preferred action
-   */
+      Selects all actions that are potentially supported by the destination.
+    
+    When calling this function, do not restrict the passed in actions to
+    the ones provided by [gdk.drop.Drop.getActions]. Those actions may
+    change in the future, even depending on the actions you provide here.
+    
+    The preferred action is a hint to the drag-and-drop mechanism about which
+    action to use when multiple actions are possible.
+    
+    This function should be called by drag destinations in response to
+    [gdk.types.EventType.DragEnter] or [gdk.types.EventType.DragMotion] events. If the destination does
+    not yet know the exact actions it supports, it should set any possible
+    actions first and then later call this function again.
+    Params:
+      actions =       Supported actions of the destination, or 0 to indicate
+           that a drop will not be accepted
+      preferred =       A unique action that's a member of actions indicating the
+           preferred action
+  */
   void status(gdk.types.DragAction actions, gdk.types.DragAction preferred)
   {
     gdk_drop_status(cast(GdkDrop*)cPtr, actions, preferred);

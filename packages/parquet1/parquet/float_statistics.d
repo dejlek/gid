@@ -6,6 +6,7 @@ import parquet.c.types;
 import parquet.statistics;
 import parquet.types;
 
+/** */
 class FloatStatistics : parquet.statistics.Statistics
 {
 
@@ -25,6 +26,7 @@ class FloatStatistics : parquet.statistics.Statistics
     return getType();
   }
 
+  /** */
   float getMax()
   {
     float _retval;
@@ -32,6 +34,7 @@ class FloatStatistics : parquet.statistics.Statistics
     return _retval;
   }
 
+  /** */
   float getMin()
   {
     float _retval;

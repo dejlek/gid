@@ -16,6 +16,7 @@ import gio.input_stream;
 import glib.error;
 import gobject.object;
 
+/** */
 class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readable.Readable
 {
 
@@ -41,6 +42,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
   alias read = gio.input_stream.InputStream.read;
   alias readBytes = gio.input_stream.InputStream.readBytes;
 
+  /** */
   bool advance(long nBytes)
   {
     bool _retval;
@@ -51,6 +53,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     return _retval;
   }
 
+  /** */
   bool align_(int alignment)
   {
     bool _retval;
@@ -61,6 +64,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     return _retval;
   }
 
+  /** */
   arrow.record_batch.RecordBatch readRecordBatch(arrow.schema.Schema schema, arrow.read_options.ReadOptions options = null)
   {
     GArrowRecordBatch* _cretval;
@@ -72,6 +76,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     return _retval;
   }
 
+  /** */
   arrow.tensor.Tensor readTensor()
   {
     GArrowTensor* _cretval;

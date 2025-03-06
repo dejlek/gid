@@ -12,11 +12,12 @@ import gio.types;
 import gobject.object;
 
 /**
- * Converter output stream implements [gio.output_stream.OutputStream] and allows
- * conversion of data of various types during reading.
- * As of GLib 2.34, `GConverterOutputStream` implements
- * [gio.pollable_output_stream.PollableOutputStream].
- */
+    Converter output stream implements [gio.output_stream.OutputStream] and allows
+  conversion of data of various types during reading.
+  
+  As of GLib 2.34, [gio.converter_output_stream.ConverterOutputStream] implements
+  [gio.pollable_output_stream.PollableOutputStream].
+*/
 class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.pollable_output_stream.PollableOutputStream
 {
 
@@ -39,12 +40,12 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
   mixin PollableOutputStreamT!();
 
   /**
-   * Creates a new converter output stream for the base_stream.
-   * Params:
-   *   baseStream = a #GOutputStream
-   *   converter = a #GConverter
-   * Returns: a new #GOutputStream.
-   */
+      Creates a new converter output stream for the base_stream.
+    Params:
+      baseStream =       a #GOutputStream
+      converter =       a #GConverter
+    Returns:     a new #GOutputStream.
+  */
   this(gio.output_stream.OutputStream baseStream, gio.converter.Converter converter)
   {
     GOutputStream* _cretval;
@@ -53,9 +54,9 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
   }
 
   /**
-   * Gets the #GConverter that is used by converter_stream.
-   * Returns: the converter of the converter output stream
-   */
+      Gets the #GConverter that is used by converter_stream.
+    Returns:     the converter of the converter output stream
+  */
   gio.converter.Converter getConverter()
   {
     GConverter* _cretval;

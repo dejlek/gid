@@ -8,6 +8,7 @@ import arrow.timestamp_data_type;
 import arrow.types;
 import gid.gid;
 
+/** */
 class TimestampArray : arrow.numeric_array.NumericArray
 {
 
@@ -27,6 +28,7 @@ class TimestampArray : arrow.numeric_array.NumericArray
     return getType();
   }
 
+  /** */
   this(arrow.timestamp_data_type.TimestampDataType dataType, long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowTimestampArray* _cretval;
@@ -34,6 +36,7 @@ class TimestampArray : arrow.numeric_array.NumericArray
     this(_cretval, Yes.Take);
   }
 
+  /** */
   long getValue(long i)
   {
     long _retval;
@@ -41,6 +44,7 @@ class TimestampArray : arrow.numeric_array.NumericArray
     return _retval;
   }
 
+  /** */
   long[] getValues()
   {
     const(long)* _cretval;

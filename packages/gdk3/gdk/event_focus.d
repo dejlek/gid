@@ -8,8 +8,8 @@ import gid.gid;
 import gobject.object;
 
 /**
- * Describes a change of keyboard focus.
- */
+    Describes a change of keyboard focus.
+*/
 class EventFocus
 {
   GdkEventFocus cInstance;

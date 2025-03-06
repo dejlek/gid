@@ -7,8 +7,8 @@ import gsk.render_node;
 import gsk.types;
 
 /**
- * A render node masking one child node with another.
- */
+    A render node masking one child node with another.
+*/
 class MaskNode : gsk.render_node.RenderNode
 {
 
@@ -21,16 +21,17 @@ class MaskNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Creates a `GskRenderNode` that will mask a given node by another.
-   * The mask_mode determines how the 'mask values' are derived from
-   * the colors of the mask. Applying the mask consists of multiplying
-   * the 'mask value' with the alpha of the source.
-   * Params:
-   *   source = The source node to be drawn
-   *   mask = The node to be used as mask
-   *   maskMode = The mask mode to use
-   * Returns: A new `GskRenderNode`
-   */
+      Creates a [gsk.render_node.RenderNode] that will mask a given node by another.
+    
+    The mask_mode determines how the 'mask values' are derived from
+    the colors of the mask. Applying the mask consists of multiplying
+    the 'mask value' with the alpha of the source.
+    Params:
+      source =       The source node to be drawn
+      mask =       The node to be used as mask
+      maskMode =       The mask mode to use
+    Returns:     A new [gsk.render_node.RenderNode]
+  */
   this(gsk.render_node.RenderNode source, gsk.render_node.RenderNode mask, gsk.types.MaskMode maskMode)
   {
     GskRenderNode* _cretval;
@@ -39,9 +40,9 @@ class MaskNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the mask `GskRenderNode` child of the node.
-   * Returns: the mask child node
-   */
+      Retrieves the mask [gsk.render_node.RenderNode] child of the node.
+    Returns:     the mask child node
+  */
   gsk.render_node.RenderNode getMask()
   {
     GskRenderNode* _cretval;
@@ -51,9 +52,9 @@ class MaskNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the mask mode used by node.
-   * Returns: the mask mode
-   */
+      Retrieves the mask mode used by node.
+    Returns:     the mask mode
+  */
   gsk.types.MaskMode getMaskMode()
   {
     GskMaskMode _cretval;
@@ -63,9 +64,9 @@ class MaskNode : gsk.render_node.RenderNode
   }
 
   /**
-   * Retrieves the source `GskRenderNode` child of the node.
-   * Returns: the source child node
-   */
+      Retrieves the source [gsk.render_node.RenderNode] child of the node.
+    Returns:     the source child node
+  */
   gsk.render_node.RenderNode getSource()
   {
     GskRenderNode* _cretval;
