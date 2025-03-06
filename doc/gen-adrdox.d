@@ -10,6 +10,7 @@ import std.process;
 import std.range;
 import std.stdio;
 import std.string;
+import std.typecons;
 
 int main(string[] args)
 {
@@ -46,15 +47,28 @@ int main(string[] args)
 
   auto cmd = args[1];
 
-  // Loop over sub packages
-  foreach (d; dirEntries(packagesPath, SpanMode.shallow).filter!(ent => ent.isDir).map!(ent => ent.name).array.sort)
-  {
-    auto pkg = d.baseName;
-    auto deps = getDubDeps(buildPath(d, "dub.json"));
-    auto depArgs = deps.map!(dep => ["--load", buildPath(packagesPath, dep), "--package-path", dep[0 .. $ - 1]
-      ~ ".*=//" ~ host ~ dep ~ "/"]).joiner.array;
+  auto depTree = dirEntries(packagesPath, SpanMode.shallow).filter!(ent => ent.isDir) // Hash of packageName => depName[]
+    .map!(ent => tuple(ent.name.baseName, getDeps(buildPath(ent.name, "dub.json")))).assocArray;
 
-    auto adrdoxCmd = ["dub", "run", "adrdox", "--", d, "-o", buildPath("api", pkg)] ~ depArgs;
+  foreach (pkg; depTree.keys.sort) // Loop over sub packages, construct recursive versioned dependencies
+  {
+    bool[string] rDeps;
+
+    void recurseDeps(string[] deps)
+    {
+      foreach (d; deps)
+      {
+        rDeps[d] = true;
+        recurseDeps(depTree[d]);
+      }
+    }
+
+    recurseDeps(depTree[pkg]);
+
+    auto depArgs = rDeps.keys.sort.map!(dep => ["--load", buildPath(packagesPath, dep), "--package-path",
+      dep[0 .. $ - 1] ~ ".*=//" ~ host ~ dep ~ "/"]).joiner.array;
+
+    auto adrdoxCmd = ["dub", "run", "adrdox", "--", buildPath(packagesPath, pkg), "-o", buildPath("api", pkg)] ~ depArgs;
 
     if (!dryRun)
     {
@@ -76,7 +90,7 @@ int main(string[] args)
   return 0;
 }
 
-string[] getDubDeps(string dubFile)
+string[] getDeps(string dubFile)
 {
   auto js = parseJSON(readText(dubFile));
   return "dependencies" in js ? js["dependencies"].object.keys.map!(pkg => pkg.chompPrefix("gid:")).array.sort.array
