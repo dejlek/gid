@@ -7,7 +7,8 @@ The intention of this project is to create high quality D language (AKA Dlang) b
 The D language bindings hosted in this repository were generated with [gidgen](https://github.com/Kymorphia/gidgen/).
 This utility takes XML GObject Introspection Repository (GIR) files and generates D binding packages which can be used with [dub](https://dub.pm/).
 
-This package repository currently contains bindings for Gtk4, Vte terminal library, GtkSource code viewer widget, Apache Arrow, and more.
+This package repository currently contains bindings for the following libraries:
+Gtk4, Gtk3, Vte terminal library, GtkSource code viewer widget, Apache Arrow, GtkSource, libsoup, and more.
 Additional useful libraries with GObject Introspection interfaces will be added based on interest.
 Potentially any of those listed in the Python [PyGObject API Reference](https://lazka.github.io/pgi-docs/) for example.
 
@@ -15,6 +16,8 @@ Potentially any of those listed in the Python [PyGObject API Reference](https://
 ## Quickstart
 
 For a quickstart guide to developing Gtk4 GUI applications, please consult the [giD Gtk4 Examples](https://github.com/Kymorphia/gid-gtk4-examples/).
+
+Dejan Lekic has several example projects for giD libraries in his [gid-examples](https://codeberg.org/dejan/gid-examples/) project.
 
 The remainder of this document provides an overview of the giD bindings.
 
@@ -28,13 +31,19 @@ Once v1.0.0 is released, an increment in the micro version will be backwards com
 
 ## API Reference
 
-Currently there isn't any giD specific API reference documentation for these D library bindings.
-There are DDoc comments in the binding files, but attempts to generate suitable docs has not yet been satisfactory (TODO).
-Currently the best reference documentation is the C API reference docs,
-with some added understanding of the D binding differences, and the D binding source code itself.
+Documentation is now being generated with [adrdox](https://github.com/adamdruppe/adrdox) and can be found at https://www.kymorphia.com/gid/.
+
+**NOTE:** Currently only the newest versions of the following libraries are generated: gtk4, gdk4, vte3, and gtksource5.
+This is due to existing limitations with adrdox.
+
+The C API reference docs can also be used with some added understanding of the D binding differences.
+And finally the D binding source code itself can be used as a referenced.
 
 
 ### C API Library Reference
+
+Here are some links to the C API documentation, which may be useful.
+Though the adrdox generated documentation is now available and is a better documentation source.
 
  * [Arrow](https://arrow.apache.org/docs/c_glib/arrow-glib/index.html)
  * [ArrowDataset](https://arrow.apache.org/docs/c_glib/arrow-dataset-glib/index.html)
@@ -59,13 +68,16 @@ with some added understanding of the D binding differences, and the D binding so
 
 ## Dub Packages
 
-Each library has its own binding dub sub-package, within the `gid` package, each with a single source directory (namespace).
-One notable exception is that the **glib** package contains glib, gobject, and the gid directory namespaces.
+Each library has its own binding dub sub-package, within the `gid` package, each with a single source directory (package name).
+One notable exception is that the **glib** package contains glib, gobject, and the gid directory top-level module paths.
 This was done to resolve interdependencies between these modules.
 
-Sub-packages are named using the lowercase name of their GIR `namespace` followed by a dash and the namespace `version` with any dots replaced by dashes.
-For example, the Gtk library uses `Gtk` as the GIR namespace and the version is `4.0` regardless of the library minor/micro version it was generated from.
-This results in the full dub package name `gid:gtk-4-0` with the package directory namespace `gtk`.
+Sub-packages are named using the lowercase name of their GIR `namespace` followed by the major version number.
+For example, the Gtk library uses `Gtk` as the GIR namespace and the version is `4`.
+This results in the full dub package name `gid:gtk4` with the toplevel package directory namespace `gtk`.
+
+**NOTE:** giD supports multiple versions of some packages, such as for Gtk.
+The same top-level module directory is used for both, which while less verbose, means that only one version can be used in an application.
 
 
 ## Module Names
@@ -81,7 +93,7 @@ Additionally there are the following built-in modules for each package:
 
  * **namespace.c.functions** - Contains all the C function pointers which are dynamically loaded at runtime.
    These pointers have the same name as the C API functions, for example `g_object_ref`, and can be called like any other C function.
- * **namespace.c.types** - Contains all C API types, including: enums, flags, structs, unions, and function callback types.
+ * **namespace.c.types** - Contains all C API types, including: enum aliases, flags, structs, unions, and function callback types.
  * **namespace.global** - Contains package global functions which aren't associated with a class or structure instance.
  * **namespace.types** - Contains D types for the package, including: aliases, enums, flags, structs, delegates, and constants.
    Many D types are simply aliases to the underlying C types with a different D symbol name.
@@ -111,11 +123,10 @@ Here are some general rules about symbol renaming:
 |------------------|-------------------|
 | AtkObject        | ObjectAtk         |
 | AtkValue         | ValueAtk          |
-| GioApplication   | ApplicationGio    |
 | GObject          | ObjectG           |
 | GVariant         | VariantG          |
 
-These renames were done to avoid conflicts with built in D types and between modules (like Gtk.Application and Gio.Application).
+These renames were done to avoid conflicts with built in D types.
 
 
 ## Output and Input/Output Arguments
