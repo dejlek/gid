@@ -31,7 +31,7 @@ Once v1.0.0 is released, an increment in the micro version will be backwards com
 
 ## API Reference
 
-Documentation is now being generated with [adrdox](https://github.com/adamdruppe/adrdox) and can be found at https://www.kymorphia.com/gid/.
+Documentation is now being generated with [adrdox](https://github.com/adamdruppe/adrdox) and can be found at [https://www.kymorphia.com/gid/](https://www.kymorphia.com/gid/).
 
 **NOTE:** Currently only the newest versions of the following libraries are generated: gtk4, gdk4, vte3, and gtksource5.
 This is due to existing limitations with adrdox.
