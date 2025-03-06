@@ -6,13 +6,102 @@ public import gobject.c.types;
 public import gdkpixbuf.c.types;
 public import gio.c.types;
 public import cairo.c.types;
-import rsvg.types;
 
+/**
+    An enumeration representing possible errors
+*/
+enum RsvgError
+{
+  /**
+      the request failed
+  */
+  Failed = 0,
+}
 
-// Enums
-alias RsvgError = rsvg.types.Error;
-alias RsvgHandleFlags = rsvg.types.HandleFlags;
-alias RsvgUnit = rsvg.types.Unit;
+/**
+    Configuration flags for an [rsvg.handle.Handle].  Note that not all of [rsvg.handle.Handle]'s
+  constructors let you specify flags.  For this reason, [rsvg.handle.Handle.newFromGfileSync]
+  and [rsvg.handle.Handle.newFromStreamSync] are the preferred ways to create a handle.
+*/
+enum RsvgHandleFlags : uint
+{
+  /**
+      No flags are set.
+  */
+  FlagsNone = 0,
+
+  /**
+      Disable safety limits in the XML parser.  Libxml2 has
+    [several limits](https://gitlab.gnome.org/GNOME/libxml2/blob/master/include/libxml/parserInternals.h)
+    designed to keep malicious XML content from consuming too much memory while parsing.
+    For security reasons, this should only be used for trusted input!  Since: 2.40.3
+  */
+  FlagUnlimited = 1,
+
+  /**
+      Use this if the Cairo surface to which you are
+    rendering is a PDF, PostScript, SVG, or Win32 Printing surface.  This will make librsvg
+    and Cairo use the original, compressed data for images in the final output, instead of
+    passing uncompressed images.  For example, this will make the a resulting PDF file
+    smaller and faster.  Please see [the Cairo
+    documentation](https://www.cairographics.org/manual/cairo-cairo-surface-t.html#cairo-surface-set-mime-data)
+    for details.
+  */
+  FlagKeepImageData = 2,
+}
+
+/**
+    Units for the [rsvg.types.Length] struct.  These have the same meaning as [CSS length
+  units](https://www.w3.org/TR/CSS21/syndata.html#length-units).
+*/
+enum RsvgUnit
+{
+  /**
+      percentage values; where <literal>1.0</literal> means 100%.
+  */
+  Percent = 0,
+
+  /**
+      pixels
+  */
+  Px = 1,
+
+  /**
+      em, or the current font size
+  */
+  Em = 2,
+
+  /**
+      x-height of the current font
+  */
+  Ex = 3,
+
+  /**
+      inches
+  */
+  In = 4,
+
+  /**
+      centimeters
+  */
+  Cm = 5,
+
+  /**
+      millimeters
+  */
+  Mm = 6,
+
+  /**
+      points, or 1/72 inch
+  */
+  Pt = 7,
+
+  /**
+      picas, or 1/6 inch (12 points)
+  */
+  Pc = 8,
+}
+
 /**
     Dimensions of an SVG image from [rsvg.handle.Handle.getDimensions], or an
   individual element from [rsvg.handle.Handle.getDimensionsSub].  Please see

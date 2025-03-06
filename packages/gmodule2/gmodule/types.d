@@ -6,6 +6,14 @@ import gmodule.c.types;
 import gmodule.module_;
 
 
+// Enums
+
+/** */
+alias ModuleError = GModuleError;
+
+/** */
+alias ModuleFlags = GModuleFlags;
+
 // Callbacks
 
 /**
@@ -35,49 +43,6 @@ alias ModuleCheckInit = string delegate(gmodule.module_.Module module_);
   )
 */
 alias ModuleUnload = void delegate(gmodule.module_.Module module_);
-
-/**
-    Errors returned by [gmodule.module_.Module.openFull].
-*/
-enum ModuleError
-{
-  /**
-      there was an error loading or opening a module file
-  */
-  Failed = 0,
-
-  /**
-      a module returned an error from its `g_module_check_init()` function
-  */
-  CheckFailed = 1,
-}
-
-/**
-    Flags passed to [gmodule.module_.Module.open].
-  Note that these flags are not supported on all platforms.
-*/
-enum ModuleFlags : uint
-{
-  /**
-      specifies that symbols are only resolved when
-        needed. The default action is to bind all symbols when the module
-        is loaded.
-  */
-  Lazy = 1,
-
-  /**
-      specifies that symbols in the module should
-        not be added to the global name space. The default action on most
-        platforms is to place symbols in the module in the global name space,
-        which may cause conflicts with existing symbols.
-  */
-  Local = 2,
-
-  /**
-      mask for all flags.
-  */
-  Mask = 3,
-}
 
 /** */
 enum MODULE_IMPL_AR = 7;

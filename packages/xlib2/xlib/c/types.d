@@ -2,7 +2,6 @@ module xlib.c.types;
 
 public import gid.basictypes;
 public import glib.c.types;
-import xlib.types;
 
 /** */
 alias Atom = gulong;

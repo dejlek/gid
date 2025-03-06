@@ -10,6 +10,26 @@ import gid.gid;
 import glib.error;
 
 
+// Enums
+
+/** */
+alias Colorspace = GdkColorspace;
+
+/** */
+alias InterpType = GdkInterpType;
+
+/** */
+alias PixbufAlphaMode = GdkPixbufAlphaMode;
+
+/** */
+alias PixbufError = GdkPixbufError;
+
+/** */
+alias PixbufFormatFlags = GdkPixbufFormatFlags;
+
+/** */
+alias PixbufRotation = GdkPixbufRotation;
+
 // Callbacks
 
 /**
@@ -202,202 +222,6 @@ alias PixbufModuleUpdatedFunc = void delegate(gdkpixbuf.pixbuf.Pixbuf pixbuf, in
   Returns:     `TRUE` if successful, `FALSE` otherwise
 */
 alias PixbufSaveFunc = bool delegate(ubyte[] buf, out glib.error.ErrorG error);
-
-/**
-    This enumeration defines the color spaces that are supported by
-  the gdk-pixbuf library.
-  
-  Currently only RGB is supported.
-*/
-enum Colorspace
-{
-  /**
-      Indicates a red/green/blue additive color space.
-  */
-  Rgb = 0,
-}
-
-/**
-    Interpolation modes for scaling functions.
-  
-  The [gdkpixbuf.types.InterpType.Nearest] mode is the fastest scaling method, but has
-  horrible quality when scaling down; [gdkpixbuf.types.InterpType.Bilinear] is the best
-  choice if you aren't sure what to choose, it has a good speed/quality
-  balance.
-  
-  **Note**: Cubic filtering is missing from the list; hyperbolic
-  interpolation is just as fast and results in higher quality.
-*/
-enum InterpType
-{
-  /**
-      Nearest neighbor sampling; this is the fastest
-     and lowest quality mode. Quality is normally unacceptable when scaling
-     down, but may be OK when scaling up.
-  */
-  Nearest = 0,
-
-  /**
-      This is an accurate simulation of the PostScript
-     image operator without any interpolation enabled.  Each pixel is
-     rendered as a tiny parallelogram of solid color, the edges of which
-     are implemented with antialiasing.  It resembles nearest neighbor for
-     enlargement, and bilinear for reduction.
-  */
-  Tiles = 1,
-
-  /**
-      Best quality/speed balance; use this mode by
-     default. Bilinear interpolation.  For enlargement, it is
-     equivalent to point-sampling the ideal bilinear-interpolated image.
-     For reduction, it is equivalent to laying down small tiles and
-     integrating over the coverage area.
-  */
-  Bilinear = 2,
-
-  /**
-      This is the slowest and highest quality
-     reconstruction function. It is derived from the hyperbolic filters in
-     Wolberg's "Digital Image Warping", and is formally defined as the
-     hyperbolic-filter sampling the ideal hyperbolic-filter interpolated
-     image (the filter is designed to be idempotent for 1:1 pixel mapping).
-     **Deprecated**: this interpolation filter is deprecated, as in reality
-     it has a lower quality than the @GDK_INTERP_BILINEAR filter
-     (Since: 2.38)
-  */
-  Hyper = 3,
-}
-
-/**
-    Control the alpha channel for drawables.
-  
-  These values can be passed to gdk_pixbuf_xlib_render_to_drawable_alpha()
-  in gdk-pixbuf-xlib to control how the alpha channel of an image should
-  be handled.
-  
-  This function can create a bilevel clipping mask (black and white) and use
-  it while painting the image.
-  
-  In the future, when the X Window System gets an alpha channel extension,
-  it will be possible to do full alpha compositing onto arbitrary drawables.
-  For now both cases fall back to a bilevel clipping mask.
-
-  Deprecated:     There is no user of GdkPixbufAlphaMode in GdkPixbuf,
-      and the Xlib utility functions have been split out to their own
-      library, gdk-pixbuf-xlib
-*/
-enum PixbufAlphaMode
-{
-  /**
-      A bilevel clipping mask (black and white)
-     will be created and used to draw the image.  Pixels below 0.5 opacity
-     will be considered fully transparent, and all others will be
-     considered fully opaque.
-  */
-  Bilevel = 0,
-
-  /**
-      For now falls back to #GDK_PIXBUF_ALPHA_BILEVEL.
-     In the future it will do full alpha compositing.
-  */
-  Full = 1,
-}
-
-/**
-    An error code in the `GDK_PIXBUF_ERROR` domain.
-  
-  Many gdk-pixbuf operations can cause errors in this domain, or in
-  the `G_FILE_ERROR` domain.
-*/
-enum PixbufError
-{
-  /**
-      An image file was broken somehow.
-  */
-  CorruptImage = 0,
-
-  /**
-      Not enough memory.
-  */
-  InsufficientMemory = 1,
-
-  /**
-      A bad option was passed to a pixbuf save module.
-  */
-  BadOption = 2,
-
-  /**
-      Unknown image type.
-  */
-  UnknownType = 3,
-
-  /**
-      Don't know how to perform the
-     given operation on the type of image at hand.
-  */
-  UnsupportedOperation = 4,
-
-  /**
-      Generic failure code, something went wrong.
-  */
-  Failed = 5,
-
-  /**
-      Only part of the animation was loaded.
-  */
-  IncompleteAnimation = 6,
-}
-
-/**
-    Flags which allow a module to specify further details about the supported
-  operations.
-*/
-enum PixbufFormatFlags : uint
-{
-  /**
-      the module can write out images in the format.
-  */
-  Writable = 1,
-
-  /**
-      the image format is scalable
-  */
-  Scalable = 2,
-
-  /**
-      the module is threadsafe. gdk-pixbuf
-        ignores modules that are not marked as threadsafe. (Since 2.28).
-  */
-  Threadsafe = 4,
-}
-
-/**
-    The possible rotations which can be passed to [gdkpixbuf.pixbuf.Pixbuf.rotateSimple].
-  
-  To make them easier to use, their numerical values are the actual degrees.
-*/
-enum PixbufRotation
-{
-  /**
-      No rotation.
-  */
-  None = 0,
-
-  /**
-      Rotate by 90 degrees.
-  */
-  Counterclockwise = 90,
-
-  /**
-      Rotate by 180 degrees.
-  */
-  Upsidedown = 180,
-
-  /**
-      Rotate by 270 degrees.
-  */
-  Clockwise = 270,
-}
 
 /**
     Major version of gdk-pixbuf library, that is the "0" in

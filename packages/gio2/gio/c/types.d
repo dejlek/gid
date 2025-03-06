@@ -4,92 +4,3079 @@ public import gid.basictypes;
 public import glib.c.types;
 public import gmodule.c.types;
 public import gobject.c.types;
-import gio.types;
 
+/**
+    Flags used when creating a #GAppInfo.
+*/
+enum GAppInfoCreateFlags : uint
+{
+  /**
+      No flags.
+  */
+  None = 0,
 
-// Enums
-alias GAppInfoCreateFlags = gio.types.AppInfoCreateFlags;
-alias GApplicationFlags = gio.types.ApplicationFlags;
-alias GAskPasswordFlags = gio.types.AskPasswordFlags;
-alias GBusNameOwnerFlags = gio.types.BusNameOwnerFlags;
-alias GBusNameWatcherFlags = gio.types.BusNameWatcherFlags;
-alias GBusType = gio.types.BusType;
-alias GConverterFlags = gio.types.ConverterFlags;
-alias GConverterResult = gio.types.ConverterResult;
-alias GCredentialsType = gio.types.CredentialsType;
-alias GDBusCallFlags = gio.types.DBusCallFlags;
-alias GDBusCapabilityFlags = gio.types.DBusCapabilityFlags;
-alias GDBusConnectionFlags = gio.types.DBusConnectionFlags;
-alias GDBusError = gio.types.DBusError;
-alias GDBusInterfaceSkeletonFlags = gio.types.DBusInterfaceSkeletonFlags;
-alias GDBusMessageByteOrder = gio.types.DBusMessageByteOrder;
-alias GDBusMessageFlags = gio.types.DBusMessageFlags;
-alias GDBusMessageHeaderField = gio.types.DBusMessageHeaderField;
-alias GDBusMessageType = gio.types.DBusMessageType;
-alias GDBusObjectManagerClientFlags = gio.types.DBusObjectManagerClientFlags;
-alias GDBusPropertyInfoFlags = gio.types.DBusPropertyInfoFlags;
-alias GDBusProxyFlags = gio.types.DBusProxyFlags;
-alias GDBusSendMessageFlags = gio.types.DBusSendMessageFlags;
-alias GDBusServerFlags = gio.types.DBusServerFlags;
-alias GDBusSignalFlags = gio.types.DBusSignalFlags;
-alias GDBusSubtreeFlags = gio.types.DBusSubtreeFlags;
-alias GDataStreamByteOrder = gio.types.DataStreamByteOrder;
-alias GDataStreamNewlineType = gio.types.DataStreamNewlineType;
-alias GDriveStartFlags = gio.types.DriveStartFlags;
-alias GDriveStartStopType = gio.types.DriveStartStopType;
-alias GEmblemOrigin = gio.types.EmblemOrigin;
-alias GFileAttributeInfoFlags = gio.types.FileAttributeInfoFlags;
-alias GFileAttributeStatus = gio.types.FileAttributeStatus;
-alias GFileAttributeType = gio.types.FileAttributeType;
-alias GFileCopyFlags = gio.types.FileCopyFlags;
-alias GFileCreateFlags = gio.types.FileCreateFlags;
-alias GFileMeasureFlags = gio.types.FileMeasureFlags;
-alias GFileMonitorEvent = gio.types.FileMonitorEvent;
-alias GFileMonitorFlags = gio.types.FileMonitorFlags;
-alias GFileQueryInfoFlags = gio.types.FileQueryInfoFlags;
-alias GFileType = gio.types.FileType;
-alias GFilesystemPreviewType = gio.types.FilesystemPreviewType;
-alias GIOErrorEnum = gio.types.IOErrorEnum;
-alias GIOModuleScopeFlags = gio.types.IOModuleScopeFlags;
-alias GIOStreamSpliceFlags = gio.types.IOStreamSpliceFlags;
-alias GMemoryMonitorWarningLevel = gio.types.MemoryMonitorWarningLevel;
-alias GMountMountFlags = gio.types.MountMountFlags;
-alias GMountOperationResult = gio.types.MountOperationResult;
-alias GMountUnmountFlags = gio.types.MountUnmountFlags;
-alias GNetworkConnectivity = gio.types.NetworkConnectivity;
-alias GNotificationPriority = gio.types.NotificationPriority;
-alias GOutputStreamSpliceFlags = gio.types.OutputStreamSpliceFlags;
-alias GPasswordSave = gio.types.PasswordSave;
-alias GPollableReturn = gio.types.PollableReturn;
-alias GResolverError = gio.types.ResolverError;
-alias GResolverNameLookupFlags = gio.types.ResolverNameLookupFlags;
-alias GResolverRecordType = gio.types.ResolverRecordType;
-alias GResourceError = gio.types.ResourceError;
-alias GResourceFlags = gio.types.ResourceFlags;
-alias GResourceLookupFlags = gio.types.ResourceLookupFlags;
-alias GSettingsBindFlags = gio.types.SettingsBindFlags;
-alias GSocketClientEvent = gio.types.SocketClientEvent;
-alias GSocketFamily = gio.types.SocketFamily;
-alias GSocketListenerEvent = gio.types.SocketListenerEvent;
-alias GSocketMsgFlags = gio.types.SocketMsgFlags;
-alias GSocketProtocol = gio.types.SocketProtocol;
-alias GSocketType = gio.types.SocketType;
-alias GSubprocessFlags = gio.types.SubprocessFlags;
-alias GTestDBusFlags = gio.types.TestDBusFlags;
-alias GTlsAuthenticationMode = gio.types.TlsAuthenticationMode;
-alias GTlsCertificateFlags = gio.types.TlsCertificateFlags;
-alias GTlsCertificateRequestFlags = gio.types.TlsCertificateRequestFlags;
-alias GTlsChannelBindingError = gio.types.TlsChannelBindingError;
-alias GTlsChannelBindingType = gio.types.TlsChannelBindingType;
-alias GTlsDatabaseLookupFlags = gio.types.TlsDatabaseLookupFlags;
-alias GTlsDatabaseVerifyFlags = gio.types.TlsDatabaseVerifyFlags;
-alias GTlsError = gio.types.TlsError;
-alias GTlsInteractionResult = gio.types.TlsInteractionResult;
-alias GTlsPasswordFlags = gio.types.TlsPasswordFlags;
-alias GTlsProtocolVersion = gio.types.TlsProtocolVersion;
-alias GTlsRehandshakeMode = gio.types.TlsRehandshakeMode;
-alias GUnixSocketAddressType = gio.types.UnixSocketAddressType;
-alias GZlibCompressorFormat = gio.types.ZlibCompressorFormat;
+  /**
+      Application opens in a terminal window.
+  */
+  NeedsTerminal = 1,
+
+  /**
+      Application supports URI arguments.
+  */
+  SupportsUris = 2,
+
+  /**
+      Application supports startup notification. Since 2.26
+  */
+  SupportsStartupNotification = 4,
+}
+
+/**
+    Flags used to define the behaviour of a #GApplication.
+*/
+enum GApplicationFlags : uint
+{
+  /**
+      Default. Deprecated in 2.74, use
+      [gio.types.ApplicationFlags.DefaultFlags] instead
+  */
+  FlagsNone = 0,
+
+  /**
+      Default flags. Since: 2.74
+  */
+  DefaultFlags = 0,
+
+  /**
+      Run as a service. In this mode, registration
+         fails if the service is already running, and the application
+         will initially wait up to 10 seconds for an initial activation
+         message to arrive.
+  */
+  IsService = 1,
+
+  /**
+      Don't try to become the primary instance.
+  */
+  IsLauncher = 2,
+
+  /**
+      This application handles opening files (in
+        the primary instance). Note that this flag only affects the default
+        implementation of local_command_line(), and has no effect if
+        [gio.types.ApplicationFlags.HandlesCommandLine] is given.
+        See [gio.application.Application.run] for details.
+  */
+  HandlesOpen = 4,
+
+  /**
+      This application handles command line
+        arguments (in the primary instance). Note that this flag only affect
+        the default implementation of local_command_line().
+        See [gio.application.Application.run] for details.
+  */
+  HandlesCommandLine = 8,
+
+  /**
+      Send the environment of the
+        launching process to the primary instance. Set this flag if your
+        application is expected to behave differently depending on certain
+        environment variables. For instance, an editor might be expected
+        to use the `GIT_COMMITTER_NAME` environment variable
+        when editing a git commit message. The environment is available
+        to the #GApplication::command-line signal handler, via
+        [gio.application_command_line.ApplicationCommandLine.getenv].
+  */
+  SendEnvironment = 16,
+
+  /**
+      Make no attempts to do any of the typical
+        single-instance application negotiation, even if the application
+        ID is given.  The application neither attempts to become the
+        owner of the application ID nor does it check if an existing
+        owner already exists.  Everything occurs in the local process.
+        Since: 2.30.
+  */
+  NonUnique = 32,
+
+  /**
+      Allow users to override the
+        application ID from the command line with `--gapplication-app-id`.
+        Since: 2.48
+  */
+  CanOverrideAppId = 64,
+
+  /**
+      Allow another instance to take over
+        the bus name. Since: 2.60
+  */
+  AllowReplacement = 128,
+
+  /**
+      Take over from another instance. This flag is
+        usually set by passing `--gapplication-replace` on the commandline.
+        Since: 2.60
+  */
+  Replace = 256,
+}
+
+/**
+    #GAskPasswordFlags are used to request specific information from the
+  user, or to notify the user of their choices in an authentication
+  situation.
+*/
+enum GAskPasswordFlags : uint
+{
+  /**
+      operation requires a password.
+  */
+  NeedPassword = 1,
+
+  /**
+      operation requires a username.
+  */
+  NeedUsername = 2,
+
+  /**
+      operation requires a domain.
+  */
+  NeedDomain = 4,
+
+  /**
+      operation supports saving settings.
+  */
+  SavingSupported = 8,
+
+  /**
+      operation supports anonymous users.
+  */
+  AnonymousSupported = 16,
+
+  /**
+      operation takes TCRYPT parameters (Since: 2.58)
+  */
+  Tcrypt = 32,
+}
+
+/**
+    Flags used in [gio.global.busOwnName].
+*/
+enum GBusNameOwnerFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      Allow another message bus connection to claim the name.
+  */
+  AllowReplacement = 1,
+
+  /**
+      If another message bus connection owns the name and have
+    specified [gio.types.BusNameOwnerFlags.AllowReplacement], then take the name from the other connection.
+  */
+  Replace = 2,
+
+  /**
+      If another message bus connection owns the name, immediately
+    return an error from [gio.global.busOwnName] rather than entering the waiting queue for that name. (Since 2.54)
+  */
+  DoNotQueue = 4,
+}
+
+/**
+    Flags used in [gio.global.busWatchName].
+*/
+enum GBusNameWatcherFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      If no-one owns the name when
+    beginning to watch the name, ask the bus to launch an owner for the
+    name.
+  */
+  AutoStart = 1,
+}
+
+/**
+    An enumeration for well-known message buses.
+*/
+enum GBusType
+{
+  /**
+      An alias for the message bus that activated the process, if any.
+  */
+  Starter = -1,
+
+  /**
+      Not a message bus.
+  */
+  None = 0,
+
+  /**
+      The system-wide message bus.
+  */
+  System = 1,
+
+  /**
+      The login session message bus.
+  */
+  Session = 2,
+}
+
+/**
+    Flags used when calling a [gio.converter.Converter.convert].
+*/
+enum GConverterFlags : uint
+{
+  /**
+      No flags.
+  */
+  None = 0,
+
+  /**
+      At end of input data
+  */
+  InputAtEnd = 1,
+
+  /**
+      Flush data
+  */
+  Flush = 2,
+}
+
+/**
+    Results returned from [gio.converter.Converter.convert].
+*/
+enum GConverterResult
+{
+  /**
+      There was an error during conversion.
+  */
+  Error = 0,
+
+  /**
+      Some data was consumed or produced
+  */
+  Converted = 1,
+
+  /**
+      The conversion is finished
+  */
+  Finished = 2,
+
+  /**
+      Flushing is finished
+  */
+  Flushed = 3,
+}
+
+/**
+    Enumeration describing different kinds of native credential types.
+*/
+enum GCredentialsType
+{
+  /**
+      Indicates an invalid native credential type.
+  */
+  Invalid = 0,
+
+  /**
+      The native credentials type is a `struct ucred`.
+  */
+  LinuxUcred = 1,
+
+  /**
+      The native credentials type is a `struct cmsgcred`.
+  */
+  FreebsdCmsgcred = 2,
+
+  /**
+      The native credentials type is a `struct sockpeercred`. Added in 2.30.
+  */
+  OpenbsdSockpeercred = 3,
+
+  /**
+      The native credentials type is a `ucred_t`. Added in 2.40.
+  */
+  SolarisUcred = 4,
+
+  /**
+      The native credentials type is a `struct unpcbid`. Added in 2.42.
+  */
+  NetbsdUnpcbid = 5,
+
+  /**
+      The native credentials type is a `struct xucred`. Added in 2.66.
+  */
+  AppleXucred = 6,
+
+  /**
+      The native credentials type is a PID `DWORD`. Added in 2.72.
+  */
+  Win32Pid = 7,
+}
+
+/**
+    Flags used in [gio.dbus_connection.DBusConnection.call] and similar APIs.
+*/
+enum GDBusCallFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      The bus must not launch
+    an owner for the destination name in response to this method
+    invocation.
+  */
+  NoAutoStart = 1,
+
+  /**
+      the caller is prepared to
+    wait for interactive authorization. Since 2.46.
+  */
+  AllowInteractiveAuthorization = 2,
+}
+
+/**
+    Capabilities negotiated with the remote peer.
+*/
+enum GDBusCapabilityFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      The connection
+    supports exchanging UNIX file descriptors with the remote peer.
+  */
+  UnixFdPassing = 1,
+}
+
+/**
+    Flags used when creating a new #GDBusConnection.
+*/
+enum GDBusConnectionFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      Perform authentication against server.
+  */
+  AuthenticationClient = 1,
+
+  /**
+      Perform authentication against client.
+  */
+  AuthenticationServer = 2,
+
+  /**
+      When
+    authenticating as a server, allow the anonymous authentication
+    method.
+  */
+  AuthenticationAllowAnonymous = 4,
+
+  /**
+      Pass this flag if connecting to a peer that is a
+    message bus. This means that the Hello() method will be invoked as part of the connection setup.
+  */
+  MessageBusConnection = 8,
+
+  /**
+      If set, processing of D-Bus messages is
+    delayed until [gio.dbus_connection.DBusConnection.startMessageProcessing] is called.
+  */
+  DelayMessageProcessing = 16,
+
+  /**
+      When authenticating
+    as a server, require the UID of the peer to be the same as the UID of the server. (Since: 2.68)
+  */
+  AuthenticationRequireSameUser = 32,
+
+  /**
+      When authenticating, try to use
+     protocols that work across a Linux user namespace boundary, even if this
+     reduces interoperability with older D-Bus implementations. This currently
+     affects client-side `EXTERNAL` authentication, for which this flag makes
+     connections to a server in another user namespace succeed, but causes
+     a deadlock when connecting to a GDBus server older than 2.73.3. Since: 2.74
+  */
+  CrossNamespace = 64,
+}
+
+/**
+    Error codes for the `G_DBUS_ERROR` error domain.
+*/
+enum GDBusError
+{
+  /**
+      A generic error; "something went wrong" - see the error message for
+    more.
+  */
+  Failed = 0,
+
+  /**
+      There was not enough memory to complete an operation.
+  */
+  NoMemory = 1,
+
+  /**
+      The bus doesn't know how to launch a service to supply the bus name
+    you wanted.
+  */
+  ServiceUnknown = 2,
+
+  /**
+      The bus name you referenced doesn't exist (i.e. no application owns
+    it).
+  */
+  NameHasNoOwner = 3,
+
+  /**
+      No reply to a message expecting one, usually means a timeout occurred.
+  */
+  NoReply = 4,
+
+  /**
+      Something went wrong reading or writing to a socket, for example.
+  */
+  IoError = 5,
+
+  /**
+      A D-Bus bus address was malformed.
+  */
+  BadAddress = 6,
+
+  /**
+      Requested operation isn't supported (like ENOSYS on UNIX).
+  */
+  NotSupported = 7,
+
+  /**
+      Some limited resource is exhausted.
+  */
+  LimitsExceeded = 8,
+
+  /**
+      Security restrictions don't allow doing what you're trying to do.
+  */
+  AccessDenied = 9,
+
+  /**
+      Authentication didn't work.
+  */
+  AuthFailed = 10,
+
+  /**
+      Unable to connect to server (probably caused by ECONNREFUSED on a
+    socket).
+  */
+  NoServer = 11,
+
+  /**
+      Certain timeout errors, possibly ETIMEDOUT on a socket.  Note that
+    [gio.types.DBusError.NoReply] is used for message reply timeouts. Warning:
+    this is confusingly-named given that [gio.types.DBusError.TimedOut] also
+    exists. We can't fix it for compatibility reasons so just be
+    careful.
+  */
+  Timeout = 12,
+
+  /**
+      No network access (probably ENETUNREACH on a socket).
+  */
+  NoNetwork = 13,
+
+  /**
+      Can't bind a socket since its address is in use (i.e. EADDRINUSE).
+  */
+  AddressInUse = 14,
+
+  /**
+      The connection is disconnected and you're trying to use it.
+  */
+  Disconnected = 15,
+
+  /**
+      Invalid arguments passed to a method call.
+  */
+  InvalidArgs = 16,
+
+  /**
+      Missing file.
+  */
+  FileNotFound = 17,
+
+  /**
+      Existing file and the operation you're using does not silently overwrite.
+  */
+  FileExists = 18,
+
+  /**
+      Method name you invoked isn't known by the object you invoked it on.
+  */
+  UnknownMethod = 19,
+
+  /**
+      Certain timeout errors, e.g. while starting a service. Warning: this is
+    confusingly-named given that [gio.types.DBusError.Timeout] also exists. We
+    can't fix it for compatibility reasons so just be careful.
+  */
+  TimedOut = 20,
+
+  /**
+      Tried to remove or modify a match rule that didn't exist.
+  */
+  MatchRuleNotFound = 21,
+
+  /**
+      The match rule isn't syntactically valid.
+  */
+  MatchRuleInvalid = 22,
+
+  /**
+      While starting a new process, the exec() call failed.
+  */
+  SpawnExecFailed = 23,
+
+  /**
+      While starting a new process, the fork() call failed.
+  */
+  SpawnForkFailed = 24,
+
+  /**
+      While starting a new process, the child exited with a status code.
+  */
+  SpawnChildExited = 25,
+
+  /**
+      While starting a new process, the child exited on a signal.
+  */
+  SpawnChildSignaled = 26,
+
+  /**
+      While starting a new process, something went wrong.
+  */
+  SpawnFailed = 27,
+
+  /**
+      We failed to setup the environment correctly.
+  */
+  SpawnSetupFailed = 28,
+
+  /**
+      We failed to setup the config parser correctly.
+  */
+  SpawnConfigInvalid = 29,
+
+  /**
+      Bus name was not valid.
+  */
+  SpawnServiceInvalid = 30,
+
+  /**
+      Service file not found in system-services directory.
+  */
+  SpawnServiceNotFound = 31,
+
+  /**
+      Permissions are incorrect on the setuid helper.
+  */
+  SpawnPermissionsInvalid = 32,
+
+  /**
+      Service file invalid (Name, User or Exec missing).
+  */
+  SpawnFileInvalid = 33,
+
+  /**
+      Tried to get a UNIX process ID and it wasn't available.
+  */
+  SpawnNoMemory = 34,
+
+  /**
+      Tried to get a UNIX process ID and it wasn't available.
+  */
+  UnixProcessIdUnknown = 35,
+
+  /**
+      A type signature is not valid.
+  */
+  InvalidSignature = 36,
+
+  /**
+      A file contains invalid syntax or is otherwise broken.
+  */
+  InvalidFileContent = 37,
+
+  /**
+      Asked for SELinux security context and it wasn't available.
+  */
+  SelinuxSecurityContextUnknown = 38,
+
+  /**
+      Asked for ADT audit data and it wasn't available.
+  */
+  AdtAuditDataUnknown = 39,
+
+  /**
+      There's already an object with the requested object path.
+  */
+  ObjectPathInUse = 40,
+
+  /**
+      Object you invoked a method on isn't known. Since 2.42
+  */
+  UnknownObject = 41,
+
+  /**
+      Interface you invoked a method on isn't known by the object. Since 2.42
+  */
+  UnknownInterface = 42,
+
+  /**
+      Property you tried to access isn't known by the object. Since 2.42
+  */
+  UnknownProperty = 43,
+
+  /**
+      Property you tried to set is read-only. Since 2.42
+  */
+  PropertyReadOnly = 44,
+}
+
+/**
+    Flags describing the behavior of a #GDBusInterfaceSkeleton instance.
+*/
+enum GDBusInterfaceSkeletonFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      Each method invocation is handled in
+      a thread dedicated to the invocation. This means that the method implementation can use blocking IO
+      without blocking any other part of the process. It also means that the method implementation must
+      use locking to access data structures used by other threads.
+  */
+  HandleMethodInvocationsInThread = 1,
+}
+
+/**
+    Enumeration used to describe the byte order of a D-Bus message.
+*/
+enum GDBusMessageByteOrder
+{
+  /**
+      The byte order is big endian.
+  */
+  BigEndian = 66,
+
+  /**
+      The byte order is little endian.
+  */
+  LittleEndian = 108,
+}
+
+/**
+    Message flags used in #GDBusMessage.
+*/
+enum GDBusMessageFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      A reply is not expected.
+  */
+  NoReplyExpected = 1,
+
+  /**
+      The bus must not launch an
+    owner for the destination name in response to this message.
+  */
+  NoAutoStart = 2,
+
+  /**
+      If set on a method
+    call, this flag means that the caller is prepared to wait for interactive
+    authorization. Since 2.46.
+  */
+  AllowInteractiveAuthorization = 4,
+}
+
+/**
+    Header fields used in #GDBusMessage.
+*/
+enum GDBusMessageHeaderField
+{
+  /**
+      Not a valid header field.
+  */
+  Invalid = 0,
+
+  /**
+      The object path.
+  */
+  Path = 1,
+
+  /**
+      The interface name.
+  */
+  Interface = 2,
+
+  /**
+      The method or signal name.
+  */
+  Member = 3,
+
+  /**
+      The name of the error that occurred.
+  */
+  ErrorName = 4,
+
+  /**
+      The serial number the message is a reply to.
+  */
+  ReplySerial = 5,
+
+  /**
+      The name the message is intended for.
+  */
+  Destination = 6,
+
+  /**
+      Unique name of the sender of the message (filled in by the bus).
+  */
+  Sender = 7,
+
+  /**
+      The signature of the message body.
+  */
+  Signature = 8,
+
+  /**
+      The number of UNIX file descriptors that accompany the message.
+  */
+  NumUnixFds = 9,
+}
+
+/**
+    Message types used in #GDBusMessage.
+*/
+enum GDBusMessageType
+{
+  /**
+      Message is of invalid type.
+  */
+  Invalid = 0,
+
+  /**
+      Method call.
+  */
+  MethodCall = 1,
+
+  /**
+      Method reply.
+  */
+  MethodReturn = 2,
+
+  /**
+      Error reply.
+  */
+  Error = 3,
+
+  /**
+      Signal emission.
+  */
+  Signal = 4,
+}
+
+/**
+    Flags used when constructing a #GDBusObjectManagerClient.
+*/
+enum GDBusObjectManagerClientFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      If not set and the
+      manager is for a well-known name, then request the bus to launch
+      an owner for the name if no-one owns the name. This flag can only
+      be used in managers for well-known names.
+  */
+  DoNotAutoStart = 1,
+}
+
+/**
+    Flags describing the access control of a D-Bus property.
+*/
+enum GDBusPropertyInfoFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      Property is readable.
+  */
+  Readable = 1,
+
+  /**
+      Property is writable.
+  */
+  Writable = 2,
+}
+
+/**
+    Flags used when constructing an instance of a #GDBusProxy derived class.
+*/
+enum GDBusProxyFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      Don't load properties.
+  */
+  DoNotLoadProperties = 1,
+
+  /**
+      Don't connect to signals on the remote object.
+  */
+  DoNotConnectSignals = 2,
+
+  /**
+      If the proxy is for a well-known name,
+    do not ask the bus to launch an owner during proxy initialization or a method call.
+    This flag is only meaningful in proxies for well-known names.
+  */
+  DoNotAutoStart = 4,
+
+  /**
+      If set, the property value for any __invalidated property__ will be (asynchronously) retrieved upon receiving the [`PropertiesChanged`](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties) D-Bus signal and the property will not cause emission of the #GDBusProxy::g-properties-changed signal. When the value is received the #GDBusProxy::g-properties-changed signal is emitted for the property along with the retrieved value. Since 2.32.
+  */
+  GetInvalidatedProperties = 8,
+
+  /**
+      If the proxy is for a well-known name,
+    do not ask the bus to launch an owner during proxy initialization, but allow it to be
+    autostarted by a method call. This flag is only meaningful in proxies for well-known names,
+    and only if [gio.types.DBusProxyFlags.DoNotAutoStart] is not also specified.
+  */
+  DoNotAutoStartAtConstruction = 16,
+
+  /**
+      Don't actually send the AddMatch D-Bus
+       call for this signal subscription. This gives you more control
+       over which match rules you add (but you must add them manually). (Since: 2.72)
+  */
+  NoMatchRule = 32,
+}
+
+/**
+    Flags used when sending #GDBusMessages on a #GDBusConnection.
+*/
+enum GDBusSendMessageFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      Do not automatically
+    assign a serial number from the #GDBusConnection object when
+    sending a message.
+  */
+  PreserveSerial = 1,
+}
+
+/**
+    Flags used when creating a #GDBusServer.
+*/
+enum GDBusServerFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      All #GDBusServer::new-connection
+    signals will run in separated dedicated threads (see signal for
+    details).
+  */
+  RunInThread = 1,
+
+  /**
+      Allow the anonymous
+    authentication method.
+  */
+  AuthenticationAllowAnonymous = 2,
+
+  /**
+      Require the UID of the
+    peer to be the same as the UID of the server when authenticating. (Since: 2.68)
+  */
+  AuthenticationRequireSameUser = 4,
+}
+
+/**
+    Flags used when subscribing to signals via [gio.dbus_connection.DBusConnection.signalSubscribe].
+*/
+enum GDBusSignalFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      Don't actually send the AddMatch
+    D-Bus call for this signal subscription.  This gives you more control
+    over which match rules you add (but you must add them manually).
+  */
+  NoMatchRule = 1,
+
+  /**
+      Match first arguments that
+    contain a bus or interface name with the given namespace.
+  */
+  MatchArg0Namespace = 2,
+
+  /**
+      Match first arguments that
+    contain an object path that is either equivalent to the given path,
+    or one of the paths is a subpath of the other.
+  */
+  MatchArg0Path = 4,
+}
+
+/**
+    Flags passed to [gio.dbus_connection.DBusConnection.registerSubtree].
+*/
+enum GDBusSubtreeFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      Method calls to objects not in the enumerated range
+                                                          will still be dispatched. This is useful if you want
+                                                          to dynamically spawn objects in the subtree.
+  */
+  DispatchToUnenumeratedNodes = 1,
+}
+
+/**
+    #GDataStreamByteOrder is used to ensure proper endianness of streaming data sources
+  across various machine architectures.
+*/
+enum GDataStreamByteOrder
+{
+  /**
+      Selects Big Endian byte order.
+  */
+  BigEndian = 0,
+
+  /**
+      Selects Little Endian byte order.
+  */
+  LittleEndian = 1,
+
+  /**
+      Selects endianness based on host machine's architecture.
+  */
+  HostEndian = 2,
+}
+
+/**
+    #GDataStreamNewlineType is used when checking for or setting the line endings for a given file.
+*/
+enum GDataStreamNewlineType
+{
+  /**
+      Selects "LF" line endings, common on most modern UNIX platforms.
+  */
+  Lf = 0,
+
+  /**
+      Selects "CR" line endings.
+  */
+  Cr = 1,
+
+  /**
+      Selects "CR, LF" line ending, common on Microsoft Windows.
+  */
+  CrLf = 2,
+
+  /**
+      Automatically try to handle any line ending type.
+  */
+  Any = 3,
+}
+
+/**
+    Flags used when starting a drive.
+*/
+enum GDriveStartFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+}
+
+/**
+    Enumeration describing how a drive can be started/stopped.
+*/
+enum GDriveStartStopType
+{
+  /**
+      Unknown or drive doesn't support
+       start/stop.
+  */
+  Unknown = 0,
+
+  /**
+      The stop method will physically
+       shut down the drive and e.g. power down the port the drive is
+       attached to.
+  */
+  Shutdown = 1,
+
+  /**
+      The start/stop methods are used
+       for connecting/disconnect to the drive over the network.
+  */
+  Network = 2,
+
+  /**
+      The start/stop methods will
+       assemble/disassemble a virtual drive from several physical
+       drives.
+  */
+  Multidisk = 3,
+
+  /**
+      The start/stop methods will
+       unlock/lock the disk (for example using the ATA <quote>SECURITY
+       UNLOCK DEVICE</quote> command)
+  */
+  Password = 4,
+}
+
+/**
+    GEmblemOrigin is used to add information about the origin of the emblem
+  to #GEmblem.
+*/
+enum GEmblemOrigin
+{
+  /**
+      Emblem of unknown origin
+  */
+  Unknown = 0,
+
+  /**
+      Emblem adds device-specific information
+  */
+  Device = 1,
+
+  /**
+      Emblem depicts live metadata, such as "readonly"
+  */
+  Livemetadata = 2,
+
+  /**
+      Emblem comes from a user-defined tag, e.g. set by nautilus (in the future)
+  */
+  Tag = 3,
+}
+
+/**
+    Flags specifying the behaviour of an attribute.
+*/
+enum GFileAttributeInfoFlags : uint
+{
+  /**
+      no flags set.
+  */
+  None = 0,
+
+  /**
+      copy the attribute values when the file is copied.
+  */
+  CopyWithFile = 1,
+
+  /**
+      copy the attribute values when the file is moved.
+  */
+  CopyWhenMoved = 2,
+}
+
+/**
+    Used by [gio.file.File.setAttributesFromInfo] when setting file attributes.
+*/
+enum GFileAttributeStatus
+{
+  /**
+      Attribute value is unset (empty).
+  */
+  Unset = 0,
+
+  /**
+      Attribute value is set.
+  */
+  Set = 1,
+
+  /**
+      Indicates an error in setting the value.
+  */
+  ErrorSetting = 2,
+}
+
+/**
+    The data types for file attributes.
+*/
+enum GFileAttributeType
+{
+  /**
+      indicates an invalid or uninitialized type.
+  */
+  Invalid = 0,
+
+  /**
+      a null terminated UTF8 string.
+  */
+  String = 1,
+
+  /**
+      a zero terminated string of non-zero bytes.
+  */
+  ByteString = 2,
+
+  /**
+      a boolean value.
+  */
+  Boolean = 3,
+
+  /**
+      an unsigned 4-byte/32-bit integer.
+  */
+  Uint32 = 4,
+
+  /**
+      a signed 4-byte/32-bit integer.
+  */
+  Int32 = 5,
+
+  /**
+      an unsigned 8-byte/64-bit integer.
+  */
+  Uint64 = 6,
+
+  /**
+      a signed 8-byte/64-bit integer.
+  */
+  Int64 = 7,
+
+  /**
+      a #GObject.
+  */
+  Object = 8,
+
+  /**
+      a null terminated char **. Since 2.22
+  */
+  Stringv = 9,
+}
+
+/**
+    Flags used when copying or moving files.
+*/
+enum GFileCopyFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      Overwrite any existing files
+  */
+  Overwrite = 1,
+
+  /**
+      Make a backup of any existing files.
+  */
+  Backup = 2,
+
+  /**
+      Don't follow symlinks.
+  */
+  NofollowSymlinks = 4,
+
+  /**
+      Copy all file metadata instead of just default set used for copy (see #GFileInfo).
+  */
+  AllMetadata = 8,
+
+  /**
+      Don't use copy and delete fallback if native move not supported.
+  */
+  NoFallbackForMove = 16,
+
+  /**
+      Leaves target file with default perms, instead of setting the source file perms.
+  */
+  TargetDefaultPerms = 32,
+
+  /**
+      Use default modification
+        timestamps instead of copying them from the source file. Since 2.80
+  */
+  TargetDefaultModifiedTime = 64,
+}
+
+/**
+    Flags used when an operation may create a file.
+*/
+enum GFileCreateFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      Create a file that can only be
+       accessed by the current user.
+  */
+  Private = 1,
+
+  /**
+      Replace the destination
+       as if it didn't exist before. Don't try to keep any old
+       permissions, replace instead of following links. This
+       is generally useful if you're doing a "copy over"
+       rather than a "save new version of" replace operation.
+       You can think of it as "unlink destination" before
+       writing to it, although the implementation may not
+       be exactly like that. This flag can only be used with
+       [gio.file.File.replace] and its variants, including [gio.file.File.replaceContents].
+       Since 2.20
+  */
+  ReplaceDestination = 2,
+}
+
+/**
+    Flags that can be used with [gio.file.File.measureDiskUsage].
+*/
+enum GFileMeasureFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      Report any error encountered
+      while traversing the directory tree.  Normally errors are only
+      reported for the toplevel file.
+  */
+  ReportAnyError = 2,
+
+  /**
+      Tally usage based on apparent file
+      sizes.  Normally, the block-size is used, if available, as this is a
+      more accurate representation of disk space used.
+      Compare with `du --apparent-size`.
+      Since GLib 2.78. and similarly to `du` since GNU Coreutils 9.2, this will
+      ignore the sizes of file types other than regular files and links, as the
+      sizes of other file types are not specified in a standard way.
+  */
+  ApparentSize = 4,
+
+  /**
+      Do not cross mount point boundaries.
+      Compare with `du -x`.
+  */
+  NoXdev = 8,
+}
+
+/**
+    Specifies what type of event a monitor event is.
+*/
+enum GFileMonitorEvent
+{
+  /**
+      a file changed.
+  */
+  Changed = 0,
+
+  /**
+      a hint that this was probably the last change in a set of changes.
+  */
+  ChangesDoneHint = 1,
+
+  /**
+      a file was deleted.
+  */
+  Deleted = 2,
+
+  /**
+      a file was created.
+  */
+  Created = 3,
+
+  /**
+      a file attribute was changed.
+  */
+  AttributeChanged = 4,
+
+  /**
+      the file location will soon be unmounted.
+  */
+  PreUnmount = 5,
+
+  /**
+      the file location was unmounted.
+  */
+  Unmounted = 6,
+
+  /**
+      the file was moved -- only sent if the
+      (deprecated) [gio.types.FileMonitorFlags.SendMoved] flag is set
+  */
+  Moved = 7,
+
+  /**
+      the file was renamed within the
+      current directory -- only sent if the [gio.types.FileMonitorFlags.WatchMoves]
+      flag is set.  Since: 2.46.
+  */
+  Renamed = 8,
+
+  /**
+      the file was moved into the
+      monitored directory from another location -- only sent if the
+      [gio.types.FileMonitorFlags.WatchMoves] flag is set.  Since: 2.46.
+  */
+  MovedIn = 9,
+
+  /**
+      the file was moved out of the
+      monitored directory to another location -- only sent if the
+      [gio.types.FileMonitorFlags.WatchMoves] flag is set.  Since: 2.46
+  */
+  MovedOut = 10,
+}
+
+/**
+    Flags used to set what a #GFileMonitor will watch for.
+*/
+enum GFileMonitorFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      Watch for mount events.
+  */
+  WatchMounts = 1,
+
+  /**
+      Pair DELETED and CREATED events caused
+      by file renames (moves) and send a single G_FILE_MONITOR_EVENT_MOVED
+      event instead (NB: not supported on all backends; the default
+      behaviour -without specifying this flag- is to send single DELETED
+      and CREATED events).  Deprecated since 2.46: use
+      [gio.types.FileMonitorFlags.WatchMoves] instead.
+  */
+  SendMoved = 2,
+
+  /**
+      Watch for changes to the file made
+      via another hard link. Since 2.36.
+  */
+  WatchHardLinks = 4,
+
+  /**
+      Watch for rename operations on a
+      monitored directory.  This causes [gio.types.FileMonitorEvent.Renamed],
+      [gio.types.FileMonitorEvent.MovedIn] and [gio.types.FileMonitorEvent.MovedOut]
+      events to be emitted when possible.  Since: 2.46.
+  */
+  WatchMoves = 8,
+}
+
+/**
+    Flags used when querying a #GFileInfo.
+*/
+enum GFileQueryInfoFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      Don't follow symlinks.
+  */
+  NofollowSymlinks = 1,
+}
+
+/**
+    Indicates the file's on-disk type.
+  
+  On Windows systems a file will never have [gio.types.FileType.SymbolicLink] type;
+  use #GFileInfo and `G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK` to determine
+  whether a file is a symlink or not. This is due to the fact that NTFS does
+  not have a single filesystem object type for symbolic links - it has
+  files that symlink to files, and directories that symlink to directories.
+  #GFileType enumeration cannot precisely represent this important distinction,
+  which is why all Windows symlinks will continue to be reported as
+  [gio.types.FileType.Regular] or [gio.types.FileType.Directory].
+*/
+enum GFileType
+{
+  /**
+      File's type is unknown.
+  */
+  Unknown = 0,
+
+  /**
+      File handle represents a regular file.
+  */
+  Regular = 1,
+
+  /**
+      File handle represents a directory.
+  */
+  Directory = 2,
+
+  /**
+      File handle represents a symbolic link
+       (Unix systems).
+  */
+  SymbolicLink = 3,
+
+  /**
+      File is a "special" file, such as a socket, fifo,
+       block device, or character device.
+  */
+  Special = 4,
+
+  /**
+      File is a shortcut (Windows systems).
+  */
+  Shortcut = 5,
+
+  /**
+      File is a mountable location.
+  */
+  Mountable = 6,
+}
+
+/**
+    Indicates a hint from the file system whether files should be
+  previewed in a file manager. Returned as the value of the key
+  `G_FILE_ATTRIBUTE_FILESYSTEM_USE_PREVIEW`.
+*/
+enum GFilesystemPreviewType
+{
+  /**
+      Only preview files if user has explicitly requested it.
+  */
+  IfAlways = 0,
+
+  /**
+      Preview files if user has requested preview of "local" files.
+  */
+  IfLocal = 1,
+
+  /**
+      Never preview files.
+  */
+  Never = 2,
+}
+
+/**
+    Error codes returned by GIO functions.
+  
+  Note that this domain may be extended in future GLib releases. In
+  general, new error codes either only apply to new APIs, or else
+  replace [gio.types.IOErrorEnum.Failed] in cases that were not explicitly
+  distinguished before. You should therefore avoid writing code like
+  ```c
+  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_FAILED))
+    {
+      // Assume that this is EPRINTERONFIRE
+      ...
+    }
+  ```
+  but should instead treat all unrecognized error codes the same as
+  [gio.types.IOErrorEnum.Failed].
+  
+  See also #GPollableReturn for a cheaper way of returning
+  [gio.types.IOErrorEnum.WouldBlock] to callers without allocating a #GError.
+*/
+enum GIOErrorEnum
+{
+  /**
+      Generic error condition for when an operation fails
+        and no more specific #GIOErrorEnum value is defined.
+  */
+  Failed = 0,
+
+  /**
+      File not found.
+  */
+  NotFound = 1,
+
+  /**
+      File already exists.
+  */
+  Exists = 2,
+
+  /**
+      File is a directory.
+  */
+  IsDirectory = 3,
+
+  /**
+      File is not a directory.
+  */
+  NotDirectory = 4,
+
+  /**
+      File is a directory that isn't empty.
+  */
+  NotEmpty = 5,
+
+  /**
+      File is not a regular file.
+  */
+  NotRegularFile = 6,
+
+  /**
+      File is not a symbolic link.
+  */
+  NotSymbolicLink = 7,
+
+  /**
+      File cannot be mounted.
+  */
+  NotMountableFile = 8,
+
+  /**
+      Filename is too many characters.
+  */
+  FilenameTooLong = 9,
+
+  /**
+      Filename is invalid or contains invalid characters.
+  */
+  InvalidFilename = 10,
+
+  /**
+      File contains too many symbolic links.
+  */
+  TooManyLinks = 11,
+
+  /**
+      No space left on drive.
+  */
+  NoSpace = 12,
+
+  /**
+      Invalid argument.
+  */
+  InvalidArgument = 13,
+
+  /**
+      Permission denied.
+  */
+  PermissionDenied = 14,
+
+  /**
+      Operation (or one of its parameters) not supported
+  */
+  NotSupported = 15,
+
+  /**
+      File isn't mounted.
+  */
+  NotMounted = 16,
+
+  /**
+      File is already mounted.
+  */
+  AlreadyMounted = 17,
+
+  /**
+      File was closed.
+  */
+  Closed = 18,
+
+  /**
+      Operation was cancelled. See #GCancellable.
+  */
+  Cancelled = 19,
+
+  /**
+      Operations are still pending.
+  */
+  Pending = 20,
+
+  /**
+      File is read only.
+  */
+  ReadOnly = 21,
+
+  /**
+      Backup couldn't be created.
+  */
+  CantCreateBackup = 22,
+
+  /**
+      File's Entity Tag was incorrect.
+  */
+  WrongEtag = 23,
+
+  /**
+      Operation timed out.
+  */
+  TimedOut = 24,
+
+  /**
+      Operation would be recursive.
+  */
+  WouldRecurse = 25,
+
+  /**
+      File is busy.
+  */
+  Busy = 26,
+
+  /**
+      Operation would block.
+  */
+  WouldBlock = 27,
+
+  /**
+      Host couldn't be found (remote operations).
+  */
+  HostNotFound = 28,
+
+  /**
+      Operation would merge files.
+  */
+  WouldMerge = 29,
+
+  /**
+      Operation failed and a helper program has
+        already interacted with the user. Do not display any error dialog.
+  */
+  FailedHandled = 30,
+
+  /**
+      The current process has too many files
+        open and can't open any more. Duplicate descriptors do count toward
+        this limit. Since 2.20
+  */
+  TooManyOpenFiles = 31,
+
+  /**
+      The object has not been initialized. Since 2.22
+  */
+  NotInitialized = 32,
+
+  /**
+      The requested address is already in use. Since 2.22
+  */
+  AddressInUse = 33,
+
+  /**
+      Need more input to finish operation. Since 2.24
+  */
+  PartialInput = 34,
+
+  /**
+      The input data was invalid. Since 2.24
+  */
+  InvalidData = 35,
+
+  /**
+      A remote object generated an error that
+        doesn't correspond to a locally registered #GError error
+        domain. Use [gio.global.dbusErrorGetRemoteError] to extract the D-Bus
+        error name and [gio.global.dbusErrorStripRemoteError] to fix up the
+        message so it matches what was received on the wire. Since 2.26.
+  */
+  DbusError = 36,
+
+  /**
+      Host unreachable. Since 2.26
+  */
+  HostUnreachable = 37,
+
+  /**
+      Network unreachable. Since 2.26
+  */
+  NetworkUnreachable = 38,
+
+  /**
+      Connection refused. Since 2.26
+  */
+  ConnectionRefused = 39,
+
+  /**
+      Connection to proxy server failed. Since 2.26
+  */
+  ProxyFailed = 40,
+
+  /**
+      Proxy authentication failed. Since 2.26
+  */
+  ProxyAuthFailed = 41,
+
+  /**
+      Proxy server needs authentication. Since 2.26
+  */
+  ProxyNeedAuth = 42,
+
+  /**
+      Proxy connection is not allowed by ruleset.
+        Since 2.26
+  */
+  ProxyNotAllowed = 43,
+
+  /**
+      Broken pipe. Since 2.36
+  */
+  BrokenPipe = 44,
+
+  /**
+      Connection closed by peer. Note that this
+        is the same code as [gio.types.IOErrorEnum.BrokenPipe]; before 2.44 some
+        "connection closed" errors returned [gio.types.IOErrorEnum.BrokenPipe], but others
+        returned [gio.types.IOErrorEnum.Failed]. Now they should all return the same
+        value, which has this more logical name. Since 2.44.
+  */
+  ConnectionClosed = 44,
+
+  /**
+      Transport endpoint is not connected. Since 2.44
+  */
+  NotConnected = 45,
+
+  /**
+      Message too large. Since 2.48.
+  */
+  MessageTooLarge = 46,
+
+  /**
+      No such device found. Since 2.74
+  */
+  NoSuchDevice = 47,
+
+  /**
+      Destination address unset. Since 2.80
+  */
+  DestinationUnset = 48,
+}
+
+/**
+    Flags for use with [gio.iomodule_scope.IOModuleScope.new_].
+*/
+enum GIOModuleScopeFlags
+{
+  /**
+      No module scan flags
+  */
+  None = 0,
+
+  /**
+      When using this scope to load or
+        scan modules, automatically block a modules which has the same base
+        basename as previously loaded module.
+  */
+  BlockDuplicates = 1,
+}
+
+/**
+    GIOStreamSpliceFlags determine how streams should be spliced.
+*/
+enum GIOStreamSpliceFlags : uint
+{
+  /**
+      Do not close either stream.
+  */
+  None = 0,
+
+  /**
+      Close the first stream after
+        the splice.
+  */
+  CloseStream1 = 1,
+
+  /**
+      Close the second stream after
+        the splice.
+  */
+  CloseStream2 = 2,
+
+  /**
+      Wait for both splice operations to finish
+        before calling the callback.
+  */
+  WaitForBoth = 4,
+}
+
+/**
+    Memory availability warning levels.
+  
+  Note that because new values might be added, it is recommended that applications check
+  #GMemoryMonitorWarningLevel as ranges, for example:
+  ```c
+  if (warning_level > G_MEMORY_MONITOR_WARNING_LEVEL_LOW)
+    drop_caches ();
+  ```
+*/
+enum GMemoryMonitorWarningLevel
+{
+  /**
+      Memory on the device is low, processes
+      should free up unneeded resources (for example, in-memory caches) so they can
+      be used elsewhere.
+  */
+  Low = 50,
+
+  /**
+      Same as @G_MEMORY_MONITOR_WARNING_LEVEL_LOW
+      but the device has even less free memory, so processes should try harder to free
+      up unneeded resources. If your process does not need to stay running, it is a
+      good time for it to quit.
+  */
+  Medium = 100,
+
+  /**
+      The system will soon start terminating
+      processes to reclaim memory, including background processes.
+  */
+  Critical = 255,
+}
+
+/**
+    Flags used when mounting a mount.
+*/
+enum GMountMountFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+}
+
+/**
+    #GMountOperationResult is returned as a result when a request for
+  information is send by the mounting operation.
+*/
+enum GMountOperationResult
+{
+  /**
+      The request was fulfilled and the
+        user specified data is now available
+  */
+  Handled = 0,
+
+  /**
+      The user requested the mount operation
+        to be aborted
+  */
+  Aborted = 1,
+
+  /**
+      The request was unhandled (i.e. not
+        implemented)
+  */
+  Unhandled = 2,
+}
+
+/**
+    Flags used when an unmounting a mount.
+*/
+enum GMountUnmountFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      Unmount even if there are outstanding
+     file operations on the mount.
+  */
+  Force = 1,
+}
+
+/**
+    The host's network connectivity state, as reported by #GNetworkMonitor.
+*/
+enum GNetworkConnectivity
+{
+  /**
+      The host is not configured with a
+      route to the Internet; it may or may not be connected to a local
+      network.
+  */
+  Local = 1,
+
+  /**
+      The host is connected to a network, but
+      does not appear to be able to reach the full Internet, perhaps
+      due to upstream network problems.
+  */
+  Limited = 2,
+
+  /**
+      The host is behind a captive portal and
+      cannot reach the full Internet.
+  */
+  Portal = 3,
+
+  /**
+      The host is connected to a network, and
+      appears to be able to reach the full Internet.
+  */
+  Full = 4,
+}
+
+/**
+    Priority levels for #GNotifications.
+*/
+enum GNotificationPriority
+{
+  /**
+      the default priority, to be used for the
+      majority of notifications (for example email messages, software updates,
+      completed download/sync operations)
+  */
+  Normal = 0,
+
+  /**
+      for notifications that do not require
+      immediate attention - typically used for contextual background
+      information, such as contact birthdays or local weather
+  */
+  Low = 1,
+
+  /**
+      for events that require more attention,
+      usually because responses are time-sensitive (for example chat and SMS
+      messages or alarms)
+  */
+  High = 2,
+
+  /**
+      for urgent notifications, or notifications
+      that require a response in a short space of time (for example phone calls
+      or emergency warnings)
+  */
+  Urgent = 3,
+}
+
+/**
+    GOutputStreamSpliceFlags determine how streams should be spliced.
+*/
+enum GOutputStreamSpliceFlags : uint
+{
+  /**
+      Do not close either stream.
+  */
+  None = 0,
+
+  /**
+      Close the source stream after
+        the splice.
+  */
+  CloseSource = 1,
+
+  /**
+      Close the target stream after
+        the splice.
+  */
+  CloseTarget = 2,
+}
+
+/**
+    #GPasswordSave is used to indicate the lifespan of a saved password.
+  
+  #Gvfs stores passwords in the Gnome keyring when this flag allows it
+  to, and later retrieves it again from there.
+*/
+enum GPasswordSave
+{
+  /**
+      never save a password.
+  */
+  Never = 0,
+
+  /**
+      save a password for the session.
+  */
+  ForSession = 1,
+
+  /**
+      save a password permanently.
+  */
+  Permanently = 2,
+}
+
+/**
+    Return value for various IO operations that signal errors via the
+  return value and not necessarily via a #GError.
+  
+  This enum exists to be able to return errors to callers without having to
+  allocate a #GError. Allocating #GErrors can be quite expensive for
+  regularly happening errors like [gio.types.IOErrorEnum.WouldBlock].
+  
+  In case of [gio.types.PollableReturn.Failed] a #GError should be set for the
+  operation to give details about the error that happened.
+*/
+enum GPollableReturn
+{
+  /**
+      Generic error condition for when an operation fails.
+  */
+  Failed = 0,
+
+  /**
+      The operation was successfully finished.
+  */
+  Ok = 1,
+
+  /**
+      The operation would block.
+  */
+  WouldBlock = -27,
+}
+
+/**
+    An error code used with `G_RESOLVER_ERROR` in a #GError returned
+  from a #GResolver routine.
+*/
+enum GResolverError
+{
+  /**
+      the requested name/address/service was not
+        found
+  */
+  NotFound = 0,
+
+  /**
+      the requested information could not
+        be looked up due to a network error or similar problem
+  */
+  TemporaryFailure = 1,
+
+  /**
+      unknown error
+  */
+  Internal = 2,
+}
+
+/**
+    Flags to modify lookup behavior.
+*/
+enum GResolverNameLookupFlags : uint
+{
+  /**
+      default behavior (same as [gio.resolver.Resolver.lookupByName])
+  */
+  Default = 0,
+
+  /**
+      only resolve ipv4 addresses
+  */
+  Ipv4Only = 1,
+
+  /**
+      only resolve ipv6 addresses
+  */
+  Ipv6Only = 2,
+}
+
+/**
+    The type of record that [gio.resolver.Resolver.lookupRecords] or
+  [gio.resolver.Resolver.lookupRecordsAsync] should retrieve. The records are returned
+  as lists of #GVariant tuples. Each record type has different values in
+  the variant tuples returned.
+  
+  [gio.types.ResolverRecordType.Srv] records are returned as variants with the signature
+  `(qqqs)`, containing a [glib.types.MAXUINT16] with the priority, a [glib.types.MAXUINT16] with the
+  weight, a [glib.types.MAXUINT16] with the port, and a string of the hostname.
+  
+  [gio.types.ResolverRecordType.Mx] records are returned as variants with the signature
+  `(qs)`, representing a [glib.types.MAXUINT16] with the preference, and a string containing
+  the mail exchanger hostname.
+  
+  [gio.types.ResolverRecordType.Txt] records are returned as variants with the signature
+  `(as)`, representing an array of the strings in the text record. Note: Most TXT
+  records only contain a single string, but
+  [RFC 1035](https://tools.ietf.org/html/rfc1035#section-3.3.14) does allow a
+  record to contain multiple strings. The RFC which defines the interpretation
+  of a specific TXT record will likely require concatenation of multiple
+  strings if they are present, as with
+  [RFC 7208](https://tools.ietf.org/html/rfc7208#section-3.3).
+  
+  [gio.types.ResolverRecordType.Soa] records are returned as variants with the signature
+  `(ssuuuuu)`, representing a string containing the primary name server, a
+  string containing the administrator, the serial as a [pango.types.uint], the refresh
+  interval as a [pango.types.uint], the retry interval as a [pango.types.uint], the expire timeout
+  as a [pango.types.uint], and the TTL as a [pango.types.uint].
+  
+  [gio.types.ResolverRecordType.Ns] records are returned as variants with the signature
+  `(s)`, representing a string of the hostname of the name server.
+*/
+enum GResolverRecordType
+{
+  /**
+      look up DNS SRV records for a domain
+  */
+  Srv = 1,
+
+  /**
+      look up DNS MX records for a domain
+  */
+  Mx = 2,
+
+  /**
+      look up DNS TXT records for a name
+  */
+  Txt = 3,
+
+  /**
+      look up DNS SOA records for a zone
+  */
+  Soa = 4,
+
+  /**
+      look up DNS NS records for a domain
+  */
+  Ns = 5,
+}
+
+/**
+    An error code used with `G_RESOURCE_ERROR` in a #GError returned
+  from a #GResource routine.
+*/
+enum GResourceError
+{
+  /**
+      no file was found at the requested path
+  */
+  NotFound = 0,
+
+  /**
+      unknown error
+  */
+  Internal = 1,
+}
+
+/**
+    GResourceFlags give information about a particular file inside a resource
+  bundle.
+*/
+enum GResourceFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+
+  /**
+      The file is compressed.
+  */
+  Compressed = 1,
+}
+
+/**
+    GResourceLookupFlags determine how resource path lookups are handled.
+*/
+enum GResourceLookupFlags : uint
+{
+  /**
+      No flags set.
+  */
+  None = 0,
+}
+
+/**
+    Flags used when creating a binding. These flags determine in which
+  direction the binding works. The default is to synchronize in both
+  directions.
+*/
+enum GSettingsBindFlags : uint
+{
+  /**
+      Equivalent to `G_SETTINGS_BIND_GET|G_SETTINGS_BIND_SET`
+  */
+  Default = 0,
+
+  /**
+      Update the #GObject property when the setting changes.
+        It is an error to use this flag if the property is not writable.
+  */
+  Get = 1,
+
+  /**
+      Update the setting when the #GObject property changes.
+        It is an error to use this flag if the property is not readable.
+  */
+  Set = 2,
+
+  /**
+      Do not try to bind a "sensitivity" property to the writability of the setting
+  */
+  NoSensitivity = 4,
+
+  /**
+      When set in addition to [gio.types.SettingsBindFlags.Get], set the #GObject property
+        value initially from the setting, but do not listen for changes of the setting
+  */
+  GetNoChanges = 8,
+
+  /**
+      When passed to [gio.settings.Settings.bind], uses a pair of mapping functions that invert
+        the boolean value when mapping between the setting and the property.  The setting and property must both
+        be booleans.  You cannot pass this flag to [gio.settings.Settings.bindWithMapping].
+  */
+  InvertBoolean = 16,
+}
+
+/**
+    Describes an event occurring on a #GSocketClient. See the
+  #GSocketClient::event signal for more details.
+  
+  Additional values may be added to this type in the future.
+*/
+enum GSocketClientEvent
+{
+  /**
+      The client is doing a DNS lookup.
+  */
+  Resolving = 0,
+
+  /**
+      The client has completed a DNS lookup.
+  */
+  Resolved = 1,
+
+  /**
+      The client is connecting to a remote
+      host (either a proxy or the destination server).
+  */
+  Connecting = 2,
+
+  /**
+      The client has connected to a remote
+      host.
+  */
+  Connected = 3,
+
+  /**
+      The client is negotiating
+      with a proxy to connect to the destination server.
+  */
+  ProxyNegotiating = 4,
+
+  /**
+      The client has negotiated
+      with the proxy server.
+  */
+  ProxyNegotiated = 5,
+
+  /**
+      The client is performing a
+      TLS handshake.
+  */
+  TlsHandshaking = 6,
+
+  /**
+      The client has performed a
+      TLS handshake.
+  */
+  TlsHandshaked = 7,
+
+  /**
+      The client is done with a particular
+      #GSocketConnectable.
+  */
+  Complete = 8,
+}
+
+/**
+    The protocol family of a #GSocketAddress. (These values are
+  identical to the system defines `AF_INET`, `AF_INET6` and `AF_UNIX`,
+  if available.)
+*/
+enum GSocketFamily
+{
+  /**
+      no address family
+  */
+  Invalid = 0,
+
+  /**
+      the UNIX domain family
+  */
+  Unix = 1,
+
+  /**
+      the IPv4 family
+  */
+  Ipv4 = 2,
+
+  /**
+      the IPv6 family
+  */
+  Ipv6 = 10,
+}
+
+/**
+    Describes an event occurring on a #GSocketListener. See the
+  #GSocketListener::event signal for more details.
+  
+  Additional values may be added to this type in the future.
+*/
+enum GSocketListenerEvent
+{
+  /**
+      The listener is about to bind a socket.
+  */
+  Binding = 0,
+
+  /**
+      The listener has bound a socket.
+  */
+  Bound = 1,
+
+  /**
+      The listener is about to start
+       listening on this socket.
+  */
+  Listening = 2,
+
+  /**
+      The listener is now listening on
+      this socket.
+  */
+  Listened = 3,
+}
+
+/**
+    Flags used in [gio.socket.Socket.receiveMessage] and [gio.socket.Socket.sendMessage].
+  The flags listed in the enum are some commonly available flags, but the
+  values used for them are the same as on the platform, and any other flags
+  are passed in/out as is. So to use a platform specific flag, just include
+  the right system header and pass in the flag.
+*/
+enum GSocketMsgFlags : uint
+{
+  /**
+      No flags.
+  */
+  None = 0,
+
+  /**
+      Request to send/receive out of band data.
+  */
+  Oob = 1,
+
+  /**
+      Read data from the socket without removing it from
+        the queue.
+  */
+  Peek = 2,
+
+  /**
+      Don't use a gateway to send out the packet,
+        only send to hosts on directly connected networks.
+  */
+  Dontroute = 4,
+}
+
+/**
+    A protocol identifier is specified when creating a #GSocket, which is a
+  family/type specific identifier, where 0 means the default protocol for
+  the particular family/type.
+  
+  This enum contains a set of commonly available and used protocols. You
+  can also pass any other identifiers handled by the platform in order to
+  use protocols not listed here.
+*/
+enum GSocketProtocol
+{
+  /**
+      The protocol type is unknown
+  */
+  Unknown = -1,
+
+  /**
+      The default protocol for the family/type
+  */
+  Default = 0,
+
+  /**
+      TCP over IP
+  */
+  Tcp = 6,
+
+  /**
+      UDP over IP
+  */
+  Udp = 17,
+
+  /**
+      SCTP over IP
+  */
+  Sctp = 132,
+}
+
+/**
+    Flags used when creating a #GSocket. Some protocols may not implement
+  all the socket types.
+*/
+enum GSocketType
+{
+  /**
+      Type unknown or wrong
+  */
+  Invalid = 0,
+
+  /**
+      Reliable connection-based byte streams (e.g. TCP).
+  */
+  Stream = 1,
+
+  /**
+      Connectionless, unreliable datagram passing.
+        (e.g. UDP)
+  */
+  Datagram = 2,
+
+  /**
+      Reliable connection-based passing of datagrams
+        of fixed maximum length (e.g. SCTP).
+  */
+  Seqpacket = 3,
+}
+
+/**
+    Flags to define the behaviour of a #GSubprocess.
+  
+  Note that the default for stdin is to redirect from `/dev/null`.  For
+  stdout and stderr the default are for them to inherit the
+  corresponding descriptor from the calling process.
+  
+  Note that it is a programmer error to mix 'incompatible' flags.  For
+  example, you may not request both [gio.types.SubprocessFlags.StdoutPipe] and
+  [gio.types.SubprocessFlags.StdoutSilence].
+*/
+enum GSubprocessFlags : uint
+{
+  /**
+      No flags.
+  */
+  None = 0,
+
+  /**
+      create a pipe for the stdin of the
+      spawned process that can be accessed with
+      [gio.subprocess.Subprocess.getStdinPipe].
+  */
+  StdinPipe = 1,
+
+  /**
+      stdin is inherited from the
+      calling process.
+  */
+  StdinInherit = 2,
+
+  /**
+      create a pipe for the stdout of the
+      spawned process that can be accessed with
+      [gio.subprocess.Subprocess.getStdoutPipe].
+  */
+  StdoutPipe = 4,
+
+  /**
+      silence the stdout of the spawned
+      process (ie: redirect to `/dev/null`).
+  */
+  StdoutSilence = 8,
+
+  /**
+      create a pipe for the stderr of the
+      spawned process that can be accessed with
+      [gio.subprocess.Subprocess.getStderrPipe].
+  */
+  StderrPipe = 16,
+
+  /**
+      silence the stderr of the spawned
+      process (ie: redirect to `/dev/null`).
+  */
+  StderrSilence = 32,
+
+  /**
+      merge the stderr of the spawned
+      process with whatever the stdout happens to be.  This is a good way
+      of directing both streams to a common log file, for example.
+  */
+  StderrMerge = 64,
+
+  /**
+      spawned processes will inherit the
+      file descriptors of their parent, unless those descriptors have
+      been explicitly marked as close-on-exec.  This flag has no effect
+      over the "standard" file descriptors (stdin, stdout, stderr).
+  */
+  InheritFds = 128,
+
+  /**
+      if path searching is
+      needed when spawning the subprocess, use the `PATH` in the launcher
+      environment. (Since: 2.72)
+  */
+  SearchPathFromEnvp = 256,
+}
+
+/**
+    Flags to define future #GTestDBus behaviour.
+*/
+enum GTestDBusFlags : uint
+{
+  /**
+      No flags.
+  */
+  None = 0,
+}
+
+/**
+    The client authentication mode for a #GTlsServerConnection.
+*/
+enum GTlsAuthenticationMode
+{
+  /**
+      client authentication not required
+  */
+  None = 0,
+
+  /**
+      client authentication is requested
+  */
+  Requested = 1,
+
+  /**
+      client authentication is required
+  */
+  Required = 2,
+}
+
+/**
+    A set of flags describing TLS certification validation. This can be
+  used to describe why a particular certificate was rejected (for
+  example, in #GTlsConnection::accept-certificate).
+  
+  GLib guarantees that if certificate verification fails, at least one
+  flag will be set, but it does not guarantee that all possible flags
+  will be set. Accordingly, you may not safely decide to ignore any
+  particular type of error. For example, it would be incorrect to mask
+  [gio.types.TlsCertificateFlags.Expired] if you want to allow expired certificates,
+  because this could potentially be the only error flag set even if
+  other problems exist with the certificate.
+*/
+enum GTlsCertificateFlags : uint
+{
+  /**
+      No flags set. Since: 2.74
+  */
+  NoFlags = 0,
+
+  /**
+      The signing certificate authority is
+      not known.
+  */
+  UnknownCa = 1,
+
+  /**
+      The certificate does not match the
+      expected identity of the site that it was retrieved from.
+  */
+  BadIdentity = 2,
+
+  /**
+      The certificate's activation time
+      is still in the future
+  */
+  NotActivated = 4,
+
+  /**
+      The certificate has expired
+  */
+  Expired = 8,
+
+  /**
+      The certificate has been revoked
+      according to the #GTlsConnection's certificate revocation list.
+  */
+  Revoked = 16,
+
+  /**
+      The certificate's algorithm is
+      considered insecure.
+  */
+  Insecure = 32,
+
+  /**
+      Some other error occurred validating
+      the certificate
+  */
+  GenericError = 64,
+
+  /**
+      the combination of all of the above
+      flags
+  */
+  ValidateAll = 127,
+}
+
+/**
+    Flags for [gio.tls_interaction.TlsInteraction.requestCertificate],
+  [gio.tls_interaction.TlsInteraction.requestCertificateAsync], and
+  [gio.tls_interaction.TlsInteraction.invokeRequestCertificate].
+*/
+enum GTlsCertificateRequestFlags
+{
+  /**
+      No flags
+  */
+  None = 0,
+}
+
+/**
+    An error code used with `G_TLS_CHANNEL_BINDING_ERROR` in a #GError to
+  indicate a TLS channel binding retrieval error.
+*/
+enum GTlsChannelBindingError
+{
+  /**
+      Either entire binding
+       retrieval facility or specific binding type is not implemented in the
+       TLS backend.
+  */
+  NotImplemented = 0,
+
+  /**
+      The handshake is not yet
+       complete on the connection which is a strong requirement for any existing
+       binding type.
+  */
+  InvalidState = 1,
+
+  /**
+      Handshake is complete but
+       binding data is not available. That normally indicates the TLS
+       implementation failed to provide the binding data. For example, some
+       implementations do not provide a peer certificate for resumed connections.
+  */
+  NotAvailable = 2,
+
+  /**
+      Binding type is not supported
+       on the current connection. This error could be triggered when requesting
+       `tls-server-end-point` binding data for a certificate which has no hash
+       function or uses multiple hash functions.
+  */
+  NotSupported = 3,
+
+  /**
+      Any other backend error
+       preventing binding data retrieval.
+  */
+  GeneralError = 4,
+}
+
+/**
+    The type of TLS channel binding data to retrieve from #GTlsConnection
+  or #GDtlsConnection, as documented by RFC 5929 or RFC 9266. The
+  [`tls-unique-for-telnet`](https://tools.ietf.org/html/rfc5929#section-5)
+  binding type is not currently implemented.
+*/
+enum GTlsChannelBindingType
+{
+  /**
+      [`tls-unique`](https://tools.ietf.org/html/rfc5929#section-3) binding
+       type
+  */
+  Unique = 0,
+
+  /**
+      [`tls-server-end-point`](https://tools.ietf.org/html/rfc5929#section-4)
+       binding type
+  */
+  ServerEndPoint = 1,
+
+  /**
+      [`tls-exporter`](https://www.rfc-editor.org/rfc/rfc9266.html) binding
+       type. Since: 2.74
+  */
+  Exporter = 2,
+}
+
+/**
+    Flags for [gio.tls_database.TlsDatabase.lookupCertificateForHandle],
+  [gio.tls_database.TlsDatabase.lookupCertificateIssuer],
+  and [gio.tls_database.TlsDatabase.lookupCertificatesIssuedBy].
+*/
+enum GTlsDatabaseLookupFlags
+{
+  /**
+      No lookup flags
+  */
+  None = 0,
+
+  /**
+      Restrict lookup to certificates that have
+        a private key.
+  */
+  Keypair = 1,
+}
+
+/**
+    Flags for [gio.tls_database.TlsDatabase.verifyChain].
+*/
+enum GTlsDatabaseVerifyFlags : uint
+{
+  /**
+      No verification flags
+  */
+  None = 0,
+}
+
+/**
+    An error code used with `G_TLS_ERROR` in a #GError returned from a
+  TLS-related routine.
+*/
+enum GTlsError
+{
+  /**
+      No TLS provider is available
+  */
+  Unavailable = 0,
+
+  /**
+      Miscellaneous TLS error
+  */
+  Misc = 1,
+
+  /**
+      The certificate presented could not
+      be parsed or failed validation.
+  */
+  BadCertificate = 2,
+
+  /**
+      The TLS handshake failed because the
+      peer does not seem to be a TLS server.
+  */
+  NotTls = 3,
+
+  /**
+      The TLS handshake failed because the
+      peer's certificate was not acceptable.
+  */
+  Handshake = 4,
+
+  /**
+      The TLS handshake failed because
+      the server requested a client-side certificate, but none was
+      provided. See [gio.tls_connection.TlsConnection.setCertificate].
+  */
+  CertificateRequired = 5,
+
+  /**
+      The TLS connection was closed without proper
+      notice, which may indicate an attack. See
+      [gio.tls_connection.TlsConnection.setRequireCloseNotify].
+  */
+  Eof = 6,
+
+  /**
+      The TLS handshake failed
+      because the client sent the fallback SCSV, indicating a protocol
+      downgrade attack. Since: 2.60
+  */
+  InappropriateFallback = 7,
+
+  /**
+      The certificate failed
+      to load because a password was incorrect. Since: 2.72
+  */
+  BadCertificatePassword = 8,
+}
+
+/**
+    #GTlsInteractionResult is returned by various functions in #GTlsInteraction
+  when finishing an interaction request.
+*/
+enum GTlsInteractionResult
+{
+  /**
+      The interaction was unhandled (i.e. not
+        implemented).
+  */
+  Unhandled = 0,
+
+  /**
+      The interaction completed, and resulting data
+        is available.
+  */
+  Handled = 1,
+
+  /**
+      The interaction has failed, or was cancelled.
+        and the operation should be aborted.
+  */
+  Failed = 2,
+}
+
+/**
+    Various flags for the password.
+*/
+enum GTlsPasswordFlags : uint
+{
+  /**
+      No flags
+  */
+  None = 0,
+
+  /**
+      The password was wrong, and the user should retry.
+  */
+  Retry = 2,
+
+  /**
+      Hint to the user that the password has been
+       wrong many times, and the user may not have many chances left.
+  */
+  ManyTries = 4,
+
+  /**
+      Hint to the user that this is the last try to get
+       this password right.
+  */
+  FinalTry = 8,
+
+  /**
+      For PKCS #11, the user PIN is required.
+       Since: 2.70.
+  */
+  Pkcs11User = 16,
+
+  /**
+      For PKCS #11, the security officer
+       PIN is required. Since: 2.70.
+  */
+  Pkcs11SecurityOfficer = 32,
+
+  /**
+      For PKCS #11, the context-specific
+       PIN is required. Since: 2.70.
+  */
+  Pkcs11ContextSpecific = 64,
+}
+
+/**
+    The TLS or DTLS protocol version used by a #GTlsConnection or
+  #GDtlsConnection. The integer values of these versions are sequential
+  to ensure newer known protocol versions compare greater than older
+  known versions. Any known DTLS protocol version will compare greater
+  than any SSL or TLS protocol version. The protocol version may be
+  [gio.types.TlsProtocolVersion.Unknown] if the TLS backend supports a newer
+  protocol version that GLib does not yet know about. This means that
+  it's possible for an unknown DTLS protocol version to compare less
+  than the TLS protocol versions.
+*/
+enum GTlsProtocolVersion
+{
+  /**
+      No protocol version or unknown protocol version
+  */
+  Unknown = 0,
+
+  /**
+      SSL 3.0, which is insecure and should not be used
+  */
+  Ssl30 = 1,
+
+  /**
+      TLS 1.0, which is insecure and should not be used
+  */
+  Tls10 = 2,
+
+  /**
+      TLS 1.1, which is insecure and should not be used
+  */
+  Tls11 = 3,
+
+  /**
+      TLS 1.2, defined by [RFC 5246](https://datatracker.ietf.org/doc/html/rfc5246)
+  */
+  Tls12 = 4,
+
+  /**
+      TLS 1.3, defined by [RFC 8446](https://datatracker.ietf.org/doc/html/rfc8446)
+  */
+  Tls13 = 5,
+
+  /**
+      DTLS 1.0, which is insecure and should not be used
+  */
+  Dtls10 = 201,
+
+  /**
+      DTLS 1.2, defined by [RFC 6347](https://datatracker.ietf.org/doc/html/rfc6347)
+  */
+  Dtls12 = 202,
+}
+
+/**
+    When to allow rehandshaking. See
+  [gio.tls_connection.TlsConnection.setRehandshakeMode].
+
+  Deprecated:     Changing the rehandshake mode is no longer
+      required for compatibility. Also, rehandshaking has been removed
+      from the TLS protocol in TLS 1.3.
+*/
+enum GTlsRehandshakeMode
+{
+  /**
+      Never allow rehandshaking
+  */
+  Never = 0,
+
+  /**
+      Allow safe rehandshaking only
+  */
+  Safely = 1,
+
+  /**
+      Allow unsafe rehandshaking
+  */
+  Unsafely = 2,
+}
+
+/**
+    The type of name used by a #GUnixSocketAddress.
+  [gio.types.UnixSocketAddressType.Path] indicates a traditional unix domain
+  socket bound to a filesystem path. [gio.types.UnixSocketAddressType.Anonymous]
+  indicates a socket not bound to any name (eg, a client-side socket,
+  or a socket created with socketpair()).
+  
+  For abstract sockets, there are two incompatible ways of naming
+  them; the man pages suggest using the entire `struct sockaddr_un`
+  as the name, padding the unused parts of the `sun_path` field with
+  zeroes; this corresponds to [gio.types.UnixSocketAddressType.AbstractPadded].
+  However, many programs instead just use a portion of `sun_path`, and
+  pass an appropriate smaller length to bind() or connect(). This is
+  [gio.types.UnixSocketAddressType.Abstract].
+*/
+enum GUnixSocketAddressType
+{
+  /**
+      invalid
+  */
+  Invalid = 0,
+
+  /**
+      anonymous
+  */
+  Anonymous = 1,
+
+  /**
+      a filesystem path
+  */
+  Path = 2,
+
+  /**
+      an abstract name
+  */
+  Abstract = 3,
+
+  /**
+      an abstract name, 0-padded
+      to the full length of a unix socket name
+  */
+  AbstractPadded = 4,
+}
+
+/**
+    Used to select the type of data format to use for #GZlibDecompressor
+  and #GZlibCompressor.
+*/
+enum GZlibCompressorFormat
+{
+  /**
+      deflate compression with zlib header
+  */
+  Zlib = 0,
+
+  /**
+      gzip file format
+  */
+  Gzip = 1,
+
+  /**
+      deflate compression with no header
+  */
+  Raw = 2,
+}
+
 /**
     [gio.action.Action] represents a single named action.
   

@@ -2,7 +2,6 @@ module parquet.c.types;
 
 public import gid.basictypes;
 public import arrow.c.types;
-import parquet.types;
 
 /** */
 struct GParquetArrowFileReader

@@ -2,11 +2,23 @@ module arrowdataset.c.types;
 
 public import gid.basictypes;
 public import arrow.c.types;
-import arrowdataset.types;
 
+/**
+    They are corresponding to `arrow::dataset::SegmentEncoding` values.
+*/
+enum GADatasetSegmentEncoding
+{
+  /**
+      No encoding.
+  */
+  None = 0,
 
-// Enums
-alias GADatasetSegmentEncoding = arrowdataset.types.SegmentEncoding;
+  /**
+      Segment values are URL-encoded.
+  */
+  Uri = 1,
+}
+
 /** */
 struct GADatasetCSVFileFormat
 {

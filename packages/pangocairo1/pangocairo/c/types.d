@@ -4,7 +4,6 @@ public import gid.basictypes;
 public import gobject.c.types;
 public import pango.c.types;
 public import cairo.c.types;
-import pangocairo.types;
 
 /**
     [pangocairo.font.Font] is an interface exported by fonts for

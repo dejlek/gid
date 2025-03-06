@@ -2,7 +2,6 @@ module arrowflight.c.types;
 
 public import gid.basictypes;
 public import arrow.c.types;
-import arrowflight.types;
 
 /** */
 struct GAFlightCallOptions

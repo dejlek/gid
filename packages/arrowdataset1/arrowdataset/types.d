@@ -5,21 +5,10 @@ import arrowdataset.c.types;
 import gid.gid;
 
 
-/**
-    They are corresponding to `arrow::dataset::SegmentEncoding` values.
-*/
-enum SegmentEncoding
-{
-  /**
-      No encoding.
-  */
-  None = 0,
+// Enums
 
-  /**
-      Segment values are URL-encoded.
-  */
-  Uri = 1,
-}
+/** */
+alias SegmentEncoding = GADatasetSegmentEncoding;
 
 /**
     The major version.

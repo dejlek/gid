@@ -5,7 +5,6 @@ public import gdkpixbuf.c.types;
 public import gio.c.types;
 public import pango.c.types;
 public import cairo.c.types;
-import gdk.types;
 
 /**
     Used to represent native events (XEvents for the X11
@@ -13,54 +12,2756 @@ import gdk.types;
 */
 alias GdkXEvent = void;
 
+/**
+    Positioning hints for aligning a window relative to a rectangle.
+  
+  These hints determine how the window should be positioned in the case that
+  the window would fall off-screen if placed in its ideal position.
+  
+  For example, [gdk.types.AnchorHints.FlipX] will replace [gdk.types.Gravity.NorthWest] with
+  [gdk.types.Gravity.NorthEast] and vice versa if the window extends beyond the left
+  or right edges of the monitor.
+  
+  If [gdk.types.AnchorHints.SlideX] is set, the window can be shifted horizontally to fit
+  on-screen. If [gdk.types.AnchorHints.ResizeX] is set, the window can be shrunken
+  horizontally to fit.
+  
+  In general, when multiple flags are set, flipping should take precedence over
+  sliding, which should take precedence over resizing.
+*/
+enum GdkAnchorHints : uint
+{
+  /**
+      allow flipping anchors horizontally
+  */
+  FlipX = 1,
 
-// Enums
-alias GdkAnchorHints = gdk.types.AnchorHints;
-alias GdkAxisFlags = gdk.types.AxisFlags;
-alias GdkAxisUse = gdk.types.AxisUse;
-alias GdkByteOrder = gdk.types.ByteOrder;
-alias GdkCrossingMode = gdk.types.CrossingMode;
-alias GdkCursorType = gdk.types.CursorType;
-alias GdkDevicePadFeature = gdk.types.DevicePadFeature;
-alias GdkDeviceToolType = gdk.types.DeviceToolType;
-alias GdkDeviceType = gdk.types.DeviceType;
-alias GdkDragAction = gdk.types.DragAction;
-alias GdkDragCancelReason = gdk.types.DragCancelReason;
-alias GdkDragProtocol = gdk.types.DragProtocol;
-alias GdkEventMask = gdk.types.EventMask;
-alias GdkEventType = gdk.types.EventType;
-alias GdkFilterReturn = gdk.types.FilterReturn;
-alias GdkFrameClockPhase = gdk.types.FrameClockPhase;
-alias GdkFullscreenMode = gdk.types.FullscreenMode;
-alias GdkGLError = gdk.types.GLError;
-alias GdkGrabOwnership = gdk.types.GrabOwnership;
-alias GdkGrabStatus = gdk.types.GrabStatus;
-alias GdkGravity = gdk.types.Gravity;
-alias GdkInputMode = gdk.types.InputMode;
-alias GdkInputSource = gdk.types.InputSource;
-alias GdkModifierIntent = gdk.types.ModifierIntent;
-alias GdkModifierType = gdk.types.ModifierType;
-alias GdkNotifyType = gdk.types.NotifyType;
-alias GdkOwnerChange = gdk.types.OwnerChange;
-alias GdkPropMode = gdk.types.PropMode;
-alias GdkPropertyState = gdk.types.PropertyState;
-alias GdkScrollDirection = gdk.types.ScrollDirection;
-alias GdkSeatCapabilities = gdk.types.SeatCapabilities;
-alias GdkSettingAction = gdk.types.SettingAction;
-alias GdkStatus = gdk.types.Status;
-alias GdkSubpixelLayout = gdk.types.SubpixelLayout;
-alias GdkTouchpadGesturePhase = gdk.types.TouchpadGesturePhase;
-alias GdkVisibilityState = gdk.types.VisibilityState;
-alias GdkVisualType = gdk.types.VisualType;
-alias GdkWMDecoration = gdk.types.WMDecoration;
-alias GdkWMFunction = gdk.types.WMFunction;
-alias GdkWindowAttributesType = gdk.types.WindowAttributesType;
-alias GdkWindowEdge = gdk.types.WindowEdge;
-alias GdkWindowHints = gdk.types.WindowHints;
-alias GdkWindowState = gdk.types.WindowState;
-alias GdkWindowType = gdk.types.WindowType;
-alias GdkWindowTypeHint = gdk.types.WindowTypeHint;
-alias GdkWindowWindowClass = gdk.types.WindowWindowClass;
+  /**
+      allow flipping anchors vertically
+  */
+  FlipY = 2,
+
+  /**
+      allow sliding window horizontally
+  */
+  SlideX = 4,
+
+  /**
+      allow sliding window vertically
+  */
+  SlideY = 8,
+
+  /**
+      allow resizing window horizontally
+  */
+  ResizeX = 16,
+
+  /**
+      allow resizing window vertically
+  */
+  ResizeY = 32,
+
+  /**
+      allow flipping anchors on both axes
+  */
+  Flip = 3,
+
+  /**
+      allow sliding window on both axes
+  */
+  Slide = 12,
+
+  /**
+      allow resizing window on both axes
+  */
+  Resize = 48,
+}
+
+/**
+    Flags describing the current capabilities of a device/tool.
+*/
+enum GdkAxisFlags : uint
+{
+  /**
+      X axis is present
+  */
+  X = 2,
+
+  /**
+      Y axis is present
+  */
+  Y = 4,
+
+  /**
+      Pressure axis is present
+  */
+  Pressure = 8,
+
+  /**
+      X tilt axis is present
+  */
+  Xtilt = 16,
+
+  /**
+      Y tilt axis is present
+  */
+  Ytilt = 32,
+
+  /**
+      Wheel axis is present
+  */
+  Wheel = 64,
+
+  /**
+      Distance axis is present
+  */
+  Distance = 128,
+
+  /**
+      Z-axis rotation is present
+  */
+  Rotation = 256,
+
+  /**
+      Slider axis is present
+  */
+  Slider = 512,
+}
+
+/**
+    An enumeration describing the way in which a device
+  axis (valuator) maps onto the predefined valuator
+  types that GTK+ understands.
+  
+  Note that the X and Y axes are not really needed; pointer devices
+  report their location via the x/y members of events regardless. Whether
+  X and Y are present as axes depends on the GDK backend.
+*/
+enum GdkAxisUse
+{
+  /**
+      the axis is ignored.
+  */
+  Ignore = 0,
+
+  /**
+      the axis is used as the x axis.
+  */
+  X = 1,
+
+  /**
+      the axis is used as the y axis.
+  */
+  Y = 2,
+
+  /**
+      the axis is used for pressure information.
+  */
+  Pressure = 3,
+
+  /**
+      the axis is used for x tilt information.
+  */
+  Xtilt = 4,
+
+  /**
+      the axis is used for y tilt information.
+  */
+  Ytilt = 5,
+
+  /**
+      the axis is used for wheel information.
+  */
+  Wheel = 6,
+
+  /**
+      the axis is used for pen/tablet distance information. (Since: 3.22)
+  */
+  Distance = 7,
+
+  /**
+      the axis is used for pen rotation information. (Since: 3.22)
+  */
+  Rotation = 8,
+
+  /**
+      the axis is used for pen slider information. (Since: 3.22)
+  */
+  Slider = 9,
+
+  /**
+      a constant equal to the numerically highest axis value.
+  */
+  Last = 10,
+}
+
+/**
+    A set of values describing the possible byte-orders
+  for storing pixel values in memory.
+*/
+enum GdkByteOrder
+{
+  /**
+      The values are stored with the least-significant byte
+      first. For instance, the 32-bit value 0xffeecc would be stored
+      in memory as 0xcc, 0xee, 0xff, 0x00.
+  */
+  LsbFirst = 0,
+
+  /**
+      The values are stored with the most-significant byte
+      first. For instance, the 32-bit value 0xffeecc would be stored
+      in memory as 0x00, 0xff, 0xee, 0xcc.
+  */
+  MsbFirst = 1,
+}
+
+/**
+    Specifies the crossing mode for #GdkEventCrossing.
+*/
+enum GdkCrossingMode
+{
+  /**
+      crossing because of pointer motion.
+  */
+  Normal = 0,
+
+  /**
+      crossing because a grab is activated.
+  */
+  Grab = 1,
+
+  /**
+      crossing because a grab is deactivated.
+  */
+  Ungrab = 2,
+
+  /**
+      crossing because a GTK+ grab is activated.
+  */
+  GtkGrab = 3,
+
+  /**
+      crossing because a GTK+ grab is deactivated.
+  */
+  GtkUngrab = 4,
+
+  /**
+      crossing because a GTK+ widget changed
+      state (e.g. sensitivity).
+  */
+  StateChanged = 5,
+
+  /**
+      crossing because a touch sequence has begun,
+      this event is synthetic as the pointer might have not left the window.
+  */
+  TouchBegin = 6,
+
+  /**
+      crossing because a touch sequence has ended,
+      this event is synthetic as the pointer might have not left the window.
+  */
+  TouchEnd = 7,
+
+  /**
+      crossing because of a device switch (i.e.
+      a mouse taking control of the pointer after a touch device), this event
+      is synthetic as the pointer didn’t leave the window.
+  */
+  DeviceSwitch = 8,
+}
+
+/**
+    Predefined cursors.
+  
+  Note that these IDs are directly taken from the X cursor font, and many
+  of these cursors are either not useful, or are not available on other platforms.
+  
+  The recommended way to create cursors is to use [gdk.cursor.Cursor.newFromName].
+*/
+enum GdkCursorType
+{
+  /**
+      ![](X_cursor.png)
+  */
+  XCursor = 0,
+
+  /**
+      ![](arrow.png)
+  */
+  Arrow = 2,
+
+  /**
+      ![](based_arrow_down.png)
+  */
+  BasedArrowDown = 4,
+
+  /**
+      ![](based_arrow_up.png)
+  */
+  BasedArrowUp = 6,
+
+  /**
+      ![](boat.png)
+  */
+  Boat = 8,
+
+  /**
+      ![](bogosity.png)
+  */
+  Bogosity = 10,
+
+  /**
+      ![](bottom_left_corner.png)
+  */
+  BottomLeftCorner = 12,
+
+  /**
+      ![](bottom_right_corner.png)
+  */
+  BottomRightCorner = 14,
+
+  /**
+      ![](bottom_side.png)
+  */
+  BottomSide = 16,
+
+  /**
+      ![](bottom_tee.png)
+  */
+  BottomTee = 18,
+
+  /**
+      ![](box_spiral.png)
+  */
+  BoxSpiral = 20,
+
+  /**
+      ![](center_ptr.png)
+  */
+  CenterPtr = 22,
+
+  /**
+      ![](circle.png)
+  */
+  Circle = 24,
+
+  /**
+      ![](clock.png)
+  */
+  Clock = 26,
+
+  /**
+      ![](coffee_mug.png)
+  */
+  CoffeeMug = 28,
+
+  /**
+      ![](cross.png)
+  */
+  Cross = 30,
+
+  /**
+      ![](cross_reverse.png)
+  */
+  CrossReverse = 32,
+
+  /**
+      ![](crosshair.png)
+  */
+  Crosshair = 34,
+
+  /**
+      ![](diamond_cross.png)
+  */
+  DiamondCross = 36,
+
+  /**
+      ![](dot.png)
+  */
+  Dot = 38,
+
+  /**
+      ![](dotbox.png)
+  */
+  Dotbox = 40,
+
+  /**
+      ![](double_arrow.png)
+  */
+  DoubleArrow = 42,
+
+  /**
+      ![](draft_large.png)
+  */
+  DraftLarge = 44,
+
+  /**
+      ![](draft_small.png)
+  */
+  DraftSmall = 46,
+
+  /**
+      ![](draped_box.png)
+  */
+  DrapedBox = 48,
+
+  /**
+      ![](exchange.png)
+  */
+  Exchange = 50,
+
+  /**
+      ![](fleur.png)
+  */
+  Fleur = 52,
+
+  /**
+      ![](gobbler.png)
+  */
+  Gobbler = 54,
+
+  /**
+      ![](gumby.png)
+  */
+  Gumby = 56,
+
+  /**
+      ![](hand1.png)
+  */
+  Hand1 = 58,
+
+  /**
+      ![](hand2.png)
+  */
+  Hand2 = 60,
+
+  /**
+      ![](heart.png)
+  */
+  Heart = 62,
+
+  /**
+      ![](icon.png)
+  */
+  Icon = 64,
+
+  /**
+      ![](iron_cross.png)
+  */
+  IronCross = 66,
+
+  /**
+      ![](left_ptr.png)
+  */
+  LeftPtr = 68,
+
+  /**
+      ![](left_side.png)
+  */
+  LeftSide = 70,
+
+  /**
+      ![](left_tee.png)
+  */
+  LeftTee = 72,
+
+  /**
+      ![](leftbutton.png)
+  */
+  Leftbutton = 74,
+
+  /**
+      ![](ll_angle.png)
+  */
+  LlAngle = 76,
+
+  /**
+      ![](lr_angle.png)
+  */
+  LrAngle = 78,
+
+  /**
+      ![](man.png)
+  */
+  Man = 80,
+
+  /**
+      ![](middlebutton.png)
+  */
+  Middlebutton = 82,
+
+  /**
+      ![](mouse.png)
+  */
+  Mouse = 84,
+
+  /**
+      ![](pencil.png)
+  */
+  Pencil = 86,
+
+  /**
+      ![](pirate.png)
+  */
+  Pirate = 88,
+
+  /**
+      ![](plus.png)
+  */
+  Plus = 90,
+
+  /**
+      ![](question_arrow.png)
+  */
+  QuestionArrow = 92,
+
+  /**
+      ![](right_ptr.png)
+  */
+  RightPtr = 94,
+
+  /**
+      ![](right_side.png)
+  */
+  RightSide = 96,
+
+  /**
+      ![](right_tee.png)
+  */
+  RightTee = 98,
+
+  /**
+      ![](rightbutton.png)
+  */
+  Rightbutton = 100,
+
+  /**
+      ![](rtl_logo.png)
+  */
+  RtlLogo = 102,
+
+  /**
+      ![](sailboat.png)
+  */
+  Sailboat = 104,
+
+  /**
+      ![](sb_down_arrow.png)
+  */
+  SbDownArrow = 106,
+
+  /**
+      ![](sb_h_double_arrow.png)
+  */
+  SbHDoubleArrow = 108,
+
+  /**
+      ![](sb_left_arrow.png)
+  */
+  SbLeftArrow = 110,
+
+  /**
+      ![](sb_right_arrow.png)
+  */
+  SbRightArrow = 112,
+
+  /**
+      ![](sb_up_arrow.png)
+  */
+  SbUpArrow = 114,
+
+  /**
+      ![](sb_v_double_arrow.png)
+  */
+  SbVDoubleArrow = 116,
+
+  /**
+      ![](shuttle.png)
+  */
+  Shuttle = 118,
+
+  /**
+      ![](sizing.png)
+  */
+  Sizing = 120,
+
+  /**
+      ![](spider.png)
+  */
+  Spider = 122,
+
+  /**
+      ![](spraycan.png)
+  */
+  Spraycan = 124,
+
+  /**
+      ![](star.png)
+  */
+  Star = 126,
+
+  /**
+      ![](target.png)
+  */
+  Target = 128,
+
+  /**
+      ![](tcross.png)
+  */
+  Tcross = 130,
+
+  /**
+      ![](top_left_arrow.png)
+  */
+  TopLeftArrow = 132,
+
+  /**
+      ![](top_left_corner.png)
+  */
+  TopLeftCorner = 134,
+
+  /**
+      ![](top_right_corner.png)
+  */
+  TopRightCorner = 136,
+
+  /**
+      ![](top_side.png)
+  */
+  TopSide = 138,
+
+  /**
+      ![](top_tee.png)
+  */
+  TopTee = 140,
+
+  /**
+      ![](trek.png)
+  */
+  Trek = 142,
+
+  /**
+      ![](ul_angle.png)
+  */
+  UlAngle = 144,
+
+  /**
+      ![](umbrella.png)
+  */
+  Umbrella = 146,
+
+  /**
+      ![](ur_angle.png)
+  */
+  UrAngle = 148,
+
+  /**
+      ![](watch.png)
+  */
+  Watch = 150,
+
+  /**
+      ![](xterm.png)
+  */
+  Xterm = 152,
+
+  /**
+      last cursor type
+  */
+  LastCursor = 153,
+
+  /**
+      Blank cursor. Since 2.16
+  */
+  BlankCursor = -2,
+
+  /**
+      type of cursors constructed with
+      [gdk.cursor.Cursor.newFromPixbuf]
+  */
+  CursorIsPixmap = -1,
+}
+
+/**
+    A pad feature.
+*/
+enum GdkDevicePadFeature
+{
+  /**
+      a button
+  */
+  Button = 0,
+
+  /**
+      a ring-shaped interactive area
+  */
+  Ring = 1,
+
+  /**
+      a straight interactive area
+  */
+  Strip = 2,
+}
+
+/**
+    Indicates the specific type of tool being used being a tablet. Such as an
+  airbrush, pencil, etc.
+*/
+enum GdkDeviceToolType
+{
+  /**
+      Tool is of an unknown type.
+  */
+  Unknown = 0,
+
+  /**
+      Tool is a standard tablet stylus.
+  */
+  Pen = 1,
+
+  /**
+      Tool is standard tablet eraser.
+  */
+  Eraser = 2,
+
+  /**
+      Tool is a brush stylus.
+  */
+  Brush = 3,
+
+  /**
+      Tool is a pencil stylus.
+  */
+  Pencil = 4,
+
+  /**
+      Tool is an airbrush stylus.
+  */
+  Airbrush = 5,
+
+  /**
+      Tool is a mouse.
+  */
+  Mouse = 6,
+
+  /**
+      Tool is a lens cursor.
+  */
+  Lens = 7,
+}
+
+/**
+    Indicates the device type. See [above][GdkDeviceManager.description]
+  for more information about the meaning of these device types.
+*/
+enum GdkDeviceType
+{
+  /**
+      Device is a master (or virtual) device. There will
+                             be an associated focus indicator on the screen.
+  */
+  Master = 0,
+
+  /**
+      Device is a slave (or physical) device.
+  */
+  Slave = 1,
+
+  /**
+      Device is a physical device, currently not attached to
+                               any virtual device.
+  */
+  Floating = 2,
+}
+
+/**
+    Used in #GdkDragContext to indicate what the destination
+  should do with the dropped data.
+*/
+enum GdkDragAction : uint
+{
+  /**
+      Means nothing, and should not be used.
+  */
+  Default = 1,
+
+  /**
+      Copy the data.
+  */
+  Copy = 2,
+
+  /**
+      Move the data, i.e. first copy it, then delete
+     it from the source using the DELETE target of the X selection protocol.
+  */
+  Move = 4,
+
+  /**
+      Add a link to the data. Note that this is only
+     useful if source and destination agree on what it means.
+  */
+  Link = 8,
+
+  /**
+      Special action which tells the source that the
+     destination will do something that the source doesn’t understand.
+  */
+  Private = 16,
+
+  /**
+      Ask the user what to do with the data.
+  */
+  Ask = 32,
+}
+
+/**
+    Used in #GdkDragContext to the reason of a cancelled DND operation.
+*/
+enum GdkDragCancelReason
+{
+  /**
+      There is no suitable drop target.
+  */
+  NoTarget = 0,
+
+  /**
+      Drag cancelled by the user
+  */
+  UserCancelled = 1,
+
+  /**
+      Unspecified error.
+  */
+  Error = 2,
+}
+
+/**
+    Used in #GdkDragContext to indicate the protocol according to
+  which DND is done.
+*/
+enum GdkDragProtocol
+{
+  /**
+      no protocol.
+  */
+  None = 0,
+
+  /**
+      The Motif DND protocol. No longer supported
+  */
+  Motif = 1,
+
+  /**
+      The Xdnd protocol.
+  */
+  Xdnd = 2,
+
+  /**
+      An extension to the Xdnd protocol for
+     unclaimed root window drops.
+  */
+  Rootwin = 3,
+
+  /**
+      The simple WM_DROPFILES protocol.
+  */
+  Win32Dropfiles = 4,
+
+  /**
+      The complex OLE2 DND protocol (not implemented).
+  */
+  Ole2 = 5,
+
+  /**
+      Intra-application DND.
+  */
+  Local = 6,
+
+  /**
+      Wayland DND protocol.
+  */
+  Wayland = 7,
+}
+
+/**
+    A set of bit-flags to indicate which events a window is to receive.
+  Most of these masks map onto one or more of the #GdkEventType event types
+  above.
+  
+  See the [input handling overview][chap-input-handling] for details of
+  [event masks][event-masks] and [event propagation][event-propagation].
+  
+  [gdk.types.EventMask.PointerMotionHintMask] is deprecated. It is a special mask
+  to reduce the number of [gdk.types.EventType.MotionNotify] events received. When using
+  [gdk.types.EventMask.PointerMotionHintMask], fewer [gdk.types.EventType.MotionNotify] events will
+  be sent, some of which are marked as a hint (the is_hint member is
+  true). To receive more motion events after a motion hint event,
+  the application needs to asks for more, by calling
+  [gdk.event.Event.requestMotions].
+  
+  Since GTK 3.8, motion events are already compressed by default, independent
+  of this mechanism. This compression can be disabled with
+  [gdk.window.Window.setEventCompression]. See the documentation of that function
+  for details.
+  
+  If [gdk.types.EventMask.TouchMask] is enabled, the window will receive touch events
+  from touch-enabled devices. Those will come as sequences of #GdkEventTouch
+  with type [gdk.types.EventType.TouchUpdate], enclosed by two events with
+  type [gdk.types.EventType.TouchBegin] and [gdk.types.EventType.TouchEnd] (or [gdk.types.EventType.TouchCancel]).
+  [gdk.event.Event.getEventSequence] returns the event sequence for these
+  events, so different sequences may be distinguished.
+*/
+enum GdkEventMask : uint
+{
+  /**
+      receive expose events
+  */
+  ExposureMask = 2,
+
+  /**
+      receive all pointer motion events
+  */
+  PointerMotionMask = 4,
+
+  /**
+      deprecated. see the explanation above
+  */
+  PointerMotionHintMask = 8,
+
+  /**
+      receive pointer motion events while any button is pressed
+  */
+  ButtonMotionMask = 16,
+
+  /**
+      receive pointer motion events while 1 button is pressed
+  */
+  Button1MotionMask = 32,
+
+  /**
+      receive pointer motion events while 2 button is pressed
+  */
+  Button2MotionMask = 64,
+
+  /**
+      receive pointer motion events while 3 button is pressed
+  */
+  Button3MotionMask = 128,
+
+  /**
+      receive button press events
+  */
+  ButtonPressMask = 256,
+
+  /**
+      receive button release events
+  */
+  ButtonReleaseMask = 512,
+
+  /**
+      receive key press events
+  */
+  KeyPressMask = 1024,
+
+  /**
+      receive key release events
+  */
+  KeyReleaseMask = 2048,
+
+  /**
+      receive window enter events
+  */
+  EnterNotifyMask = 4096,
+
+  /**
+      receive window leave events
+  */
+  LeaveNotifyMask = 8192,
+
+  /**
+      receive focus change events
+  */
+  FocusChangeMask = 16384,
+
+  /**
+      receive events about window configuration change
+  */
+  StructureMask = 32768,
+
+  /**
+      receive property change events
+  */
+  PropertyChangeMask = 65536,
+
+  /**
+      receive visibility change events
+  */
+  VisibilityNotifyMask = 131072,
+
+  /**
+      receive proximity in events
+  */
+  ProximityInMask = 262144,
+
+  /**
+      receive proximity out events
+  */
+  ProximityOutMask = 524288,
+
+  /**
+      receive events about window configuration changes of
+      child windows
+  */
+  SubstructureMask = 1048576,
+
+  /**
+      receive scroll events
+  */
+  ScrollMask = 2097152,
+
+  /**
+      receive touch events. Since 3.4
+  */
+  TouchMask = 4194304,
+
+  /**
+      receive smooth scrolling events. Since 3.4
+  */
+  SmoothScrollMask = 8388608,
+
+  /**
+      receive touchpad gesture events. Since 3.18
+  */
+  TouchpadGestureMask = 16777216,
+
+  /**
+      receive tablet pad events. Since 3.22
+  */
+  TabletPadMask = 33554432,
+
+  /**
+      the combination of all the above event masks.
+  */
+  AllEventsMask = 67108862,
+}
+
+/**
+    Specifies the type of the event.
+  
+  Do not confuse these events with the signals that GTK+ widgets emit.
+  Although many of these events result in corresponding signals being emitted,
+  the events are often transformed or filtered along the way.
+  
+  In some language bindings, the values [gdk.types.EventType._2buttonPress] and
+  [gdk.types.EventType._3buttonPress] would translate into something syntactically
+  invalid (eg `Gdk.EventType.2ButtonPress`, where a
+  symbol is not allowed to start with a number). In that case, the
+  aliases [gdk.types.EventType.DoubleButtonPress] and [gdk.types.EventType.TripleButtonPress] can
+  be used instead.
+*/
+enum GdkEventType
+{
+  /**
+      a special code to indicate a null event.
+  */
+  Nothing = -1,
+
+  /**
+      the window manager has requested that the toplevel window be
+      hidden or destroyed, usually when the user clicks on a special icon in the
+      title bar.
+  */
+  Delete = 0,
+
+  /**
+      the window has been destroyed.
+  */
+  Destroy = 1,
+
+  /**
+      all or part of the window has become visible and needs to be
+      redrawn.
+  */
+  Expose = 2,
+
+  /**
+      the pointer (usually a mouse) has moved.
+  */
+  MotionNotify = 3,
+
+  /**
+      a mouse button has been pressed.
+  */
+  ButtonPress = 4,
+
+  /**
+      a mouse button has been double-clicked (clicked twice
+      within a short period of time). Note that each click also generates a
+      [gdk.types.EventType.ButtonPress] event.
+  */
+  _2buttonPress = 5,
+
+  /**
+      alias for [gdk.types.EventType._2buttonPress], added in 3.6.
+  */
+  DoubleButtonPress = 5,
+
+  /**
+      a mouse button has been clicked 3 times in a short period
+      of time. Note that each click also generates a [gdk.types.EventType.ButtonPress] event.
+  */
+  _3buttonPress = 6,
+
+  /**
+      alias for [gdk.types.EventType._3buttonPress], added in 3.6.
+  */
+  TripleButtonPress = 6,
+
+  /**
+      a mouse button has been released.
+  */
+  ButtonRelease = 7,
+
+  /**
+      a key has been pressed.
+  */
+  KeyPress = 8,
+
+  /**
+      a key has been released.
+  */
+  KeyRelease = 9,
+
+  /**
+      the pointer has entered the window.
+  */
+  EnterNotify = 10,
+
+  /**
+      the pointer has left the window.
+  */
+  LeaveNotify = 11,
+
+  /**
+      the keyboard focus has entered or left the window.
+  */
+  FocusChange = 12,
+
+  /**
+      the size, position or stacking order of the window has changed.
+      Note that GTK+ discards these events for [gdk.types.WindowType.Child] windows.
+  */
+  Configure = 13,
+
+  /**
+      the window has been mapped.
+  */
+  Map = 14,
+
+  /**
+      the window has been unmapped.
+  */
+  Unmap = 15,
+
+  /**
+      a property on the window has been changed or deleted.
+  */
+  PropertyNotify = 16,
+
+  /**
+      the application has lost ownership of a selection.
+  */
+  SelectionClear = 17,
+
+  /**
+      another application has requested a selection.
+  */
+  SelectionRequest = 18,
+
+  /**
+      a selection has been received.
+  */
+  SelectionNotify = 19,
+
+  /**
+      an input device has moved into contact with a sensing
+      surface (e.g. a touchscreen or graphics tablet).
+  */
+  ProximityIn = 20,
+
+  /**
+      an input device has moved out of contact with a sensing
+      surface.
+  */
+  ProximityOut = 21,
+
+  /**
+      the mouse has entered the window while a drag is in progress.
+  */
+  DragEnter = 22,
+
+  /**
+      the mouse has left the window while a drag is in progress.
+  */
+  DragLeave = 23,
+
+  /**
+      the mouse has moved in the window while a drag is in
+      progress.
+  */
+  DragMotion = 24,
+
+  /**
+      the status of the drag operation initiated by the window
+      has changed.
+  */
+  DragStatus = 25,
+
+  /**
+      a drop operation onto the window has started.
+  */
+  DropStart = 26,
+
+  /**
+      the drop operation initiated by the window has completed.
+  */
+  DropFinished = 27,
+
+  /**
+      a message has been received from another application.
+  */
+  ClientEvent = 28,
+
+  /**
+      the window visibility status has changed.
+  */
+  VisibilityNotify = 29,
+
+  /**
+      the scroll wheel was turned
+  */
+  Scroll = 31,
+
+  /**
+      the state of a window has changed. See #GdkWindowState
+      for the possible window states
+  */
+  WindowState = 32,
+
+  /**
+      a setting has been modified.
+  */
+  Setting = 33,
+
+  /**
+      the owner of a selection has changed. This event type
+      was added in 2.6
+  */
+  OwnerChange = 34,
+
+  /**
+      a pointer or keyboard grab was broken. This event type
+      was added in 2.8.
+  */
+  GrabBroken = 35,
+
+  /**
+      the content of the window has been changed. This event type
+      was added in 2.14.
+  */
+  Damage = 36,
+
+  /**
+      A new touch event sequence has just started. This event
+      type was added in 3.4.
+  */
+  TouchBegin = 37,
+
+  /**
+      A touch event sequence has been updated. This event type
+      was added in 3.4.
+  */
+  TouchUpdate = 38,
+
+  /**
+      A touch event sequence has finished. This event type
+      was added in 3.4.
+  */
+  TouchEnd = 39,
+
+  /**
+      A touch event sequence has been canceled. This event type
+      was added in 3.4.
+  */
+  TouchCancel = 40,
+
+  /**
+      A touchpad swipe gesture event, the current state
+      is determined by its phase field. This event type was added in 3.18.
+  */
+  TouchpadSwipe = 41,
+
+  /**
+      A touchpad pinch gesture event, the current state
+      is determined by its phase field. This event type was added in 3.18.
+  */
+  TouchpadPinch = 42,
+
+  /**
+      A tablet pad button press event. This event type
+      was added in 3.22.
+  */
+  PadButtonPress = 43,
+
+  /**
+      A tablet pad button release event. This event type
+      was added in 3.22.
+  */
+  PadButtonRelease = 44,
+
+  /**
+      A tablet pad axis event from a "ring". This event type was
+      added in 3.22.
+  */
+  PadRing = 45,
+
+  /**
+      A tablet pad axis event from a "strip". This event type was
+      added in 3.22.
+  */
+  PadStrip = 46,
+
+  /**
+      A tablet pad group mode change. This event type was
+      added in 3.22.
+  */
+  PadGroupMode = 47,
+
+  /**
+      marks the end of the GdkEventType enumeration. Added in 2.18
+  */
+  EventLast = 48,
+}
+
+/**
+    Specifies the result of applying a #GdkFilterFunc to a native event.
+*/
+enum GdkFilterReturn
+{
+  /**
+      event not handled, continue processing.
+  */
+  Continue = 0,
+
+  /**
+      native event translated into a GDK event and stored
+     in the `event` structure that was passed in.
+  */
+  Translate = 1,
+
+  /**
+      event handled, terminate processing.
+  */
+  Remove = 2,
+}
+
+/**
+    #GdkFrameClockPhase is used to represent the different paint clock
+  phases that can be requested. The elements of the enumeration
+  correspond to the signals of #GdkFrameClock.
+*/
+enum GdkFrameClockPhase : uint
+{
+  /**
+      no phase
+  */
+  None = 0,
+
+  /**
+      corresponds to GdkFrameClock::flush-events. Should not be handled by applications.
+  */
+  FlushEvents = 1,
+
+  /**
+      corresponds to GdkFrameClock::before-paint. Should not be handled by applications.
+  */
+  BeforePaint = 2,
+
+  /**
+      corresponds to GdkFrameClock::update.
+  */
+  Update = 4,
+
+  /**
+      corresponds to GdkFrameClock::layout.
+  */
+  Layout = 8,
+
+  /**
+      corresponds to GdkFrameClock::paint.
+  */
+  Paint = 16,
+
+  /**
+      corresponds to GdkFrameClock::resume-events. Should not be handled by applications.
+  */
+  ResumeEvents = 32,
+
+  /**
+      corresponds to GdkFrameClock::after-paint. Should not be handled by applications.
+  */
+  AfterPaint = 64,
+}
+
+/**
+    Indicates which monitor (in a multi-head setup) a window should span over
+  when in fullscreen mode.
+*/
+enum GdkFullscreenMode
+{
+  /**
+      Fullscreen on current monitor only.
+  */
+  CurrentMonitor = 0,
+
+  /**
+      Span across all monitors when fullscreen.
+  */
+  AllMonitors = 1,
+}
+
+/**
+    Error enumeration for #GdkGLContext.
+*/
+enum GdkGLError
+{
+  /**
+      OpenGL support is not available
+  */
+  NotAvailable = 0,
+
+  /**
+      The requested visual format is not supported
+  */
+  UnsupportedFormat = 1,
+
+  /**
+      The requested profile is not supported
+  */
+  UnsupportedProfile = 2,
+}
+
+/**
+    Defines how device grabs interact with other devices.
+*/
+enum GdkGrabOwnership
+{
+  /**
+      All other devices’ events are allowed.
+  */
+  None = 0,
+
+  /**
+      Other devices’ events are blocked for the grab window.
+  */
+  Window = 1,
+
+  /**
+      Other devices’ events are blocked for the whole application.
+  */
+  Application = 2,
+}
+
+/**
+    Returned by [gdk.device.Device.grab], [gdk.global.pointerGrab] and [gdk.global.keyboardGrab] to
+  indicate success or the reason for the failure of the grab attempt.
+*/
+enum GdkGrabStatus
+{
+  /**
+      the resource was successfully grabbed.
+  */
+  Success = 0,
+
+  /**
+      the resource is actively grabbed by another client.
+  */
+  AlreadyGrabbed = 1,
+
+  /**
+      the resource was grabbed more recently than the
+     specified time.
+  */
+  InvalidTime = 2,
+
+  /**
+      the grab window or the @confine_to window are not
+     viewable.
+  */
+  NotViewable = 3,
+
+  /**
+      the resource is frozen by an active grab of another client.
+  */
+  Frozen = 4,
+
+  /**
+      the grab failed for some other reason. Since 3.16
+  */
+  Failed = 5,
+}
+
+/**
+    Defines the reference point of a window and the meaning of coordinates
+  passed to [gtk.window.Window.move]. See [gtk.window.Window.move] and the "implementation
+  notes" section of the
+  [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec)
+  specification for more details.
+*/
+enum GdkGravity
+{
+  /**
+      the reference point is at the top left corner.
+  */
+  NorthWest = 1,
+
+  /**
+      the reference point is in the middle of the top edge.
+  */
+  North = 2,
+
+  /**
+      the reference point is at the top right corner.
+  */
+  NorthEast = 3,
+
+  /**
+      the reference point is at the middle of the left edge.
+  */
+  West = 4,
+
+  /**
+      the reference point is at the center of the window.
+  */
+  Center = 5,
+
+  /**
+      the reference point is at the middle of the right edge.
+  */
+  East = 6,
+
+  /**
+      the reference point is at the lower left corner.
+  */
+  SouthWest = 7,
+
+  /**
+      the reference point is at the middle of the lower edge.
+  */
+  South = 8,
+
+  /**
+      the reference point is at the lower right corner.
+  */
+  SouthEast = 9,
+
+  /**
+      the reference point is at the top left corner of the
+     window itself, ignoring window manager decorations.
+  */
+  Static = 10,
+}
+
+/**
+    An enumeration that describes the mode of an input device.
+*/
+enum GdkInputMode
+{
+  /**
+      the device is disabled and will not report any events.
+  */
+  Disabled = 0,
+
+  /**
+      the device is enabled. The device’s coordinate space
+                      maps to the entire screen.
+  */
+  Screen = 1,
+
+  /**
+      the device is enabled. The device’s coordinate space
+                      is mapped to a single window. The manner in which this window
+                      is chosen is undefined, but it will typically be the same
+                      way in which the focus window for key events is determined.
+  */
+  Window = 2,
+}
+
+/**
+    An enumeration describing the type of an input device in general terms.
+*/
+enum GdkInputSource
+{
+  /**
+      the device is a mouse. (This will be reported for the core
+                       pointer, even if it is something else, such as a trackball.)
+  */
+  Mouse = 0,
+
+  /**
+      the device is a stylus of a graphics tablet or similar device.
+  */
+  Pen = 1,
+
+  /**
+      the device is an eraser. Typically, this would be the other end
+                        of a stylus on a graphics tablet.
+  */
+  Eraser = 2,
+
+  /**
+      the device is a graphics tablet “puck” or similar device.
+  */
+  Cursor = 3,
+
+  /**
+      the device is a keyboard.
+  */
+  Keyboard = 4,
+
+  /**
+      the device is a direct-input touch device, such
+        as a touchscreen or tablet. This device type has been added in 3.4.
+  */
+  Touchscreen = 5,
+
+  /**
+      the device is an indirect touch device, such
+        as a touchpad. This device type has been added in 3.4.
+  */
+  Touchpad = 6,
+
+  /**
+      the device is a trackpoint. This device type has been
+        added in 3.22
+  */
+  Trackpoint = 7,
+
+  /**
+      the device is a "pad", a collection of buttons,
+        rings and strips found in drawing tablets. This device type has been
+        added in 3.22.
+  */
+  TabletPad = 8,
+}
+
+/**
+    This enum is used with [gdk.keymap.Keymap.getModifierMask]
+  in order to determine what modifiers the
+  currently used windowing system backend uses for particular
+  purposes. For example, on X11/Windows, the Control key is used for
+  invoking menu shortcuts (accelerators), whereas on Apple computers
+  it’s the Command key (which correspond to [gdk.types.ModifierType.ControlMask] and
+  [gdk.types.ModifierType.Mod2Mask], respectively).
+*/
+enum GdkModifierIntent
+{
+  /**
+      the primary modifier used to invoke
+     menu accelerators.
+  */
+  PrimaryAccelerator = 0,
+
+  /**
+      the modifier used to invoke context menus.
+     Note that mouse button 3 always triggers context menus. When this modifier
+     is not 0, it additionally triggers context menus when used with mouse button 1.
+  */
+  ContextMenu = 1,
+
+  /**
+      the modifier used to extend selections
+     using `modifier`-click or `modifier`-cursor-key
+  */
+  ExtendSelection = 2,
+
+  /**
+      the modifier used to modify selections,
+     which in most cases means toggling the clicked item into or out of the selection.
+  */
+  ModifySelection = 3,
+
+  /**
+      when any of these modifiers is pressed, the
+     key event cannot produce a symbol directly. This is meant to be used for
+     input methods, and for use cases like typeahead search.
+  */
+  NoTextInput = 4,
+
+  /**
+      the modifier that switches between keyboard
+     groups (AltGr on X11/Windows and Option/Alt on OS X).
+  */
+  ShiftGroup = 5,
+
+  /**
+      The set of modifier masks accepted
+    as modifiers in accelerators. Needed because Command is mapped to MOD2 on
+    OSX, which is widely used, but on X11 MOD2 is NumLock and using that for a
+    mod key is problematic at best.
+    Ref: https://bugzilla.gnome.org/show_bug.cgi?id=736125.
+  */
+  DefaultModMask = 6,
+}
+
+/**
+    A set of bit-flags to indicate the state of modifier keys and mouse buttons
+  in various event types. Typical modifier keys are Shift, Control, Meta,
+  Super, Hyper, Alt, Compose, Apple, CapsLock or ShiftLock.
+  
+  Like the X Window System, GDK supports 8 modifier keys and 5 mouse buttons.
+  
+  Since 2.10, GDK recognizes which of the Meta, Super or Hyper keys are mapped
+  to Mod2 - Mod5, and indicates this by setting [gdk.types.ModifierType.SuperMask],
+  [gdk.types.ModifierType.HyperMask] or [gdk.types.ModifierType.MetaMask] in the state field of key events.
+  
+  Note that GDK may add internal values to events which include
+  reserved values such as [gdk.types.ModifierType.ModifierReserved13Mask].  Your code
+  should preserve and ignore them.  You can use [gdk.types.ModifierType.ModifierMask] to
+  remove all reserved values.
+  
+  Also note that the GDK X backend interprets button press events for button
+  4-7 as scroll events, so [gdk.types.ModifierType.Button4Mask] and [gdk.types.ModifierType.Button5Mask] will never
+  be set.
+*/
+enum GdkModifierType : uint
+{
+  /**
+      the Shift key.
+  */
+  ShiftMask = 1,
+
+  /**
+      a Lock key (depending on the modifier mapping of the
+     X server this may either be CapsLock or ShiftLock).
+  */
+  LockMask = 2,
+
+  /**
+      the Control key.
+  */
+  ControlMask = 4,
+
+  /**
+      the fourth modifier key (it depends on the modifier
+     mapping of the X server which key is interpreted as this modifier, but
+     normally it is the Alt key).
+  */
+  Mod1Mask = 8,
+
+  /**
+      the fifth modifier key (it depends on the modifier
+     mapping of the X server which key is interpreted as this modifier).
+  */
+  Mod2Mask = 16,
+
+  /**
+      the sixth modifier key (it depends on the modifier
+     mapping of the X server which key is interpreted as this modifier).
+  */
+  Mod3Mask = 32,
+
+  /**
+      the seventh modifier key (it depends on the modifier
+     mapping of the X server which key is interpreted as this modifier).
+  */
+  Mod4Mask = 64,
+
+  /**
+      the eighth modifier key (it depends on the modifier
+     mapping of the X server which key is interpreted as this modifier).
+  */
+  Mod5Mask = 128,
+
+  /**
+      the first mouse button.
+  */
+  Button1Mask = 256,
+
+  /**
+      the second mouse button.
+  */
+  Button2Mask = 512,
+
+  /**
+      the third mouse button.
+  */
+  Button3Mask = 1024,
+
+  /**
+      the fourth mouse button.
+  */
+  Button4Mask = 2048,
+
+  /**
+      the fifth mouse button.
+  */
+  Button5Mask = 4096,
+
+  /**
+      A reserved bit flag; do not use in your own code
+  */
+  ModifierReserved13Mask = 8192,
+
+  /**
+      A reserved bit flag; do not use in your own code
+  */
+  ModifierReserved14Mask = 16384,
+
+  /**
+      A reserved bit flag; do not use in your own code
+  */
+  ModifierReserved15Mask = 32768,
+
+  /**
+      A reserved bit flag; do not use in your own code
+  */
+  ModifierReserved16Mask = 65536,
+
+  /**
+      A reserved bit flag; do not use in your own code
+  */
+  ModifierReserved17Mask = 131072,
+
+  /**
+      A reserved bit flag; do not use in your own code
+  */
+  ModifierReserved18Mask = 262144,
+
+  /**
+      A reserved bit flag; do not use in your own code
+  */
+  ModifierReserved19Mask = 524288,
+
+  /**
+      A reserved bit flag; do not use in your own code
+  */
+  ModifierReserved20Mask = 1048576,
+
+  /**
+      A reserved bit flag; do not use in your own code
+  */
+  ModifierReserved21Mask = 2097152,
+
+  /**
+      A reserved bit flag; do not use in your own code
+  */
+  ModifierReserved22Mask = 4194304,
+
+  /**
+      A reserved bit flag; do not use in your own code
+  */
+  ModifierReserved23Mask = 8388608,
+
+  /**
+      A reserved bit flag; do not use in your own code
+  */
+  ModifierReserved24Mask = 16777216,
+
+  /**
+      A reserved bit flag; do not use in your own code
+  */
+  ModifierReserved25Mask = 33554432,
+
+  /**
+      the Super modifier. Since 2.10
+  */
+  SuperMask = 67108864,
+
+  /**
+      the Hyper modifier. Since 2.10
+  */
+  HyperMask = 134217728,
+
+  /**
+      the Meta modifier. Since 2.10
+  */
+  MetaMask = 268435456,
+
+  /**
+      A reserved bit flag; do not use in your own code
+  */
+  ModifierReserved29Mask = 536870912,
+
+  /**
+      not used in GDK itself. GTK+ uses it to differentiate
+     between (keyval, modifiers) pairs from key press and release events.
+  */
+  ReleaseMask = 1073741824,
+
+  /**
+      a mask covering all modifier types.
+  */
+  ModifierMask = 1543512063,
+}
+
+/**
+    Specifies the kind of crossing for #GdkEventCrossing.
+  
+  See the X11 protocol specification of LeaveNotify for
+  full details of crossing event generation.
+*/
+enum GdkNotifyType
+{
+  /**
+      the window is entered from an ancestor or
+      left towards an ancestor.
+  */
+  Ancestor = 0,
+
+  /**
+      the pointer moves between an ancestor and an
+      inferior of the window.
+  */
+  Virtual = 1,
+
+  /**
+      the window is entered from an inferior or
+      left towards an inferior.
+  */
+  Inferior = 2,
+
+  /**
+      the window is entered from or left towards
+      a window which is neither an ancestor nor an inferior.
+  */
+  Nonlinear = 3,
+
+  /**
+      the pointer moves between two windows
+      which are not ancestors of each other and the window is part of
+      the ancestor chain between one of these windows and their least
+      common ancestor.
+  */
+  NonlinearVirtual = 4,
+
+  /**
+      an unknown type of enter/leave event occurred.
+  */
+  Unknown = 5,
+}
+
+/**
+    Specifies why a selection ownership was changed.
+*/
+enum GdkOwnerChange
+{
+  /**
+      some other app claimed the ownership
+  */
+  NewOwner = 0,
+
+  /**
+      the window was destroyed
+  */
+  Destroy = 1,
+
+  /**
+      the client was closed
+  */
+  Close = 2,
+}
+
+/**
+    Describes how existing data is combined with new data when
+  using [gdk.global.propertyChange].
+*/
+enum GdkPropMode
+{
+  /**
+      the new data replaces the existing data.
+  */
+  Replace = 0,
+
+  /**
+      the new data is prepended to the existing data.
+  */
+  Prepend = 1,
+
+  /**
+      the new data is appended to the existing data.
+  */
+  Append = 2,
+}
+
+/**
+    Specifies the type of a property change for a #GdkEventProperty.
+*/
+enum GdkPropertyState
+{
+  /**
+      the property value was changed.
+  */
+  NewValue = 0,
+
+  /**
+      the property was deleted.
+  */
+  Delete = 1,
+}
+
+/**
+    Specifies the direction for #GdkEventScroll.
+*/
+enum GdkScrollDirection
+{
+  /**
+      the window is scrolled up.
+  */
+  Up = 0,
+
+  /**
+      the window is scrolled down.
+  */
+  Down = 1,
+
+  /**
+      the window is scrolled to the left.
+  */
+  Left = 2,
+
+  /**
+      the window is scrolled to the right.
+  */
+  Right = 3,
+
+  /**
+      the scrolling is determined by the delta values
+      in #GdkEventScroll. See [gdk.event.Event.getScrollDeltas]. Since: 3.4
+  */
+  Smooth = 4,
+}
+
+/**
+    Flags describing the seat capabilities.
+*/
+enum GdkSeatCapabilities : uint
+{
+  /**
+      No input capabilities
+  */
+  None = 0,
+
+  /**
+      The seat has a pointer (e.g. mouse)
+  */
+  Pointer = 1,
+
+  /**
+      The seat has touchscreen(s) attached
+  */
+  Touch = 2,
+
+  /**
+      The seat has drawing tablet(s) attached
+  */
+  TabletStylus = 4,
+
+  /**
+      The seat has keyboard(s) attached
+  */
+  Keyboard = 8,
+
+  /**
+      The union of all pointing capabilities
+  */
+  AllPointing = 7,
+
+  /**
+      The union of all capabilities
+  */
+  All = 15,
+}
+
+/**
+    Specifies the kind of modification applied to a setting in a
+  #GdkEventSetting.
+*/
+enum GdkSettingAction
+{
+  /**
+      a setting was added.
+  */
+  New = 0,
+
+  /**
+      a setting was changed.
+  */
+  Changed = 1,
+
+  /**
+      a setting was deleted.
+  */
+  Deleted = 2,
+}
+
+/** */
+enum GdkStatus
+{
+  /** */
+  Ok = 0,
+
+  /** */
+  Error = -1,
+
+  /** */
+  ErrorParam = -2,
+
+  /** */
+  ErrorFile = -3,
+
+  /** */
+  ErrorMem = -4,
+}
+
+/**
+    This enumeration describes how the red, green and blue components
+  of physical pixels on an output device are laid out.
+*/
+enum GdkSubpixelLayout
+{
+  /**
+      The layout is not known
+  */
+  Unknown = 0,
+
+  /**
+      Not organized in this way
+  */
+  None = 1,
+
+  /**
+      The layout is horizontal, the order is RGB
+  */
+  HorizontalRgb = 2,
+
+  /**
+      The layout is horizontal, the order is BGR
+  */
+  HorizontalBgr = 3,
+
+  /**
+      The layout is vertical, the order is RGB
+  */
+  VerticalRgb = 4,
+
+  /**
+      The layout is vertical, the order is BGR
+  */
+  VerticalBgr = 5,
+}
+
+/**
+    Specifies the current state of a touchpad gesture. All gestures are
+  guaranteed to begin with an event with phase [gdk.types.TouchpadGesturePhase.Begin],
+  followed by 0 or several events with phase [gdk.types.TouchpadGesturePhase.Update].
+  
+  A finished gesture may have 2 possible outcomes, an event with phase
+  [gdk.types.TouchpadGesturePhase.End] will be emitted when the gesture is
+  considered successful, this should be used as the hint to perform any
+  permanent changes.
+  
+  Cancelled gestures may be so for a variety of reasons, due to hardware
+  or the compositor, or due to the gesture recognition layers hinting the
+  gesture did not finish resolutely (eg. a 3rd finger being added during
+  a pinch gesture). In these cases, the last event will report the phase
+  [gdk.types.TouchpadGesturePhase.Cancel], this should be used as a hint
+  to undo any visible/permanent changes that were done throughout the
+  progress of the gesture.
+  
+  See also #GdkEventTouchpadSwipe and #GdkEventTouchpadPinch.
+*/
+enum GdkTouchpadGesturePhase
+{
+  /**
+      The gesture has begun.
+  */
+  Begin = 0,
+
+  /**
+      The gesture has been updated.
+  */
+  Update = 1,
+
+  /**
+      The gesture was finished, changes
+      should be permanently applied.
+  */
+  End = 2,
+
+  /**
+      The gesture was cancelled, all
+      changes should be undone.
+  */
+  Cancel = 3,
+}
+
+/**
+    Specifies the visiblity status of a window for a #GdkEventVisibility.
+*/
+enum GdkVisibilityState
+{
+  /**
+      the window is completely visible.
+  */
+  Unobscured = 0,
+
+  /**
+      the window is partially visible.
+  */
+  Partial = 1,
+
+  /**
+      the window is not visible at all.
+  */
+  FullyObscured = 2,
+}
+
+/**
+    A set of values that describe the manner in which the pixel values
+  for a visual are converted into RGB values for display.
+*/
+enum GdkVisualType
+{
+  /**
+      Each pixel value indexes a grayscale value
+        directly.
+  */
+  StaticGray = 0,
+
+  /**
+      Each pixel is an index into a color map that
+        maps pixel values into grayscale values. The color map can be
+        changed by an application.
+  */
+  Grayscale = 1,
+
+  /**
+      Each pixel value is an index into a predefined,
+        unmodifiable color map that maps pixel values into RGB values.
+  */
+  StaticColor = 2,
+
+  /**
+      Each pixel is an index into a color map that
+        maps pixel values into rgb values. The color map can be changed by
+        an application.
+  */
+  PseudoColor = 3,
+
+  /**
+      Each pixel value directly contains red, green,
+        and blue components. Use [gdk.visual.Visual.getRedPixelDetails], etc,
+        to obtain information about how the components are assembled into
+        a pixel value.
+  */
+  TrueColor = 4,
+
+  /**
+      Each pixel value contains red, green, and blue
+        components as for [gdk.types.VisualType.TrueColor], but the components are
+        mapped via a color table into the final output table instead of
+        being converted directly.
+  */
+  DirectColor = 5,
+}
+
+/**
+    These are hints originally defined by the Motif toolkit.
+  The window manager can use them when determining how to decorate
+  the window. The hint must be set before mapping the window.
+*/
+enum GdkWMDecoration : uint
+{
+  /**
+      all decorations should be applied.
+  */
+  All = 1,
+
+  /**
+      a frame should be drawn around the window.
+  */
+  Border = 2,
+
+  /**
+      the frame should have resize handles.
+  */
+  Resizeh = 4,
+
+  /**
+      a titlebar should be placed above the window.
+  */
+  Title = 8,
+
+  /**
+      a button for opening a menu should be included.
+  */
+  Menu = 16,
+
+  /**
+      a minimize button should be included.
+  */
+  Minimize = 32,
+
+  /**
+      a maximize button should be included.
+  */
+  Maximize = 64,
+}
+
+/**
+    These are hints originally defined by the Motif toolkit. The window manager
+  can use them when determining the functions to offer for the window. The
+  hint must be set before mapping the window.
+*/
+enum GdkWMFunction : uint
+{
+  /**
+      all functions should be offered.
+  */
+  All = 1,
+
+  /**
+      the window should be resizable.
+  */
+  Resize = 2,
+
+  /**
+      the window should be movable.
+  */
+  Move = 4,
+
+  /**
+      the window should be minimizable.
+  */
+  Minimize = 8,
+
+  /**
+      the window should be maximizable.
+  */
+  Maximize = 16,
+
+  /**
+      the window should be closable.
+  */
+  Close = 32,
+}
+
+/**
+    Used to indicate which fields in the #GdkWindowAttr struct should be honored.
+  For example, if you filled in the “cursor” and “x” fields of #GdkWindowAttr,
+  pass “@GDK_WA_X | @GDK_WA_CURSOR” to [gdk.window.Window.new_]. Fields in
+  #GdkWindowAttr not covered by a bit in this enum are required; for example,
+  the @width/@height, @wclass, and @window_type fields are required, they have
+  no corresponding flag in #GdkWindowAttributesType.
+*/
+enum GdkWindowAttributesType : uint
+{
+  /**
+      Honor the title field
+  */
+  Title = 2,
+
+  /**
+      Honor the X coordinate field
+  */
+  X = 4,
+
+  /**
+      Honor the Y coordinate field
+  */
+  Y = 8,
+
+  /**
+      Honor the cursor field
+  */
+  Cursor = 16,
+
+  /**
+      Honor the visual field
+  */
+  Visual = 32,
+
+  /**
+      Honor the wmclass_class and wmclass_name fields
+  */
+  Wmclass = 64,
+
+  /**
+      Honor the override_redirect field
+  */
+  Noredir = 128,
+
+  /**
+      Honor the type_hint field
+  */
+  TypeHint = 256,
+}
+
+/**
+    Determines a window edge or corner.
+*/
+enum GdkWindowEdge
+{
+  /**
+      the top left corner.
+  */
+  NorthWest = 0,
+
+  /**
+      the top edge.
+  */
+  North = 1,
+
+  /**
+      the top right corner.
+  */
+  NorthEast = 2,
+
+  /**
+      the left edge.
+  */
+  West = 3,
+
+  /**
+      the right edge.
+  */
+  East = 4,
+
+  /**
+      the lower left corner.
+  */
+  SouthWest = 5,
+
+  /**
+      the lower edge.
+  */
+  South = 6,
+
+  /**
+      the lower right corner.
+  */
+  SouthEast = 7,
+}
+
+/**
+    Used to indicate which fields of a #GdkGeometry struct should be paid
+  attention to. Also, the presence/absence of @GDK_HINT_POS,
+  @GDK_HINT_USER_POS, and @GDK_HINT_USER_SIZE is significant, though they don't
+  directly refer to #GdkGeometry fields. @GDK_HINT_USER_POS will be set
+  automatically by #GtkWindow if you call [gtk.window.Window.move].
+  @GDK_HINT_USER_POS and @GDK_HINT_USER_SIZE should be set if the user
+  specified a size/position using a --geometry command-line argument;
+  [gtk.window.Window.parseGeometry] automatically sets these flags.
+*/
+enum GdkWindowHints : uint
+{
+  /**
+      indicates that the program has positioned the window
+  */
+  Pos = 1,
+
+  /**
+      min size fields are set
+  */
+  MinSize = 2,
+
+  /**
+      max size fields are set
+  */
+  MaxSize = 4,
+
+  /**
+      base size fields are set
+  */
+  BaseSize = 8,
+
+  /**
+      aspect ratio fields are set
+  */
+  Aspect = 16,
+
+  /**
+      resize increment fields are set
+  */
+  ResizeInc = 32,
+
+  /**
+      window gravity field is set
+  */
+  WinGravity = 64,
+
+  /**
+      indicates that the window’s position was explicitly set
+     by the user
+  */
+  UserPos = 128,
+
+  /**
+      indicates that the window’s size was explicitly set by
+     the user
+  */
+  UserSize = 256,
+}
+
+/**
+    Specifies the state of a toplevel window.
+*/
+enum GdkWindowState : uint
+{
+  /**
+      the window is not shown.
+  */
+  Withdrawn = 1,
+
+  /**
+      the window is minimized.
+  */
+  Iconified = 2,
+
+  /**
+      the window is maximized.
+  */
+  Maximized = 4,
+
+  /**
+      the window is sticky.
+  */
+  Sticky = 8,
+
+  /**
+      the window is maximized without
+      decorations.
+  */
+  Fullscreen = 16,
+
+  /**
+      the window is kept above other windows.
+  */
+  Above = 32,
+
+  /**
+      the window is kept below other windows.
+  */
+  Below = 64,
+
+  /**
+      the window is presented as focused (with active decorations).
+  */
+  Focused = 128,
+
+  /**
+      the window is in a tiled state, Since 3.10. Since 3.22.23, this
+                             is deprecated in favor of per-edge information.
+  */
+  Tiled = 256,
+
+  /**
+      whether the top edge is tiled, Since 3.22.23
+  */
+  TopTiled = 512,
+
+  /**
+      whether the top edge is resizable, Since 3.22.23
+  */
+  TopResizable = 1024,
+
+  /**
+      whether the right edge is tiled, Since 3.22.23
+  */
+  RightTiled = 2048,
+
+  /**
+      whether the right edge is resizable, Since 3.22.23
+  */
+  RightResizable = 4096,
+
+  /**
+      whether the bottom edge is tiled, Since 3.22.23
+  */
+  BottomTiled = 8192,
+
+  /**
+      whether the bottom edge is resizable, Since 3.22.23
+  */
+  BottomResizable = 16384,
+
+  /**
+      whether the left edge is tiled, Since 3.22.23
+  */
+  LeftTiled = 32768,
+
+  /**
+      whether the left edge is resizable, Since 3.22.23
+  */
+  LeftResizable = 65536,
+}
+
+/**
+    Describes the kind of window.
+*/
+enum GdkWindowType
+{
+  /**
+      root window; this window has no parent, covers the entire
+     screen, and is created by the window system
+  */
+  Root = 0,
+
+  /**
+      toplevel window (used to implement #GtkWindow)
+  */
+  Toplevel = 1,
+
+  /**
+      child window (used to implement e.g. #GtkEntry)
+  */
+  Child = 2,
+
+  /**
+      override redirect temporary window (used to implement
+     #GtkMenu)
+  */
+  Temp = 3,
+
+  /**
+      foreign window (see gdk_window_foreign_new())
+  */
+  Foreign = 4,
+
+  /**
+      offscreen window (see
+     [Offscreen Windows][OFFSCREEN-WINDOWS]). Since 2.18
+  */
+  Offscreen = 5,
+
+  /**
+      subsurface-based window; This window is visually
+     tied to a toplevel, and is moved/stacked with it. Currently this window
+     type is only implemented in Wayland. Since 3.14
+  */
+  Subsurface = 6,
+}
+
+/**
+    These are hints for the window manager that indicate what type of function
+  the window has. The window manager can use this when determining decoration
+  and behaviour of the window. The hint must be set before mapping the window.
+  
+  See the [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec)
+  specification for more details about window types.
+*/
+enum GdkWindowTypeHint
+{
+  /**
+      Normal toplevel window.
+  */
+  Normal = 0,
+
+  /**
+      Dialog window.
+  */
+  Dialog = 1,
+
+  /**
+      Window used to implement a menu; GTK+ uses
+     this hint only for torn-off menus, see #GtkTearoffMenuItem.
+  */
+  Menu = 2,
+
+  /**
+      Window used to implement toolbars.
+  */
+  Toolbar = 3,
+
+  /**
+      Window used to display a splash
+     screen during application startup.
+  */
+  Splashscreen = 4,
+
+  /**
+      Utility windows which are not detached
+     toolbars or dialogs.
+  */
+  Utility = 5,
+
+  /**
+      Used for creating dock or panel windows.
+  */
+  Dock = 6,
+
+  /**
+      Used for creating the desktop background
+     window.
+  */
+  Desktop = 7,
+
+  /**
+      A menu that belongs to a menubar.
+  */
+  DropdownMenu = 8,
+
+  /**
+      A menu that does not belong to a menubar,
+     e.g. a context menu.
+  */
+  PopupMenu = 9,
+
+  /**
+      A tooltip.
+  */
+  Tooltip = 10,
+
+  /**
+      A notification - typically a “bubble”
+     that belongs to a status icon.
+  */
+  Notification = 11,
+
+  /**
+      A popup from a combo box.
+  */
+  Combo = 12,
+
+  /**
+      A window that is used to implement a DND cursor.
+  */
+  Dnd = 13,
+}
+
+/**
+    @GDK_INPUT_OUTPUT windows are the standard kind of window you might expect.
+  Such windows receive events and are also displayed on screen.
+  @GDK_INPUT_ONLY windows are invisible; they are usually placed above other
+  windows in order to trap or filter the events. You can’t draw on
+  @GDK_INPUT_ONLY windows.
+*/
+enum GdkWindowWindowClass
+{
+  /**
+      window for graphics and events
+  */
+  InputOutput = 0,
+
+  /**
+      window for events only
+  */
+  InputOnly = 1,
+}
+
 /**
     GdkAppLaunchContext is an implementation of #GAppLaunchContext that
   handles launching an application in a graphical context. It provides
