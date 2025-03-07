@@ -22,7 +22,7 @@ class CookieJarText : soup.cookie_jar.CookieJar
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_cookie_jar_text_get_type != &gidSymbolNotFound ? soup_cookie_jar_text_get_type() : cast(GType)0;
@@ -30,7 +30,7 @@ class CookieJarText : soup.cookie_jar.CookieJar
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

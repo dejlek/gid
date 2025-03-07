@@ -21,7 +21,7 @@ class ZlibDecompressor : gobject.object.ObjectG, gio.converter.Converter
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_zlib_decompressor_get_type != &gidSymbolNotFound ? g_zlib_decompressor_get_type() : cast(GType)0;
@@ -29,7 +29,7 @@ class ZlibDecompressor : gobject.object.ObjectG, gio.converter.Converter
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ConverterT!();

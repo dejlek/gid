@@ -31,7 +31,7 @@ class HScrollbar : gtk.scrollbar.Scrollbar
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_hscrollbar_get_type != &gidSymbolNotFound ? gtk_hscrollbar_get_type() : cast(GType)0;
@@ -39,7 +39,7 @@ class HScrollbar : gtk.scrollbar.Scrollbar
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

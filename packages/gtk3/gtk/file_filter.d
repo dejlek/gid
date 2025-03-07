@@ -60,7 +60,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_filter_get_type != &gidSymbolNotFound ? gtk_file_filter_get_type() : cast(GType)0;
@@ -68,7 +68,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin BuildableT!();

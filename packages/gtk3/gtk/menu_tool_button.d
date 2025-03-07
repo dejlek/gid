@@ -49,7 +49,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_tool_button_get_type != &gidSymbolNotFound ? gtk_menu_tool_button_get_type() : cast(GType)0;
@@ -57,7 +57,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

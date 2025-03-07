@@ -17,7 +17,7 @@ class Time32Array : arrow.numeric_array.NumericArray
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_time32_array_get_type != &gidSymbolNotFound ? garrow_time32_array_get_type() : cast(GType)0;
@@ -25,7 +25,7 @@ class Time32Array : arrow.numeric_array.NumericArray
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

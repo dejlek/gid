@@ -32,7 +32,7 @@ class PathMeasure : gobject.boxed.Boxed
     return dup ? copy_ : cInstancePtr;
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_path_measure_get_type != &gidSymbolNotFound ? gsk_path_measure_get_type() : cast(GType)0;
@@ -40,7 +40,7 @@ class PathMeasure : gobject.boxed.Boxed
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

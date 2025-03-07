@@ -42,7 +42,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_builder_list_item_factory_get_type != &gidSymbolNotFound ? gtk_builder_list_item_factory_get_type() : cast(GType)0;
@@ -50,7 +50,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

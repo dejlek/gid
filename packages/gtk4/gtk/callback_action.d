@@ -20,7 +20,7 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_callback_action_get_type != &gidSymbolNotFound ? gtk_callback_action_get_type() : cast(GType)0;
@@ -28,7 +28,7 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

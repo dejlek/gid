@@ -59,7 +59,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_password_entry_get_type != &gidSymbolNotFound ? gtk_password_entry_get_type() : cast(GType)0;
@@ -67,7 +67,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin EditableT!();

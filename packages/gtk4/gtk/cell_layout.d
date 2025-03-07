@@ -127,7 +127,7 @@ import gtk.types;
 interface CellLayout
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_layout_get_type != &gidSymbolNotFound ? gtk_cell_layout_get_type() : cast(GType)0;

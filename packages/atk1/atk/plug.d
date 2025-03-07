@@ -21,7 +21,7 @@ class Plug : atk.object.ObjectAtk, atk.component.Component
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_plug_get_type != &gidSymbolNotFound ? atk_plug_get_type() : cast(GType)0;
@@ -29,7 +29,7 @@ class Plug : atk.object.ObjectAtk, atk.component.Component
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ComponentT!();

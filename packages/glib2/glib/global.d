@@ -390,7 +390,7 @@ double asciiStrtod(string nptr, out string endptr)
 }
 
 /**
-    Converts a string to a [glib.types.TIME_SPAN_SECOND] value.
+    Converts a string to a [gst.types.FORMAT_PERCENT_SCALE] value.
   
   This function behaves like the standard `strtoll()` function
   does in the C locale. It does this without actually

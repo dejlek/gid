@@ -27,7 +27,7 @@ class SliceListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sec
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_slice_list_model_get_type != &gidSymbolNotFound ? gtk_slice_list_model_get_type() : cast(GType)0;
@@ -35,7 +35,7 @@ class SliceListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sec
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ListModelT!();

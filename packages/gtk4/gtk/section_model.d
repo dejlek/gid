@@ -27,7 +27,7 @@ import gtk.types;
 interface SectionModel
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_section_model_get_type != &gidSymbolNotFound ? gtk_section_model_get_type() : cast(GType)0;

@@ -16,7 +16,7 @@ class UnionArray : arrow.array.Array
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_union_array_get_type != &gidSymbolNotFound ? garrow_union_array_get_type() : cast(GType)0;
@@ -24,7 +24,7 @@ class UnionArray : arrow.array.Array
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

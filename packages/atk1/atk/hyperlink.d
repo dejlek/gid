@@ -28,7 +28,7 @@ class Hyperlink : gobject.object.ObjectG, atk.action.Action
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_hyperlink_get_type != &gidSymbolNotFound ? atk_hyperlink_get_type() : cast(GType)0;
@@ -36,7 +36,7 @@ class Hyperlink : gobject.object.ObjectG, atk.action.Action
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ActionT!();

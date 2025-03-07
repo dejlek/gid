@@ -27,7 +27,7 @@ class OtMathGlyphVariant : gobject.boxed.Boxed
     return dup ? copy_ : cInstancePtr;
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())hb_gobject_ot_math_glyph_variant_get_type != &gidSymbolNotFound ? hb_gobject_ot_math_glyph_variant_get_type() : cast(GType)0;
@@ -35,7 +35,7 @@ class OtMathGlyphVariant : gobject.boxed.Boxed
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   @property harfbuzz.types.Codepoint glyph()

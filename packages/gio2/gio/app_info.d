@@ -69,7 +69,7 @@ import gobject.object;
 interface AppInfo
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_app_info_get_type != &gidSymbolNotFound ? g_app_info_get_type() : cast(GType)0;

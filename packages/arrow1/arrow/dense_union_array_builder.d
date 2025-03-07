@@ -17,7 +17,7 @@ class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_dense_union_array_builder_get_type != &gidSymbolNotFound ? garrow_dense_union_array_builder_get_type() : cast(GType)0;
@@ -25,7 +25,7 @@ class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

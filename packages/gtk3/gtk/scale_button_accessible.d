@@ -23,7 +23,7 @@ class ScaleButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.value.
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scale_button_accessible_get_type != &gidSymbolNotFound ? gtk_scale_button_accessible_get_type() : cast(GType)0;
@@ -31,7 +31,7 @@ class ScaleButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.value.
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ValueT!();

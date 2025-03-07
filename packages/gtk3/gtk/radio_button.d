@@ -110,7 +110,7 @@ class RadioButton : gtk.check_button.CheckButton
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_radio_button_get_type != &gidSymbolNotFound ? gtk_radio_button_get_type() : cast(GType)0;
@@ -118,7 +118,7 @@ class RadioButton : gtk.check_button.CheckButton
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

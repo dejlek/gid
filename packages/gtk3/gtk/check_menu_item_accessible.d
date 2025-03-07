@@ -21,7 +21,7 @@ class CheckMenuItemAccessible : gtk.menu_item_accessible.MenuItemAccessible
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_check_menu_item_accessible_get_type != &gidSymbolNotFound ? gtk_check_menu_item_accessible_get_type() : cast(GType)0;
@@ -29,6 +29,6 @@ class CheckMenuItemAccessible : gtk.menu_item_accessible.MenuItemAccessible
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 }

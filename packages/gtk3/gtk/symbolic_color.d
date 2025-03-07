@@ -38,7 +38,7 @@ class SymbolicColor : gobject.boxed.Boxed
     return dup ? copy_ : cInstancePtr;
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_symbolic_color_get_type != &gidSymbolNotFound ? gtk_symbolic_color_get_type() : cast(GType)0;
@@ -46,7 +46,7 @@ class SymbolicColor : gobject.boxed.Boxed
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

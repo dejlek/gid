@@ -23,7 +23,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_data_output_stream_get_type != &gidSymbolNotFound ? g_data_output_stream_get_type() : cast(GType)0;
@@ -31,7 +31,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin SeekableT!();

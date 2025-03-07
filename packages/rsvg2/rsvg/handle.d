@@ -182,7 +182,7 @@ class Handle : gobject.object.ObjectG
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())rsvg_handle_get_type != &gidSymbolNotFound ? rsvg_handle_get_type() : cast(GType)0;
@@ -190,7 +190,7 @@ class Handle : gobject.object.ObjectG
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

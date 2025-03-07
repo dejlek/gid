@@ -45,7 +45,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_page_setup_unix_dialog_get_type != &gidSymbolNotFound ? gtk_page_setup_unix_dialog_get_type() : cast(GType)0;
@@ -53,7 +53,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

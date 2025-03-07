@@ -23,7 +23,7 @@ class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConne
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_address_get_type != &gidSymbolNotFound ? g_socket_address_get_type() : cast(GType)0;
@@ -31,7 +31,7 @@ class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConne
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin SocketConnectableT!();

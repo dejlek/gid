@@ -75,7 +75,7 @@ class Socket : gtk.container.Container
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_socket_get_type != &gidSymbolNotFound ? gtk_socket_get_type() : cast(GType)0;
@@ -83,7 +83,7 @@ class Socket : gtk.container.Container
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

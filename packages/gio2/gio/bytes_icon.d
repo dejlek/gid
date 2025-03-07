@@ -23,7 +23,7 @@ class BytesIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loada
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_bytes_icon_get_type != &gidSymbolNotFound ? g_bytes_icon_get_type() : cast(GType)0;
@@ -31,7 +31,7 @@ class BytesIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loada
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin IconT!();

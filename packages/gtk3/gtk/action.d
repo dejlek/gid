@@ -74,7 +74,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_action_get_type != &gidSymbolNotFound ? gtk_action_get_type() : cast(GType)0;
@@ -82,7 +82,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin BuildableT!();

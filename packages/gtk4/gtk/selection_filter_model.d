@@ -21,7 +21,7 @@ class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_selection_filter_model_get_type != &gidSymbolNotFound ? gtk_selection_filter_model_get_type() : cast(GType)0;
@@ -29,7 +29,7 @@ class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ListModelT!();

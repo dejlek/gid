@@ -15,7 +15,7 @@ class Date64DataType : arrow.temporal_data_type.TemporalDataType
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_date64_data_type_get_type != &gidSymbolNotFound ? garrow_date64_data_type_get_type() : cast(GType)0;
@@ -23,7 +23,7 @@ class Date64DataType : arrow.temporal_data_type.TemporalDataType
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

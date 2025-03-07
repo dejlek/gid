@@ -35,7 +35,7 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_recent_chooser_widget_get_type != &gidSymbolNotFound ? gtk_recent_chooser_widget_get_type() : cast(GType)0;
@@ -43,7 +43,7 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin RecentChooserT!();

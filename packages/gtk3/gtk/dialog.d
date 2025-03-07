@@ -143,7 +143,7 @@ class Dialog : gtk.window.Window
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_dialog_get_type != &gidSymbolNotFound ? gtk_dialog_get_type() : cast(GType)0;
@@ -151,7 +151,7 @@ class Dialog : gtk.window.Window
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

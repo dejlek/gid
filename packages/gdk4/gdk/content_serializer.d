@@ -36,7 +36,7 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_content_serializer_get_type != &gidSymbolNotFound ? gdk_content_serializer_get_type() : cast(GType)0;
@@ -44,7 +44,7 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin AsyncResultT!();

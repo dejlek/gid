@@ -37,7 +37,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_multipart_input_stream_get_type != &gidSymbolNotFound ? soup_multipart_input_stream_get_type() : cast(GType)0;
@@ -45,7 +45,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin PollableInputStreamT!();

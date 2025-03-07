@@ -22,7 +22,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())vte_pty_get_type != &gidSymbolNotFound ? vte_pty_get_type() : cast(GType)0;
@@ -30,7 +30,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin InitableT!();

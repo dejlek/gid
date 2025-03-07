@@ -98,7 +98,7 @@ class Scale : gtk.range.Range
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scale_get_type != &gidSymbolNotFound ? gtk_scale_get_type() : cast(GType)0;
@@ -106,7 +106,7 @@ class Scale : gtk.range.Range
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

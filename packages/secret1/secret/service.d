@@ -73,7 +73,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_service_get_type != &gidSymbolNotFound ? secret_service_get_type() : cast(GType)0;
@@ -81,7 +81,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin BackendT!();

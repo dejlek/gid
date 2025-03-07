@@ -36,7 +36,7 @@ class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_style_properties_get_type != &gidSymbolNotFound ? gtk_style_properties_get_type() : cast(GType)0;
@@ -44,7 +44,7 @@ class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin StyleProviderT!();

@@ -2307,7 +2307,7 @@ struct PangoFontMap
 struct PangoFontMapClass
 {
   /**
-      parent [gobject.object_class.ObjectClass]
+      parent [gstpbutils.types.ObjectClass]
   */
   GObjectClass parentClass;
 
@@ -2409,7 +2409,7 @@ struct PangoFontset
 struct PangoFontsetClass
 {
   /**
-      parent [gobject.object_class.ObjectClass]
+      parent [gstpbutils.types.ObjectClass]
   */
   GObjectClass parentClass;
 

@@ -85,7 +85,7 @@ class SizeGroup : gobject.object.ObjectG, gtk.buildable.Buildable
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_size_group_get_type != &gidSymbolNotFound ? gtk_size_group_get_type() : cast(GType)0;
@@ -93,7 +93,7 @@ class SizeGroup : gobject.object.ObjectG, gtk.buildable.Buildable
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin BuildableT!();

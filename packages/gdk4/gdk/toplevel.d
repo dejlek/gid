@@ -23,7 +23,7 @@ import gobject.dclosure;
 interface Toplevel
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_toplevel_get_type != &gidSymbolNotFound ? gdk_toplevel_get_type() : cast(GType)0;

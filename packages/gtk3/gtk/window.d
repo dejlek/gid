@@ -88,7 +88,7 @@ class Window : gtk.bin.Bin
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_window_get_type != &gidSymbolNotFound ? gtk_window_get_type() : cast(GType)0;
@@ -96,7 +96,7 @@ class Window : gtk.bin.Bin
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

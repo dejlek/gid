@@ -36,7 +36,7 @@ class ScaledFont : gobject.boxed.Boxed
     return dup ? copy_ : cInstancePtr;
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_scaled_font_get_type != &gidSymbolNotFound ? cairo_gobject_scaled_font_get_type() : cast(GType)0;
@@ -44,7 +44,7 @@ class ScaledFont : gobject.boxed.Boxed
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

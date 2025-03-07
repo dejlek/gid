@@ -26,7 +26,7 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_converter_output_stream_get_type != &gidSymbolNotFound ? g_converter_output_stream_get_type() : cast(GType)0;
@@ -34,7 +34,7 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin PollableOutputStreamT!();

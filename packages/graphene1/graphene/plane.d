@@ -34,7 +34,7 @@ class Plane : gobject.boxed.Boxed
     return dup ? copy_ : cInstancePtr;
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_plane_get_type != &gidSymbolNotFound ? graphene_plane_get_type() : cast(GType)0;
@@ -42,7 +42,7 @@ class Plane : gobject.boxed.Boxed
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

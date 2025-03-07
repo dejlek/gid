@@ -63,7 +63,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcut_controller_get_type != &gidSymbolNotFound ? gtk_shortcut_controller_get_type() : cast(GType)0;
@@ -71,7 +71,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ListModelT!();

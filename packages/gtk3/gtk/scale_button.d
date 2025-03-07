@@ -41,7 +41,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scale_button_get_type != &gidSymbolNotFound ? gtk_scale_button_get_type() : cast(GType)0;
@@ -49,7 +49,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin OrientableT!();

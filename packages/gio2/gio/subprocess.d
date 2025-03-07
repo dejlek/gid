@@ -81,7 +81,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_subprocess_get_type != &gidSymbolNotFound ? g_subprocess_get_type() : cast(GType)0;
@@ -89,7 +89,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin InitableT!();

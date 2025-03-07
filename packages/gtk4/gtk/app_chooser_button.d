@@ -58,7 +58,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_app_chooser_button_get_type != &gidSymbolNotFound ? gtk_app_chooser_button_get_type() : cast(GType)0;
@@ -66,7 +66,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin AppChooserT!();

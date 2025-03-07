@@ -18,7 +18,7 @@ class MutableBuffer : arrow.buffer.Buffer
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_mutable_buffer_get_type != &gidSymbolNotFound ? garrow_mutable_buffer_get_type() : cast(GType)0;
@@ -26,7 +26,7 @@ class MutableBuffer : arrow.buffer.Buffer
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

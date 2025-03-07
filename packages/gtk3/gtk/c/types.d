@@ -10217,6 +10217,9 @@ struct GtkEntryCompletionClass
 struct GtkEntryCompletionPrivate;
 
 /** */
+struct GtkEntryIconAccessible;
+
+/** */
 struct GtkEntryPrivate;
 
 /**

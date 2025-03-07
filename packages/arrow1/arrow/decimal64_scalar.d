@@ -18,7 +18,7 @@ class Decimal64Scalar : arrow.scalar.Scalar
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal64_scalar_get_type != &gidSymbolNotFound ? garrow_decimal64_scalar_get_type() : cast(GType)0;
@@ -26,7 +26,7 @@ class Decimal64Scalar : arrow.scalar.Scalar
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

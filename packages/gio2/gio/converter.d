@@ -21,7 +21,7 @@ import glib.error;
 interface Converter
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_converter_get_type != &gidSymbolNotFound ? g_converter_get_type() : cast(GType)0;

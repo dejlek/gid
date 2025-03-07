@@ -23,7 +23,7 @@ class LinkButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.hyperli
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_link_button_accessible_get_type != &gidSymbolNotFound ? gtk_link_button_accessible_get_type() : cast(GType)0;
@@ -31,7 +31,7 @@ class LinkButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.hyperli
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin HyperlinkImplT!();

@@ -17,7 +17,7 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_in_memory_fragment_get_type != &gidSymbolNotFound ? gadataset_in_memory_fragment_get_type() : cast(GType)0;
@@ -25,7 +25,7 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

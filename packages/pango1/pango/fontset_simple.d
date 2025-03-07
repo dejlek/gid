@@ -23,7 +23,7 @@ class FontsetSimple : pango.fontset.Fontset
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_fontset_simple_get_type != &gidSymbolNotFound ? pango_fontset_simple_get_type() : cast(GType)0;
@@ -31,7 +31,7 @@ class FontsetSimple : pango.fontset.Fontset
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

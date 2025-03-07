@@ -18,7 +18,7 @@ class CustomSorter : gtk.sorter.Sorter
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_custom_sorter_get_type != &gidSymbolNotFound ? gtk_custom_sorter_get_type() : cast(GType)0;
@@ -26,7 +26,7 @@ class CustomSorter : gtk.sorter.Sorter
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
   import gobject.object;
 

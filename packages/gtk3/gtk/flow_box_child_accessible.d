@@ -17,7 +17,7 @@ class FlowBoxChildAccessible : gtk.container_accessible.ContainerAccessible
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_flow_box_child_accessible_get_type != &gidSymbolNotFound ? gtk_flow_box_child_accessible_get_type() : cast(GType)0;
@@ -25,6 +25,6 @@ class FlowBoxChildAccessible : gtk.container_accessible.ContainerAccessible
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 }

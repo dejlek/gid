@@ -20,7 +20,7 @@ class Misc : gobject.object.ObjectG
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_misc_get_type != &gidSymbolNotFound ? atk_misc_get_type() : cast(GType)0;
@@ -28,7 +28,7 @@ class Misc : gobject.object.ObjectG
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

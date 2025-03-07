@@ -24,7 +24,7 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_inet_address_mask_get_type != &gidSymbolNotFound ? g_inet_address_mask_get_type() : cast(GType)0;
@@ -32,7 +32,7 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin InitableT!();

@@ -22,7 +22,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_renderer_progress_get_type != &gidSymbolNotFound ? gtk_cell_renderer_progress_get_type() : cast(GType)0;
@@ -30,7 +30,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin OrientableT!();

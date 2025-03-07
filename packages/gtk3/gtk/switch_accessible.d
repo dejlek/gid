@@ -19,7 +19,7 @@ class SwitchAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Acti
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_switch_accessible_get_type != &gidSymbolNotFound ? gtk_switch_accessible_get_type() : cast(GType)0;
@@ -27,7 +27,7 @@ class SwitchAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Acti
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ActionT!();

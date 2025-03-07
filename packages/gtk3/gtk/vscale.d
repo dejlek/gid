@@ -31,7 +31,7 @@ class VScale : gtk.scale.Scale
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_vscale_get_type != &gidSymbolNotFound ? gtk_vscale_get_type() : cast(GType)0;
@@ -39,7 +39,7 @@ class VScale : gtk.scale.Scale
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

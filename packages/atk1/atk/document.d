@@ -22,7 +22,7 @@ import gobject.dclosure;
 interface Document
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_document_get_type != &gidSymbolNotFound ? atk_document_get_type() : cast(GType)0;

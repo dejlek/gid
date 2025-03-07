@@ -31,7 +31,7 @@ class TlsConnection : gio.iostream.IOStream
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_connection_get_type != &gidSymbolNotFound ? g_tls_connection_get_type() : cast(GType)0;
@@ -39,7 +39,7 @@ class TlsConnection : gio.iostream.IOStream
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

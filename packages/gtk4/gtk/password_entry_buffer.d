@@ -20,7 +20,7 @@ class PasswordEntryBuffer : gtk.entry_buffer.EntryBuffer
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_password_entry_buffer_get_type != &gidSymbolNotFound ? gtk_password_entry_buffer_get_type() : cast(GType)0;
@@ -28,7 +28,7 @@ class PasswordEntryBuffer : gtk.entry_buffer.EntryBuffer
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

@@ -29,7 +29,7 @@ import gobject.object;
 interface Component
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_component_get_type != &gidSymbolNotFound ? atk_component_get_type() : cast(GType)0;

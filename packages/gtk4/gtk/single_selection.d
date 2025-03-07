@@ -29,7 +29,7 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_single_selection_get_type != &gidSymbolNotFound ? gtk_single_selection_get_type() : cast(GType)0;
@@ -37,7 +37,7 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ListModelT!();

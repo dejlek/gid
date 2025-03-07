@@ -120,7 +120,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_button_get_type != &gidSymbolNotFound ? gtk_menu_button_get_type() : cast(GType)0;
@@ -128,7 +128,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

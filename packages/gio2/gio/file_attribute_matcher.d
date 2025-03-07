@@ -22,7 +22,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
     return dup ? copy_ : cInstancePtr;
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_attribute_matcher_get_type != &gidSymbolNotFound ? g_file_attribute_matcher_get_type() : cast(GType)0;
@@ -30,7 +30,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

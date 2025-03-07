@@ -34,7 +34,7 @@ class TextBuffer : gobject.object.ObjectG
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_buffer_get_type != &gidSymbolNotFound ? gtk_text_buffer_get_type() : cast(GType)0;
@@ -42,7 +42,7 @@ class TextBuffer : gobject.object.ObjectG
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

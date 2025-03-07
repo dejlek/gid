@@ -27,7 +27,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_memory_output_stream_get_type != &gidSymbolNotFound ? g_memory_output_stream_get_type() : cast(GType)0;
@@ -35,7 +35,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin PollableOutputStreamT!();

@@ -25,7 +25,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_data_input_stream_get_type != &gidSymbolNotFound ? g_data_input_stream_get_type() : cast(GType)0;
@@ -33,7 +33,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

@@ -15,7 +15,7 @@ class IPCFileFormat : arrowdataset.file_format.FileFormat
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_ipc_file_format_get_type != &gidSymbolNotFound ? gadataset_ipc_file_format_get_type() : cast(GType)0;
@@ -23,7 +23,7 @@ class IPCFileFormat : arrowdataset.file_format.FileFormat
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

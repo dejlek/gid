@@ -43,7 +43,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_prompt_get_type != &gidSymbolNotFound ? secret_prompt_get_type() : cast(GType)0;
@@ -51,7 +51,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

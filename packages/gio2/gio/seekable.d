@@ -28,7 +28,7 @@ import glib.types;
 interface Seekable
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_seekable_get_type != &gidSymbolNotFound ? g_seekable_get_type() : cast(GType)0;

@@ -23,7 +23,7 @@ class EveryFilter : gtk.multi_filter.MultiFilter
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_every_filter_get_type != &gidSymbolNotFound ? gtk_every_filter_get_type() : cast(GType)0;
@@ -31,7 +31,7 @@ class EveryFilter : gtk.multi_filter.MultiFilter
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

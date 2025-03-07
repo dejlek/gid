@@ -47,7 +47,7 @@ class StringList : gobject.object.ObjectG, gio.list_model.ListModel, gtk.buildab
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_string_list_get_type != &gidSymbolNotFound ? gtk_string_list_get_type() : cast(GType)0;
@@ -55,7 +55,7 @@ class StringList : gobject.object.ObjectG, gio.list_model.ListModel, gtk.buildab
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ListModelT!();

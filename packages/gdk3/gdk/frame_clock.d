@@ -51,7 +51,7 @@ class FrameClock : gobject.object.ObjectG
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_frame_clock_get_type != &gidSymbolNotFound ? gdk_frame_clock_get_type() : cast(GType)0;
@@ -59,7 +59,7 @@ class FrameClock : gobject.object.ObjectG
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

@@ -26,7 +26,7 @@ class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_object_skeleton_get_type != &gidSymbolNotFound ? g_dbus_object_skeleton_get_type() : cast(GType)0;
@@ -34,7 +34,7 @@ class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin DBusObjectT!();

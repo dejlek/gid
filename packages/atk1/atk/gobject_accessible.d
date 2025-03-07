@@ -23,7 +23,7 @@ class GObjectAccessible : atk.object.ObjectAtk
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_gobject_accessible_get_type != &gidSymbolNotFound ? atk_gobject_accessible_get_type() : cast(GType)0;
@@ -31,7 +31,7 @@ class GObjectAccessible : atk.object.ObjectAtk
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

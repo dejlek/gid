@@ -27,7 +27,7 @@ import gio.types;
 interface DebugController
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_debug_controller_get_type != &gidSymbolNotFound ? g_debug_controller_get_type() : cast(GType)0;

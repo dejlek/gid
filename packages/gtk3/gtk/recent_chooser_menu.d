@@ -44,7 +44,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_recent_chooser_menu_get_type != &gidSymbolNotFound ? gtk_recent_chooser_menu_get_type() : cast(GType)0;
@@ -52,7 +52,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ActivatableT!();

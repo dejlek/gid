@@ -30,7 +30,7 @@ class ConstraintGuide : gobject.object.ObjectG, gtk.constraint_target.Constraint
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_constraint_guide_get_type != &gidSymbolNotFound ? gtk_constraint_guide_get_type() : cast(GType)0;
@@ -38,7 +38,7 @@ class ConstraintGuide : gobject.object.ObjectG, gtk.constraint_target.Constraint
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ConstraintTargetT!();

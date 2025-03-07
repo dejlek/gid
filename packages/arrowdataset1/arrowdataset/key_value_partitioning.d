@@ -15,7 +15,7 @@ class KeyValuePartitioning : arrowdataset.partitioning.Partitioning
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_key_value_partitioning_get_type != &gidSymbolNotFound ? gadataset_key_value_partitioning_get_type() : cast(GType)0;
@@ -23,6 +23,6 @@ class KeyValuePartitioning : arrowdataset.partitioning.Partitioning
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 }

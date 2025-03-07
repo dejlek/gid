@@ -135,7 +135,7 @@ class DebugControllerDBus : gobject.object.ObjectG, gio.debug_controller.DebugCo
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_debug_controller_dbus_get_type != &gidSymbolNotFound ? g_debug_controller_dbus_get_type() : cast(GType)0;
@@ -143,7 +143,7 @@ class DebugControllerDBus : gobject.object.ObjectG, gio.debug_controller.DebugCo
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin DebugControllerT!();

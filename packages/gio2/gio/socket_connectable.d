@@ -70,7 +70,7 @@ import gobject.object;
 interface SocketConnectable
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_connectable_get_type != &gidSymbolNotFound ? g_socket_connectable_get_type() : cast(GType)0;

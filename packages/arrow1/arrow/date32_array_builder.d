@@ -16,7 +16,7 @@ class Date32ArrayBuilder : arrow.array_builder.ArrayBuilder
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_date32_array_builder_get_type != &gidSymbolNotFound ? garrow_date32_array_builder_get_type() : cast(GType)0;
@@ -24,7 +24,7 @@ class Date32ArrayBuilder : arrow.array_builder.ArrayBuilder
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

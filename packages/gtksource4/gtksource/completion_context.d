@@ -20,7 +20,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_context_get_type != &gidSymbolNotFound ? gtk_source_completion_context_get_type() : cast(GType)0;
@@ -28,7 +28,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

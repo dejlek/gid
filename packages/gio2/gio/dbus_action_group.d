@@ -26,7 +26,7 @@ class DBusActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, gi
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_action_group_get_type != &gidSymbolNotFound ? g_dbus_action_group_get_type() : cast(GType)0;
@@ -34,7 +34,7 @@ class DBusActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, gi
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ActionGroupT!();

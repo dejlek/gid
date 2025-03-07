@@ -17,7 +17,7 @@ class RecordBatchStream : arrowflight.data_stream.DataStream
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_record_batch_stream_get_type != &gidSymbolNotFound ? gaflight_record_batch_stream_get_type() : cast(GType)0;
@@ -25,7 +25,7 @@ class RecordBatchStream : arrowflight.data_stream.DataStream
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

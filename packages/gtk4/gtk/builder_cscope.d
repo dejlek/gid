@@ -34,7 +34,7 @@ class BuilderCScope : gobject.object.ObjectG, gtk.builder_scope.BuilderScope
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_builder_cscope_get_type != &gidSymbolNotFound ? gtk_builder_cscope_get_type() : cast(GType)0;
@@ -42,7 +42,7 @@ class BuilderCScope : gobject.object.ObjectG, gtk.builder_scope.BuilderScope
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin BuilderScopeT!();

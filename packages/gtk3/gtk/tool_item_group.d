@@ -33,7 +33,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tool_item_group_get_type != &gidSymbolNotFound ? gtk_tool_item_group_get_type() : cast(GType)0;
@@ -41,7 +41,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ToolShellT!();

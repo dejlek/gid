@@ -87,7 +87,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_operation_get_type != &gidSymbolNotFound ? gtk_print_operation_get_type() : cast(GType)0;
@@ -95,7 +95,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin PrintOperationPreviewT!();

@@ -33,7 +33,7 @@ class InputStream : gobject.object.ObjectG
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_input_stream_get_type != &gidSymbolNotFound ? g_input_stream_get_type() : cast(GType)0;
@@ -41,7 +41,7 @@ class InputStream : gobject.object.ObjectG
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

@@ -38,7 +38,7 @@ class SocketClient : gobject.object.ObjectG
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_client_get_type != &gidSymbolNotFound ? g_socket_client_get_type() : cast(GType)0;
@@ -46,7 +46,7 @@ class SocketClient : gobject.object.ObjectG
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

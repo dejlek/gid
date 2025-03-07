@@ -18,7 +18,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_fixed_size_binary_array_builder_get_type != &gidSymbolNotFound ? garrow_fixed_size_binary_array_builder_get_type() : cast(GType)0;
@@ -26,7 +26,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

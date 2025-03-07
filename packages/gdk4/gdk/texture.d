@@ -41,7 +41,7 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_texture_get_type != &gidSymbolNotFound ? gdk_texture_get_type() : cast(GType)0;
@@ -49,7 +49,7 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin PaintableT!();

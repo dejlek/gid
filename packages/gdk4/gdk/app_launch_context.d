@@ -38,7 +38,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_app_launch_context_get_type != &gidSymbolNotFound ? gdk_app_launch_context_get_type() : cast(GType)0;
@@ -46,7 +46,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   alias getDisplay = gio.app_launch_context.AppLaunchContext.getDisplay;

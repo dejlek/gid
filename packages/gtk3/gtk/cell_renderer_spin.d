@@ -29,7 +29,7 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_renderer_spin_get_type != &gidSymbolNotFound ? gtk_cell_renderer_spin_get_type() : cast(GType)0;
@@ -37,7 +37,7 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

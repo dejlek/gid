@@ -25,7 +25,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_input_stream_get_type != &gidSymbolNotFound ? garrow_input_stream_get_type() : cast(GType)0;
@@ -33,7 +33,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin FileT!();

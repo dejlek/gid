@@ -23,7 +23,7 @@ import glib.source;
 interface PollableOutputStream
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_pollable_output_stream_get_type != &gidSymbolNotFound ? g_pollable_output_stream_get_type() : cast(GType)0;

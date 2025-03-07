@@ -16,7 +16,7 @@ class RankOptions : arrow.function_options.FunctionOptions
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_rank_options_get_type != &gidSymbolNotFound ? garrow_rank_options_get_type() : cast(GType)0;
@@ -24,7 +24,7 @@ class RankOptions : arrow.function_options.FunctionOptions
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

@@ -39,7 +39,7 @@ class WidgetPaintable : gobject.object.ObjectG, gdk.paintable.Paintable
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_widget_paintable_get_type != &gidSymbolNotFound ? gtk_widget_paintable_get_type() : cast(GType)0;
@@ -47,7 +47,7 @@ class WidgetPaintable : gobject.object.ObjectG, gdk.paintable.Paintable
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin PaintableT!();

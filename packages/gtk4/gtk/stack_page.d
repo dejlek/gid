@@ -20,7 +20,7 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_stack_page_get_type != &gidSymbolNotFound ? gtk_stack_page_get_type() : cast(GType)0;
@@ -28,7 +28,7 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin AccessibleT!();

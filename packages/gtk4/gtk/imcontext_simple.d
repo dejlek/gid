@@ -54,7 +54,7 @@ class IMContextSimple : gtk.imcontext.IMContext
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_im_context_simple_get_type != &gidSymbolNotFound ? gtk_im_context_simple_get_type() : cast(GType)0;
@@ -62,7 +62,7 @@ class IMContextSimple : gtk.imcontext.IMContext
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

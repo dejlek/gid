@@ -22,7 +22,7 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_hsts_enforcer_db_get_type != &gidSymbolNotFound ? soup_hsts_enforcer_db_get_type() : cast(GType)0;
@@ -30,7 +30,7 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

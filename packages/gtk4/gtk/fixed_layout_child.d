@@ -18,7 +18,7 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_fixed_layout_child_get_type != &gidSymbolNotFound ? gtk_fixed_layout_child_get_type() : cast(GType)0;
@@ -26,7 +26,7 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

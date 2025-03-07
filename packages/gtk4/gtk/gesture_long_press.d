@@ -32,7 +32,7 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_long_press_get_type != &gidSymbolNotFound ? gtk_gesture_long_press_get_type() : cast(GType)0;
@@ -40,7 +40,7 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

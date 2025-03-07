@@ -38,7 +38,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_socket_address_get_type != &gidSymbolNotFound ? g_unix_socket_address_get_type() : cast(GType)0;
@@ -46,7 +46,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

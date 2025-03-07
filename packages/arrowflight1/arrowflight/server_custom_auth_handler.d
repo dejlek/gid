@@ -20,7 +20,7 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_server_custom_auth_handler_get_type != &gidSymbolNotFound ? gaflight_server_custom_auth_handler_get_type() : cast(GType)0;
@@ -28,7 +28,7 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

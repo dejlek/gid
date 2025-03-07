@@ -15,7 +15,7 @@ class ISO8601TimestampParser : arrow.timestamp_parser.TimestampParser
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_iso8601_timestamp_parser_get_type != &gidSymbolNotFound ? garrow_iso8601_timestamp_parser_get_type() : cast(GType)0;
@@ -23,7 +23,7 @@ class ISO8601TimestampParser : arrow.timestamp_parser.TimestampParser
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

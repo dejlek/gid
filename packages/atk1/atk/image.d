@@ -27,7 +27,7 @@ import gid.gid;
 interface Image
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_image_get_type != &gidSymbolNotFound ? atk_image_get_type() : cast(GType)0;

@@ -29,7 +29,7 @@ class MediaFile : gtk.media_stream.MediaStream
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_media_file_get_type != &gidSymbolNotFound ? gtk_media_file_get_type() : cast(GType)0;
@@ -37,7 +37,7 @@ class MediaFile : gtk.media_stream.MediaStream
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

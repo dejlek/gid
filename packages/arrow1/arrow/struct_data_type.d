@@ -17,7 +17,7 @@ class StructDataType : arrow.data_type.DataType
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_struct_data_type_get_type != &gidSymbolNotFound ? garrow_struct_data_type_get_type() : cast(GType)0;
@@ -25,7 +25,7 @@ class StructDataType : arrow.data_type.DataType
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

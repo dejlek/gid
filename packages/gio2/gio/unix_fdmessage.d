@@ -32,7 +32,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_fd_message_get_type != &gidSymbolNotFound ? g_unix_fd_message_get_type() : cast(GType)0;
@@ -40,7 +40,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

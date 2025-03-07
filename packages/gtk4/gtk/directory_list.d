@@ -42,7 +42,7 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_directory_list_get_type != &gidSymbolNotFound ? gtk_directory_list_get_type() : cast(GType)0;
@@ -50,7 +50,7 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ListModelT!();

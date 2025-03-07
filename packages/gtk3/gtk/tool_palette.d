@@ -102,7 +102,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tool_palette_get_type != &gidSymbolNotFound ? gtk_tool_palette_get_type() : cast(GType)0;
@@ -110,7 +110,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin OrientableT!();

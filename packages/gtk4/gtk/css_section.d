@@ -28,7 +28,7 @@ class CssSection : gobject.boxed.Boxed
     return dup ? copy_ : cInstancePtr;
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_css_section_get_type != &gidSymbolNotFound ? gtk_css_section_get_type() : cast(GType)0;
@@ -36,7 +36,7 @@ class CssSection : gobject.boxed.Boxed
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**
@@ -67,7 +67,7 @@ class CssSection : gobject.boxed.Boxed
     _cretval = gtk_css_section_get_end_location(cast(const(GtkCssSection)*)cPtr);
     gtk.types.CssLocation _retval;
     if (_cretval)
-      _retval = *_cretval;
+      _retval = *cast(gtk.types.CssLocation*)_cretval;
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class CssSection : gobject.boxed.Boxed
     _cretval = gtk_css_section_get_start_location(cast(const(GtkCssSection)*)cPtr);
     gtk.types.CssLocation _retval;
     if (_cretval)
-      _retval = *_cretval;
+      _retval = *cast(gtk.types.CssLocation*)_cretval;
     return _retval;
   }
 

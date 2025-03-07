@@ -42,7 +42,7 @@ class HSTSEnforcer : gobject.object.ObjectG, soup.session_feature.SessionFeature
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_hsts_enforcer_get_type != &gidSymbolNotFound ? soup_hsts_enforcer_get_type() : cast(GType)0;
@@ -50,7 +50,7 @@ class HSTSEnforcer : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin SessionFeatureT!();

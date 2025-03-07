@@ -40,7 +40,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())vte_terminal_get_type != &gidSymbolNotFound ? vte_terminal_get_type() : cast(GType)0;
@@ -48,7 +48,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ScrollableT!();

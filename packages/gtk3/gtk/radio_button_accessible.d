@@ -21,7 +21,7 @@ class RadioButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessibl
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_radio_button_accessible_get_type != &gidSymbolNotFound ? gtk_radio_button_accessible_get_type() : cast(GType)0;
@@ -29,6 +29,6 @@ class RadioButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessibl
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 }

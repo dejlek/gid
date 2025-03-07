@@ -24,7 +24,7 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_font_family_get_type != &gidSymbolNotFound ? pango_font_family_get_type() : cast(GType)0;
@@ -32,7 +32,7 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ListModelT!();

@@ -19,7 +19,7 @@ class VulkanRenderer : gsk.renderer.Renderer
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_vulkan_renderer_get_type != &gidSymbolNotFound ? gsk_vulkan_renderer_get_type() : cast(GType)0;
@@ -27,7 +27,7 @@ class VulkanRenderer : gsk.renderer.Renderer
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

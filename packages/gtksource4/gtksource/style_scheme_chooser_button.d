@@ -25,7 +25,7 @@ class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_choos
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_scheme_chooser_button_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_chooser_button_get_type() : cast(GType)0;
@@ -33,7 +33,7 @@ class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_choos
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin StyleSchemeChooserT!();

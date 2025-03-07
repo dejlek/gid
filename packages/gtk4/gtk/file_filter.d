@@ -66,7 +66,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_filter_get_type != &gidSymbolNotFound ? gtk_file_filter_get_type() : cast(GType)0;
@@ -74,7 +74,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin BuildableT!();

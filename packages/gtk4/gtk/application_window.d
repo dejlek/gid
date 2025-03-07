@@ -106,7 +106,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_application_window_get_type != &gidSymbolNotFound ? gtk_application_window_get_type() : cast(GType)0;
@@ -114,7 +114,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ActionGroupT!();

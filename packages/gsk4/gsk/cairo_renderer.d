@@ -20,7 +20,7 @@ class CairoRenderer : gsk.renderer.Renderer
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_cairo_renderer_get_type != &gidSymbolNotFound ? gsk_cairo_renderer_get_type() : cast(GType)0;
@@ -28,7 +28,7 @@ class CairoRenderer : gsk.renderer.Renderer
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

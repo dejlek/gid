@@ -40,7 +40,7 @@ class OffscreenWindow : gtk.window.Window
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_offscreen_window_get_type != &gidSymbolNotFound ? gtk_offscreen_window_get_type() : cast(GType)0;
@@ -48,7 +48,7 @@ class OffscreenWindow : gtk.window.Window
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

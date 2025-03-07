@@ -122,7 +122,7 @@ class TreeModelSort : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSourc
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_model_sort_get_type != &gidSymbolNotFound ? gtk_tree_model_sort_get_type() : cast(GType)0;
@@ -130,7 +130,7 @@ class TreeModelSort : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSourc
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin TreeDragSourceT!();

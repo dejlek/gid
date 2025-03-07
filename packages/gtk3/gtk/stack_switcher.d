@@ -46,7 +46,7 @@ class StackSwitcher : gtk.box.Box
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_stack_switcher_get_type != &gidSymbolNotFound ? gtk_stack_switcher_get_type() : cast(GType)0;
@@ -54,7 +54,7 @@ class StackSwitcher : gtk.box.Box
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

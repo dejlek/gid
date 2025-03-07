@@ -21,7 +21,7 @@ class CellAccessible : gtk.accessible.Accessible, atk.action.Action, atk.compone
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_accessible_get_type != &gidSymbolNotFound ? gtk_cell_accessible_get_type() : cast(GType)0;
@@ -29,7 +29,7 @@ class CellAccessible : gtk.accessible.Accessible, atk.action.Action, atk.compone
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ActionT!();

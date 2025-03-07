@@ -16,7 +16,7 @@ class FilterNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_filter_node_options_get_type != &gidSymbolNotFound ? garrow_filter_node_options_get_type() : cast(GType)0;
@@ -24,7 +24,7 @@ class FilterNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

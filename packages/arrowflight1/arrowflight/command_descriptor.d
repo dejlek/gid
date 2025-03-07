@@ -15,7 +15,7 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_command_descriptor_get_type != &gidSymbolNotFound ? gaflight_command_descriptor_get_type() : cast(GType)0;
@@ -23,7 +23,7 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

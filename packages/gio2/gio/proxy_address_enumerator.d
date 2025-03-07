@@ -26,7 +26,7 @@ class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumer
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_proxy_address_enumerator_get_type != &gidSymbolNotFound ? g_proxy_address_enumerator_get_type() : cast(GType)0;
@@ -34,6 +34,6 @@ class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumer
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 }

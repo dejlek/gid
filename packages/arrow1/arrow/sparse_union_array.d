@@ -20,7 +20,7 @@ class SparseUnionArray : arrow.union_array.UnionArray
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_sparse_union_array_get_type != &gidSymbolNotFound ? garrow_sparse_union_array_get_type() : cast(GType)0;
@@ -28,7 +28,7 @@ class SparseUnionArray : arrow.union_array.UnionArray
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

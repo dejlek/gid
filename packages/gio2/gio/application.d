@@ -155,7 +155,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_application_get_type != &gidSymbolNotFound ? g_application_get_type() : cast(GType)0;
@@ -163,7 +163,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ActionGroupT!();

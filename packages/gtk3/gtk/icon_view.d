@@ -57,7 +57,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_view_get_type != &gidSymbolNotFound ? gtk_icon_view_get_type() : cast(GType)0;
@@ -65,7 +65,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin CellLayoutT!();

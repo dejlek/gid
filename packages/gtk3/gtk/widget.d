@@ -463,7 +463,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_widget_get_type != &gidSymbolNotFound ? gtk_widget_get_type() : cast(GType)0;
@@ -471,7 +471,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ImplementorIfaceT!();

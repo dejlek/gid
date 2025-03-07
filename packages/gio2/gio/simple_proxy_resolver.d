@@ -26,7 +26,7 @@ class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyReso
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_simple_proxy_resolver_get_type != &gidSymbolNotFound ? g_simple_proxy_resolver_get_type() : cast(GType)0;
@@ -34,7 +34,7 @@ class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyReso
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ProxyResolverT!();

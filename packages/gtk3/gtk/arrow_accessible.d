@@ -19,7 +19,7 @@ class ArrowAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_arrow_accessible_get_type != &gidSymbolNotFound ? gtk_arrow_accessible_get_type() : cast(GType)0;
@@ -27,7 +27,7 @@ class ArrowAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ImageT!();

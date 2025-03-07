@@ -1090,7 +1090,7 @@ gobject.types.SignalInvocationHint signalGetInvocationHint(gobject.object.Object
   _cretval = g_signal_get_invocation_hint(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null);
   gobject.types.SignalInvocationHint _retval;
   if (_cretval)
-    _retval = *_cretval;
+    _retval = *cast(gobject.types.SignalInvocationHint*)_cretval;
   return _retval;
 }
 

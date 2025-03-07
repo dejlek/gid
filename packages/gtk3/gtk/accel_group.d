@@ -35,7 +35,7 @@ class AccelGroup : gobject.object.ObjectG
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_accel_group_get_type != &gidSymbolNotFound ? gtk_accel_group_get_type() : cast(GType)0;
@@ -43,7 +43,7 @@ class AccelGroup : gobject.object.ObjectG
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**
@@ -194,7 +194,7 @@ class AccelGroup : gobject.object.ObjectG
     _cretval = gtk_accel_group_find(cast(GtkAccelGroup*)cPtr, _findFuncCB, _findFunc);
     gtk.types.AccelKey _retval;
     if (_cretval)
-      _retval = *_cretval;
+      _retval = *cast(gtk.types.AccelKey*)_cretval;
     return _retval;
   }
 

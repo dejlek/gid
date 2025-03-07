@@ -21,7 +21,7 @@ class WebsocketExtensionDeflate : soup.websocket_extension.WebsocketExtension
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_websocket_extension_deflate_get_type != &gidSymbolNotFound ? soup_websocket_extension_deflate_get_type() : cast(GType)0;
@@ -29,6 +29,6 @@ class WebsocketExtensionDeflate : soup.websocket_extension.WebsocketExtension
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 }

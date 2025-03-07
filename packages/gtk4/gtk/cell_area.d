@@ -348,7 +348,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_area_get_type != &gidSymbolNotFound ? gtk_cell_area_get_type() : cast(GType)0;
@@ -356,7 +356,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin BuildableT!();

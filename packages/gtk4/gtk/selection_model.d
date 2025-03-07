@@ -50,7 +50,7 @@ import gtk.types;
 interface SelectionModel
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_selection_model_get_type != &gidSymbolNotFound ? gtk_selection_model_get_type() : cast(GType)0;

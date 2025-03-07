@@ -27,7 +27,7 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_memory_input_stream_get_type != &gidSymbolNotFound ? g_memory_input_stream_get_type() : cast(GType)0;
@@ -35,7 +35,7 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin PollableInputStreamT!();

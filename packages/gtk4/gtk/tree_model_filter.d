@@ -95,7 +95,7 @@ class TreeModelFilter : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSou
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_model_filter_get_type != &gidSymbolNotFound ? gtk_tree_model_filter_get_type() : cast(GType)0;
@@ -103,7 +103,7 @@ class TreeModelFilter : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSou
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin TreeDragSourceT!();

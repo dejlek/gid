@@ -37,7 +37,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tool_item_get_type != &gidSymbolNotFound ? gtk_tool_item_get_type() : cast(GType)0;
@@ -45,7 +45,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ActivatableT!();

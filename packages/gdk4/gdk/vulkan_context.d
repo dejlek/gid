@@ -28,7 +28,7 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_vulkan_context_get_type != &gidSymbolNotFound ? gdk_vulkan_context_get_type() : cast(GType)0;
@@ -36,7 +36,7 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin InitableT!();

@@ -21,7 +21,7 @@ class DBusMenuModel : gio.menu_model.MenuModel
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_menu_model_get_type != &gidSymbolNotFound ? g_dbus_menu_model_get_type() : cast(GType)0;
@@ -29,7 +29,7 @@ class DBusMenuModel : gio.menu_model.MenuModel
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

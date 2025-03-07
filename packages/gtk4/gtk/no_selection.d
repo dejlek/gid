@@ -29,7 +29,7 @@ class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sectio
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_no_selection_get_type != &gidSymbolNotFound ? gtk_no_selection_get_type() : cast(GType)0;
@@ -37,7 +37,7 @@ class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sectio
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ListModelT!();

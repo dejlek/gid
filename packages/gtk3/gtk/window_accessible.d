@@ -19,7 +19,7 @@ class WindowAccessible : gtk.container_accessible.ContainerAccessible, atk.windo
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_window_accessible_get_type != &gidSymbolNotFound ? gtk_window_accessible_get_type() : cast(GType)0;
@@ -27,7 +27,7 @@ class WindowAccessible : gtk.container_accessible.ContainerAccessible, atk.windo
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin WindowT!();

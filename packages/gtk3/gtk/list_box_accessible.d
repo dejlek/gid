@@ -19,7 +19,7 @@ class ListBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.sele
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_box_accessible_get_type != &gidSymbolNotFound ? gtk_list_box_accessible_get_type() : cast(GType)0;
@@ -27,7 +27,7 @@ class ListBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.sele
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin SelectionT!();

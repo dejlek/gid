@@ -26,7 +26,7 @@ import gobject.object;
 interface Selection
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_selection_get_type != &gidSymbolNotFound ? atk_selection_get_type() : cast(GType)0;

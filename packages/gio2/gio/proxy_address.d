@@ -20,7 +20,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_proxy_address_get_type != &gidSymbolNotFound ? g_proxy_address_get_type() : cast(GType)0;
@@ -28,7 +28,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

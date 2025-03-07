@@ -24,7 +24,7 @@ class CustomLayout : gtk.layout_manager.LayoutManager
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_custom_layout_get_type != &gidSymbolNotFound ? gtk_custom_layout_get_type() : cast(GType)0;
@@ -32,7 +32,7 @@ class CustomLayout : gtk.layout_manager.LayoutManager
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

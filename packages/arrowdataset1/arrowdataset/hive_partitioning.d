@@ -19,7 +19,7 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_hive_partitioning_get_type != &gidSymbolNotFound ? gadataset_hive_partitioning_get_type() : cast(GType)0;
@@ -27,7 +27,7 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

@@ -39,7 +39,7 @@ class Video : gtk.widget.Widget
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_video_get_type != &gidSymbolNotFound ? gtk_video_get_type() : cast(GType)0;
@@ -47,7 +47,7 @@ class Video : gtk.widget.Widget
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

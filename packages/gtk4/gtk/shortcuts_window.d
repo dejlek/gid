@@ -81,7 +81,7 @@ class ShortcutsWindow : gtk.window.Window
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcuts_window_get_type != &gidSymbolNotFound ? gtk_shortcuts_window_get_type() : cast(GType)0;
@@ -89,7 +89,7 @@ class ShortcutsWindow : gtk.window.Window
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

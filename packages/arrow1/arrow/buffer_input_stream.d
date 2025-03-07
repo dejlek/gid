@@ -21,7 +21,7 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_buffer_input_stream_get_type != &gidSymbolNotFound ? garrow_buffer_input_stream_get_type() : cast(GType)0;
@@ -29,7 +29,7 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

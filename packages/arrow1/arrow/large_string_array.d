@@ -16,7 +16,7 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_large_string_array_get_type != &gidSymbolNotFound ? garrow_large_string_array_get_type() : cast(GType)0;
@@ -24,7 +24,7 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

@@ -34,7 +34,7 @@ class LayoutLine : gobject.boxed.Boxed
     return dup ? copy_ : cInstancePtr;
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_layout_line_get_type != &gidSymbolNotFound ? pango_layout_line_get_type() : cast(GType)0;
@@ -42,7 +42,7 @@ class LayoutLine : gobject.boxed.Boxed
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   @property pango.layout.Layout layout()

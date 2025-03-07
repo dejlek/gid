@@ -754,6 +754,9 @@ struct GdkPixbufModulePattern
   int relevance;
 }
 
+/** */
+struct GdkPixbufNonAnim;
+
 /**
     An opaque struct representing a simple animation.
 */
@@ -761,6 +764,9 @@ struct GdkPixbufSimpleAnim;
 
 /** */
 struct GdkPixbufSimpleAnimClass;
+
+/** */
+struct GdkPixbufSimpleAnimIter;
 
 alias extern(C) void function(ubyte* pixels, void* data) GdkPixbufDestroyNotify;
 

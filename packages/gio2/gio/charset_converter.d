@@ -23,7 +23,7 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_charset_converter_get_type != &gidSymbolNotFound ? g_charset_converter_get_type() : cast(GType)0;
@@ -31,7 +31,7 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ConverterT!();

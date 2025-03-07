@@ -21,7 +21,7 @@ class AuthNTLM : soup.auth.Auth
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_ntlm_get_type != &gidSymbolNotFound ? soup_auth_ntlm_get_type() : cast(GType)0;
@@ -29,6 +29,6 @@ class AuthNTLM : soup.auth.Auth
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 }

@@ -78,7 +78,7 @@ import gobject.types;
 interface ListModel
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_list_model_get_type != &gidSymbolNotFound ? g_list_model_get_type() : cast(GType)0;

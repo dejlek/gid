@@ -96,7 +96,7 @@ class DropTarget : gtk.event_controller.EventController
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drop_target_get_type != &gidSymbolNotFound ? gtk_drop_target_get_type() : cast(GType)0;
@@ -104,7 +104,7 @@ class DropTarget : gtk.event_controller.EventController
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

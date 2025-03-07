@@ -30,7 +30,7 @@ class TreeListRowSorter : gtk.sorter.Sorter
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_list_row_sorter_get_type != &gidSymbolNotFound ? gtk_tree_list_row_sorter_get_type() : cast(GType)0;
@@ -38,7 +38,7 @@ class TreeListRowSorter : gtk.sorter.Sorter
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

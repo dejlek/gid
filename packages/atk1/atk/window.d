@@ -19,7 +19,7 @@ import gobject.dclosure;
 interface Window
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_window_get_type != &gidSymbolNotFound ? atk_window_get_type() : cast(GType)0;

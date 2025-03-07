@@ -52,7 +52,7 @@ class LinkButton : gtk.button.Button
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_link_button_get_type != &gidSymbolNotFound ? gtk_link_button_get_type() : cast(GType)0;
@@ -60,7 +60,7 @@ class LinkButton : gtk.button.Button
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

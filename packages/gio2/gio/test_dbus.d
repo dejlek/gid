@@ -95,7 +95,7 @@ class TestDBus : gobject.object.ObjectG
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_test_dbus_get_type != &gidSymbolNotFound ? g_test_dbus_get_type() : cast(GType)0;
@@ -103,7 +103,7 @@ class TestDBus : gobject.object.ObjectG
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

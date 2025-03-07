@@ -21,7 +21,7 @@ class RadioMenuItemAccessible : gtk.check_menu_item_accessible.CheckMenuItemAcce
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_radio_menu_item_accessible_get_type != &gidSymbolNotFound ? gtk_radio_menu_item_accessible_get_type() : cast(GType)0;
@@ -29,6 +29,6 @@ class RadioMenuItemAccessible : gtk.check_menu_item_accessible.CheckMenuItemAcce
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 }

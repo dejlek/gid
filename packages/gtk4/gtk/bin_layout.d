@@ -23,7 +23,7 @@ class BinLayout : gtk.layout_manager.LayoutManager
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_bin_layout_get_type != &gidSymbolNotFound ? gtk_bin_layout_get_type() : cast(GType)0;
@@ -31,7 +31,7 @@ class BinLayout : gtk.layout_manager.LayoutManager
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

@@ -30,7 +30,7 @@ import glib.iochannel;
 interface StreamableContent
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_streamable_content_get_type != &gidSymbolNotFound ? atk_streamable_content_get_type() : cast(GType)0;

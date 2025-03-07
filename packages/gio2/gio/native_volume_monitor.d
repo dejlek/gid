@@ -15,7 +15,7 @@ class NativeVolumeMonitor : gio.volume_monitor.VolumeMonitor
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_native_volume_monitor_get_type != &gidSymbolNotFound ? g_native_volume_monitor_get_type() : cast(GType)0;
@@ -23,6 +23,6 @@ class NativeVolumeMonitor : gio.volume_monitor.VolumeMonitor
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 }

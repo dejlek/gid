@@ -22,7 +22,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_file_system_dataset_factory_get_type != &gidSymbolNotFound ? gadataset_file_system_dataset_factory_get_type() : cast(GType)0;
@@ -30,7 +30,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

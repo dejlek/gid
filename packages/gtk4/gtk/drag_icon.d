@@ -41,7 +41,7 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drag_icon_get_type != &gidSymbolNotFound ? gtk_drag_icon_get_type() : cast(GType)0;
@@ -49,7 +49,7 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin NativeT!();

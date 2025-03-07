@@ -88,7 +88,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_connection_get_type != &gidSymbolNotFound ? g_dbus_connection_get_type() : cast(GType)0;
@@ -96,7 +96,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin AsyncInitableT!();

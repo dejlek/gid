@@ -212,7 +212,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_label_get_type != &gidSymbolNotFound ? gtk_label_get_type() : cast(GType)0;
@@ -220,7 +220,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin AccessibleTextT!();

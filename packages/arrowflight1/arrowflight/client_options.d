@@ -15,7 +15,7 @@ class ClientOptions : gobject.object.ObjectG
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_client_options_get_type != &gidSymbolNotFound ? gaflight_client_options_get_type() : cast(GType)0;
@@ -23,7 +23,7 @@ class ClientOptions : gobject.object.ObjectG
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

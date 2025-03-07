@@ -939,6 +939,9 @@ struct GskLinearGradientNode;
 */
 struct GskMaskNode;
 
+/** */
+struct GskNglRenderer;
+
 /**
     A render node controlling the opacity of its single child node.
 */

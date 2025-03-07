@@ -16,7 +16,7 @@ class LocalFileSystem : arrow.file_system.FileSystem
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_local_file_system_get_type != &gidSymbolNotFound ? garrow_local_file_system_get_type() : cast(GType)0;
@@ -24,7 +24,7 @@ class LocalFileSystem : arrow.file_system.FileSystem
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

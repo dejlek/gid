@@ -18,7 +18,7 @@ class TcpConnection : gio.socket_connection.SocketConnection
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tcp_connection_get_type != &gidSymbolNotFound ? g_tcp_connection_get_type() : cast(GType)0;
@@ -26,7 +26,7 @@ class TcpConnection : gio.socket_connection.SocketConnection
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

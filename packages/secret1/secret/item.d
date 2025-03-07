@@ -53,7 +53,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_item_get_type != &gidSymbolNotFound ? secret_item_get_type() : cast(GType)0;
@@ -61,7 +61,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin RetrievableT!();

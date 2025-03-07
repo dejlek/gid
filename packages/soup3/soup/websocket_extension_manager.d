@@ -26,7 +26,7 @@ class WebsocketExtensionManager : gobject.object.ObjectG, soup.session_feature.S
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_websocket_extension_manager_get_type != &gidSymbolNotFound ? soup_websocket_extension_manager_get_type() : cast(GType)0;
@@ -34,7 +34,7 @@ class WebsocketExtensionManager : gobject.object.ObjectG, soup.session_feature.S
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin SessionFeatureT!();

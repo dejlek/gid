@@ -83,7 +83,7 @@ string objectGMixin()
   [graphene.types.PI_2]). If you need larger alignment for an element in a [gobject.object.ObjectG], you
   should allocate it on the heap (aligned), or arrange for your [gobject.object.ObjectG] to be
   appropriately padded. This guarantee applies to the [gobject.object.ObjectG] (or derived)
-  struct, the [gobject.object_class.ObjectClass] (or derived) struct, and any private data allocated
+  struct, the [gstpbutils.types.ObjectClass] (or derived) struct, and any private data allocated
   by `G_ADD_PRIVATE()`.
 */
 class ObjectG

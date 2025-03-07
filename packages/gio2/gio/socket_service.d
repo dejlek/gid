@@ -45,7 +45,7 @@ class SocketService : gio.socket_listener.SocketListener
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_service_get_type != &gidSymbolNotFound ? g_socket_service_get_type() : cast(GType)0;
@@ -53,7 +53,7 @@ class SocketService : gio.socket_listener.SocketListener
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

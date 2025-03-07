@@ -79,7 +79,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_combo_box_text_get_type != &gidSymbolNotFound ? gtk_combo_box_text_get_type() : cast(GType)0;
@@ -87,7 +87,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

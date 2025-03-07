@@ -44,7 +44,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_viewport_get_type != &gidSymbolNotFound ? gtk_viewport_get_type() : cast(GType)0;
@@ -52,7 +52,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ScrollableT!();

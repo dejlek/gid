@@ -31,7 +31,7 @@ class View : gtk.text_view.TextView
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_view_get_type != &gidSymbolNotFound ? gtk_source_view_get_type() : cast(GType)0;
@@ -39,7 +39,7 @@ class View : gtk.text_view.TextView
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

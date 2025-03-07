@@ -103,7 +103,7 @@ class Application : gio.application.Application
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_application_get_type != &gidSymbolNotFound ? gtk_application_get_type() : cast(GType)0;
@@ -111,7 +111,7 @@ class Application : gio.application.Application
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

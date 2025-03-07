@@ -21,7 +21,7 @@ class CompletionInfo : gtk.window.Window
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_info_get_type != &gidSymbolNotFound ? gtk_source_completion_info_get_type() : cast(GType)0;
@@ -29,7 +29,7 @@ class CompletionInfo : gtk.window.Window
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

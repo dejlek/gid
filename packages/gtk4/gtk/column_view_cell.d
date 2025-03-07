@@ -33,7 +33,7 @@ class ColumnViewCell : gtk.list_item.ListItem
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_column_view_cell_get_type != &gidSymbolNotFound ? gtk_column_view_cell_get_type() : cast(GType)0;
@@ -41,7 +41,7 @@ class ColumnViewCell : gtk.list_item.ListItem
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

@@ -16,7 +16,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_resizable_buffer_get_type != &gidSymbolNotFound ? garrow_resizable_buffer_get_type() : cast(GType)0;
@@ -24,7 +24,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

@@ -16,7 +16,7 @@ class Time32Scalar : arrow.scalar.Scalar
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_time32_scalar_get_type != &gidSymbolNotFound ? garrow_time32_scalar_get_type() : cast(GType)0;
@@ -24,7 +24,7 @@ class Time32Scalar : arrow.scalar.Scalar
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

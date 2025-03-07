@@ -52,7 +52,7 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_editable_label_get_type != &gidSymbolNotFound ? gtk_editable_label_get_type() : cast(GType)0;
@@ -60,7 +60,7 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin EditableT!();

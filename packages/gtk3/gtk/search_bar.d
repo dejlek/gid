@@ -45,7 +45,7 @@ class SearchBar : gtk.bin.Bin
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_search_bar_get_type != &gidSymbolNotFound ? gtk_search_bar_get_type() : cast(GType)0;
@@ -53,7 +53,7 @@ class SearchBar : gtk.bin.Bin
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

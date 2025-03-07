@@ -74,7 +74,7 @@ class MessageDialog : gtk.dialog.Dialog
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_message_dialog_get_type != &gidSymbolNotFound ? gtk_message_dialog_get_type() : cast(GType)0;
@@ -82,7 +82,7 @@ class MessageDialog : gtk.dialog.Dialog
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

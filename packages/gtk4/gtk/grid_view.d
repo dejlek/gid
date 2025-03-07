@@ -66,7 +66,7 @@ class GridView : gtk.list_base.ListBase
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_grid_view_get_type != &gidSymbolNotFound ? gtk_grid_view_get_type() : cast(GType)0;
@@ -74,7 +74,7 @@ class GridView : gtk.list_base.ListBase
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

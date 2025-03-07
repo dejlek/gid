@@ -18,7 +18,7 @@ class ActivateAction : gtk.shortcut_action.ShortcutAction
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_activate_action_get_type != &gidSymbolNotFound ? gtk_activate_action_get_type() : cast(GType)0;
@@ -26,7 +26,7 @@ class ActivateAction : gtk.shortcut_action.ShortcutAction
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

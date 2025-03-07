@@ -17,7 +17,7 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_message_reader_get_type != &gidSymbolNotFound ? gaflight_message_reader_get_type() : cast(GType)0;
@@ -25,7 +25,7 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

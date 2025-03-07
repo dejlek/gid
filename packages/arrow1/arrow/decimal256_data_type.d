@@ -16,7 +16,7 @@ class Decimal256DataType : arrow.decimal_data_type.DecimalDataType
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal256_data_type_get_type != &gidSymbolNotFound ? garrow_decimal256_data_type_get_type() : cast(GType)0;
@@ -24,7 +24,7 @@ class Decimal256DataType : arrow.decimal_data_type.DecimalDataType
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

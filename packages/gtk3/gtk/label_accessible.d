@@ -21,7 +21,7 @@ class LabelAccessible : gtk.widget_accessible.WidgetAccessible, atk.hypertext.Hy
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_label_accessible_get_type != &gidSymbolNotFound ? gtk_label_accessible_get_type() : cast(GType)0;
@@ -29,7 +29,7 @@ class LabelAccessible : gtk.widget_accessible.WidgetAccessible, atk.hypertext.Hy
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin HypertextT!();

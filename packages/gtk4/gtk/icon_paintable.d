@@ -24,7 +24,7 @@ class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbo
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_paintable_get_type != &gidSymbolNotFound ? gtk_icon_paintable_get_type() : cast(GType)0;
@@ -32,7 +32,7 @@ class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbo
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin PaintableT!();

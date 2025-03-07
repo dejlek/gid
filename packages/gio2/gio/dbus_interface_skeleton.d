@@ -25,7 +25,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectG, gio.dbus_interface.DBusInt
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_interface_skeleton_get_type != &gidSymbolNotFound ? g_dbus_interface_skeleton_get_type() : cast(GType)0;
@@ -33,7 +33,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectG, gio.dbus_interface.DBusInt
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin DBusInterfaceT!();
@@ -171,7 +171,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectG, gio.dbus_interface.DBusInt
     _cretval = g_dbus_interface_skeleton_get_vtable(cast(GDBusInterfaceSkeleton*)cPtr);
     gio.types.DBusInterfaceVTable _retval;
     if (_cretval)
-      _retval = *_cretval;
+      _retval = *cast(gio.types.DBusInterfaceVTable*)_cretval;
     return _retval;
   }
 

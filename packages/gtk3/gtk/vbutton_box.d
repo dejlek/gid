@@ -21,7 +21,7 @@ class VButtonBox : gtk.button_box.ButtonBox
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_vbutton_box_get_type != &gidSymbolNotFound ? gtk_vbutton_box_get_type() : cast(GType)0;
@@ -29,7 +29,7 @@ class VButtonBox : gtk.button_box.ButtonBox
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

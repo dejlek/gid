@@ -19,7 +19,7 @@ class BoolFilter : gtk.filter.Filter
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_bool_filter_get_type != &gidSymbolNotFound ? gtk_bool_filter_get_type() : cast(GType)0;
@@ -27,7 +27,7 @@ class BoolFilter : gtk.filter.Filter
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

@@ -180,7 +180,7 @@ class VariantType : Boxed
     return dup ? copy_ : cInstancePtr;
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_variant_type_get_gtype != &gidSymbolNotFound ? g_variant_type_get_gtype() : cast(GType)0;
@@ -188,7 +188,7 @@ class VariantType : Boxed
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

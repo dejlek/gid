@@ -19,7 +19,7 @@ class PanedAccessible : gtk.container_accessible.ContainerAccessible, atk.value.
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_paned_accessible_get_type != &gidSymbolNotFound ? gtk_paned_accessible_get_type() : cast(GType)0;
@@ -27,7 +27,7 @@ class PanedAccessible : gtk.container_accessible.ContainerAccessible, atk.value.
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ValueT!();

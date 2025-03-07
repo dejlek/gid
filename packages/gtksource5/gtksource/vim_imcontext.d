@@ -67,7 +67,7 @@ class VimIMContext : gtk.imcontext.IMContext
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_vim_im_context_get_type != &gidSymbolNotFound ? gtk_source_vim_im_context_get_type() : cast(GType)0;
@@ -75,7 +75,7 @@ class VimIMContext : gtk.imcontext.IMContext
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

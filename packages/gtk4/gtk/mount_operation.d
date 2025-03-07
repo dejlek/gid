@@ -32,7 +32,7 @@ class MountOperation : gio.mount_operation.MountOperation
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_mount_operation_get_type != &gidSymbolNotFound ? gtk_mount_operation_get_type() : cast(GType)0;
@@ -40,7 +40,7 @@ class MountOperation : gio.mount_operation.MountOperation
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

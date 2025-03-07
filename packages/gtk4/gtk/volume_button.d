@@ -32,7 +32,7 @@ class VolumeButton : gtk.scale_button.ScaleButton
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_volume_button_get_type != &gidSymbolNotFound ? gtk_volume_button_get_type() : cast(GType)0;
@@ -40,7 +40,7 @@ class VolumeButton : gtk.scale_button.ScaleButton
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

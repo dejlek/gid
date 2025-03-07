@@ -25,7 +25,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
     return dup ? copy_ : cInstancePtr;
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_settings_schema_key_get_type != &gidSymbolNotFound ? g_settings_schema_key_get_type() : cast(GType)0;
@@ -33,7 +33,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

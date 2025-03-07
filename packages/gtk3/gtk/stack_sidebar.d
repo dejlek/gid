@@ -38,7 +38,7 @@ class StackSidebar : gtk.bin.Bin
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_stack_sidebar_get_type != &gidSymbolNotFound ? gtk_stack_sidebar_get_type() : cast(GType)0;
@@ -46,7 +46,7 @@ class StackSidebar : gtk.bin.Bin
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

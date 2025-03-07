@@ -24,7 +24,7 @@ class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.Co
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_words_get_type != &gidSymbolNotFound ? gtk_source_completion_words_get_type() : cast(GType)0;
@@ -32,7 +32,7 @@ class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.Co
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin CompletionProviderT!();

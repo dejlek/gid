@@ -23,7 +23,7 @@ class EventControllerLegacy : gtk.event_controller.EventController
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_controller_legacy_get_type != &gidSymbolNotFound ? gtk_event_controller_legacy_get_type() : cast(GType)0;
@@ -31,7 +31,7 @@ class EventControllerLegacy : gtk.event_controller.EventController
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

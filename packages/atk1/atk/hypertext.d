@@ -24,7 +24,7 @@ import gobject.object;
 interface Hypertext
 {
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_hypertext_get_type != &gidSymbolNotFound ? atk_hypertext_get_type() : cast(GType)0;

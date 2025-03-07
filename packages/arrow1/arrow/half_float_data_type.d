@@ -15,7 +15,7 @@ class HalfFloatDataType : arrow.floating_point_data_type.FloatingPointDataType
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_half_float_data_type_get_type != &gidSymbolNotFound ? garrow_half_float_data_type_get_type() : cast(GType)0;
@@ -23,7 +23,7 @@ class HalfFloatDataType : arrow.floating_point_data_type.FloatingPointDataType
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

@@ -25,7 +25,7 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_emblemed_icon_get_type != &gidSymbolNotFound ? g_emblemed_icon_get_type() : cast(GType)0;
@@ -33,7 +33,7 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin IconT!();

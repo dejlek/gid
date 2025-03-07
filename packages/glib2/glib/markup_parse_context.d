@@ -27,7 +27,7 @@ class MarkupParseContext : gobject.boxed.Boxed
     return dup ? copy_ : cInstancePtr;
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_markup_parse_context_get_type != &gidSymbolNotFound ? g_markup_parse_context_get_type() : cast(GType)0;
@@ -35,7 +35,7 @@ class MarkupParseContext : gobject.boxed.Boxed
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   this(ref MarkupParser parser, MarkupParseFlags flags)

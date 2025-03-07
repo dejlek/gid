@@ -92,7 +92,7 @@ class PopoverMenu : gtk.popover.Popover
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_popover_menu_get_type != &gidSymbolNotFound ? gtk_popover_menu_get_type() : cast(GType)0;
@@ -100,7 +100,7 @@ class PopoverMenu : gtk.popover.Popover
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

@@ -17,7 +17,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_overlay_layout_child_get_type != &gidSymbolNotFound ? gtk_overlay_layout_child_get_type() : cast(GType)0;
@@ -25,7 +25,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

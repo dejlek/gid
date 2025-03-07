@@ -25,7 +25,7 @@ class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadab
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_icon_get_type != &gidSymbolNotFound ? g_file_icon_get_type() : cast(GType)0;
@@ -33,7 +33,7 @@ class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadab
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin IconT!();

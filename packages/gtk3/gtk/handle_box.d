@@ -47,7 +47,7 @@ class HandleBox : gtk.bin.Bin
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_handle_box_get_type != &gidSymbolNotFound ? gtk_handle_box_get_type() : cast(GType)0;
@@ -55,7 +55,7 @@ class HandleBox : gtk.bin.Bin
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

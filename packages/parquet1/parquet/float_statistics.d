@@ -15,7 +15,7 @@ class FloatStatistics : parquet.statistics.Statistics
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_float_statistics_get_type != &gidSymbolNotFound ? gparquet_float_statistics_get_type() : cast(GType)0;
@@ -23,7 +23,7 @@ class FloatStatistics : parquet.statistics.Statistics
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

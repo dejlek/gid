@@ -1025,6 +1025,15 @@ struct SoupAuth
   ObjectC parentInstance;
 }
 
+/**
+    HTTP "Basic" authentication.
+  
+  `class@Session`s support this by default; if you want to disable
+  support for it, call [soup.session.Session.removeFeatureByType],
+  passing `SOUP_TYPE_AUTH_BASIC`.
+*/
+struct SoupAuthBasic;
+
 /** */
 struct SoupAuthClass
 {
@@ -1061,6 +1070,15 @@ struct SoupAuthClass
   /** */
   void*[6] padding;
 }
+
+/**
+    HTTP "Digest" authentication.
+  
+  `class@Session`s support this by default; if you want to disable
+  support for it, call [soup.session.Session.removeFeatureByType]
+  passing `SOUP_TYPE_AUTH_DIGEST`.
+*/
+struct SoupAuthDigest;
 
 /**
     Server-side authentication.
@@ -1163,6 +1181,29 @@ struct SoupAuthManagerClass
   /** */
   GObjectClass parentClass;
 }
+
+/**
+    HTTP-based NTLM authentication.
+  
+  `class@Session`s do not support this type by default; if you want to
+  enable support for it, call [soup.session.Session.addFeatureByType],
+  passing `SOUP_TYPE_AUTH_NTLM`.
+*/
+struct SoupAuthNTLM;
+
+/**
+    HTTP-based GSS-Negotiate authentication, as defined by
+  [RFC 4559](https://datatracker.ietf.org/doc/html/rfc4559).
+  
+  `class@Session`s do not support this type by default; if you want to
+  enable support for it, call [soup.session.Session.addFeatureByType],
+  passing `SOUP_TYPE_AUTH_NEGOTIATE`.
+  
+  This auth type will only work if libsoup was compiled with GSSAPI
+  support; you can check [soup.auth_negotiate.AuthNegotiate.supported] to see if it
+  was.
+*/
+struct SoupAuthNegotiate;
 
 /**
     File-based cache for HTTP resources.

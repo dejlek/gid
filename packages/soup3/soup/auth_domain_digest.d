@@ -22,7 +22,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_domain_digest_get_type != &gidSymbolNotFound ? soup_auth_domain_digest_get_type() : cast(GType)0;
@@ -30,7 +30,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

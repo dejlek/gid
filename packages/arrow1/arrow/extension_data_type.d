@@ -19,7 +19,7 @@ class ExtensionDataType : arrow.data_type.DataType
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_extension_data_type_get_type != &gidSymbolNotFound ? garrow_extension_data_type_get_type() : cast(GType)0;
@@ -27,7 +27,7 @@ class ExtensionDataType : arrow.data_type.DataType
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

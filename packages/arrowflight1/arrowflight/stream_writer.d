@@ -16,7 +16,7 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_stream_writer_get_type != &gidSymbolNotFound ? gaflight_stream_writer_get_type() : cast(GType)0;
@@ -24,7 +24,7 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */

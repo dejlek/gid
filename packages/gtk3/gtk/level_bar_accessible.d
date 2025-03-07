@@ -19,7 +19,7 @@ class LevelBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Val
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_level_bar_accessible_get_type != &gidSymbolNotFound ? gtk_level_bar_accessible_get_type() : cast(GType)0;
@@ -27,7 +27,7 @@ class LevelBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Val
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ValueT!();

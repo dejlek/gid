@@ -46,7 +46,7 @@ class Value : Boxed
     return dup ? copy_ : cInstancePtr;
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_value_get_type != &gidSymbolNotFound ? g_value_get_type() : cast(GType)0;
@@ -54,7 +54,7 @@ class Value : Boxed
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

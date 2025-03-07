@@ -28,7 +28,7 @@ class SimpleIOStream : gio.iostream.IOStream
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_simple_io_stream_get_type != &gidSymbolNotFound ? g_simple_io_stream_get_type() : cast(GType)0;
@@ -36,7 +36,7 @@ class SimpleIOStream : gio.iostream.IOStream
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /**

@@ -24,7 +24,7 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_simple_action_get_type != &gidSymbolNotFound ? g_simple_action_get_type() : cast(GType)0;
@@ -32,7 +32,7 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin ActionT!();

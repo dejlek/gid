@@ -185,7 +185,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_chooser_native_get_type != &gidSymbolNotFound ? gtk_file_chooser_native_get_type() : cast(GType)0;
@@ -193,7 +193,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   mixin FileChooserT!();

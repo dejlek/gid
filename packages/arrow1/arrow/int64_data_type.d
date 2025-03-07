@@ -15,7 +15,7 @@ class Int64DataType : arrow.integer_data_type.IntegerDataType
     super(cast(void*)ptr, take);
   }
 
-  static GType getType()
+  static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_int64_data_type_get_type != &gidSymbolNotFound ? garrow_int64_data_type_get_type() : cast(GType)0;
@@ -23,7 +23,7 @@ class Int64DataType : arrow.integer_data_type.IntegerDataType
 
   override @property GType gType()
   {
-    return getType();
+    return getGType();
   }
 
   /** */
