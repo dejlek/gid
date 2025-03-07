@@ -1,0 +1,15 @@
+{
+  "name": "gstcheck1",
+  "description": "GstCheck library D binding",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["gstcheck"],
+  "dependencies": {
+    "gid:glib2": "*",
+    "gid:gmodule2": "*",
+    "gid:gst1": "*"
+  }
+}

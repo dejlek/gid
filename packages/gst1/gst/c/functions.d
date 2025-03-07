@@ -1,0 +1,5379 @@
+module gst.c.functions;
+
+public import gid.basictypes;
+import gid.loader;
+import gst.c.types;
+public import glib.c.types;
+public import gmodule.c.types;
+public import gobject.c.types;
+
+version(Windows)
+  private immutable LIBS = ["libgstreamer-1.0-0.dll;gstreamer-1.0-0.dll;gstreamer-1.dll"];
+else version(OSX)
+  private immutable LIBS = ["libgstreamer-1.0.0.dylib"];
+else
+  private immutable LIBS = ["libgstreamer-1.0.so.0"];
+
+__gshared extern(C)
+{
+  // AllocationParams
+  extern(C) GType function() c_gst_allocation_params_get_type;
+  GstAllocationParams* function() c_gst_allocation_params_new;
+  GstAllocationParams* function(const(GstAllocationParams)* params) c_gst_allocation_params_copy;
+  void function(GstAllocationParams* params) c_gst_allocation_params_free;
+  void function(GstAllocationParams* params) c_gst_allocation_params_init;
+
+  // Allocator
+  extern(C) GType function() c_gst_allocator_get_type;
+  GstAllocator* function(const(char)* name) c_gst_allocator_find;
+  void function(const(char)* name, GstAllocator* allocator) c_gst_allocator_register;
+  GstMemory* function(GstAllocator* allocator, size_t size, GstAllocationParams* params) c_gst_allocator_alloc;
+  void function(GstAllocator* allocator, GstMemory* memory) c_gst_allocator_free;
+  void function(GstAllocator* allocator) c_gst_allocator_set_default;
+
+  // AtomicQueue
+  extern(C) GType function() c_gst_atomic_queue_get_type;
+  GstAtomicQueue* function(uint initialSize) c_gst_atomic_queue_new;
+  uint function(GstAtomicQueue* queue) c_gst_atomic_queue_length;
+  void* function(GstAtomicQueue* queue) c_gst_atomic_queue_peek;
+  void* function(GstAtomicQueue* queue) c_gst_atomic_queue_pop;
+  void function(GstAtomicQueue* queue, void* data) c_gst_atomic_queue_push;
+  void function(GstAtomicQueue* queue) c_gst_atomic_queue_ref;
+  void function(GstAtomicQueue* queue) c_gst_atomic_queue_unref;
+
+  // Bin
+  extern(C) GType function() c_gst_bin_get_type;
+  GstElement* function(const(char)* name) c_gst_bin_new;
+  bool function(GstBin* bin, GstElement* element) c_gst_bin_add;
+  void function(GstBin* bin, GstElement* element1,  ...) c_gst_bin_add_many;
+  GstPad* function(GstBin* bin, GstPadDirection direction) c_gst_bin_find_unlinked_pad;
+  GstElement* function(GstBin* bin, GType iface) c_gst_bin_get_by_interface;
+  GstElement* function(GstBin* bin, const(char)* name) c_gst_bin_get_by_name;
+  GstElement* function(GstBin* bin, const(char)* name) c_gst_bin_get_by_name_recurse_up;
+  GstElementFlags function(GstBin* bin) c_gst_bin_get_suppressed_flags;
+  GstIterator* function(GstBin* bin, const(char)* factoryName) c_gst_bin_iterate_all_by_element_factory_name;
+  GstIterator* function(GstBin* bin, GType iface) c_gst_bin_iterate_all_by_interface;
+  GstIterator* function(GstBin* bin) c_gst_bin_iterate_elements;
+  GstIterator* function(GstBin* bin) c_gst_bin_iterate_recurse;
+  GstIterator* function(GstBin* bin) c_gst_bin_iterate_sinks;
+  GstIterator* function(GstBin* bin) c_gst_bin_iterate_sorted;
+  GstIterator* function(GstBin* bin) c_gst_bin_iterate_sources;
+  bool function(GstBin* bin) c_gst_bin_recalculate_latency;
+  bool function(GstBin* bin, GstElement* element) c_gst_bin_remove;
+  void function(GstBin* bin, GstElement* element1,  ...) c_gst_bin_remove_many;
+  void function(GstBin* bin, GstElementFlags flags) c_gst_bin_set_suppressed_flags;
+  bool function(GstBin* bin) c_gst_bin_sync_children_states;
+
+  // Bitmask
+  extern(C) GType function() c_gst_bitmask_get_type;
+
+  // Buffer
+  extern(C) GType function() c_gst_buffer_get_type;
+  GstBuffer* function() c_gst_buffer_new;
+  GstBuffer* function(GstAllocator* allocator, size_t size, GstAllocationParams* params) c_gst_buffer_new_allocate;
+  GstBuffer* function(const(void)* data, size_t size) c_gst_buffer_new_memdup;
+  GstBuffer* function(void* data, size_t size) c_gst_buffer_new_wrapped;
+  GstBuffer* function(GBytes* bytes) c_gst_buffer_new_wrapped_bytes;
+  GstBuffer* function(GstMemoryFlags flags, void* data, size_t maxsize, size_t offset, size_t size, void* userData, GDestroyNotify notify) c_gst_buffer_new_wrapped_full;
+  GstCustomMeta* function(GstBuffer* buffer, const(char)* name) c_gst_buffer_add_custom_meta;
+  GstMeta* function(GstBuffer* buffer, const(GstMetaInfo)* info, void* params) c_gst_buffer_add_meta;
+  GstParentBufferMeta* function(GstBuffer* buffer, GstBuffer* ref_) c_gst_buffer_add_parent_buffer_meta;
+  GstProtectionMeta* function(GstBuffer* buffer, GstStructure* info) c_gst_buffer_add_protection_meta;
+  GstReferenceTimestampMeta* function(GstBuffer* buffer, GstCaps* reference, GstClockTime timestamp, GstClockTime duration) c_gst_buffer_add_reference_timestamp_meta;
+  GstBuffer* function(GstBuffer* buf1, GstBuffer* buf2) c_gst_buffer_append;
+  void function(GstBuffer* buffer, GstMemory* mem) c_gst_buffer_append_memory;
+  GstBuffer* function(GstBuffer* buf1, GstBuffer* buf2, ptrdiff_t offset, ptrdiff_t size) c_gst_buffer_append_region;
+  GstBuffer* function(const(GstBuffer)* buf) c_gst_buffer_copy_deep;
+  bool function(GstBuffer* dest, GstBuffer* src, GstBufferCopyFlags flags, size_t offset, size_t size) c_gst_buffer_copy_into;
+  GstBuffer* function(GstBuffer* parent, GstBufferCopyFlags flags, size_t offset, size_t size) c_gst_buffer_copy_region;
+  size_t function(GstBuffer* buffer, size_t offset, void* dest, size_t size) c_gst_buffer_extract;
+  void function(GstBuffer* buffer, size_t offset, size_t size, void** dest, size_t* destSize) c_gst_buffer_extract_dup;
+  size_t function(GstBuffer* buffer, size_t offset, const(void)* src, size_t size) c_gst_buffer_fill;
+  bool function(GstBuffer* buffer, size_t offset, size_t size, uint* idx, uint* length, size_t* skip) c_gst_buffer_find_memory;
+  bool function(GstBuffer* buffer, GstBufferForeachMetaFunc func, void* userData) c_gst_buffer_foreach_meta;
+  GstMemory* function(GstBuffer* buffer) c_gst_buffer_get_all_memory;
+  GstCustomMeta* function(GstBuffer* buffer, const(char)* name) c_gst_buffer_get_custom_meta;
+  GstBufferFlags function(GstBuffer* buffer) c_gst_buffer_get_flags;
+  GstMemory* function(GstBuffer* buffer, uint idx) c_gst_buffer_get_memory;
+  GstMemory* function(GstBuffer* buffer, uint idx, int length) c_gst_buffer_get_memory_range;
+  GstMeta* function(GstBuffer* buffer, GType api) c_gst_buffer_get_meta;
+  uint function(GstBuffer* buffer, GType apiType) c_gst_buffer_get_n_meta;
+  GstReferenceTimestampMeta* function(GstBuffer* buffer, GstCaps* reference) c_gst_buffer_get_reference_timestamp_meta;
+  size_t function(GstBuffer* buffer) c_gst_buffer_get_size;
+  size_t function(GstBuffer* buffer, size_t* offset, size_t* maxsize) c_gst_buffer_get_sizes;
+  size_t function(GstBuffer* buffer, uint idx, int length, size_t* offset, size_t* maxsize) c_gst_buffer_get_sizes_range;
+  bool function(GstBuffer* buffer, GstBufferFlags flags) c_gst_buffer_has_flags;
+  void function(GstBuffer* buffer, int idx, GstMemory* mem) c_gst_buffer_insert_memory;
+  bool function(GstBuffer* buffer) c_gst_buffer_is_all_memory_writable;
+  bool function(GstBuffer* buffer, uint idx, int length) c_gst_buffer_is_memory_range_writable;
+  GstMeta* function(GstBuffer* buffer, void** state) c_gst_buffer_iterate_meta;
+  GstMeta* function(GstBuffer* buffer, void** state, GType metaApiType) c_gst_buffer_iterate_meta_filtered;
+  bool function(GstBuffer* buffer, GstMapInfo* info, GstMapFlags flags) c_gst_buffer_map;
+  bool function(GstBuffer* buffer, uint idx, int length, GstMapInfo* info, GstMapFlags flags) c_gst_buffer_map_range;
+  int function(GstBuffer* buffer, size_t offset, const(void)* mem, size_t size) c_gst_buffer_memcmp;
+  size_t function(GstBuffer* buffer, size_t offset, ubyte val, size_t size) c_gst_buffer_memset;
+  uint function(GstBuffer* buffer) c_gst_buffer_n_memory;
+  GstMemory* function(GstBuffer* buffer, uint idx) c_gst_buffer_peek_memory;
+  void function(GstBuffer* buffer, GstMemory* mem) c_gst_buffer_prepend_memory;
+  void function(GstBuffer* buffer) c_gst_buffer_remove_all_memory;
+  void function(GstBuffer* buffer, uint idx) c_gst_buffer_remove_memory;
+  void function(GstBuffer* buffer, uint idx, int length) c_gst_buffer_remove_memory_range;
+  bool function(GstBuffer* buffer, GstMeta* meta) c_gst_buffer_remove_meta;
+  void function(GstBuffer* buffer, GstMemory* mem) c_gst_buffer_replace_all_memory;
+  void function(GstBuffer* buffer, uint idx, GstMemory* mem) c_gst_buffer_replace_memory;
+  void function(GstBuffer* buffer, uint idx, int length, GstMemory* mem) c_gst_buffer_replace_memory_range;
+  void function(GstBuffer* buffer, ptrdiff_t offset, ptrdiff_t size) c_gst_buffer_resize;
+  bool function(GstBuffer* buffer, uint idx, int length, ptrdiff_t offset, ptrdiff_t size) c_gst_buffer_resize_range;
+  bool function(GstBuffer* buffer, GstBufferFlags flags) c_gst_buffer_set_flags;
+  void function(GstBuffer* buffer, ptrdiff_t size) c_gst_buffer_set_size;
+  void function(GstBuffer* buffer, GstMapInfo* info) c_gst_buffer_unmap;
+  bool function(GstBuffer* buffer, GstBufferFlags flags) c_gst_buffer_unset_flags;
+  uint function() c_gst_buffer_get_max_memory;
+
+  // BufferList
+  extern(C) GType function() c_gst_buffer_list_get_type;
+  GstBufferList* function() c_gst_buffer_list_new;
+  GstBufferList* function(uint size) c_gst_buffer_list_new_sized;
+  size_t function(GstBufferList* list) c_gst_buffer_list_calculate_size;
+  GstBufferList* function(const(GstBufferList)* list) c_gst_buffer_list_copy_deep;
+  bool function(GstBufferList* list, GstBufferListFunc func, void* userData) c_gst_buffer_list_foreach;
+  GstBuffer* function(GstBufferList* list, uint idx) c_gst_buffer_list_get;
+  GstBuffer* function(GstBufferList* list, uint idx) c_gst_buffer_list_get_writable;
+  void function(GstBufferList* list, int idx, GstBuffer* buffer) c_gst_buffer_list_insert;
+  uint function(GstBufferList* list) c_gst_buffer_list_length;
+  void function(GstBufferList* list, uint idx, uint length) c_gst_buffer_list_remove;
+
+  // BufferPool
+  extern(C) GType function() c_gst_buffer_pool_get_type;
+  GstBufferPool* function() c_gst_buffer_pool_new;
+  void function(GstStructure* config, const(char)* option) c_gst_buffer_pool_config_add_option;
+  bool function(GstStructure* config, GstAllocator** allocator, GstAllocationParams* params) c_gst_buffer_pool_config_get_allocator;
+  const(char)* function(GstStructure* config, uint index) c_gst_buffer_pool_config_get_option;
+  bool function(GstStructure* config, GstCaps** caps, uint* size, uint* minBuffers, uint* maxBuffers) c_gst_buffer_pool_config_get_params;
+  bool function(GstStructure* config, const(char)* option) c_gst_buffer_pool_config_has_option;
+  uint function(GstStructure* config) c_gst_buffer_pool_config_n_options;
+  void function(GstStructure* config, GstAllocator* allocator, const(GstAllocationParams)* params) c_gst_buffer_pool_config_set_allocator;
+  void function(GstStructure* config, GstCaps* caps, uint size, uint minBuffers, uint maxBuffers) c_gst_buffer_pool_config_set_params;
+  bool function(GstStructure* config, GstCaps* caps, uint size, uint minBuffers, uint maxBuffers) c_gst_buffer_pool_config_validate_params;
+  GstFlowReturn function(GstBufferPool* pool, GstBuffer** buffer, GstBufferPoolAcquireParams* params) c_gst_buffer_pool_acquire_buffer;
+  GstStructure* function(GstBufferPool* pool) c_gst_buffer_pool_get_config;
+  const(char*)* function(GstBufferPool* pool) c_gst_buffer_pool_get_options;
+  bool function(GstBufferPool* pool, const(char)* option) c_gst_buffer_pool_has_option;
+  bool function(GstBufferPool* pool) c_gst_buffer_pool_is_active;
+  void function(GstBufferPool* pool, GstBuffer* buffer) c_gst_buffer_pool_release_buffer;
+  bool function(GstBufferPool* pool, bool active) c_gst_buffer_pool_set_active;
+  bool function(GstBufferPool* pool, GstStructure* config) c_gst_buffer_pool_set_config;
+  void function(GstBufferPool* pool, bool flushing) c_gst_buffer_pool_set_flushing;
+
+  // Bus
+  extern(C) GType function() c_gst_bus_get_type;
+  GstBus* function() c_gst_bus_new;
+  void function(GstBus* bus) c_gst_bus_add_signal_watch;
+  void function(GstBus* bus, int priority) c_gst_bus_add_signal_watch_full;
+  uint function(GstBus* bus, GstBusFunc func, void* userData) c_gst_bus_add_watch;
+  uint function(GstBus* bus, int priority, GstBusFunc func, void* userData, GDestroyNotify notify) c_gst_bus_add_watch_full;
+  bool function(GstBus* bus, GstMessage* message, void* data) c_gst_bus_async_signal_func;
+  GSource* function(GstBus* bus) c_gst_bus_create_watch;
+  void function(GstBus* bus) c_gst_bus_disable_sync_message_emission;
+  void function(GstBus* bus) c_gst_bus_enable_sync_message_emission;
+  void function(GstBus* bus, GPollFD* fd) c_gst_bus_get_pollfd;
+  bool function(GstBus* bus) c_gst_bus_have_pending;
+  GstMessage* function(GstBus* bus) c_gst_bus_peek;
+  GstMessage* function(GstBus* bus, GstMessageType events, GstClockTime timeout) c_gst_bus_poll;
+  GstMessage* function(GstBus* bus) c_gst_bus_pop;
+  GstMessage* function(GstBus* bus, GstMessageType types) c_gst_bus_pop_filtered;
+  bool function(GstBus* bus, GstMessage* message) c_gst_bus_post;
+  void function(GstBus* bus) c_gst_bus_remove_signal_watch;
+  bool function(GstBus* bus) c_gst_bus_remove_watch;
+  void function(GstBus* bus, bool flushing) c_gst_bus_set_flushing;
+  void function(GstBus* bus, GstBusSyncHandler func, void* userData, GDestroyNotify notify) c_gst_bus_set_sync_handler;
+  GstBusSyncReply function(GstBus* bus, GstMessage* message, void* data) c_gst_bus_sync_signal_handler;
+  GstMessage* function(GstBus* bus, GstClockTime timeout) c_gst_bus_timed_pop;
+  GstMessage* function(GstBus* bus, GstClockTime timeout, GstMessageType types) c_gst_bus_timed_pop_filtered;
+
+  // Caps
+  extern(C) GType function() c_gst_caps_get_type;
+  GstCaps* function() c_gst_caps_new_any;
+  GstCaps* function() c_gst_caps_new_empty;
+  GstCaps* function(const(char)* mediaType) c_gst_caps_new_empty_simple;
+  GstCaps* function(GstStructure* struct1,  ...) c_gst_caps_new_full;
+  GstCaps* function(GstStructure* structure, void* varArgs) c_gst_caps_new_full_valist;
+  GstCaps* function(const(char)* mediaType, const(char)* fieldname,  ...) c_gst_caps_new_simple;
+  void function(GstCaps* caps1, GstCaps* caps2) c_gst_caps_append;
+  void function(GstCaps* caps, GstStructure* structure) c_gst_caps_append_structure;
+  void function(GstCaps* caps, GstStructure* structure, GstCapsFeatures* features) c_gst_caps_append_structure_full;
+  bool function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_can_intersect;
+  GstCaps* function(const(GstCaps)* caps) c_gst_caps_copy;
+  GstCaps* function(const(GstCaps)* caps, uint nth) c_gst_caps_copy_nth;
+  void function(GstCaps* caps, GstCapsFilterMapFunc func, void* userData) c_gst_caps_filter_and_map_in_place;
+  GstCaps* function(GstCaps* caps) c_gst_caps_fixate;
+  bool function(const(GstCaps)* caps, GstCapsForeachFunc func, void* userData) c_gst_caps_foreach;
+  GstCapsFeatures* function(const(GstCaps)* caps, uint index) c_gst_caps_get_features;
+  uint function(const(GstCaps)* caps) c_gst_caps_get_size;
+  GstStructure* function(const(GstCaps)* caps, uint index) c_gst_caps_get_structure;
+  GstCaps* function(GstCaps* caps1, GstCaps* caps2) c_gst_caps_intersect;
+  GstCaps* function(GstCaps* caps1, GstCaps* caps2, GstCapsIntersectMode mode) c_gst_caps_intersect_full;
+  bool function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_always_compatible;
+  bool function(const(GstCaps)* caps) c_gst_caps_is_any;
+  bool function(const(GstCaps)* caps) c_gst_caps_is_empty;
+  bool function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_equal;
+  bool function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_equal_fixed;
+  bool function(const(GstCaps)* caps) c_gst_caps_is_fixed;
+  bool function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_strictly_equal;
+  bool function(const(GstCaps)* subset, const(GstCaps)* superset) c_gst_caps_is_subset;
+  bool function(const(GstCaps)* caps, const(GstStructure)* structure) c_gst_caps_is_subset_structure;
+  bool function(const(GstCaps)* caps, const(GstStructure)* structure, const(GstCapsFeatures)* features) c_gst_caps_is_subset_structure_full;
+  bool function(GstCaps* caps, GstCapsMapFunc func, void* userData) c_gst_caps_map_in_place;
+  GstCaps* function(GstCaps* caps1, GstCaps* caps2) c_gst_caps_merge;
+  GstCaps* function(GstCaps* caps, GstStructure* structure) c_gst_caps_merge_structure;
+  GstCaps* function(GstCaps* caps, GstStructure* structure, GstCapsFeatures* features) c_gst_caps_merge_structure_full;
+  GstCaps* function(GstCaps* caps) c_gst_caps_normalize;
+  void function(GstCaps* caps, uint idx) c_gst_caps_remove_structure;
+  char* function(const(GstCaps)* caps, GstSerializeFlags flags) c_gst_caps_serialize;
+  void function(GstCaps* caps, uint index, GstCapsFeatures* features) c_gst_caps_set_features;
+  void function(GstCaps* caps, GstCapsFeatures* features) c_gst_caps_set_features_simple;
+  void function(GstCaps* caps, const(char)* field,  ...) c_gst_caps_set_simple;
+  void function(GstCaps* caps, const(char)* field, void* varargs) c_gst_caps_set_simple_valist;
+  void function(GstCaps* caps, const(char)* field, const(GValue)* value) c_gst_caps_set_value;
+  GstCaps* function(GstCaps* caps) c_gst_caps_simplify;
+  GstStructure* function(GstCaps* caps, uint index) c_gst_caps_steal_structure;
+  GstCaps* function(GstCaps* minuend, GstCaps* subtrahend) c_gst_caps_subtract;
+  char* function(const(GstCaps)* caps) c_gst_caps_to_string;
+  GstCaps* function(GstCaps* caps) c_gst_caps_truncate;
+  GstCaps* function(const(char)* string_) c_gst_caps_from_string;
+
+  // CapsFeatures
+  extern(C) GType function() c_gst_caps_features_get_type;
+  GstCapsFeatures* function(const(char)* feature1,  ...) c_gst_caps_features_new;
+  GstCapsFeatures* function() c_gst_caps_features_new_any;
+  GstCapsFeatures* function() c_gst_caps_features_new_empty;
+  GstCapsFeatures* function(GQuark feature1,  ...) c_gst_caps_features_new_id;
+  GstCapsFeatures* function(GQuark feature1, void* varargs) c_gst_caps_features_new_id_valist;
+  GstCapsFeatures* function(const(char)* feature) c_gst_caps_features_new_single;
+  GstCapsFeatures* function(const(char)* feature1, void* varargs) c_gst_caps_features_new_valist;
+  void function(GstCapsFeatures* features, const(char)* feature) c_gst_caps_features_add;
+  void function(GstCapsFeatures* features, GQuark feature) c_gst_caps_features_add_id;
+  bool function(const(GstCapsFeatures)* features, const(char)* feature) c_gst_caps_features_contains;
+  bool function(const(GstCapsFeatures)* features, GQuark feature) c_gst_caps_features_contains_id;
+  GstCapsFeatures* function(const(GstCapsFeatures)* features) c_gst_caps_features_copy;
+  void function(GstCapsFeatures* features) c_gst_caps_features_free;
+  const(char)* function(const(GstCapsFeatures)* features, uint i) c_gst_caps_features_get_nth;
+  GQuark function(const(GstCapsFeatures)* features, uint i) c_gst_caps_features_get_nth_id;
+  uint function(const(GstCapsFeatures)* features) c_gst_caps_features_get_size;
+  bool function(const(GstCapsFeatures)* features) c_gst_caps_features_is_any;
+  bool function(const(GstCapsFeatures)* features1, const(GstCapsFeatures)* features2) c_gst_caps_features_is_equal;
+  void function(GstCapsFeatures* features, const(char)* feature) c_gst_caps_features_remove;
+  void function(GstCapsFeatures* features, GQuark feature) c_gst_caps_features_remove_id;
+  bool function(GstCapsFeatures* features, int* refcount) c_gst_caps_features_set_parent_refcount;
+  char* function(const(GstCapsFeatures)* features) c_gst_caps_features_to_string;
+  GstCapsFeatures* function(const(char)* features) c_gst_caps_features_from_string;
+
+  // ChildProxy
+  extern(C) GType function() c_gst_child_proxy_get_type;
+  void function(GstChildProxy* parent, ObjectC* child, const(char)* name) c_gst_child_proxy_child_added;
+  void function(GstChildProxy* parent, ObjectC* child, const(char)* name) c_gst_child_proxy_child_removed;
+  void function(GstChildProxy* object, const(char)* firstPropertyName,  ...) c_gst_child_proxy_get;
+  ObjectC* function(GstChildProxy* parent, uint index) c_gst_child_proxy_get_child_by_index;
+  ObjectC* function(GstChildProxy* parent, const(char)* name) c_gst_child_proxy_get_child_by_name;
+  ObjectC* function(GstChildProxy* childProxy, const(char)* name) c_gst_child_proxy_get_child_by_name_recurse;
+  uint function(GstChildProxy* parent) c_gst_child_proxy_get_children_count;
+  void function(GstChildProxy* object, const(char)* name, GValue* value) c_gst_child_proxy_get_property;
+  void function(GstChildProxy* object, const(char)* firstPropertyName, void* varArgs) c_gst_child_proxy_get_valist;
+  bool function(GstChildProxy* object, const(char)* name, ObjectC** target, GParamSpec** pspec) c_gst_child_proxy_lookup;
+  void function(GstChildProxy* object, const(char)* firstPropertyName,  ...) c_gst_child_proxy_set;
+  void function(GstChildProxy* object, const(char)* name, const(GValue)* value) c_gst_child_proxy_set_property;
+  void function(GstChildProxy* object, const(char)* firstPropertyName, void* varArgs) c_gst_child_proxy_set_valist;
+
+  // Clock
+  extern(C) GType function() c_gst_clock_get_type;
+  int function(const(void)* id1, const(void)* id2) c_gst_clock_id_compare_func;
+  GstClock* function(GstClockID id) c_gst_clock_id_get_clock;
+  GstClockTime function(GstClockID id) c_gst_clock_id_get_time;
+  GstClockID function(GstClockID id) c_gst_clock_id_ref;
+  void function(GstClockID id) c_gst_clock_id_unref;
+  void function(GstClockID id) c_gst_clock_id_unschedule;
+  bool function(GstClockID id, GstClock* clock) c_gst_clock_id_uses_clock;
+  GstClockReturn function(GstClockID id, GstClockTimeDiff* jitter) c_gst_clock_id_wait;
+  GstClockReturn function(GstClockID id, GstClockCallback func, void* userData, GDestroyNotify destroyData) c_gst_clock_id_wait_async;
+  bool function(GstClock* clock, GstClockTime slave, GstClockTime master, double* rSquared) c_gst_clock_add_observation;
+  bool function(GstClock* clock, GstClockTime slave, GstClockTime master, double* rSquared, GstClockTime* internal, GstClockTime* external, GstClockTime* rateNum, GstClockTime* rateDenom) c_gst_clock_add_observation_unapplied;
+  GstClockTime function(GstClock* clock, GstClockTime internal) c_gst_clock_adjust_unlocked;
+  GstClockTime function(GstClock* clock, GstClockTime internalTarget, GstClockTime cinternal, GstClockTime cexternal, GstClockTime cnum, GstClockTime cdenom) c_gst_clock_adjust_with_calibration;
+  void function(GstClock* clock, GstClockTime* internal, GstClockTime* external, GstClockTime* rateNum, GstClockTime* rateDenom) c_gst_clock_get_calibration;
+  GstClockTime function(GstClock* clock) c_gst_clock_get_internal_time;
+  GstClock* function(GstClock* clock) c_gst_clock_get_master;
+  GstClockTime function(GstClock* clock) c_gst_clock_get_resolution;
+  GstClockTime function(GstClock* clock) c_gst_clock_get_time;
+  GstClockTime function(GstClock* clock) c_gst_clock_get_timeout;
+  bool function(GstClock* clock) c_gst_clock_is_synced;
+  GstClockID function(GstClock* clock, GstClockTime startTime, GstClockTime interval) c_gst_clock_new_periodic_id;
+  GstClockID function(GstClock* clock, GstClockTime time) c_gst_clock_new_single_shot_id;
+  bool function(GstClock* clock, GstClockID id, GstClockTime startTime, GstClockTime interval) c_gst_clock_periodic_id_reinit;
+  void function(GstClock* clock, GstClockTime internal, GstClockTime external, GstClockTime rateNum, GstClockTime rateDenom) c_gst_clock_set_calibration;
+  bool function(GstClock* clock, GstClock* master) c_gst_clock_set_master;
+  GstClockTime function(GstClock* clock, GstClockTime resolution) c_gst_clock_set_resolution;
+  void function(GstClock* clock, bool synced) c_gst_clock_set_synced;
+  void function(GstClock* clock, GstClockTime timeout) c_gst_clock_set_timeout;
+  bool function(GstClock* clock, GstClockID id, GstClockTime time) c_gst_clock_single_shot_id_reinit;
+  GstClockTime function(GstClock* clock, GstClockTime external) c_gst_clock_unadjust_unlocked;
+  GstClockTime function(GstClock* clock, GstClockTime externalTarget, GstClockTime cinternal, GstClockTime cexternal, GstClockTime cnum, GstClockTime cdenom) c_gst_clock_unadjust_with_calibration;
+  bool function(GstClock* clock, GstClockTime timeout) c_gst_clock_wait_for_sync;
+
+  // Context
+  extern(C) GType function() c_gst_context_get_type;
+  GstContext* function(const(char)* contextType, bool persistent) c_gst_context_new;
+  const(char)* function(const(GstContext)* context) c_gst_context_get_context_type;
+  const(GstStructure)* function(const(GstContext)* context) c_gst_context_get_structure;
+  bool function(const(GstContext)* context, const(char)* contextType) c_gst_context_has_context_type;
+  bool function(const(GstContext)* context) c_gst_context_is_persistent;
+  GstStructure* function(GstContext* context) c_gst_context_writable_structure;
+
+  // ControlBinding
+  extern(C) GType function() c_gst_control_binding_get_type;
+  bool function(GstControlBinding* binding, GstClockTime timestamp, GstClockTime interval, uint nValues, GValue* values) c_gst_control_binding_get_g_value_array;
+  GValue* function(GstControlBinding* binding, GstClockTime timestamp) c_gst_control_binding_get_value;
+  bool function(GstControlBinding* binding, GstClockTime timestamp, GstClockTime interval, uint nValues, void* values) c_gst_control_binding_get_value_array;
+  bool function(GstControlBinding* binding) c_gst_control_binding_is_disabled;
+  void function(GstControlBinding* binding, bool disabled) c_gst_control_binding_set_disabled;
+  bool function(GstControlBinding* binding, GstObject* object, GstClockTime timestamp, GstClockTime lastSync) c_gst_control_binding_sync_values;
+
+  // ControlSource
+  extern(C) GType function() c_gst_control_source_get_type;
+  bool function(GstControlSource* self, GstClockTime timestamp, double* value) c_gst_control_source_get_value;
+  bool function(GstControlSource* self, GstClockTime timestamp, GstClockTime interval, uint nValues, double* values) c_gst_control_source_get_value_array;
+
+  // CustomMeta
+  GstStructure* function(GstCustomMeta* meta) c_gst_custom_meta_get_structure;
+  bool function(GstCustomMeta* meta, const(char)* name) c_gst_custom_meta_has_name;
+
+  // DateTime
+  extern(C) GType function() c_gst_date_time_get_type;
+  GstDateTime* function(float tzoffset, int year, int month, int day, int hour, int minute, double seconds) c_gst_date_time_new;
+  GstDateTime* function(GDateTime* dt) c_gst_date_time_new_from_g_date_time;
+  GstDateTime* function(const(char)* string_) c_gst_date_time_new_from_iso8601_string;
+  GstDateTime* function(long secs) c_gst_date_time_new_from_unix_epoch_local_time;
+  GstDateTime* function(long usecs) c_gst_date_time_new_from_unix_epoch_local_time_usecs;
+  GstDateTime* function(long secs) c_gst_date_time_new_from_unix_epoch_utc;
+  GstDateTime* function(long usecs) c_gst_date_time_new_from_unix_epoch_utc_usecs;
+  GstDateTime* function(int year, int month, int day, int hour, int minute, double seconds) c_gst_date_time_new_local_time;
+  GstDateTime* function() c_gst_date_time_new_now_local_time;
+  GstDateTime* function() c_gst_date_time_new_now_utc;
+  GstDateTime* function(int year) c_gst_date_time_new_y;
+  GstDateTime* function(int year, int month) c_gst_date_time_new_ym;
+  GstDateTime* function(int year, int month, int day) c_gst_date_time_new_ymd;
+  int function(const(GstDateTime)* datetime) c_gst_date_time_get_day;
+  int function(const(GstDateTime)* datetime) c_gst_date_time_get_hour;
+  int function(const(GstDateTime)* datetime) c_gst_date_time_get_microsecond;
+  int function(const(GstDateTime)* datetime) c_gst_date_time_get_minute;
+  int function(const(GstDateTime)* datetime) c_gst_date_time_get_month;
+  int function(const(GstDateTime)* datetime) c_gst_date_time_get_second;
+  float function(const(GstDateTime)* datetime) c_gst_date_time_get_time_zone_offset;
+  int function(const(GstDateTime)* datetime) c_gst_date_time_get_year;
+  bool function(const(GstDateTime)* datetime) c_gst_date_time_has_day;
+  bool function(const(GstDateTime)* datetime) c_gst_date_time_has_month;
+  bool function(const(GstDateTime)* datetime) c_gst_date_time_has_second;
+  bool function(const(GstDateTime)* datetime) c_gst_date_time_has_time;
+  bool function(const(GstDateTime)* datetime) c_gst_date_time_has_year;
+  GstDateTime* function(GstDateTime* datetime) c_gst_date_time_ref;
+  GDateTime* function(GstDateTime* datetime) c_gst_date_time_to_g_date_time;
+  char* function(GstDateTime* datetime) c_gst_date_time_to_iso8601_string;
+  void function(GstDateTime* datetime) c_gst_date_time_unref;
+
+  // DebugCategory
+  void function(GstDebugCategory* category) c_gst_debug_category_free;
+  uint function(GstDebugCategory* category) c_gst_debug_category_get_color;
+  const(char)* function(GstDebugCategory* category) c_gst_debug_category_get_description;
+  const(char)* function(GstDebugCategory* category) c_gst_debug_category_get_name;
+  GstDebugLevel function(GstDebugCategory* category) c_gst_debug_category_get_threshold;
+  void function(GstDebugCategory* category) c_gst_debug_category_reset_threshold;
+  void function(GstDebugCategory* category, GstDebugLevel level) c_gst_debug_category_set_threshold;
+
+  // DebugMessage
+  const(char)* function(GstDebugMessage* message) c_gst_debug_message_get;
+  const(char)* function(GstDebugMessage* message) c_gst_debug_message_get_id;
+
+  // Device
+  extern(C) GType function() c_gst_device_get_type;
+  GstElement* function(GstDevice* device, const(char)* name) c_gst_device_create_element;
+  GstCaps* function(GstDevice* device) c_gst_device_get_caps;
+  char* function(GstDevice* device) c_gst_device_get_device_class;
+  char* function(GstDevice* device) c_gst_device_get_display_name;
+  GstStructure* function(GstDevice* device) c_gst_device_get_properties;
+  bool function(GstDevice* device, const(char)* classes) c_gst_device_has_classes;
+  bool function(GstDevice* device, char** classes) c_gst_device_has_classesv;
+  bool function(GstDevice* device, GstElement* element) c_gst_device_reconfigure_element;
+
+  // DeviceMonitor
+  extern(C) GType function() c_gst_device_monitor_get_type;
+  GstDeviceMonitor* function() c_gst_device_monitor_new;
+  uint function(GstDeviceMonitor* monitor, const(char)* classes, GstCaps* caps) c_gst_device_monitor_add_filter;
+  GstBus* function(GstDeviceMonitor* monitor) c_gst_device_monitor_get_bus;
+  GList* function(GstDeviceMonitor* monitor) c_gst_device_monitor_get_devices;
+  char** function(GstDeviceMonitor* monitor) c_gst_device_monitor_get_providers;
+  bool function(GstDeviceMonitor* monitor) c_gst_device_monitor_get_show_all_devices;
+  bool function(GstDeviceMonitor* monitor, uint filterId) c_gst_device_monitor_remove_filter;
+  void function(GstDeviceMonitor* monitor, bool showAll) c_gst_device_monitor_set_show_all_devices;
+  bool function(GstDeviceMonitor* monitor) c_gst_device_monitor_start;
+  void function(GstDeviceMonitor* monitor) c_gst_device_monitor_stop;
+
+  // DeviceProvider
+  extern(C) GType function() c_gst_device_provider_get_type;
+  bool function(GstPlugin* plugin, const(char)* name, uint rank, GType type) c_gst_device_provider_register;
+  bool function(GstDeviceProvider* provider) c_gst_device_provider_can_monitor;
+  void function(GstDeviceProvider* provider, GstDevice* device) c_gst_device_provider_device_add;
+  void function(GstDeviceProvider* provider, GstDevice* device, GstDevice* changedDevice) c_gst_device_provider_device_changed;
+  void function(GstDeviceProvider* provider, GstDevice* device) c_gst_device_provider_device_remove;
+  GstBus* function(GstDeviceProvider* provider) c_gst_device_provider_get_bus;
+  GList* function(GstDeviceProvider* provider) c_gst_device_provider_get_devices;
+  GstDeviceProviderFactory* function(GstDeviceProvider* provider) c_gst_device_provider_get_factory;
+  char** function(GstDeviceProvider* provider) c_gst_device_provider_get_hidden_providers;
+  const(char)* function(GstDeviceProvider* provider, const(char)* key) c_gst_device_provider_get_metadata;
+  void function(GstDeviceProvider* provider, const(char)* name) c_gst_device_provider_hide_provider;
+  bool function(GstDeviceProvider* provider) c_gst_device_provider_is_started;
+  bool function(GstDeviceProvider* provider) c_gst_device_provider_start;
+  void function(GstDeviceProvider* provider) c_gst_device_provider_stop;
+  void function(GstDeviceProvider* provider, const(char)* name) c_gst_device_provider_unhide_provider;
+
+  // DeviceProviderClass
+  void function(GstDeviceProviderClass* klass, const(char)* key, const(char)* value) c_gst_device_provider_class_add_metadata;
+  void function(GstDeviceProviderClass* klass, const(char)* key, const(char)* value) c_gst_device_provider_class_add_static_metadata;
+  const(char)* function(GstDeviceProviderClass* klass, const(char)* key) c_gst_device_provider_class_get_metadata;
+  void function(GstDeviceProviderClass* klass, const(char)* longname, const(char)* classification, const(char)* description, const(char)* author) c_gst_device_provider_class_set_metadata;
+  void function(GstDeviceProviderClass* klass, const(char)* longname, const(char)* classification, const(char)* description, const(char)* author) c_gst_device_provider_class_set_static_metadata;
+
+  // DeviceProviderFactory
+  extern(C) GType function() c_gst_device_provider_factory_get_type;
+  GstDeviceProviderFactory* function(const(char)* name) c_gst_device_provider_factory_find;
+  GstDeviceProvider* function(const(char)* factoryname) c_gst_device_provider_factory_get_by_name;
+  GList* function(GstRank minrank) c_gst_device_provider_factory_list_get_device_providers;
+  GstDeviceProvider* function(GstDeviceProviderFactory* factory) c_gst_device_provider_factory_get;
+  GType function(GstDeviceProviderFactory* factory) c_gst_device_provider_factory_get_device_provider_type;
+  const(char)* function(GstDeviceProviderFactory* factory, const(char)* key) c_gst_device_provider_factory_get_metadata;
+  char** function(GstDeviceProviderFactory* factory) c_gst_device_provider_factory_get_metadata_keys;
+  bool function(GstDeviceProviderFactory* factory, const(char)* classes) c_gst_device_provider_factory_has_classes;
+  bool function(GstDeviceProviderFactory* factory, char** classes) c_gst_device_provider_factory_has_classesv;
+
+  // DoubleRange
+  extern(C) GType function() c_gst_double_range_get_type;
+
+  // DynamicTypeFactory
+  extern(C) GType function() c_gst_dynamic_type_factory_get_type;
+  GType function(const(char)* factoryname) c_gst_dynamic_type_factory_load;
+
+  // Element
+  extern(C) GType function() c_gst_element_get_type;
+  GstElement* function(GstURIType type, const(char)* uri, const(char)* elementname, GError** _err) c_gst_element_make_from_uri;
+  bool function(GstPlugin* plugin, const(char)* name, uint rank, GType type) c_gst_element_register;
+  const(char)* function(GstStateChangeReturn stateRet) c_gst_element_state_change_return_get_name;
+  const(char)* function(GstState state) c_gst_element_state_get_name;
+  void function(GType type) c_gst_element_type_set_skip_documentation;
+  void function(GstElement* element) c_gst_element_abort_state;
+  bool function(GstElement* element, GstPad* pad) c_gst_element_add_pad;
+  gulong function(GstElement* element, const(char)* propertyName, bool includeValue) c_gst_element_add_property_deep_notify_watch;
+  gulong function(GstElement* element, const(char)* propertyName, bool includeValue) c_gst_element_add_property_notify_watch;
+  void function(GstElement* element, GstElementCallAsyncFunc func, void* userData, GDestroyNotify destroyNotify) c_gst_element_call_async;
+  GstStateChangeReturn function(GstElement* element, GstStateChange transition) c_gst_element_change_state;
+  GstStateChangeReturn function(GstElement* element, GstStateChangeReturn ret) c_gst_element_continue_state;
+  void function(GstElement* element) c_gst_element_create_all_pads;
+  char* function(GstElement* element, const(char)* streamId) c_gst_element_decorate_stream_id;
+  char* function(GstElement* element, const(char)* format,  ...) c_gst_element_decorate_stream_id_printf;
+  char* function(GstElement* element, const(char)* format, void* varArgs) c_gst_element_decorate_stream_id_printf_valist;
+  bool function(GstElement* element, GstElementForeachPadFunc func, void* userData) c_gst_element_foreach_pad;
+  bool function(GstElement* element, GstElementForeachPadFunc func, void* userData) c_gst_element_foreach_sink_pad;
+  bool function(GstElement* element, GstElementForeachPadFunc func, void* userData) c_gst_element_foreach_src_pad;
+  GstClockTime function(GstElement* element) c_gst_element_get_base_time;
+  GstBus* function(GstElement* element) c_gst_element_get_bus;
+  GstClock* function(GstElement* element) c_gst_element_get_clock;
+  GstPad* function(GstElement* element, GstPad* pad, GstCaps* caps) c_gst_element_get_compatible_pad;
+  GstPadTemplate* function(GstElement* element, GstPadTemplate* compattempl) c_gst_element_get_compatible_pad_template;
+  GstContext* function(GstElement* element, const(char)* contextType) c_gst_element_get_context;
+  GstContext* function(GstElement* element, const(char)* contextType) c_gst_element_get_context_unlocked;
+  GList* function(GstElement* element) c_gst_element_get_contexts;
+  GstClockTime function(GstElement* element) c_gst_element_get_current_clock_time;
+  GstClockTime function(GstElement* element) c_gst_element_get_current_running_time;
+  GstElementFactory* function(GstElement* element) c_gst_element_get_factory;
+  const(char)* function(GstElement* element, const(char)* key) c_gst_element_get_metadata;
+  GstPadTemplate* function(GstElement* element, const(char)* name) c_gst_element_get_pad_template;
+  GList* function(GstElement* element) c_gst_element_get_pad_template_list;
+  GstPad* function(GstElement* element, const(char)* name) c_gst_element_get_request_pad;
+  GstClockTime function(GstElement* element) c_gst_element_get_start_time;
+  GstStateChangeReturn function(GstElement* element, GstState* state, GstState* pending, GstClockTime timeout) c_gst_element_get_state;
+  GstPad* function(GstElement* element, const(char)* name) c_gst_element_get_static_pad;
+  bool function(GstElement* element) c_gst_element_is_locked_state;
+  GstIterator* function(GstElement* element) c_gst_element_iterate_pads;
+  GstIterator* function(GstElement* element) c_gst_element_iterate_sink_pads;
+  GstIterator* function(GstElement* element) c_gst_element_iterate_src_pads;
+  bool function(GstElement* src, GstElement* dest) c_gst_element_link;
+  bool function(GstElement* src, GstElement* dest, GstCaps* filter) c_gst_element_link_filtered;
+  bool function(GstElement* element1, GstElement* element2,  ...) c_gst_element_link_many;
+  bool function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname) c_gst_element_link_pads;
+  bool function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname, GstCaps* filter) c_gst_element_link_pads_filtered;
+  bool function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname, GstPadLinkCheck flags) c_gst_element_link_pads_full;
+  void function(GstElement* element) c_gst_element_lost_state;
+  void function(GstElement* element, GstMessageType type, GQuark domain, int code, char* text, char* debug_, const(char)* file, const(char)* function_, int line) c_gst_element_message_full;
+  void function(GstElement* element, GstMessageType type, GQuark domain, int code, char* text, char* debug_, const(char)* file, const(char)* function_, int line, GstStructure* structure) c_gst_element_message_full_with_details;
+  void function(GstElement* element) c_gst_element_no_more_pads;
+  bool function(GstElement* element, GstMessage* message) c_gst_element_post_message;
+  GstClock* function(GstElement* element) c_gst_element_provide_clock;
+  bool function(GstElement* element, GstQuery* query) c_gst_element_query;
+  bool function(GstElement* element, GstFormat srcFormat, long srcVal, GstFormat destFormat, long* destVal) c_gst_element_query_convert;
+  bool function(GstElement* element, GstFormat format, long* duration) c_gst_element_query_duration;
+  bool function(GstElement* element, GstFormat format, long* cur) c_gst_element_query_position;
+  void function(GstElement* element, GstPad* pad) c_gst_element_release_request_pad;
+  bool function(GstElement* element, GstPad* pad) c_gst_element_remove_pad;
+  void function(GstElement* element, gulong watchId) c_gst_element_remove_property_notify_watch;
+  GstPad* function(GstElement* element, GstPadTemplate* templ, const(char)* name, const(GstCaps)* caps) c_gst_element_request_pad;
+  GstPad* function(GstElement* element, const(char)* name) c_gst_element_request_pad_simple;
+  bool function(GstElement* element, double rate, GstFormat format, GstSeekFlags flags, GstSeekType startType, long start, GstSeekType stopType, long stop) c_gst_element_seek;
+  bool function(GstElement* element, GstFormat format, GstSeekFlags seekFlags, long seekPos) c_gst_element_seek_simple;
+  bool function(GstElement* element, GstEvent* event) c_gst_element_send_event;
+  void function(GstElement* element, GstClockTime time) c_gst_element_set_base_time;
+  void function(GstElement* element, GstBus* bus) c_gst_element_set_bus;
+  bool function(GstElement* element, GstClock* clock) c_gst_element_set_clock;
+  void function(GstElement* element, GstContext* context) c_gst_element_set_context;
+  bool function(GstElement* element, bool lockedState) c_gst_element_set_locked_state;
+  void function(GstElement* element, GstClockTime time) c_gst_element_set_start_time;
+  GstStateChangeReturn function(GstElement* element, GstState state) c_gst_element_set_state;
+  bool function(GstElement* element) c_gst_element_sync_state_with_parent;
+  void function(GstElement* src, GstElement* dest) c_gst_element_unlink;
+  void function(GstElement* element1, GstElement* element2,  ...) c_gst_element_unlink_many;
+  void function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname) c_gst_element_unlink_pads;
+
+  // ElementClass
+  void function(GstElementClass* klass, const(char)* key, const(char)* value) c_gst_element_class_add_metadata;
+  void function(GstElementClass* klass, GstPadTemplate* templ) c_gst_element_class_add_pad_template;
+  void function(GstElementClass* klass, const(char)* key, const(char)* value) c_gst_element_class_add_static_metadata;
+  void function(GstElementClass* klass, GstStaticPadTemplate* staticTempl) c_gst_element_class_add_static_pad_template;
+  void function(GstElementClass* klass, GstStaticPadTemplate* staticTempl, GType padType) c_gst_element_class_add_static_pad_template_with_gtype;
+  const(char)* function(GstElementClass* klass, const(char)* key) c_gst_element_class_get_metadata;
+  GstPadTemplate* function(GstElementClass* elementClass, const(char)* name) c_gst_element_class_get_pad_template;
+  GList* function(GstElementClass* elementClass) c_gst_element_class_get_pad_template_list;
+  void function(GstElementClass* klass, const(char)* longname, const(char)* classification, const(char)* description, const(char)* author) c_gst_element_class_set_metadata;
+  void function(GstElementClass* klass, const(char)* longname, const(char)* classification, const(char)* description, const(char)* author) c_gst_element_class_set_static_metadata;
+
+  // ElementFactory
+  extern(C) GType function() c_gst_element_factory_get_type;
+  GstElementFactory* function(const(char)* name) c_gst_element_factory_find;
+  GList* function(GList* list, const(GstCaps)* caps, GstPadDirection direction, bool subsetonly) c_gst_element_factory_list_filter;
+  GList* function(GstElementFactoryListType type, GstRank minrank) c_gst_element_factory_list_get_elements;
+  GstElement* function(const(char)* factoryname, const(char)* name) c_gst_element_factory_make;
+  GstElement* function(const(char)* factoryname, const(char)* first,  ...) c_gst_element_factory_make_full;
+  GstElement* function(const(char)* factoryname, const(char)* first, void* properties) c_gst_element_factory_make_valist;
+  GstElement* function(const(char)* factoryname, uint n, const(char*)* names, const(GValue)* values) c_gst_element_factory_make_with_properties;
+  bool function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_sink_all_caps;
+  bool function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_sink_any_caps;
+  bool function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_src_all_caps;
+  bool function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_src_any_caps;
+  GstElement* function(GstElementFactory* factory, const(char)* name) c_gst_element_factory_create;
+  GstElement* function(GstElementFactory* factory, const(char)* first,  ...) c_gst_element_factory_create_full;
+  GstElement* function(GstElementFactory* factory, const(char)* first, void* properties) c_gst_element_factory_create_valist;
+  GstElement* function(GstElementFactory* factory, uint n, const(char*)* names, const(GValue)* values) c_gst_element_factory_create_with_properties;
+  GType function(GstElementFactory* factory) c_gst_element_factory_get_element_type;
+  const(char)* function(GstElementFactory* factory, const(char)* key) c_gst_element_factory_get_metadata;
+  char** function(GstElementFactory* factory) c_gst_element_factory_get_metadata_keys;
+  uint function(GstElementFactory* factory) c_gst_element_factory_get_num_pad_templates;
+  bool function(GstElementFactory* factory) c_gst_element_factory_get_skip_documentation;
+  const(GList)* function(GstElementFactory* factory) c_gst_element_factory_get_static_pad_templates;
+  const(char*)* function(GstElementFactory* factory) c_gst_element_factory_get_uri_protocols;
+  GstURIType function(GstElementFactory* factory) c_gst_element_factory_get_uri_type;
+  bool function(GstElementFactory* factory, const(char)* interfacename) c_gst_element_factory_has_interface;
+  bool function(GstElementFactory* factory, GstElementFactoryListType type) c_gst_element_factory_list_is_type;
+
+  // Event
+  extern(C) GType function() c_gst_event_get_type;
+  GstEvent* function(GstFormat format, long minsize, long maxsize, bool async) c_gst_event_new_buffer_size;
+  GstEvent* function(GstCaps* caps) c_gst_event_new_caps;
+  GstEvent* function(GstEventType type, GstStructure* structure) c_gst_event_new_custom;
+  GstEvent* function() c_gst_event_new_eos;
+  GstEvent* function() c_gst_event_new_flush_start;
+  GstEvent* function(bool resetTime) c_gst_event_new_flush_stop;
+  GstEvent* function(GstClockTime timestamp, GstClockTime duration) c_gst_event_new_gap;
+  GstEvent* function(double rateMultiplier, GstSegmentFlags newFlags) c_gst_event_new_instant_rate_change;
+  GstEvent* function(double rateMultiplier, GstClockTime runningTime, GstClockTime upstreamRunningTime) c_gst_event_new_instant_rate_sync_time;
+  GstEvent* function(GstClockTime latency) c_gst_event_new_latency;
+  GstEvent* function(GstStructure* structure) c_gst_event_new_navigation;
+  GstEvent* function(const(char)* systemId, GstBuffer* data, const(char)* origin) c_gst_event_new_protection;
+  GstEvent* function(GstQOSType type, double proportion, GstClockTimeDiff diff, GstClockTime timestamp) c_gst_event_new_qos;
+  GstEvent* function() c_gst_event_new_reconfigure;
+  GstEvent* function(double rate, GstFormat format, GstSeekFlags flags, GstSeekType startType, long start, GstSeekType stopType, long stop) c_gst_event_new_seek;
+  GstEvent* function(const(GstSegment)* segment) c_gst_event_new_segment;
+  GstEvent* function(GstFormat format, long position) c_gst_event_new_segment_done;
+  GstEvent* function(GList* streams) c_gst_event_new_select_streams;
+  GstEvent* function(const(char)* name, GstMessage* msg) c_gst_event_new_sink_message;
+  GstEvent* function(GstFormat format, ulong amount, double rate, bool flush, bool intermediate) c_gst_event_new_step;
+  GstEvent* function(GstStreamCollection* collection) c_gst_event_new_stream_collection;
+  GstEvent* function(uint groupId) c_gst_event_new_stream_group_done;
+  GstEvent* function(const(char)* streamId) c_gst_event_new_stream_start;
+  GstEvent* function(GstTagList* taglist) c_gst_event_new_tag;
+  GstEvent* function(GstToc* toc, bool updated) c_gst_event_new_toc;
+  GstEvent* function(const(char)* uid) c_gst_event_new_toc_select;
+  void function(GstEvent* event, GstSegment* segment) c_gst_event_copy_segment;
+  long function(GstEvent* event) c_gst_event_get_running_time_offset;
+  uint function(GstEvent* event) c_gst_event_get_seqnum;
+  const(GstStructure)* function(GstEvent* event) c_gst_event_get_structure;
+  bool function(GstEvent* event, const(char)* name) c_gst_event_has_name;
+  bool function(GstEvent* event, GQuark name) c_gst_event_has_name_id;
+  void function(GstEvent* event, GstFormat* format, long* minsize, long* maxsize, bool* async) c_gst_event_parse_buffer_size;
+  void function(GstEvent* event, GstCaps** caps) c_gst_event_parse_caps;
+  void function(GstEvent* event, bool* resetTime) c_gst_event_parse_flush_stop;
+  void function(GstEvent* event, GstClockTime* timestamp, GstClockTime* duration) c_gst_event_parse_gap;
+  void function(GstEvent* event, GstGapFlags* flags) c_gst_event_parse_gap_flags;
+  bool function(GstEvent* event, uint* groupId) c_gst_event_parse_group_id;
+  void function(GstEvent* event, double* rateMultiplier, GstSegmentFlags* newFlags) c_gst_event_parse_instant_rate_change;
+  void function(GstEvent* event, double* rateMultiplier, GstClockTime* runningTime, GstClockTime* upstreamRunningTime) c_gst_event_parse_instant_rate_sync_time;
+  void function(GstEvent* event, GstClockTime* latency) c_gst_event_parse_latency;
+  void function(GstEvent* event, const(char*)* systemId, GstBuffer** data, const(char*)* origin) c_gst_event_parse_protection;
+  void function(GstEvent* event, GstQOSType* type, double* proportion, GstClockTimeDiff* diff, GstClockTime* timestamp) c_gst_event_parse_qos;
+  void function(GstEvent* event, double* rate, GstFormat* format, GstSeekFlags* flags, GstSeekType* startType, long* start, GstSeekType* stopType, long* stop) c_gst_event_parse_seek;
+  void function(GstEvent* event, GstClockTime* interval) c_gst_event_parse_seek_trickmode_interval;
+  void function(GstEvent* event, const(GstSegment*)* segment) c_gst_event_parse_segment;
+  void function(GstEvent* event, GstFormat* format, long* position) c_gst_event_parse_segment_done;
+  void function(GstEvent* event, GList** streams) c_gst_event_parse_select_streams;
+  void function(GstEvent* event, GstMessage** msg) c_gst_event_parse_sink_message;
+  void function(GstEvent* event, GstFormat* format, ulong* amount, double* rate, bool* flush, bool* intermediate) c_gst_event_parse_step;
+  void function(GstEvent* event, GstStream** stream) c_gst_event_parse_stream;
+  void function(GstEvent* event, GstStreamCollection** collection) c_gst_event_parse_stream_collection;
+  void function(GstEvent* event, GstStreamFlags* flags) c_gst_event_parse_stream_flags;
+  void function(GstEvent* event, uint* groupId) c_gst_event_parse_stream_group_done;
+  void function(GstEvent* event, const(char*)* streamId) c_gst_event_parse_stream_start;
+  void function(GstEvent* event, GstTagList** taglist) c_gst_event_parse_tag;
+  void function(GstEvent* event, GstToc** toc, bool* updated) c_gst_event_parse_toc;
+  void function(GstEvent* event, char** uid) c_gst_event_parse_toc_select;
+  void function(GstEvent* event, GstGapFlags flags) c_gst_event_set_gap_flags;
+  void function(GstEvent* event, uint groupId) c_gst_event_set_group_id;
+  void function(GstEvent* event, long offset) c_gst_event_set_running_time_offset;
+  void function(GstEvent* event, GstClockTime interval) c_gst_event_set_seek_trickmode_interval;
+  void function(GstEvent* event, uint seqnum) c_gst_event_set_seqnum;
+  void function(GstEvent* event, GstStream* stream) c_gst_event_set_stream;
+  void function(GstEvent* event, GstStreamFlags flags) c_gst_event_set_stream_flags;
+  GstStructure* function(GstEvent* event) c_gst_event_writable_structure;
+
+  // FlagSet
+  extern(C) GType function() c_gst_flagset_get_type;
+  GType function(GType flagsType) c_gst_flagset_register;
+
+  // Fraction
+  extern(C) GType function() c_gst_fraction_get_type;
+
+  // FractionRange
+  extern(C) GType function() c_gst_fraction_range_get_type;
+
+  // GhostPad
+  extern(C) GType function() c_gst_ghost_pad_get_type;
+  GstPad* function(const(char)* name, GstPad* target) c_gst_ghost_pad_new;
+  GstPad* function(const(char)* name, GstPad* target, GstPadTemplate* templ) c_gst_ghost_pad_new_from_template;
+  GstPad* function(const(char)* name, GstPadDirection dir) c_gst_ghost_pad_new_no_target;
+  GstPad* function(const(char)* name, GstPadTemplate* templ) c_gst_ghost_pad_new_no_target_from_template;
+  bool function(GstPad* pad, GstObject* parent, GstPadMode mode, bool active) c_gst_ghost_pad_activate_mode_default;
+  bool function(GstPad* pad, GstObject* parent, GstPadMode mode, bool active) c_gst_ghost_pad_internal_activate_mode_default;
+  bool function(GstGhostPad* gpad) c_gst_ghost_pad_construct;
+  GstPad* function(GstGhostPad* gpad) c_gst_ghost_pad_get_target;
+  bool function(GstGhostPad* gpad, GstPad* newtarget) c_gst_ghost_pad_set_target;
+
+  // Int64Range
+  extern(C) GType function() c_gst_int64_range_get_type;
+
+  // IntRange
+  extern(C) GType function() c_gst_int_range_get_type;
+
+  // Iterator
+  extern(C) GType function() c_gst_iterator_get_type;
+  GstIterator* function(uint size, GType type, GMutex* lock, uint* masterCookie, GstIteratorCopyFunction copy, GstIteratorNextFunction next, GstIteratorItemFunction item, GstIteratorResyncFunction resync, GstIteratorFreeFunction free) c_gst_iterator_new;
+  GstIterator* function(GType type, GMutex* lock, uint* masterCookie, GList** list, ObjectC* owner, GstIteratorItemFunction item) c_gst_iterator_new_list;
+  GstIterator* function(GType type, const(GValue)* object) c_gst_iterator_new_single;
+  GstIterator* function(const(GstIterator)* it) c_gst_iterator_copy;
+  GstIterator* function(GstIterator* it, GCompareFunc func, const(GValue)* userData) c_gst_iterator_filter;
+  bool function(GstIterator* it, GCompareFunc func, GValue* elem, void* userData) c_gst_iterator_find_custom;
+  GstIteratorResult function(GstIterator* it, GstIteratorFoldFunction func, GValue* ret, void* userData) c_gst_iterator_fold;
+  GstIteratorResult function(GstIterator* it, GstIteratorForeachFunction func, void* userData) c_gst_iterator_foreach;
+  void function(GstIterator* it) c_gst_iterator_free;
+  GstIteratorResult function(GstIterator* it, GValue* elem) c_gst_iterator_next;
+  void function(GstIterator* it, GstIterator* other) c_gst_iterator_push;
+  void function(GstIterator* it) c_gst_iterator_resync;
+
+  // Memory
+  extern(C) GType function() c_gst_memory_get_type;
+  GstMemory* function(GstMemoryFlags flags, void* data, size_t maxsize, size_t offset, size_t size, void* userData, GDestroyNotify notify) c_gst_memory_new_wrapped;
+  GstMemory* function(GstMemory* mem, ptrdiff_t offset, ptrdiff_t size) c_gst_memory_copy;
+  size_t function(GstMemory* mem, size_t* offset, size_t* maxsize) c_gst_memory_get_sizes;
+  void function(GstMemory* mem, GstMemoryFlags flags, GstAllocator* allocator, GstMemory* parent, size_t maxsize, size_t align_, size_t offset, size_t size) c_gst_memory_init;
+  bool function(GstMemory* mem1, GstMemory* mem2, size_t* offset) c_gst_memory_is_span;
+  bool function(GstMemory* mem, const(char)* memType) c_gst_memory_is_type;
+  GstMemory* function(GstMemory* mem, GstMapInfo* info, GstMapFlags flags) c_gst_memory_make_mapped;
+  bool function(GstMemory* mem, GstMapInfo* info, GstMapFlags flags) c_gst_memory_map;
+  void function(GstMemory* mem, ptrdiff_t offset, size_t size) c_gst_memory_resize;
+  GstMemory* function(GstMemory* mem, ptrdiff_t offset, ptrdiff_t size) c_gst_memory_share;
+  void function(GstMemory* mem, GstMapInfo* info) c_gst_memory_unmap;
+
+  // Message
+  extern(C) GType function() c_gst_message_get_type;
+  GstMessage* function(GstObject* src, GstStructure* structure) c_gst_message_new_application;
+  GstMessage* function(GstObject* src, GstClockTime runningTime) c_gst_message_new_async_done;
+  GstMessage* function(GstObject* src) c_gst_message_new_async_start;
+  GstMessage* function(GstObject* src, int percent) c_gst_message_new_buffering;
+  GstMessage* function(GstObject* src, GstClock* clock) c_gst_message_new_clock_lost;
+  GstMessage* function(GstObject* src, GstClock* clock, bool ready) c_gst_message_new_clock_provide;
+  GstMessage* function(GstMessageType type, GstObject* src, GstStructure* structure) c_gst_message_new_custom;
+  GstMessage* function(GstObject* src, GstDevice* device) c_gst_message_new_device_added;
+  GstMessage* function(GstObject* src, GstDevice* device, GstDevice* changedDevice) c_gst_message_new_device_changed;
+  GstMessage* function(GstObject* src, GstDevice* device) c_gst_message_new_device_removed;
+  GstMessage* function(GstObject* src) c_gst_message_new_duration_changed;
+  GstMessage* function(GstObject* src, GstStructure* structure) c_gst_message_new_element;
+  GstMessage* function(GstObject* src) c_gst_message_new_eos;
+  GstMessage* function(GstObject* src, GError* error, const(char)* debug_) c_gst_message_new_error;
+  GstMessage* function(GstObject* src, GError* error, const(char)* debug_, GstStructure* details) c_gst_message_new_error_with_details;
+  GstMessage* function(GstObject* src, GstContext* context) c_gst_message_new_have_context;
+  GstMessage* function(GstObject* src, GError* error, const(char)* debug_) c_gst_message_new_info;
+  GstMessage* function(GstObject* src, GError* error, const(char)* debug_, GstStructure* details) c_gst_message_new_info_with_details;
+  GstMessage* function(GstObject* src, double rateMultiplier) c_gst_message_new_instant_rate_request;
+  GstMessage* function(GstObject* src) c_gst_message_new_latency;
+  GstMessage* function(GstObject* src, const(char)* contextType) c_gst_message_new_need_context;
+  GstMessage* function(GstObject* src, GstClock* clock) c_gst_message_new_new_clock;
+  GstMessage* function(GstObject* src, GstProgressType type, const(char)* code, const(char)* text) c_gst_message_new_progress;
+  GstMessage* function(GstObject* src, const(char)* propertyName, GValue* val) c_gst_message_new_property_notify;
+  GstMessage* function(GstObject* src, bool live, ulong runningTime, ulong streamTime, ulong timestamp, ulong duration) c_gst_message_new_qos;
+  GstMessage* function(GstObject* src, const(char)* location, GstTagList* tagList, const(GstStructure)* entryStruct) c_gst_message_new_redirect;
+  GstMessage* function(GstObject* src, GstState state) c_gst_message_new_request_state;
+  GstMessage* function(GstObject* src, GstClockTime runningTime) c_gst_message_new_reset_time;
+  GstMessage* function(GstObject* src, GstFormat format, long position) c_gst_message_new_segment_done;
+  GstMessage* function(GstObject* src, GstFormat format, long position) c_gst_message_new_segment_start;
+  GstMessage* function(GstObject* src, GstState oldstate, GstState newstate, GstState pending) c_gst_message_new_state_changed;
+  GstMessage* function(GstObject* src) c_gst_message_new_state_dirty;
+  GstMessage* function(GstObject* src, GstFormat format, ulong amount, double rate, bool flush, bool intermediate, ulong duration, bool eos) c_gst_message_new_step_done;
+  GstMessage* function(GstObject* src, bool active, GstFormat format, ulong amount, double rate, bool flush, bool intermediate) c_gst_message_new_step_start;
+  GstMessage* function(GstObject* src, GstStreamCollection* collection) c_gst_message_new_stream_collection;
+  GstMessage* function(GstObject* src) c_gst_message_new_stream_start;
+  GstMessage* function(GstObject* src, GstStreamStatusType type, GstElement* owner) c_gst_message_new_stream_status;
+  GstMessage* function(GstObject* src, GstStreamCollection* collection) c_gst_message_new_streams_selected;
+  GstMessage* function(GstObject* src, GstStructureChangeType type, GstElement* owner, bool busy) c_gst_message_new_structure_change;
+  GstMessage* function(GstObject* src, GstTagList* tagList) c_gst_message_new_tag;
+  GstMessage* function(GstObject* src, GstToc* toc, bool updated) c_gst_message_new_toc;
+  GstMessage* function(GstObject* src, GError* error, const(char)* debug_) c_gst_message_new_warning;
+  GstMessage* function(GstObject* src, GError* error, const(char)* debug_, GstStructure* details) c_gst_message_new_warning_with_details;
+  void function(GstMessage* message, const(char)* location, GstTagList* tagList, const(GstStructure)* entryStruct) c_gst_message_add_redirect_entry;
+  GstMessage* function(const(GstMessage)* msg) c_gst_message_copy;
+  size_t function(GstMessage* message) c_gst_message_get_num_redirect_entries;
+  uint function(GstMessage* message) c_gst_message_get_seqnum;
+  const(GValue)* function(GstMessage* message) c_gst_message_get_stream_status_object;
+  const(GstStructure)* function(GstMessage* message) c_gst_message_get_structure;
+  bool function(GstMessage* message, const(char)* name) c_gst_message_has_name;
+  void function(GstMessage* message, GstClockTime* runningTime) c_gst_message_parse_async_done;
+  void function(GstMessage* message, int* percent) c_gst_message_parse_buffering;
+  void function(GstMessage* message, GstBufferingMode* mode, int* avgIn, int* avgOut, long* bufferingLeft) c_gst_message_parse_buffering_stats;
+  void function(GstMessage* message, GstClock** clock) c_gst_message_parse_clock_lost;
+  void function(GstMessage* message, GstClock** clock, bool* ready) c_gst_message_parse_clock_provide;
+  bool function(GstMessage* message, const(char*)* contextType) c_gst_message_parse_context_type;
+  void function(GstMessage* message, GstDevice** device) c_gst_message_parse_device_added;
+  void function(GstMessage* message, GstDevice** device, GstDevice** changedDevice) c_gst_message_parse_device_changed;
+  void function(GstMessage* message, GstDevice** device) c_gst_message_parse_device_removed;
+  void function(GstMessage* message, GError** gerror, char** debug_) c_gst_message_parse_error;
+  void function(GstMessage* message, const(GstStructure*)* structure) c_gst_message_parse_error_details;
+  bool function(GstMessage* message, uint* groupId) c_gst_message_parse_group_id;
+  void function(GstMessage* message, GstContext** context) c_gst_message_parse_have_context;
+  void function(GstMessage* message, GError** gerror, char** debug_) c_gst_message_parse_info;
+  void function(GstMessage* message, const(GstStructure*)* structure) c_gst_message_parse_info_details;
+  void function(GstMessage* message, double* rateMultiplier) c_gst_message_parse_instant_rate_request;
+  void function(GstMessage* message, GstClock** clock) c_gst_message_parse_new_clock;
+  void function(GstMessage* message, GstProgressType* type, char** code, char** text) c_gst_message_parse_progress;
+  void function(GstMessage* message, GstObject** object, const(char*)* propertyName, const(GValue*)* propertyValue) c_gst_message_parse_property_notify;
+  void function(GstMessage* message, bool* live, ulong* runningTime, ulong* streamTime, ulong* timestamp, ulong* duration) c_gst_message_parse_qos;
+  void function(GstMessage* message, GstFormat* format, ulong* processed, ulong* dropped) c_gst_message_parse_qos_stats;
+  void function(GstMessage* message, long* jitter, double* proportion, int* quality) c_gst_message_parse_qos_values;
+  void function(GstMessage* message, size_t entryIndex, const(char*)* location, GstTagList** tagList, const(GstStructure*)* entryStruct) c_gst_message_parse_redirect_entry;
+  void function(GstMessage* message, GstState* state) c_gst_message_parse_request_state;
+  void function(GstMessage* message, GstClockTime* runningTime) c_gst_message_parse_reset_time;
+  void function(GstMessage* message, GstFormat* format, long* position) c_gst_message_parse_segment_done;
+  void function(GstMessage* message, GstFormat* format, long* position) c_gst_message_parse_segment_start;
+  void function(GstMessage* message, GstState* oldstate, GstState* newstate, GstState* pending) c_gst_message_parse_state_changed;
+  void function(GstMessage* message, GstFormat* format, ulong* amount, double* rate, bool* flush, bool* intermediate, ulong* duration, bool* eos) c_gst_message_parse_step_done;
+  void function(GstMessage* message, bool* active, GstFormat* format, ulong* amount, double* rate, bool* flush, bool* intermediate) c_gst_message_parse_step_start;
+  void function(GstMessage* message, GstStreamCollection** collection) c_gst_message_parse_stream_collection;
+  void function(GstMessage* message, GstStreamStatusType* type, GstElement** owner) c_gst_message_parse_stream_status;
+  void function(GstMessage* message, GstStreamCollection** collection) c_gst_message_parse_streams_selected;
+  void function(GstMessage* message, GstStructureChangeType* type, GstElement** owner, bool* busy) c_gst_message_parse_structure_change;
+  void function(GstMessage* message, GstTagList** tagList) c_gst_message_parse_tag;
+  void function(GstMessage* message, GstToc** toc, bool* updated) c_gst_message_parse_toc;
+  void function(GstMessage* message, GError** gerror, char** debug_) c_gst_message_parse_warning;
+  void function(GstMessage* message, const(GstStructure*)* structure) c_gst_message_parse_warning_details;
+  void function(GstMessage* message, GstBufferingMode mode, int avgIn, int avgOut, long bufferingLeft) c_gst_message_set_buffering_stats;
+  void function(GstMessage* message, uint groupId) c_gst_message_set_group_id;
+  void function(GstMessage* message, GstFormat format, ulong processed, ulong dropped) c_gst_message_set_qos_stats;
+  void function(GstMessage* message, long jitter, double proportion, int quality) c_gst_message_set_qos_values;
+  void function(GstMessage* message, uint seqnum) c_gst_message_set_seqnum;
+  void function(GstMessage* message, const(GValue)* object) c_gst_message_set_stream_status_object;
+  void function(GstMessage* message, GstStream* stream) c_gst_message_streams_selected_add;
+  uint function(GstMessage* message) c_gst_message_streams_selected_get_size;
+  GstStream* function(GstMessage* message, uint idx) c_gst_message_streams_selected_get_stream;
+  GstStructure* function(GstMessage* message) c_gst_message_writable_structure;
+  bool function(GstMessage** oldMessage, GstMessage* newMessage) c_gst_message_replace;
+
+  // Meta
+  int function(const(GstMeta)* meta1, const(GstMeta)* meta2) c_gst_meta_compare_seqnum;
+  ulong function(const(GstMeta)* meta) c_gst_meta_get_seqnum;
+  bool function(const(GstMeta)* meta, GstByteArrayInterface* data) c_gst_meta_serialize;
+  bool function(const(GstMeta)* meta, GByteArray* data) c_gst_meta_serialize_simple;
+  const(char*)* function(GType api) c_gst_meta_api_type_get_tags;
+  bool function(GType api, GQuark tag) c_gst_meta_api_type_has_tag;
+  GType function(const(char)* api, const(char*)* tags) c_gst_meta_api_type_register;
+  GstMeta* function(GstBuffer* buffer, const(ubyte)* data, size_t size, uint* consumed) c_gst_meta_deserialize;
+  const(GstMetaInfo)* function(const(char)* impl) c_gst_meta_get_info;
+  const(GstMetaInfo)* function(GType api, const(char)* impl, size_t size, GstMetaInitFunction initFunc, GstMetaFreeFunction freeFunc, GstMetaTransformFunction transformFunc) c_gst_meta_register;
+  const(GstMetaInfo)* function(const(char)* name, const(char*)* tags, GstCustomMetaTransformFunction transformFunc, void* userData, GDestroyNotify destroyData) c_gst_meta_register_custom;
+  const(GstMetaInfo)* function(const(char)* name) c_gst_meta_register_custom_simple;
+
+  // MetaInfo
+  bool function(const(GstMetaInfo)* info) c_gst_meta_info_is_custom;
+  const(GstMetaInfo)* function(GstMetaInfo* info) c_gst_meta_info_register;
+  GstMetaInfo* function(GType api, const(char)* impl, size_t size) c_gst_meta_info_new;
+
+  // MiniObject
+  extern(C) GType function() c_gst_mini_object_get_type;
+  void function(GstMiniObject* object, GstMiniObject* parent) c_gst_mini_object_add_parent;
+  GstMiniObject* function(const(GstMiniObject)* miniObject) c_gst_mini_object_copy;
+  void* function(GstMiniObject* object, GQuark quark) c_gst_mini_object_get_qdata;
+  void function(GstMiniObject* miniObject, uint flags, GType type, GstMiniObjectCopyFunction copyFunc, GstMiniObjectDisposeFunction disposeFunc, GstMiniObjectFreeFunction freeFunc) c_gst_mini_object_init;
+  bool function(const(GstMiniObject)* miniObject) c_gst_mini_object_is_writable;
+  bool function(GstMiniObject* object, GstLockFlags flags) c_gst_mini_object_lock;
+  GstMiniObject* function(GstMiniObject* miniObject) c_gst_mini_object_make_writable;
+  GstMiniObject* function(GstMiniObject* miniObject) c_gst_mini_object_ref;
+  void function(GstMiniObject* object, GstMiniObject* parent) c_gst_mini_object_remove_parent;
+  void function(GstMiniObject* object, GQuark quark, void* data, GDestroyNotify destroy) c_gst_mini_object_set_qdata;
+  void* function(GstMiniObject* object, GQuark quark) c_gst_mini_object_steal_qdata;
+  void function(GstMiniObject* object, GstLockFlags flags) c_gst_mini_object_unlock;
+  void function(GstMiniObject* miniObject) c_gst_mini_object_unref;
+  void function(GstMiniObject* object, GstMiniObjectNotify notify, void* data) c_gst_mini_object_weak_ref;
+  void function(GstMiniObject* object, GstMiniObjectNotify notify, void* data) c_gst_mini_object_weak_unref;
+  bool function(GstMiniObject** olddata, GstMiniObject* newdata) c_gst_mini_object_replace;
+  GstMiniObject* function(GstMiniObject** olddata) c_gst_mini_object_steal;
+  bool function(GstMiniObject** olddata, GstMiniObject* newdata) c_gst_mini_object_take;
+
+  // ObjectGst
+  extern(C) GType function() c_gst_object_get_type;
+  bool function(GList* list, const(char)* name) c_gst_object_check_uniqueness;
+  void function(ObjectC* object, GstObject* orig, GParamSpec* pspec, char** excludedProps) c_gst_object_default_deep_notify;
+  void* function(void* object) c_gst_object_ref_sink;
+  bool function(GstObject** oldobj, GstObject* newobj) c_gst_object_replace;
+  bool function(GstObject* object, GstControlBinding* binding) c_gst_object_add_control_binding;
+  void function(GstObject* source, const(GError)* error, const(char)* debug_) c_gst_object_default_error;
+  GstControlBinding* function(GstObject* object, const(char)* propertyName) c_gst_object_get_control_binding;
+  GstClockTime function(GstObject* object) c_gst_object_get_control_rate;
+  bool function(GstObject* object, const(char)* propertyName, GstClockTime timestamp, GstClockTime interval, uint nValues, GValue* values) c_gst_object_get_g_value_array;
+  char* function(GstObject* object) c_gst_object_get_name;
+  GstObject* function(GstObject* object) c_gst_object_get_parent;
+  char* function(GstObject* object) c_gst_object_get_path_string;
+  GValue* function(GstObject* object, const(char)* propertyName, GstClockTime timestamp) c_gst_object_get_value;
+  bool function(GstObject* object, const(char)* propertyName, GstClockTime timestamp, GstClockTime interval, uint nValues, void* values) c_gst_object_get_value_array;
+  bool function(GstObject* object) c_gst_object_has_active_control_bindings;
+  bool function(GstObject* object, GstObject* ancestor) c_gst_object_has_ancestor;
+  bool function(GstObject* object, GstObject* ancestor) c_gst_object_has_as_ancestor;
+  bool function(GstObject* object, GstObject* parent) c_gst_object_has_as_parent;
+  GstObject* function(GstObject* object) c_gst_object_ref;
+  bool function(GstObject* object, GstControlBinding* binding) c_gst_object_remove_control_binding;
+  void function(GstObject* object, const(char)* propertyName, bool disabled) c_gst_object_set_control_binding_disabled;
+  void function(GstObject* object, bool disabled) c_gst_object_set_control_bindings_disabled;
+  void function(GstObject* object, GstClockTime controlRate) c_gst_object_set_control_rate;
+  bool function(GstObject* object, const(char)* name) c_gst_object_set_name;
+  bool function(GstObject* object, GstObject* parent) c_gst_object_set_parent;
+  GstClockTime function(GstObject* object) c_gst_object_suggest_next_sync;
+  bool function(GstObject* object, GstClockTime timestamp) c_gst_object_sync_values;
+  void function(GstObject* object) c_gst_object_unparent;
+  void function(GstObject* object) c_gst_object_unref;
+
+  // Pad
+  extern(C) GType function() c_gst_pad_get_type;
+  GstPad* function(const(char)* name, GstPadDirection direction) c_gst_pad_new;
+  GstPad* function(GstStaticPadTemplate* templ, const(char)* name) c_gst_pad_new_from_static_template;
+  GstPad* function(GstPadTemplate* templ, const(char)* name) c_gst_pad_new_from_template;
+  const(char)* function(GstPadLinkReturn ret) c_gst_pad_link_get_name;
+  bool function(GstPad* pad, GstPadMode mode, bool active) c_gst_pad_activate_mode;
+  gulong function(GstPad* pad, GstPadProbeType mask, GstPadProbeCallback callback, void* userData, GDestroyNotify destroyData) c_gst_pad_add_probe;
+  bool function(GstPad* srcpad, GstPad* sinkpad) c_gst_pad_can_link;
+  GstFlowReturn function(GstPad* pad, GstBuffer* buffer) c_gst_pad_chain;
+  GstFlowReturn function(GstPad* pad, GstBufferList* list) c_gst_pad_chain_list;
+  bool function(GstPad* pad) c_gst_pad_check_reconfigure;
+  char* function(GstPad* pad, GstElement* parent, const(char)* streamId) c_gst_pad_create_stream_id;
+  char* function(GstPad* pad, GstElement* parent, const(char)* streamId,  ...) c_gst_pad_create_stream_id_printf;
+  char* function(GstPad* pad, GstElement* parent, const(char)* streamId, void* varArgs) c_gst_pad_create_stream_id_printf_valist;
+  bool function(GstPad* pad, GstObject* parent, GstEvent* event) c_gst_pad_event_default;
+  bool function(GstPad* pad, GstPadForwardFunction forward, void* userData) c_gst_pad_forward;
+  GstCaps* function(GstPad* pad) c_gst_pad_get_allowed_caps;
+  GstCaps* function(GstPad* pad) c_gst_pad_get_current_caps;
+  GstPadDirection function(GstPad* pad) c_gst_pad_get_direction;
+  void* function(GstPad* pad) c_gst_pad_get_element_private;
+  GstFlowReturn function(GstPad* pad) c_gst_pad_get_last_flow_return;
+  long function(GstPad* pad) c_gst_pad_get_offset;
+  GstPadTemplate* function(GstPad* pad) c_gst_pad_get_pad_template;
+  GstCaps* function(GstPad* pad) c_gst_pad_get_pad_template_caps;
+  GstElement* function(GstPad* pad) c_gst_pad_get_parent_element;
+  GstPad* function(GstPad* pad) c_gst_pad_get_peer;
+  GstFlowReturn function(GstPad* pad, ulong offset, uint size, GstBuffer** buffer) c_gst_pad_get_range;
+  GstPad* function(GstPad* pad) c_gst_pad_get_single_internal_link;
+  GstEvent* function(GstPad* pad, GstEventType eventType, uint idx) c_gst_pad_get_sticky_event;
+  GstStream* function(GstPad* pad) c_gst_pad_get_stream;
+  char* function(GstPad* pad) c_gst_pad_get_stream_id;
+  GstTaskState function(GstPad* pad) c_gst_pad_get_task_state;
+  bool function(GstPad* pad) c_gst_pad_has_current_caps;
+  bool function(GstPad* pad) c_gst_pad_is_active;
+  bool function(GstPad* pad) c_gst_pad_is_blocked;
+  bool function(GstPad* pad) c_gst_pad_is_blocking;
+  bool function(GstPad* pad) c_gst_pad_is_linked;
+  GstIterator* function(GstPad* pad) c_gst_pad_iterate_internal_links;
+  GstIterator* function(GstPad* pad, GstObject* parent) c_gst_pad_iterate_internal_links_default;
+  GstPadLinkReturn function(GstPad* srcpad, GstPad* sinkpad) c_gst_pad_link;
+  GstPadLinkReturn function(GstPad* srcpad, GstPad* sinkpad, GstPadLinkCheck flags) c_gst_pad_link_full;
+  bool function(GstPad* src, GstPad* sink) c_gst_pad_link_maybe_ghosting;
+  bool function(GstPad* src, GstPad* sink, GstPadLinkCheck flags) c_gst_pad_link_maybe_ghosting_full;
+  void function(GstPad* pad) c_gst_pad_mark_reconfigure;
+  bool function(GstPad* pad) c_gst_pad_needs_reconfigure;
+  bool function(GstPad* pad) c_gst_pad_pause_task;
+  bool function(GstPad* pad, GstQuery* query) c_gst_pad_peer_query;
+  bool function(GstPad* pad, GstCaps* caps) c_gst_pad_peer_query_accept_caps;
+  GstCaps* function(GstPad* pad, GstCaps* filter) c_gst_pad_peer_query_caps;
+  bool function(GstPad* pad, GstFormat srcFormat, long srcVal, GstFormat destFormat, long* destVal) c_gst_pad_peer_query_convert;
+  bool function(GstPad* pad, GstFormat format, long* duration) c_gst_pad_peer_query_duration;
+  bool function(GstPad* pad, GstFormat format, long* cur) c_gst_pad_peer_query_position;
+  bool function(GstPad* pad, GstQuery* query) c_gst_pad_proxy_query_accept_caps;
+  bool function(GstPad* pad, GstQuery* query) c_gst_pad_proxy_query_caps;
+  GstFlowReturn function(GstPad* pad, ulong offset, uint size, GstBuffer** buffer) c_gst_pad_pull_range;
+  GstFlowReturn function(GstPad* pad, GstBuffer* buffer) c_gst_pad_push;
+  bool function(GstPad* pad, GstEvent* event) c_gst_pad_push_event;
+  GstFlowReturn function(GstPad* pad, GstBufferList* list) c_gst_pad_push_list;
+  bool function(GstPad* pad, GstQuery* query) c_gst_pad_query;
+  bool function(GstPad* pad, GstCaps* caps) c_gst_pad_query_accept_caps;
+  GstCaps* function(GstPad* pad, GstCaps* filter) c_gst_pad_query_caps;
+  bool function(GstPad* pad, GstFormat srcFormat, long srcVal, GstFormat destFormat, long* destVal) c_gst_pad_query_convert;
+  bool function(GstPad* pad, GstObject* parent, GstQuery* query) c_gst_pad_query_default;
+  bool function(GstPad* pad, GstFormat format, long* duration) c_gst_pad_query_duration;
+  bool function(GstPad* pad, GstFormat format, long* cur) c_gst_pad_query_position;
+  void function(GstPad* pad, gulong id) c_gst_pad_remove_probe;
+  bool function(GstPad* pad, GstEvent* event) c_gst_pad_send_event;
+  void function(GstPad* pad, GstPadActivateFunction activate, void* userData, GDestroyNotify notify) c_gst_pad_set_activate_function_full;
+  void function(GstPad* pad, GstPadActivateModeFunction activatemode, void* userData, GDestroyNotify notify) c_gst_pad_set_activatemode_function_full;
+  bool function(GstPad* pad, bool active) c_gst_pad_set_active;
+  void function(GstPad* pad, GstPadChainFunction chain, void* userData, GDestroyNotify notify) c_gst_pad_set_chain_function_full;
+  void function(GstPad* pad, GstPadChainListFunction chainlist, void* userData, GDestroyNotify notify) c_gst_pad_set_chain_list_function_full;
+  void function(GstPad* pad, void* priv) c_gst_pad_set_element_private;
+  void function(GstPad* pad, GstPadEventFullFunction event, void* userData, GDestroyNotify notify) c_gst_pad_set_event_full_function_full;
+  void function(GstPad* pad, GstPadEventFunction event, void* userData, GDestroyNotify notify) c_gst_pad_set_event_function_full;
+  void function(GstPad* pad, GstPadGetRangeFunction get, void* userData, GDestroyNotify notify) c_gst_pad_set_getrange_function_full;
+  void function(GstPad* pad, GstPadIterIntLinkFunction iterintlink, void* userData, GDestroyNotify notify) c_gst_pad_set_iterate_internal_links_function_full;
+  void function(GstPad* pad, GstPadLinkFunction link, void* userData, GDestroyNotify notify) c_gst_pad_set_link_function_full;
+  void function(GstPad* pad, long offset) c_gst_pad_set_offset;
+  void function(GstPad* pad, GstPadQueryFunction query, void* userData, GDestroyNotify notify) c_gst_pad_set_query_function_full;
+  void function(GstPad* pad, GstPadUnlinkFunction unlink, void* userData, GDestroyNotify notify) c_gst_pad_set_unlink_function_full;
+  bool function(GstPad* pad, GstTaskFunction func, void* userData, GDestroyNotify notify) c_gst_pad_start_task;
+  void function(GstPad* pad, GstPadStickyEventsForeachFunction foreachFunc, void* userData) c_gst_pad_sticky_events_foreach;
+  bool function(GstPad* pad) c_gst_pad_stop_task;
+  GstFlowReturn function(GstPad* pad, GstEvent* event) c_gst_pad_store_sticky_event;
+  bool function(GstPad* srcpad, GstPad* sinkpad) c_gst_pad_unlink;
+  void function(GstPad* pad) c_gst_pad_use_fixed_caps;
+
+  // PadProbeInfo
+  GstBuffer* function(GstPadProbeInfo* info) c_gst_pad_probe_info_get_buffer;
+  GstBufferList* function(GstPadProbeInfo* info) c_gst_pad_probe_info_get_buffer_list;
+  GstEvent* function(GstPadProbeInfo* info) c_gst_pad_probe_info_get_event;
+  GstQuery* function(GstPadProbeInfo* info) c_gst_pad_probe_info_get_query;
+
+  // PadTemplate
+  extern(C) GType function() c_gst_pad_template_get_type;
+  GstPadTemplate* function(const(char)* nameTemplate, GstPadDirection direction, GstPadPresence presence, GstCaps* caps) c_gst_pad_template_new;
+  GstPadTemplate* function(GstStaticPadTemplate* padTemplate, GType padType) c_gst_pad_template_new_from_static_pad_template_with_gtype;
+  GstPadTemplate* function(const(char)* nameTemplate, GstPadDirection direction, GstPadPresence presence, GstCaps* caps, GType padType) c_gst_pad_template_new_with_gtype;
+  GstCaps* function(GstPadTemplate* templ) c_gst_pad_template_get_caps;
+  GstCaps* function(GstPadTemplate* templ) c_gst_pad_template_get_documentation_caps;
+  void function(GstPadTemplate* templ, GstPad* pad) c_gst_pad_template_pad_created;
+  void function(GstPadTemplate* templ, GstCaps* caps) c_gst_pad_template_set_documentation_caps;
+
+  // ParamArray
+  extern(C) GType function() c_gst_param_spec_array_get_type;
+
+  // ParamFraction
+  extern(C) GType function() c_gst_param_spec_fraction_get_type;
+
+  // ParentBufferMeta
+  const(GstMetaInfo)* function() c_gst_parent_buffer_meta_get_info;
+
+  // ParseContext
+  extern(C) GType function() c_gst_parse_context_get_type;
+  GstParseContext* function() c_gst_parse_context_new;
+  GstParseContext* function(const(GstParseContext)* context) c_gst_parse_context_copy;
+  void function(GstParseContext* context) c_gst_parse_context_free;
+  char** function(GstParseContext* context) c_gst_parse_context_get_missing_elements;
+
+  // Pipeline
+  extern(C) GType function() c_gst_pipeline_get_type;
+  GstElement* function(const(char)* name) c_gst_pipeline_new;
+  void function(GstPipeline* pipeline) c_gst_pipeline_auto_clock;
+  bool function(GstPipeline* pipeline) c_gst_pipeline_get_auto_flush_bus;
+  GstBus* function(GstPipeline* pipeline) c_gst_pipeline_get_bus;
+  GstClock* function(GstPipeline* pipeline) c_gst_pipeline_get_clock;
+  GstClockTime function(GstPipeline* pipeline) c_gst_pipeline_get_configured_latency;
+  GstClockTime function(GstPipeline* pipeline) c_gst_pipeline_get_delay;
+  GstClockTime function(GstPipeline* pipeline) c_gst_pipeline_get_latency;
+  GstClock* function(GstPipeline* pipeline) c_gst_pipeline_get_pipeline_clock;
+  bool function(GstPipeline* pipeline) c_gst_pipeline_is_live;
+  void function(GstPipeline* pipeline, bool autoFlush) c_gst_pipeline_set_auto_flush_bus;
+  bool function(GstPipeline* pipeline, GstClock* clock) c_gst_pipeline_set_clock;
+  void function(GstPipeline* pipeline, GstClockTime delay) c_gst_pipeline_set_delay;
+  void function(GstPipeline* pipeline, GstClockTime latency) c_gst_pipeline_set_latency;
+  void function(GstPipeline* pipeline, GstClock* clock) c_gst_pipeline_use_clock;
+
+  // Plugin
+  extern(C) GType function() c_gst_plugin_get_type;
+  void function(GList* list) c_gst_plugin_list_free;
+  GstPlugin* function(const(char)* name) c_gst_plugin_load_by_name;
+  GstPlugin* function(const(char)* filename, GError** _err) c_gst_plugin_load_file;
+  bool function(int majorVersion, int minorVersion, const(char)* name, const(char)* description, GstPluginInitFunc initFunc, const(char)* version_, const(char)* license, const(char)* source, const(char)* package_, const(char)* origin) c_gst_plugin_register_static;
+  bool function(int majorVersion, int minorVersion, const(char)* name, const(char)* description, GstPluginInitFullFunc initFullFunc, const(char)* version_, const(char)* license, const(char)* source, const(char)* package_, const(char)* origin, void* userData) c_gst_plugin_register_static_full;
+  void function(GstPlugin* plugin, const(char*)* envVars, const(char*)* paths, const(char*)* names, GstPluginDependencyFlags flags) c_gst_plugin_add_dependency;
+  void function(GstPlugin* plugin, const(char)* envVars, const(char)* paths, const(char)* names, GstPluginDependencyFlags flags) c_gst_plugin_add_dependency_simple;
+  void function(GstPlugin* plugin, const(char)* message) c_gst_plugin_add_status_error;
+  void function(GstPlugin* plugin, const(char)* message) c_gst_plugin_add_status_info;
+  void function(GstPlugin* plugin, const(char)* message) c_gst_plugin_add_status_warning;
+  const(GstStructure)* function(GstPlugin* plugin) c_gst_plugin_get_cache_data;
+  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_description;
+  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_filename;
+  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_license;
+  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_name;
+  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_origin;
+  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_package;
+  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_release_date_string;
+  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_source;
+  char** function(GstPlugin* plugin) c_gst_plugin_get_status_errors;
+  char** function(GstPlugin* plugin) c_gst_plugin_get_status_infos;
+  char** function(GstPlugin* plugin) c_gst_plugin_get_status_warnings;
+  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_version;
+  bool function(GstPlugin* plugin) c_gst_plugin_is_loaded;
+  GstPlugin* function(GstPlugin* plugin) c_gst_plugin_load;
+  void function(GstPlugin* plugin, GstStructure* cacheData) c_gst_plugin_set_cache_data;
+
+  // PluginFeature
+  extern(C) GType function() c_gst_plugin_feature_get_type;
+  GList* function(GList* list) c_gst_plugin_feature_list_copy;
+  void function(GList* list) c_gst_plugin_feature_list_debug;
+  void function(GList* list) c_gst_plugin_feature_list_free;
+  int function(const(void)* p1, const(void)* p2) c_gst_plugin_feature_rank_compare_func;
+  bool function(GstPluginFeature* feature, uint minMajor, uint minMinor, uint minMicro) c_gst_plugin_feature_check_version;
+  GstPlugin* function(GstPluginFeature* feature) c_gst_plugin_feature_get_plugin;
+  const(char)* function(GstPluginFeature* feature) c_gst_plugin_feature_get_plugin_name;
+  uint function(GstPluginFeature* feature) c_gst_plugin_feature_get_rank;
+  GstPluginFeature* function(GstPluginFeature* feature) c_gst_plugin_feature_load;
+  void function(GstPluginFeature* feature, uint rank) c_gst_plugin_feature_set_rank;
+
+  // Poll
+  bool function(GstPoll* set, GstPollFD* fd) c_gst_poll_add_fd;
+  bool function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_can_read;
+  bool function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_can_write;
+  bool function(GstPoll* set, GstPollFD* fd, bool active) c_gst_poll_fd_ctl_pri;
+  bool function(GstPoll* set, GstPollFD* fd, bool active) c_gst_poll_fd_ctl_read;
+  bool function(GstPoll* set, GstPollFD* fd, bool active) c_gst_poll_fd_ctl_write;
+  bool function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_has_closed;
+  bool function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_has_error;
+  bool function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_has_pri;
+  void function(GstPoll* set, GstPollFD* fd) c_gst_poll_fd_ignored;
+  void function(GstPoll* set) c_gst_poll_free;
+  void function(GstPoll* set, GPollFD* fd) c_gst_poll_get_read_gpollfd;
+  bool function(GstPoll* set) c_gst_poll_read_control;
+  bool function(GstPoll* set, GstPollFD* fd) c_gst_poll_remove_fd;
+  void function(GstPoll* set) c_gst_poll_restart;
+  bool function(GstPoll* set, bool controllable) c_gst_poll_set_controllable;
+  void function(GstPoll* set, bool flushing) c_gst_poll_set_flushing;
+  int function(GstPoll* set, GstClockTime timeout) c_gst_poll_wait;
+  bool function(GstPoll* set) c_gst_poll_write_control;
+  GstPoll* function(bool controllable) c_gst_poll_new;
+  GstPoll* function() c_gst_poll_new_timer;
+
+  // PollFD
+  void function(GstPollFD* fd) c_gst_poll_fd_init;
+
+  // Preset
+  extern(C) GType function() c_gst_preset_get_type;
+  const(char)* function() c_gst_preset_get_app_dir;
+  bool function(const(char)* appDir) c_gst_preset_set_app_dir;
+  bool function(GstPreset* preset, const(char)* name) c_gst_preset_delete_preset;
+  bool function(GstPreset* preset, const(char)* name, const(char)* tag, char** value) c_gst_preset_get_meta;
+  char** function(GstPreset* preset) c_gst_preset_get_preset_names;
+  char** function(GstPreset* preset) c_gst_preset_get_property_names;
+  bool function(GstPreset* preset) c_gst_preset_is_editable;
+  bool function(GstPreset* preset, const(char)* name) c_gst_preset_load_preset;
+  bool function(GstPreset* preset, const(char)* oldName, const(char)* newName) c_gst_preset_rename_preset;
+  bool function(GstPreset* preset, const(char)* name) c_gst_preset_save_preset;
+  bool function(GstPreset* preset, const(char)* name, const(char)* tag, const(char)* value) c_gst_preset_set_meta;
+
+  // Promise
+  extern(C) GType function() c_gst_promise_get_type;
+  GstPromise* function() c_gst_promise_new;
+  GstPromise* function(GstPromiseChangeFunc func, void* userData, GDestroyNotify notify) c_gst_promise_new_with_change_func;
+  void function(GstPromise* promise) c_gst_promise_expire;
+  const(GstStructure)* function(GstPromise* promise) c_gst_promise_get_reply;
+  void function(GstPromise* promise) c_gst_promise_interrupt;
+  void function(GstPromise* promise, GstStructure* s) c_gst_promise_reply;
+  GstPromiseResult function(GstPromise* promise) c_gst_promise_wait;
+
+  // ProtectionMeta
+  const(GstMetaInfo)* function() c_gst_protection_meta_get_info;
+
+  // ProxyPad
+  extern(C) GType function() c_gst_proxy_pad_get_type;
+  GstFlowReturn function(GstPad* pad, GstObject* parent, GstBuffer* buffer) c_gst_proxy_pad_chain_default;
+  GstFlowReturn function(GstPad* pad, GstObject* parent, GstBufferList* list) c_gst_proxy_pad_chain_list_default;
+  GstFlowReturn function(GstPad* pad, GstObject* parent, ulong offset, uint size, GstBuffer** buffer) c_gst_proxy_pad_getrange_default;
+  GstIterator* function(GstPad* pad, GstObject* parent) c_gst_proxy_pad_iterate_internal_links_default;
+  GstProxyPad* function(GstProxyPad* pad) c_gst_proxy_pad_get_internal;
+
+  // Query
+  extern(C) GType function() c_gst_query_get_type;
+  GstQuery* function(GstCaps* caps) c_gst_query_new_accept_caps;
+  GstQuery* function(GstCaps* caps, bool needPool) c_gst_query_new_allocation;
+  GstQuery* function() c_gst_query_new_bitrate;
+  GstQuery* function(GstFormat format) c_gst_query_new_buffering;
+  GstQuery* function(GstCaps* filter) c_gst_query_new_caps;
+  GstQuery* function(const(char)* contextType) c_gst_query_new_context;
+  GstQuery* function(GstFormat srcFormat, long value, GstFormat destFormat) c_gst_query_new_convert;
+  GstQuery* function(GstQueryType type, GstStructure* structure) c_gst_query_new_custom;
+  GstQuery* function() c_gst_query_new_drain;
+  GstQuery* function(GstFormat format) c_gst_query_new_duration;
+  GstQuery* function() c_gst_query_new_formats;
+  GstQuery* function() c_gst_query_new_latency;
+  GstQuery* function(GstFormat format) c_gst_query_new_position;
+  GstQuery* function() c_gst_query_new_scheduling;
+  GstQuery* function(GstFormat format) c_gst_query_new_seeking;
+  GstQuery* function(GstFormat format) c_gst_query_new_segment;
+  GstQuery* function() c_gst_query_new_selectable;
+  GstQuery* function() c_gst_query_new_uri;
+  void function(GstQuery* query, GType api, const(GstStructure)* params) c_gst_query_add_allocation_meta;
+  void function(GstQuery* query, GstAllocator* allocator, const(GstAllocationParams)* params) c_gst_query_add_allocation_param;
+  void function(GstQuery* query, GstBufferPool* pool, uint size, uint minBuffers, uint maxBuffers) c_gst_query_add_allocation_pool;
+  bool function(GstQuery* query, long start, long stop) c_gst_query_add_buffering_range;
+  void function(GstQuery* query, GstPadMode mode) c_gst_query_add_scheduling_mode;
+  bool function(GstQuery* query, GType api, uint* index) c_gst_query_find_allocation_meta;
+  uint function(GstQuery* query) c_gst_query_get_n_allocation_metas;
+  uint function(GstQuery* query) c_gst_query_get_n_allocation_params;
+  uint function(GstQuery* query) c_gst_query_get_n_allocation_pools;
+  uint function(GstQuery* query) c_gst_query_get_n_buffering_ranges;
+  uint function(GstQuery* query) c_gst_query_get_n_scheduling_modes;
+  const(GstStructure)* function(GstQuery* query) c_gst_query_get_structure;
+  bool function(GstQuery* query, GstPadMode mode) c_gst_query_has_scheduling_mode;
+  bool function(GstQuery* query, GstPadMode mode, GstSchedulingFlags flags) c_gst_query_has_scheduling_mode_with_flags;
+  void function(GstQuery* query, GstCaps** caps) c_gst_query_parse_accept_caps;
+  void function(GstQuery* query, bool* result) c_gst_query_parse_accept_caps_result;
+  void function(GstQuery* query, GstCaps** caps, bool* needPool) c_gst_query_parse_allocation;
+  void function(GstQuery* query, uint* nominalBitrate) c_gst_query_parse_bitrate;
+  void function(GstQuery* query, bool* busy, int* percent) c_gst_query_parse_buffering_percent;
+  void function(GstQuery* query, GstFormat* format, long* start, long* stop, long* estimatedTotal) c_gst_query_parse_buffering_range;
+  void function(GstQuery* query, GstBufferingMode* mode, int* avgIn, int* avgOut, long* bufferingLeft) c_gst_query_parse_buffering_stats;
+  void function(GstQuery* query, GstCaps** filter) c_gst_query_parse_caps;
+  void function(GstQuery* query, GstCaps** caps) c_gst_query_parse_caps_result;
+  void function(GstQuery* query, GstContext** context) c_gst_query_parse_context;
+  bool function(GstQuery* query, const(char*)* contextType) c_gst_query_parse_context_type;
+  void function(GstQuery* query, GstFormat* srcFormat, long* srcValue, GstFormat* destFormat, long* destValue) c_gst_query_parse_convert;
+  void function(GstQuery* query, GstFormat* format, long* duration) c_gst_query_parse_duration;
+  void function(GstQuery* query, bool* live, GstClockTime* minLatency, GstClockTime* maxLatency) c_gst_query_parse_latency;
+  void function(GstQuery* query, uint* nFormats) c_gst_query_parse_n_formats;
+  GType function(GstQuery* query, uint index, const(GstStructure*)* params) c_gst_query_parse_nth_allocation_meta;
+  void function(GstQuery* query, uint index, GstAllocator** allocator, GstAllocationParams* params) c_gst_query_parse_nth_allocation_param;
+  void function(GstQuery* query, uint index, GstBufferPool** pool, uint* size, uint* minBuffers, uint* maxBuffers) c_gst_query_parse_nth_allocation_pool;
+  bool function(GstQuery* query, uint index, long* start, long* stop) c_gst_query_parse_nth_buffering_range;
+  void function(GstQuery* query, uint nth, GstFormat* format) c_gst_query_parse_nth_format;
+  GstPadMode function(GstQuery* query, uint index) c_gst_query_parse_nth_scheduling_mode;
+  void function(GstQuery* query, GstFormat* format, long* cur) c_gst_query_parse_position;
+  void function(GstQuery* query, GstSchedulingFlags* flags, int* minsize, int* maxsize, int* align_) c_gst_query_parse_scheduling;
+  void function(GstQuery* query, GstFormat* format, bool* seekable, long* segmentStart, long* segmentEnd) c_gst_query_parse_seeking;
+  void function(GstQuery* query, double* rate, GstFormat* format, long* startValue, long* stopValue) c_gst_query_parse_segment;
+  void function(GstQuery* query, bool* selectable) c_gst_query_parse_selectable;
+  void function(GstQuery* query, char** uri) c_gst_query_parse_uri;
+  void function(GstQuery* query, char** uri) c_gst_query_parse_uri_redirection;
+  void function(GstQuery* query, bool* permanent) c_gst_query_parse_uri_redirection_permanent;
+  void function(GstQuery* query, uint index) c_gst_query_remove_nth_allocation_meta;
+  void function(GstQuery* query, uint index) c_gst_query_remove_nth_allocation_param;
+  void function(GstQuery* query, uint index) c_gst_query_remove_nth_allocation_pool;
+  void function(GstQuery* query, bool result) c_gst_query_set_accept_caps_result;
+  void function(GstQuery* query, uint nominalBitrate) c_gst_query_set_bitrate;
+  void function(GstQuery* query, bool busy, int percent) c_gst_query_set_buffering_percent;
+  void function(GstQuery* query, GstFormat format, long start, long stop, long estimatedTotal) c_gst_query_set_buffering_range;
+  void function(GstQuery* query, GstBufferingMode mode, int avgIn, int avgOut, long bufferingLeft) c_gst_query_set_buffering_stats;
+  void function(GstQuery* query, GstCaps* caps) c_gst_query_set_caps_result;
+  void function(GstQuery* query, GstContext* context) c_gst_query_set_context;
+  void function(GstQuery* query, GstFormat srcFormat, long srcValue, GstFormat destFormat, long destValue) c_gst_query_set_convert;
+  void function(GstQuery* query, GstFormat format, long duration) c_gst_query_set_duration;
+  void function(GstQuery* query, int nFormats,  ...) c_gst_query_set_formats;
+  void function(GstQuery* query, int nFormats, const(GstFormat)* formats) c_gst_query_set_formatsv;
+  void function(GstQuery* query, bool live, GstClockTime minLatency, GstClockTime maxLatency) c_gst_query_set_latency;
+  void function(GstQuery* query, uint index, GstAllocator* allocator, const(GstAllocationParams)* params) c_gst_query_set_nth_allocation_param;
+  void function(GstQuery* query, uint index, GstBufferPool* pool, uint size, uint minBuffers, uint maxBuffers) c_gst_query_set_nth_allocation_pool;
+  void function(GstQuery* query, GstFormat format, long cur) c_gst_query_set_position;
+  void function(GstQuery* query, GstSchedulingFlags flags, int minsize, int maxsize, int align_) c_gst_query_set_scheduling;
+  void function(GstQuery* query, GstFormat format, bool seekable, long segmentStart, long segmentEnd) c_gst_query_set_seeking;
+  void function(GstQuery* query, double rate, GstFormat format, long startValue, long stopValue) c_gst_query_set_segment;
+  void function(GstQuery* query, bool selectable) c_gst_query_set_selectable;
+  void function(GstQuery* query, const(char)* uri) c_gst_query_set_uri;
+  void function(GstQuery* query, const(char)* uri) c_gst_query_set_uri_redirection;
+  void function(GstQuery* query, bool permanent) c_gst_query_set_uri_redirection_permanent;
+  GstStructure* function(GstQuery* query) c_gst_query_writable_structure;
+
+  // ReferenceTimestampMeta
+  const(GstMetaInfo)* function() c_gst_reference_timestamp_meta_get_info;
+
+  // Registry
+  extern(C) GType function() c_gst_registry_get_type;
+  bool function() c_gst_registry_fork_is_enabled;
+  void function(bool enabled) c_gst_registry_fork_set_enabled;
+  GstRegistry* function() c_gst_registry_get;
+  bool function(GstRegistry* registry, GstPluginFeature* feature) c_gst_registry_add_feature;
+  bool function(GstRegistry* registry, GstPlugin* plugin) c_gst_registry_add_plugin;
+  bool function(GstRegistry* registry, const(char)* featureName, uint minMajor, uint minMinor, uint minMicro) c_gst_registry_check_feature_version;
+  GList* function(GstRegistry* registry, GstPluginFeatureFilter filter, bool first, void* userData) c_gst_registry_feature_filter;
+  GstPluginFeature* function(GstRegistry* registry, const(char)* name, GType type) c_gst_registry_find_feature;
+  GstPlugin* function(GstRegistry* registry, const(char)* name) c_gst_registry_find_plugin;
+  GList* function(GstRegistry* registry, GType type) c_gst_registry_get_feature_list;
+  GList* function(GstRegistry* registry, const(char)* name) c_gst_registry_get_feature_list_by_plugin;
+  uint function(GstRegistry* registry) c_gst_registry_get_feature_list_cookie;
+  GList* function(GstRegistry* registry) c_gst_registry_get_plugin_list;
+  GstPlugin* function(GstRegistry* registry, const(char)* filename) c_gst_registry_lookup;
+  GstPluginFeature* function(GstRegistry* registry, const(char)* name) c_gst_registry_lookup_feature;
+  GList* function(GstRegistry* registry, GstPluginFilter filter, bool first, void* userData) c_gst_registry_plugin_filter;
+  void function(GstRegistry* registry, GstPluginFeature* feature) c_gst_registry_remove_feature;
+  void function(GstRegistry* registry, GstPlugin* plugin) c_gst_registry_remove_plugin;
+  bool function(GstRegistry* registry, const(char)* path) c_gst_registry_scan_path;
+
+  // Sample
+  extern(C) GType function() c_gst_sample_get_type;
+  GstSample* function(GstBuffer* buffer, GstCaps* caps, const(GstSegment)* segment, GstStructure* info) c_gst_sample_new;
+  GstBuffer* function(GstSample* sample) c_gst_sample_get_buffer;
+  GstBufferList* function(GstSample* sample) c_gst_sample_get_buffer_list;
+  GstCaps* function(GstSample* sample) c_gst_sample_get_caps;
+  const(GstStructure)* function(GstSample* sample) c_gst_sample_get_info;
+  GstSegment* function(GstSample* sample) c_gst_sample_get_segment;
+  void function(GstSample* sample, GstBuffer* buffer) c_gst_sample_set_buffer;
+  void function(GstSample* sample, GstBufferList* bufferList) c_gst_sample_set_buffer_list;
+  void function(GstSample* sample, GstCaps* caps) c_gst_sample_set_caps;
+  bool function(GstSample* sample, GstStructure* info) c_gst_sample_set_info;
+  void function(GstSample* sample, const(GstSegment)* segment) c_gst_sample_set_segment;
+
+  // Segment
+  extern(C) GType function() c_gst_segment_get_type;
+  GstSegment* function() c_gst_segment_new;
+  bool function(const(GstSegment)* segment, GstFormat format, ulong start, ulong stop, ulong* clipStart, ulong* clipStop) c_gst_segment_clip;
+  GstSegment* function(const(GstSegment)* segment) c_gst_segment_copy;
+  void function(const(GstSegment)* src, GstSegment* dest) c_gst_segment_copy_into;
+  bool function(GstSegment* segment, double rate, GstFormat format, GstSeekFlags flags, GstSeekType startType, ulong start, GstSeekType stopType, ulong stop, bool* update) c_gst_segment_do_seek;
+  void function(GstSegment* segment) c_gst_segment_free;
+  void function(GstSegment* segment, GstFormat format) c_gst_segment_init;
+  bool function(const(GstSegment)* s0, const(GstSegment)* s1) c_gst_segment_is_equal;
+  bool function(GstSegment* segment, GstFormat format, long offset) c_gst_segment_offset_running_time;
+  ulong function(const(GstSegment)* segment, GstFormat format, ulong runningTime) c_gst_segment_position_from_running_time;
+  int function(const(GstSegment)* segment, GstFormat format, ulong runningTime, ulong* position) c_gst_segment_position_from_running_time_full;
+  ulong function(const(GstSegment)* segment, GstFormat format, ulong streamTime) c_gst_segment_position_from_stream_time;
+  int function(const(GstSegment)* segment, GstFormat format, ulong streamTime, ulong* position) c_gst_segment_position_from_stream_time_full;
+  bool function(GstSegment* segment, GstFormat format, ulong runningTime) c_gst_segment_set_running_time;
+  ulong function(const(GstSegment)* segment, GstFormat format, ulong runningTime) c_gst_segment_to_position;
+  ulong function(const(GstSegment)* segment, GstFormat format, ulong position) c_gst_segment_to_running_time;
+  int function(const(GstSegment)* segment, GstFormat format, ulong position, ulong* runningTime) c_gst_segment_to_running_time_full;
+  ulong function(const(GstSegment)* segment, GstFormat format, ulong position) c_gst_segment_to_stream_time;
+  int function(const(GstSegment)* segment, GstFormat format, ulong position, ulong* streamTime) c_gst_segment_to_stream_time_full;
+
+  // SharedTaskPool
+  extern(C) GType function() c_gst_shared_task_pool_get_type;
+  GstTaskPool* function() c_gst_shared_task_pool_new;
+  uint function(GstSharedTaskPool* pool) c_gst_shared_task_pool_get_max_threads;
+  void function(GstSharedTaskPool* pool, uint maxThreads) c_gst_shared_task_pool_set_max_threads;
+
+  // StaticCaps
+  void function(GstStaticCaps* staticCaps) c_gst_static_caps_cleanup;
+  GstCaps* function(GstStaticCaps* staticCaps) c_gst_static_caps_get;
+
+  // StaticPadTemplate
+  GstPadTemplate* function(GstStaticPadTemplate* padTemplate) c_gst_static_pad_template_get;
+  GstCaps* function(GstStaticPadTemplate* templ) c_gst_static_pad_template_get_caps;
+
+  // Stream
+  extern(C) GType function() c_gst_stream_get_type;
+  GstStream* function(const(char)* streamId, GstCaps* caps, GstStreamType type, GstStreamFlags flags) c_gst_stream_new;
+  GstCaps* function(GstStream* stream) c_gst_stream_get_caps;
+  GstStreamFlags function(GstStream* stream) c_gst_stream_get_stream_flags;
+  const(char)* function(GstStream* stream) c_gst_stream_get_stream_id;
+  GstStreamType function(GstStream* stream) c_gst_stream_get_stream_type;
+  GstTagList* function(GstStream* stream) c_gst_stream_get_tags;
+  void function(GstStream* stream, GstCaps* caps) c_gst_stream_set_caps;
+  void function(GstStream* stream, GstStreamFlags flags) c_gst_stream_set_stream_flags;
+  void function(GstStream* stream, GstStreamType streamType) c_gst_stream_set_stream_type;
+  void function(GstStream* stream, GstTagList* tags) c_gst_stream_set_tags;
+
+  // StreamCollection
+  extern(C) GType function() c_gst_stream_collection_get_type;
+  GstStreamCollection* function(const(char)* upstreamId) c_gst_stream_collection_new;
+  bool function(GstStreamCollection* collection, GstStream* stream) c_gst_stream_collection_add_stream;
+  uint function(GstStreamCollection* collection) c_gst_stream_collection_get_size;
+  GstStream* function(GstStreamCollection* collection, uint index) c_gst_stream_collection_get_stream;
+  const(char)* function(GstStreamCollection* collection) c_gst_stream_collection_get_upstream_id;
+
+  // Structure
+  extern(C) GType function() c_gst_structure_get_type;
+  GstStructure* function(const(char)* string_, char** end) c_gst_structure_from_string;
+  GstStructure* function(const(char)* name, const(char)* firstfield,  ...) c_gst_structure_new;
+  GstStructure* function(const(char)* name) c_gst_structure_new_empty;
+  GstStructure* function(const(char)* string_) c_gst_structure_new_from_string;
+  GstStructure* function(GQuark nameQuark, GQuark fieldQuark,  ...) c_gst_structure_new_id;
+  GstStructure* function(GQuark quark) c_gst_structure_new_id_empty;
+  GstStructure* function(const(char)* name, const(char)* firstfield, void* varargs) c_gst_structure_new_valist;
+  bool function(const(GstStructure)* struct1, const(GstStructure)* struct2) c_gst_structure_can_intersect;
+  GstStructure* function(const(GstStructure)* structure) c_gst_structure_copy;
+  void function(GstStructure* structure, GstStructureFilterMapFunc func, void* userData) c_gst_structure_filter_and_map_in_place;
+  void function(GstStructure* structure) c_gst_structure_fixate;
+  bool function(GstStructure* structure, const(char)* fieldName) c_gst_structure_fixate_field;
+  bool function(GstStructure* structure, const(char)* fieldName, bool target) c_gst_structure_fixate_field_boolean;
+  bool function(GstStructure* structure, const(char)* fieldName, double target) c_gst_structure_fixate_field_nearest_double;
+  bool function(GstStructure* structure, const(char)* fieldName, int targetNumerator, int targetDenominator) c_gst_structure_fixate_field_nearest_fraction;
+  bool function(GstStructure* structure, const(char)* fieldName, int target) c_gst_structure_fixate_field_nearest_int;
+  bool function(GstStructure* structure, const(char)* fieldName, const(char)* target) c_gst_structure_fixate_field_string;
+  bool function(const(GstStructure)* structure, GstStructureForeachFunc func, void* userData) c_gst_structure_foreach;
+  void function(GstStructure* structure) c_gst_structure_free;
+  bool function(const(GstStructure)* structure, const(char)* firstFieldname,  ...) c_gst_structure_get;
+  bool function(GstStructure* structure, const(char)* fieldname, GValueArray** array) c_gst_structure_get_array;
+  bool function(const(GstStructure)* structure, const(char)* fieldname, bool* value) c_gst_structure_get_boolean;
+  bool function(const(GstStructure)* structure, const(char)* fieldname, GstClockTime* value) c_gst_structure_get_clock_time;
+  bool function(const(GstStructure)* structure, const(char)* fieldname, GDate** value) c_gst_structure_get_date;
+  bool function(const(GstStructure)* structure, const(char)* fieldname, GstDateTime** value) c_gst_structure_get_date_time;
+  bool function(const(GstStructure)* structure, const(char)* fieldname, double* value) c_gst_structure_get_double;
+  bool function(const(GstStructure)* structure, const(char)* fieldname, GType enumtype, int* value) c_gst_structure_get_enum;
+  GType function(const(GstStructure)* structure, const(char)* fieldname) c_gst_structure_get_field_type;
+  bool function(const(GstStructure)* structure, const(char)* fieldname, GType flagsType, uint* value) c_gst_structure_get_flags;
+  bool function(const(GstStructure)* structure, const(char)* fieldname, uint* valueFlags, uint* valueMask) c_gst_structure_get_flagset;
+  bool function(const(GstStructure)* structure, const(char)* fieldname, int* valueNumerator, int* valueDenominator) c_gst_structure_get_fraction;
+  bool function(const(GstStructure)* structure, const(char)* fieldname, int* value) c_gst_structure_get_int;
+  bool function(const(GstStructure)* structure, const(char)* fieldname, long* value) c_gst_structure_get_int64;
+  bool function(GstStructure* structure, const(char)* fieldname, GValueArray** array) c_gst_structure_get_list;
+  const(char)* function(const(GstStructure)* structure) c_gst_structure_get_name;
+  GQuark function(const(GstStructure)* structure) c_gst_structure_get_name_id;
+  const(char)* function(const(GstStructure)* structure, const(char)* fieldname) c_gst_structure_get_string;
+  bool function(const(GstStructure)* structure, const(char)* fieldname, uint* value) c_gst_structure_get_uint;
+  bool function(const(GstStructure)* structure, const(char)* fieldname, ulong* value) c_gst_structure_get_uint64;
+  bool function(const(GstStructure)* structure, const(char)* firstFieldname, void* args) c_gst_structure_get_valist;
+  const(GValue)* function(const(GstStructure)* structure, const(char)* fieldname) c_gst_structure_get_value;
+  bool function(const(GstStructure)* structure, const(char)* fieldname) c_gst_structure_has_field;
+  bool function(const(GstStructure)* structure, const(char)* fieldname, GType type) c_gst_structure_has_field_typed;
+  bool function(const(GstStructure)* structure, const(char)* name) c_gst_structure_has_name;
+  bool function(const(GstStructure)* structure, GQuark firstFieldId,  ...) c_gst_structure_id_get;
+  bool function(const(GstStructure)* structure, GQuark firstFieldId, void* args) c_gst_structure_id_get_valist;
+  const(GValue)* function(const(GstStructure)* structure, GQuark field) c_gst_structure_id_get_value;
+  bool function(const(GstStructure)* structure, GQuark field) c_gst_structure_id_has_field;
+  bool function(const(GstStructure)* structure, GQuark field, GType type) c_gst_structure_id_has_field_typed;
+  void function(GstStructure* structure, GQuark fieldname,  ...) c_gst_structure_id_set;
+  void function(GstStructure* structure, GQuark fieldname, void* varargs) c_gst_structure_id_set_valist;
+  void function(GstStructure* structure, GQuark field, const(GValue)* value) c_gst_structure_id_set_value;
+  void function(GstStructure* structure, GQuark field, GValue* value) c_gst_structure_id_take_value;
+  GstStructure* function(const(GstStructure)* struct1, const(GstStructure)* struct2) c_gst_structure_intersect;
+  bool function(const(GstStructure)* structure1, const(GstStructure)* structure2) c_gst_structure_is_equal;
+  bool function(const(GstStructure)* subset, const(GstStructure)* superset) c_gst_structure_is_subset;
+  bool function(GstStructure* structure, GstStructureMapFunc func, void* userData) c_gst_structure_map_in_place;
+  int function(const(GstStructure)* structure) c_gst_structure_n_fields;
+  const(char)* function(const(GstStructure)* structure, uint index) c_gst_structure_nth_field_name;
+  void function(GstStructure* structure) c_gst_structure_remove_all_fields;
+  void function(GstStructure* structure, const(char)* fieldname) c_gst_structure_remove_field;
+  void function(GstStructure* structure, const(char)* fieldname,  ...) c_gst_structure_remove_fields;
+  void function(GstStructure* structure, const(char)* fieldname, void* varargs) c_gst_structure_remove_fields_valist;
+  char* function(const(GstStructure)* structure, GstSerializeFlags flags) c_gst_structure_serialize;
+  char* function(const(GstStructure)* structure, GstSerializeFlags flags) c_gst_structure_serialize_full;
+  void function(GstStructure* structure, const(char)* fieldname,  ...) c_gst_structure_set;
+  void function(GstStructure* structure, const(char)* fieldname, const(GValueArray)* array) c_gst_structure_set_array;
+  void function(GstStructure* structure, const(char)* fieldname, const(GValueArray)* array) c_gst_structure_set_list;
+  void function(GstStructure* structure, const(char)* name) c_gst_structure_set_name;
+  bool function(GstStructure* structure, int* refcount) c_gst_structure_set_parent_refcount;
+  void function(GstStructure* structure, const(char)* fieldname, void* varargs) c_gst_structure_set_valist;
+  void function(GstStructure* structure, const(char)* fieldname, const(GValue)* value) c_gst_structure_set_value;
+  void function(GstStructure* structure, const(char)* fieldname, GValue* value) c_gst_structure_take_value;
+  char* function(const(GstStructure)* structure) c_gst_structure_to_string;
+  bool function(GstStructure** oldstrPtr, GstStructure* newstr) c_gst_structure_take;
+
+  // SystemClock
+  extern(C) GType function() c_gst_system_clock_get_type;
+  GstClock* function() c_gst_system_clock_obtain;
+  void function(GstClock* newClock) c_gst_system_clock_set_default;
+
+  // TagList
+  extern(C) GType function() c_gst_tag_list_get_type;
+  GstTagList* function(const(char)* tag,  ...) c_gst_tag_list_new;
+  GstTagList* function() c_gst_tag_list_new_empty;
+  GstTagList* function(const(char)* str) c_gst_tag_list_new_from_string;
+  GstTagList* function(void* varArgs) c_gst_tag_list_new_valist;
+  void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag,  ...) c_gst_tag_list_add;
+  void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag, void* varArgs) c_gst_tag_list_add_valist;
+  void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag, void* varArgs) c_gst_tag_list_add_valist_values;
+  void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag, const(GValue)* value) c_gst_tag_list_add_value;
+  void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag,  ...) c_gst_tag_list_add_values;
+  GstTagList* function(const(GstTagList)* taglist) c_gst_tag_list_copy;
+  void function(const(GstTagList)* list, GstTagForeachFunc func, void* userData) c_gst_tag_list_foreach;
+  bool function(const(GstTagList)* list, const(char)* tag, bool* value) c_gst_tag_list_get_boolean;
+  bool function(const(GstTagList)* list, const(char)* tag, uint index, bool* value) c_gst_tag_list_get_boolean_index;
+  bool function(const(GstTagList)* list, const(char)* tag, GDate** value) c_gst_tag_list_get_date;
+  bool function(const(GstTagList)* list, const(char)* tag, uint index, GDate** value) c_gst_tag_list_get_date_index;
+  bool function(const(GstTagList)* list, const(char)* tag, GstDateTime** value) c_gst_tag_list_get_date_time;
+  bool function(const(GstTagList)* list, const(char)* tag, uint index, GstDateTime** value) c_gst_tag_list_get_date_time_index;
+  bool function(const(GstTagList)* list, const(char)* tag, double* value) c_gst_tag_list_get_double;
+  bool function(const(GstTagList)* list, const(char)* tag, uint index, double* value) c_gst_tag_list_get_double_index;
+  bool function(const(GstTagList)* list, const(char)* tag, float* value) c_gst_tag_list_get_float;
+  bool function(const(GstTagList)* list, const(char)* tag, uint index, float* value) c_gst_tag_list_get_float_index;
+  bool function(const(GstTagList)* list, const(char)* tag, int* value) c_gst_tag_list_get_int;
+  bool function(const(GstTagList)* list, const(char)* tag, long* value) c_gst_tag_list_get_int64;
+  bool function(const(GstTagList)* list, const(char)* tag, uint index, long* value) c_gst_tag_list_get_int64_index;
+  bool function(const(GstTagList)* list, const(char)* tag, uint index, int* value) c_gst_tag_list_get_int_index;
+  bool function(const(GstTagList)* list, const(char)* tag, void** value) c_gst_tag_list_get_pointer;
+  bool function(const(GstTagList)* list, const(char)* tag, uint index, void** value) c_gst_tag_list_get_pointer_index;
+  bool function(const(GstTagList)* list, const(char)* tag, GstSample** sample) c_gst_tag_list_get_sample;
+  bool function(const(GstTagList)* list, const(char)* tag, uint index, GstSample** sample) c_gst_tag_list_get_sample_index;
+  GstTagScope function(const(GstTagList)* list) c_gst_tag_list_get_scope;
+  bool function(const(GstTagList)* list, const(char)* tag, char** value) c_gst_tag_list_get_string;
+  bool function(const(GstTagList)* list, const(char)* tag, uint index, char** value) c_gst_tag_list_get_string_index;
+  uint function(const(GstTagList)* list, const(char)* tag) c_gst_tag_list_get_tag_size;
+  bool function(const(GstTagList)* list, const(char)* tag, uint* value) c_gst_tag_list_get_uint;
+  bool function(const(GstTagList)* list, const(char)* tag, ulong* value) c_gst_tag_list_get_uint64;
+  bool function(const(GstTagList)* list, const(char)* tag, uint index, ulong* value) c_gst_tag_list_get_uint64_index;
+  bool function(const(GstTagList)* list, const(char)* tag, uint index, uint* value) c_gst_tag_list_get_uint_index;
+  const(GValue)* function(const(GstTagList)* list, const(char)* tag, uint index) c_gst_tag_list_get_value_index;
+  void function(GstTagList* into, const(GstTagList)* from, GstTagMergeMode mode) c_gst_tag_list_insert;
+  bool function(const(GstTagList)* list) c_gst_tag_list_is_empty;
+  bool function(const(GstTagList)* list1, const(GstTagList)* list2) c_gst_tag_list_is_equal;
+  GstTagList* function(const(GstTagList)* list1, const(GstTagList)* list2, GstTagMergeMode mode) c_gst_tag_list_merge;
+  int function(const(GstTagList)* list) c_gst_tag_list_n_tags;
+  const(char)* function(const(GstTagList)* list, uint index) c_gst_tag_list_nth_tag_name;
+  bool function(const(GstTagList)* list, const(char)* tag, uint index, const(char*)* value) c_gst_tag_list_peek_string_index;
+  void function(GstTagList* list, const(char)* tag) c_gst_tag_list_remove_tag;
+  void function(GstTagList* list, GstTagScope scope_) c_gst_tag_list_set_scope;
+  char* function(const(GstTagList)* list) c_gst_tag_list_to_string;
+  bool function(GValue* dest, const(GstTagList)* list, const(char)* tag) c_gst_tag_list_copy_value;
+
+  // TagSetter
+  extern(C) GType function() c_gst_tag_setter_get_type;
+  void function(GstTagSetter* setter, GstTagMergeMode mode, const(char)* tag, void* varArgs) c_gst_tag_setter_add_tag_valist;
+  void function(GstTagSetter* setter, GstTagMergeMode mode, const(char)* tag, void* varArgs) c_gst_tag_setter_add_tag_valist_values;
+  void function(GstTagSetter* setter, GstTagMergeMode mode, const(char)* tag, const(GValue)* value) c_gst_tag_setter_add_tag_value;
+  void function(GstTagSetter* setter, GstTagMergeMode mode, const(char)* tag,  ...) c_gst_tag_setter_add_tag_values;
+  void function(GstTagSetter* setter, GstTagMergeMode mode, const(char)* tag,  ...) c_gst_tag_setter_add_tags;
+  const(GstTagList)* function(GstTagSetter* setter) c_gst_tag_setter_get_tag_list;
+  GstTagMergeMode function(GstTagSetter* setter) c_gst_tag_setter_get_tag_merge_mode;
+  void function(GstTagSetter* setter, const(GstTagList)* list, GstTagMergeMode mode) c_gst_tag_setter_merge_tags;
+  void function(GstTagSetter* setter) c_gst_tag_setter_reset_tags;
+  void function(GstTagSetter* setter, GstTagMergeMode mode) c_gst_tag_setter_set_tag_merge_mode;
+
+  // Task
+  extern(C) GType function() c_gst_task_get_type;
+  GstTask* function(GstTaskFunction func, void* userData, GDestroyNotify notify) c_gst_task_new;
+  void function() c_gst_task_cleanup_all;
+  GstTaskPool* function(GstTask* task) c_gst_task_get_pool;
+  GstTaskState function(GstTask* task) c_gst_task_get_state;
+  bool function(GstTask* task) c_gst_task_join;
+  bool function(GstTask* task) c_gst_task_pause;
+  bool function(GstTask* task) c_gst_task_resume;
+  void function(GstTask* task, GstTaskThreadFunc enterFunc, void* userData, GDestroyNotify notify) c_gst_task_set_enter_callback;
+  void function(GstTask* task, GstTaskThreadFunc leaveFunc, void* userData, GDestroyNotify notify) c_gst_task_set_leave_callback;
+  void function(GstTask* task, GRecMutex* mutex) c_gst_task_set_lock;
+  void function(GstTask* task, GstTaskPool* pool) c_gst_task_set_pool;
+  bool function(GstTask* task, GstTaskState state) c_gst_task_set_state;
+  bool function(GstTask* task) c_gst_task_start;
+  bool function(GstTask* task) c_gst_task_stop;
+
+  // TaskPool
+  extern(C) GType function() c_gst_task_pool_get_type;
+  GstTaskPool* function() c_gst_task_pool_new;
+  void function(GstTaskPool* pool) c_gst_task_pool_cleanup;
+  void function(GstTaskPool* pool, void* id) c_gst_task_pool_dispose_handle;
+  void function(GstTaskPool* pool, void* id) c_gst_task_pool_join;
+  void function(GstTaskPool* pool, GError** _err) c_gst_task_pool_prepare;
+  void* function(GstTaskPool* pool, GstTaskPoolFunction func, void* userData, GError** _err) c_gst_task_pool_push;
+
+  // Toc
+  extern(C) GType function() c_gst_toc_get_type;
+  GstToc* function(GstTocScope scope_) c_gst_toc_new;
+  void function(GstToc* toc, GstTocEntry* entry) c_gst_toc_append_entry;
+  void function(GstToc* toc) c_gst_toc_dump;
+  GstTocEntry* function(const(GstToc)* toc, const(char)* uid) c_gst_toc_find_entry;
+  GList* function(const(GstToc)* toc) c_gst_toc_get_entries;
+  GstTocScope function(const(GstToc)* toc) c_gst_toc_get_scope;
+  GstTagList* function(const(GstToc)* toc) c_gst_toc_get_tags;
+  void function(GstToc* toc, GstTagList* tags, GstTagMergeMode mode) c_gst_toc_merge_tags;
+  void function(GstToc* toc, GstTagList* tags) c_gst_toc_set_tags;
+
+  // TocEntry
+  extern(C) GType function() c_gst_toc_entry_get_type;
+  GstTocEntry* function(GstTocEntryType type, const(char)* uid) c_gst_toc_entry_new;
+  void function(GstTocEntry* entry, GstTocEntry* subentry) c_gst_toc_entry_append_sub_entry;
+  GstTocEntryType function(const(GstTocEntry)* entry) c_gst_toc_entry_get_entry_type;
+  bool function(const(GstTocEntry)* entry, GstTocLoopType* loopType, int* repeatCount) c_gst_toc_entry_get_loop;
+  GstTocEntry* function(GstTocEntry* entry) c_gst_toc_entry_get_parent;
+  bool function(const(GstTocEntry)* entry, long* start, long* stop) c_gst_toc_entry_get_start_stop_times;
+  GList* function(const(GstTocEntry)* entry) c_gst_toc_entry_get_sub_entries;
+  GstTagList* function(const(GstTocEntry)* entry) c_gst_toc_entry_get_tags;
+  GstToc* function(GstTocEntry* entry) c_gst_toc_entry_get_toc;
+  const(char)* function(const(GstTocEntry)* entry) c_gst_toc_entry_get_uid;
+  bool function(const(GstTocEntry)* entry) c_gst_toc_entry_is_alternative;
+  bool function(const(GstTocEntry)* entry) c_gst_toc_entry_is_sequence;
+  void function(GstTocEntry* entry, GstTagList* tags, GstTagMergeMode mode) c_gst_toc_entry_merge_tags;
+  void function(GstTocEntry* entry, GstTocLoopType loopType, int repeatCount) c_gst_toc_entry_set_loop;
+  void function(GstTocEntry* entry, long start, long stop) c_gst_toc_entry_set_start_stop_times;
+  void function(GstTocEntry* entry, GstTagList* tags) c_gst_toc_entry_set_tags;
+
+  // TocSetter
+  extern(C) GType function() c_gst_toc_setter_get_type;
+  GstToc* function(GstTocSetter* setter) c_gst_toc_setter_get_toc;
+  void function(GstTocSetter* setter) c_gst_toc_setter_reset;
+  void function(GstTocSetter* setter, GstToc* toc) c_gst_toc_setter_set_toc;
+
+  // Tracer
+  extern(C) GType function() c_gst_tracer_get_type;
+  bool function(GstPlugin* plugin, const(char)* name, GType type) c_gst_tracer_register;
+
+  // TracerFactory
+  extern(C) GType function() c_gst_tracer_factory_get_type;
+  GList* function() c_gst_tracer_factory_get_list;
+  GType function(GstTracerFactory* factory) c_gst_tracer_factory_get_tracer_type;
+
+  // TracerRecord
+  extern(C) GType function() c_gst_tracer_record_get_type;
+  GstTracerRecord* function(const(char)* name, const(char)* firstfield,  ...) c_gst_tracer_record_new;
+  void function(GstTracerRecord* self,  ...) c_gst_tracer_record_log;
+
+  // TypeFind
+  ulong function(GstTypeFind* find) c_gst_type_find_get_length;
+  const(ubyte)* function(GstTypeFind* find, long offset, uint size) c_gst_type_find_peek;
+  void function(GstTypeFind* find, uint probability, GstCaps* caps) c_gst_type_find_suggest;
+  void function(GstTypeFind* find, uint probability, const(char)* mediaType) c_gst_type_find_suggest_empty_simple;
+  void function(GstTypeFind* find, uint probability, const(char)* mediaType, const(char)* fieldname,  ...) c_gst_type_find_suggest_simple;
+  bool function(GstPlugin* plugin, const(char)* name, uint rank, GstTypeFindFunction func, const(char)* extensions, GstCaps* possibleCaps, void* data, GDestroyNotify dataNotify) c_gst_type_find_register;
+
+  // TypeFindFactory
+  extern(C) GType function() c_gst_type_find_factory_get_type;
+  GList* function() c_gst_type_find_factory_get_list;
+  void function(GstTypeFindFactory* factory, GstTypeFind* find) c_gst_type_find_factory_call_function;
+  GstCaps* function(GstTypeFindFactory* factory) c_gst_type_find_factory_get_caps;
+  const(char*)* function(GstTypeFindFactory* factory) c_gst_type_find_factory_get_extensions;
+  bool function(GstTypeFindFactory* factory) c_gst_type_find_factory_has_function;
+
+  // URIHandler
+  extern(C) GType function() c_gst_uri_handler_get_type;
+  const(char*)* function(GstURIHandler* handler) c_gst_uri_handler_get_protocols;
+  char* function(GstURIHandler* handler) c_gst_uri_handler_get_uri;
+  GstURIType function(GstURIHandler* handler) c_gst_uri_handler_get_uri_type;
+  bool function(GstURIHandler* handler, const(char)* uri, GError** _err) c_gst_uri_handler_set_uri;
+
+  // Uri
+  extern(C) GType function() c_gst_uri_get_type;
+  GstUri* function(const(char)* scheme, const(char)* userinfo, const(char)* host, uint port, const(char)* path, const(char)* query, const(char)* fragment) c_gst_uri_new;
+  bool function(GstUri* uri, const(char)* relativePath) c_gst_uri_append_path;
+  bool function(GstUri* uri, const(char)* pathSegment) c_gst_uri_append_path_segment;
+  bool function(const(GstUri)* first, const(GstUri)* second) c_gst_uri_equal;
+  GstUri* function(GstUri* base, const(char)* uri) c_gst_uri_from_string_with_base;
+  const(char)* function(const(GstUri)* uri) c_gst_uri_get_fragment;
+  const(char)* function(const(GstUri)* uri) c_gst_uri_get_host;
+  GHashTable* function(const(GstUri)* uri) c_gst_uri_get_media_fragment_table;
+  char* function(const(GstUri)* uri) c_gst_uri_get_path;
+  GList* function(const(GstUri)* uri) c_gst_uri_get_path_segments;
+  char* function(const(GstUri)* uri) c_gst_uri_get_path_string;
+  uint function(const(GstUri)* uri) c_gst_uri_get_port;
+  GList* function(const(GstUri)* uri) c_gst_uri_get_query_keys;
+  char* function(const(GstUri)* uri) c_gst_uri_get_query_string;
+  char* function(const(GstUri)* uri, const(GList)* keys) c_gst_uri_get_query_string_ordered;
+  GHashTable* function(const(GstUri)* uri) c_gst_uri_get_query_table;
+  const(char)* function(const(GstUri)* uri, const(char)* queryKey) c_gst_uri_get_query_value;
+  const(char)* function(const(GstUri)* uri) c_gst_uri_get_scheme;
+  const(char)* function(const(GstUri)* uri) c_gst_uri_get_userinfo;
+  bool function(const(GstUri)* uri) c_gst_uri_is_normalized;
+  bool function(const(GstUri)* uri) c_gst_uri_is_writable;
+  GstUri* function(GstUri* baseUri, GstUri* refUri) c_gst_uri_join;
+  GstUri* function(GstUri* uri) c_gst_uri_make_writable;
+  GstUri* function(GstUri* base, const(char)* scheme, const(char)* userinfo, const(char)* host, uint port, const(char)* path, const(char)* query, const(char)* fragment) c_gst_uri_new_with_base;
+  bool function(GstUri* uri) c_gst_uri_normalize;
+  bool function(const(GstUri)* uri, const(char)* queryKey) c_gst_uri_query_has_key;
+  bool function(GstUri* uri, const(char)* queryKey) c_gst_uri_remove_query_key;
+  bool function(GstUri* uri, const(char)* fragment) c_gst_uri_set_fragment;
+  bool function(GstUri* uri, const(char)* host) c_gst_uri_set_host;
+  bool function(GstUri* uri, const(char)* path) c_gst_uri_set_path;
+  bool function(GstUri* uri, GList* pathSegments) c_gst_uri_set_path_segments;
+  bool function(GstUri* uri, const(char)* path) c_gst_uri_set_path_string;
+  bool function(GstUri* uri, uint port) c_gst_uri_set_port;
+  bool function(GstUri* uri, const(char)* query) c_gst_uri_set_query_string;
+  bool function(GstUri* uri, GHashTable* queryTable) c_gst_uri_set_query_table;
+  bool function(GstUri* uri, const(char)* queryKey, const(char)* queryValue) c_gst_uri_set_query_value;
+  bool function(GstUri* uri, const(char)* scheme) c_gst_uri_set_scheme;
+  bool function(GstUri* uri, const(char)* userinfo) c_gst_uri_set_userinfo;
+  char* function(const(GstUri)* uri) c_gst_uri_to_string;
+  char* function(const(GstUri)* uri, const(GList)* keys) c_gst_uri_to_string_with_keys;
+  char* function(const(char)* protocol, const(char)* location) c_gst_uri_construct;
+  GstUri* function(const(char)* uri) c_gst_uri_from_string;
+  GstUri* function(const(char)* uri) c_gst_uri_from_string_escaped;
+  char* function(const(char)* uri) c_gst_uri_get_location;
+  char* function(const(char)* uri) c_gst_uri_get_protocol;
+  bool function(const(char)* uri, const(char)* protocol) c_gst_uri_has_protocol;
+  bool function(const(char)* uri) c_gst_uri_is_valid;
+  char* function(const(char)* baseUri, const(char)* refUri) c_gst_uri_join_strings;
+  bool function(GstURIType type, const(char)* protocol) c_gst_uri_protocol_is_supported;
+  bool function(const(char)* protocol) c_gst_uri_protocol_is_valid;
+
+  // ValueArray
+  extern(C) GType function() c_gst_value_array_get_type;
+  void function(GValue* value, GValue* appendValue) c_gst_value_array_append_and_take_value;
+  void function(GValue* value, const(GValue)* appendValue) c_gst_value_array_append_value;
+  uint function(const(GValue)* value) c_gst_value_array_get_size;
+  const(GValue)* function(const(GValue)* value, uint index) c_gst_value_array_get_value;
+  GValue* function(GValue* value, uint prealloc) c_gst_value_array_init;
+  void function(GValue* value, const(GValue)* prependValue) c_gst_value_array_prepend_value;
+
+  // ValueList
+  extern(C) GType function() c_gst_value_list_get_type;
+  void function(GValue* value, GValue* appendValue) c_gst_value_list_append_and_take_value;
+  void function(GValue* value, const(GValue)* appendValue) c_gst_value_list_append_value;
+  void function(GValue* dest, const(GValue)* value1, const(GValue)* value2) c_gst_value_list_concat;
+  uint function(const(GValue)* value) c_gst_value_list_get_size;
+  const(GValue)* function(const(GValue)* value, uint index) c_gst_value_list_get_value;
+  GValue* function(GValue* value, uint prealloc) c_gst_value_list_init;
+  void function(GValue* dest, const(GValue)* value1, const(GValue)* value2) c_gst_value_list_merge;
+  void function(GValue* value, const(GValue)* prependValue) c_gst_value_list_prepend_value;
+
+  // global
+  bool function(const(GstClockTime)* xy, GstClockTime* temp, uint n, GstClockTime* mNum, GstClockTime* mDenom, GstClockTime* b, GstClockTime* xbase, double* rSquared) c_gst_calculate_linear_regression;
+  void function(GstMiniObject** objectPtr) c_gst_clear_mini_object;
+  void function(GstObject** objectPtr) c_gst_clear_object;
+  void function(GstStructure** structurePtr) c_gst_clear_structure;
+  void function(GstLogFunction func, void* userData, GDestroyNotify notify) c_gst_debug_add_log_function;
+  void function(uint maxSizePerThread, uint threadTimeout) c_gst_debug_add_ring_buffer_logger;
+  char* function(GstBin* bin, GstDebugGraphDetails details) c_gst_debug_bin_to_dot_data;
+  void function(GstBin* bin, GstDebugGraphDetails details, const(char)* fileName) c_gst_debug_bin_to_dot_file;
+  void function(GstBin* bin, GstDebugGraphDetails details, const(char)* fileName) c_gst_debug_bin_to_dot_file_with_ts;
+  char* function(uint colorinfo) c_gst_debug_construct_term_color;
+  int function(uint colorinfo) c_gst_debug_construct_win_color;
+  GSList* function() c_gst_debug_get_all_categories;
+  GstDebugColorMode function() c_gst_debug_get_color_mode;
+  GstDebugLevel function() c_gst_debug_get_default_threshold;
+  char* function(GstStackTraceFlags flags) c_gst_debug_get_stack_trace;
+  bool function() c_gst_debug_is_active;
+  bool function() c_gst_debug_is_colored;
+  void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, ObjectC* object, const(char)* format,  ...) c_gst_debug_log;
+  void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, ObjectC* object, GstDebugMessage* message, void* userData) c_gst_debug_log_default;
+  char* function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, ObjectC* object, GstDebugMessage* message) c_gst_debug_log_get_line;
+  void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, const(char)* id, const(char)* format,  ...) c_gst_debug_log_id;
+  void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, const(char)* id, const(char)* messageString) c_gst_debug_log_id_literal;
+  void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, const(char)* id, const(char)* format, void* args) c_gst_debug_log_id_valist;
+  void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, ObjectC* object, const(char)* messageString) c_gst_debug_log_literal;
+  void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, ObjectC* object, const(char)* format, void* args) c_gst_debug_log_valist;
+  void function() c_gst_debug_print_stack_trace;
+  uint function(GstLogFunction func) c_gst_debug_remove_log_function;
+  uint function(void* data) c_gst_debug_remove_log_function_by_data;
+  void function() c_gst_debug_remove_ring_buffer_logger;
+  char** function() c_gst_debug_ring_buffer_logger_get_logs;
+  void function(bool active) c_gst_debug_set_active;
+  void function(GstDebugColorMode mode) c_gst_debug_set_color_mode;
+  void function(const(char)* mode) c_gst_debug_set_color_mode_from_string;
+  void function(bool colored) c_gst_debug_set_colored;
+  void function(GstDebugLevel level) c_gst_debug_set_default_threshold;
+  void function(const(char)* name, GstDebugLevel level) c_gst_debug_set_threshold_for_name;
+  void function(const(char)* list, bool reset) c_gst_debug_set_threshold_from_string;
+  void function(const(char)* name) c_gst_debug_unset_threshold_for_name;
+  void function() c_gst_deinit;
+  bool function(GstPlugin* plugin, GType type) c_gst_dynamic_type_register;
+  char* function(GQuark domain, int code) c_gst_error_get_message;
+  char* function(const(char)* filename, GError** _err) c_gst_filename_to_uri;
+  const(char)* function(GstFlowReturn ret) c_gst_flow_get_name;
+  GQuark function(GstFlowReturn ret) c_gst_flow_to_quark;
+  bool function(const(GstFormat)* formats, GstFormat format) c_gst_formats_contains;
+  const(char)* function() c_gst_get_main_executable_path;
+  char* function(const(char)* format,  ...) c_gst_info_strdup_printf;
+  char* function(const(char)* format, void* args) c_gst_info_strdup_vprintf;
+  int function(char** result, const(char)* format, void* args) c_gst_info_vasprintf;
+  void function(int* argc, char*** argv) c_gst_init;
+  bool function(int* argc, char*** argv, GError** _err) c_gst_init_check;
+  GOptionGroup* function() c_gst_init_get_option_group;
+  bool function(const(void)* obj) c_gst_is_caps_features;
+  bool function() c_gst_is_initialized;
+  GstStructure* function(const(char)* name,  ...) c_gst_make_element_message_details;
+  GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, GParamSpec* elementSpec, GParamFlags flags) c_gst_param_spec_array;
+  GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, int minNum, int minDenom, int maxNum, int maxDenom, int defaultNum, int defaultDenom, GParamFlags flags) c_gst_param_spec_fraction;
+  GType function() c_gst_parent_buffer_meta_api_get_type;
+  GstElement* function(const(char)* binDescription, bool ghostUnlinkedPads, GError** _err) c_gst_parse_bin_from_description;
+  GstElement* function(const(char)* binDescription, bool ghostUnlinkedPads, GstParseContext* context, GstParseFlags flags, GError** _err) c_gst_parse_bin_from_description_full;
+  GstElement* function(const(char)* pipelineDescription, GError** _err) c_gst_parse_launch;
+  GstElement* function(const(char)* pipelineDescription, GstParseContext* context, GstParseFlags flags, GError** _err) c_gst_parse_launch_full;
+  GstElement* function(const(char*)* argv, GError** _err) c_gst_parse_launchv;
+  GstElement* function(const(char*)* argv, GstParseContext* context, GstParseFlags flags, GError** _err) c_gst_parse_launchv_full;
+  void function(const(char)* format,  ...) c_gst_print;
+  void function(const(char)* format,  ...) c_gst_printerr;
+  void function(const(char)* format,  ...) c_gst_printerrln;
+  void function(const(char)* format,  ...) c_gst_println;
+  char** function(const(char*)* systemIdentifiers) c_gst_protection_filter_systems_by_available_decryptors;
+  GType function() c_gst_protection_meta_api_get_type;
+  const(char)* function(const(char*)* systemIdentifiers) c_gst_protection_select_system;
+  GType function() c_gst_reference_timestamp_meta_api_get_type;
+  bool function() c_gst_segtrap_is_enabled;
+  void function(bool enabled) c_gst_segtrap_set_enabled;
+  GType function() c_gst_static_caps_get_type;
+  GType function() c_gst_static_pad_template_get_type;
+  bool function(const(char)* tag) c_gst_tag_exists;
+  const(char)* function(const(char)* tag) c_gst_tag_get_description;
+  GstTagFlag function(const(char)* tag) c_gst_tag_get_flag;
+  const(char)* function(const(char)* tag) c_gst_tag_get_nick;
+  GType function(const(char)* tag) c_gst_tag_get_type;
+  bool function(const(char)* tag) c_gst_tag_is_fixed;
+  void function(GValue* dest, const(GValue)* src) c_gst_tag_merge_strings_with_comma;
+  void function(GValue* dest, const(GValue)* src) c_gst_tag_merge_use_first;
+  void function(const(char)* name, GstTagFlag flag, GType type, const(char)* nick, const(char)* blurb, GstTagMergeFunc func) c_gst_tag_register;
+  void function(const(char)* name, GstTagFlag flag, GType type, const(char)* nick, const(char)* blurb, GstTagMergeFunc func) c_gst_tag_register_static;
+  GList* function() c_gst_tracing_get_active_tracers;
+  void function(GstTracer* tracer, const(char)* detail, GCallback func) c_gst_tracing_register_hook;
+  GType function() c_gst_type_find_get_type;
+  bool function(GType type, GstPluginAPIFlags* flags) c_gst_type_is_plugin_api;
+  void function(GType type, GstPluginAPIFlags flags) c_gst_type_mark_as_plugin_api;
+  bool function() c_gst_update_registry;
+  void* function(void* array, uint numElements, size_t elementSize, GCompareDataFunc searchFunc, GstSearchMode mode, const(void)* searchData, void* userData) c_gst_util_array_binary_search;
+  uint function(uint v) c_gst_util_ceil_log2;
+  void function(double src, int* destN, int* destD) c_gst_util_double_to_fraction;
+  void function(GstBuffer* buf) c_gst_util_dump_buffer;
+  void function(const(ubyte)* mem, uint size) c_gst_util_dump_mem;
+  int function(const(char)* a, const(char)* b) c_gst_util_filename_compare;
+  bool function(int aN, int aD, int bN, int bD, int* resN, int* resD) c_gst_util_fraction_add;
+  int function(int aN, int aD, int bN, int bD) c_gst_util_fraction_compare;
+  bool function(int aN, int aD, int bN, int bD, int* resN, int* resD) c_gst_util_fraction_multiply;
+  void function(int srcN, int srcD, double* dest) c_gst_util_fraction_to_double;
+  ulong function(double value) c_gst_util_gdouble_to_guint64;
+  bool function(ObjectC* object, const(char)* name, GValueArray** array) c_gst_util_get_object_array;
+  GstClockTime function() c_gst_util_get_timestamp;
+  int function(int a, int b) c_gst_util_greatest_common_divisor;
+  long function(long a, long b) c_gst_util_greatest_common_divisor_int64;
+  uint function() c_gst_util_group_id_next;
+  double function(ulong value) c_gst_util_guint64_to_gdouble;
+  int function(uint s1, uint s2) c_gst_util_seqnum_compare;
+  uint function() c_gst_util_seqnum_next;
+  void function(ObjectC* object, const(char)* name, const(char)* value) c_gst_util_set_object_arg;
+  bool function(ObjectC* object, const(char)* name, const(GValueArray)* array) c_gst_util_set_object_array;
+  void function(GValue* value, const(char)* valueStr) c_gst_util_set_value_from_string;
+  void function(int* numerator, int* denominator, uint nTerms, uint threshold) c_gst_util_simplify_fraction;
+  ulong function(ulong val, ulong num, ulong denom) c_gst_util_uint64_scale;
+  ulong function(ulong val, ulong num, ulong denom) c_gst_util_uint64_scale_ceil;
+  ulong function(ulong val, int num, int denom) c_gst_util_uint64_scale_int;
+  ulong function(ulong val, int num, int denom) c_gst_util_uint64_scale_int_ceil;
+  ulong function(ulong val, int num, int denom) c_gst_util_uint64_scale_int_round;
+  ulong function(ulong val, ulong num, ulong denom) c_gst_util_uint64_scale_round;
+  bool function(const(GValue)* value1, const(GValue)* value2) c_gst_value_can_compare;
+  bool function(const(GValue)* value1, const(GValue)* value2) c_gst_value_can_intersect;
+  bool function(const(GValue)* minuend, const(GValue)* subtrahend) c_gst_value_can_subtract;
+  bool function(const(GValue)* value1, const(GValue)* value2) c_gst_value_can_union;
+  int function(const(GValue)* value1, const(GValue)* value2) c_gst_value_compare;
+  bool function(GValue* dest, const(char)* src) c_gst_value_deserialize;
+  bool function(GValue* dest, const(char)* src, GParamSpec* pspec) c_gst_value_deserialize_with_pspec;
+  bool function(GValue* dest, const(GValue)* src) c_gst_value_fixate;
+  bool function(GValue* product, const(GValue)* factor1, const(GValue)* factor2) c_gst_value_fraction_multiply;
+  bool function(GValue* dest, const(GValue)* minuend, const(GValue)* subtrahend) c_gst_value_fraction_subtract;
+  ulong function(const(GValue)* value) c_gst_value_get_bitmask;
+  const(GstCaps)* function(const(GValue)* value) c_gst_value_get_caps;
+  const(GstCapsFeatures)* function(const(GValue)* value) c_gst_value_get_caps_features;
+  double function(const(GValue)* value) c_gst_value_get_double_range_max;
+  double function(const(GValue)* value) c_gst_value_get_double_range_min;
+  uint function(const(GValue)* value) c_gst_value_get_flagset_flags;
+  uint function(const(GValue)* value) c_gst_value_get_flagset_mask;
+  int function(const(GValue)* value) c_gst_value_get_fraction_denominator;
+  int function(const(GValue)* value) c_gst_value_get_fraction_numerator;
+  const(GValue)* function(const(GValue)* value) c_gst_value_get_fraction_range_max;
+  const(GValue)* function(const(GValue)* value) c_gst_value_get_fraction_range_min;
+  long function(const(GValue)* value) c_gst_value_get_int64_range_max;
+  long function(const(GValue)* value) c_gst_value_get_int64_range_min;
+  long function(const(GValue)* value) c_gst_value_get_int64_range_step;
+  int function(const(GValue)* value) c_gst_value_get_int_range_max;
+  int function(const(GValue)* value) c_gst_value_get_int_range_min;
+  int function(const(GValue)* value) c_gst_value_get_int_range_step;
+  const(GstStructure)* function(const(GValue)* value) c_gst_value_get_structure;
+  void function(GValue* dest, const(GValue)* src) c_gst_value_init_and_copy;
+  bool function(GValue* dest, const(GValue)* value1, const(GValue)* value2) c_gst_value_intersect;
+  bool function(const(GValue)* value) c_gst_value_is_fixed;
+  bool function(const(GValue)* value1, const(GValue)* value2) c_gst_value_is_subset;
+  void function(const(GstValueTable)* table) c_gst_value_register;
+  char* function(const(GValue)* value) c_gst_value_serialize;
+  void function(GValue* value, ulong bitmask) c_gst_value_set_bitmask;
+  void function(GValue* value, const(GstCaps)* caps) c_gst_value_set_caps;
+  void function(GValue* value, const(GstCapsFeatures)* features) c_gst_value_set_caps_features;
+  void function(GValue* value, double start, double end) c_gst_value_set_double_range;
+  void function(GValue* value, uint flags, uint mask) c_gst_value_set_flagset;
+  void function(GValue* value, int numerator, int denominator) c_gst_value_set_fraction;
+  void function(GValue* value, const(GValue)* start, const(GValue)* end) c_gst_value_set_fraction_range;
+  void function(GValue* value, int numeratorStart, int denominatorStart, int numeratorEnd, int denominatorEnd) c_gst_value_set_fraction_range_full;
+  void function(GValue* value, long start, long end) c_gst_value_set_int64_range;
+  void function(GValue* value, long start, long end, long step) c_gst_value_set_int64_range_step;
+  void function(GValue* value, int start, int end) c_gst_value_set_int_range;
+  void function(GValue* value, int start, int end, int step) c_gst_value_set_int_range_step;
+  void function(GValue* value, const(GstStructure)* structure) c_gst_value_set_structure;
+  bool function(GValue* dest, const(GValue)* minuend, const(GValue)* subtrahend) c_gst_value_subtract;
+  bool function(GValue* dest, const(GValue)* value1, const(GValue)* value2) c_gst_value_union;
+  void function(uint* major, uint* minor, uint* micro, uint* nano) c_gst_version;
+  char* function() c_gst_version_string;
+}
+
+// AllocationParams
+alias gst_allocation_params_get_type = c_gst_allocation_params_get_type;
+alias gst_allocation_params_new = c_gst_allocation_params_new;
+alias gst_allocation_params_copy = c_gst_allocation_params_copy;
+alias gst_allocation_params_free = c_gst_allocation_params_free;
+alias gst_allocation_params_init = c_gst_allocation_params_init;
+
+// Allocator
+alias gst_allocator_get_type = c_gst_allocator_get_type;
+alias gst_allocator_find = c_gst_allocator_find;
+alias gst_allocator_register = c_gst_allocator_register;
+alias gst_allocator_alloc = c_gst_allocator_alloc;
+alias gst_allocator_free = c_gst_allocator_free;
+alias gst_allocator_set_default = c_gst_allocator_set_default;
+
+// AtomicQueue
+alias gst_atomic_queue_get_type = c_gst_atomic_queue_get_type;
+alias gst_atomic_queue_new = c_gst_atomic_queue_new;
+alias gst_atomic_queue_length = c_gst_atomic_queue_length;
+alias gst_atomic_queue_peek = c_gst_atomic_queue_peek;
+alias gst_atomic_queue_pop = c_gst_atomic_queue_pop;
+alias gst_atomic_queue_push = c_gst_atomic_queue_push;
+alias gst_atomic_queue_ref = c_gst_atomic_queue_ref;
+alias gst_atomic_queue_unref = c_gst_atomic_queue_unref;
+
+// Bin
+alias gst_bin_get_type = c_gst_bin_get_type;
+alias gst_bin_new = c_gst_bin_new;
+alias gst_bin_add = c_gst_bin_add;
+alias gst_bin_add_many = c_gst_bin_add_many;
+alias gst_bin_find_unlinked_pad = c_gst_bin_find_unlinked_pad;
+alias gst_bin_get_by_interface = c_gst_bin_get_by_interface;
+alias gst_bin_get_by_name = c_gst_bin_get_by_name;
+alias gst_bin_get_by_name_recurse_up = c_gst_bin_get_by_name_recurse_up;
+alias gst_bin_get_suppressed_flags = c_gst_bin_get_suppressed_flags;
+alias gst_bin_iterate_all_by_element_factory_name = c_gst_bin_iterate_all_by_element_factory_name;
+alias gst_bin_iterate_all_by_interface = c_gst_bin_iterate_all_by_interface;
+alias gst_bin_iterate_elements = c_gst_bin_iterate_elements;
+alias gst_bin_iterate_recurse = c_gst_bin_iterate_recurse;
+alias gst_bin_iterate_sinks = c_gst_bin_iterate_sinks;
+alias gst_bin_iterate_sorted = c_gst_bin_iterate_sorted;
+alias gst_bin_iterate_sources = c_gst_bin_iterate_sources;
+alias gst_bin_recalculate_latency = c_gst_bin_recalculate_latency;
+alias gst_bin_remove = c_gst_bin_remove;
+alias gst_bin_remove_many = c_gst_bin_remove_many;
+alias gst_bin_set_suppressed_flags = c_gst_bin_set_suppressed_flags;
+alias gst_bin_sync_children_states = c_gst_bin_sync_children_states;
+
+// Bitmask
+alias gst_bitmask_get_type = c_gst_bitmask_get_type;
+
+// Buffer
+alias gst_buffer_get_type = c_gst_buffer_get_type;
+alias gst_buffer_new = c_gst_buffer_new;
+alias gst_buffer_new_allocate = c_gst_buffer_new_allocate;
+alias gst_buffer_new_memdup = c_gst_buffer_new_memdup;
+alias gst_buffer_new_wrapped = c_gst_buffer_new_wrapped;
+alias gst_buffer_new_wrapped_bytes = c_gst_buffer_new_wrapped_bytes;
+alias gst_buffer_new_wrapped_full = c_gst_buffer_new_wrapped_full;
+alias gst_buffer_add_custom_meta = c_gst_buffer_add_custom_meta;
+alias gst_buffer_add_meta = c_gst_buffer_add_meta;
+alias gst_buffer_add_parent_buffer_meta = c_gst_buffer_add_parent_buffer_meta;
+alias gst_buffer_add_protection_meta = c_gst_buffer_add_protection_meta;
+alias gst_buffer_add_reference_timestamp_meta = c_gst_buffer_add_reference_timestamp_meta;
+alias gst_buffer_append = c_gst_buffer_append;
+alias gst_buffer_append_memory = c_gst_buffer_append_memory;
+alias gst_buffer_append_region = c_gst_buffer_append_region;
+alias gst_buffer_copy_deep = c_gst_buffer_copy_deep;
+alias gst_buffer_copy_into = c_gst_buffer_copy_into;
+alias gst_buffer_copy_region = c_gst_buffer_copy_region;
+alias gst_buffer_extract = c_gst_buffer_extract;
+alias gst_buffer_extract_dup = c_gst_buffer_extract_dup;
+alias gst_buffer_fill = c_gst_buffer_fill;
+alias gst_buffer_find_memory = c_gst_buffer_find_memory;
+alias gst_buffer_foreach_meta = c_gst_buffer_foreach_meta;
+alias gst_buffer_get_all_memory = c_gst_buffer_get_all_memory;
+alias gst_buffer_get_custom_meta = c_gst_buffer_get_custom_meta;
+alias gst_buffer_get_flags = c_gst_buffer_get_flags;
+alias gst_buffer_get_memory = c_gst_buffer_get_memory;
+alias gst_buffer_get_memory_range = c_gst_buffer_get_memory_range;
+alias gst_buffer_get_meta = c_gst_buffer_get_meta;
+alias gst_buffer_get_n_meta = c_gst_buffer_get_n_meta;
+alias gst_buffer_get_reference_timestamp_meta = c_gst_buffer_get_reference_timestamp_meta;
+alias gst_buffer_get_size = c_gst_buffer_get_size;
+alias gst_buffer_get_sizes = c_gst_buffer_get_sizes;
+alias gst_buffer_get_sizes_range = c_gst_buffer_get_sizes_range;
+alias gst_buffer_has_flags = c_gst_buffer_has_flags;
+alias gst_buffer_insert_memory = c_gst_buffer_insert_memory;
+alias gst_buffer_is_all_memory_writable = c_gst_buffer_is_all_memory_writable;
+alias gst_buffer_is_memory_range_writable = c_gst_buffer_is_memory_range_writable;
+alias gst_buffer_iterate_meta = c_gst_buffer_iterate_meta;
+alias gst_buffer_iterate_meta_filtered = c_gst_buffer_iterate_meta_filtered;
+alias gst_buffer_map = c_gst_buffer_map;
+alias gst_buffer_map_range = c_gst_buffer_map_range;
+alias gst_buffer_memcmp = c_gst_buffer_memcmp;
+alias gst_buffer_memset = c_gst_buffer_memset;
+alias gst_buffer_n_memory = c_gst_buffer_n_memory;
+alias gst_buffer_peek_memory = c_gst_buffer_peek_memory;
+alias gst_buffer_prepend_memory = c_gst_buffer_prepend_memory;
+alias gst_buffer_remove_all_memory = c_gst_buffer_remove_all_memory;
+alias gst_buffer_remove_memory = c_gst_buffer_remove_memory;
+alias gst_buffer_remove_memory_range = c_gst_buffer_remove_memory_range;
+alias gst_buffer_remove_meta = c_gst_buffer_remove_meta;
+alias gst_buffer_replace_all_memory = c_gst_buffer_replace_all_memory;
+alias gst_buffer_replace_memory = c_gst_buffer_replace_memory;
+alias gst_buffer_replace_memory_range = c_gst_buffer_replace_memory_range;
+alias gst_buffer_resize = c_gst_buffer_resize;
+alias gst_buffer_resize_range = c_gst_buffer_resize_range;
+alias gst_buffer_set_flags = c_gst_buffer_set_flags;
+alias gst_buffer_set_size = c_gst_buffer_set_size;
+alias gst_buffer_unmap = c_gst_buffer_unmap;
+alias gst_buffer_unset_flags = c_gst_buffer_unset_flags;
+alias gst_buffer_get_max_memory = c_gst_buffer_get_max_memory;
+
+// BufferList
+alias gst_buffer_list_get_type = c_gst_buffer_list_get_type;
+alias gst_buffer_list_new = c_gst_buffer_list_new;
+alias gst_buffer_list_new_sized = c_gst_buffer_list_new_sized;
+alias gst_buffer_list_calculate_size = c_gst_buffer_list_calculate_size;
+alias gst_buffer_list_copy_deep = c_gst_buffer_list_copy_deep;
+alias gst_buffer_list_foreach = c_gst_buffer_list_foreach;
+alias gst_buffer_list_get = c_gst_buffer_list_get;
+alias gst_buffer_list_get_writable = c_gst_buffer_list_get_writable;
+alias gst_buffer_list_insert = c_gst_buffer_list_insert;
+alias gst_buffer_list_length = c_gst_buffer_list_length;
+alias gst_buffer_list_remove = c_gst_buffer_list_remove;
+
+// BufferPool
+alias gst_buffer_pool_get_type = c_gst_buffer_pool_get_type;
+alias gst_buffer_pool_new = c_gst_buffer_pool_new;
+alias gst_buffer_pool_config_add_option = c_gst_buffer_pool_config_add_option;
+alias gst_buffer_pool_config_get_allocator = c_gst_buffer_pool_config_get_allocator;
+alias gst_buffer_pool_config_get_option = c_gst_buffer_pool_config_get_option;
+alias gst_buffer_pool_config_get_params = c_gst_buffer_pool_config_get_params;
+alias gst_buffer_pool_config_has_option = c_gst_buffer_pool_config_has_option;
+alias gst_buffer_pool_config_n_options = c_gst_buffer_pool_config_n_options;
+alias gst_buffer_pool_config_set_allocator = c_gst_buffer_pool_config_set_allocator;
+alias gst_buffer_pool_config_set_params = c_gst_buffer_pool_config_set_params;
+alias gst_buffer_pool_config_validate_params = c_gst_buffer_pool_config_validate_params;
+alias gst_buffer_pool_acquire_buffer = c_gst_buffer_pool_acquire_buffer;
+alias gst_buffer_pool_get_config = c_gst_buffer_pool_get_config;
+alias gst_buffer_pool_get_options = c_gst_buffer_pool_get_options;
+alias gst_buffer_pool_has_option = c_gst_buffer_pool_has_option;
+alias gst_buffer_pool_is_active = c_gst_buffer_pool_is_active;
+alias gst_buffer_pool_release_buffer = c_gst_buffer_pool_release_buffer;
+alias gst_buffer_pool_set_active = c_gst_buffer_pool_set_active;
+alias gst_buffer_pool_set_config = c_gst_buffer_pool_set_config;
+alias gst_buffer_pool_set_flushing = c_gst_buffer_pool_set_flushing;
+
+// Bus
+alias gst_bus_get_type = c_gst_bus_get_type;
+alias gst_bus_new = c_gst_bus_new;
+alias gst_bus_add_signal_watch = c_gst_bus_add_signal_watch;
+alias gst_bus_add_signal_watch_full = c_gst_bus_add_signal_watch_full;
+alias gst_bus_add_watch = c_gst_bus_add_watch;
+alias gst_bus_add_watch_full = c_gst_bus_add_watch_full;
+alias gst_bus_async_signal_func = c_gst_bus_async_signal_func;
+alias gst_bus_create_watch = c_gst_bus_create_watch;
+alias gst_bus_disable_sync_message_emission = c_gst_bus_disable_sync_message_emission;
+alias gst_bus_enable_sync_message_emission = c_gst_bus_enable_sync_message_emission;
+alias gst_bus_get_pollfd = c_gst_bus_get_pollfd;
+alias gst_bus_have_pending = c_gst_bus_have_pending;
+alias gst_bus_peek = c_gst_bus_peek;
+alias gst_bus_poll = c_gst_bus_poll;
+alias gst_bus_pop = c_gst_bus_pop;
+alias gst_bus_pop_filtered = c_gst_bus_pop_filtered;
+alias gst_bus_post = c_gst_bus_post;
+alias gst_bus_remove_signal_watch = c_gst_bus_remove_signal_watch;
+alias gst_bus_remove_watch = c_gst_bus_remove_watch;
+alias gst_bus_set_flushing = c_gst_bus_set_flushing;
+alias gst_bus_set_sync_handler = c_gst_bus_set_sync_handler;
+alias gst_bus_sync_signal_handler = c_gst_bus_sync_signal_handler;
+alias gst_bus_timed_pop = c_gst_bus_timed_pop;
+alias gst_bus_timed_pop_filtered = c_gst_bus_timed_pop_filtered;
+
+// Caps
+alias gst_caps_get_type = c_gst_caps_get_type;
+alias gst_caps_new_any = c_gst_caps_new_any;
+alias gst_caps_new_empty = c_gst_caps_new_empty;
+alias gst_caps_new_empty_simple = c_gst_caps_new_empty_simple;
+alias gst_caps_new_full = c_gst_caps_new_full;
+alias gst_caps_new_full_valist = c_gst_caps_new_full_valist;
+alias gst_caps_new_simple = c_gst_caps_new_simple;
+alias gst_caps_append = c_gst_caps_append;
+alias gst_caps_append_structure = c_gst_caps_append_structure;
+alias gst_caps_append_structure_full = c_gst_caps_append_structure_full;
+alias gst_caps_can_intersect = c_gst_caps_can_intersect;
+alias gst_caps_copy = c_gst_caps_copy;
+alias gst_caps_copy_nth = c_gst_caps_copy_nth;
+alias gst_caps_filter_and_map_in_place = c_gst_caps_filter_and_map_in_place;
+alias gst_caps_fixate = c_gst_caps_fixate;
+alias gst_caps_foreach = c_gst_caps_foreach;
+alias gst_caps_get_features = c_gst_caps_get_features;
+alias gst_caps_get_size = c_gst_caps_get_size;
+alias gst_caps_get_structure = c_gst_caps_get_structure;
+alias gst_caps_intersect = c_gst_caps_intersect;
+alias gst_caps_intersect_full = c_gst_caps_intersect_full;
+alias gst_caps_is_always_compatible = c_gst_caps_is_always_compatible;
+alias gst_caps_is_any = c_gst_caps_is_any;
+alias gst_caps_is_empty = c_gst_caps_is_empty;
+alias gst_caps_is_equal = c_gst_caps_is_equal;
+alias gst_caps_is_equal_fixed = c_gst_caps_is_equal_fixed;
+alias gst_caps_is_fixed = c_gst_caps_is_fixed;
+alias gst_caps_is_strictly_equal = c_gst_caps_is_strictly_equal;
+alias gst_caps_is_subset = c_gst_caps_is_subset;
+alias gst_caps_is_subset_structure = c_gst_caps_is_subset_structure;
+alias gst_caps_is_subset_structure_full = c_gst_caps_is_subset_structure_full;
+alias gst_caps_map_in_place = c_gst_caps_map_in_place;
+alias gst_caps_merge = c_gst_caps_merge;
+alias gst_caps_merge_structure = c_gst_caps_merge_structure;
+alias gst_caps_merge_structure_full = c_gst_caps_merge_structure_full;
+alias gst_caps_normalize = c_gst_caps_normalize;
+alias gst_caps_remove_structure = c_gst_caps_remove_structure;
+alias gst_caps_serialize = c_gst_caps_serialize;
+alias gst_caps_set_features = c_gst_caps_set_features;
+alias gst_caps_set_features_simple = c_gst_caps_set_features_simple;
+alias gst_caps_set_simple = c_gst_caps_set_simple;
+alias gst_caps_set_simple_valist = c_gst_caps_set_simple_valist;
+alias gst_caps_set_value = c_gst_caps_set_value;
+alias gst_caps_simplify = c_gst_caps_simplify;
+alias gst_caps_steal_structure = c_gst_caps_steal_structure;
+alias gst_caps_subtract = c_gst_caps_subtract;
+alias gst_caps_to_string = c_gst_caps_to_string;
+alias gst_caps_truncate = c_gst_caps_truncate;
+alias gst_caps_from_string = c_gst_caps_from_string;
+
+// CapsFeatures
+alias gst_caps_features_get_type = c_gst_caps_features_get_type;
+alias gst_caps_features_new = c_gst_caps_features_new;
+alias gst_caps_features_new_any = c_gst_caps_features_new_any;
+alias gst_caps_features_new_empty = c_gst_caps_features_new_empty;
+alias gst_caps_features_new_id = c_gst_caps_features_new_id;
+alias gst_caps_features_new_id_valist = c_gst_caps_features_new_id_valist;
+alias gst_caps_features_new_single = c_gst_caps_features_new_single;
+alias gst_caps_features_new_valist = c_gst_caps_features_new_valist;
+alias gst_caps_features_add = c_gst_caps_features_add;
+alias gst_caps_features_add_id = c_gst_caps_features_add_id;
+alias gst_caps_features_contains = c_gst_caps_features_contains;
+alias gst_caps_features_contains_id = c_gst_caps_features_contains_id;
+alias gst_caps_features_copy = c_gst_caps_features_copy;
+alias gst_caps_features_free = c_gst_caps_features_free;
+alias gst_caps_features_get_nth = c_gst_caps_features_get_nth;
+alias gst_caps_features_get_nth_id = c_gst_caps_features_get_nth_id;
+alias gst_caps_features_get_size = c_gst_caps_features_get_size;
+alias gst_caps_features_is_any = c_gst_caps_features_is_any;
+alias gst_caps_features_is_equal = c_gst_caps_features_is_equal;
+alias gst_caps_features_remove = c_gst_caps_features_remove;
+alias gst_caps_features_remove_id = c_gst_caps_features_remove_id;
+alias gst_caps_features_set_parent_refcount = c_gst_caps_features_set_parent_refcount;
+alias gst_caps_features_to_string = c_gst_caps_features_to_string;
+alias gst_caps_features_from_string = c_gst_caps_features_from_string;
+
+// ChildProxy
+alias gst_child_proxy_get_type = c_gst_child_proxy_get_type;
+alias gst_child_proxy_child_added = c_gst_child_proxy_child_added;
+alias gst_child_proxy_child_removed = c_gst_child_proxy_child_removed;
+alias gst_child_proxy_get = c_gst_child_proxy_get;
+alias gst_child_proxy_get_child_by_index = c_gst_child_proxy_get_child_by_index;
+alias gst_child_proxy_get_child_by_name = c_gst_child_proxy_get_child_by_name;
+alias gst_child_proxy_get_child_by_name_recurse = c_gst_child_proxy_get_child_by_name_recurse;
+alias gst_child_proxy_get_children_count = c_gst_child_proxy_get_children_count;
+alias gst_child_proxy_get_property = c_gst_child_proxy_get_property;
+alias gst_child_proxy_get_valist = c_gst_child_proxy_get_valist;
+alias gst_child_proxy_lookup = c_gst_child_proxy_lookup;
+alias gst_child_proxy_set = c_gst_child_proxy_set;
+alias gst_child_proxy_set_property = c_gst_child_proxy_set_property;
+alias gst_child_proxy_set_valist = c_gst_child_proxy_set_valist;
+
+// Clock
+alias gst_clock_get_type = c_gst_clock_get_type;
+alias gst_clock_id_compare_func = c_gst_clock_id_compare_func;
+alias gst_clock_id_get_clock = c_gst_clock_id_get_clock;
+alias gst_clock_id_get_time = c_gst_clock_id_get_time;
+alias gst_clock_id_ref = c_gst_clock_id_ref;
+alias gst_clock_id_unref = c_gst_clock_id_unref;
+alias gst_clock_id_unschedule = c_gst_clock_id_unschedule;
+alias gst_clock_id_uses_clock = c_gst_clock_id_uses_clock;
+alias gst_clock_id_wait = c_gst_clock_id_wait;
+alias gst_clock_id_wait_async = c_gst_clock_id_wait_async;
+alias gst_clock_add_observation = c_gst_clock_add_observation;
+alias gst_clock_add_observation_unapplied = c_gst_clock_add_observation_unapplied;
+alias gst_clock_adjust_unlocked = c_gst_clock_adjust_unlocked;
+alias gst_clock_adjust_with_calibration = c_gst_clock_adjust_with_calibration;
+alias gst_clock_get_calibration = c_gst_clock_get_calibration;
+alias gst_clock_get_internal_time = c_gst_clock_get_internal_time;
+alias gst_clock_get_master = c_gst_clock_get_master;
+alias gst_clock_get_resolution = c_gst_clock_get_resolution;
+alias gst_clock_get_time = c_gst_clock_get_time;
+alias gst_clock_get_timeout = c_gst_clock_get_timeout;
+alias gst_clock_is_synced = c_gst_clock_is_synced;
+alias gst_clock_new_periodic_id = c_gst_clock_new_periodic_id;
+alias gst_clock_new_single_shot_id = c_gst_clock_new_single_shot_id;
+alias gst_clock_periodic_id_reinit = c_gst_clock_periodic_id_reinit;
+alias gst_clock_set_calibration = c_gst_clock_set_calibration;
+alias gst_clock_set_master = c_gst_clock_set_master;
+alias gst_clock_set_resolution = c_gst_clock_set_resolution;
+alias gst_clock_set_synced = c_gst_clock_set_synced;
+alias gst_clock_set_timeout = c_gst_clock_set_timeout;
+alias gst_clock_single_shot_id_reinit = c_gst_clock_single_shot_id_reinit;
+alias gst_clock_unadjust_unlocked = c_gst_clock_unadjust_unlocked;
+alias gst_clock_unadjust_with_calibration = c_gst_clock_unadjust_with_calibration;
+alias gst_clock_wait_for_sync = c_gst_clock_wait_for_sync;
+
+// Context
+alias gst_context_get_type = c_gst_context_get_type;
+alias gst_context_new = c_gst_context_new;
+alias gst_context_get_context_type = c_gst_context_get_context_type;
+alias gst_context_get_structure = c_gst_context_get_structure;
+alias gst_context_has_context_type = c_gst_context_has_context_type;
+alias gst_context_is_persistent = c_gst_context_is_persistent;
+alias gst_context_writable_structure = c_gst_context_writable_structure;
+
+// ControlBinding
+alias gst_control_binding_get_type = c_gst_control_binding_get_type;
+alias gst_control_binding_get_g_value_array = c_gst_control_binding_get_g_value_array;
+alias gst_control_binding_get_value = c_gst_control_binding_get_value;
+alias gst_control_binding_get_value_array = c_gst_control_binding_get_value_array;
+alias gst_control_binding_is_disabled = c_gst_control_binding_is_disabled;
+alias gst_control_binding_set_disabled = c_gst_control_binding_set_disabled;
+alias gst_control_binding_sync_values = c_gst_control_binding_sync_values;
+
+// ControlSource
+alias gst_control_source_get_type = c_gst_control_source_get_type;
+alias gst_control_source_get_value = c_gst_control_source_get_value;
+alias gst_control_source_get_value_array = c_gst_control_source_get_value_array;
+
+// CustomMeta
+alias gst_custom_meta_get_structure = c_gst_custom_meta_get_structure;
+alias gst_custom_meta_has_name = c_gst_custom_meta_has_name;
+
+// DateTime
+alias gst_date_time_get_type = c_gst_date_time_get_type;
+alias gst_date_time_new = c_gst_date_time_new;
+alias gst_date_time_new_from_g_date_time = c_gst_date_time_new_from_g_date_time;
+alias gst_date_time_new_from_iso8601_string = c_gst_date_time_new_from_iso8601_string;
+alias gst_date_time_new_from_unix_epoch_local_time = c_gst_date_time_new_from_unix_epoch_local_time;
+alias gst_date_time_new_from_unix_epoch_local_time_usecs = c_gst_date_time_new_from_unix_epoch_local_time_usecs;
+alias gst_date_time_new_from_unix_epoch_utc = c_gst_date_time_new_from_unix_epoch_utc;
+alias gst_date_time_new_from_unix_epoch_utc_usecs = c_gst_date_time_new_from_unix_epoch_utc_usecs;
+alias gst_date_time_new_local_time = c_gst_date_time_new_local_time;
+alias gst_date_time_new_now_local_time = c_gst_date_time_new_now_local_time;
+alias gst_date_time_new_now_utc = c_gst_date_time_new_now_utc;
+alias gst_date_time_new_y = c_gst_date_time_new_y;
+alias gst_date_time_new_ym = c_gst_date_time_new_ym;
+alias gst_date_time_new_ymd = c_gst_date_time_new_ymd;
+alias gst_date_time_get_day = c_gst_date_time_get_day;
+alias gst_date_time_get_hour = c_gst_date_time_get_hour;
+alias gst_date_time_get_microsecond = c_gst_date_time_get_microsecond;
+alias gst_date_time_get_minute = c_gst_date_time_get_minute;
+alias gst_date_time_get_month = c_gst_date_time_get_month;
+alias gst_date_time_get_second = c_gst_date_time_get_second;
+alias gst_date_time_get_time_zone_offset = c_gst_date_time_get_time_zone_offset;
+alias gst_date_time_get_year = c_gst_date_time_get_year;
+alias gst_date_time_has_day = c_gst_date_time_has_day;
+alias gst_date_time_has_month = c_gst_date_time_has_month;
+alias gst_date_time_has_second = c_gst_date_time_has_second;
+alias gst_date_time_has_time = c_gst_date_time_has_time;
+alias gst_date_time_has_year = c_gst_date_time_has_year;
+alias gst_date_time_ref = c_gst_date_time_ref;
+alias gst_date_time_to_g_date_time = c_gst_date_time_to_g_date_time;
+alias gst_date_time_to_iso8601_string = c_gst_date_time_to_iso8601_string;
+alias gst_date_time_unref = c_gst_date_time_unref;
+
+// DebugCategory
+alias gst_debug_category_free = c_gst_debug_category_free;
+alias gst_debug_category_get_color = c_gst_debug_category_get_color;
+alias gst_debug_category_get_description = c_gst_debug_category_get_description;
+alias gst_debug_category_get_name = c_gst_debug_category_get_name;
+alias gst_debug_category_get_threshold = c_gst_debug_category_get_threshold;
+alias gst_debug_category_reset_threshold = c_gst_debug_category_reset_threshold;
+alias gst_debug_category_set_threshold = c_gst_debug_category_set_threshold;
+
+// DebugMessage
+alias gst_debug_message_get = c_gst_debug_message_get;
+alias gst_debug_message_get_id = c_gst_debug_message_get_id;
+
+// Device
+alias gst_device_get_type = c_gst_device_get_type;
+alias gst_device_create_element = c_gst_device_create_element;
+alias gst_device_get_caps = c_gst_device_get_caps;
+alias gst_device_get_device_class = c_gst_device_get_device_class;
+alias gst_device_get_display_name = c_gst_device_get_display_name;
+alias gst_device_get_properties = c_gst_device_get_properties;
+alias gst_device_has_classes = c_gst_device_has_classes;
+alias gst_device_has_classesv = c_gst_device_has_classesv;
+alias gst_device_reconfigure_element = c_gst_device_reconfigure_element;
+
+// DeviceMonitor
+alias gst_device_monitor_get_type = c_gst_device_monitor_get_type;
+alias gst_device_monitor_new = c_gst_device_monitor_new;
+alias gst_device_monitor_add_filter = c_gst_device_monitor_add_filter;
+alias gst_device_monitor_get_bus = c_gst_device_monitor_get_bus;
+alias gst_device_monitor_get_devices = c_gst_device_monitor_get_devices;
+alias gst_device_monitor_get_providers = c_gst_device_monitor_get_providers;
+alias gst_device_monitor_get_show_all_devices = c_gst_device_monitor_get_show_all_devices;
+alias gst_device_monitor_remove_filter = c_gst_device_monitor_remove_filter;
+alias gst_device_monitor_set_show_all_devices = c_gst_device_monitor_set_show_all_devices;
+alias gst_device_monitor_start = c_gst_device_monitor_start;
+alias gst_device_monitor_stop = c_gst_device_monitor_stop;
+
+// DeviceProvider
+alias gst_device_provider_get_type = c_gst_device_provider_get_type;
+alias gst_device_provider_register = c_gst_device_provider_register;
+alias gst_device_provider_can_monitor = c_gst_device_provider_can_monitor;
+alias gst_device_provider_device_add = c_gst_device_provider_device_add;
+alias gst_device_provider_device_changed = c_gst_device_provider_device_changed;
+alias gst_device_provider_device_remove = c_gst_device_provider_device_remove;
+alias gst_device_provider_get_bus = c_gst_device_provider_get_bus;
+alias gst_device_provider_get_devices = c_gst_device_provider_get_devices;
+alias gst_device_provider_get_factory = c_gst_device_provider_get_factory;
+alias gst_device_provider_get_hidden_providers = c_gst_device_provider_get_hidden_providers;
+alias gst_device_provider_get_metadata = c_gst_device_provider_get_metadata;
+alias gst_device_provider_hide_provider = c_gst_device_provider_hide_provider;
+alias gst_device_provider_is_started = c_gst_device_provider_is_started;
+alias gst_device_provider_start = c_gst_device_provider_start;
+alias gst_device_provider_stop = c_gst_device_provider_stop;
+alias gst_device_provider_unhide_provider = c_gst_device_provider_unhide_provider;
+
+// DeviceProviderClass
+alias gst_device_provider_class_add_metadata = c_gst_device_provider_class_add_metadata;
+alias gst_device_provider_class_add_static_metadata = c_gst_device_provider_class_add_static_metadata;
+alias gst_device_provider_class_get_metadata = c_gst_device_provider_class_get_metadata;
+alias gst_device_provider_class_set_metadata = c_gst_device_provider_class_set_metadata;
+alias gst_device_provider_class_set_static_metadata = c_gst_device_provider_class_set_static_metadata;
+
+// DeviceProviderFactory
+alias gst_device_provider_factory_get_type = c_gst_device_provider_factory_get_type;
+alias gst_device_provider_factory_find = c_gst_device_provider_factory_find;
+alias gst_device_provider_factory_get_by_name = c_gst_device_provider_factory_get_by_name;
+alias gst_device_provider_factory_list_get_device_providers = c_gst_device_provider_factory_list_get_device_providers;
+alias gst_device_provider_factory_get = c_gst_device_provider_factory_get;
+alias gst_device_provider_factory_get_device_provider_type = c_gst_device_provider_factory_get_device_provider_type;
+alias gst_device_provider_factory_get_metadata = c_gst_device_provider_factory_get_metadata;
+alias gst_device_provider_factory_get_metadata_keys = c_gst_device_provider_factory_get_metadata_keys;
+alias gst_device_provider_factory_has_classes = c_gst_device_provider_factory_has_classes;
+alias gst_device_provider_factory_has_classesv = c_gst_device_provider_factory_has_classesv;
+
+// DoubleRange
+alias gst_double_range_get_type = c_gst_double_range_get_type;
+
+// DynamicTypeFactory
+alias gst_dynamic_type_factory_get_type = c_gst_dynamic_type_factory_get_type;
+alias gst_dynamic_type_factory_load = c_gst_dynamic_type_factory_load;
+
+// Element
+alias gst_element_get_type = c_gst_element_get_type;
+alias gst_element_make_from_uri = c_gst_element_make_from_uri;
+alias gst_element_register = c_gst_element_register;
+alias gst_element_state_change_return_get_name = c_gst_element_state_change_return_get_name;
+alias gst_element_state_get_name = c_gst_element_state_get_name;
+alias gst_element_type_set_skip_documentation = c_gst_element_type_set_skip_documentation;
+alias gst_element_abort_state = c_gst_element_abort_state;
+alias gst_element_add_pad = c_gst_element_add_pad;
+alias gst_element_add_property_deep_notify_watch = c_gst_element_add_property_deep_notify_watch;
+alias gst_element_add_property_notify_watch = c_gst_element_add_property_notify_watch;
+alias gst_element_call_async = c_gst_element_call_async;
+alias gst_element_change_state = c_gst_element_change_state;
+alias gst_element_continue_state = c_gst_element_continue_state;
+alias gst_element_create_all_pads = c_gst_element_create_all_pads;
+alias gst_element_decorate_stream_id = c_gst_element_decorate_stream_id;
+alias gst_element_decorate_stream_id_printf = c_gst_element_decorate_stream_id_printf;
+alias gst_element_decorate_stream_id_printf_valist = c_gst_element_decorate_stream_id_printf_valist;
+alias gst_element_foreach_pad = c_gst_element_foreach_pad;
+alias gst_element_foreach_sink_pad = c_gst_element_foreach_sink_pad;
+alias gst_element_foreach_src_pad = c_gst_element_foreach_src_pad;
+alias gst_element_get_base_time = c_gst_element_get_base_time;
+alias gst_element_get_bus = c_gst_element_get_bus;
+alias gst_element_get_clock = c_gst_element_get_clock;
+alias gst_element_get_compatible_pad = c_gst_element_get_compatible_pad;
+alias gst_element_get_compatible_pad_template = c_gst_element_get_compatible_pad_template;
+alias gst_element_get_context = c_gst_element_get_context;
+alias gst_element_get_context_unlocked = c_gst_element_get_context_unlocked;
+alias gst_element_get_contexts = c_gst_element_get_contexts;
+alias gst_element_get_current_clock_time = c_gst_element_get_current_clock_time;
+alias gst_element_get_current_running_time = c_gst_element_get_current_running_time;
+alias gst_element_get_factory = c_gst_element_get_factory;
+alias gst_element_get_metadata = c_gst_element_get_metadata;
+alias gst_element_get_pad_template = c_gst_element_get_pad_template;
+alias gst_element_get_pad_template_list = c_gst_element_get_pad_template_list;
+alias gst_element_get_request_pad = c_gst_element_get_request_pad;
+alias gst_element_get_start_time = c_gst_element_get_start_time;
+alias gst_element_get_state = c_gst_element_get_state;
+alias gst_element_get_static_pad = c_gst_element_get_static_pad;
+alias gst_element_is_locked_state = c_gst_element_is_locked_state;
+alias gst_element_iterate_pads = c_gst_element_iterate_pads;
+alias gst_element_iterate_sink_pads = c_gst_element_iterate_sink_pads;
+alias gst_element_iterate_src_pads = c_gst_element_iterate_src_pads;
+alias gst_element_link = c_gst_element_link;
+alias gst_element_link_filtered = c_gst_element_link_filtered;
+alias gst_element_link_many = c_gst_element_link_many;
+alias gst_element_link_pads = c_gst_element_link_pads;
+alias gst_element_link_pads_filtered = c_gst_element_link_pads_filtered;
+alias gst_element_link_pads_full = c_gst_element_link_pads_full;
+alias gst_element_lost_state = c_gst_element_lost_state;
+alias gst_element_message_full = c_gst_element_message_full;
+alias gst_element_message_full_with_details = c_gst_element_message_full_with_details;
+alias gst_element_no_more_pads = c_gst_element_no_more_pads;
+alias gst_element_post_message = c_gst_element_post_message;
+alias gst_element_provide_clock = c_gst_element_provide_clock;
+alias gst_element_query = c_gst_element_query;
+alias gst_element_query_convert = c_gst_element_query_convert;
+alias gst_element_query_duration = c_gst_element_query_duration;
+alias gst_element_query_position = c_gst_element_query_position;
+alias gst_element_release_request_pad = c_gst_element_release_request_pad;
+alias gst_element_remove_pad = c_gst_element_remove_pad;
+alias gst_element_remove_property_notify_watch = c_gst_element_remove_property_notify_watch;
+alias gst_element_request_pad = c_gst_element_request_pad;
+alias gst_element_request_pad_simple = c_gst_element_request_pad_simple;
+alias gst_element_seek = c_gst_element_seek;
+alias gst_element_seek_simple = c_gst_element_seek_simple;
+alias gst_element_send_event = c_gst_element_send_event;
+alias gst_element_set_base_time = c_gst_element_set_base_time;
+alias gst_element_set_bus = c_gst_element_set_bus;
+alias gst_element_set_clock = c_gst_element_set_clock;
+alias gst_element_set_context = c_gst_element_set_context;
+alias gst_element_set_locked_state = c_gst_element_set_locked_state;
+alias gst_element_set_start_time = c_gst_element_set_start_time;
+alias gst_element_set_state = c_gst_element_set_state;
+alias gst_element_sync_state_with_parent = c_gst_element_sync_state_with_parent;
+alias gst_element_unlink = c_gst_element_unlink;
+alias gst_element_unlink_many = c_gst_element_unlink_many;
+alias gst_element_unlink_pads = c_gst_element_unlink_pads;
+
+// ElementClass
+alias gst_element_class_add_metadata = c_gst_element_class_add_metadata;
+alias gst_element_class_add_pad_template = c_gst_element_class_add_pad_template;
+alias gst_element_class_add_static_metadata = c_gst_element_class_add_static_metadata;
+alias gst_element_class_add_static_pad_template = c_gst_element_class_add_static_pad_template;
+alias gst_element_class_add_static_pad_template_with_gtype = c_gst_element_class_add_static_pad_template_with_gtype;
+alias gst_element_class_get_metadata = c_gst_element_class_get_metadata;
+alias gst_element_class_get_pad_template = c_gst_element_class_get_pad_template;
+alias gst_element_class_get_pad_template_list = c_gst_element_class_get_pad_template_list;
+alias gst_element_class_set_metadata = c_gst_element_class_set_metadata;
+alias gst_element_class_set_static_metadata = c_gst_element_class_set_static_metadata;
+
+// ElementFactory
+alias gst_element_factory_get_type = c_gst_element_factory_get_type;
+alias gst_element_factory_find = c_gst_element_factory_find;
+alias gst_element_factory_list_filter = c_gst_element_factory_list_filter;
+alias gst_element_factory_list_get_elements = c_gst_element_factory_list_get_elements;
+alias gst_element_factory_make = c_gst_element_factory_make;
+alias gst_element_factory_make_full = c_gst_element_factory_make_full;
+alias gst_element_factory_make_valist = c_gst_element_factory_make_valist;
+alias gst_element_factory_make_with_properties = c_gst_element_factory_make_with_properties;
+alias gst_element_factory_can_sink_all_caps = c_gst_element_factory_can_sink_all_caps;
+alias gst_element_factory_can_sink_any_caps = c_gst_element_factory_can_sink_any_caps;
+alias gst_element_factory_can_src_all_caps = c_gst_element_factory_can_src_all_caps;
+alias gst_element_factory_can_src_any_caps = c_gst_element_factory_can_src_any_caps;
+alias gst_element_factory_create = c_gst_element_factory_create;
+alias gst_element_factory_create_full = c_gst_element_factory_create_full;
+alias gst_element_factory_create_valist = c_gst_element_factory_create_valist;
+alias gst_element_factory_create_with_properties = c_gst_element_factory_create_with_properties;
+alias gst_element_factory_get_element_type = c_gst_element_factory_get_element_type;
+alias gst_element_factory_get_metadata = c_gst_element_factory_get_metadata;
+alias gst_element_factory_get_metadata_keys = c_gst_element_factory_get_metadata_keys;
+alias gst_element_factory_get_num_pad_templates = c_gst_element_factory_get_num_pad_templates;
+alias gst_element_factory_get_skip_documentation = c_gst_element_factory_get_skip_documentation;
+alias gst_element_factory_get_static_pad_templates = c_gst_element_factory_get_static_pad_templates;
+alias gst_element_factory_get_uri_protocols = c_gst_element_factory_get_uri_protocols;
+alias gst_element_factory_get_uri_type = c_gst_element_factory_get_uri_type;
+alias gst_element_factory_has_interface = c_gst_element_factory_has_interface;
+alias gst_element_factory_list_is_type = c_gst_element_factory_list_is_type;
+
+// Event
+alias gst_event_get_type = c_gst_event_get_type;
+alias gst_event_new_buffer_size = c_gst_event_new_buffer_size;
+alias gst_event_new_caps = c_gst_event_new_caps;
+alias gst_event_new_custom = c_gst_event_new_custom;
+alias gst_event_new_eos = c_gst_event_new_eos;
+alias gst_event_new_flush_start = c_gst_event_new_flush_start;
+alias gst_event_new_flush_stop = c_gst_event_new_flush_stop;
+alias gst_event_new_gap = c_gst_event_new_gap;
+alias gst_event_new_instant_rate_change = c_gst_event_new_instant_rate_change;
+alias gst_event_new_instant_rate_sync_time = c_gst_event_new_instant_rate_sync_time;
+alias gst_event_new_latency = c_gst_event_new_latency;
+alias gst_event_new_navigation = c_gst_event_new_navigation;
+alias gst_event_new_protection = c_gst_event_new_protection;
+alias gst_event_new_qos = c_gst_event_new_qos;
+alias gst_event_new_reconfigure = c_gst_event_new_reconfigure;
+alias gst_event_new_seek = c_gst_event_new_seek;
+alias gst_event_new_segment = c_gst_event_new_segment;
+alias gst_event_new_segment_done = c_gst_event_new_segment_done;
+alias gst_event_new_select_streams = c_gst_event_new_select_streams;
+alias gst_event_new_sink_message = c_gst_event_new_sink_message;
+alias gst_event_new_step = c_gst_event_new_step;
+alias gst_event_new_stream_collection = c_gst_event_new_stream_collection;
+alias gst_event_new_stream_group_done = c_gst_event_new_stream_group_done;
+alias gst_event_new_stream_start = c_gst_event_new_stream_start;
+alias gst_event_new_tag = c_gst_event_new_tag;
+alias gst_event_new_toc = c_gst_event_new_toc;
+alias gst_event_new_toc_select = c_gst_event_new_toc_select;
+alias gst_event_copy_segment = c_gst_event_copy_segment;
+alias gst_event_get_running_time_offset = c_gst_event_get_running_time_offset;
+alias gst_event_get_seqnum = c_gst_event_get_seqnum;
+alias gst_event_get_structure = c_gst_event_get_structure;
+alias gst_event_has_name = c_gst_event_has_name;
+alias gst_event_has_name_id = c_gst_event_has_name_id;
+alias gst_event_parse_buffer_size = c_gst_event_parse_buffer_size;
+alias gst_event_parse_caps = c_gst_event_parse_caps;
+alias gst_event_parse_flush_stop = c_gst_event_parse_flush_stop;
+alias gst_event_parse_gap = c_gst_event_parse_gap;
+alias gst_event_parse_gap_flags = c_gst_event_parse_gap_flags;
+alias gst_event_parse_group_id = c_gst_event_parse_group_id;
+alias gst_event_parse_instant_rate_change = c_gst_event_parse_instant_rate_change;
+alias gst_event_parse_instant_rate_sync_time = c_gst_event_parse_instant_rate_sync_time;
+alias gst_event_parse_latency = c_gst_event_parse_latency;
+alias gst_event_parse_protection = c_gst_event_parse_protection;
+alias gst_event_parse_qos = c_gst_event_parse_qos;
+alias gst_event_parse_seek = c_gst_event_parse_seek;
+alias gst_event_parse_seek_trickmode_interval = c_gst_event_parse_seek_trickmode_interval;
+alias gst_event_parse_segment = c_gst_event_parse_segment;
+alias gst_event_parse_segment_done = c_gst_event_parse_segment_done;
+alias gst_event_parse_select_streams = c_gst_event_parse_select_streams;
+alias gst_event_parse_sink_message = c_gst_event_parse_sink_message;
+alias gst_event_parse_step = c_gst_event_parse_step;
+alias gst_event_parse_stream = c_gst_event_parse_stream;
+alias gst_event_parse_stream_collection = c_gst_event_parse_stream_collection;
+alias gst_event_parse_stream_flags = c_gst_event_parse_stream_flags;
+alias gst_event_parse_stream_group_done = c_gst_event_parse_stream_group_done;
+alias gst_event_parse_stream_start = c_gst_event_parse_stream_start;
+alias gst_event_parse_tag = c_gst_event_parse_tag;
+alias gst_event_parse_toc = c_gst_event_parse_toc;
+alias gst_event_parse_toc_select = c_gst_event_parse_toc_select;
+alias gst_event_set_gap_flags = c_gst_event_set_gap_flags;
+alias gst_event_set_group_id = c_gst_event_set_group_id;
+alias gst_event_set_running_time_offset = c_gst_event_set_running_time_offset;
+alias gst_event_set_seek_trickmode_interval = c_gst_event_set_seek_trickmode_interval;
+alias gst_event_set_seqnum = c_gst_event_set_seqnum;
+alias gst_event_set_stream = c_gst_event_set_stream;
+alias gst_event_set_stream_flags = c_gst_event_set_stream_flags;
+alias gst_event_writable_structure = c_gst_event_writable_structure;
+
+// FlagSet
+alias gst_flagset_get_type = c_gst_flagset_get_type;
+alias gst_flagset_register = c_gst_flagset_register;
+
+// Fraction
+alias gst_fraction_get_type = c_gst_fraction_get_type;
+
+// FractionRange
+alias gst_fraction_range_get_type = c_gst_fraction_range_get_type;
+
+// GhostPad
+alias gst_ghost_pad_get_type = c_gst_ghost_pad_get_type;
+alias gst_ghost_pad_new = c_gst_ghost_pad_new;
+alias gst_ghost_pad_new_from_template = c_gst_ghost_pad_new_from_template;
+alias gst_ghost_pad_new_no_target = c_gst_ghost_pad_new_no_target;
+alias gst_ghost_pad_new_no_target_from_template = c_gst_ghost_pad_new_no_target_from_template;
+alias gst_ghost_pad_activate_mode_default = c_gst_ghost_pad_activate_mode_default;
+alias gst_ghost_pad_internal_activate_mode_default = c_gst_ghost_pad_internal_activate_mode_default;
+alias gst_ghost_pad_construct = c_gst_ghost_pad_construct;
+alias gst_ghost_pad_get_target = c_gst_ghost_pad_get_target;
+alias gst_ghost_pad_set_target = c_gst_ghost_pad_set_target;
+
+// Int64Range
+alias gst_int64_range_get_type = c_gst_int64_range_get_type;
+
+// IntRange
+alias gst_int_range_get_type = c_gst_int_range_get_type;
+
+// Iterator
+alias gst_iterator_get_type = c_gst_iterator_get_type;
+alias gst_iterator_new = c_gst_iterator_new;
+alias gst_iterator_new_list = c_gst_iterator_new_list;
+alias gst_iterator_new_single = c_gst_iterator_new_single;
+alias gst_iterator_copy = c_gst_iterator_copy;
+alias gst_iterator_filter = c_gst_iterator_filter;
+alias gst_iterator_find_custom = c_gst_iterator_find_custom;
+alias gst_iterator_fold = c_gst_iterator_fold;
+alias gst_iterator_foreach = c_gst_iterator_foreach;
+alias gst_iterator_free = c_gst_iterator_free;
+alias gst_iterator_next = c_gst_iterator_next;
+alias gst_iterator_push = c_gst_iterator_push;
+alias gst_iterator_resync = c_gst_iterator_resync;
+
+// Memory
+alias gst_memory_get_type = c_gst_memory_get_type;
+alias gst_memory_new_wrapped = c_gst_memory_new_wrapped;
+alias gst_memory_copy = c_gst_memory_copy;
+alias gst_memory_get_sizes = c_gst_memory_get_sizes;
+alias gst_memory_init = c_gst_memory_init;
+alias gst_memory_is_span = c_gst_memory_is_span;
+alias gst_memory_is_type = c_gst_memory_is_type;
+alias gst_memory_make_mapped = c_gst_memory_make_mapped;
+alias gst_memory_map = c_gst_memory_map;
+alias gst_memory_resize = c_gst_memory_resize;
+alias gst_memory_share = c_gst_memory_share;
+alias gst_memory_unmap = c_gst_memory_unmap;
+
+// Message
+alias gst_message_get_type = c_gst_message_get_type;
+alias gst_message_new_application = c_gst_message_new_application;
+alias gst_message_new_async_done = c_gst_message_new_async_done;
+alias gst_message_new_async_start = c_gst_message_new_async_start;
+alias gst_message_new_buffering = c_gst_message_new_buffering;
+alias gst_message_new_clock_lost = c_gst_message_new_clock_lost;
+alias gst_message_new_clock_provide = c_gst_message_new_clock_provide;
+alias gst_message_new_custom = c_gst_message_new_custom;
+alias gst_message_new_device_added = c_gst_message_new_device_added;
+alias gst_message_new_device_changed = c_gst_message_new_device_changed;
+alias gst_message_new_device_removed = c_gst_message_new_device_removed;
+alias gst_message_new_duration_changed = c_gst_message_new_duration_changed;
+alias gst_message_new_element = c_gst_message_new_element;
+alias gst_message_new_eos = c_gst_message_new_eos;
+alias gst_message_new_error = c_gst_message_new_error;
+alias gst_message_new_error_with_details = c_gst_message_new_error_with_details;
+alias gst_message_new_have_context = c_gst_message_new_have_context;
+alias gst_message_new_info = c_gst_message_new_info;
+alias gst_message_new_info_with_details = c_gst_message_new_info_with_details;
+alias gst_message_new_instant_rate_request = c_gst_message_new_instant_rate_request;
+alias gst_message_new_latency = c_gst_message_new_latency;
+alias gst_message_new_need_context = c_gst_message_new_need_context;
+alias gst_message_new_new_clock = c_gst_message_new_new_clock;
+alias gst_message_new_progress = c_gst_message_new_progress;
+alias gst_message_new_property_notify = c_gst_message_new_property_notify;
+alias gst_message_new_qos = c_gst_message_new_qos;
+alias gst_message_new_redirect = c_gst_message_new_redirect;
+alias gst_message_new_request_state = c_gst_message_new_request_state;
+alias gst_message_new_reset_time = c_gst_message_new_reset_time;
+alias gst_message_new_segment_done = c_gst_message_new_segment_done;
+alias gst_message_new_segment_start = c_gst_message_new_segment_start;
+alias gst_message_new_state_changed = c_gst_message_new_state_changed;
+alias gst_message_new_state_dirty = c_gst_message_new_state_dirty;
+alias gst_message_new_step_done = c_gst_message_new_step_done;
+alias gst_message_new_step_start = c_gst_message_new_step_start;
+alias gst_message_new_stream_collection = c_gst_message_new_stream_collection;
+alias gst_message_new_stream_start = c_gst_message_new_stream_start;
+alias gst_message_new_stream_status = c_gst_message_new_stream_status;
+alias gst_message_new_streams_selected = c_gst_message_new_streams_selected;
+alias gst_message_new_structure_change = c_gst_message_new_structure_change;
+alias gst_message_new_tag = c_gst_message_new_tag;
+alias gst_message_new_toc = c_gst_message_new_toc;
+alias gst_message_new_warning = c_gst_message_new_warning;
+alias gst_message_new_warning_with_details = c_gst_message_new_warning_with_details;
+alias gst_message_add_redirect_entry = c_gst_message_add_redirect_entry;
+alias gst_message_copy = c_gst_message_copy;
+alias gst_message_get_num_redirect_entries = c_gst_message_get_num_redirect_entries;
+alias gst_message_get_seqnum = c_gst_message_get_seqnum;
+alias gst_message_get_stream_status_object = c_gst_message_get_stream_status_object;
+alias gst_message_get_structure = c_gst_message_get_structure;
+alias gst_message_has_name = c_gst_message_has_name;
+alias gst_message_parse_async_done = c_gst_message_parse_async_done;
+alias gst_message_parse_buffering = c_gst_message_parse_buffering;
+alias gst_message_parse_buffering_stats = c_gst_message_parse_buffering_stats;
+alias gst_message_parse_clock_lost = c_gst_message_parse_clock_lost;
+alias gst_message_parse_clock_provide = c_gst_message_parse_clock_provide;
+alias gst_message_parse_context_type = c_gst_message_parse_context_type;
+alias gst_message_parse_device_added = c_gst_message_parse_device_added;
+alias gst_message_parse_device_changed = c_gst_message_parse_device_changed;
+alias gst_message_parse_device_removed = c_gst_message_parse_device_removed;
+alias gst_message_parse_error = c_gst_message_parse_error;
+alias gst_message_parse_error_details = c_gst_message_parse_error_details;
+alias gst_message_parse_group_id = c_gst_message_parse_group_id;
+alias gst_message_parse_have_context = c_gst_message_parse_have_context;
+alias gst_message_parse_info = c_gst_message_parse_info;
+alias gst_message_parse_info_details = c_gst_message_parse_info_details;
+alias gst_message_parse_instant_rate_request = c_gst_message_parse_instant_rate_request;
+alias gst_message_parse_new_clock = c_gst_message_parse_new_clock;
+alias gst_message_parse_progress = c_gst_message_parse_progress;
+alias gst_message_parse_property_notify = c_gst_message_parse_property_notify;
+alias gst_message_parse_qos = c_gst_message_parse_qos;
+alias gst_message_parse_qos_stats = c_gst_message_parse_qos_stats;
+alias gst_message_parse_qos_values = c_gst_message_parse_qos_values;
+alias gst_message_parse_redirect_entry = c_gst_message_parse_redirect_entry;
+alias gst_message_parse_request_state = c_gst_message_parse_request_state;
+alias gst_message_parse_reset_time = c_gst_message_parse_reset_time;
+alias gst_message_parse_segment_done = c_gst_message_parse_segment_done;
+alias gst_message_parse_segment_start = c_gst_message_parse_segment_start;
+alias gst_message_parse_state_changed = c_gst_message_parse_state_changed;
+alias gst_message_parse_step_done = c_gst_message_parse_step_done;
+alias gst_message_parse_step_start = c_gst_message_parse_step_start;
+alias gst_message_parse_stream_collection = c_gst_message_parse_stream_collection;
+alias gst_message_parse_stream_status = c_gst_message_parse_stream_status;
+alias gst_message_parse_streams_selected = c_gst_message_parse_streams_selected;
+alias gst_message_parse_structure_change = c_gst_message_parse_structure_change;
+alias gst_message_parse_tag = c_gst_message_parse_tag;
+alias gst_message_parse_toc = c_gst_message_parse_toc;
+alias gst_message_parse_warning = c_gst_message_parse_warning;
+alias gst_message_parse_warning_details = c_gst_message_parse_warning_details;
+alias gst_message_set_buffering_stats = c_gst_message_set_buffering_stats;
+alias gst_message_set_group_id = c_gst_message_set_group_id;
+alias gst_message_set_qos_stats = c_gst_message_set_qos_stats;
+alias gst_message_set_qos_values = c_gst_message_set_qos_values;
+alias gst_message_set_seqnum = c_gst_message_set_seqnum;
+alias gst_message_set_stream_status_object = c_gst_message_set_stream_status_object;
+alias gst_message_streams_selected_add = c_gst_message_streams_selected_add;
+alias gst_message_streams_selected_get_size = c_gst_message_streams_selected_get_size;
+alias gst_message_streams_selected_get_stream = c_gst_message_streams_selected_get_stream;
+alias gst_message_writable_structure = c_gst_message_writable_structure;
+alias gst_message_replace = c_gst_message_replace;
+
+// Meta
+alias gst_meta_compare_seqnum = c_gst_meta_compare_seqnum;
+alias gst_meta_get_seqnum = c_gst_meta_get_seqnum;
+alias gst_meta_serialize = c_gst_meta_serialize;
+alias gst_meta_serialize_simple = c_gst_meta_serialize_simple;
+alias gst_meta_api_type_get_tags = c_gst_meta_api_type_get_tags;
+alias gst_meta_api_type_has_tag = c_gst_meta_api_type_has_tag;
+alias gst_meta_api_type_register = c_gst_meta_api_type_register;
+alias gst_meta_deserialize = c_gst_meta_deserialize;
+alias gst_meta_get_info = c_gst_meta_get_info;
+alias gst_meta_register = c_gst_meta_register;
+alias gst_meta_register_custom = c_gst_meta_register_custom;
+alias gst_meta_register_custom_simple = c_gst_meta_register_custom_simple;
+
+// MetaInfo
+alias gst_meta_info_is_custom = c_gst_meta_info_is_custom;
+alias gst_meta_info_register = c_gst_meta_info_register;
+alias gst_meta_info_new = c_gst_meta_info_new;
+
+// MiniObject
+alias gst_mini_object_get_type = c_gst_mini_object_get_type;
+alias gst_mini_object_add_parent = c_gst_mini_object_add_parent;
+alias gst_mini_object_copy = c_gst_mini_object_copy;
+alias gst_mini_object_get_qdata = c_gst_mini_object_get_qdata;
+alias gst_mini_object_init = c_gst_mini_object_init;
+alias gst_mini_object_is_writable = c_gst_mini_object_is_writable;
+alias gst_mini_object_lock = c_gst_mini_object_lock;
+alias gst_mini_object_make_writable = c_gst_mini_object_make_writable;
+alias gst_mini_object_ref = c_gst_mini_object_ref;
+alias gst_mini_object_remove_parent = c_gst_mini_object_remove_parent;
+alias gst_mini_object_set_qdata = c_gst_mini_object_set_qdata;
+alias gst_mini_object_steal_qdata = c_gst_mini_object_steal_qdata;
+alias gst_mini_object_unlock = c_gst_mini_object_unlock;
+alias gst_mini_object_unref = c_gst_mini_object_unref;
+alias gst_mini_object_weak_ref = c_gst_mini_object_weak_ref;
+alias gst_mini_object_weak_unref = c_gst_mini_object_weak_unref;
+alias gst_mini_object_replace = c_gst_mini_object_replace;
+alias gst_mini_object_steal = c_gst_mini_object_steal;
+alias gst_mini_object_take = c_gst_mini_object_take;
+
+// ObjectGst
+alias gst_object_get_type = c_gst_object_get_type;
+alias gst_object_check_uniqueness = c_gst_object_check_uniqueness;
+alias gst_object_default_deep_notify = c_gst_object_default_deep_notify;
+alias gst_object_ref_sink = c_gst_object_ref_sink;
+alias gst_object_replace = c_gst_object_replace;
+alias gst_object_add_control_binding = c_gst_object_add_control_binding;
+alias gst_object_default_error = c_gst_object_default_error;
+alias gst_object_get_control_binding = c_gst_object_get_control_binding;
+alias gst_object_get_control_rate = c_gst_object_get_control_rate;
+alias gst_object_get_g_value_array = c_gst_object_get_g_value_array;
+alias gst_object_get_name = c_gst_object_get_name;
+alias gst_object_get_parent = c_gst_object_get_parent;
+alias gst_object_get_path_string = c_gst_object_get_path_string;
+alias gst_object_get_value = c_gst_object_get_value;
+alias gst_object_get_value_array = c_gst_object_get_value_array;
+alias gst_object_has_active_control_bindings = c_gst_object_has_active_control_bindings;
+alias gst_object_has_ancestor = c_gst_object_has_ancestor;
+alias gst_object_has_as_ancestor = c_gst_object_has_as_ancestor;
+alias gst_object_has_as_parent = c_gst_object_has_as_parent;
+alias gst_object_ref = c_gst_object_ref;
+alias gst_object_remove_control_binding = c_gst_object_remove_control_binding;
+alias gst_object_set_control_binding_disabled = c_gst_object_set_control_binding_disabled;
+alias gst_object_set_control_bindings_disabled = c_gst_object_set_control_bindings_disabled;
+alias gst_object_set_control_rate = c_gst_object_set_control_rate;
+alias gst_object_set_name = c_gst_object_set_name;
+alias gst_object_set_parent = c_gst_object_set_parent;
+alias gst_object_suggest_next_sync = c_gst_object_suggest_next_sync;
+alias gst_object_sync_values = c_gst_object_sync_values;
+alias gst_object_unparent = c_gst_object_unparent;
+alias gst_object_unref = c_gst_object_unref;
+
+// Pad
+alias gst_pad_get_type = c_gst_pad_get_type;
+alias gst_pad_new = c_gst_pad_new;
+alias gst_pad_new_from_static_template = c_gst_pad_new_from_static_template;
+alias gst_pad_new_from_template = c_gst_pad_new_from_template;
+alias gst_pad_link_get_name = c_gst_pad_link_get_name;
+alias gst_pad_activate_mode = c_gst_pad_activate_mode;
+alias gst_pad_add_probe = c_gst_pad_add_probe;
+alias gst_pad_can_link = c_gst_pad_can_link;
+alias gst_pad_chain = c_gst_pad_chain;
+alias gst_pad_chain_list = c_gst_pad_chain_list;
+alias gst_pad_check_reconfigure = c_gst_pad_check_reconfigure;
+alias gst_pad_create_stream_id = c_gst_pad_create_stream_id;
+alias gst_pad_create_stream_id_printf = c_gst_pad_create_stream_id_printf;
+alias gst_pad_create_stream_id_printf_valist = c_gst_pad_create_stream_id_printf_valist;
+alias gst_pad_event_default = c_gst_pad_event_default;
+alias gst_pad_forward = c_gst_pad_forward;
+alias gst_pad_get_allowed_caps = c_gst_pad_get_allowed_caps;
+alias gst_pad_get_current_caps = c_gst_pad_get_current_caps;
+alias gst_pad_get_direction = c_gst_pad_get_direction;
+alias gst_pad_get_element_private = c_gst_pad_get_element_private;
+alias gst_pad_get_last_flow_return = c_gst_pad_get_last_flow_return;
+alias gst_pad_get_offset = c_gst_pad_get_offset;
+alias gst_pad_get_pad_template = c_gst_pad_get_pad_template;
+alias gst_pad_get_pad_template_caps = c_gst_pad_get_pad_template_caps;
+alias gst_pad_get_parent_element = c_gst_pad_get_parent_element;
+alias gst_pad_get_peer = c_gst_pad_get_peer;
+alias gst_pad_get_range = c_gst_pad_get_range;
+alias gst_pad_get_single_internal_link = c_gst_pad_get_single_internal_link;
+alias gst_pad_get_sticky_event = c_gst_pad_get_sticky_event;
+alias gst_pad_get_stream = c_gst_pad_get_stream;
+alias gst_pad_get_stream_id = c_gst_pad_get_stream_id;
+alias gst_pad_get_task_state = c_gst_pad_get_task_state;
+alias gst_pad_has_current_caps = c_gst_pad_has_current_caps;
+alias gst_pad_is_active = c_gst_pad_is_active;
+alias gst_pad_is_blocked = c_gst_pad_is_blocked;
+alias gst_pad_is_blocking = c_gst_pad_is_blocking;
+alias gst_pad_is_linked = c_gst_pad_is_linked;
+alias gst_pad_iterate_internal_links = c_gst_pad_iterate_internal_links;
+alias gst_pad_iterate_internal_links_default = c_gst_pad_iterate_internal_links_default;
+alias gst_pad_link = c_gst_pad_link;
+alias gst_pad_link_full = c_gst_pad_link_full;
+alias gst_pad_link_maybe_ghosting = c_gst_pad_link_maybe_ghosting;
+alias gst_pad_link_maybe_ghosting_full = c_gst_pad_link_maybe_ghosting_full;
+alias gst_pad_mark_reconfigure = c_gst_pad_mark_reconfigure;
+alias gst_pad_needs_reconfigure = c_gst_pad_needs_reconfigure;
+alias gst_pad_pause_task = c_gst_pad_pause_task;
+alias gst_pad_peer_query = c_gst_pad_peer_query;
+alias gst_pad_peer_query_accept_caps = c_gst_pad_peer_query_accept_caps;
+alias gst_pad_peer_query_caps = c_gst_pad_peer_query_caps;
+alias gst_pad_peer_query_convert = c_gst_pad_peer_query_convert;
+alias gst_pad_peer_query_duration = c_gst_pad_peer_query_duration;
+alias gst_pad_peer_query_position = c_gst_pad_peer_query_position;
+alias gst_pad_proxy_query_accept_caps = c_gst_pad_proxy_query_accept_caps;
+alias gst_pad_proxy_query_caps = c_gst_pad_proxy_query_caps;
+alias gst_pad_pull_range = c_gst_pad_pull_range;
+alias gst_pad_push = c_gst_pad_push;
+alias gst_pad_push_event = c_gst_pad_push_event;
+alias gst_pad_push_list = c_gst_pad_push_list;
+alias gst_pad_query = c_gst_pad_query;
+alias gst_pad_query_accept_caps = c_gst_pad_query_accept_caps;
+alias gst_pad_query_caps = c_gst_pad_query_caps;
+alias gst_pad_query_convert = c_gst_pad_query_convert;
+alias gst_pad_query_default = c_gst_pad_query_default;
+alias gst_pad_query_duration = c_gst_pad_query_duration;
+alias gst_pad_query_position = c_gst_pad_query_position;
+alias gst_pad_remove_probe = c_gst_pad_remove_probe;
+alias gst_pad_send_event = c_gst_pad_send_event;
+alias gst_pad_set_activate_function_full = c_gst_pad_set_activate_function_full;
+alias gst_pad_set_activatemode_function_full = c_gst_pad_set_activatemode_function_full;
+alias gst_pad_set_active = c_gst_pad_set_active;
+alias gst_pad_set_chain_function_full = c_gst_pad_set_chain_function_full;
+alias gst_pad_set_chain_list_function_full = c_gst_pad_set_chain_list_function_full;
+alias gst_pad_set_element_private = c_gst_pad_set_element_private;
+alias gst_pad_set_event_full_function_full = c_gst_pad_set_event_full_function_full;
+alias gst_pad_set_event_function_full = c_gst_pad_set_event_function_full;
+alias gst_pad_set_getrange_function_full = c_gst_pad_set_getrange_function_full;
+alias gst_pad_set_iterate_internal_links_function_full = c_gst_pad_set_iterate_internal_links_function_full;
+alias gst_pad_set_link_function_full = c_gst_pad_set_link_function_full;
+alias gst_pad_set_offset = c_gst_pad_set_offset;
+alias gst_pad_set_query_function_full = c_gst_pad_set_query_function_full;
+alias gst_pad_set_unlink_function_full = c_gst_pad_set_unlink_function_full;
+alias gst_pad_start_task = c_gst_pad_start_task;
+alias gst_pad_sticky_events_foreach = c_gst_pad_sticky_events_foreach;
+alias gst_pad_stop_task = c_gst_pad_stop_task;
+alias gst_pad_store_sticky_event = c_gst_pad_store_sticky_event;
+alias gst_pad_unlink = c_gst_pad_unlink;
+alias gst_pad_use_fixed_caps = c_gst_pad_use_fixed_caps;
+
+// PadProbeInfo
+alias gst_pad_probe_info_get_buffer = c_gst_pad_probe_info_get_buffer;
+alias gst_pad_probe_info_get_buffer_list = c_gst_pad_probe_info_get_buffer_list;
+alias gst_pad_probe_info_get_event = c_gst_pad_probe_info_get_event;
+alias gst_pad_probe_info_get_query = c_gst_pad_probe_info_get_query;
+
+// PadTemplate
+alias gst_pad_template_get_type = c_gst_pad_template_get_type;
+alias gst_pad_template_new = c_gst_pad_template_new;
+alias gst_pad_template_new_from_static_pad_template_with_gtype = c_gst_pad_template_new_from_static_pad_template_with_gtype;
+alias gst_pad_template_new_with_gtype = c_gst_pad_template_new_with_gtype;
+alias gst_pad_template_get_caps = c_gst_pad_template_get_caps;
+alias gst_pad_template_get_documentation_caps = c_gst_pad_template_get_documentation_caps;
+alias gst_pad_template_pad_created = c_gst_pad_template_pad_created;
+alias gst_pad_template_set_documentation_caps = c_gst_pad_template_set_documentation_caps;
+
+// ParamArray
+alias gst_param_spec_array_get_type = c_gst_param_spec_array_get_type;
+
+// ParamFraction
+alias gst_param_spec_fraction_get_type = c_gst_param_spec_fraction_get_type;
+
+// ParentBufferMeta
+alias gst_parent_buffer_meta_get_info = c_gst_parent_buffer_meta_get_info;
+
+// ParseContext
+alias gst_parse_context_get_type = c_gst_parse_context_get_type;
+alias gst_parse_context_new = c_gst_parse_context_new;
+alias gst_parse_context_copy = c_gst_parse_context_copy;
+alias gst_parse_context_free = c_gst_parse_context_free;
+alias gst_parse_context_get_missing_elements = c_gst_parse_context_get_missing_elements;
+
+// Pipeline
+alias gst_pipeline_get_type = c_gst_pipeline_get_type;
+alias gst_pipeline_new = c_gst_pipeline_new;
+alias gst_pipeline_auto_clock = c_gst_pipeline_auto_clock;
+alias gst_pipeline_get_auto_flush_bus = c_gst_pipeline_get_auto_flush_bus;
+alias gst_pipeline_get_bus = c_gst_pipeline_get_bus;
+alias gst_pipeline_get_clock = c_gst_pipeline_get_clock;
+alias gst_pipeline_get_configured_latency = c_gst_pipeline_get_configured_latency;
+alias gst_pipeline_get_delay = c_gst_pipeline_get_delay;
+alias gst_pipeline_get_latency = c_gst_pipeline_get_latency;
+alias gst_pipeline_get_pipeline_clock = c_gst_pipeline_get_pipeline_clock;
+alias gst_pipeline_is_live = c_gst_pipeline_is_live;
+alias gst_pipeline_set_auto_flush_bus = c_gst_pipeline_set_auto_flush_bus;
+alias gst_pipeline_set_clock = c_gst_pipeline_set_clock;
+alias gst_pipeline_set_delay = c_gst_pipeline_set_delay;
+alias gst_pipeline_set_latency = c_gst_pipeline_set_latency;
+alias gst_pipeline_use_clock = c_gst_pipeline_use_clock;
+
+// Plugin
+alias gst_plugin_get_type = c_gst_plugin_get_type;
+alias gst_plugin_list_free = c_gst_plugin_list_free;
+alias gst_plugin_load_by_name = c_gst_plugin_load_by_name;
+alias gst_plugin_load_file = c_gst_plugin_load_file;
+alias gst_plugin_register_static = c_gst_plugin_register_static;
+alias gst_plugin_register_static_full = c_gst_plugin_register_static_full;
+alias gst_plugin_add_dependency = c_gst_plugin_add_dependency;
+alias gst_plugin_add_dependency_simple = c_gst_plugin_add_dependency_simple;
+alias gst_plugin_add_status_error = c_gst_plugin_add_status_error;
+alias gst_plugin_add_status_info = c_gst_plugin_add_status_info;
+alias gst_plugin_add_status_warning = c_gst_plugin_add_status_warning;
+alias gst_plugin_get_cache_data = c_gst_plugin_get_cache_data;
+alias gst_plugin_get_description = c_gst_plugin_get_description;
+alias gst_plugin_get_filename = c_gst_plugin_get_filename;
+alias gst_plugin_get_license = c_gst_plugin_get_license;
+alias gst_plugin_get_name = c_gst_plugin_get_name;
+alias gst_plugin_get_origin = c_gst_plugin_get_origin;
+alias gst_plugin_get_package = c_gst_plugin_get_package;
+alias gst_plugin_get_release_date_string = c_gst_plugin_get_release_date_string;
+alias gst_plugin_get_source = c_gst_plugin_get_source;
+alias gst_plugin_get_status_errors = c_gst_plugin_get_status_errors;
+alias gst_plugin_get_status_infos = c_gst_plugin_get_status_infos;
+alias gst_plugin_get_status_warnings = c_gst_plugin_get_status_warnings;
+alias gst_plugin_get_version = c_gst_plugin_get_version;
+alias gst_plugin_is_loaded = c_gst_plugin_is_loaded;
+alias gst_plugin_load = c_gst_plugin_load;
+alias gst_plugin_set_cache_data = c_gst_plugin_set_cache_data;
+
+// PluginFeature
+alias gst_plugin_feature_get_type = c_gst_plugin_feature_get_type;
+alias gst_plugin_feature_list_copy = c_gst_plugin_feature_list_copy;
+alias gst_plugin_feature_list_debug = c_gst_plugin_feature_list_debug;
+alias gst_plugin_feature_list_free = c_gst_plugin_feature_list_free;
+alias gst_plugin_feature_rank_compare_func = c_gst_plugin_feature_rank_compare_func;
+alias gst_plugin_feature_check_version = c_gst_plugin_feature_check_version;
+alias gst_plugin_feature_get_plugin = c_gst_plugin_feature_get_plugin;
+alias gst_plugin_feature_get_plugin_name = c_gst_plugin_feature_get_plugin_name;
+alias gst_plugin_feature_get_rank = c_gst_plugin_feature_get_rank;
+alias gst_plugin_feature_load = c_gst_plugin_feature_load;
+alias gst_plugin_feature_set_rank = c_gst_plugin_feature_set_rank;
+
+// Poll
+alias gst_poll_add_fd = c_gst_poll_add_fd;
+alias gst_poll_fd_can_read = c_gst_poll_fd_can_read;
+alias gst_poll_fd_can_write = c_gst_poll_fd_can_write;
+alias gst_poll_fd_ctl_pri = c_gst_poll_fd_ctl_pri;
+alias gst_poll_fd_ctl_read = c_gst_poll_fd_ctl_read;
+alias gst_poll_fd_ctl_write = c_gst_poll_fd_ctl_write;
+alias gst_poll_fd_has_closed = c_gst_poll_fd_has_closed;
+alias gst_poll_fd_has_error = c_gst_poll_fd_has_error;
+alias gst_poll_fd_has_pri = c_gst_poll_fd_has_pri;
+alias gst_poll_fd_ignored = c_gst_poll_fd_ignored;
+alias gst_poll_free = c_gst_poll_free;
+alias gst_poll_get_read_gpollfd = c_gst_poll_get_read_gpollfd;
+alias gst_poll_read_control = c_gst_poll_read_control;
+alias gst_poll_remove_fd = c_gst_poll_remove_fd;
+alias gst_poll_restart = c_gst_poll_restart;
+alias gst_poll_set_controllable = c_gst_poll_set_controllable;
+alias gst_poll_set_flushing = c_gst_poll_set_flushing;
+alias gst_poll_wait = c_gst_poll_wait;
+alias gst_poll_write_control = c_gst_poll_write_control;
+alias gst_poll_new = c_gst_poll_new;
+alias gst_poll_new_timer = c_gst_poll_new_timer;
+
+// PollFD
+alias gst_poll_fd_init = c_gst_poll_fd_init;
+
+// Preset
+alias gst_preset_get_type = c_gst_preset_get_type;
+alias gst_preset_get_app_dir = c_gst_preset_get_app_dir;
+alias gst_preset_set_app_dir = c_gst_preset_set_app_dir;
+alias gst_preset_delete_preset = c_gst_preset_delete_preset;
+alias gst_preset_get_meta = c_gst_preset_get_meta;
+alias gst_preset_get_preset_names = c_gst_preset_get_preset_names;
+alias gst_preset_get_property_names = c_gst_preset_get_property_names;
+alias gst_preset_is_editable = c_gst_preset_is_editable;
+alias gst_preset_load_preset = c_gst_preset_load_preset;
+alias gst_preset_rename_preset = c_gst_preset_rename_preset;
+alias gst_preset_save_preset = c_gst_preset_save_preset;
+alias gst_preset_set_meta = c_gst_preset_set_meta;
+
+// Promise
+alias gst_promise_get_type = c_gst_promise_get_type;
+alias gst_promise_new = c_gst_promise_new;
+alias gst_promise_new_with_change_func = c_gst_promise_new_with_change_func;
+alias gst_promise_expire = c_gst_promise_expire;
+alias gst_promise_get_reply = c_gst_promise_get_reply;
+alias gst_promise_interrupt = c_gst_promise_interrupt;
+alias gst_promise_reply = c_gst_promise_reply;
+alias gst_promise_wait = c_gst_promise_wait;
+
+// ProtectionMeta
+alias gst_protection_meta_get_info = c_gst_protection_meta_get_info;
+
+// ProxyPad
+alias gst_proxy_pad_get_type = c_gst_proxy_pad_get_type;
+alias gst_proxy_pad_chain_default = c_gst_proxy_pad_chain_default;
+alias gst_proxy_pad_chain_list_default = c_gst_proxy_pad_chain_list_default;
+alias gst_proxy_pad_getrange_default = c_gst_proxy_pad_getrange_default;
+alias gst_proxy_pad_iterate_internal_links_default = c_gst_proxy_pad_iterate_internal_links_default;
+alias gst_proxy_pad_get_internal = c_gst_proxy_pad_get_internal;
+
+// Query
+alias gst_query_get_type = c_gst_query_get_type;
+alias gst_query_new_accept_caps = c_gst_query_new_accept_caps;
+alias gst_query_new_allocation = c_gst_query_new_allocation;
+alias gst_query_new_bitrate = c_gst_query_new_bitrate;
+alias gst_query_new_buffering = c_gst_query_new_buffering;
+alias gst_query_new_caps = c_gst_query_new_caps;
+alias gst_query_new_context = c_gst_query_new_context;
+alias gst_query_new_convert = c_gst_query_new_convert;
+alias gst_query_new_custom = c_gst_query_new_custom;
+alias gst_query_new_drain = c_gst_query_new_drain;
+alias gst_query_new_duration = c_gst_query_new_duration;
+alias gst_query_new_formats = c_gst_query_new_formats;
+alias gst_query_new_latency = c_gst_query_new_latency;
+alias gst_query_new_position = c_gst_query_new_position;
+alias gst_query_new_scheduling = c_gst_query_new_scheduling;
+alias gst_query_new_seeking = c_gst_query_new_seeking;
+alias gst_query_new_segment = c_gst_query_new_segment;
+alias gst_query_new_selectable = c_gst_query_new_selectable;
+alias gst_query_new_uri = c_gst_query_new_uri;
+alias gst_query_add_allocation_meta = c_gst_query_add_allocation_meta;
+alias gst_query_add_allocation_param = c_gst_query_add_allocation_param;
+alias gst_query_add_allocation_pool = c_gst_query_add_allocation_pool;
+alias gst_query_add_buffering_range = c_gst_query_add_buffering_range;
+alias gst_query_add_scheduling_mode = c_gst_query_add_scheduling_mode;
+alias gst_query_find_allocation_meta = c_gst_query_find_allocation_meta;
+alias gst_query_get_n_allocation_metas = c_gst_query_get_n_allocation_metas;
+alias gst_query_get_n_allocation_params = c_gst_query_get_n_allocation_params;
+alias gst_query_get_n_allocation_pools = c_gst_query_get_n_allocation_pools;
+alias gst_query_get_n_buffering_ranges = c_gst_query_get_n_buffering_ranges;
+alias gst_query_get_n_scheduling_modes = c_gst_query_get_n_scheduling_modes;
+alias gst_query_get_structure = c_gst_query_get_structure;
+alias gst_query_has_scheduling_mode = c_gst_query_has_scheduling_mode;
+alias gst_query_has_scheduling_mode_with_flags = c_gst_query_has_scheduling_mode_with_flags;
+alias gst_query_parse_accept_caps = c_gst_query_parse_accept_caps;
+alias gst_query_parse_accept_caps_result = c_gst_query_parse_accept_caps_result;
+alias gst_query_parse_allocation = c_gst_query_parse_allocation;
+alias gst_query_parse_bitrate = c_gst_query_parse_bitrate;
+alias gst_query_parse_buffering_percent = c_gst_query_parse_buffering_percent;
+alias gst_query_parse_buffering_range = c_gst_query_parse_buffering_range;
+alias gst_query_parse_buffering_stats = c_gst_query_parse_buffering_stats;
+alias gst_query_parse_caps = c_gst_query_parse_caps;
+alias gst_query_parse_caps_result = c_gst_query_parse_caps_result;
+alias gst_query_parse_context = c_gst_query_parse_context;
+alias gst_query_parse_context_type = c_gst_query_parse_context_type;
+alias gst_query_parse_convert = c_gst_query_parse_convert;
+alias gst_query_parse_duration = c_gst_query_parse_duration;
+alias gst_query_parse_latency = c_gst_query_parse_latency;
+alias gst_query_parse_n_formats = c_gst_query_parse_n_formats;
+alias gst_query_parse_nth_allocation_meta = c_gst_query_parse_nth_allocation_meta;
+alias gst_query_parse_nth_allocation_param = c_gst_query_parse_nth_allocation_param;
+alias gst_query_parse_nth_allocation_pool = c_gst_query_parse_nth_allocation_pool;
+alias gst_query_parse_nth_buffering_range = c_gst_query_parse_nth_buffering_range;
+alias gst_query_parse_nth_format = c_gst_query_parse_nth_format;
+alias gst_query_parse_nth_scheduling_mode = c_gst_query_parse_nth_scheduling_mode;
+alias gst_query_parse_position = c_gst_query_parse_position;
+alias gst_query_parse_scheduling = c_gst_query_parse_scheduling;
+alias gst_query_parse_seeking = c_gst_query_parse_seeking;
+alias gst_query_parse_segment = c_gst_query_parse_segment;
+alias gst_query_parse_selectable = c_gst_query_parse_selectable;
+alias gst_query_parse_uri = c_gst_query_parse_uri;
+alias gst_query_parse_uri_redirection = c_gst_query_parse_uri_redirection;
+alias gst_query_parse_uri_redirection_permanent = c_gst_query_parse_uri_redirection_permanent;
+alias gst_query_remove_nth_allocation_meta = c_gst_query_remove_nth_allocation_meta;
+alias gst_query_remove_nth_allocation_param = c_gst_query_remove_nth_allocation_param;
+alias gst_query_remove_nth_allocation_pool = c_gst_query_remove_nth_allocation_pool;
+alias gst_query_set_accept_caps_result = c_gst_query_set_accept_caps_result;
+alias gst_query_set_bitrate = c_gst_query_set_bitrate;
+alias gst_query_set_buffering_percent = c_gst_query_set_buffering_percent;
+alias gst_query_set_buffering_range = c_gst_query_set_buffering_range;
+alias gst_query_set_buffering_stats = c_gst_query_set_buffering_stats;
+alias gst_query_set_caps_result = c_gst_query_set_caps_result;
+alias gst_query_set_context = c_gst_query_set_context;
+alias gst_query_set_convert = c_gst_query_set_convert;
+alias gst_query_set_duration = c_gst_query_set_duration;
+alias gst_query_set_formats = c_gst_query_set_formats;
+alias gst_query_set_formatsv = c_gst_query_set_formatsv;
+alias gst_query_set_latency = c_gst_query_set_latency;
+alias gst_query_set_nth_allocation_param = c_gst_query_set_nth_allocation_param;
+alias gst_query_set_nth_allocation_pool = c_gst_query_set_nth_allocation_pool;
+alias gst_query_set_position = c_gst_query_set_position;
+alias gst_query_set_scheduling = c_gst_query_set_scheduling;
+alias gst_query_set_seeking = c_gst_query_set_seeking;
+alias gst_query_set_segment = c_gst_query_set_segment;
+alias gst_query_set_selectable = c_gst_query_set_selectable;
+alias gst_query_set_uri = c_gst_query_set_uri;
+alias gst_query_set_uri_redirection = c_gst_query_set_uri_redirection;
+alias gst_query_set_uri_redirection_permanent = c_gst_query_set_uri_redirection_permanent;
+alias gst_query_writable_structure = c_gst_query_writable_structure;
+
+// ReferenceTimestampMeta
+alias gst_reference_timestamp_meta_get_info = c_gst_reference_timestamp_meta_get_info;
+
+// Registry
+alias gst_registry_get_type = c_gst_registry_get_type;
+alias gst_registry_fork_is_enabled = c_gst_registry_fork_is_enabled;
+alias gst_registry_fork_set_enabled = c_gst_registry_fork_set_enabled;
+alias gst_registry_get = c_gst_registry_get;
+alias gst_registry_add_feature = c_gst_registry_add_feature;
+alias gst_registry_add_plugin = c_gst_registry_add_plugin;
+alias gst_registry_check_feature_version = c_gst_registry_check_feature_version;
+alias gst_registry_feature_filter = c_gst_registry_feature_filter;
+alias gst_registry_find_feature = c_gst_registry_find_feature;
+alias gst_registry_find_plugin = c_gst_registry_find_plugin;
+alias gst_registry_get_feature_list = c_gst_registry_get_feature_list;
+alias gst_registry_get_feature_list_by_plugin = c_gst_registry_get_feature_list_by_plugin;
+alias gst_registry_get_feature_list_cookie = c_gst_registry_get_feature_list_cookie;
+alias gst_registry_get_plugin_list = c_gst_registry_get_plugin_list;
+alias gst_registry_lookup = c_gst_registry_lookup;
+alias gst_registry_lookup_feature = c_gst_registry_lookup_feature;
+alias gst_registry_plugin_filter = c_gst_registry_plugin_filter;
+alias gst_registry_remove_feature = c_gst_registry_remove_feature;
+alias gst_registry_remove_plugin = c_gst_registry_remove_plugin;
+alias gst_registry_scan_path = c_gst_registry_scan_path;
+
+// Sample
+alias gst_sample_get_type = c_gst_sample_get_type;
+alias gst_sample_new = c_gst_sample_new;
+alias gst_sample_get_buffer = c_gst_sample_get_buffer;
+alias gst_sample_get_buffer_list = c_gst_sample_get_buffer_list;
+alias gst_sample_get_caps = c_gst_sample_get_caps;
+alias gst_sample_get_info = c_gst_sample_get_info;
+alias gst_sample_get_segment = c_gst_sample_get_segment;
+alias gst_sample_set_buffer = c_gst_sample_set_buffer;
+alias gst_sample_set_buffer_list = c_gst_sample_set_buffer_list;
+alias gst_sample_set_caps = c_gst_sample_set_caps;
+alias gst_sample_set_info = c_gst_sample_set_info;
+alias gst_sample_set_segment = c_gst_sample_set_segment;
+
+// Segment
+alias gst_segment_get_type = c_gst_segment_get_type;
+alias gst_segment_new = c_gst_segment_new;
+alias gst_segment_clip = c_gst_segment_clip;
+alias gst_segment_copy = c_gst_segment_copy;
+alias gst_segment_copy_into = c_gst_segment_copy_into;
+alias gst_segment_do_seek = c_gst_segment_do_seek;
+alias gst_segment_free = c_gst_segment_free;
+alias gst_segment_init = c_gst_segment_init;
+alias gst_segment_is_equal = c_gst_segment_is_equal;
+alias gst_segment_offset_running_time = c_gst_segment_offset_running_time;
+alias gst_segment_position_from_running_time = c_gst_segment_position_from_running_time;
+alias gst_segment_position_from_running_time_full = c_gst_segment_position_from_running_time_full;
+alias gst_segment_position_from_stream_time = c_gst_segment_position_from_stream_time;
+alias gst_segment_position_from_stream_time_full = c_gst_segment_position_from_stream_time_full;
+alias gst_segment_set_running_time = c_gst_segment_set_running_time;
+alias gst_segment_to_position = c_gst_segment_to_position;
+alias gst_segment_to_running_time = c_gst_segment_to_running_time;
+alias gst_segment_to_running_time_full = c_gst_segment_to_running_time_full;
+alias gst_segment_to_stream_time = c_gst_segment_to_stream_time;
+alias gst_segment_to_stream_time_full = c_gst_segment_to_stream_time_full;
+
+// SharedTaskPool
+alias gst_shared_task_pool_get_type = c_gst_shared_task_pool_get_type;
+alias gst_shared_task_pool_new = c_gst_shared_task_pool_new;
+alias gst_shared_task_pool_get_max_threads = c_gst_shared_task_pool_get_max_threads;
+alias gst_shared_task_pool_set_max_threads = c_gst_shared_task_pool_set_max_threads;
+
+// StaticCaps
+alias gst_static_caps_cleanup = c_gst_static_caps_cleanup;
+alias gst_static_caps_get = c_gst_static_caps_get;
+
+// StaticPadTemplate
+alias gst_static_pad_template_get = c_gst_static_pad_template_get;
+alias gst_static_pad_template_get_caps = c_gst_static_pad_template_get_caps;
+
+// Stream
+alias gst_stream_get_type = c_gst_stream_get_type;
+alias gst_stream_new = c_gst_stream_new;
+alias gst_stream_get_caps = c_gst_stream_get_caps;
+alias gst_stream_get_stream_flags = c_gst_stream_get_stream_flags;
+alias gst_stream_get_stream_id = c_gst_stream_get_stream_id;
+alias gst_stream_get_stream_type = c_gst_stream_get_stream_type;
+alias gst_stream_get_tags = c_gst_stream_get_tags;
+alias gst_stream_set_caps = c_gst_stream_set_caps;
+alias gst_stream_set_stream_flags = c_gst_stream_set_stream_flags;
+alias gst_stream_set_stream_type = c_gst_stream_set_stream_type;
+alias gst_stream_set_tags = c_gst_stream_set_tags;
+
+// StreamCollection
+alias gst_stream_collection_get_type = c_gst_stream_collection_get_type;
+alias gst_stream_collection_new = c_gst_stream_collection_new;
+alias gst_stream_collection_add_stream = c_gst_stream_collection_add_stream;
+alias gst_stream_collection_get_size = c_gst_stream_collection_get_size;
+alias gst_stream_collection_get_stream = c_gst_stream_collection_get_stream;
+alias gst_stream_collection_get_upstream_id = c_gst_stream_collection_get_upstream_id;
+
+// Structure
+alias gst_structure_get_type = c_gst_structure_get_type;
+alias gst_structure_from_string = c_gst_structure_from_string;
+alias gst_structure_new = c_gst_structure_new;
+alias gst_structure_new_empty = c_gst_structure_new_empty;
+alias gst_structure_new_from_string = c_gst_structure_new_from_string;
+alias gst_structure_new_id = c_gst_structure_new_id;
+alias gst_structure_new_id_empty = c_gst_structure_new_id_empty;
+alias gst_structure_new_valist = c_gst_structure_new_valist;
+alias gst_structure_can_intersect = c_gst_structure_can_intersect;
+alias gst_structure_copy = c_gst_structure_copy;
+alias gst_structure_filter_and_map_in_place = c_gst_structure_filter_and_map_in_place;
+alias gst_structure_fixate = c_gst_structure_fixate;
+alias gst_structure_fixate_field = c_gst_structure_fixate_field;
+alias gst_structure_fixate_field_boolean = c_gst_structure_fixate_field_boolean;
+alias gst_structure_fixate_field_nearest_double = c_gst_structure_fixate_field_nearest_double;
+alias gst_structure_fixate_field_nearest_fraction = c_gst_structure_fixate_field_nearest_fraction;
+alias gst_structure_fixate_field_nearest_int = c_gst_structure_fixate_field_nearest_int;
+alias gst_structure_fixate_field_string = c_gst_structure_fixate_field_string;
+alias gst_structure_foreach = c_gst_structure_foreach;
+alias gst_structure_free = c_gst_structure_free;
+alias gst_structure_get = c_gst_structure_get;
+alias gst_structure_get_array = c_gst_structure_get_array;
+alias gst_structure_get_boolean = c_gst_structure_get_boolean;
+alias gst_structure_get_clock_time = c_gst_structure_get_clock_time;
+alias gst_structure_get_date = c_gst_structure_get_date;
+alias gst_structure_get_date_time = c_gst_structure_get_date_time;
+alias gst_structure_get_double = c_gst_structure_get_double;
+alias gst_structure_get_enum = c_gst_structure_get_enum;
+alias gst_structure_get_field_type = c_gst_structure_get_field_type;
+alias gst_structure_get_flags = c_gst_structure_get_flags;
+alias gst_structure_get_flagset = c_gst_structure_get_flagset;
+alias gst_structure_get_fraction = c_gst_structure_get_fraction;
+alias gst_structure_get_int = c_gst_structure_get_int;
+alias gst_structure_get_int64 = c_gst_structure_get_int64;
+alias gst_structure_get_list = c_gst_structure_get_list;
+alias gst_structure_get_name = c_gst_structure_get_name;
+alias gst_structure_get_name_id = c_gst_structure_get_name_id;
+alias gst_structure_get_string = c_gst_structure_get_string;
+alias gst_structure_get_uint = c_gst_structure_get_uint;
+alias gst_structure_get_uint64 = c_gst_structure_get_uint64;
+alias gst_structure_get_valist = c_gst_structure_get_valist;
+alias gst_structure_get_value = c_gst_structure_get_value;
+alias gst_structure_has_field = c_gst_structure_has_field;
+alias gst_structure_has_field_typed = c_gst_structure_has_field_typed;
+alias gst_structure_has_name = c_gst_structure_has_name;
+alias gst_structure_id_get = c_gst_structure_id_get;
+alias gst_structure_id_get_valist = c_gst_structure_id_get_valist;
+alias gst_structure_id_get_value = c_gst_structure_id_get_value;
+alias gst_structure_id_has_field = c_gst_structure_id_has_field;
+alias gst_structure_id_has_field_typed = c_gst_structure_id_has_field_typed;
+alias gst_structure_id_set = c_gst_structure_id_set;
+alias gst_structure_id_set_valist = c_gst_structure_id_set_valist;
+alias gst_structure_id_set_value = c_gst_structure_id_set_value;
+alias gst_structure_id_take_value = c_gst_structure_id_take_value;
+alias gst_structure_intersect = c_gst_structure_intersect;
+alias gst_structure_is_equal = c_gst_structure_is_equal;
+alias gst_structure_is_subset = c_gst_structure_is_subset;
+alias gst_structure_map_in_place = c_gst_structure_map_in_place;
+alias gst_structure_n_fields = c_gst_structure_n_fields;
+alias gst_structure_nth_field_name = c_gst_structure_nth_field_name;
+alias gst_structure_remove_all_fields = c_gst_structure_remove_all_fields;
+alias gst_structure_remove_field = c_gst_structure_remove_field;
+alias gst_structure_remove_fields = c_gst_structure_remove_fields;
+alias gst_structure_remove_fields_valist = c_gst_structure_remove_fields_valist;
+alias gst_structure_serialize = c_gst_structure_serialize;
+alias gst_structure_serialize_full = c_gst_structure_serialize_full;
+alias gst_structure_set = c_gst_structure_set;
+alias gst_structure_set_array = c_gst_structure_set_array;
+alias gst_structure_set_list = c_gst_structure_set_list;
+alias gst_structure_set_name = c_gst_structure_set_name;
+alias gst_structure_set_parent_refcount = c_gst_structure_set_parent_refcount;
+alias gst_structure_set_valist = c_gst_structure_set_valist;
+alias gst_structure_set_value = c_gst_structure_set_value;
+alias gst_structure_take_value = c_gst_structure_take_value;
+alias gst_structure_to_string = c_gst_structure_to_string;
+alias gst_structure_take = c_gst_structure_take;
+
+// SystemClock
+alias gst_system_clock_get_type = c_gst_system_clock_get_type;
+alias gst_system_clock_obtain = c_gst_system_clock_obtain;
+alias gst_system_clock_set_default = c_gst_system_clock_set_default;
+
+// TagList
+alias gst_tag_list_get_type = c_gst_tag_list_get_type;
+alias gst_tag_list_new = c_gst_tag_list_new;
+alias gst_tag_list_new_empty = c_gst_tag_list_new_empty;
+alias gst_tag_list_new_from_string = c_gst_tag_list_new_from_string;
+alias gst_tag_list_new_valist = c_gst_tag_list_new_valist;
+alias gst_tag_list_add = c_gst_tag_list_add;
+alias gst_tag_list_add_valist = c_gst_tag_list_add_valist;
+alias gst_tag_list_add_valist_values = c_gst_tag_list_add_valist_values;
+alias gst_tag_list_add_value = c_gst_tag_list_add_value;
+alias gst_tag_list_add_values = c_gst_tag_list_add_values;
+alias gst_tag_list_copy = c_gst_tag_list_copy;
+alias gst_tag_list_foreach = c_gst_tag_list_foreach;
+alias gst_tag_list_get_boolean = c_gst_tag_list_get_boolean;
+alias gst_tag_list_get_boolean_index = c_gst_tag_list_get_boolean_index;
+alias gst_tag_list_get_date = c_gst_tag_list_get_date;
+alias gst_tag_list_get_date_index = c_gst_tag_list_get_date_index;
+alias gst_tag_list_get_date_time = c_gst_tag_list_get_date_time;
+alias gst_tag_list_get_date_time_index = c_gst_tag_list_get_date_time_index;
+alias gst_tag_list_get_double = c_gst_tag_list_get_double;
+alias gst_tag_list_get_double_index = c_gst_tag_list_get_double_index;
+alias gst_tag_list_get_float = c_gst_tag_list_get_float;
+alias gst_tag_list_get_float_index = c_gst_tag_list_get_float_index;
+alias gst_tag_list_get_int = c_gst_tag_list_get_int;
+alias gst_tag_list_get_int64 = c_gst_tag_list_get_int64;
+alias gst_tag_list_get_int64_index = c_gst_tag_list_get_int64_index;
+alias gst_tag_list_get_int_index = c_gst_tag_list_get_int_index;
+alias gst_tag_list_get_pointer = c_gst_tag_list_get_pointer;
+alias gst_tag_list_get_pointer_index = c_gst_tag_list_get_pointer_index;
+alias gst_tag_list_get_sample = c_gst_tag_list_get_sample;
+alias gst_tag_list_get_sample_index = c_gst_tag_list_get_sample_index;
+alias gst_tag_list_get_scope = c_gst_tag_list_get_scope;
+alias gst_tag_list_get_string = c_gst_tag_list_get_string;
+alias gst_tag_list_get_string_index = c_gst_tag_list_get_string_index;
+alias gst_tag_list_get_tag_size = c_gst_tag_list_get_tag_size;
+alias gst_tag_list_get_uint = c_gst_tag_list_get_uint;
+alias gst_tag_list_get_uint64 = c_gst_tag_list_get_uint64;
+alias gst_tag_list_get_uint64_index = c_gst_tag_list_get_uint64_index;
+alias gst_tag_list_get_uint_index = c_gst_tag_list_get_uint_index;
+alias gst_tag_list_get_value_index = c_gst_tag_list_get_value_index;
+alias gst_tag_list_insert = c_gst_tag_list_insert;
+alias gst_tag_list_is_empty = c_gst_tag_list_is_empty;
+alias gst_tag_list_is_equal = c_gst_tag_list_is_equal;
+alias gst_tag_list_merge = c_gst_tag_list_merge;
+alias gst_tag_list_n_tags = c_gst_tag_list_n_tags;
+alias gst_tag_list_nth_tag_name = c_gst_tag_list_nth_tag_name;
+alias gst_tag_list_peek_string_index = c_gst_tag_list_peek_string_index;
+alias gst_tag_list_remove_tag = c_gst_tag_list_remove_tag;
+alias gst_tag_list_set_scope = c_gst_tag_list_set_scope;
+alias gst_tag_list_to_string = c_gst_tag_list_to_string;
+alias gst_tag_list_copy_value = c_gst_tag_list_copy_value;
+
+// TagSetter
+alias gst_tag_setter_get_type = c_gst_tag_setter_get_type;
+alias gst_tag_setter_add_tag_valist = c_gst_tag_setter_add_tag_valist;
+alias gst_tag_setter_add_tag_valist_values = c_gst_tag_setter_add_tag_valist_values;
+alias gst_tag_setter_add_tag_value = c_gst_tag_setter_add_tag_value;
+alias gst_tag_setter_add_tag_values = c_gst_tag_setter_add_tag_values;
+alias gst_tag_setter_add_tags = c_gst_tag_setter_add_tags;
+alias gst_tag_setter_get_tag_list = c_gst_tag_setter_get_tag_list;
+alias gst_tag_setter_get_tag_merge_mode = c_gst_tag_setter_get_tag_merge_mode;
+alias gst_tag_setter_merge_tags = c_gst_tag_setter_merge_tags;
+alias gst_tag_setter_reset_tags = c_gst_tag_setter_reset_tags;
+alias gst_tag_setter_set_tag_merge_mode = c_gst_tag_setter_set_tag_merge_mode;
+
+// Task
+alias gst_task_get_type = c_gst_task_get_type;
+alias gst_task_new = c_gst_task_new;
+alias gst_task_cleanup_all = c_gst_task_cleanup_all;
+alias gst_task_get_pool = c_gst_task_get_pool;
+alias gst_task_get_state = c_gst_task_get_state;
+alias gst_task_join = c_gst_task_join;
+alias gst_task_pause = c_gst_task_pause;
+alias gst_task_resume = c_gst_task_resume;
+alias gst_task_set_enter_callback = c_gst_task_set_enter_callback;
+alias gst_task_set_leave_callback = c_gst_task_set_leave_callback;
+alias gst_task_set_lock = c_gst_task_set_lock;
+alias gst_task_set_pool = c_gst_task_set_pool;
+alias gst_task_set_state = c_gst_task_set_state;
+alias gst_task_start = c_gst_task_start;
+alias gst_task_stop = c_gst_task_stop;
+
+// TaskPool
+alias gst_task_pool_get_type = c_gst_task_pool_get_type;
+alias gst_task_pool_new = c_gst_task_pool_new;
+alias gst_task_pool_cleanup = c_gst_task_pool_cleanup;
+alias gst_task_pool_dispose_handle = c_gst_task_pool_dispose_handle;
+alias gst_task_pool_join = c_gst_task_pool_join;
+alias gst_task_pool_prepare = c_gst_task_pool_prepare;
+alias gst_task_pool_push = c_gst_task_pool_push;
+
+// Toc
+alias gst_toc_get_type = c_gst_toc_get_type;
+alias gst_toc_new = c_gst_toc_new;
+alias gst_toc_append_entry = c_gst_toc_append_entry;
+alias gst_toc_dump = c_gst_toc_dump;
+alias gst_toc_find_entry = c_gst_toc_find_entry;
+alias gst_toc_get_entries = c_gst_toc_get_entries;
+alias gst_toc_get_scope = c_gst_toc_get_scope;
+alias gst_toc_get_tags = c_gst_toc_get_tags;
+alias gst_toc_merge_tags = c_gst_toc_merge_tags;
+alias gst_toc_set_tags = c_gst_toc_set_tags;
+
+// TocEntry
+alias gst_toc_entry_get_type = c_gst_toc_entry_get_type;
+alias gst_toc_entry_new = c_gst_toc_entry_new;
+alias gst_toc_entry_append_sub_entry = c_gst_toc_entry_append_sub_entry;
+alias gst_toc_entry_get_entry_type = c_gst_toc_entry_get_entry_type;
+alias gst_toc_entry_get_loop = c_gst_toc_entry_get_loop;
+alias gst_toc_entry_get_parent = c_gst_toc_entry_get_parent;
+alias gst_toc_entry_get_start_stop_times = c_gst_toc_entry_get_start_stop_times;
+alias gst_toc_entry_get_sub_entries = c_gst_toc_entry_get_sub_entries;
+alias gst_toc_entry_get_tags = c_gst_toc_entry_get_tags;
+alias gst_toc_entry_get_toc = c_gst_toc_entry_get_toc;
+alias gst_toc_entry_get_uid = c_gst_toc_entry_get_uid;
+alias gst_toc_entry_is_alternative = c_gst_toc_entry_is_alternative;
+alias gst_toc_entry_is_sequence = c_gst_toc_entry_is_sequence;
+alias gst_toc_entry_merge_tags = c_gst_toc_entry_merge_tags;
+alias gst_toc_entry_set_loop = c_gst_toc_entry_set_loop;
+alias gst_toc_entry_set_start_stop_times = c_gst_toc_entry_set_start_stop_times;
+alias gst_toc_entry_set_tags = c_gst_toc_entry_set_tags;
+
+// TocSetter
+alias gst_toc_setter_get_type = c_gst_toc_setter_get_type;
+alias gst_toc_setter_get_toc = c_gst_toc_setter_get_toc;
+alias gst_toc_setter_reset = c_gst_toc_setter_reset;
+alias gst_toc_setter_set_toc = c_gst_toc_setter_set_toc;
+
+// Tracer
+alias gst_tracer_get_type = c_gst_tracer_get_type;
+alias gst_tracer_register = c_gst_tracer_register;
+
+// TracerFactory
+alias gst_tracer_factory_get_type = c_gst_tracer_factory_get_type;
+alias gst_tracer_factory_get_list = c_gst_tracer_factory_get_list;
+alias gst_tracer_factory_get_tracer_type = c_gst_tracer_factory_get_tracer_type;
+
+// TracerRecord
+alias gst_tracer_record_get_type = c_gst_tracer_record_get_type;
+alias gst_tracer_record_new = c_gst_tracer_record_new;
+alias gst_tracer_record_log = c_gst_tracer_record_log;
+
+// TypeFind
+alias gst_type_find_get_length = c_gst_type_find_get_length;
+alias gst_type_find_peek = c_gst_type_find_peek;
+alias gst_type_find_suggest = c_gst_type_find_suggest;
+alias gst_type_find_suggest_empty_simple = c_gst_type_find_suggest_empty_simple;
+alias gst_type_find_suggest_simple = c_gst_type_find_suggest_simple;
+alias gst_type_find_register = c_gst_type_find_register;
+
+// TypeFindFactory
+alias gst_type_find_factory_get_type = c_gst_type_find_factory_get_type;
+alias gst_type_find_factory_get_list = c_gst_type_find_factory_get_list;
+alias gst_type_find_factory_call_function = c_gst_type_find_factory_call_function;
+alias gst_type_find_factory_get_caps = c_gst_type_find_factory_get_caps;
+alias gst_type_find_factory_get_extensions = c_gst_type_find_factory_get_extensions;
+alias gst_type_find_factory_has_function = c_gst_type_find_factory_has_function;
+
+// URIHandler
+alias gst_uri_handler_get_type = c_gst_uri_handler_get_type;
+alias gst_uri_handler_get_protocols = c_gst_uri_handler_get_protocols;
+alias gst_uri_handler_get_uri = c_gst_uri_handler_get_uri;
+alias gst_uri_handler_get_uri_type = c_gst_uri_handler_get_uri_type;
+alias gst_uri_handler_set_uri = c_gst_uri_handler_set_uri;
+
+// Uri
+alias gst_uri_get_type = c_gst_uri_get_type;
+alias gst_uri_new = c_gst_uri_new;
+alias gst_uri_append_path = c_gst_uri_append_path;
+alias gst_uri_append_path_segment = c_gst_uri_append_path_segment;
+alias gst_uri_equal = c_gst_uri_equal;
+alias gst_uri_from_string_with_base = c_gst_uri_from_string_with_base;
+alias gst_uri_get_fragment = c_gst_uri_get_fragment;
+alias gst_uri_get_host = c_gst_uri_get_host;
+alias gst_uri_get_media_fragment_table = c_gst_uri_get_media_fragment_table;
+alias gst_uri_get_path = c_gst_uri_get_path;
+alias gst_uri_get_path_segments = c_gst_uri_get_path_segments;
+alias gst_uri_get_path_string = c_gst_uri_get_path_string;
+alias gst_uri_get_port = c_gst_uri_get_port;
+alias gst_uri_get_query_keys = c_gst_uri_get_query_keys;
+alias gst_uri_get_query_string = c_gst_uri_get_query_string;
+alias gst_uri_get_query_string_ordered = c_gst_uri_get_query_string_ordered;
+alias gst_uri_get_query_table = c_gst_uri_get_query_table;
+alias gst_uri_get_query_value = c_gst_uri_get_query_value;
+alias gst_uri_get_scheme = c_gst_uri_get_scheme;
+alias gst_uri_get_userinfo = c_gst_uri_get_userinfo;
+alias gst_uri_is_normalized = c_gst_uri_is_normalized;
+alias gst_uri_is_writable = c_gst_uri_is_writable;
+alias gst_uri_join = c_gst_uri_join;
+alias gst_uri_make_writable = c_gst_uri_make_writable;
+alias gst_uri_new_with_base = c_gst_uri_new_with_base;
+alias gst_uri_normalize = c_gst_uri_normalize;
+alias gst_uri_query_has_key = c_gst_uri_query_has_key;
+alias gst_uri_remove_query_key = c_gst_uri_remove_query_key;
+alias gst_uri_set_fragment = c_gst_uri_set_fragment;
+alias gst_uri_set_host = c_gst_uri_set_host;
+alias gst_uri_set_path = c_gst_uri_set_path;
+alias gst_uri_set_path_segments = c_gst_uri_set_path_segments;
+alias gst_uri_set_path_string = c_gst_uri_set_path_string;
+alias gst_uri_set_port = c_gst_uri_set_port;
+alias gst_uri_set_query_string = c_gst_uri_set_query_string;
+alias gst_uri_set_query_table = c_gst_uri_set_query_table;
+alias gst_uri_set_query_value = c_gst_uri_set_query_value;
+alias gst_uri_set_scheme = c_gst_uri_set_scheme;
+alias gst_uri_set_userinfo = c_gst_uri_set_userinfo;
+alias gst_uri_to_string = c_gst_uri_to_string;
+alias gst_uri_to_string_with_keys = c_gst_uri_to_string_with_keys;
+alias gst_uri_construct = c_gst_uri_construct;
+alias gst_uri_from_string = c_gst_uri_from_string;
+alias gst_uri_from_string_escaped = c_gst_uri_from_string_escaped;
+alias gst_uri_get_location = c_gst_uri_get_location;
+alias gst_uri_get_protocol = c_gst_uri_get_protocol;
+alias gst_uri_has_protocol = c_gst_uri_has_protocol;
+alias gst_uri_is_valid = c_gst_uri_is_valid;
+alias gst_uri_join_strings = c_gst_uri_join_strings;
+alias gst_uri_protocol_is_supported = c_gst_uri_protocol_is_supported;
+alias gst_uri_protocol_is_valid = c_gst_uri_protocol_is_valid;
+
+// ValueArray
+alias gst_value_array_get_type = c_gst_value_array_get_type;
+alias gst_value_array_append_and_take_value = c_gst_value_array_append_and_take_value;
+alias gst_value_array_append_value = c_gst_value_array_append_value;
+alias gst_value_array_get_size = c_gst_value_array_get_size;
+alias gst_value_array_get_value = c_gst_value_array_get_value;
+alias gst_value_array_init = c_gst_value_array_init;
+alias gst_value_array_prepend_value = c_gst_value_array_prepend_value;
+
+// ValueList
+alias gst_value_list_get_type = c_gst_value_list_get_type;
+alias gst_value_list_append_and_take_value = c_gst_value_list_append_and_take_value;
+alias gst_value_list_append_value = c_gst_value_list_append_value;
+alias gst_value_list_concat = c_gst_value_list_concat;
+alias gst_value_list_get_size = c_gst_value_list_get_size;
+alias gst_value_list_get_value = c_gst_value_list_get_value;
+alias gst_value_list_init = c_gst_value_list_init;
+alias gst_value_list_merge = c_gst_value_list_merge;
+alias gst_value_list_prepend_value = c_gst_value_list_prepend_value;
+
+// global
+alias gst_calculate_linear_regression = c_gst_calculate_linear_regression;
+alias gst_clear_mini_object = c_gst_clear_mini_object;
+alias gst_clear_object = c_gst_clear_object;
+alias gst_clear_structure = c_gst_clear_structure;
+alias gst_debug_add_log_function = c_gst_debug_add_log_function;
+alias gst_debug_add_ring_buffer_logger = c_gst_debug_add_ring_buffer_logger;
+alias gst_debug_bin_to_dot_data = c_gst_debug_bin_to_dot_data;
+alias gst_debug_bin_to_dot_file = c_gst_debug_bin_to_dot_file;
+alias gst_debug_bin_to_dot_file_with_ts = c_gst_debug_bin_to_dot_file_with_ts;
+alias gst_debug_construct_term_color = c_gst_debug_construct_term_color;
+alias gst_debug_construct_win_color = c_gst_debug_construct_win_color;
+alias gst_debug_get_all_categories = c_gst_debug_get_all_categories;
+alias gst_debug_get_color_mode = c_gst_debug_get_color_mode;
+alias gst_debug_get_default_threshold = c_gst_debug_get_default_threshold;
+alias gst_debug_get_stack_trace = c_gst_debug_get_stack_trace;
+alias gst_debug_is_active = c_gst_debug_is_active;
+alias gst_debug_is_colored = c_gst_debug_is_colored;
+alias gst_debug_log = c_gst_debug_log;
+alias gst_debug_log_default = c_gst_debug_log_default;
+alias gst_debug_log_get_line = c_gst_debug_log_get_line;
+alias gst_debug_log_id = c_gst_debug_log_id;
+alias gst_debug_log_id_literal = c_gst_debug_log_id_literal;
+alias gst_debug_log_id_valist = c_gst_debug_log_id_valist;
+alias gst_debug_log_literal = c_gst_debug_log_literal;
+alias gst_debug_log_valist = c_gst_debug_log_valist;
+alias gst_debug_print_stack_trace = c_gst_debug_print_stack_trace;
+alias gst_debug_remove_log_function = c_gst_debug_remove_log_function;
+alias gst_debug_remove_log_function_by_data = c_gst_debug_remove_log_function_by_data;
+alias gst_debug_remove_ring_buffer_logger = c_gst_debug_remove_ring_buffer_logger;
+alias gst_debug_ring_buffer_logger_get_logs = c_gst_debug_ring_buffer_logger_get_logs;
+alias gst_debug_set_active = c_gst_debug_set_active;
+alias gst_debug_set_color_mode = c_gst_debug_set_color_mode;
+alias gst_debug_set_color_mode_from_string = c_gst_debug_set_color_mode_from_string;
+alias gst_debug_set_colored = c_gst_debug_set_colored;
+alias gst_debug_set_default_threshold = c_gst_debug_set_default_threshold;
+alias gst_debug_set_threshold_for_name = c_gst_debug_set_threshold_for_name;
+alias gst_debug_set_threshold_from_string = c_gst_debug_set_threshold_from_string;
+alias gst_debug_unset_threshold_for_name = c_gst_debug_unset_threshold_for_name;
+alias gst_deinit = c_gst_deinit;
+alias gst_dynamic_type_register = c_gst_dynamic_type_register;
+alias gst_error_get_message = c_gst_error_get_message;
+alias gst_filename_to_uri = c_gst_filename_to_uri;
+alias gst_flow_get_name = c_gst_flow_get_name;
+alias gst_flow_to_quark = c_gst_flow_to_quark;
+alias gst_formats_contains = c_gst_formats_contains;
+alias gst_get_main_executable_path = c_gst_get_main_executable_path;
+alias gst_info_strdup_printf = c_gst_info_strdup_printf;
+alias gst_info_strdup_vprintf = c_gst_info_strdup_vprintf;
+alias gst_info_vasprintf = c_gst_info_vasprintf;
+alias gst_init = c_gst_init;
+alias gst_init_check = c_gst_init_check;
+alias gst_init_get_option_group = c_gst_init_get_option_group;
+alias gst_is_caps_features = c_gst_is_caps_features;
+alias gst_is_initialized = c_gst_is_initialized;
+alias gst_make_element_message_details = c_gst_make_element_message_details;
+alias gst_param_spec_array = c_gst_param_spec_array;
+alias gst_param_spec_fraction = c_gst_param_spec_fraction;
+alias gst_parent_buffer_meta_api_get_type = c_gst_parent_buffer_meta_api_get_type;
+alias gst_parse_bin_from_description = c_gst_parse_bin_from_description;
+alias gst_parse_bin_from_description_full = c_gst_parse_bin_from_description_full;
+alias gst_parse_launch = c_gst_parse_launch;
+alias gst_parse_launch_full = c_gst_parse_launch_full;
+alias gst_parse_launchv = c_gst_parse_launchv;
+alias gst_parse_launchv_full = c_gst_parse_launchv_full;
+alias gst_print = c_gst_print;
+alias gst_printerr = c_gst_printerr;
+alias gst_printerrln = c_gst_printerrln;
+alias gst_println = c_gst_println;
+alias gst_protection_filter_systems_by_available_decryptors = c_gst_protection_filter_systems_by_available_decryptors;
+alias gst_protection_meta_api_get_type = c_gst_protection_meta_api_get_type;
+alias gst_protection_select_system = c_gst_protection_select_system;
+alias gst_reference_timestamp_meta_api_get_type = c_gst_reference_timestamp_meta_api_get_type;
+alias gst_segtrap_is_enabled = c_gst_segtrap_is_enabled;
+alias gst_segtrap_set_enabled = c_gst_segtrap_set_enabled;
+alias gst_static_caps_get_type = c_gst_static_caps_get_type;
+alias gst_static_pad_template_get_type = c_gst_static_pad_template_get_type;
+alias gst_tag_exists = c_gst_tag_exists;
+alias gst_tag_get_description = c_gst_tag_get_description;
+alias gst_tag_get_flag = c_gst_tag_get_flag;
+alias gst_tag_get_nick = c_gst_tag_get_nick;
+alias gst_tag_get_type = c_gst_tag_get_type;
+alias gst_tag_is_fixed = c_gst_tag_is_fixed;
+alias gst_tag_merge_strings_with_comma = c_gst_tag_merge_strings_with_comma;
+alias gst_tag_merge_use_first = c_gst_tag_merge_use_first;
+alias gst_tag_register = c_gst_tag_register;
+alias gst_tag_register_static = c_gst_tag_register_static;
+alias gst_tracing_get_active_tracers = c_gst_tracing_get_active_tracers;
+alias gst_tracing_register_hook = c_gst_tracing_register_hook;
+alias gst_type_find_get_type = c_gst_type_find_get_type;
+alias gst_type_is_plugin_api = c_gst_type_is_plugin_api;
+alias gst_type_mark_as_plugin_api = c_gst_type_mark_as_plugin_api;
+alias gst_update_registry = c_gst_update_registry;
+alias gst_util_array_binary_search = c_gst_util_array_binary_search;
+alias gst_util_ceil_log2 = c_gst_util_ceil_log2;
+alias gst_util_double_to_fraction = c_gst_util_double_to_fraction;
+alias gst_util_dump_buffer = c_gst_util_dump_buffer;
+alias gst_util_dump_mem = c_gst_util_dump_mem;
+alias gst_util_filename_compare = c_gst_util_filename_compare;
+alias gst_util_fraction_add = c_gst_util_fraction_add;
+alias gst_util_fraction_compare = c_gst_util_fraction_compare;
+alias gst_util_fraction_multiply = c_gst_util_fraction_multiply;
+alias gst_util_fraction_to_double = c_gst_util_fraction_to_double;
+alias gst_util_gdouble_to_guint64 = c_gst_util_gdouble_to_guint64;
+alias gst_util_get_object_array = c_gst_util_get_object_array;
+alias gst_util_get_timestamp = c_gst_util_get_timestamp;
+alias gst_util_greatest_common_divisor = c_gst_util_greatest_common_divisor;
+alias gst_util_greatest_common_divisor_int64 = c_gst_util_greatest_common_divisor_int64;
+alias gst_util_group_id_next = c_gst_util_group_id_next;
+alias gst_util_guint64_to_gdouble = c_gst_util_guint64_to_gdouble;
+alias gst_util_seqnum_compare = c_gst_util_seqnum_compare;
+alias gst_util_seqnum_next = c_gst_util_seqnum_next;
+alias gst_util_set_object_arg = c_gst_util_set_object_arg;
+alias gst_util_set_object_array = c_gst_util_set_object_array;
+alias gst_util_set_value_from_string = c_gst_util_set_value_from_string;
+alias gst_util_simplify_fraction = c_gst_util_simplify_fraction;
+alias gst_util_uint64_scale = c_gst_util_uint64_scale;
+alias gst_util_uint64_scale_ceil = c_gst_util_uint64_scale_ceil;
+alias gst_util_uint64_scale_int = c_gst_util_uint64_scale_int;
+alias gst_util_uint64_scale_int_ceil = c_gst_util_uint64_scale_int_ceil;
+alias gst_util_uint64_scale_int_round = c_gst_util_uint64_scale_int_round;
+alias gst_util_uint64_scale_round = c_gst_util_uint64_scale_round;
+alias gst_value_can_compare = c_gst_value_can_compare;
+alias gst_value_can_intersect = c_gst_value_can_intersect;
+alias gst_value_can_subtract = c_gst_value_can_subtract;
+alias gst_value_can_union = c_gst_value_can_union;
+alias gst_value_compare = c_gst_value_compare;
+alias gst_value_deserialize = c_gst_value_deserialize;
+alias gst_value_deserialize_with_pspec = c_gst_value_deserialize_with_pspec;
+alias gst_value_fixate = c_gst_value_fixate;
+alias gst_value_fraction_multiply = c_gst_value_fraction_multiply;
+alias gst_value_fraction_subtract = c_gst_value_fraction_subtract;
+alias gst_value_get_bitmask = c_gst_value_get_bitmask;
+alias gst_value_get_caps = c_gst_value_get_caps;
+alias gst_value_get_caps_features = c_gst_value_get_caps_features;
+alias gst_value_get_double_range_max = c_gst_value_get_double_range_max;
+alias gst_value_get_double_range_min = c_gst_value_get_double_range_min;
+alias gst_value_get_flagset_flags = c_gst_value_get_flagset_flags;
+alias gst_value_get_flagset_mask = c_gst_value_get_flagset_mask;
+alias gst_value_get_fraction_denominator = c_gst_value_get_fraction_denominator;
+alias gst_value_get_fraction_numerator = c_gst_value_get_fraction_numerator;
+alias gst_value_get_fraction_range_max = c_gst_value_get_fraction_range_max;
+alias gst_value_get_fraction_range_min = c_gst_value_get_fraction_range_min;
+alias gst_value_get_int64_range_max = c_gst_value_get_int64_range_max;
+alias gst_value_get_int64_range_min = c_gst_value_get_int64_range_min;
+alias gst_value_get_int64_range_step = c_gst_value_get_int64_range_step;
+alias gst_value_get_int_range_max = c_gst_value_get_int_range_max;
+alias gst_value_get_int_range_min = c_gst_value_get_int_range_min;
+alias gst_value_get_int_range_step = c_gst_value_get_int_range_step;
+alias gst_value_get_structure = c_gst_value_get_structure;
+alias gst_value_init_and_copy = c_gst_value_init_and_copy;
+alias gst_value_intersect = c_gst_value_intersect;
+alias gst_value_is_fixed = c_gst_value_is_fixed;
+alias gst_value_is_subset = c_gst_value_is_subset;
+alias gst_value_register = c_gst_value_register;
+alias gst_value_serialize = c_gst_value_serialize;
+alias gst_value_set_bitmask = c_gst_value_set_bitmask;
+alias gst_value_set_caps = c_gst_value_set_caps;
+alias gst_value_set_caps_features = c_gst_value_set_caps_features;
+alias gst_value_set_double_range = c_gst_value_set_double_range;
+alias gst_value_set_flagset = c_gst_value_set_flagset;
+alias gst_value_set_fraction = c_gst_value_set_fraction;
+alias gst_value_set_fraction_range = c_gst_value_set_fraction_range;
+alias gst_value_set_fraction_range_full = c_gst_value_set_fraction_range_full;
+alias gst_value_set_int64_range = c_gst_value_set_int64_range;
+alias gst_value_set_int64_range_step = c_gst_value_set_int64_range_step;
+alias gst_value_set_int_range = c_gst_value_set_int_range;
+alias gst_value_set_int_range_step = c_gst_value_set_int_range_step;
+alias gst_value_set_structure = c_gst_value_set_structure;
+alias gst_value_subtract = c_gst_value_subtract;
+alias gst_value_union = c_gst_value_union;
+alias gst_version = c_gst_version;
+alias gst_version_string = c_gst_version_string;
+
+shared static this()
+{
+  // AllocationParams
+  gidLink(cast(void**)&gst_allocation_params_get_type, "gst_allocation_params_get_type", LIBS);
+  gidLink(cast(void**)&gst_allocation_params_new, "gst_allocation_params_new", LIBS);
+  gidLink(cast(void**)&gst_allocation_params_copy, "gst_allocation_params_copy", LIBS);
+  gidLink(cast(void**)&gst_allocation_params_free, "gst_allocation_params_free", LIBS);
+  gidLink(cast(void**)&gst_allocation_params_init, "gst_allocation_params_init", LIBS);
+
+  // Allocator
+  gidLink(cast(void**)&gst_allocator_get_type, "gst_allocator_get_type", LIBS);
+  gidLink(cast(void**)&gst_allocator_find, "gst_allocator_find", LIBS);
+  gidLink(cast(void**)&gst_allocator_register, "gst_allocator_register", LIBS);
+  gidLink(cast(void**)&gst_allocator_alloc, "gst_allocator_alloc", LIBS);
+  gidLink(cast(void**)&gst_allocator_free, "gst_allocator_free", LIBS);
+  gidLink(cast(void**)&gst_allocator_set_default, "gst_allocator_set_default", LIBS);
+
+  // AtomicQueue
+  gidLink(cast(void**)&gst_atomic_queue_get_type, "gst_atomic_queue_get_type", LIBS);
+  gidLink(cast(void**)&gst_atomic_queue_new, "gst_atomic_queue_new", LIBS);
+  gidLink(cast(void**)&gst_atomic_queue_length, "gst_atomic_queue_length", LIBS);
+  gidLink(cast(void**)&gst_atomic_queue_peek, "gst_atomic_queue_peek", LIBS);
+  gidLink(cast(void**)&gst_atomic_queue_pop, "gst_atomic_queue_pop", LIBS);
+  gidLink(cast(void**)&gst_atomic_queue_push, "gst_atomic_queue_push", LIBS);
+  gidLink(cast(void**)&gst_atomic_queue_ref, "gst_atomic_queue_ref", LIBS);
+  gidLink(cast(void**)&gst_atomic_queue_unref, "gst_atomic_queue_unref", LIBS);
+
+  // Bin
+  gidLink(cast(void**)&gst_bin_get_type, "gst_bin_get_type", LIBS);
+  gidLink(cast(void**)&gst_bin_new, "gst_bin_new", LIBS);
+  gidLink(cast(void**)&gst_bin_add, "gst_bin_add", LIBS);
+  gidLink(cast(void**)&gst_bin_add_many, "gst_bin_add_many", LIBS);
+  gidLink(cast(void**)&gst_bin_find_unlinked_pad, "gst_bin_find_unlinked_pad", LIBS);
+  gidLink(cast(void**)&gst_bin_get_by_interface, "gst_bin_get_by_interface", LIBS);
+  gidLink(cast(void**)&gst_bin_get_by_name, "gst_bin_get_by_name", LIBS);
+  gidLink(cast(void**)&gst_bin_get_by_name_recurse_up, "gst_bin_get_by_name_recurse_up", LIBS);
+  gidLink(cast(void**)&gst_bin_get_suppressed_flags, "gst_bin_get_suppressed_flags", LIBS);
+  gidLink(cast(void**)&gst_bin_iterate_all_by_element_factory_name, "gst_bin_iterate_all_by_element_factory_name", LIBS);
+  gidLink(cast(void**)&gst_bin_iterate_all_by_interface, "gst_bin_iterate_all_by_interface", LIBS);
+  gidLink(cast(void**)&gst_bin_iterate_elements, "gst_bin_iterate_elements", LIBS);
+  gidLink(cast(void**)&gst_bin_iterate_recurse, "gst_bin_iterate_recurse", LIBS);
+  gidLink(cast(void**)&gst_bin_iterate_sinks, "gst_bin_iterate_sinks", LIBS);
+  gidLink(cast(void**)&gst_bin_iterate_sorted, "gst_bin_iterate_sorted", LIBS);
+  gidLink(cast(void**)&gst_bin_iterate_sources, "gst_bin_iterate_sources", LIBS);
+  gidLink(cast(void**)&gst_bin_recalculate_latency, "gst_bin_recalculate_latency", LIBS);
+  gidLink(cast(void**)&gst_bin_remove, "gst_bin_remove", LIBS);
+  gidLink(cast(void**)&gst_bin_remove_many, "gst_bin_remove_many", LIBS);
+  gidLink(cast(void**)&gst_bin_set_suppressed_flags, "gst_bin_set_suppressed_flags", LIBS);
+  gidLink(cast(void**)&gst_bin_sync_children_states, "gst_bin_sync_children_states", LIBS);
+
+  // Bitmask
+  gidLink(cast(void**)&gst_bitmask_get_type, "gst_bitmask_get_type", LIBS);
+
+  // Buffer
+  gidLink(cast(void**)&gst_buffer_get_type, "gst_buffer_get_type", LIBS);
+  gidLink(cast(void**)&gst_buffer_new, "gst_buffer_new", LIBS);
+  gidLink(cast(void**)&gst_buffer_new_allocate, "gst_buffer_new_allocate", LIBS);
+  gidLink(cast(void**)&gst_buffer_new_memdup, "gst_buffer_new_memdup", LIBS);
+  gidLink(cast(void**)&gst_buffer_new_wrapped, "gst_buffer_new_wrapped", LIBS);
+  gidLink(cast(void**)&gst_buffer_new_wrapped_bytes, "gst_buffer_new_wrapped_bytes", LIBS);
+  gidLink(cast(void**)&gst_buffer_new_wrapped_full, "gst_buffer_new_wrapped_full", LIBS);
+  gidLink(cast(void**)&gst_buffer_add_custom_meta, "gst_buffer_add_custom_meta", LIBS);
+  gidLink(cast(void**)&gst_buffer_add_meta, "gst_buffer_add_meta", LIBS);
+  gidLink(cast(void**)&gst_buffer_add_parent_buffer_meta, "gst_buffer_add_parent_buffer_meta", LIBS);
+  gidLink(cast(void**)&gst_buffer_add_protection_meta, "gst_buffer_add_protection_meta", LIBS);
+  gidLink(cast(void**)&gst_buffer_add_reference_timestamp_meta, "gst_buffer_add_reference_timestamp_meta", LIBS);
+  gidLink(cast(void**)&gst_buffer_append, "gst_buffer_append", LIBS);
+  gidLink(cast(void**)&gst_buffer_append_memory, "gst_buffer_append_memory", LIBS);
+  gidLink(cast(void**)&gst_buffer_append_region, "gst_buffer_append_region", LIBS);
+  gidLink(cast(void**)&gst_buffer_copy_deep, "gst_buffer_copy_deep", LIBS);
+  gidLink(cast(void**)&gst_buffer_copy_into, "gst_buffer_copy_into", LIBS);
+  gidLink(cast(void**)&gst_buffer_copy_region, "gst_buffer_copy_region", LIBS);
+  gidLink(cast(void**)&gst_buffer_extract, "gst_buffer_extract", LIBS);
+  gidLink(cast(void**)&gst_buffer_extract_dup, "gst_buffer_extract_dup", LIBS);
+  gidLink(cast(void**)&gst_buffer_fill, "gst_buffer_fill", LIBS);
+  gidLink(cast(void**)&gst_buffer_find_memory, "gst_buffer_find_memory", LIBS);
+  gidLink(cast(void**)&gst_buffer_foreach_meta, "gst_buffer_foreach_meta", LIBS);
+  gidLink(cast(void**)&gst_buffer_get_all_memory, "gst_buffer_get_all_memory", LIBS);
+  gidLink(cast(void**)&gst_buffer_get_custom_meta, "gst_buffer_get_custom_meta", LIBS);
+  gidLink(cast(void**)&gst_buffer_get_flags, "gst_buffer_get_flags", LIBS);
+  gidLink(cast(void**)&gst_buffer_get_memory, "gst_buffer_get_memory", LIBS);
+  gidLink(cast(void**)&gst_buffer_get_memory_range, "gst_buffer_get_memory_range", LIBS);
+  gidLink(cast(void**)&gst_buffer_get_meta, "gst_buffer_get_meta", LIBS);
+  gidLink(cast(void**)&gst_buffer_get_n_meta, "gst_buffer_get_n_meta", LIBS);
+  gidLink(cast(void**)&gst_buffer_get_reference_timestamp_meta, "gst_buffer_get_reference_timestamp_meta", LIBS);
+  gidLink(cast(void**)&gst_buffer_get_size, "gst_buffer_get_size", LIBS);
+  gidLink(cast(void**)&gst_buffer_get_sizes, "gst_buffer_get_sizes", LIBS);
+  gidLink(cast(void**)&gst_buffer_get_sizes_range, "gst_buffer_get_sizes_range", LIBS);
+  gidLink(cast(void**)&gst_buffer_has_flags, "gst_buffer_has_flags", LIBS);
+  gidLink(cast(void**)&gst_buffer_insert_memory, "gst_buffer_insert_memory", LIBS);
+  gidLink(cast(void**)&gst_buffer_is_all_memory_writable, "gst_buffer_is_all_memory_writable", LIBS);
+  gidLink(cast(void**)&gst_buffer_is_memory_range_writable, "gst_buffer_is_memory_range_writable", LIBS);
+  gidLink(cast(void**)&gst_buffer_iterate_meta, "gst_buffer_iterate_meta", LIBS);
+  gidLink(cast(void**)&gst_buffer_iterate_meta_filtered, "gst_buffer_iterate_meta_filtered", LIBS);
+  gidLink(cast(void**)&gst_buffer_map, "gst_buffer_map", LIBS);
+  gidLink(cast(void**)&gst_buffer_map_range, "gst_buffer_map_range", LIBS);
+  gidLink(cast(void**)&gst_buffer_memcmp, "gst_buffer_memcmp", LIBS);
+  gidLink(cast(void**)&gst_buffer_memset, "gst_buffer_memset", LIBS);
+  gidLink(cast(void**)&gst_buffer_n_memory, "gst_buffer_n_memory", LIBS);
+  gidLink(cast(void**)&gst_buffer_peek_memory, "gst_buffer_peek_memory", LIBS);
+  gidLink(cast(void**)&gst_buffer_prepend_memory, "gst_buffer_prepend_memory", LIBS);
+  gidLink(cast(void**)&gst_buffer_remove_all_memory, "gst_buffer_remove_all_memory", LIBS);
+  gidLink(cast(void**)&gst_buffer_remove_memory, "gst_buffer_remove_memory", LIBS);
+  gidLink(cast(void**)&gst_buffer_remove_memory_range, "gst_buffer_remove_memory_range", LIBS);
+  gidLink(cast(void**)&gst_buffer_remove_meta, "gst_buffer_remove_meta", LIBS);
+  gidLink(cast(void**)&gst_buffer_replace_all_memory, "gst_buffer_replace_all_memory", LIBS);
+  gidLink(cast(void**)&gst_buffer_replace_memory, "gst_buffer_replace_memory", LIBS);
+  gidLink(cast(void**)&gst_buffer_replace_memory_range, "gst_buffer_replace_memory_range", LIBS);
+  gidLink(cast(void**)&gst_buffer_resize, "gst_buffer_resize", LIBS);
+  gidLink(cast(void**)&gst_buffer_resize_range, "gst_buffer_resize_range", LIBS);
+  gidLink(cast(void**)&gst_buffer_set_flags, "gst_buffer_set_flags", LIBS);
+  gidLink(cast(void**)&gst_buffer_set_size, "gst_buffer_set_size", LIBS);
+  gidLink(cast(void**)&gst_buffer_unmap, "gst_buffer_unmap", LIBS);
+  gidLink(cast(void**)&gst_buffer_unset_flags, "gst_buffer_unset_flags", LIBS);
+  gidLink(cast(void**)&gst_buffer_get_max_memory, "gst_buffer_get_max_memory", LIBS);
+
+  // BufferList
+  gidLink(cast(void**)&gst_buffer_list_get_type, "gst_buffer_list_get_type", LIBS);
+  gidLink(cast(void**)&gst_buffer_list_new, "gst_buffer_list_new", LIBS);
+  gidLink(cast(void**)&gst_buffer_list_new_sized, "gst_buffer_list_new_sized", LIBS);
+  gidLink(cast(void**)&gst_buffer_list_calculate_size, "gst_buffer_list_calculate_size", LIBS);
+  gidLink(cast(void**)&gst_buffer_list_copy_deep, "gst_buffer_list_copy_deep", LIBS);
+  gidLink(cast(void**)&gst_buffer_list_foreach, "gst_buffer_list_foreach", LIBS);
+  gidLink(cast(void**)&gst_buffer_list_get, "gst_buffer_list_get", LIBS);
+  gidLink(cast(void**)&gst_buffer_list_get_writable, "gst_buffer_list_get_writable", LIBS);
+  gidLink(cast(void**)&gst_buffer_list_insert, "gst_buffer_list_insert", LIBS);
+  gidLink(cast(void**)&gst_buffer_list_length, "gst_buffer_list_length", LIBS);
+  gidLink(cast(void**)&gst_buffer_list_remove, "gst_buffer_list_remove", LIBS);
+
+  // BufferPool
+  gidLink(cast(void**)&gst_buffer_pool_get_type, "gst_buffer_pool_get_type", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_new, "gst_buffer_pool_new", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_config_add_option, "gst_buffer_pool_config_add_option", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_config_get_allocator, "gst_buffer_pool_config_get_allocator", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_config_get_option, "gst_buffer_pool_config_get_option", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_config_get_params, "gst_buffer_pool_config_get_params", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_config_has_option, "gst_buffer_pool_config_has_option", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_config_n_options, "gst_buffer_pool_config_n_options", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_config_set_allocator, "gst_buffer_pool_config_set_allocator", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_config_set_params, "gst_buffer_pool_config_set_params", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_config_validate_params, "gst_buffer_pool_config_validate_params", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_acquire_buffer, "gst_buffer_pool_acquire_buffer", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_get_config, "gst_buffer_pool_get_config", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_get_options, "gst_buffer_pool_get_options", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_has_option, "gst_buffer_pool_has_option", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_is_active, "gst_buffer_pool_is_active", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_release_buffer, "gst_buffer_pool_release_buffer", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_set_active, "gst_buffer_pool_set_active", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_set_config, "gst_buffer_pool_set_config", LIBS);
+  gidLink(cast(void**)&gst_buffer_pool_set_flushing, "gst_buffer_pool_set_flushing", LIBS);
+
+  // Bus
+  gidLink(cast(void**)&gst_bus_get_type, "gst_bus_get_type", LIBS);
+  gidLink(cast(void**)&gst_bus_new, "gst_bus_new", LIBS);
+  gidLink(cast(void**)&gst_bus_add_signal_watch, "gst_bus_add_signal_watch", LIBS);
+  gidLink(cast(void**)&gst_bus_add_signal_watch_full, "gst_bus_add_signal_watch_full", LIBS);
+  gidLink(cast(void**)&gst_bus_add_watch, "gst_bus_add_watch", LIBS);
+  gidLink(cast(void**)&gst_bus_add_watch_full, "gst_bus_add_watch_full", LIBS);
+  gidLink(cast(void**)&gst_bus_async_signal_func, "gst_bus_async_signal_func", LIBS);
+  gidLink(cast(void**)&gst_bus_create_watch, "gst_bus_create_watch", LIBS);
+  gidLink(cast(void**)&gst_bus_disable_sync_message_emission, "gst_bus_disable_sync_message_emission", LIBS);
+  gidLink(cast(void**)&gst_bus_enable_sync_message_emission, "gst_bus_enable_sync_message_emission", LIBS);
+  gidLink(cast(void**)&gst_bus_get_pollfd, "gst_bus_get_pollfd", LIBS);
+  gidLink(cast(void**)&gst_bus_have_pending, "gst_bus_have_pending", LIBS);
+  gidLink(cast(void**)&gst_bus_peek, "gst_bus_peek", LIBS);
+  gidLink(cast(void**)&gst_bus_poll, "gst_bus_poll", LIBS);
+  gidLink(cast(void**)&gst_bus_pop, "gst_bus_pop", LIBS);
+  gidLink(cast(void**)&gst_bus_pop_filtered, "gst_bus_pop_filtered", LIBS);
+  gidLink(cast(void**)&gst_bus_post, "gst_bus_post", LIBS);
+  gidLink(cast(void**)&gst_bus_remove_signal_watch, "gst_bus_remove_signal_watch", LIBS);
+  gidLink(cast(void**)&gst_bus_remove_watch, "gst_bus_remove_watch", LIBS);
+  gidLink(cast(void**)&gst_bus_set_flushing, "gst_bus_set_flushing", LIBS);
+  gidLink(cast(void**)&gst_bus_set_sync_handler, "gst_bus_set_sync_handler", LIBS);
+  gidLink(cast(void**)&gst_bus_sync_signal_handler, "gst_bus_sync_signal_handler", LIBS);
+  gidLink(cast(void**)&gst_bus_timed_pop, "gst_bus_timed_pop", LIBS);
+  gidLink(cast(void**)&gst_bus_timed_pop_filtered, "gst_bus_timed_pop_filtered", LIBS);
+
+  // Caps
+  gidLink(cast(void**)&gst_caps_get_type, "gst_caps_get_type", LIBS);
+  gidLink(cast(void**)&gst_caps_new_any, "gst_caps_new_any", LIBS);
+  gidLink(cast(void**)&gst_caps_new_empty, "gst_caps_new_empty", LIBS);
+  gidLink(cast(void**)&gst_caps_new_empty_simple, "gst_caps_new_empty_simple", LIBS);
+  gidLink(cast(void**)&gst_caps_new_full, "gst_caps_new_full", LIBS);
+  gidLink(cast(void**)&gst_caps_new_full_valist, "gst_caps_new_full_valist", LIBS);
+  gidLink(cast(void**)&gst_caps_new_simple, "gst_caps_new_simple", LIBS);
+  gidLink(cast(void**)&gst_caps_append, "gst_caps_append", LIBS);
+  gidLink(cast(void**)&gst_caps_append_structure, "gst_caps_append_structure", LIBS);
+  gidLink(cast(void**)&gst_caps_append_structure_full, "gst_caps_append_structure_full", LIBS);
+  gidLink(cast(void**)&gst_caps_can_intersect, "gst_caps_can_intersect", LIBS);
+  gidLink(cast(void**)&gst_caps_copy, "gst_caps_copy", LIBS);
+  gidLink(cast(void**)&gst_caps_copy_nth, "gst_caps_copy_nth", LIBS);
+  gidLink(cast(void**)&gst_caps_filter_and_map_in_place, "gst_caps_filter_and_map_in_place", LIBS);
+  gidLink(cast(void**)&gst_caps_fixate, "gst_caps_fixate", LIBS);
+  gidLink(cast(void**)&gst_caps_foreach, "gst_caps_foreach", LIBS);
+  gidLink(cast(void**)&gst_caps_get_features, "gst_caps_get_features", LIBS);
+  gidLink(cast(void**)&gst_caps_get_size, "gst_caps_get_size", LIBS);
+  gidLink(cast(void**)&gst_caps_get_structure, "gst_caps_get_structure", LIBS);
+  gidLink(cast(void**)&gst_caps_intersect, "gst_caps_intersect", LIBS);
+  gidLink(cast(void**)&gst_caps_intersect_full, "gst_caps_intersect_full", LIBS);
+  gidLink(cast(void**)&gst_caps_is_always_compatible, "gst_caps_is_always_compatible", LIBS);
+  gidLink(cast(void**)&gst_caps_is_any, "gst_caps_is_any", LIBS);
+  gidLink(cast(void**)&gst_caps_is_empty, "gst_caps_is_empty", LIBS);
+  gidLink(cast(void**)&gst_caps_is_equal, "gst_caps_is_equal", LIBS);
+  gidLink(cast(void**)&gst_caps_is_equal_fixed, "gst_caps_is_equal_fixed", LIBS);
+  gidLink(cast(void**)&gst_caps_is_fixed, "gst_caps_is_fixed", LIBS);
+  gidLink(cast(void**)&gst_caps_is_strictly_equal, "gst_caps_is_strictly_equal", LIBS);
+  gidLink(cast(void**)&gst_caps_is_subset, "gst_caps_is_subset", LIBS);
+  gidLink(cast(void**)&gst_caps_is_subset_structure, "gst_caps_is_subset_structure", LIBS);
+  gidLink(cast(void**)&gst_caps_is_subset_structure_full, "gst_caps_is_subset_structure_full", LIBS);
+  gidLink(cast(void**)&gst_caps_map_in_place, "gst_caps_map_in_place", LIBS);
+  gidLink(cast(void**)&gst_caps_merge, "gst_caps_merge", LIBS);
+  gidLink(cast(void**)&gst_caps_merge_structure, "gst_caps_merge_structure", LIBS);
+  gidLink(cast(void**)&gst_caps_merge_structure_full, "gst_caps_merge_structure_full", LIBS);
+  gidLink(cast(void**)&gst_caps_normalize, "gst_caps_normalize", LIBS);
+  gidLink(cast(void**)&gst_caps_remove_structure, "gst_caps_remove_structure", LIBS);
+  gidLink(cast(void**)&gst_caps_serialize, "gst_caps_serialize", LIBS);
+  gidLink(cast(void**)&gst_caps_set_features, "gst_caps_set_features", LIBS);
+  gidLink(cast(void**)&gst_caps_set_features_simple, "gst_caps_set_features_simple", LIBS);
+  gidLink(cast(void**)&gst_caps_set_simple, "gst_caps_set_simple", LIBS);
+  gidLink(cast(void**)&gst_caps_set_simple_valist, "gst_caps_set_simple_valist", LIBS);
+  gidLink(cast(void**)&gst_caps_set_value, "gst_caps_set_value", LIBS);
+  gidLink(cast(void**)&gst_caps_simplify, "gst_caps_simplify", LIBS);
+  gidLink(cast(void**)&gst_caps_steal_structure, "gst_caps_steal_structure", LIBS);
+  gidLink(cast(void**)&gst_caps_subtract, "gst_caps_subtract", LIBS);
+  gidLink(cast(void**)&gst_caps_to_string, "gst_caps_to_string", LIBS);
+  gidLink(cast(void**)&gst_caps_truncate, "gst_caps_truncate", LIBS);
+  gidLink(cast(void**)&gst_caps_from_string, "gst_caps_from_string", LIBS);
+
+  // CapsFeatures
+  gidLink(cast(void**)&gst_caps_features_get_type, "gst_caps_features_get_type", LIBS);
+  gidLink(cast(void**)&gst_caps_features_new, "gst_caps_features_new", LIBS);
+  gidLink(cast(void**)&gst_caps_features_new_any, "gst_caps_features_new_any", LIBS);
+  gidLink(cast(void**)&gst_caps_features_new_empty, "gst_caps_features_new_empty", LIBS);
+  gidLink(cast(void**)&gst_caps_features_new_id, "gst_caps_features_new_id", LIBS);
+  gidLink(cast(void**)&gst_caps_features_new_id_valist, "gst_caps_features_new_id_valist", LIBS);
+  gidLink(cast(void**)&gst_caps_features_new_single, "gst_caps_features_new_single", LIBS);
+  gidLink(cast(void**)&gst_caps_features_new_valist, "gst_caps_features_new_valist", LIBS);
+  gidLink(cast(void**)&gst_caps_features_add, "gst_caps_features_add", LIBS);
+  gidLink(cast(void**)&gst_caps_features_add_id, "gst_caps_features_add_id", LIBS);
+  gidLink(cast(void**)&gst_caps_features_contains, "gst_caps_features_contains", LIBS);
+  gidLink(cast(void**)&gst_caps_features_contains_id, "gst_caps_features_contains_id", LIBS);
+  gidLink(cast(void**)&gst_caps_features_copy, "gst_caps_features_copy", LIBS);
+  gidLink(cast(void**)&gst_caps_features_free, "gst_caps_features_free", LIBS);
+  gidLink(cast(void**)&gst_caps_features_get_nth, "gst_caps_features_get_nth", LIBS);
+  gidLink(cast(void**)&gst_caps_features_get_nth_id, "gst_caps_features_get_nth_id", LIBS);
+  gidLink(cast(void**)&gst_caps_features_get_size, "gst_caps_features_get_size", LIBS);
+  gidLink(cast(void**)&gst_caps_features_is_any, "gst_caps_features_is_any", LIBS);
+  gidLink(cast(void**)&gst_caps_features_is_equal, "gst_caps_features_is_equal", LIBS);
+  gidLink(cast(void**)&gst_caps_features_remove, "gst_caps_features_remove", LIBS);
+  gidLink(cast(void**)&gst_caps_features_remove_id, "gst_caps_features_remove_id", LIBS);
+  gidLink(cast(void**)&gst_caps_features_set_parent_refcount, "gst_caps_features_set_parent_refcount", LIBS);
+  gidLink(cast(void**)&gst_caps_features_to_string, "gst_caps_features_to_string", LIBS);
+  gidLink(cast(void**)&gst_caps_features_from_string, "gst_caps_features_from_string", LIBS);
+
+  // ChildProxy
+  gidLink(cast(void**)&gst_child_proxy_get_type, "gst_child_proxy_get_type", LIBS);
+  gidLink(cast(void**)&gst_child_proxy_child_added, "gst_child_proxy_child_added", LIBS);
+  gidLink(cast(void**)&gst_child_proxy_child_removed, "gst_child_proxy_child_removed", LIBS);
+  gidLink(cast(void**)&gst_child_proxy_get, "gst_child_proxy_get", LIBS);
+  gidLink(cast(void**)&gst_child_proxy_get_child_by_index, "gst_child_proxy_get_child_by_index", LIBS);
+  gidLink(cast(void**)&gst_child_proxy_get_child_by_name, "gst_child_proxy_get_child_by_name", LIBS);
+  gidLink(cast(void**)&gst_child_proxy_get_child_by_name_recurse, "gst_child_proxy_get_child_by_name_recurse", LIBS);
+  gidLink(cast(void**)&gst_child_proxy_get_children_count, "gst_child_proxy_get_children_count", LIBS);
+  gidLink(cast(void**)&gst_child_proxy_get_property, "gst_child_proxy_get_property", LIBS);
+  gidLink(cast(void**)&gst_child_proxy_get_valist, "gst_child_proxy_get_valist", LIBS);
+  gidLink(cast(void**)&gst_child_proxy_lookup, "gst_child_proxy_lookup", LIBS);
+  gidLink(cast(void**)&gst_child_proxy_set, "gst_child_proxy_set", LIBS);
+  gidLink(cast(void**)&gst_child_proxy_set_property, "gst_child_proxy_set_property", LIBS);
+  gidLink(cast(void**)&gst_child_proxy_set_valist, "gst_child_proxy_set_valist", LIBS);
+
+  // Clock
+  gidLink(cast(void**)&gst_clock_get_type, "gst_clock_get_type", LIBS);
+  gidLink(cast(void**)&gst_clock_id_compare_func, "gst_clock_id_compare_func", LIBS);
+  gidLink(cast(void**)&gst_clock_id_get_clock, "gst_clock_id_get_clock", LIBS);
+  gidLink(cast(void**)&gst_clock_id_get_time, "gst_clock_id_get_time", LIBS);
+  gidLink(cast(void**)&gst_clock_id_ref, "gst_clock_id_ref", LIBS);
+  gidLink(cast(void**)&gst_clock_id_unref, "gst_clock_id_unref", LIBS);
+  gidLink(cast(void**)&gst_clock_id_unschedule, "gst_clock_id_unschedule", LIBS);
+  gidLink(cast(void**)&gst_clock_id_uses_clock, "gst_clock_id_uses_clock", LIBS);
+  gidLink(cast(void**)&gst_clock_id_wait, "gst_clock_id_wait", LIBS);
+  gidLink(cast(void**)&gst_clock_id_wait_async, "gst_clock_id_wait_async", LIBS);
+  gidLink(cast(void**)&gst_clock_add_observation, "gst_clock_add_observation", LIBS);
+  gidLink(cast(void**)&gst_clock_add_observation_unapplied, "gst_clock_add_observation_unapplied", LIBS);
+  gidLink(cast(void**)&gst_clock_adjust_unlocked, "gst_clock_adjust_unlocked", LIBS);
+  gidLink(cast(void**)&gst_clock_adjust_with_calibration, "gst_clock_adjust_with_calibration", LIBS);
+  gidLink(cast(void**)&gst_clock_get_calibration, "gst_clock_get_calibration", LIBS);
+  gidLink(cast(void**)&gst_clock_get_internal_time, "gst_clock_get_internal_time", LIBS);
+  gidLink(cast(void**)&gst_clock_get_master, "gst_clock_get_master", LIBS);
+  gidLink(cast(void**)&gst_clock_get_resolution, "gst_clock_get_resolution", LIBS);
+  gidLink(cast(void**)&gst_clock_get_time, "gst_clock_get_time", LIBS);
+  gidLink(cast(void**)&gst_clock_get_timeout, "gst_clock_get_timeout", LIBS);
+  gidLink(cast(void**)&gst_clock_is_synced, "gst_clock_is_synced", LIBS);
+  gidLink(cast(void**)&gst_clock_new_periodic_id, "gst_clock_new_periodic_id", LIBS);
+  gidLink(cast(void**)&gst_clock_new_single_shot_id, "gst_clock_new_single_shot_id", LIBS);
+  gidLink(cast(void**)&gst_clock_periodic_id_reinit, "gst_clock_periodic_id_reinit", LIBS);
+  gidLink(cast(void**)&gst_clock_set_calibration, "gst_clock_set_calibration", LIBS);
+  gidLink(cast(void**)&gst_clock_set_master, "gst_clock_set_master", LIBS);
+  gidLink(cast(void**)&gst_clock_set_resolution, "gst_clock_set_resolution", LIBS);
+  gidLink(cast(void**)&gst_clock_set_synced, "gst_clock_set_synced", LIBS);
+  gidLink(cast(void**)&gst_clock_set_timeout, "gst_clock_set_timeout", LIBS);
+  gidLink(cast(void**)&gst_clock_single_shot_id_reinit, "gst_clock_single_shot_id_reinit", LIBS);
+  gidLink(cast(void**)&gst_clock_unadjust_unlocked, "gst_clock_unadjust_unlocked", LIBS);
+  gidLink(cast(void**)&gst_clock_unadjust_with_calibration, "gst_clock_unadjust_with_calibration", LIBS);
+  gidLink(cast(void**)&gst_clock_wait_for_sync, "gst_clock_wait_for_sync", LIBS);
+
+  // Context
+  gidLink(cast(void**)&gst_context_get_type, "gst_context_get_type", LIBS);
+  gidLink(cast(void**)&gst_context_new, "gst_context_new", LIBS);
+  gidLink(cast(void**)&gst_context_get_context_type, "gst_context_get_context_type", LIBS);
+  gidLink(cast(void**)&gst_context_get_structure, "gst_context_get_structure", LIBS);
+  gidLink(cast(void**)&gst_context_has_context_type, "gst_context_has_context_type", LIBS);
+  gidLink(cast(void**)&gst_context_is_persistent, "gst_context_is_persistent", LIBS);
+  gidLink(cast(void**)&gst_context_writable_structure, "gst_context_writable_structure", LIBS);
+
+  // ControlBinding
+  gidLink(cast(void**)&gst_control_binding_get_type, "gst_control_binding_get_type", LIBS);
+  gidLink(cast(void**)&gst_control_binding_get_g_value_array, "gst_control_binding_get_g_value_array", LIBS);
+  gidLink(cast(void**)&gst_control_binding_get_value, "gst_control_binding_get_value", LIBS);
+  gidLink(cast(void**)&gst_control_binding_get_value_array, "gst_control_binding_get_value_array", LIBS);
+  gidLink(cast(void**)&gst_control_binding_is_disabled, "gst_control_binding_is_disabled", LIBS);
+  gidLink(cast(void**)&gst_control_binding_set_disabled, "gst_control_binding_set_disabled", LIBS);
+  gidLink(cast(void**)&gst_control_binding_sync_values, "gst_control_binding_sync_values", LIBS);
+
+  // ControlSource
+  gidLink(cast(void**)&gst_control_source_get_type, "gst_control_source_get_type", LIBS);
+  gidLink(cast(void**)&gst_control_source_get_value, "gst_control_source_get_value", LIBS);
+  gidLink(cast(void**)&gst_control_source_get_value_array, "gst_control_source_get_value_array", LIBS);
+
+  // CustomMeta
+  gidLink(cast(void**)&gst_custom_meta_get_structure, "gst_custom_meta_get_structure", LIBS);
+  gidLink(cast(void**)&gst_custom_meta_has_name, "gst_custom_meta_has_name", LIBS);
+
+  // DateTime
+  gidLink(cast(void**)&gst_date_time_get_type, "gst_date_time_get_type", LIBS);
+  gidLink(cast(void**)&gst_date_time_new, "gst_date_time_new", LIBS);
+  gidLink(cast(void**)&gst_date_time_new_from_g_date_time, "gst_date_time_new_from_g_date_time", LIBS);
+  gidLink(cast(void**)&gst_date_time_new_from_iso8601_string, "gst_date_time_new_from_iso8601_string", LIBS);
+  gidLink(cast(void**)&gst_date_time_new_from_unix_epoch_local_time, "gst_date_time_new_from_unix_epoch_local_time", LIBS);
+  gidLink(cast(void**)&gst_date_time_new_from_unix_epoch_local_time_usecs, "gst_date_time_new_from_unix_epoch_local_time_usecs", LIBS);
+  gidLink(cast(void**)&gst_date_time_new_from_unix_epoch_utc, "gst_date_time_new_from_unix_epoch_utc", LIBS);
+  gidLink(cast(void**)&gst_date_time_new_from_unix_epoch_utc_usecs, "gst_date_time_new_from_unix_epoch_utc_usecs", LIBS);
+  gidLink(cast(void**)&gst_date_time_new_local_time, "gst_date_time_new_local_time", LIBS);
+  gidLink(cast(void**)&gst_date_time_new_now_local_time, "gst_date_time_new_now_local_time", LIBS);
+  gidLink(cast(void**)&gst_date_time_new_now_utc, "gst_date_time_new_now_utc", LIBS);
+  gidLink(cast(void**)&gst_date_time_new_y, "gst_date_time_new_y", LIBS);
+  gidLink(cast(void**)&gst_date_time_new_ym, "gst_date_time_new_ym", LIBS);
+  gidLink(cast(void**)&gst_date_time_new_ymd, "gst_date_time_new_ymd", LIBS);
+  gidLink(cast(void**)&gst_date_time_get_day, "gst_date_time_get_day", LIBS);
+  gidLink(cast(void**)&gst_date_time_get_hour, "gst_date_time_get_hour", LIBS);
+  gidLink(cast(void**)&gst_date_time_get_microsecond, "gst_date_time_get_microsecond", LIBS);
+  gidLink(cast(void**)&gst_date_time_get_minute, "gst_date_time_get_minute", LIBS);
+  gidLink(cast(void**)&gst_date_time_get_month, "gst_date_time_get_month", LIBS);
+  gidLink(cast(void**)&gst_date_time_get_second, "gst_date_time_get_second", LIBS);
+  gidLink(cast(void**)&gst_date_time_get_time_zone_offset, "gst_date_time_get_time_zone_offset", LIBS);
+  gidLink(cast(void**)&gst_date_time_get_year, "gst_date_time_get_year", LIBS);
+  gidLink(cast(void**)&gst_date_time_has_day, "gst_date_time_has_day", LIBS);
+  gidLink(cast(void**)&gst_date_time_has_month, "gst_date_time_has_month", LIBS);
+  gidLink(cast(void**)&gst_date_time_has_second, "gst_date_time_has_second", LIBS);
+  gidLink(cast(void**)&gst_date_time_has_time, "gst_date_time_has_time", LIBS);
+  gidLink(cast(void**)&gst_date_time_has_year, "gst_date_time_has_year", LIBS);
+  gidLink(cast(void**)&gst_date_time_ref, "gst_date_time_ref", LIBS);
+  gidLink(cast(void**)&gst_date_time_to_g_date_time, "gst_date_time_to_g_date_time", LIBS);
+  gidLink(cast(void**)&gst_date_time_to_iso8601_string, "gst_date_time_to_iso8601_string", LIBS);
+  gidLink(cast(void**)&gst_date_time_unref, "gst_date_time_unref", LIBS);
+
+  // DebugCategory
+  gidLink(cast(void**)&gst_debug_category_free, "gst_debug_category_free", LIBS);
+  gidLink(cast(void**)&gst_debug_category_get_color, "gst_debug_category_get_color", LIBS);
+  gidLink(cast(void**)&gst_debug_category_get_description, "gst_debug_category_get_description", LIBS);
+  gidLink(cast(void**)&gst_debug_category_get_name, "gst_debug_category_get_name", LIBS);
+  gidLink(cast(void**)&gst_debug_category_get_threshold, "gst_debug_category_get_threshold", LIBS);
+  gidLink(cast(void**)&gst_debug_category_reset_threshold, "gst_debug_category_reset_threshold", LIBS);
+  gidLink(cast(void**)&gst_debug_category_set_threshold, "gst_debug_category_set_threshold", LIBS);
+
+  // DebugMessage
+  gidLink(cast(void**)&gst_debug_message_get, "gst_debug_message_get", LIBS);
+  gidLink(cast(void**)&gst_debug_message_get_id, "gst_debug_message_get_id", LIBS);
+
+  // Device
+  gidLink(cast(void**)&gst_device_get_type, "gst_device_get_type", LIBS);
+  gidLink(cast(void**)&gst_device_create_element, "gst_device_create_element", LIBS);
+  gidLink(cast(void**)&gst_device_get_caps, "gst_device_get_caps", LIBS);
+  gidLink(cast(void**)&gst_device_get_device_class, "gst_device_get_device_class", LIBS);
+  gidLink(cast(void**)&gst_device_get_display_name, "gst_device_get_display_name", LIBS);
+  gidLink(cast(void**)&gst_device_get_properties, "gst_device_get_properties", LIBS);
+  gidLink(cast(void**)&gst_device_has_classes, "gst_device_has_classes", LIBS);
+  gidLink(cast(void**)&gst_device_has_classesv, "gst_device_has_classesv", LIBS);
+  gidLink(cast(void**)&gst_device_reconfigure_element, "gst_device_reconfigure_element", LIBS);
+
+  // DeviceMonitor
+  gidLink(cast(void**)&gst_device_monitor_get_type, "gst_device_monitor_get_type", LIBS);
+  gidLink(cast(void**)&gst_device_monitor_new, "gst_device_monitor_new", LIBS);
+  gidLink(cast(void**)&gst_device_monitor_add_filter, "gst_device_monitor_add_filter", LIBS);
+  gidLink(cast(void**)&gst_device_monitor_get_bus, "gst_device_monitor_get_bus", LIBS);
+  gidLink(cast(void**)&gst_device_monitor_get_devices, "gst_device_monitor_get_devices", LIBS);
+  gidLink(cast(void**)&gst_device_monitor_get_providers, "gst_device_monitor_get_providers", LIBS);
+  gidLink(cast(void**)&gst_device_monitor_get_show_all_devices, "gst_device_monitor_get_show_all_devices", LIBS);
+  gidLink(cast(void**)&gst_device_monitor_remove_filter, "gst_device_monitor_remove_filter", LIBS);
+  gidLink(cast(void**)&gst_device_monitor_set_show_all_devices, "gst_device_monitor_set_show_all_devices", LIBS);
+  gidLink(cast(void**)&gst_device_monitor_start, "gst_device_monitor_start", LIBS);
+  gidLink(cast(void**)&gst_device_monitor_stop, "gst_device_monitor_stop", LIBS);
+
+  // DeviceProvider
+  gidLink(cast(void**)&gst_device_provider_get_type, "gst_device_provider_get_type", LIBS);
+  gidLink(cast(void**)&gst_device_provider_register, "gst_device_provider_register", LIBS);
+  gidLink(cast(void**)&gst_device_provider_can_monitor, "gst_device_provider_can_monitor", LIBS);
+  gidLink(cast(void**)&gst_device_provider_device_add, "gst_device_provider_device_add", LIBS);
+  gidLink(cast(void**)&gst_device_provider_device_changed, "gst_device_provider_device_changed", LIBS);
+  gidLink(cast(void**)&gst_device_provider_device_remove, "gst_device_provider_device_remove", LIBS);
+  gidLink(cast(void**)&gst_device_provider_get_bus, "gst_device_provider_get_bus", LIBS);
+  gidLink(cast(void**)&gst_device_provider_get_devices, "gst_device_provider_get_devices", LIBS);
+  gidLink(cast(void**)&gst_device_provider_get_factory, "gst_device_provider_get_factory", LIBS);
+  gidLink(cast(void**)&gst_device_provider_get_hidden_providers, "gst_device_provider_get_hidden_providers", LIBS);
+  gidLink(cast(void**)&gst_device_provider_get_metadata, "gst_device_provider_get_metadata", LIBS);
+  gidLink(cast(void**)&gst_device_provider_hide_provider, "gst_device_provider_hide_provider", LIBS);
+  gidLink(cast(void**)&gst_device_provider_is_started, "gst_device_provider_is_started", LIBS);
+  gidLink(cast(void**)&gst_device_provider_start, "gst_device_provider_start", LIBS);
+  gidLink(cast(void**)&gst_device_provider_stop, "gst_device_provider_stop", LIBS);
+  gidLink(cast(void**)&gst_device_provider_unhide_provider, "gst_device_provider_unhide_provider", LIBS);
+
+  // DeviceProviderClass
+  gidLink(cast(void**)&gst_device_provider_class_add_metadata, "gst_device_provider_class_add_metadata", LIBS);
+  gidLink(cast(void**)&gst_device_provider_class_add_static_metadata, "gst_device_provider_class_add_static_metadata", LIBS);
+  gidLink(cast(void**)&gst_device_provider_class_get_metadata, "gst_device_provider_class_get_metadata", LIBS);
+  gidLink(cast(void**)&gst_device_provider_class_set_metadata, "gst_device_provider_class_set_metadata", LIBS);
+  gidLink(cast(void**)&gst_device_provider_class_set_static_metadata, "gst_device_provider_class_set_static_metadata", LIBS);
+
+  // DeviceProviderFactory
+  gidLink(cast(void**)&gst_device_provider_factory_get_type, "gst_device_provider_factory_get_type", LIBS);
+  gidLink(cast(void**)&gst_device_provider_factory_find, "gst_device_provider_factory_find", LIBS);
+  gidLink(cast(void**)&gst_device_provider_factory_get_by_name, "gst_device_provider_factory_get_by_name", LIBS);
+  gidLink(cast(void**)&gst_device_provider_factory_list_get_device_providers, "gst_device_provider_factory_list_get_device_providers", LIBS);
+  gidLink(cast(void**)&gst_device_provider_factory_get, "gst_device_provider_factory_get", LIBS);
+  gidLink(cast(void**)&gst_device_provider_factory_get_device_provider_type, "gst_device_provider_factory_get_device_provider_type", LIBS);
+  gidLink(cast(void**)&gst_device_provider_factory_get_metadata, "gst_device_provider_factory_get_metadata", LIBS);
+  gidLink(cast(void**)&gst_device_provider_factory_get_metadata_keys, "gst_device_provider_factory_get_metadata_keys", LIBS);
+  gidLink(cast(void**)&gst_device_provider_factory_has_classes, "gst_device_provider_factory_has_classes", LIBS);
+  gidLink(cast(void**)&gst_device_provider_factory_has_classesv, "gst_device_provider_factory_has_classesv", LIBS);
+
+  // DoubleRange
+  gidLink(cast(void**)&gst_double_range_get_type, "gst_double_range_get_type", LIBS);
+
+  // DynamicTypeFactory
+  gidLink(cast(void**)&gst_dynamic_type_factory_get_type, "gst_dynamic_type_factory_get_type", LIBS);
+  gidLink(cast(void**)&gst_dynamic_type_factory_load, "gst_dynamic_type_factory_load", LIBS);
+
+  // Element
+  gidLink(cast(void**)&gst_element_get_type, "gst_element_get_type", LIBS);
+  gidLink(cast(void**)&gst_element_make_from_uri, "gst_element_make_from_uri", LIBS);
+  gidLink(cast(void**)&gst_element_register, "gst_element_register", LIBS);
+  gidLink(cast(void**)&gst_element_state_change_return_get_name, "gst_element_state_change_return_get_name", LIBS);
+  gidLink(cast(void**)&gst_element_state_get_name, "gst_element_state_get_name", LIBS);
+  gidLink(cast(void**)&gst_element_type_set_skip_documentation, "gst_element_type_set_skip_documentation", LIBS);
+  gidLink(cast(void**)&gst_element_abort_state, "gst_element_abort_state", LIBS);
+  gidLink(cast(void**)&gst_element_add_pad, "gst_element_add_pad", LIBS);
+  gidLink(cast(void**)&gst_element_add_property_deep_notify_watch, "gst_element_add_property_deep_notify_watch", LIBS);
+  gidLink(cast(void**)&gst_element_add_property_notify_watch, "gst_element_add_property_notify_watch", LIBS);
+  gidLink(cast(void**)&gst_element_call_async, "gst_element_call_async", LIBS);
+  gidLink(cast(void**)&gst_element_change_state, "gst_element_change_state", LIBS);
+  gidLink(cast(void**)&gst_element_continue_state, "gst_element_continue_state", LIBS);
+  gidLink(cast(void**)&gst_element_create_all_pads, "gst_element_create_all_pads", LIBS);
+  gidLink(cast(void**)&gst_element_decorate_stream_id, "gst_element_decorate_stream_id", LIBS);
+  gidLink(cast(void**)&gst_element_decorate_stream_id_printf, "gst_element_decorate_stream_id_printf", LIBS);
+  gidLink(cast(void**)&gst_element_decorate_stream_id_printf_valist, "gst_element_decorate_stream_id_printf_valist", LIBS);
+  gidLink(cast(void**)&gst_element_foreach_pad, "gst_element_foreach_pad", LIBS);
+  gidLink(cast(void**)&gst_element_foreach_sink_pad, "gst_element_foreach_sink_pad", LIBS);
+  gidLink(cast(void**)&gst_element_foreach_src_pad, "gst_element_foreach_src_pad", LIBS);
+  gidLink(cast(void**)&gst_element_get_base_time, "gst_element_get_base_time", LIBS);
+  gidLink(cast(void**)&gst_element_get_bus, "gst_element_get_bus", LIBS);
+  gidLink(cast(void**)&gst_element_get_clock, "gst_element_get_clock", LIBS);
+  gidLink(cast(void**)&gst_element_get_compatible_pad, "gst_element_get_compatible_pad", LIBS);
+  gidLink(cast(void**)&gst_element_get_compatible_pad_template, "gst_element_get_compatible_pad_template", LIBS);
+  gidLink(cast(void**)&gst_element_get_context, "gst_element_get_context", LIBS);
+  gidLink(cast(void**)&gst_element_get_context_unlocked, "gst_element_get_context_unlocked", LIBS);
+  gidLink(cast(void**)&gst_element_get_contexts, "gst_element_get_contexts", LIBS);
+  gidLink(cast(void**)&gst_element_get_current_clock_time, "gst_element_get_current_clock_time", LIBS);
+  gidLink(cast(void**)&gst_element_get_current_running_time, "gst_element_get_current_running_time", LIBS);
+  gidLink(cast(void**)&gst_element_get_factory, "gst_element_get_factory", LIBS);
+  gidLink(cast(void**)&gst_element_get_metadata, "gst_element_get_metadata", LIBS);
+  gidLink(cast(void**)&gst_element_get_pad_template, "gst_element_get_pad_template", LIBS);
+  gidLink(cast(void**)&gst_element_get_pad_template_list, "gst_element_get_pad_template_list", LIBS);
+  gidLink(cast(void**)&gst_element_get_request_pad, "gst_element_get_request_pad", LIBS);
+  gidLink(cast(void**)&gst_element_get_start_time, "gst_element_get_start_time", LIBS);
+  gidLink(cast(void**)&gst_element_get_state, "gst_element_get_state", LIBS);
+  gidLink(cast(void**)&gst_element_get_static_pad, "gst_element_get_static_pad", LIBS);
+  gidLink(cast(void**)&gst_element_is_locked_state, "gst_element_is_locked_state", LIBS);
+  gidLink(cast(void**)&gst_element_iterate_pads, "gst_element_iterate_pads", LIBS);
+  gidLink(cast(void**)&gst_element_iterate_sink_pads, "gst_element_iterate_sink_pads", LIBS);
+  gidLink(cast(void**)&gst_element_iterate_src_pads, "gst_element_iterate_src_pads", LIBS);
+  gidLink(cast(void**)&gst_element_link, "gst_element_link", LIBS);
+  gidLink(cast(void**)&gst_element_link_filtered, "gst_element_link_filtered", LIBS);
+  gidLink(cast(void**)&gst_element_link_many, "gst_element_link_many", LIBS);
+  gidLink(cast(void**)&gst_element_link_pads, "gst_element_link_pads", LIBS);
+  gidLink(cast(void**)&gst_element_link_pads_filtered, "gst_element_link_pads_filtered", LIBS);
+  gidLink(cast(void**)&gst_element_link_pads_full, "gst_element_link_pads_full", LIBS);
+  gidLink(cast(void**)&gst_element_lost_state, "gst_element_lost_state", LIBS);
+  gidLink(cast(void**)&gst_element_message_full, "gst_element_message_full", LIBS);
+  gidLink(cast(void**)&gst_element_message_full_with_details, "gst_element_message_full_with_details", LIBS);
+  gidLink(cast(void**)&gst_element_no_more_pads, "gst_element_no_more_pads", LIBS);
+  gidLink(cast(void**)&gst_element_post_message, "gst_element_post_message", LIBS);
+  gidLink(cast(void**)&gst_element_provide_clock, "gst_element_provide_clock", LIBS);
+  gidLink(cast(void**)&gst_element_query, "gst_element_query", LIBS);
+  gidLink(cast(void**)&gst_element_query_convert, "gst_element_query_convert", LIBS);
+  gidLink(cast(void**)&gst_element_query_duration, "gst_element_query_duration", LIBS);
+  gidLink(cast(void**)&gst_element_query_position, "gst_element_query_position", LIBS);
+  gidLink(cast(void**)&gst_element_release_request_pad, "gst_element_release_request_pad", LIBS);
+  gidLink(cast(void**)&gst_element_remove_pad, "gst_element_remove_pad", LIBS);
+  gidLink(cast(void**)&gst_element_remove_property_notify_watch, "gst_element_remove_property_notify_watch", LIBS);
+  gidLink(cast(void**)&gst_element_request_pad, "gst_element_request_pad", LIBS);
+  gidLink(cast(void**)&gst_element_request_pad_simple, "gst_element_request_pad_simple", LIBS);
+  gidLink(cast(void**)&gst_element_seek, "gst_element_seek", LIBS);
+  gidLink(cast(void**)&gst_element_seek_simple, "gst_element_seek_simple", LIBS);
+  gidLink(cast(void**)&gst_element_send_event, "gst_element_send_event", LIBS);
+  gidLink(cast(void**)&gst_element_set_base_time, "gst_element_set_base_time", LIBS);
+  gidLink(cast(void**)&gst_element_set_bus, "gst_element_set_bus", LIBS);
+  gidLink(cast(void**)&gst_element_set_clock, "gst_element_set_clock", LIBS);
+  gidLink(cast(void**)&gst_element_set_context, "gst_element_set_context", LIBS);
+  gidLink(cast(void**)&gst_element_set_locked_state, "gst_element_set_locked_state", LIBS);
+  gidLink(cast(void**)&gst_element_set_start_time, "gst_element_set_start_time", LIBS);
+  gidLink(cast(void**)&gst_element_set_state, "gst_element_set_state", LIBS);
+  gidLink(cast(void**)&gst_element_sync_state_with_parent, "gst_element_sync_state_with_parent", LIBS);
+  gidLink(cast(void**)&gst_element_unlink, "gst_element_unlink", LIBS);
+  gidLink(cast(void**)&gst_element_unlink_many, "gst_element_unlink_many", LIBS);
+  gidLink(cast(void**)&gst_element_unlink_pads, "gst_element_unlink_pads", LIBS);
+
+  // ElementClass
+  gidLink(cast(void**)&gst_element_class_add_metadata, "gst_element_class_add_metadata", LIBS);
+  gidLink(cast(void**)&gst_element_class_add_pad_template, "gst_element_class_add_pad_template", LIBS);
+  gidLink(cast(void**)&gst_element_class_add_static_metadata, "gst_element_class_add_static_metadata", LIBS);
+  gidLink(cast(void**)&gst_element_class_add_static_pad_template, "gst_element_class_add_static_pad_template", LIBS);
+  gidLink(cast(void**)&gst_element_class_add_static_pad_template_with_gtype, "gst_element_class_add_static_pad_template_with_gtype", LIBS);
+  gidLink(cast(void**)&gst_element_class_get_metadata, "gst_element_class_get_metadata", LIBS);
+  gidLink(cast(void**)&gst_element_class_get_pad_template, "gst_element_class_get_pad_template", LIBS);
+  gidLink(cast(void**)&gst_element_class_get_pad_template_list, "gst_element_class_get_pad_template_list", LIBS);
+  gidLink(cast(void**)&gst_element_class_set_metadata, "gst_element_class_set_metadata", LIBS);
+  gidLink(cast(void**)&gst_element_class_set_static_metadata, "gst_element_class_set_static_metadata", LIBS);
+
+  // ElementFactory
+  gidLink(cast(void**)&gst_element_factory_get_type, "gst_element_factory_get_type", LIBS);
+  gidLink(cast(void**)&gst_element_factory_find, "gst_element_factory_find", LIBS);
+  gidLink(cast(void**)&gst_element_factory_list_filter, "gst_element_factory_list_filter", LIBS);
+  gidLink(cast(void**)&gst_element_factory_list_get_elements, "gst_element_factory_list_get_elements", LIBS);
+  gidLink(cast(void**)&gst_element_factory_make, "gst_element_factory_make", LIBS);
+  gidLink(cast(void**)&gst_element_factory_make_full, "gst_element_factory_make_full", LIBS);
+  gidLink(cast(void**)&gst_element_factory_make_valist, "gst_element_factory_make_valist", LIBS);
+  gidLink(cast(void**)&gst_element_factory_make_with_properties, "gst_element_factory_make_with_properties", LIBS);
+  gidLink(cast(void**)&gst_element_factory_can_sink_all_caps, "gst_element_factory_can_sink_all_caps", LIBS);
+  gidLink(cast(void**)&gst_element_factory_can_sink_any_caps, "gst_element_factory_can_sink_any_caps", LIBS);
+  gidLink(cast(void**)&gst_element_factory_can_src_all_caps, "gst_element_factory_can_src_all_caps", LIBS);
+  gidLink(cast(void**)&gst_element_factory_can_src_any_caps, "gst_element_factory_can_src_any_caps", LIBS);
+  gidLink(cast(void**)&gst_element_factory_create, "gst_element_factory_create", LIBS);
+  gidLink(cast(void**)&gst_element_factory_create_full, "gst_element_factory_create_full", LIBS);
+  gidLink(cast(void**)&gst_element_factory_create_valist, "gst_element_factory_create_valist", LIBS);
+  gidLink(cast(void**)&gst_element_factory_create_with_properties, "gst_element_factory_create_with_properties", LIBS);
+  gidLink(cast(void**)&gst_element_factory_get_element_type, "gst_element_factory_get_element_type", LIBS);
+  gidLink(cast(void**)&gst_element_factory_get_metadata, "gst_element_factory_get_metadata", LIBS);
+  gidLink(cast(void**)&gst_element_factory_get_metadata_keys, "gst_element_factory_get_metadata_keys", LIBS);
+  gidLink(cast(void**)&gst_element_factory_get_num_pad_templates, "gst_element_factory_get_num_pad_templates", LIBS);
+  gidLink(cast(void**)&gst_element_factory_get_skip_documentation, "gst_element_factory_get_skip_documentation", LIBS);
+  gidLink(cast(void**)&gst_element_factory_get_static_pad_templates, "gst_element_factory_get_static_pad_templates", LIBS);
+  gidLink(cast(void**)&gst_element_factory_get_uri_protocols, "gst_element_factory_get_uri_protocols", LIBS);
+  gidLink(cast(void**)&gst_element_factory_get_uri_type, "gst_element_factory_get_uri_type", LIBS);
+  gidLink(cast(void**)&gst_element_factory_has_interface, "gst_element_factory_has_interface", LIBS);
+  gidLink(cast(void**)&gst_element_factory_list_is_type, "gst_element_factory_list_is_type", LIBS);
+
+  // Event
+  gidLink(cast(void**)&gst_event_get_type, "gst_event_get_type", LIBS);
+  gidLink(cast(void**)&gst_event_new_buffer_size, "gst_event_new_buffer_size", LIBS);
+  gidLink(cast(void**)&gst_event_new_caps, "gst_event_new_caps", LIBS);
+  gidLink(cast(void**)&gst_event_new_custom, "gst_event_new_custom", LIBS);
+  gidLink(cast(void**)&gst_event_new_eos, "gst_event_new_eos", LIBS);
+  gidLink(cast(void**)&gst_event_new_flush_start, "gst_event_new_flush_start", LIBS);
+  gidLink(cast(void**)&gst_event_new_flush_stop, "gst_event_new_flush_stop", LIBS);
+  gidLink(cast(void**)&gst_event_new_gap, "gst_event_new_gap", LIBS);
+  gidLink(cast(void**)&gst_event_new_instant_rate_change, "gst_event_new_instant_rate_change", LIBS);
+  gidLink(cast(void**)&gst_event_new_instant_rate_sync_time, "gst_event_new_instant_rate_sync_time", LIBS);
+  gidLink(cast(void**)&gst_event_new_latency, "gst_event_new_latency", LIBS);
+  gidLink(cast(void**)&gst_event_new_navigation, "gst_event_new_navigation", LIBS);
+  gidLink(cast(void**)&gst_event_new_protection, "gst_event_new_protection", LIBS);
+  gidLink(cast(void**)&gst_event_new_qos, "gst_event_new_qos", LIBS);
+  gidLink(cast(void**)&gst_event_new_reconfigure, "gst_event_new_reconfigure", LIBS);
+  gidLink(cast(void**)&gst_event_new_seek, "gst_event_new_seek", LIBS);
+  gidLink(cast(void**)&gst_event_new_segment, "gst_event_new_segment", LIBS);
+  gidLink(cast(void**)&gst_event_new_segment_done, "gst_event_new_segment_done", LIBS);
+  gidLink(cast(void**)&gst_event_new_select_streams, "gst_event_new_select_streams", LIBS);
+  gidLink(cast(void**)&gst_event_new_sink_message, "gst_event_new_sink_message", LIBS);
+  gidLink(cast(void**)&gst_event_new_step, "gst_event_new_step", LIBS);
+  gidLink(cast(void**)&gst_event_new_stream_collection, "gst_event_new_stream_collection", LIBS);
+  gidLink(cast(void**)&gst_event_new_stream_group_done, "gst_event_new_stream_group_done", LIBS);
+  gidLink(cast(void**)&gst_event_new_stream_start, "gst_event_new_stream_start", LIBS);
+  gidLink(cast(void**)&gst_event_new_tag, "gst_event_new_tag", LIBS);
+  gidLink(cast(void**)&gst_event_new_toc, "gst_event_new_toc", LIBS);
+  gidLink(cast(void**)&gst_event_new_toc_select, "gst_event_new_toc_select", LIBS);
+  gidLink(cast(void**)&gst_event_copy_segment, "gst_event_copy_segment", LIBS);
+  gidLink(cast(void**)&gst_event_get_running_time_offset, "gst_event_get_running_time_offset", LIBS);
+  gidLink(cast(void**)&gst_event_get_seqnum, "gst_event_get_seqnum", LIBS);
+  gidLink(cast(void**)&gst_event_get_structure, "gst_event_get_structure", LIBS);
+  gidLink(cast(void**)&gst_event_has_name, "gst_event_has_name", LIBS);
+  gidLink(cast(void**)&gst_event_has_name_id, "gst_event_has_name_id", LIBS);
+  gidLink(cast(void**)&gst_event_parse_buffer_size, "gst_event_parse_buffer_size", LIBS);
+  gidLink(cast(void**)&gst_event_parse_caps, "gst_event_parse_caps", LIBS);
+  gidLink(cast(void**)&gst_event_parse_flush_stop, "gst_event_parse_flush_stop", LIBS);
+  gidLink(cast(void**)&gst_event_parse_gap, "gst_event_parse_gap", LIBS);
+  gidLink(cast(void**)&gst_event_parse_gap_flags, "gst_event_parse_gap_flags", LIBS);
+  gidLink(cast(void**)&gst_event_parse_group_id, "gst_event_parse_group_id", LIBS);
+  gidLink(cast(void**)&gst_event_parse_instant_rate_change, "gst_event_parse_instant_rate_change", LIBS);
+  gidLink(cast(void**)&gst_event_parse_instant_rate_sync_time, "gst_event_parse_instant_rate_sync_time", LIBS);
+  gidLink(cast(void**)&gst_event_parse_latency, "gst_event_parse_latency", LIBS);
+  gidLink(cast(void**)&gst_event_parse_protection, "gst_event_parse_protection", LIBS);
+  gidLink(cast(void**)&gst_event_parse_qos, "gst_event_parse_qos", LIBS);
+  gidLink(cast(void**)&gst_event_parse_seek, "gst_event_parse_seek", LIBS);
+  gidLink(cast(void**)&gst_event_parse_seek_trickmode_interval, "gst_event_parse_seek_trickmode_interval", LIBS);
+  gidLink(cast(void**)&gst_event_parse_segment, "gst_event_parse_segment", LIBS);
+  gidLink(cast(void**)&gst_event_parse_segment_done, "gst_event_parse_segment_done", LIBS);
+  gidLink(cast(void**)&gst_event_parse_select_streams, "gst_event_parse_select_streams", LIBS);
+  gidLink(cast(void**)&gst_event_parse_sink_message, "gst_event_parse_sink_message", LIBS);
+  gidLink(cast(void**)&gst_event_parse_step, "gst_event_parse_step", LIBS);
+  gidLink(cast(void**)&gst_event_parse_stream, "gst_event_parse_stream", LIBS);
+  gidLink(cast(void**)&gst_event_parse_stream_collection, "gst_event_parse_stream_collection", LIBS);
+  gidLink(cast(void**)&gst_event_parse_stream_flags, "gst_event_parse_stream_flags", LIBS);
+  gidLink(cast(void**)&gst_event_parse_stream_group_done, "gst_event_parse_stream_group_done", LIBS);
+  gidLink(cast(void**)&gst_event_parse_stream_start, "gst_event_parse_stream_start", LIBS);
+  gidLink(cast(void**)&gst_event_parse_tag, "gst_event_parse_tag", LIBS);
+  gidLink(cast(void**)&gst_event_parse_toc, "gst_event_parse_toc", LIBS);
+  gidLink(cast(void**)&gst_event_parse_toc_select, "gst_event_parse_toc_select", LIBS);
+  gidLink(cast(void**)&gst_event_set_gap_flags, "gst_event_set_gap_flags", LIBS);
+  gidLink(cast(void**)&gst_event_set_group_id, "gst_event_set_group_id", LIBS);
+  gidLink(cast(void**)&gst_event_set_running_time_offset, "gst_event_set_running_time_offset", LIBS);
+  gidLink(cast(void**)&gst_event_set_seek_trickmode_interval, "gst_event_set_seek_trickmode_interval", LIBS);
+  gidLink(cast(void**)&gst_event_set_seqnum, "gst_event_set_seqnum", LIBS);
+  gidLink(cast(void**)&gst_event_set_stream, "gst_event_set_stream", LIBS);
+  gidLink(cast(void**)&gst_event_set_stream_flags, "gst_event_set_stream_flags", LIBS);
+  gidLink(cast(void**)&gst_event_writable_structure, "gst_event_writable_structure", LIBS);
+
+  // FlagSet
+  gidLink(cast(void**)&gst_flagset_get_type, "gst_flagset_get_type", LIBS);
+  gidLink(cast(void**)&gst_flagset_register, "gst_flagset_register", LIBS);
+
+  // Fraction
+  gidLink(cast(void**)&gst_fraction_get_type, "gst_fraction_get_type", LIBS);
+
+  // FractionRange
+  gidLink(cast(void**)&gst_fraction_range_get_type, "gst_fraction_range_get_type", LIBS);
+
+  // GhostPad
+  gidLink(cast(void**)&gst_ghost_pad_get_type, "gst_ghost_pad_get_type", LIBS);
+  gidLink(cast(void**)&gst_ghost_pad_new, "gst_ghost_pad_new", LIBS);
+  gidLink(cast(void**)&gst_ghost_pad_new_from_template, "gst_ghost_pad_new_from_template", LIBS);
+  gidLink(cast(void**)&gst_ghost_pad_new_no_target, "gst_ghost_pad_new_no_target", LIBS);
+  gidLink(cast(void**)&gst_ghost_pad_new_no_target_from_template, "gst_ghost_pad_new_no_target_from_template", LIBS);
+  gidLink(cast(void**)&gst_ghost_pad_activate_mode_default, "gst_ghost_pad_activate_mode_default", LIBS);
+  gidLink(cast(void**)&gst_ghost_pad_internal_activate_mode_default, "gst_ghost_pad_internal_activate_mode_default", LIBS);
+  gidLink(cast(void**)&gst_ghost_pad_construct, "gst_ghost_pad_construct", LIBS);
+  gidLink(cast(void**)&gst_ghost_pad_get_target, "gst_ghost_pad_get_target", LIBS);
+  gidLink(cast(void**)&gst_ghost_pad_set_target, "gst_ghost_pad_set_target", LIBS);
+
+  // Int64Range
+  gidLink(cast(void**)&gst_int64_range_get_type, "gst_int64_range_get_type", LIBS);
+
+  // IntRange
+  gidLink(cast(void**)&gst_int_range_get_type, "gst_int_range_get_type", LIBS);
+
+  // Iterator
+  gidLink(cast(void**)&gst_iterator_get_type, "gst_iterator_get_type", LIBS);
+  gidLink(cast(void**)&gst_iterator_new, "gst_iterator_new", LIBS);
+  gidLink(cast(void**)&gst_iterator_new_list, "gst_iterator_new_list", LIBS);
+  gidLink(cast(void**)&gst_iterator_new_single, "gst_iterator_new_single", LIBS);
+  gidLink(cast(void**)&gst_iterator_copy, "gst_iterator_copy", LIBS);
+  gidLink(cast(void**)&gst_iterator_filter, "gst_iterator_filter", LIBS);
+  gidLink(cast(void**)&gst_iterator_find_custom, "gst_iterator_find_custom", LIBS);
+  gidLink(cast(void**)&gst_iterator_fold, "gst_iterator_fold", LIBS);
+  gidLink(cast(void**)&gst_iterator_foreach, "gst_iterator_foreach", LIBS);
+  gidLink(cast(void**)&gst_iterator_free, "gst_iterator_free", LIBS);
+  gidLink(cast(void**)&gst_iterator_next, "gst_iterator_next", LIBS);
+  gidLink(cast(void**)&gst_iterator_push, "gst_iterator_push", LIBS);
+  gidLink(cast(void**)&gst_iterator_resync, "gst_iterator_resync", LIBS);
+
+  // Memory
+  gidLink(cast(void**)&gst_memory_get_type, "gst_memory_get_type", LIBS);
+  gidLink(cast(void**)&gst_memory_new_wrapped, "gst_memory_new_wrapped", LIBS);
+  gidLink(cast(void**)&gst_memory_copy, "gst_memory_copy", LIBS);
+  gidLink(cast(void**)&gst_memory_get_sizes, "gst_memory_get_sizes", LIBS);
+  gidLink(cast(void**)&gst_memory_init, "gst_memory_init", LIBS);
+  gidLink(cast(void**)&gst_memory_is_span, "gst_memory_is_span", LIBS);
+  gidLink(cast(void**)&gst_memory_is_type, "gst_memory_is_type", LIBS);
+  gidLink(cast(void**)&gst_memory_make_mapped, "gst_memory_make_mapped", LIBS);
+  gidLink(cast(void**)&gst_memory_map, "gst_memory_map", LIBS);
+  gidLink(cast(void**)&gst_memory_resize, "gst_memory_resize", LIBS);
+  gidLink(cast(void**)&gst_memory_share, "gst_memory_share", LIBS);
+  gidLink(cast(void**)&gst_memory_unmap, "gst_memory_unmap", LIBS);
+
+  // Message
+  gidLink(cast(void**)&gst_message_get_type, "gst_message_get_type", LIBS);
+  gidLink(cast(void**)&gst_message_new_application, "gst_message_new_application", LIBS);
+  gidLink(cast(void**)&gst_message_new_async_done, "gst_message_new_async_done", LIBS);
+  gidLink(cast(void**)&gst_message_new_async_start, "gst_message_new_async_start", LIBS);
+  gidLink(cast(void**)&gst_message_new_buffering, "gst_message_new_buffering", LIBS);
+  gidLink(cast(void**)&gst_message_new_clock_lost, "gst_message_new_clock_lost", LIBS);
+  gidLink(cast(void**)&gst_message_new_clock_provide, "gst_message_new_clock_provide", LIBS);
+  gidLink(cast(void**)&gst_message_new_custom, "gst_message_new_custom", LIBS);
+  gidLink(cast(void**)&gst_message_new_device_added, "gst_message_new_device_added", LIBS);
+  gidLink(cast(void**)&gst_message_new_device_changed, "gst_message_new_device_changed", LIBS);
+  gidLink(cast(void**)&gst_message_new_device_removed, "gst_message_new_device_removed", LIBS);
+  gidLink(cast(void**)&gst_message_new_duration_changed, "gst_message_new_duration_changed", LIBS);
+  gidLink(cast(void**)&gst_message_new_element, "gst_message_new_element", LIBS);
+  gidLink(cast(void**)&gst_message_new_eos, "gst_message_new_eos", LIBS);
+  gidLink(cast(void**)&gst_message_new_error, "gst_message_new_error", LIBS);
+  gidLink(cast(void**)&gst_message_new_error_with_details, "gst_message_new_error_with_details", LIBS);
+  gidLink(cast(void**)&gst_message_new_have_context, "gst_message_new_have_context", LIBS);
+  gidLink(cast(void**)&gst_message_new_info, "gst_message_new_info", LIBS);
+  gidLink(cast(void**)&gst_message_new_info_with_details, "gst_message_new_info_with_details", LIBS);
+  gidLink(cast(void**)&gst_message_new_instant_rate_request, "gst_message_new_instant_rate_request", LIBS);
+  gidLink(cast(void**)&gst_message_new_latency, "gst_message_new_latency", LIBS);
+  gidLink(cast(void**)&gst_message_new_need_context, "gst_message_new_need_context", LIBS);
+  gidLink(cast(void**)&gst_message_new_new_clock, "gst_message_new_new_clock", LIBS);
+  gidLink(cast(void**)&gst_message_new_progress, "gst_message_new_progress", LIBS);
+  gidLink(cast(void**)&gst_message_new_property_notify, "gst_message_new_property_notify", LIBS);
+  gidLink(cast(void**)&gst_message_new_qos, "gst_message_new_qos", LIBS);
+  gidLink(cast(void**)&gst_message_new_redirect, "gst_message_new_redirect", LIBS);
+  gidLink(cast(void**)&gst_message_new_request_state, "gst_message_new_request_state", LIBS);
+  gidLink(cast(void**)&gst_message_new_reset_time, "gst_message_new_reset_time", LIBS);
+  gidLink(cast(void**)&gst_message_new_segment_done, "gst_message_new_segment_done", LIBS);
+  gidLink(cast(void**)&gst_message_new_segment_start, "gst_message_new_segment_start", LIBS);
+  gidLink(cast(void**)&gst_message_new_state_changed, "gst_message_new_state_changed", LIBS);
+  gidLink(cast(void**)&gst_message_new_state_dirty, "gst_message_new_state_dirty", LIBS);
+  gidLink(cast(void**)&gst_message_new_step_done, "gst_message_new_step_done", LIBS);
+  gidLink(cast(void**)&gst_message_new_step_start, "gst_message_new_step_start", LIBS);
+  gidLink(cast(void**)&gst_message_new_stream_collection, "gst_message_new_stream_collection", LIBS);
+  gidLink(cast(void**)&gst_message_new_stream_start, "gst_message_new_stream_start", LIBS);
+  gidLink(cast(void**)&gst_message_new_stream_status, "gst_message_new_stream_status", LIBS);
+  gidLink(cast(void**)&gst_message_new_streams_selected, "gst_message_new_streams_selected", LIBS);
+  gidLink(cast(void**)&gst_message_new_structure_change, "gst_message_new_structure_change", LIBS);
+  gidLink(cast(void**)&gst_message_new_tag, "gst_message_new_tag", LIBS);
+  gidLink(cast(void**)&gst_message_new_toc, "gst_message_new_toc", LIBS);
+  gidLink(cast(void**)&gst_message_new_warning, "gst_message_new_warning", LIBS);
+  gidLink(cast(void**)&gst_message_new_warning_with_details, "gst_message_new_warning_with_details", LIBS);
+  gidLink(cast(void**)&gst_message_add_redirect_entry, "gst_message_add_redirect_entry", LIBS);
+  gidLink(cast(void**)&gst_message_copy, "gst_message_copy", LIBS);
+  gidLink(cast(void**)&gst_message_get_num_redirect_entries, "gst_message_get_num_redirect_entries", LIBS);
+  gidLink(cast(void**)&gst_message_get_seqnum, "gst_message_get_seqnum", LIBS);
+  gidLink(cast(void**)&gst_message_get_stream_status_object, "gst_message_get_stream_status_object", LIBS);
+  gidLink(cast(void**)&gst_message_get_structure, "gst_message_get_structure", LIBS);
+  gidLink(cast(void**)&gst_message_has_name, "gst_message_has_name", LIBS);
+  gidLink(cast(void**)&gst_message_parse_async_done, "gst_message_parse_async_done", LIBS);
+  gidLink(cast(void**)&gst_message_parse_buffering, "gst_message_parse_buffering", LIBS);
+  gidLink(cast(void**)&gst_message_parse_buffering_stats, "gst_message_parse_buffering_stats", LIBS);
+  gidLink(cast(void**)&gst_message_parse_clock_lost, "gst_message_parse_clock_lost", LIBS);
+  gidLink(cast(void**)&gst_message_parse_clock_provide, "gst_message_parse_clock_provide", LIBS);
+  gidLink(cast(void**)&gst_message_parse_context_type, "gst_message_parse_context_type", LIBS);
+  gidLink(cast(void**)&gst_message_parse_device_added, "gst_message_parse_device_added", LIBS);
+  gidLink(cast(void**)&gst_message_parse_device_changed, "gst_message_parse_device_changed", LIBS);
+  gidLink(cast(void**)&gst_message_parse_device_removed, "gst_message_parse_device_removed", LIBS);
+  gidLink(cast(void**)&gst_message_parse_error, "gst_message_parse_error", LIBS);
+  gidLink(cast(void**)&gst_message_parse_error_details, "gst_message_parse_error_details", LIBS);
+  gidLink(cast(void**)&gst_message_parse_group_id, "gst_message_parse_group_id", LIBS);
+  gidLink(cast(void**)&gst_message_parse_have_context, "gst_message_parse_have_context", LIBS);
+  gidLink(cast(void**)&gst_message_parse_info, "gst_message_parse_info", LIBS);
+  gidLink(cast(void**)&gst_message_parse_info_details, "gst_message_parse_info_details", LIBS);
+  gidLink(cast(void**)&gst_message_parse_instant_rate_request, "gst_message_parse_instant_rate_request", LIBS);
+  gidLink(cast(void**)&gst_message_parse_new_clock, "gst_message_parse_new_clock", LIBS);
+  gidLink(cast(void**)&gst_message_parse_progress, "gst_message_parse_progress", LIBS);
+  gidLink(cast(void**)&gst_message_parse_property_notify, "gst_message_parse_property_notify", LIBS);
+  gidLink(cast(void**)&gst_message_parse_qos, "gst_message_parse_qos", LIBS);
+  gidLink(cast(void**)&gst_message_parse_qos_stats, "gst_message_parse_qos_stats", LIBS);
+  gidLink(cast(void**)&gst_message_parse_qos_values, "gst_message_parse_qos_values", LIBS);
+  gidLink(cast(void**)&gst_message_parse_redirect_entry, "gst_message_parse_redirect_entry", LIBS);
+  gidLink(cast(void**)&gst_message_parse_request_state, "gst_message_parse_request_state", LIBS);
+  gidLink(cast(void**)&gst_message_parse_reset_time, "gst_message_parse_reset_time", LIBS);
+  gidLink(cast(void**)&gst_message_parse_segment_done, "gst_message_parse_segment_done", LIBS);
+  gidLink(cast(void**)&gst_message_parse_segment_start, "gst_message_parse_segment_start", LIBS);
+  gidLink(cast(void**)&gst_message_parse_state_changed, "gst_message_parse_state_changed", LIBS);
+  gidLink(cast(void**)&gst_message_parse_step_done, "gst_message_parse_step_done", LIBS);
+  gidLink(cast(void**)&gst_message_parse_step_start, "gst_message_parse_step_start", LIBS);
+  gidLink(cast(void**)&gst_message_parse_stream_collection, "gst_message_parse_stream_collection", LIBS);
+  gidLink(cast(void**)&gst_message_parse_stream_status, "gst_message_parse_stream_status", LIBS);
+  gidLink(cast(void**)&gst_message_parse_streams_selected, "gst_message_parse_streams_selected", LIBS);
+  gidLink(cast(void**)&gst_message_parse_structure_change, "gst_message_parse_structure_change", LIBS);
+  gidLink(cast(void**)&gst_message_parse_tag, "gst_message_parse_tag", LIBS);
+  gidLink(cast(void**)&gst_message_parse_toc, "gst_message_parse_toc", LIBS);
+  gidLink(cast(void**)&gst_message_parse_warning, "gst_message_parse_warning", LIBS);
+  gidLink(cast(void**)&gst_message_parse_warning_details, "gst_message_parse_warning_details", LIBS);
+  gidLink(cast(void**)&gst_message_set_buffering_stats, "gst_message_set_buffering_stats", LIBS);
+  gidLink(cast(void**)&gst_message_set_group_id, "gst_message_set_group_id", LIBS);
+  gidLink(cast(void**)&gst_message_set_qos_stats, "gst_message_set_qos_stats", LIBS);
+  gidLink(cast(void**)&gst_message_set_qos_values, "gst_message_set_qos_values", LIBS);
+  gidLink(cast(void**)&gst_message_set_seqnum, "gst_message_set_seqnum", LIBS);
+  gidLink(cast(void**)&gst_message_set_stream_status_object, "gst_message_set_stream_status_object", LIBS);
+  gidLink(cast(void**)&gst_message_streams_selected_add, "gst_message_streams_selected_add", LIBS);
+  gidLink(cast(void**)&gst_message_streams_selected_get_size, "gst_message_streams_selected_get_size", LIBS);
+  gidLink(cast(void**)&gst_message_streams_selected_get_stream, "gst_message_streams_selected_get_stream", LIBS);
+  gidLink(cast(void**)&gst_message_writable_structure, "gst_message_writable_structure", LIBS);
+  gidLink(cast(void**)&gst_message_replace, "gst_message_replace", LIBS);
+
+  // Meta
+  gidLink(cast(void**)&gst_meta_compare_seqnum, "gst_meta_compare_seqnum", LIBS);
+  gidLink(cast(void**)&gst_meta_get_seqnum, "gst_meta_get_seqnum", LIBS);
+  gidLink(cast(void**)&gst_meta_serialize, "gst_meta_serialize", LIBS);
+  gidLink(cast(void**)&gst_meta_serialize_simple, "gst_meta_serialize_simple", LIBS);
+  gidLink(cast(void**)&gst_meta_api_type_get_tags, "gst_meta_api_type_get_tags", LIBS);
+  gidLink(cast(void**)&gst_meta_api_type_has_tag, "gst_meta_api_type_has_tag", LIBS);
+  gidLink(cast(void**)&gst_meta_api_type_register, "gst_meta_api_type_register", LIBS);
+  gidLink(cast(void**)&gst_meta_deserialize, "gst_meta_deserialize", LIBS);
+  gidLink(cast(void**)&gst_meta_get_info, "gst_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_meta_register, "gst_meta_register", LIBS);
+  gidLink(cast(void**)&gst_meta_register_custom, "gst_meta_register_custom", LIBS);
+  gidLink(cast(void**)&gst_meta_register_custom_simple, "gst_meta_register_custom_simple", LIBS);
+
+  // MetaInfo
+  gidLink(cast(void**)&gst_meta_info_is_custom, "gst_meta_info_is_custom", LIBS);
+  gidLink(cast(void**)&gst_meta_info_register, "gst_meta_info_register", LIBS);
+  gidLink(cast(void**)&gst_meta_info_new, "gst_meta_info_new", LIBS);
+
+  // MiniObject
+  gidLink(cast(void**)&gst_mini_object_get_type, "gst_mini_object_get_type", LIBS);
+  gidLink(cast(void**)&gst_mini_object_add_parent, "gst_mini_object_add_parent", LIBS);
+  gidLink(cast(void**)&gst_mini_object_copy, "gst_mini_object_copy", LIBS);
+  gidLink(cast(void**)&gst_mini_object_get_qdata, "gst_mini_object_get_qdata", LIBS);
+  gidLink(cast(void**)&gst_mini_object_init, "gst_mini_object_init", LIBS);
+  gidLink(cast(void**)&gst_mini_object_is_writable, "gst_mini_object_is_writable", LIBS);
+  gidLink(cast(void**)&gst_mini_object_lock, "gst_mini_object_lock", LIBS);
+  gidLink(cast(void**)&gst_mini_object_make_writable, "gst_mini_object_make_writable", LIBS);
+  gidLink(cast(void**)&gst_mini_object_ref, "gst_mini_object_ref", LIBS);
+  gidLink(cast(void**)&gst_mini_object_remove_parent, "gst_mini_object_remove_parent", LIBS);
+  gidLink(cast(void**)&gst_mini_object_set_qdata, "gst_mini_object_set_qdata", LIBS);
+  gidLink(cast(void**)&gst_mini_object_steal_qdata, "gst_mini_object_steal_qdata", LIBS);
+  gidLink(cast(void**)&gst_mini_object_unlock, "gst_mini_object_unlock", LIBS);
+  gidLink(cast(void**)&gst_mini_object_unref, "gst_mini_object_unref", LIBS);
+  gidLink(cast(void**)&gst_mini_object_weak_ref, "gst_mini_object_weak_ref", LIBS);
+  gidLink(cast(void**)&gst_mini_object_weak_unref, "gst_mini_object_weak_unref", LIBS);
+  gidLink(cast(void**)&gst_mini_object_replace, "gst_mini_object_replace", LIBS);
+  gidLink(cast(void**)&gst_mini_object_steal, "gst_mini_object_steal", LIBS);
+  gidLink(cast(void**)&gst_mini_object_take, "gst_mini_object_take", LIBS);
+
+  // ObjectGst
+  gidLink(cast(void**)&gst_object_get_type, "gst_object_get_type", LIBS);
+  gidLink(cast(void**)&gst_object_check_uniqueness, "gst_object_check_uniqueness", LIBS);
+  gidLink(cast(void**)&gst_object_default_deep_notify, "gst_object_default_deep_notify", LIBS);
+  gidLink(cast(void**)&gst_object_ref_sink, "gst_object_ref_sink", LIBS);
+  gidLink(cast(void**)&gst_object_replace, "gst_object_replace", LIBS);
+  gidLink(cast(void**)&gst_object_add_control_binding, "gst_object_add_control_binding", LIBS);
+  gidLink(cast(void**)&gst_object_default_error, "gst_object_default_error", LIBS);
+  gidLink(cast(void**)&gst_object_get_control_binding, "gst_object_get_control_binding", LIBS);
+  gidLink(cast(void**)&gst_object_get_control_rate, "gst_object_get_control_rate", LIBS);
+  gidLink(cast(void**)&gst_object_get_g_value_array, "gst_object_get_g_value_array", LIBS);
+  gidLink(cast(void**)&gst_object_get_name, "gst_object_get_name", LIBS);
+  gidLink(cast(void**)&gst_object_get_parent, "gst_object_get_parent", LIBS);
+  gidLink(cast(void**)&gst_object_get_path_string, "gst_object_get_path_string", LIBS);
+  gidLink(cast(void**)&gst_object_get_value, "gst_object_get_value", LIBS);
+  gidLink(cast(void**)&gst_object_get_value_array, "gst_object_get_value_array", LIBS);
+  gidLink(cast(void**)&gst_object_has_active_control_bindings, "gst_object_has_active_control_bindings", LIBS);
+  gidLink(cast(void**)&gst_object_has_ancestor, "gst_object_has_ancestor", LIBS);
+  gidLink(cast(void**)&gst_object_has_as_ancestor, "gst_object_has_as_ancestor", LIBS);
+  gidLink(cast(void**)&gst_object_has_as_parent, "gst_object_has_as_parent", LIBS);
+  gidLink(cast(void**)&gst_object_ref, "gst_object_ref", LIBS);
+  gidLink(cast(void**)&gst_object_remove_control_binding, "gst_object_remove_control_binding", LIBS);
+  gidLink(cast(void**)&gst_object_set_control_binding_disabled, "gst_object_set_control_binding_disabled", LIBS);
+  gidLink(cast(void**)&gst_object_set_control_bindings_disabled, "gst_object_set_control_bindings_disabled", LIBS);
+  gidLink(cast(void**)&gst_object_set_control_rate, "gst_object_set_control_rate", LIBS);
+  gidLink(cast(void**)&gst_object_set_name, "gst_object_set_name", LIBS);
+  gidLink(cast(void**)&gst_object_set_parent, "gst_object_set_parent", LIBS);
+  gidLink(cast(void**)&gst_object_suggest_next_sync, "gst_object_suggest_next_sync", LIBS);
+  gidLink(cast(void**)&gst_object_sync_values, "gst_object_sync_values", LIBS);
+  gidLink(cast(void**)&gst_object_unparent, "gst_object_unparent", LIBS);
+  gidLink(cast(void**)&gst_object_unref, "gst_object_unref", LIBS);
+
+  // Pad
+  gidLink(cast(void**)&gst_pad_get_type, "gst_pad_get_type", LIBS);
+  gidLink(cast(void**)&gst_pad_new, "gst_pad_new", LIBS);
+  gidLink(cast(void**)&gst_pad_new_from_static_template, "gst_pad_new_from_static_template", LIBS);
+  gidLink(cast(void**)&gst_pad_new_from_template, "gst_pad_new_from_template", LIBS);
+  gidLink(cast(void**)&gst_pad_link_get_name, "gst_pad_link_get_name", LIBS);
+  gidLink(cast(void**)&gst_pad_activate_mode, "gst_pad_activate_mode", LIBS);
+  gidLink(cast(void**)&gst_pad_add_probe, "gst_pad_add_probe", LIBS);
+  gidLink(cast(void**)&gst_pad_can_link, "gst_pad_can_link", LIBS);
+  gidLink(cast(void**)&gst_pad_chain, "gst_pad_chain", LIBS);
+  gidLink(cast(void**)&gst_pad_chain_list, "gst_pad_chain_list", LIBS);
+  gidLink(cast(void**)&gst_pad_check_reconfigure, "gst_pad_check_reconfigure", LIBS);
+  gidLink(cast(void**)&gst_pad_create_stream_id, "gst_pad_create_stream_id", LIBS);
+  gidLink(cast(void**)&gst_pad_create_stream_id_printf, "gst_pad_create_stream_id_printf", LIBS);
+  gidLink(cast(void**)&gst_pad_create_stream_id_printf_valist, "gst_pad_create_stream_id_printf_valist", LIBS);
+  gidLink(cast(void**)&gst_pad_event_default, "gst_pad_event_default", LIBS);
+  gidLink(cast(void**)&gst_pad_forward, "gst_pad_forward", LIBS);
+  gidLink(cast(void**)&gst_pad_get_allowed_caps, "gst_pad_get_allowed_caps", LIBS);
+  gidLink(cast(void**)&gst_pad_get_current_caps, "gst_pad_get_current_caps", LIBS);
+  gidLink(cast(void**)&gst_pad_get_direction, "gst_pad_get_direction", LIBS);
+  gidLink(cast(void**)&gst_pad_get_element_private, "gst_pad_get_element_private", LIBS);
+  gidLink(cast(void**)&gst_pad_get_last_flow_return, "gst_pad_get_last_flow_return", LIBS);
+  gidLink(cast(void**)&gst_pad_get_offset, "gst_pad_get_offset", LIBS);
+  gidLink(cast(void**)&gst_pad_get_pad_template, "gst_pad_get_pad_template", LIBS);
+  gidLink(cast(void**)&gst_pad_get_pad_template_caps, "gst_pad_get_pad_template_caps", LIBS);
+  gidLink(cast(void**)&gst_pad_get_parent_element, "gst_pad_get_parent_element", LIBS);
+  gidLink(cast(void**)&gst_pad_get_peer, "gst_pad_get_peer", LIBS);
+  gidLink(cast(void**)&gst_pad_get_range, "gst_pad_get_range", LIBS);
+  gidLink(cast(void**)&gst_pad_get_single_internal_link, "gst_pad_get_single_internal_link", LIBS);
+  gidLink(cast(void**)&gst_pad_get_sticky_event, "gst_pad_get_sticky_event", LIBS);
+  gidLink(cast(void**)&gst_pad_get_stream, "gst_pad_get_stream", LIBS);
+  gidLink(cast(void**)&gst_pad_get_stream_id, "gst_pad_get_stream_id", LIBS);
+  gidLink(cast(void**)&gst_pad_get_task_state, "gst_pad_get_task_state", LIBS);
+  gidLink(cast(void**)&gst_pad_has_current_caps, "gst_pad_has_current_caps", LIBS);
+  gidLink(cast(void**)&gst_pad_is_active, "gst_pad_is_active", LIBS);
+  gidLink(cast(void**)&gst_pad_is_blocked, "gst_pad_is_blocked", LIBS);
+  gidLink(cast(void**)&gst_pad_is_blocking, "gst_pad_is_blocking", LIBS);
+  gidLink(cast(void**)&gst_pad_is_linked, "gst_pad_is_linked", LIBS);
+  gidLink(cast(void**)&gst_pad_iterate_internal_links, "gst_pad_iterate_internal_links", LIBS);
+  gidLink(cast(void**)&gst_pad_iterate_internal_links_default, "gst_pad_iterate_internal_links_default", LIBS);
+  gidLink(cast(void**)&gst_pad_link, "gst_pad_link", LIBS);
+  gidLink(cast(void**)&gst_pad_link_full, "gst_pad_link_full", LIBS);
+  gidLink(cast(void**)&gst_pad_link_maybe_ghosting, "gst_pad_link_maybe_ghosting", LIBS);
+  gidLink(cast(void**)&gst_pad_link_maybe_ghosting_full, "gst_pad_link_maybe_ghosting_full", LIBS);
+  gidLink(cast(void**)&gst_pad_mark_reconfigure, "gst_pad_mark_reconfigure", LIBS);
+  gidLink(cast(void**)&gst_pad_needs_reconfigure, "gst_pad_needs_reconfigure", LIBS);
+  gidLink(cast(void**)&gst_pad_pause_task, "gst_pad_pause_task", LIBS);
+  gidLink(cast(void**)&gst_pad_peer_query, "gst_pad_peer_query", LIBS);
+  gidLink(cast(void**)&gst_pad_peer_query_accept_caps, "gst_pad_peer_query_accept_caps", LIBS);
+  gidLink(cast(void**)&gst_pad_peer_query_caps, "gst_pad_peer_query_caps", LIBS);
+  gidLink(cast(void**)&gst_pad_peer_query_convert, "gst_pad_peer_query_convert", LIBS);
+  gidLink(cast(void**)&gst_pad_peer_query_duration, "gst_pad_peer_query_duration", LIBS);
+  gidLink(cast(void**)&gst_pad_peer_query_position, "gst_pad_peer_query_position", LIBS);
+  gidLink(cast(void**)&gst_pad_proxy_query_accept_caps, "gst_pad_proxy_query_accept_caps", LIBS);
+  gidLink(cast(void**)&gst_pad_proxy_query_caps, "gst_pad_proxy_query_caps", LIBS);
+  gidLink(cast(void**)&gst_pad_pull_range, "gst_pad_pull_range", LIBS);
+  gidLink(cast(void**)&gst_pad_push, "gst_pad_push", LIBS);
+  gidLink(cast(void**)&gst_pad_push_event, "gst_pad_push_event", LIBS);
+  gidLink(cast(void**)&gst_pad_push_list, "gst_pad_push_list", LIBS);
+  gidLink(cast(void**)&gst_pad_query, "gst_pad_query", LIBS);
+  gidLink(cast(void**)&gst_pad_query_accept_caps, "gst_pad_query_accept_caps", LIBS);
+  gidLink(cast(void**)&gst_pad_query_caps, "gst_pad_query_caps", LIBS);
+  gidLink(cast(void**)&gst_pad_query_convert, "gst_pad_query_convert", LIBS);
+  gidLink(cast(void**)&gst_pad_query_default, "gst_pad_query_default", LIBS);
+  gidLink(cast(void**)&gst_pad_query_duration, "gst_pad_query_duration", LIBS);
+  gidLink(cast(void**)&gst_pad_query_position, "gst_pad_query_position", LIBS);
+  gidLink(cast(void**)&gst_pad_remove_probe, "gst_pad_remove_probe", LIBS);
+  gidLink(cast(void**)&gst_pad_send_event, "gst_pad_send_event", LIBS);
+  gidLink(cast(void**)&gst_pad_set_activate_function_full, "gst_pad_set_activate_function_full", LIBS);
+  gidLink(cast(void**)&gst_pad_set_activatemode_function_full, "gst_pad_set_activatemode_function_full", LIBS);
+  gidLink(cast(void**)&gst_pad_set_active, "gst_pad_set_active", LIBS);
+  gidLink(cast(void**)&gst_pad_set_chain_function_full, "gst_pad_set_chain_function_full", LIBS);
+  gidLink(cast(void**)&gst_pad_set_chain_list_function_full, "gst_pad_set_chain_list_function_full", LIBS);
+  gidLink(cast(void**)&gst_pad_set_element_private, "gst_pad_set_element_private", LIBS);
+  gidLink(cast(void**)&gst_pad_set_event_full_function_full, "gst_pad_set_event_full_function_full", LIBS);
+  gidLink(cast(void**)&gst_pad_set_event_function_full, "gst_pad_set_event_function_full", LIBS);
+  gidLink(cast(void**)&gst_pad_set_getrange_function_full, "gst_pad_set_getrange_function_full", LIBS);
+  gidLink(cast(void**)&gst_pad_set_iterate_internal_links_function_full, "gst_pad_set_iterate_internal_links_function_full", LIBS);
+  gidLink(cast(void**)&gst_pad_set_link_function_full, "gst_pad_set_link_function_full", LIBS);
+  gidLink(cast(void**)&gst_pad_set_offset, "gst_pad_set_offset", LIBS);
+  gidLink(cast(void**)&gst_pad_set_query_function_full, "gst_pad_set_query_function_full", LIBS);
+  gidLink(cast(void**)&gst_pad_set_unlink_function_full, "gst_pad_set_unlink_function_full", LIBS);
+  gidLink(cast(void**)&gst_pad_start_task, "gst_pad_start_task", LIBS);
+  gidLink(cast(void**)&gst_pad_sticky_events_foreach, "gst_pad_sticky_events_foreach", LIBS);
+  gidLink(cast(void**)&gst_pad_stop_task, "gst_pad_stop_task", LIBS);
+  gidLink(cast(void**)&gst_pad_store_sticky_event, "gst_pad_store_sticky_event", LIBS);
+  gidLink(cast(void**)&gst_pad_unlink, "gst_pad_unlink", LIBS);
+  gidLink(cast(void**)&gst_pad_use_fixed_caps, "gst_pad_use_fixed_caps", LIBS);
+
+  // PadProbeInfo
+  gidLink(cast(void**)&gst_pad_probe_info_get_buffer, "gst_pad_probe_info_get_buffer", LIBS);
+  gidLink(cast(void**)&gst_pad_probe_info_get_buffer_list, "gst_pad_probe_info_get_buffer_list", LIBS);
+  gidLink(cast(void**)&gst_pad_probe_info_get_event, "gst_pad_probe_info_get_event", LIBS);
+  gidLink(cast(void**)&gst_pad_probe_info_get_query, "gst_pad_probe_info_get_query", LIBS);
+
+  // PadTemplate
+  gidLink(cast(void**)&gst_pad_template_get_type, "gst_pad_template_get_type", LIBS);
+  gidLink(cast(void**)&gst_pad_template_new, "gst_pad_template_new", LIBS);
+  gidLink(cast(void**)&gst_pad_template_new_from_static_pad_template_with_gtype, "gst_pad_template_new_from_static_pad_template_with_gtype", LIBS);
+  gidLink(cast(void**)&gst_pad_template_new_with_gtype, "gst_pad_template_new_with_gtype", LIBS);
+  gidLink(cast(void**)&gst_pad_template_get_caps, "gst_pad_template_get_caps", LIBS);
+  gidLink(cast(void**)&gst_pad_template_get_documentation_caps, "gst_pad_template_get_documentation_caps", LIBS);
+  gidLink(cast(void**)&gst_pad_template_pad_created, "gst_pad_template_pad_created", LIBS);
+  gidLink(cast(void**)&gst_pad_template_set_documentation_caps, "gst_pad_template_set_documentation_caps", LIBS);
+
+  // ParamArray
+  gidLink(cast(void**)&gst_param_spec_array_get_type, "gst_param_spec_array_get_type", LIBS);
+
+  // ParamFraction
+  gidLink(cast(void**)&gst_param_spec_fraction_get_type, "gst_param_spec_fraction_get_type", LIBS);
+
+  // ParentBufferMeta
+  gidLink(cast(void**)&gst_parent_buffer_meta_get_info, "gst_parent_buffer_meta_get_info", LIBS);
+
+  // ParseContext
+  gidLink(cast(void**)&gst_parse_context_get_type, "gst_parse_context_get_type", LIBS);
+  gidLink(cast(void**)&gst_parse_context_new, "gst_parse_context_new", LIBS);
+  gidLink(cast(void**)&gst_parse_context_copy, "gst_parse_context_copy", LIBS);
+  gidLink(cast(void**)&gst_parse_context_free, "gst_parse_context_free", LIBS);
+  gidLink(cast(void**)&gst_parse_context_get_missing_elements, "gst_parse_context_get_missing_elements", LIBS);
+
+  // Pipeline
+  gidLink(cast(void**)&gst_pipeline_get_type, "gst_pipeline_get_type", LIBS);
+  gidLink(cast(void**)&gst_pipeline_new, "gst_pipeline_new", LIBS);
+  gidLink(cast(void**)&gst_pipeline_auto_clock, "gst_pipeline_auto_clock", LIBS);
+  gidLink(cast(void**)&gst_pipeline_get_auto_flush_bus, "gst_pipeline_get_auto_flush_bus", LIBS);
+  gidLink(cast(void**)&gst_pipeline_get_bus, "gst_pipeline_get_bus", LIBS);
+  gidLink(cast(void**)&gst_pipeline_get_clock, "gst_pipeline_get_clock", LIBS);
+  gidLink(cast(void**)&gst_pipeline_get_configured_latency, "gst_pipeline_get_configured_latency", LIBS);
+  gidLink(cast(void**)&gst_pipeline_get_delay, "gst_pipeline_get_delay", LIBS);
+  gidLink(cast(void**)&gst_pipeline_get_latency, "gst_pipeline_get_latency", LIBS);
+  gidLink(cast(void**)&gst_pipeline_get_pipeline_clock, "gst_pipeline_get_pipeline_clock", LIBS);
+  gidLink(cast(void**)&gst_pipeline_is_live, "gst_pipeline_is_live", LIBS);
+  gidLink(cast(void**)&gst_pipeline_set_auto_flush_bus, "gst_pipeline_set_auto_flush_bus", LIBS);
+  gidLink(cast(void**)&gst_pipeline_set_clock, "gst_pipeline_set_clock", LIBS);
+  gidLink(cast(void**)&gst_pipeline_set_delay, "gst_pipeline_set_delay", LIBS);
+  gidLink(cast(void**)&gst_pipeline_set_latency, "gst_pipeline_set_latency", LIBS);
+  gidLink(cast(void**)&gst_pipeline_use_clock, "gst_pipeline_use_clock", LIBS);
+
+  // Plugin
+  gidLink(cast(void**)&gst_plugin_get_type, "gst_plugin_get_type", LIBS);
+  gidLink(cast(void**)&gst_plugin_list_free, "gst_plugin_list_free", LIBS);
+  gidLink(cast(void**)&gst_plugin_load_by_name, "gst_plugin_load_by_name", LIBS);
+  gidLink(cast(void**)&gst_plugin_load_file, "gst_plugin_load_file", LIBS);
+  gidLink(cast(void**)&gst_plugin_register_static, "gst_plugin_register_static", LIBS);
+  gidLink(cast(void**)&gst_plugin_register_static_full, "gst_plugin_register_static_full", LIBS);
+  gidLink(cast(void**)&gst_plugin_add_dependency, "gst_plugin_add_dependency", LIBS);
+  gidLink(cast(void**)&gst_plugin_add_dependency_simple, "gst_plugin_add_dependency_simple", LIBS);
+  gidLink(cast(void**)&gst_plugin_add_status_error, "gst_plugin_add_status_error", LIBS);
+  gidLink(cast(void**)&gst_plugin_add_status_info, "gst_plugin_add_status_info", LIBS);
+  gidLink(cast(void**)&gst_plugin_add_status_warning, "gst_plugin_add_status_warning", LIBS);
+  gidLink(cast(void**)&gst_plugin_get_cache_data, "gst_plugin_get_cache_data", LIBS);
+  gidLink(cast(void**)&gst_plugin_get_description, "gst_plugin_get_description", LIBS);
+  gidLink(cast(void**)&gst_plugin_get_filename, "gst_plugin_get_filename", LIBS);
+  gidLink(cast(void**)&gst_plugin_get_license, "gst_plugin_get_license", LIBS);
+  gidLink(cast(void**)&gst_plugin_get_name, "gst_plugin_get_name", LIBS);
+  gidLink(cast(void**)&gst_plugin_get_origin, "gst_plugin_get_origin", LIBS);
+  gidLink(cast(void**)&gst_plugin_get_package, "gst_plugin_get_package", LIBS);
+  gidLink(cast(void**)&gst_plugin_get_release_date_string, "gst_plugin_get_release_date_string", LIBS);
+  gidLink(cast(void**)&gst_plugin_get_source, "gst_plugin_get_source", LIBS);
+  gidLink(cast(void**)&gst_plugin_get_status_errors, "gst_plugin_get_status_errors", LIBS);
+  gidLink(cast(void**)&gst_plugin_get_status_infos, "gst_plugin_get_status_infos", LIBS);
+  gidLink(cast(void**)&gst_plugin_get_status_warnings, "gst_plugin_get_status_warnings", LIBS);
+  gidLink(cast(void**)&gst_plugin_get_version, "gst_plugin_get_version", LIBS);
+  gidLink(cast(void**)&gst_plugin_is_loaded, "gst_plugin_is_loaded", LIBS);
+  gidLink(cast(void**)&gst_plugin_load, "gst_plugin_load", LIBS);
+  gidLink(cast(void**)&gst_plugin_set_cache_data, "gst_plugin_set_cache_data", LIBS);
+
+  // PluginFeature
+  gidLink(cast(void**)&gst_plugin_feature_get_type, "gst_plugin_feature_get_type", LIBS);
+  gidLink(cast(void**)&gst_plugin_feature_list_copy, "gst_plugin_feature_list_copy", LIBS);
+  gidLink(cast(void**)&gst_plugin_feature_list_debug, "gst_plugin_feature_list_debug", LIBS);
+  gidLink(cast(void**)&gst_plugin_feature_list_free, "gst_plugin_feature_list_free", LIBS);
+  gidLink(cast(void**)&gst_plugin_feature_rank_compare_func, "gst_plugin_feature_rank_compare_func", LIBS);
+  gidLink(cast(void**)&gst_plugin_feature_check_version, "gst_plugin_feature_check_version", LIBS);
+  gidLink(cast(void**)&gst_plugin_feature_get_plugin, "gst_plugin_feature_get_plugin", LIBS);
+  gidLink(cast(void**)&gst_plugin_feature_get_plugin_name, "gst_plugin_feature_get_plugin_name", LIBS);
+  gidLink(cast(void**)&gst_plugin_feature_get_rank, "gst_plugin_feature_get_rank", LIBS);
+  gidLink(cast(void**)&gst_plugin_feature_load, "gst_plugin_feature_load", LIBS);
+  gidLink(cast(void**)&gst_plugin_feature_set_rank, "gst_plugin_feature_set_rank", LIBS);
+
+  // Poll
+  gidLink(cast(void**)&gst_poll_add_fd, "gst_poll_add_fd", LIBS);
+  gidLink(cast(void**)&gst_poll_fd_can_read, "gst_poll_fd_can_read", LIBS);
+  gidLink(cast(void**)&gst_poll_fd_can_write, "gst_poll_fd_can_write", LIBS);
+  gidLink(cast(void**)&gst_poll_fd_ctl_pri, "gst_poll_fd_ctl_pri", LIBS);
+  gidLink(cast(void**)&gst_poll_fd_ctl_read, "gst_poll_fd_ctl_read", LIBS);
+  gidLink(cast(void**)&gst_poll_fd_ctl_write, "gst_poll_fd_ctl_write", LIBS);
+  gidLink(cast(void**)&gst_poll_fd_has_closed, "gst_poll_fd_has_closed", LIBS);
+  gidLink(cast(void**)&gst_poll_fd_has_error, "gst_poll_fd_has_error", LIBS);
+  gidLink(cast(void**)&gst_poll_fd_has_pri, "gst_poll_fd_has_pri", LIBS);
+  gidLink(cast(void**)&gst_poll_fd_ignored, "gst_poll_fd_ignored", LIBS);
+  gidLink(cast(void**)&gst_poll_free, "gst_poll_free", LIBS);
+  gidLink(cast(void**)&gst_poll_get_read_gpollfd, "gst_poll_get_read_gpollfd", LIBS);
+  gidLink(cast(void**)&gst_poll_read_control, "gst_poll_read_control", LIBS);
+  gidLink(cast(void**)&gst_poll_remove_fd, "gst_poll_remove_fd", LIBS);
+  gidLink(cast(void**)&gst_poll_restart, "gst_poll_restart", LIBS);
+  gidLink(cast(void**)&gst_poll_set_controllable, "gst_poll_set_controllable", LIBS);
+  gidLink(cast(void**)&gst_poll_set_flushing, "gst_poll_set_flushing", LIBS);
+  gidLink(cast(void**)&gst_poll_wait, "gst_poll_wait", LIBS);
+  gidLink(cast(void**)&gst_poll_write_control, "gst_poll_write_control", LIBS);
+  gidLink(cast(void**)&gst_poll_new, "gst_poll_new", LIBS);
+  gidLink(cast(void**)&gst_poll_new_timer, "gst_poll_new_timer", LIBS);
+
+  // PollFD
+  gidLink(cast(void**)&gst_poll_fd_init, "gst_poll_fd_init", LIBS);
+
+  // Preset
+  gidLink(cast(void**)&gst_preset_get_type, "gst_preset_get_type", LIBS);
+  gidLink(cast(void**)&gst_preset_get_app_dir, "gst_preset_get_app_dir", LIBS);
+  gidLink(cast(void**)&gst_preset_set_app_dir, "gst_preset_set_app_dir", LIBS);
+  gidLink(cast(void**)&gst_preset_delete_preset, "gst_preset_delete_preset", LIBS);
+  gidLink(cast(void**)&gst_preset_get_meta, "gst_preset_get_meta", LIBS);
+  gidLink(cast(void**)&gst_preset_get_preset_names, "gst_preset_get_preset_names", LIBS);
+  gidLink(cast(void**)&gst_preset_get_property_names, "gst_preset_get_property_names", LIBS);
+  gidLink(cast(void**)&gst_preset_is_editable, "gst_preset_is_editable", LIBS);
+  gidLink(cast(void**)&gst_preset_load_preset, "gst_preset_load_preset", LIBS);
+  gidLink(cast(void**)&gst_preset_rename_preset, "gst_preset_rename_preset", LIBS);
+  gidLink(cast(void**)&gst_preset_save_preset, "gst_preset_save_preset", LIBS);
+  gidLink(cast(void**)&gst_preset_set_meta, "gst_preset_set_meta", LIBS);
+
+  // Promise
+  gidLink(cast(void**)&gst_promise_get_type, "gst_promise_get_type", LIBS);
+  gidLink(cast(void**)&gst_promise_new, "gst_promise_new", LIBS);
+  gidLink(cast(void**)&gst_promise_new_with_change_func, "gst_promise_new_with_change_func", LIBS);
+  gidLink(cast(void**)&gst_promise_expire, "gst_promise_expire", LIBS);
+  gidLink(cast(void**)&gst_promise_get_reply, "gst_promise_get_reply", LIBS);
+  gidLink(cast(void**)&gst_promise_interrupt, "gst_promise_interrupt", LIBS);
+  gidLink(cast(void**)&gst_promise_reply, "gst_promise_reply", LIBS);
+  gidLink(cast(void**)&gst_promise_wait, "gst_promise_wait", LIBS);
+
+  // ProtectionMeta
+  gidLink(cast(void**)&gst_protection_meta_get_info, "gst_protection_meta_get_info", LIBS);
+
+  // ProxyPad
+  gidLink(cast(void**)&gst_proxy_pad_get_type, "gst_proxy_pad_get_type", LIBS);
+  gidLink(cast(void**)&gst_proxy_pad_chain_default, "gst_proxy_pad_chain_default", LIBS);
+  gidLink(cast(void**)&gst_proxy_pad_chain_list_default, "gst_proxy_pad_chain_list_default", LIBS);
+  gidLink(cast(void**)&gst_proxy_pad_getrange_default, "gst_proxy_pad_getrange_default", LIBS);
+  gidLink(cast(void**)&gst_proxy_pad_iterate_internal_links_default, "gst_proxy_pad_iterate_internal_links_default", LIBS);
+  gidLink(cast(void**)&gst_proxy_pad_get_internal, "gst_proxy_pad_get_internal", LIBS);
+
+  // Query
+  gidLink(cast(void**)&gst_query_get_type, "gst_query_get_type", LIBS);
+  gidLink(cast(void**)&gst_query_new_accept_caps, "gst_query_new_accept_caps", LIBS);
+  gidLink(cast(void**)&gst_query_new_allocation, "gst_query_new_allocation", LIBS);
+  gidLink(cast(void**)&gst_query_new_bitrate, "gst_query_new_bitrate", LIBS);
+  gidLink(cast(void**)&gst_query_new_buffering, "gst_query_new_buffering", LIBS);
+  gidLink(cast(void**)&gst_query_new_caps, "gst_query_new_caps", LIBS);
+  gidLink(cast(void**)&gst_query_new_context, "gst_query_new_context", LIBS);
+  gidLink(cast(void**)&gst_query_new_convert, "gst_query_new_convert", LIBS);
+  gidLink(cast(void**)&gst_query_new_custom, "gst_query_new_custom", LIBS);
+  gidLink(cast(void**)&gst_query_new_drain, "gst_query_new_drain", LIBS);
+  gidLink(cast(void**)&gst_query_new_duration, "gst_query_new_duration", LIBS);
+  gidLink(cast(void**)&gst_query_new_formats, "gst_query_new_formats", LIBS);
+  gidLink(cast(void**)&gst_query_new_latency, "gst_query_new_latency", LIBS);
+  gidLink(cast(void**)&gst_query_new_position, "gst_query_new_position", LIBS);
+  gidLink(cast(void**)&gst_query_new_scheduling, "gst_query_new_scheduling", LIBS);
+  gidLink(cast(void**)&gst_query_new_seeking, "gst_query_new_seeking", LIBS);
+  gidLink(cast(void**)&gst_query_new_segment, "gst_query_new_segment", LIBS);
+  gidLink(cast(void**)&gst_query_new_selectable, "gst_query_new_selectable", LIBS);
+  gidLink(cast(void**)&gst_query_new_uri, "gst_query_new_uri", LIBS);
+  gidLink(cast(void**)&gst_query_add_allocation_meta, "gst_query_add_allocation_meta", LIBS);
+  gidLink(cast(void**)&gst_query_add_allocation_param, "gst_query_add_allocation_param", LIBS);
+  gidLink(cast(void**)&gst_query_add_allocation_pool, "gst_query_add_allocation_pool", LIBS);
+  gidLink(cast(void**)&gst_query_add_buffering_range, "gst_query_add_buffering_range", LIBS);
+  gidLink(cast(void**)&gst_query_add_scheduling_mode, "gst_query_add_scheduling_mode", LIBS);
+  gidLink(cast(void**)&gst_query_find_allocation_meta, "gst_query_find_allocation_meta", LIBS);
+  gidLink(cast(void**)&gst_query_get_n_allocation_metas, "gst_query_get_n_allocation_metas", LIBS);
+  gidLink(cast(void**)&gst_query_get_n_allocation_params, "gst_query_get_n_allocation_params", LIBS);
+  gidLink(cast(void**)&gst_query_get_n_allocation_pools, "gst_query_get_n_allocation_pools", LIBS);
+  gidLink(cast(void**)&gst_query_get_n_buffering_ranges, "gst_query_get_n_buffering_ranges", LIBS);
+  gidLink(cast(void**)&gst_query_get_n_scheduling_modes, "gst_query_get_n_scheduling_modes", LIBS);
+  gidLink(cast(void**)&gst_query_get_structure, "gst_query_get_structure", LIBS);
+  gidLink(cast(void**)&gst_query_has_scheduling_mode, "gst_query_has_scheduling_mode", LIBS);
+  gidLink(cast(void**)&gst_query_has_scheduling_mode_with_flags, "gst_query_has_scheduling_mode_with_flags", LIBS);
+  gidLink(cast(void**)&gst_query_parse_accept_caps, "gst_query_parse_accept_caps", LIBS);
+  gidLink(cast(void**)&gst_query_parse_accept_caps_result, "gst_query_parse_accept_caps_result", LIBS);
+  gidLink(cast(void**)&gst_query_parse_allocation, "gst_query_parse_allocation", LIBS);
+  gidLink(cast(void**)&gst_query_parse_bitrate, "gst_query_parse_bitrate", LIBS);
+  gidLink(cast(void**)&gst_query_parse_buffering_percent, "gst_query_parse_buffering_percent", LIBS);
+  gidLink(cast(void**)&gst_query_parse_buffering_range, "gst_query_parse_buffering_range", LIBS);
+  gidLink(cast(void**)&gst_query_parse_buffering_stats, "gst_query_parse_buffering_stats", LIBS);
+  gidLink(cast(void**)&gst_query_parse_caps, "gst_query_parse_caps", LIBS);
+  gidLink(cast(void**)&gst_query_parse_caps_result, "gst_query_parse_caps_result", LIBS);
+  gidLink(cast(void**)&gst_query_parse_context, "gst_query_parse_context", LIBS);
+  gidLink(cast(void**)&gst_query_parse_context_type, "gst_query_parse_context_type", LIBS);
+  gidLink(cast(void**)&gst_query_parse_convert, "gst_query_parse_convert", LIBS);
+  gidLink(cast(void**)&gst_query_parse_duration, "gst_query_parse_duration", LIBS);
+  gidLink(cast(void**)&gst_query_parse_latency, "gst_query_parse_latency", LIBS);
+  gidLink(cast(void**)&gst_query_parse_n_formats, "gst_query_parse_n_formats", LIBS);
+  gidLink(cast(void**)&gst_query_parse_nth_allocation_meta, "gst_query_parse_nth_allocation_meta", LIBS);
+  gidLink(cast(void**)&gst_query_parse_nth_allocation_param, "gst_query_parse_nth_allocation_param", LIBS);
+  gidLink(cast(void**)&gst_query_parse_nth_allocation_pool, "gst_query_parse_nth_allocation_pool", LIBS);
+  gidLink(cast(void**)&gst_query_parse_nth_buffering_range, "gst_query_parse_nth_buffering_range", LIBS);
+  gidLink(cast(void**)&gst_query_parse_nth_format, "gst_query_parse_nth_format", LIBS);
+  gidLink(cast(void**)&gst_query_parse_nth_scheduling_mode, "gst_query_parse_nth_scheduling_mode", LIBS);
+  gidLink(cast(void**)&gst_query_parse_position, "gst_query_parse_position", LIBS);
+  gidLink(cast(void**)&gst_query_parse_scheduling, "gst_query_parse_scheduling", LIBS);
+  gidLink(cast(void**)&gst_query_parse_seeking, "gst_query_parse_seeking", LIBS);
+  gidLink(cast(void**)&gst_query_parse_segment, "gst_query_parse_segment", LIBS);
+  gidLink(cast(void**)&gst_query_parse_selectable, "gst_query_parse_selectable", LIBS);
+  gidLink(cast(void**)&gst_query_parse_uri, "gst_query_parse_uri", LIBS);
+  gidLink(cast(void**)&gst_query_parse_uri_redirection, "gst_query_parse_uri_redirection", LIBS);
+  gidLink(cast(void**)&gst_query_parse_uri_redirection_permanent, "gst_query_parse_uri_redirection_permanent", LIBS);
+  gidLink(cast(void**)&gst_query_remove_nth_allocation_meta, "gst_query_remove_nth_allocation_meta", LIBS);
+  gidLink(cast(void**)&gst_query_remove_nth_allocation_param, "gst_query_remove_nth_allocation_param", LIBS);
+  gidLink(cast(void**)&gst_query_remove_nth_allocation_pool, "gst_query_remove_nth_allocation_pool", LIBS);
+  gidLink(cast(void**)&gst_query_set_accept_caps_result, "gst_query_set_accept_caps_result", LIBS);
+  gidLink(cast(void**)&gst_query_set_bitrate, "gst_query_set_bitrate", LIBS);
+  gidLink(cast(void**)&gst_query_set_buffering_percent, "gst_query_set_buffering_percent", LIBS);
+  gidLink(cast(void**)&gst_query_set_buffering_range, "gst_query_set_buffering_range", LIBS);
+  gidLink(cast(void**)&gst_query_set_buffering_stats, "gst_query_set_buffering_stats", LIBS);
+  gidLink(cast(void**)&gst_query_set_caps_result, "gst_query_set_caps_result", LIBS);
+  gidLink(cast(void**)&gst_query_set_context, "gst_query_set_context", LIBS);
+  gidLink(cast(void**)&gst_query_set_convert, "gst_query_set_convert", LIBS);
+  gidLink(cast(void**)&gst_query_set_duration, "gst_query_set_duration", LIBS);
+  gidLink(cast(void**)&gst_query_set_formats, "gst_query_set_formats", LIBS);
+  gidLink(cast(void**)&gst_query_set_formatsv, "gst_query_set_formatsv", LIBS);
+  gidLink(cast(void**)&gst_query_set_latency, "gst_query_set_latency", LIBS);
+  gidLink(cast(void**)&gst_query_set_nth_allocation_param, "gst_query_set_nth_allocation_param", LIBS);
+  gidLink(cast(void**)&gst_query_set_nth_allocation_pool, "gst_query_set_nth_allocation_pool", LIBS);
+  gidLink(cast(void**)&gst_query_set_position, "gst_query_set_position", LIBS);
+  gidLink(cast(void**)&gst_query_set_scheduling, "gst_query_set_scheduling", LIBS);
+  gidLink(cast(void**)&gst_query_set_seeking, "gst_query_set_seeking", LIBS);
+  gidLink(cast(void**)&gst_query_set_segment, "gst_query_set_segment", LIBS);
+  gidLink(cast(void**)&gst_query_set_selectable, "gst_query_set_selectable", LIBS);
+  gidLink(cast(void**)&gst_query_set_uri, "gst_query_set_uri", LIBS);
+  gidLink(cast(void**)&gst_query_set_uri_redirection, "gst_query_set_uri_redirection", LIBS);
+  gidLink(cast(void**)&gst_query_set_uri_redirection_permanent, "gst_query_set_uri_redirection_permanent", LIBS);
+  gidLink(cast(void**)&gst_query_writable_structure, "gst_query_writable_structure", LIBS);
+
+  // ReferenceTimestampMeta
+  gidLink(cast(void**)&gst_reference_timestamp_meta_get_info, "gst_reference_timestamp_meta_get_info", LIBS);
+
+  // Registry
+  gidLink(cast(void**)&gst_registry_get_type, "gst_registry_get_type", LIBS);
+  gidLink(cast(void**)&gst_registry_fork_is_enabled, "gst_registry_fork_is_enabled", LIBS);
+  gidLink(cast(void**)&gst_registry_fork_set_enabled, "gst_registry_fork_set_enabled", LIBS);
+  gidLink(cast(void**)&gst_registry_get, "gst_registry_get", LIBS);
+  gidLink(cast(void**)&gst_registry_add_feature, "gst_registry_add_feature", LIBS);
+  gidLink(cast(void**)&gst_registry_add_plugin, "gst_registry_add_plugin", LIBS);
+  gidLink(cast(void**)&gst_registry_check_feature_version, "gst_registry_check_feature_version", LIBS);
+  gidLink(cast(void**)&gst_registry_feature_filter, "gst_registry_feature_filter", LIBS);
+  gidLink(cast(void**)&gst_registry_find_feature, "gst_registry_find_feature", LIBS);
+  gidLink(cast(void**)&gst_registry_find_plugin, "gst_registry_find_plugin", LIBS);
+  gidLink(cast(void**)&gst_registry_get_feature_list, "gst_registry_get_feature_list", LIBS);
+  gidLink(cast(void**)&gst_registry_get_feature_list_by_plugin, "gst_registry_get_feature_list_by_plugin", LIBS);
+  gidLink(cast(void**)&gst_registry_get_feature_list_cookie, "gst_registry_get_feature_list_cookie", LIBS);
+  gidLink(cast(void**)&gst_registry_get_plugin_list, "gst_registry_get_plugin_list", LIBS);
+  gidLink(cast(void**)&gst_registry_lookup, "gst_registry_lookup", LIBS);
+  gidLink(cast(void**)&gst_registry_lookup_feature, "gst_registry_lookup_feature", LIBS);
+  gidLink(cast(void**)&gst_registry_plugin_filter, "gst_registry_plugin_filter", LIBS);
+  gidLink(cast(void**)&gst_registry_remove_feature, "gst_registry_remove_feature", LIBS);
+  gidLink(cast(void**)&gst_registry_remove_plugin, "gst_registry_remove_plugin", LIBS);
+  gidLink(cast(void**)&gst_registry_scan_path, "gst_registry_scan_path", LIBS);
+
+  // Sample
+  gidLink(cast(void**)&gst_sample_get_type, "gst_sample_get_type", LIBS);
+  gidLink(cast(void**)&gst_sample_new, "gst_sample_new", LIBS);
+  gidLink(cast(void**)&gst_sample_get_buffer, "gst_sample_get_buffer", LIBS);
+  gidLink(cast(void**)&gst_sample_get_buffer_list, "gst_sample_get_buffer_list", LIBS);
+  gidLink(cast(void**)&gst_sample_get_caps, "gst_sample_get_caps", LIBS);
+  gidLink(cast(void**)&gst_sample_get_info, "gst_sample_get_info", LIBS);
+  gidLink(cast(void**)&gst_sample_get_segment, "gst_sample_get_segment", LIBS);
+  gidLink(cast(void**)&gst_sample_set_buffer, "gst_sample_set_buffer", LIBS);
+  gidLink(cast(void**)&gst_sample_set_buffer_list, "gst_sample_set_buffer_list", LIBS);
+  gidLink(cast(void**)&gst_sample_set_caps, "gst_sample_set_caps", LIBS);
+  gidLink(cast(void**)&gst_sample_set_info, "gst_sample_set_info", LIBS);
+  gidLink(cast(void**)&gst_sample_set_segment, "gst_sample_set_segment", LIBS);
+
+  // Segment
+  gidLink(cast(void**)&gst_segment_get_type, "gst_segment_get_type", LIBS);
+  gidLink(cast(void**)&gst_segment_new, "gst_segment_new", LIBS);
+  gidLink(cast(void**)&gst_segment_clip, "gst_segment_clip", LIBS);
+  gidLink(cast(void**)&gst_segment_copy, "gst_segment_copy", LIBS);
+  gidLink(cast(void**)&gst_segment_copy_into, "gst_segment_copy_into", LIBS);
+  gidLink(cast(void**)&gst_segment_do_seek, "gst_segment_do_seek", LIBS);
+  gidLink(cast(void**)&gst_segment_free, "gst_segment_free", LIBS);
+  gidLink(cast(void**)&gst_segment_init, "gst_segment_init", LIBS);
+  gidLink(cast(void**)&gst_segment_is_equal, "gst_segment_is_equal", LIBS);
+  gidLink(cast(void**)&gst_segment_offset_running_time, "gst_segment_offset_running_time", LIBS);
+  gidLink(cast(void**)&gst_segment_position_from_running_time, "gst_segment_position_from_running_time", LIBS);
+  gidLink(cast(void**)&gst_segment_position_from_running_time_full, "gst_segment_position_from_running_time_full", LIBS);
+  gidLink(cast(void**)&gst_segment_position_from_stream_time, "gst_segment_position_from_stream_time", LIBS);
+  gidLink(cast(void**)&gst_segment_position_from_stream_time_full, "gst_segment_position_from_stream_time_full", LIBS);
+  gidLink(cast(void**)&gst_segment_set_running_time, "gst_segment_set_running_time", LIBS);
+  gidLink(cast(void**)&gst_segment_to_position, "gst_segment_to_position", LIBS);
+  gidLink(cast(void**)&gst_segment_to_running_time, "gst_segment_to_running_time", LIBS);
+  gidLink(cast(void**)&gst_segment_to_running_time_full, "gst_segment_to_running_time_full", LIBS);
+  gidLink(cast(void**)&gst_segment_to_stream_time, "gst_segment_to_stream_time", LIBS);
+  gidLink(cast(void**)&gst_segment_to_stream_time_full, "gst_segment_to_stream_time_full", LIBS);
+
+  // SharedTaskPool
+  gidLink(cast(void**)&gst_shared_task_pool_get_type, "gst_shared_task_pool_get_type", LIBS);
+  gidLink(cast(void**)&gst_shared_task_pool_new, "gst_shared_task_pool_new", LIBS);
+  gidLink(cast(void**)&gst_shared_task_pool_get_max_threads, "gst_shared_task_pool_get_max_threads", LIBS);
+  gidLink(cast(void**)&gst_shared_task_pool_set_max_threads, "gst_shared_task_pool_set_max_threads", LIBS);
+
+  // StaticCaps
+  gidLink(cast(void**)&gst_static_caps_cleanup, "gst_static_caps_cleanup", LIBS);
+  gidLink(cast(void**)&gst_static_caps_get, "gst_static_caps_get", LIBS);
+
+  // StaticPadTemplate
+  gidLink(cast(void**)&gst_static_pad_template_get, "gst_static_pad_template_get", LIBS);
+  gidLink(cast(void**)&gst_static_pad_template_get_caps, "gst_static_pad_template_get_caps", LIBS);
+
+  // Stream
+  gidLink(cast(void**)&gst_stream_get_type, "gst_stream_get_type", LIBS);
+  gidLink(cast(void**)&gst_stream_new, "gst_stream_new", LIBS);
+  gidLink(cast(void**)&gst_stream_get_caps, "gst_stream_get_caps", LIBS);
+  gidLink(cast(void**)&gst_stream_get_stream_flags, "gst_stream_get_stream_flags", LIBS);
+  gidLink(cast(void**)&gst_stream_get_stream_id, "gst_stream_get_stream_id", LIBS);
+  gidLink(cast(void**)&gst_stream_get_stream_type, "gst_stream_get_stream_type", LIBS);
+  gidLink(cast(void**)&gst_stream_get_tags, "gst_stream_get_tags", LIBS);
+  gidLink(cast(void**)&gst_stream_set_caps, "gst_stream_set_caps", LIBS);
+  gidLink(cast(void**)&gst_stream_set_stream_flags, "gst_stream_set_stream_flags", LIBS);
+  gidLink(cast(void**)&gst_stream_set_stream_type, "gst_stream_set_stream_type", LIBS);
+  gidLink(cast(void**)&gst_stream_set_tags, "gst_stream_set_tags", LIBS);
+
+  // StreamCollection
+  gidLink(cast(void**)&gst_stream_collection_get_type, "gst_stream_collection_get_type", LIBS);
+  gidLink(cast(void**)&gst_stream_collection_new, "gst_stream_collection_new", LIBS);
+  gidLink(cast(void**)&gst_stream_collection_add_stream, "gst_stream_collection_add_stream", LIBS);
+  gidLink(cast(void**)&gst_stream_collection_get_size, "gst_stream_collection_get_size", LIBS);
+  gidLink(cast(void**)&gst_stream_collection_get_stream, "gst_stream_collection_get_stream", LIBS);
+  gidLink(cast(void**)&gst_stream_collection_get_upstream_id, "gst_stream_collection_get_upstream_id", LIBS);
+
+  // Structure
+  gidLink(cast(void**)&gst_structure_get_type, "gst_structure_get_type", LIBS);
+  gidLink(cast(void**)&gst_structure_from_string, "gst_structure_from_string", LIBS);
+  gidLink(cast(void**)&gst_structure_new, "gst_structure_new", LIBS);
+  gidLink(cast(void**)&gst_structure_new_empty, "gst_structure_new_empty", LIBS);
+  gidLink(cast(void**)&gst_structure_new_from_string, "gst_structure_new_from_string", LIBS);
+  gidLink(cast(void**)&gst_structure_new_id, "gst_structure_new_id", LIBS);
+  gidLink(cast(void**)&gst_structure_new_id_empty, "gst_structure_new_id_empty", LIBS);
+  gidLink(cast(void**)&gst_structure_new_valist, "gst_structure_new_valist", LIBS);
+  gidLink(cast(void**)&gst_structure_can_intersect, "gst_structure_can_intersect", LIBS);
+  gidLink(cast(void**)&gst_structure_copy, "gst_structure_copy", LIBS);
+  gidLink(cast(void**)&gst_structure_filter_and_map_in_place, "gst_structure_filter_and_map_in_place", LIBS);
+  gidLink(cast(void**)&gst_structure_fixate, "gst_structure_fixate", LIBS);
+  gidLink(cast(void**)&gst_structure_fixate_field, "gst_structure_fixate_field", LIBS);
+  gidLink(cast(void**)&gst_structure_fixate_field_boolean, "gst_structure_fixate_field_boolean", LIBS);
+  gidLink(cast(void**)&gst_structure_fixate_field_nearest_double, "gst_structure_fixate_field_nearest_double", LIBS);
+  gidLink(cast(void**)&gst_structure_fixate_field_nearest_fraction, "gst_structure_fixate_field_nearest_fraction", LIBS);
+  gidLink(cast(void**)&gst_structure_fixate_field_nearest_int, "gst_structure_fixate_field_nearest_int", LIBS);
+  gidLink(cast(void**)&gst_structure_fixate_field_string, "gst_structure_fixate_field_string", LIBS);
+  gidLink(cast(void**)&gst_structure_foreach, "gst_structure_foreach", LIBS);
+  gidLink(cast(void**)&gst_structure_free, "gst_structure_free", LIBS);
+  gidLink(cast(void**)&gst_structure_get, "gst_structure_get", LIBS);
+  gidLink(cast(void**)&gst_structure_get_array, "gst_structure_get_array", LIBS);
+  gidLink(cast(void**)&gst_structure_get_boolean, "gst_structure_get_boolean", LIBS);
+  gidLink(cast(void**)&gst_structure_get_clock_time, "gst_structure_get_clock_time", LIBS);
+  gidLink(cast(void**)&gst_structure_get_date, "gst_structure_get_date", LIBS);
+  gidLink(cast(void**)&gst_structure_get_date_time, "gst_structure_get_date_time", LIBS);
+  gidLink(cast(void**)&gst_structure_get_double, "gst_structure_get_double", LIBS);
+  gidLink(cast(void**)&gst_structure_get_enum, "gst_structure_get_enum", LIBS);
+  gidLink(cast(void**)&gst_structure_get_field_type, "gst_structure_get_field_type", LIBS);
+  gidLink(cast(void**)&gst_structure_get_flags, "gst_structure_get_flags", LIBS);
+  gidLink(cast(void**)&gst_structure_get_flagset, "gst_structure_get_flagset", LIBS);
+  gidLink(cast(void**)&gst_structure_get_fraction, "gst_structure_get_fraction", LIBS);
+  gidLink(cast(void**)&gst_structure_get_int, "gst_structure_get_int", LIBS);
+  gidLink(cast(void**)&gst_structure_get_int64, "gst_structure_get_int64", LIBS);
+  gidLink(cast(void**)&gst_structure_get_list, "gst_structure_get_list", LIBS);
+  gidLink(cast(void**)&gst_structure_get_name, "gst_structure_get_name", LIBS);
+  gidLink(cast(void**)&gst_structure_get_name_id, "gst_structure_get_name_id", LIBS);
+  gidLink(cast(void**)&gst_structure_get_string, "gst_structure_get_string", LIBS);
+  gidLink(cast(void**)&gst_structure_get_uint, "gst_structure_get_uint", LIBS);
+  gidLink(cast(void**)&gst_structure_get_uint64, "gst_structure_get_uint64", LIBS);
+  gidLink(cast(void**)&gst_structure_get_valist, "gst_structure_get_valist", LIBS);
+  gidLink(cast(void**)&gst_structure_get_value, "gst_structure_get_value", LIBS);
+  gidLink(cast(void**)&gst_structure_has_field, "gst_structure_has_field", LIBS);
+  gidLink(cast(void**)&gst_structure_has_field_typed, "gst_structure_has_field_typed", LIBS);
+  gidLink(cast(void**)&gst_structure_has_name, "gst_structure_has_name", LIBS);
+  gidLink(cast(void**)&gst_structure_id_get, "gst_structure_id_get", LIBS);
+  gidLink(cast(void**)&gst_structure_id_get_valist, "gst_structure_id_get_valist", LIBS);
+  gidLink(cast(void**)&gst_structure_id_get_value, "gst_structure_id_get_value", LIBS);
+  gidLink(cast(void**)&gst_structure_id_has_field, "gst_structure_id_has_field", LIBS);
+  gidLink(cast(void**)&gst_structure_id_has_field_typed, "gst_structure_id_has_field_typed", LIBS);
+  gidLink(cast(void**)&gst_structure_id_set, "gst_structure_id_set", LIBS);
+  gidLink(cast(void**)&gst_structure_id_set_valist, "gst_structure_id_set_valist", LIBS);
+  gidLink(cast(void**)&gst_structure_id_set_value, "gst_structure_id_set_value", LIBS);
+  gidLink(cast(void**)&gst_structure_id_take_value, "gst_structure_id_take_value", LIBS);
+  gidLink(cast(void**)&gst_structure_intersect, "gst_structure_intersect", LIBS);
+  gidLink(cast(void**)&gst_structure_is_equal, "gst_structure_is_equal", LIBS);
+  gidLink(cast(void**)&gst_structure_is_subset, "gst_structure_is_subset", LIBS);
+  gidLink(cast(void**)&gst_structure_map_in_place, "gst_structure_map_in_place", LIBS);
+  gidLink(cast(void**)&gst_structure_n_fields, "gst_structure_n_fields", LIBS);
+  gidLink(cast(void**)&gst_structure_nth_field_name, "gst_structure_nth_field_name", LIBS);
+  gidLink(cast(void**)&gst_structure_remove_all_fields, "gst_structure_remove_all_fields", LIBS);
+  gidLink(cast(void**)&gst_structure_remove_field, "gst_structure_remove_field", LIBS);
+  gidLink(cast(void**)&gst_structure_remove_fields, "gst_structure_remove_fields", LIBS);
+  gidLink(cast(void**)&gst_structure_remove_fields_valist, "gst_structure_remove_fields_valist", LIBS);
+  gidLink(cast(void**)&gst_structure_serialize, "gst_structure_serialize", LIBS);
+  gidLink(cast(void**)&gst_structure_serialize_full, "gst_structure_serialize_full", LIBS);
+  gidLink(cast(void**)&gst_structure_set, "gst_structure_set", LIBS);
+  gidLink(cast(void**)&gst_structure_set_array, "gst_structure_set_array", LIBS);
+  gidLink(cast(void**)&gst_structure_set_list, "gst_structure_set_list", LIBS);
+  gidLink(cast(void**)&gst_structure_set_name, "gst_structure_set_name", LIBS);
+  gidLink(cast(void**)&gst_structure_set_parent_refcount, "gst_structure_set_parent_refcount", LIBS);
+  gidLink(cast(void**)&gst_structure_set_valist, "gst_structure_set_valist", LIBS);
+  gidLink(cast(void**)&gst_structure_set_value, "gst_structure_set_value", LIBS);
+  gidLink(cast(void**)&gst_structure_take_value, "gst_structure_take_value", LIBS);
+  gidLink(cast(void**)&gst_structure_to_string, "gst_structure_to_string", LIBS);
+  gidLink(cast(void**)&gst_structure_take, "gst_structure_take", LIBS);
+
+  // SystemClock
+  gidLink(cast(void**)&gst_system_clock_get_type, "gst_system_clock_get_type", LIBS);
+  gidLink(cast(void**)&gst_system_clock_obtain, "gst_system_clock_obtain", LIBS);
+  gidLink(cast(void**)&gst_system_clock_set_default, "gst_system_clock_set_default", LIBS);
+
+  // TagList
+  gidLink(cast(void**)&gst_tag_list_get_type, "gst_tag_list_get_type", LIBS);
+  gidLink(cast(void**)&gst_tag_list_new, "gst_tag_list_new", LIBS);
+  gidLink(cast(void**)&gst_tag_list_new_empty, "gst_tag_list_new_empty", LIBS);
+  gidLink(cast(void**)&gst_tag_list_new_from_string, "gst_tag_list_new_from_string", LIBS);
+  gidLink(cast(void**)&gst_tag_list_new_valist, "gst_tag_list_new_valist", LIBS);
+  gidLink(cast(void**)&gst_tag_list_add, "gst_tag_list_add", LIBS);
+  gidLink(cast(void**)&gst_tag_list_add_valist, "gst_tag_list_add_valist", LIBS);
+  gidLink(cast(void**)&gst_tag_list_add_valist_values, "gst_tag_list_add_valist_values", LIBS);
+  gidLink(cast(void**)&gst_tag_list_add_value, "gst_tag_list_add_value", LIBS);
+  gidLink(cast(void**)&gst_tag_list_add_values, "gst_tag_list_add_values", LIBS);
+  gidLink(cast(void**)&gst_tag_list_copy, "gst_tag_list_copy", LIBS);
+  gidLink(cast(void**)&gst_tag_list_foreach, "gst_tag_list_foreach", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_boolean, "gst_tag_list_get_boolean", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_boolean_index, "gst_tag_list_get_boolean_index", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_date, "gst_tag_list_get_date", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_date_index, "gst_tag_list_get_date_index", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_date_time, "gst_tag_list_get_date_time", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_date_time_index, "gst_tag_list_get_date_time_index", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_double, "gst_tag_list_get_double", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_double_index, "gst_tag_list_get_double_index", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_float, "gst_tag_list_get_float", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_float_index, "gst_tag_list_get_float_index", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_int, "gst_tag_list_get_int", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_int64, "gst_tag_list_get_int64", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_int64_index, "gst_tag_list_get_int64_index", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_int_index, "gst_tag_list_get_int_index", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_pointer, "gst_tag_list_get_pointer", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_pointer_index, "gst_tag_list_get_pointer_index", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_sample, "gst_tag_list_get_sample", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_sample_index, "gst_tag_list_get_sample_index", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_scope, "gst_tag_list_get_scope", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_string, "gst_tag_list_get_string", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_string_index, "gst_tag_list_get_string_index", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_tag_size, "gst_tag_list_get_tag_size", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_uint, "gst_tag_list_get_uint", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_uint64, "gst_tag_list_get_uint64", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_uint64_index, "gst_tag_list_get_uint64_index", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_uint_index, "gst_tag_list_get_uint_index", LIBS);
+  gidLink(cast(void**)&gst_tag_list_get_value_index, "gst_tag_list_get_value_index", LIBS);
+  gidLink(cast(void**)&gst_tag_list_insert, "gst_tag_list_insert", LIBS);
+  gidLink(cast(void**)&gst_tag_list_is_empty, "gst_tag_list_is_empty", LIBS);
+  gidLink(cast(void**)&gst_tag_list_is_equal, "gst_tag_list_is_equal", LIBS);
+  gidLink(cast(void**)&gst_tag_list_merge, "gst_tag_list_merge", LIBS);
+  gidLink(cast(void**)&gst_tag_list_n_tags, "gst_tag_list_n_tags", LIBS);
+  gidLink(cast(void**)&gst_tag_list_nth_tag_name, "gst_tag_list_nth_tag_name", LIBS);
+  gidLink(cast(void**)&gst_tag_list_peek_string_index, "gst_tag_list_peek_string_index", LIBS);
+  gidLink(cast(void**)&gst_tag_list_remove_tag, "gst_tag_list_remove_tag", LIBS);
+  gidLink(cast(void**)&gst_tag_list_set_scope, "gst_tag_list_set_scope", LIBS);
+  gidLink(cast(void**)&gst_tag_list_to_string, "gst_tag_list_to_string", LIBS);
+  gidLink(cast(void**)&gst_tag_list_copy_value, "gst_tag_list_copy_value", LIBS);
+
+  // TagSetter
+  gidLink(cast(void**)&gst_tag_setter_get_type, "gst_tag_setter_get_type", LIBS);
+  gidLink(cast(void**)&gst_tag_setter_add_tag_valist, "gst_tag_setter_add_tag_valist", LIBS);
+  gidLink(cast(void**)&gst_tag_setter_add_tag_valist_values, "gst_tag_setter_add_tag_valist_values", LIBS);
+  gidLink(cast(void**)&gst_tag_setter_add_tag_value, "gst_tag_setter_add_tag_value", LIBS);
+  gidLink(cast(void**)&gst_tag_setter_add_tag_values, "gst_tag_setter_add_tag_values", LIBS);
+  gidLink(cast(void**)&gst_tag_setter_add_tags, "gst_tag_setter_add_tags", LIBS);
+  gidLink(cast(void**)&gst_tag_setter_get_tag_list, "gst_tag_setter_get_tag_list", LIBS);
+  gidLink(cast(void**)&gst_tag_setter_get_tag_merge_mode, "gst_tag_setter_get_tag_merge_mode", LIBS);
+  gidLink(cast(void**)&gst_tag_setter_merge_tags, "gst_tag_setter_merge_tags", LIBS);
+  gidLink(cast(void**)&gst_tag_setter_reset_tags, "gst_tag_setter_reset_tags", LIBS);
+  gidLink(cast(void**)&gst_tag_setter_set_tag_merge_mode, "gst_tag_setter_set_tag_merge_mode", LIBS);
+
+  // Task
+  gidLink(cast(void**)&gst_task_get_type, "gst_task_get_type", LIBS);
+  gidLink(cast(void**)&gst_task_new, "gst_task_new", LIBS);
+  gidLink(cast(void**)&gst_task_cleanup_all, "gst_task_cleanup_all", LIBS);
+  gidLink(cast(void**)&gst_task_get_pool, "gst_task_get_pool", LIBS);
+  gidLink(cast(void**)&gst_task_get_state, "gst_task_get_state", LIBS);
+  gidLink(cast(void**)&gst_task_join, "gst_task_join", LIBS);
+  gidLink(cast(void**)&gst_task_pause, "gst_task_pause", LIBS);
+  gidLink(cast(void**)&gst_task_resume, "gst_task_resume", LIBS);
+  gidLink(cast(void**)&gst_task_set_enter_callback, "gst_task_set_enter_callback", LIBS);
+  gidLink(cast(void**)&gst_task_set_leave_callback, "gst_task_set_leave_callback", LIBS);
+  gidLink(cast(void**)&gst_task_set_lock, "gst_task_set_lock", LIBS);
+  gidLink(cast(void**)&gst_task_set_pool, "gst_task_set_pool", LIBS);
+  gidLink(cast(void**)&gst_task_set_state, "gst_task_set_state", LIBS);
+  gidLink(cast(void**)&gst_task_start, "gst_task_start", LIBS);
+  gidLink(cast(void**)&gst_task_stop, "gst_task_stop", LIBS);
+
+  // TaskPool
+  gidLink(cast(void**)&gst_task_pool_get_type, "gst_task_pool_get_type", LIBS);
+  gidLink(cast(void**)&gst_task_pool_new, "gst_task_pool_new", LIBS);
+  gidLink(cast(void**)&gst_task_pool_cleanup, "gst_task_pool_cleanup", LIBS);
+  gidLink(cast(void**)&gst_task_pool_dispose_handle, "gst_task_pool_dispose_handle", LIBS);
+  gidLink(cast(void**)&gst_task_pool_join, "gst_task_pool_join", LIBS);
+  gidLink(cast(void**)&gst_task_pool_prepare, "gst_task_pool_prepare", LIBS);
+  gidLink(cast(void**)&gst_task_pool_push, "gst_task_pool_push", LIBS);
+
+  // Toc
+  gidLink(cast(void**)&gst_toc_get_type, "gst_toc_get_type", LIBS);
+  gidLink(cast(void**)&gst_toc_new, "gst_toc_new", LIBS);
+  gidLink(cast(void**)&gst_toc_append_entry, "gst_toc_append_entry", LIBS);
+  gidLink(cast(void**)&gst_toc_dump, "gst_toc_dump", LIBS);
+  gidLink(cast(void**)&gst_toc_find_entry, "gst_toc_find_entry", LIBS);
+  gidLink(cast(void**)&gst_toc_get_entries, "gst_toc_get_entries", LIBS);
+  gidLink(cast(void**)&gst_toc_get_scope, "gst_toc_get_scope", LIBS);
+  gidLink(cast(void**)&gst_toc_get_tags, "gst_toc_get_tags", LIBS);
+  gidLink(cast(void**)&gst_toc_merge_tags, "gst_toc_merge_tags", LIBS);
+  gidLink(cast(void**)&gst_toc_set_tags, "gst_toc_set_tags", LIBS);
+
+  // TocEntry
+  gidLink(cast(void**)&gst_toc_entry_get_type, "gst_toc_entry_get_type", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_new, "gst_toc_entry_new", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_append_sub_entry, "gst_toc_entry_append_sub_entry", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_get_entry_type, "gst_toc_entry_get_entry_type", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_get_loop, "gst_toc_entry_get_loop", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_get_parent, "gst_toc_entry_get_parent", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_get_start_stop_times, "gst_toc_entry_get_start_stop_times", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_get_sub_entries, "gst_toc_entry_get_sub_entries", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_get_tags, "gst_toc_entry_get_tags", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_get_toc, "gst_toc_entry_get_toc", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_get_uid, "gst_toc_entry_get_uid", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_is_alternative, "gst_toc_entry_is_alternative", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_is_sequence, "gst_toc_entry_is_sequence", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_merge_tags, "gst_toc_entry_merge_tags", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_set_loop, "gst_toc_entry_set_loop", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_set_start_stop_times, "gst_toc_entry_set_start_stop_times", LIBS);
+  gidLink(cast(void**)&gst_toc_entry_set_tags, "gst_toc_entry_set_tags", LIBS);
+
+  // TocSetter
+  gidLink(cast(void**)&gst_toc_setter_get_type, "gst_toc_setter_get_type", LIBS);
+  gidLink(cast(void**)&gst_toc_setter_get_toc, "gst_toc_setter_get_toc", LIBS);
+  gidLink(cast(void**)&gst_toc_setter_reset, "gst_toc_setter_reset", LIBS);
+  gidLink(cast(void**)&gst_toc_setter_set_toc, "gst_toc_setter_set_toc", LIBS);
+
+  // Tracer
+  gidLink(cast(void**)&gst_tracer_get_type, "gst_tracer_get_type", LIBS);
+  gidLink(cast(void**)&gst_tracer_register, "gst_tracer_register", LIBS);
+
+  // TracerFactory
+  gidLink(cast(void**)&gst_tracer_factory_get_type, "gst_tracer_factory_get_type", LIBS);
+  gidLink(cast(void**)&gst_tracer_factory_get_list, "gst_tracer_factory_get_list", LIBS);
+  gidLink(cast(void**)&gst_tracer_factory_get_tracer_type, "gst_tracer_factory_get_tracer_type", LIBS);
+
+  // TracerRecord
+  gidLink(cast(void**)&gst_tracer_record_get_type, "gst_tracer_record_get_type", LIBS);
+  gidLink(cast(void**)&gst_tracer_record_new, "gst_tracer_record_new", LIBS);
+  gidLink(cast(void**)&gst_tracer_record_log, "gst_tracer_record_log", LIBS);
+
+  // TypeFind
+  gidLink(cast(void**)&gst_type_find_get_length, "gst_type_find_get_length", LIBS);
+  gidLink(cast(void**)&gst_type_find_peek, "gst_type_find_peek", LIBS);
+  gidLink(cast(void**)&gst_type_find_suggest, "gst_type_find_suggest", LIBS);
+  gidLink(cast(void**)&gst_type_find_suggest_empty_simple, "gst_type_find_suggest_empty_simple", LIBS);
+  gidLink(cast(void**)&gst_type_find_suggest_simple, "gst_type_find_suggest_simple", LIBS);
+  gidLink(cast(void**)&gst_type_find_register, "gst_type_find_register", LIBS);
+
+  // TypeFindFactory
+  gidLink(cast(void**)&gst_type_find_factory_get_type, "gst_type_find_factory_get_type", LIBS);
+  gidLink(cast(void**)&gst_type_find_factory_get_list, "gst_type_find_factory_get_list", LIBS);
+  gidLink(cast(void**)&gst_type_find_factory_call_function, "gst_type_find_factory_call_function", LIBS);
+  gidLink(cast(void**)&gst_type_find_factory_get_caps, "gst_type_find_factory_get_caps", LIBS);
+  gidLink(cast(void**)&gst_type_find_factory_get_extensions, "gst_type_find_factory_get_extensions", LIBS);
+  gidLink(cast(void**)&gst_type_find_factory_has_function, "gst_type_find_factory_has_function", LIBS);
+
+  // URIHandler
+  gidLink(cast(void**)&gst_uri_handler_get_type, "gst_uri_handler_get_type", LIBS);
+  gidLink(cast(void**)&gst_uri_handler_get_protocols, "gst_uri_handler_get_protocols", LIBS);
+  gidLink(cast(void**)&gst_uri_handler_get_uri, "gst_uri_handler_get_uri", LIBS);
+  gidLink(cast(void**)&gst_uri_handler_get_uri_type, "gst_uri_handler_get_uri_type", LIBS);
+  gidLink(cast(void**)&gst_uri_handler_set_uri, "gst_uri_handler_set_uri", LIBS);
+
+  // Uri
+  gidLink(cast(void**)&gst_uri_get_type, "gst_uri_get_type", LIBS);
+  gidLink(cast(void**)&gst_uri_new, "gst_uri_new", LIBS);
+  gidLink(cast(void**)&gst_uri_append_path, "gst_uri_append_path", LIBS);
+  gidLink(cast(void**)&gst_uri_append_path_segment, "gst_uri_append_path_segment", LIBS);
+  gidLink(cast(void**)&gst_uri_equal, "gst_uri_equal", LIBS);
+  gidLink(cast(void**)&gst_uri_from_string_with_base, "gst_uri_from_string_with_base", LIBS);
+  gidLink(cast(void**)&gst_uri_get_fragment, "gst_uri_get_fragment", LIBS);
+  gidLink(cast(void**)&gst_uri_get_host, "gst_uri_get_host", LIBS);
+  gidLink(cast(void**)&gst_uri_get_media_fragment_table, "gst_uri_get_media_fragment_table", LIBS);
+  gidLink(cast(void**)&gst_uri_get_path, "gst_uri_get_path", LIBS);
+  gidLink(cast(void**)&gst_uri_get_path_segments, "gst_uri_get_path_segments", LIBS);
+  gidLink(cast(void**)&gst_uri_get_path_string, "gst_uri_get_path_string", LIBS);
+  gidLink(cast(void**)&gst_uri_get_port, "gst_uri_get_port", LIBS);
+  gidLink(cast(void**)&gst_uri_get_query_keys, "gst_uri_get_query_keys", LIBS);
+  gidLink(cast(void**)&gst_uri_get_query_string, "gst_uri_get_query_string", LIBS);
+  gidLink(cast(void**)&gst_uri_get_query_string_ordered, "gst_uri_get_query_string_ordered", LIBS);
+  gidLink(cast(void**)&gst_uri_get_query_table, "gst_uri_get_query_table", LIBS);
+  gidLink(cast(void**)&gst_uri_get_query_value, "gst_uri_get_query_value", LIBS);
+  gidLink(cast(void**)&gst_uri_get_scheme, "gst_uri_get_scheme", LIBS);
+  gidLink(cast(void**)&gst_uri_get_userinfo, "gst_uri_get_userinfo", LIBS);
+  gidLink(cast(void**)&gst_uri_is_normalized, "gst_uri_is_normalized", LIBS);
+  gidLink(cast(void**)&gst_uri_is_writable, "gst_uri_is_writable", LIBS);
+  gidLink(cast(void**)&gst_uri_join, "gst_uri_join", LIBS);
+  gidLink(cast(void**)&gst_uri_make_writable, "gst_uri_make_writable", LIBS);
+  gidLink(cast(void**)&gst_uri_new_with_base, "gst_uri_new_with_base", LIBS);
+  gidLink(cast(void**)&gst_uri_normalize, "gst_uri_normalize", LIBS);
+  gidLink(cast(void**)&gst_uri_query_has_key, "gst_uri_query_has_key", LIBS);
+  gidLink(cast(void**)&gst_uri_remove_query_key, "gst_uri_remove_query_key", LIBS);
+  gidLink(cast(void**)&gst_uri_set_fragment, "gst_uri_set_fragment", LIBS);
+  gidLink(cast(void**)&gst_uri_set_host, "gst_uri_set_host", LIBS);
+  gidLink(cast(void**)&gst_uri_set_path, "gst_uri_set_path", LIBS);
+  gidLink(cast(void**)&gst_uri_set_path_segments, "gst_uri_set_path_segments", LIBS);
+  gidLink(cast(void**)&gst_uri_set_path_string, "gst_uri_set_path_string", LIBS);
+  gidLink(cast(void**)&gst_uri_set_port, "gst_uri_set_port", LIBS);
+  gidLink(cast(void**)&gst_uri_set_query_string, "gst_uri_set_query_string", LIBS);
+  gidLink(cast(void**)&gst_uri_set_query_table, "gst_uri_set_query_table", LIBS);
+  gidLink(cast(void**)&gst_uri_set_query_value, "gst_uri_set_query_value", LIBS);
+  gidLink(cast(void**)&gst_uri_set_scheme, "gst_uri_set_scheme", LIBS);
+  gidLink(cast(void**)&gst_uri_set_userinfo, "gst_uri_set_userinfo", LIBS);
+  gidLink(cast(void**)&gst_uri_to_string, "gst_uri_to_string", LIBS);
+  gidLink(cast(void**)&gst_uri_to_string_with_keys, "gst_uri_to_string_with_keys", LIBS);
+  gidLink(cast(void**)&gst_uri_construct, "gst_uri_construct", LIBS);
+  gidLink(cast(void**)&gst_uri_from_string, "gst_uri_from_string", LIBS);
+  gidLink(cast(void**)&gst_uri_from_string_escaped, "gst_uri_from_string_escaped", LIBS);
+  gidLink(cast(void**)&gst_uri_get_location, "gst_uri_get_location", LIBS);
+  gidLink(cast(void**)&gst_uri_get_protocol, "gst_uri_get_protocol", LIBS);
+  gidLink(cast(void**)&gst_uri_has_protocol, "gst_uri_has_protocol", LIBS);
+  gidLink(cast(void**)&gst_uri_is_valid, "gst_uri_is_valid", LIBS);
+  gidLink(cast(void**)&gst_uri_join_strings, "gst_uri_join_strings", LIBS);
+  gidLink(cast(void**)&gst_uri_protocol_is_supported, "gst_uri_protocol_is_supported", LIBS);
+  gidLink(cast(void**)&gst_uri_protocol_is_valid, "gst_uri_protocol_is_valid", LIBS);
+
+  // ValueArray
+  gidLink(cast(void**)&gst_value_array_get_type, "gst_value_array_get_type", LIBS);
+  gidLink(cast(void**)&gst_value_array_append_and_take_value, "gst_value_array_append_and_take_value", LIBS);
+  gidLink(cast(void**)&gst_value_array_append_value, "gst_value_array_append_value", LIBS);
+  gidLink(cast(void**)&gst_value_array_get_size, "gst_value_array_get_size", LIBS);
+  gidLink(cast(void**)&gst_value_array_get_value, "gst_value_array_get_value", LIBS);
+  gidLink(cast(void**)&gst_value_array_init, "gst_value_array_init", LIBS);
+  gidLink(cast(void**)&gst_value_array_prepend_value, "gst_value_array_prepend_value", LIBS);
+
+  // ValueList
+  gidLink(cast(void**)&gst_value_list_get_type, "gst_value_list_get_type", LIBS);
+  gidLink(cast(void**)&gst_value_list_append_and_take_value, "gst_value_list_append_and_take_value", LIBS);
+  gidLink(cast(void**)&gst_value_list_append_value, "gst_value_list_append_value", LIBS);
+  gidLink(cast(void**)&gst_value_list_concat, "gst_value_list_concat", LIBS);
+  gidLink(cast(void**)&gst_value_list_get_size, "gst_value_list_get_size", LIBS);
+  gidLink(cast(void**)&gst_value_list_get_value, "gst_value_list_get_value", LIBS);
+  gidLink(cast(void**)&gst_value_list_init, "gst_value_list_init", LIBS);
+  gidLink(cast(void**)&gst_value_list_merge, "gst_value_list_merge", LIBS);
+  gidLink(cast(void**)&gst_value_list_prepend_value, "gst_value_list_prepend_value", LIBS);
+
+  // global
+  gidLink(cast(void**)&gst_calculate_linear_regression, "gst_calculate_linear_regression", LIBS);
+  gidLink(cast(void**)&gst_clear_mini_object, "gst_clear_mini_object", LIBS);
+  gidLink(cast(void**)&gst_clear_object, "gst_clear_object", LIBS);
+  gidLink(cast(void**)&gst_clear_structure, "gst_clear_structure", LIBS);
+  gidLink(cast(void**)&gst_debug_add_log_function, "gst_debug_add_log_function", LIBS);
+  gidLink(cast(void**)&gst_debug_add_ring_buffer_logger, "gst_debug_add_ring_buffer_logger", LIBS);
+  gidLink(cast(void**)&gst_debug_bin_to_dot_data, "gst_debug_bin_to_dot_data", LIBS);
+  gidLink(cast(void**)&gst_debug_bin_to_dot_file, "gst_debug_bin_to_dot_file", LIBS);
+  gidLink(cast(void**)&gst_debug_bin_to_dot_file_with_ts, "gst_debug_bin_to_dot_file_with_ts", LIBS);
+  gidLink(cast(void**)&gst_debug_construct_term_color, "gst_debug_construct_term_color", LIBS);
+  gidLink(cast(void**)&gst_debug_construct_win_color, "gst_debug_construct_win_color", LIBS);
+  gidLink(cast(void**)&gst_debug_get_all_categories, "gst_debug_get_all_categories", LIBS);
+  gidLink(cast(void**)&gst_debug_get_color_mode, "gst_debug_get_color_mode", LIBS);
+  gidLink(cast(void**)&gst_debug_get_default_threshold, "gst_debug_get_default_threshold", LIBS);
+  gidLink(cast(void**)&gst_debug_get_stack_trace, "gst_debug_get_stack_trace", LIBS);
+  gidLink(cast(void**)&gst_debug_is_active, "gst_debug_is_active", LIBS);
+  gidLink(cast(void**)&gst_debug_is_colored, "gst_debug_is_colored", LIBS);
+  gidLink(cast(void**)&gst_debug_log, "gst_debug_log", LIBS);
+  gidLink(cast(void**)&gst_debug_log_default, "gst_debug_log_default", LIBS);
+  gidLink(cast(void**)&gst_debug_log_get_line, "gst_debug_log_get_line", LIBS);
+  gidLink(cast(void**)&gst_debug_log_id, "gst_debug_log_id", LIBS);
+  gidLink(cast(void**)&gst_debug_log_id_literal, "gst_debug_log_id_literal", LIBS);
+  gidLink(cast(void**)&gst_debug_log_id_valist, "gst_debug_log_id_valist", LIBS);
+  gidLink(cast(void**)&gst_debug_log_literal, "gst_debug_log_literal", LIBS);
+  gidLink(cast(void**)&gst_debug_log_valist, "gst_debug_log_valist", LIBS);
+  gidLink(cast(void**)&gst_debug_print_stack_trace, "gst_debug_print_stack_trace", LIBS);
+  gidLink(cast(void**)&gst_debug_remove_log_function, "gst_debug_remove_log_function", LIBS);
+  gidLink(cast(void**)&gst_debug_remove_log_function_by_data, "gst_debug_remove_log_function_by_data", LIBS);
+  gidLink(cast(void**)&gst_debug_remove_ring_buffer_logger, "gst_debug_remove_ring_buffer_logger", LIBS);
+  gidLink(cast(void**)&gst_debug_ring_buffer_logger_get_logs, "gst_debug_ring_buffer_logger_get_logs", LIBS);
+  gidLink(cast(void**)&gst_debug_set_active, "gst_debug_set_active", LIBS);
+  gidLink(cast(void**)&gst_debug_set_color_mode, "gst_debug_set_color_mode", LIBS);
+  gidLink(cast(void**)&gst_debug_set_color_mode_from_string, "gst_debug_set_color_mode_from_string", LIBS);
+  gidLink(cast(void**)&gst_debug_set_colored, "gst_debug_set_colored", LIBS);
+  gidLink(cast(void**)&gst_debug_set_default_threshold, "gst_debug_set_default_threshold", LIBS);
+  gidLink(cast(void**)&gst_debug_set_threshold_for_name, "gst_debug_set_threshold_for_name", LIBS);
+  gidLink(cast(void**)&gst_debug_set_threshold_from_string, "gst_debug_set_threshold_from_string", LIBS);
+  gidLink(cast(void**)&gst_debug_unset_threshold_for_name, "gst_debug_unset_threshold_for_name", LIBS);
+  gidLink(cast(void**)&gst_deinit, "gst_deinit", LIBS);
+  gidLink(cast(void**)&gst_dynamic_type_register, "gst_dynamic_type_register", LIBS);
+  gidLink(cast(void**)&gst_error_get_message, "gst_error_get_message", LIBS);
+  gidLink(cast(void**)&gst_filename_to_uri, "gst_filename_to_uri", LIBS);
+  gidLink(cast(void**)&gst_flow_get_name, "gst_flow_get_name", LIBS);
+  gidLink(cast(void**)&gst_flow_to_quark, "gst_flow_to_quark", LIBS);
+  gidLink(cast(void**)&gst_formats_contains, "gst_formats_contains", LIBS);
+  gidLink(cast(void**)&gst_get_main_executable_path, "gst_get_main_executable_path", LIBS);
+  gidLink(cast(void**)&gst_info_strdup_printf, "gst_info_strdup_printf", LIBS);
+  gidLink(cast(void**)&gst_info_strdup_vprintf, "gst_info_strdup_vprintf", LIBS);
+  gidLink(cast(void**)&gst_info_vasprintf, "gst_info_vasprintf", LIBS);
+  gidLink(cast(void**)&gst_init, "gst_init", LIBS);
+  gidLink(cast(void**)&gst_init_check, "gst_init_check", LIBS);
+  gidLink(cast(void**)&gst_init_get_option_group, "gst_init_get_option_group", LIBS);
+  gidLink(cast(void**)&gst_is_caps_features, "gst_is_caps_features", LIBS);
+  gidLink(cast(void**)&gst_is_initialized, "gst_is_initialized", LIBS);
+  gidLink(cast(void**)&gst_make_element_message_details, "gst_make_element_message_details", LIBS);
+  gidLink(cast(void**)&gst_param_spec_array, "gst_param_spec_array", LIBS);
+  gidLink(cast(void**)&gst_param_spec_fraction, "gst_param_spec_fraction", LIBS);
+  gidLink(cast(void**)&gst_parent_buffer_meta_api_get_type, "gst_parent_buffer_meta_api_get_type", LIBS);
+  gidLink(cast(void**)&gst_parse_bin_from_description, "gst_parse_bin_from_description", LIBS);
+  gidLink(cast(void**)&gst_parse_bin_from_description_full, "gst_parse_bin_from_description_full", LIBS);
+  gidLink(cast(void**)&gst_parse_launch, "gst_parse_launch", LIBS);
+  gidLink(cast(void**)&gst_parse_launch_full, "gst_parse_launch_full", LIBS);
+  gidLink(cast(void**)&gst_parse_launchv, "gst_parse_launchv", LIBS);
+  gidLink(cast(void**)&gst_parse_launchv_full, "gst_parse_launchv_full", LIBS);
+  gidLink(cast(void**)&gst_print, "gst_print", LIBS);
+  gidLink(cast(void**)&gst_printerr, "gst_printerr", LIBS);
+  gidLink(cast(void**)&gst_printerrln, "gst_printerrln", LIBS);
+  gidLink(cast(void**)&gst_println, "gst_println", LIBS);
+  gidLink(cast(void**)&gst_protection_filter_systems_by_available_decryptors, "gst_protection_filter_systems_by_available_decryptors", LIBS);
+  gidLink(cast(void**)&gst_protection_meta_api_get_type, "gst_protection_meta_api_get_type", LIBS);
+  gidLink(cast(void**)&gst_protection_select_system, "gst_protection_select_system", LIBS);
+  gidLink(cast(void**)&gst_reference_timestamp_meta_api_get_type, "gst_reference_timestamp_meta_api_get_type", LIBS);
+  gidLink(cast(void**)&gst_segtrap_is_enabled, "gst_segtrap_is_enabled", LIBS);
+  gidLink(cast(void**)&gst_segtrap_set_enabled, "gst_segtrap_set_enabled", LIBS);
+  gidLink(cast(void**)&gst_static_caps_get_type, "gst_static_caps_get_type", LIBS);
+  gidLink(cast(void**)&gst_static_pad_template_get_type, "gst_static_pad_template_get_type", LIBS);
+  gidLink(cast(void**)&gst_tag_exists, "gst_tag_exists", LIBS);
+  gidLink(cast(void**)&gst_tag_get_description, "gst_tag_get_description", LIBS);
+  gidLink(cast(void**)&gst_tag_get_flag, "gst_tag_get_flag", LIBS);
+  gidLink(cast(void**)&gst_tag_get_nick, "gst_tag_get_nick", LIBS);
+  gidLink(cast(void**)&gst_tag_get_type, "gst_tag_get_type", LIBS);
+  gidLink(cast(void**)&gst_tag_is_fixed, "gst_tag_is_fixed", LIBS);
+  gidLink(cast(void**)&gst_tag_merge_strings_with_comma, "gst_tag_merge_strings_with_comma", LIBS);
+  gidLink(cast(void**)&gst_tag_merge_use_first, "gst_tag_merge_use_first", LIBS);
+  gidLink(cast(void**)&gst_tag_register, "gst_tag_register", LIBS);
+  gidLink(cast(void**)&gst_tag_register_static, "gst_tag_register_static", LIBS);
+  gidLink(cast(void**)&gst_tracing_get_active_tracers, "gst_tracing_get_active_tracers", LIBS);
+  gidLink(cast(void**)&gst_tracing_register_hook, "gst_tracing_register_hook", LIBS);
+  gidLink(cast(void**)&gst_type_find_get_type, "gst_type_find_get_type", LIBS);
+  gidLink(cast(void**)&gst_type_is_plugin_api, "gst_type_is_plugin_api", LIBS);
+  gidLink(cast(void**)&gst_type_mark_as_plugin_api, "gst_type_mark_as_plugin_api", LIBS);
+  gidLink(cast(void**)&gst_update_registry, "gst_update_registry", LIBS);
+  gidLink(cast(void**)&gst_util_array_binary_search, "gst_util_array_binary_search", LIBS);
+  gidLink(cast(void**)&gst_util_ceil_log2, "gst_util_ceil_log2", LIBS);
+  gidLink(cast(void**)&gst_util_double_to_fraction, "gst_util_double_to_fraction", LIBS);
+  gidLink(cast(void**)&gst_util_dump_buffer, "gst_util_dump_buffer", LIBS);
+  gidLink(cast(void**)&gst_util_dump_mem, "gst_util_dump_mem", LIBS);
+  gidLink(cast(void**)&gst_util_filename_compare, "gst_util_filename_compare", LIBS);
+  gidLink(cast(void**)&gst_util_fraction_add, "gst_util_fraction_add", LIBS);
+  gidLink(cast(void**)&gst_util_fraction_compare, "gst_util_fraction_compare", LIBS);
+  gidLink(cast(void**)&gst_util_fraction_multiply, "gst_util_fraction_multiply", LIBS);
+  gidLink(cast(void**)&gst_util_fraction_to_double, "gst_util_fraction_to_double", LIBS);
+  gidLink(cast(void**)&gst_util_gdouble_to_guint64, "gst_util_gdouble_to_guint64", LIBS);
+  gidLink(cast(void**)&gst_util_get_object_array, "gst_util_get_object_array", LIBS);
+  gidLink(cast(void**)&gst_util_get_timestamp, "gst_util_get_timestamp", LIBS);
+  gidLink(cast(void**)&gst_util_greatest_common_divisor, "gst_util_greatest_common_divisor", LIBS);
+  gidLink(cast(void**)&gst_util_greatest_common_divisor_int64, "gst_util_greatest_common_divisor_int64", LIBS);
+  gidLink(cast(void**)&gst_util_group_id_next, "gst_util_group_id_next", LIBS);
+  gidLink(cast(void**)&gst_util_guint64_to_gdouble, "gst_util_guint64_to_gdouble", LIBS);
+  gidLink(cast(void**)&gst_util_seqnum_compare, "gst_util_seqnum_compare", LIBS);
+  gidLink(cast(void**)&gst_util_seqnum_next, "gst_util_seqnum_next", LIBS);
+  gidLink(cast(void**)&gst_util_set_object_arg, "gst_util_set_object_arg", LIBS);
+  gidLink(cast(void**)&gst_util_set_object_array, "gst_util_set_object_array", LIBS);
+  gidLink(cast(void**)&gst_util_set_value_from_string, "gst_util_set_value_from_string", LIBS);
+  gidLink(cast(void**)&gst_util_simplify_fraction, "gst_util_simplify_fraction", LIBS);
+  gidLink(cast(void**)&gst_util_uint64_scale, "gst_util_uint64_scale", LIBS);
+  gidLink(cast(void**)&gst_util_uint64_scale_ceil, "gst_util_uint64_scale_ceil", LIBS);
+  gidLink(cast(void**)&gst_util_uint64_scale_int, "gst_util_uint64_scale_int", LIBS);
+  gidLink(cast(void**)&gst_util_uint64_scale_int_ceil, "gst_util_uint64_scale_int_ceil", LIBS);
+  gidLink(cast(void**)&gst_util_uint64_scale_int_round, "gst_util_uint64_scale_int_round", LIBS);
+  gidLink(cast(void**)&gst_util_uint64_scale_round, "gst_util_uint64_scale_round", LIBS);
+  gidLink(cast(void**)&gst_value_can_compare, "gst_value_can_compare", LIBS);
+  gidLink(cast(void**)&gst_value_can_intersect, "gst_value_can_intersect", LIBS);
+  gidLink(cast(void**)&gst_value_can_subtract, "gst_value_can_subtract", LIBS);
+  gidLink(cast(void**)&gst_value_can_union, "gst_value_can_union", LIBS);
+  gidLink(cast(void**)&gst_value_compare, "gst_value_compare", LIBS);
+  gidLink(cast(void**)&gst_value_deserialize, "gst_value_deserialize", LIBS);
+  gidLink(cast(void**)&gst_value_deserialize_with_pspec, "gst_value_deserialize_with_pspec", LIBS);
+  gidLink(cast(void**)&gst_value_fixate, "gst_value_fixate", LIBS);
+  gidLink(cast(void**)&gst_value_fraction_multiply, "gst_value_fraction_multiply", LIBS);
+  gidLink(cast(void**)&gst_value_fraction_subtract, "gst_value_fraction_subtract", LIBS);
+  gidLink(cast(void**)&gst_value_get_bitmask, "gst_value_get_bitmask", LIBS);
+  gidLink(cast(void**)&gst_value_get_caps, "gst_value_get_caps", LIBS);
+  gidLink(cast(void**)&gst_value_get_caps_features, "gst_value_get_caps_features", LIBS);
+  gidLink(cast(void**)&gst_value_get_double_range_max, "gst_value_get_double_range_max", LIBS);
+  gidLink(cast(void**)&gst_value_get_double_range_min, "gst_value_get_double_range_min", LIBS);
+  gidLink(cast(void**)&gst_value_get_flagset_flags, "gst_value_get_flagset_flags", LIBS);
+  gidLink(cast(void**)&gst_value_get_flagset_mask, "gst_value_get_flagset_mask", LIBS);
+  gidLink(cast(void**)&gst_value_get_fraction_denominator, "gst_value_get_fraction_denominator", LIBS);
+  gidLink(cast(void**)&gst_value_get_fraction_numerator, "gst_value_get_fraction_numerator", LIBS);
+  gidLink(cast(void**)&gst_value_get_fraction_range_max, "gst_value_get_fraction_range_max", LIBS);
+  gidLink(cast(void**)&gst_value_get_fraction_range_min, "gst_value_get_fraction_range_min", LIBS);
+  gidLink(cast(void**)&gst_value_get_int64_range_max, "gst_value_get_int64_range_max", LIBS);
+  gidLink(cast(void**)&gst_value_get_int64_range_min, "gst_value_get_int64_range_min", LIBS);
+  gidLink(cast(void**)&gst_value_get_int64_range_step, "gst_value_get_int64_range_step", LIBS);
+  gidLink(cast(void**)&gst_value_get_int_range_max, "gst_value_get_int_range_max", LIBS);
+  gidLink(cast(void**)&gst_value_get_int_range_min, "gst_value_get_int_range_min", LIBS);
+  gidLink(cast(void**)&gst_value_get_int_range_step, "gst_value_get_int_range_step", LIBS);
+  gidLink(cast(void**)&gst_value_get_structure, "gst_value_get_structure", LIBS);
+  gidLink(cast(void**)&gst_value_init_and_copy, "gst_value_init_and_copy", LIBS);
+  gidLink(cast(void**)&gst_value_intersect, "gst_value_intersect", LIBS);
+  gidLink(cast(void**)&gst_value_is_fixed, "gst_value_is_fixed", LIBS);
+  gidLink(cast(void**)&gst_value_is_subset, "gst_value_is_subset", LIBS);
+  gidLink(cast(void**)&gst_value_register, "gst_value_register", LIBS);
+  gidLink(cast(void**)&gst_value_serialize, "gst_value_serialize", LIBS);
+  gidLink(cast(void**)&gst_value_set_bitmask, "gst_value_set_bitmask", LIBS);
+  gidLink(cast(void**)&gst_value_set_caps, "gst_value_set_caps", LIBS);
+  gidLink(cast(void**)&gst_value_set_caps_features, "gst_value_set_caps_features", LIBS);
+  gidLink(cast(void**)&gst_value_set_double_range, "gst_value_set_double_range", LIBS);
+  gidLink(cast(void**)&gst_value_set_flagset, "gst_value_set_flagset", LIBS);
+  gidLink(cast(void**)&gst_value_set_fraction, "gst_value_set_fraction", LIBS);
+  gidLink(cast(void**)&gst_value_set_fraction_range, "gst_value_set_fraction_range", LIBS);
+  gidLink(cast(void**)&gst_value_set_fraction_range_full, "gst_value_set_fraction_range_full", LIBS);
+  gidLink(cast(void**)&gst_value_set_int64_range, "gst_value_set_int64_range", LIBS);
+  gidLink(cast(void**)&gst_value_set_int64_range_step, "gst_value_set_int64_range_step", LIBS);
+  gidLink(cast(void**)&gst_value_set_int_range, "gst_value_set_int_range", LIBS);
+  gidLink(cast(void**)&gst_value_set_int_range_step, "gst_value_set_int_range_step", LIBS);
+  gidLink(cast(void**)&gst_value_set_structure, "gst_value_set_structure", LIBS);
+  gidLink(cast(void**)&gst_value_subtract, "gst_value_subtract", LIBS);
+  gidLink(cast(void**)&gst_value_union, "gst_value_union", LIBS);
+  gidLink(cast(void**)&gst_version, "gst_version", LIBS);
+  gidLink(cast(void**)&gst_version_string, "gst_version_string", LIBS);
+}

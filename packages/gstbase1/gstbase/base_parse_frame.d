@@ -1,0 +1,126 @@
+module gstbase.base_parse_frame;
+
+import gid.gid;
+import gobject.boxed;
+import gst.buffer;
+import gstbase.c.functions;
+import gstbase.c.types;
+import gstbase.types;
+
+/**
+    Frame (context) data passed to each frame parsing virtual methods.  In
+  addition to providing the data to be checked for a valid frame or an already
+  identified frame, it conveys additional metadata or control information
+  from and to the subclass w.r.t. the particular frame in question (rather
+  than global parameters).  Some of these may apply to each parsing stage, others
+  only to some a particular one.  These parameters are effectively zeroed at start
+  of each frame's processing, i.e. parsing virtual method invocation sequence.
+*/
+class BaseParseFrame : gobject.boxed.Boxed
+{
+
+  this(void* ptr, Flag!"Take" take = No.Take)
+  {
+    super(cast(void*)ptr, take);
+  }
+
+  void* cPtr(Flag!"Dup" dup = No.Dup)
+  {
+    return dup ? copy_ : cInstancePtr;
+  }
+
+  static GType getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gst_base_parse_frame_get_type != &gidSymbolNotFound ? gst_base_parse_frame_get_type() : cast(GType)0;
+  }
+
+  override @property GType gType()
+  {
+    return getGType();
+  }
+
+  @property gst.buffer.Buffer buffer()
+  {
+    return new gst.buffer.Buffer(cast(GstBuffer*)(cast(GstBaseParseFrame*)cPtr).buffer);
+  }
+
+  @property gst.buffer.Buffer outBuffer()
+  {
+    return new gst.buffer.Buffer(cast(GstBuffer*)(cast(GstBaseParseFrame*)cPtr).outBuffer);
+  }
+
+  @property uint flags()
+  {
+    return (cast(GstBaseParseFrame*)cPtr).flags;
+  }
+
+  @property void flags(uint propval)
+  {
+    (cast(GstBaseParseFrame*)cPtr).flags = propval;
+  }
+
+  @property ulong offset()
+  {
+    return (cast(GstBaseParseFrame*)cPtr).offset;
+  }
+
+  @property void offset(ulong propval)
+  {
+    (cast(GstBaseParseFrame*)cPtr).offset = propval;
+  }
+
+  @property int overhead()
+  {
+    return (cast(GstBaseParseFrame*)cPtr).overhead;
+  }
+
+  @property void overhead(int propval)
+  {
+    (cast(GstBaseParseFrame*)cPtr).overhead = propval;
+  }
+
+  /**
+      Allocates a new #GstBaseParseFrame. This function is mainly for bindings,
+    elements written in C should usually allocate the frame on the stack and
+    then use [gstbase.base_parse_frame.BaseParseFrame.init_] to initialise it.
+    Params:
+      buffer =       a #GstBuffer
+      flags =       the flags
+      overhead =       number of bytes in this frame which should be counted as
+            metadata overhead, ie. not used to calculate the average bitrate.
+            Set to -1 to mark the entire frame as metadata. If in doubt, set to 0.
+    Returns:     a newly-allocated #GstBaseParseFrame. Free with
+          [gstbase.base_parse_frame.BaseParseFrame.free] when no longer needed.
+  */
+  this(gst.buffer.Buffer buffer, gstbase.types.BaseParseFrameFlags flags, int overhead)
+  {
+    GstBaseParseFrame* _cretval;
+    _cretval = gst_base_parse_frame_new(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, flags, overhead);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Copies a #GstBaseParseFrame.
+    Returns:     A copy of frame
+  */
+  gstbase.base_parse_frame.BaseParseFrame copy()
+  {
+    GstBaseParseFrame* _cretval;
+    _cretval = gst_base_parse_frame_copy(cast(GstBaseParseFrame*)cPtr);
+    auto _retval = _cretval ? new gstbase.base_parse_frame.BaseParseFrame(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Sets a #GstBaseParseFrame to initial state.  Currently this means
+    all public fields are zero-ed and a private flag is set to make
+    sure [gstbase.base_parse_frame.BaseParseFrame.free] only frees the contents but not
+    the actual frame. Use this function to initialise a #GstBaseParseFrame
+    allocated on the stack.
+  */
+  void init_()
+  {
+    gst_base_parse_frame_init(cast(GstBaseParseFrame*)cPtr);
+  }
+}

@@ -1,0 +1,121 @@
+module gstvideo.video_orientation_mixin;
+
+public import gstvideo.video_orientation_iface_proxy;
+public import gid.gid;
+public import gst.tag_list;
+public import gstvideo.c.functions;
+public import gstvideo.c.types;
+public import gstvideo.types;
+
+/**
+    The interface allows unified access to control flipping and autocenter
+  operation of video-sources or operators.
+*/
+template VideoOrientationT()
+{
+
+
+  /**
+      Get the horizontal centering offset from the given object.
+    Params:
+      center =       return location for the result
+    Returns:     true in case the element supports centering
+  */
+  override bool getHcenter(out int center)
+  {
+    bool _retval;
+    _retval = gst_video_orientation_get_hcenter(cast(GstVideoOrientation*)cPtr, cast(int*)&center);
+    return _retval;
+  }
+
+  /**
+      Get the horizontal flipping state (true for flipped) from the given object.
+    Params:
+      flip =       return location for the result
+    Returns:     true in case the element supports flipping
+  */
+  override bool getHflip(out bool flip)
+  {
+    bool _retval;
+    _retval = gst_video_orientation_get_hflip(cast(GstVideoOrientation*)cPtr, cast(bool*)&flip);
+    return _retval;
+  }
+
+  /**
+      Get the vertical centering offset from the given object.
+    Params:
+      center =       return location for the result
+    Returns:     true in case the element supports centering
+  */
+  override bool getVcenter(out int center)
+  {
+    bool _retval;
+    _retval = gst_video_orientation_get_vcenter(cast(GstVideoOrientation*)cPtr, cast(int*)&center);
+    return _retval;
+  }
+
+  /**
+      Get the vertical flipping state (true for flipped) from the given object.
+    Params:
+      flip =       return location for the result
+    Returns:     true in case the element supports flipping
+  */
+  override bool getVflip(out bool flip)
+  {
+    bool _retval;
+    _retval = gst_video_orientation_get_vflip(cast(GstVideoOrientation*)cPtr, cast(bool*)&flip);
+    return _retval;
+  }
+
+  /**
+      Set the horizontal centering offset for the given object.
+    Params:
+      center =       centering offset
+    Returns:     true in case the element supports centering
+  */
+  override bool setHcenter(int center)
+  {
+    bool _retval;
+    _retval = gst_video_orientation_set_hcenter(cast(GstVideoOrientation*)cPtr, center);
+    return _retval;
+  }
+
+  /**
+      Set the horizontal flipping state (true for flipped) for the given object.
+    Params:
+      flip =       use flipping
+    Returns:     true in case the element supports flipping
+  */
+  override bool setHflip(bool flip)
+  {
+    bool _retval;
+    _retval = gst_video_orientation_set_hflip(cast(GstVideoOrientation*)cPtr, flip);
+    return _retval;
+  }
+
+  /**
+      Set the vertical centering offset for the given object.
+    Params:
+      center =       centering offset
+    Returns:     true in case the element supports centering
+  */
+  override bool setVcenter(int center)
+  {
+    bool _retval;
+    _retval = gst_video_orientation_set_vcenter(cast(GstVideoOrientation*)cPtr, center);
+    return _retval;
+  }
+
+  /**
+      Set the vertical flipping state (true for flipped) for the given object.
+    Params:
+      flip =       use flipping
+    Returns:     true in case the element supports flipping
+  */
+  override bool setVflip(bool flip)
+  {
+    bool _retval;
+    _retval = gst_video_orientation_set_vflip(cast(GstVideoOrientation*)cPtr, flip);
+    return _retval;
+  }
+}

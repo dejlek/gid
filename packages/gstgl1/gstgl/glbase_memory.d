@@ -1,0 +1,167 @@
+module gstgl.glbase_memory;
+
+import gid.gid;
+import glib.mutex;
+import glib.types;
+import gobject.boxed;
+import gobject.object;
+import gst.allocation_params;
+import gst.allocator;
+import gst.memory;
+import gst.types;
+import gstgl.c.functions;
+import gstgl.c.types;
+import gstgl.glallocation_params;
+import gstgl.glbase_memory_allocator;
+import gstgl.glcontext;
+import gstgl.glquery;
+import gstgl.types;
+
+/**
+    GstGLBaseMemory is a #GstMemory subclass providing the basis of support
+  for the mapping of GL buffers.
+  
+  Data is uploaded or downloaded from the GPU as is necessary.
+*/
+class GLBaseMemory : gobject.boxed.Boxed
+{
+
+  this()
+  {
+    super(safeMalloc(GstGLBaseMemory.sizeof), Yes.Take);
+  }
+
+  this(void* ptr, Flag!"Take" take = No.Take)
+  {
+    super(cast(void*)ptr, take);
+  }
+
+  void* cPtr(Flag!"Dup" dup = No.Dup)
+  {
+    return dup ? copy_ : cInstancePtr;
+  }
+
+  static GType getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gst_gl_base_memory_get_type != &gidSymbolNotFound ? gst_gl_base_memory_get_type() : cast(GType)0;
+  }
+
+  override @property GType gType()
+  {
+    return getGType();
+  }
+
+  @property gst.memory.Memory mem()
+  {
+    return new gst.memory.Memory(cast(GstMemory*)&(cast(GstGLBaseMemory*)cPtr).mem);
+  }
+
+  @property gstgl.glcontext.GLContext context()
+  {
+    return ObjectG.getDObject!(gstgl.glcontext.GLContext)((cast(GstGLBaseMemory*)cPtr).context, No.Take);
+  }
+
+  @property glib.mutex.Mutex lock()
+  {
+    return new glib.mutex.Mutex(cast(GMutex*)&(cast(GstGLBaseMemory*)cPtr).lock);
+  }
+
+  @property gst.types.MapFlags mapFlags()
+  {
+    return cast(gst.types.MapFlags)(cast(GstGLBaseMemory*)cPtr).mapFlags;
+  }
+
+  @property void mapFlags(gst.types.MapFlags propval)
+  {
+    (cast(GstGLBaseMemory*)cPtr).mapFlags = cast(GstMapFlags)propval;
+  }
+
+  @property int mapCount()
+  {
+    return (cast(GstGLBaseMemory*)cPtr).mapCount;
+  }
+
+  @property void mapCount(int propval)
+  {
+    (cast(GstGLBaseMemory*)cPtr).mapCount = propval;
+  }
+
+  @property int glMapCount()
+  {
+    return (cast(GstGLBaseMemory*)cPtr).glMapCount;
+  }
+
+  @property void glMapCount(int propval)
+  {
+    (cast(GstGLBaseMemory*)cPtr).glMapCount = propval;
+  }
+
+  @property gstgl.glquery.GLQuery query()
+  {
+    return new gstgl.glquery.GLQuery(cast(GstGLQuery*)(cast(GstGLBaseMemory*)cPtr).query);
+  }
+
+  /**
+      Note: only intended for subclass usage to allocate the system memory buffer
+    on demand.  If there is already a non-NULL data pointer in gl_mem->data,
+    then this function imply returns TRUE.
+    Returns:     whether the system memory could be allocated
+  */
+  bool allocData()
+  {
+    bool _retval;
+    _retval = gst_gl_base_memory_alloc_data(cast(GstGLBaseMemory*)cPtr);
+    return _retval;
+  }
+
+  /**
+      Initializes mem with the required parameters
+    Params:
+      allocator =       the #GstAllocator to initialize with
+      parent =       the parent #GstMemory to initialize with
+      context =       the #GstGLContext to initialize with
+      params =       the GstAllocationParams to initialize with
+      size =       the number of bytes to be allocated
+      userData =       user data to call notify with
+      notify =       a #GDestroyNotify
+  */
+  void init_(gst.allocator.Allocator allocator, gst.memory.Memory parent, gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams params, size_t size, void* userData = null, glib.types.DestroyNotify notify = null)
+  {
+    extern(C) void _notifyCallback(void* data)
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(glib.types.DestroyNotify*)data;
+
+      (*_dlg)();
+    }
+    auto _notifyCB = notify ? &_notifyCallback : null;
+    gst_gl_base_memory_init(cast(GstGLBaseMemory*)cPtr, allocator ? cast(GstAllocator*)allocator.cPtr(No.Dup) : null, parent ? cast(GstMemory*)parent.cPtr(No.Dup) : null, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, params ? cast(const(GstAllocationParams)*)params.cPtr(No.Dup) : null, size, userData, _notifyCB);
+  }
+
+  /** */
+  bool memcpy(gstgl.glbase_memory.GLBaseMemory dest, ptrdiff_t offset, ptrdiff_t size)
+  {
+    bool _retval;
+    _retval = gst_gl_base_memory_memcpy(cast(GstGLBaseMemory*)cPtr, dest ? cast(GstGLBaseMemory*)dest.cPtr(No.Dup) : null, offset, size);
+    return _retval;
+  }
+
+  /** */
+  static gstgl.glbase_memory.GLBaseMemory alloc(gstgl.glbase_memory_allocator.GLBaseMemoryAllocator allocator, gstgl.glallocation_params.GLAllocationParams params)
+  {
+    GstGLBaseMemory* _cretval;
+    _cretval = gst_gl_base_memory_alloc(allocator ? cast(GstGLBaseMemoryAllocator*)allocator.cPtr(No.Dup) : null, params ? cast(GstGLAllocationParams*)params.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gstgl.glbase_memory.GLBaseMemory(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Initializes the GL Base Memory allocator. It is safe to call this function
+    multiple times.  This must be called before any other GstGLBaseMemory operation.
+  */
+  static void initOnce()
+  {
+    gst_gl_base_memory_init_once();
+  }
+}

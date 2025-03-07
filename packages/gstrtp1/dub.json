@@ -1,0 +1,14 @@
+{
+  "name": "gstrtp1",
+  "description": "GstRtp library D binding",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["gstrtp"],
+  "dependencies": {
+    "gid:gst1": "*",
+    "gid:gstbase1": "*"
+  }
+}

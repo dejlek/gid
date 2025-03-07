@@ -1,0 +1,28 @@
+module gstglegl.types;
+
+import gid.gid;
+import gstglegl.c.functions;
+import gstglegl.c.types;
+import gstglegl.eglimage;
+
+
+// Callbacks
+
+/**
+    Function to be called when the GstEGLImage is destroyed. It should free
+  the associated `EGLImage` if necessary
+
+  ## Parameters
+  $(LIST
+    * $(B image)       a #GstEGLImage
+  )
+*/
+alias EGLImageDestroyNotify = void delegate(gstglegl.eglimage.EGLImage image);
+
+/** */
+enum GL_DISPLAY_EGL_NAME = "gst.gl.display.egl";
+
+/**
+    The name of the GL Memory EGL allocator
+*/
+enum GL_MEMORY_EGL_ALLOCATOR_NAME = "GLMemoryEGL";

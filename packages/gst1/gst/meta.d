@@ -1,0 +1,245 @@
+module gst.meta;
+
+import gid.gid;
+import glib.types;
+import gobject.types;
+import gst.buffer;
+import gst.c.functions;
+import gst.c.types;
+import gst.custom_meta;
+import gst.meta_info;
+import gst.types;
+
+/**
+    The #GstMeta structure should be included as the first member of a #GstBuffer
+  metadata structure. The structure defines the API of the metadata and should
+  be accessible to all elements using the metadata.
+  
+  A metadata API is registered with [gst.meta.Meta.apiTypeRegister] which takes a
+  name for the metadata API and some tags associated with the metadata.
+  With [gst.meta.Meta.apiTypeHasTag] one can check if a certain metadata API
+  contains a given tag.
+  
+  Multiple implementations of a metadata API can be registered.
+  To implement a metadata API, [gst.meta.Meta.register] should be used. This
+  function takes all parameters needed to create, free and transform metadata
+  along with the size of the metadata. The function returns a #GstMetaInfo
+  structure that contains the information for the implementation of the API.
+  
+  A specific implementation can be retrieved by name with [gst.meta.Meta.getInfo].
+  
+  See #GstBuffer for how the metadata can be added, retrieved and removed from
+  buffers.
+*/
+class Meta
+{
+  GstMeta cInstance;
+
+  this(void* ptr, Flag!"Take" take = No.Take)
+  {
+    if (!ptr)
+      throw new GidConstructException("Null instance pointer for Gst.Meta");
+
+    cInstance = *cast(GstMeta*)ptr;
+
+    if (take)
+      safeFree(ptr);
+  }
+
+  void* cPtr()
+  {
+    return cast(void*)&cInstance;
+  }
+
+  @property gst.types.MetaFlags flags()
+  {
+    return cast(gst.types.MetaFlags)(cast(GstMeta*)cPtr).flags;
+  }
+
+  @property void flags(gst.types.MetaFlags propval)
+  {
+    (cast(GstMeta*)cPtr).flags = cast(GstMetaFlags)propval;
+  }
+
+  @property gst.meta_info.MetaInfo info()
+  {
+    return new gst.meta_info.MetaInfo(cast(GstMetaInfo*)(cast(GstMeta*)cPtr).info);
+  }
+
+  /**
+      Meta sequence number compare function. Can be used as #GCompareFunc
+    or a #GCompareDataFunc.
+    Params:
+      meta2 =       a #GstMeta
+    Returns:     a negative number if meta1 comes before meta2, 0 if both metas
+        have an equal sequence number, or a positive integer if meta1 comes
+        after meta2.
+  */
+  int compareSeqnum(gst.meta.Meta meta2)
+  {
+    int _retval;
+    _retval = gst_meta_compare_seqnum(cast(const(GstMeta)*)cPtr, meta2 ? cast(const(GstMeta)*)meta2.cPtr : null);
+    return _retval;
+  }
+
+  /**
+      Gets seqnum for this meta.
+    Returns: 
+  */
+  ulong getSeqnum()
+  {
+    ulong _retval;
+    _retval = gst_meta_get_seqnum(cast(const(GstMeta)*)cPtr);
+    return _retval;
+  }
+
+  /**
+      Same as [gst.meta.Meta.serialize] but with a #GByteArray instead of
+    #GstByteArrayInterface.
+    Params:
+      data =       #GByteArray to append serialization data
+    Returns:     true on success, false otherwise.
+  */
+  bool serializeSimple(ubyte[] data)
+  {
+    bool _retval;
+    auto _data = gByteArrayFromD(data);
+    scope(exit) containerFree!(GByteArray*, ubyte, GidOwnership.None)(_data);
+    _retval = gst_meta_serialize_simple(cast(const(GstMeta)*)cPtr, _data);
+    return _retval;
+  }
+
+  /** */
+  static string[] apiTypeGetTags(gobject.types.GType api)
+  {
+    const(char*)* _cretval;
+    _cretval = gst_meta_api_type_get_tags(api);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      for (; _cretval[_cretlength] !is null; _cretlength++)
+        break;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString(No.Free);
+    }
+    return _retval;
+  }
+
+  /**
+      Check if api was registered with tag.
+    Params:
+      api =       an API
+      tag =       the tag to check
+    Returns:     true if api was registered with tag.
+  */
+  static bool apiTypeHasTag(gobject.types.GType api, glib.types.Quark tag)
+  {
+    bool _retval;
+    _retval = gst_meta_api_type_has_tag(api, tag);
+    return _retval;
+  }
+
+  /**
+      Register and return a GType for the api and associate it with
+    tags.
+    Params:
+      api =       an API to register
+      tags =       tags for api
+    Returns:     a unique GType for api.
+  */
+  static gobject.types.GType apiTypeRegister(string api, string[] tags)
+  {
+    gobject.types.GType _retval;
+    const(char)* _api = api.toCString(No.Alloc);
+    char*[] _tmptags;
+    foreach (s; tags)
+      _tmptags ~= s.toCString(No.Alloc);
+    _tmptags ~= null;
+    const(char*)* _tags = _tmptags.ptr;
+    _retval = gst_meta_api_type_register(_api, _tags);
+    return _retval;
+  }
+
+  /**
+      Lookup a previously registered meta info structure by its implementation name
+    impl.
+    Params:
+      impl =       the name
+    Returns:     a #GstMetaInfo with impl, or
+      null when no such metainfo exists.
+  */
+  static gst.meta_info.MetaInfo getInfo(string impl)
+  {
+    const(GstMetaInfo)* _cretval;
+    const(char)* _impl = impl.toCString(No.Alloc);
+    _cretval = gst_meta_get_info(_impl);
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    return _retval;
+  }
+
+  /**
+      Register a new custom #GstMeta implementation, backed by an opaque
+    structure holding a #GstStructure.
+    
+    The registered info can be retrieved later with [gst.meta.Meta.getInfo] by using
+    name as the key.
+    
+    The backing #GstStructure can be retrieved with
+    [gst.custom_meta.CustomMeta.getStructure], its mutability is conditioned by the
+    writability of the buffer the meta is attached to.
+    
+    When transform_func is null, the meta and its backing #GstStructure
+    will always be copied when the transform operation is copy, other operations
+    are discarded, copy regions are ignored.
+    Params:
+      name =       the name of the #GstMeta implementation
+      tags =       tags for api
+      transformFunc =       a #GstMetaTransformFunction
+    Returns:     a #GstMetaInfo that can be used to
+      access metadata.
+  */
+  static gst.meta_info.MetaInfo registerCustom(string name, string[] tags, gst.types.CustomMetaTransformFunction transformFunc = null)
+  {
+    extern(C) bool _transformFuncCallback(GstBuffer* transbuf, GstCustomMeta* meta, GstBuffer* buffer, GQuark type, void* data, void* userData)
+    {
+      auto _dlg = cast(gst.types.CustomMetaTransformFunction*)userData;
+
+      bool _retval = (*_dlg)(transbuf ? new gst.buffer.Buffer(cast(void*)transbuf, No.Take) : null, meta ? new gst.custom_meta.CustomMeta(cast(void*)meta, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, type, data);
+      return _retval;
+    }
+    auto _transformFuncCB = transformFunc ? &_transformFuncCallback : null;
+
+    const(GstMetaInfo)* _cretval;
+    const(char)* _name = name.toCString(No.Alloc);
+    char*[] _tmptags;
+    foreach (s; tags)
+      _tmptags ~= s.toCString(No.Alloc);
+    _tmptags ~= null;
+    const(char*)* _tags = _tmptags.ptr;
+
+    auto _transformFunc = transformFunc ? freezeDelegate(cast(void*)&transformFunc) : null;
+    GDestroyNotify _transformFuncDestroyCB = transformFunc ? &thawDelegate : null;
+    _cretval = gst_meta_register_custom(_name, _tags, _transformFuncCB, _transformFunc, _transformFuncDestroyCB);
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    return _retval;
+  }
+
+  /**
+      Simplified version of [gst.meta.Meta.registerCustom], with no tags and no
+    transform function.
+    Params:
+      name =       the name of the #GstMeta implementation
+    Returns:     a #GstMetaInfo that can be used to access metadata.
+  */
+  static gst.meta_info.MetaInfo registerCustomSimple(string name)
+  {
+    const(GstMetaInfo)* _cretval;
+    const(char)* _name = name.toCString(No.Alloc);
+    _cretval = gst_meta_register_custom_simple(_name);
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    return _retval;
+  }
+}

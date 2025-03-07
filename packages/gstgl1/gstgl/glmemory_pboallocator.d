@@ -1,0 +1,30 @@
+module gstgl.glmemory_pboallocator;
+
+import gid.gid;
+import gstgl.c.functions;
+import gstgl.c.types;
+import gstgl.glmemory_allocator;
+import gstgl.types;
+
+/**
+    Opaque #GstGLMemoryPBOAllocator struct
+*/
+class GLMemoryPBOAllocator : gstgl.glmemory_allocator.GLMemoryAllocator
+{
+
+  this(void* ptr, Flag!"Take" take = No.Take)
+  {
+    super(cast(void*)ptr, take);
+  }
+
+  static GType getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gst_gl_memory_pbo_allocator_get_type != &gidSymbolNotFound ? gst_gl_memory_pbo_allocator_get_type() : cast(GType)0;
+  }
+
+  override @property GType gType()
+  {
+    return getGType();
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "gstgl1",
+  "description": "GstGL library D binding",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["gstgl"],
+  "dependencies": {
+    "gid:gst1": "*",
+    "gid:gstbase1": "*",
+    "gid:gstvideo1": "*"
+  }
+}

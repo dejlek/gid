@@ -1,0 +1,16 @@
+{
+  "name": "gstpbutils1",
+  "description": "GstPbutils library D binding",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["gstpbutils"],
+  "dependencies": {
+    "gid:gst1": "*",
+    "gid:gstaudio1": "*",
+    "gid:gstbase1": "*",
+    "gid:gstvideo1": "*"
+  }
+}
