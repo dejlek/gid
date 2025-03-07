@@ -324,7 +324,7 @@ T[] gArrayGToD(T, GidOwnership ownership = GidOwnership.None)(GArray* gArray)
  * Returns: D array of the given type
  */
 T[] gPtrArrayToD(T, GidOwnership ownership = GidOwnership.None)(GPtrArray* ptrArray)
-  if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
+  if (containerTypeIsSupported!T)
 {
   T[] a;
 
@@ -353,7 +353,7 @@ T[] gPtrArrayToD(T, GidOwnership ownership = GidOwnership.None)(GPtrArray* ptrAr
  * Returns: D array of the given type
  */
 T[] gListToD(T, GidOwnership ownership = GidOwnership.None)(GList* list)
-  if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
+  if (containerTypeIsSupported!T)
 {
   T[] a;
 
@@ -387,7 +387,7 @@ T[] gListToD(T, GidOwnership ownership = GidOwnership.None)(GList* list)
  * Returns: D array of the given type
  */
 T[] gSListToD(T, GidOwnership ownership = GidOwnership.None)(GSList* list)
-  if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
+  if (containerTypeIsSupported!T)
 {
   T[] a;
 
@@ -513,7 +513,7 @@ GArray* gArrayGFromD(T, bool zeroTerminated = false)(T[] a)
  * Returns: New GPtrArray which should be freed with containerFree!() template (if ownership not taken by C code)
  */
 GPtrArray* gPtrArrayFromD(T, bool zeroTerminated = false)(T[] a)
-  if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
+  if (containerTypeIsSupported!T)
 {
   auto gPtrArray = g_ptr_array_new();
 
@@ -529,8 +529,16 @@ GPtrArray* gPtrArrayFromD(T, bool zeroTerminated = false)(T[] a)
 
   g_ptr_array_set_size(gPtrArray, cast(int)a.length);
 
-  foreach (i; 0 .. a.length)
-    containerSetItem(a[i], cast(void*)&gPtrArray.pdata[i]);
+  static if (!containerTypeIsSimple!T)
+  {
+    foreach (i; 0 .. a.length)
+      containerSetItem(a[i], cast(void*)&gPtrArray.pdata[i]);
+  }
+  else
+  {
+    foreach (i; 0 .. a.length)
+      gPtrArray.pdata[i] = g_memdup2(cast(void*)&a[i], T.sizeof);
+  }
 
   return gPtrArray;
 }
@@ -547,10 +555,21 @@ GList* gListFromD(T)(T[] a)
 {
   GList* list;
 
-  foreach (i; 0 .. a.length)
+  static if (!containerTypeIsSimple!T)
   {
-    list = g_list_prepend(list, null);
-    containerSetItem(a[i], cast(void*)&list.data);
+    foreach (i; 0 .. a.length)
+    {
+      list = g_list_prepend(list, null);
+      containerSetItem(a[i], cast(void*)&list.data);
+    }
+  }
+  else
+  {
+    foreach (i; 0 .. a.length)
+    {
+      list = g_list_prepend(list, null);
+      list.data = g_memdup2(cast(void*)&a[i], T.sizeof);
+    }
   }
 
   return g_list_reverse(list); // Prepend and reverse for optimization purposes
@@ -565,14 +584,25 @@ GList* gListFromD(T)(T[] a)
  * Returns: New GSList which should be freed with containerFree!() template (if ownership not taken by C code)
  */
 GSList* gSListFromD(T)(T[] a)
-  if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
+  if (containerTypeIsSupported!T)
 {
   GSList* list;
 
-  foreach (i; 0 .. a.length)
+  static if (!containerTypeIsSimple!T)
   {
-    list = g_slist_prepend(list, null);
-    containerSetItem(a[i], cast(void*)&list.data);
+    foreach (i; 0 .. a.length)
+    {
+      list = g_slist_prepend(list, null);
+      containerSetItem(a[i], cast(void*)&list.data);
+    }
+  }
+  else
+  {
+    foreach (i; 0 .. a.length)
+    {
+      list = g_slist_prepend(list, null);
+      list.data = g_memdup2(cast(void*)&a[i], T.sizeof);
+    }
   }
 
   return g_slist_reverse(list); // Prepend and reverse for optimization purposes
@@ -815,7 +845,7 @@ void containerFreeItem(T)(void* data)
     Boxed.boxedFree!T(data);
   else static if (__traits(compiles, T.unref(data))) // Reffed types
     T.unref(data);
-  else static if (is(T : string))
+  else static if (is(T : string) || containerTypeIsSimple!T)
     g_free(data);
 }
 
