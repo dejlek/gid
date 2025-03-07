@@ -523,7 +523,7 @@ class Layout : gobject.object.ObjectG
     PangoLogAttr* _attrs;
     pango_layout_get_log_attrs(cast(PangoLayout*)cPtr, &_attrs, &_nAttrs);
     attrs.length = _nAttrs;
-    attrs[0 .. $] = _attrs[0 .. _nAttrs];
+    attrs[0 .. $] = (cast(pango.types.LogAttr*)_attrs)[0 .. _nAttrs];
     safeFree(cast(void*)_attrs);
   }
 

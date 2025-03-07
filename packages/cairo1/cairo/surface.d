@@ -324,7 +324,7 @@ class Surface : gobject.boxed.Boxed
     const(ubyte)* _data;
     cairo_surface_get_mime_data(cast(cairo_surface_t*)cPtr, _mimeType, &_data, &_length);
     data.length = _length;
-    data[0 .. $] = _data[0 .. _length];
+    data[0 .. $] = (cast(ubyte*)_data)[0 .. _length];
   }
 
   /**

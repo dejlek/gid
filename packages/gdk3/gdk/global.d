@@ -1240,7 +1240,7 @@ bool propertyGet(gdk.window.Window window, gdk.atom.Atom property, gdk.atom.Atom
   _retval = gdk_property_get(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, property ? cast(GdkAtom)property.cPtr : null, type ? cast(GdkAtom)type.cPtr : null, offset, length, pdelete, &_actualPropertyType, cast(int*)&actualFormat, &_actualLength, &_data);
   actualPropertyType = new gdk.atom.Atom(cast(void*)&_actualPropertyType, No.Take);
   data.length = _actualLength;
-  data[0 .. $] = _data[0 .. _actualLength];
+  data[0 .. $] = (cast(ubyte*)_data)[0 .. _actualLength];
   safeFree(cast(void*)_data);
   return _retval;
 }
@@ -1265,7 +1265,7 @@ void queryDepths(out int[] depths)
   int* _depths;
   gdk_query_depths(&_depths, &_count);
   depths.length = _count;
-  depths[0 .. $] = _depths[0 .. _count];
+  depths[0 .. $] = (cast(int*)_depths)[0 .. _count];
 }
 
 /**
@@ -1288,7 +1288,7 @@ void queryVisualTypes(out gdk.types.VisualType[] visualTypes)
   GdkVisualType* _visualTypes;
   gdk_query_visual_types(&_visualTypes, &_count);
   visualTypes.length = _count;
-  visualTypes[0 .. $] = _visualTypes[0 .. _count];
+  visualTypes[0 .. $] = (cast(gdk.types.VisualType*)_visualTypes)[0 .. _count];
 }
 
 /**

@@ -110,7 +110,7 @@ class FontFace : gobject.object.ObjectG
     int* _sizes;
     pango_font_face_list_sizes(cast(PangoFontFace*)cPtr, &_sizes, &_nSizes);
     sizes.length = _nSizes;
-    sizes[0 .. $] = _sizes[0 .. _nSizes];
+    sizes[0 .. $] = (cast(int*)_sizes)[0 .. _nSizes];
     safeFree(cast(void*)_sizes);
   }
 }

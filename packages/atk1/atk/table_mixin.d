@@ -266,7 +266,7 @@ template TableT()
     int* _selected;
     auto _ret_length = atk_table_get_selected_columns(cast(AtkTable*)cPtr, &_selected);
     selected.length = _ret_length;
-    selected[0 .. $] = _selected[0 .. _ret_length];
+    selected[0 .. $] = (cast(int*)_selected)[0 .. _ret_length];
     safeFree(cast(void*)_selected);
   }
 
@@ -281,7 +281,7 @@ template TableT()
     int* _selected;
     auto _ret_length = atk_table_get_selected_rows(cast(AtkTable*)cPtr, &_selected);
     selected.length = _ret_length;
-    selected[0 .. $] = _selected[0 .. _ret_length];
+    selected[0 .. $] = (cast(int*)_selected)[0 .. _ret_length];
     safeFree(cast(void*)_selected);
   }
 

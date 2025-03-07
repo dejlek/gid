@@ -1413,7 +1413,7 @@ template FileT()
     if (_err)
       throw new ErrorG(_err);
     contents.length = _length;
-    contents[0 .. $] = _contents[0 .. _length];
+    contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
     safeFree(cast(void*)_contents);
     etagOut = _etagOut.fromCString(Yes.Free);
     return _retval;
@@ -1477,7 +1477,7 @@ template FileT()
     if (_err)
       throw new ErrorG(_err);
     contents.length = _length;
-    contents[0 .. $] = _contents[0 .. _length];
+    contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
     safeFree(cast(void*)_contents);
     etagOut = _etagOut.fromCString(Yes.Free);
     return _retval;
@@ -1508,7 +1508,7 @@ template FileT()
     if (_err)
       throw new ErrorG(_err);
     contents.length = _length;
-    contents[0 .. $] = _contents[0 .. _length];
+    contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
     safeFree(cast(void*)_contents);
     etagOut = _etagOut.fromCString(Yes.Free);
     return _retval;

@@ -970,7 +970,7 @@ void pdfGetVersions(out cairo.types.PdfVersion[] versions)
   const(cairo_pdf_version_t)* _versions;
   cairo_pdf_get_versions(&_versions, &_numVersions);
   versions.length = _numVersions;
-  versions[0 .. $] = _versions[0 .. _numVersions];
+  versions[0 .. $] = (cast(cairo.types.PdfVersion*)_versions)[0 .. _numVersions];
 }
 
 /**
@@ -1203,7 +1203,7 @@ void psGetLevels(out cairo.types.PsLevel[] levels)
   const(cairo_ps_level_t)* _levels;
   cairo_ps_get_levels(&_levels, &_numLevels);
   levels.length = _numLevels;
-  levels[0 .. $] = _levels[0 .. _numLevels];
+  levels[0 .. $] = (cast(cairo.types.PsLevel*)_levels)[0 .. _numLevels];
 }
 
 /**
@@ -1842,7 +1842,7 @@ void svgGetVersions(out cairo.types.SvgVersion[] versions)
   const(cairo_svg_version_t)* _versions;
   cairo_svg_get_versions(&_versions, &_numVersions);
   versions.length = _numVersions;
-  versions[0 .. $] = _versions[0 .. _numVersions];
+  versions[0 .. $] = (cast(cairo.types.SvgVersion*)_versions)[0 .. _numVersions];
 }
 
 /**

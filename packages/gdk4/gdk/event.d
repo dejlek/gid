@@ -65,7 +65,7 @@ class Event
     double* _axes;
     _retval = gdk_event_get_axes(cast(GdkEvent*)cPtr, &_axes, &_nAxes);
     axes.length = _nAxes;
-    axes[0 .. $] = _axes[0 .. _nAxes];
+    axes[0 .. $] = (cast(double*)_axes)[0 .. _nAxes];
     return _retval;
   }
 

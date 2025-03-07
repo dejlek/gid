@@ -131,10 +131,10 @@ class Keymap : gobject.object.ObjectG
     uint* _keyvals;
     _retval = gdk_keymap_get_entries_for_keycode(cast(GdkKeymap*)cPtr, hardwareKeycode, &_keys, &_keyvals, &_nEntries);
     keys.length = _nEntries;
-    keys[0 .. $] = _keys[0 .. _nEntries];
+    keys[0 .. $] = (cast(gdk.types.KeymapKey*)_keys)[0 .. _nEntries];
     safeFree(cast(void*)_keys);
     keyvals.length = _nEntries;
-    keyvals[0 .. $] = _keyvals[0 .. _nEntries];
+    keyvals[0 .. $] = (cast(uint*)_keyvals)[0 .. _nEntries];
     safeFree(cast(void*)_keyvals);
     return _retval;
   }
@@ -164,7 +164,7 @@ class Keymap : gobject.object.ObjectG
     GdkKeymapKey* _keys;
     _retval = gdk_keymap_get_entries_for_keyval(cast(GdkKeymap*)cPtr, keyval, &_keys, &_nKeys);
     keys.length = _nKeys;
-    keys[0 .. $] = _keys[0 .. _nKeys];
+    keys[0 .. $] = (cast(gdk.types.KeymapKey*)_keys)[0 .. _nKeys];
     safeFree(cast(void*)_keys);
     return _retval;
   }
