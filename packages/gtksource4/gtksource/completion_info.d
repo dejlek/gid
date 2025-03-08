@@ -16,7 +16,7 @@ import gtksource.types;
 class CompletionInfo : gtk.window.Window
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -37,7 +37,7 @@ class CompletionInfo : gtk.window.Window
   {
     GtkSourceCompletionInfo* _cretval;
     _cretval = gtk_source_completion_info_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -51,6 +51,6 @@ class CompletionInfo : gtk.window.Window
   */
   void moveToIter(gtk.text_view.TextView view, gtk.text_iter.TextIter iter = null)
   {
-    gtk_source_completion_info_move_to_iter(cast(GtkSourceCompletionInfo*)cPtr, view ? cast(GtkTextView*)view.cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+    gtk_source_completion_info_move_to_iter(cast(GtkSourceCompletionInfo*)cPtr, view ? cast(GtkTextView*)view.cPtr(No.dup) : null, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null);
   }
 }

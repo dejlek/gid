@@ -10,7 +10,7 @@ import gid.gid;
 class ExtensionScalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

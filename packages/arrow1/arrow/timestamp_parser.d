@@ -10,7 +10,7 @@ import gobject.object;
 class TimestampParser : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class TimestampParser : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = garrow_timestamp_parser_get_kind(cast(GArrowTimestampParser*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 }

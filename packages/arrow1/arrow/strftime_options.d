@@ -10,7 +10,7 @@ import gid.gid;
 class StrftimeOptions : arrow.function_options.FunctionOptions
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class StrftimeOptions : arrow.function_options.FunctionOptions
   {
     GArrowStrftimeOptions* _cretval;
     _cretval = garrow_strftime_options_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

@@ -36,7 +36,7 @@ import gobject.object;
 class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.DBusObjectManager
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -69,9 +69,9 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
   this(string objectPath)
   {
     GDBusObjectManagerServer* _cretval;
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString(No.alloc);
     _cretval = g_dbus_object_manager_server_new(_objectPath);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -90,7 +90,7 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
   */
   void export_(gio.dbus_object_skeleton.DBusObjectSkeleton object)
   {
-    g_dbus_object_manager_server_export(cast(GDBusObjectManagerServer*)cPtr, object ? cast(GDBusObjectSkeleton*)object.cPtr(No.Dup) : null);
+    g_dbus_object_manager_server_export(cast(GDBusObjectManagerServer*)cPtr, object ? cast(GDBusObjectSkeleton*)object.cPtr(No.dup) : null);
   }
 
   /**
@@ -103,7 +103,7 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
   */
   void exportUniquely(gio.dbus_object_skeleton.DBusObjectSkeleton object)
   {
-    g_dbus_object_manager_server_export_uniquely(cast(GDBusObjectManagerServer*)cPtr, object ? cast(GDBusObjectSkeleton*)object.cPtr(No.Dup) : null);
+    g_dbus_object_manager_server_export_uniquely(cast(GDBusObjectManagerServer*)cPtr, object ? cast(GDBusObjectSkeleton*)object.cPtr(No.dup) : null);
   }
 
   /**
@@ -116,7 +116,7 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_object_manager_server_get_connection(cast(GDBusObjectManagerServer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
   bool isExported(gio.dbus_object_skeleton.DBusObjectSkeleton object)
   {
     bool _retval;
-    _retval = g_dbus_object_manager_server_is_exported(cast(GDBusObjectManagerServer*)cPtr, object ? cast(GDBusObjectSkeleton*)object.cPtr(No.Dup) : null);
+    _retval = g_dbus_object_manager_server_is_exported(cast(GDBusObjectManagerServer*)cPtr, object ? cast(GDBusObjectSkeleton*)object.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
   */
   void setConnection(gio.dbus_connection.DBusConnection connection = null)
   {
-    g_dbus_object_manager_server_set_connection(cast(GDBusObjectManagerServer*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null);
+    g_dbus_object_manager_server_set_connection(cast(GDBusObjectManagerServer*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(No.dup) : null);
   }
 
   /**
@@ -157,7 +157,7 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
   bool unexport(string objectPath)
   {
     bool _retval;
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString(No.alloc);
     _retval = g_dbus_object_manager_server_unexport(cast(GDBusObjectManagerServer*)cPtr, _objectPath);
     return _retval;
   }

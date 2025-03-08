@@ -13,7 +13,7 @@ class Implementor
   AtkImplementor* cInstancePtr;
   bool owned;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Atk.Implementor");
@@ -38,7 +38,7 @@ class Implementor
   {
     AtkObject* _cretval;
     _cretval = atk_implementor_ref_accessible(cast(AtkImplementor*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.take);
     return _retval;
   }
 }

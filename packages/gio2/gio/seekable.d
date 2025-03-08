@@ -61,7 +61,7 @@ interface Seekable
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       offset =       a #goffset.
       type =       a #GSeekType.
@@ -86,7 +86,7 @@ interface Seekable
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned. If an
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned. If an
     operation was partially finished when the operation was cancelled the
     partial result will be returned, without an error.
     Params:

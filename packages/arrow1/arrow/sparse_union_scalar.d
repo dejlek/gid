@@ -12,7 +12,7 @@ import gid.gid;
 class SparseUnionScalar : arrow.union_scalar.UnionScalar
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,7 +32,7 @@ class SparseUnionScalar : arrow.union_scalar.UnionScalar
   this(arrow.sparse_union_data_type.SparseUnionDataType dataType, byte typeCode, arrow.scalar.Scalar value)
   {
     GArrowSparseUnionScalar* _cretval;
-    _cretval = garrow_sparse_union_scalar_new(dataType ? cast(GArrowSparseUnionDataType*)dataType.cPtr(No.Dup) : null, typeCode, value ? cast(GArrowScalar*)value.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_sparse_union_scalar_new(dataType ? cast(GArrowSparseUnionDataType*)dataType.cPtr(No.dup) : null, typeCode, value ? cast(GArrowScalar*)value.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 }

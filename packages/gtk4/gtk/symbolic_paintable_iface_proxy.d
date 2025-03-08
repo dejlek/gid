@@ -7,7 +7,7 @@ import gtk.symbolic_paintable_mixin;
 /// Proxy object for Gtk.SymbolicPaintable interface when a GObject has no applicable D binding
 class SymbolicPaintableIfaceProxy : IfaceProxy, gtk.symbolic_paintable.SymbolicPaintable
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

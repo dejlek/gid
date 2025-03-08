@@ -11,7 +11,7 @@ import gid.gid;
 class SortOptions : arrow.function_options.FunctionOptions
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,7 +34,7 @@ class SortOptions : arrow.function_options.FunctionOptions
     auto _sortKeys = gListFromD!(arrow.sort_key.SortKey)(sortKeys);
     scope(exit) containerFree!(GList*, arrow.sort_key.SortKey, GidOwnership.None)(_sortKeys);
     _cretval = garrow_sort_options_new(_sortKeys);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -44,7 +44,7 @@ class SortOptions : arrow.function_options.FunctionOptions
   */
   void addSortKey(arrow.sort_key.SortKey sortKey)
   {
-    garrow_sort_options_add_sort_key(cast(GArrowSortOptions*)cPtr, sortKey ? cast(GArrowSortKey*)sortKey.cPtr(No.Dup) : null);
+    garrow_sort_options_add_sort_key(cast(GArrowSortOptions*)cPtr, sortKey ? cast(GArrowSortKey*)sortKey.cPtr(No.dup) : null);
   }
 
   alias equal = arrow.function_options.FunctionOptions.equal;
@@ -53,7 +53,7 @@ class SortOptions : arrow.function_options.FunctionOptions
   bool equal(arrow.sort_options.SortOptions otherOptions)
   {
     bool _retval;
-    _retval = garrow_sort_options_equal(cast(GArrowSortOptions*)cPtr, otherOptions ? cast(GArrowSortOptions*)otherOptions.cPtr(No.Dup) : null);
+    _retval = garrow_sort_options_equal(cast(GArrowSortOptions*)cPtr, otherOptions ? cast(GArrowSortOptions*)otherOptions.cPtr(No.dup) : null);
     return _retval;
   }
 

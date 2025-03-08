@@ -14,7 +14,7 @@ class EventFocus
 {
   GdkEventFocus cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventFocus");
@@ -42,7 +42,7 @@ class EventFocus
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventFocus*)cPtr).window, No.Take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventFocus*)cPtr).window, No.take);
   }
 
   @property byte sendEvent()

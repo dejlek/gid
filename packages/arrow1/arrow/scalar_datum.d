@@ -11,7 +11,7 @@ import gid.gid;
 class ScalarDatum : arrow.datum.Datum
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class ScalarDatum : arrow.datum.Datum
   this(arrow.scalar.Scalar value)
   {
     GArrowScalarDatum* _cretval;
-    _cretval = garrow_scalar_datum_new(value ? cast(GArrowScalar*)value.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_scalar_datum_new(value ? cast(GArrowScalar*)value.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 }

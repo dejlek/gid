@@ -18,7 +18,7 @@ import gtk.types;
 class OverlayLayout : gtk.layout_manager.LayoutManager
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,6 +42,6 @@ class OverlayLayout : gtk.layout_manager.LayoutManager
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_overlay_layout_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

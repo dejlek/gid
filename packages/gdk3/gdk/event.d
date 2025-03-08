@@ -52,7 +52,7 @@ import gobject.object;
   
   To access other fields of the event, the pointer to the event
   can be cast to the appropriate event type, or the union member
-  name can be used. For example if the event type is [gdk.types.EventType.ButtonPress]
+  name can be used. For example if the event type is [gdk.types.EventType.buttonPress]
   then the x coordinate of the button press can be accessed with:
   ```c
     GdkEvent *event;
@@ -72,7 +72,7 @@ class Event
 {
   GdkEvent cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.Event");
@@ -310,7 +310,7 @@ class Event
   {
     GdkDevice* _cretval;
     _cretval = gdk_event_get_device(cast(const(GdkEvent)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.take);
     return _retval;
   }
 
@@ -329,13 +329,13 @@ class Event
   {
     GdkDeviceTool* _cretval;
     _cretval = gdk_event_get_device_tool(cast(const(GdkEvent)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.take);
     return _retval;
   }
 
   /**
-      If event if of type [gdk.types.EventType.TouchBegin], [gdk.types.EventType.TouchUpdate],
-    [gdk.types.EventType.TouchEnd] or [gdk.types.EventType.TouchCancel], returns the #GdkEventSequence
+      If event if of type [gdk.types.EventType.touchBegin], [gdk.types.EventType.touchUpdate],
+    [gdk.types.EventType.touchEnd] or [gdk.types.EventType.touchCancel], returns the #GdkEventSequence
     to which the event belongs. Otherwise, return null.
     Returns:     the event sequence that the event belongs to
   */
@@ -343,7 +343,7 @@ class Event
   {
     GdkEventSequence* _cretval;
     _cretval = gdk_event_get_event_sequence(cast(const(GdkEvent)*)cPtr);
-    auto _retval = _cretval ? new gdk.event_sequence.EventSequence(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.event_sequence.EventSequence(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -443,7 +443,7 @@ class Event
   {
     GdkScreen* _cretval;
     _cretval = gdk_event_get_screen(cast(const(GdkEvent)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.take);
     return _retval;
   }
 
@@ -467,7 +467,7 @@ class Event
   /**
       Extracts the scroll direction from an event.
     
-    If event is not of type [gdk.types.EventType.Scroll], the contents of direction
+    If event is not of type [gdk.types.EventType.scroll], the contents of direction
     are undefined.
     
     If you wish to handle both discrete and smooth scrolling, you
@@ -523,7 +523,7 @@ class Event
   {
     GdkSeat* _cretval;
     _cretval = gdk_event_get_seat(cast(const(GdkEvent)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.take);
     return _retval;
   }
 
@@ -543,7 +543,7 @@ class Event
   {
     GdkDevice* _cretval;
     _cretval = gdk_event_get_source_device(cast(const(GdkEvent)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.take);
     return _retval;
   }
 
@@ -583,7 +583,7 @@ class Event
   {
     GdkWindow* _cretval;
     _cretval = gdk_event_get_window(cast(const(GdkEvent)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
     return _retval;
   }
 
@@ -623,7 +623,7 @@ class Event
   */
   void setDevice(gdk.device.Device device)
   {
-    gdk_event_set_device(cast(GdkEvent*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
+    gdk_event_set_device(cast(GdkEvent*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null);
   }
 
   /**
@@ -633,7 +633,7 @@ class Event
   */
   void setDeviceTool(gdk.device_tool.DeviceTool tool = null)
   {
-    gdk_event_set_device_tool(cast(GdkEvent*)cPtr, tool ? cast(GdkDeviceTool*)tool.cPtr(No.Dup) : null);
+    gdk_event_set_device_tool(cast(GdkEvent*)cPtr, tool ? cast(GdkDeviceTool*)tool.cPtr(No.dup) : null);
   }
 
   /**
@@ -645,7 +645,7 @@ class Event
   */
   void setScreen(gdk.screen.Screen screen)
   {
-    gdk_event_set_screen(cast(GdkEvent*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
+    gdk_event_set_screen(cast(GdkEvent*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null);
   }
 
   /**
@@ -658,7 +658,7 @@ class Event
   */
   void setSourceDevice(gdk.device.Device device)
   {
-    gdk_event_set_source_device(cast(GdkEvent*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
+    gdk_event_set_source_device(cast(GdkEvent*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null);
   }
 
   /**
@@ -666,7 +666,7 @@ class Event
     context menu, according to platform conventions. The right mouse
     button always triggers context menus. Additionally, if
     [gdk.keymap.Keymap.getModifierMask] returns a non-0 mask for
-    [gdk.types.ModifierIntent.ContextMenu], then the left mouse button will
+    [gdk.types.ModifierIntent.contextMenu], then the left mouse button will
     also trigger a context menu if this modifier is pressed.
     
     This function should always be used instead of simply checking for
@@ -712,7 +712,7 @@ class Event
     {
       auto _dlg = cast(gdk.types.EventFunc*)data;
 
-      (*_dlg)(event ? new gdk.event.Event(cast(void*)event, No.Take) : null);
+      (*_dlg)(event ? new gdk.event.Event(cast(void*)event, No.take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -743,7 +743,7 @@ class Event
     request further motion notifies, because it also works for extension
     events where motion notifies are provided for devices other than the
     core pointer. Coordinate extraction, processing and requesting more
-    motion events from a [gdk.types.EventType.MotionNotify] event usually works like this:
+    motion events from a [gdk.types.EventType.motionNotify] event usually works like this:
     
     ```c
     {

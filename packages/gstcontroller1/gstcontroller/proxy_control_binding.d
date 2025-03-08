@@ -13,7 +13,7 @@ import gstcontroller.types;
 class ProxyControlBinding : gst.control_binding.ControlBinding
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -45,9 +45,9 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
   this(gst.object.ObjectGst object, string propertyName, gst.object.ObjectGst refObject, string refPropertyName)
   {
     GstControlBinding* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    const(char)* _refPropertyName = refPropertyName.toCString(No.Alloc);
-    _cretval = gst_proxy_control_binding_new(object ? cast(GstObject*)object.cPtr(No.Dup) : null, _propertyName, refObject ? cast(GstObject*)refObject.cPtr(No.Dup) : null, _refPropertyName);
-    this(_cretval, No.Take);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
+    const(char)* _refPropertyName = refPropertyName.toCString(No.alloc);
+    _cretval = gst_proxy_control_binding_new(object ? cast(GstObject*)object.cPtr(No.dup) : null, _propertyName, refObject ? cast(GstObject*)refObject.cPtr(No.dup) : null, _refPropertyName);
+    this(_cretval, No.take);
   }
 }

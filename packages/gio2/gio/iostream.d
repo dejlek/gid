@@ -29,7 +29,7 @@ import gobject.object;
   way around, so keeping the substreams alive will not keep the [gio.iostream.IOStream]
   object alive. If the [gio.iostream.IOStream] object is freed it will be closed, thus
   closing the substreams, so even if the substreams stay alive they will
-  always return [gio.types.IOErrorEnum.Closed] for all operations.
+  always return [gio.types.IOErrorEnum.closed] for all operations.
   
   To close a stream use [gio.iostream.IOStream.close] which will close the common
   stream object and also the individual substreams. You can also close
@@ -64,7 +64,7 @@ import gobject.object;
 class IOStream : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -90,7 +90,7 @@ class IOStream : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_splice_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_io_stream_splice_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -110,7 +110,7 @@ class IOStream : gobject.object.ObjectG
     closed.
     
     Once the stream is closed, all other operations will return
-    [gio.types.IOErrorEnum.Closed]. Closing a stream multiple times will not
+    [gio.types.IOErrorEnum.closed]. Closing a stream multiple times will not
     return an error.
     
     Closing a stream will automatically flush any outstanding buffers
@@ -126,13 +126,13 @@ class IOStream : gobject.object.ObjectG
     
     On failure the first error that happened will be reported, but the
     close operation will finish as much as possible. A stream that failed
-    to close will still return [gio.types.IOErrorEnum.Closed] for all operations.
+    to close will still return [gio.types.IOErrorEnum.closed] for all operations.
     Still, it is important to check and report the error to the user,
     otherwise there might be a loss of data as all data might not be written.
     
     If cancellable is not NULL, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Cancelling a close will still leave the stream closed, but some streams
     can use a faster close that doesn't block to e.g. check errors.
     
@@ -146,7 +146,7 @@ class IOStream : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_close(cast(GIOStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_io_stream_close(cast(GIOStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -176,12 +176,12 @@ class IOStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_io_stream_close_async(cast(GIOStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_io_stream_close_async(cast(GIOStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -194,7 +194,7 @@ class IOStream : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_close_finish(cast(GIOStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_io_stream_close_finish(cast(GIOStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -210,7 +210,7 @@ class IOStream : gobject.object.ObjectG
   {
     GInputStream* _cretval;
     _cretval = g_io_stream_get_input_stream(cast(GIOStream*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.take);
     return _retval;
   }
 
@@ -224,7 +224,7 @@ class IOStream : gobject.object.ObjectG
   {
     GOutputStream* _cretval;
     _cretval = g_io_stream_get_output_stream(cast(GIOStream*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.take);
     return _retval;
   }
 
@@ -289,11 +289,11 @@ class IOStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_io_stream_splice_async(cast(GIOStream*)cPtr, stream2 ? cast(GIOStream*)stream2.cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_io_stream_splice_async(cast(GIOStream*)cPtr, stream2 ? cast(GIOStream*)stream2.cPtr(No.dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 }

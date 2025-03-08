@@ -12,12 +12,12 @@ import soup.types;
 class MessageHeaders : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -47,7 +47,7 @@ class MessageHeaders : gobject.boxed.Boxed
   {
     SoupMessageHeaders* _cretval;
     _cretval = soup_message_headers_new(type);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -65,8 +65,8 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void append(string name, string value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _value = value.toCString(No.alloc);
     soup_message_headers_append(cast(SoupMessageHeaders*)cPtr, _name, _value);
   }
 
@@ -107,8 +107,8 @@ class MessageHeaders : gobject.boxed.Boxed
     extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData)
     {
       auto _dlg = cast(soup.types.MessageHeadersForeachFunc*)userData;
-      string _name = name.fromCString(No.Free);
-      string _value = value.fromCString(No.Free);
+      string _name = name.fromCString(No.free);
+      string _value = value.fromCString(No.free);
 
       (*_dlg)(_name, _value);
     }
@@ -161,7 +161,7 @@ class MessageHeaders : gobject.boxed.Boxed
     char* _disposition;
     GHashTable* _params;
     _retval = soup_message_headers_get_content_disposition(cast(SoupMessageHeaders*)cPtr, &_disposition, &_params);
-    disposition = _disposition.fromCString(Yes.Free);
+    disposition = _disposition.fromCString(Yes.free);
     params = gHashTableToD!(string, string, GidOwnership.Full)(_params);
     return _retval;
   }
@@ -170,7 +170,7 @@ class MessageHeaders : gobject.boxed.Boxed
       Gets the message body length that hdrs declare.
     
     This will only be non-0 if [soup.message_headers.MessageHeaders.getEncoding] returns
-    [soup.types.Encoding.ContentLength].
+    [soup.types.Encoding.contentLength].
     Returns:     the message body length declared by hdrs.
   */
   long getContentLength()
@@ -217,7 +217,7 @@ class MessageHeaders : gobject.boxed.Boxed
     const(char)* _cretval;
     GHashTable* _params;
     _cretval = soup_message_headers_get_content_type(cast(SoupMessageHeaders*)cPtr, &_params);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     params = gHashTableToD!(string, string, GidOwnership.Full)(_params);
     return _retval;
   }
@@ -241,8 +241,8 @@ class MessageHeaders : gobject.boxed.Boxed
   /**
       Gets the expectations declared by hdrs's "Expect" header.
     
-    Currently this will either be [soup.types.Expectation.Continue] or
-    [soup.types.Expectation.Unrecognized].
+    Currently this will either be [soup.types.Expectation.continue_] or
+    [soup.types.Expectation.unrecognized].
     Returns:     the contents of hdrs's "Expect" header
   */
   soup.types.Expectation getExpectations()
@@ -286,9 +286,9 @@ class MessageHeaders : gobject.boxed.Boxed
   string getList(string name)
   {
     const(char)* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = soup_message_headers_get_list(cast(SoupMessageHeaders*)cPtr, _name);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -310,9 +310,9 @@ class MessageHeaders : gobject.boxed.Boxed
   string getOne(string name)
   {
     const(char)* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = soup_message_headers_get_one(cast(SoupMessageHeaders*)cPtr, _name);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -333,11 +333,11 @@ class MessageHeaders : gobject.boxed.Boxed
     check that the ranges are satisfiable.
     
     #SoupServer has built-in handling for range requests. If your
-    server handler returns a [soup.types.Status.Ok] response containing the
+    server handler returns a [soup.types.Status.ok] response containing the
     complete response body (rather than pausing the message and
     returning some of the response body later), and there is a Range
     header in the request, then libsoup will automatically convert the
-    response to a [soup.types.Status.PartialContent] response containing only
+    response to a [soup.types.Status.partialContent] response containing only
     the range(s) requested by the client.
     
     The only time you need to process the Range header yourself is if
@@ -380,8 +380,8 @@ class MessageHeaders : gobject.boxed.Boxed
   bool headerContains(string name, string token)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _token = token.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _token = token.toCString(No.alloc);
     _retval = soup_message_headers_header_contains(cast(SoupMessageHeaders*)cPtr, _name, _token);
     return _retval;
   }
@@ -398,8 +398,8 @@ class MessageHeaders : gobject.boxed.Boxed
   bool headerEquals(string name, string value)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _value = value.toCString(No.alloc);
     _retval = soup_message_headers_header_equals(cast(SoupMessageHeaders*)cPtr, _name, _value);
     return _retval;
   }
@@ -413,7 +413,7 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void remove(string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     soup_message_headers_remove(cast(SoupMessageHeaders*)cPtr, _name);
   }
 
@@ -430,8 +430,8 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void replace(string name, string value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _value = value.toCString(No.alloc);
     soup_message_headers_replace(cast(SoupMessageHeaders*)cPtr, _name, _value);
   }
 
@@ -447,7 +447,7 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void setContentDisposition(string disposition, string[string] params = null)
   {
-    const(char)* _disposition = disposition.toCString(No.Alloc);
+    const(char)* _disposition = disposition.toCString(No.alloc);
     auto _params = gHashTableFromD!(string, string)(params);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_params);
     soup_message_headers_set_content_disposition(cast(SoupMessageHeaders*)cPtr, _disposition, _params);
@@ -455,7 +455,7 @@ class MessageHeaders : gobject.boxed.Boxed
 
   /**
       Sets the message body length that hdrs will declare, and sets
-    hdrs's encoding to [soup.types.Encoding.ContentLength].
+    hdrs's encoding to [soup.types.Encoding.contentLength].
     
     You do not normally need to call this; if hdrs is set to use
     Content-Length encoding, libsoup will automatically set its
@@ -502,7 +502,7 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void setContentType(string contentType, string[string] params = null)
   {
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString(No.alloc);
     auto _params = gHashTableFromD!(string, string)(params);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_params);
     soup_message_headers_set_content_type(cast(SoupMessageHeaders*)cPtr, _contentType, _params);
@@ -524,7 +524,7 @@ class MessageHeaders : gobject.boxed.Boxed
   /**
       Sets hdrs's "Expect" header according to expectations.
     
-    Currently [soup.types.Expectation.Continue] is the only known expectation
+    Currently [soup.types.Expectation.continue_] is the only known expectation
     value. You should set this value on a request if you are sending a
     large message body (eg, via POST or PUT), and want to give the
     server a chance to reject the request after seeing just the headers

@@ -17,15 +17,15 @@ class Color : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GdkColor.sizeof), Yes.Take);
+    super(safeMalloc(GdkColor.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -93,7 +93,7 @@ class Color : gobject.boxed.Boxed
   {
     GdkColor* _cretval;
     _cretval = gdk_color_copy(cast(const(GdkColor)*)cPtr);
-    auto _retval = _cretval ? new gdk.color.Color(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.color.Color(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class Color : gobject.boxed.Boxed
   bool equal(gdk.color.Color colorb)
   {
     bool _retval;
-    _retval = gdk_color_equal(cast(const(GdkColor)*)cPtr, colorb ? cast(const(GdkColor)*)colorb.cPtr(No.Dup) : null);
+    _retval = gdk_color_equal(cast(const(GdkColor)*)cPtr, colorb ? cast(const(GdkColor)*)colorb.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class Color : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gdk_color_to_string(cast(const(GdkColor)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -165,10 +165,10 @@ class Color : gobject.boxed.Boxed
   static bool parse(string spec, out gdk.color.Color color)
   {
     bool _retval;
-    const(char)* _spec = spec.toCString(No.Alloc);
+    const(char)* _spec = spec.toCString(No.alloc);
     GdkColor _color;
     _retval = gdk_color_parse(_spec, &_color);
-    color = new gdk.color.Color(cast(void*)&_color, No.Take);
+    color = new gdk.color.Color(cast(void*)&_color, No.take);
     return _retval;
   }
 }

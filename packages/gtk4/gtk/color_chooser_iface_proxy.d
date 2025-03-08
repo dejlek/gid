@@ -7,7 +7,7 @@ import gtk.color_chooser_mixin;
 /// Proxy object for Gtk.ColorChooser interface when a GObject has no applicable D binding
 class ColorChooserIfaceProxy : IfaceProxy, gtk.color_chooser.ColorChooser
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

@@ -13,7 +13,7 @@ import gobject.object;
 class UnixMountMonitor : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,7 +42,7 @@ class UnixMountMonitor : gobject.object.ObjectG
   {
     GUnixMountMonitor* _cretval;
     _cretval = g_unix_mount_monitor_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -61,7 +61,7 @@ class UnixMountMonitor : gobject.object.ObjectG
   {
     GUnixMountMonitor* _cretval;
     _cretval = g_unix_mount_monitor_get();
-    auto _retval = ObjectG.getDObject!(gio.unix_mount_monitor.UnixMountMonitor)(cast(GUnixMountMonitor*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.unix_mount_monitor.UnixMountMonitor)(cast(GUnixMountMonitor*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -101,10 +101,10 @@ class UnixMountMonitor : gobject.object.ObjectG
     Connect to MountpointsChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMountpointsChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMountpointsChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MountpointsChangedCallbackDlg) || is(T : MountpointsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -136,10 +136,10 @@ class UnixMountMonitor : gobject.object.ObjectG
     Connect to MountsChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMountsChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMountsChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MountsChangedCallbackDlg) || is(T : MountsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

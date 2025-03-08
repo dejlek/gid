@@ -11,7 +11,7 @@ import parquet.types;
 class ColumnChunkMetadata : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -39,7 +39,7 @@ class ColumnChunkMetadata : gobject.object.ObjectG
   bool equal(parquet.column_chunk_metadata.ColumnChunkMetadata otherMetadata)
   {
     bool _retval;
-    _retval = gparquet_column_chunk_metadata_equal(cast(GParquetColumnChunkMetadata*)cPtr, otherMetadata ? cast(GParquetColumnChunkMetadata*)otherMetadata.cPtr(No.Dup) : null);
+    _retval = gparquet_column_chunk_metadata_equal(cast(GParquetColumnChunkMetadata*)cPtr, otherMetadata ? cast(GParquetColumnChunkMetadata*)otherMetadata.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -56,7 +56,7 @@ class ColumnChunkMetadata : gobject.object.ObjectG
   {
     GParquetStatistics* _cretval;
     _cretval = gparquet_column_chunk_metadata_get_statistics(cast(GParquetColumnChunkMetadata*)cPtr);
-    auto _retval = ObjectG.getDObject!(parquet.statistics.Statistics)(cast(GParquetStatistics*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(parquet.statistics.Statistics)(cast(GParquetStatistics*)_cretval, Yes.take);
     return _retval;
   }
 

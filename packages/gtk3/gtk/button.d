@@ -45,7 +45,7 @@ import gtk.widget;
 class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -73,7 +73,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   {
     GtkWidget* _cretval;
     _cretval = gtk_button_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -93,9 +93,9 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   static gtk.button.Button newFromIconName(string iconName, gtk.types.IconSize size)
   {
     GtkWidget* _cretval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString(No.alloc);
     _cretval = gtk_button_new_from_icon_name(_iconName, size);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -117,9 +117,9 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   static gtk.button.Button newFromStock(string stockId)
   {
     GtkWidget* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString(No.alloc);
     _cretval = gtk_button_new_from_stock(_stockId);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -133,9 +133,9 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   static gtk.button.Button newWithLabel(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.alloc);
     _cretval = gtk_button_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -154,9 +154,9 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   static gtk.button.Button newWithMnemonic(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.alloc);
     _cretval = gtk_button_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -213,7 +213,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   {
     GdkWindow* _cretval;
     _cretval = gtk_button_get_event_window(cast(GtkButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
     return _retval;
   }
 
@@ -243,7 +243,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   {
     GtkWidget* _cretval;
     _cretval = gtk_button_get_image(cast(GtkButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   {
     const(char)* _cretval;
     _cretval = gtk_button_get_label(cast(GtkButton*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -401,7 +401,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   void setImage(gtk.widget.Widget image = null)
   {
-    gtk_button_set_image(cast(GtkButton*)cPtr, image ? cast(GtkWidget*)image.cPtr(No.Dup) : null);
+    gtk_button_set_image(cast(GtkButton*)cPtr, image ? cast(GtkWidget*)image.cPtr(No.dup) : null);
   }
 
   /**
@@ -426,16 +426,16 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   void setLabel(string label)
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.alloc);
     gtk_button_set_label(cast(GtkButton*)cPtr, _label);
   }
 
   /**
       Sets the relief style of the edges of the given #GtkButton widget.
-    Two styles exist, [gtk.types.ReliefStyle.Normal] and [gtk.types.ReliefStyle.None].
-    The default style is, as one can guess, [gtk.types.ReliefStyle.Normal].
-    The deprecated value [gtk.types.ReliefStyle.Half] behaves the same as
-    [gtk.types.ReliefStyle.Normal].
+    Two styles exist, [gtk.types.ReliefStyle.normal] and [gtk.types.ReliefStyle.none].
+    The default style is, as one can guess, [gtk.types.ReliefStyle.normal].
+    The deprecated value [gtk.types.ReliefStyle.half] behaves the same as
+    [gtk.types.ReliefStyle.normal].
     Params:
       relief =       The GtkReliefStyle as described above
   */
@@ -486,10 +486,10 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -521,10 +521,10 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     Connect to Clicked signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectClicked(T)(T callback, Flag!"After" after = No.After)
+  ulong connectClicked(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ClickedCallbackDlg) || is(T : ClickedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -558,10 +558,10 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     Connect to Enter signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEnter(T)(T callback, Flag!"After" after = No.After)
+  ulong connectEnter(T)(T callback, Flag!"after" after = No.after)
   if (is(T : EnterCallbackDlg) || is(T : EnterCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -595,10 +595,10 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     Connect to Leave signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLeave(T)(T callback, Flag!"After" after = No.After)
+  ulong connectLeave(T)(T callback, Flag!"after" after = No.after)
   if (is(T : LeaveCallbackDlg) || is(T : LeaveCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -632,10 +632,10 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     Connect to Pressed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPressed(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPressed(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PressedCallbackDlg) || is(T : PressedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -669,10 +669,10 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     Connect to Released signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectReleased(T)(T callback, Flag!"After" after = No.After)
+  ulong connectReleased(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ReleasedCallbackDlg) || is(T : ReleasedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -77,7 +77,7 @@ import gst.types;
 class PadTemplate : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -106,9 +106,9 @@ class PadTemplate : gst.object.ObjectGst
   this(string nameTemplate, gst.types.PadDirection direction, gst.types.PadPresence presence, gst.caps.Caps caps)
   {
     GstPadTemplate* _cretval;
-    const(char)* _nameTemplate = nameTemplate.toCString(No.Alloc);
-    _cretval = gst_pad_template_new(_nameTemplate, direction, presence, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    const(char)* _nameTemplate = nameTemplate.toCString(No.alloc);
+    _cretval = gst_pad_template_new(_nameTemplate, direction, presence, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
+    this(_cretval, No.take);
   }
 
   /**
@@ -122,7 +122,7 @@ class PadTemplate : gst.object.ObjectGst
   {
     GstPadTemplate* _cretval;
     _cretval = gst_pad_template_new_from_static_pad_template_with_gtype(padTemplate ? cast(GstStaticPadTemplate*)padTemplate.cPtr : null, padType);
-    auto _retval = ObjectG.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.take);
     return _retval;
   }
 
@@ -140,9 +140,9 @@ class PadTemplate : gst.object.ObjectGst
   static gst.pad_template.PadTemplate newWithGtype(string nameTemplate, gst.types.PadDirection direction, gst.types.PadPresence presence, gst.caps.Caps caps, gobject.types.GType padType)
   {
     GstPadTemplate* _cretval;
-    const(char)* _nameTemplate = nameTemplate.toCString(No.Alloc);
-    _cretval = gst_pad_template_new_with_gtype(_nameTemplate, direction, presence, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, padType);
-    auto _retval = ObjectG.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
+    const(char)* _nameTemplate = nameTemplate.toCString(No.alloc);
+    _cretval = gst_pad_template_new_with_gtype(_nameTemplate, direction, presence, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null, padType);
+    auto _retval = ObjectG.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.take);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class PadTemplate : gst.object.ObjectGst
   {
     GstCaps* _cretval;
     _cretval = gst_pad_template_get_caps(cast(GstPadTemplate*)cPtr);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class PadTemplate : gst.object.ObjectGst
   {
     GstCaps* _cretval;
     _cretval = gst_pad_template_get_documentation_caps(cast(GstPadTemplate*)cPtr);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class PadTemplate : gst.object.ObjectGst
   */
   void padCreated(gst.pad.Pad pad)
   {
-    gst_pad_template_pad_created(cast(GstPadTemplate*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+    gst_pad_template_pad_created(cast(GstPadTemplate*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.dup) : null);
   }
 
   /**
@@ -192,7 +192,7 @@ class PadTemplate : gst.object.ObjectGst
   */
   void setDocumentationCaps(gst.caps.Caps caps)
   {
-    gst_pad_template_set_documentation_caps(cast(GstPadTemplate*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    gst_pad_template_set_documentation_caps(cast(GstPadTemplate*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
   }
 
   /**
@@ -213,10 +213,10 @@ class PadTemplate : gst.object.ObjectGst
     Connect to PadCreated signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPadCreated(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPadCreated(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PadCreatedCallbackDlg) || is(T : PadCreatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

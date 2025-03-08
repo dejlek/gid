@@ -12,12 +12,12 @@ import gtk.types;
 class TreePath : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -42,7 +42,7 @@ class TreePath : gobject.boxed.Boxed
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_path_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -55,7 +55,7 @@ class TreePath : gobject.boxed.Boxed
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_path_new_first();
-    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class TreePath : gobject.boxed.Boxed
 
     auto _indices = cast(int*)indices.ptr;
     _cretval = gtk_tree_path_new_from_indicesv(_indices, _length);
-    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -93,9 +93,9 @@ class TreePath : gobject.boxed.Boxed
   static gtk.tree_path.TreePath newFromString(string path)
   {
     GtkTreePath* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     _cretval = gtk_tree_path_new_from_string(_path);
-    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class TreePath : gobject.boxed.Boxed
   int compare(gtk.tree_path.TreePath b)
   {
     int _retval;
-    _retval = gtk_tree_path_compare(cast(const(GtkTreePath)*)cPtr, b ? cast(const(GtkTreePath)*)b.cPtr(No.Dup) : null);
+    _retval = gtk_tree_path_compare(cast(const(GtkTreePath)*)cPtr, b ? cast(const(GtkTreePath)*)b.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class TreePath : gobject.boxed.Boxed
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_path_copy(cast(const(GtkTreePath)*)cPtr);
-    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class TreePath : gobject.boxed.Boxed
   bool isAncestor(gtk.tree_path.TreePath descendant)
   {
     bool _retval;
-    _retval = gtk_tree_path_is_ancestor(cast(GtkTreePath*)cPtr, descendant ? cast(GtkTreePath*)descendant.cPtr(No.Dup) : null);
+    _retval = gtk_tree_path_is_ancestor(cast(GtkTreePath*)cPtr, descendant ? cast(GtkTreePath*)descendant.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class TreePath : gobject.boxed.Boxed
   bool isDescendant(gtk.tree_path.TreePath ancestor)
   {
     bool _retval;
-    _retval = gtk_tree_path_is_descendant(cast(GtkTreePath*)cPtr, ancestor ? cast(GtkTreePath*)ancestor.cPtr(No.Dup) : null);
+    _retval = gtk_tree_path_is_descendant(cast(GtkTreePath*)cPtr, ancestor ? cast(GtkTreePath*)ancestor.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -254,7 +254,7 @@ class TreePath : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gtk_tree_path_to_string(cast(GtkTreePath*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 

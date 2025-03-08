@@ -13,7 +13,7 @@ import gobject.object;
 class MapArray : arrow.list_array.ListArray
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,10 +34,10 @@ class MapArray : arrow.list_array.ListArray
   {
     GArrowMapArray* _cretval;
     GError *_err;
-    _cretval = garrow_map_array_new(offsets ? cast(GArrowArray*)offsets.cPtr(No.Dup) : null, keys ? cast(GArrowArray*)keys.cPtr(No.Dup) : null, items ? cast(GArrowArray*)items.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_map_array_new(offsets ? cast(GArrowArray*)offsets.cPtr(No.dup) : null, keys ? cast(GArrowArray*)keys.cPtr(No.dup) : null, items ? cast(GArrowArray*)items.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */
@@ -45,7 +45,7 @@ class MapArray : arrow.list_array.ListArray
   {
     GArrowArray* _cretval;
     _cretval = garrow_map_array_get_items(cast(GArrowMapArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -54,7 +54,7 @@ class MapArray : arrow.list_array.ListArray
   {
     GArrowArray* _cretval;
     _cretval = garrow_map_array_get_keys(cast(GArrowMapArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.take);
     return _retval;
   }
 }

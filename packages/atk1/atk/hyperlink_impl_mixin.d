@@ -27,7 +27,7 @@ template HyperlinkImplT()
   {
     AtkHyperlink* _cretval;
     _cretval = atk_hyperlink_impl_get_hyperlink(cast(AtkHyperlinkImpl*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.hyperlink.Hyperlink)(cast(AtkHyperlink*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.hyperlink.Hyperlink)(cast(AtkHyperlink*)_cretval, Yes.take);
     return _retval;
   }
 }

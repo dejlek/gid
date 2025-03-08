@@ -16,7 +16,7 @@ import gobject.object;
 class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -36,8 +36,8 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
   this(arrow.buffer.Buffer buffer)
   {
     GArrowBufferInputStream* _cretval;
-    _cretval = garrow_buffer_input_stream_new(buffer ? cast(GArrowBuffer*)buffer.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_buffer_input_stream_new(buffer ? cast(GArrowBuffer*)buffer.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /** */
@@ -45,7 +45,7 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_buffer_input_stream_get_buffer(cast(GArrowBufferInputStream*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.take);
     return _retval;
   }
 }

@@ -83,7 +83,7 @@ import gtk.window_group;
 class Window : gtk.bin.Bin
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -128,7 +128,7 @@ class Window : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_new(type);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -158,7 +158,7 @@ class Window : gtk.bin.Bin
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_default_icon_name();
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class Window : gtk.bin.Bin
   */
   static void setDefaultIcon(gdkpixbuf.pixbuf.Pixbuf icon)
   {
-    gtk_window_set_default_icon(icon ? cast(PixbufC*)icon.cPtr(No.Dup) : null);
+    gtk_window_set_default_icon(icon ? cast(PixbufC*)icon.cPtr(No.dup) : null);
   }
 
   /**
@@ -219,7 +219,7 @@ class Window : gtk.bin.Bin
   static bool setDefaultIconFromFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString(No.alloc);
     GError *_err;
     _retval = gtk_window_set_default_icon_from_file(_filename, &_err);
     if (_err)
@@ -236,7 +236,7 @@ class Window : gtk.bin.Bin
   */
   static void setDefaultIconName(string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gtk_window_set_default_icon_name(_name);
   }
 
@@ -302,7 +302,7 @@ class Window : gtk.bin.Bin
   */
   void addAccelGroup(gtk.accel_group.AccelGroup accelGroup)
   {
-    gtk_window_add_accel_group(cast(GtkWindow*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
+    gtk_window_add_accel_group(cast(GtkWindow*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.dup) : null);
   }
 
   /**
@@ -313,7 +313,7 @@ class Window : gtk.bin.Bin
   */
   void addMnemonic(uint keyval, gtk.widget.Widget target)
   {
-    gtk_window_add_mnemonic(cast(GtkWindow*)cPtr, keyval, target ? cast(GtkWidget*)target.cPtr(No.Dup) : null);
+    gtk_window_add_mnemonic(cast(GtkWindow*)cPtr, keyval, target ? cast(GtkWidget*)target.cPtr(No.dup) : null);
   }
 
   /**
@@ -409,7 +409,7 @@ class Window : gtk.bin.Bin
   */
   void fullscreenOnMonitor(gdk.screen.Screen screen, int monitor)
   {
-    gtk_window_fullscreen_on_monitor(cast(GtkWindow*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null, monitor);
+    gtk_window_fullscreen_on_monitor(cast(GtkWindow*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null, monitor);
   }
 
   /**
@@ -431,7 +431,7 @@ class Window : gtk.bin.Bin
   {
     GtkApplication* _cretval;
     _cretval = gtk_window_get_application(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.application.Application)(cast(GtkApplication*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.application.Application)(cast(GtkApplication*)_cretval, No.take);
     return _retval;
   }
 
@@ -445,7 +445,7 @@ class Window : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_attached_to(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -485,7 +485,7 @@ class Window : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_default_widget(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -526,7 +526,7 @@ class Window : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_focus(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -576,7 +576,7 @@ class Window : gtk.bin.Bin
   {
     GtkWindowGroup* _cretval;
     _cretval = gtk_window_get_group(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window_group.WindowGroup)(cast(GtkWindowGroup*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.window_group.WindowGroup)(cast(GtkWindowGroup*)_cretval, No.take);
     return _retval;
   }
 
@@ -616,7 +616,7 @@ class Window : gtk.bin.Bin
   {
     PixbufC* _cretval;
     _cretval = gtk_window_get_icon(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.take);
     return _retval;
   }
 
@@ -644,7 +644,7 @@ class Window : gtk.bin.Bin
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_icon_name(cast(GtkWindow*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -774,7 +774,7 @@ class Window : gtk.bin.Bin
     bool _retval;
     GdkRectangle _rect;
     _retval = gtk_window_get_resize_grip_area(cast(GtkWindow*)cPtr, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.take);
     return _retval;
   }
 
@@ -788,7 +788,7 @@ class Window : gtk.bin.Bin
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_role(cast(GtkWindow*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -800,7 +800,7 @@ class Window : gtk.bin.Bin
   {
     GdkScreen* _cretval;
     _cretval = gtk_window_get_screen(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.take);
     return _retval;
   }
 
@@ -918,7 +918,7 @@ class Window : gtk.bin.Bin
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_title(cast(GtkWindow*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -931,7 +931,7 @@ class Window : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_titlebar(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -945,7 +945,7 @@ class Window : gtk.bin.Bin
   {
     GtkWindow* _cretval;
     _cretval = gtk_window_get_transient_for(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.take);
     return _retval;
   }
 
@@ -1227,7 +1227,7 @@ class Window : gtk.bin.Bin
   bool parseGeometry(string geometry)
   {
     bool _retval;
-    const(char)* _geometry = geometry.toCString(No.Alloc);
+    const(char)* _geometry = geometry.toCString(No.alloc);
     _retval = gtk_window_parse_geometry(cast(GtkWindow*)cPtr, _geometry);
     return _retval;
   }
@@ -1295,7 +1295,7 @@ class Window : gtk.bin.Bin
   */
   void removeAccelGroup(gtk.accel_group.AccelGroup accelGroup)
   {
-    gtk_window_remove_accel_group(cast(GtkWindow*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
+    gtk_window_remove_accel_group(cast(GtkWindow*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.dup) : null);
   }
 
   /**
@@ -1306,7 +1306,7 @@ class Window : gtk.bin.Bin
   */
   void removeMnemonic(uint keyval, gtk.widget.Widget target)
   {
-    gtk_window_remove_mnemonic(cast(GtkWindow*)cPtr, keyval, target ? cast(GtkWidget*)target.cPtr(No.Dup) : null);
+    gtk_window_remove_mnemonic(cast(GtkWindow*)cPtr, keyval, target ? cast(GtkWidget*)target.cPtr(No.dup) : null);
   }
 
   /**
@@ -1419,7 +1419,7 @@ class Window : gtk.bin.Bin
   */
   void setApplication(gtk.application.Application application = null)
   {
-    gtk_window_set_application(cast(GtkWindow*)cPtr, application ? cast(GtkApplication*)application.cPtr(No.Dup) : null);
+    gtk_window_set_application(cast(GtkWindow*)cPtr, application ? cast(GtkApplication*)application.cPtr(No.dup) : null);
   }
 
   /**
@@ -1442,7 +1442,7 @@ class Window : gtk.bin.Bin
   */
   void setAttachedTo(gtk.widget.Widget attachWidget = null)
   {
-    gtk_window_set_attached_to(cast(GtkWindow*)cPtr, attachWidget ? cast(GtkWidget*)attachWidget.cPtr(No.Dup) : null);
+    gtk_window_set_attached_to(cast(GtkWindow*)cPtr, attachWidget ? cast(GtkWidget*)attachWidget.cPtr(No.dup) : null);
   }
 
   /**
@@ -1479,7 +1479,7 @@ class Window : gtk.bin.Bin
   */
   void setDefault(gtk.widget.Widget defaultWidget = null)
   {
-    gtk_window_set_default(cast(GtkWindow*)cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget.cPtr(No.Dup) : null);
+    gtk_window_set_default(cast(GtkWindow*)cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget.cPtr(No.dup) : null);
   }
 
   /**
@@ -1585,7 +1585,7 @@ class Window : gtk.bin.Bin
   */
   void setFocus(gtk.widget.Widget focus = null)
   {
-    gtk_window_set_focus(cast(GtkWindow*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(No.Dup) : null);
+    gtk_window_set_focus(cast(GtkWindow*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(No.dup) : null);
   }
 
   /**
@@ -1624,7 +1624,7 @@ class Window : gtk.bin.Bin
   */
   void setGeometryHints(gtk.widget.Widget geometryWidget, gdk.types.Geometry geometry, gdk.types.WindowHints geomMask)
   {
-    gtk_window_set_geometry_hints(cast(GtkWindow*)cPtr, geometryWidget ? cast(GtkWidget*)geometryWidget.cPtr(No.Dup) : null, &geometry, geomMask);
+    gtk_window_set_geometry_hints(cast(GtkWindow*)cPtr, geometryWidget ? cast(GtkWidget*)geometryWidget.cPtr(No.dup) : null, &geometry, geomMask);
   }
 
   /**
@@ -1719,7 +1719,7 @@ class Window : gtk.bin.Bin
   */
   void setIcon(gdkpixbuf.pixbuf.Pixbuf icon = null)
   {
-    gtk_window_set_icon(cast(GtkWindow*)cPtr, icon ? cast(PixbufC*)icon.cPtr(No.Dup) : null);
+    gtk_window_set_icon(cast(GtkWindow*)cPtr, icon ? cast(PixbufC*)icon.cPtr(No.dup) : null);
   }
 
   /**
@@ -1735,7 +1735,7 @@ class Window : gtk.bin.Bin
   bool setIconFromFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString(No.alloc);
     GError *_err;
     _retval = gtk_window_set_icon_from_file(cast(GtkWindow*)cPtr, _filename, &_err);
     if (_err)
@@ -1791,7 +1791,7 @@ class Window : gtk.bin.Bin
   */
   void setIconName(string name = null)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gtk_window_set_icon_name(cast(GtkWindow*)cPtr, _name);
   }
 
@@ -1911,7 +1911,7 @@ class Window : gtk.bin.Bin
 
   /**
       Sets a position constraint for this window. If the old or new
-    constraint is [gtk.types.WindowPosition.CenterAlways], this will also cause
+    constraint is [gtk.types.WindowPosition.centerAlways], this will also cause
     the window to be repositioned to satisfy the new constraint.
     Params:
       position =       a position constraint.
@@ -1950,7 +1950,7 @@ class Window : gtk.bin.Bin
   */
   void setRole(string role)
   {
-    const(char)* _role = role.toCString(No.Alloc);
+    const(char)* _role = role.toCString(No.alloc);
     gtk_window_set_role(cast(GtkWindow*)cPtr, _role);
   }
 
@@ -1963,7 +1963,7 @@ class Window : gtk.bin.Bin
   */
   void setScreen(gdk.screen.Screen screen)
   {
-    gtk_window_set_screen(cast(GtkWindow*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
+    gtk_window_set_screen(cast(GtkWindow*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null);
   }
 
   /**
@@ -2007,7 +2007,7 @@ class Window : gtk.bin.Bin
   */
   void setStartupId(string startupId)
   {
-    const(char)* _startupId = startupId.toCString(No.Alloc);
+    const(char)* _startupId = startupId.toCString(No.alloc);
     gtk_window_set_startup_id(cast(GtkWindow*)cPtr, _startupId);
   }
 
@@ -2025,7 +2025,7 @@ class Window : gtk.bin.Bin
   */
   void setTitle(string title)
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString(No.alloc);
     gtk_window_set_title(cast(GtkWindow*)cPtr, _title);
   }
 
@@ -2045,7 +2045,7 @@ class Window : gtk.bin.Bin
   */
   void setTitlebar(gtk.widget.Widget titlebar = null)
   {
-    gtk_window_set_titlebar(cast(GtkWindow*)cPtr, titlebar ? cast(GtkWidget*)titlebar.cPtr(No.Dup) : null);
+    gtk_window_set_titlebar(cast(GtkWindow*)cPtr, titlebar ? cast(GtkWidget*)titlebar.cPtr(No.dup) : null);
   }
 
   /**
@@ -2072,7 +2072,7 @@ class Window : gtk.bin.Bin
   */
   void setTransientFor(gtk.window.Window parent = null)
   {
-    gtk_window_set_transient_for(cast(GtkWindow*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    gtk_window_set_transient_for(cast(GtkWindow*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null);
   }
 
   /**
@@ -2118,8 +2118,8 @@ class Window : gtk.bin.Bin
   */
   void setWmclass(string wmclassName, string wmclassClass)
   {
-    const(char)* _wmclassName = wmclassName.toCString(No.Alloc);
-    const(char)* _wmclassClass = wmclassClass.toCString(No.Alloc);
+    const(char)* _wmclassName = wmclassName.toCString(No.alloc);
+    const(char)* _wmclassClass = wmclassClass.toCString(No.alloc);
     gtk_window_set_wmclass(cast(GtkWindow*)cPtr, _wmclassName, _wmclassClass);
   }
 
@@ -2211,10 +2211,10 @@ class Window : gtk.bin.Bin
     Connect to ActivateDefault signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivateDefault(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivateDefault(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateDefaultCallbackDlg) || is(T : ActivateDefaultCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2249,10 +2249,10 @@ class Window : gtk.bin.Bin
     Connect to ActivateFocus signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivateFocus(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivateFocus(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateFocusCallbackDlg) || is(T : ActivateFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2293,10 +2293,10 @@ class Window : gtk.bin.Bin
     Connect to EnableDebugging signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEnableDebugging(T)(T callback, Flag!"After" after = No.After)
+  ulong connectEnableDebugging(T)(T callback, Flag!"after" after = No.after)
   if (is(T : EnableDebuggingCallbackDlg) || is(T : EnableDebuggingCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2332,10 +2332,10 @@ class Window : gtk.bin.Bin
     Connect to KeysChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectKeysChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectKeysChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : KeysChangedCallbackDlg) || is(T : KeysChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2369,10 +2369,10 @@ class Window : gtk.bin.Bin
     Connect to SetFocus signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSetFocus(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSetFocus(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SetFocusCallbackDlg) || is(T : SetFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -544,7 +544,7 @@ import gobject.value;
 class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -573,7 +573,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
     object, which you can retrieve later via [gio.task.Task.getTaskData].
     
     By default, if cancellable is cancelled, then the return value of
-    the task will always be [gio.types.IOErrorEnum.Cancelled], even if the task had
+    the task will always be [gio.types.IOErrorEnum.cancelled], even if the task had
     already completed before the cancellation. This allows for
     simplified handling in cases where cancellation may imply that
     other objects that the task depends on have been destroyed. If you
@@ -593,14 +593,14 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     GTask* _cretval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    _cretval = g_task_new(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
-    this(_cretval, Yes.Take);
+    _cretval = g_task_new(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -617,7 +617,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
   static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectG sourceObject = null)
   {
     bool _retval;
-    _retval = g_task_is_valid(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null);
+    _retval = g_task_is_valid(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -644,12 +644,12 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_task_report_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, _callbackCB, _callback, sourceTag, error ? cast(GError*)error.cPtr : null);
+    g_task_report_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.dup) : null, _callbackCB, _callback, sourceTag, error ? cast(GError*)error.cPtr : null);
   }
 
   /**
@@ -660,7 +660,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
   {
     GCancellable* _cretval;
     _cretval = g_task_get_cancellable(cast(GTask*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.take);
     return _retval;
   }
 
@@ -703,7 +703,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
   {
     GMainContext* _cretval;
     _cretval = g_task_get_context(cast(GTask*)cPtr);
-    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -715,7 +715,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
   {
     const(char)* _cretval;
     _cretval = g_task_get_name(cast(GTask*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -751,7 +751,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
   {
     ObjectC* _cretval;
     _cretval = g_task_get_source_object(cast(GTask*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.take);
     return _retval;
   }
 
@@ -869,7 +869,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
     _retval = g_task_propagate_value(cast(GTask*)cPtr, &_value, &_err);
     if (_err)
       throw new ErrorG(_err);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)&_value, No.take);
     return _retval;
   }
 
@@ -947,7 +947,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
   */
   void returnNewErrorLiteral(glib.types.Quark domain, int code, string message)
   {
-    const(char)* _message = message.toCString(No.Alloc);
+    const(char)* _message = message.toCString(No.alloc);
     g_task_return_new_error_literal(cast(GTask*)cPtr, domain, code, _message);
   }
 
@@ -1003,7 +1003,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
   */
   void returnValue(gobject.value.Value result = null)
   {
-    g_task_return_value(cast(GTask*)cPtr, result ? cast(GValue*)result.cPtr(No.Dup) : null);
+    g_task_return_value(cast(GTask*)cPtr, result ? cast(GValue*)result.cPtr(No.dup) : null);
   }
 
   /**
@@ -1036,7 +1036,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       ptrThawGC(taskData);
       auto _dlg = cast(gio.types.TaskThreadFunc*)taskData;
 
-      (*_dlg)(ObjectG.getDObject!(gio.task.Task)(cast(void*)task, No.Take), ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gio.task.Task)(cast(void*)task, No.take), ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.take));
     }
     auto _taskFuncCB = taskFunc ? &_taskFuncCallback : null;
     g_task_run_in_thread(cast(GTask*)cPtr, _taskFuncCB);
@@ -1069,7 +1069,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       ptrThawGC(taskData);
       auto _dlg = cast(gio.types.TaskThreadFunc*)taskData;
 
-      (*_dlg)(ObjectG.getDObject!(gio.task.Task)(cast(void*)task, No.Take), ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gio.task.Task)(cast(void*)task, No.take), ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.take));
     }
     auto _taskFuncCB = taskFunc ? &_taskFuncCallback : null;
     g_task_run_in_thread_sync(cast(GTask*)cPtr, _taskFuncCB);
@@ -1081,7 +1081,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
     [gio.task.Task.hadError] will check the task's #GCancellable first, and
     if it has been cancelled, then they will consider the task to have
     returned an "Operation was cancelled" error
-    ([gio.types.IOErrorEnum.Cancelled]), regardless of any other error or return
+    ([gio.types.IOErrorEnum.cancelled]), regardless of any other error or return
     value the task may have had.
     
     If check_cancellable is false, then the #GTask will not check the
@@ -1115,7 +1115,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
   */
   void setName(string name = null)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     g_task_set_name(cast(GTask*)cPtr, _name);
   }
 
@@ -1208,7 +1208,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
   */
   void setStaticName(string name = null)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     g_task_set_static_name(cast(GTask*)cPtr, _name);
   }
 

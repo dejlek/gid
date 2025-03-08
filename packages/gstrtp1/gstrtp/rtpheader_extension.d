@@ -15,7 +15,7 @@ import gstrtp.types;
 class RTPHeaderExtension : gst.element.Element
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,9 +35,9 @@ class RTPHeaderExtension : gst.element.Element
   static gstrtp.rtpheader_extension.RTPHeaderExtension createFromUri(string uri)
   {
     GstRTPHeaderExtension* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString(No.alloc);
     _cretval = gst_rtp_header_extension_create_from_uri(_uri);
-    auto _retval = ObjectG.getDObject!(gstrtp.rtpheader_extension.RTPHeaderExtension)(cast(GstRTPHeaderExtension*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstrtp.rtpheader_extension.RTPHeaderExtension)(cast(GstRTPHeaderExtension*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -75,7 +75,7 @@ class RTPHeaderExtension : gst.element.Element
   size_t getMaxSize(gst.buffer.Buffer inputMeta)
   {
     size_t _retval;
-    _retval = gst_rtp_header_extension_get_max_size(cast(GstRTPHeaderExtension*)cPtr, inputMeta ? cast(const(GstBuffer)*)inputMeta.cPtr(No.Dup) : null);
+    _retval = gst_rtp_header_extension_get_max_size(cast(GstRTPHeaderExtension*)cPtr, inputMeta ? cast(const(GstBuffer)*)inputMeta.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class RTPHeaderExtension : gst.element.Element
   {
     char* _cretval;
     _cretval = gst_rtp_header_extension_get_sdp_caps_field_name(cast(GstRTPHeaderExtension*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class RTPHeaderExtension : gst.element.Element
   {
     const(char)* _cretval;
     _cretval = gst_rtp_header_extension_get_uri(cast(GstRTPHeaderExtension*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class RTPHeaderExtension : gst.element.Element
       _size = cast(size_t)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _retval = gst_rtp_header_extension_read(cast(GstRTPHeaderExtension*)cPtr, readFlags, _data, _size, buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+    _retval = gst_rtp_header_extension_read(cast(GstRTPHeaderExtension*)cPtr, readFlags, _data, _size, buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class RTPHeaderExtension : gst.element.Element
   bool setAttributesFromCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_rtp_header_extension_set_attributes_from_caps(cast(GstRTPHeaderExtension*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _retval = gst_rtp_header_extension_set_attributes_from_caps(cast(GstRTPHeaderExtension*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class RTPHeaderExtension : gst.element.Element
   bool setCapsFromAttributes(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_rtp_header_extension_set_caps_from_attributes(cast(GstRTPHeaderExtension*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    _retval = gst_rtp_header_extension_set_caps_from_attributes(cast(GstRTPHeaderExtension*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -177,8 +177,8 @@ class RTPHeaderExtension : gst.element.Element
   bool setCapsFromAttributesHelper(gst.caps.Caps caps, string attributes)
   {
     bool _retval;
-    const(char)* _attributes = attributes.toCString(No.Alloc);
-    _retval = gst_rtp_header_extension_set_caps_from_attributes_helper(cast(GstRTPHeaderExtension*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, _attributes);
+    const(char)* _attributes = attributes.toCString(No.alloc);
+    _retval = gst_rtp_header_extension_set_caps_from_attributes_helper(cast(GstRTPHeaderExtension*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null, _attributes);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class RTPHeaderExtension : gst.element.Element
   bool setNonRtpSinkCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_rtp_header_extension_set_non_rtp_sink_caps(cast(GstRTPHeaderExtension*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _retval = gst_rtp_header_extension_set_non_rtp_sink_caps(cast(GstRTPHeaderExtension*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class RTPHeaderExtension : gst.element.Element
   bool updateNonRtpSrcCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_rtp_header_extension_update_non_rtp_src_caps(cast(GstRTPHeaderExtension*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    _retval = gst_rtp_header_extension_update_non_rtp_src_caps(cast(GstRTPHeaderExtension*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class RTPHeaderExtension : gst.element.Element
       _size = cast(size_t)data.length;
 
     auto _data = cast(ubyte*)data.ptr;
-    _retval = gst_rtp_header_extension_write(cast(GstRTPHeaderExtension*)cPtr, inputMeta ? cast(const(GstBuffer)*)inputMeta.cPtr(No.Dup) : null, writeFlags, output ? cast(GstBuffer*)output.cPtr(No.Dup) : null, _data, _size);
+    _retval = gst_rtp_header_extension_write(cast(GstRTPHeaderExtension*)cPtr, inputMeta ? cast(const(GstBuffer)*)inputMeta.cPtr(No.dup) : null, writeFlags, output ? cast(GstBuffer*)output.cPtr(No.dup) : null, _data, _size);
     return _retval;
   }
 }

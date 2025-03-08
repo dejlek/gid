@@ -34,15 +34,15 @@ class GLMemory : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstGLMemory.sizeof), Yes.Take);
+    super(safeMalloc(GstGLMemory.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -247,7 +247,7 @@ class GLMemory : gobject.boxed.Boxed
       (*_dlg)();
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-    gst_gl_memory_init(cast(GstGLMemory*)cPtr, allocator ? cast(GstAllocator*)allocator.cPtr(No.Dup) : null, parent ? cast(GstMemory*)parent.cPtr(No.Dup) : null, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, target, texFormat, params ? cast(const(GstAllocationParams)*)params.cPtr(No.Dup) : null, info ? cast(const(GstVideoInfo)*)info.cPtr(No.Dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign.cPtr : null, userData, _notifyCB);
+    gst_gl_memory_init(cast(GstGLMemory*)cPtr, allocator ? cast(GstAllocator*)allocator.cPtr(No.dup) : null, parent ? cast(GstMemory*)parent.cPtr(No.dup) : null, context ? cast(GstGLContext*)context.cPtr(No.dup) : null, target, texFormat, params ? cast(const(GstAllocationParams)*)params.cPtr(No.dup) : null, info ? cast(const(GstVideoInfo)*)info.cPtr(No.dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign.cPtr : null, userData, _notifyCB);
   }
 
   /**

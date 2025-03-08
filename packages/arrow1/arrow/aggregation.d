@@ -11,7 +11,7 @@ import gobject.object;
 class Aggregation : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,10 +31,10 @@ class Aggregation : gobject.object.ObjectG
   this(string function_, arrow.function_options.FunctionOptions options, string input, string output)
   {
     GArrowAggregation* _cretval;
-    const(char)* _function_ = function_.toCString(No.Alloc);
-    const(char)* _input = input.toCString(No.Alloc);
-    const(char)* _output = output.toCString(No.Alloc);
-    _cretval = garrow_aggregation_new(_function_, options ? cast(GArrowFunctionOptions*)options.cPtr(No.Dup) : null, _input, _output);
-    this(_cretval, Yes.Take);
+    const(char)* _function_ = function_.toCString(No.alloc);
+    const(char)* _input = input.toCString(No.alloc);
+    const(char)* _output = output.toCString(No.alloc);
+    _cretval = garrow_aggregation_new(_function_, options ? cast(GArrowFunctionOptions*)options.cPtr(No.dup) : null, _input, _output);
+    this(_cretval, Yes.take);
   }
 }

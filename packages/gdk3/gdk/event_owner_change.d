@@ -17,7 +17,7 @@ class EventOwnerChange
 {
   GdkEventOwnerChange cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventOwnerChange");
@@ -45,7 +45,7 @@ class EventOwnerChange
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventOwnerChange*)cPtr).window, No.Take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventOwnerChange*)cPtr).window, No.take);
   }
 
   @property byte sendEvent()
@@ -60,7 +60,7 @@ class EventOwnerChange
 
   @property gdk.window.Window owner()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventOwnerChange*)cPtr).owner, No.Take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventOwnerChange*)cPtr).owner, No.take);
   }
 
   @property gdk.types.OwnerChange reason()

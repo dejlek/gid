@@ -18,7 +18,7 @@ import gobject.object;
 class BytesIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.LoadableIcon
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,8 +50,8 @@ class BytesIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loada
   this(glib.bytes.Bytes bytes)
   {
     GIcon* _cretval;
-    _cretval = g_bytes_icon_new(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = g_bytes_icon_new(bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -62,7 +62,7 @@ class BytesIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loada
   {
     GBytes* _cretval;
     _cretval = g_bytes_icon_get_bytes(cast(GBytesIcon*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

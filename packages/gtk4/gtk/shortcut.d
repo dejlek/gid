@@ -29,7 +29,7 @@ import gtk.types;
 class Shortcut : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -57,8 +57,8 @@ class Shortcut : gobject.object.ObjectG
   this(gtk.shortcut_trigger.ShortcutTrigger trigger = null, gtk.shortcut_action.ShortcutAction action = null)
   {
     GtkShortcut* _cretval;
-    _cretval = gtk_shortcut_new(trigger ? cast(GtkShortcutTrigger*)trigger.cPtr(Yes.Dup) : null, action ? cast(GtkShortcutAction*)action.cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gtk_shortcut_new(trigger ? cast(GtkShortcutTrigger*)trigger.cPtr(Yes.dup) : null, action ? cast(GtkShortcutAction*)action.cPtr(Yes.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -69,7 +69,7 @@ class Shortcut : gobject.object.ObjectG
   {
     GtkShortcutAction* _cretval;
     _cretval = gtk_shortcut_get_action(cast(GtkShortcut*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.shortcut_action.ShortcutAction)(cast(GtkShortcutAction*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.shortcut_action.ShortcutAction)(cast(GtkShortcutAction*)_cretval, No.take);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class Shortcut : gobject.object.ObjectG
   {
     VariantC* _cretval;
     _cretval = gtk_shortcut_get_arguments(cast(GtkShortcut*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class Shortcut : gobject.object.ObjectG
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_shortcut_get_trigger(cast(GtkShortcut*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.take);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class Shortcut : gobject.object.ObjectG
   */
   void setAction(gtk.shortcut_action.ShortcutAction action = null)
   {
-    gtk_shortcut_set_action(cast(GtkShortcut*)cPtr, action ? cast(GtkShortcutAction*)action.cPtr(Yes.Dup) : null);
+    gtk_shortcut_set_action(cast(GtkShortcut*)cPtr, action ? cast(GtkShortcutAction*)action.cPtr(Yes.dup) : null);
   }
 
   /**
@@ -115,7 +115,7 @@ class Shortcut : gobject.object.ObjectG
   */
   void setArguments(glib.variant.VariantG args = null)
   {
-    gtk_shortcut_set_arguments(cast(GtkShortcut*)cPtr, args ? cast(VariantC*)args.cPtr(No.Dup) : null);
+    gtk_shortcut_set_arguments(cast(GtkShortcut*)cPtr, args ? cast(VariantC*)args.cPtr(No.dup) : null);
   }
 
   /**
@@ -126,6 +126,6 @@ class Shortcut : gobject.object.ObjectG
   */
   void setTrigger(gtk.shortcut_trigger.ShortcutTrigger trigger = null)
   {
-    gtk_shortcut_set_trigger(cast(GtkShortcut*)cPtr, trigger ? cast(GtkShortcutTrigger*)trigger.cPtr(Yes.Dup) : null);
+    gtk_shortcut_set_trigger(cast(GtkShortcut*)cPtr, trigger ? cast(GtkShortcutTrigger*)trigger.cPtr(Yes.dup) : null);
   }
 }

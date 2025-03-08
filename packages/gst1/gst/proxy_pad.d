@@ -15,7 +15,7 @@ import gst.types;
 class ProxyPad : gst.pad.Pad
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,7 +43,7 @@ class ProxyPad : gst.pad.Pad
   static gst.types.FlowReturn chainDefault(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.buffer.Buffer buffer)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_proxy_pad_chain_default(pad ? cast(GstPad*)pad.cPtr(No.Dup) : null, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null);
+    _cretval = gst_proxy_pad_chain_default(pad ? cast(GstPad*)pad.cPtr(No.dup) : null, parent ? cast(GstObject*)parent.cPtr(No.dup) : null, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -60,7 +60,7 @@ class ProxyPad : gst.pad.Pad
   static gst.types.FlowReturn chainListDefault(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.buffer_list.BufferList list)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_proxy_pad_chain_list_default(pad ? cast(GstPad*)pad.cPtr(No.Dup) : null, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, list ? cast(GstBufferList*)list.cPtr(Yes.Dup) : null);
+    _cretval = gst_proxy_pad_chain_list_default(pad ? cast(GstPad*)pad.cPtr(No.dup) : null, parent ? cast(GstObject*)parent.cPtr(No.dup) : null, list ? cast(GstBufferList*)list.cPtr(Yes.dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -80,9 +80,9 @@ class ProxyPad : gst.pad.Pad
   {
     GstFlowReturn _cretval;
     GstBuffer* _buffer;
-    _cretval = gst_proxy_pad_getrange_default(pad ? cast(GstPad*)pad.cPtr(No.Dup) : null, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, offset, size, &_buffer);
+    _cretval = gst_proxy_pad_getrange_default(pad ? cast(GstPad*)pad.cPtr(No.dup) : null, parent ? cast(GstObject*)parent.cPtr(No.dup) : null, offset, size, &_buffer);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
-    buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.Take);
+    buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.take);
     return _retval;
   }
 
@@ -97,8 +97,8 @@ class ProxyPad : gst.pad.Pad
   static gst.iterator.Iterator iterateInternalLinksDefault(gst.pad.Pad pad, gst.object.ObjectGst parent = null)
   {
     GstIterator* _cretval;
-    _cretval = gst_proxy_pad_iterate_internal_links_default(pad ? cast(GstPad*)pad.cPtr(No.Dup) : null, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_proxy_pad_iterate_internal_links_default(pad ? cast(GstPad*)pad.cPtr(No.dup) : null, parent ? cast(GstObject*)parent.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class ProxyPad : gst.pad.Pad
   {
     GstProxyPad* _cretval;
     _cretval = gst_proxy_pad_get_internal(cast(GstProxyPad*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.proxy_pad.ProxyPad)(cast(GstProxyPad*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.proxy_pad.ProxyPad)(cast(GstProxyPad*)_cretval, Yes.take);
     return _retval;
   }
 }

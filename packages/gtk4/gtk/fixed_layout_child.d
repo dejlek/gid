@@ -13,7 +13,7 @@ import gtk.types;
 class FixedLayoutChild : gtk.layout_child.LayoutChild
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -37,7 +37,7 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
   {
     GskTransform* _cretval;
     _cretval = gtk_fixed_layout_child_get_transform(cast(GtkFixedLayoutChild*)cPtr);
-    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -48,6 +48,6 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
   */
   void setTransform(gsk.transform.Transform transform)
   {
-    gtk_fixed_layout_child_set_transform(cast(GtkFixedLayoutChild*)cPtr, transform ? cast(GskTransform*)transform.cPtr(No.Dup) : null);
+    gtk_fixed_layout_child_set_transform(cast(GtkFixedLayoutChild*)cPtr, transform ? cast(GskTransform*)transform.cPtr(No.dup) : null);
   }
 }

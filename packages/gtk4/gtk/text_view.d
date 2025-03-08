@@ -61,12 +61,12 @@ import pango.tab_array;
   
   ## Accessibility
   
-  [gtk.text_view.TextView] uses the [gtk.types.AccessibleRole.TextBox] role.
+  [gtk.text_view.TextView] uses the [gtk.types.AccessibleRole.textBox] role.
 */
 class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scrollable.Scrollable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -98,7 +98,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_view_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -115,8 +115,8 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   static gtk.text_view.TextView newWithBuffer(gtk.text_buffer.TextBuffer buffer)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_text_view_new_with_buffer(buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.text_view.TextView)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_text_view_new_with_buffer(buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.text_view.TextView)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void addChildAtAnchor(gtk.widget.Widget child, gtk.text_child_anchor.TextChildAnchor anchor)
   {
-    gtk_text_view_add_child_at_anchor(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(No.Dup) : null);
+    gtk_text_view_add_child_at_anchor(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(No.dup) : null);
   }
 
   /**
@@ -149,7 +149,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void addOverlay(gtk.widget.Widget child, int xpos, int ypos)
   {
-    gtk_text_view_add_overlay(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, xpos, ypos);
+    gtk_text_view_add_overlay(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, xpos, ypos);
   }
 
   /**
@@ -169,7 +169,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool backwardDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_backward_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_text_view_backward_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool backwardDisplayLineStart(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_backward_display_line_start(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_text_view_backward_display_line_start(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool forwardDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_forward_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_text_view_forward_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool forwardDisplayLineEnd(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_forward_display_line_end(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_text_view_forward_display_line_end(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -286,7 +286,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_view_get_buffer(cast(GtkTextView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.take);
     return _retval;
   }
 
@@ -320,9 +320,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     GdkRectangle _strong;
     GdkRectangle _weak;
-    gtk_text_view_get_cursor_locations(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, &_strong, &_weak);
-    strong = new gdk.rectangle.Rectangle(cast(void*)&_strong, No.Take);
-    weak = new gdk.rectangle.Rectangle(cast(void*)&_weak, No.Take);
+    gtk_text_view_get_cursor_locations(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.dup) : null, &_strong, &_weak);
+    strong = new gdk.rectangle.Rectangle(cast(void*)&_strong, No.take);
+    weak = new gdk.rectangle.Rectangle(cast(void*)&_weak, No.take);
   }
 
   /**
@@ -358,7 +358,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     GMenuModel* _cretval;
     _cretval = gtk_text_view_get_extra_menu(cast(GtkTextView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.take);
     return _retval;
   }
 
@@ -367,8 +367,8 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     
     See [gtk.text_view.TextView.setGutter].
     
-    win must be one of [gtk.types.TextWindowType.Left], [gtk.types.TextWindowType.Right],
-    [gtk.types.TextWindowType.Top], or [gtk.types.TextWindowType.Bottom].
+    win must be one of [gtk.types.TextWindowType.left], [gtk.types.TextWindowType.right],
+    [gtk.types.TextWindowType.top], or [gtk.types.TextWindowType.bottom].
     Params:
       win =       a [gtk.types.TextWindowType]
     Returns:     a [gtk.widget.Widget]
@@ -377,7 +377,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_view_get_gutter(cast(GtkTextView*)cPtr, win);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -437,7 +437,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     bool _retval;
     GtkTextIter _iter;
     _retval = gtk_text_view_get_iter_at_location(cast(GtkTextView*)cPtr, &_iter, x, y);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.take);
     return _retval;
   }
 
@@ -467,7 +467,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     bool _retval;
     GtkTextIter _iter;
     _retval = gtk_text_view_get_iter_at_position(cast(GtkTextView*)cPtr, &_iter, cast(int*)&trailing, x, y);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.take);
     return _retval;
   }
 
@@ -484,8 +484,8 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   void getIterLocation(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle location)
   {
     GdkRectangle _location;
-    gtk_text_view_get_iter_location(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, &_location);
-    location = new gdk.rectangle.Rectangle(cast(void*)&_location, No.Take);
+    gtk_text_view_get_iter_location(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.dup) : null, &_location);
+    location = new gdk.rectangle.Rectangle(cast(void*)&_location, No.take);
   }
 
   /**
@@ -532,7 +532,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     GtkTextIter _targetIter;
     gtk_text_view_get_line_at_y(cast(GtkTextView*)cPtr, &_targetIter, y, cast(int*)&lineTop);
-    targetIter = new gtk.text_iter.TextIter(cast(void*)&_targetIter, No.Take);
+    targetIter = new gtk.text_iter.TextIter(cast(void*)&_targetIter, No.take);
   }
 
   /**
@@ -548,7 +548,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void getLineYrange(gtk.text_iter.TextIter iter, out int y, out int height)
   {
-    gtk_text_view_get_line_yrange(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, cast(int*)&y, cast(int*)&height);
+    gtk_text_view_get_line_yrange(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.dup) : null, cast(int*)&y, cast(int*)&height);
   }
 
   /**
@@ -562,7 +562,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     PangoContext* _cretval;
     _cretval = gtk_text_view_get_ltr_context(cast(GtkTextView*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.take);
     return _retval;
   }
 
@@ -652,7 +652,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     PangoContext* _cretval;
     _cretval = gtk_text_view_get_rtl_context(cast(GtkTextView*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.take);
     return _retval;
   }
 
@@ -670,7 +670,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     PangoTabArray* _cretval;
     _cretval = gtk_text_view_get_tabs(cast(GtkTextView*)cPtr);
-    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -698,7 +698,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   {
     GdkRectangle _visibleRect;
     gtk_text_view_get_visible_rect(cast(GtkTextView*)cPtr, &_visibleRect);
-    visibleRect = new gdk.rectangle.Rectangle(cast(void*)&_visibleRect, No.Take);
+    visibleRect = new gdk.rectangle.Rectangle(cast(void*)&_visibleRect, No.take);
   }
 
   /**
@@ -752,7 +752,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool imContextFilterKeypress(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gtk_text_view_im_context_filter_keypress(cast(GtkTextView*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
+    _retval = gtk_text_view_im_context_filter_keypress(cast(GtkTextView*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -766,7 +766,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool moveMarkOnscreen(gtk.text_mark.TextMark mark)
   {
     bool _retval;
-    _retval = gtk_text_view_move_mark_onscreen(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null);
+    _retval = gtk_text_view_move_mark_onscreen(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -781,7 +781,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void moveOverlay(gtk.widget.Widget child, int xpos, int ypos)
   {
-    gtk_text_view_move_overlay(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, xpos, ypos);
+    gtk_text_view_move_overlay(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, xpos, ypos);
   }
 
   /**
@@ -806,7 +806,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool moveVisually(gtk.text_iter.TextIter iter, int count)
   {
     bool _retval;
-    _retval = gtk_text_view_move_visually(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, count);
+    _retval = gtk_text_view_move_visually(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, count);
     return _retval;
   }
 
@@ -829,7 +829,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void remove(gtk.widget.Widget child)
   {
-    gtk_text_view_remove(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_text_view_remove(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -866,7 +866,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void scrollMarkOnscreen(gtk.text_mark.TextMark mark)
   {
-    gtk_text_view_scroll_mark_onscreen(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null);
+    gtk_text_view_scroll_mark_onscreen(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.dup) : null);
   }
 
   /**
@@ -897,7 +897,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool scrollToIter(gtk.text_iter.TextIter iter, double withinMargin, bool useAlign, double xalign, double yalign)
   {
     bool _retval;
-    _retval = gtk_text_view_scroll_to_iter(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, withinMargin, useAlign, xalign, yalign);
+    _retval = gtk_text_view_scroll_to_iter(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, withinMargin, useAlign, xalign, yalign);
     return _retval;
   }
 
@@ -920,7 +920,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void scrollToMark(gtk.text_mark.TextMark mark, double withinMargin, bool useAlign, double xalign, double yalign)
   {
-    gtk_text_view_scroll_to_mark(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null, withinMargin, useAlign, xalign, yalign);
+    gtk_text_view_scroll_to_mark(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.dup) : null, withinMargin, useAlign, xalign, yalign);
   }
 
   /**
@@ -966,7 +966,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void setBuffer(gtk.text_buffer.TextBuffer buffer = null)
   {
-    gtk_text_view_set_buffer(cast(GtkTextView*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
+    gtk_text_view_set_buffer(cast(GtkTextView*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.dup) : null);
   }
 
   /**
@@ -1008,21 +1008,21 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void setExtraMenu(gio.menu_model.MenuModel model = null)
   {
-    gtk_text_view_set_extra_menu(cast(GtkTextView*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
+    gtk_text_view_set_extra_menu(cast(GtkTextView*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.dup) : null);
   }
 
   /**
       Places widget into the gutter specified by win.
     
-    win must be one of [gtk.types.TextWindowType.Left], [gtk.types.TextWindowType.Right],
-    [gtk.types.TextWindowType.Top], or [gtk.types.TextWindowType.Bottom].
+    win must be one of [gtk.types.TextWindowType.left], [gtk.types.TextWindowType.right],
+    [gtk.types.TextWindowType.top], or [gtk.types.TextWindowType.bottom].
     Params:
       win =       a [gtk.types.TextWindowType]
       widget =       a [gtk.widget.Widget]
   */
   void setGutter(gtk.types.TextWindowType win, gtk.widget.Widget widget = null)
   {
-    gtk_text_view_set_gutter(cast(GtkTextView*)cPtr, win, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_text_view_set_gutter(cast(GtkTextView*)cPtr, win, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
   }
 
   /**
@@ -1173,7 +1173,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   */
   void setTabs(pango.tab_array.TabArray tabs)
   {
-    gtk_text_view_set_tabs(cast(GtkTextView*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
+    gtk_text_view_set_tabs(cast(GtkTextView*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.dup) : null);
   }
 
   /**
@@ -1211,7 +1211,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   bool startsDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_starts_display_line(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_text_view_starts_display_line(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -1252,10 +1252,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     Connect to Backspace signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectBackspace(T)(T callback, Flag!"After" after = No.After)
+  ulong connectBackspace(T)(T callback, Flag!"after" after = No.after)
   if (is(T : BackspaceCallbackDlg) || is(T : BackspaceCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1293,10 +1293,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     Connect to CopyClipboard signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCopyClipboard(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CopyClipboardCallbackDlg) || is(T : CopyClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1334,10 +1334,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     Connect to CutClipboard signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCutClipboard(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCutClipboard(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CutClipboardCallbackDlg) || is(T : CutClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1357,7 +1357,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     
     The ::delete-from-cursor signal is a [keybinding signal](class.SignalAction.html).
     
-    If the type is [gtk.types.DeleteType.Chars], GTK deletes the selection
+    If the type is [gtk.types.DeleteType.chars], GTK deletes the selection
     if there is one, otherwise it deletes the requested number
     of characters.
     
@@ -1382,10 +1382,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     Connect to DeleteFromCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeleteFromCursor(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDeleteFromCursor(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DeleteFromCursorCallbackDlg) || is(T : DeleteFromCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1425,10 +1425,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     Connect to ExtendSelection signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectExtendSelection(T)(T callback, Flag!"After" after = No.After)
+  ulong connectExtendSelection(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ExtendSelectionCallbackDlg) || is(T : ExtendSelectionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1472,10 +1472,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     Connect to InsertAtCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInsertAtCursor(T)(T callback, Flag!"After" after = No.After)
+  ulong connectInsertAtCursor(T)(T callback, Flag!"after" after = No.after)
   if (is(T : InsertAtCursorCallbackDlg) || is(T : InsertAtCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1514,10 +1514,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     Connect to InsertEmoji signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInsertEmoji(T)(T callback, Flag!"After" after = No.After)
+  ulong connectInsertEmoji(T)(T callback, Flag!"after" after = No.after)
   if (is(T : InsertEmojiCallbackDlg) || is(T : InsertEmojiCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1576,10 +1576,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     Connect to MoveCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMoveCursor(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1623,10 +1623,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     Connect to MoveViewport signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveViewport(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMoveViewport(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MoveViewportCallbackDlg) || is(T : MoveViewportCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1667,10 +1667,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     Connect to PasteClipboard signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPasteClipboard(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PasteClipboardCallbackDlg) || is(T : PasteClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1710,10 +1710,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     Connect to PreeditChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPreeditChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PreeditChangedCallbackDlg) || is(T : PreeditChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1755,10 +1755,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     Connect to SelectAll signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSelectAll(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SelectAllCallbackDlg) || is(T : SelectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1798,10 +1798,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     Connect to SetAnchor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSetAnchor(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSetAnchor(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SetAnchorCallbackDlg) || is(T : SetAnchorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1838,10 +1838,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     Connect to ToggleCursorVisible signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToggleCursorVisible(T)(T callback, Flag!"After" after = No.After)
+  ulong connectToggleCursorVisible(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ToggleCursorVisibleCallbackDlg) || is(T : ToggleCursorVisibleCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1877,10 +1877,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     Connect to ToggleOverwrite signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToggleOverwrite(T)(T callback, Flag!"After" after = No.After)
+  ulong connectToggleOverwrite(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ToggleOverwriteCallbackDlg) || is(T : ToggleOverwriteCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

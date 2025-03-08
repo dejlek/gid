@@ -13,12 +13,12 @@ import gst.types;
 class AtomicQueue : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -45,7 +45,7 @@ class AtomicQueue : gobject.boxed.Boxed
   {
     GstAtomicQueue* _cretval;
     _cretval = gst_atomic_queue_new(initialSize);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**

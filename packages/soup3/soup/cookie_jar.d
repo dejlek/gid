@@ -25,7 +25,7 @@ import soup.types;
 class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -54,7 +54,7 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
   {
     SoupCookieJar* _cretval;
     _cretval = soup_cookie_jar_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -70,7 +70,7 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
   */
   void addCookie(soup.cookie.Cookie cookie)
   {
-    soup_cookie_jar_add_cookie(cast(SoupCookieJar*)cPtr, cookie ? cast(SoupCookie*)cookie.cPtr(Yes.Dup) : null);
+    soup_cookie_jar_add_cookie(cast(SoupCookieJar*)cPtr, cookie ? cast(SoupCookie*)cookie.cPtr(Yes.dup) : null);
   }
 
   /**
@@ -94,7 +94,7 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
   */
   void addCookieFull(soup.cookie.Cookie cookie, glib.uri.Uri uri = null, glib.uri.Uri firstParty = null)
   {
-    soup_cookie_jar_add_cookie_full(cast(SoupCookieJar*)cPtr, cookie ? cast(SoupCookie*)cookie.cPtr(Yes.Dup) : null, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, firstParty ? cast(GUri*)firstParty.cPtr(No.Dup) : null);
+    soup_cookie_jar_add_cookie_full(cast(SoupCookieJar*)cPtr, cookie ? cast(SoupCookie*)cookie.cPtr(Yes.dup) : null, uri ? cast(GUri*)uri.cPtr(No.dup) : null, firstParty ? cast(GUri*)firstParty.cPtr(No.dup) : null);
   }
 
   /**
@@ -117,7 +117,7 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
   */
   void addCookieWithFirstParty(glib.uri.Uri firstParty, soup.cookie.Cookie cookie)
   {
-    soup_cookie_jar_add_cookie_with_first_party(cast(SoupCookieJar*)cPtr, firstParty ? cast(GUri*)firstParty.cPtr(No.Dup) : null, cookie ? cast(SoupCookie*)cookie.cPtr(Yes.Dup) : null);
+    soup_cookie_jar_add_cookie_with_first_party(cast(SoupCookieJar*)cPtr, firstParty ? cast(GUri*)firstParty.cPtr(No.dup) : null, cookie ? cast(SoupCookie*)cookie.cPtr(Yes.dup) : null);
   }
 
   /**
@@ -145,7 +145,7 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
   */
   void deleteCookie(soup.cookie.Cookie cookie)
   {
-    soup_cookie_jar_delete_cookie(cast(SoupCookieJar*)cPtr, cookie ? cast(SoupCookie*)cookie.cPtr(No.Dup) : null);
+    soup_cookie_jar_delete_cookie(cast(SoupCookieJar*)cPtr, cookie ? cast(SoupCookie*)cookie.cPtr(No.dup) : null);
   }
 
   /**
@@ -181,7 +181,7 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
   soup.cookie.Cookie[] getCookieList(glib.uri.Uri uri, bool forHttp)
   {
     GSList* _cretval;
-    _cretval = soup_cookie_jar_get_cookie_list(cast(SoupCookieJar*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, forHttp);
+    _cretval = soup_cookie_jar_get_cookie_list(cast(SoupCookieJar*)cPtr, uri ? cast(GUri*)uri.cPtr(No.dup) : null, forHttp);
     auto _retval = gSListToD!(soup.cookie.Cookie, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -208,7 +208,7 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
   soup.cookie.Cookie[] getCookieListWithSameSiteInfo(glib.uri.Uri uri, glib.uri.Uri topLevel, glib.uri.Uri siteForCookies, bool forHttp, bool isSafeMethod, bool isTopLevelNavigation)
   {
     GSList* _cretval;
-    _cretval = soup_cookie_jar_get_cookie_list_with_same_site_info(cast(SoupCookieJar*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, topLevel ? cast(GUri*)topLevel.cPtr(No.Dup) : null, siteForCookies ? cast(GUri*)siteForCookies.cPtr(No.Dup) : null, forHttp, isSafeMethod, isTopLevelNavigation);
+    _cretval = soup_cookie_jar_get_cookie_list_with_same_site_info(cast(SoupCookieJar*)cPtr, uri ? cast(GUri*)uri.cPtr(No.dup) : null, topLevel ? cast(GUri*)topLevel.cPtr(No.dup) : null, siteForCookies ? cast(GUri*)siteForCookies.cPtr(No.dup) : null, forHttp, isSafeMethod, isTopLevelNavigation);
     auto _retval = gSListToD!(soup.cookie.Cookie, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -234,8 +234,8 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
   string getCookies(glib.uri.Uri uri, bool forHttp)
   {
     char* _cretval;
-    _cretval = soup_cookie_jar_get_cookies(cast(SoupCookieJar*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, forHttp);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    _cretval = soup_cookie_jar_get_cookies(cast(SoupCookieJar*)cPtr, uri ? cast(GUri*)uri.cPtr(No.dup) : null, forHttp);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -265,8 +265,8 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
     Set-Cookie header returned from a request to uri.
     
     Keep in mind that if the `enumCookieJarAcceptPolicy` set is either
-    [soup.types.CookieJarAcceptPolicy.NoThirdParty] or
-    [soup.types.CookieJarAcceptPolicy.GrandfatheredThirdParty] you'll need to use
+    [soup.types.CookieJarAcceptPolicy.noThirdParty] or
+    [soup.types.CookieJarAcceptPolicy.grandfatheredThirdParty] you'll need to use
     [soup.cookie_jar.CookieJar.setCookieWithFirstParty], otherwise the jar
     will have no way of knowing if the cookie is being set by a third
     party or not.
@@ -276,8 +276,8 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
   */
   void setCookie(glib.uri.Uri uri, string cookie)
   {
-    const(char)* _cookie = cookie.toCString(No.Alloc);
-    soup_cookie_jar_set_cookie(cast(SoupCookieJar*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, _cookie);
+    const(char)* _cookie = cookie.toCString(No.alloc);
+    soup_cookie_jar_set_cookie(cast(SoupCookieJar*)cPtr, uri ? cast(GUri*)uri.cPtr(No.dup) : null, _cookie);
   }
 
   /**
@@ -293,8 +293,8 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
   */
   void setCookieWithFirstParty(glib.uri.Uri uri, glib.uri.Uri firstParty, string cookie)
   {
-    const(char)* _cookie = cookie.toCString(No.Alloc);
-    soup_cookie_jar_set_cookie_with_first_party(cast(SoupCookieJar*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, firstParty ? cast(GUri*)firstParty.cPtr(No.Dup) : null, _cookie);
+    const(char)* _cookie = cookie.toCString(No.alloc);
+    soup_cookie_jar_set_cookie_with_first_party(cast(SoupCookieJar*)cPtr, uri ? cast(GUri*)uri.cPtr(No.dup) : null, firstParty ? cast(GUri*)firstParty.cPtr(No.dup) : null, _cookie);
   }
 
   /**
@@ -324,10 +324,10 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

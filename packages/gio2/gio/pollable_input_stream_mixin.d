@@ -59,8 +59,8 @@ template PollableInputStreamT()
   override glib.source.Source createSource(gio.cancellable.Cancellable cancellable = null)
   {
     GSource* _cretval;
-    _cretval = g_pollable_input_stream_create_source(cast(GPollableInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = g_pollable_input_stream_create_source(cast(GPollableInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -72,7 +72,7 @@ template PollableInputStreamT()
     after this returns true would still block. To guarantee
     non-blocking behavior, you should always use
     [gio.pollable_input_stream.PollableInputStream.readNonblocking], which will return a
-    [gio.types.IOErrorEnum.WouldBlock] error rather than blocking.
+    [gio.types.IOErrorEnum.wouldBlock] error rather than blocking.
     
     The behaviour of this method is undefined if
     [gio.pollable_input_stream.PollableInputStream.canPoll] returns false for stream.
@@ -91,7 +91,7 @@ template PollableInputStreamT()
   /**
       Attempts to read up to count bytes from stream into buffer, as
     with [gio.input_stream.InputStream.read]. If stream is not currently readable,
-    this will immediately return [gio.types.IOErrorEnum.WouldBlock], and you can
+    this will immediately return [gio.types.IOErrorEnum.wouldBlock], and you can
     use [gio.pollable_input_stream.PollableInputStream.createSource] to create a #GSource
     that will be triggered when stream is readable.
     
@@ -108,14 +108,14 @@ template PollableInputStreamT()
             buffer to read data into (which should be at least count bytes long).
       cancellable =       a #GCancellable, or null
     Returns:     the number of bytes read, or -1 on error (including
-        [gio.types.IOErrorEnum.WouldBlock]).
+        [gio.types.IOErrorEnum.wouldBlock]).
   */
   override ptrdiff_t readNonblocking(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
     ptrdiff_t _retval;
     size_t _count;
     GError *_err;
-    _retval = g_pollable_input_stream_read_nonblocking(cast(GPollableInputStream*)cPtr, buffer.ptr, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_pollable_input_stream_read_nonblocking(cast(GPollableInputStream*)cPtr, buffer.ptr, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

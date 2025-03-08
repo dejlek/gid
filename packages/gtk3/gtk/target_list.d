@@ -17,12 +17,12 @@ import gtk.types;
 class TargetList : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -57,7 +57,7 @@ class TargetList : gobject.boxed.Boxed
       _tmptargets ~= *cast(GtkTargetEntry*)obj.cPtr;
     const(GtkTargetEntry)* _targets = _tmptargets.ptr;
     _cretval = gtk_target_list_new(_targets, _ntargets);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -98,7 +98,7 @@ class TargetList : gobject.boxed.Boxed
   */
   void addRichTextTargets(uint info, bool deserializable, gtk.text_buffer.TextBuffer buffer)
   {
-    gtk_target_list_add_rich_text_targets(cast(GtkTargetList*)cPtr, info, deserializable, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
+    gtk_target_list_add_rich_text_targets(cast(GtkTargetList*)cPtr, info, deserializable, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.dup) : null);
   }
 
   /**

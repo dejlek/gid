@@ -32,7 +32,7 @@ class TextSelection
 {
   AtkTextSelection cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Atk.TextSelection");
@@ -50,7 +50,7 @@ class TextSelection
 
   @property atk.object.ObjectAtk startObject()
   {
-    return ObjectG.getDObject!(atk.object.ObjectAtk)((cast(AtkTextSelection*)cPtr).startObject, No.Take);
+    return ObjectG.getDObject!(atk.object.ObjectAtk)((cast(AtkTextSelection*)cPtr).startObject, No.take);
   }
 
   @property int startOffset()
@@ -65,7 +65,7 @@ class TextSelection
 
   @property atk.object.ObjectAtk endObject()
   {
-    return ObjectG.getDObject!(atk.object.ObjectAtk)((cast(AtkTextSelection*)cPtr).endObject, No.Take);
+    return ObjectG.getDObject!(atk.object.ObjectAtk)((cast(AtkTextSelection*)cPtr).endObject, No.take);
   }
 
   @property int endOffset()

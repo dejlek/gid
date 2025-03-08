@@ -15,7 +15,7 @@ class BitWriter
 {
   GstBitWriter cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstBase.BitWriter");
@@ -67,7 +67,7 @@ class BitWriter
   {
     GstBuffer* _cretval;
     _cretval = gst_bit_writer_free_and_get_buffer(cast(GstBitWriter*)cPtr);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class BitWriter
   {
     GstBuffer* _cretval;
     _cretval = gst_bit_writer_reset_and_get_buffer(cast(GstBitWriter*)cPtr);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 

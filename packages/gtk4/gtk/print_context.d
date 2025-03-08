@@ -85,7 +85,7 @@ import pango.layout;
 class PrintContext : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -110,7 +110,7 @@ class PrintContext : gobject.object.ObjectG
   {
     PangoContext* _cretval;
     _cretval = gtk_print_context_create_pango_context(cast(GtkPrintContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class PrintContext : gobject.object.ObjectG
   {
     PangoLayout* _cretval;
     _cretval = gtk_print_context_create_pango_layout(cast(GtkPrintContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class PrintContext : gobject.object.ObjectG
   {
     cairo_t* _cretval;
     _cretval = gtk_print_context_get_cairo_context(cast(GtkPrintContext*)cPtr);
-    auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class PrintContext : gobject.object.ObjectG
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_context_get_page_setup(cast(GtkPrintContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.take);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class PrintContext : gobject.object.ObjectG
   {
     PangoFontMap* _cretval;
     _cretval = gtk_print_context_get_pango_fontmap(cast(GtkPrintContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.take);
     return _retval;
   }
 
@@ -243,6 +243,6 @@ class PrintContext : gobject.object.ObjectG
   */
   void setCairoContext(cairo.context.Context cr, double dpiX, double dpiY)
   {
-    gtk_print_context_set_cairo_context(cast(GtkPrintContext*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, dpiX, dpiY);
+    gtk_print_context_set_cairo_context(cast(GtkPrintContext*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, dpiX, dpiY);
   }
 }

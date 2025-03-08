@@ -12,22 +12,22 @@ enum JsonNodeType
   /**
       The node contains a JSON object
   */
-  Object = 0,
+  object = 0,
 
   /**
       The node contains a JSON array
   */
-  Array = 1,
+  array = 1,
 
   /**
       The node contains a fundamental type
   */
-  Value = 2,
+  value = 2,
 
   /**
       Special type, for nodes containing null
   */
-  Null = 3,
+  null_ = 3,
 }
 
 /**
@@ -40,42 +40,42 @@ enum JsonParserError
   /**
       parse error
   */
-  Parse = 0,
+  parse = 0,
 
   /**
       unexpected trailing comma
   */
-  TrailingComma = 1,
+  trailingComma = 1,
 
   /**
       expected comma
   */
-  MissingComma = 2,
+  missingComma = 2,
 
   /**
       expected colon
   */
-  MissingColon = 3,
+  missingColon = 3,
 
   /**
       invalid bareword
   */
-  InvalidBareword = 4,
+  invalidBareword = 4,
 
   /**
       empty member name (Since: 0.16)
   */
-  EmptyMemberName = 5,
+  emptyMemberName = 5,
 
   /**
       invalid data (Since: 0.18)
   */
-  InvalidData = 6,
+  invalidData = 6,
 
   /**
       unknown error
   */
-  Unknown = 7,
+  unknown = 7,
 }
 
 /**
@@ -88,7 +88,7 @@ enum JsonPathError
   /**
       Invalid query
   */
-  Query = 0,
+  query = 0,
 }
 
 /**
@@ -101,39 +101,39 @@ enum JsonReaderError
   /**
       No array found at the current position
   */
-  NoArray = 0,
+  noArray = 0,
 
   /**
       Index out of bounds
   */
-  InvalidIndex = 1,
+  invalidIndex = 1,
 
   /**
       No object found at the current position
   */
-  NoObject = 2,
+  noObject = 2,
 
   /**
       Member not found
   */
-  InvalidMember = 3,
+  invalidMember = 3,
 
   /**
       No valid node found at the current position
   */
-  InvalidNode = 4,
+  invalidNode = 4,
 
   /**
       The node at the current position does not
       hold a value
   */
-  NoValue = 5,
+  noValue = 5,
 
   /**
       The node at the current position does not
       hold a value of the desired type
   */
-  InvalidType = 6,
+  invalidType = 6,
 }
 
 /**

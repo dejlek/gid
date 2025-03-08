@@ -16,7 +16,7 @@ class Parameter
 {
   GParameter cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.Parameter");
@@ -34,13 +34,13 @@ class Parameter
 
   @property string name()
   {
-    return (cast(GParameter*)cPtr).name.fromCString(No.Free);
+    return (cast(GParameter*)cPtr).name.fromCString(No.free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(GParameter*)cPtr).name);
-    (cast(GParameter*)cPtr).name = propval.toCString(Yes.Alloc);
+    (cast(GParameter*)cPtr).name = propval.toCString(Yes.alloc);
   }
 
   @property gobject.value.Value value()

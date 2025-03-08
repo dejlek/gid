@@ -10,7 +10,7 @@ import gstvideo.video_aggregator_pad;
 class GLBaseMixerPad : gstvideo.video_aggregator_pad.VideoAggregatorPad
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

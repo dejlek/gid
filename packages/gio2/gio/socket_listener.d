@@ -33,7 +33,7 @@ import gobject.object;
 class SocketListener : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -59,7 +59,7 @@ class SocketListener : gobject.object.ObjectG
   {
     GSocketListener* _cretval;
     _cretval = g_socket_listener_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -73,7 +73,7 @@ class SocketListener : gobject.object.ObjectG
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       sourceObject =       location where #GObject pointer will be stored, or null
       cancellable =       optional #GCancellable object, null to ignore.
@@ -84,11 +84,11 @@ class SocketListener : gobject.object.ObjectG
     GSocketConnection* _cretval;
     ObjectC* _sourceObject;
     GError *_err;
-    _cretval = g_socket_listener_accept(cast(GSocketListener*)cPtr, &_sourceObject, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_socket_listener_accept(cast(GSocketListener*)cPtr, &_sourceObject, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
-    sourceObject = new gobject.object.ObjectG(cast(void*)_sourceObject, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.take);
+    sourceObject = new gobject.object.ObjectG(cast(void*)_sourceObject, No.take);
     return _retval;
   }
 
@@ -109,12 +109,12 @@ class SocketListener : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_socket_listener_accept_async(cast(GSocketListener*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_socket_listener_accept_async(cast(GSocketListener*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -129,11 +129,11 @@ class SocketListener : gobject.object.ObjectG
     GSocketConnection* _cretval;
     ObjectC* _sourceObject;
     GError *_err;
-    _cretval = g_socket_listener_accept_finish(cast(GSocketListener*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_sourceObject, &_err);
+    _cretval = g_socket_listener_accept_finish(cast(GSocketListener*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_sourceObject, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
-    sourceObject = new gobject.object.ObjectG(cast(void*)_sourceObject, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.take);
+    sourceObject = new gobject.object.ObjectG(cast(void*)_sourceObject, No.take);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class SocketListener : gobject.object.ObjectG
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       sourceObject =       location where #GObject pointer will be stored, or null.
       cancellable =       optional #GCancellable object, null to ignore.
@@ -162,11 +162,11 @@ class SocketListener : gobject.object.ObjectG
     GSocket* _cretval;
     ObjectC* _sourceObject;
     GError *_err;
-    _cretval = g_socket_listener_accept_socket(cast(GSocketListener*)cPtr, &_sourceObject, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_socket_listener_accept_socket(cast(GSocketListener*)cPtr, &_sourceObject, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.Take);
-    sourceObject = new gobject.object.ObjectG(cast(void*)_sourceObject, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.take);
+    sourceObject = new gobject.object.ObjectG(cast(void*)_sourceObject, No.take);
     return _retval;
   }
 
@@ -187,12 +187,12 @@ class SocketListener : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_socket_listener_accept_socket_async(cast(GSocketListener*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_socket_listener_accept_socket_async(cast(GSocketListener*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -207,11 +207,11 @@ class SocketListener : gobject.object.ObjectG
     GSocket* _cretval;
     ObjectC* _sourceObject;
     GError *_err;
-    _cretval = g_socket_listener_accept_socket_finish(cast(GSocketListener*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_sourceObject, &_err);
+    _cretval = g_socket_listener_accept_socket_finish(cast(GSocketListener*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_sourceObject, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.Take);
-    sourceObject = new gobject.object.ObjectG(cast(void*)_sourceObject, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.take);
+    sourceObject = new gobject.object.ObjectG(cast(void*)_sourceObject, No.take);
     return _retval;
   }
 
@@ -252,10 +252,10 @@ class SocketListener : gobject.object.ObjectG
     bool _retval;
     GSocketAddress* _effectiveAddress;
     GError *_err;
-    _retval = g_socket_listener_add_address(cast(GSocketListener*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, type, protocol, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_effectiveAddress, &_err);
+    _retval = g_socket_listener_add_address(cast(GSocketListener*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.dup) : null, type, protocol, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.dup) : null, &_effectiveAddress, &_err);
     if (_err)
       throw new ErrorG(_err);
-    effectiveAddress = new gio.socket_address.SocketAddress(cast(void*)_effectiveAddress, Yes.Take);
+    effectiveAddress = new gio.socket_address.SocketAddress(cast(void*)_effectiveAddress, Yes.take);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class SocketListener : gobject.object.ObjectG
   {
     ushort _retval;
     GError *_err;
-    _retval = g_socket_listener_add_any_inet_port(cast(GSocketListener*)cPtr, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_listener_add_any_inet_port(cast(GSocketListener*)cPtr, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -306,7 +306,7 @@ class SocketListener : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_listener_add_inet_port(cast(GSocketListener*)cPtr, port, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_listener_add_inet_port(cast(GSocketListener*)cPtr, port, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -335,7 +335,7 @@ class SocketListener : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_listener_add_socket(cast(GSocketListener*)cPtr, socket ? cast(GSocket*)socket.cPtr(No.Dup) : null, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_listener_add_socket(cast(GSocketListener*)cPtr, socket ? cast(GSocket*)socket.cPtr(No.dup) : null, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -385,10 +385,10 @@ class SocketListener : gobject.object.ObjectG
     Connect to Event signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEvent(T)(T callback, Flag!"After" after = No.After)
+  ulong connectEvent(T)(T callback, Flag!"after" after = No.after)
   if (is(T : EventCallbackDlg) || is(T : EventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

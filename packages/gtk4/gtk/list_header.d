@@ -18,7 +18,7 @@ import gtk.widget;
 class ListHeader : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,7 +43,7 @@ class ListHeader : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_header_get_child(cast(GtkListHeader*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class ListHeader : gobject.object.ObjectG
   {
     ObjectC* _cretval;
     _cretval = gtk_list_header_get_item(cast(GtkListHeader*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.take);
     return _retval;
   }
 
@@ -115,6 +115,6 @@ class ListHeader : gobject.object.ObjectG
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_list_header_set_child(cast(GtkListHeader*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_list_header_set_child(cast(GtkListHeader*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 }

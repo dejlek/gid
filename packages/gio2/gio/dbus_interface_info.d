@@ -18,15 +18,15 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GDBusInterfaceInfo.sizeof), Yes.Take);
+    super(safeMalloc(GDBusInterfaceInfo.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -54,13 +54,13 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
 
   @property string name()
   {
-    return (cast(GDBusInterfaceInfo*)cPtr).name.fromCString(No.Free);
+    return (cast(GDBusInterfaceInfo*)cPtr).name.fromCString(No.free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(GDBusInterfaceInfo*)cPtr).name);
-    (cast(GDBusInterfaceInfo*)cPtr).name = propval.toCString(Yes.Alloc);
+    (cast(GDBusInterfaceInfo*)cPtr).name = propval.toCString(Yes.alloc);
   }
 
   /**
@@ -103,7 +103,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   */
   void generateXml(uint indent, glib.string_.String stringBuilder)
   {
-    g_dbus_interface_info_generate_xml(cast(GDBusInterfaceInfo*)cPtr, indent, stringBuilder ? cast(GString*)stringBuilder.cPtr(No.Dup) : null);
+    g_dbus_interface_info_generate_xml(cast(GDBusInterfaceInfo*)cPtr, indent, stringBuilder ? cast(GString*)stringBuilder.cPtr(No.dup) : null);
   }
 
   /**
@@ -118,9 +118,9 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   gio.dbus_method_info.DBusMethodInfo lookupMethod(string name)
   {
     GDBusMethodInfo* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = g_dbus_interface_info_lookup_method(cast(GDBusInterfaceInfo*)cPtr, _name);
-    auto _retval = _cretval ? new gio.dbus_method_info.DBusMethodInfo(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gio.dbus_method_info.DBusMethodInfo(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -136,9 +136,9 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   gio.dbus_property_info.DBusPropertyInfo lookupProperty(string name)
   {
     GDBusPropertyInfo* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = g_dbus_interface_info_lookup_property(cast(GDBusInterfaceInfo*)cPtr, _name);
-    auto _retval = _cretval ? new gio.dbus_property_info.DBusPropertyInfo(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gio.dbus_property_info.DBusPropertyInfo(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -154,9 +154,9 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   gio.dbus_signal_info.DBusSignalInfo lookupSignal(string name)
   {
     GDBusSignalInfo* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = g_dbus_interface_info_lookup_signal(cast(GDBusInterfaceInfo*)cPtr, _name);
-    auto _retval = _cretval ? new gio.dbus_signal_info.DBusSignalInfo(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gio.dbus_signal_info.DBusSignalInfo(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

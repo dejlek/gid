@@ -101,7 +101,7 @@ import gtk.widget;
 class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.ShortcutManager
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -128,7 +128,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -164,7 +164,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_get_child(cast(GtkPopover*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
     bool _retval;
     GdkRectangle _rect;
     _retval = gtk_popover_get_pointing_to(cast(GtkPopover*)cPtr, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.take);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_popover_set_child(cast(GtkPopover*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_popover_set_child(cast(GtkPopover*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -321,7 +321,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void setDefaultWidget(gtk.widget.Widget widget = null)
   {
-    gtk_popover_set_default_widget(cast(GtkPopover*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_popover_set_default_widget(cast(GtkPopover*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
   }
 
   /**
@@ -369,7 +369,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void setPointingTo(gdk.rectangle.Rectangle rect = null)
   {
-    gtk_popover_set_pointing_to(cast(GtkPopover*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null);
+    gtk_popover_set_pointing_to(cast(GtkPopover*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.dup) : null);
   }
 
   /**
@@ -408,10 +408,10 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
     Connect to ActivateDefault signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivateDefault(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivateDefault(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateDefaultCallbackDlg) || is(T : ActivateDefaultCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -443,10 +443,10 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
     Connect to Closed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  ulong connectClosed(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ClosedCallbackDlg) || is(T : ClosedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

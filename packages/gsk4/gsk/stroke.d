@@ -14,12 +14,12 @@ import gsk.types;
 class Stroke : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -45,7 +45,7 @@ class Stroke : gobject.boxed.Boxed
   {
     GskStroke* _cretval;
     _cretval = gsk_stroke_new(lineWidth);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -56,7 +56,7 @@ class Stroke : gobject.boxed.Boxed
   {
     GskStroke* _cretval;
     _cretval = gsk_stroke_copy(cast(const(GskStroke)*)cPtr);
-    auto _retval = _cretval ? new gsk.stroke.Stroke(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gsk.stroke.Stroke(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class Stroke : gobject.boxed.Boxed
     
     Each "on" segment will have caps applied as if the segment were a
     separate contour. In particular, it is valid to use an "on" length
-    of 0 with [gsk.types.LineCap.Round] or [gsk.types.LineCap.Square] to draw dots
+    of 0 with [gsk.types.LineCap.round] or [gsk.types.LineCap.square] to draw dots
     or squares along a path.
     
     If n_dash is 0, if all elements in dash are 0, or if there are
@@ -233,9 +233,9 @@ class Stroke : gobject.boxed.Boxed
     
     The miter limit is in units of line width and must be non-negative.
     
-    For joins of type [gsk.types.LineJoin.Miter] that exceed the miter
+    For joins of type [gsk.types.LineJoin.miter] that exceed the miter
     limit, the join gets rendered as if it was of type
-    [gsk.types.LineJoin.Bevel].
+    [gsk.types.LineJoin.bevel].
     Params:
       limit =       the miter limit
   */
@@ -252,7 +252,7 @@ class Stroke : gobject.boxed.Boxed
   */
   void toCairo(cairo.context.Context cr)
   {
-    gsk_stroke_to_cairo(cast(const(GskStroke)*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
+    gsk_stroke_to_cairo(cast(const(GskStroke)*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null);
   }
 
   /**

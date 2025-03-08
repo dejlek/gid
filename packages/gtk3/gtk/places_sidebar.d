@@ -57,7 +57,7 @@ import gtk.widget;
 class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -85,7 +85,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   {
     GtkWidget* _cretval;
     _cretval = gtk_places_sidebar_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -104,7 +104,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void addShortcut(gio.file.File location)
   {
-    gtk_places_sidebar_add_shortcut(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.Dup) : null);
+    gtk_places_sidebar_add_shortcut(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.dup) : null);
   }
 
   /**
@@ -135,7 +135,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   {
     GFile* _cretval;
     _cretval = gtk_places_sidebar_get_location(cast(GtkPlacesSidebar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   {
     GFile* _cretval;
     _cretval = gtk_places_sidebar_get_nth_bookmark(cast(GtkPlacesSidebar*)cPtr, n);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -275,7 +275,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void removeShortcut(gio.file.File location)
   {
-    gtk_places_sidebar_remove_shortcut(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.Dup) : null);
+    gtk_places_sidebar_remove_shortcut(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.dup) : null);
   }
 
   /**
@@ -295,7 +295,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void setDropTargetsVisible(bool visible, gdk.drag_context.DragContext context)
   {
-    gtk_places_sidebar_set_drop_targets_visible(cast(GtkPlacesSidebar*)cPtr, visible, context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null);
+    gtk_places_sidebar_set_drop_targets_visible(cast(GtkPlacesSidebar*)cPtr, visible, context ? cast(GdkDragContext*)context.cPtr(No.dup) : null);
   }
 
   /**
@@ -319,7 +319,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void setLocation(gio.file.File location = null)
   {
-    gtk_places_sidebar_set_location(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.Dup) : null);
+    gtk_places_sidebar_set_location(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.dup) : null);
   }
 
   /**
@@ -464,10 +464,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
     Connect to DragActionAsk signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragActionAsk(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDragActionAsk(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DragActionAskCallbackDlg) || is(T : DragActionAskCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -506,10 +506,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
     Connect to Mount signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMount(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMount(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MountCallbackDlg) || is(T : MountCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -547,10 +547,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
     Connect to OpenLocation signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectOpenLocation(T)(T callback, Flag!"After" after = No.After)
+  ulong connectOpenLocation(T)(T callback, Flag!"after" after = No.after)
   if (is(T : OpenLocationCallbackDlg) || is(T : OpenLocationCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -613,10 +613,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
     Connect to PopulatePopup signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPopulatePopup(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PopulatePopupCallbackDlg) || is(T : PopulatePopupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -658,10 +658,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
     Connect to ShowConnectToServer signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectShowConnectToServer(T)(T callback, Flag!"After" after = No.After)
+  ulong connectShowConnectToServer(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ShowConnectToServerCallbackDlg) || is(T : ShowConnectToServerCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -696,10 +696,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
     Connect to ShowEnterLocation signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectShowEnterLocation(T)(T callback, Flag!"After" after = No.After)
+  ulong connectShowEnterLocation(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ShowEnterLocationCallbackDlg) || is(T : ShowEnterLocationCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -736,10 +736,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
     Connect to ShowErrorMessage signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectShowErrorMessage(T)(T callback, Flag!"After" after = No.After)
+  ulong connectShowErrorMessage(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ShowErrorMessageCallbackDlg) || is(T : ShowErrorMessageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -781,10 +781,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
     Connect to ShowOtherLocations signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectShowOtherLocations(T)(T callback, Flag!"After" after = No.After)
+  ulong connectShowOtherLocations(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ShowOtherLocationsCallbackDlg) || is(T : ShowOtherLocationsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -821,10 +821,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
     Connect to ShowOtherLocationsWithFlags signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectShowOtherLocationsWithFlags(T)(T callback, Flag!"After" after = No.After)
+  ulong connectShowOtherLocationsWithFlags(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ShowOtherLocationsWithFlagsCallbackDlg) || is(T : ShowOtherLocationsWithFlagsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -862,10 +862,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
     Connect to ShowStarredLocation signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectShowStarredLocation(T)(T callback, Flag!"After" after = No.After)
+  ulong connectShowStarredLocation(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ShowStarredLocationCallbackDlg) || is(T : ShowStarredLocationCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -902,10 +902,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
     Connect to Unmount signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUnmount(T)(T callback, Flag!"After" after = No.After)
+  ulong connectUnmount(T)(T callback, Flag!"after" after = No.after)
   if (is(T : UnmountCallbackDlg) || is(T : UnmountCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

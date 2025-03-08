@@ -144,10 +144,10 @@ interface ChildProxy
     Connect to ChildAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChildAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChildAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChildAddedCallbackDlg) || is(T : ChildAddedCallbackFunc));
 
   /**
@@ -169,9 +169,9 @@ interface ChildProxy
     Connect to ChildRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChildRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChildRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChildRemovedCallbackDlg) || is(T : ChildRemovedCallbackFunc));
   }

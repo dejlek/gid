@@ -10,7 +10,7 @@ import gobject.object;
 class JSONReadOptions : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class JSONReadOptions : gobject.object.ObjectG
   {
     GArrowJSONReadOptions* _cretval;
     _cretval = garrow_json_read_options_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

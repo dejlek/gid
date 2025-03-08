@@ -48,12 +48,12 @@ import json.types;
 class Node : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -79,7 +79,7 @@ class Node : gobject.boxed.Boxed
   {
     JsonNode* _cretval;
     _cretval = json_node_alloc();
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class Node : gobject.boxed.Boxed
   {
     JsonNode* _cretval;
     _cretval = json_node_new(type);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -118,7 +118,7 @@ class Node : gobject.boxed.Boxed
   {
     JsonNode* _cretval;
     _cretval = json_node_copy(cast(JsonNode*)cPtr);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class Node : gobject.boxed.Boxed
   {
     JsonArray* _cretval;
     _cretval = json_node_dup_array(cast(JsonNode*)cPtr);
-    auto _retval = _cretval ? new json.array.Array(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new json.array.Array(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class Node : gobject.boxed.Boxed
   {
     JsonObject* _cretval;
     _cretval = json_node_dup_object(cast(JsonNode*)cPtr);
-    auto _retval = _cretval ? new json.object.ObjectJson(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new json.object.ObjectJson(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class Node : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = json_node_dup_string(cast(JsonNode*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class Node : gobject.boxed.Boxed
   bool equal(json.node.Node b)
   {
     bool _retval;
-    _retval = json_node_equal(cast(JsonNode*)cPtr, b ? cast(JsonNode*)b.cPtr(No.Dup) : null);
+    _retval = json_node_equal(cast(JsonNode*)cPtr, b ? cast(JsonNode*)b.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class Node : gobject.boxed.Boxed
   {
     JsonArray* _cretval;
     _cretval = json_node_get_array(cast(JsonNode*)cPtr);
-    auto _retval = _cretval ? new json.array.Array(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new json.array.Array(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class Node : gobject.boxed.Boxed
     If the node holds an integer or double value which is zero, `FALSE` is
     returned; otherwise `TRUE` is returned.
     
-    If the node holds a [json.types.NodeType.Null] value or a value of another
+    If the node holds a [json.types.NodeType.null_] value or a value of another
     non-boolean type, `FALSE` is returned.
     Returns:     a boolean value.
   */
@@ -229,7 +229,7 @@ class Node : gobject.boxed.Boxed
     If the node holds a `FALSE` boolean value, `0.0` is returned; otherwise
     a non-zero double is returned.
     
-    If the node holds a [json.types.NodeType.Null] value or a value of another
+    If the node holds a [json.types.NodeType.null_] value or a value of another
     non-double type, `0.0` is returned.
     Returns:     a double value.
   */
@@ -248,7 +248,7 @@ class Node : gobject.boxed.Boxed
     If the node holds a `FALSE` boolean value, `0` is returned; otherwise,
     a non-zero integer is returned.
     
-    If the node holds a [json.types.NodeType.Null] value or a value of another
+    If the node holds a [json.types.NodeType.null_] value or a value of another
     non-integer type, `0` is returned.
     Returns:     an integer value.
   */
@@ -282,7 +282,7 @@ class Node : gobject.boxed.Boxed
   {
     JsonObject* _cretval;
     _cretval = json_node_get_object(cast(JsonNode*)cPtr);
-    auto _retval = _cretval ? new json.object.ObjectJson(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new json.object.ObjectJson(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -295,7 +295,7 @@ class Node : gobject.boxed.Boxed
   {
     JsonNode* _cretval;
     _cretval = json_node_get_parent(cast(JsonNode*)cPtr);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -309,7 +309,7 @@ class Node : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = json_node_get_string(cast(JsonNode*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -328,13 +328,13 @@ class Node : gobject.boxed.Boxed
   {
     GValue _value;
     json_node_get_value(cast(JsonNode*)cPtr, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)&_value, No.take);
   }
 
   /**
       Returns the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] of the payload of the node.
     
-    For [json.types.NodeType.Null] nodes, the returned type is `G_TYPE_INVALID`.
+    For [json.types.NodeType.null_] nodes, the returned type is `G_TYPE_INVALID`.
     Returns:     the type for the payload
   */
   gobject.types.GType getValueType()
@@ -373,12 +373,12 @@ class Node : gobject.boxed.Boxed
   {
     JsonNode* _cretval;
     _cretval = json_node_init(cast(JsonNode*)cPtr, type);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
   /**
-      Initializes node to [json.types.NodeType.Array] and sets array into it.
+      Initializes node to [json.types.NodeType.array] and sets array into it.
     
     This function will take a reference on array.
     
@@ -391,13 +391,13 @@ class Node : gobject.boxed.Boxed
   json.node.Node initArray(json.array.Array array = null)
   {
     JsonNode* _cretval;
-    _cretval = json_node_init_array(cast(JsonNode*)cPtr, array ? cast(JsonArray*)array.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
+    _cretval = json_node_init_array(cast(JsonNode*)cPtr, array ? cast(JsonArray*)array.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
   /**
-      Initializes node to [json.types.NodeType.Value] and sets value into it.
+      Initializes node to [json.types.NodeType.value] and sets value into it.
     
     If the node has already been initialized once, it will be reset to
     the given type, and any data contained will be cleared.
@@ -409,12 +409,12 @@ class Node : gobject.boxed.Boxed
   {
     JsonNode* _cretval;
     _cretval = json_node_init_boolean(cast(JsonNode*)cPtr, value);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
   /**
-      Initializes node to [json.types.NodeType.Value] and sets value into it.
+      Initializes node to [json.types.NodeType.value] and sets value into it.
     
     If the node has already been initialized once, it will be reset to
     the given type, and any data contained will be cleared.
@@ -426,12 +426,12 @@ class Node : gobject.boxed.Boxed
   {
     JsonNode* _cretval;
     _cretval = json_node_init_double(cast(JsonNode*)cPtr, value);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
   /**
-      Initializes node to [json.types.NodeType.Value] and sets value into it.
+      Initializes node to [json.types.NodeType.value] and sets value into it.
     
     If the node has already been initialized once, it will be reset to
     the given type, and any data contained will be cleared.
@@ -443,12 +443,12 @@ class Node : gobject.boxed.Boxed
   {
     JsonNode* _cretval;
     _cretval = json_node_init_int(cast(JsonNode*)cPtr, value);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
   /**
-      Initializes node to [json.types.NodeType.Null].
+      Initializes node to [json.types.NodeType.null_].
     
     If the node has already been initialized once, it will be reset to
     the given type, and any data contained will be cleared.
@@ -458,12 +458,12 @@ class Node : gobject.boxed.Boxed
   {
     JsonNode* _cretval;
     _cretval = json_node_init_null(cast(JsonNode*)cPtr);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
   /**
-      Initializes node to [json.types.NodeType.Object] and sets object into it.
+      Initializes node to [json.types.NodeType.object] and sets object into it.
     
     This function will take a reference on object.
     
@@ -476,13 +476,13 @@ class Node : gobject.boxed.Boxed
   json.node.Node initObject(json.object.ObjectJson object = null)
   {
     JsonNode* _cretval;
-    _cretval = json_node_init_object(cast(JsonNode*)cPtr, object ? cast(JsonObject*)object.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
+    _cretval = json_node_init_object(cast(JsonNode*)cPtr, object ? cast(JsonObject*)object.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
   /**
-      Initializes node to [json.types.NodeType.Value] and sets value into it.
+      Initializes node to [json.types.NodeType.value] and sets value into it.
     
     If the node has already been initialized once, it will be reset to
     the given type, and any data contained will be cleared.
@@ -493,9 +493,9 @@ class Node : gobject.boxed.Boxed
   json.node.Node initString(string value = null)
   {
     JsonNode* _cretval;
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.alloc);
     _cretval = json_node_init_string(cast(JsonNode*)cPtr, _value);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -512,9 +512,9 @@ class Node : gobject.boxed.Boxed
   }
 
   /**
-      Checks whether node is a [json.types.NodeType.Null].
+      Checks whether node is a [json.types.NodeType.null_].
     
-    A [json.types.NodeType.Null] node is not the same as a `NULL` node; a [json.types.NodeType.Null]
+    A [json.types.NodeType.null_] node is not the same as a `NULL` node; a [json.types.NodeType.null_]
     represents a literal `null` value in the JSON tree.
     Returns:     `TRUE` if the node is null
   */
@@ -551,7 +551,7 @@ class Node : gobject.boxed.Boxed
   */
   void setArray(json.array.Array array)
   {
-    json_node_set_array(cast(JsonNode*)cPtr, array ? cast(JsonArray*)array.cPtr(No.Dup) : null);
+    json_node_set_array(cast(JsonNode*)cPtr, array ? cast(JsonArray*)array.cPtr(No.dup) : null);
   }
 
   /**
@@ -610,7 +610,7 @@ class Node : gobject.boxed.Boxed
   */
   void setObject(json.object.ObjectJson object = null)
   {
-    json_node_set_object(cast(JsonNode*)cPtr, object ? cast(JsonObject*)object.cPtr(No.Dup) : null);
+    json_node_set_object(cast(JsonNode*)cPtr, object ? cast(JsonObject*)object.cPtr(No.dup) : null);
   }
 
   /**
@@ -624,7 +624,7 @@ class Node : gobject.boxed.Boxed
   */
   void setParent(json.node.Node parent = null)
   {
-    json_node_set_parent(cast(JsonNode*)cPtr, parent ? cast(JsonNode*)parent.cPtr(No.Dup) : null);
+    json_node_set_parent(cast(JsonNode*)cPtr, parent ? cast(JsonNode*)parent.cPtr(No.dup) : null);
   }
 
   /**
@@ -638,7 +638,7 @@ class Node : gobject.boxed.Boxed
   */
   void setString(string value)
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.alloc);
     json_node_set_string(cast(JsonNode*)cPtr, _value);
   }
 
@@ -670,7 +670,7 @@ class Node : gobject.boxed.Boxed
   */
   void setValue(gobject.value.Value value)
   {
-    json_node_set_value(cast(JsonNode*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    json_node_set_value(cast(JsonNode*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.dup) : null);
   }
 
   /**
@@ -685,7 +685,7 @@ class Node : gobject.boxed.Boxed
   */
   void takeArray(json.array.Array array)
   {
-    json_node_take_array(cast(JsonNode*)cPtr, array ? cast(JsonArray*)array.cPtr(Yes.Dup) : null);
+    json_node_take_array(cast(JsonNode*)cPtr, array ? cast(JsonArray*)array.cPtr(Yes.dup) : null);
   }
 
   /**
@@ -700,7 +700,7 @@ class Node : gobject.boxed.Boxed
   */
   void takeObject(json.object.ObjectJson object)
   {
-    json_node_take_object(cast(JsonNode*)cPtr, object ? cast(JsonObject*)object.cPtr(Yes.Dup) : null);
+    json_node_take_object(cast(JsonNode*)cPtr, object ? cast(JsonObject*)object.cPtr(Yes.dup) : null);
   }
 
   /**
@@ -714,7 +714,7 @@ class Node : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = json_node_type_name(cast(JsonNode*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 }

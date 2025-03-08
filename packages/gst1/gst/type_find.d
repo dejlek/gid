@@ -15,7 +15,7 @@ class TypeFind
 {
   GstTypeFind cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gst.TypeFind");
@@ -71,7 +71,7 @@ class TypeFind
   */
   void suggest(uint probability, gst.caps.Caps caps)
   {
-    gst_type_find_suggest(cast(GstTypeFind*)cPtr, probability, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    gst_type_find_suggest(cast(GstTypeFind*)cPtr, probability, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
   }
 
   /**
@@ -86,7 +86,7 @@ class TypeFind
   */
   void suggestEmptySimple(uint probability, string mediaType)
   {
-    const(char)* _mediaType = mediaType.toCString(No.Alloc);
+    const(char)* _mediaType = mediaType.toCString(No.alloc);
     gst_type_find_suggest_empty_simple(cast(GstTypeFind*)cPtr, probability, _mediaType);
   }
 
@@ -111,16 +111,16 @@ class TypeFind
     {
       auto _dlg = cast(gst.types.TypeFindFunction*)userData;
 
-      (*_dlg)(find ? new gst.type_find.TypeFind(cast(void*)find, No.Take) : null);
+      (*_dlg)(find ? new gst.type_find.TypeFind(cast(void*)find, No.take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _extensions = extensions.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _extensions = extensions.toCString(No.alloc);
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    _retval = gst_type_find_register(plugin ? cast(GstPlugin*)plugin.cPtr(No.Dup) : null, _name, rank, _funcCB, _extensions, possibleCaps ? cast(GstCaps*)possibleCaps.cPtr(No.Dup) : null, _func, _funcDestroyCB);
+    _retval = gst_type_find_register(plugin ? cast(GstPlugin*)plugin.cPtr(No.dup) : null, _name, rank, _funcCB, _extensions, possibleCaps ? cast(GstCaps*)possibleCaps.cPtr(No.dup) : null, _func, _funcDestroyCB);
     return _retval;
   }
 }

@@ -105,7 +105,7 @@ import gtk.types;
 class Image : gtk.misc.Misc
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -129,7 +129,7 @@ class Image : gtk.misc.Misc
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -149,8 +149,8 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation animation)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_animation(animation ? cast(GdkPixbufAnimation*)animation.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_new_from_animation(animation ? cast(GdkPixbufAnimation*)animation.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -178,9 +178,9 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromFile(string filename)
   {
     GtkWidget* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString(No.alloc);
     _cretval = gtk_image_new_from_file(_filename);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -197,8 +197,8 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromGicon(gio.icon.Icon icon, gtk.types.IconSize size)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_gicon(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, size);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_new_from_gicon(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null, size);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -215,9 +215,9 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromIconName(string iconName, gtk.types.IconSize size)
   {
     GtkWidget* _cretval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString(No.alloc);
     _cretval = gtk_image_new_from_icon_name(_iconName, size);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -243,8 +243,8 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromIconSet(gtk.icon_set.IconSet iconSet, gtk.types.IconSize size)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_icon_set(iconSet ? cast(GtkIconSet*)iconSet.cPtr(No.Dup) : null, size);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_new_from_icon_set(iconSet ? cast(GtkIconSet*)iconSet.cPtr(No.dup) : null, size);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -264,8 +264,8 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -293,9 +293,9 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromResource(string resourcePath)
   {
     GtkWidget* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString(No.alloc);
     _cretval = gtk_image_new_from_resource(_resourcePath);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -316,9 +316,9 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromStock(string stockId, gtk.types.IconSize size)
   {
     GtkWidget* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString(No.alloc);
     _cretval = gtk_image_new_from_stock(_stockId, size);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -334,8 +334,8 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromSurface(cairo.surface.Surface surface = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_surface(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_new_from_surface(surface ? cast(cairo_surface_t*)surface.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -349,8 +349,8 @@ class Image : gtk.misc.Misc
 
   /**
       Gets the #GdkPixbufAnimation being displayed by the #GtkImage.
-    The storage type of the image must be [gtk.types.ImageType.Empty] or
-    [gtk.types.ImageType.Animation] (see [gtk.image.Image.getStorageType]).
+    The storage type of the image must be [gtk.types.ImageType.empty] or
+    [gtk.types.ImageType.animation] (see [gtk.image.Image.getStorageType]).
     The caller of this function does not own a reference to the
     returned animation.
     Returns:     the displayed animation, or null if
@@ -360,14 +360,14 @@ class Image : gtk.misc.Misc
   {
     GdkPixbufAnimation* _cretval;
     _cretval = gtk_image_get_animation(cast(GtkImage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, No.take);
     return _retval;
   }
 
   /**
       Gets the #GIcon and size being displayed by the #GtkImage.
-    The storage type of the image must be [gtk.types.ImageType.Empty] or
-    [gtk.types.ImageType.Gicon] (see [gtk.image.Image.getStorageType]).
+    The storage type of the image must be [gtk.types.ImageType.empty] or
+    [gtk.types.ImageType.gicon] (see [gtk.image.Image.getStorageType]).
     The caller of this function does not own a reference to the
     returned #GIcon.
     Params:
@@ -380,13 +380,13 @@ class Image : gtk.misc.Misc
   {
     GIcon* _gicon;
     gtk_image_get_gicon(cast(GtkImage*)cPtr, &_gicon, &size);
-    gicon = ObjectG.getDObject!(gio.icon.Icon)(_gicon, No.Take);
+    gicon = ObjectG.getDObject!(gio.icon.Icon)(_gicon, No.take);
   }
 
   /**
       Gets the icon name and size being displayed by the #GtkImage.
-    The storage type of the image must be [gtk.types.ImageType.Empty] or
-    [gtk.types.ImageType.IconName] (see [gtk.image.Image.getStorageType]).
+    The storage type of the image must be [gtk.types.ImageType.empty] or
+    [gtk.types.ImageType.iconName] (see [gtk.image.Image.getStorageType]).
     The returned string is owned by the #GtkImage and should not
     be freed.
     Params:
@@ -399,13 +399,13 @@ class Image : gtk.misc.Misc
   {
     char* _iconName;
     gtk_image_get_icon_name(cast(GtkImage*)cPtr, &_iconName, &size);
-    iconName = _iconName.fromCString(No.Free);
+    iconName = _iconName.fromCString(No.free);
   }
 
   /**
       Gets the icon set and size being displayed by the #GtkImage.
-    The storage type of the image must be [gtk.types.ImageType.Empty] or
-    [gtk.types.ImageType.IconSet] (see [gtk.image.Image.getStorageType]).
+    The storage type of the image must be [gtk.types.ImageType.empty] or
+    [gtk.types.ImageType.iconSet] (see [gtk.image.Image.getStorageType]).
     Params:
       iconSet =       location to store a
             #GtkIconSet, or null
@@ -418,13 +418,13 @@ class Image : gtk.misc.Misc
   {
     GtkIconSet* _iconSet;
     gtk_image_get_icon_set(cast(GtkImage*)cPtr, &_iconSet, &size);
-    iconSet = new gtk.icon_set.IconSet(cast(void*)_iconSet, No.Take);
+    iconSet = new gtk.icon_set.IconSet(cast(void*)_iconSet, No.take);
   }
 
   /**
       Gets the #GdkPixbuf being displayed by the #GtkImage.
-    The storage type of the image must be [gtk.types.ImageType.Empty] or
-    [gtk.types.ImageType.Pixbuf] (see [gtk.image.Image.getStorageType]).
+    The storage type of the image must be [gtk.types.ImageType.empty] or
+    [gtk.types.ImageType.pixbuf] (see [gtk.image.Image.getStorageType]).
     The caller of this function does not own a reference to the
     returned pixbuf.
     Returns:     the displayed pixbuf, or null if
@@ -434,7 +434,7 @@ class Image : gtk.misc.Misc
   {
     PixbufC* _cretval;
     _cretval = gtk_image_get_pixbuf(cast(GtkImage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.take);
     return _retval;
   }
 
@@ -451,8 +451,8 @@ class Image : gtk.misc.Misc
 
   /**
       Gets the stock icon name and size being displayed by the #GtkImage.
-    The storage type of the image must be [gtk.types.ImageType.Empty] or
-    [gtk.types.ImageType.Stock] (see [gtk.image.Image.getStorageType]).
+    The storage type of the image must be [gtk.types.ImageType.empty] or
+    [gtk.types.ImageType.stock] (see [gtk.image.Image.getStorageType]).
     The returned string is owned by the #GtkImage and should not
     be freed.
     Params:
@@ -467,13 +467,13 @@ class Image : gtk.misc.Misc
   {
     char* _stockId;
     gtk_image_get_stock(cast(GtkImage*)cPtr, &_stockId, &size);
-    stockId = _stockId.fromCString(No.Free);
+    stockId = _stockId.fromCString(No.free);
   }
 
   /**
       Gets the type of representation being used by the #GtkImage
     to store image data. If the #GtkImage has no image data,
-    the return value will be [gtk.types.ImageType.Empty].
+    the return value will be [gtk.types.ImageType.empty].
     Returns:     image representation being used
   */
   gtk.types.ImageType getStorageType()
@@ -492,7 +492,7 @@ class Image : gtk.misc.Misc
   */
   void setFromAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation animation)
   {
-    gtk_image_set_from_animation(cast(GtkImage*)cPtr, animation ? cast(GdkPixbufAnimation*)animation.cPtr(No.Dup) : null);
+    gtk_image_set_from_animation(cast(GtkImage*)cPtr, animation ? cast(GdkPixbufAnimation*)animation.cPtr(No.dup) : null);
   }
 
   /**
@@ -502,7 +502,7 @@ class Image : gtk.misc.Misc
   */
   void setFromFile(string filename = null)
   {
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString(No.alloc);
     gtk_image_set_from_file(cast(GtkImage*)cPtr, _filename);
   }
 
@@ -514,7 +514,7 @@ class Image : gtk.misc.Misc
   */
   void setFromGicon(gio.icon.Icon icon, gtk.types.IconSize size)
   {
-    gtk_image_set_from_gicon(cast(GtkImage*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, size);
+    gtk_image_set_from_gicon(cast(GtkImage*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null, size);
   }
 
   /**
@@ -525,7 +525,7 @@ class Image : gtk.misc.Misc
   */
   void setFromIconName(string iconName, gtk.types.IconSize size)
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString(No.alloc);
     gtk_image_set_from_icon_name(cast(GtkImage*)cPtr, _iconName, size);
   }
 
@@ -539,7 +539,7 @@ class Image : gtk.misc.Misc
   */
   void setFromIconSet(gtk.icon_set.IconSet iconSet, gtk.types.IconSize size)
   {
-    gtk_image_set_from_icon_set(cast(GtkImage*)cPtr, iconSet ? cast(GtkIconSet*)iconSet.cPtr(No.Dup) : null, size);
+    gtk_image_set_from_icon_set(cast(GtkImage*)cPtr, iconSet ? cast(GtkIconSet*)iconSet.cPtr(No.dup) : null, size);
   }
 
   /**
@@ -549,7 +549,7 @@ class Image : gtk.misc.Misc
   */
   void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_image_set_from_pixbuf(cast(GtkImage*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    gtk_image_set_from_pixbuf(cast(GtkImage*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null);
   }
 
   /**
@@ -559,7 +559,7 @@ class Image : gtk.misc.Misc
   */
   void setFromResource(string resourcePath = null)
   {
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString(No.alloc);
     gtk_image_set_from_resource(cast(GtkImage*)cPtr, _resourcePath);
   }
 
@@ -573,7 +573,7 @@ class Image : gtk.misc.Misc
   */
   void setFromStock(string stockId, gtk.types.IconSize size)
   {
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString(No.alloc);
     gtk_image_set_from_stock(cast(GtkImage*)cPtr, _stockId, size);
   }
 
@@ -584,7 +584,7 @@ class Image : gtk.misc.Misc
   */
   void setFromSurface(cairo.surface.Surface surface = null)
   {
-    gtk_image_set_from_surface(cast(GtkImage*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
+    gtk_image_set_from_surface(cast(GtkImage*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(No.dup) : null);
   }
 
   /**

@@ -14,7 +14,7 @@ import gobject.object;
 class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,8 +34,8 @@ class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   static arrow.source_node_options.SourceNodeOptions newRecordBatch(arrow.record_batch.RecordBatch recordBatch)
   {
     GArrowSourceNodeOptions* _cretval;
-    _cretval = garrow_source_node_options_new_record_batch(recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
+    _cretval = garrow_source_node_options_new_record_batch(recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -43,8 +43,8 @@ class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   static arrow.source_node_options.SourceNodeOptions newRecordBatchReader(arrow.record_batch_reader.RecordBatchReader reader)
   {
     GArrowSourceNodeOptions* _cretval;
-    _cretval = garrow_source_node_options_new_record_batch_reader(reader ? cast(GArrowRecordBatchReader*)reader.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
+    _cretval = garrow_source_node_options_new_record_batch_reader(reader ? cast(GArrowRecordBatchReader*)reader.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -52,8 +52,8 @@ class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   static arrow.source_node_options.SourceNodeOptions newTable(arrow.table.Table table)
   {
     GArrowSourceNodeOptions* _cretval;
-    _cretval = garrow_source_node_options_new_table(table ? cast(GArrowTable*)table.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.Take);
+    _cretval = garrow_source_node_options_new_table(table ? cast(GArrowTable*)table.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(arrow.source_node_options.SourceNodeOptions)(cast(GArrowSourceNodeOptions*)_cretval, Yes.take);
     return _retval;
   }
 }

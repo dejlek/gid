@@ -81,10 +81,10 @@ interface CellEditable
     Connect to EditingDone signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEditingDone(T)(T callback, Flag!"After" after = No.After)
+  ulong connectEditingDone(T)(T callback, Flag!"after" after = No.after)
   if (is(T : EditingDoneCallbackDlg) || is(T : EditingDoneCallbackFunc));
 
   /**
@@ -115,9 +115,9 @@ interface CellEditable
     Connect to RemoveWidget signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRemoveWidget(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRemoveWidget(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RemoveWidgetCallbackDlg) || is(T : RemoveWidgetCallbackFunc));
   }

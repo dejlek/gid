@@ -17,12 +17,12 @@ import gsk.types;
 class ShaderArgsBuilder : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -50,8 +50,8 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   this(gsk.glshader.GLShader shader, glib.bytes.Bytes initialValues = null)
   {
     GskShaderArgsBuilder* _cretval;
-    _cretval = gsk_shader_args_builder_new(shader ? cast(GskGLShader*)shader.cPtr(No.Dup) : null, initialValues ? cast(GBytes*)initialValues.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gsk_shader_args_builder_new(shader ? cast(GskGLShader*)shader.cPtr(No.dup) : null, initialValues ? cast(GBytes*)initialValues.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -116,7 +116,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   */
   void setVec2(int idx, graphene.vec2.Vec2 value)
   {
-    gsk_shader_args_builder_set_vec2(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(const(graphene_vec2_t)*)value.cPtr(No.Dup) : null);
+    gsk_shader_args_builder_set_vec2(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(const(graphene_vec2_t)*)value.cPtr(No.dup) : null);
   }
 
   /**
@@ -129,7 +129,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   */
   void setVec3(int idx, graphene.vec3.Vec3 value)
   {
-    gsk_shader_args_builder_set_vec3(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(const(graphene_vec3_t)*)value.cPtr(No.Dup) : null);
+    gsk_shader_args_builder_set_vec3(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(const(graphene_vec3_t)*)value.cPtr(No.dup) : null);
   }
 
   /**
@@ -142,7 +142,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   */
   void setVec4(int idx, graphene.vec4.Vec4 value)
   {
-    gsk_shader_args_builder_set_vec4(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(const(graphene_vec4_t)*)value.cPtr(No.Dup) : null);
+    gsk_shader_args_builder_set_vec4(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(const(graphene_vec4_t)*)value.cPtr(No.dup) : null);
   }
 
   /**
@@ -164,7 +164,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   {
     GBytes* _cretval;
     _cretval = gsk_shader_args_builder_to_args(cast(GskShaderArgsBuilder*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

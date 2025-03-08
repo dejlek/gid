@@ -25,15 +25,15 @@ class TextCluster : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(cairo_text_cluster_t.sizeof), Yes.Take);
+    super(safeMalloc(cairo_text_cluster_t.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }

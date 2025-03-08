@@ -10,7 +10,7 @@ import gid.gid;
 class UInt8DataType : arrow.integer_data_type.IntegerDataType
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class UInt8DataType : arrow.integer_data_type.IntegerDataType
   {
     GArrowUInt8DataType* _cretval;
     _cretval = garrow_uint8_data_type_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

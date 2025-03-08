@@ -40,7 +40,7 @@ import gtk.types;
 class SearchBar : gtk.bin.Bin
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -66,7 +66,7 @@ class SearchBar : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_bar_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -79,7 +79,7 @@ class SearchBar : gtk.bin.Bin
   */
   void connectEntry(gtk.entry.Entry entry)
   {
-    gtk_search_bar_connect_entry(cast(GtkSearchBar*)cPtr, entry ? cast(GtkEntry*)entry.cPtr(No.Dup) : null);
+    gtk_search_bar_connect_entry(cast(GtkSearchBar*)cPtr, entry ? cast(GtkEntry*)entry.cPtr(No.dup) : null);
   }
 
   /**

@@ -12,19 +12,19 @@ enum GstAggregatorStartTimeSelection
   /**
       Start at running time 0.
   */
-  Zero = 0,
+  zero = 0,
 
   /**
       Start at the running time of
     the first buffer that is received.
   */
-  First = 1,
+  first = 1,
 
   /**
       Start at the running time
     selected by the `start-time` property.
   */
-  Set = 2,
+  set = 2,
 }
 
 /**
@@ -35,14 +35,14 @@ enum GstBaseParseFrameFlags : uint
   /**
       no flag
   */
-  None = 0,
+  none = 0,
 
   /**
       set by baseclass if current frame
       is passed for processing to the subclass for the first time
       (and not set on subsequent calls with same data).
   */
-  NewFrame = 1,
+  newFrame = 1,
 
   /**
       set to indicate this buffer should not be
@@ -50,27 +50,27 @@ enum GstBaseParseFrameFlags : uint
       As it is not counted as a frame, bitrate increases but frame to time
       conversions are maintained.
   */
-  NoFrame = 2,
+  noFrame = 2,
 
   /**
       @pre_push_frame can set this to indicate
        that regular segment clipping can still be performed (as opposed to
        any custom one having been done).
   */
-  Clip = 4,
+  clip = 4,
 
   /**
       indicates to @finish_frame that the
        the frame should be dropped (and might be handled internally by subclass)
   */
-  Drop = 8,
+  drop = 8,
 
   /**
       indicates to @finish_frame that the
        the frame should be queued for now and processed fully later
        when the first non-queued frame is finished
   */
-  Queue = 16,
+  queue = 16,
 }
 
 /**
@@ -81,17 +81,17 @@ enum GstBaseSrcFlags : uint
   /**
       has source is starting
   */
-  Starting = 16384,
+  starting = 16384,
 
   /**
       has source been started
   */
-  Started = 32768,
+  started = 32768,
 
   /**
       offset to define more flags
   */
-  Last = 1048576,
+  last = 1048576,
 }
 
 /** */
@@ -100,31 +100,31 @@ enum GstCollectPadsStateFlags : uint
   /**
       Set if collectdata's pad is EOS.
   */
-  Eos = 1,
+  eos = 1,
 
   /**
       Set if collectdata's pad is flushing.
   */
-  Flushing = 2,
+  flushing = 2,
 
   /**
       Set if collectdata's pad received a
                                          new_segment event.
   */
-  NewSegment = 4,
+  newSegment = 4,
 
   /**
       Set if collectdata's pad must be waited
                                          for when collecting.
   */
-  Waiting = 8,
+  waiting = 8,
 
   /**
       Set collectdata's pad WAITING state must
                                          not be changed.
     #GstCollectPadsStateFlags indicate private state of a collectdata('s pad).
   */
-  Locked = 16,
+  locked = 16,
 }
 
 /**
@@ -182,7 +182,7 @@ enum GstCollectPadsStateFlags : uint
   An element using #GstAdapter in its sink pad chain function should ensure that
   when the FLUSH_STOP event is received, that any queued data is cleared using
   [gstbase.adapter.Adapter.clear]. Data should also be cleared or processed on EOS and
-  when changing state from [gst.types.State.Paused] to [gst.types.State.Ready].
+  when changing state from [gst.types.State.paused] to [gst.types.State.ready].
   
   Also check the GST_BUFFER_FLAG_DISCONT flag on the buffer. Some elements might
   need to clear the adapter after a discontinuity.
@@ -669,9 +669,9 @@ struct GstAggregatorPrivate;
   set the fixed caps on srcpad, when the format is ensured (e.g.  when
   base class calls subclass' #GstBaseParseClass::set_sink_caps function).
   
-  This base class uses [gst.types.Format.Default] as a meaning of frames. So,
+  This base class uses [gst.types.Format.default_] as a meaning of frames. So,
   subclass conversion routine needs to know that conversion from
-  [gst.types.Format.Time] to [gst.types.Format.Default] must return the
+  [gst.types.Format.time] to [gst.types.Format.default_] must return the
   frame number that can be found from the given byte position.
   
   #GstBaseParse uses subclasses conversion methods also for seeking (or
@@ -936,7 +936,7 @@ struct GstBaseParsePrivate;
   ```
   
   #GstBaseSink will handle the prerolling correctly. This means that it will
-  return [gst.types.StateChangeReturn.Async] from a state change to PAUSED until the first
+  return [gst.types.StateChangeReturn.async] from a state change to PAUSED until the first
   buffer arrives in this element. The base class will call the
   #GstBaseSinkClass::preroll vmethod with this preroll buffer and will then
   commit the state change to the next asynchronously pending state.
@@ -963,14 +963,14 @@ struct GstBaseParsePrivate;
   element receives EOS in PAUSED, preroll completes, the event is queued and an
   EOS message is posted when going to PLAYING.
   
-  #GstBaseSink will internally use the [gst.types.EventType.Segment] events to schedule
+  #GstBaseSink will internally use the [gst.types.EventType.segment] events to schedule
   synchronisation and clipping of buffers. Buffers that fall completely outside
   of the current segment are dropped. Buffers that fall partially in the
   segment are rendered (and prerolled). Subclasses should do any subbuffer
   clipping themselves when needed.
   
   #GstBaseSink will by default report the current playback position in
-  [gst.types.Format.Time] based on the current clock time and segment information.
+  [gst.types.Format.time] based on the current clock time and segment information.
   If no clock has been set on the element, the query will be forwarded
   upstream.
   
@@ -1222,21 +1222,21 @@ struct GstBaseSinkPrivate;
       
   The source can be configured to operate in any #GstFormat with the
   [gstbase.base_src.BaseSrc.setFormat] method. The currently set format determines
-  the format of the internal #GstSegment and any [gst.types.EventType.Segment]
-  events. The default format for #GstBaseSrc is [gst.types.Format.Bytes].
+  the format of the internal #GstSegment and any [gst.types.EventType.segment]
+  events. The default format for #GstBaseSrc is [gst.types.Format.bytes].
   
   #GstBaseSrc always supports push mode scheduling. If the following
   conditions are met, it also supports pull mode scheduling:
   
     $(LIST
-        * The format is set to [gst.types.Format.Bytes] (default).
+        * The format is set to [gst.types.Format.bytes] (default).
         * #GstBaseSrcClass::is_seekable returns true.
     )
       
   If all the conditions are met for operating in pull mode, #GstBaseSrc is
   automatically seekable in push mode as well. The following conditions must
   be met to make the element seekable in push mode when the format is not
-  [gst.types.Format.Bytes]:
+  [gst.types.Format.bytes]:
   
   $(LIST
     * #GstBaseSrcClass::is_seekable returns true.
@@ -1263,7 +1263,7 @@ struct GstBaseSinkPrivate;
   #GstBaseSrcClass::create method will not be called in PAUSED but only in
   PLAYING. To signal the pipeline that the element will not produce data, the
   return value from the READY to PAUSED state will be
-  [gst.types.StateChangeReturn.NoPreroll].
+  [gst.types.StateChangeReturn.noPreroll].
   
   A typical live source will timestamp the buffers it creates with the
   current running time of the pipeline. This is one reason why a live source
@@ -1323,7 +1323,7 @@ struct GstBaseSinkPrivate;
   
   An application may send an EOS event to a source element to make it
   perform the EOS logic (send EOS event downstream or post a
-  [gst.types.MessageType.SegmentDone] on the bus). This can typically be done
+  [gst.types.MessageType.segmentDone] on the bus). This can typically be done
   with the [gst.element.Element.sendEvent] function on the element or its parent bin.
   
   After the EOS has been sent to the element, the application should wait for
@@ -2266,7 +2266,7 @@ struct GstDataQueueSize
   it to the caller.
   
   To add a new pad to the #GstFlowCombiner use [gstbase.flow_combiner.FlowCombiner.addPad].
-  The new #GstPad is stored with a default value of [gst.types.FlowReturn.Ok].
+  The new #GstPad is stored with a default value of [gst.types.FlowReturn.ok].
   
   In case you want a #GstPad to be removed, use [gstbase.flow_combiner.FlowCombiner.removePad].
   
@@ -2280,15 +2280,15 @@ struct GstDataQueueSize
   These rules are:
   
   $(LIST
-    * [gst.types.FlowReturn.Eos]: only if all returns are EOS too
-    * [gst.types.FlowReturn.NotLinked]: only if all returns are NOT_LINKED too
-    * [gst.types.FlowReturn.Error] or below: if at least one returns an error return
-    * [gst.types.FlowReturn.NotNegotiated]: if at least one returns a not-negotiated return
-    * [gst.types.FlowReturn.Flushing]: if at least one returns flushing
-    * [gst.types.FlowReturn.Ok]: otherwise
+    * [gst.types.FlowReturn.eos]: only if all returns are EOS too
+    * [gst.types.FlowReturn.notLinked]: only if all returns are NOT_LINKED too
+    * [gst.types.FlowReturn.error] or below: if at least one returns an error return
+    * [gst.types.FlowReturn.notNegotiated]: if at least one returns a not-negotiated return
+    * [gst.types.FlowReturn.flushing]: if at least one returns flushing
+    * [gst.types.FlowReturn.ok]: otherwise
   )
     
-  [gst.types.FlowReturn.Error] or below, GST_FLOW_NOT_NEGOTIATED and GST_FLOW_FLUSHING are
+  [gst.types.FlowReturn.error] or below, GST_FLOW_NOT_NEGOTIATED and GST_FLOW_FLUSHING are
   returned immediately from the [gstbase.flow_combiner.FlowCombiner.updateFlow] function.
 */
 struct GstFlowCombiner;

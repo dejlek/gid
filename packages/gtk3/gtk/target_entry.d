@@ -14,12 +14,12 @@ import gtk.types;
 class TargetEntry : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -37,13 +37,13 @@ class TargetEntry : gobject.boxed.Boxed
 
   @property string target()
   {
-    return (cast(GtkTargetEntry*)cPtr).target.fromCString(No.Free);
+    return (cast(GtkTargetEntry*)cPtr).target.fromCString(No.free);
   }
 
   @property void target(string propval)
   {
     safeFree(cast(void*)(cast(GtkTargetEntry*)cPtr).target);
-    (cast(GtkTargetEntry*)cPtr).target = propval.toCString(Yes.Alloc);
+    (cast(GtkTargetEntry*)cPtr).target = propval.toCString(Yes.alloc);
   }
 
   @property uint flags()
@@ -78,9 +78,9 @@ class TargetEntry : gobject.boxed.Boxed
   this(string target, uint flags, uint info)
   {
     GtkTargetEntry* _cretval;
-    const(char)* _target = target.toCString(No.Alloc);
+    const(char)* _target = target.toCString(No.alloc);
     _cretval = gtk_target_entry_new(_target, flags, info);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -92,7 +92,7 @@ class TargetEntry : gobject.boxed.Boxed
   {
     GtkTargetEntry* _cretval;
     _cretval = gtk_target_entry_copy(cast(GtkTargetEntry*)cPtr);
-    auto _retval = _cretval ? new gtk.target_entry.TargetEntry(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.target_entry.TargetEntry(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

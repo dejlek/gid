@@ -37,7 +37,7 @@ import gobject.object;
 class ObjectAtk : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -63,7 +63,7 @@ class ObjectAtk : gobject.object.ObjectG
   bool addRelationship(atk.types.RelationType relationship, atk.object.ObjectAtk target)
   {
     bool _retval;
-    _retval = atk_object_add_relationship(cast(AtkObject*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
+    _retval = atk_object_add_relationship(cast(AtkObject*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class ObjectAtk : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = atk_object_get_accessible_id(cast(AtkObject*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class ObjectAtk : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = atk_object_get_description(cast(AtkObject*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class ObjectAtk : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = atk_object_get_help_text(cast(AtkObject*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class ObjectAtk : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = atk_object_get_name(cast(AtkObject*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class ObjectAtk : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = atk_object_get_object_locale(cast(AtkObject*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class ObjectAtk : gobject.object.ObjectG
   {
     AtkObject* _cretval;
     _cretval = atk_object_get_parent(cast(AtkObject*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.take);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class ObjectAtk : gobject.object.ObjectG
   {
     AtkObject* _cretval;
     _cretval = atk_object_peek_parent(cast(AtkObject*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.take);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class ObjectAtk : gobject.object.ObjectG
   {
     AtkObject* _cretval;
     _cretval = atk_object_ref_accessible_child(cast(AtkObject*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -290,7 +290,7 @@ class ObjectAtk : gobject.object.ObjectG
   {
     AtkRelationSet* _cretval;
     _cretval = atk_object_ref_relation_set(cast(AtkObject*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.relation_set.RelationSet)(cast(AtkRelationSet*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.relation_set.RelationSet)(cast(AtkRelationSet*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class ObjectAtk : gobject.object.ObjectG
   {
     AtkStateSet* _cretval;
     _cretval = atk_object_ref_state_set(cast(AtkObject*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -330,7 +330,7 @@ class ObjectAtk : gobject.object.ObjectG
   bool removeRelationship(atk.types.RelationType relationship, atk.object.ObjectAtk target)
   {
     bool _retval;
-    _retval = atk_object_remove_relationship(cast(AtkObject*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
+    _retval = atk_object_remove_relationship(cast(AtkObject*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -345,7 +345,7 @@ class ObjectAtk : gobject.object.ObjectG
   */
   void setAccessibleId(string id)
   {
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString(No.alloc);
     atk_object_set_accessible_id(cast(AtkObject*)cPtr, _id);
   }
 
@@ -359,7 +359,7 @@ class ObjectAtk : gobject.object.ObjectG
   */
   void setDescription(string description)
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString(No.alloc);
     atk_object_set_description(cast(AtkObject*)cPtr, _description);
   }
 
@@ -372,7 +372,7 @@ class ObjectAtk : gobject.object.ObjectG
   */
   void setHelpText(string helpText)
   {
-    const(char)* _helpText = helpText.toCString(No.Alloc);
+    const(char)* _helpText = helpText.toCString(No.alloc);
     atk_object_set_help_text(cast(AtkObject*)cPtr, _helpText);
   }
 
@@ -386,7 +386,7 @@ class ObjectAtk : gobject.object.ObjectG
   */
   void setName(string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     atk_object_set_name(cast(AtkObject*)cPtr, _name);
   }
 
@@ -397,7 +397,7 @@ class ObjectAtk : gobject.object.ObjectG
   */
   void setParent(atk.object.ObjectAtk parent)
   {
-    atk_object_set_parent(cast(AtkObject*)cPtr, parent ? cast(AtkObject*)parent.cPtr(No.Dup) : null);
+    atk_object_set_parent(cast(AtkObject*)cPtr, parent ? cast(AtkObject*)parent.cPtr(No.dup) : null);
   }
 
   /**
@@ -432,10 +432,10 @@ class ObjectAtk : gobject.object.ObjectG
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActiveDescendantChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  ulong connectActiveDescendantChanged(T)(string detail = null, T callback, Flag!"after" after = No.after)
   if (is(T : ActiveDescendantChangedCallbackDlg) || is(T : ActiveDescendantChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -472,10 +472,10 @@ class ObjectAtk : gobject.object.ObjectG
     Connect to Announcement signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAnnouncement(T)(T callback, Flag!"After" after = No.After)
+  ulong connectAnnouncement(T)(T callback, Flag!"after" after = No.after)
   if (is(T : AnnouncementCallbackDlg) || is(T : AnnouncementCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -512,10 +512,10 @@ class ObjectAtk : gobject.object.ObjectG
     Connect to AttributeChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAttributeChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectAttributeChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : AttributeChangedCallbackDlg) || is(T : AttributeChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -559,10 +559,10 @@ class ObjectAtk : gobject.object.ObjectG
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChildrenChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  ulong connectChildrenChanged(T)(string detail = null, T callback, Flag!"after" after = No.after)
   if (is(T : ChildrenChangedCallbackDlg) || is(T : ChildrenChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -601,10 +601,10 @@ class ObjectAtk : gobject.object.ObjectG
     Connect to FocusEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFocusEvent(T)(T callback, Flag!"After" after = No.After)
+  ulong connectFocusEvent(T)(T callback, Flag!"after" after = No.after)
   if (is(T : FocusEventCallbackDlg) || is(T : FocusEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -641,10 +641,10 @@ class ObjectAtk : gobject.object.ObjectG
     Connect to Notification signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNotification(T)(T callback, Flag!"After" after = No.After)
+  ulong connectNotification(T)(T callback, Flag!"after" after = No.after)
   if (is(T : NotificationCallbackDlg) || is(T : NotificationCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -693,10 +693,10 @@ class ObjectAtk : gobject.object.ObjectG
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPropertyChange(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  ulong connectPropertyChange(T)(string detail = null, T callback, Flag!"after" after = No.after)
   if (is(T : PropertyChangeCallbackDlg) || is(T : PropertyChangeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -734,10 +734,10 @@ class ObjectAtk : gobject.object.ObjectG
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStateChange(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  ulong connectStateChange(T)(string detail = null, T callback, Flag!"after" after = No.after)
   if (is(T : StateChangeCallbackDlg) || is(T : StateChangeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -772,10 +772,10 @@ class ObjectAtk : gobject.object.ObjectG
     Connect to VisibleDataChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectVisibleDataChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectVisibleDataChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : VisibleDataChangedCallbackDlg) || is(T : VisibleDataChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -7,7 +7,7 @@ import gio.proxy_mixin;
 /// Proxy object for Gio.Proxy interface when a GObject has no applicable D binding
 class ProxyIfaceProxy : IfaceProxy, gio.proxy.Proxy
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

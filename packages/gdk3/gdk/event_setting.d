@@ -14,7 +14,7 @@ class EventSetting
 {
   GdkEventSetting cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventSetting");
@@ -42,7 +42,7 @@ class EventSetting
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventSetting*)cPtr).window, No.Take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventSetting*)cPtr).window, No.take);
   }
 
   @property byte sendEvent()
@@ -67,12 +67,12 @@ class EventSetting
 
   @property string name()
   {
-    return (cast(GdkEventSetting*)cPtr).name.fromCString(No.Free);
+    return (cast(GdkEventSetting*)cPtr).name.fromCString(No.free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(GdkEventSetting*)cPtr).name);
-    (cast(GdkEventSetting*)cPtr).name = propval.toCString(Yes.Alloc);
+    (cast(GdkEventSetting*)cPtr).name = propval.toCString(Yes.alloc);
   }
 }

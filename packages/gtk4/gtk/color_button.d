@@ -42,7 +42,7 @@ import gtk.widget;
 class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -76,7 +76,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_button_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -88,8 +88,8 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   static gtk.color_button.ColorButton newWithRgba(gdk.rgba.RGBA rgba)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_color_button_new_with_rgba(rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_color_button_new_with_rgba(rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   {
     const(char)* _cretval;
     _cretval = gtk_color_button_get_title(cast(GtkColorButton*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   */
   void setTitle(string title)
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString(No.alloc);
     gtk_color_button_set_title(cast(GtkColorButton*)cPtr, _title);
   }
 
@@ -165,10 +165,10 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -207,10 +207,10 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
     Connect to ColorSet signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectColorSet(T)(T callback, Flag!"After" after = No.After)
+  ulong connectColorSet(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ColorSetCallbackDlg) || is(T : ColorSetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

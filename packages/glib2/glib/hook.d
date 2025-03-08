@@ -13,7 +13,7 @@ class Hook
 {
   GHook cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.Hook");
@@ -156,7 +156,7 @@ class Hook
 
     extern(C) int _funcCallback(GHook* newHook, GHook* sibling)
     {
-      int _retval = _static_func(newHook ? new glib.hook.Hook(cast(void*)newHook, No.Take) : null, sibling ? new glib.hook.Hook(cast(void*)sibling, No.Take) : null);
+      int _retval = _static_func(newHook ? new glib.hook.Hook(cast(void*)newHook, No.take) : null, sibling ? new glib.hook.Hook(cast(void*)sibling, No.take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

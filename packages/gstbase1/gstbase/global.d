@@ -26,8 +26,8 @@ import gstbase.types;
 gst.caps.Caps typeFindHelper(gst.pad.Pad src, ulong size)
 {
   GstCaps* _cretval;
-  _cretval = gst_type_find_helper(src ? cast(GstPad*)src.cPtr(No.Dup) : null, size);
-  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+  _cretval = gst_type_find_helper(src ? cast(GstPad*)src.cPtr(No.dup) : null, size);
+  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -37,7 +37,7 @@ gst.caps.Caps typeFindHelper(gst.pad.Pad src, ulong size)
   file.
   
   All available typefinders will be called on the data in order of rank. If
-  a typefinding function returns a probability of [gst.types.TypeFindProbability.Maximum],
+  a typefinding function returns a probability of [gst.types.TypeFindProbability.maximum],
   typefinding is stopped immediately and the found caps will be returned
   right away. Otherwise, all available typefind functions will the tried,
   and the caps with the highest probability will be returned, or null if
@@ -56,8 +56,8 @@ gst.caps.Caps typeFindHelper(gst.pad.Pad src, ulong size)
 gst.caps.Caps typeFindHelperForBuffer(gst.object.ObjectGst obj, gst.buffer.Buffer buf, out gst.types.TypeFindProbability prob)
 {
   GstCaps* _cretval;
-  _cretval = gst_type_find_helper_for_buffer(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, buf ? cast(GstBuffer*)buf.cPtr(No.Dup) : null, &prob);
-  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+  _cretval = gst_type_find_helper_for_buffer(obj ? cast(GstObject*)obj.cPtr(No.dup) : null, buf ? cast(GstBuffer*)buf.cPtr(No.dup) : null, &prob);
+  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -88,8 +88,8 @@ gst.caps.Caps typeFindHelperForBuffer(gst.object.ObjectGst obj, gst.buffer.Buffe
 gst.caps.Caps typeFindHelperForBufferWithCaps(gst.object.ObjectGst obj, gst.buffer.Buffer buf, gst.caps.Caps caps, out gst.types.TypeFindProbability prob)
 {
   GstCaps* _cretval;
-  _cretval = gst_type_find_helper_for_buffer_with_caps(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, buf ? cast(GstBuffer*)buf.cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, &prob);
-  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+  _cretval = gst_type_find_helper_for_buffer_with_caps(obj ? cast(GstObject*)obj.cPtr(No.dup) : null, buf ? cast(GstBuffer*)buf.cPtr(No.dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null, &prob);
+  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -99,7 +99,7 @@ gst.caps.Caps typeFindHelperForBufferWithCaps(gst.object.ObjectGst obj, gst.buff
   file.
   
   All available typefinders will be called on the data in order of rank. If
-  a typefinding function returns a probability of [gst.types.TypeFindProbability.Maximum],
+  a typefinding function returns a probability of [gst.types.TypeFindProbability.maximum],
   typefinding is stopped immediately and the found caps will be returned
   right away. Otherwise, all available typefind functions will the tried,
   and the caps with the highest probability will be returned, or null if
@@ -123,9 +123,9 @@ gst.caps.Caps typeFindHelperForBufferWithCaps(gst.object.ObjectGst obj, gst.buff
 gst.caps.Caps typeFindHelperForBufferWithExtension(gst.object.ObjectGst obj, gst.buffer.Buffer buf, string extension, out gst.types.TypeFindProbability prob)
 {
   GstCaps* _cretval;
-  const(char)* _extension = extension.toCString(No.Alloc);
-  _cretval = gst_type_find_helper_for_buffer_with_extension(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, buf ? cast(GstBuffer*)buf.cPtr(No.Dup) : null, _extension, &prob);
-  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+  const(char)* _extension = extension.toCString(No.alloc);
+  _cretval = gst_type_find_helper_for_buffer_with_extension(obj ? cast(GstObject*)obj.cPtr(No.dup) : null, buf ? cast(GstBuffer*)buf.cPtr(No.dup) : null, _extension, &prob);
+  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -135,7 +135,7 @@ gst.caps.Caps typeFindHelperForBufferWithExtension(gst.object.ObjectGst obj, gst
   file.
   
   All available typefinders will be called on the data in order of rank. If
-  a typefinding function returns a probability of [gst.types.TypeFindProbability.Maximum],
+  a typefinding function returns a probability of [gst.types.TypeFindProbability.maximum],
   typefinding is stopped immediately and the found caps will be returned
   right away. Otherwise, all available typefind functions will the tried,
   and the caps with the highest probability will be returned, or null if
@@ -161,8 +161,8 @@ gst.caps.Caps typeFindHelperForData(gst.object.ObjectGst obj, ubyte[] data, out 
     _size = cast(size_t)data.length;
 
   auto _data = cast(const(ubyte)*)data.ptr;
-  _cretval = gst_type_find_helper_for_data(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, _data, _size, &prob);
-  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+  _cretval = gst_type_find_helper_for_data(obj ? cast(GstObject*)obj.cPtr(No.dup) : null, _data, _size, &prob);
+  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -194,8 +194,8 @@ gst.caps.Caps typeFindHelperForDataWithCaps(gst.object.ObjectGst obj, ubyte[] da
     _size = cast(size_t)data.length;
 
   auto _data = cast(const(ubyte)*)data.ptr;
-  _cretval = gst_type_find_helper_for_data_with_caps(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, _data, _size, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, &prob);
-  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+  _cretval = gst_type_find_helper_for_data_with_caps(obj ? cast(GstObject*)obj.cPtr(No.dup) : null, _data, _size, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null, &prob);
+  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -205,7 +205,7 @@ gst.caps.Caps typeFindHelperForDataWithCaps(gst.object.ObjectGst obj, ubyte[] da
   file.
   
   All available typefinders will be called on the data in order of rank. If
-  a typefinding function returns a probability of [gst.types.TypeFindProbability.Maximum],
+  a typefinding function returns a probability of [gst.types.TypeFindProbability.maximum],
   typefinding is stopped immediately and the found caps will be returned
   right away. Otherwise, all available typefind functions will the tried,
   and the caps with the highest probability will be returned, or null if
@@ -236,9 +236,9 @@ gst.caps.Caps typeFindHelperForDataWithExtension(gst.object.ObjectGst obj, ubyte
     _size = cast(size_t)data.length;
 
   auto _data = cast(const(ubyte)*)data.ptr;
-  const(char)* _extension = extension.toCString(No.Alloc);
-  _cretval = gst_type_find_helper_for_data_with_extension(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, _data, _size, _extension, &prob);
-  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+  const(char)* _extension = extension.toCString(No.alloc);
+  _cretval = gst_type_find_helper_for_data_with_extension(obj ? cast(GstObject*)obj.cPtr(No.dup) : null, _data, _size, _extension, &prob);
+  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -260,9 +260,9 @@ gst.caps.Caps typeFindHelperForDataWithExtension(gst.object.ObjectGst obj, ubyte
 gst.caps.Caps typeFindHelperForExtension(gst.object.ObjectGst obj, string extension)
 {
   GstCaps* _cretval;
-  const(char)* _extension = extension.toCString(No.Alloc);
-  _cretval = gst_type_find_helper_for_extension(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, _extension);
-  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+  const(char)* _extension = extension.toCString(No.alloc);
+  _cretval = gst_type_find_helper_for_extension(obj ? cast(GstObject*)obj.cPtr(No.dup) : null, _extension);
+  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -300,9 +300,9 @@ gst.caps.Caps typeFindHelperGetRange(gst.object.ObjectGst obj, gst.object.Object
   extern(C) GstFlowReturn _funcCallback(GstObject* obj, GstObject* parent, ulong offset, uint length, GstBuffer** buffer)
   {
     gst.types.FlowReturn _dretval;
-    auto _buffer = new gst.buffer.Buffer(buffer, No.Take);
+    auto _buffer = new gst.buffer.Buffer(buffer, No.take);
 
-    _dretval = _static_func(ObjectG.getDObject!(gst.object.ObjectGst)(cast(void*)obj, No.Take), ObjectG.getDObject!(gst.object.ObjectGst)(cast(void*)parent, No.Take), offset, length, _buffer);
+    _dretval = _static_func(ObjectG.getDObject!(gst.object.ObjectGst)(cast(void*)obj, No.take), ObjectG.getDObject!(gst.object.ObjectGst)(cast(void*)parent, No.take), offset, length, _buffer);
     auto _retval = cast(GstFlowReturn)_dretval;
     *buffer = *cast(GstBuffer**)_buffer.cPtr;
 
@@ -312,10 +312,10 @@ gst.caps.Caps typeFindHelperGetRange(gst.object.ObjectGst obj, gst.object.Object
 
   _static_func = func;
   GstCaps* _cretval;
-  const(char)* _extension = extension.toCString(No.Alloc);
-  _cretval = gst_type_find_helper_get_range(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, _funcCB, size, _extension, &prob);
+  const(char)* _extension = extension.toCString(No.alloc);
+  _cretval = gst_type_find_helper_get_range(obj ? cast(GstObject*)obj.cPtr(No.dup) : null, parent ? cast(GstObject*)parent.cPtr(No.dup) : null, _funcCB, size, _extension, &prob);
   _static_func = null;
-  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -342,7 +342,7 @@ gst.caps.Caps typeFindHelperGetRange(gst.object.ObjectGst obj, gst.object.Object
     caps =       returned caps
     prob =       location to store the probability of the found
           caps, or null
-  Returns:     the last [gst.types.FlowReturn] from pulling a buffer or [gst.types.FlowReturn.Ok] if
+  Returns:     the last [gst.types.FlowReturn] from pulling a buffer or [gst.types.FlowReturn.ok] if
              typefinding was successful.
 */
 gst.types.FlowReturn typeFindHelperGetRangeFull(gst.object.ObjectGst obj, gst.object.ObjectGst parent, gstbase.types.TypeFindHelperGetRangeFunction func, ulong size, string extension, out gst.caps.Caps caps, out gst.types.TypeFindProbability prob)
@@ -352,9 +352,9 @@ gst.types.FlowReturn typeFindHelperGetRangeFull(gst.object.ObjectGst obj, gst.ob
   extern(C) GstFlowReturn _funcCallback(GstObject* obj, GstObject* parent, ulong offset, uint length, GstBuffer** buffer)
   {
     gst.types.FlowReturn _dretval;
-    auto _buffer = new gst.buffer.Buffer(buffer, No.Take);
+    auto _buffer = new gst.buffer.Buffer(buffer, No.take);
 
-    _dretval = _static_func(ObjectG.getDObject!(gst.object.ObjectGst)(cast(void*)obj, No.Take), ObjectG.getDObject!(gst.object.ObjectGst)(cast(void*)parent, No.Take), offset, length, _buffer);
+    _dretval = _static_func(ObjectG.getDObject!(gst.object.ObjectGst)(cast(void*)obj, No.take), ObjectG.getDObject!(gst.object.ObjectGst)(cast(void*)parent, No.take), offset, length, _buffer);
     auto _retval = cast(GstFlowReturn)_dretval;
     *buffer = *cast(GstBuffer**)_buffer.cPtr;
 
@@ -364,12 +364,12 @@ gst.types.FlowReturn typeFindHelperGetRangeFull(gst.object.ObjectGst obj, gst.ob
 
   _static_func = func;
   GstFlowReturn _cretval;
-  const(char)* _extension = extension.toCString(No.Alloc);
+  const(char)* _extension = extension.toCString(No.alloc);
   GstCaps* _caps;
-  _cretval = gst_type_find_helper_get_range_full(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, _funcCB, size, _extension, &_caps, &prob);
+  _cretval = gst_type_find_helper_get_range_full(obj ? cast(GstObject*)obj.cPtr(No.dup) : null, parent ? cast(GstObject*)parent.cPtr(No.dup) : null, _funcCB, size, _extension, &_caps, &prob);
   _static_func = null;
   gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
-  caps = new gst.caps.Caps(cast(void*)_caps, Yes.Take);
+  caps = new gst.caps.Caps(cast(void*)_caps, Yes.take);
   return _retval;
 }
 
@@ -390,7 +390,7 @@ gst.types.FlowReturn typeFindHelperGetRangeFull(gst.object.ObjectGst obj, gst.ob
 gst.type_find_factory.TypeFindFactory[] typeFindListFactoriesForCaps(gst.object.ObjectGst obj, gst.caps.Caps caps)
 {
   GList* _cretval;
-  _cretval = gst_type_find_list_factories_for_caps(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+  _cretval = gst_type_find_list_factories_for_caps(obj ? cast(GstObject*)obj.cPtr(No.dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
   auto _retval = gListToD!(gst.type_find_factory.TypeFindFactory, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
 }

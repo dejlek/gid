@@ -14,7 +14,7 @@ import gstgl.types;
 class GLShader : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -39,8 +39,8 @@ class GLShader : gst.object.ObjectGst
   this(gstgl.glcontext.GLContext context)
   {
     GstGLShader* _cretval;
-    _cretval = gst_gl_shader_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gst_gl_shader_new(context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -53,10 +53,10 @@ class GLShader : gst.object.ObjectGst
   {
     GstGLShader* _cretval;
     GError *_err;
-    _cretval = gst_gl_shader_new_default(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, &_err);
+    _cretval = gst_gl_shader_new_default(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gstgl.glshader.GLShader)(cast(GstGLShader*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstgl.glshader.GLShader)(cast(GstGLShader*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -64,8 +64,8 @@ class GLShader : gst.object.ObjectGst
   static string stringFragmentExternalOesGetDefault(gstgl.glcontext.GLContext context, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile)
   {
     char* _cretval;
-    _cretval = gst_gl_shader_string_fragment_external_oes_get_default(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, version_, profile);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    _cretval = gst_gl_shader_string_fragment_external_oes_get_default(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, version_, profile);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -73,8 +73,8 @@ class GLShader : gst.object.ObjectGst
   static string stringFragmentGetDefault(gstgl.glcontext.GLContext context, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile)
   {
     char* _cretval;
-    _cretval = gst_gl_shader_string_fragment_get_default(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, version_, profile);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    _cretval = gst_gl_shader_string_fragment_get_default(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, version_, profile);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -96,8 +96,8 @@ class GLShader : gst.object.ObjectGst
   static string stringGetHighestPrecision(gstgl.glcontext.GLContext context, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile)
   {
     const(char)* _cretval;
-    _cretval = gst_gl_shader_string_get_highest_precision(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, version_, profile);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    _cretval = gst_gl_shader_string_get_highest_precision(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, version_, profile);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class GLShader : gst.object.ObjectGst
   bool attach(gstgl.glslstage.GLSLStage stage)
   {
     bool _retval;
-    _retval = gst_gl_shader_attach(cast(GstGLShader*)cPtr, stage ? cast(GstGLSLStage*)stage.cPtr(No.Dup) : null);
+    _retval = gst_gl_shader_attach(cast(GstGLShader*)cPtr, stage ? cast(GstGLSLStage*)stage.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class GLShader : gst.object.ObjectGst
   bool attachUnlocked(gstgl.glslstage.GLSLStage stage)
   {
     bool _retval;
-    _retval = gst_gl_shader_attach_unlocked(cast(GstGLShader*)cPtr, stage ? cast(GstGLSLStage*)stage.cPtr(No.Dup) : null);
+    _retval = gst_gl_shader_attach_unlocked(cast(GstGLShader*)cPtr, stage ? cast(GstGLSLStage*)stage.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class GLShader : gst.object.ObjectGst
   */
   void bindAttributeLocation(uint index, string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gst_gl_shader_bind_attribute_location(cast(GstGLShader*)cPtr, index, _name);
   }
 
@@ -155,7 +155,7 @@ class GLShader : gst.object.ObjectGst
   */
   void bindFragDataLocation(uint index, string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gst_gl_shader_bind_frag_data_location(cast(GstGLShader*)cPtr, index, _name);
   }
 
@@ -171,7 +171,7 @@ class GLShader : gst.object.ObjectGst
   {
     bool _retval;
     GError *_err;
-    _retval = gst_gl_shader_compile_attach_stage(cast(GstGLShader*)cPtr, stage ? cast(GstGLSLStage*)stage.cPtr(No.Dup) : null, &_err);
+    _retval = gst_gl_shader_compile_attach_stage(cast(GstGLShader*)cPtr, stage ? cast(GstGLSLStage*)stage.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -187,7 +187,7 @@ class GLShader : gst.object.ObjectGst
   */
   void detach(gstgl.glslstage.GLSLStage stage)
   {
-    gst_gl_shader_detach(cast(GstGLShader*)cPtr, stage ? cast(GstGLSLStage*)stage.cPtr(No.Dup) : null);
+    gst_gl_shader_detach(cast(GstGLShader*)cPtr, stage ? cast(GstGLSLStage*)stage.cPtr(No.dup) : null);
   }
 
   /**
@@ -200,14 +200,14 @@ class GLShader : gst.object.ObjectGst
   */
   void detachUnlocked(gstgl.glslstage.GLSLStage stage)
   {
-    gst_gl_shader_detach_unlocked(cast(GstGLShader*)cPtr, stage ? cast(GstGLSLStage*)stage.cPtr(No.Dup) : null);
+    gst_gl_shader_detach_unlocked(cast(GstGLShader*)cPtr, stage ? cast(GstGLSLStage*)stage.cPtr(No.dup) : null);
   }
 
   /** */
   int getAttributeLocation(string name)
   {
     int _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _retval = gst_gl_shader_get_attribute_location(cast(GstGLShader*)cPtr, _name);
     return _retval;
   }
@@ -275,7 +275,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform1f(string name, float value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gst_gl_shader_set_uniform_1f(cast(GstGLShader*)cPtr, _name, value);
   }
 
@@ -287,7 +287,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform1fv(string name, float[] value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     uint _count;
     if (value)
       _count = cast(uint)value.length;
@@ -304,7 +304,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform1i(string name, int value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gst_gl_shader_set_uniform_1i(cast(GstGLShader*)cPtr, _name, value);
   }
 
@@ -316,7 +316,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform1iv(string name, int[] value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     uint _count;
     if (value)
       _count = cast(uint)value.length;
@@ -334,7 +334,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform2f(string name, float v0, float v1)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gst_gl_shader_set_uniform_2f(cast(GstGLShader*)cPtr, _name, v0, v1);
   }
 
@@ -346,7 +346,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform2fv(string name, float[] value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     uint _count;
     if (value)
       _count = cast(uint)value.length;
@@ -364,7 +364,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform2i(string name, int v0, int v1)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gst_gl_shader_set_uniform_2i(cast(GstGLShader*)cPtr, _name, v0, v1);
   }
 
@@ -376,7 +376,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform2iv(string name, int[] value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     uint _count;
     if (value)
       _count = cast(uint)value.length;
@@ -395,7 +395,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform3f(string name, float v0, float v1, float v2)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gst_gl_shader_set_uniform_3f(cast(GstGLShader*)cPtr, _name, v0, v1, v2);
   }
 
@@ -407,7 +407,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform3fv(string name, float[] value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     uint _count;
     if (value)
       _count = cast(uint)value.length;
@@ -426,7 +426,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform3i(string name, int v0, int v1, int v2)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gst_gl_shader_set_uniform_3i(cast(GstGLShader*)cPtr, _name, v0, v1, v2);
   }
 
@@ -438,7 +438,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform3iv(string name, int[] value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     uint _count;
     if (value)
       _count = cast(uint)value.length;
@@ -458,7 +458,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform4f(string name, float v0, float v1, float v2, float v3)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gst_gl_shader_set_uniform_4f(cast(GstGLShader*)cPtr, _name, v0, v1, v2, v3);
   }
 
@@ -470,7 +470,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform4fv(string name, float[] value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     uint _count;
     if (value)
       _count = cast(uint)value.length;
@@ -490,7 +490,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform4i(string name, int v0, int v1, int v2, int v3)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gst_gl_shader_set_uniform_4i(cast(GstGLShader*)cPtr, _name, v0, v1, v2, v3);
   }
 
@@ -502,7 +502,7 @@ class GLShader : gst.object.ObjectGst
   */
   void setUniform4iv(string name, int[] value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     uint _count;
     if (value)
       _count = cast(uint)value.length;

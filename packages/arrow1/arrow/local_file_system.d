@@ -11,7 +11,7 @@ import gid.gid;
 class LocalFileSystem : arrow.file_system.FileSystem
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class LocalFileSystem : arrow.file_system.FileSystem
   this(arrow.local_file_system_options.LocalFileSystemOptions options = null)
   {
     GArrowLocalFileSystem* _cretval;
-    _cretval = garrow_local_file_system_new(options ? cast(GArrowLocalFileSystemOptions*)options.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_local_file_system_new(options ? cast(GArrowLocalFileSystemOptions*)options.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 }

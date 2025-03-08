@@ -93,7 +93,7 @@ import pango.layout;
 class Scale : gtk.range.Range
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -120,8 +120,8 @@ class Scale : gtk.range.Range
   this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_scale_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    _cretval = gtk_scale_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
+    this(_cretval, No.take);
   }
 
   /**
@@ -145,7 +145,7 @@ class Scale : gtk.range.Range
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_new_with_range(orientation, min, max, step);
-    auto _retval = ObjectG.getDObject!(gtk.scale.Scale)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.scale.Scale)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -163,14 +163,14 @@ class Scale : gtk.range.Range
       value =       the value at which the mark is placed, must be between
           the lower and upper limits of the scales’ adjustment
       position =       where to draw the mark. For a horizontal scale, #GTK_POS_TOP
-          and [gtk.types.PositionType.Left] are drawn above the scale, anything else below.
-          For a vertical scale, #GTK_POS_LEFT and [gtk.types.PositionType.Top] are drawn to
+          and [gtk.types.PositionType.left] are drawn above the scale, anything else below.
+          For a vertical scale, #GTK_POS_LEFT and [gtk.types.PositionType.top] are drawn to
           the left of the scale, anything else to the right.
       markup =       Text to be shown at the mark, using [Pango markup][PangoMarkupFormat], or null
   */
   void addMark(double value, gtk.types.PositionType position, string markup = null)
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString(No.alloc);
     gtk_scale_add_mark(cast(GtkScale*)cPtr, value, position, _markup);
   }
 
@@ -227,7 +227,7 @@ class Scale : gtk.range.Range
   {
     PangoLayout* _cretval;
     _cretval = gtk_scale_get_layout(cast(GtkScale*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.take);
     return _retval;
   }
 
@@ -349,10 +349,10 @@ class Scale : gtk.range.Range
     Connect to FormatValue signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFormatValue(T)(T callback, Flag!"After" after = No.After)
+  ulong connectFormatValue(T)(T callback, Flag!"after" after = No.after)
   if (is(T : FormatValueCallbackDlg) || is(T : FormatValueCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

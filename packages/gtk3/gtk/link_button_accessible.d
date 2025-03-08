@@ -18,7 +18,7 @@ import gtk.types;
 class LinkButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.hyperlink_impl.HyperlinkImpl
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

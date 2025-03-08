@@ -67,7 +67,7 @@ import gtk.widget;
 class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -96,9 +96,9 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
   this(string name)
   {
     GtkActionGroup* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gtk_action_group_new(_name);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -113,7 +113,7 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void addAction(gtk.action.Action action)
   {
-    gtk_action_group_add_action(cast(GtkActionGroup*)cPtr, action ? cast(GtkAction*)action.cPtr(No.Dup) : null);
+    gtk_action_group_add_action(cast(GtkActionGroup*)cPtr, action ? cast(GtkAction*)action.cPtr(No.dup) : null);
   }
 
   /**
@@ -131,8 +131,8 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void addActionWithAccel(gtk.action.Action action, string accelerator = null)
   {
-    const(char)* _accelerator = accelerator.toCString(No.Alloc);
-    gtk_action_group_add_action_with_accel(cast(GtkActionGroup*)cPtr, action ? cast(GtkAction*)action.cPtr(No.Dup) : null, _accelerator);
+    const(char)* _accelerator = accelerator.toCString(No.alloc);
+    gtk_action_group_add_action_with_accel(cast(GtkActionGroup*)cPtr, action ? cast(GtkAction*)action.cPtr(No.dup) : null, _accelerator);
   }
 
   /**
@@ -144,7 +144,7 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkAccelGroup* _cretval;
     _cretval = gtk_action_group_get_accel_group(cast(GtkActionGroup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.take);
     return _retval;
   }
 
@@ -157,9 +157,9 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
   gtk.action.Action getAction(string actionName)
   {
     GtkAction* _cretval;
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString(No.alloc);
     _cretval = gtk_action_group_get_action(cast(GtkActionGroup*)cPtr, _actionName);
-    auto _retval = ObjectG.getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.take);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_group_get_name(cast(GtkActionGroup*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -222,7 +222,7 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void removeAction(gtk.action.Action action)
   {
-    gtk_action_group_remove_action(cast(GtkActionGroup*)cPtr, action ? cast(GtkAction*)action.cPtr(No.Dup) : null);
+    gtk_action_group_remove_action(cast(GtkActionGroup*)cPtr, action ? cast(GtkAction*)action.cPtr(No.dup) : null);
   }
 
   /**
@@ -232,7 +232,7 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void setAccelGroup(gtk.accel_group.AccelGroup accelGroup = null)
   {
-    gtk_action_group_set_accel_group(cast(GtkActionGroup*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
+    gtk_action_group_set_accel_group(cast(GtkActionGroup*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.dup) : null);
   }
 
   /**
@@ -260,10 +260,10 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
     {
       string _dretval;
       auto _dlg = cast(gtk.types.TranslateFunc*)funcData;
-      string _path = path.fromCString(No.Free);
+      string _path = path.fromCString(No.free);
 
       _dretval = (*_dlg)(_path);
-      char* _retval = _dretval.toCString(Yes.Alloc);
+      char* _retval = _dretval.toCString(Yes.alloc);
 
       return _retval;
     }
@@ -287,7 +287,7 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void setTranslationDomain(string domain = null)
   {
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString(No.alloc);
     gtk_action_group_set_translation_domain(cast(GtkActionGroup*)cPtr, _domain);
   }
 
@@ -312,9 +312,9 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
   string translateString(string string_)
   {
     const(char)* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString(No.alloc);
     _cretval = gtk_action_group_translate_string(cast(GtkActionGroup*)cPtr, _string_);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -347,10 +347,10 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to ConnectProxy signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectConnectProxy(T)(T callback, Flag!"After" after = No.After)
+  ulong connectConnectProxy(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ConnectProxyCallbackDlg) || is(T : ConnectProxyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -391,10 +391,10 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to DisconnectProxy signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDisconnectProxy(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDisconnectProxy(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DisconnectProxyCallbackDlg) || is(T : DisconnectProxyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -433,10 +433,10 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to PostActivate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPostActivate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPostActivate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PostActivateCallbackDlg) || is(T : PostActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -474,10 +474,10 @@ class ActionGroup : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to PreActivate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPreActivate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPreActivate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PreActivateCallbackDlg) || is(T : PreActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

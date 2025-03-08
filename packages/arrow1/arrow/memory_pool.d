@@ -10,7 +10,7 @@ import gobject.object;
 class MemoryPool : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class MemoryPool : gobject.object.ObjectG
   {
     GArrowMemoryPool* _cretval;
     _cretval = garrow_memory_pool_default();
-    auto _retval = ObjectG.getDObject!(arrow.memory_pool.MemoryPool)(cast(GArrowMemoryPool*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.memory_pool.MemoryPool)(cast(GArrowMemoryPool*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -40,7 +40,7 @@ class MemoryPool : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = garrow_memory_pool_get_backend_name(cast(GArrowMemoryPool*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 

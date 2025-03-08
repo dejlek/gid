@@ -14,7 +14,7 @@ class RTCPPacket
 {
   GstRTCPPacket cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstRtp.RTCPPacket");
@@ -116,7 +116,7 @@ class RTCPPacket
   {
     const(char)* _cretval;
     _cretval = gst_rtcp_packet_app_get_name(cast(GstRTCPPacket*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class RTCPPacket
   */
   void appSetName(string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gst_rtcp_packet_app_set_name(cast(GstRTCPPacket*)cPtr, _name);
   }
 
@@ -245,7 +245,7 @@ class RTCPPacket
   {
     char* _cretval;
     _cretval = gst_rtcp_packet_bye_get_reason(cast(GstRTCPPacket*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class RTCPPacket
   bool byeSetReason(string reason)
   {
     bool _retval;
-    const(char)* _reason = reason.toCString(No.Alloc);
+    const(char)* _reason = reason.toCString(No.alloc);
     _retval = gst_rtcp_packet_bye_set_reason(cast(GstRTCPPacket*)cPtr, _reason);
     return _retval;
   }

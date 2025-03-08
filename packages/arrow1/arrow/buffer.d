@@ -12,7 +12,7 @@ import gobject.object;
 class Buffer : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -38,15 +38,15 @@ class Buffer : gobject.object.ObjectG
 
     auto _data = cast(const(ubyte)*)data.ptr;
     _cretval = garrow_buffer_new(_data, _size);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */
   static arrow.buffer.Buffer newBytes(glib.bytes.Bytes data)
   {
     GArrowBuffer* _cretval;
-    _cretval = garrow_buffer_new_bytes(data ? cast(GBytes*)data.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    _cretval = garrow_buffer_new_bytes(data ? cast(GBytes*)data.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ class Buffer : gobject.object.ObjectG
     _cretval = garrow_buffer_copy(cast(GArrowBuffer*)cPtr, start, size, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -66,7 +66,7 @@ class Buffer : gobject.object.ObjectG
   bool equal(arrow.buffer.Buffer otherBuffer)
   {
     bool _retval;
-    _retval = garrow_buffer_equal(cast(GArrowBuffer*)cPtr, otherBuffer ? cast(GArrowBuffer*)otherBuffer.cPtr(No.Dup) : null);
+    _retval = garrow_buffer_equal(cast(GArrowBuffer*)cPtr, otherBuffer ? cast(GArrowBuffer*)otherBuffer.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class Buffer : gobject.object.ObjectG
   bool equalNBytes(arrow.buffer.Buffer otherBuffer, long nBytes)
   {
     bool _retval;
-    _retval = garrow_buffer_equal_n_bytes(cast(GArrowBuffer*)cPtr, otherBuffer ? cast(GArrowBuffer*)otherBuffer.cPtr(No.Dup) : null, nBytes);
+    _retval = garrow_buffer_equal_n_bytes(cast(GArrowBuffer*)cPtr, otherBuffer ? cast(GArrowBuffer*)otherBuffer.cPtr(No.dup) : null, nBytes);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class Buffer : gobject.object.ObjectG
   {
     GBytes* _cretval;
     _cretval = garrow_buffer_get_data(cast(GArrowBuffer*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class Buffer : gobject.object.ObjectG
   {
     GBytes* _cretval;
     _cretval = garrow_buffer_get_mutable_data(cast(GArrowBuffer*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class Buffer : gobject.object.ObjectG
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_buffer_get_parent(cast(GArrowBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class Buffer : gobject.object.ObjectG
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_buffer_slice(cast(GArrowBuffer*)cPtr, offset, size);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.take);
     return _retval;
   }
 }

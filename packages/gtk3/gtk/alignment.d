@@ -32,7 +32,7 @@ import gtk.types;
 class Alignment : gtk.bin.Bin
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -70,7 +70,7 @@ class Alignment : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_alignment_new(xalign, yalign, xscale, yscale);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**

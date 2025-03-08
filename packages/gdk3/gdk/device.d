@@ -24,7 +24,7 @@ import gobject.object;
 class Device : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -60,20 +60,20 @@ class Device : gobject.object.ObjectG
   {
     bool _retval;
     GdkWindow* _grabWindow;
-    _retval = gdk_device_grab_info_libgtk_only(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, &_grabWindow, cast(bool*)&ownerEvents);
-    grabWindow = new gdk.window.Window(cast(void*)_grabWindow, No.Take);
+    _retval = gdk_device_grab_info_libgtk_only(display ? cast(GdkDisplay*)display.cPtr(No.dup) : null, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, &_grabWindow, cast(bool*)&ownerEvents);
+    grabWindow = new gdk.window.Window(cast(void*)_grabWindow, No.take);
     return _retval;
   }
 
   /**
       Returns the associated device to device, if device is of type
-    [gdk.types.DeviceType.Master], it will return the paired pointer or
+    [gdk.types.DeviceType.master], it will return the paired pointer or
     keyboard.
     
-    If device is of type [gdk.types.DeviceType.Slave], it will return
+    If device is of type [gdk.types.DeviceType.slave], it will return
     the master device to which device is attached to.
     
-    If device is of type [gdk.types.DeviceType.Floating], null will be
+    If device is of type [gdk.types.DeviceType.floating], null will be
     returned, as there is no associated device.
     Returns:     The associated device, or
         null
@@ -82,7 +82,7 @@ class Device : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_device_get_associated_device(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.take);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class Device : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_device_get_display(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class Device : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_device_get_last_event_window(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
     return _retval;
   }
 
@@ -223,14 +223,14 @@ class Device : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_device_get_name(cast(GdkDevice*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
   /**
       Gets the current location of device. As a slave device
     coordinates are those of its master pointer, This function
-    may not be called on devices of type [gdk.types.DeviceType.Slave],
+    may not be called on devices of type [gdk.types.DeviceType.slave],
     unless there is an ongoing grab on them, see [gdk.device.Device.grab].
     Params:
       screen =       location to store the #GdkScreen
@@ -242,13 +242,13 @@ class Device : gobject.object.ObjectG
   {
     GdkScreen* _screen;
     gdk_device_get_position(cast(GdkDevice*)cPtr, &_screen, cast(int*)&x, cast(int*)&y);
-    screen = new gdk.screen.Screen(cast(void*)_screen, No.Take);
+    screen = new gdk.screen.Screen(cast(void*)_screen, No.take);
   }
 
   /**
       Gets the current location of device in double precision. As a slave device's
     coordinates are those of its master pointer, this function
-    may not be called on devices of type [gdk.types.DeviceType.Slave],
+    may not be called on devices of type [gdk.types.DeviceType.slave],
     unless there is an ongoing grab on them. See [gdk.device.Device.grab].
     Params:
       screen =       location to store the #GdkScreen
@@ -260,7 +260,7 @@ class Device : gobject.object.ObjectG
   {
     GdkScreen* _screen;
     gdk_device_get_position_double(cast(GdkDevice*)cPtr, &_screen, cast(double*)&x, cast(double*)&y);
-    screen = new gdk.screen.Screen(cast(void*)_screen, No.Take);
+    screen = new gdk.screen.Screen(cast(void*)_screen, No.take);
   }
 
   /**
@@ -273,7 +273,7 @@ class Device : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_device_get_product_id(cast(GdkDevice*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -286,7 +286,7 @@ class Device : gobject.object.ObjectG
   {
     GdkSeat* _cretval;
     _cretval = gdk_device_get_seat(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.take);
     return _retval;
   }
 
@@ -335,7 +335,7 @@ class Device : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_device_get_vendor_id(cast(GdkDevice*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -344,7 +344,7 @@ class Device : gobject.object.ObjectG
     null if the window tree under device is not known to GDK (for example, belongs to another application).
     
     As a slave device coordinates are those of its master pointer, This
-    function may not be called on devices of type [gdk.types.DeviceType.Slave],
+    function may not be called on devices of type [gdk.types.DeviceType.slave],
     unless there is an ongoing grab on them, see [gdk.device.Device.grab].
     Params:
       winX =       return location for the X coordinate of the device location,
@@ -358,7 +358,7 @@ class Device : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_device_get_window_at_position(cast(GdkDevice*)cPtr, cast(int*)&winX, cast(int*)&winY);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
     return _retval;
   }
 
@@ -368,7 +368,7 @@ class Device : gobject.object.ObjectG
     belongs to another application).
     
     As a slave device coordinates are those of its master pointer, This
-    function may not be called on devices of type [gdk.types.DeviceType.Slave],
+    function may not be called on devices of type [gdk.types.DeviceType.slave],
     unless there is an ongoing grab on them, see [gdk.device.Device.grab].
     Params:
       winX =       return location for the X coordinate of the device location,
@@ -382,7 +382,7 @@ class Device : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_device_get_window_at_position_double(cast(GdkDevice*)cPtr, cast(double*)&winX, cast(double*)&winY);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
     return _retval;
   }
 
@@ -426,20 +426,20 @@ class Device : gobject.object.ObjectG
       time =       the timestamp of the event which led to this pointer grab. This
                 usually comes from the #GdkEvent struct, though `GDK_CURRENT_TIME`
                 can be used if the time isn’t known.
-    Returns:     [gdk.types.GrabStatus.Success] if the grab was successful.
+    Returns:     [gdk.types.GrabStatus.success] if the grab was successful.
   
     Deprecated:     Use [gdk.seat.Seat.grab] instead.
   */
   gdk.types.GrabStatus grab(gdk.window.Window window, gdk.types.GrabOwnership grabOwnership, bool ownerEvents, gdk.types.EventMask eventMask, gdk.cursor.Cursor cursor, uint time)
   {
     GdkGrabStatus _cretval;
-    _cretval = gdk_device_grab(cast(GdkDevice*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, grabOwnership, ownerEvents, eventMask, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null, time);
+    _cretval = gdk_device_grab(cast(GdkDevice*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.dup) : null, grabOwnership, ownerEvents, eventMask, cursor ? cast(GdkCursor*)cursor.cPtr(No.dup) : null, time);
     gdk.types.GrabStatus _retval = cast(gdk.types.GrabStatus)_cretval;
     return _retval;
   }
 
   /**
-      If the device if of type [gdk.types.DeviceType.Master], it will return
+      If the device if of type [gdk.types.DeviceType.master], it will return
     the list of slave devices attached to it, otherwise it will return
     null
     Returns:     the list of slave devices, or null. The list must be
@@ -528,7 +528,7 @@ class Device : gobject.object.ObjectG
   */
   void warp(gdk.screen.Screen screen, int x, int y)
   {
-    gdk_device_warp(cast(GdkDevice*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null, x, y);
+    gdk_device_warp(cast(GdkDevice*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null, x, y);
   }
 
   /**
@@ -554,10 +554,10 @@ class Device : gobject.object.ObjectG
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -591,10 +591,10 @@ class Device : gobject.object.ObjectG
     Connect to ToolChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToolChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectToolChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ToolChangedCallbackDlg) || is(T : ToolChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

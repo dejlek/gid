@@ -12,7 +12,7 @@ import gtk.types;
 class SocketAccessible : gtk.container_accessible.ContainerAccessible
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class SocketAccessible : gtk.container_accessible.ContainerAccessible
   /** */
   void embed(string path)
   {
-    char* _path = path.toCString(No.Alloc);
+    char* _path = path.toCString(No.alloc);
     gtk_socket_accessible_embed(cast(GtkSocketAccessible*)cPtr, _path);
   }
 }

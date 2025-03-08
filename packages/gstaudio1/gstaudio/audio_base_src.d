@@ -16,7 +16,7 @@ import gstbase.push_src;
 class AudioBaseSrc : gstbase.push_src.PushSrc
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,7 +42,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
   {
     GstAudioRingBuffer* _cretval;
     _cretval = gst_audio_base_src_create_ringbuffer(cast(GstAudioBaseSrc*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(GstAudioRingBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(GstAudioRingBuffer*)_cretval, No.take);
     return _retval;
   }
 

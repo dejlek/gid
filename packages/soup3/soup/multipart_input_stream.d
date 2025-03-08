@@ -32,7 +32,7 @@ import soup.types;
 class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.pollable_input_stream.PollableInputStream
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -65,8 +65,8 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   this(soup.message.Message msg, gio.input_stream.InputStream baseStream)
   {
     SoupMultipartInputStream* _cretval;
-    _cretval = soup_multipart_input_stream_new(msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, baseStream ? cast(GInputStream*)baseStream.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = soup_multipart_input_stream_new(msg ? cast(SoupMessage*)msg.cPtr(No.dup) : null, baseStream ? cast(GInputStream*)baseStream.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -87,7 +87,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   {
     SoupMessageHeaders* _cretval;
     _cretval = soup_multipart_input_stream_get_headers(cast(SoupMultipartInputStream*)cPtr);
-    auto _retval = _cretval ? new soup.message_headers.MessageHeaders(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new soup.message_headers.MessageHeaders(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -112,10 +112,10 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   {
     GInputStream* _cretval;
     GError *_err;
-    _cretval = soup_multipart_input_stream_next_part(cast(SoupMultipartInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = soup_multipart_input_stream_next_part(cast(SoupMultipartInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -135,12 +135,12 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    soup_multipart_input_stream_next_part_async(cast(SoupMultipartInputStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    soup_multipart_input_stream_next_part_async(cast(SoupMultipartInputStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -155,10 +155,10 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   {
     GInputStream* _cretval;
     GError *_err;
-    _cretval = soup_multipart_input_stream_next_part_finish(cast(SoupMultipartInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = soup_multipart_input_stream_next_part_finish(cast(SoupMultipartInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.take);
     return _retval;
   }
 }

@@ -10,7 +10,7 @@ import gid.gid;
 class IndexOptions : arrow.function_options.FunctionOptions
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class IndexOptions : arrow.function_options.FunctionOptions
   {
     GArrowIndexOptions* _cretval;
     _cretval = garrow_index_options_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

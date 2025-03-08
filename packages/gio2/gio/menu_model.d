@@ -134,7 +134,7 @@ import gobject.object;
 class MenuModel : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -172,9 +172,9 @@ class MenuModel : gobject.object.ObjectG
   glib.variant.VariantG getItemAttributeValue(int itemIndex, string attribute, glib.variant_type.VariantType expectedType = null)
   {
     VariantC* _cretval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
-    _cretval = g_menu_model_get_item_attribute_value(cast(GMenuModel*)cPtr, itemIndex, _attribute, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    const(char)* _attribute = attribute.toCString(No.alloc);
+    _cretval = g_menu_model_get_item_attribute_value(cast(GMenuModel*)cPtr, itemIndex, _attribute, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -192,9 +192,9 @@ class MenuModel : gobject.object.ObjectG
   gio.menu_model.MenuModel getItemLink(int itemIndex, string link)
   {
     GMenuModel* _cretval;
-    const(char)* _link = link.toCString(No.Alloc);
+    const(char)* _link = link.toCString(No.alloc);
     _cretval = g_menu_model_get_item_link(cast(GMenuModel*)cPtr, itemIndex, _link);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class MenuModel : gobject.object.ObjectG
   {
     GMenuAttributeIter* _cretval;
     _cretval = g_menu_model_iterate_item_attributes(cast(GMenuModel*)cPtr, itemIndex);
-    auto _retval = ObjectG.getDObject!(gio.menu_attribute_iter.MenuAttributeIter)(cast(GMenuAttributeIter*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_attribute_iter.MenuAttributeIter)(cast(GMenuAttributeIter*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -280,7 +280,7 @@ class MenuModel : gobject.object.ObjectG
   {
     GMenuLinkIter* _cretval;
     _cretval = g_menu_model_iterate_item_links(cast(GMenuModel*)cPtr, itemIndex);
-    auto _retval = ObjectG.getDObject!(gio.menu_link_iter.MenuLinkIter)(cast(GMenuLinkIter*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_link_iter.MenuLinkIter)(cast(GMenuLinkIter*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -323,10 +323,10 @@ class MenuModel : gobject.object.ObjectG
     Connect to ItemsChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectItemsChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ItemsChangedCallbackDlg) || is(T : ItemsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

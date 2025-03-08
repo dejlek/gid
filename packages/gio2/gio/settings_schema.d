@@ -102,12 +102,12 @@ import gobject.boxed;
 class SettingsSchema : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -131,7 +131,7 @@ class SettingsSchema : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_get_id(cast(GSettingsSchema*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -147,9 +147,9 @@ class SettingsSchema : gobject.boxed.Boxed
   gio.settings_schema_key.SettingsSchemaKey getKey(string name)
   {
     GSettingsSchemaKey* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = g_settings_schema_get_key(cast(GSettingsSchema*)cPtr, _name);
-    auto _retval = _cretval ? new gio.settings_schema_key.SettingsSchemaKey(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gio.settings_schema_key.SettingsSchemaKey(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class SettingsSchema : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_get_path(cast(GSettingsSchema*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class SettingsSchema : gobject.boxed.Boxed
   bool hasKey(string name)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _retval = g_settings_schema_has_key(cast(GSettingsSchema*)cPtr, _name);
     return _retval;
   }
@@ -208,7 +208,7 @@ class SettingsSchema : gobject.boxed.Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -235,7 +235,7 @@ class SettingsSchema : gobject.boxed.Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }

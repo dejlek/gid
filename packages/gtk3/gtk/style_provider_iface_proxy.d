@@ -7,7 +7,7 @@ import gtk.style_provider_mixin;
 /// Proxy object for Gtk.StyleProvider interface when a GObject has no applicable D binding
 class StyleProviderIfaceProxy : IfaceProxy, gtk.style_provider.StyleProvider
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

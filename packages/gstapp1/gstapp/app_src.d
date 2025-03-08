@@ -84,7 +84,7 @@ import gstbase.base_src;
 class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -124,7 +124,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   {
     GstCaps* _cretval;
     _cretval = gst_app_src_get_caps(cast(GstAppSrc*)cPtr);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   gst.types.FlowReturn pushBuffer(gst.buffer.Buffer buffer)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_app_src_push_buffer(cast(GstAppSrc*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null);
+    _cretval = gst_app_src_push_buffer(cast(GstAppSrc*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -303,7 +303,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   gst.types.FlowReturn pushBufferList(gst.buffer_list.BufferList bufferList)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_app_src_push_buffer_list(cast(GstAppSrc*)cPtr, bufferList ? cast(GstBufferList*)bufferList.cPtr(Yes.Dup) : null);
+    _cretval = gst_app_src_push_buffer_list(cast(GstAppSrc*)cPtr, bufferList ? cast(GstBufferList*)bufferList.cPtr(Yes.dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -329,7 +329,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   gst.types.FlowReturn pushSample(gst.sample.Sample sample)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_app_src_push_sample(cast(GstAppSrc*)cPtr, sample ? cast(GstSample*)sample.cPtr(No.Dup) : null);
+    _cretval = gst_app_src_push_sample(cast(GstAppSrc*)cPtr, sample ? cast(GstSample*)sample.cPtr(No.dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -346,7 +346,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   void setCaps(gst.caps.Caps caps = null)
   {
-    gst_app_src_set_caps(cast(GstAppSrc*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    gst_app_src_set_caps(cast(GstAppSrc*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null);
   }
 
   /**
@@ -475,10 +475,10 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
     Connect to EndOfStream signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEndOfStream(T)(T callback, Flag!"After" after = No.After)
+  ulong connectEndOfStream(T)(T callback, Flag!"after" after = No.after)
   if (is(T : EndOfStreamCallbackDlg) || is(T : EndOfStreamCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -514,10 +514,10 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
     Connect to EnoughData signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEnoughData(T)(T callback, Flag!"After" after = No.After)
+  ulong connectEnoughData(T)(T callback, Flag!"after" after = No.after)
   if (is(T : EnoughDataCallbackDlg) || is(T : EnoughDataCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -557,10 +557,10 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
     Connect to NeedData signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNeedData(T)(T callback, Flag!"After" after = No.After)
+  ulong connectNeedData(T)(T callback, Flag!"after" after = No.after)
   if (is(T : NeedDataCallbackDlg) || is(T : NeedDataCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -603,10 +603,10 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
     Connect to PushBuffer signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPushBuffer(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPushBuffer(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PushBufferCallbackDlg) || is(T : PushBufferCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -651,10 +651,10 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
     Connect to PushBufferList signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPushBufferList(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPushBufferList(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PushBufferListCallbackDlg) || is(T : PushBufferListCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -703,10 +703,10 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
     Connect to PushSample signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPushSample(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPushSample(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PushSampleCallbackDlg) || is(T : PushSampleCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -745,10 +745,10 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
     Connect to SeekData signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSeekData(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSeekData(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SeekDataCallbackDlg) || is(T : SeekDataCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

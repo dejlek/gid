@@ -66,7 +66,7 @@ import gtk.widget;
 class Box : gtk.container.Container, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -95,7 +95,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_box_new(orientation, spacing);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -119,7 +119,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_box_get_center_widget(cast(GtkBox*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   */
   void packEnd(gtk.widget.Widget child, bool expand, bool fill, uint padding)
   {
-    gtk_box_pack_end(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, expand, fill, padding);
+    gtk_box_pack_end(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, expand, fill, padding);
   }
 
   /**
@@ -193,7 +193,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   */
   void packStart(gtk.widget.Widget child, bool expand, bool fill, uint padding)
   {
-    gtk_box_pack_start(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, expand, fill, padding);
+    gtk_box_pack_start(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, expand, fill, padding);
   }
 
   /**
@@ -211,7 +211,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   */
   void queryChildPacking(gtk.widget.Widget child, out bool expand, out bool fill, out uint padding, out gtk.types.PackType packType)
   {
-    gtk_box_query_child_packing(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, cast(bool*)&expand, cast(bool*)&fill, cast(uint*)&padding, &packType);
+    gtk_box_query_child_packing(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, cast(bool*)&expand, cast(bool*)&fill, cast(uint*)&padding, &packType);
   }
 
   /**
@@ -232,7 +232,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   */
   void reorderChild(gtk.widget.Widget child, int position)
   {
-    gtk_box_reorder_child(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
+    gtk_box_reorder_child(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, position);
   }
 
   /**
@@ -260,7 +260,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   */
   void setCenterWidget(gtk.widget.Widget widget = null)
   {
-    gtk_box_set_center_widget(cast(GtkBox*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_box_set_center_widget(cast(GtkBox*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
   }
 
   /**
@@ -274,7 +274,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   */
   void setChildPacking(gtk.widget.Widget child, bool expand, bool fill, uint padding, gtk.types.PackType packType)
   {
-    gtk_box_set_child_packing(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, expand, fill, padding, packType);
+    gtk_box_set_child_packing(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, expand, fill, padding, packType);
   }
 
   /**

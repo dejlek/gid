@@ -60,7 +60,7 @@ alias CollectDataDestroyNotify = void delegate(gstbase.collect_data.CollectData 
     * $(B data)       the #GstCollectData of pad that has received the buffer
     * $(B buffer)       the #GstBuffer
   )
-  Returns:     [gst.types.FlowReturn.Ok] for success
+  Returns:     [gst.types.FlowReturn.ok] for success
 */
 alias CollectPadsBufferFunction = gst.types.FlowReturn delegate(gstbase.collect_pads.CollectPads pads, gstbase.collect_data.CollectData data, gst.buffer.Buffer buffer);
 
@@ -140,7 +140,7 @@ alias CollectPadsFlushFunction = void delegate(gstbase.collect_pads.CollectPads 
   $(LIST
     * $(B pads)       the #GstCollectPads that triggered the callback
   )
-  Returns:     [gst.types.FlowReturn.Ok] for success
+  Returns:     [gst.types.FlowReturn.ok] for success
 */
 alias CollectPadsFunction = gst.types.FlowReturn delegate(gstbase.collect_pads.CollectPads pads);
 

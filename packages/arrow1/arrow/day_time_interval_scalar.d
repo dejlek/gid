@@ -12,7 +12,7 @@ import gobject.object;
 class DayTimeIntervalScalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,8 +32,8 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
   this(arrow.day_millisecond.DayMillisecond value)
   {
     GArrowDayTimeIntervalScalar* _cretval;
-    _cretval = garrow_day_time_interval_scalar_new(value ? cast(GArrowDayMillisecond*)value.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_day_time_interval_scalar_new(value ? cast(GArrowDayMillisecond*)value.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /** */
@@ -41,7 +41,7 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
   {
     GArrowDayMillisecond* _cretval;
     _cretval = garrow_day_time_interval_scalar_get_value(cast(GArrowDayTimeIntervalScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.day_millisecond.DayMillisecond)(cast(GArrowDayMillisecond*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.day_millisecond.DayMillisecond)(cast(GArrowDayMillisecond*)_cretval, No.take);
     return _retval;
   }
 }

@@ -16,12 +16,12 @@ import gtk.types;
 class CssSection : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -85,7 +85,7 @@ class CssSection : gobject.boxed.Boxed
   {
     GFile* _cretval;
     _cretval = gtk_css_section_get_file(cast(const(GtkCssSection)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.take);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ class CssSection : gobject.boxed.Boxed
   {
     GtkCssSection* _cretval;
     _cretval = gtk_css_section_get_parent(cast(const(GtkCssSection)*)cPtr);
-    auto _retval = _cretval ? new gtk.css_section.CssSection(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.css_section.CssSection(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 

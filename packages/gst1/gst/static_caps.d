@@ -15,7 +15,7 @@ class StaticCaps
 {
   GstStaticCaps cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gst.StaticCaps");
@@ -38,13 +38,13 @@ class StaticCaps
 
   @property string string_()
   {
-    return (cast(GstStaticCaps*)cPtr).string_.fromCString(No.Free);
+    return (cast(GstStaticCaps*)cPtr).string_.fromCString(No.free);
   }
 
   @property void string_(string propval)
   {
     safeFree(cast(void*)(cast(GstStaticCaps*)cPtr).string_);
-    (cast(GstStaticCaps*)cPtr).string_ = propval.toCString(Yes.Alloc);
+    (cast(GstStaticCaps*)cPtr).string_ = propval.toCString(Yes.alloc);
   }
 
   /**
@@ -65,7 +65,7 @@ class StaticCaps
   {
     GstCaps* _cretval;
     _cretval = gst_static_caps_get(cast(GstStaticCaps*)cPtr);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

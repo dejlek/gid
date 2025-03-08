@@ -102,12 +102,12 @@ import gobject.boxed;
 class VariantDict : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -142,8 +142,8 @@ class VariantDict : gobject.boxed.Boxed
   this(glib.variant.VariantG fromAsv = null)
   {
     GVariantDict* _cretval;
-    _cretval = g_variant_dict_new(fromAsv ? cast(VariantC*)fromAsv.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = g_variant_dict_new(fromAsv ? cast(VariantC*)fromAsv.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -176,7 +176,7 @@ class VariantDict : gobject.boxed.Boxed
   bool contains(string key)
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.alloc);
     _retval = g_variant_dict_contains(cast(GVariantDict*)cPtr, _key);
     return _retval;
   }
@@ -195,7 +195,7 @@ class VariantDict : gobject.boxed.Boxed
   {
     VariantC* _cretval;
     _cretval = g_variant_dict_end(cast(GVariantDict*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -209,8 +209,8 @@ class VariantDict : gobject.boxed.Boxed
   */
   void insertValue(string key, glib.variant.VariantG value)
   {
-    const(char)* _key = key.toCString(No.Alloc);
-    g_variant_dict_insert_value(cast(GVariantDict*)cPtr, _key, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    const(char)* _key = key.toCString(No.alloc);
+    g_variant_dict_insert_value(cast(GVariantDict*)cPtr, _key, value ? cast(VariantC*)value.cPtr(No.dup) : null);
   }
 
   /**
@@ -233,9 +233,9 @@ class VariantDict : gobject.boxed.Boxed
   glib.variant.VariantG lookupValue(string key, glib.variant_type.VariantType expectedType = null)
   {
     VariantC* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
-    _cretval = g_variant_dict_lookup_value(cast(GVariantDict*)cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    const(char)* _key = key.toCString(No.alloc);
+    _cretval = g_variant_dict_lookup_value(cast(GVariantDict*)cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class VariantDict : gobject.boxed.Boxed
   bool remove(string key)
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.alloc);
     _retval = g_variant_dict_remove(cast(GVariantDict*)cPtr, _key);
     return _retval;
   }

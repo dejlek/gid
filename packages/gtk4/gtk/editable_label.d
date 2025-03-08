@@ -47,7 +47,7 @@ import gtk.widget;
 class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -74,9 +74,9 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
   this(string str)
   {
     GtkWidget* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString(No.alloc);
     _cretval = gtk_editable_label_new(_str);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**

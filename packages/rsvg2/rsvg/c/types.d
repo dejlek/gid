@@ -15,7 +15,7 @@ enum RsvgError
   /**
       the request failed
   */
-  Failed = 0,
+  failed = 0,
 }
 
 /**
@@ -28,7 +28,7 @@ enum RsvgHandleFlags : uint
   /**
       No flags are set.
   */
-  FlagsNone = 0,
+  flagsNone = 0,
 
   /**
       Disable safety limits in the XML parser.  Libxml2 has
@@ -36,7 +36,7 @@ enum RsvgHandleFlags : uint
     designed to keep malicious XML content from consuming too much memory while parsing.
     For security reasons, this should only be used for trusted input!  Since: 2.40.3
   */
-  FlagUnlimited = 1,
+  flagUnlimited = 1,
 
   /**
       Use this if the Cairo surface to which you are
@@ -47,7 +47,7 @@ enum RsvgHandleFlags : uint
     documentation](https://www.cairographics.org/manual/cairo-cairo-surface-t.html#cairo-surface-set-mime-data)
     for details.
   */
-  FlagKeepImageData = 2,
+  flagKeepImageData = 2,
 }
 
 /**
@@ -59,47 +59,47 @@ enum RsvgUnit
   /**
       percentage values; where <literal>1.0</literal> means 100%.
   */
-  Percent = 0,
+  percent = 0,
 
   /**
       pixels
   */
-  Px = 1,
+  px = 1,
 
   /**
       em, or the current font size
   */
-  Em = 2,
+  em = 2,
 
   /**
       x-height of the current font
   */
-  Ex = 3,
+  ex = 3,
 
   /**
       inches
   */
-  In = 4,
+  in_ = 4,
 
   /**
       centimeters
   */
-  Cm = 5,
+  cm = 5,
 
   /**
       millimeters
   */
-  Mm = 6,
+  mm = 6,
 
   /**
       points, or 1/72 inch
   */
-  Pt = 7,
+  pt = 7,
 
   /**
       picas, or 1/6 inch (12 points)
   */
-  Pc = 8,
+  pc = 8,
 }
 
 /**

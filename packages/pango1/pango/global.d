@@ -33,7 +33,7 @@ pango.attribute.Attribute attrAllowBreaksNew(bool allowBreaks)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_allow_breaks_new(allowBreaks);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -49,7 +49,7 @@ pango.attribute.Attribute attrBackgroundAlphaNew(ushort alpha)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_background_alpha_new(alpha);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -67,7 +67,7 @@ pango.attribute.Attribute attrBackgroundNew(ushort red, ushort green, ushort blu
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_background_new(red, green, blue);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -93,7 +93,7 @@ pango.attribute.Attribute attrBaselineShiftNew(int shift)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_baseline_shift_new(shift);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -121,7 +121,7 @@ void attrBreak(string text, pango.attr_list.AttrList attrList, int offset, pango
     _attrsLen = cast(int)attrs.length;
 
   auto _attrs = cast(PangoLogAttr*)attrs.ptr;
-  pango_attr_break(_text, _length, attrList ? cast(PangoAttrList*)attrList.cPtr(No.Dup) : null, offset, _attrs, _attrsLen);
+  pango_attr_break(_text, _length, attrList ? cast(PangoAttrList*)attrList.cPtr(No.dup) : null, offset, _attrs, _attrsLen);
 }
 
 /**
@@ -142,7 +142,7 @@ pango.attribute.Attribute attrFallbackNew(bool enableFallback)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_fallback_new(enableFallback);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -157,9 +157,9 @@ pango.attribute.Attribute attrFallbackNew(bool enableFallback)
 pango.attribute.Attribute attrFamilyNew(string family)
 {
   PangoAttribute* _cretval;
-  const(char)* _family = family.toCString(No.Alloc);
+  const(char)* _family = family.toCString(No.alloc);
   _cretval = pango_attr_family_new(_family);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -179,7 +179,7 @@ pango.attribute.Attribute attrFontScaleNew(pango.types.FontScale scale)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_font_scale_new(scale);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -195,7 +195,7 @@ pango.attribute.Attribute attrForegroundAlphaNew(ushort alpha)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_foreground_alpha_new(alpha);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -213,7 +213,7 @@ pango.attribute.Attribute attrForegroundNew(ushort red, ushort green, ushort blu
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_foreground_new(red, green, blue);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -229,14 +229,14 @@ pango.attribute.Attribute attrGravityHintNew(pango.types.GravityHint hint)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_gravity_hint_new(hint);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
 /**
     Create a new gravity attribute.
   Params:
-    gravity =       the gravity value; should not be [pango.types.Gravity.Auto]
+    gravity =       the gravity value; should not be [pango.types.Gravity.auto_]
   Returns:     the newly allocated
       [pango.attribute.Attribute], which should be freed with
       [pango.attribute.Attribute.destroy]
@@ -245,7 +245,7 @@ pango.attribute.Attribute attrGravityNew(pango.types.Gravity gravity)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_gravity_new(gravity);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -265,7 +265,7 @@ pango.attribute.Attribute attrInsertHyphensNew(bool insertHyphens)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_insert_hyphens_new(insertHyphens);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -282,7 +282,7 @@ pango.attribute.Attribute attrLetterSpacingNew(int letterSpacing)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_letter_spacing_new(letterSpacing);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -301,7 +301,7 @@ pango.attribute.Attribute attrLineHeightNew(double factor)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_line_height_new(factor);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -320,7 +320,7 @@ pango.attribute.Attribute attrLineHeightNewAbsolute(int height)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_line_height_new_absolute(height);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -341,7 +341,7 @@ pango.attribute.Attribute attrOverlineColorNew(ushort red, ushort green, ushort 
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_overline_color_new(red, green, blue);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -357,7 +357,7 @@ pango.attribute.Attribute attrOverlineNew(pango.types.Overline overline)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_overline_new(overline);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -374,7 +374,7 @@ pango.attribute.Attribute attrRiseNew(int rise)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_rise_new(rise);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -393,7 +393,7 @@ pango.attribute.Attribute attrScaleNew(double scaleFactor)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_scale_new(scaleFactor);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -410,7 +410,7 @@ pango.attribute.Attribute attrSentenceNew()
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_sentence_new();
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -427,7 +427,7 @@ pango.attribute.Attribute attrShowNew(pango.types.ShowFlags flags)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_show_new(flags);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -443,7 +443,7 @@ pango.attribute.Attribute attrStretchNew(pango.types.Stretch stretch)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_stretch_new(stretch);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -464,7 +464,7 @@ pango.attribute.Attribute attrStrikethroughColorNew(ushort red, ushort green, us
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_strikethrough_color_new(red, green, blue);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -480,7 +480,7 @@ pango.attribute.Attribute attrStrikethroughNew(bool strikethrough)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_strikethrough_new(strikethrough);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -496,7 +496,7 @@ pango.attribute.Attribute attrStyleNew(pango.types.Style style)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_style_new(style);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -513,7 +513,7 @@ pango.attribute.Attribute attrTextTransformNew(pango.types.TextTransform transfo
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_text_transform_new(transform);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -534,7 +534,7 @@ pango.attribute.Attribute attrUnderlineColorNew(ushort red, ushort green, ushort
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_underline_color_new(red, green, blue);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -550,7 +550,7 @@ pango.attribute.Attribute attrUnderlineNew(pango.types.Underline underline)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_underline_new(underline);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -565,7 +565,7 @@ pango.attribute.Attribute attrVariantNew(pango.types.Variant variant)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_variant_new(variant);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -581,7 +581,7 @@ pango.attribute.Attribute attrWeightNew(pango.types.Weight weight)
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_weight_new(weight);
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -598,7 +598,7 @@ pango.attribute.Attribute attrWordNew()
 {
   PangoAttribute* _cretval;
   _cretval = pango_attr_word_new();
-  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -689,7 +689,7 @@ void extentsToPixels(pango.types.Rectangle inclusive, pango.types.Rectangle near
   Params:
     text =       the text to process. Must be valid UTF-8
   Returns:     The direction corresponding to the first strong character.
-      If no such character is found, then [pango.types.Direction.Neutral] is returned.
+      If no such character is found, then [pango.types.Direction.neutral] is returned.
 */
 pango.types.Direction findBaseDir(string text)
 {
@@ -765,7 +765,7 @@ void getLogAttrs(string text, int level, pango.language.Language language, pango
     _attrsLen = cast(int)attrs.length;
 
   auto _attrs = cast(PangoLogAttr*)attrs.ptr;
-  pango_get_log_attrs(_text, _length, level, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null, _attrs, _attrsLen);
+  pango_get_log_attrs(_text, _length, level, language ? cast(PangoLanguage*)language.cPtr(No.dup) : null, _attrs, _attrsLen);
 }
 
 /**
@@ -815,8 +815,8 @@ bool isZeroWidth(dchar ch)
 pango.item.Item[] itemize(pango.context.Context context, string text, int startIndex, int length, pango.attr_list.AttrList attrs, pango.attr_iterator.AttrIterator cachedIter = null)
 {
   GList* _cretval;
-  const(char)* _text = text.toCString(No.Alloc);
-  _cretval = pango_itemize(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, _text, startIndex, length, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null, cachedIter ? cast(PangoAttrIterator*)cachedIter.cPtr(No.Dup) : null);
+  const(char)* _text = text.toCString(No.alloc);
+  _cretval = pango_itemize(context ? cast(PangoContext*)context.cPtr(No.dup) : null, _text, startIndex, length, attrs ? cast(PangoAttrList*)attrs.cPtr(No.dup) : null, cachedIter ? cast(PangoAttrIterator*)cachedIter.cPtr(No.dup) : null);
   auto _retval = gListToD!(pango.item.Item, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
 }
@@ -844,8 +844,8 @@ pango.item.Item[] itemize(pango.context.Context context, string text, int startI
 pango.item.Item[] itemizeWithBaseDir(pango.context.Context context, pango.types.Direction baseDir, string text, int startIndex, int length, pango.attr_list.AttrList attrs, pango.attr_iterator.AttrIterator cachedIter = null)
 {
   GList* _cretval;
-  const(char)* _text = text.toCString(No.Alloc);
-  _cretval = pango_itemize_with_base_dir(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, baseDir, _text, startIndex, length, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null, cachedIter ? cast(PangoAttrIterator*)cachedIter.cPtr(No.Dup) : null);
+  const(char)* _text = text.toCString(No.alloc);
+  _cretval = pango_itemize_with_base_dir(context ? cast(PangoContext*)context.cPtr(No.dup) : null, baseDir, _text, startIndex, length, attrs ? cast(PangoAttrList*)attrs.cPtr(No.dup) : null, cachedIter ? cast(PangoAttrIterator*)cachedIter.cPtr(No.dup) : null);
   auto _retval = gListToD!(pango.item.Item, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
 }
@@ -870,11 +870,11 @@ bool markupParserFinish(glib.markup_parse_context.MarkupParseContext context, ou
   PangoAttrList* _attrList;
   char* _text;
   GError *_err;
-  _retval = pango_markup_parser_finish(context ? cast(GMarkupParseContext*)context.cPtr(No.Dup) : null, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
+  _retval = pango_markup_parser_finish(context ? cast(GMarkupParseContext*)context.cPtr(No.dup) : null, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
   if (_err)
     throw new ErrorG(_err);
-  attrList = new pango.attr_list.AttrList(cast(void*)_attrList, Yes.Take);
-  text = _text.fromCString(Yes.Free);
+  attrList = new pango.attr_list.AttrList(cast(void*)_attrList, Yes.take);
+  text = _text.fromCString(Yes.free);
   return _retval;
 }
 
@@ -888,7 +888,7 @@ bool markupParserFinish(glib.markup_parse_context.MarkupParseContext context, ou
   If accel_marker is nonzero, the given character will mark the
   character following it as an accelerator. For example, accel_marker
   might be an ampersand or underscore. All characters marked
-  as an accelerator will receive a [pango.types.Underline.Low] attribute,
+  as an accelerator will receive a [pango.types.Underline.low] attribute,
   and the first character so marked will be returned in accel_char,
   when calling `funcmarkup_parser_finish`. Two accel_marker characters
   following each other produce a single literal accel_marker character.
@@ -910,7 +910,7 @@ glib.markup_parse_context.MarkupParseContext markupParserNew(dchar accelMarker)
 {
   GMarkupParseContext* _cretval;
   _cretval = pango_markup_parser_new(accelMarker);
-  auto _retval = _cretval ? new glib.markup_parse_context.MarkupParseContext(cast(void*)_cretval, No.Take) : null;
+  auto _retval = _cretval ? new glib.markup_parse_context.MarkupParseContext(cast(void*)_cretval, No.take) : null;
   return _retval;
 }
 
@@ -937,10 +937,10 @@ glib.markup_parse_context.MarkupParseContext markupParserNew(dchar accelMarker)
 bool parseEnum(gobject.types.GType type, string str, out int value, bool warn, out string possibleValues)
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString(No.alloc);
   char* _possibleValues;
   _retval = pango_parse_enum(type, _str, cast(int*)&value, warn, &_possibleValues);
-  possibleValues = _possibleValues.fromCString(Yes.Free);
+  possibleValues = _possibleValues.fromCString(Yes.free);
   return _retval;
 }
 
@@ -953,7 +953,7 @@ bool parseEnum(gobject.types.GType type, string str, out int value, bool warn, o
   If accel_marker is nonzero, the given character will mark the
   character following it as an accelerator. For example, accel_marker
   might be an ampersand or underscore. All characters marked
-  as an accelerator will receive a [pango.types.Underline.Low] attribute,
+  as an accelerator will receive a [pango.types.Underline.low] attribute,
   and the first character so marked will be returned in accel_char.
   Two accel_marker characters following each other produce a single
   literal accel_marker character.
@@ -984,8 +984,8 @@ bool parseMarkup(string markupText, dchar accelMarker, out pango.attr_list.AttrL
   _retval = pango_parse_markup(_markupText, _length, accelMarker, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
   if (_err)
     throw new ErrorG(_err);
-  attrList = new pango.attr_list.AttrList(cast(void*)_attrList, Yes.Take);
-  text = _text.fromCString(Yes.Free);
+  attrList = new pango.attr_list.AttrList(cast(void*)_attrList, Yes.take);
+  text = _text.fromCString(Yes.free);
   return _retval;
 }
 
@@ -1006,7 +1006,7 @@ bool parseMarkup(string markupText, dchar accelMarker, out pango.attr_list.AttrL
 bool parseStretch(string str, out pango.types.Stretch stretch, bool warn)
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString(No.alloc);
   _retval = pango_parse_stretch(_str, &stretch, warn);
   return _retval;
 }
@@ -1026,7 +1026,7 @@ bool parseStretch(string str, out pango.types.Stretch stretch, bool warn)
 bool parseStyle(string str, out pango.types.Style style, bool warn)
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString(No.alloc);
   _retval = pango_parse_style(_str, &style, warn);
   return _retval;
 }
@@ -1046,7 +1046,7 @@ bool parseStyle(string str, out pango.types.Style style, bool warn)
 bool parseVariant(string str, out pango.types.Variant variant, bool warn)
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString(No.alloc);
   _retval = pango_parse_variant(_str, &variant, warn);
   return _retval;
 }
@@ -1066,7 +1066,7 @@ bool parseVariant(string str, out pango.types.Variant variant, bool warn)
 bool parseWeight(string str, out pango.types.Weight weight, bool warn)
 {
   bool _retval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString(No.alloc);
   _retval = pango_parse_weight(_str, &weight, warn);
   return _retval;
 }
@@ -1108,7 +1108,7 @@ void quantizeLineGeometry(ref int thickness, ref int position)
 int readLine(void* stream, glib.string_.String str)
 {
   int _retval;
-  _retval = pango_read_line(stream, str ? cast(GString*)str.cPtr(No.Dup) : null);
+  _retval = pango_read_line(stream, str ? cast(GString*)str.cPtr(No.dup) : null);
   return _retval;
 }
 
@@ -1168,7 +1168,7 @@ void shape(string text, pango.analysis.Analysis analysis, pango.glyph_string.Gly
     _length = cast(int)text.length;
 
   auto _text = cast(const(char)*)text.ptr;
-  pango_shape(_text, _length, analysis ? cast(const(PangoAnalysis)*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null);
+  pango_shape(_text, _length, analysis ? cast(const(PangoAnalysis)*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.dup) : null);
 }
 
 /**
@@ -1211,7 +1211,7 @@ void shapeFull(string itemText, string paragraphText, pango.analysis.Analysis an
     _paragraphLength = cast(int)paragraphText.length;
 
   auto _paragraphText = cast(const(char)*)paragraphText.ptr;
-  pango_shape_full(_itemText, _itemLength, _paragraphText, _paragraphLength, analysis ? cast(const(PangoAnalysis)*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null);
+  pango_shape_full(_itemText, _itemLength, _paragraphText, _paragraphLength, analysis ? cast(const(PangoAnalysis)*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.dup) : null);
 }
 
 /**
@@ -1242,7 +1242,7 @@ void shapeItem(pango.item.Item item, string paragraphText, pango.types.LogAttr l
     _paragraphLength = cast(int)paragraphText.length;
 
   auto _paragraphText = cast(const(char)*)paragraphText.ptr;
-  pango_shape_item(item ? cast(PangoItem*)item.cPtr(No.Dup) : null, _paragraphText, _paragraphLength, &logAttrs, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, flags);
+  pango_shape_item(item ? cast(PangoItem*)item.cPtr(No.dup) : null, _paragraphText, _paragraphLength, &logAttrs, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.dup) : null, flags);
 }
 
 /**
@@ -1283,7 +1283,7 @@ void shapeWithFlags(string itemText, string paragraphText, pango.analysis.Analys
     _paragraphLength = cast(int)paragraphText.length;
 
   auto _paragraphText = cast(const(char)*)paragraphText.ptr;
-  pango_shape_with_flags(_itemText, _itemLength, _paragraphText, _paragraphLength, analysis ? cast(const(PangoAnalysis)*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, flags);
+  pango_shape_with_flags(_itemText, _itemLength, _paragraphText, _paragraphLength, analysis ? cast(const(PangoAnalysis)*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.dup) : null, flags);
 }
 
 /**
@@ -1297,7 +1297,7 @@ void shapeWithFlags(string itemText, string paragraphText, pango.analysis.Analys
 string[] splitFileList(string str)
 {
   char** _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString(No.alloc);
   _cretval = pango_split_file_list(_str);
   string[] _retval;
 
@@ -1308,7 +1308,7 @@ string[] splitFileList(string str)
       break;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(Yes.Free);
+      _retval[i] = _cretval[i].fromCString(Yes.free);
   }
   return _retval;
 }
@@ -1355,17 +1355,17 @@ void tailorBreak(string text, pango.analysis.Analysis analysis, int offset, pang
 string trimString(string str)
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString(No.alloc);
   _cretval = pango_trim_string(_str);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
   return _retval;
 }
 
 /**
     Determines the inherent direction of a character.
   
-  The inherent direction is either [pango.types.Direction.Ltr], [pango.types.Direction.Rtl],
-  or [pango.types.Direction.Neutral].
+  The inherent direction is either [pango.types.Direction.ltr], [pango.types.Direction.rtl],
+  or [pango.types.Direction.neutral].
   
   This function is useful to categorize characters into left-to-right
   letters, right-to-left letters, and everything else. If full Unicode
@@ -1460,7 +1460,7 @@ string versionCheck(int requiredMajor, int requiredMinor, int requiredMicro)
 {
   const(char)* _cretval;
   _cretval = pango_version_check(requiredMajor, requiredMinor, requiredMicro);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
   return _retval;
 }
 
@@ -1477,6 +1477,6 @@ string versionString()
 {
   const(char)* _cretval;
   _cretval = pango_version_string();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
   return _retval;
 }

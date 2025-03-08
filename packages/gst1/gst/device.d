@@ -22,7 +22,7 @@ import gst.types;
 class Device : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,9 +50,9 @@ class Device : gst.object.ObjectGst
   gst.element.Element createElement(string name = null)
   {
     GstElement* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_device_create_element(cast(GstDevice*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.take);
     return _retval;
   }
 
@@ -65,7 +65,7 @@ class Device : gst.object.ObjectGst
   {
     GstCaps* _cretval;
     _cretval = gst_device_get_caps(cast(GstDevice*)cPtr);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class Device : gst.object.ObjectGst
   {
     char* _cretval;
     _cretval = gst_device_get_device_class(cast(GstDevice*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class Device : gst.object.ObjectGst
   {
     char* _cretval;
     _cretval = gst_device_get_display_name(cast(GstDevice*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class Device : gst.object.ObjectGst
   {
     GstStructure* _cretval;
     _cretval = gst_device_get_properties(cast(GstDevice*)cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class Device : gst.object.ObjectGst
   bool hasClasses(string classes)
   {
     bool _retval;
-    const(char)* _classes = classes.toCString(No.Alloc);
+    const(char)* _classes = classes.toCString(No.alloc);
     _retval = gst_device_has_classes(cast(GstDevice*)cPtr, _classes);
     return _retval;
   }
@@ -135,7 +135,7 @@ class Device : gst.object.ObjectGst
     bool _retval;
     char*[] _tmpclasses;
     foreach (s; classes)
-      _tmpclasses ~= s.toCString(No.Alloc);
+      _tmpclasses ~= s.toCString(No.alloc);
     _tmpclasses ~= null;
     char** _classes = _tmpclasses.ptr;
     _retval = gst_device_has_classesv(cast(GstDevice*)cPtr, _classes);
@@ -157,7 +157,7 @@ class Device : gst.object.ObjectGst
   bool reconfigureElement(gst.element.Element element)
   {
     bool _retval;
-    _retval = gst_device_reconfigure_element(cast(GstDevice*)cPtr, element ? cast(GstElement*)element.cPtr(No.Dup) : null);
+    _retval = gst_device_reconfigure_element(cast(GstDevice*)cPtr, element ? cast(GstElement*)element.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -171,10 +171,10 @@ class Device : gst.object.ObjectGst
     Connect to Removed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RemovedCallbackDlg) || is(T : RemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

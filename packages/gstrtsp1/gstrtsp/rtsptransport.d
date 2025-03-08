@@ -13,7 +13,7 @@ class RTSPTransport
 {
   GstRTSPTransport cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstRtsp.RTSPTransport");
@@ -61,24 +61,24 @@ class RTSPTransport
 
   @property string destination()
   {
-    return (cast(GstRTSPTransport*)cPtr).destination.fromCString(No.Free);
+    return (cast(GstRTSPTransport*)cPtr).destination.fromCString(No.free);
   }
 
   @property void destination(string propval)
   {
     safeFree(cast(void*)(cast(GstRTSPTransport*)cPtr).destination);
-    (cast(GstRTSPTransport*)cPtr).destination = propval.toCString(Yes.Alloc);
+    (cast(GstRTSPTransport*)cPtr).destination = propval.toCString(Yes.alloc);
   }
 
   @property string source()
   {
-    return (cast(GstRTSPTransport*)cPtr).source.fromCString(No.Free);
+    return (cast(GstRTSPTransport*)cPtr).source.fromCString(No.free);
   }
 
   @property void source(string propval)
   {
     safeFree(cast(void*)(cast(GstRTSPTransport*)cPtr).source);
-    (cast(GstRTSPTransport*)cPtr).source = propval.toCString(Yes.Alloc);
+    (cast(GstRTSPTransport*)cPtr).source = propval.toCString(Yes.alloc);
   }
 
   @property uint layers()
@@ -171,7 +171,7 @@ class RTSPTransport
   {
     char* _cretval;
     _cretval = gst_rtsp_transport_as_text(cast(GstRTSPTransport*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class RTSPTransport
     char* _mediaType;
     _cretval = gst_rtsp_transport_get_media_type(cast(GstRTSPTransport*)cPtr, &_mediaType);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    mediaType = _mediaType.fromCString(No.Free);
+    mediaType = _mediaType.fromCString(No.free);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class RTSPTransport
     char* _manager;
     _cretval = gst_rtsp_transport_get_manager(trans, &_manager, option);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    manager = _manager.fromCString(No.Free);
+    manager = _manager.fromCString(No.free);
     return _retval;
   }
 
@@ -234,7 +234,7 @@ class RTSPTransport
     char* _mime;
     _cretval = gst_rtsp_transport_get_mime(trans, &_mime);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    mime = _mime.fromCString(No.Free);
+    mime = _mime.fromCString(No.free);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class RTSPTransport
   static gstrtsp.types.RTSPResult parse(string str, out gstrtsp.rtsptransport.RTSPTransport transport)
   {
     GstRTSPResult _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString(No.alloc);
     GstRTSPTransport _transport;
     _cretval = gst_rtsp_transport_parse(_str, &_transport);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;

@@ -49,9 +49,9 @@ template InitableT()
     Implementations may also support cancellation. If cancellable is not null,
     then initialization can be cancelled by triggering the cancellable object
     from another thread. If the operation was cancelled, the error
-    [gio.types.IOErrorEnum.Cancelled] will be returned. If cancellable is not null and
+    [gio.types.IOErrorEnum.cancelled] will be returned. If cancellable is not null and
     the object doesn't support cancellable initialization the error
-    [gio.types.IOErrorEnum.NotSupported] will be returned.
+    [gio.types.IOErrorEnum.notSupported] will be returned.
     
     If the object is not initialized, or initialization returns with an
     error, then all operations on the object except [gobject.object.ObjectG.ref_] and
@@ -85,7 +85,7 @@ template InitableT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_initable_init(cast(GInitable*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_initable_init(cast(GInitable*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

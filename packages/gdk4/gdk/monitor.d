@@ -21,7 +21,7 @@ import gobject.object;
 class MonitorG : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,7 +49,7 @@ class MonitorG : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_connector(cast(GdkMonitor*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -63,7 +63,7 @@ class MonitorG : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_description(cast(GdkMonitor*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -75,7 +75,7 @@ class MonitorG : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_monitor_get_display(cast(GdkMonitor*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class MonitorG : gobject.object.ObjectG
   {
     GdkRectangle _geometry;
     gdk_monitor_get_geometry(cast(GdkMonitor*)cPtr, &_geometry);
-    geometry = new gdk.rectangle.Rectangle(cast(void*)&_geometry, No.Take);
+    geometry = new gdk.rectangle.Rectangle(cast(void*)&_geometry, No.take);
   }
 
   /**
@@ -120,7 +120,7 @@ class MonitorG : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_manufacturer(cast(GdkMonitor*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class MonitorG : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_model(cast(GdkMonitor*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -241,10 +241,10 @@ class MonitorG : gobject.object.ObjectG
     Connect to Invalidate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInvalidate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectInvalidate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : InvalidateCallbackDlg) || is(T : InvalidateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

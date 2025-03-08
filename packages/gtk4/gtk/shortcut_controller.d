@@ -58,7 +58,7 @@ import gtk.types;
 class ShortcutController : gtk.event_controller.EventController, gio.list_model.ListModel, gtk.buildable.Buildable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -85,7 +85,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   {
     GtkEventController* _cretval;
     _cretval = gtk_shortcut_controller_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -102,8 +102,8 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   static gtk.shortcut_controller.ShortcutController newForModel(gio.list_model.ListModel model)
   {
     GtkEventController* _cretval;
-    _cretval = gtk_shortcut_controller_new_for_model(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.shortcut_controller.ShortcutController)(cast(GtkEventController*)_cretval, Yes.Take);
+    _cretval = gtk_shortcut_controller_new_for_model(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.shortcut_controller.ShortcutController)(cast(GtkEventController*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   */
   void addShortcut(gtk.shortcut.Shortcut shortcut)
   {
-    gtk_shortcut_controller_add_shortcut(cast(GtkShortcutController*)cPtr, shortcut ? cast(GtkShortcut*)shortcut.cPtr(Yes.Dup) : null);
+    gtk_shortcut_controller_add_shortcut(cast(GtkShortcutController*)cPtr, shortcut ? cast(GtkShortcut*)shortcut.cPtr(Yes.dup) : null);
   }
 
   /**
@@ -156,7 +156,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   */
   void removeShortcut(gtk.shortcut.Shortcut shortcut)
   {
-    gtk_shortcut_controller_remove_shortcut(cast(GtkShortcutController*)cPtr, shortcut ? cast(GtkShortcut*)shortcut.cPtr(No.Dup) : null);
+    gtk_shortcut_controller_remove_shortcut(cast(GtkShortcutController*)cPtr, shortcut ? cast(GtkShortcut*)shortcut.cPtr(No.dup) : null);
   }
 
   /**
@@ -189,7 +189,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
     keyboard shortcuts that can be activated even when a widget does
     not have focus.
     
-    With [gtk.types.ShortcutScope.Local], shortcuts will only be activated
+    With [gtk.types.ShortcutScope.local], shortcuts will only be activated
     when the widget has focus.
     Params:
       scope_ =       the new scope to use

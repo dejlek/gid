@@ -15,7 +15,7 @@ import gtksource.types;
 class CompletionContext : gobject.initially_unowned.InitiallyUnowned
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -47,7 +47,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   {
     auto _proposals = gListFromD!(gtksource.completion_proposal.CompletionProposal)(proposals);
     scope(exit) containerFree!(GList*, gtksource.completion_proposal.CompletionProposal, GidOwnership.None)(_proposals);
-    gtk_source_completion_context_add_proposals(cast(GtkSourceCompletionContext*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, _proposals, finished);
+    gtk_source_completion_context_add_proposals(cast(GtkSourceCompletionContext*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.dup) : null, _proposals, finished);
   }
 
   /**
@@ -74,7 +74,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
     bool _retval;
     GtkTextIter _iter;
     _retval = gtk_source_completion_context_get_iter(cast(GtkSourceCompletionContext*)cPtr, &_iter);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.take);
     return _retval;
   }
 
@@ -97,10 +97,10 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
     Connect to Cancelled signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCancelled(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCancelled(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CancelledCallbackDlg) || is(T : CancelledCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

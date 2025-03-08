@@ -87,10 +87,10 @@ extern(C) void thawDelegate(void* dlg)
 * Convert a D string to a zero terminated C string, with allocation parameter.
 * Params:
 *   dstr = String to convert
-*   alloc = Yes.Alloc if string is being transferred to C (use g_malloc), No.Alloc for D allocation (no transfer)
+*   alloc = Yes.alloc if string is being transferred to C (use g_malloc), No.alloc for D allocation (no transfer)
 * Returns: Zero terminated C string (D or C allocation)
 */
-char* toCString(string dstr, Flag!"Alloc" alloc)
+char* toCString(string dstr, Flag!"alloc" alloc)
 {
   if (dstr is null)
     return null;
@@ -114,10 +114,10 @@ char* toCString(string dstr, Flag!"Alloc" alloc)
 * Convert a C string to a D string, with parameter to consume (free) the C string with g_free().
 * Params:
 *   cstr = Zero terminated C string
-*   free = Yes.Free to free the C string with g_free, No.Free to just copy it
+*   free = Yes.free to free the C string with g_free, No.free to just copy it
 * Returns: The D string copy
 */
-string fromCString(const(char)* cstr, Flag!"Free" free)
+string fromCString(const(char)* cstr, Flag!"free" free)
 {
   if (!cstr)
     return null;
@@ -178,12 +178,12 @@ void zero(void* p, size_t len)
 * Template to copy a D array for use by C.
 * Params:
 *   T = The array type
-*   alloc = Yes.Alloc to use g_malloc() to allocate the array, No.Alloc to use D memory (defaults to No)
-*   zeroTerm = Yes.ZeroTerminated if the resulting array should be zero terminated (defaults to No)
+*   alloc = Yes.alloc to use g_malloc() to allocate the array, No.alloc to use D memory (defaults to No)
+*   zeroTerm = Yes.zeroTerm if the resulting array should be zero terminated (defaults to No)
 *   array = The array to copy
 * Returns: C array or null if array is empty
 */
-T* arrayDtoC(T, Flag!"Alloc" alloc = No.Alloc, Flag!"ZeroTerm" zeroTerm = No.ZeroTerm)(T[] array)
+T* arrayDtoC(T, Flag!"alloc" alloc = No.alloc, Flag!"zeroTerm" zeroTerm = No.zeroTerm)(T[] array)
 {
   if (array.length == 0)
     return null;
@@ -205,7 +205,7 @@ T* arrayDtoC(T, Flag!"Alloc" alloc = No.Alloc, Flag!"ZeroTerm" zeroTerm = No.Zer
     if (!retArray)
       throw new OutOfMemoryError;
   }
-  else // No.Malloc, local D allocation
+  else // No.alloc, local D allocation
   {
     static if (zeroTerm)
     {
@@ -655,7 +655,7 @@ if ((is(K == string) || is(K == const(void)*))
 */
 bool isTypeBoxedOrReffed(T)()
 {
-  return __traits(compiles, {auto c = new T(cast(void*)null, No.Take); c.cPtr(Yes.Dup);});
+  return __traits(compiles, {auto c = new T(cast(void*)null, No.take); c.cPtr(Yes.dup);});
 }
 
 /**
@@ -788,11 +788,11 @@ T containerGetItem(T)(void* data)
 if (containerTypeIsSupported!T)
 {
   static if (is(T : ObjectG) || is(T == interface))
-    return ObjectG.getDObject!T(data, No.Take);
+    return ObjectG.getDObject!T(data, No.take);
   else static if (is(T == string))
-    return fromCString(cast(const(char)*)data, No.Free);
+    return fromCString(cast(const(char)*)data, No.free);
   else static if (isTypeBoxedOrReffed!T)
-    return new T(data, No.Take);
+    return new T(data, No.take);
   else static if (is(T == void*) || is(T == const(void)*))
     return data;
   else static if (containerTypeIsSimple!T)
@@ -811,16 +811,16 @@ void containerSetItem(T)(T val, void* data)
 if (containerTypeIsSupported!T)
 {
   static if (is(T : ObjectG) || isTypeBoxedOrReffed!T)
-    *(cast(void**)data) = val.cPtr(Yes.Dup);
+    *(cast(void**)data) = val.cPtr(Yes.dup);
   else static if (is(T == interface))
   {
     if (auto objG = cast(ObjectG)val)
-      *(cast(void**)data) = objG.cPtr(Yes.Dup);
+      *(cast(void**)data) = objG.cPtr(Yes.dup);
     else
       assert(0, "Object implementing " ~ T.stringof ~ " interface is not an ObjectG");
   }
   else static if (is(T == string))
-    *cast(char**)data = toCString(val, Yes.Alloc); // Transfer the string to C (use g_malloc)
+    *cast(char**)data = toCString(val, Yes.alloc); // Transfer the string to C (use g_malloc)
   else static if (is(T == void*) || is(T == const(void)*))
     *(cast(void**)data) = cast(void*)val;
   else static if (containerTypeIsSimple!T)

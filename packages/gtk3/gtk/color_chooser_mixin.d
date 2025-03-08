@@ -38,8 +38,8 @@ template ColorChooserT()
     
     If colors is null, removes all previously added palettes.
     Params:
-      orientation =       [gtk.types.Orientation.Horizontal] if the palette should
-            be displayed in rows, [gtk.types.Orientation.Vertical] for columns
+      orientation =       [gtk.types.Orientation.horizontal] if the palette should
+            be displayed in rows, [gtk.types.Orientation.vertical] for columns
       colorsPerLine =       the number of colors to show in each row/column
       colors =       the colors of the palette, or null
   */
@@ -65,7 +65,7 @@ template ColorChooserT()
   {
     GdkRGBA _color;
     gtk_color_chooser_get_rgba(cast(GtkColorChooser*)cPtr, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.take);
   }
 
   /**
@@ -87,7 +87,7 @@ template ColorChooserT()
   */
   override void setRgba(gdk.rgba.RGBA color)
   {
-    gtk_color_chooser_set_rgba(cast(GtkColorChooser*)cPtr, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
+    gtk_color_chooser_set_rgba(cast(GtkColorChooser*)cPtr, color ? cast(const(GdkRGBA)*)color.cPtr(No.dup) : null);
   }
 
   /**
@@ -121,10 +121,10 @@ template ColorChooserT()
     Connect to ColorActivated signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectColorActivated(T)(T callback, Flag!"After" after = No.After)
+  ulong connectColorActivated(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ColorActivatedCallbackDlg) || is(T : ColorActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

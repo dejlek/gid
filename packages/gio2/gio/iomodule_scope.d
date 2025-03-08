@@ -17,7 +17,7 @@ class IOModuleScope
   GIOModuleScope* cInstancePtr;
   bool owned;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.IOModuleScope");
@@ -41,7 +41,7 @@ class IOModuleScope
   */
   void block(string basename)
   {
-    const(char)* _basename = basename.toCString(No.Alloc);
+    const(char)* _basename = basename.toCString(No.alloc);
     g_io_module_scope_block(cast(GIOModuleScope*)cPtr, _basename);
   }
 }

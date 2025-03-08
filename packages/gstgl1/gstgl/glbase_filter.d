@@ -17,7 +17,7 @@ import gstgl.types;
 class GLBaseFilter : gstbase.base_transform.BaseTransform
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -46,7 +46,7 @@ class GLBaseFilter : gstbase.base_transform.BaseTransform
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_base_filter_get_gl_context(cast(GstGLBaseFilter*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.take);
     return _retval;
   }
 }

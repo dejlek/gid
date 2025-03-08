@@ -40,7 +40,7 @@ import gtk.widget;
 class Table : gtk.container.Container
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -75,7 +75,7 @@ class Table : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_table_new(rows, columns, homogeneous);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -109,7 +109,7 @@ class Table : gtk.container.Container
   */
   void attach(gtk.widget.Widget child, uint leftAttach, uint rightAttach, uint topAttach, uint bottomAttach, gtk.types.AttachOptions xoptions, gtk.types.AttachOptions yoptions, uint xpadding, uint ypadding)
   {
-    gtk_table_attach(cast(GtkTable*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, leftAttach, rightAttach, topAttach, bottomAttach, xoptions, yoptions, xpadding, ypadding);
+    gtk_table_attach(cast(GtkTable*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, leftAttach, rightAttach, topAttach, bottomAttach, xoptions, yoptions, xpadding, ypadding);
   }
 
   /**
@@ -129,7 +129,7 @@ class Table : gtk.container.Container
   */
   void attachDefaults(gtk.widget.Widget widget, uint leftAttach, uint rightAttach, uint topAttach, uint bottomAttach)
   {
-    gtk_table_attach_defaults(cast(GtkTable*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, leftAttach, rightAttach, topAttach, bottomAttach);
+    gtk_table_attach_defaults(cast(GtkTable*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, leftAttach, rightAttach, topAttach, bottomAttach);
   }
 
   /**

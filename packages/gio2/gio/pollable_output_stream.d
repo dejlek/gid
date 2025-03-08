@@ -67,7 +67,7 @@ interface PollableOutputStream
     after this returns true would still block. To guarantee
     non-blocking behavior, you should always use
     [gio.pollable_output_stream.PollableOutputStream.writeNonblocking], which will return a
-    [gio.types.IOErrorEnum.WouldBlock] error rather than blocking.
+    [gio.types.IOErrorEnum.wouldBlock] error rather than blocking.
     
     The behaviour of this method is undefined if
     [gio.pollable_output_stream.PollableOutputStream.canPoll] returns false for stream.
@@ -81,7 +81,7 @@ interface PollableOutputStream
   /**
       Attempts to write up to count bytes from buffer to stream, as
     with [gio.output_stream.OutputStream.write]. If stream is not currently writable,
-    this will immediately return [gio.types.IOErrorEnum.WouldBlock], and you can
+    this will immediately return [gio.types.IOErrorEnum.wouldBlock], and you can
     use [gio.pollable_output_stream.PollableOutputStream.createSource] to create a #GSource
     that will be triggered when stream is writable.
     
@@ -91,7 +91,7 @@ interface PollableOutputStream
     may happen if you call this method after a source triggers due
     to having been cancelled.
     
-    Also note that if [gio.types.IOErrorEnum.WouldBlock] is returned some underlying
+    Also note that if [gio.types.IOErrorEnum.wouldBlock] is returned some underlying
     transports like D/TLS require that you re-send the same buffer and
     count in the next write call.
     
@@ -102,7 +102,7 @@ interface PollableOutputStream
             data from
       cancellable =       a #GCancellable, or null
     Returns:     the number of bytes written, or -1 on error (including
-        [gio.types.IOErrorEnum.WouldBlock]).
+        [gio.types.IOErrorEnum.wouldBlock]).
   */
   ptrdiff_t writeNonblocking(ubyte[] buffer, gio.cancellable.Cancellable cancellable = null);
 
@@ -120,7 +120,7 @@ interface PollableOutputStream
     may happen if you call this method after a source triggers due
     to having been cancelled.
     
-    Also note that if [gio.types.PollableReturn.WouldBlock] is returned some underlying
+    Also note that if [gio.types.PollableReturn.wouldBlock] is returned some underlying
     transports like D/TLS require that you re-send the same vectors and
     n_vectors in the next write call.
     
@@ -131,9 +131,9 @@ interface PollableOutputStream
       bytesWritten =       location to store the number of bytes that were
             written to the stream
       cancellable =       a #GCancellable, or null
-    Returns:     %G_POLLABLE_RETURN_OK on success, [gio.types.PollableReturn.WouldBlock]
+    Returns:     %G_POLLABLE_RETURN_OK on success, [gio.types.PollableReturn.wouldBlock]
       if the stream is not currently writable (and error is *not* set), or
-      [gio.types.PollableReturn.Failed] if there was an error in which case error will
+      [gio.types.PollableReturn.failed] if there was an error in which case error will
       be set.
   */
   gio.types.PollableReturn writevNonblocking(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null);

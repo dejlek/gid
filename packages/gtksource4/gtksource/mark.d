@@ -11,7 +11,7 @@ import gtksource.types;
 class Mark : gtk.text_mark.TextMark
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -44,10 +44,10 @@ class Mark : gtk.text_mark.TextMark
   this(string name, string category)
   {
     GtkSourceMark* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _category = category.toCString(No.alloc);
     _cretval = gtk_source_mark_new(_name, _category);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -58,7 +58,7 @@ class Mark : gtk.text_mark.TextMark
   {
     const(char)* _cretval;
     _cretval = gtk_source_mark_get_category(cast(GtkSourceMark*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -74,9 +74,9 @@ class Mark : gtk.text_mark.TextMark
   gtksource.mark.Mark next(string category = null)
   {
     GtkSourceMark* _cretval;
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _category = category.toCString(No.alloc);
     _cretval = gtk_source_mark_next(cast(GtkSourceMark*)cPtr, _category);
-    auto _retval = ObjectG.getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.take);
     return _retval;
   }
 
@@ -92,9 +92,9 @@ class Mark : gtk.text_mark.TextMark
   gtksource.mark.Mark prev(string category)
   {
     GtkSourceMark* _cretval;
-    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _category = category.toCString(No.alloc);
     _cretval = gtk_source_mark_prev(cast(GtkSourceMark*)cPtr, _category);
-    auto _retval = ObjectG.getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.take);
     return _retval;
   }
 }

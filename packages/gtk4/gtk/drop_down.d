@@ -73,12 +73,12 @@ import gtk.widget;
   
   ## Accessibility
   
-  [gtk.drop_down.DropDown] uses the [gtk.types.AccessibleRole.ComboBox] role.
+  [gtk.drop_down.DropDown] uses the [gtk.types.AccessibleRole.comboBox] role.
 */
 class DropDown : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -107,8 +107,8 @@ class DropDown : gtk.widget.Widget
   this(gio.list_model.ListModel model = null, gtk.expression.Expression expression = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_drop_down_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
-    this(_cretval, No.Take);
+    _cretval = gtk_drop_down_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.dup) : null, expression ? cast(GtkExpression*)expression.cPtr(Yes.dup) : null);
+    this(_cretval, No.take);
   }
 
   /**
@@ -123,11 +123,11 @@ class DropDown : gtk.widget.Widget
     GtkWidget* _cretval;
     char*[] _tmpstrings;
     foreach (s; strings)
-      _tmpstrings ~= s.toCString(No.Alloc);
+      _tmpstrings ~= s.toCString(No.alloc);
     _tmpstrings ~= null;
     const(char*)* _strings = _tmpstrings.ptr;
     _cretval = gtk_drop_down_new_from_strings(_strings);
-    auto _retval = ObjectG.getDObject!(gtk.drop_down.DropDown)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.drop_down.DropDown)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class DropDown : gtk.widget.Widget
   {
     GtkExpression* _cretval;
     _cretval = gtk_drop_down_get_expression(cast(GtkDropDown*)cPtr);
-    auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class DropDown : gtk.widget.Widget
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_drop_down_get_factory(cast(GtkDropDown*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.take);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class DropDown : gtk.widget.Widget
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_drop_down_get_header_factory(cast(GtkDropDown*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.take);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class DropDown : gtk.widget.Widget
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_drop_down_get_list_factory(cast(GtkDropDown*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.take);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class DropDown : gtk.widget.Widget
   {
     GListModel* _cretval;
     _cretval = gtk_drop_down_get_model(cast(GtkDropDown*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.take);
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class DropDown : gtk.widget.Widget
   {
     ObjectC* _cretval;
     _cretval = gtk_drop_down_get_selected_item(cast(GtkDropDown*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.take);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ class DropDown : gtk.widget.Widget
   */
   void setExpression(gtk.expression.Expression expression = null)
   {
-    gtk_drop_down_set_expression(cast(GtkDropDown*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
+    gtk_drop_down_set_expression(cast(GtkDropDown*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.dup) : null);
   }
 
   /**
@@ -289,7 +289,7 @@ class DropDown : gtk.widget.Widget
   */
   void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_drop_down_set_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
+    gtk_drop_down_set_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.dup) : null);
   }
 
   /**
@@ -299,7 +299,7 @@ class DropDown : gtk.widget.Widget
   */
   void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_drop_down_set_header_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
+    gtk_drop_down_set_header_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.dup) : null);
   }
 
   /**
@@ -309,7 +309,7 @@ class DropDown : gtk.widget.Widget
   */
   void setListFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_drop_down_set_list_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
+    gtk_drop_down_set_list_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.dup) : null);
   }
 
   /**
@@ -319,7 +319,7 @@ class DropDown : gtk.widget.Widget
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_drop_down_set_model(cast(GtkDropDown*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_drop_down_set_model(cast(GtkDropDown*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
   }
 
   /**
@@ -372,10 +372,10 @@ class DropDown : gtk.widget.Widget
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

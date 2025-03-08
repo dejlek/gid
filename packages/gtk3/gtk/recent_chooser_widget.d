@@ -30,7 +30,7 @@ import gtk.types;
 class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -57,7 +57,7 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
   {
     GtkWidget* _cretval;
     _cretval = gtk_recent_chooser_widget_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -72,8 +72,8 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
   static gtk.recent_chooser_widget.RecentChooserWidget newForManager(gtk.recent_manager.RecentManager manager)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_recent_chooser_widget_new_for_manager(manager ? cast(GtkRecentManager*)manager.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.recent_chooser_widget.RecentChooserWidget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_recent_chooser_widget_new_for_manager(manager ? cast(GtkRecentManager*)manager.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.recent_chooser_widget.RecentChooserWidget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 }

@@ -28,7 +28,7 @@ import gtk.widget;
 class Range : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -57,7 +57,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_range_get_adjustment(cast(GtkRange*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.take);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GdkRectangle _rangeRect;
     gtk_range_get_range_rect(cast(GtkRange*)cPtr, &_rangeRect);
-    rangeRect = new gdk.rectangle.Rectangle(cast(void*)&_rangeRect, No.Take);
+    rangeRect = new gdk.rectangle.Rectangle(cast(void*)&_rangeRect, No.take);
   }
 
   /**
@@ -238,7 +238,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setAdjustment(gtk.adjustment.Adjustment adjustment)
   {
-    gtk_range_set_adjustment(cast(GtkRange*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_range_set_adjustment(cast(GtkRange*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
   }
 
   /**
@@ -269,7 +269,7 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       If a range is flippable, it will switch its direction if it is
-    horizontal and its direction is [gtk.types.TextDirection.Rtl].
+    horizontal and its direction is [gtk.types.TextDirection.rtl].
     
     See [gtk.widget.Widget.getDirection].
     Params:
@@ -437,10 +437,10 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
     Connect to AdjustBounds signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAdjustBounds(T)(T callback, Flag!"After" after = No.After)
+  ulong connectAdjustBounds(T)(T callback, Flag!"after" after = No.after)
   if (is(T : AdjustBoundsCallbackDlg) || is(T : AdjustBoundsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -488,10 +488,10 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
     Connect to ChangeValue signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChangeValue(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChangeValue(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChangeValueCallbackDlg) || is(T : ChangeValueCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -528,10 +528,10 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
     Connect to MoveSlider signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveSlider(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMoveSlider(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MoveSliderCallbackDlg) || is(T : MoveSliderCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -564,10 +564,10 @@ class Range : gtk.widget.Widget, gtk.orientable.Orientable
     Connect to ValueChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectValueChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ValueChangedCallbackDlg) || is(T : ValueChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

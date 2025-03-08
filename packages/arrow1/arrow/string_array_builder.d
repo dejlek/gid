@@ -11,7 +11,7 @@ import glib.error;
 class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,7 +32,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
   {
     GArrowStringArrayBuilder* _cretval;
     _cretval = garrow_string_array_builder_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   alias append = arrow.binary_array_builder.BinaryArrayBuilder.append;
@@ -41,7 +41,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
   bool append(string value)
   {
     bool _retval;
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.alloc);
     GError *_err;
     _retval = garrow_string_array_builder_append(cast(GArrowStringArrayBuilder*)cPtr, _value, &_err);
     if (_err)
@@ -53,7 +53,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
   bool appendString(string value)
   {
     bool _retval;
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.alloc);
     GError *_err;
     _retval = garrow_string_array_builder_append_string(cast(GArrowStringArrayBuilder*)cPtr, _value, &_err);
     if (_err)
@@ -65,7 +65,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
   bool appendStringLen(string value, int length)
   {
     bool _retval;
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.alloc);
     GError *_err;
     _retval = garrow_string_array_builder_append_string_len(cast(GArrowStringArrayBuilder*)cPtr, _value, length, &_err);
     if (_err)
@@ -93,7 +93,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
 
     char*[] _tmpvalues;
     foreach (s; values)
-      _tmpvalues ~= s.toCString(No.Alloc);
+      _tmpvalues ~= s.toCString(No.alloc);
     const(char*)* _values = _tmpvalues.ptr;
 
     long _isValidsLength;

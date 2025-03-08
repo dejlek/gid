@@ -165,7 +165,7 @@ interface Editable
   static bool delegateGetProperty(gobject.object.ObjectG object, uint propId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec)
   {
     bool _retval;
-    _retval = gtk_editable_delegate_get_property(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, propId, value ? cast(GValue*)value.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
+    _retval = gtk_editable_delegate_get_property(object ? cast(ObjectC*)object.cPtr(No.dup) : null, propId, value ? cast(GValue*)value.cPtr(No.dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ interface Editable
   static bool delegateSetProperty(gobject.object.ObjectG object, uint propId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec)
   {
     bool _retval;
-    _retval = gtk_editable_delegate_set_property(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, propId, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
+    _retval = gtk_editable_delegate_set_property(object ? cast(ObjectC*)object.cPtr(No.dup) : null, propId, value ? cast(const(GValue)*)value.cPtr(No.dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -474,10 +474,10 @@ interface Editable
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc));
 
   /**
@@ -507,9 +507,9 @@ interface Editable
     Connect to DeleteText signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeleteText(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDeleteText(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DeleteTextCallbackDlg) || is(T : DeleteTextCallbackFunc));
   }

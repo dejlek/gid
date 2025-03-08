@@ -16,7 +16,7 @@ import gtk.types;
 class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.Buildable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,7 +42,7 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
   */
   void append(gtk.filter.Filter filter)
   {
-    gtk_multi_filter_append(cast(GtkMultiFilter*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(Yes.Dup) : null);
+    gtk_multi_filter_append(cast(GtkMultiFilter*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(Yes.dup) : null);
   }
 
   /**

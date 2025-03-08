@@ -26,7 +26,7 @@ import gtk.widget;
 class Spinner : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,7 +50,7 @@ class Spinner : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_spinner_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**

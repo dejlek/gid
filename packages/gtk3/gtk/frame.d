@@ -53,13 +53,13 @@ import gtk.widget;
   
   The border node can be given the style class “.flat”, which is used by themes
   to disable drawing of the border. To do this from code, call
-  [gtk.frame.Frame.setShadowType] with [gtk.types.ShadowType.None] to add the “.flat” class or
+  [gtk.frame.Frame.setShadowType] with [gtk.types.ShadowType.none] to add the “.flat” class or
   any other shadow type to remove it.
 */
 class Frame : gtk.bin.Bin
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -85,9 +85,9 @@ class Frame : gtk.bin.Bin
   this(string label = null)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.alloc);
     _cretval = gtk_frame_new(_label);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -104,7 +104,7 @@ class Frame : gtk.bin.Bin
   {
     const(char)* _cretval;
     _cretval = gtk_frame_get_label(cast(GtkFrame*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class Frame : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_frame_get_label_widget(cast(GtkFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class Frame : gtk.bin.Bin
   */
   void setLabel(string label = null)
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.alloc);
     gtk_frame_set_label(cast(GtkFrame*)cPtr, _label);
   }
 
@@ -186,13 +186,13 @@ class Frame : gtk.bin.Bin
   */
   void setLabelWidget(gtk.widget.Widget labelWidget = null)
   {
-    gtk_frame_set_label_widget(cast(GtkFrame*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
+    gtk_frame_set_label_widget(cast(GtkFrame*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.dup) : null);
   }
 
   /**
       Sets the #GtkFrame:shadow-type for frame, i.e. whether it is drawn without
-    ([gtk.types.ShadowType.None]) or with (other values) a visible border. Values other than
-    [gtk.types.ShadowType.None] are treated identically by GtkFrame. The chosen type is
+    ([gtk.types.ShadowType.none]) or with (other values) a visible border. Values other than
+    [gtk.types.ShadowType.none] are treated identically by GtkFrame. The chosen type is
     applied by removing or adding the .flat class to the CSS node named border.
     Params:
       type =       the new #GtkShadowType

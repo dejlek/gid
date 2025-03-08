@@ -10,7 +10,7 @@ import gobject.object;
 class ServerCallContext : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -36,8 +36,8 @@ class ServerCallContext : gobject.object.ObjectG
     extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData)
     {
       auto _dlg = cast(arrowflight.types.HeaderFunc*)userData;
-      string _name = name.fromCString(No.Free);
-      string _value = value.fromCString(No.Free);
+      string _name = name.fromCString(No.free);
+      string _value = value.fromCString(No.free);
 
       (*_dlg)(_name, _value);
     }

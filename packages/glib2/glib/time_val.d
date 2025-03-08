@@ -23,7 +23,7 @@ class TimeVal
 {
   GTimeVal cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.TimeVal");
@@ -118,7 +118,7 @@ class TimeVal
   {
     char* _cretval;
     _cretval = g_time_val_to_iso8601(cast(GTimeVal*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class TimeVal
   static bool fromIso8601(string isoDate, out glib.time_val.TimeVal time)
   {
     bool _retval;
-    const(char)* _isoDate = isoDate.toCString(No.Alloc);
+    const(char)* _isoDate = isoDate.toCString(No.alloc);
     GTimeVal _time;
     _retval = g_time_val_from_iso8601(_isoDate, &_time);
     time = new glib.time_val.TimeVal(cast(void*)&_time);

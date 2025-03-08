@@ -27,7 +27,7 @@ import gobject.object;
 class Drag : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -54,10 +54,10 @@ class Drag : gobject.object.ObjectG
     but GTK keeps its own reference as well, as long as the DND operation
     is going on.
     
-    Note: if actions include [gdk.types.DragAction.Move], you need to listen for
+    Note: if actions include [gdk.types.DragAction.move], you need to listen for
     the `signalGdk.Drag::dnd-finished` signal and delete the data at
     the source if [gdk.drag.Drag.getSelectedAction] returns
-    [gdk.types.DragAction.Move].
+    [gdk.types.DragAction.move].
     Params:
       surface =       the source surface for this drag
       device =       the device that controls this drag
@@ -70,8 +70,8 @@ class Drag : gobject.object.ObjectG
   static gdk.drag.Drag begin(gdk.surface.Surface surface, gdk.device.Device device, gdk.content_provider.ContentProvider content, gdk.types.DragAction actions, double dx, double dy)
   {
     GdkDrag* _cretval;
-    _cretval = gdk_drag_begin(surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, content ? cast(GdkContentProvider*)content.cPtr(No.Dup) : null, actions, dx, dy);
-    auto _retval = ObjectG.getDObject!(gdk.drag.Drag)(cast(GdkDrag*)_cretval, Yes.Take);
+    _cretval = gdk_drag_begin(surface ? cast(GdkSurface*)surface.cPtr(No.dup) : null, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, content ? cast(GdkContentProvider*)content.cPtr(No.dup) : null, actions, dx, dy);
+    auto _retval = ObjectG.getDObject!(gdk.drag.Drag)(cast(GdkDrag*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class Drag : gobject.object.ObjectG
   {
     GdkContentProvider* _cretval;
     _cretval = gdk_drag_get_content(cast(GdkDrag*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, No.take);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class Drag : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_drag_get_device(cast(GdkDrag*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.take);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class Drag : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_drag_get_display(cast(GdkDrag*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class Drag : gobject.object.ObjectG
   {
     GdkSurface* _cretval;
     _cretval = gdk_drag_get_drag_surface(cast(GdkDrag*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.take);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class Drag : gobject.object.ObjectG
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_drag_get_formats(cast(GdkDrag*)cPtr);
-    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class Drag : gobject.object.ObjectG
   {
     GdkSurface* _cretval;
     _cretval = gdk_drag_get_surface(cast(GdkDrag*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.take);
     return _retval;
   }
 
@@ -229,10 +229,10 @@ class Drag : gobject.object.ObjectG
     Connect to Cancel signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCancel(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCancel(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CancelCallbackDlg) || is(T : CancelCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -267,10 +267,10 @@ class Drag : gobject.object.ObjectG
     Connect to DndFinished signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDndFinished(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDndFinished(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DndFinishedCallbackDlg) || is(T : DndFinishedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -302,10 +302,10 @@ class Drag : gobject.object.ObjectG
     Connect to DropPerformed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDropPerformed(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDropPerformed(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DropPerformedCallbackDlg) || is(T : DropPerformedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

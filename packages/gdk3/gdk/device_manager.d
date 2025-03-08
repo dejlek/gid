@@ -128,7 +128,7 @@ import gobject.object;
 class DeviceManager : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -160,7 +160,7 @@ class DeviceManager : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_device_manager_get_client_pointer(cast(GdkDeviceManager*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.take);
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class DeviceManager : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_device_manager_get_display(cast(GdkDeviceManager*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
     return _retval;
   }
 
@@ -219,10 +219,10 @@ class DeviceManager : gobject.object.ObjectG
     Connect to DeviceAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeviceAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDeviceAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DeviceAddedCallbackDlg) || is(T : DeviceAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -247,8 +247,8 @@ class DeviceManager : gobject.object.ObjectG
     
     If a slave device is detached from all master devices
     ([gdk.device.Device.getAssociatedDevice] returns null), its
-    #GdkDeviceType will change to [gdk.types.DeviceType.Floating],
-    if it's attached, it will change to [gdk.types.DeviceType.Slave].
+    #GdkDeviceType will change to [gdk.types.DeviceType.floating],
+    if it's attached, it will change to [gdk.types.DeviceType.slave].
   
     ## Parameters
     $(LIST
@@ -265,10 +265,10 @@ class DeviceManager : gobject.object.ObjectG
     Connect to DeviceChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeviceChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDeviceChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DeviceChangedCallbackDlg) || is(T : DeviceChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -304,10 +304,10 @@ class DeviceManager : gobject.object.ObjectG
     Connect to DeviceRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeviceRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDeviceRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DeviceRemovedCallbackDlg) || is(T : DeviceRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

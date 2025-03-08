@@ -47,7 +47,7 @@ import gtk.window;
 class Assistant : gtk.window.Window
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -71,7 +71,7 @@ class Assistant : gtk.window.Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_assistant_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -81,7 +81,7 @@ class Assistant : gtk.window.Window
   */
   void addActionWidget(gtk.widget.Widget child)
   {
-    gtk_assistant_add_action_widget(cast(GtkAssistant*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_assistant_add_action_widget(cast(GtkAssistant*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -93,7 +93,7 @@ class Assistant : gtk.window.Window
   int appendPage(gtk.widget.Widget page)
   {
     int _retval;
-    _retval = gtk_assistant_append_page(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
+    _retval = gtk_assistant_append_page(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class Assistant : gtk.window.Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_assistant_get_nth_page(cast(GtkAssistant*)cPtr, pageNum);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class Assistant : gtk.window.Window
   bool getPageComplete(gtk.widget.Widget page)
   {
     bool _retval;
-    _retval = gtk_assistant_get_page_complete(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
+    _retval = gtk_assistant_get_page_complete(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class Assistant : gtk.window.Window
   bool getPageHasPadding(gtk.widget.Widget page)
   {
     bool _retval;
-    _retval = gtk_assistant_get_page_has_padding(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
+    _retval = gtk_assistant_get_page_has_padding(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -192,8 +192,8 @@ class Assistant : gtk.window.Window
   gdkpixbuf.pixbuf.Pixbuf getPageHeaderImage(gtk.widget.Widget page)
   {
     PixbufC* _cretval;
-    _cretval = gtk_assistant_get_page_header_image(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    _cretval = gtk_assistant_get_page_header_image(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.take);
     return _retval;
   }
 
@@ -210,8 +210,8 @@ class Assistant : gtk.window.Window
   gdkpixbuf.pixbuf.Pixbuf getPageSideImage(gtk.widget.Widget page)
   {
     PixbufC* _cretval;
-    _cretval = gtk_assistant_get_page_side_image(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    _cretval = gtk_assistant_get_page_side_image(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.take);
     return _retval;
   }
 
@@ -224,8 +224,8 @@ class Assistant : gtk.window.Window
   string getPageTitle(gtk.widget.Widget page)
   {
     const(char)* _cretval;
-    _cretval = gtk_assistant_get_page_title(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    _cretval = gtk_assistant_get_page_title(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -238,7 +238,7 @@ class Assistant : gtk.window.Window
   gtk.types.AssistantPageType getPageType(gtk.widget.Widget page)
   {
     GtkAssistantPageType _cretval;
-    _cretval = gtk_assistant_get_page_type(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
+    _cretval = gtk_assistant_get_page_type(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.dup) : null);
     gtk.types.AssistantPageType _retval = cast(gtk.types.AssistantPageType)_cretval;
     return _retval;
   }
@@ -254,7 +254,7 @@ class Assistant : gtk.window.Window
   int insertPage(gtk.widget.Widget page, int position)
   {
     int _retval;
-    _retval = gtk_assistant_insert_page(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, position);
+    _retval = gtk_assistant_insert_page(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.dup) : null, position);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class Assistant : gtk.window.Window
   int prependPage(gtk.widget.Widget page)
   {
     int _retval;
-    _retval = gtk_assistant_prepend_page(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
+    _retval = gtk_assistant_prepend_page(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class Assistant : gtk.window.Window
   */
   void removeActionWidget(gtk.widget.Widget child)
   {
-    gtk_assistant_remove_action_widget(cast(GtkAssistant*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_assistant_remove_action_widget(cast(GtkAssistant*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -376,7 +376,7 @@ class Assistant : gtk.window.Window
   */
   void setPageComplete(gtk.widget.Widget page, bool complete)
   {
-    gtk_assistant_set_page_complete(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, complete);
+    gtk_assistant_set_page_complete(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.dup) : null, complete);
   }
 
   /**
@@ -388,7 +388,7 @@ class Assistant : gtk.window.Window
   */
   void setPageHasPadding(gtk.widget.Widget page, bool hasPadding)
   {
-    gtk_assistant_set_page_has_padding(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, hasPadding);
+    gtk_assistant_set_page_has_padding(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.dup) : null, hasPadding);
   }
 
   /**
@@ -402,7 +402,7 @@ class Assistant : gtk.window.Window
   */
   void setPageHeaderImage(gtk.widget.Widget page, gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_assistant_set_page_header_image(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    gtk_assistant_set_page_header_image(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null);
   }
 
   /**
@@ -419,7 +419,7 @@ class Assistant : gtk.window.Window
   */
   void setPageSideImage(gtk.widget.Widget page, gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_assistant_set_page_side_image(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    gtk_assistant_set_page_side_image(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null);
   }
 
   /**
@@ -433,8 +433,8 @@ class Assistant : gtk.window.Window
   */
   void setPageTitle(gtk.widget.Widget page, string title)
   {
-    const(char)* _title = title.toCString(No.Alloc);
-    gtk_assistant_set_page_title(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, _title);
+    const(char)* _title = title.toCString(No.alloc);
+    gtk_assistant_set_page_title(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.dup) : null, _title);
   }
 
   /**
@@ -447,7 +447,7 @@ class Assistant : gtk.window.Window
   */
   void setPageType(gtk.widget.Widget page, gtk.types.AssistantPageType type)
   {
-    gtk_assistant_set_page_type(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, type);
+    gtk_assistant_set_page_type(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.dup) : null, type);
   }
 
   /**
@@ -475,7 +475,7 @@ class Assistant : gtk.window.Window
     A handler for the ::apply signal should carry out the actions for
     which the wizard has collected data. If the action takes a long time
     to complete, you might consider putting a page of type
-    [gtk.types.AssistantPageType.Progress] after the confirmation page and handle
+    [gtk.types.AssistantPageType.progress] after the confirmation page and handle
     this operation within the #GtkAssistant::prepare signal of the progress
     page.
   
@@ -493,10 +493,10 @@ class Assistant : gtk.window.Window
     Connect to Apply signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectApply(T)(T callback, Flag!"After" after = No.After)
+  ulong connectApply(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ApplyCallbackDlg) || is(T : ApplyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -528,10 +528,10 @@ class Assistant : gtk.window.Window
     Connect to Cancel signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCancel(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCancel(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CancelCallbackDlg) || is(T : CancelCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -549,7 +549,7 @@ class Assistant : gtk.window.Window
   /**
       The ::close signal is emitted either when the close button of
     a summary page is clicked, or when the apply button in the last
-    page in the flow (of type [gtk.types.AssistantPageType.Confirm]) is clicked.
+    page in the flow (of type [gtk.types.AssistantPageType.confirm]) is clicked.
   
     ## Parameters
     $(LIST
@@ -565,10 +565,10 @@ class Assistant : gtk.window.Window
     Connect to Close signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectClose(T)(T callback, Flag!"After" after = No.After)
+  ulong connectClose(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CloseCallbackDlg) || is(T : CloseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -593,10 +593,10 @@ class Assistant : gtk.window.Window
     Connect to Escape signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEscape(T)(T callback, Flag!"After" after = No.After)
+  ulong connectEscape(T)(T callback, Flag!"after" after = No.after)
   if (is(T : EscapeCallbackDlg) || is(T : EscapeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -633,10 +633,10 @@ class Assistant : gtk.window.Window
     Connect to Prepare signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPrepare(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPrepare(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PrepareCallbackDlg) || is(T : PrepareCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

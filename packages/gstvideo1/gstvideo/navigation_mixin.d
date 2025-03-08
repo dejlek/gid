@@ -92,7 +92,7 @@ template NavigationT()
   /** */
   override void sendEvent(gst.structure.Structure structure)
   {
-    gst_navigation_send_event(cast(GstNavigation*)cPtr, structure ? cast(GstStructure*)structure.cPtr(No.Dup) : null);
+    gst_navigation_send_event(cast(GstNavigation*)cPtr, structure ? cast(GstStructure*)structure.cPtr(No.dup) : null);
   }
 
   /**
@@ -102,14 +102,14 @@ template NavigationT()
   */
   override void sendEventSimple(gst.event.Event event)
   {
-    gst_navigation_send_event_simple(cast(GstNavigation*)cPtr, event ? cast(GstEvent*)event.cPtr(Yes.Dup) : null);
+    gst_navigation_send_event_simple(cast(GstNavigation*)cPtr, event ? cast(GstEvent*)event.cPtr(Yes.dup) : null);
   }
 
   /** */
   override void sendKeyEvent(string event, string key)
   {
-    const(char)* _event = event.toCString(No.Alloc);
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _event = event.toCString(No.alloc);
+    const(char)* _key = key.toCString(No.alloc);
     gst_navigation_send_key_event(cast(GstNavigation*)cPtr, _event, _key);
   }
 
@@ -128,7 +128,7 @@ template NavigationT()
   */
   override void sendMouseEvent(string event, int button, double x, double y)
   {
-    const(char)* _event = event.toCString(No.Alloc);
+    const(char)* _event = event.toCString(No.alloc);
     gst_navigation_send_mouse_event(cast(GstNavigation*)cPtr, _event, button, x, y);
   }
 

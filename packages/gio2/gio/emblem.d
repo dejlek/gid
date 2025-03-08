@@ -19,7 +19,7 @@ import gobject.object;
 class Emblem : gobject.object.ObjectG, gio.icon.Icon
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -46,8 +46,8 @@ class Emblem : gobject.object.ObjectG, gio.icon.Icon
   this(gio.icon.Icon icon)
   {
     GEmblem* _cretval;
-    _cretval = g_emblem_new(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = g_emblem_new(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -60,8 +60,8 @@ class Emblem : gobject.object.ObjectG, gio.icon.Icon
   static gio.emblem.Emblem newWithOrigin(gio.icon.Icon icon, gio.types.EmblemOrigin origin)
   {
     GEmblem* _cretval;
-    _cretval = g_emblem_new_with_origin(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, origin);
-    auto _retval = ObjectG.getDObject!(gio.emblem.Emblem)(cast(GEmblem*)_cretval, Yes.Take);
+    _cretval = g_emblem_new_with_origin(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null, origin);
+    auto _retval = ObjectG.getDObject!(gio.emblem.Emblem)(cast(GEmblem*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class Emblem : gobject.object.ObjectG, gio.icon.Icon
   {
     GIcon* _cretval;
     _cretval = g_emblem_get_icon(cast(GEmblem*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.take);
     return _retval;
   }
 

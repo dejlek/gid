@@ -230,7 +230,7 @@ interface FileChooser
     Note that this is the folder that the file chooser is currently displaying
     (e.g. "/home/username/Documents"), which is not the same
     as the currently-selected folder if the chooser is in
-    [gtk.types.FileChooserAction.SelectFolder] mode
+    [gtk.types.FileChooserAction.selectFolder] mode
     (e.g. "/home/username/Documents/selected-folder/".  To get the
     currently-selected folder in that mode, use [gtk.file_chooser.FileChooser.getUri] as the
     usual way to get the selection.
@@ -257,7 +257,7 @@ interface FileChooser
     Note that this is the folder that the file chooser is currently displaying
     (e.g. "file:///home/username/Documents"), which is not the same
     as the currently-selected folder if the chooser is in
-    [gtk.types.FileChooserAction.SelectFolder] mode
+    [gtk.types.FileChooserAction.selectFolder] mode
     (e.g. "file:///home/username/Documents/selected-folder/".  To get the
     currently-selected folder in that mode, use [gtk.file_chooser.FileChooser.getUri] as the
     usual way to get the selection.
@@ -551,8 +551,8 @@ interface FileChooser
       Sets the type of operation that the chooser is performing; the
     user interface is adapted to suit the selected action. For example,
     an option to create a new folder might be shown if the action is
-    [gtk.types.FileChooserAction.Save] but not if the action is
-    [gtk.types.FileChooserAction.Open].
+    [gtk.types.FileChooserAction.save] but not if the action is
+    [gtk.types.FileChooserAction.open].
     Params:
       action =       the action that the file selector is performing
   */
@@ -571,7 +571,7 @@ interface FileChooser
   /**
       Sets whether file choser will offer to create new folders.
     This is only relevant if the action is not set to be
-    [gtk.types.FileChooserAction.Open].
+    [gtk.types.FileChooserAction.open].
     Params:
       createFolders =       true if the Create Folder button should be displayed
   */
@@ -633,7 +633,7 @@ interface FileChooser
   void setCurrentName(string name);
 
   /**
-      Sets whether a file chooser in [gtk.types.FileChooserAction.Save] mode will present
+      Sets whether a file chooser in [gtk.types.FileChooserAction.save] mode will present
     a confirmation dialog if the user types a file name that already exists.  This
     is false by default.
     
@@ -659,7 +659,7 @@ interface FileChooser
   /**
       Sets file as the current filename for the file chooser, by changing
     to the file’s parent folder and actually selecting the file in list.  If
-    the chooser is in [gtk.types.FileChooserAction.Save] mode, the file’s base name
+    the chooser is in [gtk.types.FileChooserAction.save] mode, the file’s base name
     will also appear in the dialog’s file name entry.
     
     If the file name isn’t in the current folder of chooser, then the current
@@ -700,7 +700,7 @@ interface FileChooser
       Sets filename as the current filename for the file chooser, by changing to
     the file’s parent folder and actually selecting the file in list; all other
     files will be unselected.  If the chooser is in
-    [gtk.types.FileChooserAction.Save] mode, the file’s base name will also appear in
+    [gtk.types.FileChooserAction.save] mode, the file’s base name will also appear in
     the dialog’s file name entry.
     
     Note that the file must exist, or nothing will be done except
@@ -798,8 +798,8 @@ interface FileChooser
 
   /**
       Sets whether multiple files can be selected in the file selector.  This is
-    only relevant if the action is set to be [gtk.types.FileChooserAction.Open] or
-    [gtk.types.FileChooserAction.SelectFolder].
+    only relevant if the action is set to be [gtk.types.FileChooserAction.open] or
+    [gtk.types.FileChooserAction.selectFolder].
     Params:
       selectMultiple =       true if multiple files can be selected.
   */
@@ -815,7 +815,7 @@ interface FileChooser
   /**
       Sets the file referred to by uri as the current file for the file chooser,
     by changing to the URI’s parent folder and actually selecting the URI in the
-    list.  If the chooser is [gtk.types.FileChooserAction.Save] mode, the URI’s base
+    list.  If the chooser is [gtk.types.FileChooserAction.save] mode, the URI’s base
     name will also appear in the dialog’s file name entry.
     
     Note that the URI must exist, or nothing will be done except for the
@@ -898,7 +898,7 @@ interface FileChooser
       This signal gets emitted whenever it is appropriate to present a
     confirmation dialog when the user has selected a file name that
     already exists.  The signal only gets emitted when the file
-    chooser is in [gtk.types.FileChooserAction.Save] mode.
+    chooser is in [gtk.types.FileChooserAction.save] mode.
     
     Most applications just need to turn on the
     #GtkFileChooser:do-overwrite-confirmation property (or call the
@@ -912,12 +912,12 @@ interface FileChooser
     #GtkFileChooserConfirmation value, which indicates the action to
     take.  If the handler determines that the user wants to select a
     different filename, it should return
-    [gtk.types.FileChooserConfirmation.SelectAgain].  If it determines
+    [gtk.types.FileChooserConfirmation.selectAgain].  If it determines
     that the user is satisfied with his choice of file name, it
-    should return [gtk.types.FileChooserConfirmation.AcceptFilename].
+    should return [gtk.types.FileChooserConfirmation.acceptFilename].
     On the other hand, if it determines that the stock confirmation
     dialog should be used, it should return
-    [gtk.types.FileChooserConfirmation.Confirm]. The following example
+    [gtk.types.FileChooserConfirmation.confirm]. The following example
     illustrates this.
     
     ## Custom confirmation ## {#gtkfilechooser-confirmation}
@@ -970,10 +970,10 @@ interface FileChooser
     Connect to ConfirmOverwrite signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectConfirmOverwrite(T)(T callback, Flag!"After" after = No.After)
+  ulong connectConfirmOverwrite(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ConfirmOverwriteCallbackDlg) || is(T : ConfirmOverwriteCallbackFunc));
 
   /**
@@ -1005,10 +1005,10 @@ interface FileChooser
     Connect to CurrentFolderChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCurrentFolderChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCurrentFolderChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CurrentFolderChangedCallbackDlg) || is(T : CurrentFolderChangedCallbackFunc));
 
   /**
@@ -1038,10 +1038,10 @@ interface FileChooser
     Connect to FileActivated signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFileActivated(T)(T callback, Flag!"After" after = No.After)
+  ulong connectFileActivated(T)(T callback, Flag!"after" after = No.after)
   if (is(T : FileActivatedCallbackDlg) || is(T : FileActivatedCallbackFunc));
 
   /**
@@ -1074,10 +1074,10 @@ interface FileChooser
     Connect to SelectionChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSelectionChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SelectionChangedCallbackDlg) || is(T : SelectionChangedCallbackFunc));
 
   /**
@@ -1118,9 +1118,9 @@ interface FileChooser
     Connect to UpdatePreview signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUpdatePreview(T)(T callback, Flag!"After" after = No.After)
+  ulong connectUpdatePreview(T)(T callback, Flag!"after" after = No.after)
   if (is(T : UpdatePreviewCallbackDlg) || is(T : UpdatePreviewCallbackFunc));
   }

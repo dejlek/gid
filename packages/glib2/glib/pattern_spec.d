@@ -27,12 +27,12 @@ import gobject.boxed;
 class PatternSpec : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -57,9 +57,9 @@ class PatternSpec : gobject.boxed.Boxed
   this(string pattern)
   {
     GPatternSpec* _cretval;
-    const(char)* _pattern = pattern.toCString(No.Alloc);
+    const(char)* _pattern = pattern.toCString(No.alloc);
     _cretval = g_pattern_spec_new(_pattern);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -70,7 +70,7 @@ class PatternSpec : gobject.boxed.Boxed
   {
     GPatternSpec* _cretval;
     _cretval = g_pattern_spec_copy(cast(GPatternSpec*)cPtr);
-    auto _retval = _cretval ? new glib.pattern_spec.PatternSpec(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.pattern_spec.PatternSpec(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class PatternSpec : gobject.boxed.Boxed
   bool equal(glib.pattern_spec.PatternSpec pspec2)
   {
     bool _retval;
-    _retval = g_pattern_spec_equal(cast(GPatternSpec*)cPtr, pspec2 ? cast(GPatternSpec*)pspec2.cPtr(No.Dup) : null);
+    _retval = g_pattern_spec_equal(cast(GPatternSpec*)cPtr, pspec2 ? cast(GPatternSpec*)pspec2.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -116,8 +116,8 @@ class PatternSpec : gobject.boxed.Boxed
   bool match(size_t stringLength, string string_, string stringReversed = null)
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
-    const(char)* _stringReversed = stringReversed.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _stringReversed = stringReversed.toCString(No.alloc);
     _retval = g_pattern_spec_match(cast(GPatternSpec*)cPtr, stringLength, _string_, _stringReversed);
     return _retval;
   }
@@ -133,7 +133,7 @@ class PatternSpec : gobject.boxed.Boxed
   bool matchString(string string_)
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString(No.alloc);
     _retval = g_pattern_spec_match_string(cast(GPatternSpec*)cPtr, _string_);
     return _retval;
   }

@@ -57,7 +57,7 @@ import gtk.widget;
 class Fixed : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -81,7 +81,7 @@ class Fixed : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_fixed_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -96,7 +96,7 @@ class Fixed : gtk.widget.Widget
   */
   void getChildPosition(gtk.widget.Widget widget, out double x, out double y)
   {
-    gtk_fixed_get_child_position(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
+    gtk_fixed_get_child_position(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, cast(double*)&x, cast(double*)&y);
   }
 
   /**
@@ -109,8 +109,8 @@ class Fixed : gtk.widget.Widget
   gsk.transform.Transform getChildTransform(gtk.widget.Widget widget)
   {
     GskTransform* _cretval;
-    _cretval = gtk_fixed_get_child_transform(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, No.Take) : null;
+    _cretval = gtk_fixed_get_child_transform(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class Fixed : gtk.widget.Widget
   */
   void move(gtk.widget.Widget widget, double x, double y)
   {
-    gtk_fixed_move(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, x, y);
+    gtk_fixed_move(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, x, y);
   }
 
   /**
@@ -136,7 +136,7 @@ class Fixed : gtk.widget.Widget
   */
   void put(gtk.widget.Widget widget, double x, double y)
   {
-    gtk_fixed_put(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, x, y);
+    gtk_fixed_put(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, x, y);
   }
 
   /**
@@ -146,7 +146,7 @@ class Fixed : gtk.widget.Widget
   */
   void remove(gtk.widget.Widget widget)
   {
-    gtk_fixed_remove(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_fixed_remove(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
   }
 
   /**
@@ -162,6 +162,6 @@ class Fixed : gtk.widget.Widget
   */
   void setChildTransform(gtk.widget.Widget widget, gsk.transform.Transform transform = null)
   {
-    gtk_fixed_set_child_transform(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, transform ? cast(GskTransform*)transform.cPtr(No.Dup) : null);
+    gtk_fixed_set_child_transform(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, transform ? cast(GskTransform*)transform.cPtr(No.dup) : null);
   }
 }

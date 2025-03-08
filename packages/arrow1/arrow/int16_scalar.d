@@ -10,7 +10,7 @@ import gid.gid;
 class Int16Scalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class Int16Scalar : arrow.scalar.Scalar
   {
     GArrowInt16Scalar* _cretval;
     _cretval = garrow_int16_scalar_new(value);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */

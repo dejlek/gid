@@ -22,7 +22,7 @@ import gtk.widget;
   from the taskbar by default.
   
   The easiest way to do a modal message dialog is to use [gtk.dialog.Dialog.run], though
-  you can also pass in the [gtk.types.DialogFlags.Modal] flag, [gtk.dialog.Dialog.run] automatically
+  you can also pass in the [gtk.types.DialogFlags.modal] flag, [gtk.dialog.Dialog.run] automatically
   makes the dialog modal and waits for the user to respond to it. [gtk.dialog.Dialog.run]
   returns when any dialog button is clicked.
   
@@ -69,7 +69,7 @@ import gtk.widget;
 class MessageDialog : gtk.dialog.Dialog
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -95,7 +95,7 @@ class MessageDialog : gtk.dialog.Dialog
   {
     GtkWidget* _cretval;
     _cretval = gtk_message_dialog_get_image(cast(GtkMessageDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class MessageDialog : gtk.dialog.Dialog
   {
     GtkWidget* _cretval;
     _cretval = gtk_message_dialog_get_message_area(cast(GtkMessageDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class MessageDialog : gtk.dialog.Dialog
   */
   void setImage(gtk.widget.Widget image)
   {
-    gtk_message_dialog_set_image(cast(GtkMessageDialog*)cPtr, image ? cast(GtkWidget*)image.cPtr(No.Dup) : null);
+    gtk_message_dialog_set_image(cast(GtkMessageDialog*)cPtr, image ? cast(GtkWidget*)image.cPtr(No.dup) : null);
   }
 
   /**
@@ -136,7 +136,7 @@ class MessageDialog : gtk.dialog.Dialog
   */
   void setMarkup(string str)
   {
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString(No.alloc);
     gtk_message_dialog_set_markup(cast(GtkMessageDialog*)cPtr, _str);
   }
 }

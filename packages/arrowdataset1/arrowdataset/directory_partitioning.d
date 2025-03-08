@@ -14,7 +14,7 @@ import glib.error;
 class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartitioning
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -37,9 +37,9 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
     auto _dictionaries = gListFromD!(arrow.array.Array)(dictionaries);
     scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_dictionaries);
     GError *_err;
-    _cretval = gadataset_directory_partitioning_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, _dictionaries, options ? cast(GADatasetKeyValuePartitioningOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = gadataset_directory_partitioning_new(schema ? cast(GArrowSchema*)schema.cPtr(No.dup) : null, _dictionaries, options ? cast(GADatasetKeyValuePartitioningOptions*)options.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

@@ -17,12 +17,12 @@ import pango.types;
 class FontDescription : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -47,7 +47,7 @@ class FontDescription : gobject.boxed.Boxed
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_description_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -58,7 +58,7 @@ class FontDescription : gobject.boxed.Boxed
     Approximate matching is done for weight and style; other style attributes
     must match exactly. Style attributes are all attributes other than family
     and size-related attributes. Approximate matching for style considers
-    [pango.types.Style.Oblique] and [pango.types.Style.Italic] as matches, but not as good
+    [pango.types.Style.oblique] and [pango.types.Style.italic] as matches, but not as good
     a match as when the styles are equal.
     
     Note that old_match must match desc.
@@ -70,7 +70,7 @@ class FontDescription : gobject.boxed.Boxed
   bool betterMatch(pango.font_description.FontDescription oldMatch, pango.font_description.FontDescription newMatch)
   {
     bool _retval;
-    _retval = pango_font_description_better_match(cast(const(PangoFontDescription)*)cPtr, oldMatch ? cast(const(PangoFontDescription)*)oldMatch.cPtr(No.Dup) : null, newMatch ? cast(const(PangoFontDescription)*)newMatch.cPtr(No.Dup) : null);
+    _retval = pango_font_description_better_match(cast(const(PangoFontDescription)*)cPtr, oldMatch ? cast(const(PangoFontDescription)*)oldMatch.cPtr(No.dup) : null, newMatch ? cast(const(PangoFontDescription)*)newMatch.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class FontDescription : gobject.boxed.Boxed
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_description_copy(cast(const(PangoFontDescription)*)cPtr);
-    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class FontDescription : gobject.boxed.Boxed
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_description_copy_static(cast(const(PangoFontDescription)*)cPtr);
-    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class FontDescription : gobject.boxed.Boxed
   bool equal(pango.font_description.FontDescription desc2)
   {
     bool _retval;
-    _retval = pango_font_description_equal(cast(const(PangoFontDescription)*)cPtr, desc2 ? cast(const(PangoFontDescription)*)desc2.cPtr(No.Dup) : null);
+    _retval = pango_font_description_equal(cast(const(PangoFontDescription)*)cPtr, desc2 ? cast(const(PangoFontDescription)*)desc2.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class FontDescription : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = pango_font_description_get_family(cast(const(PangoFontDescription)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -269,7 +269,7 @@ class FontDescription : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = pango_font_description_get_variations(cast(const(PangoFontDescription)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class FontDescription : gobject.boxed.Boxed
   */
   void merge(pango.font_description.FontDescription descToMerge, bool replaceExisting)
   {
-    pango_font_description_merge(cast(PangoFontDescription*)cPtr, descToMerge ? cast(const(PangoFontDescription)*)descToMerge.cPtr(No.Dup) : null, replaceExisting);
+    pango_font_description_merge(cast(PangoFontDescription*)cPtr, descToMerge ? cast(const(PangoFontDescription)*)descToMerge.cPtr(No.dup) : null, replaceExisting);
   }
 
   /**
@@ -340,7 +340,7 @@ class FontDescription : gobject.boxed.Boxed
   */
   void mergeStatic(pango.font_description.FontDescription descToMerge, bool replaceExisting)
   {
-    pango_font_description_merge_static(cast(PangoFontDescription*)cPtr, descToMerge ? cast(const(PangoFontDescription)*)descToMerge.cPtr(No.Dup) : null, replaceExisting);
+    pango_font_description_merge_static(cast(PangoFontDescription*)cPtr, descToMerge ? cast(const(PangoFontDescription)*)descToMerge.cPtr(No.dup) : null, replaceExisting);
   }
 
   /**
@@ -371,7 +371,7 @@ class FontDescription : gobject.boxed.Boxed
   */
   void setFamily(string family)
   {
-    const(char)* _family = family.toCString(No.Alloc);
+    const(char)* _family = family.toCString(No.alloc);
     pango_font_description_set_family(cast(PangoFontDescription*)cPtr, _family);
   }
 
@@ -388,7 +388,7 @@ class FontDescription : gobject.boxed.Boxed
   */
   void setFamilyStatic(string family)
   {
-    const(char)* _family = family.toCString(No.Alloc);
+    const(char)* _family = family.toCString(No.alloc);
     pango_font_description_set_family_static(cast(PangoFontDescription*)cPtr, _family);
   }
 
@@ -397,7 +397,7 @@ class FontDescription : gobject.boxed.Boxed
     
     The gravity field
     specifies how the glyphs should be rotated. If gravity is
-    [pango.types.Gravity.Auto], this actually unsets the gravity mask on
+    [pango.types.Gravity.auto_], this actually unsets the gravity mask on
     the font description.
     
     This function is seldom useful to the user. Gravity should normally
@@ -448,7 +448,7 @@ class FontDescription : gobject.boxed.Boxed
     
     The [pango.types.Style] enumeration describes whether the font is
     slanted and the manner in which it is slanted; it can be either
-    [pango.types.Style.Normal], [pango.types.Style.Italic], or [pango.types.Style.Oblique].
+    [pango.types.Style.normal], [pango.types.Style.italic], or [pango.types.Style.oblique].
     
     Most fonts will either have a italic style or an oblique style,
     but not both, and font matching in Pango will match italic
@@ -465,8 +465,8 @@ class FontDescription : gobject.boxed.Boxed
   /**
       Sets the variant field of a font description.
     
-    The [pango.types.Variant] can either be [pango.types.Variant.Normal]
-    or [pango.types.Variant.SmallCaps].
+    The [pango.types.Variant] can either be [pango.types.Variant.normal]
+    or [pango.types.Variant.smallCaps].
     Params:
       variant =       the variant type for the font description.
   */
@@ -497,7 +497,7 @@ class FontDescription : gobject.boxed.Boxed
   */
   void setVariations(string variations = null)
   {
-    const(char)* _variations = variations.toCString(No.Alloc);
+    const(char)* _variations = variations.toCString(No.alloc);
     pango_font_description_set_variations(cast(PangoFontDescription*)cPtr, _variations);
   }
 
@@ -515,7 +515,7 @@ class FontDescription : gobject.boxed.Boxed
   */
   void setVariationsStatic(string variations)
   {
-    const(char)* _variations = variations.toCString(No.Alloc);
+    const(char)* _variations = variations.toCString(No.alloc);
     pango_font_description_set_variations_static(cast(PangoFontDescription*)cPtr, _variations);
   }
 
@@ -547,7 +547,7 @@ class FontDescription : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = pango_font_description_to_filename(cast(const(PangoFontDescription)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -564,7 +564,7 @@ class FontDescription : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = pango_font_description_to_string(cast(const(PangoFontDescription)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -632,9 +632,9 @@ class FontDescription : gobject.boxed.Boxed
   static pango.font_description.FontDescription fromString(string str)
   {
     PangoFontDescription* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString(No.alloc);
     _cretval = pango_font_description_from_string(_str);
-    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

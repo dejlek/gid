@@ -13,7 +13,7 @@ import gtk.types;
 class ConstantExpression : gtk.expression.Expression
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.ConstantExpression");
@@ -30,8 +30,8 @@ class ConstantExpression : gtk.expression.Expression
   static gtk.constant_expression.ConstantExpression newForValue(gobject.value.Value value)
   {
     GtkExpression* _cretval;
-    _cretval = gtk_constant_expression_new_for_value(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gtk.constant_expression.ConstantExpression(cast(GtkExpression*)_cretval, Yes.Take) : null;
+    _cretval = gtk_constant_expression_new_for_value(value ? cast(const(GValue)*)value.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gtk.constant_expression.ConstantExpression(cast(GtkExpression*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -43,7 +43,7 @@ class ConstantExpression : gtk.expression.Expression
   {
     const(GValue)* _cretval;
     _cretval = gtk_constant_expression_get_value(cast(GtkExpression*)cPtr);
-    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

@@ -23,7 +23,7 @@ import gobject.types;
 class Registry : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -51,7 +51,7 @@ class Registry : gobject.object.ObjectG
   {
     AtkObjectFactory* _cretval;
     _cretval = atk_registry_get_factory(cast(AtkRegistry*)cPtr, type);
-    auto _retval = ObjectG.getDObject!(atk.object_factory.ObjectFactory)(cast(AtkObjectFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.object_factory.ObjectFactory)(cast(AtkObjectFactory*)_cretval, No.take);
     return _retval;
   }
 

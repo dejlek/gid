@@ -12,7 +12,7 @@ import gstpbutils.types;
 class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamInfo
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -65,7 +65,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   {
     const(char)* _cretval;
     _cretval = gst_discoverer_audio_info_get_language(cast(const(GstDiscovererAudioInfo)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 

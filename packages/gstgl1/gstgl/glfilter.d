@@ -17,7 +17,7 @@ import gstgl.types;
 class GLFilter : gstgl.glbase_filter.GLBaseFilter
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -54,7 +54,7 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
   bool filterTexture(gst.buffer.Buffer input, gst.buffer.Buffer output)
   {
     bool _retval;
-    _retval = gst_gl_filter_filter_texture(cast(GstGLFilter*)cPtr, input ? cast(GstBuffer*)input.cPtr(No.Dup) : null, output ? cast(GstBuffer*)output.cPtr(No.Dup) : null);
+    _retval = gst_gl_filter_filter_texture(cast(GstGLFilter*)cPtr, input ? cast(GstBuffer*)input.cPtr(No.dup) : null, output ? cast(GstBuffer*)output.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -72,14 +72,14 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
     {
       auto _dlg = cast(gstgl.types.GLFilterRenderFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gstgl.glfilter.GLFilter)(cast(void*)filter, No.Take), inTex ? new gstgl.glmemory.GLMemory(cast(void*)inTex, No.Take) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gstgl.glfilter.GLFilter)(cast(void*)filter, No.take), inTex ? new gstgl.glmemory.GLMemory(cast(void*)inTex, No.take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
-    _retval = gst_gl_filter_render_to_target(cast(GstGLFilter*)cPtr, input ? cast(GstGLMemory*)input.cPtr(No.Dup) : null, output ? cast(GstGLMemory*)output.cPtr(No.Dup) : null, _funcCB, _func);
+    _retval = gst_gl_filter_render_to_target(cast(GstGLFilter*)cPtr, input ? cast(GstGLMemory*)input.cPtr(No.dup) : null, output ? cast(GstGLMemory*)output.cPtr(No.dup) : null, _funcCB, _func);
     return _retval;
   }
 
@@ -94,6 +94,6 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
   */
   void renderToTargetWithShader(gstgl.glmemory.GLMemory input, gstgl.glmemory.GLMemory output, gstgl.glshader.GLShader shader)
   {
-    gst_gl_filter_render_to_target_with_shader(cast(GstGLFilter*)cPtr, input ? cast(GstGLMemory*)input.cPtr(No.Dup) : null, output ? cast(GstGLMemory*)output.cPtr(No.Dup) : null, shader ? cast(GstGLShader*)shader.cPtr(No.Dup) : null);
+    gst_gl_filter_render_to_target_with_shader(cast(GstGLFilter*)cPtr, input ? cast(GstGLMemory*)input.cPtr(No.dup) : null, output ? cast(GstGLMemory*)output.cPtr(No.dup) : null, shader ? cast(GstGLShader*)shader.cPtr(No.dup) : null);
   }
 }

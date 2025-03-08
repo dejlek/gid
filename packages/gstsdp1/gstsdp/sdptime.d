@@ -13,7 +13,7 @@ class SDPTime
 {
   GstSDPTime cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstSdp.SDPTime");
@@ -31,24 +31,24 @@ class SDPTime
 
   @property string start()
   {
-    return (cast(GstSDPTime*)cPtr).start.fromCString(No.Free);
+    return (cast(GstSDPTime*)cPtr).start.fromCString(No.free);
   }
 
   @property void start(string propval)
   {
     safeFree(cast(void*)(cast(GstSDPTime*)cPtr).start);
-    (cast(GstSDPTime*)cPtr).start = propval.toCString(Yes.Alloc);
+    (cast(GstSDPTime*)cPtr).start = propval.toCString(Yes.alloc);
   }
 
   @property string stop()
   {
-    return (cast(GstSDPTime*)cPtr).stop.fromCString(No.Free);
+    return (cast(GstSDPTime*)cPtr).stop.fromCString(No.free);
   }
 
   @property void stop(string propval)
   {
     safeFree(cast(void*)(cast(GstSDPTime*)cPtr).stop);
-    (cast(GstSDPTime*)cPtr).stop = propval.toCString(Yes.Alloc);
+    (cast(GstSDPTime*)cPtr).stop = propval.toCString(Yes.alloc);
   }
 
   /**
@@ -74,11 +74,11 @@ class SDPTime
   gstsdp.types.SDPResult set(string start, string stop, string[] repeat)
   {
     GstSDPResult _cretval;
-    const(char)* _start = start.toCString(No.Alloc);
-    const(char)* _stop = stop.toCString(No.Alloc);
+    const(char)* _start = start.toCString(No.alloc);
+    const(char)* _stop = stop.toCString(No.alloc);
     char*[] _tmprepeat;
     foreach (s; repeat)
-      _tmprepeat ~= s.toCString(No.Alloc);
+      _tmprepeat ~= s.toCString(No.alloc);
     _tmprepeat ~= null;
     const(char*)* _repeat = _tmprepeat.ptr;
     _cretval = gst_sdp_time_set(cast(GstSDPTime*)cPtr, _start, _stop, _repeat);

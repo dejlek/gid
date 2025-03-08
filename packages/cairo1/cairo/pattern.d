@@ -29,12 +29,12 @@ import gobject.boxed;
 class Pattern : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -68,7 +68,7 @@ class Pattern : gobject.boxed.Boxed
     
     Note: If the pattern is not a gradient pattern, (eg. a linear or
     radial pattern), then the pattern will be put into an error status
-    with a status of [cairo.types.Status.PatternTypeMismatch].
+    with a status of [cairo.types.Status.patternTypeMismatch].
     Params:
       offset =       an offset in the range [0.0 .. 1.0]
       red =       red component of color
@@ -97,7 +97,7 @@ class Pattern : gobject.boxed.Boxed
     
     Note: If the pattern is not a gradient pattern, (eg. a linear or
     radial pattern), then the pattern will be put into an error status
-    with a status of [cairo.types.Status.PatternTypeMismatch].
+    with a status of [cairo.types.Status.patternTypeMismatch].
     Params:
       offset =       an offset in the range [0.0 .. 1.0]
       red =       red component of color
@@ -115,8 +115,8 @@ class Pattern : gobject.boxed.Boxed
     pattern.
     Params:
       count =       return value for the number of color stops, or null
-    Returns:     [cairo.types.Status.Success], or
-      [cairo.types.Status.PatternTypeMismatch] if pattern is not a gradient
+    Returns:     [cairo.types.Status.success], or
+      [cairo.types.Status.patternTypeMismatch] if pattern is not a gradient
       pattern.
   */
   cairo.types.Status getColorStopCount(out int count)
@@ -141,9 +141,9 @@ class Pattern : gobject.boxed.Boxed
       green =       return value for green component of color, or null
       blue =       return value for blue component of color, or null
       alpha =       return value for alpha component of color, or null
-    Returns:     [cairo.types.Status.Success], or [cairo.types.Status.InvalidIndex]
+    Returns:     [cairo.types.Status.success], or [cairo.types.Status.invalidIndex]
       if index is not valid for the given pattern.  If the pattern is
-      not a gradient pattern, [cairo.types.Status.PatternTypeMismatch] is
+      not a gradient pattern, [cairo.types.Status.patternTypeMismatch] is
       returned.
   */
   cairo.types.Status getColorStopRgba(int index, out double offset, out double red, out double green, out double blue, out double alpha)
@@ -201,8 +201,8 @@ class Pattern : gobject.boxed.Boxed
       y0 =       return value for the y coordinate of the first point, or null
       x1 =       return value for the x coordinate of the second point, or null
       y1 =       return value for the y coordinate of the second point, or null
-    Returns:     [cairo.types.Status.Success], or
-      [cairo.types.Status.PatternTypeMismatch] if pattern is not a linear
+    Returns:     [cairo.types.Status.success], or
+      [cairo.types.Status.patternTypeMismatch] if pattern is not a linear
       gradient pattern.
   */
   cairo.types.Status getLinearPoints(out double x0, out double y0, out double x1, out double y1)
@@ -220,7 +220,7 @@ class Pattern : gobject.boxed.Boxed
   */
   void getMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_pattern_get_matrix(cast(cairo_pattern_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
+    cairo_pattern_get_matrix(cast(cairo_pattern_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.dup) : null);
   }
 
   /**
@@ -233,8 +233,8 @@ class Pattern : gobject.boxed.Boxed
       x1 =       return value for the x coordinate of the center of the second circle, or null
       y1 =       return value for the y coordinate of the center of the second circle, or null
       r1 =       return value for the radius of the second circle, or null
-    Returns:     [cairo.types.Status.Success], or
-      [cairo.types.Status.PatternTypeMismatch] if pattern is not a radial
+    Returns:     [cairo.types.Status.success], or
+      [cairo.types.Status.patternTypeMismatch] if pattern is not a radial
       gradient pattern.
   */
   cairo.types.Status getRadialCircles(out double x0, out double y0, out double r0, out double x1, out double y1, out double r1)
@@ -254,8 +254,8 @@ class Pattern : gobject.boxed.Boxed
       green =       return value for green component of color, or null
       blue =       return value for blue component of color, or null
       alpha =       return value for alpha component of color, or null
-    Returns:     [cairo.types.Status.Success], or
-      [cairo.types.Status.PatternTypeMismatch] if the pattern is not a solid
+    Returns:     [cairo.types.Status.success], or
+      [cairo.types.Status.patternTypeMismatch] if the pattern is not a solid
       color pattern.
   */
   cairo.types.Status getRgba(out double red, out double green, out double blue, out double alpha)
@@ -272,14 +272,14 @@ class Pattern : gobject.boxed.Boxed
     [cairo.surface.Surface.reference] if the surface is to be retained.
     Params:
       surface =       return value for surface of pattern, or null
-    Returns:     [cairo.types.Status.Success], or
-      [cairo.types.Status.PatternTypeMismatch] if the pattern is not a surface
+    Returns:     [cairo.types.Status.success], or
+      [cairo.types.Status.patternTypeMismatch] if the pattern is not a surface
       pattern.
   */
   cairo.types.Status getSurface(cairo.surface.Surface surface)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_pattern_get_surface(cast(cairo_pattern_t*)cPtr, surface ? cast(cairo_surface_t**)surface.cPtr(No.Dup) : null);
+    _cretval = cairo_pattern_get_surface(cast(cairo_pattern_t*)cPtr, surface ? cast(cairo_surface_t**)surface.cPtr(No.dup) : null);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
@@ -329,8 +329,8 @@ class Pattern : gobject.boxed.Boxed
     See #cairo_extend_t for details on the semantics of each extend
     strategy.
     
-    The default extend mode is [cairo.types.Extend.None] for surface patterns
-    and [cairo.types.Extend.Pad] for gradient patterns.
+    The default extend mode is [cairo.types.Extend.none] for surface patterns
+    and [cairo.types.Extend.pad] for gradient patterns.
     Params:
       extend =       a #cairo_extend_t describing how the area outside of the
         pattern will be drawn
@@ -397,15 +397,15 @@ class Pattern : gobject.boxed.Boxed
   */
   void setMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_pattern_set_matrix(cast(cairo_pattern_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.Dup) : null);
+    cairo_pattern_set_matrix(cast(cairo_pattern_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.dup) : null);
   }
 
   /**
       Checks whether an error has previously occurred for this
     pattern.
-    Returns:     [cairo.types.Status.Success], [cairo.types.Status.NoMemory],
-      [cairo.types.Status.InvalidMatrix], [cairo.types.Status.PatternTypeMismatch],
-      or [cairo.types.Status.InvalidMeshConstruction].
+    Returns:     [cairo.types.Status.success], [cairo.types.Status.noMemory],
+      [cairo.types.Status.invalidMatrix], [cairo.types.Status.patternTypeMismatch],
+      or [cairo.types.Status.invalidMeshConstruction].
   */
   cairo.types.Status status()
   {

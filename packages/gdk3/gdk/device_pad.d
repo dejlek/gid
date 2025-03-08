@@ -8,7 +8,7 @@ import gid.gid;
 
 /**
     #GdkDevicePad is an interface implemented by devices of type
-  [gdk.types.InputSource.TabletPad], it allows querying the features provided
+  [gdk.types.InputSource.tabletPad], it allows querying the features provided
   by the pad device.
   
   Tablet pads may contain one or more groups, each containing a subset

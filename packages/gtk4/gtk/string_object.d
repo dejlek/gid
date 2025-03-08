@@ -16,7 +16,7 @@ import gtk.types;
 class StringObject : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,9 +41,9 @@ class StringObject : gobject.object.ObjectG
   this(string string_)
   {
     GtkStringObject* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString(No.alloc);
     _cretval = gtk_string_object_new(_string_);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -54,7 +54,7 @@ class StringObject : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_string_object_get_string(cast(GtkStringObject*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 }

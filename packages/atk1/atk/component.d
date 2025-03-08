@@ -229,9 +229,9 @@ interface Component
     Connect to BoundsChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectBoundsChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectBoundsChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : BoundsChangedCallbackDlg) || is(T : BoundsChangedCallbackFunc));
   }

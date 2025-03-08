@@ -14,15 +14,15 @@ class RTSPUrl : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstRTSPUrl.sizeof), Yes.Take);
+    super(safeMalloc(GstRTSPUrl.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -60,35 +60,35 @@ class RTSPUrl : gobject.boxed.Boxed
 
   @property string user()
   {
-    return (cast(GstRTSPUrl*)cPtr).user.fromCString(No.Free);
+    return (cast(GstRTSPUrl*)cPtr).user.fromCString(No.free);
   }
 
   @property void user(string propval)
   {
     safeFree(cast(void*)(cast(GstRTSPUrl*)cPtr).user);
-    (cast(GstRTSPUrl*)cPtr).user = propval.toCString(Yes.Alloc);
+    (cast(GstRTSPUrl*)cPtr).user = propval.toCString(Yes.alloc);
   }
 
   @property string passwd()
   {
-    return (cast(GstRTSPUrl*)cPtr).passwd.fromCString(No.Free);
+    return (cast(GstRTSPUrl*)cPtr).passwd.fromCString(No.free);
   }
 
   @property void passwd(string propval)
   {
     safeFree(cast(void*)(cast(GstRTSPUrl*)cPtr).passwd);
-    (cast(GstRTSPUrl*)cPtr).passwd = propval.toCString(Yes.Alloc);
+    (cast(GstRTSPUrl*)cPtr).passwd = propval.toCString(Yes.alloc);
   }
 
   @property string host()
   {
-    return (cast(GstRTSPUrl*)cPtr).host.fromCString(No.Free);
+    return (cast(GstRTSPUrl*)cPtr).host.fromCString(No.free);
   }
 
   @property void host(string propval)
   {
     safeFree(cast(void*)(cast(GstRTSPUrl*)cPtr).host);
-    (cast(GstRTSPUrl*)cPtr).host = propval.toCString(Yes.Alloc);
+    (cast(GstRTSPUrl*)cPtr).host = propval.toCString(Yes.alloc);
   }
 
   @property ushort port()
@@ -103,24 +103,24 @@ class RTSPUrl : gobject.boxed.Boxed
 
   @property string abspath()
   {
-    return (cast(GstRTSPUrl*)cPtr).abspath.fromCString(No.Free);
+    return (cast(GstRTSPUrl*)cPtr).abspath.fromCString(No.free);
   }
 
   @property void abspath(string propval)
   {
     safeFree(cast(void*)(cast(GstRTSPUrl*)cPtr).abspath);
-    (cast(GstRTSPUrl*)cPtr).abspath = propval.toCString(Yes.Alloc);
+    (cast(GstRTSPUrl*)cPtr).abspath = propval.toCString(Yes.alloc);
   }
 
   @property string query()
   {
-    return (cast(GstRTSPUrl*)cPtr).query.fromCString(No.Free);
+    return (cast(GstRTSPUrl*)cPtr).query.fromCString(No.free);
   }
 
   @property void query(string propval)
   {
     safeFree(cast(void*)(cast(GstRTSPUrl*)cPtr).query);
-    (cast(GstRTSPUrl*)cPtr).query = propval.toCString(Yes.Alloc);
+    (cast(GstRTSPUrl*)cPtr).query = propval.toCString(Yes.alloc);
   }
 
   /**
@@ -131,7 +131,7 @@ class RTSPUrl : gobject.boxed.Boxed
   {
     GstRTSPUrl* _cretval;
     _cretval = gst_rtsp_url_copy(cast(const(GstRTSPUrl)*)cPtr);
-    auto _retval = _cretval ? new gstrtsp.rtspurl.RTSPUrl(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gstrtsp.rtspurl.RTSPUrl(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class RTSPUrl : gobject.boxed.Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -190,7 +190,7 @@ class RTSPUrl : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_rtsp_url_get_request_uri(cast(const(GstRTSPUrl)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -205,9 +205,9 @@ class RTSPUrl : gobject.boxed.Boxed
   string getRequestUriWithControl(string controlPath)
   {
     char* _cretval;
-    const(char)* _controlPath = controlPath.toCString(No.Alloc);
+    const(char)* _controlPath = controlPath.toCString(No.alloc);
     _cretval = gst_rtsp_url_get_request_uri_with_control(cast(const(GstRTSPUrl)*)cPtr, _controlPath);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -236,11 +236,11 @@ class RTSPUrl : gobject.boxed.Boxed
   static gstrtsp.types.RTSPResult parse(string urlstr, out gstrtsp.rtspurl.RTSPUrl url)
   {
     GstRTSPResult _cretval;
-    const(char)* _urlstr = urlstr.toCString(No.Alloc);
+    const(char)* _urlstr = urlstr.toCString(No.alloc);
     GstRTSPUrl* _url;
     _cretval = gst_rtsp_url_parse(_urlstr, &_url);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    url = new gstrtsp.rtspurl.RTSPUrl(cast(void*)_url, Yes.Take);
+    url = new gstrtsp.rtspurl.RTSPUrl(cast(void*)_url, Yes.take);
     return _retval;
   }
 }

@@ -37,12 +37,12 @@ import soup.types;
 class Cookie : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -79,7 +79,7 @@ class Cookie : gobject.boxed.Boxed
     [soup.cookie.Cookie.setExpires].)
     
     As of version 3.4.0 the default value of a cookie's same-site-policy
-    is [soup.types.SameSitePolicy.Lax].
+    is [soup.types.SameSitePolicy.lax].
     Params:
       name =       cookie name
       value =       cookie value
@@ -91,12 +91,12 @@ class Cookie : gobject.boxed.Boxed
   this(string name, string value, string domain, string path, int maxAge)
   {
     SoupCookie* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
-    const(char)* _domain = domain.toCString(No.Alloc);
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _value = value.toCString(No.alloc);
+    const(char)* _domain = domain.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.alloc);
     _cretval = soup_cookie_new(_name, _value, _domain, _path, maxAge);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -112,7 +112,7 @@ class Cookie : gobject.boxed.Boxed
   bool appliesToUri(glib.uri.Uri uri)
   {
     bool _retval;
-    _retval = soup_cookie_applies_to_uri(cast(SoupCookie*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null);
+    _retval = soup_cookie_applies_to_uri(cast(SoupCookie*)cPtr, uri ? cast(GUri*)uri.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class Cookie : gobject.boxed.Boxed
   {
     SoupCookie* _cretval;
     _cretval = soup_cookie_copy(cast(SoupCookie*)cPtr);
-    auto _retval = _cretval ? new soup.cookie.Cookie(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new soup.cookie.Cookie(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class Cookie : gobject.boxed.Boxed
   bool domainMatches(string host)
   {
     bool _retval;
-    const(char)* _host = host.toCString(No.Alloc);
+    const(char)* _host = host.toCString(No.alloc);
     _retval = soup_cookie_domain_matches(cast(SoupCookie*)cPtr, _host);
     return _retval;
   }
@@ -157,7 +157,7 @@ class Cookie : gobject.boxed.Boxed
   bool equal(soup.cookie.Cookie cookie2)
   {
     bool _retval;
-    _retval = soup_cookie_equal(cast(SoupCookie*)cPtr, cookie2 ? cast(SoupCookie*)cookie2.cPtr(No.Dup) : null);
+    _retval = soup_cookie_equal(cast(SoupCookie*)cPtr, cookie2 ? cast(SoupCookie*)cookie2.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class Cookie : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = soup_cookie_get_domain(cast(SoupCookie*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class Cookie : gobject.boxed.Boxed
   {
     GDateTime* _cretval;
     _cretval = soup_cookie_get_expires(cast(SoupCookie*)cPtr);
-    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class Cookie : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = soup_cookie_get_name(cast(SoupCookie*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class Cookie : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = soup_cookie_get_path(cast(SoupCookie*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -252,7 +252,7 @@ class Cookie : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = soup_cookie_get_value(cast(SoupCookie*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class Cookie : gobject.boxed.Boxed
   */
   void setDomain(string domain)
   {
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString(No.alloc);
     soup_cookie_set_domain(cast(SoupCookie*)cPtr, _domain);
   }
 
@@ -279,7 +279,7 @@ class Cookie : gobject.boxed.Boxed
   */
   void setExpires(glib.date_time.DateTime expires)
   {
-    soup_cookie_set_expires(cast(SoupCookie*)cPtr, expires ? cast(GDateTime*)expires.cPtr(No.Dup) : null);
+    soup_cookie_set_expires(cast(SoupCookie*)cPtr, expires ? cast(GDateTime*)expires.cPtr(No.dup) : null);
   }
 
   /**
@@ -322,7 +322,7 @@ class Cookie : gobject.boxed.Boxed
   */
   void setName(string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     soup_cookie_set_name(cast(SoupCookie*)cPtr, _name);
   }
 
@@ -333,7 +333,7 @@ class Cookie : gobject.boxed.Boxed
   */
   void setPath(string path)
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     soup_cookie_set_path(cast(SoupCookie*)cPtr, _path);
   }
 
@@ -369,7 +369,7 @@ class Cookie : gobject.boxed.Boxed
   */
   void setValue(string value)
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.alloc);
     soup_cookie_set_value(cast(SoupCookie*)cPtr, _value);
   }
 
@@ -382,7 +382,7 @@ class Cookie : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = soup_cookie_to_cookie_header(cast(SoupCookie*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -396,7 +396,7 @@ class Cookie : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = soup_cookie_to_set_cookie_header(cast(SoupCookie*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -413,7 +413,7 @@ class Cookie : gobject.boxed.Boxed
     of the cookie.
     
     As of version 3.4.0 the default value of a cookie's same-site-policy
-    is [soup.types.SameSitePolicy.Lax].
+    is [soup.types.SameSitePolicy.lax].
     Params:
       header =       a cookie string (eg, the value of a Set-Cookie header)
       origin =       origin of the cookie
@@ -424,9 +424,9 @@ class Cookie : gobject.boxed.Boxed
   static soup.cookie.Cookie parse(string header, glib.uri.Uri origin = null)
   {
     SoupCookie* _cretval;
-    const(char)* _header = header.toCString(No.Alloc);
-    _cretval = soup_cookie_parse(_header, origin ? cast(GUri*)origin.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new soup.cookie.Cookie(cast(void*)_cretval, Yes.Take) : null;
+    const(char)* _header = header.toCString(No.alloc);
+    _cretval = soup_cookie_parse(_header, origin ? cast(GUri*)origin.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new soup.cookie.Cookie(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

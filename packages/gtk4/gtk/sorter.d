@@ -32,7 +32,7 @@ import gtk.types;
 class Sorter : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -87,14 +87,14 @@ class Sorter : gobject.object.ObjectG
     Params:
       item1 =       first item to compare
       item2 =       second item to compare
-    Returns:     [gtk.types.Ordering.Equal] if item1 == item2,
-        [gtk.types.Ordering.Smaller] if item1 < item2,
-        [gtk.types.Ordering.Larger] if item1 > item2
+    Returns:     [gtk.types.Ordering.equal] if item1 == item2,
+        [gtk.types.Ordering.smaller] if item1 < item2,
+        [gtk.types.Ordering.larger] if item1 > item2
   */
   gtk.types.Ordering compare(gobject.object.ObjectG item1, gobject.object.ObjectG item2)
   {
     GtkOrdering _cretval;
-    _cretval = gtk_sorter_compare(cast(GtkSorter*)cPtr, item1 ? cast(ObjectC*)item1.cPtr(No.Dup) : null, item2 ? cast(ObjectC*)item2.cPtr(No.Dup) : null);
+    _cretval = gtk_sorter_compare(cast(GtkSorter*)cPtr, item1 ? cast(ObjectC*)item1.cPtr(No.dup) : null, item2 ? cast(ObjectC*)item2.cPtr(No.dup) : null);
     gtk.types.Ordering _retval = cast(gtk.types.Ordering)_cretval;
     return _retval;
   }
@@ -143,10 +143,10 @@ class Sorter : gobject.object.ObjectG
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

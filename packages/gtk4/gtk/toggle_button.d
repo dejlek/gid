@@ -49,7 +49,7 @@ import gtk.types;
   
   ## Accessibility
   
-  [gtk.toggle_button.ToggleButton] uses the [gtk.types.AccessibleRole.ToggleButton] role.
+  [gtk.toggle_button.ToggleButton] uses the [gtk.types.AccessibleRole.toggleButton] role.
   
   ## Creating two [gtk.toggle_button.ToggleButton] widgets.
   
@@ -96,7 +96,7 @@ import gtk.types;
 class ToggleButton : gtk.button.Button
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -122,7 +122,7 @@ class ToggleButton : gtk.button.Button
   {
     GtkWidget* _cretval;
     _cretval = gtk_toggle_button_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -134,9 +134,9 @@ class ToggleButton : gtk.button.Button
   static gtk.toggle_button.ToggleButton newWithLabel(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.alloc);
     _cretval = gtk_toggle_button_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -153,9 +153,9 @@ class ToggleButton : gtk.button.Button
   static gtk.toggle_button.ToggleButton newWithMnemonic(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.alloc);
     _cretval = gtk_toggle_button_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class ToggleButton : gtk.button.Button
   */
   void setGroup(gtk.toggle_button.ToggleButton group = null)
   {
-    gtk_toggle_button_set_group(cast(GtkToggleButton*)cPtr, group ? cast(GtkToggleButton*)group.cPtr(No.Dup) : null);
+    gtk_toggle_button_set_group(cast(GtkToggleButton*)cPtr, group ? cast(GtkToggleButton*)group.cPtr(No.dup) : null);
   }
 
   /**
@@ -237,10 +237,10 @@ class ToggleButton : gtk.button.Button
     Connect to Toggled signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToggled(T)(T callback, Flag!"After" after = No.After)
+  ulong connectToggled(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ToggledCallbackDlg) || is(T : ToggledCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

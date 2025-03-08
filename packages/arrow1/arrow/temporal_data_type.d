@@ -10,7 +10,7 @@ import gid.gid;
 class TemporalDataType : arrow.fixed_width_data_type.FixedWidthDataType
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

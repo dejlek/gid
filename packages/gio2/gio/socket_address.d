@@ -18,7 +18,7 @@ import gobject.object;
 class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConnectable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,7 +49,7 @@ class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConne
   {
     GSocketAddress* _cretval;
     _cretval = g_socket_address_new_from_native(native, len);
-    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -83,9 +83,9 @@ class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConne
       Converts a #GSocketAddress to a native struct sockaddr, which can
     be passed to low-level functions like connect() or bind().
     
-    If not enough space is available, a [gio.types.IOErrorEnum.NoSpace] error
+    If not enough space is available, a [gio.types.IOErrorEnum.noSpace] error
     is returned. If the address type is not known on the system
-    then a [gio.types.IOErrorEnum.NotSupported] error is returned.
+    then a [gio.types.IOErrorEnum.notSupported] error is returned.
     Params:
       dest =       a pointer to a memory location that will contain the native
         struct sockaddr

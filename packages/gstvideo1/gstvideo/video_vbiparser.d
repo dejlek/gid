@@ -13,12 +13,12 @@ import gstvideo.types;
 class VideoVBIParser : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -46,7 +46,7 @@ class VideoVBIParser : gobject.boxed.Boxed
   {
     GstVideoVBIParser* _cretval;
     _cretval = gst_video_vbi_parser_new(format, pixelWidth);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */
@@ -54,7 +54,7 @@ class VideoVBIParser : gobject.boxed.Boxed
   {
     GstVideoVBIParser* _cretval;
     _cretval = gst_video_vbi_parser_copy(cast(const(GstVideoVBIParser)*)cPtr);
-    auto _retval = _cretval ? new gstvideo.video_vbiparser.VideoVBIParser(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gstvideo.video_vbiparser.VideoVBIParser(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -62,8 +62,8 @@ class VideoVBIParser : gobject.boxed.Boxed
       Parse the line provided previously by [gstvideo.video_vbiparser.VideoVBIParser.addLine].
     Params:
       anc =       a #GstVideoAncillary to start the eventual ancillary data
-    Returns:     [gstvideo.types.VideoVBIParserResult.Ok] if ancillary data was found and
-      anc was filled. [gstvideo.types.VideoVBIParserResult.Done] if there wasn't any
+    Returns:     [gstvideo.types.VideoVBIParserResult.ok] if ancillary data was found and
+      anc was filled. [gstvideo.types.VideoVBIParserResult.done] if there wasn't any
       data.
   */
   gstvideo.types.VideoVBIParserResult getAncillary(out gstvideo.types.VideoAncillary anc)

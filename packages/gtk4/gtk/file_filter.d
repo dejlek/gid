@@ -61,7 +61,7 @@ import gtk.types;
 class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -100,7 +100,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_filter_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -115,8 +115,8 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   static gtk.file_filter.FileFilter newFromGvariant(glib.variant.VariantG variant)
   {
     GtkFileFilter* _cretval;
-    _cretval = gtk_file_filter_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, Yes.Take);
+    _cretval = gtk_file_filter_new_from_gvariant(variant ? cast(VariantC*)variant.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   */
   void addMimeType(string mimeType)
   {
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString(No.alloc);
     gtk_file_filter_add_mime_type(cast(GtkFileFilter*)cPtr, _mimeType);
   }
 
@@ -142,7 +142,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   */
   void addPattern(string pattern)
   {
-    const(char)* _pattern = pattern.toCString(No.Alloc);
+    const(char)* _pattern = pattern.toCString(No.alloc);
     gtk_file_filter_add_pattern(cast(GtkFileFilter*)cPtr, _pattern);
   }
 
@@ -171,7 +171,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   */
   void addSuffix(string suffix)
   {
-    const(char)* _suffix = suffix.toCString(No.Alloc);
+    const(char)* _suffix = suffix.toCString(No.alloc);
     gtk_file_filter_add_suffix(cast(GtkFileFilter*)cPtr, _suffix);
   }
 
@@ -197,7 +197,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString(No.free);
     }
     return _retval;
   }
@@ -212,7 +212,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_file_filter_get_name(cast(GtkFileFilter*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   */
   void setName(string name = null)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gtk_file_filter_set_name(cast(GtkFileFilter*)cPtr, _name);
   }
 
@@ -239,7 +239,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   {
     VariantC* _cretval;
     _cretval = gtk_file_filter_to_gvariant(cast(GtkFileFilter*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
     return _retval;
   }
 }

@@ -15,7 +15,7 @@ import gobject.object;
 class Info : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -38,17 +38,17 @@ class Info : gobject.object.ObjectG
     auto _endpoints = gListFromD!(arrowflight.endpoint.Endpoint)(endpoints);
     scope(exit) containerFree!(GList*, arrowflight.endpoint.Endpoint, GidOwnership.None)(_endpoints);
     GError *_err;
-    _cretval = gaflight_info_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, descriptor ? cast(GAFlightDescriptor*)descriptor.cPtr(No.Dup) : null, _endpoints, totalRecords, totalBytes, &_err);
+    _cretval = gaflight_info_new(schema ? cast(GArrowSchema*)schema.cPtr(No.dup) : null, descriptor ? cast(GAFlightDescriptor*)descriptor.cPtr(No.dup) : null, _endpoints, totalRecords, totalBytes, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */
   bool equal(arrowflight.info.Info otherInfo)
   {
     bool _retval;
-    _retval = gaflight_info_equal(cast(GAFlightInfo*)cPtr, otherInfo ? cast(GAFlightInfo*)otherInfo.cPtr(No.Dup) : null);
+    _retval = gaflight_info_equal(cast(GAFlightInfo*)cPtr, otherInfo ? cast(GAFlightInfo*)otherInfo.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -57,7 +57,7 @@ class Info : gobject.object.ObjectG
   {
     GAFlightDescriptor* _cretval;
     _cretval = gaflight_info_get_descriptor(cast(GAFlightInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrowflight.descriptor.Descriptor)(cast(GAFlightDescriptor*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowflight.descriptor.Descriptor)(cast(GAFlightDescriptor*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -75,10 +75,10 @@ class Info : gobject.object.ObjectG
   {
     GArrowSchema* _cretval;
     GError *_err;
-    _cretval = gaflight_info_get_schema(cast(GAFlightInfo*)cPtr, options ? cast(GArrowReadOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = gaflight_info_get_schema(cast(GAFlightInfo*)cPtr, options ? cast(GArrowReadOptions*)options.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.take);
     return _retval;
   }
 

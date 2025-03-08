@@ -11,7 +11,7 @@ import gid.gid;
 class FilterNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class FilterNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   this(arrow.expression.Expression expression)
   {
     GArrowFilterNodeOptions* _cretval;
-    _cretval = garrow_filter_node_options_new(expression ? cast(GArrowExpression*)expression.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_filter_node_options_new(expression ? cast(GArrowExpression*)expression.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 }

@@ -62,7 +62,7 @@ import gtk.types;
 class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Buildable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -97,7 +97,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   {
     GtkRecentFilter* _cretval;
     _cretval = gtk_recent_filter_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -119,7 +119,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   */
   void addApplication(string application)
   {
-    const(char)* _application = application.toCString(No.Alloc);
+    const(char)* _application = application.toCString(No.alloc);
     gtk_recent_filter_add_application(cast(GtkRecentFilter*)cPtr, _application);
   }
 
@@ -141,7 +141,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
     {
       auto _dlg = cast(gtk.types.RecentFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(filterInfo ? new gtk.recent_filter_info.RecentFilterInfo(cast(void*)filterInfo, No.Take) : null);
+      bool _retval = (*_dlg)(filterInfo ? new gtk.recent_filter_info.RecentFilterInfo(cast(void*)filterInfo, No.take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -159,7 +159,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   */
   void addGroup(string group)
   {
-    const(char)* _group = group.toCString(No.Alloc);
+    const(char)* _group = group.toCString(No.alloc);
     gtk_recent_filter_add_group(cast(GtkRecentFilter*)cPtr, _group);
   }
 
@@ -170,7 +170,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   */
   void addMimeType(string mimeType)
   {
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString(No.alloc);
     gtk_recent_filter_add_mime_type(cast(GtkRecentFilter*)cPtr, _mimeType);
   }
 
@@ -182,7 +182,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   */
   void addPattern(string pattern)
   {
-    const(char)* _pattern = pattern.toCString(No.Alloc);
+    const(char)* _pattern = pattern.toCString(No.alloc);
     gtk_recent_filter_add_pattern(cast(GtkRecentFilter*)cPtr, _pattern);
   }
 
@@ -227,7 +227,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   {
     const(char)* _cretval;
     _cretval = gtk_recent_filter_get_name(cast(GtkRecentFilter*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -258,7 +258,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   */
   void setName(string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gtk_recent_filter_set_name(cast(GtkRecentFilter*)cPtr, _name);
   }
 }

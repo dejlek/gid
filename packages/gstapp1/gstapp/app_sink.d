@@ -55,7 +55,7 @@ import gstbase.base_sink;
 class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -92,7 +92,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   {
     GstCaps* _cretval;
     _cretval = gst_app_sink_get_caps(cast(GstAppSink*)cPtr);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   {
     GstSample* _cretval;
     _cretval = gst_app_sink_pull_preroll(cast(GstAppSink*)cPtr);
-    auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -231,7 +231,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   {
     GstSample* _cretval;
     _cretval = gst_app_sink_pull_sample(cast(GstAppSink*)cPtr);
-    auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -258,7 +258,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   void setCaps(gst.caps.Caps caps = null)
   {
-    gst_app_sink_set_caps(cast(GstAppSink*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    gst_app_sink_set_caps(cast(GstAppSink*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null);
   }
 
   /**
@@ -362,7 +362,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   {
     GstSample* _cretval;
     _cretval = gst_app_sink_try_pull_preroll(cast(GstAppSink*)cPtr, timeout);
-    auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -388,7 +388,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   {
     GstSample* _cretval;
     _cretval = gst_app_sink_try_pull_sample(cast(GstAppSink*)cPtr, timeout);
-    auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -410,10 +410,10 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
     Connect to Eos signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEos(T)(T callback, Flag!"After" after = No.After)
+  ulong connectEos(T)(T callback, Flag!"after" after = No.after)
   if (is(T : EosCallbackDlg) || is(T : EosCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -456,10 +456,10 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
     Connect to NewPreroll signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNewPreroll(T)(T callback, Flag!"After" after = No.After)
+  ulong connectNewPreroll(T)(T callback, Flag!"after" after = No.after)
   if (is(T : NewPrerollCallbackDlg) || is(T : NewPrerollCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -504,10 +504,10 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
     Connect to NewSample signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNewSample(T)(T callback, Flag!"After" after = No.After)
+  ulong connectNewSample(T)(T callback, Flag!"after" after = No.after)
   if (is(T : NewSampleCallbackDlg) || is(T : NewSampleCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -558,10 +558,10 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
     Connect to NewSerializedEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNewSerializedEvent(T)(T callback, Flag!"After" after = No.After)
+  ulong connectNewSerializedEvent(T)(T callback, Flag!"after" after = No.after)
   if (is(T : NewSerializedEventCallbackDlg) || is(T : NewSerializedEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -600,10 +600,10 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
     Connect to ProposeAllocation signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectProposeAllocation(T)(T callback, Flag!"After" after = No.After)
+  ulong connectProposeAllocation(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ProposeAllocationCallbackDlg) || is(T : ProposeAllocationCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -656,10 +656,10 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
     Connect to PullPreroll signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPullPreroll(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPullPreroll(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PullPrerollCallbackDlg) || is(T : PullPrerollCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -706,10 +706,10 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
     Connect to PullSample signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPullSample(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPullSample(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PullSampleCallbackDlg) || is(T : PullSampleCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -765,10 +765,10 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
     Connect to TryPullObject signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTryPullObject(T)(T callback, Flag!"After" after = No.After)
+  ulong connectTryPullObject(T)(T callback, Flag!"after" after = No.after)
   if (is(T : TryPullObjectCallbackDlg) || is(T : TryPullObjectCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -823,10 +823,10 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
     Connect to TryPullPreroll signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTryPullPreroll(T)(T callback, Flag!"After" after = No.After)
+  ulong connectTryPullPreroll(T)(T callback, Flag!"after" after = No.after)
   if (is(T : TryPullPrerollCallbackDlg) || is(T : TryPullPrerollCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -876,10 +876,10 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
     Connect to TryPullSample signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTryPullSample(T)(T callback, Flag!"After" after = No.After)
+  ulong connectTryPullSample(T)(T callback, Flag!"after" after = No.after)
   if (is(T : TryPullSampleCallbackDlg) || is(T : TryPullSampleCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

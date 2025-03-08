@@ -130,7 +130,7 @@ import gsk.types;
 class GLShader : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -155,8 +155,8 @@ class GLShader : gobject.object.ObjectG
   static gsk.glshader.GLShader newFromBytes(glib.bytes.Bytes sourcecode)
   {
     GskGLShader* _cretval;
-    _cretval = gsk_gl_shader_new_from_bytes(sourcecode ? cast(GBytes*)sourcecode.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, Yes.Take);
+    _cretval = gsk_gl_shader_new_from_bytes(sourcecode ? cast(GBytes*)sourcecode.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -170,9 +170,9 @@ class GLShader : gobject.object.ObjectG
   static gsk.glshader.GLShader newFromResource(string resourcePath)
   {
     GskGLShader* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString(No.alloc);
     _cretval = gsk_gl_shader_new_from_resource(_resourcePath);
-    auto _retval = ObjectG.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class GLShader : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gsk_gl_shader_compile(cast(GskGLShader*)cPtr, renderer ? cast(GskRenderer*)renderer.cPtr(No.Dup) : null, &_err);
+    _retval = gsk_gl_shader_compile(cast(GskGLShader*)cPtr, renderer ? cast(GskRenderer*)renderer.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -213,7 +213,7 @@ class GLShader : gobject.object.ObjectG
   int findUniformByName(string name)
   {
     int _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _retval = gsk_gl_shader_find_uniform_by_name(cast(GskGLShader*)cPtr, _name);
     return _retval;
   }
@@ -230,7 +230,7 @@ class GLShader : gobject.object.ObjectG
   bool getArgBool(glib.bytes.Bytes args, int idx)
   {
     bool _retval;
-    _retval = gsk_gl_shader_get_arg_bool(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.Dup) : null, idx);
+    _retval = gsk_gl_shader_get_arg_bool(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.dup) : null, idx);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class GLShader : gobject.object.ObjectG
   float getArgFloat(glib.bytes.Bytes args, int idx)
   {
     float _retval;
-    _retval = gsk_gl_shader_get_arg_float(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.Dup) : null, idx);
+    _retval = gsk_gl_shader_get_arg_float(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.dup) : null, idx);
     return _retval;
   }
 
@@ -262,7 +262,7 @@ class GLShader : gobject.object.ObjectG
   int getArgInt(glib.bytes.Bytes args, int idx)
   {
     int _retval;
-    _retval = gsk_gl_shader_get_arg_int(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.Dup) : null, idx);
+    _retval = gsk_gl_shader_get_arg_int(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.dup) : null, idx);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class GLShader : gobject.object.ObjectG
   uint getArgUint(glib.bytes.Bytes args, int idx)
   {
     uint _retval;
-    _retval = gsk_gl_shader_get_arg_uint(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.Dup) : null, idx);
+    _retval = gsk_gl_shader_get_arg_uint(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.dup) : null, idx);
     return _retval;
   }
 
@@ -293,7 +293,7 @@ class GLShader : gobject.object.ObjectG
   */
   void getArgVec2(glib.bytes.Bytes args, int idx, graphene.vec2.Vec2 outValue)
   {
-    gsk_gl_shader_get_arg_vec2(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.Dup) : null, idx, outValue ? cast(graphene_vec2_t*)outValue.cPtr(No.Dup) : null);
+    gsk_gl_shader_get_arg_vec2(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.dup) : null, idx, outValue ? cast(graphene_vec2_t*)outValue.cPtr(No.dup) : null);
   }
 
   /**
@@ -307,7 +307,7 @@ class GLShader : gobject.object.ObjectG
   */
   void getArgVec3(glib.bytes.Bytes args, int idx, graphene.vec3.Vec3 outValue)
   {
-    gsk_gl_shader_get_arg_vec3(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.Dup) : null, idx, outValue ? cast(graphene_vec3_t*)outValue.cPtr(No.Dup) : null);
+    gsk_gl_shader_get_arg_vec3(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.dup) : null, idx, outValue ? cast(graphene_vec3_t*)outValue.cPtr(No.dup) : null);
   }
 
   /**
@@ -321,7 +321,7 @@ class GLShader : gobject.object.ObjectG
   */
   void getArgVec4(glib.bytes.Bytes args, int idx, graphene.vec4.Vec4 outValue)
   {
-    gsk_gl_shader_get_arg_vec4(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.Dup) : null, idx, outValue ? cast(graphene_vec4_t*)outValue.cPtr(No.Dup) : null);
+    gsk_gl_shader_get_arg_vec4(cast(GskGLShader*)cPtr, args ? cast(GBytes*)args.cPtr(No.dup) : null, idx, outValue ? cast(graphene_vec4_t*)outValue.cPtr(No.dup) : null);
   }
 
   /**
@@ -370,7 +370,7 @@ class GLShader : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gsk_gl_shader_get_resource(cast(GskGLShader*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -382,7 +382,7 @@ class GLShader : gobject.object.ObjectG
   {
     GBytes* _cretval;
     _cretval = gsk_gl_shader_get_source(cast(GskGLShader*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -396,7 +396,7 @@ class GLShader : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gsk_gl_shader_get_uniform_name(cast(GskGLShader*)cPtr, idx);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 

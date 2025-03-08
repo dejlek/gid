@@ -56,7 +56,7 @@ import gtk.types;
 class StyleContext : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -93,7 +93,7 @@ class StyleContext : gobject.object.ObjectG
   */
   static void addProviderForDisplay(gdk.display.Display display, gtk.style_provider.StyleProvider provider, uint priority)
   {
-    gtk_style_context_add_provider_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, priority);
+    gtk_style_context_add_provider_for_display(display ? cast(GdkDisplay*)display.cPtr(No.dup) : null, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.dup) : null, priority);
   }
 
   /**
@@ -104,7 +104,7 @@ class StyleContext : gobject.object.ObjectG
   */
   static void removeProviderForDisplay(gdk.display.Display display, gtk.style_provider.StyleProvider provider)
   {
-    gtk_style_context_remove_provider_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_style_context_remove_provider_for_display(display ? cast(GdkDisplay*)display.cPtr(No.dup) : null, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.dup) : null);
   }
 
   /**
@@ -130,7 +130,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void addClass(string className)
   {
-    const(char)* _className = className.toCString(No.Alloc);
+    const(char)* _className = className.toCString(No.alloc);
     gtk_style_context_add_class(cast(GtkStyleContext*)cPtr, _className);
   }
 
@@ -157,7 +157,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void addProvider(gtk.style_provider.StyleProvider provider, uint priority)
   {
-    gtk_style_context_add_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, priority);
+    gtk_style_context_add_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.dup) : null, priority);
   }
 
   /**
@@ -171,7 +171,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GtkBorder _border;
     gtk_style_context_get_border(cast(GtkStyleContext*)cPtr, &_border);
-    border = new gtk.border.Border(cast(void*)&_border, No.Take);
+    border = new gtk.border.Border(cast(void*)&_border, No.take);
   }
 
   /**
@@ -185,7 +185,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GdkRGBA _color;
     gtk_style_context_get_color(cast(GtkStyleContext*)cPtr, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.take);
   }
 
   /**
@@ -198,7 +198,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gtk_style_context_get_display(cast(GtkStyleContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
     return _retval;
   }
 
@@ -213,7 +213,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GtkBorder _margin;
     gtk_style_context_get_margin(cast(GtkStyleContext*)cPtr, &_margin);
-    margin = new gtk.border.Border(cast(void*)&_margin, No.Take);
+    margin = new gtk.border.Border(cast(void*)&_margin, No.take);
   }
 
   /**
@@ -227,7 +227,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GtkBorder _padding;
     gtk_style_context_get_padding(cast(GtkStyleContext*)cPtr, &_padding);
-    padding = new gtk.border.Border(cast(void*)&_padding, No.Take);
+    padding = new gtk.border.Border(cast(void*)&_padding, No.take);
   }
 
   /**
@@ -275,7 +275,7 @@ class StyleContext : gobject.object.ObjectG
   bool hasClass(string className)
   {
     bool _retval;
-    const(char)* _className = className.toCString(No.Alloc);
+    const(char)* _className = className.toCString(No.alloc);
     _retval = gtk_style_context_has_class(cast(GtkStyleContext*)cPtr, _className);
     return _retval;
   }
@@ -292,10 +292,10 @@ class StyleContext : gobject.object.ObjectG
   bool lookupColor(string colorName, out gdk.rgba.RGBA color)
   {
     bool _retval;
-    const(char)* _colorName = colorName.toCString(No.Alloc);
+    const(char)* _colorName = colorName.toCString(No.alloc);
     GdkRGBA _color;
     _retval = gtk_style_context_lookup_color(cast(GtkStyleContext*)cPtr, _colorName, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.take);
     return _retval;
   }
 
@@ -308,7 +308,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void removeClass(string className)
   {
-    const(char)* _className = className.toCString(No.Alloc);
+    const(char)* _className = className.toCString(No.alloc);
     gtk_style_context_remove_class(cast(GtkStyleContext*)cPtr, _className);
   }
 
@@ -319,7 +319,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void removeProvider(gtk.style_provider.StyleProvider provider)
   {
-    gtk_style_context_remove_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_style_context_remove_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.dup) : null);
   }
 
   /**
@@ -369,7 +369,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void setDisplay(gdk.display.Display display)
   {
-    gtk_style_context_set_display(cast(GtkStyleContext*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
+    gtk_style_context_set_display(cast(GtkStyleContext*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.dup) : null);
   }
 
   /**
@@ -417,7 +417,7 @@ class StyleContext : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = gtk_style_context_to_string(cast(GtkStyleContext*)cPtr, flags);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

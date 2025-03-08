@@ -44,7 +44,7 @@ import gtk.widget;
 class MenuToolButton : gtk.tool_button.ToolButton
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -71,9 +71,9 @@ class MenuToolButton : gtk.tool_button.ToolButton
   this(gtk.widget.Widget iconWidget = null, string label = null)
   {
     GtkToolItem* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
-    _cretval = gtk_menu_tool_button_new(iconWidget ? cast(GtkWidget*)iconWidget.cPtr(No.Dup) : null, _label);
-    this(_cretval, No.Take);
+    const(char)* _label = label.toCString(No.alloc);
+    _cretval = gtk_menu_tool_button_new(iconWidget ? cast(GtkWidget*)iconWidget.cPtr(No.dup) : null, _label);
+    this(_cretval, No.take);
   }
 
   /**
@@ -89,9 +89,9 @@ class MenuToolButton : gtk.tool_button.ToolButton
   static gtk.menu_tool_button.MenuToolButton newFromStock(string stockId)
   {
     GtkToolItem* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString(No.alloc);
     _cretval = gtk_menu_tool_button_new_from_stock(_stockId);
-    auto _retval = ObjectG.getDObject!(gtk.menu_tool_button.MenuToolButton)(cast(GtkToolItem*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.menu_tool_button.MenuToolButton)(cast(GtkToolItem*)_cretval, No.take);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_tool_button_get_menu(cast(GtkMenuToolButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
   */
   void setArrowTooltipMarkup(string markup)
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString(No.alloc);
     gtk_menu_tool_button_set_arrow_tooltip_markup(cast(GtkMenuToolButton*)cPtr, _markup);
   }
 
@@ -130,7 +130,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
   */
   void setArrowTooltipText(string text)
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString(No.alloc);
     gtk_menu_tool_button_set_arrow_tooltip_text(cast(GtkMenuToolButton*)cPtr, _text);
   }
 
@@ -142,7 +142,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
   */
   void setMenu(gtk.widget.Widget menu)
   {
-    gtk_menu_tool_button_set_menu(cast(GtkMenuToolButton*)cPtr, menu ? cast(GtkWidget*)menu.cPtr(No.Dup) : null);
+    gtk_menu_tool_button_set_menu(cast(GtkMenuToolButton*)cPtr, menu ? cast(GtkWidget*)menu.cPtr(No.dup) : null);
   }
 
   /**
@@ -169,10 +169,10 @@ class MenuToolButton : gtk.tool_button.ToolButton
     Connect to ShowMenu signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectShowMenu(T)(T callback, Flag!"After" after = No.After)
+  ulong connectShowMenu(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ShowMenuCallbackDlg) || is(T : ShowMenuCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

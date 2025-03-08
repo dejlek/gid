@@ -14,7 +14,7 @@ import gsk.types;
 class ColorMatrixNode : gsk.render_node.RenderNode
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.ColorMatrixNode");
@@ -41,8 +41,8 @@ class ColorMatrixNode : gsk.render_node.RenderNode
   this(gsk.render_node.RenderNode child, graphene.matrix.Matrix colorMatrix, graphene.vec4.Vec4 colorOffset)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_color_matrix_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, colorMatrix ? cast(const(graphene_matrix_t)*)colorMatrix.cPtr(No.Dup) : null, colorOffset ? cast(const(graphene_vec4_t)*)colorOffset.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gsk_color_matrix_node_new(child ? cast(GskRenderNode*)child.cPtr(No.dup) : null, colorMatrix ? cast(const(graphene_matrix_t)*)colorMatrix.cPtr(No.dup) : null, colorOffset ? cast(const(graphene_vec4_t)*)colorOffset.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -53,7 +53,7 @@ class ColorMatrixNode : gsk.render_node.RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_color_matrix_node_get_child(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -65,7 +65,7 @@ class ColorMatrixNode : gsk.render_node.RenderNode
   {
     const(graphene_matrix_t)* _cretval;
     _cretval = gsk_color_matrix_node_get_color_matrix(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new graphene.matrix.Matrix(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.matrix.Matrix(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class ColorMatrixNode : gsk.render_node.RenderNode
   {
     const(graphene_vec4_t)* _cretval;
     _cretval = gsk_color_matrix_node_get_color_offset(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new graphene.vec4.Vec4(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.vec4.Vec4(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

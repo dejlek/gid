@@ -66,20 +66,20 @@ import gtk.types;
   [gtk.gesture.Gesture.setState] on one will effectively propagate
   the state throughout the group.
   
-  By default, all sequences start out in the [gtk.types.EventSequenceState.None] state,
+  By default, all sequences start out in the [gtk.types.EventSequenceState.none] state,
   sequences in this state trigger the gesture event handler, but event
   propagation will continue unstopped by gestures.
   
-  If a sequence enters into the [gtk.types.EventSequenceState.Denied] state, the gesture
+  If a sequence enters into the [gtk.types.EventSequenceState.denied] state, the gesture
   group will effectively ignore the sequence, letting events go unstopped
   through the gesture, but the "slot" will still remain occupied while
   the touch is active.
   
-  If a sequence enters in the [gtk.types.EventSequenceState.Claimed] state, the gesture
+  If a sequence enters in the [gtk.types.EventSequenceState.claimed] state, the gesture
   group will grab all interaction on the sequence, by:
   
   $(LIST
-    * Setting the same sequence to [gtk.types.EventSequenceState.Denied] on every other
+    * Setting the same sequence to [gtk.types.EventSequenceState.denied] on every other
       gesture group within the widget, and every gesture on parent widgets
       in the propagation chain.
     * Emitting [gtk.gesture.Gesture.cancel] on every gesture in widgets
@@ -87,10 +87,10 @@ import gtk.types;
     * Stopping event propagation after the gesture group handles the event.
   )
     
-  Note: if a sequence is set early to [gtk.types.EventSequenceState.Claimed] on
-  [gdk.types.EventType.TouchBegin]/[gdk.types.EventType.ButtonPress] (so those events are captured before
-  reaching the event widget, this implies [gtk.types.PropagationPhase.Capture]), one similar
-  event will be emulated if the sequence changes to [gtk.types.EventSequenceState.Denied].
+  Note: if a sequence is set early to [gtk.types.EventSequenceState.claimed] on
+  [gdk.types.EventType.touchBegin]/[gdk.types.EventType.buttonPress] (so those events are captured before
+  reaching the event widget, this implies [gtk.types.PropagationPhase.capture]), one similar
+  event will be emulated if the sequence changes to [gtk.types.EventSequenceState.denied].
   This way event coherence is preserved before event propagation is unstopped
   again.
   
@@ -105,14 +105,14 @@ import gtk.types;
   do to enable this support are:
   
   $(LIST
-    * If the gesture has [gtk.types.PropagationPhase.None], ensuring events of type
-      [gdk.types.EventType.TouchpadSwipe] and [gdk.types.EventType.TouchpadPinch] are handled by the [gtk.gesture.Gesture]
+    * If the gesture has [gtk.types.PropagationPhase.none], ensuring events of type
+      [gdk.types.EventType.touchpadSwipe] and [gdk.types.EventType.touchpadPinch] are handled by the [gtk.gesture.Gesture]
   )
 */
 class Gesture : gtk.event_controller.EventController
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -149,7 +149,7 @@ class Gesture : gtk.event_controller.EventController
     bool _retval;
     GdkRectangle _rect;
     _retval = gtk_gesture_get_bounding_box(cast(GtkGesture*)cPtr, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.take);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class Gesture : gtk.event_controller.EventController
   {
     GdkDevice* _cretval;
     _cretval = gtk_gesture_get_device(cast(GtkGesture*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.take);
     return _retval;
   }
 
@@ -212,8 +212,8 @@ class Gesture : gtk.event_controller.EventController
   gdk.event.Event getLastEvent(gdk.event_sequence.EventSequence sequence = null)
   {
     GdkEvent* _cretval;
-    _cretval = gtk_gesture_get_last_event(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, No.Take) : null;
+    _cretval = gtk_gesture_get_last_event(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class Gesture : gtk.event_controller.EventController
   {
     GdkEventSequence* _cretval;
     _cretval = gtk_gesture_get_last_updated_sequence(cast(GtkGesture*)cPtr);
-    auto _retval = _cretval ? new gdk.event_sequence.EventSequence(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.event_sequence.EventSequence(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class Gesture : gtk.event_controller.EventController
   bool getPoint(gdk.event_sequence.EventSequence sequence, out double x, out double y)
   {
     bool _retval;
-    _retval = gtk_gesture_get_point(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
+    _retval = gtk_gesture_get_point(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.dup) : null, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 
@@ -257,7 +257,7 @@ class Gesture : gtk.event_controller.EventController
   gtk.types.EventSequenceState getSequenceState(gdk.event_sequence.EventSequence sequence)
   {
     GtkEventSequenceState _cretval;
-    _cretval = gtk_gesture_get_sequence_state(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null);
+    _cretval = gtk_gesture_get_sequence_state(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.dup) : null);
     gtk.types.EventSequenceState _retval = cast(gtk.types.EventSequenceState)_cretval;
     return _retval;
   }
@@ -292,16 +292,16 @@ class Gesture : gtk.event_controller.EventController
     the same value to the others.
     
     Groups also perform an "implicit grabbing" of sequences, if a
-    [gdk.event_sequence.EventSequence] state is set to [gtk.types.EventSequenceState.Claimed]
+    [gdk.event_sequence.EventSequence] state is set to [gtk.types.EventSequenceState.claimed]
     on one group, every other gesture group attached to the same
     [gtk.widget.Widget] will switch the state for that sequence to
-    [gtk.types.EventSequenceState.Denied].
+    [gtk.types.EventSequenceState.denied].
     Params:
       gesture =       a [gtk.gesture.Gesture]
   */
   void group(gtk.gesture.Gesture gesture)
   {
-    gtk_gesture_group(cast(GtkGesture*)cPtr, gesture ? cast(GtkGesture*)gesture.cPtr(No.Dup) : null);
+    gtk_gesture_group(cast(GtkGesture*)cPtr, gesture ? cast(GtkGesture*)gesture.cPtr(No.dup) : null);
   }
 
   /**
@@ -314,7 +314,7 @@ class Gesture : gtk.event_controller.EventController
   bool handlesSequence(gdk.event_sequence.EventSequence sequence = null)
   {
     bool _retval;
-    _retval = gtk_gesture_handles_sequence(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null);
+    _retval = gtk_gesture_handles_sequence(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -341,7 +341,7 @@ class Gesture : gtk.event_controller.EventController
   bool isGroupedWith(gtk.gesture.Gesture other)
   {
     bool _retval;
-    _retval = gtk_gesture_is_grouped_with(cast(GtkGesture*)cPtr, other ? cast(GtkGesture*)other.cPtr(No.Dup) : null);
+    _retval = gtk_gesture_is_grouped_with(cast(GtkGesture*)cPtr, other ? cast(GtkGesture*)other.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -362,9 +362,9 @@ class Gesture : gtk.event_controller.EventController
   /**
       Sets the state of sequence in gesture.
     
-    Sequences start in state [gtk.types.EventSequenceState.None], and whenever
+    Sequences start in state [gtk.types.EventSequenceState.none], and whenever
     they change state, they can never go back to that state. Likewise,
-    sequences in state [gtk.types.EventSequenceState.Denied] cannot turn back to
+    sequences in state [gtk.types.EventSequenceState.denied] cannot turn back to
     a not denied state. With these rules, the lifetime of an event
     sequence is constrained to the next four:
     
@@ -415,7 +415,7 @@ class Gesture : gtk.event_controller.EventController
   bool setSequenceState(gdk.event_sequence.EventSequence sequence, gtk.types.EventSequenceState state)
   {
     bool _retval;
-    _retval = gtk_gesture_set_sequence_state(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null, state);
+    _retval = gtk_gesture_set_sequence_state(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.dup) : null, state);
     return _retval;
   }
 
@@ -423,9 +423,9 @@ class Gesture : gtk.event_controller.EventController
       Sets the state of all sequences that gesture is currently
     interacting with.
     
-    Sequences start in state [gtk.types.EventSequenceState.None], and whenever
+    Sequences start in state [gtk.types.EventSequenceState.none], and whenever
     they change state, they can never go back to that state. Likewise,
-    sequences in state [gtk.types.EventSequenceState.Denied] cannot turn back to
+    sequences in state [gtk.types.EventSequenceState.denied] cannot turn back to
     a not denied state. With these rules, the lifetime of an event
     sequence is constrained to the next four:
     
@@ -512,10 +512,10 @@ class Gesture : gtk.event_controller.EventController
     Connect to Begin signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectBegin(T)(T callback, Flag!"After" after = No.After)
+  ulong connectBegin(T)(T callback, Flag!"after" after = No.after)
   if (is(T : BeginCallbackDlg) || is(T : BeginCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -558,10 +558,10 @@ class Gesture : gtk.event_controller.EventController
     Connect to Cancel signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCancel(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCancel(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CancelCallbackDlg) || is(T : CancelCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -604,10 +604,10 @@ class Gesture : gtk.event_controller.EventController
     Connect to End signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEnd(T)(T callback, Flag!"After" after = No.After)
+  ulong connectEnd(T)(T callback, Flag!"after" after = No.after)
   if (is(T : EndCallbackDlg) || is(T : EndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -645,10 +645,10 @@ class Gesture : gtk.event_controller.EventController
     Connect to SequenceStateChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSequenceStateChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSequenceStateChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SequenceStateChangedCallbackDlg) || is(T : SequenceStateChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -685,10 +685,10 @@ class Gesture : gtk.event_controller.EventController
     Connect to Update signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUpdate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectUpdate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : UpdateCallbackDlg) || is(T : UpdateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -115,9 +115,9 @@ import gstbase.types;
   set the fixed caps on srcpad, when the format is ensured (e.g.  when
   base class calls subclass' #GstBaseParseClass::set_sink_caps function).
   
-  This base class uses [gst.types.Format.Default] as a meaning of frames. So,
+  This base class uses [gst.types.Format.default_] as a meaning of frames. So,
   subclass conversion routine needs to know that conversion from
-  [gst.types.Format.Time] to [gst.types.Format.Default] must return the
+  [gst.types.Format.time] to [gst.types.Format.default_] must return the
   frame number that can be found from the given byte position.
   
   #GstBaseParse uses subclasses conversion methods also for seeking (or
@@ -159,7 +159,7 @@ import gstbase.types;
 class BaseParse : gst.element.Element
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -243,7 +243,7 @@ class BaseParse : gst.element.Element
   gst.types.FlowReturn finishFrame(gstbase.base_parse_frame.BaseParseFrame frame, int size)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_base_parse_finish_frame(cast(GstBaseParse*)cPtr, frame ? cast(GstBaseParseFrame*)frame.cPtr(No.Dup) : null, size);
+    _cretval = gst_base_parse_finish_frame(cast(GstBaseParse*)cPtr, frame ? cast(GstBaseParseFrame*)frame.cPtr(No.dup) : null, size);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -262,7 +262,7 @@ class BaseParse : gst.element.Element
   */
   void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode)
   {
-    gst_base_parse_merge_tags(cast(GstBaseParse*)cPtr, tags ? cast(GstTagList*)tags.cPtr(No.Dup) : null, mode);
+    gst_base_parse_merge_tags(cast(GstBaseParse*)cPtr, tags ? cast(GstTagList*)tags.cPtr(No.dup) : null, mode);
   }
 
   /**
@@ -278,7 +278,7 @@ class BaseParse : gst.element.Element
   gst.types.FlowReturn pushFrame(gstbase.base_parse_frame.BaseParseFrame frame)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_base_parse_push_frame(cast(GstBaseParse*)cPtr, frame ? cast(GstBaseParseFrame*)frame.cPtr(No.Dup) : null);
+    _cretval = gst_base_parse_push_frame(cast(GstBaseParse*)cPtr, frame ? cast(GstBaseParseFrame*)frame.cPtr(No.dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }

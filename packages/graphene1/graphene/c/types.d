@@ -15,163 +15,163 @@ enum graphene_euler_order_t
       Rotate in the default order; the
       default order is one of the following enumeration values
   */
-  Default = -1,
+  default_ = -1,
 
   /**
       Rotate in the X, Y, and Z order. Deprecated in
       Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SXYZ`
   */
-  Xyz = 0,
+  xyz = 0,
 
   /**
       Rotate in the Y, Z, and X order. Deprecated in
       Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SYZX`
   */
-  Yzx = 1,
+  yzx = 1,
 
   /**
       Rotate in the Z, X, and Y order. Deprecated in
       Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SZXY`
   */
-  Zxy = 2,
+  zxy = 2,
 
   /**
       Rotate in the X, Z, and Y order. Deprecated in
       Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SXZY`
   */
-  Xzy = 3,
+  xzy = 3,
 
   /**
       Rotate in the Y, X, and Z order. Deprecated in
       Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SYXZ`
   */
-  Yxz = 4,
+  yxz = 4,
 
   /**
       Rotate in the Z, Y, and X order. Deprecated in
       Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SZYX`
   */
-  Zyx = 5,
+  zyx = 5,
 
   /**
       Defines a static rotation along the X, Y, and Z axes (Since: 1.10)
   */
-  Sxyz = 6,
+  sxyz = 6,
 
   /**
       Defines a static rotation along the X, Y, and X axes (Since: 1.10)
   */
-  Sxyx = 7,
+  sxyx = 7,
 
   /**
       Defines a static rotation along the X, Z, and Y axes (Since: 1.10)
   */
-  Sxzy = 8,
+  sxzy = 8,
 
   /**
       Defines a static rotation along the X, Z, and X axes (Since: 1.10)
   */
-  Sxzx = 9,
+  sxzx = 9,
 
   /**
       Defines a static rotation along the Y, Z, and X axes (Since: 1.10)
   */
-  Syzx = 10,
+  syzx = 10,
 
   /**
       Defines a static rotation along the Y, Z, and Y axes (Since: 1.10)
   */
-  Syzy = 11,
+  syzy = 11,
 
   /**
       Defines a static rotation along the Y, X, and Z axes (Since: 1.10)
   */
-  Syxz = 12,
+  syxz = 12,
 
   /**
       Defines a static rotation along the Y, X, and Y axes (Since: 1.10)
   */
-  Syxy = 13,
+  syxy = 13,
 
   /**
       Defines a static rotation along the Z, X, and Y axes (Since: 1.10)
   */
-  Szxy = 14,
+  szxy = 14,
 
   /**
       Defines a static rotation along the Z, X, and Z axes (Since: 1.10)
   */
-  Szxz = 15,
+  szxz = 15,
 
   /**
       Defines a static rotation along the Z, Y, and X axes (Since: 1.10)
   */
-  Szyx = 16,
+  szyx = 16,
 
   /**
       Defines a static rotation along the Z, Y, and Z axes (Since: 1.10)
   */
-  Szyz = 17,
+  szyz = 17,
 
   /**
       Defines a relative rotation along the Z, Y, and X axes (Since: 1.10)
   */
-  Rzyx = 18,
+  rzyx = 18,
 
   /**
       Defines a relative rotation along the X, Y, and X axes (Since: 1.10)
   */
-  Rxyx = 19,
+  rxyx = 19,
 
   /**
       Defines a relative rotation along the Y, Z, and X axes (Since: 1.10)
   */
-  Ryzx = 20,
+  ryzx = 20,
 
   /**
       Defines a relative rotation along the X, Z, and X axes (Since: 1.10)
   */
-  Rxzx = 21,
+  rxzx = 21,
 
   /**
       Defines a relative rotation along the X, Z, and Y axes (Since: 1.10)
   */
-  Rxzy = 22,
+  rxzy = 22,
 
   /**
       Defines a relative rotation along the Y, Z, and Y axes (Since: 1.10)
   */
-  Ryzy = 23,
+  ryzy = 23,
 
   /**
       Defines a relative rotation along the Z, X, and Y axes (Since: 1.10)
   */
-  Rzxy = 24,
+  rzxy = 24,
 
   /**
       Defines a relative rotation along the Y, X, and Y axes (Since: 1.10)
   */
-  Ryxy = 25,
+  ryxy = 25,
 
   /**
       Defines a relative rotation along the Y, X, and Z axes (Since: 1.10)
   */
-  Ryxz = 26,
+  ryxz = 26,
 
   /**
       Defines a relative rotation along the Z, X, and Z axes (Since: 1.10)
   */
-  Rzxz = 27,
+  rzxz = 27,
 
   /**
       Defines a relative rotation along the X, Y, and Z axes (Since: 1.10)
   */
-  Rxyz = 28,
+  rxyz = 28,
 
   /**
       Defines a relative rotation along the Z, Y, and Z axes (Since: 1.10)
   */
-  Rzyz = 29,
+  rzyz = 29,
 }
 
 /**
@@ -182,19 +182,19 @@ enum graphene_ray_intersection_kind_t
   /**
       No intersection
   */
-  None = 0,
+  none = 0,
 
   /**
       The ray is entering the intersected
       object
   */
-  Enter = 1,
+  enter = 1,
 
   /**
       The ray is leaving the intersected
       object
   */
-  Leave = 2,
+  leave = 2,
 }
 
 /**

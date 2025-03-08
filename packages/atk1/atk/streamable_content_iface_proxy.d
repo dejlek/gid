@@ -7,7 +7,7 @@ import atk.streamable_content_mixin;
 /// Proxy object for Atk.StreamableContent interface when a GObject has no applicable D binding
 class StreamableContentIfaceProxy : IfaceProxy, atk.streamable_content.StreamableContent
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

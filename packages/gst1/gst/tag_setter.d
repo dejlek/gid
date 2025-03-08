@@ -22,7 +22,7 @@ import gst.types;
   [gst.tag_setter.TagSetter.mergeTags] or [gst.tag_setter.TagSetter.addTags]. Also consider
   setting the #GstTagMergeMode that is used for tag events that arrive at the
   tagsetter element (default mode is to keep existing tags).
-  The application should do that before the element goes to [gst.types.State.Paused].
+  The application should do that before the element goes to [gst.types.State.paused].
   
   Elements implementing the #GstTagSetter interface often have to merge
   any tags received from upstream and the tags set by the application via

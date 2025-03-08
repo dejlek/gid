@@ -65,7 +65,7 @@ import gst.types;
 class Pipeline : gst.bin.Bin
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -92,9 +92,9 @@ class Pipeline : gst.bin.Bin
   this(string name = null)
   {
     GstElement* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_pipeline_new(_name);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -138,7 +138,7 @@ class Pipeline : gst.bin.Bin
   {
     GstBus* _cretval;
     _cretval = gst_pipeline_get_bus(cast(GstPipeline*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class Pipeline : gst.bin.Bin
   {
     GstClock* _cretval;
     _cretval = gst_pipeline_get_pipeline_clock(cast(GstPipeline*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -282,6 +282,6 @@ class Pipeline : gst.bin.Bin
   */
   void useClock(gst.clock.Clock clock = null)
   {
-    gst_pipeline_use_clock(cast(GstPipeline*)cPtr, clock ? cast(GstClock*)clock.cPtr(No.Dup) : null);
+    gst_pipeline_use_clock(cast(GstPipeline*)cPtr, clock ? cast(GstClock*)clock.cPtr(No.dup) : null);
   }
 }

@@ -56,7 +56,7 @@ import gtk.widget;
 class Statusbar : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -82,7 +82,7 @@ class Statusbar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_statusbar_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -100,7 +100,7 @@ class Statusbar : gtk.widget.Widget
   uint getContextId(string contextDescription)
   {
     uint _retval;
-    const(char)* _contextDescription = contextDescription.toCString(No.Alloc);
+    const(char)* _contextDescription = contextDescription.toCString(No.alloc);
     _retval = gtk_statusbar_get_context_id(cast(GtkStatusbar*)cPtr, _contextDescription);
     return _retval;
   }
@@ -136,7 +136,7 @@ class Statusbar : gtk.widget.Widget
   uint push(uint contextId, string text)
   {
     uint _retval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString(No.alloc);
     _retval = gtk_statusbar_push(cast(GtkStatusbar*)cPtr, contextId, _text);
     return _retval;
   }
@@ -189,10 +189,10 @@ class Statusbar : gtk.widget.Widget
     Connect to TextPopped signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextPopped(T)(T callback, Flag!"After" after = No.After)
+  ulong connectTextPopped(T)(T callback, Flag!"after" after = No.after)
   if (is(T : TextPoppedCallbackDlg) || is(T : TextPoppedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -230,10 +230,10 @@ class Statusbar : gtk.widget.Widget
     Connect to TextPushed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextPushed(T)(T callback, Flag!"After" after = No.After)
+  ulong connectTextPushed(T)(T callback, Flag!"after" after = No.after)
   if (is(T : TextPushedCallbackDlg) || is(T : TextPushedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

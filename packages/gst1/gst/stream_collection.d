@@ -31,7 +31,7 @@ import gst.types;
 class StreamCollection : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -56,9 +56,9 @@ class StreamCollection : gst.object.ObjectGst
   this(string upstreamId = null)
   {
     GstStreamCollection* _cretval;
-    const(char)* _upstreamId = upstreamId.toCString(No.Alloc);
+    const(char)* _upstreamId = upstreamId.toCString(No.alloc);
     _cretval = gst_stream_collection_new(_upstreamId);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -70,7 +70,7 @@ class StreamCollection : gst.object.ObjectGst
   bool addStream(gst.stream.Stream stream)
   {
     bool _retval;
-    _retval = gst_stream_collection_add_stream(cast(GstStreamCollection*)cPtr, stream ? cast(GstStream*)stream.cPtr(Yes.Dup) : null);
+    _retval = gst_stream_collection_add_stream(cast(GstStreamCollection*)cPtr, stream ? cast(GstStream*)stream.cPtr(Yes.dup) : null);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class StreamCollection : gst.object.ObjectGst
   {
     GstStream* _cretval;
     _cretval = gst_stream_collection_get_stream(cast(GstStreamCollection*)cPtr, index);
-    auto _retval = ObjectG.getDObject!(gst.stream.Stream)(cast(GstStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gst.stream.Stream)(cast(GstStream*)_cretval, No.take);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class StreamCollection : gst.object.ObjectGst
   {
     const(char)* _cretval;
     _cretval = gst_stream_collection_get_upstream_id(cast(GstStreamCollection*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -134,10 +134,10 @@ class StreamCollection : gst.object.ObjectGst
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStreamNotify(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  ulong connectStreamNotify(T)(string detail = null, T callback, Flag!"after" after = No.after)
   if (is(T : StreamNotifyCallbackDlg) || is(T : StreamNotifyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

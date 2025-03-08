@@ -30,7 +30,7 @@ import gtk.types;
 class Filter : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -70,7 +70,7 @@ class Filter : gobject.object.ObjectG
   /**
       Gets the known strictness of filters.
     
-    If the strictness is not known, [gtk.types.FilterMatch.Some] is returned.
+    If the strictness is not known, [gtk.types.FilterMatch.some] is returned.
     
     This value may change after emission of the [gtk.filter.Filter.changed]
     signal.
@@ -97,7 +97,7 @@ class Filter : gobject.object.ObjectG
   bool match(gobject.object.ObjectG item)
   {
     bool _retval;
-    _retval = gtk_filter_match(cast(GtkFilter*)cPtr, item ? cast(ObjectC*)item.cPtr(No.Dup) : null);
+    _retval = gtk_filter_match(cast(GtkFilter*)cPtr, item ? cast(ObjectC*)item.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -128,10 +128,10 @@ class Filter : gobject.object.ObjectG
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

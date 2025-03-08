@@ -23,7 +23,7 @@ import gtksource.types;
 class SnippetManager : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -48,7 +48,7 @@ class SnippetManager : gobject.object.ObjectG
   {
     GtkSourceSnippetManager* _cretval;
     _cretval = gtk_source_snippet_manager_get_default();
-    auto _retval = ObjectG.getDObject!(gtksource.snippet_manager.SnippetManager)(cast(GtkSourceSnippetManager*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.snippet_manager.SnippetManager)(cast(GtkSourceSnippetManager*)_cretval, No.take);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ class SnippetManager : gobject.object.ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString(No.free);
     }
     return _retval;
   }
@@ -91,11 +91,11 @@ class SnippetManager : gobject.object.ObjectG
   gtksource.snippet.Snippet getSnippet(string group, string languageId, string trigger)
   {
     GtkSourceSnippet* _cretval;
-    const(char)* _group = group.toCString(No.Alloc);
-    const(char)* _languageId = languageId.toCString(No.Alloc);
-    const(char)* _trigger = trigger.toCString(No.Alloc);
+    const(char)* _group = group.toCString(No.alloc);
+    const(char)* _languageId = languageId.toCString(No.alloc);
+    const(char)* _trigger = trigger.toCString(No.alloc);
     _cretval = gtk_source_snippet_manager_get_snippet(cast(GtkSourceSnippetManager*)cPtr, _group, _languageId, _trigger);
-    auto _retval = ObjectG.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class SnippetManager : gobject.object.ObjectG
   {
     GListModel* _cretval;
     _cretval = gtk_source_snippet_manager_list_all(cast(GtkSourceSnippetManager*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.take);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class SnippetManager : gobject.object.ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString(No.free);
     }
     return _retval;
   }
@@ -158,11 +158,11 @@ class SnippetManager : gobject.object.ObjectG
   gio.list_model.ListModel listMatching(string group = null, string languageId = null, string triggerPrefix = null)
   {
     GListModel* _cretval;
-    const(char)* _group = group.toCString(No.Alloc);
-    const(char)* _languageId = languageId.toCString(No.Alloc);
-    const(char)* _triggerPrefix = triggerPrefix.toCString(No.Alloc);
+    const(char)* _group = group.toCString(No.alloc);
+    const(char)* _languageId = languageId.toCString(No.alloc);
+    const(char)* _triggerPrefix = triggerPrefix.toCString(No.alloc);
     _cretval = gtk_source_snippet_manager_list_matching(cast(GtkSourceSnippetManager*)cPtr, _group, _languageId, _triggerPrefix);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class SnippetManager : gobject.object.ObjectG
   {
     char*[] _tmpdirs;
     foreach (s; dirs)
-      _tmpdirs ~= s.toCString(No.Alloc);
+      _tmpdirs ~= s.toCString(No.alloc);
     _tmpdirs ~= null;
     const(char*)* _dirs = _tmpdirs.ptr;
     gtk_source_snippet_manager_set_search_path(cast(GtkSourceSnippetManager*)cPtr, _dirs);

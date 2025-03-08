@@ -32,7 +32,7 @@ import gtk.widget;
   small handle that the user can drag to adjust the division. It does not
   draw any relief around the children or around the separator. (The space
   in which the separator is called the gutter.) Often, it is useful to put
-  each child inside a #GtkFrame with the shadow type set to [gtk.types.ShadowType.In]
+  each child inside a #GtkFrame with the shadow type set to [gtk.types.ShadowType.in_]
   so that the gutter appears as a ridge. No separator is drawn if one of
   the children is missing.
   
@@ -85,7 +85,7 @@ import gtk.widget;
 class Paned : gtk.container.Container, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -113,7 +113,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_new(orientation);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -125,7 +125,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   */
   void add1(gtk.widget.Widget child)
   {
-    gtk_paned_add1(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_paned_add1(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -137,7 +137,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   */
   void add2(gtk.widget.Widget child)
   {
-    gtk_paned_add2(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_paned_add2(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -148,7 +148,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_get_child1(cast(GtkPaned*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_get_child2(cast(GtkPaned*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   {
     GdkWindow* _cretval;
     _cretval = gtk_paned_get_handle_window(cast(GtkPaned*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   */
   void pack1(gtk.widget.Widget child, bool resize, bool shrink)
   {
-    gtk_paned_pack1(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, resize, shrink);
+    gtk_paned_pack1(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, resize, shrink);
   }
 
   /**
@@ -222,7 +222,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   */
   void pack2(gtk.widget.Widget child, bool resize, bool shrink)
   {
-    gtk_paned_pack2(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, resize, shrink);
+    gtk_paned_pack2(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, resize, shrink);
   }
 
   /**
@@ -269,10 +269,10 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
     Connect to AcceptPosition signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAcceptPosition(T)(T callback, Flag!"After" after = No.After)
+  ulong connectAcceptPosition(T)(T callback, Flag!"after" after = No.after)
   if (is(T : AcceptPositionCallbackDlg) || is(T : AcceptPositionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -313,10 +313,10 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
     Connect to CancelPosition signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCancelPosition(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCancelPosition(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CancelPositionCallbackDlg) || is(T : CancelPositionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -356,10 +356,10 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
     Connect to CycleChildFocus signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCycleChildFocus(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCycleChildFocus(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CycleChildFocusCallbackDlg) || is(T : CycleChildFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -401,10 +401,10 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
     Connect to CycleHandleFocus signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCycleHandleFocus(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCycleHandleFocus(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CycleHandleFocusCallbackDlg) || is(T : CycleHandleFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -444,10 +444,10 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
     Connect to MoveHandle signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveHandle(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMoveHandle(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MoveHandleCallbackDlg) || is(T : MoveHandleCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -488,10 +488,10 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
     Connect to ToggleHandleFocus signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToggleHandleFocus(T)(T callback, Flag!"After" after = No.After)
+  ulong connectToggleHandleFocus(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ToggleHandleFocusCallbackDlg) || is(T : ToggleHandleFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

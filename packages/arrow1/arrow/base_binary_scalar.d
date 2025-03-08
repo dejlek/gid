@@ -12,7 +12,7 @@ import gobject.object;
 class BaseBinaryScalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,7 +33,7 @@ class BaseBinaryScalar : arrow.scalar.Scalar
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_base_binary_scalar_get_value(cast(GArrowBaseBinaryScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, No.take);
     return _retval;
   }
 }

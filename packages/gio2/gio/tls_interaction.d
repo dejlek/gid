@@ -30,13 +30,13 @@ import gobject.object;
   Derived classes can choose to implement whichever interactions methods they’d
   like to support by overriding those virtual methods in their class
   initialization function. Any interactions not implemented will return
-  [gio.types.TlsInteractionResult.Unhandled]. If a derived class implements an async method,
+  [gio.types.TlsInteractionResult.unhandled]. If a derived class implements an async method,
   it must also implement the corresponding finish method.
 */
 class TlsInteraction : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -63,8 +63,8 @@ class TlsInteraction : gobject.object.ObjectG
     abort this password request, which will usually abort the TLS connection.
     
     If the interaction is cancelled by the cancellation object, or by the
-    user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
-    contains a [gio.types.IOErrorEnum.Cancelled] error code. Certain implementations may
+    user then [gio.types.TlsInteractionResult.failed] will be returned with an error that
+    contains a [gio.types.IOErrorEnum.cancelled] error code. Certain implementations may
     not support immediate cancellation.
     Params:
       password =       a #GTlsPassword object
@@ -75,7 +75,7 @@ class TlsInteraction : gobject.object.ObjectG
   {
     GTlsInteractionResult _cretval;
     GError *_err;
-    _cretval = g_tls_interaction_ask_password(cast(GTlsInteraction*)cPtr, password ? cast(GTlsPassword*)password.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_interaction_ask_password(cast(GTlsInteraction*)cPtr, password ? cast(GTlsPassword*)password.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
@@ -93,8 +93,8 @@ class TlsInteraction : gobject.object.ObjectG
     abort this password request, which will usually abort the TLS connection.
     
     If the interaction is cancelled by the cancellation object, or by the
-    user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
-    contains a [gio.types.IOErrorEnum.Cancelled] error code. Certain implementations may
+    user then [gio.types.TlsInteractionResult.failed] will be returned with an error that
+    contains a [gio.types.IOErrorEnum.cancelled] error code. Certain implementations may
     not support immediate cancellation.
     
     Certain implementations may not support immediate cancellation.
@@ -110,24 +110,24 @@ class TlsInteraction : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_tls_interaction_ask_password_async(cast(GTlsInteraction*)cPtr, password ? cast(GTlsPassword*)password.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_tls_interaction_ask_password_async(cast(GTlsInteraction*)cPtr, password ? cast(GTlsPassword*)password.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
       Complete an ask password user interaction request. This should be once
     the [gio.tls_interaction.TlsInteraction.askPasswordAsync] completion callback is called.
     
-    If [gio.types.TlsInteractionResult.Handled] is returned, then the #GTlsPassword passed
+    If [gio.types.TlsInteractionResult.handled] is returned, then the #GTlsPassword passed
     to [gio.tls_interaction.TlsInteraction.askPassword] will have its password filled in.
     
     If the interaction is cancelled by the cancellation object, or by the
-    user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
-    contains a [gio.types.IOErrorEnum.Cancelled] error code.
+    user then [gio.types.TlsInteractionResult.failed] will be returned with an error that
+    contains a [gio.types.IOErrorEnum.cancelled] error code.
     Params:
       result =       the result passed to the callback
     Returns:     The status of the ask password interaction.
@@ -136,7 +136,7 @@ class TlsInteraction : gobject.object.ObjectG
   {
     GTlsInteractionResult _cretval;
     GError *_err;
-    _cretval = g_tls_interaction_ask_password_finish(cast(GTlsInteraction*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_interaction_ask_password_finish(cast(GTlsInteraction*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
@@ -160,8 +160,8 @@ class TlsInteraction : gobject.object.ObjectG
     calling which ever one correctly.
     
     If the interaction is cancelled by the cancellation object, or by the
-    user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
-    contains a [gio.types.IOErrorEnum.Cancelled] error code. Certain implementations may
+    user then [gio.types.TlsInteractionResult.failed] will be returned with an error that
+    contains a [gio.types.IOErrorEnum.cancelled] error code. Certain implementations may
     not support immediate cancellation.
     Params:
       password =       a #GTlsPassword object
@@ -172,7 +172,7 @@ class TlsInteraction : gobject.object.ObjectG
   {
     GTlsInteractionResult _cretval;
     GError *_err;
-    _cretval = g_tls_interaction_invoke_ask_password(cast(GTlsInteraction*)cPtr, password ? cast(GTlsPassword*)password.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_interaction_invoke_ask_password(cast(GTlsInteraction*)cPtr, password ? cast(GTlsPassword*)password.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
@@ -197,8 +197,8 @@ class TlsInteraction : gobject.object.ObjectG
     calling which ever one correctly.
     
     If the interaction is cancelled by the cancellation object, or by the
-    user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
-    contains a [gio.types.IOErrorEnum.Cancelled] error code. Certain implementations may
+    user then [gio.types.TlsInteractionResult.failed] will be returned with an error that
+    contains a [gio.types.IOErrorEnum.cancelled] error code. Certain implementations may
     not support immediate cancellation.
     Params:
       connection =       a #GTlsConnection object
@@ -210,7 +210,7 @@ class TlsInteraction : gobject.object.ObjectG
   {
     GTlsInteractionResult _cretval;
     GError *_err;
-    _cretval = g_tls_interaction_invoke_request_certificate(cast(GTlsInteraction*)cPtr, connection ? cast(GTlsConnection*)connection.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_interaction_invoke_request_certificate(cast(GTlsInteraction*)cPtr, connection ? cast(GTlsConnection*)connection.cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
@@ -226,13 +226,13 @@ class TlsInteraction : gobject.object.ObjectG
     also choose to provide a certificate from elsewhere. Alternatively the user may
     abort this certificate request, which will usually abort the TLS connection.
     
-    If [gio.types.TlsInteractionResult.Handled] is returned, then the #GTlsConnection
+    If [gio.types.TlsInteractionResult.handled] is returned, then the #GTlsConnection
     passed to [gio.tls_interaction.TlsInteraction.requestCertificate] will have had its
     #GTlsConnection:certificate filled in.
     
     If the interaction is cancelled by the cancellation object, or by the
-    user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
-    contains a [gio.types.IOErrorEnum.Cancelled] error code. Certain implementations may
+    user then [gio.types.TlsInteractionResult.failed] will be returned with an error that
+    contains a [gio.types.IOErrorEnum.cancelled] error code. Certain implementations may
     not support immediate cancellation.
     Params:
       connection =       a #GTlsConnection object
@@ -244,7 +244,7 @@ class TlsInteraction : gobject.object.ObjectG
   {
     GTlsInteractionResult _cretval;
     GError *_err;
-    _cretval = g_tls_interaction_request_certificate(cast(GTlsInteraction*)cPtr, connection ? cast(GTlsConnection*)connection.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_interaction_request_certificate(cast(GTlsInteraction*)cPtr, connection ? cast(GTlsConnection*)connection.cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
@@ -273,25 +273,25 @@ class TlsInteraction : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_tls_interaction_request_certificate_async(cast(GTlsInteraction*)cPtr, connection ? cast(GTlsConnection*)connection.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_tls_interaction_request_certificate_async(cast(GTlsInteraction*)cPtr, connection ? cast(GTlsConnection*)connection.cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
       Complete a request certificate user interaction request. This should be once
     the [gio.tls_interaction.TlsInteraction.requestCertificateAsync] completion callback is called.
     
-    If [gio.types.TlsInteractionResult.Handled] is returned, then the #GTlsConnection
+    If [gio.types.TlsInteractionResult.handled] is returned, then the #GTlsConnection
     passed to [gio.tls_interaction.TlsInteraction.requestCertificateAsync] will have had its
     #GTlsConnection:certificate filled in.
     
     If the interaction is cancelled by the cancellation object, or by the
-    user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
-    contains a [gio.types.IOErrorEnum.Cancelled] error code.
+    user then [gio.types.TlsInteractionResult.failed] will be returned with an error that
+    contains a [gio.types.IOErrorEnum.cancelled] error code.
     Params:
       result =       the result passed to the callback
     Returns:     The status of the request certificate interaction.
@@ -300,7 +300,7 @@ class TlsInteraction : gobject.object.ObjectG
   {
     GTlsInteractionResult _cretval;
     GError *_err;
-    _cretval = g_tls_interaction_request_certificate_finish(cast(GTlsInteraction*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_interaction_request_certificate_finish(cast(GTlsInteraction*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;

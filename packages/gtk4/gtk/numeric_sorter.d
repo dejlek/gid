@@ -16,7 +16,7 @@ import gtk.types;
 class NumericSorter : gtk.sorter.Sorter
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -44,8 +44,8 @@ class NumericSorter : gtk.sorter.Sorter
   this(gtk.expression.Expression expression = null)
   {
     GtkNumericSorter* _cretval;
-    _cretval = gtk_numeric_sorter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gtk_numeric_sorter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -56,7 +56,7 @@ class NumericSorter : gtk.sorter.Sorter
   {
     GtkExpression* _cretval;
     _cretval = gtk_numeric_sorter_get_expression(cast(GtkNumericSorter*)cPtr);
-    auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class NumericSorter : gtk.sorter.Sorter
   */
   void setExpression(gtk.expression.Expression expression = null)
   {
-    gtk_numeric_sorter_set_expression(cast(GtkNumericSorter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
+    gtk_numeric_sorter_set_expression(cast(GtkNumericSorter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.dup) : null);
   }
 
   /**

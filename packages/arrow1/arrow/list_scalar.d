@@ -11,7 +11,7 @@ import gid.gid;
 class ListScalar : arrow.base_list_scalar.BaseListScalar
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class ListScalar : arrow.base_list_scalar.BaseListScalar
   this(arrow.list_array.ListArray value)
   {
     GArrowListScalar* _cretval;
-    _cretval = garrow_list_scalar_new(value ? cast(GArrowListArray*)value.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_list_scalar_new(value ? cast(GArrowListArray*)value.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 }

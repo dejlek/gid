@@ -12,7 +12,7 @@ import parquet.types;
 class RowGroupMetadata : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class RowGroupMetadata : gobject.object.ObjectG
   bool equal(parquet.row_group_metadata.RowGroupMetadata otherMetadata)
   {
     bool _retval;
-    _retval = gparquet_row_group_metadata_equal(cast(GParquetRowGroupMetadata*)cPtr, otherMetadata ? cast(GParquetRowGroupMetadata*)otherMetadata.cPtr(No.Dup) : null);
+    _retval = gparquet_row_group_metadata_equal(cast(GParquetRowGroupMetadata*)cPtr, otherMetadata ? cast(GParquetRowGroupMetadata*)otherMetadata.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -52,7 +52,7 @@ class RowGroupMetadata : gobject.object.ObjectG
     _cretval = gparquet_row_group_metadata_get_column_chunk(cast(GParquetRowGroupMetadata*)cPtr, index, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(parquet.column_chunk_metadata.ColumnChunkMetadata)(cast(GParquetColumnChunkMetadata*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(parquet.column_chunk_metadata.ColumnChunkMetadata)(cast(GParquetColumnChunkMetadata*)_cretval, Yes.take);
     return _retval;
   }
 

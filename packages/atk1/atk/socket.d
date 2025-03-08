@@ -39,7 +39,7 @@ import gid.gid;
 class Socket : atk.object.ObjectAtk, atk.component.Component
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -65,7 +65,7 @@ class Socket : atk.object.ObjectAtk, atk.component.Component
   {
     AtkObject* _cretval;
     _cretval = atk_socket_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -84,7 +84,7 @@ class Socket : atk.object.ObjectAtk, atk.component.Component
   */
   void embed(string plugId)
   {
-    const(char)* _plugId = plugId.toCString(No.Alloc);
+    const(char)* _plugId = plugId.toCString(No.alloc);
     atk_socket_embed(cast(AtkSocket*)cPtr, _plugId);
   }
 

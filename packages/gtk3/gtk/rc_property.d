@@ -16,7 +16,7 @@ class RcProperty
 {
   GtkRcProperty cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.RcProperty");
@@ -54,13 +54,13 @@ class RcProperty
 
   @property string origin()
   {
-    return (cast(GtkRcProperty*)cPtr).origin.fromCString(No.Free);
+    return (cast(GtkRcProperty*)cPtr).origin.fromCString(No.free);
   }
 
   @property void origin(string propval)
   {
     safeFree(cast(void*)(cast(GtkRcProperty*)cPtr).origin);
-    (cast(GtkRcProperty*)cPtr).origin = propval.toCString(Yes.Alloc);
+    (cast(GtkRcProperty*)cPtr).origin = propval.toCString(Yes.alloc);
   }
 
   @property gobject.value.Value value()
@@ -84,7 +84,7 @@ class RcProperty
   static bool parseBorder(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
   {
     bool _retval;
-    _retval = gtk_rc_property_parse_border(pspec ? cast(const(GParamSpec)*)pspec.cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring.cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue.cPtr(No.Dup) : null);
+    _retval = gtk_rc_property_parse_border(pspec ? cast(const(GParamSpec)*)pspec.cPtr(No.dup) : null, gstring ? cast(const(GString)*)gstring.cPtr(No.dup) : null, propertyValue ? cast(GValue*)propertyValue.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class RcProperty
   static bool parseColor(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
   {
     bool _retval;
-    _retval = gtk_rc_property_parse_color(pspec ? cast(const(GParamSpec)*)pspec.cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring.cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue.cPtr(No.Dup) : null);
+    _retval = gtk_rc_property_parse_color(pspec ? cast(const(GParamSpec)*)pspec.cPtr(No.dup) : null, gstring ? cast(const(GString)*)gstring.cPtr(No.dup) : null, propertyValue ? cast(GValue*)propertyValue.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class RcProperty
   static bool parseEnum(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
   {
     bool _retval;
-    _retval = gtk_rc_property_parse_enum(pspec ? cast(const(GParamSpec)*)pspec.cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring.cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue.cPtr(No.Dup) : null);
+    _retval = gtk_rc_property_parse_enum(pspec ? cast(const(GParamSpec)*)pspec.cPtr(No.dup) : null, gstring ? cast(const(GString)*)gstring.cPtr(No.dup) : null, propertyValue ? cast(GValue*)propertyValue.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class RcProperty
   static bool parseFlags(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
   {
     bool _retval;
-    _retval = gtk_rc_property_parse_flags(pspec ? cast(const(GParamSpec)*)pspec.cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring.cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue.cPtr(No.Dup) : null);
+    _retval = gtk_rc_property_parse_flags(pspec ? cast(const(GParamSpec)*)pspec.cPtr(No.dup) : null, gstring ? cast(const(GString)*)gstring.cPtr(No.dup) : null, propertyValue ? cast(GValue*)propertyValue.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class RcProperty
   static bool parseRequisition(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
   {
     bool _retval;
-    _retval = gtk_rc_property_parse_requisition(pspec ? cast(const(GParamSpec)*)pspec.cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring.cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue.cPtr(No.Dup) : null);
+    _retval = gtk_rc_property_parse_requisition(pspec ? cast(const(GParamSpec)*)pspec.cPtr(No.dup) : null, gstring ? cast(const(GString)*)gstring.cPtr(No.dup) : null, propertyValue ? cast(GValue*)propertyValue.cPtr(No.dup) : null);
     return _retval;
   }
 }

@@ -16,7 +16,7 @@ import gobject.object;
 class DBusMessage : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class DBusMessage : gobject.object.ObjectG
   {
     GDBusMessage* _cretval;
     _cretval = g_dbus_message_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -49,7 +49,7 @@ class DBusMessage : gobject.object.ObjectG
     [gio.dbus_message.DBusMessage.getByteOrder].
     
     If the blob cannot be parsed, contains invalid fields, or contains invalid
-    headers, [gio.types.IOErrorEnum.InvalidArgument] will be returned.
+    headers, [gio.types.IOErrorEnum.invalidArgument] will be returned.
     Params:
       blob =       A blob representing a binary D-Bus message.
       capabilities =       A #GDBusCapabilityFlags describing what protocol features are supported.
@@ -68,7 +68,7 @@ class DBusMessage : gobject.object.ObjectG
     _cretval = g_dbus_message_new_from_blob(_blob, _blobLen, capabilities, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -84,12 +84,12 @@ class DBusMessage : gobject.object.ObjectG
   static gio.dbus_message.DBusMessage newMethodCall(string name, string path, string interface_, string method)
   {
     GDBusMessage* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _path = path.toCString(No.Alloc);
-    const(char)* _interface_ = interface_.toCString(No.Alloc);
-    const(char)* _method = method.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _interface_ = interface_.toCString(No.alloc);
+    const(char)* _method = method.toCString(No.alloc);
     _cretval = g_dbus_message_new_method_call(_name, _path, _interface_, _method);
-    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -104,11 +104,11 @@ class DBusMessage : gobject.object.ObjectG
   static gio.dbus_message.DBusMessage newSignal(string path, string interface_, string signal)
   {
     GDBusMessage* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
-    const(char)* _interface_ = interface_.toCString(No.Alloc);
-    const(char)* _signal = signal.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _interface_ = interface_.toCString(No.alloc);
+    const(char)* _signal = signal.toCString(No.alloc);
     _cretval = g_dbus_message_new_signal(_path, _interface_, _signal);
-    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class DBusMessage : gobject.object.ObjectG
     _cretval = g_dbus_message_copy(cast(GDBusMessage*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class DBusMessage : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_arg0(cast(GDBusMessage*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class DBusMessage : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_arg0_path(cast(GDBusMessage*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class DBusMessage : gobject.object.ObjectG
   {
     VariantC* _cretval;
     _cretval = g_dbus_message_get_body(cast(GDBusMessage*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -214,26 +214,26 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-      Convenience getter for the [gio.types.DBusMessageHeaderField.Destination] header field.
+      Convenience getter for the [gio.types.DBusMessageHeaderField.destination] header field.
     Returns:     The value.
   */
   string getDestination()
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_destination(cast(GDBusMessage*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
   /**
-      Convenience getter for the [gio.types.DBusMessageHeaderField.ErrorName] header field.
+      Convenience getter for the [gio.types.DBusMessageHeaderField.errorName] header field.
     Returns:     The value.
   */
   string getErrorName()
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_error_name(cast(GDBusMessage*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -263,14 +263,14 @@ class DBusMessage : gobject.object.ObjectG
   {
     VariantC* _cretval;
     _cretval = g_dbus_message_get_header(cast(GDBusMessage*)cPtr, headerField);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
     return _retval;
   }
 
   /**
       Gets an array of all header fields on message that are set.
     Returns:     An array of header fields
-      terminated by [gio.types.DBusMessageHeaderField.Invalid].  Each element
+      terminated by [gio.types.DBusMessageHeaderField.invalid].  Each element
       is a #guchar. Free with [glib.global.gfree].
   */
   ubyte[] getHeaderFields()
@@ -290,14 +290,14 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-      Convenience getter for the [gio.types.DBusMessageHeaderField.Interface] header field.
+      Convenience getter for the [gio.types.DBusMessageHeaderField.interface_] header field.
     Returns:     The value.
   */
   string getInterface()
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_interface(cast(GDBusMessage*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -315,14 +315,14 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-      Convenience getter for the [gio.types.DBusMessageHeaderField.Member] header field.
+      Convenience getter for the [gio.types.DBusMessageHeaderField.member] header field.
     Returns:     The value.
   */
   string getMember()
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_member(cast(GDBusMessage*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -339,7 +339,7 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-      Convenience getter for the [gio.types.DBusMessageHeaderField.NumUnixFds] header field.
+      Convenience getter for the [gio.types.DBusMessageHeaderField.numUnixFds] header field.
     Returns:     The value.
   */
   uint getNumUnixFds()
@@ -350,19 +350,19 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-      Convenience getter for the [gio.types.DBusMessageHeaderField.Path] header field.
+      Convenience getter for the [gio.types.DBusMessageHeaderField.path] header field.
     Returns:     The value.
   */
   string getPath()
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_path(cast(GDBusMessage*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
   /**
-      Convenience getter for the [gio.types.DBusMessageHeaderField.ReplySerial] header field.
+      Convenience getter for the [gio.types.DBusMessageHeaderField.replySerial] header field.
     Returns:     The value.
   */
   uint getReplySerial()
@@ -373,14 +373,14 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-      Convenience getter for the [gio.types.DBusMessageHeaderField.Sender] header field.
+      Convenience getter for the [gio.types.DBusMessageHeaderField.sender] header field.
     Returns:     The value.
   */
   string getSender()
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_sender(cast(GDBusMessage*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -396,7 +396,7 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-      Convenience getter for the [gio.types.DBusMessageHeaderField.Signature] header field.
+      Convenience getter for the [gio.types.DBusMessageHeaderField.signature] header field.
     
     This will always be non-null, but may be an empty string.
     Returns:     The value.
@@ -405,7 +405,7 @@ class DBusMessage : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_signature(cast(GDBusMessage*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -426,7 +426,7 @@ class DBusMessage : gobject.object.ObjectG
   {
     GUnixFDList* _cretval;
     _cretval = g_dbus_message_get_unix_fd_list(cast(GDBusMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.take);
     return _retval;
   }
 
@@ -448,10 +448,10 @@ class DBusMessage : gobject.object.ObjectG
   gio.dbus_message.DBusMessage newMethodErrorLiteral(string errorName, string errorMessage)
   {
     GDBusMessage* _cretval;
-    const(char)* _errorName = errorName.toCString(No.Alloc);
-    const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
+    const(char)* _errorName = errorName.toCString(No.alloc);
+    const(char)* _errorMessage = errorMessage.toCString(No.alloc);
     _cretval = g_dbus_message_new_method_error_literal(cast(GDBusMessage*)cPtr, _errorName, _errorMessage);
-    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -463,7 +463,7 @@ class DBusMessage : gobject.object.ObjectG
   {
     GDBusMessage* _cretval;
     _cretval = g_dbus_message_new_method_reply(cast(GDBusMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -508,13 +508,13 @@ class DBusMessage : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = g_dbus_message_print(cast(GDBusMessage*)cPtr, indent);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
   /**
       Sets the body message. As a side-effect the
-    [gio.types.DBusMessageHeaderField.Signature] header field is set to the
+    [gio.types.DBusMessageHeaderField.signature] header field is set to the
     type string of body (or cleared if body is null).
     
     If body is floating, message assumes ownership of body.
@@ -523,7 +523,7 @@ class DBusMessage : gobject.object.ObjectG
   */
   void setBody(glib.variant.VariantG body_)
   {
-    g_dbus_message_set_body(cast(GDBusMessage*)cPtr, body_ ? cast(VariantC*)body_.cPtr(No.Dup) : null);
+    g_dbus_message_set_body(cast(GDBusMessage*)cPtr, body_ ? cast(VariantC*)body_.cPtr(No.dup) : null);
   }
 
   /**
@@ -537,24 +537,24 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-      Convenience setter for the [gio.types.DBusMessageHeaderField.Destination] header field.
+      Convenience setter for the [gio.types.DBusMessageHeaderField.destination] header field.
     Params:
       value =       The value to set.
   */
   void setDestination(string value = null)
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.alloc);
     g_dbus_message_set_destination(cast(GDBusMessage*)cPtr, _value);
   }
 
   /**
-      Convenience setter for the [gio.types.DBusMessageHeaderField.ErrorName] header field.
+      Convenience setter for the [gio.types.DBusMessageHeaderField.errorName] header field.
     Params:
       value =       The value to set.
   */
   void setErrorName(string value)
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.alloc);
     g_dbus_message_set_error_name(cast(GDBusMessage*)cPtr, _value);
   }
 
@@ -579,28 +579,28 @@ class DBusMessage : gobject.object.ObjectG
   */
   void setHeader(gio.types.DBusMessageHeaderField headerField, glib.variant.VariantG value = null)
   {
-    g_dbus_message_set_header(cast(GDBusMessage*)cPtr, headerField, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    g_dbus_message_set_header(cast(GDBusMessage*)cPtr, headerField, value ? cast(VariantC*)value.cPtr(No.dup) : null);
   }
 
   /**
-      Convenience setter for the [gio.types.DBusMessageHeaderField.Interface] header field.
+      Convenience setter for the [gio.types.DBusMessageHeaderField.interface_] header field.
     Params:
       value =       The value to set.
   */
   void setInterface(string value = null)
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.alloc);
     g_dbus_message_set_interface(cast(GDBusMessage*)cPtr, _value);
   }
 
   /**
-      Convenience setter for the [gio.types.DBusMessageHeaderField.Member] header field.
+      Convenience setter for the [gio.types.DBusMessageHeaderField.member] header field.
     Params:
       value =       The value to set.
   */
   void setMember(string value = null)
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.alloc);
     g_dbus_message_set_member(cast(GDBusMessage*)cPtr, _value);
   }
 
@@ -615,7 +615,7 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-      Convenience setter for the [gio.types.DBusMessageHeaderField.NumUnixFds] header field.
+      Convenience setter for the [gio.types.DBusMessageHeaderField.numUnixFds] header field.
     Params:
       value =       The value to set.
   */
@@ -625,18 +625,18 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-      Convenience setter for the [gio.types.DBusMessageHeaderField.Path] header field.
+      Convenience setter for the [gio.types.DBusMessageHeaderField.path] header field.
     Params:
       value =       The value to set.
   */
   void setPath(string value = null)
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.alloc);
     g_dbus_message_set_path(cast(GDBusMessage*)cPtr, _value);
   }
 
   /**
-      Convenience setter for the [gio.types.DBusMessageHeaderField.ReplySerial] header field.
+      Convenience setter for the [gio.types.DBusMessageHeaderField.replySerial] header field.
     Params:
       value =       The value to set.
   */
@@ -646,13 +646,13 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-      Convenience setter for the [gio.types.DBusMessageHeaderField.Sender] header field.
+      Convenience setter for the [gio.types.DBusMessageHeaderField.sender] header field.
     Params:
       value =       The value to set.
   */
   void setSender(string value = null)
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.alloc);
     g_dbus_message_set_sender(cast(GDBusMessage*)cPtr, _value);
   }
 
@@ -667,19 +667,19 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-      Convenience setter for the [gio.types.DBusMessageHeaderField.Signature] header field.
+      Convenience setter for the [gio.types.DBusMessageHeaderField.signature] header field.
     Params:
       value =       The value to set.
   */
   void setSignature(string value = null)
   {
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.alloc);
     g_dbus_message_set_signature(cast(GDBusMessage*)cPtr, _value);
   }
 
   /**
       Sets the UNIX file descriptors associated with message. As a
-    side-effect the [gio.types.DBusMessageHeaderField.NumUnixFds] header
+    side-effect the [gio.types.DBusMessageHeaderField.numUnixFds] header
     field is set to the number of fds in fd_list (or cleared if
     fd_list is null).
     
@@ -694,7 +694,7 @@ class DBusMessage : gobject.object.ObjectG
   */
   void setUnixFdList(gio.unix_fdlist.UnixFDList fdList = null)
   {
-    g_dbus_message_set_unix_fd_list(cast(GDBusMessage*)cPtr, fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
+    g_dbus_message_set_unix_fd_list(cast(GDBusMessage*)cPtr, fdList ? cast(GUnixFDList*)fdList.cPtr(No.dup) : null);
   }
 
   /**
@@ -724,12 +724,12 @@ class DBusMessage : gobject.object.ObjectG
   }
 
   /**
-      If message is not of type [gio.types.DBusMessageType.Error] does
+      If message is not of type [gio.types.DBusMessageType.error] does
     nothing and returns false.
     
     Otherwise this method encodes the error in message as a #GError
     using g_dbus_error_set_dbus_error() using the information in the
-    [gio.types.DBusMessageHeaderField.ErrorName] header field of message as
+    [gio.types.DBusMessageHeaderField.errorName] header field of message as
     well as the first string item in message's body.
     Returns:     true if error was set, false otherwise.
   */

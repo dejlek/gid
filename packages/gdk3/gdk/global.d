@@ -38,7 +38,7 @@ import pango.context;
 */
 void addOptionEntriesLibgtkOnly(glib.option_group.OptionGroup group)
 {
-  gdk_add_option_entries_libgtk_only(group ? cast(GOptionGroup*)group.cPtr(No.Dup) : null);
+  gdk_add_option_entries_libgtk_only(group ? cast(GOptionGroup*)group.cPtr(No.dup) : null);
 }
 
 /**
@@ -59,7 +59,7 @@ void beep()
   cycle of the toolkit; this should be avoided, as it breaks various assumptions
   and optimizations.
   
-  If you are drawing on a native #GdkWindow in response to a [gdk.types.EventType.Expose] event
+  If you are drawing on a native #GdkWindow in response to a [gdk.types.EventType.expose] event
   you should use [gdk.window.Window.beginDrawFrame] and [gdk.drawing_context.DrawingContext.getCairoContext]
   instead. GTK will automatically do this for you when drawing a widget.
   Params:
@@ -73,8 +73,8 @@ void beep()
 cairo.context.Context cairoCreate(gdk.window.Window window)
 {
   cairo_t* _cretval;
-  _cretval = gdk_cairo_create(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, Yes.Take) : null;
+  _cretval = gdk_cairo_create(window ? cast(GdkWindow*)window.cPtr(No.dup) : null);
+  auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -108,7 +108,7 @@ cairo.context.Context cairoCreate(gdk.window.Window window)
 */
 void cairoDrawFromGl(cairo.context.Context cr, gdk.window.Window window, int source, int sourceType, int bufferScale, int x, int y, int width, int height)
 {
-  gdk_cairo_draw_from_gl(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, source, sourceType, bufferScale, x, y, width, height);
+  gdk_cairo_draw_from_gl(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, window ? cast(GdkWindow*)window.cPtr(No.dup) : null, source, sourceType, bufferScale, x, y, width, height);
 }
 
 /**
@@ -125,8 +125,8 @@ bool cairoGetClipRectangle(cairo.context.Context cr, out gdk.rectangle.Rectangle
 {
   bool _retval;
   GdkRectangle _rect;
-  _retval = gdk_cairo_get_clip_rectangle(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, &_rect);
-  rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+  _retval = gdk_cairo_get_clip_rectangle(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, &_rect);
+  rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.take);
   return _retval;
 }
 
@@ -140,8 +140,8 @@ bool cairoGetClipRectangle(cairo.context.Context cr, out gdk.rectangle.Rectangle
 gdk.drawing_context.DrawingContext cairoGetDrawingContext(cairo.context.Context cr)
 {
   GdkDrawingContext* _cretval;
-  _cretval = gdk_cairo_get_drawing_context(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(gdk.drawing_context.DrawingContext)(cast(GdkDrawingContext*)_cretval, No.Take);
+  _cretval = gdk_cairo_get_drawing_context(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null);
+  auto _retval = ObjectG.getDObject!(gdk.drawing_context.DrawingContext)(cast(GdkDrawingContext*)_cretval, No.take);
   return _retval;
 }
 
@@ -153,7 +153,7 @@ gdk.drawing_context.DrawingContext cairoGetDrawingContext(cairo.context.Context 
 */
 void cairoRectangle(cairo.context.Context cr, gdk.rectangle.Rectangle rectangle)
 {
-  gdk_cairo_rectangle(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, rectangle ? cast(const(GdkRectangle)*)rectangle.cPtr(No.Dup) : null);
+  gdk_cairo_rectangle(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, rectangle ? cast(const(GdkRectangle)*)rectangle.cPtr(No.dup) : null);
 }
 
 /**
@@ -164,7 +164,7 @@ void cairoRectangle(cairo.context.Context cr, gdk.rectangle.Rectangle rectangle)
 */
 void cairoRegion(cairo.context.Context cr, cairo.region.Region region)
 {
-  gdk_cairo_region(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
+  gdk_cairo_region(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, region ? cast(const(cairo_region_t)*)region.cPtr(No.dup) : null);
 }
 
 /**
@@ -180,8 +180,8 @@ void cairoRegion(cairo.context.Context cr, cairo.region.Region region)
 cairo.region.Region cairoRegionCreateFromSurface(cairo.surface.Surface surface)
 {
   cairo_region_t* _cretval;
-  _cretval = gdk_cairo_region_create_from_surface(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
+  _cretval = gdk_cairo_region_create_from_surface(surface ? cast(cairo_surface_t*)surface.cPtr(No.dup) : null);
+  auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -195,13 +195,13 @@ cairo.region.Region cairoRegionCreateFromSurface(cairo.surface.Surface surface)
 */
 void cairoSetSourceColor(cairo.context.Context cr, gdk.color.Color color)
 {
-  gdk_cairo_set_source_color(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
+  gdk_cairo_set_source_color(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, color ? cast(const(GdkColor)*)color.cPtr(No.dup) : null);
 }
 
 /**
     Sets the given pixbuf as the source pattern for cr.
   
-  The pattern has an extend mode of [cairo.types.Extend.None] and is aligned
+  The pattern has an extend mode of [cairo.types.Extend.none] and is aligned
   so that the origin of pixbuf is pixbuf_x, pixbuf_y.
   Params:
     cr =       a cairo context
@@ -211,7 +211,7 @@ void cairoSetSourceColor(cairo.context.Context cr, gdk.color.Color color)
 */
 void cairoSetSourcePixbuf(cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixbuf, double pixbufX, double pixbufY)
 {
-  gdk_cairo_set_source_pixbuf(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, pixbuf ? cast(const(PixbufC)*)pixbuf.cPtr(No.Dup) : null, pixbufX, pixbufY);
+  gdk_cairo_set_source_pixbuf(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, pixbuf ? cast(const(PixbufC)*)pixbuf.cPtr(No.dup) : null, pixbufX, pixbufY);
 }
 
 /**
@@ -222,13 +222,13 @@ void cairoSetSourcePixbuf(cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixb
 */
 void cairoSetSourceRgba(cairo.context.Context cr, gdk.rgba.RGBA rgba)
 {
-  gdk_cairo_set_source_rgba(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
+  gdk_cairo_set_source_rgba(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.dup) : null);
 }
 
 /**
     Sets the given window as the source pattern for cr.
   
-  The pattern has an extend mode of [cairo.types.Extend.None] and is aligned
+  The pattern has an extend mode of [cairo.types.Extend.none] and is aligned
   so that the origin of window is x, y. The window contains all its
   subwindows when rendering.
   
@@ -242,7 +242,7 @@ void cairoSetSourceRgba(cairo.context.Context cr, gdk.rgba.RGBA rgba)
 */
 void cairoSetSourceWindow(cairo.context.Context cr, gdk.window.Window window, double x, double y)
 {
-  gdk_cairo_set_source_window(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, x, y);
+  gdk_cairo_set_source_window(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, window ? cast(GdkWindow*)window.cPtr(No.dup) : null, x, y);
 }
 
 /**
@@ -257,8 +257,8 @@ void cairoSetSourceWindow(cairo.context.Context cr, gdk.window.Window window, do
 cairo.surface.Surface cairoSurfaceCreateFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf, int scale, gdk.window.Window forWindow = null)
 {
   cairo_surface_t* _cretval;
-  _cretval = gdk_cairo_surface_create_from_pixbuf(pixbuf ? cast(const(PixbufC)*)pixbuf.cPtr(No.Dup) : null, scale, forWindow ? cast(GdkWindow*)forWindow.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
+  _cretval = gdk_cairo_surface_create_from_pixbuf(pixbuf ? cast(const(PixbufC)*)pixbuf.cPtr(No.dup) : null, scale, forWindow ? cast(GdkWindow*)forWindow.cPtr(No.dup) : null);
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -290,7 +290,7 @@ void disableMultidevice()
 */
 void dragAbort(gdk.drag_context.DragContext context, uint time)
 {
-  gdk_drag_abort(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, time);
+  gdk_drag_abort(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, time);
 }
 
 /**
@@ -306,7 +306,7 @@ void dragAbort(gdk.drag_context.DragContext context, uint time)
 */
 void dragDrop(gdk.drag_context.DragContext context, uint time)
 {
-  gdk_drag_drop(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, time);
+  gdk_drag_drop(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, time);
 }
 
 /**
@@ -326,13 +326,13 @@ void dragDrop(gdk.drag_context.DragContext context, uint time)
 */
 void dragDropDone(gdk.drag_context.DragContext context, bool success)
 {
-  gdk_drag_drop_done(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, success);
+  gdk_drag_drop_done(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, success);
 }
 
 /**
     Returns whether the dropped data has been successfully
   transferred. This function is intended to be used while
-  handling a [gdk.types.EventType.DropFinished] event, its return value is
+  handling a [gdk.types.EventType.dropFinished] event, its return value is
   meaningless at other times.
   Params:
     context =       a #GdkDragContext
@@ -341,7 +341,7 @@ void dragDropDone(gdk.drag_context.DragContext context, bool success)
 bool dragDropSucceeded(gdk.drag_context.DragContext context)
 {
   bool _retval;
-  _retval = gdk_drag_drop_succeeded(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null);
+  _retval = gdk_drag_drop_succeeded(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null);
   return _retval;
 }
 
@@ -364,8 +364,8 @@ bool dragDropSucceeded(gdk.drag_context.DragContext context)
 void dragFindWindowForScreen(gdk.drag_context.DragContext context, gdk.window.Window dragWindow, gdk.screen.Screen screen, int xRoot, int yRoot, out gdk.window.Window destWindow, out gdk.types.DragProtocol protocol)
 {
   GdkWindow* _destWindow;
-  gdk_drag_find_window_for_screen(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, dragWindow ? cast(GdkWindow*)dragWindow.cPtr(No.Dup) : null, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null, xRoot, yRoot, &_destWindow, &protocol);
-  destWindow = new gdk.window.Window(cast(void*)_destWindow, Yes.Take);
+  gdk_drag_find_window_for_screen(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, dragWindow ? cast(GdkWindow*)dragWindow.cPtr(No.dup) : null, screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null, xRoot, yRoot, &_destWindow, &protocol);
+  destWindow = new gdk.window.Window(cast(void*)_destWindow, Yes.take);
 }
 
 /**
@@ -377,8 +377,8 @@ void dragFindWindowForScreen(gdk.drag_context.DragContext context, gdk.window.Wi
 gdk.atom.Atom dragGetSelection(gdk.drag_context.DragContext context)
 {
   GdkAtom _cretval;
-  _cretval = gdk_drag_get_selection(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
+  _cretval = gdk_drag_get_selection(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null);
+  auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.take) : null;
   return _retval;
 }
 
@@ -405,7 +405,7 @@ gdk.atom.Atom dragGetSelection(gdk.drag_context.DragContext context)
 bool dragMotion(gdk.drag_context.DragContext context, gdk.window.Window destWindow, gdk.types.DragProtocol protocol, int xRoot, int yRoot, gdk.types.DragAction suggestedAction, gdk.types.DragAction possibleActions, uint time)
 {
   bool _retval;
-  _retval = gdk_drag_motion(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, destWindow ? cast(GdkWindow*)destWindow.cPtr(No.Dup) : null, protocol, xRoot, yRoot, suggestedAction, possibleActions, time);
+  _retval = gdk_drag_motion(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, destWindow ? cast(GdkWindow*)destWindow.cPtr(No.dup) : null, protocol, xRoot, yRoot, suggestedAction, possibleActions, time);
   return _retval;
 }
 
@@ -422,7 +422,7 @@ bool dragMotion(gdk.drag_context.DragContext context, gdk.window.Window destWind
 */
 void dragStatus(gdk.drag_context.DragContext context, gdk.types.DragAction action, uint time)
 {
-  gdk_drag_status(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, action, time);
+  gdk_drag_status(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, action, time);
 }
 
 /**
@@ -436,7 +436,7 @@ void dragStatus(gdk.drag_context.DragContext context, gdk.types.DragAction actio
 */
 void dropFinish(gdk.drag_context.DragContext context, bool success, uint time)
 {
-  gdk_drop_finish(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, success, time);
+  gdk_drop_finish(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, success, time);
 }
 
 /**
@@ -451,7 +451,7 @@ void dropFinish(gdk.drag_context.DragContext context, bool success, uint time)
 */
 void dropReply(gdk.drag_context.DragContext context, bool accepted, uint time)
 {
-  gdk_drop_reply(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, accepted, time);
+  gdk_drop_reply(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, accepted, time);
 }
 
 /**
@@ -601,7 +601,7 @@ gdk.window.Window getDefaultRootWindow()
 {
   GdkWindow* _cretval;
   _cretval = gdk_get_default_root_window();
-  auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+  auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
   return _retval;
 }
 
@@ -618,7 +618,7 @@ string getDisplay()
 {
   char* _cretval;
   _cretval = gdk_get_display();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
   return _retval;
 }
 
@@ -633,7 +633,7 @@ string getDisplayArgName()
 {
   const(char)* _cretval;
   _cretval = gdk_get_display_arg_name();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
   return _retval;
 }
 
@@ -648,7 +648,7 @@ string getProgramClass()
 {
   const(char)* _cretval;
   _cretval = gdk_get_program_class();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
   return _retval;
 }
 
@@ -681,14 +681,14 @@ bool getShowEvents()
         set by the application.
     time =       a timestamp from a #GdkEvent, or `GDK_CURRENT_TIME` if no timestamp is
         available.
-  Returns:     [gdk.types.GrabStatus.Success] if the grab was successful.
+  Returns:     [gdk.types.GrabStatus.success] if the grab was successful.
 
   Deprecated:     Use [gdk.device.Device.grab] instead.
 */
 gdk.types.GrabStatus keyboardGrab(gdk.window.Window window, bool ownerEvents, uint time)
 {
   GdkGrabStatus _cretval;
-  _cretval = gdk_keyboard_grab(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, ownerEvents, time);
+  _cretval = gdk_keyboard_grab(window ? cast(GdkWindow*)window.cPtr(No.dup) : null, ownerEvents, time);
   gdk.types.GrabStatus _retval = cast(gdk.types.GrabStatus)_cretval;
   return _retval;
 }
@@ -735,7 +735,7 @@ void keyvalConvertCase(uint symbol, out uint lower, out uint upper)
 uint keyvalFromName(string keyvalName)
 {
   uint _retval;
-  const(char)* _keyvalName = keyvalName.toCString(No.Alloc);
+  const(char)* _keyvalName = keyvalName.toCString(No.alloc);
   _retval = gdk_keyval_from_name(_keyvalName);
   return _retval;
 }
@@ -784,7 +784,7 @@ string keyvalName(uint keyval)
 {
   char* _cretval;
   _cretval = gdk_keyval_name(keyval);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
   return _retval;
 }
 
@@ -880,7 +880,7 @@ void notifyStartupComplete()
 */
 void notifyStartupCompleteWithId(string startupId)
 {
-  const(char)* _startupId = startupId.toCString(No.Alloc);
+  const(char)* _startupId = startupId.toCString(No.alloc);
   gdk_notify_startup_complete_with_id(_startupId);
 }
 
@@ -894,8 +894,8 @@ void notifyStartupCompleteWithId(string startupId)
 gdk.window.Window offscreenWindowGetEmbedder(gdk.window.Window window)
 {
   GdkWindow* _cretval;
-  _cretval = gdk_offscreen_window_get_embedder(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+  _cretval = gdk_offscreen_window_get_embedder(window ? cast(GdkWindow*)window.cPtr(No.dup) : null);
+  auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
   return _retval;
 }
 
@@ -911,8 +911,8 @@ gdk.window.Window offscreenWindowGetEmbedder(gdk.window.Window window)
 cairo.surface.Surface offscreenWindowGetSurface(gdk.window.Window window)
 {
   cairo_surface_t* _cretval;
-  _cretval = gdk_offscreen_window_get_surface(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.Take) : null;
+  _cretval = gdk_offscreen_window_get_surface(window ? cast(GdkWindow*)window.cPtr(No.dup) : null);
+  auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.take) : null;
   return _retval;
 }
 
@@ -929,7 +929,7 @@ cairo.surface.Surface offscreenWindowGetSurface(gdk.window.Window window)
 */
 void offscreenWindowSetEmbedder(gdk.window.Window window, gdk.window.Window embedder)
 {
-  gdk_offscreen_window_set_embedder(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, embedder ? cast(GdkWindow*)embedder.cPtr(No.Dup) : null);
+  gdk_offscreen_window_set_embedder(window ? cast(GdkWindow*)window.cPtr(No.dup) : null, embedder ? cast(GdkWindow*)embedder.cPtr(No.dup) : null);
 }
 
 /**
@@ -952,7 +952,7 @@ pango.context.Context pangoContextGet()
 {
   PangoContext* _cretval;
   _cretval = gdk_pango_context_get();
-  auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
+  auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.take);
   return _retval;
 }
 
@@ -977,8 +977,8 @@ pango.context.Context pangoContextGet()
 pango.context.Context pangoContextGetForDisplay(gdk.display.Display display)
 {
   PangoContext* _cretval;
-  _cretval = gdk_pango_context_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
+  _cretval = gdk_pango_context_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.dup) : null);
+  auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.take);
   return _retval;
 }
 
@@ -1003,8 +1003,8 @@ pango.context.Context pangoContextGetForDisplay(gdk.display.Display display)
 pango.context.Context pangoContextGetForScreen(gdk.screen.Screen screen)
 {
   PangoContext* _cretval;
-  _cretval = gdk_pango_context_get_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
-  auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
+  _cretval = gdk_pango_context_get_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null);
+  auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.take);
   return _retval;
 }
 
@@ -1028,8 +1028,8 @@ pango.context.Context pangoContextGetForScreen(gdk.screen.Screen screen)
 gdkpixbuf.pixbuf.Pixbuf pixbufGetFromSurface(cairo.surface.Surface surface, int srcX, int srcY, int width, int height)
 {
   PixbufC* _cretval;
-  _cretval = gdk_pixbuf_get_from_surface(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, srcX, srcY, width, height);
-  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+  _cretval = gdk_pixbuf_get_from_surface(surface ? cast(cairo_surface_t*)surface.cPtr(No.dup) : null, srcX, srcY, width, height);
+  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
   return _retval;
 }
 
@@ -1077,8 +1077,8 @@ gdkpixbuf.pixbuf.Pixbuf pixbufGetFromSurface(cairo.surface.Surface surface, int 
 gdkpixbuf.pixbuf.Pixbuf pixbufGetFromWindow(gdk.window.Window window, int srcX, int srcY, int width, int height)
 {
   PixbufC* _cretval;
-  _cretval = gdk_pixbuf_get_from_window(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, srcX, srcY, width, height);
-  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+  _cretval = gdk_pixbuf_get_from_window(window ? cast(GdkWindow*)window.cPtr(No.dup) : null, srcX, srcY, width, height);
+  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
   return _retval;
 }
 
@@ -1124,14 +1124,14 @@ gdkpixbuf.pixbuf.Pixbuf pixbufGetFromWindow(gdk.window.Window window, int srcX, 
     time =       the timestamp of the event which led to this pointer grab. This usually
               comes from a #GdkEventButton struct, though `GDK_CURRENT_TIME` can be used if
               the time isn’t known.
-  Returns:     [gdk.types.GrabStatus.Success] if the grab was successful.
+  Returns:     [gdk.types.GrabStatus.success] if the grab was successful.
 
   Deprecated:     Use [gdk.device.Device.grab] instead.
 */
 gdk.types.GrabStatus pointerGrab(gdk.window.Window window, bool ownerEvents, gdk.types.EventMask eventMask, gdk.window.Window confineTo, gdk.cursor.Cursor cursor, uint time)
 {
   GdkGrabStatus _cretval;
-  _cretval = gdk_pointer_grab(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, ownerEvents, eventMask, confineTo ? cast(GdkWindow*)confineTo.cPtr(No.Dup) : null, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null, time);
+  _cretval = gdk_pointer_grab(window ? cast(GdkWindow*)window.cPtr(No.dup) : null, ownerEvents, eventMask, confineTo ? cast(GdkWindow*)confineTo.cPtr(No.dup) : null, cursor ? cast(GdkCursor*)cursor.cPtr(No.dup) : null, time);
   gdk.types.GrabStatus _retval = cast(gdk.types.GrabStatus)_cretval;
   return _retval;
 }
@@ -1188,7 +1188,7 @@ void preParseLibgtkOnly()
 */
 void propertyDelete(gdk.window.Window window, gdk.atom.Atom property)
 {
-  gdk_property_delete(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, property ? cast(GdkAtom)property.cPtr : null);
+  gdk_property_delete(window ? cast(GdkWindow*)window.cPtr(No.dup) : null, property ? cast(GdkAtom)property.cPtr : null);
 }
 
 /**
@@ -1237,8 +1237,8 @@ bool propertyGet(gdk.window.Window window, gdk.atom.Atom property, gdk.atom.Atom
   GdkAtom _actualPropertyType;
   int _actualLength;
   ubyte* _data;
-  _retval = gdk_property_get(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, property ? cast(GdkAtom)property.cPtr : null, type ? cast(GdkAtom)type.cPtr : null, offset, length, pdelete, &_actualPropertyType, cast(int*)&actualFormat, &_actualLength, &_data);
-  actualPropertyType = new gdk.atom.Atom(cast(void*)&_actualPropertyType, No.Take);
+  _retval = gdk_property_get(window ? cast(GdkWindow*)window.cPtr(No.dup) : null, property ? cast(GdkAtom)property.cPtr : null, type ? cast(GdkAtom)type.cPtr : null, offset, length, pdelete, &_actualPropertyType, cast(int*)&actualFormat, &_actualLength, &_data);
+  actualPropertyType = new gdk.atom.Atom(cast(void*)&_actualPropertyType, No.take);
   data.length = _actualLength;
   data[0 .. $] = (cast(ubyte*)_data)[0 .. _actualLength];
   safeFree(cast(void*)_data);
@@ -1306,7 +1306,7 @@ void queryVisualTypes(out gdk.types.VisualType[] visualTypes)
 */
 void selectionConvert(gdk.window.Window requestor, gdk.atom.Atom selection, gdk.atom.Atom target, uint time)
 {
-  gdk_selection_convert(requestor ? cast(GdkWindow*)requestor.cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, target ? cast(GdkAtom)target.cPtr : null, time);
+  gdk_selection_convert(requestor ? cast(GdkWindow*)requestor.cPtr(No.dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, target ? cast(GdkAtom)target.cPtr : null, time);
 }
 
 /**
@@ -1324,7 +1324,7 @@ gdk.window.Window selectionOwnerGet(gdk.atom.Atom selection)
 {
   GdkWindow* _cretval;
   _cretval = gdk_selection_owner_get(selection ? cast(GdkAtom)selection.cPtr : null);
-  auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+  auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
   return _retval;
 }
 
@@ -1345,8 +1345,8 @@ gdk.window.Window selectionOwnerGet(gdk.atom.Atom selection)
 gdk.window.Window selectionOwnerGetForDisplay(gdk.display.Display display, gdk.atom.Atom selection)
 {
   GdkWindow* _cretval;
-  _cretval = gdk_selection_owner_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection.cPtr : null);
-  auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+  _cretval = gdk_selection_owner_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.dup) : null, selection ? cast(GdkAtom)selection.cPtr : null);
+  auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
   return _retval;
 }
 
@@ -1369,7 +1369,7 @@ gdk.window.Window selectionOwnerGetForDisplay(gdk.display.Display display, gdk.a
 bool selectionOwnerSet(gdk.window.Window owner, gdk.atom.Atom selection, uint time, bool sendEvent)
 {
   bool _retval;
-  _retval = gdk_selection_owner_set(owner ? cast(GdkWindow*)owner.cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, time, sendEvent);
+  _retval = gdk_selection_owner_set(owner ? cast(GdkWindow*)owner.cPtr(No.dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, time, sendEvent);
   return _retval;
 }
 
@@ -1391,7 +1391,7 @@ bool selectionOwnerSet(gdk.window.Window owner, gdk.atom.Atom selection, uint ti
 bool selectionOwnerSetForDisplay(gdk.display.Display display, gdk.window.Window owner, gdk.atom.Atom selection, uint time, bool sendEvent)
 {
   bool _retval;
-  _retval = gdk_selection_owner_set_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, owner ? cast(GdkWindow*)owner.cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, time, sendEvent);
+  _retval = gdk_selection_owner_set_for_display(display ? cast(GdkDisplay*)display.cPtr(No.dup) : null, owner ? cast(GdkWindow*)owner.cPtr(No.dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, time, sendEvent);
   return _retval;
 }
 
@@ -1408,7 +1408,7 @@ bool selectionOwnerSetForDisplay(gdk.display.Display display, gdk.window.Window 
 */
 void selectionSendNotify(gdk.window.Window requestor, gdk.atom.Atom selection, gdk.atom.Atom target, gdk.atom.Atom property, uint time)
 {
-  gdk_selection_send_notify(requestor ? cast(GdkWindow*)requestor.cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, target ? cast(GdkAtom)target.cPtr : null, property ? cast(GdkAtom)property.cPtr : null, time);
+  gdk_selection_send_notify(requestor ? cast(GdkWindow*)requestor.cPtr(No.dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, target ? cast(GdkAtom)target.cPtr : null, property ? cast(GdkAtom)property.cPtr : null, time);
 }
 
 /**
@@ -1424,7 +1424,7 @@ void selectionSendNotify(gdk.window.Window requestor, gdk.atom.Atom selection, g
 */
 void selectionSendNotifyForDisplay(gdk.display.Display display, gdk.window.Window requestor, gdk.atom.Atom selection, gdk.atom.Atom target, gdk.atom.Atom property, uint time)
 {
-  gdk_selection_send_notify_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, requestor ? cast(GdkWindow*)requestor.cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, target ? cast(GdkAtom)target.cPtr : null, property ? cast(GdkAtom)property.cPtr : null, time);
+  gdk_selection_send_notify_for_display(display ? cast(GdkDisplay*)display.cPtr(No.dup) : null, requestor ? cast(GdkWindow*)requestor.cPtr(No.dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, target ? cast(GdkAtom)target.cPtr : null, property ? cast(GdkAtom)property.cPtr : null, time);
 }
 
 /**
@@ -1460,7 +1460,7 @@ void selectionSendNotifyForDisplay(gdk.display.Display display, gdk.window.Windo
 */
 void setAllowedBackends(string backends)
 {
-  const(char)* _backends = backends.toCString(No.Alloc);
+  const(char)* _backends = backends.toCString(No.alloc);
   gdk_set_allowed_backends(_backends);
 }
 
@@ -1490,7 +1490,7 @@ void setDoubleClickTime(uint msec)
 */
 void setProgramClass(string programClass)
 {
-  const(char)* _programClass = programClass.toCString(No.Alloc);
+  const(char)* _programClass = programClass.toCString(No.alloc);
   gdk_set_program_class(_programClass);
 }
 
@@ -1519,15 +1519,15 @@ void setShowEvents(bool showEvents)
 bool settingGet(string name, gobject.value.Value value)
 {
   bool _retval;
-  const(char)* _name = name.toCString(No.Alloc);
-  _retval = gdk_setting_get(_name, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+  const(char)* _name = name.toCString(No.alloc);
+  _retval = gdk_setting_get(_name, value ? cast(GValue*)value.cPtr(No.dup) : null);
   return _retval;
 }
 
 /** */
 void synthesizeWindowState(gdk.window.Window window, gdk.types.WindowState unsetFlags, gdk.types.WindowState setFlags)
 {
-  gdk_synthesize_window_state(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, unsetFlags, setFlags);
+  gdk_synthesize_window_state(window ? cast(GdkWindow*)window.cPtr(No.dup) : null, unsetFlags, setFlags);
 }
 
 /**
@@ -1541,7 +1541,7 @@ void synthesizeWindowState(gdk.window.Window window, gdk.types.WindowState unset
 */
 void testRenderSync(gdk.window.Window window)
 {
-  gdk_test_render_sync(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
+  gdk_test_render_sync(window ? cast(GdkWindow*)window.cPtr(No.dup) : null);
 }
 
 /**
@@ -1563,14 +1563,14 @@ void testRenderSync(gdk.window.Window window)
     y =       y coordinate within window for the button event
     button =       Number of the pointer button for the event, usually 1, 2 or 3
     modifiers =       Keyboard modifiers the event is setup with
-    buttonPressrelease =       either [gdk.types.EventType.ButtonPress] or [gdk.types.EventType.ButtonRelease]
+    buttonPressrelease =       either [gdk.types.EventType.buttonPress] or [gdk.types.EventType.buttonRelease]
   Returns:     whether all actions necessary for a button event simulation
         were carried out successfully
 */
 bool testSimulateButton(gdk.window.Window window, int x, int y, uint button, gdk.types.ModifierType modifiers, gdk.types.EventType buttonPressrelease)
 {
   bool _retval;
-  _retval = gdk_test_simulate_button(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, x, y, button, modifiers, buttonPressrelease);
+  _retval = gdk_test_simulate_button(window ? cast(GdkWindow*)window.cPtr(No.dup) : null, x, y, button, modifiers, buttonPressrelease);
   return _retval;
 }
 
@@ -1597,14 +1597,14 @@ bool testSimulateButton(gdk.window.Window window, int x, int y, uint button, gdk
     y =       y coordinate within window for the key event
     keyval =       A GDK keyboard value
     modifiers =       Keyboard modifiers the event is setup with
-    keyPressrelease =       either [gdk.types.EventType.KeyPress] or [gdk.types.EventType.KeyRelease]
+    keyPressrelease =       either [gdk.types.EventType.keyPress] or [gdk.types.EventType.keyRelease]
   Returns:     whether all actions necessary for a key event simulation
         were carried out successfully
 */
 bool testSimulateKey(gdk.window.Window window, int x, int y, uint keyval, gdk.types.ModifierType modifiers, gdk.types.EventType keyPressrelease)
 {
   bool _retval;
-  _retval = gdk_test_simulate_key(window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, x, y, keyval, modifiers, keyPressrelease);
+  _retval = gdk_test_simulate_key(window ? cast(GdkWindow*)window.cPtr(No.dup) : null, x, y, keyval, modifiers, keyPressrelease);
   return _retval;
 }
 
@@ -1630,7 +1630,7 @@ int textPropertyToUtf8ListForDisplay(gdk.display.Display display, gdk.atom.Atom 
 
   auto _text = cast(const(ubyte)*)text.ptr;
   char** _list;
-  _retval = gdk_text_property_to_utf8_list_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, encoding ? cast(GdkAtom)encoding.cPtr : null, format, _text, _length, &_list);
+  _retval = gdk_text_property_to_utf8_list_for_display(display ? cast(GdkDisplay*)display.cPtr(No.dup) : null, encoding ? cast(GdkAtom)encoding.cPtr : null, format, _text, _length, &_list);
   uint _lenlist;
   if (_list)
   {
@@ -1640,7 +1640,7 @@ int textPropertyToUtf8ListForDisplay(gdk.display.Display display, gdk.atom.Atom 
   }
   list.length = _lenlist;
   foreach (i; 0 .. _lenlist)
-    list[i] = _list[i].fromCString(Yes.Free);
+    list[i] = _list[i].fromCString(Yes.free);
   safeFree(cast(void*)_list);
   return _retval;
 }
@@ -1880,8 +1880,8 @@ uint unicodeToKeyval(uint wc)
 string utf8ToStringTarget(string str)
 {
   char* _cretval;
-  const(char)* _str = str.toCString(No.Alloc);
+  const(char)* _str = str.toCString(No.alloc);
   _cretval = gdk_utf8_to_string_target(_str);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
   return _retval;
 }

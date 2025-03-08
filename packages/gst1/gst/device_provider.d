@@ -27,7 +27,7 @@ import gst.types;
 class DeviceProvider : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -57,8 +57,8 @@ class DeviceProvider : gst.object.ObjectGst
   static bool register(gst.plugin.Plugin plugin, string name, uint rank, gobject.types.GType type)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_device_provider_register(plugin ? cast(GstPlugin*)plugin.cPtr(No.Dup) : null, _name, rank, type);
+    const(char)* _name = name.toCString(No.alloc);
+    _retval = gst_device_provider_register(plugin ? cast(GstPlugin*)plugin.cPtr(No.dup) : null, _name, rank, type);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class DeviceProvider : gst.object.ObjectGst
   */
   void deviceAdd(gst.device.Device device)
   {
-    gst_device_provider_device_add(cast(GstDeviceProvider*)cPtr, device ? cast(GstDevice*)device.cPtr(No.Dup) : null);
+    gst_device_provider_device_add(cast(GstDeviceProvider*)cPtr, device ? cast(GstDevice*)device.cPtr(No.dup) : null);
   }
 
   /**
@@ -98,7 +98,7 @@ class DeviceProvider : gst.object.ObjectGst
   */
   void deviceChanged(gst.device.Device device, gst.device.Device changedDevice)
   {
-    gst_device_provider_device_changed(cast(GstDeviceProvider*)cPtr, device ? cast(GstDevice*)device.cPtr(No.Dup) : null, changedDevice ? cast(GstDevice*)changedDevice.cPtr(No.Dup) : null);
+    gst_device_provider_device_changed(cast(GstDeviceProvider*)cPtr, device ? cast(GstDevice*)device.cPtr(No.dup) : null, changedDevice ? cast(GstDevice*)changedDevice.cPtr(No.dup) : null);
   }
 
   /**
@@ -111,7 +111,7 @@ class DeviceProvider : gst.object.ObjectGst
   */
   void deviceRemove(gst.device.Device device)
   {
-    gst_device_provider_device_remove(cast(GstDeviceProvider*)cPtr, device ? cast(GstDevice*)device.cPtr(No.Dup) : null);
+    gst_device_provider_device_remove(cast(GstDeviceProvider*)cPtr, device ? cast(GstDevice*)device.cPtr(No.dup) : null);
   }
 
   /**
@@ -122,7 +122,7 @@ class DeviceProvider : gst.object.ObjectGst
   {
     GstBus* _cretval;
     _cretval = gst_device_provider_get_bus(cast(GstDeviceProvider*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class DeviceProvider : gst.object.ObjectGst
   {
     GstDeviceProviderFactory* _cretval;
     _cretval = gst_device_provider_get_factory(cast(GstDeviceProvider*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.device_provider_factory.DeviceProviderFactory)(cast(GstDeviceProviderFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gst.device_provider_factory.DeviceProviderFactory)(cast(GstDeviceProviderFactory*)_cretval, No.take);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class DeviceProvider : gst.object.ObjectGst
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -189,9 +189,9 @@ class DeviceProvider : gst.object.ObjectGst
   string getMetadata(string key)
   {
     const(char)* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.alloc);
     _cretval = gst_device_provider_get_metadata(cast(GstDeviceProvider*)cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class DeviceProvider : gst.object.ObjectGst
   */
   void hideProvider(string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gst_device_provider_hide_provider(cast(GstDeviceProvider*)cPtr, _name);
   }
 
@@ -265,7 +265,7 @@ class DeviceProvider : gst.object.ObjectGst
   */
   void unhideProvider(string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gst_device_provider_unhide_provider(cast(GstDeviceProvider*)cPtr, _name);
   }
 
@@ -279,10 +279,10 @@ class DeviceProvider : gst.object.ObjectGst
     Connect to ProviderHidden signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectProviderHidden(T)(T callback, Flag!"After" after = No.After)
+  ulong connectProviderHidden(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ProviderHiddenCallbackDlg) || is(T : ProviderHiddenCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -308,10 +308,10 @@ class DeviceProvider : gst.object.ObjectGst
     Connect to ProviderUnhidden signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectProviderUnhidden(T)(T callback, Flag!"After" after = No.After)
+  ulong connectProviderUnhidden(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ProviderUnhiddenCallbackDlg) || is(T : ProviderUnhiddenCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -43,7 +43,7 @@ import gtk.types;
 class TreeSelection : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -89,10 +89,10 @@ class TreeSelection : gobject.object.ObjectG
 
   /**
       Sets iter to the currently selected node if selection is set to
-    [gtk.types.SelectionMode.Single] or [gtk.types.SelectionMode.Browse].  iter may be NULL if you
+    [gtk.types.SelectionMode.single] or [gtk.types.SelectionMode.browse].  iter may be NULL if you
     just want to test if selection has any selected nodes.  model is filled
     with the current model as a convenience.  This function will not work if you
-    use selection is [gtk.types.SelectionMode.Multiple].
+    use selection is [gtk.types.SelectionMode.multiple].
     Params:
       model =       A pointer to set to the [gtk.tree_model.TreeModel]
       iter =       The [gtk.tree_iter.TreeIter]
@@ -106,8 +106,8 @@ class TreeSelection : gobject.object.ObjectG
     GtkTreeModel* _model;
     GtkTreeIter _iter;
     _retval = gtk_tree_selection_get_selected(cast(GtkTreeSelection*)cPtr, &_model, &_iter);
-    model = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
+    model = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_model, No.take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.take);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class TreeSelection : gobject.object.ObjectG
     GtkTreeModel* _model;
     _cretval = gtk_tree_selection_get_selected_rows(cast(GtkTreeSelection*)cPtr, &_model);
     auto _retval = gListToD!(gtk.tree_path.TreePath, GidOwnership.Full)(cast(GList*)_cretval);
-    model = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
+    model = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_model, No.take);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class TreeSelection : gobject.object.ObjectG
   {
     GtkTreeView* _cretval;
     _cretval = gtk_tree_selection_get_tree_view(cast(GtkTreeSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_view.TreeView)(cast(GtkTreeView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_view.TreeView)(cast(GtkTreeView*)_cretval, No.take);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class TreeSelection : gobject.object.ObjectG
   bool iterIsSelected(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = gtk_tree_selection_iter_is_selected(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_tree_selection_iter_is_selected(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -178,12 +178,12 @@ class TreeSelection : gobject.object.ObjectG
   bool pathIsSelected(gtk.tree_path.TreePath path)
   {
     bool _retval;
-    _retval = gtk_tree_selection_path_is_selected(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    _retval = gtk_tree_selection_path_is_selected(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null);
     return _retval;
   }
 
   /**
-      Selects all the nodes. selection must be set to [gtk.types.SelectionMode.Multiple]
+      Selects all the nodes. selection must be set to [gtk.types.SelectionMode.multiple]
     mode.
   
     Deprecated:     Use GtkListView or GtkColumnView
@@ -202,7 +202,7 @@ class TreeSelection : gobject.object.ObjectG
   */
   void selectIter(gtk.tree_iter.TreeIter iter)
   {
-    gtk_tree_selection_select_iter(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
+    gtk_tree_selection_select_iter(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.dup) : null);
   }
 
   /**
@@ -214,12 +214,12 @@ class TreeSelection : gobject.object.ObjectG
   */
   void selectPath(gtk.tree_path.TreePath path)
   {
-    gtk_tree_selection_select_path(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    gtk_tree_selection_select_path(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null);
   }
 
   /**
       Selects a range of nodes, determined by start_path and end_path inclusive.
-    selection must be set to [gtk.types.SelectionMode.Multiple] mode.
+    selection must be set to [gtk.types.SelectionMode.multiple] mode.
     Params:
       startPath =       The initial node of the range.
       endPath =       The final node of the range.
@@ -228,7 +228,7 @@ class TreeSelection : gobject.object.ObjectG
   */
   void selectRange(gtk.tree_path.TreePath startPath, gtk.tree_path.TreePath endPath)
   {
-    gtk_tree_selection_select_range(cast(GtkTreeSelection*)cPtr, startPath ? cast(GtkTreePath*)startPath.cPtr(No.Dup) : null, endPath ? cast(GtkTreePath*)endPath.cPtr(No.Dup) : null);
+    gtk_tree_selection_select_range(cast(GtkTreeSelection*)cPtr, startPath ? cast(GtkTreePath*)startPath.cPtr(No.dup) : null, endPath ? cast(GtkTreePath*)endPath.cPtr(No.dup) : null);
   }
 
   /**
@@ -246,7 +246,7 @@ class TreeSelection : gobject.object.ObjectG
     {
       auto _dlg = cast(gtk.types.TreeSelectionForeachFunc*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.take) : null, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -256,7 +256,7 @@ class TreeSelection : gobject.object.ObjectG
 
   /**
       Sets the selection mode of the selection.  If the previous type was
-    [gtk.types.SelectionMode.Multiple], then the anchor is kept selected, if it was
+    [gtk.types.SelectionMode.multiple], then the anchor is kept selected, if it was
     previously selected.
     Params:
       type =       The selection mode
@@ -286,7 +286,7 @@ class TreeSelection : gobject.object.ObjectG
     {
       auto _dlg = cast(gtk.types.TreeSelectionFunc*)data;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_selection.TreeSelection)(cast(void*)selection, No.Take), ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, pathCurrentlySelected);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_selection.TreeSelection)(cast(void*)selection, No.take), ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.take) : null, pathCurrentlySelected);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -315,7 +315,7 @@ class TreeSelection : gobject.object.ObjectG
   */
   void unselectIter(gtk.tree_iter.TreeIter iter)
   {
-    gtk_tree_selection_unselect_iter(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
+    gtk_tree_selection_unselect_iter(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.dup) : null);
   }
 
   /**
@@ -327,7 +327,7 @@ class TreeSelection : gobject.object.ObjectG
   */
   void unselectPath(gtk.tree_path.TreePath path)
   {
-    gtk_tree_selection_unselect_path(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    gtk_tree_selection_unselect_path(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null);
   }
 
   /**
@@ -341,7 +341,7 @@ class TreeSelection : gobject.object.ObjectG
   */
   void unselectRange(gtk.tree_path.TreePath startPath, gtk.tree_path.TreePath endPath)
   {
-    gtk_tree_selection_unselect_range(cast(GtkTreeSelection*)cPtr, startPath ? cast(GtkTreePath*)startPath.cPtr(No.Dup) : null, endPath ? cast(GtkTreePath*)endPath.cPtr(No.Dup) : null);
+    gtk_tree_selection_unselect_range(cast(GtkTreeSelection*)cPtr, startPath ? cast(GtkTreePath*)startPath.cPtr(No.dup) : null, endPath ? cast(GtkTreePath*)endPath.cPtr(No.dup) : null);
   }
 
   /**
@@ -364,10 +364,10 @@ class TreeSelection : gobject.object.ObjectG
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

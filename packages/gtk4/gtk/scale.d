@@ -99,12 +99,12 @@ import pango.layout;
   
   # Accessibility
   
-  [gtk.scale.Scale] uses the [gtk.types.AccessibleRole.Slider] role.
+  [gtk.scale.Scale] uses the [gtk.types.AccessibleRole.slider] role.
 */
 class Scale : gtk.range.Range
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -131,8 +131,8 @@ class Scale : gtk.range.Range
   this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_scale_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    _cretval = gtk_scale_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
+    this(_cretval, No.take);
   }
 
   /**
@@ -158,7 +158,7 @@ class Scale : gtk.range.Range
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_new_with_range(orientation, min, max, step);
-    auto _retval = ObjectG.getDObject!(gtk.scale.Scale)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.scale.Scale)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -175,15 +175,15 @@ class Scale : gtk.range.Range
     Params:
       value =       the value at which the mark is placed, must be between
           the lower and upper limits of the scales’ adjustment
-      position =       where to draw the mark. For a horizontal scale, [gtk.types.PositionType.Top]
-          and [gtk.types.PositionType.Left] are drawn above the scale, anything else below.
-          For a vertical scale, [gtk.types.PositionType.Left] and [gtk.types.PositionType.Top] are drawn to
+      position =       where to draw the mark. For a horizontal scale, [gtk.types.PositionType.top]
+          and [gtk.types.PositionType.left] are drawn above the scale, anything else below.
+          For a vertical scale, [gtk.types.PositionType.left] and [gtk.types.PositionType.top] are drawn to
           the left of the scale, anything else to the right.
       markup =       Text to be shown at the mark, using Pango markup
   */
   void addMark(double value, gtk.types.PositionType position, string markup = null)
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString(No.alloc);
     gtk_scale_add_mark(cast(GtkScale*)cPtr, value, position, _markup);
   }
 
@@ -242,7 +242,7 @@ class Scale : gtk.range.Range
   {
     PangoLayout* _cretval;
     _cretval = gtk_scale_get_layout(cast(GtkScale*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.take);
     return _retval;
   }
 
@@ -328,8 +328,8 @@ class Scale : gtk.range.Range
       string _dretval;
       auto _dlg = cast(gtk.types.ScaleFormatValueFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gtk.scale.Scale)(cast(void*)scale, No.Take), value);
-      char* _retval = _dretval.toCString(Yes.Alloc);
+      _dretval = (*_dlg)(ObjectG.getDObject!(gtk.scale.Scale)(cast(void*)scale, No.take), value);
+      char* _retval = _dretval.toCString(Yes.alloc);
 
       return _retval;
     }

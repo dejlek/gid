@@ -16,7 +16,7 @@ import gstgl.types;
 class GLViewConvert : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -37,7 +37,7 @@ class GLViewConvert : gst.object.ObjectGst
   {
     GstGLViewConvert* _cretval;
     _cretval = gst_gl_view_convert_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -51,8 +51,8 @@ class GLViewConvert : gst.object.ObjectGst
   gst.caps.Caps fixateCaps(gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps othercaps)
   {
     GstCaps* _cretval;
-    _cretval = gst_gl_view_convert_fixate_caps(cast(GstGLViewConvert*)cPtr, direction, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, othercaps ? cast(GstCaps*)othercaps.cPtr(Yes.Dup) : null);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_gl_view_convert_fixate_caps(cast(GstGLViewConvert*)cPtr, direction, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null, othercaps ? cast(GstCaps*)othercaps.cPtr(Yes.dup) : null);
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -68,7 +68,7 @@ class GLViewConvert : gst.object.ObjectGst
     GstBuffer* _outbufPtr;
     _cretval = gst_gl_view_convert_get_output(cast(GstGLViewConvert*)cPtr, &_outbufPtr);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
-    outbufPtr = new gst.buffer.Buffer(cast(void*)_outbufPtr, Yes.Take);
+    outbufPtr = new gst.buffer.Buffer(cast(void*)_outbufPtr, Yes.take);
     return _retval;
   }
 
@@ -82,8 +82,8 @@ class GLViewConvert : gst.object.ObjectGst
   gst.buffer.Buffer perform(gst.buffer.Buffer inbuf)
   {
     GstBuffer* _cretval;
-    _cretval = gst_gl_view_convert_perform(cast(GstGLViewConvert*)cPtr, inbuf ? cast(GstBuffer*)inbuf.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_gl_view_convert_perform(cast(GstGLViewConvert*)cPtr, inbuf ? cast(GstBuffer*)inbuf.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class GLViewConvert : gst.object.ObjectGst
   bool setCaps(gst.caps.Caps inCaps, gst.caps.Caps outCaps)
   {
     bool _retval;
-    _retval = gst_gl_view_convert_set_caps(cast(GstGLViewConvert*)cPtr, inCaps ? cast(GstCaps*)inCaps.cPtr(No.Dup) : null, outCaps ? cast(GstCaps*)outCaps.cPtr(No.Dup) : null);
+    _retval = gst_gl_view_convert_set_caps(cast(GstGLViewConvert*)cPtr, inCaps ? cast(GstCaps*)inCaps.cPtr(No.dup) : null, outCaps ? cast(GstCaps*)outCaps.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class GLViewConvert : gst.object.ObjectGst
   */
   void setContext(gstgl.glcontext.GLContext context)
   {
-    gst_gl_view_convert_set_context(cast(GstGLViewConvert*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
+    gst_gl_view_convert_set_context(cast(GstGLViewConvert*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
   }
 
   /**
@@ -130,7 +130,7 @@ class GLViewConvert : gst.object.ObjectGst
   gst.types.FlowReturn submitInputBuffer(bool isDiscont, gst.buffer.Buffer input)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_gl_view_convert_submit_input_buffer(cast(GstGLViewConvert*)cPtr, isDiscont, input ? cast(GstBuffer*)input.cPtr(Yes.Dup) : null);
+    _cretval = gst_gl_view_convert_submit_input_buffer(cast(GstGLViewConvert*)cPtr, isDiscont, input ? cast(GstBuffer*)input.cPtr(Yes.dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -146,8 +146,8 @@ class GLViewConvert : gst.object.ObjectGst
   gst.caps.Caps transformCaps(gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps filter)
   {
     GstCaps* _cretval;
-    _cretval = gst_gl_view_convert_transform_caps(cast(GstGLViewConvert*)cPtr, direction, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_gl_view_convert_transform_caps(cast(GstGLViewConvert*)cPtr, direction, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null, filter ? cast(GstCaps*)filter.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

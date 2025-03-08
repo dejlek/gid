@@ -14,7 +14,7 @@ class BindingSignal
 {
   GtkBindingSignal cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.BindingSignal");
@@ -37,13 +37,13 @@ class BindingSignal
 
   @property string signalName()
   {
-    return (cast(GtkBindingSignal*)cPtr).signalName.fromCString(No.Free);
+    return (cast(GtkBindingSignal*)cPtr).signalName.fromCString(No.free);
   }
 
   @property void signalName(string propval)
   {
     safeFree(cast(void*)(cast(GtkBindingSignal*)cPtr).signalName);
-    (cast(GtkBindingSignal*)cPtr).signalName = propval.toCString(Yes.Alloc);
+    (cast(GtkBindingSignal*)cPtr).signalName = propval.toCString(Yes.alloc);
   }
 
   @property uint nArgs()

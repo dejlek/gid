@@ -12,7 +12,7 @@ import gobject.object;
 class Decimal32 : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,7 +33,7 @@ class Decimal32 : gobject.object.ObjectG
   {
     GArrowDecimal32* _cretval;
     _cretval = garrow_decimal32_new_integer(data);
-    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -41,12 +41,12 @@ class Decimal32 : gobject.object.ObjectG
   static arrow.decimal32.Decimal32 newString(string data)
   {
     GArrowDecimal32* _cretval;
-    const(char)* _data = data.toCString(No.Alloc);
+    const(char)* _data = data.toCString(No.alloc);
     GError *_err;
     _cretval = garrow_decimal32_new_string(_data, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -63,7 +63,7 @@ class Decimal32 : gobject.object.ObjectG
   {
     GArrowDecimal32* _cretval;
     _cretval = garrow_decimal32_copy(cast(GArrowDecimal32*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -73,11 +73,11 @@ class Decimal32 : gobject.object.ObjectG
     GArrowDecimal32* _cretval;
     GArrowDecimal32* _remainder;
     GError *_err;
-    _cretval = garrow_decimal32_divide(cast(GArrowDecimal32*)cPtr, right ? cast(GArrowDecimal32*)right.cPtr(No.Dup) : null, &_remainder, &_err);
+    _cretval = garrow_decimal32_divide(cast(GArrowDecimal32*)cPtr, right ? cast(GArrowDecimal32*)right.cPtr(No.dup) : null, &_remainder, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.Take);
-    remainder = new arrow.decimal32.Decimal32(cast(void*)_remainder, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.take);
+    remainder = new arrow.decimal32.Decimal32(cast(void*)_remainder, Yes.take);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class Decimal32 : gobject.object.ObjectG
   bool equal(arrow.decimal32.Decimal32 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal32_equal(cast(GArrowDecimal32*)cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal.cPtr(No.Dup) : null);
+    _retval = garrow_decimal32_equal(cast(GArrowDecimal32*)cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class Decimal32 : gobject.object.ObjectG
   bool greaterThan(arrow.decimal32.Decimal32 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal32_greater_than(cast(GArrowDecimal32*)cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal.cPtr(No.Dup) : null);
+    _retval = garrow_decimal32_greater_than(cast(GArrowDecimal32*)cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class Decimal32 : gobject.object.ObjectG
   bool greaterThanOrEqual(arrow.decimal32.Decimal32 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal32_greater_than_or_equal(cast(GArrowDecimal32*)cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal.cPtr(No.Dup) : null);
+    _retval = garrow_decimal32_greater_than_or_equal(cast(GArrowDecimal32*)cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class Decimal32 : gobject.object.ObjectG
   bool lessThan(arrow.decimal32.Decimal32 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal32_less_than(cast(GArrowDecimal32*)cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal.cPtr(No.Dup) : null);
+    _retval = garrow_decimal32_less_than(cast(GArrowDecimal32*)cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class Decimal32 : gobject.object.ObjectG
   bool lessThanOrEqual(arrow.decimal32.Decimal32 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal32_less_than_or_equal(cast(GArrowDecimal32*)cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal.cPtr(No.Dup) : null);
+    _retval = garrow_decimal32_less_than_or_equal(cast(GArrowDecimal32*)cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -125,8 +125,8 @@ class Decimal32 : gobject.object.ObjectG
   arrow.decimal32.Decimal32 minus(arrow.decimal32.Decimal32 right)
   {
     GArrowDecimal32* _cretval;
-    _cretval = garrow_decimal32_minus(cast(GArrowDecimal32*)cPtr, right ? cast(GArrowDecimal32*)right.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.Take);
+    _cretval = garrow_decimal32_minus(cast(GArrowDecimal32*)cPtr, right ? cast(GArrowDecimal32*)right.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -134,8 +134,8 @@ class Decimal32 : gobject.object.ObjectG
   arrow.decimal32.Decimal32 multiply(arrow.decimal32.Decimal32 right)
   {
     GArrowDecimal32* _cretval;
-    _cretval = garrow_decimal32_multiply(cast(GArrowDecimal32*)cPtr, right ? cast(GArrowDecimal32*)right.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.Take);
+    _cretval = garrow_decimal32_multiply(cast(GArrowDecimal32*)cPtr, right ? cast(GArrowDecimal32*)right.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class Decimal32 : gobject.object.ObjectG
   bool notEqual(arrow.decimal32.Decimal32 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal32_not_equal(cast(GArrowDecimal32*)cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal.cPtr(No.Dup) : null);
+    _retval = garrow_decimal32_not_equal(cast(GArrowDecimal32*)cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -159,8 +159,8 @@ class Decimal32 : gobject.object.ObjectG
   arrow.decimal32.Decimal32 plus(arrow.decimal32.Decimal32 right)
   {
     GArrowDecimal32* _cretval;
-    _cretval = garrow_decimal32_plus(cast(GArrowDecimal32*)cPtr, right ? cast(GArrowDecimal32*)right.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.Take);
+    _cretval = garrow_decimal32_plus(cast(GArrowDecimal32*)cPtr, right ? cast(GArrowDecimal32*)right.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class Decimal32 : gobject.object.ObjectG
     _cretval = garrow_decimal32_rescale(cast(GArrowDecimal32*)cPtr, originalScale, newScale, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class Decimal32 : gobject.object.ObjectG
   {
     GBytes* _cretval;
     _cretval = garrow_decimal32_to_bytes(cast(GArrowDecimal32*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -198,7 +198,7 @@ class Decimal32 : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = garrow_decimal32_to_string(cast(GArrowDecimal32*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class Decimal32 : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = garrow_decimal32_to_string_scale(cast(GArrowDecimal32*)cPtr, scale);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

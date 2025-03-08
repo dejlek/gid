@@ -24,7 +24,7 @@ import gstnet.types;
 gstnet.net_address_meta.NetAddressMeta bufferAddNetAddressMeta(gst.buffer.Buffer buffer, gio.socket_address.SocketAddress addr)
 {
   GstNetAddressMeta* _cretval;
-  _cretval = gst_buffer_add_net_address_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, addr ? cast(GSocketAddress*)addr.cPtr(No.Dup) : null);
+  _cretval = gst_buffer_add_net_address_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null, addr ? cast(GSocketAddress*)addr.cPtr(No.dup) : null);
   auto _retval = _cretval ? new gstnet.net_address_meta.NetAddressMeta(cast(GstNetAddressMeta*)_cretval) : null;
   return _retval;
 }
@@ -39,7 +39,7 @@ gstnet.net_address_meta.NetAddressMeta bufferAddNetAddressMeta(gst.buffer.Buffer
 gstnet.net_control_message_meta.NetControlMessageMeta bufferAddNetControlMessageMeta(gst.buffer.Buffer buffer, gio.socket_control_message.SocketControlMessage message)
 {
   GstNetControlMessageMeta* _cretval;
-  _cretval = gst_buffer_add_net_control_message_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, message ? cast(GSocketControlMessage*)message.cPtr(No.Dup) : null);
+  _cretval = gst_buffer_add_net_control_message_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null, message ? cast(GSocketControlMessage*)message.cPtr(No.dup) : null);
   auto _retval = _cretval ? new gstnet.net_control_message_meta.NetControlMessageMeta(cast(GstNetControlMessageMeta*)_cretval) : null;
   return _retval;
 }
@@ -54,7 +54,7 @@ gstnet.net_control_message_meta.NetControlMessageMeta bufferAddNetControlMessage
 gstnet.net_address_meta.NetAddressMeta bufferGetNetAddressMeta(gst.buffer.Buffer buffer)
 {
   GstNetAddressMeta* _cretval;
-  _cretval = gst_buffer_get_net_address_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+  _cretval = gst_buffer_get_net_address_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null);
   auto _retval = _cretval ? new gstnet.net_address_meta.NetAddressMeta(cast(GstNetAddressMeta*)_cretval) : null;
   return _retval;
 }
@@ -85,7 +85,7 @@ gobject.types.GType netControlMessageMetaApiGetType()
 bool netUtilsSetSocketTos(gio.socket.Socket socket, int qosDscp)
 {
   bool _retval;
-  _retval = gst_net_utils_set_socket_tos(socket ? cast(GSocket*)socket.cPtr(No.Dup) : null, qosDscp);
+  _retval = gst_net_utils_set_socket_tos(socket ? cast(GSocket*)socket.cPtr(No.dup) : null, qosDscp);
   return _retval;
 }
 
@@ -119,7 +119,7 @@ bool ptpInit(ulong clockId, string[] interfaces = null)
   bool _retval;
   char*[] _tmpinterfaces;
   foreach (s; interfaces)
-    _tmpinterfaces ~= s.toCString(No.Alloc);
+    _tmpinterfaces ~= s.toCString(No.alloc);
   _tmpinterfaces ~= null;
   char** _interfaces = _tmpinterfaces.ptr;
   _retval = gst_ptp_init(clockId, _interfaces);
@@ -151,7 +151,7 @@ bool ptpInit(ulong clockId, string[] interfaces = null)
 bool ptpInitFull(gst.structure.Structure config)
 {
   bool _retval;
-  _retval = gst_ptp_init_full(config ? cast(const(GstStructure)*)config.cPtr(No.Dup) : null);
+  _retval = gst_ptp_init_full(config ? cast(const(GstStructure)*)config.cPtr(No.dup) : null);
   return _retval;
 }
 
@@ -193,7 +193,7 @@ gulong ptpStatisticsCallbackAdd(gstnet.types.PtpStatisticsCallback callback)
   {
     auto _dlg = cast(gstnet.types.PtpStatisticsCallback*)userData;
 
-    bool _retval = (*_dlg)(domain, stats ? new gst.structure.Structure(cast(void*)stats, No.Take) : null);
+    bool _retval = (*_dlg)(domain, stats ? new gst.structure.Structure(cast(void*)stats, No.take) : null);
     return _retval;
   }
   auto _callbackCB = callback ? &_callbackCallback : null;

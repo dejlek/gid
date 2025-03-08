@@ -10,7 +10,7 @@ import gobject.object;
 class MonthDayNano : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,14 +31,14 @@ class MonthDayNano : gobject.object.ObjectG
   {
     GArrowMonthDayNano* _cretval;
     _cretval = garrow_month_day_nano_new(month, day, nanosecond);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */
   bool equal(arrow.month_day_nano.MonthDayNano otherMonthNanoDay)
   {
     bool _retval;
-    _retval = garrow_month_day_nano_equal(cast(GArrowMonthDayNano*)cPtr, otherMonthNanoDay ? cast(GArrowMonthDayNano*)otherMonthNanoDay.cPtr(No.Dup) : null);
+    _retval = garrow_month_day_nano_equal(cast(GArrowMonthDayNano*)cPtr, otherMonthNanoDay ? cast(GArrowMonthDayNano*)otherMonthNanoDay.cPtr(No.dup) : null);
     return _retval;
   }
 }

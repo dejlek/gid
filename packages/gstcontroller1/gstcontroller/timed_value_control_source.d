@@ -21,7 +21,7 @@ import gstcontroller.types;
 class TimedValueControlSource : gst.control_source.ControlSource
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -51,7 +51,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
   {
     GSequenceIter* _cretval;
     _cretval = gst_timed_value_control_source_find_control_point_iter(cast(GstTimedValueControlSource*)cPtr, timestamp);
-    auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -150,10 +150,10 @@ class TimedValueControlSource : gst.control_source.ControlSource
     Connect to ValueAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectValueAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectValueAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ValueAddedCallbackDlg) || is(T : ValueAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -187,10 +187,10 @@ class TimedValueControlSource : gst.control_source.ControlSource
     Connect to ValueChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectValueChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ValueChangedCallbackDlg) || is(T : ValueChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -224,10 +224,10 @@ class TimedValueControlSource : gst.control_source.ControlSource
     Connect to ValueRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectValueRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectValueRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ValueRemovedCallbackDlg) || is(T : ValueRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

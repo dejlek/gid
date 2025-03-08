@@ -58,7 +58,7 @@ import gtk.widget;
 class Fixed : gtk.container.Container
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -82,7 +82,7 @@ class Fixed : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_fixed_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -94,7 +94,7 @@ class Fixed : gtk.container.Container
   */
   void move(gtk.widget.Widget widget, int x, int y)
   {
-    gtk_fixed_move(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, x, y);
+    gtk_fixed_move(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, x, y);
   }
 
   /**
@@ -106,6 +106,6 @@ class Fixed : gtk.container.Container
   */
   void put(gtk.widget.Widget widget, int x, int y)
   {
-    gtk_fixed_put(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, x, y);
+    gtk_fixed_put(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, x, y);
   }
 }

@@ -17,7 +17,7 @@ class RTPBuffer
 {
   GstRTPBuffer cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstRtp.RTPBuffer");
@@ -152,7 +152,7 @@ class RTPBuffer
   {
     GBytes* _cretval;
     _cretval = gst_rtp_buffer_get_extension_bytes(cast(GstRTPBuffer*)cPtr, cast(ushort*)&bits);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -252,7 +252,7 @@ class RTPBuffer
   {
     GstBuffer* _cretval;
     _cretval = gst_rtp_buffer_get_payload_buffer(cast(GstRTPBuffer*)cPtr);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class RTPBuffer
   {
     GBytes* _cretval;
     _cretval = gst_rtp_buffer_get_payload_bytes(cast(GstRTPBuffer*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -294,7 +294,7 @@ class RTPBuffer
   {
     GstBuffer* _cretval;
     _cretval = gst_rtp_buffer_get_payload_subbuffer(cast(GstRTPBuffer*)cPtr, offset, len);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -522,7 +522,7 @@ class RTPBuffer
   */
   static void allocateData(gst.buffer.Buffer buffer, uint payloadLen, ubyte padLen, ubyte csrcCount)
   {
-    gst_rtp_buffer_allocate_data(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, payloadLen, padLen, csrcCount);
+    gst_rtp_buffer_allocate_data(buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null, payloadLen, padLen, csrcCount);
   }
 
   /**
@@ -642,7 +642,7 @@ class RTPBuffer
     bool _retval;
     uint _size;
     void* _data;
-    _retval = gst_rtp_buffer_get_extension_onebyte_header_from_bytes(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, bitPattern, id, nth, &_data, &_size);
+    _retval = gst_rtp_buffer_get_extension_onebyte_header_from_bytes(bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null, bitPattern, id, nth, &_data, &_size);
     data.length = _size;
     data[0 .. $] = (cast(ubyte*)_data)[0 .. _size];
     return _retval;
@@ -660,7 +660,7 @@ class RTPBuffer
   {
     bool _retval;
     GstRTPBuffer _rtp;
-    _retval = gst_rtp_buffer_map(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, flags, &_rtp);
+    _retval = gst_rtp_buffer_map(buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null, flags, &_rtp);
     rtp = new gstrtp.rtpbuffer.RTPBuffer(cast(void*)&_rtp);
     return _retval;
   }
@@ -680,7 +680,7 @@ class RTPBuffer
   {
     GstBuffer* _cretval;
     _cretval = gst_rtp_buffer_new_allocate(payloadLen, padLen, csrcCount);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -699,7 +699,7 @@ class RTPBuffer
   {
     GstBuffer* _cretval;
     _cretval = gst_rtp_buffer_new_allocate_len(packetLen, padLen, csrcCount);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -721,7 +721,7 @@ class RTPBuffer
 
     auto _data = cast(const(void)*)data.ptr;
     _cretval = gst_rtp_buffer_new_copy_data(_data, _len);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

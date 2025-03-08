@@ -11,7 +11,7 @@ import gid.gid;
 class StructScalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,8 +33,8 @@ class StructScalar : arrow.scalar.Scalar
     GArrowStructScalar* _cretval;
     auto _value = gListFromD!(arrow.scalar.Scalar)(value);
     scope(exit) containerFree!(GList*, arrow.scalar.Scalar, GidOwnership.None)(_value);
-    _cretval = garrow_struct_scalar_new(dataType ? cast(GArrowStructDataType*)dataType.cPtr(No.Dup) : null, _value);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_struct_scalar_new(dataType ? cast(GArrowStructDataType*)dataType.cPtr(No.dup) : null, _value);
+    this(_cretval, Yes.take);
   }
 
   /** */

@@ -27,7 +27,7 @@ import gobject.object;
 class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,7 +50,7 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
     while querying the stream. For the asynchronous (non-blocking) version
     of this function, see [gio.file_input_stream.FileInputStream.queryInfoAsync]. While the
     stream is blocked, the stream will set the pending flag internally, and
-    any other operations on the stream will fail with [gio.types.IOErrorEnum.Pending].
+    any other operations on the stream will fail with [gio.types.IOErrorEnum.pending].
     Params:
       attributes =       a file attribute query string.
       cancellable =       optional #GCancellable object, null to ignore.
@@ -59,12 +59,12 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
   gio.file_info.FileInfo queryInfo(string attributes, gio.cancellable.Cancellable cancellable = null)
   {
     GFileInfo* _cretval;
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString(No.alloc);
     GError *_err;
-    _cretval = g_file_input_stream_query_info(cast(GFileInputStream*)cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_input_stream_query_info(cast(GFileInputStream*)cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be set
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be set
     Params:
       attributes =       a file attribute query string.
       ioPriority =       the [I/O priority][io-priority] of the request
@@ -94,13 +94,13 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString(No.alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_input_stream_query_info_async(cast(GFileInputStream*)cPtr, _attributes, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_file_input_stream_query_info_async(cast(GFileInputStream*)cPtr, _attributes, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -113,10 +113,10 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
   {
     GFileInfo* _cretval;
     GError *_err;
-    _cretval = g_file_input_stream_query_info_finish(cast(GFileInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_input_stream_query_info_finish(cast(GFileInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.take);
     return _retval;
   }
 }

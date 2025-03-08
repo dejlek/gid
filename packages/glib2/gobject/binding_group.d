@@ -19,7 +19,7 @@ import gobject.types;
 class BindingGroup : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,14 +43,14 @@ class BindingGroup : gobject.object.ObjectG
   {
     GBindingGroup* _cretval;
     _cretval = g_binding_group_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
       Creates a binding between source_property on the source object
     and target_property on target. Whenever the source_property
     is changed the target_property is updated using the same value.
-    The binding flag [gobject.types.BindingFlags.SyncCreate] is automatically specified.
+    The binding flag [gobject.types.BindingFlags.syncCreate] is automatically specified.
     
     See [gobject.object.ObjectG.bindProperty] for more information.
     Params:
@@ -61,16 +61,16 @@ class BindingGroup : gobject.object.ObjectG
   */
   void bind(string sourceProperty, gobject.object.ObjectG target, string targetProperty, gobject.types.BindingFlags flags)
   {
-    const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
-    const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
-    g_binding_group_bind(cast(GBindingGroup*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _targetProperty, flags);
+    const(char)* _sourceProperty = sourceProperty.toCString(No.alloc);
+    const(char)* _targetProperty = targetProperty.toCString(No.alloc);
+    g_binding_group_bind(cast(GBindingGroup*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.dup) : null, _targetProperty, flags);
   }
 
   /**
       Creates a binding between source_property on the source object and
     target_property on target, allowing you to set the transformation
     functions to be used by the binding. The binding flag
-    [gobject.types.BindingFlags.SyncCreate] is automatically specified.
+    [gobject.types.BindingFlags.syncCreate] is automatically specified.
     
     This function is the language bindings friendly version of
     g_binding_group_bind_property_full(), using #GClosures
@@ -91,9 +91,9 @@ class BindingGroup : gobject.object.ObjectG
   */
   void bindFull(string sourceProperty, gobject.object.ObjectG target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo = null, gobject.closure.Closure transformFrom = null)
   {
-    const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
-    const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
-    g_binding_group_bind_with_closures(cast(GBindingGroup*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _targetProperty, flags, transformTo ? cast(GClosure*)transformTo.cPtr(No.Dup) : null, transformFrom ? cast(GClosure*)transformFrom.cPtr(No.Dup) : null);
+    const(char)* _sourceProperty = sourceProperty.toCString(No.alloc);
+    const(char)* _targetProperty = targetProperty.toCString(No.alloc);
+    g_binding_group_bind_with_closures(cast(GBindingGroup*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.dup) : null, _targetProperty, flags, transformTo ? cast(GClosure*)transformTo.cPtr(No.dup) : null, transformFrom ? cast(GClosure*)transformFrom.cPtr(No.dup) : null);
   }
 
   /**
@@ -104,7 +104,7 @@ class BindingGroup : gobject.object.ObjectG
   {
     ObjectC* _cretval;
     _cretval = g_binding_group_dup_source(cast(GBindingGroup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.take);
     return _retval;
   }
 
@@ -120,6 +120,6 @@ class BindingGroup : gobject.object.ObjectG
   */
   void setSource(gobject.object.ObjectG source = null)
   {
-    g_binding_group_set_source(cast(GBindingGroup*)cPtr, source ? cast(ObjectC*)source.cPtr(No.Dup) : null);
+    g_binding_group_set_source(cast(GBindingGroup*)cPtr, source ? cast(ObjectC*)source.cPtr(No.dup) : null);
   }
 }

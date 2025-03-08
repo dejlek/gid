@@ -11,7 +11,7 @@ class SettingsValue
 {
   GtkSettingsValue cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.SettingsValue");
@@ -29,13 +29,13 @@ class SettingsValue
 
   @property string origin()
   {
-    return (cast(GtkSettingsValue*)cPtr).origin.fromCString(No.Free);
+    return (cast(GtkSettingsValue*)cPtr).origin.fromCString(No.free);
   }
 
   @property void origin(string propval)
   {
     safeFree(cast(void*)(cast(GtkSettingsValue*)cPtr).origin);
-    (cast(GtkSettingsValue*)cPtr).origin = propval.toCString(Yes.Alloc);
+    (cast(GtkSettingsValue*)cPtr).origin = propval.toCString(Yes.alloc);
   }
 
   @property gobject.value.Value value()

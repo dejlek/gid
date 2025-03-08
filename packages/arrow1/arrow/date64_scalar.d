@@ -10,7 +10,7 @@ import gid.gid;
 class Date64Scalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class Date64Scalar : arrow.scalar.Scalar
   {
     GArrowDate64Scalar* _cretval;
     _cretval = garrow_date64_scalar_new(value);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */

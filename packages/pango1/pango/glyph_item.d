@@ -22,15 +22,15 @@ class GlyphItem : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(PangoGlyphItem.sizeof), Yes.Take);
+    super(safeMalloc(PangoGlyphItem.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -115,8 +115,8 @@ class GlyphItem : gobject.boxed.Boxed
   pango.glyph_item.GlyphItem[] applyAttrs(string text, pango.attr_list.AttrList list)
   {
     GSList* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
-    _cretval = pango_glyph_item_apply_attrs(cast(PangoGlyphItem*)cPtr, _text, list ? cast(PangoAttrList*)list.cPtr(No.Dup) : null);
+    const(char)* _text = text.toCString(No.alloc);
+    _cretval = pango_glyph_item_apply_attrs(cast(PangoGlyphItem*)cPtr, _text, list ? cast(PangoAttrList*)list.cPtr(No.dup) : null);
     auto _retval = gSListToD!(pango.glyph_item.GlyphItem, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -129,7 +129,7 @@ class GlyphItem : gobject.boxed.Boxed
   {
     PangoGlyphItem* _cretval;
     _cretval = pango_glyph_item_copy(cast(PangoGlyphItem*)cPtr);
-    auto _retval = _cretval ? new pango.glyph_item.GlyphItem(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.glyph_item.GlyphItem(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -156,9 +156,9 @@ class GlyphItem : gobject.boxed.Boxed
   pango.glyph_item.GlyphItem split(string text, int splitIndex)
   {
     PangoGlyphItem* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString(No.alloc);
     _cretval = pango_glyph_item_split(cast(PangoGlyphItem*)cPtr, _text, splitIndex);
-    auto _retval = _cretval ? new pango.glyph_item.GlyphItem(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.glyph_item.GlyphItem(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

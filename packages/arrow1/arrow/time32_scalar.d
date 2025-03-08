@@ -11,7 +11,7 @@ import gid.gid;
 class Time32Scalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,8 +31,8 @@ class Time32Scalar : arrow.scalar.Scalar
   this(arrow.time32_data_type.Time32DataType dataType, int value)
   {
     GArrowTime32Scalar* _cretval;
-    _cretval = garrow_time32_scalar_new(dataType ? cast(GArrowTime32DataType*)dataType.cPtr(No.Dup) : null, value);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_time32_scalar_new(dataType ? cast(GArrowTime32DataType*)dataType.cPtr(No.dup) : null, value);
+    this(_cretval, Yes.take);
   }
 
   /** */

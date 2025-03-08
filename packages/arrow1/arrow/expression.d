@@ -10,7 +10,7 @@ import gobject.object;
 class Expression : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -30,7 +30,7 @@ class Expression : gobject.object.ObjectG
   bool equal(arrow.expression.Expression otherExpression)
   {
     bool _retval;
-    _retval = garrow_expression_equal(cast(GArrowExpression*)cPtr, otherExpression ? cast(GArrowExpression*)otherExpression.cPtr(No.Dup) : null);
+    _retval = garrow_expression_equal(cast(GArrowExpression*)cPtr, otherExpression ? cast(GArrowExpression*)otherExpression.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -39,7 +39,7 @@ class Expression : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = garrow_expression_to_string(cast(GArrowExpression*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

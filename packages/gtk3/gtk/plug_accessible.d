@@ -14,7 +14,7 @@ import gtk.window_accessible;
 class PlugAccessible : gtk.window_accessible.WindowAccessible
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,7 +35,7 @@ class PlugAccessible : gtk.window_accessible.WindowAccessible
   {
     char* _cretval;
     _cretval = gtk_plug_accessible_get_id(cast(GtkPlugAccessible*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

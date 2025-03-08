@@ -20,12 +20,12 @@ import gobject.boxed;
 class VariantBuilder : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -58,8 +58,8 @@ class VariantBuilder : gobject.boxed.Boxed
   this(glib.variant_type.VariantType type)
   {
     GVariantBuilder* _cretval;
-    _cretval = g_variant_builder_new(type ? cast(const(GVariantType)*)type.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = g_variant_builder_new(type ? cast(const(GVariantType)*)type.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -78,7 +78,7 @@ class VariantBuilder : gobject.boxed.Boxed
   */
   void addValue(glib.variant.VariantG value)
   {
-    g_variant_builder_add_value(cast(GVariantBuilder*)cPtr, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    g_variant_builder_add_value(cast(GVariantBuilder*)cPtr, value ? cast(VariantC*)value.cPtr(No.dup) : null);
   }
 
   /**
@@ -118,7 +118,7 @@ class VariantBuilder : gobject.boxed.Boxed
   {
     VariantC* _cretval;
     _cretval = g_variant_builder_end(cast(GVariantBuilder*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -164,6 +164,6 @@ class VariantBuilder : gobject.boxed.Boxed
   */
   void open(glib.variant_type.VariantType type)
   {
-    g_variant_builder_open(cast(GVariantBuilder*)cPtr, type ? cast(const(GVariantType)*)type.cPtr(No.Dup) : null);
+    g_variant_builder_open(cast(GVariantBuilder*)cPtr, type ? cast(const(GVariantType)*)type.cPtr(No.dup) : null);
   }
 }

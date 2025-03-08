@@ -54,15 +54,15 @@ class GlyphItemIter : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(PangoGlyphItemIter.sizeof), Yes.Take);
+    super(safeMalloc(PangoGlyphItemIter.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -85,13 +85,13 @@ class GlyphItemIter : gobject.boxed.Boxed
 
   @property string text()
   {
-    return (cast(PangoGlyphItemIter*)cPtr).text.fromCString(No.Free);
+    return (cast(PangoGlyphItemIter*)cPtr).text.fromCString(No.free);
   }
 
   @property void text(string propval)
   {
     safeFree(cast(void*)(cast(PangoGlyphItemIter*)cPtr).text);
-    (cast(PangoGlyphItemIter*)cPtr).text = propval.toCString(Yes.Alloc);
+    (cast(PangoGlyphItemIter*)cPtr).text = propval.toCString(Yes.alloc);
   }
 
   @property int startGlyph()
@@ -162,7 +162,7 @@ class GlyphItemIter : gobject.boxed.Boxed
   {
     PangoGlyphItemIter* _cretval;
     _cretval = pango_glyph_item_iter_copy(cast(PangoGlyphItemIter*)cPtr);
-    auto _retval = _cretval ? new pango.glyph_item_iter.GlyphItemIter(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.glyph_item_iter.GlyphItemIter(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -179,8 +179,8 @@ class GlyphItemIter : gobject.boxed.Boxed
   bool initEnd(pango.glyph_item.GlyphItem glyphItem, string text)
   {
     bool _retval;
-    const(char)* _text = text.toCString(No.Alloc);
-    _retval = pango_glyph_item_iter_init_end(cast(PangoGlyphItemIter*)cPtr, glyphItem ? cast(PangoGlyphItem*)glyphItem.cPtr(No.Dup) : null, _text);
+    const(char)* _text = text.toCString(No.alloc);
+    _retval = pango_glyph_item_iter_init_end(cast(PangoGlyphItemIter*)cPtr, glyphItem ? cast(PangoGlyphItem*)glyphItem.cPtr(No.dup) : null, _text);
     return _retval;
   }
 
@@ -197,8 +197,8 @@ class GlyphItemIter : gobject.boxed.Boxed
   bool initStart(pango.glyph_item.GlyphItem glyphItem, string text)
   {
     bool _retval;
-    const(char)* _text = text.toCString(No.Alloc);
-    _retval = pango_glyph_item_iter_init_start(cast(PangoGlyphItemIter*)cPtr, glyphItem ? cast(PangoGlyphItem*)glyphItem.cPtr(No.Dup) : null, _text);
+    const(char)* _text = text.toCString(No.alloc);
+    _retval = pango_glyph_item_iter_init_start(cast(PangoGlyphItemIter*)cPtr, glyphItem ? cast(PangoGlyphItem*)glyphItem.cPtr(No.dup) : null, _text);
     return _retval;
   }
 

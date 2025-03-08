@@ -17,15 +17,15 @@ class ControlPoint : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstControlPoint.sizeof), Yes.Take);
+    super(safeMalloc(GstControlPoint.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -69,7 +69,7 @@ class ControlPoint : gobject.boxed.Boxed
   {
     GstControlPoint* _cretval;
     _cretval = gst_control_point_copy(cast(GstControlPoint*)cPtr);
-    auto _retval = _cretval ? new gstcontroller.control_point.ControlPoint(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gstcontroller.control_point.ControlPoint(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

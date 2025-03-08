@@ -14,12 +14,12 @@ import gtk.types;
 class AccessibleList : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -53,7 +53,7 @@ class AccessibleList : gobject.boxed.Boxed
       _tmpaccessibles ~= obj ? cast(GtkAccessible*)(cast(ObjectG)obj).cPtr : null;
     GtkAccessible** _accessibles = _tmpaccessibles.ptr;
     _cretval = gtk_accessible_list_new_from_array(_accessibles, _nAccessibles);
-    auto _retval = _cretval ? new gtk.accessible_list.AccessibleList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.accessible_list.AccessibleList(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class AccessibleList : gobject.boxed.Boxed
     auto _list = gListFromD!(gtk.accessible.Accessible)(list);
     scope(exit) containerFree!(GList*, gtk.accessible.Accessible, GidOwnership.None)(_list);
     _cretval = gtk_accessible_list_new_from_list(_list);
-    auto _retval = _cretval ? new gtk.accessible_list.AccessibleList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.accessible_list.AccessibleList(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 

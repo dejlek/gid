@@ -43,7 +43,7 @@ import gtk.types;
 class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -71,9 +71,9 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   this(string contentType)
   {
     GtkWidget* _cretval;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString(No.alloc);
     _cretval = gtk_app_chooser_widget_new(_contentType);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -85,7 +85,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   {
     const(char)* _cretval;
     _cretval = gtk_app_chooser_widget_get_default_text(cast(GtkAppChooserWidget*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
   */
   void setDefaultText(string text)
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString(No.alloc);
     gtk_app_chooser_widget_set_default_text(cast(GtkAppChooserWidget*)cPtr, _text);
   }
 
@@ -238,10 +238,10 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
     Connect to ApplicationActivated signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectApplicationActivated(T)(T callback, Flag!"After" after = No.After)
+  ulong connectApplicationActivated(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ApplicationActivatedCallbackDlg) || is(T : ApplicationActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -275,10 +275,10 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
     Connect to ApplicationSelected signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectApplicationSelected(T)(T callback, Flag!"After" after = No.After)
+  ulong connectApplicationSelected(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ApplicationSelectedCallbackDlg) || is(T : ApplicationSelectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -316,10 +316,10 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
     Connect to PopulatePopup signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPopulatePopup(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PopulatePopupCallbackDlg) || is(T : PopulatePopupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

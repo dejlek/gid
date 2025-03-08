@@ -28,7 +28,7 @@ class RenderNode
 {
   GskRenderNode* cInstancePtr;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.RenderNode");
@@ -45,7 +45,7 @@ class RenderNode
   }
 
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     if (dup)
       gsk_render_node_ref(cInstancePtr);
@@ -68,14 +68,14 @@ class RenderNode
     {
       auto _dlg = cast(gsk.types.ParseErrorFunc*)userData;
 
-      (*_dlg)(*start, *end, error ? new glib.error.ErrorG(cast(void*)error, No.Take) : null);
+      (*_dlg)(*start, *end, error ? new glib.error.ErrorG(cast(void*)error, No.take) : null);
     }
     auto _errorFuncCB = errorFunc ? &_errorFuncCallback : null;
 
     GskRenderNode* _cretval;
     auto _errorFunc = errorFunc ? cast(void*)&(errorFunc) : null;
-    _cretval = gsk_render_node_deserialize(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, _errorFuncCB, _errorFunc);
-    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, Yes.Take) : null;
+    _cretval = gsk_render_node_deserialize(bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null, _errorFuncCB, _errorFunc);
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class RenderNode
   */
   void draw(cairo.context.Context cr)
   {
-    gsk_render_node_draw(cast(GskRenderNode*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
+    gsk_render_node_draw(cast(GskRenderNode*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null);
   }
 
   /**
@@ -107,7 +107,7 @@ class RenderNode
   {
     graphene_rect_t _bounds;
     gsk_render_node_get_bounds(cast(GskRenderNode*)cPtr, &_bounds);
-    bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.Take);
+    bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.take);
   }
 
   /**
@@ -138,7 +138,7 @@ class RenderNode
   {
     GBytes* _cretval;
     _cretval = gsk_render_node_serialize(cast(GskRenderNode*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class RenderNode
   bool writeToFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString(No.alloc);
     GError *_err;
     _retval = gsk_render_node_write_to_file(cast(GskRenderNode*)cPtr, _filename, &_err);
     if (_err)

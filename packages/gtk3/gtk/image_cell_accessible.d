@@ -18,7 +18,7 @@ import gtk.types;
 class ImageCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessible, atk.image.Image
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

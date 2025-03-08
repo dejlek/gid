@@ -18,7 +18,7 @@ import gtk.widget;
 class EventControllerKey : gtk.event_controller.EventController
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,7 +42,7 @@ class EventControllerKey : gtk.event_controller.EventController
   {
     GtkEventController* _cretval;
     _cretval = gtk_event_controller_key_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -59,7 +59,7 @@ class EventControllerKey : gtk.event_controller.EventController
   bool forward(gtk.widget.Widget widget)
   {
     bool _retval;
-    _retval = gtk_event_controller_key_forward(cast(GtkEventControllerKey*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    _retval = gtk_event_controller_key_forward(cast(GtkEventControllerKey*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class EventControllerKey : gtk.event_controller.EventController
   {
     GtkIMContext* _cretval;
     _cretval = gtk_event_controller_key_get_im_context(cast(GtkEventControllerKey*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.imcontext.IMContext)(cast(GtkIMContext*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.imcontext.IMContext)(cast(GtkIMContext*)_cretval, No.take);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class EventControllerKey : gtk.event_controller.EventController
   */
   void setImContext(gtk.imcontext.IMContext imContext = null)
   {
-    gtk_event_controller_key_set_im_context(cast(GtkEventControllerKey*)cPtr, imContext ? cast(GtkIMContext*)imContext.cPtr(No.Dup) : null);
+    gtk_event_controller_key_set_im_context(cast(GtkEventControllerKey*)cPtr, imContext ? cast(GtkIMContext*)imContext.cPtr(No.dup) : null);
   }
 
   /**
@@ -119,10 +119,10 @@ class EventControllerKey : gtk.event_controller.EventController
     Connect to ImUpdate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectImUpdate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectImUpdate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ImUpdateCallbackDlg) || is(T : ImUpdateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -158,10 +158,10 @@ class EventControllerKey : gtk.event_controller.EventController
     Connect to KeyPressed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectKeyPressed(T)(T callback, Flag!"After" after = No.After)
+  ulong connectKeyPressed(T)(T callback, Flag!"after" after = No.after)
   if (is(T : KeyPressedCallbackDlg) || is(T : KeyPressedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -201,10 +201,10 @@ class EventControllerKey : gtk.event_controller.EventController
     Connect to KeyReleased signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectKeyReleased(T)(T callback, Flag!"After" after = No.After)
+  ulong connectKeyReleased(T)(T callback, Flag!"after" after = No.after)
   if (is(T : KeyReleasedCallbackDlg) || is(T : KeyReleasedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -242,10 +242,10 @@ class EventControllerKey : gtk.event_controller.EventController
     Connect to Modifiers signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectModifiers(T)(T callback, Flag!"After" after = No.After)
+  ulong connectModifiers(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ModifiersCallbackDlg) || is(T : ModifiersCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

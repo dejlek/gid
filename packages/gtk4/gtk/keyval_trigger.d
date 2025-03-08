@@ -13,7 +13,7 @@ import gtk.types;
 class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,7 +41,7 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_keyval_trigger_new(keyval, modifiers);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**

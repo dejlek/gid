@@ -41,7 +41,7 @@ import gtk.types;
 class StackSwitcher : gtk.box.Box
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -65,7 +65,7 @@ class StackSwitcher : gtk.box.Box
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_switcher_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -78,7 +78,7 @@ class StackSwitcher : gtk.box.Box
   {
     GtkStack* _cretval;
     _cretval = gtk_stack_switcher_get_stack(cast(GtkStackSwitcher*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.take);
     return _retval;
   }
 
@@ -89,6 +89,6 @@ class StackSwitcher : gtk.box.Box
   */
   void setStack(gtk.stack.Stack stack = null)
   {
-    gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)cPtr, stack ? cast(GtkStack*)stack.cPtr(No.Dup) : null);
+    gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)cPtr, stack ? cast(GtkStack*)stack.cPtr(No.dup) : null);
   }
 }

@@ -7,7 +7,7 @@ import pangocairo.font_map_mixin;
 /// Proxy object for PangoCairo.FontMap interface when a GObject has no applicable D binding
 class FontMapIfaceProxy : IfaceProxy, pangocairo.font_map.FontMap
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

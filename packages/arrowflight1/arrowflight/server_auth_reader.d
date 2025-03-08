@@ -12,7 +12,7 @@ import gobject.object;
 class ServerAuthReader : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class ServerAuthReader : gobject.object.ObjectG
     _cretval = gaflight_server_auth_reader_read(cast(GAFlightServerAuthReader*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

@@ -70,7 +70,7 @@ import gst.types;
 class ObjectGst : gobject.initially_unowned.InitiallyUnowned
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -106,7 +106,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
     bool _retval;
     auto _list = gListFromD!(gst.object.ObjectGst)(list);
     scope(exit) containerFree!(GList*, gst.object.ObjectGst, GidOwnership.None)(_list);
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _retval = gst_object_check_uniqueness(_list, _name);
     return _retval;
   }
@@ -130,10 +130,10 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   {
     char*[] _tmpexcludedProps;
     foreach (s; excludedProps)
-      _tmpexcludedProps ~= s.toCString(No.Alloc);
+      _tmpexcludedProps ~= s.toCString(No.alloc);
     _tmpexcludedProps ~= null;
     char** _excludedProps = _tmpexcludedProps.ptr;
-    gst_object_default_deep_notify(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, orig ? cast(GstObject*)orig.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, _excludedProps);
+    gst_object_default_deep_notify(object ? cast(ObjectC*)object.cPtr(No.dup) : null, orig ? cast(GstObject*)orig.cPtr(No.dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.dup) : null, _excludedProps);
   }
 
   /**
@@ -151,7 +151,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   static bool replace(gst.object.ObjectGst oldobj = null, gst.object.ObjectGst newobj = null)
   {
     bool _retval;
-    _retval = gst_object_replace(oldobj ? cast(GstObject**)oldobj.cPtr(No.Dup) : null, newobj ? cast(GstObject*)newobj.cPtr(No.Dup) : null);
+    _retval = gst_object_replace(oldobj ? cast(GstObject**)oldobj.cPtr(No.dup) : null, newobj ? cast(GstObject*)newobj.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   bool addControlBinding(gst.control_binding.ControlBinding binding)
   {
     bool _retval;
-    _retval = gst_object_add_control_binding(cast(GstObject*)cPtr, binding ? cast(GstControlBinding*)binding.cPtr(No.Dup) : null);
+    _retval = gst_object_add_control_binding(cast(GstObject*)cPtr, binding ? cast(GstControlBinding*)binding.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   */
   void defaultError(glib.error.ErrorG error, string debug_ = null)
   {
-    const(char)* _debug_ = debug_.toCString(No.Alloc);
+    const(char)* _debug_ = debug_.toCString(No.alloc);
     gst_object_default_error(cast(GstObject*)cPtr, error ? cast(const(GError)*)error.cPtr : null, _debug_);
   }
 
@@ -199,9 +199,9 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   gst.control_binding.ControlBinding getControlBinding(string propertyName)
   {
     GstControlBinding* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
     _cretval = gst_object_get_control_binding(cast(GstObject*)cPtr, _propertyName);
-    auto _retval = ObjectG.getDObject!(gst.control_binding.ControlBinding)(cast(GstControlBinding*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.control_binding.ControlBinding)(cast(GstControlBinding*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
     `GST_CLOCK_TIME_NONE`. This allows the element to avoid the sub-dividing.
     
     The control-rate is not expected to change if the element is in
-    [gst.types.State.Paused] or [gst.types.State.Playing].
+    [gst.types.State.paused] or [gst.types.State.playing].
     Returns:     the control rate in nanoseconds
   */
   gst.types.ClockTime getControlRate()
@@ -242,7 +242,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   bool getGValueArray(string propertyName, gst.types.ClockTime timestamp, gst.types.ClockTime interval, gobject.value.Value[] values)
   {
     bool _retval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
     uint _nValues;
     if (values)
       _nValues = cast(uint)values.length;
@@ -271,7 +271,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   {
     char* _cretval;
     _cretval = gst_object_get_name(cast(GstObject*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   {
     GstObject* _cretval;
     _cretval = gst_object_get_parent(cast(GstObject*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.object.ObjectGst)(cast(GstObject*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.object.ObjectGst)(cast(GstObject*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   {
     char* _cretval;
     _cretval = gst_object_get_path_string(cast(GstObject*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -321,9 +321,9 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   gobject.value.Value getValue(string propertyName, gst.types.ClockTime timestamp)
   {
     GValue* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
     _cretval = gst_object_get_value(cast(GstObject*)cPtr, _propertyName, timestamp);
-    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -352,7 +352,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   bool hasAncestor(gst.object.ObjectGst ancestor)
   {
     bool _retval;
-    _retval = gst_object_has_ancestor(cast(GstObject*)cPtr, ancestor ? cast(GstObject*)ancestor.cPtr(No.Dup) : null);
+    _retval = gst_object_has_ancestor(cast(GstObject*)cPtr, ancestor ? cast(GstObject*)ancestor.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -368,7 +368,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   bool hasAsAncestor(gst.object.ObjectGst ancestor)
   {
     bool _retval;
-    _retval = gst_object_has_as_ancestor(cast(GstObject*)cPtr, ancestor ? cast(GstObject*)ancestor.cPtr(No.Dup) : null);
+    _retval = gst_object_has_as_ancestor(cast(GstObject*)cPtr, ancestor ? cast(GstObject*)ancestor.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -385,7 +385,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   bool hasAsParent(gst.object.ObjectGst parent)
   {
     bool _retval;
-    _retval = gst_object_has_as_parent(cast(GstObject*)cPtr, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null);
+    _retval = gst_object_has_as_parent(cast(GstObject*)cPtr, parent ? cast(GstObject*)parent.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -399,7 +399,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   bool removeControlBinding(gst.control_binding.ControlBinding binding)
   {
     bool _retval;
-    _retval = gst_object_remove_control_binding(cast(GstObject*)cPtr, binding ? cast(GstControlBinding*)binding.cPtr(No.Dup) : null);
+    _retval = gst_object_remove_control_binding(cast(GstObject*)cPtr, binding ? cast(GstControlBinding*)binding.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -414,7 +414,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   */
   void setControlBindingDisabled(string propertyName, bool disabled)
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
     gst_object_set_control_binding_disabled(cast(GstObject*)cPtr, _propertyName, disabled);
   }
 
@@ -436,8 +436,8 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
     [gst.object.ObjectGst.syncValues] in between. The length of the processing segment
     should be up to control-rate nanoseconds.
     
-    The control-rate should not change if the element is in [gst.types.State.Paused] or
-    [gst.types.State.Playing].
+    The control-rate should not change if the element is in [gst.types.State.paused] or
+    [gst.types.State.playing].
     Params:
       controlRate =       the new control-rate in nanoseconds.
   */
@@ -462,7 +462,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   bool setName(string name = null)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _retval = gst_object_set_name(cast(GstObject*)cPtr, _name);
     return _retval;
   }
@@ -480,7 +480,7 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
   bool setParent(gst.object.ObjectGst parent)
   {
     bool _retval;
-    _retval = gst_object_set_parent(cast(GstObject*)cPtr, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null);
+    _retval = gst_object_set_parent(cast(GstObject*)cPtr, parent ? cast(GstObject*)parent.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -548,10 +548,10 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeepNotify(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  ulong connectDeepNotify(T)(string detail = null, T callback, Flag!"after" after = No.after)
   if (is(T : DeepNotifyCallbackDlg) || is(T : DeepNotifyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

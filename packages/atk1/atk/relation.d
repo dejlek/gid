@@ -19,7 +19,7 @@ import gobject.object;
 class Relation : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -57,7 +57,7 @@ class Relation : gobject.object.ObjectG
       _tmptargets ~= obj ? cast(AtkObject*)obj.cPtr : null;
     AtkObject** _targets = cast(AtkObject**)_tmptargets.ptr;
     _cretval = atk_relation_new(_targets, _nTargets, relationship);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -68,7 +68,7 @@ class Relation : gobject.object.ObjectG
   */
   void addTarget(atk.object.ObjectAtk target)
   {
-    atk_relation_add_target(cast(AtkRelation*)cPtr, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
+    atk_relation_add_target(cast(AtkRelation*)cPtr, target ? cast(AtkObject*)target.cPtr(No.dup) : null);
   }
 
   /**
@@ -104,7 +104,7 @@ class Relation : gobject.object.ObjectG
   bool removeTarget(atk.object.ObjectAtk target)
   {
     bool _retval;
-    _retval = atk_relation_remove_target(cast(AtkRelation*)cPtr, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
+    _retval = atk_relation_remove_target(cast(AtkRelation*)cPtr, target ? cast(AtkObject*)target.cPtr(No.dup) : null);
     return _retval;
   }
 }

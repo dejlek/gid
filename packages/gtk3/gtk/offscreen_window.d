@@ -35,7 +35,7 @@ import gtk.window;
 class OffscreenWindow : gtk.window.Window
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -60,7 +60,7 @@ class OffscreenWindow : gtk.window.Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_offscreen_window_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -74,7 +74,7 @@ class OffscreenWindow : gtk.window.Window
   {
     PixbufC* _cretval;
     _cretval = gtk_offscreen_window_get_pixbuf(cast(GtkOffscreenWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class OffscreenWindow : gtk.window.Window
   {
     cairo_surface_t* _cretval;
     _cretval = gtk_offscreen_window_get_surface(cast(GtkOffscreenWindow*)cPtr);
-    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

@@ -24,7 +24,7 @@ import gtksource.types;
 class GutterLines : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -53,7 +53,7 @@ class GutterLines : gobject.object.ObjectG
   */
   void addClass(uint line, string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gtk_source_gutter_lines_add_class(cast(GtkSourceGutterLines*)cPtr, line, _name);
   }
 
@@ -82,7 +82,7 @@ class GutterLines : gobject.object.ObjectG
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_source_gutter_lines_get_buffer(cast(GtkSourceGutterLines*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.take);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class GutterLines : gobject.object.ObjectG
   {
     GtkTextIter _iter;
     gtk_source_gutter_lines_get_iter_at_line(cast(GtkSourceGutterLines*)cPtr, &_iter, line);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.take);
   }
 
   /**
@@ -146,7 +146,7 @@ class GutterLines : gobject.object.ObjectG
   {
     GtkTextView* _cretval;
     _cretval = gtk_source_gutter_lines_get_view(cast(GtkSourceGutterLines*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_view.TextView)(cast(GtkTextView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_view.TextView)(cast(GtkTextView*)_cretval, No.take);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class GutterLines : gobject.object.ObjectG
   bool hasClass(uint line, string name)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _retval = gtk_source_gutter_lines_has_class(cast(GtkSourceGutterLines*)cPtr, line, _name);
     return _retval;
   }
@@ -253,7 +253,7 @@ class GutterLines : gobject.object.ObjectG
   */
   void removeClass(uint line, string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gtk_source_gutter_lines_remove_class(cast(GtkSourceGutterLines*)cPtr, line, _name);
   }
 

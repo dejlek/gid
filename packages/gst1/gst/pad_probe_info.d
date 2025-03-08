@@ -16,7 +16,7 @@ class PadProbeInfo
 {
   GstPadProbeInfo cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gst.PadProbeInfo");
@@ -77,7 +77,7 @@ class PadProbeInfo
   {
     GstBuffer* _cretval;
     _cretval = gst_pad_probe_info_get_buffer(cast(GstPadProbeInfo*)cPtr);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class PadProbeInfo
   {
     GstBufferList* _cretval;
     _cretval = gst_pad_probe_info_get_buffer_list(cast(GstPadProbeInfo*)cPtr);
-    auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class PadProbeInfo
   {
     GstEvent* _cretval;
     _cretval = gst_pad_probe_info_get_event(cast(GstPadProbeInfo*)cPtr);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class PadProbeInfo
   {
     GstQuery* _cretval;
     _cretval = gst_pad_probe_info_get_query(cast(GstPadProbeInfo*)cPtr);
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

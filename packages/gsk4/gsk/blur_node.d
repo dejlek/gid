@@ -12,7 +12,7 @@ import gsk.types;
 class BlurNode : gsk.render_node.RenderNode
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.BlurNode");
@@ -30,8 +30,8 @@ class BlurNode : gsk.render_node.RenderNode
   this(gsk.render_node.RenderNode child, float radius)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_blur_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, radius);
-    this(_cretval, Yes.Take);
+    _cretval = gsk_blur_node_new(child ? cast(GskRenderNode*)child.cPtr(No.dup) : null, radius);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -42,7 +42,7 @@ class BlurNode : gsk.render_node.RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_blur_node_get_child(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.take) : null;
     return _retval;
   }
 

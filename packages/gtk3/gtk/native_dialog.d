@@ -28,7 +28,7 @@ import gtk.window;
 class NativeDialog : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -81,7 +81,7 @@ class NativeDialog : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_native_dialog_get_title(cast(GtkNativeDialog*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class NativeDialog : gobject.object.ObjectG
   {
     GtkWindow* _cretval;
     _cretval = gtk_native_dialog_get_transient_for(cast(GtkNativeDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.take);
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class NativeDialog : gobject.object.ObjectG
   */
   void setTitle(string title)
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString(No.alloc);
     gtk_native_dialog_set_title(cast(GtkNativeDialog*)cPtr, _title);
   }
 
@@ -200,7 +200,7 @@ class NativeDialog : gobject.object.ObjectG
   */
   void setTransientFor(gtk.window.Window parent = null)
   {
-    gtk_native_dialog_set_transient_for(cast(GtkNativeDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    gtk_native_dialog_set_transient_for(cast(GtkNativeDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null);
   }
 
   /**
@@ -239,10 +239,10 @@ class NativeDialog : gobject.object.ObjectG
     Connect to Response signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectResponse(T)(T callback, Flag!"After" after = No.After)
+  ulong connectResponse(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ResponseCallbackDlg) || is(T : ResponseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -16,7 +16,7 @@ import gtk.widget;
 class ColorSelectionDialog : gtk.dialog.Dialog
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,9 +41,9 @@ class ColorSelectionDialog : gtk.dialog.Dialog
   this(string title)
   {
     GtkWidget* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString(No.alloc);
     _cretval = gtk_color_selection_dialog_new(_title);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -54,7 +54,7 @@ class ColorSelectionDialog : gtk.dialog.Dialog
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_selection_dialog_get_color_selection(cast(GtkColorSelectionDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 }

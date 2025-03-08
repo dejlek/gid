@@ -26,7 +26,7 @@ import gtk.types;
 class VScale : gtk.scale.Scale
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -48,13 +48,13 @@ class VScale : gtk.scale.Scale
       adjustment =       the #GtkAdjustment which sets the range of the scale.
     Returns:     a new #GtkVScale.
   
-    Deprecated:     Use [gtk.scale.Scale.new_] with [gtk.types.Orientation.Vertical] instead
+    Deprecated:     Use [gtk.scale.Scale.new_] with [gtk.types.Orientation.vertical] instead
   */
   this(gtk.adjustment.Adjustment adjustment)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_vscale_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    _cretval = gtk_vscale_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
+    this(_cretval, No.take);
   }
 
   /**
@@ -72,13 +72,13 @@ class VScale : gtk.scale.Scale
       step =       step increment (tick size) used with keyboard shortcuts
     Returns:     a new #GtkVScale
   
-    Deprecated:     Use [gtk.scale.Scale.newWithRange] with [gtk.types.Orientation.Vertical] instead
+    Deprecated:     Use [gtk.scale.Scale.newWithRange] with [gtk.types.Orientation.vertical] instead
   */
   static gtk.vscale.VScale newWithRange(double min, double max, double step)
   {
     GtkWidget* _cretval;
     _cretval = gtk_vscale_new_with_range(min, max, step);
-    auto _retval = ObjectG.getDObject!(gtk.vscale.VScale)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.vscale.VScale)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 }

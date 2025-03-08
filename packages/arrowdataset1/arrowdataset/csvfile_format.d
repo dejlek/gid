@@ -10,7 +10,7 @@ import gid.gid;
 class CSVFileFormat : arrowdataset.file_format.FileFormat
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class CSVFileFormat : arrowdataset.file_format.FileFormat
   {
     GADatasetCSVFileFormat* _cretval;
     _cretval = gadataset_csv_file_format_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

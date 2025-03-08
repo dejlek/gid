@@ -12,17 +12,17 @@ enum GstAncillaryMetaField
   /**
       Progressive or no field specified (default)
   */
-  Progressive = 0,
+  progressive = 0,
 
   /**
       Interlaced first field
   */
-  InterlacedFirst = 16,
+  interlacedFirst = 16,
 
   /**
       Interlaced second field
   */
-  InterlacedSecond = 17,
+  interlacedSecond = 17,
 }
 
 /**
@@ -37,13 +37,13 @@ enum GstColorBalanceType
       Color balance is implemented with dedicated
             hardware.
   */
-  Hardware = 0,
+  hardware = 0,
 
   /**
       Color balance is implemented via software
             processing.
   */
-  Software = 1,
+  software = 1,
 }
 
 /**
@@ -65,91 +65,91 @@ enum GstNavigationCommand
   /**
       An invalid command entry
   */
-  Invalid = 0,
+  invalid = 0,
 
   /**
       Execute navigation menu command 1. For DVD,
     this enters the DVD root menu, or exits back to the title from the menu.
   */
-  Menu1 = 1,
+  menu1 = 1,
 
   /**
       Execute navigation menu command 2. For DVD,
     this jumps to the DVD title menu.
   */
-  Menu2 = 2,
+  menu2 = 2,
 
   /**
       Execute navigation menu command 3. For DVD,
     this jumps into the DVD root menu.
   */
-  Menu3 = 3,
+  menu3 = 3,
 
   /**
       Execute navigation menu command 4. For DVD,
     this jumps to the Subpicture menu.
   */
-  Menu4 = 4,
+  menu4 = 4,
 
   /**
       Execute navigation menu command 5. For DVD,
     the jumps to the audio menu.
   */
-  Menu5 = 5,
+  menu5 = 5,
 
   /**
       Execute navigation menu command 6. For DVD,
     this jumps to the angles menu.
   */
-  Menu6 = 6,
+  menu6 = 6,
 
   /**
       Execute navigation menu command 7. For DVD,
     this jumps to the chapter menu.
   */
-  Menu7 = 7,
+  menu7 = 7,
 
   /**
       Select the next button to the left in a menu,
     if such a button exists.
   */
-  Left = 20,
+  left = 20,
 
   /**
       Select the next button to the right in a menu,
     if such a button exists.
   */
-  Right = 21,
+  right = 21,
 
   /**
       Select the button above the current one in a
     menu, if such a button exists.
   */
-  Up = 22,
+  up = 22,
 
   /**
       Select the button below the current one in a
     menu, if such a button exists.
   */
-  Down = 23,
+  down = 23,
 
   /**
       Activate (click) the currently selected
     button in a menu, if such a button exists.
   */
-  Activate = 24,
+  activate = 24,
 
   /**
       Switch to the previous angle in a
     multiangle feature.
   */
-  PrevAngle = 30,
+  prevAngle = 30,
 
   /**
       Switch to the next angle in a multiangle
     feature.
   */
-  NextAngle = 31,
+  nextAngle = 31,
 }
 
 /**
@@ -163,52 +163,52 @@ enum GstNavigationEventType
       Returned from
     [gstvideo.navigation.Navigation.eventGetType] when the passed event is not a navigation event.
   */
-  Invalid = 0,
+  invalid = 0,
 
   /**
       A key press event. Use
     [gstvideo.navigation.Navigation.eventParseKeyEvent] to extract the details from the event.
   */
-  KeyPress = 1,
+  keyPress = 1,
 
   /**
       A key release event. Use
     [gstvideo.navigation.Navigation.eventParseKeyEvent] to extract the details from the event.
   */
-  KeyRelease = 2,
+  keyRelease = 2,
 
   /**
       A mouse button press event. Use
     [gstvideo.navigation.Navigation.eventParseMouseButtonEvent] to extract the details from the
     event.
   */
-  MouseButtonPress = 3,
+  mouseButtonPress = 3,
 
   /**
       A mouse button release event. Use
     [gstvideo.navigation.Navigation.eventParseMouseButtonEvent] to extract the details from the
     event.
   */
-  MouseButtonRelease = 4,
+  mouseButtonRelease = 4,
 
   /**
       A mouse movement event. Use
     [gstvideo.navigation.Navigation.eventParseMouseMoveEvent] to extract the details from the
     event.
   */
-  MouseMove = 5,
+  mouseMove = 5,
 
   /**
       A navigation command event. Use
     [gstvideo.navigation.Navigation.eventParseCommand] to extract the details from the event.
   */
-  Command = 6,
+  command = 6,
 
   /**
       A mouse scroll event. Use [gstvideo.navigation.Navigation.eventParseMouseScrollEvent]
     to extract the details from the event.
   */
-  MouseScroll = 7,
+  mouseScroll = 7,
 
   /**
       An event describing a new touch point, which will be assigned an identifier
@@ -216,14 +216,14 @@ enum GstNavigationEventType
     Use [gstvideo.navigation.Navigation.eventParseTouchEvent] to extract the details
     from the event.
   */
-  TouchDown = 8,
+  touchDown = 8,
 
   /**
       An event describing the movement of an active touch point across
     the screen. Use [gstvideo.navigation.Navigation.eventParseTouchEvent] to extract
     the details from the event.
   */
-  TouchMotion = 9,
+  touchMotion = 9,
 
   /**
       An event describing a removed touch point. After this event,
@@ -231,17 +231,17 @@ enum GstNavigationEventType
     Use [gstvideo.navigation.Navigation.eventParseTouchUpEvent] to extract the details
     from the event.
   */
-  TouchUp = 10,
+  touchUp = 10,
 
   /**
       An event signaling the end of a sequence of simultaneous touch events.
   */
-  TouchFrame = 11,
+  touchFrame = 11,
 
   /**
       An event cancelling all currently active touch points.
   */
-  TouchCancel = 12,
+  touchCancel = 12,
 }
 
 /**
@@ -255,32 +255,32 @@ enum GstNavigationMessageType
     [gstvideo.navigation.Navigation.messageGetType] when the passed message is not a
     navigation message.
   */
-  Invalid = 0,
+  invalid = 0,
 
   /**
       Sent when the mouse moves over or leaves a
     clickable region of the output, such as a DVD menu button.
   */
-  MouseOver = 1,
+  mouseOver = 1,
 
   /**
       Sent when the set of available commands
     changes and should re-queried by interested applications.
   */
-  CommandsChanged = 2,
+  commandsChanged = 2,
 
   /**
       Sent when display angles in a multi-angle
     feature (such as a multiangle DVD) change - either angles have appeared or
     disappeared.
   */
-  AnglesChanged = 3,
+  anglesChanged = 3,
 
   /**
       Sent when a navigation event was not handled
     by any element in the pipeline (Since: 1.6)
   */
-  Event = 4,
+  event = 4,
 }
 
 /**
@@ -293,90 +293,90 @@ enum GstNavigationMessageType
 enum GstNavigationModifierType : uint
 {
   /** */
-  None = 0,
+  none = 0,
 
   /**
       the Shift key.
   */
-  ShiftMask = 1,
+  shiftMask = 1,
 
   /** */
-  LockMask = 2,
+  lockMask = 2,
 
   /**
       the Control key.
   */
-  ControlMask = 4,
+  controlMask = 4,
 
   /**
       the third modifier key
   */
-  Mod1Mask = 8,
+  mod1Mask = 8,
 
   /**
       the fourth modifier key
   */
-  Mod2Mask = 16,
+  mod2Mask = 16,
 
   /**
       the fifth modifier key
   */
-  Mod3Mask = 32,
+  mod3Mask = 32,
 
   /**
       the sixth modifier key
   */
-  Mod4Mask = 64,
+  mod4Mask = 64,
 
   /**
       the seventh modifier key
   */
-  Mod5Mask = 128,
+  mod5Mask = 128,
 
   /**
       the first mouse button (usually the left button).
   */
-  Button1Mask = 256,
+  button1Mask = 256,
 
   /**
       the second mouse button (usually the right button).
   */
-  Button2Mask = 512,
+  button2Mask = 512,
 
   /**
       the third mouse button (usually the mouse wheel button or middle button).
   */
-  Button3Mask = 1024,
+  button3Mask = 1024,
 
   /**
       the fourth mouse button (typically the "Back" button).
   */
-  Button4Mask = 2048,
+  button4Mask = 2048,
 
   /**
       the fifth mouse button (typically the "forward" button).
   */
-  Button5Mask = 4096,
+  button5Mask = 4096,
 
   /**
       the Super modifier
   */
-  SuperMask = 67108864,
+  superMask = 67108864,
 
   /**
       the Hyper modifier
   */
-  HyperMask = 134217728,
+  hyperMask = 134217728,
 
   /**
       the Meta modifier
   */
-  MetaMask = 268435456,
+  metaMask = 268435456,
 
   /**
       A mask covering all entries in #GdkModifierType.
   */
-  Mask = 469770239,
+  mask = 469770239,
 }
 
 /**
@@ -387,17 +387,17 @@ enum GstNavigationQueryType
   /**
       invalid query
   */
-  Invalid = 0,
+  invalid = 0,
 
   /**
       command query
   */
-  Commands = 1,
+  commands = 1,
 
   /**
       viewing angle query
   */
-  Angles = 2,
+  angles = 2,
 }
 
 /**
@@ -416,15 +416,15 @@ enum GstVideoAFDSpec
   /**
       AFD value is from DVB/ETSI standard
   */
-  DvbEtsi = 0,
+  dvbEtsi = 0,
 
   /**
       AFD value is from ATSC A/53 standard
   */
-  AtscA53 = 1,
+  atscA53 = 1,
 
   /** */
-  SmpteSt20161 = 2,
+  smpteSt20161 = 2,
 }
 
 /**
@@ -466,7 +466,7 @@ enum GstVideoAFDValue
   /**
       Unavailable (see note 0 below).
   */
-  Unavailable = 0,
+  unavailable = 0,
 
   /**
       For 4:3 coded frame, letterbox 16:9 image,
@@ -487,7 +487,7 @@ enum GstVideoAFDValue
          greater than 16:9, vertically centered in the coded frame. For 16:9 coded frame,
          letterbox image with an aspect ratio greater than 16:9.
   */
-  GreaterThan169 = 4,
+  greaterThan169 = 4,
 
   /**
       For 4:3 coded frame, full frame 4:3 image,
@@ -546,13 +546,13 @@ enum GstVideoAlphaMode
             When the input has no alpha, alpha will be set to
             #GST_VIDEO_CONVERTER_OPT_ALPHA_VALUE
   */
-  Copy = 0,
+  copy = 0,
 
   /**
       set all alpha to
        #GST_VIDEO_CONVERTER_OPT_ALPHA_VALUE
   */
-  Set = 1,
+  set = 1,
 
   /**
       multiply all alpha with
@@ -560,47 +560,47 @@ enum GstVideoAlphaMode
             When the input format has no alpha but the output format has, the
             alpha value will be set to #GST_VIDEO_CONVERTER_OPT_ALPHA_VALUE
   */
-  Mult = 2,
+  mult = 2,
 }
 
 /** */
 enum GstVideoAncillaryDID
 {
   /** */
-  Undefined = 0,
+  undefined = 0,
 
   /** */
-  Deletion = 128,
+  deletion = 128,
 
   /** */
-  Hanc3gAudioDataFirst = 160,
+  hanc3gAudioDataFirst = 160,
 
   /** */
-  Hanc3gAudioDataLast = 167,
+  hanc3gAudioDataLast = 167,
 
   /** */
-  HancHdtvAudioDataFirst = 224,
+  hancHdtvAudioDataFirst = 224,
 
   /** */
-  HancHdtvAudioDataLast = 231,
+  hancHdtvAudioDataLast = 231,
 
   /** */
-  HancSdtvAudioData1First = 236,
+  hancSdtvAudioData1First = 236,
 
   /** */
-  HancSdtvAudioData1Last = 239,
+  hancSdtvAudioData1Last = 239,
 
   /** */
-  CameraPosition = 240,
+  cameraPosition = 240,
 
   /** */
-  HancErrorDetection = 244,
+  hancErrorDetection = 244,
 
   /** */
-  HancSdtvAudioData2First = 248,
+  hancSdtvAudioData2First = 248,
 
   /** */
-  HancSdtvAudioData2Last = 255,
+  hancSdtvAudioData2Last = 255,
 }
 
 /**
@@ -611,17 +611,17 @@ enum GstVideoAncillaryDID16
   /**
       CEA 708 Ancillary data according to SMPTE 334
   */
-  S334Eia708 = 24833,
+  s334Eia708 = 24833,
 
   /**
       CEA 608 Ancillary data according to SMPTE 334
   */
-  S334Eia608 = 24834,
+  s334Eia608 = 24834,
 
   /**
       AFD/Bar Ancillary data according to SMPTE 2016-3 (Since: 1.18)
   */
-  S20163AfdBar = 16645,
+  s20163AfdBar = 16645,
 }
 
 /**
@@ -638,28 +638,28 @@ enum GstVideoBufferFlags : uint
                                         interlace-mode, this flags specifies if the frame is
                                         interlaced or progressive.
   */
-  Interlaced = 1048576,
+  interlaced = 1048576,
 
   /**
       If the #GstBuffer is interlaced, then the first field
                                         in the video frame is the top field.  If unset, the
                                         bottom field is first.
   */
-  Tff = 2097152,
+  tff = 2097152,
 
   /**
       If the #GstBuffer is interlaced, then the first field
-                                        (as defined by the [gstvideo.types.VideoBufferFlags.Tff] flag setting)
+                                        (as defined by the [gstvideo.types.VideoBufferFlags.tff] flag setting)
                                         is repeated.
   */
-  Rff = 4194304,
+  rff = 4194304,
 
   /**
       If the #GstBuffer is interlaced, then only the
-                                        first field (as defined by the [gstvideo.types.VideoBufferFlags.Tff]
+                                        first field (as defined by the [gstvideo.types.VideoBufferFlags.tff]
                                         flag setting) is to be displayed (Since: 1.16).
   */
-  Onefield = 8388608,
+  onefield = 8388608,
 
   /**
       The #GstBuffer contains one or more specific views,
@@ -669,14 +669,14 @@ enum GstVideoBufferFlags : uint
                                         mono / non-mono streams, the absence of the flag marks
                                         mono buffers.
   */
-  MultipleView = 16777216,
+  multipleView = 16777216,
 
   /**
       When conveying stereo/multiview content with
                                         frame-by-frame methods, this flag marks the first buffer
                                          in a bundle of frames that belong together.
   */
-  FirstInBundle = 33554432,
+  firstInBundle = 33554432,
 
   /**
       The video frame has the top field only. This is the
@@ -684,7 +684,7 @@ enum GstVideoBufferFlags : uint
                                         GST_VIDEO_BUFFER_FLAG_ONEFIELD (Since: 1.16).
                                         Use GST_VIDEO_BUFFER_IS_TOP_FIELD() to check for this flag.
   */
-  TopField = 10485760,
+  topField = 10485760,
 
   /**
       The video frame has the bottom field only. This is
@@ -692,18 +692,18 @@ enum GstVideoBufferFlags : uint
                                         (GST_VIDEO_BUFFER_FLAG_TFF flag unset) (Since: 1.16).
                                         Use GST_VIDEO_BUFFER_IS_BOTTOM_FIELD() to check for this flag.
   */
-  BottomField = 8388608,
+  bottomField = 8388608,
 
   /**
       The #GstBuffer contains the end of a video field or frame
                                         boundary such as the last subframe or packet (Since: 1.18).
   */
-  Marker = 512,
+  marker = 512,
 
   /**
       Offset to define more flags
   */
-  Last = 268435456,
+  last = 268435456,
 }
 
 /**
@@ -714,7 +714,7 @@ enum GstVideoCaptionType
   /**
       Unknown type of CC
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       CEA-608 as byte pairs. Note that
@@ -725,7 +725,7 @@ enum GstVideoCaptionType
          if you wish to store CEA-608 from two fields and prefix each byte pair
          with 0xFC for the first field and 0xFD for the second field.
   */
-  Cea608Raw = 1,
+  cea608Raw = 1,
 
   /**
       CEA-608 as byte triplets as defined
@@ -737,21 +737,21 @@ enum GstVideoCaptionType
          for 525-line field 1, line 272 for 525-line field 2, line 5 for
          625-line field 1 and line 318 for 625-line field 2).
   */
-  Cea608S3341a = 2,
+  cea608S3341a = 2,
 
   /**
       CEA-708 as cc_data byte triplets. They
          can also contain 608-in-708 and the first byte of each triplet has to
          be inspected for detecting the type.
   */
-  Cea708Raw = 3,
+  cea708Raw = 3,
 
   /**
       CEA-708 (and optionally CEA-608) in
          a CDP (Caption Distribution Packet) defined by SMPTE S-334-2.
          Contains the whole CDP (starting with 0x9669).
   */
-  Cea708Cdp = 4,
+  cea708Cdp = 4,
 }
 
 /**
@@ -762,12 +762,12 @@ enum GstVideoChromaFlags : uint
   /**
       no flags
   */
-  None = 0,
+  none = 0,
 
   /**
       the input is interlaced
   */
-  Interlaced = 1,
+  interlaced = 1,
 }
 
 /**
@@ -779,13 +779,13 @@ enum GstVideoChromaMethod
       Duplicates the chroma samples when
        upsampling and drops when subsampling
   */
-  Nearest = 0,
+  nearest = 0,
 
   /**
       Uses linear interpolation to reconstruct
        missing chroma and averaging to subsample
   */
-  Linear = 1,
+  linear = 1,
 }
 
 /**
@@ -796,22 +796,22 @@ enum GstVideoChromaMode
   /**
       do full chroma up and down sampling
   */
-  Full = 0,
+  full = 0,
 
   /**
       only perform chroma upsampling
   */
-  UpsampleOnly = 1,
+  upsampleOnly = 1,
 
   /**
       only perform chroma downsampling
   */
-  DownsampleOnly = 2,
+  downsampleOnly = 2,
 
   /**
       disable chroma resampling
   */
-  None = 3,
+  none = 3,
 }
 
 /**
@@ -822,47 +822,47 @@ enum GstVideoChromaSite : uint
   /**
       unknown cositing
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       no cositing
   */
-  None = 1,
+  none = 1,
 
   /**
       chroma is horizontally cosited
   */
-  HCosited = 2,
+  hCosited = 2,
 
   /**
       chroma is vertically cosited
   */
-  VCosited = 4,
+  vCosited = 4,
 
   /**
       choma samples are sited on alternate lines
   */
-  AltLine = 8,
+  altLine = 8,
 
   /**
       chroma samples cosited with luma samples
   */
-  Cosited = 6,
+  cosited = 6,
 
   /**
       jpeg style cositing, also for mpeg1 and mjpeg
   */
-  Jpeg = 1,
+  jpeg = 1,
 
   /**
       mpeg2 style cositing
   */
-  Mpeg2 = 2,
+  mpeg2 = 2,
 
   /**
       DV style cositing
   */
-  Dv = 14,
+  dv = 14,
 }
 
 /**
@@ -873,27 +873,27 @@ enum GstVideoCodecFrameFlags : uint
   /**
       is the frame only meant to be decoded
   */
-  DecodeOnly = 1,
+  decodeOnly = 1,
 
   /**
       is the frame a synchronization point (keyframe)
   */
-  SyncPoint = 2,
+  syncPoint = 2,
 
   /**
       should the output frame be made a keyframe
   */
-  ForceKeyframe = 4,
+  forceKeyframe = 4,
 
   /**
       should the encoder output stream headers
   */
-  ForceKeyframeHeaders = 8,
+  forceKeyframeHeaders = 8,
 
   /**
       The buffer data is corrupted.
   */
-  Corrupted = 16,
+  corrupted = 16,
 }
 
 /**
@@ -905,39 +905,39 @@ enum GstVideoColorMatrix
   /**
       unknown matrix
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       identity matrix. Order of coefficients is
     actually GBR, also IEC 61966-2-1 (sRGB)
   */
-  Rgb = 1,
+  rgb = 1,
 
   /**
       FCC Title 47 Code of Federal Regulations 73.682 (a)(20)
   */
-  Fcc = 2,
+  fcc = 2,
 
   /**
       ITU-R BT.709 color matrix, also ITU-R BT1361
     / IEC 61966-2-4 xvYCC709 / SMPTE RP177 Annex B
   */
-  Bt709 = 3,
+  bt709 = 3,
 
   /**
       ITU-R BT.601 color matrix, also SMPTE170M / ITU-R BT1358 525 / ITU-R BT1700 NTSC
   */
-  Bt601 = 4,
+  bt601 = 4,
 
   /**
       SMPTE 240M color matrix
   */
-  Smpte240m = 5,
+  smpte240m = 5,
 
   /**
       ITU-R BT.2020 color matrix. Since: 1.6
   */
-  Bt2020 = 6,
+  bt2020 = 6,
 }
 
 /**
@@ -949,76 +949,76 @@ enum GstVideoColorPrimaries
   /**
       unknown color primaries
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       BT709 primaries, also ITU-R BT1361 / IEC
     61966-2-4 / SMPTE RP177 Annex B
   */
-  Bt709 = 1,
+  bt709 = 1,
 
   /**
       BT470M primaries, also FCC Title 47 Code
     of Federal Regulations 73.682 (a)(20)
   */
-  Bt470m = 2,
+  bt470m = 2,
 
   /**
       BT470BG primaries, also ITU-R BT601-6
     625 / ITU-R BT1358 625 / ITU-R BT1700 625 PAL & SECAM
   */
-  Bt470bg = 3,
+  bt470bg = 3,
 
   /**
       SMPTE170M primaries, also ITU-R
     BT601-6 525 / ITU-R BT1358 525 / ITU-R BT1700 NTSC
   */
-  Smpte170m = 4,
+  smpte170m = 4,
 
   /**
       SMPTE240M primaries
   */
-  Smpte240m = 5,
+  smpte240m = 5,
 
   /**
       Generic film (colour filters using
     Illuminant C)
   */
-  Film = 6,
+  film = 6,
 
   /**
       ITU-R BT2020 primaries. Since: 1.6
   */
-  Bt2020 = 7,
+  bt2020 = 7,
 
   /**
       Adobe RGB primaries. Since: 1.8
   */
-  Adobergb = 8,
+  adobergb = 8,
 
   /**
       SMPTE ST 428 primaries (CIE 1931
     XYZ). Since: 1.16
   */
-  Smptest428 = 9,
+  smptest428 = 9,
 
   /**
       SMPTE RP 431 primaries (ST 431-2
     (2011) / DCI P3). Since: 1.16
   */
-  Smpterp431 = 10,
+  smpterp431 = 10,
 
   /**
       SMPTE EG 432 primaries (ST 432-1
     (2010) / P3 D65). Since: 1.16
   */
-  Smpteeg432 = 11,
+  smpteeg432 = 11,
 
   /**
       EBU 3213 primaries (JEDEC P22
     phosphors). Since: 1.16
   */
-  Ebu3213 = 12,
+  ebu3213 = 12,
 }
 
 /**
@@ -1030,7 +1030,7 @@ enum GstVideoColorRange
   /**
       unknown range
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       [0..255] for 8 bit components
@@ -1054,13 +1054,13 @@ enum GstVideoDecoderRequestSyncPointFlags : uint
       discard all following
         input until the next sync point.
   */
-  DiscardInput = 1,
+  discardInput = 1,
 
   /**
       discard all following
         output until the next sync point.
   */
-  CorruptOutput = 2,
+  corruptOutput = 2,
 }
 
 /**
@@ -1071,17 +1071,17 @@ enum GstVideoDitherFlags : uint
   /**
       no flags
   */
-  None = 0,
+  none = 0,
 
   /**
       the input is interlaced
   */
-  Interlaced = 1,
+  interlaced = 1,
 
   /**
       quantize values in addition to adding dither.
   */
-  Quantize = 2,
+  quantize = 2,
 }
 
 /**
@@ -1092,27 +1092,27 @@ enum GstVideoDitherMethod
   /**
       no dithering
   */
-  None = 0,
+  none = 0,
 
   /**
       propagate rounding errors downwards
   */
-  Verterr = 1,
+  verterr = 1,
 
   /**
       Dither with floyd-steinberg error diffusion
   */
-  FloydSteinberg = 2,
+  floydSteinberg = 2,
 
   /**
       Dither with Sierra Lite error diffusion
   */
-  SierraLite = 3,
+  sierraLite = 3,
 
   /**
       ordered dither using a bayer pattern
   */
-  Bayer = 4,
+  bayer = 4,
 }
 
 /**
@@ -1127,17 +1127,17 @@ enum GstVideoFieldOrder
       unknown field order for interlaced content.
         The actual field order is signalled via buffer flags.
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       top field is first
   */
-  TopFieldFirst = 1,
+  topFieldFirst = 1,
 
   /**
       bottom field is first
   */
-  BottomFieldFirst = 2,
+  bottomFieldFirst = 2,
 }
 
 /**
@@ -1148,19 +1148,19 @@ enum GstVideoFlags : uint
   /**
       no flags
   */
-  None = 0,
+  none = 0,
 
   /**
       a variable fps is selected, fps_n and fps_d
         denote the maximum fps of the video
   */
-  VariableFps = 1,
+  variableFps = 1,
 
   /**
       Each color has been scaled by the alpha
         value.
   */
-  PremultipliedAlpha = 2,
+  premultipliedAlpha = 2,
 }
 
 /**
@@ -1174,7 +1174,7 @@ enum GstVideoFormat
   /**
       Unknown or unset video format id
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       Encoded video format. Only ever use that in caps for
@@ -1182,577 +1182,577 @@ enum GstVideoFormat
                                memory GstCapsFeatures where it does not make sense
                                to specify a real video format.
   */
-  Encoded = 1,
+  encoded = 1,
 
   /**
       planar 4:2:0 YUV
   */
-  I420 = 2,
+  i420 = 2,
 
   /**
       planar 4:2:0 YVU (like I420 but UV planes swapped)
   */
-  Yv12 = 3,
+  yv12 = 3,
 
   /**
       packed 4:2:2 YUV (Y0-U0-Y1-V0 Y2-U2-Y3-V2 Y4 ...)
   */
-  Yuy2 = 4,
+  yuy2 = 4,
 
   /**
       packed 4:2:2 YUV (U0-Y0-V0-Y1 U2-Y2-V2-Y3 U4 ...)
   */
-  Uyvy = 5,
+  uyvy = 5,
 
   /**
       packed 4:4:4 YUV with alpha channel (A0-Y0-U0-V0 ...)
   */
-  Ayuv = 6,
+  ayuv = 6,
 
   /**
       sparse rgb packed into 32 bit, space last
   */
-  Rgbx = 7,
+  rgbx = 7,
 
   /**
       sparse reverse rgb packed into 32 bit, space last
   */
-  Bgrx = 8,
+  bgrx = 8,
 
   /**
       sparse rgb packed into 32 bit, space first
   */
-  Xrgb = 9,
+  xrgb = 9,
 
   /**
       sparse reverse rgb packed into 32 bit, space first
   */
-  Xbgr = 10,
+  xbgr = 10,
 
   /**
       rgb with alpha channel last
   */
-  Rgba = 11,
+  rgba = 11,
 
   /**
       reverse rgb with alpha channel last
   */
-  Bgra = 12,
+  bgra = 12,
 
   /**
       rgb with alpha channel first
   */
-  Argb = 13,
+  argb = 13,
 
   /**
       reverse rgb with alpha channel first
   */
-  Abgr = 14,
+  abgr = 14,
 
   /**
       RGB packed into 24 bits without padding (`R-G-B-R-G-B`)
   */
-  Rgb = 15,
+  rgb = 15,
 
   /**
       reverse RGB packed into 24 bits without padding (`B-G-R-B-G-R`)
   */
-  Bgr = 16,
+  bgr = 16,
 
   /**
       planar 4:1:1 YUV
   */
-  Y41b = 17,
+  y41b = 17,
 
   /**
       planar 4:2:2 YUV
   */
-  Y42b = 18,
+  y42b = 18,
 
   /**
       packed 4:2:2 YUV (Y0-V0-Y1-U0 Y2-V2-Y3-U2 Y4 ...)
   */
-  Yvyu = 19,
+  yvyu = 19,
 
   /**
       planar 4:4:4 YUV
   */
-  Y444 = 20,
+  y444 = 20,
 
   /**
       packed 4:2:2 10-bit YUV, complex format
   */
-  V210 = 21,
+  v210 = 21,
 
   /**
       packed 4:2:2 16-bit YUV, Y0-U0-Y1-V1 order
   */
-  V216 = 22,
+  v216 = 22,
 
   /**
       planar 4:2:0 YUV with interleaved UV plane
   */
-  Nv12 = 23,
+  nv12 = 23,
 
   /**
       planar 4:2:0 YUV with interleaved VU plane
   */
-  Nv21 = 24,
+  nv21 = 24,
 
   /**
       8-bit grayscale
   */
-  Gray8 = 25,
+  gray8 = 25,
 
   /**
       16-bit grayscale, most significant byte first
   */
-  Gray16Be = 26,
+  gray16Be = 26,
 
   /**
       16-bit grayscale, least significant byte first
   */
-  Gray16Le = 27,
+  gray16Le = 27,
 
   /**
       packed 4:4:4 YUV (Y-U-V ...)
   */
-  V308 = 28,
+  v308 = 28,
 
   /**
       rgb 5-6-5 bits per component
   */
-  Rgb16 = 29,
+  rgb16 = 29,
 
   /**
       reverse rgb 5-6-5 bits per component
   */
-  Bgr16 = 30,
+  bgr16 = 30,
 
   /**
       rgb 5-5-5 bits per component
   */
-  Rgb15 = 31,
+  rgb15 = 31,
 
   /**
       reverse rgb 5-5-5 bits per component
   */
-  Bgr15 = 32,
+  bgr15 = 32,
 
   /**
       packed 10-bit 4:2:2 YUV (U0-Y0-V0-Y1 U2-Y2-V2-Y3 U4 ...)
   */
-  Uyvp = 33,
+  uyvp = 33,
 
   /**
       planar 4:4:2:0 AYUV
   */
-  A420 = 34,
+  a420 = 34,
 
   /**
       8-bit paletted RGB
   */
-  Rgb8p = 35,
+  rgb8p = 35,
 
   /**
       planar 4:1:0 YUV
   */
-  Yuv9 = 36,
+  yuv9 = 36,
 
   /**
       planar 4:1:0 YUV (like YUV9 but UV planes swapped)
   */
-  Yvu9 = 37,
+  yvu9 = 37,
 
   /**
       packed 4:1:1 YUV (Cb-Y0-Y1-Cr-Y2-Y3 ...)
   */
-  Iyu1 = 38,
+  iyu1 = 38,
 
   /**
       rgb with alpha channel first, 16 bits (native endianness) per channel
   */
-  Argb64 = 39,
+  argb64 = 39,
 
   /**
       packed 4:4:4 YUV with alpha channel, 16 bits (native endianness) per channel (A0-Y0-U0-V0 ...)
   */
-  Ayuv64 = 40,
+  ayuv64 = 40,
 
   /**
       packed 4:4:4 RGB, 10 bits per channel
   */
-  R210 = 41,
+  r210 = 41,
 
   /**
       planar 4:2:0 YUV, 10 bits per channel
   */
-  I42010be = 42,
+  i42010be = 42,
 
   /**
       planar 4:2:0 YUV, 10 bits per channel
   */
-  I42010le = 43,
+  i42010le = 43,
 
   /**
       planar 4:2:2 YUV, 10 bits per channel
   */
-  I42210be = 44,
+  i42210be = 44,
 
   /**
       planar 4:2:2 YUV, 10 bits per channel
   */
-  I42210le = 45,
+  i42210le = 45,
 
   /**
       planar 4:4:4 YUV, 10 bits per channel (Since: 1.2)
   */
-  Y44410be = 46,
+  y44410be = 46,
 
   /**
       planar 4:4:4 YUV, 10 bits per channel (Since: 1.2)
   */
-  Y44410le = 47,
+  y44410le = 47,
 
   /**
       planar 4:4:4 RGB, 8 bits per channel (Since: 1.2)
   */
-  Gbr = 48,
+  gbr = 48,
 
   /**
       planar 4:4:4 RGB, 10 bits per channel (Since: 1.2)
   */
-  Gbr10be = 49,
+  gbr10be = 49,
 
   /**
       planar 4:4:4 RGB, 10 bits per channel (Since: 1.2)
   */
-  Gbr10le = 50,
+  gbr10le = 50,
 
   /**
       planar 4:2:2 YUV with interleaved UV plane (Since: 1.2)
   */
-  Nv16 = 51,
+  nv16 = 51,
 
   /**
       planar 4:4:4 YUV with interleaved UV plane (Since: 1.2)
   */
-  Nv24 = 52,
+  nv24 = 52,
 
   /**
       NV12 with 64x32 tiling in zigzag pattern (Since: 1.4)
   */
-  Nv1264z32 = 53,
+  nv1264z32 = 53,
 
   /**
       planar 4:4:2:0 YUV, 10 bits per channel (Since: 1.6)
   */
-  A42010be = 54,
+  a42010be = 54,
 
   /**
       planar 4:4:2:0 YUV, 10 bits per channel (Since: 1.6)
   */
-  A42010le = 55,
+  a42010le = 55,
 
   /**
       planar 4:4:2:2 YUV, 10 bits per channel (Since: 1.6)
   */
-  A42210be = 56,
+  a42210be = 56,
 
   /**
       planar 4:4:2:2 YUV, 10 bits per channel (Since: 1.6)
   */
-  A42210le = 57,
+  a42210le = 57,
 
   /**
       planar 4:4:4:4 YUV, 10 bits per channel (Since: 1.6)
   */
-  A44410be = 58,
+  a44410be = 58,
 
   /**
       planar 4:4:4:4 YUV, 10 bits per channel (Since: 1.6)
   */
-  A44410le = 59,
+  a44410le = 59,
 
   /**
       planar 4:2:2 YUV with interleaved VU plane (Since: 1.6)
   */
-  Nv61 = 60,
+  nv61 = 60,
 
   /**
       planar 4:2:0 YUV with interleaved UV plane, 10 bits per channel (Since: 1.10)
   */
-  P01010be = 61,
+  p01010be = 61,
 
   /**
       planar 4:2:0 YUV with interleaved UV plane, 10 bits per channel (Since: 1.10)
   */
-  P01010le = 62,
+  p01010le = 62,
 
   /**
       packed 4:4:4 YUV (U-Y-V ...) (Since: 1.10)
   */
-  Iyu2 = 63,
+  iyu2 = 63,
 
   /**
       packed 4:2:2 YUV (V0-Y0-U0-Y1 V2-Y2-U2-Y3 V4 ...)
   */
-  Vyuy = 64,
+  vyuy = 64,
 
   /**
       planar 4:4:4:4 ARGB, 8 bits per channel (Since: 1.12)
   */
-  Gbra = 65,
+  gbra = 65,
 
   /**
       planar 4:4:4:4 ARGB, 10 bits per channel (Since: 1.12)
   */
-  Gbra10be = 66,
+  gbra10be = 66,
 
   /**
       planar 4:4:4:4 ARGB, 10 bits per channel (Since: 1.12)
   */
-  Gbra10le = 67,
+  gbra10le = 67,
 
   /**
       planar 4:4:4 RGB, 12 bits per channel (Since: 1.12)
   */
-  Gbr12be = 68,
+  gbr12be = 68,
 
   /**
       planar 4:4:4 RGB, 12 bits per channel (Since: 1.12)
   */
-  Gbr12le = 69,
+  gbr12le = 69,
 
   /**
       planar 4:4:4:4 ARGB, 12 bits per channel (Since: 1.12)
   */
-  Gbra12be = 70,
+  gbra12be = 70,
 
   /**
       planar 4:4:4:4 ARGB, 12 bits per channel (Since: 1.12)
   */
-  Gbra12le = 71,
+  gbra12le = 71,
 
   /**
       planar 4:2:0 YUV, 12 bits per channel (Since: 1.12)
   */
-  I42012be = 72,
+  i42012be = 72,
 
   /**
       planar 4:2:0 YUV, 12 bits per channel (Since: 1.12)
   */
-  I42012le = 73,
+  i42012le = 73,
 
   /**
       planar 4:2:2 YUV, 12 bits per channel (Since: 1.12)
   */
-  I42212be = 74,
+  i42212be = 74,
 
   /**
       planar 4:2:2 YUV, 12 bits per channel (Since: 1.12)
   */
-  I42212le = 75,
+  i42212le = 75,
 
   /**
       planar 4:4:4 YUV, 12 bits per channel (Since: 1.12)
   */
-  Y44412be = 76,
+  y44412be = 76,
 
   /**
       planar 4:4:4 YUV, 12 bits per channel (Since: 1.12)
   */
-  Y44412le = 77,
+  y44412le = 77,
 
   /**
       10-bit grayscale, packed into 32bit words (2 bits padding) (Since: 1.14)
   */
-  Gray10Le32 = 78,
+  gray10Le32 = 78,
 
   /**
       10-bit variant of @GST_VIDEO_FORMAT_NV12, packed into 32bit words (MSB 2 bits padding) (Since: 1.14)
   */
-  Nv1210le32 = 79,
+  nv1210le32 = 79,
 
   /**
       10-bit variant of @GST_VIDEO_FORMAT_NV16, packed into 32bit words (MSB 2 bits padding) (Since: 1.14)
   */
-  Nv1610le32 = 80,
+  nv1610le32 = 80,
 
   /**
       Fully packed variant of NV12_10LE32 (Since: 1.16)
   */
-  Nv1210le40 = 81,
+  nv1210le40 = 81,
 
   /**
       packed 4:2:2 YUV, 10 bits per channel (Since: 1.16)
   */
-  Y210 = 82,
+  y210 = 82,
 
   /**
       packed 4:4:4 YUV, 10 bits per channel(A-V-Y-U...) (Since: 1.16)
   */
-  Y410 = 83,
+  y410 = 83,
 
   /**
       packed 4:4:4 YUV with alpha channel (V0-U0-Y0-A0...) (Since: 1.16)
   */
-  Vuya = 84,
+  vuya = 84,
 
   /**
       packed 4:4:4 RGB with alpha channel(B-G-R-A), 10 bits for R/G/B channel and MSB 2 bits for alpha channel (Since: 1.16)
   */
-  Bgr10a2Le = 85,
+  bgr10a2Le = 85,
 
   /**
       packed 4:4:4 RGB with alpha channel(R-G-B-A), 10 bits for R/G/B channel and MSB 2 bits for alpha channel (Since: 1.18)
   */
-  Rgb10a2Le = 86,
+  rgb10a2Le = 86,
 
   /**
       planar 4:4:4 YUV, 16 bits per channel (Since: 1.18)
   */
-  Y44416be = 87,
+  y44416be = 87,
 
   /**
       planar 4:4:4 YUV, 16 bits per channel (Since: 1.18)
   */
-  Y44416le = 88,
+  y44416le = 88,
 
   /**
       planar 4:2:0 YUV with interleaved UV plane, 16 bits per channel (Since: 1.18)
   */
-  P016Be = 89,
+  p016Be = 89,
 
   /**
       planar 4:2:0 YUV with interleaved UV plane, 16 bits per channel (Since: 1.18)
   */
-  P016Le = 90,
+  p016Le = 90,
 
   /**
       planar 4:2:0 YUV with interleaved UV plane, 12 bits per channel (Since: 1.18)
   */
-  P012Be = 91,
+  p012Be = 91,
 
   /**
       planar 4:2:0 YUV with interleaved UV plane, 12 bits per channel (Since: 1.18)
   */
-  P012Le = 92,
+  p012Le = 92,
 
   /**
       packed 4:2:2 YUV, 12 bits per channel (Y-U-Y-V) (Since: 1.18)
   */
-  Y212Be = 93,
+  y212Be = 93,
 
   /**
       packed 4:2:2 YUV, 12 bits per channel (Y-U-Y-V) (Since: 1.18)
   */
-  Y212Le = 94,
+  y212Le = 94,
 
   /**
       packed 4:4:4:4 YUV, 12 bits per channel(U-Y-V-A...) (Since: 1.18)
   */
-  Y412Be = 95,
+  y412Be = 95,
 
   /**
       packed 4:4:4:4 YUV, 12 bits per channel(U-Y-V-A...) (Since: 1.18)
   */
-  Y412Le = 96,
+  y412Le = 96,
 
   /**
       NV12 with 4x4 tiles in linear order.
   */
-  Nv124l4 = 97,
+  nv124l4 = 97,
 
   /**
       NV12 with 32x32 tiles in linear order.
   */
-  Nv1232l32 = 98,
+  nv1232l32 = 98,
 
   /**
       Planar 4:4:4 RGB, R-G-B order
   */
-  Rgbp = 99,
+  rgbp = 99,
 
   /**
       Planar 4:4:4 RGB, B-G-R order
   */
-  Bgrp = 100,
+  bgrp = 100,
 
   /**
       Planar 4:2:0 YUV with interleaved UV plane with alpha as
     3rd plane.
   */
-  Av12 = 101,
+  av12 = 101,
 
   /**
       RGB with alpha channel first, 16 bits (little endian)
     per channel.
   */
-  Argb64Le = 102,
+  argb64Le = 102,
 
   /**
       RGB with alpha channel first, 16 bits (big endian)
     per channel.
   */
-  Argb64Be = 103,
+  argb64Be = 103,
 
   /**
       RGB with alpha channel last, 16 bits (little endian)
     per channel.
   */
-  Rgba64Le = 104,
+  rgba64Le = 104,
 
   /**
       RGB with alpha channel last, 16 bits (big endian)
     per channel.
   */
-  Rgba64Be = 105,
+  rgba64Be = 105,
 
   /**
       Reverse RGB with alpha channel last, 16 bits (little endian)
     per channel.
   */
-  Bgra64Le = 106,
+  bgra64Le = 106,
 
   /**
       Reverse RGB with alpha channel last, 16 bits (big endian)
     per channel.
   */
-  Bgra64Be = 107,
+  bgra64Be = 107,
 
   /**
       Reverse RGB with alpha channel first, 16 bits (little endian)
     per channel.
   */
-  Abgr64Le = 108,
+  abgr64Le = 108,
 
   /**
       Reverse RGB with alpha channel first, 16 bits (big endian)
     per channel.
   */
-  Abgr64Be = 109,
+  abgr64Be = 109,
 
   /**
       NV12 with 16x32 Y tiles and 16x16 UV tiles.
   */
-  Nv1216l32s = 110,
+  nv1216l32s = 110,
 
   /**
       NV12 with 8x128 tiles in linear order.
   */
-  Nv128l128 = 111,
+  nv128l128 = 111,
 
   /**
       NV12 10bit big endian with 8x128 tiles in linear order.
   */
-  Nv1210be8l128 = 112,
+  nv1210be8l128 = 112,
 
   /**
       @GST_VIDEO_FORMAT_NV12_10LE40 with 4x4 pixels tiles (5 bytes
      per tile row). This format is produced by Verisilicon/Hantro decoders.
   */
-  Nv1210le404l4 = 113,
+  nv1210le404l4 = 113,
 
   /**
       @GST_VIDEO_FORMAT_DMA_DRM represent the DMA DRM special format. It's
@@ -1760,104 +1760,104 @@ enum GstVideoFormat
     parameter (drm-format) is required to define the image format and
     its memory layout.
   */
-  DmaDrm = 114,
+  dmaDrm = 114,
 
   /**
       Mediatek 10bit NV12 little endian with 16x32 tiles in linear order, tile 2
     bits.
   */
-  Mt2110t = 115,
+  mt2110t = 115,
 
   /**
       Mediatek 10bit NV12 little endian with 16x32 tiles in linear order, raster
     2 bits.
   */
-  Mt2110r = 116,
+  mt2110r = 116,
 
   /**
       planar 4:4:2:2 YUV, 8 bits per channel
   */
-  A422 = 117,
+  a422 = 117,
 
   /**
       planar 4:4:4:4 YUV, 8 bits per channel
   */
-  A444 = 118,
+  a444 = 118,
 
   /**
       planar 4:4:4:4 YUV, 12 bits per channel
   */
-  A44412le = 119,
+  a44412le = 119,
 
   /**
       planar 4:4:4:4 YUV, 12 bits per channel
   */
-  A44412be = 120,
+  a44412be = 120,
 
   /**
       planar 4:4:2:2 YUV, 12 bits per channel
   */
-  A42212le = 121,
+  a42212le = 121,
 
   /**
       planar 4:4:2:2 YUV, 12 bits per channel
   */
-  A42212be = 122,
+  a42212be = 122,
 
   /**
       planar 4:4:2:0 YUV, 12 bits per channel
   */
-  A42012le = 123,
+  a42012le = 123,
 
   /**
       planar 4:4:2:0 YUV, 12 bits per channel
   */
-  A42012be = 124,
+  a42012be = 124,
 
   /**
       planar 4:4:4:4 YUV, 16 bits per channel
   */
-  A44416le = 125,
+  a44416le = 125,
 
   /**
       planar 4:4:4:4 YUV, 16 bits per channel
   */
-  A44416be = 126,
+  a44416be = 126,
 
   /**
       planar 4:4:2:2 YUV, 16 bits per channel
   */
-  A42216le = 127,
+  a42216le = 127,
 
   /**
       planar 4:4:2:2 YUV, 16 bits per channel
   */
-  A42216be = 128,
+  a42216be = 128,
 
   /**
       planar 4:4:2:0 YUV, 16 bits per channel
   */
-  A42016le = 129,
+  a42016le = 129,
 
   /**
       planar 4:4:2:0 YUV, 16 bits per channel
   */
-  A42016be = 130,
+  a42016be = 130,
 
   /**
       planar 4:4:4 RGB, 16 bits per channel
   */
-  Gbr16le = 131,
+  gbr16le = 131,
 
   /**
       planar 4:4:4 RGB, 16 bits per channel
   */
-  Gbr16be = 132,
+  gbr16be = 132,
 
   /**
       packed RGB with alpha, 8 bits per channel
   */
-  Rbga = 133,
+  rbga = 133,
 }
 
 /**
@@ -1869,60 +1869,60 @@ enum GstVideoFormatFlags : uint
       The video format is YUV, components are numbered
       0=Y, 1=U, 2=V.
   */
-  Yuv = 1,
+  yuv = 1,
 
   /**
       The video format is RGB, components are numbered
       0=R, 1=G, 2=B.
   */
-  Rgb = 2,
+  rgb = 2,
 
   /**
       The video is gray, there is one gray component
       with index 0.
   */
-  Gray = 4,
+  gray = 4,
 
   /**
       The video format has an alpha components with
       the number 3.
   */
-  Alpha = 8,
+  alpha = 8,
 
   /**
       The video format has data stored in little
       endianness.
   */
-  Le = 16,
+  le = 16,
 
   /**
       The video format has a palette. The palette
       is stored in the second plane and indexes are stored in the first plane.
   */
-  Palette = 32,
+  palette = 32,
 
   /**
       The video format has a complex layout that
       can't be described with the usual information in the #GstVideoFormatInfo.
   */
-  Complex = 64,
+  complex = 64,
 
   /**
       This format can be used in a
       #GstVideoFormatUnpack and #GstVideoFormatPack function.
   */
-  Unpack = 128,
+  unpack = 128,
 
   /**
       The format is tiled, there is tiling information
       in the last plane.
   */
-  Tiled = 256,
+  tiled = 256,
 
   /**
       The tile size varies per plane according to the subsampling.
   */
-  Subtiles = 512,
+  subtiles = 512,
 }
 
 /**
@@ -1933,55 +1933,55 @@ enum GstVideoFrameFlags : uint
   /**
       no flags
   */
-  None = 0,
+  none = 0,
 
   /**
       The video frame is interlaced. In mixed
               interlace-mode, this flag specifies if the frame is interlaced or
               progressive.
   */
-  Interlaced = 1,
+  interlaced = 1,
 
   /**
       The video frame has the top field first
   */
-  Tff = 2,
+  tff = 2,
 
   /**
       The video frame has the repeat flag
   */
-  Rff = 4,
+  rff = 4,
 
   /**
       The video frame has one field
   */
-  Onefield = 8,
+  onefield = 8,
 
   /**
       The video contains one or
         more non-mono views
   */
-  MultipleView = 16,
+  multipleView = 16,
 
   /**
       The video frame is the first
         in a set of corresponding views provided as sequential frames.
   */
-  FirstInBundle = 32,
+  firstInBundle = 32,
 
   /**
       The video frame has the top field only. This
         is the same as GST_VIDEO_FRAME_FLAG_TFF | GST_VIDEO_FRAME_FLAG_ONEFIELD
         (Since: 1.16).
   */
-  TopField = 10,
+  topField = 10,
 
   /**
       The video frame has the bottom field
         only. This is the same as GST_VIDEO_FRAME_FLAG_ONEFIELD
         (GST_VIDEO_FRAME_FLAG_TFF flag unset) (Since: 1.16).
   */
-  BottomField = 8,
+  bottomField = 8,
 }
 
 /**
@@ -1995,12 +1995,12 @@ enum GstVideoFrameMapFlags : uint
                                        writable while the frame is mapped, but requires that the
                                        buffer reference stays valid until the frame is unmapped again.
   */
-  NoRef = 65536,
+  noRef = 65536,
 
   /**
       Offset to define more flags
   */
-  Last = 16777216,
+  last = 16777216,
 }
 
 /**
@@ -2011,22 +2011,22 @@ enum GstVideoGLTextureOrientation
   /**
       Top line first in memory, left row first
   */
-  NormalYNormal = 0,
+  normalYNormal = 0,
 
   /**
       Bottom line first in memory, left row first
   */
-  NormalYFlip = 1,
+  normalYFlip = 1,
 
   /**
       Top line first in memory, right row first
   */
-  FlipYNormal = 2,
+  flipYNormal = 2,
 
   /**
       Bottom line first in memory, right row first
   */
-  FlipYFlip = 3,
+  flipYFlip = 3,
 }
 
 /**
@@ -2037,37 +2037,37 @@ enum GstVideoGLTextureType
   /**
       Luminance texture, GL_LUMINANCE
   */
-  Luminance = 0,
+  luminance = 0,
 
   /**
       Luminance-alpha texture, GL_LUMINANCE_ALPHA
   */
-  LuminanceAlpha = 1,
+  luminanceAlpha = 1,
 
   /**
       RGB 565 texture, GL_RGB
   */
-  Rgb16 = 2,
+  rgb16 = 2,
 
   /**
       RGB texture, GL_RGB
   */
-  Rgb = 3,
+  rgb = 3,
 
   /**
       RGBA texture, GL_RGBA
   */
-  Rgba = 4,
+  rgba = 4,
 
   /**
       R texture, GL_RED_EXT
   */
-  R = 5,
+  r = 5,
 
   /**
       RG texture, GL_RG_EXT
   */
-  Rg = 6,
+  rg = 6,
 }
 
 /** */
@@ -2076,13 +2076,13 @@ enum GstVideoGammaMode
   /**
       disable gamma handling
   */
-  None = 0,
+  none = 0,
 
   /**
       convert between input and output gamma
     Different gamma conversion modes
   */
-  Remap = 1,
+  remap = 1,
 }
 
 /**
@@ -2094,19 +2094,19 @@ enum GstVideoInterlaceMode
   /**
       all frames are progressive
   */
-  Progressive = 0,
+  progressive = 0,
 
   /**
       2 fields are interleaved in one video
         frame. Extra buffer flags describe the field order.
   */
-  Interleaved = 1,
+  interleaved = 1,
 
   /**
       frames contains both interlaced and
         progressive video, the buffer flags describe the frame and fields.
   */
-  Mixed = 2,
+  mixed = 2,
 
   /**
       2 fields are stored in one buffer, use the
@@ -2117,7 +2117,7 @@ enum GstVideoInterlaceMode
         height property. This mode requires multiple GstVideoMeta metadata
         to describe the fields.
   */
-  Fields = 3,
+  fields = 3,
 
   /**
       1 field is stored in one buffer,
@@ -2126,7 +2126,7 @@ enum GstVideoInterlaceMode
         bottom buffers must alternate in the pipeline, with this mode
         (Since: 1.16).
   */
-  Alternate = 4,
+  alternate = 4,
 }
 
 /**
@@ -2137,24 +2137,24 @@ enum GstVideoMatrixMode
   /**
       do conversion between color matrices
   */
-  Full = 0,
+  full = 0,
 
   /**
       use the input color matrix to convert
       to and from R'G'B
   */
-  InputOnly = 1,
+  inputOnly = 1,
 
   /**
       use the output color matrix to convert
       to and from R'G'B
   */
-  OutputOnly = 2,
+  outputOnly = 2,
 
   /**
       disable color matrix conversion.
   */
-  None = 3,
+  none = 3,
 }
 
 /**
@@ -2167,37 +2167,37 @@ enum GstVideoMultiviewFlags : uint
   /**
       No flags
   */
-  None = 0,
+  none = 0,
 
   /**
       For stereo streams, the
         normal arrangement of left and right views is reversed.
   */
-  RightViewFirst = 1,
+  rightViewFirst = 1,
 
   /**
       The left view is vertically
         mirrored.
   */
-  LeftFlipped = 2,
+  leftFlipped = 2,
 
   /**
       The left view is horizontally
         mirrored.
   */
-  LeftFlopped = 4,
+  leftFlopped = 4,
 
   /**
       The right view is
         vertically mirrored.
   */
-  RightFlipped = 8,
+  rightFlipped = 8,
 
   /**
       The right view is
         horizontally mirrored.
   */
-  RightFlopped = 16,
+  rightFlopped = 16,
 
   /**
       For frame-packed
@@ -2210,7 +2210,7 @@ enum GstVideoMultiviewFlags : uint
         pixel width will be doubled. For row interleaved and top-bottom
         encodings, pixel height will be doubled.
   */
-  HalfAspect = 16384,
+  halfAspect = 16384,
 
   /**
       The video stream contains both
@@ -2218,7 +2218,7 @@ enum GstVideoMultiviewFlags : uint
         absence or presence of the @GST_VIDEO_BUFFER_FLAG_MULTIPLE_VIEW
         buffer flag.
   */
-  MixedMono = 32768,
+  mixedMono = 32768,
 }
 
 /**
@@ -2238,28 +2238,28 @@ enum GstVideoMultiviewFramePacking
       A special value indicating
     no frame packing info.
   */
-  None = -1,
+  none = -1,
 
   /**
       All frames are monoscopic.
   */
-  Mono = 0,
+  mono = 0,
 
   /**
       All frames represent a left-eye view.
   */
-  Left = 1,
+  left = 1,
 
   /**
       All frames represent a right-eye view.
   */
-  Right = 2,
+  right = 2,
 
   /**
       Left and right eye views are
     provided in the left and right half of the frame respectively.
   */
-  SideBySide = 3,
+  sideBySide = 3,
 
   /**
       Left and right eye
@@ -2267,32 +2267,32 @@ enum GstVideoMultiviewFramePacking
     have been sampled using quincunx method, with half-pixel offset
     between the 2 views.
   */
-  SideBySideQuincunx = 4,
+  sideBySideQuincunx = 4,
 
   /**
       Alternating vertical
     columns of pixels represent the left and right eye view respectively.
   */
-  ColumnInterleaved = 5,
+  columnInterleaved = 5,
 
   /**
       Alternating horizontal
     rows of pixels represent the left and right eye view respectively.
   */
-  RowInterleaved = 6,
+  rowInterleaved = 6,
 
   /**
       The top half of the frame
     contains the left eye, and the bottom half the right eye.
   */
-  TopBottom = 7,
+  topBottom = 7,
 
   /**
       Pixels are arranged with
     alternating pixels representing left and right eye views in a
     checkerboard fashion.
   */
-  Checkerboard = 8,
+  checkerboard = 8,
 }
 
 /**
@@ -2308,28 +2308,28 @@ enum GstVideoMultiviewMode
     indicate that no specific multiview handling has been requested or
     provided. This value is never carried on caps.
   */
-  None = -1,
+  none = -1,
 
   /**
       All frames are monoscopic.
   */
-  Mono = 0,
+  mono = 0,
 
   /**
       All frames represent a left-eye view.
   */
-  Left = 1,
+  left = 1,
 
   /**
       All frames represent a right-eye view.
   */
-  Right = 2,
+  right = 2,
 
   /**
       Left and right eye views are
     provided in the left and right half of the frame respectively.
   */
-  SideBySide = 3,
+  sideBySide = 3,
 
   /**
       Left and right eye
@@ -2337,38 +2337,38 @@ enum GstVideoMultiviewMode
     have been sampled using quincunx method, with half-pixel offset
     between the 2 views.
   */
-  SideBySideQuincunx = 4,
+  sideBySideQuincunx = 4,
 
   /**
       Alternating vertical
     columns of pixels represent the left and right eye view respectively.
   */
-  ColumnInterleaved = 5,
+  columnInterleaved = 5,
 
   /**
       Alternating horizontal
     rows of pixels represent the left and right eye view respectively.
   */
-  RowInterleaved = 6,
+  rowInterleaved = 6,
 
   /**
       The top half of the frame
     contains the left eye, and the bottom half the right eye.
   */
-  TopBottom = 7,
+  topBottom = 7,
 
   /**
       Pixels are arranged with
     alternating pixels representing left and right eye views in a
     checkerboard fashion.
   */
-  Checkerboard = 8,
+  checkerboard = 8,
 
   /**
       Left and right eye views
     are provided in separate frames alternately.
   */
-  FrameByFrame = 32,
+  frameByFrame = 32,
 
   /**
       Multiple
@@ -2377,7 +2377,7 @@ enum GstVideoMultiviewMode
     Specific view identification is via the `GstVideoMultiviewMeta`
     and #GstVideoMeta(s) on raw video buffers.
   */
-  MultiviewFrameByFrame = 33,
+  multiviewFrameByFrame = 33,
 
   /**
       Multiple views are
@@ -2385,7 +2385,7 @@ enum GstVideoMultiviewMode
     #GstBuffer, described by the `GstVideoMultiviewMeta`
     and #GstVideoMeta(s)
   */
-  Separated = 34,
+  separated = 34,
 }
 
 /**
@@ -2396,7 +2396,7 @@ enum GstVideoOrientationMethod
   /**
       Identity (no rotation)
   */
-  Identity = 0,
+  identity = 0,
 
   /**
       Rotate clockwise 90 degrees
@@ -2416,32 +2416,32 @@ enum GstVideoOrientationMethod
   /**
       Flip horizontally
   */
-  Horiz = 4,
+  horiz = 4,
 
   /**
       Flip vertically
   */
-  Vert = 5,
+  vert = 5,
 
   /**
       Flip across upper left/lower right diagonal
   */
-  UlLr = 6,
+  ulLr = 6,
 
   /**
       Flip across upper right/lower left diagonal
   */
-  UrLl = 7,
+  urLl = 7,
 
   /**
       Select flip method based on image-orientation tag
   */
-  Auto = 8,
+  auto_ = 8,
 
   /**
       Current status depends on plugin internal setup
   */
-  Custom = 9,
+  custom = 9,
 }
 
 /**
@@ -2452,17 +2452,17 @@ enum GstVideoOverlayFormatFlags : uint
   /**
       no flags
   */
-  None = 0,
+  none = 0,
 
   /**
       RGB are premultiplied by A/255.
   */
-  PremultipliedAlpha = 1,
+  premultipliedAlpha = 1,
 
   /**
       a global-alpha value != 1 is set.
   */
-  GlobalAlpha = 2,
+  globalAlpha = 2,
 }
 
 /**
@@ -2473,7 +2473,7 @@ enum GstVideoPackFlags : uint
   /**
       No flag
   */
-  None = 0,
+  none = 0,
 
   /**
       When the source has a smaller depth
@@ -2482,14 +2482,14 @@ enum GstVideoPackFlags : uint
       is not specified, the most significant bits of the source are duplicated
       in the least significant bits of the destination.
   */
-  TruncateRange = 1,
+  truncateRange = 1,
 
   /**
       The source is interlaced. The unpacked
       format will be interlaced as well with each line containing
       information from alternating fields. (Since: 1.2)
   */
-  Interlaced = 2,
+  interlaced = 2,
 }
 
 /**
@@ -2500,18 +2500,18 @@ enum GstVideoPrimariesMode
   /**
       disable conversion between primaries
   */
-  None = 0,
+  none = 0,
 
   /**
       do conversion between primaries only
       when it can be merged with color matrix conversion.
   */
-  MergeOnly = 1,
+  mergeOnly = 1,
 
   /**
       fast conversion between primaries
   */
-  Fast = 2,
+  fast = 2,
 }
 
 /**
@@ -2522,14 +2522,14 @@ enum GstVideoResamplerFlags : uint
   /**
       no flags
   */
-  None = 0,
+  none = 0,
 
   /**
       when no taps are given, half the
                  number of calculated taps. This can be used when making scalers
                  for the different fields of an interlaced picture. Since: 1.10
   */
-  HalfTaps = 1,
+  halfTaps = 1,
 }
 
 /**
@@ -2541,28 +2541,28 @@ enum GstVideoResamplerMethod
       Duplicates the samples when
        upsampling and drops when downsampling
   */
-  Nearest = 0,
+  nearest = 0,
 
   /**
       Uses linear interpolation to reconstruct
        missing samples and averaging to downsample
   */
-  Linear = 1,
+  linear = 1,
 
   /**
       Uses cubic interpolation
   */
-  Cubic = 2,
+  cubic = 2,
 
   /**
       Uses sinc interpolation
   */
-  Sinc = 3,
+  sinc = 3,
 
   /**
       Uses lanczos interpolation
   */
-  Lanczos = 4,
+  lanczos = 4,
 }
 
 /**
@@ -2573,12 +2573,12 @@ enum GstVideoScalerFlags : uint
   /**
       no flags
   */
-  None = 0,
+  none = 0,
 
   /**
       Set up a scaler for interlaced content
   */
-  Interlaced = 1,
+  interlaced = 1,
 }
 
 /**
@@ -2589,7 +2589,7 @@ enum GstVideoTileMode
   /**
       Unknown or unset tile mode
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       Every four adjacent blocks - two
@@ -2597,12 +2597,12 @@ enum GstVideoTileMode
        in memory in Z or flipped Z order. In case of odd rows, the last row
        of blocks is arranged in linear order.
   */
-  Zflipz2x2 = 65536,
+  zflipz2x2 = 65536,
 
   /**
       Tiles are in row order.
   */
-  Linear = 131072,
+  linear = 131072,
 }
 
 /**
@@ -2615,7 +2615,7 @@ enum GstVideoTileType
       gst_video_tile_get_index () to retrieve the tile at the requested
       coordinates.
   */
-  Indexed = 0,
+  indexed = 0,
 }
 
 /**
@@ -2627,17 +2627,17 @@ enum GstVideoTimeCodeFlags : uint
   /**
       No flags
   */
-  None = 0,
+  none = 0,
 
   /**
       Whether we have drop frame rate
   */
-  DropFrame = 1,
+  dropFrame = 1,
 
   /**
       Whether we have interlaced video
   */
-  Interlaced = 2,
+  interlaced = 2,
 }
 
 /**
@@ -2649,75 +2649,75 @@ enum GstVideoTransferFunction
   /**
       unknown transfer function
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       linear RGB, gamma 1.0 curve
   */
-  Gamma10 = 1,
+  gamma10 = 1,
 
   /**
       Gamma 1.8 curve
   */
-  Gamma18 = 2,
+  gamma18 = 2,
 
   /**
       Gamma 2.0 curve
   */
-  Gamma20 = 3,
+  gamma20 = 3,
 
   /**
       Gamma 2.2 curve
   */
-  Gamma22 = 4,
+  gamma22 = 4,
 
   /**
       Gamma 2.2 curve with a linear segment in the lower
                               range, also ITU-R BT470M / ITU-R BT1700 625 PAL &
                               SECAM / ITU-R BT1361
   */
-  Bt709 = 5,
+  bt709 = 5,
 
   /**
       Gamma 2.2 curve with a linear segment in the
                                   lower range
   */
-  Smpte240m = 6,
+  smpte240m = 6,
 
   /**
       Gamma 2.4 curve with a linear segment in the lower
                              range. IEC 61966-2-1 (sRGB or sYCC)
   */
-  Srgb = 7,
+  srgb = 7,
 
   /**
       Gamma 2.8 curve, also ITU-R BT470BG
   */
-  Gamma28 = 8,
+  gamma28 = 8,
 
   /**
       Logarithmic transfer characteristic
                                 100:1 range
   */
-  Log100 = 9,
+  log100 = 9,
 
   /**
       Logarithmic transfer characteristic
                                 316.22777:1 range (100 * sqrt(10) : 1)
   */
-  Log316 = 10,
+  log316 = 10,
 
   /**
       Gamma 2.2 curve with a linear segment in the lower
                                    range. Used for BT.2020 with 12 bits per
                                    component. Since: 1.6
   */
-  Bt202012 = 11,
+  bt202012 = 11,
 
   /**
       Gamma 2.19921875. Since: 1.8
   */
-  Adobergb = 12,
+  adobergb = 12,
 
   /**
       Rec. ITU-R BT.2020-2 with 10 bits per component.
@@ -2725,26 +2725,26 @@ enum GstVideoTransferFunction
                                    GST_VIDEO_TRANSFER_BT709 and GST_VIDEO_TRANSFER_BT601).
                                    Since: 1.18
   */
-  Bt202010 = 13,
+  bt202010 = 13,
 
   /**
       SMPTE ST 2084 for 10, 12, 14, and 16-bit systems.
                                    Known as perceptual quantization (PQ)
                                    Since: 1.18
   */
-  Smpte2084 = 14,
+  smpte2084 = 14,
 
   /**
       Association of Radio Industries and Businesses (ARIB)
                                       STD-B67 and Rec. ITU-R BT.2100-1 hybrid loggamma (HLG) system
                                       Since: 1.18
   */
-  AribStdB67 = 15,
+  aribStdB67 = 15,
 
   /**
       also known as SMPTE170M / ITU-R BT1358 525 or 625 / ITU-R BT1700 NTSC
   */
-  Bt601 = 16,
+  bt601 = 16,
 }
 
 /**
@@ -2755,17 +2755,17 @@ enum GstVideoVBIParserResult
   /**
       No line were provided, or no more Ancillary data was found.
   */
-  Done = 0,
+  done = 0,
 
   /**
       A #GstVideoAncillary was found.
   */
-  Ok = 1,
+  ok = 1,
 
   /**
       An error occurred
   */
-  Error = 2,
+  error = 2,
 }
 
 /**

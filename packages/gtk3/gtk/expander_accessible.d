@@ -14,7 +14,7 @@ import gtk.types;
 class ExpanderAccessible : gtk.container_accessible.ContainerAccessible, atk.action.Action
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

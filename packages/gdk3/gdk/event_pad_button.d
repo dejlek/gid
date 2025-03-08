@@ -8,13 +8,13 @@ import gid.gid;
 import gobject.object;
 
 /**
-    Generated during [gdk.types.InputSource.TabletPad] button presses and releases.
+    Generated during [gdk.types.InputSource.tabletPad] button presses and releases.
 */
 class EventPadButton
 {
   GdkEventPadButton cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventPadButton");
@@ -42,7 +42,7 @@ class EventPadButton
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventPadButton*)cPtr).window, No.Take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventPadButton*)cPtr).window, No.take);
   }
 
   @property byte sendEvent()

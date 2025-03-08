@@ -51,7 +51,7 @@ template TlsBackendT()
   {
     GTlsDatabase* _cretval;
     _cretval = g_tls_backend_get_default_database(cast(GTlsBackend*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ template TlsBackendT()
   */
   override void setDefaultDatabase(gio.tls_database.TlsDatabase database = null)
   {
-    g_tls_backend_set_default_database(cast(GTlsBackend*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.Dup) : null);
+    g_tls_backend_set_default_database(cast(GTlsBackend*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.dup) : null);
   }
 
   /**

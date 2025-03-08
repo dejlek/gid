@@ -31,12 +31,12 @@ import json.types;
 class ObjectJson : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -60,7 +60,7 @@ class ObjectJson : gobject.boxed.Boxed
   {
     JsonObject* _cretval;
     _cretval = json_object_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -76,8 +76,8 @@ class ObjectJson : gobject.boxed.Boxed
   */
   void addMember(string memberName, json.node.Node node)
   {
-    const(char)* _memberName = memberName.toCString(No.Alloc);
-    json_object_add_member(cast(JsonObject*)cPtr, _memberName, node ? cast(JsonNode*)node.cPtr(Yes.Dup) : null);
+    const(char)* _memberName = memberName.toCString(No.alloc);
+    json_object_add_member(cast(JsonObject*)cPtr, _memberName, node ? cast(JsonNode*)node.cPtr(Yes.dup) : null);
   }
 
   /**
@@ -90,9 +90,9 @@ class ObjectJson : gobject.boxed.Boxed
   json.node.Node dupMember(string memberName)
   {
     JsonNode* _cretval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     _cretval = json_object_dup_member(cast(JsonObject*)cPtr, _memberName);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class ObjectJson : gobject.boxed.Boxed
   bool equal(json.object.ObjectJson b)
   {
     bool _retval;
-    _retval = json_object_equal(cast(JsonObject*)cPtr, b ? cast(JsonObject*)b.cPtr(No.Dup) : null);
+    _retval = json_object_equal(cast(JsonObject*)cPtr, b ? cast(JsonObject*)b.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -128,9 +128,9 @@ class ObjectJson : gobject.boxed.Boxed
     extern(C) void _funcCallback(JsonObject* object, const(char)* memberName, JsonNode* memberNode, void* userData)
     {
       auto _dlg = cast(json.types.ObjectForeach*)userData;
-      string _memberName = memberName.fromCString(No.Free);
+      string _memberName = memberName.fromCString(No.free);
 
-      (*_dlg)(object ? new json.object.ObjectJson(cast(void*)object, No.Take) : null, _memberName, memberNode ? new json.node.Node(cast(void*)memberNode, No.Take) : null);
+      (*_dlg)(object ? new json.object.ObjectJson(cast(void*)object, No.take) : null, _memberName, memberNode ? new json.node.Node(cast(void*)memberNode, No.take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -153,9 +153,9 @@ class ObjectJson : gobject.boxed.Boxed
   json.array.Array getArrayMember(string memberName)
   {
     JsonArray* _cretval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     _cretval = json_object_get_array_member(cast(JsonObject*)cPtr, _memberName);
-    auto _retval = _cretval ? new json.array.Array(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new json.array.Array(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -173,7 +173,7 @@ class ObjectJson : gobject.boxed.Boxed
   bool getBooleanMember(string memberName)
   {
     bool _retval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     _retval = json_object_get_boolean_member(cast(JsonObject*)cPtr, _memberName);
     return _retval;
   }
@@ -193,7 +193,7 @@ class ObjectJson : gobject.boxed.Boxed
   bool getBooleanMemberWithDefault(string memberName, bool defaultValue)
   {
     bool _retval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     _retval = json_object_get_boolean_member_with_default(cast(JsonObject*)cPtr, _memberName, defaultValue);
     return _retval;
   }
@@ -212,7 +212,7 @@ class ObjectJson : gobject.boxed.Boxed
   double getDoubleMember(string memberName)
   {
     double _retval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     _retval = json_object_get_double_member(cast(JsonObject*)cPtr, _memberName);
     return _retval;
   }
@@ -232,7 +232,7 @@ class ObjectJson : gobject.boxed.Boxed
   double getDoubleMemberWithDefault(string memberName, double defaultValue)
   {
     double _retval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     _retval = json_object_get_double_member_with_default(cast(JsonObject*)cPtr, _memberName, defaultValue);
     return _retval;
   }
@@ -251,7 +251,7 @@ class ObjectJson : gobject.boxed.Boxed
   long getIntMember(string memberName)
   {
     long _retval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     _retval = json_object_get_int_member(cast(JsonObject*)cPtr, _memberName);
     return _retval;
   }
@@ -271,7 +271,7 @@ class ObjectJson : gobject.boxed.Boxed
   long getIntMemberWithDefault(string memberName, long defaultValue)
   {
     long _retval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     _retval = json_object_get_int_member_with_default(cast(JsonObject*)cPtr, _memberName, defaultValue);
     return _retval;
   }
@@ -286,9 +286,9 @@ class ObjectJson : gobject.boxed.Boxed
   json.node.Node getMember(string memberName)
   {
     JsonNode* _cretval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     _cretval = json_object_get_member(cast(JsonObject*)cPtr, _memberName);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class ObjectJson : gobject.boxed.Boxed
   bool getNullMember(string memberName)
   {
     bool _retval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     _retval = json_object_get_null_member(cast(JsonObject*)cPtr, _memberName);
     return _retval;
   }
@@ -341,9 +341,9 @@ class ObjectJson : gobject.boxed.Boxed
   json.object.ObjectJson getObjectMember(string memberName)
   {
     JsonObject* _cretval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     _cretval = json_object_get_object_member(cast(JsonObject*)cPtr, _memberName);
-    auto _retval = _cretval ? new json.object.ObjectJson(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new json.object.ObjectJson(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -372,9 +372,9 @@ class ObjectJson : gobject.boxed.Boxed
   string getStringMember(string memberName)
   {
     const(char)* _cretval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     _cretval = json_object_get_string_member(cast(JsonObject*)cPtr, _memberName);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -393,10 +393,10 @@ class ObjectJson : gobject.boxed.Boxed
   string getStringMemberWithDefault(string memberName, string defaultValue)
   {
     const(char)* _cretval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
-    const(char)* _defaultValue = defaultValue.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
+    const(char)* _defaultValue = defaultValue.toCString(No.alloc);
     _cretval = json_object_get_string_member_with_default(cast(JsonObject*)cPtr, _memberName, _defaultValue);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -422,7 +422,7 @@ class ObjectJson : gobject.boxed.Boxed
   bool hasMember(string memberName)
   {
     bool _retval;
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     _retval = json_object_has_member(cast(JsonObject*)cPtr, _memberName);
     return _retval;
   }
@@ -461,7 +461,7 @@ class ObjectJson : gobject.boxed.Boxed
   */
   void removeMember(string memberName)
   {
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     json_object_remove_member(cast(JsonObject*)cPtr, _memberName);
   }
 
@@ -487,8 +487,8 @@ class ObjectJson : gobject.boxed.Boxed
   */
   void setArrayMember(string memberName, json.array.Array value)
   {
-    const(char)* _memberName = memberName.toCString(No.Alloc);
-    json_object_set_array_member(cast(JsonObject*)cPtr, _memberName, value ? cast(JsonArray*)value.cPtr(Yes.Dup) : null);
+    const(char)* _memberName = memberName.toCString(No.alloc);
+    json_object_set_array_member(cast(JsonObject*)cPtr, _memberName, value ? cast(JsonArray*)value.cPtr(Yes.dup) : null);
   }
 
   /**
@@ -501,7 +501,7 @@ class ObjectJson : gobject.boxed.Boxed
   */
   void setBooleanMember(string memberName, bool value)
   {
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     json_object_set_boolean_member(cast(JsonObject*)cPtr, _memberName, value);
   }
 
@@ -515,7 +515,7 @@ class ObjectJson : gobject.boxed.Boxed
   */
   void setDoubleMember(string memberName, double value)
   {
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     json_object_set_double_member(cast(JsonObject*)cPtr, _memberName, value);
   }
 
@@ -529,7 +529,7 @@ class ObjectJson : gobject.boxed.Boxed
   */
   void setIntMember(string memberName, long value)
   {
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     json_object_set_int_member(cast(JsonObject*)cPtr, _memberName, value);
   }
 
@@ -547,8 +547,8 @@ class ObjectJson : gobject.boxed.Boxed
   */
   void setMember(string memberName, json.node.Node node)
   {
-    const(char)* _memberName = memberName.toCString(No.Alloc);
-    json_object_set_member(cast(JsonObject*)cPtr, _memberName, node ? cast(JsonNode*)node.cPtr(Yes.Dup) : null);
+    const(char)* _memberName = memberName.toCString(No.alloc);
+    json_object_set_member(cast(JsonObject*)cPtr, _memberName, node ? cast(JsonNode*)node.cPtr(Yes.dup) : null);
   }
 
   /**
@@ -560,7 +560,7 @@ class ObjectJson : gobject.boxed.Boxed
   */
   void setNullMember(string memberName)
   {
-    const(char)* _memberName = memberName.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
     json_object_set_null_member(cast(JsonObject*)cPtr, _memberName);
   }
 
@@ -574,8 +574,8 @@ class ObjectJson : gobject.boxed.Boxed
   */
   void setObjectMember(string memberName, json.object.ObjectJson value)
   {
-    const(char)* _memberName = memberName.toCString(No.Alloc);
-    json_object_set_object_member(cast(JsonObject*)cPtr, _memberName, value ? cast(JsonObject*)value.cPtr(Yes.Dup) : null);
+    const(char)* _memberName = memberName.toCString(No.alloc);
+    json_object_set_object_member(cast(JsonObject*)cPtr, _memberName, value ? cast(JsonObject*)value.cPtr(Yes.dup) : null);
   }
 
   /**
@@ -588,8 +588,8 @@ class ObjectJson : gobject.boxed.Boxed
   */
   void setStringMember(string memberName, string value)
   {
-    const(char)* _memberName = memberName.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _memberName = memberName.toCString(No.alloc);
+    const(char)* _value = value.toCString(No.alloc);
     json_object_set_string_member(cast(JsonObject*)cPtr, _memberName, _value);
   }
 }

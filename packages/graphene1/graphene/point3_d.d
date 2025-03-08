@@ -16,15 +16,15 @@ class Point3D : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(graphene_point3d_t.sizeof), Yes.Take);
+    super(safeMalloc(graphene_point3d_t.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -80,7 +80,7 @@ class Point3D : gobject.boxed.Boxed
   {
     graphene_point3d_t* _cretval;
     _cretval = graphene_point3d_alloc();
-    auto _retval = _cretval ? new graphene.point3_d.Point3D(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new graphene.point3_d.Point3D(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -94,8 +94,8 @@ class Point3D : gobject.boxed.Boxed
   void cross(graphene.point3_d.Point3D b, out graphene.point3_d.Point3D res)
   {
     graphene_point3d_t _res;
-    graphene_point3d_cross(cast(const(graphene_point3d_t)*)cPtr, b ? cast(const(graphene_point3d_t)*)b.cPtr(No.Dup) : null, &_res);
-    res = new graphene.point3_d.Point3D(cast(void*)&_res, No.Take);
+    graphene_point3d_cross(cast(const(graphene_point3d_t)*)cPtr, b ? cast(const(graphene_point3d_t)*)b.cPtr(No.dup) : null, &_res);
+    res = new graphene.point3_d.Point3D(cast(void*)&_res, No.take);
   }
 
   /**
@@ -110,8 +110,8 @@ class Point3D : gobject.boxed.Boxed
   {
     float _retval;
     graphene_vec3_t _delta;
-    _retval = graphene_point3d_distance(cast(const(graphene_point3d_t)*)cPtr, b ? cast(const(graphene_point3d_t)*)b.cPtr(No.Dup) : null, &_delta);
-    delta = new graphene.vec3.Vec3(cast(void*)&_delta, No.Take);
+    _retval = graphene_point3d_distance(cast(const(graphene_point3d_t)*)cPtr, b ? cast(const(graphene_point3d_t)*)b.cPtr(No.dup) : null, &_delta);
+    delta = new graphene.vec3.Vec3(cast(void*)&_delta, No.take);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class Point3D : gobject.boxed.Boxed
   float dot(graphene.point3_d.Point3D b)
   {
     float _retval;
-    _retval = graphene_point3d_dot(cast(const(graphene_point3d_t)*)cPtr, b ? cast(const(graphene_point3d_t)*)b.cPtr(No.Dup) : null);
+    _retval = graphene_point3d_dot(cast(const(graphene_point3d_t)*)cPtr, b ? cast(const(graphene_point3d_t)*)b.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class Point3D : gobject.boxed.Boxed
   bool equal(graphene.point3_d.Point3D b)
   {
     bool _retval;
-    _retval = graphene_point3d_equal(cast(const(graphene_point3d_t)*)cPtr, b ? cast(const(graphene_point3d_t)*)b.cPtr(No.Dup) : null);
+    _retval = graphene_point3d_equal(cast(const(graphene_point3d_t)*)cPtr, b ? cast(const(graphene_point3d_t)*)b.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class Point3D : gobject.boxed.Boxed
   {
     graphene_point3d_t* _cretval;
     _cretval = graphene_point3d_init(cast(graphene_point3d_t*)cPtr, x, y, z);
-    auto _retval = _cretval ? new graphene.point3_d.Point3D(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.point3_d.Point3D(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -167,8 +167,8 @@ class Point3D : gobject.boxed.Boxed
   graphene.point3_d.Point3D initFromPoint(graphene.point3_d.Point3D src)
   {
     graphene_point3d_t* _cretval;
-    _cretval = graphene_point3d_init_from_point(cast(graphene_point3d_t*)cPtr, src ? cast(const(graphene_point3d_t)*)src.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new graphene.point3_d.Point3D(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_point3d_init_from_point(cast(graphene_point3d_t*)cPtr, src ? cast(const(graphene_point3d_t)*)src.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new graphene.point3_d.Point3D(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -182,8 +182,8 @@ class Point3D : gobject.boxed.Boxed
   graphene.point3_d.Point3D initFromVec3(graphene.vec3.Vec3 v)
   {
     graphene_point3d_t* _cretval;
-    _cretval = graphene_point3d_init_from_vec3(cast(graphene_point3d_t*)cPtr, v ? cast(const(graphene_vec3_t)*)v.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new graphene.point3_d.Point3D(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_point3d_init_from_vec3(cast(graphene_point3d_t*)cPtr, v ? cast(const(graphene_vec3_t)*)v.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new graphene.point3_d.Point3D(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -199,8 +199,8 @@ class Point3D : gobject.boxed.Boxed
   void interpolate(graphene.point3_d.Point3D b, double factor, out graphene.point3_d.Point3D res)
   {
     graphene_point3d_t _res;
-    graphene_point3d_interpolate(cast(const(graphene_point3d_t)*)cPtr, b ? cast(const(graphene_point3d_t)*)b.cPtr(No.Dup) : null, factor, &_res);
-    res = new graphene.point3_d.Point3D(cast(void*)&_res, No.Take);
+    graphene_point3d_interpolate(cast(const(graphene_point3d_t)*)cPtr, b ? cast(const(graphene_point3d_t)*)b.cPtr(No.dup) : null, factor, &_res);
+    res = new graphene.point3_d.Point3D(cast(void*)&_res, No.take);
   }
 
   /**
@@ -226,7 +226,7 @@ class Point3D : gobject.boxed.Boxed
   bool near(graphene.point3_d.Point3D b, float epsilon)
   {
     bool _retval;
-    _retval = graphene_point3d_near(cast(const(graphene_point3d_t)*)cPtr, b ? cast(const(graphene_point3d_t)*)b.cPtr(No.Dup) : null, epsilon);
+    _retval = graphene_point3d_near(cast(const(graphene_point3d_t)*)cPtr, b ? cast(const(graphene_point3d_t)*)b.cPtr(No.dup) : null, epsilon);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class Point3D : gobject.boxed.Boxed
   {
     graphene_point3d_t _res;
     graphene_point3d_normalize(cast(const(graphene_point3d_t)*)cPtr, &_res);
-    res = new graphene.point3_d.Point3D(cast(void*)&_res, No.Take);
+    res = new graphene.point3_d.Point3D(cast(void*)&_res, No.take);
   }
 
   /**
@@ -262,8 +262,8 @@ class Point3D : gobject.boxed.Boxed
   void normalizeViewport(graphene.rect.Rect viewport, float zNear, float zFar, out graphene.point3_d.Point3D res)
   {
     graphene_point3d_t _res;
-    graphene_point3d_normalize_viewport(cast(const(graphene_point3d_t)*)cPtr, viewport ? cast(const(graphene_rect_t)*)viewport.cPtr(No.Dup) : null, zNear, zFar, &_res);
-    res = new graphene.point3_d.Point3D(cast(void*)&_res, No.Take);
+    graphene_point3d_normalize_viewport(cast(const(graphene_point3d_t)*)cPtr, viewport ? cast(const(graphene_rect_t)*)viewport.cPtr(No.dup) : null, zNear, zFar, &_res);
+    res = new graphene.point3_d.Point3D(cast(void*)&_res, No.take);
   }
 
   /**
@@ -277,7 +277,7 @@ class Point3D : gobject.boxed.Boxed
   {
     graphene_point3d_t _res;
     graphene_point3d_scale(cast(const(graphene_point3d_t)*)cPtr, factor, &_res);
-    res = new graphene.point3_d.Point3D(cast(void*)&_res, No.Take);
+    res = new graphene.point3_d.Point3D(cast(void*)&_res, No.take);
   }
 
   /**
@@ -290,7 +290,7 @@ class Point3D : gobject.boxed.Boxed
   {
     graphene_vec3_t _v;
     graphene_point3d_to_vec3(cast(const(graphene_point3d_t)*)cPtr, &_v);
-    v = new graphene.vec3.Vec3(cast(void*)&_v, No.Take);
+    v = new graphene.vec3.Vec3(cast(void*)&_v, No.take);
   }
 
   /**
@@ -301,7 +301,7 @@ class Point3D : gobject.boxed.Boxed
   {
     const(graphene_point3d_t)* _cretval;
     _cretval = graphene_point3d_zero();
-    auto _retval = _cretval ? new graphene.point3_d.Point3D(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.point3_d.Point3D(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

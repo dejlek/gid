@@ -43,7 +43,7 @@ import gst.types;
   ```
   
   Each #GstPromise starts out with a #GstPromiseResult of
-  [gst.types.PromiseResult.Pending] and only ever transitions once
+  [gst.types.PromiseResult.pending] and only ever transitions once
   into one of the other #GstPromiseResult's.
   
   In order to support multi-threaded code, [gst.promise.Promise.reply],
@@ -66,12 +66,12 @@ import gst.types;
 class Promise : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -97,12 +97,12 @@ class Promise : gobject.boxed.Boxed
   {
     GstPromise* _cretval;
     _cretval = gst_promise_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
       func will be called exactly once when transitioning out of
-    [gst.types.PromiseResult.Pending] into any of the other #GstPromiseResult
+    [gst.types.PromiseResult.pending] into any of the other #GstPromiseResult
     states.
     Params:
       func =       a #GstPromiseChangeFunc to call
@@ -114,7 +114,7 @@ class Promise : gobject.boxed.Boxed
     {
       auto _dlg = cast(gst.types.PromiseChangeFunc*)userData;
 
-      (*_dlg)(promise ? new gst.promise.Promise(cast(void*)promise, No.Take) : null);
+      (*_dlg)(promise ? new gst.promise.Promise(cast(void*)promise, No.take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -122,13 +122,13 @@ class Promise : gobject.boxed.Boxed
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     _cretval = gst_promise_new_with_change_func(_funcCB, _func, _funcDestroyCB);
-    auto _retval = _cretval ? new gst.promise.Promise(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.promise.Promise(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
   /**
       Expire a promise.  This will wake up any waiters with
-    [gst.types.PromiseResult.Expired].  Called by a message loop when the parent
+    [gst.types.PromiseResult.expired].  Called by a message loop when the parent
     message is handled and/or destroyed (possibly unanswered).
   */
   void expire()
@@ -138,20 +138,20 @@ class Promise : gobject.boxed.Boxed
 
   /**
       Retrieve the reply set on promise.  promise must be in
-    [gst.types.PromiseResult.Replied] and the returned structure is owned by promise
+    [gst.types.PromiseResult.replied] and the returned structure is owned by promise
     Returns:     The reply set on promise
   */
   gst.structure.Structure getReply()
   {
     const(GstStructure)* _cretval;
     _cretval = gst_promise_get_reply(cast(GstPromise*)cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
   /**
       Interrupt waiting for a promise.  This will wake up any waiters with
-    [gst.types.PromiseResult.Interrupted].  Called when the consumer does not want
+    [gst.types.PromiseResult.interrupted].  Called when the consumer does not want
     the value produced anymore.
   */
   void interrupt()
@@ -161,7 +161,7 @@ class Promise : gobject.boxed.Boxed
 
   /**
       Set a reply on promise.  This will wake up any waiters with
-    [gst.types.PromiseResult.Replied].  Called by the producer of the value to
+    [gst.types.PromiseResult.replied].  Called by the producer of the value to
     indicate success (or failure).
     
     If promise has already been interrupted by the consumer, then this reply
@@ -171,12 +171,12 @@ class Promise : gobject.boxed.Boxed
   */
   void reply(gst.structure.Structure s = null)
   {
-    gst_promise_reply(cast(GstPromise*)cPtr, s ? cast(GstStructure*)s.cPtr(Yes.Dup) : null);
+    gst_promise_reply(cast(GstPromise*)cPtr, s ? cast(GstStructure*)s.cPtr(Yes.dup) : null);
   }
 
   /**
-      Wait for promise to move out of the [gst.types.PromiseResult.Pending] state.
-    If promise is not in [gst.types.PromiseResult.Pending] then it will return
+      Wait for promise to move out of the [gst.types.PromiseResult.pending] state.
+    If promise is not in [gst.types.PromiseResult.pending] then it will return
     immediately with the current result.
     Returns:     the result of the promise
   */

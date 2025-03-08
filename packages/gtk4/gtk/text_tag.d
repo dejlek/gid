@@ -29,7 +29,7 @@ import gtk.types;
 class TextTag : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -54,9 +54,9 @@ class TextTag : gobject.object.ObjectG
   this(string name = null)
   {
     GtkTextTag* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gtk_text_tag_new(_name);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**

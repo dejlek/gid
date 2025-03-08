@@ -22,12 +22,12 @@ import gobject.boxed;
 class String : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -45,13 +45,13 @@ class String : gobject.boxed.Boxed
 
   @property string str()
   {
-    return (cast(GString*)cPtr).str.fromCString(No.Free);
+    return (cast(GString*)cPtr).str.fromCString(No.free);
   }
 
   @property void str(string propval)
   {
     safeFree(cast(void*)(cast(GString*)cPtr).str);
-    (cast(GString*)cPtr).str = propval.toCString(Yes.Alloc);
+    (cast(GString*)cPtr).str = propval.toCString(Yes.alloc);
   }
 
   @property size_t len()
@@ -84,9 +84,9 @@ class String : gobject.boxed.Boxed
   this(string init_ = null)
   {
     GString* _cretval;
-    const(char)* _init_ = init_.toCString(No.Alloc);
+    const(char)* _init_ = init_.toCString(No.alloc);
     _cretval = g_string_new(_init_);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -105,9 +105,9 @@ class String : gobject.boxed.Boxed
   static glib.string_.String newLen(string init_, ptrdiff_t len)
   {
     GString* _cretval;
-    const(char)* _init_ = init_.toCString(No.Alloc);
+    const(char)* _init_ = init_.toCString(No.alloc);
     _cretval = g_string_new_len(_init_, len);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -126,9 +126,9 @@ class String : gobject.boxed.Boxed
   static glib.string_.String newTake(string init_ = null)
   {
     GString* _cretval;
-    char* _init_ = init_.toCString(Yes.Alloc);
+    char* _init_ = init_.toCString(Yes.alloc);
     _cretval = g_string_new_take(_init_);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class String : gobject.boxed.Boxed
   {
     GString* _cretval;
     _cretval = g_string_sized_new(dflSize);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -159,9 +159,9 @@ class String : gobject.boxed.Boxed
   glib.string_.String append(string val)
   {
     GString* _cretval;
-    const(char)* _val = val.toCString(No.Alloc);
+    const(char)* _val = val.toCString(No.alloc);
     _cretval = g_string_append(cast(GString*)cPtr, _val);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class String : gobject.boxed.Boxed
   {
     GString* _cretval;
     _cretval = g_string_append_c(cast(GString*)cPtr, c);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -198,9 +198,9 @@ class String : gobject.boxed.Boxed
   glib.string_.String appendLen(string val, ptrdiff_t len)
   {
     GString* _cretval;
-    const(char)* _val = val.toCString(No.Alloc);
+    const(char)* _val = val.toCString(No.alloc);
     _cretval = g_string_append_len(cast(GString*)cPtr, _val, len);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class String : gobject.boxed.Boxed
   {
     GString* _cretval;
     _cretval = g_string_append_unichar(cast(GString*)cPtr, wc);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -232,10 +232,10 @@ class String : gobject.boxed.Boxed
   glib.string_.String appendUriEscaped(string unescaped, string reservedCharsAllowed, bool allowUtf8)
   {
     GString* _cretval;
-    const(char)* _unescaped = unescaped.toCString(No.Alloc);
-    const(char)* _reservedCharsAllowed = reservedCharsAllowed.toCString(No.Alloc);
+    const(char)* _unescaped = unescaped.toCString(No.alloc);
+    const(char)* _reservedCharsAllowed = reservedCharsAllowed.toCString(No.alloc);
     _cretval = g_string_append_uri_escaped(cast(GString*)cPtr, _unescaped, _reservedCharsAllowed, allowUtf8);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class String : gobject.boxed.Boxed
   {
     GString* _cretval;
     _cretval = g_string_ascii_down(cast(GString*)cPtr);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class String : gobject.boxed.Boxed
   {
     GString* _cretval;
     _cretval = g_string_ascii_up(cast(GString*)cPtr);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -279,9 +279,9 @@ class String : gobject.boxed.Boxed
   glib.string_.String assign(string rval)
   {
     GString* _cretval;
-    const(char)* _rval = rval.toCString(No.Alloc);
+    const(char)* _rval = rval.toCString(No.alloc);
     _cretval = g_string_assign(cast(GString*)cPtr, _rval);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -297,7 +297,7 @@ class String : gobject.boxed.Boxed
   {
     GString* _cretval;
     _cretval = g_string_down(cast(GString*)cPtr);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -312,7 +312,7 @@ class String : gobject.boxed.Boxed
   bool equal(glib.string_.String v2)
   {
     bool _retval;
-    _retval = g_string_equal(cast(const(GString)*)cPtr, v2 ? cast(const(GString)*)v2.cPtr(No.Dup) : null);
+    _retval = g_string_equal(cast(const(GString)*)cPtr, v2 ? cast(const(GString)*)v2.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -329,7 +329,7 @@ class String : gobject.boxed.Boxed
   {
     GString* _cretval;
     _cretval = g_string_erase(cast(GString*)cPtr, pos, len);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -344,7 +344,7 @@ class String : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = g_string_free_and_steal(cast(GString*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -363,7 +363,7 @@ class String : gobject.boxed.Boxed
   {
     GBytes* _cretval;
     _cretval = g_string_free_to_bytes(cast(GString*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -389,9 +389,9 @@ class String : gobject.boxed.Boxed
   glib.string_.String insert(ptrdiff_t pos, string val)
   {
     GString* _cretval;
-    const(char)* _val = val.toCString(No.Alloc);
+    const(char)* _val = val.toCString(No.alloc);
     _cretval = g_string_insert(cast(GString*)cPtr, pos, _val);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -406,7 +406,7 @@ class String : gobject.boxed.Boxed
   {
     GString* _cretval;
     _cretval = g_string_insert_c(cast(GString*)cPtr, pos, c);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -431,9 +431,9 @@ class String : gobject.boxed.Boxed
   glib.string_.String insertLen(ptrdiff_t pos, string val, ptrdiff_t len)
   {
     GString* _cretval;
-    const(char)* _val = val.toCString(No.Alloc);
+    const(char)* _val = val.toCString(No.alloc);
     _cretval = g_string_insert_len(cast(GString*)cPtr, pos, _val, len);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -450,7 +450,7 @@ class String : gobject.boxed.Boxed
   {
     GString* _cretval;
     _cretval = g_string_insert_unichar(cast(GString*)cPtr, pos, wc);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -464,9 +464,9 @@ class String : gobject.boxed.Boxed
   glib.string_.String overwrite(size_t pos, string val)
   {
     GString* _cretval;
-    const(char)* _val = val.toCString(No.Alloc);
+    const(char)* _val = val.toCString(No.alloc);
     _cretval = g_string_overwrite(cast(GString*)cPtr, pos, _val);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -482,9 +482,9 @@ class String : gobject.boxed.Boxed
   glib.string_.String overwriteLen(size_t pos, string val, ptrdiff_t len)
   {
     GString* _cretval;
-    const(char)* _val = val.toCString(No.Alloc);
+    const(char)* _val = val.toCString(No.alloc);
     _cretval = g_string_overwrite_len(cast(GString*)cPtr, pos, _val, len);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -498,9 +498,9 @@ class String : gobject.boxed.Boxed
   glib.string_.String prepend(string val)
   {
     GString* _cretval;
-    const(char)* _val = val.toCString(No.Alloc);
+    const(char)* _val = val.toCString(No.alloc);
     _cretval = g_string_prepend(cast(GString*)cPtr, _val);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -515,7 +515,7 @@ class String : gobject.boxed.Boxed
   {
     GString* _cretval;
     _cretval = g_string_prepend_c(cast(GString*)cPtr, c);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -537,9 +537,9 @@ class String : gobject.boxed.Boxed
   glib.string_.String prependLen(string val, ptrdiff_t len)
   {
     GString* _cretval;
-    const(char)* _val = val.toCString(No.Alloc);
+    const(char)* _val = val.toCString(No.alloc);
     _cretval = g_string_prepend_len(cast(GString*)cPtr, _val, len);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -554,7 +554,7 @@ class String : gobject.boxed.Boxed
   {
     GString* _cretval;
     _cretval = g_string_prepend_unichar(cast(GString*)cPtr, wc);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -578,8 +578,8 @@ class String : gobject.boxed.Boxed
   uint replace(string find, string replace, uint limit)
   {
     uint _retval;
-    const(char)* _find = find.toCString(No.Alloc);
-    const(char)* _replace = replace.toCString(No.Alloc);
+    const(char)* _find = find.toCString(No.alloc);
+    const(char)* _replace = replace.toCString(No.alloc);
     _retval = g_string_replace(cast(GString*)cPtr, _find, _replace, limit);
     return _retval;
   }
@@ -598,7 +598,7 @@ class String : gobject.boxed.Boxed
   {
     GString* _cretval;
     _cretval = g_string_set_size(cast(GString*)cPtr, len);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -612,7 +612,7 @@ class String : gobject.boxed.Boxed
   {
     GString* _cretval;
     _cretval = g_string_truncate(cast(GString*)cPtr, len);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -628,7 +628,7 @@ class String : gobject.boxed.Boxed
   {
     GString* _cretval;
     _cretval = g_string_up(cast(GString*)cPtr);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

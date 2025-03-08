@@ -12,7 +12,7 @@ import gobject.object;
 class RecordBatchIterator : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,14 +35,14 @@ class RecordBatchIterator : gobject.object.ObjectG
     auto _recordBatches = gListFromD!(arrow.record_batch.RecordBatch)(recordBatches);
     scope(exit) containerFree!(GList*, arrow.record_batch.RecordBatch, GidOwnership.None)(_recordBatches);
     _cretval = garrow_record_batch_iterator_new(_recordBatches);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */
   bool equal(arrow.record_batch_iterator.RecordBatchIterator otherIterator)
   {
     bool _retval;
-    _retval = garrow_record_batch_iterator_equal(cast(GArrowRecordBatchIterator*)cPtr, otherIterator ? cast(GArrowRecordBatchIterator*)otherIterator.cPtr(No.Dup) : null);
+    _retval = garrow_record_batch_iterator_equal(cast(GArrowRecordBatchIterator*)cPtr, otherIterator ? cast(GArrowRecordBatchIterator*)otherIterator.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -54,7 +54,7 @@ class RecordBatchIterator : gobject.object.ObjectG
     _cretval = garrow_record_batch_iterator_next(cast(GArrowRecordBatchIterator*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.take);
     return _retval;
   }
 

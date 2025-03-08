@@ -59,8 +59,8 @@ template PollableOutputStreamT()
   override glib.source.Source createSource(gio.cancellable.Cancellable cancellable = null)
   {
     GSource* _cretval;
-    _cretval = g_pollable_output_stream_create_source(cast(GPollableOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = g_pollable_output_stream_create_source(cast(GPollableOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -72,7 +72,7 @@ template PollableOutputStreamT()
     after this returns true would still block. To guarantee
     non-blocking behavior, you should always use
     [gio.pollable_output_stream.PollableOutputStream.writeNonblocking], which will return a
-    [gio.types.IOErrorEnum.WouldBlock] error rather than blocking.
+    [gio.types.IOErrorEnum.wouldBlock] error rather than blocking.
     
     The behaviour of this method is undefined if
     [gio.pollable_output_stream.PollableOutputStream.canPoll] returns false for stream.
@@ -91,7 +91,7 @@ template PollableOutputStreamT()
   /**
       Attempts to write up to count bytes from buffer to stream, as
     with [gio.output_stream.OutputStream.write]. If stream is not currently writable,
-    this will immediately return [gio.types.IOErrorEnum.WouldBlock], and you can
+    this will immediately return [gio.types.IOErrorEnum.wouldBlock], and you can
     use [gio.pollable_output_stream.PollableOutputStream.createSource] to create a #GSource
     that will be triggered when stream is writable.
     
@@ -101,7 +101,7 @@ template PollableOutputStreamT()
     may happen if you call this method after a source triggers due
     to having been cancelled.
     
-    Also note that if [gio.types.IOErrorEnum.WouldBlock] is returned some underlying
+    Also note that if [gio.types.IOErrorEnum.wouldBlock] is returned some underlying
     transports like D/TLS require that you re-send the same buffer and
     count in the next write call.
     
@@ -112,7 +112,7 @@ template PollableOutputStreamT()
             data from
       cancellable =       a #GCancellable, or null
     Returns:     the number of bytes written, or -1 on error (including
-        [gio.types.IOErrorEnum.WouldBlock]).
+        [gio.types.IOErrorEnum.wouldBlock]).
   */
   override ptrdiff_t writeNonblocking(ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
@@ -123,7 +123,7 @@ template PollableOutputStreamT()
 
     auto _buffer = cast(void*)buffer.ptr;
     GError *_err;
-    _retval = g_pollable_output_stream_write_nonblocking(cast(GPollableOutputStream*)cPtr, _buffer, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_pollable_output_stream_write_nonblocking(cast(GPollableOutputStream*)cPtr, _buffer, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -143,7 +143,7 @@ template PollableOutputStreamT()
     may happen if you call this method after a source triggers due
     to having been cancelled.
     
-    Also note that if [gio.types.PollableReturn.WouldBlock] is returned some underlying
+    Also note that if [gio.types.PollableReturn.wouldBlock] is returned some underlying
     transports like D/TLS require that you re-send the same vectors and
     n_vectors in the next write call.
     
@@ -154,9 +154,9 @@ template PollableOutputStreamT()
       bytesWritten =       location to store the number of bytes that were
             written to the stream
       cancellable =       a #GCancellable, or null
-    Returns:     %G_POLLABLE_RETURN_OK on success, [gio.types.PollableReturn.WouldBlock]
+    Returns:     %G_POLLABLE_RETURN_OK on success, [gio.types.PollableReturn.wouldBlock]
       if the stream is not currently writable (and error is *not* set), or
-      [gio.types.PollableReturn.Failed] if there was an error in which case error will
+      [gio.types.PollableReturn.failed] if there was an error in which case error will
       be set.
   */
   override gio.types.PollableReturn writevNonblocking(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
@@ -168,7 +168,7 @@ template PollableOutputStreamT()
 
     auto _vectors = cast(const(GOutputVector)*)vectors.ptr;
     GError *_err;
-    _cretval = g_pollable_output_stream_writev_nonblocking(cast(GPollableOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_pollable_output_stream_writev_nonblocking(cast(GPollableOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     gio.types.PollableReturn _retval = cast(gio.types.PollableReturn)_cretval;

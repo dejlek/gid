@@ -15,10 +15,10 @@ import gtk.widget;
     GtkOverlay is a container which contains a single main child, on top
   of which it can place “overlay” widgets. The position of each overlay
   widget is determined by its #GtkWidget:halign and #GtkWidget:valign
-  properties. E.g. a widget with both alignments set to [gtk.types.Align.Start]
+  properties. E.g. a widget with both alignments set to [gtk.types.Align.start]
   will be placed at the top left corner of the GtkOverlay container,
-  whereas an overlay with halign set to [gtk.types.Align.Center] and valign set
-  to [gtk.types.Align.End] will be placed a the bottom edge of the GtkOverlay,
+  whereas an overlay with halign set to [gtk.types.Align.center] and valign set
+  to [gtk.types.Align.end] will be placed a the bottom edge of the GtkOverlay,
   horizontally centered. The position can be adjusted by setting the margin
   properties of the child to non-zero values.
   
@@ -43,7 +43,7 @@ import gtk.widget;
 class Overlay : gtk.bin.Bin
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -67,7 +67,7 @@ class Overlay : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_overlay_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -83,7 +83,7 @@ class Overlay : gtk.bin.Bin
   */
   void addOverlay(gtk.widget.Widget widget)
   {
-    gtk_overlay_add_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_overlay_add_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
   }
 
   /**
@@ -96,7 +96,7 @@ class Overlay : gtk.bin.Bin
   bool getOverlayPassThrough(gtk.widget.Widget widget)
   {
     bool _retval;
-    _retval = gtk_overlay_get_overlay_pass_through(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    _retval = gtk_overlay_get_overlay_pass_through(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class Overlay : gtk.bin.Bin
   */
   void reorderOverlay(gtk.widget.Widget child, int index)
   {
-    gtk_overlay_reorder_overlay(cast(GtkOverlay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, index);
+    gtk_overlay_reorder_overlay(cast(GtkOverlay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, index);
   }
 
   /**
@@ -128,6 +128,6 @@ class Overlay : gtk.bin.Bin
   */
   void setOverlayPassThrough(gtk.widget.Widget widget, bool passThrough)
   {
-    gtk_overlay_set_overlay_pass_through(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, passThrough);
+    gtk_overlay_set_overlay_pass_through(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, passThrough);
   }
 }

@@ -25,7 +25,7 @@ import gstgl.types;
 class GLColorConvert : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -45,8 +45,8 @@ class GLColorConvert : gst.object.ObjectGst
   this(gstgl.glcontext.GLContext context)
   {
     GstGLColorConvert* _cretval;
-    _cretval = gst_gl_color_convert_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gst_gl_color_convert_new(context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -61,8 +61,8 @@ class GLColorConvert : gst.object.ObjectGst
   static gst.caps.Caps fixateCaps(gstgl.glcontext.GLContext context, gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps other)
   {
     GstCaps* _cretval;
-    _cretval = gst_gl_color_convert_fixate_caps(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, direction, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, other ? cast(GstCaps*)other.cPtr(Yes.Dup) : null);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_gl_color_convert_fixate_caps(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, direction, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null, other ? cast(GstCaps*)other.cPtr(Yes.dup) : null);
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -70,8 +70,8 @@ class GLColorConvert : gst.object.ObjectGst
   static string swizzleShaderString(gstgl.glcontext.GLContext context)
   {
     char* _cretval;
-    _cretval = gst_gl_color_convert_swizzle_shader_string(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    _cretval = gst_gl_color_convert_swizzle_shader_string(context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -87,8 +87,8 @@ class GLColorConvert : gst.object.ObjectGst
   static gst.caps.Caps transformCaps(gstgl.glcontext.GLContext context, gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps filter)
   {
     GstCaps* _cretval;
-    _cretval = gst_gl_color_convert_transform_caps(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, direction, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_gl_color_convert_transform_caps(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, direction, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null, filter ? cast(GstCaps*)filter.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -108,8 +108,8 @@ class GLColorConvert : gst.object.ObjectGst
   static string yuvToRgbShaderString(gstgl.glcontext.GLContext context)
   {
     char* _cretval;
-    _cretval = gst_gl_color_convert_yuv_to_rgb_shader_string(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    _cretval = gst_gl_color_convert_yuv_to_rgb_shader_string(context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class GLColorConvert : gst.object.ObjectGst
   bool decideAllocation(gst.query.Query query)
   {
     bool _retval;
-    _retval = gst_gl_color_convert_decide_allocation(cast(GstGLColorConvert*)cPtr, query ? cast(GstQuery*)query.cPtr(No.Dup) : null);
+    _retval = gst_gl_color_convert_decide_allocation(cast(GstGLColorConvert*)cPtr, query ? cast(GstQuery*)query.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -136,8 +136,8 @@ class GLColorConvert : gst.object.ObjectGst
   gst.buffer.Buffer perform(gst.buffer.Buffer inbuf)
   {
     GstBuffer* _cretval;
-    _cretval = gst_gl_color_convert_perform(cast(GstGLColorConvert*)cPtr, inbuf ? cast(GstBuffer*)inbuf.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_gl_color_convert_perform(cast(GstGLColorConvert*)cPtr, inbuf ? cast(GstBuffer*)inbuf.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class GLColorConvert : gst.object.ObjectGst
   bool setCaps(gst.caps.Caps inCaps, gst.caps.Caps outCaps)
   {
     bool _retval;
-    _retval = gst_gl_color_convert_set_caps(cast(GstGLColorConvert*)cPtr, inCaps ? cast(GstCaps*)inCaps.cPtr(No.Dup) : null, outCaps ? cast(GstCaps*)outCaps.cPtr(No.Dup) : null);
+    _retval = gst_gl_color_convert_set_caps(cast(GstGLColorConvert*)cPtr, inCaps ? cast(GstCaps*)inCaps.cPtr(No.dup) : null, outCaps ? cast(GstCaps*)outCaps.cPtr(No.dup) : null);
     return _retval;
   }
 }

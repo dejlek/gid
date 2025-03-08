@@ -16,7 +16,7 @@ import gobject.types;
 class Function : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -45,9 +45,9 @@ class Function : gobject.object.ObjectG
   static arrow.function_.Function find(string name)
   {
     GArrowFunction* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = garrow_function_find(_name);
-    auto _retval = ObjectG.getDObject!(arrow.function_.Function)(cast(GArrowFunction*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.function_.Function)(cast(GArrowFunction*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -55,7 +55,7 @@ class Function : gobject.object.ObjectG
   bool equal(arrow.function_.Function otherFunction)
   {
     bool _retval;
-    _retval = garrow_function_equal(cast(GArrowFunction*)cPtr, otherFunction ? cast(GArrowFunction*)otherFunction.cPtr(No.Dup) : null);
+    _retval = garrow_function_equal(cast(GArrowFunction*)cPtr, otherFunction ? cast(GArrowFunction*)otherFunction.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -66,10 +66,10 @@ class Function : gobject.object.ObjectG
     auto _args = gListFromD!(arrow.datum.Datum)(args);
     scope(exit) containerFree!(GList*, arrow.datum.Datum, GidOwnership.None)(_args);
     GError *_err;
-    _cretval = garrow_function_execute(cast(GArrowFunction*)cPtr, _args, options ? cast(GArrowFunctionOptions*)options.cPtr(No.Dup) : null, context ? cast(GArrowExecuteContext*)context.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_function_execute(cast(GArrowFunction*)cPtr, _args, options ? cast(GArrowFunctionOptions*)options.cPtr(No.dup) : null, context ? cast(GArrowExecuteContext*)context.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.datum.Datum)(cast(GArrowDatum*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.datum.Datum)(cast(GArrowDatum*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -78,7 +78,7 @@ class Function : gobject.object.ObjectG
   {
     GArrowFunctionOptions* _cretval;
     _cretval = garrow_function_get_default_options(cast(GArrowFunction*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.function_options.FunctionOptions)(cast(GArrowFunctionOptions*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.function_options.FunctionOptions)(cast(GArrowFunctionOptions*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class Function : gobject.object.ObjectG
   {
     GArrowFunctionDoc* _cretval;
     _cretval = garrow_function_get_doc(cast(GArrowFunction*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.function_doc.FunctionDoc)(cast(GArrowFunctionDoc*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.function_doc.FunctionDoc)(cast(GArrowFunctionDoc*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class Function : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = garrow_function_get_name(cast(GArrowFunction*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class Function : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = garrow_function_to_string(cast(GArrowFunction*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

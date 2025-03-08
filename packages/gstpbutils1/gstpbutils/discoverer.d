@@ -32,7 +32,7 @@ import gstpbutils.types;
 class Discoverer : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -65,7 +65,7 @@ class Discoverer : gobject.object.ObjectG
     _cretval = gst_discoverer_new(timeout, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -81,12 +81,12 @@ class Discoverer : gobject.object.ObjectG
   gstpbutils.discoverer_info.DiscovererInfo discoverUri(string uri)
   {
     GstDiscovererInfo* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString(No.alloc);
     GError *_err;
     _cretval = gst_discoverer_discover_uri(cast(GstDiscoverer*)cPtr, _uri, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class Discoverer : gobject.object.ObjectG
   bool discoverUriAsync(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString(No.alloc);
     _retval = gst_discoverer_discover_uri_async(cast(GstDiscoverer*)cPtr, _uri);
     return _retval;
   }
@@ -156,10 +156,10 @@ class Discoverer : gobject.object.ObjectG
     Connect to Discovered signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDiscovered(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDiscovered(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DiscoveredCallbackDlg) || is(T : DiscoveredCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -193,10 +193,10 @@ class Discoverer : gobject.object.ObjectG
     Connect to Finished signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFinished(T)(T callback, Flag!"After" after = No.After)
+  ulong connectFinished(T)(T callback, Flag!"after" after = No.after)
   if (is(T : FinishedCallbackDlg) || is(T : FinishedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -233,10 +233,10 @@ class Discoverer : gobject.object.ObjectG
     Connect to LoadSerializedInfo signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLoadSerializedInfo(T)(T callback, Flag!"After" after = No.After)
+  ulong connectLoadSerializedInfo(T)(T callback, Flag!"after" after = No.after)
   if (is(T : LoadSerializedInfoCallbackDlg) || is(T : LoadSerializedInfoCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -277,10 +277,10 @@ class Discoverer : gobject.object.ObjectG
     Connect to SourceSetup signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSourceSetup(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSourceSetup(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SourceSetupCallbackDlg) || is(T : SourceSetupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -313,10 +313,10 @@ class Discoverer : gobject.object.ObjectG
     Connect to Starting signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStarting(T)(T callback, Flag!"After" after = No.After)
+  ulong connectStarting(T)(T callback, Flag!"after" after = No.after)
   if (is(T : StartingCallbackDlg) || is(T : StartingCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

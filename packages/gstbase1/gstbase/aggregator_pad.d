@@ -16,7 +16,7 @@ import gstbase.types;
 class AggregatorPad : gst.pad.Pad
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -81,7 +81,7 @@ class AggregatorPad : gst.pad.Pad
   {
     GstBuffer* _cretval;
     _cretval = gst_aggregator_pad_peek_buffer(cast(GstAggregatorPad*)cPtr);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class AggregatorPad : gst.pad.Pad
   {
     GstBuffer* _cretval;
     _cretval = gst_aggregator_pad_pop_buffer(cast(GstAggregatorPad*)cPtr);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -108,10 +108,10 @@ class AggregatorPad : gst.pad.Pad
     Connect to BufferConsumed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectBufferConsumed(T)(T callback, Flag!"After" after = No.After)
+  ulong connectBufferConsumed(T)(T callback, Flag!"after" after = No.after)
   if (is(T : BufferConsumedCallbackDlg) || is(T : BufferConsumedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

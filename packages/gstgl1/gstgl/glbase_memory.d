@@ -28,15 +28,15 @@ class GLBaseMemory : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstGLBaseMemory.sizeof), Yes.Take);
+    super(safeMalloc(GstGLBaseMemory.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -59,7 +59,7 @@ class GLBaseMemory : gobject.boxed.Boxed
 
   @property gstgl.glcontext.GLContext context()
   {
-    return ObjectG.getDObject!(gstgl.glcontext.GLContext)((cast(GstGLBaseMemory*)cPtr).context, No.Take);
+    return ObjectG.getDObject!(gstgl.glcontext.GLContext)((cast(GstGLBaseMemory*)cPtr).context, No.take);
   }
 
   @property glib.mutex.Mutex lock()
@@ -136,14 +136,14 @@ class GLBaseMemory : gobject.boxed.Boxed
       (*_dlg)();
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-    gst_gl_base_memory_init(cast(GstGLBaseMemory*)cPtr, allocator ? cast(GstAllocator*)allocator.cPtr(No.Dup) : null, parent ? cast(GstMemory*)parent.cPtr(No.Dup) : null, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, params ? cast(const(GstAllocationParams)*)params.cPtr(No.Dup) : null, size, userData, _notifyCB);
+    gst_gl_base_memory_init(cast(GstGLBaseMemory*)cPtr, allocator ? cast(GstAllocator*)allocator.cPtr(No.dup) : null, parent ? cast(GstMemory*)parent.cPtr(No.dup) : null, context ? cast(GstGLContext*)context.cPtr(No.dup) : null, params ? cast(const(GstAllocationParams)*)params.cPtr(No.dup) : null, size, userData, _notifyCB);
   }
 
   /** */
   bool memcpy(gstgl.glbase_memory.GLBaseMemory dest, ptrdiff_t offset, ptrdiff_t size)
   {
     bool _retval;
-    _retval = gst_gl_base_memory_memcpy(cast(GstGLBaseMemory*)cPtr, dest ? cast(GstGLBaseMemory*)dest.cPtr(No.Dup) : null, offset, size);
+    _retval = gst_gl_base_memory_memcpy(cast(GstGLBaseMemory*)cPtr, dest ? cast(GstGLBaseMemory*)dest.cPtr(No.dup) : null, offset, size);
     return _retval;
   }
 
@@ -151,8 +151,8 @@ class GLBaseMemory : gobject.boxed.Boxed
   static gstgl.glbase_memory.GLBaseMemory alloc(gstgl.glbase_memory_allocator.GLBaseMemoryAllocator allocator, gstgl.glallocation_params.GLAllocationParams params)
   {
     GstGLBaseMemory* _cretval;
-    _cretval = gst_gl_base_memory_alloc(allocator ? cast(GstGLBaseMemoryAllocator*)allocator.cPtr(No.Dup) : null, params ? cast(GstGLAllocationParams*)params.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gstgl.glbase_memory.GLBaseMemory(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_gl_base_memory_alloc(allocator ? cast(GstGLBaseMemoryAllocator*)allocator.cPtr(No.dup) : null, params ? cast(GstGLAllocationParams*)params.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gstgl.glbase_memory.GLBaseMemory(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 

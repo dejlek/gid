@@ -82,7 +82,7 @@ import pango.attr_list;
 class IMContext : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -184,8 +184,8 @@ class IMContext : gobject.object.ObjectG
     char* _str;
     PangoAttrList* _attrs;
     gtk_im_context_get_preedit_string(cast(GtkIMContext*)cPtr, &_str, &_attrs, cast(int*)&cursorPos);
-    str = _str.fromCString(Yes.Free);
-    attrs = new pango.attr_list.AttrList(cast(void*)_attrs, Yes.Take);
+    str = _str.fromCString(Yes.free);
+    attrs = new pango.attr_list.AttrList(cast(void*)_attrs, Yes.take);
   }
 
   /**
@@ -216,7 +216,7 @@ class IMContext : gobject.object.ObjectG
     bool _retval;
     char* _text;
     _retval = gtk_im_context_get_surrounding(cast(GtkIMContext*)cPtr, &_text, cast(int*)&cursorIndex);
-    text = _text.fromCString(Yes.Free);
+    text = _text.fromCString(Yes.free);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class IMContext : gobject.object.ObjectG
   */
   void setClientWindow(gdk.window.Window window = null)
   {
-    gtk_im_context_set_client_window(cast(GtkIMContext*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
+    gtk_im_context_set_client_window(cast(GtkIMContext*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.dup) : null);
   }
 
   /**
@@ -253,7 +253,7 @@ class IMContext : gobject.object.ObjectG
   */
   void setCursorLocation(gdk.rectangle.Rectangle area)
   {
-    gtk_im_context_set_cursor_location(cast(GtkIMContext*)cPtr, area ? cast(const(GdkRectangle)*)area.cPtr(No.Dup) : null);
+    gtk_im_context_set_cursor_location(cast(GtkIMContext*)cPtr, area ? cast(const(GdkRectangle)*)area.cPtr(No.dup) : null);
   }
 
   /**
@@ -270,7 +270,7 @@ class IMContext : gobject.object.ObjectG
   */
   void setSurrounding(string text, int len, int cursorIndex)
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString(No.alloc);
     gtk_im_context_set_surrounding(cast(GtkIMContext*)cPtr, _text, len, cursorIndex);
   }
 
@@ -307,10 +307,10 @@ class IMContext : gobject.object.ObjectG
     Connect to Commit signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCommit(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCommit(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CommitCallbackDlg) || is(T : CommitCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -349,10 +349,10 @@ class IMContext : gobject.object.ObjectG
     Connect to DeleteSurrounding signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeleteSurrounding(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDeleteSurrounding(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DeleteSurroundingCallbackDlg) || is(T : DeleteSurroundingCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -391,10 +391,10 @@ class IMContext : gobject.object.ObjectG
     Connect to PreeditChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPreeditChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PreeditChangedCallbackDlg) || is(T : PreeditChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -427,10 +427,10 @@ class IMContext : gobject.object.ObjectG
     Connect to PreeditEnd signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPreeditEnd(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPreeditEnd(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PreeditEndCallbackDlg) || is(T : PreeditEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -463,10 +463,10 @@ class IMContext : gobject.object.ObjectG
     Connect to PreeditStart signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPreeditStart(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPreeditStart(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PreeditStartCallbackDlg) || is(T : PreeditStartCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -502,10 +502,10 @@ class IMContext : gobject.object.ObjectG
     Connect to RetrieveSurrounding signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRetrieveSurrounding(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRetrieveSurrounding(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RetrieveSurroundingCallbackDlg) || is(T : RetrieveSurroundingCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

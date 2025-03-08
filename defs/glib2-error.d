@@ -11,12 +11,12 @@ class ErrorG : Exception
   this(void* err, bool unused=false)
   {
     errPtr = cast(GError*)err;
-    super(errPtr.message.fromCString(No.Free));
+    super(errPtr.message.fromCString(No.free));
   }
 
   this(Quark domain, int code, string message)
   {
-    this(g_error_new_literal(domain, code, message.toCString(No.Alloc)));
+    this(g_error_new_literal(domain, code, message.toCString(No.alloc)));
   }
 
   ~this()
@@ -51,13 +51,13 @@ class ErrorG : Exception
 
   @property string message()
   {
-    return errPtr.message.fromCString(No.Free);
+    return errPtr.message.fromCString(No.free);
   }
 
   @property void message(string propval)
   {
     g_free(cast(void*)errPtr.message);
-    errPtr.message = propval.toCString(Yes.Alloc);
+    errPtr.message = propval.toCString(Yes.alloc);
   }
 
   /**
@@ -66,7 +66,7 @@ class ErrorG : Exception
   static ErrorG newLiteral(Quark domain, int code, string message)
   {
     GError* _cretval;
-    const(char)* _message = message.toCString(No.Alloc);
+    const(char)* _message = message.toCString(No.alloc);
     _cretval = g_error_new_literal(domain, code, _message);
     ErrorG _retval = new ErrorG(cast(GError*)_cretval);
     return _retval;

@@ -12,7 +12,7 @@ import gobject.object;
 class Field : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,18 +32,18 @@ class Field : gobject.object.ObjectG
   this(string name, arrow.data_type.DataType dataType)
   {
     GArrowField* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    _cretval = garrow_field_new(_name, dataType ? cast(GArrowDataType*)dataType.cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    const(char)* _name = name.toCString(No.alloc);
+    _cretval = garrow_field_new(_name, dataType ? cast(GArrowDataType*)dataType.cPtr(Yes.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /** */
   static arrow.field.Field newFull(string name, arrow.data_type.DataType dataType, bool nullable)
   {
     GArrowField* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    _cretval = garrow_field_new_full(_name, dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, nullable);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    const(char)* _name = name.toCString(No.alloc);
+    _cretval = garrow_field_new_full(_name, dataType ? cast(GArrowDataType*)dataType.cPtr(No.dup) : null, nullable);
+    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -55,7 +55,7 @@ class Field : gobject.object.ObjectG
     _cretval = garrow_field_import(cAbiSchema, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -63,7 +63,7 @@ class Field : gobject.object.ObjectG
   bool equal(arrow.field.Field otherField)
   {
     bool _retval;
-    _retval = garrow_field_equal(cast(GArrowField*)cPtr, otherField ? cast(GArrowField*)otherField.cPtr(No.Dup) : null);
+    _retval = garrow_field_equal(cast(GArrowField*)cPtr, otherField ? cast(GArrowField*)otherField.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class Field : gobject.object.ObjectG
   {
     GArrowDataType* _cretval;
     _cretval = garrow_field_get_data_type(cast(GArrowField*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, No.take);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class Field : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = garrow_field_get_name(cast(GArrowField*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class Field : gobject.object.ObjectG
   {
     GArrowField* _cretval;
     _cretval = garrow_field_remove_metadata(cast(GArrowField*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class Field : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = garrow_field_to_string(cast(GArrowField*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class Field : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = garrow_field_to_string_metadata(cast(GArrowField*)cPtr, showMetadata);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class Field : gobject.object.ObjectG
     auto _metadata = gHashTableFromD!(string, string)(metadata);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_metadata);
     _cretval = garrow_field_with_merged_metadata(cast(GArrowField*)cPtr, _metadata);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class Field : gobject.object.ObjectG
     auto _metadata = gHashTableFromD!(string, string)(metadata);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_metadata);
     _cretval = garrow_field_with_metadata(cast(GArrowField*)cPtr, _metadata);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.take);
     return _retval;
   }
 }

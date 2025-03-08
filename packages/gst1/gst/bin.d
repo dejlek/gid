@@ -46,20 +46,20 @@ import gst.types;
   implements the following default behaviour for each of them:
   
   $(LIST
-    * [gst.types.MessageType.Eos]: This message is only posted by sinks in the PLAYING
+    * [gst.types.MessageType.eos]: This message is only posted by sinks in the PLAYING
   )
   state. If all sinks posted the EOS message, this bin will post and EOS
   message upwards.
   
   $(LIST
-    * [gst.types.MessageType.SegmentStart]: Just collected and never forwarded upwards.
+    * [gst.types.MessageType.segmentStart]: Just collected and never forwarded upwards.
       The messages are used to decide when all elements have completed playback
       of their segment.
     
-    * [gst.types.MessageType.SegmentDone]: Is posted by #GstBin when all elements that posted
+    * [gst.types.MessageType.segmentDone]: Is posted by #GstBin when all elements that posted
       a SEGMENT_START have posted a SEGMENT_DONE.
     
-    * [gst.types.MessageType.DurationChanged]: Is posted by an element that detected a change
+    * [gst.types.MessageType.durationChanged]: Is posted by an element that detected a change
       in the stream duration. The duration change is posted to the
       application so that it can refetch the new duration with a duration
       query.
@@ -71,10 +71,10 @@ import gst.types;
       between the stream being currently displayed and the returned duration query.
     
       Applications might want to also query for duration (and changes) by
-      listening to the [gst.types.MessageType.StreamStart] message, signaling the active start
+      listening to the [gst.types.MessageType.streamStart] message, signaling the active start
       of a (new) stream.
     
-    * [gst.types.MessageType.ClockLost]: This message is posted by an element when it
+    * [gst.types.MessageType.clockLost]: This message is posted by an element when it
       can no longer provide a clock.
     
       The default bin behaviour is to check if the lost clock was the one provided
@@ -86,7 +86,7 @@ import gst.types;
       PAUSE the pipeline and set it back to PLAYING to force a new clock
       distribution.
     
-    * [gst.types.MessageType.ClockProvide]: This message is generated when an element
+    * [gst.types.MessageType.clockProvide]: This message is generated when an element
       can provide a clock. This mostly happens when a new clock
       provider is added to the bin.
     
@@ -104,11 +104,11 @@ import gst.types;
   #GstQuery:
   
   $(LIST
-    * [gst.types.QueryType.Duration]: The bin will forward the query to all sink
+    * [gst.types.QueryType.duration]: The bin will forward the query to all sink
       elements contained within and will return the maximum value.
       If no sinks are available in the bin, the query fails.
     
-    * [gst.types.QueryType.Position]: The query is sent to all sink elements in the bin and the
+    * [gst.types.QueryType.position]: The query is sent to all sink elements in the bin and the
       MAXIMUM of all values is returned. If no sinks are available in the bin,
       the query fails.
     
@@ -118,7 +118,7 @@ import gst.types;
   )
     
   A #GstBin will by default forward any event sent to it to all sink
-  ( [gst.types.EventTypeFlags.Upstream] ) or source ( [gst.types.EventTypeFlags.Downstream] ) elements
+  ( [gst.types.EventTypeFlags.upstream] ) or source ( [gst.types.EventTypeFlags.downstream] ) elements
   depending on the event type.
   
   If all the elements return true, the bin will also return true, else false
@@ -128,7 +128,7 @@ import gst.types;
 class Bin : gst.element.Element, gst.child_proxy.ChildProxy
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -155,9 +155,9 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   this(string name = null)
   {
     GstElement* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_bin_new(_name);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -180,7 +180,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   bool add(gst.element.Element element)
   {
     bool _retval;
-    _retval = gst_bin_add(cast(GstBin*)cPtr, element ? cast(GstElement*)element.cPtr(No.Dup) : null);
+    _retval = gst_bin_add(cast(GstBin*)cPtr, element ? cast(GstElement*)element.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   {
     GstPad* _cretval;
     _cretval = gst_bin_find_unlinked_pad(cast(GstBin*)cPtr, direction);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   {
     GstElement* _cretval;
     _cretval = gst_bin_get_by_interface(cast(GstBin*)cPtr, iface);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -233,9 +233,9 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   gst.element.Element getByName(string name)
   {
     GstElement* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_bin_get_by_name(cast(GstBin*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -250,9 +250,9 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   gst.element.Element getByNameRecurseUp(string name)
   {
     GstElement* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_bin_get_by_name_recurse_up(cast(GstBin*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -277,9 +277,9 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   gst.iterator.Iterator iterateAllByElementFactoryName(string factoryName)
   {
     GstIterator* _cretval;
-    const(char)* _factoryName = factoryName.toCString(No.Alloc);
+    const(char)* _factoryName = factoryName.toCString(No.alloc);
     _cretval = gst_bin_iterate_all_by_element_factory_name(cast(GstBin*)cPtr, _factoryName);
-    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -297,7 +297,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   {
     GstIterator* _cretval;
     _cretval = gst_bin_iterate_all_by_interface(cast(GstBin*)cPtr, iface);
-    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -309,7 +309,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   {
     GstIterator* _cretval;
     _cretval = gst_bin_iterate_elements(cast(GstBin*)cPtr);
-    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -322,7 +322,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   {
     GstIterator* _cretval;
     _cretval = gst_bin_iterate_recurse(cast(GstBin*)cPtr);
-    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -335,7 +335,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   {
     GstIterator* _cretval;
     _cretval = gst_bin_iterate_sinks(cast(GstBin*)cPtr);
-    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -352,7 +352,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   {
     GstIterator* _cretval;
     _cretval = gst_bin_iterate_sorted(cast(GstBin*)cPtr);
-    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -365,7 +365,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   {
     GstIterator* _cretval;
     _cretval = gst_bin_iterate_sources(cast(GstBin*)cPtr);
-    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -405,7 +405,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   bool remove(gst.element.Element element)
   {
     bool _retval;
-    _retval = gst_bin_remove(cast(GstBin*)cPtr, element ? cast(GstElement*)element.cPtr(No.Dup) : null);
+    _retval = gst_bin_remove(cast(GstBin*)cPtr, element ? cast(GstElement*)element.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -454,10 +454,10 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
     Connect to DeepElementAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeepElementAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDeepElementAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DeepElementAddedCallbackDlg) || is(T : DeepElementAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -493,10 +493,10 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
     Connect to DeepElementRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeepElementRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDeepElementRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DeepElementRemovedCallbackDlg) || is(T : DeepElementRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -541,10 +541,10 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
     Connect to DoLatency signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDoLatency(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDoLatency(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DoLatencyCallbackDlg) || is(T : DoLatencyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -579,10 +579,10 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
     Connect to ElementAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectElementAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectElementAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ElementAddedCallbackDlg) || is(T : ElementAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -616,10 +616,10 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
     Connect to ElementRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectElementRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectElementRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ElementRemovedCallbackDlg) || is(T : ElementRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

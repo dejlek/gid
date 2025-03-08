@@ -24,7 +24,7 @@ import gobject.object;
 class RelationSet : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -48,7 +48,7 @@ class RelationSet : gobject.object.ObjectG
   {
     AtkRelationSet* _cretval;
     _cretval = atk_relation_set_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -62,7 +62,7 @@ class RelationSet : gobject.object.ObjectG
   */
   void add(atk.relation.Relation relation)
   {
-    atk_relation_set_add(cast(AtkRelationSet*)cPtr, relation ? cast(AtkRelation*)relation.cPtr(No.Dup) : null);
+    atk_relation_set_add(cast(AtkRelationSet*)cPtr, relation ? cast(AtkRelation*)relation.cPtr(No.dup) : null);
   }
 
   /**
@@ -76,7 +76,7 @@ class RelationSet : gobject.object.ObjectG
   */
   void addRelationByType(atk.types.RelationType relationship, atk.object.ObjectAtk target)
   {
-    atk_relation_set_add_relation_by_type(cast(AtkRelationSet*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
+    atk_relation_set_add_relation_by_type(cast(AtkRelationSet*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.dup) : null);
   }
 
   /**
@@ -107,7 +107,7 @@ class RelationSet : gobject.object.ObjectG
   bool containsTarget(atk.types.RelationType relationship, atk.object.ObjectAtk target)
   {
     bool _retval;
-    _retval = atk_relation_set_contains_target(cast(AtkRelationSet*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
+    _retval = atk_relation_set_contains_target(cast(AtkRelationSet*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class RelationSet : gobject.object.ObjectG
   {
     AtkRelation* _cretval;
     _cretval = atk_relation_set_get_relation(cast(AtkRelationSet*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(atk.relation.Relation)(cast(AtkRelation*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.relation.Relation)(cast(AtkRelation*)_cretval, No.take);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class RelationSet : gobject.object.ObjectG
   {
     AtkRelation* _cretval;
     _cretval = atk_relation_set_get_relation_by_type(cast(AtkRelationSet*)cPtr, relationship);
-    auto _retval = ObjectG.getDObject!(atk.relation.Relation)(cast(AtkRelation*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.relation.Relation)(cast(AtkRelation*)_cretval, No.take);
     return _retval;
   }
 
@@ -161,6 +161,6 @@ class RelationSet : gobject.object.ObjectG
   */
   void remove(atk.relation.Relation relation)
   {
-    atk_relation_set_remove(cast(AtkRelationSet*)cPtr, relation ? cast(AtkRelation*)relation.cPtr(No.Dup) : null);
+    atk_relation_set_remove(cast(AtkRelationSet*)cPtr, relation ? cast(AtkRelation*)relation.cPtr(No.dup) : null);
   }
 }

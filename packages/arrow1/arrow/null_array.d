@@ -10,7 +10,7 @@ import gid.gid;
 class NullArray : arrow.array.Array
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class NullArray : arrow.array.Array
   {
     GArrowNullArray* _cretval;
     _cretval = garrow_null_array_new(length);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

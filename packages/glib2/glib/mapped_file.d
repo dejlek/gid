@@ -16,12 +16,12 @@ import gobject.boxed;
 class MappedFile : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -64,12 +64,12 @@ class MappedFile : gobject.boxed.Boxed
   this(string filename, bool writable)
   {
     GMappedFile* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString(No.alloc);
     GError *_err;
     _cretval = g_mapped_file_new(_filename, writable, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -97,7 +97,7 @@ class MappedFile : gobject.boxed.Boxed
     _cretval = g_mapped_file_new_from_fd(fd, writable, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.mapped_file.MappedFile(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.mapped_file.MappedFile(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class MappedFile : gobject.boxed.Boxed
   {
     GBytes* _cretval;
     _cretval = g_mapped_file_get_bytes(cast(GMappedFile*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class MappedFile : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = g_mapped_file_get_contents(cast(GMappedFile*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 

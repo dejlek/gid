@@ -12,7 +12,7 @@ import glib.error;
 class RecordBatchStreamReader : arrow.record_batch_reader.RecordBatchReader
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,9 +33,9 @@ class RecordBatchStreamReader : arrow.record_batch_reader.RecordBatchReader
   {
     GArrowRecordBatchStreamReader* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_stream_reader_new(stream ? cast(GArrowInputStream*)stream.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_record_batch_stream_reader_new(stream ? cast(GArrowInputStream*)stream.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

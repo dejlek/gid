@@ -20,15 +20,15 @@ class BitsetIter : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GtkBitsetIter.sizeof), Yes.Take);
+    super(safeMalloc(GtkBitsetIter.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -117,8 +117,8 @@ class BitsetIter : gobject.boxed.Boxed
   {
     bool _retval;
     GtkBitsetIter _iter;
-    _retval = gtk_bitset_iter_init_at(&_iter, set ? cast(const(GtkBitset)*)set.cPtr(No.Dup) : null, target, cast(uint*)&value);
-    iter = new gtk.bitset_iter.BitsetIter(cast(void*)&_iter, No.Take);
+    _retval = gtk_bitset_iter_init_at(&_iter, set ? cast(const(GtkBitset)*)set.cPtr(No.dup) : null, target, cast(uint*)&value);
+    iter = new gtk.bitset_iter.BitsetIter(cast(void*)&_iter, No.take);
     return _retval;
   }
 
@@ -137,8 +137,8 @@ class BitsetIter : gobject.boxed.Boxed
   {
     bool _retval;
     GtkBitsetIter _iter;
-    _retval = gtk_bitset_iter_init_first(&_iter, set ? cast(const(GtkBitset)*)set.cPtr(No.Dup) : null, cast(uint*)&value);
-    iter = new gtk.bitset_iter.BitsetIter(cast(void*)&_iter, No.Take);
+    _retval = gtk_bitset_iter_init_first(&_iter, set ? cast(const(GtkBitset)*)set.cPtr(No.dup) : null, cast(uint*)&value);
+    iter = new gtk.bitset_iter.BitsetIter(cast(void*)&_iter, No.take);
     return _retval;
   }
 
@@ -157,8 +157,8 @@ class BitsetIter : gobject.boxed.Boxed
   {
     bool _retval;
     GtkBitsetIter _iter;
-    _retval = gtk_bitset_iter_init_last(&_iter, set ? cast(const(GtkBitset)*)set.cPtr(No.Dup) : null, cast(uint*)&value);
-    iter = new gtk.bitset_iter.BitsetIter(cast(void*)&_iter, No.Take);
+    _retval = gtk_bitset_iter_init_last(&_iter, set ? cast(const(GtkBitset)*)set.cPtr(No.dup) : null, cast(uint*)&value);
+    iter = new gtk.bitset_iter.BitsetIter(cast(void*)&_iter, No.take);
     return _retval;
   }
 }

@@ -34,7 +34,7 @@ public import gobject.object;
   set the peer address on their base [gio.datagram_based.DatagramBased] if it is a
   [gio.socket.Socket] — it is up to the caller to do that if they wish. If they
   do not, and [gio.socket.Socket.close] is called on the base socket, the
-  [gio.dtls_connection.DtlsConnection] will not raise a [gio.types.IOErrorEnum.NotConnected] error on
+  [gio.dtls_connection.DtlsConnection] will not raise a [gio.types.IOErrorEnum.notConnected] error on
   further I/O.
 */
 template DtlsConnectionT()
@@ -50,7 +50,7 @@ template DtlsConnectionT()
     not close the underlying #GDtlsConnection:base-socket; that must be closed
     separately.
     
-    Once conn is closed, all other operations will return [gio.types.IOErrorEnum.Closed].
+    Once conn is closed, all other operations will return [gio.types.IOErrorEnum.closed].
     Closing a #GDtlsConnection multiple times will not return an error.
     
     #GDtlsConnections will be automatically closed when the last reference is
@@ -68,7 +68,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_close(cast(GDtlsConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_dtls_connection_close(cast(GDtlsConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -89,12 +89,12 @@ template DtlsConnectionT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_dtls_connection_close_async(cast(GDtlsConnection*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_dtls_connection_close_async(cast(GDtlsConnection*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -109,7 +109,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_close_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_dtls_connection_close_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -127,7 +127,7 @@ template DtlsConnectionT()
   override bool emitAcceptCertificate(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors)
   {
     bool _retval;
-    _retval = g_dtls_connection_emit_accept_certificate(cast(GDtlsConnection*)cPtr, peerCert ? cast(GTlsCertificate*)peerCert.cPtr(No.Dup) : null, errors);
+    _retval = g_dtls_connection_emit_accept_certificate(cast(GDtlsConnection*)cPtr, peerCert ? cast(GTlsCertificate*)peerCert.cPtr(No.dup) : null, errors);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ template DtlsConnectionT()
   {
     GTlsCertificate* _cretval;
     _cretval = g_dtls_connection_get_certificate(cast(GDtlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.take);
     return _retval;
   }
 
@@ -159,7 +159,7 @@ template DtlsConnectionT()
   {
     char* _cretval;
     _cretval = g_dtls_connection_get_ciphersuite_name(cast(GDtlsConnection*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ template DtlsConnectionT()
   {
     GTlsDatabase* _cretval;
     _cretval = g_dtls_connection_get_database(cast(GDtlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.take);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ template DtlsConnectionT()
   {
     GTlsInteraction* _cretval;
     _cretval = g_dtls_connection_get_interaction(cast(GDtlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, No.take);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ template DtlsConnectionT()
   {
     const(char)* _cretval;
     _cretval = g_dtls_connection_get_negotiated_protocol(cast(GDtlsConnection*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -218,7 +218,7 @@ template DtlsConnectionT()
   {
     GTlsCertificate* _cretval;
     _cretval = g_dtls_connection_get_peer_certificate(cast(GDtlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.take);
     return _retval;
   }
 
@@ -238,7 +238,7 @@ template DtlsConnectionT()
 
   /**
       Returns the current DTLS protocol version, which may be
-    [gio.types.TlsProtocolVersion.Unknown] if the connection has not handshaked, or
+    [gio.types.TlsProtocolVersion.unknown] if the connection has not handshaked, or
     has been closed, or if the TLS backend has implemented a protocol version
     that is not a recognized #GTlsProtocolVersion.
     Returns:     The current DTLS protocol version
@@ -254,7 +254,7 @@ template DtlsConnectionT()
   /**
       Gets conn rehandshaking mode. See
     [gio.dtls_connection.DtlsConnection.setRehandshakeMode] for details.
-    Returns:     [gio.types.TlsRehandshakeMode.Safely]
+    Returns:     [gio.types.TlsRehandshakeMode.safely]
   
     Deprecated:     Changing the rehandshake mode is no longer
         required for compatibility. Also, rehandshaking has been removed
@@ -316,7 +316,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_handshake(cast(GDtlsConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_dtls_connection_handshake(cast(GDtlsConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -337,12 +337,12 @@ template DtlsConnectionT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_dtls_connection_handshake_async(cast(GDtlsConnection*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_dtls_connection_handshake_async(cast(GDtlsConnection*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -357,7 +357,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_handshake_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_dtls_connection_handshake_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -382,7 +382,7 @@ template DtlsConnectionT()
   {
     char*[] _tmpprotocols;
     foreach (s; protocols)
-      _tmpprotocols ~= s.toCString(No.Alloc);
+      _tmpprotocols ~= s.toCString(No.alloc);
     _tmpprotocols ~= null;
     const(char*)* _protocols = _tmpprotocols.ptr;
     g_dtls_connection_set_advertised_protocols(cast(GDtlsConnection*)cPtr, _protocols);
@@ -395,7 +395,7 @@ template DtlsConnectionT()
     time.
     
     For a #GDtlsClientConnection, this is optional. If a handshake fails
-    with [gio.types.TlsError.CertificateRequired], that means that the server
+    with [gio.types.TlsError.certificateRequired], that means that the server
     requires a certificate, and if you try connecting again, you should
     call this method first. You can call
     [gio.dtls_client_connection.DtlsClientConnection.getAcceptedCas] on the failed connection
@@ -412,7 +412,7 @@ template DtlsConnectionT()
   */
   override void setCertificate(gio.tls_certificate.TlsCertificate certificate)
   {
-    g_dtls_connection_set_certificate(cast(GDtlsConnection*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null);
+    g_dtls_connection_set_certificate(cast(GDtlsConnection*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.dup) : null);
   }
 
   /**
@@ -420,7 +420,7 @@ template DtlsConnectionT()
     This is set to the default database by default. See
     [gio.tls_backend.TlsBackend.getDefaultDatabase]. If set to null, then
     peer certificate validation will always set the
-    [gio.types.TlsCertificateFlags.UnknownCa] error (meaning
+    [gio.types.TlsCertificateFlags.unknownCa] error (meaning
     #GDtlsConnection::accept-certificate will always be emitted on
     client-side connections, unless that bit is not set in
     #GDtlsClientConnection:validation-flags).
@@ -432,7 +432,7 @@ template DtlsConnectionT()
   */
   override void setDatabase(gio.tls_database.TlsDatabase database = null)
   {
-    g_dtls_connection_set_database(cast(GDtlsConnection*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.Dup) : null);
+    g_dtls_connection_set_database(cast(GDtlsConnection*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.dup) : null);
   }
 
   /**
@@ -447,7 +447,7 @@ template DtlsConnectionT()
   */
   override void setInteraction(gio.tls_interaction.TlsInteraction interaction = null)
   {
-    g_dtls_connection_set_interaction(cast(GDtlsConnection*)cPtr, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null);
+    g_dtls_connection_set_interaction(cast(GDtlsConnection*)cPtr, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.dup) : null);
   }
 
   /**
@@ -472,7 +472,7 @@ template DtlsConnectionT()
     before the connection is closed. If this is true (the default),
     then conn will expect to receive a TLS close notification from its
     peer before the connection is closed, and will return a
-    [gio.types.TlsError.Eof] error if the connection is closed without proper
+    [gio.types.TlsError.eof] error if the connection is closed without proper
     notification (since this may indicate a network error, or
     man-in-the-middle attack).
     
@@ -506,11 +506,11 @@ template DtlsConnectionT()
     
     If shutdown_read is true then the receiving side of the connection is shut
     down, and further reading is disallowed. Subsequent calls to
-    [gio.datagram_based.DatagramBased.receiveMessages] will return [gio.types.IOErrorEnum.Closed].
+    [gio.datagram_based.DatagramBased.receiveMessages] will return [gio.types.IOErrorEnum.closed].
     
     If shutdown_write is true then the sending side of the connection is shut
     down, and further writing is disallowed. Subsequent calls to
-    [gio.datagram_based.DatagramBased.sendMessages] will return [gio.types.IOErrorEnum.Closed].
+    [gio.datagram_based.DatagramBased.sendMessages] will return [gio.types.IOErrorEnum.closed].
     
     It is allowed for both shutdown_read and shutdown_write to be TRUE — this
     is equivalent to calling [gio.dtls_connection.DtlsConnection.close].
@@ -528,7 +528,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_shutdown(cast(GDtlsConnection*)cPtr, shutdownRead, shutdownWrite, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_dtls_connection_shutdown(cast(GDtlsConnection*)cPtr, shutdownRead, shutdownWrite, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -551,12 +551,12 @@ template DtlsConnectionT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_dtls_connection_shutdown_async(cast(GDtlsConnection*)cPtr, shutdownRead, shutdownWrite, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_dtls_connection_shutdown_async(cast(GDtlsConnection*)cPtr, shutdownRead, shutdownWrite, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -571,7 +571,7 @@ template DtlsConnectionT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_dtls_connection_shutdown_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_dtls_connection_shutdown_finish(cast(GDtlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -588,14 +588,14 @@ template DtlsConnectionT()
     #GDtlsClientConnection:validation_flags. If you would like the
     certificate to be accepted despite errors, return true from the
     signal handler. Otherwise, if no handler accepts the certificate,
-    the handshake will fail with [gio.types.TlsError.BadCertificate].
+    the handshake will fail with [gio.types.TlsError.badCertificate].
     
     GLib guarantees that if certificate verification fails, this signal
     will be emitted with at least one error will be set in errors, but
     it does not guarantee that all possible errors will be set.
     Accordingly, you may not safely decide to ignore any particular
     type of error. For example, it would be incorrect to ignore
-    [gio.types.TlsCertificateFlags.Expired] if you want to allow expired
+    [gio.types.TlsCertificateFlags.expired] if you want to allow expired
     certificates, because this could potentially be the only error flag
     set even if other problems exist with the certificate.
     
@@ -612,7 +612,7 @@ template DtlsConnectionT()
     let the user decide whether or not to accept the certificate, you
     would have to return false from the signal handler on the first
     attempt, and then after the connection attempt returns a
-    [gio.types.TlsError.BadCertificate], you can interact with the user, and
+    [gio.types.TlsError.badCertificate], you can interact with the user, and
     if the user decides to accept the certificate, remember that fact,
     create a new connection, and return true from the signal handler
     the next time.
@@ -641,10 +641,10 @@ template DtlsConnectionT()
     Connect to AcceptCertificate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectAcceptCertificate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : AcceptCertificateCallbackDlg) || is(T : AcceptCertificateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

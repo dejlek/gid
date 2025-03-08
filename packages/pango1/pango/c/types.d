@@ -49,17 +49,17 @@ enum PangoAlignment
   /**
       Put all available space on the right
   */
-  Left = 0,
+  left = 0,
 
   /**
       Center the line within the available space
   */
-  Center = 1,
+  center = 1,
 
   /**
       Put all available space on the left
   */
-  Right = 2,
+  right = 2,
 }
 
 /**
@@ -75,190 +75,190 @@ enum PangoAttrType
   /**
       does not happen
   */
-  Invalid = 0,
+  invalid = 0,
 
   /**
       language ([pango.attr_language.AttrLanguage])
   */
-  Language = 1,
+  language = 1,
 
   /**
       font family name list ([pango.attr_string.AttrString])
   */
-  Family = 2,
+  family = 2,
 
   /**
       font slant style ([pango.attr_int.AttrInt])
   */
-  Style = 3,
+  style = 3,
 
   /**
       font weight ([pango.attr_int.AttrInt])
   */
-  Weight = 4,
+  weight = 4,
 
   /**
       font variant (normal or small caps) ([pango.attr_int.AttrInt])
   */
-  Variant = 5,
+  variant = 5,
 
   /**
       font stretch ([pango.attr_int.AttrInt])
   */
-  Stretch = 6,
+  stretch = 6,
 
   /**
       font size in points scaled by `PANGO_SCALE` ([pango.attr_int.AttrInt])
   */
-  Size = 7,
+  size = 7,
 
   /**
       font description ([pango.attr_font_desc.AttrFontDesc])
   */
-  FontDesc = 8,
+  fontDesc = 8,
 
   /**
       foreground color ([pango.attr_color.AttrColor])
   */
-  Foreground = 9,
+  foreground = 9,
 
   /**
       background color ([pango.attr_color.AttrColor])
   */
-  Background = 10,
+  background = 10,
 
   /**
       whether the text has an underline ([pango.attr_int.AttrInt])
   */
-  Underline = 11,
+  underline = 11,
 
   /**
       whether the text is struck-through ([pango.attr_int.AttrInt])
   */
-  Strikethrough = 12,
+  strikethrough = 12,
 
   /**
       baseline displacement ([pango.attr_int.AttrInt])
   */
-  Rise = 13,
+  rise = 13,
 
   /**
       shape ([pango.attr_shape.AttrShape])
   */
-  Shape = 14,
+  shape = 14,
 
   /**
       font size scale factor ([pango.attr_float.AttrFloat])
   */
-  Scale = 15,
+  scale = 15,
 
   /**
       whether fallback is enabled ([pango.attr_int.AttrInt])
   */
-  Fallback = 16,
+  fallback = 16,
 
   /**
       letter spacing (`struct@PangoAttrInt`)
   */
-  LetterSpacing = 17,
+  letterSpacing = 17,
 
   /**
       underline color ([pango.attr_color.AttrColor])
   */
-  UnderlineColor = 18,
+  underlineColor = 18,
 
   /**
       strikethrough color ([pango.attr_color.AttrColor])
   */
-  StrikethroughColor = 19,
+  strikethroughColor = 19,
 
   /**
       font size in pixels scaled by `PANGO_SCALE` ([pango.attr_int.AttrInt])
   */
-  AbsoluteSize = 20,
+  absoluteSize = 20,
 
   /**
       base text gravity ([pango.attr_int.AttrInt])
   */
-  Gravity = 21,
+  gravity = 21,
 
   /**
       gravity hint ([pango.attr_int.AttrInt])
   */
-  GravityHint = 22,
+  gravityHint = 22,
 
   /**
       OpenType font features ([pango.attr_font_features.AttrFontFeatures]). Since 1.38
   */
-  FontFeatures = 23,
+  fontFeatures = 23,
 
   /**
       foreground alpha ([pango.attr_int.AttrInt]). Since 1.38
   */
-  ForegroundAlpha = 24,
+  foregroundAlpha = 24,
 
   /**
       background alpha ([pango.attr_int.AttrInt]). Since 1.38
   */
-  BackgroundAlpha = 25,
+  backgroundAlpha = 25,
 
   /**
       whether breaks are allowed ([pango.attr_int.AttrInt]). Since 1.44
   */
-  AllowBreaks = 26,
+  allowBreaks = 26,
 
   /**
       how to render invisible characters ([pango.attr_int.AttrInt]). Since 1.44
   */
-  Show = 27,
+  show = 27,
 
   /**
       whether to insert hyphens at intra-word line breaks ([pango.attr_int.AttrInt]). Since 1.44
   */
-  InsertHyphens = 28,
+  insertHyphens = 28,
 
   /**
       whether the text has an overline ([pango.attr_int.AttrInt]). Since 1.46
   */
-  Overline = 29,
+  overline = 29,
 
   /**
       overline color ([pango.attr_color.AttrColor]). Since 1.46
   */
-  OverlineColor = 30,
+  overlineColor = 30,
 
   /**
       line height factor ([pango.attr_float.AttrFloat]). Since: 1.50
   */
-  LineHeight = 31,
+  lineHeight = 31,
 
   /**
       line height ([pango.attr_int.AttrInt]). Since: 1.50
   */
-  AbsoluteLineHeight = 32,
+  absoluteLineHeight = 32,
 
   /** */
-  TextTransform = 33,
+  textTransform = 33,
 
   /**
       override segmentation to classify the range of the attribute as a single word ([pango.attr_int.AttrInt]). Since 1.50
   */
-  Word = 34,
+  word = 34,
 
   /**
       override segmentation to classify the range of the attribute as a single sentence ([pango.attr_int.AttrInt]). Since 1.50
   */
-  Sentence = 35,
+  sentence = 35,
 
   /**
       baseline displacement ([pango.attr_int.AttrInt]). Since 1.50
   */
-  BaselineShift = 36,
+  baselineShift = 36,
 
   /**
       font-relative size change ([pango.attr_int.AttrInt]). Since 1.50
   */
-  FontScale = 37,
+  fontScale = 37,
 }
 
 /**
@@ -269,19 +269,19 @@ enum PangoBaselineShift
   /**
       Leave the baseline unchanged
   */
-  None = 0,
+  none = 0,
 
   /**
       Shift the baseline to the superscript position,
       relative to the previous run
   */
-  Superscript = 1,
+  superscript = 1,
 
   /**
       Shift the baseline to the subscript position,
       relative to the previous run
   */
-  Subscript = 2,
+  subscript = 2,
 }
 
 /**
@@ -298,124 +298,124 @@ enum PangoBidiType
   /**
       Left-to-Right
   */
-  L = 0,
+  l = 0,
 
   /**
       Left-to-Right Embedding
   */
-  Lre = 1,
+  lre = 1,
 
   /**
       Left-to-Right Override
   */
-  Lro = 2,
+  lro = 2,
 
   /**
       Right-to-Left
   */
-  R = 3,
+  r = 3,
 
   /**
       Right-to-Left Arabic
   */
-  Al = 4,
+  al = 4,
 
   /**
       Right-to-Left Embedding
   */
-  Rle = 5,
+  rle = 5,
 
   /**
       Right-to-Left Override
   */
-  Rlo = 6,
+  rlo = 6,
 
   /**
       Pop Directional Format
   */
-  Pdf = 7,
+  pdf = 7,
 
   /**
       European Number
   */
-  En = 8,
+  en = 8,
 
   /**
       European Number Separator
   */
-  Es = 9,
+  es = 9,
 
   /**
       European Number Terminator
   */
-  Et = 10,
+  et = 10,
 
   /**
       Arabic Number
   */
-  An = 11,
+  an = 11,
 
   /**
       Common Number Separator
   */
-  Cs = 12,
+  cs = 12,
 
   /**
       Nonspacing Mark
   */
-  Nsm = 13,
+  nsm = 13,
 
   /**
       Boundary Neutral
   */
-  Bn = 14,
+  bn = 14,
 
   /**
       Paragraph Separator
   */
-  B = 15,
+  b = 15,
 
   /**
       Segment Separator
   */
-  S = 16,
+  s = 16,
 
   /**
       Whitespace
   */
-  Ws = 17,
+  ws = 17,
 
   /**
       Other Neutrals
   */
-  On = 18,
+  on = 18,
 
   /**
       Left-to-Right isolate. Since 1.48.6
   */
-  Lri = 19,
+  lri = 19,
 
   /**
       Right-to-Left isolate. Since 1.48.6
   */
-  Rli = 20,
+  rli = 20,
 
   /**
       First strong isolate. Since 1.48.6
   */
-  Fsi = 21,
+  fsi = 21,
 
   /**
       Pop directional isolate. Since 1.48.6
   */
-  Pdi = 22,
+  pdi = 22,
 }
 
 /**
     [pango.types.CoverageLevel] is used to indicate how well a font can
   represent a particular Unicode character for a particular script.
   
-  Since 1.44, only [pango.types.CoverageLevel.None] and [pango.types.CoverageLevel.Exact]
+  Since 1.44, only [pango.types.CoverageLevel.none] and [pango.types.CoverageLevel.exact]
   will be returned.
 */
 enum PangoCoverageLevel
@@ -424,7 +424,7 @@ enum PangoCoverageLevel
       The character is not representable with
       the font.
   */
-  None = 0,
+  none = 0,
 
   /**
       The character is represented in a
@@ -433,20 +433,20 @@ enum PangoCoverageLevel
       as a a sequence of Jamos, or a Latin transliteration of a
       Cyrillic word.
   */
-  Fallback = 1,
+  fallback = 1,
 
   /**
       The character is represented as
       basically the correct graphical form, but with a stylistic
       variant inappropriate for the current script.
   */
-  Approximate = 2,
+  approximate = 2,
 
   /**
       The character is represented as the
       correct graphical form.
   */
-  Exact = 3,
+  exact = 3,
 }
 
 /**
@@ -455,12 +455,12 @@ enum PangoCoverageLevel
   
   Not every value in this enumeration makes sense for every usage of
   [pango.types.Direction]; for example, the return value of `func@unichar_direction`
-  and `func@find_base_dir` cannot be [pango.types.Direction.WeakLtr] or
-  [pango.types.Direction.WeakRtl], since every character is either neutral
-  or has a strong direction; on the other hand [pango.types.Direction.Neutral]
+  and `func@find_base_dir` cannot be [pango.types.Direction.weakLtr] or
+  [pango.types.Direction.weakRtl], since every character is either neutral
+  or has a strong direction; on the other hand [pango.types.Direction.neutral]
   doesn't make sense to pass to `func@itemize_with_base_dir`.
   
-  The [pango.types.Direction.TtbLtr], [pango.types.Direction.TtbRtl] values come from
+  The [pango.types.Direction.ttbLtr], [pango.types.Direction.ttbRtl] values come from
   an earlier interpretation of this enumeration as the writing direction
   of a block of text and are no longer used. See [pango.types.Gravity] for how
   vertical text is handled in Pango.
@@ -474,39 +474,39 @@ enum PangoDirection
   /**
       A strong left-to-right direction
   */
-  Ltr = 0,
+  ltr = 0,
 
   /**
       A strong right-to-left direction
   */
-  Rtl = 1,
+  rtl = 1,
 
   /**
       Deprecated value; treated the
-      same as [pango.types.Direction.Rtl].
+      same as [pango.types.Direction.rtl].
   */
-  TtbLtr = 2,
+  ttbLtr = 2,
 
   /**
       Deprecated value; treated the
-      same as [pango.types.Direction.Ltr]
+      same as [pango.types.Direction.ltr]
   */
-  TtbRtl = 3,
+  ttbRtl = 3,
 
   /**
       A weak left-to-right direction
   */
-  WeakLtr = 4,
+  weakLtr = 4,
 
   /**
       A weak right-to-left direction
   */
-  WeakRtl = 5,
+  weakRtl = 5,
 
   /**
       No direction specified
   */
-  Neutral = 6,
+  neutral = 6,
 }
 
 /**
@@ -522,22 +522,22 @@ enum PangoEllipsizeMode
   /**
       No ellipsization
   */
-  None = 0,
+  none = 0,
 
   /**
       Omit characters at the start of the text
   */
-  Start = 1,
+  start = 1,
 
   /**
       Omit characters in the middle of the text
   */
-  Middle = 2,
+  middle = 2,
 
   /**
       Omit characters at the end of the text
   */
-  End = 3,
+  end = 3,
 }
 
 /**
@@ -549,42 +549,42 @@ enum PangoFontMask : uint
   /**
       the font family is specified.
   */
-  Family = 1,
+  family = 1,
 
   /**
       the font style is specified.
   */
-  Style = 2,
+  style = 2,
 
   /**
       the font variant is specified.
   */
-  Variant = 4,
+  variant = 4,
 
   /**
       the font weight is specified.
   */
-  Weight = 8,
+  weight = 8,
 
   /**
       the font stretch is specified.
   */
-  Stretch = 16,
+  stretch = 16,
 
   /**
       the font size is specified.
   */
-  Size = 32,
+  size = 32,
 
   /**
       the font gravity is specified (Since: 1.16.)
   */
-  Gravity = 64,
+  gravity = 64,
 
   /**
       OpenType font variations are specified (Since: 1.42)
   */
-  Variations = 128,
+  variations = 128,
 }
 
 /**
@@ -596,22 +596,22 @@ enum PangoFontScale
   /**
       Leave the font size unchanged
   */
-  None = 0,
+  none = 0,
 
   /**
       Change the font to a size suitable for superscripts
   */
-  Superscript = 1,
+  superscript = 1,
 
   /**
       Change the font to a size suitable for subscripts
   */
-  Subscript = 2,
+  subscript = 2,
 
   /**
       Change the font to a size suitable for Small Caps
   */
-  SmallCaps = 3,
+  smallCaps = 3,
 }
 
 /**
@@ -623,7 +623,7 @@ enum PangoFontScale
   glyph orientation is controlled using [pango.types.Gravity].
   
   Not every value in this enumeration makes sense for every usage of
-  [pango.types.Gravity]; for example, [pango.types.Gravity.Auto] only can be passed to
+  [pango.types.Gravity]; for example, [pango.types.Gravity.auto_] only can be passed to
   [pango.context.Context.setBaseGravity] and can only be returned by
   [pango.context.Context.getBaseGravity].
   
@@ -634,27 +634,27 @@ enum PangoGravity
   /**
       Glyphs stand upright (default) <img align="right" valign="center" src="m-south.png">
   */
-  South = 0,
+  south = 0,
 
   /**
       Glyphs are rotated 90 degrees counter-clockwise. <img align="right" valign="center" src="m-east.png">
   */
-  East = 1,
+  east = 1,
 
   /**
       Glyphs are upside-down. <img align="right" valign="cener" src="m-north.png">
   */
-  North = 2,
+  north = 2,
 
   /**
       Glyphs are rotated 90 degrees clockwise. <img align="right" valign="center" src="m-west.png">
   */
-  West = 3,
+  west = 3,
 
   /**
       Gravity is resolved from the context matrix
   */
-  Auto = 4,
+  auto_ = 4,
 }
 
 /**
@@ -671,13 +671,13 @@ enum PangoGravityHint
       scripts will take their natural gravity based
       on the base gravity and the script.  This is the default.
   */
-  Natural = 0,
+  natural = 0,
 
   /**
       always use the base gravity set, regardless of
       the script.
   */
-  Strong = 1,
+  strong = 1,
 
   /**
       for scripts not in their natural direction (eg.
@@ -685,7 +685,7 @@ enum PangoGravityHint
       respects the line progression. This means, Latin and Arabic will take
       opposite gravities and both flow top-to-bottom for example.
   */
-  Line = 2,
+  line = 2,
 }
 
 /**
@@ -696,19 +696,19 @@ enum PangoLayoutDeserializeError
   /**
       Unspecified error
   */
-  Invalid = 0,
+  invalid = 0,
 
   /**
       A JSon value could not be
       interpreted
   */
-  InvalidValue = 1,
+  invalidValue = 1,
 
   /**
       A required JSon member was
       not found
   */
-  MissingValue = 2,
+  missingValue = 2,
 }
 
 /**
@@ -721,13 +721,13 @@ enum PangoLayoutDeserializeFlags : uint
   /**
       Default behavior
   */
-  Default = 0,
+  default_ = 0,
 
   /**
       Apply context information
       from the serialization to the [pango.context.Context]
   */
-  Context = 1,
+  context = 1,
 }
 
 /**
@@ -740,17 +740,17 @@ enum PangoLayoutSerializeFlags : uint
   /**
       Default behavior
   */
-  Default = 0,
+  default_ = 0,
 
   /**
       Include context information
   */
-  Context = 1,
+  context = 1,
 
   /**
       Include information about the formatted output
   */
-  Output = 2,
+  output = 2,
 }
 
 /**
@@ -762,13 +762,13 @@ enum PangoOverline
   /**
       no overline should be drawn
   */
-  None = 0,
+  none = 0,
 
   /**
       Draw a single line above the ink
       extents of the text being underlined.
   */
-  Single = 1,
+  single = 1,
 }
 
 /**
@@ -780,27 +780,27 @@ enum PangoRenderPart
   /**
       the text itself
   */
-  Foreground = 0,
+  foreground = 0,
 
   /**
       the area behind the text
   */
-  Background = 1,
+  background = 1,
 
   /**
       underlines
   */
-  Underline = 2,
+  underline = 2,
 
   /**
       strikethrough lines
   */
-  Strikethrough = 3,
+  strikethrough = 3,
 
   /**
       overlines
   */
-  Overline = 4,
+  overline = 4,
 }
 
 /**
@@ -820,593 +820,593 @@ enum PangoScript
   /**
       a value never returned from [pango.global.scriptForUnichar]
   */
-  InvalidCode = -1,
+  invalidCode = -1,
 
   /**
       a character used by multiple different scripts
   */
-  Common = 0,
+  common = 0,
 
   /**
       a mark glyph that takes its script from the
     base glyph to which it is attached
   */
-  Inherited = 1,
+  inherited = 1,
 
   /**
       Arabic
   */
-  Arabic = 2,
+  arabic = 2,
 
   /**
       Armenian
   */
-  Armenian = 3,
+  armenian = 3,
 
   /**
       Bengali
   */
-  Bengali = 4,
+  bengali = 4,
 
   /**
       Bopomofo
   */
-  Bopomofo = 5,
+  bopomofo = 5,
 
   /**
       Cherokee
   */
-  Cherokee = 6,
+  cherokee = 6,
 
   /**
       Coptic
   */
-  Coptic = 7,
+  coptic = 7,
 
   /**
       Cyrillic
   */
-  Cyrillic = 8,
+  cyrillic = 8,
 
   /**
       Deseret
   */
-  Deseret = 9,
+  deseret = 9,
 
   /**
       Devanagari
   */
-  Devanagari = 10,
+  devanagari = 10,
 
   /**
       Ethiopic
   */
-  Ethiopic = 11,
+  ethiopic = 11,
 
   /**
       Georgian
   */
-  Georgian = 12,
+  georgian = 12,
 
   /**
       Gothic
   */
-  Gothic = 13,
+  gothic = 13,
 
   /**
       Greek
   */
-  Greek = 14,
+  greek = 14,
 
   /**
       Gujarati
   */
-  Gujarati = 15,
+  gujarati = 15,
 
   /**
       Gurmukhi
   */
-  Gurmukhi = 16,
+  gurmukhi = 16,
 
   /**
       Han
   */
-  Han = 17,
+  han = 17,
 
   /**
       Hangul
   */
-  Hangul = 18,
+  hangul = 18,
 
   /**
       Hebrew
   */
-  Hebrew = 19,
+  hebrew = 19,
 
   /**
       Hiragana
   */
-  Hiragana = 20,
+  hiragana = 20,
 
   /**
       Kannada
   */
-  Kannada = 21,
+  kannada = 21,
 
   /**
       Katakana
   */
-  Katakana = 22,
+  katakana = 22,
 
   /**
       Khmer
   */
-  Khmer = 23,
+  khmer = 23,
 
   /**
       Lao
   */
-  Lao = 24,
+  lao = 24,
 
   /**
       Latin
   */
-  Latin = 25,
+  latin = 25,
 
   /**
       Malayalam
   */
-  Malayalam = 26,
+  malayalam = 26,
 
   /**
       Mongolian
   */
-  Mongolian = 27,
+  mongolian = 27,
 
   /**
       Myanmar
   */
-  Myanmar = 28,
+  myanmar = 28,
 
   /**
       Ogham
   */
-  Ogham = 29,
+  ogham = 29,
 
   /**
       Old Italic
   */
-  OldItalic = 30,
+  oldItalic = 30,
 
   /**
       Oriya
   */
-  Oriya = 31,
+  oriya = 31,
 
   /**
       Runic
   */
-  Runic = 32,
+  runic = 32,
 
   /**
       Sinhala
   */
-  Sinhala = 33,
+  sinhala = 33,
 
   /**
       Syriac
   */
-  Syriac = 34,
+  syriac = 34,
 
   /**
       Tamil
   */
-  Tamil = 35,
+  tamil = 35,
 
   /**
       Telugu
   */
-  Telugu = 36,
+  telugu = 36,
 
   /**
       Thaana
   */
-  Thaana = 37,
+  thaana = 37,
 
   /**
       Thai
   */
-  Thai = 38,
+  thai = 38,
 
   /**
       Tibetan
   */
-  Tibetan = 39,
+  tibetan = 39,
 
   /**
       Canadian Aboriginal
   */
-  CanadianAboriginal = 40,
+  canadianAboriginal = 40,
 
   /**
       Yi
   */
-  Yi = 41,
+  yi = 41,
 
   /**
       Tagalog
   */
-  Tagalog = 42,
+  tagalog = 42,
 
   /**
       Hanunoo
   */
-  Hanunoo = 43,
+  hanunoo = 43,
 
   /**
       Buhid
   */
-  Buhid = 44,
+  buhid = 44,
 
   /**
       Tagbanwa
   */
-  Tagbanwa = 45,
+  tagbanwa = 45,
 
   /**
       Braille
   */
-  Braille = 46,
+  braille = 46,
 
   /**
       Cypriot
   */
-  Cypriot = 47,
+  cypriot = 47,
 
   /**
       Limbu
   */
-  Limbu = 48,
+  limbu = 48,
 
   /**
       Osmanya
   */
-  Osmanya = 49,
+  osmanya = 49,
 
   /**
       Shavian
   */
-  Shavian = 50,
+  shavian = 50,
 
   /**
       Linear B
   */
-  LinearB = 51,
+  linearB = 51,
 
   /**
       Tai Le
   */
-  TaiLe = 52,
+  taiLe = 52,
 
   /**
       Ugaritic
   */
-  Ugaritic = 53,
+  ugaritic = 53,
 
   /**
       New Tai Lue. Since 1.10
   */
-  NewTaiLue = 54,
+  newTaiLue = 54,
 
   /**
       Buginese. Since 1.10
   */
-  Buginese = 55,
+  buginese = 55,
 
   /**
       Glagolitic. Since 1.10
   */
-  Glagolitic = 56,
+  glagolitic = 56,
 
   /**
       Tifinagh. Since 1.10
   */
-  Tifinagh = 57,
+  tifinagh = 57,
 
   /**
       Syloti Nagri. Since 1.10
   */
-  SylotiNagri = 58,
+  sylotiNagri = 58,
 
   /**
       Old Persian. Since 1.10
   */
-  OldPersian = 59,
+  oldPersian = 59,
 
   /**
       Kharoshthi. Since 1.10
   */
-  Kharoshthi = 60,
+  kharoshthi = 60,
 
   /**
       an unassigned code point. Since 1.14
   */
-  Unknown = 61,
+  unknown = 61,
 
   /**
       Balinese. Since 1.14
   */
-  Balinese = 62,
+  balinese = 62,
 
   /**
       Cuneiform. Since 1.14
   */
-  Cuneiform = 63,
+  cuneiform = 63,
 
   /**
       Phoenician. Since 1.14
   */
-  Phoenician = 64,
+  phoenician = 64,
 
   /**
       Phags-pa. Since 1.14
   */
-  PhagsPa = 65,
+  phagsPa = 65,
 
   /**
       N'Ko. Since 1.14
   */
-  Nko = 66,
+  nko = 66,
 
   /**
       Kayah Li. Since 1.20.1
   */
-  KayahLi = 67,
+  kayahLi = 67,
 
   /**
       Lepcha. Since 1.20.1
   */
-  Lepcha = 68,
+  lepcha = 68,
 
   /**
       Rejang. Since 1.20.1
   */
-  Rejang = 69,
+  rejang = 69,
 
   /**
       Sundanese. Since 1.20.1
   */
-  Sundanese = 70,
+  sundanese = 70,
 
   /**
       Saurashtra. Since 1.20.1
   */
-  Saurashtra = 71,
+  saurashtra = 71,
 
   /**
       Cham. Since 1.20.1
   */
-  Cham = 72,
+  cham = 72,
 
   /**
       Ol Chiki. Since 1.20.1
   */
-  OlChiki = 73,
+  olChiki = 73,
 
   /**
       Vai. Since 1.20.1
   */
-  Vai = 74,
+  vai = 74,
 
   /**
       Carian. Since 1.20.1
   */
-  Carian = 75,
+  carian = 75,
 
   /**
       Lycian. Since 1.20.1
   */
-  Lycian = 76,
+  lycian = 76,
 
   /**
       Lydian. Since 1.20.1
   */
-  Lydian = 77,
+  lydian = 77,
 
   /**
       Batak. Since 1.32
   */
-  Batak = 78,
+  batak = 78,
 
   /**
       Brahmi. Since 1.32
   */
-  Brahmi = 79,
+  brahmi = 79,
 
   /**
       Mandaic. Since 1.32
   */
-  Mandaic = 80,
+  mandaic = 80,
 
   /**
       Chakma. Since: 1.32
   */
-  Chakma = 81,
+  chakma = 81,
 
   /**
       Meroitic Cursive. Since: 1.32
   */
-  MeroiticCursive = 82,
+  meroiticCursive = 82,
 
   /**
       Meroitic Hieroglyphs. Since: 1.32
   */
-  MeroiticHieroglyphs = 83,
+  meroiticHieroglyphs = 83,
 
   /**
       Miao. Since: 1.32
   */
-  Miao = 84,
+  miao = 84,
 
   /**
       Sharada. Since: 1.32
   */
-  Sharada = 85,
+  sharada = 85,
 
   /**
       Sora Sompeng. Since: 1.32
   */
-  SoraSompeng = 86,
+  soraSompeng = 86,
 
   /**
       Takri. Since: 1.32
   */
-  Takri = 87,
+  takri = 87,
 
   /**
       Bassa. Since: 1.40
   */
-  BassaVah = 88,
+  bassaVah = 88,
 
   /**
       Caucasian Albanian. Since: 1.40
   */
-  CaucasianAlbanian = 89,
+  caucasianAlbanian = 89,
 
   /**
       Duployan. Since: 1.40
   */
-  Duployan = 90,
+  duployan = 90,
 
   /**
       Elbasan. Since: 1.40
   */
-  Elbasan = 91,
+  elbasan = 91,
 
   /**
       Grantha. Since: 1.40
   */
-  Grantha = 92,
+  grantha = 92,
 
   /**
       Kjohki. Since: 1.40
   */
-  Khojki = 93,
+  khojki = 93,
 
   /**
       Khudawadi, Sindhi. Since: 1.40
   */
-  Khudawadi = 94,
+  khudawadi = 94,
 
   /**
       Linear A. Since: 1.40
   */
-  LinearA = 95,
+  linearA = 95,
 
   /**
       Mahajani. Since: 1.40
   */
-  Mahajani = 96,
+  mahajani = 96,
 
   /**
       Manichaean. Since: 1.40
   */
-  Manichaean = 97,
+  manichaean = 97,
 
   /**
       Mende Kikakui. Since: 1.40
   */
-  MendeKikakui = 98,
+  mendeKikakui = 98,
 
   /**
       Modi. Since: 1.40
   */
-  Modi = 99,
+  modi = 99,
 
   /**
       Mro. Since: 1.40
   */
-  Mro = 100,
+  mro = 100,
 
   /**
       Nabataean. Since: 1.40
   */
-  Nabataean = 101,
+  nabataean = 101,
 
   /**
       Old North Arabian. Since: 1.40
   */
-  OldNorthArabian = 102,
+  oldNorthArabian = 102,
 
   /**
       Old Permic. Since: 1.40
   */
-  OldPermic = 103,
+  oldPermic = 103,
 
   /**
       Pahawh Hmong. Since: 1.40
   */
-  PahawhHmong = 104,
+  pahawhHmong = 104,
 
   /**
       Palmyrene. Since: 1.40
   */
-  Palmyrene = 105,
+  palmyrene = 105,
 
   /**
       Pau Cin Hau. Since: 1.40
   */
-  PauCinHau = 106,
+  pauCinHau = 106,
 
   /**
       Psalter Pahlavi. Since: 1.40
   */
-  PsalterPahlavi = 107,
+  psalterPahlavi = 107,
 
   /**
       Siddham. Since: 1.40
   */
-  Siddham = 108,
+  siddham = 108,
 
   /**
       Tirhuta. Since: 1.40
   */
-  Tirhuta = 109,
+  tirhuta = 109,
 
   /**
       Warang Citi. Since: 1.40
   */
-  WarangCiti = 110,
+  warangCiti = 110,
 
   /**
       Ahom. Since: 1.40
   */
-  Ahom = 111,
+  ahom = 111,
 
   /**
       Anatolian Hieroglyphs. Since: 1.40
   */
-  AnatolianHieroglyphs = 112,
+  anatolianHieroglyphs = 112,
 
   /**
       Hatran. Since: 1.40
   */
-  Hatran = 113,
+  hatran = 113,
 
   /**
       Multani. Since: 1.40
   */
-  Multani = 114,
+  multani = 114,
 
   /**
       Old Hungarian. Since: 1.40
   */
-  OldHungarian = 115,
+  oldHungarian = 115,
 
   /**
       Signwriting. Since: 1.40
   */
-  Signwriting = 116,
+  signwriting = 116,
 }
 
 /**
@@ -1419,13 +1419,13 @@ enum PangoShapeFlags : uint
   /**
       Default value
   */
-  None = 0,
+  none = 0,
 
   /**
       Round glyph positions and widths to whole device units
       This option should be set if the target renderer can't do subpixel positioning of glyphs
   */
-  RoundPositions = 1,
+  roundPositions = 1,
 }
 
 /**
@@ -1437,23 +1437,23 @@ enum PangoShowFlags : uint
   /**
       No special treatment for invisible characters
   */
-  None = 0,
+  none = 0,
 
   /**
       Render spaces, tabs and newlines visibly
   */
-  Spaces = 1,
+  spaces = 1,
 
   /**
       Render line breaks visibly
   */
-  LineBreaks = 2,
+  lineBreaks = 2,
 
   /**
       Render default-ignorable Unicode
       characters visibly
   */
-  Ignorables = 4,
+  ignorables = 4,
 }
 
 /**
@@ -1465,47 +1465,47 @@ enum PangoStretch
   /**
       ultra condensed width
   */
-  UltraCondensed = 0,
+  ultraCondensed = 0,
 
   /**
       extra condensed width
   */
-  ExtraCondensed = 1,
+  extraCondensed = 1,
 
   /**
       condensed width
   */
-  Condensed = 2,
+  condensed = 2,
 
   /**
       semi condensed width
   */
-  SemiCondensed = 3,
+  semiCondensed = 3,
 
   /**
       the normal width
   */
-  Normal = 4,
+  normal = 4,
 
   /**
       semi expanded width
   */
-  SemiExpanded = 5,
+  semiExpanded = 5,
 
   /**
       expanded width
   */
-  Expanded = 6,
+  expanded = 6,
 
   /**
       extra expanded width
   */
-  ExtraExpanded = 7,
+  extraExpanded = 7,
 
   /**
       ultra expanded width
   */
-  UltraExpanded = 8,
+  ultraExpanded = 8,
 }
 
 /**
@@ -1516,17 +1516,17 @@ enum PangoStyle
   /**
       the font is upright.
   */
-  Normal = 0,
+  normal = 0,
 
   /**
       the font is slanted, but in a roman style.
   */
-  Oblique = 1,
+  oblique = 1,
 
   /**
       the font is slanted in an italic style.
   */
-  Italic = 2,
+  italic = 2,
 }
 
 /**
@@ -1538,26 +1538,26 @@ enum PangoTabAlign
   /**
       the text appears to the right of the tab stop position
   */
-  Left = 0,
+  left = 0,
 
   /**
       the text appears to the left of the tab stop position
       until the available space is filled. Since: 1.50
   */
-  Right = 1,
+  right = 1,
 
   /**
       the text is centered at the tab stop position
       until the available space is filled. Since: 1.50
   */
-  Center = 2,
+  center = 2,
 
   /**
       text before the first occurrence of the decimal point
       character appears to the left of the tab stop position (until the available
       space is filled), the rest to the right. Since: 1.50
   */
-  Decimal = 3,
+  decimal = 3,
 }
 
 /**
@@ -1568,23 +1568,23 @@ enum PangoTextTransform
   /**
       Leave text unchanged
   */
-  None = 0,
+  none = 0,
 
   /**
       Display letters and numbers as lowercase
   */
-  Lowercase = 1,
+  lowercase = 1,
 
   /**
       Display letters and numbers as uppercase
   */
-  Uppercase = 2,
+  uppercase = 2,
 
   /**
       Display the first character of a word
       in titlecase
   */
-  Capitalize = 3,
+  capitalize = 3,
 }
 
 /**
@@ -1596,27 +1596,27 @@ enum PangoUnderline
   /**
       no underline should be drawn
   */
-  None = 0,
+  none = 0,
 
   /**
       a single underline should be drawn
   */
-  Single = 1,
+  single = 1,
 
   /**
       a double underline should be drawn
   */
-  Double = 2,
+  double_ = 2,
 
   /**
       a single underline should be drawn at a
       position beneath the ink extents of the text being
       underlined. This should be used only for underlining
       single characters, such as for keyboard accelerators.
-      [pango.types.Underline.Single] should be used for extended
+      [pango.types.Underline.single] should be used for extended
       portions of text.
   */
-  Low = 3,
+  low = 3,
 
   /**
       an underline indicating an error should
@@ -1628,28 +1628,28 @@ enum PangoUnderline
       may automatically be used. This type of underlining is
       available since Pango 1.4.
   */
-  Error = 4,
+  error = 4,
 
   /**
       Like @PANGO_UNDERLINE_SINGLE, but
       drawn continuously across multiple runs. This type
       of underlining is available since Pango 1.46.
   */
-  SingleLine = 5,
+  singleLine = 5,
 
   /**
       Like @PANGO_UNDERLINE_DOUBLE, but
       drawn continuously across multiple runs. This type
       of underlining is available since Pango 1.46.
   */
-  DoubleLine = 6,
+  doubleLine = 6,
 
   /**
       Like @PANGO_UNDERLINE_ERROR, but
       drawn continuously across multiple runs. This type
       of underlining is available since Pango 1.46.
   */
-  ErrorLine = 7,
+  errorLine = 7,
 }
 
 /**
@@ -1660,45 +1660,45 @@ enum PangoVariant
   /**
       A normal font.
   */
-  Normal = 0,
+  normal = 0,
 
   /**
       A font with the lower case characters
       replaced by smaller variants of the capital characters.
   */
-  SmallCaps = 1,
+  smallCaps = 1,
 
   /**
       A font with all characters
       replaced by smaller variants of the capital characters. Since: 1.50
   */
-  AllSmallCaps = 2,
+  allSmallCaps = 2,
 
   /**
       A font with the lower case characters
       replaced by smaller variants of the capital characters.
       Petite Caps can be even smaller than Small Caps. Since: 1.50
   */
-  PetiteCaps = 3,
+  petiteCaps = 3,
 
   /**
       A font with all characters
       replaced by smaller variants of the capital characters.
       Petite Caps can be even smaller than Small Caps. Since: 1.50
   */
-  AllPetiteCaps = 4,
+  allPetiteCaps = 4,
 
   /**
       A font with the upper case characters
       replaced by smaller variants of the capital letters. Since: 1.50
   */
-  Unicase = 5,
+  unicase = 5,
 
   /**
       A font with capital letters that
       are more suitable for all-uppercase titles. Since: 1.50
   */
-  TitleCaps = 6,
+  titleCaps = 6,
 }
 
 /**
@@ -1712,62 +1712,62 @@ enum PangoWeight
   /**
       the thin weight (= 100) Since: 1.24
   */
-  Thin = 100,
+  thin = 100,
 
   /**
       the ultralight weight (= 200)
   */
-  Ultralight = 200,
+  ultralight = 200,
 
   /**
       the light weight (= 300)
   */
-  Light = 300,
+  light = 300,
 
   /**
       the semilight weight (= 350) Since: 1.36.7
   */
-  Semilight = 350,
+  semilight = 350,
 
   /**
       the book weight (= 380) Since: 1.24)
   */
-  Book = 380,
+  book = 380,
 
   /**
       the default weight (= 400)
   */
-  Normal = 400,
+  normal = 400,
 
   /**
       the medium weight (= 500) Since: 1.24
   */
-  Medium = 500,
+  medium = 500,
 
   /**
       the semibold weight (= 600)
   */
-  Semibold = 600,
+  semibold = 600,
 
   /**
       the bold weight (= 700)
   */
-  Bold = 700,
+  bold = 700,
 
   /**
       the ultrabold weight (= 800)
   */
-  Ultrabold = 800,
+  ultrabold = 800,
 
   /**
       the heavy weight (= 900)
   */
-  Heavy = 900,
+  heavy = 900,
 
   /**
       the ultraheavy weight (= 1000) Since: 1.24
   */
-  Ultraheavy = 1000,
+  ultraheavy = 1000,
 }
 
 /**
@@ -1784,18 +1784,18 @@ enum PangoWrapMode
   /**
       wrap lines at word boundaries.
   */
-  Word = 0,
+  word = 0,
 
   /**
       wrap lines at character boundaries.
   */
-  Char = 1,
+  char_ = 1,
 
   /**
       wrap lines at word boundaries, but fall back to
       character boundaries if there is not enough space for a full word.
   */
-  WordChar = 2,
+  wordChar = 2,
 }
 
 /**
@@ -2052,15 +2052,15 @@ struct PangoAttrSize
 
   /**
       size of font, in units of 1/`PANGO_SCALE` of a point (for
-      [pango.types.AttrType.Size]) or of a device unit (for [pango.types.AttrType.AbsoluteSize])
+      [pango.types.AttrType.size]) or of a device unit (for [pango.types.AttrType.absoluteSize])
   */
   int size;
 
   /**
       whether the font size is in device units or points.
       This field is only present for compatibility with Pango-1.8.0
-      ([pango.types.AttrType.AbsoluteSize] was added in 1.8.1); and always will
-      be false for [pango.types.AttrType.Size] and true for [pango.types.AttrType.AbsoluteSize].
+      ([pango.types.AttrType.absoluteSize] was added in 1.8.1); and always will
+      be false for [pango.types.AttrType.size] and true for [pango.types.AttrType.absoluteSize].
   */
   uint absolute;
 }

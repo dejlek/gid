@@ -14,7 +14,7 @@ import gtk.types;
 class BoolFilter : gtk.filter.Filter
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -39,8 +39,8 @@ class BoolFilter : gtk.filter.Filter
   this(gtk.expression.Expression expression = null)
   {
     GtkBoolFilter* _cretval;
-    _cretval = gtk_bool_filter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gtk_bool_filter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -52,7 +52,7 @@ class BoolFilter : gtk.filter.Filter
   {
     GtkExpression* _cretval;
     _cretval = gtk_bool_filter_get_expression(cast(GtkBoolFilter*)cPtr);
-    auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class BoolFilter : gtk.filter.Filter
   */
   void setExpression(gtk.expression.Expression expression = null)
   {
-    gtk_bool_filter_set_expression(cast(GtkBoolFilter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
+    gtk_bool_filter_set_expression(cast(GtkBoolFilter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.dup) : null);
   }
 
   /**

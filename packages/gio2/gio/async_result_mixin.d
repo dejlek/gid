@@ -83,7 +83,7 @@ public import gobject.object;
   
   The callback for an asynchronous operation is called only once, and is
   always called, even in the case of a cancelled operation. On cancellation
-  the result is a [gio.types.IOErrorEnum.Cancelled] error.
+  the result is a [gio.types.IOErrorEnum.cancelled] error.
   
   ## I/O Priority
   
@@ -107,7 +107,7 @@ template AsyncResultT()
   {
     ObjectC* _cretval;
     _cretval = g_async_result_get_source_object(cast(GAsyncResult*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.take);
     return _retval;
   }
 

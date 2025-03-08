@@ -11,7 +11,7 @@ import gid.gid;
 class RunEndEncodeOptions : arrow.function_options.FunctionOptions
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class RunEndEncodeOptions : arrow.function_options.FunctionOptions
   this(arrow.data_type.DataType runEndDataType = null)
   {
     GArrowRunEndEncodeOptions* _cretval;
-    _cretval = garrow_run_end_encode_options_new(runEndDataType ? cast(GArrowDataType*)runEndDataType.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_run_end_encode_options_new(runEndDataType ? cast(GArrowDataType*)runEndDataType.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 }

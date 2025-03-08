@@ -11,7 +11,7 @@ import glib.error;
 class FieldExpression : arrow.expression.Expression
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,11 +31,11 @@ class FieldExpression : arrow.expression.Expression
   this(string reference)
   {
     GArrowFieldExpression* _cretval;
-    const(char)* _reference = reference.toCString(No.Alloc);
+    const(char)* _reference = reference.toCString(No.alloc);
     GError *_err;
     _cretval = garrow_field_expression_new(_reference, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

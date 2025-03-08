@@ -15,7 +15,7 @@ import gobject.object;
 class Misc : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,7 +41,7 @@ class Misc : gobject.object.ObjectG
   {
     const(AtkMisc)* _cretval;
     _cretval = atk_misc_get_instance();
-    auto _retval = ObjectG.getDObject!(atk.misc.Misc)(cast(AtkMisc*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.misc.Misc)(cast(AtkMisc*)_cretval, No.take);
     return _retval;
   }
 

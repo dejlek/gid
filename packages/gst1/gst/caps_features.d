@@ -30,12 +30,12 @@ import gst.types;
 class CapsFeatures : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -61,7 +61,7 @@ class CapsFeatures : gobject.boxed.Boxed
   {
     GstCapsFeatures* _cretval;
     _cretval = gst_caps_features_new_any();
-    auto _retval = _cretval ? new gst.caps_features.CapsFeatures(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.caps_features.CapsFeatures(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class CapsFeatures : gobject.boxed.Boxed
   {
     GstCapsFeatures* _cretval;
     _cretval = gst_caps_features_new_empty();
-    auto _retval = _cretval ? new gst.caps_features.CapsFeatures(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.caps_features.CapsFeatures(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -86,9 +86,9 @@ class CapsFeatures : gobject.boxed.Boxed
   static gst.caps_features.CapsFeatures newSingle(string feature)
   {
     GstCapsFeatures* _cretval;
-    const(char)* _feature = feature.toCString(No.Alloc);
+    const(char)* _feature = feature.toCString(No.alloc);
     _cretval = gst_caps_features_new_single(_feature);
-    auto _retval = _cretval ? new gst.caps_features.CapsFeatures(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.caps_features.CapsFeatures(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class CapsFeatures : gobject.boxed.Boxed
   */
   void add(string feature)
   {
-    const(char)* _feature = feature.toCString(No.Alloc);
+    const(char)* _feature = feature.toCString(No.alloc);
     gst_caps_features_add(cast(GstCapsFeatures*)cPtr, _feature);
   }
 
@@ -122,7 +122,7 @@ class CapsFeatures : gobject.boxed.Boxed
   bool contains(string feature)
   {
     bool _retval;
-    const(char)* _feature = feature.toCString(No.Alloc);
+    const(char)* _feature = feature.toCString(No.alloc);
     _retval = gst_caps_features_contains(cast(const(GstCapsFeatures)*)cPtr, _feature);
     return _retval;
   }
@@ -148,7 +148,7 @@ class CapsFeatures : gobject.boxed.Boxed
   {
     GstCapsFeatures* _cretval;
     _cretval = gst_caps_features_copy(cast(const(GstCapsFeatures)*)cPtr);
-    auto _retval = _cretval ? new gst.caps_features.CapsFeatures(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.caps_features.CapsFeatures(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class CapsFeatures : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gst_caps_features_get_nth(cast(const(GstCapsFeatures)*)cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class CapsFeatures : gobject.boxed.Boxed
   bool isEqual(gst.caps_features.CapsFeatures features2)
   {
     bool _retval;
-    _retval = gst_caps_features_is_equal(cast(const(GstCapsFeatures)*)cPtr, features2 ? cast(const(GstCapsFeatures)*)features2.cPtr(No.Dup) : null);
+    _retval = gst_caps_features_is_equal(cast(const(GstCapsFeatures)*)cPtr, features2 ? cast(const(GstCapsFeatures)*)features2.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class CapsFeatures : gobject.boxed.Boxed
   */
   void remove(string feature)
   {
-    const(char)* _feature = feature.toCString(No.Alloc);
+    const(char)* _feature = feature.toCString(No.alloc);
     gst_caps_features_remove(cast(GstCapsFeatures*)cPtr, _feature);
   }
 
@@ -251,7 +251,7 @@ class CapsFeatures : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_caps_features_to_string(cast(const(GstCapsFeatures)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -265,9 +265,9 @@ class CapsFeatures : gobject.boxed.Boxed
   static gst.caps_features.CapsFeatures fromString(string features)
   {
     GstCapsFeatures* _cretval;
-    const(char)* _features = features.toCString(No.Alloc);
+    const(char)* _features = features.toCString(No.alloc);
     _cretval = gst_caps_features_from_string(_features);
-    auto _retval = _cretval ? new gst.caps_features.CapsFeatures(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.caps_features.CapsFeatures(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

@@ -13,7 +13,7 @@ import gtk.types;
 class CustomFilter : gtk.filter.Filter
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -47,7 +47,7 @@ class CustomFilter : gtk.filter.Filter
     {
       auto _dlg = cast(gtk.types.CustomFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.take));
       return _retval;
     }
     auto _matchFuncCB = matchFunc ? &_matchFuncCallback : null;
@@ -56,7 +56,7 @@ class CustomFilter : gtk.filter.Filter
     auto _matchFunc = matchFunc ? freezeDelegate(cast(void*)&matchFunc) : null;
     GDestroyNotify _matchFuncDestroyCB = matchFunc ? &thawDelegate : null;
     _cretval = gtk_custom_filter_new(_matchFuncCB, _matchFunc, _matchFuncDestroyCB);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -78,7 +78,7 @@ class CustomFilter : gtk.filter.Filter
     {
       auto _dlg = cast(gtk.types.CustomFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.take));
       return _retval;
     }
     auto _matchFuncCB = matchFunc ? &_matchFuncCallback : null;

@@ -78,7 +78,7 @@ import gst.types;
 class Element : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -106,13 +106,13 @@ class Element : gst.object.ObjectGst
   static gst.element.Element makeFromUri(gst.types.URIType type, string uri, string elementname = null)
   {
     GstElement* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
-    const(char)* _elementname = elementname.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _elementname = elementname.toCString(No.alloc);
     GError *_err;
     _cretval = gst_element_make_from_uri(type, _uri, _elementname, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.take);
     return _retval;
   }
 
@@ -130,8 +130,8 @@ class Element : gst.object.ObjectGst
   static bool register(gst.plugin.Plugin plugin, string name, uint rank, gobject.types.GType type)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_element_register(plugin ? cast(GstPlugin*)plugin.cPtr(No.Dup) : null, _name, rank, type);
+    const(char)* _name = name.toCString(No.alloc);
+    _retval = gst_element_register(plugin ? cast(GstPlugin*)plugin.cPtr(No.dup) : null, _name, rank, type);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class Element : gst.object.ObjectGst
   {
     const(char)* _cretval;
     _cretval = gst_element_state_change_return_get_name(stateRet);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class Element : gst.object.ObjectGst
   {
     const(char)* _cretval;
     _cretval = gst_element_state_get_name(state);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class Element : gst.object.ObjectGst
   bool addPad(gst.pad.Pad pad)
   {
     bool _retval;
-    _retval = gst_element_add_pad(cast(GstElement*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+    _retval = gst_element_add_pad(cast(GstElement*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class Element : gst.object.ObjectGst
   gulong addPropertyDeepNotifyWatch(string propertyName, bool includeValue)
   {
     gulong _retval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
     _retval = gst_element_add_property_deep_notify_watch(cast(GstElement*)cPtr, _propertyName, includeValue);
     return _retval;
   }
@@ -242,7 +242,7 @@ class Element : gst.object.ObjectGst
   gulong addPropertyNotifyWatch(string propertyName, bool includeValue)
   {
     gulong _retval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
     _retval = gst_element_add_property_notify_watch(cast(GstElement*)cPtr, _propertyName, includeValue);
     return _retval;
   }
@@ -267,7 +267,7 @@ class Element : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.ElementCallAsyncFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gst.element.Element)(cast(void*)element, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gst.element.Element)(cast(void*)element, No.take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -298,7 +298,7 @@ class Element : gst.object.ObjectGst
     pending state if any. This function is used
     by elements that do asynchronous state changes.
     The core will normally call this method automatically when an
-    element returned [gst.types.StateChangeReturn.Success] from the state change function.
+    element returned [gst.types.StateChangeReturn.success] from the state change function.
     
     If after calling this method the element still has not reached
     the pending state, the next state change is performed.
@@ -352,9 +352,9 @@ class Element : gst.object.ObjectGst
   string decorateStreamId(string streamId)
   {
     char* _cretval;
-    const(char)* _streamId = streamId.toCString(No.Alloc);
+    const(char)* _streamId = streamId.toCString(No.alloc);
     _cretval = gst_element_decorate_stream_id(cast(GstElement*)cPtr, _streamId);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -376,7 +376,7 @@ class Element : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.element.Element)(cast(void*)element, No.Take), ObjectG.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.element.Element)(cast(void*)element, No.take), ObjectG.getDObject!(gst.pad.Pad)(cast(void*)pad, No.take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -405,7 +405,7 @@ class Element : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.element.Element)(cast(void*)element, No.Take), ObjectG.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.element.Element)(cast(void*)element, No.take), ObjectG.getDObject!(gst.pad.Pad)(cast(void*)pad, No.take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -434,7 +434,7 @@ class Element : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.element.Element)(cast(void*)element, No.Take), ObjectG.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.element.Element)(cast(void*)element, No.take), ObjectG.getDObject!(gst.pad.Pad)(cast(void*)pad, No.take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -473,7 +473,7 @@ class Element : gst.object.ObjectGst
   {
     GstBus* _cretval;
     _cretval = gst_element_get_bus(cast(GstElement*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -491,7 +491,7 @@ class Element : gst.object.ObjectGst
   {
     GstClock* _cretval;
     _cretval = gst_element_get_clock(cast(GstElement*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -513,8 +513,8 @@ class Element : gst.object.ObjectGst
   gst.pad.Pad getCompatiblePad(gst.pad.Pad pad, gst.caps.Caps caps = null)
   {
     GstPad* _cretval;
-    _cretval = gst_element_get_compatible_pad(cast(GstElement*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    _cretval = gst_element_get_compatible_pad(cast(GstElement*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -530,8 +530,8 @@ class Element : gst.object.ObjectGst
   gst.pad_template.PadTemplate getCompatiblePadTemplate(gst.pad_template.PadTemplate compattempl)
   {
     GstPadTemplate* _cretval;
-    _cretval = gst_element_get_compatible_pad_template(cast(GstElement*)cPtr, compattempl ? cast(GstPadTemplate*)compattempl.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
+    _cretval = gst_element_get_compatible_pad_template(cast(GstElement*)cPtr, compattempl ? cast(GstPadTemplate*)compattempl.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.take);
     return _retval;
   }
 
@@ -546,9 +546,9 @@ class Element : gst.object.ObjectGst
   gst.context.Context getContext(string contextType)
   {
     GstContext* _cretval;
-    const(char)* _contextType = contextType.toCString(No.Alloc);
+    const(char)* _contextType = contextType.toCString(No.alloc);
     _cretval = gst_element_get_context(cast(GstElement*)cPtr, _contextType);
-    auto _retval = _cretval ? new gst.context.Context(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.context.Context(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -561,9 +561,9 @@ class Element : gst.object.ObjectGst
   gst.context.Context getContextUnlocked(string contextType)
   {
     GstContext* _cretval;
-    const(char)* _contextType = contextType.toCString(No.Alloc);
+    const(char)* _contextType = contextType.toCString(No.alloc);
     _cretval = gst_element_get_context_unlocked(cast(GstElement*)cPtr, _contextType);
-    auto _retval = _cretval ? new gst.context.Context(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.context.Context(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -617,7 +617,7 @@ class Element : gst.object.ObjectGst
   {
     GstElementFactory* _cretval;
     _cretval = gst_element_get_factory(cast(GstElement*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.element_factory.ElementFactory)(cast(GstElementFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gst.element_factory.ElementFactory)(cast(GstElementFactory*)_cretval, No.take);
     return _retval;
   }
 
@@ -630,9 +630,9 @@ class Element : gst.object.ObjectGst
   string getMetadata(string key)
   {
     const(char)* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.alloc);
     _cretval = gst_element_get_metadata(cast(GstElement*)cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -647,9 +647,9 @@ class Element : gst.object.ObjectGst
   gst.pad_template.PadTemplate getPadTemplate(string name)
   {
     GstPadTemplate* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_element_get_pad_template(cast(GstElement*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.take);
     return _retval;
   }
 
@@ -682,9 +682,9 @@ class Element : gst.object.ObjectGst
   gst.pad.Pad getRequestPad(string name)
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_element_get_request_pad(cast(GstElement*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -713,16 +713,16 @@ class Element : gst.object.ObjectGst
     specified timeout value for the state change to complete.
     If the element completes the state change or goes into
     an error, this function returns immediately with a return value of
-    [gst.types.StateChangeReturn.Success] or [gst.types.StateChangeReturn.Failure] respectively.
+    [gst.types.StateChangeReturn.success] or [gst.types.StateChangeReturn.failure] respectively.
     
-    For elements that did not return [gst.types.StateChangeReturn.Async], this function
+    For elements that did not return [gst.types.StateChangeReturn.async], this function
     returns the current and pending state immediately.
     
-    This function returns [gst.types.StateChangeReturn.NoPreroll] if the element
+    This function returns [gst.types.StateChangeReturn.noPreroll] if the element
     successfully changed its state but is not able to provide data yet.
     This mostly happens for live sources that only produce data in
-    [gst.types.State.Playing]. While the state change return is equivalent to
-    [gst.types.StateChangeReturn.Success], it is returned to the application to signal that
+    [gst.types.State.playing]. While the state change return is equivalent to
+    [gst.types.StateChangeReturn.success], it is returned to the application to signal that
     some sink elements might not be able to complete their state change because
     an element is not producing data to complete the preroll. When setting the
     element to playing, the preroll will complete and playback will start.
@@ -733,10 +733,10 @@ class Element : gst.object.ObjectGst
             state. Can be null.
       timeout =       a #GstClockTime to specify the timeout for an async
                   state change or `GST_CLOCK_TIME_NONE` for infinite timeout.
-    Returns:     [gst.types.StateChangeReturn.Success] if the element has no more pending state
-               and the last state change succeeded, [gst.types.StateChangeReturn.Async] if the
+    Returns:     [gst.types.StateChangeReturn.success] if the element has no more pending state
+               and the last state change succeeded, [gst.types.StateChangeReturn.async] if the
                element is still performing a state change or
-               [gst.types.StateChangeReturn.Failure] if the last state change failed.
+               [gst.types.StateChangeReturn.failure] if the last state change failed.
       
       MT safe.
   */
@@ -761,9 +761,9 @@ class Element : gst.object.ObjectGst
   gst.pad.Pad getStaticPad(string name)
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_element_get_static_pad(cast(GstElement*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -799,7 +799,7 @@ class Element : gst.object.ObjectGst
   {
     GstIterator* _cretval;
     _cretval = gst_element_iterate_pads(cast(GstElement*)cPtr);
-    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -816,7 +816,7 @@ class Element : gst.object.ObjectGst
   {
     GstIterator* _cretval;
     _cretval = gst_element_iterate_sink_pads(cast(GstElement*)cPtr);
-    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -833,7 +833,7 @@ class Element : gst.object.ObjectGst
   {
     GstIterator* _cretval;
     _cretval = gst_element_iterate_src_pads(cast(GstElement*)cPtr);
-    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -853,7 +853,7 @@ class Element : gst.object.ObjectGst
   bool link(gst.element.Element dest)
   {
     bool _retval;
-    _retval = gst_element_link(cast(GstElement*)cPtr, dest ? cast(GstElement*)dest.cPtr(No.Dup) : null);
+    _retval = gst_element_link(cast(GstElement*)cPtr, dest ? cast(GstElement*)dest.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -875,7 +875,7 @@ class Element : gst.object.ObjectGst
   bool linkFiltered(gst.element.Element dest, gst.caps.Caps filter = null)
   {
     bool _retval;
-    _retval = gst_element_link_filtered(cast(GstElement*)cPtr, dest ? cast(GstElement*)dest.cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter.cPtr(No.Dup) : null);
+    _retval = gst_element_link_filtered(cast(GstElement*)cPtr, dest ? cast(GstElement*)dest.cPtr(No.dup) : null, filter ? cast(GstCaps*)filter.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -895,9 +895,9 @@ class Element : gst.object.ObjectGst
   bool linkPads(string srcpadname, gst.element.Element dest, string destpadname = null)
   {
     bool _retval;
-    const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
-    const(char)* _destpadname = destpadname.toCString(No.Alloc);
-    _retval = gst_element_link_pads(cast(GstElement*)cPtr, _srcpadname, dest ? cast(GstElement*)dest.cPtr(No.Dup) : null, _destpadname);
+    const(char)* _srcpadname = srcpadname.toCString(No.alloc);
+    const(char)* _destpadname = destpadname.toCString(No.alloc);
+    _retval = gst_element_link_pads(cast(GstElement*)cPtr, _srcpadname, dest ? cast(GstElement*)dest.cPtr(No.dup) : null, _destpadname);
     return _retval;
   }
 
@@ -919,9 +919,9 @@ class Element : gst.object.ObjectGst
   bool linkPadsFiltered(string srcpadname, gst.element.Element dest, string destpadname = null, gst.caps.Caps filter = null)
   {
     bool _retval;
-    const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
-    const(char)* _destpadname = destpadname.toCString(No.Alloc);
-    _retval = gst_element_link_pads_filtered(cast(GstElement*)cPtr, _srcpadname, dest ? cast(GstElement*)dest.cPtr(No.Dup) : null, _destpadname, filter ? cast(GstCaps*)filter.cPtr(No.Dup) : null);
+    const(char)* _srcpadname = srcpadname.toCString(No.alloc);
+    const(char)* _destpadname = destpadname.toCString(No.alloc);
+    _retval = gst_element_link_pads_filtered(cast(GstElement*)cPtr, _srcpadname, dest ? cast(GstElement*)dest.cPtr(No.dup) : null, _destpadname, filter ? cast(GstCaps*)filter.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -931,7 +931,7 @@ class Element : gst.object.ObjectGst
     child of the parent of the other element.  If they have different
     parents, the link fails.
     
-    Calling [gst.element.Element.linkPadsFull] with flags == [gst.types.PadLinkCheck.Default]
+    Calling [gst.element.Element.linkPadsFull] with flags == [gst.types.PadLinkCheck.default_]
     is the same as calling [gst.element.Element.linkPads] and the recommended way of
     linking pads with safety checks applied.
     
@@ -948,23 +948,23 @@ class Element : gst.object.ObjectGst
   bool linkPadsFull(string srcpadname, gst.element.Element dest, string destpadname, gst.types.PadLinkCheck flags)
   {
     bool _retval;
-    const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
-    const(char)* _destpadname = destpadname.toCString(No.Alloc);
-    _retval = gst_element_link_pads_full(cast(GstElement*)cPtr, _srcpadname, dest ? cast(GstElement*)dest.cPtr(No.Dup) : null, _destpadname, flags);
+    const(char)* _srcpadname = srcpadname.toCString(No.alloc);
+    const(char)* _destpadname = destpadname.toCString(No.alloc);
+    _retval = gst_element_link_pads_full(cast(GstElement*)cPtr, _srcpadname, dest ? cast(GstElement*)dest.cPtr(No.dup) : null, _destpadname, flags);
     return _retval;
   }
 
   /**
       Brings the element to the lost state. The current state of the
     element is copied to the pending state so that any call to
-    [gst.element.Element.getState] will return [gst.types.StateChangeReturn.Async].
+    [gst.element.Element.getState] will return [gst.types.StateChangeReturn.async].
     
     An ASYNC_START message is posted. If the element was PLAYING, it will
     go to PAUSED. The element will be restored to its PLAYING state by
     the parent pipeline when it prerolls again.
     
     This is mostly used for elements that lost their preroll buffer
-    in the [gst.types.State.Paused] or [gst.types.State.Playing] state after a flush,
+    in the [gst.types.State.paused] or [gst.types.State.playing] state after a flush,
     they will go to their pending state again when a new preroll buffer is
     queued. This function can only be called when the element is currently
     not in error or an async state change.
@@ -1000,10 +1000,10 @@ class Element : gst.object.ObjectGst
   */
   void messageFull(gst.types.MessageType type, glib.types.Quark domain, int code, string text, string debug_, string file, string function_, int line)
   {
-    char* _text = text.toCString(Yes.Alloc);
-    char* _debug_ = debug_.toCString(Yes.Alloc);
-    const(char)* _file = file.toCString(No.Alloc);
-    const(char)* _function_ = function_.toCString(No.Alloc);
+    char* _text = text.toCString(Yes.alloc);
+    char* _debug_ = debug_.toCString(Yes.alloc);
+    const(char)* _file = file.toCString(No.alloc);
+    const(char)* _function_ = function_.toCString(No.alloc);
     gst_element_message_full(cast(GstElement*)cPtr, type, domain, code, _text, _debug_, _file, _function_, line);
   }
 
@@ -1029,11 +1029,11 @@ class Element : gst.object.ObjectGst
   */
   void messageFullWithDetails(gst.types.MessageType type, glib.types.Quark domain, int code, string text, string debug_, string file, string function_, int line, gst.structure.Structure structure)
   {
-    char* _text = text.toCString(Yes.Alloc);
-    char* _debug_ = debug_.toCString(Yes.Alloc);
-    const(char)* _file = file.toCString(No.Alloc);
-    const(char)* _function_ = function_.toCString(No.Alloc);
-    gst_element_message_full_with_details(cast(GstElement*)cPtr, type, domain, code, _text, _debug_, _file, _function_, line, structure ? cast(GstStructure*)structure.cPtr(Yes.Dup) : null);
+    char* _text = text.toCString(Yes.alloc);
+    char* _debug_ = debug_.toCString(Yes.alloc);
+    const(char)* _file = file.toCString(No.alloc);
+    const(char)* _function_ = function_.toCString(No.alloc);
+    gst_element_message_full_with_details(cast(GstElement*)cPtr, type, domain, code, _text, _debug_, _file, _function_, line, structure ? cast(GstStructure*)structure.cPtr(Yes.dup) : null);
   }
 
   /**
@@ -1066,7 +1066,7 @@ class Element : gst.object.ObjectGst
   bool postMessage(gst.message.Message message)
   {
     bool _retval;
-    _retval = gst_element_post_message(cast(GstElement*)cPtr, message ? cast(GstMessage*)message.cPtr(Yes.Dup) : null);
+    _retval = gst_element_post_message(cast(GstElement*)cPtr, message ? cast(GstMessage*)message.cPtr(Yes.dup) : null);
     return _retval;
   }
 
@@ -1083,7 +1083,7 @@ class Element : gst.object.ObjectGst
   {
     GstClock* _cretval;
     _cretval = gst_element_provide_clock(cast(GstElement*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -1104,7 +1104,7 @@ class Element : gst.object.ObjectGst
   bool query(gst.query.Query query)
   {
     bool _retval;
-    _retval = gst_element_query(cast(GstElement*)cPtr, query ? cast(GstQuery*)query.cPtr(No.Dup) : null);
+    _retval = gst_element_query(cast(GstElement*)cPtr, query ? cast(GstQuery*)query.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -1182,7 +1182,7 @@ class Element : gst.object.ObjectGst
   */
   void releaseRequestPad(gst.pad.Pad pad)
   {
-    gst_element_release_request_pad(cast(GstElement*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+    gst_element_release_request_pad(cast(GstElement*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.dup) : null);
   }
 
   /**
@@ -1212,7 +1212,7 @@ class Element : gst.object.ObjectGst
   bool removePad(gst.pad.Pad pad)
   {
     bool _retval;
-    _retval = gst_element_remove_pad(cast(GstElement*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+    _retval = gst_element_remove_pad(cast(GstElement*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -1240,9 +1240,9 @@ class Element : gst.object.ObjectGst
   gst.pad.Pad requestPad(gst.pad_template.PadTemplate templ, string name = null, gst.caps.Caps caps = null)
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_element_request_pad(cast(GstElement*)cPtr, templ ? cast(GstPadTemplate*)templ.cPtr(No.Dup) : null, _name, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    const(char)* _name = name.toCString(No.alloc);
+    _cretval = gst_element_request_pad(cast(GstElement*)cPtr, templ ? cast(GstPadTemplate*)templ.cPtr(No.dup) : null, _name, caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -1267,9 +1267,9 @@ class Element : gst.object.ObjectGst
   gst.pad.Pad requestPadSimple(string name)
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_element_request_pad_simple(cast(GstElement*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -1288,7 +1288,7 @@ class Element : gst.object.ObjectGst
       stopType =       The type and flags for the new stop position
       stop =       The value of the new stop position
     Returns:     true if the event was handled. Flushing seeks will trigger a
-      preroll, which will emit [gst.types.MessageType.AsyncDone].
+      preroll, which will emit [gst.types.MessageType.asyncDone].
   */
   bool seek(double rate, gst.types.Format format, gst.types.SeekFlags flags, gst.types.SeekType startType, long start, gst.types.SeekType stopType, long stop)
   {
@@ -1321,7 +1321,7 @@ class Element : gst.object.ObjectGst
                    multiply with #GST_SECOND to convert seconds to nanoseconds or
                    with #GST_MSECOND to convert milliseconds to nanoseconds.
     Returns:     true if the seek operation succeeded. Flushing seeks will trigger a
-      preroll, which will emit [gst.types.MessageType.AsyncDone].
+      preroll, which will emit [gst.types.MessageType.asyncDone].
   */
   bool seekSimple(gst.types.Format format, gst.types.SeekFlags seekFlags, long seekPos)
   {
@@ -1342,12 +1342,12 @@ class Element : gst.object.ObjectGst
     Params:
       event =       the #GstEvent to send to the element.
     Returns:     true if the event was handled. Events that trigger a preroll (such
-      as flushing seeks and steps) will emit [gst.types.MessageType.AsyncDone].
+      as flushing seeks and steps) will emit [gst.types.MessageType.asyncDone].
   */
   bool sendEvent(gst.event.Event event)
   {
     bool _retval;
-    _retval = gst_element_send_event(cast(GstElement*)cPtr, event ? cast(GstEvent*)event.cPtr(Yes.Dup) : null);
+    _retval = gst_element_send_event(cast(GstElement*)cPtr, event ? cast(GstEvent*)event.cPtr(Yes.dup) : null);
     return _retval;
   }
 
@@ -1373,7 +1373,7 @@ class Element : gst.object.ObjectGst
   */
   void setBus(gst.bus.Bus bus = null)
   {
-    gst_element_set_bus(cast(GstElement*)cPtr, bus ? cast(GstBus*)bus.cPtr(No.Dup) : null);
+    gst_element_set_bus(cast(GstElement*)cPtr, bus ? cast(GstBus*)bus.cPtr(No.dup) : null);
   }
 
   /**
@@ -1391,7 +1391,7 @@ class Element : gst.object.ObjectGst
   bool setClock(gst.clock.Clock clock = null)
   {
     bool _retval;
-    _retval = gst_element_set_clock(cast(GstElement*)cPtr, clock ? cast(GstClock*)clock.cPtr(No.Dup) : null);
+    _retval = gst_element_set_clock(cast(GstElement*)cPtr, clock ? cast(GstClock*)clock.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -1404,7 +1404,7 @@ class Element : gst.object.ObjectGst
   */
   void setContext(gst.context.Context context)
   {
-    gst_element_set_context(cast(GstElement*)cPtr, context ? cast(GstContext*)context.cPtr(No.Dup) : null);
+    gst_element_set_context(cast(GstElement*)cPtr, context ? cast(GstContext*)context.cPtr(No.dup) : null);
   }
 
   /**
@@ -1458,10 +1458,10 @@ class Element : gst.object.ObjectGst
     element will perform the remainder of the state change asynchronously in
     another thread.
     An application can use [gst.element.Element.getState] to wait for the completion
-    of the state change or it can wait for a [gst.types.MessageType.AsyncDone] or
-    [gst.types.MessageType.StateChanged] on the bus.
+    of the state change or it can wait for a [gst.types.MessageType.asyncDone] or
+    [gst.types.MessageType.stateChanged] on the bus.
     
-    State changes to [gst.types.State.Ready] or [gst.types.State.Null] never return
+    State changes to [gst.types.State.ready] or [gst.types.State.null_] never return
     #GST_STATE_CHANGE_ASYNC.
     Params:
       state =       the element's new #GstState.
@@ -1502,7 +1502,7 @@ class Element : gst.object.ObjectGst
   */
   void unlink(gst.element.Element dest)
   {
-    gst_element_unlink(cast(GstElement*)cPtr, dest ? cast(GstElement*)dest.cPtr(No.Dup) : null);
+    gst_element_unlink(cast(GstElement*)cPtr, dest ? cast(GstElement*)dest.cPtr(No.dup) : null);
   }
 
   /**
@@ -1516,9 +1516,9 @@ class Element : gst.object.ObjectGst
   */
   void unlinkPads(string srcpadname, gst.element.Element dest, string destpadname)
   {
-    const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
-    const(char)* _destpadname = destpadname.toCString(No.Alloc);
-    gst_element_unlink_pads(cast(GstElement*)cPtr, _srcpadname, dest ? cast(GstElement*)dest.cPtr(No.Dup) : null, _destpadname);
+    const(char)* _srcpadname = srcpadname.toCString(No.alloc);
+    const(char)* _destpadname = destpadname.toCString(No.alloc);
+    gst_element_unlink_pads(cast(GstElement*)cPtr, _srcpadname, dest ? cast(GstElement*)dest.cPtr(No.dup) : null, _destpadname);
   }
 
   /**
@@ -1540,10 +1540,10 @@ class Element : gst.object.ObjectGst
     Connect to NoMorePads signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNoMorePads(T)(T callback, Flag!"After" after = No.After)
+  ulong connectNoMorePads(T)(T callback, Flag!"after" after = No.after)
   if (is(T : NoMorePadsCallbackDlg) || is(T : NoMorePadsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1580,10 +1580,10 @@ class Element : gst.object.ObjectGst
     Connect to PadAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPadAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPadAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PadAddedCallbackDlg) || is(T : PadAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1617,10 +1617,10 @@ class Element : gst.object.ObjectGst
     Connect to PadRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPadRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPadRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PadRemovedCallbackDlg) || is(T : PadRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -52,7 +52,7 @@ template TlsClientConnectionT()
   */
   override void copySessionState(gio.tls_client_connection.TlsClientConnection source)
   {
-    g_tls_client_connection_copy_session_state(cast(GTlsClientConnection*)cPtr, source ? cast(GTlsClientConnection*)(cast(ObjectG)source).cPtr(No.Dup) : null);
+    g_tls_client_connection_copy_session_state(cast(GTlsClientConnection*)cPtr, source ? cast(GTlsClientConnection*)(cast(ObjectG)source).cPtr(No.dup) : null);
   }
 
   /**
@@ -65,7 +65,7 @@ template TlsClientConnectionT()
   {
     GSocketConnectable* _cretval;
     _cretval = g_tls_client_connection_get_server_identity(cast(GTlsClientConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket_connectable.SocketConnectable)(cast(GSocketConnectable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_connectable.SocketConnectable)(cast(GSocketConnectable*)_cretval, No.take);
     return _retval;
   }
 
@@ -105,13 +105,13 @@ template TlsClientConnectionT()
       Sets conn's expected server identity, which is used both to tell
     servers on virtual hosts which certificate to present, and also
     to let conn know what name to look for in the certificate when
-    performing [gio.types.TlsCertificateFlags.BadIdentity] validation, if enabled.
+    performing [gio.types.TlsCertificateFlags.badIdentity] validation, if enabled.
     Params:
       identity =       a #GSocketConnectable describing the expected server identity
   */
   override void setServerIdentity(gio.socket_connectable.SocketConnectable identity)
   {
-    g_tls_client_connection_set_server_identity(cast(GTlsClientConnection*)cPtr, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.Dup) : null);
+    g_tls_client_connection_set_server_identity(cast(GTlsClientConnection*)cPtr, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.dup) : null);
   }
 
   /**
@@ -138,7 +138,7 @@ template TlsClientConnectionT()
   /**
       Sets conn's validation flags, to override the default set of
     checks performed when validating a server certificate. By default,
-    [gio.types.TlsCertificateFlags.ValidateAll] is used.
+    [gio.types.TlsCertificateFlags.validateAll] is used.
     
     This function does not work as originally designed and is impossible
     to use correctly. See #GTlsClientConnection:validation-flags for more

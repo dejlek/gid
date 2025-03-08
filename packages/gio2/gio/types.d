@@ -576,7 +576,7 @@ alias DBusSubtreeDispatchFunc = gio.types.DBusInterfaceVTable delegate(gio.dbus_
   
   This function is called when generating introspection data and also
   when preparing to dispatch incoming messages in the event that the
-  [gio.types.DBusSubtreeFlags.DispatchToUnenumeratedNodes] flag is not
+  [gio.types.DBusSubtreeFlags.dispatchToUnenumeratedNodes] flag is not
   specified (ie: to verify that the object path is valid).
   
   Hierarchies are not supported; the items that you return should not
@@ -673,7 +673,7 @@ alias DesktopAppLaunchCallback = void delegate(gio.desktop_app_info.DesktopAppIn
   final async result would be reported).
   
   current_size is in the same units as requested by the operation (see
-  [gio.types.FileMeasureFlags.ApparentSize]).
+  [gio.types.FileMeasureFlags.apparentSize]).
   
   The frequency of the updates is implementation defined, but is
   ideally about once every 200ms.
@@ -934,7 +934,7 @@ enum DRIVE_IDENTIFIER_KIND_UNIX_DEVICE = "unix-device";
 /**
     A key in the "access" namespace for checking deletion privileges.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
   
   This attribute will be true if the user is able to delete the file.
 */
@@ -943,7 +943,7 @@ enum FILE_ATTRIBUTE_ACCESS_CAN_DELETE = "access::can-delete";
 /**
     A key in the "access" namespace for getting execution privileges.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
   
   This attribute will be true if the user is able to execute the file.
 */
@@ -952,7 +952,7 @@ enum FILE_ATTRIBUTE_ACCESS_CAN_EXECUTE = "access::can-execute";
 /**
     A key in the "access" namespace for getting read privileges.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
   
   This attribute will be true if the user is able to read the file.
 */
@@ -961,7 +961,7 @@ enum FILE_ATTRIBUTE_ACCESS_CAN_READ = "access::can-read";
 /**
     A key in the "access" namespace for checking renaming privileges.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
   
   This attribute will be true if the user is able to rename the file.
 */
@@ -970,7 +970,7 @@ enum FILE_ATTRIBUTE_ACCESS_CAN_RENAME = "access::can-rename";
 /**
     A key in the "access" namespace for checking trashing privileges.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
   
   This attribute will be true if the user is able to move the file to
   the trash.
@@ -980,7 +980,7 @@ enum FILE_ATTRIBUTE_ACCESS_CAN_TRASH = "access::can-trash";
 /**
     A key in the "access" namespace for getting write privileges.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
   
   This attribute will be true if the user is able to write to the file.
 */
@@ -994,7 +994,7 @@ enum FILE_ATTRIBUTE_ACCESS_CAN_WRITE = "access::can-write";
   
   This attribute is only available for DOS file systems.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_DOS_IS_ARCHIVE = "dos::is-archive";
 
@@ -1007,7 +1007,7 @@ enum FILE_ATTRIBUTE_DOS_IS_ARCHIVE = "dos::is-archive";
   
   This attribute is only available for DOS file systems.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_DOS_IS_MOUNTPOINT = "dos::is-mountpoint";
 
@@ -1019,7 +1019,7 @@ enum FILE_ATTRIBUTE_DOS_IS_MOUNTPOINT = "dos::is-mountpoint";
   
   This attribute is only available for DOS file systems.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_DOS_IS_SYSTEM = "dos::is-system";
 
@@ -1031,7 +1031,7 @@ enum FILE_ATTRIBUTE_DOS_IS_SYSTEM = "dos::is-system";
   See the [Reparse Tags](https://msdn.microsoft.com/en-us/library/dd541667.aspx)
   page for possible reparse tag values.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_DOS_REPARSE_POINT_TAG = "dos::reparse-point-tag";
 
@@ -1039,7 +1039,7 @@ enum FILE_ATTRIBUTE_DOS_REPARSE_POINT_TAG = "dos::reparse-point-tag";
     A key in the "etag" namespace for getting the value of the file's
   entity tag.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
 */
 enum FILE_ATTRIBUTE_ETAG_VALUE = "etag::value";
 
@@ -1047,7 +1047,7 @@ enum FILE_ATTRIBUTE_ETAG_VALUE = "etag::value";
     A key in the "filesystem" namespace for getting the number of bytes
   of free space left on the file system.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint64].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint64].
 */
 enum FILE_ATTRIBUTE_FILESYSTEM_FREE = "filesystem::free";
 
@@ -1057,7 +1057,7 @@ enum FILE_ATTRIBUTE_FILESYSTEM_FREE = "filesystem::free";
   
   Is set to true if the file system is read only.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_FILESYSTEM_READONLY = "filesystem::readonly";
 
@@ -1067,7 +1067,7 @@ enum FILE_ATTRIBUTE_FILESYSTEM_READONLY = "filesystem::readonly";
   
   Is set to true if the file system is remote.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_FILESYSTEM_REMOTE = "filesystem::remote";
 
@@ -1075,14 +1075,14 @@ enum FILE_ATTRIBUTE_FILESYSTEM_REMOTE = "filesystem::remote";
     A key in the "filesystem" namespace for getting the total size (in
   bytes) of the file system, used in [gio.file.File.queryFilesystemInfo].
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint64].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint64].
 */
 enum FILE_ATTRIBUTE_FILESYSTEM_SIZE = "filesystem::size";
 
 /**
     A key in the "filesystem" namespace for getting the file system's type.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
 */
 enum FILE_ATTRIBUTE_FILESYSTEM_TYPE = "filesystem::type";
 
@@ -1090,7 +1090,7 @@ enum FILE_ATTRIBUTE_FILESYSTEM_TYPE = "filesystem::type";
     A key in the "filesystem" namespace for getting the number of bytes
   used by data on the file system.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint64].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint64].
 */
 enum FILE_ATTRIBUTE_FILESYSTEM_USED = "filesystem::used";
 
@@ -1107,14 +1107,14 @@ enum FILE_ATTRIBUTE_FILESYSTEM_USE_PREVIEW = "filesystem::use-preview";
     A key in the "gvfs" namespace that gets the name of the current
   GVFS backend in use.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
 */
 enum FILE_ATTRIBUTE_GVFS_BACKEND = "gvfs::backend";
 
 /**
     A key in the "id" namespace for getting a file identifier.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
   
   An example use would be during listing files, to avoid recursive
   directory scanning.
@@ -1124,7 +1124,7 @@ enum FILE_ATTRIBUTE_ID_FILE = "id::file";
 /**
     A key in the "id" namespace for getting the file system identifier.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
   
   An example use would be during drag and drop to see if the source
   and target are on the same filesystem (default to move) or not (default
@@ -1136,7 +1136,7 @@ enum FILE_ATTRIBUTE_ID_FILESYSTEM = "id::filesystem";
     A key in the "mountable" namespace for checking if a file (of
   type G_FILE_TYPE_MOUNTABLE) can be ejected.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_MOUNTABLE_CAN_EJECT = "mountable::can-eject";
 
@@ -1144,7 +1144,7 @@ enum FILE_ATTRIBUTE_MOUNTABLE_CAN_EJECT = "mountable::can-eject";
     A key in the "mountable" namespace for checking if a file (of
   type G_FILE_TYPE_MOUNTABLE) is mountable.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_MOUNTABLE_CAN_MOUNT = "mountable::can-mount";
 
@@ -1152,7 +1152,7 @@ enum FILE_ATTRIBUTE_MOUNTABLE_CAN_MOUNT = "mountable::can-mount";
     A key in the "mountable" namespace for checking if a file (of
   type G_FILE_TYPE_MOUNTABLE) can be polled.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_MOUNTABLE_CAN_POLL = "mountable::can-poll";
 
@@ -1160,7 +1160,7 @@ enum FILE_ATTRIBUTE_MOUNTABLE_CAN_POLL = "mountable::can-poll";
     A key in the "mountable" namespace for checking if a file (of
   type G_FILE_TYPE_MOUNTABLE) can be started.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_MOUNTABLE_CAN_START = "mountable::can-start";
 
@@ -1168,7 +1168,7 @@ enum FILE_ATTRIBUTE_MOUNTABLE_CAN_START = "mountable::can-start";
     A key in the "mountable" namespace for checking if a file (of
   type G_FILE_TYPE_MOUNTABLE) can be started degraded.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_MOUNTABLE_CAN_START_DEGRADED = "mountable::can-start-degraded";
 
@@ -1176,7 +1176,7 @@ enum FILE_ATTRIBUTE_MOUNTABLE_CAN_START_DEGRADED = "mountable::can-start-degrade
     A key in the "mountable" namespace for checking if a file (of
   type G_FILE_TYPE_MOUNTABLE) can be stopped.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_MOUNTABLE_CAN_STOP = "mountable::can-stop";
 
@@ -1184,7 +1184,7 @@ enum FILE_ATTRIBUTE_MOUNTABLE_CAN_STOP = "mountable::can-stop";
     A key in the "mountable" namespace for checking if a file (of
   type G_FILE_TYPE_MOUNTABLE)  is unmountable.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_MOUNTABLE_CAN_UNMOUNT = "mountable::can-unmount";
 
@@ -1192,7 +1192,7 @@ enum FILE_ATTRIBUTE_MOUNTABLE_CAN_UNMOUNT = "mountable::can-unmount";
     A key in the "mountable" namespace for getting the HAL UDI for the mountable
   file.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
 */
 enum FILE_ATTRIBUTE_MOUNTABLE_HAL_UDI = "mountable::hal-udi";
 
@@ -1200,35 +1200,35 @@ enum FILE_ATTRIBUTE_MOUNTABLE_HAL_UDI = "mountable::hal-udi";
     A key in the "mountable" namespace for checking if a file (of
   type G_FILE_TYPE_MOUNTABLE) is automatically polled for media.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_MOUNTABLE_IS_MEDIA_CHECK_AUTOMATIC = "mountable::is-media-check-automatic";
 
 /**
     A key in the "mountable" namespace for getting the #GDriveStartStopType.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_MOUNTABLE_START_STOP_TYPE = "mountable::start-stop-type";
 
 /**
     A key in the "mountable" namespace for getting the unix device.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_MOUNTABLE_UNIX_DEVICE = "mountable::unix-device";
 
 /**
     A key in the "mountable" namespace for getting the unix device file.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
 */
 enum FILE_ATTRIBUTE_MOUNTABLE_UNIX_DEVICE_FILE = "mountable::unix-device-file";
 
 /**
     A key in the "owner" namespace for getting the file owner's group.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
 */
 enum FILE_ATTRIBUTE_OWNER_GROUP = "owner::group";
 
@@ -1236,7 +1236,7 @@ enum FILE_ATTRIBUTE_OWNER_GROUP = "owner::group";
     A key in the "owner" namespace for getting the user name of the
   file's owner.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
 */
 enum FILE_ATTRIBUTE_OWNER_USER = "owner::user";
 
@@ -1244,7 +1244,7 @@ enum FILE_ATTRIBUTE_OWNER_USER = "owner::user";
     A key in the "owner" namespace for getting the real name of the
   user that owns the file.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
 */
 enum FILE_ATTRIBUTE_OWNER_USER_REAL = "owner::user-real";
 
@@ -1254,7 +1254,7 @@ enum FILE_ATTRIBUTE_OWNER_USER_REAL = "owner::user-real";
   
   For example, it may be a low resolution thumbnail without metadata.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Object].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.object].
   
   The value for this key should contain a #GIcon.
 */
@@ -1264,7 +1264,7 @@ enum FILE_ATTRIBUTE_PREVIEW_ICON = "preview::icon";
     A key in the "recent" namespace for getting time, when the metadata for the
   file in `recent:///` was last changed.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Int64].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.int64].
 */
 enum FILE_ATTRIBUTE_RECENT_MODIFIED = "recent::modified";
 
@@ -1272,7 +1272,7 @@ enum FILE_ATTRIBUTE_RECENT_MODIFIED = "recent::modified";
     A key in the "selinux" namespace for getting the file's SELinux
   context.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
   
   Note that this attribute is only available if GLib has been built
   with SELinux support.
@@ -1286,14 +1286,14 @@ enum FILE_ATTRIBUTE_SELINUX_CONTEXT = "selinux::context";
   This will generally be larger than the file size (due to block size
   overhead) but can occasionally be smaller (for example, for sparse files).
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint64].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint64].
 */
 enum FILE_ATTRIBUTE_STANDARD_ALLOCATED_SIZE = "standard::allocated-size";
 
 /**
     A key in the "standard" namespace for getting the content type of the file.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
   
   The value for this key should contain a valid content type.
 */
@@ -1308,7 +1308,7 @@ enum FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE = "standard::content-type";
   might have a different encoding. If the filename is not a valid string in the
   encoding selected for the filesystem it is in then the copy name will not be set.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
 */
 enum FILE_ATTRIBUTE_STANDARD_COPY_NAME = "standard::copy-name";
 
@@ -1321,7 +1321,7 @@ enum FILE_ATTRIBUTE_STANDARD_COPY_NAME = "standard::copy-name";
   for a file in the trash. This is useful for instance as the window title
   when displaying a directory or for a bookmarks menu.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
 */
 enum FILE_ATTRIBUTE_STANDARD_DESCRIPTION = "standard::description";
 
@@ -1331,7 +1331,7 @@ enum FILE_ATTRIBUTE_STANDARD_DESCRIPTION = "standard::description";
   A display name is guaranteed to be in UTF-8 and can thus be displayed in
   the UI. It is guaranteed to be set on every file.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
 */
 enum FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME = "standard::display-name";
 
@@ -1343,7 +1343,7 @@ enum FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME = "standard::display-name";
   might contain information you don't want in the new filename (such as
   "(invalid unicode)" if the filename was in an invalid encoding).
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
 */
 enum FILE_ATTRIBUTE_STANDARD_EDIT_NAME = "standard::edit-name";
 
@@ -1354,14 +1354,14 @@ enum FILE_ATTRIBUTE_STANDARD_EDIT_NAME = "standard::edit-name";
   only uses the filename to guess it, but it is faster to calculate than the
   regular content type.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
 */
 enum FILE_ATTRIBUTE_STANDARD_FAST_CONTENT_TYPE = "standard::fast-content-type";
 
 /**
     A key in the "standard" namespace for getting the icon for the file.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Object].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.object].
   
   The value for this key should contain a #GIcon.
 */
@@ -1370,14 +1370,14 @@ enum FILE_ATTRIBUTE_STANDARD_ICON = "standard::icon";
 /**
     A key in the "standard" namespace for checking if a file is a backup file.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_STANDARD_IS_BACKUP = "standard::is-backup";
 
 /**
     A key in the "standard" namespace for checking if a file is hidden.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_STANDARD_IS_HIDDEN = "standard::is-hidden";
 
@@ -1388,14 +1388,14 @@ enum FILE_ATTRIBUTE_STANDARD_IS_HIDDEN = "standard::is-hidden";
   
   On Windows NTFS mountpoints are considered to be symlinks as well.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_STANDARD_IS_SYMLINK = "standard::is-symlink";
 
 /**
     A key in the "standard" namespace for checking if a file is virtual.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_STANDARD_IS_VIRTUAL = "standard::is-virtual";
 
@@ -1405,7 +1405,7 @@ enum FILE_ATTRIBUTE_STANDARD_IS_VIRTUAL = "standard::is-virtual";
   indicate that the URI is not persistent. Applications should look
   at `G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET` for the persistent URI.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_STANDARD_IS_VOLATILE = "standard::is-volatile";
 
@@ -1419,21 +1419,21 @@ enum FILE_ATTRIBUTE_STANDARD_IS_VOLATILE = "standard::is-volatile";
   Use `G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME` if you need to display the
   name in a user interface.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.ByteString].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.byteString].
 */
 enum FILE_ATTRIBUTE_STANDARD_NAME = "standard::name";
 
 /**
     A key in the "standard" namespace for getting the file's size (in bytes).
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint64].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint64].
 */
 enum FILE_ATTRIBUTE_STANDARD_SIZE = "standard::size";
 
 /**
     A key in the "standard" namespace for setting the sort order of a file.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Int32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.int32].
   
   An example use would be in file managers, which would use this key
   to set the order files are displayed. Files with smaller sort order
@@ -1445,7 +1445,7 @@ enum FILE_ATTRIBUTE_STANDARD_SORT_ORDER = "standard::sort-order";
 /**
     A key in the "standard" namespace for getting the symbolic icon for the file.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Object].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.object].
   
   The value for this key should contain a #GIcon.
 */
@@ -1455,22 +1455,22 @@ enum FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON = "standard::symbolic-icon";
     A key in the "standard" namespace for getting the symlink target, if the file
   is a symlink.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.ByteString].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.byteString].
 */
 enum FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET = "standard::symlink-target";
 
 /**
     A key in the "standard" namespace for getting the target URI for the file, in
-  the case of [gio.types.FileType.Shortcut] or [gio.types.FileType.Mountable] files.
+  the case of [gio.types.FileType.shortcut] or [gio.types.FileType.mountable] files.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
 */
 enum FILE_ATTRIBUTE_STANDARD_TARGET_URI = "standard::target-uri";
 
 /**
     A key in the "standard" namespace for storing file types.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
   
   The value for this key should contain a #GFileType.
 */
@@ -1481,7 +1481,7 @@ enum FILE_ATTRIBUTE_STANDARD_TYPE = "standard::type";
   
   This attribute is true if thumbnailing failed.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_THUMBNAILING_FAILED = "thumbnail::failed";
 
@@ -1491,7 +1491,7 @@ enum FILE_ATTRIBUTE_THUMBNAILING_FAILED = "thumbnail::failed";
   
   This attribute is true if thumbnailing failed.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_THUMBNAILING_FAILED_LARGE = "thumbnail::failed-large";
 
@@ -1501,7 +1501,7 @@ enum FILE_ATTRIBUTE_THUMBNAILING_FAILED_LARGE = "thumbnail::failed-large";
   
   This attribute is true if thumbnailing failed.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_THUMBNAILING_FAILED_NORMAL = "thumbnail::failed-normal";
 
@@ -1511,7 +1511,7 @@ enum FILE_ATTRIBUTE_THUMBNAILING_FAILED_NORMAL = "thumbnail::failed-normal";
   
   This attribute is true if thumbnailing failed.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_THUMBNAILING_FAILED_XLARGE = "thumbnail::failed-xlarge";
 
@@ -1521,7 +1521,7 @@ enum FILE_ATTRIBUTE_THUMBNAILING_FAILED_XLARGE = "thumbnail::failed-xlarge";
   
   This attribute is true if thumbnailing failed.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_THUMBNAILING_FAILED_XXLARGE = "thumbnail::failed-xxlarge";
 
@@ -1534,7 +1534,7 @@ enum FILE_ATTRIBUTE_THUMBNAILING_FAILED_XXLARGE = "thumbnail::failed-xxlarge";
   If `G_FILE_ATTRIBUTE_THUMBNAILING_FAILED` is true and this attribute is false,
   it indicates that thumbnailing may be attempted again and may succeed.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_THUMBNAIL_IS_VALID = "thumbnail::is-valid";
 
@@ -1550,7 +1550,7 @@ enum FILE_ATTRIBUTE_THUMBNAIL_IS_VALID = "thumbnail::is-valid";
   is false, it indicates that thumbnailing may be attempted again and may
   succeed.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_THUMBNAIL_IS_VALID_LARGE = "thumbnail::is-valid-large";
 
@@ -1566,7 +1566,7 @@ enum FILE_ATTRIBUTE_THUMBNAIL_IS_VALID_LARGE = "thumbnail::is-valid-large";
   is false, it indicates that thumbnailing may be attempted again and may
   succeed.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_THUMBNAIL_IS_VALID_NORMAL = "thumbnail::is-valid-normal";
 
@@ -1582,7 +1582,7 @@ enum FILE_ATTRIBUTE_THUMBNAIL_IS_VALID_NORMAL = "thumbnail::is-valid-normal";
   is false, it indicates that thumbnailing may be attempted again and may
   succeed.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_THUMBNAIL_IS_VALID_XLARGE = "thumbnail::is-valid-xlarge";
 
@@ -1598,7 +1598,7 @@ enum FILE_ATTRIBUTE_THUMBNAIL_IS_VALID_XLARGE = "thumbnail::is-valid-xlarge";
   is false, it indicates that thumbnailing may be attempted again and may
   succeed.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_THUMBNAIL_IS_VALID_XXLARGE = "thumbnail::is-valid-xxlarge";
 
@@ -1606,7 +1606,7 @@ enum FILE_ATTRIBUTE_THUMBNAIL_IS_VALID_XXLARGE = "thumbnail::is-valid-xxlarge";
     A key in the "thumbnail" namespace for getting the path to the thumbnail
   image with the biggest size available.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.ByteString].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.byteString].
 */
 enum FILE_ATTRIBUTE_THUMBNAIL_PATH = "thumbnail::path";
 
@@ -1614,7 +1614,7 @@ enum FILE_ATTRIBUTE_THUMBNAIL_PATH = "thumbnail::path";
     A key in the "thumbnail" namespace for getting the path to the large
   thumbnail image.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.ByteString].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.byteString].
 */
 enum FILE_ATTRIBUTE_THUMBNAIL_PATH_LARGE = "thumbnail::path-large";
 
@@ -1622,7 +1622,7 @@ enum FILE_ATTRIBUTE_THUMBNAIL_PATH_LARGE = "thumbnail::path-large";
     A key in the "thumbnail" namespace for getting the path to the normal
   thumbnail image.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.ByteString].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.byteString].
 */
 enum FILE_ATTRIBUTE_THUMBNAIL_PATH_NORMAL = "thumbnail::path-normal";
 
@@ -1630,7 +1630,7 @@ enum FILE_ATTRIBUTE_THUMBNAIL_PATH_NORMAL = "thumbnail::path-normal";
     A key in the "thumbnail" namespace for getting the path to the x-large
   thumbnail image.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.ByteString].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.byteString].
 */
 enum FILE_ATTRIBUTE_THUMBNAIL_PATH_XLARGE = "thumbnail::path-xlarge";
 
@@ -1638,7 +1638,7 @@ enum FILE_ATTRIBUTE_THUMBNAIL_PATH_XLARGE = "thumbnail::path-xlarge";
     A key in the "thumbnail" namespace for getting the path to the xx-large
   thumbnail image.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.ByteString].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.byteString].
 */
 enum FILE_ATTRIBUTE_THUMBNAIL_PATH_XXLARGE = "thumbnail::path-xxlarge";
 
@@ -1646,7 +1646,7 @@ enum FILE_ATTRIBUTE_THUMBNAIL_PATH_XXLARGE = "thumbnail::path-xxlarge";
     A key in the "time" namespace for getting the time the file was last
   accessed.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint64], and
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint64], and
   contains the time since the file was last accessed, in seconds since the
   UNIX epoch.
 */
@@ -1656,7 +1656,7 @@ enum FILE_ATTRIBUTE_TIME_ACCESS = "time::access";
     A key in the "time" namespace for getting the nanoseconds of the time
   the file was last accessed. This should be used in conjunction with
   #G_FILE_ATTRIBUTE_TIME_ACCESS. Corresponding #GFileAttributeType is
-  [gio.types.FileAttributeType.Uint32].
+  [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_TIME_ACCESS_NSEC = "time::access-nsec";
 
@@ -1666,7 +1666,7 @@ enum FILE_ATTRIBUTE_TIME_ACCESS_NSEC = "time::access-nsec";
   
   This should be used in conjunction with `G_FILE_ATTRIBUTE_TIME_ACCESS`.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_TIME_ACCESS_USEC = "time::access-usec";
 
@@ -1674,7 +1674,7 @@ enum FILE_ATTRIBUTE_TIME_ACCESS_USEC = "time::access-usec";
     A key in the "time" namespace for getting the time the file was last
   changed.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint64],
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint64],
   and contains the time since the file was last changed, in seconds since
   the UNIX epoch.
   
@@ -1686,7 +1686,7 @@ enum FILE_ATTRIBUTE_TIME_CHANGED = "time::changed";
     A key in the "time" namespace for getting the nanoseconds of the time
   the file was last changed. This should be used in conjunction with
   #G_FILE_ATTRIBUTE_TIME_CHANGED. Corresponding #GFileAttributeType is
-  [gio.types.FileAttributeType.Uint32].
+  [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_TIME_CHANGED_NSEC = "time::changed-nsec";
 
@@ -1696,14 +1696,14 @@ enum FILE_ATTRIBUTE_TIME_CHANGED_NSEC = "time::changed-nsec";
   
   This should be used in conjunction with `G_FILE_ATTRIBUTE_TIME_CHANGED`.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_TIME_CHANGED_USEC = "time::changed-usec";
 
 /**
     A key in the "time" namespace for getting the time the file was created.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint64],
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint64],
   and contains the time since the file was created, in seconds since the UNIX
   epoch.
   
@@ -1716,7 +1716,7 @@ enum FILE_ATTRIBUTE_TIME_CREATED = "time::created";
     A key in the "time" namespace for getting the nanoseconds of the time
   the file was created. This should be used in conjunction with
   #G_FILE_ATTRIBUTE_TIME_CREATED. Corresponding #GFileAttributeType is
-  [gio.types.FileAttributeType.Uint32].
+  [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_TIME_CREATED_NSEC = "time::created-nsec";
 
@@ -1726,7 +1726,7 @@ enum FILE_ATTRIBUTE_TIME_CREATED_NSEC = "time::created-nsec";
   
   This should be used in conjunction with `G_FILE_ATTRIBUTE_TIME_CREATED`.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_TIME_CREATED_USEC = "time::created-usec";
 
@@ -1734,7 +1734,7 @@ enum FILE_ATTRIBUTE_TIME_CREATED_USEC = "time::created-usec";
     A key in the "time" namespace for getting the time the file was last
   modified.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint64], and
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint64], and
   contains the time since the file was modified, in seconds since the UNIX
   epoch.
 */
@@ -1744,7 +1744,7 @@ enum FILE_ATTRIBUTE_TIME_MODIFIED = "time::modified";
     A key in the "time" namespace for getting the nanoseconds of the time
   the file was last modified. This should be used in conjunction with
   #G_FILE_ATTRIBUTE_TIME_MODIFIED. Corresponding #GFileAttributeType is
-  [gio.types.FileAttributeType.Uint32].
+  [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_TIME_MODIFIED_NSEC = "time::modified-nsec";
 
@@ -1754,7 +1754,7 @@ enum FILE_ATTRIBUTE_TIME_MODIFIED_NSEC = "time::modified-nsec";
   
   This should be used in conjunction with `G_FILE_ATTRIBUTE_TIME_MODIFIED`.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_TIME_MODIFIED_USEC = "time::modified-usec";
 
@@ -1764,7 +1764,7 @@ enum FILE_ATTRIBUTE_TIME_MODIFIED_USEC = "time::modified-usec";
   
   The format of the returned string is `YYYY-MM-DDThh:mm:ss`.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.String].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.string_].
 */
 enum FILE_ATTRIBUTE_TRASH_DELETION_DATE = "trash::deletion-date";
 
@@ -1772,7 +1772,7 @@ enum FILE_ATTRIBUTE_TRASH_DELETION_DATE = "trash::deletion-date";
     A key in the "trash" namespace for getting the number of (toplevel) items
   that are present in the `trash:///` folder.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_TRASH_ITEM_COUNT = "trash::item-count";
 
@@ -1780,7 +1780,7 @@ enum FILE_ATTRIBUTE_TRASH_ITEM_COUNT = "trash::item-count";
     A key in the "trash" namespace for getting the original path of a file
   inside the `trash:///` folder before it was trashed.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.ByteString].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.byteString].
 */
 enum FILE_ATTRIBUTE_TRASH_ORIG_PATH = "trash::orig-path";
 
@@ -1790,7 +1790,7 @@ enum FILE_ATTRIBUTE_TRASH_ORIG_PATH = "trash::orig-path";
   
   This attribute is only available for UNIX file systems.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint64].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint64].
 */
 enum FILE_ATTRIBUTE_UNIX_BLOCKS = "unix::blocks";
 
@@ -1800,7 +1800,7 @@ enum FILE_ATTRIBUTE_UNIX_BLOCKS = "unix::blocks";
   
   This attribute is only available for UNIX file systems.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_UNIX_BLOCK_SIZE = "unix::block-size";
 
@@ -1810,7 +1810,7 @@ enum FILE_ATTRIBUTE_UNIX_BLOCK_SIZE = "unix::block-size";
   
   This attribute is only available for UNIX file systems.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_UNIX_DEVICE = "unix::device";
 
@@ -1819,7 +1819,7 @@ enum FILE_ATTRIBUTE_UNIX_DEVICE = "unix::device";
   
   This attribute is only available for UNIX file systems.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_UNIX_GID = "unix::gid";
 
@@ -1828,7 +1828,7 @@ enum FILE_ATTRIBUTE_UNIX_GID = "unix::gid";
   
   This attribute is only available for UNIX file systems.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint64].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint64].
 */
 enum FILE_ATTRIBUTE_UNIX_INODE = "unix::inode";
 
@@ -1842,7 +1842,7 @@ enum FILE_ATTRIBUTE_UNIX_INODE = "unix::inode";
   
   This attribute is only available for UNIX file systems.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Boolean].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.boolean].
 */
 enum FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT = "unix::is-mountpoint";
 
@@ -1856,7 +1856,7 @@ enum FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT = "unix::is-mountpoint";
   
   This attribute is only available for UNIX file systems.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_UNIX_MODE = "unix::mode";
 
@@ -1868,7 +1868,7 @@ enum FILE_ATTRIBUTE_UNIX_MODE = "unix::mode";
   
   This attribute is only available for UNIX file systems.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_UNIX_NLINK = "unix::nlink";
 
@@ -1880,7 +1880,7 @@ enum FILE_ATTRIBUTE_UNIX_NLINK = "unix::nlink";
   
   This attribute is only available for UNIX file systems.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_UNIX_RDEV = "unix::rdev";
 
@@ -1889,7 +1889,7 @@ enum FILE_ATTRIBUTE_UNIX_RDEV = "unix::rdev";
   
   This attribute is only available for UNIX file systems.
   
-  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.Uint32].
+  Corresponding #GFileAttributeType is [gio.types.FileAttributeType.uint32].
 */
 enum FILE_ATTRIBUTE_UNIX_UID = "unix::uid";
 

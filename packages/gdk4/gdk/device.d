@@ -22,7 +22,7 @@ import pango.types;
 class Device : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -59,7 +59,7 @@ class Device : gobject.object.ObjectG
   {
     GdkDeviceTool* _cretval;
     _cretval = gdk_device_get_device_tool(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.take);
     return _retval;
   }
 
@@ -70,8 +70,8 @@ class Device : gobject.object.ObjectG
     
     The direction of a layout is the direction of the majority
     of its symbols. See `funcPango.unichar_direction`.
-    Returns:     [pango.types.Direction.Ltr] or [pango.types.Direction.Rtl]
-        if it can determine the direction. [pango.types.Direction.Neutral]
+    Returns:     [pango.types.Direction.ltr] or [pango.types.Direction.rtl]
+        if it can determine the direction. [pango.types.Direction.neutral]
         otherwise
   */
   pango.types.Direction getDirection()
@@ -90,7 +90,7 @@ class Device : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_device_get_display(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class Device : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_device_get_name(cast(GdkDevice*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class Device : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_device_get_product_id(cast(GdkDevice*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class Device : gobject.object.ObjectG
   {
     GdkSeat* _cretval;
     _cretval = gdk_device_get_seat(cast(GdkDevice*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.take);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ class Device : gobject.object.ObjectG
   {
     GdkSurface* _cretval;
     _cretval = gdk_device_get_surface_at_position(cast(GdkDevice*)cPtr, cast(double*)&winX, cast(double*)&winY);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.take);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class Device : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_device_get_vendor_id(cast(GdkDevice*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -323,10 +323,10 @@ class Device : gobject.object.ObjectG
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -359,10 +359,10 @@ class Device : gobject.object.ObjectG
     Connect to ToolChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToolChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectToolChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ToolChangedCallbackDlg) || is(T : ToolChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

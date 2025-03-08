@@ -64,13 +64,13 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.flow_box.FlowBox] uses the [gtk.types.AccessibleRole.Grid] role, and [gtk.flow_box_child.FlowBoxChild]
-  uses the [gtk.types.AccessibleRole.GridCell] role.
+  [gtk.flow_box.FlowBox] uses the [gtk.types.AccessibleRole.grid] role, and [gtk.flow_box_child.FlowBoxChild]
+  uses the [gtk.types.AccessibleRole.gridCell] role.
 */
 class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -96,7 +96,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_flow_box_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -111,7 +111,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void append(gtk.widget.Widget child)
   {
-    gtk_flow_box_append(cast(GtkFlowBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_flow_box_append(cast(GtkFlowBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -141,8 +141,8 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       gtk.widget.Widget _dretval;
       auto _dlg = cast(gtk.types.FlowBoxCreateWidgetFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.Take));
-      GtkWidget* _retval = cast(GtkWidget*)_dretval.cPtr(Yes.Dup);
+      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.take));
+      GtkWidget* _retval = cast(GtkWidget*)_dretval.cPtr(Yes.dup);
 
       return _retval;
     }
@@ -150,7 +150,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
 
     auto _createWidgetFunc = createWidgetFunc ? freezeDelegate(cast(void*)&createWidgetFunc) : null;
     GDestroyNotify _createWidgetFuncDestroyCB = createWidgetFunc ? &thawDelegate : null;
-    gtk_flow_box_bind_model(cast(GtkFlowBox*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null, _createWidgetFuncCB, _createWidgetFunc, _createWidgetFuncDestroyCB);
+    gtk_flow_box_bind_model(cast(GtkFlowBox*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.dup) : null, _createWidgetFuncCB, _createWidgetFunc, _createWidgetFuncDestroyCB);
   }
 
   /**
@@ -177,7 +177,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkFlowBoxChild* _cretval;
     _cretval = gtk_flow_box_get_child_at_index(cast(GtkFlowBox*)cPtr, idx);
-    auto _retval = ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(GtkFlowBoxChild*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(GtkFlowBoxChild*)_cretval, No.take);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkFlowBoxChild* _cretval;
     _cretval = gtk_flow_box_get_child_at_pos(cast(GtkFlowBox*)cPtr, x, y);
-    auto _retval = ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(GtkFlowBoxChild*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(GtkFlowBoxChild*)_cretval, No.take);
     return _retval;
   }
 
@@ -294,7 +294,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void insert(gtk.widget.Widget widget, int position)
   {
-    gtk_flow_box_insert(cast(GtkFlowBox*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, position);
+    gtk_flow_box_insert(cast(GtkFlowBox*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, position);
   }
 
   /**
@@ -334,7 +334,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void prepend(gtk.widget.Widget child)
   {
-    gtk_flow_box_prepend(cast(GtkFlowBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_flow_box_prepend(cast(GtkFlowBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -344,7 +344,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void remove(gtk.widget.Widget widget)
   {
-    gtk_flow_box_remove(cast(GtkFlowBox*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_flow_box_remove(cast(GtkFlowBox*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
   }
 
   /**
@@ -374,7 +374,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void selectChild(gtk.flow_box_child.FlowBoxChild child)
   {
-    gtk_flow_box_select_child(cast(GtkFlowBox*)cPtr, child ? cast(GtkFlowBoxChild*)child.cPtr(No.Dup) : null);
+    gtk_flow_box_select_child(cast(GtkFlowBox*)cPtr, child ? cast(GtkFlowBoxChild*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -391,7 +391,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
     {
       auto _dlg = cast(gtk.types.FlowBoxForeachFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.flow_box.FlowBox)(cast(void*)box, No.Take), ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gtk.flow_box.FlowBox)(cast(void*)box, No.take), ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -444,7 +444,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
     {
       auto _dlg = cast(gtk.types.FlowBoxFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.take));
       return _retval;
     }
     auto _filterFuncCB = filterFunc ? &_filterFuncCallback : null;
@@ -472,7 +472,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setHadjustment(gtk.adjustment.Adjustment adjustment)
   {
-    gtk_flow_box_set_hadjustment(cast(GtkFlowBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_flow_box_set_hadjustment(cast(GtkFlowBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
   }
 
   /**
@@ -554,7 +554,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
     {
       auto _dlg = cast(gtk.types.FlowBoxSortFunc*)userData;
 
-      int _retval = (*_dlg)(ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child1, No.Take), ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child2, No.Take));
+      int _retval = (*_dlg)(ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child1, No.take), ObjectG.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child2, No.take));
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
@@ -582,7 +582,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setVadjustment(gtk.adjustment.Adjustment adjustment)
   {
-    gtk_flow_box_set_vadjustment(cast(GtkFlowBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_flow_box_set_vadjustment(cast(GtkFlowBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
   }
 
   /**
@@ -602,7 +602,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void unselectChild(gtk.flow_box_child.FlowBoxChild child)
   {
-    gtk_flow_box_unselect_child(cast(GtkFlowBox*)cPtr, child ? cast(GtkFlowBoxChild*)child.cPtr(No.Dup) : null);
+    gtk_flow_box_unselect_child(cast(GtkFlowBox*)cPtr, child ? cast(GtkFlowBoxChild*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -624,10 +624,10 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
     Connect to ActivateCursorChild signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivateCursorChild(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivateCursorChild(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateCursorChildCallbackDlg) || is(T : ActivateCursorChildCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -660,10 +660,10 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
     Connect to ChildActivated signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChildActivated(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChildActivated(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChildActivatedCallbackDlg) || is(T : ChildActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -719,10 +719,10 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
     Connect to MoveCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMoveCursor(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -765,10 +765,10 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
     Connect to SelectAll signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSelectAll(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SelectAllCallbackDlg) || is(T : SelectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -804,10 +804,10 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
     Connect to SelectedChildrenChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectedChildrenChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSelectedChildrenChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SelectedChildrenChangedCallbackDlg) || is(T : SelectedChildrenChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -843,10 +843,10 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
     Connect to ToggleCursorChild signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToggleCursorChild(T)(T callback, Flag!"After" after = No.After)
+  ulong connectToggleCursorChild(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ToggleCursorChildCallbackDlg) || is(T : ToggleCursorChildCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -883,10 +883,10 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
     Connect to UnselectAll signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
+  ulong connectUnselectAll(T)(T callback, Flag!"after" after = No.after)
   if (is(T : UnselectAllCallbackDlg) || is(T : UnselectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

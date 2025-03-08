@@ -15,7 +15,7 @@ class SequenceIter
   GSequenceIter* cInstancePtr;
   bool owned;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.SequenceIter");
@@ -66,7 +66,7 @@ class SequenceIter
   {
     GSequence* _cretval;
     _cretval = g_sequence_iter_get_sequence(cast(GSequenceIter*)cPtr);
-    auto _retval = _cretval ? new glib.sequence.Sequence(cast(GSequence*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.sequence.Sequence(cast(GSequence*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class SequenceIter
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_iter_move(cast(GSequenceIter*)cPtr, delta);
-    auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class SequenceIter
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_iter_next(cast(GSequenceIter*)cPtr);
-    auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class SequenceIter
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_iter_prev(cast(GSequenceIter*)cPtr);
-    auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.take) : null;
     return _retval;
   }
 }

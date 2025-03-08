@@ -16,12 +16,12 @@ import gstsdp.types;
 class MIKEYMessage : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -105,7 +105,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   {
     GstMIKEYMessage* _cretval;
     _cretval = gst_mikey_message_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -119,10 +119,10 @@ class MIKEYMessage : gobject.boxed.Boxed
   {
     GstMIKEYMessage* _cretval;
     GError *_err;
-    _cretval = gst_mikey_message_new_from_bytes(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, info, &_err);
+    _cretval = gst_mikey_message_new_from_bytes(bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null, info, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new gstsdp.mikeymessage.MIKEYMessage(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gstsdp.mikeymessage.MIKEYMessage(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -141,8 +141,8 @@ class MIKEYMessage : gobject.boxed.Boxed
   static gstsdp.mikeymessage.MIKEYMessage newFromCaps(gst.caps.Caps caps)
   {
     GstMIKEYMessage* _cretval;
-    _cretval = gst_mikey_message_new_from_caps(caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gstsdp.mikeymessage.MIKEYMessage(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_mikey_message_new_from_caps(caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gstsdp.mikeymessage.MIKEYMessage(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class MIKEYMessage : gobject.boxed.Boxed
     _cretval = gst_mikey_message_new_from_data(_data, _size, info, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new gstsdp.mikeymessage.MIKEYMessage(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gstsdp.mikeymessage.MIKEYMessage(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool addPayload(gstsdp.mikeypayload.MIKEYPayload payload)
   {
     bool _retval;
-    _retval = gst_mikey_message_add_payload(cast(GstMIKEYMessage*)cPtr, payload ? cast(GstMIKEYPayload*)payload.cPtr(Yes.Dup) : null);
+    _retval = gst_mikey_message_add_payload(cast(GstMIKEYMessage*)cPtr, payload ? cast(GstMIKEYPayload*)payload.cPtr(Yes.dup) : null);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_mikey_message_base64_encode(cast(GstMIKEYMessage*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   {
     const(GstMIKEYPayload)* _cretval;
     _cretval = gst_mikey_message_find_payload(cast(const(GstMIKEYMessage)*)cPtr, type, nth);
-    auto _retval = _cretval ? new gstsdp.mikeypayload.MIKEYPayload(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstsdp.mikeypayload.MIKEYPayload(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -334,7 +334,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   {
     const(GstMIKEYPayload)* _cretval;
     _cretval = gst_mikey_message_get_payload(cast(const(GstMIKEYMessage)*)cPtr, idx);
-    auto _retval = _cretval ? new gstsdp.mikeypayload.MIKEYPayload(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gstsdp.mikeypayload.MIKEYPayload(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -365,7 +365,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool insertPayload(uint idx, gstsdp.mikeypayload.MIKEYPayload payload)
   {
     bool _retval;
-    _retval = gst_mikey_message_insert_payload(cast(GstMIKEYMessage*)cPtr, idx, payload ? cast(GstMIKEYPayload*)payload.cPtr(Yes.Dup) : null);
+    _retval = gst_mikey_message_insert_payload(cast(GstMIKEYMessage*)cPtr, idx, payload ? cast(GstMIKEYPayload*)payload.cPtr(Yes.dup) : null);
     return _retval;
   }
 
@@ -419,7 +419,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool replacePayload(uint idx, gstsdp.mikeypayload.MIKEYPayload payload)
   {
     bool _retval;
-    _retval = gst_mikey_message_replace_payload(cast(GstMIKEYMessage*)cPtr, idx, payload ? cast(GstMIKEYPayload*)payload.cPtr(Yes.Dup) : null);
+    _retval = gst_mikey_message_replace_payload(cast(GstMIKEYMessage*)cPtr, idx, payload ? cast(GstMIKEYPayload*)payload.cPtr(Yes.dup) : null);
     return _retval;
   }
 
@@ -454,7 +454,7 @@ class MIKEYMessage : gobject.boxed.Boxed
     _cretval = gst_mikey_message_to_bytes(cast(GstMIKEYMessage*)cPtr, info, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -462,7 +462,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   bool toCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_mikey_message_to_caps(cast(const(GstMIKEYMessage)*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    _retval = gst_mikey_message_to_caps(cast(const(GstMIKEYMessage)*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
     return _retval;
   }
 }

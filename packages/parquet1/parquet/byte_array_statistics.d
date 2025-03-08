@@ -11,7 +11,7 @@ import parquet.types;
 class ByteArrayStatistics : parquet.statistics.Statistics
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,7 +32,7 @@ class ByteArrayStatistics : parquet.statistics.Statistics
   {
     GBytes* _cretval;
     _cretval = gparquet_byte_array_statistics_get_max(cast(GParquetByteArrayStatistics*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -41,7 +41,7 @@ class ByteArrayStatistics : parquet.statistics.Statistics
   {
     GBytes* _cretval;
     _cretval = gparquet_byte_array_statistics_get_min(cast(GParquetByteArrayStatistics*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

@@ -13,12 +13,12 @@ import gstvideo.types;
 class VideoVBIEncoder : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -46,7 +46,7 @@ class VideoVBIEncoder : gobject.boxed.Boxed
   {
     GstVideoVBIEncoder* _cretval;
     _cretval = gst_video_vbi_encoder_new(format, pixelWidth);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -81,7 +81,7 @@ class VideoVBIEncoder : gobject.boxed.Boxed
   {
     GstVideoVBIEncoder* _cretval;
     _cretval = gst_video_vbi_encoder_copy(cast(const(GstVideoVBIEncoder)*)cPtr);
-    auto _retval = _cretval ? new gstvideo.video_vbiencoder.VideoVBIEncoder(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gstvideo.video_vbiencoder.VideoVBIEncoder(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

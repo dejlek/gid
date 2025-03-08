@@ -15,7 +15,7 @@ import gstglegl.types;
 class GLDisplayEGL : gstgl.gldisplay.GLDisplay
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -39,7 +39,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   {
     GstGLDisplayEGL* _cretval;
     _cretval = gst_gl_display_egl_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -51,7 +51,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   {
     GstGLDisplayEGL* _cretval;
     _cretval = gst_gl_display_egl_new_surfaceless();
-    auto _retval = ObjectG.getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -60,7 +60,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   {
     GstGLDisplayEGL* _cretval;
     _cretval = gst_gl_display_egl_new_with_egl_display(display);
-    auto _retval = ObjectG.getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, No.take);
     return _retval;
   }
 
@@ -76,15 +76,15 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   static gstglegl.gldisplay_egl.GLDisplayEGL fromGlDisplay(gstgl.gldisplay.GLDisplay display)
   {
     GstGLDisplayEGL* _cretval;
-    _cretval = gst_gl_display_egl_from_gl_display(display ? cast(GstGLDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, Yes.Take);
+    _cretval = gst_gl_display_egl_from_gl_display(display ? cast(GstGLDisplay*)display.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, Yes.take);
     return _retval;
   }
 
   /**
       Attempts to create a new `EGLDisplay` from display.  If type is
-    [gstgl.types.GLDisplayType.Any] or [gstgl.types.GLDisplayType.EglSurfaceless], then
-    display must be 0. type must not be [gstgl.types.GLDisplayType.None].
+    [gstgl.types.GLDisplayType.any] or [gstgl.types.GLDisplayType.eglSurfaceless], then
+    display must be 0. type must not be [gstgl.types.GLDisplayType.none].
     Params:
       type =       a #GstGLDisplayType
       display =       pointer to a display (or 0)

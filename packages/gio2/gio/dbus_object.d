@@ -66,10 +66,10 @@ interface DBusObject
     Connect to InterfaceAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectInterfaceAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : InterfaceAddedCallbackDlg) || is(T : InterfaceAddedCallbackFunc));
 
   /**
@@ -90,9 +90,9 @@ interface DBusObject
     Connect to InterfaceRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectInterfaceRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : InterfaceRemovedCallbackDlg) || is(T : InterfaceRemovedCallbackFunc));
   }

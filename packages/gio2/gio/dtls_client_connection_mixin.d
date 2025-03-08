@@ -28,7 +28,7 @@ template DtlsClientConnectionT()
   {
     GSocketConnectable* _cretval;
     _cretval = g_dtls_client_connection_get_server_identity(cast(GDtlsClientConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket_connectable.SocketConnectable)(cast(GSocketConnectable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_connectable.SocketConnectable)(cast(GSocketConnectable*)_cretval, No.take);
     return _retval;
   }
 
@@ -54,19 +54,19 @@ template DtlsClientConnectionT()
       Sets conn's expected server identity, which is used both to tell
     servers on virtual hosts which certificate to present, and also
     to let conn know what name to look for in the certificate when
-    performing [gio.types.TlsCertificateFlags.BadIdentity] validation, if enabled.
+    performing [gio.types.TlsCertificateFlags.badIdentity] validation, if enabled.
     Params:
       identity =       a #GSocketConnectable describing the expected server identity
   */
   override void setServerIdentity(gio.socket_connectable.SocketConnectable identity)
   {
-    g_dtls_client_connection_set_server_identity(cast(GDtlsClientConnection*)cPtr, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.Dup) : null);
+    g_dtls_client_connection_set_server_identity(cast(GDtlsClientConnection*)cPtr, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.dup) : null);
   }
 
   /**
       Sets conn's validation flags, to override the default set of
     checks performed when validating a server certificate. By default,
-    [gio.types.TlsCertificateFlags.ValidateAll] is used.
+    [gio.types.TlsCertificateFlags.validateAll] is used.
     
     This function does not work as originally designed and is impossible
     to use correctly. See #GDtlsClientConnection:validation-flags for more

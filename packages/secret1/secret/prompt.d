@@ -38,7 +38,7 @@ import secret.types;
 class Prompt : gio.dbus_proxy.DBusProxy
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -79,13 +79,13 @@ class Prompt : gio.dbus_proxy.DBusProxy
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _windowId = windowId.toCString(No.Alloc);
+    const(char)* _windowId = windowId.toCString(No.alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_prompt_perform(cast(SecretPrompt*)cPtr, _windowId, returnType ? cast(const(GVariantType)*)returnType.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_prompt_perform(cast(SecretPrompt*)cPtr, _windowId, returnType ? cast(const(GVariantType)*)returnType.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -103,10 +103,10 @@ class Prompt : gio.dbus_proxy.DBusProxy
   {
     VariantC* _cretval;
     GError *_err;
-    _cretval = secret_prompt_perform_finish(cast(SecretPrompt*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = secret_prompt_perform_finish(cast(SecretPrompt*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -134,12 +134,12 @@ class Prompt : gio.dbus_proxy.DBusProxy
   glib.variant.VariantG performSync(string windowId, gio.cancellable.Cancellable cancellable, glib.variant_type.VariantType returnType)
   {
     VariantC* _cretval;
-    const(char)* _windowId = windowId.toCString(No.Alloc);
+    const(char)* _windowId = windowId.toCString(No.alloc);
     GError *_err;
-    _cretval = secret_prompt_perform_sync(cast(SecretPrompt*)cPtr, _windowId, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, returnType ? cast(const(GVariantType)*)returnType.cPtr(No.Dup) : null, &_err);
+    _cretval = secret_prompt_perform_sync(cast(SecretPrompt*)cPtr, _windowId, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, returnType ? cast(const(GVariantType)*)returnType.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -169,12 +169,12 @@ class Prompt : gio.dbus_proxy.DBusProxy
   glib.variant.VariantG run(string windowId, gio.cancellable.Cancellable cancellable, glib.variant_type.VariantType returnType)
   {
     VariantC* _cretval;
-    const(char)* _windowId = windowId.toCString(No.Alloc);
+    const(char)* _windowId = windowId.toCString(No.alloc);
     GError *_err;
-    _cretval = secret_prompt_run(cast(SecretPrompt*)cPtr, _windowId, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, returnType ? cast(const(GVariantType)*)returnType.cPtr(No.Dup) : null, &_err);
+    _cretval = secret_prompt_run(cast(SecretPrompt*)cPtr, _windowId, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, returnType ? cast(const(GVariantType)*)returnType.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

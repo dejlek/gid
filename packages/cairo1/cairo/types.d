@@ -218,8 +218,8 @@ alias RasterSourceSnapshotFunc = cairo.types.Status delegate(cairo.pattern.Patte
   closure which was specified by the user at the time the read
   function was registered, the buffer to read the data into and the
   length of the data in bytes.  The read function should return
-  [cairo.types.Status.Success] if all the data was successfully read,
-  [cairo.types.Status.ReadError] otherwise.
+  [cairo.types.Status.success] if all the data was successfully read,
+  [cairo.types.Status.readError] otherwise.
 
   ## Parameters
   $(LIST
@@ -269,7 +269,7 @@ alias SurfaceObserverCallback = void delegate(cairo.surface.Surface observer, ca
     * $(B cr)       a cairo context, in font space
     * $(B extents)       font extents to fill in, in font space
   )
-  Returns:     [cairo.types.Status.Success] upon success, or an error status on error.
+  Returns:     [cairo.types.Status.success] upon success, or an error status on error.
 */
 alias UserScaledFontInitFunc = cairo.types.Status delegate(cairo.scaled_font.ScaledFont scaledFont, cairo.context.Context cr, cairo.types.FontExtents extents);
 
@@ -320,9 +320,9 @@ alias UserScaledFontInitFunc = cairo.types.Status delegate(cairo.scaled_font.Sca
   [cairo.global.userFontFaceSetRenderColorGlyphFunc], and
   [cairo.global.userFontFaceSetRenderGlyphFunc], the color glyph
   callback will be called first. If the color glyph callback returns
-  [cairo.types.Status.UserFontNotImplemented], any drawing operations are
+  [cairo.types.Status.userFontNotImplemented], any drawing operations are
   discarded and the non-color callback will be called. This is the
-  only case in which the [cairo.types.Status.UserFontNotImplemented] may
+  only case in which the [cairo.types.Status.userFontNotImplemented] may
   be returned from a render callback. This fallback sequence allows a
   user font face to contain a combination of both color and non-color
   glyphs.
@@ -334,9 +334,9 @@ alias UserScaledFontInitFunc = cairo.types.Status delegate(cairo.scaled_font.Sca
     * $(B cr)       cairo context to draw to, in font space
     * $(B extents)       glyph extents to fill in, in font space
   )
-  Returns:     [cairo.types.Status.Success] upon success,
-    [cairo.types.Status.UserFontNotImplemented] if fallback options should be tried,
-    or [cairo.types.Status.UserFontError] or any other error status on error.
+  Returns:     [cairo.types.Status.success] upon success,
+    [cairo.types.Status.userFontNotImplemented] if fallback options should be tried,
+    or [cairo.types.Status.userFontError] or any other error status on error.
 */
 alias UserScaledFontRenderGlyphFunc = cairo.types.Status delegate(cairo.scaled_font.ScaledFont scaledFont, gulong glyph, cairo.context.Context cr, cairo.types.TextExtents extents);
 
@@ -356,7 +356,7 @@ alias UserScaledFontRenderGlyphFunc = cairo.types.Status delegate(cairo.scaled_f
   
   The callback is optional, and only used if text_to_glyphs callback is not
   set or fails to return glyphs.  If this callback is not set or if it returns
-  [cairo.types.Status.UserFontNotImplemented], an identity mapping from Unicode
+  [cairo.types.Status.userFontNotImplemented], an identity mapping from Unicode
   code-points to glyph indices is assumed.
   
   Note: While cairo does not impose any limitation on glyph indices,
@@ -373,9 +373,9 @@ alias UserScaledFontRenderGlyphFunc = cairo.types.Status delegate(cairo.scaled_f
     * $(B unicode)       input unicode character code-point
     * $(B glyphIndex)       output glyph index
   )
-  Returns:     [cairo.types.Status.Success] upon success,
-    [cairo.types.Status.UserFontNotImplemented] if fallback options should be tried,
-    or [cairo.types.Status.UserFontError] or any other error status on error.
+  Returns:     [cairo.types.Status.success] upon success,
+    [cairo.types.Status.userFontNotImplemented] if fallback options should be tried,
+    or [cairo.types.Status.userFontError] or any other error status on error.
 */
 alias UserScaledFontUnicodeToGlyphFunc = cairo.types.Status delegate(cairo.scaled_font.ScaledFont scaledFont, gulong unicode, out gulong glyphIndex);
 
@@ -385,8 +385,8 @@ alias UserScaledFontUnicodeToGlyphFunc = cairo.types.Status delegate(cairo.scale
   closure which was specified by the user at the time the write
   function was registered, the data to write and the length of the
   data in bytes.  The write function should return
-  [cairo.types.Status.Success] if all the data was successfully written,
-  [cairo.types.Status.WriteError] otherwise.
+  [cairo.types.Status.success] if all the data was successfully written,
+  [cairo.types.Status.writeError] otherwise.
 
   ## Parameters
   $(LIST

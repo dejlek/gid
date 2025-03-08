@@ -39,7 +39,7 @@ import pango.language;
 class FontDialogButton : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -68,8 +68,8 @@ class FontDialogButton : gtk.widget.Widget
   this(gtk.font_dialog.FontDialog dialog = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_font_dialog_button_new(dialog ? cast(GtkFontDialog*)dialog.cPtr(Yes.Dup) : null);
-    this(_cretval, No.Take);
+    _cretval = gtk_font_dialog_button_new(dialog ? cast(GtkFontDialog*)dialog.cPtr(Yes.dup) : null);
+    this(_cretval, No.take);
   }
 
   /**
@@ -80,7 +80,7 @@ class FontDialogButton : gtk.widget.Widget
   {
     GtkFontDialog* _cretval;
     _cretval = gtk_font_dialog_button_get_dialog(cast(GtkFontDialogButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.font_dialog.FontDialog)(cast(GtkFontDialog*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.font_dialog.FontDialog)(cast(GtkFontDialog*)_cretval, No.take);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class FontDialogButton : gtk.widget.Widget
   {
     PangoFontDescription* _cretval;
     _cretval = gtk_font_dialog_button_get_font_desc(cast(GtkFontDialogButton*)cPtr);
-    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -109,14 +109,14 @@ class FontDialogButton : gtk.widget.Widget
     
     Note that the button will only let users choose font features
     if [gtk.font_dialog_button.FontDialogButton.FontLevel] is set to
-    [gtk.types.FontLevel.Features].
+    [gtk.types.FontLevel.features].
     Returns:     the font features
   */
   string getFontFeatures()
   {
     const(char)* _cretval;
     _cretval = gtk_font_dialog_button_get_font_features(cast(GtkFontDialogButton*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class FontDialogButton : gtk.widget.Widget
   {
     PangoLanguage* _cretval;
     _cretval = gtk_font_dialog_button_get_language(cast(GtkFontDialogButton*)cPtr);
-    auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class FontDialogButton : gtk.widget.Widget
   */
   void setDialog(gtk.font_dialog.FontDialog dialog)
   {
-    gtk_font_dialog_button_set_dialog(cast(GtkFontDialogButton*)cPtr, dialog ? cast(GtkFontDialog*)dialog.cPtr(No.Dup) : null);
+    gtk_font_dialog_button_set_dialog(cast(GtkFontDialogButton*)cPtr, dialog ? cast(GtkFontDialog*)dialog.cPtr(No.dup) : null);
   }
 
   /**
@@ -186,7 +186,7 @@ class FontDialogButton : gtk.widget.Widget
   */
   void setFontDesc(pango.font_description.FontDescription fontDesc)
   {
-    gtk_font_dialog_button_set_font_desc(cast(GtkFontDialogButton*)cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc.cPtr(No.Dup) : null);
+    gtk_font_dialog_button_set_font_desc(cast(GtkFontDialogButton*)cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc.cPtr(No.dup) : null);
   }
 
   /**
@@ -196,7 +196,7 @@ class FontDialogButton : gtk.widget.Widget
   */
   void setFontFeatures(string fontFeatures = null)
   {
-    const(char)* _fontFeatures = fontFeatures.toCString(No.Alloc);
+    const(char)* _fontFeatures = fontFeatures.toCString(No.alloc);
     gtk_font_dialog_button_set_font_features(cast(GtkFontDialogButton*)cPtr, _fontFeatures);
   }
 
@@ -207,7 +207,7 @@ class FontDialogButton : gtk.widget.Widget
   */
   void setLanguage(pango.language.Language language = null)
   {
-    gtk_font_dialog_button_set_language(cast(GtkFontDialogButton*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    gtk_font_dialog_button_set_language(cast(GtkFontDialogButton*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.dup) : null);
   }
 
   /**
@@ -265,10 +265,10 @@ class FontDialogButton : gtk.widget.Widget
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

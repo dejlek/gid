@@ -13,7 +13,7 @@ class BuildableParseContext
   GtkBuildableParseContext* cInstancePtr;
   bool owned;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.BuildableParseContext");
@@ -40,7 +40,7 @@ class BuildableParseContext
   {
     const(char)* _cretval;
     _cretval = gtk_buildable_parse_context_get_element(cast(GtkBuildableParseContext*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 

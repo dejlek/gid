@@ -25,7 +25,7 @@ import gtk.types;
 class GridLayout : gtk.layout_manager.LayoutManager
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,7 +49,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_grid_layout_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -90,7 +90,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
     
     If no value has been set with
     [gtk.grid_layout.GridLayout.setRowBaselinePosition],
-    the default value of [gtk.types.BaselinePosition.Center]
+    the default value of [gtk.types.BaselinePosition.center]
     is returned.
     Params:
       row =       a row index

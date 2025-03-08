@@ -97,7 +97,7 @@ string audioChannelPositionsToString(gstaudio.types.AudioChannelPosition[] posit
 
   auto _position = cast(const(GstAudioChannelPosition)*)position.ptr;
   _cretval = gst_audio_channel_positions_to_string(_position, _channels);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
   return _retval;
 }
 
@@ -296,7 +296,7 @@ gst.caps.Caps audioMakeRawCaps(gstaudio.types.AudioFormat[] formats, gstaudio.ty
 
   auto _formats = cast(const(GstAudioFormat)*)formats.ptr;
   _cretval = gst_audio_make_raw_caps(_formats, _len, layout);
-  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+  auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
   return _retval;
 }
 
@@ -355,7 +355,7 @@ bool audioReorderChannels(ubyte[] data, gstaudio.types.AudioFormat format, gstau
 gstaudio.audio_clipping_meta.AudioClippingMeta bufferAddAudioClippingMeta(gst.buffer.Buffer buffer, gst.types.Format format, ulong start, ulong end)
 {
   GstAudioClippingMeta* _cretval;
-  _cretval = gst_buffer_add_audio_clipping_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, format, start, end);
+  _cretval = gst_buffer_add_audio_clipping_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null, format, start, end);
   auto _retval = _cretval ? new gstaudio.audio_clipping_meta.AudioClippingMeta(cast(GstAudioClippingMeta*)_cretval) : null;
   return _retval;
 }
@@ -371,7 +371,7 @@ gstaudio.audio_clipping_meta.AudioClippingMeta bufferAddAudioClippingMeta(gst.bu
 gstaudio.audio_level_meta.AudioLevelMeta bufferAddAudioLevelMeta(gst.buffer.Buffer buffer, ubyte level, bool voiceActivity)
 {
   GstAudioLevelMeta* _cretval;
-  _cretval = gst_buffer_add_audio_level_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, level, voiceActivity);
+  _cretval = gst_buffer_add_audio_level_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null, level, voiceActivity);
   auto _retval = _cretval ? new gstaudio.audio_level_meta.AudioLevelMeta(cast(GstAudioLevelMeta*)_cretval) : null;
   return _retval;
 }
@@ -393,7 +393,7 @@ gstaudio.audio_downmix_meta.AudioDownmixMeta bufferGetAudioDownmixMetaForChannel
     _toChannels = cast(int)toPosition.length;
 
   auto _toPosition = cast(const(GstAudioChannelPosition)*)toPosition.ptr;
-  _cretval = gst_buffer_get_audio_downmix_meta_for_channels(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, _toPosition, _toChannels);
+  _cretval = gst_buffer_get_audio_downmix_meta_for_channels(buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null, _toPosition, _toChannels);
   auto _retval = _cretval ? new gstaudio.audio_downmix_meta.AudioDownmixMeta(cast(GstAudioDownmixMeta*)_cretval) : null;
   return _retval;
 }
@@ -408,7 +408,7 @@ gstaudio.audio_downmix_meta.AudioDownmixMeta bufferGetAudioDownmixMetaForChannel
 gstaudio.audio_level_meta.AudioLevelMeta bufferGetAudioLevelMeta(gst.buffer.Buffer buffer)
 {
   GstAudioLevelMeta* _cretval;
-  _cretval = gst_buffer_get_audio_level_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+  _cretval = gst_buffer_get_audio_level_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null);
   auto _retval = _cretval ? new gstaudio.audio_level_meta.AudioLevelMeta(cast(GstAudioLevelMeta*)_cretval) : null;
   return _retval;
 }

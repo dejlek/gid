@@ -18,7 +18,7 @@ import gtk.types;
   [gtk.window.Window] and [gtk.popover.Popover].
   
   Every widget that implements [gtk.shortcut_manager.ShortcutManager] will be used as a
-  [gtk.types.ShortcutScope.Managed].
+  [gtk.types.ShortcutScope.managed].
 */
 interface ShortcutManager
 {

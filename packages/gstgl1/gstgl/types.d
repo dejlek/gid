@@ -211,12 +211,12 @@ enum BUFFER_POOL_OPTION_GL_SYNC_META = "GstBufferPoolOptionGLSyncMeta";
 enum BUFFER_POOL_OPTION_GL_TEXTURE_TARGET_2D = "GstBufferPoolOptionGLTextureTarget2D";
 
 /**
-    String used for [gstgl.types.GLTextureTarget.ExternalOes] as a #GstBufferPool pool option
+    String used for [gstgl.types.GLTextureTarget.externalOes] as a #GstBufferPool pool option
 */
 enum BUFFER_POOL_OPTION_GL_TEXTURE_TARGET_EXTERNAL_OES = "GstBufferPoolOptionGLTextureTargetExternalOES";
 
 /**
-    String used for [gstgl.types.GLTextureTarget.Rectangle] as a #GstBufferPool pool option
+    String used for [gstgl.types.GLTextureTarget.rectangle] as a #GstBufferPool pool option
 */
 enum BUFFER_POOL_OPTION_GL_TEXTURE_TARGET_RECTANGLE = "GstBufferPoolOptionGLTextureTargetRectangle";
 
@@ -263,22 +263,22 @@ enum GL_ALLOCATION_PARAMS_ALLOC_FLAG_WRAP_GPU_HANDLE = 4;
 enum GL_ALLOCATION_PARAMS_ALLOC_FLAG_WRAP_SYSMEM = 2;
 
 /**
-    The name for [gstgl.types.GLAPI.Gles1] used in various places
+    The name for [gstgl.types.GLAPI.gles1] used in various places
 */
 enum GL_API_GLES1_NAME = "gles1";
 
 /**
-    The name for [gstgl.types.GLAPI.Gles2] used in various places
+    The name for [gstgl.types.GLAPI.gles2] used in various places
 */
 enum GL_API_GLES2_NAME = "gles2";
 
 /**
-    The name for [gstgl.types.GLAPI.Opengl3] used in various places
+    The name for [gstgl.types.GLAPI.opengl3] used in various places
 */
 enum GL_API_OPENGL3_NAME = "opengl3";
 
 /**
-    The name for [gstgl.types.GLAPI.Opengl] used in various places
+    The name for [gstgl.types.GLAPI.opengl] used in various places
 */
 enum GL_API_OPENGL_NAME = "opengl";
 
@@ -360,12 +360,12 @@ enum GL_RENDERBUFFER_ALLOCATOR_NAME = "GLRenderbuffer";
 enum GL_TEXTURE_TARGET_2D_STR = "2D";
 
 /**
-    String used for [gstgl.types.GLTextureTarget.ExternalOes] in things like caps values
+    String used for [gstgl.types.GLTextureTarget.externalOes] in things like caps values
 */
 enum GL_TEXTURE_TARGET_EXTERNAL_OES_STR = "external-oes";
 
 /**
-    String used for [gstgl.types.GLTextureTarget.Rectangle] in things like caps values
+    String used for [gstgl.types.GLTextureTarget.rectangle] in things like caps values
 */
 enum GL_TEXTURE_TARGET_RECTANGLE_STR = "rectangle";
 

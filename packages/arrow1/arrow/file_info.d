@@ -10,7 +10,7 @@ import gobject.object;
 class FileInfo : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,14 +31,14 @@ class FileInfo : gobject.object.ObjectG
   {
     GArrowFileInfo* _cretval;
     _cretval = garrow_file_info_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */
   bool equal(arrow.file_info.FileInfo otherFileInfo)
   {
     bool _retval;
-    _retval = garrow_file_info_equal(cast(GArrowFileInfo*)cPtr, otherFileInfo ? cast(GArrowFileInfo*)otherFileInfo.cPtr(No.Dup) : null);
+    _retval = garrow_file_info_equal(cast(GArrowFileInfo*)cPtr, otherFileInfo ? cast(GArrowFileInfo*)otherFileInfo.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -63,7 +63,7 @@ class FileInfo : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = garrow_file_info_to_string(cast(GArrowFileInfo*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

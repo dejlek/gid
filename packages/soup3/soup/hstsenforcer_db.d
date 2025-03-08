@@ -17,7 +17,7 @@ import soup.types;
 class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,8 +49,8 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
   this(string filename)
   {
     SoupHSTSEnforcer* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString(No.alloc);
     _cretval = soup_hsts_enforcer_db_new(_filename);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

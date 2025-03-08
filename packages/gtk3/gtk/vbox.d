@@ -21,12 +21,12 @@ import gtk.types;
   All children are allocated the same width.
   
   GtkVBox has been deprecated. You can use #GtkBox with a #GtkOrientable:orientation
-  set to [gtk.types.Orientation.Vertical] instead when calling [gtk.box.Box.new_],
+  set to [gtk.types.Orientation.vertical] instead when calling [gtk.box.Box.new_],
   which is a very quick and easy change.
   
   If you have derived your own classes from GtkVBox, you can change the
   inheritance to derive directly from #GtkBox, and set the #GtkOrientable:orientation
-  property to [gtk.types.Orientation.Vertical] in your instance init function,
+  property to [gtk.types.Orientation.vertical] in your instance init function,
   with a call like:
   
   ```c
@@ -42,7 +42,7 @@ import gtk.types;
 class VBox : gtk.box.Box
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -65,13 +65,13 @@ class VBox : gtk.box.Box
       spacing =       the number of pixels to place by default between children.
     Returns:     a new #GtkVBox.
   
-    Deprecated:     You should use [gtk.box.Box.new_] with a [gtk.types.Orientation.Vertical]
+    Deprecated:     You should use [gtk.box.Box.new_] with a [gtk.types.Orientation.vertical]
         #GtkOrientable:orientation instead
   */
   this(bool homogeneous, int spacing)
   {
     GtkWidget* _cretval;
     _cretval = gtk_vbox_new(homogeneous, spacing);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 }

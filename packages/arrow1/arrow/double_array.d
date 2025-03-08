@@ -12,7 +12,7 @@ import glib.error;
 class DoubleArray : arrow.numeric_array.NumericArray
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,8 +32,8 @@ class DoubleArray : arrow.numeric_array.NumericArray
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowDoubleArray* _cretval;
-    _cretval = garrow_double_array_new(length, data ? cast(GArrowBuffer*)data.cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_double_array_new(length, data ? cast(GArrowBuffer*)data.cPtr(No.dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.dup) : null, nNulls);
+    this(_cretval, Yes.take);
   }
 
   /** */

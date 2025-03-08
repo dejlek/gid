@@ -250,7 +250,7 @@ template EditableT()
   {
     char* _cretval;
     _cretval = gtk_editable_get_chars(cast(GtkEditable*)cPtr, startPos, endPos);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ template EditableT()
   {
     GtkEditable* _cretval;
     _cretval = gtk_editable_get_delegate(cast(GtkEditable*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.editable.Editable)(cast(GtkEditable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.editable.Editable)(cast(GtkEditable*)_cretval, No.take);
     return _retval;
   }
 
@@ -346,7 +346,7 @@ template EditableT()
   {
     const(char)* _cretval;
     _cretval = gtk_editable_get_text(cast(GtkEditable*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -490,7 +490,7 @@ template EditableT()
   */
   override void setText(string text)
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString(No.alloc);
     gtk_editable_set_text(cast(GtkEditable*)cPtr, _text);
   }
 
@@ -533,10 +533,10 @@ template EditableT()
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -578,10 +578,10 @@ template EditableT()
     Connect to DeleteText signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeleteText(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDeleteText(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DeleteTextCallbackDlg) || is(T : DeleteTextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

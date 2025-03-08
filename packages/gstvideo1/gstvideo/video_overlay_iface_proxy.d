@@ -7,7 +7,7 @@ import gstvideo.video_overlay_mixin;
 /// Proxy object for GstVideo.VideoOverlay interface when a GObject has no applicable D binding
 class VideoOverlayIfaceProxy : IfaceProxy, gstvideo.video_overlay.VideoOverlay
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

@@ -94,7 +94,7 @@ template AppInfoT()
   override bool addSupportsType(string contentType)
   {
     bool _retval;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString(No.alloc);
     GError *_err;
     _retval = g_app_info_add_supports_type(cast(GAppInfo*)cPtr, _contentType, &_err);
     if (_err)
@@ -149,7 +149,7 @@ template AppInfoT()
   {
     GAppInfo* _cretval;
     _cretval = g_app_info_dup(cast(GAppInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ template AppInfoT()
   override bool equal(gio.app_info.AppInfo appinfo2)
   {
     bool _retval;
-    _retval = g_app_info_equal(cast(GAppInfo*)cPtr, appinfo2 ? cast(GAppInfo*)(cast(ObjectG)appinfo2).cPtr(No.Dup) : null);
+    _retval = g_app_info_equal(cast(GAppInfo*)cPtr, appinfo2 ? cast(GAppInfo*)(cast(ObjectG)appinfo2).cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_commandline(cast(GAppInfo*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_description(cast(GAppInfo*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_display_name(cast(GAppInfo*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -224,7 +224,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_executable(cast(GAppInfo*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -237,7 +237,7 @@ template AppInfoT()
   {
     GIcon* _cretval;
     _cretval = g_app_info_get_icon(cast(GAppInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.take);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_id(cast(GAppInfo*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -267,7 +267,7 @@ template AppInfoT()
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_name(cast(GAppInfo*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -293,7 +293,7 @@ template AppInfoT()
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString(No.free);
     }
     return _retval;
   }
@@ -337,7 +337,7 @@ template AppInfoT()
     auto _files = gListFromD!(gio.file.File)(files);
     scope(exit) containerFree!(GList*, gio.file.File, GidOwnership.None)(_files);
     GError *_err;
-    _retval = g_app_info_launch(cast(GAppInfo*)cPtr, _files, context ? cast(GAppLaunchContext*)context.cPtr(No.Dup) : null, &_err);
+    _retval = g_app_info_launch(cast(GAppInfo*)cPtr, _files, context ? cast(GAppLaunchContext*)context.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -367,7 +367,7 @@ template AppInfoT()
     auto _uris = gListFromD!(string)(uris);
     scope(exit) containerFree!(GList*, string, GidOwnership.None)(_uris);
     GError *_err;
-    _retval = g_app_info_launch_uris(cast(GAppInfo*)cPtr, _uris, context ? cast(GAppLaunchContext*)context.cPtr(No.Dup) : null, &_err);
+    _retval = g_app_info_launch_uris(cast(GAppInfo*)cPtr, _uris, context ? cast(GAppLaunchContext*)context.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -393,14 +393,14 @@ template AppInfoT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _uris = gListFromD!(string)(uris);
     scope(exit) containerFree!(GList*, string, GidOwnership.None)(_uris);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_app_info_launch_uris_async(cast(GAppInfo*)cPtr, _uris, context ? cast(GAppLaunchContext*)context.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_app_info_launch_uris_async(cast(GAppInfo*)cPtr, _uris, context ? cast(GAppLaunchContext*)context.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -413,7 +413,7 @@ template AppInfoT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_app_info_launch_uris_finish(cast(GAppInfo*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_app_info_launch_uris_finish(cast(GAppInfo*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -428,7 +428,7 @@ template AppInfoT()
   override bool removeSupportsType(string contentType)
   {
     bool _retval;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString(No.alloc);
     GError *_err;
     _retval = g_app_info_remove_supports_type(cast(GAppInfo*)cPtr, _contentType, &_err);
     if (_err)
@@ -446,7 +446,7 @@ template AppInfoT()
   override bool setAsDefaultForExtension(string extension)
   {
     bool _retval;
-    const(char)* _extension = extension.toCString(No.Alloc);
+    const(char)* _extension = extension.toCString(No.alloc);
     GError *_err;
     _retval = g_app_info_set_as_default_for_extension(cast(GAppInfo*)cPtr, _extension, &_err);
     if (_err)
@@ -463,7 +463,7 @@ template AppInfoT()
   override bool setAsDefaultForType(string contentType)
   {
     bool _retval;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString(No.alloc);
     GError *_err;
     _retval = g_app_info_set_as_default_for_type(cast(GAppInfo*)cPtr, _contentType, &_err);
     if (_err)
@@ -483,7 +483,7 @@ template AppInfoT()
   override bool setAsLastUsedForType(string contentType)
   {
     bool _retval;
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString(No.alloc);
     GError *_err;
     _retval = g_app_info_set_as_last_used_for_type(cast(GAppInfo*)cPtr, _contentType, &_err);
     if (_err)

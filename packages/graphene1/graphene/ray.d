@@ -23,15 +23,15 @@ class Ray : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(graphene_ray_t.sizeof), Yes.Take);
+    super(safeMalloc(graphene_ray_t.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -59,7 +59,7 @@ class Ray : gobject.boxed.Boxed
   {
     graphene_ray_t* _cretval;
     _cretval = graphene_ray_alloc();
-    auto _retval = _cretval ? new graphene.ray.Ray(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new graphene.ray.Ray(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -72,7 +72,7 @@ class Ray : gobject.boxed.Boxed
   bool equal(graphene.ray.Ray b)
   {
     bool _retval;
-    _retval = graphene_ray_equal(cast(const(graphene_ray_t)*)cPtr, b ? cast(const(graphene_ray_t)*)b.cPtr(No.Dup) : null);
+    _retval = graphene_ray_equal(cast(const(graphene_ray_t)*)cPtr, b ? cast(const(graphene_ray_t)*)b.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -86,8 +86,8 @@ class Ray : gobject.boxed.Boxed
   void getClosestPointToPoint(graphene.point3_d.Point3D p, out graphene.point3_d.Point3D res)
   {
     graphene_point3d_t _res;
-    graphene_ray_get_closest_point_to_point(cast(const(graphene_ray_t)*)cPtr, p ? cast(const(graphene_point3d_t)*)p.cPtr(No.Dup) : null, &_res);
-    res = new graphene.point3_d.Point3D(cast(void*)&_res, No.Take);
+    graphene_ray_get_closest_point_to_point(cast(const(graphene_ray_t)*)cPtr, p ? cast(const(graphene_point3d_t)*)p.cPtr(No.dup) : null, &_res);
+    res = new graphene.point3_d.Point3D(cast(void*)&_res, No.take);
   }
 
   /**
@@ -99,7 +99,7 @@ class Ray : gobject.boxed.Boxed
   {
     graphene_vec3_t _direction;
     graphene_ray_get_direction(cast(const(graphene_ray_t)*)cPtr, &_direction);
-    direction = new graphene.vec3.Vec3(cast(void*)&_direction, No.Take);
+    direction = new graphene.vec3.Vec3(cast(void*)&_direction, No.take);
   }
 
   /**
@@ -114,7 +114,7 @@ class Ray : gobject.boxed.Boxed
   float getDistanceToPlane(graphene.plane.Plane p)
   {
     float _retval;
-    _retval = graphene_ray_get_distance_to_plane(cast(const(graphene_ray_t)*)cPtr, p ? cast(const(graphene_plane_t)*)p.cPtr(No.Dup) : null);
+    _retval = graphene_ray_get_distance_to_plane(cast(const(graphene_ray_t)*)cPtr, p ? cast(const(graphene_plane_t)*)p.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class Ray : gobject.boxed.Boxed
   float getDistanceToPoint(graphene.point3_d.Point3D p)
   {
     float _retval;
-    _retval = graphene_ray_get_distance_to_point(cast(const(graphene_ray_t)*)cPtr, p ? cast(const(graphene_point3d_t)*)p.cPtr(No.Dup) : null);
+    _retval = graphene_ray_get_distance_to_point(cast(const(graphene_ray_t)*)cPtr, p ? cast(const(graphene_point3d_t)*)p.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class Ray : gobject.boxed.Boxed
   {
     graphene_point3d_t _origin;
     graphene_ray_get_origin(cast(const(graphene_ray_t)*)cPtr, &_origin);
-    origin = new graphene.point3_d.Point3D(cast(void*)&_origin, No.Take);
+    origin = new graphene.point3_d.Point3D(cast(void*)&_origin, No.take);
   }
 
   /**
@@ -159,7 +159,7 @@ class Ray : gobject.boxed.Boxed
   {
     graphene_point3d_t _position;
     graphene_ray_get_position_at(cast(const(graphene_ray_t)*)cPtr, t, &_position);
-    position = new graphene.point3_d.Point3D(cast(void*)&_position, No.Take);
+    position = new graphene.point3_d.Point3D(cast(void*)&_position, No.take);
   }
 
   /**
@@ -173,8 +173,8 @@ class Ray : gobject.boxed.Boxed
   graphene.ray.Ray init_(graphene.point3_d.Point3D origin = null, graphene.vec3.Vec3 direction = null)
   {
     graphene_ray_t* _cretval;
-    _cretval = graphene_ray_init(cast(graphene_ray_t*)cPtr, origin ? cast(const(graphene_point3d_t)*)origin.cPtr(No.Dup) : null, direction ? cast(const(graphene_vec3_t)*)direction.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new graphene.ray.Ray(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_ray_init(cast(graphene_ray_t*)cPtr, origin ? cast(const(graphene_point3d_t)*)origin.cPtr(No.dup) : null, direction ? cast(const(graphene_vec3_t)*)direction.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new graphene.ray.Ray(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -188,8 +188,8 @@ class Ray : gobject.boxed.Boxed
   graphene.ray.Ray initFromRay(graphene.ray.Ray src)
   {
     graphene_ray_t* _cretval;
-    _cretval = graphene_ray_init_from_ray(cast(graphene_ray_t*)cPtr, src ? cast(const(graphene_ray_t)*)src.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new graphene.ray.Ray(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_ray_init_from_ray(cast(graphene_ray_t*)cPtr, src ? cast(const(graphene_ray_t)*)src.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new graphene.ray.Ray(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -203,8 +203,8 @@ class Ray : gobject.boxed.Boxed
   graphene.ray.Ray initFromVec3(graphene.vec3.Vec3 origin = null, graphene.vec3.Vec3 direction = null)
   {
     graphene_ray_t* _cretval;
-    _cretval = graphene_ray_init_from_vec3(cast(graphene_ray_t*)cPtr, origin ? cast(const(graphene_vec3_t)*)origin.cPtr(No.Dup) : null, direction ? cast(const(graphene_vec3_t)*)direction.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new graphene.ray.Ray(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_ray_init_from_vec3(cast(graphene_ray_t*)cPtr, origin ? cast(const(graphene_vec3_t)*)origin.cPtr(No.dup) : null, direction ? cast(const(graphene_vec3_t)*)direction.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new graphene.ray.Ray(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class Ray : gobject.boxed.Boxed
   graphene.types.RayIntersectionKind intersectBox(graphene.box.Box b, out float tOut)
   {
     graphene_ray_intersection_kind_t _cretval;
-    _cretval = graphene_ray_intersect_box(cast(const(graphene_ray_t)*)cPtr, b ? cast(const(graphene_box_t)*)b.cPtr(No.Dup) : null, cast(float*)&tOut);
+    _cretval = graphene_ray_intersect_box(cast(const(graphene_ray_t)*)cPtr, b ? cast(const(graphene_box_t)*)b.cPtr(No.dup) : null, cast(float*)&tOut);
     graphene.types.RayIntersectionKind _retval = cast(graphene.types.RayIntersectionKind)_cretval;
     return _retval;
   }
@@ -235,7 +235,7 @@ class Ray : gobject.boxed.Boxed
   graphene.types.RayIntersectionKind intersectSphere(graphene.sphere.Sphere s, out float tOut)
   {
     graphene_ray_intersection_kind_t _cretval;
-    _cretval = graphene_ray_intersect_sphere(cast(const(graphene_ray_t)*)cPtr, s ? cast(const(graphene_sphere_t)*)s.cPtr(No.Dup) : null, cast(float*)&tOut);
+    _cretval = graphene_ray_intersect_sphere(cast(const(graphene_ray_t)*)cPtr, s ? cast(const(graphene_sphere_t)*)s.cPtr(No.dup) : null, cast(float*)&tOut);
     graphene.types.RayIntersectionKind _retval = cast(graphene.types.RayIntersectionKind)_cretval;
     return _retval;
   }
@@ -251,7 +251,7 @@ class Ray : gobject.boxed.Boxed
   graphene.types.RayIntersectionKind intersectTriangle(graphene.triangle.Triangle t, out float tOut)
   {
     graphene_ray_intersection_kind_t _cretval;
-    _cretval = graphene_ray_intersect_triangle(cast(const(graphene_ray_t)*)cPtr, t ? cast(const(graphene_triangle_t)*)t.cPtr(No.Dup) : null, cast(float*)&tOut);
+    _cretval = graphene_ray_intersect_triangle(cast(const(graphene_ray_t)*)cPtr, t ? cast(const(graphene_triangle_t)*)t.cPtr(No.dup) : null, cast(float*)&tOut);
     graphene.types.RayIntersectionKind _retval = cast(graphene.types.RayIntersectionKind)_cretval;
     return _retval;
   }
@@ -268,7 +268,7 @@ class Ray : gobject.boxed.Boxed
   bool intersectsBox(graphene.box.Box b)
   {
     bool _retval;
-    _retval = graphene_ray_intersects_box(cast(const(graphene_ray_t)*)cPtr, b ? cast(const(graphene_box_t)*)b.cPtr(No.Dup) : null);
+    _retval = graphene_ray_intersects_box(cast(const(graphene_ray_t)*)cPtr, b ? cast(const(graphene_box_t)*)b.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -284,7 +284,7 @@ class Ray : gobject.boxed.Boxed
   bool intersectsSphere(graphene.sphere.Sphere s)
   {
     bool _retval;
-    _retval = graphene_ray_intersects_sphere(cast(const(graphene_ray_t)*)cPtr, s ? cast(const(graphene_sphere_t)*)s.cPtr(No.Dup) : null);
+    _retval = graphene_ray_intersects_sphere(cast(const(graphene_ray_t)*)cPtr, s ? cast(const(graphene_sphere_t)*)s.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -300,7 +300,7 @@ class Ray : gobject.boxed.Boxed
   bool intersectsTriangle(graphene.triangle.Triangle t)
   {
     bool _retval;
-    _retval = graphene_ray_intersects_triangle(cast(const(graphene_ray_t)*)cPtr, t ? cast(const(graphene_triangle_t)*)t.cPtr(No.Dup) : null);
+    _retval = graphene_ray_intersects_triangle(cast(const(graphene_ray_t)*)cPtr, t ? cast(const(graphene_triangle_t)*)t.cPtr(No.dup) : null);
     return _retval;
   }
 }

@@ -30,12 +30,12 @@ import gobject.boxed;
 class Context : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -57,13 +57,13 @@ class Context : gobject.boxed.Boxed
     [cairo.context.Context.copyPathFlat] or it may be constructed manually.  See
     #cairo_path_t for details on how the path data structure should be
     initialized, and note that <literal>path->status</literal> must be
-    initialized to [cairo.types.Status.Success].
+    initialized to [cairo.types.Status.success].
     Params:
       path =       path to be appended
   */
   void appendPath(cairo.path.Path path)
   {
-    cairo_append_path(cast(cairo_t*)cPtr, path ? cast(const(cairo_path_t)*)path.cPtr(No.Dup) : null);
+    cairo_append_path(cast(cairo_t*)cPtr, path ? cast(const(cairo_path_t)*)path.cPtr(No.dup) : null);
   }
 
   /**
@@ -232,7 +232,7 @@ class Context : gobject.boxed.Boxed
       Gets the current clip region as a list of rectangles in user coordinates.
     Never returns null.
     
-    The status in the list may be [cairo.types.Status.ClipNotRepresentable] to
+    The status in the list may be [cairo.types.Status.clipNotRepresentable] to
     indicate that the clip region cannot be represented as a list of
     user-space rectangles. The status may have other values to indicate
     other errors.
@@ -243,7 +243,7 @@ class Context : gobject.boxed.Boxed
   {
     cairo_rectangle_list_t* _cretval;
     _cretval = cairo_copy_clip_rectangle_list(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new cairo.rectangle_list.RectangleList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.rectangle_list.RectangleList(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class Context : gobject.boxed.Boxed
     <orderedlist>
     <listitem>If there is insufficient memory to copy the path. In this
         case <literal>path->status</literal> will be set to
-        [cairo.types.Status.NoMemory].</listitem>
+        [cairo.types.Status.noMemory].</listitem>
     <listitem>If cr is already in an error state. In this case
        <literal>path->status</literal> will contain the same status that
        would be returned by [cairo.context.Context.status].</listitem>
@@ -287,7 +287,7 @@ class Context : gobject.boxed.Boxed
   {
     cairo_path_t* _cretval;
     _cretval = cairo_copy_path(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new cairo.path.Path(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.path.Path(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -300,8 +300,8 @@ class Context : gobject.boxed.Boxed
     in the path will be approximated with piecewise-linear
     approximations, (accurate to within the current tolerance
     value). That is, the result is guaranteed to not have any elements
-    of type [cairo.types.PathDataType.CurveTo] which will instead be replaced by a
-    series of [cairo.types.PathDataType.LineTo] elements.
+    of type [cairo.types.PathDataType.curveTo] which will instead be replaced by a
+    series of [cairo.types.PathDataType.lineTo] elements.
     
     This function will always return a valid pointer, but the result
     will have no data (<literal>data==null</literal> and
@@ -311,7 +311,7 @@ class Context : gobject.boxed.Boxed
     <orderedlist>
     <listitem>If there is insufficient memory to copy the path. In this
         case <literal>path->status</literal> will be set to
-        [cairo.types.Status.NoMemory].</listitem>
+        [cairo.types.Status.noMemory].</listitem>
     <listitem>If cr is already in an error state. In this case
        <literal>path->status</literal> will contain the same status that
        would be returned by [cairo.context.Context.status].</listitem>
@@ -324,7 +324,7 @@ class Context : gobject.boxed.Boxed
   {
     cairo_path_t* _cretval;
     _cretval = cairo_copy_path_flat(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new cairo.path.Path(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.path.Path(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -534,7 +534,7 @@ class Context : gobject.boxed.Boxed
       
       This function never returns null. If memory cannot be allocated, a
       special "nil" #cairo_font_face_t object will be returned on which
-      [cairo.font_face.FontFace.status] returns [cairo.types.Status.NoMemory]. Using
+      [cairo.font_face.FontFace.status] returns [cairo.types.Status.noMemory]. Using
       this nil object will cause its error state to propagate to other
       objects it is passed to, (for example, calling
       [cairo.context.Context.setFontFace] with a nil font will trigger an error that
@@ -544,7 +544,7 @@ class Context : gobject.boxed.Boxed
   {
     cairo_font_face_t* _cretval;
     _cretval = cairo_get_font_face(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new cairo.font_face.FontFace(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.font_face.FontFace(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -556,7 +556,7 @@ class Context : gobject.boxed.Boxed
   */
   void getFontMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_get_font_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
+    cairo_get_font_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.dup) : null);
   }
 
   /**
@@ -570,7 +570,7 @@ class Context : gobject.boxed.Boxed
   */
   void getFontOptions(cairo.font_options.FontOptions options)
   {
-    cairo_get_font_options(cast(cairo_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(No.Dup) : null);
+    cairo_get_font_options(cast(cairo_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(No.dup) : null);
   }
 
   /**
@@ -581,9 +581,9 @@ class Context : gobject.boxed.Boxed
     
     This function will always return a valid pointer, but the result
     can be a "nil" surface if cr is already in an error state,
-    (ie. [cairo.context.Context.status] <literal>!=</literal> [cairo.types.Status.Success]).
+    (ie. [cairo.context.Context.status] <literal>!=</literal> [cairo.types.Status.success]).
     A nil surface is indicated by [cairo.surface.Surface.status]
-    <literal>!=</literal> [cairo.types.Status.Success].
+    <literal>!=</literal> [cairo.types.Status.success].
     Returns:     the target surface. This object is owned by cairo. To
       keep a reference to it, you must call [cairo.surface.Surface.reference].
   */
@@ -591,7 +591,7 @@ class Context : gobject.boxed.Boxed
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_get_group_target(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -651,7 +651,7 @@ class Context : gobject.boxed.Boxed
   */
   void getMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_get_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
+    cairo_get_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.dup) : null);
   }
 
   /**
@@ -685,7 +685,7 @@ class Context : gobject.boxed.Boxed
       
       This function never returns null. If memory cannot be allocated, a
       special "nil" #cairo_scaled_font_t object will be returned on which
-      [cairo.scaled_font.ScaledFont.status] returns [cairo.types.Status.NoMemory]. Using
+      [cairo.scaled_font.ScaledFont.status] returns [cairo.types.Status.noMemory]. Using
       this nil object will cause its error state to propagate to other
       objects it is passed to, (for example, calling
       [cairo.context.Context.setScaledFont] with a nil font will trigger an error that
@@ -695,7 +695,7 @@ class Context : gobject.boxed.Boxed
   {
     cairo_scaled_font_t* _cretval;
     _cretval = cairo_get_scaled_font(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new cairo.scaled_font.ScaledFont(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.scaled_font.ScaledFont(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -709,7 +709,7 @@ class Context : gobject.boxed.Boxed
   {
     cairo_pattern_t* _cretval;
     _cretval = cairo_get_source(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -719,9 +719,9 @@ class Context : gobject.boxed.Boxed
     
     This function will always return a valid pointer, but the result
     can be a "nil" surface if cr is already in an error state,
-    (ie. [cairo.context.Context.status] <literal>!=</literal> [cairo.types.Status.Success]).
+    (ie. [cairo.context.Context.status] <literal>!=</literal> [cairo.types.Status.success]).
     A nil surface is indicated by [cairo.surface.Surface.status]
-    <literal>!=</literal> [cairo.types.Status.Success].
+    <literal>!=</literal> [cairo.types.Status.success].
     Returns:     the target surface. This object is owned by cairo. To
       keep a reference to it, you must call [cairo.surface.Surface.reference].
   */
@@ -729,7 +729,7 @@ class Context : gobject.boxed.Boxed
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_get_target(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -762,7 +762,7 @@ class Context : gobject.boxed.Boxed
   */
   void glyphExtents(cairo.glyph.Glyph glyphs, int numGlyphs, cairo.types.TextExtents extents)
   {
-    cairo_glyph_extents(cast(cairo_t*)cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.Dup) : null, numGlyphs, &extents);
+    cairo_glyph_extents(cast(cairo_t*)cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.dup) : null, numGlyphs, &extents);
   }
 
   /**
@@ -775,7 +775,7 @@ class Context : gobject.boxed.Boxed
   */
   void glyphPath(cairo.glyph.Glyph glyphs, int numGlyphs)
   {
-    cairo_glyph_path(cast(cairo_t*)cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.Dup) : null, numGlyphs);
+    cairo_glyph_path(cast(cairo_t*)cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.dup) : null, numGlyphs);
   }
 
   /**
@@ -888,7 +888,7 @@ class Context : gobject.boxed.Boxed
   */
   void mask(cairo.pattern.Pattern pattern)
   {
-    cairo_mask(cast(cairo_t*)cPtr, pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null);
+    cairo_mask(cast(cairo_t*)cPtr, pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.dup) : null);
   }
 
   /**
@@ -903,7 +903,7 @@ class Context : gobject.boxed.Boxed
   */
   void maskSurface(cairo.surface.Surface surface, double surfaceX, double surfaceY)
   {
-    cairo_mask_surface(cast(cairo_t*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, surfaceX, surfaceY);
+    cairo_mask_surface(cast(cairo_t*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(No.dup) : null, surfaceX, surfaceY);
   }
 
   /**
@@ -978,7 +978,7 @@ class Context : gobject.boxed.Boxed
     the corresponding drawing operations.
     
     The result of [cairo.context.Context.pathExtents] is defined as equivalent to the
-    limit of [cairo.context.Context.strokeExtents] with [cairo.types.LineCap.Round] as the
+    limit of [cairo.context.Context.strokeExtents] with [cairo.types.LineCap.round] as the
     line width approaches 0.0, (but never reaching the empty-rectangle
     returned by [cairo.context.Context.strokeExtents] for a line width of 0.0).
     
@@ -1018,7 +1018,7 @@ class Context : gobject.boxed.Boxed
   {
     cairo_pattern_t* _cretval;
     _cretval = cairo_pop_group(cast(cairo_t*)cPtr);
-    auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -1071,7 +1071,7 @@ class Context : gobject.boxed.Boxed
     group, (the pop_group functions call [cairo.context.Context.restore]).
     
     By default the intermediate group will have a content type of
-    [cairo.types.Content.ColorAlpha]. Other content types can be chosen for
+    [cairo.types.Content.colorAlpha]. Other content types can be chosen for
     the group by using [cairo.context.Context.pushGroupWithContent] instead.
     
     As an example, here is how one might fill and stroke a path with
@@ -1150,7 +1150,7 @@ class Context : gobject.boxed.Boxed
     
     It is an error to call this function with no current point. Doing
     so will cause cr to shutdown with a status of
-    [cairo.types.Status.NoCurrentPoint].
+    [cairo.types.Status.noCurrentPoint].
     Params:
       dx1 =       the X offset to the first control point
       dy1 =       the Y offset to the first control point
@@ -1175,7 +1175,7 @@ class Context : gobject.boxed.Boxed
     
     It is an error to call this function with no current point. Doing
     so will cause cr to shutdown with a status of
-    [cairo.types.Status.NoCurrentPoint].
+    [cairo.types.Status.noCurrentPoint].
     Params:
       dx =       the X offset to the end of the new line
       dy =       the Y offset to the end of the new line
@@ -1194,7 +1194,7 @@ class Context : gobject.boxed.Boxed
     
     It is an error to call this function with no current point. Doing
     so will cause cr to shutdown with a status of
-    [cairo.types.Status.NoCurrentPoint].
+    [cairo.types.Status.noCurrentPoint].
     Params:
       dx =       the X offset
       dy =       the Y offset
@@ -1318,8 +1318,8 @@ class Context : gobject.boxed.Boxed
     If text is drawn without a call to [cairo.context.Context.selectFontFace], (nor
     [cairo.context.Context.setFontFace] nor [cairo.context.Context.setScaledFont]), the default
     family is platform-specific, but is essentially "sans-serif".
-    Default slant is [cairo.types.FontSlant.Normal], and default weight is
-    [cairo.types.FontWeight.Normal].
+    Default slant is [cairo.types.FontSlant.normal], and default weight is
+    [cairo.types.FontWeight.normal].
     
     This function is equivalent to a call to [cairo.global.toyFontFaceCreate]
     followed by [cairo.context.Context.setFontFace].
@@ -1330,7 +1330,7 @@ class Context : gobject.boxed.Boxed
   */
   void selectFontFace(string family, cairo.types.FontSlant slant, cairo.types.FontWeight weight)
   {
-    const(char)* _family = family.toCString(No.Alloc);
+    const(char)* _family = family.toCString(No.alloc);
     cairo_select_font_face(cast(cairo_t*)cPtr, _family, slant, weight);
   }
 
@@ -1338,7 +1338,7 @@ class Context : gobject.boxed.Boxed
       Set the antialiasing mode of the rasterizer used for drawing shapes.
     This value is a hint, and a particular backend may or may not support
     a particular value.  At the current time, no backend supports
-    [cairo.types.Antialias.Subpixel] when drawing shapes.
+    [cairo.types.Antialias.subpixel] when drawing shapes.
     
     Note that this option does not affect text rendering, instead see
     [cairo.font_options.FontOptions.setAntialias].
@@ -1359,7 +1359,7 @@ class Context : gobject.boxed.Boxed
     
     Each "on" segment will have caps applied as if the segment were a
     separate sub-path. In particular, it is valid to use an "on" length
-    of 0.0 with [cairo.types.LineCap.Round] or [cairo.types.LineCap.Square] in order
+    of 0.0 with [cairo.types.LineCap.round] or [cairo.types.LineCap.square] in order
     to distributed dots or squares along a path.
     
     Note: The length values are in user-space units as evaluated at the
@@ -1374,7 +1374,7 @@ class Context : gobject.boxed.Boxed
     
     If any value in dashes is negative, or if all values are 0, then
     cr will be put into an error state with a status of
-    [cairo.types.Status.InvalidDash].
+    [cairo.types.Status.invalidDash].
     Params:
       dashes =       an array specifying alternate lengths of on and off stroke portions
       offset =       an offset into the dash pattern at which the stroke should start
@@ -1396,7 +1396,7 @@ class Context : gobject.boxed.Boxed
     both [cairo.context.Context.fill] and [cairo.context.Context.clip]. See #cairo_fill_rule_t for details
     on the semantics of each available fill rule.
     
-    The default fill rule is [cairo.types.FillRule.Winding].
+    The default fill rule is [cairo.types.FillRule.winding].
     Params:
       fillRule =       a fill rule, specified as a #cairo_fill_rule_t
   */
@@ -1414,7 +1414,7 @@ class Context : gobject.boxed.Boxed
   */
   void setFontFace(cairo.font_face.FontFace fontFace)
   {
-    cairo_set_font_face(cast(cairo_t*)cPtr, fontFace ? cast(cairo_font_face_t*)fontFace.cPtr(No.Dup) : null);
+    cairo_set_font_face(cast(cairo_t*)cPtr, fontFace ? cast(cairo_font_face_t*)fontFace.cPtr(No.dup) : null);
   }
 
   /**
@@ -1430,21 +1430,21 @@ class Context : gobject.boxed.Boxed
   */
   void setFontMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_set_font_matrix(cast(cairo_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.Dup) : null);
+    cairo_set_font_matrix(cast(cairo_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.dup) : null);
   }
 
   /**
       Sets a set of custom font rendering options for the #cairo_t.
     Rendering options are derived by merging these options with the
     options derived from underlying surface; if the value in options
-    has a default value (like [cairo.types.Antialias.Default]), then the value
+    has a default value (like [cairo.types.Antialias.default_]), then the value
     from the surface is used.
     Params:
       options =       font options to use
   */
   void setFontOptions(cairo.font_options.FontOptions options)
   {
-    cairo_set_font_options(cast(cairo_t*)cPtr, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.Dup) : null);
+    cairo_set_font_options(cast(cairo_t*)cPtr, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.dup) : null);
   }
 
   /**
@@ -1504,7 +1504,7 @@ class Context : gobject.boxed.Boxed
     examined by [cairo.context.Context.stroke], and [cairo.context.Context.strokeExtents], but does not have
     any effect during path construction.
     
-    The default line cap style is [cairo.types.LineCap.Butt].
+    The default line cap style is [cairo.types.LineCap.butt].
     Params:
       lineCap =       a line cap style
   */
@@ -1522,7 +1522,7 @@ class Context : gobject.boxed.Boxed
     examined by [cairo.context.Context.stroke], and [cairo.context.Context.strokeExtents], but does not have
     any effect during path construction.
     
-    The default line join style is [cairo.types.LineJoin.Miter].
+    The default line join style is [cairo.types.LineJoin.miter].
     Params:
       lineJoin =       a line join style
   */
@@ -1567,13 +1567,13 @@ class Context : gobject.boxed.Boxed
   */
   void setMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_set_matrix(cast(cairo_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.Dup) : null);
+    cairo_set_matrix(cast(cairo_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.dup) : null);
   }
 
   /**
       Sets the current miter limit within the cairo context.
     
-    If the current line join style is set to [cairo.types.LineJoin.Miter]
+    If the current line join style is set to [cairo.types.LineJoin.miter]
     (see [cairo.context.Context.setLineJoin]), the miter limit is used to determine
     whether the lines should be joined with a bevel instead of a miter.
     Cairo divides the length of the miter by the line width.
@@ -1605,7 +1605,7 @@ class Context : gobject.boxed.Boxed
     operations. See #cairo_operator_t for details on the semantics of
     each available compositing operator.
     
-    The default operator is [cairo.types.Operator.Over].
+    The default operator is [cairo.types.Operator.over].
     Params:
       op =       a compositing operator, specified as a #cairo_operator_t
   */
@@ -1625,7 +1625,7 @@ class Context : gobject.boxed.Boxed
   */
   void setScaledFont(cairo.scaled_font.ScaledFont scaledFont)
   {
-    cairo_set_scaled_font(cast(cairo_t*)cPtr, scaledFont ? cast(const(cairo_scaled_font_t)*)scaledFont.cPtr(No.Dup) : null);
+    cairo_set_scaled_font(cast(cairo_t*)cPtr, scaledFont ? cast(const(cairo_scaled_font_t)*)scaledFont.cPtr(No.dup) : null);
   }
 
   /**
@@ -1647,7 +1647,7 @@ class Context : gobject.boxed.Boxed
   */
   void setSource(cairo.pattern.Pattern source)
   {
-    cairo_set_source(cast(cairo_t*)cPtr, source ? cast(cairo_pattern_t*)source.cPtr(No.Dup) : null);
+    cairo_set_source(cast(cairo_t*)cPtr, source ? cast(cairo_pattern_t*)source.cPtr(No.dup) : null);
   }
 
   /**
@@ -1718,7 +1718,7 @@ class Context : gobject.boxed.Boxed
   */
   void setSourceSurface(cairo.surface.Surface surface, double x, double y)
   {
-    cairo_set_source_surface(cast(cairo_t*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, x, y);
+    cairo_set_source_surface(cast(cairo_t*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(No.dup) : null, x, y);
   }
 
   /**
@@ -1750,7 +1750,7 @@ class Context : gobject.boxed.Boxed
   */
   void showGlyphs(cairo.glyph.Glyph glyphs, int numGlyphs)
   {
-    cairo_show_glyphs(cast(cairo_t*)cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.Dup) : null, numGlyphs);
+    cairo_show_glyphs(cast(cairo_t*)cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.dup) : null, numGlyphs);
   }
 
   /**
@@ -1792,7 +1792,7 @@ class Context : gobject.boxed.Boxed
   */
   void showText(string utf8)
   {
-    const(char)* _utf8 = utf8.toCString(No.Alloc);
+    const(char)* _utf8 = utf8.toCString(No.alloc);
     cairo_show_text(cast(cairo_t*)cPtr, _utf8);
   }
 
@@ -1811,7 +1811,7 @@ class Context : gobject.boxed.Boxed
     and glyphs in entirety.
     
     The first cluster always covers bytes from the beginning of utf8.
-    If cluster_flags do not have the [cairo.types.TextClusterFlags.Backward]
+    If cluster_flags do not have the [cairo.types.TextClusterFlags.backward]
     set, the first cluster also covers the beginning
     of glyphs, otherwise it covers the end of the glyphs array and
     following clusters move backward.
@@ -1828,8 +1828,8 @@ class Context : gobject.boxed.Boxed
   */
   void showTextGlyphs(string utf8, int utf8Len, cairo.glyph.Glyph glyphs, int numGlyphs, cairo.text_cluster.TextCluster clusters, int numClusters, cairo.types.TextClusterFlags clusterFlags)
   {
-    const(char)* _utf8 = utf8.toCString(No.Alloc);
-    cairo_show_text_glyphs(cast(cairo_t*)cPtr, _utf8, utf8Len, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.Dup) : null, numGlyphs, clusters ? cast(const(cairo_text_cluster_t)*)clusters.cPtr(No.Dup) : null, numClusters, clusterFlags);
+    const(char)* _utf8 = utf8.toCString(No.alloc);
+    cairo_show_text_glyphs(cast(cairo_t*)cPtr, _utf8, utf8Len, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.dup) : null, numGlyphs, clusters ? cast(const(cairo_text_cluster_t)*)clusters.cPtr(No.dup) : null, numClusters, clusterFlags);
   }
 
   /**
@@ -1857,20 +1857,20 @@ class Context : gobject.boxed.Boxed
     situations:
     
     1. Zero-length "on" segments set in [cairo.context.Context.setDash]. If the cap
-    style is [cairo.types.LineCap.Round] or [cairo.types.LineCap.Square] then these
+    style is [cairo.types.LineCap.round] or [cairo.types.LineCap.square] then these
     segments will be drawn as circular dots or squares respectively. In
-    the case of [cairo.types.LineCap.Square], the orientation of the squares
+    the case of [cairo.types.LineCap.square], the orientation of the squares
     is determined by the direction of the underlying path.
     
     2. A sub-path created by [cairo.context.Context.moveTo] followed by either a
     [cairo.context.Context.closePath] or one or more calls to [cairo.context.Context.lineTo] to the
     same coordinate as the [cairo.context.Context.moveTo]. If the cap style is
-    [cairo.types.LineCap.Round] then these sub-paths will be drawn as circular
-    dots. Note that in the case of [cairo.types.LineCap.Square] a degenerate
+    [cairo.types.LineCap.round] then these sub-paths will be drawn as circular
+    dots. Note that in the case of [cairo.types.LineCap.square] a degenerate
     sub-path will not be drawn at all, (since the correct orientation
     is indeterminate).
     
-    In no case will a cap style of [cairo.types.LineCap.Butt] cause anything
+    In no case will a cap style of [cairo.types.LineCap.butt] cause anything
     to be drawn in the case of either degenerate segments or sub-paths.
   */
   void stroke()
@@ -1958,8 +1958,8 @@ class Context : gobject.boxed.Boxed
   */
   void tagBegin(string tagName, string attributes)
   {
-    const(char)* _tagName = tagName.toCString(No.Alloc);
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _tagName = tagName.toCString(No.alloc);
+    const(char)* _attributes = attributes.toCString(No.alloc);
     cairo_tag_begin(cast(cairo_t*)cPtr, _tagName, _attributes);
   }
 
@@ -1975,7 +1975,7 @@ class Context : gobject.boxed.Boxed
   */
   void tagEnd(string tagName)
   {
-    const(char)* _tagName = tagName.toCString(No.Alloc);
+    const(char)* _tagName = tagName.toCString(No.alloc);
     cairo_tag_end(cast(cairo_t*)cPtr, _tagName);
   }
 
@@ -1999,7 +1999,7 @@ class Context : gobject.boxed.Boxed
   */
   void textExtents(string utf8, cairo.types.TextExtents extents)
   {
-    const(char)* _utf8 = utf8.toCString(No.Alloc);
+    const(char)* _utf8 = utf8.toCString(No.alloc);
     cairo_text_extents(cast(cairo_t*)cPtr, _utf8, &extents);
   }
 
@@ -2027,7 +2027,7 @@ class Context : gobject.boxed.Boxed
   */
   void textPath(string utf8)
   {
-    const(char)* _utf8 = utf8.toCString(No.Alloc);
+    const(char)* _utf8 = utf8.toCString(No.alloc);
     cairo_text_path(cast(cairo_t*)cPtr, _utf8);
   }
 
@@ -2040,7 +2040,7 @@ class Context : gobject.boxed.Boxed
   */
   void transform(cairo.matrix.Matrix matrix)
   {
-    cairo_transform(cast(cairo_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.Dup) : null);
+    cairo_transform(cast(cairo_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.dup) : null);
   }
 
   /**

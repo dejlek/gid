@@ -13,7 +13,7 @@ class FileFilterInfo
 {
   GtkFileFilterInfo cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.FileFilterInfo");
@@ -41,45 +41,45 @@ class FileFilterInfo
 
   @property string filename()
   {
-    return (cast(GtkFileFilterInfo*)cPtr).filename.fromCString(No.Free);
+    return (cast(GtkFileFilterInfo*)cPtr).filename.fromCString(No.free);
   }
 
   @property void filename(string propval)
   {
     safeFree(cast(void*)(cast(GtkFileFilterInfo*)cPtr).filename);
-    (cast(GtkFileFilterInfo*)cPtr).filename = propval.toCString(Yes.Alloc);
+    (cast(GtkFileFilterInfo*)cPtr).filename = propval.toCString(Yes.alloc);
   }
 
   @property string uri()
   {
-    return (cast(GtkFileFilterInfo*)cPtr).uri.fromCString(No.Free);
+    return (cast(GtkFileFilterInfo*)cPtr).uri.fromCString(No.free);
   }
 
   @property void uri(string propval)
   {
     safeFree(cast(void*)(cast(GtkFileFilterInfo*)cPtr).uri);
-    (cast(GtkFileFilterInfo*)cPtr).uri = propval.toCString(Yes.Alloc);
+    (cast(GtkFileFilterInfo*)cPtr).uri = propval.toCString(Yes.alloc);
   }
 
   @property string displayName()
   {
-    return (cast(GtkFileFilterInfo*)cPtr).displayName.fromCString(No.Free);
+    return (cast(GtkFileFilterInfo*)cPtr).displayName.fromCString(No.free);
   }
 
   @property void displayName(string propval)
   {
     safeFree(cast(void*)(cast(GtkFileFilterInfo*)cPtr).displayName);
-    (cast(GtkFileFilterInfo*)cPtr).displayName = propval.toCString(Yes.Alloc);
+    (cast(GtkFileFilterInfo*)cPtr).displayName = propval.toCString(Yes.alloc);
   }
 
   @property string mimeType()
   {
-    return (cast(GtkFileFilterInfo*)cPtr).mimeType.fromCString(No.Free);
+    return (cast(GtkFileFilterInfo*)cPtr).mimeType.fromCString(No.free);
   }
 
   @property void mimeType(string propval)
   {
     safeFree(cast(void*)(cast(GtkFileFilterInfo*)cPtr).mimeType);
-    (cast(GtkFileFilterInfo*)cPtr).mimeType = propval.toCString(Yes.Alloc);
+    (cast(GtkFileFilterInfo*)cPtr).mimeType = propval.toCString(Yes.alloc);
   }
 }

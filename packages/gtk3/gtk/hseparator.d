@@ -27,7 +27,7 @@ import gtk.types;
 class HSeparator : gtk.separator.Separator
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -47,12 +47,12 @@ class HSeparator : gtk.separator.Separator
       Creates a new #GtkHSeparator.
     Returns:     a new #GtkHSeparator.
   
-    Deprecated:     Use [gtk.separator.Separator.new_] with [gtk.types.Orientation.Horizontal] instead
+    Deprecated:     Use [gtk.separator.Separator.new_] with [gtk.types.Orientation.horizontal] instead
   */
   this()
   {
     GtkWidget* _cretval;
     _cretval = gtk_hseparator_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 }

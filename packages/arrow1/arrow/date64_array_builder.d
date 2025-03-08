@@ -11,7 +11,7 @@ import glib.error;
 class Date64ArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,7 +32,7 @@ class Date64ArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     GArrowDate64ArrayBuilder* _cretval;
     _cretval = garrow_date64_array_builder_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */

@@ -83,7 +83,7 @@ import gobject.object;
   
   The callback for an asynchronous operation is called only once, and is
   always called, even in the case of a cancelled operation. On cancellation
-  the result is a [gio.types.IOErrorEnum.Cancelled] error.
+  the result is a [gio.types.IOErrorEnum.cancelled] error.
   
   ## I/O Priority
   

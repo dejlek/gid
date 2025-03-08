@@ -18,7 +18,7 @@ import gtk.types;
 class TextCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessible, atk.text.Text
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

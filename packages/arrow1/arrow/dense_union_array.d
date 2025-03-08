@@ -16,7 +16,7 @@ import gobject.object;
 class DenseUnionArray : arrow.union_array.UnionArray
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -39,10 +39,10 @@ class DenseUnionArray : arrow.union_array.UnionArray
     auto _fields = gListFromD!(arrow.array.Array)(fields);
     scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_fields);
     GError *_err;
-    _cretval = garrow_dense_union_array_new(typeIds ? cast(GArrowInt8Array*)typeIds.cPtr(No.Dup) : null, valueOffsets ? cast(GArrowInt32Array*)valueOffsets.cPtr(No.Dup) : null, _fields, &_err);
+    _cretval = garrow_dense_union_array_new(typeIds ? cast(GArrowInt8Array*)typeIds.cPtr(No.dup) : null, valueOffsets ? cast(GArrowInt32Array*)valueOffsets.cPtr(No.dup) : null, _fields, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */
@@ -52,10 +52,10 @@ class DenseUnionArray : arrow.union_array.UnionArray
     auto _fields = gListFromD!(arrow.array.Array)(fields);
     scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_fields);
     GError *_err;
-    _cretval = garrow_dense_union_array_new_data_type(dataType ? cast(GArrowDenseUnionDataType*)dataType.cPtr(No.Dup) : null, typeIds ? cast(GArrowInt8Array*)typeIds.cPtr(No.Dup) : null, valueOffsets ? cast(GArrowInt32Array*)valueOffsets.cPtr(No.Dup) : null, _fields, &_err);
+    _cretval = garrow_dense_union_array_new_data_type(dataType ? cast(GArrowDenseUnionDataType*)dataType.cPtr(No.dup) : null, typeIds ? cast(GArrowInt8Array*)typeIds.cPtr(No.dup) : null, valueOffsets ? cast(GArrowInt32Array*)valueOffsets.cPtr(No.dup) : null, _fields, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.dense_union_array.DenseUnionArray)(cast(GArrowDenseUnionArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.dense_union_array.DenseUnionArray)(cast(GArrowDenseUnionArray*)_cretval, Yes.take);
     return _retval;
   }
 

@@ -87,7 +87,7 @@ import gstvideo.video_codec_state;
 class VideoEncoder : gst.element.Element, gst.preset.Preset
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -116,7 +116,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   {
     GstBuffer* _cretval;
     _cretval = gst_video_encoder_allocate_output_buffer(cast(GstVideoEncoder*)cPtr, size);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -130,12 +130,12 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
     Params:
       frame =       a #GstVideoCodecFrame
       size =       size of the buffer
-    Returns:     [gst.types.FlowReturn.Ok] if an output buffer could be allocated
+    Returns:     [gst.types.FlowReturn.ok] if an output buffer could be allocated
   */
   gst.types.FlowReturn allocateOutputFrame(gstvideo.video_codec_frame.VideoCodecFrame frame, size_t size)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_video_encoder_allocate_output_frame(cast(GstVideoEncoder*)cPtr, frame ? cast(GstVideoCodecFrame*)frame.cPtr(No.Dup) : null, size);
+    _cretval = gst_video_encoder_allocate_output_frame(cast(GstVideoEncoder*)cPtr, frame ? cast(GstVideoCodecFrame*)frame.cPtr(No.dup) : null, size);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -157,7 +157,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gst.types.FlowReturn finishFrame(gstvideo.video_codec_frame.VideoCodecFrame frame)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_video_encoder_finish_frame(cast(GstVideoEncoder*)cPtr, frame ? cast(GstVideoCodecFrame*)frame.cPtr(Yes.Dup) : null);
+    _cretval = gst_video_encoder_finish_frame(cast(GstVideoEncoder*)cPtr, frame ? cast(GstVideoCodecFrame*)frame.cPtr(Yes.dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -179,7 +179,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gst.types.FlowReturn finishSubframe(gstvideo.video_codec_frame.VideoCodecFrame frame)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_video_encoder_finish_subframe(cast(GstVideoEncoder*)cPtr, frame ? cast(GstVideoCodecFrame*)frame.cPtr(No.Dup) : null);
+    _cretval = gst_video_encoder_finish_subframe(cast(GstVideoEncoder*)cPtr, frame ? cast(GstVideoCodecFrame*)frame.cPtr(No.dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -200,8 +200,8 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
     GstAllocator* _allocator;
     GstAllocationParams _params;
     gst_video_encoder_get_allocator(cast(GstVideoEncoder*)cPtr, &_allocator, &_params);
-    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, Yes.Take);
+    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.take);
+    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, Yes.take);
   }
 
   /**
@@ -214,7 +214,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   {
     GstVideoCodecFrame* _cretval;
     _cretval = gst_video_encoder_get_frame(cast(GstVideoEncoder*)cPtr, frameNumber);
-    auto _retval = _cretval ? new gstvideo.video_codec_frame.VideoCodecFrame(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gstvideo.video_codec_frame.VideoCodecFrame(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gst.types.ClockTimeDiff getMaxEncodeTime(gstvideo.video_codec_frame.VideoCodecFrame frame)
   {
     gst.types.ClockTimeDiff _retval;
-    _retval = gst_video_encoder_get_max_encode_time(cast(GstVideoEncoder*)cPtr, frame ? cast(GstVideoCodecFrame*)frame.cPtr(No.Dup) : null);
+    _retval = gst_video_encoder_get_max_encode_time(cast(GstVideoEncoder*)cPtr, frame ? cast(GstVideoCodecFrame*)frame.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   {
     GstVideoCodecFrame* _cretval;
     _cretval = gst_video_encoder_get_oldest_frame(cast(GstVideoEncoder*)cPtr);
-    auto _retval = _cretval ? new gstvideo.video_codec_frame.VideoCodecFrame(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gstvideo.video_codec_frame.VideoCodecFrame(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -295,7 +295,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   {
     GstVideoCodecState* _cretval;
     _cretval = gst_video_encoder_get_output_state(cast(GstVideoEncoder*)cPtr);
-    auto _retval = _cretval ? new gstvideo.video_codec_state.VideoCodecState(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gstvideo.video_codec_state.VideoCodecState(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   */
   void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode)
   {
-    gst_video_encoder_merge_tags(cast(GstVideoEncoder*)cPtr, tags ? cast(const(GstTagList)*)tags.cPtr(No.Dup) : null, mode);
+    gst_video_encoder_merge_tags(cast(GstVideoEncoder*)cPtr, tags ? cast(const(GstTagList)*)tags.cPtr(No.dup) : null, mode);
   }
 
   /**
@@ -355,8 +355,8 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gst.caps.Caps proxyGetcaps(gst.caps.Caps caps = null, gst.caps.Caps filter = null)
   {
     GstCaps* _cretval;
-    _cretval = gst_video_encoder_proxy_getcaps(cast(GstVideoEncoder*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_video_encoder_proxy_getcaps(cast(GstVideoEncoder*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null, filter ? cast(GstCaps*)filter.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -425,8 +425,8 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gstvideo.video_codec_state.VideoCodecState setOutputState(gst.caps.Caps caps, gstvideo.video_codec_state.VideoCodecState reference = null)
   {
     GstVideoCodecState* _cretval;
-    _cretval = gst_video_encoder_set_output_state(cast(GstVideoEncoder*)cPtr, caps ? cast(GstCaps*)caps.cPtr(Yes.Dup) : null, reference ? cast(GstVideoCodecState*)reference.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gstvideo.video_codec_state.VideoCodecState(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_video_encoder_set_output_state(cast(GstVideoEncoder*)cPtr, caps ? cast(GstCaps*)caps.cPtr(Yes.dup) : null, reference ? cast(GstVideoCodecState*)reference.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gstvideo.video_codec_state.VideoCodecState(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 

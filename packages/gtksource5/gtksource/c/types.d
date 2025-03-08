@@ -9,12 +9,12 @@ enum GtkSourceBackgroundPatternType
   /**
       no pattern
   */
-  None = 0,
+  none = 0,
 
   /**
       grid pattern
   */
-  Grid = 1,
+  grid = 1,
 }
 
 /** */
@@ -23,23 +23,23 @@ enum GtkSourceBracketMatchType
   /**
       there is no bracket to match.
   */
-  None = 0,
+  none = 0,
 
   /**
       matching a bracket
      failed because the maximum range was reached.
   */
-  OutOfRange = 1,
+  outOfRange = 1,
 
   /**
       a matching bracket was not found.
   */
-  NotFound = 2,
+  notFound = 2,
 
   /**
       a matching bracket was found.
   */
-  Found = 3,
+  found = 3,
 }
 
 /** */
@@ -48,57 +48,57 @@ enum GtkSourceChangeCaseType
   /**
       change case to lowercase.
   */
-  Lower = 0,
+  lower = 0,
 
   /**
       change case to uppercase.
   */
-  Upper = 1,
+  upper = 1,
 
   /**
       toggle case of each character.
   */
-  Toggle = 2,
+  toggle = 2,
 
   /**
       capitalize each word.
   */
-  Title = 3,
+  title = 3,
 }
 
 /** */
 enum GtkSourceCompletionActivation
 {
   /** */
-  None = 0,
+  none = 0,
 
   /** */
-  Interactive = 1,
+  interactive = 1,
 
   /** */
-  UserRequested = 2,
+  userRequested = 2,
 }
 
 /** */
 enum GtkSourceCompletionColumn
 {
   /** */
-  Icon = 0,
+  icon = 0,
 
   /** */
-  Before = 1,
+  before = 1,
 
   /** */
-  TypedText = 2,
+  typedText = 2,
 
   /** */
-  After = 3,
+  after = 3,
 
   /** */
-  Comment = 4,
+  comment = 4,
 
   /** */
-  Details = 5,
+  details = 5,
 }
 
 /** */
@@ -107,12 +107,12 @@ enum GtkSourceCompressionType
   /**
       plain text.
   */
-  None = 0,
+  none = 0,
 
   /**
       gzip compression.
   */
-  Gzip = 1,
+  gzip = 1,
 }
 
 /**
@@ -123,19 +123,19 @@ enum GtkSourceFileLoaderError
   /**
       The file is too big.
   */
-  TooBig = 0,
+  tooBig = 0,
 
   /**
       It is not
     possible to detect the encoding automatically.
   */
-  EncodingAutoDetectionFailed = 1,
+  encodingAutoDetectionFailed = 1,
 
   /**
       There was an encoding
     conversion error and it was needed to use a fallback character.
   */
-  ConversionFallback = 2,
+  conversionFallback = 2,
 }
 
 /**
@@ -147,13 +147,13 @@ enum GtkSourceFileSaverError
       The buffer contains invalid
       characters.
   */
-  InvalidChars = 0,
+  invalidChars = 0,
 
   /**
       The file is externally
       modified.
   */
-  ExternallyModified = 1,
+  externallyModified = 1,
 }
 
 /**
@@ -164,22 +164,22 @@ enum GtkSourceFileSaverFlags : uint
   /**
       No flags.
   */
-  None = 0,
+  none = 0,
 
   /**
       Ignore invalid characters.
   */
-  IgnoreInvalidChars = 1,
+  ignoreInvalidChars = 1,
 
   /**
       Save file despite external modifications.
   */
-  IgnoreModificationTime = 2,
+  ignoreModificationTime = 2,
 
   /**
       Create a backup before saving the file.
   */
-  CreateBackup = 4,
+  createBackup = 4,
 }
 
 /**
@@ -191,17 +191,17 @@ enum GtkSourceGutterRendererAlignmentMode
   /**
       The full cell.
   */
-  Cell = 0,
+  cell = 0,
 
   /**
       The first line.
   */
-  First = 1,
+  first = 1,
 
   /**
       The last line.
   */
-  Last = 2,
+  last = 2,
 }
 
 /** */
@@ -210,18 +210,18 @@ enum GtkSourceNewlineType
   /**
       line feed, used on UNIX.
   */
-  Lf = 0,
+  lf = 0,
 
   /**
       carriage return, used on Mac.
   */
-  Cr = 1,
+  cr = 1,
 
   /**
       carriage return followed by a line feed, used
       on Windows.
   */
-  CrLf = 2,
+  crLf = 2,
 }
 
 /** */
@@ -230,27 +230,27 @@ enum GtkSourceSmartHomeEndType
   /**
       smart-home-end disabled.
   */
-  Disabled = 0,
+  disabled = 0,
 
   /**
       move to the first/last
     non-whitespace character on the first press of the HOME/END keys and
     to the beginning/end of the line on the second press.
   */
-  Before = 1,
+  before = 1,
 
   /**
       move to the beginning/end of the
     line on the first press of the HOME/END keys and to the first/last
     non-whitespace character on the second press.
   */
-  After = 2,
+  after = 2,
 
   /**
       always move to the first/last
     non-whitespace character when the HOME/END keys are pressed.
   */
-  Always = 3,
+  always = 3,
 }
 
 /** */
@@ -259,57 +259,57 @@ enum GtkSourceSortFlags : uint
   /**
       no flags specified
   */
-  None = 0,
+  none = 0,
 
   /**
       case sensitive sort
   */
-  CaseSensitive = 1,
+  caseSensitive = 1,
 
   /**
       sort in reverse order
   */
-  ReverseOrder = 2,
+  reverseOrder = 2,
 
   /**
       remove duplicates
   */
-  RemoveDuplicates = 4,
+  removeDuplicates = 4,
 }
 
 /**
     #GtkSourceSpaceLocationFlags contains flags for white space locations.
   
   If a line contains only white spaces (no text), the white spaces match both
-  [gtksource.types.SpaceLocationFlags.Leading] and [gtksource.types.SpaceLocationFlags.Trailing].
+  [gtksource.types.SpaceLocationFlags.leading] and [gtksource.types.SpaceLocationFlags.trailing].
 */
 enum GtkSourceSpaceLocationFlags : uint
 {
   /**
       No flags.
   */
-  None = 0,
+  none = 0,
 
   /**
       Leading white spaces on a line, i.e. the
       indentation.
   */
-  Leading = 1,
+  leading = 1,
 
   /**
       White spaces inside a line of text.
   */
-  InsideText = 2,
+  insideText = 2,
 
   /**
       Trailing white spaces on a line.
   */
-  Trailing = 4,
+  trailing = 4,
 
   /**
       White spaces anywhere.
   */
-  All = 7,
+  all = 7,
 }
 
 /**
@@ -320,34 +320,34 @@ enum GtkSourceSpaceTypeFlags : uint
   /**
       No flags.
   */
-  None = 0,
+  none = 0,
 
   /**
       Space character.
   */
-  Space = 1,
+  space = 1,
 
   /**
       Tab character.
   */
-  Tab = 2,
+  tab = 2,
 
   /**
       Line break character. If the
       #GtkSourceBuffer:implicit-trailing-newline property is true,
       #GtkSourceSpaceDrawer also draws a line break at the end of the buffer.
   */
-  Newline = 4,
+  newline = 4,
 
   /**
       Non-breaking space character.
   */
-  Nbsp = 8,
+  nbsp = 8,
 
   /**
       All white spaces.
   */
-  All = 15,
+  all = 15,
 }
 
 /** */
@@ -357,13 +357,13 @@ enum GtkSourceViewGutterPosition
       the gutter position of the lines
     renderer
   */
-  Lines = -30,
+  lines = -30,
 
   /**
       the gutter position of the marks
     renderer
   */
-  Marks = -20,
+  marks = -20,
 }
 
 /**
@@ -474,7 +474,7 @@ struct GtkSourceBufferClass
   The `iface@CompletionProposal` interface represents a proposal.
   
   If a proposal contains extra information (see
-  [gtksource.types.CompletionColumn.Details]), it will be
+  [gtksource.types.CompletionColumn.details]), it will be
   displayed in a supplemental details window, which appears when
   the "Details" button is clicked.
   
@@ -766,8 +766,8 @@ struct GtkSourceFileSaverClass
   The gutter works very much the same way as cells rendered in a [gtk.tree_view.TreeView].
   The concept is similar, with the exception that the gutter does not have an
   underlying [gtk.tree_model.TreeModel]. The builtin line number renderer is at position
-  [gtksource.types.ViewGutterPosition.Lines] (-30) and the marks renderer is at
-  [gtksource.types.ViewGutterPosition.Marks] (-20). The gutter sorts the renderers
+  [gtksource.types.ViewGutterPosition.lines] (-30) and the marks renderer is at
+  [gtksource.types.ViewGutterPosition.marks] (-20). The gutter sorts the renderers
   in ascending order, from left to right. So the marks are displayed on the
   right of the line numbers.
 */
@@ -1029,7 +1029,7 @@ struct GtkSourceHoverProviderInterface
   `vfunc@Indenter.is_trigger` is called upon key-press to
   determine of the key press should trigger an indentation.  The default
   implementation of the interface checks to see if the key was
-  [gdk.types.KEY_Return] or [gdk.types.KEY_KP_Enter] without [gdk.types.ModifierType.ShiftMask] set.
+  [gdk.types.KEY_Return] or [gdk.types.KEY_KP_Enter] without [gdk.types.ModifierType.shiftMask] set.
   
   `vfunc@Indenter.indent` is called after text has been
   inserted into `class@Buffer` when

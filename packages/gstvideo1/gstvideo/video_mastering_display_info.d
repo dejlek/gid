@@ -14,7 +14,7 @@ class VideoMasteringDisplayInfo
 {
   GstVideoMasteringDisplayInfo cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstVideo.VideoMasteringDisplayInfo");
@@ -69,7 +69,7 @@ class VideoMasteringDisplayInfo
   bool addToCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_video_mastering_display_info_add_to_caps(cast(const(GstVideoMasteringDisplayInfo)*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    _retval = gst_video_mastering_display_info_add_to_caps(cast(const(GstVideoMasteringDisplayInfo)*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class VideoMasteringDisplayInfo
   bool fromCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_video_mastering_display_info_from_caps(cast(GstVideoMasteringDisplayInfo*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _retval = gst_video_mastering_display_info_from_caps(cast(GstVideoMasteringDisplayInfo*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class VideoMasteringDisplayInfo
   {
     char* _cretval;
     _cretval = gst_video_mastering_display_info_to_string(cast(const(GstVideoMasteringDisplayInfo)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class VideoMasteringDisplayInfo
   {
     bool _retval;
     GstVideoMasteringDisplayInfo _minfo;
-    const(char)* _mastering = mastering.toCString(No.Alloc);
+    const(char)* _mastering = mastering.toCString(No.alloc);
     _retval = gst_video_mastering_display_info_from_string(&_minfo, _mastering);
     minfo = new gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo(cast(void*)&_minfo);
     return _retval;

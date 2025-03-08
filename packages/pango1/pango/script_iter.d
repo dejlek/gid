@@ -13,12 +13,12 @@ import pango.types;
 class ScriptIter : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -57,7 +57,7 @@ class ScriptIter : gobject.boxed.Boxed
 
     auto _text = cast(const(char)*)text.ptr;
     _cretval = pango_script_iter_new(_text, _length);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -80,8 +80,8 @@ class ScriptIter : gobject.boxed.Boxed
     char* _start;
     char* _end;
     pango_script_iter_get_range(cast(PangoScriptIter*)cPtr, &_start, &_end, &script);
-    start = _start.fromCString(Yes.Free);
-    end = _end.fromCString(Yes.Free);
+    start = _start.fromCString(Yes.free);
+    end = _end.fromCString(Yes.free);
   }
 
   /**

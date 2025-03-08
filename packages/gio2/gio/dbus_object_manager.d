@@ -85,10 +85,10 @@ interface DBusObjectManager
     Connect to InterfaceAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectInterfaceAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : InterfaceAddedCallbackDlg) || is(T : InterfaceAddedCallbackFunc));
 
   /**
@@ -113,10 +113,10 @@ interface DBusObjectManager
     Connect to InterfaceRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectInterfaceRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : InterfaceRemovedCallbackDlg) || is(T : InterfaceRemovedCallbackFunc));
 
   /**
@@ -137,10 +137,10 @@ interface DBusObjectManager
     Connect to ObjectAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectObjectAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectObjectAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ObjectAddedCallbackDlg) || is(T : ObjectAddedCallbackFunc));
 
   /**
@@ -161,9 +161,9 @@ interface DBusObjectManager
     Connect to ObjectRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectObjectRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectObjectRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ObjectRemovedCallbackDlg) || is(T : ObjectRemovedCallbackFunc));
   }

@@ -40,7 +40,7 @@ import gobject.object;
   in blocking mode all operations (which don’t take an explicit blocking
   parameter) block until the requested operation
   is finished or there is an error. In non-blocking mode all calls that
-  would block return immediately with a [gio.types.IOErrorEnum.WouldBlock] error.
+  would block return immediately with a [gio.types.IOErrorEnum.wouldBlock] error.
   To know when a call would successfully run you can call
   [gio.socket.Socket.conditionCheck], or [gio.socket.Socket.conditionWait].
   You can also use [gio.socket.Socket.createSource] and attach it to a
@@ -49,11 +49,11 @@ import gobject.object;
   blocking mode is emulated in [gio.socket.Socket].
   
   When working in non-blocking mode applications should always be able to
-  handle getting a [gio.types.IOErrorEnum.WouldBlock] error even when some other
+  handle getting a [gio.types.IOErrorEnum.wouldBlock] error even when some other
   function said that I/O was possible. This can easily happen in case
   of a race condition in the application, but it can also happen for other
   reasons. For instance, on Windows a socket is always seen as writable
-  until a write returns [gio.types.IOErrorEnum.WouldBlock].
+  until a write returns [gio.types.IOErrorEnum.wouldBlock].
   
   [gio.socket.Socket]s can be either connection oriented or datagram based.
   For connection oriented types you must first establish a connection by
@@ -76,7 +76,7 @@ import gobject.object;
   ## Nagle’s algorithm
   
   Since GLib 2.80, [gio.socket.Socket] will automatically set the `TCP_NODELAY` option on
-  all [gio.types.SocketType.Stream] sockets. This disables
+  all [gio.types.SocketType.stream] sockets. This disables
   [Nagle’s algorithm](https://en.wikipedia.org/wiki/Nagle`27s_algorithm`) as it
   typically does more harm than good on modern networks.
   
@@ -94,7 +94,7 @@ import gobject.object;
 class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.initable.Initable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -115,7 +115,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
 
   /**
       Creates a new #GSocket with the defined family, type and protocol.
-    If protocol is 0 ([gio.types.SocketProtocol.Default]) the default protocol type
+    If protocol is 0 ([gio.types.SocketProtocol.default_]) the default protocol type
     for the family and type is used.
     
     The protocol is a family and type specific int that specifies what
@@ -128,7 +128,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     system, so you can use protocols not listed in #GSocketProtocol if you
     know the protocol number used for it.
     Params:
-      family =       the socket family to use, e.g. [gio.types.SocketFamily.Ipv4].
+      family =       the socket family to use, e.g. [gio.types.SocketFamily.ipv4].
       type =       the socket type to use.
       protocol =       the id of the protocol to use, or 0 for default.
     Returns:     a #GSocket or null on error.
@@ -141,7 +141,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     _cretval = g_socket_new(family, type, protocol, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -157,7 +157,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     caller must close fd themselves.
     
     Since GLib 2.46, it is no longer a fatal error to call this on a non-socket
-    descriptor.  Instead, a GError will be set with code [gio.types.IOErrorEnum.Failed]
+    descriptor.  Instead, a GError will be set with code [gio.types.IOErrorEnum.failed]
     Params:
       fd =       a native socket file descriptor.
     Returns:     a #GSocket or null on error.
@@ -170,7 +170,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     _cretval = g_socket_new_from_fd(fd, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -183,8 +183,8 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     must be listening for incoming connections ([gio.socket.Socket.listen]).
     
     If there are no outstanding connections then the operation will block
-    or return [gio.types.IOErrorEnum.WouldBlock] if non-blocking I/O is enabled.
-    To be notified of an incoming connection, wait for the [glib.types.IOCondition.In] condition.
+    or return [gio.types.IOErrorEnum.wouldBlock] if non-blocking I/O is enabled.
+    To be notified of an incoming connection, wait for the [glib.types.IOCondition.in_] condition.
     Params:
       cancellable =       a [gio.cancellable.Cancellable] or null
     Returns:     a new #GSocket, or null on error.
@@ -194,10 +194,10 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
   {
     GSocket* _cretval;
     GError *_err;
-    _cretval = g_socket_accept(cast(GSocket*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_socket_accept(cast(GSocket*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -216,7 +216,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     server sockets (sockets that you will eventually call
     [gio.socket.Socket.accept] on), and false for client sockets. (Failing to
     set this flag on a server socket may cause [gio.socket.Socket.bind] to return
-    [gio.types.IOErrorEnum.AddressInUse] if the server program is stopped and then
+    [gio.types.IOErrorEnum.addressInUse] if the server program is stopped and then
     immediately restarted.)
     
     If socket is a UDP socket, then allow_reuse determines whether or
@@ -234,7 +234,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_bind(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, allowReuse, &_err);
+    _retval = g_socket_bind(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.dup) : null, allowReuse, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -264,7 +264,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     to complete even if the close returns with no error.
     
     Once the socket is closed, all other operations will return
-    [gio.types.IOErrorEnum.Closed]. Closing a socket multiple times will not
+    [gio.types.IOErrorEnum.closed]. Closing a socket multiple times will not
     return an error.
     
     Sockets will be automatically closed when the last reference
@@ -273,7 +273,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     
     Beware that due to the way that TCP works, it is possible for
     recently-sent data to be lost if either you close a socket while the
-    [glib.types.IOCondition.In] condition is set, or else if the remote connection tries to
+    [glib.types.IOCondition.in_] condition is set, or else if the remote connection tries to
     send something to you after you close the socket but before it has
     finished reading all of the data you sent. There is no easy generic
     way to avoid this problem; the easiest fix is to design the network
@@ -305,14 +305,14 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     is returned.
     
     Note that on Windows, it is possible for an operation to return
-    [gio.types.IOErrorEnum.WouldBlock] even immediately after
+    [gio.types.IOErrorEnum.wouldBlock] even immediately after
     [gio.socket.Socket.conditionCheck] has claimed that the socket is ready for
     writing. Rather than calling [gio.socket.Socket.conditionCheck] and then
     writing to the socket if it succeeds, it is generally better to
     simply try writing to the socket right away, and try again later if
-    the initial attempt returns [gio.types.IOErrorEnum.WouldBlock].
+    the initial attempt returns [gio.types.IOErrorEnum.wouldBlock].
     
-    It is meaningless to specify [glib.types.IOCondition.Err] or [glib.types.IOCondition.Hup] in condition;
+    It is meaningless to specify [glib.types.IOCondition.err] or [glib.types.IOCondition.hup] in condition;
     these conditions will always be set in the output if they are true.
     
     This call never blocks.
@@ -335,8 +335,8 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     If cancellable is cancelled before the condition is met, or if
     timeout_us (or the socket's #GSocket:timeout) is reached before the
     condition is met, then false is returned and error, if non-null,
-    is set to the appropriate value ([gio.types.IOErrorEnum.Cancelled] or
-    [gio.types.IOErrorEnum.TimedOut]).
+    is set to the appropriate value ([gio.types.IOErrorEnum.cancelled] or
+    [gio.types.IOErrorEnum.timedOut]).
     
     If you don't want a timeout, use [gio.socket.Socket.conditionWait].
     (Alternatively, you can pass -1 for timeout_us.)
@@ -355,7 +355,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_condition_timed_wait(cast(GSocket*)cPtr, condition, timeoutUs, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_condition_timed_wait(cast(GSocket*)cPtr, condition, timeoutUs, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -368,8 +368,8 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     If cancellable is cancelled before the condition is met, or if the
     socket has a timeout set and it is reached before the condition is
     met, then false is returned and error, if non-null, is set to
-    the appropriate value ([gio.types.IOErrorEnum.Cancelled] or
-    [gio.types.IOErrorEnum.TimedOut]).
+    the appropriate value ([gio.types.IOErrorEnum.cancelled] or
+    [gio.types.IOErrorEnum.timedOut]).
     
     See also [gio.socket.Socket.conditionTimedWait].
     Params:
@@ -381,7 +381,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_condition_wait(cast(GSocket*)cPtr, condition, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_condition_wait(cast(GSocket*)cPtr, condition, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -400,7 +400,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     default address.
     
     If the connect call needs to do network I/O it will block, unless
-    non-blocking I/O is enabled. Then [gio.types.IOErrorEnum.Pending] is returned
+    non-blocking I/O is enabled. Then [gio.types.IOErrorEnum.pending] is returned
     and the user can be notified of the connection finishing by waiting
     for the G_IO_OUT condition. The result of the connection must then be
     checked with [gio.socket.Socket.checkConnectResult].
@@ -413,7 +413,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_connect(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_connect(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -428,7 +428,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
   {
     GSocketConnection* _cretval;
     _cretval = g_socket_connection_factory_create_connection(cast(GSocket*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -482,11 +482,11 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
 
   /**
       Returns the credentials of the foreign process connected to this
-    socket, if any (e.g. it is only supported for [gio.types.SocketFamily.Unix]
+    socket, if any (e.g. it is only supported for [gio.types.SocketFamily.unix]
     sockets).
     
     If this operation isn't supported on the OS, the method fails with
-    the [gio.types.IOErrorEnum.NotSupported] error. On Linux this is implemented
+    the [gio.types.IOErrorEnum.notSupported] error. On Linux this is implemented
     by reading the `SO_PEERCRED` option on the underlying socket.
     
     This method can be expected to be available on the following platforms:
@@ -513,7 +513,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     _cretval = g_socket_get_credentials(cast(GSocket*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -582,7 +582,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     _cretval = g_socket_get_local_address(cast(GSocket*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -669,7 +669,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     _cretval = g_socket_get_remote_address(cast(GSocket*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -739,7 +739,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
 
   /**
       Registers socket to receive multicast messages sent to group.
-    socket must be a [gio.types.SocketType.Datagram] socket, and must have
+    socket must be a [gio.types.SocketType.datagram] socket, and must have
     been bound to an appropriate interface and port with
     [gio.socket.Socket.bind].
     
@@ -748,7 +748,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     
     If source_specific is true, source-specific multicast as defined
     in RFC 4604 is used. Note that on older platforms this may fail
-    with a [gio.types.IOErrorEnum.NotSupported] error.
+    with a [gio.types.IOErrorEnum.notSupported] error.
     
     To bind to a given source-specific multicast address, use
     [gio.socket.Socket.joinMulticastGroupSsm] instead.
@@ -761,9 +761,9 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
   bool joinMulticastGroup(gio.inet_address.InetAddress group, bool sourceSpecific, string iface = null)
   {
     bool _retval;
-    const(char)* _iface = iface.toCString(No.Alloc);
+    const(char)* _iface = iface.toCString(No.alloc);
     GError *_err;
-    _retval = g_socket_join_multicast_group(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(No.Dup) : null, sourceSpecific, _iface, &_err);
+    _retval = g_socket_join_multicast_group(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(No.dup) : null, sourceSpecific, _iface, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -771,7 +771,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
 
   /**
       Registers socket to receive multicast messages sent to group.
-    socket must be a [gio.types.SocketType.Datagram] socket, and must have
+    socket must be a [gio.types.SocketType.datagram] socket, and must have
     been bound to an appropriate interface and port with
     [gio.socket.Socket.bind].
     
@@ -780,7 +780,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     
     If source_specific is not null, use source-specific multicast as
     defined in RFC 4604. Note that on older platforms this may fail
-    with a [gio.types.IOErrorEnum.NotSupported] error.
+    with a [gio.types.IOErrorEnum.notSupported] error.
     
     Note that this function can be called multiple times for the same
     group with different source_specific in order to receive multicast
@@ -795,9 +795,9 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
   bool joinMulticastGroupSsm(gio.inet_address.InetAddress group, gio.inet_address.InetAddress sourceSpecific = null, string iface = null)
   {
     bool _retval;
-    const(char)* _iface = iface.toCString(No.Alloc);
+    const(char)* _iface = iface.toCString(No.alloc);
     GError *_err;
-    _retval = g_socket_join_multicast_group_ssm(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(No.Dup) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific.cPtr(No.Dup) : null, _iface, &_err);
+    _retval = g_socket_join_multicast_group_ssm(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(No.dup) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific.cPtr(No.dup) : null, _iface, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -822,9 +822,9 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
   bool leaveMulticastGroup(gio.inet_address.InetAddress group, bool sourceSpecific, string iface = null)
   {
     bool _retval;
-    const(char)* _iface = iface.toCString(No.Alloc);
+    const(char)* _iface = iface.toCString(No.alloc);
     GError *_err;
-    _retval = g_socket_leave_multicast_group(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(No.Dup) : null, sourceSpecific, _iface, &_err);
+    _retval = g_socket_leave_multicast_group(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(No.dup) : null, sourceSpecific, _iface, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -847,9 +847,9 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
   bool leaveMulticastGroupSsm(gio.inet_address.InetAddress group, gio.inet_address.InetAddress sourceSpecific = null, string iface = null)
   {
     bool _retval;
-    const(char)* _iface = iface.toCString(No.Alloc);
+    const(char)* _iface = iface.toCString(No.alloc);
     GError *_err;
-    _retval = g_socket_leave_multicast_group_ssm(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(No.Dup) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific.cPtr(No.Dup) : null, _iface, &_err);
+    _retval = g_socket_leave_multicast_group_ssm(cast(GSocket*)cPtr, group ? cast(GInetAddress*)group.cPtr(No.dup) : null, sourceSpecific ? cast(GInetAddress*)sourceSpecific.cPtr(No.dup) : null, _iface, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -881,13 +881,13 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     connection-oriented sockets; it is identical to [gio.socket.Socket.receiveFrom]
     with address set to null.
     
-    For [gio.types.SocketType.Datagram] and [gio.types.SocketType.Seqpacket] sockets,
+    For [gio.types.SocketType.datagram] and [gio.types.SocketType.seqpacket] sockets,
     [gio.socket.Socket.receive] will always read either 0 or 1 complete messages from
     the socket. If the received message is too large to fit in buffer, then
     the data beyond size bytes will be discarded, without any explicit
     indication that this has occurred.
     
-    For [gio.types.SocketType.Stream] sockets, [gio.socket.Socket.receive] can return any
+    For [gio.types.SocketType.stream] sockets, [gio.socket.Socket.receive] can return any
     number of bytes, up to size. If more than size bytes have been
     received, the additional data will be returned in future calls to
     [gio.socket.Socket.receive].
@@ -895,9 +895,9 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     If the socket is in blocking mode the call will block until there
     is some data to receive, the connection is closed, or there is an
     error. If there is no data available and the socket is in
-    non-blocking mode, a [gio.types.IOErrorEnum.WouldBlock] error will be
+    non-blocking mode, a [gio.types.IOErrorEnum.wouldBlock] error will be
     returned. To be notified when data is available, wait for the
-    [glib.types.IOCondition.In] condition.
+    [glib.types.IOCondition.in_] condition.
     
     On error -1 is returned and error is set accordingly.
     Params:
@@ -911,7 +911,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     ptrdiff_t _retval;
     size_t _size;
     GError *_err;
-    _retval = g_socket_receive(cast(GSocket*)cPtr, buffer.ptr, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_receive(cast(GSocket*)cPtr, buffer.ptr, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -926,7 +926,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     Pass `-1` to timeout_us to block indefinitely until data is received (or
     the connection is closed, or there is an error). Pass `0` to use the default
     timeout from [gio.socket.Socket.guint], or pass a positive number to wait
-    for that many microseconds for data before returning [gio.types.IOErrorEnum.TimedOut].
+    for that many microseconds for data before returning [gio.types.IOErrorEnum.timedOut].
     Params:
       size =       the number of bytes you want to read from the socket
       timeoutUs =       the timeout to wait for, in microseconds, or `-1` to block
@@ -939,10 +939,10 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
   {
     GBytes* _cretval;
     GError *_err;
-    _cretval = g_socket_receive_bytes(cast(GSocket*)cPtr, size, timeoutUs, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_socket_receive_bytes(cast(GSocket*)cPtr, size, timeoutUs, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -960,7 +960,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     Pass `-1` to timeout_us to block indefinitely until data is received (or
     the connection is closed, or there is an error). Pass `0` to use the default
     timeout from [gio.socket.Socket.guint], or pass a positive number to wait
-    for that many microseconds for data before returning [gio.types.IOErrorEnum.TimedOut].
+    for that many microseconds for data before returning [gio.types.IOErrorEnum.timedOut].
     Params:
       address =       return location for a #GSocketAddress
       size =       the number of bytes you want to read from the socket
@@ -975,11 +975,11 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     GBytes* _cretval;
     GSocketAddress* _address;
     GError *_err;
-    _cretval = g_socket_receive_bytes_from(cast(GSocket*)cPtr, &_address, size, timeoutUs, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_socket_receive_bytes_from(cast(GSocket*)cPtr, &_address, size, timeoutUs, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
-    address = new gio.socket_address.SocketAddress(cast(void*)_address, Yes.Take);
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
+    address = new gio.socket_address.SocketAddress(cast(void*)_address, Yes.take);
     return _retval;
   }
 
@@ -1005,10 +1005,10 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     GSocketAddress* _address;
     size_t _size;
     GError *_err;
-    _retval = g_socket_receive_from(cast(GSocket*)cPtr, &_address, buffer.ptr, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_receive_from(cast(GSocket*)cPtr, &_address, buffer.ptr, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    address = new gio.socket_address.SocketAddress(cast(void*)_address, Yes.Take);
+    address = new gio.socket_address.SocketAddress(cast(void*)_address, Yes.take);
     return _retval;
   }
 
@@ -1057,9 +1057,9 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     out of it are relevant to the specific returned message.
     
     As with [gio.socket.Socket.receive], data may be discarded if socket is
-    [gio.types.SocketType.Datagram] or [gio.types.SocketType.Seqpacket] and you do not
+    [gio.types.SocketType.datagram] or [gio.types.SocketType.seqpacket] and you do not
     provide enough buffer space to read a complete message. You can pass
-    [gio.types.SocketMsgFlags.Peek] in flags to peek at the current message without
+    [gio.types.SocketMsgFlags.peek] in flags to peek at the current message without
     removing it from the receive queue, but there is no portable way to find
     out the length of the message other than by reading it into a
     sufficiently-large buffer.
@@ -1067,9 +1067,9 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     If the socket is in blocking mode the call will block until there
     is some data to receive, the connection is closed, or there is an
     error. If there is no data available and the socket is in
-    non-blocking mode, a [gio.types.IOErrorEnum.WouldBlock] error will be
+    non-blocking mode, a [gio.types.IOErrorEnum.wouldBlock] error will be
     returned. To be notified when data is available, wait for the
-    [glib.types.IOCondition.In] condition.
+    [glib.types.IOCondition.in_] condition.
     
     On error -1 is returned and error is set accordingly.
     Params:
@@ -1097,13 +1097,13 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     int _numMessages;
     GSocketControlMessage** _messages;
     GError *_err;
-    _retval = g_socket_receive_message(cast(GSocket*)cPtr, &_address, _vectors, _numVectors, &_messages, &_numMessages, cast(int*)&flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_receive_message(cast(GSocket*)cPtr, &_address, _vectors, _numVectors, &_messages, &_numMessages, cast(int*)&flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    address = new gio.socket_address.SocketAddress(cast(void*)_address, Yes.Take);
+    address = new gio.socket_address.SocketAddress(cast(void*)_address, Yes.take);
     messages.length = _numMessages;
     foreach (i; 0 .. _numMessages)
-      messages[i] = ObjectG.getDObject!(gio.socket_control_message.SocketControlMessage)(_messages[i], Yes.Take);
+      messages[i] = ObjectG.getDObject!(gio.socket_control_message.SocketControlMessage)(_messages[i], Yes.take);
     safeFree(cast(void*)_messages);
     return _retval;
   }
@@ -1124,7 +1124,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     ptrdiff_t _retval;
     size_t _size;
     GError *_err;
-    _retval = g_socket_receive_with_blocking(cast(GSocket*)cPtr, buffer.ptr, _size, blocking, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_receive_with_blocking(cast(GSocket*)cPtr, buffer.ptr, _size, blocking, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1137,11 +1137,11 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     
     If the socket is in blocking mode the call will block until there is
     space for the data in the socket queue. If there is no space available
-    and the socket is in non-blocking mode a [gio.types.IOErrorEnum.WouldBlock] error
+    and the socket is in non-blocking mode a [gio.types.IOErrorEnum.wouldBlock] error
     will be returned. To be notified when space is available, wait for the
-    [glib.types.IOCondition.Out] condition. Note though that you may still receive
-    [gio.types.IOErrorEnum.WouldBlock] from [gio.socket.Socket.send] even if you were previously
-    notified of a [glib.types.IOCondition.Out] condition. (On Windows in particular, this is
+    [glib.types.IOCondition.out_] condition. Note though that you may still receive
+    [gio.types.IOErrorEnum.wouldBlock] from [gio.socket.Socket.send] even if you were previously
+    notified of a [glib.types.IOCondition.out_] condition. (On Windows in particular, this is
     very common due to the way the underlying APIs work.)
     
     On error -1 is returned and error is set accordingly.
@@ -1161,7 +1161,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
 
     auto _buffer = cast(const(ubyte)*)buffer.ptr;
     GError *_err;
-    _retval = g_socket_send(cast(GSocket*)cPtr, _buffer, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_send(cast(GSocket*)cPtr, _buffer, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1197,11 +1197,11 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     
     If the socket is in blocking mode the call will block until there is
     space for the data in the socket queue. If there is no space available
-    and the socket is in non-blocking mode a [gio.types.IOErrorEnum.WouldBlock] error
+    and the socket is in non-blocking mode a [gio.types.IOErrorEnum.wouldBlock] error
     will be returned. To be notified when space is available, wait for the
-    [glib.types.IOCondition.Out] condition. Note though that you may still receive
-    [gio.types.IOErrorEnum.WouldBlock] from [gio.socket.Socket.send] even if you were previously
-    notified of a [glib.types.IOCondition.Out] condition. (On Windows in particular, this is
+    [glib.types.IOCondition.out_] condition. Note though that you may still receive
+    [gio.types.IOErrorEnum.wouldBlock] from [gio.socket.Socket.send] even if you were previously
+    notified of a [glib.types.IOCondition.out_] condition. (On Windows in particular, this is
     very common due to the way the underlying APIs work.)
     
     The sum of the sizes of each #GOutputVector in vectors must not be
@@ -1239,7 +1239,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     GSocketControlMessage** _messages = cast(GSocketControlMessage**)_tmpmessages.ptr;
 
     GError *_err;
-    _retval = g_socket_send_message(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, _vectors, _numVectors, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_send_message(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.dup) : null, _vectors, _numVectors, _messages, _numMessages, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1250,8 +1250,8 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     the choice of timeout behavior is determined by the timeout_us argument
     rather than by socket's properties.
     
-    On error [gio.types.PollableReturn.Failed] is returned and error is set accordingly, or
-    if the socket is currently not writable [gio.types.PollableReturn.WouldBlock] is
+    On error [gio.types.PollableReturn.failed] is returned and error is set accordingly, or
+    if the socket is currently not writable [gio.types.PollableReturn.wouldBlock] is
     returned. bytes_written will contain 0 in both cases.
     Params:
       address =       a #GSocketAddress, or null
@@ -1263,9 +1263,9 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
       timeoutUs =       the maximum time (in microseconds) to wait, or -1
       bytesWritten =       location to store the number of bytes that were written to the socket
       cancellable =       a [gio.cancellable.Cancellable] or null
-    Returns:     [gio.types.PollableReturn.Ok] if all data was successfully written,
-      [gio.types.PollableReturn.WouldBlock] if the socket is currently not writable, or
-      [gio.types.PollableReturn.Failed] if an error happened and error is set.
+    Returns:     [gio.types.PollableReturn.ok] if all data was successfully written,
+      [gio.types.PollableReturn.wouldBlock] if the socket is currently not writable, or
+      [gio.types.PollableReturn.failed] if an error happened and error is set.
   */
   gio.types.PollableReturn sendMessageWithTimeout(gio.socket_address.SocketAddress address, gio.types.OutputVector[] vectors, gio.socket_control_message.SocketControlMessage[] messages, int flags, long timeoutUs, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1285,7 +1285,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     GSocketControlMessage** _messages = cast(GSocketControlMessage**)_tmpmessages.ptr;
 
     GError *_err;
-    _cretval = g_socket_send_message_with_timeout(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, _vectors, _numVectors, _messages, _numMessages, flags, timeoutUs, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_socket_send_message_with_timeout(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.dup) : null, _vectors, _numVectors, _messages, _numMessages, flags, timeoutUs, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     gio.types.PollableReturn _retval = cast(gio.types.PollableReturn)_cretval;
@@ -1315,7 +1315,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
 
     auto _buffer = cast(const(ubyte)*)buffer.ptr;
     GError *_err;
-    _retval = g_socket_send_to(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, _buffer, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_send_to(cast(GSocket*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.dup) : null, _buffer, _size, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1342,7 +1342,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
 
     auto _buffer = cast(const(ubyte)*)buffer.ptr;
     GError *_err;
-    _retval = g_socket_send_with_blocking(cast(GSocket*)cPtr, _buffer, _size, blocking, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_send_with_blocking(cast(GSocket*)cPtr, _buffer, _size, blocking, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1353,7 +1353,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     all operations (which don’t take an explicit blocking parameter) block until
     they succeed or there is an error. In
     non-blocking mode all functions return results immediately or
-    with a [gio.types.IOErrorEnum.WouldBlock] error.
+    with a [gio.types.IOErrorEnum.wouldBlock] error.
     
     All sockets are created in blocking mode. However, note that the
     platform level socket is always non-blocking, and blocking mode
@@ -1387,7 +1387,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     the connection.
     
     This option is only functional on certain kinds of sockets. (Notably,
-    [gio.types.SocketProtocol.Tcp] sockets.)
+    [gio.types.SocketProtocol.tcp] sockets.)
     
     The exact time between pings is system- and protocol-dependent, but will
     normally be at least two hours. Most commonly, you would set this flag
@@ -1477,15 +1477,15 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     
     On a blocking socket, this means that any blocking #GSocket
     operation will time out after timeout seconds of inactivity,
-    returning [gio.types.IOErrorEnum.TimedOut].
+    returning [gio.types.IOErrorEnum.timedOut].
     
     On a non-blocking socket, calls to [gio.socket.Socket.conditionWait] will
-    also fail with [gio.types.IOErrorEnum.TimedOut] after the given time. Sources
+    also fail with [gio.types.IOErrorEnum.timedOut] after the given time. Sources
     created with [gio.socket.Socket.createSource] will trigger after
     timeout seconds of inactivity, with the requested condition
     set, at which point calling [gio.socket.Socket.receive], [gio.socket.Socket.send],
     [gio.socket.Socket.checkConnectResult], etc, will fail with
-    [gio.types.IOErrorEnum.TimedOut].
+    [gio.types.IOErrorEnum.timedOut].
     
     If timeout is 0 (the default), operations will never time out
     on their own.

@@ -36,8 +36,8 @@ template ChildProxyT()
   */
   override void childAdded(gobject.object.ObjectG child, string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    gst_child_proxy_child_added(cast(GstChildProxy*)cPtr, child ? cast(ObjectC*)child.cPtr(No.Dup) : null, _name);
+    const(char)* _name = name.toCString(No.alloc);
+    gst_child_proxy_child_added(cast(GstChildProxy*)cPtr, child ? cast(ObjectC*)child.cPtr(No.dup) : null, _name);
   }
 
   /**
@@ -48,8 +48,8 @@ template ChildProxyT()
   */
   override void childRemoved(gobject.object.ObjectG child, string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    gst_child_proxy_child_removed(cast(GstChildProxy*)cPtr, child ? cast(ObjectC*)child.cPtr(No.Dup) : null, _name);
+    const(char)* _name = name.toCString(No.alloc);
+    gst_child_proxy_child_removed(cast(GstChildProxy*)cPtr, child ? cast(ObjectC*)child.cPtr(No.dup) : null, _name);
   }
 
   /**
@@ -63,7 +63,7 @@ template ChildProxyT()
   {
     ObjectC* _cretval;
     _cretval = gst_child_proxy_get_child_by_index(cast(GstChildProxy*)cPtr, index);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -81,9 +81,9 @@ template ChildProxyT()
   override gobject.object.ObjectG getChildByName(string name)
   {
     ObjectC* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_child_proxy_get_child_by_name(cast(GstChildProxy*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -104,9 +104,9 @@ template ChildProxyT()
   override gobject.object.ObjectG getChildByNameRecurse(string name)
   {
     ObjectC* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_child_proxy_get_child_by_name_recurse(cast(GstChildProxy*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -130,10 +130,10 @@ template ChildProxyT()
   */
   override void getChildProxyProperty(string name, out gobject.value.Value value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     GValue _value;
     gst_child_proxy_get_property(cast(GstChildProxy*)cPtr, _name, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)&_value, No.take);
   }
 
   /**
@@ -151,12 +151,12 @@ template ChildProxyT()
   override bool lookup(string name, out gobject.object.ObjectG target, out gobject.param_spec.ParamSpec pspec)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     ObjectC* _target;
     GParamSpec* _pspec;
     _retval = gst_child_proxy_lookup(cast(GstChildProxy*)cPtr, _name, &_target, &_pspec);
-    target = new gobject.object.ObjectG(cast(void*)_target, Yes.Take);
-    pspec = new gobject.param_spec.ParamSpec(cast(void*)_pspec, No.Take);
+    target = new gobject.object.ObjectG(cast(void*)_target, Yes.take);
+    pspec = new gobject.param_spec.ParamSpec(cast(void*)_pspec, No.take);
     return _retval;
   }
 
@@ -168,8 +168,8 @@ template ChildProxyT()
   */
   override void setProperty(string name, gobject.value.Value value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    gst_child_proxy_set_property(cast(GstChildProxy*)cPtr, _name, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    const(char)* _name = name.toCString(No.alloc);
+    gst_child_proxy_set_property(cast(GstChildProxy*)cPtr, _name, value ? cast(const(GValue)*)value.cPtr(No.dup) : null);
   }
 
   /**
@@ -191,10 +191,10 @@ template ChildProxyT()
     Connect to ChildAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChildAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChildAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChildAddedCallbackDlg) || is(T : ChildAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -230,10 +230,10 @@ template ChildProxyT()
     Connect to ChildRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChildRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChildRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChildRemovedCallbackDlg) || is(T : ChildRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -13,7 +13,7 @@ import gtksource.view;
 class Gutter : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class Gutter : gobject.object.ObjectG
   {
     GtkSourceGutterRenderer* _cretval;
     _cretval = gtk_source_gutter_get_renderer_at_pos(cast(GtkSourceGutter*)cPtr, x, y);
-    auto _retval = ObjectG.getDObject!(gtksource.gutter_renderer.GutterRenderer)(cast(GtkSourceGutterRenderer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.gutter_renderer.GutterRenderer)(cast(GtkSourceGutterRenderer*)_cretval, No.take);
     return _retval;
   }
 
@@ -49,7 +49,7 @@ class Gutter : gobject.object.ObjectG
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_gutter_get_view(cast(GtkSourceGutter*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.take);
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class Gutter : gobject.object.ObjectG
   bool insert(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {
     bool _retval;
-    _retval = gtk_source_gutter_insert(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.Dup) : null, position);
+    _retval = gtk_source_gutter_insert(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.dup) : null, position);
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class Gutter : gobject.object.ObjectG
   */
   void remove(gtksource.gutter_renderer.GutterRenderer renderer)
   {
-    gtk_source_gutter_remove(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.Dup) : null);
+    gtk_source_gutter_remove(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.dup) : null);
   }
 
   /**
@@ -105,6 +105,6 @@ class Gutter : gobject.object.ObjectG
   */
   void reorder(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {
-    gtk_source_gutter_reorder(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.Dup) : null, position);
+    gtk_source_gutter_reorder(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.dup) : null, position);
   }
 }

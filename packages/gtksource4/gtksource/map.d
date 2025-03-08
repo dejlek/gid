@@ -17,7 +17,7 @@ import gtksource.view;
 class Map : gtksource.view.View
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,7 +41,7 @@ class Map : gtksource.view.View
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_map_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -52,7 +52,7 @@ class Map : gtksource.view.View
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_map_get_view(cast(GtkSourceMap*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.take);
     return _retval;
   }
 
@@ -63,6 +63,6 @@ class Map : gtksource.view.View
   */
   void setView(gtksource.view.View view)
   {
-    gtk_source_map_set_view(cast(GtkSourceMap*)cPtr, view ? cast(GtkSourceView*)view.cPtr(No.Dup) : null);
+    gtk_source_map_set_view(cast(GtkSourceMap*)cPtr, view ? cast(GtkSourceView*)view.cPtr(No.dup) : null);
   }
 }

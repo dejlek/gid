@@ -54,7 +54,7 @@ template CellEditableT()
   */
   override void startEditing(gdk.event.Event event = null)
   {
-    gtk_cell_editable_start_editing(cast(GtkCellEditable*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
+    gtk_cell_editable_start_editing(cast(GtkCellEditable*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.dup) : null);
   }
 
   /**
@@ -84,10 +84,10 @@ template CellEditableT()
     Connect to EditingDone signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEditingDone(T)(T callback, Flag!"After" after = No.After)
+  ulong connectEditingDone(T)(T callback, Flag!"after" after = No.after)
   if (is(T : EditingDoneCallbackDlg) || is(T : EditingDoneCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -130,10 +130,10 @@ template CellEditableT()
     Connect to RemoveWidget signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRemoveWidget(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRemoveWidget(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RemoveWidgetCallbackDlg) || is(T : RemoveWidgetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

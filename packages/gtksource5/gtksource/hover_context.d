@@ -25,7 +25,7 @@ import gtksource.view;
 class HoverContext : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -60,8 +60,8 @@ class HoverContext : gobject.object.ObjectG
     GtkTextIter _begin;
     GtkTextIter _end;
     _retval = gtk_source_hover_context_get_bounds(cast(GtkSourceHoverContext*)cPtr, &_begin, &_end);
-    begin = new gtk.text_iter.TextIter(cast(void*)&_begin, No.Take);
-    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
+    begin = new gtk.text_iter.TextIter(cast(void*)&_begin, No.take);
+    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.take);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class HoverContext : gobject.object.ObjectG
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_hover_context_get_buffer(cast(GtkSourceHoverContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.take);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class HoverContext : gobject.object.ObjectG
   bool getIter(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_source_hover_context_get_iter(cast(GtkSourceHoverContext*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_source_hover_context_get_iter(cast(GtkSourceHoverContext*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class HoverContext : gobject.object.ObjectG
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_hover_context_get_view(cast(GtkSourceHoverContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.take);
     return _retval;
   }
 }

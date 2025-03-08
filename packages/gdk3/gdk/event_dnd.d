@@ -15,7 +15,7 @@ class EventDND
 {
   GdkEventDND cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventDND");
@@ -43,7 +43,7 @@ class EventDND
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventDND*)cPtr).window, No.Take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventDND*)cPtr).window, No.take);
   }
 
   @property byte sendEvent()
@@ -58,7 +58,7 @@ class EventDND
 
   @property gdk.drag_context.DragContext context()
   {
-    return ObjectG.getDObject!(gdk.drag_context.DragContext)((cast(GdkEventDND*)cPtr).context, No.Take);
+    return ObjectG.getDObject!(gdk.drag_context.DragContext)((cast(GdkEventDND*)cPtr).context, No.take);
   }
 
   @property uint time()

@@ -13,7 +13,7 @@ class EnumValue
 {
   GEnumValue cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.EnumValue");
@@ -41,23 +41,23 @@ class EnumValue
 
   @property string valueName()
   {
-    return (cast(GEnumValue*)cPtr).valueName.fromCString(No.Free);
+    return (cast(GEnumValue*)cPtr).valueName.fromCString(No.free);
   }
 
   @property void valueName(string propval)
   {
     safeFree(cast(void*)(cast(GEnumValue*)cPtr).valueName);
-    (cast(GEnumValue*)cPtr).valueName = propval.toCString(Yes.Alloc);
+    (cast(GEnumValue*)cPtr).valueName = propval.toCString(Yes.alloc);
   }
 
   @property string valueNick()
   {
-    return (cast(GEnumValue*)cPtr).valueNick.fromCString(No.Free);
+    return (cast(GEnumValue*)cPtr).valueNick.fromCString(No.free);
   }
 
   @property void valueNick(string propval)
   {
     safeFree(cast(void*)(cast(GEnumValue*)cPtr).valueNick);
-    (cast(GEnumValue*)cPtr).valueNick = propval.toCString(Yes.Alloc);
+    (cast(GEnumValue*)cPtr).valueNick = propval.toCString(Yes.alloc);
   }
 }

@@ -11,7 +11,7 @@ import gobject.object;
 class UnionScalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class UnionScalar : arrow.scalar.Scalar
   {
     GArrowScalar* _cretval;
     _cretval = garrow_union_scalar_get_value(cast(GArrowUnionScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, No.take);
     return _retval;
   }
 }

@@ -13,7 +13,7 @@ import glib.error;
 class RecordBatchStreamWriter : arrow.record_batch_writer.RecordBatchWriter
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,9 +34,9 @@ class RecordBatchStreamWriter : arrow.record_batch_writer.RecordBatchWriter
   {
     GArrowRecordBatchStreamWriter* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_stream_writer_new(sink ? cast(GArrowOutputStream*)sink.cPtr(No.Dup) : null, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_record_batch_stream_writer_new(sink ? cast(GArrowOutputStream*)sink.cPtr(No.dup) : null, schema ? cast(GArrowSchema*)schema.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

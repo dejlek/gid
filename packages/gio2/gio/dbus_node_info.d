@@ -17,15 +17,15 @@ class DBusNodeInfo : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GDBusNodeInfo.sizeof), Yes.Take);
+    super(safeMalloc(GDBusNodeInfo.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -53,13 +53,13 @@ class DBusNodeInfo : gobject.boxed.Boxed
 
   @property string path()
   {
-    return (cast(GDBusNodeInfo*)cPtr).path.fromCString(No.Free);
+    return (cast(GDBusNodeInfo*)cPtr).path.fromCString(No.free);
   }
 
   @property void path(string propval)
   {
     safeFree(cast(void*)(cast(GDBusNodeInfo*)cPtr).path);
-    (cast(GDBusNodeInfo*)cPtr).path = propval.toCString(Yes.Alloc);
+    (cast(GDBusNodeInfo*)cPtr).path = propval.toCString(Yes.alloc);
   }
 
   /**
@@ -79,12 +79,12 @@ class DBusNodeInfo : gobject.boxed.Boxed
   static gio.dbus_node_info.DBusNodeInfo newForXml(string xmlData)
   {
     GDBusNodeInfo* _cretval;
-    const(char)* _xmlData = xmlData.toCString(No.Alloc);
+    const(char)* _xmlData = xmlData.toCString(No.alloc);
     GError *_err;
     _cretval = g_dbus_node_info_new_for_xml(_xmlData, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new gio.dbus_node_info.DBusNodeInfo(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gio.dbus_node_info.DBusNodeInfo(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
   */
   void generateXml(uint indent, glib.string_.String stringBuilder)
   {
-    g_dbus_node_info_generate_xml(cast(GDBusNodeInfo*)cPtr, indent, stringBuilder ? cast(GString*)stringBuilder.cPtr(No.Dup) : null);
+    g_dbus_node_info_generate_xml(cast(GDBusNodeInfo*)cPtr, indent, stringBuilder ? cast(GString*)stringBuilder.cPtr(No.dup) : null);
   }
 
   /**
@@ -113,9 +113,9 @@ class DBusNodeInfo : gobject.boxed.Boxed
   gio.dbus_interface_info.DBusInterfaceInfo lookupInterface(string name)
   {
     GDBusInterfaceInfo* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = g_dbus_node_info_lookup_interface(cast(GDBusNodeInfo*)cPtr, _name);
-    auto _retval = _cretval ? new gio.dbus_interface_info.DBusInterfaceInfo(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gio.dbus_interface_info.DBusInterfaceInfo(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

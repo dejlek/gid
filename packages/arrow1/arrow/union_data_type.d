@@ -12,7 +12,7 @@ import gobject.object;
 class UnionDataType : arrow.data_type.DataType
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,7 +33,7 @@ class UnionDataType : arrow.data_type.DataType
   {
     GArrowField* _cretval;
     _cretval = garrow_union_data_type_get_field(cast(GArrowUnionDataType*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.take);
     return _retval;
   }
 

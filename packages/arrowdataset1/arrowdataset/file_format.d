@@ -16,7 +16,7 @@ import gobject.object;
 class FileFormat : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -36,7 +36,7 @@ class FileFormat : gobject.object.ObjectG
   bool equal(arrowdataset.file_format.FileFormat otherFormat)
   {
     bool _retval;
-    _retval = gadataset_file_format_equal(cast(GADatasetFileFormat*)cPtr, otherFormat ? cast(GADatasetFileFormat*)otherFormat.cPtr(No.Dup) : null);
+    _retval = gadataset_file_format_equal(cast(GADatasetFileFormat*)cPtr, otherFormat ? cast(GADatasetFileFormat*)otherFormat.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -45,7 +45,7 @@ class FileFormat : gobject.object.ObjectG
   {
     GADatasetFileWriteOptions* _cretval;
     _cretval = gadataset_file_format_get_default_write_options(cast(GADatasetFileFormat*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrowdataset.file_write_options.FileWriteOptions)(cast(GADatasetFileWriteOptions*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowdataset.file_write_options.FileWriteOptions)(cast(GADatasetFileWriteOptions*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -54,7 +54,7 @@ class FileFormat : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = gadataset_file_format_get_type_name(cast(GADatasetFileFormat*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -62,12 +62,12 @@ class FileFormat : gobject.object.ObjectG
   arrowdataset.file_writer.FileWriter openWriter(arrow.output_stream.OutputStream destination, arrow.file_system.FileSystem fileSystem, string path, arrow.schema.Schema schema, arrowdataset.file_write_options.FileWriteOptions options)
   {
     GADatasetFileWriter* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     GError *_err;
-    _cretval = gadataset_file_format_open_writer(cast(GADatasetFileFormat*)cPtr, destination ? cast(GArrowOutputStream*)destination.cPtr(No.Dup) : null, fileSystem ? cast(GArrowFileSystem*)fileSystem.cPtr(No.Dup) : null, _path, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, options ? cast(GADatasetFileWriteOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = gadataset_file_format_open_writer(cast(GADatasetFileFormat*)cPtr, destination ? cast(GArrowOutputStream*)destination.cPtr(No.dup) : null, fileSystem ? cast(GArrowFileSystem*)fileSystem.cPtr(No.dup) : null, _path, schema ? cast(GArrowSchema*)schema.cPtr(No.dup) : null, options ? cast(GADatasetFileWriteOptions*)options.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrowdataset.file_writer.FileWriter)(cast(GADatasetFileWriter*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowdataset.file_writer.FileWriter)(cast(GADatasetFileWriter*)_cretval, Yes.take);
     return _retval;
   }
 }

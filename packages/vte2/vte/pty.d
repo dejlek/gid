@@ -17,7 +17,7 @@ import vte.types;
 class Pty : gobject.object.ObjectG, gio.initable.Initable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -51,10 +51,10 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
   {
     VtePty* _cretval;
     GError *_err;
-    _cretval = vte_pty_new_foreign_sync(fd, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = vte_pty_new_foreign_sync(fd, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -95,10 +95,10 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
   {
     VtePty* _cretval;
     GError *_err;
-    _cretval = vte_pty_new_sync(flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = vte_pty_new_sync(flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -212,27 +212,27 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+    const(char)* _workingDirectory = workingDirectory.toCString(No.alloc);
     char*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(No.Alloc);
+      _tmpargv ~= s.toCString(No.alloc);
     _tmpargv ~= null;
     char** _argv = _tmpargv.ptr;
 
     char*[] _tmpenvv;
     foreach (s; envv)
-      _tmpenvv ~= s.toCString(No.Alloc);
+      _tmpenvv ~= s.toCString(No.alloc);
     _tmpenvv ~= null;
     char** _envv = _tmpenvv.ptr;
 
     auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
     GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    vte_pty_spawn_async(cast(VtePty*)cPtr, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    vte_pty_spawn_async(cast(VtePty*)cPtr, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /** */
@@ -240,7 +240,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
   {
     bool _retval;
     GError *_err;
-    _retval = vte_pty_spawn_finish(cast(VtePty*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(GPid*)&childPid, &_err);
+    _retval = vte_pty_spawn_finish(cast(VtePty*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, cast(GPid*)&childPid, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -307,20 +307,20 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
+    const(char)* _workingDirectory = workingDirectory.toCString(No.alloc);
     const(char)*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(No.Alloc);
+      _tmpargv ~= s.toCString(No.alloc);
     _tmpargv ~= null;
     const(char*)* _argv = _tmpargv.ptr;
 
     const(char)*[] _tmpenvv;
     foreach (s; envv)
-      _tmpenvv ~= s.toCString(No.Alloc);
+      _tmpenvv ~= s.toCString(No.alloc);
     _tmpenvv ~= null;
     const(char*)* _envv = _tmpenvv.ptr;
 
@@ -337,6 +337,6 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
     auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
     GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    vte_pty_spawn_with_fds_async(cast(VtePty*)cPtr, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    vte_pty_spawn_with_fds_async(cast(VtePty*)cPtr, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 }

@@ -41,7 +41,7 @@ import gst.types;
 class ElementFactory : gst.plugin_feature.PluginFeature
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -68,9 +68,9 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   static gst.element_factory.ElementFactory find(string name)
   {
     GstElementFactory* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_element_factory_find(_name);
-    auto _retval = ObjectG.getDObject!(gst.element_factory.ElementFactory)(cast(GstElementFactory*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.element_factory.ElementFactory)(cast(GstElementFactory*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     GList* _cretval;
     auto _list = gListFromD!(gst.element_factory.ElementFactory)(list);
     scope(exit) containerFree!(GList*, gst.element_factory.ElementFactory, GidOwnership.None)(_list);
-    _cretval = gst_element_factory_list_filter(_list, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null, direction, subsetonly);
+    _cretval = gst_element_factory_list_filter(_list, caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null, direction, subsetonly);
     auto _retval = gListToD!(gst.element_factory.ElementFactory, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -135,10 +135,10 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   static gst.element.Element make(string factoryname, string name = null)
   {
     GstElement* _cretval;
-    const(char)* _factoryname = factoryname.toCString(No.Alloc);
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _factoryname = factoryname.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_element_factory_make(_factoryname, _name);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.take);
     return _retval;
   }
 
@@ -155,14 +155,14 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   static gst.element.Element makeWithProperties(string factoryname, string[] names = null, gobject.value.Value[] values = null)
   {
     GstElement* _cretval;
-    const(char)* _factoryname = factoryname.toCString(No.Alloc);
+    const(char)* _factoryname = factoryname.toCString(No.alloc);
     uint _n;
     if (names)
       _n = cast(uint)names.length;
 
     char*[] _tmpnames;
     foreach (s; names)
-      _tmpnames ~= s.toCString(No.Alloc);
+      _tmpnames ~= s.toCString(No.alloc);
     const(char*)* _names = _tmpnames.ptr;
 
     if (values)
@@ -173,7 +173,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       _tmpvalues ~= *cast(GValue*)obj.cPtr;
     const(GValue)* _values = _tmpvalues.ptr;
     _cretval = gst_element_factory_make_with_properties(_factoryname, _n, _names, _values);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.take);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool canSinkAllCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_element_factory_can_sink_all_caps(cast(GstElementFactory*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _retval = gst_element_factory_can_sink_all_caps(cast(GstElementFactory*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool canSinkAnyCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_element_factory_can_sink_any_caps(cast(GstElementFactory*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _retval = gst_element_factory_can_sink_any_caps(cast(GstElementFactory*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool canSrcAllCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_element_factory_can_src_all_caps(cast(GstElementFactory*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _retval = gst_element_factory_can_src_all_caps(cast(GstElementFactory*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool canSrcAnyCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_element_factory_can_src_any_caps(cast(GstElementFactory*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _retval = gst_element_factory_can_src_any_caps(cast(GstElementFactory*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -242,9 +242,9 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   gst.element.Element create(string name = null)
   {
     GstElement* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_element_factory_create(cast(GstElementFactory*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.take);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
     char*[] _tmpnames;
     foreach (s; names)
-      _tmpnames ~= s.toCString(No.Alloc);
+      _tmpnames ~= s.toCString(No.alloc);
     const(char*)* _names = _tmpnames.ptr;
 
     if (values)
@@ -277,7 +277,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       _tmpvalues ~= *cast(GValue*)obj.cPtr;
     const(GValue)* _values = _tmpvalues.ptr;
     _cretval = gst_element_factory_create_with_properties(cast(GstElementFactory*)cPtr, _n, _names, _values);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.take);
     return _retval;
   }
 
@@ -305,9 +305,9 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   string getMetadata(string key)
   {
     const(char)* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.alloc);
     _cretval = gst_element_factory_get_metadata(cast(GstElementFactory*)cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -329,7 +329,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -378,7 +378,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString(No.free);
     }
     return _retval;
   }
@@ -404,7 +404,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool hasInterface(string interfacename)
   {
     bool _retval;
-    const(char)* _interfacename = interfacename.toCString(No.Alloc);
+    const(char)* _interfacename = interfacename.toCString(No.alloc);
     _retval = gst_element_factory_has_interface(cast(GstElementFactory*)cPtr, _interfacename);
     return _retval;
   }

@@ -56,7 +56,7 @@ import gtksource.view;
 class GutterRenderer : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -86,7 +86,7 @@ class GutterRenderer : gtk.widget.Widget
   */
   void activate(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, uint button, gdk.types.ModifierType state, int nPresses)
   {
-    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, area ? cast(const(GdkRectangle)*)area.cPtr(No.Dup) : null, button, state, nPresses);
+    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.dup) : null, area ? cast(const(GdkRectangle)*)area.cPtr(No.dup) : null, button, state, nPresses);
   }
 
   /**
@@ -134,7 +134,7 @@ class GutterRenderer : gtk.widget.Widget
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_gutter_renderer_get_buffer(cast(GtkSourceGutterRenderer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.take);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class GutterRenderer : gtk.widget.Widget
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_gutter_renderer_get_view(cast(GtkSourceGutterRenderer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.take);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class GutterRenderer : gtk.widget.Widget
   bool queryActivatable(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area)
   {
     bool _retval;
-    _retval = gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, area ? cast(const(GdkRectangle)*)area.cPtr(No.Dup) : null);
+    _retval = gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.dup) : null, area ? cast(const(GdkRectangle)*)area.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -300,10 +300,10 @@ class GutterRenderer : gtk.widget.Widget
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -343,10 +343,10 @@ class GutterRenderer : gtk.widget.Widget
     Connect to QueryActivatable signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectQueryActivatable(T)(T callback, Flag!"After" after = No.After)
+  ulong connectQueryActivatable(T)(T callback, Flag!"after" after = No.after)
   if (is(T : QueryActivatableCallbackDlg) || is(T : QueryActivatableCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -375,10 +375,10 @@ class GutterRenderer : gtk.widget.Widget
     Connect to QueryData signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectQueryData(T)(T callback, Flag!"After" after = No.After)
+  ulong connectQueryData(T)(T callback, Flag!"after" after = No.after)
   if (is(T : QueryDataCallbackDlg) || is(T : QueryDataCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

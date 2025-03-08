@@ -39,12 +39,12 @@ import gobject.value;
 class ValueArray : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -89,7 +89,7 @@ class ValueArray : gobject.boxed.Boxed
   {
     GValueArray* _cretval;
     _cretval = g_value_array_new(nPrealloced);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -104,8 +104,8 @@ class ValueArray : gobject.boxed.Boxed
   gobject.value_array.ValueArray append(gobject.value.Value value = null)
   {
     GValueArray* _cretval;
-    _cretval = g_value_array_append(cast(GValueArray*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.Take) : null;
+    _cretval = g_value_array_append(cast(GValueArray*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class ValueArray : gobject.boxed.Boxed
   {
     GValueArray* _cretval;
     _cretval = g_value_array_copy(cast(const(GValueArray)*)cPtr);
-    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class ValueArray : gobject.boxed.Boxed
   {
     GValue* _cretval;
     _cretval = g_value_array_get_nth(cast(GValueArray*)cPtr, index);
-    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -153,8 +153,8 @@ class ValueArray : gobject.boxed.Boxed
   gobject.value_array.ValueArray insert(uint index, gobject.value.Value value = null)
   {
     GValueArray* _cretval;
-    _cretval = g_value_array_insert(cast(GValueArray*)cPtr, index, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.Take) : null;
+    _cretval = g_value_array_insert(cast(GValueArray*)cPtr, index, value ? cast(const(GValue)*)value.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -170,8 +170,8 @@ class ValueArray : gobject.boxed.Boxed
   gobject.value_array.ValueArray prepend(gobject.value.Value value = null)
   {
     GValueArray* _cretval;
-    _cretval = g_value_array_prepend(cast(GValueArray*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.Take) : null;
+    _cretval = g_value_array_prepend(cast(GValueArray*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class ValueArray : gobject.boxed.Boxed
   {
     GValueArray* _cretval;
     _cretval = g_value_array_remove(cast(GValueArray*)cPtr, index);
-    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class ValueArray : gobject.boxed.Boxed
     GValueArray* _cretval;
     auto _compareFunc = compareFunc ? cast(void*)&(compareFunc) : null;
     _cretval = g_value_array_sort_with_data(cast(GValueArray*)cPtr, _compareFuncCB, _compareFunc);
-    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

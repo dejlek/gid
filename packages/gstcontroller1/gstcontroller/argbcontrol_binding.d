@@ -16,7 +16,7 @@ import gstcontroller.types;
 class ARGBControlBinding : gst.control_binding.ControlBinding
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -47,8 +47,8 @@ class ARGBControlBinding : gst.control_binding.ControlBinding
   this(gst.object.ObjectGst object, string propertyName, gst.control_source.ControlSource csA, gst.control_source.ControlSource csR, gst.control_source.ControlSource csG, gst.control_source.ControlSource csB)
   {
     GstControlBinding* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _cretval = gst_argb_control_binding_new(object ? cast(GstObject*)object.cPtr(No.Dup) : null, _propertyName, csA ? cast(GstControlSource*)csA.cPtr(No.Dup) : null, csR ? cast(GstControlSource*)csR.cPtr(No.Dup) : null, csG ? cast(GstControlSource*)csG.cPtr(No.Dup) : null, csB ? cast(GstControlSource*)csB.cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
+    _cretval = gst_argb_control_binding_new(object ? cast(GstObject*)object.cPtr(No.dup) : null, _propertyName, csA ? cast(GstControlSource*)csA.cPtr(No.dup) : null, csR ? cast(GstControlSource*)csR.cPtr(No.dup) : null, csG ? cast(GstControlSource*)csG.cPtr(No.dup) : null, csB ? cast(GstControlSource*)csB.cPtr(No.dup) : null);
+    this(_cretval, No.take);
   }
 }

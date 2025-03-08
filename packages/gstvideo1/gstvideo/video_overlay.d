@@ -294,7 +294,7 @@ interface VideoOverlay
   static bool setProperty(gobject.object.ObjectG object, int lastPropId, uint propertyId, gobject.value.Value value)
   {
     bool _retval;
-    _retval = gst_video_overlay_set_property(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, lastPropId, propertyId, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    _retval = gst_video_overlay_set_property(object ? cast(ObjectC*)object.cPtr(No.dup) : null, lastPropId, propertyId, value ? cast(const(GValue)*)value.cPtr(No.dup) : null);
     return _retval;
   }
 

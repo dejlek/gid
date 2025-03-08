@@ -55,7 +55,7 @@ import gst.types;
 class Bus : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -79,7 +79,7 @@ class Bus : gst.object.ObjectGst
   {
     GstBus* _cretval;
     _cretval = gst_bus_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -158,7 +158,7 @@ class Bus : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.BusFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.bus.Bus)(cast(void*)bus, No.take), message ? new gst.message.Message(cast(void*)message, No.take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -181,7 +181,7 @@ class Bus : gst.object.ObjectGst
   bool asyncSignalFunc(gst.message.Message message, void* data = null)
   {
     bool _retval;
-    _retval = gst_bus_async_signal_func(cast(GstBus*)cPtr, message ? cast(GstMessage*)message.cPtr(No.Dup) : null, data);
+    _retval = gst_bus_async_signal_func(cast(GstBus*)cPtr, message ? cast(GstMessage*)message.cPtr(No.dup) : null, data);
     return _retval;
   }
 
@@ -198,7 +198,7 @@ class Bus : gst.object.ObjectGst
   {
     GSource* _cretval;
     _cretval = gst_bus_create_watch(cast(GstBus*)cPtr);
-    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class Bus : gst.object.ObjectGst
       Gets the file descriptor from the bus which can be used to get notified about
     messages being available with functions like [glib.global.poll], and allows integration
     into other event loops based on file descriptors.
-    Whenever a message is available, the POLLIN / [glib.types.IOCondition.In] event is set.
+    Whenever a message is available, the POLLIN / [glib.types.IOCondition.in_] event is set.
     
     Warning: NEVER read or write anything to the returned fd but only use it
     for getting notifications via [glib.global.poll] or similar and then use the normal
@@ -280,7 +280,7 @@ class Bus : gst.object.ObjectGst
   {
     GstMessage* _cretval;
     _cretval = gst_bus_peek(cast(GstBus*)cPtr);
-    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -330,7 +330,7 @@ class Bus : gst.object.ObjectGst
   {
     GstMessage* _cretval;
     _cretval = gst_bus_poll(cast(GstBus*)cPtr, events, timeout);
-    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -343,7 +343,7 @@ class Bus : gst.object.ObjectGst
   {
     GstMessage* _cretval;
     _cretval = gst_bus_pop(cast(GstBus*)cPtr);
-    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -363,7 +363,7 @@ class Bus : gst.object.ObjectGst
   {
     GstMessage* _cretval;
     _cretval = gst_bus_pop_filtered(cast(GstBus*)cPtr, types);
-    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -377,7 +377,7 @@ class Bus : gst.object.ObjectGst
   bool post(gst.message.Message message)
   {
     bool _retval;
-    _retval = gst_bus_post(cast(GstBus*)cPtr, message ? cast(GstMessage*)message.cPtr(Yes.Dup) : null);
+    _retval = gst_bus_post(cast(GstBus*)cPtr, message ? cast(GstMessage*)message.cPtr(Yes.dup) : null);
     return _retval;
   }
 
@@ -432,7 +432,7 @@ class Bus : gst.object.ObjectGst
       gst.types.BusSyncReply _dretval;
       auto _dlg = cast(gst.types.BusSyncHandler*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
+      _dretval = (*_dlg)(ObjectG.getDObject!(gst.bus.Bus)(cast(void*)bus, No.take), message ? new gst.message.Message(cast(void*)message, No.take) : null);
       auto _retval = cast(GstBusSyncReply)_dretval;
 
       return _retval;
@@ -450,12 +450,12 @@ class Bus : gst.object.ObjectGst
     Params:
       message =       the #GstMessage received
       data =       user data
-    Returns:     [gst.types.BusSyncReply.Pass]
+    Returns:     [gst.types.BusSyncReply.pass]
   */
   gst.types.BusSyncReply syncSignalHandler(gst.message.Message message, void* data = null)
   {
     GstBusSyncReply _cretval;
-    _cretval = gst_bus_sync_signal_handler(cast(GstBus*)cPtr, message ? cast(GstMessage*)message.cPtr(No.Dup) : null, data);
+    _cretval = gst_bus_sync_signal_handler(cast(GstBus*)cPtr, message ? cast(GstMessage*)message.cPtr(No.dup) : null, data);
     gst.types.BusSyncReply _retval = cast(gst.types.BusSyncReply)_cretval;
     return _retval;
   }
@@ -476,7 +476,7 @@ class Bus : gst.object.ObjectGst
   {
     GstMessage* _cretval;
     _cretval = gst_bus_timed_pop(cast(GstBus*)cPtr, timeout);
-    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -490,7 +490,7 @@ class Bus : gst.object.ObjectGst
     matching message was posted on the bus.
     Params:
       timeout =       a timeout in nanoseconds, or `GST_CLOCK_TIME_NONE` to wait forever
-      types =       message types to take into account, [gst.types.MessageType.Any] for any type
+      types =       message types to take into account, [gst.types.MessageType.any] for any type
     Returns:     a #GstMessage matching the
           filter in types, or null if no matching message was found on
           the bus until the timeout expired.
@@ -499,7 +499,7 @@ class Bus : gst.object.ObjectGst
   {
     GstMessage* _cretval;
     _cretval = gst_bus_timed_pop_filtered(cast(GstBus*)cPtr, timeout, types);
-    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -524,10 +524,10 @@ class Bus : gst.object.ObjectGst
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMessage(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  ulong connectMessage(T)(string detail = null, T callback, Flag!"after" after = No.after)
   if (is(T : MessageCallbackDlg) || is(T : MessageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -566,10 +566,10 @@ class Bus : gst.object.ObjectGst
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSyncMessage(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  ulong connectSyncMessage(T)(string detail = null, T callback, Flag!"after" after = No.after)
   if (is(T : SyncMessageCallbackDlg) || is(T : SyncMessageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

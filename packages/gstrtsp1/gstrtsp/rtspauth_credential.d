@@ -14,15 +14,15 @@ class RTSPAuthCredential : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstRTSPAuthCredential.sizeof), Yes.Take);
+    super(safeMalloc(GstRTSPAuthCredential.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -50,12 +50,12 @@ class RTSPAuthCredential : gobject.boxed.Boxed
 
   @property string authorization()
   {
-    return (cast(GstRTSPAuthCredential*)cPtr).authorization.fromCString(No.Free);
+    return (cast(GstRTSPAuthCredential*)cPtr).authorization.fromCString(No.free);
   }
 
   @property void authorization(string propval)
   {
     safeFree(cast(void*)(cast(GstRTSPAuthCredential*)cPtr).authorization);
-    (cast(GstRTSPAuthCredential*)cPtr).authorization = propval.toCString(Yes.Alloc);
+    (cast(GstRTSPAuthCredential*)cPtr).authorization = propval.toCString(Yes.alloc);
   }
 }

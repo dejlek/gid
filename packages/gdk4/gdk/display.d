@@ -40,7 +40,7 @@ import gobject.value;
 class Display : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -69,7 +69,7 @@ class Display : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_display_get_default();
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
     return _retval;
   }
 
@@ -84,9 +84,9 @@ class Display : gobject.object.ObjectG
   static gdk.display.Display open(string displayName = null)
   {
     GdkDisplay* _cretval;
-    const(char)* _displayName = displayName.toCString(No.Alloc);
+    const(char)* _displayName = displayName.toCString(No.alloc);
     _cretval = gdk_display_open(_displayName);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class Display : gobject.object.ObjectG
     _cretval = gdk_display_create_gl_context(cast(GdkDisplay*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class Display : gobject.object.ObjectG
   bool deviceIsGrabbed(gdk.device.Device device)
   {
     bool _retval;
-    _retval = gdk_display_device_is_grabbed(cast(GdkDisplay*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
+    _retval = gdk_display_device_is_grabbed(cast(GdkDisplay*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class Display : gobject.object.ObjectG
   {
     GdkAppLaunchContext* _cretval;
     _cretval = gdk_display_get_app_launch_context(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.app_launch_context.AppLaunchContext)(cast(GdkAppLaunchContext*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdk.app_launch_context.AppLaunchContext)(cast(GdkAppLaunchContext*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class Display : gobject.object.ObjectG
   {
     GdkClipboard* _cretval;
     _cretval = gdk_display_get_clipboard(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.clipboard.Clipboard)(cast(GdkClipboard*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.clipboard.Clipboard)(cast(GdkClipboard*)_cretval, No.take);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class Display : gobject.object.ObjectG
   {
     GdkSeat* _cretval;
     _cretval = gdk_display_get_default_seat(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.take);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class Display : gobject.object.ObjectG
   {
     GdkDmabufFormats* _cretval;
     _cretval = gdk_display_get_dmabuf_formats(cast(GdkDisplay*)cPtr);
-    auto _retval = _cretval ? new gdk.dmabuf_formats.DmabufFormats(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.dmabuf_formats.DmabufFormats(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -232,8 +232,8 @@ class Display : gobject.object.ObjectG
   gdk.monitor.MonitorG getMonitorAtSurface(gdk.surface.Surface surface)
   {
     GdkMonitor* _cretval;
-    _cretval = gdk_display_get_monitor_at_surface(cast(GdkDisplay*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.monitor.MonitorG)(cast(GdkMonitor*)_cretval, No.Take);
+    _cretval = gdk_display_get_monitor_at_surface(cast(GdkDisplay*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gdk.monitor.MonitorG)(cast(GdkMonitor*)_cretval, No.take);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class Display : gobject.object.ObjectG
   {
     GListModel* _cretval;
     _cretval = gdk_display_get_monitors(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.take);
     return _retval;
   }
 
@@ -264,7 +264,7 @@ class Display : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_display_get_name(cast(GdkDisplay*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ class Display : gobject.object.ObjectG
   {
     GdkClipboard* _cretval;
     _cretval = gdk_display_get_primary_clipboard(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.clipboard.Clipboard)(cast(GdkClipboard*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.clipboard.Clipboard)(cast(GdkClipboard*)_cretval, No.take);
     return _retval;
   }
 
@@ -295,8 +295,8 @@ class Display : gobject.object.ObjectG
   bool getSetting(string name, gobject.value.Value value)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    _retval = gdk_display_get_setting(cast(GdkDisplay*)cPtr, _name, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    const(char)* _name = name.toCString(No.alloc);
+    _retval = gdk_display_get_setting(cast(GdkDisplay*)cPtr, _name, value ? cast(GValue*)value.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -309,7 +309,7 @@ class Display : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_display_get_startup_notification_id(cast(GdkDisplay*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -465,7 +465,7 @@ class Display : gobject.object.ObjectG
   */
   void notifyStartupComplete(string startupId)
   {
-    const(char)* _startupId = startupId.toCString(No.Alloc);
+    const(char)* _startupId = startupId.toCString(No.alloc);
     gdk_display_notify_startup_complete(cast(GdkDisplay*)cPtr, _startupId);
   }
 
@@ -506,7 +506,7 @@ class Display : gobject.object.ObjectG
   */
   void putEvent(gdk.event.Event event)
   {
-    gdk_display_put_event(cast(GdkDisplay*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
+    gdk_display_put_event(cast(GdkDisplay*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.dup) : null);
   }
 
   /**
@@ -613,10 +613,10 @@ class Display : gobject.object.ObjectG
     Connect to Closed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  ulong connectClosed(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ClosedCallbackDlg) || is(T : ClosedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -649,10 +649,10 @@ class Display : gobject.object.ObjectG
     Connect to Opened signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectOpened(T)(T callback, Flag!"After" after = No.After)
+  ulong connectOpened(T)(T callback, Flag!"after" after = No.after)
   if (is(T : OpenedCallbackDlg) || is(T : OpenedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -685,10 +685,10 @@ class Display : gobject.object.ObjectG
     Connect to SeatAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSeatAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSeatAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SeatAddedCallbackDlg) || is(T : SeatAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -722,10 +722,10 @@ class Display : gobject.object.ObjectG
     Connect to SeatRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSeatRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSeatRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SeatRemovedCallbackDlg) || is(T : SeatRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -759,10 +759,10 @@ class Display : gobject.object.ObjectG
     Connect to SettingChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSettingChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSettingChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SettingChangedCallbackDlg) || is(T : SettingChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

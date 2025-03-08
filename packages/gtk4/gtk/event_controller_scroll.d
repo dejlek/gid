@@ -28,18 +28,18 @@ import gtk.types;
   conditions of the widget changed).
   
   The controller can be set up to emit motion for either/both vertical
-  and horizontal scroll events through [gtk.types.EventControllerScrollFlags.Vertical],
-  [gtk.types.EventControllerScrollFlags.Horizontal] and [gtk.types.EventControllerScrollFlags.BothAxes].
+  and horizontal scroll events through [gtk.types.EventControllerScrollFlags.vertical],
+  [gtk.types.EventControllerScrollFlags.horizontal] and [gtk.types.EventControllerScrollFlags.bothAxes].
   If any axis is disabled, the respective [gtk.event_controller_scroll.EventControllerScroll.scroll]
   delta will be 0. Vertical scroll events will be translated to horizontal
   motion for the devices incapable of horizontal scrolling.
   
   The event controller can also be forced to emit discrete events on all
-  devices through [gtk.types.EventControllerScrollFlags.Discrete]. This can be used
+  devices through [gtk.types.EventControllerScrollFlags.discrete]. This can be used
   to implement discrete actions triggered through scroll events (e.g.
   switching across combobox options).
   
-  The [gtk.types.EventControllerScrollFlags.Kinetic] flag toggles the emission of the
+  The [gtk.types.EventControllerScrollFlags.kinetic] flag toggles the emission of the
   [gtk.event_controller_scroll.EventControllerScroll.decelerate] signal, emitted at the end
   of scrolling with two X/Y velocity arguments that are consistent with the
   motion that was received.
@@ -47,7 +47,7 @@ import gtk.types;
 class EventControllerScroll : gtk.event_controller.EventController
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -73,7 +73,7 @@ class EventControllerScroll : gtk.event_controller.EventController
   {
     GtkEventController* _cretval;
     _cretval = gtk_event_controller_scroll_new(flags);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -92,8 +92,8 @@ class EventControllerScroll : gtk.event_controller.EventController
       Gets the scroll unit of the last
     [gtk.event_controller_scroll.EventControllerScroll.scroll] signal received.
     
-    Always returns [gdk.types.ScrollUnit.Wheel] if the
-    [gtk.types.EventControllerScrollFlags.Discrete] flag is set.
+    Always returns [gdk.types.ScrollUnit.wheel] if the
+    [gtk.types.EventControllerScrollFlags.discrete] flag is set.
     Returns:     the scroll unit.
   */
   gdk.types.ScrollUnit getUnit()
@@ -116,7 +116,7 @@ class EventControllerScroll : gtk.event_controller.EventController
 
   /**
       Emitted after scroll is finished if the
-    [gtk.types.EventControllerScrollFlags.Kinetic] flag is set.
+    [gtk.types.EventControllerScrollFlags.kinetic] flag is set.
     
     vel_x and vel_y express the initial velocity that was
     imprinted by the scroll events. vel_x and vel_y are expressed in
@@ -138,10 +138,10 @@ class EventControllerScroll : gtk.event_controller.EventController
     Connect to Decelerate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDecelerate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDecelerate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DecelerateCallbackDlg) || is(T : DecelerateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -183,10 +183,10 @@ class EventControllerScroll : gtk.event_controller.EventController
     Connect to Scroll signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectScroll(T)(T callback, Flag!"After" after = No.After)
+  ulong connectScroll(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ScrollCallbackDlg) || is(T : ScrollCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -224,10 +224,10 @@ class EventControllerScroll : gtk.event_controller.EventController
     Connect to ScrollBegin signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectScrollBegin(T)(T callback, Flag!"After" after = No.After)
+  ulong connectScrollBegin(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ScrollBeginCallbackDlg) || is(T : ScrollBeginCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -261,10 +261,10 @@ class EventControllerScroll : gtk.event_controller.EventController
     Connect to ScrollEnd signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectScrollEnd(T)(T callback, Flag!"After" after = No.After)
+  ulong connectScrollEnd(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ScrollEndCallbackDlg) || is(T : ScrollEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

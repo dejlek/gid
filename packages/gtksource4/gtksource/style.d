@@ -11,7 +11,7 @@ import gtksource.types;
 class Style : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class Style : gobject.object.ObjectG
   */
   void apply(gtk.text_tag.TextTag tag)
   {
-    gtk_source_style_apply(cast(const(GtkSourceStyle)*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
+    gtk_source_style_apply(cast(const(GtkSourceStyle)*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.dup) : null);
   }
 
   /**
@@ -53,7 +53,7 @@ class Style : gobject.object.ObjectG
   {
     GtkSourceStyle* _cretval;
     _cretval = gtk_source_style_copy(cast(const(GtkSourceStyle)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.style.Style)(cast(GtkSourceStyle*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.style.Style)(cast(GtkSourceStyle*)_cretval, Yes.take);
     return _retval;
   }
 }

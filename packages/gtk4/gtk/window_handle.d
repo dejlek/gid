@@ -25,14 +25,14 @@ import gtk.widget;
   
   # Accessibility
   
-  Until GTK 4.10, [gtk.window_handle.WindowHandle] used the [gtk.types.AccessibleRole.Group] role.
+  Until GTK 4.10, [gtk.window_handle.WindowHandle] used the [gtk.types.AccessibleRole.group] role.
   
-  Starting from GTK 4.12, [gtk.window_handle.WindowHandle] uses the [gtk.types.AccessibleRole.Generic] role.
+  Starting from GTK 4.12, [gtk.window_handle.WindowHandle] uses the [gtk.types.AccessibleRole.generic] role.
 */
 class WindowHandle : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -56,7 +56,7 @@ class WindowHandle : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_handle_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -67,7 +67,7 @@ class WindowHandle : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_handle_get_child(cast(GtkWindowHandle*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -78,6 +78,6 @@ class WindowHandle : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_window_handle_set_child(cast(GtkWindowHandle*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_window_handle_set_child(cast(GtkWindowHandle*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 }

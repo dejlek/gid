@@ -10,7 +10,7 @@ import gobject.object;
 class FileSystemDatasetWriteOptions : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class FileSystemDatasetWriteOptions : gobject.object.ObjectG
   {
     GADatasetFileSystemDatasetWriteOptions* _cretval;
     _cretval = gadataset_file_system_dataset_write_options_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

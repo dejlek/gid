@@ -17,7 +17,7 @@ import gtk.types;
 class RendererCellAccessible : gtk.cell_accessible.CellAccessible
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -37,7 +37,7 @@ class RendererCellAccessible : gtk.cell_accessible.CellAccessible
   this(gtk.cell_renderer.CellRenderer renderer)
   {
     AtkObject* _cretval;
-    _cretval = gtk_renderer_cell_accessible_new(renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gtk_renderer_cell_accessible_new(renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 }

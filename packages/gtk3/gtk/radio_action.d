@@ -17,7 +17,7 @@ import gtk.types;
 class RadioAction : gtk.toggle_action.ToggleAction
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -51,12 +51,12 @@ class RadioAction : gtk.toggle_action.ToggleAction
   this(string name, string label, string tooltip, string stockId, int value)
   {
     GtkRadioAction* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _label = label.toCString(No.Alloc);
-    const(char)* _tooltip = tooltip.toCString(No.Alloc);
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _tooltip = tooltip.toCString(No.alloc);
+    const(char)* _stockId = stockId.toCString(No.alloc);
     _cretval = gtk_radio_action_new(_name, _label, _tooltip, _stockId, value);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -124,7 +124,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
   */
   void joinGroup(gtk.radio_action.RadioAction groupSource = null)
   {
-    gtk_radio_action_join_group(cast(GtkRadioAction*)cPtr, groupSource ? cast(GtkRadioAction*)groupSource.cPtr(No.Dup) : null);
+    gtk_radio_action_join_group(cast(GtkRadioAction*)cPtr, groupSource ? cast(GtkRadioAction*)groupSource.cPtr(No.dup) : null);
   }
 
   /**
@@ -170,10 +170,10 @@ class RadioAction : gtk.toggle_action.ToggleAction
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -14,7 +14,7 @@ class SDPZone
 {
   GstSDPZone cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstSdp.SDPZone");
@@ -32,24 +32,24 @@ class SDPZone
 
   @property string time()
   {
-    return (cast(GstSDPZone*)cPtr).time.fromCString(No.Free);
+    return (cast(GstSDPZone*)cPtr).time.fromCString(No.free);
   }
 
   @property void time(string propval)
   {
     safeFree(cast(void*)(cast(GstSDPZone*)cPtr).time);
-    (cast(GstSDPZone*)cPtr).time = propval.toCString(Yes.Alloc);
+    (cast(GstSDPZone*)cPtr).time = propval.toCString(Yes.alloc);
   }
 
   @property string typedTime()
   {
-    return (cast(GstSDPZone*)cPtr).typedTime.fromCString(No.Free);
+    return (cast(GstSDPZone*)cPtr).typedTime.fromCString(No.free);
   }
 
   @property void typedTime(string propval)
   {
     safeFree(cast(void*)(cast(GstSDPZone*)cPtr).typedTime);
-    (cast(GstSDPZone*)cPtr).typedTime = propval.toCString(Yes.Alloc);
+    (cast(GstSDPZone*)cPtr).typedTime = propval.toCString(Yes.alloc);
   }
 
   /**
@@ -74,8 +74,8 @@ class SDPZone
   gstsdp.types.SDPResult set(string adjTime, string typedTime)
   {
     GstSDPResult _cretval;
-    const(char)* _adjTime = adjTime.toCString(No.Alloc);
-    const(char)* _typedTime = typedTime.toCString(No.Alloc);
+    const(char)* _adjTime = adjTime.toCString(No.alloc);
+    const(char)* _typedTime = typedTime.toCString(No.alloc);
     _cretval = gst_sdp_zone_set(cast(GstSDPZone*)cPtr, _adjTime, _typedTime);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;

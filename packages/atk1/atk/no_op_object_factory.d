@@ -16,7 +16,7 @@ import gid.gid;
 class NoOpObjectFactory : atk.object_factory.ObjectFactory
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,6 +41,6 @@ class NoOpObjectFactory : atk.object_factory.ObjectFactory
   {
     AtkObjectFactory* _cretval;
     _cretval = atk_no_op_object_factory_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

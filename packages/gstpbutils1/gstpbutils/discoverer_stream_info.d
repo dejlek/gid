@@ -30,7 +30,7 @@ import gstpbutils.types;
 class DiscovererStreamInfo : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -64,7 +64,7 @@ class DiscovererStreamInfo : gobject.object.ObjectG
   {
     GstCaps* _cretval;
     _cretval = gst_discoverer_stream_info_get_caps(cast(GstDiscovererStreamInfo*)cPtr);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class DiscovererStreamInfo : gobject.object.ObjectG
   {
     const(GstStructure)* _cretval;
     _cretval = gst_discoverer_stream_info_get_misc(cast(GstDiscovererStreamInfo*)cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class DiscovererStreamInfo : gobject.object.ObjectG
   {
     GstDiscovererStreamInfo* _cretval;
     _cretval = gst_discoverer_stream_info_get_next(cast(GstDiscovererStreamInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class DiscovererStreamInfo : gobject.object.ObjectG
   {
     GstDiscovererStreamInfo* _cretval;
     _cretval = gst_discoverer_stream_info_get_previous(cast(GstDiscovererStreamInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class DiscovererStreamInfo : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gst_discoverer_stream_info_get_stream_id(cast(GstDiscovererStreamInfo*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class DiscovererStreamInfo : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gst_discoverer_stream_info_get_stream_type_nick(cast(GstDiscovererStreamInfo*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class DiscovererStreamInfo : gobject.object.ObjectG
   {
     const(GstTagList)* _cretval;
     _cretval = gst_discoverer_stream_info_get_tags(cast(GstDiscovererStreamInfo*)cPtr);
-    auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -135,7 +135,7 @@ class DiscovererStreamInfo : gobject.object.ObjectG
   {
     const(GstToc)* _cretval;
     _cretval = gst_discoverer_stream_info_get_toc(cast(GstDiscovererStreamInfo*)cPtr);
-    auto _retval = _cretval ? new gst.toc.Toc(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.toc.Toc(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

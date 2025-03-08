@@ -16,7 +16,7 @@ import gobject.object;
 class DBusMenuModel : gio.menu_model.MenuModel
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -52,10 +52,10 @@ class DBusMenuModel : gio.menu_model.MenuModel
   static gio.dbus_menu_model.DBusMenuModel get(gio.dbus_connection.DBusConnection connection, string busName, string objectPath)
   {
     GDBusMenuModel* _cretval;
-    const(char)* _busName = busName.toCString(No.Alloc);
-    const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    _cretval = g_dbus_menu_model_get(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, _busName, _objectPath);
-    auto _retval = ObjectG.getDObject!(gio.dbus_menu_model.DBusMenuModel)(cast(GDBusMenuModel*)_cretval, Yes.Take);
+    const(char)* _busName = busName.toCString(No.alloc);
+    const(char)* _objectPath = objectPath.toCString(No.alloc);
+    _cretval = g_dbus_menu_model_get(connection ? cast(GDBusConnection*)connection.cPtr(No.dup) : null, _busName, _objectPath);
+    auto _retval = ObjectG.getDObject!(gio.dbus_menu_model.DBusMenuModel)(cast(GDBusMenuModel*)_cretval, Yes.take);
     return _retval;
   }
 }

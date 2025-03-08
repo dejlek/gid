@@ -30,7 +30,7 @@ import gobject.object;
 class ThreadedSocketService : gio.socket_service.SocketService
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -58,7 +58,7 @@ class ThreadedSocketService : gio.socket_service.SocketService
   {
     GSocketService* _cretval;
     _cretval = g_threaded_socket_service_new(maxThreads);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -84,10 +84,10 @@ class ThreadedSocketService : gio.socket_service.SocketService
     Connect to Run signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRun(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRun(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RunCallbackDlg) || is(T : RunCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

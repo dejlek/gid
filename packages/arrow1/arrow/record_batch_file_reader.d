@@ -14,7 +14,7 @@ import gobject.object;
 class RecordBatchFileReader : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,10 +35,10 @@ class RecordBatchFileReader : gobject.object.ObjectG
   {
     GArrowRecordBatchFileReader* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_file_reader_new(file ? cast(GArrowSeekableInputStream*)file.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_record_batch_file_reader_new(file ? cast(GArrowSeekableInputStream*)file.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */
@@ -57,7 +57,7 @@ class RecordBatchFileReader : gobject.object.ObjectG
     _cretval = garrow_record_batch_file_reader_get_record_batch(cast(GArrowRecordBatchFileReader*)cPtr, i, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -66,7 +66,7 @@ class RecordBatchFileReader : gobject.object.ObjectG
   {
     GArrowSchema* _cretval;
     _cretval = garrow_record_batch_file_reader_get_schema(cast(GArrowRecordBatchFileReader*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class RecordBatchFileReader : gobject.object.ObjectG
     _cretval = garrow_record_batch_file_reader_read_record_batch(cast(GArrowRecordBatchFileReader*)cPtr, i, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.take);
     return _retval;
   }
 }

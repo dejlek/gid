@@ -17,7 +17,7 @@ import gtk.types;
 class GestureZoom : gtk.gesture.Gesture
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,7 +42,7 @@ class GestureZoom : gtk.gesture.Gesture
   {
     GtkGesture* _cretval;
     _cretval = gtk_gesture_zoom_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -79,10 +79,10 @@ class GestureZoom : gtk.gesture.Gesture
     Connect to ScaleChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectScaleChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectScaleChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ScaleChangedCallbackDlg) || is(T : ScaleChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

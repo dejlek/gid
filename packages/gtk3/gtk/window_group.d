@@ -29,7 +29,7 @@ import gtk.window;
 class WindowGroup : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -54,7 +54,7 @@ class WindowGroup : gobject.object.ObjectG
   {
     GtkWindowGroup* _cretval;
     _cretval = gtk_window_group_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -64,7 +64,7 @@ class WindowGroup : gobject.object.ObjectG
   */
   void addWindow(gtk.window.Window window)
   {
-    gtk_window_group_add_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
+    gtk_window_group_add_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.dup) : null);
   }
 
   /**
@@ -76,8 +76,8 @@ class WindowGroup : gobject.object.ObjectG
   gtk.widget.Widget getCurrentDeviceGrab(gdk.device.Device device)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_window_group_get_current_device_grab(cast(GtkWindowGroup*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_window_group_get_current_device_grab(cast(GtkWindowGroup*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class WindowGroup : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_group_get_current_grab(cast(GtkWindowGroup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -114,6 +114,6 @@ class WindowGroup : gobject.object.ObjectG
   */
   void removeWindow(gtk.window.Window window)
   {
-    gtk_window_group_remove_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
+    gtk_window_group_remove_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.dup) : null);
   }
 }

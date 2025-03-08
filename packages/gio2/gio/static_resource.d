@@ -14,7 +14,7 @@ class StaticResource
 {
   GStaticResource cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.StaticResource");
@@ -54,7 +54,7 @@ class StaticResource
   {
     GResource* _cretval;
     _cretval = g_static_resource_get_resource(cast(GStaticResource*)cPtr);
-    auto _retval = _cretval ? new gio.resource.Resource(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gio.resource.Resource(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 

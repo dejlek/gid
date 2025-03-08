@@ -22,7 +22,7 @@ import gtk.widget;
 class LayoutChild : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -46,7 +46,7 @@ class LayoutChild : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_layout_child_get_child_widget(cast(GtkLayoutChild*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -59,7 +59,7 @@ class LayoutChild : gobject.object.ObjectG
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_layout_child_get_layout_manager(cast(GtkLayoutChild*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.layout_manager.LayoutManager)(cast(GtkLayoutManager*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.layout_manager.LayoutManager)(cast(GtkLayoutManager*)_cretval, No.take);
     return _retval;
   }
 }

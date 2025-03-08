@@ -13,7 +13,7 @@ import gtk.types;
 class ObjectExpression : gtk.expression.Expression
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.ObjectExpression");
@@ -36,8 +36,8 @@ class ObjectExpression : gtk.expression.Expression
   this(gobject.object.ObjectG object)
   {
     GtkExpression* _cretval;
-    _cretval = gtk_object_expression_new(object ? cast(ObjectC*)object.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gtk_object_expression_new(object ? cast(ObjectC*)object.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -48,7 +48,7 @@ class ObjectExpression : gtk.expression.Expression
   {
     ObjectC* _cretval;
     _cretval = gtk_object_expression_get_object(cast(GtkExpression*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.take);
     return _retval;
   }
 }

@@ -18,7 +18,7 @@ class EventGrabBroken
 {
   GdkEventGrabBroken cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventGrabBroken");
@@ -46,7 +46,7 @@ class EventGrabBroken
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventGrabBroken*)cPtr).window, No.Take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventGrabBroken*)cPtr).window, No.take);
   }
 
   @property byte sendEvent()
@@ -81,6 +81,6 @@ class EventGrabBroken
 
   @property gdk.window.Window grabWindow()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventGrabBroken*)cPtr).grabWindow, No.Take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventGrabBroken*)cPtr).grabWindow, No.take);
   }
 }

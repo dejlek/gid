@@ -10,7 +10,7 @@ import gobject.object;
 class Descriptor : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -30,7 +30,7 @@ class Descriptor : gobject.object.ObjectG
   bool equal(arrowflight.descriptor.Descriptor otherDescriptor)
   {
     bool _retval;
-    _retval = gaflight_descriptor_equal(cast(GAFlightDescriptor*)cPtr, otherDescriptor ? cast(GAFlightDescriptor*)otherDescriptor.cPtr(No.Dup) : null);
+    _retval = gaflight_descriptor_equal(cast(GAFlightDescriptor*)cPtr, otherDescriptor ? cast(GAFlightDescriptor*)otherDescriptor.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -39,7 +39,7 @@ class Descriptor : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = gaflight_descriptor_to_string(cast(GAFlightDescriptor*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

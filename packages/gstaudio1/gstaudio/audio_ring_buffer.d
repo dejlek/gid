@@ -23,7 +23,7 @@ import gstaudio.types;
 class AudioRingBuffer : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -69,7 +69,7 @@ class AudioRingBuffer : gst.object.ObjectGst
   static bool parseCaps(gstaudio.audio_ring_buffer_spec.AudioRingBufferSpec spec, gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_audio_ring_buffer_parse_caps(spec ? cast(GstAudioRingBufferSpec*)spec.cPtr : null, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    _retval = gst_audio_ring_buffer_parse_caps(spec ? cast(GstAudioRingBufferSpec*)spec.cPtr : null, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -427,7 +427,7 @@ class AudioRingBuffer : gst.object.ObjectGst
       _data.length = len;
       _data[0 .. len] = data[0 .. len];
 
-      (*_dlg)(ObjectG.getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(void*)rbuf, No.Take), _data);
+      (*_dlg)(ObjectG.getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(void*)rbuf, No.take), _data);
     }
     auto _cbCB = cb ? &_cbCallback : null;
 

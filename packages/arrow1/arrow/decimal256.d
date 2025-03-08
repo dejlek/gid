@@ -12,7 +12,7 @@ import gobject.object;
 class Decimal256 : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,7 +33,7 @@ class Decimal256 : gobject.object.ObjectG
   {
     GArrowDecimal256* _cretval;
     _cretval = garrow_decimal256_new_integer(data);
-    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -41,12 +41,12 @@ class Decimal256 : gobject.object.ObjectG
   static arrow.decimal256.Decimal256 newString(string data)
   {
     GArrowDecimal256* _cretval;
-    const(char)* _data = data.toCString(No.Alloc);
+    const(char)* _data = data.toCString(No.alloc);
     GError *_err;
     _cretval = garrow_decimal256_new_string(_data, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -63,7 +63,7 @@ class Decimal256 : gobject.object.ObjectG
   {
     GArrowDecimal256* _cretval;
     _cretval = garrow_decimal256_copy(cast(GArrowDecimal256*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -73,11 +73,11 @@ class Decimal256 : gobject.object.ObjectG
     GArrowDecimal256* _cretval;
     GArrowDecimal256* _remainder;
     GError *_err;
-    _cretval = garrow_decimal256_divide(cast(GArrowDecimal256*)cPtr, right ? cast(GArrowDecimal256*)right.cPtr(No.Dup) : null, &_remainder, &_err);
+    _cretval = garrow_decimal256_divide(cast(GArrowDecimal256*)cPtr, right ? cast(GArrowDecimal256*)right.cPtr(No.dup) : null, &_remainder, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.Take);
-    remainder = new arrow.decimal256.Decimal256(cast(void*)_remainder, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.take);
+    remainder = new arrow.decimal256.Decimal256(cast(void*)_remainder, Yes.take);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class Decimal256 : gobject.object.ObjectG
   bool equal(arrow.decimal256.Decimal256 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal256_equal(cast(GArrowDecimal256*)cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal.cPtr(No.Dup) : null);
+    _retval = garrow_decimal256_equal(cast(GArrowDecimal256*)cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class Decimal256 : gobject.object.ObjectG
   bool greaterThan(arrow.decimal256.Decimal256 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal256_greater_than(cast(GArrowDecimal256*)cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal.cPtr(No.Dup) : null);
+    _retval = garrow_decimal256_greater_than(cast(GArrowDecimal256*)cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class Decimal256 : gobject.object.ObjectG
   bool greaterThanOrEqual(arrow.decimal256.Decimal256 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal256_greater_than_or_equal(cast(GArrowDecimal256*)cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal.cPtr(No.Dup) : null);
+    _retval = garrow_decimal256_greater_than_or_equal(cast(GArrowDecimal256*)cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class Decimal256 : gobject.object.ObjectG
   bool lessThan(arrow.decimal256.Decimal256 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal256_less_than(cast(GArrowDecimal256*)cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal.cPtr(No.Dup) : null);
+    _retval = garrow_decimal256_less_than(cast(GArrowDecimal256*)cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class Decimal256 : gobject.object.ObjectG
   bool lessThanOrEqual(arrow.decimal256.Decimal256 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal256_less_than_or_equal(cast(GArrowDecimal256*)cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal.cPtr(No.Dup) : null);
+    _retval = garrow_decimal256_less_than_or_equal(cast(GArrowDecimal256*)cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -125,8 +125,8 @@ class Decimal256 : gobject.object.ObjectG
   arrow.decimal256.Decimal256 multiply(arrow.decimal256.Decimal256 right)
   {
     GArrowDecimal256* _cretval;
-    _cretval = garrow_decimal256_multiply(cast(GArrowDecimal256*)cPtr, right ? cast(GArrowDecimal256*)right.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.Take);
+    _cretval = garrow_decimal256_multiply(cast(GArrowDecimal256*)cPtr, right ? cast(GArrowDecimal256*)right.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class Decimal256 : gobject.object.ObjectG
   bool notEqual(arrow.decimal256.Decimal256 otherDecimal)
   {
     bool _retval;
-    _retval = garrow_decimal256_not_equal(cast(GArrowDecimal256*)cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal.cPtr(No.Dup) : null);
+    _retval = garrow_decimal256_not_equal(cast(GArrowDecimal256*)cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -150,8 +150,8 @@ class Decimal256 : gobject.object.ObjectG
   arrow.decimal256.Decimal256 plus(arrow.decimal256.Decimal256 right)
   {
     GArrowDecimal256* _cretval;
-    _cretval = garrow_decimal256_plus(cast(GArrowDecimal256*)cPtr, right ? cast(GArrowDecimal256*)right.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.Take);
+    _cretval = garrow_decimal256_plus(cast(GArrowDecimal256*)cPtr, right ? cast(GArrowDecimal256*)right.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class Decimal256 : gobject.object.ObjectG
     _cretval = garrow_decimal256_rescale(cast(GArrowDecimal256*)cPtr, originalScale, newScale, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class Decimal256 : gobject.object.ObjectG
   {
     GBytes* _cretval;
     _cretval = garrow_decimal256_to_bytes(cast(GArrowDecimal256*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class Decimal256 : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = garrow_decimal256_to_string(cast(GArrowDecimal256*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class Decimal256 : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = garrow_decimal256_to_string_scale(cast(GArrowDecimal256*)cPtr, scale);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

@@ -12,7 +12,7 @@ class AudioFormatInfo
 {
   GstAudioFormatInfo cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstAudio.AudioFormatInfo");
@@ -40,24 +40,24 @@ class AudioFormatInfo
 
   @property string name()
   {
-    return (cast(GstAudioFormatInfo*)cPtr).name.fromCString(No.Free);
+    return (cast(GstAudioFormatInfo*)cPtr).name.fromCString(No.free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(GstAudioFormatInfo*)cPtr).name);
-    (cast(GstAudioFormatInfo*)cPtr).name = propval.toCString(Yes.Alloc);
+    (cast(GstAudioFormatInfo*)cPtr).name = propval.toCString(Yes.alloc);
   }
 
   @property string description()
   {
-    return (cast(GstAudioFormatInfo*)cPtr).description.fromCString(No.Free);
+    return (cast(GstAudioFormatInfo*)cPtr).description.fromCString(No.free);
   }
 
   @property void description(string propval)
   {
     safeFree(cast(void*)(cast(GstAudioFormatInfo*)cPtr).description);
-    (cast(GstAudioFormatInfo*)cPtr).description = propval.toCString(Yes.Alloc);
+    (cast(GstAudioFormatInfo*)cPtr).description = propval.toCString(Yes.alloc);
   }
 
   @property gstaudio.types.AudioFormatFlags flags()

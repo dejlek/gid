@@ -122,10 +122,10 @@ interface Document
     Connect to DocumentAttributeChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDocumentAttributeChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDocumentAttributeChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DocumentAttributeChangedCallbackDlg) || is(T : DocumentAttributeChangedCallbackFunc));
 
   /**
@@ -153,10 +153,10 @@ interface Document
     Connect to LoadComplete signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLoadComplete(T)(T callback, Flag!"After" after = No.After)
+  ulong connectLoadComplete(T)(T callback, Flag!"after" after = No.after)
   if (is(T : LoadCompleteCallbackDlg) || is(T : LoadCompleteCallbackFunc));
 
   /**
@@ -181,10 +181,10 @@ interface Document
     Connect to LoadStopped signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLoadStopped(T)(T callback, Flag!"After" after = No.After)
+  ulong connectLoadStopped(T)(T callback, Flag!"after" after = No.after)
   if (is(T : LoadStoppedCallbackDlg) || is(T : LoadStoppedCallbackFunc));
 
   /**
@@ -208,10 +208,10 @@ interface Document
     Connect to PageChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPageChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPageChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PageChangedCallbackDlg) || is(T : PageChangedCallbackFunc));
 
   /**
@@ -235,9 +235,9 @@ interface Document
     Connect to Reload signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectReload(T)(T callback, Flag!"After" after = No.After)
+  ulong connectReload(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ReloadCallbackDlg) || is(T : ReloadCallbackFunc));
   }

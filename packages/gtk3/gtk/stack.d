@@ -33,7 +33,7 @@ import gtk.widget;
 class Stack : gtk.container.Container
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -57,7 +57,7 @@ class Stack : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -69,8 +69,8 @@ class Stack : gtk.container.Container
   */
   void addNamed(gtk.widget.Widget child, string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    gtk_stack_add_named(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _name);
+    const(char)* _name = name.toCString(No.alloc);
+    gtk_stack_add_named(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, _name);
   }
 
   /**
@@ -85,9 +85,9 @@ class Stack : gtk.container.Container
   */
   void addTitled(gtk.widget.Widget child, string name, string title)
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _title = title.toCString(No.Alloc);
-    gtk_stack_add_titled(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _name, _title);
+    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _title = title.toCString(No.alloc);
+    gtk_stack_add_titled(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, _name, _title);
   }
 
   /**
@@ -101,9 +101,9 @@ class Stack : gtk.container.Container
   gtk.widget.Widget getChildByName(string name)
   {
     GtkWidget* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gtk_stack_get_child_by_name(cast(GtkStack*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class Stack : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_get_visible_child(cast(GtkStack*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class Stack : gtk.container.Container
   {
     const(char)* _cretval;
     _cretval = gtk_stack_get_visible_child_name(cast(GtkStack*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -318,7 +318,7 @@ class Stack : gtk.container.Container
   */
   void setVisibleChild(gtk.widget.Widget child)
   {
-    gtk_stack_set_visible_child(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_stack_set_visible_child(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -333,7 +333,7 @@ class Stack : gtk.container.Container
   */
   void setVisibleChildFull(string name, gtk.types.StackTransitionType transition)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gtk_stack_set_visible_child_full(cast(GtkStack*)cPtr, _name, transition);
   }
 
@@ -353,7 +353,7 @@ class Stack : gtk.container.Container
   */
   void setVisibleChildName(string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gtk_stack_set_visible_child_name(cast(GtkStack*)cPtr, _name);
   }
 }

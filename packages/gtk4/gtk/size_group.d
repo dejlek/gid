@@ -37,16 +37,16 @@ import gtk.widget;
   Widgets can be part of multiple size groups; GTK will compute the
   horizontal size of a widget from the horizontal requisition of all
   widgets that can be reached from the widget by a chain of size groups
-  of type [gtk.types.SizeGroupMode.Horizontal] or [gtk.types.SizeGroupMode.Both], and the
+  of type [gtk.types.SizeGroupMode.horizontal] or [gtk.types.SizeGroupMode.both], and the
   vertical size from the vertical requisition of all widgets that can be
   reached from the widget by a chain of size groups of type
-  [gtk.types.SizeGroupMode.Vertical] or [gtk.types.SizeGroupMode.Both].
+  [gtk.types.SizeGroupMode.vertical] or [gtk.types.SizeGroupMode.both].
   
   Note that only non-contextual sizes of every widget are ever consulted
   by size groups (since size groups have no knowledge of what size a widget
   will be allocated in one dimension, it cannot derive how much height
   a widget will receive for a given width). When grouping widgets that
-  trade height for width in mode [gtk.types.SizeGroupMode.Vertical] or [gtk.types.SizeGroupMode.Both]:
+  trade height for width in mode [gtk.types.SizeGroupMode.vertical] or [gtk.types.SizeGroupMode.both]:
   the height for the minimum width will be the requested height for all
   widgets in the group. The same is of course true when horizontally grouping
   width for height widgets.
@@ -78,7 +78,7 @@ import gtk.widget;
 class SizeGroup : gobject.object.ObjectG, gtk.buildable.Buildable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -106,7 +106,7 @@ class SizeGroup : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkSizeGroup* _cretval;
     _cretval = gtk_size_group_new(mode);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -126,7 +126,7 @@ class SizeGroup : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void addWidget(gtk.widget.Widget widget)
   {
-    gtk_size_group_add_widget(cast(GtkSizeGroup*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_size_group_add_widget(cast(GtkSizeGroup*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
   }
 
   /**
@@ -161,7 +161,7 @@ class SizeGroup : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void removeWidget(gtk.widget.Widget widget)
   {
-    gtk_size_group_remove_widget(cast(GtkSizeGroup*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_size_group_remove_widget(cast(GtkSizeGroup*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
   }
 
   /**
@@ -169,9 +169,9 @@ class SizeGroup : gobject.object.ObjectG, gtk.buildable.Buildable
     
     The mode of the size group determines whether the widgets in the
     size group should all have the same horizontal requisition
-    ([gtk.types.SizeGroupMode.Horizontal]) all have the same vertical requisition
-    ([gtk.types.SizeGroupMode.Vertical]), or should all have the same requisition
-    in both directions ([gtk.types.SizeGroupMode.Both]).
+    ([gtk.types.SizeGroupMode.horizontal]) all have the same vertical requisition
+    ([gtk.types.SizeGroupMode.vertical]), or should all have the same requisition
+    in both directions ([gtk.types.SizeGroupMode.both]).
     Params:
       mode =       the mode to set for the size group.
   */

@@ -34,7 +34,7 @@ import gobject.types;
 class SignalGroup : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -60,7 +60,7 @@ class SignalGroup : gobject.object.ObjectG
   {
     GSignalGroup* _cretval;
     _cretval = g_signal_group_new(targetType);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -87,8 +87,8 @@ class SignalGroup : gobject.object.ObjectG
   */
   void connectClosure(string detailedSignal, gobject.closure.Closure closure, bool after)
   {
-    const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
-    g_signal_group_connect_closure(cast(GSignalGroup*)cPtr, _detailedSignal, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, after);
+    const(char)* _detailedSignal = detailedSignal.toCString(No.alloc);
+    g_signal_group_connect_closure(cast(GSignalGroup*)cPtr, _detailedSignal, closure ? cast(GClosure*)closure.cPtr(No.dup) : null, after);
   }
 
   /**
@@ -99,7 +99,7 @@ class SignalGroup : gobject.object.ObjectG
   {
     ObjectC* _cretval;
     _cretval = g_signal_group_dup_target(cast(GSignalGroup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class SignalGroup : gobject.object.ObjectG
   */
   void setTarget(gobject.object.ObjectG target = null)
   {
-    g_signal_group_set_target(cast(GSignalGroup*)cPtr, target ? cast(ObjectC*)target.cPtr(No.Dup) : null);
+    g_signal_group_set_target(cast(GSignalGroup*)cPtr, target ? cast(ObjectC*)target.cPtr(No.dup) : null);
   }
 
   /**
@@ -151,10 +151,10 @@ class SignalGroup : gobject.object.ObjectG
     Connect to Bind signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectBind(T)(T callback, Flag!"After" after = No.After)
+  ulong connectBind(T)(T callback, Flag!"after" after = No.after)
   if (is(T : BindCallbackDlg) || is(T : BindCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -191,10 +191,10 @@ class SignalGroup : gobject.object.ObjectG
     Connect to Unbind signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUnbind(T)(T callback, Flag!"After" after = No.After)
+  ulong connectUnbind(T)(T callback, Flag!"after" after = No.after)
   if (is(T : UnbindCallbackDlg) || is(T : UnbindCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

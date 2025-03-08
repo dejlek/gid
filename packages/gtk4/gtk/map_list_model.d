@@ -44,7 +44,7 @@ import gtk.types;
 class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -77,8 +77,8 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
       gobject.object.ObjectG _dretval;
       auto _dlg = cast(gtk.types.MapListModelMapFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, Yes.Take));
-      ObjectC* _retval = cast(ObjectC*)_dretval.cPtr(Yes.Dup);
+      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, Yes.take));
+      ObjectC* _retval = cast(ObjectC*)_dretval.cPtr(Yes.dup);
 
       return _retval;
     }
@@ -87,8 +87,8 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
     GtkMapListModel* _cretval;
     auto _mapFunc = mapFunc ? freezeDelegate(cast(void*)&mapFunc) : null;
     GDestroyNotify _mapFuncDestroyCB = mapFunc ? &thawDelegate : null;
-    _cretval = gtk_map_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, _mapFuncCB, _mapFunc, _mapFuncDestroyCB);
-    this(_cretval, Yes.Take);
+    _cretval = gtk_map_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.dup) : null, _mapFuncCB, _mapFunc, _mapFuncDestroyCB);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -99,7 +99,7 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
   {
     GListModel* _cretval;
     _cretval = gtk_map_list_model_get_model(cast(GtkMapListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.take);
     return _retval;
   }
 
@@ -136,8 +136,8 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
       gobject.object.ObjectG _dretval;
       auto _dlg = cast(gtk.types.MapListModelMapFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, Yes.Take));
-      ObjectC* _retval = cast(ObjectC*)_dretval.cPtr(Yes.Dup);
+      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, Yes.take));
+      ObjectC* _retval = cast(ObjectC*)_dretval.cPtr(Yes.dup);
 
       return _retval;
     }
@@ -159,6 +159,6 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_map_list_model_set_model(cast(GtkMapListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_map_list_model_set_model(cast(GtkMapListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
   }
 }

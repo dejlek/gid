@@ -13,7 +13,7 @@ import gobject.object;
 class Decimal256Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,7 +34,7 @@ class Decimal256Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   {
     char* _cretval;
     _cretval = garrow_decimal256_array_format_value(cast(GArrowDecimal256Array*)cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -45,7 +45,7 @@ class Decimal256Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   {
     GArrowDecimal256* _cretval;
     _cretval = garrow_decimal256_array_get_value(cast(GArrowDecimal256Array*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, Yes.take);
     return _retval;
   }
 }

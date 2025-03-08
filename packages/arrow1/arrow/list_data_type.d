@@ -12,7 +12,7 @@ import gobject.object;
 class ListDataType : arrow.data_type.DataType
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,8 +32,8 @@ class ListDataType : arrow.data_type.DataType
   this(arrow.field.Field field)
   {
     GArrowListDataType* _cretval;
-    _cretval = garrow_list_data_type_new(field ? cast(GArrowField*)field.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_list_data_type_new(field ? cast(GArrowField*)field.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /** */
@@ -41,7 +41,7 @@ class ListDataType : arrow.data_type.DataType
   {
     GArrowField* _cretval;
     _cretval = garrow_list_data_type_get_field(cast(GArrowListDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -50,7 +50,7 @@ class ListDataType : arrow.data_type.DataType
   {
     GArrowField* _cretval;
     _cretval = garrow_list_data_type_get_value_field(cast(GArrowListDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.take);
     return _retval;
   }
 }

@@ -81,7 +81,7 @@ import gtk.widget;
 class Popover : gtk.bin.Bin
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -106,8 +106,8 @@ class Popover : gtk.bin.Bin
   this(gtk.widget.Widget relativeTo = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_popover_new(relativeTo ? cast(GtkWidget*)relativeTo.cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    _cretval = gtk_popover_new(relativeTo ? cast(GtkWidget*)relativeTo.cPtr(No.dup) : null);
+    this(_cretval, No.take);
   }
 
   /**
@@ -129,8 +129,8 @@ class Popover : gtk.bin.Bin
   static gtk.popover.Popover newFromModel(gtk.widget.Widget relativeTo, gio.menu_model.MenuModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_popover_new_from_model(relativeTo ? cast(GtkWidget*)relativeTo.cPtr(No.Dup) : null, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.popover.Popover)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_popover_new_from_model(relativeTo ? cast(GtkWidget*)relativeTo.cPtr(No.dup) : null, model ? cast(GMenuModel*)model.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.popover.Popover)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -166,8 +166,8 @@ class Popover : gtk.bin.Bin
   */
   void bindModel(gio.menu_model.MenuModel model = null, string actionNamespace = null)
   {
-    const(char)* _actionNamespace = actionNamespace.toCString(No.Alloc);
-    gtk_popover_bind_model(cast(GtkPopover*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null, _actionNamespace);
+    const(char)* _actionNamespace = actionNamespace.toCString(No.alloc);
+    gtk_popover_bind_model(cast(GtkPopover*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.dup) : null, _actionNamespace);
   }
 
   /**
@@ -193,7 +193,7 @@ class Popover : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_get_default_widget(cast(GtkPopover*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -223,7 +223,7 @@ class Popover : gtk.bin.Bin
     bool _retval;
     GdkRectangle _rect;
     _retval = gtk_popover_get_pointing_to(cast(GtkPopover*)cPtr, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
+    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.take);
     return _retval;
   }
 
@@ -247,7 +247,7 @@ class Popover : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_get_relative_to(cast(GtkPopover*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -310,7 +310,7 @@ class Popover : gtk.bin.Bin
   */
   void setDefaultWidget(gtk.widget.Widget widget = null)
   {
-    gtk_popover_set_default_widget(cast(GtkPopover*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_popover_set_default_widget(cast(GtkPopover*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
   }
 
   /**
@@ -335,7 +335,7 @@ class Popover : gtk.bin.Bin
   */
   void setPointingTo(gdk.rectangle.Rectangle rect)
   {
-    gtk_popover_set_pointing_to(cast(GtkPopover*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null);
+    gtk_popover_set_pointing_to(cast(GtkPopover*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.dup) : null);
   }
 
   /**
@@ -366,7 +366,7 @@ class Popover : gtk.bin.Bin
   */
   void setRelativeTo(gtk.widget.Widget relativeTo = null)
   {
-    gtk_popover_set_relative_to(cast(GtkPopover*)cPtr, relativeTo ? cast(GtkWidget*)relativeTo.cPtr(No.Dup) : null);
+    gtk_popover_set_relative_to(cast(GtkPopover*)cPtr, relativeTo ? cast(GtkWidget*)relativeTo.cPtr(No.dup) : null);
   }
 
   /**
@@ -401,10 +401,10 @@ class Popover : gtk.bin.Bin
     Connect to Closed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  ulong connectClosed(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ClosedCallbackDlg) || is(T : ClosedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

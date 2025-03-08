@@ -72,13 +72,13 @@ import gst.types;
   The "cache" and "registry" are different concepts and can represent
   different sets of plugins. For various reasons, at init time, the cache is
   stored in the default registry, and plugins not relevant to the current
-  process are marked with the [gst.types.PluginFlags.Cached] bit. These plugins are
+  process are marked with the [gst.types.PluginFlags.cached] bit. These plugins are
   removed at the end of initialization.
 */
 class Registry : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -133,7 +133,7 @@ class Registry : gst.object.ObjectGst
   {
     GstRegistry* _cretval;
     _cretval = gst_registry_get();
-    auto _retval = ObjectG.getDObject!(gst.registry.Registry)(cast(GstRegistry*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gst.registry.Registry)(cast(GstRegistry*)_cretval, No.take);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class Registry : gst.object.ObjectGst
   bool addFeature(gst.plugin_feature.PluginFeature feature)
   {
     bool _retval;
-    _retval = gst_registry_add_feature(cast(GstRegistry*)cPtr, feature ? cast(GstPluginFeature*)feature.cPtr(No.Dup) : null);
+    _retval = gst_registry_add_feature(cast(GstRegistry*)cPtr, feature ? cast(GstPluginFeature*)feature.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class Registry : gst.object.ObjectGst
   bool addPlugin(gst.plugin.Plugin plugin)
   {
     bool _retval;
-    _retval = gst_registry_add_plugin(cast(GstRegistry*)cPtr, plugin ? cast(GstPlugin*)plugin.cPtr(No.Dup) : null);
+    _retval = gst_registry_add_plugin(cast(GstRegistry*)cPtr, plugin ? cast(GstPlugin*)plugin.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class Registry : gst.object.ObjectGst
   bool checkFeatureVersion(string featureName, uint minMajor, uint minMinor, uint minMicro)
   {
     bool _retval;
-    const(char)* _featureName = featureName.toCString(No.Alloc);
+    const(char)* _featureName = featureName.toCString(No.alloc);
     _retval = gst_registry_check_feature_version(cast(GstRegistry*)cPtr, _featureName, minMajor, minMinor, minMicro);
     return _retval;
   }
@@ -212,7 +212,7 @@ class Registry : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.PluginFeatureFilter*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.plugin_feature.PluginFeature)(cast(void*)feature, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.plugin_feature.PluginFeature)(cast(void*)feature, No.take));
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;
@@ -238,9 +238,9 @@ class Registry : gst.object.ObjectGst
   gst.plugin_feature.PluginFeature findFeature(string name, gobject.types.GType type)
   {
     GstPluginFeature* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_registry_find_feature(cast(GstRegistry*)cPtr, _name, type);
-    auto _retval = ObjectG.getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -258,9 +258,9 @@ class Registry : gst.object.ObjectGst
   gst.plugin.Plugin findPlugin(string name)
   {
     GstPlugin* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_registry_find_plugin(cast(GstRegistry*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -291,7 +291,7 @@ class Registry : gst.object.ObjectGst
   gst.plugin_feature.PluginFeature[] getFeatureListByPlugin(string name)
   {
     GList* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_registry_get_feature_list_by_plugin(cast(GstRegistry*)cPtr, _name);
     auto _retval = gListToD!(gst.plugin_feature.PluginFeature, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
@@ -336,9 +336,9 @@ class Registry : gst.object.ObjectGst
   gst.plugin.Plugin lookup(string filename)
   {
     GstPlugin* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString(No.alloc);
     _cretval = gst_registry_lookup(cast(GstRegistry*)cPtr, _filename);
-    auto _retval = ObjectG.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -354,9 +354,9 @@ class Registry : gst.object.ObjectGst
   gst.plugin_feature.PluginFeature lookupFeature(string name)
   {
     GstPluginFeature* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_registry_lookup_feature(cast(GstRegistry*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -380,7 +380,7 @@ class Registry : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.PluginFilter*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.take));
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;
@@ -401,7 +401,7 @@ class Registry : gst.object.ObjectGst
   */
   void removeFeature(gst.plugin_feature.PluginFeature feature)
   {
-    gst_registry_remove_feature(cast(GstRegistry*)cPtr, feature ? cast(GstPluginFeature*)feature.cPtr(No.Dup) : null);
+    gst_registry_remove_feature(cast(GstRegistry*)cPtr, feature ? cast(GstPluginFeature*)feature.cPtr(No.dup) : null);
   }
 
   /**
@@ -413,7 +413,7 @@ class Registry : gst.object.ObjectGst
   */
   void removePlugin(gst.plugin.Plugin plugin)
   {
-    gst_registry_remove_plugin(cast(GstRegistry*)cPtr, plugin ? cast(GstPlugin*)plugin.cPtr(No.Dup) : null);
+    gst_registry_remove_plugin(cast(GstRegistry*)cPtr, plugin ? cast(GstPlugin*)plugin.cPtr(No.dup) : null);
   }
 
   /**
@@ -426,7 +426,7 @@ class Registry : gst.object.ObjectGst
   bool scanPath(string path)
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     _retval = gst_registry_scan_path(cast(GstRegistry*)cPtr, _path);
     return _retval;
   }
@@ -450,10 +450,10 @@ class Registry : gst.object.ObjectGst
     Connect to FeatureAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFeatureAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectFeatureAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : FeatureAddedCallbackDlg) || is(T : FeatureAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -488,10 +488,10 @@ class Registry : gst.object.ObjectGst
     Connect to PluginAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPluginAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPluginAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PluginAddedCallbackDlg) || is(T : PluginAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

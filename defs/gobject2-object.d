@@ -43,7 +43,7 @@ private shared bool classMapsInitialized;
 string objectGMixin()
 {
   return
-`  this(void* cObj, Flag!"Take" take = No.Take)
+`  this(void* cObj, Flag!"take" take = No.take)
   {
     super(cObj, take);
   }
@@ -63,16 +63,16 @@ class ObjectG
    */
   final this(GType type)
   {
-    this(g_object_new(type, null), Yes.Take);
+    this(g_object_new(type, null), Yes.take);
   }
 
   /**
    * Constructor to wrap a C GObject with a D proxy object.
    * Params:
    *   cObj = Pointer to the GObject
-   *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference (default)
+   *   take = Yes.take if the D object should take ownership of the passed reference, No.take to add a new reference (default)
    */
-  final this(void* cObj, Flag!"Take" take = No.Take)
+  final this(void* cObj, Flag!"take" take = No.take)
   {
     if (!cObj)
       throw new GidConstructException("Null instance pointer for " ~ typeid(this).name);
@@ -97,9 +97,9 @@ class ObjectG
    * Set the GObject of a D ObjectG wrapper.
    * Params:
    *   cObj = Pointer to the GObject
-   *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference (default)
+   *   take = Yes.take if the D object should take ownership of the passed reference, No.take to add a new reference (default)
    */
-  final void setGObject(void* cObj, Flag!"Take" take = No.Take)
+  final void setGObject(void* cObj, Flag!"take" take = No.take)
   {
     assert(!cInstancePtr);
 
@@ -139,10 +139,10 @@ class ObjectG
   /**
    * Get a pointer to the underlying C object.
    * Params:
-   *   dup = Yes.Dup to add a reference with g_object_ref(), No.Dup otherwise (default)
+   *   dup = Yes.dup to add a reference with g_object_ref(), No.dup otherwise (default)
    * Returns: The C object (reference added according to addRef parameter)
    */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     if (dup)
       g_object_ref(cInstancePtr);
@@ -196,10 +196,10 @@ class ObjectG
    * Params:
    *   T = The D object type
    *   cInstance = The C GObject (can be null, in which case null is returned)
-   *   take = If Yes.Take then the D object will consume a GObject reference (No.Take by default).
+   *   take = If Yes.take then the D object will consume a GObject reference (No.take by default).
    * Returns: The D object (which may be a new object if the GObject wasn't already wrapped)
    */
-  static T getDObject(T)(void* cptr, Flag!"Take" take = No.Take)
+  static T getDObject(T)(void* cptr, Flag!"take" take = No.take)
   {
     if (!cptr)
       return null;
@@ -306,12 +306,13 @@ class ObjectG
    * Params:
    *   signalDetail = Signal name and optional detail separated by '::'
    *   closure = Closure to connect signal to
-   *   after = Yes.After to invoke the signal after the default handler, No.After to execute before (default)
+   *   after = Yes.after to invoke the signal after the default handler, No.after to execute before (default)
    * Returns: The signal connection ID
    */
-  ulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"After" after = No.After)
+  ulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"after" after = No.after)
   {
-    return g_signal_connect_closure(cInstancePtr, signalDetail.toCString(No.Alloc), cast(GClosure*)(cast(Closure)closure).cPtr, after == Yes.After);
+    return g_signal_connect_closure(cInstancePtr, signalDetail.toCString(No.alloc),
+      cast(GClosure*)(cast(Closure)closure).cPtr, after == Yes.after);
   }
 
   /**
@@ -325,7 +326,7 @@ class ObjectG
     GValue value;
     initVal!T(&value);
     setVal(&value, val);
-    g_object_set_property(cInstancePtr, toCString(propertyName, No.Alloc), &value);
+    g_object_set_property(cInstancePtr, toCString(propertyName, No.alloc), &value);
     g_value_unset(&value);
   }
 
@@ -339,7 +340,7 @@ class ObjectG
   {
     GValue value;
     initVal!T(&value);
-    g_object_get_property(cInstancePtr, toCString(propertyName, No.Alloc), &value);
+    g_object_get_property(cInstancePtr, toCString(propertyName, No.alloc), &value);
     T retval = getVal(&value, val);
     g_value_unset(&value);
     return retval;
@@ -349,7 +350,7 @@ class ObjectG
 /// Interface proxy class - used to wrap unknown GObjects as a specific interface
 abstract class IfaceProxy : ObjectG
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(ptr, take);
   }

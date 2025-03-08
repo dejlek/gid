@@ -14,15 +14,15 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GDBusAnnotationInfo.sizeof), Yes.Take);
+    super(safeMalloc(GDBusAnnotationInfo.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -50,24 +50,24 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
 
   @property string key()
   {
-    return (cast(GDBusAnnotationInfo*)cPtr).key.fromCString(No.Free);
+    return (cast(GDBusAnnotationInfo*)cPtr).key.fromCString(No.free);
   }
 
   @property void key(string propval)
   {
     safeFree(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).key);
-    (cast(GDBusAnnotationInfo*)cPtr).key = propval.toCString(Yes.Alloc);
+    (cast(GDBusAnnotationInfo*)cPtr).key = propval.toCString(Yes.alloc);
   }
 
   @property string value()
   {
-    return (cast(GDBusAnnotationInfo*)cPtr).value.fromCString(No.Free);
+    return (cast(GDBusAnnotationInfo*)cPtr).value.fromCString(No.free);
   }
 
   @property void value(string propval)
   {
     safeFree(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).value);
-    (cast(GDBusAnnotationInfo*)cPtr).value = propval.toCString(Yes.Alloc);
+    (cast(GDBusAnnotationInfo*)cPtr).value = propval.toCString(Yes.alloc);
   }
 
   /**
@@ -88,9 +88,9 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
     _tmpannotations.length++;
     GDBusAnnotationInfo** _annotations = _tmpannotations.ptr;
 
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = g_dbus_annotation_info_lookup(_annotations, _name);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 }

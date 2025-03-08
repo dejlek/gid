@@ -34,7 +34,7 @@ template ActionableT()
   {
     const(char)* _cretval;
     _cretval = gtk_actionable_get_action_name(cast(GtkActionable*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -48,7 +48,7 @@ template ActionableT()
   {
     VariantC* _cretval;
     _cretval = gtk_actionable_get_action_target_value(cast(GtkActionable*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -69,7 +69,7 @@ template ActionableT()
   */
   override void setActionName(string actionName = null)
   {
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString(No.alloc);
     gtk_actionable_set_action_name(cast(GtkActionable*)cPtr, _actionName);
   }
 
@@ -98,7 +98,7 @@ template ActionableT()
   */
   override void setActionTargetValue(glib.variant.VariantG targetValue = null)
   {
-    gtk_actionable_set_action_target_value(cast(GtkActionable*)cPtr, targetValue ? cast(VariantC*)targetValue.cPtr(No.Dup) : null);
+    gtk_actionable_set_action_target_value(cast(GtkActionable*)cPtr, targetValue ? cast(VariantC*)targetValue.cPtr(No.dup) : null);
   }
 
   /**
@@ -118,7 +118,7 @@ template ActionableT()
   */
   override void setDetailedActionName(string detailedActionName)
   {
-    const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
+    const(char)* _detailedActionName = detailedActionName.toCString(No.alloc);
     gtk_actionable_set_detailed_action_name(cast(GtkActionable*)cPtr, _detailedActionName);
   }
 }

@@ -26,7 +26,7 @@ import gtk.types;
 class AspectFrame : gtk.frame.Frame
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -60,9 +60,9 @@ class AspectFrame : gtk.frame.Frame
   this(string label, float xalign, float yalign, float ratio, bool obeyChild)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.alloc);
     _cretval = gtk_aspect_frame_new(_label, xalign, yalign, ratio, obeyChild);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**

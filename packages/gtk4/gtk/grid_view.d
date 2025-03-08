@@ -55,13 +55,13 @@ import gtk.types;
   
   # Accessibility
   
-  [gtk.grid_view.GridView] uses the [gtk.types.AccessibleRole.Grid] role, and the items
-  use the [gtk.types.AccessibleRole.GridCell] role.
+  [gtk.grid_view.GridView] uses the [gtk.types.AccessibleRole.grid] role, and the items
+  use the [gtk.types.AccessibleRole.gridCell] role.
 */
 class GridView : gtk.list_base.ListBase
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -95,8 +95,8 @@ class GridView : gtk.list_base.ListBase
   this(gtk.selection_model.SelectionModel model = null, gtk.list_item_factory.ListItemFactory factory = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_grid_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.Dup) : null);
-    this(_cretval, No.Take);
+    _cretval = gtk_grid_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.dup) : null, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.dup) : null);
+    this(_cretval, No.take);
   }
 
   /**
@@ -118,7 +118,7 @@ class GridView : gtk.list_base.ListBase
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_grid_view_get_factory(cast(GtkGridView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.take);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class GridView : gtk.list_base.ListBase
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_grid_view_get_model(cast(GtkGridView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.take);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class GridView : gtk.list_base.ListBase
   */
   void scrollTo(uint pos, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll = null)
   {
-    gtk_grid_view_scroll_to(cast(GtkGridView*)cPtr, pos, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
+    gtk_grid_view_scroll_to(cast(GtkGridView*)cPtr, pos, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.dup) : null);
   }
 
   /**
@@ -214,7 +214,7 @@ class GridView : gtk.list_base.ListBase
   */
   void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_grid_view_set_factory(cast(GtkGridView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
+    gtk_grid_view_set_factory(cast(GtkGridView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.dup) : null);
   }
 
   /**
@@ -256,7 +256,7 @@ class GridView : gtk.list_base.ListBase
   */
   void setModel(gtk.selection_model.SelectionModel model = null)
   {
-    gtk_grid_view_set_model(cast(GtkGridView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_grid_view_set_model(cast(GtkGridView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
   }
 
   /**
@@ -303,10 +303,10 @@ class GridView : gtk.list_base.ListBase
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

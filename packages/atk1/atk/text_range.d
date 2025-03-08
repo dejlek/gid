@@ -14,15 +14,15 @@ class TextRange : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(AtkTextRange.sizeof), Yes.Take);
+    super(safeMalloc(AtkTextRange.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -70,12 +70,12 @@ class TextRange : gobject.boxed.Boxed
 
   @property string content()
   {
-    return (cast(AtkTextRange*)cPtr).content.fromCString(No.Free);
+    return (cast(AtkTextRange*)cPtr).content.fromCString(No.free);
   }
 
   @property void content(string propval)
   {
     safeFree(cast(void*)(cast(AtkTextRange*)cPtr).content);
-    (cast(AtkTextRange*)cPtr).content = propval.toCString(Yes.Alloc);
+    (cast(AtkTextRange*)cPtr).content = propval.toCString(Yes.alloc);
   }
 }

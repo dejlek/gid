@@ -20,7 +20,7 @@ import gtksource.view;
 class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -51,7 +51,7 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_source_completion_add_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_source_completion_add_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -86,8 +86,8 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
   gtksource.completion_context.CompletionContext createContext(gtk.text_iter.TextIter position = null)
   {
     GtkSourceCompletionContext* _cretval;
-    _cretval = gtk_source_completion_create_context(cast(GtkSourceCompletion*)cPtr, position ? cast(GtkTextIter*)position.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtksource.completion_context.CompletionContext)(cast(GtkSourceCompletionContext*)_cretval, No.Take);
+    _cretval = gtk_source_completion_create_context(cast(GtkSourceCompletion*)cPtr, position ? cast(GtkTextIter*)position.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtksource.completion_context.CompletionContext)(cast(GtkSourceCompletionContext*)_cretval, No.take);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkSourceCompletionInfo* _cretval;
     _cretval = gtk_source_completion_get_info_window(cast(GtkSourceCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.completion_info.CompletionInfo)(cast(GtkSourceCompletionInfo*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.completion_info.CompletionInfo)(cast(GtkSourceCompletionInfo*)_cretval, No.take);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_completion_get_view(cast(GtkSourceCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.take);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -178,7 +178,7 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
     bool _retval;
     auto _providers = gListFromD!(gtksource.completion_provider.CompletionProvider)(providers);
     scope(exit) containerFree!(GList*, gtksource.completion_provider.CompletionProvider, GidOwnership.None)(_providers);
-    _retval = gtk_source_completion_start(cast(GtkSourceCompletion*)cPtr, _providers, context ? cast(GtkSourceCompletionContext*)context.cPtr(No.Dup) : null);
+    _retval = gtk_source_completion_start(cast(GtkSourceCompletion*)cPtr, _providers, context ? cast(GtkSourceCompletionContext*)context.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -215,10 +215,10 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to ActivateProposal signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivateProposal(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivateProposal(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateProposalCallbackDlg) || is(T : ActivateProposalCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -251,10 +251,10 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to Hide signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectHide(T)(T callback, Flag!"After" after = No.After)
+  ulong connectHide(T)(T callback, Flag!"after" after = No.after)
   if (is(T : HideCallbackDlg) || is(T : HideCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -279,7 +279,7 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
     <keycap>Home</keycap> and <keycap>End</keycap> keys are bound to the
     normal behavior expected by those keys.
     
-    When step is equal to [gtk.types.ScrollStep.Pages], the page size is defined by
+    When step is equal to [gtk.types.ScrollStep.pages], the page size is defined by
     the #GtkSourceCompletion:proposal-page-size property. It is used for
     the <keycap>PageDown</keycap> and <keycap>PageUp</keycap> keys.
     
@@ -303,10 +303,10 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to MoveCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMoveCursor(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -360,10 +360,10 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to MovePage signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMovePage(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMovePage(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MovePageCallbackDlg) || is(T : MovePageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -399,10 +399,10 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to PopulateContext signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPopulateContext(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPopulateContext(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PopulateContextCallbackDlg) || is(T : PopulateContextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -436,10 +436,10 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to Show signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectShow(T)(T callback, Flag!"After" after = No.After)
+  ulong connectShow(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ShowCallbackDlg) || is(T : ShowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

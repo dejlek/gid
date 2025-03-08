@@ -87,7 +87,7 @@ import gtk.types;
 class PopoverMenu : gtk.popover.Popover
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -111,7 +111,7 @@ class PopoverMenu : gtk.popover.Popover
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_menu_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -129,7 +129,7 @@ class PopoverMenu : gtk.popover.Popover
   */
   void openSubmenu(string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gtk_popover_menu_open_submenu(cast(GtkPopoverMenu*)cPtr, _name);
   }
 }

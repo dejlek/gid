@@ -62,8 +62,8 @@ import gtk.widget_path;
   that make use of GTK+’s height for width geometry management system. First,
   it’s important to note that a container must prioritize one of its
   dimensions, that is to say that a widget or container can only have a
-  #GtkSizeRequestMode that is [gtk.types.SizeRequestMode.HeightForWidth] or
-  [gtk.types.SizeRequestMode.WidthForHeight]. However, every widget and container
+  #GtkSizeRequestMode that is [gtk.types.SizeRequestMode.heightForWidth] or
+  [gtk.types.SizeRequestMode.widthForHeight]. However, every widget and container
   must be able to respond to the APIs for both dimensions, i.e. even if a
   widget has a request mode that is height-for-width, it is possible that
   its parent will request its sizes using the width-for-height APIs.
@@ -224,7 +224,7 @@ import gtk.widget_path;
 class Container : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -258,7 +258,7 @@ class Container : gtk.widget.Widget
   */
   void add(gtk.widget.Widget widget)
   {
-    gtk_container_add(cast(GtkContainer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_container_add(cast(GtkContainer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
   }
 
   /** */
@@ -276,8 +276,8 @@ class Container : gtk.widget.Widget
   */
   void childGetProperty(gtk.widget.Widget child, string propertyName, gobject.value.Value value)
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    gtk_container_child_get_property(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _propertyName, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
+    gtk_container_child_get_property(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, _propertyName, value ? cast(GValue*)value.cPtr(No.dup) : null);
   }
 
   alias childNotify = gtk.widget.Widget.childNotify;
@@ -297,8 +297,8 @@ class Container : gtk.widget.Widget
   */
   void childNotify(gtk.widget.Widget child, string childProperty)
   {
-    const(char)* _childProperty = childProperty.toCString(No.Alloc);
-    gtk_container_child_notify(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _childProperty);
+    const(char)* _childProperty = childProperty.toCString(No.alloc);
+    gtk_container_child_notify(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, _childProperty);
   }
 
   /**
@@ -314,7 +314,7 @@ class Container : gtk.widget.Widget
   */
   void childNotifyByPspec(gtk.widget.Widget child, gobject.param_spec.ParamSpec pspec)
   {
-    gtk_container_child_notify_by_pspec(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
+    gtk_container_child_notify_by_pspec(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.dup) : null);
   }
 
   /**
@@ -326,8 +326,8 @@ class Container : gtk.widget.Widget
   */
   void childSetProperty(gtk.widget.Widget child, string propertyName, gobject.value.Value value)
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    gtk_container_child_set_property(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _propertyName, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
+    gtk_container_child_set_property(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, _propertyName, value ? cast(const(GValue)*)value.cPtr(No.dup) : null);
   }
 
   /**
@@ -363,7 +363,7 @@ class Container : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.Callback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -392,7 +392,7 @@ class Container : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.Callback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -465,7 +465,7 @@ class Container : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_container_get_focus_child(cast(GtkContainer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -479,7 +479,7 @@ class Container : gtk.widget.Widget
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_container_get_focus_hadjustment(cast(GtkContainer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.take);
     return _retval;
   }
 
@@ -493,7 +493,7 @@ class Container : gtk.widget.Widget
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_container_get_focus_vadjustment(cast(GtkContainer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.take);
     return _retval;
   }
 
@@ -507,8 +507,8 @@ class Container : gtk.widget.Widget
   gtk.widget_path.WidgetPath getPathForChild(gtk.widget.Widget child)
   {
     GtkWidgetPath* _cretval;
-    _cretval = gtk_container_get_path_for_child(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gtk.widget_path.WidgetPath(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gtk_container_get_path_for_child(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gtk.widget_path.WidgetPath(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -553,7 +553,7 @@ class Container : gtk.widget.Widget
   */
   void propagateDraw(gtk.widget.Widget child, cairo.context.Context cr)
   {
-    gtk_container_propagate_draw(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
+    gtk_container_propagate_draw(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null);
   }
 
   /**
@@ -571,7 +571,7 @@ class Container : gtk.widget.Widget
   */
   void remove(gtk.widget.Widget widget)
   {
-    gtk_container_remove(cast(GtkContainer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_container_remove(cast(GtkContainer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
   }
 
   /** */
@@ -634,7 +634,7 @@ class Container : gtk.widget.Widget
   */
   void setFocusChild(gtk.widget.Widget child = null)
   {
-    gtk_container_set_focus_child(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_container_set_focus_child(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -653,7 +653,7 @@ class Container : gtk.widget.Widget
   */
   void setFocusHadjustment(gtk.adjustment.Adjustment adjustment)
   {
-    gtk_container_set_focus_hadjustment(cast(GtkContainer*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_container_set_focus_hadjustment(cast(GtkContainer*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
   }
 
   /**
@@ -672,7 +672,7 @@ class Container : gtk.widget.Widget
   */
   void setFocusVadjustment(gtk.adjustment.Adjustment adjustment)
   {
-    gtk_container_set_focus_vadjustment(cast(GtkContainer*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_container_set_focus_vadjustment(cast(GtkContainer*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
   }
 
   /**
@@ -729,10 +729,10 @@ class Container : gtk.widget.Widget
     Connect to Add signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAdd(T)(T callback, Flag!"After" after = No.After)
+  ulong connectAdd(T)(T callback, Flag!"after" after = No.after)
   if (is(T : AddCallbackDlg) || is(T : AddCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -758,10 +758,10 @@ class Container : gtk.widget.Widget
     Connect to CheckResize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCheckResize(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCheckResize(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CheckResizeCallbackDlg) || is(T : CheckResizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -786,10 +786,10 @@ class Container : gtk.widget.Widget
     Connect to Remove signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRemove(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRemove(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RemoveCallbackDlg) || is(T : RemoveCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -815,10 +815,10 @@ class Container : gtk.widget.Widget
     Connect to SetFocusChild signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSetFocusChild(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSetFocusChild(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SetFocusChildCallbackDlg) || is(T : SetFocusChildCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

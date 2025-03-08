@@ -20,12 +20,12 @@ import gst.types;
 class DateTime : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -71,7 +71,7 @@ class DateTime : gobject.boxed.Boxed
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new(tzoffset, year, month, day, hour, minute, seconds);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -84,8 +84,8 @@ class DateTime : gobject.boxed.Boxed
   static gst.date_time.DateTime newFromGDateTime(glib.date_time.DateTime dt = null)
   {
     GstDateTime* _cretval;
-    _cretval = gst_date_time_new_from_g_date_time(dt ? cast(GDateTime*)dt.cPtr(Yes.Dup) : null);
-    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_date_time_new_from_g_date_time(dt ? cast(GDateTime*)dt.cPtr(Yes.dup) : null);
+    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -106,9 +106,9 @@ class DateTime : gobject.boxed.Boxed
   static gst.date_time.DateTime newFromIso8601String(string string_)
   {
     GstDateTime* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString(No.alloc);
     _cretval = gst_date_time_new_from_iso8601_string(_string_);
-    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class DateTime : gobject.boxed.Boxed
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_from_unix_epoch_local_time(secs);
-    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class DateTime : gobject.boxed.Boxed
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_from_unix_epoch_local_time_usecs(usecs);
-    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class DateTime : gobject.boxed.Boxed
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_from_unix_epoch_utc(secs);
-    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class DateTime : gobject.boxed.Boxed
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_from_unix_epoch_utc_usecs(usecs);
-    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class DateTime : gobject.boxed.Boxed
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_local_time(year, month, day, hour, minute, seconds);
-    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class DateTime : gobject.boxed.Boxed
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_now_local_time();
-    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class DateTime : gobject.boxed.Boxed
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_now_utc();
-    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class DateTime : gobject.boxed.Boxed
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_y(year);
-    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class DateTime : gobject.boxed.Boxed
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_ym(year, month);
-    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -299,7 +299,7 @@ class DateTime : gobject.boxed.Boxed
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_ymd(year, month, day);
-    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -449,7 +449,7 @@ class DateTime : gobject.boxed.Boxed
   {
     GDateTime* _cretval;
     _cretval = gst_date_time_to_g_date_time(cast(GstDateTime*)cPtr);
-    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -465,7 +465,7 @@ class DateTime : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_date_time_to_iso8601_string(cast(GstDateTime*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

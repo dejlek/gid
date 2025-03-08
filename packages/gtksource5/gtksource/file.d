@@ -22,7 +22,7 @@ import gtksource.types;
 class File : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,7 +43,7 @@ class File : gobject.object.ObjectG
   {
     GtkSourceFile* _cretval;
     _cretval = gtk_source_file_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -80,7 +80,7 @@ class File : gobject.object.ObjectG
   {
     const(GtkSourceEncoding)* _cretval;
     _cretval = gtk_source_file_get_encoding(cast(GtkSourceFile*)cPtr);
-    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class File : gobject.object.ObjectG
   {
     GFile* _cretval;
     _cretval = gtk_source_file_get_location(cast(GtkSourceFile*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.take);
     return _retval;
   }
 
@@ -166,6 +166,6 @@ class File : gobject.object.ObjectG
   */
   void setLocation(gio.file.File location = null)
   {
-    gtk_source_file_set_location(cast(GtkSourceFile*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.Dup) : null);
+    gtk_source_file_set_location(cast(GtkSourceFile*)cPtr, location ? cast(GFile*)(cast(ObjectG)location).cPtr(No.dup) : null);
   }
 }

@@ -17,7 +17,7 @@ import gobject.object;
 class MenuItem : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,10 +50,10 @@ class MenuItem : gobject.object.ObjectG
   this(string label = null, string detailedAction = null)
   {
     GMenuItem* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
-    const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _detailedAction = detailedAction.toCString(No.alloc);
     _cretval = g_menu_item_new(_label, _detailedAction);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -70,8 +70,8 @@ class MenuItem : gobject.object.ObjectG
   static gio.menu_item.MenuItem newFromModel(gio.menu_model.MenuModel model, int itemIndex)
   {
     GMenuItem* _cretval;
-    _cretval = g_menu_item_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null, itemIndex);
-    auto _retval = ObjectG.getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.Take);
+    _cretval = g_menu_item_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.dup) : null, itemIndex);
+    auto _retval = ObjectG.getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -144,9 +144,9 @@ class MenuItem : gobject.object.ObjectG
   static gio.menu_item.MenuItem newSection(string label, gio.menu_model.MenuModel section)
   {
     GMenuItem* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
-    _cretval = g_menu_item_new_section(_label, section ? cast(GMenuModel*)section.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.Take);
+    const(char)* _label = label.toCString(No.alloc);
+    _cretval = g_menu_item_new_section(_label, section ? cast(GMenuModel*)section.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -163,9 +163,9 @@ class MenuItem : gobject.object.ObjectG
   static gio.menu_item.MenuItem newSubmenu(string label, gio.menu_model.MenuModel submenu)
   {
     GMenuItem* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
-    _cretval = g_menu_item_new_submenu(_label, submenu ? cast(GMenuModel*)submenu.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.Take);
+    const(char)* _label = label.toCString(No.alloc);
+    _cretval = g_menu_item_new_submenu(_label, submenu ? cast(GMenuModel*)submenu.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gio.menu_item.MenuItem)(cast(GMenuItem*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -183,9 +183,9 @@ class MenuItem : gobject.object.ObjectG
   glib.variant.VariantG getAttributeValue(string attribute, glib.variant_type.VariantType expectedType = null)
   {
     VariantC* _cretval;
-    const(char)* _attribute = attribute.toCString(No.Alloc);
-    _cretval = g_menu_item_get_attribute_value(cast(GMenuItem*)cPtr, _attribute, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    const(char)* _attribute = attribute.toCString(No.alloc);
+    _cretval = g_menu_item_get_attribute_value(cast(GMenuItem*)cPtr, _attribute, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -198,9 +198,9 @@ class MenuItem : gobject.object.ObjectG
   gio.menu_model.MenuModel getLink(string link)
   {
     GMenuModel* _cretval;
-    const(char)* _link = link.toCString(No.Alloc);
+    const(char)* _link = link.toCString(No.alloc);
     _cretval = g_menu_item_get_link(cast(GMenuItem*)cPtr, _link);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -247,8 +247,8 @@ class MenuItem : gobject.object.ObjectG
   */
   void setActionAndTargetValue(string action = null, glib.variant.VariantG targetValue = null)
   {
-    const(char)* _action = action.toCString(No.Alloc);
-    g_menu_item_set_action_and_target_value(cast(GMenuItem*)cPtr, _action, targetValue ? cast(VariantC*)targetValue.cPtr(No.Dup) : null);
+    const(char)* _action = action.toCString(No.alloc);
+    g_menu_item_set_action_and_target_value(cast(GMenuItem*)cPtr, _action, targetValue ? cast(VariantC*)targetValue.cPtr(No.dup) : null);
   }
 
   /**
@@ -277,8 +277,8 @@ class MenuItem : gobject.object.ObjectG
   */
   void setAttributeValue(string attribute, glib.variant.VariantG value = null)
   {
-    const(char)* _attribute = attribute.toCString(No.Alloc);
-    g_menu_item_set_attribute_value(cast(GMenuItem*)cPtr, _attribute, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    const(char)* _attribute = attribute.toCString(No.alloc);
+    g_menu_item_set_attribute_value(cast(GMenuItem*)cPtr, _attribute, value ? cast(VariantC*)value.cPtr(No.dup) : null);
   }
 
   /**
@@ -298,7 +298,7 @@ class MenuItem : gobject.object.ObjectG
   */
   void setDetailedAction(string detailedAction)
   {
-    const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
+    const(char)* _detailedAction = detailedAction.toCString(No.alloc);
     g_menu_item_set_detailed_action(cast(GMenuItem*)cPtr, _detailedAction);
   }
 
@@ -320,7 +320,7 @@ class MenuItem : gobject.object.ObjectG
   */
   void setIcon(gio.icon.Icon icon)
   {
-    g_menu_item_set_icon(cast(GMenuItem*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    g_menu_item_set_icon(cast(GMenuItem*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null);
   }
 
   /**
@@ -333,7 +333,7 @@ class MenuItem : gobject.object.ObjectG
   */
   void setLabel(string label = null)
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.alloc);
     g_menu_item_set_label(cast(GMenuItem*)cPtr, _label);
   }
 
@@ -354,8 +354,8 @@ class MenuItem : gobject.object.ObjectG
   */
   void setLink(string link, gio.menu_model.MenuModel model = null)
   {
-    const(char)* _link = link.toCString(No.Alloc);
-    g_menu_item_set_link(cast(GMenuItem*)cPtr, _link, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
+    const(char)* _link = link.toCString(No.alloc);
+    g_menu_item_set_link(cast(GMenuItem*)cPtr, _link, model ? cast(GMenuModel*)model.cPtr(No.dup) : null);
   }
 
   /**
@@ -371,7 +371,7 @@ class MenuItem : gobject.object.ObjectG
   */
   void setSection(gio.menu_model.MenuModel section = null)
   {
-    g_menu_item_set_section(cast(GMenuItem*)cPtr, section ? cast(GMenuModel*)section.cPtr(No.Dup) : null);
+    g_menu_item_set_section(cast(GMenuItem*)cPtr, section ? cast(GMenuModel*)section.cPtr(No.dup) : null);
   }
 
   /**
@@ -387,6 +387,6 @@ class MenuItem : gobject.object.ObjectG
   */
   void setSubmenu(gio.menu_model.MenuModel submenu = null)
   {
-    g_menu_item_set_submenu(cast(GMenuItem*)cPtr, submenu ? cast(GMenuModel*)submenu.cPtr(No.Dup) : null);
+    g_menu_item_set_submenu(cast(GMenuItem*)cPtr, submenu ? cast(GMenuModel*)submenu.cPtr(No.dup) : null);
   }
 }

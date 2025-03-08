@@ -12,7 +12,7 @@ import gobject.object;
 class BaseListScalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,7 +33,7 @@ class BaseListScalar : arrow.scalar.Scalar
   {
     GArrowArray* _cretval;
     _cretval = garrow_base_list_scalar_get_value(cast(GArrowBaseListScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, No.take);
     return _retval;
   }
 }

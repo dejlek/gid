@@ -12,7 +12,7 @@ import glib.error;
 class SparseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,9 +33,9 @@ class SparseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
   {
     GArrowSparseUnionArrayBuilder* _cretval;
     GError *_err;
-    _cretval = garrow_sparse_union_array_builder_new(dataType ? cast(GArrowSparseUnionDataType*)dataType.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_sparse_union_array_builder_new(dataType ? cast(GArrowSparseUnionDataType*)dataType.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

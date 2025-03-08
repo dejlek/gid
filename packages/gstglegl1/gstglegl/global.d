@@ -12,7 +12,7 @@ string eglGetErrorString(int err)
 {
   const(char)* _cretval;
   _cretval = gst_egl_get_error_string(err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
   return _retval;
 }
 
@@ -20,6 +20,6 @@ string eglGetErrorString(int err)
 bool isGlMemoryEgl(gst.memory.Memory mem)
 {
   bool _retval;
-  _retval = gst_is_gl_memory_egl(mem ? cast(GstMemory*)mem.cPtr(No.Dup) : null);
+  _retval = gst_is_gl_memory_egl(mem ? cast(GstMemory*)mem.cPtr(No.dup) : null);
   return _retval;
 }

@@ -15,12 +15,12 @@ import gobject.boxed;
 class SettingsSchemaKey : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -47,7 +47,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
   {
     VariantC* _cretval;
     _cretval = g_settings_schema_key_get_default_value(cast(GSettingsSchemaKey*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -72,7 +72,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_key_get_description(cast(GSettingsSchemaKey*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_key_get_name(cast(GSettingsSchemaKey*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
   {
     VariantC* _cretval;
     _cretval = g_settings_schema_key_get_range(cast(GSettingsSchemaKey*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_key_get_summary(cast(GSettingsSchemaKey*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
   {
     const(GVariantType)* _cretval;
     _cretval = g_settings_schema_key_get_value_type(cast(GSettingsSchemaKey*)cPtr);
-    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
   bool rangeCheck(glib.variant.VariantG value)
   {
     bool _retval;
-    _retval = g_settings_schema_key_range_check(cast(GSettingsSchemaKey*)cPtr, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    _retval = g_settings_schema_key_range_check(cast(GSettingsSchemaKey*)cPtr, value ? cast(VariantC*)value.cPtr(No.dup) : null);
     return _retval;
   }
 }

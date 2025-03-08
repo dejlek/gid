@@ -16,7 +16,7 @@ import gst.types;
 class ControlBinding : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -75,7 +75,7 @@ class ControlBinding : gst.object.ObjectGst
   {
     GValue* _cretval;
     _cretval = gst_control_binding_get_value(cast(GstControlBinding*)cPtr, timestamp);
-    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class ControlBinding : gst.object.ObjectGst
   bool syncValues(gst.object.ObjectGst object, gst.types.ClockTime timestamp, gst.types.ClockTime lastSync)
   {
     bool _retval;
-    _retval = gst_control_binding_sync_values(cast(GstControlBinding*)cPtr, object ? cast(GstObject*)object.cPtr(No.Dup) : null, timestamp, lastSync);
+    _retval = gst_control_binding_sync_values(cast(GstControlBinding*)cPtr, object ? cast(GstObject*)object.cPtr(No.dup) : null, timestamp, lastSync);
     return _retval;
   }
 }

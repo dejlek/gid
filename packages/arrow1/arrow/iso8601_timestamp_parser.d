@@ -10,7 +10,7 @@ import gid.gid;
 class ISO8601TimestampParser : arrow.timestamp_parser.TimestampParser
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class ISO8601TimestampParser : arrow.timestamp_parser.TimestampParser
   {
     GArrowISO8601TimestampParser* _cretval;
     _cretval = garrow_iso8601_timestamp_parser_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

@@ -21,7 +21,7 @@ import gobject.object;
 class TlsCertificate : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -54,12 +54,12 @@ class TlsCertificate : gobject.object.ObjectG
   static gio.tls_certificate.TlsCertificate newFromFile(string file)
   {
     GTlsCertificate* _cretval;
-    const(char)* _file = file.toCString(No.Alloc);
+    const(char)* _file = file.toCString(No.alloc);
     GError *_err;
     _cretval = g_tls_certificate_new_from_file(_file, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -69,7 +69,7 @@ class TlsCertificate : gobject.object.ObjectG
     If file cannot be read or parsed, the function will return null and
     set error.
     
-    Any unknown file types will error with [gio.types.IOErrorEnum.NotSupported].
+    Any unknown file types will error with [gio.types.IOErrorEnum.notSupported].
     Currently only `.p12` and `.pfx` files are supported.
     See [gio.tls_certificate.TlsCertificate.newFromPkcs12] for more details.
     Params:
@@ -80,13 +80,13 @@ class TlsCertificate : gobject.object.ObjectG
   static gio.tls_certificate.TlsCertificate newFromFileWithPassword(string file, string password)
   {
     GTlsCertificate* _cretval;
-    const(char)* _file = file.toCString(No.Alloc);
-    const(char)* _password = password.toCString(No.Alloc);
+    const(char)* _file = file.toCString(No.alloc);
+    const(char)* _password = password.toCString(No.alloc);
     GError *_err;
     _cretval = g_tls_certificate_new_from_file_with_password(_file, _password, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -115,13 +115,13 @@ class TlsCertificate : gobject.object.ObjectG
   static gio.tls_certificate.TlsCertificate newFromFiles(string certFile, string keyFile)
   {
     GTlsCertificate* _cretval;
-    const(char)* _certFile = certFile.toCString(No.Alloc);
-    const(char)* _keyFile = keyFile.toCString(No.Alloc);
+    const(char)* _certFile = certFile.toCString(No.alloc);
+    const(char)* _keyFile = keyFile.toCString(No.alloc);
     GError *_err;
     _cretval = g_tls_certificate_new_from_files(_certFile, _keyFile, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -148,12 +148,12 @@ class TlsCertificate : gobject.object.ObjectG
   static gio.tls_certificate.TlsCertificate newFromPem(string data, ptrdiff_t length)
   {
     GTlsCertificate* _cretval;
-    const(char)* _data = data.toCString(No.Alloc);
+    const(char)* _data = data.toCString(No.alloc);
     GError *_err;
     _cretval = g_tls_certificate_new_from_pem(_data, length, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -190,13 +190,13 @@ class TlsCertificate : gobject.object.ObjectG
   static gio.tls_certificate.TlsCertificate newFromPkcs11Uris(string pkcs11Uri, string privateKeyPkcs11Uri = null)
   {
     GTlsCertificate* _cretval;
-    const(char)* _pkcs11Uri = pkcs11Uri.toCString(No.Alloc);
-    const(char)* _privateKeyPkcs11Uri = privateKeyPkcs11Uri.toCString(No.Alloc);
+    const(char)* _pkcs11Uri = pkcs11Uri.toCString(No.alloc);
+    const(char)* _privateKeyPkcs11Uri = privateKeyPkcs11Uri.toCString(No.alloc);
     GError *_err;
     _cretval = g_tls_certificate_new_from_pkcs11_uris(_pkcs11Uri, _privateKeyPkcs11Uri, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -211,13 +211,13 @@ class TlsCertificate : gobject.object.ObjectG
     You can pass as single password for all of the data which will be
     used both for the PKCS #12 container as well as encrypted
     private keys. If decryption fails it will error with
-    [gio.types.TlsError.BadCertificatePassword].
+    [gio.types.TlsError.badCertificatePassword].
     
     This constructor requires support in the current #GTlsBackend.
     If support is missing it will error with
-    [gio.types.IOErrorEnum.NotSupported].
+    [gio.types.IOErrorEnum.notSupported].
     
-    Other parsing failures will error with [gio.types.TlsError.BadCertificate].
+    Other parsing failures will error with [gio.types.TlsError.badCertificate].
     Params:
       data =       DER-encoded PKCS #12 format certificate data
       password =       optional password for encrypted certificate data
@@ -231,12 +231,12 @@ class TlsCertificate : gobject.object.ObjectG
       _length = cast(size_t)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    const(char)* _password = password.toCString(No.Alloc);
+    const(char)* _password = password.toCString(No.alloc);
     GError *_err;
     _cretval = g_tls_certificate_new_from_pkcs12(_data, _length, _password, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class TlsCertificate : gobject.object.ObjectG
   static gio.tls_certificate.TlsCertificate[] listNewFromFile(string file)
   {
     GList* _cretval;
-    const(char)* _file = file.toCString(No.Alloc);
+    const(char)* _file = file.toCString(No.alloc);
     GError *_err;
     _cretval = g_tls_certificate_list_new_from_file(_file, &_err);
     if (_err)
@@ -300,7 +300,7 @@ class TlsCertificate : gobject.object.ObjectG
   {
     GTlsCertificate* _cretval;
     _cretval = g_tls_certificate_get_issuer(cast(GTlsCertificate*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.take);
     return _retval;
   }
 
@@ -312,7 +312,7 @@ class TlsCertificate : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = g_tls_certificate_get_issuer_name(cast(GTlsCertificate*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -324,7 +324,7 @@ class TlsCertificate : gobject.object.ObjectG
   {
     GDateTime* _cretval;
     _cretval = g_tls_certificate_get_not_valid_after(cast(GTlsCertificate*)cPtr);
-    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -336,7 +336,7 @@ class TlsCertificate : gobject.object.ObjectG
   {
     GDateTime* _cretval;
     _cretval = g_tls_certificate_get_not_valid_before(cast(GTlsCertificate*)cPtr);
-    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -348,7 +348,7 @@ class TlsCertificate : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = g_tls_certificate_get_subject_name(cast(GTlsCertificate*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -365,7 +365,7 @@ class TlsCertificate : gobject.object.ObjectG
   bool isSame(gio.tls_certificate.TlsCertificate certTwo)
   {
     bool _retval;
-    _retval = g_tls_certificate_is_same(cast(GTlsCertificate*)cPtr, certTwo ? cast(GTlsCertificate*)certTwo.cPtr(No.Dup) : null);
+    _retval = g_tls_certificate_is_same(cast(GTlsCertificate*)cPtr, certTwo ? cast(GTlsCertificate*)certTwo.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -376,16 +376,16 @@ class TlsCertificate : gobject.object.ObjectG
     check a certificate against a CA that is not part of the system
     CA database.
     
-    If cert is valid, [gio.types.TlsCertificateFlags.NoFlags] is returned.
+    If cert is valid, [gio.types.TlsCertificateFlags.noFlags] is returned.
     
     If identity is not null, cert's name(s) will be compared against
-    it, and [gio.types.TlsCertificateFlags.BadIdentity] will be set in the return
+    it, and [gio.types.TlsCertificateFlags.badIdentity] will be set in the return
     value if it does not match. If identity is null, that bit will
     never be set in the return value.
     
     If trusted_ca is not null, then cert (or one of the certificates
     in its chain) must be signed by it, or else
-    [gio.types.TlsCertificateFlags.UnknownCa] will be set in the return value. If
+    [gio.types.TlsCertificateFlags.unknownCa] will be set in the return value. If
     trusted_ca is null, that bit will never be set in the return
     value.
     
@@ -393,7 +393,7 @@ class TlsCertificate : gobject.object.ObjectG
     error will be set in the return value, but it does not guarantee
     that all possible errors will be set. Accordingly, you may not safely
     decide to ignore any particular type of error. For example, it would
-    be incorrect to mask [gio.types.TlsCertificateFlags.Expired] if you want to allow
+    be incorrect to mask [gio.types.TlsCertificateFlags.expired] if you want to allow
     expired certificates, because this could potentially be the only
     error flag set even if other problems exist with the certificate.
     
@@ -411,7 +411,7 @@ class TlsCertificate : gobject.object.ObjectG
   gio.types.TlsCertificateFlags verify(gio.socket_connectable.SocketConnectable identity = null, gio.tls_certificate.TlsCertificate trustedCa = null)
   {
     GTlsCertificateFlags _cretval;
-    _cretval = g_tls_certificate_verify(cast(GTlsCertificate*)cPtr, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.Dup) : null, trustedCa ? cast(GTlsCertificate*)trustedCa.cPtr(No.Dup) : null);
+    _cretval = g_tls_certificate_verify(cast(GTlsCertificate*)cPtr, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.dup) : null, trustedCa ? cast(GTlsCertificate*)trustedCa.cPtr(No.dup) : null);
     gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
   }

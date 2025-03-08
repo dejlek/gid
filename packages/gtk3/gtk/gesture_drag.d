@@ -19,7 +19,7 @@ import gtk.widget;
 class GestureDrag : gtk.gesture_single.GestureSingle
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -44,8 +44,8 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   this(gtk.widget.Widget widget)
   {
     GtkGesture* _cretval;
-    _cretval = gtk_gesture_drag_new(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gtk_gesture_drag_new(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -99,10 +99,10 @@ class GestureDrag : gtk.gesture_single.GestureSingle
     Connect to DragBegin signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragBegin(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDragBegin(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DragBeginCallbackDlg) || is(T : DragBeginCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -138,10 +138,10 @@ class GestureDrag : gtk.gesture_single.GestureSingle
     Connect to DragEnd signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragEnd(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDragEnd(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DragEndCallbackDlg) || is(T : DragEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -177,10 +177,10 @@ class GestureDrag : gtk.gesture_single.GestureSingle
     Connect to DragUpdate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragUpdate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDragUpdate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DragUpdateCallbackDlg) || is(T : DragUpdateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

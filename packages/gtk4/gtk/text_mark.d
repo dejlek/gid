@@ -45,7 +45,7 @@ import gtk.types;
 class TextMark : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -81,9 +81,9 @@ class TextMark : gobject.object.ObjectG
   this(string name, bool leftGravity)
   {
     GtkTextMark* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gtk_text_mark_new(_name, leftGravity);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -96,7 +96,7 @@ class TextMark : gobject.object.ObjectG
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_mark_get_buffer(cast(GtkTextMark*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.take);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ class TextMark : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_text_mark_get_name(cast(GtkTextMark*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 

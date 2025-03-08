@@ -18,7 +18,7 @@ import gtk.widget;
 class GestureStylus : gtk.gesture_single.GestureSingle
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,8 +43,8 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   this(gtk.widget.Widget widget)
   {
     GtkGesture* _cretval;
-    _cretval = gtk_gesture_stylus_new(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gtk_gesture_stylus_new(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -75,7 +75,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   {
     GdkDeviceTool* _cretval;
     _cretval = gtk_gesture_stylus_get_device_tool(cast(GtkGestureStylus*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.take);
     return _retval;
   }
 
@@ -89,10 +89,10 @@ class GestureStylus : gtk.gesture_single.GestureSingle
     Connect to Down signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDown(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDown(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DownCallbackDlg) || is(T : DownCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -119,10 +119,10 @@ class GestureStylus : gtk.gesture_single.GestureSingle
     Connect to Motion signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMotion(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMotion(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MotionCallbackDlg) || is(T : MotionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -149,10 +149,10 @@ class GestureStylus : gtk.gesture_single.GestureSingle
     Connect to Proximity signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectProximity(T)(T callback, Flag!"After" after = No.After)
+  ulong connectProximity(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ProximityCallbackDlg) || is(T : ProximityCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -179,10 +179,10 @@ class GestureStylus : gtk.gesture_single.GestureSingle
     Connect to Up signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUp(T)(T callback, Flag!"After" after = No.After)
+  ulong connectUp(T)(T callback, Flag!"after" after = No.after)
   if (is(T : UpCallbackDlg) || is(T : UpCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

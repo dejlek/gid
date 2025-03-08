@@ -42,7 +42,7 @@ import gstrtp.types;
 class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -86,7 +86,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
   {
     GstAdapter* _cretval;
     _cretval = gst_rtp_base_audio_payload_get_adapter(cast(GstRTPBaseAudioPayload*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstbase.adapter.Adapter)(cast(GstAdapter*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstbase.adapter.Adapter)(cast(GstAdapter*)_cretval, Yes.take);
     return _retval;
   }
 

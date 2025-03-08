@@ -56,7 +56,7 @@ import gtk.widget;
 class ActionBar : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -80,7 +80,7 @@ class ActionBar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_bar_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -91,7 +91,7 @@ class ActionBar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_bar_get_center_widget(cast(GtkActionBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class ActionBar : gtk.widget.Widget
   */
   void packEnd(gtk.widget.Widget child)
   {
-    gtk_action_bar_pack_end(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_action_bar_pack_end(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -126,7 +126,7 @@ class ActionBar : gtk.widget.Widget
   */
   void packStart(gtk.widget.Widget child)
   {
-    gtk_action_bar_pack_start(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_action_bar_pack_start(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -136,7 +136,7 @@ class ActionBar : gtk.widget.Widget
   */
   void remove(gtk.widget.Widget child)
   {
-    gtk_action_bar_remove(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_action_bar_remove(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -146,7 +146,7 @@ class ActionBar : gtk.widget.Widget
   */
   void setCenterWidget(gtk.widget.Widget centerWidget = null)
   {
-    gtk_action_bar_set_center_widget(cast(GtkActionBar*)cPtr, centerWidget ? cast(GtkWidget*)centerWidget.cPtr(No.Dup) : null);
+    gtk_action_bar_set_center_widget(cast(GtkActionBar*)cPtr, centerWidget ? cast(GtkWidget*)centerWidget.cPtr(No.dup) : null);
   }
 
   /**

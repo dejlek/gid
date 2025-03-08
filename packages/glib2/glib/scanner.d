@@ -27,7 +27,7 @@ class Scanner
 {
   GScanner cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.Scanner");
@@ -70,13 +70,13 @@ class Scanner
 
   @property string inputName()
   {
-    return (cast(GScanner*)cPtr).inputName.fromCString(No.Free);
+    return (cast(GScanner*)cPtr).inputName.fromCString(No.free);
   }
 
   @property void inputName(string propval)
   {
     safeFree(cast(void*)(cast(GScanner*)cPtr).inputName);
-    (cast(GScanner*)cPtr).inputName = propval.toCString(Yes.Alloc);
+    (cast(GScanner*)cPtr).inputName = propval.toCString(Yes.alloc);
   }
 
   @property glib.types.Data qdata()
@@ -267,7 +267,7 @@ class Scanner
   */
   void inputText(string text, uint textLen)
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString(No.alloc);
     g_scanner_input_text(cast(GScanner*)cPtr, _text, textLen);
   }
 
@@ -282,7 +282,7 @@ class Scanner
   */
   void* lookupSymbol(string symbol)
   {
-    const(char)* _symbol = symbol.toCString(No.Alloc);
+    const(char)* _symbol = symbol.toCString(No.alloc);
     auto _retval = g_scanner_lookup_symbol(cast(GScanner*)cPtr, _symbol);
     return _retval;
   }
@@ -318,7 +318,7 @@ class Scanner
   */
   void scopeAddSymbol(uint scopeId, string symbol, void* value = null)
   {
-    const(char)* _symbol = symbol.toCString(No.Alloc);
+    const(char)* _symbol = symbol.toCString(No.alloc);
     g_scanner_scope_add_symbol(cast(GScanner*)cPtr, scopeId, _symbol, value);
   }
 
@@ -356,7 +356,7 @@ class Scanner
   */
   void* scopeLookupSymbol(uint scopeId, string symbol)
   {
-    const(char)* _symbol = symbol.toCString(No.Alloc);
+    const(char)* _symbol = symbol.toCString(No.alloc);
     auto _retval = g_scanner_scope_lookup_symbol(cast(GScanner*)cPtr, scopeId, _symbol);
     return _retval;
   }
@@ -369,7 +369,7 @@ class Scanner
   */
   void scopeRemoveSymbol(uint scopeId, string symbol)
   {
-    const(char)* _symbol = symbol.toCString(No.Alloc);
+    const(char)* _symbol = symbol.toCString(No.alloc);
     g_scanner_scope_remove_symbol(cast(GScanner*)cPtr, scopeId, _symbol);
   }
 
@@ -424,10 +424,10 @@ class Scanner
   */
   void unexpToken(glib.types.TokenType expectedToken, string identifierSpec, string symbolSpec, string symbolName, string message, int isError)
   {
-    const(char)* _identifierSpec = identifierSpec.toCString(No.Alloc);
-    const(char)* _symbolSpec = symbolSpec.toCString(No.Alloc);
-    const(char)* _symbolName = symbolName.toCString(No.Alloc);
-    const(char)* _message = message.toCString(No.Alloc);
+    const(char)* _identifierSpec = identifierSpec.toCString(No.alloc);
+    const(char)* _symbolSpec = symbolSpec.toCString(No.alloc);
+    const(char)* _symbolName = symbolName.toCString(No.alloc);
+    const(char)* _message = message.toCString(No.alloc);
     g_scanner_unexp_token(cast(GScanner*)cPtr, expectedToken, _identifierSpec, _symbolSpec, _symbolName, _message, isError);
   }
 }

@@ -21,10 +21,10 @@ import gtk.widget;
   
   The position of each overlay widget is determined by its
   [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align]
-  properties. E.g. a widget with both alignments set to [gtk.types.Align.Start]
+  properties. E.g. a widget with both alignments set to [gtk.types.Align.start]
   will be placed at the top left corner of the [gtk.overlay.Overlay] container,
-  whereas an overlay with halign set to [gtk.types.Align.Center] and valign set
-  to [gtk.types.Align.End] will be placed a the bottom edge of the [gtk.overlay.Overlay],
+  whereas an overlay with halign set to [gtk.types.Align.center] and valign set
+  to [gtk.types.Align.end] will be placed a the bottom edge of the [gtk.overlay.Overlay],
   horizontally centered. The position can be adjusted by setting the margin
   properties of the child to non-zero values.
   
@@ -50,7 +50,7 @@ import gtk.widget;
 class Overlay : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -74,7 +74,7 @@ class Overlay : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_overlay_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -91,7 +91,7 @@ class Overlay : gtk.widget.Widget
   */
   void addOverlay(gtk.widget.Widget widget)
   {
-    gtk_overlay_add_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_overlay_add_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
   }
 
   /**
@@ -102,7 +102,7 @@ class Overlay : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_overlay_get_child(cast(GtkOverlay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class Overlay : gtk.widget.Widget
   bool getClipOverlay(gtk.widget.Widget widget)
   {
     bool _retval;
-    _retval = gtk_overlay_get_clip_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    _retval = gtk_overlay_get_clip_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class Overlay : gtk.widget.Widget
   bool getMeasureOverlay(gtk.widget.Widget widget)
   {
     bool _retval;
-    _retval = gtk_overlay_get_measure_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    _retval = gtk_overlay_get_measure_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class Overlay : gtk.widget.Widget
   */
   void removeOverlay(gtk.widget.Widget widget)
   {
-    gtk_overlay_remove_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_overlay_remove_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
   }
 
   /**
@@ -150,7 +150,7 @@ class Overlay : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_overlay_set_child(cast(GtkOverlay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_overlay_set_child(cast(GtkOverlay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -161,7 +161,7 @@ class Overlay : gtk.widget.Widget
   */
   void setClipOverlay(gtk.widget.Widget widget, bool clipOverlay)
   {
-    gtk_overlay_set_clip_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, clipOverlay);
+    gtk_overlay_set_clip_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, clipOverlay);
   }
 
   /**
@@ -176,6 +176,6 @@ class Overlay : gtk.widget.Widget
   */
   void setMeasureOverlay(gtk.widget.Widget widget, bool measure)
   {
-    gtk_overlay_set_measure_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, measure);
+    gtk_overlay_set_measure_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, measure);
   }
 }

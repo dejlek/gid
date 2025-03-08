@@ -16,7 +16,7 @@ class PluginDesc
 {
   GstPluginDesc cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gst.PluginDesc");
@@ -54,24 +54,24 @@ class PluginDesc
 
   @property string name()
   {
-    return (cast(GstPluginDesc*)cPtr).name.fromCString(No.Free);
+    return (cast(GstPluginDesc*)cPtr).name.fromCString(No.free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).name);
-    (cast(GstPluginDesc*)cPtr).name = propval.toCString(Yes.Alloc);
+    (cast(GstPluginDesc*)cPtr).name = propval.toCString(Yes.alloc);
   }
 
   @property string description()
   {
-    return (cast(GstPluginDesc*)cPtr).description.fromCString(No.Free);
+    return (cast(GstPluginDesc*)cPtr).description.fromCString(No.free);
   }
 
   @property void description(string propval)
   {
     safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).description);
-    (cast(GstPluginDesc*)cPtr).description = propval.toCString(Yes.Alloc);
+    (cast(GstPluginDesc*)cPtr).description = propval.toCString(Yes.alloc);
   }
 
   @property GstPluginInitFunc pluginInit()
@@ -86,67 +86,67 @@ class PluginDesc
 
   @property string version_()
   {
-    return (cast(GstPluginDesc*)cPtr).version_.fromCString(No.Free);
+    return (cast(GstPluginDesc*)cPtr).version_.fromCString(No.free);
   }
 
   @property void version_(string propval)
   {
     safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).version_);
-    (cast(GstPluginDesc*)cPtr).version_ = propval.toCString(Yes.Alloc);
+    (cast(GstPluginDesc*)cPtr).version_ = propval.toCString(Yes.alloc);
   }
 
   @property string license()
   {
-    return (cast(GstPluginDesc*)cPtr).license.fromCString(No.Free);
+    return (cast(GstPluginDesc*)cPtr).license.fromCString(No.free);
   }
 
   @property void license(string propval)
   {
     safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).license);
-    (cast(GstPluginDesc*)cPtr).license = propval.toCString(Yes.Alloc);
+    (cast(GstPluginDesc*)cPtr).license = propval.toCString(Yes.alloc);
   }
 
   @property string source()
   {
-    return (cast(GstPluginDesc*)cPtr).source.fromCString(No.Free);
+    return (cast(GstPluginDesc*)cPtr).source.fromCString(No.free);
   }
 
   @property void source(string propval)
   {
     safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).source);
-    (cast(GstPluginDesc*)cPtr).source = propval.toCString(Yes.Alloc);
+    (cast(GstPluginDesc*)cPtr).source = propval.toCString(Yes.alloc);
   }
 
   @property string package_()
   {
-    return (cast(GstPluginDesc*)cPtr).package_.fromCString(No.Free);
+    return (cast(GstPluginDesc*)cPtr).package_.fromCString(No.free);
   }
 
   @property void package_(string propval)
   {
     safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).package_);
-    (cast(GstPluginDesc*)cPtr).package_ = propval.toCString(Yes.Alloc);
+    (cast(GstPluginDesc*)cPtr).package_ = propval.toCString(Yes.alloc);
   }
 
   @property string origin()
   {
-    return (cast(GstPluginDesc*)cPtr).origin.fromCString(No.Free);
+    return (cast(GstPluginDesc*)cPtr).origin.fromCString(No.free);
   }
 
   @property void origin(string propval)
   {
     safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).origin);
-    (cast(GstPluginDesc*)cPtr).origin = propval.toCString(Yes.Alloc);
+    (cast(GstPluginDesc*)cPtr).origin = propval.toCString(Yes.alloc);
   }
 
   @property string releaseDatetime()
   {
-    return (cast(GstPluginDesc*)cPtr).releaseDatetime.fromCString(No.Free);
+    return (cast(GstPluginDesc*)cPtr).releaseDatetime.fromCString(No.free);
   }
 
   @property void releaseDatetime(string propval)
   {
     safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).releaseDatetime);
-    (cast(GstPluginDesc*)cPtr).releaseDatetime = propval.toCString(Yes.Alloc);
+    (cast(GstPluginDesc*)cPtr).releaseDatetime = propval.toCString(Yes.alloc);
   }
 }

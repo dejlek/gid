@@ -22,7 +22,7 @@ import gobject.object;
 class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_stream.PollableInputStream, gio.seekable.Seekable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,7 +49,7 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
   {
     GInputStream* _cretval;
     _cretval = g_memory_input_stream_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -61,8 +61,8 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
   static gio.memory_input_stream.MemoryInputStream newFromBytes(glib.bytes.Bytes bytes)
   {
     GInputStream* _cretval;
-    _cretval = g_memory_input_stream_new_from_bytes(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.memory_input_stream.MemoryInputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    _cretval = g_memory_input_stream_new_from_bytes(bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gio.memory_input_stream.MemoryInputStream)(cast(GInputStream*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -73,6 +73,6 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
   */
   void addBytes(glib.bytes.Bytes bytes)
   {
-    g_memory_input_stream_add_bytes(cast(GMemoryInputStream*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
+    g_memory_input_stream_add_bytes(cast(GMemoryInputStream*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null);
   }
 }

@@ -47,7 +47,7 @@ import gtk.types;
 class IconTheme : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -76,7 +76,7 @@ class IconTheme : gobject.object.ObjectG
   {
     GtkIconTheme* _cretval;
     _cretval = gtk_icon_theme_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -97,8 +97,8 @@ class IconTheme : gobject.object.ObjectG
   static gtk.icon_theme.IconTheme getForDisplay(gdk.display.Display display)
   {
     GtkIconTheme* _cretval;
-    _cretval = gtk_icon_theme_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.icon_theme.IconTheme)(cast(GtkIconTheme*)_cretval, No.Take);
+    _cretval = gtk_icon_theme_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.icon_theme.IconTheme)(cast(GtkIconTheme*)_cretval, No.take);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class IconTheme : gobject.object.ObjectG
   */
   void addResourcePath(string path)
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     gtk_icon_theme_add_resource_path(cast(GtkIconTheme*)cPtr, _path);
   }
 
@@ -128,7 +128,7 @@ class IconTheme : gobject.object.ObjectG
   */
   void addSearchPath(string path)
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     gtk_icon_theme_add_search_path(cast(GtkIconTheme*)cPtr, _path);
   }
 
@@ -141,7 +141,7 @@ class IconTheme : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gtk_icon_theme_get_display(cast(GtkIconTheme*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class IconTheme : gobject.object.ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -185,7 +185,7 @@ class IconTheme : gobject.object.ObjectG
   int[] getIconSizes(string iconName)
   {
     int* _cretval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString(No.alloc);
     _cretval = gtk_icon_theme_get_icon_sizes(cast(GtkIconTheme*)cPtr, _iconName);
     int[] _retval;
 
@@ -218,7 +218,7 @@ class IconTheme : gobject.object.ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -242,7 +242,7 @@ class IconTheme : gobject.object.ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -257,7 +257,7 @@ class IconTheme : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = gtk_icon_theme_get_theme_name(cast(GtkIconTheme*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class IconTheme : gobject.object.ObjectG
   bool hasGicon(gio.icon.Icon gicon)
   {
     bool _retval;
-    _retval = gtk_icon_theme_has_gicon(cast(GtkIconTheme*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.Dup) : null);
+    _retval = gtk_icon_theme_has_gicon(cast(GtkIconTheme*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -286,7 +286,7 @@ class IconTheme : gobject.object.ObjectG
   bool hasIcon(string iconName)
   {
     bool _retval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString(No.alloc);
     _retval = gtk_icon_theme_has_icon(cast(GtkIconTheme*)cPtr, _iconName);
     return _retval;
   }
@@ -308,8 +308,8 @@ class IconTheme : gobject.object.ObjectG
   gtk.icon_paintable.IconPaintable lookupByGicon(gio.icon.Icon icon, int size, int scale, gtk.types.TextDirection direction, gtk.types.IconLookupFlags flags)
   {
     GtkIconPaintable* _cretval;
-    _cretval = gtk_icon_theme_lookup_by_gicon(cast(GtkIconTheme*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, size, scale, direction, flags);
-    auto _retval = ObjectG.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
+    _cretval = gtk_icon_theme_lookup_by_gicon(cast(GtkIconTheme*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null, size, scale, direction, flags);
+    auto _retval = ObjectG.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -343,14 +343,14 @@ class IconTheme : gobject.object.ObjectG
   gtk.icon_paintable.IconPaintable lookupIcon(string iconName, string[] fallbacks, int size, int scale, gtk.types.TextDirection direction, gtk.types.IconLookupFlags flags)
   {
     GtkIconPaintable* _cretval;
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString(No.alloc);
     char*[] _tmpfallbacks;
     foreach (s; fallbacks)
-      _tmpfallbacks ~= s.toCString(No.Alloc);
+      _tmpfallbacks ~= s.toCString(No.alloc);
     _tmpfallbacks ~= null;
     const(char*)* _fallbacks = _tmpfallbacks.ptr;
     _cretval = gtk_icon_theme_lookup_icon(cast(GtkIconTheme*)cPtr, _iconName, _fallbacks, size, scale, direction, flags);
-    auto _retval = ObjectG.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -374,7 +374,7 @@ class IconTheme : gobject.object.ObjectG
   {
     const(char)*[] _tmppath;
     foreach (s; path)
-      _tmppath ~= s.toCString(No.Alloc);
+      _tmppath ~= s.toCString(No.alloc);
     _tmppath ~= null;
     const(char*)* _path = _tmppath.ptr;
     gtk_icon_theme_set_resource_path(cast(GtkIconTheme*)cPtr, _path);
@@ -404,7 +404,7 @@ class IconTheme : gobject.object.ObjectG
   {
     const(char)*[] _tmppath;
     foreach (s; path)
-      _tmppath ~= s.toCString(No.Alloc);
+      _tmppath ~= s.toCString(No.alloc);
     _tmppath ~= null;
     const(char*)* _path = _tmppath.ptr;
     gtk_icon_theme_set_search_path(cast(GtkIconTheme*)cPtr, _path);
@@ -422,7 +422,7 @@ class IconTheme : gobject.object.ObjectG
   */
   void setThemeName(string themeName = null)
   {
-    const(char)* _themeName = themeName.toCString(No.Alloc);
+    const(char)* _themeName = themeName.toCString(No.alloc);
     gtk_icon_theme_set_theme_name(cast(GtkIconTheme*)cPtr, _themeName);
   }
 
@@ -447,10 +447,10 @@ class IconTheme : gobject.object.ObjectG
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

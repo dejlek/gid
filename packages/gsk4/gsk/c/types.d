@@ -18,85 +18,85 @@ enum GskBlendMode
   /**
       The default blend mode, which specifies no blending
   */
-  Default = 0,
+  default_ = 0,
 
   /**
       The source color is multiplied by the destination
       and replaces the destination
   */
-  Multiply = 1,
+  multiply = 1,
 
   /**
       Multiplies the complements of the destination and source
       color values, then complements the result.
   */
-  Screen = 2,
+  screen = 2,
 
   /**
       Multiplies or screens the colors, depending on the
       destination color value. This is the inverse of hard-list
   */
-  Overlay = 3,
+  overlay = 3,
 
   /**
       Selects the darker of the destination and source colors
   */
-  Darken = 4,
+  darken = 4,
 
   /**
       Selects the lighter of the destination and source colors
   */
-  Lighten = 5,
+  lighten = 5,
 
   /**
       Brightens the destination color to reflect the source color
   */
-  ColorDodge = 6,
+  colorDodge = 6,
 
   /**
       Darkens the destination color to reflect the source color
   */
-  ColorBurn = 7,
+  colorBurn = 7,
 
   /**
       Multiplies or screens the colors, depending on the source color value
   */
-  HardLight = 8,
+  hardLight = 8,
 
   /**
       Darkens or lightens the colors, depending on the source color value
   */
-  SoftLight = 9,
+  softLight = 9,
 
   /**
       Subtracts the darker of the two constituent colors from the lighter color
   */
-  Difference = 10,
+  difference = 10,
 
   /**
       Produces an effect similar to that of the difference mode but lower in contrast
   */
-  Exclusion = 11,
+  exclusion = 11,
 
   /**
       Creates a color with the hue and saturation of the source color and the luminosity of the destination color
   */
-  Color = 12,
+  color = 12,
 
   /**
       Creates a color with the hue of the source color and the saturation and luminosity of the destination color
   */
-  Hue = 13,
+  hue = 13,
 
   /**
       Creates a color with the saturation of the source color and the hue and luminosity of the destination color
   */
-  Saturation = 14,
+  saturation = 14,
 
   /**
       Creates a color with the luminosity of the source color and the hue and saturation of the destination color
   */
-  Luminosity = 15,
+  luminosity = 15,
 }
 
 /**
@@ -107,22 +107,22 @@ enum GskCorner
   /**
       The top left corner
   */
-  TopLeft = 0,
+  topLeft = 0,
 
   /**
       The top right corner
   */
-  TopRight = 1,
+  topRight = 1,
 
   /**
       The bottom right corner
   */
-  BottomRight = 2,
+  bottomRight = 2,
 
   /**
       The bottom left corner
   */
-  BottomLeft = 3,
+  bottomLeft = 3,
 }
 
 /**
@@ -148,7 +148,7 @@ enum GskFillRule
       from the perspective of looking along the ray from the starting
       point.) If the total count is non-zero, the point will be filled.
   */
-  Winding = 0,
+  winding = 0,
 
   /**
       Counts the total number of
@@ -156,7 +156,7 @@ enum GskFillRule
       the total number of intersections is odd, the point will be
       filled.
   */
-  EvenOdd = 1,
+  evenOdd = 1,
 }
 
 /**
@@ -171,49 +171,49 @@ enum GskGLUniformType
   /**
       No type, used for uninitialized or unspecified values.
   */
-  None = 0,
+  none = 0,
 
   /**
       A float uniform
   */
-  Float = 1,
+  float_ = 1,
 
   /**
       A GLSL int / gint32 uniform
   */
-  Int = 2,
+  int_ = 2,
 
   /**
       A GLSL uint / guint32 uniform
   */
-  Uint = 3,
+  uint_ = 3,
 
   /**
       A GLSL bool / gboolean uniform
   */
-  Bool = 4,
+  bool_ = 4,
 
   /**
       A GLSL vec2 / graphene_vec2_t uniform
   */
-  Vec2 = 5,
+  vec2 = 5,
 
   /**
       A GLSL vec3 / graphene_vec3_t uniform
   */
-  Vec3 = 6,
+  vec3 = 6,
 
   /**
       A GLSL vec4 / graphene_vec4_t uniform
   */
-  Vec4 = 7,
+  vec4 = 7,
 }
 
 /**
     Specifies how to render the start and end points of contours or
   dashes when stroking.
   
-  The default line cap style is [gsk.types.LineCap.Butt].
+  The default line cap style is [gsk.types.LineCap.butt].
   
   New entries may be added in future versions.
   
@@ -231,25 +231,25 @@ enum GskLineCap
       Start and stop the line exactly at the start
       and end point
   */
-  Butt = 0,
+  butt = 0,
 
   /**
       Use a round ending, the center of the circle
       is the start or end point
   */
-  Round = 1,
+  round = 1,
 
   /**
       use squared ending, the center of the square
       is the start or end point
   */
-  Square = 2,
+  square = 2,
 }
 
 /**
     Specifies how to render the junction of two lines when stroking.
   
-  The default line join style is [gsk.types.LineJoin.Miter].
+  The default line join style is [gsk.types.LineJoin.miter].
   
   New entries may be added in future versions.
   
@@ -266,19 +266,19 @@ enum GskLineJoin
   /**
       Use a sharp angled corner
   */
-  Miter = 0,
+  miter = 0,
 
   /**
       Use a round join, the center of the circle is
       the join point
   */
-  Round = 1,
+  round = 1,
 
   /**
       use a cut-off join, the join is cut off at half
       the line width from the joint point
   */
-  Bevel = 2,
+  bevel = 2,
 }
 
 /**
@@ -289,24 +289,24 @@ enum GskMaskMode
   /**
       Use the alpha channel of the mask
   */
-  Alpha = 0,
+  alpha = 0,
 
   /**
       Use the inverted alpha channel of the mask
   */
-  InvertedAlpha = 1,
+  invertedAlpha = 1,
 
   /**
       Use the luminance of the mask,
         multiplied by mask alpha
   */
-  Luminance = 2,
+  luminance = 2,
 
   /**
       Use the inverted luminance of the mask,
         multiplied by mask alpha
   */
-  InvertedLuminance = 3,
+  invertedLuminance = 3,
 }
 
 /**
@@ -328,25 +328,25 @@ enum GskPathDirection
       The tangent in path direction of the incoming side
       of the path
   */
-  FromStart = 0,
+  fromStart = 0,
 
   /**
       The tangent against path direction of the incoming side
       of the path
   */
-  ToStart = 1,
+  toStart = 1,
 
   /**
       The tangent in path direction of the outgoing side
       of the path
   */
-  ToEnd = 2,
+  toEnd = 2,
 
   /**
       The tangent against path direction of the outgoing
       side of the path
   */
-  FromEnd = 3,
+  fromEnd = 3,
 }
 
 /**
@@ -355,30 +355,30 @@ enum GskPathDirection
   
   By default, [gsk.path.Path.foreach_] will only emit a path with all
   operations flattened to straight lines to allow for maximum compatibility.
-  The only operations emitted will be [gsk.types.PathOperation.Move], [gsk.types.PathOperation.Line] and
-  [gsk.types.PathOperation.Close].
+  The only operations emitted will be [gsk.types.PathOperation.move], [gsk.types.PathOperation.line] and
+  [gsk.types.PathOperation.close].
 */
 enum GskPathForeachFlags : uint
 {
   /**
       The default behavior, only allow lines.
   */
-  OnlyLines = 0,
+  onlyLines = 0,
 
   /**
-      Allow emission of [gsk.types.PathOperation.Quad] operations
+      Allow emission of [gsk.types.PathOperation.quad] operations
   */
-  Quad = 1,
+  quad = 1,
 
   /**
-      Allow emission of [gsk.types.PathOperation.Cubic] operations.
+      Allow emission of [gsk.types.PathOperation.cubic] operations.
   */
-  Cubic = 2,
+  cubic = 2,
 
   /**
-      Allow emission of [gsk.types.PathOperation.Conic] operations.
+      Allow emission of [gsk.types.PathOperation.conic] operations.
   */
-  Conic = 4,
+  conic = 4,
 }
 
 /**
@@ -391,40 +391,40 @@ enum GskPathOperation
   /**
       A move-to operation, with 1 point describing the target point.
   */
-  Move = 0,
+  move = 0,
 
   /**
       A close operation ending the current contour with a line back
       to the starting point. Two points describe the start and end of the line.
   */
-  Close = 1,
+  close = 1,
 
   /**
       A line-to operation, with 2 points describing the start and
       end point of a straight line.
   */
-  Line = 2,
+  line = 2,
 
   /**
       A curve-to operation describing a quadratic Bézier curve
       with 3 points describing the start point, the control point and the end
       point of the curve.
   */
-  Quad = 3,
+  quad = 3,
 
   /**
       A curve-to operation describing a cubic Bézier curve with 4
       points describing the start point, the two control points and the end point
       of the curve.
   */
-  Cubic = 4,
+  cubic = 4,
 
   /**
       A rational quadratic Bézier curve with 3 points describing
       the start point, control point and end point of the curve. A weight for the
       curve will be passed, too.
   */
-  Conic = 5,
+  conic = 5,
 }
 
 /**
@@ -435,157 +435,157 @@ enum GskRenderNodeType
   /**
       Error type. No node will ever have this type.
   */
-  NotARenderNode = 0,
+  notARenderNode = 0,
 
   /**
       A node containing a stack of children
   */
-  ContainerNode = 1,
+  containerNode = 1,
 
   /**
       A node drawing a [cairo.surface.Surface]
   */
-  CairoNode = 2,
+  cairoNode = 2,
 
   /**
       A node drawing a single color rectangle
   */
-  ColorNode = 3,
+  colorNode = 3,
 
   /**
       A node drawing a linear gradient
   */
-  LinearGradientNode = 4,
+  linearGradientNode = 4,
 
   /**
       A node drawing a repeating linear gradient
   */
-  RepeatingLinearGradientNode = 5,
+  repeatingLinearGradientNode = 5,
 
   /**
       A node drawing a radial gradient
   */
-  RadialGradientNode = 6,
+  radialGradientNode = 6,
 
   /**
       A node drawing a repeating radial gradient
   */
-  RepeatingRadialGradientNode = 7,
+  repeatingRadialGradientNode = 7,
 
   /**
       A node drawing a conic gradient
   */
-  ConicGradientNode = 8,
+  conicGradientNode = 8,
 
   /**
       A node stroking a border around an area
   */
-  BorderNode = 9,
+  borderNode = 9,
 
   /**
       A node drawing a [gdk.texture.Texture]
   */
-  TextureNode = 10,
+  textureNode = 10,
 
   /**
       A node drawing an inset shadow
   */
-  InsetShadowNode = 11,
+  insetShadowNode = 11,
 
   /**
       A node drawing an outset shadow
   */
-  OutsetShadowNode = 12,
+  outsetShadowNode = 12,
 
   /**
       A node that renders its child after applying a matrix transform
   */
-  TransformNode = 13,
+  transformNode = 13,
 
   /**
       A node that changes the opacity of its child
   */
-  OpacityNode = 14,
+  opacityNode = 14,
 
   /**
       A node that applies a color matrix to every pixel
   */
-  ColorMatrixNode = 15,
+  colorMatrixNode = 15,
 
   /**
       A node that repeats the child's contents
   */
-  RepeatNode = 16,
+  repeatNode = 16,
 
   /**
       A node that clips its child to a rectangular area
   */
-  ClipNode = 17,
+  clipNode = 17,
 
   /**
       A node that clips its child to a rounded rectangle
   */
-  RoundedClipNode = 18,
+  roundedClipNode = 18,
 
   /**
       A node that draws a shadow below its child
   */
-  ShadowNode = 19,
+  shadowNode = 19,
 
   /**
       A node that blends two children together
   */
-  BlendNode = 20,
+  blendNode = 20,
 
   /**
       A node that cross-fades between two children
   */
-  CrossFadeNode = 21,
+  crossFadeNode = 21,
 
   /**
       A node containing a glyph string
   */
-  TextNode = 22,
+  textNode = 22,
 
   /**
       A node that applies a blur
   */
-  BlurNode = 23,
+  blurNode = 23,
 
   /**
       Debug information that does not affect the rendering
   */
-  DebugNode = 24,
+  debugNode = 24,
 
   /**
       A node that uses OpenGL fragment shaders to render
   */
-  GlShaderNode = 25,
+  glShaderNode = 25,
 
   /**
       A node drawing a [gdk.texture.Texture] scaled and filtered.
   */
-  TextureScaleNode = 26,
+  textureScaleNode = 26,
 
   /**
       A node that masks one child with another.
   */
-  MaskNode = 27,
+  maskNode = 27,
 
   /**
       A node that fills a path.
   */
-  FillNode = 28,
+  fillNode = 28,
 
   /**
       A node that strokes a path.
   */
-  StrokeNode = 29,
+  strokeNode = 29,
 
   /**
       A node that possibly redirects part of the scene graph to a subsurface.
   */
-  SubsurfaceNode = 30,
+  subsurfaceNode = 30,
 }
 
 /**
@@ -599,19 +599,19 @@ enum GskScalingFilter
   /**
       linear interpolation filter
   */
-  Linear = 0,
+  linear = 0,
 
   /**
       nearest neighbor interpolation filter
   */
-  Nearest = 1,
+  nearest = 1,
 
   /**
       linear interpolation along each axis,
       plus mipmap generation, with linear interpolation along the mipmap
       levels
   */
-  Trilinear = 2,
+  trilinear = 2,
 }
 
 /**
@@ -622,19 +622,19 @@ enum GskSerializationError
   /**
       The format can not be identified
   */
-  UnsupportedFormat = 0,
+  unsupportedFormat = 0,
 
   /**
       The version of the data is not
       understood
   */
-  UnsupportedVersion = 1,
+  unsupportedVersion = 1,
 
   /**
       The given data may not exist in
       a proper serialization
   */
-  InvalidData = 2,
+  invalidData = 2,
 }
 
 /**
@@ -655,13 +655,13 @@ enum GskTransformCategory
       The category of the matrix has not been
       determined.
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       Analyzing the matrix concluded that it does
       not fit in any other category.
   */
-  Any = 1,
+  any = 1,
 
   /**
       The matrix is a 3D matrix. This means that
@@ -691,7 +691,7 @@ enum GskTransformCategory
   /**
       The matrix is the identity matrix.
   */
-  Identity = 6,
+  identity = 6,
 }
 
 /**

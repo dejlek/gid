@@ -17,12 +17,12 @@ import pango.types;
 class Item : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -82,7 +82,7 @@ class Item : gobject.boxed.Boxed
   {
     PangoItem* _cretval;
     _cretval = pango_item_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -102,7 +102,7 @@ class Item : gobject.boxed.Boxed
   */
   void applyAttrs(pango.attr_iterator.AttrIterator iter)
   {
-    pango_item_apply_attrs(cast(PangoItem*)cPtr, iter ? cast(PangoAttrIterator*)iter.cPtr(No.Dup) : null);
+    pango_item_apply_attrs(cast(PangoItem*)cPtr, iter ? cast(PangoAttrIterator*)iter.cPtr(No.dup) : null);
   }
 
   /**
@@ -113,7 +113,7 @@ class Item : gobject.boxed.Boxed
   {
     PangoItem* _cretval;
     _cretval = pango_item_copy(cast(PangoItem*)cPtr);
-    auto _retval = _cretval ? new pango.item.Item(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.item.Item(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class Item : gobject.boxed.Boxed
   {
     PangoItem* _cretval;
     _cretval = pango_item_split(cast(PangoItem*)cPtr, splitIndex, splitOffset);
-    auto _retval = _cretval ? new pango.item.Item(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.item.Item(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

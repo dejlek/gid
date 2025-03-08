@@ -18,7 +18,7 @@ import gstbase.types;
   it to the caller.
   
   To add a new pad to the #GstFlowCombiner use [gstbase.flow_combiner.FlowCombiner.addPad].
-  The new #GstPad is stored with a default value of [gst.types.FlowReturn.Ok].
+  The new #GstPad is stored with a default value of [gst.types.FlowReturn.ok].
   
   In case you want a #GstPad to be removed, use [gstbase.flow_combiner.FlowCombiner.removePad].
   
@@ -32,26 +32,26 @@ import gstbase.types;
   These rules are:
   
   $(LIST
-    * [gst.types.FlowReturn.Eos]: only if all returns are EOS too
-    * [gst.types.FlowReturn.NotLinked]: only if all returns are NOT_LINKED too
-    * [gst.types.FlowReturn.Error] or below: if at least one returns an error return
-    * [gst.types.FlowReturn.NotNegotiated]: if at least one returns a not-negotiated return
-    * [gst.types.FlowReturn.Flushing]: if at least one returns flushing
-    * [gst.types.FlowReturn.Ok]: otherwise
+    * [gst.types.FlowReturn.eos]: only if all returns are EOS too
+    * [gst.types.FlowReturn.notLinked]: only if all returns are NOT_LINKED too
+    * [gst.types.FlowReturn.error] or below: if at least one returns an error return
+    * [gst.types.FlowReturn.notNegotiated]: if at least one returns a not-negotiated return
+    * [gst.types.FlowReturn.flushing]: if at least one returns flushing
+    * [gst.types.FlowReturn.ok]: otherwise
   )
     
-  [gst.types.FlowReturn.Error] or below, GST_FLOW_NOT_NEGOTIATED and GST_FLOW_FLUSHING are
+  [gst.types.FlowReturn.error] or below, GST_FLOW_NOT_NEGOTIATED and GST_FLOW_FLUSHING are
   returned immediately from the [gstbase.flow_combiner.FlowCombiner.updateFlow] function.
 */
 class FlowCombiner : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -75,7 +75,7 @@ class FlowCombiner : gobject.boxed.Boxed
   {
     GstFlowCombiner* _cretval;
     _cretval = gst_flow_combiner_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -85,7 +85,7 @@ class FlowCombiner : gobject.boxed.Boxed
   */
   void addPad(gst.pad.Pad pad)
   {
-    gst_flow_combiner_add_pad(cast(GstFlowCombiner*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+    gst_flow_combiner_add_pad(cast(GstFlowCombiner*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.dup) : null);
   }
 
   /**
@@ -103,7 +103,7 @@ class FlowCombiner : gobject.boxed.Boxed
   */
   void removePad(gst.pad.Pad pad)
   {
-    gst_flow_combiner_remove_pad(cast(GstFlowCombiner*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+    gst_flow_combiner_remove_pad(cast(GstFlowCombiner*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.dup) : null);
   }
 
   /**
@@ -149,7 +149,7 @@ class FlowCombiner : gobject.boxed.Boxed
   gst.types.FlowReturn updatePadFlow(gst.pad.Pad pad, gst.types.FlowReturn fret)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_flow_combiner_update_pad_flow(cast(GstFlowCombiner*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null, fret);
+    _cretval = gst_flow_combiner_update_pad_flow(cast(GstFlowCombiner*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.dup) : null, fret);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }

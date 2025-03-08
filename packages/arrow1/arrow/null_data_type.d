@@ -10,7 +10,7 @@ import gid.gid;
 class NullDataType : arrow.data_type.DataType
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class NullDataType : arrow.data_type.DataType
   {
     GArrowNullDataType* _cretval;
     _cretval = garrow_null_data_type_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

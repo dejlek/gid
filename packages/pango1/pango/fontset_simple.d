@@ -18,7 +18,7 @@ import pango.types;
 class FontsetSimple : pango.fontset.Fontset
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,8 +43,8 @@ class FontsetSimple : pango.fontset.Fontset
   this(pango.language.Language language)
   {
     PangoFontsetSimple* _cretval;
-    _cretval = pango_fontset_simple_new(language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = pango_fontset_simple_new(language ? cast(PangoLanguage*)language.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -56,7 +56,7 @@ class FontsetSimple : pango.fontset.Fontset
   */
   void append(pango.font.Font font)
   {
-    pango_fontset_simple_append(cast(PangoFontsetSimple*)cPtr, font ? cast(PangoFont*)font.cPtr(Yes.Dup) : null);
+    pango_fontset_simple_append(cast(PangoFontsetSimple*)cPtr, font ? cast(PangoFont*)font.cPtr(Yes.dup) : null);
   }
 
   /**

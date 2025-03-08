@@ -62,7 +62,7 @@ import soup.websocket_connection;
 class Session : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -86,7 +86,7 @@ class Session : gobject.object.ObjectG
   {
     SoupSession* _cretval;
     _cretval = soup_session_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -109,7 +109,7 @@ class Session : gobject.object.ObjectG
   */
   void addFeature(soup.session_feature.SessionFeature feature)
   {
-    soup_session_add_feature(cast(SoupSession*)cPtr, feature ? cast(SoupSessionFeature*)(cast(ObjectG)feature).cPtr(No.Dup) : null);
+    soup_session_add_feature(cast(SoupSession*)cPtr, feature ? cast(SoupSessionFeature*)(cast(ObjectG)feature).cPtr(No.dup) : null);
   }
 
   /**
@@ -142,7 +142,7 @@ class Session : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_session_get_accept_language(cast(SoupSession*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -171,8 +171,8 @@ class Session : gobject.object.ObjectG
   soup.message.Message getAsyncResultMessage(gio.async_result.AsyncResult result)
   {
     SoupMessage* _cretval;
-    _cretval = soup_session_get_async_result_message(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, No.Take);
+    _cretval = soup_session_get_async_result_message(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, No.take);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class Session : gobject.object.ObjectG
   {
     SoupSessionFeature* _cretval;
     _cretval = soup_session_get_feature(cast(SoupSession*)cPtr, featureType);
-    auto _retval = ObjectG.getDObject!(soup.session_feature.SessionFeature)(cast(SoupSessionFeature*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(soup.session_feature.SessionFeature)(cast(SoupSessionFeature*)_cretval, No.take);
     return _retval;
   }
 
@@ -203,8 +203,8 @@ class Session : gobject.object.ObjectG
   soup.session_feature.SessionFeature getFeatureForMessage(gobject.types.GType featureType, soup.message.Message msg)
   {
     SoupSessionFeature* _cretval;
-    _cretval = soup_session_get_feature_for_message(cast(SoupSession*)cPtr, featureType, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(soup.session_feature.SessionFeature)(cast(SoupSessionFeature*)_cretval, No.Take);
+    _cretval = soup_session_get_feature_for_message(cast(SoupSession*)cPtr, featureType, msg ? cast(SoupMessage*)msg.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(soup.session_feature.SessionFeature)(cast(SoupSessionFeature*)_cretval, No.take);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class Session : gobject.object.ObjectG
   {
     GInetSocketAddress* _cretval;
     _cretval = soup_session_get_local_address(cast(SoupSession*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.inet_socket_address.InetSocketAddress)(cast(GInetSocketAddress*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.inet_socket_address.InetSocketAddress)(cast(GInetSocketAddress*)_cretval, No.take);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class Session : gobject.object.ObjectG
   {
     GProxyResolver* _cretval;
     _cretval = soup_session_get_proxy_resolver(cast(SoupSession*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, No.take);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class Session : gobject.object.ObjectG
   {
     GSocketConnectable* _cretval;
     _cretval = soup_session_get_remote_connectable(cast(SoupSession*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket_connectable.SocketConnectable)(cast(GSocketConnectable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_connectable.SocketConnectable)(cast(GSocketConnectable*)_cretval, No.take);
     return _retval;
   }
 
@@ -301,7 +301,7 @@ class Session : gobject.object.ObjectG
   {
     GTlsDatabase* _cretval;
     _cretval = soup_session_get_tls_database(cast(SoupSession*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.take);
     return _retval;
   }
 
@@ -313,7 +313,7 @@ class Session : gobject.object.ObjectG
   {
     GTlsInteraction* _cretval;
     _cretval = soup_session_get_tls_interaction(cast(SoupSession*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, No.take);
     return _retval;
   }
 
@@ -325,7 +325,7 @@ class Session : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_session_get_user_agent(cast(SoupSession*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -369,12 +369,12 @@ class Session : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    soup_session_preconnect_async(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    soup_session_preconnect_async(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -387,7 +387,7 @@ class Session : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = soup_session_preconnect_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = soup_session_preconnect_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -400,7 +400,7 @@ class Session : gobject.object.ObjectG
   */
   void removeFeature(soup.session_feature.SessionFeature feature)
   {
-    soup_session_remove_feature(cast(SoupSession*)cPtr, feature ? cast(SoupSessionFeature*)(cast(ObjectG)feature).cPtr(No.Dup) : null);
+    soup_session_remove_feature(cast(SoupSession*)cPtr, feature ? cast(SoupSessionFeature*)(cast(ObjectG)feature).cPtr(No.dup) : null);
   }
 
   /**
@@ -423,7 +423,7 @@ class Session : gobject.object.ObjectG
     that a 2xx class status code was received.)
     
     If non-null, cancellable can be used to cancel the request;
-    [soup.session.Session.send] will return a [gio.types.IOErrorEnum.Cancelled] error. Note that
+    [soup.session.Session.send] will return a [gio.types.IOErrorEnum.cancelled] error. Note that
     with requests that have side effects (eg, `POST`, `PUT`, `DELETE`) it is
     possible that you might cancel the request after the server acts on it, but
     before it returns a response, leaving the remote resource in an unknown
@@ -443,10 +443,10 @@ class Session : gobject.object.ObjectG
   {
     GInputStream* _cretval;
     GError *_err;
-    _cretval = soup_session_send(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = soup_session_send(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -467,10 +467,10 @@ class Session : gobject.object.ObjectG
   {
     GBytes* _cretval;
     GError *_err;
-    _cretval = soup_session_send_and_read(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = soup_session_send_and_read(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -497,12 +497,12 @@ class Session : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    soup_session_send_and_read_async(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    soup_session_send_and_read_async(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -517,10 +517,10 @@ class Session : gobject.object.ObjectG
   {
     GBytes* _cretval;
     GError *_err;
-    _cretval = soup_session_send_and_read_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = soup_session_send_and_read_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -539,7 +539,7 @@ class Session : gobject.object.ObjectG
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = soup_session_send_and_splice(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, outStream ? cast(GOutputStream*)outStream.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = soup_session_send_and_splice(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.dup) : null, outStream ? cast(GOutputStream*)outStream.cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -566,12 +566,12 @@ class Session : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    soup_session_send_and_splice_async(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, outStream ? cast(GOutputStream*)outStream.cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    soup_session_send_and_splice_async(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.dup) : null, outStream ? cast(GOutputStream*)outStream.cPtr(No.dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -584,7 +584,7 @@ class Session : gobject.object.ObjectG
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = soup_session_send_and_splice_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = soup_session_send_and_splice_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -612,12 +612,12 @@ class Session : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    soup_session_send_async(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    soup_session_send_async(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -634,10 +634,10 @@ class Session : gobject.object.ObjectG
   {
     GInputStream* _cretval;
     GError *_err;
-    _cretval = soup_session_send_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = soup_session_send_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -652,7 +652,7 @@ class Session : gobject.object.ObjectG
   */
   void setAcceptLanguage(string acceptLanguage)
   {
-    const(char)* _acceptLanguage = acceptLanguage.toCString(No.Alloc);
+    const(char)* _acceptLanguage = acceptLanguage.toCString(No.alloc);
     soup_session_set_accept_language(cast(SoupSession*)cPtr, _acceptLanguage);
   }
 
@@ -693,7 +693,7 @@ class Session : gobject.object.ObjectG
   */
   void setProxyResolver(gio.proxy_resolver.ProxyResolver proxyResolver = null)
   {
-    soup_session_set_proxy_resolver(cast(SoupSession*)cPtr, proxyResolver ? cast(GProxyResolver*)(cast(ObjectG)proxyResolver).cPtr(No.Dup) : null);
+    soup_session_set_proxy_resolver(cast(SoupSession*)cPtr, proxyResolver ? cast(GProxyResolver*)(cast(ObjectG)proxyResolver).cPtr(No.dup) : null);
   }
 
   /**
@@ -719,7 +719,7 @@ class Session : gobject.object.ObjectG
   */
   void setTlsDatabase(gio.tls_database.TlsDatabase tlsDatabase = null)
   {
-    soup_session_set_tls_database(cast(SoupSession*)cPtr, tlsDatabase ? cast(GTlsDatabase*)tlsDatabase.cPtr(No.Dup) : null);
+    soup_session_set_tls_database(cast(SoupSession*)cPtr, tlsDatabase ? cast(GTlsDatabase*)tlsDatabase.cPtr(No.dup) : null);
   }
 
   /**
@@ -734,7 +734,7 @@ class Session : gobject.object.ObjectG
   */
   void setTlsInteraction(gio.tls_interaction.TlsInteraction tlsInteraction = null)
   {
-    soup_session_set_tls_interaction(cast(SoupSession*)cPtr, tlsInteraction ? cast(GTlsInteraction*)tlsInteraction.cPtr(No.Dup) : null);
+    soup_session_set_tls_interaction(cast(SoupSession*)cPtr, tlsInteraction ? cast(GTlsInteraction*)tlsInteraction.cPtr(No.dup) : null);
   }
 
   /**
@@ -750,7 +750,7 @@ class Session : gobject.object.ObjectG
   */
   void setUserAgent(string userAgent)
   {
-    const(char)* _userAgent = userAgent.toCString(No.Alloc);
+    const(char)* _userAgent = userAgent.toCString(No.alloc);
     soup_session_set_user_agent(cast(SoupSession*)cPtr, _userAgent);
   }
 
@@ -771,7 +771,7 @@ class Session : gobject.object.ObjectG
     If the server returns a status other than "101 Switching Protocols", then
     msg will contain the complete response headers and body from the server's
     response, and [soup.session.Session.websocketConnectFinish] will return
-    [soup.types.WebsocketError.NotWebsocket].
+    [soup.types.WebsocketError.notWebsocket].
     Params:
       msg =       #SoupMessage indicating the WebSocket server to connect to
       origin =       origin of the connection
@@ -788,19 +788,19 @@ class Session : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _origin = origin.toCString(No.Alloc);
+    const(char)* _origin = origin.toCString(No.alloc);
     char*[] _tmpprotocols;
     foreach (s; protocols)
-      _tmpprotocols ~= s.toCString(No.Alloc);
+      _tmpprotocols ~= s.toCString(No.alloc);
     _tmpprotocols ~= null;
     char** _protocols = _tmpprotocols.ptr;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    soup_session_websocket_connect_async(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, _origin, _protocols, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    soup_session_websocket_connect_async(cast(SoupSession*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.dup) : null, _origin, _protocols, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -818,10 +818,10 @@ class Session : gobject.object.ObjectG
   {
     SoupWebsocketConnection* _cretval;
     GError *_err;
-    _cretval = soup_session_websocket_connect_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = soup_session_websocket_connect_finish(cast(SoupSession*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(soup.websocket_connection.WebsocketConnection)(cast(SoupWebsocketConnection*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(soup.websocket_connection.WebsocketConnection)(cast(SoupWebsocketConnection*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -870,10 +870,10 @@ class Session : gobject.object.ObjectG
     Connect to RequestQueued signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRequestQueued(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRequestQueued(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RequestQueuedCallbackDlg) || is(T : RequestQueuedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -911,10 +911,10 @@ class Session : gobject.object.ObjectG
     Connect to RequestUnqueued signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRequestUnqueued(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRequestUnqueued(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RequestUnqueuedCallbackDlg) || is(T : RequestUnqueuedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

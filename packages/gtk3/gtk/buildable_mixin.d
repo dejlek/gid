@@ -37,8 +37,8 @@ template BuildableT()
   */
   override void addChild(gtk.builder.Builder builder, gobject.object.ObjectG child, string type = null)
   {
-    const(char)* _type = type.toCString(No.Alloc);
-    gtk_buildable_add_child(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.Dup) : null, child ? cast(ObjectC*)child.cPtr(No.Dup) : null, _type);
+    const(char)* _type = type.toCString(No.alloc);
+    gtk_buildable_add_child(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.dup) : null, child ? cast(ObjectC*)child.cPtr(No.dup) : null, _type);
   }
 
   /**
@@ -54,9 +54,9 @@ template BuildableT()
   override gobject.object.ObjectG constructChild(gtk.builder.Builder builder, string name)
   {
     ObjectC* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gtk_buildable_construct_child(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.Dup) : null, _name);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
+    const(char)* _name = name.toCString(No.alloc);
+    _cretval = gtk_buildable_construct_child(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.dup) : null, _name);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -71,8 +71,8 @@ template BuildableT()
   */
   override void customFinished(gtk.builder.Builder builder, gobject.object.ObjectG child, string tagname, void* data = null)
   {
-    const(char)* _tagname = tagname.toCString(No.Alloc);
-    gtk_buildable_custom_finished(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.Dup) : null, child ? cast(ObjectC*)child.cPtr(No.Dup) : null, _tagname, data);
+    const(char)* _tagname = tagname.toCString(No.alloc);
+    gtk_buildable_custom_finished(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.dup) : null, child ? cast(ObjectC*)child.cPtr(No.dup) : null, _tagname, data);
   }
 
   /**
@@ -90,8 +90,8 @@ template BuildableT()
   override bool customTagStart(gtk.builder.Builder builder, gobject.object.ObjectG child, string tagname, out glib.types.MarkupParser parser, out void* data)
   {
     bool _retval;
-    const(char)* _tagname = tagname.toCString(No.Alloc);
-    _retval = gtk_buildable_custom_tag_start(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.Dup) : null, child ? cast(ObjectC*)child.cPtr(No.Dup) : null, _tagname, &parser, cast(void**)&data);
+    const(char)* _tagname = tagname.toCString(No.alloc);
+    _retval = gtk_buildable_custom_tag_start(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.dup) : null, child ? cast(ObjectC*)child.cPtr(No.dup) : null, _tagname, &parser, cast(void**)&data);
     return _retval;
   }
 
@@ -105,9 +105,9 @@ template BuildableT()
   override gobject.object.ObjectG getInternalChild(gtk.builder.Builder builder, string childname)
   {
     ObjectC* _cretval;
-    const(char)* _childname = childname.toCString(No.Alloc);
-    _cretval = gtk_buildable_get_internal_child(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.Dup) : null, _childname);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    const(char)* _childname = childname.toCString(No.alloc);
+    _cretval = gtk_buildable_get_internal_child(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.dup) : null, _childname);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.take);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ template BuildableT()
   {
     const(char)* _cretval;
     _cretval = gtk_buildable_get_name(cast(GtkBuildable*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -138,7 +138,7 @@ template BuildableT()
   */
   override void parserFinished(gtk.builder.Builder builder)
   {
-    gtk_buildable_parser_finished(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.Dup) : null);
+    gtk_buildable_parser_finished(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.dup) : null);
   }
 
   /**
@@ -150,8 +150,8 @@ template BuildableT()
   */
   override void setBuildableProperty(gtk.builder.Builder builder, string name, gobject.value.Value value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    gtk_buildable_set_buildable_property(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.Dup) : null, _name, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    const(char)* _name = name.toCString(No.alloc);
+    gtk_buildable_set_buildable_property(cast(GtkBuildable*)cPtr, builder ? cast(GtkBuilder*)builder.cPtr(No.dup) : null, _name, value ? cast(const(GValue)*)value.cPtr(No.dup) : null);
   }
 
   /**
@@ -161,7 +161,7 @@ template BuildableT()
   */
   override void setName(string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gtk_buildable_set_name(cast(GtkBuildable*)cPtr, _name);
   }
 }

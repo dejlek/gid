@@ -15,12 +15,12 @@ import gobject.types;
 class ContentFormatsBuilder : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -47,7 +47,7 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
   {
     GdkContentFormatsBuilder* _cretval;
     _cretval = gdk_content_formats_builder_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -58,7 +58,7 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
   */
   void addFormats(gdk.content_formats.ContentFormats formats)
   {
-    gdk_content_formats_builder_add_formats(cast(GdkContentFormatsBuilder*)cPtr, formats ? cast(const(GdkContentFormats)*)formats.cPtr(No.Dup) : null);
+    gdk_content_formats_builder_add_formats(cast(GdkContentFormatsBuilder*)cPtr, formats ? cast(const(GdkContentFormats)*)formats.cPtr(No.dup) : null);
   }
 
   /**
@@ -78,7 +78,7 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
   */
   void addMimeType(string mimeType)
   {
-    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString(No.alloc);
     gdk_content_formats_builder_add_mime_type(cast(GdkContentFormatsBuilder*)cPtr, _mimeType);
   }
 
@@ -97,7 +97,7 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_formats_builder_to_formats(cast(GdkContentFormatsBuilder*)cPtr);
-    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

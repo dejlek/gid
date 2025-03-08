@@ -45,7 +45,7 @@ template PresetT()
   override bool deletePreset(string name)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _retval = gst_preset_delete_preset(cast(GstPreset*)cPtr, _name);
     return _retval;
   }
@@ -63,11 +63,11 @@ template PresetT()
   override bool getMeta(string name, string tag, out string value)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _tag = tag.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _tag = tag.toCString(No.alloc);
     char* _value;
     _retval = gst_preset_get_meta(cast(GstPreset*)cPtr, _name, _tag, &_value);
-    value = _value.fromCString(Yes.Free);
+    value = _value.fromCString(Yes.free);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ template PresetT()
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -111,7 +111,7 @@ template PresetT()
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -136,7 +136,7 @@ template PresetT()
   override bool loadPreset(string name)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _retval = gst_preset_load_preset(cast(GstPreset*)cPtr, _name);
     return _retval;
   }
@@ -152,8 +152,8 @@ template PresetT()
   override bool renamePreset(string oldName, string newName)
   {
     bool _retval;
-    const(char)* _oldName = oldName.toCString(No.Alloc);
-    const(char)* _newName = newName.toCString(No.Alloc);
+    const(char)* _oldName = oldName.toCString(No.alloc);
+    const(char)* _newName = newName.toCString(No.alloc);
     _retval = gst_preset_rename_preset(cast(GstPreset*)cPtr, _oldName, _newName);
     return _retval;
   }
@@ -168,7 +168,7 @@ template PresetT()
   override bool savePreset(string name)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _retval = gst_preset_save_preset(cast(GstPreset*)cPtr, _name);
     return _retval;
   }
@@ -186,9 +186,9 @@ template PresetT()
   override bool setMeta(string name, string tag, string value = null)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _tag = tag.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _tag = tag.toCString(No.alloc);
+    const(char)* _value = value.toCString(No.alloc);
     _retval = gst_preset_set_meta(cast(GstPreset*)cPtr, _name, _tag, _value);
     return _retval;
   }

@@ -36,7 +36,7 @@ import gtk.widget;
   
   For menus, the [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align]
   properties of the menu are also taken into account. For example, when the
-  direction is [gtk.types.ArrowType.Down] and the horizontal alignment is [gtk.types.Align.Start],
+  direction is [gtk.types.ArrowType.down] and the horizontal alignment is [gtk.types.Align.start],
   the menu will be positioned below the button, with the starting edge
   (depending on the text direction) of the menu aligned with the starting
   edge of the button. If there is not enough space below the button, the
@@ -78,12 +78,12 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.menu_button.MenuButton] uses the [gtk.types.AccessibleRole.Button] role.
+  [gtk.menu_button.MenuButton] uses the [gtk.types.AccessibleRole.button] role.
 */
 class MenuButton : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -111,7 +111,7 @@ class MenuButton : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_button_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -158,7 +158,7 @@ class MenuButton : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_button_get_child(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class MenuButton : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_menu_button_get_icon_name(cast(GtkMenuButton*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class MenuButton : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_menu_button_get_label(cast(GtkMenuButton*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class MenuButton : gtk.widget.Widget
   {
     GMenuModel* _cretval;
     _cretval = gtk_menu_button_get_menu_model(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.take);
     return _retval;
   }
 
@@ -234,7 +234,7 @@ class MenuButton : gtk.widget.Widget
   {
     GtkPopover* _cretval;
     _cretval = gtk_menu_button_get_popover(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.take);
     return _retval;
   }
 
@@ -322,14 +322,14 @@ class MenuButton : gtk.widget.Widget
     `propertyGtk.MenuButton:icon-name`.
     
     If `propertyGtk.MenuButton:always-show-arrow` is set to `TRUE` and
-    [gtk.menu_button.MenuButton.ArrowType] is not [gtk.types.ArrowType.None], a dropdown arrow
+    [gtk.menu_button.MenuButton.ArrowType] is not [gtk.types.ArrowType.none], a dropdown arrow
     will be shown next to the child.
     Params:
       child =       the child widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_menu_button_set_child(cast(GtkMenuButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_menu_button_set_child(cast(GtkMenuButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -358,7 +358,7 @@ class MenuButton : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.MenuButtonCreatePopupFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.menu_button.MenuButton)(cast(void*)menuButton, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gtk.menu_button.MenuButton)(cast(void*)menuButton, No.take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -378,8 +378,8 @@ class MenuButton : gtk.widget.Widget
     If the does not fit in the available space in the given direction,
     GTK will its best to keep it inside the screen and fully visible.
     
-    If you pass [gtk.types.ArrowType.None] for a direction, the popup will behave
-    as if you passed [gtk.types.ArrowType.Down] (although you won’t see any arrows).
+    If you pass [gtk.types.ArrowType.none] for a direction, the popup will behave
+    as if you passed [gtk.types.ArrowType.down] (although you won’t see any arrows).
     Params:
       direction =       a [gtk.types.ArrowType]
   */
@@ -405,14 +405,14 @@ class MenuButton : gtk.widget.Widget
     [gtk.menu_button.MenuButton.Widget].
     
     If `propertyGtk.MenuButton:always-show-arrow` is set to `TRUE` and
-    [gtk.menu_button.MenuButton.ArrowType] is not [gtk.types.ArrowType.None], a dropdown arrow
+    [gtk.menu_button.MenuButton.ArrowType] is not [gtk.types.ArrowType.none], a dropdown arrow
     will be shown next to the icon.
     Params:
       iconName =       the icon name
   */
   void setIconName(string iconName)
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString(No.alloc);
     gtk_menu_button_set_icon_name(cast(GtkMenuButton*)cPtr, _iconName);
   }
 
@@ -422,14 +422,14 @@ class MenuButton : gtk.widget.Widget
     Setting a label resets `propertyGtk.MenuButton:icon-name` and
     [gtk.menu_button.MenuButton.Widget].
     
-    If [gtk.menu_button.MenuButton.ArrowType] is not [gtk.types.ArrowType.None], a dropdown
+    If [gtk.menu_button.MenuButton.ArrowType] is not [gtk.types.ArrowType.none], a dropdown
     arrow will be shown next to the label.
     Params:
       label =       the label
   */
   void setLabel(string label)
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.alloc);
     gtk_menu_button_set_label(cast(GtkMenuButton*)cPtr, _label);
   }
 
@@ -450,7 +450,7 @@ class MenuButton : gtk.widget.Widget
   */
   void setMenuModel(gio.menu_model.MenuModel menuModel = null)
   {
-    gtk_menu_button_set_menu_model(cast(GtkMenuButton*)cPtr, menuModel ? cast(GMenuModel*)menuModel.cPtr(No.Dup) : null);
+    gtk_menu_button_set_menu_model(cast(GtkMenuButton*)cPtr, menuModel ? cast(GMenuModel*)menuModel.cPtr(No.dup) : null);
   }
 
   /**
@@ -465,7 +465,7 @@ class MenuButton : gtk.widget.Widget
   */
   void setPopover(gtk.widget.Widget popover = null)
   {
-    gtk_menu_button_set_popover(cast(GtkMenuButton*)cPtr, popover ? cast(GtkWidget*)popover.cPtr(No.Dup) : null);
+    gtk_menu_button_set_popover(cast(GtkMenuButton*)cPtr, popover ? cast(GtkWidget*)popover.cPtr(No.dup) : null);
   }
 
   /**
@@ -510,10 +510,10 @@ class MenuButton : gtk.widget.Widget
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

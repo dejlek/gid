@@ -15,7 +15,7 @@ class RegionIter
 {
   GtkSourceRegionIter cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GtkSource.RegionIter");
@@ -45,8 +45,8 @@ class RegionIter
     GtkTextIter _start;
     GtkTextIter _end;
     _retval = gtk_source_region_iter_get_subregion(cast(GtkSourceRegionIter*)cPtr, &_start, &_end);
-    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
-    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
+    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.take);
+    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.take);
     return _retval;
   }
 

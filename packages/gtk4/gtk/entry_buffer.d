@@ -22,7 +22,7 @@ import gtk.types;
 class EntryBuffer : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,9 +50,9 @@ class EntryBuffer : gobject.object.ObjectG
   this(string initialChars, int nInitialChars)
   {
     GtkEntryBuffer* _cretval;
-    const(char)* _initialChars = initialChars.toCString(No.Alloc);
+    const(char)* _initialChars = initialChars.toCString(No.alloc);
     _cretval = gtk_entry_buffer_new(_initialChars, nInitialChars);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -99,7 +99,7 @@ class EntryBuffer : gobject.object.ObjectG
   */
   void emitInsertedText(uint position, string chars, uint nChars)
   {
-    const(char)* _chars = chars.toCString(No.Alloc);
+    const(char)* _chars = chars.toCString(No.alloc);
     gtk_entry_buffer_emit_inserted_text(cast(GtkEntryBuffer*)cPtr, position, _chars, nChars);
   }
 
@@ -152,7 +152,7 @@ class EntryBuffer : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_entry_buffer_get_text(cast(GtkEntryBuffer*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class EntryBuffer : gobject.object.ObjectG
   uint insertText(uint position, string chars, int nChars)
   {
     uint _retval;
-    const(char)* _chars = chars.toCString(No.Alloc);
+    const(char)* _chars = chars.toCString(No.alloc);
     _retval = gtk_entry_buffer_insert_text(cast(GtkEntryBuffer*)cPtr, position, _chars, nChars);
     return _retval;
   }
@@ -209,7 +209,7 @@ class EntryBuffer : gobject.object.ObjectG
   */
   void setText(string chars, int nChars)
   {
-    const(char)* _chars = chars.toCString(No.Alloc);
+    const(char)* _chars = chars.toCString(No.alloc);
     gtk_entry_buffer_set_text(cast(GtkEntryBuffer*)cPtr, _chars, nChars);
   }
 
@@ -235,10 +235,10 @@ class EntryBuffer : gobject.object.ObjectG
     Connect to DeletedText signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeletedText(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDeletedText(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DeletedTextCallbackDlg) || is(T : DeletedTextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -275,10 +275,10 @@ class EntryBuffer : gobject.object.ObjectG
     Connect to InsertedText signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInsertedText(T)(T callback, Flag!"After" after = No.After)
+  ulong connectInsertedText(T)(T callback, Flag!"after" after = No.after)
   if (is(T : InsertedTextCallbackDlg) || is(T : InsertedTextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

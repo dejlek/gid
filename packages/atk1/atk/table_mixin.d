@@ -81,7 +81,7 @@ template TableT()
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_caption(cast(AtkTable*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.take);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ template TableT()
   {
     const(char)* _cretval;
     _cretval = atk_table_get_column_description(cast(AtkTable*)cPtr, column);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ template TableT()
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_column_header(cast(AtkTable*)cPtr, column);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.take);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ template TableT()
   {
     const(char)* _cretval;
     _cretval = atk_table_get_row_description(cast(AtkTable*)cPtr, row);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ template TableT()
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_row_header(cast(AtkTable*)cPtr, row);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.take);
     return _retval;
   }
 
@@ -294,7 +294,7 @@ template TableT()
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_summary(cast(AtkTable*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -357,7 +357,7 @@ template TableT()
   {
     AtkObject* _cretval;
     _cretval = atk_table_ref_at(cast(AtkTable*)cPtr, row, column);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -396,7 +396,7 @@ template TableT()
   */
   override void setCaption(atk.object.ObjectAtk caption)
   {
-    atk_table_set_caption(cast(AtkTable*)cPtr, caption ? cast(AtkObject*)caption.cPtr(No.Dup) : null);
+    atk_table_set_caption(cast(AtkTable*)cPtr, caption ? cast(AtkObject*)caption.cPtr(No.dup) : null);
   }
 
   /**
@@ -408,7 +408,7 @@ template TableT()
   */
   override void setColumnDescription(int column, string description)
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString(No.alloc);
     atk_table_set_column_description(cast(AtkTable*)cPtr, column, _description);
   }
 
@@ -420,7 +420,7 @@ template TableT()
   */
   override void setColumnHeader(int column, atk.object.ObjectAtk header)
   {
-    atk_table_set_column_header(cast(AtkTable*)cPtr, column, header ? cast(AtkObject*)header.cPtr(No.Dup) : null);
+    atk_table_set_column_header(cast(AtkTable*)cPtr, column, header ? cast(AtkObject*)header.cPtr(No.dup) : null);
   }
 
   /**
@@ -432,7 +432,7 @@ template TableT()
   */
   override void setRowDescription(int row, string description)
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString(No.alloc);
     atk_table_set_row_description(cast(AtkTable*)cPtr, row, _description);
   }
 
@@ -444,7 +444,7 @@ template TableT()
   */
   override void setRowHeader(int row, atk.object.ObjectAtk header)
   {
-    atk_table_set_row_header(cast(AtkTable*)cPtr, row, header ? cast(AtkObject*)header.cPtr(No.Dup) : null);
+    atk_table_set_row_header(cast(AtkTable*)cPtr, row, header ? cast(AtkObject*)header.cPtr(No.dup) : null);
   }
 
   /**
@@ -455,7 +455,7 @@ template TableT()
   */
   override void setSummary(atk.object.ObjectAtk accessible)
   {
-    atk_table_set_summary(cast(AtkTable*)cPtr, accessible ? cast(AtkObject*)accessible.cPtr(No.Dup) : null);
+    atk_table_set_summary(cast(AtkTable*)cPtr, accessible ? cast(AtkObject*)accessible.cPtr(No.dup) : null);
   }
 
   /**
@@ -478,10 +478,10 @@ template TableT()
     Connect to ColumnDeleted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectColumnDeleted(T)(T callback, Flag!"After" after = No.After)
+  ulong connectColumnDeleted(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ColumnDeletedCallbackDlg) || is(T : ColumnDeletedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -518,10 +518,10 @@ template TableT()
     Connect to ColumnInserted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectColumnInserted(T)(T callback, Flag!"After" after = No.After)
+  ulong connectColumnInserted(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ColumnInsertedCallbackDlg) || is(T : ColumnInsertedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -557,10 +557,10 @@ template TableT()
     Connect to ColumnReordered signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectColumnReordered(T)(T callback, Flag!"After" after = No.After)
+  ulong connectColumnReordered(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ColumnReorderedCallbackDlg) || is(T : ColumnReorderedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -594,10 +594,10 @@ template TableT()
     Connect to ModelChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectModelChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectModelChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ModelChangedCallbackDlg) || is(T : ModelChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -632,10 +632,10 @@ template TableT()
     Connect to RowDeleted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRowDeleted(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RowDeletedCallbackDlg) || is(T : RowDeletedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -672,10 +672,10 @@ template TableT()
     Connect to RowInserted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowInserted(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRowInserted(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RowInsertedCallbackDlg) || is(T : RowInsertedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -711,10 +711,10 @@ template TableT()
     Connect to RowReordered signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowReordered(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRowReordered(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RowReorderedCallbackDlg) || is(T : RowReorderedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

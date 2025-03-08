@@ -12,7 +12,7 @@ import gobject.object;
 class MetadataWriter : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -38,7 +38,7 @@ class MetadataWriter : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_metadata_writer_write(cast(GAFlightMetadataWriter*)cPtr, metadata ? cast(GArrowBuffer*)metadata.cPtr(No.Dup) : null, &_err);
+    _retval = gaflight_metadata_writer_write(cast(GAFlightMetadataWriter*)cPtr, metadata ? cast(GArrowBuffer*)metadata.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

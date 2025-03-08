@@ -15,12 +15,12 @@ import gtk.types;
 class SelectionData : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -44,7 +44,7 @@ class SelectionData : gobject.boxed.Boxed
   {
     GtkSelectionData* _cretval;
     _cretval = gtk_selection_data_copy(cast(const(GtkSelectionData)*)cPtr);
-    auto _retval = _cretval ? new gtk.selection_data.SelectionData(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.selection_data.SelectionData(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -56,7 +56,7 @@ class SelectionData : gobject.boxed.Boxed
   {
     GdkAtom _cretval;
     _cretval = gtk_selection_data_get_data_type(cast(const(GtkSelectionData)*)cPtr);
-    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class SelectionData : gobject.boxed.Boxed
   {
     GdkDisplay* _cretval;
     _cretval = gtk_selection_data_get_display(cast(const(GtkSelectionData)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class SelectionData : gobject.boxed.Boxed
   {
     PixbufC* _cretval;
     _cretval = gtk_selection_data_get_pixbuf(cast(const(GtkSelectionData)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class SelectionData : gobject.boxed.Boxed
   {
     GdkAtom _cretval;
     _cretval = gtk_selection_data_get_selection(cast(const(GtkSelectionData)*)cPtr);
-    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class SelectionData : gobject.boxed.Boxed
   {
     GdkAtom _cretval;
     _cretval = gtk_selection_data_get_target(cast(const(GtkSelectionData)*)cPtr);
-    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class SelectionData : gobject.boxed.Boxed
   {
     ubyte* _cretval;
     _cretval = gtk_selection_data_get_text(cast(const(GtkSelectionData)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class SelectionData : gobject.boxed.Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -227,7 +227,7 @@ class SelectionData : gobject.boxed.Boxed
   bool setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     bool _retval;
-    _retval = gtk_selection_data_set_pixbuf(cast(GtkSelectionData*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    _retval = gtk_selection_data_set_pixbuf(cast(GtkSelectionData*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class SelectionData : gobject.boxed.Boxed
   bool setText(string str, int len)
   {
     bool _retval;
-    const(char)* _str = str.toCString(No.Alloc);
+    const(char)* _str = str.toCString(No.alloc);
     _retval = gtk_selection_data_set_text(cast(GtkSelectionData*)cPtr, _str, len);
     return _retval;
   }
@@ -267,7 +267,7 @@ class SelectionData : gobject.boxed.Boxed
     bool _retval;
     char*[] _tmpuris;
     foreach (s; uris)
-      _tmpuris ~= s.toCString(No.Alloc);
+      _tmpuris ~= s.toCString(No.alloc);
     _tmpuris ~= null;
     char** _uris = _tmpuris.ptr;
     _retval = gtk_selection_data_set_uris(cast(GtkSelectionData*)cPtr, _uris);
@@ -304,7 +304,7 @@ class SelectionData : gobject.boxed.Boxed
   bool targetsIncludeRichText(gtk.text_buffer.TextBuffer buffer)
   {
     bool _retval;
-    _retval = gtk_selection_data_targets_include_rich_text(cast(const(GtkSelectionData)*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
+    _retval = gtk_selection_data_targets_include_rich_text(cast(const(GtkSelectionData)*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.dup) : null);
     return _retval;
   }
 

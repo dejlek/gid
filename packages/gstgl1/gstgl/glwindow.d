@@ -17,7 +17,7 @@ import gstgl.types;
 class GLWindow : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -37,8 +37,8 @@ class GLWindow : gst.object.ObjectGst
   this(gstgl.gldisplay.GLDisplay display)
   {
     GstGLWindow* _cretval;
-    _cretval = gst_gl_window_new(display ? cast(GstGLDisplay*)display.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gst_gl_window_new(display ? cast(GstGLDisplay*)display.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -65,7 +65,7 @@ class GLWindow : gst.object.ObjectGst
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_window_get_context(cast(GstGLWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -154,8 +154,8 @@ class GLWindow : gst.object.ObjectGst
   /** */
   void sendKeyEvent(string eventType, string keyStr)
   {
-    const(char)* _eventType = eventType.toCString(No.Alloc);
-    const(char)* _keyStr = keyStr.toCString(No.Alloc);
+    const(char)* _eventType = eventType.toCString(No.alloc);
+    const(char)* _keyStr = keyStr.toCString(No.alloc);
     gst_gl_window_send_key_event(cast(GstGLWindow*)cPtr, _eventType, _keyStr);
   }
 
@@ -204,7 +204,7 @@ class GLWindow : gst.object.ObjectGst
   /** */
   void sendMouseEvent(string eventType, int button, double posx, double posy)
   {
-    const(char)* _eventType = eventType.toCString(No.Alloc);
+    const(char)* _eventType = eventType.toCString(No.alloc);
     gst_gl_window_send_mouse_event(cast(GstGLWindow*)cPtr, _eventType, button, posx, posy);
   }
 
@@ -349,10 +349,10 @@ class GLWindow : gst.object.ObjectGst
     Connect to KeyEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectKeyEvent(T)(T callback, Flag!"After" after = No.After)
+  ulong connectKeyEvent(T)(T callback, Flag!"after" after = No.after)
   if (is(T : KeyEventCallbackDlg) || is(T : KeyEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -390,10 +390,10 @@ class GLWindow : gst.object.ObjectGst
     Connect to MouseEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMouseEvent(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMouseEvent(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MouseEventCallbackDlg) || is(T : MouseEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -433,10 +433,10 @@ class GLWindow : gst.object.ObjectGst
     Connect to ScrollEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectScrollEvent(T)(T callback, Flag!"After" after = No.After)
+  ulong connectScrollEvent(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ScrollEventCallbackDlg) || is(T : ScrollEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -475,10 +475,10 @@ class GLWindow : gst.object.ObjectGst
     Connect to WindowHandleChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectWindowHandleChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectWindowHandleChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : WindowHandleChangedCallbackDlg) || is(T : WindowHandleChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

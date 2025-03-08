@@ -10,7 +10,7 @@ import gid.gid;
 class LargeStringDataType : arrow.data_type.DataType
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class LargeStringDataType : arrow.data_type.DataType
   {
     GArrowLargeStringDataType* _cretval;
     _cretval = garrow_large_string_data_type_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

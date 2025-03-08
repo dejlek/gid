@@ -22,15 +22,15 @@ class Matrix : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(PangoMatrix.sizeof), Yes.Take);
+    super(safeMalloc(PangoMatrix.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -115,7 +115,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void concat(pango.matrix.Matrix newMatrix)
   {
-    pango_matrix_concat(cast(PangoMatrix*)cPtr, newMatrix ? cast(const(PangoMatrix)*)newMatrix.cPtr(No.Dup) : null);
+    pango_matrix_concat(cast(PangoMatrix*)cPtr, newMatrix ? cast(const(PangoMatrix)*)newMatrix.cPtr(No.dup) : null);
   }
 
   /**
@@ -126,7 +126,7 @@ class Matrix : gobject.boxed.Boxed
   {
     PangoMatrix* _cretval;
     _cretval = pango_matrix_copy(cast(const(PangoMatrix)*)cPtr);
-    auto _retval = _cretval ? new pango.matrix.Matrix(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.matrix.Matrix(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 

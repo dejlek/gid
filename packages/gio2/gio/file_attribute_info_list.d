@@ -14,12 +14,12 @@ import gobject.boxed;
 class FileAttributeInfoList : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -58,7 +58,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
   {
     GFileAttributeInfoList* _cretval;
     _cretval = g_file_attribute_info_list_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -71,7 +71,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
   */
   void add(string name, gio.types.FileAttributeType type, gio.types.FileAttributeInfoFlags flags)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     g_file_attribute_info_list_add(cast(GFileAttributeInfoList*)cPtr, _name, type, flags);
   }
 
@@ -83,7 +83,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
   {
     GFileAttributeInfoList* _cretval;
     _cretval = g_file_attribute_info_list_dup(cast(GFileAttributeInfoList*)cPtr);
-    auto _retval = _cretval ? new gio.file_attribute_info_list.FileAttributeInfoList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gio.file_attribute_info_list.FileAttributeInfoList(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
   gio.file_attribute_info.FileAttributeInfo lookup(string name)
   {
     const(GFileAttributeInfo)* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = g_file_attribute_info_list_lookup(cast(GFileAttributeInfoList*)cPtr, _name);
     auto _retval = _cretval ? new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)_cretval) : null;
     return _retval;

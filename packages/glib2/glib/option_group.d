@@ -18,12 +18,12 @@ import gobject.boxed;
 class OptionGroup : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -42,11 +42,11 @@ class OptionGroup : gobject.boxed.Boxed
   this(string name, string description, string helpDescription)
   {
     GOptionGroup* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _description = description.toCString(No.Alloc);
-    const(char)* _helpDescription = helpDescription.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _description = description.toCString(No.alloc);
+    const(char)* _helpDescription = helpDescription.toCString(No.alloc);
     _cretval = g_option_group_new(_name, _description, _helpDescription, null, null);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
 
@@ -77,10 +77,10 @@ class OptionGroup : gobject.boxed.Boxed
     {
       string _dretval;
       auto _dlg = cast(glib.types.TranslateFunc*)data;
-      string _str = str.fromCString(No.Free);
+      string _str = str.fromCString(No.free);
 
       _dretval = (*_dlg)(_str);
-      const(char)* _retval = _dretval.toCString(No.Alloc);
+      const(char)* _retval = _dretval.toCString(No.alloc);
 
       return _retval;
     }
@@ -99,7 +99,7 @@ class OptionGroup : gobject.boxed.Boxed
   */
   void setTranslationDomain(string domain)
   {
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString(No.alloc);
     g_option_group_set_translation_domain(cast(GOptionGroup*)cPtr, _domain);
   }
 }

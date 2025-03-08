@@ -19,7 +19,7 @@ import gtksource.types;
 class FileLoader : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,8 +49,8 @@ class FileLoader : gobject.object.ObjectG
   this(gtksource.buffer.Buffer buffer, gtksource.file.File file)
   {
     GtkSourceFileLoader* _cretval;
-    _cretval = gtk_source_file_loader_new(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gtk_source_file_loader_new(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.dup) : null, file ? cast(GtkSourceFile*)file.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -64,8 +64,8 @@ class FileLoader : gobject.object.ObjectG
   static gtksource.file_loader.FileLoader newFromStream(gtksource.buffer.Buffer buffer, gtksource.file.File file, gio.input_stream.InputStream stream)
   {
     GtkSourceFileLoader* _cretval;
-    _cretval = gtk_source_file_loader_new_from_stream(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file.cPtr(No.Dup) : null, stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtksource.file_loader.FileLoader)(cast(GtkSourceFileLoader*)_cretval, Yes.Take);
+    _cretval = gtk_source_file_loader_new_from_stream(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.dup) : null, file ? cast(GtkSourceFile*)file.cPtr(No.dup) : null, stream ? cast(GInputStream*)stream.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtksource.file_loader.FileLoader)(cast(GtkSourceFileLoader*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class FileLoader : gobject.object.ObjectG
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_file_loader_get_buffer(cast(GtkSourceFileLoader*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.take);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class FileLoader : gobject.object.ObjectG
   {
     const(GtkSourceEncoding)* _cretval;
     _cretval = gtk_source_file_loader_get_encoding(cast(GtkSourceFileLoader*)cPtr);
-    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class FileLoader : gobject.object.ObjectG
   {
     GtkSourceFile* _cretval;
     _cretval = gtk_source_file_loader_get_file(cast(GtkSourceFileLoader*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.file.File)(cast(GtkSourceFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.file.File)(cast(GtkSourceFile*)_cretval, No.take);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class FileLoader : gobject.object.ObjectG
   {
     GInputStream* _cretval;
     _cretval = gtk_source_file_loader_get_input_stream(cast(GtkSourceFileLoader*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.take);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class FileLoader : gobject.object.ObjectG
   {
     GFile* _cretval;
     _cretval = gtk_source_file_loader_get_location(cast(GtkSourceFileLoader*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.take);
     return _retval;
   }
 
@@ -160,14 +160,14 @@ class FileLoader : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _progressCallback = progressCallback ? freezeDelegate(cast(void*)&progressCallback) : null;
     GDestroyNotify _progressCallbackDestroyCB = progressCallback ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_source_file_loader_load_async(cast(GtkSourceFileLoader*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, _progressCallbackDestroyCB, _callbackCB, _callback);
+    gtk_source_file_loader_load_async(cast(GtkSourceFileLoader*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _progressCallbackCB, _progressCallback, _progressCallbackDestroyCB, _callbackCB, _callback);
   }
 
   /**
@@ -184,7 +184,7 @@ class FileLoader : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_source_file_loader_load_finish(cast(GtkSourceFileLoader*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_source_file_loader_load_finish(cast(GtkSourceFileLoader*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

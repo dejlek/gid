@@ -131,16 +131,16 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.popover_menu.PopoverMenu] uses the [gtk.types.AccessibleRole.Menu] role, and its
-  items use the [gtk.types.AccessibleRole.MenuItem],
-  [gtk.types.AccessibleRole.MenuItemCheckbox] or
-  [gtk.types.AccessibleRole.MenuItemRadio] roles, depending on the
+  [gtk.popover_menu.PopoverMenu] uses the [gtk.types.AccessibleRole.menu] role, and its
+  items use the [gtk.types.AccessibleRole.menuItem],
+  [gtk.types.AccessibleRole.menuItemCheckbox] or
+  [gtk.types.AccessibleRole.menuItemRadio] roles, depending on the
   action they are connected to.
 */
 class PopoverMenu : gtk.popover.Popover
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -177,8 +177,8 @@ class PopoverMenu : gtk.popover.Popover
   static gtk.popover_menu.PopoverMenu newFromModel(gio.menu_model.MenuModel model = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_popover_menu_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_popover_menu_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -198,8 +198,8 @@ class PopoverMenu : gtk.popover.Popover
   static gtk.popover_menu.PopoverMenu newFromModelFull(gio.menu_model.MenuModel model, gtk.types.PopoverMenuFlags flags)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_popover_menu_new_from_model_full(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null, flags);
-    auto _retval = ObjectG.getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_popover_menu_new_from_model_full(model ? cast(GMenuModel*)model.cPtr(No.dup) : null, flags);
+    auto _retval = ObjectG.getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -216,8 +216,8 @@ class PopoverMenu : gtk.popover.Popover
   bool addChild(gtk.widget.Widget child, string id)
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.Alloc);
-    _retval = gtk_popover_menu_add_child(cast(GtkPopoverMenu*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _id);
+    const(char)* _id = id.toCString(No.alloc);
+    _retval = gtk_popover_menu_add_child(cast(GtkPopoverMenu*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, _id);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class PopoverMenu : gtk.popover.Popover
   {
     GMenuModel* _cretval;
     _cretval = gtk_popover_menu_get_menu_model(cast(GtkPopoverMenu*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.take);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class PopoverMenu : gtk.popover.Popover
   bool removeChild(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_popover_menu_remove_child(cast(GtkPopoverMenu*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    _retval = gtk_popover_menu_remove_child(cast(GtkPopoverMenu*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -283,6 +283,6 @@ class PopoverMenu : gtk.popover.Popover
   */
   void setMenuModel(gio.menu_model.MenuModel model = null)
   {
-    gtk_popover_menu_set_menu_model(cast(GtkPopoverMenu*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
+    gtk_popover_menu_set_menu_model(cast(GtkPopoverMenu*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.dup) : null);
   }
 }

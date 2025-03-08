@@ -25,7 +25,7 @@ import gtk.types;
   GtkHBox, you can simply change the inheritance to derive directly
   from #GtkBox. No further changes are needed, since the default
   value of the #GtkOrientable:orientation property is
-  [gtk.types.Orientation.Horizontal].
+  [gtk.types.Orientation.horizontal].
   
   If you have a grid-like layout composed of nested boxes, and you don’t
   need first-child or last-child styling, the recommendation is to switch
@@ -35,7 +35,7 @@ import gtk.types;
 class HBox : gtk.box.Box
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -58,13 +58,13 @@ class HBox : gtk.box.Box
       spacing =       the number of pixels to place by default between children.
     Returns:     a new #GtkHBox.
   
-    Deprecated:     You should use [gtk.box.Box.new_] with a [gtk.types.Orientation.Horizontal]
+    Deprecated:     You should use [gtk.box.Box.new_] with a [gtk.types.Orientation.horizontal]
         #GtkOrientable:orientation instead
   */
   this(bool homogeneous, int spacing)
   {
     GtkWidget* _cretval;
     _cretval = gtk_hbox_new(homogeneous, spacing);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 }

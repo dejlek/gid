@@ -14,7 +14,7 @@ import gobject.object;
 class MenuLinkIter : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class MenuLinkIter : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = g_menu_link_iter_get_name(cast(GMenuLinkIter*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -70,8 +70,8 @@ class MenuLinkIter : gobject.object.ObjectG
     char* _outLink;
     GMenuModel* _value;
     _retval = g_menu_link_iter_get_next(cast(GMenuLinkIter*)cPtr, &_outLink, &_value);
-    outLink = _outLink.fromCString(No.Free);
-    value = new gio.menu_model.MenuModel(cast(void*)_value, Yes.Take);
+    outLink = _outLink.fromCString(No.free);
+    value = new gio.menu_model.MenuModel(cast(void*)_value, Yes.take);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class MenuLinkIter : gobject.object.ObjectG
   {
     GMenuModel* _cretval;
     _cretval = g_menu_link_iter_get_value(cast(GMenuLinkIter*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.take);
     return _retval;
   }
 

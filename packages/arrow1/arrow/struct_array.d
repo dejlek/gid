@@ -14,7 +14,7 @@ import gobject.object;
 class StructArray : arrow.array.Array
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -36,8 +36,8 @@ class StructArray : arrow.array.Array
     GArrowStructArray* _cretval;
     auto _fields = gListFromD!(arrow.array.Array)(fields);
     scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_fields);
-    _cretval = garrow_struct_array_new(dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, length, _fields, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_struct_array_new(dataType ? cast(GArrowDataType*)dataType.cPtr(No.dup) : null, length, _fields, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.dup) : null, nNulls);
+    this(_cretval, Yes.take);
   }
 
   /** */
@@ -57,7 +57,7 @@ class StructArray : arrow.array.Array
   {
     GArrowArray* _cretval;
     _cretval = garrow_struct_array_get_field(cast(GArrowStructArray*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.take);
     return _retval;
   }
 

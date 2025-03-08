@@ -12,7 +12,7 @@ import gobject.object;
 class MapDataType : arrow.list_data_type.ListDataType
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,8 +32,8 @@ class MapDataType : arrow.list_data_type.ListDataType
   this(arrow.data_type.DataType keyType, arrow.data_type.DataType itemType)
   {
     GArrowMapDataType* _cretval;
-    _cretval = garrow_map_data_type_new(keyType ? cast(GArrowDataType*)keyType.cPtr(No.Dup) : null, itemType ? cast(GArrowDataType*)itemType.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_map_data_type_new(keyType ? cast(GArrowDataType*)keyType.cPtr(No.dup) : null, itemType ? cast(GArrowDataType*)itemType.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /** */
@@ -41,7 +41,7 @@ class MapDataType : arrow.list_data_type.ListDataType
   {
     GArrowDataType* _cretval;
     _cretval = garrow_map_data_type_get_item_type(cast(GArrowMapDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -50,7 +50,7 @@ class MapDataType : arrow.list_data_type.ListDataType
   {
     GArrowDataType* _cretval;
     _cretval = garrow_map_data_type_get_key_type(cast(GArrowMapDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.take);
     return _retval;
   }
 }

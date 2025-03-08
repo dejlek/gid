@@ -14,25 +14,25 @@ enum GstInterpolationMode
   /**
       steps-like interpolation, default
   */
-  None = 0,
+  none = 0,
 
   /**
       linear interpolation
   */
-  Linear = 1,
+  linear = 1,
 
   /**
       cubic interpolation (natural), may overshoot
       the min or max values set by the control point, but is more 'curvy'
   */
-  Cubic = 2,
+  cubic = 2,
 
   /**
       monotonic cubic interpolation, will not
       produce any values outside of the min-max range set by the control points
       (Since: 1.8)
   */
-  CubicMonotonic = 3,
+  cubicMonotonic = 3,
 }
 
 /**
@@ -43,27 +43,27 @@ enum GstLFOWaveform
   /**
       sine waveform
   */
-  Sine = 0,
+  sine = 0,
 
   /**
       square waveform
   */
-  Square = 1,
+  square = 1,
 
   /**
       saw waveform
   */
-  Saw = 2,
+  saw = 2,
 
   /**
       reverse saw waveform
   */
-  ReverseSaw = 3,
+  reverseSaw = 3,
 
   /**
       triangle waveform
   */
-  Triangle = 4,
+  triangle = 4,
 }
 
 /**

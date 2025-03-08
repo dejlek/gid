@@ -14,12 +14,12 @@ import gtk.types;
 class Requisition : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -64,7 +64,7 @@ class Requisition : gobject.boxed.Boxed
   {
     GtkRequisition* _cretval;
     _cretval = gtk_requisition_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -75,7 +75,7 @@ class Requisition : gobject.boxed.Boxed
   {
     GtkRequisition* _cretval;
     _cretval = gtk_requisition_copy(cast(const(GtkRequisition)*)cPtr);
-    auto _retval = _cretval ? new gtk.requisition.Requisition(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.requisition.Requisition(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

@@ -59,7 +59,7 @@ import gtk.widget;
 class ListBox : gtk.container.Container
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -83,7 +83,7 @@ class ListBox : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -115,8 +115,8 @@ class ListBox : gtk.container.Container
       gtk.widget.Widget _dretval;
       auto _dlg = cast(gtk.types.ListBoxCreateWidgetFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.Take));
-      GtkWidget* _retval = cast(GtkWidget*)_dretval.cPtr(Yes.Dup);
+      _dretval = (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)item, No.take));
+      GtkWidget* _retval = cast(GtkWidget*)_dretval.cPtr(Yes.dup);
 
       return _retval;
     }
@@ -124,7 +124,7 @@ class ListBox : gtk.container.Container
 
     auto _createWidgetFunc = createWidgetFunc ? freezeDelegate(cast(void*)&createWidgetFunc) : null;
     GDestroyNotify _createWidgetFuncDestroyCB = createWidgetFunc ? &thawDelegate : null;
-    gtk_list_box_bind_model(cast(GtkListBox*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null, _createWidgetFuncCB, _createWidgetFunc, _createWidgetFuncDestroyCB);
+    gtk_list_box_bind_model(cast(GtkListBox*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.dup) : null, _createWidgetFuncCB, _createWidgetFunc, _createWidgetFuncDestroyCB);
   }
 
   /**
@@ -139,7 +139,7 @@ class ListBox : gtk.container.Container
   */
   void dragHighlightRow(gtk.list_box_row.ListBoxRow row)
   {
-    gtk_list_box_drag_highlight_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(No.Dup) : null);
+    gtk_list_box_drag_highlight_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(No.dup) : null);
   }
 
   /**
@@ -171,7 +171,7 @@ class ListBox : gtk.container.Container
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_list_box_get_adjustment(cast(GtkListBox*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.take);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class ListBox : gtk.container.Container
   {
     GtkListBoxRow* _cretval;
     _cretval = gtk_list_box_get_row_at_index(cast(GtkListBox*)cPtr, index);
-    auto _retval = ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(GtkListBoxRow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(GtkListBoxRow*)_cretval, No.take);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class ListBox : gtk.container.Container
   {
     GtkListBoxRow* _cretval;
     _cretval = gtk_list_box_get_row_at_y(cast(GtkListBox*)cPtr, y);
-    auto _retval = ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(GtkListBoxRow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(GtkListBoxRow*)_cretval, No.take);
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class ListBox : gtk.container.Container
   {
     GtkListBoxRow* _cretval;
     _cretval = gtk_list_box_get_selected_row(cast(GtkListBox*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(GtkListBoxRow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(GtkListBoxRow*)_cretval, No.take);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class ListBox : gtk.container.Container
   */
   void insert(gtk.widget.Widget child, int position)
   {
-    gtk_list_box_insert(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
+    gtk_list_box_insert(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, position);
   }
 
   /**
@@ -304,7 +304,7 @@ class ListBox : gtk.container.Container
   */
   void prepend(gtk.widget.Widget child)
   {
-    gtk_list_box_prepend(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_list_box_prepend(cast(GtkListBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -322,7 +322,7 @@ class ListBox : gtk.container.Container
   */
   void selectRow(gtk.list_box_row.ListBoxRow row = null)
   {
-    gtk_list_box_select_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(No.Dup) : null);
+    gtk_list_box_select_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(No.dup) : null);
   }
 
   /**
@@ -338,7 +338,7 @@ class ListBox : gtk.container.Container
     {
       auto _dlg = cast(gtk.types.ListBoxForeachFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.list_box.ListBox)(cast(void*)box, No.Take), ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gtk.list_box.ListBox)(cast(void*)box, No.take), ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -371,7 +371,7 @@ class ListBox : gtk.container.Container
   */
   void setAdjustment(gtk.adjustment.Adjustment adjustment = null)
   {
-    gtk_list_box_set_adjustment(cast(GtkListBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_list_box_set_adjustment(cast(GtkListBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
   }
 
   /**
@@ -394,7 +394,7 @@ class ListBox : gtk.container.Container
     {
       auto _dlg = cast(gtk.types.ListBoxFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.take));
       return _retval;
     }
     auto _filterFuncCB = filterFunc ? &_filterFuncCallback : null;
@@ -432,7 +432,7 @@ class ListBox : gtk.container.Container
     {
       auto _dlg = cast(gtk.types.ListBoxUpdateHeaderFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take), ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)before, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.take), ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)before, No.take));
     }
     auto _updateHeaderCB = updateHeader ? &_updateHeaderCallback : null;
 
@@ -449,7 +449,7 @@ class ListBox : gtk.container.Container
   */
   void setPlaceholder(gtk.widget.Widget placeholder = null)
   {
-    gtk_list_box_set_placeholder(cast(GtkListBox*)cPtr, placeholder ? cast(GtkWidget*)placeholder.cPtr(No.Dup) : null);
+    gtk_list_box_set_placeholder(cast(GtkListBox*)cPtr, placeholder ? cast(GtkWidget*)placeholder.cPtr(No.dup) : null);
   }
 
   /**
@@ -482,7 +482,7 @@ class ListBox : gtk.container.Container
     {
       auto _dlg = cast(gtk.types.ListBoxSortFunc*)userData;
 
-      int _retval = (*_dlg)(ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row1, No.Take), ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row2, No.Take));
+      int _retval = (*_dlg)(ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row1, No.take), ObjectG.getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row2, No.take));
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
@@ -507,7 +507,7 @@ class ListBox : gtk.container.Container
   */
   void unselectRow(gtk.list_box_row.ListBoxRow row)
   {
-    gtk_list_box_unselect_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(No.Dup) : null);
+    gtk_list_box_unselect_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(No.dup) : null);
   }
 
   /** */
@@ -520,10 +520,10 @@ class ListBox : gtk.container.Container
     Connect to ActivateCursorRow signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivateCursorRow(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivateCursorRow(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateCursorRowCallbackDlg) || is(T : ActivateCursorRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -548,10 +548,10 @@ class ListBox : gtk.container.Container
     Connect to MoveCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMoveCursor(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -586,10 +586,10 @@ class ListBox : gtk.container.Container
     Connect to RowActivated signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowActivated(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRowActivated(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RowActivatedCallbackDlg) || is(T : RowActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -628,10 +628,10 @@ class ListBox : gtk.container.Container
     Connect to RowSelected signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowSelected(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRowSelected(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RowSelectedCallbackDlg) || is(T : RowSelectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -668,10 +668,10 @@ class ListBox : gtk.container.Container
     Connect to SelectAll signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSelectAll(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SelectAllCallbackDlg) || is(T : SelectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -704,10 +704,10 @@ class ListBox : gtk.container.Container
     Connect to SelectedRowsChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectedRowsChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSelectedRowsChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SelectedRowsChangedCallbackDlg) || is(T : SelectedRowsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -732,10 +732,10 @@ class ListBox : gtk.container.Container
     Connect to ToggleCursorRow signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToggleCursorRow(T)(T callback, Flag!"After" after = No.After)
+  ulong connectToggleCursorRow(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ToggleCursorRowCallbackDlg) || is(T : ToggleCursorRowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -771,10 +771,10 @@ class ListBox : gtk.container.Container
     Connect to UnselectAll signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
+  ulong connectUnselectAll(T)(T callback, Flag!"after" after = No.after)
   if (is(T : UnselectAllCallbackDlg) || is(T : UnselectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

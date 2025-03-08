@@ -27,7 +27,7 @@ import gtk.widget;
 class EventController : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -54,7 +54,7 @@ class EventController : gobject.object.ObjectG
   {
     GdkEvent* _cretval;
     _cretval = gtk_event_controller_get_current_event(cast(GtkEventController*)cPtr);
-    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class EventController : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gtk_event_controller_get_current_event_device(cast(GtkEventController*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.take);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class EventController : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_event_controller_get_name(cast(GtkEventController*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class EventController : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_event_controller_get_widget(cast(GtkEventController*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -166,14 +166,14 @@ class EventController : gobject.object.ObjectG
   */
   void setName(string name = null)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gtk_event_controller_set_name(cast(GtkEventController*)cPtr, _name);
   }
 
   /**
       Sets the event propagation limit on the event controller.
     
-    If the limit is set to [gtk.types.PropagationLimit.SameNative], the controller
+    If the limit is set to [gtk.types.PropagationLimit.sameNative], the controller
     won't handle events that are targeted at widgets on a different
     surface, such as popovers.
     Params:
@@ -187,7 +187,7 @@ class EventController : gobject.object.ObjectG
   /**
       Sets the propagation phase at which a controller handles events.
     
-    If phase is [gtk.types.PropagationPhase.None], no automatic event handling will be
+    If phase is [gtk.types.PropagationPhase.none], no automatic event handling will be
     performed, but other additional gesture maintenance will.
     Params:
       phase =       a propagation phase
@@ -204,7 +204,7 @@ class EventController : gobject.object.ObjectG
   */
   void setStaticName(string name = null)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gtk_event_controller_set_static_name(cast(GtkEventController*)cPtr, _name);
   }
 }

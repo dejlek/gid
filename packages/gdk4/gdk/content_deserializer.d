@@ -30,7 +30,7 @@ import gobject.value;
 class ContentDeserializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -58,7 +58,7 @@ class ContentDeserializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   {
     GCancellable* _cretval;
     _cretval = gdk_content_deserializer_get_cancellable(cast(GdkContentDeserializer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.take);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class ContentDeserializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   {
     GInputStream* _cretval;
     _cretval = gdk_content_deserializer_get_input_stream(cast(GdkContentDeserializer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.take);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class ContentDeserializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   {
     const(char)* _cretval;
     _cretval = gdk_content_deserializer_get_mime_type(cast(GdkContentDeserializer*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class ContentDeserializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   {
     GValue* _cretval;
     _cretval = gdk_content_deserializer_get_value(cast(GdkContentDeserializer*)cPtr);
-    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 

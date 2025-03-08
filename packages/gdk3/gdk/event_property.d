@@ -15,7 +15,7 @@ class EventProperty
 {
   GdkEventProperty cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventProperty");
@@ -43,7 +43,7 @@ class EventProperty
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventProperty*)cPtr).window, No.Take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventProperty*)cPtr).window, No.take);
   }
 
   @property byte sendEvent()

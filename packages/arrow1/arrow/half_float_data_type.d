@@ -10,7 +10,7 @@ import gid.gid;
 class HalfFloatDataType : arrow.floating_point_data_type.FloatingPointDataType
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class HalfFloatDataType : arrow.floating_point_data_type.FloatingPointDataType
   {
     GArrowHalfFloatDataType* _cretval;
     _cretval = garrow_half_float_data_type_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

@@ -16,7 +16,7 @@ class EventSelection
 {
   GdkEventSelection cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventSelection");
@@ -44,7 +44,7 @@ class EventSelection
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventSelection*)cPtr).window, No.Take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventSelection*)cPtr).window, No.take);
   }
 
   @property byte sendEvent()
@@ -84,6 +84,6 @@ class EventSelection
 
   @property gdk.window.Window requestor()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventSelection*)cPtr).requestor, No.Take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventSelection*)cPtr).requestor, No.take);
   }
 }

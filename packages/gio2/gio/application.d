@@ -128,7 +128,7 @@ import gobject.object;
   `cwd`), and optionally the environment (ie the set of environment
   variables and their values) of the calling process (key `environ`).
   The environment is only added to the platform data if the
-  [gio.types.ApplicationFlags.SendEnvironment] flag is set. [gio.application.Application] subclasses
+  [gio.types.ApplicationFlags.sendEnvironment] flag is set. [gio.application.Application] subclasses
   can add their own platform data by overriding the
   `vfunc@Gio.Application.add_platform_data` virtual function. For instance,
   [gtk.application.Application] adds startup notification data in this way.
@@ -150,7 +150,7 @@ import gobject.object;
 class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.action_map.ActionMap
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -185,9 +185,9 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   this(string applicationId, gio.types.ApplicationFlags flags)
   {
     GApplication* _cretval;
-    const(char)* _applicationId = applicationId.toCString(No.Alloc);
+    const(char)* _applicationId = applicationId.toCString(No.alloc);
     _cretval = g_application_new(_applicationId, flags);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -204,7 +204,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   {
     GApplication* _cretval;
     _cretval = g_application_get_default();
-    auto _retval = ObjectG.getDObject!(gio.application.Application)(cast(GApplication*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.application.Application)(cast(GApplication*)_cretval, No.take);
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   static bool idIsValid(string applicationId)
   {
     bool _retval;
-    const(char)* _applicationId = applicationId.toCString(No.Alloc);
+    const(char)* _applicationId = applicationId.toCString(No.alloc);
     _retval = g_application_id_is_valid(_applicationId);
     return _retval;
   }
@@ -290,7 +290,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     
     The parsed arguments will be packed into a #GVariantDict which
     is passed to #GApplication::handle-local-options. If
-    [gio.types.ApplicationFlags.HandlesCommandLine] is set, then it will also
+    [gio.types.ApplicationFlags.handlesCommandLine] is set, then it will also
     be sent to the primary instance. See
     [gio.application.Application.addMainOptionEntries] for more details.
     
@@ -306,9 +306,9 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   */
   void addMainOption(string longName, char shortName, glib.types.OptionFlags flags, glib.types.OptionArg arg, string description, string argDescription = null)
   {
-    const(char)* _longName = longName.toCString(No.Alloc);
-    const(char)* _description = description.toCString(No.Alloc);
-    const(char)* _argDescription = argDescription.toCString(No.Alloc);
+    const(char)* _longName = longName.toCString(No.alloc);
+    const(char)* _description = description.toCString(No.alloc);
+    const(char)* _argDescription = argDescription.toCString(No.alloc);
     g_application_add_main_option(cast(GApplication*)cPtr, _longName, shortName, flags, arg, _description, _argDescription);
   }
 
@@ -326,7 +326,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     arg_data for a non-callback #GOptionEntry.  This results in the
     argument in question being packed into a #GVariantDict which is also
     passed to #GApplication::handle-local-options, where it can be
-    inspected and modified.  If [gio.types.ApplicationFlags.HandlesCommandLine] is
+    inspected and modified.  If [gio.types.ApplicationFlags.handlesCommandLine] is
     set, then the resulting dictionary is sent to the primary instance,
     where [gio.application_command_line.ApplicationCommandLine.getOptionsDict] will return it.
     As it has been passed outside the process at this point, the types of all
@@ -349,7 +349,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     on the local side.  Calling this function "opts in" to the new
     behaviour, and in particular, means that unrecognised options will be
     treated as errors.  Unrecognised options have never been ignored when
-    [gio.types.ApplicationFlags.HandlesCommandLine] is unset.
+    [gio.types.ApplicationFlags.handlesCommandLine] is unset.
     
     If #GApplication::handle-local-options needs to see the list of
     filenames, then the use of `G_OPTION_REMAINING` is recommended.  If
@@ -406,13 +406,13 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     Calling this function will cause the options in the supplied option
     group to be parsed, but it does not cause you to be "opted in" to the
     new functionality whereby unrecognised options are rejected even if
-    [gio.types.ApplicationFlags.HandlesCommandLine] was given.
+    [gio.types.ApplicationFlags.handlesCommandLine] was given.
     Params:
       group =       a #GOptionGroup
   */
   void addOptionGroup(glib.option_group.OptionGroup group)
   {
-    g_application_add_option_group(cast(GApplication*)cPtr, group ? cast(GOptionGroup*)group.cPtr(Yes.Dup) : null);
+    g_application_add_option_group(cast(GApplication*)cPtr, group ? cast(GOptionGroup*)group.cPtr(Yes.dup) : null);
   }
 
   /**
@@ -428,8 +428,8 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   */
   void bindBusyProperty(gobject.object.ObjectG object, string property)
   {
-    const(char)* _property = property.toCString(No.Alloc);
-    g_application_bind_busy_property(cast(GApplication*)cPtr, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property);
+    const(char)* _property = property.toCString(No.alloc);
+    g_application_bind_busy_property(cast(GApplication*)cPtr, object ? cast(ObjectC*)object.cPtr(No.dup) : null, _property);
   }
 
   /**
@@ -440,7 +440,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   {
     const(char)* _cretval;
     _cretval = g_application_get_application_id(cast(GApplication*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -464,7 +464,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   {
     GDBusConnection* _cretval;
     _cretval = g_application_get_dbus_connection(cast(GApplication*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.take);
     return _retval;
   }
 
@@ -489,7 +489,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   {
     const(char)* _cretval;
     _cretval = g_application_get_dbus_object_path(cast(GApplication*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -577,7 +577,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   {
     const(char)* _cretval;
     _cretval = g_application_get_resource_base_path(cast(GApplication*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -589,7 +589,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   {
     const(char)* _cretval;
     _cretval = g_application_get_version(cast(GApplication*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -640,7 +640,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     for this functionality, you should use "".
     
     The application must be registered before calling this function
-    and it must have the [gio.types.ApplicationFlags.HandlesOpen] flag set.
+    and it must have the [gio.types.ApplicationFlags.handlesOpen] flag set.
     Params:
       files =       an array of #GFiles to open
       hint =       a hint (or ""), but never null
@@ -656,7 +656,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
       _tmpfiles ~= obj ? cast(GFile*)(cast(ObjectG)obj).cPtr : null;
     GFile** _files = _tmpfiles.ptr;
 
-    const(char)* _hint = hint.toCString(No.Alloc);
+    const(char)* _hint = hint.toCString(No.alloc);
     g_application_open(cast(GApplication*)cPtr, _files, _nFiles, _hint);
   }
 
@@ -689,7 +689,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     application identifier as a unique bus name on the session bus using
     GDBus.
     
-    If there is no application ID or if [gio.types.ApplicationFlags.NonUnique] was
+    If there is no application ID or if [gio.types.ApplicationFlags.nonUnique] was
     given, then this process will always become the primary instance.
     
     Due to the internal architecture of GDBus, method calls can be
@@ -719,7 +719,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   {
     bool _retval;
     GError *_err;
-    _retval = g_application_register(cast(GApplication*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_application_register(cast(GApplication*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -763,13 +763,13 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     the process.
     
     What happens next depends on the flags: if
-    [gio.types.ApplicationFlags.HandlesCommandLine] was specified then the remaining
+    [gio.types.ApplicationFlags.handlesCommandLine] was specified then the remaining
     commandline arguments are sent to the primary instance, where a
     #GApplication::command-line signal is emitted.  Otherwise, the
     remaining commandline arguments are assumed to be a list of files.
     If there are no files listed, the application is activated via the
     #GApplication::activate signal.  If there are one or more files, and
-    [gio.types.ApplicationFlags.HandlesOpen] was specified then the files are opened
+    [gio.types.ApplicationFlags.handlesOpen] was specified then the files are opened
     via the #GApplication::open signal.
     
     If you are interested in doing more complicated local handling of the
@@ -785,7 +785,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     non-zero then the default main context is iterated until the use count
     falls to zero, at which point 0 is returned.
     
-    If the [gio.types.ApplicationFlags.IsService] flag is set, then the service will
+    If the [gio.types.ApplicationFlags.isService] flag is set, then the service will
     run for as much as 10 seconds with a use count of zero while waiting
     for the message that caused the activation to arrive.  After that,
     if the use count falls to zero the application will exit immediately,
@@ -799,12 +799,12 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     for the duration that the application is running.
     
     Since 2.40, applications that are not explicitly flagged as services
-    or launchers (ie: neither [gio.types.ApplicationFlags.IsService] or
-    [gio.types.ApplicationFlags.IsLauncher] are given as flags) will check (from the
+    or launchers (ie: neither [gio.types.ApplicationFlags.isService] or
+    [gio.types.ApplicationFlags.isLauncher] are given as flags) will check (from the
     default handler for local_command_line) if "--gapplication-service"
     was given in the command line.  If this flag is present then normal
     commandline processing is interrupted and the
-    [gio.types.ApplicationFlags.IsService] flag is set.  This provides a "compromise"
+    [gio.types.ApplicationFlags.isService] flag is set.  This provides a "compromise"
     solution whereby running an application directly from the commandline
     will invoke it in the normal way (which can be useful for debugging)
     while still allowing applications to be D-Bus activated in service
@@ -827,7 +827,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
 
     char*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(No.Alloc);
+      _tmpargv ~= s.toCString(No.alloc);
     char** _argv = _tmpargv.ptr;
     _retval = g_application_run(cast(GApplication*)cPtr, _argc, _argv);
     return _retval;
@@ -869,8 +869,8 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   */
   void sendNotification(string id, gio.notification.Notification notification)
   {
-    const(char)* _id = id.toCString(No.Alloc);
-    g_application_send_notification(cast(GApplication*)cPtr, _id, notification ? cast(GNotification*)notification.cPtr(No.Dup) : null);
+    const(char)* _id = id.toCString(No.alloc);
+    g_application_send_notification(cast(GApplication*)cPtr, _id, notification ? cast(GNotification*)notification.cPtr(No.dup) : null);
   }
 
   /**
@@ -887,7 +887,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   */
   void setActionGroup(gio.action_group.ActionGroup actionGroup = null)
   {
-    g_application_set_action_group(cast(GApplication*)cPtr, actionGroup ? cast(GActionGroup*)(cast(ObjectG)actionGroup).cPtr(No.Dup) : null);
+    g_application_set_action_group(cast(GApplication*)cPtr, actionGroup ? cast(GActionGroup*)(cast(ObjectG)actionGroup).cPtr(No.dup) : null);
   }
 
   /**
@@ -903,7 +903,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   */
   void setApplicationId(string applicationId = null)
   {
-    const(char)* _applicationId = applicationId.toCString(No.Alloc);
+    const(char)* _applicationId = applicationId.toCString(No.alloc);
     g_application_set_application_id(cast(GApplication*)cPtr, _applicationId);
   }
 
@@ -962,7 +962,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   */
   void setOptionContextDescription(string description = null)
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString(No.alloc);
     g_application_set_option_context_description(cast(GApplication*)cPtr, _description);
   }
 
@@ -979,7 +979,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   */
   void setOptionContextParameterString(string parameterString = null)
   {
-    const(char)* _parameterString = parameterString.toCString(No.Alloc);
+    const(char)* _parameterString = parameterString.toCString(No.alloc);
     g_application_set_option_context_parameter_string(cast(GApplication*)cPtr, _parameterString);
   }
 
@@ -993,7 +993,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   */
   void setOptionContextSummary(string summary = null)
   {
-    const(char)* _summary = summary.toCString(No.Alloc);
+    const(char)* _summary = summary.toCString(No.alloc);
     g_application_set_option_context_summary(cast(GApplication*)cPtr, _summary);
   }
 
@@ -1036,7 +1036,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   */
   void setResourceBasePath(string resourcePath = null)
   {
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString(No.alloc);
     g_application_set_resource_base_path(cast(GApplication*)cPtr, _resourcePath);
   }
 
@@ -1051,7 +1051,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   */
   void setVersion(string version_)
   {
-    const(char)* _version_ = version_.toCString(No.Alloc);
+    const(char)* _version_ = version_.toCString(No.alloc);
     g_application_set_version(cast(GApplication*)cPtr, _version_);
   }
 
@@ -1065,8 +1065,8 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   */
   void unbindBusyProperty(gobject.object.ObjectG object, string property)
   {
-    const(char)* _property = property.toCString(No.Alloc);
-    g_application_unbind_busy_property(cast(GApplication*)cPtr, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property);
+    const(char)* _property = property.toCString(No.alloc);
+    g_application_unbind_busy_property(cast(GApplication*)cPtr, object ? cast(ObjectC*)object.cPtr(No.dup) : null, _property);
   }
 
   /**
@@ -1102,7 +1102,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   */
   void withdrawNotification(string id)
   {
-    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _id = id.toCString(No.alloc);
     g_application_withdraw_notification(cast(GApplication*)cPtr, _id);
   }
 
@@ -1124,10 +1124,10 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1165,10 +1165,10 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     Connect to CommandLine signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCommandLine(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCommandLine(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CommandLineCallbackDlg) || is(T : CommandLineCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1200,13 +1200,13 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     (which may be useful for options like --version).
     
     In the event that the application is marked
-    [gio.types.ApplicationFlags.HandlesCommandLine] the "normal processing" will
+    [gio.types.ApplicationFlags.handlesCommandLine] the "normal processing" will
     send the options dictionary to the primary instance where it can be
     read with [gio.application_command_line.ApplicationCommandLine.getOptionsDict].  The signal
     handler can modify the dictionary before returning, and the
     modified dictionary will be sent.
     
-    In the event that [gio.types.ApplicationFlags.HandlesCommandLine] is not set,
+    In the event that [gio.types.ApplicationFlags.handlesCommandLine] is not set,
     "normal processing" will treat the remaining uncollected command
     line arguments as filenames or URIs.  If there are no arguments,
     the application is activated by [gio.application.Application.activate].  One or
@@ -1248,10 +1248,10 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     Connect to HandleLocalOptions signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectHandleLocalOptions(T)(T callback, Flag!"After" after = No.After)
+  ulong connectHandleLocalOptions(T)(T callback, Flag!"after" after = No.after)
   if (is(T : HandleLocalOptionsCallbackDlg) || is(T : HandleLocalOptionsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1272,7 +1272,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
   /**
       The ::name-lost signal is emitted only on the registered primary instance
     when a new instance has taken over. This can only happen if the application
-    is using the [gio.types.ApplicationFlags.AllowReplacement] flag.
+    is using the [gio.types.ApplicationFlags.allowReplacement] flag.
     
     The default handler for this signal calls [gio.application.Application.quit].
   
@@ -1291,10 +1291,10 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     Connect to NameLost signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNameLost(T)(T callback, Flag!"After" after = No.After)
+  ulong connectNameLost(T)(T callback, Flag!"after" after = No.after)
   if (is(T : NameLostCallbackDlg) || is(T : NameLostCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1331,10 +1331,10 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     Connect to Open signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectOpen(T)(T callback, Flag!"After" after = No.After)
+  ulong connectOpen(T)(T callback, Flag!"after" after = No.after)
   if (is(T : OpenCallbackDlg) || is(T : OpenCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1347,7 +1347,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
       auto nFiles = getVal!(int)(&_paramVals[2]);
       auto hint = getVal!(string)(&_paramVals[3]);
       foreach (i; 0 .. nFiles)
-        _files ~= ObjectG.getDObject!(gio.file.File)(files[i], No.Take);
+        _files ~= ObjectG.getDObject!(gio.file.File)(files[i], No.take);
       _dClosure.dlg(_files, hint, application);
     }
 
@@ -1373,10 +1373,10 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     Connect to Shutdown signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectShutdown(T)(T callback, Flag!"After" after = No.After)
+  ulong connectShutdown(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ShutdownCallbackDlg) || is(T : ShutdownCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1409,10 +1409,10 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     Connect to Startup signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStartup(T)(T callback, Flag!"After" after = No.After)
+  ulong connectStartup(T)(T callback, Flag!"after" after = No.after)
   if (is(T : StartupCallbackDlg) || is(T : StartupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

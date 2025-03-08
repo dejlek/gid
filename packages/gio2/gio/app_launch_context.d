@@ -18,7 +18,7 @@ import gobject.object;
 class AppLaunchContext : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,7 +43,7 @@ class AppLaunchContext : gobject.object.ObjectG
   {
     GAppLaunchContext* _cretval;
     _cretval = g_app_launch_context_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -60,8 +60,8 @@ class AppLaunchContext : gobject.object.ObjectG
     char* _cretval;
     auto _files = gListFromD!(gio.file.File)(files);
     scope(exit) containerFree!(GList*, gio.file.File, GidOwnership.None)(_files);
-    _cretval = g_app_launch_context_get_display(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(ObjectG)info).cPtr(No.Dup) : null, _files);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    _cretval = g_app_launch_context_get_display(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(ObjectG)info).cPtr(No.dup) : null, _files);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class AppLaunchContext : gobject.object.ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -115,8 +115,8 @@ class AppLaunchContext : gobject.object.ObjectG
     char* _cretval;
     auto _files = gListFromD!(gio.file.File)(files);
     scope(exit) containerFree!(GList*, gio.file.File, GidOwnership.None)(_files);
-    _cretval = g_app_launch_context_get_startup_notify_id(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(ObjectG)info).cPtr(No.Dup) : null, _files);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    _cretval = g_app_launch_context_get_startup_notify_id(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(ObjectG)info).cPtr(No.dup) : null, _files);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class AppLaunchContext : gobject.object.ObjectG
   */
   void launchFailed(string startupNotifyId)
   {
-    const(char)* _startupNotifyId = startupNotifyId.toCString(No.Alloc);
+    const(char)* _startupNotifyId = startupNotifyId.toCString(No.alloc);
     g_app_launch_context_launch_failed(cast(GAppLaunchContext*)cPtr, _startupNotifyId);
   }
 
@@ -141,8 +141,8 @@ class AppLaunchContext : gobject.object.ObjectG
   */
   void setenv(string variable, string value)
   {
-    const(char)* _variable = variable.toCString(No.Alloc);
-    const(char)* _value = value.toCString(No.Alloc);
+    const(char)* _variable = variable.toCString(No.alloc);
+    const(char)* _value = value.toCString(No.alloc);
     g_app_launch_context_setenv(cast(GAppLaunchContext*)cPtr, _variable, _value);
   }
 
@@ -154,7 +154,7 @@ class AppLaunchContext : gobject.object.ObjectG
   */
   void unsetenv(string variable)
   {
-    const(char)* _variable = variable.toCString(No.Alloc);
+    const(char)* _variable = variable.toCString(No.alloc);
     g_app_launch_context_unsetenv(cast(GAppLaunchContext*)cPtr, _variable);
   }
 
@@ -182,10 +182,10 @@ class AppLaunchContext : gobject.object.ObjectG
     Connect to LaunchFailed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLaunchFailed(T)(T callback, Flag!"After" after = No.After)
+  ulong connectLaunchFailed(T)(T callback, Flag!"after" after = No.after)
   if (is(T : LaunchFailedCallbackDlg) || is(T : LaunchFailedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -237,10 +237,10 @@ class AppLaunchContext : gobject.object.ObjectG
     Connect to LaunchStarted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLaunchStarted(T)(T callback, Flag!"After" after = No.After)
+  ulong connectLaunchStarted(T)(T callback, Flag!"after" after = No.after)
   if (is(T : LaunchStartedCallbackDlg) || is(T : LaunchStartedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -295,10 +295,10 @@ class AppLaunchContext : gobject.object.ObjectG
     Connect to Launched signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLaunched(T)(T callback, Flag!"After" after = No.After)
+  ulong connectLaunched(T)(T callback, Flag!"after" after = No.after)
   if (is(T : LaunchedCallbackDlg) || is(T : LaunchedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

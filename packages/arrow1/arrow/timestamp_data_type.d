@@ -11,7 +11,7 @@ import glib.time_zone;
 class TimestampDataType : arrow.temporal_data_type.TemporalDataType
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,8 +31,8 @@ class TimestampDataType : arrow.temporal_data_type.TemporalDataType
   this(arrow.types.TimeUnit unit, glib.time_zone.TimeZone timeZone = null)
   {
     GArrowTimestampDataType* _cretval;
-    _cretval = garrow_timestamp_data_type_new(unit, timeZone ? cast(GTimeZone*)timeZone.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_timestamp_data_type_new(unit, timeZone ? cast(GTimeZone*)timeZone.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /** */

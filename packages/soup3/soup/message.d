@@ -31,7 +31,7 @@ import soup.types;
   [soup.message.Message.newFromUri], set up its fields appropriately, and send it.
   
   `property@Message:status-code` will normally be a `enum@Status` value, eg,
-  [soup.types.Status.Ok], though of course it might actually be an unknown status
+  [soup.types.Status.ok], though of course it might actually be an unknown status
   code. `property@Message:reason-phrase` is the actual text returned from the
   server, which may or may not correspond to the "standard" description of
   @status_code. At any rate, it is almost certainly not localized, and not very
@@ -48,7 +48,7 @@ import soup.types;
 class Message : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -75,10 +75,10 @@ class Message : gobject.object.ObjectG
   this(string method, string uriString)
   {
     SoupMessage* _cretval;
-    const(char)* _method = method.toCString(No.Alloc);
-    const(char)* _uriString = uriString.toCString(No.Alloc);
+    const(char)* _method = method.toCString(No.alloc);
+    const(char)* _uriString = uriString.toCString(No.alloc);
     _cretval = soup_message_new(_method, _uriString);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -100,11 +100,11 @@ class Message : gobject.object.ObjectG
   static soup.message.Message newFromEncodedForm(string method, string uriString, string encodedForm)
   {
     SoupMessage* _cretval;
-    const(char)* _method = method.toCString(No.Alloc);
-    const(char)* _uriString = uriString.toCString(No.Alloc);
-    char* _encodedForm = encodedForm.toCString(Yes.Alloc);
+    const(char)* _method = method.toCString(No.alloc);
+    const(char)* _uriString = uriString.toCString(No.alloc);
+    char* _encodedForm = encodedForm.toCString(Yes.alloc);
     _cretval = soup_message_new_from_encoded_form(_method, _uriString, _encodedForm);
-    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -120,9 +120,9 @@ class Message : gobject.object.ObjectG
   static soup.message.Message newFromMultipart(string uriString, soup.multipart.Multipart multipart)
   {
     SoupMessage* _cretval;
-    const(char)* _uriString = uriString.toCString(No.Alloc);
-    _cretval = soup_message_new_from_multipart(_uriString, multipart ? cast(SoupMultipart*)multipart.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
+    const(char)* _uriString = uriString.toCString(No.alloc);
+    _cretval = soup_message_new_from_multipart(_uriString, multipart ? cast(SoupMultipart*)multipart.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -136,9 +136,9 @@ class Message : gobject.object.ObjectG
   static soup.message.Message newFromUri(string method, glib.uri.Uri uri)
   {
     SoupMessage* _cretval;
-    const(char)* _method = method.toCString(No.Alloc);
-    _cretval = soup_message_new_from_uri(_method, uri ? cast(GUri*)uri.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
+    const(char)* _method = method.toCString(No.alloc);
+    _cretval = soup_message_new_from_uri(_method, uri ? cast(GUri*)uri.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -152,8 +152,8 @@ class Message : gobject.object.ObjectG
   static soup.message.Message newOptionsPing(glib.uri.Uri baseUri)
   {
     SoupMessage* _cretval;
-    _cretval = soup_message_new_options_ping(baseUri ? cast(GUri*)baseUri.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
+    _cretval = soup_message_new_options_ping(baseUri ? cast(GUri*)baseUri.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class Message : gobject.object.ObjectG
   {
     GUri* _cretval;
     _cretval = soup_message_get_first_party(cast(SoupMessage*)cPtr);
-    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -283,14 +283,14 @@ class Message : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_message_get_method(cast(SoupMessage*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
   /**
       Get the `structMessageMetrics` of msg.
     
-    If the flag [soup.types.MessageFlags.CollectMetrics] is not enabled for msg this will
+    If the flag [soup.types.MessageFlags.collectMetrics] is not enabled for msg this will
     return null.
     Returns:     a #SoupMessageMetrics
   */
@@ -298,7 +298,7 @@ class Message : gobject.object.ObjectG
   {
     SoupMessageMetrics* _cretval;
     _cretval = soup_message_get_metrics(cast(SoupMessage*)cPtr);
-    auto _retval = _cretval ? new soup.message_metrics.MessageMetrics(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new soup.message_metrics.MessageMetrics(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -324,7 +324,7 @@ class Message : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_message_get_reason_phrase(cast(SoupMessage*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -344,7 +344,7 @@ class Message : gobject.object.ObjectG
   {
     GSocketAddress* _cretval;
     _cretval = soup_message_get_remote_address(cast(SoupMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.take);
     return _retval;
   }
 
@@ -356,7 +356,7 @@ class Message : gobject.object.ObjectG
   {
     SoupMessageHeaders* _cretval;
     _cretval = soup_message_get_request_headers(cast(SoupMessage*)cPtr);
-    auto _retval = _cretval ? new soup.message_headers.MessageHeaders(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new soup.message_headers.MessageHeaders(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -368,7 +368,7 @@ class Message : gobject.object.ObjectG
   {
     SoupMessageHeaders* _cretval;
     _cretval = soup_message_get_response_headers(cast(SoupMessage*)cPtr);
-    auto _retval = _cretval ? new soup.message_headers.MessageHeaders(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new soup.message_headers.MessageHeaders(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -380,7 +380,7 @@ class Message : gobject.object.ObjectG
   {
     GUri* _cretval;
     _cretval = soup_message_get_site_for_cookies(cast(SoupMessage*)cPtr);
-    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -405,7 +405,7 @@ class Message : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_message_get_tls_ciphersuite_name(cast(SoupMessage*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -421,7 +421,7 @@ class Message : gobject.object.ObjectG
   {
     GTlsCertificate* _cretval;
     _cretval = soup_message_get_tls_peer_certificate(cast(SoupMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.take);
     return _retval;
   }
 
@@ -442,7 +442,7 @@ class Message : gobject.object.ObjectG
   /**
       Gets the TLS protocol version negotiated for msg's connection.
     
-    If the message connection is not SSL, [gio.types.TlsProtocolVersion.Unknown] is returned.
+    If the message connection is not SSL, [gio.types.TlsProtocolVersion.unknown] is returned.
     Returns:     a #GTlsProtocolVersion
   */
   gio.types.TlsProtocolVersion getTlsProtocolVersion()
@@ -461,7 +461,7 @@ class Message : gobject.object.ObjectG
   {
     GUri* _cretval;
     _cretval = soup_message_get_uri(cast(SoupMessage*)cPtr);
-    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -528,7 +528,7 @@ class Message : gobject.object.ObjectG
   */
   void setFirstParty(glib.uri.Uri firstParty)
   {
-    soup_message_set_first_party(cast(SoupMessage*)cPtr, firstParty ? cast(GUri*)firstParty.cPtr(No.Dup) : null);
+    soup_message_set_first_party(cast(SoupMessage*)cPtr, firstParty ? cast(GUri*)firstParty.cPtr(No.dup) : null);
   }
 
   /**
@@ -587,7 +587,7 @@ class Message : gobject.object.ObjectG
   */
   void setMethod(string method)
   {
-    const(char)* _method = method.toCString(No.Alloc);
+    const(char)* _method = method.toCString(No.alloc);
     soup_message_set_method(cast(SoupMessage*)cPtr, _method);
   }
 
@@ -626,8 +626,8 @@ class Message : gobject.object.ObjectG
   */
   void setRequestBody(string contentType, gio.input_stream.InputStream stream, ptrdiff_t contentLength)
   {
-    const(char)* _contentType = contentType.toCString(No.Alloc);
-    soup_message_set_request_body(cast(SoupMessage*)cPtr, _contentType, stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, contentLength);
+    const(char)* _contentType = contentType.toCString(No.alloc);
+    soup_message_set_request_body(cast(SoupMessage*)cPtr, _contentType, stream ? cast(GInputStream*)stream.cPtr(No.dup) : null, contentLength);
   }
 
   /**
@@ -643,8 +643,8 @@ class Message : gobject.object.ObjectG
   */
   void setRequestBodyFromBytes(string contentType = null, glib.bytes.Bytes bytes = null)
   {
-    const(char)* _contentType = contentType.toCString(No.Alloc);
-    soup_message_set_request_body_from_bytes(cast(SoupMessage*)cPtr, _contentType, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
+    const(char)* _contentType = contentType.toCString(No.alloc);
+    soup_message_set_request_body_from_bytes(cast(SoupMessage*)cPtr, _contentType, bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null);
   }
 
   /**
@@ -662,7 +662,7 @@ class Message : gobject.object.ObjectG
   */
   void setSiteForCookies(glib.uri.Uri siteForCookies = null)
   {
-    soup_message_set_site_for_cookies(cast(SoupMessage*)cPtr, siteForCookies ? cast(GUri*)siteForCookies.cPtr(No.Dup) : null);
+    soup_message_set_site_for_cookies(cast(SoupMessage*)cPtr, siteForCookies ? cast(GUri*)siteForCookies.cPtr(No.dup) : null);
   }
 
   /**
@@ -679,7 +679,7 @@ class Message : gobject.object.ObjectG
   */
   void setTlsClientCertificate(gio.tls_certificate.TlsCertificate certificate = null)
   {
-    soup_message_set_tls_client_certificate(cast(SoupMessage*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null);
+    soup_message_set_tls_client_certificate(cast(SoupMessage*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.dup) : null);
   }
 
   /**
@@ -692,7 +692,7 @@ class Message : gobject.object.ObjectG
   */
   void setUri(glib.uri.Uri uri)
   {
-    soup_message_set_uri(cast(SoupMessage*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null);
+    soup_message_set_uri(cast(SoupMessage*)cPtr, uri ? cast(GUri*)uri.cPtr(No.dup) : null);
   }
 
   /**
@@ -733,10 +733,10 @@ class Message : gobject.object.ObjectG
     Connect to AcceptCertificate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectAcceptCertificate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : AcceptCertificateCallbackDlg) || is(T : AcceptCertificateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -789,10 +789,10 @@ class Message : gobject.object.ObjectG
     Connect to Authenticate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAuthenticate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectAuthenticate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : AuthenticateCallbackDlg) || is(T : AuthenticateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -830,10 +830,10 @@ class Message : gobject.object.ObjectG
     Connect to Finished signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFinished(T)(T callback, Flag!"After" after = No.After)
+  ulong connectFinished(T)(T callback, Flag!"after" after = No.after)
   if (is(T : FinishedCallbackDlg) || is(T : FinishedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -865,10 +865,10 @@ class Message : gobject.object.ObjectG
     Connect to GotBody signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectGotBody(T)(T callback, Flag!"After" after = No.After)
+  ulong connectGotBody(T)(T callback, Flag!"after" after = No.after)
   if (is(T : GotBodyCallbackDlg) || is(T : GotBodyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -902,10 +902,10 @@ class Message : gobject.object.ObjectG
     Connect to GotBodyData signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectGotBodyData(T)(T callback, Flag!"After" after = No.After)
+  ulong connectGotBodyData(T)(T callback, Flag!"after" after = No.after)
   if (is(T : GotBodyDataCallbackDlg) || is(T : GotBodyDataCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -951,10 +951,10 @@ class Message : gobject.object.ObjectG
     Connect to GotHeaders signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectGotHeaders(T)(T callback, Flag!"After" after = No.After)
+  ulong connectGotHeaders(T)(T callback, Flag!"after" after = No.after)
   if (is(T : GotHeadersCallbackDlg) || is(T : GotHeadersCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -995,10 +995,10 @@ class Message : gobject.object.ObjectG
     Connect to GotInformational signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectGotInformational(T)(T callback, Flag!"After" after = No.After)
+  ulong connectGotInformational(T)(T callback, Flag!"after" after = No.after)
   if (is(T : GotInformationalCallbackDlg) || is(T : GotInformationalCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1032,10 +1032,10 @@ class Message : gobject.object.ObjectG
     Connect to HstsEnforced signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectHstsEnforced(T)(T callback, Flag!"After" after = No.After)
+  ulong connectHstsEnforced(T)(T callback, Flag!"after" after = No.after)
   if (is(T : HstsEnforcedCallbackDlg) || is(T : HstsEnforcedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1058,7 +1058,7 @@ class Message : gobject.object.ObjectG
     but only for events that occur while msg "owns" the connection; if
     msg is sent on an existing persistent connection, then this signal
     will not be emitted. (If you want to force the message to be sent on
-    a new connection, set the [soup.types.MessageFlags.NewConnection] flag on it.)
+    a new connection, set the [soup.types.MessageFlags.newConnection] flag on it.)
     
     See [gio.socket_client.SocketClient.event] for more information on what
     the different values of event correspond to, and what
@@ -1080,10 +1080,10 @@ class Message : gobject.object.ObjectG
     Connect to NetworkEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNetworkEvent(T)(T callback, Flag!"After" after = No.After)
+  ulong connectNetworkEvent(T)(T callback, Flag!"after" after = No.after)
   if (is(T : NetworkEventCallbackDlg) || is(T : NetworkEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1119,7 +1119,7 @@ class Message : gobject.object.ObjectG
       * $(B message) the instance the signal is connected to
     )
     Returns:     true to handle the request, or false to make the connection
-        fail with [gio.types.TlsError.CertificateRequired].
+        fail with [gio.types.TlsError.certificateRequired].
   */
   alias RequestCertificateCallbackDlg = bool delegate(gio.tls_client_connection.TlsClientConnection tlsConnection, soup.message.Message message);
 
@@ -1130,10 +1130,10 @@ class Message : gobject.object.ObjectG
     Connect to RequestCertificate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRequestCertificate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRequestCertificate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RequestCertificateCallbackDlg) || is(T : RequestCertificateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1171,7 +1171,7 @@ class Message : gobject.object.ObjectG
       * $(B message) the instance the signal is connected to
     )
     Returns:     true to handle the request, or false to make the connection
-        fail with [gio.types.TlsError.CertificateRequired].
+        fail with [gio.types.TlsError.certificateRequired].
   */
   alias RequestCertificatePasswordCallbackDlg = bool delegate(gio.tls_password.TlsPassword tlsPassword, soup.message.Message message);
 
@@ -1182,10 +1182,10 @@ class Message : gobject.object.ObjectG
     Connect to RequestCertificatePassword signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRequestCertificatePassword(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRequestCertificatePassword(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RequestCertificatePasswordCallbackDlg) || is(T : RequestCertificatePasswordCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1225,10 +1225,10 @@ class Message : gobject.object.ObjectG
     Connect to Restarted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRestarted(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRestarted(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RestartedCallbackDlg) || is(T : RestartedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1260,10 +1260,10 @@ class Message : gobject.object.ObjectG
     Connect to Starting signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStarting(T)(T callback, Flag!"After" after = No.After)
+  ulong connectStarting(T)(T callback, Flag!"after" after = No.after)
   if (is(T : StartingCallbackDlg) || is(T : StartingCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1296,10 +1296,10 @@ class Message : gobject.object.ObjectG
     Connect to WroteBody signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectWroteBody(T)(T callback, Flag!"After" after = No.After)
+  ulong connectWroteBody(T)(T callback, Flag!"after" after = No.after)
   if (is(T : WroteBodyCallbackDlg) || is(T : WroteBodyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1333,10 +1333,10 @@ class Message : gobject.object.ObjectG
     Connect to WroteBodyData signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectWroteBodyData(T)(T callback, Flag!"After" after = No.After)
+  ulong connectWroteBodyData(T)(T callback, Flag!"after" after = No.after)
   if (is(T : WroteBodyDataCallbackDlg) || is(T : WroteBodyDataCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1370,10 +1370,10 @@ class Message : gobject.object.ObjectG
     Connect to WroteHeaders signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectWroteHeaders(T)(T callback, Flag!"After" after = No.After)
+  ulong connectWroteHeaders(T)(T callback, Flag!"after" after = No.after)
   if (is(T : WroteHeadersCallbackDlg) || is(T : WroteHeadersCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

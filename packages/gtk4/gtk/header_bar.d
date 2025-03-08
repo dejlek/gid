@@ -84,12 +84,12 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.header_bar.HeaderBar] uses the [gtk.types.AccessibleRole.Group] role.
+  [gtk.header_bar.HeaderBar] uses the [gtk.types.AccessibleRole.group] role.
 */
 class HeaderBar : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -113,7 +113,7 @@ class HeaderBar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_header_bar_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -124,7 +124,7 @@ class HeaderBar : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_header_bar_get_decoration_layout(cast(GtkHeaderBar*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class HeaderBar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_header_bar_get_title_widget(cast(GtkHeaderBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void packEnd(gtk.widget.Widget child)
   {
-    gtk_header_bar_pack_end(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_header_bar_pack_end(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -173,7 +173,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void packStart(gtk.widget.Widget child)
   {
-    gtk_header_bar_pack_start(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_header_bar_pack_start(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -188,7 +188,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void remove(gtk.widget.Widget child)
   {
-    gtk_header_bar_remove(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_header_bar_remove(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -214,7 +214,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void setDecorationLayout(string layout = null)
   {
-    const(char)* _layout = layout.toCString(No.Alloc);
+    const(char)* _layout = layout.toCString(No.alloc);
     gtk_header_bar_set_decoration_layout(cast(GtkHeaderBar*)cPtr, _layout);
   }
 
@@ -246,6 +246,6 @@ class HeaderBar : gtk.widget.Widget
   */
   void setTitleWidget(gtk.widget.Widget titleWidget = null)
   {
-    gtk_header_bar_set_title_widget(cast(GtkHeaderBar*)cPtr, titleWidget ? cast(GtkWidget*)titleWidget.cPtr(No.Dup) : null);
+    gtk_header_bar_set_title_widget(cast(GtkHeaderBar*)cPtr, titleWidget ? cast(GtkWidget*)titleWidget.cPtr(No.dup) : null);
   }
 }

@@ -16,7 +16,7 @@ import gstvideo.video_aggregator;
 class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -37,7 +37,7 @@ class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_base_mixer_get_gl_context(cast(GstGLBaseMixer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.take);
     return _retval;
   }
 }

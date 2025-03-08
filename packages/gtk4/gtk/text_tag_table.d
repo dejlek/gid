@@ -36,7 +36,7 @@ import gtk.types;
 class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -64,7 +64,7 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkTextTagTable* _cretval;
     _cretval = gtk_text_tag_table_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -81,7 +81,7 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
   bool add(gtk.text_tag.TextTag tag)
   {
     bool _retval;
-    _retval = gtk_text_tag_table_add(cast(GtkTextTagTable*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
+    _retval = gtk_text_tag_table_add(cast(GtkTextTagTable*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
     {
       auto _dlg = cast(gtk.types.TextTagTableForeach*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.text_tag.TextTag)(cast(void*)tag, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gtk.text_tag.TextTag)(cast(void*)tag, No.take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -127,9 +127,9 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
   gtk.text_tag.TextTag lookup(string name)
   {
     GtkTextTag* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gtk_text_tag_table_lookup(cast(GtkTextTagTable*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gtk.text_tag.TextTag)(cast(GtkTextTag*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.text_tag.TextTag)(cast(GtkTextTag*)_cretval, No.take);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void remove(gtk.text_tag.TextTag tag)
   {
-    gtk_text_tag_table_remove(cast(GtkTextTagTable*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
+    gtk_text_tag_table_remove(cast(GtkTextTagTable*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.dup) : null);
   }
 
   /**
@@ -166,10 +166,10 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to TagAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTagAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectTagAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : TagAddedCallbackDlg) || is(T : TagAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -204,10 +204,10 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to TagChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTagChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectTagChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : TagChangedCallbackDlg) || is(T : TagChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -245,10 +245,10 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to TagRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTagRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectTagRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : TagRemovedCallbackDlg) || is(T : TagRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

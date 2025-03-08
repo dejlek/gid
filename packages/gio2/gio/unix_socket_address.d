@@ -18,7 +18,7 @@ import gobject.object;
   visible in the filesystem and not affected by the filesystem
   permissions, visibility, etc. Currently this is only supported
   under Linux. If you attempt to use abstract sockets on other
-  systems, function calls may return [gio.types.IOErrorEnum.NotSupported]
+  systems, function calls may return [gio.types.IOErrorEnum.notSupported]
   errors. You can use [gio.unix_socket_address.UnixSocketAddress.abstractNamesSupported]
   to see if abstract names are supported.
   
@@ -33,7 +33,7 @@ import gobject.object;
 class UnixSocketAddress : gio.socket_address.SocketAddress
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -61,13 +61,13 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   this(string path)
   {
     GSocketAddress* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     _cretval = g_unix_socket_address_new(_path);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
-      Creates a new [gio.types.UnixSocketAddressType.AbstractPadded]
+      Creates a new [gio.types.UnixSocketAddressType.abstractPadded]
     #GUnixSocketAddress for path.
     Params:
       path =       the abstract name
@@ -84,20 +84,20 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
 
     auto _path = cast(const(char)*)path.ptr;
     _cretval = g_unix_socket_address_new_abstract(_path, _pathLen);
-    auto _retval = ObjectG.getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.take);
     return _retval;
   }
 
   /**
       Creates a new #GUnixSocketAddress of type type with name path.
     
-    If type is [gio.types.UnixSocketAddressType.Path], this is equivalent to
+    If type is [gio.types.UnixSocketAddressType.path], this is equivalent to
     calling [gio.unix_socket_address.UnixSocketAddress.new_].
     
-    If type is [gio.types.UnixSocketAddressType.Anonymous], path and path_len will be
+    If type is [gio.types.UnixSocketAddressType.anonymous], path and path_len will be
     ignored.
     
-    If path_type is [gio.types.UnixSocketAddressType.Abstract], then path_len
+    If path_type is [gio.types.UnixSocketAddressType.abstract_], then path_len
     bytes of path will be copied to the socket's path, and only those
     bytes will be considered part of the name. (If path_len is -1,
     then path is assumed to be NUL-terminated.) For example, if path
@@ -105,7 +105,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
     returned socket would return 7 (2 bytes of overhead, 1 byte for the
     abstract-socket indicator byte, and 4 bytes for the name "test").
     
-    If path_type is [gio.types.UnixSocketAddressType.AbstractPadded], then
+    If path_type is [gio.types.UnixSocketAddressType.abstractPadded], then
     path_len bytes of path will be copied to the socket's path, the
     rest of the path will be padded with 0 bytes, and the entire
     zero-padded buffer will be considered the name. (As above, if
@@ -115,8 +115,8 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
     [gio.unix_socket_address.UnixSocketAddress.getPathLen] will still return just the
     length of path.
     
-    [gio.types.UnixSocketAddressType.Abstract] is preferred over
-    [gio.types.UnixSocketAddressType.AbstractPadded] for new programs. Of course,
+    [gio.types.UnixSocketAddressType.abstract_] is preferred over
+    [gio.types.UnixSocketAddressType.abstractPadded] for new programs. Of course,
     when connecting to a server created by another process, you must
     use the appropriate type corresponding to how that process created
     its listening socket.
@@ -134,7 +134,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
 
     auto _path = cast(const(char)*)path.ptr;
     _cretval = g_unix_socket_address_new_with_type(_path, _pathLen, type);
-    auto _retval = ObjectG.getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   {
     const(char)* _cretval;
     _cretval = g_unix_socket_address_get_path(cast(GUnixSocketAddress*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 

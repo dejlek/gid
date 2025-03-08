@@ -7,7 +7,7 @@ import gio.mount_mixin;
 /// Proxy object for Gio.Mount interface when a GObject has no applicable D binding
 class MountIfaceProxy : IfaceProxy, gio.mount.Mount
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

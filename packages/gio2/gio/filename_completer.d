@@ -15,7 +15,7 @@ import gobject.object;
 class FilenameCompleter : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -39,7 +39,7 @@ class FilenameCompleter : gobject.object.ObjectG
   {
     GFilenameCompleter* _cretval;
     _cretval = g_filename_completer_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -53,9 +53,9 @@ class FilenameCompleter : gobject.object.ObjectG
   string getCompletionSuffix(string initialText)
   {
     char* _cretval;
-    const(char)* _initialText = initialText.toCString(No.Alloc);
+    const(char)* _initialText = initialText.toCString(No.alloc);
     _cretval = g_filename_completer_get_completion_suffix(cast(GFilenameCompleter*)cPtr, _initialText);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -69,7 +69,7 @@ class FilenameCompleter : gobject.object.ObjectG
   string[] getCompletions(string initialText)
   {
     char** _cretval;
-    const(char)* _initialText = initialText.toCString(No.Alloc);
+    const(char)* _initialText = initialText.toCString(No.alloc);
     _cretval = g_filename_completer_get_completions(cast(GFilenameCompleter*)cPtr, _initialText);
     string[] _retval;
 
@@ -80,7 +80,7 @@ class FilenameCompleter : gobject.object.ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -113,10 +113,10 @@ class FilenameCompleter : gobject.object.ObjectG
     Connect to GotCompletionData signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectGotCompletionData(T)(T callback, Flag!"After" after = No.After)
+  ulong connectGotCompletionData(T)(T callback, Flag!"after" after = No.after)
   if (is(T : GotCompletionDataCallbackDlg) || is(T : GotCompletionDataCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

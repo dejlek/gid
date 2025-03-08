@@ -32,7 +32,7 @@ template RecentChooserT()
   */
   override void addFilter(gtk.recent_filter.RecentFilter filter)
   {
-    gtk_recent_chooser_add_filter(cast(GtkRecentChooser*)cPtr, filter ? cast(GtkRecentFilter*)filter.cPtr(No.Dup) : null);
+    gtk_recent_chooser_add_filter(cast(GtkRecentChooser*)cPtr, filter ? cast(GtkRecentFilter*)filter.cPtr(No.dup) : null);
   }
 
   /**
@@ -44,7 +44,7 @@ template RecentChooserT()
   {
     GtkRecentInfo* _cretval;
     _cretval = gtk_recent_chooser_get_current_item(cast(GtkRecentChooser*)cPtr);
-    auto _retval = _cretval ? new gtk.recent_info.RecentInfo(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.recent_info.RecentInfo(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -56,7 +56,7 @@ template RecentChooserT()
   {
     char* _cretval;
     _cretval = gtk_recent_chooser_get_current_uri(cast(GtkRecentChooser*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -69,7 +69,7 @@ template RecentChooserT()
   {
     GtkRecentFilter* _cretval;
     _cretval = gtk_recent_chooser_get_filter(cast(GtkRecentChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.recent_filter.RecentFilter)(cast(GtkRecentFilter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.recent_filter.RecentFilter)(cast(GtkRecentFilter*)_cretval, No.take);
     return _retval;
   }
 
@@ -210,7 +210,7 @@ template RecentChooserT()
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -236,7 +236,7 @@ template RecentChooserT()
   */
   override void removeFilter(gtk.recent_filter.RecentFilter filter)
   {
-    gtk_recent_chooser_remove_filter(cast(GtkRecentChooser*)cPtr, filter ? cast(GtkRecentFilter*)filter.cPtr(No.Dup) : null);
+    gtk_recent_chooser_remove_filter(cast(GtkRecentChooser*)cPtr, filter ? cast(GtkRecentFilter*)filter.cPtr(No.dup) : null);
   }
 
   /**
@@ -257,7 +257,7 @@ template RecentChooserT()
   override bool selectUri(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString(No.alloc);
     GError *_err;
     _retval = gtk_recent_chooser_select_uri(cast(GtkRecentChooser*)cPtr, _uri, &_err);
     if (_err)
@@ -274,7 +274,7 @@ template RecentChooserT()
   override bool setCurrentUri(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString(No.alloc);
     GError *_err;
     _retval = gtk_recent_chooser_set_current_uri(cast(GtkRecentChooser*)cPtr, _uri, &_err);
     if (_err)
@@ -290,7 +290,7 @@ template RecentChooserT()
   */
   override void setFilter(gtk.recent_filter.RecentFilter filter = null)
   {
-    gtk_recent_chooser_set_filter(cast(GtkRecentChooser*)cPtr, filter ? cast(GtkRecentFilter*)filter.cPtr(No.Dup) : null);
+    gtk_recent_chooser_set_filter(cast(GtkRecentChooser*)cPtr, filter ? cast(GtkRecentFilter*)filter.cPtr(No.dup) : null);
   }
 
   /**
@@ -388,7 +388,7 @@ template RecentChooserT()
     {
       auto _dlg = cast(gtk.types.RecentSortFunc*)userData;
 
-      int _retval = (*_dlg)(a ? new gtk.recent_info.RecentInfo(cast(void*)a, No.Take) : null, b ? new gtk.recent_info.RecentInfo(cast(void*)b, No.Take) : null);
+      int _retval = (*_dlg)(a ? new gtk.recent_info.RecentInfo(cast(void*)a, No.take) : null, b ? new gtk.recent_info.RecentInfo(cast(void*)b, No.take) : null);
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
@@ -424,7 +424,7 @@ template RecentChooserT()
   */
   override void unselectUri(string uri)
   {
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString(No.alloc);
     gtk_recent_chooser_unselect_uri(cast(GtkRecentChooser*)cPtr, _uri);
   }
 
@@ -448,10 +448,10 @@ template RecentChooserT()
     Connect to ItemActivated signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectItemActivated(T)(T callback, Flag!"After" after = No.After)
+  ulong connectItemActivated(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ItemActivatedCallbackDlg) || is(T : ItemActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -486,10 +486,10 @@ template RecentChooserT()
     Connect to SelectionChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSelectionChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SelectionChangedCallbackDlg) || is(T : SelectionChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -47,7 +47,7 @@ import gtk.window;
 class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -77,8 +77,8 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
   this(string title = null, gtk.window.Window parent = null)
   {
     GtkWidget* _cretval;
-    const(char)* _title = title.toCString(No.Alloc);
-    _cretval = gtk_color_chooser_dialog_new(_title, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    const(char)* _title = title.toCString(No.alloc);
+    _cretval = gtk_color_chooser_dialog_new(_title, parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null);
+    this(_cretval, No.take);
   }
 }

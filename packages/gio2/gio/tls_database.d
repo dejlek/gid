@@ -26,7 +26,7 @@ import gobject.object;
 class TlsDatabase : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -59,8 +59,8 @@ class TlsDatabase : gobject.object.ObjectG
   string createCertificateHandle(gio.tls_certificate.TlsCertificate certificate)
   {
     char* _cretval;
-    _cretval = g_tls_database_create_certificate_handle(cast(GTlsDatabase*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    _cretval = g_tls_database_create_certificate_handle(cast(GTlsDatabase*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -88,12 +88,12 @@ class TlsDatabase : gobject.object.ObjectG
   gio.tls_certificate.TlsCertificate lookupCertificateForHandle(string handle, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GTlsCertificate* _cretval;
-    const(char)* _handle = handle.toCString(No.Alloc);
+    const(char)* _handle = handle.toCString(No.alloc);
     GError *_err;
-    _cretval = g_tls_database_lookup_certificate_for_handle(cast(GTlsDatabase*)cPtr, _handle, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_database_lookup_certificate_for_handle(cast(GTlsDatabase*)cPtr, _handle, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -114,13 +114,13 @@ class TlsDatabase : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _handle = handle.toCString(No.Alloc);
+    const(char)* _handle = handle.toCString(No.alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_tls_database_lookup_certificate_for_handle_async(cast(GTlsDatabase*)cPtr, _handle, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_tls_database_lookup_certificate_for_handle_async(cast(GTlsDatabase*)cPtr, _handle, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -138,10 +138,10 @@ class TlsDatabase : gobject.object.ObjectG
   {
     GTlsCertificate* _cretval;
     GError *_err;
-    _cretval = g_tls_database_lookup_certificate_for_handle_finish(cast(GTlsDatabase*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_database_lookup_certificate_for_handle_finish(cast(GTlsDatabase*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -178,10 +178,10 @@ class TlsDatabase : gobject.object.ObjectG
   {
     GTlsCertificate* _cretval;
     GError *_err;
-    _cretval = g_tls_database_lookup_certificate_issuer(cast(GTlsDatabase*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_database_lookup_certificate_issuer(cast(GTlsDatabase*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.dup) : null, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -202,12 +202,12 @@ class TlsDatabase : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_tls_database_lookup_certificate_issuer_async(cast(GTlsDatabase*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_tls_database_lookup_certificate_issuer_async(cast(GTlsDatabase*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.dup) : null, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -222,10 +222,10 @@ class TlsDatabase : gobject.object.ObjectG
   {
     GTlsCertificate* _cretval;
     GError *_err;
-    _cretval = g_tls_database_lookup_certificate_issuer_finish(cast(GTlsDatabase*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_database_lookup_certificate_issuer_finish(cast(GTlsDatabase*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class TlsDatabase : gobject.object.ObjectG
     auto _issuerRawDn = gByteArrayFromD(issuerRawDn);
     scope(exit) containerFree!(GByteArray*, ubyte, GidOwnership.None)(_issuerRawDn);
     GError *_err;
-    _cretval = g_tls_database_lookup_certificates_issued_by(cast(GTlsDatabase*)cPtr, _issuerRawDn, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_database_lookup_certificates_issued_by(cast(GTlsDatabase*)cPtr, _issuerRawDn, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(gio.tls_certificate.TlsCertificate, GidOwnership.Full)(cast(GList*)_cretval);
@@ -276,14 +276,14 @@ class TlsDatabase : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _issuerRawDn = gByteArrayFromD(issuerRawDn);
     scope(exit) containerFree!(GByteArray*, ubyte, GidOwnership.None)(_issuerRawDn);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_tls_database_lookup_certificates_issued_by_async(cast(GTlsDatabase*)cPtr, _issuerRawDn, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_tls_database_lookup_certificates_issued_by_async(cast(GTlsDatabase*)cPtr, _issuerRawDn, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -298,7 +298,7 @@ class TlsDatabase : gobject.object.ObjectG
   {
     GList* _cretval;
     GError *_err;
-    _cretval = g_tls_database_lookup_certificates_issued_by_finish(cast(GTlsDatabase*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_database_lookup_certificates_issued_by_finish(cast(GTlsDatabase*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(gio.tls_certificate.TlsCertificate, GidOwnership.Full)(cast(GList*)_cretval);
@@ -319,13 +319,13 @@ class TlsDatabase : gobject.object.ObjectG
     
     The identity is used to ensure the server certificate is valid for
     the expected peer identity. If the identity does not match the
-    certificate, [gio.types.TlsCertificateFlags.BadIdentity] will be set in the
+    certificate, [gio.types.TlsCertificateFlags.badIdentity] will be set in the
     return value. If identity is null, that bit will never be set in
     the return value. The peer identity may also be used to check for
     pinned certificates (trust exceptions) in the database. These may
     override the normal verification process on a host-by-host basis.
     
-    Currently there are no flags, and [gio.types.TlsDatabaseVerifyFlags.None] should be
+    Currently there are no flags, and [gio.types.TlsDatabaseVerifyFlags.none] should be
     used.
     
     If chain is found to be valid, then the return value will be 0. If
@@ -333,7 +333,7 @@ class TlsDatabase : gobject.object.ObjectG
     least one problem found. If the function is unable to determine
     whether chain is valid (for example, because cancellable is
     triggered before it completes) then the return value will be
-    [gio.types.TlsCertificateFlags.GenericError] and error will be set accordingly.
+    [gio.types.TlsCertificateFlags.genericError] and error will be set accordingly.
     error is not set when chain is successfully analyzed but found to
     be invalid.
     
@@ -341,7 +341,7 @@ class TlsDatabase : gobject.object.ObjectG
     error will be set in the return value, but it does not guarantee
     that all possible errors will be set. Accordingly, you may not safely
     decide to ignore any particular type of error. For example, it would
-    be incorrect to mask [gio.types.TlsCertificateFlags.Expired] if you want to allow
+    be incorrect to mask [gio.types.TlsCertificateFlags.expired] if you want to allow
     expired certificates, because this could potentially be the only
     error flag set even if other problems exist with the certificate.
     
@@ -379,9 +379,9 @@ class TlsDatabase : gobject.object.ObjectG
   gio.types.TlsCertificateFlags verifyChain(gio.tls_certificate.TlsCertificate chain, string purpose, gio.socket_connectable.SocketConnectable identity, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseVerifyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GTlsCertificateFlags _cretval;
-    const(char)* _purpose = purpose.toCString(No.Alloc);
+    const(char)* _purpose = purpose.toCString(No.alloc);
     GError *_err;
-    _cretval = g_tls_database_verify_chain(cast(GTlsDatabase*)cPtr, chain ? cast(GTlsCertificate*)chain.cPtr(No.Dup) : null, _purpose, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.Dup) : null, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_database_verify_chain(cast(GTlsDatabase*)cPtr, chain ? cast(GTlsCertificate*)chain.cPtr(No.dup) : null, _purpose, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.dup) : null, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
@@ -408,13 +408,13 @@ class TlsDatabase : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _purpose = purpose.toCString(No.Alloc);
+    const(char)* _purpose = purpose.toCString(No.alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_tls_database_verify_chain_async(cast(GTlsDatabase*)cPtr, chain ? cast(GTlsCertificate*)chain.cPtr(No.Dup) : null, _purpose, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.Dup) : null, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_tls_database_verify_chain_async(cast(GTlsDatabase*)cPtr, chain ? cast(GTlsCertificate*)chain.cPtr(No.dup) : null, _purpose, identity ? cast(GSocketConnectable*)(cast(ObjectG)identity).cPtr(No.dup) : null, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -426,7 +426,7 @@ class TlsDatabase : gobject.object.ObjectG
     the problems found. If the function is unable to determine whether
     chain is valid or not (eg, because cancellable is triggered
     before it completes) then the return value will be
-    [gio.types.TlsCertificateFlags.GenericError] and error will be set
+    [gio.types.TlsCertificateFlags.genericError] and error will be set
     accordingly. error is not set when chain is successfully analyzed
     but found to be invalid.
     Params:
@@ -438,7 +438,7 @@ class TlsDatabase : gobject.object.ObjectG
   {
     GTlsCertificateFlags _cretval;
     GError *_err;
-    _cretval = g_tls_database_verify_chain_finish(cast(GTlsDatabase*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_database_verify_chain_finish(cast(GTlsDatabase*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;

@@ -13,7 +13,7 @@ import gsk.types;
 class LinearGradientNode : gsk.render_node.RenderNode
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.LinearGradientNode");
@@ -29,7 +29,7 @@ class LinearGradientNode : gsk.render_node.RenderNode
   {
     const(graphene_point_t)* _cretval;
     _cretval = gsk_linear_gradient_node_get_end(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -52,7 +52,7 @@ class LinearGradientNode : gsk.render_node.RenderNode
   {
     const(graphene_point_t)* _cretval;
     _cretval = gsk_linear_gradient_node_get_start(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

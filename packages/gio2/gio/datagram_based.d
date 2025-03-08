@@ -33,21 +33,21 @@ import glib.types;
   for blocking behaviour, zero for non-blocking behaviour, or positive for
   timeout behaviour. A blocking operation blocks until finished or there is an
   error. A non-blocking operation will return immediately with a
-  [gio.types.IOErrorEnum.WouldBlock] error if it cannot make progress. A timeout operation
+  [gio.types.IOErrorEnum.wouldBlock] error if it cannot make progress. A timeout operation
   will block until the operation is complete or the timeout expires; if the
   timeout expires it will return what progress it made, or
-  [gio.types.IOErrorEnum.TimedOut] if no progress was made. To know when a call would
+  [gio.types.IOErrorEnum.timedOut] if no progress was made. To know when a call would
   successfully run you can call [gio.datagram_based.DatagramBased.conditionCheck] or
   [gio.datagram_based.DatagramBased.conditionWait]. You can also use
   [gio.datagram_based.DatagramBased.createSource] and attach it to a [glib.main_context.MainContext]
   to get callbacks when I/O is possible.
   
   When running a non-blocking operation applications should always be able to
-  handle getting a [gio.types.IOErrorEnum.WouldBlock] error even when some other function
+  handle getting a [gio.types.IOErrorEnum.wouldBlock] error even when some other function
   said that I/O was possible. This can easily happen in case of a race
   condition in the application, but it can also happen for other reasons. For
   instance, on Windows a socket is always seen as writable until a write
-  returns [gio.types.IOErrorEnum.WouldBlock].
+  returns [gio.types.IOErrorEnum.wouldBlock].
   
   As with [gio.socket.Socket], [gio.datagram_based.DatagramBased]s can be either connection oriented (for
   example, SCTP) or connectionless (for example, UDP). [gio.datagram_based.DatagramBased]s must be
@@ -75,7 +75,7 @@ interface DatagramBased
     operations specified in condition are checked for and masked against the
     currently-satisfied conditions on datagram_based. The result is returned.
     
-    [glib.types.IOCondition.In] will be set in the return value if data is available to read with
+    [glib.types.IOCondition.in_] will be set in the return value if data is available to read with
     [gio.datagram_based.DatagramBased.receiveMessages], or if the connection is closed remotely
     (EOS); and if the datagram_based has not been closed locally using some
     implementation-specific method (such as [gio.socket.Socket.close] or
@@ -83,26 +83,26 @@ interface DatagramBased
     
     If the connection is shut down or closed (by calling [gio.socket.Socket.close] or
     [gio.socket.Socket.shutdown] with shutdown_read set, if it’s a #GSocket, for
-    example), all calls to this function will return [gio.types.IOErrorEnum.Closed].
+    example), all calls to this function will return [gio.types.IOErrorEnum.closed].
     
-    [glib.types.IOCondition.Out] will be set if it is expected that at least one byte can be sent
+    [glib.types.IOCondition.out_] will be set if it is expected that at least one byte can be sent
     using [gio.datagram_based.DatagramBased.sendMessages] without blocking. It will not be set
     if the datagram_based has been closed locally.
     
-    [glib.types.IOCondition.Hup] will be set if the connection has been closed locally.
+    [glib.types.IOCondition.hup] will be set if the connection has been closed locally.
     
-    [glib.types.IOCondition.Err] will be set if there was an asynchronous error in transmitting data
+    [glib.types.IOCondition.err] will be set if there was an asynchronous error in transmitting data
     previously enqueued using [gio.datagram_based.DatagramBased.sendMessages].
     
     Note that on Windows, it is possible for an operation to return
-    [gio.types.IOErrorEnum.WouldBlock] even immediately after
+    [gio.types.IOErrorEnum.wouldBlock] even immediately after
     [gio.datagram_based.DatagramBased.conditionCheck] has claimed that the #GDatagramBased is
     ready for writing. Rather than calling [gio.datagram_based.DatagramBased.conditionCheck] and
     then writing to the #GDatagramBased if it succeeds, it is generally better to
     simply try writing right away, and try again later if the initial attempt
-    returns [gio.types.IOErrorEnum.WouldBlock].
+    returns [gio.types.IOErrorEnum.wouldBlock].
     
-    It is meaningless to specify [glib.types.IOCondition.Err] or [glib.types.IOCondition.Hup] in condition; these
+    It is meaningless to specify [glib.types.IOCondition.err] or [glib.types.IOCondition.hup] in condition; these
     conditions will always be set in the output if they are true. Apart from
     these flags, the output is guaranteed to be masked by condition.
     
@@ -119,7 +119,7 @@ interface DatagramBased
     
     If cancellable is cancelled before the condition is met, or if timeout is
     reached before the condition is met, then false is returned and error is
-    set appropriately ([gio.types.IOErrorEnum.Cancelled] or [gio.types.IOErrorEnum.TimedOut]).
+    set appropriately ([gio.types.IOErrorEnum.cancelled] or [gio.types.IOErrorEnum.timedOut]).
     Params:
       condition =       a #GIOCondition mask to wait for
       timeout =       the maximum time (in microseconds) to wait, 0 to not block, or -1
@@ -136,7 +136,7 @@ interface DatagramBased
     
     The callback on the source is of the #GDatagramBasedSourceFunc type.
     
-    It is meaningless to specify [glib.types.IOCondition.Err] or [glib.types.IOCondition.Hup] in condition; these
+    It is meaningless to specify [glib.types.IOCondition.err] or [glib.types.IOCondition.hup] in condition; these
     conditions will always be reported in the callback if they are true.
     
     If non-null, cancellable can be used to cancel the source, which will

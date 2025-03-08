@@ -12,7 +12,7 @@ import gid.gid;
 class RecordBatchStream : arrowflight.data_stream.DataStream
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,7 +32,7 @@ class RecordBatchStream : arrowflight.data_stream.DataStream
   this(arrow.record_batch_reader.RecordBatchReader reader, arrow.write_options.WriteOptions options = null)
   {
     GAFlightRecordBatchStream* _cretval;
-    _cretval = gaflight_record_batch_stream_new(reader ? cast(GArrowRecordBatchReader*)reader.cPtr(No.Dup) : null, options ? cast(GArrowWriteOptions*)options.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gaflight_record_batch_stream_new(reader ? cast(GArrowRecordBatchReader*)reader.cPtr(No.dup) : null, options ? cast(GArrowWriteOptions*)options.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 }

@@ -11,7 +11,7 @@ import gobject.object;
 class UnionArray : arrow.array.Array
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class UnionArray : arrow.array.Array
   {
     GArrowArray* _cretval;
     _cretval = garrow_union_array_get_field(cast(GArrowUnionArray*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.take);
     return _retval;
   }
 

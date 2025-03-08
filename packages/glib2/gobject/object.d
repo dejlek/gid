@@ -54,7 +54,7 @@ private shared bool classMapsInitialized;
 string objectGMixin()
 {
   return
-  `  this(void* cObj, Flag!"Take" take = No.Take)
+  `  this(void* cObj, Flag!"take" take = No.take)
   {
     super(cObj, take);
   }
@@ -98,16 +98,16 @@ class ObjectG
   */
   final this(GType type)
   {
-    this(g_object_new(type, null), Yes.Take);
+    this(g_object_new(type, null), Yes.take);
   }
 
   /**
   * Constructor to wrap a C GObject with a D proxy object.
   * Params:
   *   cObj = Pointer to the GObject
-  *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference (default)
+  *   take = Yes.take if the D object should take ownership of the passed reference, No.take to add a new reference (default)
   */
-  final this(void* cObj, Flag!"Take" take = No.Take)
+  final this(void* cObj, Flag!"take" take = No.take)
   {
     if (!cObj)
       throw new GidConstructException("Null instance pointer for " ~ typeid(this).name);
@@ -132,9 +132,9 @@ class ObjectG
   * Set the GObject of a D ObjectG wrapper.
   * Params:
   *   cObj = Pointer to the GObject
-  *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference (default)
+  *   take = Yes.take if the D object should take ownership of the passed reference, No.take to add a new reference (default)
   */
-  final void setGObject(void* cObj, Flag!"Take" take = No.Take)
+  final void setGObject(void* cObj, Flag!"take" take = No.take)
   {
     assert(!cInstancePtr);
 
@@ -174,10 +174,10 @@ class ObjectG
   /**
   * Get a pointer to the underlying C object.
   * Params:
-  *   dup = Yes.Dup to add a reference with g_object_ref(), No.Dup otherwise (default)
+  *   dup = Yes.dup to add a reference with g_object_ref(), No.dup otherwise (default)
   * Returns: The C object (reference added according to addRef parameter)
   */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     if (dup)
       g_object_ref(cInstancePtr);
@@ -231,10 +231,10 @@ class ObjectG
   * Params:
   *   T = The D object type
   *   cInstance = The C GObject (can be null, in which case null is returned)
-  *   take = If Yes.Take then the D object will consume a GObject reference (No.Take by default).
+  *   take = If Yes.take then the D object will consume a GObject reference (No.take by default).
   * Returns: The D object (which may be a new object if the GObject wasn't already wrapped)
   */
-  static T getDObject(T)(void* cptr, Flag!"Take" take = No.Take)
+  static T getDObject(T)(void* cptr, Flag!"take" take = No.take)
   {
     if (!cptr)
       return null;
@@ -341,12 +341,13 @@ class ObjectG
   * Params:
   *   signalDetail = Signal name and optional detail separated by '::'
   *   closure = Closure to connect signal to
-  *   after = Yes.After to invoke the signal after the default handler, No.After to execute before (default)
+  *   after = Yes.after to invoke the signal after the default handler, No.after to execute before (default)
   * Returns: The signal connection ID
   */
-  ulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"After" after = No.After)
+  ulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"after" after = No.after)
   {
-    return g_signal_connect_closure(cInstancePtr, signalDetail.toCString(No.Alloc), cast(GClosure*)(cast(Closure)closure).cPtr, after == Yes.After);
+    return g_signal_connect_closure(cInstancePtr, signalDetail.toCString(No.alloc),
+    cast(GClosure*)(cast(Closure)closure).cPtr, after == Yes.after);
   }
 
   /**
@@ -360,7 +361,7 @@ class ObjectG
     GValue value;
     initVal!T(&value);
     setVal(&value, val);
-    g_object_set_property(cInstancePtr, toCString(propertyName, No.Alloc), &value);
+    g_object_set_property(cInstancePtr, toCString(propertyName, No.alloc), &value);
     g_value_unset(&value);
   }
 
@@ -374,7 +375,7 @@ class ObjectG
   {
     GValue value;
     initVal!T(&value);
-    g_object_get_property(cInstancePtr, toCString(propertyName, No.Alloc), &value);
+    g_object_get_property(cInstancePtr, toCString(propertyName, No.alloc), &value);
     T retval = getVal(&value, val);
     g_value_unset(&value);
     return retval;
@@ -403,7 +404,7 @@ class ObjectG
     updated with the same value of the "active" property of the action #GObject
     instance.
     
-    If flags contains [gobject.types.BindingFlags.Bidirectional] then the binding will be mutual:
+    If flags contains [gobject.types.BindingFlags.bidirectional] then the binding will be mutual:
     if target_property on target changes then the source_property on source
     will be updated as well.
     
@@ -432,10 +433,10 @@ class ObjectG
   gobject.binding.Binding bindProperty(string sourceProperty, gobject.object.ObjectG target, string targetProperty, gobject.types.BindingFlags flags)
   {
     GBinding* _cretval;
-    const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
-    const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
-    _cretval = g_object_bind_property(cast(ObjectC*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _targetProperty, flags);
-    auto _retval = ObjectG.getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.Take);
+    const(char)* _sourceProperty = sourceProperty.toCString(No.alloc);
+    const(char)* _targetProperty = targetProperty.toCString(No.alloc);
+    _cretval = g_object_bind_property(cast(ObjectC*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.dup) : null, _targetProperty, flags);
+    auto _retval = ObjectG.getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.take);
     return _retval;
   }
 
@@ -463,10 +464,10 @@ class ObjectG
   gobject.binding.Binding bindPropertyFull(string sourceProperty, gobject.object.ObjectG target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo, gobject.closure.Closure transformFrom)
   {
     GBinding* _cretval;
-    const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
-    const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
-    _cretval = g_object_bind_property_with_closures(cast(ObjectC*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _targetProperty, flags, transformTo ? cast(GClosure*)transformTo.cPtr(No.Dup) : null, transformFrom ? cast(GClosure*)transformFrom.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.Take);
+    const(char)* _sourceProperty = sourceProperty.toCString(No.alloc);
+    const(char)* _targetProperty = targetProperty.toCString(No.alloc);
+    _cretval = g_object_bind_property_with_closures(cast(ObjectC*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.dup) : null, _targetProperty, flags, transformTo ? cast(GClosure*)transformTo.cPtr(No.dup) : null, transformFrom ? cast(GClosure*)transformFrom.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.take);
     return _retval;
   }
 
@@ -506,7 +507,7 @@ class ObjectG
   */
   void* getData(string key)
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.alloc);
     auto _retval = g_object_get_data(cast(ObjectC*)cPtr, _key);
     return _retval;
   }
@@ -536,8 +537,8 @@ class ObjectG
   */
   void getProperty(string propertyName, gobject.value.Value value)
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    g_object_get_property(cast(ObjectC*)cPtr, _propertyName, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
+    g_object_get_property(cast(ObjectC*)cPtr, _propertyName, value ? cast(GValue*)value.cPtr(No.dup) : null);
   }
 
   /**
@@ -570,7 +571,7 @@ class ObjectG
 
     char*[] _tmpnames;
     foreach (s; names)
-      _tmpnames ~= s.toCString(No.Alloc);
+      _tmpnames ~= s.toCString(No.alloc);
     const(char*)* _names = _tmpnames.ptr;
 
     if (values)
@@ -610,7 +611,7 @@ class ObjectG
   */
   void notify(string propertyName)
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
     g_object_notify(cast(ObjectC*)cPtr, _propertyName);
   }
 
@@ -657,7 +658,7 @@ class ObjectG
   */
   void notifyByPspec(gobject.param_spec.ParamSpec pspec)
   {
-    g_object_notify_by_pspec(cast(ObjectC*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
+    g_object_notify_by_pspec(cast(ObjectC*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.dup) : null);
   }
 
   /**
@@ -678,7 +679,7 @@ class ObjectG
   {
     ObjectC* _cretval;
     _cretval = g_object_ref_sink(cast(ObjectC*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.take);
     return _retval;
   }
 
@@ -710,7 +711,7 @@ class ObjectG
   */
   void setData(string key, void* data = null)
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.alloc);
     g_object_set_data(cast(ObjectC*)cPtr, _key, data);
   }
 
@@ -722,8 +723,8 @@ class ObjectG
   */
   void setProperty(string propertyName, gobject.value.Value value)
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    g_object_set_property(cast(ObjectC*)cPtr, _propertyName, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
+    g_object_set_property(cast(ObjectC*)cPtr, _propertyName, value ? cast(const(GValue)*)value.cPtr(No.dup) : null);
   }
 
   /**
@@ -736,7 +737,7 @@ class ObjectG
   */
   void* stealData(string key)
   {
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.alloc);
     auto _retval = g_object_steal_data(cast(ObjectC*)cPtr, _key);
     return _retval;
   }
@@ -818,7 +819,7 @@ class ObjectG
   */
   void watchClosure(gobject.closure.Closure closure)
   {
-    g_object_watch_closure(cast(ObjectC*)cPtr, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null);
+    g_object_watch_closure(cast(ObjectC*)cPtr, closure ? cast(GClosure*)closure.cPtr(No.dup) : null);
   }
 
   /**
@@ -864,10 +865,10 @@ class ObjectG
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNotify(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  ulong connectNotify(T)(string detail = null, T callback, Flag!"after" after = No.after)
   if (is(T : NotifyCallbackDlg) || is(T : NotifyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -887,7 +888,7 @@ class ObjectG
 /// Interface proxy class - used to wrap unknown GObjects as a specific interface
 abstract class IfaceProxy : ObjectG
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(ptr, take);
   }

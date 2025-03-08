@@ -27,7 +27,7 @@ import secret.types;
   schema is automatically stored as an attribute on the item.
   
   Normally when looking up passwords only those with matching schema names are
-  returned. If the schema @flags contain the [secret.types.SchemaFlags.DontMatchName] flag,
+  returned. If the schema @flags contain the [secret.types.SchemaFlags.dontMatchName] flag,
   then lookups will not check that the schema name matches that on the item, only
   the schema's attributes are matched. This is useful when you are looking up
   items that are not stored by the libsecret library. Other libraries such as
@@ -64,12 +64,12 @@ import secret.types;
 class Schema : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -87,13 +87,13 @@ class Schema : gobject.boxed.Boxed
 
   @property string name()
   {
-    return (cast(SecretSchema*)cPtr).name.fromCString(No.Free);
+    return (cast(SecretSchema*)cPtr).name.fromCString(No.free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(SecretSchema*)cPtr).name);
-    (cast(SecretSchema*)cPtr).name = propval.toCString(Yes.Alloc);
+    (cast(SecretSchema*)cPtr).name = propval.toCString(Yes.alloc);
   }
 
   @property secret.types.SchemaFlags flags()

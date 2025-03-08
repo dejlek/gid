@@ -14,7 +14,7 @@ class EventKey
 {
   GdkEventKey cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventKey");
@@ -42,7 +42,7 @@ class EventKey
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventKey*)cPtr).window, No.Take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventKey*)cPtr).window, No.take);
   }
 
   @property byte sendEvent()
@@ -97,13 +97,13 @@ class EventKey
 
   @property string string_()
   {
-    return (cast(GdkEventKey*)cPtr).string_.fromCString(No.Free);
+    return (cast(GdkEventKey*)cPtr).string_.fromCString(No.free);
   }
 
   @property void string_(string propval)
   {
     safeFree(cast(void*)(cast(GdkEventKey*)cPtr).string_);
-    (cast(GdkEventKey*)cPtr).string_ = propval.toCString(Yes.Alloc);
+    (cast(GdkEventKey*)cPtr).string_ = propval.toCString(Yes.alloc);
   }
 
   @property ushort hardwareKeycode()

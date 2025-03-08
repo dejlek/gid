@@ -16,7 +16,7 @@ import gobject.object;
 class StateSet : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class StateSet : gobject.object.ObjectG
   {
     AtkStateSet* _cretval;
     _cretval = atk_state_set_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -93,8 +93,8 @@ class StateSet : gobject.object.ObjectG
   atk.state_set.StateSet andSets(atk.state_set.StateSet compareSet)
   {
     AtkStateSet* _cretval;
-    _cretval = atk_state_set_and_sets(cast(AtkStateSet*)cPtr, compareSet ? cast(AtkStateSet*)compareSet.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
+    _cretval = atk_state_set_and_sets(cast(AtkStateSet*)cPtr, compareSet ? cast(AtkStateSet*)compareSet.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -159,8 +159,8 @@ class StateSet : gobject.object.ObjectG
   atk.state_set.StateSet orSets(atk.state_set.StateSet compareSet)
   {
     AtkStateSet* _cretval;
-    _cretval = atk_state_set_or_sets(cast(AtkStateSet*)cPtr, compareSet ? cast(AtkStateSet*)compareSet.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
+    _cretval = atk_state_set_or_sets(cast(AtkStateSet*)cPtr, compareSet ? cast(AtkStateSet*)compareSet.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -194,8 +194,8 @@ class StateSet : gobject.object.ObjectG
   atk.state_set.StateSet xorSets(atk.state_set.StateSet compareSet)
   {
     AtkStateSet* _cretval;
-    _cretval = atk_state_set_xor_sets(cast(AtkStateSet*)cPtr, compareSet ? cast(AtkStateSet*)compareSet.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
+    _cretval = atk_state_set_xor_sets(cast(AtkStateSet*)cPtr, compareSet ? cast(AtkStateSet*)compareSet.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.take);
     return _retval;
   }
 }

@@ -14,12 +14,12 @@ import gstvideo.types;
 class VideoOverlayRectangle : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -62,8 +62,8 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   static gstvideo.video_overlay_rectangle.VideoOverlayRectangle newRaw(gst.buffer.Buffer pixels, int renderX, int renderY, uint renderWidth, uint renderHeight, gstvideo.types.VideoOverlayFormatFlags flags)
   {
     GstVideoOverlayRectangle* _cretval;
-    _cretval = gst_video_overlay_rectangle_new_raw(pixels ? cast(GstBuffer*)pixels.cPtr(No.Dup) : null, renderX, renderY, renderWidth, renderHeight, flags);
-    auto _retval = _cretval ? new gstvideo.video_overlay_rectangle.VideoOverlayRectangle(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_video_overlay_rectangle_new_raw(pixels ? cast(GstBuffer*)pixels.cPtr(No.dup) : null, renderX, renderY, renderWidth, renderHeight, flags);
+    auto _retval = _cretval ? new gstvideo.video_overlay_rectangle.VideoOverlayRectangle(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   {
     GstVideoOverlayRectangle* _cretval;
     _cretval = gst_video_overlay_rectangle_copy(cast(GstVideoOverlayRectangle*)cPtr);
-    auto _retval = _cretval ? new gstvideo.video_overlay_rectangle.VideoOverlayRectangle(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gstvideo.video_overlay_rectangle.VideoOverlayRectangle(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   {
     GstBuffer* _cretval;
     _cretval = gst_video_overlay_rectangle_get_pixels_argb(cast(GstVideoOverlayRectangle*)cPtr, flags);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   {
     GstBuffer* _cretval;
     _cretval = gst_video_overlay_rectangle_get_pixels_ayuv(cast(GstVideoOverlayRectangle*)cPtr, flags);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   {
     GstBuffer* _cretval;
     _cretval = gst_video_overlay_rectangle_get_pixels_raw(cast(GstVideoOverlayRectangle*)cPtr, flags);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   {
     GstBuffer* _cretval;
     _cretval = gst_video_overlay_rectangle_get_pixels_unscaled_argb(cast(GstVideoOverlayRectangle*)cPtr, flags);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   {
     GstBuffer* _cretval;
     _cretval = gst_video_overlay_rectangle_get_pixels_unscaled_ayuv(cast(GstVideoOverlayRectangle*)cPtr, flags);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   {
     GstBuffer* _cretval;
     _cretval = gst_video_overlay_rectangle_get_pixels_unscaled_raw(cast(GstVideoOverlayRectangle*)cPtr, flags);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 

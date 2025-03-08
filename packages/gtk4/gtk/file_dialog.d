@@ -29,7 +29,7 @@ import gtk.window;
 class FileDialog : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -53,7 +53,7 @@ class FileDialog : gobject.object.ObjectG
   {
     GtkFileDialog* _cretval;
     _cretval = gtk_file_dialog_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */
@@ -61,7 +61,7 @@ class FileDialog : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_file_dialog_get_accept_label(cast(GtkFileDialog*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class FileDialog : gobject.object.ObjectG
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_dialog_get_default_filter(cast(GtkFileDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.take);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class FileDialog : gobject.object.ObjectG
   {
     GListModel* _cretval;
     _cretval = gtk_file_dialog_get_filters(cast(GtkFileDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.take);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class FileDialog : gobject.object.ObjectG
   {
     GFile* _cretval;
     _cretval = gtk_file_dialog_get_initial_file(cast(GtkFileDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.take);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class FileDialog : gobject.object.ObjectG
   {
     GFile* _cretval;
     _cretval = gtk_file_dialog_get_initial_folder(cast(GtkFileDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.take);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class FileDialog : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_file_dialog_get_initial_name(cast(GtkFileDialog*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class FileDialog : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_file_dialog_get_title(cast(GtkFileDialog*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -175,12 +175,12 @@ class FileDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_file_dialog_open(cast(GtkFileDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_file_dialog_open(cast(GtkFileDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -195,10 +195,10 @@ class FileDialog : gobject.object.ObjectG
   {
     GFile* _cretval;
     GError *_err;
-    _cretval = gtk_file_dialog_open_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_file_dialog_open_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -224,12 +224,12 @@ class FileDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_file_dialog_open_multiple(cast(GtkFileDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_file_dialog_open_multiple(cast(GtkFileDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -245,10 +245,10 @@ class FileDialog : gobject.object.ObjectG
   {
     GListModel* _cretval;
     GError *_err;
-    _cretval = gtk_file_dialog_open_multiple_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_file_dialog_open_multiple_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -271,12 +271,12 @@ class FileDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_file_dialog_save(cast(GtkFileDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_file_dialog_save(cast(GtkFileDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -291,10 +291,10 @@ class FileDialog : gobject.object.ObjectG
   {
     GFile* _cretval;
     GError *_err;
-    _cretval = gtk_file_dialog_save_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_file_dialog_save_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -321,12 +321,12 @@ class FileDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_file_dialog_select_folder(cast(GtkFileDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_file_dialog_select_folder(cast(GtkFileDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -341,10 +341,10 @@ class FileDialog : gobject.object.ObjectG
   {
     GFile* _cretval;
     GError *_err;
-    _cretval = gtk_file_dialog_select_folder_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_file_dialog_select_folder_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -370,12 +370,12 @@ class FileDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_file_dialog_select_multiple_folders(cast(GtkFileDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_file_dialog_select_multiple_folders(cast(GtkFileDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -391,10 +391,10 @@ class FileDialog : gobject.object.ObjectG
   {
     GListModel* _cretval;
     GError *_err;
-    _cretval = gtk_file_dialog_select_multiple_folders_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_file_dialog_select_multiple_folders_finish(cast(GtkFileDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -408,7 +408,7 @@ class FileDialog : gobject.object.ObjectG
   */
   void setAcceptLabel(string acceptLabel = null)
   {
-    const(char)* _acceptLabel = acceptLabel.toCString(No.Alloc);
+    const(char)* _acceptLabel = acceptLabel.toCString(No.alloc);
     gtk_file_dialog_set_accept_label(cast(GtkFileDialog*)cPtr, _acceptLabel);
   }
 
@@ -424,7 +424,7 @@ class FileDialog : gobject.object.ObjectG
   */
   void setDefaultFilter(gtk.file_filter.FileFilter filter = null)
   {
-    gtk_file_dialog_set_default_filter(cast(GtkFileDialog*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.Dup) : null);
+    gtk_file_dialog_set_default_filter(cast(GtkFileDialog*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.dup) : null);
   }
 
   /**
@@ -435,7 +435,7 @@ class FileDialog : gobject.object.ObjectG
   */
   void setFilters(gio.list_model.ListModel filters = null)
   {
-    gtk_file_dialog_set_filters(cast(GtkFileDialog*)cPtr, filters ? cast(GListModel*)(cast(ObjectG)filters).cPtr(No.Dup) : null);
+    gtk_file_dialog_set_filters(cast(GtkFileDialog*)cPtr, filters ? cast(GListModel*)(cast(ObjectG)filters).cPtr(No.dup) : null);
   }
 
   /**
@@ -451,7 +451,7 @@ class FileDialog : gobject.object.ObjectG
   */
   void setInitialFile(gio.file.File file = null)
   {
-    gtk_file_dialog_set_initial_file(cast(GtkFileDialog*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    gtk_file_dialog_set_initial_file(cast(GtkFileDialog*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null);
   }
 
   /**
@@ -462,7 +462,7 @@ class FileDialog : gobject.object.ObjectG
   */
   void setInitialFolder(gio.file.File folder = null)
   {
-    gtk_file_dialog_set_initial_folder(cast(GtkFileDialog*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(No.Dup) : null);
+    gtk_file_dialog_set_initial_folder(cast(GtkFileDialog*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(No.dup) : null);
   }
 
   /**
@@ -476,7 +476,7 @@ class FileDialog : gobject.object.ObjectG
   */
   void setInitialName(string name = null)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gtk_file_dialog_set_initial_name(cast(GtkFileDialog*)cPtr, _name);
   }
 
@@ -500,7 +500,7 @@ class FileDialog : gobject.object.ObjectG
   */
   void setTitle(string title)
   {
-    const(char)* _title = title.toCString(No.Alloc);
+    const(char)* _title = title.toCString(No.alloc);
     gtk_file_dialog_set_title(cast(GtkFileDialog*)cPtr, _title);
   }
 }

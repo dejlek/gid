@@ -15,14 +15,14 @@ enum GdkColorspace
   /**
       Indicates a red/green/blue additive color space.
   */
-  Rgb = 0,
+  rgb = 0,
 }
 
 /**
     Interpolation modes for scaling functions.
   
-  The [gdkpixbuf.types.InterpType.Nearest] mode is the fastest scaling method, but has
-  horrible quality when scaling down; [gdkpixbuf.types.InterpType.Bilinear] is the best
+  The [gdkpixbuf.types.InterpType.nearest] mode is the fastest scaling method, but has
+  horrible quality when scaling down; [gdkpixbuf.types.InterpType.bilinear] is the best
   choice if you aren't sure what to choose, it has a good speed/quality
   balance.
   
@@ -36,7 +36,7 @@ enum GdkInterpType
      and lowest quality mode. Quality is normally unacceptable when scaling
      down, but may be OK when scaling up.
   */
-  Nearest = 0,
+  nearest = 0,
 
   /**
       This is an accurate simulation of the PostScript
@@ -45,7 +45,7 @@ enum GdkInterpType
      are implemented with antialiasing.  It resembles nearest neighbor for
      enlargement, and bilinear for reduction.
   */
-  Tiles = 1,
+  tiles = 1,
 
   /**
       Best quality/speed balance; use this mode by
@@ -54,7 +54,7 @@ enum GdkInterpType
      For reduction, it is equivalent to laying down small tiles and
      integrating over the coverage area.
   */
-  Bilinear = 2,
+  bilinear = 2,
 
   /**
       This is the slowest and highest quality
@@ -66,7 +66,7 @@ enum GdkInterpType
      it has a lower quality than the @GDK_INTERP_BILINEAR filter
      (Since: 2.38)
   */
-  Hyper = 3,
+  hyper = 3,
 }
 
 /**
@@ -95,13 +95,13 @@ enum GdkPixbufAlphaMode
      will be considered fully transparent, and all others will be
      considered fully opaque.
   */
-  Bilevel = 0,
+  bilevel = 0,
 
   /**
       For now falls back to #GDK_PIXBUF_ALPHA_BILEVEL.
      In the future it will do full alpha compositing.
   */
-  Full = 1,
+  full = 1,
 }
 
 /**
@@ -115,38 +115,38 @@ enum GdkPixbufError
   /**
       An image file was broken somehow.
   */
-  CorruptImage = 0,
+  corruptImage = 0,
 
   /**
       Not enough memory.
   */
-  InsufficientMemory = 1,
+  insufficientMemory = 1,
 
   /**
       A bad option was passed to a pixbuf save module.
   */
-  BadOption = 2,
+  badOption = 2,
 
   /**
       Unknown image type.
   */
-  UnknownType = 3,
+  unknownType = 3,
 
   /**
       Don't know how to perform the
      given operation on the type of image at hand.
   */
-  UnsupportedOperation = 4,
+  unsupportedOperation = 4,
 
   /**
       Generic failure code, something went wrong.
   */
-  Failed = 5,
+  failed = 5,
 
   /**
       Only part of the animation was loaded.
   */
-  IncompleteAnimation = 6,
+  incompleteAnimation = 6,
 }
 
 /**
@@ -158,18 +158,18 @@ enum GdkPixbufFormatFlags : uint
   /**
       the module can write out images in the format.
   */
-  Writable = 1,
+  writable = 1,
 
   /**
       the image format is scalable
   */
-  Scalable = 2,
+  scalable = 2,
 
   /**
       the module is threadsafe. gdk-pixbuf
         ignores modules that are not marked as threadsafe. (Since 2.28).
   */
-  Threadsafe = 4,
+  threadsafe = 4,
 }
 
 /**
@@ -182,22 +182,22 @@ enum GdkPixbufRotation
   /**
       No rotation.
   */
-  None = 0,
+  none = 0,
 
   /**
       Rotate by 90 degrees.
   */
-  Counterclockwise = 90,
+  counterclockwise = 90,
 
   /**
       Rotate by 180 degrees.
   */
-  Upsidedown = 180,
+  upsidedown = 180,
 
   /**
       Rotate by 270 degrees.
   */
-  Clockwise = 270,
+  clockwise = 270,
 }
 
 /**

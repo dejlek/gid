@@ -54,7 +54,7 @@ import gtk.widget;
 class CellRenderer : gobject.initially_unowned.InitiallyUnowned
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -87,8 +87,8 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   bool activate(gdk.event.Event event, gtk.widget.Widget widget, string path, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags)
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.Alloc);
-    _retval = gtk_cell_renderer_activate(cast(GtkCellRenderer*)cPtr, event ? cast(GdkEvent*)event.cPtr : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _path, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.Dup) : null, flags);
+    const(char)* _path = path.toCString(No.alloc);
+    _retval = gtk_cell_renderer_activate(cast(GtkCellRenderer*)cPtr, event ? cast(GdkEvent*)event.cPtr : null, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _path, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea.cPtr(No.dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.dup) : null, flags);
     return _retval;
   }
 
@@ -105,8 +105,8 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   void getAlignedArea(gtk.widget.Widget widget, gtk.types.CellRendererState flags, gdk.rectangle.Rectangle cellArea, out gdk.rectangle.Rectangle alignedArea)
   {
     GdkRectangle _alignedArea;
-    gtk_cell_renderer_get_aligned_area(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, flags, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.Dup) : null, &_alignedArea);
-    alignedArea = new gdk.rectangle.Rectangle(cast(void*)&_alignedArea, No.Take);
+    gtk_cell_renderer_get_aligned_area(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, flags, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.dup) : null, &_alignedArea);
+    alignedArea = new gdk.rectangle.Rectangle(cast(void*)&_alignedArea, No.take);
   }
 
   /**
@@ -151,7 +151,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void getPreferredHeight(gtk.widget.Widget widget, out int minimumSize, out int naturalSize)
   {
-    gtk_cell_renderer_get_preferred_height(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cast(int*)&minimumSize, cast(int*)&naturalSize);
+    gtk_cell_renderer_get_preferred_height(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, cast(int*)&minimumSize, cast(int*)&naturalSize);
   }
 
   /**
@@ -165,7 +165,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void getPreferredHeightForWidth(gtk.widget.Widget widget, int width, out int minimumHeight, out int naturalHeight)
   {
-    gtk_cell_renderer_get_preferred_height_for_width(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
+    gtk_cell_renderer_get_preferred_height_for_width(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
 
   /**
@@ -180,9 +180,9 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   {
     GtkRequisition _minimumSize;
     GtkRequisition _naturalSize;
-    gtk_cell_renderer_get_preferred_size(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, &_minimumSize, &_naturalSize);
-    minimumSize = new gtk.requisition.Requisition(cast(void*)&_minimumSize, No.Take);
-    naturalSize = new gtk.requisition.Requisition(cast(void*)&_naturalSize, No.Take);
+    gtk_cell_renderer_get_preferred_size(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, &_minimumSize, &_naturalSize);
+    minimumSize = new gtk.requisition.Requisition(cast(void*)&_minimumSize, No.take);
+    naturalSize = new gtk.requisition.Requisition(cast(void*)&_naturalSize, No.take);
   }
 
   /**
@@ -194,7 +194,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void getPreferredWidth(gtk.widget.Widget widget, out int minimumSize, out int naturalSize)
   {
-    gtk_cell_renderer_get_preferred_width(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cast(int*)&minimumSize, cast(int*)&naturalSize);
+    gtk_cell_renderer_get_preferred_width(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, cast(int*)&minimumSize, cast(int*)&naturalSize);
   }
 
   /**
@@ -208,7 +208,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void getPreferredWidthForHeight(gtk.widget.Widget widget, int height, out int minimumWidth, out int naturalWidth)
   {
-    gtk_cell_renderer_get_preferred_width_for_height(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
+    gtk_cell_renderer_get_preferred_width_for_height(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
 
   /**
@@ -255,7 +255,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void getSize(gtk.widget.Widget widget, gdk.rectangle.Rectangle cellArea, out int xOffset, out int yOffset, out int width, out int height)
   {
-    gtk_cell_renderer_get_size(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.Dup) : null, cast(int*)&xOffset, cast(int*)&yOffset, cast(int*)&width, cast(int*)&height);
+    gtk_cell_renderer_get_size(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.dup) : null, cast(int*)&xOffset, cast(int*)&yOffset, cast(int*)&width, cast(int*)&height);
   }
 
   /**
@@ -270,7 +270,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   gtk.types.StateFlags getState(gtk.widget.Widget widget, gtk.types.CellRendererState cellState)
   {
     GtkStateFlags _cretval;
-    _cretval = gtk_cell_renderer_get_state(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cellState);
+    _cretval = gtk_cell_renderer_get_state(cast(GtkCellRenderer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, cellState);
     gtk.types.StateFlags _retval = cast(gtk.types.StateFlags)_cretval;
     return _retval;
   }
@@ -315,7 +315,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void render(cairo.context.Context cr, gtk.widget.Widget widget, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags)
   {
-    gtk_cell_renderer_render(cast(GtkCellRenderer*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.Dup) : null, flags);
+    gtk_cell_renderer_render(cast(GtkCellRenderer*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea.cPtr(No.dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.dup) : null, flags);
   }
 
   /**
@@ -388,9 +388,9 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   gtk.cell_editable.CellEditable startEditing(gdk.event.Event event, gtk.widget.Widget widget, string path, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags)
   {
     GtkCellEditable* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
-    _cretval = gtk_cell_renderer_start_editing(cast(GtkCellRenderer*)cPtr, event ? cast(GdkEvent*)event.cPtr : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _path, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.Dup) : null, flags);
-    auto _retval = ObjectG.getDObject!(gtk.cell_editable.CellEditable)(cast(GtkCellEditable*)_cretval, No.Take);
+    const(char)* _path = path.toCString(No.alloc);
+    _cretval = gtk_cell_renderer_start_editing(cast(GtkCellRenderer*)cPtr, event ? cast(GdkEvent*)event.cPtr : null, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _path, backgroundArea ? cast(const(GdkRectangle)*)backgroundArea.cPtr(No.dup) : null, cellArea ? cast(const(GdkRectangle)*)cellArea.cPtr(No.dup) : null, flags);
+    auto _retval = ObjectG.getDObject!(gtk.cell_editable.CellEditable)(cast(GtkCellEditable*)_cretval, No.take);
     return _retval;
   }
 
@@ -431,10 +431,10 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
     Connect to EditingCanceled signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEditingCanceled(T)(T callback, Flag!"After" after = No.After)
+  ulong connectEditingCanceled(T)(T callback, Flag!"after" after = No.after)
   if (is(T : EditingCanceledCallbackDlg) || is(T : EditingCanceledCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -496,10 +496,10 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
     Connect to EditingStarted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEditingStarted(T)(T callback, Flag!"After" after = No.After)
+  ulong connectEditingStarted(T)(T callback, Flag!"after" after = No.after)
   if (is(T : EditingStartedCallbackDlg) || is(T : EditingStartedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

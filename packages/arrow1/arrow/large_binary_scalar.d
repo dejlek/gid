@@ -11,7 +11,7 @@ import gid.gid;
 class LargeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class LargeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
   this(arrow.buffer.Buffer value)
   {
     GArrowLargeBinaryScalar* _cretval;
-    _cretval = garrow_large_binary_scalar_new(value ? cast(GArrowBuffer*)value.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_large_binary_scalar_new(value ? cast(GArrowBuffer*)value.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 }

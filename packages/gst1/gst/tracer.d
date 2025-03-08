@@ -17,7 +17,7 @@ import gst.types;
 class Tracer : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -45,8 +45,8 @@ class Tracer : gst.object.ObjectGst
   static bool register(gst.plugin.Plugin plugin, string name, gobject.types.GType type)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_tracer_register(plugin ? cast(GstPlugin*)plugin.cPtr(No.Dup) : null, _name, type);
+    const(char)* _name = name.toCString(No.alloc);
+    _retval = gst_tracer_register(plugin ? cast(GstPlugin*)plugin.cPtr(No.dup) : null, _name, type);
     return _retval;
   }
 }

@@ -14,7 +14,7 @@ import gst.types;
 class PluginFeature : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -112,7 +112,7 @@ class PluginFeature : gst.object.ObjectGst
   {
     GstPlugin* _cretval;
     _cretval = gst_plugin_feature_get_plugin(cast(GstPluginFeature*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class PluginFeature : gst.object.ObjectGst
   {
     const(char)* _cretval;
     _cretval = gst_plugin_feature_get_plugin_name(cast(GstPluginFeature*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class PluginFeature : gst.object.ObjectGst
   {
     GstPluginFeature* _cretval;
     _cretval = gst_plugin_feature_load(cast(GstPluginFeature*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.take);
     return _retval;
   }
 

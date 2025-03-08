@@ -18,7 +18,7 @@ import gtksource.types;
 class CompletionSnippets : gobject.object.ObjectG, gtksource.completion_provider.CompletionProvider
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,6 +41,6 @@ class CompletionSnippets : gobject.object.ObjectG, gtksource.completion_provider
   {
     GtkSourceCompletionSnippets* _cretval;
     _cretval = gtk_source_completion_snippets_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

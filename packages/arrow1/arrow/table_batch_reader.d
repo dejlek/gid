@@ -11,7 +11,7 @@ import gid.gid;
 class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,8 +31,8 @@ class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
   this(arrow.table.Table table)
   {
     GArrowTableBatchReader* _cretval;
-    _cretval = garrow_table_batch_reader_new(table ? cast(GArrowTable*)table.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_table_batch_reader_new(table ? cast(GArrowTable*)table.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**

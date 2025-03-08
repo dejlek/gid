@@ -25,7 +25,7 @@ import gtksource.types;
 class Hover : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -44,12 +44,12 @@ class Hover : gobject.object.ObjectG
   /** */
   void addProvider(gtksource.hover_provider.HoverProvider provider)
   {
-    gtk_source_hover_add_provider(cast(GtkSourceHover*)cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_source_hover_add_provider(cast(GtkSourceHover*)cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(ObjectG)provider).cPtr(No.dup) : null);
   }
 
   /** */
   void removeProvider(gtksource.hover_provider.HoverProvider provider)
   {
-    gtk_source_hover_remove_provider(cast(GtkSourceHover*)cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_source_hover_remove_provider(cast(GtkSourceHover*)cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(ObjectG)provider).cPtr(No.dup) : null);
   }
 }

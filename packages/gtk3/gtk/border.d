@@ -13,12 +13,12 @@ import gtk.types;
 class Border : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -83,7 +83,7 @@ class Border : gobject.boxed.Boxed
   {
     GtkBorder* _cretval;
     _cretval = gtk_border_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -94,7 +94,7 @@ class Border : gobject.boxed.Boxed
   {
     GtkBorder* _cretval;
     _cretval = gtk_border_copy(cast(const(GtkBorder)*)cPtr);
-    auto _retval = _cretval ? new gtk.border.Border(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtk.border.Border(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

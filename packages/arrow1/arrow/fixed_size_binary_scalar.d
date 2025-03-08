@@ -12,7 +12,7 @@ import gid.gid;
 class FixedSizeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,7 +32,7 @@ class FixedSizeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
   this(arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType dataType, arrow.buffer.Buffer value)
   {
     GArrowFixedSizeBinaryScalar* _cretval;
-    _cretval = garrow_fixed_size_binary_scalar_new(dataType ? cast(GArrowFixedSizeBinaryDataType*)dataType.cPtr(No.Dup) : null, value ? cast(GArrowBuffer*)value.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_fixed_size_binary_scalar_new(dataType ? cast(GArrowFixedSizeBinaryDataType*)dataType.cPtr(No.dup) : null, value ? cast(GArrowBuffer*)value.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 }

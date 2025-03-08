@@ -11,7 +11,7 @@ import glib.error;
 class UInt64ArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,7 +32,7 @@ class UInt64ArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     GArrowUInt64ArrayBuilder* _cretval;
     _cretval = garrow_uint64_array_builder_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */

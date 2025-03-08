@@ -13,12 +13,12 @@ import gobject.boxed;
 class Dir : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -49,12 +49,12 @@ class Dir : gobject.boxed.Boxed
   static glib.dir.Dir open(string path, uint flags)
   {
     GDir* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     GError *_err;
     _cretval = g_dir_open(_path, flags, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.dir.Dir(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.dir.Dir(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class Dir : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_dir_read_name(cast(GDir*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -116,12 +116,12 @@ class Dir : gobject.boxed.Boxed
   static string makeTmp(string tmpl = null)
   {
     char* _cretval;
-    const(char)* _tmpl = tmpl.toCString(No.Alloc);
+    const(char)* _tmpl = tmpl.toCString(No.alloc);
     GError *_err;
     _cretval = g_dir_make_tmp(_tmpl, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

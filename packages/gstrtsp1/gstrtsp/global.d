@@ -16,7 +16,7 @@ import gstrtsp.types;
 */
 void rtspAuthCredentialsFree(gstrtsp.rtspauth_credential.RTSPAuthCredential credentials)
 {
-  gst_rtsp_auth_credentials_free(credentials ? cast(GstRTSPAuthCredential**)credentials.cPtr(No.Dup) : null);
+  gst_rtsp_auth_credentials_free(credentials ? cast(GstRTSPAuthCredential**)credentials.cPtr(No.dup) : null);
 }
 
 /**
@@ -29,7 +29,7 @@ void rtspAuthCredentialsFree(gstrtsp.rtspauth_credential.RTSPAuthCredential cred
 gstrtsp.types.RTSPHeaderField rtspFindHeaderField(string header)
 {
   GstRTSPHeaderField _cretval;
-  const(char)* _header = header.toCString(No.Alloc);
+  const(char)* _header = header.toCString(No.alloc);
   _cretval = gst_rtsp_find_header_field(_header);
   gstrtsp.types.RTSPHeaderField _retval = cast(gstrtsp.types.RTSPHeaderField)_cretval;
   return _retval;
@@ -45,7 +45,7 @@ gstrtsp.types.RTSPHeaderField rtspFindHeaderField(string header)
 gstrtsp.types.RTSPMethod rtspFindMethod(string method)
 {
   GstRTSPMethod _cretval;
-  const(char)* _method = method.toCString(No.Alloc);
+  const(char)* _method = method.toCString(No.alloc);
   _cretval = gst_rtsp_find_method(_method);
   gstrtsp.types.RTSPMethod _retval = cast(gstrtsp.types.RTSPMethod)_cretval;
   return _retval;
@@ -69,15 +69,15 @@ gstrtsp.types.RTSPMethod rtspFindMethod(string method)
 string rtspGenerateDigestAuthResponse(string algorithm, string method, string realm, string username, string password, string uri, string nonce)
 {
   char* _cretval;
-  const(char)* _algorithm = algorithm.toCString(No.Alloc);
-  const(char)* _method = method.toCString(No.Alloc);
-  const(char)* _realm = realm.toCString(No.Alloc);
-  const(char)* _username = username.toCString(No.Alloc);
-  const(char)* _password = password.toCString(No.Alloc);
-  const(char)* _uri = uri.toCString(No.Alloc);
-  const(char)* _nonce = nonce.toCString(No.Alloc);
+  const(char)* _algorithm = algorithm.toCString(No.alloc);
+  const(char)* _method = method.toCString(No.alloc);
+  const(char)* _realm = realm.toCString(No.alloc);
+  const(char)* _username = username.toCString(No.alloc);
+  const(char)* _password = password.toCString(No.alloc);
+  const(char)* _uri = uri.toCString(No.alloc);
+  const(char)* _nonce = nonce.toCString(No.alloc);
   _cretval = gst_rtsp_generate_digest_auth_response(_algorithm, _method, _realm, _username, _password, _uri, _nonce);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
   return _retval;
 }
 
@@ -100,13 +100,13 @@ string rtspGenerateDigestAuthResponse(string algorithm, string method, string re
 string rtspGenerateDigestAuthResponseFromMd5(string algorithm, string method, string md5, string uri, string nonce)
 {
   char* _cretval;
-  const(char)* _algorithm = algorithm.toCString(No.Alloc);
-  const(char)* _method = method.toCString(No.Alloc);
-  const(char)* _md5 = md5.toCString(No.Alloc);
-  const(char)* _uri = uri.toCString(No.Alloc);
-  const(char)* _nonce = nonce.toCString(No.Alloc);
+  const(char)* _algorithm = algorithm.toCString(No.alloc);
+  const(char)* _method = method.toCString(No.alloc);
+  const(char)* _md5 = md5.toCString(No.alloc);
+  const(char)* _uri = uri.toCString(No.alloc);
+  const(char)* _nonce = nonce.toCString(No.alloc);
   _cretval = gst_rtsp_generate_digest_auth_response_from_md5(_algorithm, _method, _md5, _uri, _nonce);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
   return _retval;
 }
 
@@ -133,7 +133,7 @@ string rtspHeaderAsText(gstrtsp.types.RTSPHeaderField field)
 {
   const(char)* _cretval;
   _cretval = gst_rtsp_header_as_text(field);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
   return _retval;
 }
 
@@ -149,7 +149,7 @@ gstrtsp.types.RTSPResult rtspMessageNew(out gstrtsp.rtspmessage.RTSPMessage msg)
   GstRTSPMessage* _msg;
   _cretval = gst_rtsp_message_new(&_msg);
   gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-  msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.Take);
+  msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.take);
   return _retval;
 }
 
@@ -167,7 +167,7 @@ gstrtsp.types.RTSPResult rtspMessageNewData(out gstrtsp.rtspmessage.RTSPMessage 
   GstRTSPMessage* _msg;
   _cretval = gst_rtsp_message_new_data(&_msg, channel);
   gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-  msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.Take);
+  msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.take);
   return _retval;
 }
 
@@ -184,10 +184,10 @@ gstrtsp.types.RTSPResult rtspMessageNewRequest(out gstrtsp.rtspmessage.RTSPMessa
 {
   GstRTSPResult _cretval;
   GstRTSPMessage* _msg;
-  const(char)* _uri = uri.toCString(No.Alloc);
+  const(char)* _uri = uri.toCString(No.alloc);
   _cretval = gst_rtsp_message_new_request(&_msg, method, _uri);
   gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-  msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.Take);
+  msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.take);
   return _retval;
 }
 
@@ -210,10 +210,10 @@ gstrtsp.types.RTSPResult rtspMessageNewResponse(out gstrtsp.rtspmessage.RTSPMess
 {
   GstRTSPResult _cretval;
   GstRTSPMessage* _msg;
-  const(char)* _reason = reason.toCString(No.Alloc);
-  _cretval = gst_rtsp_message_new_response(&_msg, code, _reason, request ? cast(const(GstRTSPMessage)*)request.cPtr(No.Dup) : null);
+  const(char)* _reason = reason.toCString(No.alloc);
+  _cretval = gst_rtsp_message_new_response(&_msg, code, _reason, request ? cast(const(GstRTSPMessage)*)request.cPtr(No.dup) : null);
   gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-  msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.Take);
+  msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.take);
   return _retval;
 }
 
@@ -227,7 +227,7 @@ string rtspOptionsAsText(gstrtsp.types.RTSPMethod options)
 {
   char* _cretval;
   _cretval = gst_rtsp_options_as_text(options);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
   return _retval;
 }
 
@@ -241,7 +241,7 @@ string rtspOptionsAsText(gstrtsp.types.RTSPMethod options)
 gstrtsp.types.RTSPMethod rtspOptionsFromText(string options)
 {
   GstRTSPMethod _cretval;
-  const(char)* _options = options.toCString(No.Alloc);
+  const(char)* _options = options.toCString(No.alloc);
   _cretval = gst_rtsp_options_from_text(_options);
   gstrtsp.types.RTSPMethod _retval = cast(gstrtsp.types.RTSPMethod)_cretval;
   return _retval;
@@ -257,7 +257,7 @@ string rtspStatusAsText(gstrtsp.types.RTSPStatusCode code)
 {
   const(char)* _cretval;
   _cretval = gst_rtsp_status_as_text(code);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
   return _retval;
 }
 
@@ -271,6 +271,6 @@ string rtspStrresult(gstrtsp.types.RTSPResult result)
 {
   char* _cretval;
   _cretval = gst_rtsp_strresult(result);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
   return _retval;
 }

@@ -19,15 +19,15 @@ class PixbufFormat : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GdkPixbufFormat.sizeof), Yes.Take);
+    super(safeMalloc(GdkPixbufFormat.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -45,13 +45,13 @@ class PixbufFormat : gobject.boxed.Boxed
 
   @property string name()
   {
-    return (cast(GdkPixbufFormat*)cPtr).name.fromCString(No.Free);
+    return (cast(GdkPixbufFormat*)cPtr).name.fromCString(No.free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(GdkPixbufFormat*)cPtr).name);
-    (cast(GdkPixbufFormat*)cPtr).name = propval.toCString(Yes.Alloc);
+    (cast(GdkPixbufFormat*)cPtr).name = propval.toCString(Yes.alloc);
   }
 
   @property gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern signature()
@@ -61,24 +61,24 @@ class PixbufFormat : gobject.boxed.Boxed
 
   @property string domain()
   {
-    return (cast(GdkPixbufFormat*)cPtr).domain.fromCString(No.Free);
+    return (cast(GdkPixbufFormat*)cPtr).domain.fromCString(No.free);
   }
 
   @property void domain(string propval)
   {
     safeFree(cast(void*)(cast(GdkPixbufFormat*)cPtr).domain);
-    (cast(GdkPixbufFormat*)cPtr).domain = propval.toCString(Yes.Alloc);
+    (cast(GdkPixbufFormat*)cPtr).domain = propval.toCString(Yes.alloc);
   }
 
   @property string description()
   {
-    return (cast(GdkPixbufFormat*)cPtr).description.fromCString(No.Free);
+    return (cast(GdkPixbufFormat*)cPtr).description.fromCString(No.free);
   }
 
   @property void description(string propval)
   {
     safeFree(cast(void*)(cast(GdkPixbufFormat*)cPtr).description);
-    (cast(GdkPixbufFormat*)cPtr).description = propval.toCString(Yes.Alloc);
+    (cast(GdkPixbufFormat*)cPtr).description = propval.toCString(Yes.alloc);
   }
 
   @property uint flags()
@@ -103,13 +103,13 @@ class PixbufFormat : gobject.boxed.Boxed
 
   @property string license()
   {
-    return (cast(GdkPixbufFormat*)cPtr).license.fromCString(No.Free);
+    return (cast(GdkPixbufFormat*)cPtr).license.fromCString(No.free);
   }
 
   @property void license(string propval)
   {
     safeFree(cast(void*)(cast(GdkPixbufFormat*)cPtr).license);
-    (cast(GdkPixbufFormat*)cPtr).license = propval.toCString(Yes.Alloc);
+    (cast(GdkPixbufFormat*)cPtr).license = propval.toCString(Yes.alloc);
   }
 
   /**
@@ -121,7 +121,7 @@ class PixbufFormat : gobject.boxed.Boxed
   {
     GdkPixbufFormat* _cretval;
     _cretval = gdk_pixbuf_format_copy(cast(const(GdkPixbufFormat)*)cPtr);
-    auto _retval = _cretval ? new gdkpixbuf.pixbuf_format.PixbufFormat(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gdkpixbuf.pixbuf_format.PixbufFormat(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class PixbufFormat : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gdk_pixbuf_format_get_description(cast(GdkPixbufFormat*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class PixbufFormat : gobject.boxed.Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -172,7 +172,7 @@ class PixbufFormat : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gdk_pixbuf_format_get_license(cast(GdkPixbufFormat*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class PixbufFormat : gobject.boxed.Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -206,7 +206,7 @@ class PixbufFormat : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gdk_pixbuf_format_get_name(cast(GdkPixbufFormat*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -235,7 +235,7 @@ class PixbufFormat : gobject.boxed.Boxed
   bool isSaveOptionSupported(string optionKey)
   {
     bool _retval;
-    const(char)* _optionKey = optionKey.toCString(No.Alloc);
+    const(char)* _optionKey = optionKey.toCString(No.alloc);
     _retval = gdk_pixbuf_format_is_save_option_supported(cast(GdkPixbufFormat*)cPtr, _optionKey);
     return _retval;
   }

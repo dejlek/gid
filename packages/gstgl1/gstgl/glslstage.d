@@ -15,7 +15,7 @@ import gstgl.types;
 class GLSLStage : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,16 +35,16 @@ class GLSLStage : gst.object.ObjectGst
   this(gstgl.glcontext.GLContext context, uint type)
   {
     GstGLSLStage* _cretval;
-    _cretval = gst_glsl_stage_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, type);
-    this(_cretval, No.Take);
+    _cretval = gst_glsl_stage_new(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, type);
+    this(_cretval, No.take);
   }
 
   /** */
   static gstgl.glslstage.GLSLStage newDefaultFragment(gstgl.glcontext.GLContext context)
   {
     GstGLSLStage* _cretval;
-    _cretval = gst_glsl_stage_new_default_fragment(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.Take);
+    _cretval = gst_glsl_stage_new_default_fragment(context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.take);
     return _retval;
   }
 
@@ -52,8 +52,8 @@ class GLSLStage : gst.object.ObjectGst
   static gstgl.glslstage.GLSLStage newDefaultVertex(gstgl.glcontext.GLContext context)
   {
     GstGLSLStage* _cretval;
-    _cretval = gst_glsl_stage_new_default_vertex(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.Take);
+    _cretval = gst_glsl_stage_new_default_vertex(context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.take);
     return _retval;
   }
 
@@ -61,9 +61,9 @@ class GLSLStage : gst.object.ObjectGst
   static gstgl.glslstage.GLSLStage newWithString(gstgl.glcontext.GLContext context, uint type, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile, string str)
   {
     GstGLSLStage* _cretval;
-    const(char)* _str = str.toCString(No.Alloc);
-    _cretval = gst_glsl_stage_new_with_string(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, type, version_, profile, _str);
-    auto _retval = ObjectG.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.Take);
+    const(char)* _str = str.toCString(No.alloc);
+    _cretval = gst_glsl_stage_new_with_string(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, type, version_, profile, _str);
+    auto _retval = ObjectG.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.take);
     return _retval;
   }
 
@@ -77,10 +77,10 @@ class GLSLStage : gst.object.ObjectGst
 
     char*[] _tmpstr;
     foreach (s; str)
-      _tmpstr ~= s.toCString(No.Alloc);
+      _tmpstr ~= s.toCString(No.alloc);
     const(char*)* _str = _tmpstr.ptr;
-    _cretval = gst_glsl_stage_new_with_strings(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, type, version_, profile, _nStrings, _str);
-    auto _retval = ObjectG.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.Take);
+    _cretval = gst_glsl_stage_new_with_strings(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, type, version_, profile, _nStrings, _str);
+    auto _retval = ObjectG.getDObject!(gstgl.glslstage.GLSLStage)(cast(GstGLSLStage*)_cretval, No.take);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class GLSLStage : gst.object.ObjectGst
 
     char*[] _tmpstr;
     foreach (s; str)
-      _tmpstr ~= s.toCString(No.Alloc);
+      _tmpstr ~= s.toCString(No.alloc);
     const(char*)* _str = _tmpstr.ptr;
     _retval = gst_glsl_stage_set_strings(cast(GstGLSLStage*)cPtr, version_, profile, _nStrings, _str);
     return _retval;

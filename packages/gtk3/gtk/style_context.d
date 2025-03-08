@@ -76,7 +76,7 @@ import pango.font_description;
 class StyleContext : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -107,7 +107,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GtkStyleContext* _cretval;
     _cretval = gtk_style_context_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -131,7 +131,7 @@ class StyleContext : gobject.object.ObjectG
   */
   static void addProviderForScreen(gdk.screen.Screen screen, gtk.style_provider.StyleProvider provider, uint priority)
   {
-    gtk_style_context_add_provider_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, priority);
+    gtk_style_context_add_provider_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.dup) : null, priority);
   }
 
   /**
@@ -142,7 +142,7 @@ class StyleContext : gobject.object.ObjectG
   */
   static void removeProviderForScreen(gdk.screen.Screen screen, gtk.style_provider.StyleProvider provider)
   {
-    gtk_style_context_remove_provider_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_style_context_remove_provider_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.dup) : null);
   }
 
   /**
@@ -157,7 +157,7 @@ class StyleContext : gobject.object.ObjectG
   */
   static void resetWidgets(gdk.screen.Screen screen)
   {
-    gtk_style_context_reset_widgets(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
+    gtk_style_context_reset_widgets(screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null);
   }
 
   /**
@@ -182,7 +182,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void addClass(string className)
   {
-    const(char)* _className = className.toCString(No.Alloc);
+    const(char)* _className = className.toCString(No.alloc);
     gtk_style_context_add_class(cast(GtkStyleContext*)cPtr, _className);
   }
 
@@ -206,7 +206,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void addProvider(gtk.style_provider.StyleProvider provider, uint priority)
   {
-    gtk_style_context_add_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null, priority);
+    gtk_style_context_add_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.dup) : null, priority);
   }
 
   /**
@@ -238,7 +238,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void addRegion(string regionName, gtk.types.RegionFlags flags)
   {
-    const(char)* _regionName = regionName.toCString(No.Alloc);
+    const(char)* _regionName = regionName.toCString(No.alloc);
     gtk_style_context_add_region(cast(GtkStyleContext*)cPtr, _regionName, flags);
   }
 
@@ -284,7 +284,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GdkRGBA _color;
     gtk_style_context_get_background_color(cast(GtkStyleContext*)cPtr, state, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.take);
   }
 
   /**
@@ -300,7 +300,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GtkBorder _border;
     gtk_style_context_get_border(cast(GtkStyleContext*)cPtr, state, &_border);
-    border = new gtk.border.Border(cast(void*)&_border, No.Take);
+    border = new gtk.border.Border(cast(void*)&_border, No.take);
   }
 
   /**
@@ -315,7 +315,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GdkRGBA _color;
     gtk_style_context_get_border_color(cast(GtkStyleContext*)cPtr, state, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.take);
   }
 
   /**
@@ -331,7 +331,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GdkRGBA _color;
     gtk_style_context_get_color(cast(GtkStyleContext*)cPtr, state, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.take);
   }
 
   /**
@@ -367,7 +367,7 @@ class StyleContext : gobject.object.ObjectG
   {
     const(PangoFontDescription)* _cretval;
     _cretval = gtk_style_context_get_font(cast(GtkStyleContext*)cPtr, state);
-    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -380,7 +380,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GdkFrameClock* _cretval;
     _cretval = gtk_style_context_get_frame_clock(cast(GtkStyleContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.take);
     return _retval;
   }
 
@@ -408,7 +408,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GtkBorder _margin;
     gtk_style_context_get_margin(cast(GtkStyleContext*)cPtr, state, &_margin);
-    margin = new gtk.border.Border(cast(void*)&_margin, No.Take);
+    margin = new gtk.border.Border(cast(void*)&_margin, No.take);
   }
 
   /**
@@ -423,7 +423,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GtkBorder _padding;
     gtk_style_context_get_padding(cast(GtkStyleContext*)cPtr, state, &_padding);
-    padding = new gtk.border.Border(cast(void*)&_padding, No.Take);
+    padding = new gtk.border.Border(cast(void*)&_padding, No.take);
   }
 
   /**
@@ -435,7 +435,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GtkStyleContext* _cretval;
     _cretval = gtk_style_context_get_parent(cast(GtkStyleContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.style_context.StyleContext)(cast(GtkStyleContext*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.style_context.StyleContext)(cast(GtkStyleContext*)_cretval, No.take);
     return _retval;
   }
 
@@ -447,7 +447,7 @@ class StyleContext : gobject.object.ObjectG
   {
     const(GtkWidgetPath)* _cretval;
     _cretval = gtk_style_context_get_path(cast(GtkStyleContext*)cPtr);
-    auto _retval = _cretval ? new gtk.widget_path.WidgetPath(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.widget_path.WidgetPath(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -474,10 +474,10 @@ class StyleContext : gobject.object.ObjectG
   */
   void getProperty(string property, gtk.types.StateFlags state, out gobject.value.Value value)
   {
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _property = property.toCString(No.alloc);
     GValue _value;
     gtk_style_context_get_property(cast(GtkStyleContext*)cPtr, _property, state, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, Yes.Take);
+    value = new gobject.value.Value(cast(void*)&_value, Yes.take);
   }
 
   /**
@@ -499,7 +499,7 @@ class StyleContext : gobject.object.ObjectG
   {
     GdkScreen* _cretval;
     _cretval = gtk_style_context_get_screen(cast(GtkStyleContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.take);
     return _retval;
   }
 
@@ -524,9 +524,9 @@ class StyleContext : gobject.object.ObjectG
   gtk.css_section.CssSection getSection(string property)
   {
     GtkCssSection* _cretval;
-    const(char)* _property = property.toCString(No.Alloc);
+    const(char)* _property = property.toCString(No.alloc);
     _cretval = gtk_style_context_get_section(cast(GtkStyleContext*)cPtr, _property);
-    auto _retval = _cretval ? new gtk.css_section.CssSection(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.css_section.CssSection(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -558,8 +558,8 @@ class StyleContext : gobject.object.ObjectG
   */
   void getStyleProperty(string propertyName, gobject.value.Value value)
   {
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    gtk_style_context_get_style_property(cast(GtkStyleContext*)cPtr, _propertyName, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
+    gtk_style_context_get_style_property(cast(GtkStyleContext*)cPtr, _propertyName, value ? cast(GValue*)value.cPtr(No.dup) : null);
   }
 
   /**
@@ -572,7 +572,7 @@ class StyleContext : gobject.object.ObjectG
   bool hasClass(string className)
   {
     bool _retval;
-    const(char)* _className = className.toCString(No.Alloc);
+    const(char)* _className = className.toCString(No.alloc);
     _retval = gtk_style_context_has_class(cast(GtkStyleContext*)cPtr, _className);
     return _retval;
   }
@@ -589,7 +589,7 @@ class StyleContext : gobject.object.ObjectG
   bool hasRegion(string regionName, out gtk.types.RegionFlags flagsReturn)
   {
     bool _retval;
-    const(char)* _regionName = regionName.toCString(No.Alloc);
+    const(char)* _regionName = regionName.toCString(No.alloc);
     _retval = gtk_style_context_has_region(cast(GtkStyleContext*)cPtr, _regionName, &flagsReturn);
     return _retval;
   }
@@ -646,10 +646,10 @@ class StyleContext : gobject.object.ObjectG
   bool lookupColor(string colorName, out gdk.rgba.RGBA color)
   {
     bool _retval;
-    const(char)* _colorName = colorName.toCString(No.Alloc);
+    const(char)* _colorName = colorName.toCString(No.alloc);
     GdkRGBA _color;
     _retval = gtk_style_context_lookup_color(cast(GtkStyleContext*)cPtr, _colorName, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.take);
     return _retval;
   }
 
@@ -666,9 +666,9 @@ class StyleContext : gobject.object.ObjectG
   gtk.icon_set.IconSet lookupIconSet(string stockId)
   {
     GtkIconSet* _cretval;
-    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString(No.alloc);
     _cretval = gtk_style_context_lookup_icon_set(cast(GtkStyleContext*)cPtr, _stockId);
-    auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -725,7 +725,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void notifyStateChange(gdk.window.Window window, void* regionId, gtk.types.StateType state, bool stateValue)
   {
-    gtk_style_context_notify_state_change(cast(GtkStyleContext*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, regionId, state, stateValue);
+    gtk_style_context_notify_state_change(cast(GtkStyleContext*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.dup) : null, regionId, state, stateValue);
   }
 
   /**
@@ -766,7 +766,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void removeClass(string className)
   {
-    const(char)* _className = className.toCString(No.Alloc);
+    const(char)* _className = className.toCString(No.alloc);
     gtk_style_context_remove_class(cast(GtkStyleContext*)cPtr, _className);
   }
 
@@ -777,7 +777,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void removeProvider(gtk.style_provider.StyleProvider provider)
   {
-    gtk_style_context_remove_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_style_context_remove_provider(cast(GtkStyleContext*)cPtr, provider ? cast(GtkStyleProvider*)(cast(ObjectG)provider).cPtr(No.dup) : null);
   }
 
   /**
@@ -787,7 +787,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void removeRegion(string regionName)
   {
-    const(char)* _regionName = regionName.toCString(No.Alloc);
+    const(char)* _regionName = regionName.toCString(No.alloc);
     gtk_style_context_remove_region(cast(GtkStyleContext*)cPtr, _regionName);
   }
 
@@ -829,7 +829,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void scrollAnimations(gdk.window.Window window, int dx, int dy)
   {
-    gtk_style_context_scroll_animations(cast(GtkStyleContext*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, dx, dy);
+    gtk_style_context_scroll_animations(cast(GtkStyleContext*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.dup) : null, dx, dy);
   }
 
   /**
@@ -844,7 +844,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void setBackground(gdk.window.Window window)
   {
-    gtk_style_context_set_background(cast(GtkStyleContext*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
+    gtk_style_context_set_background(cast(GtkStyleContext*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.dup) : null);
   }
 
   /**
@@ -878,7 +878,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void setFrameClock(gdk.frame_clock.FrameClock frameClock)
   {
-    gtk_style_context_set_frame_clock(cast(GtkStyleContext*)cPtr, frameClock ? cast(GdkFrameClock*)frameClock.cPtr(No.Dup) : null);
+    gtk_style_context_set_frame_clock(cast(GtkStyleContext*)cPtr, frameClock ? cast(GdkFrameClock*)frameClock.cPtr(No.dup) : null);
   }
 
   /**
@@ -913,7 +913,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void setParent(gtk.style_context.StyleContext parent = null)
   {
-    gtk_style_context_set_parent(cast(GtkStyleContext*)cPtr, parent ? cast(GtkStyleContext*)parent.cPtr(No.Dup) : null);
+    gtk_style_context_set_parent(cast(GtkStyleContext*)cPtr, parent ? cast(GtkStyleContext*)parent.cPtr(No.dup) : null);
   }
 
   /**
@@ -929,7 +929,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void setPath(gtk.widget_path.WidgetPath path)
   {
-    gtk_style_context_set_path(cast(GtkStyleContext*)cPtr, path ? cast(GtkWidgetPath*)path.cPtr(No.Dup) : null);
+    gtk_style_context_set_path(cast(GtkStyleContext*)cPtr, path ? cast(GtkWidgetPath*)path.cPtr(No.dup) : null);
   }
 
   /**
@@ -956,7 +956,7 @@ class StyleContext : gobject.object.ObjectG
   */
   void setScreen(gdk.screen.Screen screen)
   {
-    gtk_style_context_set_screen(cast(GtkStyleContext*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
+    gtk_style_context_set_screen(cast(GtkStyleContext*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null);
   }
 
   /**
@@ -1011,7 +1011,7 @@ class StyleContext : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = gtk_style_context_to_string(cast(GtkStyleContext*)cPtr, flags);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -1038,10 +1038,10 @@ class StyleContext : gobject.object.ObjectG
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

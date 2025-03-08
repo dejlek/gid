@@ -16,12 +16,12 @@ import pango.types;
 class TabArray : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -52,7 +52,7 @@ class TabArray : gobject.boxed.Boxed
   {
     PangoTabArray* _cretval;
     _cretval = pango_tab_array_new(initialSize, positionsInPixels);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -64,14 +64,14 @@ class TabArray : gobject.boxed.Boxed
   {
     PangoTabArray* _cretval;
     _cretval = pango_tab_array_copy(cast(PangoTabArray*)cPtr);
-    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
   /**
       Gets the Unicode character to use as decimal point.
     
-    This is only relevant for tabs with [pango.types.TabAlign.Decimal] alignment,
+    This is only relevant for tabs with [pango.types.TabAlign.decimal] alignment,
     which align content at the first occurrence of the decimal point
     character.
     
@@ -139,7 +139,7 @@ class TabArray : gobject.boxed.Boxed
   /**
       Sets the Unicode character to use as decimal point.
     
-    This is only relevant for tabs with [pango.types.TabAlign.Decimal] alignment,
+    This is only relevant for tabs with [pango.types.TabAlign.decimal] alignment,
     which align content at the first occurrence of the decimal point
     character.
     
@@ -200,7 +200,7 @@ class TabArray : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = pango_tab_array_to_string(cast(PangoTabArray*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -216,9 +216,9 @@ class TabArray : gobject.boxed.Boxed
   static pango.tab_array.TabArray fromString(string text)
   {
     PangoTabArray* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString(No.alloc);
     _cretval = pango_tab_array_from_string(_text);
-    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

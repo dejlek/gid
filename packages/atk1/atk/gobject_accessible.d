@@ -18,7 +18,7 @@ import gobject.object;
 class GObjectAccessible : atk.object.ObjectAtk
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -44,8 +44,8 @@ class GObjectAccessible : atk.object.ObjectAtk
   static atk.object.ObjectAtk forObject(gobject.object.ObjectG obj)
   {
     AtkObject* _cretval;
-    _cretval = atk_gobject_accessible_for_object(obj ? cast(ObjectC*)obj.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+    _cretval = atk_gobject_accessible_for_object(obj ? cast(ObjectC*)obj.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.take);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ class GObjectAccessible : atk.object.ObjectAtk
   {
     ObjectC* _cretval;
     _cretval = atk_gobject_accessible_get_object(cast(AtkGObjectAccessible*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.take);
     return _retval;
   }
 }

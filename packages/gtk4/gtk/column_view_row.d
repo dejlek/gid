@@ -16,7 +16,7 @@ import gtk.types;
 class ColumnViewRow : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class ColumnViewRow : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_row_get_accessible_description(cast(GtkColumnViewRow*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -52,7 +52,7 @@ class ColumnViewRow : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_row_get_accessible_label(cast(GtkColumnViewRow*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class ColumnViewRow : gobject.object.ObjectG
   {
     ObjectC* _cretval;
     _cretval = gtk_column_view_row_get_item(cast(GtkColumnViewRow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.take);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class ColumnViewRow : gobject.object.ObjectG
   */
   void setAccessibleDescription(string description)
   {
-    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _description = description.toCString(No.alloc);
     gtk_column_view_row_set_accessible_description(cast(GtkColumnViewRow*)cPtr, _description);
   }
 
@@ -155,7 +155,7 @@ class ColumnViewRow : gobject.object.ObjectG
   */
   void setAccessibleLabel(string label)
   {
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.alloc);
     gtk_column_view_row_set_accessible_label(cast(GtkColumnViewRow*)cPtr, _label);
   }
 

@@ -23,7 +23,7 @@ import gio.types;
 class SimpleIOStream : gio.iostream.IOStream
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,7 +50,7 @@ class SimpleIOStream : gio.iostream.IOStream
   this(gio.input_stream.InputStream inputStream, gio.output_stream.OutputStream outputStream)
   {
     GIOStream* _cretval;
-    _cretval = g_simple_io_stream_new(inputStream ? cast(GInputStream*)inputStream.cPtr(No.Dup) : null, outputStream ? cast(GOutputStream*)outputStream.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = g_simple_io_stream_new(inputStream ? cast(GInputStream*)inputStream.cPtr(No.dup) : null, outputStream ? cast(GOutputStream*)outputStream.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 }

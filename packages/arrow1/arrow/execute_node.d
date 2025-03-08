@@ -11,7 +11,7 @@ import gobject.object;
 class ExecuteNode : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,7 +32,7 @@ class ExecuteNode : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = garrow_execute_node_get_kind_name(cast(GArrowExecuteNode*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -41,7 +41,7 @@ class ExecuteNode : gobject.object.ObjectG
   {
     GArrowSchema* _cretval;
     _cretval = garrow_execute_node_get_output_schema(cast(GArrowExecuteNode*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.take);
     return _retval;
   }
 }

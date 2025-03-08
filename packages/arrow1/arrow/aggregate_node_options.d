@@ -12,7 +12,7 @@ import glib.error;
 class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,13 +40,13 @@ class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 
     char*[] _tmpkeys;
     foreach (s; keys)
-      _tmpkeys ~= s.toCString(No.Alloc);
+      _tmpkeys ~= s.toCString(No.alloc);
     const(char*)* _keys = _tmpkeys.ptr;
 
     GError *_err;
     _cretval = garrow_aggregate_node_options_new(_aggregations, _keys, _nKeys, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

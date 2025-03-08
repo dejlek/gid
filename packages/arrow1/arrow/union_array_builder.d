@@ -11,7 +11,7 @@ import glib.error;
 class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,8 +31,8 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
   byte appendChild(arrow.array_builder.ArrayBuilder child, string fieldName = null)
   {
     byte _retval;
-    const(char)* _fieldName = fieldName.toCString(No.Alloc);
-    _retval = garrow_union_array_builder_append_child(cast(GArrowUnionArrayBuilder*)cPtr, child ? cast(GArrowArrayBuilder*)child.cPtr(No.Dup) : null, _fieldName);
+    const(char)* _fieldName = fieldName.toCString(No.alloc);
+    _retval = garrow_union_array_builder_append_child(cast(GArrowUnionArrayBuilder*)cPtr, child ? cast(GArrowArrayBuilder*)child.cPtr(No.dup) : null, _fieldName);
     return _retval;
   }
 

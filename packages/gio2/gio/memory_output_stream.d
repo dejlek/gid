@@ -22,7 +22,7 @@ import gobject.object;
 class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_stream.PollableOutputStream, gio.seekable.Seekable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,7 +50,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
   {
     GOutputStream* _cretval;
     _cretval = g_memory_output_stream_new_resizable();
-    auto _retval = ObjectG.getDObject!(gio.memory_output_stream.MemoryOutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.memory_output_stream.MemoryOutputStream)(cast(GOutputStream*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
     
     If the stream is fixed-sized (ie: no realloc was passed to
     [gio.memory_output_stream.MemoryOutputStream.new_]) then this is the maximum size of the
-    stream and further writes will return [gio.types.IOErrorEnum.NoSpace].
+    stream and further writes will return [gio.types.IOErrorEnum.noSpace].
     
     In any case, if you want the number of bytes currently written to the
     stream, use [gio.memory_output_stream.MemoryOutputStream.getDataSize].
@@ -116,7 +116,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
   {
     GBytes* _cretval;
     _cretval = g_memory_output_stream_steal_as_bytes(cast(GMemoryOutputStream*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 

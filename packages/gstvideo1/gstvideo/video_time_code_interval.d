@@ -13,12 +13,12 @@ import gstvideo.types;
 class VideoTimeCodeInterval : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -79,7 +79,7 @@ class VideoTimeCodeInterval : gobject.boxed.Boxed
   {
     GstVideoTimeCodeInterval* _cretval;
     _cretval = gst_video_time_code_interval_new(hours, minutes, seconds, frames);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -92,9 +92,9 @@ class VideoTimeCodeInterval : gobject.boxed.Boxed
   static gstvideo.video_time_code_interval.VideoTimeCodeInterval newFromString(string tcInterStr)
   {
     GstVideoTimeCodeInterval* _cretval;
-    const(char)* _tcInterStr = tcInterStr.toCString(No.Alloc);
+    const(char)* _tcInterStr = tcInterStr.toCString(No.alloc);
     _cretval = gst_video_time_code_interval_new_from_string(_tcInterStr);
-    auto _retval = _cretval ? new gstvideo.video_time_code_interval.VideoTimeCodeInterval(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gstvideo.video_time_code_interval.VideoTimeCodeInterval(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class VideoTimeCodeInterval : gobject.boxed.Boxed
   {
     GstVideoTimeCodeInterval* _cretval;
     _cretval = gst_video_time_code_interval_copy(cast(const(GstVideoTimeCodeInterval)*)cPtr);
-    auto _retval = _cretval ? new gstvideo.video_time_code_interval.VideoTimeCodeInterval(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gstvideo.video_time_code_interval.VideoTimeCodeInterval(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 

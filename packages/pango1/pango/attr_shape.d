@@ -14,7 +14,7 @@ class AttrShape
 {
   PangoAttrShape cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Pango.AttrShape");
@@ -93,7 +93,7 @@ class AttrShape
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_shape_new(&inkRect, &logicalRect);
-    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

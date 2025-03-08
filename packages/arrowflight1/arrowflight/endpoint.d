@@ -12,7 +12,7 @@ import gobject.object;
 class Endpoint : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,15 +34,15 @@ class Endpoint : gobject.object.ObjectG
     GAFlightEndpoint* _cretval;
     auto _locations = gListFromD!(arrowflight.location.Location)(locations);
     scope(exit) containerFree!(GList*, arrowflight.location.Location, GidOwnership.None)(_locations);
-    _cretval = gaflight_endpoint_new(ticket ? cast(GAFlightTicket*)ticket.cPtr(No.Dup) : null, _locations);
-    this(_cretval, Yes.Take);
+    _cretval = gaflight_endpoint_new(ticket ? cast(GAFlightTicket*)ticket.cPtr(No.dup) : null, _locations);
+    this(_cretval, Yes.take);
   }
 
   /** */
   bool equal(arrowflight.endpoint.Endpoint otherEndpoint)
   {
     bool _retval;
-    _retval = gaflight_endpoint_equal(cast(GAFlightEndpoint*)cPtr, otherEndpoint ? cast(GAFlightEndpoint*)otherEndpoint.cPtr(No.Dup) : null);
+    _retval = gaflight_endpoint_equal(cast(GAFlightEndpoint*)cPtr, otherEndpoint ? cast(GAFlightEndpoint*)otherEndpoint.cPtr(No.dup) : null);
     return _retval;
   }
 

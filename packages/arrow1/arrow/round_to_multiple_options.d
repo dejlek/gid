@@ -10,7 +10,7 @@ import gid.gid;
 class RoundToMultipleOptions : arrow.function_options.FunctionOptions
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class RoundToMultipleOptions : arrow.function_options.FunctionOptions
   {
     GArrowRoundToMultipleOptions* _cretval;
     _cretval = garrow_round_to_multiple_options_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

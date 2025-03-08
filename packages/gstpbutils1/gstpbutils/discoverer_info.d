@@ -23,7 +23,7 @@ import gstpbutils.types;
 class DiscovererInfo : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,8 +49,8 @@ class DiscovererInfo : gobject.object.ObjectG
   static gstpbutils.discoverer_info.DiscovererInfo fromVariant(glib.variant.VariantG variant)
   {
     GstDiscovererInfo* _cretval;
-    _cretval = gst_discoverer_info_from_variant(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
+    _cretval = gst_discoverer_info_from_variant(variant ? cast(VariantC*)variant.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -59,7 +59,7 @@ class DiscovererInfo : gobject.object.ObjectG
   {
     GstDiscovererInfo* _cretval;
     _cretval = gst_discoverer_info_copy(cast(GstDiscovererInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class DiscovererInfo : gobject.object.ObjectG
   {
     const(GstStructure)* _cretval;
     _cretval = gst_discoverer_info_get_misc(cast(const(GstDiscovererInfo)*)cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class DiscovererInfo : gobject.object.ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.Free);
+        _retval[i] = _cretval[i].fromCString(No.free);
     }
     return _retval;
   }
@@ -163,7 +163,7 @@ class DiscovererInfo : gobject.object.ObjectG
   {
     GstDiscovererStreamInfo* _cretval;
     _cretval = gst_discoverer_info_get_stream_info(cast(GstDiscovererInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class DiscovererInfo : gobject.object.ObjectG
   {
     const(GstTagList)* _cretval;
     _cretval = gst_discoverer_info_get_tags(cast(const(GstDiscovererInfo)*)cPtr);
-    auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class DiscovererInfo : gobject.object.ObjectG
   {
     const(GstToc)* _cretval;
     _cretval = gst_discoverer_info_get_toc(cast(const(GstDiscovererInfo)*)cPtr);
-    auto _retval = _cretval ? new gst.toc.Toc(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.toc.Toc(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class DiscovererInfo : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gst_discoverer_info_get_uri(cast(const(GstDiscovererInfo)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class DiscovererInfo : gobject.object.ObjectG
   {
     VariantC* _cretval;
     _cretval = gst_discoverer_info_to_variant(cast(GstDiscovererInfo*)cPtr, flags);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

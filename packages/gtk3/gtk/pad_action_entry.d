@@ -12,7 +12,7 @@ class PadActionEntry
 {
   GtkPadActionEntry cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.PadActionEntry");
@@ -60,23 +60,23 @@ class PadActionEntry
 
   @property string label()
   {
-    return (cast(GtkPadActionEntry*)cPtr).label.fromCString(No.Free);
+    return (cast(GtkPadActionEntry*)cPtr).label.fromCString(No.free);
   }
 
   @property void label(string propval)
   {
     safeFree(cast(void*)(cast(GtkPadActionEntry*)cPtr).label);
-    (cast(GtkPadActionEntry*)cPtr).label = propval.toCString(Yes.Alloc);
+    (cast(GtkPadActionEntry*)cPtr).label = propval.toCString(Yes.alloc);
   }
 
   @property string actionName()
   {
-    return (cast(GtkPadActionEntry*)cPtr).actionName.fromCString(No.Free);
+    return (cast(GtkPadActionEntry*)cPtr).actionName.fromCString(No.free);
   }
 
   @property void actionName(string propval)
   {
     safeFree(cast(void*)(cast(GtkPadActionEntry*)cPtr).actionName);
-    (cast(GtkPadActionEntry*)cPtr).actionName = propval.toCString(Yes.Alloc);
+    (cast(GtkPadActionEntry*)cPtr).actionName = propval.toCString(Yes.alloc);
   }
 }

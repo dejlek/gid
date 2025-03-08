@@ -14,7 +14,7 @@ import gsk.types;
 class VulkanRenderer : gsk.renderer.Renderer
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,6 +35,6 @@ class VulkanRenderer : gsk.renderer.Renderer
   {
     GskRenderer* _cretval;
     _cretval = gsk_vulkan_renderer_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

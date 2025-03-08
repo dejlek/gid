@@ -45,7 +45,7 @@ import gtk.types;
 class ColumnViewSorter : gtk.sorter.Sorter
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -94,7 +94,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
   {
     GtkColumnViewColumn* _cretval;
     _cretval = gtk_column_view_sorter_get_nth_sort_column(cast(GtkColumnViewSorter*)cPtr, position, &sortOrder);
-    auto _retval = ObjectG.getDObject!(gtk.column_view_column.ColumnViewColumn)(cast(GtkColumnViewColumn*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.column_view_column.ColumnViewColumn)(cast(GtkColumnViewColumn*)_cretval, No.take);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
   {
     GtkColumnViewColumn* _cretval;
     _cretval = gtk_column_view_sorter_get_primary_sort_column(cast(GtkColumnViewSorter*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.column_view_column.ColumnViewColumn)(cast(GtkColumnViewColumn*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.column_view_column.ColumnViewColumn)(cast(GtkColumnViewColumn*)_cretval, No.take);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
     or downwards.
     
     If there is no primary sort column, then this function returns
-    [gtk.types.SortType.Ascending].
+    [gtk.types.SortType.ascending].
     Returns:     the primary sort order
   */
   gtk.types.SortType getPrimarySortOrder()

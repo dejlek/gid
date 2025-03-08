@@ -11,7 +11,7 @@ import gobject.object;
 class ServerOptions : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class ServerOptions : gobject.object.ObjectG
   this(arrowflight.location.Location location)
   {
     GAFlightServerOptions* _cretval;
-    _cretval = gaflight_server_options_new(location ? cast(GAFlightLocation*)location.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gaflight_server_options_new(location ? cast(GAFlightLocation*)location.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 }

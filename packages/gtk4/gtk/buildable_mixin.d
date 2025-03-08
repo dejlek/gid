@@ -35,7 +35,7 @@ template BuildableT()
   {
     const(char)* _cretval;
     _cretval = gtk_buildable_get_buildable_id(cast(GtkBuildable*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 }

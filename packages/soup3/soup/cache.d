@@ -14,7 +14,7 @@ import soup.types;
 class Cache : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -45,9 +45,9 @@ class Cache : gobject.object.ObjectG, soup.session_feature.SessionFeature
   this(string cacheDir, soup.types.CacheType cacheType)
   {
     SoupCache* _cretval;
-    const(char)* _cacheDir = cacheDir.toCString(No.Alloc);
+    const(char)* _cacheDir = cacheDir.toCString(No.alloc);
     _cretval = soup_cache_new(_cacheDir, cacheType);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**

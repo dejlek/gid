@@ -20,7 +20,7 @@ import gtksource.types;
 class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_chooser.StyleSchemeChooser
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -46,6 +46,6 @@ class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_choos
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_style_scheme_chooser_button_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 }

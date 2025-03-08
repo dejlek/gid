@@ -23,7 +23,7 @@ import gtk.types;
 class VPaned : gtk.paned.Paned
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,12 +43,12 @@ class VPaned : gtk.paned.Paned
       Create a new #GtkVPaned
     Returns:     the new #GtkVPaned
   
-    Deprecated:     Use [gtk.paned.Paned.new_] with [gtk.types.Orientation.Vertical] instead
+    Deprecated:     Use [gtk.paned.Paned.new_] with [gtk.types.Orientation.vertical] instead
   */
   this()
   {
     GtkWidget* _cretval;
     _cretval = gtk_vpaned_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 }

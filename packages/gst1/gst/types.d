@@ -397,7 +397,7 @@ alias BusFunc = bool delegate(gst.bus.Bus bus, gst.message.Message message);
   into the bus. This function is mostly used internally. Only one sync handler
   can be attached to a given bus.
   
-  If the handler returns [gst.types.BusSyncReply.Drop], it should unref the message, else the
+  If the handler returns [gst.types.BusSyncReply.drop], it should unref the message, else the
   message should not be unreffed by the sync handler.
 
   ## Parameters
@@ -924,7 +924,7 @@ alias PadChainListFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.
                during the execution of this function.
     * $(B event)       the #GstEvent to handle.
   )
-  Returns:     [gst.types.FlowReturn.Ok] if the event was handled properly, or any other
+  Returns:     [gst.types.FlowReturn.ok] if the event was handled properly, or any other
     #GstFlowReturn dependent on downstream state.
 */
 alias PadEventFullFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.event.Event event);

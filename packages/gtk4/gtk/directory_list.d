@@ -37,7 +37,7 @@ import gtk.types;
 class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -68,9 +68,9 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
   this(string attributes = null, gio.file.File file = null)
   {
     GtkDirectoryList* _cretval;
-    const(char)* _attributes = attributes.toCString(No.Alloc);
-    _cretval = gtk_directory_list_new(_attributes, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    const(char)* _attributes = attributes.toCString(No.alloc);
+    _cretval = gtk_directory_list_new(_attributes, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -81,7 +81,7 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
   {
     const(char)* _cretval;
     _cretval = gtk_directory_list_get_attributes(cast(GtkDirectoryList*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
   {
     GFile* _cretval;
     _cretval = gtk_directory_list_get_file(cast(GtkDirectoryList*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.take);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
   */
   void setAttributes(string attributes = null)
   {
-    const(char)* _attributes = attributes.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString(No.alloc);
     gtk_directory_list_set_attributes(cast(GtkDirectoryList*)cPtr, _attributes);
   }
 
@@ -179,7 +179,7 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
   */
   void setFile(gio.file.File file = null)
   {
-    gtk_directory_list_set_file(cast(GtkDirectoryList*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    gtk_directory_list_set_file(cast(GtkDirectoryList*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null);
   }
 
   /**

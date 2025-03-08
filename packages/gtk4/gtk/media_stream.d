@@ -32,7 +32,7 @@ import gtk.types;
 class MediaStream : gobject.object.ObjectG, gdk.paintable.Paintable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -289,7 +289,7 @@ class MediaStream : gobject.object.ObjectG, gdk.paintable.Paintable
   */
   void realize(gdk.surface.Surface surface)
   {
-    gtk_media_stream_realize(cast(GtkMediaStream*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
+    gtk_media_stream_realize(cast(GtkMediaStream*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.dup) : null);
   }
 
   /**
@@ -461,7 +461,7 @@ class MediaStream : gobject.object.ObjectG, gdk.paintable.Paintable
   */
   void unrealize(gdk.surface.Surface surface)
   {
-    gtk_media_stream_unrealize(cast(GtkMediaStream*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
+    gtk_media_stream_unrealize(cast(GtkMediaStream*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.dup) : null);
   }
 
   /**

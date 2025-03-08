@@ -45,7 +45,7 @@ import gtk.types;
 class SearchEntry : gtk.entry.Entry
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -70,7 +70,7 @@ class SearchEntry : gtk.entry.Entry
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_entry_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -122,10 +122,10 @@ class SearchEntry : gtk.entry.Entry
     Connect to NextMatch signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNextMatch(T)(T callback, Flag!"After" after = No.After)
+  ulong connectNextMatch(T)(T callback, Flag!"after" after = No.after)
   if (is(T : NextMatchCallbackDlg) || is(T : NextMatchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -164,10 +164,10 @@ class SearchEntry : gtk.entry.Entry
     Connect to PreviousMatch signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPreviousMatch(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPreviousMatch(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PreviousMatchCallbackDlg) || is(T : PreviousMatchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -200,10 +200,10 @@ class SearchEntry : gtk.entry.Entry
     Connect to SearchChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSearchChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSearchChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SearchChangedCallbackDlg) || is(T : SearchChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -241,10 +241,10 @@ class SearchEntry : gtk.entry.Entry
     Connect to StopSearch signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStopSearch(T)(T callback, Flag!"After" after = No.After)
+  ulong connectStopSearch(T)(T callback, Flag!"after" after = No.after)
   if (is(T : StopSearchCallbackDlg) || is(T : StopSearchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

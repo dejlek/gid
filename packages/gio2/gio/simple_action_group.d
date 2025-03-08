@@ -19,7 +19,7 @@ import gobject.object;
 class SimpleActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.action_map.ActionMap
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -46,7 +46,7 @@ class SimpleActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, 
   {
     GSimpleActionGroup* _cretval;
     _cretval = g_simple_action_group_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -63,7 +63,7 @@ class SimpleActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, 
   */
   void insert(gio.action.Action action)
   {
-    g_simple_action_group_insert(cast(GSimpleActionGroup*)cPtr, action ? cast(GAction*)(cast(ObjectG)action).cPtr(No.Dup) : null);
+    g_simple_action_group_insert(cast(GSimpleActionGroup*)cPtr, action ? cast(GAction*)(cast(ObjectG)action).cPtr(No.dup) : null);
   }
 
   /**
@@ -79,9 +79,9 @@ class SimpleActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, 
   gio.action.Action lookup(string actionName)
   {
     GAction* _cretval;
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString(No.alloc);
     _cretval = g_simple_action_group_lookup(cast(GSimpleActionGroup*)cPtr, _actionName);
-    auto _retval = ObjectG.getDObject!(gio.action.Action)(cast(GAction*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.action.Action)(cast(GAction*)_cretval, No.take);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class SimpleActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, 
   */
   void remove(string actionName)
   {
-    const(char)* _actionName = actionName.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString(No.alloc);
     g_simple_action_group_remove(cast(GSimpleActionGroup*)cPtr, _actionName);
   }
 }

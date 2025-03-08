@@ -24,7 +24,7 @@ import gio.types;
 class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_based.FileDescriptorBased, gio.pollable_output_stream.PollableOutputStream
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -57,7 +57,7 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
   {
     GOutputStream* _cretval;
     _cretval = g_unix_output_stream_new(fd, closeFd);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**

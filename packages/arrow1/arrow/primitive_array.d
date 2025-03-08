@@ -12,7 +12,7 @@ import gobject.object;
 class PrimitiveArray : arrow.array.Array
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,7 +33,7 @@ class PrimitiveArray : arrow.array.Array
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_primitive_array_get_buffer(cast(GArrowPrimitiveArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -42,7 +42,7 @@ class PrimitiveArray : arrow.array.Array
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_primitive_array_get_data_buffer(cast(GArrowPrimitiveArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.take);
     return _retval;
   }
 }

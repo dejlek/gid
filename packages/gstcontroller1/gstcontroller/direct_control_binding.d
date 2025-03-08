@@ -20,7 +20,7 @@ import gstcontroller.types;
 class DirectControlBinding : gst.control_binding.ControlBinding
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,9 +49,9 @@ class DirectControlBinding : gst.control_binding.ControlBinding
   this(gst.object.ObjectGst object, string propertyName, gst.control_source.ControlSource cs)
   {
     GstControlBinding* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _cretval = gst_direct_control_binding_new(object ? cast(GstObject*)object.cPtr(No.Dup) : null, _propertyName, cs ? cast(GstControlSource*)cs.cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
+    _cretval = gst_direct_control_binding_new(object ? cast(GstObject*)object.cPtr(No.dup) : null, _propertyName, cs ? cast(GstControlSource*)cs.cPtr(No.dup) : null);
+    this(_cretval, No.take);
   }
 
   /**
@@ -67,9 +67,9 @@ class DirectControlBinding : gst.control_binding.ControlBinding
   static gstcontroller.direct_control_binding.DirectControlBinding newAbsolute(gst.object.ObjectGst object, string propertyName, gst.control_source.ControlSource cs)
   {
     GstControlBinding* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _cretval = gst_direct_control_binding_new_absolute(object ? cast(GstObject*)object.cPtr(No.Dup) : null, _propertyName, cs ? cast(GstControlSource*)cs.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gstcontroller.direct_control_binding.DirectControlBinding)(cast(GstControlBinding*)_cretval, No.Take);
+    const(char)* _propertyName = propertyName.toCString(No.alloc);
+    _cretval = gst_direct_control_binding_new_absolute(object ? cast(GstObject*)object.cPtr(No.dup) : null, _propertyName, cs ? cast(GstControlSource*)cs.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gstcontroller.direct_control_binding.DirectControlBinding)(cast(GstControlBinding*)_cretval, No.take);
     return _retval;
   }
 }

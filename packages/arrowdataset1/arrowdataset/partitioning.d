@@ -10,7 +10,7 @@ import gobject.object;
 class Partitioning : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class Partitioning : gobject.object.ObjectG
   {
     GADatasetPartitioning* _cretval;
     _cretval = gadataset_partitioning_create_default();
-    auto _retval = ObjectG.getDObject!(arrowdataset.partitioning.Partitioning)(cast(GADatasetPartitioning*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrowdataset.partitioning.Partitioning)(cast(GADatasetPartitioning*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -40,7 +40,7 @@ class Partitioning : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = gadataset_partitioning_get_type_name(cast(GADatasetPartitioning*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

@@ -245,7 +245,7 @@
     GMarkupParseContext* _cretval;
     GMarkupParseFlags _flags = cast(GMarkupParseFlags)cast(uint)flags;
     _cretval = g_markup_parse_context_new(&parser, _flags, null, null);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
 //# g_option_group_new() has unnecessary closure and destroy notify, override the new() method
@@ -255,11 +255,11 @@
   this(string name, string description, string helpDescription)
   {
     GOptionGroup* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _description = description.toCString(No.Alloc);
-    const(char)* _helpDescription = helpDescription.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _description = description.toCString(No.alloc);
+    const(char)* _helpDescription = helpDescription.toCString(No.alloc);
     _cretval = g_option_group_new(_name, _description, _helpDescription, null, null);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
 //# Use a custom free function since g_thread_pool_free takes 3 arguments

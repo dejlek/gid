@@ -13,7 +13,7 @@ import gobject.object;
     This [gio.socket_control_message.SocketControlMessage] contains a [gio.unix_fdlist.UnixFDList].
   It may be sent using [gio.socket.Socket.sendMessage] and received using
   [gio.socket.Socket.receiveMessage] over UNIX sockets (ie: sockets in the
-  [gio.types.SocketFamily.Unix] family). The file descriptors are copied
+  [gio.types.SocketFamily.unix] family). The file descriptors are copied
   between processes by the kernel.
   
   For an easier way to send and receive file descriptors over
@@ -27,7 +27,7 @@ import gobject.object;
 class UnixFDMessage : gio.socket_control_message.SocketControlMessage
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -52,7 +52,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
   {
     GSocketControlMessage* _cretval;
     _cretval = g_unix_fd_message_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -64,8 +64,8 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
   static gio.unix_fdmessage.UnixFDMessage newWithFdList(gio.unix_fdlist.UnixFDList fdList)
   {
     GSocketControlMessage* _cretval;
-    _cretval = g_unix_fd_message_new_with_fd_list(fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.unix_fdmessage.UnixFDMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
+    _cretval = g_unix_fd_message_new_with_fd_list(fdList ? cast(GUnixFDList*)fdList.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gio.unix_fdmessage.UnixFDMessage)(cast(GSocketControlMessage*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
   {
     GUnixFDList* _cretval;
     _cretval = g_unix_fd_message_get_fd_list(cast(GUnixFDMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.take);
     return _retval;
   }
 

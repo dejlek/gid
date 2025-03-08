@@ -268,7 +268,7 @@ template ActivatableT()
   */
   override void doSetRelatedAction(gtk.action.Action action)
   {
-    gtk_activatable_do_set_related_action(cast(GtkActivatable*)cPtr, action ? cast(GtkAction*)action.cPtr(No.Dup) : null);
+    gtk_activatable_do_set_related_action(cast(GtkActivatable*)cPtr, action ? cast(GtkAction*)action.cPtr(No.dup) : null);
   }
 
   /**
@@ -279,7 +279,7 @@ template ActivatableT()
   {
     GtkAction* _cretval;
     _cretval = gtk_activatable_get_related_action(cast(GtkActivatable*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.take);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ template ActivatableT()
   */
   override void setRelatedAction(gtk.action.Action action)
   {
-    gtk_activatable_set_related_action(cast(GtkActivatable*)cPtr, action ? cast(GtkAction*)action.cPtr(No.Dup) : null);
+    gtk_activatable_set_related_action(cast(GtkActivatable*)cPtr, action ? cast(GtkAction*)action.cPtr(No.dup) : null);
   }
 
   /**
@@ -335,6 +335,6 @@ template ActivatableT()
   */
   override void syncActionProperties(gtk.action.Action action = null)
   {
-    gtk_activatable_sync_action_properties(cast(GtkActivatable*)cPtr, action ? cast(GtkAction*)action.cPtr(No.Dup) : null);
+    gtk_activatable_sync_action_properties(cast(GtkActivatable*)cPtr, action ? cast(GtkAction*)action.cPtr(No.dup) : null);
   }
 }

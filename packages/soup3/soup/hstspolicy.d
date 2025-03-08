@@ -30,12 +30,12 @@ import soup.types;
 class HSTSPolicy : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -72,9 +72,9 @@ class HSTSPolicy : gobject.boxed.Boxed
   this(string domain, gulong maxAge, bool includeSubdomains)
   {
     SoupHSTSPolicy* _cretval;
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString(No.alloc);
     _cretval = soup_hsts_policy_new(_domain, maxAge, includeSubdomains);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -88,8 +88,8 @@ class HSTSPolicy : gobject.boxed.Boxed
   static soup.hstspolicy.HSTSPolicy newFromResponse(soup.message.Message msg)
   {
     SoupHSTSPolicy* _cretval;
-    _cretval = soup_hsts_policy_new_from_response(msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = soup_hsts_policy_new_from_response(msg ? cast(SoupMessage*)msg.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -108,9 +108,9 @@ class HSTSPolicy : gobject.boxed.Boxed
   static soup.hstspolicy.HSTSPolicy newFull(string domain, gulong maxAge, glib.date_time.DateTime expires, bool includeSubdomains)
   {
     SoupHSTSPolicy* _cretval;
-    const(char)* _domain = domain.toCString(No.Alloc);
-    _cretval = soup_hsts_policy_new_full(_domain, maxAge, expires ? cast(GDateTime*)expires.cPtr(No.Dup) : null, includeSubdomains);
-    auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
+    const(char)* _domain = domain.toCString(No.alloc);
+    _cretval = soup_hsts_policy_new_full(_domain, maxAge, expires ? cast(GDateTime*)expires.cPtr(No.dup) : null, includeSubdomains);
+    auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -136,9 +136,9 @@ class HSTSPolicy : gobject.boxed.Boxed
   static soup.hstspolicy.HSTSPolicy newSessionPolicy(string domain, bool includeSubdomains)
   {
     SoupHSTSPolicy* _cretval;
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString(No.alloc);
     _cretval = soup_hsts_policy_new_session_policy(_domain, includeSubdomains);
-    auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   {
     SoupHSTSPolicy* _cretval;
     _cretval = soup_hsts_policy_copy(cast(SoupHSTSPolicy*)cPtr);
-    auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   bool equal(soup.hstspolicy.HSTSPolicy policy2)
   {
     bool _retval;
-    _retval = soup_hsts_policy_equal(cast(SoupHSTSPolicy*)cPtr, policy2 ? cast(SoupHSTSPolicy*)policy2.cPtr(No.Dup) : null);
+    _retval = soup_hsts_policy_equal(cast(SoupHSTSPolicy*)cPtr, policy2 ? cast(SoupHSTSPolicy*)policy2.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = soup_hsts_policy_get_domain(cast(SoupHSTSPolicy*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   {
     GDateTime* _cretval;
     _cretval = soup_hsts_policy_get_expires(cast(SoupHSTSPolicy*)cPtr);
-    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 

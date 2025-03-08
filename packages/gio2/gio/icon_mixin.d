@@ -55,7 +55,7 @@ template IconT()
   override bool equal(gio.icon.Icon icon2 = null)
   {
     bool _retval;
-    _retval = g_icon_equal(cast(GIcon*)cPtr, icon2 ? cast(GIcon*)(cast(ObjectG)icon2).cPtr(No.Dup) : null);
+    _retval = g_icon_equal(cast(GIcon*)cPtr, icon2 ? cast(GIcon*)(cast(ObjectG)icon2).cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ template IconT()
   {
     VariantC* _cretval;
     _cretval = g_icon_serialize(cast(GIcon*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -113,7 +113,7 @@ template IconT()
   {
     char* _cretval;
     _cretval = g_icon_to_string(cast(GIcon*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

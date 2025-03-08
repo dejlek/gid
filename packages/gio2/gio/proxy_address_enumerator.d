@@ -21,7 +21,7 @@ import gio.types;
 class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumerator
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

@@ -10,12 +10,12 @@ import gtksource.types;
 class Encoding : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -39,7 +39,7 @@ class Encoding : gobject.boxed.Boxed
   {
     GtkSourceEncoding* _cretval;
     _cretval = gtk_source_encoding_copy(cast(const(GtkSourceEncoding)*)cPtr);
-    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -52,7 +52,7 @@ class Encoding : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_source_encoding_get_charset(cast(const(GtkSourceEncoding)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -64,7 +64,7 @@ class Encoding : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_source_encoding_get_name(cast(const(GtkSourceEncoding)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class Encoding : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gtk_source_encoding_to_string(cast(const(GtkSourceEncoding)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class Encoding : gobject.boxed.Boxed
   {
     const(GtkSourceEncoding)* _cretval;
     _cretval = gtk_source_encoding_get_current();
-    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -131,9 +131,9 @@ class Encoding : gobject.boxed.Boxed
   static gtksource.encoding.Encoding getFromCharset(string charset)
   {
     const(GtkSourceEncoding)* _cretval;
-    const(char)* _charset = charset.toCString(No.Alloc);
+    const(char)* _charset = charset.toCString(No.alloc);
     _cretval = gtk_source_encoding_get_from_charset(_charset);
-    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class Encoding : gobject.boxed.Boxed
   {
     const(GtkSourceEncoding)* _cretval;
     _cretval = gtk_source_encoding_get_utf8();
-    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

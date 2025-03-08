@@ -27,7 +27,7 @@ import gtk.types;
 class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -57,8 +57,8 @@ class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   this(gio.list_model.ListModel model = null, gtk.filter.Filter filter = null)
   {
     GtkFilterListModel* _cretval;
-    _cretval = gtk_filter_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, filter ? cast(GtkFilter*)filter.cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gtk_filter_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.dup) : null, filter ? cast(GtkFilter*)filter.cPtr(Yes.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -69,7 +69,7 @@ class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   {
     GtkFilter* _cretval;
     _cretval = gtk_filter_list_model_get_filter(cast(GtkFilterListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.filter.Filter)(cast(GtkFilter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.filter.Filter)(cast(GtkFilter*)_cretval, No.take);
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   {
     GListModel* _cretval;
     _cretval = gtk_filter_list_model_get_model(cast(GtkFilterListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.take);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   */
   void setFilter(gtk.filter.Filter filter = null)
   {
-    gtk_filter_list_model_set_filter(cast(GtkFilterListModel*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(No.Dup) : null);
+    gtk_filter_list_model_set_filter(cast(GtkFilterListModel*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(No.dup) : null);
   }
 
   /**
@@ -171,6 +171,6 @@ class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_filter_list_model_set_model(cast(GtkFilterListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_filter_list_model_set_model(cast(GtkFilterListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
   }
 }

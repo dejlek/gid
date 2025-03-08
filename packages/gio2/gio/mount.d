@@ -211,7 +211,7 @@ interface Mount
       Finishes guessing content types of mount. If any errors occurred
     during the operation, error will be set to contain the errors and
     false will be returned. In particular, you may get an
-    [gio.types.IOErrorEnum.NotSupported] if the mount does not support content
+    [gio.types.IOErrorEnum.notSupported] if the mount does not support content
     guessing.
     Params:
       result =       a #GAsyncResult
@@ -374,10 +374,10 @@ interface Mount
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc));
 
   /**
@@ -401,10 +401,10 @@ interface Mount
     Connect to PreUnmount signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPreUnmount(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPreUnmount(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PreUnmountCallbackDlg) || is(T : PreUnmountCallbackFunc));
 
   /**
@@ -427,9 +427,9 @@ interface Mount
     Connect to Unmounted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUnmounted(T)(T callback, Flag!"After" after = No.After)
+  ulong connectUnmounted(T)(T callback, Flag!"after" after = No.after)
   if (is(T : UnmountedCallbackDlg) || is(T : UnmountedCallbackFunc));
   }

@@ -11,12 +11,12 @@ enum GModuleError
   /**
       there was an error loading or opening a module file
   */
-  Failed = 0,
+  failed = 0,
 
   /**
       a module returned an error from its `g_module_check_init()` function
   */
-  CheckFailed = 1,
+  checkFailed = 1,
 }
 
 /**
@@ -30,7 +30,7 @@ enum GModuleFlags : uint
         needed. The default action is to bind all symbols when the module
         is loaded.
   */
-  Lazy = 1,
+  lazy_ = 1,
 
   /**
       specifies that symbols in the module should
@@ -38,12 +38,12 @@ enum GModuleFlags : uint
         platforms is to place symbols in the module in the global name space,
         which may cause conflicts with existing symbols.
   */
-  Local = 2,
+  local = 2,
 
   /**
       mask for all flags.
   */
-  Mask = 3,
+  mask = 3,
 }
 
 /**

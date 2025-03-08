@@ -24,7 +24,7 @@ import gtk.types;
 class MenuBar : gtk.menu_shell.MenuShell
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -48,7 +48,7 @@ class MenuBar : gtk.menu_shell.MenuShell
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_bar_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -66,8 +66,8 @@ class MenuBar : gtk.menu_shell.MenuShell
   static gtk.menu_bar.MenuBar newFromModel(gio.menu_model.MenuModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_menu_bar_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.menu_bar.MenuBar)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_menu_bar_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.menu_bar.MenuBar)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 

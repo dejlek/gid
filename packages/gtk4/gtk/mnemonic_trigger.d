@@ -15,7 +15,7 @@ import gtk.types;
 class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -45,7 +45,7 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_mnemonic_trigger_new(keyval);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**

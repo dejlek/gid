@@ -34,7 +34,7 @@ import gobject.object;
   set the peer address on their base [gio.datagram_based.DatagramBased] if it is a
   [gio.socket.Socket] — it is up to the caller to do that if they wish. If they
   do not, and [gio.socket.Socket.close] is called on the base socket, the
-  [gio.dtls_connection.DtlsConnection] will not raise a [gio.types.IOErrorEnum.NotConnected] error on
+  [gio.dtls_connection.DtlsConnection] will not raise a [gio.types.IOErrorEnum.notConnected] error on
   further I/O.
 */
 interface DtlsConnection
@@ -56,7 +56,7 @@ interface DtlsConnection
     not close the underlying #GDtlsConnection:base-socket; that must be closed
     separately.
     
-    Once conn is closed, all other operations will return [gio.types.IOErrorEnum.Closed].
+    Once conn is closed, all other operations will return [gio.types.IOErrorEnum.closed].
     Closing a #GDtlsConnection multiple times will not return an error.
     
     #GDtlsConnections will be automatically closed when the last reference is
@@ -168,7 +168,7 @@ interface DtlsConnection
 
   /**
       Returns the current DTLS protocol version, which may be
-    [gio.types.TlsProtocolVersion.Unknown] if the connection has not handshaked, or
+    [gio.types.TlsProtocolVersion.unknown] if the connection has not handshaked, or
     has been closed, or if the TLS backend has implemented a protocol version
     that is not a recognized #GTlsProtocolVersion.
     Returns:     The current DTLS protocol version
@@ -178,7 +178,7 @@ interface DtlsConnection
   /**
       Gets conn rehandshaking mode. See
     [gio.dtls_connection.DtlsConnection.setRehandshakeMode] for details.
-    Returns:     [gio.types.TlsRehandshakeMode.Safely]
+    Returns:     [gio.types.TlsRehandshakeMode.safely]
   
     Deprecated:     Changing the rehandshake mode is no longer
         required for compatibility. Also, rehandshaking has been removed
@@ -271,7 +271,7 @@ interface DtlsConnection
     time.
     
     For a #GDtlsClientConnection, this is optional. If a handshake fails
-    with [gio.types.TlsError.CertificateRequired], that means that the server
+    with [gio.types.TlsError.certificateRequired], that means that the server
     requires a certificate, and if you try connecting again, you should
     call this method first. You can call
     [gio.dtls_client_connection.DtlsClientConnection.getAcceptedCas] on the failed connection
@@ -293,7 +293,7 @@ interface DtlsConnection
     This is set to the default database by default. See
     [gio.tls_backend.TlsBackend.getDefaultDatabase]. If set to null, then
     peer certificate validation will always set the
-    [gio.types.TlsCertificateFlags.UnknownCa] error (meaning
+    [gio.types.TlsCertificateFlags.unknownCa] error (meaning
     #GDtlsConnection::accept-certificate will always be emitted on
     client-side connections, unless that bit is not set in
     #GDtlsClientConnection:validation-flags).
@@ -336,7 +336,7 @@ interface DtlsConnection
     before the connection is closed. If this is true (the default),
     then conn will expect to receive a TLS close notification from its
     peer before the connection is closed, and will return a
-    [gio.types.TlsError.Eof] error if the connection is closed without proper
+    [gio.types.TlsError.eof] error if the connection is closed without proper
     notification (since this may indicate a network error, or
     man-in-the-middle attack).
     
@@ -367,11 +367,11 @@ interface DtlsConnection
     
     If shutdown_read is true then the receiving side of the connection is shut
     down, and further reading is disallowed. Subsequent calls to
-    [gio.datagram_based.DatagramBased.receiveMessages] will return [gio.types.IOErrorEnum.Closed].
+    [gio.datagram_based.DatagramBased.receiveMessages] will return [gio.types.IOErrorEnum.closed].
     
     If shutdown_write is true then the sending side of the connection is shut
     down, and further writing is disallowed. Subsequent calls to
-    [gio.datagram_based.DatagramBased.sendMessages] will return [gio.types.IOErrorEnum.Closed].
+    [gio.datagram_based.DatagramBased.sendMessages] will return [gio.types.IOErrorEnum.closed].
     
     It is allowed for both shutdown_read and shutdown_write to be TRUE — this
     is equivalent to calling [gio.dtls_connection.DtlsConnection.close].
@@ -420,14 +420,14 @@ interface DtlsConnection
     #GDtlsClientConnection:validation_flags. If you would like the
     certificate to be accepted despite errors, return true from the
     signal handler. Otherwise, if no handler accepts the certificate,
-    the handshake will fail with [gio.types.TlsError.BadCertificate].
+    the handshake will fail with [gio.types.TlsError.badCertificate].
     
     GLib guarantees that if certificate verification fails, this signal
     will be emitted with at least one error will be set in errors, but
     it does not guarantee that all possible errors will be set.
     Accordingly, you may not safely decide to ignore any particular
     type of error. For example, it would be incorrect to ignore
-    [gio.types.TlsCertificateFlags.Expired] if you want to allow expired
+    [gio.types.TlsCertificateFlags.expired] if you want to allow expired
     certificates, because this could potentially be the only error flag
     set even if other problems exist with the certificate.
     
@@ -444,7 +444,7 @@ interface DtlsConnection
     let the user decide whether or not to accept the certificate, you
     would have to return false from the signal handler on the first
     attempt, and then after the connection attempt returns a
-    [gio.types.TlsError.BadCertificate], you can interact with the user, and
+    [gio.types.TlsError.badCertificate], you can interact with the user, and
     if the user decides to accept the certificate, remember that fact,
     create a new connection, and return true from the signal handler
     the next time.
@@ -473,9 +473,9 @@ interface DtlsConnection
     Connect to AcceptCertificate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectAcceptCertificate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : AcceptCertificateCallbackDlg) || is(T : AcceptCertificateCallbackFunc));
   }

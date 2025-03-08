@@ -16,7 +16,7 @@ import glib.error;
 class CompressedInputStream : arrow.input_stream.InputStream
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -37,9 +37,9 @@ class CompressedInputStream : arrow.input_stream.InputStream
   {
     GArrowCompressedInputStream* _cretval;
     GError *_err;
-    _cretval = garrow_compressed_input_stream_new(codec ? cast(GArrowCodec*)codec.cPtr(No.Dup) : null, raw ? cast(GArrowInputStream*)raw.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_compressed_input_stream_new(codec ? cast(GArrowCodec*)codec.cPtr(No.dup) : null, raw ? cast(GArrowInputStream*)raw.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

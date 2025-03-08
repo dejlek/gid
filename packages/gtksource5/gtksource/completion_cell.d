@@ -36,7 +36,7 @@ import pango.attr_list;
 class CompletionCell : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -69,34 +69,34 @@ class CompletionCell : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_completion_cell_get_widget(cast(GtkSourceCompletionCell*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
   /** */
   void setGicon(gio.icon.Icon gicon)
   {
-    gtk_source_completion_cell_set_gicon(cast(GtkSourceCompletionCell*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.Dup) : null);
+    gtk_source_completion_cell_set_gicon(cast(GtkSourceCompletionCell*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.dup) : null);
   }
 
   /** */
   void setIconName(string iconName)
   {
-    const(char)* _iconName = iconName.toCString(No.Alloc);
+    const(char)* _iconName = iconName.toCString(No.alloc);
     gtk_source_completion_cell_set_icon_name(cast(GtkSourceCompletionCell*)cPtr, _iconName);
   }
 
   /** */
   void setMarkup(string markup)
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString(No.alloc);
     gtk_source_completion_cell_set_markup(cast(GtkSourceCompletionCell*)cPtr, _markup);
   }
 
   /** */
   void setPaintable(gdk.paintable.Paintable paintable)
   {
-    gtk_source_completion_cell_set_paintable(cast(GtkSourceCompletionCell*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
+    gtk_source_completion_cell_set_paintable(cast(GtkSourceCompletionCell*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.dup) : null);
   }
 
   /**
@@ -106,20 +106,20 @@ class CompletionCell : gtk.widget.Widget
   */
   void setText(string text = null)
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString(No.alloc);
     gtk_source_completion_cell_set_text(cast(GtkSourceCompletionCell*)cPtr, _text);
   }
 
   /** */
   void setTextWithAttributes(string text, pango.attr_list.AttrList attrs)
   {
-    const(char)* _text = text.toCString(No.Alloc);
-    gtk_source_completion_cell_set_text_with_attributes(cast(GtkSourceCompletionCell*)cPtr, _text, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
+    const(char)* _text = text.toCString(No.alloc);
+    gtk_source_completion_cell_set_text_with_attributes(cast(GtkSourceCompletionCell*)cPtr, _text, attrs ? cast(PangoAttrList*)attrs.cPtr(No.dup) : null);
   }
 
   /** */
   void setWidget(gtk.widget.Widget child)
   {
-    gtk_source_completion_cell_set_widget(cast(GtkSourceCompletionCell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_source_completion_cell_set_widget(cast(GtkSourceCompletionCell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 }

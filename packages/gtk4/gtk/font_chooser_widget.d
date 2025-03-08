@@ -38,7 +38,7 @@ import gtk.widget;
 class FontChooserWidget : gtk.widget.Widget, gtk.font_chooser.FontChooser
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -66,6 +66,6 @@ class FontChooserWidget : gtk.widget.Widget, gtk.font_chooser.FontChooser
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_chooser_widget_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 }

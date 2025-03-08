@@ -14,7 +14,7 @@ import gobject.object;
 class Scalar : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,10 +40,10 @@ class Scalar : gobject.object.ObjectG
 
     auto _data = cast(const(ubyte)*)data.ptr;
     GError *_err;
-    _cretval = garrow_scalar_parse(dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, _data, _size, &_err);
+    _cretval = garrow_scalar_parse(dataType ? cast(GArrowDataType*)dataType.cPtr(No.dup) : null, _data, _size, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -52,10 +52,10 @@ class Scalar : gobject.object.ObjectG
   {
     GArrowScalar* _cretval;
     GError *_err;
-    _cretval = garrow_scalar_cast(cast(GArrowScalar*)cPtr, dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, options ? cast(GArrowCastOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_scalar_cast(cast(GArrowScalar*)cPtr, dataType ? cast(GArrowDataType*)dataType.cPtr(No.dup) : null, options ? cast(GArrowCastOptions*)options.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -63,7 +63,7 @@ class Scalar : gobject.object.ObjectG
   bool equal(arrow.scalar.Scalar otherScalar)
   {
     bool _retval;
-    _retval = garrow_scalar_equal(cast(GArrowScalar*)cPtr, otherScalar ? cast(GArrowScalar*)otherScalar.cPtr(No.Dup) : null);
+    _retval = garrow_scalar_equal(cast(GArrowScalar*)cPtr, otherScalar ? cast(GArrowScalar*)otherScalar.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ class Scalar : gobject.object.ObjectG
   bool equalOptions(arrow.scalar.Scalar otherScalar, arrow.equal_options.EqualOptions options = null)
   {
     bool _retval;
-    _retval = garrow_scalar_equal_options(cast(GArrowScalar*)cPtr, otherScalar ? cast(GArrowScalar*)otherScalar.cPtr(No.Dup) : null, options ? cast(GArrowEqualOptions*)options.cPtr(No.Dup) : null);
+    _retval = garrow_scalar_equal_options(cast(GArrowScalar*)cPtr, otherScalar ? cast(GArrowScalar*)otherScalar.cPtr(No.dup) : null, options ? cast(GArrowEqualOptions*)options.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class Scalar : gobject.object.ObjectG
   {
     GArrowDataType* _cretval;
     _cretval = garrow_scalar_get_data_type(cast(GArrowScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, No.take);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class Scalar : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = garrow_scalar_to_string(cast(GArrowScalar*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

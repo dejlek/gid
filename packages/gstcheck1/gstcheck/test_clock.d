@@ -157,7 +157,7 @@ import gstcheck.types;
 class TestClock : gst.clock.Clock
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -183,7 +183,7 @@ class TestClock : gst.clock.Clock
   {
     GstClock* _cretval;
     _cretval = gst_test_clock_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -198,7 +198,7 @@ class TestClock : gst.clock.Clock
   {
     GstClock* _cretval;
     _cretval = gst_test_clock_new_with_start_time(startTime);
-    auto _retval = ObjectG.getDObject!(gstcheck.test_clock.TestClock)(cast(GstClock*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstcheck.test_clock.TestClock)(cast(GstClock*)_cretval, Yes.take);
     return _retval;
   }
 

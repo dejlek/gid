@@ -14,7 +14,7 @@ import glib.error;
 class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,8 +34,8 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
   this(arrow.decimal128_data_type.Decimal128DataType dataType)
   {
     GArrowDecimal128ArrayBuilder* _cretval;
-    _cretval = garrow_decimal128_array_builder_new(dataType ? cast(GArrowDecimal128DataType*)dataType.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_decimal128_array_builder_new(dataType ? cast(GArrowDecimal128DataType*)dataType.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /** */
@@ -43,7 +43,7 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_decimal128_array_builder_append(cast(GArrowDecimal128ArrayBuilder*)cPtr, value ? cast(GArrowDecimal128*)value.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_decimal128_array_builder_append(cast(GArrowDecimal128ArrayBuilder*)cPtr, value ? cast(GArrowDecimal128*)value.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -56,7 +56,7 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_decimal128_array_builder_append_value(cast(GArrowDecimal128ArrayBuilder*)cPtr, value ? cast(GArrowDecimal128*)value.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_decimal128_array_builder_append_value(cast(GArrowDecimal128ArrayBuilder*)cPtr, value ? cast(GArrowDecimal128*)value.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

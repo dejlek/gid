@@ -21,7 +21,7 @@ import gobject.object;
 class InetAddress : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,14 +50,14 @@ class InetAddress : gobject.object.ObjectG
   {
     GInetAddress* _cretval;
     _cretval = g_inet_address_new_any(family);
-    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.take);
     return _retval;
   }
 
   /**
       Creates a new #GInetAddress from the given family and bytes.
-    bytes should be 4 bytes for [gio.types.SocketFamily.Ipv4] and 16 bytes for
-    [gio.types.SocketFamily.Ipv6].
+    bytes should be 4 bytes for [gio.types.SocketFamily.ipv4] and 16 bytes for
+    [gio.types.SocketFamily.ipv6].
     Params:
       bytes =       raw address data
       family =       the address family of bytes
@@ -69,7 +69,7 @@ class InetAddress : gobject.object.ObjectG
     GInetAddress* _cretval;
     auto _bytes = cast(const(ubyte)*)(bytes ~ ubyte.init).ptr;
     _cretval = g_inet_address_new_from_bytes(_bytes, family);
-    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -84,9 +84,9 @@ class InetAddress : gobject.object.ObjectG
   static gio.inet_address.InetAddress newFromString(string string_)
   {
     GInetAddress* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString(No.alloc);
     _cretval = g_inet_address_new_from_string(_string_);
-    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class InetAddress : gobject.object.ObjectG
   {
     GInetAddress* _cretval;
     _cretval = g_inet_address_new_loopback(family);
-    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class InetAddress : gobject.object.ObjectG
   bool equal(gio.inet_address.InetAddress otherAddress)
   {
     bool _retval;
-    _retval = g_inet_address_equal(cast(GInetAddress*)cPtr, otherAddress ? cast(GInetAddress*)otherAddress.cPtr(No.Dup) : null);
+    _retval = g_inet_address_equal(cast(GInetAddress*)cPtr, otherAddress ? cast(GInetAddress*)otherAddress.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -267,7 +267,7 @@ class InetAddress : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = g_inet_address_to_string(cast(GInetAddress*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

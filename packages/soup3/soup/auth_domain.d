@@ -29,7 +29,7 @@ import soup.types;
 class AuthDomain : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -62,8 +62,8 @@ class AuthDomain : gobject.object.ObjectG
   string accepts(soup.server_message.ServerMessage msg)
   {
     char* _cretval;
-    _cretval = soup_auth_domain_accepts(cast(SoupAuthDomain*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    _cretval = soup_auth_domain_accepts(cast(SoupAuthDomain*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -78,7 +78,7 @@ class AuthDomain : gobject.object.ObjectG
   */
   void addPath(string path)
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     soup_auth_domain_add_path(cast(SoupAuthDomain*)cPtr, _path);
   }
 
@@ -94,7 +94,7 @@ class AuthDomain : gobject.object.ObjectG
   */
   void challenge(soup.server_message.ServerMessage msg)
   {
-    soup_auth_domain_challenge(cast(SoupAuthDomain*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null);
+    soup_auth_domain_challenge(cast(SoupAuthDomain*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.dup) : null);
   }
 
   /**
@@ -112,9 +112,9 @@ class AuthDomain : gobject.object.ObjectG
   bool checkPassword(soup.server_message.ServerMessage msg, string username, string password)
   {
     bool _retval;
-    const(char)* _username = username.toCString(No.Alloc);
-    const(char)* _password = password.toCString(No.Alloc);
-    _retval = soup_auth_domain_check_password(cast(SoupAuthDomain*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null, _username, _password);
+    const(char)* _username = username.toCString(No.alloc);
+    const(char)* _password = password.toCString(No.alloc);
+    _retval = soup_auth_domain_check_password(cast(SoupAuthDomain*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.dup) : null, _username, _password);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class AuthDomain : gobject.object.ObjectG
   bool covers(soup.server_message.ServerMessage msg)
   {
     bool _retval;
-    _retval = soup_auth_domain_covers(cast(SoupAuthDomain*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null);
+    _retval = soup_auth_domain_covers(cast(SoupAuthDomain*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class AuthDomain : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_auth_domain_get_realm(cast(SoupAuthDomain*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class AuthDomain : gobject.object.ObjectG
   */
   void removePath(string path)
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     soup_auth_domain_remove_path(cast(SoupAuthDomain*)cPtr, _path);
   }
 
@@ -207,7 +207,7 @@ class AuthDomain : gobject.object.ObjectG
     {
       auto _dlg = cast(soup.types.AuthDomainFilter*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.take));
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;
@@ -233,9 +233,9 @@ class AuthDomain : gobject.object.ObjectG
     extern(C) bool _authCallbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, void* userData)
     {
       auto _dlg = cast(soup.types.AuthDomainGenericAuthCallback*)userData;
-      string _username = username.fromCString(No.Free);
+      string _username = username.fromCString(No.free);
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.take), _username);
       return _retval;
     }
     auto _authCallbackCB = authCallback ? &_authCallbackCallback : null;

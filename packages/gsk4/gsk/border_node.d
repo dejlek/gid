@@ -14,7 +14,7 @@ import gsk.types;
 class BorderNode : gsk.render_node.RenderNode
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.BorderNode");
@@ -46,7 +46,7 @@ class BorderNode : gsk.render_node.RenderNode
       _tmpborderColor ~= *cast(GdkRGBA*)obj.cPtr;
     const(GdkRGBA)* _borderColor = _tmpborderColor.ptr;
     _cretval = gsk_border_node_new(outline ? cast(const(GskRoundedRect)*)outline.cPtr : null, _borderWidth, _borderColor);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -58,7 +58,7 @@ class BorderNode : gsk.render_node.RenderNode
   {
     const(GdkRGBA)* _cretval;
     _cretval = gsk_border_node_get_colors(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 

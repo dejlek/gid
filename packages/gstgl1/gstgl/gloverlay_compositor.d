@@ -15,7 +15,7 @@ import gstgl.types;
 class GLOverlayCompositor : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,16 +35,16 @@ class GLOverlayCompositor : gst.object.ObjectGst
   this(gstgl.glcontext.GLContext context)
   {
     GstGLOverlayCompositor* _cretval;
-    _cretval = gst_gl_overlay_compositor_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    _cretval = gst_gl_overlay_compositor_new(context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
+    this(_cretval, No.take);
   }
 
   /** */
   static gst.caps.Caps addCaps(gst.caps.Caps caps)
   {
     GstCaps* _cretval;
-    _cretval = gst_gl_overlay_compositor_add_caps(caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_gl_overlay_compositor_add_caps(caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -63,6 +63,6 @@ class GLOverlayCompositor : gst.object.ObjectGst
   /** */
   void uploadOverlays(gst.buffer.Buffer buf)
   {
-    gst_gl_overlay_compositor_upload_overlays(cast(GstGLOverlayCompositor*)cPtr, buf ? cast(GstBuffer*)buf.cPtr(No.Dup) : null);
+    gst_gl_overlay_compositor_upload_overlays(cast(GstGLOverlayCompositor*)cPtr, buf ? cast(GstBuffer*)buf.cPtr(No.dup) : null);
   }
 }

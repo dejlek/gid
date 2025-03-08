@@ -46,7 +46,7 @@ import gobject.object;
 class Cursor : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -90,9 +90,9 @@ class Cursor : gobject.object.ObjectG
   static gdk.cursor.Cursor newFromName(string name, gdk.cursor.Cursor fallback = null)
   {
     GdkCursor* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gdk_cursor_new_from_name(_name, fallback ? cast(GdkCursor*)fallback.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
+    const(char)* _name = name.toCString(No.alloc);
+    _cretval = gdk_cursor_new_from_name(_name, fallback ? cast(GdkCursor*)fallback.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -109,8 +109,8 @@ class Cursor : gobject.object.ObjectG
   static gdk.cursor.Cursor newFromTexture(gdk.texture.Texture texture, int hotspotX, int hotspotY, gdk.cursor.Cursor fallback = null)
   {
     GdkCursor* _cretval;
-    _cretval = gdk_cursor_new_from_texture(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null, hotspotX, hotspotY, fallback ? cast(GdkCursor*)fallback.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
+    _cretval = gdk_cursor_new_from_texture(texture ? cast(GdkTexture*)texture.cPtr(No.dup) : null, hotspotX, hotspotY, fallback ? cast(GdkCursor*)fallback.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class Cursor : gobject.object.ObjectG
   {
     GdkCursor* _cretval;
     _cretval = gdk_cursor_get_fallback(cast(GdkCursor*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.take);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class Cursor : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gdk_cursor_get_name(cast(GdkCursor*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class Cursor : gobject.object.ObjectG
   {
     GdkTexture* _cretval;
     _cretval = gdk_cursor_get_texture(cast(GdkCursor*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.take);
     return _retval;
   }
 }

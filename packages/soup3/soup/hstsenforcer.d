@@ -37,7 +37,7 @@ import soup.types;
 class HSTSEnforcer : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -66,7 +66,7 @@ class HSTSEnforcer : gobject.object.ObjectG, soup.session_feature.SessionFeature
   {
     SoupHSTSEnforcer* _cretval;
     _cretval = soup_hsts_enforcer_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -111,7 +111,7 @@ class HSTSEnforcer : gobject.object.ObjectG, soup.session_feature.SessionFeature
   bool hasValidPolicy(string domain)
   {
     bool _retval;
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString(No.alloc);
     _retval = soup_hsts_enforcer_has_valid_policy(cast(SoupHSTSEnforcer*)cPtr, _domain);
     return _retval;
   }
@@ -141,7 +141,7 @@ class HSTSEnforcer : gobject.object.ObjectG, soup.session_feature.SessionFeature
   */
   void setPolicy(soup.hstspolicy.HSTSPolicy policy)
   {
-    soup_hsts_enforcer_set_policy(cast(SoupHSTSEnforcer*)cPtr, policy ? cast(SoupHSTSPolicy*)policy.cPtr(No.Dup) : null);
+    soup_hsts_enforcer_set_policy(cast(SoupHSTSEnforcer*)cPtr, policy ? cast(SoupHSTSPolicy*)policy.cPtr(No.dup) : null);
   }
 
   /**
@@ -155,7 +155,7 @@ class HSTSEnforcer : gobject.object.ObjectG, soup.session_feature.SessionFeature
   */
   void setSessionPolicy(string domain, bool includeSubdomains)
   {
-    const(char)* _domain = domain.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString(No.alloc);
     soup_hsts_enforcer_set_session_policy(cast(SoupHSTSEnforcer*)cPtr, _domain, includeSubdomains);
   }
 
@@ -189,10 +189,10 @@ class HSTSEnforcer : gobject.object.ObjectG, soup.session_feature.SessionFeature
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

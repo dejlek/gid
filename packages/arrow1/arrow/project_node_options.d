@@ -11,7 +11,7 @@ import gid.gid;
 class ProjectNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -39,9 +39,9 @@ class ProjectNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 
     char*[] _tmpnames;
     foreach (s; names)
-      _tmpnames ~= s.toCString(No.Alloc);
+      _tmpnames ~= s.toCString(No.alloc);
     char** _names = _tmpnames.ptr;
     _cretval = garrow_project_node_options_new(_expressions, _names, _nNames);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

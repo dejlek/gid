@@ -33,14 +33,14 @@ import gtk.widget;
   
   # Accessibility
   
-  Until GTK 4.10, [gtk.viewport.Viewport] used the [gtk.types.AccessibleRole.Group] role.
+  Until GTK 4.10, [gtk.viewport.Viewport] used the [gtk.types.AccessibleRole.group] role.
   
-  Starting from GTK 4.12, [gtk.viewport.Viewport] uses the [gtk.types.AccessibleRole.Generic] role.
+  Starting from GTK 4.12, [gtk.viewport.Viewport] uses the [gtk.types.AccessibleRole.generic] role.
 */
 class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -71,8 +71,8 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_viewport_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    _cretval = gtk_viewport_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.dup) : null);
+    this(_cretval, No.take);
   }
 
   /**
@@ -83,7 +83,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkWidget* _cretval;
     _cretval = gtk_viewport_get_child(cast(GtkViewport*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void scrollTo(gtk.widget.Widget descendant, gtk.scroll_info.ScrollInfo scroll = null)
   {
-    gtk_viewport_scroll_to(cast(GtkViewport*)cPtr, descendant ? cast(GtkWidget*)descendant.cPtr(No.Dup) : null, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
+    gtk_viewport_scroll_to(cast(GtkViewport*)cPtr, descendant ? cast(GtkWidget*)descendant.cPtr(No.dup) : null, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.dup) : null);
   }
 
   /**
@@ -121,7 +121,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_viewport_set_child(cast(GtkViewport*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_viewport_set_child(cast(GtkViewport*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**

@@ -10,7 +10,7 @@ import gid.gid;
 class DoubleScalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class DoubleScalar : arrow.scalar.Scalar
   {
     GArrowDoubleScalar* _cretval;
     _cretval = garrow_double_scalar_new(value);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */

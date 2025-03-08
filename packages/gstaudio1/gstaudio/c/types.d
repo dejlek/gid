@@ -16,32 +16,32 @@ enum GstAudioBaseSinkDiscontReason
   /**
       No discontinuity occurred
   */
-  NoDiscont = 0,
+  noDiscont = 0,
 
   /**
       New caps are set, causing renegotiotion
   */
-  NewCaps = 1,
+  newCaps = 1,
 
   /**
       Samples have been flushed
   */
-  Flush = 2,
+  flush = 2,
 
   /**
       Sink was synchronized to the estimated latency (occurs during initialization)
   */
-  SyncLatency = 3,
+  syncLatency = 3,
 
   /**
       Aligning buffers failed because the timestamps are too discontinuous
   */
-  Alignment = 4,
+  alignment = 4,
 
   /**
       Audio output device experienced and recovered from an error but introduced latency in the process (see also [gstaudio.audio_base_sink.AudioBaseSink.reportDeviceFailure])
   */
-  DeviceFailure = 5,
+  deviceFailure = 5,
 }
 
 /**
@@ -53,23 +53,23 @@ enum GstAudioBaseSinkSlaveMethod
   /**
       Resample to match the master clock
   */
-  Resample = 0,
+  resample = 0,
 
   /**
       Adjust playout pointer when master clock
     drifts too much.
   */
-  Skew = 1,
+  skew = 1,
 
   /**
       No adjustment is done.
   */
-  None = 2,
+  none = 2,
 
   /**
       Use custom clock slaving algorithm (Since: 1.6)
   */
-  Custom = 3,
+  custom = 3,
 }
 
 /**
@@ -81,24 +81,24 @@ enum GstAudioBaseSrcSlaveMethod
   /**
       Resample to match the master clock.
   */
-  Resample = 0,
+  resample = 0,
 
   /**
       Retimestamp output buffers with master
     clock time.
   */
-  ReTimestamp = 1,
+  reTimestamp = 1,
 
   /**
       Adjust capture pointer when master clock
     drifts too much.
   */
-  Skew = 2,
+  skew = 2,
 
   /**
       No adjustment is done.
   */
-  None = 3,
+  none = 3,
 }
 
 /**
@@ -110,12 +110,12 @@ enum GstAudioCdSrcMode
   /**
       each single track is a stream
   */
-  Normal = 0,
+  normal = 0,
 
   /**
       the entire disc is a single stream
   */
-  Continuous = 1,
+  continuous = 1,
 }
 
 /**
@@ -126,27 +126,27 @@ enum GstAudioChannelMixerFlags : uint
   /**
       no flag
   */
-  None = 0,
+  none = 0,
 
   /**
       input channels are not interleaved
   */
-  NonInterleavedIn = 1,
+  nonInterleavedIn = 1,
 
   /**
       output channels are not interleaved
   */
-  NonInterleavedOut = 2,
+  nonInterleavedOut = 2,
 
   /**
       input channels are explicitly unpositioned
   */
-  UnpositionedIn = 4,
+  unpositionedIn = 4,
 
   /**
       output channels are explicitly unpositioned
   */
-  UnpositionedOut = 8,
+  unpositionedOut = 8,
 }
 
 /**
@@ -182,158 +182,158 @@ enum GstAudioChannelPosition
         from a sound card that records 1024 channels; mutually exclusive with
         any other channel position
   */
-  None = -3,
+  none = -3,
 
   /**
       Mono without direction;
         can only be used with 1 channel
   */
-  Mono = -2,
+  mono = -2,
 
   /**
       invalid position
   */
-  Invalid = -1,
+  invalid = -1,
 
   /**
       Front left
   */
-  FrontLeft = 0,
+  frontLeft = 0,
 
   /**
       Front right
   */
-  FrontRight = 1,
+  frontRight = 1,
 
   /**
       Front center
   */
-  FrontCenter = 2,
+  frontCenter = 2,
 
   /**
       Low-frequency effects 1 (subwoofer)
   */
-  Lfe1 = 3,
+  lfe1 = 3,
 
   /**
       Rear left
   */
-  RearLeft = 4,
+  rearLeft = 4,
 
   /**
       Rear right
   */
-  RearRight = 5,
+  rearRight = 5,
 
   /**
       Front left of center
   */
-  FrontLeftOfCenter = 6,
+  frontLeftOfCenter = 6,
 
   /**
       Front right of center
   */
-  FrontRightOfCenter = 7,
+  frontRightOfCenter = 7,
 
   /**
       Rear center
   */
-  RearCenter = 8,
+  rearCenter = 8,
 
   /**
       Low-frequency effects 2 (subwoofer)
   */
-  Lfe2 = 9,
+  lfe2 = 9,
 
   /**
       Side left
   */
-  SideLeft = 10,
+  sideLeft = 10,
 
   /**
       Side right
   */
-  SideRight = 11,
+  sideRight = 11,
 
   /**
       Top front left
   */
-  TopFrontLeft = 12,
+  topFrontLeft = 12,
 
   /**
       Top front right
   */
-  TopFrontRight = 13,
+  topFrontRight = 13,
 
   /**
       Top front center
   */
-  TopFrontCenter = 14,
+  topFrontCenter = 14,
 
   /**
       Top center
   */
-  TopCenter = 15,
+  topCenter = 15,
 
   /**
       Top rear left
   */
-  TopRearLeft = 16,
+  topRearLeft = 16,
 
   /**
       Top rear right
   */
-  TopRearRight = 17,
+  topRearRight = 17,
 
   /**
       Top side right
   */
-  TopSideLeft = 18,
+  topSideLeft = 18,
 
   /**
       Top rear right
   */
-  TopSideRight = 19,
+  topSideRight = 19,
 
   /**
       Top rear center
   */
-  TopRearCenter = 20,
+  topRearCenter = 20,
 
   /**
       Bottom front center
   */
-  BottomFrontCenter = 21,
+  bottomFrontCenter = 21,
 
   /**
       Bottom front left
   */
-  BottomFrontLeft = 22,
+  bottomFrontLeft = 22,
 
   /**
       Bottom front right
   */
-  BottomFrontRight = 23,
+  bottomFrontRight = 23,
 
   /**
       Wide left (between front left and side left)
   */
-  WideLeft = 24,
+  wideLeft = 24,
 
   /**
       Wide right (between front right and side right)
   */
-  WideRight = 25,
+  wideRight = 25,
 
   /**
       Surround left (between rear left and side left)
   */
-  SurroundLeft = 26,
+  surroundLeft = 26,
 
   /**
       Surround right (between rear right and side right)
   */
-  SurroundRight = 27,
+  surroundRight = 27,
 }
 
 /**
@@ -344,19 +344,19 @@ enum GstAudioConverterFlags : uint
   /**
       no flag
   */
-  None = 0,
+  none = 0,
 
   /**
       the input sample arrays are writable and can be
        used as temporary storage during conversion.
   */
-  InWritable = 1,
+  inWritable = 1,
 
   /**
       allow arbitrary rate updates with
        [gstaudio.audio_converter.AudioConverter.updateConfig].
   */
-  VariableRate = 2,
+  variableRate = 2,
 }
 
 /**
@@ -367,22 +367,22 @@ enum GstAudioDitherMethod
   /**
       No dithering
   */
-  None = 0,
+  none = 0,
 
   /**
       Rectangular dithering
   */
-  Rpdf = 1,
+  rpdf = 1,
 
   /**
       Triangular dithering (default)
   */
-  Tpdf = 2,
+  tpdf = 2,
 
   /**
       High frequency triangular dithering
   */
-  TpdfHf = 3,
+  tpdfHf = 3,
 }
 
 /**
@@ -393,13 +393,13 @@ enum GstAudioFlags : uint
   /**
       no valid flag
   */
-  None = 0,
+  none = 0,
 
   /**
       the position array explicitly
         contains unpositioned channels.
   */
-  Unpositioned = 1,
+  unpositioned = 1,
 }
 
 /**
@@ -410,232 +410,232 @@ enum GstAudioFormat
   /**
       unknown or unset audio format
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       encoded audio format
   */
-  Encoded = 1,
+  encoded = 1,
 
   /**
       8 bits in 8 bits, signed
   */
-  S8 = 2,
+  s8 = 2,
 
   /**
       8 bits in 8 bits, unsigned
   */
-  U8 = 3,
+  u8 = 3,
 
   /**
       16 bits in 16 bits, signed, little endian
   */
-  S16le = 4,
+  s16le = 4,
 
   /**
       16 bits in 16 bits, signed, big endian
   */
-  S16be = 5,
+  s16be = 5,
 
   /**
       16 bits in 16 bits, unsigned, little endian
   */
-  U16le = 6,
+  u16le = 6,
 
   /**
       16 bits in 16 bits, unsigned, big endian
   */
-  U16be = 7,
+  u16be = 7,
 
   /**
       24 bits in 32 bits, signed, little endian
   */
-  S2432le = 8,
+  s2432le = 8,
 
   /**
       24 bits in 32 bits, signed, big endian
   */
-  S2432be = 9,
+  s2432be = 9,
 
   /**
       24 bits in 32 bits, unsigned, little endian
   */
-  U2432le = 10,
+  u2432le = 10,
 
   /**
       24 bits in 32 bits, unsigned, big endian
   */
-  U2432be = 11,
+  u2432be = 11,
 
   /**
       32 bits in 32 bits, signed, little endian
   */
-  S32le = 12,
+  s32le = 12,
 
   /**
       32 bits in 32 bits, signed, big endian
   */
-  S32be = 13,
+  s32be = 13,
 
   /**
       32 bits in 32 bits, unsigned, little endian
   */
-  U32le = 14,
+  u32le = 14,
 
   /**
       32 bits in 32 bits, unsigned, big endian
   */
-  U32be = 15,
+  u32be = 15,
 
   /**
       24 bits in 24 bits, signed, little endian
   */
-  S24le = 16,
+  s24le = 16,
 
   /**
       24 bits in 24 bits, signed, big endian
   */
-  S24be = 17,
+  s24be = 17,
 
   /**
       24 bits in 24 bits, unsigned, little endian
   */
-  U24le = 18,
+  u24le = 18,
 
   /**
       24 bits in 24 bits, unsigned, big endian
   */
-  U24be = 19,
+  u24be = 19,
 
   /**
       20 bits in 24 bits, signed, little endian
   */
-  S20le = 20,
+  s20le = 20,
 
   /**
       20 bits in 24 bits, signed, big endian
   */
-  S20be = 21,
+  s20be = 21,
 
   /**
       20 bits in 24 bits, unsigned, little endian
   */
-  U20le = 22,
+  u20le = 22,
 
   /**
       20 bits in 24 bits, unsigned, big endian
   */
-  U20be = 23,
+  u20be = 23,
 
   /**
       18 bits in 24 bits, signed, little endian
   */
-  S18le = 24,
+  s18le = 24,
 
   /**
       18 bits in 24 bits, signed, big endian
   */
-  S18be = 25,
+  s18be = 25,
 
   /**
       18 bits in 24 bits, unsigned, little endian
   */
-  U18le = 26,
+  u18le = 26,
 
   /**
       18 bits in 24 bits, unsigned, big endian
   */
-  U18be = 27,
+  u18be = 27,
 
   /**
       32-bit floating point samples, little endian
   */
-  F32le = 28,
+  f32le = 28,
 
   /**
       32-bit floating point samples, big endian
   */
-  F32be = 29,
+  f32be = 29,
 
   /**
       64-bit floating point samples, little endian
   */
-  F64le = 30,
+  f64le = 30,
 
   /**
       64-bit floating point samples, big endian
   */
-  F64be = 31,
+  f64be = 31,
 
   /**
       16 bits in 16 bits, signed, native endianness
   */
-  S16 = 4,
+  s16 = 4,
 
   /**
       16 bits in 16 bits, unsigned, native endianness
   */
-  U16 = 6,
+  u16 = 6,
 
   /**
       24 bits in 32 bits, signed, native endianness
   */
-  S2432 = 8,
+  s2432 = 8,
 
   /**
       24 bits in 32 bits, unsigned, native endianness
   */
-  U2432 = 10,
+  u2432 = 10,
 
   /**
       32 bits in 32 bits, signed, native endianness
   */
-  S32 = 12,
+  s32 = 12,
 
   /**
       32 bits in 32 bits, unsigned, native endianness
   */
-  U32 = 14,
+  u32 = 14,
 
   /**
       24 bits in 24 bits, signed, native endianness
   */
-  S24 = 16,
+  s24 = 16,
 
   /**
       24 bits in 24 bits, unsigned, native endianness
   */
-  U24 = 18,
+  u24 = 18,
 
   /**
       20 bits in 24 bits, signed, native endianness
   */
-  S20 = 20,
+  s20 = 20,
 
   /**
       20 bits in 24 bits, unsigned, native endianness
   */
-  U20 = 22,
+  u20 = 22,
 
   /**
       18 bits in 24 bits, signed, native endianness
   */
-  S18 = 24,
+  s18 = 24,
 
   /**
       18 bits in 24 bits, unsigned, native endianness
   */
-  U18 = 26,
+  u18 = 26,
 
   /**
       32-bit floating point samples, native endianness
   */
-  F32 = 28,
+  f32 = 28,
 
   /**
       64-bit floating point samples, native endianness
   */
-  F64 = 30,
+  f64 = 30,
 }
 
 /**
@@ -646,28 +646,28 @@ enum GstAudioFormatFlags : uint
   /**
       integer samples
   */
-  Integer = 1,
+  integer = 1,
 
   /**
       float samples
   */
-  Float = 2,
+  float_ = 2,
 
   /**
       signed samples
   */
-  Signed = 4,
+  signed = 4,
 
   /**
       complex layout
   */
-  Complex = 16,
+  complex = 16,
 
   /**
       the format can be used in
     #GstAudioFormatUnpack and #GstAudioFormatPack functions
   */
-  Unpack = 32,
+  unpack = 32,
 }
 
 /**
@@ -678,12 +678,12 @@ enum GstAudioLayout
   /**
       interleaved audio
   */
-  Interleaved = 0,
+  interleaved = 0,
 
   /**
       non-interleaved audio
   */
-  NonInterleaved = 1,
+  nonInterleaved = 1,
 }
 
 /**
@@ -694,27 +694,27 @@ enum GstAudioNoiseShapingMethod
   /**
       No noise shaping (default)
   */
-  None = 0,
+  none = 0,
 
   /**
       Error feedback
   */
-  ErrorFeedback = 1,
+  errorFeedback = 1,
 
   /**
       Simple 2-pole noise shaping
   */
-  Simple = 2,
+  simple = 2,
 
   /**
       Medium 5-pole noise shaping
   */
-  Medium = 3,
+  medium = 3,
 
   /**
       High 8-pole noise shaping
   */
-  High = 4,
+  high = 4,
 }
 
 /**
@@ -725,7 +725,7 @@ enum GstAudioPackFlags : uint
   /**
       No flag
   */
-  None = 0,
+  none = 0,
 
   /**
       When the source has a smaller depth
@@ -734,7 +734,7 @@ enum GstAudioPackFlags : uint
       is not specified, the most significant bits of the source are duplicated
       in the least significant bits of the destination.
   */
-  TruncateRange = 1,
+  truncateRange = 1,
 }
 
 /**
@@ -745,12 +745,12 @@ enum GstAudioQuantizeFlags : uint
   /**
       no flags
   */
-  None = 0,
+  none = 0,
 
   /**
       samples are non-interleaved
   */
-  NonInterleaved = 1,
+  nonInterleaved = 1,
 }
 
 /**
@@ -761,19 +761,19 @@ enum GstAudioResamplerFilterInterpolation
   /**
       no interpolation
   */
-  None = 0,
+  none = 0,
 
   /**
       linear interpolation of the
       filter coefficients.
   */
-  Linear = 1,
+  linear = 1,
 
   /**
       cubic interpolation of the
       filter coefficients.
   */
-  Cubic = 2,
+  cubic = 2,
 }
 
 /**
@@ -786,19 +786,19 @@ enum GstAudioResamplerFilterMode
         uses less memory but more CPU and is slightly less accurate but it allows for more
         efficient variable rate resampling with [gstaudio.audio_resampler.AudioResampler.update].
   */
-  Interpolated = 0,
+  interpolated = 0,
 
   /**
       Use full filter table. This uses more memory
         but less CPU.
   */
-  Full = 1,
+  full = 1,
 
   /**
       Automatically choose between interpolated
         and full filter tables.
   */
-  Auto = 2,
+  auto_ = 2,
 }
 
 /**
@@ -809,28 +809,28 @@ enum GstAudioResamplerFlags : uint
   /**
       no flags
   */
-  None = 0,
+  none = 0,
 
   /**
       input samples are non-interleaved.
        an array of blocks of samples, one for each channel, should be passed to the
        resample function.
   */
-  NonInterleavedIn = 1,
+  nonInterleavedIn = 1,
 
   /**
       output samples are non-interleaved.
        an array of blocks of samples, one for each channel, should be passed to the
        resample function.
   */
-  NonInterleavedOut = 2,
+  nonInterleavedOut = 2,
 
   /**
       optimize for dynamic updates of the sample
        rates with [gstaudio.audio_resampler.AudioResampler.update]. This will select an interpolating filter
        when #GST_AUDIO_RESAMPLER_FILTER_MODE_AUTO is configured.
   */
-  VariableRate = 4,
+  variableRate = 4,
 }
 
 /**
@@ -842,28 +842,28 @@ enum GstAudioResamplerMethod
       Duplicates the samples when
        upsampling and drops when downsampling
   */
-  Nearest = 0,
+  nearest = 0,
 
   /**
       Uses linear interpolation to reconstruct
        missing samples and averaging to downsample
   */
-  Linear = 1,
+  linear = 1,
 
   /**
       Uses cubic interpolation
   */
-  Cubic = 2,
+  cubic = 2,
 
   /**
       Uses Blackman-Nuttall windowed sinc interpolation
   */
-  BlackmanNuttall = 3,
+  blackmanNuttall = 3,
 
   /**
       Uses Kaiser windowed sinc interpolation
   */
-  Kaiser = 4,
+  kaiser = 4,
 }
 
 /**
@@ -874,82 +874,82 @@ enum GstAudioRingBufferFormatType
   /**
       samples in linear or float
   */
-  Raw = 0,
+  raw = 0,
 
   /**
       samples in mulaw
   */
-  MuLaw = 1,
+  muLaw = 1,
 
   /**
       samples in alaw
   */
-  ALaw = 2,
+  aLaw = 2,
 
   /**
       samples in ima adpcm
   */
-  ImaAdpcm = 3,
+  imaAdpcm = 3,
 
   /**
       samples in mpeg audio (but not AAC) format
   */
-  Mpeg = 4,
+  mpeg = 4,
 
   /**
       samples in gsm format
   */
-  Gsm = 5,
+  gsm = 5,
 
   /**
       samples in IEC958 frames (e.g. AC3)
   */
-  Iec958 = 6,
+  iec958 = 6,
 
   /**
       samples in AC3 format
   */
-  Ac3 = 7,
+  ac3 = 7,
 
   /**
       samples in EAC3 format
   */
-  Eac3 = 8,
+  eac3 = 8,
 
   /**
       samples in DTS format
   */
-  Dts = 9,
+  dts = 9,
 
   /**
       samples in MPEG-2 AAC ADTS format
   */
-  Mpeg2Aac = 10,
+  mpeg2Aac = 10,
 
   /**
       samples in MPEG-4 AAC ADTS format
   */
-  Mpeg4Aac = 11,
+  mpeg4Aac = 11,
 
   /**
       samples in MPEG-2 AAC raw format (Since: 1.12)
   */
-  Mpeg2AacRaw = 12,
+  mpeg2AacRaw = 12,
 
   /**
       samples in MPEG-4 AAC raw format (Since: 1.12)
   */
-  Mpeg4AacRaw = 13,
+  mpeg4AacRaw = 13,
 
   /**
       samples in FLAC format (Since: 1.12)
   */
-  Flac = 14,
+  flac = 14,
 
   /**
       samples in DSD format (Since: 1.24)
   */
-  Dsd = 15,
+  dsd = 15,
 }
 
 /**
@@ -960,24 +960,24 @@ enum GstAudioRingBufferState
   /**
       The ringbuffer is stopped
   */
-  Stopped = 0,
+  stopped = 0,
 
   /**
       The ringbuffer is paused
   */
-  Paused = 1,
+  paused = 1,
 
   /**
       The ringbuffer is started
   */
-  Started = 2,
+  started = 2,
 
   /**
       The ringbuffer has encountered an
         error after it has been started, e.g. because the device was
         disconnected (Since: 1.2)
   */
-  Error = 3,
+  error = 3,
 }
 
 /**
@@ -988,47 +988,47 @@ enum GstDsdFormat
   /**
       unknown / invalid DSD format
   */
-  DsdFormatUnknown = 0,
+  dsdFormatUnknown = 0,
 
   /**
       8 DSD bits in 1 byte
   */
-  DsdFormatU8 = 1,
+  dsdFormatU8 = 1,
 
   /**
       16 DSD bits in 2 bytes, little endian order
   */
-  DsdFormatU16le = 2,
+  dsdFormatU16le = 2,
 
   /**
       16 DSD bits in 2 bytes, big endian order
   */
-  DsdFormatU16be = 3,
+  dsdFormatU16be = 3,
 
   /**
       32 DSD bits in 4 bytes, little endian order
   */
-  DsdFormatU32le = 4,
+  dsdFormatU32le = 4,
 
   /**
       32 DSD bits in 4 bytes, big endian order
   */
-  DsdFormatU32be = 5,
+  dsdFormatU32be = 5,
 
   /**
       number of valid DSD formats
   */
-  NumDsdFormats = 6,
+  numDsdFormats = 6,
 
   /**
       16 DSD bits in 2 bytes, native endianness
   */
-  DsdFormatU16 = 2,
+  dsdFormatU16 = 2,
 
   /**
       32 DSD bits in 4 bytes, native endianness
   */
-  DsdFormatU32 = 4,
+  dsdFormatU32 = 4,
 }
 
 /**
@@ -1043,17 +1043,17 @@ enum GstStreamVolumeFormat
   /**
       Linear scale factor, 1.0 = 100%
   */
-  Linear = 0,
+  linear = 0,
 
   /**
       Cubic volume scale
   */
-  Cubic = 1,
+  cubic = 1,
 
   /**
       Logarithmic volume scale (dB, amplitude not power)
   */
-  Db = 2,
+  db = 2,
 }
 
 /**

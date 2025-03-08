@@ -35,12 +35,12 @@ import gsk.types;
 class Path : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -84,7 +84,7 @@ class Path : gobject.boxed.Boxed
     {
       auto _dlg = cast(gsk.types.PathForeachFunc*)userData;
 
-      bool _retval = (*_dlg)(op, pts ? new graphene.point.Point(cast(void*)pts, No.Take) : null, nPts, weight);
+      bool _retval = (*_dlg)(op, pts ? new graphene.point.Point(cast(void*)pts, No.take) : null, nPts, weight);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -120,7 +120,7 @@ class Path : gobject.boxed.Boxed
     bool _retval;
     graphene_rect_t _bounds;
     _retval = gsk_path_get_bounds(cast(GskPath*)cPtr, &_bounds);
-    bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.Take);
+    bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.take);
     return _retval;
   }
 
@@ -142,8 +142,8 @@ class Path : gobject.boxed.Boxed
   {
     bool _retval;
     graphene_rect_t _bounds;
-    _retval = gsk_path_get_stroke_bounds(cast(GskPath*)cPtr, stroke ? cast(const(GskStroke)*)stroke.cPtr(No.Dup) : null, &_bounds);
-    bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.Take);
+    _retval = gsk_path_get_stroke_bounds(cast(GskPath*)cPtr, stroke ? cast(const(GskStroke)*)stroke.cPtr(No.dup) : null, &_bounds);
+    bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.take);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class Path : gobject.boxed.Boxed
   bool inFill(graphene.point.Point point, gsk.types.FillRule fillRule)
   {
     bool _retval;
-    _retval = gsk_path_in_fill(cast(GskPath*)cPtr, point ? cast(const(graphene_point_t)*)point.cPtr(No.Dup) : null, fillRule);
+    _retval = gsk_path_in_fill(cast(GskPath*)cPtr, point ? cast(const(graphene_point_t)*)point.cPtr(No.dup) : null, fillRule);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class Path : gobject.boxed.Boxed
   */
   void print(glib.string_.String string_)
   {
-    gsk_path_print(cast(GskPath*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
+    gsk_path_print(cast(GskPath*)cPtr, string_ ? cast(GString*)string_.cPtr(No.dup) : null);
   }
 
   /**
@@ -218,7 +218,7 @@ class Path : gobject.boxed.Boxed
   */
   void toCairo(cairo.context.Context cr)
   {
-    gsk_path_to_cairo(cast(GskPath*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
+    gsk_path_to_cairo(cast(GskPath*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null);
   }
 
   /**
@@ -235,7 +235,7 @@ class Path : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gsk_path_to_string(cast(GskPath*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -274,9 +274,9 @@ class Path : gobject.boxed.Boxed
   static gsk.path.Path parse(string string_)
   {
     GskPath* _cretval;
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString(No.alloc);
     _cretval = gsk_path_parse(_string_);
-    auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

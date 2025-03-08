@@ -17,7 +17,7 @@ import soup.types;
 class AuthDomainBasic : soup.auth_domain.AuthDomain
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -53,10 +53,10 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
     extern(C) bool _callbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password, void* userData)
     {
       auto _dlg = cast(soup.types.AuthDomainBasicAuthCallback*)userData;
-      string _username = username.fromCString(No.Free);
-      string _password = password.fromCString(No.Free);
+      string _username = username.fromCString(No.free);
+      string _password = password.fromCString(No.free);
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain_basic.AuthDomainBasic)(cast(void*)domain, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username, _password);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain_basic.AuthDomainBasic)(cast(void*)domain, No.take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.take), _username, _password);
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;

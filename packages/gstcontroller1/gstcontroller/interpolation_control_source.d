@@ -19,7 +19,7 @@ import gstcontroller.types;
 class InterpolationControlSource : gstcontroller.timed_value_control_source.TimedValueControlSource
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,6 +43,6 @@ class InterpolationControlSource : gstcontroller.timed_value_control_source.Time
   {
     GstControlSource* _cretval;
     _cretval = gst_interpolation_control_source_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

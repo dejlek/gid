@@ -34,7 +34,7 @@ import gtk.widget;
 class StackSidebar : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -58,7 +58,7 @@ class StackSidebar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_sidebar_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -70,7 +70,7 @@ class StackSidebar : gtk.widget.Widget
   {
     GtkStack* _cretval;
     _cretval = gtk_stack_sidebar_get_stack(cast(GtkStackSidebar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.take);
     return _retval;
   }
 
@@ -84,6 +84,6 @@ class StackSidebar : gtk.widget.Widget
   */
   void setStack(gtk.stack.Stack stack)
   {
-    gtk_stack_sidebar_set_stack(cast(GtkStackSidebar*)cPtr, stack ? cast(GtkStack*)stack.cPtr(No.Dup) : null);
+    gtk_stack_sidebar_set_stack(cast(GtkStackSidebar*)cPtr, stack ? cast(GtkStack*)stack.cPtr(No.dup) : null);
   }
 }

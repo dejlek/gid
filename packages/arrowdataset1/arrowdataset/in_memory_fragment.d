@@ -12,7 +12,7 @@ import gid.gid;
 class InMemoryFragment : arrowdataset.fragment.Fragment
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
     foreach (obj; recordBatches)
       _tmprecordBatches ~= obj ? cast(GArrowRecordBatch*)obj.cPtr : null;
     GArrowRecordBatch** _recordBatches = cast(GArrowRecordBatch**)_tmprecordBatches.ptr;
-    _cretval = gadataset_in_memory_fragment_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, _recordBatches, _nRecordBatches);
-    this(_cretval, Yes.Take);
+    _cretval = gadataset_in_memory_fragment_new(schema ? cast(GArrowSchema*)schema.cPtr(No.dup) : null, _recordBatches, _nRecordBatches);
+    this(_cretval, Yes.take);
   }
 }

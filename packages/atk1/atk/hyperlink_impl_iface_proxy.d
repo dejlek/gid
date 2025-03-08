@@ -7,7 +7,7 @@ import atk.hyperlink_impl_mixin;
 /// Proxy object for Atk.HyperlinkImpl interface when a GObject has no applicable D binding
 class HyperlinkImplIfaceProxy : IfaceProxy, atk.hyperlink_impl.HyperlinkImpl
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

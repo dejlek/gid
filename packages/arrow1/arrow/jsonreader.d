@@ -14,7 +14,7 @@ import gobject.object;
 class JSONReader : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,10 +35,10 @@ class JSONReader : gobject.object.ObjectG
   {
     GArrowJSONReader* _cretval;
     GError *_err;
-    _cretval = garrow_json_reader_new(input ? cast(GArrowInputStream*)input.cPtr(No.Dup) : null, options ? cast(GArrowJSONReadOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_json_reader_new(input ? cast(GArrowInputStream*)input.cPtr(No.dup) : null, options ? cast(GArrowJSONReadOptions*)options.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */
@@ -49,7 +49,7 @@ class JSONReader : gobject.object.ObjectG
     _cretval = garrow_json_reader_read(cast(GArrowJSONReader*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
     return _retval;
   }
 }

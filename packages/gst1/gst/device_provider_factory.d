@@ -22,7 +22,7 @@ import gst.types;
 class DeviceProviderFactory : gst.plugin_feature.PluginFeature
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,9 +49,9 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
   static gst.device_provider_factory.DeviceProviderFactory find(string name)
   {
     GstDeviceProviderFactory* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gst_device_provider_factory_find(_name);
-    auto _retval = ObjectG.getDObject!(gst.device_provider_factory.DeviceProviderFactory)(cast(GstDeviceProviderFactory*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.device_provider_factory.DeviceProviderFactory)(cast(GstDeviceProviderFactory*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -66,9 +66,9 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
   static gst.device_provider.DeviceProvider getByName(string factoryname)
   {
     GstDeviceProvider* _cretval;
-    const(char)* _factoryname = factoryname.toCString(No.Alloc);
+    const(char)* _factoryname = factoryname.toCString(No.alloc);
     _cretval = gst_device_provider_factory_get_by_name(_factoryname);
-    auto _retval = ObjectG.getDObject!(gst.device_provider.DeviceProvider)(cast(GstDeviceProvider*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.device_provider.DeviceProvider)(cast(GstDeviceProvider*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
   {
     GstDeviceProvider* _cretval;
     _cretval = gst_device_provider_factory_get(cast(GstDeviceProviderFactory*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.device_provider.DeviceProvider)(cast(GstDeviceProvider*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.device_provider.DeviceProvider)(cast(GstDeviceProvider*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -125,9 +125,9 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
   string getMetadata(string key)
   {
     const(char)* _cretval;
-    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _key = key.toCString(No.alloc);
     _cretval = gst_device_provider_factory_get_metadata(cast(GstDeviceProviderFactory*)cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -164,7 +164,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
   bool hasClasses(string classes = null)
   {
     bool _retval;
-    const(char)* _classes = classes.toCString(No.Alloc);
+    const(char)* _classes = classes.toCString(No.alloc);
     _retval = gst_device_provider_factory_has_classes(cast(GstDeviceProviderFactory*)cPtr, _classes);
     return _retval;
   }
@@ -181,7 +181,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
     bool _retval;
     char*[] _tmpclasses;
     foreach (s; classes)
-      _tmpclasses ~= s.toCString(No.Alloc);
+      _tmpclasses ~= s.toCString(No.alloc);
     _tmpclasses ~= null;
     char** _classes = _tmpclasses.ptr;
     _retval = gst_device_provider_factory_has_classesv(cast(GstDeviceProviderFactory*)cPtr, _classes);

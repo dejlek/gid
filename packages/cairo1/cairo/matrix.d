@@ -20,15 +20,15 @@ class Matrix : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(cairo_matrix_t.sizeof), Yes.Take);
+    super(safeMalloc(cairo_matrix_t.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -177,8 +177,8 @@ class Matrix : gobject.boxed.Boxed
     collapses points together (it is <firstterm>degenerate</firstterm>),
     then it has no inverse and this function will fail.
     Returns:     If matrix has an inverse, modifies matrix to
-       be the inverse matrix and returns [cairo.types.Status.Success]. Otherwise,
-       returns [cairo.types.Status.InvalidMatrix].
+       be the inverse matrix and returns [cairo.types.Status.success]. Otherwise,
+       returns [cairo.types.Status.invalidMatrix].
   */
   cairo.types.Status invert()
   {
@@ -202,7 +202,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void multiply(cairo.matrix.Matrix a, cairo.matrix.Matrix b)
   {
-    cairo_matrix_multiply(cast(cairo_matrix_t*)cPtr, a ? cast(const(cairo_matrix_t)*)a.cPtr(No.Dup) : null, b ? cast(const(cairo_matrix_t)*)b.cPtr(No.Dup) : null);
+    cairo_matrix_multiply(cast(cairo_matrix_t*)cPtr, a ? cast(const(cairo_matrix_t)*)a.cPtr(No.dup) : null, b ? cast(const(cairo_matrix_t)*)b.cPtr(No.dup) : null);
   }
 
   /**

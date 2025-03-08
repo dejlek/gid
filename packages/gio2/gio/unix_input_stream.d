@@ -24,7 +24,7 @@ import gio.types;
 class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.FileDescriptorBased, gio.pollable_input_stream.PollableInputStream
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -57,7 +57,7 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
   {
     GInputStream* _cretval;
     _cretval = g_unix_input_stream_new(fd, closeFd);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**

@@ -30,12 +30,12 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.separator.Separator] uses the [gtk.types.AccessibleRole.Separator] role.
+  [gtk.separator.Separator] uses the [gtk.types.AccessibleRole.separator] role.
 */
 class Separator : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -63,6 +63,6 @@ class Separator : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_separator_new(orientation);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 }

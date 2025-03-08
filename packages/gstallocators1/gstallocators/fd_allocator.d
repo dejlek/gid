@@ -13,7 +13,7 @@ import gstallocators.types;
 class FdAllocator : gst.allocator.Allocator
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -38,7 +38,7 @@ class FdAllocator : gst.allocator.Allocator
   {
     GstAllocator* _cretval;
     _cretval = gst_fd_allocator_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -56,8 +56,8 @@ class FdAllocator : gst.allocator.Allocator
   static gst.memory.Memory alloc(gst.allocator.Allocator allocator, int fd, size_t size, gstallocators.types.FdMemoryFlags flags)
   {
     GstMemory* _cretval;
-    _cretval = gst_fd_allocator_alloc(allocator ? cast(GstAllocator*)allocator.cPtr(No.Dup) : null, fd, size, flags);
-    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = gst_fd_allocator_alloc(allocator ? cast(GstAllocator*)allocator.cPtr(No.dup) : null, fd, size, flags);
+    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

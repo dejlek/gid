@@ -10,7 +10,7 @@ import gtksource.types;
 class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,7 +34,7 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
   {
     GtkSourceGutterRenderer* _cretval;
     _cretval = gtk_source_gutter_renderer_text_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -49,7 +49,7 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
   */
   void measure(string text, out int width, out int height)
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString(No.alloc);
     gtk_source_gutter_renderer_text_measure(cast(GtkSourceGutterRendererText*)cPtr, _text, cast(int*)&width, cast(int*)&height);
   }
 
@@ -65,21 +65,21 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
   */
   void measureMarkup(string markup, out int width, out int height)
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString(No.alloc);
     gtk_source_gutter_renderer_text_measure_markup(cast(GtkSourceGutterRendererText*)cPtr, _markup, cast(int*)&width, cast(int*)&height);
   }
 
   /** */
   void setMarkup(string markup, int length)
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString(No.alloc);
     gtk_source_gutter_renderer_text_set_markup(cast(GtkSourceGutterRendererText*)cPtr, _markup, length);
   }
 
   /** */
   void setText(string text, int length)
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString(No.alloc);
     gtk_source_gutter_renderer_text_set_text(cast(GtkSourceGutterRendererText*)cPtr, _text, length);
   }
 }

@@ -13,7 +13,7 @@ import gobject.object;
 class LargeListArray : arrow.array.Array
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,8 +33,8 @@ class LargeListArray : arrow.array.Array
   this(arrow.data_type.DataType dataType, long length, arrow.buffer.Buffer valueOffsets, arrow.array.Array values, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowLargeListArray* _cretval;
-    _cretval = garrow_large_list_array_new(dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, length, valueOffsets ? cast(GArrowBuffer*)valueOffsets.cPtr(No.Dup) : null, values ? cast(GArrowArray*)values.cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_large_list_array_new(dataType ? cast(GArrowDataType*)dataType.cPtr(No.dup) : null, length, valueOffsets ? cast(GArrowBuffer*)valueOffsets.cPtr(No.dup) : null, values ? cast(GArrowArray*)values.cPtr(No.dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.dup) : null, nNulls);
+    this(_cretval, Yes.take);
   }
 
   /** */
@@ -42,7 +42,7 @@ class LargeListArray : arrow.array.Array
   {
     GArrowArray* _cretval;
     _cretval = garrow_large_list_array_get_value(cast(GArrowLargeListArray*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class LargeListArray : arrow.array.Array
   {
     GArrowDataType* _cretval;
     _cretval = garrow_large_list_array_get_value_type(cast(GArrowLargeListArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class LargeListArray : arrow.array.Array
   {
     GArrowArray* _cretval;
     _cretval = garrow_large_list_array_get_values(cast(GArrowLargeListArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.take);
     return _retval;
   }
 }

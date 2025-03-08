@@ -20,12 +20,12 @@ import gst.types;
 class BufferList : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -49,7 +49,7 @@ class BufferList : gobject.boxed.Boxed
   {
     GstBufferList* _cretval;
     _cretval = gst_buffer_list_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -63,7 +63,7 @@ class BufferList : gobject.boxed.Boxed
   {
     GstBufferList* _cretval;
     _cretval = gst_buffer_list_new_sized(size);
-    auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class BufferList : gobject.boxed.Boxed
   {
     GstBufferList* _cretval;
     _cretval = gst_buffer_list_copy_deep(cast(const(GstBufferList)*)cPtr);
-    auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class BufferList : gobject.boxed.Boxed
     extern(C) bool _funcCallback(GstBuffer** buffer, uint idx, void* userData)
     {
       auto _dlg = cast(gst.types.BufferListFunc*)userData;
-      auto _buffer = new gst.buffer.Buffer(buffer, No.Take);
+      auto _buffer = new gst.buffer.Buffer(buffer, No.take);
 
       bool _retval = (*_dlg)(_buffer, idx);
       *buffer = *cast(GstBuffer**)_buffer.cPtr;
@@ -138,7 +138,7 @@ class BufferList : gobject.boxed.Boxed
   {
     GstBuffer* _cretval;
     _cretval = gst_buffer_list_get(cast(GstBufferList*)cPtr, idx);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class BufferList : gobject.boxed.Boxed
   {
     GstBuffer* _cretval;
     _cretval = gst_buffer_list_get_writable(cast(GstBufferList*)cPtr, idx);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class BufferList : gobject.boxed.Boxed
   */
   void insert(int idx, gst.buffer.Buffer buffer)
   {
-    gst_buffer_list_insert(cast(GstBufferList*)cPtr, idx, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null);
+    gst_buffer_list_insert(cast(GstBufferList*)cPtr, idx, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.dup) : null);
   }
 
   /**

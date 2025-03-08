@@ -60,12 +60,12 @@ import gtk.widget;
   
   ## Accessibility
   
-  [gtk.search_entry.SearchEntry] uses the [gtk.types.AccessibleRole.SearchBox] role.
+  [gtk.search_entry.SearchEntry] uses the [gtk.types.AccessibleRole.searchBox] role.
 */
 class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -91,7 +91,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_entry_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -126,7 +126,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_entry_get_key_capture_widget(cast(GtkSearchEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   {
     const(char)* _cretval;
     _cretval = gtk_search_entry_get_placeholder_text(cast(GtkSearchEntry*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   void setKeyCaptureWidget(gtk.widget.Widget widget = null)
   {
-    gtk_search_entry_set_key_capture_widget(cast(GtkSearchEntry*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_search_entry_set_key_capture_widget(cast(GtkSearchEntry*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
   }
 
   /**
@@ -207,7 +207,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   void setPlaceholderText(string text = null)
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString(No.alloc);
     gtk_search_entry_set_placeholder_text(cast(GtkSearchEntry*)cPtr, _text);
   }
 
@@ -241,10 +241,10 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -284,10 +284,10 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
     Connect to NextMatch signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNextMatch(T)(T callback, Flag!"After" after = No.After)
+  ulong connectNextMatch(T)(T callback, Flag!"after" after = No.after)
   if (is(T : NextMatchCallbackDlg) || is(T : NextMatchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -327,10 +327,10 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
     Connect to PreviousMatch signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPreviousMatch(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPreviousMatch(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PreviousMatchCallbackDlg) || is(T : PreviousMatchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -364,10 +364,10 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
     Connect to SearchChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSearchChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSearchChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SearchChangedCallbackDlg) || is(T : SearchChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -399,10 +399,10 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
     Connect to SearchStarted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSearchStarted(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSearchStarted(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SearchStartedCallbackDlg) || is(T : SearchStartedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -441,10 +441,10 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
     Connect to StopSearch signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStopSearch(T)(T callback, Flag!"After" after = No.After)
+  ulong connectStopSearch(T)(T callback, Flag!"after" after = No.after)
   if (is(T : StopSearchCallbackDlg) || is(T : StopSearchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

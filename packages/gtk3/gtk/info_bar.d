@@ -91,7 +91,7 @@ import gtk.widget;
 class InfoBar : gtk.box.Box
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -115,7 +115,7 @@ class InfoBar : gtk.box.Box
   {
     GtkWidget* _cretval;
     _cretval = gtk_info_bar_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -129,7 +129,7 @@ class InfoBar : gtk.box.Box
   */
   void addActionWidget(gtk.widget.Widget child, int responseId)
   {
-    gtk_info_bar_add_action_widget(cast(GtkInfoBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, responseId);
+    gtk_info_bar_add_action_widget(cast(GtkInfoBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, responseId);
   }
 
   /**
@@ -147,9 +147,9 @@ class InfoBar : gtk.box.Box
   gtk.button.Button addButton(string buttonText, int responseId)
   {
     GtkWidget* _cretval;
-    const(char)* _buttonText = buttonText.toCString(No.Alloc);
+    const(char)* _buttonText = buttonText.toCString(No.alloc);
     _cretval = gtk_info_bar_add_button(cast(GtkInfoBar*)cPtr, _buttonText, responseId);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class InfoBar : gtk.box.Box
   {
     GtkWidget* _cretval;
     _cretval = gtk_info_bar_get_action_area(cast(GtkInfoBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -173,7 +173,7 @@ class InfoBar : gtk.box.Box
   {
     GtkWidget* _cretval;
     _cretval = gtk_info_bar_get_content_area(cast(GtkInfoBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class InfoBar : gtk.box.Box
 
   /**
       If true, a standard close button is shown. When clicked it emits
-    the response [gtk.types.ResponseType.Close].
+    the response [gtk.types.ResponseType.close].
     Params:
       setting =       true to include a close button
   */
@@ -305,10 +305,10 @@ class InfoBar : gtk.box.Box
     Connect to Close signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectClose(T)(T callback, Flag!"After" after = No.After)
+  ulong connectClose(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CloseCallbackDlg) || is(T : CloseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -343,10 +343,10 @@ class InfoBar : gtk.box.Box
     Connect to Response signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectResponse(T)(T callback, Flag!"After" after = No.After)
+  ulong connectResponse(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ResponseCallbackDlg) || is(T : ResponseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -61,7 +61,7 @@ import gtk.widget;
 class LayoutManager : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -89,7 +89,7 @@ class LayoutManager : gobject.object.ObjectG
   */
   void allocate(gtk.widget.Widget widget, int width, int height, int baseline)
   {
-    gtk_layout_manager_allocate(cast(GtkLayoutManager*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, width, height, baseline);
+    gtk_layout_manager_allocate(cast(GtkLayoutManager*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, width, height, baseline);
   }
 
   /**
@@ -108,8 +108,8 @@ class LayoutManager : gobject.object.ObjectG
   gtk.layout_child.LayoutChild getLayoutChild(gtk.widget.Widget child)
   {
     GtkLayoutChild* _cretval;
-    _cretval = gtk_layout_manager_get_layout_child(cast(GtkLayoutManager*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.layout_child.LayoutChild)(cast(GtkLayoutChild*)_cretval, No.Take);
+    _cretval = gtk_layout_manager_get_layout_child(cast(GtkLayoutManager*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.layout_child.LayoutChild)(cast(GtkLayoutChild*)_cretval, No.take);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class LayoutManager : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_layout_manager_get_widget(cast(GtkLayoutManager*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -158,8 +158,8 @@ class LayoutManager : gobject.object.ObjectG
       widget =       the [gtk.widget.Widget] using manager
       orientation =       the orientation to measure
       forSize =       Size for the opposite of orientation; for instance, if
-          the orientation is [gtk.types.Orientation.Horizontal], this is the height
-          of the widget; if the orientation is [gtk.types.Orientation.Vertical], this
+          the orientation is [gtk.types.Orientation.horizontal], this is the height
+          of the widget; if the orientation is [gtk.types.Orientation.vertical], this
           is the width of the widget. This allows to measure the height for the
           given width, and the width for the given height. Use -1 if the size
           is not known
@@ -174,6 +174,6 @@ class LayoutManager : gobject.object.ObjectG
   */
   void measure(gtk.widget.Widget widget, gtk.types.Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline)
   {
-    gtk_layout_manager_measure(cast(GtkLayoutManager*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, orientation, forSize, cast(int*)&minimum, cast(int*)&natural, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
+    gtk_layout_manager_measure(cast(GtkLayoutManager*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, orientation, forSize, cast(int*)&minimum, cast(int*)&natural, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
   }
 }

@@ -13,7 +13,7 @@ class DebugCategory
 {
   GstDebugCategory cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gst.DebugCategory");
@@ -49,7 +49,7 @@ class DebugCategory
   {
     const(char)* _cretval;
     _cretval = gst_debug_category_get_description(cast(GstDebugCategory*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -61,7 +61,7 @@ class DebugCategory
   {
     const(char)* _cretval;
     _cretval = gst_debug_category_get_name(cast(GstDebugCategory*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 

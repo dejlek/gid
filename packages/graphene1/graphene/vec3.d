@@ -19,15 +19,15 @@ class Vec3 : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(graphene_vec3_t.sizeof), Yes.Take);
+    super(safeMalloc(graphene_vec3_t.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -57,7 +57,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     graphene_vec3_t* _cretval;
     _cretval = graphene_vec3_alloc();
-    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -70,8 +70,8 @@ class Vec3 : gobject.boxed.Boxed
   void add(graphene.vec3.Vec3 b, out graphene.vec3.Vec3 res)
   {
     graphene_vec3_t _res;
-    graphene_vec3_add(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.Dup) : null, &_res);
-    res = new graphene.vec3.Vec3(cast(void*)&_res, No.Take);
+    graphene_vec3_add(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.dup) : null, &_res);
+    res = new graphene.vec3.Vec3(cast(void*)&_res, No.take);
   }
 
   /**
@@ -83,8 +83,8 @@ class Vec3 : gobject.boxed.Boxed
   void cross(graphene.vec3.Vec3 b, out graphene.vec3.Vec3 res)
   {
     graphene_vec3_t _res;
-    graphene_vec3_cross(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.Dup) : null, &_res);
-    res = new graphene.vec3.Vec3(cast(void*)&_res, No.Take);
+    graphene_vec3_cross(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.dup) : null, &_res);
+    res = new graphene.vec3.Vec3(cast(void*)&_res, No.take);
   }
 
   /**
@@ -98,8 +98,8 @@ class Vec3 : gobject.boxed.Boxed
   void divide(graphene.vec3.Vec3 b, out graphene.vec3.Vec3 res)
   {
     graphene_vec3_t _res;
-    graphene_vec3_divide(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.Dup) : null, &_res);
-    res = new graphene.vec3.Vec3(cast(void*)&_res, No.Take);
+    graphene_vec3_divide(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.dup) : null, &_res);
+    res = new graphene.vec3.Vec3(cast(void*)&_res, No.take);
   }
 
   /**
@@ -111,7 +111,7 @@ class Vec3 : gobject.boxed.Boxed
   float dot(graphene.vec3.Vec3 b)
   {
     float _retval;
-    _retval = graphene_vec3_dot(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.Dup) : null);
+    _retval = graphene_vec3_dot(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class Vec3 : gobject.boxed.Boxed
   bool equal(graphene.vec3.Vec3 v2)
   {
     bool _retval;
-    _retval = graphene_vec3_equal(cast(const(graphene_vec3_t)*)cPtr, v2 ? cast(const(graphene_vec3_t)*)v2.cPtr(No.Dup) : null);
+    _retval = graphene_vec3_equal(cast(const(graphene_vec3_t)*)cPtr, v2 ? cast(const(graphene_vec3_t)*)v2.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     graphene_vec2_t _res;
     graphene_vec3_get_xy(cast(const(graphene_vec3_t)*)cPtr, &_res);
-    res = new graphene.vec2.Vec2(cast(void*)&_res, No.Take);
+    res = new graphene.vec2.Vec2(cast(void*)&_res, No.take);
   }
 
   /**
@@ -162,7 +162,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     graphene_vec3_t _res;
     graphene_vec3_get_xy0(cast(const(graphene_vec3_t)*)cPtr, &_res);
-    res = new graphene.vec3.Vec3(cast(void*)&_res, No.Take);
+    res = new graphene.vec3.Vec3(cast(void*)&_res, No.take);
   }
 
   /**
@@ -175,7 +175,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     graphene_vec4_t _res;
     graphene_vec3_get_xyz0(cast(const(graphene_vec3_t)*)cPtr, &_res);
-    res = new graphene.vec4.Vec4(cast(void*)&_res, No.Take);
+    res = new graphene.vec4.Vec4(cast(void*)&_res, No.take);
   }
 
   /**
@@ -188,7 +188,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     graphene_vec4_t _res;
     graphene_vec3_get_xyz1(cast(const(graphene_vec3_t)*)cPtr, &_res);
-    res = new graphene.vec4.Vec4(cast(void*)&_res, No.Take);
+    res = new graphene.vec4.Vec4(cast(void*)&_res, No.take);
   }
 
   /**
@@ -202,7 +202,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     graphene_vec4_t _res;
     graphene_vec3_get_xyzw(cast(const(graphene_vec3_t)*)cPtr, w, &_res);
-    res = new graphene.vec4.Vec4(cast(void*)&_res, No.Take);
+    res = new graphene.vec4.Vec4(cast(void*)&_res, No.take);
   }
 
   /**
@@ -242,7 +242,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     graphene_vec3_t* _cretval;
     _cretval = graphene_vec3_init(cast(graphene_vec3_t*)cPtr, x, y, z);
-    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -258,7 +258,7 @@ class Vec3 : gobject.boxed.Boxed
     assert(!src || src.length == 3);
     auto _src = cast(const(float)*)src.ptr;
     _cretval = graphene_vec3_init_from_float(cast(graphene_vec3_t*)cPtr, _src);
-    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -272,8 +272,8 @@ class Vec3 : gobject.boxed.Boxed
   graphene.vec3.Vec3 initFromVec3(graphene.vec3.Vec3 src)
   {
     graphene_vec3_t* _cretval;
-    _cretval = graphene_vec3_init_from_vec3(cast(graphene_vec3_t*)cPtr, src ? cast(const(graphene_vec3_t)*)src.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_vec3_init_from_vec3(cast(graphene_vec3_t*)cPtr, src ? cast(const(graphene_vec3_t)*)src.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -287,8 +287,8 @@ class Vec3 : gobject.boxed.Boxed
   void interpolate(graphene.vec3.Vec3 v2, double factor, out graphene.vec3.Vec3 res)
   {
     graphene_vec3_t _res;
-    graphene_vec3_interpolate(cast(const(graphene_vec3_t)*)cPtr, v2 ? cast(const(graphene_vec3_t)*)v2.cPtr(No.Dup) : null, factor, &_res);
-    res = new graphene.vec3.Vec3(cast(void*)&_res, No.Take);
+    graphene_vec3_interpolate(cast(const(graphene_vec3_t)*)cPtr, v2 ? cast(const(graphene_vec3_t)*)v2.cPtr(No.dup) : null, factor, &_res);
+    res = new graphene.vec3.Vec3(cast(void*)&_res, No.take);
   }
 
   /**
@@ -312,8 +312,8 @@ class Vec3 : gobject.boxed.Boxed
   void max(graphene.vec3.Vec3 b, out graphene.vec3.Vec3 res)
   {
     graphene_vec3_t _res;
-    graphene_vec3_max(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.Dup) : null, &_res);
-    res = new graphene.vec3.Vec3(cast(void*)&_res, No.Take);
+    graphene_vec3_max(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.dup) : null, &_res);
+    res = new graphene.vec3.Vec3(cast(void*)&_res, No.take);
   }
 
   /**
@@ -326,8 +326,8 @@ class Vec3 : gobject.boxed.Boxed
   void min(graphene.vec3.Vec3 b, out graphene.vec3.Vec3 res)
   {
     graphene_vec3_t _res;
-    graphene_vec3_min(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.Dup) : null, &_res);
-    res = new graphene.vec3.Vec3(cast(void*)&_res, No.Take);
+    graphene_vec3_min(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.dup) : null, &_res);
+    res = new graphene.vec3.Vec3(cast(void*)&_res, No.take);
   }
 
   /**
@@ -339,8 +339,8 @@ class Vec3 : gobject.boxed.Boxed
   void multiply(graphene.vec3.Vec3 b, out graphene.vec3.Vec3 res)
   {
     graphene_vec3_t _res;
-    graphene_vec3_multiply(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.Dup) : null, &_res);
-    res = new graphene.vec3.Vec3(cast(void*)&_res, No.Take);
+    graphene_vec3_multiply(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.dup) : null, &_res);
+    res = new graphene.vec3.Vec3(cast(void*)&_res, No.take);
   }
 
   /**
@@ -354,7 +354,7 @@ class Vec3 : gobject.boxed.Boxed
   bool near(graphene.vec3.Vec3 v2, float epsilon)
   {
     bool _retval;
-    _retval = graphene_vec3_near(cast(const(graphene_vec3_t)*)cPtr, v2 ? cast(const(graphene_vec3_t)*)v2.cPtr(No.Dup) : null, epsilon);
+    _retval = graphene_vec3_near(cast(const(graphene_vec3_t)*)cPtr, v2 ? cast(const(graphene_vec3_t)*)v2.cPtr(No.dup) : null, epsilon);
     return _retval;
   }
 
@@ -367,7 +367,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     graphene_vec3_t _res;
     graphene_vec3_negate(cast(const(graphene_vec3_t)*)cPtr, &_res);
-    res = new graphene.vec3.Vec3(cast(void*)&_res, No.Take);
+    res = new graphene.vec3.Vec3(cast(void*)&_res, No.take);
   }
 
   /**
@@ -379,7 +379,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     graphene_vec3_t _res;
     graphene_vec3_normalize(cast(const(graphene_vec3_t)*)cPtr, &_res);
-    res = new graphene.vec3.Vec3(cast(void*)&_res, No.Take);
+    res = new graphene.vec3.Vec3(cast(void*)&_res, No.take);
   }
 
   /**
@@ -392,7 +392,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     graphene_vec3_t _res;
     graphene_vec3_scale(cast(const(graphene_vec3_t)*)cPtr, factor, &_res);
-    res = new graphene.vec3.Vec3(cast(void*)&_res, No.Take);
+    res = new graphene.vec3.Vec3(cast(void*)&_res, No.take);
   }
 
   /**
@@ -406,8 +406,8 @@ class Vec3 : gobject.boxed.Boxed
   void subtract(graphene.vec3.Vec3 b, out graphene.vec3.Vec3 res)
   {
     graphene_vec3_t _res;
-    graphene_vec3_subtract(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.Dup) : null, &_res);
-    res = new graphene.vec3.Vec3(cast(void*)&_res, No.Take);
+    graphene_vec3_subtract(cast(const(graphene_vec3_t)*)cPtr, b ? cast(const(graphene_vec3_t)*)b.cPtr(No.dup) : null, &_res);
+    res = new graphene.vec3.Vec3(cast(void*)&_res, No.take);
   }
 
   /**
@@ -430,7 +430,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     const(graphene_vec3_t)* _cretval;
     _cretval = graphene_vec3_one();
-    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -443,7 +443,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     const(graphene_vec3_t)* _cretval;
     _cretval = graphene_vec3_x_axis();
-    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -456,7 +456,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     const(graphene_vec3_t)* _cretval;
     _cretval = graphene_vec3_y_axis();
-    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -469,7 +469,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     const(graphene_vec3_t)* _cretval;
     _cretval = graphene_vec3_z_axis();
-    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -482,7 +482,7 @@ class Vec3 : gobject.boxed.Boxed
   {
     const(graphene_vec3_t)* _cretval;
     _cretval = graphene_vec3_zero();
-    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.vec3.Vec3(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

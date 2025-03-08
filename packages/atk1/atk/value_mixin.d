@@ -168,7 +168,7 @@ template ValueT()
   {
     GValue _value;
     atk_value_get_current_value(cast(AtkValue*)cPtr, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)&_value, No.take);
   }
 
   /**
@@ -197,7 +197,7 @@ template ValueT()
   {
     GValue _value;
     atk_value_get_maximum_value(cast(AtkValue*)cPtr, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)&_value, No.take);
   }
 
   /**
@@ -213,7 +213,7 @@ template ValueT()
   {
     GValue _value;
     atk_value_get_minimum_increment(cast(AtkValue*)cPtr, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)&_value, No.take);
   }
 
   /**
@@ -227,7 +227,7 @@ template ValueT()
   {
     GValue _value;
     atk_value_get_minimum_value(cast(AtkValue*)cPtr, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.Take);
+    value = new gobject.value.Value(cast(void*)&_value, No.take);
   }
 
   /**
@@ -240,7 +240,7 @@ template ValueT()
   {
     AtkRange* _cretval;
     _cretval = atk_value_get_range(cast(AtkValue*)cPtr);
-    auto _retval = _cretval ? new atk.range.Range(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new atk.range.Range(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -272,7 +272,7 @@ template ValueT()
   {
     char* _text;
     atk_value_get_value_and_text(cast(AtkValue*)cPtr, cast(double*)&value, &_text);
-    text = _text.fromCString(Yes.Free);
+    text = _text.fromCString(Yes.free);
   }
 
   /**
@@ -286,7 +286,7 @@ template ValueT()
   override bool setCurrentValue(gobject.value.Value value)
   {
     bool _retval;
-    _retval = atk_value_set_current_value(cast(AtkValue*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    _retval = atk_value_set_current_value(cast(AtkValue*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -344,10 +344,10 @@ template ValueT()
     Connect to ValueChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectValueChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ValueChangedCallbackDlg) || is(T : ValueChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

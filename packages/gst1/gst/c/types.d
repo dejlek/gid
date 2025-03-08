@@ -74,9 +74,9 @@ enum GstAllocatorFlags : uint
       The allocator has a custom alloc function.
        Only elements designed to work with this allocator should be using it,
        other elements should ignore it from allocation propositions.
-       This implies [gst.types.AllocatorFlags.NoCopy].
+       This implies [gst.types.AllocatorFlags.noCopy].
   */
-  CustomAlloc = 16,
+  customAlloc = 16,
 
   /**
       When copying a #GstMemory allocated with this allocator, the copy will
@@ -84,12 +84,12 @@ enum GstAllocatorFlags : uint
     new memory is an heavy opperation that should only be done with a
     #GstBufferPool for example.
   */
-  NoCopy = 32,
+  noCopy = 32,
 
   /**
       first flag that can be used for custom purposes
   */
-  Last = 1048576,
+  last = 1048576,
 }
 
 /**
@@ -102,19 +102,19 @@ enum GstBinFlags : uint
   /**
       Don't resync a state change when elements are added or linked in the bin
   */
-  NoResync = 16384,
+  noResync = 16384,
 
   /**
       Indicates whether the bin can handle elements that add/remove source pads
     at any point in time without first posting a no-more-pads signal.
   */
-  StreamsAware = 32768,
+  streamsAware = 32768,
 
   /**
       The last enum in the series of flags for bins. Derived classes can use this
     as first value in a list of flags.
   */
-  Last = 524288,
+  last = 524288,
 }
 
 /**
@@ -126,24 +126,24 @@ enum GstBufferCopyFlags : uint
   /**
       copy nothing
   */
-  None = 0,
+  none = 0,
 
   /**
       flag indicating that buffer flags should be copied
   */
-  Flags = 1,
+  flags = 1,
 
   /**
       flag indicating that buffer pts, dts,
       duration, offset and offset_end should be copied
   */
-  Timestamps = 2,
+  timestamps = 2,
 
   /**
       flag indicating that buffer meta should be
       copied
   */
-  Meta = 4,
+  meta = 4,
 
   /**
       flag indicating that buffer memory should be reffed
@@ -151,18 +151,18 @@ enum GstBufferCopyFlags : uint
       NO_SHARE, no actual copy of the memory is made but it is simply reffed.
       Add @GST_BUFFER_COPY_DEEP to force a real copy.
   */
-  Memory = 8,
+  memory = 8,
 
   /**
       flag indicating that buffer memory should be
       merged
   */
-  Merge = 16,
+  merge = 16,
 
   /**
       flag indicating that memory should always be copied instead of reffed
   */
-  Deep = 32,
+  deep = 32,
 }
 
 /**
@@ -174,7 +174,7 @@ enum GstBufferFlags : uint
       the buffer is live data and should be discarded in
                                     the PAUSED state.
   */
-  Live = 16,
+  live = 16,
 
   /**
       the buffer contains data that should be dropped
@@ -182,25 +182,25 @@ enum GstBufferFlags : uint
                                     boundaries or because it does not contain data
                                     that should be shown to the user.
   */
-  DecodeOnly = 32,
+  decodeOnly = 32,
 
   /**
       the buffer marks a data discontinuity in the stream.
                                     This typically occurs after a seek or a dropped buffer
                                     from a live or network source.
   */
-  Discont = 64,
+  discont = 64,
 
   /**
       the buffer timestamps might have a discontinuity
                                     and this buffer is a good point to resynchronize.
   */
-  Resync = 128,
+  resync = 128,
 
   /**
       the buffer data is corrupted.
   */
-  Corrupted = 256,
+  corrupted = 256,
 
   /**
       the buffer contains a media specific marker. for
@@ -209,13 +209,13 @@ enum GstBufferFlags : uint
                                     packets this matches the marker flag in the
                                     RTP packet header.
   */
-  Marker = 512,
+  marker = 512,
 
   /**
       the buffer contains header information that is
                                     needed to decode the following data.
   */
-  Header = 1024,
+  header = 1024,
 
   /**
       the buffer has been created to fill a gap in the
@@ -223,30 +223,30 @@ enum GstBufferFlags : uint
                                     switch to optimized code path that ignores the buffer
                                     content).
   */
-  Gap = 2048,
+  gap = 2048,
 
   /**
       the buffer can be dropped without breaking the
                                     stream, for example to reduce bandwidth.
   */
-  Droppable = 4096,
+  droppable = 4096,
 
   /**
       this unit cannot be decoded independently.
   */
-  DeltaUnit = 8192,
+  deltaUnit = 8192,
 
   /**
       this flag is set when memory of the buffer
                                     is added/removed
   */
-  TagMemory = 16384,
+  tagMemory = 16384,
 
   /**
       Elements which write to disk or permanent storage should ensure the data
     is synced after writing the contents of this buffer.
   */
-  SyncAfter = 32768,
+  syncAfter = 32768,
 
   /**
       This buffer is important and should not be dropped.
@@ -256,13 +256,13 @@ enum GstBufferFlags : uint
     purposes, or to prevent still video frames from being dropped by elements
     due to QoS.
   */
-  NonDroppable = 65536,
+  nonDroppable = 65536,
 
   /**
       additional media specific flags can be added starting from
                                     this flag.
   */
-  Last = 1048576,
+  last = 1048576,
 }
 
 /**
@@ -273,30 +273,30 @@ enum GstBufferPoolAcquireFlags : uint
   /**
       no flags
   */
-  None = 0,
+  none = 0,
 
   /**
       buffer is keyframe
   */
-  KeyUnit = 1,
+  keyUnit = 1,
 
   /**
       when the bufferpool is empty, acquire_buffer
     will by default block until a buffer is released into the pool again. Setting
     this flag makes acquire_buffer return #GST_FLOW_EOS instead of blocking.
   */
-  Dontwait = 2,
+  dontwait = 2,
 
   /**
       buffer is discont
   */
-  Discont = 4,
+  discont = 4,
 
   /**
       last flag, subclasses can use private flags
        starting from this value.
   */
-  Last = 65536,
+  last = 65536,
 }
 
 /**
@@ -307,22 +307,22 @@ enum GstBufferingMode
   /**
       a small amount of data is buffered
   */
-  Stream = 0,
+  stream = 0,
 
   /**
       the stream is being downloaded
   */
-  Download = 1,
+  download = 1,
 
   /**
       the stream is being downloaded in a ringbuffer
   */
-  Timeshift = 2,
+  timeshift = 2,
 
   /**
       the stream is a live stream
   */
-  Live = 3,
+  live = 3,
 }
 
 /**
@@ -333,12 +333,12 @@ enum GstBusFlags : uint
   /**
       The bus is currently dropping all messages
   */
-  Flushing = 16,
+  flushing = 16,
 
   /**
       offset to define more flags
   */
-  FlagLast = 32,
+  flagLast = 32,
 }
 
 /**
@@ -349,17 +349,17 @@ enum GstBusSyncReply
   /**
       drop the message
   */
-  Drop = 0,
+  drop = 0,
 
   /**
       pass the message to the async queue
   */
-  Pass = 1,
+  pass = 1,
 
   /**
       pass message to async queue, continue if message is handled
   */
-  Async = 2,
+  async = 2,
 }
 
 /**
@@ -371,13 +371,13 @@ enum GstCapsFlags : uint
       Caps has no specific content, but can contain
        anything.
   */
-  Any = 16,
+  any = 16,
 }
 
 /**
     Modes of caps intersection
   
-  [gst.types.CapsIntersectMode.ZigZag] tries to preserve overall order of both caps
+  [gst.types.CapsIntersectMode.zigZag] tries to preserve overall order of both caps
   by iterating on the caps' structures as the following matrix shows:
   
   ```
@@ -392,7 +392,7 @@ enum GstCapsFlags : uint
   tee's sink pad getcaps function, it will probe its src pad peers' for their
   caps and intersect them with this mode.
   
-  [gst.types.CapsIntersectMode.First] is useful when an element wants to preserve
+  [gst.types.CapsIntersectMode.first] is useful when an element wants to preserve
   another element's caps priority order when intersecting with its own caps.
   Example: If caps1 is `[A, B, C]` and caps2 is `[E, B, D, A]`, the result
   would be `[A, B]`, maintaining the first caps priority on the intersection.
@@ -402,12 +402,12 @@ enum GstCapsIntersectMode
   /**
       Zig-zags over both caps.
   */
-  ZigZag = 0,
+  zigZag = 0,
 
   /**
       Keeps the first caps order.
   */
-  First = 1,
+  first = 1,
 }
 
 /**
@@ -418,12 +418,12 @@ enum GstClockEntryType
   /**
       a single shot timeout
   */
-  Single = 0,
+  single = 0,
 
   /**
       a periodic timeout request
   */
-  Periodic = 1,
+  periodic = 1,
 }
 
 /**
@@ -434,42 +434,42 @@ enum GstClockFlags : uint
   /**
       clock can do a single sync timeout request
   */
-  CanDoSingleSync = 16,
+  canDoSingleSync = 16,
 
   /**
       clock can do a single async timeout request
   */
-  CanDoSingleAsync = 32,
+  canDoSingleAsync = 32,
 
   /**
       clock can do sync periodic timeout requests
   */
-  CanDoPeriodicSync = 64,
+  canDoPeriodicSync = 64,
 
   /**
       clock can do async periodic timeout callbacks
   */
-  CanDoPeriodicAsync = 128,
+  canDoPeriodicAsync = 128,
 
   /**
       clock's resolution can be changed
   */
-  CanSetResolution = 256,
+  canSetResolution = 256,
 
   /**
       clock can be slaved to a master clock
   */
-  CanSetMaster = 512,
+  canSetMaster = 512,
 
   /**
       clock needs to be synced before it can be used
   */
-  NeedsStartupSync = 1024,
+  needsStartupSync = 1024,
 
   /**
       subclasses can add additional flags starting from this flag
   */
-  Last = 4096,
+  last = 4096,
 }
 
 /**
@@ -480,42 +480,42 @@ enum GstClockReturn
   /**
       The operation succeeded.
   */
-  Ok = 0,
+  ok = 0,
 
   /**
       The operation was scheduled too late.
   */
-  Early = 1,
+  early = 1,
 
   /**
       The clockID was unscheduled
   */
-  Unscheduled = 2,
+  unscheduled = 2,
 
   /**
       The ClockID is busy
   */
-  Busy = 3,
+  busy = 3,
 
   /**
       A bad time was provided to a function.
   */
-  Badtime = 4,
+  badtime = 4,
 
   /**
       An error occurred
   */
-  Error = 5,
+  error = 5,
 
   /**
       Operation is not supported
   */
-  Unsupported = 6,
+  unsupported = 6,
 
   /**
       The ClockID is done waiting
   */
-  Done = 7,
+  done = 7,
 }
 
 /**
@@ -526,24 +526,24 @@ enum GstClockType
   /**
       time since Epoch
   */
-  Realtime = 0,
+  realtime = 0,
 
   /**
       monotonic time since some unspecified starting
                                point
   */
-  Monotonic = 1,
+  monotonic = 1,
 
   /**
       some other time source is used (Since: 1.0.5)
   */
-  Other = 2,
+  other = 2,
 
   /**
       time since Epoch, but using International Atomic Time
                          as reference (Since: 1.18)
   */
-  Tai = 3,
+  tai = 3,
 }
 
 /**
@@ -555,80 +555,80 @@ enum GstCoreError
       a general error which doesn't fit in any other
     category.  Make sure you add a custom message to the error call.
   */
-  Failed = 1,
+  failed = 1,
 
   /**
       do not use this except as a placeholder for
     deciding where to go while developing code.
   */
-  TooLazy = 2,
+  tooLazy = 2,
 
   /**
       use this when you do not want to implement
     this functionality yet.
   */
-  NotImplemented = 3,
+  notImplemented = 3,
 
   /**
       used for state change errors.
   */
-  StateChange = 4,
+  stateChange = 4,
 
   /**
       used for pad-related errors.
   */
-  Pad = 5,
+  pad = 5,
 
   /**
       used for thread-related errors.
   */
-  Thread = 6,
+  thread = 6,
 
   /**
       used for negotiation-related errors.
   */
-  Negotiation = 7,
+  negotiation = 7,
 
   /**
       used for event-related errors.
   */
-  Event = 8,
+  event = 8,
 
   /**
       used for seek-related errors.
   */
-  Seek = 9,
+  seek = 9,
 
   /**
       used for caps-related errors.
   */
-  Caps = 10,
+  caps = 10,
 
   /**
       used for negotiation-related errors.
   */
-  Tag = 11,
+  tag = 11,
 
   /**
       used if a plugin is missing.
   */
-  MissingPlugin = 12,
+  missingPlugin = 12,
 
   /**
       used for clock related errors.
   */
-  Clock = 13,
+  clock = 13,
 
   /**
       used if functionality has been disabled at
                               compile time.
   */
-  Disabled = 14,
+  disabled = 14,
 
   /**
       the number of core error types.
   */
-  NumErrors = 15,
+  numErrors = 15,
 }
 
 /**
@@ -640,92 +640,92 @@ enum GstDebugColorFlags : uint
   /**
       Use black as foreground color.
   */
-  FgBlack = 0,
+  fgBlack = 0,
 
   /**
       Use red as foreground color.
   */
-  FgRed = 1,
+  fgRed = 1,
 
   /**
       Use green as foreground color.
   */
-  FgGreen = 2,
+  fgGreen = 2,
 
   /**
       Use yellow as foreground color.
   */
-  FgYellow = 3,
+  fgYellow = 3,
 
   /**
       Use blue as foreground color.
   */
-  FgBlue = 4,
+  fgBlue = 4,
 
   /**
       Use magenta as foreground color.
   */
-  FgMagenta = 5,
+  fgMagenta = 5,
 
   /**
       Use cyan as foreground color.
   */
-  FgCyan = 6,
+  fgCyan = 6,
 
   /**
       Use white as foreground color.
   */
-  FgWhite = 7,
+  fgWhite = 7,
 
   /**
       Use black as background color.
   */
-  BgBlack = 0,
+  bgBlack = 0,
 
   /**
       Use red as background color.
   */
-  BgRed = 16,
+  bgRed = 16,
 
   /**
       Use green as background color.
   */
-  BgGreen = 32,
+  bgGreen = 32,
 
   /**
       Use yellow as background color.
   */
-  BgYellow = 48,
+  bgYellow = 48,
 
   /**
       Use blue as background color.
   */
-  BgBlue = 64,
+  bgBlue = 64,
 
   /**
       Use magenta as background color.
   */
-  BgMagenta = 80,
+  bgMagenta = 80,
 
   /**
       Use cyan as background color.
   */
-  BgCyan = 96,
+  bgCyan = 96,
 
   /**
       Use white as background color.
   */
-  BgWhite = 112,
+  bgWhite = 112,
 
   /**
       Make the output bold.
   */
-  Bold = 256,
+  bold = 256,
 
   /**
       Underline the output.
   */
-  Underline = 512,
+  underline = 512,
 }
 
 /** */
@@ -734,18 +734,18 @@ enum GstDebugColorMode
   /**
       Do not use colors in logs.
   */
-  Off = 0,
+  off = 0,
 
   /**
       Paint logs in a platform-specific way.
   */
-  On = 1,
+  on = 1,
 
   /**
       Paint logs with UNIX terminal color codes
                                 no matter what platform GStreamer is running on.
   */
-  Unix = 2,
+  unix = 2,
 }
 
 /**
@@ -757,40 +757,40 @@ enum GstDebugGraphDetails : uint
   /**
       show caps-name on edges
   */
-  MediaType = 1,
+  mediaType = 1,
 
   /**
       show caps-details on edges
   */
-  CapsDetails = 2,
+  capsDetails = 2,
 
   /**
       show modified parameters on
                                               elements
   */
-  NonDefaultParams = 4,
+  nonDefaultParams = 4,
 
   /**
       show element states
   */
-  States = 8,
+  states = 8,
 
   /**
       show full element parameter values even
                                        if they are very long
   */
-  FullParams = 16,
+  fullParams = 16,
 
   /**
       show all the typical details that one might want
   */
-  All = 15,
+  all = 15,
 
   /**
       show all details regardless of how large or
                                    verbose they make the resulting output
   */
-  Verbose = 4294967295,
+  verbose = 4294967295,
 }
 
 /**
@@ -803,7 +803,7 @@ enum GstDebugLevel
       No debugging level specified or desired. Used to deactivate
      debugging output.
   */
-  None = 0,
+  none = 0,
 
   /**
       Error messages are to be used only when an error occurred
@@ -811,7 +811,7 @@ enum GstDebugLevel
      An examples is gst_element_error, which outputs a message with this priority.
      It does not mean that the application is terminating as with g_error.
   */
-  Error = 1,
+  error = 1,
 
   /**
       Warning messages are to inform about abnormal behaviour
@@ -819,7 +819,7 @@ enum GstDebugLevel
      would be clocking issues ("your computer is pretty slow") or broken input
      data ("Can't synchronize to stream.")
   */
-  Warning = 2,
+  warning = 2,
 
   /**
       Fixme messages are messages that indicate that something
@@ -828,7 +828,7 @@ enum GstDebugLevel
      of this message is to make it easier to spot incomplete/unfinished pieces
      of code when reading the debug log.
   */
-  Fixme = 3,
+  fixme = 3,
 
   /**
       Informational messages should be used to keep the developer
@@ -837,7 +837,7 @@ enum GstDebugLevel
      successfully determined the type of the stream or when an mp3 plugin detects
      the format to be used. ("This file has mono sound.")
   */
-  Info = 4,
+  info = 4,
 
   /**
       Debugging messages should be used when something common
@@ -847,7 +847,7 @@ enum GstDebugLevel
      An example would be notifications about state changes or receiving/sending
      of events.
   */
-  Debug = 5,
+  debug_ = 5,
 
   /**
       Log messages are messages that are very common but might be
@@ -856,25 +856,25 @@ enum GstDebugLevel
      Use this log level to log recurring information in chain functions and
      loop functions, for example.
   */
-  Log = 6,
+  log = 6,
 
   /**
       Tracing-related messages.
      Examples for this are referencing/dereferencing of objects.
   */
-  Trace = 7,
+  trace = 7,
 
   /**
       memory dump messages are used to log (small) chunks of
      data as memory dumps in the log. They will be displayed as hexdump with
      ASCII characters.
   */
-  Memdump = 9,
+  memdump = 9,
 
   /**
       The number of defined debugging levels.
   */
-  Count = 10,
+  count = 10,
 }
 
 /**
@@ -885,37 +885,37 @@ enum GstElementFlags : uint
   /**
       ignore state changes from parent
   */
-  LockedState = 16,
+  lockedState = 16,
 
   /**
       the element is a sink
   */
-  Sink = 32,
+  sink = 32,
 
   /**
       the element is a source.
   */
-  Source = 64,
+  source = 64,
 
   /**
       the element can provide a clock
   */
-  ProvideClock = 128,
+  provideClock = 128,
 
   /**
       the element requires a clock
   */
-  RequireClock = 256,
+  requireClock = 256,
 
   /**
       the element can use an index
   */
-  Indexable = 512,
+  indexable = 512,
 
   /**
       offset to define more flags
   */
-  Last = 16384,
+  last = 16384,
 }
 
 /**
@@ -932,31 +932,31 @@ enum GstEventType
   /**
       unknown event.
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       Start a flush operation. This event clears all data
                     from the pipeline and unblock all streaming threads.
   */
-  FlushStart = 2563,
+  flushStart = 2563,
 
   /**
       Stop a flush operation. This event resets the
                     running-time of the pipeline.
   */
-  FlushStop = 5127,
+  flushStop = 5127,
 
   /**
       Event to mark the start of a new stream. Sent before any
                     other serialized event and only sent at the start of a new stream,
                     not after flushing seeks.
   */
-  StreamStart = 10254,
+  streamStart = 10254,
 
   /**
       #GstCaps event. Notify the pad of a new media type.
   */
-  Caps = 12814,
+  caps = 12814,
 
   /**
       A new media segment follows in the dataflow. The
@@ -964,158 +964,158 @@ enum GstEventType
                     converting buffer timestamps to running-time and
                     stream-time.
   */
-  Segment = 17934,
+  segment = 17934,
 
   /**
       A new #GstStreamCollection is available (Since: 1.10)
   */
-  StreamCollection = 19230,
+  streamCollection = 19230,
 
   /**
       A new set of metadata tags has been found in the stream.
   */
-  Tag = 20510,
+  tag = 20510,
 
   /**
       Notification of buffering requirements. Currently not
                     used yet.
   */
-  Buffersize = 23054,
+  buffersize = 23054,
 
   /**
       An event that sinks turn into a message. Used to
                              send messages that should be emitted in sync with
                              rendering.
   */
-  SinkMessage = 25630,
+  sinkMessage = 25630,
 
   /**
       Indicates that there is no more data for
                     the stream group ID in the message. Sent before EOS
                     in some instances and should be handled mostly the same. (Since: 1.10)
   */
-  StreamGroupDone = 26894,
+  streamGroupDone = 26894,
 
   /**
       End-Of-Stream. No more data is to be expected to follow
                     without either a STREAM_START event, or a FLUSH_STOP and a SEGMENT
                     event.
   */
-  Eos = 28174,
+  eos = 28174,
 
   /**
       An event which indicates that a new table of contents (TOC)
                     was found or updated.
   */
-  Toc = 30750,
+  toc = 30750,
 
   /**
       An event which indicates that new or updated
                     encryption information has been found in the stream.
   */
-  Protection = 33310,
+  protection = 33310,
 
   /**
       Marks the end of a segment playback.
   */
-  SegmentDone = 38406,
+  segmentDone = 38406,
 
   /**
       Marks a gap in the datastream.
   */
-  Gap = 40966,
+  gap = 40966,
 
   /**
       Notify downstream that a playback rate override
                                     should be applied as soon as possible. (Since: 1.18)
   */
-  InstantRateChange = 46090,
+  instantRateChange = 46090,
 
   /**
       A quality message. Used to indicate to upstream elements
                     that the downstream elements should adjust their processing
                     rate.
   */
-  Qos = 48641,
+  qos = 48641,
 
   /**
       A request for a new playback position and rate.
   */
-  Seek = 51201,
+  seek = 51201,
 
   /**
       Navigation events are usually used for communicating
                            user requests, such as mouse or keyboard movements,
                            to upstream elements.
   */
-  Navigation = 53761,
+  navigation = 53761,
 
   /**
       Notification of new latency adjustment. Sinks will use
                         the latency information to adjust their synchronisation.
   */
-  Latency = 56321,
+  latency = 56321,
 
   /**
       A request for stepping through the media. Sinks will usually
                      execute the step operation.
   */
-  Step = 58881,
+  step = 58881,
 
   /**
       A request for upstream renegotiating caps and reconfiguring.
   */
-  Reconfigure = 61441,
+  reconfigure = 61441,
 
   /**
       A request for a new playback position based on TOC
                            entry's UID.
   */
-  TocSelect = 64001,
+  tocSelect = 64001,
 
   /**
       A request to select one or more streams (Since: 1.10)
   */
-  SelectStreams = 66561,
+  selectStreams = 66561,
 
   /**
       Sent by the pipeline to notify elements that handle the
                                        instant-rate-change event about the running-time when
                                        the rate multiplier should be applied (or was applied). (Since: 1.18)
   */
-  InstantRateSyncTime = 66817,
+  instantRateSyncTime = 66817,
 
   /**
       Upstream custom event
   */
-  CustomUpstream = 69121,
+  customUpstream = 69121,
 
   /**
       Downstream custom event that travels in the
                            data flow.
   */
-  CustomDownstream = 71686,
+  customDownstream = 71686,
 
   /**
       Custom out-of-band downstream event.
   */
-  CustomDownstreamOob = 74242,
+  customDownstreamOob = 74242,
 
   /**
       Custom sticky downstream event.
   */
-  CustomDownstreamSticky = 76830,
+  customDownstreamSticky = 76830,
 
   /**
       Custom upstream or downstream event.
                             In-band when travelling downstream.
   */
-  CustomBoth = 79367,
+  customBoth = 79367,
 
   /**
       Custom upstream or downstream out-of-band event.
   */
-  CustomBothOob = 81923,
+  customBothOob = 81923,
 }
 
 /**
@@ -1128,29 +1128,29 @@ enum GstEventTypeFlags : uint
   /**
       Set if the event can travel upstream.
   */
-  Upstream = 1,
+  upstream = 1,
 
   /**
       Set if the event can travel downstream.
   */
-  Downstream = 2,
+  downstream = 2,
 
   /**
       Set if the event should be serialized with data
                                   flow.
   */
-  Serialized = 4,
+  serialized = 4,
 
   /**
       Set if the event is sticky on the pads.
   */
-  Sticky = 8,
+  sticky = 8,
 
   /**
       Multiple sticky events can be on a pad, each
                                   identified by the event name.
   */
-  StickyMulti = 16,
+  stickyMulti = 16,
 }
 
 /**
@@ -1164,76 +1164,76 @@ enum GstFlowReturn
   /**
       Pre-defined custom success code.
   */
-  CustomSuccess2 = 102,
+  customSuccess2 = 102,
 
   /**
       Pre-defined custom success code (define your
                                   custom success code to this to avoid compiler
                                   warnings).
   */
-  CustomSuccess1 = 101,
+  customSuccess1 = 101,
 
   /**
       Elements can use values starting from
                                   this (and higher) to define custom success
                                   codes.
   */
-  CustomSuccess = 100,
+  customSuccess = 100,
 
   /**
       Data passing was ok.
   */
-  Ok = 0,
+  ok = 0,
 
   /**
       Pad is not linked.
   */
-  NotLinked = -1,
+  notLinked = -1,
 
   /**
       Pad is flushing.
   */
-  Flushing = -2,
+  flushing = -2,
 
   /**
       Pad is EOS.
   */
-  Eos = -3,
+  eos = -3,
 
   /**
       Pad is not negotiated.
   */
-  NotNegotiated = -4,
+  notNegotiated = -4,
 
   /**
       Some (fatal) error occurred. Element generating
                                   this error should post an error message using
                                   GST_ELEMENT_ERROR() with more details.
   */
-  Error = -5,
+  error = -5,
 
   /**
       This operation is not supported.
   */
-  NotSupported = -6,
+  notSupported = -6,
 
   /**
       Elements can use values starting from
                                   this (and lower) to define custom error codes.
   */
-  CustomError = -100,
+  customError = -100,
 
   /**
       Pre-defined custom error code (define your
                                   custom error code to this to avoid compiler
                                   warnings).
   */
-  CustomError1 = -101,
+  customError1 = -101,
 
   /**
       Pre-defined custom error code.
   */
-  CustomError2 = -102,
+  customError2 = -102,
 }
 
 /**
@@ -1244,7 +1244,7 @@ enum GstFormat
   /**
       undefined format
   */
-  Undefined = 0,
+  undefined = 0,
 
   /**
       the default format of the pad/element. This can be
@@ -1252,29 +1252,29 @@ enum GstFormat
        elements support this; use @GST_FORMAT_TIME if you don't have a good
        reason to query for samples/frames)
   */
-  Default = 1,
+  default_ = 1,
 
   /**
       bytes
   */
-  Bytes = 2,
+  bytes = 2,
 
   /**
       time in nanoseconds
   */
-  Time = 3,
+  time = 3,
 
   /**
       buffers (few, if any, elements implement this as of
         May 2009)
   */
-  Buffers = 4,
+  buffers = 4,
 
   /**
       percentage of stream (few, if any, elements implement
         this as of May 2009)
   */
-  Percent = 5,
+  percent = 5,
 }
 
 /**
@@ -1287,7 +1287,7 @@ enum GstGapFlags : uint
       The #GST_EVENT_GAP signals missing data,
        for example because of packet loss.
   */
-  Data = 1,
+  data = 1,
 }
 
 /**
@@ -1298,17 +1298,17 @@ enum GstIteratorItem
   /**
       Skip this item
   */
-  Skip = 0,
+  skip = 0,
 
   /**
       Return item
   */
-  Pass = 1,
+  pass = 1,
 
   /**
       Stop after this item.
   */
-  End = 2,
+  end = 2,
 }
 
 /**
@@ -1319,22 +1319,22 @@ enum GstIteratorResult
   /**
       No more items in the iterator
   */
-  Done = 0,
+  done = 0,
 
   /**
       An item was retrieved
   */
-  Ok = 1,
+  ok = 1,
 
   /**
       Datastructure changed while iterating
   */
-  Resync = 2,
+  resync = 2,
 
   /**
       An error happened
   */
-  Error = 3,
+  error = 3,
 }
 
 /**
@@ -1347,38 +1347,38 @@ enum GstLibraryError
       a general error which doesn't fit in any other
     category.  Make sure you add a custom message to the error call.
   */
-  Failed = 1,
+  failed = 1,
 
   /**
       do not use this except as a placeholder for
     deciding where to go while developing code.
   */
-  TooLazy = 2,
+  tooLazy = 2,
 
   /**
       used when the library could not be opened.
   */
-  Init = 3,
+  init_ = 3,
 
   /**
       used when the library could not be closed.
   */
-  Shutdown = 4,
+  shutdown = 4,
 
   /**
       used when the library doesn't accept settings.
   */
-  Settings = 5,
+  settings = 5,
 
   /**
       used when the library generated an encoding error.
   */
-  Encode = 6,
+  encode = 6,
 
   /**
       the number of library error types.
   */
-  NumErrors = 7,
+  numErrors = 7,
 }
 
 /**
@@ -1389,22 +1389,22 @@ enum GstLockFlags : uint
   /**
       lock for read access
   */
-  Read = 1,
+  read = 1,
 
   /**
       lock for write access
   */
-  Write = 2,
+  write = 2,
 
   /**
       lock for exclusive access
   */
-  Exclusive = 4,
+  exclusive = 4,
 
   /**
       first flag that can be used for custom purposes
   */
-  Last = 256,
+  last = 256,
 }
 
 /**
@@ -1415,17 +1415,17 @@ enum GstMapFlags : uint
   /**
       map for read access
   */
-  Read = 1,
+  read = 1,
 
   /**
       map for write access
   */
-  Write = 2,
+  write = 2,
 
   /**
       first flag that can be used for custom purposes
   */
-  FlagLast = 65536,
+  flagLast = 65536,
 }
 
 /**
@@ -1437,7 +1437,7 @@ enum GstMemoryFlags : uint
       memory is readonly. It is not allowed to map the
     memory with #GST_MAP_WRITE.
   */
-  Readonly = 2,
+  readonly = 2,
 
   /**
       memory must not be shared. Copies will have to be
@@ -1446,34 +1446,34 @@ enum GstMemoryFlags : uint
     memory pooling instead of relying on the GstBuffer they were originally
     attached to.)
   */
-  NoShare = 16,
+  noShare = 16,
 
   /**
       the memory prefix is filled with 0 bytes
   */
-  ZeroPrefixed = 32,
+  zeroPrefixed = 32,
 
   /**
       the memory padding is filled with 0 bytes
   */
-  ZeroPadded = 64,
+  zeroPadded = 64,
 
   /**
       the memory is physically
     contiguous. (Since: 1.2)
   */
-  PhysicallyContiguous = 128,
+  physicallyContiguous = 128,
 
   /**
       the memory can't be mapped via
     [gst.memory.Memory.map] without any preconditions. (Since: 1.2)
   */
-  NotMappable = 256,
+  notMappable = 256,
 
   /**
       first flag that can be used for custom purposes
   */
-  Last = 1048576,
+  last = 1048576,
 }
 
 /**
@@ -1484,7 +1484,7 @@ enum GstMessageType : uint
   /**
       an undefined message
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       end-of-stream reached in a pipeline. The application will
@@ -1492,7 +1492,7 @@ enum GstMessageType : uint
     pipeline to PLAYING that is in the EOS state. The application can perform a
     flushing seek in the pipeline, which will undo the EOS state again.
   */
-  Eos = 1,
+  eos = 1,
 
   /**
       an error occurred. When the application receives an error
@@ -1501,22 +1501,22 @@ enum GstMessageType : uint
     messages by setting a `redirect-location` field into the error message, application
     or high level bins might use the information as required.
   */
-  Error = 2,
+  error = 2,
 
   /**
       a warning occurred.
   */
-  Warning = 4,
+  warning = 4,
 
   /**
       an info message occurred
   */
-  Info = 8,
+  info = 8,
 
   /**
       a tag was found.
   */
-  Tag = 16,
+  tag = 16,
 
   /**
       the pipeline is buffering. When the application
@@ -1526,30 +1526,30 @@ enum GstMessageType : uint
     performed and the buffering percentage can be used to inform the user about
     the progress.
   */
-  Buffering = 32,
+  buffering = 32,
 
   /**
       a state change happened
   */
-  StateChanged = 64,
+  stateChanged = 64,
 
   /**
       an element changed state in a streaming thread.
     This message is deprecated.
   */
-  StateDirty = 128,
+  stateDirty = 128,
 
   /**
       a stepping operation finished.
   */
-  StepDone = 256,
+  stepDone = 256,
 
   /**
       an element notifies its capability of providing
                                 a clock. This message is used internally and
                                 never forwarded to the application.
   */
-  ClockProvide = 512,
+  clockProvide = 512,
 
   /**
       The current clock as selected by the pipeline became
@@ -1558,111 +1558,111 @@ enum GstMessageType : uint
                              should set the pipeline to PAUSED and back to
                              PLAYING when this message is received.
   */
-  ClockLost = 1024,
+  clockLost = 1024,
 
   /**
       a new clock was selected in the pipeline.
   */
-  NewClock = 2048,
+  newClock = 2048,
 
   /**
       the structure of the pipeline changed. This
     message is used internally and never forwarded to the application.
   */
-  StructureChange = 4096,
+  structureChange = 4096,
 
   /**
       status about a stream, emitted when it starts,
                                 stops, errors, etc..
   */
-  StreamStatus = 8192,
+  streamStatus = 8192,
 
   /**
       message posted by the application, possibly
                               via an application-specific element.
   */
-  Application = 16384,
+  application = 16384,
 
   /**
       element-specific message, see the specific element's
                           documentation
   */
-  Element = 32768,
+  element = 32768,
 
   /**
       pipeline started playback of a segment. This
     message is used internally and never forwarded to the application.
   */
-  SegmentStart = 65536,
+  segmentStart = 65536,
 
   /**
       pipeline completed playback of a segment. This
     message is forwarded to the application after all elements that posted
     @GST_MESSAGE_SEGMENT_START posted a GST_MESSAGE_SEGMENT_DONE message.
   */
-  SegmentDone = 131072,
+  segmentDone = 131072,
 
   /**
       The duration of a pipeline changed. The
     application can get the new duration with a duration query.
   */
-  DurationChanged = 262144,
+  durationChanged = 262144,
 
   /**
       Posted by elements when their latency changes. The
     application should recalculate and distribute a new latency.
   */
-  Latency = 524288,
+  latency = 524288,
 
   /**
       Posted by elements when they start an ASYNC
     #GstStateChange. This message is not forwarded to the application but is used
     internally.
   */
-  AsyncStart = 1048576,
+  asyncStart = 1048576,
 
   /**
       Posted by elements when they complete an ASYNC
     #GstStateChange. The application will only receive this message from the toplevel
     pipeline.
   */
-  AsyncDone = 2097152,
+  asyncDone = 2097152,
 
   /**
       Posted by elements when they want the pipeline to
     change state. This message is a suggestion to the application which can
     decide to perform the state change on (part of) the pipeline.
   */
-  RequestState = 4194304,
+  requestState = 4194304,
 
   /**
       A stepping operation was started.
   */
-  StepStart = 8388608,
+  stepStart = 8388608,
 
   /**
       A buffer was dropped or an element changed its processing
     strategy for Quality of Service reasons.
   */
-  Qos = 16777216,
+  qos = 16777216,
 
   /**
       A progress message.
   */
-  Progress = 33554432,
+  progress = 33554432,
 
   /**
       A new table of contents (TOC) was found or previously found TOC
     was updated.
   */
-  Toc = 67108864,
+  toc = 67108864,
 
   /**
       Message to request resetting the pipeline's
         running time from the pipeline. This is an internal message which
         applications will likely never receive.
   */
-  ResetTime = 134217728,
+  resetTime = 134217728,
 
   /**
       Message indicating start of a new stream. Useful
@@ -1670,17 +1670,17 @@ enum GstMessageType : uint
         the next title actually starts playing (which will be some time after
         the URI for the next title has been set).
   */
-  StreamStart = 268435456,
+  streamStart = 268435456,
 
   /**
       Message indicating that an element wants a specific context (Since: 1.2)
   */
-  NeedContext = 536870912,
+  needContext = 536870912,
 
   /**
       Message indicating that an element created a context (Since: 1.2)
   */
-  HaveContext = 1073741824,
+  haveContext = 1073741824,
 
   /**
       Message is an extended message type (see below).
@@ -1689,62 +1689,62 @@ enum GstMessageType : uint
         filter for GST_MESSAGE_EXTENDED and then check the result for the
         specific type. (Since: 1.4)
   */
-  Extended = 2147483648,
+  extended = 2147483648,
 
   /**
       Message indicating a #GstDevice was added to
         a #GstDeviceProvider (Since: 1.4)
   */
-  DeviceAdded = 2147483649,
+  deviceAdded = 2147483649,
 
   /**
       Message indicating a #GstDevice was removed
         from a #GstDeviceProvider (Since: 1.4)
   */
-  DeviceRemoved = 2147483650,
+  deviceRemoved = 2147483650,
 
   /**
       Message indicating a #GObject property has
         changed (Since: 1.10)
   */
-  PropertyNotify = 2147483651,
+  propertyNotify = 2147483651,
 
   /**
       Message indicating a new #GstStreamCollection
         is available (Since: 1.10)
   */
-  StreamCollection = 2147483652,
+  streamCollection = 2147483652,
 
   /**
       Message indicating the active selection of
         #GstStreams has changed (Since: 1.10)
   */
-  StreamsSelected = 2147483653,
+  streamsSelected = 2147483653,
 
   /**
       Message indicating to request the application to
         try to play the given URL(s). Useful if for example a HTTP 302/303
         response is received with a non-HTTP URL inside. (Since: 1.10)
   */
-  Redirect = 2147483654,
+  redirect = 2147483654,
 
   /**
       Message indicating a #GstDevice was changed
         a #GstDeviceProvider (Since: 1.16)
   */
-  DeviceChanged = 2147483655,
+  deviceChanged = 2147483655,
 
   /**
       Message sent by elements to request the
         running time from the pipeline when an instant rate change should
         be applied (which may be in the past when the answer arrives). (Since: 1.18)
   */
-  InstantRateRequest = 2147483656,
+  instantRateRequest = 2147483656,
 
   /**
       mask for all of the above messages.
   */
-  Any = 4294967295,
+  any = 4294967295,
 }
 
 /**
@@ -1755,27 +1755,27 @@ enum GstMetaFlags : uint
   /**
       no flags
   */
-  None = 0,
+  none = 0,
 
   /**
       metadata should not be modified
   */
-  Readonly = 1,
+  readonly = 1,
 
   /**
       metadata is managed by a bufferpool
   */
-  Pooled = 2,
+  pooled = 2,
 
   /**
       metadata should not be removed
   */
-  Locked = 4,
+  locked = 4,
 
   /**
       additional flags can be added starting from this flag.
   */
-  Last = 65536,
+  last = 65536,
 }
 
 /**
@@ -1787,25 +1787,25 @@ enum GstMiniObjectFlags : uint
       the object can be locked and unlocked with
     [gst.mini_object.MiniObject.lock] and [gst.mini_object.MiniObject.unlock].
   */
-  Lockable = 1,
+  lockable = 1,
 
   /**
       the object is permanently locked in
     READONLY mode. Only read locks can be performed on the object.
   */
-  LockReadonly = 2,
+  lockReadonly = 2,
 
   /**
       the object is expected to stay alive
     even after [gst.global.deinit] has been called and so should be ignored by leak
     detection tools. (Since: 1.10)
   */
-  MayBeLeaked = 4,
+  mayBeLeaked = 4,
 
   /**
       first flag that can be used by subclasses.
   */
-  Last = 16,
+  last = 16,
 }
 
 /**
@@ -1818,7 +1818,7 @@ enum GstObjectFlags : uint
     after [gst.global.deinit] has been called and so should be ignored by leak
     detection tools. (Since: 1.10)
   */
-  MayBeLeaked = 1,
+  mayBeLeaked = 1,
 
   /**
       Flag that's set when the object has been constructed. This can be used by
@@ -1828,12 +1828,12 @@ enum GstObjectFlags : uint
     set values in the instance structure), and the case where the object is
     constructed.
   */
-  Constructed = 2,
+  constructed = 2,
 
   /**
       subclasses can add additional flags starting from this flag
   */
-  Last = 16,
+  last = 16,
 }
 
 /**
@@ -1844,17 +1844,17 @@ enum GstPadDirection
   /**
       direction is unknown.
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       the pad is a source pad.
   */
-  Src = 1,
+  src = 1,
 
   /**
       the pad is a sink pad.
   */
-  Sink = 2,
+  sink = 2,
 }
 
 /**
@@ -1865,68 +1865,68 @@ enum GstPadFlags : uint
   /**
       is dataflow on a pad blocked
   */
-  Blocked = 16,
+  blocked = 16,
 
   /**
       is pad flushing
   */
-  Flushing = 32,
+  flushing = 32,
 
   /**
       is pad in EOS state
   */
-  Eos = 64,
+  eos = 64,
 
   /**
       is pad currently blocking on a buffer or event
   */
-  Blocking = 128,
+  blocking = 128,
 
   /**
       ensure that there is a parent object before calling
                           into the pad callbacks.
   */
-  NeedParent = 256,
+  needParent = 256,
 
   /**
       the pad should be reconfigured/renegotiated.
                                The flag has to be unset manually after
                                reconfiguration happened.
   */
-  NeedReconfigure = 512,
+  needReconfigure = 512,
 
   /**
       the pad has pending events
   */
-  PendingEvents = 1024,
+  pendingEvents = 1024,
 
   /**
       the pad is using fixed caps. This means that
         once the caps are set on the pad, the default caps query function
         will only return those caps.
   */
-  FixedCaps = 2048,
+  fixedCaps = 2048,
 
   /**
       the default event and query handler will forward
                          all events and queries to the internally linked pads
                          instead of discarding them.
   */
-  ProxyCaps = 4096,
+  proxyCaps = 4096,
 
   /**
       the default query handler will forward
                          allocation queries to the internally linked pads
                          instead of discarding them.
   */
-  ProxyAllocation = 8192,
+  proxyAllocation = 8192,
 
   /**
       the default query handler will forward
                          scheduling queries to the internally linked pads
                          instead of discarding them.
   */
-  ProxyScheduling = 16384,
+  proxyScheduling = 16384,
 
   /**
       the default accept-caps handler will check
@@ -1934,20 +1934,20 @@ enum GstPadFlags : uint
                          of checking for a subset. This is interesting for
                          parsers that can accept incompletely specified caps.
   */
-  AcceptIntersect = 32768,
+  acceptIntersect = 32768,
 
   /**
       the default accept-caps handler will use
                          the template pad caps instead of query caps to
                          compare with the accept caps. Use this in combination
-                         with [gst.types.PadFlags.AcceptIntersect]. (Since: 1.6)
+                         with [gst.types.PadFlags.acceptIntersect]. (Since: 1.6)
   */
-  AcceptTemplate = 65536,
+  acceptTemplate = 65536,
 
   /**
       offset to define more flags
   */
-  Last = 1048576,
+  last = 1048576,
 }
 
 /**
@@ -1957,7 +1957,7 @@ enum GstPadFlags : uint
   
   > Only disable some of the checks if you are 100% certain you know the link
   > will not fail because of hierarchy/caps compatibility failures. If uncertain,
-  > use the default checks ([gst.types.PadLinkCheck.Default]) or the regular methods
+  > use the default checks ([gst.types.PadLinkCheck.default_]) or the regular methods
   > for linking the pads.
 */
 enum GstPadLinkCheck : uint
@@ -1965,39 +1965,39 @@ enum GstPadLinkCheck : uint
   /**
       Don't check hierarchy or caps compatibility.
   */
-  Nothing = 0,
+  nothing = 0,
 
   /**
       Check the pads have same parents/grandparents.
       Could be omitted if it is already known that the two elements that own the
       pads are in the same bin.
   */
-  Hierarchy = 1,
+  hierarchy = 1,
 
   /**
       Check if the pads are compatible by using
       their template caps. This is much faster than @GST_PAD_LINK_CHECK_CAPS, but
       would be unsafe e.g. if one pad has `GST_CAPS_ANY`.
   */
-  TemplateCaps = 2,
+  templateCaps = 2,
 
   /**
       Check if the pads are compatible by comparing the
       caps returned by [gst.pad.Pad.queryCaps].
   */
-  Caps = 4,
+  caps = 4,
 
   /**
       Disables pushing a reconfigure event when pads are
       linked.
   */
-  NoReconfigure = 8,
+  noReconfigure = 8,
 
   /**
       The default checks done when linking
       pads (i.e. the ones used by [gst.pad.Pad.link]).
   */
-  Default = 5,
+  default_ = 5,
 }
 
 /**
@@ -2008,37 +2008,37 @@ enum GstPadLinkReturn
   /**
       link succeeded
   */
-  Ok = 0,
+  ok = 0,
 
   /**
       pads have no common grandparent
   */
-  WrongHierarchy = -1,
+  wrongHierarchy = -1,
 
   /**
       pad was already linked
   */
-  WasLinked = -2,
+  wasLinked = -2,
 
   /**
       pads have wrong direction
   */
-  WrongDirection = -3,
+  wrongDirection = -3,
 
   /**
       pads do not have common format
   */
-  Noformat = -4,
+  noformat = -4,
 
   /**
       pads cannot cooperate in scheduling
   */
-  Nosched = -5,
+  nosched = -5,
 
   /**
       refused for some reason
   */
-  Refused = -6,
+  refused = -6,
 }
 
 /**
@@ -2051,17 +2051,17 @@ enum GstPadMode
   /**
       Pad will not handle dataflow
   */
-  None = 0,
+  none = 0,
 
   /**
       Pad handles dataflow in downstream push mode
   */
-  Push = 1,
+  push = 1,
 
   /**
       Pad handles dataflow in upstream pull mode
   */
-  Pull = 2,
+  pull = 2,
 }
 
 /**
@@ -2072,18 +2072,18 @@ enum GstPadPresence
   /**
       the pad is always available
   */
-  Always = 0,
+  always = 0,
 
   /**
       the pad will become available depending on the media stream
   */
-  Sometimes = 1,
+  sometimes = 1,
 
   /**
       the pad is only available on request with
      [gst.element.Element.requestPad].
   */
-  Request = 2,
+  request = 2,
 }
 
 /**
@@ -2095,10 +2095,10 @@ enum GstPadProbeReturn
       drop data in data probes. For push mode this means that
            the data item is not sent downstream. For pull mode, it means that
            the data item is not passed upstream. In both cases, no other probes
-           are called for this item and [gst.types.FlowReturn.Ok] or true is returned to the
+           are called for this item and [gst.types.FlowReturn.ok] or true is returned to the
            caller.
   */
-  Drop = 0,
+  drop = 0,
 
   /**
       normal probe return value. This leaves the probe in
@@ -2107,33 +2107,33 @@ enum GstPadProbeReturn
            for the probe type applies ('block' for blocking probes,
            and 'pass' for non-blocking probes).
   */
-  Ok = 1,
+  ok = 1,
 
   /**
       remove this probe, passing the data. For blocking probes
            this will cause data flow to unblock, unless there are also other
            blocking probes installed.
   */
-  Remove = 2,
+  remove = 2,
 
   /**
       pass the data item in the block probe and block on the
            next item. Note, that if there are multiple pad probes installed and
            any probe returns PASS, the data will be passed.
   */
-  Pass = 3,
+  pass = 3,
 
   /**
       Data has been handled in the probe and will not be
            forwarded further. For events and buffers this is the same behaviour as
-           [gst.types.PadProbeReturn.Drop] (except that in this case you need to unref the buffer
+           [gst.types.PadProbeReturn.drop] (except that in this case you need to unref the buffer
            or event yourself). For queries it will also return true to the caller.
            The probe can also modify the #GstFlowReturn value by using the
            #GST_PAD_PROBE_INFO_FLOW_RETURN() accessor.
            Note that the resulting query must contain valid entries.
            Since: 1.6
   */
-  Handled = 4,
+  handled = 4,
 }
 
 /**
@@ -2146,37 +2146,37 @@ enum GstPadProbeType : uint
   /**
       invalid probe type
   */
-  Invalid = 0,
+  invalid = 0,
 
   /**
       probe idle pads and block while the callback is called
   */
-  Idle = 1,
+  idle = 1,
 
   /**
       probe and block pads
   */
-  Block = 2,
+  block = 2,
 
   /**
       probe buffers
   */
-  Buffer = 16,
+  buffer = 16,
 
   /**
       probe buffer lists
   */
-  BufferList = 32,
+  bufferList = 32,
 
   /**
       probe downstream events
   */
-  EventDownstream = 64,
+  eventDownstream = 64,
 
   /**
       probe upstream events
   */
-  EventUpstream = 128,
+  eventUpstream = 128,
 
   /**
       probe flush events. This probe has to be
@@ -2184,77 +2184,77 @@ enum GstPadProbeType : uint
         @@GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM or
         @@GST_PAD_PROBE_TYPE_EVENT_UPSTREAM probe types.
   */
-  EventFlush = 256,
+  eventFlush = 256,
 
   /**
       probe downstream queries
   */
-  QueryDownstream = 512,
+  queryDownstream = 512,
 
   /**
       probe upstream queries
   */
-  QueryUpstream = 1024,
+  queryUpstream = 1024,
 
   /**
       probe push
   */
-  Push = 4096,
+  push = 4096,
 
   /**
       probe pull
   */
-  Pull = 8192,
+  pull = 8192,
 
   /**
       probe and block at the next opportunity, at data flow or when idle
   */
-  Blocking = 3,
+  blocking = 3,
 
   /**
       probe downstream data (buffers, buffer lists, and events)
   */
-  DataDownstream = 112,
+  dataDownstream = 112,
 
   /**
       probe upstream data (events)
   */
-  DataUpstream = 128,
+  dataUpstream = 128,
 
   /**
       probe upstream and downstream data (buffers, buffer lists, and events)
   */
-  DataBoth = 240,
+  dataBoth = 240,
 
   /**
       probe and block downstream data (buffers, buffer lists, and events)
   */
-  BlockDownstream = 114,
+  blockDownstream = 114,
 
   /**
       probe and block upstream data (events)
   */
-  BlockUpstream = 130,
+  blockUpstream = 130,
 
   /**
       probe upstream and downstream events
   */
-  EventBoth = 192,
+  eventBoth = 192,
 
   /**
       probe upstream and downstream queries
   */
-  QueryBoth = 1536,
+  queryBoth = 1536,
 
   /**
       probe upstream events and queries and downstream buffers, buffer lists, events and queries
   */
-  AllBoth = 1776,
+  allBoth = 1776,
 
   /**
       probe push and pull
   */
-  Scheduling = 12288,
+  scheduling = 12288,
 }
 
 /**
@@ -2265,7 +2265,7 @@ enum GstPadTemplateFlags : uint
   /**
       first flag that can be used by subclasses.
   */
-  Last = 256,
+  last = 256,
 }
 
 /**
@@ -2276,42 +2276,42 @@ enum GstParseError
   /**
       A syntax error occurred.
   */
-  Syntax = 0,
+  syntax = 0,
 
   /**
       The description contained an unknown element
   */
-  NoSuchElement = 1,
+  noSuchElement = 1,
 
   /**
       An element did not have a specified property
   */
-  NoSuchProperty = 2,
+  noSuchProperty = 2,
 
   /**
       There was an error linking two pads.
   */
-  Link = 3,
+  link = 3,
 
   /**
       There was an error setting a property
   */
-  CouldNotSetProperty = 4,
+  couldNotSetProperty = 4,
 
   /**
       An empty bin was specified.
   */
-  EmptyBin = 5,
+  emptyBin = 5,
 
   /**
       An empty description was specified
   */
-  Empty = 6,
+  empty = 6,
 
   /**
       A delayed link did not get resolved.
   */
-  DelayedLink = 7,
+  delayedLink = 7,
 }
 
 /**
@@ -2322,27 +2322,27 @@ enum GstParseFlags : uint
   /**
       Do not use any special parsing options.
   */
-  None = 0,
+  none = 0,
 
   /**
       Always return null when an error occurs
         (default behaviour is to return partially constructed bins or elements
          in some cases)
   */
-  FatalErrors = 1,
+  fatalErrors = 1,
 
   /**
       If a bin only has a single element,
         just return the element.
   */
-  NoSingleElementBins = 2,
+  noSingleElementBins = 2,
 
   /**
       If more than one toplevel element is described
         by the pipeline description string, put them in a #GstBin instead of a
         #GstPipeline. (Since: 1.10)
   */
-  PlaceInBin = 4,
+  placeInBin = 4,
 }
 
 /**
@@ -2353,12 +2353,12 @@ enum GstPipelineFlags : uint
   /**
       this pipeline works with a fixed clock
   */
-  FixedClock = 524288,
+  fixedClock = 524288,
 
   /**
       offset to define more flags
   */
-  Last = 8388608,
+  last = 8388608,
 }
 
 /** */
@@ -2369,7 +2369,7 @@ enum GstPluginAPIFlags : uint
       the plugins cache. This is useful if the members of the enum are generated
       dynamically, in order not to expose incorrect documentation to the end user.
   */
-  Members = 1,
+  members = 1,
 }
 
 /**
@@ -2380,39 +2380,39 @@ enum GstPluginDependencyFlags : uint
   /**
       no special flags
   */
-  None = 0,
+  none = 0,
 
   /**
       recurse into subdirectories
   */
-  Recurse = 1,
+  recurse = 1,
 
   /**
       use paths
             argument only if none of the environment variables is set
   */
-  PathsAreDefaultOnly = 2,
+  pathsAreDefaultOnly = 2,
 
   /**
       interpret
             filename argument as filter suffix and check all matching files in
             the directory
   */
-  FileNameIsSuffix = 4,
+  fileNameIsSuffix = 4,
 
   /**
       interpret
             filename argument as filter prefix and check all matching files in
             the directory. Since: 1.8.
   */
-  FileNameIsPrefix = 8,
+  fileNameIsPrefix = 8,
 
   /**
       interpret
       non-absolute paths as relative to the main executable directory. Since
       1.14.
   */
-  PathsAreRelativeToExe = 16,
+  pathsAreRelativeToExe = 16,
 }
 
 /**
@@ -2423,17 +2423,17 @@ enum GstPluginError
   /**
       The plugin could not be loaded
   */
-  Module = 0,
+  module_ = 0,
 
   /**
       The plugin has unresolved dependencies
   */
-  Dependencies = 1,
+  dependencies = 1,
 
   /**
       The plugin has already be loaded from a different file
   */
-  NameMismatch = 2,
+  nameMismatch = 2,
 }
 
 /**
@@ -2444,16 +2444,16 @@ enum GstPluginFlags : uint
   /**
       Temporarily loaded plugins
   */
-  Cached = 16,
+  cached = 16,
 
   /**
       The plugin won't be scanned (again)
   */
-  Blacklisted = 32,
+  blacklisted = 32,
 }
 
 /**
-    The type of a [gst.types.MessageType.Progress]. The progress messages inform the
+    The type of a [gst.types.MessageType.progress]. The progress messages inform the
   application of the status of asynchronous tasks.
 */
 enum GstProgressType
@@ -2461,28 +2461,28 @@ enum GstProgressType
   /**
       A new task started.
   */
-  Start = 0,
+  start = 0,
 
   /**
       A task completed and a new one continues.
   */
-  Continue = 1,
+  continue_ = 1,
 
   /**
       A task completed.
   */
-  Complete = 2,
+  complete = 2,
 
   /**
       A task was canceled.
   */
-  Canceled = 3,
+  canceled = 3,
 
   /**
       A task caused an error. An error message is also
              posted on the bus.
   */
-  Error = 4,
+  error = 4,
 }
 
 /**
@@ -2494,24 +2494,24 @@ enum GstPromiseResult
       Initial state. Waiting for transition to any
     	other state.
   */
-  Pending = 0,
+  pending = 0,
 
   /**
       Interrupted by the consumer as it doesn't
     	want the value anymore.
   */
-  Interrupted = 1,
+  interrupted = 1,
 
   /**
       A producer marked a reply
   */
-  Replied = 2,
+  replied = 2,
 
   /**
       The promise expired (the carrying object
     	lost all refs) and the promise will never be fulfilled.
   */
-  Expired = 3,
+  expired = 3,
 }
 
 /**
@@ -2526,20 +2526,20 @@ enum GstQOSType
        processing the data. Upstream should reduce their production rate. This
        type is also used when buffers arrive early or in time.
   */
-  Overflow = 0,
+  overflow = 0,
 
   /**
       The QoS event type that is produced when upstream
        elements are producing data too slowly and need to speed up their
        production rate.
   */
-  Underflow = 1,
+  underflow = 1,
 
   /**
       The QoS event type that is produced when the
        application enabled throttling to limit the data rate.
   */
-  Throttle = 2,
+  throttle = 2,
 }
 
 /**
@@ -2550,108 +2550,108 @@ enum GstQueryType
   /**
       unknown query type
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       current position in stream
   */
-  Position = 2563,
+  position = 2563,
 
   /**
       total duration of the stream
   */
-  Duration = 5123,
+  duration = 5123,
 
   /**
       latency of stream
   */
-  Latency = 7683,
+  latency = 7683,
 
   /**
       current jitter of stream
   */
-  Jitter = 10243,
+  jitter = 10243,
 
   /**
       current rate of the stream
   */
-  Rate = 12803,
+  rate = 12803,
 
   /**
       seeking capabilities
   */
-  Seeking = 15363,
+  seeking = 15363,
 
   /**
       segment start/stop positions
   */
-  Segment = 17923,
+  segment = 17923,
 
   /**
       convert values between formats
   */
-  Convert = 20483,
+  convert = 20483,
 
   /**
       query supported formats for convert
   */
-  Formats = 23043,
+  formats = 23043,
 
   /**
       query available media for efficient seeking.
   */
-  Buffering = 28163,
+  buffering = 28163,
 
   /**
       a custom application or element defined query.
   */
-  Custom = 30723,
+  custom = 30723,
 
   /**
       query the URI of the source or sink.
   */
-  Uri = 33283,
+  uri = 33283,
 
   /**
       the buffer allocation properties
   */
-  Allocation = 35846,
+  allocation = 35846,
 
   /**
       the scheduling properties
   */
-  Scheduling = 38401,
+  scheduling = 38401,
 
   /**
       the accept caps query
   */
-  AcceptCaps = 40963,
+  acceptCaps = 40963,
 
   /**
       the caps query
   */
-  Caps = 43523,
+  caps = 43523,
 
   /**
       wait till all serialized data is consumed downstream
   */
-  Drain = 46086,
+  drain = 46086,
 
   /**
       query the pipeline-local context from
         downstream or upstream (since 1.2)
   */
-  Context = 48643,
+  context = 48643,
 
   /**
       the bitrate query (since 1.16)
   */
-  Bitrate = 51202,
+  bitrate = 51202,
 
   /**
       Query stream selection capability.
   */
-  Selectable = 53763,
+  selectable = 53763,
 }
 
 /**
@@ -2664,18 +2664,18 @@ enum GstQueryTypeFlags : uint
   /**
       Set if the query can travel upstream.
   */
-  Upstream = 1,
+  upstream = 1,
 
   /**
       Set if the query can travel downstream.
   */
-  Downstream = 2,
+  downstream = 2,
 
   /**
       Set if the query should be serialized with data
                                   flow.
   */
-  Serialized = 4,
+  serialized = 4,
 }
 
 /**
@@ -2692,22 +2692,22 @@ enum GstRank
   /**
       will be chosen last or not at all
   */
-  None = 0,
+  none = 0,
 
   /**
       unlikely to be chosen
   */
-  Marginal = 64,
+  marginal = 64,
 
   /**
       likely to be chosen
   */
-  Secondary = 128,
+  secondary = 128,
 
   /**
       will be chosen first
   */
-  Primary = 256,
+  primary = 256,
 }
 
 /**
@@ -2721,86 +2721,86 @@ enum GstResourceError
       a general error which doesn't fit in any other
     category.  Make sure you add a custom message to the error call.
   */
-  Failed = 1,
+  failed = 1,
 
   /**
       do not use this except as a placeholder for
     deciding where to go while developing code.
   */
-  TooLazy = 2,
+  tooLazy = 2,
 
   /**
       used when the resource could not be found.
   */
-  NotFound = 3,
+  notFound = 3,
 
   /**
       used when resource is busy.
   */
-  Busy = 4,
+  busy = 4,
 
   /**
       used when resource fails to open for reading.
   */
-  OpenRead = 5,
+  openRead = 5,
 
   /**
       used when resource fails to open for writing.
   */
-  OpenWrite = 6,
+  openWrite = 6,
 
   /**
       used when resource cannot be opened for
     both reading and writing, or either (but unspecified which).
   */
-  OpenReadWrite = 7,
+  openReadWrite = 7,
 
   /**
       used when the resource can't be closed.
   */
-  Close = 8,
+  close = 8,
 
   /**
       used when the resource can't be read from.
   */
-  Read = 9,
+  read = 9,
 
   /**
       used when the resource can't be written to.
   */
-  Write = 10,
+  write = 10,
 
   /**
       used when a seek on the resource fails.
   */
-  Seek = 11,
+  seek = 11,
 
   /**
       used when a synchronize on the resource fails.
   */
-  Sync = 12,
+  sync = 12,
 
   /**
       used when settings can't be manipulated on.
   */
-  Settings = 13,
+  settings = 13,
 
   /**
       used when the resource has no space left.
   */
-  NoSpaceLeft = 14,
+  noSpaceLeft = 14,
 
   /**
       used when the resource can't be opened
                                         due to missing authorization.
                                         (Since: 1.2.4)
   */
-  NotAuthorized = 15,
+  notAuthorized = 15,
 
   /**
       the number of resource error types.
   */
-  NumErrors = 16,
+  numErrors = 16,
 }
 
 /**
@@ -2811,17 +2811,17 @@ enum GstSchedulingFlags : uint
   /**
       if seeking is possible
   */
-  Seekable = 1,
+  seekable = 1,
 
   /**
       if sequential access is recommended
   */
-  Sequential = 2,
+  sequential = 2,
 
   /**
       if bandwidth is limited and buffering possible (since 1.2)
   */
-  BandwidthLimited = 4,
+  bandwidthLimited = 4,
 }
 
 /**
@@ -2832,17 +2832,17 @@ enum GstSearchMode
   /**
       Only search for exact matches.
   */
-  Exact = 0,
+  exact = 0,
 
   /**
       Search for an exact match or the element just before.
   */
-  Before = 1,
+  before = 1,
 
   /**
       Search for an exact match or the element just after.
   */
-  After = 2,
+  after = 2,
 }
 
 /**
@@ -2858,13 +2858,13 @@ enum GstSearchMode
   
   When performing a segment seek: after the playback of the segment completes,
   no EOS will be emitted by the element that performed the seek, but a
-  [gst.types.MessageType.SegmentDone] message will be posted on the bus by the element.
+  [gst.types.MessageType.segmentDone] message will be posted on the bus by the element.
   When this message is posted, it is possible to send a new seek event to
   continue playback. With this seek method it is possible to perform seamless
   looping or simple linear editing.
   
   When only changing the playback rate and not the direction, the
-  [gst.types.SeekFlags.InstantRateChange] flag can be used for a non-flushing seek
+  [gst.types.SeekFlags.instantRateChange] flag can be used for a non-flushing seek
   to signal that the rate change should be applied immediately. This requires
   special support in the seek handlers (e.g. demuxers) and any elements
   synchronizing to the clock, and in general can't work in all cases (for example
@@ -2874,18 +2874,18 @@ enum GstSearchMode
   playback position - as the playback position will not be changing.
   
   When doing fast forward (rate > 1.0) or fast reverse (rate < -1.0) trickmode
-  playback, the [gst.types.SeekFlags.Trickmode] flag can be used to instruct decoders
+  playback, the [gst.types.SeekFlags.trickmode] flag can be used to instruct decoders
   and demuxers to adjust the playback rate by skipping frames. This can improve
   performance and decrease CPU usage because not all frames need to be decoded.
   
-  Beyond that, the [gst.types.SeekFlags.TrickmodeKeyUnits] flag can be used to
+  Beyond that, the [gst.types.SeekFlags.trickmodeKeyUnits] flag can be used to
   request that decoders skip all frames except key units, and
-  [gst.types.SeekFlags.TrickmodeNoAudio] flags can be used to request that audio
+  [gst.types.SeekFlags.trickmodeNoAudio] flags can be used to request that audio
   decoders do no decoding at all, and simple output silence.
   
-  The [gst.types.SeekFlags.SnapBefore] flag can be used to snap to the previous
-  relevant location, and the [gst.types.SeekFlags.SnapAfter] flag can be used to
-  select the next relevant location. If [gst.types.SeekFlags.KeyUnit] is specified,
+  The [gst.types.SeekFlags.snapBefore] flag can be used to snap to the previous
+  relevant location, and the [gst.types.SeekFlags.snapAfter] flag can be used to
+  select the next relevant location. If [gst.types.SeekFlags.keyUnit] is specified,
   the relevant location is a keyframe. If both flags are specified, the nearest
   of these locations will be selected. If none are specified, the implementation is
   free to select whichever it wants.
@@ -2903,64 +2903,64 @@ enum GstSeekFlags : uint
   /**
       no flag
   */
-  None = 0,
+  none = 0,
 
   /**
       flush pipeline
   */
-  Flush = 1,
+  flush = 1,
 
   /**
       accurate position is requested, this might
                         be considerably slower for some formats.
   */
-  Accurate = 2,
+  accurate = 2,
 
   /**
       seek to the nearest keyframe. This might be
                         faster but less accurate.
   */
-  KeyUnit = 4,
+  keyUnit = 4,
 
   /**
       perform a segment seek.
   */
-  Segment = 8,
+  segment = 8,
 
   /**
       when doing fast forward or fast reverse playback, allow
                         elements to skip frames instead of generating all
                         frames. (Since: 1.6)
   */
-  Trickmode = 16,
+  trickmode = 16,
 
   /**
       Deprecated backward compatibility flag, replaced
-                        by [gst.types.SeekFlags.Trickmode]
+                        by [gst.types.SeekFlags.trickmode]
   */
-  Skip = 16,
+  skip = 16,
 
   /**
       go to a location before the requested position,
-                        if [gst.types.SeekFlags.KeyUnit] this means the keyframe at or before
+                        if [gst.types.SeekFlags.keyUnit] this means the keyframe at or before
                         the requested position the one at or before the seek target.
   */
-  SnapBefore = 32,
+  snapBefore = 32,
 
   /**
       go to a location after the requested position,
-                        if [gst.types.SeekFlags.KeyUnit] this means the keyframe at of after the
+                        if [gst.types.SeekFlags.keyUnit] this means the keyframe at of after the
                         requested position.
   */
-  SnapAfter = 64,
+  snapAfter = 64,
 
   /**
       go to a position near the requested position,
-                        if [gst.types.SeekFlags.KeyUnit] this means the keyframe closest
+                        if [gst.types.SeekFlags.keyUnit] this means the keyframe closest
                         to the requested position, if both keyframes are at an equal
-                        distance, behaves like [gst.types.SeekFlags.SnapBefore].
+                        distance, behaves like [gst.types.SeekFlags.snapBefore].
   */
-  SnapNearest = 96,
+  snapNearest = 96,
 
   /**
       when doing fast forward or fast reverse
@@ -2968,14 +2968,14 @@ enum GstSeekFlags : uint
                         and skip all other content, for formats that have
                         keyframes. (Since: 1.6)
   */
-  TrickmodeKeyUnits = 128,
+  trickmodeKeyUnits = 128,
 
   /**
       when doing fast forward or fast reverse
                         playback, request that audio decoder elements skip
                         decoding and output only gap events or silence. (Since: 1.6)
   */
-  TrickmodeNoAudio = 256,
+  trickmodeNoAudio = 256,
 
   /**
       When doing fast forward or fast reverse
@@ -2984,7 +2984,7 @@ enum GstSeekFlags : uint
                         B-Frames), for formats that have keyframes and forward predicted
                         frames. (Since: 1.18)
   */
-  TrickmodeForwardPredicted = 512,
+  trickmodeForwardPredicted = 512,
 
   /**
       Signals that a rate change should be
@@ -2992,7 +2992,7 @@ enum GstSeekFlags : uint
                         are GST_CLOCK_TIME_NONE, the playback direction does not change
                         and the seek is not flushing. (Since: 1.18)
   */
-  InstantRateChange = 1024,
+  instantRateChange = 1024,
 }
 
 /**
@@ -3004,17 +3004,17 @@ enum GstSeekType
   /**
       no change in position is required
   */
-  None = 0,
+  none = 0,
 
   /**
       absolute position is requested
   */
-  Set = 1,
+  set = 1,
 
   /**
       relative position to duration is requested
   */
-  End = 2,
+  end = 2,
 }
 
 /**
@@ -3026,47 +3026,47 @@ enum GstSegmentFlags : uint
   /**
       no flags
   */
-  None = 0,
+  none = 0,
 
   /**
       reset the pipeline running_time to the segment
                              running_time
   */
-  Reset = 1,
+  reset = 1,
 
   /**
       perform skip playback (Since: 1.6)
   */
-  Trickmode = 16,
+  trickmode = 16,
 
   /**
       Deprecated backward compatibility flag, replaced
                             by @GST_SEGMENT_FLAG_TRICKMODE
   */
-  Skip = 16,
+  skip = 16,
 
   /**
       send SEGMENT_DONE instead of EOS
   */
-  Segment = 8,
+  segment = 8,
 
   /**
       Decode only keyframes, where
                                            possible (Since: 1.6)
   */
-  TrickmodeKeyUnits = 128,
+  trickmodeKeyUnits = 128,
 
   /**
       Decode only keyframes or forward
                                            predicted frames, where possible (Since: 1.18)
   */
-  TrickmodeForwardPredicted = 512,
+  trickmodeForwardPredicted = 512,
 
   /**
       Do not decode any audio, where
                                            possible (Since: 1.6)
   */
-  TrickmodeNoAudio = 256,
+  trickmodeNoAudio = 256,
 }
 
 /** */
@@ -3075,19 +3075,19 @@ enum GstSerializeFlags : uint
   /**
       No special flags specified.
   */
-  None = 0,
+  none = 0,
 
   /**
       Serialize using the old format for
                                          nested structures.
   */
-  BackwardCompat = 1,
+  backwardCompat = 1,
 
   /**
       Serialization fails if a value cannot be serialized instead of using
     placeholder "NULL" value (e.g. pointers, objects).
   */
-  Strict = 2,
+  strict = 2,
 }
 
 /** */
@@ -3098,14 +3098,14 @@ enum GstStackTraceFlags : uint
                                 available, which may be none on some platforms
                                 (Since: 1.18)
   */
-  None = 0,
+  none = 0,
 
   /**
       Try to retrieve as much information as possible,
                                 including source information when getting the
                                 stack trace
   */
-  Full = 1,
+  full = 1,
 }
 
 /**
@@ -3117,36 +3117,36 @@ enum GstState
   /**
       no pending state.
   */
-  VoidPending = 0,
+  voidPending = 0,
 
   /**
       the NULL state or initial state of an element.
   */
-  Null = 1,
+  null_ = 1,
 
   /**
       the element is ready to go to PAUSED.
   */
-  Ready = 2,
+  ready = 2,
 
   /**
       the element is PAUSED, it is ready to accept and
                              process data. Sink elements however only accept one
                              buffer and then block.
   */
-  Paused = 3,
+  paused = 3,
 
   /**
       the element is PLAYING, the #GstClock is running and
                              the data is flowing.
   */
-  Playing = 4,
+  playing = 4,
 }
 
 /**
     These are the different state changes an element goes through.
-  [gst.types.State.Null] &rArr; [gst.types.State.Playing] is called an upwards state change
-  and [gst.types.State.Playing] &rArr; [gst.types.State.Null] a downwards state change.
+  [gst.types.State.null_] &rArr; [gst.types.State.playing] is called an upwards state change
+  and [gst.types.State.playing] &rArr; [gst.types.State.null_] a downwards state change.
 */
 enum GstStateChange
 {
@@ -3159,23 +3159,23 @@ enum GstStateChange
           * The element opens the device (in case feature need to be probed).
       )
   */
-  NullToReady = 10,
+  nullToReady = 10,
 
   /**
       state change from READY to PAUSED.
       $(LIST
           * The element pads are activated in order to receive data in PAUSED.
             Streaming threads are started.
-          * Some elements might need to return [gst.types.StateChangeReturn.Async] and complete
+          * Some elements might need to return [gst.types.StateChangeReturn.async] and complete
             the state change when they have enough information. It is a requirement
-            for sinks to return [gst.types.StateChangeReturn.Async] and complete the state change
-            when they receive the first buffer or [gst.types.EventType.Eos] (preroll).
+            for sinks to return [gst.types.StateChangeReturn.async] and complete the state change
+            when they receive the first buffer or [gst.types.EventType.eos] (preroll).
             Sinks also block the dataflow when in PAUSED.
           * A pipeline resets the running_time to 0.
-          * Live sources return [gst.types.StateChangeReturn.NoPreroll] and don't generate data.
+          * Live sources return [gst.types.StateChangeReturn.noPreroll] and don't generate data.
       )
   */
-  ReadyToPaused = 19,
+  readyToPaused = 19,
 
   /**
       state change from PAUSED to PLAYING.
@@ -3189,14 +3189,14 @@ enum GstStateChange
             the state change.
           * Sink elements stop blocking on the preroll buffer or event and start
             rendering the data.
-          * Sinks can post [gst.types.MessageType.Eos] in the PLAYING state. It is not allowed
-            to post [gst.types.MessageType.Eos] when not in the PLAYING state.
+          * Sinks can post [gst.types.MessageType.eos] in the PLAYING state. It is not allowed
+            to post [gst.types.MessageType.eos] when not in the PLAYING state.
           * While streaming in PAUSED or PLAYING elements can create and remove
             sometimes pads.
-          * Live sources start generating data and return [gst.types.StateChangeReturn.Success].
+          * Live sources start generating data and return [gst.types.StateChangeReturn.success].
       )
   */
-  PausedToPlaying = 28,
+  pausedToPlaying = 28,
 
   /**
       state change from PLAYING to PAUSED.
@@ -3208,28 +3208,28 @@ enum GstStateChange
           * Sinks unblock any #GstClock wait calls.
           * When a sink does not have a pending buffer to play, it returns
             #GST_STATE_CHANGE_ASYNC from this state change and completes the state
-            change when it receives a new buffer or an [gst.types.EventType.Eos].
-          * Any queued [gst.types.MessageType.Eos] items are removed since they will be reposted
+            change when it receives a new buffer or an [gst.types.EventType.eos].
+          * Any queued [gst.types.MessageType.eos] items are removed since they will be reposted
             when going back to the PLAYING state. The EOS messages are queued in
             #GstBin containers.
-          * Live sources stop generating data and return [gst.types.StateChangeReturn.NoPreroll].
+          * Live sources stop generating data and return [gst.types.StateChangeReturn.noPreroll].
       )
   */
-  PlayingToPaused = 35,
+  playingToPaused = 35,
 
   /**
       state change from PAUSED to READY.
       $(LIST
           * Sinks unblock any waits in the preroll.
           * Elements unblock any waits on devices
-          * Chain or get_range functions return [gst.types.FlowReturn.Flushing].
+          * Chain or get_range functions return [gst.types.FlowReturn.flushing].
           * The element pads are deactivated so that streaming becomes impossible and
             all streaming threads are stopped.
           * The sink forgets all negotiated formats
           * Elements remove all sometimes pads
       )
   */
-  PausedToReady = 26,
+  pausedToReady = 26,
 
   /**
       state change from READY to NULL.
@@ -3238,31 +3238,31 @@ enum GstStateChange
           * Elements reset any internal state.
       )
   */
-  ReadyToNull = 17,
+  readyToNull = 17,
 
   /**
       state change from NULL to NULL. (Since: 1.14)
   */
-  NullToNull = 9,
+  nullToNull = 9,
 
   /**
       state change from READY to READY,
     This might happen when going to PAUSED asynchronously failed, in that case
     elements should make sure they are in a proper, coherent READY state. (Since: 1.14)
   */
-  ReadyToReady = 18,
+  readyToReady = 18,
 
   /**
       state change from PAUSED to PAUSED.
     This might happen when elements were in PLAYING state and 'lost state',
     they should make sure to go back to real 'PAUSED' state (prerolling for example). (Since: 1.14)
   */
-  PausedToPaused = 27,
+  pausedToPaused = 27,
 
   /**
       state change from PLAYING to PLAYING. (Since: 1.14)
   */
-  PlayingToPlaying = 36,
+  playingToPlaying = 36,
 }
 
 /**
@@ -3274,24 +3274,24 @@ enum GstStateChangeReturn
   /**
       the state change failed
   */
-  Failure = 0,
+  failure = 0,
 
   /**
       the state change succeeded
   */
-  Success = 1,
+  success = 1,
 
   /**
       the state change will happen asynchronously
   */
-  Async = 2,
+  async = 2,
 
   /**
       the state change succeeded but the element
-                                  cannot produce data in [gst.types.State.Paused].
+                                  cannot produce data in [gst.types.State.paused].
                                   This typically happens with live sources.
   */
-  NoPreroll = 3,
+  noPreroll = 3,
 }
 
 /**
@@ -3305,80 +3305,80 @@ enum GstStreamError
       a general error which doesn't fit in any other
     category.  Make sure you add a custom message to the error call.
   */
-  Failed = 1,
+  failed = 1,
 
   /**
       do not use this except as a placeholder for
     deciding where to go while developing code.
   */
-  TooLazy = 2,
+  tooLazy = 2,
 
   /**
       use this when you do not want to implement
     this functionality yet.
   */
-  NotImplemented = 3,
+  notImplemented = 3,
 
   /**
       used when the element doesn't know the
     stream's type.
   */
-  TypeNotFound = 4,
+  typeNotFound = 4,
 
   /**
       used when the element doesn't handle this type
     of stream.
   */
-  WrongType = 5,
+  wrongType = 5,
 
   /**
       used when there's no codec to handle the
     stream's type.
   */
-  CodecNotFound = 6,
+  codecNotFound = 6,
 
   /**
       used when decoding fails.
   */
-  Decode = 7,
+  decode = 7,
 
   /**
       used when encoding fails.
   */
-  Encode = 8,
+  encode = 8,
 
   /**
       used when demuxing fails.
   */
-  Demux = 9,
+  demux = 9,
 
   /**
       used when muxing fails.
   */
-  Mux = 10,
+  mux = 10,
 
   /**
       used when the stream is of the wrong format
     (for example, wrong caps).
   */
-  Format = 11,
+  format = 11,
 
   /**
       used when the stream is encrypted and can't be
     decrypted because this is not supported by the element.
   */
-  Decrypt = 12,
+  decrypt = 12,
 
   /**
       used when the stream is encrypted and
     can't be decrypted because no suitable key is available.
   */
-  DecryptNokey = 13,
+  decryptNokey = 13,
 
   /**
       the number of stream error types.
   */
-  NumErrors = 14,
+  numErrors = 14,
 }
 
 /** */
@@ -3387,21 +3387,21 @@ enum GstStreamFlags : uint
   /**
       This stream has no special attributes
   */
-  None = 0,
+  none = 0,
 
   /**
       This stream is a sparse stream (e.g. a subtitle
        stream), data may flow only in irregular intervals with large gaps in
        between.
   */
-  Sparse = 1,
+  sparse = 1,
 
   /**
       This stream should be selected by default. This
        flag may be used by demuxers to signal that a stream should be selected
        by default in a playback scenario.
   */
-  Select = 2,
+  select = 2,
 
   /**
       This stream should not be selected by default.
@@ -3410,11 +3410,11 @@ enum GstStreamFlags : uint
        selected by the user (e.g. an audio track for the hard of hearing or
        a director's commentary track).
   */
-  Unselect = 4,
+  unselect = 4,
 }
 
 /**
-    The type of a [gst.types.MessageType.StreamStatus]. The stream status messages inform the
+    The type of a [gst.types.MessageType.streamStatus]. The stream status messages inform the
   application of new streaming threads and their status.
 */
 enum GstStreamStatusType
@@ -3422,37 +3422,37 @@ enum GstStreamStatusType
   /**
       A new thread need to be created.
   */
-  Create = 0,
+  create = 0,
 
   /**
       a thread entered its loop function
   */
-  Enter = 1,
+  enter = 1,
 
   /**
       a thread left its loop function
   */
-  Leave = 2,
+  leave = 2,
 
   /**
       a thread is destroyed
   */
-  Destroy = 3,
+  destroy = 3,
 
   /**
       a thread is started
   */
-  Start = 8,
+  start = 8,
 
   /**
       a thread is paused
   */
-  Pause = 9,
+  pause = 9,
 
   /**
       a thread is stopped
   */
-  Stop = 10,
+  stop = 10,
 }
 
 /**
@@ -3468,43 +3468,43 @@ enum GstStreamType : uint
   /**
       The stream is of unknown (unclassified) type.
   */
-  Unknown = 1,
+  unknown = 1,
 
   /**
       The stream is of audio data
   */
-  Audio = 2,
+  audio = 2,
 
   /**
       The stream carries video data
   */
-  Video = 4,
+  video = 4,
 
   /**
       The stream is a muxed container type
   */
-  Container = 8,
+  container = 8,
 
   /**
       The stream contains subtitle / subpicture data.
   */
-  Text = 16,
+  text = 16,
 }
 
 /**
-    The type of a [gst.types.MessageType.StructureChange].
+    The type of a [gst.types.MessageType.structureChange].
 */
 enum GstStructureChangeType
 {
   /**
       Pad linking is starting or done.
   */
-  Link = 0,
+  link = 0,
 
   /**
       Pad unlinking is starting or done.
   */
-  Unlink = 1,
+  unlink = 1,
 }
 
 /**
@@ -3515,27 +3515,27 @@ enum GstTagFlag
   /**
       undefined flag
   */
-  Undefined = 0,
+  undefined = 0,
 
   /**
       tag is meta data
   */
-  Meta = 1,
+  meta = 1,
 
   /**
       tag is encoded
   */
-  Encoded = 2,
+  encoded = 2,
 
   /**
       tag is decoded
   */
-  Decoded = 3,
+  decoded = 3,
 
   /**
       number of tag flags
   */
-  Count = 4,
+  count = 4,
 }
 
 /**
@@ -3543,7 +3543,7 @@ enum GstTagFlag
   but they can be seen from two directions. Given two taglists: (A) the tags
   already in the element and (B) the ones that are supplied to the element (
   e.g. via [gst.tag_setter.TagSetter.mergeTags] / [gst.tag_setter.TagSetter.addTags] or a
-  [gst.types.EventType.Tag]), how are these tags merged?
+  [gst.types.EventType.tag]), how are these tags merged?
   In the table below this is shown for the cases that a tag exists in the list
   (A) or does not exists (!A) and combinations thereof.
   
@@ -3561,42 +3561,42 @@ enum GstTagMergeMode
   /**
       undefined merge mode
   */
-  Undefined = 0,
+  undefined = 0,
 
   /**
       replace all tags (clear list and append)
   */
-  ReplaceAll = 1,
+  replaceAll = 1,
 
   /**
       replace tags
   */
-  Replace = 2,
+  replace = 2,
 
   /**
       append tags
   */
-  Append = 3,
+  append = 3,
 
   /**
       prepend tags
   */
-  Prepend = 4,
+  prepend = 4,
 
   /**
       keep existing tags
   */
-  Keep = 5,
+  keep = 5,
 
   /**
       keep all existing tags
   */
-  KeepAll = 6,
+  keepAll = 6,
 
   /**
       the number of merge modes
   */
-  Count = 7,
+  count = 7,
 }
 
 /**
@@ -3608,12 +3608,12 @@ enum GstTagScope
   /**
       tags specific to this single stream
   */
-  Stream = 0,
+  stream = 0,
 
   /**
       global tags for the complete medium
   */
-  Global = 1,
+  global = 1,
 }
 
 /**
@@ -3624,17 +3624,17 @@ enum GstTaskState
   /**
       the task is started and running
   */
-  Started = 0,
+  started = 0,
 
   /**
       the task is stopped
   */
-  Stopped = 1,
+  stopped = 1,
 
   /**
       the task is paused
   */
-  Paused = 2,
+  paused = 2,
 }
 
 /**
@@ -3647,37 +3647,37 @@ enum GstTocEntryType
   /**
       entry is an angle (i.e. an alternative)
   */
-  Angle = -3,
+  angle = -3,
 
   /**
       entry is a version (i.e. alternative)
   */
-  Version = -2,
+  version_ = -2,
 
   /**
       entry is an edition (i.e. alternative)
   */
-  Edition = -1,
+  edition = -1,
 
   /**
       invalid entry type value
   */
-  Invalid = 0,
+  invalid = 0,
 
   /**
       entry is a title (i.e. a part of a sequence)
   */
-  Title = 1,
+  title = 1,
 
   /**
       entry is a track (i.e. a part of a sequence)
   */
-  Track = 2,
+  track = 2,
 
   /**
       entry is a chapter (i.e. a part of a sequence)
   */
-  Chapter = 3,
+  chapter = 3,
 }
 
 /**
@@ -3689,22 +3689,22 @@ enum GstTocLoopType
   /**
       single forward playback
   */
-  None = 0,
+  none = 0,
 
   /**
       repeat forward
   */
-  Forward = 1,
+  forward = 1,
 
   /**
       repeat backward
   */
-  Reverse = 2,
+  reverse = 2,
 
   /**
       repeat forward and backward
   */
-  PingPong = 3,
+  pingPong = 3,
 }
 
 /**
@@ -3716,7 +3716,7 @@ enum GstTocScope
       global TOC representing all selectable options
         (this is what applications are usually interested in)
   */
-  Global = 1,
+  global = 1,
 
   /**
       TOC for the currently active/selected stream
@@ -3726,7 +3726,7 @@ enum GstTocScope
         the current title, or the chapters selected for playback from the
         current title)
   */
-  Current = 2,
+  current = 2,
 }
 
 /**
@@ -3738,27 +3738,27 @@ enum GstTracerValueFlags : uint
   /**
       no flags
   */
-  None = 0,
+  none = 0,
 
   /**
       the value is optional. When using this flag
       one need to have an additional boolean arg before this value in the
       var-args list passed to  [gst.tracer_record.TracerRecord.log].
   */
-  Optional = 1,
+  optional = 1,
 
   /**
       the value is a combined figure, since the
       start of tracing. Examples are averages or timestamps.
   */
-  Aggregated = 2,
+  aggregated = 2,
 }
 
 /**
     Tracing record will contain fields that contain a measured value or extra
   meta-data. One such meta data are values that tell where a measurement was
   taken. This enumerating declares to which scope such a meta data field
-  relates to. If it is e.g. [gst.types.TracerValueScope.Pad], then each of the log
+  relates to. If it is e.g. [gst.types.TracerValueScope.pad], then each of the log
   events may contain values for different #GstPads.
 */
 enum GstTracerValueScope
@@ -3766,22 +3766,22 @@ enum GstTracerValueScope
   /**
       the value is related to the process
   */
-  Process = 0,
+  process = 0,
 
   /**
       the value is related to a thread
   */
-  Thread = 1,
+  thread = 1,
 
   /**
       the value is related to an #GstElement
   */
-  Element = 2,
+  element = 2,
 
   /**
       the value is related to a #GstPad
   */
-  Pad = 3,
+  pad = 3,
 }
 
 /**
@@ -3793,32 +3793,32 @@ enum GstTypeFindProbability
   /**
       type undetected.
   */
-  None = 0,
+  none = 0,
 
   /**
       unlikely typefind.
   */
-  Minimum = 1,
+  minimum = 1,
 
   /**
       possible type detected.
   */
-  Possible = 50,
+  possible = 50,
 
   /**
       likely a type was detected.
   */
-  Likely = 80,
+  likely = 80,
 
   /**
       nearly certain that a type was detected.
   */
-  NearlyCertain = 99,
+  nearlyCertain = 99,
 
   /**
       very certain a type was detected.
   */
-  Maximum = 100,
+  maximum = 100,
 }
 
 /**
@@ -3829,24 +3829,24 @@ enum GstURIError
   /**
       The protocol is not supported
   */
-  UnsupportedProtocol = 0,
+  unsupportedProtocol = 0,
 
   /**
       There was a problem with the URI
   */
-  BadUri = 1,
+  badUri = 1,
 
   /**
       Could not set or change the URI because the
         URI handler was in a state where that is not possible or not permitted
   */
-  BadState = 2,
+  badState = 2,
 
   /**
       There was a problem with the entity that
         the URI references
   */
-  BadReference = 3,
+  badReference = 3,
 }
 
 /**
@@ -3857,17 +3857,17 @@ enum GstURIType
   /**
       The URI direction is unknown
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       The URI is a consumer.
   */
-  Sink = 1,
+  sink = 1,
 
   /**
       The URI is a producer.
   */
-  Src = 2,
+  src = 2,
 }
 
 /**
@@ -4030,20 +4030,20 @@ struct GstAtomicQueue;
   implements the following default behaviour for each of them:
   
   $(LIST
-    * [gst.types.MessageType.Eos]: This message is only posted by sinks in the PLAYING
+    * [gst.types.MessageType.eos]: This message is only posted by sinks in the PLAYING
   )
   state. If all sinks posted the EOS message, this bin will post and EOS
   message upwards.
   
   $(LIST
-    * [gst.types.MessageType.SegmentStart]: Just collected and never forwarded upwards.
+    * [gst.types.MessageType.segmentStart]: Just collected and never forwarded upwards.
       The messages are used to decide when all elements have completed playback
       of their segment.
     
-    * [gst.types.MessageType.SegmentDone]: Is posted by #GstBin when all elements that posted
+    * [gst.types.MessageType.segmentDone]: Is posted by #GstBin when all elements that posted
       a SEGMENT_START have posted a SEGMENT_DONE.
     
-    * [gst.types.MessageType.DurationChanged]: Is posted by an element that detected a change
+    * [gst.types.MessageType.durationChanged]: Is posted by an element that detected a change
       in the stream duration. The duration change is posted to the
       application so that it can refetch the new duration with a duration
       query.
@@ -4055,10 +4055,10 @@ struct GstAtomicQueue;
       between the stream being currently displayed and the returned duration query.
     
       Applications might want to also query for duration (and changes) by
-      listening to the [gst.types.MessageType.StreamStart] message, signaling the active start
+      listening to the [gst.types.MessageType.streamStart] message, signaling the active start
       of a (new) stream.
     
-    * [gst.types.MessageType.ClockLost]: This message is posted by an element when it
+    * [gst.types.MessageType.clockLost]: This message is posted by an element when it
       can no longer provide a clock.
     
       The default bin behaviour is to check if the lost clock was the one provided
@@ -4070,7 +4070,7 @@ struct GstAtomicQueue;
       PAUSE the pipeline and set it back to PLAYING to force a new clock
       distribution.
     
-    * [gst.types.MessageType.ClockProvide]: This message is generated when an element
+    * [gst.types.MessageType.clockProvide]: This message is generated when an element
       can provide a clock. This mostly happens when a new clock
       provider is added to the bin.
     
@@ -4088,11 +4088,11 @@ struct GstAtomicQueue;
   #GstQuery:
   
   $(LIST
-    * [gst.types.QueryType.Duration]: The bin will forward the query to all sink
+    * [gst.types.QueryType.duration]: The bin will forward the query to all sink
       elements contained within and will return the maximum value.
       If no sinks are available in the bin, the query fails.
     
-    * [gst.types.QueryType.Position]: The query is sent to all sink elements in the bin and the
+    * [gst.types.QueryType.position]: The query is sent to all sink elements in the bin and the
       MAXIMUM of all values is returned. If no sinks are available in the bin,
       the query fails.
     
@@ -4102,7 +4102,7 @@ struct GstAtomicQueue;
   )
     
   A #GstBin will by default forward any event sent to it to all sink
-  ( [gst.types.EventTypeFlags.Upstream] ) or source ( [gst.types.EventTypeFlags.Downstream] ) elements
+  ( [gst.types.EventTypeFlags.upstream] ) or source ( [gst.types.EventTypeFlags.downstream] ) elements
   depending on the event type.
   
   If all the elements return true, the bin will also return true, else false
@@ -4936,20 +4936,20 @@ struct GstClockPrivate;
   order until one step succeeds:
   
   1. Check if the element already has a context
-  2. Query downstream with [gst.types.QueryType.Context] for the context
-  3. Query upstream with [gst.types.QueryType.Context] for the context
-  4. Post a [gst.types.MessageType.NeedContext] message on the bus with the required
+  2. Query downstream with [gst.types.QueryType.context] for the context
+  3. Query upstream with [gst.types.QueryType.context] for the context
+  4. Post a [gst.types.MessageType.needContext] message on the bus with the required
      context types and afterwards check if a usable context was set now
-  5. Create a context by itself and post a [gst.types.MessageType.HaveContext] message
+  5. Create a context by itself and post a [gst.types.MessageType.haveContext] message
      on the bus.
   
-  Bins will catch [gst.types.MessageType.NeedContext] messages and will set any previously
+  Bins will catch [gst.types.MessageType.needContext] messages and will set any previously
   known context on the element that asks for it if possible. Otherwise the
   application should provide one if it can.
   
   #GstContext can be persistent.
   A persistent #GstContext is kept in elements when they reach
-  [gst.types.State.Null], non-persistent ones will be removed.
+  [gst.types.State.null_], non-persistent ones will be removed.
   Also, a non-persistent context won't override a previous persistent
   context set to an element.
 */
@@ -5090,7 +5090,7 @@ struct GstControlSourceClass
   
   Since 1.24 it can be serialized using [gst.meta.Meta.serialize] and
   [gst.meta.Meta.deserialize], but only if the #GstStructure does not contain any
-  fields that cannot be serialized, see [gst.types.SerializeFlags.Strict].
+  fields that cannot be serialized, see [gst.types.SerializeFlags.strict].
 */
 struct GstCustomMeta
 {
@@ -7325,7 +7325,7 @@ struct GstPresetInterface
   ```
   
   Each #GstPromise starts out with a #GstPromiseResult of
-  [gst.types.PromiseResult.Pending] and only ever transitions once
+  [gst.types.PromiseResult.pending] and only ever transitions once
   into one of the other #GstPromiseResult's.
   
   In order to support multi-threaded code, [gst.promise.Promise.reply],
@@ -7540,7 +7540,7 @@ struct GstReferenceTimestampMeta
   The "cache" and "registry" are different concepts and can represent
   different sets of plugins. For various reasons, at init time, the cache is
   stored in the default registry, and plugins not relevant to the current
-  process are marked with the [gst.types.PluginFlags.Cached] bit. These plugins are
+  process are marked with the [gst.types.PluginFlags.cached] bit. These plugins are
   removed at the end of initialization.
 */
 struct GstRegistry
@@ -8089,7 +8089,7 @@ struct GstTagList
   [gst.tag_setter.TagSetter.mergeTags] or [gst.tag_setter.TagSetter.addTags]. Also consider
   setting the #GstTagMergeMode that is used for tag events that arrive at the
   tagsetter element (default mode is to keep existing tags).
-  The application should do that before the element goes to [gst.types.State.Paused].
+  The application should do that before the element goes to [gst.types.State.paused].
   
   Elements implementing the #GstTagSetter interface often have to merge
   any tags received from upstream and the tags set by the application via

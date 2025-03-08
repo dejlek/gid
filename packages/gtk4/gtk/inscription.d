@@ -33,7 +33,7 @@ import pango.types;
 class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -60,9 +60,9 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   this(string text = null)
   {
     GtkWidget* _cretval;
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString(No.alloc);
     _cretval = gtk_inscription_new(_text);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -73,7 +73,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   {
     PangoAttrList* _cretval;
     _cretval = gtk_inscription_get_attributes(cast(GtkInscription*)cPtr);
-    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   {
     const(char)* _cretval;
     _cretval = gtk_inscription_get_text(cast(GtkInscription*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   void setAttributes(pango.attr_list.AttrList attrs = null)
   {
-    gtk_inscription_set_attributes(cast(GtkInscription*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
+    gtk_inscription_set_attributes(cast(GtkInscription*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.dup) : null);
   }
 
   /**
@@ -214,7 +214,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   void setMarkup(string markup = null)
   {
-    const(char)* _markup = markup.toCString(No.Alloc);
+    const(char)* _markup = markup.toCString(No.alloc);
     gtk_inscription_set_markup(cast(GtkInscription*)cPtr, _markup);
   }
 
@@ -273,7 +273,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   void setText(string text = null)
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString(No.alloc);
     gtk_inscription_set_text(cast(GtkInscription*)cPtr, _text);
   }
 

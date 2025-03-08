@@ -101,7 +101,7 @@ import gtk.window;
 class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.action_map.ActionMap
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -130,8 +130,8 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   this(gtk.application.Application application)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_application_window_new(application ? cast(GtkApplication*)application.cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    _cretval = gtk_application_window_new(application ? cast(GtkApplication*)application.cPtr(No.dup) : null);
+    this(_cretval, No.take);
   }
 
   /**
@@ -145,7 +145,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   {
     GtkShortcutsWindow* _cretval;
     _cretval = gtk_application_window_get_help_overlay(cast(GtkApplicationWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.shortcuts_window.ShortcutsWindow)(cast(GtkShortcutsWindow*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.shortcuts_window.ShortcutsWindow)(cast(GtkShortcutsWindow*)_cretval, No.take);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   */
   void setHelpOverlay(gtk.shortcuts_window.ShortcutsWindow helpOverlay = null)
   {
-    gtk_application_window_set_help_overlay(cast(GtkApplicationWindow*)cPtr, helpOverlay ? cast(GtkShortcutsWindow*)helpOverlay.cPtr(No.Dup) : null);
+    gtk_application_window_set_help_overlay(cast(GtkApplicationWindow*)cPtr, helpOverlay ? cast(GtkShortcutsWindow*)helpOverlay.cPtr(No.dup) : null);
   }
 
   /**

@@ -27,7 +27,7 @@ import gtk.types;
 class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -51,6 +51,6 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_spin_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 }

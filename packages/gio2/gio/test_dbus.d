@@ -90,7 +90,7 @@ import gobject.object;
 class TestDBus : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -116,7 +116,7 @@ class TestDBus : gobject.object.ObjectG
   {
     GTestDBus* _cretval;
     _cretval = g_test_dbus_new(flags);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -140,7 +140,7 @@ class TestDBus : gobject.object.ObjectG
   */
   void addServiceDir(string path)
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     g_test_dbus_add_service_dir(cast(GTestDBus*)cPtr, _path);
   }
 
@@ -166,7 +166,7 @@ class TestDBus : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = g_test_dbus_get_bus_address(cast(GTestDBus*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 

@@ -14,7 +14,7 @@ import glib.error;
 class Decimal256ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,8 +34,8 @@ class Decimal256ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
   this(arrow.decimal256_data_type.Decimal256DataType dataType)
   {
     GArrowDecimal256ArrayBuilder* _cretval;
-    _cretval = garrow_decimal256_array_builder_new(dataType ? cast(GArrowDecimal256DataType*)dataType.cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_decimal256_array_builder_new(dataType ? cast(GArrowDecimal256DataType*)dataType.cPtr(No.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   alias appendValue = arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder.appendValue;
@@ -45,7 +45,7 @@ class Decimal256ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_decimal256_array_builder_append_value(cast(GArrowDecimal256ArrayBuilder*)cPtr, value ? cast(GArrowDecimal256*)value.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_decimal256_array_builder_append_value(cast(GArrowDecimal256ArrayBuilder*)cPtr, value ? cast(GArrowDecimal256*)value.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

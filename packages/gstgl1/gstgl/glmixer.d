@@ -15,7 +15,7 @@ import gstgl.types;
 class GLMixer : gstgl.glbase_mixer.GLBaseMixer
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -36,7 +36,7 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
   {
     GstGLFramebuffer* _cretval;
     _cretval = gst_gl_mixer_get_framebuffer(cast(GstGLMixer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstgl.glframebuffer.GLFramebuffer)(cast(GstGLFramebuffer*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstgl.glframebuffer.GLFramebuffer)(cast(GstGLFramebuffer*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -51,7 +51,7 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
   bool processTextures(gst.buffer.Buffer outbuf)
   {
     bool _retval;
-    _retval = gst_gl_mixer_process_textures(cast(GstGLMixer*)cPtr, outbuf ? cast(GstBuffer*)outbuf.cPtr(No.Dup) : null);
+    _retval = gst_gl_mixer_process_textures(cast(GstGLMixer*)cPtr, outbuf ? cast(GstBuffer*)outbuf.cPtr(No.dup) : null);
     return _retval;
   }
 }

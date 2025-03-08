@@ -18,7 +18,7 @@ import gtk.widget_accessible;
 class EntryAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Action, atk.editable_text.EditableText, atk.text.Text
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

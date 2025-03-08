@@ -21,12 +21,12 @@ import pango.types;
 class AttrIterator : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -52,7 +52,7 @@ class AttrIterator : gobject.boxed.Boxed
   {
     PangoAttrIterator* _cretval;
     _cretval = pango_attr_iterator_copy(cast(PangoAttrIterator*)cPtr);
-    auto _retval = _cretval ? new pango.attr_iterator.AttrIterator(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.attr_iterator.AttrIterator(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class AttrIterator : gobject.boxed.Boxed
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_iterator_get(cast(PangoAttrIterator*)cPtr, type);
-    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -123,8 +123,8 @@ class AttrIterator : gobject.boxed.Boxed
   {
     PangoLanguage* _language;
     GSList* _extraAttrs;
-    pango_attr_iterator_get_font(cast(PangoAttrIterator*)cPtr, desc ? cast(PangoFontDescription*)desc.cPtr(No.Dup) : null, &_language, &_extraAttrs);
-    language = new pango.language.Language(cast(void*)_language, Yes.Take);
+    pango_attr_iterator_get_font(cast(PangoAttrIterator*)cPtr, desc ? cast(PangoFontDescription*)desc.cPtr(No.dup) : null, &_language, &_extraAttrs);
+    language = new pango.language.Language(cast(void*)_language, Yes.take);
     extraAttrs = gSListToD!(pango.attribute.Attribute, GidOwnership.Full)(_extraAttrs);
   }
 

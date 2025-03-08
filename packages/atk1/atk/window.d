@@ -43,10 +43,10 @@ interface Window
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc));
 
   /**
@@ -67,10 +67,10 @@ interface Window
     Connect to Create signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCreate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCreate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CreateCallbackDlg) || is(T : CreateCallbackFunc));
 
   /**
@@ -91,10 +91,10 @@ interface Window
     Connect to Deactivate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeactivate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDeactivate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DeactivateCallbackDlg) || is(T : DeactivateCallbackFunc));
 
   /**
@@ -115,10 +115,10 @@ interface Window
     Connect to Destroy signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDestroy(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDestroy(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DestroyCallbackDlg) || is(T : DestroyCallbackFunc));
 
   /**
@@ -139,10 +139,10 @@ interface Window
     Connect to Maximize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMaximize(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMaximize(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MaximizeCallbackDlg) || is(T : MaximizeCallbackFunc));
 
   /**
@@ -163,10 +163,10 @@ interface Window
     Connect to Minimize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMinimize(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMinimize(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MinimizeCallbackDlg) || is(T : MinimizeCallbackFunc));
 
   /**
@@ -187,10 +187,10 @@ interface Window
     Connect to Move signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMove(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMove(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MoveCallbackDlg) || is(T : MoveCallbackFunc));
 
   /**
@@ -211,10 +211,10 @@ interface Window
     Connect to Resize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectResize(T)(T callback, Flag!"After" after = No.After)
+  ulong connectResize(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ResizeCallbackDlg) || is(T : ResizeCallbackFunc));
 
   /**
@@ -235,9 +235,9 @@ interface Window
     Connect to Restore signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRestore(T)(T callback, Flag!"After" after = No.After)
+  ulong connectRestore(T)(T callback, Flag!"after" after = No.after)
   if (is(T : RestoreCallbackDlg) || is(T : RestoreCallbackFunc));
   }

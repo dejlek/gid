@@ -25,12 +25,12 @@ import secret.types;
 class Value : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -62,10 +62,10 @@ class Value : gobject.boxed.Boxed
   this(string secret, ptrdiff_t length, string contentType)
   {
     SecretValue* _cretval;
-    const(char)* _secret = secret.toCString(No.Alloc);
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    const(char)* _secret = secret.toCString(No.alloc);
+    const(char)* _contentType = contentType.toCString(No.alloc);
     _cretval = secret_value_new(_secret, length, _contentType);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -95,10 +95,10 @@ class Value : gobject.boxed.Boxed
     auto _destroyCB = destroy ? &_destroyCallback : null;
 
     SecretValue* _cretval;
-    char* _secretData = secretData.toCString(No.Alloc);
-    const(char)* _contentType = contentType.toCString(No.Alloc);
+    char* _secretData = secretData.toCString(No.alloc);
+    const(char)* _contentType = contentType.toCString(No.alloc);
     _cretval = secret_value_new_full(_secretData, length, _contentType, _destroyCB);
-    auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class Value : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = secret_value_get_content_type(cast(SecretValue*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class Value : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = secret_value_get_text(cast(SecretValue*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class Value : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = secret_value_unref_to_password(cast(SecretValue*)cPtr, cast(size_t*)&length);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

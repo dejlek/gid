@@ -11,7 +11,7 @@ import glib.error;
 class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,7 +35,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
     _cretval = garrow_resizable_buffer_new(initialSize, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */

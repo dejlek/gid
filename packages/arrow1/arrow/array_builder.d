@@ -13,7 +13,7 @@ import gobject.object;
 class ArrayBuilder : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -93,7 +93,7 @@ class ArrayBuilder : gobject.object.ObjectG
     _cretval = garrow_array_builder_finish(cast(GArrowArrayBuilder*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class ArrayBuilder : gobject.object.ObjectG
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_array_builder_get_child(cast(GArrowArrayBuilder*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.take);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class ArrayBuilder : gobject.object.ObjectG
   {
     GArrowDataType* _cretval;
     _cretval = garrow_array_builder_get_value_data_type(cast(GArrowArrayBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.take);
     return _retval;
   }
 

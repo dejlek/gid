@@ -20,7 +20,7 @@ import gstrtp.types;
 gstrtp.rtpsource_meta.RTPSourceMeta bufferGetRtpSourceMeta(gst.buffer.Buffer buffer)
 {
   GstRTPSourceMeta* _cretval;
-  _cretval = gst_buffer_get_rtp_source_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+  _cretval = gst_buffer_get_rtp_source_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null);
   auto _retval = _cretval ? new gstrtp.rtpsource_meta.RTPSourceMeta(cast(GstRTPSourceMeta*)_cretval) : null;
   return _retval;
 }
@@ -52,7 +52,7 @@ ulong rtcpNtpToUnix(ulong ntptime)
 gstrtp.types.RTCPSDESType rtcpSdesNameToType(string name)
 {
   GstRTCPSDESType _cretval;
-  const(char)* _name = name.toCString(No.Alloc);
+  const(char)* _name = name.toCString(No.alloc);
   _cretval = gst_rtcp_sdes_name_to_type(_name);
   gstrtp.types.RTCPSDESType _retval = cast(gstrtp.types.RTCPSDESType)_cretval;
   return _retval;
@@ -69,7 +69,7 @@ string rtcpSdesTypeToName(gstrtp.types.RTCPSDESType type)
 {
   const(char)* _cretval;
   _cretval = gst_rtcp_sdes_type_to_name(type);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
   return _retval;
 }
 

@@ -27,12 +27,12 @@ import gobject.boxed;
 class SrvTarget : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -63,9 +63,9 @@ class SrvTarget : gobject.boxed.Boxed
   this(string hostname, ushort port, ushort priority, ushort weight)
   {
     GSrvTarget* _cretval;
-    const(char)* _hostname = hostname.toCString(No.Alloc);
+    const(char)* _hostname = hostname.toCString(No.alloc);
     _cretval = g_srv_target_new(_hostname, port, priority, weight);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -76,7 +76,7 @@ class SrvTarget : gobject.boxed.Boxed
   {
     GSrvTarget* _cretval;
     _cretval = g_srv_target_copy(cast(GSrvTarget*)cPtr);
-    auto _retval = _cretval ? new gio.srv_target.SrvTarget(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gio.srv_target.SrvTarget(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class SrvTarget : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_srv_target_get_hostname(cast(GSrvTarget*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 

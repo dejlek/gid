@@ -15,15 +15,15 @@ class Color : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(PangoColor.sizeof), Yes.Take);
+    super(safeMalloc(PangoColor.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -83,7 +83,7 @@ class Color : gobject.boxed.Boxed
   {
     PangoColor* _cretval;
     _cretval = pango_color_copy(cast(const(PangoColor)*)cPtr);
-    auto _retval = _cretval ? new pango.color.Color(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.color.Color(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class Color : gobject.boxed.Boxed
   bool parse(string spec)
   {
     bool _retval;
-    const(char)* _spec = spec.toCString(No.Alloc);
+    const(char)* _spec = spec.toCString(No.alloc);
     _retval = pango_color_parse(cast(PangoColor*)cPtr, _spec);
     return _retval;
   }
@@ -135,7 +135,7 @@ class Color : gobject.boxed.Boxed
   bool parseWithAlpha(out ushort alpha, string spec)
   {
     bool _retval;
-    const(char)* _spec = spec.toCString(No.Alloc);
+    const(char)* _spec = spec.toCString(No.alloc);
     _retval = pango_color_parse_with_alpha(cast(PangoColor*)cPtr, cast(ushort*)&alpha, _spec);
     return _retval;
   }
@@ -153,7 +153,7 @@ class Color : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = pango_color_to_string(cast(const(PangoColor)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

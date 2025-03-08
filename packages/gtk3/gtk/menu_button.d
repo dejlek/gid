@@ -36,7 +36,7 @@ import gtk.widget;
   
   For menus, the #GtkWidget:halign and #GtkWidget:valign properties of the
   menu are also taken into account. For example, when the direction is
-  [gtk.types.ArrowType.Down] and the horizontal alignment is [gtk.types.Align.Start], the
+  [gtk.types.ArrowType.down] and the horizontal alignment is [gtk.types.Align.start], the
   menu will be positioned below the button, with the starting edge
   (depending on the text direction) of the menu aligned with the starting
   edge of the button. If there is not enough space below the button, the
@@ -115,7 +115,7 @@ import gtk.widget;
 class MenuButton : gtk.toggle_button.ToggleButton
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -141,7 +141,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_button_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -152,7 +152,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_button_get_align_widget(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   {
     GMenuModel* _cretval;
     _cretval = gtk_menu_button_get_menu_model(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.take);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   {
     GtkPopover* _cretval;
     _cretval = gtk_menu_button_get_popover(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.take);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   {
     GtkMenu* _cretval;
     _cretval = gtk_menu_button_get_popup(cast(GtkMenuButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.menu.Menu)(cast(GtkMenu*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.menu.Menu)(cast(GtkMenu*)_cretval, No.take);
     return _retval;
   }
 
@@ -236,7 +236,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   */
   void setAlignWidget(gtk.widget.Widget alignWidget = null)
   {
-    gtk_menu_button_set_align_widget(cast(GtkMenuButton*)cPtr, alignWidget ? cast(GtkWidget*)alignWidget.cPtr(No.Dup) : null);
+    gtk_menu_button_set_align_widget(cast(GtkMenuButton*)cPtr, alignWidget ? cast(GtkWidget*)alignWidget.cPtr(No.dup) : null);
   }
 
   alias setDirection = gtk.widget.Widget.setDirection;
@@ -249,8 +249,8 @@ class MenuButton : gtk.toggle_button.ToggleButton
     If the does not fit in the available space in the given direction,
     GTK+ will its best to keep it inside the screen and fully visible.
     
-    If you pass [gtk.types.ArrowType.None] for a direction, the popup will behave
-    as if you passed [gtk.types.ArrowType.Down] (although you won’t see any arrows).
+    If you pass [gtk.types.ArrowType.none] for a direction, the popup will behave
+    as if you passed [gtk.types.ArrowType.down] (although you won’t see any arrows).
     Params:
       direction =       a #GtkArrowType
   */
@@ -277,7 +277,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   */
   void setMenuModel(gio.menu_model.MenuModel menuModel = null)
   {
-    gtk_menu_button_set_menu_model(cast(GtkMenuButton*)cPtr, menuModel ? cast(GMenuModel*)menuModel.cPtr(No.Dup) : null);
+    gtk_menu_button_set_menu_model(cast(GtkMenuButton*)cPtr, menuModel ? cast(GMenuModel*)menuModel.cPtr(No.dup) : null);
   }
 
   /**
@@ -291,7 +291,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   */
   void setPopover(gtk.widget.Widget popover = null)
   {
-    gtk_menu_button_set_popover(cast(GtkMenuButton*)cPtr, popover ? cast(GtkWidget*)popover.cPtr(No.Dup) : null);
+    gtk_menu_button_set_popover(cast(GtkMenuButton*)cPtr, popover ? cast(GtkWidget*)popover.cPtr(No.dup) : null);
   }
 
   /**
@@ -305,7 +305,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
   */
   void setPopup(gtk.widget.Widget menu = null)
   {
-    gtk_menu_button_set_popup(cast(GtkMenuButton*)cPtr, menu ? cast(GtkWidget*)menu.cPtr(No.Dup) : null);
+    gtk_menu_button_set_popup(cast(GtkMenuButton*)cPtr, menu ? cast(GtkWidget*)menu.cPtr(No.dup) : null);
   }
 
   /**

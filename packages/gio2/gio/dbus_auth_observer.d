@@ -48,7 +48,7 @@ import gobject.object;
   anonymous connections using the `ANONYMOUS` mechanism). If you only
   want to allow D-Bus connections from processes owned by the same uid
   as the server, since GLib 2.68, you should use the
-  [gio.types.DBusServerFlags.AuthenticationRequireSameUser] flag. It’s equivalent
+  [gio.types.DBusServerFlags.authenticationRequireSameUser] flag. It’s equivalent
   to the following signal handler:
   
   ```c
@@ -77,7 +77,7 @@ import gobject.object;
 class DBusAuthObserver : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -101,7 +101,7 @@ class DBusAuthObserver : gobject.object.ObjectG
   {
     GDBusAuthObserver* _cretval;
     _cretval = g_dbus_auth_observer_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -113,7 +113,7 @@ class DBusAuthObserver : gobject.object.ObjectG
   bool allowMechanism(string mechanism)
   {
     bool _retval;
-    const(char)* _mechanism = mechanism.toCString(No.Alloc);
+    const(char)* _mechanism = mechanism.toCString(No.alloc);
     _retval = g_dbus_auth_observer_allow_mechanism(cast(GDBusAuthObserver*)cPtr, _mechanism);
     return _retval;
   }
@@ -128,7 +128,7 @@ class DBusAuthObserver : gobject.object.ObjectG
   bool authorizeAuthenticatedPeer(gio.iostream.IOStream stream, gio.credentials.Credentials credentials = null)
   {
     bool _retval;
-    _retval = g_dbus_auth_observer_authorize_authenticated_peer(cast(GDBusAuthObserver*)cPtr, stream ? cast(GIOStream*)stream.cPtr(No.Dup) : null, credentials ? cast(GCredentials*)credentials.cPtr(No.Dup) : null);
+    _retval = g_dbus_auth_observer_authorize_authenticated_peer(cast(GDBusAuthObserver*)cPtr, stream ? cast(GIOStream*)stream.cPtr(No.dup) : null, credentials ? cast(GCredentials*)credentials.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -151,10 +151,10 @@ class DBusAuthObserver : gobject.object.ObjectG
     Connect to AllowMechanism signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAllowMechanism(T)(T callback, Flag!"After" after = No.After)
+  ulong connectAllowMechanism(T)(T callback, Flag!"after" after = No.after)
   if (is(T : AllowMechanismCallbackDlg) || is(T : AllowMechanismCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -193,10 +193,10 @@ class DBusAuthObserver : gobject.object.ObjectG
     Connect to AuthorizeAuthenticatedPeer signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAuthorizeAuthenticatedPeer(T)(T callback, Flag!"After" after = No.After)
+  ulong connectAuthorizeAuthenticatedPeer(T)(T callback, Flag!"after" after = No.after)
   if (is(T : AuthorizeAuthenticatedPeerCallbackDlg) || is(T : AuthorizeAuthenticatedPeerCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

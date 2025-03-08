@@ -11,21 +11,21 @@ import gobject.object;
 
 /**
     Used for touch events.
-  @type field will be one of [gdk.types.EventType.TouchBegin], [gdk.types.EventType.TouchUpdate],
-  [gdk.types.EventType.TouchEnd] or [gdk.types.EventType.TouchCancel].
+  @type field will be one of [gdk.types.EventType.touchBegin], [gdk.types.EventType.touchUpdate],
+  [gdk.types.EventType.touchEnd] or [gdk.types.EventType.touchCancel].
   
   Touch events are grouped into sequences by means of the @sequence
   field, which can also be obtained with [gdk.event.Event.getEventSequence].
-  Each sequence begins with a [gdk.types.EventType.TouchBegin] event, followed by
-  any number of [gdk.types.EventType.TouchUpdate] events, and ends with a [gdk.types.EventType.TouchEnd]
-  (or [gdk.types.EventType.TouchCancel]) event. With multitouch devices, there may be
+  Each sequence begins with a [gdk.types.EventType.touchBegin] event, followed by
+  any number of [gdk.types.EventType.touchUpdate] events, and ends with a [gdk.types.EventType.touchEnd]
+  (or [gdk.types.EventType.touchCancel]) event. With multitouch devices, there may be
   several active sequences at the same time.
 */
 class EventTouch
 {
   GdkEventTouch cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventTouch");
@@ -53,7 +53,7 @@ class EventTouch
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventTouch*)cPtr).window, No.Take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventTouch*)cPtr).window, No.take);
   }
 
   @property byte sendEvent()
@@ -123,7 +123,7 @@ class EventTouch
 
   @property gdk.device.Device device()
   {
-    return ObjectG.getDObject!(gdk.device.Device)((cast(GdkEventTouch*)cPtr).device, No.Take);
+    return ObjectG.getDObject!(gdk.device.Device)((cast(GdkEventTouch*)cPtr).device, No.take);
   }
 
   @property double xRoot()

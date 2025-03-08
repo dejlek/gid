@@ -13,7 +13,7 @@ class RecentData
 {
   GtkRecentData cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.RecentData");
@@ -31,57 +31,57 @@ class RecentData
 
   @property string displayName()
   {
-    return (cast(GtkRecentData*)cPtr).displayName.fromCString(No.Free);
+    return (cast(GtkRecentData*)cPtr).displayName.fromCString(No.free);
   }
 
   @property void displayName(string propval)
   {
     safeFree(cast(void*)(cast(GtkRecentData*)cPtr).displayName);
-    (cast(GtkRecentData*)cPtr).displayName = propval.toCString(Yes.Alloc);
+    (cast(GtkRecentData*)cPtr).displayName = propval.toCString(Yes.alloc);
   }
 
   @property string description()
   {
-    return (cast(GtkRecentData*)cPtr).description.fromCString(No.Free);
+    return (cast(GtkRecentData*)cPtr).description.fromCString(No.free);
   }
 
   @property void description(string propval)
   {
     safeFree(cast(void*)(cast(GtkRecentData*)cPtr).description);
-    (cast(GtkRecentData*)cPtr).description = propval.toCString(Yes.Alloc);
+    (cast(GtkRecentData*)cPtr).description = propval.toCString(Yes.alloc);
   }
 
   @property string mimeType()
   {
-    return (cast(GtkRecentData*)cPtr).mimeType.fromCString(No.Free);
+    return (cast(GtkRecentData*)cPtr).mimeType.fromCString(No.free);
   }
 
   @property void mimeType(string propval)
   {
     safeFree(cast(void*)(cast(GtkRecentData*)cPtr).mimeType);
-    (cast(GtkRecentData*)cPtr).mimeType = propval.toCString(Yes.Alloc);
+    (cast(GtkRecentData*)cPtr).mimeType = propval.toCString(Yes.alloc);
   }
 
   @property string appName()
   {
-    return (cast(GtkRecentData*)cPtr).appName.fromCString(No.Free);
+    return (cast(GtkRecentData*)cPtr).appName.fromCString(No.free);
   }
 
   @property void appName(string propval)
   {
     safeFree(cast(void*)(cast(GtkRecentData*)cPtr).appName);
-    (cast(GtkRecentData*)cPtr).appName = propval.toCString(Yes.Alloc);
+    (cast(GtkRecentData*)cPtr).appName = propval.toCString(Yes.alloc);
   }
 
   @property string appExec()
   {
-    return (cast(GtkRecentData*)cPtr).appExec.fromCString(No.Free);
+    return (cast(GtkRecentData*)cPtr).appExec.fromCString(No.free);
   }
 
   @property void appExec(string propval)
   {
     safeFree(cast(void*)(cast(GtkRecentData*)cPtr).appExec);
-    (cast(GtkRecentData*)cPtr).appExec = propval.toCString(Yes.Alloc);
+    (cast(GtkRecentData*)cPtr).appExec = propval.toCString(Yes.alloc);
   }
 
   @property bool isPrivate()

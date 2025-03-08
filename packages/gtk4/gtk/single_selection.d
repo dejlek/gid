@@ -24,7 +24,7 @@ import gtk.types;
 class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel, gtk.selection_model.SelectionModel
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -53,8 +53,8 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   this(gio.list_model.ListModel model = null)
   {
     GtkSingleSelection* _cretval;
-    _cretval = gtk_single_selection_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gtk_single_selection_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -89,7 +89,7 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   {
     GListModel* _cretval;
     _cretval = gtk_single_selection_get_model(cast(GtkSingleSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.take);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   {
     ObjectC* _cretval;
     _cretval = gtk_single_selection_get_selected_item(cast(GtkSingleSelection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.take);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_single_selection_set_model(cast(GtkSingleSelection*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    gtk_single_selection_set_model(cast(GtkSingleSelection*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
   }
 
   /**

@@ -20,7 +20,7 @@ import gtk.types;
 class SpinButtonAccessible : gtk.entry_accessible.EntryAccessible, atk.value.Value
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }

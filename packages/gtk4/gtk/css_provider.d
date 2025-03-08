@@ -47,7 +47,7 @@ import gtk.types;
 class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -73,7 +73,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   {
     GtkCssProvider* _cretval;
     _cretval = gtk_css_provider_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -85,7 +85,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   */
   void loadFromBytes(glib.bytes.Bytes data)
   {
-    gtk_css_provider_load_from_bytes(cast(GtkCssProvider*)cPtr, data ? cast(GBytes*)data.cPtr(No.Dup) : null);
+    gtk_css_provider_load_from_bytes(cast(GtkCssProvider*)cPtr, data ? cast(GBytes*)data.cPtr(No.dup) : null);
   }
 
   /**
@@ -101,7 +101,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   */
   void loadFromData(string data, ptrdiff_t length)
   {
-    const(char)* _data = data.toCString(No.Alloc);
+    const(char)* _data = data.toCString(No.alloc);
     gtk_css_provider_load_from_data(cast(GtkCssProvider*)cPtr, _data, length);
   }
 
@@ -114,7 +114,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   */
   void loadFromFile(gio.file.File file)
   {
-    gtk_css_provider_load_from_file(cast(GtkCssProvider*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    gtk_css_provider_load_from_file(cast(GtkCssProvider*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null);
   }
 
   /**
@@ -126,7 +126,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   */
   void loadFromPath(string path)
   {
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     gtk_css_provider_load_from_path(cast(GtkCssProvider*)cPtr, _path);
   }
 
@@ -140,7 +140,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   */
   void loadFromResource(string resourcePath)
   {
-    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    const(char)* _resourcePath = resourcePath.toCString(No.alloc);
     gtk_css_provider_load_from_resource(cast(GtkCssProvider*)cPtr, _resourcePath);
   }
 
@@ -153,7 +153,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   */
   void loadFromString(string string_)
   {
-    const(char)* _string_ = string_.toCString(No.Alloc);
+    const(char)* _string_ = string_.toCString(No.alloc);
     gtk_css_provider_load_from_string(cast(GtkCssProvider*)cPtr, _string_);
   }
 
@@ -170,8 +170,8 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   */
   void loadNamed(string name, string variant = null)
   {
-    const(char)* _name = name.toCString(No.Alloc);
-    const(char)* _variant = variant.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _variant = variant.toCString(No.alloc);
     gtk_css_provider_load_named(cast(GtkCssProvider*)cPtr, _name, _variant);
   }
 
@@ -189,7 +189,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   {
     char* _cretval;
     _cretval = gtk_css_provider_to_string(cast(GtkCssProvider*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -224,10 +224,10 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
     Connect to ParsingError signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectParsingError(T)(T callback, Flag!"After" after = No.After)
+  ulong connectParsingError(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ParsingErrorCallbackDlg) || is(T : ParsingErrorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

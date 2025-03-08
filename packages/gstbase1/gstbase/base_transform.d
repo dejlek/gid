@@ -135,7 +135,7 @@ import gstbase.types;
 class BaseTransform : gst.element.Element
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -166,8 +166,8 @@ class BaseTransform : gst.element.Element
     GstAllocator* _allocator;
     GstAllocationParams _params;
     gst_base_transform_get_allocator(cast(GstBaseTransform*)cPtr, &_allocator, &_params);
-    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.Take);
+    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.take);
+    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.take);
   }
 
   /** */
@@ -175,7 +175,7 @@ class BaseTransform : gst.element.Element
   {
     GstBufferPool* _cretval;
     _cretval = gst_base_transform_get_buffer_pool(cast(GstBaseTransform*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -264,7 +264,7 @@ class BaseTransform : gst.element.Element
 
   /**
       If gap_aware is false (the default), output buffers will have the
-    [gst.types.BufferFlags.Gap] flag unset.
+    [gst.types.BufferFlags.gap] flag unset.
     
     If set to true, the element must handle output buffers with this flag set
     correctly, i.e. it can assume that the buffer contains neutral data but must
@@ -377,7 +377,7 @@ class BaseTransform : gst.element.Element
   bool updateSrcCaps(gst.caps.Caps updatedCaps)
   {
     bool _retval;
-    _retval = gst_base_transform_update_src_caps(cast(GstBaseTransform*)cPtr, updatedCaps ? cast(GstCaps*)updatedCaps.cPtr(No.Dup) : null);
+    _retval = gst_base_transform_update_src_caps(cast(GstBaseTransform*)cPtr, updatedCaps ? cast(GstCaps*)updatedCaps.cPtr(No.dup) : null);
     return _retval;
   }
 }

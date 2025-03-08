@@ -36,7 +36,7 @@ template NetworkMonitorT()
     If monitor believes that an attempt to connect to connectable
     will succeed, it will return true. Otherwise, it will return
     false and set error to an appropriate error (such as
-    [gio.types.IOErrorEnum.HostUnreachable]).
+    [gio.types.IOErrorEnum.hostUnreachable]).
     
     Note that although this does not attempt to connect to
     connectable, it may still block for a brief period of time (eg,
@@ -51,7 +51,7 @@ template NetworkMonitorT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_network_monitor_can_reach(cast(GNetworkMonitor*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_network_monitor_can_reach(cast(GNetworkMonitor*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -80,12 +80,12 @@ template NetworkMonitorT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_network_monitor_can_reach_async(cast(GNetworkMonitor*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_network_monitor_can_reach_async(cast(GNetworkMonitor*)cPtr, connectable ? cast(GSocketConnectable*)(cast(ObjectG)connectable).cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -99,7 +99,7 @@ template NetworkMonitorT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_network_monitor_can_reach_finish(cast(GNetworkMonitor*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_network_monitor_can_reach_finish(cast(GNetworkMonitor*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -110,18 +110,18 @@ template NetworkMonitorT()
     [gio.network_monitor.NetworkMonitor.getNetworkAvailable].
     
     If #GNetworkMonitor:network-available is false, then the
-    connectivity state will be [gio.types.NetworkConnectivity.Local].
+    connectivity state will be [gio.types.NetworkConnectivity.local].
     
     If #GNetworkMonitor:network-available is true, then the
-    connectivity state will be [gio.types.NetworkConnectivity.Full] (if there
-    is full Internet connectivity), [gio.types.NetworkConnectivity.Limited] (if
+    connectivity state will be [gio.types.NetworkConnectivity.full] (if there
+    is full Internet connectivity), [gio.types.NetworkConnectivity.limited] (if
     the host has a default route, but appears to be unable to actually
-    reach the full Internet), or [gio.types.NetworkConnectivity.Portal] (if the
+    reach the full Internet), or [gio.types.NetworkConnectivity.portal] (if the
     host is trapped behind a "captive portal" that requires some sort
     of login or acknowledgement before allowing full Internet access).
     
-    Note that in the case of [gio.types.NetworkConnectivity.Limited] and
-    [gio.types.NetworkConnectivity.Portal], it is possible that some sites are
+    Note that in the case of [gio.types.NetworkConnectivity.limited] and
+    [gio.types.NetworkConnectivity.portal], it is possible that some sites are
     reachable but others are not. In this case, applications can
     attempt to connect to remote servers, but should gracefully fall
     back to their "offline" behavior if the connection attempt fails.
@@ -179,10 +179,10 @@ template NetworkMonitorT()
     Connect to NetworkChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNetworkChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectNetworkChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : NetworkChangedCallbackDlg) || is(T : NetworkChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

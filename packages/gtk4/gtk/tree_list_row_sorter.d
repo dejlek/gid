@@ -25,7 +25,7 @@ import gtk.types;
 class TreeListRowSorter : gtk.sorter.Sorter
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -54,8 +54,8 @@ class TreeListRowSorter : gtk.sorter.Sorter
   this(gtk.sorter.Sorter sorter = null)
   {
     GtkTreeListRowSorter* _cretval;
-    _cretval = gtk_tree_list_row_sorter_new(sorter ? cast(GtkSorter*)sorter.cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    _cretval = gtk_tree_list_row_sorter_new(sorter ? cast(GtkSorter*)sorter.cPtr(Yes.dup) : null);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -66,7 +66,7 @@ class TreeListRowSorter : gtk.sorter.Sorter
   {
     GtkSorter* _cretval;
     _cretval = gtk_tree_list_row_sorter_get_sorter(cast(GtkTreeListRowSorter*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.take);
     return _retval;
   }
 
@@ -80,6 +80,6 @@ class TreeListRowSorter : gtk.sorter.Sorter
   */
   void setSorter(gtk.sorter.Sorter sorter = null)
   {
-    gtk_tree_list_row_sorter_set_sorter(cast(GtkTreeListRowSorter*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.Dup) : null);
+    gtk_tree_list_row_sorter_set_sorter(cast(GtkTreeListRowSorter*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.dup) : null);
   }
 }

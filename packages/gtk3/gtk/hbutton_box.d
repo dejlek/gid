@@ -16,7 +16,7 @@ import gtk.types;
 class HButtonBox : gtk.button_box.ButtonBox
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -36,12 +36,12 @@ class HButtonBox : gtk.button_box.ButtonBox
       Creates a new horizontal button box.
     Returns:     a new button box #GtkWidget.
   
-    Deprecated:     Use [gtk.button_box.ButtonBox.new_] with [gtk.types.Orientation.Horizontal] instead
+    Deprecated:     Use [gtk.button_box.ButtonBox.new_] with [gtk.types.Orientation.horizontal] instead
   */
   this()
   {
     GtkWidget* _cretval;
     _cretval = gtk_hbutton_box_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 }

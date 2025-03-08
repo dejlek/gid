@@ -20,7 +20,7 @@ import gobject.object;
 class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readable.Readable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -69,10 +69,10 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
-    _cretval = garrow_input_stream_read_record_batch(cast(GArrowInputStream*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, options ? cast(GArrowReadOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_input_stream_read_record_batch(cast(GArrowInputStream*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.dup) : null, options ? cast(GArrowReadOptions*)options.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     _cretval = garrow_input_stream_read_tensor(cast(GArrowInputStream*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.tensor.Tensor)(cast(GArrowTensor*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.tensor.Tensor)(cast(GArrowTensor*)_cretval, Yes.take);
     return _retval;
   }
 }

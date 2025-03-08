@@ -12,7 +12,7 @@ class OtNameEntry
 {
   hb_ot_name_entry_t cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for HarfBuzz.OtNameEntry");

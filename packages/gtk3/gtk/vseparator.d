@@ -22,7 +22,7 @@ import gtk.types;
 class VSeparator : gtk.separator.Separator
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,12 +42,12 @@ class VSeparator : gtk.separator.Separator
       Creates a new #GtkVSeparator.
     Returns:     a new #GtkVSeparator.
   
-    Deprecated:     Use [gtk.separator.Separator.new_] with [gtk.types.Orientation.Vertical] instead
+    Deprecated:     Use [gtk.separator.Separator.new_] with [gtk.types.Orientation.vertical] instead
   */
   this()
   {
     GtkWidget* _cretval;
     _cretval = gtk_vseparator_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 }

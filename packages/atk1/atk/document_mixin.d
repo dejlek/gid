@@ -34,9 +34,9 @@ template DocumentT()
   override string getAttributeValue(string attributeName)
   {
     const(char)* _cretval;
-    const(char)* _attributeName = attributeName.toCString(No.Alloc);
+    const(char)* _attributeName = attributeName.toCString(No.alloc);
     _cretval = atk_document_get_attribute_value(cast(AtkDocument*)cPtr, _attributeName);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ template DocumentT()
   {
     const(char)* _cretval;
     _cretval = atk_document_get_document_type(cast(AtkDocument*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ template DocumentT()
   {
     const(char)* _cretval;
     _cretval = atk_document_get_locale(cast(AtkDocument*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -128,8 +128,8 @@ template DocumentT()
   override bool setAttributeValue(string attributeName, string attributeValue)
   {
     bool _retval;
-    const(char)* _attributeName = attributeName.toCString(No.Alloc);
-    const(char)* _attributeValue = attributeValue.toCString(No.Alloc);
+    const(char)* _attributeName = attributeName.toCString(No.alloc);
+    const(char)* _attributeValue = attributeValue.toCString(No.alloc);
     _retval = atk_document_set_attribute_value(cast(AtkDocument*)cPtr, _attributeName, _attributeValue);
     return _retval;
   }
@@ -156,10 +156,10 @@ template DocumentT()
     Connect to DocumentAttributeChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDocumentAttributeChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDocumentAttributeChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DocumentAttributeChangedCallbackDlg) || is(T : DocumentAttributeChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -201,10 +201,10 @@ template DocumentT()
     Connect to LoadComplete signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLoadComplete(T)(T callback, Flag!"After" after = No.After)
+  ulong connectLoadComplete(T)(T callback, Flag!"after" after = No.after)
   if (is(T : LoadCompleteCallbackDlg) || is(T : LoadCompleteCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -241,10 +241,10 @@ template DocumentT()
     Connect to LoadStopped signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLoadStopped(T)(T callback, Flag!"After" after = No.After)
+  ulong connectLoadStopped(T)(T callback, Flag!"after" after = No.after)
   if (is(T : LoadStoppedCallbackDlg) || is(T : LoadStoppedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -280,10 +280,10 @@ template DocumentT()
     Connect to PageChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPageChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPageChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PageChangedCallbackDlg) || is(T : PageChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -320,10 +320,10 @@ template DocumentT()
     Connect to Reload signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectReload(T)(T callback, Flag!"After" after = No.After)
+  ulong connectReload(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ReloadCallbackDlg) || is(T : ReloadCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

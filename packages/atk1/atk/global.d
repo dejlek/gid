@@ -23,7 +23,7 @@ import gobject.object;
 */
 void focusTrackerNotify(atk.object.ObjectAtk object)
 {
-  atk_focus_tracker_notify(object ? cast(AtkObject*)object.cPtr(No.Dup) : null);
+  atk_focus_tracker_notify(object ? cast(AtkObject*)object.cPtr(No.dup) : null);
 }
 
 /**
@@ -53,7 +53,7 @@ atk.registry.Registry getDefaultRegistry()
 {
   AtkRegistry* _cretval;
   _cretval = atk_get_default_registry();
-  auto _retval = ObjectG.getDObject!(atk.registry.Registry)(cast(AtkRegistry*)_cretval, Yes.Take);
+  auto _retval = ObjectG.getDObject!(atk.registry.Registry)(cast(AtkRegistry*)_cretval, Yes.take);
   return _retval;
 }
 
@@ -66,7 +66,7 @@ atk.object.ObjectAtk getFocusObject()
 {
   AtkObject* _cretval;
   _cretval = atk_get_focus_object();
-  auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+  auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.take);
   return _retval;
 }
 
@@ -142,7 +142,7 @@ atk.object.ObjectAtk getRoot()
 {
   AtkObject* _cretval;
   _cretval = atk_get_root();
-  auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
+  auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.take);
   return _retval;
 }
 
@@ -154,7 +154,7 @@ string getToolkitName()
 {
   const(char)* _cretval;
   _cretval = atk_get_toolkit_name();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
   return _retval;
 }
 
@@ -166,7 +166,7 @@ string getToolkitVersion()
 {
   const(char)* _cretval;
   _cretval = atk_get_toolkit_version();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
   return _retval;
 }
 
@@ -178,7 +178,7 @@ string getVersion()
 {
   const(char)* _cretval;
   _cretval = atk_get_version();
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
   return _retval;
 }
 

@@ -12,7 +12,7 @@ import glib.error;
 class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,7 +33,7 @@ class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     GArrowMonthDayNanoIntervalArrayBuilder* _cretval;
     _cretval = garrow_month_day_nano_interval_array_builder_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */
@@ -41,7 +41,7 @@ class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_month_day_nano_interval_array_builder_append_value(cast(GArrowMonthDayNanoIntervalArrayBuilder*)cPtr, value ? cast(GArrowMonthDayNano*)value.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_month_day_nano_interval_array_builder_append_value(cast(GArrowMonthDayNanoIntervalArrayBuilder*)cPtr, value ? cast(GArrowMonthDayNano*)value.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

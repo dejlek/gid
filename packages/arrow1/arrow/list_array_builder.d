@@ -13,7 +13,7 @@ import gobject.object;
 class ListArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,10 +34,10 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     GArrowListArrayBuilder* _cretval;
     GError *_err;
-    _cretval = garrow_list_array_builder_new(dataType ? cast(GArrowListDataType*)dataType.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_list_array_builder_new(dataType ? cast(GArrowListDataType*)dataType.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */
@@ -67,7 +67,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_list_array_builder_get_value_builder(cast(GArrowListArrayBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.take);
     return _retval;
   }
 }

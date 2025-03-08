@@ -23,7 +23,7 @@ import soup.types;
 class ContentSniffer : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,7 +49,7 @@ class ContentSniffer : gobject.object.ObjectG, soup.session_feature.SessionFeatu
   {
     SoupContentSniffer* _cretval;
     _cretval = soup_content_sniffer_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -69,8 +69,8 @@ class ContentSniffer : gobject.object.ObjectG, soup.session_feature.SessionFeatu
   {
     char* _cretval;
     GHashTable* _params;
-    _cretval = soup_content_sniffer_sniff(cast(SoupContentSniffer*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, buffer ? cast(GBytes*)buffer.cPtr(No.Dup) : null, &_params);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    _cretval = soup_content_sniffer_sniff(cast(SoupContentSniffer*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.dup) : null, buffer ? cast(GBytes*)buffer.cPtr(No.dup) : null, &_params);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     params = gHashTableToD!(string, string, GidOwnership.Full)(_params);
     return _retval;
   }

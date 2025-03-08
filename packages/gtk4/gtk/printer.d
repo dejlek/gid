@@ -23,7 +23,7 @@ import gtk.types;
 class Printer : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,9 +50,9 @@ class Printer : gobject.object.ObjectG
   this(string name, gtk.types.PrintBackend backend, bool virtual)
   {
     GtkPrinter* _cretval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _cretval = gtk_printer_new(_name, backend, virtual);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -89,7 +89,7 @@ class Printer : gobject.object.ObjectG
   int compare(gtk.printer.Printer b)
   {
     int _retval;
-    _retval = gtk_printer_compare(cast(GtkPrinter*)cPtr, b ? cast(GtkPrinter*)b.cPtr(No.Dup) : null);
+    _retval = gtk_printer_compare(cast(GtkPrinter*)cPtr, b ? cast(GtkPrinter*)b.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class Printer : gobject.object.ObjectG
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_printer_get_default_page_size(cast(GtkPrinter*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class Printer : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_description(cast(GtkPrinter*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class Printer : gobject.object.ObjectG
   bool getHardMarginsForPaperSize(gtk.paper_size.PaperSize paperSize, out double top, out double bottom, out double left, out double right)
   {
     bool _retval;
-    _retval = gtk_printer_get_hard_margins_for_paper_size(cast(GtkPrinter*)cPtr, paperSize ? cast(GtkPaperSize*)paperSize.cPtr(No.Dup) : null, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
+    _retval = gtk_printer_get_hard_margins_for_paper_size(cast(GtkPrinter*)cPtr, paperSize ? cast(GtkPaperSize*)paperSize.cPtr(No.dup) : null, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class Printer : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_icon_name(cast(GtkPrinter*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class Printer : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_location(cast(GtkPrinter*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -238,7 +238,7 @@ class Printer : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_name(cast(GtkPrinter*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class Printer : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_state_message(cast(GtkPrinter*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -378,10 +378,10 @@ class Printer : gobject.object.ObjectG
     Connect to DetailsAcquired signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDetailsAcquired(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDetailsAcquired(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DetailsAcquiredCallbackDlg) || is(T : DetailsAcquiredCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

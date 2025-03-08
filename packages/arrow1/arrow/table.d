@@ -24,7 +24,7 @@ import gobject.object;
 class Table : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -54,10 +54,10 @@ class Table : gobject.object.ObjectG
     GArrowArray** _arrays = cast(GArrowArray**)_tmparrays.ptr;
 
     GError *_err;
-    _cretval = garrow_table_new_arrays(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, _arrays, _nArrays, &_err);
+    _cretval = garrow_table_new_arrays(schema ? cast(GArrowSchema*)schema.cPtr(No.dup) : null, _arrays, _nArrays, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -75,10 +75,10 @@ class Table : gobject.object.ObjectG
     GArrowChunkedArray** _chunkedArrays = cast(GArrowChunkedArray**)_tmpchunkedArrays.ptr;
 
     GError *_err;
-    _cretval = garrow_table_new_chunked_arrays(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, _chunkedArrays, _nChunkedArrays, &_err);
+    _cretval = garrow_table_new_chunked_arrays(schema ? cast(GArrowSchema*)schema.cPtr(No.dup) : null, _chunkedArrays, _nChunkedArrays, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -96,10 +96,10 @@ class Table : gobject.object.ObjectG
     GArrowRecordBatch** _recordBatches = cast(GArrowRecordBatch**)_tmprecordBatches.ptr;
 
     GError *_err;
-    _cretval = garrow_table_new_record_batches(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, _recordBatches, _nRecordBatches, &_err);
+    _cretval = garrow_table_new_record_batches(schema ? cast(GArrowSchema*)schema.cPtr(No.dup) : null, _recordBatches, _nRecordBatches, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -108,10 +108,10 @@ class Table : gobject.object.ObjectG
   {
     GArrowTable* _cretval;
     GError *_err;
-    _cretval = garrow_table_add_column(cast(GArrowTable*)cPtr, i, field ? cast(GArrowField*)field.cPtr(No.Dup) : null, chunkedArray ? cast(GArrowChunkedArray*)chunkedArray.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_table_add_column(cast(GArrowTable*)cPtr, i, field ? cast(GArrowField*)field.cPtr(No.dup) : null, chunkedArray ? cast(GArrowChunkedArray*)chunkedArray.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class Table : gobject.object.ObjectG
     _cretval = garrow_table_combine_chunks(cast(GArrowTable*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -134,10 +134,10 @@ class Table : gobject.object.ObjectG
     auto _otherTables = gListFromD!(arrow.table.Table)(otherTables);
     scope(exit) containerFree!(GList*, arrow.table.Table, GidOwnership.None)(_otherTables);
     GError *_err;
-    _cretval = garrow_table_concatenate(cast(GArrowTable*)cPtr, _otherTables, options ? cast(GArrowTableConcatenateOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_table_concatenate(cast(GArrowTable*)cPtr, _otherTables, options ? cast(GArrowTableConcatenateOptions*)options.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class Table : gobject.object.ObjectG
   bool equal(arrow.table.Table otherTable)
   {
     bool _retval;
-    _retval = garrow_table_equal(cast(GArrowTable*)cPtr, otherTable ? cast(GArrowTable*)otherTable.cPtr(No.Dup) : null);
+    _retval = garrow_table_equal(cast(GArrowTable*)cPtr, otherTable ? cast(GArrowTable*)otherTable.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class Table : gobject.object.ObjectG
   bool equalMetadata(arrow.table.Table otherTable, bool checkMetadata)
   {
     bool _retval;
-    _retval = garrow_table_equal_metadata(cast(GArrowTable*)cPtr, otherTable ? cast(GArrowTable*)otherTable.cPtr(No.Dup) : null, checkMetadata);
+    _retval = garrow_table_equal_metadata(cast(GArrowTable*)cPtr, otherTable ? cast(GArrowTable*)otherTable.cPtr(No.dup) : null, checkMetadata);
     return _retval;
   }
 
@@ -162,10 +162,10 @@ class Table : gobject.object.ObjectG
   {
     GArrowTable* _cretval;
     GError *_err;
-    _cretval = garrow_table_filter(cast(GArrowTable*)cPtr, filter ? cast(GArrowBooleanArray*)filter.cPtr(No.Dup) : null, options ? cast(GArrowFilterOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_table_filter(cast(GArrowTable*)cPtr, filter ? cast(GArrowBooleanArray*)filter.cPtr(No.dup) : null, options ? cast(GArrowFilterOptions*)options.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -174,10 +174,10 @@ class Table : gobject.object.ObjectG
   {
     GArrowTable* _cretval;
     GError *_err;
-    _cretval = garrow_table_filter_chunked_array(cast(GArrowTable*)cPtr, filter ? cast(GArrowChunkedArray*)filter.cPtr(No.Dup) : null, options ? cast(GArrowFilterOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_table_filter_chunked_array(cast(GArrowTable*)cPtr, filter ? cast(GArrowChunkedArray*)filter.cPtr(No.dup) : null, options ? cast(GArrowFilterOptions*)options.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class Table : gobject.object.ObjectG
   {
     GArrowChunkedArray* _cretval;
     _cretval = garrow_table_get_column_data(cast(GArrowTable*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class Table : gobject.object.ObjectG
   {
     GArrowSchema* _cretval;
     _cretval = garrow_table_get_schema(cast(GArrowTable*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -223,7 +223,7 @@ class Table : gobject.object.ObjectG
     _cretval = garrow_table_remove_column(cast(GArrowTable*)cPtr, i, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -232,10 +232,10 @@ class Table : gobject.object.ObjectG
   {
     GArrowTable* _cretval;
     GError *_err;
-    _cretval = garrow_table_replace_column(cast(GArrowTable*)cPtr, i, field ? cast(GArrowField*)field.cPtr(No.Dup) : null, chunkedArray ? cast(GArrowChunkedArray*)chunkedArray.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_table_replace_column(cast(GArrowTable*)cPtr, i, field ? cast(GArrowField*)field.cPtr(No.dup) : null, chunkedArray ? cast(GArrowChunkedArray*)chunkedArray.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class Table : gobject.object.ObjectG
   {
     GArrowTable* _cretval;
     _cretval = garrow_table_slice(cast(GArrowTable*)cPtr, offset, length);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -253,10 +253,10 @@ class Table : gobject.object.ObjectG
   {
     GArrowUInt64Array* _cretval;
     GError *_err;
-    _cretval = garrow_table_sort_indices(cast(GArrowTable*)cPtr, options ? cast(GArrowSortOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_table_sort_indices(cast(GArrowTable*)cPtr, options ? cast(GArrowSortOptions*)options.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.uint64_array.UInt64Array)(cast(GArrowUInt64Array*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.uint64_array.UInt64Array)(cast(GArrowUInt64Array*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -265,10 +265,10 @@ class Table : gobject.object.ObjectG
   {
     GArrowTable* _cretval;
     GError *_err;
-    _cretval = garrow_table_take(cast(GArrowTable*)cPtr, indices ? cast(GArrowArray*)indices.cPtr(No.Dup) : null, options ? cast(GArrowTakeOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_table_take(cast(GArrowTable*)cPtr, indices ? cast(GArrowArray*)indices.cPtr(No.dup) : null, options ? cast(GArrowTakeOptions*)options.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -277,10 +277,10 @@ class Table : gobject.object.ObjectG
   {
     GArrowTable* _cretval;
     GError *_err;
-    _cretval = garrow_table_take_chunked_array(cast(GArrowTable*)cPtr, indices ? cast(GArrowChunkedArray*)indices.cPtr(No.Dup) : null, options ? cast(GArrowTakeOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_table_take_chunked_array(cast(GArrowTable*)cPtr, indices ? cast(GArrowChunkedArray*)indices.cPtr(No.dup) : null, options ? cast(GArrowTakeOptions*)options.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class Table : gobject.object.ObjectG
     _cretval = garrow_table_to_string(cast(GArrowTable*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 
@@ -307,7 +307,7 @@ class Table : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_table_write_as_feather(cast(GArrowTable*)cPtr, sink ? cast(GArrowOutputStream*)sink.cPtr(No.Dup) : null, properties ? cast(GArrowFeatherWriteProperties*)properties.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_table_write_as_feather(cast(GArrowTable*)cPtr, sink ? cast(GArrowOutputStream*)sink.cPtr(No.dup) : null, properties ? cast(GArrowFeatherWriteProperties*)properties.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

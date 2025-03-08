@@ -99,7 +99,7 @@ import gtk.widget;
 class Notebook : gtk.container.Container
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -123,7 +123,7 @@ class Notebook : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -138,7 +138,7 @@ class Notebook : gtk.container.Container
   int appendPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null)
   {
     int _retval;
-    _retval = gtk_notebook_append_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null);
+    _retval = gtk_notebook_append_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class Notebook : gtk.container.Container
   int appendPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null, gtk.widget.Widget menuLabel = null)
   {
     int _retval;
-    _retval = gtk_notebook_append_page_menu(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.Dup) : null);
+    _retval = gtk_notebook_append_page_menu(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class Notebook : gtk.container.Container
   */
   void detachTab(gtk.widget.Widget child)
   {
-    gtk_notebook_detach_tab(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_notebook_detach_tab(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -191,7 +191,7 @@ class Notebook : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_action_widget(cast(GtkNotebook*)cPtr, packType);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -216,7 +216,7 @@ class Notebook : gtk.container.Container
   {
     const(char)* _cretval;
     _cretval = gtk_notebook_get_group_name(cast(GtkNotebook*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -231,8 +231,8 @@ class Notebook : gtk.container.Container
   gtk.widget.Widget getMenuLabel(gtk.widget.Widget child)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_notebook_get_menu_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_notebook_get_menu_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -249,8 +249,8 @@ class Notebook : gtk.container.Container
   string getMenuLabelText(gtk.widget.Widget child)
   {
     const(char)* _cretval;
-    _cretval = gtk_notebook_get_menu_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    _cretval = gtk_notebook_get_menu_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class Notebook : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_nth_page(cast(GtkNotebook*)cPtr, pageNum);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -326,7 +326,7 @@ class Notebook : gtk.container.Container
   bool getTabDetachable(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_notebook_get_tab_detachable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    _retval = gtk_notebook_get_tab_detachable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -354,8 +354,8 @@ class Notebook : gtk.container.Container
   gtk.widget.Widget getTabLabel(gtk.widget.Widget child)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_notebook_get_tab_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_notebook_get_tab_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -371,8 +371,8 @@ class Notebook : gtk.container.Container
   string getTabLabelText(gtk.widget.Widget child)
   {
     const(char)* _cretval;
-    _cretval = gtk_notebook_get_tab_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    _cretval = gtk_notebook_get_tab_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -398,7 +398,7 @@ class Notebook : gtk.container.Container
   bool getTabReorderable(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_notebook_get_tab_reorderable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    _retval = gtk_notebook_get_tab_reorderable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -429,7 +429,7 @@ class Notebook : gtk.container.Container
   int insertPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel, int position)
   {
     int _retval;
-    _retval = gtk_notebook_insert_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null, position);
+    _retval = gtk_notebook_insert_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.dup) : null, position);
     return _retval;
   }
 
@@ -454,7 +454,7 @@ class Notebook : gtk.container.Container
   int insertPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel, gtk.widget.Widget menuLabel, int position)
   {
     int _retval;
-    _retval = gtk_notebook_insert_page_menu(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.Dup) : null, position);
+    _retval = gtk_notebook_insert_page_menu(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.dup) : null, position);
     return _retval;
   }
 
@@ -478,7 +478,7 @@ class Notebook : gtk.container.Container
   int pageNum(gtk.widget.Widget child)
   {
     int _retval;
-    _retval = gtk_notebook_page_num(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    _retval = gtk_notebook_page_num(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -512,7 +512,7 @@ class Notebook : gtk.container.Container
   int prependPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null)
   {
     int _retval;
-    _retval = gtk_notebook_prepend_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null);
+    _retval = gtk_notebook_prepend_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -535,7 +535,7 @@ class Notebook : gtk.container.Container
   int prependPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null, gtk.widget.Widget menuLabel = null)
   {
     int _retval;
-    _retval = gtk_notebook_prepend_page_menu(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.Dup) : null);
+    _retval = gtk_notebook_prepend_page_menu(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -571,7 +571,7 @@ class Notebook : gtk.container.Container
   */
   void reorderChild(gtk.widget.Widget child, int position)
   {
-    gtk_notebook_reorder_child(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
+    gtk_notebook_reorder_child(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, position);
   }
 
   /**
@@ -587,7 +587,7 @@ class Notebook : gtk.container.Container
   */
   void setActionWidget(gtk.widget.Widget widget, gtk.types.PackType packType)
   {
-    gtk_notebook_set_action_widget(cast(GtkNotebook*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, packType);
+    gtk_notebook_set_action_widget(cast(GtkNotebook*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, packType);
   }
 
   /**
@@ -620,7 +620,7 @@ class Notebook : gtk.container.Container
   */
   void setGroupName(string groupName = null)
   {
-    const(char)* _groupName = groupName.toCString(No.Alloc);
+    const(char)* _groupName = groupName.toCString(No.alloc);
     gtk_notebook_set_group_name(cast(GtkNotebook*)cPtr, _groupName);
   }
 
@@ -632,7 +632,7 @@ class Notebook : gtk.container.Container
   */
   void setMenuLabel(gtk.widget.Widget child, gtk.widget.Widget menuLabel = null)
   {
-    gtk_notebook_set_menu_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.Dup) : null);
+    gtk_notebook_set_menu_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.dup) : null);
   }
 
   /**
@@ -643,8 +643,8 @@ class Notebook : gtk.container.Container
   */
   void setMenuLabelText(gtk.widget.Widget child, string menuText)
   {
-    const(char)* _menuText = menuText.toCString(No.Alloc);
-    gtk_notebook_set_menu_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _menuText);
+    const(char)* _menuText = menuText.toCString(No.alloc);
+    gtk_notebook_set_menu_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, _menuText);
   }
 
   /**
@@ -732,7 +732,7 @@ class Notebook : gtk.container.Container
   */
   void setTabDetachable(gtk.widget.Widget child, bool detachable)
   {
-    gtk_notebook_set_tab_detachable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, detachable);
+    gtk_notebook_set_tab_detachable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, detachable);
   }
 
   /**
@@ -746,7 +746,7 @@ class Notebook : gtk.container.Container
   */
   void setTabLabel(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null)
   {
-    gtk_notebook_set_tab_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null);
+    gtk_notebook_set_tab_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.dup) : null);
   }
 
   /**
@@ -758,8 +758,8 @@ class Notebook : gtk.container.Container
   */
   void setTabLabelText(gtk.widget.Widget child, string tabText)
   {
-    const(char)* _tabText = tabText.toCString(No.Alloc);
-    gtk_notebook_set_tab_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _tabText);
+    const(char)* _tabText = tabText.toCString(No.alloc);
+    gtk_notebook_set_tab_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, _tabText);
   }
 
   /**
@@ -782,7 +782,7 @@ class Notebook : gtk.container.Container
   */
   void setTabReorderable(gtk.widget.Widget child, bool reorderable)
   {
-    gtk_notebook_set_tab_reorderable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, reorderable);
+    gtk_notebook_set_tab_reorderable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, reorderable);
   }
 
   /** */
@@ -795,10 +795,10 @@ class Notebook : gtk.container.Container
     Connect to ChangeCurrentPage signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChangeCurrentPage(T)(T callback, Flag!"After" after = No.After)
+  ulong connectChangeCurrentPage(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ChangeCurrentPageCallbackDlg) || is(T : ChangeCurrentPageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -845,10 +845,10 @@ class Notebook : gtk.container.Container
     Connect to CreateWindow signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCreateWindow(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCreateWindow(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CreateWindowCallbackDlg) || is(T : CreateWindowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -877,10 +877,10 @@ class Notebook : gtk.container.Container
     Connect to FocusTab signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFocusTab(T)(T callback, Flag!"After" after = No.After)
+  ulong connectFocusTab(T)(T callback, Flag!"after" after = No.after)
   if (is(T : FocusTabCallbackDlg) || is(T : FocusTabCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -908,10 +908,10 @@ class Notebook : gtk.container.Container
     Connect to MoveFocusOut signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveFocusOut(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMoveFocusOut(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MoveFocusOutCallbackDlg) || is(T : MoveFocusOutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -947,10 +947,10 @@ class Notebook : gtk.container.Container
     Connect to PageAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPageAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPageAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PageAddedCallbackDlg) || is(T : PageAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -987,10 +987,10 @@ class Notebook : gtk.container.Container
     Connect to PageRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPageRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPageRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PageRemovedCallbackDlg) || is(T : PageRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1027,10 +1027,10 @@ class Notebook : gtk.container.Container
     Connect to PageReordered signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPageReordered(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPageReordered(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PageReorderedCallbackDlg) || is(T : PageReorderedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1057,10 +1057,10 @@ class Notebook : gtk.container.Container
     Connect to ReorderTab signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectReorderTab(T)(T callback, Flag!"After" after = No.After)
+  ulong connectReorderTab(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ReorderTabCallbackDlg) || is(T : ReorderTabCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1089,10 +1089,10 @@ class Notebook : gtk.container.Container
     Connect to SelectPage signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectPage(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSelectPage(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SelectPageCallbackDlg) || is(T : SelectPageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1129,10 +1129,10 @@ class Notebook : gtk.container.Container
     Connect to SwitchPage signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSwitchPage(T)(T callback, Flag!"After" after = No.After)
+  ulong connectSwitchPage(T)(T callback, Flag!"after" after = No.after)
   if (is(T : SwitchPageCallbackDlg) || is(T : SwitchPageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

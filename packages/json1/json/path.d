@@ -142,7 +142,7 @@ import json.types;
 class Path : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -169,7 +169,7 @@ class Path : gobject.object.ObjectG
   {
     JsonPath* _cretval;
     _cretval = json_path_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -183,17 +183,17 @@ class Path : gobject.object.ObjectG
       expression =       a JSONPath expression
       root =       the root of a JSON tree
     Returns:     a newly-created node of type
-        [json.types.NodeType.Array] containing the array of matching nodes
+        [json.types.NodeType.array] containing the array of matching nodes
   */
   static json.node.Node query(string expression, json.node.Node root)
   {
     JsonNode* _cretval;
-    const(char)* _expression = expression.toCString(No.Alloc);
+    const(char)* _expression = expression.toCString(No.alloc);
     GError *_err;
-    _cretval = json_path_query(_expression, root ? cast(JsonNode*)root.cPtr(No.Dup) : null, &_err);
+    _cretval = json_path_query(_expression, root ? cast(JsonNode*)root.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class Path : gobject.object.ObjectG
   bool compile(string expression)
   {
     bool _retval;
-    const(char)* _expression = expression.toCString(No.Alloc);
+    const(char)* _expression = expression.toCString(No.alloc);
     GError *_err;
     _retval = json_path_compile(cast(JsonPath*)cPtr, _expression, &_err);
     if (_err)
@@ -226,13 +226,13 @@ class Path : gobject.object.ObjectG
     Params:
       root =       the root node of the JSON data to match
     Returns:     a newly-created node of type
-        [json.types.NodeType.Array] containing the array of matching nodes
+        [json.types.NodeType.array] containing the array of matching nodes
   */
   json.node.Node match(json.node.Node root)
   {
     JsonNode* _cretval;
-    _cretval = json_path_match(cast(JsonPath*)cPtr, root ? cast(JsonNode*)root.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
+    _cretval = json_path_match(cast(JsonPath*)cPtr, root ? cast(JsonNode*)root.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

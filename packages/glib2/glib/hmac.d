@@ -26,12 +26,12 @@ import gobject.boxed;
 class Hmac : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -79,7 +79,7 @@ class Hmac : gobject.boxed.Boxed
 
     auto _key = cast(const(ubyte)*)key.ptr;
     _cretval = g_hmac_new(digestType, _key, _keyLen);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -93,7 +93,7 @@ class Hmac : gobject.boxed.Boxed
   {
     GHmac* _cretval;
     _cretval = g_hmac_copy(cast(const(GHmac)*)cPtr);
-    auto _retval = _cretval ? new glib.hmac.Hmac(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.hmac.Hmac(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class Hmac : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_hmac_get_string(cast(GHmac*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 

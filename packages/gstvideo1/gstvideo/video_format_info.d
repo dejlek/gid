@@ -12,7 +12,7 @@ class VideoFormatInfo
 {
   GstVideoFormatInfo cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstVideo.VideoFormatInfo");
@@ -40,24 +40,24 @@ class VideoFormatInfo
 
   @property string name()
   {
-    return (cast(GstVideoFormatInfo*)cPtr).name.fromCString(No.Free);
+    return (cast(GstVideoFormatInfo*)cPtr).name.fromCString(No.free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(GstVideoFormatInfo*)cPtr).name);
-    (cast(GstVideoFormatInfo*)cPtr).name = propval.toCString(Yes.Alloc);
+    (cast(GstVideoFormatInfo*)cPtr).name = propval.toCString(Yes.alloc);
   }
 
   @property string description()
   {
-    return (cast(GstVideoFormatInfo*)cPtr).description.fromCString(No.Free);
+    return (cast(GstVideoFormatInfo*)cPtr).description.fromCString(No.free);
   }
 
   @property void description(string propval)
   {
     safeFree(cast(void*)(cast(GstVideoFormatInfo*)cPtr).description);
-    (cast(GstVideoFormatInfo*)cPtr).description = propval.toCString(Yes.Alloc);
+    (cast(GstVideoFormatInfo*)cPtr).description = propval.toCString(Yes.alloc);
   }
 
   @property gstvideo.types.VideoFormatFlags flags()

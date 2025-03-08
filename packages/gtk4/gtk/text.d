@@ -82,7 +82,7 @@ import pango.tab_array;
   
   # Accessibility
   
-  [gtk.text.Text] uses the [gtk.types.AccessibleRole.None] role, which causes it to be
+  [gtk.text.Text] uses the [gtk.types.AccessibleRole.none] role, which causes it to be
   skipped for accessibility. This is because [gtk.text.Text] is expected to be used
   as a delegate for a [gtk.editable.Editable] implementation that will be represented
   to accessibility.
@@ -90,7 +90,7 @@ import pango.tab_array;
 class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable.Editable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -117,7 +117,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -129,8 +129,8 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   static gtk.text.Text newWithBuffer(gtk.entry_buffer.EntryBuffer buffer)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_text_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.text.Text)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_text_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.text.Text)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -155,8 +155,8 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     graphene_rect_t _strong;
     graphene_rect_t _weak;
     gtk_text_compute_cursor_extents(cast(GtkText*)cPtr, position, &_strong, &_weak);
-    strong = new graphene.rect.Rect(cast(void*)&_strong, No.Take);
-    weak = new graphene.rect.Rect(cast(void*)&_weak, No.Take);
+    strong = new graphene.rect.Rect(cast(void*)&_strong, No.take);
+    weak = new graphene.rect.Rect(cast(void*)&_weak, No.take);
   }
 
   /**
@@ -183,7 +183,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   {
     PangoAttrList* _cretval;
     _cretval = gtk_text_get_attributes(cast(GtkText*)cPtr);
-    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   {
     GtkEntryBuffer* _cretval;
     _cretval = gtk_text_get_buffer(cast(GtkText*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.entry_buffer.EntryBuffer)(cast(GtkEntryBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.entry_buffer.EntryBuffer)(cast(GtkEntryBuffer*)_cretval, No.take);
     return _retval;
   }
 
@@ -222,7 +222,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   {
     GMenuModel* _cretval;
     _cretval = gtk_text_get_extra_menu(cast(GtkText*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.take);
     return _retval;
   }
 
@@ -307,7 +307,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   {
     const(char)* _cretval;
     _cretval = gtk_text_get_placeholder_text(cast(GtkText*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -333,7 +333,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   {
     PangoTabArray* _cretval;
     _cretval = gtk_text_get_tabs(cast(GtkText*)cPtr);
-    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -414,7 +414,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setAttributes(pango.attr_list.AttrList attrs = null)
   {
-    gtk_text_set_attributes(cast(GtkText*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
+    gtk_text_set_attributes(cast(GtkText*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.dup) : null);
   }
 
   /**
@@ -425,7 +425,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setBuffer(gtk.entry_buffer.EntryBuffer buffer)
   {
-    gtk_text_set_buffer(cast(GtkText*)cPtr, buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
+    gtk_text_set_buffer(cast(GtkText*)cPtr, buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.dup) : null);
   }
 
   /**
@@ -450,7 +450,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setExtraMenu(gio.menu_model.MenuModel model = null)
   {
-    gtk_text_set_extra_menu(cast(GtkText*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
+    gtk_text_set_extra_menu(cast(GtkText*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.dup) : null);
   }
 
   /**
@@ -532,7 +532,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setPlaceholderText(string text = null)
   {
-    const(char)* _text = text.toCString(No.Alloc);
+    const(char)* _text = text.toCString(No.alloc);
     gtk_text_set_placeholder_text(cast(GtkText*)cPtr, _text);
   }
 
@@ -553,7 +553,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setTabs(pango.tab_array.TabArray tabs = null)
   {
-    gtk_text_set_tabs(cast(GtkText*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
+    gtk_text_set_tabs(cast(GtkText*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.dup) : null);
   }
 
   /**
@@ -579,7 +579,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     [gtk.text.Text.setInvisibleChar].
     
     Note that you probably want to set `propertyGtk.Text:input-purpose`
-    to [gtk.types.InputPurpose.Password] or [gtk.types.InputPurpose.Pin] to
+    to [gtk.types.InputPurpose.password] or [gtk.types.InputPurpose.pin] to
     inform input methods about the purpose of this self,
     in addition to setting visibility to false.
     Params:
@@ -622,10 +622,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -662,10 +662,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     Connect to Backspace signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectBackspace(T)(T callback, Flag!"After" after = No.After)
+  ulong connectBackspace(T)(T callback, Flag!"after" after = No.after)
   if (is(T : BackspaceCallbackDlg) || is(T : BackspaceCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -703,10 +703,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     Connect to CopyClipboard signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCopyClipboard(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CopyClipboardCallbackDlg) || is(T : CopyClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -744,10 +744,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     Connect to CutClipboard signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCutClipboard(T)(T callback, Flag!"After" after = No.After)
+  ulong connectCutClipboard(T)(T callback, Flag!"after" after = No.after)
   if (is(T : CutClipboardCallbackDlg) || is(T : CutClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -767,7 +767,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     
     This is a [keybinding signal](class.SignalAction.html).
     
-    If the type is [gtk.types.DeleteType.Chars], GTK deletes the selection
+    If the type is [gtk.types.DeleteType.chars], GTK deletes the selection
     if there is one, otherwise it deletes the requested number
     of characters.
     
@@ -791,10 +791,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     Connect to DeleteFromCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeleteFromCursor(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDeleteFromCursor(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DeleteFromCursorCallbackDlg) || is(T : DeleteFromCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -834,10 +834,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     Connect to InsertAtCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInsertAtCursor(T)(T callback, Flag!"After" after = No.After)
+  ulong connectInsertAtCursor(T)(T callback, Flag!"after" after = No.after)
   if (is(T : InsertAtCursorCallbackDlg) || is(T : InsertAtCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -876,10 +876,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     Connect to InsertEmoji signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInsertEmoji(T)(T callback, Flag!"After" after = No.After)
+  ulong connectInsertEmoji(T)(T callback, Flag!"after" after = No.after)
   if (is(T : InsertEmojiCallbackDlg) || is(T : InsertEmojiCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -935,10 +935,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     Connect to MoveCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  ulong connectMoveCursor(T)(T callback, Flag!"after" after = No.after)
   if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -978,10 +978,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     Connect to PasteClipboard signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPasteClipboard(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PasteClipboardCallbackDlg) || is(T : PasteClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1018,10 +1018,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     Connect to PreeditChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectPreeditChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : PreeditChangedCallbackDlg) || is(T : PreeditChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1058,10 +1058,10 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     Connect to ToggleOverwrite signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToggleOverwrite(T)(T callback, Flag!"After" after = No.After)
+  ulong connectToggleOverwrite(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ToggleOverwriteCallbackDlg) || is(T : ToggleOverwriteCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

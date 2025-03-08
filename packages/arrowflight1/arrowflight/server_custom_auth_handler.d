@@ -15,7 +15,7 @@ import glib.error;
 class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandler
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,7 +42,7 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
   void authenticate(arrowflight.server_call_context.ServerCallContext context, arrowflight.server_auth_sender.ServerAuthSender sender, arrowflight.server_auth_reader.ServerAuthReader reader)
   {
     GError *_err;
-    gaflight_server_custom_auth_handler_authenticate(cast(GAFlightServerCustomAuthHandler*)cPtr, context ? cast(GAFlightServerCallContext*)context.cPtr(No.Dup) : null, sender ? cast(GAFlightServerAuthSender*)sender.cPtr(No.Dup) : null, reader ? cast(GAFlightServerAuthReader*)reader.cPtr(No.Dup) : null, &_err);
+    gaflight_server_custom_auth_handler_authenticate(cast(GAFlightServerCustomAuthHandler*)cPtr, context ? cast(GAFlightServerCallContext*)context.cPtr(No.dup) : null, sender ? cast(GAFlightServerAuthSender*)sender.cPtr(No.dup) : null, reader ? cast(GAFlightServerAuthReader*)reader.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
   }
@@ -60,10 +60,10 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
   {
     GBytes* _cretval;
     GError *_err;
-    _cretval = gaflight_server_custom_auth_handler_is_valid(cast(GAFlightServerCustomAuthHandler*)cPtr, context ? cast(GAFlightServerCallContext*)context.cPtr(No.Dup) : null, token ? cast(GBytes*)token.cPtr(No.Dup) : null, &_err);
+    _cretval = gaflight_server_custom_auth_handler_is_valid(cast(GAFlightServerCustomAuthHandler*)cPtr, context ? cast(GAFlightServerCallContext*)context.cPtr(No.dup) : null, token ? cast(GBytes*)token.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }

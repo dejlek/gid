@@ -17,7 +17,7 @@ import gobject.object;
 class Seat : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -70,7 +70,7 @@ class Seat : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_seat_get_display(cast(GdkSeat*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class Seat : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_seat_get_keyboard(cast(GdkSeat*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.take);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class Seat : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_seat_get_pointer(cast(GdkSeat*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.take);
     return _retval;
   }
 
@@ -130,10 +130,10 @@ class Seat : gobject.object.ObjectG
     Connect to DeviceAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeviceAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDeviceAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DeviceAddedCallbackDlg) || is(T : DeviceAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -167,10 +167,10 @@ class Seat : gobject.object.ObjectG
     Connect to DeviceRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeviceRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectDeviceRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : DeviceRemovedCallbackDlg) || is(T : DeviceRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -210,10 +210,10 @@ class Seat : gobject.object.ObjectG
     Connect to ToolAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToolAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectToolAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ToolAddedCallbackDlg) || is(T : ToolAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -247,10 +247,10 @@ class Seat : gobject.object.ObjectG
     Connect to ToolRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToolRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectToolRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ToolRemovedCallbackDlg) || is(T : ToolRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

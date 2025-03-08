@@ -10,7 +10,7 @@ import gid.gid;
 class DayTimeIntervalDataType : arrow.interval_data_type.IntervalDataType
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class DayTimeIntervalDataType : arrow.interval_data_type.IntervalDataType
   {
     GArrowDayTimeIntervalDataType* _cretval;
     _cretval = garrow_day_time_interval_data_type_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 }

@@ -16,7 +16,7 @@ import gtk.widget;
 class EventController : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -52,7 +52,7 @@ class EventController : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_event_controller_get_widget(cast(GtkEventController*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class EventController : gobject.object.ObjectG
   /**
       Sets the propagation phase at which a controller handles events.
     
-    If phase is [gtk.types.PropagationPhase.None], no automatic event handling will be
+    If phase is [gtk.types.PropagationPhase.none], no automatic event handling will be
     performed, but other additional gesture maintenance will. In that phase,
     the events can be managed by calling [gtk.event_controller.EventController.handleEvent].
     Params:

@@ -20,7 +20,7 @@ class OutputMessage
 {
   GOutputMessage cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.OutputMessage");
@@ -38,7 +38,7 @@ class OutputMessage
 
   @property gio.socket_address.SocketAddress address()
   {
-    return ObjectG.getDObject!(gio.socket_address.SocketAddress)((cast(GOutputMessage*)cPtr).address, No.Take);
+    return ObjectG.getDObject!(gio.socket_address.SocketAddress)((cast(GOutputMessage*)cPtr).address, No.take);
   }
 
   @property gio.types.OutputVector vectors()

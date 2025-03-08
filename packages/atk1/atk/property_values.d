@@ -15,7 +15,7 @@ class PropertyValues
 {
   AtkPropertyValues cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Atk.PropertyValues");
@@ -33,13 +33,13 @@ class PropertyValues
 
   @property string propertyName()
   {
-    return (cast(AtkPropertyValues*)cPtr).propertyName.fromCString(No.Free);
+    return (cast(AtkPropertyValues*)cPtr).propertyName.fromCString(No.free);
   }
 
   @property void propertyName(string propval)
   {
     safeFree(cast(void*)(cast(AtkPropertyValues*)cPtr).propertyName);
-    (cast(AtkPropertyValues*)cPtr).propertyName = propval.toCString(Yes.Alloc);
+    (cast(AtkPropertyValues*)cPtr).propertyName = propval.toCString(Yes.alloc);
   }
 
   @property gobject.value.Value oldValue()

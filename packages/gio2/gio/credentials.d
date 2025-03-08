@@ -24,30 +24,30 @@ import gobject.object;
   
   On Linux, the native credential type is a `struct ucred` - see the
   [`unix(7)` man page](man:unix(7)) for details. This corresponds to
-  [gio.types.CredentialsType.LinuxUcred].
+  [gio.types.CredentialsType.linuxUcred].
   
   On Apple operating systems (including iOS, tvOS, and macOS), the native credential
-  type is a `struct xucred`. This corresponds to [gio.types.CredentialsType.AppleXucred].
+  type is a `struct xucred`. This corresponds to [gio.types.CredentialsType.appleXucred].
   
   On FreeBSD, Debian GNU/kFreeBSD, and GNU/Hurd, the native credential type is a
-  `struct cmsgcred`. This corresponds to [gio.types.CredentialsType.FreebsdCmsgcred].
+  `struct cmsgcred`. This corresponds to [gio.types.CredentialsType.freebsdCmsgcred].
   
   On NetBSD, the native credential type is a `struct unpcbid`.
-  This corresponds to [gio.types.CredentialsType.NetbsdUnpcbid].
+  This corresponds to [gio.types.CredentialsType.netbsdUnpcbid].
   
   On OpenBSD, the native credential type is a `struct sockpeercred`.
-  This corresponds to [gio.types.CredentialsType.OpenbsdSockpeercred].
+  This corresponds to [gio.types.CredentialsType.openbsdSockpeercred].
   
   On Solaris (including OpenSolaris and its derivatives), the native credential type
-  is a `ucred_t`. This corresponds to [gio.types.CredentialsType.SolarisUcred].
+  is a `ucred_t`. This corresponds to [gio.types.CredentialsType.solarisUcred].
   
   Since GLib 2.72, on Windows, the native credentials may contain the PID of a
-  process. This corresponds to [gio.types.CredentialsType.Win32Pid].
+  process. This corresponds to [gio.types.CredentialsType.win32Pid].
 */
 class Credentials : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -72,7 +72,7 @@ class Credentials : gobject.object.ObjectG
   {
     GCredentials* _cretval;
     _cretval = g_credentials_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -127,7 +127,7 @@ class Credentials : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_credentials_is_same_user(cast(GCredentials*)cPtr, otherCredentials ? cast(GCredentials*)otherCredentials.cPtr(No.Dup) : null, &_err);
+    _retval = g_credentials_is_same_user(cast(GCredentials*)cPtr, otherCredentials ? cast(GCredentials*)otherCredentials.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -181,7 +181,7 @@ class Credentials : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = g_credentials_to_string(cast(GCredentials*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
     return _retval;
   }
 }

@@ -14,15 +14,15 @@ class Size : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(graphene_size_t.sizeof), Yes.Take);
+    super(safeMalloc(graphene_size_t.sizeof), Yes.take);
   }
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -68,7 +68,7 @@ class Size : gobject.boxed.Boxed
   {
     graphene_size_t* _cretval;
     _cretval = graphene_size_alloc();
-    auto _retval = _cretval ? new graphene.size.Size(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new graphene.size.Size(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class Size : gobject.boxed.Boxed
   bool equal(graphene.size.Size b)
   {
     bool _retval;
-    _retval = graphene_size_equal(cast(const(graphene_size_t)*)cPtr, b ? cast(const(graphene_size_t)*)b.cPtr(No.Dup) : null);
+    _retval = graphene_size_equal(cast(const(graphene_size_t)*)cPtr, b ? cast(const(graphene_size_t)*)b.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class Size : gobject.boxed.Boxed
   {
     graphene_size_t* _cretval;
     _cretval = graphene_size_init(cast(graphene_size_t*)cPtr, width, height);
-    auto _retval = _cretval ? new graphene.size.Size(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.size.Size(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -110,8 +110,8 @@ class Size : gobject.boxed.Boxed
   graphene.size.Size initFromSize(graphene.size.Size src)
   {
     graphene_size_t* _cretval;
-    _cretval = graphene_size_init_from_size(cast(graphene_size_t*)cPtr, src ? cast(const(graphene_size_t)*)src.cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new graphene.size.Size(cast(void*)_cretval, No.Take) : null;
+    _cretval = graphene_size_init_from_size(cast(graphene_size_t*)cPtr, src ? cast(const(graphene_size_t)*)src.cPtr(No.dup) : null);
+    auto _retval = _cretval ? new graphene.size.Size(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -126,8 +126,8 @@ class Size : gobject.boxed.Boxed
   void interpolate(graphene.size.Size b, double factor, out graphene.size.Size res)
   {
     graphene_size_t _res;
-    graphene_size_interpolate(cast(const(graphene_size_t)*)cPtr, b ? cast(const(graphene_size_t)*)b.cPtr(No.Dup) : null, factor, &_res);
-    res = new graphene.size.Size(cast(void*)&_res, No.Take);
+    graphene_size_interpolate(cast(const(graphene_size_t)*)cPtr, b ? cast(const(graphene_size_t)*)b.cPtr(No.dup) : null, factor, &_res);
+    res = new graphene.size.Size(cast(void*)&_res, No.take);
   }
 
   /**
@@ -140,7 +140,7 @@ class Size : gobject.boxed.Boxed
   {
     graphene_size_t _res;
     graphene_size_scale(cast(const(graphene_size_t)*)cPtr, factor, &_res);
-    res = new graphene.size.Size(cast(void*)&_res, No.Take);
+    res = new graphene.size.Size(cast(void*)&_res, No.take);
   }
 
   /**
@@ -152,7 +152,7 @@ class Size : gobject.boxed.Boxed
   {
     const(graphene_size_t)* _cretval;
     _cretval = graphene_size_zero();
-    auto _retval = _cretval ? new graphene.size.Size(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new graphene.size.Size(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 }

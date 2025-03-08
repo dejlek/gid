@@ -26,7 +26,7 @@ import gtk.types;
   
   The attributes are updated every time a UI element's state changes in
   a way that should be reflected by assistive technologies. For instance,
-  if a [gtk.widget.Widget] visibility changes, the [gtk.types.AccessibleState.Hidden]
+  if a [gtk.widget.Widget] visibility changes, the [gtk.types.AccessibleState.hidden]
   state will also change to reflect the [gtk.widget.Widget.gboolean] property.
   
   Every accessible implementation is part of a tree of accessible objects.

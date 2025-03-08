@@ -31,7 +31,7 @@ import gobject.value;
 class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -59,7 +59,7 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   {
     GCancellable* _cretval;
     _cretval = gdk_content_serializer_get_cancellable(cast(GdkContentSerializer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.take);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   {
     const(char)* _cretval;
     _cretval = gdk_content_serializer_get_mime_type(cast(GdkContentSerializer*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   {
     GOutputStream* _cretval;
     _cretval = gdk_content_serializer_get_output_stream(cast(GdkContentSerializer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.take);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
   {
     const(GValue)* _cretval;
     _cretval = gdk_content_serializer_get_value(cast(GdkContentSerializer*)cPtr);
-    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 

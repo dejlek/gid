@@ -13,7 +13,7 @@ class FormatDefinition
 {
   GstFormatDefinition cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gst.FormatDefinition");
@@ -41,24 +41,24 @@ class FormatDefinition
 
   @property string nick()
   {
-    return (cast(GstFormatDefinition*)cPtr).nick.fromCString(No.Free);
+    return (cast(GstFormatDefinition*)cPtr).nick.fromCString(No.free);
   }
 
   @property void nick(string propval)
   {
     safeFree(cast(void*)(cast(GstFormatDefinition*)cPtr).nick);
-    (cast(GstFormatDefinition*)cPtr).nick = propval.toCString(Yes.Alloc);
+    (cast(GstFormatDefinition*)cPtr).nick = propval.toCString(Yes.alloc);
   }
 
   @property string description()
   {
-    return (cast(GstFormatDefinition*)cPtr).description.fromCString(No.Free);
+    return (cast(GstFormatDefinition*)cPtr).description.fromCString(No.free);
   }
 
   @property void description(string propval)
   {
     safeFree(cast(void*)(cast(GstFormatDefinition*)cPtr).description);
-    (cast(GstFormatDefinition*)cPtr).description = propval.toCString(Yes.Alloc);
+    (cast(GstFormatDefinition*)cPtr).description = propval.toCString(Yes.alloc);
   }
 
   @property glib.types.Quark quark()

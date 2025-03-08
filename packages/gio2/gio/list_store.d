@@ -19,7 +19,7 @@ import gobject.types;
 class ListStore : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -128,7 +128,7 @@ class ListStore : gobject.object.ObjectG, gio.list_model.ListModel
   {
     GListStore* _cretval;
     _cretval = g_list_store_new(itemType);
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /**
@@ -143,7 +143,7 @@ class ListStore : gobject.object.ObjectG, gio.list_model.ListModel
   */
   void append(gobject.object.ObjectG item)
   {
-    g_list_store_append(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(No.Dup) : null);
+    g_list_store_append(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(No.dup) : null);
   }
 
   /**
@@ -162,7 +162,7 @@ class ListStore : gobject.object.ObjectG, gio.list_model.ListModel
   bool find(gobject.object.ObjectG item, out uint position)
   {
     bool _retval;
-    _retval = g_list_store_find(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(No.Dup) : null, cast(uint*)&position);
+    _retval = g_list_store_find(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(No.dup) : null, cast(uint*)&position);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class ListStore : gobject.object.ObjectG, gio.list_model.ListModel
   */
   void insert(uint position, gobject.object.ObjectG item)
   {
-    g_list_store_insert(cast(GListStore*)cPtr, position, item ? cast(ObjectC*)item.cPtr(No.Dup) : null);
+    g_list_store_insert(cast(GListStore*)cPtr, position, item ? cast(ObjectC*)item.cPtr(No.dup) : null);
   }
 
   /**

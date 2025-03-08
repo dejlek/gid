@@ -21,9 +21,9 @@ class VariantG
   {
     // Somewhat counter-intuitive.. We don't "own" a reference, it is floating, so pass false to sink it.
     static if (is(T : VariantG)) // A variant (wrap it)
-      this(cast(void*)createVariant(cast(VariantC*)val.cPtr), No.Take);
+      this(cast(void*)createVariant(cast(VariantC*)val.cPtr), No.take);
     else
-      this(cast(void*)createVariant(val), No.Take);
+      this(cast(void*)createVariant(val), No.take);
   }
 
   /**
@@ -48,7 +48,7 @@ class VariantG
         g_variant_builder_add_value(&builder, createVariant(v)); // !! takes over floating reference of new VariantC
     }
 
-    this(g_variant_builder_end(&builder), No.Take);
+    this(g_variant_builder_end(&builder), No.take);
   }
 
   override bool opEquals(Object other)
@@ -126,10 +126,10 @@ VariantC* createVariant(T)(T val)
   else static if (is(T == float) || is(T == double))
     return g_variant_new_double(val);
   else static if (isSomeString!T)
-    return g_variant_new_string(toCString(val.to!string, No.Alloc));
+    return g_variant_new_string(toCString(val.to!string, No.alloc));
   else static if (is(T : E[], E))
   {
-    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString(No.Alloc)); // ++ new
+    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString(No.alloc)); // ++ new
     GVariantBuilder builder;
     g_variant_builder_init(&builder, variantType);
     g_variant_type_free(variantType); // -- free
@@ -141,7 +141,7 @@ VariantC* createVariant(T)(T val)
   }
   else static if (is(T : V[K], V, K)) // Dictionary
   {
-    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString(No.Alloc)); // ++ new
+    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString(No.alloc)); // ++ new
     GVariantBuilder builder;
     g_variant_builder_init(&builder, variantType);
     g_variant_type_free(variantType); // -- free
@@ -229,7 +229,7 @@ T getVal(T)(VariantC* v)
   else static if (is(T == float) || is(T == double))
     return cast(T)g_variant_get_double(v);
   else static if (isSomeString!T)
-    return fromCString(g_variant_get_string(v, null), No.Free); // g_variant_get_string second argument is an optional output length parameter
+    return fromCString(g_variant_get_string(v, null), No.free); // g_variant_get_string second argument is an optional output length parameter
   else static if (is(T : E[], E))
   {
     T valArray;

@@ -14,7 +14,7 @@ class VideoCropMeta
 {
   GstVideoCropMeta cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstVideo.VideoCropMeta");

@@ -143,11 +143,11 @@ interface File
     GFile* _cretval;
     const(char)*[] _tmpargs;
     foreach (s; args)
-      _tmpargs ~= s.toCString(No.Alloc);
+      _tmpargs ~= s.toCString(No.alloc);
     _tmpargs ~= null;
     const(char*)* _args = _tmpargs.ptr;
     _cretval = g_file_new_build_filenamev(_args);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -174,9 +174,9 @@ interface File
   static gio.file.File newForCommandlineArg(string arg)
   {
     GFile* _cretval;
-    const(char)* _arg = arg.toCString(No.Alloc);
+    const(char)* _arg = arg.toCString(No.alloc);
     _cretval = g_file_new_for_commandline_arg(_arg);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -200,10 +200,10 @@ interface File
   static gio.file.File newForCommandlineArgAndCwd(string arg, string cwd)
   {
     GFile* _cretval;
-    const(char)* _arg = arg.toCString(No.Alloc);
-    const(char)* _cwd = cwd.toCString(No.Alloc);
+    const(char)* _arg = arg.toCString(No.alloc);
+    const(char)* _cwd = cwd.toCString(No.alloc);
     _cretval = g_file_new_for_commandline_arg_and_cwd(_arg, _cwd);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -220,9 +220,9 @@ interface File
   static gio.file.File newForPath(string path)
   {
     GFile* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     _cretval = g_file_new_for_path(_path);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -239,9 +239,9 @@ interface File
   static gio.file.File newForUri(string uri)
   {
     GFile* _cretval;
-    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _uri = uri.toCString(No.alloc);
     _cretval = g_file_new_for_uri(_uri);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -266,14 +266,14 @@ interface File
   static gio.file.File newTmp(string tmpl, out gio.file_iostream.FileIOStream iostream)
   {
     GFile* _cretval;
-    const(char)* _tmpl = tmpl.toCString(No.Alloc);
+    const(char)* _tmpl = tmpl.toCString(No.alloc);
     GFileIOStream* _iostream;
     GError *_err;
     _cretval = g_file_new_tmp(_tmpl, &_iostream, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
-    iostream = new gio.file_iostream.FileIOStream(cast(void*)_iostream, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    iostream = new gio.file_iostream.FileIOStream(cast(void*)_iostream, Yes.take);
     return _retval;
   }
 
@@ -298,13 +298,13 @@ interface File
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _tmpl = tmpl.toCString(No.Alloc);
+    const(char)* _tmpl = tmpl.toCString(No.alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_new_tmp_async(_tmpl, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_file_new_tmp_async(_tmpl, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -328,13 +328,13 @@ interface File
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _tmpl = tmpl.toCString(No.Alloc);
+    const(char)* _tmpl = tmpl.toCString(No.alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_new_tmp_dir_async(_tmpl, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_file_new_tmp_dir_async(_tmpl, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -349,10 +349,10 @@ interface File
   {
     GFile* _cretval;
     GError *_err;
-    _cretval = g_file_new_tmp_dir_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_new_tmp_dir_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -369,11 +369,11 @@ interface File
     GFile* _cretval;
     GFileIOStream* _iostream;
     GError *_err;
-    _cretval = g_file_new_tmp_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_iostream, &_err);
+    _cretval = g_file_new_tmp_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_iostream, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
-    iostream = new gio.file_iostream.FileIOStream(cast(void*)_iostream, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    iostream = new gio.file_iostream.FileIOStream(cast(void*)_iostream, Yes.take);
     return _retval;
   }
 
@@ -389,9 +389,9 @@ interface File
   static gio.file.File parseName(string parseName)
   {
     GFile* _cretval;
-    const(char)* _parseName = parseName.toCString(No.Alloc);
+    const(char)* _parseName = parseName.toCString(No.alloc);
     _cretval = g_file_parse_name(_parseName);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -400,18 +400,18 @@ interface File
     If the file doesn't already exist it is created.
     
     By default files created are generally readable by everyone,
-    but if you pass [gio.types.FileCreateFlags.Private] in flags the file
+    but if you pass [gio.types.FileCreateFlags.private_] in flags the file
     will be made readable only to the current user, to the level that
     is supported on the target filesystem.
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
     returned.
     
     Some file systems don't allow all file names, and may return an
-    [gio.types.IOErrorEnum.InvalidFilename] error. If the file is a directory the
-    [gio.types.IOErrorEnum.IsDirectory] error will be returned. Other errors are
+    [gio.types.IOErrorEnum.invalidFilename] error. If the file is a directory the
+    [gio.types.IOErrorEnum.isDirectory] error will be returned. Other errors are
     possible too, and depend on what kind of filesystem the file is on.
     Params:
       flags =       a set of #GFileCreateFlags
@@ -475,20 +475,20 @@ interface File
       Copies the file source to the location specified by destination.
     Can not handle recursive copies of directories.
     
-    If the flag [gio.types.FileCopyFlags.Overwrite] is specified an already
+    If the flag [gio.types.FileCopyFlags.overwrite] is specified an already
     existing destination file is overwritten.
     
-    If the flag [gio.types.FileCopyFlags.NofollowSymlinks] is specified then symlinks
+    If the flag [gio.types.FileCopyFlags.nofollowSymlinks] is specified then symlinks
     will be copied as symlinks, otherwise the target of the
     source symlink will be copied.
     
-    If the flag [gio.types.FileCopyFlags.AllMetadata] is specified then all the metadata
+    If the flag [gio.types.FileCopyFlags.allMetadata] is specified then all the metadata
     that is possible to copy is copied, not just the default subset (which,
     for instance, does not include the owner, see #GFileInfo).
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     
     If progress_callback is not null, then the operation can be monitored
     by setting this to a #GFileProgressCallback function.
@@ -496,19 +496,19 @@ interface File
     that this callback will be called after all data has been transferred with
     the total number of bytes copied during the operation.
     
-    If the source file does not exist, then the [gio.types.IOErrorEnum.NotFound] error
+    If the source file does not exist, then the [gio.types.IOErrorEnum.notFound] error
     is returned, independent on the status of the destination.
     
-    If [gio.types.FileCopyFlags.Overwrite] is not specified and the target exists, then
-    the error [gio.types.IOErrorEnum.Exists] is returned.
+    If [gio.types.FileCopyFlags.overwrite] is not specified and the target exists, then
+    the error [gio.types.IOErrorEnum.exists] is returned.
     
-    If trying to overwrite a file over a directory, the [gio.types.IOErrorEnum.IsDirectory]
+    If trying to overwrite a file over a directory, the [gio.types.IOErrorEnum.isDirectory]
     error is returned. If trying to overwrite a directory with a directory the
-    [gio.types.IOErrorEnum.WouldMerge] error is returned.
+    [gio.types.IOErrorEnum.wouldMerge] error is returned.
     
     If the source is a directory and the target does not exist, or
-    [gio.types.FileCopyFlags.Overwrite] is specified and the target is a file, then the
-    [gio.types.IOErrorEnum.WouldRecurse] error is returned.
+    [gio.types.FileCopyFlags.overwrite] is specified and the target is a file, then the
+    [gio.types.IOErrorEnum.wouldRecurse] error is returned.
     
     If you are interested in copying the #GFile object itself (not the on-disk
     file), see [gio.file.File.dup].
@@ -553,7 +553,7 @@ interface File
     Normally only a subset of the file attributes are copied,
     those that are copies in a normal file copy operation
     (which for instance does not include e.g. owner). However
-    if [gio.types.FileCopyFlags.AllMetadata] is specified in flags, then
+    if [gio.types.FileCopyFlags.allMetadata] is specified in flags, then
     all the metadata that is possible to copy is copied. This
     is useful when implementing move by copy + delete source.
     Params:
@@ -579,19 +579,19 @@ interface File
     The file must not already exist.
     
     By default files created are generally readable by everyone,
-    but if you pass [gio.types.FileCreateFlags.Private] in flags the file
+    but if you pass [gio.types.FileCreateFlags.private_] in flags the file
     will be made readable only to the current user, to the level
     that is supported on the target filesystem.
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
     returned.
     
     If a file or directory with this name already exists the
-    [gio.types.IOErrorEnum.Exists] error will be returned. Some file systems don't
-    allow all file names, and may return an [gio.types.IOErrorEnum.InvalidFilename]
-    error, and if the name is to long [gio.types.IOErrorEnum.FilenameTooLong] will
+    [gio.types.IOErrorEnum.exists] error will be returned. Some file systems don't
+    allow all file names, and may return an [gio.types.IOErrorEnum.invalidFilename]
+    error, and if the name is to long [gio.types.IOErrorEnum.filenameTooLong] will
     be returned. Other errors are possible too, and depend on what kind
     of filesystem the file is on.
     Params:
@@ -639,19 +639,19 @@ interface File
     writing to it. The file must not already exist.
     
     By default files created are generally readable by everyone,
-    but if you pass [gio.types.FileCreateFlags.Private] in flags the file
+    but if you pass [gio.types.FileCreateFlags.private_] in flags the file
     will be made readable only to the current user, to the level
     that is supported on the target filesystem.
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
     returned.
     
     If a file or directory with this name already exists, the
-    [gio.types.IOErrorEnum.Exists] error will be returned. Some file systems don't
-    allow all file names, and may return an [gio.types.IOErrorEnum.InvalidFilename]
-    error, and if the name is too long, [gio.types.IOErrorEnum.FilenameTooLong]
+    [gio.types.IOErrorEnum.exists] error will be returned. Some file systems don't
+    allow all file names, and may return an [gio.types.IOErrorEnum.invalidFilename]
+    error, and if the name is too long, [gio.types.IOErrorEnum.filenameTooLong]
     will be returned. Other errors are possible too, and depend on what
     kind of filesystem the file is on.
     
@@ -702,7 +702,7 @@ interface File
       Deletes a file. If the file is a directory, it will only be
     deleted if it is empty. This has the same semantics as [glib.global.unlink].
     
-    If file doesn’t exist, [gio.types.IOErrorEnum.NotFound] will be returned. This allows
+    If file doesn’t exist, [gio.types.IOErrorEnum.notFound] will be returned. This allows
     for deletion to be implemented avoiding
     [time-of-check to time-of-use races](https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use):
     ```
@@ -719,7 +719,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object,
           null to ignore
@@ -772,7 +772,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       flags =       flags affecting the operation
       cancellable =       optional #GCancellable object,
@@ -805,7 +805,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       flags =       flags affecting the operation
       mountOperation =       a #GMountOperation,
@@ -847,11 +847,11 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
     returned.
     
-    If the file does not exist, the [gio.types.IOErrorEnum.NotFound] error will
-    be returned. If the file is not a directory, the [gio.types.IOErrorEnum.NotDirectory]
+    If the file does not exist, the [gio.types.IOErrorEnum.notFound] error will
+    be returned. If the file is not a directory, the [gio.types.IOErrorEnum.notDirectory]
     error will be returned. Other errors are possible too.
     Params:
       attributes =       an attribute query string
@@ -915,11 +915,11 @@ interface File
     
     #GMount is returned only for user interesting locations, see
     #GVolumeMonitor. If the #GFileIface for file does not have a #mount,
-    error will be set to [gio.types.IOErrorEnum.NotFound] and null #will be returned.
+    error will be set to [gio.types.IOErrorEnum.notFound] and null #will be returned.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object,
           null to ignore
@@ -1233,7 +1233,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object, null to ignore
       contents =       a location to place the contents of the file
@@ -1257,7 +1257,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object, null to ignore
       callback =       a #GAsyncReadyCallback to call when the request is satisfied
@@ -1301,16 +1301,16 @@ interface File
     of the immediate parent directory of the path or URI given by the #GFile.
     To recursively create directories, see [gio.file.File.makeDirectoryWithParents].
     This function will fail if the parent directory does not exist, setting
-    error to [gio.types.IOErrorEnum.NotFound]. If the file system doesn't support
+    error to [gio.types.IOErrorEnum.notFound]. If the file system doesn't support
     creating directories, this function will fail, setting error to
-    [gio.types.IOErrorEnum.NotSupported].
+    [gio.types.IOErrorEnum.notSupported].
     
     For a local #GFile the newly created directory will have the default
     (current) ownership and permissions of the current process.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object,
           null to ignore
@@ -1342,8 +1342,8 @@ interface File
       Creates a directory and any parent directories that may not
     exist similar to 'mkdir -p'. If the file system does not support
     creating directories, this function will fail, setting error to
-    [gio.types.IOErrorEnum.NotSupported]. If the directory itself already exists,
-    this function will fail setting error to [gio.types.IOErrorEnum.Exists], unlike
+    [gio.types.IOErrorEnum.notSupported]. If the directory itself already exists,
+    this function will fail setting error to [gio.types.IOErrorEnum.exists], unlike
     the similar [glib.global.mkdirWithParents].
     
     For a local #GFile the newly created directories will have the default
@@ -1351,7 +1351,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object,
           null to ignore
@@ -1366,7 +1366,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       symlinkValue =       a string with the path for the target
           of the new symlink
@@ -1408,7 +1408,7 @@ interface File
     
     By default, errors are only reported against the toplevel file
     itself.  Errors found while recursing are silently ignored, unless
-    [gio.types.FileMeasureFlags.ReportAnyError] is given in flags.
+    [gio.types.FileMeasureFlags.reportAnyError] is given in flags.
     
     The returned size, disk_usage, is in bytes and should be formatted
     with [glib.global.formatSize] in order to get something reasonable for showing
@@ -1450,7 +1450,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       flags =       a set of #GFileMonitorFlags
       cancellable =       optional #GCancellable object,
@@ -1467,10 +1467,10 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     
     It does not make sense for flags to contain
-    [gio.types.FileMonitorFlags.WatchHardLinks], since hard links can not be made to
+    [gio.types.FileMonitorFlags.watchHardLinks], since hard links can not be made to
     directories.  It is not possible to monitor all the files in a
     directory for changes made via hard links; if you want to do this then
     you must register individual watches with [gio.file.File.monitor].
@@ -1489,9 +1489,9 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     
-    If flags contains [gio.types.FileMonitorFlags.WatchHardLinks] then the monitor
+    If flags contains [gio.types.FileMonitorFlags.watchHardLinks] then the monitor
     will also attempt to report changes made to the file via another
     filename (ie, a hard link). Without this flag, you can only rely on
     changes made through the filename contained in file to be
@@ -1518,7 +1518,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       flags =       flags affecting the operation
       mountOperation =       a #GMountOperation
@@ -1547,7 +1547,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     
     When the operation is finished, callback will be called.
     You can then call [gio.file.File.mountMountableFinish] to get
@@ -1582,12 +1582,12 @@ interface File
     implementation may support moving directories (for instance on moves
     inside the same filesystem), but the fallback code does not.
     
-    If the flag [gio.types.FileCopyFlags.Overwrite] is specified an already
+    If the flag [gio.types.FileCopyFlags.overwrite] is specified an already
     existing destination file is overwritten.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     
     If progress_callback is not null, then the operation can be monitored
     by setting this to a #GFileProgressCallback function.
@@ -1595,19 +1595,19 @@ interface File
     guaranteed that this callback will be called after all data has been
     transferred with the total number of bytes copied during the operation.
     
-    If the source file does not exist, then the [gio.types.IOErrorEnum.NotFound]
+    If the source file does not exist, then the [gio.types.IOErrorEnum.notFound]
     error is returned, independent on the status of the destination.
     
-    If [gio.types.FileCopyFlags.Overwrite] is not specified and the target exists,
-    then the error [gio.types.IOErrorEnum.Exists] is returned.
+    If [gio.types.FileCopyFlags.overwrite] is not specified and the target exists,
+    then the error [gio.types.IOErrorEnum.exists] is returned.
     
-    If trying to overwrite a file over a directory, the [gio.types.IOErrorEnum.IsDirectory]
+    If trying to overwrite a file over a directory, the [gio.types.IOErrorEnum.isDirectory]
     error is returned. If trying to overwrite a directory with a directory the
-    [gio.types.IOErrorEnum.WouldMerge] error is returned.
+    [gio.types.IOErrorEnum.wouldMerge] error is returned.
     
     If the source is a directory and the target does not exist, or
-    [gio.types.FileCopyFlags.Overwrite] is specified and the target is a file, then
-    the [gio.types.IOErrorEnum.WouldRecurse] error may be returned (if the native
+    [gio.types.FileCopyFlags.overwrite] is specified and the target is a file, then
+    the [gio.types.IOErrorEnum.wouldRecurse] error may be returned (if the native
     move operation isn't available).
     Params:
       destination =       #GFile pointing to the destination location
@@ -1658,11 +1658,11 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
     returned.
     
-    If the file does not exist, the [gio.types.IOErrorEnum.NotFound] error will
-    be returned. If the file is a directory, the [gio.types.IOErrorEnum.IsDirectory]
+    If the file does not exist, the [gio.types.IOErrorEnum.notFound] error will
+    be returned. If the file is a directory, the [gio.types.IOErrorEnum.isDirectory]
     error will be returned. Other errors are possible too, and depend on
     what kind of filesystem the file is on. Note that in many non-local
     file cases read and write streams are not supported, so make sure you
@@ -1717,11 +1717,11 @@ interface File
   string peekPath();
 
   /**
-      Polls a file of type [gio.types.FileType.Mountable].
+      Polls a file of type [gio.types.FileType.mountable].
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     
     When the operation is finished, callback will be called.
     You can then call [gio.file.File.mountMountableFinish] to get
@@ -1751,7 +1751,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object, null to ignore
     Returns:     a #GAppInfo if the handle was found,
@@ -1795,7 +1795,7 @@ interface File
     These can both result in two processes creating the file (with perhaps
     a partially written file as the result). The correct approach is to
     always try to create the file with [gio.file.File.create] which will either
-    atomically create the file or fail with a [gio.types.IOErrorEnum.Exists] error.
+    atomically create the file or fail with a [gio.types.IOErrorEnum.exists] error.
     
     However, in many cases an existence check is useful in a user interface,
     for instance to make a menu item sensitive/insensitive, so that you don't
@@ -1820,7 +1820,7 @@ interface File
       flags =       a set of #GFileQueryInfoFlags passed to [gio.file.File.queryInfo]
       cancellable =       optional #GCancellable object,
           null to ignore
-    Returns:     The #GFileType of the file and [gio.types.FileType.Unknown]
+    Returns:     The #GFileType of the file and [gio.types.FileType.unknown]
         if the file does not exist
   */
   gio.types.FileType queryFileType(gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
@@ -1845,10 +1845,10 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
     returned.
     
-    If the file does not exist, the [gio.types.IOErrorEnum.NotFound] error will
+    If the file does not exist, the [gio.types.IOErrorEnum.notFound] error will
     be returned. Other errors are possible too, and depend on what
     kind of filesystem the file is on.
     Params:
@@ -1911,17 +1911,17 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
     returned.
     
     For symlinks, normally the information about the target of the
     symlink is returned, rather than information about the symlink
-    itself. However if you pass [gio.types.FileQueryInfoFlags.NofollowSymlinks]
+    itself. However if you pass [gio.types.FileQueryInfoFlags.nofollowSymlinks]
     in flags the information about the symlink itself will be returned.
     Also, for symlinks that point to non-existing files the information
     about the symlink itself will be returned.
     
-    If the file does not exist, the [gio.types.IOErrorEnum.NotFound] error will be
+    If the file does not exist, the [gio.types.IOErrorEnum.notFound] error will be
     returned. Other errors are possible too, and depend on what kind of
     filesystem the file is on.
     Params:
@@ -1976,7 +1976,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object,
           null to ignore
@@ -1993,7 +1993,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object,
           null to ignore
@@ -2009,10 +2009,10 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     
-    If the file does not exist, the [gio.types.IOErrorEnum.NotFound] error will be
-    returned. If the file is a directory, the [gio.types.IOErrorEnum.IsDirectory]
+    If the file does not exist, the [gio.types.IOErrorEnum.notFound] error will be
+    returned. If the file is a directory, the [gio.types.IOErrorEnum.isDirectory]
     error will be returned. Other errors are possible too, and depend
     on what kind of filesystem the file is on.
     Params:
@@ -2062,18 +2062,18 @@ interface File
     the destination when the stream is closed.
     
     By default files created are generally readable by everyone,
-    but if you pass [gio.types.FileCreateFlags.Private] in flags the file
+    but if you pass [gio.types.FileCreateFlags.private_] in flags the file
     will be made readable only to the current user, to the level that
     is supported on the target filesystem.
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
     returned.
     
     If you pass in a non-null etag value and file already exists, then
     this value is compared to the current entity tag of the file, and if
-    they differ an [gio.types.IOErrorEnum.WrongEtag] error is returned. This
+    they differ an [gio.types.IOErrorEnum.wrongEtag] error is returned. This
     generally means that the file has been changed since you last read
     it. You can get the new etag from [gio.file_output_stream.FileOutputStream.getEtag]
     after you've finished writing and closed the #GFileOutputStream. When
@@ -2082,15 +2082,15 @@ interface File
     
     If make_backup is true, this function will attempt to make a
     backup of the current file before overwriting it. If this fails
-    a [gio.types.IOErrorEnum.CantCreateBackup] error will be returned. If you
+    a [gio.types.IOErrorEnum.cantCreateBackup] error will be returned. If you
     want to replace anyway, try again with make_backup set to false.
     
-    If the file is a directory the [gio.types.IOErrorEnum.IsDirectory] error will
+    If the file is a directory the [gio.types.IOErrorEnum.isDirectory] error will
     be returned, and if the file is some other form of non-regular file
-    then a [gio.types.IOErrorEnum.NotRegularFile] error will be returned. Some
+    then a [gio.types.IOErrorEnum.notRegularFile] error will be returned. Some
     file systems don't allow all file names, and may return an
-    [gio.types.IOErrorEnum.InvalidFilename] error, and if the name is to long
-    [gio.types.IOErrorEnum.FilenameTooLong] will be returned. Other errors are
+    [gio.types.IOErrorEnum.invalidFilename] error, and if the name is to long
+    [gio.types.IOErrorEnum.filenameTooLong] will be returned. Other errors are
     possible too, and depend on what kind of filesystem the file is on.
     Params:
       etag =       an optional [entity tag](#entity-tags)
@@ -2131,7 +2131,7 @@ interface File
       Replaces the contents of file with contents of length bytes.
     
     If etag is specified (not null), any existing file must have that etag,
-    or the error [gio.types.IOErrorEnum.WrongEtag] will be returned.
+    or the error [gio.types.IOErrorEnum.wrongEtag] will be returned.
     
     If make_backup is true, this function will attempt to make a backup
     of file. Internally, it uses [gio.file.File.replace], so will try to replace the
@@ -2140,7 +2140,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     
     The returned new_etag can be used to verify that the file hasn't
     changed the next time it is saved over.
@@ -2170,7 +2170,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     
     If make_backup is true, this function will attempt to
     make a backup of file.
@@ -2305,11 +2305,11 @@ interface File
       Sets an attribute in the file with attribute name attribute to value_p.
     
     Some attributes can be unset by setting type to
-    [gio.types.FileAttributeType.Invalid] and value_p to null.
+    [gio.types.FileAttributeType.invalid] and value_p to null.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       attribute =       a string containing the attribute's name
       type =       The type of the attribute
@@ -2323,13 +2323,13 @@ interface File
   bool setAttribute(string attribute, gio.types.FileAttributeType type, void* valueP, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
-      Sets attribute of type [gio.types.FileAttributeType.ByteString] to value.
+      Sets attribute of type [gio.types.FileAttributeType.byteString] to value.
     If attribute is of a different type, this operation will fail,
     returning false.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       attribute =       a string containing the attribute's name
       value =       a string containing the attribute's new value
@@ -2342,12 +2342,12 @@ interface File
   bool setAttributeByteString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
-      Sets attribute of type [gio.types.FileAttributeType.Int32] to value.
+      Sets attribute of type [gio.types.FileAttributeType.int32] to value.
     If attribute is of a different type, this operation will fail.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       attribute =       a string containing the attribute's name
       value =       a #gint32 containing the attribute's new value
@@ -2360,12 +2360,12 @@ interface File
   bool setAttributeInt32(string attribute, int value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
-      Sets attribute of type [gio.types.FileAttributeType.Int64] to value.
+      Sets attribute of type [gio.types.FileAttributeType.int64] to value.
     If attribute is of a different type, this operation will fail.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       attribute =       a string containing the attribute's name
       value =       a #guint64 containing the attribute's new value
@@ -2377,12 +2377,12 @@ interface File
   bool setAttributeInt64(string attribute, long value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
-      Sets attribute of type [gio.types.FileAttributeType.String] to value.
+      Sets attribute of type [gio.types.FileAttributeType.string_] to value.
     If attribute is of a different type, this operation will fail.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       attribute =       a string containing the attribute's name
       value =       a string containing the attribute's value
@@ -2394,12 +2394,12 @@ interface File
   bool setAttributeString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
-      Sets attribute of type [gio.types.FileAttributeType.Uint32] to value.
+      Sets attribute of type [gio.types.FileAttributeType.uint32] to value.
     If attribute is of a different type, this operation will fail.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       attribute =       a string containing the attribute's name
       value =       a #guint32 containing the attribute's new value
@@ -2412,12 +2412,12 @@ interface File
   bool setAttributeUint32(string attribute, uint value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null);
 
   /**
-      Sets attribute of type [gio.types.FileAttributeType.Uint64] to value.
+      Sets attribute of type [gio.types.FileAttributeType.uint64] to value.
     If attribute is of a different type, this operation will fail.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       attribute =       a string containing the attribute's name
       value =       a #guint64 containing the attribute's new value
@@ -2465,12 +2465,12 @@ interface File
     If there is any error during this operation then error will
     be set to the first error. Error on particular fields are flagged
     by setting the "status" field in the attribute value to
-    [gio.types.FileAttributeStatus.ErrorSetting], which means you can
+    [gio.types.FileAttributeStatus.errorSetting], which means you can
     also detect further errors.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       info =       a #GFileInfo
       flags =       #GFileQueryInfoFlags
@@ -2495,7 +2495,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       displayName =       a string
       cancellable =       optional #GCancellable object,
@@ -2536,13 +2536,13 @@ interface File
   gio.file.File setDisplayNameFinish(gio.async_result.AsyncResult res);
 
   /**
-      Starts a file of type [gio.types.FileType.Mountable].
+      Starts a file of type [gio.types.FileType.mountable].
     Using start_operation, you can request callbacks when, for instance,
     passwords are needed during authentication.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     
     When the operation is finished, callback will be called.
     You can then call [gio.file.File.mountMountableFinish] to get
@@ -2568,11 +2568,11 @@ interface File
   bool startMountableFinish(gio.async_result.AsyncResult result);
 
   /**
-      Stops a file of type [gio.types.FileType.Mountable].
+      Stops a file of type [gio.types.FileType.mountable].
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     
     When the operation is finished, callback will be called.
     You can then call [gio.file.File.stopMountableFinish] to get
@@ -2613,13 +2613,13 @@ interface File
       Sends file to the "Trashcan", if possible. This is similar to
     deleting it, but the user can recover it before emptying the trashcan.
     Not all file systems support trashing, so this call can return the
-    [gio.types.IOErrorEnum.NotSupported] error. Since GLib 2.66, the `x-gvfs-notrash` unix
+    [gio.types.IOErrorEnum.notSupported] error. Since GLib 2.66, the `x-gvfs-notrash` unix
     mount option can be used to disable [gio.file.File.trash] support for certain
-    mounts, the [gio.types.IOErrorEnum.NotSupported] error will be returned in that case.
+    mounts, the [gio.types.IOErrorEnum.notSupported] error will be returned in that case.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object,
           null to ignore
@@ -2652,7 +2652,7 @@ interface File
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     
     When the operation is finished, callback will be called.
     You can then call [gio.file.File.unmountMountableFinish] to get
@@ -2684,11 +2684,11 @@ interface File
   bool unmountMountableFinish(gio.async_result.AsyncResult result);
 
   /**
-      Unmounts a file of type [gio.types.FileType.Mountable].
+      Unmounts a file of type [gio.types.FileType.mountable].
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
     
     When the operation is finished, callback will be called.
     You can then call [gio.file.File.unmountMountableFinish] to get

@@ -20,12 +20,12 @@ import pango.types;
 class LayoutIter : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -60,7 +60,7 @@ class LayoutIter : gobject.boxed.Boxed
   {
     PangoLayoutIter* _cretval;
     _cretval = pango_layout_iter_copy(cast(PangoLayoutIter*)cPtr);
-    auto _retval = _cretval ? new pango.layout_iter.LayoutIter(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.layout_iter.LayoutIter(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class LayoutIter : gobject.boxed.Boxed
   {
     PangoLayout* _cretval;
     _cretval = pango_layout_iter_get_layout(cast(PangoLayoutIter*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.take);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class LayoutIter : gobject.boxed.Boxed
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_layout_iter_get_line(cast(PangoLayoutIter*)cPtr);
-    auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class LayoutIter : gobject.boxed.Boxed
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_layout_iter_get_line_readonly(cast(PangoLayoutIter*)cPtr);
-    auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class LayoutIter : gobject.boxed.Boxed
   {
     PangoLayoutRun* _cretval;
     _cretval = pango_layout_iter_get_run(cast(PangoLayoutIter*)cPtr);
-    auto _retval = _cretval ? new pango.types.LayoutRun(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.types.LayoutRun(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 
@@ -284,7 +284,7 @@ class LayoutIter : gobject.boxed.Boxed
   {
     PangoLayoutRun* _cretval;
     _cretval = pango_layout_iter_get_run_readonly(cast(PangoLayoutIter*)cPtr);
-    auto _retval = _cretval ? new pango.types.LayoutRun(cast(void*)_cretval, No.Take) : null;
+    auto _retval = _cretval ? new pango.types.LayoutRun(cast(void*)_cretval, No.take) : null;
     return _retval;
   }
 

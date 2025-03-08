@@ -12,72 +12,72 @@ enum GstRTCPFBType
   /**
       Invalid type
   */
-  FbTypeInvalid = 0,
+  fbTypeInvalid = 0,
 
   /**
       Generic NACK
   */
-  RtpfbTypeNack = 1,
+  rtpfbTypeNack = 1,
 
   /**
       Temporary Maximum Media Stream Bit Rate Request
   */
-  RtpfbTypeTmmbr = 3,
+  rtpfbTypeTmmbr = 3,
 
   /**
       Temporary Maximum Media Stream Bit Rate
        Notification
   */
-  RtpfbTypeTmmbn = 4,
+  rtpfbTypeTmmbn = 4,
 
   /**
       Request an SR packet for early
        synchronization
   */
-  RtpfbTypeRtcpSrReq = 5,
+  rtpfbTypeRtcpSrReq = 5,
 
   /** */
-  RtpfbTypeTwcc = 15,
+  rtpfbTypeTwcc = 15,
 
   /**
       Picture Loss Indication
   */
-  PsfbTypePli = 1,
+  psfbTypePli = 1,
 
   /**
       Slice Loss Indication
   */
-  PsfbTypeSli = 2,
+  psfbTypeSli = 2,
 
   /**
       Reference Picture Selection Indication
   */
-  PsfbTypeRpsi = 3,
+  psfbTypeRpsi = 3,
 
   /**
       Application layer Feedback
   */
-  PsfbTypeAfb = 15,
+  psfbTypeAfb = 15,
 
   /**
       Full Intra Request Command
   */
-  PsfbTypeFir = 4,
+  psfbTypeFir = 4,
 
   /**
       Temporal-Spatial Trade-off Request
   */
-  PsfbTypeTstr = 5,
+  psfbTypeTstr = 5,
 
   /**
       Temporal-Spatial Trade-off Notification
   */
-  PsfbTypeTstn = 6,
+  psfbTypeTstn = 6,
 
   /**
       Video Back Channel Message
   */
-  PsfbTypeVbcn = 7,
+  psfbTypeVbcn = 7,
 }
 
 /**
@@ -88,87 +88,87 @@ enum GstRTCPSDESType
   /**
       Invalid SDES entry
   */
-  Invalid = -1,
+  invalid = -1,
 
   /**
       End of SDES list
   */
-  End = 0,
+  end = 0,
 
   /**
       Canonical name
   */
-  Cname = 1,
+  cname = 1,
 
   /**
       User name
   */
-  Name = 2,
+  name = 2,
 
   /**
       User's electronic mail address
   */
-  Email = 3,
+  email = 3,
 
   /**
       User's phone number
   */
-  Phone = 4,
+  phone = 4,
 
   /**
       Geographic user location
   */
-  Loc = 5,
+  loc = 5,
 
   /**
       Name of application or tool
   */
-  Tool = 6,
+  tool = 6,
 
   /**
       Notice about the source
   */
-  Note = 7,
+  note = 7,
 
   /**
       Private extensions
   */
-  Priv = 8,
+  priv = 8,
 
   /**
       H.323 callable address
   */
-  H323Caddr = 9,
+  h323Caddr = 9,
 
   /**
       Application Specific Identifier (RFC6776)
   */
-  Apsi = 10,
+  apsi = 10,
 
   /**
       Reporting Group Identifier (RFC8861)
   */
-  Rgrp = 11,
+  rgrp = 11,
 
   /**
       RtpStreamId SDES item (RFC8852).
   */
-  RtpStreamId = 12,
+  rtpStreamId = 12,
 
   /**
       RepairedRtpStreamId SDES item (RFC8852).
   */
-  RepairedRtpStreamId = 13,
+  repairedRtpStreamId = 13,
 
   /**
       CLUE CaptId (RFC8849)
   */
-  Ccid = 14,
+  ccid = 14,
 
   /**
       MID SDES item (RFC8843).
   */
-  Mid = 15,
+  mid = 15,
 }
 
 /**
@@ -179,47 +179,47 @@ enum GstRTCPType
   /**
       Invalid type
   */
-  Invalid = 0,
+  invalid = 0,
 
   /**
       Sender report
   */
-  Sr = 200,
+  sr = 200,
 
   /**
       Receiver report
   */
-  Rr = 201,
+  rr = 201,
 
   /**
       Source description
   */
-  Sdes = 202,
+  sdes = 202,
 
   /**
       Goodbye
   */
-  Bye = 203,
+  bye = 203,
 
   /**
       Application defined
   */
-  App = 204,
+  app = 204,
 
   /**
       Transport layer feedback.
   */
-  Rtpfb = 205,
+  rtpfb = 205,
 
   /**
       Payload-specific feedback.
   */
-  Psfb = 206,
+  psfb = 206,
 
   /**
       Extended report.
   */
-  Xr = 207,
+  xr = 207,
 }
 
 /**
@@ -231,42 +231,42 @@ enum GstRTCPXRType
   /**
       Invalid XR Report Block
   */
-  Invalid = -1,
+  invalid = -1,
 
   /**
       Loss RLE Report Block
   */
-  Lrle = 1,
+  lrle = 1,
 
   /**
       Duplicate RLE Report Block
   */
-  Drle = 2,
+  drle = 2,
 
   /**
       Packet Receipt Times Report Block
   */
-  Prt = 3,
+  prt = 3,
 
   /**
       Receiver Reference Time Report Block
   */
-  Rrt = 4,
+  rrt = 4,
 
   /**
       Delay since the last Receiver Report
   */
-  Dlrr = 5,
+  dlrr = 5,
 
   /**
       Statistics Summary Report Block
   */
-  Ssumm = 6,
+  ssumm = 6,
 
   /**
       VoIP Metrics Report Block
   */
-  VoipMetrics = 7,
+  voipMetrics = 7,
 }
 
 /**
@@ -282,7 +282,7 @@ enum GstRTPBufferFlags : uint
       The #GstBuffer was once wrapped
               in a retransmitted packet as specified by RFC 4588.
   */
-  Retransmission = 1048576,
+  retransmission = 1048576,
 
   /**
       The packet represents redundant RTP packet.
@@ -290,12 +290,12 @@ enum GstRTPBufferFlags : uint
               and use it only for recovery from packet loss.
               Since: 1.14
   */
-  Redundant = 2097152,
+  redundant = 2097152,
 
   /**
       Offset to define more flags.
   */
-  Last = 268435456,
+  last = 268435456,
 }
 
 /**
@@ -308,12 +308,12 @@ enum GstRTPBufferMapFlags : uint
               padding and RTP pad count when present. Useful for buffers where
               the padding may be encrypted.
   */
-  SkipPadding = 65536,
+  skipPadding = 65536,
 
   /**
       Offset to define more flags
   */
-  Last = 16777216,
+  last = 16777216,
 }
 
 /**
@@ -325,29 +325,29 @@ enum GstRTPHeaderExtensionDirection : uint
       Neither send nor
     receive RTP Header Extensions
   */
-  Inactive = 0,
+  inactive = 0,
 
   /**
       Only send RTP Header
     Extensions @GST_RTP_HEADER_EXTENSION_DIRECTION_RECVONLY: Only
     receive RTP Header Extensions
   */
-  Sendonly = 1,
+  sendonly = 1,
 
   /** */
-  Recvonly = 2,
+  recvonly = 2,
 
   /**
       Send and receive RTP
     Header Extensions ext
   */
-  Sendrecv = 3,
+  sendrecv = 3,
 
   /**
       RTP header extension
     direction is inherited from the stream
   */
-  Inherited = 4,
+  inherited = 4,
 }
 
 /**
@@ -360,14 +360,14 @@ enum GstRTPHeaderExtensionFlags : uint
                  1-16 data bytes per extension with a maximum of
                  14 extension ids in total.
   */
-  OneByte = 1,
+  oneByte = 1,
 
   /**
       The two byte rtp extension header.
                  256 data bytes per extension with a maximum of 255 (or 256
                  including appbits) extensions in total.
   */
-  TwoByte = 2,
+  twoByte = 2,
 }
 
 /**
@@ -389,7 +389,7 @@ enum GstRTPPayload
   /**
       ITU-T G.711. mu-law audio (RFC 3551)
   */
-  Pcmu = 0,
+  pcmu = 0,
 
   /**
       RFC 3551 says reserved
@@ -399,122 +399,122 @@ enum GstRTPPayload
   /**
       RFC 3551 says reserved
   */
-  G721 = 2,
+  g721 = 2,
 
   /**
       GSM audio
   */
-  Gsm = 3,
+  gsm = 3,
 
   /**
       ITU G.723.1 audio
   */
-  G723 = 4,
+  g723 = 4,
 
   /**
       IMA ADPCM wave type (RFC 3551)
   */
-  Dvi48000 = 5,
+  dvi48000 = 5,
 
   /**
       IMA ADPCM wave type (RFC 3551)
   */
-  Dvi416000 = 6,
+  dvi416000 = 6,
 
   /**
       experimental linear predictive encoding
   */
-  Lpc = 7,
+  lpc = 7,
 
   /**
       ITU-T G.711 A-law audio (RFC 3551)
   */
-  Pcma = 8,
+  pcma = 8,
 
   /**
       ITU-T G.722 (RFC 3551)
   */
-  G722 = 9,
+  g722 = 9,
 
   /**
       stereo PCM
   */
-  L16Stereo = 10,
+  l16Stereo = 10,
 
   /**
       mono PCM
   */
-  L16Mono = 11,
+  l16Mono = 11,
 
   /**
       EIA & TIA standard IS-733
   */
-  Qcelp = 12,
+  qcelp = 12,
 
   /**
       Comfort Noise (RFC 3389)
   */
-  Cn = 13,
+  cn = 13,
 
   /**
       Audio MPEG 1-3.
   */
-  Mpa = 14,
+  mpa = 14,
 
   /**
       ITU-T G.728 Speech coder (RFC 3551)
   */
-  G728 = 15,
+  g728 = 15,
 
   /**
       IMA ADPCM wave type (RFC 3551)
   */
-  Dvi411025 = 16,
+  dvi411025 = 16,
 
   /**
       IMA ADPCM wave type (RFC 3551)
   */
-  Dvi422050 = 17,
+  dvi422050 = 17,
 
   /**
       ITU-T G.729 Speech coder (RFC 3551)
   */
-  G729 = 18,
+  g729 = 18,
 
   /**
       See RFC 2029
   */
-  Cellb = 25,
+  cellb = 25,
 
   /**
       ISO Standards 10918-1 and 10918-2 (RFC 2435)
   */
-  Jpeg = 26,
+  jpeg = 26,
 
   /**
       nv encoding by Ron Frederick
   */
-  Nv = 28,
+  nv = 28,
 
   /**
       ITU-T Recommendation H.261 (RFC 2032)
   */
-  H261 = 31,
+  h261 = 31,
 
   /**
       Video MPEG 1 & 2 (RFC 2250)
   */
-  Mpv = 32,
+  mpv = 32,
 
   /**
       MPEG-2 transport stream (RFC 2250)
   */
-  Mp2t = 33,
+  mp2t = 33,
 
   /**
       Video H263 (RFC 2190)
   */
-  H263 = 34,
+  h263 = 34,
 }
 
 /**
@@ -525,27 +525,27 @@ enum GstRTPProfile
   /**
       invalid profile
   */
-  Unknown = 0,
+  unknown = 0,
 
   /**
       the Audio/Visual profile (RFC 3551)
   */
-  Avp = 1,
+  avp = 1,
 
   /**
       the secure Audio/Visual profile (RFC 3711)
   */
-  Savp = 2,
+  savp = 2,
 
   /**
       the Audio/Visual profile with feedback (RFC 4585)
   */
-  Avpf = 3,
+  avpf = 3,
 
   /**
       the secure Audio/Visual profile with feedback (RFC 5124)
   */
-  Savpf = 4,
+  savpf = 4,
 }
 
 /**

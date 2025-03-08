@@ -38,7 +38,7 @@ import gstgl.types;
 class GLContext : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -63,8 +63,8 @@ class GLContext : gst.object.ObjectGst
   this(gstgl.gldisplay.GLDisplay display)
   {
     GstGLContext* _cretval;
-    _cretval = gst_gl_context_new(display ? cast(GstGLDisplay*)display.cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    _cretval = gst_gl_context_new(display ? cast(GstGLDisplay*)display.cPtr(No.dup) : null);
+    this(_cretval, No.take);
   }
 
   /**
@@ -74,9 +74,9 @@ class GLContext : gst.object.ObjectGst
     represented by handle stays alive while the returned #GstGLContext is
     active.
     
-    context_type must not be [gstgl.types.GLPlatform.None] or [gstgl.types.GLPlatform.Any]
+    context_type must not be [gstgl.types.GLPlatform.none] or [gstgl.types.GLPlatform.any]
     
-    available_apis must not be [gstgl.types.GLAPI.None] or [gstgl.types.GLAPI.Any]
+    available_apis must not be [gstgl.types.GLAPI.none] or [gstgl.types.GLAPI.any]
     Params:
       display =       a #GstGLDisplay
       handle =       the OpenGL context to wrap
@@ -87,8 +87,8 @@ class GLContext : gst.object.ObjectGst
   static gstgl.glcontext.GLContext newWrapped(gstgl.gldisplay.GLDisplay display, size_t handle, gstgl.types.GLPlatform contextType, gstgl.types.GLAPI availableApis)
   {
     GstGLContext* _cretval;
-    _cretval = gst_gl_context_new_wrapped(display ? cast(GstGLDisplay*)display.cPtr(No.Dup) : null, handle, contextType, availableApis);
-    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
+    _cretval = gst_gl_context_new_wrapped(display ? cast(GstGLDisplay*)display.cPtr(No.dup) : null, handle, contextType, availableApis);
+    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class GLContext : gst.object.ObjectGst
   */
   static void* defaultGetProcAddress(gstgl.types.GLAPI glApi, string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     auto _retval = gst_gl_context_default_get_proc_address(glApi, _name);
     return _retval;
   }
@@ -117,19 +117,19 @@ class GLContext : gst.object.ObjectGst
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_context_get_current();
-    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, No.take);
     return _retval;
   }
 
   /**
-      If an error occurs, major and minor are not modified and [gstgl.types.GLAPI.None] is
+      If an error occurs, major and minor are not modified and [gstgl.types.GLAPI.none] is
     returned.
     Params:
       platform =       the #GstGLPlatform to retrieve the API for
       major =       the major version
       minor =       the minor version
     Returns:     The version supported by the OpenGL context current in the calling
-               thread or [gstgl.types.GLAPI.None]
+               thread or [gstgl.types.GLAPI.none]
   */
   static gstgl.types.GLAPI getCurrentGlApi(gstgl.types.GLPlatform platform, out uint major, out uint minor)
   {
@@ -160,7 +160,7 @@ class GLContext : gst.object.ObjectGst
   */
   static void* getProcAddressWithPlatform(gstgl.types.GLPlatform contextType, gstgl.types.GLAPI glApi, string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     auto _retval = gst_gl_context_get_proc_address_with_platform(contextType, glApi, _name);
     return _retval;
   }
@@ -191,7 +191,7 @@ class GLContext : gst.object.ObjectGst
   bool canShare(gstgl.glcontext.GLContext otherContext)
   {
     bool _retval;
-    _retval = gst_gl_context_can_share(cast(GstGLContext*)cPtr, otherContext ? cast(GstGLContext*)otherContext.cPtr(No.Dup) : null);
+    _retval = gst_gl_context_can_share(cast(GstGLContext*)cPtr, otherContext ? cast(GstGLContext*)otherContext.cPtr(No.dup) : null);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class GLContext : gst.object.ObjectGst
   bool checkFeature(string feature)
   {
     bool _retval;
-    const(char)* _feature = feature.toCString(No.Alloc);
+    const(char)* _feature = feature.toCString(No.alloc);
     _retval = gst_gl_context_check_feature(cast(GstGLContext*)cPtr, _feature);
     return _retval;
   }
@@ -281,7 +281,7 @@ class GLContext : gst.object.ObjectGst
   {
     bool _retval;
     GError *_err;
-    _retval = gst_gl_context_create(cast(GstGLContext*)cPtr, otherContext ? cast(GstGLContext*)otherContext.cPtr(No.Dup) : null, &_err);
+    _retval = gst_gl_context_create(cast(GstGLContext*)cPtr, otherContext ? cast(GstGLContext*)otherContext.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -326,7 +326,7 @@ class GLContext : gst.object.ObjectGst
   {
     GstStructure* _cretval;
     _cretval = gst_gl_context_get_config(cast(GstGLContext*)cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -335,7 +335,7 @@ class GLContext : gst.object.ObjectGst
   {
     GstGLDisplay* _cretval;
     _cretval = gst_gl_context_get_display(cast(GstGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstgl.gldisplay.GLDisplay)(cast(GstGLDisplay*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstgl.gldisplay.GLDisplay)(cast(GstGLDisplay*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -428,7 +428,7 @@ class GLContext : gst.object.ObjectGst
   */
   void* getProcAddress(string name)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     auto _retval = gst_gl_context_get_proc_address(cast(GstGLContext*)cPtr, _name);
     return _retval;
   }
@@ -438,7 +438,7 @@ class GLContext : gst.object.ObjectGst
   {
     GThread* _cretval;
     _cretval = gst_gl_context_get_thread(cast(GstGLContext*)cPtr);
-    auto _retval = _cretval ? new glib.thread.Thread(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.thread.Thread(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -447,7 +447,7 @@ class GLContext : gst.object.ObjectGst
   {
     GstGLWindow* _cretval;
     _cretval = gst_gl_context_get_window(cast(GstGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -480,7 +480,7 @@ class GLContext : gst.object.ObjectGst
   bool requestConfig(gst.structure.Structure glConfig = null)
   {
     bool _retval;
-    _retval = gst_gl_context_request_config(cast(GstGLContext*)cPtr, glConfig ? cast(GstStructure*)glConfig.cPtr(Yes.Dup) : null);
+    _retval = gst_gl_context_request_config(cast(GstGLContext*)cPtr, glConfig ? cast(GstStructure*)glConfig.cPtr(Yes.dup) : null);
     return _retval;
   }
 
@@ -491,7 +491,7 @@ class GLContext : gst.object.ObjectGst
   */
   void setSharedWith(gstgl.glcontext.GLContext share)
   {
-    gst_gl_context_set_shared_with(cast(GstGLContext*)cPtr, share ? cast(GstGLContext*)share.cPtr(No.Dup) : null);
+    gst_gl_context_set_shared_with(cast(GstGLContext*)cPtr, share ? cast(GstGLContext*)share.cPtr(No.dup) : null);
   }
 
   /**
@@ -505,7 +505,7 @@ class GLContext : gst.object.ObjectGst
   bool setWindow(gstgl.glwindow.GLWindow window)
   {
     bool _retval;
-    _retval = gst_gl_context_set_window(cast(GstGLContext*)cPtr, window ? cast(GstGLWindow*)window.cPtr(Yes.Dup) : null);
+    _retval = gst_gl_context_set_window(cast(GstGLContext*)cPtr, window ? cast(GstGLWindow*)window.cPtr(Yes.dup) : null);
     return _retval;
   }
 
@@ -555,7 +555,7 @@ class GLContext : gst.object.ObjectGst
     {
       auto _dlg = cast(gstgl.types.GLContextThreadFunc*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(void*)context, No.Take));
+      (*_dlg)(ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(void*)context, No.take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 

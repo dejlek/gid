@@ -10,37 +10,37 @@ import gobject.object;
 
 /**
     Used for button press and button release events. The
-  @type field will be one of [gdk.types.EventType.ButtonPress],
-  [gdk.types.EventType._2buttonPress], [gdk.types.EventType._3buttonPress] or [gdk.types.EventType.ButtonRelease],
+  @type field will be one of [gdk.types.EventType.buttonPress],
+  [gdk.types.EventType._2buttonPress], [gdk.types.EventType._3buttonPress] or [gdk.types.EventType.buttonRelease],
   
   Double and triple-clicks result in a sequence of events being received.
   For double-clicks the order of events will be:
   
   $(LIST
-    * [gdk.types.EventType.ButtonPress]
-    * [gdk.types.EventType.ButtonRelease]
-    * [gdk.types.EventType.ButtonPress]
+    * [gdk.types.EventType.buttonPress]
+    * [gdk.types.EventType.buttonRelease]
+    * [gdk.types.EventType.buttonPress]
     * [gdk.types.EventType._2buttonPress]
-    * [gdk.types.EventType.ButtonRelease]
+    * [gdk.types.EventType.buttonRelease]
   )
     
   Note that the first click is received just like a normal
   button press, while the second click results in a [gdk.types.EventType._2buttonPress]
-  being received just after the [gdk.types.EventType.ButtonPress].
+  being received just after the [gdk.types.EventType.buttonPress].
   
   Triple-clicks are very similar to double-clicks, except that
   [gdk.types.EventType._3buttonPress] is inserted after the third click. The order of the
   events is:
   
   $(LIST
-    * [gdk.types.EventType.ButtonPress]
-    * [gdk.types.EventType.ButtonRelease]
-    * [gdk.types.EventType.ButtonPress]
+    * [gdk.types.EventType.buttonPress]
+    * [gdk.types.EventType.buttonRelease]
+    * [gdk.types.EventType.buttonPress]
     * [gdk.types.EventType._2buttonPress]
-    * [gdk.types.EventType.ButtonRelease]
-    * [gdk.types.EventType.ButtonPress]
+    * [gdk.types.EventType.buttonRelease]
+    * [gdk.types.EventType.buttonPress]
     * [gdk.types.EventType._3buttonPress]
-    * [gdk.types.EventType.ButtonRelease]
+    * [gdk.types.EventType.buttonRelease]
   )
     
   For a double click to occur, the second button press must occur within
@@ -51,7 +51,7 @@ class EventButton
 {
   GdkEventButton cInstance;
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventButton");
@@ -79,7 +79,7 @@ class EventButton
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventButton*)cPtr).window, No.Take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventButton*)cPtr).window, No.take);
   }
 
   @property byte sendEvent()
@@ -144,7 +144,7 @@ class EventButton
 
   @property gdk.device.Device device()
   {
-    return ObjectG.getDObject!(gdk.device.Device)((cast(GdkEventButton*)cPtr).device, No.Take);
+    return ObjectG.getDObject!(gdk.device.Device)((cast(GdkEventButton*)cPtr).device, No.take);
   }
 
   @property double xRoot()

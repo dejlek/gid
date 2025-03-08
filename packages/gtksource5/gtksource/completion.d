@@ -30,7 +30,7 @@ import pango.attr_list;
   The `iface@CompletionProposal` interface represents a proposal.
   
   If a proposal contains extra information (see
-  [gtksource.types.CompletionColumn.Details]), it will be
+  [gtksource.types.CompletionColumn.details]), it will be
   displayed in a supplemental details window, which appears when
   the "Details" button is clicked.
   
@@ -45,7 +45,7 @@ import pango.attr_list;
 class Completion : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -72,10 +72,10 @@ class Completion : gobject.object.ObjectG
   static pango.attr_list.AttrList fuzzyHighlight(string haystack, string casefoldQuery)
   {
     PangoAttrList* _cretval;
-    const(char)* _haystack = haystack.toCString(No.Alloc);
-    const(char)* _casefoldQuery = casefoldQuery.toCString(No.Alloc);
+    const(char)* _haystack = haystack.toCString(No.alloc);
+    const(char)* _casefoldQuery = casefoldQuery.toCString(No.alloc);
     _cretval = gtk_source_completion_fuzzy_highlight(_haystack, _casefoldQuery);
-    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -97,8 +97,8 @@ class Completion : gobject.object.ObjectG
   static bool fuzzyMatch(string haystack, string casefoldNeedle, out uint priority)
   {
     bool _retval;
-    const(char)* _haystack = haystack.toCString(No.Alloc);
-    const(char)* _casefoldNeedle = casefoldNeedle.toCString(No.Alloc);
+    const(char)* _haystack = haystack.toCString(No.alloc);
+    const(char)* _casefoldNeedle = casefoldNeedle.toCString(No.alloc);
     _retval = gtk_source_completion_fuzzy_match(_haystack, _casefoldNeedle, cast(uint*)&priority);
     return _retval;
   }
@@ -111,7 +111,7 @@ class Completion : gobject.object.ObjectG
   */
   void addProvider(gtksource.completion_provider.CompletionProvider provider)
   {
-    gtk_source_completion_add_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_source_completion_add_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.dup) : null);
   }
 
   /** */
@@ -128,7 +128,7 @@ class Completion : gobject.object.ObjectG
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_completion_get_buffer(cast(GtkSourceCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.take);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class Completion : gobject.object.ObjectG
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_completion_get_view(cast(GtkSourceCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.take);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class Completion : gobject.object.ObjectG
   */
   void removeProvider(gtksource.completion_provider.CompletionProvider provider)
   {
-    gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.Dup) : null);
+    gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(ObjectG)provider).cPtr(No.dup) : null);
   }
 
   /** */
@@ -215,10 +215,10 @@ class Completion : gobject.object.ObjectG
     Connect to Hide signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectHide(T)(T callback, Flag!"After" after = No.After)
+  ulong connectHide(T)(T callback, Flag!"after" after = No.after)
   if (is(T : HideCallbackDlg) || is(T : HideCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -252,10 +252,10 @@ class Completion : gobject.object.ObjectG
     Connect to ProviderAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectProviderAdded(T)(T callback, Flag!"After" after = No.After)
+  ulong connectProviderAdded(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ProviderAddedCallbackDlg) || is(T : ProviderAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -290,10 +290,10 @@ class Completion : gobject.object.ObjectG
     Connect to ProviderRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectProviderRemoved(T)(T callback, Flag!"After" after = No.After)
+  ulong connectProviderRemoved(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ProviderRemovedCallbackDlg) || is(T : ProviderRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -327,10 +327,10 @@ class Completion : gobject.object.ObjectG
     Connect to Show signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectShow(T)(T callback, Flag!"After" after = No.After)
+  ulong connectShow(T)(T callback, Flag!"after" after = No.after)
   if (is(T : ShowCallbackDlg) || is(T : ShowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

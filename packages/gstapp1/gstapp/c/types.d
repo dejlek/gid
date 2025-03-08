@@ -13,17 +13,17 @@ enum GstAppLeakyType
   /**
       Not Leaky
   */
-  None = 0,
+  none = 0,
 
   /**
       Leaky on upstream (new buffers)
   */
-  Upstream = 1,
+  upstream = 1,
 
   /**
       Leaky on downstream (old buffers)
   */
-  Downstream = 2,
+  downstream = 2,
 }
 
 /**
@@ -35,19 +35,19 @@ enum GstAppStreamType
       No seeking is supported in the stream, such as a
     live stream.
   */
-  Stream = 0,
+  stream = 0,
 
   /**
       The stream is seekable but seeking might not
     be very fast, such as data from a webserver.
   */
-  Seekable = 1,
+  seekable = 1,
 
   /**
       The stream is seekable and seeking is fast,
     such as in a local file.
   */
-  RandomAccess = 2,
+  randomAccess = 2,
 }
 
 /**

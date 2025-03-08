@@ -16,7 +16,7 @@ import gtk.types;
 class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -37,13 +37,13 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
   {
     GtkContainerCellAccessible* _cretval;
     _cretval = gtk_container_cell_accessible_new();
-    this(_cretval, Yes.Take);
+    this(_cretval, Yes.take);
   }
 
   /** */
   void addChild(gtk.cell_accessible.CellAccessible child)
   {
-    gtk_container_cell_accessible_add_child(cast(GtkContainerCellAccessible*)cPtr, child ? cast(GtkCellAccessible*)child.cPtr(No.Dup) : null);
+    gtk_container_cell_accessible_add_child(cast(GtkContainerCellAccessible*)cPtr, child ? cast(GtkCellAccessible*)child.cPtr(No.dup) : null);
   }
 
   /**
@@ -61,6 +61,6 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
   /** */
   void removeChild(gtk.cell_accessible.CellAccessible child)
   {
-    gtk_container_cell_accessible_remove_child(cast(GtkContainerCellAccessible*)cPtr, child ? cast(GtkCellAccessible*)child.cPtr(No.Dup) : null);
+    gtk_container_cell_accessible_remove_child(cast(GtkContainerCellAccessible*)cPtr, child ? cast(GtkCellAccessible*)child.cPtr(No.dup) : null);
   }
 }

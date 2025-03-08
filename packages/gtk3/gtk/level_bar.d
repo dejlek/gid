@@ -112,7 +112,7 @@ import gtk.widget;
 class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -138,7 +138,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_level_bar_new();
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -153,7 +153,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_level_bar_new_for_interval(minValue, maxValue);
-    auto _retval = ObjectG.getDObject!(gtk.level_bar.LevelBar)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.level_bar.LevelBar)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void addOffsetValue(string name, double value)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gtk_level_bar_add_offset_value(cast(GtkLevelBar*)cPtr, _name, value);
   }
 
@@ -231,7 +231,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   bool getOffsetValue(string name, out double value)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     _retval = gtk_level_bar_get_offset_value(cast(GtkLevelBar*)cPtr, _name, cast(double*)&value);
     return _retval;
   }
@@ -256,7 +256,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void removeOffsetValue(string name = null)
   {
-    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.alloc);
     gtk_level_bar_remove_offset_value(cast(GtkLevelBar*)cPtr, _name);
   }
 
@@ -341,10 +341,10 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectOffsetChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  ulong connectOffsetChanged(T)(string detail = null, T callback, Flag!"after" after = No.after)
   if (is(T : OffsetChangedCallbackDlg) || is(T : OffsetChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

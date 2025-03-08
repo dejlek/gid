@@ -105,7 +105,7 @@ import gtk.types;
 class RadioButton : gtk.check_button.CheckButton
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -135,7 +135,7 @@ class RadioButton : gtk.check_button.CheckButton
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);
     _cretval = gtk_radio_button_new(_group);
-    this(_cretval, No.Take);
+    this(_cretval, No.take);
   }
 
   /**
@@ -149,8 +149,8 @@ class RadioButton : gtk.check_button.CheckButton
   static gtk.radio_button.RadioButton newFromWidget(gtk.radio_button.RadioButton radioGroupMember = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_radio_button_new_from_widget(radioGroupMember ? cast(GtkRadioButton*)radioGroupMember.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_radio_button_new_from_widget(radioGroupMember ? cast(GtkRadioButton*)radioGroupMember.cPtr(No.dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -167,9 +167,9 @@ class RadioButton : gtk.check_button.CheckButton
     GtkWidget* _cretval;
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.alloc);
     _cretval = gtk_radio_button_new_with_label(_group, _label);
-    auto _retval = ObjectG.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -184,9 +184,9 @@ class RadioButton : gtk.check_button.CheckButton
   static gtk.radio_button.RadioButton newWithLabelFromWidget(gtk.radio_button.RadioButton radioGroupMember, string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
-    _cretval = gtk_radio_button_new_with_label_from_widget(radioGroupMember ? cast(GtkRadioButton*)radioGroupMember.cPtr(No.Dup) : null, _label);
-    auto _retval = ObjectG.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
+    const(char)* _label = label.toCString(No.alloc);
+    _cretval = gtk_radio_button_new_with_label_from_widget(radioGroupMember ? cast(GtkRadioButton*)radioGroupMember.cPtr(No.dup) : null, _label);
+    auto _retval = ObjectG.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -207,9 +207,9 @@ class RadioButton : gtk.check_button.CheckButton
     GtkWidget* _cretval;
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);
-    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.alloc);
     _cretval = gtk_radio_button_new_with_mnemonic(_group, _label);
-    auto _retval = ObjectG.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -226,9 +226,9 @@ class RadioButton : gtk.check_button.CheckButton
   static gtk.radio_button.RadioButton newWithMnemonicFromWidget(gtk.radio_button.RadioButton radioGroupMember, string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.Alloc);
-    _cretval = gtk_radio_button_new_with_mnemonic_from_widget(radioGroupMember ? cast(GtkRadioButton*)radioGroupMember.cPtr(No.Dup) : null, _label);
-    auto _retval = ObjectG.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.Take);
+    const(char)* _label = label.toCString(No.alloc);
+    _cretval = gtk_radio_button_new_with_mnemonic_from_widget(radioGroupMember ? cast(GtkRadioButton*)radioGroupMember.cPtr(No.dup) : null, _label);
+    auto _retval = ObjectG.getDObject!(gtk.radio_button.RadioButton)(cast(GtkWidget*)_cretval, No.take);
     return _retval;
   }
 
@@ -272,7 +272,7 @@ class RadioButton : gtk.check_button.CheckButton
   */
   void joinGroup(gtk.radio_button.RadioButton groupSource = null)
   {
-    gtk_radio_button_join_group(cast(GtkRadioButton*)cPtr, groupSource ? cast(GtkRadioButton*)groupSource.cPtr(No.Dup) : null);
+    gtk_radio_button_join_group(cast(GtkRadioButton*)cPtr, groupSource ? cast(GtkRadioButton*)groupSource.cPtr(No.dup) : null);
   }
 
   /**
@@ -313,10 +313,10 @@ class RadioButton : gtk.check_button.CheckButton
     Connect to GroupChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      after = Yes.after to execute callback after default handler, No.after to execute before (default)
     Returns: Signal ID
   */
-  ulong connectGroupChanged(T)(T callback, Flag!"After" after = No.After)
+  ulong connectGroupChanged(T)(T callback, Flag!"after" after = No.after)
   if (is(T : GroupChangedCallbackDlg) || is(T : GroupChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

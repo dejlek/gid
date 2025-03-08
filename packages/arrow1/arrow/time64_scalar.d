@@ -11,7 +11,7 @@ import gid.gid;
 class Time64Scalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,8 +31,8 @@ class Time64Scalar : arrow.scalar.Scalar
   this(arrow.time64_data_type.Time64DataType dataType, long value)
   {
     GArrowTime64Scalar* _cretval;
-    _cretval = garrow_time64_scalar_new(dataType ? cast(GArrowTime64DataType*)dataType.cPtr(No.Dup) : null, value);
-    this(_cretval, Yes.Take);
+    _cretval = garrow_time64_scalar_new(dataType ? cast(GArrowTime64DataType*)dataType.cPtr(No.dup) : null, value);
+    this(_cretval, Yes.take);
   }
 
   /** */

@@ -178,12 +178,12 @@ import gobject.object;
 class Resource : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"take" take = No.take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* cPtr(Flag!"dup" dup = No.dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -211,7 +211,7 @@ class Resource : gobject.boxed.Boxed
     Otherwise this function will internally create a copy of the memory since
     GLib 2.56, or in older versions fail and exit the process.
     
-    If data is empty or corrupt, [gio.types.ResourceError.Internal] will be returned.
+    If data is empty or corrupt, [gio.types.ResourceError.internal] will be returned.
     Params:
       data =       A #GBytes
     Returns:     a new #GResource, or null on error
@@ -220,10 +220,10 @@ class Resource : gobject.boxed.Boxed
   {
     GResource* _cretval;
     GError *_err;
-    _cretval = g_resource_new_from_data(data ? cast(GBytes*)data.cPtr(No.Dup) : null, &_err);
+    _cretval = g_resource_new_from_data(data ? cast(GBytes*)data.cPtr(No.dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new gio.resource.Resource(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gio.resource.Resource(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class Resource : gobject.boxed.Boxed
     be released with [glib.global.strfreev].
     
     If path is invalid or does not exist in the #GResource,
-    [gio.types.ResourceError.NotFound] will be returned.
+    [gio.types.ResourceError.notFound] will be returned.
     
     lookup_flags controls the behaviour of the lookup.
     Params:
@@ -244,7 +244,7 @@ class Resource : gobject.boxed.Boxed
   string[] enumerateChildren(string path, gio.types.ResourceLookupFlags lookupFlags)
   {
     char** _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     GError *_err;
     _cretval = g_resource_enumerate_children(cast(GResource*)cPtr, _path, lookupFlags, &_err);
     if (_err)
@@ -258,7 +258,7 @@ class Resource : gobject.boxed.Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.Free);
+        _retval[i] = _cretval[i].fromCString(Yes.free);
     }
     return _retval;
   }
@@ -280,7 +280,7 @@ class Resource : gobject.boxed.Boxed
   bool getInfo(string path, gio.types.ResourceLookupFlags lookupFlags, out size_t size, out uint flags)
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     GError *_err;
     _retval = g_resource_get_info(cast(GResource*)cPtr, _path, lookupFlags, cast(size_t*)&size, cast(uint*)&flags, &_err);
     if (_err)
@@ -312,12 +312,12 @@ class Resource : gobject.boxed.Boxed
   glib.bytes.Bytes lookupData(string path, gio.types.ResourceLookupFlags lookupFlags)
   {
     GBytes* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     GError *_err;
     _cretval = g_resource_lookup_data(cast(GResource*)cPtr, _path, lookupFlags, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 
@@ -335,12 +335,12 @@ class Resource : gobject.boxed.Boxed
   gio.input_stream.InputStream openStream(string path, gio.types.ResourceLookupFlags lookupFlags)
   {
     GInputStream* _cretval;
-    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _path = path.toCString(No.alloc);
     GError *_err;
     _cretval = g_resource_open_stream(cast(GResource*)cPtr, _path, lookupFlags, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.take);
     return _retval;
   }
 
@@ -352,7 +352,7 @@ class Resource : gobject.boxed.Boxed
     to register it with [gio.resource.Resource.Register].
     
     If filename is empty or the data in it is corrupt,
-    [gio.types.ResourceError.Internal] will be returned. If filename doesn’t exist, or
+    [gio.types.ResourceError.internal] will be returned. If filename doesn’t exist, or
     there is an error in reading it, an error from [glib.mapped_file.MappedFile.new_] will be
     returned.
     Params:
@@ -362,12 +362,12 @@ class Resource : gobject.boxed.Boxed
   static gio.resource.Resource load(string filename)
   {
     GResource* _cretval;
-    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString(No.alloc);
     GError *_err;
     _cretval = g_resource_load(_filename, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new gio.resource.Resource(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gio.resource.Resource(cast(void*)_cretval, Yes.take) : null;
     return _retval;
   }
 }
